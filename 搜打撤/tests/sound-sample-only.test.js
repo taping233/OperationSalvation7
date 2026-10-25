@@ -45,8 +45,8 @@ describe('sample-only runtime', () => {
   });
   it('caps total voices, protects priority and disposes all nodes once', async () => {
     const { player, sources } = fixture(); player.load(async () => ({ duration: 1 })); await flush();
-    for (let i = 0; i < 15; i++) player.play('hit'); expect(player.voices.size).toBe(10);
-    player.play('danger'); expect(player.voices.size).toBe(10); expect(sources[0].stop).toHaveBeenCalledOnce();
+    for (let i = 0; i < 15; i++) player.play('hit'); expect(player.voices.size).toBe(9);
+    player.play('danger'); expect(player.voices.size).toBe(9); expect(sources[0].stop).toHaveBeenCalledOnce();
     player.dispose(); player.dispose(); expect(player.voices.size).toBe(0);
     for (const source of sources) { expect(source.stop).toHaveBeenCalledOnce(); expect(source.disconnect).toHaveBeenCalledOnce(); }
   });

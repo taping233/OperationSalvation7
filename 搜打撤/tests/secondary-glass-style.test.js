@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
+import {readCssSource} from './helpers/css-source.js';
 import postcss from 'postcss';
 
-const css = name => postcss.parse(readFileSync(`game/css/${name}.css`, 'utf8'));
+const css = name => postcss.parse(readCssSource(`game/css/${name}.css`, 'utf8'));
 const declaration = (name, selector, prop) => {
   let value;
   css(name).walkRules(rule => {

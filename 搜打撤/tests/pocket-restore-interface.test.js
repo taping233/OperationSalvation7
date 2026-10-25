@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
 const st = vi.hoisted(() => ({ game:{}, saves:vi.fn(), uid:0 }));
 vi.mock('../game/src/run/game.session.js', () => ({
@@ -58,11 +59,11 @@ afterEach(() => {
 });
 
 describe('消耗卡复原公共选择界面', () => {
-  it('修鞋铺入口只提供场景句，次数范围与操作由公共界面说明一次', () => {
+  it('战地整备的复原入口只提供场景句，次数范围与操作由公共界面说明一次', () => {
     const events = readFileSync('game/src/run/game.run.events.js', 'utf8');
-    const sub = events.match(/title: '修鞋铺 · 修整行装',\s*sub: '([^']+)'/)[1];
-    expect(sub).toBe('老师傅替你修整行装。');
-    openPocketRestore(1, vi.fn(), { title:'修鞋铺 · 修整行装', sub });
+    const sub = events.match(/title: '战地整备 · 修整行装',\s*sub: '([^']+)'/)[1];
+    expect(sub).toBe('整备队在撤离前替你修整一件行装。');
+    openPocketRestore(1, vi.fn(), { title:'战地整备 · 修整行装', sub });
     expect(remaining()).toContain('还可复原 1 张（最多 1 张）');
     expect(remaining()).not.toContain('点击卡牌');
     expect(document.querySelector('.battle-decision-head').textContent).toContain('消耗区');
@@ -73,7 +74,7 @@ describe('消耗卡复原公共选择界面', () => {
   it.each([
     [3, { title:'祭坛回赠 · 复原', tone:'altar', icon:'[[icon:crystal]]' }],
     [2, { title:'祭坛回赠 · 复原', tone:'altar' }],
-    [1, { title:'修鞋铺 · 修整行装', tone:'event', sub:'老师傅替你修整行装' }],
+    [1, { title:'战地整备 · 修整行装', tone:'event', sub:'整备队在撤离前替你修整一件行装。' }],
   ])('%s张入口沿用共同决策壳，标题/说明/次数与独立footer可见', (picks, opts) => {
     openPocketRestore(picks, vi.fn(), opts);
     expect(UI._lastMode).toBe('discover');
@@ -190,15 +191,15 @@ describe('消耗卡复原公共选择界面', () => {
     expect(takeBagReturnHook()).toBeNull();
   });
 
-  it('公共CSS只限定复原域，五列240卡/共用滚动区/固定动作栏和可读字号有明确契约', () => {
-    const source = readFileSync('game/css/expedition-rewards.css', 'utf8');
+  it('公共CSS只限定复原域，完整卡宽/共用滚动区/固定动作栏和可读字号有明确契约', () => {
+    const source = readCssSource('game/css/expedition-rewards.css', 'utf8');
     const added = source.slice(source.indexOf('/* Shared consumed-card restoration'), source.indexOf('/* In-reward organization'));
     const css = postcss.parse(added), values = selector => {
       const result = {}; css.walkRules(selector, rule => rule.walkDecls(d => { result[d.prop] = d.value; })); return result;
     };
     css.walkRules(rule => expect(rule.selector).toContain('.pocket-restore'));
     const scope = 'body #overlay .pocket-restore';
-    expect(values(`${scope} .pocket-restore-content .fire-restore-hand`)['grid-template-columns']).toBe('repeat(5,minmax(0,240px))');
+    expect(values(`${scope} .pocket-restore-content .fire-restore-hand`)['grid-template-columns']).toBe('repeat(auto-fit,minmax(240px,280px))');
     expect(values(`${scope} .pocket-restore-content`).flex).toBe('1 1 auto');
     expect(values(`${scope} .pocket-restore-content .pocket-restore-art .hs-card`)['font-size']).toBe('24px');
     expect(values(`${scope} .pocket-restore-content .fire-restore-hand`)['max-height']).toBe('none');

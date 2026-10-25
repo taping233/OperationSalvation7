@@ -13,6 +13,7 @@ export function createBattleActionRunner({
   preparePresentation,
   deferPersist = write => write(),
   onIdle = () => {},
+  onFailure = (...details) => { void details; },
 }) {
   return function queueBattleAction(execute, label = '战斗动作', onError = null) {
     const battleToken = getBattleState().token;
@@ -53,7 +54,10 @@ export function createBattleActionRunner({
     })
       .catch(error => {
         onError?.(error);
-        if (error?.name !== 'BattleActionCancelledError') console.error(`[battle] ${label}异常：`, error);
+        if (error?.name !== 'BattleActionCancelledError' && error?.name !== 'AbortError') {
+          console.error(`[battle] ${label}异常：`, error);
+          if (session.generation === generation && getBattleState().token === battleToken && getGame()?.battleActive) onFailure(error, { label, battleToken });
+        }
       })
       .finally(async () => {
         if (session.generation !== generation) return;

@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import {installRunTopBar} from '../game/src/ui/run-top-bar.js';
 import { writeFileSync } from 'node:fs';
 
 const observed = vi.hoisted(() => ({ handStates: [], snapshots: 0, dreadMarks: 0, floats: [], ready: [] }));
@@ -41,7 +42,7 @@ const UI = {
     const hook = onOverlay; onOverlay = null; hook?.();
   },
   hideOverlay() { this.el.overlay.hidden = true; }, hideTooltip() {}, showTooltip() {}, refresh() {}, log() {},
-  act: (name, fn) => actions.set(name, fn),
+  act(name,fn){(this._acts||={})[name]=fn;actions.set(name,fn);},
 };
 window.SDT = {
   UI, Icons: { img: () => '', rich, TYPE_ART: {} },
@@ -82,6 +83,7 @@ function start({ many = true, suffix = '', flushFrames = true, potion = false } 
 function bodyFixture() {
   document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
   UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  installRunTopBar(UI);
   UI.el.ovBody.addEventListener('click', event => {
     const button = event.target.closest('[data-act]');
     if (button && !button.disabled && !button.closest('[inert]')) actions.get(button.dataset.act)?.(button.dataset);
@@ -198,26 +200,27 @@ describe('session-owned battle stage production contracts', () => {
     expect(node('.sts-energy b').textContent).toBe('1'); expect(observed.handStates.at(-1).snapshot.energy).toBe(9);
     UI.showOverlay('cold', '<p>elsewhere</p>', 'settings'); observed.snapshots = 0;
     render(); expect(observed.snapshots).toBe(2);
-    node('[data-act="btSettings"]').click(); observed.snapshots = 0;
+    document.getElementById('btnBattleOptions').click(); observed.snapshots = 0;
     render(); expect(observed.snapshots).toBe(2);
     expect(stage().hasAttribute('inert')).toBe(false);
   });
 
   it('keeps expanded options, focus, runtime animation classes, energy artwork and unrelated HUD identities', () => {
     start();
-    const scene = stage(), options = node('.sts-options'), summary = options.querySelector('summary');
+    const scene = stage(), summary = document.getElementById('btnBattleOptions');
     const image = node('.battle-energy-emblem'), piles = node('.sts-hud-r'), self = node('#btSelf');
-    options.open = true; summary.focus(); scene.classList.add('fx-dread'); self.classList.add('fx-hit');
+    summary.focus(); scene.classList.add('fx-dread'); self.classList.add('fx-hit');
     render({ ...snapshot(), energy: 2, maxEnergy: 6, busy: true, phase: 'enemy', turn: 4 });
-    expect(stage()).toBe(scene); expect(options.open).toBe(true); expect(document.activeElement).toBe(summary);
+    expect(stage()).toBe(scene); expect(summary.isConnected).toBe(true); expect(document.activeElement).toBe(summary);
     expect(scene.classList.contains('fx-dread')).toBe(true); expect(self.classList.contains('fx-hit')).toBe(true);
     expect(node('.battle-energy-emblem')).toBe(image); expect(node('.sts-hud-r')).toBe(piles);
     expect(node('.sts-energy b').textContent).toBe('2'); expect(node('.sts-energy .battle-control-value > span').textContent).toBe('/6');
     expect(node('.sts-energy').getAttribute('aria-label')).toBe('能量 2，每回合 6');
-    expect(node('.sts-energy').dataset.uiTipNote).toBe('回合开始恢复至 6 点');
+    expect([...node('.sts-energy').attributes].some(attribute => attribute.name.startsWith('data-ui-tip'))).toBe(false);
     expect(node('.sts-encounter b').textContent).toBe('第 4 回合');
     expect(stage().dataset.phase).toBe('enemy'); expect(stage().classList.contains('phase-enemy')).toBe(true);
-    expect(node('[data-act="btEnd"]').disabled).toBe(true); expect(node('[data-act="btFlee"]').disabled).toBe(true);
+    expect(stage().dataset.turn).toBe('4');
+    expect(node('[data-act="btEnd"]').disabled).toBe(true); expect(node('[data-act="btFlee"]')).toBeNull();
   });
 
   it('repairs controlled text, classes, ARIA and disabled state even with identical presentation inputs', () => {
@@ -233,14 +236,14 @@ describe('session-owned battle stage production contracts', () => {
   });
 
   it('repairs owner-controlled root classes and button attributes without leaving duplicate damaged components', () => {
-    start(); const rest = node('.sts-hud-r'), options = node('.sts-options'), end = node('[data-act="btEnd"]');
-    rest.className = 'external-marker'; options.classList.remove('sts-options');
+    start(); const rest = node('.sts-hud-r'), end = node('[data-act="btEnd"]');
+    rest.className = 'external-marker';
     end.removeAttribute('data-act'); end.setAttribute('role', 'link');
     render();
-    expect(node('.sts-hud-r')).toBe(rest); expect(node('.sts-options')).toBe(options);
+    expect(node('.sts-hud-r')).toBe(rest); expect(node('.sts-options')).toBeNull();
     expect(rest.classList.contains('external-marker')).toBe(true);
     expect(node('[data-act="btEnd"]')).toBe(end); expect(end.getAttribute('role')).toBeNull();
-    expect(stage().querySelectorAll('.sts-hud-r')).toHaveLength(1); expect(stage().querySelectorAll('.sts-options')).toHaveLength(1);
+    expect(stage().querySelectorAll('.sts-hud-r')).toHaveLength(1); expect(stage().querySelectorAll('.sts-options')).toHaveLength(0);
   });
 
   it.each(['.sts-arena', '.sts-hud'])('repairs the class of the owned %s container without recreating scenery or mounts', selector => {
@@ -255,12 +258,16 @@ describe('session-owned battle stage production contracts', () => {
 
   it('repairs changed energy child structure and attributes without replacing surviving artwork', () => {
     start(); const wrap = node('.sts-energy-wrap'), energy = node('.sts-energy'), image = node('.battle-energy-emblem');
+    energy.setAttribute('data-ui-tip', ''); energy.setAttribute('data-ui-tip-text', '旧能量说明');
+    energy.setAttribute('data-ui-tip-title', '能量'); energy.setAttribute('data-ui-tip-note', '旧恢复说明');
     energy.querySelector('b').replaceWith(document.createElement('i'));
     energy.querySelector('.battle-control-value > span').remove(); image.removeAttribute('alt'); image.removeAttribute('draggable');
     render();
     expect(node('.sts-energy-wrap')).toBe(wrap); expect(node('.sts-energy')).toBe(energy); expect(node('.battle-energy-emblem')).toBe(image);
     expect(energy.querySelector('b').textContent).toBe('9'); expect(energy.querySelector('.battle-control-value > span').textContent).toBe('/9');
     expect(energy.querySelector('i')).toBeNull(); expect(image.getAttribute('alt')).toBe(''); expect(image.draggable).toBe(false);
+    expect([...energy.attributes].some(attribute => attribute.name.startsWith('data-ui-tip'))).toBe(false);
+    expect(energy.getAttribute('aria-label')).toBe('能量 9，每回合 9');
   });
 
   it('cold-repairs a displaced stage root before updating its unit and hand owners', () => {
@@ -287,7 +294,7 @@ describe('session-owned battle stage production contracts', () => {
     expect(stage()).toBe(scene); expect(node(selector)).not.toBeNull();
     expect(node('#btSelf')).toBe(self); expect(node('.sts-hand')).toBe(hand);
     expect(stage().querySelectorAll('.sts-hand-tools')).toHaveLength(1);
-    expect(node('.sts-hand-tools').parentElement).toBe(self);
+    expect(node('.sts-hand-tools').parentElement).toBe(self.querySelector('.sts-unit-actions'));
     expect(node('.sts-energy b').textContent).toBe('9'); expect(node('[data-act="btEnd"]').disabled).toBe(false);
   });
 
@@ -315,7 +322,7 @@ describe('session-owned battle stage production contracts', () => {
   it('keeps the timed flee confirmation armed across unrelated patches and restores its original label', () => {
     start(); vi.useFakeTimers();
     try {
-      const flee = node('[data-act="btFlee"]'); flee.click();
+      const flee=document.createElement('button');flee.dataset.act='btFlee';flee.className='ov-btn ghost';flee.textContent='撤离（判负）';stage().querySelector('.sts-tactics').append(flee);flee.addEventListener('click',event=>{event.stopPropagation();actions.get('btFlee')({});});flee.click();
       expect(flee.dataset.confirm).toBe('1'); expect(flee.textContent).toContain('确认撤离');
       set$energy(7); render();
       expect(node('[data-act="btFlee"]')).toBe(flee); expect(flee.dataset.confirm).toBe('1');
@@ -394,11 +401,11 @@ describe('session-owned battle stage production contracts', () => {
   });
 
   it('does not repaint a page opened synchronously by the restored focus target', () => {
-    start(); const scene = stage(), settings = node('[data-act="btSettings"]');
-    settings.focus(); settings.click();
+    start(); const scene = stage(), settings = node('[data-act="btGrave"]');
+    settings.focus(); BattleSession.commands.openGrave();flush();
     settings.addEventListener('focus', () => UI.showOverlay('New page', '<p id="focus-navigation">Keep this page</p>', 'settings'), { once:true });
-    const back = UI.el.ovBody.querySelector('[data-act="btSettingsBack"]');
-    back.focus(); back.click();
+    const back = UI.el.ovBody.querySelector('[data-act="btGraveBack"]');
+    back.focus(); back.click(); flush();
     expect(UI.el.ovBody.querySelector('#focus-navigation')?.textContent).toBe('Keep this page');
     expect(scene.isConnected).toBe(false); expect(stage()).toBeNull();
     expect(UI._lastMode).toBe('settings');
@@ -409,7 +416,7 @@ describe('session-owned battle stage production contracts', () => {
     start({ many: false, suffix: '-current' }); const current = stage(), currentToken = snapshot().battleToken;
     render(stale);
     expect(stage()).toBe(current); expect(current._battleToken).toBe(currentToken);
-    node('[data-act="btSettings"]').click();
+    document.getElementById('btnBattleOptions').click();
     expect(stage()).toBe(current); expect(current.isConnected).toBe(true);
     expect(UI.el.ovBody.querySelector('.battle-secondary-panel')).not.toBeNull();
     UI.el.ovBody.querySelector('[data-act="btSettingsBack"]').click();

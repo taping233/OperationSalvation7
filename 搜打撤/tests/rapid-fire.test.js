@@ -1,13 +1,15 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 连续射击（cc-rapid-fire，2026-09-10 需求）真实战斗实打：
  * 1 费史诗武术——「本回合每打出一张其他招式，造成2点固定伤害」。
  * 覆盖：n=0 不造成伤害 / n 随本回合已打出的武术数递增 / 回合开始清零 / 本牌不计自身。 */
+import { createBattleGameFactory, drainBattle } from './helpers/battle-fixtures.js';
 import { describe, it, expect, beforeAll } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 99, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 99) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -24,45 +26,15 @@ beforeAll(() => {
 });
 
 // ---------- 假对局环境（与 battle-all-cards 同口径） ----------
-let uidSeq = 0;
-function makeGame(cards) {
-  const logs = [];
-  const g = {
-    ownedCards: cards.map(c => ({ uid: 'g' + (uidSeq++), card: c, safe: false })),
-    hp: 99999, maxHp: 99999, atk: 5, spellPower: 2, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
-    lastBattleEnd: null,
-    log(m) { logs.push(String(m).replace(/\[\[[^\]]+\]\]/g, '')); },
-    logs,
-    heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
-    addItem() {},
-    onBattleEnd() {},
-  };
-  return g;
-}
+
+const makeGame = createBattleGameFactory();
 const foeDef = () => ({ id: 'infantry', name: '连射靶子', hp: 99999, atk: 1 });
 const tick = () => new Promise(r => setTimeout(r, 0));
-const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 const foeHp = () => snap().foes[0].hp;
 const energy = () => snap().energy;
 
-async function drain(maxLoops = 300) {
-  for (let i = 0; i < maxLoops; i++) {
-    await tick();
-    const s = snap();
-    if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
-    if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
-    if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return snap();
-}
+const drain = (maxLoops = 300) => drainBattle(BattleSession, maxLoops);
 
 async function playByName(g, name) {
   const hand = snap().hand || [];

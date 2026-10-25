@@ -37,9 +37,12 @@ export function beginNodeRestore(game, { source, picks }) {
   return record;
 }
 
-export function claimNodeRestore(game, record, { name, isRestorable, canReceive, newUid }) {
+export function claimNodeRestore(game, record, { name, entry = null, isRestorable, canReceive, newUid }) {
   if (nodeRestoreAt(game) !== record) return false;
-  const item = game.usedPocket.find(entry => entry.card.name === name && isRestorable(entry.card));
+  const matches = game.usedPocket.filter(item => (!entry || item === entry)
+    && item.card.name === name && isRestorable(item.card));
+  if (matches.length !== 1) return false;
+  const item = matches[0];
   if (!item || item.count < 1 || !item.card.id || !canReceive(item.card)) return false;
   const copy = { uid:newUid(), card:{ ...item.card } };
   item.count--;

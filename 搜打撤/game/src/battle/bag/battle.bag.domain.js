@@ -1,3 +1,4 @@
+import { withPreparedDiscovery, claimPreparedDiscovery } from '../effects/battle.discover-preview.js';
 import { esc } from '../../core/shared.js';
 import { itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { createM2Domain } from '../effects/effect-steps.m2.domain.js';
@@ -25,7 +26,7 @@ function createBattleBag({
   throwIfActionCancelled, findCard,
   triggersM2,
   addEnergy, drawCards, queueDiscover, getTurn,
-  processDiscoverQueue, randomDiscoverCard,
+  processDiscoverQueue, randomDiscoverCard, previewDiscovery = (...args) => { void args; return null; },
   getConsumedPile: readConsumed = () => readConsumedPile({ hand: instanceRuntime.hand, drawPile: instanceRuntime.drawPile, played: instanceRuntime.played, consumed: instanceRuntime.consumed, discard: instanceRuntime.discard, grave: instanceRuntime.grave }),
   takeConsumedCard = uid => takeFromConsumedPile({ hand: instanceRuntime.hand, drawPile: instanceRuntime.drawPile, played: instanceRuntime.played, consumed: instanceRuntime.consumed, discard: instanceRuntime.discard, grave: instanceRuntime.grave }, uid, 'hand'),
   markCardResolving = /** @type {(uid: string, marker: object, active: boolean) => void} */ (() => {}),
@@ -34,6 +35,14 @@ function createBattleBag({
   const sameBattle = marker => marker?.game === instanceRuntime.G && marker?.token === instanceRuntime.battleState.token;
   const pendingItem = uid => sameBattle(pendingItems.get(uid)) ? pendingItems.get(uid) : null;
   const getConsumedPile = () => readConsumed().filter(uid => !pendingItem(uid));
+  function healPlayer(n) {
+    if ((instanceRuntime.pstat.status.healban || 0) > 0) {
+      instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${instanceRuntime.pstat.status.healban} 回合）`, 'warn');
+    } else {
+      instanceRuntime.G.heal(n);
+      instanceRuntime.floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+    }
+  }
   function restoreConsumed(n) {
     let cnt = 0;
     const available = getConsumedPile().slice().reverse();
@@ -101,6 +110,7 @@ function createBattleBag({
     return { usable: true, why: '' };
   }
   function useItem(uid, side) {
+    if (!instanceRuntime.G?.battleActive) return;
     const entry = battleBagItems().find(o => o.uid === uid);
     if (!entry) return;
     if (instanceRuntime.busy || instanceRuntime.infusing || instanceRuntime.discovering || instanceRuntime.choosing || instanceRuntime.handSelecting) return;
@@ -134,20 +144,12 @@ function createBattleBag({
     if (!marker) return;
     try {
     instanceRuntime.G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】`, 'sys');
-    if (healM) {
-      const n = +healM[1];
-      if ((instanceRuntime.pstat.status.healban || 0) > 0) {
-        instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${instanceRuntime.pstat.status.healban} 回合）`, 'warn');
-      } else {
-        instanceRuntime.G.heal(n);
-        instanceRuntime.floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
-      }
-    }
+    if (healM) healPlayer(+healM[1]);
     if (isCrystal) {
       if (!restoreConsumed(3)) instanceRuntime.G.log('消耗牌堆是空的，没有可复原的卡牌', 'dim');
     }
     if (isPotion) {
-      const r = Random.random('loot');
+      const r = Random.random('loot', 'reward');
       if (r < 1 / 3) {
         if ((instanceRuntime.pstat.status.healban || 0) > 0) instanceRuntime.G.log('[[icon:flask]] 禁疗中：神秘药水的回复无效', 'warn');
         else { instanceRuntime.G.heal(8); instanceRuntime.floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
@@ -156,7 +158,7 @@ function createBattleBag({
         instanceRuntime.G.log('[[icon:flask]] 神秘药水：获得 <b>3</b> 币', 'coin');
       } else {
         const pool = cardCatalog.all().filter(c => cardCatalog.isRandomObtainable(c));
-        const got = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
+        const got = pool.length ? pool[Math.floor(Random.random('loot', 'reward') * pool.length)] : null;
         if (got) {
           if (instanceRuntime.mode === 'boss') addDeckCard({ ...got });
           else addTempCard({ ...got });
@@ -212,12 +214,7 @@ function createBattleBag({
         return true;
       }
       if (op.op === 'heal') {
-        if ((instanceRuntime.pstat.status.healban || 0) > 0) {
-          instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${amount}</b> 点生命无效（还剩 ${instanceRuntime.pstat.status.healban} 回合）`, 'warn');
-        } else {
-          instanceRuntime.G.heal(amount);
-          instanceRuntime.floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
-        }
+        healPlayer(amount);
       } else if (op.op === 'restoreConsumed') {
         if (!restoreConsumed(amount)) instanceRuntime.G.log('消耗牌堆是空的，没有可复原的卡牌', 'dim');
       } else if (op.op === 'energy') {
@@ -244,7 +241,7 @@ function createBattleBag({
         instanceRuntime.G.log(`[[icon:cards]] 抽了 ${got} 张牌`, 'sys');
       } else if (op.op === 'damage') {
         const dmg = op.amount !== undefined ? op.amount
-          : op.range ? (op.range[0] + Math.floor(Random.random('battle') * (op.range[1] - op.range[0] + 1)))
+          : op.range ? (op.range[0] + Math.floor(Random.random('battle', 'generation') * (op.range[1] - op.range[0] + 1)))
           : 0;
         const victims = op.target === 'allEnemies' ? alive().slice() : (target ? [target] : []);
         const targets = victims.filter(foe => !foe.dead);
@@ -272,7 +269,7 @@ function createBattleBag({
         const cls = instanceRuntime.G.myClass || null;
         const pool = cardCatalog.all().filter(c => c.type === '能力卡' && (c.cls || null) === cls);
         if (pool.length) {
-          const got = pool[Math.floor(Random.random('battle') * pool.length)];
+          const got = pool[Math.floor(Random.random('battle', 'generation') * pool.length)];
           addTempCard({ ...got });
           instanceRuntime.G.log(`[[icon:sparkles]] <b>${esc(card.name)}</b> 觉醒：获得本职业能力卡【<b>${esc(got.name)}</b>】`, 'loot');
         } else {
@@ -289,8 +286,8 @@ function createBattleBag({
           instanceRuntime.G.log('[[icon:cross]] 没有可获取的传说卡', 'warn');
         }
       } else if (op.op === 'acquire' || op.op === 'discover') {
-        queueDiscover({ n: amount, pool: op.pool || { kind: '随机' }, dest: op.dest,
-          act: op.act, sourceCardId: card.id });
+        queueDiscover(claimPreparedDiscovery(card, { n: amount, pool: op.pool || { kind: '随机' }, dest: op.dest,
+          act: op.act, sourceCardId: card.id }));
       }
     }
     if (settle) {
@@ -336,7 +333,7 @@ function createBattleBag({
       try {
       if (!sameBattle(marker) || pendingItem(entry.uid) !== marker) return;
       throwIfActionCancelled(signal);
-      const current = battleBagItems(marker).find(item => item.uid === entry.uid);
+      let current = battleBagItems(marker).find(item => item.uid === entry.uid);
       if (!current) return;
       // 入队后再次核对，防止旧快照或直接调用绕过空堆保护。
       if (['cmtn6bge52qt', 'tt-crystal'].includes(current.card.id) && !itemUsability(current.card).usable) {
@@ -346,6 +343,18 @@ function createBattleBag({
       if (needsEnemy && target.dead) {
         instanceRuntime.G.log(`[[icon:cross]] 【${esc(card.name)}】的目标已失效，道具未消耗`, 'warn');
         return;
+      }
+      const executionCard = current.card;
+      const waiting = previewDiscovery(executionCard, current.uid, signal,
+        () => battleBagItems(marker).find(item => item.uid === entry.uid)?.card || executionCard,
+        () => sameBattle(marker) && pendingItem(entry.uid) === marker && battleBagItems(marker).some(item => item.uid === entry.uid));
+      if (waiting) {
+        const prepared = await waiting;
+        throwIfActionCancelled(signal);
+        if (prepared === false || !sameBattle(marker)) return;
+        current = battleBagItems(marker).find(item => item.uid === entry.uid);
+        if (!current) return;
+        if (prepared) current = { ...current, card: withPreparedDiscovery(current.card, prepared) };
       }
       // 结构化道具先走目标选择和队列门，再进入唯一结算分支。
       if (Array.isArray(current.card.rules?.bag?.use)) {
@@ -539,12 +548,7 @@ function createBattleBag({
   function resolveSlamHeal(skill) {
     instanceRuntime.set$energy(instanceRuntime.energy - skill.cost);
     const n = skill.heal || 0;
-    if ((instanceRuntime.pstat.status.healban || 0) > 0) {
-      instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${instanceRuntime.pstat.status.healban} 回合）`, 'warn');
-    } else {
-      instanceRuntime.G.heal(n);
-      instanceRuntime.floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
-    }
+    healPlayer(n);
     instanceRuntime.G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>：回复 <b>${n}</b> 点生命（-${skill.cost} 能量）`, 'sys');
     switchSlamSkill(skill);
   }
@@ -552,7 +556,7 @@ function createBattleBag({
   function resolveSlamAcquire(skill) {
     instanceRuntime.set$energy(instanceRuntime.energy - skill.cost);
     const pool = cardCatalog.all().filter(c => cardCatalog.isRandomObtainable(c) && (instanceRuntime.mode !== 'boss' || c.type !== '道具'));
-    const got = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
+    const got = pool.length ? pool[Math.floor(Random.random('loot', 'reward') * pool.length)] : null;
     if (got) {
       if (instanceRuntime.mode === 'boss') addDeckCard({ ...got });
       else addTempCard({ ...got });
@@ -565,6 +569,7 @@ function createBattleBag({
 
   // 药水栏点击：敌方指向道具在多敌时进入点选模式，其余直接生效
   function usePotion(uid) {
+    if (!instanceRuntime.G?.battleActive) return;
     const entry = battleBagItems().find(o => o.uid === uid);
     if (!entry) return;
     if (instanceRuntime.busy || instanceRuntime.infusing || instanceRuntime.discovering || instanceRuntime.choosing || instanceRuntime.handSelecting || instanceRuntime.viewingGrave || instanceRuntime.selectingDeck) return;

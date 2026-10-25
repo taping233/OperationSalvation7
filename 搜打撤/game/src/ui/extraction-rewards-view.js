@@ -8,7 +8,7 @@ const smartDescription = '按估值从高到低入库，同估值按背包原次
 const rarityOfCard = (card, rarityOf) => rarityOf?.(card) || card.rarity || '古朴';
 
 // Presentation only. Original indices survive the rarity sort; commands still own capacity and value order.
-function cardGrid(stacks, { cardHTML, rarityOf, action, room = 0, broughtByName = new Map(), pending = false }) {
+function cardGrid(stacks, { cardHTML, rarityOf, action, room = 0, broughtByName = new Map(), pending = false, sourceIdentityVersion = undefined }) {
   return stacks.map((stack, index) => ({ ...stack, index, rarity: rarityOfCard(stack.card, rarityOf) }))
     .sort((a, b) => rarities.indexOf(b.rarity) - rarities.indexOf(a.rarity) || a.index - b.index)
     .map(({ card, count, index, rarity }) => {
@@ -20,7 +20,7 @@ function cardGrid(stacks, { cardHTML, rarityOf, action, room = 0, broughtByName 
         <button type="button" class="exr-card-preview" data-act="${action}" data-i="${index}" aria-label="查看${escAttr(card.name)}详情，${escAttr(rarity)}，${count}张">
           <span class="exr-card-face" inert aria-hidden="true">${cardHTML(card, 'sm')}</span><span class="exr-inspect-hint">查看详情</span>
         </button>
-        ${pending ? `<button type="button" class="exr-deposit ext-card${take ? '' : ' off'}" data-act="exStash" data-i="${index}" ${take ? '' : 'disabled'} aria-disabled="${!take}" aria-label="${escAttr(card.name)} · ${availability}" title="${availability}"><span>${take ? (take < count ? `可入库 ${take}/${count} 张` : `入库 ${take} 张`) : `仓库已满 · ×${count}`}</span></button>${brought ? `<span class="exr-brought" title="本局同名卡的出发携入记录，不代表剩余卡的来源；入库按同名合并，不区分携入或局内获得">出发曾带入 ×${brought}</span>` : ''}` : '<span class="exr-item-saved" aria-label="已入库">[[icon:check]]</span>'}
+        ${pending ? `<button type="button" class="exr-deposit ext-card${take ? '' : ' off'}" data-act="exStash" data-i="${index}" ${take ? '' : 'disabled'} aria-disabled="${!take}" aria-label="${escAttr(card.name)} · ${availability}" title="${availability}"><span>${take ? (take < count ? `可入库 ${take}/${count} 张` : `入库 ${take} 张`) : `仓库已满 · ×${count}`}</span></button>${brought ? `<span class="exr-brought" title="本局同名卡的出发携入记录，不代表剩余卡的来源；${sourceIdentityVersion === 1 ? '入库保留所选卡牌版本' : '入库按同名合并，不区分携入或局内获得'}">出发曾带入 ×${brought}</span>` : ''}` : '<span class="exr-item-saved" aria-label="已入库">[[icon:check]]</span>'}
       </article>`;
     }).join('');
 }
@@ -66,10 +66,10 @@ function growthHTML(receipt) {
  * @typedef {{cardHTML: (card: ExtractionCard, size: string) => string, rarityOf: (card: ExtractionCard) => string}} ExtractionRenderers
  * @typedef {Partial<ReturnType<typeof import('../hub/extraction.commands.js').buildExtractionReceipt>>} ExtractionReceipt
  */
-/** @param {Partial<ExtractionRenderers & {remainingCards: ExtractionStack[], savedCards: ExtractionStack[], keptPocket: ExtractionStack[], pocketKept: number, pocketLost: number, pocketRuleLost: number, wood: number, rations: number, stashUsed: number, stashCap: number, room: number, coins: number, shaN: number, starterSha: number, otherN: number, broughtByName: Map<string, number>, help: string, notice: string, confirmFinish: boolean}>} [options] */
+/** @param {Partial<ExtractionRenderers & {remainingCards: ExtractionStack[], savedCards: ExtractionStack[], keptPocket: ExtractionStack[], pocketKept: number, pocketLost: number, pocketRuleLost: number, wood: number, rations: number, stashUsed: number, stashCap: number, room: number, coins: number, shaN: number, starterSha: number, otherN: number, broughtByName: Map<string, number>, sourceIdentityVersion: 1, help: string, notice: string, confirmFinish: boolean}>} [options] */
 export function extractionStashHTML({ remainingCards = [], savedCards = [], keptPocket = [], pocketKept = 0, pocketLost = 0, pocketRuleLost = 0,
   wood = 0, rations = 0, stashUsed = 0, stashCap = 0, room = 0, coins = 0, shaN = 0, starterSha = 0, otherN = 0,
-  broughtByName = new Map(), cardHTML, rarityOf, help = '', notice = '', confirmFinish = false } = {}) {
+  broughtByName = new Map(), sourceIdentityVersion, cardHTML, rarityOf, help = '', notice = '', confirmFinish = false } = {}) {
   const remaining = countOf(remainingCards), saved = countOf(savedCards);
   const canStore = Math.min(remaining, Math.max(0, room));
   const allFit = remaining > 0 && canStore === remaining;
@@ -81,7 +81,7 @@ export function extractionStashHTML({ remainingCards = [], savedCards = [], kept
     <div class="exr-layout"><section class="exr-loot" aria-label="本次战利品">
       <div class="exr-section-title"><div><h3>待入库 <b>${remaining}</b><small> 张</small></h3></div></div>
       <p class="exr-notice" role="status" aria-live="polite">${esc(notice)}</p>
-      <div class="exr-card-scroll"><div class="exr-card-grid">${remaining ? cardGrid(remainingCards, { cardHTML, rarityOf, action: 'exInspect', pending: true, room, broughtByName }) : `<div class="exr-empty"><span>[[icon:archive]]</span><h3>${saved ? '卡牌已妥善入库' : '本次没有待入库卡牌'}</h3></div>`}</div>
+      <div class="exr-card-scroll"><div class="exr-card-grid">${remaining ? cardGrid(remainingCards, { cardHTML, rarityOf, action: 'exInspect', pending: true, room, broughtByName, sourceIdentityVersion }) : `<div class="exr-empty"><span>[[icon:archive]]</span><h3>${saved ? '卡牌已妥善入库' : '本次没有待入库卡牌'}</h3></div>`}</div>
         ${saved ? `<details class="exr-saved-shelf"><summary>[[icon:check]] 本次已入库 ${saved} 张 </summary><div class="exr-card-grid">${cardGrid(savedCards, { cardHTML, rarityOf, action: 'exSavedInspect' })}</div></details>` : ''}
       </div>
     </section><aside class="exr-sidebar" aria-label="入库与去向">

@@ -1,70 +1,11 @@
 // @ts-check
-/* M3 卡牌规则化数据迁移批 D5（2026-09-27）：B-M2 onPlay 扩展批次，共迁 24 张（派单 33 张扣 9 跳过）。
- * definitions 内联手写，字段风格与 cards.sync.m1.js / cards.sync.m2.js 一致（version:1 /
- * onPlay 有序 ops）；canonical 整卡取实际定版（CARDS_SYNC / TABLETOP10 / 11 / 12，m1/m2 先例：
- * 不另存一份可漂移数值表；同 id 多表引用取「最后写入的定版」——与 catalog-after 实测逐卡深相等比对确认）。
- *
- * 迁移口径（逐卡对照矩阵 docs/M-BATCH-MATRIX.md B-M2 行 + 工作区现场 schema/capability/执行器，
- * 全部 24 张先过 validateCardRules + inspectCardRuleCapability 双门再定稿）：
- *   cc-cursed-blade   攻（+3），附加手牌招式的全部诅咒 → damage + curse source:'handMoves'
- *                     （执行器按卡面默认量逐诅咒施加，resolution curse 分支 source 手牌聚合）；
- *   cc-last-stand     攻（+3），末张手牌触发 2 次 → damage + recast:{on:'lastHand',times:2}；
- *   cc-rapid-fire     每打出一张其他招式造成 2 点固定伤 → damage amount:2（=卡面 dmg）+
- *                     hits:{perPlayedMoves:true}（段数=本回合已打出招式数，结算后自增口径）；
- *   cmtn0xt0zr7       5 点固定伤，击杀 +2 币 → damage amount:5 + onKill:{coins:2}；
- *   tt2-jianghu       发现 1 张其它职业卡并直接施放 → acquire n:1 pool{kind:'其它职业'}
- *                     dest:'discover' act:'play'（parsePoolNoun 其它职业池 + 发现面板原生 act）；
- *   tt2-turtlearmor   消耗 1 张装备牌 +10 甲 → armor amount:10 + consumeEquip:true（付不出则无效）；
- *   tt3-dig-treasure  牌库底三张中发现 1 张，获等同其价格的护甲 → acquire n:3 pool{kind:'牌库底'} +
- *                     armor priceOf:'discovered'（锚定发现牌价格）；
- *   tt3-fly-arrowhawk 攻（+3），本次攻击流血加成翻倍 → damage（命中入口按本卡处理）；
- *   tt3-purify-arrow  攻（-1），净化自身 → damage（负攻词条需 dmgType attack）+ cleanse self；
- *   tt3sp-shadowbug   偷取 1 名敌人攻击力至 1 点 → stealAtk capTo:1（缺省 1 回合后归还）；
- *   tt3wu-shike       降 1 名敌人 2 攻持续 3 回合，附加流血 → curse atkDown amount:2 duration:3 +
- *                     curse bleed stacks:1（atkDown 计时型必填 amount/duration，与 stacks 互斥）；
- *   tt7-armup         从牌库抽 2 张装备牌 → draw amount:2 filter{type:'装备'}
- *                     （BOSS 战 deckDraw 定向，普通战降级获得初始攻击——执行器既有口径）；
- *   cmtn1epgt20j      发现一张注能卡，使其无需注能 → acquire n:1 pool{kind:'注能'} dest:'discover'
- *                     act:'noInfuse'（展示候选，选中实例免注能；v5修正旧随机直发）；
- *   cmtn1p9vb5au      发现一种形态并释放 → acquire n:1 pool{kind:'形态'} dest:'discover' act:'play'；
- *   tt12-chargeray    5 点法伤，每注能过 1 张 +2 → damage amount:5 + perInfusedInHand:2；
- *   tt3-holy-water    回复 5 点生命并净化自身 → heal amountField:'heal' + cleanse self；
- *   tt3-thunderblast  7 点法伤，墓地每 1 张法术 +1 → damage amount:7 + graveyard{type:'法术',perCard:1}；
- *   tt7-bladebloom    发现并直接施放 1 张，获取剩下两张 → acquire n:1 dest:'discover' act:'playKeep'
- *                     （SPEC §二.6「施放 1 张其余入手」=本卡口径，随机通用池）；
- *   tt7-burnharvest   5 点法伤，受法伤加成翻倍 → damage amount:5 + spellPowerMul:2；
- *   tt7-maxsupply     抽牌直到 4 张手牌 → draw untilHandN:4；
- *   tt7-recruit       召唤步兵（4-4）×2 抵挡伤害 → summon name/atk/hp/count + taunt:true
- *                     （engine summonAlly 随从位，taunt 为随从位自带语义）；
- *   tt3sp-devour      消灭 1 名攻 4 及以下小怪 → execute cap{atk:4} count:1（SPEC §二.5 同款）；
- *   tt3sp-magicoil    发现 1 瓶药水并直接释放 → acquire n:1 pool{kind:'药水'} dest:'discover' act:'play'；
- *   tt3sp-shadowshot  3 点法伤，对手身负诅咒时额外施放 1 次 → 两段 damage amount:3（=卡面 dmg）：
- *                     基础段无条件 + 条件段 cond{anyCurse:true}（recast 仅 on kill/lastHand，
- *                     条件重施以「无条件段+条件段」等价表达——未诅咒 3 点 / 诅咒 6 点，与卡面一致）。
- *
- * 跳过 9 张（逐条原因见 docs/archive/card-migration-2026-09-27/M3-D5-RESULT.md，此处仅摘要）：
- *   cmtn0pbkmnvc 流光照影（「每层诅咒释放一次初始攻击」需 execute 携带 what 键，键集无 what，
- *                execute 域语义是消灭低攻目标，与文本路径专支 release.curseLayers 错配）、
- *   tt7-goldencicada 金蝉脱壳（ensureEffectFields 按描述运行时注入 draw:3，存储卡与源表不可深相等，
- *                m2 tt7-arcanebolt 同款；内联手写补丁快照违背「不另存可漂移数值表」先例）、
- *   tt7-marchrush 急行军（recast 键仅挂 damage op，本牌只有抽牌+护甲无伤害段承载「效果触发2次」）、
- *   tt7-demonbreaker 破甲重斩（卡面 armor:4 触发「onPlay must declare card.armor」字段一致性契约，
- *                补 armor op 会把击杀奖励错成即时加甲）、
- *   tt3-qi-wave 气功波（卡面缺 dmgType 字段，damage 交叉契约要求 supported dmgType 必拒）、
- *   tt3-grope 摸索（衍生 draw:2=区间下限触发 declaresField，range 源不算声明字段，amount:2 丢随机）、
- *   tt7-abysscurse 深渊诅咒（卡面 draw:1 触发 declaresField，perCurseKinds 源不算声明字段，
- *                amount:1 与 perCurseKinds 五源选一互斥）、
- *   tt7-meteorstrong 星陨之力（卡面 infuse:2 禁入 onPlay，T11；且「施放 3 次火球」需 execute.what）、
- *   tt3sp-silverthorn 镭射（卡面 infuse:1 禁入 onPlay，T11；infuseBonus 执行器已接线但过不了 schema 门）。
- *
- * 2026-09-29 重构：入口骨架收敛到 cards.sync.backfiller.js createRuleBackfiller，
- * 本文件只保留 definitions 数据与批次参数；迁移数据行为不变（m3-data.test.js 守护）。 */
+// M3 规则迁移；逐卡依据见 docs/archive/card-migration-2026-09-27/M3-D5-RESULT.md。
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
+import { canonicalTables, onPlayDefinition as R } from './card-rule-definitions.js';
 
 // v6：飞身劈仅当次攻击翻倍流血加成，移除旧持续 bleedAmp 声明。
 const M3_MARKER_KEY = 'sdt-cards-m3-onplay-rules-v6-seeded';
 
-const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
 const ENEMY_ONE = { target: { side: 'enemy', area: false } };
 const SELF = { target: { side: 'self', area: false } };
 const dmgField = () => ({ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' });
@@ -128,41 +69,20 @@ const definitions = new Map([
   ])],
 ]);
 
-// canonical 源表：id → SDT.Cards 上的定版数组名。同 id 多表引用取「最后写入的定版」：
-// 4 张 cc-/治愈 在实机覆盖批次 cards-sync.json（m2 cc-chase-slash 同款）；其余为 TABLETOP
-// 定版（10/11/12；TABLETOP2/3/7 旧批次同名卡已被 TABLETOP10 按 id 整卡覆盖，m1 先例）。
-const CANONICAL_TABLE_BY_ID = new Map([
-  ['cc-cursed-blade', 'CARDS_SYNC'],
-  ['cc-last-stand', 'CARDS_SYNC'],
-  ['cc-rapid-fire', 'CARDS_SYNC'],
-  ['tt3-holy-water', 'CARDS_SYNC'],
-  ['tt2-jianghu', 'TABLETOP10'],
-  ['tt2-turtlearmor', 'TABLETOP10'],
-  ['tt3-dig-treasure', 'TABLETOP10'],
-  ['tt3-fly-arrowhawk', 'TABLETOP10'],
-  ['tt3-purify-arrow', 'TABLETOP10'],
-  ['tt3sp-shadowbug', 'TABLETOP10'],
-  ['tt3wu-shike', 'TABLETOP10'],
-  ['tt7-armup', 'TABLETOP10'],
-  ['cmtn1epgt20j', 'TABLETOP10'],
-  ['tt7-bladebloom', 'TABLETOP10'],
-  ['tt7-burnharvest', 'TABLETOP10'],
-  ['tt7-recruit', 'TABLETOP10'],
-  ['tt3sp-devour', 'TABLETOP10'],
-  ['tt3sp-magicoil', 'TABLETOP10'],
-  ['tt3sp-shadowshot', 'TABLETOP10'],
-  ['tt3-thunderblast', 'TABLETOP10'],
-  ['cmtn0xt0zr7', 'TABLETOP11'],
-  ['cmtn1p9vb5au', 'TABLETOP11'],
-  ['tt7-maxsupply', 'TABLETOP11'],
-  ['tt12-chargeray', 'TABLETOP12'],
-]);
-
 export const ensureM3OnplayRules = createRuleBackfiller({
   label: 'M3',
   markerKey: M3_MARKER_KEY,
   definitions,
-  canonicalTableById: CANONICAL_TABLE_BY_ID,
+  canonicalTableById: canonicalTables(definitions, 'TABLETOP10', {
+    'cc-cursed-blade': 'CARDS_SYNC',
+    'cc-last-stand': 'CARDS_SYNC',
+    'cc-rapid-fire': 'CARDS_SYNC',
+    'tt3-holy-water': 'CARDS_SYNC',
+    'cmtn0xt0zr7': 'TABLETOP11',
+    'cmtn1p9vb5au': 'TABLETOP11',
+    'tt7-maxsupply': 'TABLETOP11',
+    'tt12-chargeray': 'TABLETOP12',
+  }),
   // v1 时代旧版 rules 快照（v3 修正语义，m3-data.test.js 批次级保守语义章守护）：
   // 整卡（canonical 卡面 + 旧版 rules）精确匹配的存档视为本批旧版产物，允许重写为现行版；
   // 玩家改名/改字段的卡深不相等，仍保守跳过。

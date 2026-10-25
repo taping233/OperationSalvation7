@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>卡面数值一致性 · 只读复核</title>
+<link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/cards.css"><link rel="stylesheet" href="/css/card-v3.css"><link rel="stylesheet" href="/css/card-layout-selected.css">
+<style>
+body{margin:0;background:#17242f;color:#e4edef;font-family:var(--font-ui,sans-serif);overflow:auto}header{padding:20px 32px 0}h1{font-size:22px;margin:0 0 10px}p{font-size:16px;margin:10px 0}nav{display:flex;gap:12px}button{font:inherit;padding:8px 14px}main{display:flex;justify-content:center;gap:36px;padding:26px 24px}.sample{width:230px;flex:none}.sample h2{font-size:17px;text-align:center;margin:0 0 12px}.sample .hs-card{width:230px;font-size:23px;pointer-events:none}#status{color:#bcd7d2}
+</style></head>
+<body><header><h1>卡面数值一致性 · 只读复核</h1><p>使用生产卡面、当前数据与说明入口，不装载引擎或玩家档位。</p><nav><button id="staticMode">图鉴：无战斗加成</button><button id="battleMode">战斗：法伤加成 +2</button></nav><p id="status" role="status"></p></header><main id="samples"></main><script type="module" src="/dev/card-effect-consistency-review.js"></script></body>
+</html>

@@ -1,10 +1,10 @@
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { expect, it } from 'vitest';
 import { chestRewardFrameHTML, chestRewardOverviewHTML } from '../game/src/ui/chest-reward-overview.js';
+import { readCssSource } from './helpers/css-source.js';
 
 it('箱内领取仅当前层可见，总览保留尺寸且不可交互，返回后原动作恢复', () => {
-  const css = postcss.parse(readFileSync('game/css/chest-reward-overview.css', 'utf8'));
+  const css = postcss.parse(readCssSource('game/css/chest-reward-overview.css', 'utf8'));
   const selectors = [];
   css.walkRules('body #overlay .card .cqo-frame.cqo-picker-open .cqo-background', rule => {
     const declarations = {}; rule.walkDecls(d => declarations[d.prop] = d.value); selectors.push(declarations);
@@ -26,30 +26,26 @@ it('箱内领取仅当前层可见，总览保留尺寸且不可交互，返回�
 });
 
 
-it('总览关键说明与操作增大，金币收拢为横条而箱列表保留独立滚动', () => {
-  const css = postcss.parse(readFileSync('game/css/chest-reward-overview.css', 'utf8'));
+it('总览紧凑条目与金币共享滚动区，标题与统一页脚留在区外', () => {
+  const css = postcss.parse(readCssSource('game/css/chest-reward-overview.css', 'utf8'));
   const prefix = 'body #overlay .card .cqo-frame ';
   const decl = suffix => {
     const result = {};
     css.walkRules(prefix + suffix, rule => rule.walkDecls(d => { result[d.prop] = d.value; }));
     return result;
   };
-  for (const selector of ['.cqo-notice','.cqo-summary','.cqo-box-rule','.cqo-footer-note','.cqo-box-status']) {
-    expect(Number.parseFloat(decl(selector)['font-size']), selector).toBeGreaterThanOrEqual(22);
+  for (const selector of ['.cqo-notice','.cqo-box-rule','.cqo-footer-note']) {
+    expect(Number.parseFloat(decl(selector)['font-size']), selector).toBeGreaterThanOrEqual(18);
   }
-  expect(decl('.cqo-progress small')['font-size']).toBe('18px');
-  expect(decl('.cqo-button')).toMatchObject({'font-size':'24px','min-height':'60px','max-width':'100%','white-space':'normal'});
-  expect(decl('.cqo-coins')).toMatchObject({flex:'none','flex-direction':'row'});
-  expect(decl('.cqo-coins b')).toMatchObject({'max-width':'100%','overflow-wrap':'anywhere'});
-  expect(decl('.cqo-footer-note')['min-width']).toBe('0');
-  expect(decl('.cqo-boxes')).toMatchObject({'min-width':'0','overflow':'auto'});
-  expect(decl('.cqo-footer')['flex-wrap']).toBe('wrap');
-  expect(decl('.cqo-actions')).toMatchObject({'flex-wrap':'wrap','max-width':'100%'});
-  expect(decl('.cqo-progress')['flex-wrap']).toBe('wrap');
+  expect(decl('.cqo-button')).toMatchObject({'font-size':'22px','min-height':'52px'});
+  expect(decl('.cqo-coins')).toMatchObject({display:'flex','align-items':'center'});
+  expect(decl('.cqo-rewards')).toMatchObject({'min-height':'0',overflow:'auto',flex:'1'});
+  expect(decl('.cqo-boxes')).toMatchObject({display:'flex','flex-wrap':'wrap'});
+  expect(decl('.cqo-box')['min-height']).toBe('330px');
+  expect(decl('.cqo-box-art')).toMatchObject({width:'150px',height:'150px'});
   expect(decl('.cqo-overview').overflow).toBe('hidden');
-  // 旧共享关闭按钮不跟随总览变大；picker独立布局/滚动继续保留。
-  expect(decl(':is(.cqo-button,.cqp-close)')['min-height']).toBe('48px');
-  expect(decl('.cqp-dialog')['max-height']).toBeTruthy();
+  expect(decl('.cqp-close')['min-height']).toBe('44px');
+  expect(decl('.cqp-dialog')).toMatchObject({height:'100%','min-height':'0',overflow:'hidden'});
 });
 
 
@@ -66,21 +62,21 @@ it.each([
   const box={index:0,name:'箱',cardCount:3,takenCount:0,lostCount:0,rule:'3 张 · 可全部领取',...state};
   const before=JSON.stringify(box);
   const root=document.createElement('div'); root.innerHTML=chestRewardOverviewHTML({boxes:[box]});
-  expect(root.querySelector('.cqo-box-rule').textContent).toBe(text);
+  expect(root.querySelector('.cqo-box-rule').firstChild.textContent).toBe(text);
   expect(root.querySelector('.cqo-box').disabled).toBe(!!state.completed);
   expect(JSON.stringify(box)).toBe(before);
   if(state.completed) expect(root.textContent).not.toContain('可全部领取');
-  if(state.completed) expect(root.querySelector('.cqo-box-mode').textContent).toBe('✓已处理');
+  if(state.completed) expect(root.querySelector('.cqo-box-action').textContent).toBe('已结束');
 });
 it('未开启三选一保留规则，不将候选数描述为获得数', () => {
   const root=document.createElement('div');
   root.innerHTML=chestRewardOverviewHTML({boxes:[{index:0,choice:true,rule:'3 张中选 1 张',cardCount:0,takenCount:0,lostCount:0}]});
-  expect(root.querySelector('.cqo-box-rule').textContent).toBe('3 张中选 1 张');
+  expect(root.querySelector('.cqo-box-rule').firstChild.textContent).toBe('3 张中选 1 张');
 });
 
 it('picker 数量与附赠提示独立可见，完成无规则时也不被隐藏', async () => {
   const { rewardSceneHTML } = await import('../game/src/ui/reward-scene-view.js');
-  const css = readFileSync('game/css/chest-reward-overview.css', 'utf8');
+  const css = readCssSource('game/css/chest-reward-overview.css', 'utf8');
   const parsed = postcss.parse(css);
   const hidden = [];
   parsed.walkRules(rule => {
@@ -91,8 +87,8 @@ it('picker 数量与附赠提示独立可见，完成无规则时也不被隐藏
     root.id = 'overlay';
     root.innerHTML = `<div class="card">${chestRewardFrameHTML({ overview:'', picker:rewardSceneHTML({title:'选择收获',source:'物资箱',countLabel:'共 6 张 · 含额外 3 张 · 横向查看全部',rule,cards:'',actions:''}) })}</div>`;
     document.body.append(root);
-    const count = root.querySelector('.reward-count');
-    expect(count.textContent).toBe('共 6 张 · 含额外 3 张 · 横向查看全部');
+    const count = root.querySelector('.reward-head');
+    expect(count.getAttribute('aria-description')).toContain('共 6 张 · 含额外 3 张 · 横向查看全部');
     for (let el = count; el && el !== root; el = el.parentElement) {
       for (const selector of hidden) expect(el.matches(selector), selector).toBe(false);
     }
@@ -113,10 +109,10 @@ it('互斥箱完成只说明本箱已放弃，另一箱仍可继续领取', () =
   const root = document.createElement('div');
   root.innerHTML = chestRewardOverviewHTML({ boxes, primaryAction:{index:1,label:'继续领取'} });
   const [done, pending] = root.querySelectorAll('.cqo-box');
-  expect(done.querySelector('.cqo-box-rule').textContent).toBe('已领取 1 张 · 其余 2 张已放弃');
+  expect(done.querySelector('.cqo-box-rule').firstChild.textContent).toBe('已领取 1 张 · 其余 2 张已放弃');
   expect(done.textContent).not.toContain('未领取');
   expect(done.disabled).toBe(true);
-  expect(pending.querySelector('.cqo-box-rule').textContent).toBe('已领取 1 张 · 剩余 1 张待处理');
+  expect(pending.querySelector('.cqo-box-rule').firstChild.textContent).toBe('已领取 1 张 · 剩余 1 张待处理');
   expect(pending.disabled).toBe(false);
   expect(root.querySelector('[data-act="chestNext"]').dataset.i).toBe('1');
   expect(root.querySelector('[data-act="chestFinish"]')).toBeNull();

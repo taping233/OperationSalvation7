@@ -1,5 +1,4 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import fs from "node:fs";
 import path from "node:path";
 import { Texture } from "pixi.js";
 
@@ -75,6 +74,7 @@ import {
   projectHomePoint,
   unprojectHomePoint,
 } from "../game/src/home/home.scene.js";
+import { readCssSource } from './helpers/css-source.js';
 
 const view = () => ({
   revision: 2,
@@ -183,7 +183,7 @@ describe("M05 home scene", () => {
     expect(
       host.querySelector(".home-display__card > .hs-card.tp0.rv6.cf1.sm"),
     ).not.toBeNull();
-    const homeCss = fs.readFileSync(
+    const homeCss = readCssSource(
       path.resolve(import.meta.dirname, "../game/css/home-scene.css"),
       "utf8",
     );

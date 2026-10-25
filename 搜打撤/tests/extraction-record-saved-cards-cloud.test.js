@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 // Real two-key transaction, recovery, recorder and export modules; isolated jsdom storage only.
@@ -5,8 +6,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music: vi.fn(), sfx: vi.fn(), setDucked: vi.fn() },
   FX: { feedback: vi.fn() }, UI: { log: vi.fn(), refresh: vi.fn(), showOverlay: vi.fn(), hideOverlay: vi.fn(), act: vi.fn() },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10,
-    bossDeckSize: 10, starterSha: 3, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6,
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 3, 5, 1),
     stashStart: 25, stashMax: 100, stashUpgradeSlots: 5 } },
 };
 await import('../game/src/cards/cards.js');
@@ -21,9 +21,9 @@ const initial = card('starter-attack', '初始攻击', 1, '初始');
 const count = stacks => stacks.reduce((n, s) => n + s.count, 0);
 const totalValue = stacks => stacks.reduce((n, s) => n + s.count * window.SDT.Cards.sellPrice(s.card), 0);
 
-async function harness({ owned, stash = [], clear = true } = {}) {
+async function harness({ owned, stash = [], clear = true, legacyPending = false } = {}) {
   localStorage.clear();
-  RunStorage.remove(2);
+  await RunStorage.remove(2);
   recorder.resetRunCounters();
   Base.use(2); (await Base.reset(2));
   Base.data.stash = structuredClone(stash);
@@ -33,7 +33,7 @@ async function harness({ owned, stash = [], clear = true } = {}) {
     usedPocket: [], inventory: [], ownedCards: owned.map((c, i) => ({ uid: `saved-audit-${i}`, card: structuredClone(c) })),
     myClass: '法师', characterId: 'baita' };
   window.SDT.game = game;
-  expect(RunStorage.write(2, { ...game, seed: 'saved-card-fixture', rngState: { seed: 1, streams: {} } })).toBe(true);
+  expect(await RunStorage.write(2, { ...game, seed: 'saved-card-fixture', rngState: { seed: 1, streams: {} } })).toBe(true);
   let pendingFailure = null;
   const recovery = createRecoveryCommands({ storage: localStorage,
     lockManager: { request: (_name, _options, callback) => callback() }, baseApi: Base, runStore: RunStorage,
@@ -42,6 +42,20 @@ async function harness({ owned, stash = [], clear = true } = {}) {
     addXpToProgress: (p, a) => ({ after: { lv: p.lv || 1, xp: (p.xp || 0) + a } }) };
   const commands = createExtractionCommands(deps);
   const started = await commands.begin(); expect(started.ok).toBe(true);
+  if (legacyPending) {
+    // Frozen pre-identity drafts used the first same-name card for the entire stack.
+    const pending = structuredClone(started.value);
+    delete pending.sourceIdentityVersion;
+    const byName = new Map();
+    for (const stack of pending.remainingCards) {
+      const existing = byName.get(stack.card.name);
+      if (existing) existing.count += stack.count;
+      else byName.set(stack.card.name, stack);
+    }
+    pending.remainingCards = [...byName.values()];
+    game.pendingExtraction = pending;
+    expect(await RunStorage.write(2, { ...RunStorage.read(2), pendingExtraction: pending })).toBe(true);
+  }
   return { game, commands, runId: started.value.runId, newCommands: () => createExtractionCommands(deps),
     failNextAt: phase => { pendingFailure = phase; } };
 }
@@ -61,19 +75,21 @@ const record = receipt => recorder.recordRun(receipt.outcome, { receipt, savedCa
 beforeEach(() => { recorder.resetRunCounters(); });
 
 describe('final saved-card receipt feeds records without candidate/warehouse contamination', () => {
-  it.each([true, false])('clear=%s: groups same-name run variants using actual command semantics, independent of prior same-name warehouse cards', async clear => {
+  it.each([true, false])('clear=%s: legacy pending keeps its frozen same-name grouping, independent of prior warehouse cards', async clear => {
     const first = card('new-a-first', '同名卡', 4, '史诗');
     const variant = card('new-a-variant', '同名卡', 7, '传说');
     const other = card('new-b', '本局乙', 2);
-    const h = await harness({ clear, owned: [initial, first, variant, first, other, card('lost', '未选卡', 1)],
+    const h = await harness({ clear, legacyPending: true, owned: [initial, first, variant, first, other, card('lost', '未选卡', 1)],
       stash: [{ card: card('old-a', '同名卡', 99), count: 2 }] });
     const result = await h.commands.updateCards([{ name: '同名卡', count: 2 }, { name: '本局乙', count: 1 }], h.runId, 2);
     expect(result.count).toBe(3);
     const receipt = await finish(h);
     expect(receipt.outcome).toBe(clear ? 'clear' : 'extract');
     expect(receipt.savedCards).toEqual([{ card: first, count: 2 }, { card: other, count: 1 }]);
-    // Existing warehouse stack keeps its original card object; this is not the run's valuation source.
-    expect(Base.data.stash.find(s => s.card.name === '同名卡')).toMatchObject({ card: { id: 'old-a' }, count: 4 });
+    // Same-name inbound cards keep their own identity; the previous warehouse holding is unchanged.
+    expect(Base.data.stash.find(s => s.card.id === 'old-a')).toMatchObject({ count: 2 });
+    expect(Base.data.stash.find(s => s.card.id === first.id)).toMatchObject({ count: 2 });
+    expect(Base.data.stash.filter(s => s.card.name === '同名卡').reduce((sum, s) => sum + s.count, 0)).toBe(4);
     const entry = record(receipt);
     expect(count(entry.carried)).toBe(3); expect(entry.carriedValue).toBe(10);
     expect(entry.carried.map(c => c.name)).toEqual(['同名卡', '本局乙']);

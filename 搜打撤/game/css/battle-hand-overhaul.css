@@ -1,126 +1,131 @@
 /* 手牌常态收在下沿；悬停或键盘焦点只抬起当前牌，移开后回落。 */
 body #overlay .battle-stage.battle-sts .bt-thought-bubble { border-radius:4px;background:#e8e3d0;color:#2a3030; }
-body #overlay .battle-stage.battle-sts .bt-fpreview {
+body #overlay .battle-stage.battle-sts .bt-fpreview{
+& {
   width:max-content;max-width:min(300px,40vw);padding:9px 11px;
   background:rgba(12,29,37,.96);border:1px solid rgba(178,207,211,.68);
   border-left:3px solid #e0c98e;color:#ecf1ed;box-shadow:0 10px 22px rgba(0,0,0,.38);
   white-space:normal;text-align:left;
 }
-body #overlay .battle-stage.battle-sts .bt-fpreview > b { color:#f1dda9;font-size:14px;line-height:1.35; }
-body #overlay .battle-stage.battle-sts .bt-fpreview span { color:#d5e1e3;font-size:12px;line-height:1.4; }
-body #overlay .battle-stage.battle-sts .bt-fpreview .bt-fpreview-tip { color:#afcdd1;font-size:11px; }
+& > b { color:#f1dda9;font-size:14px;line-height:1.35; }
+& span { color:#d5e1e3;font-size:12px;line-height:1.4; }
+& .bt-fpreview-tip { color:#afcdd1;font-size:11px; }}
 
 /* 手牌规则只占一层前景；关闭后原战斗 DOM 和选择状态仍在。 */
-body #overlay .bt-hand-detail { position:absolute;inset:0;z-index:120;display:grid;place-items:center;pointer-events:auto; }
-body #overlay .bt-hand-detail-scrim { position:absolute;inset:0;background:rgba(5,13,19,.5); }
-body #overlay .bt-hand-detail-surface {
+body #overlay{
+& .bt-hand-detail { position:absolute;inset:0;z-index:120;display:grid;place-items:center;pointer-events:auto; }
+& .bt-hand-detail-scrim { position:absolute;inset:0;background:rgba(5,13,19,.5); }
+& .bt-hand-detail-surface {
   position:relative;width:min(1080px,86%);max-height:92%;overflow:visible;
   display:flex;flex-direction:column;background:none;border:0;box-shadow:none;color:#e3eceb;
-}
-body #overlay .bt-hand-detail header,
-body #overlay .bt-hand-detail footer {
+}}
+body #overlay .bt-hand-detail{
+& header,
+& footer {
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:12px 20px;background:none;border:0;
   font-size:20px;color:#c3d8dc;
 }
-body #overlay .bt-hand-detail header { justify-content:flex-end; }
-body #overlay .bt-hand-detail footer { flex-direction:column;gap:10px; }
-body #overlay .bt-hand-detail-close {
+& header { justify-content:flex-end; }
+& footer { flex-direction:column;gap:10px; }}
+body #overlay .bt-hand-detail-close{
+& {
   min-height:48px;padding:10px 16px;border:1px solid #9bb6bd;background:#18323d;color:#e3eceb;font-size:20px;font-weight:700;cursor:pointer;
 }
-body #overlay .bt-hand-detail-close:focus-visible { outline:3px solid #fff0be;outline-offset:3px; }
-body #overlay .bt-hand-detail-body {
+&:focus-visible { outline:3px solid #fff0be;outline-offset:3px; }}
+body{
+& #overlay .bt-hand-detail-body {
   position:relative;display:flex;justify-content:center;align-items:center;
   min-height:0;overflow:visible;padding:12px 24px;
 }
-body:has(#viewport) #overlay .bt-hand-detail-art .hs-card { width:420px!important;font-size:42px!important;max-width:100%;filter:drop-shadow(0 10px 24px #0009); }
-body #overlay .bt-hand-detail-body:has(.bt-hand-detail-copy) { gap:72px;align-items:flex-start; }
-body #overlay .bt-hand-detail-copy { position:relative;flex:0 0 320px;width:320px;max-height:560px;overflow:auto;overscroll-behavior:contain;margin:12px 0 0;padding:20px 24px;background:#10232cf2;border:1px solid #9ebfc652;box-sizing:border-box; }
-body #overlay .bt-hand-detail-copy summary { font-size:22px;color:#d7e8ea;cursor:pointer; }
-body #overlay .bt-hand-detail-copy[open] summary { margin-bottom:14px; }
-body #overlay .bt-hand-detail-rules { margin:0;white-space:pre-wrap;font-family:var(--font-ui);line-height:var(--card-copy-leading,1.55);font-size:var(--card-copy-size,24px);font-weight:400;color:var(--card-copy-ink,#e8edef); }
-body #overlay .bt-hand-detail-action-note { margin:0;max-width:32ch;line-height:1.45;color:#c3d8dc; }
-body #overlay .bt-hand-detail-use { flex-shrink:0;width:420px;max-width:100%;min-height:64px;padding:14px 24px;border:1px solid #ecdca8;background:#d6c48e;color:#1b2a31;font-size:24px;font-weight:800;cursor:pointer; }
-body #overlay .bt-hand-detail-use:disabled { opacity:.55;cursor:default; }
-body #overlay .bt-hand-detail-use:focus-visible { outline:3px solid #b6e8ff;outline-offset:3px; }
-@media (prefers-reduced-motion:reduce) {
-}
+&:has(#viewport) #overlay .bt-hand-detail-art .hs-card { width:420px!important;font-size:42px!important;max-width:100%;filter:drop-shadow(0 10px 24px #0009); }
+& #overlay .bt-hand-detail-body:has(.bt-hand-detail-copy) { gap:72px;align-items:flex-start; }}
+body #overlay .bt-hand-detail-copy{
+& { position:relative;flex:0 0 320px;width:320px;max-height:560px;overflow:auto;overscroll-behavior:contain;margin:12px 0 0;padding:20px 24px;background:#10232cf2;border:1px solid #9ebfc652;box-sizing:border-box; }
+& summary { font-size:22px;color:#d7e8ea;cursor:pointer; }
+&[open] summary { margin-bottom:14px; }}
+body #overlay{
+& .bt-hand-detail-rules { margin:0;white-space:pre-wrap;font-family:var(--font-ui);line-height:var(--card-copy-leading,1.55);font-size:var(--card-copy-size,24px);font-weight:400;color:var(--card-copy-ink,#e8edef); }
+& .bt-hand-detail-action-note { margin:0;max-width:32ch;line-height:1.45;color:#c3d8dc; }}
+body #overlay .bt-hand-detail-use{
+& { flex-shrink:0;width:420px;max-width:100%;min-height:64px;padding:14px 24px;border:1px solid #ecdca8;background:#d6c48e;color:#1b2a31;font-size:24px;font-weight:800;cursor:pointer; }
+&:disabled { opacity:.55;cursor:default; }
+&:focus-visible { outline:3px solid #b6e8ff;outline-offset:3px; }}
 
 /* 发现、抉择、牌堆、背包沿用同一阅读面，动作停在固定页脚。 */
-body #overlay .battle-decision {
+body #overlay{
+& .battle-decision {
   background:#10232b;color:#e5eeee;border:1px solid rgba(170,196,201,.62);
 }
-body #overlay .battle-decision-head { background:#213d49;border-bottom:1px solid rgba(171,195,201,.4); }
-body #overlay .battle-decision-head h3 { color:#f0e0b8; }
-body #overlay .battle-decision-content { background:#10232b; }
-body #overlay .battle-decision-summary { background:#1a343e; }
-body #overlay .battle-decision-actions { background:#152b34;border-top:1px solid rgba(171,195,201,.38); }
-body #overlay .battle-decision-actions .ov-btn.ok { background:#dec78c;color:#17262e;border-color:#eddbaf;font-weight:800; }
-body #overlay .battle-decision-actions .ov-btn:not(.ok) { background:#27424d;color:#dce9e9;border:1px solid #7a9ca6; }
-body #overlay .battle-decision .choice-opt { background:#203b46;border:1px solid #7897a0;border-left:3px solid #d9c58e;color:#e8eff0; }
-body #overlay .battle-decision .choice-opt:hover,
-body #overlay .battle-decision .choice-opt:focus-visible { background:#36515a;outline:2px solid #e7d39d;outline-offset:2px; }
-body #overlay .battle-decision .battle-pile-layout { display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,30%);gap:24px;align-items:start; }
-body #overlay .battle-decision .battle-pile-layout .bt-gy-list { min-width:0; }
-body #overlay .battle-decision .battle-pile-card { cursor:pointer;border:1px solid transparent;background:rgba(26,46,55,.5);padding:6px; }
-body #overlay .battle-decision .battle-pile-card.is-inspected { border-color:#e2d19b;background:rgba(226,209,155,.12); }
-body #overlay .battle-decision .battle-pile-card:focus-visible { outline:3px solid #ead99f;outline-offset:3px; }
-body #overlay .battle-decision .battle-decision-inspect {
+& .battle-decision-head { background:#213d49;border-bottom:1px solid rgba(171,195,201,.4); }
+& .battle-decision-head h3 { color:#f0e0b8; }
+& .battle-decision-content { background:#10232b; }
+& .battle-decision-summary { background:#1a343e; }}
+body #overlay .battle-decision-actions{
+& { background:#152b34;border-top:1px solid rgba(171,195,201,.38); }
+& .ov-btn.ok { background:#dec78c;color:#17262e;border-color:#eddbaf;font-weight:800; }
+& .ov-btn:not(.ok) { background:#27424d;color:#dce9e9;border:1px solid #7a9ca6; }}
+body #overlay .battle-decision{
+& .choice-opt { background:#203b46;border:1px solid #7897a0;border-left:3px solid #d9c58e;color:#e8eff0; }
+& .choice-opt:hover,
+& .choice-opt:focus-visible { background:#36515a;outline:2px solid #e7d39d;outline-offset:2px; }
+& .battle-pile-card { cursor:pointer;border:1px solid transparent;background:rgba(26,46,55,.5);padding:6px; }
+& .battle-pile-card.is-inspected { border-color:#e2d19b;background:rgba(226,209,155,.12); }
+& .battle-pile-card:focus-visible { outline:3px solid #ead99f;outline-offset:3px; }
+& .battle-decision-inspect {
   position:sticky;top:10px;min-width:0;padding:20px;background:#1c3640;
   border:1px solid #819fa8;border-left:3px solid #e1c98d;color:#e7eeee;
 }
-body #overlay .battle-decision .battle-decision-inspect-kicker { color:#b9ced2;font-size:13px;letter-spacing:.12em; }
-body #overlay .battle-decision .battle-decision-inspect h4 { margin:8px 0;color:#f0e0b8;font-size:21px; }
-body #overlay .battle-decision .battle-decision-inspect-meta { color:#bdd0d5;font-size:14px; }
-body #overlay .battle-decision .battle-decision-inspect-rules { white-space:pre-wrap;line-height:1.6;font-size:16px; }
+& .battle-decision-inspect-kicker { color:#b9ced2;font-size:13px;letter-spacing:.12em; }
+& .battle-decision-inspect h4 { margin:8px 0;color:#f0e0b8;font-size:21px; }
+& .battle-decision-inspect-meta { color:#bdd0d5;font-size:14px; }
+& .battle-decision-inspect-rules { white-space:pre-wrap;line-height:1.6;font-size:16px; }}
 /* 牌库与消耗牌共用阅读尺寸；长规则留在中部阅读区，不挤走返回动作。 */
-body #overlay .card:has(.battle-decision[data-decision-kind="pile"]) {
+body #overlay .card:has(.battle-decision[data-decision-kind="pile"]){
+& {
   box-sizing:border-box;display:flex;width:min(1680px,94%);height:94%;min-width:0;min-height:0;max-width:94%;max-height:94%;
 }
-body #overlay .card:has(.battle-decision[data-decision-kind="pile"]) > #ovBody { min-width:0;max-width:none; }
-body #overlay .battle-decision[data-decision-kind="pile"] { flex:1 1 auto;height:100%;max-height:none; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-head { flex-wrap:wrap; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-head h3 { font-size:34px;line-height:1.35;overflow-wrap:anywhere; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-head > span { font-size:22px;white-space:normal; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-summary .ov-stats { font-size:var(--card-copy-size,24px);overflow-wrap:anywhere; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-content {
+& > #ovBody { min-width:0;max-width:none; }}
+body #overlay .battle-decision[data-decision-kind="pile"]{
+& { flex:1 1 auto;height:100%;max-height:none; }
+& .battle-decision-head { flex-wrap:wrap; }
+& .battle-decision-head h3 { font-size:34px;line-height:1.35;overflow-wrap:anywhere; }
+& .battle-decision-head > span { font-size:22px;white-space:normal; }
+& .battle-decision-summary .ov-stats { font-size:var(--card-copy-size,24px);overflow-wrap:anywhere; }
+& .battle-decision-content {
   flex:1 1 auto;min-width:0;overflow:auto;scrollbar-gutter:stable;scroll-padding:16px;
 }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-pile-layout { grid-template-columns:minmax(0,1fr) minmax(400px,30%);gap:32px; }
-body #overlay .battle-decision[data-decision-kind="pile"] .bt-gy-list {
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:28px;justify-items:center;align-content:start;overflow:visible;
-}
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-pile-card {
+& .battle-pile-card {
   box-sizing:border-box;width:320px;max-width:100%;min-width:0;padding:0;scroll-margin:16px;
 }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-pile-card .hs-card { width:100%;max-width:100%;margin:0;font-size:32px; }
-body #overlay .battle-decision[data-decision-kind="pile"] .bt-count { font-size:22px;padding:4px 8px; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect {
+& .battle-pile-card .hs-card { width:100%;max-width:100%;margin:0;font-size:32px; }
+& .bt-count { font-size:22px;padding:4px 8px; }
+& .battle-decision-inspect {
   box-sizing:border-box;max-height:calc(var(--game-layout-height,100vh) * .94 - 332px);overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding:12px;overflow-wrap:anywhere;
 }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect-kicker { font-size:20px; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect h4 { font-size:30px;line-height:1.4; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect-meta { font-size:22px;line-height:1.5; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect-rules,
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-content .ov-note,
-body #overlay .battle-decision[data-decision-kind="pile"] .ov-empty { font-size:var(--card-copy-size,24px);line-height:var(--card-copy-leading,1.55);overflow-wrap:anywhere; }
-body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-actions .ov-btn { min-height:64px;min-width:240px;max-width:100%;font-size:24px; }
-body #overlay .battle-decision[data-decision-kind="bag"] .battle-decision-inspect { position:static;margin:0 0 18px; }
-body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-entry { display:flex;flex-direction:column;align-items:center;gap:6px; }
-body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-inspect {
+& .battle-decision-inspect-kicker { font-size:20px; }
+& .battle-decision-inspect h4 { font-size:30px;line-height:1.4; }
+& .battle-decision-inspect-meta { font-size:22px;line-height:1.5; }
+& .battle-decision-inspect-rules,
+& .battle-decision-content .ov-note,
+& .ov-empty { font-size:var(--card-copy-size,24px);line-height:var(--card-copy-leading,1.55);overflow-wrap:anywhere; }
+& .battle-decision-actions .ov-btn { min-height:64px;min-width:240px;max-width:100%;font-size:24px; }}
+body #overlay .battle-decision[data-decision-kind="bag"]{
+& .battle-decision-inspect { position:static;margin:0 0 18px; }
+& .battle-bag-entry { display:flex;flex-direction:column;align-items:center;gap:6px; }
+& .battle-bag-inspect {
   width:100%;min-height:34px;background:#294651;border:1px solid #8fadb4;
   color:#e1eceb;font-size:14px;cursor:pointer;
 }
-body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-inspect:hover,
-body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-inspect:focus-visible {
+& .battle-bag-inspect:hover,
+& .battle-bag-inspect:focus-visible {
   background:#d7c58e;color:#1b2c34;outline:2px solid #f5e4ae;outline-offset:2px;
-}
+}}
 @media (max-width:900px) {
-  body #overlay .battle-decision .battle-pile-layout { grid-template-columns:minmax(0,1fr); }
-  body #overlay .battle-decision .battle-decision-inspect { position:static; }
-  body #overlay .battle-decision[data-decision-kind="pile"] .battle-pile-layout { grid-template-columns:minmax(0,1fr); }
-  body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect { position:static;max-height:none;overflow:visible; }
-  body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-actions .ov-btn { min-width:0;width:100%; }
+body #overlay .battle-decision{
+  & .battle-decision-inspect { position:static; }
+  &[data-decision-kind="pile"] .battle-decision-inspect { position:static;max-height:none;overflow:visible; }
+  &[data-decision-kind="pile"] .battle-decision-actions .ov-btn { min-width:0;width:100%; }}
 }
 
 /* 同一手牌保留原卡框；StS2位置表适配的低弧让九叠身份区全部可见。 */
@@ -128,24 +133,29 @@ body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-inspect:foc
 /* 短规则悬停/焦点全文可读；密集规则保留节选与明确的完整规则入口。 */
 
 /* 首脑编组先看对手与进度，再选择卡牌；抽牌细则按需展开。 */
-body #overlay .battle-decision[data-decision-kind="formation"] .boss-formation-summary { display:flex;justify-content:space-between;align-items:center;gap:32px;margin:0; }
-body #overlay .boss-formation-summary > div { display:flex;flex-direction:column;gap:8px; }
-body #overlay .boss-formation-kicker { font-size:14px;letter-spacing:.14em;color:#9dbfc8; }
-body #overlay .boss-formation-summary b { font-size:30px;line-height:1.35;color:#f2e4c3; }
-body #overlay .boss-formation-summary span { color:#bfd2d7; }
-body #overlay .boss-formation-progress { min-width:150px;text-align:right; }
-body #overlay .boss-formation-progress strong { font-size:42px;color:#c6e8e2;line-height:1; }
-body #overlay .boss-formation-progress small { font-size:24px;color:#8bacb7; }
-body #overlay .boss-formation-affix { display:flex;gap:18px;margin:0 0 18px;padding:12px 16px;border-left:2px solid #cfb875;background:#27434b;color:#c7d9dc;line-height:1.5; }
-body #overlay .boss-formation-affix b { flex-shrink:0;color:#ead9b0; }
+body #overlay{
+& .battle-decision[data-decision-kind="formation"] .boss-formation-summary { display:flex;justify-content:space-between;align-items:center;gap:32px;margin:0; }
+& .boss-formation-summary > div { display:flex;flex-direction:column;gap:8px; }
+& .boss-formation-kicker { font-size:14px;letter-spacing:.14em;color:#9dbfc8; }}
+body #overlay .boss-formation-summary{
+& b { font-size:30px;line-height:1.35;color:#f2e4c3; }
+& span { color:#bfd2d7; }}
+body #overlay .boss-formation-progress{
+& { min-width:150px;text-align:right; }
+& strong { font-size:42px;color:#c6e8e2;line-height:1; }
+& small { font-size:24px;color:#8bacb7; }}
+body #overlay .boss-formation-affix{
+& { display:flex;gap:18px;margin:0 0 18px;padding:12px 16px;border-left:2px solid #cfb875;background:#27434b;color:#c7d9dc;line-height:1.5; }
+& b { flex-shrink:0;color:#ead9b0; }}
 body #overlay .boss-formation-instruction { font-size:18px;color:#edf2e9;line-height:1.5;margin:0 0 12px; }
-body #overlay .boss-formation-rules { color:#abc5ce;font-size:15px;line-height:1.6;margin-bottom:20px; }
-body #overlay .boss-formation-rules summary { cursor:pointer;width:max-content;border-bottom:1px solid #678a95;padding-bottom:4px; }
-body #overlay .boss-formation-rules p { max-width:70ch;margin:10px 0; }
-body #overlay .battle-decision[data-decision-kind="formation"] .set-h { display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:20px; }
-body #overlay .battle-decision[data-decision-kind="formation"] .bs-count { font-size:15px;color:#a8c4cb; }
-body #overlay .battle-decision[data-decision-kind="formation"] .bt-hand { gap:18px;padding:18px 0 24px;align-items:start; }
-body #overlay .battle-decision[data-decision-kind="formation"] .bt-card { position:relative;transition:transform .16s,border-color .16s; }
-body #overlay .battle-decision[data-decision-kind="formation"] .bt-card.sel::after { content:'已编入';position:absolute;inset:0 0 auto;padding:7px 12px;background:#b8ded6;color:#16303a;text-align:center;font-size:16px;font-weight:700;pointer-events:none; }
+body #overlay .boss-formation-rules{
+& { color:#abc5ce;font-size:15px;line-height:1.6;margin-bottom:20px; }
+& summary { cursor:pointer;width:max-content;border-bottom:1px solid #678a95;padding-bottom:4px; }
+& p { max-width:70ch;margin:10px 0; }}
+body #overlay .battle-decision[data-decision-kind="formation"]{
+& .set-h { display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:20px; }
+& .bs-count { font-size:15px;color:#a8c4cb; }
+& .bt-hand { gap:18px;padding:18px 0 24px;align-items:start; }
+& .bt-card { position:relative;transition:transform .16s,border-color .16s; }}
 
 /* 独立操作固定在牌面可见顶部；不随沉底牌面掉出窗口。 */

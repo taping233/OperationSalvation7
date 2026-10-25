@@ -47,7 +47,7 @@
   "eventEnemies": [
     {
       "id": "bandit",
-      "name": "反抗组织拾荒者",
+      "name": "截道拾荒者",
       "hp": 3,
       "atk": 3
     }
@@ -90,21 +90,21 @@
     },
     "archer": {
       "id": "archer",
-      "name": "联邦射手",
+      "name": "封锁线枪手",
       "atk": 5,
       "hp": 3,
       "behavior": "volley"
     },
     "bandit": {
       "id": "bandit",
-      "name": "反抗组织拾荒者",
+      "name": "截道拾荒者",
       "atk": 3,
       "hp": 3,
       "behavior": "strike"
     },
     "cavalry": {
       "id": "cavalry",
-      "name": "联邦机动兵",
+      "name": "封锁线突击兵",
       "atk": 5,
       "hp": 6,
       "behavior": "charge"
@@ -118,28 +118,28 @@
     },
     "wolf_rider": {
       "id": "wolf_rider",
-      "name": "变异雪狼",
+      "name": "裂颚匍行体",
       "atk": 7,
       "hp": 6,
       "behavior": "charge"
     },
     "orc_axe": {
       "id": "orc_axe",
-      "name": "甲壳变异体",
+      "name": "板壳畸变体",
       "atk": 4,
       "hp": 7,
       "behavior": "guard"
     },
     "fire_el": {
       "id": "fire_el",
-      "name": "灼热异变体",
+      "name": "灼囊畸变体",
       "atk": 10,
       "hp": 7,
       "behavior": "strike"
     },
     "water_el": {
       "id": "water_el",
-      "name": "腐蚀异变体",
+      "name": "渗蚀畸变体",
       "atk": 7,
       "hp": 10,
       "behavior": "guard"
@@ -160,7 +160,7 @@
     },
     "grass_el": {
       "id": "grass_el",
-      "name": "滋生异变体",
+      "name": "囊生畸变体",
       "atk": 5,
       "hp": 12,
       "behavior": "curse"
@@ -181,11 +181,103 @@
     },
     "dragon": {
       "id": "dragon",
-      "name": "巨兽「荒渊」",
+      "name": "封街巨躯",
       "atk": 7,
       "hp": 40,
       "elite": true,
       "behavior": "dragon"
+    },
+    "rager": {
+      "id": "rager",
+      "name": "暴怒者",
+      "atk": 2,
+      "hp": 5,
+      "elite": true,
+      "behavior": "strike",
+      "eliteSkill": "allyDeathRage",
+      "desc": "一个友方角色死亡后，自身攻击力 +2。"
+    },
+    "deserter": {
+      "id": "deserter",
+      "name": "落难逃兵",
+      "atk": 3,
+      "hp": 7,
+      "elite": true,
+      "behavior": "strike",
+      "eliteSkill": "allyDeathLoss",
+      "desc": "每有一个友方角色死亡，自身失去 2 点生命。"
+    },
+    "greedy_imp": {
+      "id": "greedy_imp",
+      "name": "拾能囊虫",
+      "atk": 4,
+      "hp": 5,
+      "elite": true,
+      "behavior": "strike",
+      "eliteSkill": "deathEnergy",
+      "desc": "自身死亡后，为主人公回复 1 点能量。"
+    },
+    "swaggerer": {
+      "id": "swaggerer",
+      "name": "招摇过客",
+      "atk": 2,
+      "hp": 6,
+      "elite": true,
+      "behavior": "strike",
+      "eliteSkill": "attackAura",
+      "desc": "其它所有友方单位攻击力 +2。"
+    },
+    "tin_mute": {
+      "id": "tin_mute",
+      "name": "覆板缄默者",
+      "atk": 4,
+      "hp": 9,
+      "elite": true,
+      "behavior": "strike",
+      "eliteSkill": "damageCap",
+      "desc": "每次受到的伤害不超过 4 点；破甲与真实伤害无视此限制。",
+      "damageCap": 4
+    },
+    "heavy_hammer": {
+      "id": "heavy_hammer",
+      "name": "笨重锤手",
+      "atk": 8,
+      "hp": 8,
+      "elite": true,
+      "behavior": "strike",
+      "eliteSkill": "evenAttack",
+      "desc": "仅偶数回合可以攻击。",
+      "evenAttack": true
+    },
+    "cultist": {
+      "id": "cultist",
+      "name": "封识信徒",
+      "atk": 6,
+      "hp": 6,
+      "elite": true,
+      "behavior": "strike",
+      "eliteSkill": "blockPowerGain",
+      "desc": "存活期间，主人公无法获得攻击强化与法术强化。"
+    },
+    "fake_apothecary": {
+      "id": "fake_apothecary",
+      "name": "黑诊配药人",
+      "atk": 5,
+      "hp": 10,
+      "elite": true,
+      "behavior": "strike",
+      "eliteSkill": "curseHeal",
+      "desc": "每次被附加诅咒时回复 2 点生命（受禁疗限制）。"
+    },
+    "camo_sniper": {
+      "id": "camo_sniper",
+      "name": "迷彩狙击手",
+      "atk": 7,
+      "hp": 4,
+      "elite": true,
+      "behavior": "strike",
+      "eliteSkill": "firstTurnStealth",
+      "desc": "第一回合具有潜行；其它友方角色均死亡时立即失去潜行。"
     }
   },
   "encounters": [
@@ -241,14 +333,25 @@
         }
       ],
       "risk": "中",
-      "strategy": "对峙：射手生命较低，机动兵更耐打；优先快速减员，或集中处理厚血目标。",
+      "strategy": "对峙：射手生命较低，机动兵更耐打；优先快速减员，或集中处理厚血目标。 每场固定 1 个本层精英，其余为普通怪，总数量沿原区间。",
       "groups": [
         {
           "id": "l2-archer-cavalry",
-          "enemyIds": ["archer", "cavalry"],
-          "size": [2, 2],
+          "enemyIds": [
+            "archer",
+            "cavalry"
+          ],
+          "size": [
+            2,
+            2
+          ],
           "strategy": "射手生命较低，机动兵更耐打；选择快速减员或集中处理厚血目标。"
         }
+      ],
+      "guaranteedElite": [
+        "rager",
+        "deserter",
+        "greedy_imp"
       ]
     },
     {
@@ -276,18 +379,12 @@
         }
       ],
       "risk": "高",
-      "strategy": "异变：雪狼攻击凶猛，甲壳更耐打，掷弹兵生命较低；根据威胁与减员成本选择目标。",
-      "elite": {
-        "pool": [
-          "dragon"
-        ],
-        "size": [
-          1,
-          1
-        ],
-        "chance": 0.03,
-        "strategy": "精英预警：巨兽「荒渊」固定单体——奖励 2 个大宝箱，30% 概率额外掉 1 张传说卡"
-      }
+      "strategy": "异变：雪狼攻击凶猛，甲壳更耐打，掷弹兵生命较低；根据威胁与减员成本选择目标。 每场固定 1 个本层精英，其余为普通怪，总数量沿原区间。",
+      "guaranteedElite": [
+        "swaggerer",
+        "tin_mute",
+        "heavy_hammer"
+      ]
     },
     {
       "entries": [
@@ -314,32 +411,32 @@
         }
       ],
       "risk": "极高",
-      "strategy": "核心区：腐蚀持续消耗、滋生体厚血缠斗，随时准备战术取舍；巨兽「荒渊」偶尔出没",
+      "strategy": "核心区：腐蚀持续消耗、囊生畸变体厚血缠斗，随时准备战术取舍 每场固定 1 个本层精英，其余为普通怪，总数量沿原区间。",
       "groups": [
         {
           "id": "l4-fire-grass",
-          "enemyIds": ["fire_el", "grass_el"],
-          "size": [2, 2],
-          "strategy": "灼热异变体伤害更高，滋生异变体更耐打；未被防住的攻击还会留下持续威胁。"
+          "enemyIds": [
+            "fire_el",
+            "grass_el"
+          ],
+          "size": [
+            2,
+            2
+          ],
+          "strategy": "灼囊畸变体伤害更高，囊生畸变体更耐打；未被防住的攻击还会留下持续威胁。"
         }
       ],
-      "elite": {
-        "pool": [
-          "dragon"
-        ],
-        "size": [
-          1,
-          1
-        ],
-        "chance": 0.1,
-        "strategy": "精英预警：巨兽「荒渊」固定单体——奖励 2 个大宝箱，30% 概率额外掉 1 张传说卡"
-      }
+      "guaranteedElite": [
+        "cultist",
+        "fake_apothecary",
+        "camo_sniper"
+      ]
     }
   ],
   "enemyPool": [
     {
       "id": "bandit",
-      "name": "反抗组织拾荒者",
+      "name": "截道拾荒者",
       "hp": 3,
       "atk": 3
     }
@@ -469,7 +566,7 @@
     "bosses": [
       {
         "id": "boss_general",
-        "name": "肃清总督",
+        "name": "封控指挥官",
         "hp": 50,
         "atk": 5,
         "cell": [
@@ -484,7 +581,7 @@
       },
       {
         "id": "boss_orc",
-        "name": "变异巢母",
+        "name": "囊巢母体",
         "hp": 45,
         "atk": 4,
         "cell": [
@@ -499,16 +596,16 @@
       },
       {
         "id": "boss_elem",
-        "name": "异能领主",
+        "name": "隔离区看守",
         "hp": 48,
         "atk": 8,
         "cell": [
           3,
           4
         ],
-        "icon": "能",
+        "icon": "障",
         "affix": "aegis",
-        "affixName": "元素庇幕",
+        "affixName": "闭合隔膜",
         "behavior": "element_boss",
         "affixDesc": "偶数回合减免所有伤害（破甲可克制）"
       }

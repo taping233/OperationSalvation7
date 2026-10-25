@@ -1,3 +1,4 @@
+import { damageRuleFields, acquireRuleFields } from './helpers/environment-fixtures.js';
 /* M3 卡牌规则化数据迁移批 D5 锁定（2026-09-27）：cards.sync.m3.js ensureM3OnplayRules。
  * B-M2 onPlay 扩展批 24 张（派单 33 张扣 9 跳过，跳过清单见 docs/archive/card-migration-2026-09-27/M3-D5-RESULT.md）。
  * 每张迁的卡三条用例，锁定三件事：
@@ -66,11 +67,7 @@ const EXPECTED_RULES = {
     ] },
   },
   'tt2-jianghu': {
-    version: 1,
-    battle: { target: { side: 'self', area: false } },
-    triggers: { onPlay: [
-      { op: 'acquire', n: 1, pool: { kind: '其它职业' }, dest: 'discover', act: 'play' },
-    ] },
+    ...acquireRuleFields(1, '其它职业', 'discover', 'play'),
   },
   'tt2-turtlearmor': {
     version: 1,
@@ -88,11 +85,7 @@ const EXPECTED_RULES = {
     ] },
   },
   'tt3-fly-arrowhawk': {
-    version: 1,
-    battle: { target: { side: 'enemy', area: false } },
-    triggers: { onPlay: [
-      { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
-    ] },
+    ...damageRuleFields(false, 'chosenEnemy'),
   },
   'tt3-purify-arrow': {
     version: 1,
@@ -125,18 +118,10 @@ const EXPECTED_RULES = {
     ] },
   },
   'cmtn1epgt20j': {
-    version: 1,
-    battle: { target: { side: 'self', area: false } },
-    triggers: { onPlay: [
-      { op: 'acquire', n: 1, pool: { kind: '注能' }, dest: 'discover', act: 'noInfuse' },
-    ] },
+    ...acquireRuleFields(1, '注能', 'discover', 'noInfuse'),
   },
   'cmtn1p9vb5au': {
-    version: 1,
-    battle: { target: { side: 'self', area: false } },
-    triggers: { onPlay: [
-      { op: 'acquire', n: 1, pool: { kind: '形态' }, dest: 'discover', act: 'play' },
-    ] },
+    ...acquireRuleFields(1, '形态', 'discover', 'play'),
   },
   'tt12-chargeray': {
     version: 1,
@@ -161,11 +146,7 @@ const EXPECTED_RULES = {
     ] },
   },
   'tt7-bladebloom': {
-    version: 1,
-    battle: { target: { side: 'self', area: false } },
-    triggers: { onPlay: [
-      { op: 'acquire', n: 1, pool: { kind: '随机' }, dest: 'discover', act: 'playKeep' },
-    ] },
+    ...acquireRuleFields(1, '随机', 'discover', 'playKeep'),
   },
   'tt7-burnharvest': {
     version: 1,
@@ -196,11 +177,7 @@ const EXPECTED_RULES = {
     ] },
   },
   'tt3sp-magicoil': {
-    version: 1,
-    battle: { target: { side: 'self', area: false } },
-    triggers: { onPlay: [
-      { op: 'acquire', n: 1, pool: { kind: '药水' }, dest: 'discover', act: 'play' },
-    ] },
+    ...acquireRuleFields(1, '药水', 'discover', 'play'),
   },
   'tt3sp-shadowshot': {
     version: 1,

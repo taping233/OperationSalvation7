@@ -33,7 +33,7 @@ afterEach(() => {
   document.body.replaceChildren(); document.body.className = '';
   document.head.querySelectorAll('[data-interface-motion]').forEach(link => link.remove());
 });
-const hub = (room, view) => `<main id="hubMain" class="base-camp" data-page="${room}"><button class="hub-tab on" data-tab="${room}"></button><section class="hub-page" data-view="${view}"><button class="stash-section-tab on" data-view="${view}"></button></section></main>`;
+const hub = (room, view) => `<main id="hubMain" class="base-camp" data-page="${room}"><button class="hub-tab on" data-tab="${room}"></button><section class="hub-page" data-view="${view}"></section></main>`;
 async function fixture() {
   const overlay = document.getElementById('overlay');
   let phase = 'before';

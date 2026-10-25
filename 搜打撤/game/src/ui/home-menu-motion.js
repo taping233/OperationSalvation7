@@ -1,6 +1,8 @@
 import { interfaceReducedMotion } from './interface-motion.js';
 import { motionTiming, motionEasing } from './motion-presets.js';
+import { completeSurfaceMotion } from './motion-completion.js';
 import '../../css/home-ui-tokens.css';
+import '../../css/home-menu-motion.css';
 
 // Home-menu choreography accompanies the shared interface transitions.
 const title = /** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title'));
@@ -8,15 +10,15 @@ const overlay = document.getElementById('overlay');
 const credits = /** @type {HTMLDialogElement} */ (document.getElementById('homeCredits'));
 const routes = new Set(['mStart', 'mGuide', 'mAch', 'btnCardLib', 'mSettings', 'mInbox']);
 const homePages = '.slot-page, .beginner-guide, .achievement-gallery, .card-library-page, .settings-page';
-// Only hover/leave feedback is slower; menu actions retain their original dispatch timing.
-const homeEntryDuration = 900;
+// Home entry/return choreography; ordinary destinations follow the short departure.
+const homeEntryDuration = 560;
 const homeEntryDelays = new Map([
-  ['mStart', 160], ['mGuide', 300], ['mAch', 440], ['btnCardLib', 550],
-  ['mSettings', 650], ['mCredits', 740], ['btnTitleExit', 830],
+  ['mStart', 80], ['mGuide', 140], ['mAch', 220], ['btnCardLib', 280],
+  ['mSettings', 350], ['mCredits', 400], ['btnTitleExit', 450],
 ]);
 const homeRestoreDelays = new Map([
-  ['mStart', 170], ['mGuide', 270], ['mAch', 430], ['btnCardLib', 510],
-  ['mSettings', 590], ['mCredits', 670], ['btnTitleExit', 750],
+  ['mStart', 100], ['mGuide', 150], ['mAch', 230], ['btnCardLib', 290],
+  ['mSettings', 340], ['mCredits', 390], ['btnTitleExit', 440],
 ]);
 let route = null;
 let routeVersion = 0;
@@ -25,6 +27,9 @@ let settleTimer;
 let returnToken = 0;
 let exitBusy = false;
 let replayExit = false;
+let replayNavigation = false;
+let pendingNavigation = null;
+let cancelNavigation = null;
 let homeHasEntered = false;
 let revealVersion = false;
 
@@ -49,16 +54,16 @@ export function restoreHomeFromWallpaper() {
   revealVersion = !revealVersion;
   /** @type {import("./ui.dom.types.js").UIElement} */ (title.querySelector('.is-picked'))?.classList.remove('is-picked');
   delete title.dataset.homePick;
-  title.style.setProperty('--home-console-duration', '640ms');
-  title.style.setProperty('--home-console-delay', '280ms');
-  let finishAt = 920;
+  title.style.setProperty('--home-console-duration', '480ms');
+  title.style.setProperty('--home-console-delay', '100ms');
+  let finishAt = 580;
   /** @type {NodeListOf<HTMLElement>} */ (title.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout')).forEach(region => {
-    const delay = region.classList.contains('home-brand') ? 80
-      : region.classList.contains('home-footer') ? 880
-        : region.classList.contains('home-readout') ? 820 : homeRestoreDelays.get(region.id) ?? 590;
-    region.style.setProperty('--home-enter-duration', '440ms');
+    const delay = region.classList.contains('home-brand') ? 40
+      : region.classList.contains('home-footer') ? 430
+        : region.classList.contains('home-readout') ? 380 : homeRestoreDelays.get(region.id) ?? 340;
+    region.style.setProperty('--home-enter-duration', '360ms');
     region.style.setProperty('--home-enter-delay', `${delay}ms`);
-    finishAt = Math.max(finishAt, delay + 440);
+    finishAt = Math.max(finishAt, delay + 360);
   });
   title.dataset.homeReveal = revealVersion ? 'a' : 'b';
   title.dataset.homePhase = 'in';
@@ -86,18 +91,18 @@ export function returnHome() {
   const token = ++returnToken;
   const firstEntry = !homeHasEntered;
   homeHasEntered = true;
-  const entryDuration = firstEntry ? homeEntryDuration : 640;
+  const entryDuration = firstEntry ? homeEntryDuration : 380;
   title.style.setProperty('--surface-in', `${entryDuration}ms`);
-  title.style.setProperty('--home-console-duration', firstEntry ? '850ms' : '500ms');
-  title.style.setProperty('--home-console-delay', firstEntry ? '220ms' : '240ms');
+  title.style.setProperty('--home-console-duration', firstEntry ? '560ms' : '380ms');
+  title.style.setProperty('--home-console-delay', firstEntry ? '140ms' : '80ms');
   let finishAt = entryDuration;
   /** @type {NodeListOf<HTMLElement>} */ (title.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout')).forEach(region => {
     const plate = region.classList.contains('home-plate');
-    const duration = region.classList.contains('home-brand') ? (firstEntry ? 1100 : 640) : plate ? entryDuration : (firstEntry ? 700 : 500);
+    const duration = region.classList.contains('home-brand') ? (firstEntry ? 700 : 420) : plate ? entryDuration : (firstEntry ? 420 : 320);
     const entryDelay = region.classList.contains('home-brand') ? 0
-      : plate ? (region.classList.contains('is-picked') ? 0 : homeEntryDelays.get(region.id) ?? 650)
-        : region.classList.contains('home-footer') ? 760 : 480;
-    const delay = firstEntry ? entryDelay : Math.round(entryDelay * .65);
+      : plate ? (region.classList.contains('is-picked') ? 0 : homeEntryDelays.get(region.id) ?? 350)
+        : region.classList.contains('home-footer') ? 440 : 320;
+    const delay = firstEntry ? entryDelay : Math.round(entryDelay * .4);
     region.style.setProperty('--home-enter-duration', `${duration}ms`);
     region.style.setProperty('--home-enter-delay', `${delay}ms`);
     if (plate) region.style.setProperty('--hd', `${delay}ms`);
@@ -110,6 +115,9 @@ export function returnHome() {
 }
 
 function clearRoute() {
+  cancelNavigation?.();
+  cancelNavigation = null;
+  pendingNavigation = null;
   navigationObserver?.disconnect();
   navigationObserver = null;
   route = null;
@@ -177,34 +185,18 @@ export function leaveHomeDialog(dialog, finish) {
   if (dialog.dataset.homeMotion === 'out') return;
   dialog.dataset.homeMotion = 'out';
   returnHome();
-  if (homeReducedMotion()) { finish(); return; }
-  let finished = false;
-  let timer;
-  const settle = () => {
-    if (finished) return;
-    finished = true;
-    clearTimeout(timer);
-    dialog.removeEventListener('animationend', onEnd);
-    finish();
-  };
-  const onEnd = event => {
-    if (event.target === dialog && event.animationName === 'creditsFrameOut') settle();
-  };
-  dialog.addEventListener('animationend', onEnd);
-  timer = setTimeout(settle, motionTiming.exit + 30);
+  completeSurfaceMotion(dialog, finish, { duration: motionTiming.exit, name: 'creditsFrameOut' });
 }
 
 if (title && overlay) {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = new URL('../../css/home-menu-motion.css', import.meta.url).href;
-  link.dataset.homeMenuMotion = '1';
-  document.head.appendChild(link);
-
   title.addEventListener('click', event => {
       if (!(event.target instanceof Element)) return;
     const button = event.target.closest?.('button');
     if (!button || !title.contains(button) || button.closest('dialog') || button.disabled) return;
+    if (replayNavigation) return;
+    if (pendingNavigation) {
+      event.preventDefault(); event.stopImmediatePropagation(); return;
+    }
     if (button.id === 'btnTitleExit') { animateExit(event, button); return; }
     if (route && title.dataset.homePhase === 'out') {
       // The next click can precede the cover-removal observer after Escape.
@@ -220,9 +212,38 @@ if (title && overlay) {
       route = button.id;
       leavingHome();
       enterPage();
-      watchNavigation();
     }
+    // The city already owns its archive reveal. Other entries need one visible
+    // departure before an opaque destination or native dialog covers the home.
+    if ((routes.has(button.id) || button.id === 'mCredits') && button.id !== 'mStart' && !homeReducedMotion()) {
+      event.preventDefault(); event.stopImmediatePropagation();
+      if (button.id === 'mCredits') leavingHome();
+      pendingNavigation = button;
+      tapFeedback(button);
+      // The shared completion owner advances on the selected control's exit,
+      // with a timeout fallback and cancellation when Escape changes the route.
+      const departure = button.classList.contains('home-plate') ? button : title.querySelector('.home-footer');
+      cancelNavigation = completeSurfaceMotion(departure, () => {
+        cancelNavigation = null;
+        if (pendingNavigation !== button) return;
+        pendingNavigation = null;
+        if (!button.isConnected || title.hidden || title._scrHiding || title.classList.contains('wallpaper-only') || !overlay.hidden || credits?.open) {
+          clearRoute(); returnHome(); return;
+        }
+        if (routes.has(button.id)) watchNavigation();
+        replayNavigation = true;
+        try { button.click(); } finally { replayNavigation = false; }
+      }, { duration: motionTiming.exit, name: button.classList.contains('home-plate') ? 'hmPickedOut' : 'hmQuietOut' });
+      return;
+    }
+    if (routes.has(button.id)) watchNavigation();
     tapFeedback(button);
+  }, true);
+
+  window.addEventListener('keydown', event => {
+    if (!pendingNavigation || event.key !== 'Escape') return;
+    event.preventDefault(); event.stopImmediatePropagation();
+    clearRoute(); returnHome();
   }, true);
 
   document.addEventListener('sdt-overlay-mode', (/** @type {CustomEvent} */ event) => {
@@ -256,3 +277,10 @@ if (title && overlay) {
   });
   returnHome();
 }
+
+if (import.meta.hot) import.meta.hot.dispose(() => {
+  cancelNavigation?.();
+  clearTimeout(settleTimer);
+  navigationObserver?.disconnect();
+  pendingNavigation = null;
+});

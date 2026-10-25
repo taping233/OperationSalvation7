@@ -3,6 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { minifyStandaloneCssAssets } from '../scripts/css-asset-minification.mjs';
+import postcss from 'postcss';
+import viteConfig from '../vite.config.js';
 
 function cssAsset(source, fileName = 'assets/runtime-abc.css') {
   return { type: 'asset', fileName, originalFileNames: ['css/runtime.css'], source };
@@ -18,6 +20,13 @@ async function runPlugin(bundle, build = {}) {
 }
 
 describe('standalone CSS asset whitespace minification', () => {
+  it('uses the same component-scope expansion for Vite development stylesheets', async () => {
+    const result = await postcss(viteConfig.css.postcss.plugins).process(
+      '.panel { & > button { color: red; } }', { from: 'runtime.css' },
+    );
+    expect(result.css).toContain('.panel > button');
+    expect(result.css).not.toContain('&');
+  });
   it('preserves selectors, fallback/cascade order, animation names, relative URLs and legal comments', async () => {
     const source = `/*! @license Example MIT */
       /* ordinary implementation notes */
@@ -73,6 +82,51 @@ describe('standalone CSS asset whitespace minification', () => {
       expect(asset.source).toBe('.panel { color: red; }');
     },
   );
+
+  it.each([{ sourcemap: true }, { sourcemap: 'hidden' }, { cssMinify: false }])(
+    'expands component scopes before the debugging/minification decision %j', async (build) => {
+      const asset = cssAsset('.panel { & > button { display: block; display: flex; } &:hover::before { color: red; } }');
+      await runPlugin({ [asset.fileName]: asset }, build);
+      expect(asset.source).toContain('.panel > button');
+      expect(asset.source).toContain('.panel:hover::before');
+      expect(asset.source).toContain('display: block; display: flex;');
+      expect(asset.source).not.toContain('&');
+    },
+  );
+
+  it('composes a standalone source map when expanding component scopes', async () => {
+    const source = '.panel {\n & > button { color: red; }\n}\n';
+    const asset = cssAsset(source, 'assets/scoped.css');
+    const previous = { version: 3, sources: ['nested.css'], names: [], mappings: 'AAAA;AACA;AACA', sourcesContent: [source] };
+    const map = { type: 'asset', fileName: `${asset.fileName}.map`, source: JSON.stringify(previous) };
+    await runPlugin({ [asset.fileName]: asset, [map.fileName]: map }, { sourcemap: 'hidden' });
+    expect(asset.source).toContain('.panel > button');
+    expect(asset.source).not.toContain('&');
+    expect(asset.source).not.toContain('sourceMappingURL');
+    const composed = JSON.parse(map.source);
+    expect(composed.version).toBe(3);
+    expect(composed.sourcesContent).toContain(source);
+    expect(composed.mappings).not.toBe(previous.mappings);
+  });
+
+  it('preserves a nonstandard external map name and byte map source', async () => {
+    const original = '.panel { & > button { color: red; } }';
+    const asset = cssAsset(`${original}\n/*# sourceMappingURL=original.css.map */`);
+    const map = { type: 'asset', fileName: 'assets/original.css.map', source: new Uint8Array(Buffer.from(JSON.stringify({
+      version: 3, sources: ['original.scss'], names: [], mappings: 'AAAA', sourcesContent: [original],
+    }))) };
+    await runPlugin({ [asset.fileName]: asset, [map.fileName]: map }, { cssMinify: false });
+    expect(asset.source).toContain('.panel > button');
+    expect(asset.source).toContain('sourceMappingURL=original.css.map');
+    expect(JSON.parse(map.source).sources.some(source => source.endsWith('original.scss'))).toBe(true);
+  });
+
+  it('rejects a missing external map before changing a nested source', async () => {
+    const source = '.panel { & > button { color: red; } }\n/*# sourceMappingURL=missing.map */';
+    const asset = cssAsset(source);
+    await expect(runPlugin({ [asset.fileName]: asset }, { cssMinify: false })).rejects.toThrow('without the source map');
+    expect(asset.source).toBe(source);
+  });
 
   it('reduces actual runtime CSS payload without changing any source files', async () => {
     let before = 0;

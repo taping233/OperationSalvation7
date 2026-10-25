@@ -1,17 +1,18 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { ensureM7EquipRules } from '../game/src/cards/cards.sync.m7.js';
+import * as runtime from '../game/src/battle/runtime/battle.runtime.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 6, battleHandMax: 30, bossDeckSize: 15, starterSha: 5,
-    battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+  rules: { ...battleRules(6, 30, 15, 5, 5, 1) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
-const { applyKillRewards, fireConsumeTriggers } = await import('../game/src/battle/core/battle.engine.js');
+const { hitFoe, fireConsumeTriggers } = await import('../game/src/battle/core/battle.engine.js');
 const Cards = window.SDT.Cards;
 
 beforeAll(() => {
@@ -35,8 +36,7 @@ const nap = ms => new Promise(resolve => setTimeout(resolve, ms));
 function makeGame(ownedCards = []) {
   return {
     ownedCards, inventory: [], cardOrder: ownedCards.map(entry => entry.uid), usedPocket: [],
-    eventLog: [], hp: 50, maxHp: 50, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+    eventLog: [], ...playerFields(50, 50, 5, 0, '侠客', null),
     log(message) { this.eventLog.push(String(message)); },
     heal(amount) { this.hp = Math.min(this.maxHp, this.hp + amount); }, onBattleEnd() {},
   };
@@ -68,7 +68,7 @@ describe('M7 装备触发器真实 BattleSession 消费', () => {
     await drain();
     BattleSession.commands.playCard('blooddrink-1', 'self');
     await drain();
-    applyKillRewards({ name: '击杀探针', desc: '' }, 1);
+    hitFoe(runtime.foes[0], { name: '击杀探针', desc: '' }, runtime.foes[0].hp, 'true');
     const result = BattleSession.getSnapshot();
     expect(result.pstat.status.atkUp).toBe(1);
     expect(game.eventLog.filter(line => line.includes('饮血剑')).length).toBe(1);

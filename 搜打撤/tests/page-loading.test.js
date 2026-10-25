@@ -4,7 +4,15 @@ vi.mock('../game/src/core/motion.js', () => ({ reduceMotion: vi.fn(() => false) 
 vi.mock('../game/src/core/map-image-ready.js', () => ({ mapImageReady: vi.fn(async () => true) }));
 import { reduceMotion } from '../game/src/core/motion.js';
 import { mapImageReady } from '../game/src/core/map-image-ready.js';
-import { runPageLoading } from '../game/src/ui/page-loading.js';
+import { runPageLoading as startPageLoading } from '../game/src/ui/page-loading.js';
+const loadingControllers = [];
+function runPageLoading(options) {
+  const controller = new AbortController(); loadingControllers.push(controller);
+  if (options.signal?.aborted) controller.abort();
+  else options.signal?.addEventListener('abort', () => controller.abort(), { once:true });
+  return startPageLoading({...options,signal:controller.signal});
+}
+afterEach(async () => { loadingControllers.splice(0).forEach(controller => controller.abort()); await Promise.resolve(); });
 
 describe('shared page loading cover', () => {
   beforeEach(() => {
@@ -23,9 +31,9 @@ describe('shared page loading cover', () => {
     const repeated = vi.fn();
     expect(runPageLoading({ title: '照相馆', detail: '', open: repeated })).toBe(first);
     expect(document.querySelectorAll('.page-loading')).toHaveLength(1);
-    expect(document.querySelector('.page-loading--interface')).not.toBeNull();
-    expect(document.querySelector('.camp-entry-cut')).toBeNull();
-    expect(document.querySelector('.page-loading-copy h2').textContent).toBe('照相馆');
+    expect(document.querySelector('.page-loading--city')).not.toBeNull();
+    expect(document.querySelector('.silent-node-cut[data-film-kind="loading"]')).not.toBeNull();
+    expect(document.querySelector('.page-loading-copy')).toBeNull();
     expect(document.querySelector('[role="status"]').getAttribute('aria-label')).toContain('正在整理馆藏');
     expect(open).not.toHaveBeenCalled();
     expect(document.getElementById('viewport').getAttribute('aria-busy')).toBe('true');
@@ -72,7 +80,7 @@ describe('shared page loading cover', () => {
     const mounted = new KeyboardEvent('keydown', { key: 'Enter', cancelable: true });
     window.dispatchEvent(mounted);
     expect(mounted.defaultPrevented).toBe(true);   // 挂载后仍护键：等待目标首帧视觉就绪
-    await vi.advanceTimersByTimeAsync(64);         // 视觉就绪检查（无 ovBody 立即放行）+ 一帧
+    await vi.advanceTimersByTimeAsync(160);        // 等待短片首帧和160ms播放段，淡出开始即释放输入
     const key = new KeyboardEvent('keydown', { key: 'Enter', cancelable: true });
     window.dispatchEvent(key);
     expect(key.defaultPrevented).toBe(false);      // 揭幕开始即放行，不等淡出结束
@@ -115,14 +123,14 @@ describe('shared page loading cover', () => {
     expect(reveal).not.toHaveBeenCalled();
     expect(document.querySelector('.page-loading--city')).not.toBeNull();
     expect(document.querySelector('.page-loading-copy')).toBeNull();
-    expect(document.querySelector('.camp-entry-cut').classList.contains('page-cut-waiting')).toBe(true);
+    expect(document.querySelector('.camp-entry-cut').classList.contains('silent-film-playing')).toBe(true);
     mount('ready');
-    await vi.advanceTimersByTimeAsync(48);   // 挂载后先过目标首帧视觉就绪，再揭幕一次
+    await vi.advanceTimersByTimeAsync(650);  // 目标就绪且1100ms照片短片结束后才揭幕
     expect(reveal).toHaveBeenCalledOnce();
     expect(document.querySelector('.camp-entry-cut')).not.toBeNull();
     expect(document.querySelector('.camp-entry-cut').classList.contains('page-cut-waiting')).toBe(false);
     expect(document.querySelector('.page-loading').classList.contains('leaving')).toBe(true);
-    await vi.advanceTimersByTimeAsync(800);
+    await vi.advanceTimersByTimeAsync(400);
     expect(document.querySelector('.page-loading')).not.toBeNull();
     controller.abort();
     await expect(pending).resolves.toBe('ready');
@@ -216,6 +224,26 @@ describe('mounted destination ownership during readiness', () => {
     const pending = runPageLoading({title:'页面',detail:'',onRevealStart:reveal,open:() => {
       document.getElementById('ovBody').innerHTML = '<main>页面</main>'; return 'ready';
     }});
+    await vi.runAllTimersAsync();
+    await expect(pending).resolves.toBe('ready');
+    expect(reveal).toHaveBeenCalledOnce();
+  });
+
+  it('prepares destination images alongside background readiness and waits for both', async () => {
+    let releaseBackground, releasePhotos;
+    window.SDT.UI._pageBgReady = new Promise(resolve => { releaseBackground = resolve; });
+    const photos = new Promise(resolve => { releasePhotos = resolve; });
+    const prepare = vi.fn(() => photos), reveal = vi.fn();
+    const pending = runPageLoading({ title:'照相馆', detail:'准备中', prepare, onRevealStart:reveal, open:() => {
+      document.getElementById('ovBody').innerHTML = '<main class="studio-unified">照片</main>'; return 'ready';
+    }});
+    await vi.advanceTimersByTimeAsync(64);
+    expect(prepare).toHaveBeenCalledOnce();
+    expect(prepare.mock.calls[0][0]).toBeInstanceOf(AbortSignal);
+    releaseBackground();
+    await vi.advanceTimersByTimeAsync(64);
+    expect(reveal).not.toHaveBeenCalled();
+    releasePhotos();
     await vi.runAllTimersAsync();
     await expect(pending).resolves.toBe('ready');
     expect(reveal).toHaveBeenCalledOnce();

@@ -1,4 +1,4 @@
-/* 新局6/9的数量与硬约束唯一来源；旧3/9、4/9、5/9快照保留各自规则。 */
+/* 数量与安全约束唯一来源；7/9额外检查探索结构，旧3/9至6/9保留各自规则。 */
 import { validateGeneratedMap as validateLegacyMap } from './map-generator.js';
 
 /**
@@ -7,7 +7,9 @@ import { validateGeneratedMap as validateLegacyMap } from './map-generator.js';
  * @typedef {ReadonlyArray<MapLayerTypeBudget>} MapTypeBudgets
  */
 
+// Historical public identifier stays at 6 for frozen generation/route consumers.
 export const CURRENT_GENERATOR_VERSION = 6;
+export const EXPLORATION_GENERATOR_VERSION = 7;
 export const CURRENT_LAYOUT_VERSION = 9;
 export const FIRE_BATTLE_LIMIT = 2;
 /** @type {MapTypeBudgets} */
@@ -80,12 +82,13 @@ export function finaleOrderOk(layer, altar, boss) {
 }
 
 // 只校验，不修补。任何后置覆盖也必须经过这一最终门，不能重引入已消除的冲突。
-export function validateCurrentGeneratedMap(layers, budgets = MAP_TYPE_BUDGETS, enforceFirePacing = true) {
+export function validateCurrentGeneratedMap(layers, budgets = MAP_TYPE_BUDGETS, enforceFirePacing = true, exploration = false) {
   let legacy;
   try { legacy = validateLegacyMap(layers); }
   catch { return { ok: false, issues: ['新地图结构无效'] }; }
   // 旧质量门的节点数量冻结；新版数量由下方完整配额独立校验。
-  const issues = legacy.issues.filter(issue => !/^层 \d+ 节点数异常$/.test(issue));
+  const issues = legacy.issues.filter(issue => !/^层 \d+ 节点数异常$/.test(issue)
+    && !(exploration && /^层 \d+ (分叉不足|没有回环)$/.test(issue)));
   if (layers.length !== MAP_TYPE_BUDGETS.length) return { ok: false, issues };
   layers.forEach((layer, li) => {
     const budget = budgets[li], counts = {};
@@ -94,6 +97,14 @@ export function validateCurrentGeneratedMap(layers, budgets = MAP_TYPE_BUDGETS, 
       if ((counts[type] || 0) !== (budget[type] || 0)) issues.push(`层 ${li + 1} ${type} 配额异常`);
     }
     const neighbors = layerNeighbors(layer);
+    if (exploration) {
+      const leaves=layer.nodes.filter(n=>n.idx!==layer.entry&&n.idx!==layer.exit&&neighbors[n.idx].length===1);
+      const cycles=neighbors.reduce((sum,edges)=>sum+edges.length,0)/2-layer.nodes.length+1;
+      if(leaves.length<(li===0?1:2))issues.push(`层 ${li+1} 探索尽头不足`);
+      if(neighbors.filter(edges=>edges.length>=3).length<(li===0?1:2))issues.push(`层 ${li+1} 探索分叉不足`);
+      if(cycles>1)issues.push(`层 ${li+1} 回环过密`);
+      if(!leaves.some(n=>['chest','resource','event'].includes(n.type)))issues.push(`层 ${li+1} 尽头缺少探索内容`);
+    }
     const fire = layer.nodes.find(node => node.type === 'fire');
     const shop = layer.nodes.find(node => node.type === 'shop');
     if (fire && enforceFirePacing && minimumBattlesTo(layer, fire.idx) > FIRE_BATTLE_LIMIT) {

@@ -3,11 +3,12 @@ import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { JSDOM } from 'jsdom';
 import { describe, expect, it } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
-const css = postcss.parse(readFileSync(new URL('../game/css/expedition-rewards.css', import.meta.url), 'utf8'));
+const css = postcss.parse(readCssSource(new URL('../game/css/expedition-rewards.css', import.meta.url), 'utf8'));
 const altar = readFileSync(new URL('../game/src/run/game.run.altar.js', import.meta.url), 'utf8');
 const picker = 'body #overlay .card.discover:has(.sac-hand)';
-const ledger = 'body #overlay #exMain.result-pg .pk-row:not(.dep-row)';
+
 function declarations(selector) {
   const values = {};
   css.walkRules(rule => {
@@ -27,12 +28,12 @@ describe('共用献祭选卡器的阅读与命中范围', () => {
       display:'flex', 'flex-direction':'column', flex:'1 1 auto', 'min-height':'0', overflow:'hidden',
     });
     expect(declarations(`${picker} .sac-hand`)).toMatchObject({
-      display:'grid', 'grid-template-columns':'repeat(5,minmax(0,240px))', gap:'28px',
+      display:'grid', 'grid-template-columns':'repeat(auto-fit,minmax(240px,280px))', gap:'28px',
       flex:'1 1 auto', 'min-height':'0', 'max-height':'none', overflow:'auto',
       'overscroll-behavior':'contain', 'scrollbar-gutter':'stable',
     });
-    // Five 240px cards, four gaps, padding and stable gutter fit the fixed logical layout.
-    expect(5 * 240 + 4 * 28 + 24 + 20).toBeLessThan(1480 - 72);
+    // Four full-size cards fit without compressing the text to keep five columns.
+    expect(4 * 280 + 3 * 28 + 24 + 20).toBeLessThan(1480 - 72);
     expect(declarations(`${picker} .sac-hand > .ov-empty`)['grid-column']).toBe('1/-1');
   });
 
@@ -77,23 +78,6 @@ describe('共用献祭选卡器的阅读与命中范围', () => {
         });
       }
     });
-    dom.window.close();
-  });
-});
-
-describe('成功撤离自动入库的两列账目', () => {
-  it('标签不拆字，只有说明列可缩窄换行，保留既有22px阅读档', () => {
-    expect(declarations(ledger)).toMatchObject({ display:'grid', 'grid-template-columns':'max-content minmax(0,1fr)', 'align-items':'start' });
-    expect(declarations(`${ledger} > span:first-child`)).toMatchObject({ 'white-space':'nowrap', 'overflow-wrap':'normal' });
-    expect(declarations(`${ledger} > span:last-child`)['min-width']).toBe('0');
-    expect(declarations('body #overlay #exMain.result-pg :is(.res-chip,.result-summary span:last-child,.hub-card-tip,.pk-row,.dim,.ov-note,.ov-empty)')['font-size']).toBe('22px');
-  });
-
-  it('统一覆盖木材、口粮、物资与消耗区，不影响左侧初始攻击说明或其他页面', () => {
-    const rows = ['木材 ×0', '口粮 ×0', '其余物资 ×3', '消耗区'];
-    const dom = new JSDOM(`<body><div id="overlay"><div id="exMain" class="result-pg"><div class="pk-row dep-row locked"><span>初始攻击 · 初始牌不可入库</span><span class="dim">遗落</span></div>${rows.map(label => `<div class="pk-row"><span>${label}</span><span class="dim">每张1/3概率保留 · 带回2张 · 散失14张</span></div>`).join('')}</div><div class="pk-row"><span>其他页面</span><span>说明</span></div></div></body>`);
-    expect([...dom.window.document.querySelectorAll(ledger)].map(el => el.firstElementChild.textContent)).toEqual(rows);
-    expect(dom.window.document.querySelector(`${ledger}.dep-row`)).toBeNull();
     dom.window.close();
   });
 });

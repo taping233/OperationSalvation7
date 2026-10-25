@@ -1,3 +1,4 @@
+import { acquireRuleFields } from './helpers/environment-fixtures.js';
 /* M5 卡牌规则化数据迁移批 D7 锁定（2026-09-27）：cards.sync.m5.js ensureM5DelayedRules。
  * 每张迁的卡一条用例组，锁定四件事：
  *   1) validateCardRules 通过；2) inspectCardRuleCapability supported；
@@ -264,7 +265,7 @@ describe('M5 数据迁移批 D7：跳过卡的契约缺口锁定', () => {
   });
 
   it('cmtn1wnhhym 江湖救急-改：acquire dest hand 无 decay act（capability 拒）', () => {
-    rejected({ id: 'cmtn1wnhhym', type: '武术', rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'acquire', n: 3, pool: { kind: '随机' }, dest: 'hand', act: 'decay' }] } } }, 'capability');
+    rejected({ id: 'cmtn1wnhhym', type: '武术', rules: { ...acquireRuleFields(3, '随机', 'hand', 'decay') } }, 'capability');
   });
 
   it('tt7-provoke 扰敌：敌对敌攻击域无 foeFight op（schema 拒）', () => {

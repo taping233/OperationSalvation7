@@ -11,6 +11,7 @@ export const CARD_INSTANCE_FIELD_LIFETIMES = Object.freeze({
   _triggerPoint: 'play',
   _soulEcho: 'play',
   _preview: 'presentation',
+  _presentation: 'presentation',
 });
 
 /** @param {string} field */

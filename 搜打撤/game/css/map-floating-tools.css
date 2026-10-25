@@ -1,58 +1,61 @@
-/* Two tool groups share a faint transparent frame; the map remains visible beneath. */
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] {
+/* Map tools float directly over the scenery without a surrounding frame. */
+body{
+&:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] {
   position:absolute; z-index:30; left:32px; right:32px; bottom:18px;
-  display:block; width:auto; height:104px; min-height:0; padding:0; margin:0;
+  display:block; width:auto; height:88px; min-height:0; padding:0; margin:0;
   overflow:visible; background:none; border:0; box-shadow:none; pointer-events:none;
 }
-body #sidebar[data-expedition-layout="map"]::before { content:none; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"][hidden] { display:none; }
-body #sidebar[data-expedition-layout="map"] .expedition-nav-summary { display:block; height:100%; padding:0; min-width:0; }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar {
+& #sidebar[data-expedition-layout="map"]::before { content:none; }
+&:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"][hidden] { display:none; }}
+body #sidebar[data-expedition-layout="map"]{
+& .expedition-nav-summary { display:block; height:100%; padding:0; min-width:0; }
+& .expedition-toolbar {
   display:flex; justify-content:space-between; align-items:flex-end; gap:32px; height:100%;
-  background:linear-gradient(180deg,#09131b30,#09131b70); border-radius:12px;
-  box-shadow:inset 0 0 0 1px #a8c2c31c,inset 0 1px 0 #d5e6df08;
+  background:none; border-radius:0;
+  box-shadow:none;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-tool-group {
-  display:flex; align-items:center; gap:8px; padding:8px;
-  background:transparent;
-  border-radius:12px; pointer-events:auto;
+& .expedition-tool-group {
+  display:flex; align-items:center; gap:4px; padding:6px;
+  background:none; border:0;
+  border-radius:0; pointer-events:auto; box-shadow:none;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar button {
+& .expedition-toolbar button {
   position:relative; display:flex; align-items:center; gap:4px; flex:none;
-  min-width:176px; min-height:88px; padding:0 18px 0 0;
+  min-width:148px; min-height:72px; padding:0 16px 0 4px;
   color:#c5d0cf; background:transparent; border:1px solid transparent; border-radius:8px;
   box-shadow:none; clip-path:none; text-align:left; cursor:pointer;
   transition:background 160ms ease-out,border-color 160ms ease-out,color 160ms ease-out;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-tool-art {
-  display:block; width:88px; height:88px; flex:none; object-fit:contain; opacity:.90;
+& .expedition-tool-art {
+  display:block; width:64px; height:64px; flex:none; object-fit:contain; opacity:.90;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-tool-copy {
-  display:flex; flex-direction:column; gap:5px; font:500 22px/1.2 var(--font-ui); white-space:nowrap;
+& .expedition-tool-copy {
+  display:flex; flex-direction:column; gap:5px; font:500 20px/1.2 var(--font-ui); white-space:nowrap;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar strong { color:#e3e9e4; font:500 23px/1 var(--font-num); white-space:nowrap; }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar strong small { color:#91a3a7; font:400 18px/1 var(--font-num); }
-body #sidebar[data-expedition-layout="map"] .expedition-bag-capacity {
+& .expedition-toolbar strong { color:#e3e9e4; font:500 23px/1 var(--font-num); white-space:nowrap; }
+& .expedition-toolbar strong small { color:#91a3a7; font:400 18px/1 var(--font-num); }
+& .expedition-bag-capacity {
   display:block; width:84px; height:4px; overflow:hidden; border-radius:2px;
   background:#8ca6ae24; color:#a3c4c5;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-bag-capacity i { display:block; height:100%; background:currentColor; }
-body #sidebar[data-expedition-layout="map"] [data-capacity-state="tight"] .expedition-bag-capacity { color:#d9c996; }
-body #sidebar[data-expedition-layout="map"] [data-capacity-state="full"] .expedition-bag-capacity { color:#e7a18b; }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar kbd {
+& .expedition-bag-capacity i { display:block; height:100%; background:currentColor; }
+& [data-capacity-state="tight"] .expedition-bag-capacity { color:#d9c996; }
+& [data-capacity-state="full"] .expedition-bag-capacity { color:#e7a18b; }}
+body #sidebar[data-expedition-layout="map"] .expedition-toolbar{
+& kbd {
   position:absolute; right:6px; bottom:7px; padding:0; border:0; background:none; box-shadow:none;
   color:#73858b; font:400 12px/1 var(--font-num);
 }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar .map-view-tool { min-width:146px; padding-right:20px; }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar button:hover:not(:disabled),
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar button[aria-expanded="true"] {
+& .map-view-tool { min-width:146px; padding-right:20px; }
+& button:hover:not(:disabled),
+& button[aria-expanded="true"] {
   color:#edf3ed; background:#8fc2c00c; border-color:#8fc2c036;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar button:focus-visible { outline:2px solid #99cbc8; outline-offset:2px; }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar button:disabled { opacity:.42; cursor:default; }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar [data-capacity-state="tight"] strong { color:#d9c996; }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar [data-capacity-state="full"] strong { color:#e7a18b; }
-body #sidebar[data-expedition-layout="map"] .expedition-toolbar [data-capacity-state="full"] { background:#9a4c3712; }
+& button:focus-visible { outline:2px solid #99cbc8; outline-offset:2px; }
+& button:disabled { opacity:.42; cursor:default; }
+& [data-capacity-state="tight"] strong { color:#d9c996; }
+& [data-capacity-state="full"] strong { color:#e7a18b; }
+& [data-capacity-state="full"] { background:#9a4c3712; }}
 body #sidebar[data-expedition-layout="map"] .expedition-map-preview { pointer-events:auto; }
 body.reduce-motion #sidebar[data-expedition-layout="map"] .expedition-toolbar button { transition:none; }
 @media (prefers-reduced-motion:reduce) {

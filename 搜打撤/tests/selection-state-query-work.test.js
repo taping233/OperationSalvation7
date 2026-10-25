@@ -53,7 +53,7 @@ it('discovers added members and groups, unobserves removed members, and releases
   const { group, first, rootQueries } = await mount();
   const added = first.cloneNode(true); added.getBoundingClientRect = () => rect(200);
   first.remove(); group.append(added); await flush();
-  expect(rootQueries).toHaveBeenCalledTimes(3);
+  expect(rootQueries).toHaveBeenCalledTimes(6);
   expect(resize.unobserve).toHaveBeenCalledWith(first); expect(resize.observe).toHaveBeenCalledWith(added);
   const newGroup = group.cloneNode(true); newGroup.querySelector('.selection-state-plate').remove();
   document.body.append(newGroup); await flush(); expect(resize.observe).toHaveBeenCalledWith(newGroup);

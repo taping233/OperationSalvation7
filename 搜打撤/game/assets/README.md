@@ -1,5 +1,9 @@
 # Vite 游戏素材目录
 
+剧情敌图已逐张核对27种，其中16种使用NAI4.5起稿＋内置imagegen重绘，包含10种非人形污染畸变体与6种现代人形；其余11种沿用符合设定的原图。运行图使用 `portraits/enemies/<id>.webp`，透明WebP与缩略图同步，侧向静止朝左；ID、数值、行为与奖励沿用。现行名称、逐张提示、来源及旧图备份见[本批记录](../../docs/evidence/2026-10-25-enemies-nai45/README.md)。
+
+战斗实际使用 `portraits/cut/enemies/<id>.webp` 预烘图；上述16张已同步到这一路径。更新敌图时同步战斗派生图及 `game/src/core/enemy-portrait-presentation.js` 的轮廓/内容版本，避免战斗仍显示旧图。当前27种敌人的体型、脚底与中心对齐接入见[战斗比例记录](../../docs/evidence/2026-10-25-enemy-battle-fit/README.md)。
+
 第十三批13张卡面当前为1:1正方形，原图1254×1254、缩略图448×448；沿老板逐轮选定版本适配方图，保留常无欲灵魂契约、星月三张星牌与收刀白花手下留情。完整提示词、原横版备份及原图/缩略图SHA256见[方图接入回执](../../docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json)。
 
 第十三批13张新增卡已补专属插画，由NAI4.5 Full沿现行v3.4画师链起稿、内置生图按游戏默认画风重绘；原图与缩略图通过`art-mapping.json`逐卡接入。完整提示词、生成参数与来源哈希见[本批记录](../../docs/evidence/2026-10-20-tt13-card-art/README.md)。
@@ -24,11 +28,11 @@
 
 新素材应记录来源与授权；已有字体、音效和卡图的来源说明分别见本目录下的 `fonts/`、`sfx/` 和 `cards/items/`。替换或删除素材前，先检查实际引用、来源记录及对应的视觉回归。
 
-首页壁纸列表为雪原公路、白塔与黑像、星月钢琴、无贝斯、白塔车站、星月芦苇六张；没有有效壁纸偏好时默认展示无贝斯，已有选择继续保留。各图采用独立图层，切换时以0.5秒交叉淡入淡出。无贝斯采用1672×941默认块面厚涂扩图版，来源与哈希见[接入记录](../../docs/evidence/2026-10-20-wu-bass-remix/install-receipt.json)；雪原公路来源见[记录](../../docs/evidence/2026-10-16-home-snow-road/receipt.json)。设置页背景仍用雪原公路。原 `wallpaper-wu-1004.webp` 与 `wallpaper-ensemble-1005.webp` 保留为退役存档。
+首页壁纸列表为雪原公路、白塔与黑像、星月钢琴、无贝斯、白塔车站、星月芦苇、五人共餐七张；没有有效壁纸偏好时默认展示无贝斯，已有选择继续保留。各图采用独立图层，切换时以0.5秒交叉淡入淡出。五人共餐与选档界面共用 `slot-bg-knight-fantasy.webp`，采用疤痕与眼神修正版，来源与哈希见[接入记录](../../docs/evidence/2026-10-25-dinner-wallpaper-install/receipt.json)。无贝斯采用1672×941默认块面厚涂扩图版，来源与哈希见[接入记录](../../docs/evidence/2026-10-20-wu-bass-remix/install-receipt.json)；雪原公路来源见[记录](../../docs/evidence/2026-10-16-home-snow-road/receipt.json)。设置页背景仍用雪原公路。原 `wallpaper-wu-1004.webp` 与 `wallpaper-ensemble-1005.webp` 保留为退役存档。
 
 星月芦苇使用1672×941夕照光影细化扩图版，加入第六张轮换，来源与哈希见[接入记录](../../docs/evidence/2026-10-20-xingyue-reeds-light-wallpaper/install-receipt.json)。
 
-无的“春日·机车”“新春·旗袍”“盛夏·水枪”分别使用 `portraits/full/wu-casual-v14.webp`、`wu-spring-v15.webp`、`wu-beach.webp`，三图均已按当前人物大图容器约1.30:1补绘上下场景并实装；来源、备份和逐图预览见[扩图记录](../../docs/evidence/2026-10-15-wu-skin-fill/README.md)。泳装此前的NAI构图及默认v1.0重绘过程见[泳装来源](../../docs/evidence/2026-10-15-wu-swim-nai/README.md)。
+无的“春日·机车”“新春·旗袍”“盛夏·水枪”分别使用 `portraits/full/wu-casual-v14.webp`、`wu-spring-v15.webp`、`wu-beach.webp`，均为约1.30:1场景图。“春日·机车”采用2026-10-25 NAI5图生图＋内置默认画风重绘的减噪修订版，整理衣褶、发动机和轮毂细节，保留蓝衬衫黑短裤、坐姿与樱花机车场景，来源和旧图备份见[接入记录](../../docs/evidence/2026-10-25-wu-motorcycle-clean/install-receipt.json)。其余两图的扩图来源见[扩图记录](../../docs/evidence/2026-10-15-wu-skin-fill/README.md)。泳装此前的NAI构图及默认v1.0重绘过程见[泳装来源](../../docs/evidence/2026-10-15-wu-swim-nai/README.md)。
 
 常无欲的战斗Sprite使用 portraits/frames/changwuyu/sprite-v1/（animations.json维护帧序和时长），静态兜底与新待机一致；四动作实装来源见 [10-10实装记录](../../docs/evidence/2026-10-10-changwuyu-install/README.md)。
 

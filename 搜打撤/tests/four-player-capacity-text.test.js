@@ -1,3 +1,4 @@
+import { runPendingFields } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import { beforeAll, beforeEach, afterEach, expect, it, vi } from 'vitest';
 
@@ -26,9 +27,7 @@ beforeAll(async () => {
 beforeEach(() => {
   vi.clearAllMocks();
   Object.assign(game, { runActive: true, state: 'idle', myClass: '法师', inventory: [],
-    usedPocket: [], cardOrder: [], pendingExtraction: null, extractionPending: null,
-    terminalPending: null, battleActive: false, nestActive: false, hp: 20, maxHp: 30,
-    elapsed: 0, elapsedSynced: 0 });
+    ...runPendingFields() });
 });
 afterEach(() => UI.hideOverlay({ immediate: true }));
 

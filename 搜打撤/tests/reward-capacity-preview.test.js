@@ -1,3 +1,4 @@
+import { overlayElements } from './helpers/environment-fixtures.js';
 // Differential checks against real grantEventCard and real bag accounting.
 import { readFileSync } from 'node:fs';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -66,7 +67,7 @@ beforeAll(async () => {
 beforeEach(()=>{
   vi.useFakeTimers();vi.clearAllMocks();localStorage.clear();H.uid=0;Random.reseed('capacity-preview');
   document.body.innerHTML='<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
-  H.UI.el={overlay:document.getElementById('overlay'),ovBody:document.getElementById('ovBody'),ovTitle:document.getElementById('ovTitle')};
+  H.UI.el={...overlayElements()};
   Object.assign(H.game,{seed:7,layerIdx:0,trackPos:1,discoveredPairs:new Set(),state:'modal',ownedCards:[],inventory:[],coins:0,
     usedSlots:Bag.usedSlots,bagCap:Bag.bagCap,bagCapacityText:Bag.bagCapacityText,
     grantCard:vi.fn((card,opts)=>scenes.grantEventCard(card,opts)),gainCoins:vi.fn(),persistSave:vi.fn(()=>true)});

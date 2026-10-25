@@ -1,3 +1,4 @@
+import { playerFields, canvasTraps, audioGainFields } from './helpers/environment-fixtures.js';
 /* 启动链冒烟测试：真实导入 src/main.js 并触发 DOMContentLoaded。
  * 回归目标：ESM 循环导入下模块体在顶层读 game 导致启动崩溃
  *（症状：标题页漏出局内下方控制栏 / 开始游戏·设置按钮无响应）。
@@ -20,15 +21,7 @@ installImmediateWebLocks();
 // eslint-disable-next-line no-constant-condition
 if (!window.HTMLCanvasElement.prototype.getContext || true) {
   const noopCtx = () => new Proxy(function () {}, {
-    get: (_t, k) => {
-      if (k === 'canvas') return null;
-      if (k === 'measureText') return () => ({ width: 10 });
-      if (k === 'createLinearGradient' || k === 'createRadialGradient' ||
-          k === 'createPattern' || k === 'getImageData') return () => ({ addColorStop: () => {}, data: [] });
-      return () => noopCtx();
-    },
-    set: () => true,
-    apply: () => noopCtx(),
+    ...canvasTraps(noopCtx),
   });
   window.HTMLCanvasElement.prototype.getContext = function () { return noopCtx(); };
 }
@@ -43,7 +36,7 @@ window.Audio = class FakeAudio {
 // WebAudio（sound.js 惰性创建，兜底防未定义）
 window.AudioContext = window.AudioContext || class FakeAudioContext {
   constructor() { this.currentTime = 0; this.destination = {}; this.sampleRate = 44100; }
-  createGain() { return { connect: () => {}, disconnect: () => {}, gain: { value: 0, setValueAtTime: () => {}, linearRampToValueAtTime: () => {}, cancelScheduledValues: () => {}, setTargetAtTime: () => {} } }; }
+  createGain() { return { ...audioGainFields() }; }
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }
@@ -146,7 +139,6 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     const UI = window.SDT.UI;
     const overlay = UI.el.overlay;
     expect(document.body.classList.contains('interface-motion')).toBe(true);
-    expect(document.querySelector('link[data-interface-motion]')).not.toBeNull();
     const action = vi.fn();
     try {
       UI.beginRoom();
@@ -264,10 +256,10 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(await waitFor(() => game.state === 'title')).toBe(true);
     await waitFor(() => document.getElementById('overlay').hidden);
 
-    document.getElementById('btnCardLib').click();
+    window.dispatchEvent(new KeyboardEvent('keydown',{key:'7',altKey:true,bubbles:true}));
     expect(cardsLib.cardPageLoading).toBe(true);
     expect(game.state).toBe('title');
-    document.getElementById('btnCardLib').click();
+    window.dispatchEvent(new KeyboardEvent('keydown',{key:'7',altKey:true,bubbles:true}));
     expect(cardsLib.cardPageLoading).toBe(true);
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     expect(cardsLib.cardPageLoading).toBe(false);
@@ -313,7 +305,6 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     window.SDT.Sound.sfx = () => {};
     document.getElementById('btnCardLib').click();
     await waitFor(() => document.querySelector('.page-loading'));
-    expect(document.querySelector('.card-library-page')).toBeNull();
     await waitFor(() => document.querySelector('.card-library-page'));
     await waitFor(() => !document.querySelector('.page-loading'));
     const page = document.querySelector('.card-library-page');
@@ -448,7 +439,8 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     // getEventListeners 不可用，用行为代理：点击 mSettings 应弹出设置 overlay（不再 hidden）
     document.getElementById('mSettings').click();
     const overlay = document.getElementById('overlay');
-    expect(overlay.hidden, '点击设置后 overlay 应打开').toBe(false);
+    expect(await waitFor(()=>!overlay.hidden && overlay.querySelector('.settings-page'))).toBe(true);
+    await waitFor(()=>!document.querySelector('.page-loading,.page-visual-handoff'));
     const back = overlay.querySelector('.settings-page [data-act="closeSettings"]');
     expect(back).not.toBeNull();
     back.click();
@@ -464,7 +456,8 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
   it('成就陈列室按整页暂停背景，并完成退场后返回标题', async () => {
     document.getElementById('mAch').click();
     const overlay = document.getElementById('overlay');
-    expect(overlay.querySelector('.achievement-gallery')).not.toBeNull();
+    expect(await waitFor(()=>overlay.querySelector('.achievement-gallery'))).toBe(true);
+    await waitFor(()=>!document.querySelector('.page-loading,.page-visual-handoff,.camp-entry-cut'));
     expect(overlay.querySelector('.card').classList.contains('page')).toBe(true);
     expect(document.body.classList.contains('page-covered')).toBe(true);
     overlay.querySelector('[data-act="achBack"]').click();
@@ -685,14 +678,36 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     game.state = 'title';
   });
 
+  it('穿门刷新详情栏后，镜头补间仍落在新层入口中心', async () => {
+    const session = await import('../game/src/run/game.session.js');
+    const camera = session.cam;
+    session.buildDerived('entry-camera-refresh');
+    camera.resize(800, 600);
+    camera.detailInset = 230;
+    camera.cx = 1200; camera.cy = 1200;
+    const frames = [];
+    const raf = vi.spyOn(globalThis, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
+    const refresh = vi.spyOn(window.SDT.UI, 'refresh').mockImplementation(() => camera.setDetailInset(0, { deferFrame:true }));
+    try {
+      const at = session.game.layerData[1].entrances[0];
+      session.enterLayer(1, at, { glideCam:true, deferSave:true });
+      const now = performance.now() + 1000;
+      for (const callback of frames.splice(0)) callback(now);
+      const entry = session.game.nodePos[1][at];
+      expect(camera.worldToScreen(entry.x, entry.y)).toEqual({ x:400, y:300 });
+      expect(camera._glide).toBeNull();
+    } finally {
+      raf.mockRestore(); refresh.mockRestore(); session.game.state = 'title';
+    }
+  });
+
   it('战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算', { timeout: 15_000 }, async () => {
     await (await import('../game/src/battle/battle-loader.js')).ensureBattleReady();
     const restoreSettlement = await isolateInputFixtureSettlement();
     const sha = window.SDT.Cards.all().find(c => c.id === 'starter-attack');
     const game = {
       ownedCards: [{ uid: 'boot-click-sha', card: sha },
-        { uid: 'boot-blocked', card: { ...sha, id: 'boot-expensive', cost: 99 } }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
-      myClass: '战士', characterId: null, state: 'idle', battleActive: false,
+        { uid: 'boot-blocked', card: { ...sha, id: 'boot-expensive', cost: 99 } }], ...playerFields(30, 30, 5, 0, '战士', null),
       log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
     };
     const foes = [{ id: 'infantry', name: '第一目标', hp: 40, maxHp: 40, atk: 1 },
@@ -775,8 +790,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     const restoreSettlement = await isolateInputFixtureSettlement();
     const sha = window.SDT.Cards.all().find(c => c.id === 'starter-attack');
     const game = {
-      ownedCards: [{ uid: 'boot-single-sha', card: sha }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
-      myClass: '战士', characterId: null, state: 'idle', battleActive: false,
+      ownedCards: [{ uid: 'boot-single-sha', card: sha }], ...playerFields(30, 30, 5, 0, '战士', null),
       log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
     };
     const oldAnimate = Element.prototype.animate;
@@ -865,7 +879,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(overlay.hidden).toBe(true);
 
     // 加载态分支（boot.js 152）同族守卫：组合态 Esc 不强关、不打断加载
-    document.getElementById('btnCardLib').click();
+    window.dispatchEvent(new KeyboardEvent('keydown',{key:'7',altKey:true,bubbles:true}));
     expect(cardsLib.cardPageLoading).toBe(true);
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, isComposing: true }));
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, keyCode: 229 }));

@@ -9,7 +9,7 @@ const slot = { card, price:2 };
 const shopPorts: ShopPorts = { state:{ coins:5, ownedCards:[], shopStock:[slot] },
   canReceive: () => true, newUid: () => 'owned-1', isSellable: () => true, sellPrice: () => 1, save: () => true };
 const shop = createShopCommands(shopPorts);
-const result = shop.buy({ index:0, quote:{ slot, card, price:2, replenish:false } });
+const result = await shop.buy({ index:0, quote:{ slot, card, price:2, replenish:false } });
 if (result.ok) { const price:number = result.price; const saved:boolean = result.saved; void [price, saved]; }
 else { const reason:string = result.reason; void reason; }
 // @ts-expect-error UID factories must return strings.

@@ -1,15 +1,17 @@
-import { mapTravelPoint } from './map-travel-path.js';
+import { mapTravelCurve, mapTravelPoint } from './map-travel-path.js';
 import { ease } from '../core/motion-primitives.js';
 
 // Arc-length samples give the whole route one speed profile, including curved edges.
 export function createTravelMotion(route, zoom) {
   const samples = [{ distance: 0, segment: 1, progress: 0, point: route[0] }];
   const ends = [];
+  const curves = [];
   let distance = 0, previous = route[0];
   for (let segment = 1; segment < route.length; segment++) {
+    const curve = curves[segment] = mapTravelCurve(route[segment - 1], route[segment]);
     for (let index = 1; index <= 32; index++) {
       const progress = index / 32;
-      const point = mapTravelPoint(route[segment - 1], route[segment], progress);
+      const point = mapTravelPoint(route[segment - 1], route[segment], progress, curve);
       distance += Math.hypot(point.x - previous.x, point.y - previous.y);
       samples.push({ distance, segment, progress, point });
       previous = point;
@@ -21,14 +23,18 @@ export function createTravelMotion(route, zoom) {
     : Math.max(500, Math.min(2400, 180 + distance * zoom * .8));
   const at = progress => {
     const target = distance * Math.max(0, Math.min(1, progress));
-    let index = 1;
-    while (index < samples.length - 1 && samples[index].distance < target) index++;
+    let index = 1, upper = samples.length - 1;
+    while (index < upper) {
+      const middle = (index + upper) >>> 1;
+      if (samples[middle].distance < target) index = middle + 1;
+      else upper = middle;
+    }
     const a = samples[index - 1], b = samples[index];
     const ratio = (target - a.distance) / Math.max(.0001, b.distance - a.distance);
     const local = (a.segment === b.segment ? a.progress : 0) +
       (b.progress - (a.segment === b.segment ? a.progress : 0)) * ratio;
     return { distance: target, segment: b.segment, progress: local,
-      point: mapTravelPoint(route[b.segment - 1], route[b.segment], local) };
+      point: mapTravelPoint(route[b.segment - 1], route[b.segment], local, curves[b.segment]) };
   };
   return { duration, ends, at, sample: time => at(ease.smooth(Math.max(0, Math.min(1, time)))) };
 }

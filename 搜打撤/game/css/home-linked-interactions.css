@@ -33,43 +33,22 @@ body.cardlib-open #cardZoom#cardZoom.cz-photo .cz-close:not(:hover):not(:focus-v
   filter: brightness(0) !important; opacity: .7;
 }
 /* 仓库沿用共用全幅比例，数量留在卡外，避让右上品质徽记。 */
-#overlay#overlay #hubMain.pg.hub.base-camp .warehouse-card-art {
-  aspect-ratio: 272 / 406;
-}
-#overlay#overlay #hubMain.pg.hub.base-camp .warehouse-detail-art {
-  height: auto; aspect-ratio: 272 / 406;
-}
-#overlay#overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stash-card-caption {
-  padding-right: 60px; box-sizing: border-box;
-}
-#overlay#overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stack-count {
-  top: auto; bottom: 22px; right: 14px;
-}
 /* 共用返回键保留窄窗口的既有比例，按压不再改变点击区域。 */
-#overlay#overlay#overlay .archive-back:is(:hover, :active, :focus-visible) {
+#overlay#overlay#overlay .archive-back:is(:hover, :active, :focus-visible),
+#title#title #homeCredits .archive-back:is(:hover, :active, :focus-visible) {
   transform: scale(1);
 }
-#title#title #homeCredits .archive-back:is(:hover, :active, :focus-visible) { transform: scale(1); }
 #title#title #homeCredits > form { position: absolute; left: 18px; top: 16px; margin: 0; }
 #title#title #homeCredits > form .archive-back { position: static; }
 
-/* 整备沿用自身页头的点击范围，公共返回件只提供图标与输入反馈。 */
-#overlay #depMain.camp-depart-detail {
-  --archive-back-left: 36px; --archive-back-top: 24px;
-  --archive-back-width: 46px; --archive-back-height: 46px;
-}
-/* 卡池的带字返回留在页头流中，两种入口继续使用各自宽度。 */
+/* 卡池的带字返回留在页头流中，尺寸和图标沿公共返回件。 */
 #overlay#overlay#overlay .cls-pool-page .pool-back.archive-back {
-  position: static; inset: auto; flex: none; gap: 9px;
-  width: 104px; height: 44px;
+  position: static; inset: auto; flex: none;
 }
-#overlay#overlay#overlay .cls-pool-page[data-base-departure='true'] .pool-back.archive-back { width: 128px; }
 
 /* Same return control inside the merchant's existing footer layout. */
 #overlay#overlay#overlay .shop-market-footer .shop-back.archive-back {
-  position:static; inset:auto; width:auto; height:auto; min-width:208px;
-  display:flex; gap:14px; padding:12px 28px; margin:0;
-  clip-path:none; border-radius:0;
+  position:static; inset:auto; margin:0;
 }
 #overlay#overlay#overlay .shop-market-footer .shop-back.archive-back svg { flex:none; width:24px; height:24px; }
 

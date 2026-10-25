@@ -1,4 +1,4 @@
-const freeze = value => { if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value; Object.values(value).forEach(freeze); return Object.freeze(value); };
+import { freezeDeep as freeze } from './commands.shared.js';
 
 // 来源证据引用（2026-10-03 复核：path:line 已按现行真身校准；下列目标再移动/增删须同步更新此处）
 const SOURCE_EVIDENCE = freeze({

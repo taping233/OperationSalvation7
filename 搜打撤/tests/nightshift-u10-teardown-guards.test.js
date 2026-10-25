@@ -1,3 +1,4 @@
+import { chestBaseMocks } from './helpers/environment-fixtures.js';
 import { continueChestRewards } from './helpers/chest-actions.js';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -58,16 +59,12 @@ describe('U10 H2 chests 逐卡揭晓音效守卫', () => {
         all: () => [card], randomDropCard: () => card, pickOfRarity: () => card, classPool: () => [],
         rarityOf: item => item.rarity, sellPrice: () => 1, cardHTML: () => '<div class="hs-card">测试卡</div>',
       },
-      Base: { data: { eggPity: 0, eggBattles: 0 }, save: vi.fn(), petEggDropChance: () => 0, recordPetEggChestResult: vi.fn(), bagCap: () => 10, isSha: () => false },
-      Sound: { sfx: vi.fn() },
-      Icons: { rich: html => html },
+      ...chestBaseMocks(() => vi),
     };
     const { SDT: chestFacade } = await import('../game/src/run/chests.js');
     chestFacade.Chests.open(game, [{ kind: 'small' }]);
-    ovBody.querySelector('[data-act="chestNext"]').click();
-    ovBody.querySelector('[data-eps-search]').click();        // 立即揭晓 → scheduleRevealSfx 挂 140ms 定时器（无句柄）
-    ovBody.querySelector('[data-act="chestTake1"]').click();
-    continueChestRewards(acts); // 单卡已领完，继续探索使 cur 失活
+    await acts.chestTake1({ i:'0' });
+    await continueChestRewards(acts); // 单卡已领完，继续探索使 cur 失活
     expect(chestFacade.Chests.isOpen()).toBe(false);
     expect(vi.getTimerCount()).toBeGreaterThan(0);             // 揭晓音效定时器仍待触发
     vi.stubGlobal('document', undefined);
@@ -139,17 +136,5 @@ describe('U10 H4 cinematics 发卡队列续棒守卫', () => {
     expect(queued.dataset.combat).toBe('false');
     expect(queued.querySelector('.lg-name').textContent).toBe('能力样本');
     expect(queued.querySelector('.lg-hint').textContent).toBe('收起');
-  });
-});
-
-// H1 pocket-strip.js:91——600ms 永久 interval 的 tick() 裸引 window.SDT（模块装载即自启，无清理通道）。
-// 置于文件末尾：本用例拆除整个 window，须保证其余用例的 sdt-facade 首次装载已在此前完成。
-describe('U10 H1 pocket-strip tick 宿主守卫', () => {
-  it('window 拆除后 600ms 轮询安全短路，不抛 window 引用错', async () => {
-    vi.useFakeTimers();
-    await import('../game/src/experience/pocket-strip.js');   // 模块自启 startPocketStrip → setInterval(tick, 600)
-    expect(vi.getTimerCount()).toBeGreaterThan(0);            // 自证 interval 已挂（用例非空转）
-    vi.stubGlobal('window', undefined);
-    expect(() => vi.advanceTimersByTime(600)).not.toThrow();
   });
 });

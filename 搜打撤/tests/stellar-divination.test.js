@@ -1,9 +1,10 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { createBattleDiscoverFlow } from '../game/src/battle/effects/battle.discover-flow.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '', TYPE_ART: {} } };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 99, battleHandMax: 8, bossDeckSize: 15, starterSha: 0, battleStartDraw: 0, battleTurnDraw: 0, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(99, 8, 15, 0, 0, 0) }, items: {} };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
@@ -14,8 +15,7 @@ const R = await import('../game/src/battle/runtime/battle.runtime.js');
 const card = () => ({ id: 'stellar-test', name: '星光测试', type: '法术', rarity: '普通', cost: 3, desc: '造成3点法术伤害。', _castOnDraw: true });
 const canonical = id => { const result = C.all().find(c => c.id === id); expect(result).toBeTruthy(); return result; };
 function start() {
-  const game = { ownedCards: [], hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0, myClass: '战士', characterId: null,
-    state: 'idle', battleActive: false, logs: [], log(message) { this.logs.push(message); },
+  const game = { ownedCards: [], ...playerFields(100, 100, 5, 0, '战士', null), logs: [], log(message) { this.logs.push(message); },
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {} };
   BattleSession.start(game, [{ id: 'foe', name: '靶', hp: 100, atk: 0 }], { isBoss: false });
   R.set$mode('boss');
@@ -121,7 +121,7 @@ it('canonical stellar divination keeps the chosen spell and shuffles two draw-ca
 it('type-targeted deck draw also releases a copy through the queue despite a full hand', async () => {
   start(); R.set$hand(Array.from({ length: 8 }, (_, i) => `filler-${i}`));
   const uid = put(card());
-  const flow = createBattleDraw({ R: () => window.SDT.MAP.rules, alive: () => R.foes.filter(foe => !foe.dead), findCard, queueCardExecution });
+  const flow = createBattleDraw({ R: () => window.SDT.MAP.rules, alive: () => R.foes.filter(foe => !foe.dead), findCard, queueCardExecution, checkSealTransformation() {} });
   expect(flow.deckDraw({ n: 1, type: '法术' })).toBe(1); await settle();
   expect(R.hand).toHaveLength(8); expect(R.hand).not.toContain(uid); expect(R.foes[0].hp).toBe(97);
 });

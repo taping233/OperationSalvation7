@@ -1,21 +1,22 @@
 /* One title layout for scene cuts, page loading, layer travel and map return. */
-:is(#overlay, body) .transition-heading.transition-heading {
+:is(#overlay, body) .transition-heading{
+&.transition-heading {
   position: absolute; inset: 0; z-index: 35; display: flex;
   flex-direction: column; align-items: flex-start; justify-content: center;
   gap: 24px; padding: 8vh 12vw; text-align: left; pointer-events: none;
   box-sizing: border-box;
 }
-:is(#overlay, body) .transition-heading.transition-heading > h2 {
+&.transition-heading > h2 {
   margin: 0; padding: 0; border: 0; background: none;
   font: 600 44px/1.2 var(--font-ui); color: #f1f2ed; letter-spacing: .08em;
   text-shadow: 0 2px 18px #080f15;
   animation: transitionTitleIn var(--motion-detail-enter,220ms) var(--motion-ease-enter,ease-out) both;
 }
-:is(#overlay, body) .transition-heading > .expedition-cut-rule {
+& > .expedition-cut-rule {
   width: 110px; height: 4px; flex-shrink: 0; background: #9acbc5;
   transform-origin: left;
   animation: transitionRuleIn var(--motion-detail-enter,220ms) var(--motion-ease-enter,ease-out) both;
-}
+}}
 /* City artwork extends 20% beyond either side; headings align to the visible window. */
 :is(#overlay, body) .camp-entry-cut > .transition-heading.transition-heading { inset-inline: calc(100% / 7); }
 .camp-entry-cut > .camp-entry-register { display: none; }

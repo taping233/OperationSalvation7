@@ -1,3 +1,6 @@
+import { claimPreparedDiscovery } from '../effects/battle.discover-preview.js';
+import { hasLegacyStealthBreakBonus, isLegacyBloodpoison, legacyTurnStartDescription, hasLegacyManaSurge } from '../../cards/card-legacy-battle-policy.js';
+import { createLegacyResolution } from './battle.legacy-resolution.domain.js';
 import { attackCue } from '../view/battle.attack-cues.js';
 import { createAcquireOperation } from '../effects/battle.acquire-operation.domain.js';
 import { createStatusOperations } from '../effects/battle.status-operations.domain.js';
@@ -14,7 +17,7 @@ import { createChoiceSemanticOperations } from '../effects/choice-semantic-opera
 export function createResolutionDomain(context) {
 
 const { resolveCleanseOperation, resolveDrawUntilHandN, resolveDrawHandOps } = createM1Domain(context);
-const { resolveStealAtk, resolveNoDrawNext, resolveExtraTurn, resolveExecute, resolveSummon, resolveRegisterRule, applyDamageOnKill, resolveConsumeEquip, applyAtkDown, countCurseKinds, handMoveCurses, isLastHandCard, resolveFoeFightSteps, resolveCopyRandom } = createM2Domain(context);
+const { resolveStealAtk, resolveNoDrawNext, resolveExtraTurn, resolveExecute, resolveSummon, resolveRegisterRule, applyDamageOnKill, resolveConsumeEquipSteps, applyAtkDown, countCurseKinds, handMoveCurses, isLastHandCard, resolveFoeFightSteps, resolveCopyRandom } = createM2Domain(context);
 const getHostedExecutionCard = context.normalizeCard;
 const { hasInfusionWaiver } = createInfusionDomain(context);
 const resolveSemanticOperation = context.resolveSemanticOperation || createCardSemanticOperations(context);
@@ -61,7 +64,7 @@ function createBattleResolution(ports) {
   // 结构化路径 operation.lifesteal 与文本路径「回复等量生命」同语义，统一禁疗判定与演出。
   const applyLifesteal = total => {
     if ((getPlayerStatus().status.healban || 0) > 0) {
-      log(`[[icon:heart]] 禁疗中：吸血回复无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+      log(`[[icon:status-heal-ban]] 禁疗中：吸血回复无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
       return;
     }
     heal(total);
@@ -80,6 +83,7 @@ function createBattleResolution(ports) {
   // M2（M 批契约扩展第二批，2026-09-27）：effect-steps.m2.js 的注入端口收口。
   const m2Deps = {
     combat, getAliveFoes, findCard, addCoins, addArmor, addEnergy, log, esc,
+    onHandConsumed: ports.onHandConsumed,
     sweepDead: ports.sweepDead,
     markNoDrawNext, setExtraTurn, setBleedAmp, setMeleeCost1, setSpellCost1,
     summonAlly, hitFoe, getTurn, getPlayerStatus, getPlayerSpellPower,
@@ -91,10 +95,13 @@ function createBattleResolution(ports) {
     foeDealDamage: ports.foeDealDamage || ((attacker, target, amount) => combat.dealDamage(attacker, target, amount, 'attack')),
   };
   const { resolveAcquireOperation } = createAcquireOperation({ getAllCards, getMyClass, deckBottomCount, takeDeckBottom,
-    findCard, queueDiscoverTracked, randomDiscoverCard, addDeckCard, shuffleDeck, addTempCard, esc, log });
+    findCard, queueDiscoverTracked, prepareDiscoverJob: claimPreparedDiscovery, randomDiscoverCard, addDeckCard, shuffleDeck, addTempCard, esc, log });
   const { resolveCurseOperation, resolveBlessingOperation } = createStatusOperations({ combat, getAliveFoes, randomBattle,
     getPlayerStatus, handMoveCurses, m2Deps, getDamageTypeMeta, fixedDamageType, addPlayerCurse,
     canApplyPlayerCurse, applyAtkDown, esc, log });
+  const legacyResolution = createLegacyResolution({ combat, log, esc, getHandSize, randomDiscoverCard,
+    addTempCard, getPlayerStatus, heal, addFloat, getAllCards, isRandomObtainable,
+    readState, randomBattle, addDelayed, deckBottomCount, takeDeckBottom, findCard, queueDiscoverTracked });
   // B1：伤害条件对象（schema CONDITION_KEYS 共用形状）。
   // 口径对照：foeHpBelow 以「血量 ≤ n」承接斩杀「对 9 血以下」（与 hpCap 同口径）；
   // foeHpHalf 以「血量 ≤ 上限一半」承接惩击 halfB；foeStatus 查目标身上的诅咒层；
@@ -122,8 +129,7 @@ function createBattleResolution(ports) {
     card = getHostedExecutionCard(card);
     // Direct resolution (e.g. ash overflow) bypasses execPlay but retains infusion waivers.
     infused = !!infused || hasInfusionWaiver(card, readState().allSpellsInfused);
-    const stealthBreakBonus = card.id === 'tt7-ghostblade'
-      && card.rules?.battle?.hosted?.includes('stealth-break-bonus') === true;
+    const stealthBreakBonus = hasLegacyStealthBreakBonus(card);
     let brokeOwnStealth = false;
     assertCardRulesExecutable(card);
     if (card.type === '道具' && Array.isArray(card.rules?.bag?.use)) {
@@ -137,41 +143,7 @@ function createBattleResolution(ports) {
     const hostedPlaySetup = card.rules?.battle?.hosted?.includes('batch13-flame-form');
     if ((!ownsOnPlay || hostedPlaySetup) && ports.resolveRequestedCard && (yield* ports.resolveRequestedCard(card, target, ports))) return;
 
-    if (!ownsOnPlay && card.id === 'cc-rot-seed') {
-      const foe = target && !target.dead && target.hp > 0 ? target : null;
-      if (foe) {
-        combat.addCurse(foe, 'poison', 2);
-        foe.rotSeedMarked = true;
-        log(`[[icon:skull]] <b>腐化之种</b>：标记 <b>${esc(foe.name)}</b> 并附加 2 层中毒；死亡时按中毒层数对所有敌人造成真实伤害`, 'sys');
-      }
-      return;
-    }
-
-    // 牧师浪掷风吟：固定宿主实现，直接按随机池置入至 6 张并只按新置入法术数回血。
-    // 原文分号会拆开手牌填充与回血句，旧文本步骤因此先泛化回复 heal 字段再漏算逐张系数；
-    // hosted adapter 提供定版卡面，仅此 ID 走此分支，不依赖可编辑描述执行。
-    if (!ownsOnPlay && card.rules?.battle?.hosted?.includes('priest')) {
-      let put = 0, spells = 0;
-      while ((typeof getHandSize === 'function' ? getHandSize() : 0) < 6) {
-        const candidate = randomDiscoverCard(null);
-        if (!candidate) break;
-        const before = typeof getHandSize === 'function' ? getHandSize() : 0;
-        addTempCard(candidate);
-        const after = typeof getHandSize === 'function' ? getHandSize() : 0;
-        if (after <= before) break;
-        put++;
-        if (candidate.type === '法术') spells++;
-      }
-      const healAmount = Math.max(0, Number(card.heal) || 0) * spells;
-      if (healAmount > 0) {
-        const healban = getPlayerStatus().status.healban || 0;
-        if (healban > 0) log(`[[icon:heart]] 禁疗中：浪掷风吟回复无效（还剩 ${healban} 回合）`, 'warn');
-        else { heal(healAmount); addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
-      }
-      const handSize = typeof getHandSize === 'function' ? getHandSize() : 0;
-      log(`[[icon:cards]] <b>${esc(card.name)}</b>：置入 ${put} 张随机卡牌（手牌 ${handSize}/6）${spells ? `，其中 ${spells} 张法术回复 ${healAmount} 血` : ''}`, 'loot');
-      return;
-    }
+    if (legacyResolution.resolveOpening(card, target, ownsOnPlay)) return;
 
     // 血毒双镖（2026-09-16 留言「血毒双镖应该能选择两次目标」）：两段拆开——首段（攻+1 附加流血）
     // 随本牌目标结算；二段（攻+1 附加中毒）由 execPlay 收尾进入点选（interaction 'dart'），
@@ -181,44 +153,9 @@ function createBattleResolution(ports) {
     const structuredOnPlay = playPlan.onPlay.ops;
     const suppressText = playPlan.suppressImmediateText;
     assertPlayExecutionView(card);
-    if (!hasStructuredOnPlay && card.id === 'tt7-bloodpoison') desc = '攻（+1），附加流血。';
-    // 江湖救急（2026-09-18 老板定版）：「随机直接给 3 张」才是本意——不走发现面板。
-    // 随机池与发现同口径（isRandomObtainable），置入的临时卡在下个回合开始时消耗。
-    if (!hasStructuredOnPlay && card.id === 'cmtn1wnhhym') {   // 同名旧卡 tt2-jianghu 有自己的发现流程
-      const pool = getAllCards().filter(c => isRandomObtainable(c)
-        && (readState().mode !== 'boss' || c.type !== '道具'));
-      if (!pool.length) {
-        log(`[[icon:cards]] <b>${esc(card.name)}</b>：当前没有符合本场战斗规则的随机卡牌`, 'warn');
-        return;
-      }
-      const uids = [];
-      for (let k = 0; k < 3 && pool.length; k++) {
-        const c = pool[Math.floor(randomBattle() * pool.length)];
-        uids.push(addTempCard({ ...c }));
-      }
-      if (uids.length) {
-        addDelayed({ special: 'consumeTemps', uids, cardName: card.name });
-        log(`[[icon:cards]] <b>${esc(card.name)}</b>：随机获得 ${uids.length} 张临时卡牌（下个回合开始时消耗）`, 'loot');
-      }
-      return;
-    }
-    // 搜索大宝箱「探宝」（2026-09-17 留言「探宝没有从牌库底发现卡牌，而是随机发现」）：
-    // 三张候选就是牌库底的真实卡牌，选 1 张入手、其余按原顺序放回牌库底。
-    // 探宝只有发现效果，结算完直接收尾；空库不会随机补足。
-    if (!hasStructuredOnPlay && card.id === 'cmtn28jv33wx') {
-      const take = Math.min(3, deckBottomCount());
-      const uids = takeDeckBottom(take);   // 数组头部 = 牌库底
-      const cards = uids.map(u => { const o = findCard(u); return o ? o.card : null; }).filter(Boolean);
-      if (cards.length) {
-        // n=1：三张候选就是本次面板，选 1 张入手即完（其余放回牌库底）。此前 n 误传候选数 3，
-        // pickDiscover 的 n>1 分支又排队 2 次随机发现（09-30 深审 BC-05）
-        queueDiscoverTracked({ n: 1, explicit: cards, explicitUids: uids, deckBottom: true });
-        log(`[[icon:question]] <b>${esc(card.name)}</b>：翻开牌库底 ${cards.length} 张——选 1 张入手，其余放回牌库底`, 'loot');
-      }
-      return;
-    }
-    const parts = splitClauses(card.id === 'cmtn7err0a7'
-      ? desc.replace(/（[^）]*从这些中随机[^）]*）|祝福包括[^。]*(?:。|$)/g, '') : desc);
+    if (!hasStructuredOnPlay && isLegacyBloodpoison(card)) desc = '攻（+1），附加流血。';
+    if (legacyResolution.resolveAcquisition(card, hasStructuredOnPlay)) return;
+    const parts = splitClauses(legacyTurnStartDescription(card, desc));
     const equipRules = card.rules?.equip;
     const ownsEquipField = playPlan.ownsField;
     const ownsPassive = playPlan.equipment('passive').kind === 'structured';
@@ -284,7 +221,7 @@ function createBattleResolution(ports) {
           const infusedCount = getHandInfuseCount(uid);
           if (infusedCount > 0) {
             baseDamage += infusedCount * operation.perInfusedInHand;
-            log(`[[icon:crystal]] <b>${esc(card.name)}</b>：本牌在手期间已注能 ${infusedCount} 张，伤害 +${infusedCount * operation.perInfusedInHand}`, 'sys');
+            log(`[[icon:infuse]] <b>${esc(card.name)}</b>：本牌在手期间已注能 ${infusedCount} 张，伤害 +${infusedCount * operation.perInfusedInHand}`, 'sys');
           }
         }
         // M2：infuseBonus——注能打出时伤害 +N（镭射「注能(1)：伤害+3」口径，infused 由 exec 层传入）
@@ -306,7 +243,7 @@ function createBattleResolution(ports) {
           const power = getPlayerSpellPower() + (+getPlayerStatus().status?.spellUp || 0);
           if (power > 0) {
             baseDamage += power * (operation.spellPowerMul - 1);
-            log(`[[icon:crystal]] <b>${esc(card.name)}</b>：法伤加成 ×${operation.spellPowerMul}（额外 +${power * (operation.spellPowerMul - 1)}）`, 'sys');
+            log(`[[icon:spell-power]] <b>${esc(card.name)}</b>：法伤加成 ×${operation.spellPowerMul}（额外 +${power * (operation.spellPowerMul - 1)}）`, 'sys');
           }
         }
         // B2：段数来源——v1 hitCount / v2 hits.count / v2 hits.range（每次施放掷一次）；
@@ -335,7 +272,7 @@ function createBattleResolution(ports) {
           if (operation.target === 'allEnemies') return getAliveFoes();
           if (operation.target === 'randomEnemy') {
             const alive = getAliveFoes();
-            return alive.length ? [alive[Math.floor(randomBattle() * alive.length)]] : [];
+            return alive.length ? [alive[Math.floor(randomBattle('target') * alive.length)]] : [];
           }
           return [preferred && !preferred.dead ? preferred : getAliveFoes()[0]].filter(Boolean);
         };
@@ -346,7 +283,9 @@ function createBattleResolution(ports) {
           if (!windupTargets.length) return { dealt: 0, first: null };
           const cue = attackCue(type, card, { hitCount, amount: baseDamage });
           yield { kind: 'windup', targets: windupTargets, ...(cue ? { cue } : {}) };
-          const targets = pickTargets();
+          const targets = operation.target === 'randomEnemy'
+            ? windupTargets.some(foe => !foe.dead && foe.hp > 0) ? windupTargets : pickTargets()
+            : pickTargets();
           if (!targets.length) return { dealt: 0, first: null };
           let dealt = 0;
           let hitThisSegment = false;
@@ -394,8 +333,6 @@ function createBattleResolution(ports) {
           if (operation.target === 'chosenEnemy') preferred = result.first;
           if (operation.retarget !== 'livingFoes' && operation.target === 'chosenEnemy' && preferred.dead) break;
         }
-        // B3：吸血——按本 op 实际造成的伤害回复，走 healban 门（与文本路径吸血同口径）。
-        if (operation.lifesteal === true && dealtTotal > 0) applyLifesteal(dealtTotal);
         // B2：recast:{on:'kill'}——本 op 击杀过敌人时再施放 N 次（镜像文本路径击杀连锁：
         // 余烬爆裂/饱和打击）。再施放段不做 cond/bonus 复判，按基础伤害结算。
         // M2：recast.on 扩 'lastHand'——本牌为最后一张手牌时再施放 N 次（急行军/破釜沉舟族）。
@@ -413,6 +350,9 @@ function createBattleResolution(ports) {
             dealtTotal += result.dealt;
           }
         }
+        // Recasts belong to this same operation, so lifesteal includes every
+        // completed segment while retaining the shared healing-ban boundary.
+        if (operation.lifesteal === true && dealtTotal > 0) applyLifesteal(dealtTotal);
         // M2：damage.onKill 结构化击杀奖励（闪金之锤 +币 / 破甲重斩 +甲）。
         // foesHit 按命中段累加，多段打同一敌人会重复计数——按「击杀只数」去重结算
         if (operation.onKill) {
@@ -471,7 +411,7 @@ function createBattleResolution(ports) {
       if (inhandM && getHandInfuseCount(uid) > 0) {
         const infusedCount = getHandInfuseCount(uid);
         dmgVal += infusedCount * +inhandM[1];
-        log(`[[icon:crystal]] <b>${esc(card.name)}</b>：本牌在手期间已注能 ${infusedCount} 张，伤害 +${infusedCount * +inhandM[1]}`, 'sys');
+        log(`[[icon:infuse]] <b>${esc(card.name)}</b>：本牌在手期间已注能 ${infusedCount} 张，伤害 +${infusedCount * +inhandM[1]}`, 'sys');
       }
       // 斩杀阈值（斩杀：对 N 血以下角色才造成伤害）
       const hpCap = +((desc.match(/对\s*(\d+)\s*血以下/) || [])[1] || 0);
@@ -516,7 +456,7 @@ function createBattleResolution(ports) {
             const pierceB = desc.match(/若对方[^。]*?流血[^。]*?伤害\s*\+\s*(\d+)/);
             if (pierceB && (foe.status.bleed || 0) > 0) {
               foeDmg += +pierceB[1];
-              if (i === 0) log(`[[icon:blood]] <b>${esc(foe.name)}</b> 处于流血状态，伤害 +${pierceB[1]}`, 'sys');
+              if (i === 0) log(`[[icon:status-bleed]] <b>${esc(foe.name)}</b> 处于流血状态，伤害 +${pierceB[1]}`, 'sys');
             }
             // 固定 hosted 规则：只奖励这张牌实际破除自己的潜行，不把敌方潜行当条件。
             const breakingStealth = stealthBreakBonus && !brokeOwnStealth && combat.isStealthed(getPlayerStatus());
@@ -594,14 +534,14 @@ function createBattleResolution(ports) {
             const names = affected.length === targets.length
               ? '全体敌人'
               : affected.map(foe => esc(foe.name)).join('、');
-            log(`[[icon:crystal]] ${names} 被冰冻 ${operation.duration} 回合（无法行动）`, 'sys');
+            log(`[[icon:status-freeze]] ${names} 被冰冻 ${operation.duration} 回合（无法行动）`, 'sys');
             did = true;
           }
           continue;
         }
         if (operation.op === 'discover' && Number.isInteger(operation.count) && operation.count > 0) {
-          queueDiscoverTracked({ n: operation.count, pool: operation.pool, costDecayPerTurn: operation.costDecayPerTurn,
-            sourceCardId: card.id });
+          queueDiscoverTracked(claimPreparedDiscovery(card, { n: operation.count, pool: operation.pool, costDecayPerTurn: operation.costDecayPerTurn,
+            sourceCardId: card.id }));
           did = true;
           continue;
         }
@@ -710,8 +650,8 @@ function createBattleResolution(ports) {
         // 已定格的牌库不追溯扩容；普通战不使用 BOSS 编组上限。
         if (operation.op === 'deckCap') {
           log(readState().mode === 'boss'
-            ? `[[icon:cards]] <b>${esc(card.name)}</b>：牌库上限在开战前编组阶段生效，战斗中 +${operation.n} 不追溯扩容`
-            : `[[icon:cards]] <b>${esc(card.name)}</b>：普通战斗不使用 BOSS 编组上限，牌库上限 +${operation.n} 不改变本场牌数`, 'dim');
+            ? `[[icon:draw-pile]] <b>${esc(card.name)}</b>：牌库上限在开战前编组阶段生效，战斗中 +${operation.n} 不追溯扩容`
+            : `[[icon:draw-pile]] <b>${esc(card.name)}</b>：普通战斗不使用 BOSS 编组上限，牌库上限 +${operation.n} 不改变本场牌数`, 'dim');
           did = true;
           continue;
         }
@@ -729,7 +669,7 @@ function createBattleResolution(ports) {
             const want = operation.upTo;
             const current = getPlayerHp();
             if (healban > 0) {
-              log(`[[icon:heart]] 禁疗中：回复至 ${want} 血无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+              log(`[[icon:status-heal-ban]] 禁疗中：回复至 ${want} 血无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
             } else if (want > current) {
               heal(want - current);
               addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
@@ -752,7 +692,7 @@ function createBattleResolution(ports) {
               log(`[[icon:cards]] 本次入手 ${spellsGained} 张法术 → 回复 ${amount} 点生命`, 'sys');
             }
             if (healban > 0) {
-              log(`[[icon:heart]] 禁疗中：回复 ${amount} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+              log(`[[icon:status-heal-ban]] 禁疗中：回复 ${amount} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
             } else {
               heal(amount);
               addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
@@ -762,7 +702,7 @@ function createBattleResolution(ports) {
           // B3：护甲来源二选一（amountField/amount）；guard=true 叠加格挡（本回合所受伤害降为 1）；
           // decayAtTurnEnd=n 注册「下回合开始时 -n 点」延迟段（与坚盾文本路径同一条 delayed 管线）。
           // M2：priceOf:'discovered' 护甲锚定发现牌价格（挖宝）；consumeEquip 消耗手牌装备为代价（铸甲）。
-          if (operation.consumeEquip !== undefined && !resolveConsumeEquip(card, m2Deps)) {
+          if (operation.consumeEquip !== undefined && !(yield* resolveConsumeEquipSteps(card, m2Deps))) {
             // 付不出代价：整段无效（不白拿甲），与手牌代价「付不出即无效果」口径一致
             continue;
           }
@@ -818,17 +758,17 @@ function createBattleResolution(ports) {
                 : (target && !target.dead ? target : getAliveFoes()[0]);
               const kinds = countCurseKinds(anchor, m2Deps);
               amount = kinds;
-              log(`[[icon:cards]] <b>${esc(card.name)}</b>：目标身负 ${kinds} 种诅咒，抽 ${kinds} 张牌`, 'sys');
+              log(`[[icon:draw-card]] <b>${esc(card.name)}</b>：目标身负 ${kinds} 种诅咒，抽 ${kinds} 张牌`, 'sys');
             }
             if (operation.filter !== undefined) {
               // M2：所有模式按指定类型从真实牌库抽取。
               const want = operation.filter.type;
               const got = deckDraw({ n: amount, type: want });
-              log(`[[icon:cards]] <b>${esc(card.name)}</b>：从牌库抽取 ${got} 张【${esc(want)}】牌`, 'sys');
+              log(`[[icon:draw-card]] <b>${esc(card.name)}</b>：从牌库抽取 ${got} 张【${esc(want)}】牌`, 'sys');
             } else {
               const got = drawCards(amount);
               if (typeof countDrawnSpells === 'function') spellsGained += countDrawnSpells();
-              log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
+              log(`[[icon:draw-card]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
             }
           }
         }
@@ -838,8 +778,7 @@ function createBattleResolution(ports) {
     // 法力奔涌（2026-09-10 需求 #37/#38）：「对随机敌人释放4个随机法术（这些随机法术默认已注能）」。
     // 识别加名称/ID 兜底——旧档背包里的快照克隆可能带着旧措辞描述，正则失配曾导致整卡无效果。
     const surgeM = desc.match(/对随机敌人释放\s*(\d+|四)\s*个随机法术/);
-    if (!suppressText && (surgeM || card.id === 'cc-mana-surge' ||
-        card.rules?.battle?.hosted?.includes('mana-surge') || /法力奔涌/.test(String(card.name || '')))) {
+    if (!suppressText && (surgeM || hasLegacyManaSurge(card))) {
       startSurge(castRandomSpells(surgeM ? (surgeM[1] === '四' ? 4 : Math.max(1, +surgeM[1])) : 4, card.id));
       did = true;
     }
@@ -858,7 +797,7 @@ function createBattleResolution(ports) {
       if (stealthBreakBonus) continue;
       if (foesAnnihilated()) break;   // 终局守卫：前句伤害已全灭，余下立即句不再结算
       // 双镖首段若已击杀原目标，流血不得借文本执行器的空目标回退串到下一名活敌人。
-      if (card.id === 'tt7-bloodpoison' && target && target.dead && /流血/.test(cl)) continue;
+      if (isLegacyBloodpoison(card) && target && target.dead && /流血/.test(cl)) continue;
       const args = [card, cl, target, { structuredHit, infused, fuelCost, uid, hpAtCast }];
       const res = applyTextEffects.steps ? yield* applyTextEffects.steps(...args) : applyTextEffects(...args);
       did = did || res.did;
@@ -870,7 +809,7 @@ function createBattleResolution(ports) {
     if (!suppressText && !ownsEquipField('heal') && !(infuseLead && !infused) && !healed && !skillOnly && !foesAnnihilated() && +(card.heal || 0) > 0) {
       const n = +(card.heal || 0);
       if ((getPlayerStatus().status.healban || 0) > 0) {
-        log(`[[icon:heart]] 禁疗中：回复 ${n} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+        log(`[[icon:status-heal-ban]] 禁疗中：回复 ${n} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
       } else { heal(n); addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
       did = true;
     }
@@ -885,7 +824,7 @@ function createBattleResolution(ports) {
         !hostedWarlockHandlesItsOwnDraw && (!stealthBreakBonus || brokeOwnStealth) && !foesAnnihilated() && drawOf(card) > 0) {
       const n = drawOf(card);
       const got = drawCards(n);
-      log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
+      log(`[[icon:draw-card]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
       did = true;
     }
     // —— 「回合开始时」生效时刻词条 ——

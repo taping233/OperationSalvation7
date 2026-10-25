@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import * as runtime from '../game/src/battle/runtime/battle.runtime.js';
 
@@ -5,8 +6,7 @@ window.SDT ||= {};
 window.SDT.Icons = { ...(window.SDT.Icons || {}), img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 30, battleHandMax: 99, bossDeckSize: 1, starterSha: 0,
-    battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+  rules: { ...battleRules(30, 99, 1, 0, 5, 1) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -47,8 +47,7 @@ async function start(cards, definitions = [{ id: 'facts-target', name: '事实�
     return { uid: `facts-${sequence++}`, card: structuredClone(card), safe: false };
   });
   game = {
-    ownedCards, hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false, lastBattleEnd: null,
+    ownedCards, ...playerFields(100, 100, 5, 0, '侠客', null), lastBattleEnd: null,
     logs: [], onLog: null,
     log(message) { this.logs.push(String(message)); this.onLog?.(String(message)); },
     heal(amount) { this.hp = Math.min(this.maxHp, this.hp + amount); }, addItem() {}, onBattleEnd() {},
@@ -153,12 +152,12 @@ describe('战斗事实通过真实 BattleSession 边界记录', () => {
     await start(['tt2-shoot']);
     const entry = await play('tt2-shoot', 0);
     const recorded = JSON.stringify(facts());
-    const snapshot = BattleSession.getSnapshot();
-    const copied = JSON.stringify(snapshot.pstat.requestedCards.history);
+    const snapshot = BattleSession.getReplayState();
+    const copied = JSON.stringify(snapshot.rules.history);
     entry.card.id = 'changed-id'; entry.card.name = '改名卡'; entry.card.type = '资源';
     runtime.foes[0].id = 'changed-target'; runtime.foes[0].name = '改名敌人'; runtime.foes[0].hp = 50;
     expect(JSON.stringify(facts())).toBe(recorded);
-    expect(JSON.stringify(snapshot.pstat.requestedCards.history)).toBe(copied);
+    expect(JSON.stringify(snapshot.rules.history)).toBe(copied);
     expect(damage('enemy')[0]).toMatchObject({ cardId: 'tt2-shoot', targetId: 'facts-target', hpAfter: 198 });
     expect(completions()[0]).toMatchObject({ cardId: 'tt2-shoot', cardType: '武术' });
   });

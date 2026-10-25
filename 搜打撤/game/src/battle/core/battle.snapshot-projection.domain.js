@@ -43,6 +43,10 @@ function captureSnapshotInput() {
         }
         return acc;
       }, []) : null;
+    const requested = /** @type {{ requestedCards?: Record<string, unknown> }} */ (instanceRuntime.pstat)?.requestedCards;
+    const requestedSummary = { ...(requested || {}) };
+    delete requestedSummary.history;
+    const projectedStatus = requested ? { ...instanceRuntime.pstat, requestedCards: requestedSummary } : instanceRuntime.pstat;
     return {
       battleToken: instanceRuntime.battleState.token, mode: instanceRuntime.mode, turn: instanceRuntime.turn, energy: instanceRuntime.energy, maxEnergy: instanceRuntime.maxEnergy, busy: instanceRuntime.busy, phase: instanceRuntime.battleState.phase,
       actionQueueLength: actionQueue.length, playedMovesThisTurn: instanceRuntime.playedMovesThisTurn, endTurnContext: { deathSave: instanceRuntime.deathSave, timeRune: instanceRuntime.timeRune, extraTurn: instanceRuntime.extraTurn },
@@ -53,7 +57,7 @@ function captureSnapshotInput() {
       opts: instanceRuntime.opts,
       player: instanceRuntime.G ? { hp: instanceRuntime.G.hp, maxHp: instanceRuntime.G.maxHp, atk: instanceRuntime.G.atk, spellPower: instanceRuntime.G.spellPower || 0, myClass: instanceRuntime.G.myClass || null, characterId: instanceRuntime.G.characterId || null } : null,
       handInfuseCounts: instanceRuntime.handInfuseCounts,
-      pdef: instanceRuntime.pdef, pstat: instanceRuntime.pstat, foes: instanceRuntime.foes, deathFxPending: instanceRuntime.foes.map(foe => stagedDeathFx.has(foe)), allies: instanceRuntime.allies, hand: instanceRuntime.hand, drawPile: instanceRuntime.drawPile, discard: instanceRuntime.discard, grave: instanceRuntime.grave, played: instanceRuntime.played, consumed: instanceRuntime.consumed, consumedPile: getConsumedPile(), infusing: instanceRuntime.infusing, discovering: instanceRuntime.discovering,
+      pdef: instanceRuntime.pdef, pstat: projectedStatus, foes: instanceRuntime.foes, deathFxPending: instanceRuntime.foes.map(foe => stagedDeathFx.has(foe)), allies: instanceRuntime.allies, hand: instanceRuntime.hand, drawPile: instanceRuntime.drawPile, discard: instanceRuntime.discard, grave: instanceRuntime.grave, played: instanceRuntime.played, consumed: instanceRuntime.consumed, consumedPile: getConsumedPile(), infusing: instanceRuntime.infusing, discovering: instanceRuntime.discovering,
       handSelecting: instanceRuntime.handSelecting ? { ...instanceRuntime.handSelecting,
         ...selectionContract } : null,
       choosing: instanceRuntime.choosing, pendingTarget: pTgt, pendingHint: instanceRuntime.pendingHint, viewingGrave: instanceRuntime.viewingGrave, viewingDeck: instanceRuntime.viewingDeck, viewingBag: instanceRuntime.viewingBag,

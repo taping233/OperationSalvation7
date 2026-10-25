@@ -23,7 +23,7 @@ export function createEquipmentSemanticOperations({ runtime, combat, random, ali
       const response = entry.card.rules.equip.passive.damageResponse;
       if (!response) continue;
       const targets = alive();
-      if (targets.length) hitFoe(targets[Math.floor(random() * targets.length)], entry.card,
+      if (targets.length) hitFoe(targets[Math.floor(random('target') * targets.length)], entry.card,
         response.damage, combat.TYPES.FIXED, '', { preserveBaseDamage:true });
       if (!isCurrent(token)) return;
       if (random() < response.drawChance) drawCards(response.draw);

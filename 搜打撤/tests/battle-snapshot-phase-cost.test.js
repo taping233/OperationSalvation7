@@ -1,9 +1,9 @@
+import { battleRules, damageRuleFields, inventoryFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, beforeEach, expect, it, vi } from 'vitest';
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 6, battleHandMax: 200, bossDeckSize: 3,
-    starterSha: 0, battleStartDraw: 2, battleTurnDraw: 1, diceSides: 6 }, items: {} },
+  MAP: { rules: { ...battleRules(6, 200, 3, 0, 2, 1) }, items: {} },
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
@@ -28,14 +28,12 @@ afterEach(() => {
 function makeCard(index) {
   return { id: `snapshot-phase-${index}`, name: `快照探针${index}`, cost: 0,
     type: '武术', desc: '造成1点攻击伤害。', dmg: 1, dmgType: 'attack',
-    rules: { version: 1, battle: { target: { side: 'enemy', area: false } },
-      triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } },
+    rules: { ...damageRuleFields(false, 'chosenEnemy') },
   };
 }
 function start(options = {}, count = 120) {
   game = { ownedCards: Array.from({ length: count }, (_, index) => ({ uid: `owned-${index}`, card: makeCard(index) })),
-    inventory: [], usedPocket: [], hp: 100, maxHp: 100, atk: 4, spellPower: 0,
-    coins: 0, myClass: '战士', state: 'idle', battleActive: false,
+    ...inventoryFields(100, 100, 0, '战士'),
     log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, onBattleEnd() {},
   };
   BattleSession.start(game, [{ id: 'phase-target', name: '快照靶子', hp: 100, atk: 1 }], options);

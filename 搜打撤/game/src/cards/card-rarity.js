@@ -35,11 +35,14 @@ export function isHeroLine(card, findById) {
 
 /** @param {CardRarityInput} card @param {CardLookup} findById @returns {CardRarity | undefined} */
 export function rarityOf(card, findById) {
-  const visitedSources = new Set();
+  /** @type {Set<string> | null} */
+  let visitedSources = null;
   let current = card;
   while (true) {
     if (isHeroLine(current, findById)) return '棱彩';
     if (current.rarity !== '衍生' || !current.tokenOf) return current.rarity;
+    // Most render/sort queries stop above; only source traversal needs a set.
+    if (!visitedSources) visitedSources = new Set();
     // Old custom catalogs may contain cyclic sources. Keep the same derived
     // fallback as a missing source, without changing the catalog or valid chains.
     if (visitedSources.has(current.tokenOf)) return current.rarity;

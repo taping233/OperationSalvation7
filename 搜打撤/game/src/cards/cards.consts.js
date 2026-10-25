@@ -17,7 +17,7 @@
   const TT10_KEY = 'sdt-cards-tt10-v3-seeded';   // 第十批：设计者实机定版同步（2026-09-07 双向合并）；v2：清掉合并残留的错误词条（能力卡 armor:5 等）并重播覆盖一次；v3：tt3-nature-form 改名「满月形态」转牧师职业卡（2026-10-02 老板）——换 key 重播让已同步环境拿到新表
   const TT11_KEY = 'sdt-cards-tt11-v6-seeded';   // 第十一批：与设计者实机卡库导出完全对齐（2026-09-09 老板拍板，见 TABLETOP11 注释）；v2：法力补给补 cls=法师（白塔专属）；v3：不变应万变补 cls=侠客（无专属，老板 2026-09-12 拍板）；v4：恶魔之力补 cls=牧师（星月专属，老板 2026-09-13 拍板）；v5：恶魔之力 tt7-drunksong 整卡退役（老板 2026-09-13 改拍板删除，同名双版收口只留 cc-demon）；v6：圣光之源补 cls=牧师（星月专属，老板 2026-09-20 拍板）——均换 key 重播让旧档拿到
   const ITEM_RENAME_KEY = 'sdt-cards-item-renames-v1'; // 2026-09-08：道具定名 + 金创药/金疮药合并
-  const EVENTS_0919_KEY = 'sdt-events-0919-v2-seeded'; // 2026-09-19：都市污染事件池（10 旧事件改名 + 9 新事件）；v2：熔断双箱/隧道血契 desc 对齐实装口径（迭代评审 09-20 B-P0/P2）
+  const EVENTS_0919_KEY = 'sdt-events-0919-v4-seeded'; // 2026-10-25：封城事件名称与新增选择说明。
   const TT12_KEY = 'sdt-cards-tt12-v1-seeded';         // 第十二批：射线/研发系列新卡 17 张（2026-09-23 老板卡表）；全新 KEY——老档未标记过，启动即补播（不进 cards-sync 数组）
   // 第十批退役：同设计重复 id（设计者实机已把同名卡定版在旧 id 上，见 TABLETOP10 尾部注释）
   /** @type {string[]} */

@@ -1,8 +1,10 @@
 // @ts-check
 // Preserve the eager UiScale registration used by synchronous UI/card-zoom consumers.
 import './ui-scale.js';
-/* 词条讲解浮框（2026-09-20 老板：特殊词条触摸时要有我们自己绘制的文字框描述讲解，如形态/中毒等诅咒）
- * 全局单例 + 事件委托：卡面描述高亮词（descRich 输出的 data-term）与战斗状态角标（bt-curse/bt-buff、
+import { TERM_KEYWORDS } from './term-definitions.js';
+import { allowsTermTip } from './term-tip-policy.js';
+/* 词条与动作说明浮框；卡面和卡牌详情中的词条共用触摸与悬停介绍。
+ * 全局单例 + 事件委托：战斗状态角标（bt-curse/bt-buff、
  * 诅咒之刃 chips、敌方狂乱角标）统一由 document 级委托接管，渲染点零改动自动生效。
  * 桌面悬停或键盘聚焦显示；触屏按下显示、松手收起。data-ui-tip 提供动态动作说明。
  * data-term 的 click 与键盘激活在同步捕获层拦截；动态动作说明保留按钮的原始点击与拖动。
@@ -13,6 +15,7 @@ import './ui-scale.js';
 // 卡面描述文本词 → 词条 key；具体伤害类型有讲解，生命/回合等常识词保持纯高亮。
 /** @type {Record<string, string>} */
 const TERM_ALIAS = {
+  ...TERM_KEYWORDS,
   '攻击伤害': 'attackDamage', '法术伤害': 'spellDamage', '固定伤害': 'fixedDamage', '真实伤害': 'trueDamage', '法伤': 'spellPower',
   '冰冻': 'freeze', '冻结': 'freeze', '中毒': 'poison',
   '流血': 'bleed', '沉默': 'silence', '禁疗': 'healban', '诅咒': 'curse', '净化': 'purify', '充能': 'charge',
@@ -97,10 +100,16 @@ function syncTrigger() {
  * @param {EventTarget|null} t
  * @returns {Element|null}
  */
-function closestTerm(t) { return t && /** @type {Element} */ (t).closest ? /** @type {Element} */ (t).closest('[data-term]') : null; }
+function closestTerm(t) {
+  if (!(t instanceof Element) || !allowsTermTip(t)) return null;
+  return t.closest('[data-term]');
+}
 
 /** @param {EventTarget|null} t @returns {Element|null} */
-function closestTrigger(t) { return t && /** @type {Element} */ (t).closest ? /** @type {Element} */ (t).closest('[data-term], [data-ui-tip]') : null; }
+function closestTrigger(t) {
+  if (!(t instanceof Element) || !allowsTermTip(t)) return null;
+  return t.closest('[data-term], [data-ui-tip]');
+}
 
 /** document 级事件委托接管全部词条触发（悬停即显/按压即显/点击只讲解/滚动收起）。 */
 function initTermTips() {
@@ -108,7 +117,9 @@ function initTermTips() {
     if (hoverExitTimer !== null && !closestTrigger(e.target) && !isTip(e.target)) return;
     cancelHoverExit();
     if (isTip(e.target)) return;
-    hoverEl = closestTrigger(e.target); syncTrigger();
+    const trigger = closestTrigger(e.target);
+    if (trigger === hoverEl) return;
+    hoverEl = trigger; syncTrigger();
   });
   document.addEventListener('pointerout', (e) => {
     if (isTip(e.target)) {

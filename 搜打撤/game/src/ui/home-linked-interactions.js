@@ -1,11 +1,12 @@
 import '../../css/home-linked-interactions.css';
-import './motion-presets.js';
+import '../../css/interface-components.css';
+import { motionReduced } from './motion-presets.js';
 import { esc, escAttr } from '../core/shared.js';
 
 /* 导航外观统一；目的地和退出生命周期仍由调用页面负责。 */
 /** @param {string} action @param {string} label @param {string} [className] @param {string} [type] @param {{shortcut?: string, text?: string, cancel?: boolean}} [options] */
 export function linkedBackHTML(action, label, className = '', type = 'button', { shortcut = 'Esc', text = '', cancel } = {}) {
-  return `<button type="${type === 'submit' ? 'submit' : 'button'}" class="archive-back ${escAttr(className)}" data-act="${escAttr(action)}"${cancel == null ? '' : ` data-cancel="${cancel}"`} aria-label="${escAttr(label)}" title="${escAttr(label)}${shortcut ? `（${escAttr(shortcut)}）` : ''}"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>${text ? `<span>${esc(text)}</span>` : ''}</button>`;
+  return `<button type="${type === 'submit' ? 'submit' : 'button'}" class="archive-back ${escAttr(className)}" data-act="${escAttr(action)}"${cancel == null ? '' : ` data-cancel="${cancel}"`} aria-label="${escAttr(label)}" title="${escAttr(label)}${shortcut ? `（${escAttr(shortcut)}）` : ''}"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>${text ? `<span class="ui-control-label">${esc(text)}</span>` : ''}</button>`;
 }
 
 /* 资源数值由调用页提供，共用持有/需要与不足标记，不参与扣款。 */
@@ -15,9 +16,11 @@ export function linkedCostsHTML(rows, note = '持有 / 需要') {
 
 const linkedAnimations = new Set();
 const pausedAnimations = new Set();
+const reducedPausedAnimations = new Set();
 function releaseLinkedAnimation(animation) {
   linkedAnimations.delete(animation);
   pausedAnimations.delete(animation);
+  reducedPausedAnimations.delete(animation);
 }
 function cancelDetachedAnimation(animation) {
   if (animation.effect?.target?.isConnected !== false) return false;
@@ -25,11 +28,28 @@ function cancelDetachedAnimation(animation) {
   animation.cancel();
   return true;
 }
+function settleReducedAnimation(animation) {
+  if (cancelDetachedAnimation(animation)) return;
+  const end = animation.effect?.getComputedTiming?.().endTime ?? 0;
+  if (!Number.isFinite(end)) {
+    if (animation.playState === 'running' || pausedAnimations.has(animation)) {
+      animation.pause(); reducedPausedAnimations.add(animation);
+    }
+    return;
+  }
+  releaseLinkedAnimation(animation);
+  if (animation.playState === 'idle' || animation.playState === 'finished') return;
+  try {
+    if (animation.playbackRate === 0) animation.playbackRate = 1;
+    animation.finish();
+  } catch { animation.cancel(); }
+}
 export function trackLinkedAnimation(animation) {
   if (!animation) return animation;
   linkedAnimations.add(animation);
   const release = () => releaseLinkedAnimation(animation);
   animation.finished.then(release, release);
+  if (motionReduced()) { settleReducedAnimation(animation); return animation; }
   // pending also includes a caller's pause request; only running belongs to this clock.
   if (document.hidden && animation.playState === 'running') {
     animation.pause();
@@ -42,6 +62,17 @@ export function linkedAnimate(node, frames, options) {
 }
 const syncVisibility = () => {
   document.body.classList.toggle('linked-backgrounded', document.hidden);
+  const reduced = motionReduced();
+  if (reduced) {
+    for (const animation of [...linkedAnimations]) settleReducedAnimation(animation);
+  } else {
+    for (const animation of [...reducedPausedAnimations]) {
+      reducedPausedAnimations.delete(animation);
+      if (cancelDetachedAnimation(animation) || animation.playState !== 'paused') continue;
+      if (document.hidden) pausedAnimations.add(animation);
+      else animation.play();
+    }
+  }
   if (document.hidden) {
     for (const animation of linkedAnimations) {
       if (animation.playState !== 'running' || cancelDetachedAnimation(animation)) continue;
@@ -50,10 +81,27 @@ const syncVisibility = () => {
     }
   } else {
     for (const animation of pausedAnimations) {
-      if (!cancelDetachedAnimation(animation) && animation.playState === 'paused') animation.play();
+      if (!cancelDetachedAnimation(animation) && !reducedPausedAnimations.has(animation)
+        && animation.playState === 'paused') animation.play();
     }
     pausedAnimations.clear();
   }
 };
 syncVisibility();
 document.addEventListener('visibilitychange', syncVisibility);
+let lastReduced = motionReduced();
+const syncPreference = () => {
+  const reduced = motionReduced();
+  if (reduced === lastReduced) return;
+  lastReduced = reduced;
+  syncVisibility();
+};
+const preferenceObserver = new MutationObserver(syncPreference);
+preferenceObserver.observe(document.body, { attributes:true, attributeFilter:['class'] });
+const preference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+preference?.addEventListener?.('change', syncPreference);
+if (import.meta.hot) import.meta.hot.dispose(() => {
+  preferenceObserver.disconnect();
+  preference?.removeEventListener?.('change', syncPreference);
+  document.removeEventListener('visibilitychange', syncVisibility);
+});

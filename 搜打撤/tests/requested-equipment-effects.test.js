@@ -1,6 +1,7 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 20, battleHandMax: 30, bossDeckSize: 15, starterSha: 0, battleStartDraw: 0, battleTurnDraw: 0, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(20, 30, 15, 0, 0, 0) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();

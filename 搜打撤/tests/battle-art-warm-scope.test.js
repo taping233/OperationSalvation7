@@ -1,3 +1,4 @@
+import { playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, expect, it, vi } from 'vitest';
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
@@ -14,8 +15,7 @@ it('battle entry and checkpoint restore only request card art, using existing wa
   const item = {id:'warm-item',name:'道具',type:'道具',desc:''};
   const ability = {id:'warm-ability',name:'能力',type:'能力卡',desc:''};
   const nonCombat = ['资源','事件','生物'].map((type,i)=>({uid:`other-${i}`,card:{id:`other-${i}`,name:type,type,desc:''}}));
-  const game = { ownedCards: [{ uid: 'one', card }, {uid:'item',card:item}, {uid:'ability',card:ability}, ...nonCombat], inventory: [], usedPocket: [], hp: 30, maxHp: 30, atk: 5,
-    spellPower: 0, coins: 0, myClass: '战士', characterId: 'heixiang', state: 'idle', battleActive: false,
+  const game = { ownedCards: [{ uid: 'one', card }, {uid:'item',card:item}, {uid:'ability',card:ability}, ...nonCombat], inventory: [], usedPocket: [], ...playerFields(30, 30, 5, 0, '战士', 'heixiang'),
     log() {}, onBattleEnd() {} };
   BattleSession.start(game, [{ id: 'infantry', name: '靶子', hp: 20, atk: 1, behavior: 'strike' }], { isBoss: false });
   expect(collectCardAssets).toHaveBeenLastCalledWith([card,item,ability], { includePortraits: false });

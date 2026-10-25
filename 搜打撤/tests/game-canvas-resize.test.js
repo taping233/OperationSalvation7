@@ -16,7 +16,7 @@ vi.mock('../game/src/run/game.run.js', () => ({ bindRunMixins: vi.fn(), devForce
   showRunTransition: vi.fn(), resumeChestsOnCell: vi.fn(), resumeEventCardChoice: vi.fn(() => false) }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ PRELOAD_SCENES: {} }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ resumeExtraction: vi.fn() }));
-vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn(), baseHubLoading: false }));
+vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn(), preloadBaseHub: vi.fn(), baseHubLoading: false }));
 vi.mock('../game/src/hub/game.bag.js', () => ({ bindBagMixins: vi.fn(), resumeBattleRewards: vi.fn(),
   showBackpack: vi.fn(), showBackpackSection: vi.fn(), setBagReturnHook: vi.fn() }));
 vi.mock('../game/src/run/game.run.shop.js', () => ({ configureShopRuntime: vi.fn() }));
@@ -28,7 +28,6 @@ vi.mock('../game/src/hub/game.cardslib.js', () => ({ cardPageOpen: false, cardPa
 vi.mock('../game/src/run/game.session.browser.js', () => ({ createGameCanvas: () => ({ canvas: h.canvas, ctx: h.ctx }) }));
 vi.mock('../game/src/agent/agent.js', () => ({}));
 vi.mock('../game/src/ui/quick-nav.js', () => ({}));
-vi.mock('../game/src/experience/pocket-strip.js', () => ({ startPocketStrip: vi.fn() }));
 let bounds, widthWrites, heightWrites;
 beforeAll(async () => {
   vi.stubGlobal('requestAnimationFrame', vi.fn(() => 1));

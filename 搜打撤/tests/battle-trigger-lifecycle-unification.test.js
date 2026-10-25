@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { BATTLE_TRIGGER_POINTS, DIRECT_TRIGGER_POINTS, REGISTERED_TRIGGER_POINTS,
   hasStructuredTrigger } from '../game/src/cards/card-trigger-contract.js';
@@ -7,8 +8,7 @@ import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capabili
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 9, battleHandMax: 20, bossDeckSize: 1,
-  starterSha: 0, battleStartDraw: 0, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(9, 20, 1, 0, 0, 1) }, items: {} };
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();

@@ -1,5 +1,6 @@
 /* Content state is separate from the current-position and reachable-location labels. */
-body #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-node-status {
+body #sidebar[data-expedition-layout="map"]{
+& .expedition-map-preview .expedition-node-status {
   --node-status-ink:#c7d0d0;
   --node-status-bg:#263238;
   display:inline-flex;
@@ -15,23 +16,23 @@ body #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-
   font:600 18px/1.25 var(--font-ui,sans-serif);
   letter-spacing:.04em;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-node-status[data-content-state="pending"] {
+& .expedition-node-status[data-content-state="pending"] {
   --node-status-ink:#f0ce89;
   --node-status-bg:#3d3120;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-node-status[data-content-state="shop-open"] {
+& .expedition-node-status[data-content-state="shop-open"] {
   --node-status-ink:#a8d7bf;
   --node-status-bg:#203a30;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-node-status[data-content-state="completed"],
-body #sidebar[data-expedition-layout="map"] .expedition-node-status[data-content-state="shop-closed"] {
+& .expedition-node-status[data-content-state="completed"],
+& .expedition-node-status[data-content-state="shop-closed"] {
   --node-status-ink:#acbcb8;
   --node-status-bg:#283332;
 }
-body #sidebar[data-expedition-layout="map"] .expedition-node-status-dot {
+& .expedition-node-status-dot {
   width:6px;
   height:6px;
   flex:none;
   border-radius:50%;
   background:currentColor;
-}
+}}

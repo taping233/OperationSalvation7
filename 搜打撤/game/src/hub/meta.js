@@ -129,7 +129,7 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     if (m.reward.rations) parts.push(`[[icon:bread]] 口粮 ×${m.reward.rations}`);
     if (m.reward.keys) parts.push(`[[icon:key]] 钥匙 ×${m.reward.keys}`);
     if (m.reward.legend) parts.push(`[[icon:medal]] 传说卡 ×${m.reward.legend}`);
-    if (m.reward.egg) parts.push(`[[icon:crystal]] 宠物蛋 ×${m.reward.egg}`);
+    if (m.reward.egg) parts.push(`[[icon:pet-egg]] 宠物蛋 ×${m.reward.egg}`);
     return parts.join(' · ');
   }
 
@@ -155,7 +155,7 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
       const taken = new Set();
       for (let k = 0; k < m.reward.legend; k++) {
         const free = pool.filter(c => !taken.has(c.id));
-        const got = free[Math.floor(Random.random('coll') * free.length)];
+        const got = free[Math.floor(Random.random('coll', 'reward') * free.length)];
         taken.add(got.id);
         cards.push({ card: { ...got }, count: 1 });
       }
@@ -268,7 +268,7 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     cards.forEach(c => parts.push(`[[icon:cards]] 【${c.card.name}】`));
     if (a.back) {
       const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === a.back);
-      parts.push(`[[icon:cards]] 卡背【${bd ? bd.name : a.back}】`);
+      parts.push(`[[icon:card-back]] 卡背【${bd ? bd.name : a.back}】`);
     }
     const msg = `[[icon:trophy]] 领取成就奖励【${a.name}】：${parts.join(' · ')}`;
     if (SDT.UI) SDT.UI.log(msg, 'loot');

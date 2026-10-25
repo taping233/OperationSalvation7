@@ -1,10 +1,10 @@
-import fs from 'node:fs';
 import path from 'node:path';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { decorateInventoryZoom } from '../game/src/ui/inventory-zoom.js';
 import { displayCardDescription } from '../game/src/cards/card-description-text.js';
+import { readCssSource } from './helpers/css-source.js';
 
-const stylesheet = name => fs.readFileSync(path.resolve('game/css', name), 'utf8');
+const stylesheet = name => readCssSource(path.resolve('game/css', name), 'utf8');
 const common = stylesheet('card-layout-selected.css');
 const block = selector => {
   const start = common.indexOf(`${selector} {`);

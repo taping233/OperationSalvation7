@@ -2,6 +2,7 @@
 import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
 const stylesheets = ['ak-skin', 'base', 'base-camp', 'base-camp-rework', 'base-cohesion-v5', 'base-controls-v4', 'base-rooms-v7', 'camp-entry', 'expedition-hub', 'expedition-inventory', 'expedition-rewards', 'expedition', 'hub', 'page-ach', 'page-expedition-hud', 'page-rewards-bag-help', 'scenes', 'winter'];
 const legacyScopes = [
@@ -15,7 +16,7 @@ const legacyScopes = [
   /\.warehouse-use-tabs\b/,
 ];
 const source = relative => readFileSync(new URL(`../${relative}`, import.meta.url), 'utf8');
-const stylesheet = name => postcss.parse(source(`game/css/${name}.css`));
+const stylesheet = name => postcss.parse(readCssSource(new URL(`../game/css/${name}.css`, import.meta.url)));
 
 // A legacy name inside an exclusion or an alternative does not make its whole
 // selector dead. Ignore those functions, including nested functions and strings.
@@ -59,21 +60,25 @@ describe('只清退已有替代界面的死 DOM 样式', () => {
   it('没有把共享 is/where/not 规则整条移除', () => {
     const skin = [];
     stylesheet('ak-skin').walkRules(rule => skin.push(rule.selector));
-    expect(skin.some(selector => selector.includes(':is(.hub-card, .dep-card, .settings-group, .class-dossier,'))).toBe(true);
+    expect(skin.some(selector => selector.includes(':is(.hub-card, .dep-card, .slot-card,'))).toBe(true);
     const rooms = [];
     stylesheet('base-rooms-v7').walkRules(rule => rooms.push(rule.selector));
-    expect(rooms.some(selector => selector.includes(':is(.pool-type-tabs,.warehouse-use-tabs,.archive-status,.trade-v5-modes)'))).toBe(true);
-    expect(source('game/css/page-ach.css')).toContain('.hub-card:not(.collection-panel):not(.coll-room)');
+    expect(rooms.some(selector => selector.includes(':is(.archive-status,.trade-v5-modes)'))).toBe(true);
+    expect(readCssSource(new URL('../game/css/page-ach.css', import.meta.url))).toContain('.hub-card:not(.collection-panel):not(.coll-room)');
   });
 
-  it('混合选择器仍保留活着的仓库、成就和出征人物声明', () => {
+  it('仍保留活着的仓库、成就和出征人物声明', () => {
     const inventory = stylesheet('expedition-inventory');
     let row;
     inventory.walkRules(rule => {
-      if (rule.selectors.includes('#overlay .stash-row') && rule.selectors.includes('#overlay .ach-row')) row = rule;
+      if (rule.selectors.map(selector => selector.trim()).includes('#overlay .ach-row')) row = rule;
     });
     expect(row).toBeDefined();
     expect(row.nodes.find(decl => decl.prop === 'background').value).toBe('#1c1e20');
+    let warehouse;
+    stylesheet('collection-workspace').walkRules('&[data-collection-variant="warehouse"]', rule => { warehouse = rule; });
+    expect(Object.fromEntries(warehouse.nodes.flatMap(node => node.type === 'decl' ? [node] : node.type === 'rule' && node.selector === '&' ? node.nodes.filter(n => n.type === 'decl') : []).map(decl => [decl.prop, decl.value])))
+      .toMatchObject({ display:'flex', 'min-height':'0', width:'100%', overflow:'hidden' });
     let art;
     stylesheet('base-camp').walkRules(rule => {
       if (rule.selectors.includes('#overlay #depMain.pg.hub.camp-detail .camp-depart-person-art .art-figure-wrap')) art = rule;
@@ -90,7 +95,7 @@ describe('只清退已有替代界面的死 DOM 样式', () => {
     ['game/src/hub/hub.archive-v3.js', 'archive-v12', /coll-(?:room|ms|slot|group)|back-(?:card|grid|thumb|sm)/],
     ['game/src/hub/hub.trade-shop-v5.js', 'trade-v5-item', /shelf-(?:item|visual|info|ico)|shop-price/],
     ['game/src/run/chests.js', 'reward-v14', /chest-(?:ops|reveal)|loot-(?:manifest|capacity)/],
-    ['game/src/hub/hub.warehouse.js', 'warehouse-workspace-v12', /warehouse-use-tabs/],
+    ['game/src/hub/hub.warehouse.js', 'collectionWorkspaceHTML', /warehouse-use-tabs/],
     ['game/src/run/expedition.view.js', 'expedition-map-preview', /route-option|route-heading|route-help/],
   ])('%s 使用当前界面且不再生成旧作用域', (file, current, legacy) => {
     const producer = source(file);

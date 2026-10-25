@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
@@ -5,8 +6,7 @@ import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capabili
 window.SDT = window.SDT || { Icons: { img: () => '', TYPE_ART: {} } };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 9, battleHandMax: 8, bossDeckSize: 1, starterSha: 0,
-    battleStartDraw: 0, battleTurnDraw: 0, diceSides: 6 }, items: {},
+  rules: { ...battleRules(9, 8, 1, 0, 0, 0) }, items: {},
 };
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;

@@ -1,3 +1,4 @@
+import { battleViewMocks } from './helpers/environment-fixtures.js';
 import { afterAll, afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
@@ -20,11 +21,7 @@ const UI = {
   hideTooltip() {}, showTooltip() {}, refresh() {}, log() {}, act(name, fn) { actions.set(name, fn); },
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} },
-  Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 2, battleHandMax: 8, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 2, 8, 5, 5),
 };
 const animateDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'animate');
 const imageDescriptors = Object.fromEntries(['complete', 'naturalWidth', 'decode'].map(name => [name, Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, name)]));

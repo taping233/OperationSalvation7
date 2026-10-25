@@ -1,22 +1,20 @@
 /* Safe opening is local to the search presentation; rewards keep their own layout. */
-body #overlay .card.chest:has(.safe-opening) {
+body{
+& #overlay .card.chest:has(.safe-opening) {
   width:min(760px,94%); max-height:94%; padding:24px 32px 22px;
   background:radial-gradient(ellipse at 58% 50%,#33343a,#191b20 65%) !important;
   border:1px solid #b9c0ce45 !important; border-radius:4px;
   box-shadow:0 28px 100px #02050ab3 !important; overflow:hidden;
 }
-body[data-ui-cover-context='ordinary'] #overlay .card.chest:has(.safe-opening) > h2,
-body #overlay .card.chest:has(.safe-opening) > h2 {
+&[data-ui-cover-context='ordinary'] #overlay .card.chest:has(.safe-opening) > h2,
+& #overlay .card.chest:has(.safe-opening) > h2 {
   color:#e4e6eb !important; margin:0; padding:0 0 13px; border-bottom:1px solid #aeb5c52b;
   font:500 16px/1.5 var(--font-ui); letter-spacing:.08em; text-shadow:none;
 }
-body #overlay .card.chest:has(.safe-opening) .evt-sts-desc {
-  color:#9da8b8; font-size:13px; margin:12px 0 0; text-align:center;
-}
-body #overlay .pick-search.safe-opening {
+& #overlay .pick-search.safe-opening {
   --safe-accent:#e8e4df; appearance:none; display:flex; align-items:center; gap:0;
   width:100%; padding:0; color:#e4e6eb; border:0; background:none; font:inherit; cursor:pointer;
-}
+}}
 .safe-opening .safe-stage {
   position:relative; isolation:isolate; display:block;
   width:min(440px,100%,calc(var(--game-layout-height,100vh) * .52)); aspect-ratio:1;
@@ -26,26 +24,29 @@ body #overlay .safe-opening .safe-stage .ps-chest {
   position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
   filter:drop-shadow(0 14px 16px #0006); animation:none; transform:none;
 }
-.safe-opening .safe-glow,.safe-opening .safe-burst {
+.safe-opening{
+& .safe-glow,& .safe-burst {
   position:absolute; left:64%; top:59%; width:84%; height:84%; object-fit:contain;
   transform:translate(-50%,-50%) scale(.1); transform-origin:50% 85%; opacity:0; pointer-events:none;
 }
-.safe-opening .safe-glow { z-index:-1; }
-.safe-opening .safe-burst { z-index:1; }
+& .safe-glow { z-index:-1; }
+& .safe-burst { z-index:1; }}
 /* New frames contain inner light; the separate flash stays a restrained accent. */
-body #overlay .safe-opening[data-chest-fx='frames'] .safe-burst {
+body #overlay .safe-opening[data-chest-fx='frames']{
+& .safe-burst {
   left:0; top:-12%; width:100%; height:100%; transform:none;
   animation:none; opacity:.1;
 }
-body #overlay .safe-opening[data-chest-fx='frames'][data-chest-phase='opening'] .safe-burst { opacity:.14; }
-body #overlay .safe-opening[data-chest-fx='frames'][data-chest-phase='burst'] .safe-burst { opacity:.26; }
-body #overlay .safe-opening[data-chest-fx='frames'][data-chest-phase='settle'] .safe-burst { opacity:.1; }
-.safe-opening[data-chest-phase='charging'] .safe-glow { animation:safeCharge .78s ease-in both; }
-.safe-opening[data-chest-phase='opening'] .safe-glow { opacity:.2; transform:translate(-50%,-50%) scale(.65); }
-.safe-opening[data-chest-phase='burst'] .safe-burst { animation:safeTreasureBurst .35s cubic-bezier(.12,.7,.24,1) both; }
-.safe-opening[data-chest-phase='burst'] .safe-glow { opacity:.6; transform:translate(-50%,-50%) scale(1.05); }
-.safe-opening[data-chest-phase='settle'] .safe-glow { opacity:.22; transform:translate(-50%,-50%) scale(.82); }
-.safe-opening .safe-caption { color:var(--safe-accent); font:500 17px/1.5 var(--font-ui); letter-spacing:.24em; }
+&[data-chest-phase='opening'] .safe-burst { opacity:.14; }
+&[data-chest-phase='burst'] .safe-burst { opacity:.26; }
+&[data-chest-phase='settle'] .safe-burst { opacity:.1; }}
+.safe-opening{
+&[data-chest-phase='charging'] .safe-glow { animation:safeCharge .78s ease-in both; }
+&[data-chest-phase='opening'] .safe-glow { opacity:.2; transform:translate(-50%,-50%) scale(.65); }
+&[data-chest-phase='burst'] .safe-burst { animation:safeTreasureBurst .35s cubic-bezier(.12,.7,.24,1) both; }
+&[data-chest-phase='burst'] .safe-glow { opacity:.6; transform:translate(-50%,-50%) scale(1.05); }
+&[data-chest-phase='settle'] .safe-glow { opacity:.22; transform:translate(-50%,-50%) scale(.82); }
+& .safe-caption { color:var(--safe-accent); font:500 17px/1.5 var(--font-ui); letter-spacing:.24em; }}
 body #overlay .safe-opening .ps-tip { color:#b6b4b8; margin:7px 0 0; font:400 13px/1.5 var(--font-ui); letter-spacing:.08em; text-shadow:none; animation:none; }
 .safe-opening:focus-visible { outline:2px solid var(--safe-accent); outline-offset:5px; }
 @keyframes safeCharge {

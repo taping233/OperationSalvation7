@@ -10,6 +10,8 @@ import { characterName } from '../core/characters.js';
 import { firstExploreMoves } from '../hub/extraction.commands.js';
 import { esc } from '../core/shared.js';
 import { uiDisclosure } from '../ui/ui-disclosure.js';
+import { uiDecisionFacts } from '../ui/ui-decision.js';
+import { settlementReportHTML } from '../ui/settlement-report.js';
 
 // 终局失败车队横幅（LEG-6b，2026-09-26 W1 批件）：挂「撤离失败」终局页顶部作正脸
 // 结算演出（判负撤离与倒下共用本页，均为失败语义）。素材只读引用，不改结算语义。
@@ -41,11 +43,11 @@ function snapshotBattleReview(summary, isBoss) {
 }
 function battleReviewHTML(token) {
   const review = token.battleReview;
-  if (!review) return `<section class="doom-review" aria-label="本次结束原因"><b>结束原因</b><p>${esc(token.endReason)}</p><small>本次没有战斗摘要，不推算敌人状态或承伤来源。</small></section>`;
+  if (!review) return `<section class="settlement-review" aria-label="本次结束原因"><b>结束原因</b><p>${esc(token.endReason)}</p><small>本次没有战斗摘要，不推算敌人状态或承伤来源。</small></section>`;
   const sources = new Map();
   review.hits.forEach(hit => sources.set(hit.source,(sources.get(hit.source) || 0) + hit.damage));
   const damage = [...sources].sort((a,b) => b[1]-a[1]).map(([name,n]) => `${esc(name)} ${n}`).join('、');
-  return `<section class="doom-review" aria-label="战斗复盘"><b>战斗复盘 · 最后第 ${review.round} 回合</b><p>${review.isBoss ? '首脑' : '敌方'}剩余：${review.foes.length ? review.foes.map(foe => `${esc(foe.name)} ${Math.max(0,foe.hp)}/${foe.maxHp} 生命`).join('、') : '无存活敌人'}</p>${uiDisclosure({label:'承伤来源与记录范围',className:'doom-damage-details',content:`<p>已归因承伤：${damage || '未记录到已覆盖来源的生命伤害'}</p><small>${esc(review.coverage)}</small>`})}</section>`;
+  return `<section class="settlement-review" aria-label="战斗复盘"><b>战斗复盘 · 最后第 ${review.round} 回合</b><p>${review.isBoss ? '首脑' : '敌方'}剩余：${review.foes.length ? review.foes.map(foe => `${esc(foe.name)} ${Math.max(0,foe.hp)}/${foe.maxHp} 生命`).join('、') : '无存活敌人'}</p>${uiDisclosure({label:'承伤来源与记录范围',className:'settlement-damage-details',content:`<p>已归因承伤：${damage || '未记录到已覆盖来源的生命伤害'}</p><small>${esc(review.coverage)}</small>`})}</section>`;
 }
 
 // 2026-10-03 老板（SYS-11）：死亡局也产「真实回执」——字段与 extraction.commands 的
@@ -131,6 +133,7 @@ export function createDeathSettlement({
     // 也错误抢运回基地（09-30 深审 ROOT-05）
     const cards = game.ownedCards.filter(o => o.safe || (o.stored && !o.pouchOf && boxSafe)).map(o => ({ card: o.card, count: 1 }));
     const token = { kind: 'death', generation, slotId, cards, deathClass: game.myClass, saved, lost, why,
+      deathCause: battleSummary ? 'battle' : reason || game.surrenderedRun ? 'nonBattle' : 'unknown',
       partnerName: sourceBase?.carriedPet?.()?.name || '随行伙伴',
       looseItems: game.inventory.filter(item => item.count > 0).map(item => `${esc(item.name)} ×${item.count}`).join('、'),
       lostResources: resourceNames(cardsAfterRescue(game.ownedCards, cards)),
@@ -162,7 +165,7 @@ export function createDeathSettlement({
       game.surrenderedRun = false;
       // 2026-10-03 老板（SYS-11）：死亡收益读回执口径（netTake/losses/首探随 token.receipt），
       // savedCards 仍作 carried 既有口径；无回执调用（旧测试兜底）行为不变
-      SDT.Agent?.recorder?.recordRun('death', { why: token.why, savedCards: token.saved, receipt: token.receipt });   // 跑局统计（数据分析系统）
+      SDT.Agent?.recorder?.recordRun('death', { why: token.why, deathCause: token.deathCause, savedCards: token.saved, receipt: token.receipt });   // 跑局统计（数据分析系统）
     SDT.Sound.sfx('extractionFail');
       SDT.Sound.music('title');
       if (token.ephemeral) {
@@ -188,11 +191,11 @@ export function createDeathSettlement({
         const rewardCopy = gained == null ? '本次失败结算奖励已发放' : `本次失败结算 <b class="gold">+${gained} XP</b>`;
         if (token.ephemeral) {
           const lvNow = token.lvBefore + (levels || 0);
-          if (levels > 0) xpRow = `<div class="doom-xp"><p class="doom-xp-h">熟练度提升！Lv.${token.lvBefore} → Lv.${lvNow}（测试投影 · 不写档）</p></div>`;
+          if (levels > 0) xpRow = `<div class="settlement-xp"><p class="settlement-xp-h">熟练度提升！Lv.${token.lvBefore} → Lv.${lvNow}（测试投影 · 不写档）</p></div>`;
         } else if (sumAfter.lv > token.lvBefore) {
-          xpRow = `<div class="doom-xp doom-xp-up"><p class="doom-xp-h">熟练度提升！Lv.${token.lvBefore} → Lv.${sumAfter.lv}</p><div class="doom-xp-bar" aria-label="熟练度 ${pct.toFixed(0)}%"><i style="width:${pct.toFixed(1)}%"></i></div><p class="doom-xp-note">${rewardCopy} · 当前累计进度 Lv.${sumAfter.lv}：${sumAfter.xp}/${sumAfter.need}</p></div>`;
+          xpRow = `<div class="settlement-xp settlement-xp-up"><p class="settlement-xp-h">熟练度提升！Lv.${token.lvBefore} → Lv.${sumAfter.lv}</p><div class="settlement-xp-bar" aria-label="熟练度 ${pct.toFixed(0)}%"><i style="width:${pct.toFixed(1)}%"></i></div><p class="settlement-xp-note">${rewardCopy} · 当前累计进度 Lv.${sumAfter.lv}：${sumAfter.xp}/${sumAfter.need}</p></div>`;
         } else {
-          xpRow = `<div class="doom-xp"><p class="doom-xp-h">熟练度成长</p><div class="doom-xp-bar" aria-label="熟练度 ${pct.toFixed(0)}%"><i style="width:${pct.toFixed(1)}%"></i></div><p class="doom-xp-note">${rewardCopy} · 当前累计进度 Lv.${sumAfter.lv}：${sumAfter.xp}/${sumAfter.need} · 差 <b>${sumAfter.need - sumAfter.xp}</b> 点升级</p></div>`;
+          xpRow = `<div class="settlement-xp"><p class="settlement-xp-h">熟练度成长</p><div class="settlement-xp-bar" aria-label="熟练度 ${pct.toFixed(0)}%"><i style="width:${pct.toFixed(1)}%"></i></div><p class="settlement-xp-note">${rewardCopy} · 当前累计进度 Lv.${sumAfter.lv}：${sumAfter.xp}/${sumAfter.need} · 差 <b>${sumAfter.need - sumAfter.xp}</b> 点升级</p></div>`;
         }
       }
       UI.log(savedN
@@ -202,29 +205,29 @@ export function createDeathSettlement({
       // Counts retain the receipt's separate owned-card and consumed-pocket categories.
       const deathLoss = token.receipt?.losses;
       const lossDetails = `${deathLoss?.lostNotable?.length ? `<p class="ov-note">散失的关键卡：${deathLoss.lostNotable.map(c => `【${esc(c.name)}】`).join('、')}</p>` : ''}${token.lostResources ? `<p class="ov-note">其中资源卡散失：${token.lostResources}</p>` : ''}`;
-      UI.showOverlay('撤离失败', `
-        <div class="doom-panel ui-design-system">
-          <img class="battle-banner" src="${RUN_FAIL_BANNER}" alt="" draggable="false">
-          <p class="doom-sub">${esc(token.endReason)} · 远征到此为止</p>
+      UI.showOverlay('撤离失败', settlementReportHTML({
+        title:'撤离失败', subtitle:`${token.endReason} · 远征到此为止`, banner:RUN_FAIL_BANNER,
+        actions:[{ action:'goBase', label:'回基地' }, { action:'again', label:'再出发', primary:true }],
+        content:`
           ${token.ephemeral ? '<p class="ov-note">开发测试档未选择存档槽；基地奖励仅暂存于内存。</p>' : ''}
-          <div class="doom-stats" aria-label="本次损失与保留">
-            <div class="doom-stat"><span class="ds-k">卡牌散失</span><b class="ds-v bad">${deathLoss?.lostCount || 0} 张</b><span class="doom-stat-note">消耗区另散失 ${deathLoss?.pocketLost || 0} 张${token.lost > 0 ? ` · 散装物资估值损失 ${token.lost.toLocaleString()}` : ''}</span></div>
-            <div class="doom-stat"><span class="ds-k">抢运回基地</span><b class="ds-v good">${savedN} 张</b><span class="doom-stat-note">安全格占用 ${safeUsed()}/${safeCap()}</span></div>
+          ${uiDecisionFacts([['卡牌散失', `${deathLoss?.lostCount || 0} 张`], ['抢运回基地', `${savedN} 张`]])}
+          <div class="settlement-notes">
+            <p>消耗区另散失 ${deathLoss?.pocketLost || 0} 张${token.lost > 0 ? ` · 散装物资估值损失 ${token.lost.toLocaleString()}` : ''}</p>
+            <p>安全格占用 ${safeUsed()}/${safeCap()}</p>
           </div>
           ${battleReviewHTML(token)}
           ${xpRow}
-          ${uiDisclosure({label:'物资明细与保留规则',className:'doom-details',content:`
-            <div class="doom-details-body">
+          ${uiDisclosure({label:'物资明细与保留规则',className:'settlement-details',content:`
+            <div class="settlement-details-body">
               ${lossDetails}
-              <p class="ov-note doom-material-note">散装物资估值损失：<b>${token.lost.toLocaleString()}</b>（不含卡牌）。<br>散装物资散失：${token.looseItems || '无'}。资源卡按卡牌清单计数。${token.savedResources ? `<br>已抢运资源卡：${token.savedResources}。` : ''}</p>
+              <p class="ov-note settlement-material-note">散装物资估值损失：<b>${token.lost.toLocaleString()}</b>（不含卡牌）。<br>散装物资散失：${token.looseItems || '无'}。资源卡按卡牌清单计数。${token.savedResources ? `<br>已抢运资源卡：${token.savedResources}。` : ''}</p>
               ${token.saved.length
-                ? `<div class="doom-loot"><p class="doom-loot-h">${esc(token.partnerName)}抢运回基地</p><div class="doom-cards">${token.saved.slice(0, 6).map((s, i) =>
-                    `<span class="doom-card" style="--i:${i}">${SDT.Cards.cardHTML(s.card, 'sm')}</span>`).join('')}${token.saved.length > 6 ? `<span class="doom-more">还有 ${token.saved.length - 6} 张</span>` : ''}</div></div>`
+                ? `<div class="settlement-loot"><p class="settlement-loot-h">${esc(token.partnerName)}抢运回基地</p><div class="settlement-cards">${token.saved.slice(0, 6).map((s, i) =>
+                    `<span class="settlement-card" style="--i:${i}">${SDT.Cards.cardHTML(s.card, 'sm')}</span>`).join('')}${token.saved.length > 6 ? `<span class="settlement-more">还有 ${token.saved.length - 6} 张</span>` : ''}</div></div>`
                 : (token.hadCards ? '<p class="ov-note">安全格里没有卡牌。把卡存进背包安全格（基地用口粮升级），倒下时才抢得回来。</p>' : '')}
               <p class="ov-note">木材、口粮、钥匙资源卡入基地仓库后，需在仓库“使用”才折入基地材料数字；散装木材与口粮仅在成功撤离时直接折入。</p>
             </div>`})}
-          <div class="doom-btns"><button class="ov-btn" data-act="goBase">回基地</button><button class="ov-btn ok" data-act="again">再出发</button></div>
-        </div>`, 'doom');
+        ` }), 'doom');
       UI.act('goBase', () => runtime.openBaseHub('deploy'));
       UI.act('again', () => runtime.openBaseHub('deploy'));
       UI.refresh(game);

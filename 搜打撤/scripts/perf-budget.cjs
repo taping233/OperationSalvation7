@@ -122,35 +122,36 @@ async function run() {
   const html = existsSync(path.join(outDir, 'index.html')) ? readFileSync(path.join(outDir, 'index.html'), 'utf8') : '';
   const initial = inspectInitialJs(outDir, html);
   failures.push(...initial.failures);
+  const gzipSizes = new Map();
+  const gzipBytes = file => {
+    if (!gzipSizes.has(file)) gzipSizes.set(file, gzipSync(readFileSync(file)).length);
+    return gzipSizes.get(file);
+  };
+  const maxGzip = files => files.reduce((max, file) => Math.max(max, gzipBytes(file)), 0);
+  const sumGzip = files => files.reduce((sum, file) => sum + gzipBytes(file), 0);
   const entryFiles = [...new Set([...files.filter(file => /[\\/]assets[\\/]js[\\/]index-[^\\/]+\.js$/.test(file)), ...initial.entryFiles])];
-  const entryGzip = entryFiles.filter(file => existsSync(file) && statSync(file).isFile())
-    .reduce((max, file) => Math.max(max, gzipSync(readFileSync(file)).length), 0);
+  const entryGzip = maxGzip(entryFiles.filter(file => existsSync(file) && statSync(file).isFile()));
   if (entryGzip > PERFORMANCE_BUDGETS.entryGzipBytesMax) {
     failures.push(`入口 JS gzip ${kib(entryGzip)} > ${kib(PERFORMANCE_BUDGETS.entryGzipBytesMax)}`);
   }
 
-  const initialJsGzip = initial.initialFiles.filter(file => existsSync(file) && statSync(file).isFile())
-    .reduce((sum, file) => sum + gzipSync(readFileSync(file)).length, 0);
+  const initialJsGzip = sumGzip(initial.initialFiles.filter(file => existsSync(file) && statSync(file).isFile()));
   if (initialJsGzip > PERFORMANCE_BUDGETS.initialJsGzipBytesMax) {
     failures.push(`首屏 JS gzip ${kib(initialJsGzip)} > ${kib(PERFORMANCE_BUDGETS.initialJsGzipBytesMax)}`);
   }
 
-  const featureFiles = files.filter(file => /[\\/]assets[\\/]js[\\/]battle\.view-[^\\/]+\.js$/.test(file));
-  const featureGzip = featureFiles.reduce((max, file) => Math.max(max, gzipSync(readFileSync(file)).length), 0);
-  if (!featureFiles.length) failures.push('未生成独立 battle.view feature chunk');
-  else if (featureGzip > PERFORMANCE_BUDGETS.featureChunkGzipBytesMax) {
-    failures.push(`战斗 feature gzip ${kib(featureGzip)} > ${kib(PERFORMANCE_BUDGETS.featureChunkGzipBytesMax)}`);
+  const featureGzip = inspectFeature('battle.view', '战斗', PERFORMANCE_BUDGETS.featureChunkGzipBytesMax);
+  const narrativeGzip = inspectFeature('vendor-narrative', '叙事', PERFORMANCE_BUDGETS.narrativeChunkGzipBytesMax);
+  function inspectFeature(name, label, limit) {
+    const pattern = new RegExp(`[\\\\/]assets[\\\\/]js[\\\\/]${name.replaceAll('.', '\\.')}-[^\\\\/]+\\.js$`);
+    const featureFiles = files.filter(file => pattern.test(file));
+    const bytes = maxGzip(featureFiles);
+    if (!featureFiles.length) failures.push(`未生成独立 ${name} feature chunk`);
+    else if (bytes > limit) failures.push(`${label} feature gzip ${kib(bytes)} > ${kib(limit)}`);
+    return bytes;
   }
 
-  const narrativeFiles = files.filter(file => /[\\/]assets[\\/]js[\\/]vendor-narrative-[^\\/]+\.js$/.test(file));
-  const narrativeGzip = narrativeFiles.reduce((max, file) => Math.max(max, gzipSync(readFileSync(file)).length), 0);
-  if (!narrativeFiles.length) failures.push('未生成独立 vendor-narrative feature chunk');
-  else if (narrativeGzip > PERFORMANCE_BUDGETS.narrativeChunkGzipBytesMax) {
-    failures.push(`叙事 feature gzip ${kib(narrativeGzip)} > ${kib(PERFORMANCE_BUDGETS.narrativeChunkGzipBytesMax)}`);
-  }
-
-  const cssFiles = files.filter(file => file.endsWith('.css'));
-  const cssGzip = cssFiles.reduce((sum, file) => sum + gzipSync(readFileSync(file)).length, 0);
+  const cssGzip = sumGzip(files.filter(file => file.endsWith('.css')));
   if (cssGzip > PERFORMANCE_BUDGETS.cssGzipBytesMax) {
     failures.push(`CSS gzip ${kib(cssGzip)} > ${kib(PERFORMANCE_BUDGETS.cssGzipBytesMax)}`);
   }

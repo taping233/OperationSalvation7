@@ -1,36 +1,40 @@
 /* Optional local terminal display; reward choices keep their existing layout and behavior. */
 .event-signal-puzzle { --signal-ink:#bad8cf; flex:none; min-width:0; color:#dbe7e1; border-top:1px solid #a4c9bd3b; text-align:left; }
-.event-signal-puzzle .signal-puzzle-entry { display:flex; align-items:center; gap:9px; padding:13px 0 2px; color:#c7d9d2; font:500 18px/1.5 var(--font-ui); cursor:pointer; list-style:none; }
-.event-signal-puzzle .signal-puzzle-entry::-webkit-details-marker { display:none; }
-.event-signal-puzzle .signal-puzzle-entry small { color:#9eafa8; font-size:14px; }
-.event-signal-puzzle .signal-puzzle-entry > span { display:grid; place-items:center; flex:none; width:24px; height:24px; margin-left:auto; font:400 22px/1 var(--font-ui); }
-.event-signal-puzzle .signal-puzzle-entry > span::before { content:'＋'; }
-.event-signal-puzzle[open] .signal-puzzle-entry > span::before { content:'−'; }
-.event-signal-puzzle .signal-puzzle-screen { padding-top:12px; }
-.event-signal-puzzle .signal-puzzle-rule { margin:0; font:400 16px/1.5 var(--font-ui); color:#c6d7d0; }
-.event-signal-puzzle .signal-puzzle-board { position:relative; width:100%; max-width:340px; aspect-ratio:320/220; margin:4px auto; overflow:hidden; background:radial-gradient(ellipse,#9ec7af0c,transparent 75%); }
-.event-signal-puzzle .signal-puzzle-wires { display:block; width:100%; height:100%; overflow:visible; }
-.event-signal-puzzle .signal-puzzle-wires path,.event-signal-puzzle .signal-terminal rect,.event-signal-puzzle .signal-drone circle { fill:none; stroke:#85a399; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-.event-signal-puzzle .signal-puzzle-wires .signal-wire { stroke-width:3; }
-.event-signal-puzzle .signal-puzzle-wires text { fill:#bdcfc8; font:500 14px var(--font-ui); }
-.event-signal-puzzle .signal-puzzle-tile { position:absolute; box-sizing:border-box; left:28.75%; top:var(--signal-y); width:20%; height:29.09091%; margin:0; padding:0; transform:translateY(-50%); border:1px solid #a9c7b65e; border-radius:7px; background:#142c2df0; color:var(--signal-ink); cursor:pointer; box-shadow:inset 0 0 12px #a4d9c40c; }
-.event-signal-puzzle .signal-puzzle-tile svg { display:block; width:100%; height:100%; overflow:visible; transform:rotate(var(--signal-angle)); transition:transform .18s ease-out; }
-.event-signal-puzzle .signal-puzzle-tile path { fill:none; stroke:currentColor; stroke-width:4; stroke-linejoin:round; }
-.event-signal-puzzle .signal-puzzle-tile circle { fill:currentColor; }
-.event-signal-puzzle .signal-puzzle-tile:hover { background:#244541; border-color:#c5dfc9; }
-.event-signal-puzzle .signal-puzzle-tile[aria-disabled=true] { cursor:default; border-color:#c5dfc9; }
-.event-signal-puzzle .signal-puzzle-tile[aria-disabled=true]:hover { background:#142c2df0; }
-.event-signal-puzzle .signal-puzzle-bottom { display:flex; align-items:center; gap:12px; min-height:34px; }
-.event-signal-puzzle .signal-puzzle-status { flex:1; color:#a9c4b8; font:400 14px/1.5 var(--font-ui); }
-.event-signal-puzzle .signal-puzzle-close { flex:none; padding:7px 12px; border:1px solid #a3c6ba50; border-radius:3px; background:transparent; color:#cedfd5; font:500 15px/1.3 var(--font-ui); cursor:pointer; }
-.event-signal-puzzle :is(summary,button):focus-visible { outline:2px solid #e9db9f; outline-offset:3px; }
-.event-signal-puzzle :is(summary,.signal-puzzle-close):focus-visible { outline-offset:-2px; }
-.event-signal-puzzle .signal-puzzle-pulse { position:absolute; left:9.375%; top:var(--signal-start-y); width:7px; height:7px; border-radius:50%; background:#f5e8aa; box-shadow:0 0 9px #eedd9e; opacity:0; pointer-events:none; transform:translate(-50%,-50%); }
-.event-signal-puzzle.is-connected { --signal-ink:#e7e9b7; }
-.event-signal-puzzle.is-connected .signal-wire { stroke:#cedca5; }
-.event-signal-puzzle.is-connected .signal-drone-lamp { fill:#e6e3a8; stroke:#e6e3a8; }
-.event-signal-puzzle.is-connected .signal-puzzle-status { color:#e4e7b7; }
-.event-signal-puzzle.signal-just-connected .signal-puzzle-pulse { animation:signal-puzzle-travel .9s ease-in-out 1; }
+.event-signal-puzzle .signal-puzzle-entry{
+& { display:flex; align-items:center; gap:9px; padding:13px 0 2px; color:#c7d9d2; font:500 18px/1.5 var(--font-ui); cursor:pointer; list-style:none; }
+&::-webkit-details-marker { display:none; }
+& small { color:#9eafa8; font-size:14px; }
+& > span { display:grid; place-items:center; flex:none; width:24px; height:24px; margin-left:auto; font:400 22px/1 var(--font-ui); }
+& > span::before { content:'＋'; }}
+.event-signal-puzzle{
+&[open] .signal-puzzle-entry > span::before { content:'−'; }
+& .signal-puzzle-screen { padding-top:12px; }
+& .signal-puzzle-rule { margin:0; font:400 16px/1.5 var(--font-ui); color:#c6d7d0; }
+& .signal-puzzle-board { position:relative; width:100%; max-width:340px; aspect-ratio:320/220; margin:4px auto; overflow:hidden; background:radial-gradient(ellipse,#9ec7af0c,transparent 75%); }
+& .signal-puzzle-wires { display:block; width:100%; height:100%; overflow:visible; }
+& .signal-puzzle-wires path,& .signal-terminal rect,& .signal-drone circle { fill:none; stroke:#85a399; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+& .signal-puzzle-wires .signal-wire { stroke-width:3; }
+& .signal-puzzle-wires text { fill:#bdcfc8; font:500 14px var(--font-ui); }}
+.event-signal-puzzle .signal-puzzle-tile{
+& { position:absolute; box-sizing:border-box; left:28.75%; top:var(--signal-y); width:20%; height:29.09091%; margin:0; padding:0; transform:translateY(-50%); border:1px solid #a9c7b65e; border-radius:7px; background:#142c2df0; color:var(--signal-ink); cursor:pointer; box-shadow:inset 0 0 12px #a4d9c40c; }
+& svg { display:block; width:100%; height:100%; overflow:visible; transform:rotate(var(--signal-angle)); transition:transform .18s ease-out; }
+& path { fill:none; stroke:currentColor; stroke-width:4; stroke-linejoin:round; }
+& circle { fill:currentColor; }
+&:hover { background:#244541; border-color:#c5dfc9; }
+&[aria-disabled=true] { cursor:default; border-color:#c5dfc9; }
+&[aria-disabled=true]:hover { background:#142c2df0; }}
+.event-signal-puzzle{
+& .signal-puzzle-bottom { display:flex; align-items:center; gap:12px; min-height:34px; }
+& .signal-puzzle-status { flex:1; color:#a9c4b8; font:400 14px/1.5 var(--font-ui); }
+& .signal-puzzle-close { flex:none; padding:7px 12px; border:1px solid #a3c6ba50; border-radius:3px; background:transparent; color:#cedfd5; font:500 15px/1.3 var(--font-ui); cursor:pointer; }
+& :is(summary,button):focus-visible { outline:2px solid #e9db9f; outline-offset:3px; }
+& :is(summary,.signal-puzzle-close):focus-visible { outline-offset:-2px; }
+& .signal-puzzle-pulse { position:absolute; left:9.375%; top:var(--signal-start-y); width:7px; height:7px; border-radius:50%; background:#f5e8aa; box-shadow:0 0 9px #eedd9e; opacity:0; pointer-events:none; transform:translate(-50%,-50%); }
+&.is-connected { --signal-ink:#e7e9b7; }
+&.is-connected .signal-wire { stroke:#cedca5; }
+&.is-connected .signal-drone-lamp { fill:#e6e3a8; stroke:#e6e3a8; }
+&.is-connected .signal-puzzle-status { color:#e4e7b7; }
+&.signal-just-connected .signal-puzzle-pulse { animation:signal-puzzle-travel .9s ease-in-out 1; }}
 @keyframes signal-puzzle-travel {
   0% { opacity:0; left:9.375%; top:var(--signal-start-y); }
   10% { opacity:1; }

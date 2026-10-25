@@ -1,3 +1,4 @@
+import { chestBaseMocks } from './helpers/environment-fixtures.js';
 import { continueChestRewards } from './helpers/chest-actions.js';
 import { afterEach, expect, it, vi } from 'vitest';
 
@@ -10,9 +11,10 @@ it.each([[true, true, false], [true, false, false], [false, true, false], [false
   const overlay = document.getElementById('overlay');
   const ovBody = document.getElementById('ovBody');
   const actions = {};
+  let pendingAction;
   ovBody.addEventListener('click', event => {
     const button = event.target.closest('[data-act]');
-    if (button) actions[button.dataset.act]?.(button.dataset);
+    if (button) pendingAction=actions[button.dataset.act]?.(button.dataset);
   });
   const card = { id: 'queue-card', name: '队列测试卡', rarity: '古朴', type: '法术', desc: '', cost: 0 };
   const otherCard = { ...card, id:'queue-card-2', name:'队列测试卡二' };
@@ -35,31 +37,28 @@ it.each([[true, true, false], [true, false, false], [false, true, false], [false
     Cards: { RARITIES:['古朴','稀有','史诗','传说'], all:() => [card, otherCard], randomDropCard:dropCard,
       pickOfRarity:() => card, classPool:() => [], rarityOf:item => item.rarity,
       sellPrice:() => 1, cardHTML:() => '<div>队列测试卡</div>' },
-    Base: { data:{eggPity:0,eggBattles:0}, save:vi.fn(), petEggDropChance:() => 0,
-      recordPetEggChestResult:vi.fn(), bagCap:() => 10, isSha:() => false },
-    Sound: { sfx:vi.fn() }, Icons: { rich:html => html },
+    ...chestBaseMocks(() => vi),
   };
   const { SDT } = await import('../game/src/run/chests.js');
   SDT.Chests.open(game, [{kind:'small'}, {kind:'small'}], done);
   let claimed = 0;
-  for (const [index, take] of [first, second].entries()) {
-    ovBody.querySelector('[data-act="chestNext"]').click();
-    ovBody.querySelector('[data-act="chestReveal"]').click();
+  for (const take of [first, second]) {
+    expect(ovBody.querySelector('[data-eps-search]')).toBeNull(); await pendingAction;
     if (take) {
-      ovBody.querySelector('[data-act="chestTake1"]').click();
+      ovBody.querySelector('[data-act="chestTake1"]').click(); await pendingAction;
       claimed++;
     } else {
-      ovBody.querySelector('[data-act="chestSkip"]').click();
-      ovBody.querySelector('[data-act="chestLeave"]').click();
+      ovBody.querySelector('[data-act="chestSkip"]').click(); await pendingAction;
+      ovBody.querySelector('[data-act="chestLeave"]').click(); await pendingAction;
     }
-    if (ovBody.querySelector('[data-act="chestClosePicker"]')) actions.chestClosePicker();
-    expect.soft(ovBody.querySelector('.cqo-notice').textContent).toBe('');
+
+    expect(ovBody.querySelector('.reward-notice')).toBeNull();
     expect(ovBody.querySelector('.cqo-receipt')).toBeNull();
     expect(game.grantCard).toHaveBeenCalledTimes(claimed);
-    expect(game.gainCoins).toHaveBeenCalledTimes(index + 1);
+    expect(game.gainCoins).toHaveBeenCalledTimes(2);
   }
-  expect(ovBody.querySelectorAll('.cqo-box-complete')).toHaveLength(2);
-  continueChestRewards(actions);
+  expect(ovBody.querySelector('[data-act="chestContinue"]')).not.toBeNull();
+  await continueChestRewards(actions);
   expect(done).toHaveBeenCalledTimes(1);
   expect(game.state).toBe('idle');
 });

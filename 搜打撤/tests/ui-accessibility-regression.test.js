@@ -10,7 +10,7 @@ describe('核心卡牌交互的键盘与读屏契约', () => {
     expect(cards).toContain('<button type="button" class="lib-cardwrap studio-photo');
     expect(cards).toContain('aria-label="查看照片：');
     expect(cards).toContain('let libEditMode = false');
-    expect(cards).toContain('game.devMode && libEditMode');
+    expect(cards).toContain('const editorTools = game.devMode ?');
     expect(cards).toContain("libAct('libEditMode'");
     expect(cards).toMatch(/function libAct\(name, callback\)\s*\{[^}]*isCurrentLibPage\(session\)[\s\S]*?UI\.act\(name, action\);/);
     expect(cards).toMatch(/const editorTools = game\.devMode/);

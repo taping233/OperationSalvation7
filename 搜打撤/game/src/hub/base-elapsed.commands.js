@@ -1,7 +1,7 @@
 // @ts-check
 
-/** @typedef {{ stats: { playSeconds?: unknown } }} BaseElapsedState */
-/** @typedef {{ read: () => BaseElapsedState, persistPlaySeconds: (next: number) => boolean }} BaseElapsedPorts */
+/** @typedef {{ stats: { playSeconds?: unknown, playTimeCheckpoint?: {runId:string, elapsed:number} } }} BaseElapsedState */
+/** @typedef {{ read: () => BaseElapsedState, persistPlaySeconds: (next: number, checkpoint?: {runId:string, elapsed:number}|null) => boolean }} BaseElapsedPorts */
 /** @typedef {{ changed: false, delta: 0, checkpoint: number }} ElapsedSyncNoop */
 /** @typedef {{ changed: true, delta: number, checkpoint: number, persisted: boolean }} ElapsedSyncChanged */
 /** @typedef {ElapsedSyncNoop | ElapsedSyncChanged} ElapsedSyncResult */
@@ -16,14 +16,16 @@
  */
 export function createBaseElapsedCommands({ read, persistPlaySeconds }) {
   /** @param {number} elapsed @param {number} elapsedSynced @returns {ElapsedSyncResult} */
-  function syncPlayTime(elapsed, elapsedSynced) {
+  function syncPlayTime(elapsed, elapsedSynced, runId = null) {
     const now = Math.max(0, Number(elapsed) || 0);
-    const previous = Math.max(0, Number(elapsedSynced) || 0);
+    const stored = read().stats.playTimeCheckpoint;
+    const previous = Math.max(0, Number(runId && stored?.runId === runId ? stored.elapsed : elapsedSynced) || 0);
     const delta = Math.max(0, now - previous);
-    if (!(delta > 0)) return { changed: false, delta: 0, checkpoint: previous };
+    const establish = runId && stored?.runId !== runId;
+    if (!(delta > 0) && !establish) return { changed: false, delta: 0, checkpoint: previous };
 
     const current = Math.max(0, Number(read().stats.playSeconds) || 0);
-    const persisted = persistPlaySeconds(current + delta);
+    const persisted = persistPlaySeconds(current + delta, runId ? { runId, elapsed: now } : null);
     return { changed: true, delta, checkpoint: now, persisted };
   }
 

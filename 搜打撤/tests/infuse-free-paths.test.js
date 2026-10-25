@@ -1,10 +1,10 @@
+import { battleRules, playerFields, acquireRuleFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '', TYPE_ART: {} } };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 30, battleHandMax: 99, bossDeckSize: 30, starterSha: 0,
-    battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: {},
+  rules: { ...battleRules(30, 99, 30, 0, 5, 1) }, items: {},
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession, viewApi } = await import('../game/src/battle/core/battle.core.js');
@@ -37,8 +37,7 @@ async function drain() {
 async function begin(cards, boss = false) {
   const game = {
     ownedCards: cards.map((card, index) => ({ uid: `free-${index}`, card })),
-    hp: 10, maxHp: 1000, atk: 0, spellPower: 0, coins: 0,
-    myClass: '降临者', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(10, 1000, 0, 0, '降临者', null),
     log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     addItem() {}, onBattleEnd() {},
   };
@@ -127,11 +126,10 @@ describe('其他免注能来源与绕过手动出牌的结算路径', () => {
     const heal = PURE_HEAL;
     const game = await begin([]);
     R.set$mode('boss');
-    R.set$drawPile([]); // 隔离本测试的显式洗入牌，不带普通99库。
+    R.set$drawPile([]); // 隔离本测试的显式洗入牌，不带普通10库。
     const source = {
       id: 'free-deck-source', name: '免注能洗入测试', type: '法术', cost: 0, desc: '',
-      rules: { version: 1, battle: { target: { side: 'self', area: false } },
-        triggers: { onPlay: [{ op: 'acquire', n: 1, pool: { kind: '注能' }, dest: 'deck', act: 'noInfuse' }] } },
+      rules: { ...acquireRuleFields(1, '注能', 'deck', 'noInfuse') },
     };
     vi.spyOn(C, 'all').mockReturnValue([heal]);
     E.resolveCard(source, null, false, 0, null);

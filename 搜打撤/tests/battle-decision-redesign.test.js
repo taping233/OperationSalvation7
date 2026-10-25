@@ -1,10 +1,10 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { createBattleDecisionPresenter } from '../game/src/battle/view/battle.decision-shell.js';
 import { battlePileBodyHTML, battleChoiceBodyHTML, battleHandSelectBodyHTML, battleDiscoverLifecycleNote } from '../game/src/battle/view/battle.decision-content.js';
 import { battleDiscoverBodyHTML } from '../game/src/battle/view/battle.discover-view.js';
+import { readCssSource } from './helpers/css-source.js';
 
 const face = card => `<div class="hs-card" data-card-id="${card.id}">${card.name}</div>`;
 const cards = [
@@ -15,7 +15,7 @@ const cards = [
 const snapshot = {battleToken:12,turn:9,energy:3,maxEnergy:3,opts:{isBoss:true}};
 function setup() {
   document.body.innerHTML='<div id="overlay"><div class="card"><div id="ovBody"></div></div></div>';
-  const UI={el:{ovBody:document.getElementById('ovBody')},showOverlay:vi.fn((_title,html)=>{UI.el.ovBody.innerHTML=html;})};
+  const UI={el:{ovBody:document.getElementById('ovBody')},_acts:{},act(name,fn){this._acts[name]=fn;},showOverlay:vi.fn((_title,html)=>{UI.el.ovBody.innerHTML=html;})};
   return {UI,show:createBattleDecisionPresenter({UI,getSnapshot:()=>snapshot,R:()=>({battleEnergy:3})})};
 }
 afterEach(()=>document.body.replaceChildren());
@@ -25,10 +25,10 @@ describe('统一战斗二级界面展示契约',()=>{
     const before=JSON.stringify(cards), {show}=setup();
     const {html,stacks}=battlePileBodyHTML({cards,cardHTML:face,kind,isBoss:true});
     show('牌堆',html,true,snapshot);
-    expect(Object.fromEntries(stacks.map(s=>[s.card.id,s.count]))).toEqual({same:2,other:1});
-    expect(stacks.find(s=>s.card.id==='same').card).toBe(cards[0].card);
+    expect(Object.fromEntries(stacks.map(s=>[s.card.id,s.count]))).toEqual(kind==='deck'?{same:1,other:1}:{same:2,other:1});
+    expect(stacks.find(s=>s.card.id==='same').card).toEqual(cards[0].card);
     expect(battlePileBodyHTML({cards:[...cards].reverse(),cardHTML:face,kind}).stacks.map(s=>s.key)).toEqual(stacks.map(s=>s.key));
-    expect([...document.querySelectorAll('.battle-pile-card')].map(b=>b.dataset.i)).toEqual(['0','1']);
+    expect([...document.querySelectorAll('.battle-pile-card')].map(b=>b.dataset.i)).toEqual(kind==='deck'?['0','1','2']:['0','1']);
     expect(document.querySelector('.battle-decision-actions button').dataset.act).toBe(kind==='deck'?'btDeckBack':'btGraveBack');
     expect(document.querySelector('.battle-pile-total').textContent).toBe('3 张');
     expect(document.querySelector('.battle-decision-head').textContent).not.toMatch(/能量|回合/);
@@ -95,14 +95,15 @@ describe('统一战斗二级界面展示契约',()=>{
     expect(document.querySelector('.battle-decision').dataset.decisionKind).toBe('hand-select');
     expect(document.querySelector('.battle-decision-actions [data-act="btPickHandSkip"]')).not.toBeNull();
   });
-  it('发现详情是独立按钮，原选择凭据及顺序不变',()=>{
+  it('发现候选显示完整卡面，原选择凭据及顺序不变',()=>{
     const {show}=setup();
     show('发现',battleDiscoverBodyHTML({candidates:cards.map(entry=>({card:entry.card})),cardHTML:face,action:'选择 1 张免费施放',remaining:1,pageToken:'ticket'}),'discover',snapshot);
     const picks=[...document.querySelectorAll('[data-act="btDiscover"]')];
     expect(picks).toHaveLength(3);expect(picks.map(b=>b.dataset.i)).toEqual(['0','1','2']);
     expect(picks.every(b=>b.dataset.discoverPage==='ticket')).toBe(true);
     expect(picks.every(b=>!b.querySelector('button'))).toBe(true);
-    expect(document.querySelectorAll('[data-act="btDecisionInspect"]')).toHaveLength(3);
+    expect(picks.every(button=>button.querySelector('.hs-card'))).toBe(true);
+    expect(document.querySelector('[data-act="btDiscoverConfirm"]')).not.toBeNull();
   });
   it('普通和首脑的发现牌统一进入消耗牌堆，锦囊取出保留原支付规则',()=>{
     const boss=battleDiscoverLifecycleNote({act:'play',isBoss:true});
@@ -125,7 +126,7 @@ describe('统一战斗二级界面展示契约',()=>{
     expect(document.querySelector('.battle-decision-content').scrollTop).toBe(0);
   });
   it('新共用壳显式解除ovBody窄上限并保持动作栏独立，卡宽不挤压成文本列表',()=>{
-    const css=postcss.parse(readFileSync('game/css/battle-decision.css','utf8'));
+    const css=postcss.parse(readCssSource('game/css/battle-decision.css','utf8'));
     const rules=[];css.walkRules(r=>rules.push({selector:r.selector,decl:Object.fromEntries(r.nodes.filter(n=>n.type==='decl').map(n=>[n.prop,n.value]))}));
     const body=rules.find(r=>r.selector.endsWith('> #ovBody'));
     expect(body.decl).toMatchObject({width:'100%','max-width':'none',overflow:'hidden','min-width':'0'});

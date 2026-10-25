@@ -3,7 +3,7 @@
  *
  * 供体验线路线面板做「常规/高危/精英池」差异化提示。口径与引擎一致：
  * 层回退镜像 buildEncounter（game.run.scenes.js:204 encounters[layerIdx] || [0]）；
- * 精英概率=enc.elite.chance（selectEncounterSpec 的进格骰口径，这里只揭示不掷骰）。
+ * 固定精英池概率为1，否则沿用 enc.elite.chance；这里只揭示不掷骰。
  * 纯只读零依赖：不 import 门面、不消费随机流、不写任何状态。
  * 敌人名经 MAP.monsters 映射，仅供展示；不做强度估算（避免制造隐性玩法口径）。
  * ============================================================ */
@@ -19,8 +19,8 @@ export function encounterPoolMeta(enc, monsters) {
     strategy: enc.strategy || '',
     entryCount: entries.length,
     groupCount: groups.length,
-    eliteChance: enc.elite && Number.isFinite(enc.elite.chance) ? enc.elite.chance : 0,
-    eliteEnemies: enc.elite ? (enc.elite.pool || []).map(id => nameOf(monsters, id)) : [],
+    eliteChance: enc.guaranteedElite?.length ? 1 : enc.elite && Number.isFinite(enc.elite.chance) ? enc.elite.chance : 0,
+    eliteEnemies: (enc.guaranteedElite || enc.elite?.pool || []).map(id => nameOf(monsters, id)),
     entries: entries.map(e => ({ id: e && e.id, name: nameOf(monsters, e && e.id), size: [...(e && e.size || [])] })),
     groups: groups.map(g => ({ id: g && g.id, enemies: (g && g.enemyIds || []).map(id => nameOf(monsters, id)) })),
   };

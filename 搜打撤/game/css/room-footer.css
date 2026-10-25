@@ -1,0 +1,13 @@
+/* The shared header overlays rooms without reserving a separate strip. */
+body:not(.lobby):has(#runTopBar:not([hidden])) #overlay{
+& :is(.shop-market,.sc-fire) .pg-head{padding-top:0;}}
+body #overlay{
+& .room-footer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) auto;align-items:center;gap:20px;flex:none;box-sizing:border-box;min-height:88px;padding:16px 24px;border-top:1px solid #afc1bb40;background:#17252b;color:#dbe7e1;}
+& .room-footer-back,& .room-footer-info,& .room-footer-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;min-width:0;}
+& .room-footer-actions{justify-content:flex-end;}
+& .room-footer-info{font-size:20px;line-height:1.45;}}
+body #overlay .room-footer{
+& button{min-height:52px;padding:10px 20px;border:1px solid #adc8c15c;border-radius:2px;background:#273c42;color:#e7eee7;font:500 22px/1.35 var(--font-ui);cursor:pointer;}
+& .room-proceed{min-width:190px;border-color:#cfbb88;background:#cfbb88;color:#17252b;font-weight:650;}
+& button:focus-visible{outline:2px solid #d3eeeb;outline-offset:4px;}
+& button:disabled{opacity:.55;cursor:default;}}

@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 const game = { state: 'title', devMode: false };
 vi.mock('../game/src/run/game.session.js', () => ({ game }));
 
-async function setup(catalog = null) {
+async function setup(catalog = null, { curtain = false } = {}) {
   vi.resetModules();
   vi.useFakeTimers();
   game.state = 'title'; game.devMode = false;
@@ -20,6 +20,7 @@ async function setup(catalog = null) {
   });
   document.body.innerHTML = '<div id="overlay" hidden><div id="ovBody"></div></div>';
   document.body.className = '';
+  if (curtain) document.body.insertAdjacentHTML('beforeend', '<div class="page-loading page-loading--city"></div>');
   const overlay = document.getElementById('overlay'), body = document.getElementById('ovBody');
   const cards = catalog || Array.from({ length: 140 }, (_, i) => ({ id: `fixture-${i}`, name: `照片${i}`, type: '法术', rarity: '古朴', desc: `合成说明${i}`, cost: 1 }));
   const UI = {
@@ -43,6 +44,38 @@ async function setup(catalog = null) {
 afterEach(() => { document.dispatchEvent(new CustomEvent('sdt-overlay-close')); vi.clearAllTimers(); vi.useRealTimers(); vi.unstubAllGlobals(); document.body.replaceChildren(); document.body.className = ''; });
 
 describe('照相馆真实实现生命周期回归', () => {
+  it('过场期间只挂首窗，过场结束才恢复远处瓦片与分批壳', async () => {
+    const { page, frames, observers } = await setup(null, { curtain:true });
+    const root = document.querySelector('.card-library-page');
+    const grid = document.getElementById('libGrid');
+    const initial = grid.children.length;
+    frames.splice(0).forEach(callback => callback());
+    expect(grid.children.length).toBe(initial);
+    expect(observers.filter(observer => observer.targets.has(grid.querySelector('.lib-ph')))).toHaveLength(0);
+    page.finishPhotoStudioEntry(document.createElement('div'));
+    frames.splice(0).forEach(callback => callback());
+    expect(grid.children.length).toBe(initial);
+    page.finishPhotoStudioEntry(root);
+    frames.splice(0).forEach(callback => callback());
+    expect(grid.children.length).toBeGreaterThan(initial);
+  });
+
+  it('首屏照片主动赋图源，不等待观察器派发；取消后释放准备', async () => {
+    const { page } = await setup(null, { curtain:true });
+    const grid = document.getElementById('libGrid');
+    const tile = grid.firstElementChild;
+    const image = tile.querySelector('img');
+    grid.getBoundingClientRect = () => ({ top:0, bottom:100 });
+    tile.getBoundingClientRect = image.getBoundingClientRect = () => ({ top:1, bottom:80 });
+    expect(image.hasAttribute('src')).toBe(false);
+    const controller = new AbortController();
+    const ready = page.preparePhotoStudioEntry(controller.signal);
+    expect(image.getAttribute('src')).toBe('/fixture-0.png');
+    expect(image.loading).toBe('eager');
+    controller.abort();
+    await ready;
+  });
+
   it('外部换页释放旧观察器，旧筛选Escape不吞掉新页按键', async () => {
     const { UI, observers, body } = await setup();
     const choice = document.querySelector('.studio-choice');

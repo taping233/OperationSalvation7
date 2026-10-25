@@ -1,6 +1,6 @@
 // @ts-check
 import { clone, esc } from '../../core/shared.js';
-import { buildDiscoverPool, pickRandomDiscoverCandidate } from './battle.discover-candidates.js';
+import { buildDiscoverPool, isDiscoverClassAllowed, pickRandomDiscoverCandidate } from './battle.discover-candidates.js';
 import {
   buildExplicitDiscoverState,
   buildRandomDiscoverState,
@@ -46,6 +46,10 @@ import {
  */
 export function createBattleDiscoverFlow(ports) {
   const { cards, interaction, random, battle, effects, output } = ports;
+  let roundSerial = 0;
+  /** @param {NonNullable<DiscoveringState>} state */
+  const open = state => interaction.set({ ...state, roundId: ++roundSerial, canCancel: true,
+    cancelLabel: '结束发现', sourceCommit: 'committed' });
 
   /**
    * Public compatibility path for one-off discovery calls: catalog is reread on
@@ -72,6 +76,30 @@ export function createBattleDiscoverFlow(ports) {
     const job = jobs.shift();
     if (!job) return;
 
+    if (job.fixedOptions?.length) {
+      // Cached generated cards obey the same profession gate as fresh draws.
+      // Deck-bottom and stored cards select existing owned instances.
+      const options = job.deckBottom || job.act === 'pouch' ? job.fixedOptions
+        : job.fixedOptions.filter(card => isDiscoverClassAllowed(card, {
+          pred:job.pred, rarity:job.rarity, otherCls:!!job.otherCls,
+        }));
+      if (typeof job.confirmedIndex === 'number' && Number.isInteger(job.confirmedIndex)) {
+        const selected = job.fixedOptions[job.confirmedIndex];
+        const index = selected ? options.indexOf(selected) : -1;
+        if (index < 0) {
+          output.log('[[icon:cross]] 该候选不符合当前发现卡池，未获得卡牌', 'warn');
+          return;
+        }
+        open(buildRandomDiscoverState(job, options));
+        pickDiscover(index);
+        return;
+      }
+      if (options.length) {
+        open(buildRandomDiscoverState(job, options));
+        interaction.requestRender();
+        return;
+      }
+    }
     /** @type {DiscoverCardPredicate | null} */
     const legacyPred = job.rarity ? (card => card.rarity === job.rarity)
       : job.otherCls ? (card => card.rarity === '职业' && !!card.cls && card.cls !== battle.currentClass())
@@ -98,7 +126,7 @@ export function createBattleDiscoverFlow(ports) {
     // Explicit candidates are authoritative and keep their original card references.
     if (job.explicit && job.explicit.length) {
       const explicitJob = { ...job, explicit: job.explicit };
-      interaction.set(buildExplicitDiscoverState(explicitJob));
+      open(buildExplicitDiscoverState(explicitJob));
       interaction.requestRender();
       return;
     }
@@ -137,7 +165,7 @@ export function createBattleDiscoverFlow(ports) {
       output.log('（没有符合条件的卡牌可发现）', 'dim');
       return;
     }
-    interaction.set(buildRandomDiscoverState(job, options));
+    open(buildRandomDiscoverState(job, options));
     interaction.requestRender();
   }
 
@@ -278,5 +306,20 @@ export function createBattleDiscoverFlow(ports) {
     interaction.requestRender();
   }
 
-  return { randomDiscoverCard, processDiscoverQueue, pickDiscover };
+  /** @param {string | number | null} [expectedRoundId] */
+  function cancelDiscover(expectedRoundId) {
+    const state = interaction.get();
+    if (!state || (expectedRoundId != null && state.roundId !== expectedRoundId)
+      || battle.battleActive && !battle.battleActive()) return false;
+    interaction.set(null);
+    if ('deckBottom' in state && state.deckBottom && state.deckBottomUids?.length) effects.returnToDeckBottom(state.deckBottomUids);
+    // Previously confirmed temporary rewards still expire even when later picks are declined.
+    if ('tempUids' in state && state.consumeTempAtTurn && state.tempUids?.length)
+      effects.enqueueDelayed({ special: 'consumeTemps', uids: [...state.tempUids], cardName: '江湖救急' });
+    output.log('[[icon:question]] 已结束本次发现，放弃尚未确认的奖励；此前用牌与已结算效果保留', 'sys');
+    interaction.requestRender();
+    return true;
+  }
+
+  return { randomDiscoverCard, processDiscoverQueue, pickDiscover, cancelDiscover };
 }

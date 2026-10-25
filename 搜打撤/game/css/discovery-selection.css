@@ -1,0 +1,48 @@
+/* This component owns its two action columns across decision and reward shells. */
+body #overlay .card .ov-btns.discovery-selection-actions{
+& {
+  display:flex; flex-wrap:nowrap; justify-content:space-between; align-items:stretch;
+  box-sizing:border-box; width:100%; min-width:0; gap:1rem; margin:0;
+}
+& > .ov-btn[data-act][data-cancel] {
+  flex:0 1 auto; width:auto; min-width:0; max-width:calc(50% - .5rem); white-space:normal;
+}
+& > button:first-child { margin-right:auto; }
+& > button:last-child { margin-left:auto; }}
+/* Reward shells normally reserve an auto-width right lane for one proceed button.
+   A two-sided selector instead owns a full-width action row below its help text. */
+body #overlay .card .room-reward .reward-foot.room-footer{
+&:has(.discovery-selection-actions) {
+  grid-template-columns:minmax(0,1fr);
+}
+& .room-footer-actions:has(.discovery-selection-actions) {
+  width:100%; min-width:0; justify-content:stretch;
+}}
+/* A single quiet frame and explicit mark express business selection. Keyboard
+   focus stays on the real button and can move without changing that selection. */
+body #overlay .card button[data-discovery-option]{
+& {
+  --discover-accent:#c5e3ed;
+  position:relative; overflow:visible;
+}
+& > .discovery-selection-frame {
+  position:absolute; inset:0; z-index:3; pointer-events:none; box-sizing:border-box;
+  border-radius:inherit; opacity:0; transition:opacity 120ms ease-out;
+}
+& > .discovery-selection-mark {
+  position:absolute; right:8px; top:8px; z-index:4; padding:3px 10px;
+  pointer-events:none; border:1px solid #cbb57c; border-radius:3px; background:#302b20;
+  color:#fff0bb; font:650 16px/1.35 var(--font-ui,sans-serif); white-space:nowrap; opacity:0; transition:opacity 120ms ease-out;
+}
+&[data-discovery-selected="true"][aria-pressed="true"] > .discovery-selection-frame {
+  opacity:1; border:2px solid #cbb57c;
+}
+&[data-discovery-selected="true"][aria-pressed="true"] > .discovery-selection-mark { opacity:1; }
+&:focus-visible {
+  outline:3px solid var(--discover-accent); outline-offset:6px;
+}}
+[data-discovery-busy="true"] .discovery-selection-actions { opacity:.7; }
+body.reduce-motion [data-discovery-option] > :is(.discovery-selection-frame,.discovery-selection-mark) { transition:none; }
+@media (prefers-reduced-motion:reduce) {
+  [data-discovery-option] > :is(.discovery-selection-frame,.discovery-selection-mark) { transition:none; }
+}

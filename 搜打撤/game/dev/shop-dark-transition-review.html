@@ -1,0 +1,15 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>商店暗色转场复核</title>
+<style>body{margin:0;background:#18272d;color:#e4e3dc;font:20px system-ui}main{padding:10vh}button{font:inherit;padding:12px}#cover{position:fixed;inset:0;pointer-events:none}pre{white-space:pre-wrap}</style>
+<main><h1>商店暗色短转场</h1><button id="play">播放商店转场</button><pre id="result">等待播放</pre></main><div id="cover"></div>
+<script type="module">
+import {createSilentNodeCut,prepareSilentFilm,silentFilmRemaining} from '../src/ui/silent-node-film.js';
+import {revealTransition} from '../src/ui/transition-handoff.js';
+const host=document.querySelector('#cover'),result=document.querySelector('#result');
+document.querySelector('#play').onclick=async()=>{
+ const cover=document.createElement('div');cover.className='page-loading--city';cover.style.cssText='position:absolute;inset:0';
+ const cut=createSilentNodeCut('shop');cover.append(cut);host.replaceChildren(cover);await prepareSilentFilm(cut);
+ result.textContent=JSON.stringify({background:getComputedStyle(cut).backgroundColor,kind:cut.dataset.filmKind,motion:cut.querySelector('[data-film-motion]').dataset.filmMotion});
+ await new Promise(resolve=>setTimeout(resolve,silentFilmRemaining(cut)));await revealTransition(cover);cover.remove();
+ result.textContent+='\n已完成暗色淡出';
+};
+</script></html>

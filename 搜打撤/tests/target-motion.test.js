@@ -86,7 +86,7 @@ it('applies reduced motion immediately and settles a live transition on preferen
   const { element, run, motion, reduce } = setup();
   const old = motion.retargetVisual(element, { opacity:1 });
   reduce(); motion.flush();
-  expect(await old.finished).toBe(false);
+  expect(await old.finished).toBe(true);
   expect(element.style.opacity).toBe('1');
   const next = motion.retargetVisual(element, { opacity:.8, y:0 });
   expect(await next.finished).toBe(true);

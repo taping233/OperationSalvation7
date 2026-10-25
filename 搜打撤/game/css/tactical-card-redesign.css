@@ -1,19 +1,16 @@
 /* 仅保留战斗宿主尺寸和队友立绘；卡面由 card-layout-selected.css 统一。 */
 
 /* Full ally portraits keep the existing slots, names and target behaviour. */
-body[data-ui-cover-context='ordinary'] #overlay .card.battle .sts-hand .hs-card {
+body[data-ui-cover-context='ordinary'] #overlay{
+& .card.battle .sts-hand .hs-card {
   width: 10em !important;
   font-size: 14px !important;
 }
-body[data-ui-cover-context='ordinary'] #overlay .card.discover:has([data-act='btDiscover'], [data-act='btPickHand']) {
+& .card.discover:has([data-act='btDiscover'], [data-act='btPickHand']) {
   width: min(1180px, 96vw) !important;
   max-width: 96vw !important;
 }
-body[data-ui-cover-context='ordinary'] #overlay .battle-stage.sts .sts-ally .sts-figure {
-  width: 92px; height: 142px; display: flex; align-items: flex-end; justify-content: center;
-  filter: drop-shadow(0 3px 4px #12141566);
-}
-body[data-ui-cover-context='ordinary'] #overlay .battle-stage.sts .sts-ally .ally-portrait {
+& .battle-stage.sts .sts-ally .ally-portrait {
   width: 100%; height: 100% !important; object-fit: contain; object-position: center bottom;
   background: transparent; border: 0; filter: none;
-}
+}}

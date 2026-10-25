@@ -1,3 +1,6 @@
+import { battleRules, overlayElements, quietUiMocks } from './helpers/environment-fixtures.js';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { continueChestRewards } from './helpers/chest-actions.js';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -9,7 +12,7 @@ const state = vi.hoisted(() => ({
 
 vi.mock('../game/src/run/game.session.js', () => ({
   game: state.game,
-  saveGame: (...args) => state.saveGame(...args),
+  saveGame: async (...args) => await state.saveGame(...args),
   createRunSavePayload: (...args) => state.payloadFactory(...args),
   getActiveSlot: () => state.activeSlot,
   setBattleSettlementPending: (...args) => state.setPending(...args),
@@ -153,7 +156,7 @@ describe('真实战斗奖励刷新续流', () => {
   it.each([false, true])('未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=%s）', async isBoss => {
     document.body.innerHTML = '<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
     const UI = window.SDT.UI;
-    UI.el = { overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody'), ovTitle:document.getElementById('ovTitle') };
+    UI.el = { ...overlayElements() };
     UI.showOverlay = (_title, html) => { UI.el.ovBody.innerHTML = html; };
     const cards = [0, 1].map(i => ({ id:`battle-loot-${i}`, name:`战利品${i}`, type:'法术', rarity:'古朴', cost:0, desc:'战斗中获得的奖励' }));
     const draw = vi.fn().mockImplementationOnce(() => cards[0]).mockImplementation(() => cards[1]);
@@ -190,22 +193,22 @@ describe('真实战斗奖励刷新续流', () => {
       expect(draw).toHaveBeenCalledTimes(drawCount);
     };
     reload();
-    expect(document.querySelector('.cqo-overview')).not.toBeNull();
-    state.actions.chestNext(); state.actions.chestReveal();
-    state.actions.chestSelect({ i:0 }); state.actions.chestTake1({ i:0 });
+    expect(document.querySelector('.reward-v14')).not.toBeNull();
+    await Promise.resolve();
+    state.actions.chestSelect({ i:0 }); await state.actions.chestTake1({ i:0 });
     expect(disk.chestReward.current.taken).toEqual([0]);
     reload();
-    state.actions.chestTake1({ i:0 });
+    await state.actions.chestTake1({ i:0 });
     expect(state.game.grantCard).toHaveBeenCalledTimes(1);
-    state.actions.chestSelect({ i:1 }); state.actions.chestTake1({ i:1 });
+    state.actions.chestSelect({ i:1 }); await state.actions.chestTake1({ i:1 });
     expect(disk.chestReward.current.taken).toEqual([0,1]);
     reload();
     if (isBoss) state.commitResponses.push({ ok:false, code:'WRITE_FAILED', message:'restored reward retry' });
-    continueChestRewards(state.actions);
+    await continueChestRewards(state.actions);
     if (isBoss) {
       expect(state.commands.commitAttempt).not.toHaveBeenCalled();
-      state.actions.chestTake1({ i:0 });
-      continueChestRewards(state.actions);
+      await state.actions.chestTake1({ i:0 });
+      await continueChestRewards(state.actions);
     }
     await vi.waitFor(() => expect(state.commands.commitAttempt).toHaveBeenCalledTimes(1));
     if (isBoss) {
@@ -222,7 +225,7 @@ describe('真实战斗奖励刷新续流', () => {
     expect(window.SDT.Base.data.eggBattles).toBe(1);
     expect(state.game.visited['0,1']).toBe(1);
     expect(state.transition).toHaveBeenCalledTimes(1);
-    continueChestRewards(state.actions);
+    await continueChestRewards(state.actions);
     expect(state.commands.commitAttempt).toHaveBeenCalledTimes(isBoss ? 2 : 1);
     expect(state.game.coins).toBe(1);
   });
@@ -235,8 +238,8 @@ describe('战后结算事务接线与失败重试', () => {
     const onBattleEnd = await bind();
     await openAndFinishChest(onBattleEnd, { isBoss: false, foeNames: ['荒渊巨兽'], encounterId: 'elite:beast' });
 
-    expect(state.random).toHaveBeenNthCalledWith(1, 'loot');
-    expect(state.random).toHaveBeenNthCalledWith(2, 'loot');
+    expect(state.random).toHaveBeenNthCalledWith(1, 'loot', 'reward');
+    expect(state.random).toHaveBeenNthCalledWith(2, 'loot', 'reward');
     expect(state.game.grantCard).toHaveBeenCalledTimes(1);
   });
 
@@ -247,7 +250,7 @@ describe('战后结算事务接线与失败重试', () => {
     await openAndFinishChest(onBattleEnd, { isBoss: false, foeNames: ['荒渊巨兽'], encounterId: 'elite:beast' });
 
     expect(state.random).toHaveBeenCalledTimes(1);
-    expect(state.random).toHaveBeenCalledWith('loot');
+    expect(state.random).toHaveBeenCalledWith('loot', 'reward');
     expect(state.game.grantCard).not.toHaveBeenCalled();
   });
 
@@ -605,12 +608,12 @@ describe('真实 session 的战后保存入口', () => {
     document.body.innerHTML = '<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div>';
     window.SDT = {
       Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {} }, FX: { feedback() {} },
-      MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
+      MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
     };
     await import('../game/src/cards/cards.js');
     await import('../game/src/ui/ui.js');
     await import('../game/src/hub/base.js');
-    Object.assign(window.SDT.UI, { log() {}, refresh() {}, clearLog() {}, hideOverlay() {}, hideScreen() {}, showScreen() {}, showOverlay() {}, act() {}, registerHelp() {}, helpBtn() { return ''; } });
+    Object.assign(window.SDT.UI, { log() {}, refresh() {}, ...quietUiMocks() });
     window.SDT.Meta = { setXpMul() {}, track() {} };
     window.SDT.Nest = { renderNestMap() {} };
     const session = await import('../game/src/run/game.session.js');
@@ -625,7 +628,7 @@ describe('真实 session 的战后保存入口', () => {
     session.game.state = 'idle';
     session.game.elapsed = 30;
     session.game.elapsedSynced = 20;
-    expect(session.saveGame()).toBe(true);
+    expect(await session.saveGame()).toBe(true);
     const initialStats = Base.data.stats.playSeconds;
     const rawBeforePayload = [localStorage.getItem(RunStorage.key(slot)), localStorage.getItem(`sdt-base-v2-slot${slot}`)];
     const syncedBeforePayload = session.game.elapsedSynced;
@@ -640,13 +643,13 @@ describe('真实 session 的战后保存入口', () => {
     session.game.elapsed = 40;
     session.game.ownedCards = session.game.ownedCards.filter(() => true);
     const rawBeforeBlockedSave = [localStorage.getItem(RunStorage.key(slot)), localStorage.getItem(`sdt-base-v2-slot${slot}`)];
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect([localStorage.getItem(RunStorage.key(slot)), localStorage.getItem(`sdt-base-v2-slot${slot}`)]).toEqual(rawBeforeBlockedSave);
     expect(session.game.elapsedSynced).toBe(30);
     expect(Base.data.stats.playSeconds).toBe(initialStats);
 
     session.clearBattleSettlementPending(slot, identity.value.runId);
-    expect(session.saveGame()).toBe(true);
+    expect(await session.saveGame()).toBe(true);
     expect(session.game.elapsedSynced).toBe(40);
     expect(Base.data.stats.playSeconds).toBe(initialStats + 10);
   });

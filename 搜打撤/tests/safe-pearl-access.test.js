@@ -1,3 +1,4 @@
+import { runPendingFields } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -42,8 +43,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   Object.assign(game, { seed: 'safe-pearl-run', discoveredPairs: new Set(), runActive: true, state: 'idle', myClass: '战士', inventory: [],
     ownedCards: [...copies(pearl, 1, { safe: true }), ...copies(threeKeys, 1, { stored: 1 }), ...copies(key, 1)],
-    usedPocket: [], cardOrder: [], pendingExtraction: null, extractionPending: null, terminalPending: null,
-    battleActive: false, nestActive: false, hp: 20, maxHp: 30, elapsed: 0, elapsedSynced: 0 });
+    ...runPendingFields() });
   window.SDT.Chests = { isOpen: () => false };
   UI.beginRoom(); bag.showBackpackSection('main');
 });
@@ -176,9 +176,9 @@ describe('安全格珍珠盒直接存取', () => {
     openSafe(); button('pearlPut', key.name).click();
     game.hp = 0; game.surrenderedRun = false;
     expect(await session.doDeath()).toBe(true);
-    const result = document.querySelector('.doom-panel');
+    const result = document.querySelector('.settlement-report');
     expect(result.textContent).toContain('已抢运资源卡：三把钥匙 ×1、一把钥匙 ×1');
-    expect(result.querySelector('.doom-stat:nth-child(2)').textContent).toContain('3 张');
+    expect(result.querySelector('.ui-facts > div:nth-child(2)').textContent).toContain('3 张');
     expect(game.ownedCards.find(o => o.card.id === pearl.id).safe).toBe(true);
   });
 });

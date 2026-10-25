@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 龙巢回归（2026-09-18 三局实测修复）：
  * 1. 移动：直线图改「点击下一格」推进（原禁用条件把出发格永禁、其余只有当前格可点——开局无格可点）
  * 2. pickNestBoss 此前未定义：startNestBattle 一进来就 ReferenceError，龙巢任何战斗都开不起来
@@ -21,7 +22,7 @@ document.body.appendChild(__cv);
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
-window.SDT.MAP = { rules: { battleEnergy: 2, battleHandMax: 99, bossDeckSize: 10, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } };
+window.SDT.MAP = { rules: { ...battleRules(2, 99, 10, 5, 5, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } };
 await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');            // UI.init 需要的 overlay 骨架
 await import('../game/src/hub/base.js');          // SDT.Base（boot-order 同款绑定）

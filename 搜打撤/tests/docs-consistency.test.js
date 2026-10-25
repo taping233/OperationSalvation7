@@ -115,10 +115,11 @@ describe('文档一致性守卫', () => {
     // 与 docs:check 共用契约：历史 source 可退役，归档原文及现行替代入口不可丢失。
     expect(validateDocumentation(repoRoot).findings.filter(item => !item.review)).toEqual([]);
   });
-  it('src/README 域表与 game/src 顶层目录一一对应（generated 除外，正文单列）', () => {
+  it('src/README 域表与 game/src 非空顶层目录一一对应（generated 除外，正文单列）', () => {
     const srcDir = resolve(repoRoot, 'game/src');
     const actual = readdirSync(srcDir, { withFileTypes: true })
-      .filter(entry => entry.isDirectory() && entry.name !== 'generated')
+      .filter(entry => entry.isDirectory() && entry.name !== 'generated'
+        && readdirSync(resolve(srcDir, entry.name), { recursive:true, withFileTypes:true }).some(child => child.isFile()))
       .map(entry => entry.name);
     const table = domainTableNames();
     expect(new Set(table).size).toBe(table.length); // 表内无重复

@@ -1,7 +1,8 @@
 /* 远征基地出发页：简报优先，所有数值来自 game.hub.js 的真实基地状态。 */
 /* 2026-09-25 对齐修复：与 .hub-classes/.hub-ach 页签统一 max-width + 居中，避免页签内容对齐行为不一致 */
-#overlay .hub-deploy .hub-page { max-width:1420px; margin:0 auto; width:100%; }
-#overlay #hubMain .hub-head h2 { display:block; font-size:clamp(16px,calc(var(--game-layout-width, 100vw) * 0.016),21px); }
+#overlay{
+& .hub-deploy .hub-page { max-width:1420px; margin:0 auto; width:100%; }
+& #hubMain .hub-head h2 { display:block; font-size:clamp(16px,calc(var(--game-layout-width, 100vw) * 0.016),21px); }}
 /* 二波 C 组：hero 统一暗角（径向渐晕）+底部渐变融入底色；banner 中心左已留白，渐晕只压四缘 */
 /* 长文案折行收口（研究所锁定态键）：极窄容器下允许换行并收紧行距 */
 #btnNest { white-space:normal; line-height:1.35; }
@@ -10,57 +11,18 @@
    龙巢=secondary 深蓝描边金 hover（不再与主行动抢金）。
    （W2-02 起 #btnNest 仅在解锁后渲染，nest-locked 锁态样式已随重设计删除） */
 /* 金底上的位图图标压成深色剪影（09-20 批1）：exit/lock 原图为青蓝调，直接放金底显脏 */
-.dock-label { display:block; margin-bottom:10px; color:#e0d6b6; font-size:11px; letter-spacing:1.5px; }
-.readiness-head { display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; padding-bottom:14px; border-bottom:1px solid rgba(204,205,206,.16); }
-.readiness-head > b { flex:1; color:#e4e3df; font-size:19px; }
-.brief-status { padding:4px 8px; border:1px solid rgba(163,173,180,.42); border-radius:999px; color:#b6e2c3; font-size:10px; }
-.brief-mode { display:grid; gap:4px; padding:12px; border-radius:0; background:rgba(9,9,10,.48); }
-.brief-mode span { color:#9ea4a7; font-size:10px; letter-spacing:1px; }
-.brief-mode b { color:#ffe9a0; font-size:21px; }
-.brief-mode small { color:#c3c5c6; font-size:11px; line-height:1.5; }
-.brief-pet { display:flex; align-items:center; gap:11px; padding:12px 0; }
-.brief-pet-icon { width:34px; height:34px; display:grid; place-items:center; border:1px solid rgba(224,196,105,.5); border-radius:50%; color:#fbdf82; }
-.brief-pet > span:nth-child(2) { display:grid; gap:3px; }
-.brief-pet small { color:#9ea4a7; font-size:10px; }
-.brief-pet b { color:#e6e5e2; font-size:13px; }
-.brief-pet em { margin-left:auto; max-width:140px; color:#b2b5b7; font-size:10px; line-height:1.45; text-align:right; font-style:normal; }
-#overlay .hub-deploy .gate-strip { margin-top:16px; }
-@media (prefers-reduced-motion:reduce) { }
 
 /* 人物档案与收藏档案：与基地的深青金属骨架共用视觉语言。 */
 #overlay .hub-classes .hub-page,
 #overlay .hub-ach .hub-page { max-width:1420px; margin:0 auto; width:100%; }
-.section-kicker { display:block; margin-bottom:8px; font:700 10px/1.2 "Cascadia Code",monospace; letter-spacing:.2em; }
-.class-command { display:flex; align-items:flex-end; justify-content:space-between; gap:28px; margin-bottom:16px; padding:20px 24px; border:1px solid rgba(195,199,202,.2); border-left:3px solid #e2c76c; background:linear-gradient(110deg,rgba(28,30,32,.96),rgba(16,17,18,.96)); box-shadow:0 14px 30px rgba(0,0,0,.18); }
-.class-command-copy { max-width:670px; }
-.class-command h3 { margin:0 0 7px; color:#e7e6e3; font:400 clamp(25px,calc(var(--game-layout-width, 100vw) * 0.024),36px)/1.1 var(--font-display); letter-spacing:5px; }
-.class-command p { margin:0; color:#b6b9bb; font-size:13px; line-height:1.7; }
-.class-command-stats { display:flex; gap:8px; flex:0 0 auto; }
-.class-command-stats > span { min-width:94px; padding:10px 12px; border:1px solid rgba(195,199,201,.16); background:rgba(10,11,11,.45); }
-.class-command-stats small { display:block; margin-bottom:4px; color:#9a9ea1; font-size:10px; letter-spacing:1px; }
-.class-command-stats b { color:#f4dd94; font:700 19px/1 "Cascadia Code",monospace; }
-.class-skins { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; margin-top:8px; }
-.class-skins .mini-btn { min-width:0; padding:7px 6px; font-size:10px; letter-spacing:0; white-space:nowrap; }
-
-.collection-tabs { position:sticky; top:0; z-index:3; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-bottom:12px; padding:8px; border:1px solid rgba(184,189,192,.18); background:rgba(14,15,16,.94); backdrop-filter:blur(12px); }
-.collection-tabs button { min-height:44px; border:1px solid transparent; background:transparent; color:#a7aaad; font:700 13px var(--font-ui); letter-spacing:1px; cursor:pointer; }
-.collection-tabs button .ic { width:16px; height:16px; vertical-align:-.2em; }
-.collection-tabs button:hover { color:#ebebeb; border-color:rgba(186,191,194,.24); }
-.collection-tabs button.on { border-color:rgba(229,201,110,.55); background:linear-gradient(180deg,rgba(72,62,38,.72),rgba(38,35,29,.72)); color:#fbe6a2; box-shadow:inset 0 1px rgba(255,255,255,.08); }
-#overlay .hub-ach .ach-row { border-color:rgba(183,188,192,.16); border-radius:0; background:rgba(11,12,13,.42); }
-#overlay .hub-ach .ach-row.done { border-color:rgba(224,197,106,.36); background:rgba(57,48,28,.35); }
-#overlay .hub-ach .ach-info b { color:#e9e9e9; }
-#overlay .hub-ach .ach-info span { color:#b0b3b5; }
-#overlay .hub-ach .back-lock { position:absolute; z-index:6; top:-5px; right:-6px; display:grid; place-items:center; width:20px; height:20px; border:1px solid var(--back-accent); border-radius:50%; background:#17181a; }
-#overlay .hub-ach .back-lock .ic { width:11px; height:11px; }
-@media (prefers-reduced-motion:reduce) { }
+#overlay .hub-ach .ach-row{
+& { border-color:rgba(183,188,192,.16); border-radius:0; background:rgba(11,12,13,.42); }
+&.done { border-color:rgba(224,197,106,.36); background:rgba(57,48,28,.35); }}
 
 /* 基地商店（09-20 P1-6）→ 2026-09-25 无害化：货板 DOM 已切到 .shelf-item 体系，
    .pk-row.stash-row 簇为幽灵选择器；按走查要求保留规则块，块内可见属性
    （background/border/color/opacity/filter）全部置初始/透明，防该类名未来
    复用时旧金描边整段复活 */
-#overlay .pk-row.stash-row.poor { opacity: 1; filter: none; }
-#overlay .pk-row.stash-row .poor-why { margin-left: 6px; color: inherit; }
 
 /* 2026-10-03 A6：认可白底横幅完整坐入相纸窗；档案信息独立流式排版。
    当前窗口样板采用宽卡，后续人物沿原容器滚动；不修改原图或皮肤行为。 */
@@ -70,5 +32,3 @@
 
 /* W4-04（0926 W4 R1）：双语 eyebrow 制式归一——.section-kicker 为唯一页面/节级制式。
    存量色 #e3c871 归并主金 token（W4-01 体系）；整备页头 kicker 在 flex 头内独占一行 */
-.section-kicker { color: var(--gold-main); }
-#overlay #depMain .hub-head .dep-kicker { flex-basis: 100%; margin-bottom: -6px; }

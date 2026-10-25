@@ -1,5 +1,6 @@
 /* 数字贴在受作用单位周围；多段落点由 battle.vfx.js 的活跃槽位确定。 */
-#overlay .sts-float:not(.stk) {
+#overlay .sts-float{
+&:not(.stk) {
   min-width:0;
   max-width:148px;
   padding:2px 4px;
@@ -15,12 +16,12 @@
   text-shadow:0 2px 3px #000,0 0 7px #000;
   animation-duration:.8s;
 }
-#overlay .sts-float.hurt:not(.stk) { color:#ffb8a9; }
-#overlay .sts-float.heal:not(.stk) { color:#9ce4bd; font-size:23px; }
-#overlay .sts-float.block:not(.stk) { color:#e1ebed; font-size:18px; }
-#overlay .sts-float.fx-finisher:not(.stk) { color:#ffdf86; font-size:30px; }
-#overlay .sts-float.critical:not(.stk) { color:#ffc39f; }
-#overlay .sts-float small { margin-bottom:2px; color:#d4dce0; }
+&.hurt:not(.stk) { color:#ffb8a9; }
+&.heal:not(.stk) { color:#9ce4bd; font-size:23px; }
+&.block:not(.stk) { color:#e1ebed; font-size:18px; }
+&.fx-finisher:not(.stk) { color:#ffdf86; font-size:30px; }
+&.critical:not(.stk) { color:#ffc39f; }
+& small { margin-bottom:2px; color:#d4dce0; }}
 
 @keyframes stsFloatUp {
   0% { opacity:0; transform:translate(-50%,-50%) translateY(6px) scale(.95); }

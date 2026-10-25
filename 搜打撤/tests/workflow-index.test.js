@@ -126,6 +126,17 @@ describe('文档结构硬契约', () => {
     put(root, 'docs/archive/workflow-test/manifest.json', JSON.stringify({ items: [item] }));
     expect(validateDocumentation(root).ok).toBe(false);
   });
+  it('空的退役目录不算源码域，新增实际文件后必须登记域表', () => {
+    const root = fixture();
+    put(root, 'game/src/README.md', '| 目录 | 域 |\n| --- | --- |');
+    mkdirSync(path.join(root, 'game/src/retired'), { recursive:true });
+    const drift = () => validateDocumentation(root).findings.filter(item => item.kind === 'domain-table-drift');
+    expect(drift()).toEqual([]);
+    put(root, 'game/src/retired/current.js', 'export const value = 1;');
+    expect(drift()).toHaveLength(1);
+    put(root, 'game/src/README.md', '| '+String.fromCharCode(96)+'retired/'+String.fromCharCode(96)+' | 域 |');
+    expect(drift()).toEqual([]);
+  });
   it('预算以 UTF-8 字节计数，域表漂移阻断', () => {
     const root = fixture();
     put(root, '../AGENTS.md', '规'.repeat(2049));

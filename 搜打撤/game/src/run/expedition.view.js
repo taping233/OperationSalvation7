@@ -1,6 +1,7 @@
 import { esc } from '../core/shared.js';
 import { expeditionToolArt } from './expedition-tool-art.js';
 import '../../css/map-floating-tools.css';
+import '../../css/run-experience.css';
 import { previousRoutePlan, routeChoicePreview } from './route-choice-preview.js';
 import { mapNodeInfo } from '../core/node-info.js';
 import { isConsumedMapNode, mapNodeStatus } from '../core/map-node-state.js';
@@ -109,8 +110,7 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   const doc = panel?.ownerDocument || document;
   const overlay = doc.getElementById('overlay');
   const mapVisible = game.runActive && !game.battleActive && ['idle','moving'].includes(game.state)
-    && (!overlay || overlay.hidden) && !doc.body?.classList.contains('lobby')
-    && !doc.body?.classList.contains('scene-battle-3d');
+    && (!overlay || overlay.hidden) && !doc.body?.classList.contains('lobby');
   if (!mapVisible) { clearExpeditionPanel(doc); return; }
   const sidebar = panel?.closest('#sidebar') || doc.getElementById('sidebar');
   if (sidebar) {
@@ -130,20 +130,22 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
     const safeCap = game.safeCap?.() ?? 0;
     const pocket = (game.usedPocket || []).reduce((n, item) => n + (item.count || 0), 0);
     const disabled = game.state !== 'idle';
-    const toolbarKey = `${used}:${cap}:${safe}:${safeCap}:${pocket}:${disabled}`;
+    const keyLabel = (action, fallback) => window.SDT?.Input?.bindingLabel?.(action) ?? fallback;
+    const bagKey=keyLabel('backpack','B'), focusKey=keyLabel('camFocus','F'), overviewKey=keyLabel('camOverview','G');
+    const toolbarKey = `${used}:${cap}:${safe}:${safeCap}:${pocket}:${disabled}:${bagKey}:${focusKey}:${overviewKey}`;
     const capacityState = used >= cap ? 'full' : used / Math.max(1, cap) >= .75 ? 'tight' : used ? 'ready' : 'empty';
     const capacityFill = Math.max(0, Math.min(100, used / Math.max(1, cap) * 100));
     if (summary.dataset.toolbarKey !== toolbarKey) {
       summary.dataset.toolbarKey = toolbarKey;
       summary.innerHTML = `<nav class="expedition-toolbar" aria-label="远征工具">
         <div class="expedition-tool-group" role="group" aria-label="携行物资">
-          <button type="button" data-expedition-tool="bag" data-capacity-state="${capacityState}" aria-label="背包：占格 ${used}/${cap}，${capacityState === 'full' ? '已满' : `余 ${Math.max(0, cap - used)} 格`}" ${disabled ? 'disabled' : ''}>${expeditionToolArt('bag')}<span class="expedition-tool-copy"><span>背包</span><strong>${used}<small>/${cap}</small></strong><span class="expedition-bag-capacity" aria-hidden="true"><i style="width:${capacityFill}%"></i></span></span><kbd>B</kbd></button>
+          <button type="button" data-expedition-tool="bag" data-capacity-state="${capacityState}" aria-label="背包：占格 ${used}/${cap}，${capacityState === 'full' ? '已满' : `余 ${Math.max(0, cap - used)} 格`}" ${disabled ? 'disabled' : ''}>${expeditionToolArt('bag')}<span class="expedition-tool-copy"><span>背包</span><strong>${used}<small>/${cap}</small></strong><span class="expedition-bag-capacity" aria-hidden="true"><i style="width:${capacityFill}%"></i></span></span><kbd>${esc(bagKey)}</kbd></button>
           <button type="button" data-expedition-tool="safe" aria-label="安全格：保护物资 ${safe}/${safeCap}" ${disabled ? 'disabled' : ''}>${expeditionToolArt('safe')}<span class="expedition-tool-copy"><span>安全格</span><strong>${safe}<small>/${safeCap}</small></strong></span></button>
           <button type="button" data-expedition-tool="pocket" aria-label="消耗区：已消耗卡牌 ${pocket}" ${disabled ? 'disabled' : ''}>${expeditionToolArt('pocket')}<span class="expedition-tool-copy"><span>消耗区</span><strong>${pocket}</strong></span></button>
         </div>
         <div class="expedition-tool-group expedition-view-tools" role="group" aria-label="地图视野">
-          <button type="button" class="map-view-tool" data-expedition-tool="focus" title="回到当前位置与相邻路线 · F" aria-label="定位：当前位置与相邻路线" ${disabled ? 'disabled' : ''}>${expeditionToolArt('focus')}<span class="expedition-tool-copy">定位</span><kbd>F</kbd></button>
-          <button type="button" class="map-view-tool" data-expedition-tool="overview" title="查看整层路线，未探明地点仅显示剪影 · G" aria-label="全景：整层路线，未知地点保留迷雾" ${disabled ? 'disabled' : ''}>${expeditionToolArt('overview')}<span class="expedition-tool-copy">全景</span><kbd>G</kbd></button>
+          <button type="button" class="map-view-tool" data-expedition-tool="focus" title="回到当前位置与相邻路线 · ${esc(focusKey)}" aria-label="定位：当前位置与相邻路线" ${disabled ? 'disabled' : ''}>${expeditionToolArt('focus')}<span class="expedition-tool-copy">定位</span><kbd>${esc(focusKey)}</kbd></button>
+          <button type="button" class="map-view-tool" data-expedition-tool="overview" title="查看整层路线，未探明地点仅显示剪影 · ${esc(overviewKey)}" aria-label="全景：整层路线，未知地点保留迷雾" ${disabled ? 'disabled' : ''}>${expeditionToolArt('overview')}<span class="expedition-tool-copy">全景</span><kbd>${esc(overviewKey)}</kbd></button>
         </div>
       </nav>`;
     }
@@ -190,12 +192,10 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   const danger = !pending && !selectedSpent && !selectedDoor && ['battle','boss','elite','battleElite'].includes(selectedNode?.def?.type);
   const lowLife = danger && game.hp > 0 && game.hp / game.maxHp <= .25;
   const cam = game.cam;
-  const previousInset = cam?.detailInset || 0;
-  // 移动事务持有镜头；侧栏变化不能打断跟随或硬切取景。
-  const automaticFrame = !['manual', 'travel'].includes(cam?.frameMode);
-  if (cam?.frameMode !== 'travel') cam?.setDetailInset?.(name ? cam.viewW * (570 / 1920) : 0, { deferFrame:automaticFrame });
-  if (cam?.frameExploration && previousInset !== cam.detailInset && !['manual', 'travel'].includes(cam.frameMode)) {
-    cam.frameExploration(game, cam.frameMode === 'overview', { glide:true });
+  // Preview reserves space for future explicit framing, without moving or
+  // zooming the displayed map. Travel retains ownership of its camera inset.
+  if (cam?.frameMode !== 'travel') {
+    cam?.setDetailInset?.(name ? cam.viewW * (570 / 1920) : 0, { deferFrame:true });
   }
   const actionLabel = completedLocal ? content.id === 'shop-closed' ? '本店交易已结束' : '本地内容已完成'
     : pending ? isCurrent ? '继续领奖' : '前往领奖'
@@ -216,8 +216,8 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   strip.innerHTML = name ? `
     <header class="expedition-preview-heading">
       <span class="expedition-preview-icon" aria-hidden="true">${paintedIcon || (glyph ? `<img class="ic" src="${glyph}" alt="" draggable="false">` : iconHTML(route?.icon || nodeIcon))}</span>
-      <span class="expedition-preview-copy"><small class="expedition-preview-status">${esc(status)}</small><b>${esc(name)}</b></span>
-      <button type="button" class="expedition-preview-close" data-route-close="1" aria-label="关闭地点预览">×</button>
+      <span class="expedition-preview-copy"><small class="expedition-preview-status">地点预览</small><b>${esc(name)}</b></span>
+      <span class="expedition-preview-badge">${esc(status)}</span>
     </header>
     <div class="expedition-preview-content">
       ${content.label ? `<span class="expedition-node-status" data-content-state="${esc(content.id)}"><span aria-hidden="true" class="expedition-node-status-dot"></span>${esc(content.label)}</span>` : ''}
@@ -225,5 +225,5 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
       ${!reachable && !isCurrent ? '<p class="expedition-preview-condition">需要先到达与此处相连的地点。</p>' : ''}
       ${lowLife ? '<p class="expedition-preview-risk">生命偏低，建议先恢复再迎战。</p>' : ''}
     </div>
-    <button type="button" class="expedition-preview-enter" data-route-enter="1" ${game.state !== 'idle' || (!reachable && !isCurrent) || completedLocal ? 'disabled' : ''}><span>${esc(actionLabel)}</span><span aria-hidden="true">→</span></button>` : '';
+    <div class="expedition-preview-action"><button type="button" class="expedition-preview-enter" data-route-enter="1" ${game.state !== 'idle' || (!reachable && !isCurrent) || completedLocal ? 'disabled' : ''}><span>${esc(actionLabel)}</span><span aria-hidden="true">→</span></button></div>` : '';
 }

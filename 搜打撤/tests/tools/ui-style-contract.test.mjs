@@ -45,7 +45,8 @@ test('container label reuses the existing 18px semantic token', async () => {
   tokens.walkDecls('--ui-text-label', decl => values.push(decl.value));
   assert.deepEqual(values, ['18px']);
   const labels = [];
-  container.walkRules('body #overlay .container-column-head span', rule => {
+  container.walkRules('& .container-column-head span', rule => {
+    if (rule.parent.selector !== '#overlay .collection-workspace[data-collection-variant="container"]') return;
     rule.walkDecls('font-size', decl => labels.push(decl.value));
   });
   assert.deepEqual(labels, ['var(--ui-text-label)']);

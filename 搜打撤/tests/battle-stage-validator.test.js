@@ -67,17 +67,16 @@ describe('allocation-light stage validation', () => {
   it('repairs injected controlled states without erasing runtime effects or confirmation ownership', () => {
     const input = view(), {owner} = presenter.show(input);
     const cases = [['.bt-potion','off'],['.bt-potion','need-target'],['.bt-slam-btn','active'],
-      ['.bt-turn-forecast','lethal'],['[data-act="btFlee"]','dis'],['.sts-phase-dot','foe']];
+      ['.bt-turn-forecast','lethal'],['.sts-phase-dot','foe']];
     for (const [selector, state] of cases) owner.stage.querySelector(selector).classList.add(state, 'fx-hit');
-    const flee = owner.stage.querySelector('[data-act="btFlee"]'); flee.classList.add('arm');
-    const options = owner.stage.querySelector('.sts-options'); options.open = true;
+    expect(owner.stage.querySelector('.sts-options,[data-act="btFlee"]')).toBeNull();
     presenter.show(input);
     for (const [selector, state] of cases) {
       const node = owner.stage.querySelector(selector);
       expect(node.classList.contains(state), `${selector} removes ${state}`).toBe(false);
       expect(node.classList.contains('fx-hit')).toBe(true);
     }
-    expect(flee.classList.contains('arm')).toBe(true); expect(options.open).toBe(true);
+    expect(owner.stage.querySelector('.sts-options,[data-act="btFlee"]')).toBeNull();
   });
 
   it('retains only the real feedback-owned badge through warm updates, new arrivals and paging', () => {

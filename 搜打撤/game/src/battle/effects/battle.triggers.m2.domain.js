@@ -137,6 +137,16 @@ function createTriggerRunner({
     if (Array.isArray(ops) && ops.length) resolveOps(card, ops, target);
   }
 
+  function snapshot() {
+    const copy = value => {
+      if (Array.isArray(value)) return Object.freeze(value.map(copy));
+      if (value && typeof value === 'object') return Object.freeze(Object.fromEntries(Object.entries(value).map(([key, item]) => [key, copy(item)])));
+      return value;
+    };
+    return Object.freeze([...registry.values()].map((entry, order) => copy({ order, uid: entry.uid,
+      cardId: entry.card.id || null, card: entry.card, remaining: entry.left,
+      points: [...entry.points].map(([point, operations]) => ({ point, operations })), executing: [...entry.executing] })));
+  }
   function reset() { registry.clear(); }
 
   // 装备域结构化 ops 直接执行（onEquip/battleStart/skill）——不经登记，一次性合成结算
@@ -144,7 +154,7 @@ function createTriggerRunner({
 
   return {
     registerCard, fireTurnStart, fireTurnEnd, fireBattleStart, fireDamaged, firePlayCard,
-    fireKill, fireDrawn, fireConsume, reset, resolveEquipOps, fireFreezeDealt, fireAcquire,
+    fireKill, fireDrawn, fireConsume, snapshot, reset, resolveEquipOps, fireFreezeDealt, fireAcquire,
   };
 }
 return { createTriggerRunner };

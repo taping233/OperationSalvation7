@@ -18,7 +18,7 @@ function provenanceDriver(run) {
 function outcomeCounts(runs) {
   const counts = { clear: 0, extract: 0, death: 0, abandon: 0 };
   for (const r of runs) {
-    const key = counts[r.outcome] != null ? r.outcome : 'abandon';
+    const key = Object.hasOwn(counts, r.outcome) ? r.outcome : 'abandon';
     counts[key] += 1;
   }
   return counts;
@@ -64,14 +64,14 @@ function aggregate(runs) {
   const deathByLayer = {};
   // 死因分桶（09-26 方法论补强）：层×节点×败因——假设从这里直接长出来，不靠人工翻 trace。
   //   节点维度：G.trackPos（死亡时所在格），层维度 maxLayer
-  //   败因维度：battles.fought>won → 死于战斗中；否则 → 战斗外（事件/撤离/道具）
+  // 败因使用死亡时记录的事实；旧记录缺少来源时归未知，撤退场次不能反推死因。
   const deathBucket = {};
   const cardAgg = new Map();   // 名称 → { name, rarity, seen, carriedCount, value }
   for (const r of runs) {
     if (r.outcome === 'death' && r.maxLayer != null) {
       deathByLayer[r.maxLayer] = (deathByLayer[r.maxLayer] || 0) + 1;
-      const lost = (r.battles?.fought ?? 0) > (r.battles?.won ?? 0);
-      const key = `L${r.maxLayer}${r.node != null ? 'N' + r.node : ''}/${lost ? '战斗中' : '战后'}`;
+      const cause = r.deathCause === 'battle' ? '战斗中' : r.deathCause === 'nonBattle' ? '战后' : '未知';
+      const key = `L${r.maxLayer}${r.node != null ? 'N' + r.node : ''}/${cause}`;
       deathBucket[key] = (deathBucket[key] || 0) + 1;
     }
     for (const c of r.carried || []) {

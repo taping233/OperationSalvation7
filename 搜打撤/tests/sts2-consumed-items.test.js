@@ -1,9 +1,9 @@
+import { battleRules, damageRuleFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 30, battleHandMax: 200, bossDeckSize: 99, starterSha: 0,
-    battleStartDraw: 99, battleTurnDraw: 1, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(30, 200, 99, 0, 99, 1) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
@@ -13,8 +13,7 @@ const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
 const { createBattleBag } = await import('../game/src/battle/bag/battle.bag.js');
 const settle = () => vi.advanceTimersByTimeAsync(3000);
 const strike = { id: 'item-strike', name: '道具取回靶牌', type: '武术', cost: 0, dmg: 1, dmgType: 'fixed', desc: '',
-  rules: { version: 1, battle: { target: { side: 'enemy', area: false } },
-    triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } } };
+  rules: { ...damageRuleFields(false, 'chosenEnemy') } };
 const recall = { id: 'item-recall', name: '取回道具', type: '法术', cost: 0, desc: '复活最多3张卡牌。',
   rules: { version: 1, battle: { target: { side: 'self', area: false } } } };
 const healing = { id: 'item-heal-text', name: '同步回复道具', type: '道具', desc: '回复 5 点生命。' };

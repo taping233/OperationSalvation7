@@ -6,7 +6,7 @@ const platform = Object.freeze({ key:'winter-platform-minimal',
   aspect:1672/941,footLine:.68,stageLayers:true });
 
 export function selectBattleScenery({layerIdx=0,isBoss=false}={}) {
-  // 层号与首脑参数保留原接口；当前所有战场共用本轮新站台三层场景。
+  // 层号与首脑参数保留原接口；当前所有战场共用简约轨道站三层场景。
   void layerIdx; void isBoss;
   return platform;
 }

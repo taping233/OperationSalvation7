@@ -1,7 +1,7 @@
 /* 新局 L2 局部路线：最多一对换位、两对双向删边。基础 4/9 与旧路线协议均不改。 */
 import { clone } from '../core/shared.js';
 import { hashSeed } from '../core/random-core.js';
-import { CURRENT_GENERATOR_VERSION, validateCurrentGeneratedMap, MAP_TYPE_BUDGETS, PREVIOUS_MAP_TYPE_BUDGETS } from './map-generation-rules.js';
+import { CURRENT_GENERATOR_VERSION, validateCurrentGeneratedMap, MAP_TYPE_BUDGETS, PREVIOUS_MAP_TYPE_BUDGETS, graphDistances as distances } from './map-generation-rules.js';
 
 export const GUARDED_ROUTE_VERSION = 'r5-routes-v2';
 export const MAX_ROUTE_ASSIGNMENTS = 46; // 10 个非出入口节点：原图 + C(10,2)
@@ -49,15 +49,6 @@ function longestNoncombat(graph, types) {
   return ids.reduce((best,_,i) => Math.max(best,walk(i,1 << i)),0);
 }
 
-function distances(graph, start, blocked = new Set()) {
-  const d = graph.map(() => Infinity), queue = [];
-  if (!blocked.has(start)) { d[start] = 0; queue.push(start); }
-  for (let cursor = 0; cursor < queue.length; cursor++) for (const next of graph[queue[cursor]]) {
-    if (blocked.has(next) || d[next] !== Infinity) continue;
-    d[next] = d[queue[cursor]] + 1; queue.push(next);
-  }
-  return d;
-}
 function battleCost(types, graph, start, end) {
   const d = graph.map(() => Infinity), queue = [start]; d[start] = 0;
   while (queue.length) {

@@ -16,6 +16,9 @@ describe('事件选项实时预告', () => {
     root.innerHTML = eventOptionHTML(choice, 0, game);
     expect(root.textContent).toContain('背包可容纳');
     expect(root.querySelector('button').dataset.optionState).toBe('ready');
+    expect(root.querySelector('.evt-opt-index').textContent).toBe('01');
+    expect(root.querySelector('.evt-opt-state').textContent).toBe('可选择');
+    expect(root.querySelector('.evt-opt-detail').textContent).toContain('背包可容纳');
     expect(run).not.toHaveBeenCalled();
     expect(game).toEqual({ hp:6, coins:2 });
   });

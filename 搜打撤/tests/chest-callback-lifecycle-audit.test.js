@@ -1,3 +1,4 @@
+import { overlayElements, chestMocks } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 let Chests, game, UI, actions, drawn;
@@ -6,7 +7,7 @@ beforeEach(async () => {
   vi.resetModules(); vi.useFakeTimers();
   document.body.innerHTML = '<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
   actions = {}; drawn = vi.fn(seen => seen.has(cards[0].id) ? cards[1] : cards[0]);
-  UI = { el: { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') },
+  UI = { el: { ...overlayElements() },
     showOverlay(title, html) { this.el.ovBody.innerHTML = html; this.el.overlay.hidden = false; }, hideOverlay() { this.el.overlay.hidden = true; },
     act: (name, fn) => actions[name] = fn, refresh() {}, log() {},
   };
@@ -14,51 +15,46 @@ beforeEach(async () => {
     usedSlots: () => game.ownedCards.length, bagCap: () => 16, canReceiveCard: () => true,
     grantCard: vi.fn(card => { game.ownedCards.push({ card }); return true; }), gainCoins: vi.fn(), persistSave: vi.fn(() => true),
   };
-  window.SDT = { game, UI, Icons: { rich: html => html }, Sound: { sfx: vi.fn() },
-    MAP: { chestKinds: { small: { name: '小箱', cards: 2, coins: [2, 2] } } },
-    Cards: { RARITIES: ['古朴', '稀有', '史诗', '传说'], all: () => cards, randomDropCard: drawn, pickOfRarity: () => cards[0],
-      classPool: () => [], rarityOf: card => card.rarity, sellPrice: () => 1, cardHTML: card => `<span>${card.name}</span>` },
-    Base: { slot: 1, data: {}, save() {}, petEggDropChance: () => 0, recordPetEggChestResult() {}, bagCap: () => 16, isSha: () => false },
+  window.SDT = { game, UI, ...chestMocks(cards, () => vi, () => drawn),
   };
   await import('../game/src/run/chests.js'); Chests = window.SDT.Chests;
 });
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); delete window.SDT; });
-function open() { Chests.open(game, [{ kind: 'small' }], vi.fn(), { onCell: true }); actions.chestNext(); }
+async function open() { Chests.open(game, [{ kind: 'small' }], vi.fn(), { onCell: true }); }
 
 describe('宝箱回调与探索身份审计', () => {
-  it('未领取宝箱不自动开箱，旧领取动作不能跨局发起开箱', () => {
+  it('直接展示卡牌不自动领取，旧领取不能跨局修改页面', async () => {
     Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true });
-    const oldClaim = actions.chestNext;
-    vi.advanceTimersByTime(5000);
-    expect(UI.el.ovBody.querySelector('.cqo-overview')).not.toBeNull();
-    expect(UI.el.ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
-    game.discoveredPairs = new Set(); oldClaim();
+    const oldTake = actions.chestTake1, before = UI.el.ovBody.innerHTML;
     expect(UI.el.ovBody.querySelector('[data-eps-search]')).toBeNull();
+    expect(game.grantCard).not.toHaveBeenCalled();
+    game.discoveredPairs = new Set(); oldTake({ i:'0' }); vi.advanceTimersByTime(5000);
+    expect(UI.el.ovBody.innerHTML).toBe(before);
     expect(game.grantCard).not.toHaveBeenCalled();
   });
 
-  it('领取宝箱双击只启动一次并收币一次，未选前不发卡', () => {
+  it('领取宝箱双击只启动一次并收币一次，未选前不发卡', async () => {
     Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true });
-    const claim = actions.chestNext, draws = drawn.mock.calls.length;
-    claim(); claim();
-    expect(Chests.serialize(game).current.rewardStage).toBe('opening');
+    const draws = drawn.mock.calls.length;
+    Chests.suspend(); Chests.resume(); Chests.resume();
+    expect(Chests.serialize(game).current.rewardStage).toBe('cards');
     expect(drawn).toHaveBeenCalledTimes(draws);
-    expect(window.SDT.Sound.sfx.mock.calls.filter(([name]) => name === 'chestShake')).toHaveLength(1);
+    expect(game.gainCoins).toHaveBeenCalledTimes(1);
     expect(game.grantCard).not.toHaveBeenCalled(); expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(2);
-    actions.chestReveal();
+    await Promise.resolve();
     expect(Chests.serialize(game).current.rewardStage).toBe('cards');
   });
 
-  it.each(['run-token', 'location', 'slot'])('搜索等待期间%s变化后旧揭晓不能覆盖新局', change => {
-    open(); const oldReveal = actions.chestReveal;
+  it.each(['run-token', 'location', 'slot'])('奖励展示后%s变化，旧领取不能覆盖新局', async change => {
+    await open(); const oldTake = actions.chestTake1;
     if (change === 'run-token') game.discoveredPairs = new Set();
     if (change === 'location') game.trackPos++;
     if (change === 'slot') window.SDT.Base.slot = 2;
-    const before = UI.el.ovBody.innerHTML; oldReveal(); vi.advanceTimersByTime(1600);
-    expect(UI.el.ovBody.innerHTML).toBe(before); expect(UI.el.ovBody.querySelector('.reward-head')).toBeNull();
+    const before = UI.el.ovBody.innerHTML; oldTake({ i:'0' }); vi.advanceTimersByTime(1600);
+    expect(UI.el.ovBody.innerHTML).toBe(before); expect(UI.el.ovBody.querySelector('.reward-v14')).not.toBeNull();
   });
-  it.each(['run-token', 'location', 'slot', 'new-page'])('已揭晓奖励%s变化后旧领取不能发奖或写盘', change => {
-    open(); actions.chestReveal(); const oldTake = actions.chestTake1;
+  it.each(['run-token', 'location', 'slot', 'new-page'])('已揭晓奖励%s变化后旧领取不能发奖或写盘', async change => {
+    await open(); await Promise.resolve(); const oldTake = actions.chestTake1;
     const beforeSaves = game.persistSave.mock.calls.length;
     if (change === 'run-token') game.discoveredPairs = new Set();
     if (change === 'location') game.trackPos++;
@@ -67,24 +63,24 @@ describe('宝箱回调与探索身份审计', () => {
     oldTake({ i: '0' });
     expect(game.grantCard).not.toHaveBeenCalled(); expect(game.persistSave).toHaveBeenCalledTimes(beforeSaves);
   });
-  it('背包合法挂起/恢复不重抽，旧页动作失效且现页逐张领取只发一次', () => {
-    open(); actions.chestReveal(); const oldTake = actions.chestTake1; const draws = drawn.mock.calls.length;
+  it('背包合法挂起/恢复不重抽，旧页动作失效且现页逐张领取只发一次', async () => {
+    await open(); await Promise.resolve(); const oldTake = actions.chestTake1; const draws = drawn.mock.calls.length;
     expect(Chests.suspend()).toBe(true); UI.showOverlay('背包', '<main>背包</main>'); Chests.resume();
     oldTake({ i: '0' }); expect(game.grantCard).not.toHaveBeenCalled();
     const current = actions.chestTake1; current({ i: '0' }); current({ i: '0' });
     expect(game.grantCard).toHaveBeenCalledTimes(1); expect(drawn).toHaveBeenCalledTimes(draws);
   });
-  it('新局不再视旧箱为可恢复，resume不会把旧奖励盖回新页', () => {
-    open(); actions.chestReveal(); Chests.suspend(); game.discoveredPairs = new Set();
+  it('新局不再视旧箱为可恢复，resume不会把旧奖励盖回新页', async () => {
+    await open(); await Promise.resolve(); Chests.suspend(); game.discoveredPairs = new Set();
     UI.showOverlay('', '<main id="new-run-page">新局</main>');
     expect(Chests.isOpen()).toBe(false); Chests.resume();
     expect(document.getElementById('new-run-page')?.textContent).toBe('新局'); expect(Chests.serialize(game)).toBeNull();
   });
-  it('领取后普通保存失败仍保留当前已领取事实，重试保存不重复发奖', () => {
-    game.persistSave.mockReturnValue(false); open(); actions.chestReveal();
-    actions.chestTake1({ i: '0' }); expect(game.grantCard).toHaveBeenCalledTimes(1);
+  it('领取后普通保存失败仍保留当前已领取事实，重试保存不重复发奖', async () => {
+    game.persistSave.mockReturnValue(false); await open(); await Promise.resolve();
+    await actions.chestTake1({ i: '0' }); expect(game.grantCard).toHaveBeenCalledTimes(1);
     const saved = Chests.serialize(game); expect(saved.current.taken).toEqual([0]);
-    game.persistSave.mockReturnValue(true); Chests.restore(game, saved, vi.fn()); actions.chestTake1({ i: '0' });
+    game.persistSave.mockReturnValue(true); Chests.restore(game, saved, vi.fn()); await actions.chestTake1({ i: '0' });
     expect(game.grantCard).toHaveBeenCalledTimes(1);
   });
 });
@@ -113,46 +109,46 @@ it('固定事件使用独立领取样式，保留来源和既有动作；返回�
   oldTake({ i:'0' });
   expect(game.grantCard).not.toHaveBeenCalled();
   expect(Chests.restore(game, game.nodeChestRewards['0,1'], vi.fn())).toBe(true);
-  actions.chestTake1({ i:'0' }); actions.chestTake1({ i:'0' });
+  await actions.chestTake1({ i:'0' }); await actions.chestTake1({ i:'0' });
   expect(game.grantCard).toHaveBeenCalledTimes(1);
   expect(drawn).not.toHaveBeenCalled();
   expect(Chests.serialize(game).current).toMatchObject({ taken:[0], lost:[], source:'污染空投箱', title:'领取奖励' });
   expect(root.querySelector('[data-act="chestContinue"]')).not.toBeNull();
-  expect(root.querySelector('.reward-final').textContent).toBe('1 张已入背包');
+  expect(root.querySelectorAll('.reward-unit-state.is-received')).toHaveLength(1); expect(root.querySelector('.reward-final')).toBeNull();
 });
-it('固定事件满包和放弃确认仍由原动作控制，不因展示层改变奖励状态', () => {
+it('固定事件满包和放弃确认仍由原动作控制，不因展示层改变奖励状态', async () => {
   game.canReceiveCard = () => false;
   restoreFixedReceipt();
   expect(UI.el.ovBody.querySelector('[data-act="chestMakeRoom"]').dataset.i).toBe('0');
   expect(UI.el.ovBody.querySelector('[data-act="chestOpenBag"]').classList.contains('is-primary')).toBe(true);
-  actions.chestSkip();
+  await actions.chestSkip();
   expect(Chests.serialize(game).current.lost).toEqual([]);
   expect(UI.el.ovBody.querySelector('[data-act="chestLeave"]')).not.toBeNull();
-  actions.chestStay();
+  await actions.chestStay();
   expect(Chests.serialize(game).current.lost).toEqual([]);
-  actions.chestSkip(); actions.chestLeave();
+  await actions.chestSkip(); await actions.chestLeave();
   expect(Chests.serialize(game).current).toMatchObject({ taken:[], lost:[0] });
   expect(game.grantCard).not.toHaveBeenCalled();
   expect(drawn).not.toHaveBeenCalled();
 });
 
-it('关闭动画期间旧领奖和放弃动作不能改变奖励或重开页面', () => {
+it('关闭动画期间旧领奖和放弃动作不能改变奖励或重开页面', async () => {
   restoreFixedReceipt();
   const before = UI.el.ovBody.innerHTML, saves = game.persistSave.mock.calls.length;
   UI.el.overlay.classList.add('closing');
-  actions.chestTake1({ i:'0' }); actions.chestSkip(); actions.chestSelect({ i:'0' });
+  await actions.chestTake1({ i:'0' }); await actions.chestSkip(); await actions.chestSelect({ i:'0' });
   expect(game.grantCard).not.toHaveBeenCalled();
   expect(game.persistSave).toHaveBeenCalledTimes(saves);
   expect(UI.el.ovBody.innerHTML).toBe(before);
 });
-it('放弃后取消再重选保留横向卡列位置，且不重抽不发奖', () => {
+it('放弃后取消再重选保留横向卡列位置，且不重抽不发奖', async () => {
   restoreFixedReceipt();
   const scroller = UI.el.ovBody.querySelector('.loot-scroll');
   scroller.scrollLeft = 240; scroller.scrollTop = 37;
-  actions.chestSkip();
+  await actions.chestSkip();
   expect(document.activeElement.dataset.act).toBe('chestStay');
   expect(UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(240);
-  actions.chestStay(); actions.chestSelect({ i:'0' });
+  await actions.chestStay(); await actions.chestSelect({ i:'0' });
   expect(UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(240);
   expect(UI.el.ovBody.querySelector('.loot-scroll').scrollTop).toBe(37);
   expect(Chests.serialize(game).current).toMatchObject({ taken:[], lost:[] });
@@ -163,7 +159,7 @@ it.each(['overview', 'cards'])('等待返回地图时 %s 被新页面替换，�
   let resolveCommit;
   const beforeMapReturn = vi.fn(() => new Promise(resolve => { resolveCommit = resolve; }));
   Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true, beforeMapReturn });
-  if (screen === 'cards') { actions.chestNext(); actions.chestReveal(); }
+  if (screen === 'cards') { Chests.suspend(); Chests.resume(); }
   const pending = actions.chestReturn();
   UI.showOverlay('背包', '<main id="replacement">新页面</main>');
   const saves = game.persistSave.mock.calls.length;
@@ -197,8 +193,8 @@ it.each([
   ['overview', 'map', false], ['cards', 'map', false],
   ['overview', 'map', true], ['cards', 'reward', true],
 ])('%s 返回时%s保存失败（throw=%s）保留原奖励，重试不重抽或重领', async (screen, phase, throws) => {
-  open(); actions.chestReveal(); actions.chestTake1({ i:'0' });
-  if (screen === 'overview') actions.chestClosePicker();
+  await open(); await Promise.resolve(); await actions.chestTake1({ i:'0' });
+  if (screen === 'overview') await actions.chestClosePicker();
   const before = Chests.serialize(game), draws = drawn.mock.calls.length;
   game.persistSave.mockReset().mockReturnValue(true);
   if (phase === 'map') game.persistSave.mockReturnValueOnce(true);
@@ -218,6 +214,6 @@ it.each([
   expect(game.state).toBe('idle');
   expect(drawn).toHaveBeenCalledTimes(draws);
   expect(Chests.restore(game, game.nodeChestRewards['0,1'], vi.fn())).toBe(true);
-  actions.chestOpen?.({ i:'0' }); actions.chestTake1({ i:'0' });
+  actions.chestOpen?.({ i:'0' }); await actions.chestTake1({ i:'0' });
   expect(game.grantCard).toHaveBeenCalledOnce();
 });

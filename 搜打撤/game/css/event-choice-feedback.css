@@ -1,20 +1,23 @@
 /* Semantic option identities share the expedition palette and selection controls. */
-body #overlay .event-scene.sc-event .event-decisions .evt-opt {
+body #overlay .event-scene.sc-event .event-decisions .evt-opt{
+& {
   --choice-accent:#b6cdd4; display:grid; position:relative;
   grid-template-columns:48px minmax(0,1fr); gap:8px 18px; align-content:center;
   min-height:112px; padding:22px 46px 22px 22px; border:1px solid #b4cad338;
   border-left:3px solid var(--choice-accent); border-radius:3px;
   background:#11212be8; box-shadow:none; text-align:left;
 }
-body #overlay .event-scene.sc-event .event-decisions .evt-opt[data-choice-kind="combat"] { --choice-accent:#e0a398; background:linear-gradient(110deg,#42272be8,#14212bf0 75%); }
-body #overlay .event-scene.sc-event .event-decisions .evt-opt[data-choice-kind="trade"] { --choice-accent:#d8c18d; }
-body #overlay .event-scene.sc-event .event-decisions .evt-opt[data-choice-kind="restore"] { --choice-accent:#a6d3c2; }
-body #overlay .event-scene.sc-event .event-decisions .evt-opt[data-choice-kind="leave"] { --choice-accent:#8d9eab; background:#15202adb; }
-body #overlay .event-scene.sc-event .event-decisions .evt-opt .event-choice-symbol { grid-column:1; grid-row:1/3; align-self:center; color:var(--choice-accent); }
+&[data-choice-kind="combat"] { --choice-accent:#e0a398; background:linear-gradient(110deg,#42272be8,#14212bf0 75%); }
+&[data-choice-kind="trade"] { --choice-accent:#d8c18d; }
+&[data-choice-kind="restore"] { --choice-accent:#a6d3c2; }
+&[data-choice-kind="leave"] { --choice-accent:#8d9eab; background:#15202adb; }
+& .event-choice-symbol { grid-column:1; grid-row:1/3; align-self:center; color:var(--choice-accent); }}
 body #overlay .event-choice-symbol .ic { width:36px; height:36px; }
-body #overlay .event-scene.sc-event .event-decisions .evt-opt > b { grid-column:2; color:#edf1ec; font-size:25px; line-height:1.4; }
-body #overlay .event-scene.sc-event .event-decisions .evt-opt > span { grid-column:2; color:#b6c8d2; font-size:19px; line-height:1.5; }
-body #overlay .event-scene.sc-event .event-decisions .evt-opt::after { content:attr(data-choice-number); position:absolute; right:16px; top:14px; color:var(--choice-accent); opacity:.7; font:500 14px/1 var(--font-ui); }
-body #overlay .event-scene.sc-event .event-decisions .evt-opt.is-selected { border-color:var(--choice-accent); box-shadow:inset 0 0 0 1px var(--choice-accent); }
-body #overlay .event-scene.sc-event .event-choice-announcement small { display:none; }
-body #overlay .event-scene.sc-event .event-choice-state { gap:16px; padding-top:24px; }
+body #overlay .event-scene.sc-event .event-decisions .evt-opt{
+& > b { grid-column:2; color:#edf1ec; font-size:25px; line-height:1.4; }
+& > span { grid-column:2; color:#b6c8d2; font-size:19px; line-height:1.5; }
+&::after { content:attr(data-choice-number); position:absolute; right:16px; top:14px; color:var(--choice-accent); opacity:.7; font:500 14px/1 var(--font-ui); }
+&.is-selected { border-color:var(--choice-accent); box-shadow:inset 0 0 0 1px var(--choice-accent); }}
+body #overlay .event-scene.sc-event{
+& .event-choice-announcement small { display:none; }
+& .event-choice-state { gap:16px; padding-top:24px; }}

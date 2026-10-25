@@ -29,6 +29,7 @@ it('keeps one decorative plate through interrupted selection and never moves foc
   select(tabs, 2); await flush();
   expect(motion.retargetVisual).toHaveBeenLastCalledWith(plate, expect.objectContaining({ y: 100 }), {});
   expect(group.querySelectorAll('.selection-state-plate')).toHaveLength(1);
+  expect(group.hasAttribute('data-selection-motion-ready')).toBe(true);
   expect(plate.getAttribute('aria-hidden')).toBe('true');
   expect(plate.hasAttribute('tabindex')).toBe(false);
   expect(document.activeElement).toBe(tabs[0]);
@@ -49,9 +50,34 @@ it('installation is idempotent, disposal removes the layer, and reopening starts
   const { group, tabs, plate } = mount();
   expect(installSelectionStateMotion(document.body)).toBe(dispose);
   dispose(); expect(plate.isConnected).toBe(false);
+  expect(group.hasAttribute('data-selection-motion-ready')).toBe(false);
   select(tabs, 2); dispose = installSelectionStateMotion(document.body);
   expect(group.querySelectorAll('.selection-state-plate')).toHaveLength(1);
   expect(motion.retargetVisual).toHaveBeenLastCalledWith(expect.any(HTMLElement), expect.objectContaining({ y: 100 }), { duration: 0 });
+});
+
+it('leaves business selection responsible for paint until layout is measurable, then releases it again when hidden', async () => {
+  document.body.innerHTML = '<div id="overlay"><nav class="settings-nav"><button class="settings-tab" aria-selected="true">A</button><button class="settings-tab" aria-selected="false">B</button></nav></div>';
+  const group = document.querySelector('nav'), tabs = [...group.children];
+  let visible = false;
+  group.getBoundingClientRect = () => rect(10, 20, visible ? 120 : 0, visible ? 180 : 0);
+  tabs.forEach((tab, i) => { tab.getBoundingClientRect = () => rect(10, 20 + i * 50, visible ? 90 : 0, visible ? 40 : 0); });
+  dispose = installSelectionStateMotion(document.body);
+  const plate = group.querySelector('.selection-state-plate');
+  expect(group.hasAttribute('data-selection-motion')).toBe(true);
+  expect(group.hasAttribute('data-selection-motion-ready')).toBe(false);
+  expect(tabs[0].getAttribute('aria-selected')).toBe('true');
+
+  visible = true; window.dispatchEvent(new Event('resize')); await flush();
+  expect(group.hasAttribute('data-selection-motion-ready')).toBe(true);
+  expect(motion.retargetVisual).toHaveBeenLastCalledWith(plate, expect.objectContaining({ y: 0, opacity: 1 }), { duration: 0 });
+
+  visible = false; group.hidden = true; await flush();
+  expect(group.hasAttribute('data-selection-motion-ready')).toBe(false);
+  expect(tabs[0].getAttribute('aria-selected')).toBe('true');
+  visible = true; group.hidden = false; select(tabs, 1); await flush();
+  expect(group.hasAttribute('data-selection-motion-ready')).toBe(true);
+  expect(motion.retargetVisual).toHaveBeenLastCalledWith(plate, expect.objectContaining({ y: 50, opacity: 1 }), { duration: 0 });
 });
 
 it('retains backpack filter buttons and the plate through refresh, with scroll and focus intact', () => {

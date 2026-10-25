@@ -26,7 +26,9 @@ function normalizePicks(picks) {
     if (!ref || !Number.isInteger(count) || count < 1 || count > 99) return null;
     const key = refKey(ref);
     const old = merged.get(key);
-    merged.set(key, { card: ref, count: (old?.count || 0) + count });
+    const total = (old?.count || 0) + count;
+    if (total > 99) return null;
+    merged.set(key, { card: ref, count: total });
   }
   return [...merged.values()];
 }

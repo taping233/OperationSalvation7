@@ -66,7 +66,6 @@ export function createBaseMetaCommands({ persistProgress }) {
       const d = payload || {};
       /** @type {{cls: string|undefined, amount: number}|null} */
       let xp = null;
-      let changed = true;
       switch (type) {
         case 'turnMoves':
           if ((d.n || 0) > (s.turnMovesMax || 0)) s.turnMovesMax = d.n;
@@ -77,27 +76,22 @@ export function createBaseMetaCommands({ persistProgress }) {
         case 'reviveKill':
           s.reviveKills = (s.reviveKills || 0) + 1;
           break;
-        case 'kill':
-          if (d.boss) {
-            if (!s.bossKills.includes(d.name)) s.bossKills.push(d.name);
-            s.kills++;
-            xp = { cls: d.cls, amount: Math.round(40 * (xpMultiplier() || 1)) };
-          } else {
-            s.kills++;
-            xp = { cls: d.cls, amount: Math.round(6 * (xpMultiplier() || 1)) };
-          }
+        case 'kill': {
+          const boss = d.boss;
+          if (boss && !s.bossKills.includes(d.name)) s.bossKills.push(d.name);
+          s.kills++;
+          xp = { cls: d.cls, amount: Math.round((boss ? 40 : 6) * (xpMultiplier() || 1)) };
           break;
+        }
         case 'action':
           s.actions++;
           break;
         case 'stash':
           s.stashTotal += d.count || 0;
           break;
-        default:
-          changed = false;
       }
-      const gained = changed && xp ? applyClassXp(draft, xp.cls, xp.amount) : null;
-      return { changed, xp, gained };
+      const gained = xp ? applyClassXp(draft, xp.cls, xp.amount) : null;
+      return { changed: true, xp, gained };
     });
     return { changed: result.value.changed, xp: result.value.xp, gained: result.value.gained, persisted: result.persisted };
   }

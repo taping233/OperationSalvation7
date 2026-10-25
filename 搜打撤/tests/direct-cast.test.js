@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 直接释放 / 直接施放类卡牌 + 能力卡专项实打审计（2026-09-13 老板任务 #8）：
  * 在真实 BattleSession（battle.core，无视图层）里逐条验证「直接释放」链路的语义正确性：
  *   1 无量仙剑·云风（能力卡）——抽 5 张后自动直接释放其中的武术（免费）
@@ -18,7 +19,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 3, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 10, 0, 5, 3) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');

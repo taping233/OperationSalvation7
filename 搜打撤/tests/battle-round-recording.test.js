@@ -1,10 +1,10 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 2, battleHandMax: 8, bossDeckSize: 15, starterSha: 1,
-    battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: {} },
+  MAP: { rules: { ...battleRules(2, 8, 15, 1, 5, 1) }, items: {} },
 };
 await import('../game/src/cards/cards.js');
 const recorder = await import('../game/src/agent/agent.recorder.js');

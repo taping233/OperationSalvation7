@@ -1,11 +1,11 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { describe, expect, it } from 'vitest';
 
 // 通过当前正常迁移后的卡库与真实战斗道具入口验证，不以历史审查快照提供规则。
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 8, starterSha: 0,
-    battleStartDraw: 2, battleTurnDraw: 1, diceSides: 6 },
+  MAP: { rules: { ...battleRules(99, 99, 8, 0, 2, 1) },
     items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
 };
 await import('../game/src/cards/cards.js');

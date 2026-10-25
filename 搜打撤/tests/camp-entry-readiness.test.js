@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createCityCut, playPreparedCut, prepareCityCut, cityCutDuration } from '../game/src/ui/camp-entry.js';
+import { createCityCut, playPreparedCut, prepareCityCut, cityCutDuration, enterAchievementCut } from '../game/src/ui/camp-entry.js';
 
 // Keep the real readiness modules; only emulate browser image delivery and clocks.
 let finish;
@@ -24,7 +24,7 @@ function start() {
   finish = playPreparedCut(document.querySelector('main'), cut, cityCutDuration, onFinish);
   return { cut, image, onFinish };
 }
-it.each(['settings-page', 'achievement-gallery', 'cls-pool-page'])(
+it.each(['settings-page', 'cls-pool-page'])(
   'legacy cut adapters cannot mask the shared %s navigation surface', className => {
     const page = document.querySelector('main');
     page.className = className;
@@ -37,7 +37,7 @@ it.each(['settings-page', 'achievement-gallery', 'cls-pool-page'])(
     expect(onFinish).toHaveBeenCalledOnce();
   });
 async function expectFinished(cut, onFinish) {
-  await vi.advanceTimersByTimeAsync(cityCutDuration + 64);
+  await vi.advanceTimersByTimeAsync(cityCutDuration + 800);
   expect(cut.isConnected).toBe(false);
   expect(onFinish).toHaveBeenCalledOnce();
   finish();
@@ -45,6 +45,26 @@ async function expectFinished(cut, onFinish) {
   expect(vi.getTimerCount()).toBe(0);
 }
 describe('achievement curtain with real image-readiness implementation', () => {
+  it('plays the actual gallery entry, cleans on return and plays again on reopen', async () => {
+    const page = document.querySelector('main');
+    page.className = 'achievement-gallery';
+    finish = enterAchievementCut(page, false);
+    const cut = document.querySelector('.camp-entry-cut');
+    expect(cut).not.toBeNull();
+    expect(cut.textContent).toBe('');
+    expect(cut.getAttribute('aria-label')).toContain('荣誉档案');
+    expect(cut.querySelector('img').src).toContain('archive-leaves-v1.webp');
+    cut.querySelector('img').dispatchEvent(new Event('error'));
+    await vi.advanceTimersByTimeAsync(64);
+    expect(cut.classList.contains('page-cut-waiting')).toBe(false);
+    finish();
+    expect(cut.isConnected).toBe(false);
+    finish = enterAchievementCut(page, false);
+    expect(document.querySelector('.camp-entry-cut')).not.toBe(cut);
+    finish();
+    finish = enterAchievementCut(page, true);
+    expect(document.querySelector('.camp-entry-cut')).toBeNull();
+  });
   it('reveals after a successful image and removes the cut once', async () => {
     const { cut, image, onFinish } = start();
     Object.defineProperty(image, 'naturalWidth', { value: 640 });

@@ -1,6 +1,6 @@
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
 const fixture = vi.hoisted(() => ({ entries:new Map(), snapshot:null }));
 vi.mock('../game/src/battle/core/battle.core.js', () => ({
@@ -21,7 +21,7 @@ const UI = {
 window.SDT = { UI, Cards:{ cardHTML:(card,size) => `<div class="hs-card" data-card-id="${card.id}" data-size="${size}">${card.name}<div class="hsc-desc" tabindex="0">${card.desc}</div></div>` } };
 const { renderDeckPileView, renderGrave } = await import('../game/src/battle/view/battle.overlays.js');
 
-const source = readFileSync('game/css/battle-pile-view.css', 'utf8');
+const source = readCssSource('game/css/battle-pile-view.css', 'utf8');
 const css = postcss.parse(source);
 const scope = 'body #overlay .battle-decision.battle-decision-unified[data-decision-kind="pile"]';
 const panel = `${scope}:has([data-battle-pile-view])`;
@@ -90,10 +90,11 @@ describe('shared deck and consumed-pile reading surface', () => {
     render(fixture.snapshot);
     const root = UI.el.ovBody.querySelector('.battle-decision[data-decision-kind="pile"]');
     const cards = [...root.querySelectorAll('.battle-pile-card')];
-    expect(cards).toHaveLength(2);
+    expect(cards).toHaveLength(_kind==='deck'?3:2);
     const short=cards.find(button=>button.querySelector('[data-card-id="pile-short"]'));
     const long=cards.find(button=>button.querySelector('[data-card-id="pile-long"]'));
-    expect(short.querySelector('.battle-pile-count').textContent).toBe('×2');
+    if(_kind==='grave') expect(short.querySelector('.battle-pile-count').textContent).toBe('×2');
+    else expect(short.querySelector('.battle-pile-count')).toBeNull();
     expect(cards.every(button=>button.querySelector('.hs-card').dataset.size==='lg')).toBe(true);
     expect(cards.every(button=>button.querySelector('[tabindex]').tabIndex===-1)).toBe(true);
     expect(root.querySelector('.battle-pile-total').textContent).toBe('3 张');
@@ -102,10 +103,10 @@ describe('shared deck and consumed-pile reading surface', () => {
     expect(root.querySelector('.battle-decision-content').contains(root.querySelector(`[data-act="${backAction}"]`))).toBe(false);
     long.focus(); actions.get('btDecisionInspect')(long.dataset);
     expect(document.activeElement).toBe(long);
-    expect(UI.showCardZoom).toHaveBeenLastCalledWith(fixture.entries.get('second').card,{returnFocus:long});
+    expect(UI.showCardZoom).toHaveBeenLastCalledWith(fixture.entries.get('second').card,expect.objectContaining({returnFocus:long,items:expect.any(Array),index:expect.any(Number)}));
     expect(long.querySelector('.hsc-desc').textContent).toBe(fixture.entries.get('second').card.desc);
     short.focus(); actions.get('btDecisionInspect')(short.dataset);
-    expect(UI.showCardZoom).toHaveBeenLastCalledWith(fixture.entries.get('first').card,{returnFocus:short});
+    expect(UI.showCardZoom).toHaveBeenLastCalledWith(fixture.entries.get('first').card,expect.objectContaining({returnFocus:short,items:expect.any(Array),index:expect.any(Number)}));
     expect(UI.el.ovBody.querySelector('.battle-decision')).toBe(root);
     expect(JSON.stringify(fixture.snapshot)).toBe(before);
   });

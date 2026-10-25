@@ -1,3 +1,4 @@
+import { audioGainFields } from './helpers/environment-fixtures.js';
 /* INFRA-02 回归：开发者控制台「快捷键」页签点「进入」后，jump 成功开出的目标页
  * 必须存活（_acts 不被 hideOverlay 清掉、overlay 不被隐藏），控制台页被目标页顶替。
  * 走真实链路：openDevConsole → devcTab 切快捷键页签 → 真实 DOM click「进入」按钮。 */
@@ -34,7 +35,7 @@ window.Audio = class FakeAudio {
 };
 window.AudioContext = window.AudioContext || class FakeAudioContext {
   constructor() { this.currentTime = 0; this.destination = {}; this.sampleRate = 44100; }
-  createGain() { return { connect: () => {}, disconnect: () => {}, gain: { value: 0, setValueAtTime: () => {}, linearRampToValueAtTime: () => {}, cancelScheduledValues: () => {}, setTargetAtTime: () => {} } }; }
+  createGain() { return { ...audioGainFields() }; }
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(1) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }

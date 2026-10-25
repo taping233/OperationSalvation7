@@ -49,6 +49,22 @@ function createBattleCardInspection({ cards, readState, curseMeta }) {
   // a captured effective face re-read its live UID at the final payment boundary,
   // without replacing an explicitly prepared custom execution candidate.
   const effectiveSources = new WeakMap();
+  const presentedCards = new WeakMap();
+  function withPresentation(card, original, uid, temporary) {
+    const transforming = !!original?.rules?.battle?.handTransform || original?.id === 'tt7-imitate';
+    const transformed = !!original && (card.id !== original.id || card.name !== original.name);
+    const printedCost = transformed ? cards.all?.().find(value => value.id === card.id)?.cost : original?.cost;
+    const baseCost = card._baseCost ?? printedCost ?? card.cost;
+    const key = JSON.stringify([uid, temporary, transforming, transformed, original?.name, baseCost]);
+    let variants = presentedCards.get(card);
+    if (!variants) { variants = new Map(); presentedCards.set(card, variants); }
+    const previous = variants.get(key);
+    if (!previous || Object.keys(card).some(name => name !== '_presentation' && previous[name] !== card[name])
+      || Object.keys(previous).length !== Object.keys(card).filter(name => name !== '_presentation').length + 1) variants.set(key, { ...card, _presentation: {
+      uid, temporary, transforming, transformed, originName: original?.name, baseCost,
+    } });
+    return variants.get(key);
+  }
   const findEffectiveCard = (uid, executionCard = null, normalize = null) => {
     const state = readState();
     const supplied = executionCard && typeof executionCard === 'object' ? executionCard : null;
@@ -74,6 +90,7 @@ function createBattleCardInspection({ cards, readState, curseMeta }) {
     // Array.map passes its source array as the third argument; only a function
     // is an execution normalizer. Track any clone it creates by the same source.
     if (typeof normalize === 'function') card = normalize(card);
+    card = withPresentation(card, base?.card, uid, !state.game.ownedCards.includes(base));
     if (card === entry.card) {
       if (liveUid) effectiveSources.set(card, { uid, card: entry.card, liveUid: true });
       return entry;

@@ -3,10 +3,12 @@ import { sdtDefine } from './sdt-facade.js';
 import { assetUrl } from './asset-url.js';
 import { esc } from './shared.js';
 import { observeIconHydration } from './icon-hydration.js';
+import { SEMANTIC_ICON_KEYS, semanticIconPath } from './semantic-icons.js';
 
   
   const ROOT = 'assets/ui/icons/';
   const NAMES = new Set('altar heart broken coin pouch sword swords bag dice upload download book cards home fire skull gem lantern key lock unlock crystal trash door exit tools pocket broom wood bread trophy paw map notes medal shield plate blood flask scroll save helmet question sparkles bolt recycle check cross arrow play skip hourglass gear pen folder archive mouse flag slime demon runner'.split(' '));
+  SEMANTIC_ICON_KEYS.forEach(name => NAMES.add(name));
   const missingKeys = new Set();
   function reportMissing(kind, key) {
     const label = `${kind}:${String(key || '(empty)')}`;
@@ -15,14 +17,16 @@ import { observeIconHydration } from './icon-hydration.js';
       console.error(`[SDT.Icons] missing bitmap: ${label}`);
     }
   }
-  // W5-08（0926）：语义别名——chart/info 尚无专属位图，映射到现有位图消灭 missing bitmap
-  // 空缺（跑局数据页头/终局结算提示）；零新素材，后续专属图出图后在此改指向即可。
-  const ALIAS = { chart: 'archive', info: 'scroll' };
-  function safe(name) { name = ALIAS[name] || name; if (NAMES.has(name)) return name; reportMissing('icon', name); return 'question'; }
+  function safe(name) { if (NAMES.has(name)) return name; reportMissing('icon', name); return 'question'; }
   // 金币货币图标统一使用地图资源栏同源美术（2026-10-15 老板指示），不再走 icons/coin.png。
   const COIN_ART_URL = assetUrl('assets/ui/map-hud-1015/gold-is7-v2.webp');
   const ALTAR_ART_URL = assetUrl('assets/scenes/map-nodes/altar-symbol-1017-v2.webp');
-  function url(name) { return safe(name) === 'altar' ? ALTAR_ART_URL : safe(name) === 'coin' ? COIN_ART_URL : assetUrl(`${ROOT}${safe(name)}.png`); }
+  function url(name) {
+    const key = safe(name);
+    if (key === 'altar') return ALTAR_ART_URL;
+    if (key === 'coin') return COIN_ART_URL;
+    return assetUrl(semanticIconPath(key) || `${ROOT}${key}.png`);
+  }
   function img(name, cls, alt) { const n=safe(name); if(n==='altar') return `<span class="ic${cls?' '+esc(cls):''}" role="img" aria-label="${esc(alt||'祭坛')}" data-asset-key="icon-altar" style="position:relative;display:inline-block;overflow:hidden;filter:none"><img src="${url(n)}" alt="" draggable="false" loading="eager" decoding="async" style="position:absolute;left:-37.1%;top:-39.6%;width:171.3%;height:171.3%;max-width:none;max-height:none;object-fit:fill;filter:none"></span>`; return `<img class="ic${cls?' '+esc(cls):''}" src="${url(n)}" alt="${esc(alt||n)}" data-asset-key="icon-${esc(n)}" draggable="false" loading="eager" decoding="async">`; }
 
   const MAP = Object.create(null);
@@ -36,14 +40,17 @@ import { observeIconHydration } from './icon-hydration.js';
   add('pocket',[0x1f9f3,0x1f45d]); add('broom',[0x1f9f9]); add('wood',[0x1fab5,0x1f33f]); add('bread',[0x1f35e]); add('trophy',[0x1f3c6]);
   add('paw',[0x1f43e,0x1f415]); add('map',[0x1f5fa]); add('notes',[0x1f4dd]); add('medal',[0x1f396,0x1f3c5]);
   add('shield',[0x1f6e1]); add('plate',[0x1faa8]); add('blood',[0x1fa78]); add('flask',[0x1f9ea,0x2697]); add('scroll',[0x1f4dc]);
-  add('save',[0x1f4be]); add('helmet',[0x1f9b8]); add('question',[0x2754,0x2753,0x1f50d]); add('sparkles',[0x2728,0x1f31f,0x1f30c,0x1f4ab,0x2b50]);
+  add('save',[0x1f4be]); add('helmet',[0x1f9b8]); add('question',[0x2754,0x2753]); add('sparkles',[0x2728,0x1f31f,0x1f30c,0x1f4ab,0x2b50]);
   add('bolt',[0x26a1]); add('recycle',[0x267b,0x1f504,0x1f500]); add('check',[0x2714,0x2705]); add('cross',[0x2715,0x274c,0x1f6ab,0x1f910]);
   add('arrow',[0x27a1,0x1f4c8,0x1f4c9]); add('play',[0x25b6]); add('skip',[0x23ed]); add('hourglass',[0x23f3,0x231b]);
   add('gear',[0x2699,0x1f50a,0x1f4e1]); add('pen',[0x2712,0x270e]); add('folder',[0x1f4c1]); add('archive',[0x1f5c2,0x1f5c3,0x1f4e6]);
   add('mouse',[0x1f5b1]); add('flag',[0x1f3f3]); add('slime',[0x1f47e]); add('demon',[0x1f479,0x1f608,0x1f409]); add('runner',[0x1f3c3,0x1f47b,0x1f4a8]);
-  add('question',[0x26a0,0x267e,0x221e,0x1f4cc]); add('crystal',[0x2744]);
+  add('warning',[0x26a0]); add('search',[0x1f50d]); add('infinity',[0x267e,0x221e]); add('pin',[0x1f4cc]); add('status-freeze',[0x2744]);
 
-  const EMOJI_RE = /(?:[\uD83C-\uDBFF][\uDC00-\uDFFF](?:\uFE0F|\u200D[\s\S])?|[\u2300-\u27BF]\x75FE0?|[\u2B00-\u2BFF]\x75FE0?)/g;
+  // Only registered BMP symbols become images: page ornaments such as ✦ / ✓
+  // keep their native glyph rather than becoming an unrelated question mark.
+  const bmpSymbols = Object.keys(MAP).filter(symbol => symbol.length === 1).join('');
+  const EMOJI_RE = new RegExp(`(?:[\\uD83C-\\uDBFF][\\uDC00-\\uDFFF](?:\\uFE0F|\\u200D[\\s\\S])?|[${bmpSymbols}](?:\\uFE0F)?)`, 'g');
   const ICON_TOKEN_RE = /\[\[icon:[a-z-]+\]\]/;
   function hasTokens(text) {
     EMOJI_RE.lastIndex = 0;

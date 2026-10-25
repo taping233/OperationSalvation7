@@ -20,22 +20,26 @@ beforeEach(() => {
   controller=createGameMenuController({SDT,UI,game,runtime:{rebuildNotes:rebuild,syncDevVisibility:noop}});
   UI.log=vi.fn();
   controller.openSettings();
-  document.querySelector('#settings-tab-data').click();
+  document.querySelector('#settings-tab-general').click();
+  document.querySelector('.settings-danger').closest('details').open=true;
 });
-afterEach(() => { UI.hideOverlay({immediate:true}); vi.clearAllTimers(); vi.useRealTimers(); vi.unstubAllGlobals(); });
+afterEach(() => { document.querySelector('[data-confirm-cancel]')?.click(); UI.hideOverlay({immediate:true}); vi.clearAllTimers(); vi.useRealTimers(); vi.unstubAllGlobals(); });
 describe('真实设置入口清空备注回执',()=>{
-  it('首次只确认；失败时不重建或报告已清空，提示原内容保留',()=>{
+  it('首次只确认；失败时不重建或报告已清空，提示原内容保留',async ()=>{
     const button=document.querySelector('[data-act="wipeNotes"]'); button.click();
     expect(clear).not.toHaveBeenCalled();
-    button.click();
+    document.querySelector('[data-confirm-submit]').click();
+    await vi.advanceTimersByTimeAsync(0);
     expect(clear).toHaveBeenCalledOnce();
     expect(rebuild).not.toHaveBeenCalled();
     expect(UI.log).not.toHaveBeenCalledWith('已清空全部格子备注','warn');
     expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('原内容已保留'),'warn');
   });
-  it('失败重试真实成功后才重建并显示完成',()=>{
-    const button=document.querySelector('[data-act="wipeNotes"]'); button.click(); button.click();
-    clear.mockReturnValue(true); button.click();
+  it('失败重试真实成功后才重建并显示完成',async ()=>{
+    const button=document.querySelector('[data-act="wipeNotes"]'); button.click(); document.querySelector('[data-confirm-submit]').click();
+    await vi.advanceTimersByTimeAsync(0);
+    clear.mockReturnValue(true); document.querySelector('[data-confirm-submit]').click();
+    await vi.advanceTimersByTimeAsync(0);
     expect(clear).toHaveBeenCalledTimes(2); expect(rebuild).toHaveBeenCalledOnce();
     expect(UI.log).toHaveBeenLastCalledWith('已清空全部格子备注','warn');
   });

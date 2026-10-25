@@ -17,7 +17,7 @@ vi.mock('../game/src/run/game.run.js', () => ({ bindRunMixins: vi.fn(), devForce
 vi.mock('../game/src/ui/game.menu.js', () => ({ get menuPageLoading() { return h.menuLoading; }, cancelPendingMenuPageOpen: h.cancelMenu }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ PRELOAD_SCENES: Object.fromEntries(['battle', 'coin', 'wood', 'rations', 'key', 'fire'].map(key => [key, `scene-${key}.webp`])) }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ resumeExtraction: vi.fn() }));
-vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn(), baseHubLoading: false }));
+vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn(), preloadBaseHub: vi.fn(async () => {}), baseHubLoading: false }));
 vi.mock('../game/src/hub/game.bag.js', () => ({ bindBagMixins: vi.fn(), resumeBattleRewards: vi.fn(),
   showBackpack: vi.fn(), showBackpackSection: vi.fn(), setBagReturnHook: vi.fn() }));
 vi.mock('../game/src/run/game.run.shop.js', () => ({ configureShopRuntime: vi.fn() }));
@@ -29,7 +29,6 @@ vi.mock('../game/src/hub/game.cardslib.js', () => ({ cardPageOpen: false, cardPa
 vi.mock('../game/src/run/game.session.browser.js', () => ({ createGameCanvas: () => ({ canvas: h.canvas, ctx: h.ctx }) }));
 vi.mock('../game/src/agent/agent.js', () => ({}));
 vi.mock('../game/src/ui/quick-nav.js', () => ({}));
-vi.mock('../game/src/experience/pocket-strip.js', () => ({ startPocketStrip: vi.fn() }));
 
 // Preserve the real empty UI cache until DOMContentLoaded; pre-populating it hid this race.
 const frames = new Map();

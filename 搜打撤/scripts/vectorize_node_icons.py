@@ -7,6 +7,10 @@ from pathlib import Path
 
 import cv2
 import numpy as np
+if __package__:
+    from .vectorize_common import contour_path as trace_contour, layer_paths
+else:
+    from vectorize_common import contour_path as trace_contour, layer_paths
 
 
 NAMES = (
@@ -119,11 +123,7 @@ def quantize(rgb: np.ndarray, mask: np.ndarray, colours: int = 12) -> tuple[np.n
 
 
 def contour_path(contour: np.ndarray) -> str:
-    epsilon = max(0.7, cv2.arcLength(contour, True) * 0.0022)
-    points = cv2.approxPolyDP(contour, epsilon, True).reshape(-1, 2)
-    if len(points) < 3:
-        return ""
-    return "M" + "L".join(f"{int(x)} {int(y)}" for x, y in points) + "Z"
+    return trace_contour(contour, 0.7, 0.0022)
 
 
 def trace_svg(rgb: np.ndarray, mask: np.ndarray, title: str) -> str:
@@ -135,25 +135,8 @@ def trace_svg(rgb: np.ndarray, mask: np.ndarray, title: str) -> str:
     remapped[mask > 0] = distances.argmin(axis=1)
     output_palette = themed_palette(title, len(ordered_palette))
     paths: list[str] = []
-    for index, _ in enumerate(ordered_palette):
-        layer = (remapped == index).astype(np.uint8) * 255
-        layer = cv2.morphologyEx(layer, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
-        contours, hierarchy = cv2.findContours(layer, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
-        if hierarchy is None:
-            continue
-        hierarchy = hierarchy[0]
-        for i, contour in enumerate(contours):
-            if hierarchy[i][3] != -1 or cv2.contourArea(contour) < 7:
-                continue
-            pieces = [contour_path(contour)]
-            child = hierarchy[i][2]
-            while child != -1:
-                pieces.append(contour_path(contours[child]))
-                child = hierarchy[child][0]
-            d = "".join(piece for piece in pieces if piece)
-            if d:
-                fill = "#{:02x}{:02x}{:02x}".format(*output_palette[index])
-                paths.append(f'  <path d="{d}" fill="{fill}" fill-rule="evenodd"/>')
+    for index, colour in enumerate(output_palette):
+        paths.extend(layer_paths(remapped == index, colour, 7, contour_path))
     return "\n".join((
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">',
         f"  <title>{title}</title>",

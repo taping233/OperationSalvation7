@@ -33,10 +33,30 @@ const encounter = (version, seed) => {
 };
 
 describe('F38 新局第三层同档普通编组轮换', () => {
+  it('各层300个种子固定一个本层精英，人数等于未替换的普通遭遇', () => {
+    for (let layer = 0; layer < 4; layer++) {
+      const pool = H.map.encounters[layer].guaranteedElite;
+      const seen = new Set();
+      for (let seed = 0; seed < 300; seed++) {
+        H.random = seeded(`elite:${layer}:${seed}`);
+        const mixed = buildEncounter(layer);
+        const elites = mixed.filter(enemy => enemy.elite);
+        expect(elites).toHaveLength(layer ? 1 : 0);
+        if (layer) { expect(pool).toContain(elites[0].id); seen.add(elites[0].id); }
+        expect(mixed.rewardKind).toBe('normal');
+        H.map.encounters[layer].guaranteedElite = [];
+        try {
+          H.random = seeded(`elite:${layer}:${seed}`);
+          expect(mixed).toHaveLength(buildEncounter(layer).length);
+        } finally { H.map.encounters[layer].guaranteedElite = pool; }
+      }
+      if (layer) expect(seen.size).toBe(3);
+    }
+  });
   it('240个种子保持原人数、精英、奖励和随机流步数，只从同层既有普通池替代', () => {
     const normalIds = new Set(H.map.encounters[2].entries.map(entry => entry.id));
     const combinations = new Set();
-    let elite = 0, rotated = 0;
+    let rotated = 0;
     for (let seed = 0; seed < 240; seed++) {
       H.game.mapSeed = seed;
       H.game.trackPos = seed % 4;
@@ -46,10 +66,10 @@ describe('F38 新局第三层同档普通编组轮换', () => {
       expect(fresh.enemies.encounterKind).toBe(old.enemies.encounterKind);
       expect(fresh.enemies.rewardKind).toBe(old.enemies.rewardKind);
       expect(fresh.enemies.risk).toBe(old.enemies.risk);
-      if (old.enemies.encounterKind === 'elite') {
-        elite++; expect(fresh.enemies).toEqual(old.enemies);
-      } else {
-        fresh.enemies.forEach(enemy => {
+      expect(fresh.enemies.filter(enemy => enemy.elite)).toHaveLength(1);
+      expect(H.map.encounters[2].guaranteedElite).toContain(fresh.enemies[0].id);
+      {
+        fresh.enemies.filter(enemy => !enemy.elite).forEach(enemy => {
           expect(normalIds.has(enemy.id)).toBe(true);
           expect(enemy).toEqual({ ...H.map.monsters[enemy.id], scaled:true });
           const entry = H.map.encounters[2].entries.find(item => item.id === enemy.id);
@@ -61,21 +81,22 @@ describe('F38 新局第三层同档普通编组轮换', () => {
       }
       expect(encounter(1, seed).enemies).toEqual(fresh.enemies);
     }
-    expect(elite).toBeGreaterThan(0);
     expect(rotated).toBeGreaterThan(0);
     expect(combinations.size).toBeGreaterThanOrEqual(6);
   });
-  it('连续节点相同旧掷数得到不同组合；人数1没有可替代时保留雪狼', () => {
+  it('连续节点保留普通怪轮换；人数1仅生成一个精英', () => {
     const combinations = [];
     for (let index = 0; index < 3; index++) {
       H.game.trackPos = index; H.random = () => .6;
       combinations.push(buildEncounter(2).map(enemy => enemy.id).join('+'));
     }
     expect(new Set(combinations).size).toBe(3);
-    const values = [.9, .1, 0, .2];
+    const values = [.1, 0, .2];
     H.random = () => values.shift() ?? .2;
     const single = buildEncounter(2);
-    expect(single.map(enemy => enemy.id)).toEqual(['wolf_rider']);
+    expect(single).toHaveLength(1);
+    expect(single[0].elite).toBe(true);
+    expect(H.map.encounters[2].guaranteedElite).toContain(single[0].id);
     expect(single.encounterId).toBe('entry:wolf_rider');
   });
   it('其他层即使带新局标记也沿用原编组', () => {

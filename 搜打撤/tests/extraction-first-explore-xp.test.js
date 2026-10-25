@@ -1,3 +1,4 @@
+import { extractionMocks } from './helpers/environment-fixtures.js';
 /* SYS-01 探索奖励（2026-10-03）：撤离经验只统计「首次有效探索量」（首踏入格打标 explored）。
  * 验收钉死两条：
  *   ① 同一有效路线，加或不加安全往返（重复进出已探索格），最终撤离经验相同；
@@ -29,10 +30,7 @@ vi.mock('../game/src/core/random.js', () => ({
 }));
 vi.mock('../game/src/battle/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
 vi.mock('../game/src/run/game.run.scenes.js', () => ({
-  FIRE_RESTORABLE: [], consumeCurrentCell: vi.fn(), finishInstant: vi.fn(), grantEventCard: vi.fn(),
-  nodeOpt: (act, label) => `<button data-act="${act}">${label}</button>`,
-  nodeShell: ({ body = '', foot = '' }) => window.SDT.UI.showOverlay('', `${body}${foot}`),
-  openPocketRestore: vi.fn(), openShop: vi.fn(), preloadAllNodeShellBgs: vi.fn(), showRunTransition: vi.fn(),
+  ...extractionMocks(() => vi),
 }));
 vi.mock('../game/src/run/game.nest.js', () => ({ unlockNest: vi.fn() }));
 vi.mock('../game/src/hub/game.storage.js', () => ({ RunStorage: {} }));

@@ -1,3 +1,4 @@
+import { refreshRunTopBar, runTopBarPlayerView } from './run-top-bar.js';
 // @ts-check
 /* ui.hud.js —— HUD 常驻区：顶栏回合/经济/血条/背包浮动键刷新、日志面板、tooltip 空转桩
  * （09-25 自 ui.js 拆出，方法包由 ui.js 组装）。
@@ -89,9 +90,9 @@ export const hudMethods = {
 
     // 人物：血条 + 经济 + 背包格数
     // U18：负血不外显——数据层保留真实值（含 hpKey 缓存键），展示层统一 max(0,hp)
-    const dispHp = Math.max(0, game.hp);
-    const pct = Math.max(0, game.hp / game.maxHp);
-    const hpKey = `${game.hp}/${game.maxHp}`;
+    const playerHud = runTopBarPlayerView(this, game);
+    const pct = Math.max(0, playerHud.hp / playerHud.maxHp);
+    const hpKey = `${playerHud.hp}/${playerHud.maxHp}`;
     const firstHpSet = this._lastHpKey == null;
     if (this._lastHpKey !== hpKey) {
       // 首帧直贴：进场不从 0% 播过渡（口径同战斗血条 instant）
@@ -101,23 +102,21 @@ export const hudMethods = {
       if (firstHpSet) { void this.el.hpBar.offsetWidth; this.el.hpBar.style.transition = ''; }
       this.el.hpBar.style.background = pct > 0.5 ? 'linear-gradient(90deg,#2f6f9f,#55a4d6)'
         : pct > 0.25 ? 'linear-gradient(90deg,#b08238,#d4a44e)' : 'linear-gradient(90deg,#b8453a,#d97a52)';
-      this.el.hpBarWrap.classList.toggle('low', pct <= 0.25 && game.hp > 0);
-      this.el.hpText.innerHTML = `${dispHp}<span class="hp-rest">/${game.maxHp}</span>`;
+      this.el.hpBarWrap.classList.toggle('low', pct <= 0.25 && playerHud.hp > 0);
     }
     updateMapHealthHud(this.el.hpText.closest('#hpHud'), {
-      hp: game.hp, maxHp: game.maxHp, instant: firstHpSet,
-      active: game.runActive !== false && this._lastMode !== 'battle'
-        && !document.body.matches('.lobby, .scene-battle-3d'),
+      hp: playerHud.hp, maxHp: playerHud.maxHp, instant: firstHpSet,
+      active: game.runActive !== false,
     });
     if (this._lastCoins !== game.coins) {
       this.el.charCoins.textContent = /** @type {any} */ (game.coins);
       if (this._lastCoins != null) this.popNum(this.el.charCoins);
       this._lastCoins = game.coins;
     }
-    if (this._lastAtk !== game.atk) {
-      this.el.charAtk.textContent = /** @type {any} */ (game.atk);
+    if (this._lastAtk !== playerHud.atk) {
+      this.el.charAtk.textContent = /** @type {any} */ (playerHud.atk);
       if (this._lastAtk != null) this.popNum(this.el.charAtk);
-      this._lastAtk = game.atk;
+      this._lastAtk = playerHud.atk;
     }
     // 头像与职业（选职业后同步；头像使用职业立绘）
     const cls = game.myClass || '';
@@ -125,6 +124,7 @@ export const hudMethods = {
       this._lastHeroCls = cls;
       this.el.heroAva.innerHTML = (cls && SDT.Art) ? SDT.Art.classAvatarArt(cls) : '旅';
     }
+    refreshRunTopBar(this, game);
     // 背包容量角标随全局浮动背包键一并移除（2026-10-15 老板：删旧背包按钮，背包页自带退出键）
   },
 

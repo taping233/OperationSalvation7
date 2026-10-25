@@ -1,8 +1,9 @@
+import { firstPureDiscoveryJob } from '../effects/battle.discover-preview.js';
 import { createTargetTurnCostModifier } from '../effects/battle.cost-modifiers.js';
 import { createInfusionDomain } from '../effects/battle.infusion.domain.js';
 import { esc } from '../../core/shared.js';
 import { splitEffectClauses as splitClauses } from '../effects/battle.effects.js';
-import { isHandPaymentCandidate, matchesHandSelectKey } from './battle.hand-selection.js';
+import { isHandPaymentCandidate, matchesHandSelectKey, nextHandSelectionId } from './battle.hand-selection.js';
 import { createBattleDiscoverFlow } from '../effects/battle.discover-flow.js';
 import { withBlessingChoices } from '../effects/random-blessings.js';
 import { createChoiceSemanticOperations } from '../effects/choice-semantic-operations.js';
@@ -82,6 +83,63 @@ function createBattleSelectionFlow({
     },
     output: { log: (message, kind) => instanceRuntime.G.log(message, kind) },
   });
+  let preview = null, previewSerial = 0;
+  let cacheScope = null;
+  const previewCache = new Map();
+  function refreshPreviewCache(force = false) {
+    const scope = `${instanceRuntime.battleState.token}:${instanceRuntime.turn}`;
+    if (force || cacheScope !== scope) { previewCache.clear(); cacheScope = scope; }
+  }
+  const planKey = card => JSON.stringify({ id: card.id, type: card.type, desc: card.desc, rules: card.rules });
+  function previewDiscovery(card, uid, signal, readSourceCard = () => findCard(uid)?.card || card, sourceAvailable = () => instanceRuntime.hand.includes(uid)) {
+    if (instanceRuntime.discovering || instanceRuntime.discoverQueue.length ||
+      (!(card.type === '道具' && Array.isArray(card.rules?.bag?.use)) && !card.rules?.battle?.ignoresSilence && (instanceRuntime.pstat.status.silence || 0) > 0)) return null;
+    const job = firstPureDiscoveryJob(card, { getAllCards: () => cards.all(), getMyClass: () => instanceRuntime.G.myClass, sourceUid: uid,
+      getStoredCards: () => (instanceRuntime.G.ownedCards || []).filter(o => o.pouchOf === 'tt7-stratagem' && o.card?.type === '法术').map(o => ({ ...o.card, pouchUid: o.uid })) });
+    if (!job) return null;
+    const token = instanceRuntime.battleState.token, turn = instanceRuntime.turn;
+    refreshPreviewCache();
+    const signature = planKey(card), key = `${uid}:${signature}`;
+    const cached = previewCache.get(key);
+    instanceRuntime.discoverQueue.unshift(cached ? { ...job, fixedOptions: cached } : job);
+    discoverFlow.processDiscoverQueue();
+    if (!instanceRuntime.discovering) return null;
+    const state = { ...instanceRuntime.discovering, roundId: `preview-${++previewSerial}`,
+      sourceUid: uid, sourceCardId: card.id, sourceCommit: 'preview', canCancel: true, cancelLabel: '取消使用' };
+    instanceRuntime.set$discovering(state);
+    previewCache.set(key, state.options);
+    requestBattleRender();
+    return new Promise(resolve => {
+      const finish = (value, cancelledBySignal = false) => {
+        signal?.removeEventListener('abort', abort);
+        if (preview?.state === state) preview = null;
+        if (instanceRuntime.discovering === state) instanceRuntime.set$discovering(null);
+        if (!cancelledBySignal && instanceRuntime.G?.battleActive && instanceRuntime.battleState.token === token) requestBattleRender();
+        resolve(value);
+      };
+      const abort = () => { refreshPreviewCache(true); finish(false, true); };
+      preview = { state, finish,
+        valid: () => instanceRuntime.G?.battleActive && instanceRuntime.battleState.token === token && instanceRuntime.turn === turn
+          && sourceAvailable() && planKey(readSourceCard()) === signature
+          && (job.act !== 'pouch' || state.options.every(option => instanceRuntime.G.ownedCards.some(o => o.uid === option.pouchUid && o.card?.id === option.id))) };
+      signal?.addEventListener('abort', abort, { once: true });
+      if (signal?.aborted) abort();
+    });
+  }
+  function cancelDiscover(expectedRoundId) {
+    const state = instanceRuntime.discovering;
+    if (!state || (expectedRoundId != null && state.roundId !== expectedRoundId)) return false;
+    if (preview?.state === state) {
+      const active = preview;
+      if (!active.valid()) { active.finish(false); return false; }
+      instanceRuntime.G.log('[[icon:question]] 已取消本次使用，源牌、能量、注能材料与手牌代价均未消耗；再次打开保留本回合候选', 'sys');
+      active.finish(false);
+      return true;
+    }
+    const cancelled = discoverFlow.cancelDiscover(expectedRoundId);
+    if (cancelled) settleSelections();
+    return cancelled;
+  }
   const randomDiscoverCard = (/** @type {Parameters<typeof discoverFlow.randomDiscoverCard>} */ ...args) => discoverFlow.randomDiscoverCard(...args);
   const processDiscoverQueue = () => {
     // 空池或不支持的发现任务会自行跳过；继续排队任务，不能留下无人处理的回合续接。
@@ -89,6 +147,12 @@ function createBattleSelectionFlow({
     while (!instanceRuntime.discovering && instanceRuntime.discoverQueue.length);
   };
   const pickDiscover = index => {
+    if (preview?.state === instanceRuntime.discovering) {
+      const active = preview, state = active.state;
+      if (!active.valid() || !Number.isInteger(+index) || !state.options[+index]) return false;
+      active.finish({ options: state.options, index: +index, claimed: false });
+      return true;
+    }
     discoverFlow.pickDiscover(index);
     settleSelections();
   };
@@ -113,6 +177,7 @@ function createBattleSelectionFlow({
       return;
     }
     instanceRuntime.set$handSelecting({
+      selectionId: nextHandSelectionId(),
       n: Math.min(job.n || 1, matched), type: job.type || null, act: job.act || 'play',
       thenText: job.thenText || '', target: job.target || null, srcCard: job.srcCard || null,
       mandatory: !!job.mandatory, onDone: job.onDone || null,
@@ -192,9 +257,22 @@ function createBattleSelectionFlow({
     // 所有效果选牌都只接受当前手牌中的合格候选；旧按钮不能重复消耗已移出的 UID。
     if (!instanceRuntime.hand.includes(uid) || !matchesHandSelectKey(entry.card, instanceRuntime.handSelecting.type)) return;
     if (instanceRuntime.handSelecting.act === 'play') {
+      const job = instanceRuntime.handSelecting;
+      const token = instanceRuntime.battleState.token;
       instanceRuntime.set$handSelecting(null);
       // 选卡施放：不扣费；「直接释放」词条（剑荡妖邪）——注能卡视为已注能（反馈#5b 老板定版）
-      if (queueCardExecution(uid, entry.card, [], alive()[0] || null, true, false, [], null, null, true) === false) settleSelections();
+      const onResolved = () => {
+        if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token) return;
+        if (job.n > 1) {
+          // Child effects keep their own active selection; resume this batch only after they finish.
+          handSelectQueue.unshift({ ...job, n: job.n - 1 });
+          settleSelections();
+          return;
+        }
+        job.onDone?.();
+        if (instanceRuntime.G?.battleActive) finishHandSelectionEffect(job.srcCard || entry.card, job.thenText, job.target || null);
+      };
+      if (queueCardExecution(uid, entry.card, [], alive()[0] || null, true, false, [], onResolved, null, true) === false) settleSelections();
       return;
     }
     if (instanceRuntime.handSelecting.act === 'copy') {
@@ -300,7 +378,7 @@ function createBattleSelectionFlow({
   }
   return {
     randomDiscoverCard, matchHandSelectKey: matchesHandSelectKey, processHandSelect, skipHandSelect, pickHandSelect,
-    processChoice, pickChoice, processDiscoverQueue, pickDiscover,
+    processChoice, pickChoice, processDiscoverQueue, pickDiscover, cancelDiscover, previewDiscovery, refreshPreviewCache,
   };
 }
 return { createBattleSelectionFlow };

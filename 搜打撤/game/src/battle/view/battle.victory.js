@@ -32,7 +32,7 @@ export function presentVictory(options = {}, isCurrent = () => true) {
       document.removeEventListener('sdt-overlay-mode', onMode);
       document.removeEventListener('sdt-overlay-close', onClose);
       notice.remove();
-      if (stage._battleToken === token) { stage.inert = wasInert; stage.classList.remove('battle-won'); }
+      if (stage._battleToken === token) { stage.inert = wasInert; }
       if (!success) animation?.cancel();
       resolve(success && current());
     };
@@ -50,7 +50,7 @@ export function presentVictory(options = {}, isCurrent = () => true) {
       clearTimeout(deathTimer);
       if (done) return;
       if (!current()) { finish(false); return; }
-      stage.appendChild(notice); stage.classList.add('battle-won');
+      stage.appendChild(notice);
       animation = notice.animate([
         { opacity: 0, transform: 'translateY(8px)' },
         { opacity: 1, transform: 'translateY(0)', offset: .2 },

@@ -1,3 +1,4 @@
+import { altarMocks, altarStateFields } from './helpers/environment-fixtures.js';
 /* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：祭坛献祭两分支、消耗区复原、
  * 钥匙复原链与火堆自动复原（只验证不改行为）的事务顺序钉现状。
  * 审计结论：五拍齐全、无「已领/未领搞混」缺陷——
@@ -5,7 +6,7 @@
  *   弃 3 激活：卡不足 3 张拒开选卡器；确认后 markActivated+visited+saveGame；
  *   碎片兑换：先发卡后扣 2 碎片（满包拒收不扣碎片，2026-09-10 留言 #30/#532 注释口径）；
  *   奖励二选一：离开保留选择；传说+装备选择后冻结到持久化领奖页，容量失败保留；
- *   复原页 restoreOne：left 校验+满包拒绝（卡留口袋）；修鞋铺 picks=1 复原 1 张自动收尾；
+ *   复原页 restoreOne：left 校验+满包拒绝（卡留口袋）；战地整备的复原分支 picks=1，复原 1 张自动收尾；
  *   火堆（10-02 玩法批改「发现两张自动复原」，本包不动行为）：满包先检后扣口袋、
  *   consumeCurrentCell 收格、saveGame 落盘；
  *   钥匙复原（base.restore）：钥匙不足 nokey 拒绝、仓库满 full 拒绝、mutate 事务内扣钥匙入仓。
@@ -51,12 +52,7 @@ let UI, acts;
 function makeGame() {
   return {
     state: 'idle', layerIdx: 0, trackPos: 0, turn: 1, mode: 'normal', myClass: 'wu',
-    hp: 20, maxHp: 30, coins: 0, fragments: 0, visited: {},
-    ownedCards: [], usedPocket: [], inventory: [],
-    // 祭坛/火堆运行期标记：原地 assign 复用同一 game 对象时必须显式复位，
-    // 否则上一用例的激活/上锁状态会泄漏到下一用例
-    altarActivated: undefined, altarItemSacrificed: undefined, altarRewardPending: undefined,
-    bossKilled: false, _fireRestKey: undefined, nodeRewards: {},
+    hp: 20, maxHp: 30, ...altarStateFields(),
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     bagCap: () => st.bagCapN,
     usedSlots() { return this.ownedCards.length; },
@@ -89,23 +85,7 @@ beforeEach(async () => {
   };
   window.SDT = {
     UI,
-    Sound: { sfx: vi.fn(), scene: vi.fn() },
-    Icons: { rich: x => x },
-    Meta: { addXpToProgress: x => ({ after: x }), track: vi.fn() },
-    Cards: {
-      all: () => [
-        { id: 'lg1', name: '传说甲', rarity: '传说', type: '法术' },
-        { id: 'eq1', name: '装备甲', rarity: '史诗', type: '装备' },
-      ],
-      classPool: () => [{ id: 'ab1', name: '能力甲', rarity: '职业', type: '能力卡' }],
-      isRandomObtainable: () => true,
-      randomClassCard: () => null,
-      cardHTML: c => c.name,
-      sellPrice: () => 1,
-    },
-    MAP: { chestKinds:{ small:{ name:'小宝箱' } } },
-    Base: { isSha: () => false, bagCap:() => st.bagCapN },
-    Motion: undefined,
+    ...altarMocks(st, () => vi),
   };
 });
 

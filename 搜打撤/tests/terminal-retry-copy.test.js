@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 // terminal-retry-copy.test.js —— SYS-10（2026-10-03 老板）存档失败提示钉现状：
 // 终局失败页必须说人话（进度保留在哪、重试为什么安全），不裸露实现术语/原始异常。
 // 幂等机制本身不在此重建——tests/terminal-persistence.test.js 三失败点矩阵 +
@@ -14,9 +15,7 @@ window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music: vi.fn(), sfx: vi.fn(), setDucked: vi.fn() },
   FX: { feedback: vi.fn() },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2,
-    battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5,
-    battleTurnDraw: 1, diceSides: 6 } },
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1) } },
 };
 await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');
@@ -103,6 +102,7 @@ describe('常规存档写失败提示（saveGame，注入配额满）', () => {
     session._set_active_slot(2);
     logs.length = 0;
     await session.newRun('standard', [], { skipClassChoice: true });
+    await RunStorage.flushWrites();
     game.state = 'idle';
     const runKey = RunStorage.key(2);
     const raw = window.localStorage.getItem(runKey);
@@ -110,10 +110,10 @@ describe('常规存档写失败提示（saveGame，注入配额满）', () => {
     const spy = vi.spyOn(proto, 'setItem').mockImplementation(() => {
       throw new DOMException('The quota has been exceeded.', 'QuotaExceededError');
     });
-    let ok;
-    expect(() => { ok = saveGame(); }).not.toThrow();
+    const saving = saveGame();
+    expect(saving).toBeInstanceOf(Promise);
+    await expect(saving).resolves.toBe(false);
     spy.mockRestore();
-    expect(ok).toBe(false);
     expect(window.localStorage.getItem(runKey)).toBe(raw);   // 主档字节未变
     expect(logs.join('\n')).toContain('对局存档写入失败（存储空间可能已满）');
     expect(logs.join('\n')).toContain('请导出存档或删除旧档位');   // 处置建议

@@ -2,6 +2,8 @@
 import { achievementMedalHTML, pickAchievementMedalStyle } from './achievement-medals.js';
 import { createAchievementMotion } from './achievement-motion.js';
 import { linkedBackHTML } from './home-linked-interactions.js';
+import { collectionHeaderHTML, collectionToolbarHTML } from './collection-chrome.js';
+import { transitionRegion, cancelRegionTransition } from './region-transition.js';
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 }[char]));
@@ -37,23 +39,24 @@ export function achievementGalleryHTML({ achievements, base, slot, isUnlocked, b
     ].filter(Boolean).join(' / ') || '远征纪念';
     const state = entry.claimed ? 'claimed' : entry.unlocked ? 'unlocked' : 'locked';
     const label = entry.claimed ? '已领取' : entry.unlocked ? '已获得 · 待领取' : '未获得';
-    return `<button type="button" class="ag-medal ag-${state}" data-gallery-item data-medal-id="${esc(entry.id)}" data-number="${entry.number}" data-rewards="${esc(rewards)}" data-category="${entry.category.id}" data-unlocked="${entry.unlocked}" data-search="${esc(entry.name + ' ' + entry.desc)}" aria-label="${esc(entry.name)}，${label}，查看详情">
+    return `<button type="button" class="ag-medal ag-${state}" aria-pressed="false" data-gallery-item data-medal-id="${esc(entry.id)}" data-number="${entry.number}" data-rewards="${esc(rewards)}" data-category="${entry.category.id}" data-unlocked="${entry.unlocked}" data-search="${esc(entry.name + ' ' + entry.desc)}" aria-label="${esc(entry.name)}，${label}，查看详情">
       <span class="ag-emblem">${achievementMedalHTML(entry.id, 'tile', medalStyle)}</span>
       <span class="ag-medal-copy"><span class="ag-item-heading"><strong>${esc(entry.name)}</strong><span class="ag-state"><i>${entry.unlocked ? '✓' : '◇'}</i>${label}</span></span>
       <span class="ag-description">${esc(entry.desc)}</span>
-      <span class="ag-item-footer"><span>${entry.category.name} / NO. ${entry.number}</span><span>查看详情 ↗</span></span></span>
+      <span class="ag-item-footer">${entry.category.name}</span></span>
     </button>`;
   }).join('');
+  const categories = `<nav class="ag-categories" aria-label="奖章分类">${CATEGORIES.map(category => `<button type="button" data-gallery-category="${category.id}" aria-pressed="${category.id === 'all'}">${category.name}<small>${category.id === 'all' ? entries.length : entries.filter(entry => entry.category.id === category.id).length}</small></button>`).join('')}</nav>`;
+  const summary = `<div class="ag-summary"><span class="ag-total">已获得 <strong>${done}</strong><span>/ ${entries.length}</span></span><div class="ag-progress" role="progressbar" aria-label="成就收集进度" aria-valuemin="0" aria-valuemax="${entries.length}" aria-valuenow="${done}"><span style="width:${percentage}%"></span><i class="ag-cabinet-glint" aria-hidden="true"></i></div><span class="ag-archive">${slot ? `档案 ${String(slot).padStart(2,'0')}` : '尚无远征档案'}</span></div>`;
+  const filters = `<nav class="ag-filters" aria-label="获得状态"><button type="button" data-gallery-filter="all" aria-pressed="true">全部</button><button type="button" data-gallery-filter="unlocked" aria-pressed="false">已获得</button><button type="button" data-gallery-filter="locked" aria-pressed="false">未获得</button><button type="button" data-gallery-filter="pending" aria-pressed="false">待领取 <b>${pending}</b></button><button type="button" data-gallery-filter="claimed" aria-pressed="false">已领取 <b>${claimed}</b></button></nav>`;
+  const actions = `<details class="ag-display-menu"><summary>展柜灯光</summary><div class="ag-display-options"><button type="button" data-gallery-ambient aria-pressed="true">微光 · 开</button><button type="button" data-gallery-polish>擦亮展柜</button></div></details>`;
   return `<section class="achievement-gallery" aria-label="成就陈列室" data-medal-style="${medalStyle}">
-    <header class="ag-header"><div class="ag-title-group">${linkedBackHTML('achBack', '返回', 'ag-back')}<div><h2>成就陈列室</h2></div></div>
-    <div class="ag-header-tools"><nav class="ag-filters" aria-label="获得状态"><button type="button" data-gallery-filter="all" aria-pressed="true">全部</button><button type="button" data-gallery-filter="unlocked" aria-pressed="false">已获得</button><button type="button" data-gallery-filter="locked" aria-pressed="false">未获得</button></nav><nav class="ag-view" aria-label="陈列方式"><button type="button" data-gallery-view="list" aria-pressed="true">☷ 分列</button><button type="button" data-gallery-view="grid" aria-pressed="false">▦ 集中</button></nav></div></header>
+    ${collectionHeaderHTML({title:'成就陈列室',back:linkedBackHTML('achBack','返回','ag-back'),navigation:categories,summary,actions,className:'ag-header'})}
+    <div class="ag-tools">${collectionToolbarHTML({search:'<label class="ag-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="搜索成就" placeholder="搜索奖章或获得条件" autocomplete="off"/></label>',filters,results:`<span class="ag-result-count" aria-live="polite">${entries.length} 枚奖章</span><nav class="ag-view" aria-label="陈列方式"><button type="button" data-gallery-view="list" aria-pressed="true">列表</button><button type="button" data-gallery-view="grid" aria-pressed="false">网格</button></nav>`,className:'ag-list-heading',label:'成就搜索与筛选'})}</div>
     <div class="ag-body">
-      <aside class="ag-summary"><div class="ag-watermark" aria-hidden="true">${achievementMedalHTML('collectLegend', 'watermark', medalStyle)}<i class="ag-cabinet-glint"></i></div><div class="ag-ambient-specks" aria-hidden="true"><i></i><i></i><i></i></div><span class="ag-summary-label">总收集数</span><div class="ag-total"><strong>${done}</strong><span>/ ${entries.length}</span></div><div class="ag-progress" role="progressbar" aria-label="成就收集进度" aria-valuemin="0" aria-valuemax="${entries.length}" aria-valuenow="${done}"><span style="width:${percentage}%"></span></div><p class="ag-collection-rate">收集率 <b>${percentage}%</b></p><div class="ag-counts"><span><i class="ag-dot earned"></i>已获得<b>${done}</b></span><span><i class="ag-dot pending"></i>待领取<b>${pending}</b></span><span><i class="ag-dot claimed"></i>已领取<b>${claimed}</b></span></div><p class="ag-archive">${slot ? `档案 0${slot} · 最近游玩` : '尚无远征档案'}</p><details class="ag-display-menu"><summary>展柜灯光<span aria-hidden="true">⌄</span></summary><div class="ag-display-options"><button type="button" data-gallery-ambient aria-pressed="true">微光 · 开</button><button type="button" data-gallery-polish>擦亮展柜 ✦</button></div></details></aside>
-      <main class="ag-content"><div class="ag-list-heading"><label class="ag-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="搜索成就" placeholder="搜索奖章或获得条件" autocomplete="off"/></label><span class="ag-result-count" aria-live="polite">${entries.length} 枚奖章</span></div><div class="ag-scroll"><div class="ag-grid" data-view="list">${tiles}</div><div class="ag-empty" hidden><span aria-hidden="true">◇</span><h3>暂无符合条件的奖章</h3><p class="ag-empty-copy">试试其他分类或搜索词。</p><button type="button" data-gallery-reset>查看全部奖章</button></div></div></main>
-      <nav class="ag-categories" aria-label="奖章分类">${CATEGORIES.map(category => `<button type="button" data-gallery-category="${category.id}" aria-pressed="${category.id === 'all'}">${category.name}<small>${category.id === 'all' ? entries.length : entries.filter(entry => entry.category.id === category.id).length}</small></button>`).join('')}</nav>
+      <main class="ag-content"><div class="ag-scroll"><div class="ag-grid" data-view="list">${tiles}</div><div class="ag-empty" hidden><h3>暂无符合条件的奖章</h3><p class="ag-empty-copy">试试其他分类或搜索词。</p><button type="button" data-gallery-reset>查看全部奖章</button></div></div></main>
+      <aside class="ag-inspector" aria-label="奖章浏览详情"><div class="ag-detail-empty"><span aria-hidden="true">◇</span><h3>选择一枚奖章</h3><p>查看获得方式与奖励，可连续切换比较。</p></div><section class="ag-detail" hidden role="region" aria-label="奖章详情"><div class="ag-detail-toolbar"><button type="button" data-gallery-prev aria-label="上一枚奖章">←</button><button type="button" data-gallery-next aria-label="下一枚奖章">→</button><button type="button" class="ag-detail-close" data-gallery-dismiss data-cancel="true" aria-label="收起奖章详情">收起详情</button></div><div class="ag-detail-content"></div></section></aside>
     </div>
-    <div class="ag-detail-backdrop" hidden data-gallery-dismiss aria-hidden="true"></div>
-    <section class="ag-detail" hidden role="dialog" aria-modal="true" aria-label="奖章详情" tabindex="-1"><div class="ag-detail-toolbar"><button type="button" class="ag-detail-close" data-gallery-dismiss data-cancel="true" aria-label="关闭奖章详情">收回奖章 <span aria-hidden="true">×</span></button></div><div class="ag-detail-content"></div></section>
   </section>`;
 }
 // Detail content is built only for the selected medal, not for every tile at entry.
@@ -64,38 +67,57 @@ function achievementDetailHTML(tile, style) {
   const label = claimed ? '已领取' : unlocked ? '已获得 · 待领取' : '未获得';
   return `<span class="ag-detail-art">${achievementMedalHTML(tile.dataset.medalId, 'detail', style)}</span><span class="ag-detail-copy"><span class="ag-detail-category">${category.name} / NO. ${esc(tile.dataset.number)}</span><h3>${esc(/** @type {HTMLElement} */ (tile.querySelector('.ag-item-heading strong')).textContent)}</h3><span class="ag-state"><i>${unlocked ? '✓' : '◇'}</i>${label}</span><p class="ag-detail-condition"><b>获得方式</b><span>${esc(/** @type {HTMLElement} */ (tile.querySelector('.ag-description')).textContent)}</span></p><p class="ag-detail-reward"><b>达成奖励</b><span>${esc(tile.dataset.rewards)}</span></p><p class="ag-detail-note">${claimed ? '奖励已记入该档位的基地档案。' : unlocked ? '请进入该档位的基地领取奖励。' : '完成以上条件后，即可解锁这枚奖章。'}</p></span>`;
 }
-export function bindAchievementGallery(root) {
+export function bindAchievementGallery(root, { deferEntry = false } = {}) {
   if (!root) return { closeDetail: () => false };
   const input = /** @type {HTMLInputElement} */ (root.querySelector('input'));
   const tiles = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-gallery-item]'))];
   const filters = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-gallery-filter]'))];
   const categories = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-gallery-category]'))];
   const detail = /** @type {HTMLElement} */ (root.querySelector('.ag-detail'));
-  const backdrop = /** @type {HTMLElement} */ (root.querySelector('.ag-detail-backdrop'));
-  const body = /** @type {HTMLElement} */ (root.querySelector('.ag-body'));
-  const header = /** @type {HTMLElement} */ (root.querySelector('.ag-header'));
+  const detailEmpty = /** @type {HTMLElement} */ (root.querySelector('.ag-detail-empty'));
+  const detailContent = /** @type {HTMLElement} */ (root.querySelector('.ag-detail-content'));
   const motion = createAchievementMotion(root);
+  let cancelEntryWait = () => {};
   let selected = 'all', category = 'all', openedTile = null;
-  let detailClosing = false;
   let polishAnimation = null;
-  const closeDetail = () => {
+  const visibleTiles = () => tiles.filter(tile => !tile.hidden);
+  const syncDetailNavigation = () => {
+    const visible = visibleTiles(), index = visible.indexOf(openedTile);
+    /** @type {HTMLButtonElement} */ (root.querySelector('[data-gallery-prev]')).disabled = index <= 0;
+    /** @type {HTMLButtonElement} */ (root.querySelector('[data-gallery-next]')).disabled = index < 0 || index >= visible.length - 1;
+  };
+  const closeDetail = ({restoreFocus = true} = {}) => {
     if (detail.hidden) return false;
-    if (detailClosing) return true;
-    detailClosing = true;
-    motion.closeDetail(() => {
-      detail.hidden = true; backdrop.hidden = true; body.inert = false;
-      header.inert = false;
-      detailClosing = false;
-      if (openedTile?.isConnected && !openedTile.hidden) openedTile.focus({ preventScroll: true });
-    });
+    cancelRegionTransition(detailContent);
+    motion.closeDetail(() => { detail.hidden = true; detailEmpty.hidden = false; });
+    tiles.forEach(tile => tile.setAttribute('aria-pressed','false'));
+    if (restoreFocus && openedTile?.isConnected && !openedTile.hidden) openedTile.focus({preventScroll:true});
     return true;
   };
+  const selectDetail = button => {
+    cancelEntryWait();
+    const changed = detailContent.dataset.medalId !== button.dataset.medalId;
+    const initial = detail.hidden;
+    cancelRegionTransition(detailContent);
+    openedTile = button;
+    detail.hidden = false; detailEmpty.hidden = true;
+    tiles.forEach(tile => tile.setAttribute('aria-pressed', String(tile === button)));
+    if (changed) {
+      const html = achievementDetailHTML(button, root.dataset.medalStyle);
+      const commit = () => { detailContent.innerHTML = html; detailContent.dataset.medalId = button.dataset.medalId; };
+      if (initial) commit();
+      else void transitionRegion(detailContent, commit, {direction:0,isCurrent:() => root.isConnected && !detail.hidden && openedTile === button});
+    }
+    motion.openDetail(button);
+    syncDetailNavigation();
+  };
   const refresh = (reason = 'search') => {
+    cancelEntryWait();
     const anchor = motion.captureAnchor();
     const query = input.value.trim().toLocaleLowerCase();
     let visible = 0;
     for (const tile of tiles) {
-      const matchesState = selected === 'all' || (tile.dataset.unlocked === 'true') === (selected === 'unlocked');
+      const matchesState = selected === 'all' || selected === 'pending' && tile.classList.contains('ag-unlocked') || selected === 'claimed' && tile.classList.contains('ag-claimed') || selected === 'unlocked' && tile.dataset.unlocked === 'true' || selected === 'locked' && tile.dataset.unlocked !== 'true';
       tile.hidden = !matchesState || (category !== 'all' && tile.dataset.category !== category) || !tile.dataset.search.toLocaleLowerCase().includes(query);
       if (!tile.hidden) visible++;
     }
@@ -104,10 +126,12 @@ export function bindAchievementGallery(root) {
     /** @type {HTMLElement} */ (root.querySelector('.ag-empty')).hidden = visible > 0;
     /** @type {HTMLElement} */ (root.querySelector('.ag-empty')).dataset.emptyState = selected === 'unlocked' && !query ? 'earned' : 'filtered';
     /** @type {HTMLElement} */ (root.querySelector('.ag-empty-copy')).textContent = selected === 'unlocked' && !query
-      ? '尚未获得奖章。' : '试试其他分类、名称或获得条件。';
+      ? '尚未获得奖章。' : selected === 'pending' ? '当前范围没有待领取奖励。' : selected === 'claimed' ? '当前范围没有已领取的奖章。' : '试试其他分类、名称或获得条件。';
     /** @type {HTMLElement} */ (root.querySelector('.ag-result-count')).textContent = `${visible} 枚奖章`;
     if (reason === 'category' || reason === 'reset') /** @type {HTMLElement} */ (root.querySelector('.ag-scroll')).scrollTop = 0;
     else motion.restoreAnchor(anchor);
+    if (openedTile?.hidden) closeDetail({restoreFocus:false});
+    syncDetailNavigation();
     motion.revealList(reason);
   };
   input.addEventListener('input', () => refresh('search'));
@@ -122,14 +146,6 @@ export function bindAchievementGallery(root) {
       }
       return;
     }
-    if (event.key !== 'Tab') return;
-    const controls = [.../** @type {NodeListOf<HTMLButtonElement>} */ (detail.querySelectorAll('button:not(:disabled), a[href], input:not(:disabled), [tabindex="0"]'))];
-    if (!controls.length) { event.preventDefault(); detail.focus(); return; }
-    const index = controls.indexOf(/** @type {HTMLButtonElement} */ (document.activeElement));
-    const next = event.shiftKey ? (index <= 0 ? controls.length - 1 : index - 1) : (index + 1) % controls.length;
-    event.preventDefault();
-    event.stopPropagation();
-    controls[next].focus({ preventScroll: true });
   });
   root.addEventListener('click', event => {
       if (!(event.target instanceof Element)) return;
@@ -171,17 +187,37 @@ export function bindAchievementGallery(root) {
       motion.revealList('layout');
     }
     if (button.hasAttribute('data-gallery-reset')) { selected = 'all'; category = 'all'; input.value = ''; refresh('reset'); input.focus(); }
-    if (button.hasAttribute('data-gallery-item')) {
-      if (openedTile !== button) {
-        /** @type {HTMLElement} */ (root.querySelector('.ag-detail-content')).innerHTML = achievementDetailHTML(button, root.dataset.medalStyle);
-      }
-      openedTile = button;
-      detail.hidden = false; backdrop.hidden = false; body.inert = true; detail.focus();
-      header.inert = true;
-      detailClosing = false;
-      motion.openDetail(button);
+    if (button.hasAttribute('data-gallery-prev') || button.hasAttribute('data-gallery-next')) {
+      const visible = visibleTiles(), index = visible.indexOf(openedTile);
+      const next = visible[index + (button.hasAttribute('data-gallery-prev') ? -1 : 1)];
+      if (next) { selectDetail(next); next.scrollIntoView?.({block:'nearest'}); }
     }
+    if (button.hasAttribute('data-gallery-item')) selectDetail(button);
   });
-  motion.enterGallery();
+  if (!deferEntry) motion.enterGallery();
+  else {
+    // The caller installs its cut in this same turn. Watch its removal so both
+    // cold and warm entry keep medal animations until the page is uncovered.
+    const overlay = root.closest('#overlay');
+    let entryCancelled = false;
+    root.dataset.galleryEntry = 'waiting';
+    const observer = new MutationObserver(enterWhenVisible);
+    cancelEntryWait = () => { entryCancelled = true; observer.disconnect(); delete root.dataset.galleryEntry; };
+    function enterWhenVisible() {
+      if (entryCancelled) return;
+      if (!root.isConnected || overlay?.hidden || overlay?.classList.contains('closing') || overlay?.hasAttribute('data-ui-closing')) {
+        cancelEntryWait(); return;
+      }
+      if (document.querySelector('.page-loading') || overlay?.querySelector('.camp-entry-cut')) return;
+      cancelEntryWait();
+      motion.enterGallery();
+    }
+    observer.observe(document.body, { childList:true });
+    if (overlay) {
+      observer.observe(overlay, { childList:true, subtree:true, attributes:true, attributeFilter:['hidden','class','data-ui-closing'] });
+      if (overlay.parentElement) observer.observe(overlay.parentElement, { childList:true });
+    }
+    queueMicrotask(enterWhenVisible);
+  }
   return { closeDetail };
 }

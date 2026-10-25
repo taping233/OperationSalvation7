@@ -12,6 +12,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { parse } from 'acorn';
 
 const BATTLE_DIR = resolve(process.cwd(), 'game/src/battle/');
 
@@ -50,33 +51,43 @@ const WHITELIST = {
   ],
 };
 
-// 顶层逗号切分：跳过 ()/[]/{}/字符串 内的逗号，再取每个声明符 `=` 前的标识符。
-function splitDeclarators(stmt) {
-  const parts = [];
-  let depth = 0, cur = '', str = null;
-  for (const ch of stmt) {
-    if (str) { cur += ch; if (ch === str) str = null; continue; }
-    if (ch === '"' || ch === "'" || ch === '`') { str = ch; cur += ch; continue; }
-    if ('([{'.includes(ch)) depth++;
-    if (')]}'.includes(ch)) depth--;
-    if (ch === ',' && depth === 0) { parts.push(cur); cur = ''; continue; }
-    cur += ch;
-  }
-  parts.push(cur);
-  return parts.map(p => p.split('=')[0].trim()).filter(Boolean);
+function exportedVariables(src, kind) {
+  return parse(src, { ecmaVersion: 'latest', sourceType: 'module' }).body
+    .filter(node => node.type === 'ExportNamedDeclaration'
+      && node.declaration?.type === 'VariableDeclaration' && node.declaration.kind === kind)
+    .flatMap(node => node.declaration.declarations);
+}
+
+function bindingNames(id) {
+  if (id.type === 'Identifier') return [id.name];
+  if (id.type !== 'ObjectPattern') throw new Error(`Unsupported runtime binding: ${id.type}`);
+  return id.properties.map(property => {
+    if (property.type !== 'Property' || property.computed || property.value.type !== 'Identifier') {
+      throw new Error('Runtime declarations require explicit named bindings');
+    }
+    return property.value.name;
+  });
 }
 
 function extractExportLets(src) {
-  const names = [];
-  for (const m of src.matchAll(/^export let (.+);$/gm)) names.push(...splitDeclarators(m[1]));
-  return names.sort();
+  return exportedVariables(src, 'let').flatMap(declaration => bindingNames(declaration.id)).sort();
 }
 
 function extractSetters(src) {
+  const aliases = exportedVariables(src, 'const').flatMap(({ id, init }) => {
+    if (id.type === 'ObjectPattern' && init?.type === 'Identifier' && init.name === 'runtime') {
+      return id.properties.filter(property => property.type === 'Property' && !property.computed
+        && property.key.type === 'Identifier' && property.value.type === 'Identifier'
+        && property.key.name === property.value.name).map(property => property.value.name);
+    }
+    if (id.type === 'Identifier' && init?.type === 'MemberExpression' && !init.computed
+      && init.object.name === 'runtime' && init.property.name === id.name) return [id.name];
+    return [];
+  }).filter(name => name.startsWith('set$')).map(name => name.slice(4));
   return new Set([
-    ...src.matchAll(/^export function set\$(\w+)/gm),
-    ...src.matchAll(/^export const set\$(\w+) = runtime\.set\$\1;$/gm),
-  ].map(m => m[1]));
+    ...aliases,
+    ...[...src.matchAll(/^export function set\$(\w+)/gm)].map(match => match[1]),
+  ]);
 }
 
 // 09-29 knip C 类批豁免（老板批删）：这些字段的 set$ 写入口全仓零调用（生产+测试+动态

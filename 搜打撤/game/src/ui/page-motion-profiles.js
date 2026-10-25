@@ -1,10 +1,12 @@
 // 页面声明展示顺序及切换语义；普通界面不借用场景遮幕，场景资源仍由原入口准备。
 import { motionTiming } from './motion-presets.js';
 import { navigationTiming } from './navigation-motion.js';
+// P3 R03/R07: one short regional entrance, 22 ms spacing; no per-card queue.
+const expeditionMotion = { expedition:true, duration:motionTiming.fastEnter, rise:6, staggerMax:motionTiming.navigationStagger * 2 };
 const profiles = [
   { key: 'backpack', root: '.bag-v2', duration: motionTiming.detailEnter, rise: 0, staggerMax: 44, groups: [
     ['.bag-rail', 'nav', 0], ['.bag-head2', 'heading', 0],
-    ['.bag-tools', 'nav', 22], ['.bag-board', 'content', 44], ['.bag-side', 'content', 44],
+    ['.bag-tools', 'nav', 22], ['.bag-board', 'content', 44],
   ] },
   { key: 'inbox', root: '.sugin-page', groups: [
     ['.pg-head', 'heading', 40], ['#sugBox', 'content', 140],
@@ -20,15 +22,15 @@ const profiles = [
     ['.bg-copy', 'content', 160], ['.bg-pager', 'actions', 220],
   ] },
   { key: 'achievements', root: '.achievement-gallery', duration: motionTiming.regionEnter, rise: 6, groups: [
-    ['.ag-title-group > div', 'heading', 0],
+    ['.collection-page-identity', 'heading', 0],
     ['.ag-summary', 'content', 30],
   ] },
   { key: 'data', root: '.data-tuned, .pg.hub:not(#hubMain):has(.dt-grid)', groups: [
     ['.doom-stats', 'heading', 60], ['.dt-grid', 'content', 150], ['.devc-actions', 'actions', 230],
   ] },
   { key: 'character', root: '.cls2-page', groups: [
-    ['.cls2-fullart', 'portrait', 60], ['.cls2-eyebrow, .cls2-nameline', 'heading', 90],
-    ['.cls2-level, .cls2-perk, .cls2-palette, .cls2-stats, .cls2-story, .cls2-skins-wrap', 'content', 130],
+    ['.cls2-fullart', 'portrait', 60], ['.cls2-nameline', 'heading', 90],
+    ['.cls2-level, .cls2-perk, .cls2-stats, .cls2-story, .cls2-skins-wrap', 'content', 130],
     ['.cls2-strip', 'nav', 160], ['.cls2-confirm', 'actions', 240],
   ] },
   { key: 'card-pool', root: '.cls-pool-page', groups: [
@@ -42,18 +44,18 @@ const profiles = [
   { key: 'preparation', root: '.preparation-shell', groups: [
     ['#preparationRoot', 'content', 100],
   ] },
-  { key: 'expedition-event', root: '.event-scene', expedition: true, duration: 240, rise: 8, staggerMax: 48, groups: [
-    ['.event-story', 'content', 0], ['.node-main', 'content', 24], ['.node-foot', 'actions', 48],
+  { key: 'expedition-event', root: '.event-scene', ...expeditionMotion, groups: [
+    ['.event-story', 'content', 0], ['.node-main', 'content', motionTiming.navigationStagger], ['.node-foot', 'actions', motionTiming.navigationStagger * 2],
   ] },
-  { key: 'expedition-shop', root: '.shop-market', expedition: true, duration: 240, rise: 8, staggerMax: 48, groups: [
-    ['.pg-head', 'heading', 0], ['.shop-board', 'content', 24],
-    ['.shop-detail', 'content', 36], ['.shop-services', 'actions', 48],
+  { key: 'expedition-shop', root: '.shop-market', ...expeditionMotion, groups: [
+    ['.pg-head', 'heading', 0], ['.shop-board', 'content', motionTiming.navigationStagger],
+    ['.shop-detail', 'content', 36], ['.shop-services', 'actions', motionTiming.navigationStagger * 2],
   ] },
-  { key: 'expedition-reward', root: '.reward-v14, .entry-reward-scene', expedition: true, duration: 240, rise: 8, staggerMax: 48, groups: [
-    ['.reward-head, .entry-reward-head', 'heading', 0], ['.reward-main, .entry-reward-cards', 'content', 24],
-    ['.loot-actions, .entry-reward-actions', 'actions', 48],
+  { key: 'expedition-reward', root: '.reward-v14, .entry-reward-scene', ...expeditionMotion, groups: [
+    ['.reward-head', 'heading', 0], ['.reward-main', 'content', motionTiming.navigationStagger],
+    ['.loot-actions', 'actions', motionTiming.navigationStagger * 2],
   ] },
-  { key: 'encounter', root: '.node-pg', expedition: true, duration: 240, rise: 8, staggerMax: 48, groups: [
+  { key: 'encounter', root: '.node-pg', ...expeditionMotion, groups: [
     ['.node-kicker, .pg-head', 'heading', 40], ['.node-main', 'content', 130],
     ['.node-foot', 'actions', 230],
   ] },
@@ -63,9 +65,9 @@ const profiles = [
   { key: 'base-content', root: '#hubMain.base-camp', shell: 'content', duration: navigationTiming.enter, staggerMax: navigationTiming.staggerMax, groups: [
     ['.camp-section-head, .trade-v5-heading, .av3-header, .pv12-page-head, .courtyard-v3-heading', 'heading', 0],
     ['.pv12-agent-strip, .companion-toolbar, .warehouse-controls-v12, .trade-v5-modes, .facility-map, .av12-workspace > nav, .courtyard-v3-modes', 'nav', 60],
-    ['.pv12-agent-art, .pv12-pool-catalog, .partner-display, .companion-hatch-art, .facility-v12-stage, .courtyard-v3-scene', 'portrait', 100],
-    ['.pv12-agent-data, .warehouse-inventory-v12, .trade-v5-rail, .av12-content', 'content', 160],
-    ['.warehouse-reading-v12, .trade-v5-desk, .facility-details, .courtyard-v3-controls, .partner-details, .companion-hatch', 'content', 220],
+    ['.pv12-agent-art, .pv12-pool-catalog, .partner-display, .companion-hatch-art', 'portrait', 100],
+    ['.pv12-agent-data, .warehouse-inventory-v12, .trade-v5-rail, .av12-content, .facility-v12-stage, .courtyard-v3-scene', 'content', 160],
+    ['.trade-v5-desk, .facility-details, .courtyard-v3-controls, .partner-details, .companion-hatch', 'content', 220],
     ['.pv12-sections, .personnel-v12 .partner-stage > .person-roster', 'actions', 280],
   ] },
   { key: 'photo-studio', root: '.studio-unified, .card-library-page', groups: [
@@ -92,7 +94,7 @@ export function pageMotionProfile(content) {
   if (!pages?.length) return null;
   for (const profile of profiles) {
     for (const page of pages) {
-      if (page.matches(profile.root)) return { ...profile, page, navigation: navigationProfiles.has(profile.key) };
+      if (page.matches(profile.root)) return { expedition:false, ...profile, page, navigation: navigationProfiles.has(profile.key) };
     }
   }
   return null;

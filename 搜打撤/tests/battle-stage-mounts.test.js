@@ -50,7 +50,7 @@ it('validates cached mounts without any body-wide mount queries on warm updates'
   for (let i = 0; i < 20; i++) mount(mounts);
   expect(query).not.toHaveBeenCalled();
   for (const [key, node] of Object.entries(kept)) expect(mounts[key]).toBe(node);
-  expect(mounts.tools.parentElement).toBe(mounts.self);
+  expect(mounts.tools.parentElement).toBe(mounts.self.querySelector('.sts-unit-actions'));
   expect(mounts.self.parentElement).toBe(mounts.arena);
   expect(mounts.hand.parentElement).toBe(mounts.hud);
 });
@@ -92,7 +92,7 @@ it('repairs removed and replaced mounts instead of freezing cached layers', () =
   mount(mounts);
   expect(mounts.foes).toBe(foes); expect(mounts.allies.parentElement).toBe(mounts.arena);
   for (const [key, node] of Object.entries(kept)) { expect(mounts[key]).toBe(node); expect(node.isConnected).toBe(true); }
-  expect(mounts.tools.parentElement).toBe(mounts.self);
+  expect(mounts.tools.parentElement).toBe(mounts.self.querySelector('.sts-unit-actions'));
   const replacement = document.createElement('div'); replacement.className = 'bt-hand sts-hand';
   mounts.hand.replaceWith(replacement); mount(mounts);
   expect(mounts.hand).toBe(kept.hand); expect(replacement.isConnected).toBe(false);

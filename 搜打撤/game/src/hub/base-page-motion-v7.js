@@ -1,7 +1,7 @@
 import '../../css/base-page-motion-v7.css';
 import { linkedAnimate } from '../ui/home-linked-interactions.js';
-import { motionReduced, motionTiming, motionEasing } from '../ui/motion-presets.js';
-import { navigationState, navigationChange, navigationTiming } from '../ui/navigation-motion.js';
+import { motionReduced } from '../ui/motion-presets.js';
+import { navigationState, baseNavigationChange as navigationChange, baseNavigationTiming as navigationTiming, baseNavigationEasing } from '../ui/navigation-motion.js';
 
 const roots = new WeakMap();
 let previousNavigation = null;
@@ -16,15 +16,15 @@ function stop(state) {
   state.animations.clear();
 }
 
-function animateRegion(state, node, { x = 0, y = 0, delay = 0 } = {}) {
+function animateRegion(state, node, { x = 0, y = 0, delay = 0, duration = /** @type {number} */ (navigationTiming.enter), fade = false } = {}) {
   if (!node?.isConnected || !node.animate) return;
   const animation = linkedAnimate(node, [
-    { opacity: 1, transform: `translate(${x}px,${y}px)` },
+    { opacity: fade ? 0 : 1, transform: `translate(${x}px,${y}px)` },
     { opacity: 1, transform: 'none' },
   ], {
-    duration: navigationTiming.enter,
-    delay: Math.min(delay, motionTiming.staggerMax),
-    easing: motionEasing.enter,
+    duration,
+    delay: Math.max(0, delay),
+    easing: baseNavigationEasing,
     fill: 'backwards',
   });
   if (!animation) return;
@@ -49,17 +49,21 @@ function covered(overlay) {
 
 function playHome(home, state) {
   state.pending = false;
+  // 首次揭幕按固定栏、事务、整备入场；房间背景始终静止。
+  if (state.coldEntry) {
+    animateRegion(state, state.root.querySelector('.hub-head'), { y:-8, duration:340, fade:true });
+    animateRegion(state, state.root.querySelector('.base-navigation-v7'), { y:12, delay:40, duration:340, fade:true });
+  }
+  animateRegion(state, home.querySelector('.base-home-affairs'), {
+    x:state.coldEntry ? -52 : state.enterX * .5,
+    delay:state.coldEntry ? 110 : 0, duration:state.coldEntry ? 400 : 320, fade:true,
+  });
+  animateRegion(state, home.querySelector('.base-home-preparation'), {
+    x:state.coldEntry ? 72 : state.enterX,
+    delay:state.coldEntry ? 170 : 60, duration:state.coldEntry ? 440 : 380, fade:true,
+  });
+  // 先建立延迟段首帧，再解除整区隐藏，避免闪现。
   delete home.dataset.baseMotionPending;
-  animateRegion(state, home.querySelector('.base-home-title'), { x: -24 });
-  animateRegion(state, home.querySelector('.base-home-launch'), { x: state.enterX ?? 72 });
-  // Each room is a destination. Reveal the rows, not a single menu container.
-  if (!state.switchingPage) home.closest('.base-frame-v7')?.querySelectorAll('.base-navigation-v7 > button').forEach((button, index) => {
-    animateRegion(state, button, { y: 24, delay: index * motionTiming.stagger });
-  });
-  animateRegion(state, home.querySelector('.base-home-mode'), { x: state.switchingPage ? state.enterX : 0, y: state.switchingPage ? 0 : 24, delay: motionTiming.stagger });
-  home.querySelectorAll('.base-home-services > button').forEach((button, index) => {
-    animateRegion(state, button, { x: state.switchingPage ? state.enterX : 0, y: state.switchingPage ? 0 : 24, delay: (index + 1) * motionTiming.stagger });
-  });
   if (!state.animations.size) stop(state);
 }
 
@@ -119,6 +123,8 @@ export function bindBasePageMotionV7(root, { changed = true } = {}) {
   const page = root.querySelector('.hub-page');
   const home = root.querySelector('.base-home-v7');
   const view = page?.dataset.motionView || page?.dataset.view || root.dataset.page || (home ? 'home' : 'subpage');
+  state.root = root;
+  state.coldEntry = !previousNavigation || covered(root.closest('#overlay'));
   const nextNavigation = navigationState(root);
   const transition = navigationChange(previousNavigation, nextNavigation);
   state.switchingPage = !!(changed && previousNavigation && transition.changed);
@@ -158,7 +164,7 @@ export function animateBaseModeChangeV12(root, previousMode) {
   const play = (node, frames) => {
     if (!node?.animate) return;
     const animation = linkedAnimate(node, frames, {
-      duration: motionTiming.change, easing: motionEasing.enter, fill:'backwards',
+      duration: navigationTiming.refresh, easing: baseNavigationEasing, fill:'backwards',
     });
     if (!animation) return;
     state.animations.add(animation);
@@ -169,10 +175,9 @@ export function animateBaseModeChangeV12(root, previousMode) {
     { transform:shift(previousMode), backgroundColor:color(previousMode) },
     { transform:shift(mode), backgroundColor:color(mode) },
   ]);
-  // 图标静止色恒为金（base-home-v7.css #e2c891），动画若带颜色终点会在 fill 释放时弹回闪色，故只留缩放脉冲。
+  // 难度切换只移动标记和图标，不缩放整备面板或改变图标静止色。
   play(home.querySelector('#btnDeploy > .base-home-icon'), [
-    { transform:'scale(.82)' },
-    { transform:'scale(1.08)', offset:.65 },
+    { transform:`translateX(${mode === 'elite' ? 8 : -8}px)` },
     { transform:'none' },
   ]);
   animateRegion(state, home.querySelector('.base-home-mode p'), { y:8 });

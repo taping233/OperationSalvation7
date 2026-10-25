@@ -1,47 +1,44 @@
 /* 节点确认与内容展开分开：短切幕只保留一次目的地名称。 */
+/* Fade the entire cover in over the map; fading only its artwork still exposes
+   the opaque overlay background immediately. The held destination owns exit. */
+@media (prefers-reduced-motion:no-preference) {
+  body.interface-motion:not(.reduce-motion) #overlay:not([hidden]):has(.flow-transition .silent-node-cut):not(:has([data-handoff-profile="resume"],.page-visual-scene)) {
+    animation:nodeCurtainEnter 240ms ease-in-out both!important;
+  }
+}
+@keyframes nodeCurtainEnter { from { opacity:0; } to { opacity:1; } }
 /* Resume keeps the destination covered until restoration and its first map frame finish. */
-#overlay .flow-transition.city-run-transition.resume-hold { background:#10171b!important; }
-#overlay .city-run-transition.resume-hold .camp-entry-cut {
+#overlay{
+& .flow-transition.city-run-transition.resume-hold { background:#10171b!important; }
+& .city-run-transition.resume-hold .camp-entry-cut {
   animation:resumeCutHold var(--city-run-duration,900ms) ease-out both!important;
-}
-#overlay .city-run-transition.resume-hold.resume-reveal { background:transparent!important; }
-#overlay .city-run-transition.resume-hold.resume-reveal .camp-entry-cut {
-  animation:resumeCutReveal 220ms cubic-bezier(.65,0,.2,1) both!important;
-}
+}}
 @keyframes resumeCutHold { from,to { transform:translate3d(0,0,0); clip-path:polygon(0 0,100% 0,100% 100%,0 100%); } }
-@keyframes resumeCutReveal {
-  from { transform:translate3d(0,0,0); clip-path:polygon(0 0,100% 0,100% 100%,0 100%); }
-  to { transform:translate3d(105%,0,0); clip-path:polygon(0 0,84% 0,100% 100%,0 100%); }
-}
-#overlay .card.scene:has(.expedition-cut) { width:100%; height:100%; max-width:none; max-height:none; padding:0; border:0; border-radius:0; background:#171c20; box-shadow:none; }
-#overlay .card.scene:has(.expedition-cut) > #ovTitle,
-#overlay .card.scene:has(.expedition-cut)::before,
-#overlay .card.scene:has(.expedition-cut)::after { display:none; }
-#overlay .card.scene:has(.expedition-cut) #ovBody { width:100%; height:100%; }
+#overlay .card.scene:has(.expedition-cut){
+& { width:100%; height:100%; max-width:none; max-height:none; padding:0; border:0; border-radius:0; background:#171c20; box-shadow:none; }
+& > #ovTitle,
+&::before,
+&::after { display:none; }
+& #ovBody { width:100%; height:100%; }}
 #overlay .scene.flow-transition.expedition-cut { width:100%; height:100%; margin:0; padding:0; background:#171c20; animation:none; overflow:hidden; }
-#overlay .expedition-cut::before { content:''; display:block; position:absolute; inset:0; background:linear-gradient(115deg,#10171b 0 34%,#1c2a30 34% 66%,#132127 66%); animation:expeditionCutField var(--motion-scene-enter,450ms) var(--motion-ease-enter,ease-out) both; pointer-events:none; }
-#overlay .expedition-cut::after { display:none; }
-#overlay .expedition-cut > * { position:relative; }
-#overlay .card.scene:has(.illustrated-cut) { width:100%; height:100%; max-width:none; max-height:none; padding:0; border:0; border-radius:0; background:#10171b; }
-#overlay .card.scene:has(.illustrated-cut) #ovBody { width:100%; height:100%; }
-#overlay .scene.flow-transition.illustrated-cut { width:100%; height:100%; }
-#overlay .flow-transition > .transition-art { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; z-index:0; pointer-events:none; }
-#overlay .expedition-cut.illustrated-cut::before { z-index:1; background:linear-gradient(90deg,rgba(8,15,21,.72),rgba(8,15,21,.18) 65%,rgba(8,15,21,.1)); animation:none; }
-#overlay .city-run-transition.resume-reveal .transition-heading { opacity:0; transition:opacity 220ms ease-out; }
+#overlay .expedition-cut{
+&::before { content:''; display:block; position:absolute; inset:0; background:linear-gradient(115deg,#10171b 0 34%,#1c2a30 34% 66%,#132127 66%); animation:expeditionCutField var(--motion-scene-enter,450ms) var(--motion-ease-enter,ease-out) both; pointer-events:none; }
+&::after { display:none; }
+& > * { position:relative; }}
+#overlay .card.scene:has(.illustrated-cut){
+& { width:100%; height:100%; max-width:none; max-height:none; padding:0; border:0; border-radius:0; background:#10171b; }
+& #ovBody { width:100%; height:100%; }}
+#overlay{
+& .scene.flow-transition.illustrated-cut { width:100%; height:100%; }
+& .flow-transition > .transition-art { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; z-index:0; pointer-events:none; }
+& .expedition-cut.illustrated-cut::before { z-index:1; background:linear-gradient(90deg,rgba(8,15,21,.72),rgba(8,15,21,.18) 65%,rgba(8,15,21,.1)); animation:none; }}
 @keyframes expeditionCutField { from { transform:translateX(-8%); } to { transform:none; } }
-@keyframes expeditionCutTitle { from { opacity:0; transform:translateX(14px); } to { opacity:1; transform:none; } }
 @keyframes expeditionCutRule { from { transform:scaleX(.1); } to { transform:scaleX(1); } }
 body.reduce-motion .transition-heading *,body.reduce-motion .expedition-cut *,body.reduce-motion .expedition-cut::before { animation:none!important; }
 @media (prefers-reduced-motion:reduce) { .transition-heading *,.expedition-cut *,.expedition-cut::before { animation:none!important; } }
+#overlay :is(.event-scene .evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy){
 
-.departure-handoff { position:fixed; inset:0; z-index:1500; display:grid; place-items:center; background:#10171b; pointer-events:auto; animation:departureCover .15s ease-out both; }
-.departure-handoff i { width:96px; height:3px; background:#b2d8d1; transform-origin:left; animation:expeditionCutRule .16s ease-out both; }
-.departure-handoff.leaving { animation:none; opacity:0; transition:opacity .14s ease-out; }
-@keyframes departureCover { from { opacity:0; } to { opacity:1; } }
-body.reduce-motion .departure-handoff,body.reduce-motion .departure-handoff i { animation:none; transition:none; }
-@media (prefers-reduced-motion:reduce) { .departure-handoff,.departure-handoff i { animation:none; transition:none; } }
-
-#overlay :is(.event-scene .evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy) { transition:transform .12s ease,background-color .16s ease,border-color .16s ease; }
-#overlay :is(.event-scene .evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy):active:not(:disabled) { transform:translateY(2px) scale(.985); }
+& { transition:transform .12s ease,background-color .16s ease,border-color .16s ease; }
+&:active:not(:disabled) { transform:translateY(2px) scale(.985); }}
 body.reduce-motion #overlay :is(.evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy) { transition:none; }
 @media (prefers-reduced-motion:reduce) { #overlay :is(.evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy) { transition:none; } }

@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 // Transparent proxies count top-level table enumeration, not elapsed time.
@@ -65,8 +66,7 @@ describe('immutable native migration lookup reuse', () => {
     window.SDT ||= {};
     window.SDT.Icons = { img: () => '', TYPE_ART: {} };
     window.SDT.Sound = { sfx() {}, music() {}, setDucked() {}, setBoss() {} };
-    window.SDT.MAP = { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15,
-      starterSha: 0, battleStartDraw: 0, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+    window.SDT.MAP = { rules: { ...battleRules(9, 99, 15, 0, 0, 1) }, items: {} };
     await import('../game/src/cards/cards.js');
     const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
     const runtime = await import('../game/src/battle/runtime/battle.runtime.js');

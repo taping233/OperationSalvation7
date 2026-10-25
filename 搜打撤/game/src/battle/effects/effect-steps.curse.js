@@ -23,7 +23,7 @@ export function curseSteps(s) {
         run: (ctx, m) => {
           // m 命中但组 1 缺失（「附加流血」无层数）时 +m[1] 是 NaN——曾把敌人 bleed 写成 NaN（2026-09-09 老板 #15/#16）
           const n = m && m[1] ? +m[1] : 1;
-          if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'bleed', n); log(`[[icon:blood]] <b>${esc(ctx.curseTarget.name)}</b> 附加 ${n} 层流血`, 'sys'); ctx.did = true; }
+          if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'bleed', n); log(`[[icon:status-bleed]] <b>${esc(ctx.curseTarget.name)}</b> 附加 ${n} 层流血`, 'sys'); ctx.did = true; }
         },
       },
       {
@@ -37,8 +37,8 @@ export function curseSteps(s) {
           if (targets.length) {
             targets.forEach(t => combat.addCurse(t, 'poison', n));
             log(targets.length > 1
-              ? `[[icon:skull]] 全体敌人附加 ${n} 层中毒（每层回合末 1 点固定伤害）`
-              : `[[icon:skull]] <b>${esc(targets[0].name)}</b> 附加 ${n} 层中毒（每层回合末 1 点固定伤害）`, 'sys');
+              ? `[[icon:status-poison]] 全体敌人附加 ${n} 层中毒（每层回合末 1 点固定伤害）`
+              : `[[icon:status-poison]] <b>${esc(targets[0].name)}</b> 附加 ${n} 层中毒（每层回合末 1 点固定伤害）`, 'sys');
             ctx.did = true;
           }
         },
@@ -78,7 +78,7 @@ export function curseSteps(s) {
             const pre = t0 && ctx.flags.hpAtCast ? ctx.flags.hpAtCast.get(t0) : null;
             const undmg = t0 ? (pre != null ? pre >= (t0.maxHp || 0) : t0.hp >= (t0.maxHp || 0)) : false;
             if (!undmg) {
-              if (t0) log(`[[icon:crystal]] ${esc(t0.name)} 此前已受过伤，冰冻未生效`, 'dim');
+              if (t0) log(`[[icon:status-freeze]] ${esc(t0.name)} 此前已受过伤，冰冻未生效`, 'dim');
               ctx.did = true;
               return;
             }
@@ -93,12 +93,12 @@ export function curseSteps(s) {
           if (aoeP) {
             const targets = getAlive().filter(t => t && !t.dead);
             targets.forEach(t => combat.addCurse(t, 'freeze', n));
-            if (targets.length) { log(`[[icon:crystal]] 全体敌人被冰冻 ${n} 回合（无法行动）`, 'sys'); ctx.did = true; }
+            if (targets.length) { log(`[[icon:status-freeze]] 全体敌人被冰冻 ${n} 回合（无法行动）`, 'sys'); ctx.did = true; }
           } else if (multiN > 1) {
             const targets = getAlive().slice(0, multiN);
             targets.forEach(t => combat.addCurse(t, 'freeze', n));
-            if (targets.length) { log(`[[icon:crystal]] ${targets.map(t => esc(t.name)).join('、')} 被冰冻 ${n} 回合（无法行动）`, 'sys'); ctx.did = true; }
-          } else if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'freeze', n); log(`[[icon:crystal]] <b>${esc(ctx.curseTarget.name)}</b> 被冰冻 ${n} 回合（无法行动）`, 'sys'); ctx.did = true; }
+            if (targets.length) { log(`[[icon:status-freeze]] ${targets.map(t => esc(t.name)).join('、')} 被冰冻 ${n} 回合（无法行动）`, 'sys'); ctx.did = true; }
+          } else if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'freeze', n); log(`[[icon:status-freeze]] <b>${esc(ctx.curseTarget.name)}</b> 被冰冻 ${n} 回合（无法行动）`, 'sys'); ctx.did = true; }
         },
       },
       {
@@ -106,7 +106,7 @@ export function curseSteps(s) {
         when: (ctx) => /沉默/.test(ctx.desc) ? true : null,
         run: (ctx) => {
           const n = ctx.durOv ? +ctx.durOv : 1;
-          if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'silence', n); log(`[[icon:cross]] <b>${esc(ctx.curseTarget.name)}</b> 被沉默 ${n} 回合（技能无效，攻击除外）`, 'sys'); ctx.did = true; }
+          if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'silence', n); log(`[[icon:status-silence]] <b>${esc(ctx.curseTarget.name)}</b> 被沉默 ${n} 回合（技能无效，攻击除外）`, 'sys'); ctx.did = true; }
         },
       },
       {
@@ -114,7 +114,7 @@ export function curseSteps(s) {
         when: (ctx) => (/破甲/.test(ctx.desc) && !ctx.bleedGateFail) ? true : null,
         run: (ctx) => {
           const n = ctx.durOv ? +ctx.durOv : 2;
-          if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'abreak', n); log(`[[icon:tools]] <b>${esc(ctx.curseTarget.name)}</b> 破甲 ${n} 回合（无法减免伤害——元素庇幕失效）`, 'sys'); ctx.did = true; }
+          if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'abreak', n); log(`[[icon:status-armor-break]] <b>${esc(ctx.curseTarget.name)}</b> 破甲 ${n} 回合（无法减免伤害——元素庇幕失效）`, 'sys'); ctx.did = true; }
         },
       },
       {
@@ -122,7 +122,7 @@ export function curseSteps(s) {
         when: (ctx) => /禁疗/.test(ctx.desc) ? true : null,
         run: (ctx) => {
           const n = ctx.durOv ? +ctx.durOv : 2;
-          if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'healban', n); log(`[[icon:heart]] <b>${esc(ctx.curseTarget.name)}</b> 禁疗 ${n} 回合（无法回复生命）`, 'sys'); ctx.did = true; }
+          if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'healban', n); log(`[[icon:status-heal-ban]] <b>${esc(ctx.curseTarget.name)}</b> 禁疗 ${n} 回合（无法回复生命）`, 'sys'); ctx.did = true; }
         },
       },
       {
@@ -132,7 +132,7 @@ export function curseSteps(s) {
           const stm = ctx.desc.match(/潜行(?:状态)?\s*(\d+)\s*回合/);
           const n = stm ? +stm[1] : (ctx.durOv ? +ctx.durOv : 1);
           combat.addBlessing(ctx.pstat, 'stealth', n);
-          log(`[[icon:runner]] <b>祝福·潜行</b>：${n} 回合内无法成为被攻击对象（造成伤害会破除）`, 'ok');
+          log(`[[icon:status-stealth]] <b>祝福·潜行</b>：${n} 回合内无法成为被攻击对象（造成伤害会破除）`, 'ok');
           ctx.did = true;
         },
       },
@@ -144,7 +144,7 @@ export function curseSteps(s) {
           || ctx.desc.match(/获得\s*(\d+)\s*点?攻击力?/)),
         run: (ctx, m) => {
           combat.addBlessing(ctx.pstat, 'atkUp', +m[1], ctx.durOv ? +ctx.durOv : 0);
-          log(`[[icon:swords]] <b>祝福·攻击力增加</b>：攻击力 +${m[1]}（${ctx.durOv ? ctx.durOv + ' 回合' : '本场战斗'}，当前加成 ${ctx.pstat.status.atkUp}）`, 'ok');
+          log(`[[icon:status-atk-up]] <b>祝福·攻击力增加</b>：攻击力 +${m[1]}（${ctx.durOv ? ctx.durOv + ' 回合' : '本场战斗'}，当前加成 ${ctx.pstat.status.atkUp}）`, 'ok');
           ctx.did = true;
         },
       },
@@ -153,7 +153,7 @@ export function curseSteps(s) {
         when: (ctx) => ctx.desc.match(/法伤\s*\+\s*(\d+)/) || ctx.desc.match(/法术伤害\s*\+\s*(\d+)/),
         run: (ctx, m) => {
           combat.addBlessing(ctx.pstat, 'spellUp', +m[1], ctx.durOv ? +ctx.durOv : 0);
-          log(`[[icon:crystal]] <b>祝福·法伤增加</b>：法术伤害 +${m[1]}（${ctx.durOv ? ctx.durOv + ' 回合' : '本场战斗'}，当前加成 ${ctx.pstat.status.spellUp}）`, 'ok');
+          log(`[[icon:status-spell-up]] <b>祝福·法伤增加</b>：法术伤害 +${m[1]}（${ctx.durOv ? ctx.durOv + ' 回合' : '本场战斗'}，当前加成 ${ctx.pstat.status.spellUp}）`, 'ok');
           ctx.did = true;
         },
       },
@@ -178,7 +178,7 @@ export function curseSteps(s) {
           const im = ctx.desc.match(/(\d+)\s*回合内[^。]*无敌/) || ctx.desc.match(/无敌[^。]*?(\d+)\s*回合/);
           const n = im ? +im[1] : (ctx.durOv ? +ctx.durOv : 1);
           combat.addBlessing(ctx.pstat, 'immune', n);
-          log(`[[icon:sparkles]] <b>祝福·免疫伤害</b>：${n} 回合内不受到任何伤害`, 'ok');
+          log(`[[icon:status-immune]] <b>祝福·免疫伤害</b>：${n} 回合内不受到任何伤害`, 'ok');
           ctx.did = true;
         },
       },
@@ -188,7 +188,7 @@ export function curseSteps(s) {
         run: (ctx, m) => {
           const n = m[1] ? +m[1] : 1;
           combat.addBlessing(ctx.pstat, 'reduce', n);
-          log(`[[icon:plate]] <b>祝福·减伤</b>：每次受到的伤害 -${n}（本场战斗）`, 'ok');
+          log(`[[icon:status-reduce]] <b>祝福·减伤</b>：每次受到的伤害 -${n}（本场战斗）`, 'ok');
           ctx.did = true;
         },
       },
@@ -198,7 +198,7 @@ export function curseSteps(s) {
           /回合开始时[^。]*?额外抽\s*\d+\s*张/.test(ctx.desc)) ? true : null,
         run: (ctx) => {
           combat.addBlessing(ctx.pstat, 'swordForm');
-          log('[[icon:sword]] <b>祝福·剑仙形态</b>：回合开始时额外抽 1 张牌（本局对战）', 'ok');
+          log('[[icon:status-sword-form]] <b>祝福·剑仙形态</b>：回合开始时额外抽 1 张牌（本局对战）', 'ok');
           ctx.did = true;
         },
       },
@@ -207,7 +207,7 @@ export function curseSteps(s) {
         when: (ctx) => (/满月形态/.test(ctx.desc) || /回合开始时[^。]*获得\s*\d+\s*点?能量/.test(ctx.desc)) ? true : null,
         run: (ctx) => {
           combat.addBlessing(ctx.pstat, 'natureForm');
-          log('[[icon:wood]] <b>祝福·满月形态</b>：回合开始时额外获得 1 点能量（本局对战）', 'ok');
+          log('[[icon:status-moon-form]] <b>祝福·满月形态</b>：回合开始时额外获得 1 点能量（本局对战）', 'ok');
           ctx.did = true;
         },
       },
@@ -216,7 +216,7 @@ export function curseSteps(s) {
         when: (ctx) => /宇宙形态/.test(ctx.desc) ? true : null,
         run: (ctx) => {
           combat.addBlessing(ctx.pstat, 'cosmosForm');
-          log('[[icon:sparkles]] <b>祝福·宇宙形态</b>：本局对战内，所有卡牌变为 1 费', 'ok');
+          log('[[icon:status-cosmos-form]] <b>祝福·宇宙形态</b>：本局对战内，所有卡牌变为 1 费', 'ok');
           ctx.did = true;
         },
       },

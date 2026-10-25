@@ -54,7 +54,7 @@ export function damageSteps(s) {
           for (let i = 0; i < times; i++) {
             const pool = getAlive().filter(t => t && !t.dead);
             if (!pool.length) break;
-            const t = pool[Math.floor(random01() * pool.length)];
+            const t = pool[Math.floor(random01('target') * pool.length)];
             const cue = attackCue(type, ctx.card, { hitCount: times, amount: +m[1] });
             yield { kind: 'windup', targets: [t], ...(cue ? { cue } : {}) };
             const dealt = hitFoe(ctx, t, +m[1], type, caster, i + 1).dealt;

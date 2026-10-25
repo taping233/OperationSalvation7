@@ -1,3 +1,4 @@
+import { battleRules, playerFields, damageRuleFields } from './helpers/environment-fixtures.js';
 // 09-30 全仓深审 BC-01~10 的修复回归（发现来源：
 // docs/evidence/2026-09-30-full-repository-review/battle_cards/findings.json，
 // 复现手法沿用其 battle.repro.test.js 的可达路径，断言反转成修复后行为）。
@@ -6,7 +7,7 @@ import { describe, expect, it } from 'vitest';
 window.SDT = window.SDT || { Icons: { img: () => '', TYPE_ART: {} } };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 20, bossDeckSize: 15, starterSha: 0, battleStartDraw: 0, battleTurnDraw: 0, diceSides: 6 },
+  rules: { ...battleRules(99, 20, 15, 0, 0, 0) },
   items: {},
 };
 await import('../game/src/cards/cards.js');
@@ -18,7 +19,7 @@ const E = await import('../game/src/battle/core/battle.engine.js');
 const R = await import('../game/src/battle/runtime/battle.runtime.js');
 
 const waitIdle = async () => {
-  for (let n = 0; n < 600; n++) { await new Promise(r => setTimeout(r, 5)); if (!R.busy) return; }
+  for (let n = 0; n < 600; n++) { await new Promise(r => setTimeout(r, 5)); if (!R.busy || R.discovering) return; }
   throw Error('battle action queue timeout');
 };
 
@@ -26,8 +27,7 @@ let seq = 0;
 function makeGame(cards) {
   return {
     ownedCards: cards.map(card => ({ uid: `rev-${++seq}`, card: { ...card }, safe: false })),
-    hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0, myClass: '战士', characterId: null,
-    state: 'idle', battleActive: false, logs: [],
+    ...playerFields(100, 100, 5, 0, '战士', null), logs: [],
     log(message) { this.logs.push(message); },
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     addItem() {}, onBattleEnd() {},
@@ -180,7 +180,7 @@ describe('09-30 深审 BC 组修复回归', () => {
 
   it('BC-10 饮血剑：AOE 双杀 +2、砸击第三杀累计 +3（多杀与 null 来源不再漏计）', async () => {
     const sword = C.all().find(c => c.id === 'tt3-blooddrinker');
-    const aoe = { ...basic('aoe-kill'), rules: { version: 1, battle: { target: { side: 'enemy', area: true } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'allEnemies' }] } } };
+    const aoe = { ...basic('aoe-kill'), rules: { ...damageRuleFields(true, 'allEnemies') } };
     const g = makeGame([sword, aoe]);
     BattleSession.start(g, [1, 1, 3, 1000].map((hp, i) => ({ id: `multi-${i}`, name: `multi-${i}`, hp, atk: 1 })), { isBoss: false, name: 'kill-regression' });
     BattleSession.commands.playCard(g.ownedCards[0].uid, 'self');

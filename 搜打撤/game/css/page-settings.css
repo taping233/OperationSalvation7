@@ -1,509 +1,62 @@
-/* EXP @import url('./settings-cover.css'); */
-/* EXP @import url('./inbox-cover.css'); */
-
-/* ═══════════════════════════════════════════════════════════════════
-   设置页 + 留言库子页美术升级（2026-09-24）——对标标题页 title-p0.css、
-   选档页 page-slot-select.css、基地页 page-hub.css 的定稿语言：
-     ① 冷青统一调色（页面分级底色/四角暗角/顶部淡金体积光）
-     ② var(--gold-main) 暖金装饰（页头发丝线+端点光点/分组前置金短线/行选中金轨）
-     ③ 信息排版仪式感（恢复页名/分组主辅层级/留言档案卡封条）
-     ④ 交互系统（hover/按压快按慢弹/:focus-visible 金线焦点环/三档节奏/出入场）
-   作用域：全部规则限定 .pg.settings-page（留言库 .sugin-page 同时挂该类，
-   页面级规则两者共享；差异项用 .sugin-page / :not(.sugin-page) 分流）。
-   约束：只覆盖不删除；动画仅 transform/opacity；reduced-motion 由
-   winter.css 全局 `*{animation:none!important;transition:none!important}` 兜底。
-   ═══════════════════════════════════════════════════════════════════ */
-
-/* ── S0 统一节奏变量：fast=色彩/光晕/小位移，lift=卡片抬升，press=按下快进 ── */
-#overlay .card.page:has(.pg.settings-page) {
-  --set-fast: .18s cubic-bezier(.33, 1, .68, 1);
-  --set-lift: .32s cubic-bezier(.22, 1, .36, 1);
-  --set-press: .1s ease-out;
+/* Settings and inbox shell. Content owns its layout; surface-motion owns entry/exit. */
+#overlay .card.page:has(.settings-page) { background:#11171f; color:#e1e8ef; }
+#overlay .pg.settings-page {
+  --settings-tint:var(--interface-selection-rgb);
+  --settings-accent:rgb(var(--settings-tint));
+  --public-control-ring:rgb(var(--settings-tint));
+  --control-focus:rgb(var(--settings-tint));
+  --settings-ease:var(--motion-ease-enter,cubic-bezier(.22,1,.36,1));
+  --settings-wallpaper:url('../assets/reconstruction/wallpaper-snow-road-1016.webp?v=1016b');
+  width:100%; height:100%; padding:0; display:flex; flex-direction:column;
+  position:relative; isolation:isolate; overflow:hidden; background:#11171f;
+  &::before { content:''; position:absolute; inset:-12px; z-index:-1; pointer-events:none;
+    background:linear-gradient(90deg,#0d131ae0,#11171fad 65%,#11171f80),var(--settings-wallpaper) center / cover; filter:blur(7px) saturate(.5); }
+  & .pg-head { position:relative; flex:none; min-height:88px; padding:20px 7%; margin:0;
+    display:flex; align-items:center; gap:24px; background:#0d1218b3; border-bottom:1px solid #dce7ef1c; }
+  & .pg-head h2 { display:flex; align-items:center; gap:12px; margin:0; padding:0;
+    color:#e8eef4; font:600 var(--interface-text-page)/1.4 var(--font-ui); letter-spacing:2px; text-shadow:none; }
+  & .pg-head .pg-spacer { flex:1; }
+  & .btn-row { display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; }
+  & :is(.mini-btn,.ov-btn) { min-height:44px; padding:10px 18px; border:1px solid #c2d4e136;
+    border-radius:3px; background:#91a9bc21; color:#dde7ee; font:500 var(--interface-text-control)/1.5 var(--font-ui);
+    letter-spacing:.04em; clip-path:none; text-decoration:none;
+    &:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) { background:#abc1d237; border-color:#c2d4e166; }
+    &:active:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) { box-shadow:inset 0 2px 5px #02050940; }
+    &:is(:disabled,[aria-disabled="true"]) { opacity:.55; }
+  }
+  & .hint { color:#aab7c2; font-size:var(--interface-text-label); line-height:1.8; }
 }
-
-/* ── S4 出入场：页面淡入 + 10px 上浮（backwards 结束即释放 transform 给交互态；
-   覆盖 overlays.css 的 setPageIn；关闭沿用 winter pgOut 的 !important 不动） ── */
-#overlay .card.page:has(.pg.settings-page) {
-  animation: setPanelIn .42s cubic-bezier(.22, 1, .36, 1) backwards;
-  will-change: transform, opacity;
+#overlay .pg.sugin-page {
+  & .pg-head { padding-left:98px; }
+  & .sugin-exit { position:absolute; top:16px; left:18px; z-index:6; }
+  & .settings { flex:1; min-height:0; width:min(1080px,90%); margin:28px auto; padding:0 8px 24px;
+    overflow-y:auto; scrollbar-width:thin; scrollbar-color:#536c81 transparent; }
+  & .sugin-row { margin:0 0 16px; padding:20px 24px; border:1px solid #dce7ef26; border-left:3px solid #ccb58b;
+    background:#19232db3; border-radius:3px; }
+  & .sugin-row.done { border-left-color:#8294a6; }
+  & .sugin-top { display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding-bottom:12px;
+    border-bottom:1px solid #dce7ef1c; font-size:var(--interface-text-caption); color:#aab7c2; }
+  & .sugin-mark { display:inline-flex; color:#e2c98d; }
+  & .sugin-row.done .sugin-mark { color:#aab7c2; }
+  & .sugin-time { color:#aab7c2; font-variant-numeric:tabular-nums; }
+  & .sugin-page-name { color:#e8eef4; }
+  & .sugin-top > .mini-btn:first-of-type { margin-left:auto; }
+  & .sugin-del { flex:0 0 auto; }
+  & .sugin-text { margin-top:14px; color:#eceff2; font-size:var(--interface-text-body); line-height:1.75; white-space:pre-wrap; overflow-wrap:anywhere; }
+  & .sugin-row.done .sugin-text { color:#c1cbd4; }
+  & .sugin-where { margin-top:8px; color:#aab7c2; font-size:var(--interface-text-caption); overflow-wrap:anywhere; }
+  & .sugin-complete { display:block; width:auto; margin:16px 0 0; color:#e2c98d; }
+  & .sugin-detail { margin:12px 0 0; padding:12px 16px; background:#0d131a80;
+    border-left:2px solid #ccb58b66; color:#c1cbd4; font-size:var(--interface-text-label); line-height:1.7; white-space:pre-wrap; }
+  & .sugin-detail b { display:block; margin-bottom:6px; color:#e2c98d; font-size:var(--interface-text-caption); letter-spacing:.08em; }
+  & .sugin-pager { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;
+    margin-top:20px; padding-top:16px; border-top:1px solid #dce7ef26; }
+  & .ov-empty { color:#aab7c2; font-size:var(--interface-text-label); }
+  & .sugin-empty { display:flex; align-items:center; gap:24px; margin:6px 0 10px; padding:24px;
+    border:1px solid #dce7ef26; border-radius:3px; background:#19232db3; }
+  & .se-art { flex:none; width:128px; height:auto; align-self:stretch; object-fit:cover; border:1px solid #ccb58b4d; }
+  & .se-text { display:flex; flex-direction:column; gap:12px; min-width:0; text-align:left; }
+  & .se-text b { font-size:var(--interface-text-object); color:#e8eef4; }
+  & .se-text span { font-size:var(--interface-text-label); line-height:1.8; color:#aab7c2; }
 }
-@keyframes setPanelIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: none; }
-}
-
-/* ═════════ S1 冷青统一调色 + 暗角视线归属 ═════════ */
-
-/* S1a 页底分级： winter 蓝青渐变 → 冷青纵深感底 + 顶部淡金体积光（hub W1a 语言） */
-#overlay .card .pg.settings-page {
-  background:
-    radial-gradient(1100px 300px at 50% -80px, rgba(230,203,118,.10), transparent 70%),
-    radial-gradient(ellipse 120% 92% at 50% 26%, #2f3236 0%, #272a2d 36%, #1d2022 66%, #141517 100%);
-}
-/* 游戏整体缩放到 85% 时，设置列仍需留足实际阅读与操作宽度。 */
-#overlay .pg.settings-page:not(.sugin-page) .settings { max-width: 1020px; }
-
-/* S1b 四角暗角：视线收向中央设置列（对标选档页 W1c；pointer-events none 不挡交互） */
-.pg.settings-page::after {
-  content: ''; position: absolute; inset: 0; z-index: 4; pointer-events: none;
-  background:
-    radial-gradient(130% 100% at 50% 34%, transparent 52%, rgba(8,9,9,.28) 86%, rgba(7,7,8,.44) 100%),
-    linear-gradient(0deg, rgba(9,9,10,.30), transparent 12%);
-}
-
-/* ═════════ S2 页头：恢复页名 + 金发丝线 + 端点光点（hub W2 语言） ═════════ */
-
-/* S2a 页头底：实色板 → 半透明冷青渐变，与页面底色融为一体 */
-#overlay .pg.settings-page .pg-head {
-  position: relative;
-  background: linear-gradient(180deg, rgba(15,16,17,.78), rgba(12,13,14,.42));
-}
-
-/* S2b 下缘金发丝线（两端渐隐、中心提亮）+ 右端封蜡光点呼吸 */
-#overlay .pg.settings-page .pg-head::after {
-  content: ''; position: absolute; left: 24px; right: 24px; bottom: -1px; height: 1px;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, #e6cb76a1 18%, #e6cb76c4 50%, #e6cb76a1 82%, transparent);
-  box-shadow: 0 0 6px #e6cb7633;
-}
-#overlay .pg.settings-page .pg-head::before {
-  content: ''; position: absolute; right: 20px; bottom: -3px; width: 5px; height: 5px;
-  border-radius: 50%; pointer-events: none;
-  background: var(--gold-bright);
-  box-shadow: 0 0 10px #e6cb76d9, 0 0 22px #e6cb7655;
-  animation: setGemBreath 5s ease-in-out infinite alternate;
-}
-@keyframes setGemBreath { from { opacity: .5; } to { opacity: 1; } }
-
-/* S2c 恢复页名（cards.css 对 .card.page h2 一刀切 display:none，商店页已有
-   display:block 先例）：竖金标 + 提亮 + 微金晕（留言库页名同享） */
-#overlay .pg.settings-page .pg-head h2 {
-  display: block; position: relative; margin: 0;
-  padding-left: 14px;
-  font-size: clamp(17px, calc(var(--game-layout-width, 100vw) * 0.017), 21px); letter-spacing: 6px; color: #f4f4f4;
-  text-shadow: 0 0 16px rgba(16,18,19,.8), 0 0 3px rgba(230,203,118,.28);
-}
-#overlay .pg.settings-page .pg-head h2::before {
-  content: ''; position: absolute; left: 0; top: 50%; width: 2px; height: 16px;
-  transform: translateY(-50%);
-  background: linear-gradient(180deg, transparent, #e6cb76cc, transparent);
-  box-shadow: 1px 0 6px #e6cb7640;
-}
-#overlay .pg.settings-page .pg-head h2 .ic { filter: brightness(1.08) drop-shadow(0 0 4px rgba(230,203,118,.22)); }
-#overlay .pg.settings-page .pg-head h2 .settings-gear-r2 {
-  display: inline-block; width: 28px; height: 28px; object-fit: contain;
-  vertical-align: -6px; margin-right: 4px; flex: none;
-  filter: brightness(1.08) drop-shadow(0 0 4px rgba(230,203,118,.22));
-}
-
-/* 页头迟一拍落位（开卷仪式，与选档页 T4 同思路） */
-.pg.settings-page .pg-head { animation: setHeadIn .46s cubic-bezier(.22, 1, .36, 1) .03s backwards; }
-@keyframes setHeadIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: none; }
-}
-
-/* ═════════ S3 分组头 .set-h：前置金短线 + 金发丝下缘（档案章语言） ═════════ */
-
-.pg.settings-page .set-h {
-  position: relative; gap: 10px;
-  margin: 34px 0 12px; padding: 0 0 10px;
-  font-size: 16px; letter-spacing: 2.8px; color: #e3e1dd;
-  border-bottom: 1px solid rgba(230,203,118,.14);
-  text-shadow: 0 0 14px rgba(16,18,19,.8), 0 0 3px rgba(230,203,118,.16);
-}
-.pg.settings-page .set-h::before {
-  content: ''; display: block; flex: none; width: 18px; height: 1px;
-  background: linear-gradient(90deg, transparent, #e6cb76a8);
-  box-shadow: 0 0 4px #e6cb7655;
-}
-.pg.settings-page .set-h::after {
-  content: ''; position: absolute; left: 0; bottom: -1px; width: 62%; height: 1px;
-  pointer-events: none;
-  background: linear-gradient(90deg, #e6cb76a1, rgba(230,203,118,.22) 55%, transparent);
-}
-.pg.settings-page .set-h:first-child { margin-top: 10px; }
-.pg.settings-page .set-h .ic { filter: brightness(1.08) drop-shadow(0 0 3px rgba(230,203,118,.2)); }
-.pg.settings-page .set-h .set-en { margin-left: auto; font-size: 11.5px; color: #afb3b6; letter-spacing: 1.6px; }
-
-/* 危险区分组转暖红警示（仅设置页明确标记的危险面板） */
-.pg.settings-page:not(.sugin-page) .settings-danger .set-h { color: #e9b4a6; text-shadow: 0 0 14px rgba(20,10,8,.6); }
-.pg.settings-page:not(.sugin-page) .settings-danger .set-h::before {
-  background: linear-gradient(90deg, transparent, #c96f5ca8);
-  box-shadow: 0 0 4px #c96f5c44;
-}
-.pg.settings-page:not(.sugin-page) .settings-danger .set-h::after {
-  background: linear-gradient(90deg, #c96f5c8c, rgba(201,111,92,.2) 55%, transparent);
-}
-
-/* ═════════ S5 设置行 .chk：档案行质感 + 选中金轨 + hover 三档节奏 ═════════ */
-
-.pg.settings-page .chk {
-  position: relative;
-  font-size: 16px; line-height: 1.4; min-height: 52px; box-sizing: border-box;
-  padding: 12px 16px; border-radius:0;
-  background: rgba(37,40,42,.38);
-  border: 1px solid rgba(77,83,89,.28);
-  margin-bottom: 6px;
-  transition: background var(--set-fast), border-color var(--set-fast),
-    box-shadow var(--set-fast), transform var(--set-fast);
-}
-.pg.settings-page .chk:hover {
-  background: rgba(44,48,51,.58);
-  border-color: rgba(170,174,177,.48);
-  box-shadow: inset 2px 0 0 rgba(230,203,118,.5), 0 4px 12px rgba(7,7,8,.3);
-}
-.pg.settings-page .chk:active { transform: translateY(1px); }
-/* 已开启的行：左侧金轨 + 金族淡边（状态一眼可辨） */
-.pg.settings-page .chk:has(input:checked) {
-  background: rgba(42,45,48,.5);
-  border-color: rgba(230,203,118,.22);
-}
-/* 已开启行 hover：边框留在金族（通用 hover 的冷白边不抢状态色） */
-.pg.settings-page .chk:has(input:checked):hover {
-  border-color: rgba(230,203,118,.48);
-}
-.pg.settings-page .chk:has(input:checked)::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-  background: linear-gradient(180deg, transparent, rgba(230,203,118,.55), transparent);
-}
-.pg.settings-page .chk .set-en { margin-left: auto; padding-left: 12px; font-size: 11.5px; color: #afb3b6; letter-spacing: 1.2px; }
-
-/* 包 span 的行（音乐来源/音量）：EN 右缘对齐与其他行一致 */
-.pg.settings-page .chk > span:first-child { flex: 1; display: flex; align-items: center; gap: 6px; min-width: 0; }
-.pg.settings-page .chk > span:first-child .set-en { margin-left: auto; padding-left: 12px; }
-/* 音量行 EN 标签右对齐并定宽，与其他行右缘制式统一（MUSIC VOL / SFX VOL） */
-.pg.settings-page .chk.vol .set-en { min-width: 96px; margin-right: 12px; text-align: right; }
-
-/* S5b 控件本体：勾选框转档案金定制框，滑条转暖金族，数值提亮微金晕 */
-.pg.settings-page .chk input[type="checkbox"] {
-  appearance: none; flex: none; width: 16px; height: 16px; margin: 0;
-  border-radius:0;
-  border: 1px solid rgba(170,174,177,.5);
-  background: rgba(14,15,16,.6);
-  cursor: pointer;
-  transition: background var(--set-fast), border-color var(--set-fast), box-shadow var(--set-fast);
-}
-.pg.settings-page .chk input[type="checkbox"]:hover {
-  border-color: rgba(230,203,118,.7);
-  box-shadow: 0 0 8px rgba(230,203,118,.2);
-}
-.pg.settings-page .chk input[type="checkbox"]:checked {
-  border-color: rgba(230,203,118,.85);
-  background:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M2.5 6.3l2.5 2.5 4.5-5.6' fill='none' stroke='%23152e3b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>")
-    center / 11px 11px no-repeat,
-    linear-gradient(135deg, #e9d07d, #bc9e3d);
-  box-shadow: inset 0 1px 0 rgba(226,222,213,.5), 0 0 8px rgba(230,203,118,.25);
-}
-.pg.settings-page .chk input[type="checkbox"]:active { transform: scale(.9); transition-duration: .08s; }
-.pg.settings-page input[type="range"] { accent-color: var(--gold-main); cursor: pointer; min-height: 28px; }
-.pg.settings-page input[type="range"]:hover,
-.pg.settings-page input[type="range"]:active {
-  filter: brightness(1.12) drop-shadow(0 0 4px rgba(230,203,118,.3));
-}
-/* 拖动/聚焦滑条时数值跟着点亮（b 紧跟 input，兄弟选择器直达） */
-.pg.settings-page input[type="range"]:active + b,
-.pg.settings-page input[type="range"]:focus-visible + b {
-  color: var(--gold-bright);
-  text-shadow: 0 0 10px rgba(230,203,118,.5);
-}
-.pg.settings-page .chk.vol { padding: 12px 14px 12px 16px; }
-.pg.settings-page .chk b {
-  color: #e3e1de; font-size: 12.5px; min-width: 34px; text-align: right;
-  font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 8px rgba(230,203,118,.2);
-}
-
-/* S5c 音乐来源下拉：冷青档案框 + hover 金边。
-   appearance 定制 + 暗色 color-scheme：弹出列表不再走系统白底；
-   option 深底浅字、选中项暖金，与行控件同一语言。 */
-.pg.settings-page select {
-  appearance: none;
-  margin-left: 8px; padding: 8px 30px 8px 12px; border-radius:0;
-  border: 1px solid rgba(110,116,120,.55);
-  background: rgba(19,20,22,.9)
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'><path d='M1 1l3 3 3-3' fill='none' stroke='%23d9bb82' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")
-    no-repeat right 10px center;
-  color: #e3e3e4; cursor: pointer; color-scheme: dark;
-  font-size: 12.5px; letter-spacing: 1px;
-  transition: border-color var(--set-fast), box-shadow var(--set-fast), background-color var(--set-fast);
-}
-.pg.settings-page select:hover {
-  border-color: rgba(230,203,118,.55);
-  background-color: rgba(27,29,31,.95);
-  box-shadow: 0 0 8px rgba(230,203,118,.14);
-}
-.pg.settings-page select:active { border-color: rgba(230,203,118,.8); transition-duration: .08s; }
-.pg.settings-page select option { background: #17191a; color: #e3e3e4; }
-.pg.settings-page select option:checked { color: var(--gold-main); }
-
-/* S5d 说明文字：冷青灰小字 */
-.pg.settings-page .hint { color: #afb3b6; font-size: 13.5px; line-height: 1.7; margin: 12px 2px 4px; }
-.pg.settings-page .ov-empty { color: #9a9fa2; }
-
-/* ═════════ S6 按钮体系：hover 金边上浮 / 按压快按慢弹 / 危险暖红 ═════════ */
-
-/* S6a 通用按钮节奏（mini-btn：查看历史留言 / 导出 / 删除 / 危险区） */
-#overlay .pg.settings-page .mini-btn {
-  letter-spacing: 1px;
-  transition: color var(--set-fast), background var(--set-fast), border-color var(--set-fast),
-    box-shadow var(--set-fast), transform var(--set-fast), filter var(--set-fast);
-}
-#overlay .pg.settings-page .btn-row .mini-btn { padding: 11px 0; font-size: 13px; letter-spacing: 2px; }
-#overlay .pg.settings-page .mini-btn:hover:not(:disabled) {
-  transform: translateY(-1px);
-  border-color: rgba(213,214,215,.6);
-  box-shadow: 0 0 10px rgba(168,177,183,.16);
-}
-#overlay .pg.settings-page .mini-btn:active:not(:disabled) {
-  transform: translateY(1px) scale(.96);
-  transition-duration: .08s;
-}
-
-/* S6b 危险按钮 hover：暖红警示（对标选档页 T5） */
-#overlay .pg.settings-page .mini-btn.danger:hover {
-  background: linear-gradient(160deg, #8a3a31, #63251e);
-  border-color: #c96f5c;
-  color: #ffd9cf;
-  box-shadow: 0 0 12px rgba(190,84,62,.32);
-}
-/* S6c（W1-08）危险区分级：低危两钮一排；「清空全部存档」独占一排+加重描边内晕，
-   与低危钮拉开视觉权重（不可逆代价悬殊不应同形同位；两步确认逻辑不变） */
-#overlay .pg.settings-page .btn-row.danger-row { margin-top: 12px; }
-#overlay .pg.settings-page .mini-btn.danger-max {
-  border-color: #a4432f;
-  background: linear-gradient(160deg, #5c221a, #38120c);
-  color: #ffc4b6;
-  box-shadow: inset 0 0 0 1px rgba(255,122,92,.22), 0 0 10px rgba(190,84,62,.14);
-}
-#overlay .pg.settings-page .mini-btn.danger-max:hover:not(:disabled) {
-  background: linear-gradient(160deg, #8a3a31, #55201a);
-  border-color: #e08a74;
-  color: #ffe2d9;
-  box-shadow: 0 0 16px rgba(190,84,62,.42);
-}
-/* 两步确认「已武装」态：暖红常亮（hover 也不回落），压过 overlays.css 的灰底 */
-#overlay .pg.settings-page .mini-btn.arm,
-#overlay .pg.settings-page .mini-btn.arm:hover {
-  background: linear-gradient(160deg, #8a3a31, #5c2019);
-  border-color: #d98a76;
-  color: #ffe4da;
-  box-shadow: 0 0 14px rgba(190,84,62,.4);
-}
-
-/* S6d 右上全局关闭钮：冷青幽灵语言 + hover 金边（hub W2e 同款） */
-#overlay .card.page:has(.pg.settings-page) .ov-x {
-  color: #c0c4c7; border-color: rgba(170,174,177,.35); background: rgba(14,15,16,.55);
-  transition: color var(--set-fast), border-color var(--set-fast), background var(--set-fast),
-    box-shadow var(--set-fast), transform var(--set-fast);
-}
-#overlay .card.page:has(.pg.settings-page) .ov-x:hover {
-  color: #f4f4f4; border-color: rgba(230,203,118,.55); background: rgba(18,19,21,.75);
-  box-shadow: 0 0 10px rgba(230,203,118,.15);
-}
-#overlay .card.page:has(.pg.settings-page) .ov-x:active { transform: scale(.92); transition-duration: .08s; }
-
-/* S6f 返回键统一（2026-09-25 老板）：设置页返回 = 主页左上退出键同款同位，
-   定位/底色/内框在 winter.css #12 .ak-back-tl；这里只做页头让位与暖金 hover 收口
-   （留言库 S6e 同款语言）。底部大返回钮已取消。 */
-#overlay .pg.settings-page .pg-head { padding-left: 98px; min-height: 88px; }
-#overlay .pg.settings-page .ak-back-tl,
-#overlay .pg.settings-page .ak-back-tl:hover,
-#overlay .pg.settings-page .ak-back-tl:active,
-#overlay .pg.settings-page .ak-back-tl:focus-visible {
-  background: transparent;
-  border-color: transparent;
-}
-#overlay .pg.settings-page .ak-back-tl { color: #c0c4c7; box-shadow: none; }
-#overlay .pg.settings-page .ak-back-tl::after { display: none; }
-#overlay .pg.settings-page .ak-back-tl:hover,
-#overlay .pg.settings-page .ak-back-tl:active { color: #f8e5a8; box-shadow: none; }
-#overlay .pg.settings-page .ak-back-tl:focus-visible {
-  color: #f8e5a8;
-  outline: 1px solid #e6cb76cc;
-  outline-offset: 3px;
-  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(230,203,118,.35);
-}
-
-/* 留言库返回键只保留图标，常态与悬停均不绘制底板或内框。 */
-#overlay .sugin-page .sugin-exit {
-  background: transparent; border: 0; box-shadow: none;
-  transition-property: color !important;
-}
-#overlay .sugin-page .sugin-exit::after { content: none; }
-#overlay#overlay#overlay .sugin-page .sugin-exit:is(:hover, :focus-visible):not(:disabled):not([aria-disabled="true"]) {
-  background: transparent !important; border-color: transparent !important;
-  color: #f8e5a8 !important;
-  box-shadow: none !important;
-}
-#overlay .sugin-page .sugin-exit:active { transform: scale(.92); transition-duration: .08s; }
-
-/* ═════════ S7 留言库：档案卡语言（封条金线/主辅层级/档案框细节） ═════════ */
-
-.pg.sugin-page .sugin-row {
-  position: relative;
-  border: 1px solid rgba(77,83,89,.34);
-  background: rgba(37,40,42,.34);
-  border-radius:0;
-  padding: 12px 16px; margin-bottom: 10px;
-  transition: border-color var(--set-lift), background var(--set-lift), box-shadow var(--set-lift);
-}
-/* 卡顶封条金线（选档页 W2d 语言）：待处理可辨、hover 点亮、已完成极淡 */
-.pg.sugin-page .sugin-row::before {
-  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgba(230,203,118,.72), transparent);
-  opacity: .26;
-  transition: opacity var(--set-fast);
-}
-.pg.sugin-page .sugin-row:hover {
-  border-color: rgba(170,174,177,.5);
-  background: rgba(43,46,49,.5);
-  box-shadow: 0 6px 16px rgba(7,7,8,.32);
-}
-.pg.sugin-page .sugin-row:hover::before { opacity: .72; }
-.pg.sugin-page .sugin-row.done { opacity: 1; }
-.pg.sugin-page .sugin-row.done::before { opacity: .1; }
-.pg.sugin-page .sugin-row.done:hover { opacity: 1; }
-
-/* S7b 行内元信息行：底部分隔 + 层级（时间弱、页名亮、标记金） */
-.pg.sugin-page .sugin-top {
-  gap: 10px; padding-bottom: 8px;
-  border-bottom: 1px dashed rgba(170,174,177,.16);
-}
-.pg.sugin-page .sugin-mark { color: var(--gold-main); }
-.pg.sugin-page .sugin-row.done .sugin-mark { color: #a8adb0; }
-.pg.sugin-page .sugin-time { color: #9a9fa2; font-variant-numeric: tabular-nums; letter-spacing: .5px; }
-.pg.sugin-page .sugin-page-name { color: #e7e8e9; letter-spacing: 1.5px; }
-
-/* S7c 正文与档案框：正文提亮、复现步骤等收进金边档案框 */
-.pg.sugin-page .sugin-text { margin-top: 8px; font-size: 17px; line-height: 1.75; color: #ececec; }
-.pg.sugin-page .sugin-row.done .sugin-text { color: #d7dde0; }
-#overlay:has(.sugin-page) #ovCloseX { display: none !important; }
-.pg.sugin-page .sugin-where { color: #8b9093; }
-.pg.sugin-page .sugin-complete { display: block; width: auto; margin: 12px 0 0; padding: 6px 12px; color: #e6cb76; }
-.pg.sugin-page .sugin-detail {
-  margin: 8px 0 0; padding: 6px 10px;
-  background: rgba(14,15,16,.45);
-  border-left: 2px solid rgba(230,203,118,.4);
-  border-radius:0;
-  color: #c2c5c7; font-size: 12px; line-height: 1.7;
-}
-.pg.sugin-page .sugin-detail b { color: var(--gold-main); letter-spacing: .2em; font-size: 10px; margin-bottom: 2px; }
-
-/* S7d 列表出入场：整体内容错峰上浮（sugBox 重渲染仅发生在打开/删除时） */
-.pg.settings-page .settings > * {
-  animation: setRowIn .38s cubic-bezier(.22, 1, .36, 1) backwards;
-}
-@keyframes setRowIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
-}
-.pg.settings-page .settings > *:nth-child(1) { animation-delay: .02s; }
-.pg.settings-page .settings > *:nth-child(2) { animation-delay: .05s; }
-.pg.settings-page .settings > *:nth-child(3) { animation-delay: .08s; }
-.pg.settings-page .settings > *:nth-child(4) { animation-delay: .11s; }
-.pg.settings-page .settings > *:nth-child(5) { animation-delay: .14s; }
-.pg.settings-page .settings > *:nth-child(6) { animation-delay: .17s; }
-.pg.settings-page .settings > *:nth-child(7) { animation-delay: .2s; }
-.pg.settings-page .settings > *:nth-child(8) { animation-delay: .22s; }
-.pg.settings-page .settings > *:nth-child(9) { animation-delay: .24s; }
-.pg.settings-page .settings > *:nth-child(n+10) { animation-delay: .26s; }
-
-/* 主设置页按用途分卡，危险操作横跨整列并与日常入口留出明确间隔。 */
-.pg.settings-page .settings-layout {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-areas: 'general audio' 'display audio' 'records credits' 'danger danger';
-  align-content: start;
-  align-items: start;
-  gap: 14px;
-  padding-top: 8px;
-}
-.pg.settings-page .settings-group {
-  min-width: 0;
-  padding: 4px 16px 16px;
-  border: 1px solid rgba(127,134,138,.25);
-  background: linear-gradient(145deg, rgba(37,40,43,.62), rgba(20,21,23,.5));
-  box-shadow: inset 0 1px rgba(227,228,229,.035), 0 8px 18px rgba(7,7,8,.12);
-}
-.pg.settings-page .settings-general { grid-area: general; }
-.pg.settings-page .settings-display { grid-area: display; }
-.pg.settings-page .settings-audio { grid-area: audio; height: 100%; }
-.pg.settings-page .settings-records { grid-area: records; }
-.pg.settings-page .settings-credits { grid-area: credits; }
-.pg.settings-page .settings-group .set-h { margin: 12px 0 12px; }
-.pg.settings-page .settings-group .chk { margin-bottom: 7px; }
-.pg.settings-page .settings-group .hint { margin: 12px 2px 2px; }
-.pg.settings-page .settings-records .set-h:not(:first-child) { margin-top: 23px; }
-.pg.settings-page .settings-danger {
-  grid-area: danger;
-  grid-column: 1 / -1;
-  margin-top: 4px;
-  border-color: rgba(201,111,92,.38);
-  background: linear-gradient(145deg, rgba(77,37,35,.42), rgba(23,25,26,.58));
-  box-shadow: inset 0 1px rgba(255,215,205,.04), 0 8px 20px rgba(14,5,7,.2);
-}
-.pg.settings-page .settings-danger .hint { color: #d1a39a; }
-
-/* ═════════ S8 焦点态：键盘导航金线焦点环（hub T2 语言） ═════════ */
-
-#overlay .pg.settings-page :is(button, select, input):focus-visible {
-  outline: 1px solid #e6cb76cc;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(230,203,118,.35);
-}
-/* 行内控件聚焦时，焦点环升级到整行（勾选框/滑条小控件不裸露小环） */
-#overlay .pg.settings-page .chk input:focus-visible { outline: none; box-shadow: none; }
-#overlay .pg.settings-page .chk:has(input:focus-visible) {
-  outline: 1px solid #e6cb76cc;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(230,203,118,.35);
-}
-#overlay .sugin-page .sugin-exit:focus-visible,
-#overlay .card.page:has(.pg.settings-page) .ov-x:focus-visible {
-  outline: 1px solid #e6cb76cc;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(230,203,118,.35);
-}
-
-/* ═════════ S9 光标自查 ═════════ */
-#overlay .pg.settings-page button:not(:disabled) { cursor: pointer; }
-.pg.settings-page .chk { cursor: pointer; }
-
-/* ═════════ S10 滚动条：冷青细轨（expedition-roster 语言） ═════════ */
-.pg.settings-page .settings::-webkit-scrollbar { width: 9px; }
-.pg.settings-page .settings::-webkit-scrollbar-track { background: rgba(16,17,18,.35); }
-.pg.settings-page .settings::-webkit-scrollbar-thumb { background: var(--sb-thumb); border-radius: var(--sb-radius); }
-.pg.settings-page .settings::-webkit-scrollbar-thumb:hover { background: rgba(170,174,177,.52); }
-
-/* ═════════ S11 留言库空态「雪地邮筒」（2026-09-25 A 组·审查计划项5）═════════
-   中心 NAI 生图 sugin-mail-empty.webp（832×1216 冬日邮筒 → 360px webp q90），
-   左图右文的档案空态框：虚线框 + 斜纹底延续仓库占位语言 */
-.pg.settings-page .sugin-empty {
-  display: flex; align-items: center; gap: 22px;
-  margin: 6px 0 10px; padding: 20px 22px;
-  border: 1px dashed rgba(230,203,118,.38);
-  border-radius:0;
-  background:
-    repeating-linear-gradient(45deg, rgba(230,203,118,.035) 0 10px, transparent 10px 22px),
-    radial-gradient(ellipse 80% 90% at 24% 50%, rgba(230,203,118,.06), transparent 70%),
-    rgba(10,11,12,.45);
-}
-.pg.settings-page .sugin-empty .se-art {
-  flex: none; width: 128px; height: auto; align-self: stretch; object-fit: cover;
-  border: 1px solid rgba(230,203,118,.3); border-radius:0;
-  box-shadow: 0 6px 16px rgba(7,7,8,.45);
-  filter: saturate(.96);
-}
-.pg.settings-page .sugin-empty .se-text {
-  display: flex; flex-direction: column; gap: 7px; min-width: 0;
-  text-align: left;
-}
-.pg.settings-page .sugin-empty .se-text b {
-  font-size: 15.5px; letter-spacing: 3px; color: #e3e1de;
-  text-shadow: 0 0 12px rgba(230,203,118,.16);
-}
-.pg.settings-page .sugin-empty .se-text span { font-size: 12.5px; line-height: 1.8; color: #9da1a3; }
-.pg.settings-page .sugin-empty .se-text span b { color: var(--gold-main); font-size: 12.5px; letter-spacing: 1px; }
+#overlay:has(.sugin-page) #ovCloseX { display:none; }

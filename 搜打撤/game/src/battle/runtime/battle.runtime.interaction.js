@@ -1,58 +1,35 @@
+import { subscribeStateBindings } from '../../core/live-bindings.js';
 import { defaultBattleRuntime as runtime } from './battle.runtime.default.js';
 
 // Derived ESM bindings preserve existing readers; mutable data lives in runtime.
-export let infusing = runtime.infusing;
-export let discovering = runtime.discovering;
-export let discoverQueue = runtime.discoverQueue;
-export let handSelecting = runtime.handSelecting;
-export let choosing = runtime.choosing;
-export let interaction = runtime.interaction;
-export let pendingHint = runtime.pendingHint;
-export let viewingGrave = runtime.viewingGrave;
-export let viewingDeck = runtime.viewingDeck;
-export let viewingBag = runtime.viewingBag;
-export let selPool = runtime.selPool;
-export let selShaN = runtime.selShaN;
-export let sel = runtime.sel;
-export let lastDeckSel = runtime.lastDeckSel;
-export let selectingDeck = runtime.selectingDeck;
-export let selDeckMax = runtime.selDeckMax;
-runtime.subscribe((state, key) => {
-  switch (key) {
-    case 'infusing': infusing = state.infusing; break;
-    case 'discovering': discovering = state.discovering; break;
-    case 'discoverQueue': discoverQueue = state.discoverQueue; break;
-    case 'handSelecting': handSelecting = state.handSelecting; break;
-    case 'choosing': choosing = state.choosing; break;
-    case 'interaction': interaction = state.interaction; break;
-    case 'pendingHint': pendingHint = state.pendingHint; break;
-    case 'viewingGrave': viewingGrave = state.viewingGrave; break;
-    case 'viewingDeck': viewingDeck = state.viewingDeck; break;
-    case 'viewingBag': viewingBag = state.viewingBag; break;
-    case 'selPool': selPool = state.selPool; break;
-    case 'selShaN': selShaN = state.selShaN; break;
-    case 'sel': sel = state.sel; break;
-    case 'lastDeckSel': lastDeckSel = state.lastDeckSel; break;
-    case 'selectingDeck': selectingDeck = state.selectingDeck; break;
-    case 'selDeckMax': selDeckMax = state.selDeckMax; break;
-  }
+export let {
+  infusing, discovering, discoverQueue, handSelecting,
+  choosing, interaction, pendingHint, viewingGrave,
+  viewingDeck, viewingBag, selPool, selShaN,
+  sel, lastDeckSel, selectingDeck, selDeckMax
+} = runtime;
+subscribeStateBindings(runtime, {
+  infusing: value => { infusing = value; },
+  discovering: value => { discovering = value; },
+  discoverQueue: value => { discoverQueue = value; },
+  handSelecting: value => { handSelecting = value; },
+  choosing: value => { choosing = value; },
+  interaction: value => { interaction = value; },
+  pendingHint: value => { pendingHint = value; },
+  viewingGrave: value => { viewingGrave = value; },
+  viewingDeck: value => { viewingDeck = value; },
+  viewingBag: value => { viewingBag = value; },
+  selPool: value => { selPool = value; },
+  selShaN: value => { selShaN = value; },
+  sel: value => { sel = value; },
+  lastDeckSel: value => { lastDeckSel = value; },
+  selectingDeck: value => { selectingDeck = value; },
+  selDeckMax: value => { selDeckMax = value; },
 });
-export const set$infusing = runtime.set$infusing;
-export const set$discovering = runtime.set$discovering;
-export const set$discoverQueue = runtime.set$discoverQueue;
-export const set$handSelecting = runtime.set$handSelecting;
-export const set$choosing = runtime.set$choosing;
-export const set$interaction = runtime.set$interaction;
-export const set$pendingHint = runtime.set$pendingHint;
-export const set$viewingGrave = runtime.set$viewingGrave;
-export const set$viewingDeck = runtime.set$viewingDeck;
-export const set$viewingBag = runtime.set$viewingBag;
-export const set$selPool = runtime.set$selPool;
-export const set$selShaN = runtime.set$selShaN;
-export const set$sel = runtime.set$sel;
-export const set$lastDeckSel = runtime.set$lastDeckSel;
-export const set$selectingDeck = runtime.set$selectingDeck;
-export const set$selDeckMax = runtime.set$selDeckMax;
-export const clearBattlePopups = runtime.clearBattlePopups;
-export const closeBattleViews = runtime.closeBattleViews;
-export const clearTargetHint = runtime.clearTargetHint;
+export const {
+  set$infusing, set$discovering, set$discoverQueue, set$handSelecting,
+  set$choosing, set$interaction, set$pendingHint, set$viewingGrave,
+  set$viewingDeck, set$viewingBag, set$selPool, set$selShaN,
+  set$sel, set$lastDeckSel, set$selectingDeck, set$selDeckMax,
+  clearBattlePopups, closeBattleViews, clearTargetHint
+} = runtime;

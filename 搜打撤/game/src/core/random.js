@@ -15,7 +15,7 @@ function setRandomService(next) {
 }
 
 const Random = Object.freeze({
-  random: stream => service.random(stream),
+  random: (stream, purpose = undefined) => service.random(stream, purpose),
   /** @param {unknown} [seed] */
   reseed: seed => service.reseed(seed),
   snapshot: () => service.snapshot(),
@@ -23,6 +23,8 @@ const Random = Object.freeze({
   get seed() { return service.seed; },
 });
 
+const randomRule = (purpose, legacyStream) => Random.random(legacyStream, purpose);
+
 sdtDefine('Random', Random);
 
-export { Random, SeededRandomService, generateSeed, hashSeed, nextRandom, setRandomService };
+export { Random, SeededRandomService, generateSeed, hashSeed, nextRandom, setRandomService, randomRule };

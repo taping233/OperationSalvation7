@@ -1,9 +1,9 @@
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { cardResultRows, showBattleCardResults } from '../game/src/battle/view/battle.card-results.js';
 import { createBattleDraw } from '../game/src/battle/core/battle.draw.js';
 import * as runtime from '../game/src/battle/runtime/battle.runtime.js';
+import { readCssSource } from './helpers/css-source.js';
 
 let stage;
 beforeEach(() => {
@@ -62,14 +62,14 @@ it('正式舞台结果日志与道具栏横向分区，高度封顶且保留滚�
   const declarations = selector => {
     const result = {};
     for (const file of ['battle.css', 'battle-stage.css']) {
-      postcss.parse(readFileSync(`game/css/${file}`, 'utf8')).walkRules(rule => {
+      postcss.parse(readCssSource(`game/css/${file}`, 'utf8')).walkRules(rule => {
         if (rule.selector === selector) rule.walkDecls(d => { result[d.prop] = d.value; });
       });
     }
     return result;
   };
   const log = { ...declarations('.bt-card-results'), ...declarations('#overlay .battle-stage.sts>.bt-card-results') };
-  const items = declarations('#overlay .battle-stage.sts>.bt-potions');
+  const items = declarations('#overlay .battle-stage.sts>.sts-topbar>.bt-potions');
   const infusion = declarations('#overlay .battle-stage.sts>.bt-infuse');
   const topbar = declarations('#overlay .battle-stage.sts .sts-topbar');
   expect(log.right).toBe('auto');
@@ -95,20 +95,20 @@ it('正式舞台结果日志与道具栏横向分区，高度封顶且保留滚�
 
 it('顶部透明空白区不截获日志输入，实际顶栏控件保留交互', () => {
   const rules = new Map();
-  postcss.parse(readFileSync('game/css/battle-stage.css', 'utf8')).walkRules(rule => {
+  postcss.parse(readCssSource('game/css/battle-stage.css', 'utf8')).walkRules(rule => {
     const values = rules.get(rule.selector) || {};
     rule.walkDecls(d => { values[d.prop] = d.value; }); rules.set(rule.selector, values);
   });
   expect(rules.get('#overlay .battle-stage.sts .sts-topbar')?.['pointer-events']).toBe('none');
-  expect(rules.get('#overlay .battle-stage.sts .sts-topbar > :is(.sts-encounter,.sts-options)')?.['pointer-events']).toBe('auto');
+  expect(rules.get('#overlay .battle-stage.sts .sts-topbar > :is(.sts-encounter,.bt-potions)')?.['pointer-events']).toBe('auto');
   stage.classList.add('sts');
-  stage.insertAdjacentHTML('afterbegin', '<div class="sts-topbar"><div class="sts-encounter">回合</div><details class="sts-options" open><summary>选项</summary><div class="sts-options-menu"><button>设置</button></div></details></div>');
+  stage.insertAdjacentHTML('afterbegin', '<div class="sts-topbar"><div class="sts-encounter">回合</div><div class="bt-potions"><button>道具</button></div></div>');
   const style = document.createElement('style');
   style.textContent = [...rules].filter(([selector]) => selector.includes('.sts-topbar')).map(([selector, values]) => `${selector}{${Object.entries(values).map(([name, value]) => `${name}:${value}`).join(';')}}`).join('');
   document.head.appendChild(style);
   try {
     expect(getComputedStyle(stage.querySelector('.sts-topbar')).pointerEvents).toBe('none');
-    for (const selector of ['.sts-encounter', '.sts-options', '.sts-options summary', '.sts-options-menu button']) {
+    for (const selector of ['.sts-encounter', '.bt-potions', '.bt-potions button']) {
       expect(getComputedStyle(stage.querySelector(selector)).pointerEvents).toBe('auto');
     }
   } finally { style.remove(); }

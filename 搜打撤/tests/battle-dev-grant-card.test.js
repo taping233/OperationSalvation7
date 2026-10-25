@@ -1,3 +1,4 @@
+import { playerFields } from './helpers/environment-fixtures.js';
 import { expect, it, vi } from 'vitest';
 
 window.SDT = { Icons:{ img:() => '', TYPE_ART:{} }, Sound:{ music() {}, sfx() {}, setDucked() {}, setBoss() {} },
@@ -13,8 +14,7 @@ window.SDT.Cards.ensureEffectFields();
 it('控制台发卡加入普通战和首脑战的当前手牌，结束后拒绝发卡', async () => {
   const card = window.SDT.Cards.all().find(card => card.id === 'tt3-fireball');
   for (const isBoss of [false, true]) {
-    const game = { ownedCards:[{ uid:'starter', card }], inventory:[], usedPocket:[], hp:50, maxHp:50, atk:5,
-      spellPower:0, coins:0, myClass:'降临者', characterId:null, state:'idle', battleActive:false,
+    const game = { ownedCards:[{ uid:'starter', card }], inventory:[], usedPocket:[], ...playerFields(50, 50, 5, 0, '降临者', null),
       log:vi.fn(), addItem() {}, onBattleEnd() {} };
     BattleSession.start(game, [{ id:'target', name:'测试靶', hp:999, maxHp:999, atk:0 }], { isBoss });
     if (isBoss) {

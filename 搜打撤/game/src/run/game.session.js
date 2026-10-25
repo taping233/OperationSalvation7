@@ -1,3 +1,6 @@
+import { createSessionPersistence } from './game-session-persistence.js';
+import { createSessionRestoration } from './game-session-restoration.js';
+import { createSessionDeparture } from './game-session-departure.js';
 import { traceRestoreStep } from '../core/flight-recorder.local.js';
 /* ============================================================
  * game.session.js —— 搜打撤会话生命周期 + 兼容导出面（2026-09-25 拆分后）
@@ -9,9 +12,8 @@ import { traceRestoreStep } from '../core/flight-recorder.local.js';
  *
  * 2026-09-25 拆分（battle.runtime 同款手法）：内核/模式/背包/地图几何/迷雾小地图
  * 拆入 game.session.kernel/modes/bag/map/board.js，终局结算经 game.session.death.js
- * 工厂注入；本文件保留档位存取、存读档、开局流程、菜单装配与进层，并原样转发
- * 全部具名导出——调用方零改动。tests 对本文件有源文本断言（run-architecture 的
- * canReceiveCard 正则、random 的 rng 字段、hub-flow 的 skipClassChoice 行），勿移。
+ * 工厂注入；保存、恢复和出征由显式端口控制器负责，本文件装配菜单与进层，
+ * 并原样转发全部具名导出。
  * ============================================================ */
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -21,6 +23,8 @@ import { RunStorage, SLOT_COUNT, TX_KEY } from '../hub/game.storage.js';
 import { createDeparturePersistence } from '../hub/departure-persistence.js';
 import { planBaseDeparture } from '../hub/base-departure.commands.js';
 import { validateRunSave } from '../hub/run-save-validation.js';
+import { createSaveArchive, validateArchivedRun } from '../hub/save-archive.js';
+import { withSlotWriteLock } from '../hub/slot-write-lock.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot, recoverSlotIfPending } from '../hub/recovery.commands.js';
 import { validatePendingExtraction } from '../hub/extraction.commands.js';
 import { createTerminalCommands } from '../hub/terminal.commands.js';
@@ -30,7 +34,7 @@ import { resetRunCounters, restoreRunBattles, snapshotRunBattles } from '../agen
 import { ensureBattleReady } from '../battle/battle-loader.js';
 import { Random } from '../core/random.js';
 import { GENERATOR_VERSION, LAYOUT_VERSION } from './map-generator.js';
-import { createMapSnapshot, planMapRestore, validateMapSnapshot } from './map-snapshot.js';
+import { createMapSnapshot, planMapRestore } from './map-snapshot.js';
 import { game, runtime, MAP, cam, curLayer, cellCenter } from './game.session.kernel.js';
 import { MODES, modeCfg, applyModeRules } from './game.session.modes.js';
 import { assertZones, cardStacks, canAcceptCard, safeCap, safeUsed, refreshCardClones, PEARL_BOX_ID } from './game.session.bag.js';
@@ -47,7 +51,60 @@ export const getActiveSlot = () => activeSlot;
 export const _set_active_slot = value => { activeSlot = value; };
 const getTerminalGeneration = () => terminalGeneration;
 const nextTerminalGeneration = () => ++terminalGeneration;
+function publishSaveState(state, scope, message = '') {
+  document.dispatchEvent(new CustomEvent('sdt-save-state', { detail: { state, scope, message } }));
+}
+export const saveArchive = createSaveArchive();
+export const previewRunBackup = slot => RunStorage.previousCandidate(slot, validateArchivedRun);
+export const restoreRunBackup = (slot, candidate) => RunStorage.restorePrevious(slot, candidate, validateArchivedRun);
 
+
+// Factories only retain readers and define commands; cross-controller calls are
+// deferred until an action starts, after menu/death assembly has completed.
+const sessionPorts = {
+  readState: () => ({ game, runtime, activeSlot }),
+  readServices: () => window.SDT,
+  readUI: () => window.SDT.UI,
+  readStorage: () => globalThis.localStorage,
+};
+const persistenceController = createSessionPersistence({ ...sessionPorts,
+  Random, RunStorage, SLOT_COUNT, TX_KEY, createMapSnapshot, GENERATOR_VERSION, LAYOUT_VERSION,
+  snapshotRunBattles, assertZones, publishSaveState, withSlotWriteLock });
+const restorationController = createSessionRestoration({ ...sessionPorts, development: import.meta.env.DEV,
+  RunStorage, validateRunSave, validatePendingExtraction, planMapRestore, traceRestoreStep,
+  Random, installDerived, MODES, MAP, applyModeRules, refreshCardClones, eventChoiceRewardAt, restoreRunBattles,
+  setLobby: (...args) => setLobby(...args), enterLayer, saveGame,
+  saveBaseForLoad: persistenceController.saveBaseForLoad,
+  recordBaseSaveForLoad: persistenceController.recordBaseSaveForLoad,
+  trackRestoration: persistenceController.trackRestoration,
+});
+const departureController = createSessionDeparture({ ...sessionPorts,
+  Random, MAP, MODES, modeCfg, buildNewRunDerived, newUid, createRunSavePayload,
+  createDeparturePersistence, planBaseDeparture, RunStorage, TX_KEY, resetRunCounters, applyModeRules,
+  setLobby: (...args) => setLobby(...args), enterLayer, nextTerminalGeneration, esc });
+
+/** @param {Parameters<typeof persistenceController.createRunSavePayload>} args */
+function createRunSavePayload(...args) { return persistenceController.createRunSavePayload(...args); }
+/** @param {Parameters<typeof persistenceController.saveGame>} args */
+function saveGame(...args) { return persistenceController.saveGame(...args); }
+/** @param {Parameters<typeof persistenceController.saveSession>} args */
+function saveSession(...args) { return persistenceController.saveSession(...args); }
+/** @param {Parameters<typeof persistenceController.syncPlayTime>} args */
+function syncPlayTime(...args) { return persistenceController.syncPlayTime(...args); }
+function clearSlot(...args) { return persistenceController.clearSlot(...args); }
+/** @param {Parameters<typeof persistenceController.clearSave>} args */
+function clearSave(...args) { return persistenceController.clearSave(...args); }
+/** @param {Parameters<typeof persistenceController.clearAllSlots>} args */
+function clearAllSlots(...args) { return persistenceController.clearAllSlots(...args); }
+function hasRun(...args) { return persistenceController.hasRun(...args); }
+function readSlot(...args) { return persistenceController.readSlot(...args); }
+/** @param {Parameters<typeof persistenceController.migrateOldSave>} args */
+function migrateOldSave(...args) { return persistenceController.migrateOldSave(...args); }
+function setBattleSettlementPending(...args) { return persistenceController.setBattleSettlementPending(...args); }
+function clearBattleSettlementPending(...args) { return persistenceController.clearBattleSettlementPending(...args); }
+function loadGame(...args) { return restorationController.loadGame(...args); }
+function preflightRunMap(...args) { return restorationController.preflightRunMap(...args); }
+function newRun(...args) { return departureController.newRun(...args); }
 
 // 两键结算命令（创建/提交/重放尝试）：同步读档位与游玩时长，供终局结算与菜单复用
 const terminalCommands = createTerminalCommands({
@@ -73,426 +130,11 @@ const { doDeath } = createDeathSettlement({
   }
 game.canReceiveCard = canReceiveCard; // 叠放上限感知的收卡判定（#7）
 
-// ---------- 存档（五档位，互相独立；基地数据也按档位隔离，见 base.js） ----------
-// 读档数值归一化（迭代评审 09-20 G-P2）：Number.isFinite 强转——0 是合法值不能用 || 兜底
-//（会吃掉 0 币/0 血），缺失/NaN/类型异常回退默认，防 undefined 进血条全线 NaN、hp 缺失恒假打不死
-const numOr = (v, d) => { const n = +v; return Number.isFinite(n) ? n : d; };
-let lastSaveFailWarnAt = 0;           // 写档失败警示 30s 节流（迭代评审 09-20 G-P3）：成功落盘即复位
-let lastSaveConflictWarnAt = 0;
-let pendingBattleSettlement = null;
-// 只在同步装载期间收集原有保存调用；包括 enterLayer 间接触发的 saveGame。
-let loadPersistence = null;
-const loadPersistenceTasks = new WeakMap();
-
-function recordLoadPersistence(target, reason, ok, code) {
-  if (!loadPersistence) return;
-  const attempt = { target, reason, ok: ok === true };
-  if (!attempt.ok && code) attempt.code = code;
-  loadPersistence.attempts.push(attempt);
-  loadPersistence.status = loadPersistence.attempts.some(a => a.pending) ? 'pending'
-    : loadPersistence.attempts.some(a => !a.ok) ? 'failed' : 'succeeded';
-}
-
-function saveBaseForLoad(reason) {
-  return recordBaseSaveForLoad(reason, SDT.Base.save());
-}
-
-function recordBaseSaveForLoad(reason, ok) {
-  if (ok && typeof ok.then === 'function') {
-    const context = loadPersistence;
-    if (!context) return ok;
-    const attempt = { target: 'base', reason, ok: null, pending: true };
-    context.attempts.push(attempt);
-    context.status = 'pending';
-    const task = Promise.resolve(ok).catch(() => false).then(saved => {
-      attempt.ok = saved === true;
-      delete attempt.pending;
-      if (!attempt.ok) attempt.code = 'BASE_SAVE_FAILED';
-      context.status = context.attempts.some(a => a.pending) ? 'pending'
-        : context.attempts.some(a => !a.ok) ? 'failed' : 'succeeded';
-      return attempt.ok;
-    });
-    loadPersistenceTasks.get(context)?.push(task);
-    return task;
-  }
-  recordLoadPersistence('base', reason, ok, 'BASE_SAVE_FAILED');
-  return ok;
-}
-
-function setBattleSettlementPending(slotId, runId) {
-  pendingBattleSettlement = { slotId, runId, seed: game.seed, runToken: game.discoveredPairs };
-}
-
-function clearBattleSettlementPending(slotId, runId) {
-  if (pendingBattleSettlement?.slotId === slotId && pendingBattleSettlement.runId === runId) pendingBattleSettlement = null;
-}
-
-function blocksSaveForPendingBattleSettlement() {
-  if (!pendingBattleSettlement) return false;
-  if (activeSlot !== pendingBattleSettlement.slotId) {
-    pendingBattleSettlement = null;
-    return false;
-  }
-  const sameInMemoryRun = game.seed === pendingBattleSettlement.seed && game.discoveredPairs === pendingBattleSettlement.runToken;
-  const currentIdentity = RunStorage.readIdentity(activeSlot);
-  if (currentIdentity.ok && currentIdentity.value.runId !== pendingBattleSettlement.runId) {
-    pendingBattleSettlement = null;
-    return false;
-  }
-  if (!sameInMemoryRun) {
-    pendingBattleSettlement = null;
-    return false;
-  }
-  return true;
-}
-
-const hasRun = (i) => RunStorage.has(i);                            // 该档有进行中的对局
-
-function readSlot(i) {
-  return RunStorage.read(i);
-}
-
-function migrateOldSave() {
-  RunStorage.migrateLegacy();
-}
-
-// 构造当前稳定点的唯一对局 payload。结算 pair 会直接提交它，因此此入口不
-// 同步时长、不调用 Base.save，也不写 RunStorage。
-function createRunSavePayload({ freshRun = false } = {}) {
-  assertZones();
-  const identity = activeSlot ? RunStorage.readIdentity(activeSlot) : null;
-  let snapshotResult = game.nestActive ? { ok: true, value: null } : createMapSnapshot({
-    mapSeed: game.mapSeed, generatorVersion: game.generatorVersion, layoutVersion: game.layoutVersion, layerData: game.layerData,
-    routeVersion: game.routeVersion, routePlan: game.routePlan,
-  });
-  if (snapshotResult.ok && !game.nestActive) snapshotResult = validateMapSnapshot(snapshotResult.value, { layerIdx: game.layerIdx, trackPos: game.trackPos });
-  if (!snapshotResult.ok) return null;
-  const chestReward = SDT.Chests?.serialize?.(game) || null;
-  const nodeChestRewards = { ...(game.nodeChestRewards || {}) };
-  if (chestReward) nodeChestRewards[`${game.layerIdx},${game.trackPos}`] = chestReward;
-  return {
-    seed: Random.seed, rngState: Random.snapshot(),
-    mapSeed: game.mapSeed ?? Random.seed,
-    encounterRotationVersion: game.encounterRotationVersion === 1 ? 1 : 0,
-    generatorVersion: game.generatorVersion ?? GENERATOR_VERSION,
-    layoutVersion: game.layoutVersion ?? LAYOUT_VERSION,
-    geometryVersion: game.geometryVersion ?? null,
-    routeVersion: game.routeVersion ?? null,
-    mapSnapshot: snapshotResult.value,
-    layerIdx: game.layerIdx, trackPos: game.trackPos,
-    hp: game.hp, maxHp: game.maxHp, coins: game.coins, turn: game.turn,
-    atk: game.atk, mode: game.mode, myClass: game.myClass || null, characterId: game.characterId || null,
-    inventory: game.inventory, ownedCards: game.ownedCards,
-    cardOrder: game.cardOrder || [],
-    usedPocket: game.usedPocket,
-    eventLog: game.eventLog || [],
-    visited: game.visited || {},
-    seen: game.seen || {},
-    explored: game.explored || null,   // 2026-10-03 老板（SYS-01）：首踏入格打标（撤离经验锚定首探）；旧档会话为 null 原样回写
-    fragments: game.fragments || 0,
-    discovered: [...game.discoveredPairs],
-    bossKilled: !!game.bossKilled,
-    altarActivated: !!game.altarActivated,   // 第四层祭坛是否已激活（首脑格准入条件）
-    altarRewardPending: !!game.altarRewardPending,   // 祭坛奖励待领取（回赠面板可重进，只能领一次）
-    bossPlan: (game.bossPlan == null ? null : game.bossPlan),   // 本层首脑预案（进层 roll 一次存全层，2026-09-13 老板拍板）
-    altarItemSacrificed: !!game.altarItemSacrificed,   // 第四层祭坛道具献祭一次性锁（2026-09-19 老板定版）
-    shopStocks: game.shopStocks || {},   // 各商店货架（按格子/门持久，防关门重刷，2026-09-19 审计 D-1）
-    chestReward, nodeChestRewards,
-    entrySupply: game.entrySupply || null,
-    nodeRewards: game.nodeRewards || {},
-    runBattleStats: freshRun ? { version: 1, runId: null, fought: 0, won: 0, log: [] } : snapshotRunBattles(identity?.ok ? identity.value.runId : null),
-    elapsed: game.elapsed,
-    slot: activeSlot, savedAt: Date.now(),
-    // 战斗中退出/关窗（beforeunload）：只写战斗入场检查点；读档从本场战斗开头重开
-    battle: (game.battleActive && SDT.Battle && typeof SDT.Battle.serialize === 'function')
-      ? SDT.Battle.serialize() : null,
-    // 龙巢进行中状态（2026-09-18 断点续战）
-    nestActive: !!game.nestActive,
-    nestPos: game.nestPos == null ? 0 : game.nestPos,
-    cardBox: game.cardBox || [],
-    nestRunes: game.nestRunes || [],
-    nestEquipped: game.nestEquipped || [],
-    nestBossName: game.nestBossName || null,
-    nestTargetedBox: game.nestTargetedBox || 0,
-    pendingRunePick: game.pendingRunePick || null,
-  };
-}
-
-function saveGame() {
-  // 整理期间只有两键结算命令能推进存档，常规自动保存不得覆盖待入库状态。
-  if (game.pendingExtraction || game.extractionPending || game.terminalPending || blocksSaveForPendingBattleSettlement()) return false;
-  // 战败倒地演出可延后 battle:end/doDeath；此时 battleActive 已清零，不能把致死血量写回进行中对局。
-  if (game.runActive && !game.battleActive && game.hp <= 0) return false;
-  // v0.21：只有真正开局后（runActive）才写对局存档；在基地/标题界面不产生对局文件
-  // 只保存稳定节点；动画中可能仍停在线段中间，退出/刷新后必须回到上一个落点。
-  if ((!game.runActive && !game.nestActive) || game.state === 'title' || game.state === 'done' || game.state === 'boot' || game.state === 'moving') return;
-  if (!activeSlot) return;
-  syncPlayTime();
-  const payload = createRunSavePayload();
-  if (!payload) {
-    UI.log('[[icon:cross]] 路线快照校验失败，本次未覆盖旧对局存档', 'warn');
-    return false;
-  }
-  const ok = RunStorage.write(activeSlot, payload);
-  recordLoadPersistence('run', 'save_game', ok, RunStorage.lastWriteIssue(activeSlot) || 'RUN_SAVE_FAILED');
-  if (!ok) {
-    if (RunStorage.lastWriteIssue(activeSlot) === 'STALE_SLOT') {
-      const now = Date.now();
-      if (now - lastSaveConflictWarnAt >= 30_000) {
-        lastSaveConflictWarnAt = now;
-        UI.log('[[icon:cross]] 档位已在其他标签页更新，对局进度未保存，请重新载入档位后继续', 'warn');
-        console.warn('[save] 对局存档版本冲突：请重新载入档位后继续');
-      }
-      return false;
-    }
-    // 写失败（典型：localStorage 配额满，五档对局+基地+留言共约 5MB）不提示就是无声丢档。
-    // 30s 节流+成功复位（迭代评审 09-20 G-P3）：处置前持续丢进度有感知、腾出空间后立即恢复提醒
-    const now = Date.now();
-    if (now - lastSaveFailWarnAt >= 30_000) {
-      lastSaveFailWarnAt = now;
-      UI.log('[[icon:cross]] 对局存档写入失败（存储空间可能已满），进度未被保存——请导出存档或删除旧档位', 'warn');
-      console.error('[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）');
-    }
-  } else {
-    lastSaveFailWarnAt = 0;   // 成功落盘=已恢复，下次失败立即提示（节流不吞「已恢复」后的第一次告警）
-    lastSaveConflictWarnAt = 0;
-  }
-  return ok;
-}
-function syncPlayTime() {
-  if (!activeSlot || SDT.Base.slot !== activeSlot) return Promise.resolve({ changed: false, persisted: true });
-  const now = Math.max(0, Number(game.elapsed) || 0), previous = Math.max(0, Number(game.elapsedSynced) || 0);
-  if (!(now > previous)) return Promise.resolve({ changed: false, persisted: true });
-  // Reserve the checkpoint before waiting for the lock so overlapping saves never count the same seconds twice.
-  game.elapsedSynced = now;
-  const result = Promise.resolve(SDT.Base.syncPlayTime(now, previous));
-  recordBaseSaveForLoad('play_time_sync', result.then(value => value.changed === false || value.persisted === true));
-  result.then(value => { if ('persisted' in value && value.persisted === false) UI.log('[[icon:cross]] 游玩时间尚未保存；本局内存进度保留，请重试保存', 'warn'); });
-  return result;
-}
-
-async function saveSession() {
-  const slot = activeSlot, seed = game.seed;
-  const runSaved = saveGame();
-  const checkpoints = await SDT.Base.flushWrites?.();
-  if (activeSlot !== slot || game.seed !== seed) return { ok: false, code: 'STALE_SLOT', message: '保存期间对局已变化' };
-  const baseSaved = !slot || await SDT.Base.save();
-  if (activeSlot !== slot || game.seed !== seed) return { ok: false, code: 'STALE_SLOT', message: '保存期间对局已变化' };
-  const baseFailed = !baseSaved || (!slot && checkpoints?.ok === false);
-  if (runSaved === false || baseFailed) return { ok: false, code: baseFailed ? 'BASE_SAVE_FAILED' : 'RUN_SAVE_FAILED', message: '部分进度尚未保存，请重试' };
-  return { ok: true };
-}
-
-// 删除仍是分离存储的顺序操作；明确报告部分完成，不回填或宣称跨键原子性。
-async function clearSlot(i) {
-  if (!RunStorage.remove(i)) return { ok: false, slot: i, code: 'RUN_DELETE_FAILED',
-    message: '对局删除未完整完成，基地数据未删除；请检查存储状态后重试' };
-  if (!await SDT.Base.wipe(i)) return { ok: false, slot: i, code: 'BASE_DELETE_FAILED',
-    message: '对局已删除，基地数据未能删除；请检查存储状态后重试' };
-  return { ok: true, slot: i };
-}
-function clearSave() { if (activeSlot) RunStorage.remove(activeSlot); }
-async function clearAllSlots() {
-  const results = [];
-  for (let i = 1; i <= SLOT_COUNT; i++) results.push(await clearSlot(i));
-  return { ok: results.every(result => result.ok), results };
-}
-
-function preflightRunMap(slot) {
-  const identity = RunStorage.readIdentity(slot);
-  if (identity.code === 'RECOVERY_REQUIRED') return { ...identity, preserveRun: true };
-  const s = RunStorage.readForPreflight(slot);
-  if (!s) {
-    const issue = RunStorage.issue(slot);
-    return { ok:false, code:issue==='tooNew'?'RUN_TOO_NEW':issue==='readFailed'?'STORAGE_READ_FAILED':'RUN_UNREADABLE', message:RunStorage.loadIssueMessage(slot) || '对局存档无法读取', preserveRun:true };
-  }
-  const structure = validateRunSave(s);
-  if (!structure.ok) return structure;
-  if (s.pendingExtraction != null) {
-    const pending = validatePendingExtraction(s.pendingExtraction);
-    if (!pending.ok) return { ...pending, preserveRun: true };
-    // readForPreflight 可能已由 prev 自愈主档，撤离身份须按生效原串重新核验。
-    const effectiveIdentity = RunStorage.readIdentity(slot);
-    if (!effectiveIdentity.ok || effectiveIdentity.value.runId !== s.pendingExtraction.runId) {
-      return { ok: false, code: 'INVALID_EXTRACTION_IDENTITY', message: '撤离整理记录与对局身份不一致', preserveRun: true };
-    }
-  }
-  const planned=planMapRestore(s);
-  return planned.ok?{ok:true,value:{run:s,plan:planned.value}}:planned;
-}
-
-function loadGame(slot) {
-  return import.meta.env.DEV ? traceRestoreStep('load-game', () => loadGameImpl(slot)) : loadGameImpl(slot);
-}
-
-function loadGameImpl(slot) {
-  const persistence = { status: 'not_attempted', attempts: [] };
-  const tasks = [];
-  loadPersistenceTasks.set(persistence, tasks);
-  const previous = loadPersistence;
-  loadPersistence = persistence;
-  try {
-    const result = restoreGame(slot);
-    const restoredSeed = game.seed;
-    const pendingPersistence = Promise.all(tasks).then(() => {
-      if (persistence.status === 'failed') {
-        if (activeSlot === slot && game.seed === restoredSeed) UI.log(`[[icon:cross]] ${result.ok ? '对局已恢复，但恢复后的部分进度未保存' : '恢复过程中部分进度未保存'}，请勿将本次进入视为保存成功；请检查存储状态后重试保存`, 'warn');
-        return { ok: false, code: persistence.attempts.find(attempt => attempt.ok === false)?.code || 'SAVE_FAILED' };
-      }
-      return { ok: true };
-    });
-    return { ...result, persistence, pendingPersistence };
-  } finally {
-    loadPersistence = previous;
-  }
-}
-
-function restoreGame(slot) {
-  const preflight=preflightRunMap(slot);
-  if(!preflight.ok) {
-    if (preflight.code === 'RUN_UNREADABLE') UI.log(`[[icon:cross]] ${preflight.message}，原档已保留`, 'warn');
-    else if (preflight.code === 'RUN_TOO_NEW') UI.log('[[icon:cross]] 对局存档来自更新版本的游戏，无法读取', 'warn');
-    else UI.log(`[[icon:cross]] ${preflight.message}，原档已保留`, 'warn');
-    return preflight;
-  }
-  const {run:s,plan}=preflight.value;
-  const accepted = RunStorage.acceptLoad(slot, s);
-  if (!accepted.ok) {
-    UI.log(`[[icon:cross]] ${accepted.message}，原档已保留`, 'warn');
-    return accepted;
-  }
-  const identity = RunStorage.readIdentity(slot);
-  restoreRunBattles(s.runBattleStats, identity.ok ? identity.value.runId : null);
-  game.seed = Random.restore(s.rngState || s.seed);
-  if (plan.source !== 'nest') installDerived(plan.layerData, plan.mapSeed, plan.generatorVersion, plan.layoutVersion, plan.routeVersion, plan.routePlan);
-  SDT.Base.use(slot);   // 该档位的基地数据（仓库/熟练度/成就/卡背）
-  const bi = SDT.Base.issue(slot);
-  if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏，原档已保留，本次以空档案启动', 'warn');
-  else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
-  game.runActive = true;
-  setLobby(false);      // 直接回到棋盘上的对局：恢复左侧栏
-  game.hp = numOr(s.hp, MAP.rules.playerMaxHp);   // 归一化（09-20）：迁移链之后执行，坏字段回退默认
-  game.maxHp = numOr(s.maxHp, MAP.rules.playerMaxHp);
-  game.atk = numOr(s.atk, MAP.rules.playerAtk);
-  game.coins = numOr(s.coins, 0); game.turn = numOr(s.turn, 1);
-  game.mode = MODES[s.mode] ? s.mode : 'standard';
-  game.myClass = s.myClass || null;
-  game.characterId = s.characterId || null;
-  applyModeRules();
-  game.inventory = Array.isArray(s.inventory) ? s.inventory : [];
-  game.ownedCards = Array.isArray(s.ownedCards) ? s.ownedCards : [];
-  game.cardBox = Array.isArray(s.cardBox) ? s.cardBox : [];
-  // 能力卡术语迁移（原「英雄卡」类型，2026-09-08 定版）：存档内整卡副本与基地仓库/口袋同步更名
-  {
-    const copies = game.ownedCards.map(o => o.card)
-      .concat(game.cardBox || [])
-      .concat((SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card));
-    const abilityChanged = SDT.Cards.applyAbilityRename(copies);
-    const duplicateChanged = SDT.Cards.applyDuplicateRenames(copies);
-    if (abilityChanged || duplicateChanged) saveBaseForLoad('card_rename');
-  }
-  game.cardOrder = Array.isArray(s.cardOrder) ? s.cardOrder : [];
-  game.usedPocket = Array.isArray(s.usedPocket) ? s.usedPocket : [];
-  // 背包/仓库/消耗区卡牌快照刷新（2026-09-10 留言 #22/#37）：发牌时存的是卡库快照克隆且
-  // 从不随版本更新——旧档里「血蝠风暴」还卡着旧费用 4（每回合 2 费永远注能不了）、「法力奔涌」
-  // 带着旧措辞描述（识别正则失配整卡无效）。读档时按 id 用现行卡库刷新克隆。
-  refreshCardClones(game.ownedCards.map(o => o.card)
-    .concat(game.usedPocket.map(p => p.card))
-    .concat(game.cardBox || [])
-    .concat((SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card).filter(Boolean)));
-  game.eventLog = Array.isArray(s.eventLog) ? s.eventLog : [];
-  // 迷雾与防重刷（旧档无字段 → {}，走【全部可见/可重复】的兼容路径）
-  game.visited = (s.visited && typeof s.visited === 'object') ? s.visited : {};
-  game.seen = (s.seen && typeof s.seen === 'object') ? s.seen : {};
-  // 2026-10-03 老板（SYS-01）：首踏入格打标（撤离经验只统计首次有效探索）；旧档无字段 → null，
-  // 本会话移动不补标、撤离结算回退旧口径 turn-1（存量进度不缩水）
-  game.explored = (s.explored && typeof s.explored === 'object') ? s.explored : null;
-  game.fragments = +s.fragments || 0;   // 员工通行证A碎片（旧档无字段 → 0）
-  game.bossKilled = !!s.bossKilled;     // 本局是否已击败首脑（终局撤离条件）
-  game.encounterRotationVersion = s.encounterRotationVersion === 1 ? 1 : 0;
-  game.altarActivated = !!s.altarActivated;   // 第四层祭坛是否已激活（首脑格准入条件，旧档无字段 → false）
-  game.altarRewardPending = !!s.altarRewardPending;   // 祭坛奖励待领取（旧档无字段 → false）
-  game.bossPlan = (s.bossPlan == null ? null : +s.bossPlan);   // 本层首脑预案（旧档无字段 → null，进 boss 格时现 roll）
-  game.pendingEventLoot = null;
-  game.entrySupply = s.entrySupply || null;
-  game.nodeRewards = s.nodeRewards || {};
-  game.nodeChestRewards = s.nodeChestRewards || {};
-  if (s.chestReward) game.nodeChestRewards[`${s.chestReward.layerIdx},${s.chestReward.trackPos}`] = s.chestReward;
-  game.discoveredPairs = new Set(s.discovered || []);
-  game.elapsed = s.elapsed || 0;
-  game.altarItemSacrificed = !!s.altarItemSacrificed;   // 祭坛道具献祭一次性锁（旧档无字段 → false）
-  game.shopStocks = (s.shopStocks && typeof s.shopStocks === 'object') ? s.shopStocks : {};
-  // 旧存档只有本局 elapsed：首次读取时按 max 语义迁入累计游玩时间。
-  if ((Number(SDT.Base.data.stats.playSeconds) || 0) < (Number(game.elapsed) || 0)) {
-    const elapsedMigration = Promise.resolve(SDT.Base.migrateElapsed(game.elapsed));
-    recordBaseSaveForLoad('elapsed_migration', elapsedMigration.then(value => value.changed === false || value.persisted === true));
-  }
-  game.elapsedSynced = Number(game.elapsed) || 0;
-  game.extractionPending = null;
-  game.terminalPending = null;
-  game.pendingExtraction = s.pendingExtraction || null;
-  if (game.pendingExtraction) {
-    game.battleActive = false;
-    game.nestActive = false;
-    game.layerIdx = s.layerIdx;
-    game.trackPos = s.trackPos;
-    game.state = 'modal';
-    const restored = runtime.resumeExtraction(game.pendingExtraction);
-    if (!restored?.ok) return { ...(restored || { code: 'EXTRACTION_UNAVAILABLE' }), ok: false, preserveRun: true };
-    return { ok: true, value: true };
-  }
-  if (plan.source === 'nest') {
-    // 龙巢进行中存档：恢复牌盒/符文/进度并直接回到巢穴地图（2026-09-18 断点续战）
-    game.nestActive = true;
-    game.nestPos = s.nestPos || 0;
-    game.nestRunes = s.nestRunes || [];
-    game.nestEquipped = s.nestEquipped || [];
-    game.nestBossName = s.nestBossName || '？？？';
-    game.nestTargetedBox = s.nestTargetedBox || 0;
-    game.pendingRunePick = s.pendingRunePick || null;
-    game.nestBoss = null;   // 巢主在开战时重新降临（boss 定义不序列化）
-    UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档——研究所远征继续`, 'ok');
-    window.SDT.Nest.renderNestMap();
-    if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
-      if (SDT.Battle.restore(game, s.battle)) saveGame();
-    }
-    return {ok:true,value:true};
-  }
-  game.nestActive = false;
-  const safeLayer = s.layerIdx;
-  const safeIdx = s.trackPos;
-  // Reattach a pending reward before allowing enterLayer to write a run snapshot.
-  enterLayer(safeLayer, safeIdx, { preserveBossPlan:true, deferSave:!!s.chestReward });
-  SDT.Sound.music('board');
-  UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
-  if (!game.myClass) return { ok:true, value:true, classChoiceEntry:runtime.openClassChoice({ recoveringRun:true }) };   // 同步恢复结果附带选角就绪，不把 Promise 写入 game/存档
-  else if (s.chestReward) {
-    const resume = s.chestReward.context?.battleSettlement ? runtime.resumeBattleRewards : runtime.resumeChestsOnCell;
-    if (!resume?.(s.chestReward)) {
-      game.state = 'modal';
-      UI.log('[[icon:cross]] 待领奖励恢复未完成，原档已保留，请重新进入此档位', 'warn');
-      return { ok:false, code:'REWARD_RESTORE_FAILED', preserveRun:true };
-    }
-    UI.log('[[icon:archive]] 已恢复揭晓的宝箱奖励，内容与已领取进度不变', 'ok');
-  }
-  else if (eventChoiceRewardAt(game)) {
-    if (!runtime.resumeEventCardChoice()) {
-      game.state = 'modal';
-      UI.log('[[icon:cross]] 未领事件奖励恢复未完成，候选与付款记录已保留，请重新进入此档位', 'warn');
-      return { ok:false, code:'EVENT_CHOICE_RESTORE_FAILED', preserveRun:true };
-    }
-  }
-  else if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
-    if (SDT.Battle.restore(game, s.battle)) {
-      saveGame();   // 恢复后立刻回写，防二次退出丢进度
-    }
-  }
-  return {ok:true,value:true};
-}
-
+// ---------- 菜单装配 ----------
 const menuController = createGameMenuController({
   SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
   hasRun, RunStorage, ensureBattleReady, recoverSlotIfPending, terminalCommands,
+  saveArchive, previewRunBackup, restoreRunBackup,
   saveGame, saveSession, syncPlayTime, clearSave, clearAllSlots,
   getActiveSlot: () => activeSlot, preflightRunMap,
   setActiveSlot: value => { activeSlot = value; },
@@ -501,205 +143,8 @@ const menuController = createGameMenuController({
 const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide, openSuggestionInbox, openDataPageUi } = menuController;
 
 // ---------- 开局流程 ----------
-const newUid = () => 'o' + Date.now().toString(36) +
-  Math.floor(Random.random('identity') * 46656).toString(36) + Math.floor(Random.random('identity') * 1296).toString(36);
-
-// 每局开始：固定携带 5 张初始牌「初始攻击」（同名堆叠）+ 1 张「火球」
-// brought=1：开局带入的卡（放弃对局时无条件丢失，v0.21 规则）
-// 2026-09-09 需求 #4 宠物加成：变形机器人 +2 张杀；火焰精灵把 5 张杀化为 5 张火球
-function grantStarterSha(log = /** @param {Parameters<typeof UI.log>} args */ (...args) => UI.log(...args)) {
-  const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;
-  /** @type {{extraSha?: number, shaToFireball?: boolean}} */
-  const effect = (pet && pet.effect) || {};
-  const shaN = MAP.rules.starterSha + (effect.extraSha || 0);
-  const sha = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
-  const fireball = SDT.Cards.all().find(c => c.id === 'tt3-fireball');
-  if (effect.shaToFireball && fireball) {
-    for (let i = 0; i < shaN; i++) {
-      game.ownedCards.push({ uid: newUid(), card: { ...fireball }, brought: 1 });
-    }
-    log(`[[icon:fire]] <b>火焰精灵</b>：起始背包中的 ${shaN} 张【初始攻击】化为 <b>${shaN} 张【火球】</b>`, 'ok');
-  } else {
-    for (let i = 0; i < shaN; i++) {
-      game.ownedCards.push({ uid: newUid(), card: { ...sha }, brought: 1 });
-    }
-    if (effect.extraSha) log(`[[icon:tools]] <b>变形机器人</b>：起始背包额外增加 <b>2 张【初始攻击】</b>（共 ${shaN} 张）`, 'ok');
-  }
-  // 2026-09-16 留言：初始不发火球（火球改为衍生稀有度）
-}
-
-let pendingDeparture = null;
-let departureInFlight = null;
-
-function restoreDepartureState(state, random) {
-  for (const key of Object.keys(game)) if (!Object.hasOwn(state, key)) delete game[key];
-  Object.assign(game, state);
-  Random.restore(random);
-}
-
-function publishDeparture(candidate, options) {
-  restoreDepartureState(candidate.state, candidate.random);
-  terminalGeneration++;
-  resetRunCounters();
-  applyModeRules();
-  setLobby(false);
-  SDT.Sound.music('board');
-  UI.clearLog();
-  candidate.logs.forEach(args => UI.log(.../** @type {Parameters<typeof UI.log>} */ (args)));
-  enterLayer(game.layerIdx, game.trackPos, { preserveBossPlan: true, deferSave: true });
-  if (!options.skipClassChoice) return runtime.openClassChoice();
-}
-
-function newRun(mode, picks, options = {}) {
-  const slot = activeSlot;
-  const seed = game.seed;
-  const originState = game.state, originPairs = game.discoveredPairs;
-  const current = () => activeSlot === slot && (slot == null || SDT.Base.slot === slot) && game.seed === seed &&
-    game.state === originState && game.discoveredPairs === originPairs && (!options.isCurrent || options.isCurrent());
-  const request = JSON.stringify([slot, mode, picks, !!options.skipClassChoice]);
-  if (departureInFlight) return departureInFlight.request === request ? departureInFlight.promise : Promise.resolve(false);
-  const persistence = slot ? createDeparturePersistence({
-    storage: globalThis.localStorage, baseApi: SDT.Base, runStore: RunStorage, txKey: TX_KEY,
-  }) : null;
-  const work = () => prepareNewRun(mode, picks, persistence, slot);
-  const promise = (persistence ? persistence.withLock(slot, current, work) : Promise.resolve(current() ? work() : false))
-    .then(result => {
-      if (!current()) return false;
-      if (result?.candidate) return publishDeparture(result.candidate, options);
-      if (result?.ok === false) UI.log(`[[icon:cross]] ${result.message}`, 'warn');
-      return false;
-    }).finally(() => { if (departureInFlight?.promise === promise) departureInFlight = null; });
-  departureInFlight = { request, promise };
-  return promise;
-}
-
-function prepareNewRun(mode, picks, persistence, slot) {
-  if (persistence) {
-    const pending = persistence.pending(slot);
-    if (!pending.ok) { UI.log(`[[icon:cross]] ${pending.message}`, 'warn'); return false; }
-    if (pending.value) {
-      const result = persistence.recover(slot);
-      if (!result.ok) { UI.log('[[icon:cross]] 出征存档尚未完成，请重试或重新进入档位继续恢复', 'warn'); return false; }
-      if (pendingDeparture?.slot === slot && pendingDeparture.runId === pending.value.runId) {
-        const candidate = pendingDeparture;
-        pendingDeparture = null;
-        return { candidate };
-      }
-      UI.log('[[icon:download]] 已恢复上次出征，请返回选档继续原对局', 'warn');
-      return false;
-    }
-  }
-  const prepared = persistence ? persistence.prepare(slot, picks) : null;
-  // Developer/test explorations have no slot: never debit an unrelated loaded Base slot.
-  const departure = persistence ? prepared.ok && prepared.value.departure : planBaseDeparture(SDT.Base.data, picks).departure;
-  if (!departure?.ok) {
-    UI.log(`[[icon:cross]] ${prepared?.message || '基地出征整备未保存，请重试；当前没有开始新局'}`, 'warn');
-    return false;
-  }
-  const before = { ...game }, random = Random.snapshot(), logs = [];
-  let candidate;
-  try {
-    initializeNewRun(mode, departure, (...args) => logs.push(args));
-    const payload = createRunSavePayload({ freshRun: true });
-    if (!payload) throw new Error('路线快照校验失败');
-    candidate = { slot, state: { ...game }, random: Random.snapshot(), logs };
-    restoreDepartureState(before, random);
-    if (persistence) {
-      const committed = persistence.commit(slot, prepared.value, payload);
-      if (!committed.result.ok) {
-        pendingDeparture = { ...candidate, runId: committed.runId };
-        UI.log('[[icon:cross]] 出征存档未完成，请重试；已开始的提交会从原出征继续恢复', 'warn');
-        return false;
-      }
-    }
-  } catch (error) {
-    restoreDepartureState(before, random);
-    UI.log(`[[icon:cross]] 出征未完成：${esc(error.message || '无法准备存档')}，请重试`, 'warn');
-    return false;
-  }
-  pendingDeparture = null;
-  return { candidate };
-}
-
-// Only constructs candidate state. Persistence and all page/audio effects belong to newRun.
-function initializeNewRun(mode, departure, log) {
-  game.seed = Random.reseed();
-  game.mapSeed = game.seed;
-  game.encounterRotationVersion = 1;   // 仅新局启用同层编组轮换；旧档缺省继续原遭遇。
-  buildNewRunDerived(game.mapSeed);
-  game.mode = MODES[mode] ? mode : 'standard';
-  game.runActive = true;    // v0.21：从这一刻起才写对局存档
-  game.pendingExtraction = null;
-  game.extractionPending = null;
-  game.terminalPending = null;
-  game.battleActive = false;   // 新开局必须与旧战斗会话切割（防旧战斗快照混入新档——2026-09-18 实测）
-  game.inventory = [];
-  game.ownedCards = [];
-  game.shopStocks = {};   // 商店货架按局重置（D-1 防关门重刷）
-  game.cardOrder = [];
-  game.usedPocket = [];
-  game.eventLog = [];
-  game.fragments = 0;   // 员工通行证A碎片（Q6 隐藏计数器）
-  game.altarItemSacrificed = false;   // 祭坛道具献祭一次性锁（每局重置）
-  game.pendingEventLoot = null;
-  game.entrySupply = null;
-  game.nodeRewards = {};
-  game.nodeChestRewards = {};
-  game.myClass = null;
-  game.characterId = null;
-  game.classCard = null;
-  game.coins = modeCfg().startCoins || 0;
-  game.maxHp = MAP.rules.playerMaxHp;
-  game.hp = game.maxHp;
-  game.atk = MAP.rules.playerAtk;
-  game.discoveredPairs = new Set();
-  game.turn = 1;
-  game.elapsed = 0;
-  game.elapsedSynced = 0;
-  game.altarFrom = null;
-  game.altarActivated = false;   // 第四层祭坛未激活——首脑格封印中
-  game.altarRewardPending = false;   // 祭坛奖励待领取（激活后置位，领取消耗）
-  game.bossPlan = null;   // 本层首脑预案（进层时重 roll，见 enterLayer）
-  game.surrenderedRun = false;   // 本局是否因主动撤离判负（区分战败/撤离失败文案）
-  game.bossKilled = false;   // 第四层击败首脑后才能终局撤离
-  game.visited = {};   // 已结算过的一次性格（防回头路重刷战斗/宝箱/事件）
-  game.seen = {};      // 战争迷雾：走过的节点 + 当前相邻节点可见，其余隐藏
-  game.explored = {};   // 2026-10-03 老板（SYS-01）：首次踏入过的格（撤离经验只算首探量，防安全往返刷经验）
-  log(`欢迎来到<b>代号7</b>：本次玩法【<b>${modeCfg().name}</b>】——${modeCfg().ckpt}`, 'sys');
-  log('点击相邻节点前进，落脚触发事件；层间闸门通往更深区域，终层可完成撤离', 'sys');
-  grantStarterSha(log);
-  log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}（不可入库 / 安全格）`, 'sys');   // 2026-09-16 留言「初始不给火球」：欢迎语去掉火球（已不再发放）
-  let loaded = 0;
-  for (const stack of departure.cards) {
-    for (let i = 0; i < stack.count; i++) {
-      game.ownedCards.push({ uid: newUid(), card: { ...stack.card }, brought: 1 });
-    }
-    loaded += stack.count;
-  }
-  for (const name of departure.rejectedClassNames) {
-    log(`[[icon:cross]] 职业卡【${esc(name)}】无法带入对局（带出后留在仓库）`, 'warn');
-  }
-  if (loaded) log(`[[icon:archive]] 从基地仓库携带 <b>${loaded}</b> 张卡牌出征`, 'loot');
-  // 需求 #1：下一次出发后，基地消耗区清空（未复原的卡牌随之消散）
-  if (departure.pocketCleared) {
-    log(`[[icon:pocket]] 出发整理：基地消耗区已清空（${departure.dispersedPocketCount} 张未复原的卡牌消散了）`, 'dim');
-  }
-  // 需求 #4：携带宠物「旺财」的生命上限 +5
-  const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;
-  if (pet && pet.effect && pet.effect.maxHp) {
-    game.maxHp += pet.effect.maxHp;
-    game.hp += pet.effect.maxHp;
-    log(`[[icon:paw]] 携带宠物<b>「${esc(pet.name)}」</b>：生命上限 +${pet.effect.maxHp}（${game.maxHp}）`, 'ok');
-  } else if (pet) {
-    log(`[[icon:paw]] 携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc.replace(/^携带效果：/, ''))}`, 'ok');
-  }
-  // Item 18（2026-09-16 老板定版）：储备币不进局——留在基地用于孵蛋与基地建设，
-  // 局内币与基地储备币彻底分开（原「出发时全部随身带走」口径作废）
-  // 四层图从第一层的多个入口之一开始；这是起点选择，不消耗行动力。
-  const l1 = game.layerData[0];
-  const startIdx = l1.entrances[Math.floor(Random.random('gameplay') * l1.entrances.length)] || 0;
-  enterLayer(0, startIdx, { deferSave: true, deferPresentation: true });
-}
+function newUid() { return 'o' + Date.now().toString(36) +
+  Math.floor(Random.random('identity') * 46656).toString(36) + Math.floor(Random.random('identity') * 1296).toString(36); }
 
 // ---------- 进层 ----------
 function enterLayer(li, atIdx, opts = null) {
@@ -717,6 +162,8 @@ function enterLayer(li, atIdx, opts = null) {
   if (!opts?.preserveBossPlan) game.bossPlan = null;   // 真正进层重置；读档保留已恢复的首脑预案。
   game.state = 'idle';
   if (opts?.deferPresentation) return;
+  // Refresh the destination preview first: its inset update cancels camera glides.
+  UI.refresh(game);
   if (cam) {
     // Focus on the currently available choices; unexplored map bounds no longer shrink them.
     // 取景默认同步落定（开局/读档/测试都依赖同步终态）；穿门换层经 opts.glideCam 走镜头补间
@@ -729,7 +176,6 @@ function enterLayer(li, atIdx, opts = null) {
   const eName = eIdx >= 0 ? f.entranceNames[eIdx] : `#${atIdx} 格`;
   UI.log(`—— 置身 <b>${f.name}</b>（${eName}）——`, 'sys');
   if (!opts?.deferSave) saveGame();
-  UI.refresh(game);
 }
 
 // ---------- 兼容导出面（与拆分前逐一对应，调用方零改动） ----------
@@ -739,4 +185,4 @@ export { MODES, modeCfg, scaledEnemy } from './game.session.modes.js';
 export { bagCap, cardStacks, safeCap, safeUsed, usedSlots, gainCoins } from './game.session.bag.js';
 export { buildDerived } from './game.session.map.js';
 export { markSeen, renderMiniMap } from './game.session.board.js';
-export { clearBattleSettlementPending, clearSave, createRunSavePayload, enterLayer, doDeath, exitToTitle, hasRun, loadGame, migrateOldSave, newRun, newUid, openDataPageUi, openLeaveMenu, openSettings, openSuggestionInbox, openTitleGuide, preflightRunMap, quitGame, saveGame, saveSession, setBattleSettlementPending, setLobby, showTitle, startNewGame, syncPlayTime };
+export { clearSlot, clearBattleSettlementPending, clearSave, createRunSavePayload, enterLayer, doDeath, exitToTitle, hasRun, loadGame, migrateOldSave, newRun, newUid, openDataPageUi, openLeaveMenu, openSettings, openSuggestionInbox, openTitleGuide, preflightRunMap, quitGame, saveGame, saveSession, setBattleSettlementPending, setLobby, showTitle, startNewGame, syncPlayTime };

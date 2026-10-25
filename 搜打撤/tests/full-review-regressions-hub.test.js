@@ -1,3 +1,4 @@
+import { runPendingFields } from './helpers/environment-fixtures.js';
 // 09-30 全仓深审 ROOT 组（背包/整备/死亡抢运）修复回归。发现来源：
 // docs/evidence/2026-09-30-full-repository-review/root/findings.json，
 // 复现手法沿用其 bag-and-preparation.test.js，断言反转成修复后行为。
@@ -26,8 +27,7 @@ const entries = (count, c = card, flags = {}) => Array.from({ length: count }, (
 beforeEach(() => {
   localStorage.clear(); Base.use(1); session._set_active_slot(null);
   Object.assign(game, { runActive: true, state: 'idle', myClass: '战士', inventory: [], ownedCards: [],
-    usedPocket: [], cardOrder: [], pendingExtraction: null, extractionPending: null, terminalPending: null,
-    battleActive: false, nestActive: false, hp: 20, maxHp: 30, elapsed: 0, elapsedSynced: 0 });
+    ...runPendingFields() });
   window.SDT.Chests = { isOpen: () => false };
   UI.hideOverlay({ immediate: true });
 });

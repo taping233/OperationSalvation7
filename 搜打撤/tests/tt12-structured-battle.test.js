@@ -1,3 +1,4 @@
+import { playerFields } from './helpers/environment-fixtures.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -30,8 +31,7 @@ function makeGame(ownedCards) {
   const logs = [];
   return {
     ownedCards,
-    hp: 50, maxHp: 50, atk: 5, spellPower: 0, coins: 0,
-    myClass: '降临者', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(50, 50, 5, 0, '降临者', null),
     lastBattleEnd: null,
     log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs,

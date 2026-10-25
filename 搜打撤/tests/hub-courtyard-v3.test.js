@@ -136,9 +136,9 @@ describe('庭院独立页生命周期', () => {
     const root = await mount('koi');
     expect(frames.size).toBe(0); expect(root.classList.contains('is-still')).toBe(true);
     expect(root.querySelector('[data-courtyard-control="pause"]').disabled).toBe(true);
-    document.body.classList.remove('reduce-motion'); await Promise.resolve();
+    document.body.classList.remove('reduce-motion'); await Promise.resolve(); await Promise.resolve();
     expect(frames.size).toBe(1); expect(root.classList.contains('is-still')).toBe(false);
-    document.body.classList.add('reduce-motion'); await Promise.resolve();
+    document.body.classList.add('reduce-motion'); await Promise.resolve(); await Promise.resolve();
     expect(frames.size).toBe(0); expect(root.classList.contains('is-still')).toBe(true);
   });
 });

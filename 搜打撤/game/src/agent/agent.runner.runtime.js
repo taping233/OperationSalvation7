@@ -111,6 +111,10 @@ async function step(decide, options = {}) {
   const obs = first.obs || observe();
   if (decisionCancelled()) return cancelled();
   const context = commandContext();
+  const decisionPage = document.getElementById('ovBody')?.firstChild;
+  const decisionZoom = document.getElementById('cardZoom');
+  const sameSurface = () => decisionPage === document.getElementById('ovBody')?.firstChild
+    && decisionZoom === document.getElementById('cardZoom');
   const contextChanged = () => ({ obs: observe(), action: null, res: { ok: false, code: 'CONTEXT_CHANGED',
     message: '决策期间对局归属已改变，未执行旧动作' }, done: false, stopReason: 'context-changed' });
   const t1 = prof ? nowMs() : 0;
@@ -119,17 +123,18 @@ async function step(decide, options = {}) {
     decision = await decide(obs, { signal: decisionRun?.signal });
   } catch (error) {
     if (decisionCancelled()) return cancelled();
-    if (!sameContext(context)) return contextChanged();
+    if (!sameContext(context) || !sameSurface()) return contextChanged();
     return { obs, action: null, res: null, error: String(error?.message || error), done: true };
   }
   if (decisionCancelled()) return cancelled();
-  if (!sameContext(context)) return contextChanged();
+  if (!sameContext(context) || !sameSurface()) return contextChanged();
   if (decision == null) return { obs, action: null, res: null, done: true };
   const t2 = prof ? nowMs() : 0;
   const before = settleSignature();
   const accepted = act(decision);
   const completion = completions.get(accepted);
   const res = completion ? await awaitCommand(accepted, options) : accepted;
+  if (decisionCancelled()) return cancelled();
   const settledContext = completion?.context || commandContext();
   const staleCommand = () => ({ obs: observe(), action: decision, id: res.id,
     res: { ok: false, id: res.id, code: 'CONTEXT_CHANGED', message: '命令交棒期间对局归属已改变' },
@@ -145,7 +150,6 @@ async function step(decide, options = {}) {
     const deadline = nowMs() + (isTurbo() ? 40 : 1500);
     const pl = prof;
     let actPoll = 0;
-    let firstCheckMs = 0;
     let idleStuckMs = 0;
     for (;;) {
       // 签名降频 1/4（09-26 均耗时优化）：轮询主成本是 settleSignature 本体（0.35ms/次，
@@ -159,7 +163,6 @@ async function step(decide, options = {}) {
         // 完成后签名永不改变 → 白等满 40ms 死线（实测 12.6% 步、占 act 段 57%）。
         // busy/queue 全空闲 + 签名 3ms 未动 = 不会有推进了，提前放行；引擎忙时照等满窗
         const nowE = nowMs();
-        if (!firstCheckMs) firstCheckMs = nowE;
         const snapNow = window.SDT?.Battle?.getSnapshot?.() || null;
         const engineIdle = !(snapNow && (snapNow.busy || snapNow.actionQueueLength > 0));
         if (engineIdle) {
@@ -195,6 +198,29 @@ async function step(decide, options = {}) {
 // 墙钟 4000ms 覆盖 4 发奔涌（3.4s）+余量；真死锁仍由它收口（30s 单局硬上限兜底）。
 const WAIT_LIMIT_MS = 4000;
 
+// A caller's stop/deadline must also bound a decision or command that never settles.
+// Late decisions still pass step's ownership/signal checks before dispatching anything.
+async function waitOwnedStep(decide, options, run, deadline) {
+  let timer, onAbort;
+  const stopped = () => ({ obs: observe(), action: null, res: null, done: true,
+    stopReason: run.signal.reason === 'run-timeout' ? 'run-timeout' : 'cancelled' });
+  const interrupted = new Promise(resolve => {
+    onAbort = () => resolve(stopped());
+    run.signal.addEventListener('abort', onAbort, { once: true });
+    if (run.signal.aborted) onAbort();
+    if (Number.isFinite(deadline)) {
+      const checkDeadline = () => {
+        const remaining = deadline - nowMs();
+        if (remaining <= 0) run.abort('run-timeout');
+        else timer = setTimeout(checkDeadline, Math.min(remaining, 2147483647));
+      };
+      checkDeadline();
+    }
+  });
+  try { return await Promise.race([step(decide, { ...options, signal: run.signal }), interrupted]); }
+  finally { options.preStable = false; clearTimeout(timer); run.signal.removeEventListener('abort', onAbort); }
+}
+
 /** @typedef {Awaited<ReturnType<typeof step>> | {obs:{phase:string,actions:unknown[],turn:number,run:null},action:null,res:null,error:string,done:boolean}} StepNotice */
 /** @param {{decide:Parameters<typeof step>[0],maxSteps?:number,onStep?:(result:StepNotice,index:number)=>void,until?:(result:Awaited<ReturnType<typeof step>>)=>boolean,driver?:string,spinLimit?:number,stayLimit?:number,waitLimitMs?:number,runTimeoutMs?:number,commandTimeoutMs?:number,quietMs?:number,pollMs?:number,timeoutMs?:number,allowEmpty?:boolean,preStable?:boolean,preSettled?:boolean,carryObs?:ReturnType<typeof observe>,signal?:AbortSignal}} options */
 async function autoRun({ decide, maxSteps = 800, onStep, until, spinLimit = 6, stayLimit = 500, waitLimitMs = WAIT_LIMIT_MS, ...options }, run, runDeadlineMs) {
@@ -221,7 +247,7 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, spinLimit = 6, s
     if (nowMs() >= runDeadlineMs) { stopReason = 'run-timeout'; break; }
     let result;
     try {
-      result = await step(decide, options);
+      result = await waitOwnedStep(decide, options, run, runDeadlineMs);
     } catch (error) {
       // 异常自愈（09-26 机制）：单步抛错=跳过该步继续，错误进 trace；连续 5 次判局内风暴停局
       stepErrors += 1;
@@ -248,7 +274,7 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, spinLimit = 6, s
     // 每回合变化会把跨回合受击观测冲掉，首版实测 hits 恒 0）
     if (result.obs.battle) {
       battleTick(result.obs.battle);
-      if (result.action && (result.action.name === 'usePotion' || result.action.name === 'flee')) {
+      if (result.res?.ok && result.action && (result.action.name === 'usePotion' || result.action.name === 'flee')) {
         battleActionTick(result.action.name, result.obs.battle);
       }
       prevBattleActive = true;

@@ -6,6 +6,7 @@
  *    条目）必须单调保留，旧条件 `!srcIds.has(c.id)` 恒假会把它们整份抹掉。 */
 import { describe, it, expect } from 'vitest';
 import { sourceCardLibrary, diff, buildDoc, stripModule } from '../scripts/sync-cards-from-live.mjs';
+import mapData from '../game/data/map.json';
 
 describe('sync-cards-from-live 源码有效卡库（六文件沙箱）', () => {
   it('沙箱求值建出完整现役卡库，关键卡在位', () => {
@@ -37,6 +38,21 @@ describe('sync-cards-from-live 源码有效卡库（六文件沙箱）', () => {
       { op: 'curse', curse: 'poison', stacks: 2, target: 'chosenEnemy' },
       { op: 'markEnemy', event: 'death', status: 'poison', multiplier: 1, dmgType: 'true', dest: 'allEnemies', target: 'chosenEnemy' },
     ]);
+  });
+  it('精英图鉴与生产使用同一份地图怪物定义', () => {
+    const library = sourceCardLibrary();
+    const eliteIds = mapData.encounters.flatMap(encounter => encounter.guaranteedElite || []);
+    expect(eliteIds).toHaveLength(9);
+    for (const id of eliteIds) {
+      const card = library.find(entry => entry.id === `foe-${id}`);
+      expect(card, id).toMatchObject({ name: mapData.monsters[id].name, type: '生物', unrandom: true });
+      expect(card.desc).toContain(`攻击 ${mapData.monsters[id].atk} / 生命 ${mapData.monsters[id].hp}`);
+    }
+  });
+  it('每次从隔离空库执行生产迁移清单，包含末尾补种且结果稳定', () => {
+    const first = sourceCardLibrary();
+    expect(first.find(card => card.id === 'tt13-poor-meal')).toBeDefined();
+    expect(sourceCardLibrary()).toEqual(first);
   });
   it('diff 对齐口径：完全一致的输入零差异', () => {
     const lib = sourceCardLibrary();

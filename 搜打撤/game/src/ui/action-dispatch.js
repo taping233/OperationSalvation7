@@ -48,6 +48,12 @@ export function invokeUiAction(UI, element, { allowBase = !element?.closest('#ca
       !Object.entries(expected.params || {}).every(([key, value]) => String(element.dataset[key] ?? '') === String(value ?? '')))) {
     return { ok:false, reason:'unavailable' };
   }
+  // Captured actions describe the complete observed button state. A retained
+  // button may acquire a confirmation flag without being replaced in the DOM.
+  if (expected && observedTargets.get(expected) === element &&
+      Object.keys(element.dataset).filter(key => key !== 'act').length !== Object.keys(expected.params || {}).length) {
+    return { ok:false, reason:'unavailable' };
+  }
   const fn = UI?._acts?.[element.dataset.act] || (allowBase && UI?._baseActs?.[element.dataset.act]);
   if (typeof fn !== 'function') return { ok:false, reason:'unhandled' };
   return { ok:true, value:element.hasAttribute('data-photo-zoom-source') ? fn(element.dataset, element) : fn(element.dataset) };

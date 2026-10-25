@@ -7,7 +7,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const { decide } = await import('../game/src/agent/agent.llm.js');
 
-const obs = { phase: 'title', turn: 0, actions: [], ui: { actions: [] }, run: null, battle: null };
+const obs = { phase: 'title', turn: 0, actions: [{ type: 'sys', name: 'noop' }], ui: { actions: [] }, run: null, battle: null };
 const LLM_CONFIG = { baseUrl: 'https://llm.test/v1', apiKey: 'k', model: 'm' };
 
 beforeEach(() => {

@@ -17,7 +17,7 @@ import { createTravelMotion, createArrivalFeedback } from './map-travel-motion.j
 import { showLayerPassage, isLayerPassageActive } from '../ui/map-passage.js';
 import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene, resumeChestsOnCell } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply, resumeNodeRestore } from './game.run.altar.js';
-import { entrySupplyAt, entrySupplyGate, nodeActionBinding } from './node-reward-state.js';
+import { entrySupplyAt, entrySupplyGate } from './node-reward-state.js';
 import { createEventCardChoiceController } from './event-card-choice.js';
 import { createEventLifecycle, createLazyEventEntry } from './event-lifecycle.js';
 import { nodeChestRewardAt } from './chest-reward-save.js';
@@ -279,17 +279,6 @@ function openResourcePick(done) {
   return resources.openResourcePick(done);
 }
 
-function openNodeDecision(spec) {
-  game.state = 'modal';
-  nodeShell({ tone:spec.tone, title:spec.title, sub:spec.sub,
-    body:nodeOpt(spec.act, spec.label, spec.detail), foot:'<button class="ov-btn" data-act="nodeDecisionLeave">返回地图</button>' });
-  const active = nodeActionBinding(game, UI, spec.act);
-  let decided = false;
-  setBagReturnHook(() => openNodeDecision(spec));
-  UI.act('nodeDecisionLeave', () => { if (!active() || decided) return; decided = true; setBagReturnHook(null); UI.hideOverlay(); finishInstant(); });
-  UI.act(spec.act, () => { if (!active() || decided) return; decided = true; setBagReturnHook(null); UI.hideOverlay(); spec.run(); });
-}
-
 function openSafeNode() {
   setBagReturnHook(null);
   UI.hideOverlay();
@@ -314,9 +303,7 @@ function runInstant(def, after) {
       openFixedRewardsOnCell(Array.from({ length:cnt }, () => card).filter(Boolean), '木材补给', { consumeNode:true });
     } break;
     // 宝箱：70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1），使用通用卡牌池。
-    case 'chest': openNodeDecision({ tone:'pickup', title:'宝箱', sub:'你找到一只遗留的宝箱，里面或许还有值得带走的卡牌与补给。',
-      act:'nodeChestSearch', label:'开启宝箱', detail:'打开宝箱，查看可领取的随机卡牌',
-      run:() => openChestsOnCell([Random.random('loot') < 0.7 ? { kind:'small' } : { kind:'medium' }], null, { consumeNode:true }) }); break;
+    case 'chest': openChestsOnCell([Random.random('loot', 'reward') < 0.7 ? { kind:'small' } : { kind:'medium' }], null, { consumeNode:true }); break;
     // 物资格（2026-09-16 Item 17 定版）：按爆率刷新 2 张随机资源卡，二选一带走
     case 'resource': openResourcePick(done); break;
     case 'rations': {

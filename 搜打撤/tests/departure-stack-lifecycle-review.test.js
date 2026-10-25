@@ -9,7 +9,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn() }, _set_cardPageOpen: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.bridge.js', () => ({ slots: { renderHub: ports.hub } }));
 vi.mock('../game/src/hub/base.commands.js', () => ({ readBase: vi.fn(), readBaseReceipt: vi.fn(), commitBase: vi.fn() }));
-vi.mock('../game/src/ui/departure-transition.js', () => ({ enterDepartureCut: vi.fn(), startDepartureHandoff: ports.handoff }));
+vi.mock('../game/src/ui/departure-transition.js', () => ({ enterDepartureCut: vi.fn(), enterDepartureStep: vi.fn(), startDepartureHandoff: ports.handoff }));
 
 let actions, base, ui, departure;
 const first = { id: 'first', name: '同名牌', rarity: '古朴', type: '道具', cost: 1 };
@@ -33,48 +33,7 @@ beforeEach(async () => {
   });
 });
 
-describe('新手可调整推荐装配', () => {
-  const defense = { id: 'defense', name: '护身', type: '法术', rarity: '古朴', cost: 1, desc: '获得 3 点护甲' };
-  const attack = { id: 'attack', name: '试探', type: '武术', rarity: '古朴', cost: 1, desc: '攻击' };
-  const third = { id: 'third', name: '援手', type: '生物', rarity: '古朴', cost: 2 };
-  const preview = async () => { document.querySelector('[data-act="depRecommendPreview"]').click(); await vi.dynamicImportSettled(); await Promise.resolve(); };
-  it('真实预览按钮不改已选、不扣仓；应用补充并可撤销到原手选', async () => {
-    base.data.stash = [defense, attack, third].map(card => ({ card, count: 2 })); open();
-    expect(document.querySelector('[data-act="depRecommendApply"]').disabled).toBe(true);
-    expect(document.querySelector('[data-act="depRecommendUndo"]').disabled).toBe(true);
-    expect(document.querySelector('[data-act="depRecommendPreview"]').disabled).toBe(false);
-    document.querySelector('[data-act="pickAdd"][data-name="试探"]').click();
-    const original = { ...departure.deployPick }, inventory = structuredClone(base.data.stash);
-    await preview(); expect(departure.deployPick).toEqual(original); expect(base.data.stash).toEqual(inventory);
-    expect(document.querySelector('#depStatus').textContent).toContain('推荐补充');
-    expect(document.querySelector('[data-act="depRecommendApply"]').disabled).toBe(false);
-    expect(document.querySelector('[data-act="depRecommendUndo"]').disabled).toBe(true);
-    document.querySelector('[data-act="depRecommendApply"]').click();
-    expect(departure.deployPick).toEqual({ 'card:attack': 1, 'card:defense': 1, 'card:third': 1 });
-    expect(document.querySelector('[data-act="depRecommendApply"]').disabled).toBe(true);
-    expect(document.querySelector('[data-act="depRecommendUndo"]').disabled).toBe(false);
-    document.querySelector('[data-act="depRecommendUndo"]').click();
-    expect(departure.deployPick).toEqual(original); expect(base.data.stash).toEqual(inventory); expect(ports.start).not.toHaveBeenCalled();
-    expect(document.querySelector('[data-act="depRecommendApply"]').disabled).toBe(true);
-    expect(document.querySelector('[data-act="depRecommendUndo"]').disabled).toBe(true);
-  });
-  it('机器人额外初始牌也计占格，预留三格且禁带职业卡', async () => {
-    base.bagCap = () => 6; base.carriedPet = () => ({ id: 'robot', name: '机器人', effect: { extraSha: 2 } });
-    base.data.stash = [{ card: { ...defense, id: 'class', rarity: '职业' }, count: 2 }, ...[defense, attack, third].map(card => ({ card, count: 2 }))];
-    open(); await preview(); document.querySelector('[data-act="depRecommendApply"]').click();
-    expect(Object.keys(departure.deployPick)).toEqual(['card:defense']);
-    expect(document.querySelector('#depCapacity').textContent).toContain('3/6');
-    expect(base.data.stash.map(stack => stack.count)).toEqual([2, 2, 2, 2]);
-  });
-  it('预览后库存变化必须重新预览，继续手调后撤销不覆盖手选', async () => {
-    base.data.stash = [defense, attack, third].map(card => ({ card, count: 2 })); open(); await preview();
-    base.data.stash[0].count = 1; document.querySelector('[data-act="depRecommendApply"]').click();
-    expect(departure.deployPick).toEqual({}); expect(document.querySelector('#depStatus').textContent).toContain('重新预览');
-    await preview(); document.querySelector('[data-act="depRecommendApply"]').click();
-    document.querySelector('[data-act="pickAdd"][data-name="试探"]').click(); const changed = { ...departure.deployPick };
-    expect(document.querySelector('[data-act="depRecommendUndo"]').disabled).toBe(true);
-    document.querySelector('[data-act="depRecommendUndo"]').click(); expect(departure.deployPick).toEqual(changed);
-  });
+describe('整备消耗说明', () => {
   it('首次整备在出发按钮之前明示统一消耗去向与复原入口', () => {
     open(); const rules = document.querySelector('.dep-survival'); expect(rules.open).toBe(true);
     expect(rules.textContent).toContain('用过的牌进入消耗区，复原后可再用');

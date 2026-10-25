@@ -20,6 +20,8 @@ for (;;) {
 `SDT.Agent.autoRun({ decide, maxSteps })` 连续驱动一局。
 内置策略 `SDT.Agent.policies.greedy()` / `.random()` 返回 decide 函数，可直接用或作参照。
 
+满包丢弃动作 `sys.discardCard` 使用 `args:[卡名,实例UID]`，只丢弃观察时对应的普通背包实例；旧的单卡名调用继续兼容。动作回复含解释文字时提取首个完整可解析JSON对象，字符串内的花括号和转义引号不会截断对象。
+
 ### 战斗命令复现
 
 `SDT.Agent.replay.capture()` 与 `.play()` 用于受控战斗 fixture 的开发复现。两者都要求可信的本地 `prepare(fixture)` 适配器：它负责识别 fixture ID、恢复种子和规则输入，并通过正常入口重建空闲的第 1 回合。调用会重建测试场景，应在隔离测试对局使用；复现包只含数据，不执行其中的脚本，也不直接写回战斗私有状态。
@@ -94,7 +96,7 @@ if (captured.ok) {
 - Promise 命令立即返回 `{ ok:true, id, async:true, completed:false }`。这只表示受理，**不表示完成或已经持久化**；结果不包含 Promise。
 - `step()` 内部等待该次命令完成，最终 `res` 包含 `async:true, completed:true` 和真实的 `ok`。Promise 拒绝也归为失败；不能通过 `await act()` 或仅 `waitSettle()` 等待命令完成，应使用 `step()` / `autoRun()`。
 - 命令超过 `commandTimeoutMs`（默认 20000 毫秒）后返回 `COMMAND_TIMEOUT`，`completed:false`，`autoRun` 以 `command-timeout` 停止。超时不会取消底层命令，不应立即重派同一动作。
-- 异步决策或命令完成时会核对档位和对局身份；旧局结果以 `CONTEXT_CHANGED` / `context-changed` 停止，旧失败不会写入新页面的失败记忆。
+- 异步决策或命令完成时会核对档位和对局身份；决策期间替换主弹层内容或打开/关闭卡牌特写也会使旧决策失效。旧结果以 `CONTEXT_CHANGED` / `context-changed` 停止，旧失败不会写入新页面的失败记忆。
 - `ui:enterSlot` 合法续档或进入基地会更换归属，因此由菜单在完成瞬间交回内部凭据；Agent 核对目标档位和当前身份后接受。该凭据不出现在公开结果中，其他命令不能借它跳过旧局校验。
 
 动作形状或路由校验失败不会执行命令。业务命令自身抛错或拒绝前可能已经产生部分副作用，返回失败不承诺自动回滚或可以无条件重试。
@@ -135,6 +137,7 @@ if (captured.ok) {
 - `waitSettle({ quietMs, timeoutMs })`：局面签名连续不变且战斗非 busy 才返回；超时返回
   `{ ok:false, stalled:true, obs }`，绝不无限挂起。首次加载执行模块也计入同一期限，热入口直接沿用原选项。
 - 冷 `step` 加载超过该等待期限返回 `AGENT_RUNNER_LOAD_TIMEOUT`，不调用迟到决策；可在之后重试。`autoRun` 的停止与局级期限会立即释放冷等待的运行归属，迟到模块只缓存代码。
+- `autoRun` 的 `stopRun()`、调用方 `signal` 与 `runTimeoutMs` 同样约束在途决策和命令等待，分别以 `cancelled` / `run-timeout` 收口；迟到决策不会执行。已经受理的业务命令仍由其自身事务完成，停止驱动不撤销业务副作用。
 - 两分钟预算：纯策略全链路远低于 2 分钟；LLM 决策延迟取决于模型与网络（决策点约 30–80 个）。
 
 ## 五、配套模块（game/src/agent/）
@@ -166,7 +169,11 @@ if (captured.ok) {
 `POST {baseUrl}/chat/completions`（OpenAI 兼容），要求回严格动作 JSON；
 解析失败 / 动作非法带错误重试（≤3 次），再失败退化为安全动作（跳过/确认），不卡死循环。
 
+动作类型与参数必须同时匹配本次观察的 `actions` 清单；同名按钮的不同商品、卡牌 UID 或移动坐标分别校验。形状合法但不在清单中的回复同样重试，三次仍不可用时回退。
+
 ## 七、批量与统计
+
+统计与 CSV 使用旧记录的安全读取视图；追加新局或导出 JSON 时保留历史记录的原始字段，不把统计缺省值写回旧记录。
 
 - Node 无头批量：`npx vite-node game/tools/agent-batch.mjs --runs 100 --policy greedy [--mode nest] --out output/agent/`
   （jsdom 引擎，7-17s/局，产 runs.jsonl 逐局记录 + summary.json 汇总；vite-node 负责 src 内 JSON import 转换）。

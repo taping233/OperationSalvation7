@@ -39,21 +39,17 @@ describe('带种子的随机数服务', () => {
 
   it('源码不再绕过随机数服务，且对局存档包含 seed 与流状态', () => {
     const root = resolve(process.cwd(), 'game/src');
-    // SOURCE.md 确认这两份为未导入的历史 MIT 审核源码；其余运行时源码仍全树守卫。
-    const historicalRainSources = new Set([
-      resolve(root, 'hub/courtyard-vendor/RainSimulation.js'),
-      resolve(root, 'hub/courtyard-vendor/RainRenderer.js'),
-    ]);
     const listJs = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
       const p = resolve(dir, e.name);
-      return e.isDirectory() ? listJs(p) : (e.name.endsWith('.js') && e.name !== 'random.js' && !historicalRainSources.has(p) ? [p] : []);
+      return e.isDirectory() ? listJs(p) : (e.name.endsWith('.js') && e.name !== 'random.js' ? [p] : []);
     });
     const sources = listJs(root).map((p) => readFileSync(p, 'utf8'));
     expect(sources.length).toBeGreaterThan(100);   // 目录化后递归扫描全树，防止根层只剩入口文件时断言假松
     expect(sources.join('\n')).not.toMatch(/(?:RainRenderer|RainSimulation)\.js/);
     expect(sources.join('\n')).not.toContain('Math.random()');
-    const session = readFileSync(resolve(root, 'run/game.session.js'), 'utf8');
-    expect(session).toContain('seed: Random.seed, rngState: Random.snapshot()');
-    expect(session).toContain('Random.restore(s.rngState || s.seed)');
+    const persistence = readFileSync(resolve(root, 'run/game-session-persistence.js'), 'utf8');
+    const restoration = readFileSync(resolve(root, 'run/game-session-restoration.js'), 'utf8');
+    expect(persistence).toContain('seed: Random.seed, rngState: Random.snapshot()');
+    expect(restoration).toContain('Random.restore(s.rngState || s.seed)');
   });
 });

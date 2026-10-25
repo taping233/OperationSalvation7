@@ -15,9 +15,9 @@ await import('../game/src/hub/base.js');
 const Base = window.SDT.Base;
 const slotKey = (i) => Base.SLOT_KEY(i);
 
-beforeEach(() => {
+beforeEach(async () => {
   localStorage.clear();
-  for (let slot = 1; slot <= SLOT_COUNT; slot++) RunStorage.remove(slot);
+  for (let slot = 1; slot <= SLOT_COUNT; slot++) await RunStorage.remove(slot);
 });
 
 describe('base 坏档 issue 不再粘滞', () => {

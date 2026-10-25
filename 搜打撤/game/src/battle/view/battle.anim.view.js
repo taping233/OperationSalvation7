@@ -10,47 +10,6 @@ import { showBattleCardResults } from './battle.card-results.js';
 import { showBattleEffectFeedback } from './battle.effect-feedback.js';
 import { showTurnFeedback } from './battle.turn-feedback.js';
 import { quietFeedback } from '../../ui/feedback-theme.js';
-// Each live pile owns its presentation-clock cancellation functions.
-const pileEffects = new Map();
-function clearPileEffects(pile) {
-  const state = pileEffects.get(pile);
-  if (!state) return;
-  for (const [cls, cancel] of state.cancels) { cancel(); pile.classList.remove(cls); }
-  state.observer.disconnect();
-  pileEffects.delete(pile);
-}
-function clearAllPileEffects() { for (const pile of pileEffects.keys()) clearPileEffects(pile); }
-function onPileOverlayMode(event) { if (event.detail !== 'battle') clearAllPileEffects(); }
-document.addEventListener('sdt-overlay-close', clearAllPileEffects);
-document.addEventListener('sdt-overlay-mode', onPileOverlayMode);
-if (import.meta.hot) import.meta.hot.dispose(() => {
-  clearAllPileEffects();
-  document.removeEventListener('sdt-overlay-close', clearAllPileEffects);
-  document.removeEventListener('sdt-overlay-mode', onPileOverlayMode);
-});
-function replayPileClass(pile, cls, ms) {
-  const host = pile.closest('#overlay') || pile.parentElement;
-  if (!pile.isConnected || !host || host.hidden) return;
-  let state = pileEffects.get(pile);
-  if (!state) {
-    state = { cancels: new Map(), observer: new MutationObserver(() => {
-      if (!pile.isConnected || !host.contains(pile) || host.hidden) clearPileEffects(pile);
-    }) };
-    state.observer.observe(host, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden'] });
-    pileEffects.set(pile, state);
-  }
-  state.cancels.get(cls)?.();
-  pile.classList.remove(cls);
-  void pile.offsetWidth;
-  pile.classList.add(cls);
-  const cancel = schedulePresentationMs(() => {
-    if (pileEffects.get(pile) !== state || state.cancels.get(cls) !== cancel) return;
-    pile.classList.remove(cls);
-    state.cancels.delete(cls);
-    if (!state.cancels.size) clearPileEffects(pile);
-  }, ms);
-  state.cancels.set(cls, cancel);
-}
   // ---------- 牌局动画（2026-09-09）：离场克隆飞行 / 新牌飞入 / 幸存者归位 / 手牌区显隐 ----------
   // 渲染是整块重建，跨渲染的位移全部走 WAAPI：离场牌在 overlay 常驻层放克隆体飞行，
   // 入场/归位用 composite:'add' 加法合成——不破坏槽位自身的扇形 transform。
@@ -197,22 +156,12 @@ function replayPileClass(pile, cls, ms) {
     const ov = UI.el.overlay;
     const ovR = uiRect(ov);   // 布局口径：飞卡定位/目标换算
     const played = new Set(), drawn = new Set();
-    const shuffles = [];   // 洗入牌动画事件（addDeckCard：「将 X 洗入牌库」）
     events.forEach(ev => {
       if (ev.kind === 'draw') drawn.add(ev.uid);
-      else if (ev.kind === 'shuffle') shuffles.push(ev);
       else if (['play', 'dump', 'burn'].includes(ev.kind)) played.add(ev.uid);
     });
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
     if (events.some(ev => ev.kind === 'burn')) SDT.Sound.sfx('burn');   // 同帧多张消耗卡合并为一次燃烧提示
-    // —— 牌库图标动画（2026-09-11 需求，约 1.5s）：抽牌脉冲 / 洗入旋光 ——
-    // 重播辅助：1.6s 内同类二次触发要摘类+reflow 再挂（类已挂时 add 无效=动画不重播），
-    // 并清旧定时器（否则旧 timer 到点摘类截断新一轮）
-    const pileEl = /** @type {BattleElement} */ (body.querySelector('.sts-hud-l .bt-pile'));
-    if (pileEl) {
-      if (drawn.size) replayPileClass(pileEl, 'pile-pulse', 1600);
-      if (shuffles.length) replayPileClass(pileEl, 'pile-shuffle', 900);
-    }
     // Acquisition and random-cast faces use the independent feedback queue.
     // —— 出牌队列演出（批次F，STS2 NCardPlayQueue）：同一渲染帧打出多张时，克隆体先飞到
     //    手牌区上方的队列位横排站定（按结算次序错开入场），停顿一拍再依次飞向去处——

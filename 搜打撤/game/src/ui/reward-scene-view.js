@@ -1,3 +1,5 @@
+import '../../css/room-rewards.css';
+import '../../css/room-footer.css';
 import { esc, escAttr } from '../core/shared.js';
 /** @typedef {{ total?: number, pending?: number, received?: number, choiceCount?: number, choicePending?: boolean, choiceName?: string, bonusPending?: number }} RewardModeProgress */
 
@@ -9,14 +11,12 @@ export function rewardExitHTML(act, label = '继续探索', extraClass = '') {
 export function rewardSceneHTML({ title, source = '', countLabel = '', rule = '', cards, actions, footer = '', coins = '', warning = '', details = '', className = 'reward-v14', count = 0, compact = false, claimMode = '', progress = /** @type {RewardModeProgress} */ ({}) }) {
   const mode = claimMode === 'one' || claimMode === 'all' ? claimMode : '';
   const choiceState = progress.choicePending ? 'pending' : progress.choiceName ? 'selected' : 'forfeited';
-  const modeHeader = mode === 'one'
-    ? `<div class="reward-mode-banner reward-mode-choice"><span class="reward-mode-mark" aria-hidden="true">1</span><div><span>${progress.choicePending ? `${progress.choiceCount || 0} 张候选 · 选取后其余永久放弃` : progress.choiceName ? `已选定「${esc(progress.choiceName)}」` : '本组已放弃'}</span></div></div>`
-    : mode === 'all' ? `<div class="reward-mode-banner reward-mode-collection" role="status" aria-live="polite"><span class="reward-mode-mark">${progress.pending || 0}</span><div><b>${progress.pending ? '张待收下' : !progress.total ? '无卡牌待领' : progress.received === progress.total ? '卡牌已收齐' : '卡牌已处理'}</b><span>已收下 ${progress.received || 0} / ${progress.total || 0} 张</span></div></div>` : '';
-  return `<section class="${escAttr(className)}${compact ? ' reward-compact' : ''} reward-replica${className.includes('reward-standalone-picker') ? ' ui-design-system' : ''}" data-reward-count="${count}"${mode ? ` data-reward-mode="${mode}"${mode === 'one' ? ` data-reward-choice-state="${choiceState}"` : ''}` : ''}>
-    <header class="reward-head"><div>${source ? `<span class="reward-source">${esc(source)}</span>` : ''}<h3>${esc(title)}</h3>${compact && mode === 'all' ? '' : modeHeader}${countLabel ? `<p class="reward-count">${esc(countLabel)}</p>` : ''}${rule ? `<p class="reward-rule">${esc(rule)}</p>` : ''}</div></header>
-    <div class="reward-main"><div class="reward-stage loot-scroll"><div class="reward-objects"${mode === 'one' ? ' role="group" aria-label="互斥候选与独立附赠"' : mode === 'all' ? ' role="list" aria-label="可逐张收下的战利品"' : ''}>${coins}${cards}</div>${warning}${details}</div></div>
-    ${footer || actions ? `<footer class="reward-foot"><div class="reward-footer-info">${footer}</div><aside class="loot-actions" aria-label="奖励操作">${actions}</aside></footer>` : ''}
-  </section>`;
+  const heading = mode === 'one' && progress.choicePending ? '选择 1 张' : title;
+  const description = [countLabel, rule, mode === 'one' && progress.choicePending ? '其余候选将放弃' : ''].filter(Boolean).join(' · ');
+  const headHTML = `<header class="reward-head"${description ? ` aria-description="${escAttr(description)}"` : ''}><div><h3>${esc(heading)}</h3>${source ? `<span class="reward-source">${esc(source)}</span>` : ''}${!mode && rule ? `<p class="reward-rule">${esc(rule)}</p>` : ''}</div></header>`;
+  const mainHTML = `<div class="reward-main"><div class="reward-stage loot-scroll"><div class="reward-objects"${mode === 'one' ? ' role="group" aria-label="互斥候选与独立附赠"' : mode === 'all' ? ' role="list" aria-label="可逐张收下的战利品"' : ''}>${coins}${cards}</div>${warning}${details}</div></div>`;
+  const footHTML = `${footer || actions ? `<footer class="reward-foot room-footer"><div class="reward-footer-info">${footer}</div><aside class="loot-actions room-footer-actions" aria-label="奖励操作">${actions}</aside></footer>` : ''}`;
+  return `<section class="${escAttr(className)}${compact ? ' reward-compact' : ''} reward-replica room-reward${className.includes('reward-standalone-picker') ? ' ui-design-system' : ''}" data-reward-count="${count}"${mode ? ` data-reward-mode="${mode}"${mode === 'one' ? ` data-reward-choice-state="${choiceState}"` : ''}` : ''}>${headHTML + mainHTML + footHTML}</section>`;
 }
 
 // A receipt changes card state, not its artwork. Keep the live cards and scroll
@@ -71,7 +71,18 @@ export function patchRewardScene(host, html) {
   }
   for (const selector of ['.reward-head', '.loot-actions', '.reward-foot']) {
     const old = current.querySelector(selector), fresh = next.querySelector(selector);
-    if (old && fresh && old.innerHTML !== fresh.innerHTML) old.innerHTML = fresh.innerHTML;
+    if (old && fresh) {
+      if (fresh.hasAttribute('aria-description')) old.setAttribute('aria-description',fresh.getAttribute('aria-description'));
+      else old.removeAttribute('aria-description');
+      if (old.innerHTML !== fresh.innerHTML) {
+        const disclosures=[...old.querySelectorAll('details')];
+        old.innerHTML=fresh.innerHTML;
+        for (const previous of disclosures) {
+          const replacement=[...old.querySelectorAll('details')].find(node=>node.className===previous.className && node.innerHTML===previous.innerHTML);
+          if (replacement) replacement.replaceWith(previous);
+        }
+      }
+    }
     else if (old && !fresh) old.remove();
     else if (!old && fresh) current.append(fresh);
   }
@@ -110,21 +121,24 @@ export function restoreRewardActionFocus(host, focus) {
 
 // Both the card face and its zoom use this exact action; no business callbacks live here.
 export function rewardClaimHTML({ index, cardName = '卡牌', state = 'pending', choice = false, fits = true, disabled = false, zoom = false, claimMode = '', bonus = false, actions = /** @type {{pick?: string, take?: string, organize?: string}} */ ({}) }) {
-  if (claimMode === 'one' || claimMode === 'all') {
-    const mode = choice ? 'one' : 'all';
-    if (state !== 'pending') return `<span class="reward-unit-state reward-state-${mode} is-${state}" role="status"><span class="reward-claim-mark" aria-hidden="true">${state === 'received' ? '✓' : '×'}</span><span>${state === 'received' ? choice ? '已选定 · 已入背包' : '已收下' : choice ? '未选择 · 已放弃' : '已放弃'}</span></span>`;
-    const action = fits ? choice ? actions.pick || 'chestPick' : actions.take || 'chestTake1' : actions.organize || 'chestMakeRoom';
-    const label = fits ? choice ? '选择这张' : bonus ? '收下附赠' : '收下' : '整理背包';
-    return `${zoom && choice ? '<p class="reward-choice-warning">选定后，其余基础候选将放弃。</p>' : ''}<button type="button" class="${zoom ? 'ov-btn ok' : 'reward-claim'} reward-claim-${mode}" data-act="${escAttr(action)}" data-i="${escAttr(index)}" data-cancel="false" aria-label="${escAttr(`${label}：${cardName || '卡牌'}`)}"${choice && fits ? ' aria-description="其余候选将永久放弃"' : ''}${disabled ? ' disabled' : ''}>${label}</button>`;
-  }
-  if (state !== 'pending') return `<span class="reward-unit-state">${state === 'received' ? choice ? '已选择' : '已收下' : '已放弃'}</span>`;
+  const explicitMode = claimMode === 'one' || claimMode === 'all';
+  const mode = choice ? 'one' : 'all';
+  if (state !== 'pending') return explicitMode
+    ? `<span class="reward-unit-state reward-state-${mode} is-${state}" role="status"><span class="reward-claim-mark" aria-hidden="true">${state === 'received' ? '✓' : '×'}</span><span>${state === 'received' ? choice ? '已入背包' : '已收下' : '已放弃'}</span></span>`
+    : `<span class="reward-unit-state">${state === 'received' ? choice ? '已选择' : '已收下' : '已放弃'}</span>`;
   const action = fits ? choice ? actions.pick || 'chestPick' : actions.take || 'chestTake1' : actions.organize || 'chestMakeRoom';
-  const label = fits ? choice ? '选择这张' : '收下' : '整理背包';
-  const accessibleLabel = `${label}：${cardName || '卡牌'}`;
-  return `${zoom && choice ? '<p class="reward-choice-warning">其余选项将放弃</p>' : ''}<button type="button" class="${zoom ? 'ov-btn ok' : 'reward-claim'}" data-act="${escAttr(action)}" data-i="${escAttr(index)}" data-cancel="false" aria-label="${escAttr(accessibleLabel)}"${disabled ? ' disabled' : ''}>${label}</button>`;
+  const label = fits ? choice ? '选择' : '收下' : '整理背包';
+  const accessibleLabel = fits && explicitMode && bonus ? '收下附赠' : label;
+  const warning = zoom && choice ? `<p class="reward-choice-warning">${explicitMode ? '选定后，其余基础候选将放弃。' : '其余选项将放弃'}</p>` : '';
+  return `${warning}<button type="button" class="${zoom ? 'ov-btn ok' : 'reward-claim'}${explicitMode ? ` reward-claim-${mode}` : ''}" data-act="${escAttr(action)}" data-i="${escAttr(index)}" data-cancel="false" aria-label="${escAttr(`${accessibleLabel}：${cardName || '卡牌'}`)}"${explicitMode && choice && fits ? ' aria-description="其余候选将永久放弃"' : ''}${disabled ? ' disabled' : ''}>${label}</button>`;
 }
 
 // Cancel returns to the owning reward surface; it never means forfeiting rewards.
 export function rewardReturnHTML({ action, organize = false, className = '', arrow = false }) {
   return `<button type="button"${className ? ` class="${escAttr(className)}"` : ''} data-${organize ? 'organize' : 'act'}="${escAttr(action)}" data-cancel="true">${arrow ? '<span aria-hidden="true">←</span> ' : ''}返回奖励</button>`;
+}
+
+// Shared acquisition tile: the face owns its name/rules; one button owns receipt.
+export function rewardCardUnitHTML({ card, face, index, readAction, action = '', className = '', category = '', rarity = '', listItem = false }) {
+  return `<article class="reward-unit ${escAttr(className)}" data-reward-index="${index}" data-reward-card="${escAttr(card.id || card.name)}" data-reward-rarity="${escAttr(rarity || card.rarity || '')}"${category ? ` data-reward-category="${escAttr(category)}"` : ''}${listItem ? ' role="listitem"' : ''}><button type="button" class="reward-card" data-act="${escAttr(readAction)}" data-i="${index}" aria-label="放大查看${escAttr(card.name || '卡牌')}">${face}</button>${action}</article>`;
 }

@@ -56,9 +56,10 @@ async function commitBase(context, preparedChange) {
   if (invalid) return invalid;
   const base = Base();
   if (base.slot == null || base.slot !== context.slotId) return fail('INVALID_STATE', '提交档位与当前游玩档位不一致');
+  const generation = base._selectionGeneration;
   const locked = await withSlotWriteLock(context.slotId,
     lease => commitBaseLocked(context, preparedChange, lease),
-    { isCurrent: () => Base() === base && base.slot === context.slotId });
+    { isCurrent: () => Base() === base && base.slot === context.slotId && base._selectionGeneration === generation });
   return locked.ok === true ? locked.value : locked;
 }
 

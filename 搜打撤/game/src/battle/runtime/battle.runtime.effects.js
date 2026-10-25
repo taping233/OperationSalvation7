@@ -1,109 +1,63 @@
+import { subscribeStateBindings } from '../../core/live-bindings.js';
 import { defaultBattleRuntime as runtime } from './battle.runtime.default.js';
 
 // Derived ESM bindings preserve existing readers; mutable data lives in runtime.
-export let stealthStrike = runtime.stealthStrike;
-export let nextSpellTwice = runtime.nextSpellTwice;
-export let spellCost1 = runtime.spellCost1;
-export let meleeCost1 = runtime.meleeCost1;
-export let shaTransform = runtime.shaTransform;
-export let consumeFireballN = runtime.consumeFireballN;
-export let lastPlayedType = runtime.lastPlayedType;
-export let playedMartialThisTurn = runtime.playedMartialThisTurn;
-export let playedMovesThisTurn = runtime.playedMovesThisTurn;
-export let growthNames = runtime.growthNames;
-export let growth = runtime.growth;
-export let infuseFuels = runtime.infuseFuels;
-export let handInfuseCounts = runtime.handInfuseCounts;
-export let sealUnlocked = runtime.sealUnlocked;
-export let extraTurn = runtime.extraTurn;
-export let deathSave = runtime.deathSave;
-export let killAtkUp = runtime.killAtkUp;
-export let poisonOnSpell = runtime.poisonOnSpell;
-export let poisonLegacy = runtime.poisonLegacy;
-export let nestRunes = runtime.nestRunes;
-export let nestSyn = runtime.nestSyn;
-export let timeRune = runtime.timeRune;
-export let arrowRune = runtime.arrowRune;
-export let unyieldRune = runtime.unyieldRune;
-export let ashRune = runtime.ashRune;
-export let unlimitedRune = runtime.unlimitedRune;
-export let holyRune = runtime.holyRune;
-export let fireballRuneOn = runtime.fireballRuneOn;
-export let freezeRuneOn = runtime.freezeRuneOn;
-export let swiftRune = runtime.swiftRune;
-export let timeSpaceRune = runtime.timeSpaceRune;
-export let timeSpaceUsed = runtime.timeSpaceUsed;
-export let armorMul = runtime.armorMul;
-export let sealDone = runtime.sealDone;
-export let playerCurseImmune = runtime.playerCurseImmune;
-export let allSpellsInfused = runtime.allSpellsInfused;
-runtime.subscribe((state, key) => {
-  switch (key) {
-    case 'stealthStrike': stealthStrike = state.stealthStrike; break;
-    case 'nextSpellTwice': nextSpellTwice = state.nextSpellTwice; break;
-    case 'spellCost1': spellCost1 = state.spellCost1; break;
-    case 'meleeCost1': meleeCost1 = state.meleeCost1; break;
-    case 'shaTransform': shaTransform = state.shaTransform; break;
-    case 'consumeFireballN': consumeFireballN = state.consumeFireballN; break;
-    case 'lastPlayedType': lastPlayedType = state.lastPlayedType; break;
-    case 'playedMartialThisTurn': playedMartialThisTurn = state.playedMartialThisTurn; break;
-    case 'playedMovesThisTurn': playedMovesThisTurn = state.playedMovesThisTurn; break;
-    case 'growthNames': growthNames = state.growthNames; break;
-    case 'growth': growth = state.growth; break;
-    case 'infuseFuels': infuseFuels = state.infuseFuels; break;
-    case 'handInfuseCounts': handInfuseCounts = state.handInfuseCounts; break;
-    case 'sealUnlocked': sealUnlocked = state.sealUnlocked; break;
-    case 'extraTurn': extraTurn = state.extraTurn; break;
-    case 'deathSave': deathSave = state.deathSave; break;
-    case 'killAtkUp': killAtkUp = state.killAtkUp; break;
-    case 'poisonOnSpell': poisonOnSpell = state.poisonOnSpell; break;
-    case 'poisonLegacy': poisonLegacy = state.poisonLegacy; break;
-    case 'nestRunes': nestRunes = state.nestRunes; break;
-    case 'nestSyn': nestSyn = state.nestSyn; break;
-    case 'timeRune': timeRune = state.timeRune; break;
-    case 'arrowRune': arrowRune = state.arrowRune; break;
-    case 'unyieldRune': unyieldRune = state.unyieldRune; break;
-    case 'ashRune': ashRune = state.ashRune; break;
-    case 'unlimitedRune': unlimitedRune = state.unlimitedRune; break;
-    case 'holyRune': holyRune = state.holyRune; break;
-    case 'fireballRuneOn': fireballRuneOn = state.fireballRuneOn; break;
-    case 'freezeRuneOn': freezeRuneOn = state.freezeRuneOn; break;
-    case 'swiftRune': swiftRune = state.swiftRune; break;
-    case 'timeSpaceRune': timeSpaceRune = state.timeSpaceRune; break;
-    case 'timeSpaceUsed': timeSpaceUsed = state.timeSpaceUsed; break;
-    case 'armorMul': armorMul = state.armorMul; break;
-    case 'sealDone': sealDone = state.sealDone; break;
-    case 'playerCurseImmune': playerCurseImmune = state.playerCurseImmune; break;
-    case 'allSpellsInfused': allSpellsInfused = state.allSpellsInfused; break;
-  }
+export let {
+  stealthStrike, nextSpellTwice, spellCost1, meleeCost1,
+  shaTransform, consumeFireballN, lastPlayedType, playedMartialThisTurn,
+  playedMovesThisTurn, growthNames, growth, infuseFuels,
+  handInfuseCounts, sealUnlocked, extraTurn, deathSave,
+  killAtkUp, poisonOnSpell, poisonLegacy, nestRunes,
+  nestSyn, timeRune, arrowRune, unyieldRune,
+  ashRune, unlimitedRune, holyRune, fireballRuneOn,
+  freezeRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed,
+  armorMul, sealDone, playerCurseImmune, allSpellsInfused
+} = runtime;
+subscribeStateBindings(runtime, {
+  stealthStrike: value => { stealthStrike = value; },
+  nextSpellTwice: value => { nextSpellTwice = value; },
+  spellCost1: value => { spellCost1 = value; },
+  meleeCost1: value => { meleeCost1 = value; },
+  shaTransform: value => { shaTransform = value; },
+  consumeFireballN: value => { consumeFireballN = value; },
+  lastPlayedType: value => { lastPlayedType = value; },
+  playedMartialThisTurn: value => { playedMartialThisTurn = value; },
+  playedMovesThisTurn: value => { playedMovesThisTurn = value; },
+  growthNames: value => { growthNames = value; },
+  growth: value => { growth = value; },
+  infuseFuels: value => { infuseFuels = value; },
+  handInfuseCounts: value => { handInfuseCounts = value; },
+  sealUnlocked: value => { sealUnlocked = value; },
+  extraTurn: value => { extraTurn = value; },
+  deathSave: value => { deathSave = value; },
+  killAtkUp: value => { killAtkUp = value; },
+  poisonOnSpell: value => { poisonOnSpell = value; },
+  poisonLegacy: value => { poisonLegacy = value; },
+  nestRunes: value => { nestRunes = value; },
+  nestSyn: value => { nestSyn = value; },
+  timeRune: value => { timeRune = value; },
+  arrowRune: value => { arrowRune = value; },
+  unyieldRune: value => { unyieldRune = value; },
+  ashRune: value => { ashRune = value; },
+  unlimitedRune: value => { unlimitedRune = value; },
+  holyRune: value => { holyRune = value; },
+  fireballRuneOn: value => { fireballRuneOn = value; },
+  freezeRuneOn: value => { freezeRuneOn = value; },
+  swiftRune: value => { swiftRune = value; },
+  timeSpaceRune: value => { timeSpaceRune = value; },
+  timeSpaceUsed: value => { timeSpaceUsed = value; },
+  armorMul: value => { armorMul = value; },
+  sealDone: value => { sealDone = value; },
+  playerCurseImmune: value => { playerCurseImmune = value; },
+  allSpellsInfused: value => { allSpellsInfused = value; },
 });
-export const set$handInfuseCounts = runtime.set$handInfuseCounts;
-export const recordHandInfusion = runtime.recordHandInfusion;
-export const set$stealthStrike = runtime.set$stealthStrike;
-export const set$nextSpellTwice = runtime.set$nextSpellTwice;
-export const set$spellCost1 = runtime.set$spellCost1;
-export const set$meleeCost1 = runtime.set$meleeCost1;
-export const set$shaTransform = runtime.set$shaTransform;
-export const set$consumeFireballN = runtime.set$consumeFireballN;
-export const set$lastPlayedType = runtime.set$lastPlayedType;
-export const set$playedMartialThisTurn = runtime.set$playedMartialThisTurn;
-export const set$playedMovesThisTurn = runtime.set$playedMovesThisTurn;
-export const set$infuseFuels = runtime.set$infuseFuels;
-export const set$sealUnlocked = runtime.set$sealUnlocked;
-export const set$extraTurn = runtime.set$extraTurn;
-export const set$deathSave = runtime.set$deathSave;
-export const set$killAtkUp = runtime.set$killAtkUp;
-export const set$poisonOnSpell = runtime.set$poisonOnSpell;
-export const set$poisonLegacy = runtime.set$poisonLegacy;
-export const set$nestRunes = runtime.set$nestRunes;
-export const set$nestSyn = runtime.set$nestSyn;
-export const set$timeSpaceUsed = runtime.set$timeSpaceUsed;
-export const set$sealDone = runtime.set$sealDone;
-export const set$playerCurseImmune = runtime.set$playerCurseImmune;
-export const set$allSpellsInfused = runtime.set$allSpellsInfused;
-export const effectiveHandMax = runtime.effectiveHandMax;
-export const restoreEffectState = runtime.restoreEffectState;
-export const restoreEffectRules = runtime.restoreEffectRules;
-export const resetCostFlags = runtime.resetCostFlags;
-export const applyRuneFlag = runtime.applyRuneFlag;
-export const resetBattleEffectFlags = runtime.resetBattleEffectFlags;
+export const {
+  set$handInfuseCounts, recordHandInfusion, set$stealthStrike, set$nextSpellTwice,
+  set$spellCost1, set$meleeCost1, set$shaTransform, set$consumeFireballN,
+  set$lastPlayedType, set$playedMartialThisTurn, set$playedMovesThisTurn, set$infuseFuels,
+  set$sealUnlocked, set$extraTurn, set$deathSave, set$killAtkUp,
+  set$poisonOnSpell, set$poisonLegacy, set$nestRunes, set$nestSyn,
+  set$timeSpaceUsed, set$sealDone, set$playerCurseImmune, set$allSpellsInfused,
+  effectiveHandMax, restoreEffectState, restoreEffectRules, resetCostFlags,
+  applyRuneFlag, resetBattleEffectFlags
+} = runtime;

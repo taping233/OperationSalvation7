@@ -96,12 +96,12 @@ describe('故障重编页候选', () => {
 });
 
 describe('节点壳模板解析', () => {
-  it.each(['entry', 'fire', 'pickup', 'door', 'altar', 'extract'])('%s 不解析未使用的事件选项模板', tone => {
+  it.each(['entry', 'fire', 'pickup', 'door', 'altar', 'extract'])('%s 仅为插画页面解析选项模板', tone => {
     const create = vi.spyOn(document, 'createElement');
     const body = '<button data-act="continue">继续</button>';
     const html = eventSceneHTML({ tone, title: '节点', body, layer: 0 });
     expect(html).toContain(body);
-    expect(create.mock.calls.filter(([tag]) => tag === 'template')).toHaveLength(0);
+    expect(create.mock.calls.filter(([tag]) => tag === 'template')).toHaveLength(['entry','fire','pickup'].includes(tone) ? 1 : 0);
   });
   it('多项事件只解析一次body，单项同文叙述仍去重、保留动作键', () => {
     const create = vi.spyOn(document, 'createElement');
@@ -113,7 +113,7 @@ describe('节点壳模板解析', () => {
     expect(create.mock.calls.filter(([tag]) => tag === 'template')).toHaveLength(2);
     document.body.innerHTML = html;
     expect(document.querySelector('[data-act="one"]')).not.toBeNull();
-    expect(document.querySelector('[data-act="one"] > span')).toBeNull();
+    expect(document.querySelector('[data-act="one"] > .choice-detail').textContent).toBe('');
     expect(document.querySelector('.event-scene').dataset.eventChoiceCount).toBe('1');
   });
 });
@@ -130,7 +130,7 @@ describe('选角页图片入口', () => {
     vi.doMock('../game/src/battle/battle-loader.js', () => ({ captureBattleContext: context, ensureBattleReady: vi.fn(async () => {}) }));
     vi.doMock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn() } }));
     vi.doMock('../game/src/run/game.run.scenes.js', () => ({ preloadAllNodeShellBgs: vi.fn(), showRunTransition: vi.fn() }));
-    vi.doMock('../game/src/ui/character-view-motion.js', () => ({ createCharacterViewMotion: () => ({ busy: false, enter() {}, preview() {},
+    vi.doMock('../game/src/ui/character-view-motion.js', () => ({ createCharacterViewMotion: () => ({ busy: false, enter() {}, preview() {}, cancelPage() {},
       page: fn => fn(), swapPortrait: (current, next) => current.replaceWith(next),
     }) }));
     vi.stubGlobal('requestIdleCallback', vi.fn());

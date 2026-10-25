@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import * as runtime from '../game/src/battle/runtime/battle.runtime.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
@@ -7,8 +8,7 @@ import { triggerExecutionPlan } from '../game/src/cards/card-execution-plan.js';
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { sfx() {}, music() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15,
-  starterSha: 0, battleStartDraw: 0, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(9, 99, 15, 0, 0, 1) }, items: {} };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const Engine = await import('../game/src/battle/core/battle.engine.js');
@@ -39,7 +39,7 @@ function resolve(card, mode) {
   }
   Engine.resolveCard(card, null, false, 0, 'source');
   const result = { energy: runtime.energy, maxEnergy: runtime.maxEnergy, drawn: runtime.hand.length,
-    remaining: runtime.drawPile.length, logs };
+    remaining: runtime.drawPile.length, logs:logs.map(log=>log.replaceAll('[[icon:draw-card]]','[[icon:cards]]')) };
   BattleSession.commands.flee();
   return result;
 }

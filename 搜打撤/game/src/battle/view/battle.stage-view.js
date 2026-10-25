@@ -1,4 +1,5 @@
 import { escAttr } from '../../core/shared.js';
+import { setRunTopBarBattleOptions } from '../../ui/run-top-bar.js';
 
 // A battle owns its shell and the small HUD regions inside it. These records are
 // presentation-only: no state is attached to the game, snapshot, or save data.
@@ -118,15 +119,10 @@ function patchNode(live, next, previous, retainChild) {
 function shellHTML(view) {
   return `<div class="battle-stage sts battle-sts" data-asset-key="${escAttr(view.assetKey)}" data-boss="${view.isBoss ? '1' : '0'}">
     <div class="battle-stage-shade"></div>
-    <div class="sts-topbar"><div class="sts-encounter"></div>
-      <details class="sts-options"><summary>[[icon:gear]] 选项</summary><div class="sts-options-menu">
-        <button class="ov-btn ghost" data-act="btBossRules">战斗规则</button>
-        <button class="ov-btn ghost" data-act="btFlee">[[icon:runner]] 撤离（判负）</button>
-        <button class="ov-btn ghost" data-act="btSettings" title="战斗设置（音频 / 震动）">[[icon:gear]] 设置</button>
-      </div></details></div>
+    <div class="sts-topbar"><div class="sts-encounter"></div></div>
     <div class="sts-arena"><div data-unit-mount="self"></div><div class="sts-allies" data-unit-mount="allies"></div><div class="sts-foes" data-unit-mount="foes"></div></div>
     <div class="sts-hud"><div class="sts-resource-dock"><div class="sts-hud-l" aria-label="抽牌堆"></div>
-      <div class="sts-energy-wrap"><div class="sts-energy" role="group" tabindex="0" data-ui-tip data-ui-tip-title="能量" data-ui-tip-text="打出卡牌与使用职业技能时消耗。"><img class="battle-energy-emblem battle-control-icon" src="${escAttr(view.energyArt)}" alt="" draggable="false" decoding="async"><span class="battle-control-value"><b></b><span></span></span></div></div></div>
+      <div class="sts-energy-wrap"><div class="sts-energy" role="group" tabindex="0"><img class="battle-energy-emblem battle-control-icon" src="${escAttr(view.energyArt)}" alt="" draggable="false" decoding="async"><span class="battle-control-value"><b></b><span></span></span></div></div></div>
       <div class="sts-hand-tools" aria-label="职业技能"></div><div class="sts-hud-r" aria-label="消耗牌堆"></div>
       <div class="bt-hand sts-hand" role="group" aria-label="当前手牌"></div>
       <div class="sts-tactics" aria-label="战术操作"><button class="ov-btn sts-end-turn" data-act="btEnd">结束回合</button></div>
@@ -161,8 +157,9 @@ function repairMounts(owner) {
   mount(owner, 'foes', arena, '[data-unit-mount="foes"]', () => element(arena, 'sts-foes', { 'data-unit-mount':'foes' }));
   mount(owner, 'dock', hud, '.sts-resource-dock', () => element(hud, 'sts-resource-dock'));
   mount(owner, 'hand', hud, '.sts-hand', () => element(hud, 'bt-hand sts-hand', {role:'group','aria-label':'当前手牌'}));
-  if (owner.tools?.parentNode !== hud && owner.tools?.parentNode !== owner.self) {
-    owner.tools = owner.self.querySelector(':scope > .sts-hand-tools') || hud.querySelector(':scope > .sts-hand-tools')
+  const toolsHost = owner.self.querySelector(':scope > .sts-unit-vitals > .sts-unit-actions') || owner.self;
+  if (owner.tools?.parentNode !== hud && owner.tools?.parentNode !== toolsHost) {
+    owner.tools = toolsHost.querySelector(':scope > .sts-hand-tools') || owner.self.querySelector(':scope > .sts-hand-tools') || hud.querySelector(':scope > .sts-hand-tools')
       || element(hud, 'sts-hand-tools', { 'aria-label':'职业技能' });
   }
   syncClasses(owner.tools, 'sts-hand-tools');
@@ -225,10 +222,11 @@ export function createBattleStageView({ UI, rich, onReplace, onMount, onPotionsC
     }
     syncClasses(stage, `battle-stage sts battle-sts phase-${view.phase}`);
     setAttribute(stage, 'data-phase', view.phase); setAttribute(stage, 'data-battle-state', view.combatState.tone);
+    setAttribute(stage, 'data-turn', view.turn);
     setAttribute(stage, 'data-asset-key', view.assetKey); setAttribute(stage, 'data-boss', view.isBoss ? '1' : '0');
     const oldPotions = owner.regions.get('potions')?.html;
     if (oldPotions !== view.potionsHTML) onPotionsChange?.();
-    region(owner, 'potions', stage, '.bt-potions', view.potionsHTML, rich, owner.topbar, null, ownsPotionPanel);
+    region(owner, 'potions', owner.topbar, '.bt-potions', view.potionsHTML, rich, null, null, ownsPotionPanel);
     region(owner, 'encounter', owner.topbar, '.sts-encounter', `<div class="sts-encounter">${view.isBoss ? '<span class="sts-encounter-kicker">首脑战</span>' : ''}<b></b><span class="sts-phase-dot"></span><span></span></div>`, rich, owner.topbar.firstElementChild, tree => {
       const children = tree.children, offset = view.isBoss ? 1 : 0;
       setText(children[offset], `第 ${view.turn} 回合`);
@@ -238,19 +236,11 @@ export function createBattleStageView({ UI, rich, onReplace, onMount, onPotionsC
       if (owner.tone && owner.tone !== view.combatState.tone) liveDot?.classList.remove(owner.tone);
       owner.tone = view.combatState.tone;
     });
-    // A small independent component keeps details.open, focused controls and
-    // the timed flee confirmation across busy/phase changes.
-    region(owner, 'options', owner.topbar, '.sts-options', `<details class="sts-options"><summary>[[icon:gear]] 选项</summary><div class="sts-options-menu"><button class="ov-btn ghost" data-act="btBossRules">战斗规则</button><button class="ov-btn ghost" data-act="btFlee">[[icon:runner]] 撤离（判负）</button><button class="ov-btn ghost" data-act="btSettings" title="战斗设置（音频 / 震动）">[[icon:gear]] 设置</button></div></details>`, rich, null, tree => {
-      const flee = tree.querySelector('[data-act="btFlee"]');
-      flee.classList.toggle('dis', view.mode === 'boss');
-      setAttribute(flee, 'disabled', view.locked ? '' : null);
-      setAttribute(flee, 'title', view.mode === 'boss' ? 'BOSS 战不可撤离——击败首脑或战败即终局' : '撤离将视为本局失败');
-    });
+    setRunTopBarBattleOptions(UI, owner.stage);
     region(owner, 'draw', owner.dock, '.sts-hud-l', `<div class="sts-hud-l" aria-label="抽牌堆">${view.drawHTML}</div>`, rich, owner.dock.firstElementChild);
-    region(owner, 'energy', owner.dock, '.sts-energy-wrap', `<div class="sts-energy-wrap"><div class="sts-energy" role="group" tabindex="0" data-ui-tip data-ui-tip-title="能量" data-ui-tip-text="打出卡牌与使用职业技能时消耗。"><img class="battle-energy-emblem battle-control-icon" src="${escAttr(view.energyArt)}" alt="" draggable="false" decoding="async"><span class="battle-control-value"><b></b><span></span></span></div></div>`, rich, null, tree => {
+    region(owner, 'energy', owner.dock, '.sts-energy-wrap', `<div class="sts-energy-wrap"><div class="sts-energy" role="group" tabindex="0"><img class="battle-energy-emblem battle-control-icon" src="${escAttr(view.energyArt)}" alt="" draggable="false" decoding="async"><span class="battle-control-value"><b></b><span></span></span></div></div>`, rich, null, tree => {
       const energy = tree.firstElementChild;
       setAttribute(energy, 'aria-label', `能量 ${view.energy}，每回合 ${view.maxEnergy}`);
-      setAttribute(energy, 'data-ui-tip-note', `回合开始恢复至 ${view.maxEnergy} 点`);
       setText(energy.children[1].children[0], view.energy); setText(energy.children[1].children[1], `/${view.maxEnergy}`);
     });
     region(owner, 'rest', owner.hud, '.sts-hud-r', `<div class="sts-hud-r" aria-label="消耗牌堆">${view.restHTML}</div>`, rich, owner.hand);
@@ -266,7 +256,10 @@ export function createBattleStageView({ UI, rich, onReplace, onMount, onPotionsC
     region(owner, 'page', owner.dock, '.bt-hand-page', view.pageHTML, rich, owner.regions.get('energy').node, null, ownsHandPageFeedback);
     region(owner, 'forecast', owner.tactics, '.bt-turn-forecast', view.forecastHTML, rich, owner.tactics.firstElementChild);
     region(owner, 'end', owner.tactics, '.sts-end-turn', '<button class="ov-btn sts-end-turn" data-act="btEnd">结束回合</button>', rich, null, tree => {
-      tree.classList.toggle('ok', !view.locked); setAttribute(tree, 'disabled', view.locked ? '' : null);
+      const locked = view.locked || view.phase !== 'player';
+      const label = view.phase === 'enemy' ? '敌方行动中' : view.phase === 'resolving' || view.locked ? '结算中…' : view.phase !== 'player' ? '请完成当前选择' : '结束回合';
+      setText(tree, label); setAttribute(tree, 'title', locked ? label : '结束本回合并进入敌方行动');
+      tree.classList.toggle('ok', !locked); setAttribute(tree, 'disabled', locked ? '' : null);
     });
     return { owner, crossedHost };
   }

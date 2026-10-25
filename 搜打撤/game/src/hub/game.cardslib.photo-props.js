@@ -17,7 +17,6 @@ const PHOTO_FOCUS = Object.freeze({
   'tt8-hero-descender': '50% 20%',
   'tt8-hero-summoner': '50% 0%',
   'tt8-hero-warlock': '50% 0%',
-  'tt8-hero-priest': '50% 20%',
 });
 
 const PHOTO_COMPLETE_TYPES = new Set(['道具', '装备', '资源', '生物']);

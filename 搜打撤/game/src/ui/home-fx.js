@@ -1,6 +1,8 @@
 import { interfaceReducedMotion } from './interface-motion.js';
+import '../../css/home-polish.css';
+import { watchSurfaceActivity } from './surface-activity.js';
 
-// Home cover details: frame-batched pointer parallax and plate spotlight, sparkles, mist, grain, sheen and a status readout.
+// Home cover details: frame-batched pointer parallax, sparkles, mist, grain, sheen and a status readout.
 const title = document.getElementById('title');
 const inner = /** @type {HTMLElement} */ (title?.querySelector('.title-inner'));
 const brand = /** @type {HTMLElement} */ (title?.querySelector('.home-brand'));
@@ -9,7 +11,7 @@ const credits = /** @type {HTMLDialogElement} */ (document.getElementById('homeC
 function sceneInteractive() {
   return !title.hidden && !document.hidden && !credits?.open
     && !title.classList.contains('wallpaper-only') && title.dataset.homePhase !== 'out'
-    && !document.body.classList.contains('page-covered');
+    && !document.body.classList.contains('page-covered') && !document.querySelector('.page-loading');
 }
 
 const SPARKS = [
@@ -27,7 +29,6 @@ function make(tag, className, vars = {}) {
 
 function bindSpotlight() {
   let frame = 0;
-  let plate = null;
   let x = 0;
   let y = 0;
   const apply = () => {
@@ -37,28 +38,22 @@ function bindSpotlight() {
     if (!area.width || !area.height) return;
     title.style.setProperty('--px', ((x - area.left) / area.width * 2 - 1).toFixed(3));
     title.style.setProperty('--py', ((y - area.top) / area.height * 2 - 1).toFixed(3));
-    if (!plate) return;
-    const box = plate.getBoundingClientRect();
-    const sx = box.width ? plate.clientWidth / box.width : 1;
-    const sy = box.height ? plate.clientHeight / box.height : 1;
-    plate.style.setProperty('--mx', `${Math.round((x - box.left) * sx)}px`);
-    plate.style.setProperty('--my', `${Math.round((y - box.top) * sy)}px`);
   };
   title.addEventListener('pointermove', event => {
       if (!(event.target instanceof Element)) return;
     if (!sceneInteractive() || interfaceReducedMotion()) return;
-    plate = event.target.closest?.('.home-plate');
     x = event.clientX;
     y = event.clientY;
     if (!frame) frame = requestAnimationFrame(apply);
   }, { passive: true });
-  title.addEventListener('pointerleave', () => {
-    plate = null;
+  const reset = () => {
     if (frame) cancelAnimationFrame(frame);
     frame = 0;
     title.style.setProperty('--px', '0');
     title.style.setProperty('--py', '0');
-  });
+  };
+  title.addEventListener('pointerleave', reset);
+  return reset;
 }
 
 function bindSceneAttention(onVisibilityChange) {
@@ -66,8 +61,11 @@ function bindSceneAttention(onVisibilityChange) {
     : node?.closest?.('.home-collection') ? 'collection'
       : node?.closest?.('.home-system') ? 'system' : null;
   let pointerZone = null;
-  const sync = () => {
-    const interactive = sceneInteractive();
+  let activity = null;
+  const sync = state => {
+    const interactive = typeof state === 'boolean' ? state : sceneInteractive() && activity?.active() !== false;
+    const ambient = interactive && !interfaceReducedMotion() ? 'running' : 'paused';
+    if (title.dataset.homeAmbient !== ambient) title.dataset.homeAmbient = ambient;
     onVisibilityChange?.(interactive);
     if (!interactive) {
       pointerZone = null;
@@ -77,24 +75,21 @@ function bindSceneAttention(onVisibilityChange) {
       return;
     }
     const zone = pointerZone || zoneOf(document.activeElement);
-    if (zone) title.dataset.homeAttention = zone;
-    else delete title.dataset.homeAttention;
+    if (zone) {
+      if (title.dataset.homeAttention !== zone) title.dataset.homeAttention = zone;
+    } else if (title.hasAttribute('data-home-attention')) delete title.dataset.homeAttention;
   };
   title.addEventListener('pointerover', event => { pointerZone = zoneOf(event.target); sync(); });
   title.addEventListener('pointerleave', () => { pointerZone = null; sync(); });
   title.addEventListener('focusin', sync);
   title.addEventListener('focusout', () => queueMicrotask(sync));
-  document.addEventListener('visibilitychange', sync);
   window.addEventListener('blur', () => { pointerZone = null; delete title.dataset.homeAttention; });
-  new MutationObserver(sync).observe(title, { attributes: true, attributeFilter: ['class', 'hidden', 'data-home-phase'] });
-  new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ['class'] });
-  if (credits) new MutationObserver(sync).observe(credits, { attributes: true, attributeFilter: ['open'] });
+  activity = watchSurfaceActivity(title, { isActive:sceneInteractive, extraRoots:[credits], onRefresh:sync });
   sync();
 }
 
 function mountSceneDepth() {
   title.insertBefore(make('div', 'home-depth'), inner);
-  title.insertBefore(make('div', 'home-scene-light'), inner);
   const snow = make('div', 'home-near-snow');
   [[12, 7, 13, -3], [28, 9, 16, -10], [43, 6, 14, -7], [69, 8, 18, -14], [83, 10, 15, -5], [93, 6, 19, -17]]
     .forEach(([left, size, duration, delay]) => snow.appendChild(make('i', '', {
@@ -162,12 +157,6 @@ function bindWarmupHint() {
 }
 
 if (title && inner && title.classList.contains('home-composed')) {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = new URL('../../css/home-polish.css', import.meta.url).href;
-  link.dataset.homeFx = '1';
-  document.head.appendChild(link);
-
   for (const plate of /** @type {NodeListOf<HTMLElement>} */ (title.querySelectorAll('.home-plate'))) {
     plate.appendChild(make('i', 'home-hover-glow'));
   }
@@ -208,8 +197,11 @@ if (title && inner && title.classList.contains('home-composed')) {
   window.addEventListener('pagehide', () => syncClock(false));
   window.addEventListener('pageshow', () => syncClock(sceneInteractive()));
 
-  bindSpotlight();
-  bindSceneAttention(syncClock);
+  const resetSpotlight = bindSpotlight();
+  bindSceneAttention(active => {
+    syncClock(active);
+    if (!active || interfaceReducedMotion()) resetSpotlight();
+  });
   bindPick();
   bindWarmupHint();
 }

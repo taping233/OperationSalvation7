@@ -13,6 +13,7 @@ beforeEach(async () => {
   vi.stubGlobal('matchMedia', () => ({ matches: false }));
   vi.stubGlobal('Image', class {
     src = ''; naturalHeight = 100; naturalWidth = 100;
+    removeAttribute(name) { if (name === 'src') this.src = ''; }
     constructor() {
       probes.push(this);
       if (!useLoadEvents) this.decode = () => new Promise((resolve, reject) => { this.resolve = resolve; this.reject = reject; });

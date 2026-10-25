@@ -1,43 +1,51 @@
 /* Shared cover for destinations that need a frame to prepare their content. */
-.page-loading {
+.page-loading{
+& {
   position: fixed; inset: 0; z-index: 990; display: grid; place-items: center;
   background: #111214; color: #ebebea; pointer-events: auto;
 }
-.page-loading::before {
+&::before {
   content: ''; position: absolute; inset: 22px; border: 1px solid #c2c5c722;
-}
-.page-loading-copy { width: min(380px, calc(var(--game-layout-width, 100vw) * 0.75)); text-align: center; }
-.page-loading-copy small { color: #b7bcbf; font: 10px/1.6 Consolas, monospace; letter-spacing: .3em; }
-.page-loading-copy h2 { margin: 22px 0 14px; font: 500 30px/1.4 var(--font-ui); letter-spacing: .2em; }
-.page-loading-copy p { margin: 0; color: #c2c5c8; font: 14px/1.8 var(--font-ui); }
-.page-loading-track { display: flex; justify-content: center; gap: 9px; margin-top: 30px; }
-.page-loading-track i { width: 44px; height: 2px; background: #ead283; animation: pageLoadPulse 1s ease-in-out infinite; }
-.page-loading-track i:nth-child(2) { animation-delay: .15s; }
-.page-loading-track i:nth-child(3) { animation-delay: .3s; }
+}}
+.page-loading-copy{
+& { width: min(380px, calc(var(--game-layout-width, 100vw) * 0.75)); text-align: center; }
+& small { color: #b7bcbf; font: 10px/1.6 Consolas, monospace; letter-spacing: .3em; }
+& h2 { margin: 22px 0 14px; font: 500 30px/1.4 var(--font-ui); letter-spacing: .2em; }
+& p { margin: 0; color: #c2c5c8; font: 14px/1.8 var(--font-ui); }}
+.page-loading-track{
+& { display: flex; justify-content: center; gap: 9px; margin-top: 30px; }
+& i { width: 44px; height: 2px; background: #ead283; animation: pageLoadPulse 1s ease-in-out infinite; }
+& i:nth-child(2) { animation-delay: .15s; }
+& i:nth-child(3) { animation-delay: .3s; }}
 .page-loading.leaving { animation: pageLoadOut .18s var(--ease-fly) both; pointer-events: none; }
 @keyframes pageLoadPulse { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
 @keyframes pageLoadOut { to { opacity: 0; } }
 /* Module loading preserves the source scene. Only a slower request shows a compact status. */
-.page-loading.page-loading--interface { background:transparent; }
-.page-loading.page-loading--interface::before { content:none; }
-.page-loading--interface .page-loading-copy {
+.page-loading.page-loading--interface{
+& { background:transparent; }
+&::before { content:none; }}
+.page-loading--interface .page-loading-copy{
+& {
   position:absolute; bottom:24px; padding:14px 24px; border:1px solid #c2c5c733;
   background:#111b24ed; border-radius:6px;
   animation:pageLoadingStatusIn 120ms ease-out 150ms backwards;
 }
-.page-loading--interface .page-loading-copy h2 { margin:0 0 4px; font-size:18px; letter-spacing:.08em; }
-.page-loading--interface .page-loading-copy p { font-size:13px; }
+& h2 { margin:0 0 4px; font-size:18px; letter-spacing:.08em; }
+& p { font-size:13px; }}
 @keyframes pageLoadingStatusIn { from { opacity:0; } to { opacity:1; } }
 /* 先画出切幕并保持首姿；目标页就绪后统一揭幕。 */
-.page-loading.page-loading--city { background: #10191f; overflow: hidden; }
-.page-loading.page-loading--city::before { content: none; }
+.page-loading.page-loading--city{
+& { background: #10191f; overflow: hidden; }
+&::before { content: none; }}
 body:has(.page-loading--city:not(.leaving)) #overlay:has(.studio-unified) { visibility: hidden; }
-.page-loading--city::after {
-  content: attr(data-loading-detail); position: absolute; top: 72%;
-  color: #c2c5c8; font: 14px/1.8 var(--font-ui); letter-spacing: .1em; z-index: 40;
-}
 .page-loading.page-loading--city.leaving { background: transparent; animation: none; }
-.page-loading--city.leaving::after { content: none; }
+/* Keep the photographic exposure close to the gallery's subdued room light. */
+.page-loading--city .silent-node-cut[data-film-kind="photo"] > .silent-film-scenery {
+  filter:brightness(.78);
+}
+.page-loading--city .silent-node-cut[data-film-kind="photo"] {
+  background:#242723!important;
+}
 .reduce-motion .page-loading *, .reduce-motion .page-loading.leaving { animation: none; }
 @media (prefers-reduced-motion: reduce) {
   .page-loading *, .page-loading.leaving { animation: none; }

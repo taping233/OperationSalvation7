@@ -30,7 +30,7 @@ async function loadCommands({ initialize = false, lockManager = locks, failpoint
   });
   if (initialize) {
     RunStorage.readForLoad(slotId);
-    expect(RunStorage.write(slotId, {
+    expect(await RunStorage.write(slotId, {
       turn: 7, layerIdx: node.layerIdx, trackPos: node.trackPos, visited: {}, battleComplete: false,
       ownedCards: [{ uid: 'starter', card: { id: 'starter', name: '起始牌' } }],
       rngState: { loot: 12, map: 41 }, mapSnapshot: { seed: 'stable-map', layoutVersion: 1 }, elapsed: 17,
@@ -228,7 +228,7 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     env.Base.data.coins += 1;
     expect(await env.Base.save()).toBe(true);
     const currentRun = env.RunStorage.read(slotId);
-    expect(env.RunStorage.write(slotId, { ...currentRun, turn: 9 })).toBe(true);
+    expect(await env.RunStorage.write(slotId, { ...currentRun, turn: 9 })).toBe(true);
   });
 
   it('同requestId但节点业务payload不同会冲突；坏日志保留双存档现场', async () => {
@@ -269,7 +269,7 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     let env = await loadCommands();
     const runAttempt = await prepare(env);
     const run = env.RunStorage.read(slotId);
-    expect(env.RunStorage.write(slotId, { ...run, turn: 99 })).toBe(true);
+    expect(await env.RunStorage.write(slotId, { ...run, turn: 99 })).toBe(true);
     expect(await env.commands.commitAttempt(runAttempt.attempt)).toMatchObject({ ok: false, code: 'STALE_RUN' });
     expect(env.Base.data.eggBattles).toBe(0);
 
@@ -285,9 +285,9 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     activeSlot = 2;
     expect(await env.commands.commitAttempt(oldRunAttempt.attempt)).toMatchObject({ ok: false, code: 'STALE_SLOT' });
     activeSlot = slotId;
-    expect(env.RunStorage.remove(slotId)).toBe(true);
+    expect(await env.RunStorage.remove(slotId)).toBe(true);
     env.RunStorage.readForLoad(slotId);
-    expect(env.RunStorage.write(slotId, { turn: 0, layerIdx: 0, trackPos: 1, visited: {} })).toBe(true);
+    expect(await env.RunStorage.write(slotId, { turn: 0, layerIdx: 0, trackPos: 1, visited: {} })).toBe(true);
     expect(await env.commands.commitAttempt(oldRunAttempt.attempt)).toMatchObject({ ok: false, code: 'STALE_RUN' });
     expect(env.Base.data.eggBattles).toBe(0);
   });

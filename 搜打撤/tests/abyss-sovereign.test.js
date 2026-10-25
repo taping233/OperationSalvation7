@@ -1,9 +1,11 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 受缚之残影（tt8-hero-sealer）定版重做（2026-09-16 老板定版，v21/v22）真实战斗实打：
  * 深海封印——BOSS 编组带着时，开局把本牌与封印肢体1-4洗入牌库；5 张封印单卡无效果且
  * 无法打出（普通战无法使用能力卡 → 封印只在 BOSS 战发动）；手牌集齐 5 张 → 化为
  * 「深渊主宰·妲莉薇特」（2 费可打出）：旧日再临——抽到 6 张 / 免疫诅咒 / 能量上限+1 /
  * 法伤+1 / 可注能与必须注能的招式均视为已注能；打出时 5 张封印单卡早已消耗，
  * 并召唤 4 名无攻血封印肢体（同天国之门口径，不自动攻击、不替主人承伤）。 */
+import { createBattleGameFactory, drainBattle } from './helpers/battle-fixtures.js';
 import { describe, it, expect, beforeAll } from 'vitest';
 import { unplayableReasonFor } from '../game/src/battle/effects/battle.target-rules.js';
 
@@ -11,7 +13,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 2, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 2, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -27,43 +29,12 @@ beforeAll(() => {
   C.ensureEffectFields();
 });
 
-let uidSeq = 0;
-function makeGame(cards) {
-  const logs = [];
-  const g = {
-    ownedCards: cards.map(c => ({ uid: 'g' + (uidSeq++), card: c, safe: false })),
-    hp: 99999, maxHp: 99999, atk: 5, spellPower: 2, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
-    lastBattleEnd: null,
-    log(m) { logs.push(String(m).replace(/\[\[[^\]]+\]\]/g, '')); },
-    logs,
-    heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
-    addItem() {},
-    onBattleEnd() {},
-  };
-  return g;
-}
+
+const makeGame = createBattleGameFactory();
 const foeDef = (name) => ({ id: 'infantry', name: name || '靶子', hp: 99999, atk: 1 });
-const tick = () => new Promise(r => setTimeout(r, 0));
-const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 
-async function drain(maxLoops = 400) {
-  for (let i = 0; i < maxLoops; i++) {
-    await tick();
-    const s = snap();
-    if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
-    if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
-    if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return snap();
-}
+const drain = (maxLoops = 400) => drainBattle(BattleSession, maxLoops);
 
 const sealer = () => C.all().find(c => c.id === 'tt8-hero-sealer');
 const sovereign = () => C.all().find(c => c.id === 'tt8-abyss-sovereign');

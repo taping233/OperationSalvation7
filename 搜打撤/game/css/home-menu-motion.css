@@ -1,24 +1,33 @@
 /* Home navigation: matched departures, gentle page reveals, staggered returns.
    Page closing stays within the existing overlay 225ms cleanup window. */
-#title.home-composed[data-home-phase] { animation: none !important; }
+#title.home-composed{
+&[data-home-phase] { animation: none !important; }
 /* Settling a return must not restart the cover's original entry animation. */
-#title.home-composed[data-home-phase="rest"] .home-plate,
-#title.home-composed[data-home-phase="rest"] .home-brand,
-#title.home-composed[data-home-phase="rest"] .home-footer { animation: none !important; }
-#title.home-composed[data-home-phase="out"] .home-primary > .home-plate {
+&[data-home-phase="rest"] .home-plate,
+&[data-home-phase="rest"] .home-brand,
+&[data-home-phase="rest"] .home-footer { animation: none !important; }}
+@media (prefers-reduced-motion: no-preference) {
+body:not(.reduce-motion) #title#title#title.home-composed[data-home-phase="out"]{
+& .home-primary > .home-plate {
   animation: hmMenuLeftOut var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both !important;
 }
-#title.home-composed[data-home-phase="out"] .home-secondary > .home-plate {
+& .home-secondary > .home-plate,
+& .home-system > .home-plate {
   animation: hmMenuRightOut var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both !important;
 }
-#title.home-composed[data-home-phase="out"] .home-brand,
-#title.home-composed[data-home-phase="out"] .home-footer {
+& .home-brand,
+& .home-footer {
   animation: hmQuietOut var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both !important;
 }
+& .home-plate.is-picked {
+  animation: hmPickedOut var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both !important;
+}
 /* 入场方向由 surface-motion 管理；分档时长与顺序由 home-menu-motion.js 提供。 */
-#title.home-composed[data-home-phase="out"] .home-primary,
-#title.home-composed[data-home-phase="out"] .home-secondary,
-#title.home-composed[data-home-phase="out"] .home-footer { pointer-events: none; }
+& .home-primary,
+& .home-secondary,
+& .home-system,
+& .home-footer { pointer-events: none; }}
+}
 /* A covered title still needs its finite departure to finish; ambient effects stay paused. */
 body.page-covered #title.home-composed[data-home-phase] .home-plate,
 body.page-covered #title.home-composed[data-home-phase] .home-brand,
@@ -26,58 +35,63 @@ body.page-covered #title.home-composed[data-home-phase] .home-footer { animation
 @keyframes hmMenuLeftOut { to { opacity: 0; transform: translateX(-18px) scale(.985); } }
 @keyframes hmMenuRightOut { to { opacity: 0; transform: translateX(18px) scale(.985); } }
 @keyframes hmQuietOut { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes hmPickedOut { 0% { opacity: 1; transform: none; } 30% { opacity: 1; transform: scale(.985); } 100% { opacity: 0; transform: translateY(-4px) scale(.99); } }
 @keyframes hmQuietIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 @keyframes hmLayerIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes hmLayerOut { to { opacity: 0; } }
+#title.home-composed .home-credits-dialog{
 
-#title.home-composed .home-credits-dialog[open][data-home-motion="out"] {
+&[open][data-home-motion="out"] {
   pointer-events: none;
 }
-#title.home-composed .home-credits-dialog[data-home-motion="in"]::backdrop { animation: hmLayerIn var(--motion-region-enter,360ms) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1)) both; }
-#title.home-composed .home-credits-dialog[data-home-motion="out"]::backdrop { animation: hmLayerOut var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both; }
+&[data-home-motion="in"]::backdrop { animation: hmLayerIn var(--motion-region-enter,360ms) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1)) both; }
+&[data-home-motion="out"]::backdrop { animation: hmLayerOut var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both; }}
 
 /* This native dialog is nested in the departing title, but owns its region phase. */
-#title #homeCredits > form { position: absolute; left: 25px; top: 22px; }
-#title #homeCredits > form .home-credits-back { position: static; }
+#title #homeCredits > form{
+& { position: absolute; left: 25px; top: 22px; }
+& .home-credits-back { position: static; }}
 /* 名单的外框、标题与姓名动画由 title-credits.css 管理。 */
 
 @media (prefers-reduced-motion: no-preference) {
   /* 壁纸保持可见；先展开左侧主操作，再展开右侧收藏与系统。 */
-  body:not(.reduce-motion) #title#title.home-composed[data-home-scene-ready]:not(.wallpaper-only) .home-scene {
+body:not(.reduce-motion) #title#title.home-composed{
+  &[data-home-scene-ready]:not(.wallpaper-only) .home-scene {
     animation: homeDrift 48s ease-in-out infinite alternate;
   }
-  body:not(.reduce-motion) #title#title.home-composed[data-home-reveal] .title-inner {
+  &[data-home-reveal] .title-inner {
     opacity: 1; visibility: visible; transform: none; transition: none;
   }
-  body:not(.reduce-motion) #title#title.home-composed[data-home-reveal] .home-command {
+  &[data-home-reveal] .home-command {
     animation: homeRestoreLeft var(--home-console-duration,640ms) cubic-bezier(.2,.72,.25,1) both;
   }
-  body:not(.reduce-motion) #title#title.home-composed[data-home-reveal] .home-support {
+  &[data-home-reveal] .home-support {
     animation: homeRestoreRight var(--home-console-duration,640ms) cubic-bezier(.2,.72,.25,1) var(--home-console-delay,280ms) both;
   }
-  body:not(.reduce-motion) #title#title.home-composed[data-home-reveal="b"] .home-command { animation-name: homeRestoreLeftB; }
-  body:not(.reduce-motion) #title#title.home-composed[data-home-reveal="b"] .home-support { animation-name: homeRestoreRightB; }
-  body:not(.reduce-motion) #title#title#title.home-composed[data-home-reveal] :is(.home-brand,.home-plate)[data-surface-block] {
+  &[data-home-reveal="b"] .home-command { animation-name: homeRestoreLeftB; }
+  &[data-home-reveal="b"] .home-support { animation-name: homeRestoreRightB; }}
+body:not(.reduce-motion) #title#title{
+  &#title.home-composed[data-home-reveal] :is(.home-brand,.home-plate)[data-surface-block] {
     animation: homeRestoreItem var(--home-enter-duration,440ms) var(--home-ui-ease) var(--home-enter-delay,0ms) both !important;
   }
-  body:not(.reduce-motion) #title#title.home-composed[data-home-reveal] :is(.home-command,.home-support)::before { animation: none !important; }
-  body:not(.reduce-motion) #title#title#title.home-composed[data-home-reveal] .home-footer[data-surface-block] {
+  &.home-composed[data-home-reveal] :is(.home-command,.home-support)::before { animation: none !important; }
+  &#title.home-composed[data-home-reveal] .home-footer[data-surface-block] {
     animation: homeRestoreFooter var(--home-enter-duration,440ms) var(--home-ui-ease) var(--home-enter-delay,880ms) both !important;
   }
-  body:not(.reduce-motion) #title#title#title.home-composed[data-home-reveal] .home-readout[data-surface-block] {
+  &#title.home-composed[data-home-reveal] .home-readout[data-surface-block] {
     animation: homeRestoreReadout var(--home-enter-duration,440ms) var(--home-ui-ease) var(--home-enter-delay,820ms) both !important;
   }
-  body:not(.reduce-motion) #title#title.home-composed[data-home-reveal] .home-primary,
-  body:not(.reduce-motion) #title#title.home-composed[data-home-reveal] .home-secondary { pointer-events: none; }
+  &.home-composed[data-home-reveal] .home-primary,
+  &.home-composed[data-home-reveal] .home-secondary { pointer-events: none; }}
 }
-@keyframes homeRestoreLeft { from { opacity: 0; transform: translateX(-120px); } to { opacity: 1; transform: none; } }
-@keyframes homeRestoreLeftB { from { opacity: 0; transform: translateX(-120px); } to { opacity: 1; transform: none; } }
-@keyframes homeRestoreRight { from { opacity: 0; transform: translateX(120px); } to { opacity: 1; transform: none; } }
-@keyframes homeRestoreRightB { from { opacity: 0; transform: translateX(120px); } to { opacity: 1; transform: none; } }
-@keyframes homeRestoreFooter { from { opacity: 0; transform: translateX(-56px); } to { opacity: 1; transform: none; } }
-@keyframes homeRestoreReadout { from { opacity: 0; transform: translateX(56px); } to { opacity: 1; transform: none; } }
-@keyframes homeRestoreItem { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes homeRestoreLeft { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: none; } }
+@keyframes homeRestoreLeftB { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: none; } }
+@keyframes homeRestoreRight { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
+@keyframes homeRestoreRightB { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
+@keyframes homeRestoreFooter { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
+@keyframes homeRestoreReadout { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+@keyframes homeRestoreItem { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 body.reduce-motion #title.home-composed[data-home-phase] *,
 body.reduce-motion #title.home-composed .home-credits-dialog[data-home-motion]::backdrop {

@@ -1,10 +1,10 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT ||= {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 9, battleHandMax: 20, bossDeckSize: 15,
-  starterSha: 0, battleStartDraw: 0, battleTurnDraw: 0, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(9, 20, 15, 0, 0, 0) }, items: {} };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const engine = await import('../game/src/battle/core/battle.engine.js');

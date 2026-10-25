@@ -15,6 +15,8 @@ export class SceneMusicPlayer {
     this.desired = null;
     this.enabled = false;
     this.volume = 0;
+    this.bookmarks = new Map();
+    this.bookmarkTtlMs = 120000;
   }
 
   playing() { return !!this.current?.track.playing(); }
@@ -24,7 +26,7 @@ export class SceneMusicPlayer {
     this.onStateChange();
   }
 
-  setState(scene, { enabled, volume, immediate = false }) {
+  setState(scene, { enabled, volume, immediate = false, preservePosition = false }) {
     const changed = this.desired !== scene || this.enabled !== enabled;
     const gainChanged = this.volume !== volume;
     if (changed) { this.failedScene = null; this.lastError = null; }
@@ -33,8 +35,9 @@ export class SceneMusicPlayer {
     this.volume = volume;
     if (!this.enabled || !scene) {
       // 静音同时卸载排队/解锁中的音轨，避免恢复上下文后执行旧播放请求。
+      if (!preservePosition) this.bookmarks.clear();
       for (const entry of [...this.entries.values()]) {
-        if (immediate) this.release(entry);
+        if (immediate) this.release(entry, { preservePosition });
         else this.fadeOut(entry);
       }
       if (immediate) this.current = null;
@@ -113,6 +116,11 @@ export class SceneMusicPlayer {
     track.mute(false);
     entry.targetVolume = this.volume;
     if (!track.playing()) {
+      const bookmark = this.bookmarks.get(entry.scene);
+      this.bookmarks.delete(entry.scene);
+      if (bookmark && Date.now() - bookmark.at <= this.bookmarkTtlMs) {
+        try { track.seek?.(bookmark.position); } catch { /* Playback remains available from the beginning. */ }
+      }
       track.volume(0); entry.starting = true;
       track.play(); // Only a real play callback may retire the previous audible track.
     } else this.commit(entry);
@@ -177,7 +185,13 @@ export class SceneMusicPlayer {
     }, this.fadeOutMs + 32);
   }
 
-  release(entry) {
+  release(entry, { preservePosition = false } = {}) {
+    if (preservePosition && entry.confirmed) {
+      try {
+        const position = entry.track.seek?.();
+        if (typeof position === 'number' && Number.isFinite(position) && position >= 0) this.bookmarks.set(entry.scene, { position, at: Date.now() });
+      } catch { /* A track without a readable position restarts normally. */ }
+    }
     this.cancel(entry);
     entry.starting = false;
     entry.track.pause();
@@ -190,6 +204,7 @@ export class SceneMusicPlayer {
   dispose() {
     this.enabled = false;
     this.desired = null;
+    this.bookmarks.clear();
     for (const entry of [...this.entries.values()]) this.release(entry);
     this.current = null;
   }

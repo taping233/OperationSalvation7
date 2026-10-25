@@ -72,28 +72,39 @@ function normalizeObjField(d, key, fallback) {
 
 // 把原始 JSON 补齐为完整基地数据（读取 / 概览共用）
 export function normalizeBaseState(raw) {
-  const d = Object.assign(createBaseState(), raw, {
+  const defaults = createBaseState();
+  const d = Object.assign({}, defaults, raw, {
     stash: Array.isArray(raw.stash) ? raw.stash : [],
     pocket: Array.isArray(raw.pocket) ? raw.pocket : [],
   });
   // F1（2026-09-24）：容器字段类型兜底。stats/characters/classes/pets/home 等在
   // peek/use/终局提交全链路被解引用或赋属性，写坏即 TypeError（JSON 语法坏已有
   // corrupt 备份口径，这里补齐「JSON 合法但字段类型坏」的缺口：可读、可渲染、不写回）。
-  normalizeObjField(d, 'stats', createBaseState().stats);
-  normalizeObjField(d, 'characters', {});
-  normalizeObjField(d, 'classes', {});
-  normalizeObjField(d, 'pets', {});
-  normalizeObjField(d, 'home', createBaseState().home);
-  normalizeObjField(d, 'appearance', createBaseState().appearance);
-  normalizeObjField(d, 'goals', createBaseState().goals);
-  normalizeObjField(d, 'story', createBaseState().story);
-  normalizeObjField(d, 'achClaimed', {});
   // 字符串 id 写入数组不会进入 JSON；领取/收藏记录必须保留为对象字典。
-  normalizeObjField(d, 'collection', {});
-  normalizeObjField(d, 'collClaimed', {});
-  normalizeObjField(d, 'collXp', {});
-  normalizeObjField(d, 'backs', { classic: true });
-  mergeDef(d, createBaseState());
+  for (const key of ['stats', 'characters', 'classes', 'pets', 'home', 'appearance',
+    'goals', 'story', 'achClaimed', 'collection', 'collClaimed', 'collXp', 'backs']) {
+    normalizeObjField(d, key, defaults[key] || {});
+  }
+  // A valid progress dictionary can still contain an invalid individual record.
+  // Remove those before legacy migration so intact old class progress can fill it.
+  for (const group of ['characters', 'classes']) {
+    for (const [id, progress] of Object.entries(d[group] || {})) {
+      if (!isPlainObj(progress)) {
+        console.warn(`[base] 存档字段 ${group}.${id} 类型损坏，已回落默认进度`);
+        delete d[group][id];
+      } else {
+        if (!Number.isInteger(progress.lv) || progress.lv < 1) progress.lv = 1;
+        if (!Number.isFinite(progress.xp) || progress.xp < 0) progress.xp = 0;
+      }
+    }
+  }
+  for (const [id, pet] of Object.entries(d.pets)) {
+    if (!isPlainObj(pet)) {
+      console.warn(`[base] 存档字段 pets.${id} 类型损坏，已忽略无效记录`);
+      delete d.pets[id];
+    } else if (!Number.isInteger(pet.lv) || pet.lv < 1) pet.lv = 1;
+  }
+  mergeDef(d, defaults);
   if (!Array.isArray(d.stats.bossKills)) d.stats.bossKills = [];
   if (!Array.isArray(d.stats.nestBossKills)) d.stats.nestBossKills = [];
   if (typeof d.stats.reviveKills !== 'number') d.stats.reviveKills = 0;
@@ -104,7 +115,7 @@ export function normalizeBaseState(raw) {
   if (typeof d.nestUnlocked !== 'boolean') d.nestUnlocked = false;
   d.backs.classic = true;   // 默认卡背永远可用
   if (!d.backSel || !d.backs[d.backSel]) d.backSel = 'classic';
-  if (!d._m01 || typeof d._m01 !== 'object') d._m01 = { revision: 0, requests: {} };
+  if (!isPlainObj(d._m01)) d._m01 = { revision: 0, requests: {} };
   if (!Number.isInteger(d._m01.revision) || d._m01.revision < 0) d._m01.revision = 0;
   if (!d._m01.requests || typeof d._m01.requests !== 'object' || Array.isArray(d._m01.requests)) d._m01.requests = {};
   return migrateCharacterProgress(d);

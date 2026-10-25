@@ -1,3 +1,4 @@
+import { battleViewMocks, overlayElements, frameMocks, inventoryFields, mountBattleRoot } from './helpers/environment-fixtures.js';
 /* 反馈12条·B组（10）：敌方负面状态图标——施加到敌人身上的每一个状态，
  * 名牌角标都必须同时给出图标与文案，不能出现「有状态没图标」。 */
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
@@ -7,8 +8,7 @@ vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
   waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }),
 }));
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
-  attach: () => Promise.resolve(false), hide() {}, cacheStats: () => ({}), play() {},
-  setPaused() {}, presentDeath() {}, isLiveBattleFigure: () => false, actionImpactRemaining: () => null,
+  ...frameMocks(),
 }));
 // 真实图标口径：[[icon:key]] 必须被解析成 <img>，测试据此断言「图标真的出了」。
 const rich = value => String(value || '').replace(/\[\[icon:([^\]]+)\]\]/g, (_m, key) => `<img class="ic" data-icon="${key}" alt="">`);
@@ -18,10 +18,7 @@ const UI = {
   hideOverlay() { this.el.overlay.hidden = true; document.dispatchEvent(new Event('sdt-overlay-close')); },
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 9, 99, 5, 5),
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession, commands, Combat } = await import('../game/src/battle/core/battle.core.js');
@@ -47,8 +44,7 @@ async function settle() {
 async function start() {
   game = {
     ownedCards: [{ uid: 'status-bandage', card: structuredClone(catalog.find(card => card.id === 'tt3-bandage')) }],
-    inventory: [], usedPocket: [], hp: 60, maxHp: 80, atk: 4, spellPower: 1, coins: 0, myClass: '法师',
-    state: 'idle', battleActive: false, log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
+    ...inventoryFields(60, 80, 1, '法师'), log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
   };
   window.SDT.game = game;
   BattleSession.start(game, [{ id: 'unit-target', name: '训练靶', hp: 120, atk: 3 }], { isBoss: false });
@@ -57,15 +53,13 @@ async function start() {
   return { ...snapshot, equipped: [], allies: [], foes: [{ ...snapshot.foes[0], status: {} }] };
 }
 function paint(snapshot, ctx = {}) {
-  updateUnits(mountUnitLayer(UI.el.ovBody, snapshot.battleToken), snapshot, ctx);
+  updateUnits(mountUnitLayer(UI.el.ovBody, snapshot.battleToken), snapshot, {turn:snapshot.turn,playerStatus:snapshot.pstat.status,...ctx});
 }
 beforeEach(() => {
   frames = [];
   vi.spyOn(window, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
-  Element.prototype.animate = () => ({ finished: Promise.resolve(), cancel() {}, onfinish: null });
-  localStorage.setItem('sdt-intent-legend', '1');
-  document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  mountBattleRoot();
+  UI.el = { ...overlayElements() };
   UI._lastMode = null;
 });
 afterEach(async () => {
@@ -74,61 +68,22 @@ afterEach(async () => {
   UI.hideOverlay(); frames = []; Element.prototype.animate = originalAnimate; vi.restoreAllMocks();
 });
 
-it('施加到敌人身上的每个诅咒都渲染出图标角标', async () => {
-  const snapshot = await start();
-  const all = [...Combat.CURSES, ...Combat.BUFFS];
-  expect(all.length).toBeGreaterThanOrEqual(16);
-  // 一次全挂：任一状态缺图标都会让下面的逐键断言失败
-  snapshot.foes[0].status = Object.fromEntries(all.map(key => [key, key === 'atkDown' || key === 'stealth' ? 2 : 1]));
-  paint(snapshot);
-  const plate = foes()[0].querySelector('.sts-chips');
-  expect(plate, '状态角标容器存在').not.toBeNull();
-  for (const key of all) {
-    const chip = plate.querySelector(`.bt-curse.c-${key}, .bt-buff.b-${key}`);
-    expect(chip, `${key} 有角标`).not.toBeNull();
-    const icon = chip && chip.querySelector('img.ic');
-    expect(icon, `${key} 角标带图标`).not.toBeNull();
-    expect(icon && icon.getAttribute('data-icon'), `${key} 图标名`).toBeTruthy();
-    expect(chip.textContent.trim().length, `${key} 角标带文案`).toBeGreaterThan(0);
-  }
-  // 未解析的图标标记=玩家会看到裸文本 [[icon:x]]
-  expect(plate.innerHTML).not.toContain('[[icon:');
-  // 逐键增删同步：先清空再单独挂一个，验证没有被前一状态的签名缓存吞掉
-  for (const key of all) {
-    snapshot.foes[0].status = { [key]: 1 };
-    paint(snapshot);
-    const chips = [...foes()[0].querySelectorAll('.sts-chips .bt-curse, .sts-chips .bt-buff')];
-    expect(chips.map(el => el.className.split(' ')[1]), `${key} 单挂时角标`)
-      .toEqual([Combat.CURSES.includes(key) ? `c-${key}` : `b-${key}`]);
-    expect(chips[0].querySelector('img.ic'), `${key} 单挂带图标`).not.toBeNull();
-  }
+it('敌方名称详情显示全部生效状态，逐键刷新且不残留',async()=>{
+ const snapshot=await start(),all=[...Combat.CURSES,...Combat.BUFFS];expect(all.length).toBeGreaterThanOrEqual(16);
+ const metadata=key=>Combat.CURSE_META[key]||Combat.BUFF_META[key];
+ snapshot.foes[0].status=Object.fromEntries(all.map(key=>[key,1]));paint(snapshot);
+ const head=()=>foes()[0].querySelector('.sts-headrow[data-ui-tip]');
+ expect(head().tabIndex).toBe(0);
+ for(const key of all)expect(head().dataset.uiTipText).toContain(metadata(key).name);
+ for(const key of all){snapshot.foes[0].status={[key]:1};paint(snapshot);expect(head().dataset.uiTipText).toContain(metadata(key).name);for(const other of all.filter(k=>k!==key))expect(head().dataset.uiTipText).not.toContain(metadata(other).name+' ');}
+ expect(head().dataset.uiTipText).not.toContain('[[icon:');
 });
-
-it('标记类负面状态（腐化/契约回响）同样出图标角标', async () => {
-  const snapshot = await start();
-  for (const patch of [
-    { rotSeedMarked: true, label: '腐化标记' },
-    { deathBurst: { status: 'poison', multiplier: 1 }, label: '腐化标记' },
-    { damageEcho: { amount: 2, dmgType: 'true', recursive: false }, label: '契约回响' },
-    { soulContractMarked: true, label: '契约回响' },
-  ]) {
-    snapshot.foes[0].status = {};
-    snapshot.foes[0].rotSeedMarked = false;
-    snapshot.foes[0].deathBurst = null;
-    snapshot.foes[0].damageEcho = null;
-    snapshot.foes[0].soulContractMarked = false;
-    Object.assign(snapshot.foes[0], patch);
-    paint(snapshot);
-    const plate = foes()[0].querySelector('.sts-chips');
-    const chip = plate && plate.querySelector('.bt-affix');
-    expect(chip, `${patch.label} 角标存在`).not.toBeNull();
-    expect(chip.querySelector('img.ic'), `${patch.label} 带图标`).not.toBeNull();
-    expect(chip.textContent, `${patch.label} 文案`).toContain(patch.label);
-  }
-  // 同一卡的两种标记写法不重复出角标
-  snapshot.foes[0].rotSeedMarked = true;
-  snapshot.foes[0].deathBurst = { status: 'poison', multiplier: 1 };
-  snapshot.foes[0].damageEcho = null; snapshot.foes[0].soulContractMarked = false;
-  paint(snapshot);
-  expect([...foes()[0].querySelectorAll('.sts-chips .bt-affix')].map(el => el.textContent.trim())).toEqual(['腐化标记']);
+it('腐化与契约回响在名称详情中各出现一次',async()=>{
+ const snapshot=await start();
+ for(const patch of [{rotSeedMarked:true,label:'腐化标记'},{deathBurst:{status:'poison',multiplier:1},label:'腐化标记'},{damageEcho:{amount:2,dmgType:'true'},label:'契约回响'},{soulContractMarked:true,label:'契约回响'}]){
+ Object.assign(snapshot.foes[0],{status:{},rotSeedMarked:false,deathBurst:null,damageEcho:null,soulContractMarked:false},patch);paint(snapshot);
+ expect(foes()[0].querySelector('.sts-headrow').dataset.uiTipText).toContain(patch.label);
+ }
+ Object.assign(snapshot.foes[0],{rotSeedMarked:true,deathBurst:{status:'poison',multiplier:1},damageEcho:null,soulContractMarked:false});paint(snapshot);
+ expect(foes()[0].querySelector('.sts-headrow').dataset.uiTipText.split('腐化标记')).toHaveLength(2);
 });

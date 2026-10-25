@@ -139,14 +139,14 @@ describe('known map travel path', () => {
     game.state = 'moving';
     renderExpeditionPanel(null, game, icon => icon);
     expect(document.querySelector('.expedition-map-preview').dataset.nodeState).toBe('moving');
-    expect(document.querySelector('.expedition-preview-status').textContent).toContain('2/2');
+    expect(document.querySelector('.expedition-preview-badge').textContent).toContain('2/2');
     expect(document.querySelector('[data-route-enter]').disabled).toBe(true);
     game.trackPos = 2;
     game.state = 'idle';
     setMapTravelPresentation(game, { path: [target(0), target(1), target(2)], segmentIndex: 2, progress: 1, phase: 'arrived' });
     renderExpeditionPanel(null, game, icon => icon);
     expect(document.querySelector('.expedition-map-preview').dataset.nodeState).toBe('current');
-    expect(document.querySelector('.expedition-preview-status').textContent).toBe('已抵达');
+    expect(document.querySelector('.expedition-preview-badge').textContent).toContain('已抵达');
     expect(document.querySelector('[data-route-enter]').disabled).toBe(false);
   });
 });

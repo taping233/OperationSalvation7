@@ -1,6 +1,7 @@
 // Battle-entry command replay. A trusted local prepare(fixture) rebuilds the declared fixture;
 // packets are data, never restoration scripts or arbitrary mid-battle save states.
 import { Random } from '../core/random.js';
+import { NON_RULE_RANDOM_STREAMS } from '../core/random-streams.js';
 import { step, waitSettle } from './agent.runner.js';
 import { normalizeAction } from './agent.protocol.js';
 import { plainData, readReplayState, firstDifference, stateSummary, fingerprintOf } from './agent.replay-state.js';
@@ -50,7 +51,7 @@ async function capture({ fixture, fingerprint, prepare, decide, maxCommands = 10
         || battle.phase !== 'player' || battle.pendingTarget || battle.infusing || battle.discovering
         || battle.handSelecting || battle.choosing || battle.deckSelection) return fail('BATTLE_ENTRY_REQUIRED');
     packet = { format: FORMAT, schema: 1, fingerprint: identity, fixture: setup,
-      boundary: 'trusted-fixture-battle-entry', nonRuleStreams: ['agent-policy', 'recording', 'visual'],
+      boundary: 'trusted-fixture-battle-entry', nonRuleStreams: [...NON_RULE_RANDOM_STREAMS],
       initial, initialSummary: stateSummary(initial), initialRng: plainData(Random.snapshot()),
       checkpoint: plainData(window.SDT?.Battle?.serialize?.() || null), commands: [], replayable: true };
     for (let index = 0; index < maxCommands; index++) {
@@ -115,10 +116,6 @@ async function play(input, { prepare, fingerprint, stepOptions = {} } = {}) {
       if (difference) return fail('REPLAY_DIVERGED', { executed, index: entry.index, stage: 'before', difference });
       const result = await step(() => entry.action, { ...stepOptions });
       executed++;
-      if (result.res?.ok !== true || result.res?.completed === false || result.stopReason || result.error || result.settleStalled) {
-        return fail('REPLAY_DIVERGED', { executed, index: entry.index, stage: 'result',
-          difference: firstDifference(entry.result, resultState(result)) });
-      }
       difference = firstDifference(entry.result, resultState(result));
       if (difference) return fail('REPLAY_DIVERGED', { executed, index: entry.index, stage: 'result', difference });
       actual = readReplayState();

@@ -1,6 +1,8 @@
 <!-- 由 A1 波只读盘点生成（2026-09-25）；数据源：node 实测播种管线（cards.data.js + cards-sync.json，272 张）。 -->
 # 卡牌规则 schema v2 设计地基 —— 效果语义盘点（2026-09-25）
 
+> 历史快照：本文名称、效果及数量对应2026-09-25盘点，不代表现行卡库；当前事件名称和选择见[玩家规则](../rules.md)与 `game/src/cards/cards.data.js` 的 EVENTS_0919 定义。
+
 > 定位：为「卡牌规则化战役」A1 波 schema v2 设计提供实测地基。全文数字均由脚本实测（播种管线模拟 + 逐卡归组），非拍脑袋。
 > 口径：**现役卡池** = 空库冷启动按 `cards.js ensureTabletop()` 顺序播种（TT1–TT8→TT9 图鉴→TT10 同步→CC 整合→TT11 同步→cards-sync live→EVENTS_0919→TT12）+ 各 `ensure*Rules` 规则回填后的库面（272 张）。cards-sync.json 只是同步/退役层，真源按批内联定义。
 > `battle.layers.js` 正被另一代理在途修改：本文涉及它的结论仅 1 处（cc-cursed-blade），已标注「在途」。

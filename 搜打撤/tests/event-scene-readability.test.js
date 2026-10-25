@@ -1,10 +1,10 @@
-import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
 import { eventSceneHTML } from '../game/src/ui/node-scene-view.js';
+import { readCssSource } from './helpers/css-source.js';
 
-const css = postcss.parse(readFileSync(resolve('game/css/entry-events.css'), 'utf8'));
+const css = postcss.parse(readCssSource(resolve('game/css/entry-events.css'), 'utf8'));
 const shell = '#overlay .card.page .event-themed';
 const page = '#overlay .card.page .pg.node-pg.event-themed';
 const node = '#overlay .card.page .pg.node-pg.event-scene:not(.event-themed)';
@@ -44,7 +44,7 @@ describe('事件共用场景阅读层', () => {
     expect(declarations(`${page} .event-story`).background).toContain('#0a141b');
   });
 
-  it('叙事、后果和裸提示统一22px，标题26px在1188窗口仍可读', () => {
+  it('叙事、后果和裸提示统一22px，标题36px在1188窗口仍可读', () => {
     for (const selector of [
       `${page} .event-narrative`, `${page} .evt-opt > span`,
       `${shell} .node-summary > :is(p,.ov-note,.ov-empty)`, `${shell} .reward-notice`,
@@ -52,7 +52,7 @@ describe('事件共用场景阅读层', () => {
       expect(fontSize(selector)).toBe(22);
       expect(fontSize(selector) * 1188 / 1920).toBeGreaterThanOrEqual(13);
     }
-    expect(fontSize(`${page} .event-story > .pg-head h2`)).toBe(26);
+    expect(fontSize(`${page} .event-story > .pg-head h2`)).toBe(36);
     expect(fontSize(`${page} .evt-opt > b`)).toBe(26);
     expect(declarations(`${shell} .reward-notice:empty`).display).toBe('none');
   });
@@ -111,9 +111,9 @@ describe('非themed节点的长规则阅读边界', () => {
 
   it('四项长规则在限高主区内可滚动，换行与固定页脚避免被长文本挤出', () => {
     expect(declarations(`${node} .event-decisions`)).toMatchObject({
-      'align-self':'center', 'box-sizing':'border-box', 'max-height':'100%', 'min-height':'0', padding:'24px',
+      'align-self':'center', 'box-sizing':'border-box', 'max-height':'100%', 'min-height':'0', padding:'32px',
     });
-    expect(declarations(`${node} .event-decisions`).background).toContain('#0a141b');
+    expect(declarations(`${node} .event-decisions`).background).toContain('#142537');
     expect(declarations(`${node} .event-decisions`).height).toBeUndefined();
     expect(declarations(`${node} .event-decisions > .node-main`)).toMatchObject({
       flex:'0 1 auto', 'min-width':'0', 'min-height':'0', overflow:'auto', 'scrollbar-gutter':'stable',

@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cardBrowserItems, filterCardBrowserItems, selectCardBrowserItems } from '../game/src/ui/card-browser-state.js';
 import { bindCardBrowser, cardBrowserHTML, refreshCardBrowser } from '../game/src/ui/card-browser.js';
+vi.mock('../game/src/ui/region-transition.js',()=>({cancelRegionTransition(){},transitionRegion:async(_root,render)=>{render();return true;}}));
 vi.mock('../game/src/hub/hub.presentation.js', () => ({ bindCardNavigation:vi.fn() }));
 vi.mock('../game/src/hub/base-motion-v4.js', () => ({ animateBaseRefresh:vi.fn() }));
 vi.mock('../game/src/ui/inventory-zoom.js', () => ({ decorateInventoryZoom:vi.fn() }));
@@ -161,19 +162,18 @@ describe('collection and personnel consumers', () => {
     ui.acts.collectionV12Zoom({id:'dup'}); expect(ui.showCardZoom.mock.calls.at(-1)[0]).toBe(last);
     cards.all=()=>[]; ui.acts.collectionV12Zoom({id:'dup'}); expect(ui.showCardZoom.mock.calls.at(-1)[0]).toBe(last);
   });
-  it('personnel repeated filtering leaves pool controls intact and changes only selected controls', () => {
+  it('personnel catalog keeps selection, paging and remount position without filter controls', () => {
     const catalog=Array.from({length:12},(_,i)=>({id:String(i),name:`招式${i}`}));
     window.SDT.Cards={classPool:()=>catalog};
     document.body.innerHTML=`<section class="personnel-v2" data-section="pool"><span data-person-pool-count></span><div class="pool-empty"></div>${cardBrowserHTML('pool-test','招式',catalog.map(card=>`<button class="person-pool-card" data-browser-key="${card.id}" data-id="${card.id}" data-search="${card.name}" data-type="法术" data-recorded="true">${card.name}</button>`).join(''),{rows:1,columns:4})}</section>`;
     bindPersonnel({ui,refresh:vi.fn(),sound:{tick:vi.fn()}});
     const root=document.querySelector('[data-card-browser]'), items=cardBrowserItems(root), observer=mutations(root);
-    for(let i=0;i<20;i++)ui.acts.personPoolType({type:''});
     expect(observer.read()).toHaveLength(0); expect(cardBrowserItems(root)).toEqual(items);
-    ui.acts.personPoolPick({id:'1'}); expect(observer.read()).toHaveLength(4);
+    root.querySelector('[data-browser-key="1"]').click(); expect(observer.read()).toHaveLength(4);
     expect(ui.showCardZoom).toHaveBeenCalledOnce(); observer.stop();
     root.querySelector('[data-browser-page="next"]').click();
     expect(root.querySelector('.card-browser-position').textContent).toBe('2 / 3');
-    ui.acts.personPoolType({type:''});expect(root.querySelector('.card-browser-position').textContent).toBe('2 / 3');
+    expect(ui.acts.personPoolType).toBeUndefined();
     const saved=document.body.innerHTML;document.body.innerHTML=saved;
     bindPersonnel({ui,refresh:vi.fn(),sound:{tick:vi.fn()}});
     expect(document.querySelector('.card-browser-position').textContent).toBe('2 / 3');

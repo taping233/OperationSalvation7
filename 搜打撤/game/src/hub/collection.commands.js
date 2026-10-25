@@ -103,6 +103,15 @@ function createCollectionCommands(deps = {}) {
     cards: deps.cards || (() => (globalThis.window && window.SDT && window.SDT.Cards)),
     applySkin: deps.applySkin || setActiveSkin,
   };
+  const applyCurrentSkin = (context, characterId) => {
+    const base = globalThis.window?.SDT?.Base;
+    if (base?.slot !== context.slotId) return;
+    // Receipts describe their original request; runtime art follows the latest
+    // durable selection, including the default fallback for unavailable artwork.
+    const selected = base.data?.appearance?.selectedSkins?.[characterId] || 'default';
+    const known = (SKIN_FULL_ART[characterId] || []).some(skin => skin.id === selected);
+    io.applySkin(characterId, known ? selected : 'default');
+  };
 
   async function convert(context, input) {
     if (!context || typeof context !== 'object' || !input || typeof input.stackKey !== 'string' ||
@@ -182,7 +191,7 @@ function createCollectionCommands(deps = {}) {
     if (!prior.ok) return prior;
     if (prior.value) {
       const result = unwrapCommit(prior);
-      if (result.ok && globalThis.window?.SDT?.Base?.slot === context.slotId) io.applySkin(character.id, input.skinId);
+      if (result.ok) applyCurrentSkin(context, character.id);
       return result;
     }
     const read = io.readBase(context.slotId);
@@ -217,7 +226,7 @@ function createCollectionCommands(deps = {}) {
       events: [{ type: 'appearance.changed', payload: { characterId: character.id, skinId: input.skinId, assetFallback } }],
     });
     const result = unwrapCommit(committed);
-    if (result.ok && globalThis.window?.SDT?.Base?.slot === context.slotId) io.applySkin(character.id, input.skinId);
+    if (result.ok) applyCurrentSkin(context, character.id);
     return result;
   }
 

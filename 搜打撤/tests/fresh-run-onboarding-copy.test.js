@@ -14,9 +14,8 @@ describe('新档最短目标与模式差异', () => {
     expect(entry.dataset.act).toBe('deploy'); expect(entry.textContent).toContain('首次目标');
     expect(entry.textContent).toContain('后勤使用'); expect(home('standard', true)).not.toContain('首次目标');
     const steps = entry.querySelector('small').textContent;
-    expect(steps.indexOf('撤离带回资源卡')).toBeLessThan(steps.indexOf('后勤使用'));
-    expect(steps.indexOf('后勤使用')).toBeLessThan(steps.indexOf('建设扩建'));
-    expect(steps).toContain('背包留空格');
+    expect(steps).toBe('撤离后，在后勤使用资源卡。');
+    expect(document.querySelector('.base-home-preparation #btnDeploy')).not.toBeNull();
   });
   it('两模式均有就地说明，不把直入敌腹误写成跳过探索', () => {
     expect(home()).toContain('四层探索 · 基础难度');

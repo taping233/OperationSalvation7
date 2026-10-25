@@ -19,6 +19,15 @@ describe('pile display copies and effective card identities', () => {
     expect(stacks[0].uids).not.toBe(source);
   });
 
+  it('groups actual presentation wrappers by effective face while keeping state differences', () => {
+    const source=Object.freeze(Array.from({length:99},(_,i)=>Object.freeze({uid:'pile-'+i,card:Object.freeze({...card,_presentation:Object.freeze({uid:'pile-'+i,temporary:true,transforming:false,baseCost:1})})})));
+    const before=JSON.stringify(source),stacks=buildPileStacks(source);
+    expect(stacks).toHaveLength(1);expect(stacks[0].count).toBe(99);
+    expect(stacks[0].uids).toEqual(source.map(entry=>entry.uid));expect(JSON.stringify(source)).toBe(before);
+    const variant={uid:'permanent',card:{...card,_presentation:{uid:'permanent',temporary:false,transforming:false,baseCost:1}}};
+    expect(buildPileStacks([...source,variant]).map(stack=>stack.count).sort((a,b)=>a-b)).toEqual([1,99]);
+  });
+
   it.each([
     {cost:0}, {dmg:7}, {desc:'额外规则'}, {rarity:'传说'},
     {rules:{triggers:{onPlay:[{op:'draw',amount:2}]}}},
@@ -37,7 +46,7 @@ describe('pile display copies and effective card identities', () => {
     const forward = battlePileBodyHTML({ cards:source, cardHTML:face, kind:'deck' });
     const backward = battlePileBodyHTML({ cards:[...source].reverse(), cardHTML:face, kind:'deck' });
     expect(forward.html).toBe(backward.html);
-    expect(forward.stacks.find(stack => stack.card.id===card.id).count).toBe(2);
+    expect(forward.stacks.filter(stack => stack.card.id===card.id)).toHaveLength(2);
     expect(JSON.stringify(source)).toBe(before);
     expect(forward.html).not.toMatch(/first|second|third|下一张|抽牌顺序|data-uid/);
   });
@@ -46,9 +55,10 @@ describe('pile display copies and effective card identities', () => {
     const root = document.createElement('div');
     root.innerHTML = battlePileBodyHTML({ cards:entries, cardHTML:face, kind }).html;
     expect(root.querySelector('[data-battle-pile-view]').dataset.pileTotal).toBe('99');
-    expect(root.querySelectorAll('.battle-pile-card')).toHaveLength(1);
+    expect(root.querySelectorAll('.battle-pile-card')).toHaveLength(kind==='deck'?99:1);
     expect(root.querySelector('.hs-card').dataset.size).toBe('lg');
-    expect(root.querySelector('.battle-pile-count').textContent).toBe('×99');
+    if(kind==='grave') expect(root.querySelector('.battle-pile-count').textContent).toBe('×99');
+    else expect(root.querySelector('.battle-pile-count')).toBeNull();
     expect(root.querySelector('.battle-pile-card').dataset.act).toBe('btDecisionInspect');
     expect(root.querySelector('.battle-decision-inspect,.battle-pile-note,.battle-pile-context,.ov-stats')).toBeNull();
     expect(root.querySelector('.ov-btns button').dataset.act).toBe(kind==='deck'?'btDeckBack':'btGraveBack');

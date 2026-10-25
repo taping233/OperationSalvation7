@@ -103,13 +103,19 @@ export function resourceRewardAt(game, drawCards) {
 }
 
 const resourceClaims = new WeakSet();
-export function claimResourceReward(record, index, receive) {
+export function claimResourceReward(record, index, receive, received = () => false) {
   if (!record || record.taken !== null || !Number.isInteger(index) || !record.cardIds[index]) return false;
   if (resourceClaims.has(record)) return false;
   resourceClaims.add(record);
   try {
-    if (!receive(record.cardIds[index])) return false;
     record.taken = index;
+    let accepted = false;
+    try { accepted = !!receive(record.cardIds[index]); }
+    catch (error) {
+      if (!received()) { record.taken = null; throw error; }
+      accepted = true;
+    }
+    if (!accepted && !received()) { record.taken = null; return false; }
     return true;
   } finally { resourceClaims.delete(record); }
 }

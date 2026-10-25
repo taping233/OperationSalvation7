@@ -1,3 +1,4 @@
+import { battleViewMocks, overlayElements, frameMocks } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 vi.mock('../game/src/battle/view/battle.presentation-ready.js',()=>({
@@ -5,17 +6,14 @@ vi.mock('../game/src/battle/view/battle.presentation-ready.js',()=>({
   waitForBattleImages:()=>({promise:Promise.resolve(true),cancel(){}}),
 }));
 vi.mock('../game/src/battle/view/battle.frames.js',()=>({
-  attach:()=>Promise.resolve(false),hide(){},cacheStats:()=>({}),play(){},setPaused(){},presentDeath(){},isLiveBattleFigure:()=>false,actionImpactRemaining:()=>null,
+  ...frameMocks(),
 }));
 const rich=value=>String(value||'').replace(/\[\[icon:[^\]]+\]\]/g,'');
 const UI={el:{},_lastMode:null,hideTooltip(){},showTooltip(){},refresh(){},log(){},act(){},
   showOverlay(title,html,mode){this.el.ovBody.innerHTML=rich(html);this.el.overlay.hidden=false;this._lastMode=mode;},
   hideOverlay(){this.el.overlay.hidden=true;document.dispatchEvent(new Event('sdt-overlay-close'));},
 };
-window.SDT={UI,Icons:{img:()=>'',rich,TYPE_ART:{}},Sound:{music(){},sfx(){},setDucked(){},setBoss(){}},
-  Art:{has:()=>false,monsterArt:()=>'',classArt:()=>'',cutoutFigures(){},decodeIn(){},warm(){},collectCardAssets:()=>[]},
-  Meta:{track(){}},Motion:{reduceMotion:()=>false},
-  MAP:{rules:{battleEnergy:9,battleHandMax:99,bossDeckSize:15,starterSha:5,battleStartDraw:5,battleTurnDraw:1},items:{}},
+window.SDT={UI,...battleViewMocks(rich, false, 9, 99, 5, 5),
 };
 await import('../game/src/cards/cards.js');
 const {BattleSession,commands}=await import('../game/src/battle/core/battle.core.js');
@@ -42,7 +40,7 @@ beforeEach(()=>{
   vi.spyOn(window,'requestAnimationFrame').mockImplementation(callback=>{frames.push(callback);return frames.length;});
   Element.prototype.animate=()=>({finished:Promise.resolve(),cancel(){},onfinish:null});
   document.body.innerHTML='<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
-  UI.el={overlay:document.getElementById('overlay'),ovBody:document.getElementById('ovBody'),ovTitle:document.getElementById('ovTitle')};
+  UI.el={...overlayElements()};
   UI._lastMode=null;
 });
 afterEach(async()=>{clearFeedback();if(game?.battleActive)commands.flee();if(game)await settle();frames=[];Element.prototype.animate=originalAnimate;vi.restoreAllMocks();});

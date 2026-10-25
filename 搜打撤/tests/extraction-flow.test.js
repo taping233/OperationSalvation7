@@ -1,3 +1,4 @@
+import { extractionMocks } from './helpers/environment-fixtures.js';
 import { beforeEach, expect, it, vi } from 'vitest';
 
 const altarState = vi.hoisted(() => ({ game: {}, random: vi.fn(() => 0) }));
@@ -25,10 +26,7 @@ vi.mock('../game/src/core/random.js', () => ({
 }));
 vi.mock('../game/src/battle/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
 vi.mock('../game/src/run/game.run.scenes.js', () => ({
-  FIRE_RESTORABLE: [], consumeCurrentCell: vi.fn(), finishInstant: vi.fn(), grantEventCard: vi.fn(),
-  nodeOpt: (act, label) => `<button data-act="${act}">${label}</button>`,
-  nodeShell: ({ body = '', foot = '' }) => window.SDT.UI.showOverlay('', `${body}${foot}`),
-  openPocketRestore: vi.fn(), openShop: vi.fn(), preloadAllNodeShellBgs: vi.fn(), showRunTransition: vi.fn(),
+  ...extractionMocks(() => vi),
 }));
 vi.mock('../game/src/run/game.nest.js', () => ({ unlockNest: vi.fn() }));
 vi.mock('../game/src/hub/game.storage.js', () => ({ RunStorage: {} }));

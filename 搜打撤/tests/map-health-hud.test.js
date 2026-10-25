@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
 import { mountMapHealthHud, updateMapHealthHud } from '../game/src/ui/map-health-hud.js';
+import { readCssSource } from './helpers/css-source.js';
 let control;
 afterEach(() => { control?.dispose(); control = null; vi.useRealTimers(); document.body.innerHTML = ''; });
 function fixture(hp = 30) {
@@ -11,12 +11,38 @@ function fixture(hp = 30) {
   return root;
 }
 describe('地图生命展示', () => {
+  it('统一数字入口保留当前/上限节点，同值更新不重写数字DOM', () => {
+    const root = fixture(), text = root.querySelector('#hpText');
+    const current = text.querySelector('.hp-current'), rest = text.querySelector('.hp-rest');
+    expect(current).not.toBeNull(); expect(rest).not.toBeNull();
+    control.update({ hp:20, maxHp:50 });
+    expect(root.querySelector('#hpText')).toBe(text);
+    expect(text.querySelector('.hp-current')).toBe(current);
+    expect(text.querySelector('.hp-rest')).toBe(rest);
+    expect(current.textContent).toBe('20'); expect(rest.textContent).toBe('/50');
+    const observer = new MutationObserver(() => {});
+    observer.observe(text, { subtree:true, childList:true, characterData:true });
+    control.update({ hp:20, maxHp:50 });
+    expect(observer.takeRecords()).toHaveLength(0); observer.disconnect();
+  });
+  it('缓存命中仍修复被旧入口抹掉的数字格式，inactive也保持准确且不播反馈', () => {
+    const root = fixture(5), text = root.querySelector('#hpText');
+    control.update({ hp:5, maxHp:30, active:false });
+    text.textContent = '旧格式';
+    control.update({ hp:5, maxHp:30, active:false });
+    expect(root.querySelector('#hpText')).toBe(text);
+    expect(text.querySelector('.hp-current')?.textContent).toBe('5');
+    expect(text.querySelector('.hp-rest')?.textContent).toBe('/30');
+    expect(root.querySelector('.map-health-delta').textContent).toBe('');
+    expect(root.dataset.healthActive).toBe('false');
+  });
   it('首次载入低血不播受伤，数字与低血语义可读', () => {
     const root = fixture(5);
     expect(root.classList.contains('health-low')).toBe(true);
     expect(root.classList.contains('health-hurt')).toBe(false);
     expect(root.getAttribute('aria-label')).toBe('生命 5，上限 30，生命偏低');
-    expect(root.querySelector('#mapHealthTip').textContent).toBe('生命值当前 5 / 上限 30');
+    expect(root.querySelector('#mapHealthTip').textContent).toBe('');
+    expect(root.querySelector('#mapHealthTip').hidden).toBe(true);
     expect(root.querySelector('#hpBar').style.width).toBe('16.7%');
   });
   it('伤害与回血仅短促一次，重复刷新不重播，连续变化替换计时', () => {
@@ -47,23 +73,21 @@ describe('地图生命展示', () => {
     control.update({ hp:40, maxHp:30 }); expect(root.querySelector('#hpBar').style.width).toBe('100%');
     control.update({ hp:0, maxHp:0 }); expect(root.querySelector('#hpBar').style.width).toBe('0%');
   });
-  it('触控点击可展开/收起，不触发地图父级指针或点击', () => {
+  it('生命只作信息展示，点击不展开文字或触发地图父级', () => {
     const root = fixture(); const click = vi.fn(), pointer = vi.fn();
     root.parentElement.addEventListener('click', click); root.parentElement.addEventListener('pointerdown', pointer);
     root.dispatchEvent(new Event('pointerdown', { bubbles:true })); root.click();
-    expect(root.getAttribute('aria-expanded')).toBe('true'); expect(click).not.toHaveBeenCalled(); expect(pointer).not.toHaveBeenCalled();
-    root.click(); expect(root.getAttribute('aria-expanded')).toBe('false');
-    root.click(); document.querySelector('#outside').dispatchEvent(new Event('pointerdown', { bubbles:true }));
-    expect(root.getAttribute('aria-expanded')).toBe('false');
+    expect(root.hasAttribute('aria-expanded')).toBe(false); expect(click).not.toHaveBeenCalled(); expect(pointer).not.toHaveBeenCalled();
+    expect(root.getAttribute('role')).toBe('img');
+    expect(root.hasAttribute('tabindex')).toBe(false);
+    expect(root.querySelector('#mapHealthTip').hidden).toBe(true);
   });
-  it('Enter/空格与Escape可用，长按不反复切换，焦点离开关闭', () => {
+  it('键盘输入不再打开冗余的生命说明', () => {
     const root = fixture(); root.focus();
     const key = (key, repeat = false) => root.dispatchEvent(new KeyboardEvent('keydown', { key, repeat, bubbles:true, cancelable:true }));
-    key('Enter'); expect(root.getAttribute('aria-expanded')).toBe('true');
-    key('Enter', true); expect(root.getAttribute('aria-expanded')).toBe('true');
-    key('Escape'); expect(root.dataset.healthDismissed).toBe('true');
-    key(' '); expect(root.getAttribute('aria-expanded')).toBe('true');
-    document.querySelector('#outside').focus(); expect(root.getAttribute('aria-expanded')).toBe('false');
+    key('Enter'); key('Enter', true); key('Escape'); key(' ');
+    expect(root.hasAttribute('aria-expanded')).toBe(false);
+    expect(root.querySelector('#mapHealthTip').hidden).toBe(true);
   });
   it('缺少地图壳时安全跳过，重复刷新只挂一个控件', () => {
     expect(() => updateMapHealthHud(null, {hp:1,maxHp:2})).not.toThrow();
@@ -87,19 +111,24 @@ describe('地图生命展示', () => {
     ctx._lastHpKey = null; game.hp = 30; refresh();
     expect(root.querySelector('.map-health-delta').textContent).toBe('');
     ctx._lastMode = 'battle'; game.hp = 4; refresh();
+    expect(root.dataset.healthActive).toBe('true');
+    root.click(); expect(root.hasAttribute('aria-expanded')).toBe(false);
+    game.runActive = false; refresh();
     expect(root.dataset.healthActive).toBe('false');
+    expect(root.querySelector('#hpText').textContent).toBe('4/30');
+    game.runActive = true;
     ctx._lastMode = 'map'; refresh(); expect(root.classList.contains('health-hurt')).toBe(false);
     expect(game.hp).toBe(4);
   });
   it('生命标签和详情使用可读逻辑字号且只作用新HUD，保持原顶栏高度', () => {
-    const css = readFileSync('game/css/page-expedition-hud.css', 'utf8');
+    const css = readCssSource('game/css/page-expedition-hud.css', 'utf8');
     expect(css).toMatch(/#hpHud\[data-health-hud\] \.map-health-heading\s*\{[^}]*font:500 18px\/20px/);
     expect(css).toContain('#hpHud[data-health-hud] .map-resource-tip { font-size:20px; line-height:1.45; }');
     expect(css).toContain('#hpHud[data-health-hud] .map-resource-tip strong { font-size:20px; line-height:1.4; }');
     expect(css).toContain('#hpHud[data-health-hud] .hp-hud-body { gap:1px; }');
   });
   it('样式关闭旧无限低血动画，系统和游戏减少动态均覆盖血条', () => {
-    const css = readFileSync('game/css/page-expedition-hud.css', 'utf8');
+    const css = readCssSource('game/css/page-expedition-hud.css', 'utf8');
     expect(css).toContain('#topBtns #hpHud[data-health-hud] #hpBarWrap { animation:none; will-change:auto; }');
     expect(css).toContain('body.reduce-motion #topBtns #hpHud[data-health-hud] #hpBar { transition:none; }');
     expect(css).toContain('@media (prefers-reduced-motion:reduce)');

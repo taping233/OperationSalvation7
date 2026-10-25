@@ -1,4 +1,5 @@
-import { rollEventDice } from './helpers/event-dice.js';
+import { overlayElements, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
+import { rollEventDice } from './helpers/event-dice-async.js';
 // 09-30 全仓深审 WORLD 组（世界/UI 流程）修复回归。发现来源：
 // docs/evidence/2026-09-30-full-repository-review/world_ui/findings.json，
 // 复现手法沿用其 repro.test.js（mock 装配同款），断言反转成修复后行为。
@@ -9,11 +10,7 @@ import { JSDOM } from 'jsdom';
 const H = globalThis.__worldRegress = { game: {}, saves: [], cards: [], uid: 0 };
 vi.mock('../game/src/run/game.session.js', () => ({
   game: H.game, MAP: { rules: { fireHeal: 10, fireClassCardChance: 1 }, monsters: {}, altar: { bosses: [] } }, MODES: {},
-  bagCap: () => 9, usedSlots: () => 0, newUid: () => `u${++H.uid}`, pick: a => a[0],
-  saveGame: () => { H.saves.push(JSON.parse(JSON.stringify(H.game))); return true; },
-  scaledEnemy: a => a, getActiveSlot: () => null, curLayer: () => H.game.layerData[H.game.layerIdx],
-  cellCenter: () => ({}), markSeen() {}, modeCfg: () => ({}), gainCoins: n => H.game.coins += n,
-  weighted: a => a[0], enterLayer() {}, exitToTitle() {},
+  bagCap: () => 9, usedSlots: () => 0, ...eventSaveActions(H), getActiveSlot: () => null, ...eventMapActions(H),
 }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick() {}, ding() {} }, _set_cardPageOpen() {}, cardHTML: c => `<span>${c.name}</span>` }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub() {} }));
@@ -28,8 +25,7 @@ beforeAll(async () => {
   window.SDT = { Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
     Cards: { all: () => H.cards, isRandomObtainable: () => true, randomClassCard: () => H.cards[0], cardHTML: c => `<span>${c.name}</span>` } };
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
-  UI = window.SDT.UI = { ...overlayMethods, _acts: {}, _baseActs: {}, _roomActive: true, el: {},
-    act: (name, fn) => UI._acts[name] = fn, refresh() {}, log() {}, showCardReward() {}, _checkPageBg() {},
+  UI = window.SDT.UI = { ...overlayMethods, ...eventUiMocks(() => UI),
   };
   ({ takeBagReturnHook, setBagReturnHook } = await import('../game/src/hub/bag-return-hook.js'));
   scenes = await import('../game/src/run/game.run.scenes.js');
@@ -38,7 +34,7 @@ beforeAll(async () => {
 });
 beforeEach(() => {
   document.body.innerHTML = '<div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  UI.el = { ...overlayElements() };
   UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; setBagReturnHook(null);
   H.cards = [{ id: 'reward', name: '奖励牌', rarity: '职业', type: '武术' }]; H.saves = []; H.uid = 0;
   Object.assign(H.game, { state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, nodeRewards: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 9,
@@ -53,7 +49,7 @@ function closeCoveredBag() {
 }
 
 describe('09-30 深审 WORLD 组修复回归', () => {
-  it('WORLD-005 启动失败条：收起后不再重现，启动成功后轮询真正停止', () => {
+  it('WORLD-005 启动失败条：收起后不再重现，启动成功后轮询真正停止', async () => {
     vi.useFakeTimers();
     const html = fs.readFileSync('game/index.html', 'utf8');
     const source = html.match(/<script>([\s\S]*?)<\/script>/)[1];
@@ -90,7 +86,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(UI.el.ovBody.querySelector('[data-act="closeSettings"]')).not.toBeNull();
   });
 
-  it('WORLD-001 拾取页：背包返回后领取按钮已注册且可领一次', () => {
+  it('WORLD-001 拾取页：背包返回后领取按钮已注册且可领一次', async () => {
     let claimed = 0;
     const onDone = () => { claimed++; };
     scenes.openPickupPage('coin', '+1', onDone, true);
@@ -114,7 +110,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(claimed).toBe(2);
   });
 
-  it('WORLD-002 火堆：从消耗区自动发现两张复原（道具不入池），节点一次性结算', () => {
+  it('WORLD-002 火堆：从消耗区自动发现两张复原（道具不入池），节点一次性结算', async () => {
     H.game.usedPocket = [
       { uid: 'p1', card: { id: 'x1', name: '烬卡一', type: '武术' }, count: 1 },
       { uid: 'p2', card: { id: 'x2', name: '烬卡二', type: '武术' }, count: 1 },
@@ -122,7 +118,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     ];
     altar.openFireRest();
     expect(H.game.hp).toBe(1); // 确认前不结算
-    UI._acts.fireHeal(); UI._acts.fireRestore();
+    await UI._acts.fireHeal(); await UI._acts.fireRestore();
     expect(H.game.hp).toBe(11);   // 回血一次（重入不得重复）
     // 职业卡 + 自动发现两张复原入包；道具卡留在消耗区不可复原（发现顺序随机，排序后比对）
     expect(H.game.ownedCards.map(c => c.card.name).sort()).toEqual(['奖励牌', '烬卡一', '烬卡二'].sort());
@@ -130,17 +126,17 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(H.game.state).toBe('modal'); // 结果页待继续
     expect(H.game.visited['0,1']).toBe(1);
     expect(H.saves.at(-1).ownedCards).toHaveLength(3);
-    UI._acts.fireDone();
+    await UI._acts.fireDone();
     // 已结算节点重进：resolveCell 按 visited 拦截，不再回血/再复原
     flow.reenterCell();
     expect(H.game.hp).toBe(11);
     expect(H.game.ownedCards).toHaveLength(3);
   });
 
-  it('WORLD-002b 火堆空池：只回血掷职业卡并给提示，不再打开复原选牌页', () => {
+  it('WORLD-002b 火堆空池：只回血掷职业卡并给提示，不再打开复原选牌页', async () => {
     altar.openFireRest();
     expect(UI.el.ovBody.querySelector('[data-act="fireHeal"]')).not.toBeNull();
-    UI._acts.fireHeal(); UI._acts.fireRestore();
+    await UI._acts.fireHeal(); await UI._acts.fireRestore();
     expect(H.game.hp).toBe(11);
     expect(H.game.ownedCards).toHaveLength(1);   // 仅职业卡
     expect(H.game.visited['0,1']).toBeUndefined();
@@ -150,24 +146,24 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(UI.el.ovBody.querySelector('[data-act="fireResultCard"]')).not.toBeNull(); // 职业奖励可查看
   });
 
-  it('火堆结果页按实际生命差和复原卡显示，满血不报名义回复', () => {
+  it('火堆结果页按实际生命差和复原卡显示，满血不报名义回复', async () => {
     H.game.hp = H.game.maxHp;
     const restored = { id:'restored', name:'复原样本', type:'武术' };
     H.cards.push(restored);
     H.game.usedPocket = [{ card:restored, count:1 }];
     altar.openFireRest();
-    UI._acts.fireHeal(); UI._acts.fireRestore();
+    await UI._acts.fireHeal(); await UI._acts.fireRestore();
     expect(H.game.nodeRewards['0,1']).toMatchObject({ type:'fire', hpGain:0, hpAfter:H.game.maxHp, restoredIds:['restored'] });
     expect(UI.el.ovBody.textContent).toContain('生命已满');
     expect(UI.el.ovBody.textContent).toContain('已复原 1 张');
     expect(UI.el.ovBody.querySelector('[data-act="fireResultCard"]')).not.toBeNull();
     expect(H.saves.at(-1)).not.toHaveProperty('nodeFeedback');
-    UI._acts.fireDone();
+    await UI._acts.fireDone();
     flow.reenterCell();
     expect(H.game.nodeRewards['0,1'].restoredIds).toEqual(['restored']);
   });
 
-  it('营火说明可展开且无副作用，结果区分复原与额外奖励并保留查看入口', () => {
+  it('营火说明可展开且无副作用，结果区分复原与额外奖励并保留查看入口', async () => {
     const card = { id:'restored-ui', name:'复原牌', type:'武术' };
     H.cards.push(card);
     H.game.usedPocket = [{ card, count:1 }];
@@ -178,7 +174,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     help.open = true;
     expect(JSON.stringify(H.game)).toBe(before);
     expect(UI.el.ovBody.querySelector('[data-act="fireHeal"]').closest('details')).toBeNull();
-    UI._acts.fireHeal(); UI._acts.fireRestore();
+    await UI._acts.fireHeal(); await UI._acts.fireRestore();
     expect([...UI.el.ovBody.querySelectorAll('.fire-result-label')].map(el => el.textContent)).toEqual(['已复原', '额外获得']);
     expect(UI.el.ovBody.querySelectorAll('[data-act="fireResultCard"]')).toHaveLength(2);
     expect(UI.el.ovBody.querySelector('[data-act="fireDone"]').textContent).toContain('继续探索');
@@ -188,10 +184,10 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(UI.el.ovBody.querySelectorAll('[data-act="fireResultCard"]')).toHaveLength(2);
   });
 
-  it('WORLD-002c 火堆池仅 1 张可复原：发现该张即止（池不足两张全复原）', () => {
+  it('WORLD-002c 火堆池仅 1 张可复原：发现该张即止（池不足两张全复原）', async () => {
     H.game.usedPocket = [{ uid: 'p1', card: { id: 'x1', name: '孤卡', type: '武术' }, count: 1 }];
     altar.openFireRest();
-    UI._acts.fireHeal(); UI._acts.fireRestore();
+    await UI._acts.fireHeal(); await UI._acts.fireRestore();
     expect(H.game.ownedCards.map(c => c.card.name)).toEqual(['奖励牌', '孤卡']);
     expect(H.game.usedPocket).toHaveLength(0);
     expect(H.game.visited['0,1']).toBe(1);
@@ -201,7 +197,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
   it('WORLD-003 事件二级选卡页：开关背包不丢已付奖励（付款一次、节点消耗一次）', async () => {
     H.cards = [{ id: 'ev19-quartermaster', type: '事件', name: '装备征用令' }, ...Array.from({ length: 3 }, (_, i) => ({ id: `equip${i}`, name: `装备${i}`, type: '装备', rarity: '古朴' }))];
     H.game.layerData[0].logical[1].def.type = 'event';
-    await flow.runEventDeck(); UI._acts.evtChoice({ i: 0 }); rollEventDice(UI);
+    await flow.runEventDeck(); await UI._acts.evtChoice({ i: 0 }); await rollEventDice(UI);
     expect(H.game.coins).toBe(6); expect(H.game.visited['0,1']).toBe(1);
     const pending = H.game.nodeRewards['0,1'];
     expect(pending).toMatchObject({ type:'event-choice', eventId:'ev19-quartermaster', paidCoins:3, taken:null });
@@ -210,7 +206,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     UI.showOverlay('背包', '<button data-act="closeBag">关闭</button>', 'bagpage'); closeCoveredBag();
     expect(H.game.state).toBe('modal');   // 返回钩子重开选卡页（此前回 idle 且奖励永久丢失）
     expect(UI.el.ovBody.querySelector('[data-act="eventCardPick"]')).not.toBeNull();
-    UI._acts.eventCardPick({ i: 1 });
+    await UI._acts.eventCardPick({ i: 1 });
     expect(H.game.ownedCards).toHaveLength(1);   // 已付的奖励最终到手
     expect(H.saves.at(-1).coins).toBe(6);        // 只扣一次款
     expect(H.game.nodeRewards['0,1']).toMatchObject({ cardIds:candidateIds, paidCoins:3, taken:1 });

@@ -1,0 +1,16 @@
+/* Local recovery remains optional; it never covers the page or blocks navigation. */
+.visual-resource-recovery {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  box-sizing:border-box; max-width:100%; padding:10px 12px; margin-top:10px;
+  color:#d6d7dd; background:#17191ede; border:1px solid #d4d6e329; border-radius:6px;
+  font:400 13px/1.6 "Microsoft YaHei",sans-serif; text-shadow:none;
+  & > span { min-width:0; overflow-wrap:anywhere; }
+  & button { flex-shrink:0; min-height:34px; padding:5px 12px; color:#ececf1;
+    background:#ffffff0b; border:1px solid #ffffff38; border-radius:4px;
+    font:inherit; cursor:pointer; }
+  & button:hover:not(:disabled) { background:#ffffff18; border-color:#ffffff66; }
+  & button:focus-visible { outline:2px solid #e7ddbe; outline-offset:3px; }
+  & button:disabled { opacity:.6; cursor:wait; }
+  &.is-floating { position:absolute; z-index:6; left:18px; right:18px; bottom:18px; margin:0; }
+  &.list-image-recovery { flex-basis:100%; font-family:var(--font-ui,sans-serif); }
+}

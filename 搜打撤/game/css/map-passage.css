@@ -1,11 +1,28 @@
-.map-layer-passage { position:fixed; inset:0; z-index:990; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:linear-gradient(115deg,#101b28,#1e3040); color:#e3edf5; font-family:var(--font-ui,sans-serif); pointer-events:auto; }
-.map-layer-passage::before { content:''; position:absolute; left:0; right:0; top:35%; height:30%; border-block:1px solid #b9cad24d; background:linear-gradient(90deg,transparent,#b9cad20a,transparent); transform:skewY(-4deg); }
-.map-layer-passage small { font-size:14px; color:#9db5c9; letter-spacing:.35em; }
-.map-layer-passage b { font-size:clamp(38px,5vw,70px); font-weight:400; letter-spacing:.2em; }
-.map-layer-passage span { color:#a5bbca; font-size:18px; letter-spacing:.12em; }
-.map-layer-passage > * { animation:mapLayerTextIn 180ms ease both; }
-.map-layer-passage.leaving { pointer-events:auto; animation:mapLayerPassageOut 180ms ease both; }
-@keyframes mapLayerTextIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-@keyframes mapLayerPassageOut { to { opacity:0; } }
+.map-layer-passage.map-layer-passage { position:fixed; inset:0; z-index:990; overflow:hidden; background:#090b0d; pointer-events:auto; }
+.map-layer-passage.map-layer-passage.leaving { background:transparent; }
+.layer-passage-caption {
+  position:absolute; z-index:32; left:9%; top:43%; max-width:27%;
+  color:#d8d3c7; font-family:var(--font-ui,serif); opacity:0;
+}
+.layer-passage-caption small { color:#a49b8d; font-size:12px; letter-spacing:.24em; }
+.layer-passage-caption h2 { margin:14px 0 12px; font-size:clamp(24px,3vw,42px); font-weight:400; letter-spacing:.18em; }
+.layer-passage-caption p { margin:0; color:#a9a69b; font-size:14px; letter-spacing:.12em; }
+.layer-passage-caption::before { content:''; display:block; width:36px; height:1px; margin-bottom:22px; background:#8c5240; }
+.passage-playing .layer-passage-caption { animation:layerPassageCaptionIn 850ms ease-out 650ms both; }
+.map-layer-passage.leaving .layer-passage-caption { animation:none; opacity:0; transition:opacity 360ms ease; }
+@keyframes layerPassageCaptionIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+.map-layer-passage .silent-film-playing [data-film-motion="layer-descent"] > img {
+  animation:layerDescentApproach var(--silent-film-duration,3600ms) cubic-bezier(.2,.55,.3,1) both;
+  transform-origin:50% 57%;
+}
+.map-layer-passage [data-film-motion="layer-descent"] > .sf-shade {
+  display:block; inset:0;
+  background:linear-gradient(#060c164d,transparent 25% 70%,#060c1666),radial-gradient(ellipse,transparent 35%,#060c1655);
+}
+@keyframes layerDescentApproach {
+  0% { opacity:0; transform:scale(1); }
+  16% { opacity:1; }
+  100% { opacity:1; transform:scale(1.085); }
+}
 .reduce-motion .map-layer-passage { display:none; }
-@media(prefers-reduced-motion:reduce) { .map-layer-passage { display:none; } }
+@media (prefers-reduced-motion:reduce) { .map-layer-passage { display:none; } }

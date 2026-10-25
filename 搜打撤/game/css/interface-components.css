@@ -1,0 +1,75 @@
+/* Shared feedback and neutral glass dialogs; page themes retain semantic colours. */
+:root {
+  --dialog-fill: linear-gradient(135deg,#ffffff12,transparent 60%),#26262cba;
+  --dialog-edge: #ffffff30; --dialog-copy: #c9c8d0; --dialog-title: #f4f3f6;
+  --dialog-shadow: inset 0 1px 0 #ffffff1c,0 24px 80px #0007;
+  --layer-cinematic: 9500; --layer-feedback: 11000; --layer-confirmation: 12000;
+}
+.action-confirmation {
+  position:fixed; inset:0; z-index:var(--layer-confirmation,12000); display:grid; place-items:center;
+  padding:24px; box-sizing:border-box; color:var(--dialog-title); font:var(--interface-text-label)/1.65 var(--font-ui);
+  &::before { content:''; position:absolute; inset:0; background:#09090d80; pointer-events:none;
+    animation:confirmationVeilIn var(--motion-fast-exit,110ms) ease-out both; }
+}
+.ui-dialog-panel,
+#overlay .ui-dialog-panel {
+  position:relative; z-index:1; box-sizing:border-box; min-width:0; width:min(600px,100%);
+  max-height:calc(100dvh - 48px); overflow:auto; padding:30px 32px 24px;
+  border:1px solid var(--dialog-edge); border-radius:14px; text-align:left;
+  background:var(--dialog-fill); box-shadow:var(--dialog-shadow);
+  -webkit-backdrop-filter:blur(18px) saturate(85%); backdrop-filter:blur(18px) saturate(85%);
+  & :is(h2,.sug-head) { margin:0; color:var(--dialog-title); font-size:var(--interface-text-object); font-weight:600; line-height:1.4; letter-spacing:.02em; }
+  & :is(p,.ov-note) { color:var(--dialog-copy); font-size:var(--interface-text-body); font-weight:400; line-height:1.75; text-shadow:none; }
+  & .confirmation-status { color:#e7bbc2; }
+}
+#overlay .glass-panel.ui-dialog-panel { margin:0 auto; }
+.confirmation-panel {
+  animation:confirmationPanelIn var(--motion-fast-enter,180ms) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1)) backwards;
+  & p { white-space:pre-line; margin:12px 0 0; }
+  & .confirmation-status { color:#e7bbc2; }
+  & .confirmation-status:empty { display:none; }
+}
+.action-confirmation.confirmation-leaving {
+  pointer-events:none;
+  &::before { animation:confirmationVeilOut var(--motion-panel-exit,160ms) ease-in both; }
+  & .confirmation-panel { animation:confirmationPanelOut var(--motion-panel-exit,160ms) ease-in both; }
+}
+.confirmation-actions {
+  display:flex; justify-content:flex-end; flex-wrap:wrap; gap:12px; margin-top:26px; padding-top:20px; border-top:1px solid #ffffff14;
+}
+.confirmation-actions button,
+#sugLayer .sug-btns .ui-control,
+#overlay .ui-dialog-panel .ov-btn {
+  box-sizing:border-box; min-width:104px; min-height:48px; max-width:100%; padding:11px 20px
+}
+.confirmation-actions .danger { min-width:168px; }
+#sugLayer {
+  position:fixed; inset:0; display:grid; place-items:center;
+  z-index:var(--layer-feedback,11000); padding:24px; box-sizing:border-box; background:#09090d80;
+  &[hidden] { display:none; }
+  & .sug-panel .sug-head { margin-bottom:16px; }
+  & .sug-where { margin:0 0 6px; padding:8px 12px; color:var(--dialog-copy); font-size:var(--interface-text-caption); line-height:1.7; background:#ffffff06; border-left:3px solid #c8d5df45; }
+  & .sug-where:empty { display:none; }
+  & .sug-tip { margin:0 0 10px; font-size:var(--interface-text-caption); color:#aaaab7; }
+  & .sug-label { display:block; margin:12px 0 6px; font-size:var(--interface-text-caption); color:var(--dialog-copy); }
+  & .sug-textarea { box-sizing:border-box; width:100%; max-width:100%; min-height:150px; margin-bottom:12px; padding:10px 12px; resize:vertical;
+    border:1px solid var(--dialog-edge); border-radius:7px; background:#ffffff09;
+    color:var(--dialog-title); font:var(--interface-text-label)/1.6 var(--font-ui); }
+  & .sug-textarea::placeholder { color:#9a9aa8; }
+  & .sug-textarea.sug-small { min-height:54px; margin-bottom:7px; }
+  & .sug-textarea:focus-visible { outline:2px solid var(--control-focus); outline-offset:2px; }
+  & .sug-btns { display:flex; justify-content:flex-end; gap:12px; margin-top:20px; padding-top:18px; border-top:1px solid #ffffff14; flex-wrap:wrap; }
+}
+@keyframes confirmationVeilIn { from { opacity:0; } to { opacity:1; } }
+@keyframes confirmationPanelIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+@keyframes confirmationVeilOut { from { opacity:1; } to { opacity:0; } }
+@keyframes confirmationPanelOut { from { opacity:1; transform:none; } to { opacity:0; transform:translateY(4px); } }
+/* Failed critical images retain their box and accessible alternative text. */
+img[data-visual-state="unavailable"] { background:#777b831a; color:inherit; }
+[data-ui-activity="paused"] [data-ui-ambient],
+[data-ui-activity="paused"] [data-ui-ambient]::before,
+[data-ui-activity="paused"] [data-ui-ambient]::after { animation-play-state:paused !important; }
+body.reduce-motion :is(.action-confirmation::before,.confirmation-panel) { animation:none; }
+@media (prefers-reduced-motion:reduce) {
+  .action-confirmation::before,.confirmation-panel { animation:none; }
+}

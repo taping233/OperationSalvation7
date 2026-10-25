@@ -1,3 +1,4 @@
+import { overlayElements } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const fixture = vi.hoisted(() => ({ game:{}, saveGame:vi.fn() }));
@@ -20,7 +21,7 @@ beforeEach(async () => {
   Object.keys(fixture.game).forEach(key => delete fixture.game[key]);
   Object.assign(fixture.game, { state:'idle', runActive:true, battleActive:false, coins:0, hp:20, maxHp:30, persistSave:vi.fn() });
   UI = {
-    el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody'), ovTitle:document.getElementById('ovTitle') },
+    el:{ ...overlayElements() },
     _acts:{}, _inputHandler:null, _hoverHandler:null, _lastMode:null, wipeNextShow:false,
     act(name, handler) { this._acts[name] = handler; },
     showOverlay(title, html, mode) {

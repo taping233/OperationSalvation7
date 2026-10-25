@@ -66,7 +66,7 @@ describe('card instance creation at real acquisition boundaries', () => {
     expect(template).toMatchObject(transient());
   });
 
-  it('real repeated shop purchases isolate rules while preserving UID allocation, price and quantity', () => {
+  it('real repeated shop purchases isolate rules while preserving UID allocation, price and quantity', async () => {
     const template = face(), original = structuredClone(template), slot = { card: template, price: 2, shaReplenish: 2 };
     const state = { coins: 10, shopStock: [slot], ownedCards: [] };
     let next = 0;
@@ -74,8 +74,8 @@ describe('card instance creation at real acquisition boundaries', () => {
     const commands = createShopCommands({ state, canReceive: () => true, newUid, save,
       isSellable: () => true, sellPrice: () => 1 });
     const quote = { slot, card: template, price: 2, free: undefined, replenish: true };
-    expect(commands.buy({ index: 0, quote, replenish: true }).ok).toBe(true);
-    expect(commands.buy({ index: 0, quote, replenish: true }).ok).toBe(true);
+    expect((await commands.buy({ index: 0, quote, replenish: true })).ok).toBe(true);
+    expect((await commands.buy({ index: 0, quote, replenish: true })).ok).toBe(true);
     expect(state.ownedCards.map(entry => entry.uid)).toEqual(['shop-1', 'shop-2']);
     expect(state.coins).toBe(6);
     expect(slot.shaReplenish).toBe(0);

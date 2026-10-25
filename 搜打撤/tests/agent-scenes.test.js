@@ -1,3 +1,4 @@
+import { canvasTraps, audioGainFields } from './helpers/environment-fixtures.js';
 /* 验收剧本库定向测试：真实启动链（main.js）跑通 dev 直跳场景。
  * 回归目标：SDT.Agent.scenes 装配与 battle/shop 场景的断言链在 jsdom 全量
  * 启动环境下自然收口（pass），防止场景与命令面/动作面漂移脱节。
@@ -21,15 +22,7 @@ vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
 // eslint-disable-next-line no-constant-condition
 if (!window.HTMLCanvasElement.prototype.getContext || true) {
   const noopCtx = () => new Proxy(function () {}, {
-    get: (_t, k) => {
-      if (k === 'canvas') return null;
-      if (k === 'measureText') return () => ({ width: 10 });
-      if (k === 'createLinearGradient' || k === 'createRadialGradient' ||
-          k === 'createPattern' || k === 'getImageData') return () => ({ addColorStop: () => {}, data: [] });
-      return () => noopCtx();
-    },
-    set: () => true,
-    apply: () => noopCtx(),
+    ...canvasTraps(noopCtx),
   });
   window.HTMLCanvasElement.prototype.getContext = function () { return noopCtx(); };
 }
@@ -45,7 +38,7 @@ window.Audio = class FakeAudio {
 };
 window.AudioContext = window.AudioContext || class FakeAudioContext {
   constructor() { this.currentTime = 0; this.destination = {}; this.sampleRate = 44100; }
-  createGain() { return { connect: () => {}, disconnect: () => {}, gain: { value: 0, setValueAtTime: () => {}, linearRampToValueAtTime: () => {}, cancelScheduledValues: () => {}, setTargetAtTime: () => {} } }; }
+  createGain() { return { ...audioGainFields() }; }
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }

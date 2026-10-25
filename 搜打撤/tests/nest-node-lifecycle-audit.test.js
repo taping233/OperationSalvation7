@@ -41,7 +41,7 @@ beforeEach(async () => {
     { id: 'class', name: '职业卡', rarity: '职业', type: '武术' }];
   window.SDT.Base.data = { runes: [], stash: [], stats: {}, nestBagUp: 0 };
   Object.assign(H.game, { seed: 7, discoveredPairs: new Set(), state: 'modal', runActive: true, nestActive: true,
-    nestPos: 0, nestEquipped: [], nestRunes: [], pendingRunePick: null, nestTargetedBox: 0, battleActive: false,
+    nestPos: 0, nestEquipped: [], nestRunes: [], nestShopStocks: {}, pendingRunePick: null, nestTargetedBox: 0, battleActive: false,
     ownedCards: [], cardBox: [], nestKills: 0, nestBossDown: false, coins: 0, hp: 20, maxHp: 35,
     nestBoss: { id: 'fixture-boss', name: '测试所主', hp: 35, atk: 1 }, nestBossName: '测试所主',
   });
@@ -50,7 +50,9 @@ beforeEach(async () => {
 afterEach(() => vi.restoreAllMocks());
 function endBattle(win, opts = H.battleStarts.at(-1).opts) {
   H.game.battleActive = false; H.game.state = 'idle';
-  opts.foeNames = [opts.name]; Bus.emit('battle:end', opts, [], win, []); return opts;
+  opts.foeNames = [opts.name];
+  H.game.onNestBattleEnd(opts, [], win, []);
+  Bus.emit('battle:end', opts, [], win, []); return opts;
 }
 
 describe('研究所自然节点与奖励生命周期审计', () => {
@@ -59,7 +61,8 @@ describe('研究所自然节点与奖励生命周期审计', () => {
     const opts = endBattle(true);
     expect(H.game.nestPos).toBe(1); expect(H.game.coins).toBeGreaterThanOrEqual(5);
     expect(H.game.cardBox).toHaveLength(1); expect(H.game.nestRunes).toHaveLength(1);
-    const snapshot = JSON.parse(JSON.stringify(H.game)); Bus.emit('battle:end', opts, [], true, []);
+    const snapshot = JSON.parse(JSON.stringify(H.game));
+    H.game.onNestBattleEnd(opts, [], true, []); Bus.emit('battle:end', opts, [], true, []);
     expect(JSON.parse(JSON.stringify(H.game))).toEqual(snapshot);
   });
   it('首战失败保留原进度，重试成功仍按首战奖励', () => {

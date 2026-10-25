@@ -81,7 +81,9 @@ function beginCardTargeting(uid, card, targetIds, hint, fuelUids = [], foeFightF
     // Keep raw card identity and findCard's legacy repairs, not effective faces.
     const handCards = renderContext?.handCards || readState().hand.map(u => { const o = findCard(u); return o ? { uid: u, card: o.card } : null; }).filter(Boolean);
     if (renderContext) renderContext.handCards = handCards;
-    return unplayableReasonFor(card, readState().mode, { handCards, selfCard: card });
+    const raw = handCards.find(entry => entry.uid === card?._presentation?.uid)?.card;
+    const selfCard = raw && raw.id === card.id && raw.name === card.name ? raw : card;
+    return unplayableReasonFor(card, readState().mode, { handCards, selfCard });
   }
 
   function equipmentPlayLimit(card) {

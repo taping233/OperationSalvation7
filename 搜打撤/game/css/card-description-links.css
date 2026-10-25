@@ -6,20 +6,23 @@
   cursor:pointer;
 }
 :where(.studio-archive,#cardZoom.cz-photo) .card-description-ref { color:#71508e; }
-.card-description-ref:hover { color:#9c6aaf; }
-.card-description-ref:focus-visible { outline:1px solid currentColor; outline-offset:3px; }
+.card-description-ref{
+&:hover { color:#9c6aaf; }
+&:focus-visible { outline:1px solid currentColor; outline-offset:3px; }}
 .studio-search-hit { background:#c09a4933; color:inherit; border-radius:0; padding:0; }
 .studio-search-sentence { background:#c09a491a; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
-#cardZoom .cz-reference-back {
+#cardZoom .cz-reference-back{
+& {
   position:absolute; top:18px; left:18px; z-index:12; padding:9px 14px;
   border:1px solid #b3a18066; border-radius:0; background:#282e28e8; color:#e9dfc9;
   font:14px/1.4 var(--font-ui); cursor:pointer;
 }
-#cardZoom .cz-reference-back:hover { background:#3b4536; }
-.studio-locate {
+&:hover { background:#3b4536; }}
+.studio-locate{
+& {
   appearance:none; flex:0 0 32px; width:32px; height:32px; padding:6px;
   border:0; background:transparent; color:#7b674a; cursor:pointer;
 }
-.studio-locate svg { display:block; width:100%; height:100%; }
-.studio-locate:hover { color:#a66f42; }
-.studio-locate:focus-visible { outline:1px solid currentColor; outline-offset:2px; }
+& svg { display:block; width:100%; height:100%; }
+&:hover { color:#a66f42; }
+&:focus-visible { outline:1px solid currentColor; outline-offset:2px; }}

@@ -7,6 +7,7 @@ describe('选角确认的出征整备守卫', () => {
     [true, true, 'deferred-new-run'], [true, true, 'deferred-stale-page'],
     [false, true, 'before-hidden'], [false, true, 'before-run'],
     [false, true, 'pool-return'], [true, true, 'pool-return'],
+    [false, true, 'pool-browse'],
   ])('整备守卫与入城边界（延迟确认：%s，转场完成：%s，等待情形：%s）', async (deferred, completed, waiting) => {
     document.body.replaceChildren();
     vi.resetModules();
@@ -63,7 +64,7 @@ describe('选角确认的出征整备守卫', () => {
         addXpToProgress: vi.fn(), classLv: () => 1, classXP: () => 0,
         LEVEL_MAX: 10, xpForNext: () => 100, perkText: () => '',
       },
-      Cards: { classPool: () => [{ id: 'class-card' }], randomClassCard, rarityOf: () => '古朴', cardHTML: card => `<article>${card.name}</article>` },
+      Cards: { classPool: () => waiting === 'pool-browse' ? Array.from({length:42},(_,i)=>({id:`card-${i}`,name:`卡牌${i}`,type:i%2?'装备':'法术'})) : [{ id: 'class-card' }], randomClassCard, rarityOf: () => '古朴', cardHTML: card => `<article>${card.name}</article>` },
       Art: {
         warmClassRoster: vi.fn(), classFullArt: () => '', classArt: () => '',
         listSkins: () => [], getSkin: () => 'default',
@@ -73,6 +74,31 @@ describe('选角确认的出征整备守卫', () => {
     const { openClassChoice } = await import('../game/src/run/game.run.class-choice.page.js');
 
     const onSelect = vi.fn();
+    if (waiting === 'pool-browse') {
+      openClassChoice({onCancel:vi.fn()});
+      const original=document.querySelector('.cls2-face[aria-pressed="true"]').dataset.cls;
+      const other=[...document.querySelectorAll('.cls2-face')].find(button=>button.dataset.cls!==original).dataset.cls;
+      handlers.clsPool();handlers.poolFilter({filter:'装备'});handlers.poolNext();
+      const card=[...document.querySelectorAll('.pool-card-button')][2];
+      card.dispatchEvent(new FocusEvent('focusin',{bubbles:true}));
+      const selected=card.dataset.i;
+      document.getElementById('poolGrid').scrollTop=83;document.getElementById('poolPreview').scrollTop=41;
+      handlers.clsBack();handlers.clsPool();
+      expect(document.querySelector('.pool-filter.active').dataset.filter).toBe('装备');
+      expect(document.querySelector('.pool-page-now').textContent).toBe('2');
+      expect(document.querySelector('.pool-card-button.selected').dataset.i).toBe(selected);
+      expect(document.getElementById('poolPreview').dataset.cardIndex).toBe(selected);
+      expect(document.getElementById('poolGrid').scrollTop).toBe(83);
+      expect(document.getElementById('poolPreview').scrollTop).toBe(41);
+      handlers.clsBack();handlers.selClass({cls:other});handlers.clsPool();
+      expect(document.querySelector('.pool-filter.active').dataset.filter).toBe('all');
+      expect(document.querySelector('.pool-page-now').textContent).toBe('1');
+      expect(document.getElementById('poolGrid').scrollTop).toBe(0);
+      handlers.clsBack();handlers.selClass({cls:original});handlers.clsPool();
+      expect(document.querySelector('.pool-filter.active').dataset.filter).toBe('all');
+      expect(document.querySelector('.pool-page-now').textContent).toBe('1');
+      expect(saveGame).not.toHaveBeenCalled();return;
+    }
     if (waiting === 'pool-return') {
       openClassChoice(deferred ? { onCancel:vi.fn() } : {});
       handlers.clsPool();

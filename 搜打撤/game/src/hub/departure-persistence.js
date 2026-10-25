@@ -74,7 +74,7 @@ export function createDeparturePersistence({ storage, baseApi, runStore, txKey, 
     const fingerprint = stable({ command: DEPARTURE_COMMAND, payload, runId });
     const receipt = successReceipt({ requestId: runId, command: DEPARTURE_COMMAND, baseRevision: revision, runRevision: 0, runId, output: null }, revision);
     afterBase.version = baseApi.BASE_VERSION;
-    afterBase._m01 = { revision, requests: { ...(afterBase._m01?.requests || {}), [`${DEPARTURE_COMMAND}:${runId}`]: { fingerprint, result: receipt } } };
+    afterBase._m01 = { revision, requests: { ...retainRunReceipts(afterBase._m01?.requests, runId), [`${DEPARTURE_COMMAND}:${runId}`]: { fingerprint, result: receipt } } };
     const afterRun = { ...run, version: runStore.SAVE_VERSION, _r2: { runId, revision: 0 } };
     /** @type {import('./recoverable-pair.js').Journal} */
     const journal = {
@@ -96,3 +96,4 @@ export function createDeparturePersistence({ storage, baseApi, runStore, txKey, 
   }
   return { pending, prepare, commit, recover: slotId => pair.recover(slotId), withLock };
 }
+import { retainRunReceipts } from './receipt-retention.js';

@@ -3,33 +3,24 @@ import { motionTiming, motionEasing } from '../ui/motion-presets.js';
 import { pageMotionProfile, pageMotionBlocks } from '../ui/page-motion-profiles.js';
 import { animateBaseRefresh } from './base-motion-v4.js';
 import { refreshCardBrowser } from '../ui/card-browser.js';
-import { navigationState, navigationChange, navigationTiming } from '../ui/navigation-motion.js';
+import { navigationState, baseNavigationChange as navigationChange, baseNavigationTiming as navigationTiming, baseNavigationEasing } from '../ui/navigation-motion.js';
 // 基地壳只挂载一次；浏览状态留在界面，交易继续使用原命令入口。
 let portraitRequest = 0;
-const portraitSizing = new WeakSet();
-function sizePortrait(hero) {
-  const image = hero?.querySelector('img');
-  if (!image) return;
-  const apply = () => { if (image.naturalWidth && image.naturalHeight) hero.classList.toggle('is-wide', image.naturalWidth > image.naturalHeight * 1.15); };
-  apply();
-  if (!portraitSizing.has(image)) { portraitSizing.add(image); image.addEventListener('load', apply); }
-}
 const readingPositions = new Map();
-function readingKey(root, pane) {
-  const identity = pane.classList.contains('warehouse-reading') ? pane.querySelector('header h3')?.textContent || '' : '';
-  return `${root.querySelector('.hub-slot-label')?.textContent}/${root.querySelector('.hub-page')?.dataset.view}/${pane.classList.contains('warehouse-reading') ? 'card/' + identity : 'person'}`;
+function readingKey(root) {
+  return `${root.querySelector('.hub-slot-label')?.textContent}/${root.querySelector('.hub-page')?.dataset.view}/person`;
 }
 function rememberReading(root) {
   if (!root) return;
-  for (const pane of root.querySelectorAll('.warehouse-reading, .person-stage .person-details')) {
-    const key = readingKey(root, pane);
+  for (const pane of root.querySelectorAll('.person-stage .person-details')) {
+    const key = readingKey(root);
     readingPositions.delete(key); readingPositions.set(key, pane.scrollTop);
   }
   while (readingPositions.size > 64) readingPositions.delete(readingPositions.keys().next().value);
 }
 function restoreReading(root) {
   if (!root) return;
-  for (const pane of root.querySelectorAll('.warehouse-reading, .person-stage .person-details')) pane.scrollTop = readingPositions.get(readingKey(root, pane)) || 0;
+  for (const pane of root.querySelectorAll('.person-stage .person-details')) pane.scrollTop = readingPositions.get(readingKey(root)) || 0;
 }
 export function presentHub(ui, html, icons) {
   const current = document.getElementById('hubMain');
@@ -71,20 +62,25 @@ export function presentHub(ui, html, icons) {
     else button.removeAttribute('aria-current');
     if (button.innerHTML !== replacement.innerHTML) button.innerHTML = replacement.innerHTML;
   }
-  const visibleHero = page.querySelector('.person-hero');
-  const originalImage = visibleHero?.querySelector('img');
-  const oldEcho = visibleHero?.querySelector('[data-portrait-echo]');
-  const visibleImage = oldEcho && Number(getComputedStyle(originalImage).opacity) < .5 ? oldEcho : originalImage;
-  const before = { view: /** @type {HTMLElement} */ (page).dataset.view, portrait: visibleHero?.getBoundingClientRect(), source: /** @type {HTMLImageElement} */ (visibleImage)?.currentSrc || /** @type {HTMLImageElement} */ (visibleImage)?.src };
+  const localDirection = browseDirection(page, nextPage);
+  const before = { view: /** @type {HTMLElement} */ (page).dataset.view, direction: localDirection || 1 };
   page.getAnimations?.({ subtree: true }).forEach(animation => animation.cancel());
   page.className = nextPage.className.replace(' page-in', '');
   /** @type {HTMLElement} */ (page).dataset.view = nextPage.dataset.view;
   /** @type {HTMLElement} */ (page).dataset.motionView = nextPage.dataset.motionView || nextPage.dataset.view;
   const previousRegions = regionContents(page);
-  const keptPortrait = updatePersonnel(page, nextPage, reducedMotion(), before);
+  const keptPortrait = updatePersonnelV12(page, nextPage, reducedMotion(), before);
   if (!keptPortrait) {
     page.innerHTML = nextPage.innerHTML;
-    if (!changed && !page.querySelector('.trade-v5')) animateChangedRegions(page, previousRegions);
+    if (!changed && localDirection) {
+      // 建设沿左侧纵向目录切换，横向货架/人物名册沿左右方向；只平移完整区域。
+      const vertical = !!page.querySelector('.facilities-v12');
+      animateChangedRegions(page, previousRegions, {
+        x: vertical ? 0 : localDirection * 64,
+        y: vertical ? localDirection * 28 : 0,
+        duration: navigationTiming.detail,
+      });
+    }
   }
   positionNavigation(current);
   restoreReading(current);
@@ -103,7 +99,7 @@ function reducedMotion() {
 export function pulseNumber(target) {
   if (!target || reducedMotion() || !target.animate) return;
   target.getAnimations?.().forEach(animation => animation.cancel());
-  linkedAnimate(target, [{ opacity: .35, transform: 'translateY(5px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.feedback, easing: motionEasing.enter });
+  linkedAnimate(target, [{ opacity: .35 }, { opacity: 1 }], { duration: motionTiming.feedback, easing: motionEasing.enter });
 }
 export function bindCardNavigation(root, selector, { activate = true } = {}) {
   if (!root || root.dataset.cardNavigationBound) return;
@@ -126,16 +122,7 @@ export function bindCardNavigation(root, selector, { activate = true } = {}) {
 }
 function positionNavigation(root) {
   if (!root) return;
-  const nav = root?.querySelector('.hub-tabs'), target = nav?.querySelector('.hub-tab.on');
-  if (target) {
-  let marker = nav.querySelector('.camp-navigation-indicator');
-  if (!marker) { marker = document.createElement('span'); marker.className = 'camp-navigation-indicator'; marker.setAttribute('aria-hidden', 'true'); nav.append(marker); }
-  marker.style.height = `${target.offsetHeight}px`;
-  marker.style.transform = `translateY(${target.offsetTop}px)`;
-  }
-  const page = root.querySelector('.hub-page'), inspector = root.querySelector('.warehouse-inspector'), layout = root.querySelector('.warehouse-layout');
-  if (page && inspector && layout && page.clientHeight) inspector.style.height = `${Math.max(320, page.clientHeight - layout.offsetTop - 20)}px`;
-  sizePortrait(page?.querySelector('.person-hero'));
+  const page = root.querySelector('.hub-page');
   const stage = page?.querySelector('.person-stage');
   if (stage && page.clientHeight) {
     const pageBounds = page.getBoundingClientRect(), stageBounds = stage.getBoundingClientRect();
@@ -148,15 +135,31 @@ function positionNavigation(root) {
   root?.querySelectorAll('[data-card-browser]').forEach(browser => refreshCardBrowser(browser));
 }
 window.addEventListener('resize', () => positionNavigation(document.getElementById('hubMain')));
-function regionContents(page) {
-  const profile = pageMotionProfile(page.closest('#hubMain')?.parentElement);
-  return new Map((profile ? pageMotionBlocks(profile) : []).map(({ el }) => [el.className, el.innerHTML]));
+function browseDirection(page, next) {
+  const identity = button => ['data-skin', 'data-character', 'data-key', 'data-id', 'data-mode', 'data-category']
+    .filter(attribute => button.hasAttribute(attribute)).map(attribute => `${attribute}:${button.getAttribute(attribute)}`).join('/');
+  const selected = buttons => buttons.find(button => button.getAttribute('aria-pressed') === 'true' || ['on', 'sel', 'is-selected'].some(name => button.classList.contains(name)));
+  for (const selector of ['[data-act="tradeShopMode"]', '[data-act="tradeShopCategory"]', '[data-act="tradeShopSelectGood"], [data-act="tradeShopSelectStack"]', '[data-act="campFacility"]', '[data-act="personPet"]', '.pv12-agent-choice', '.person-skin']) {
+    const before = [...page.querySelectorAll(selector)], after = [...next.querySelectorAll(selector)];
+    const previous = selected(before), following = selected(after);
+    if (!previous || !following || identity(previous) === identity(following)) continue;
+    const from = before.indexOf(previous), to = before.findIndex(button => identity(button) === identity(following));
+    return to < 0 ? 1 : Math.sign(to - from) || 1;
+  }
+  return 0;
 }
-function animateChangedRegions(page, before) {
+function localRegions(page) {
   const profile = pageMotionProfile(page.closest('#hubMain')?.parentElement);
+  return (profile ? pageMotionBlocks(profile) : []).filter(({ role }) => role === 'content' || role === 'portrait')
+    .map(region => ({ ...region, el: region.el.matches('.trade-v5-rail') ? region.el.querySelector('.trade-v5-list') || region.el : region.el }));
+}
+function regionContents(page) {
+  return new Map(localRegions(page).map(({ el }) => [el.className, el.innerHTML]));
+}
+function animateChangedRegions(page, before, transition) {
   let index = 0;
-  for (const { el } of profile ? pageMotionBlocks(profile) : []) {
-    if (before.get(el.className) !== el.innerHTML) animateBaseRefresh(el, Math.min(index++ * navigationTiming.stagger, navigationTiming.staggerMax));
+  for (const { el } of localRegions(page)) {
+    if (before.get(el.className) !== el.innerHTML) animateBaseRefresh(el, Math.min(index++ * navigationTiming.stagger, navigationTiming.staggerMax), transition);
   }
 }
 function enterRegions(page, transition) {
@@ -167,7 +170,30 @@ function enterRegions(page, transition) {
     // 玻璃父层只做位移，不创建 opacity 动画合成层。
     { transform:`translateX(${transition.x}px)` },
     { transform:'none' },
-  ], { duration: transition.duration, delay: Math.min(delay, navigationTiming.staggerMax), easing:motionEasing.enter, fill:'backwards' });
+  ], { duration: transition.duration, delay: Math.min(delay, navigationTiming.staggerMax), easing:baseNavigationEasing, fill:'backwards' });
+}
+function syncAppearanceContent(content, nextContent) {
+  /** @param {HTMLElement} button */
+  const key = button => `${button.dataset.character}/${button.dataset.skin}`;
+  const buttons = [.../** @type {NodeListOf<HTMLButtonElement>} */ (content.querySelectorAll('[data-act="personPreviewSkin"]'))];
+  const nextButtons = new Map([.../** @type {NodeListOf<HTMLButtonElement>} */ (nextContent.querySelectorAll('[data-act="personPreviewSkin"]'))].map(button => [key(button), button]));
+  const heading = content.querySelector('h4'), nextHeading = nextContent.querySelector('h4');
+  if (!heading || !nextHeading || !buttons.length || buttons.length !== nextButtons.size || buttons.some(button => !nextButtons.has(key(button)))) return false;
+  // Preserve the list, loaded thumbnails, keyboard focus and reading position.
+  heading.textContent = nextHeading.textContent;
+  const current = content.querySelector('.appearance-current');
+  const nextCurrent = nextContent.querySelector('.appearance-current');
+  if (!nextCurrent) current?.remove();
+  else if (current) current.textContent = nextCurrent.textContent;
+  else heading.after(nextCurrent.cloneNode(true));
+  for (const button of buttons) {
+    const replacement = nextButtons.get(key(button));
+    button.className = replacement.className;
+    button.setAttribute('aria-pressed', replacement.getAttribute('aria-pressed'));
+    const status = button.querySelector('small'), nextStatus = replacement.querySelector('small');
+    if (status && nextStatus) status.textContent = nextStatus.textContent;
+  }
+  return true;
 }
 function updatePersonnelV12(page, next, reduced, before) {
   const current = page.querySelector('.personnel-v12');
@@ -182,6 +208,16 @@ function updatePersonnelV12(page, next, reduced, before) {
   const image = hero.querySelector('img'), nextImage = nextHero.querySelector('img');
   const source = new URL(nextImage.getAttribute('src'), document.baseURI).href;
   const changedPerson = image.alt !== nextImage.alt;
+  const changedSkin = hero.dataset.skin !== nextHero.dataset.skin;
+  const appearanceRefresh = !changedPerson && previousSection === 'appearance' && replacement.dataset.section === 'appearance';
+  const syncPortrait = () => {
+    image.style.cssText = nextImage.style.cssText;
+    image.dataset.portraitFit = nextImage.dataset.portraitFit;
+    hero.dataset.portraitAlpha = nextHero.dataset.portraitAlpha || 'false';
+    hero.dataset.skin = nextHero.dataset.skin;
+    hero.querySelector('figcaption').innerHTML = nextHero.querySelector('figcaption').innerHTML;
+    image.alt = nextImage.alt;
+  };
   const request = String(++portraitRequest);
   image.dataset.portraitRequest = request;
   // Keep the decoded illustration visible until the requested replacement is ready.
@@ -189,12 +225,12 @@ function updatePersonnelV12(page, next, reduced, before) {
     const loading = new Image();
     const reveal = () => {
       if (!image.isConnected || image.dataset.portraitRequest !== request) return;
-      image.style.cssText = nextImage.style.cssText;
-      image.dataset.portraitFit = nextImage.dataset.portraitFit;
-      hero.dataset.portraitAlpha = nextHero.dataset.portraitAlpha || 'false';
-      image.src = source; image.alt = nextImage.alt;
-      if (changedPerson && !reduced) {
-        if (!hero.hidden) linkedAnimate(image, [{ opacity: .7 }, { opacity: 1 }], { duration: 120, easing: motionEasing.enter });
+      syncPortrait();
+      image.src = source;
+      if (changedSkin && !changedPerson && !reduced && !hero.hidden) {
+        linkedAnimate(image, [{ opacity: .7, transform: `translateX(${before.direction * 24}px)` }, { opacity: 1, transform: 'none' }], { duration: motionTiming.regionEnter, easing: motionEasing.enter });
+      } else if (changedPerson && !reduced) {
+        if (!hero.hidden) linkedAnimate(image, [{ opacity: .7, transform: `translateX(${before.direction * 48}px)` }, { opacity: 1, transform: 'none' }], { duration: motionTiming.regionEnter, easing: motionEasing.enter });
       }
     };
     loading.onload = () => {
@@ -204,13 +240,8 @@ function updatePersonnelV12(page, next, reduced, before) {
     };
     loading.src = source;
   } else {
-    image.style.cssText = nextImage.style.cssText;
-    image.dataset.portraitFit = nextImage.dataset.portraitFit;
-    hero.dataset.portraitAlpha = nextHero.dataset.portraitAlpha || 'false';
-    image.alt = nextImage.alt;
+    syncPortrait();
   }
-  hero.dataset.skin = nextHero.dataset.skin;
-  hero.querySelector('figcaption').innerHTML = nextHero.querySelector('figcaption').innerHTML;
   const strip = current.querySelector('.pv12-agent-strip');
   const nextStrip = replacement.querySelector('.pv12-agent-strip');
   for (const button of strip.querySelectorAll('[data-character]')) {
@@ -231,14 +262,23 @@ function updatePersonnelV12(page, next, reduced, before) {
   else {
     const content = data.querySelector('.pv12-data-content');
     const nextContent = nextData.querySelector('.pv12-data-content');
-    if (content.innerHTML !== nextContent.innerHTML) content.innerHTML = nextContent.innerHTML;
+    if (content.innerHTML !== nextContent.innerHTML && !(appearanceRefresh && syncAppearanceContent(content, nextContent))) content.innerHTML = nextContent.innerHTML;
     data.querySelector('.pv12-identity > span').textContent = nextData.querySelector('.pv12-identity > span').textContent;
     // Fixed actions belong to the current section, outside its scrollable reading body.
     const actions = data.querySelector('.pv12-data-actions');
     const nextActions = nextData.querySelector('.pv12-data-actions');
     if (!nextActions) actions?.remove();
     else if (!actions) data.append(nextActions.cloneNode(true));
-    else if (actions.innerHTML !== nextActions.innerHTML) actions.innerHTML = nextActions.innerHTML;
+    else if (actions.innerHTML !== nextActions.innerHTML) {
+      const button = /** @type {HTMLButtonElement} */ (actions.querySelector('[data-act="selectCharacterSkin"]'));
+      const nextButton = /** @type {HTMLButtonElement} */ (nextActions.querySelector('[data-act="selectCharacterSkin"]'));
+      if (appearanceRefresh && button && nextButton) {
+        button.textContent = nextButton.textContent;
+        button.disabled = nextButton.disabled;
+        button.dataset.character = nextButton.dataset.character;
+        button.dataset.skin = nextButton.dataset.skin;
+      } else actions.innerHTML = nextActions.innerHTML;
+    }
   }
   const nextSections = replacement.querySelector('.pv12-sections');
   for (const button of current.querySelectorAll('.pv12-sections [data-section]')) {
@@ -250,64 +290,12 @@ function updatePersonnelV12(page, next, reduced, before) {
   const content = data.querySelector('.pv12-data-content');
   if (sectionChanged || changedPerson) content.scrollTop = 0;
   const transition = sectionChanged ? navigationChange({ room: 'classes', view: before.view }, { room: 'classes', view: next.dataset.view }) : null;
+  if (!reduced && changedPerson && !sectionChanged && replacement.dataset.section !== 'appearance') animateBaseRefresh(content, 0, { x: before.direction * 64, duration: navigationTiming.detail });
   if (!reduced && !changedPerson && !catalog.hidden && (catalogChanged || sectionChanged)) animateBaseRefresh(catalog, 0, transition);
-  if (!reduced && !changedPerson && (contentChanged || sectionChanged)) animateBaseRefresh(content, !catalog.hidden ? navigationTiming.stagger : 0, transition);
+  if (!reduced && !changedPerson && !appearanceRefresh && (contentChanged || sectionChanged)) animateBaseRefresh(content, !catalog.hidden ? navigationTiming.stagger : 0, transition);
   return true;
 }
-function updatePersonnel(page, next, reduced, before) {
-  if (updatePersonnelV12(page, next, reduced, before)) return true;
-  const hero = page.querySelector('.person-hero'), nextHero = next.querySelector('.person-hero');
-  const details = page.querySelector('.person-stage .person-details'), nextDetails = next.querySelector('.person-stage .person-details');
-  if (!hero || !nextHero || !details || !nextDetails) return false;
-  const previousSection = page.querySelector('.personnel-v2').dataset.section;
-  const nextSection = next.querySelector('.personnel-v2').dataset.section;
-  page.querySelector('.personnel-v2').dataset.section = nextSection;
-  const image = hero.querySelector('img'), nextImage = nextHero.querySelector('img');
-  const request = String(++portraitRequest);
-  image.dataset.portraitRequest = request;
-  const changedPerson = image.alt !== nextImage.alt;
-  // template 中的图片属于惰性文档；先按运行页面解析地址，避免加载完成后相对/绝对地址比较失败。
-  const expectedSource = new URL(nextImage.getAttribute('src'), document.baseURI).href;
-  const changedImage = image.src !== expectedSource;
-  hero.querySelectorAll('[data-portrait-echo]').forEach(echo => echo.remove());
-  image.style.opacity = '';
-  if ((changedImage || before.source !== expectedSource) && !reduced && before.source) {
-    const echo = image.cloneNode(false);
-    echo.src = before.source; echo.alt = ''; echo.className = 'portrait-echo'; echo.style.opacity = '';
-    echo.setAttribute('data-portrait-echo', ''); echo.setAttribute('aria-hidden', 'true'); hero.append(echo);
-    image.style.opacity = '0'; image.src = expectedSource;
-    const reveal = () => {
-      image.removeEventListener('load', reveal); image.removeEventListener('error', reveal);
-      if (!image.isConnected || image.src !== expectedSource || image.dataset.portraitRequest !== request) { echo.remove(); return; }
-      image.style.opacity = '';
-      linkedAnimate(image, [{ opacity: 0 }, { opacity: 1 }], { duration: motionTiming.feedback, easing: motionEasing.enter });
-      const fade = linkedAnimate(echo, [{ opacity: 1 }, { opacity: 0 }], { duration: motionTiming.feedback, easing: motionEasing.exit });
-      if (fade) fade.finished.then(() => echo.remove(), () => echo.remove()); else echo.remove();
-    };
-    if (image.complete) reveal(); else { image.addEventListener('load', reveal, { once: true }); image.addEventListener('error', reveal, { once: true }); }
-  } else if (changedImage) image.src = expectedSource;
-  image.alt = nextImage.alt;
-  sizePortrait(hero);
-  hero.dataset.skin = nextHero.dataset.skin;
-  hero.querySelector('figcaption').innerHTML = nextHero.querySelector('figcaption').innerHTML;
-  const heading = page.querySelector('.camp-section-head'), nextHeading = next.querySelector('.camp-section-head');
-  if (heading && nextHeading) heading.innerHTML = nextHeading.innerHTML;
-  for (const button of page.querySelectorAll('.person-face')) {
-    const replacement = next.querySelector(`.person-face[data-character="${button.dataset.character}"]`);
-    button.className = replacement.className; button.setAttribute('aria-pressed', replacement.getAttribute('aria-pressed'));
-  }
-  details.getAnimations?.().forEach(animation => animation.cancel());
-  hero.getAnimations?.().forEach(animation => animation.cancel());
-  details.innerHTML = nextDetails.innerHTML;
-  const direction = navigationChange({ room: 'classes', view: before.view }, { room: 'classes', view: next.dataset.view }).direction;
-  if (!reduced && details.animate) linkedAnimate(details, [{ opacity: 0, transform: `translateX(${direction * 14}px)` }, { opacity: 1, transform: 'none' }], { duration: motionTiming.change, easing: motionEasing.enter });
-  if (!reduced && hero.animate && previousSection !== nextSection && hero.offsetWidth && hero.offsetHeight) {
-    const after = hero.getBoundingClientRect(), visible = before.portrait || after;
-    const scaleX = after.width / hero.offsetWidth, scaleY = after.height / hero.offsetHeight;
-    linkedAnimate(hero, [{ transform: `translate(${(visible.left - after.left) / scaleX}px, ${(visible.top - after.top) / scaleY}px) scale(${visible.width / after.width}, ${visible.height / after.height})` }, { transform: 'none' }], { duration: motionTiming.change, easing: motionEasing.enter });
-  } else if (changedPerson && !reduced && hero.animate) linkedAnimate(hero, [{ opacity: .2, transform: 'translateX(-16px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.change, easing: motionEasing.enter });
-  return true;
-}
+
 
 export function bindHubBrowse(root, scroll, focus) {
   const page = /** @type {HTMLElement} */ (/** @type {HTMLElement} */ (/** @type {HTMLElement} */ (/** @type {HTMLElement} */ (root.querySelector('.hub-page')))));

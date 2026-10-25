@@ -8,6 +8,7 @@
  * 商店控制器也在此装配（openShop 唯一实例，供 ALTAR/FLOW 复用）。
  * ============================================================ */
 import { esc, escAttr } from '../core/shared.js';
+import { playOutcomeFeedback } from '../ui/outcome-feedback.js';
 import { createCardInstance } from '../cards/card-instance.js';
 import { MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } from './game.session.js';
 import { _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
@@ -25,13 +26,15 @@ import { selectEncounterSpec } from './encounter-selector.js';
 import { turboMs } from '../core/turbo.js';
 import { usePlainBattleTransition } from '../ui/transition-diagnostic-policy.js';
 import { reduceMotion } from '../core/motion.js';
-import { createCityCut, cityCutDuration, prepareCityCut } from '../ui/camp-entry.js';
+import { cityCutDuration, prepareCityCut } from '../ui/camp-entry.js';
+import { createSilentNodeCut, SILENT_FILMS, silentFilmRemaining } from '../ui/silent-node-film.js';
+import { cinematicKind } from '../ui/cinematic-profiles.js';
 import { createPageSurfaceLifetime } from '../ui/page-surface-lifetime.js';
 import { prepareTransition } from '../ui/transition-preparation.js';
 import { motionTiming } from '../ui/motion-presets.js';
-import { revealTransition } from '../ui/transition-handoff.js';
+import { revealTransition, transitionPause } from '../ui/transition-handoff.js';
 import { TRANSITION_ART } from '../ui/transition-art.js';
-import { transitionHeadingHTML } from '../ui/transition-heading.js';
+import { wireEventChoiceSelection } from '../ui/event-choice-selection.js';
 import { eventSceneHTML } from '../ui/node-scene-view.js';
 import '../../css/entry-events.css';
 import '../../css/expedition-transitions.css';
@@ -102,64 +105,6 @@ function preloadSceneList(urls) {
 export function preloadAllNodeShellBgs() {
   preloadSceneList(Array.from(IMMEDIATE_SCENES, key => PRELOAD_SCENES[key]).filter(Boolean));
 }
-// 事件选中是阅读状态；真正结算仍交给原有 data-act 回调。
-let eventChoiceSelection = null;
-function wireEventChoiceSelection(root, key) {
-  const options = [...root.querySelectorAll('.node-summary > .evt-opt[data-act]')];
-  if (options.length < 2) { eventChoiceSelection = null; return; }
-  const confirm = root.querySelector('.event-choice-confirm');
-  const clear = root.querySelector('.event-choice-clear');
-  const name = root.querySelector('[data-event-choice-name]');
-  const detail = root.querySelector('[data-event-choice-detail]');
-  if (!confirm || !clear || !name || !detail) return;
-  let selected = eventChoiceSelection?.key === key ? eventChoiceSelection.index : -1;
-  let executing = false;
-  let forwarding = false;
-  const sync = () => {
-    const option = options[selected];
-    options.forEach((item, index) => {
-      item.classList.toggle('is-selected', index === selected);
-      item.setAttribute('aria-pressed', String(index === selected));
-    });
-    name.textContent = option?.querySelector('b')?.textContent || '未选择';
-    detail.textContent = option?.querySelector('span')?.textContent || (option ? '结果未知' : '');
-    confirm.disabled = !option || executing;
-    clear.disabled = !option || executing;
-    confirm.textContent = '确认选择';
-  };
-  const choose = index => {
-    if (executing || options[index]?.disabled) return;
-    selected = index;
-    eventChoiceSelection = { key, index };
-    sync();
-  };
-  root.querySelector('.node-summary').addEventListener('click', event => {
-    const option = event.target.closest('.evt-opt[data-act]');
-    if (!option || forwarding) return;
-    event.preventDefault();
-    event.stopPropagation();
-    choose(options.indexOf(option));
-  });
-  clear.addEventListener('click', () => {
-    if (executing) return;
-    selected = -1;
-    eventChoiceSelection = null;
-    sync();
-    options[0]?.focus({ preventScroll:true });
-  });
-  confirm.addEventListener('click', () => {
-    const option = options[selected];
-    if (!option || executing || option.disabled) return;
-    executing = true;
-    eventChoiceSelection = null;
-    sync();
-    forwarding = true;
-    try { option.click(); } finally { forwarding = false; }
-  });
-  root._clearEventChoice = () => { selected = -1; eventChoiceSelection = null; sync(); };
-  if (selected < 0 || options[selected]?.disabled) selected = -1;
-  sync();
-}
 document.addEventListener('keydown', event => {
   if (event.key !== 'Escape' || event.isComposing || event.keyCode === 229) return;
   const root = UI.el?.ovBody?.querySelector('.event-scene[data-event-choice-count]');
@@ -180,7 +125,7 @@ export function nodeShell(o) {
     const key = `${game.mapSeed}|${game.turn}|${game.layerIdx},${game.trackPos}|${o.title}|${bg}|${o.sub || ''}`;
     if (o.tone === 'event') {
       const root = UI.el?.ovBody?.querySelector('.event-scene');
-      if (root) wireEventChoiceSelection(root, key);
+      if (root) wireEventChoiceSelection(root, key, game.discoveredPairs || game.layerData || game);
     }
     UI.act('eventExit', () => {
       if (game.state !== 'modal') return;
@@ -209,7 +154,7 @@ export function consumeCurrentCell() { consumeCell(); }
 let transitionRequest = 0;
 /**
  * @param {object} options
- * @param {string} options.title 中文标题；共用左侧标题与短横线，不接受单页排版。
+ * @param {string} options.title 无障碍场景名称；过场不显示标题或解释文案。
  * @param {string} [options.art] 已导入的图片 URL；不传则显示公共暗色底。
  * @param {number} [options.duration] 原流程的停留时间（ms）。
  * @param {string} [options.tone]
@@ -222,7 +167,7 @@ let transitionRequest = 0;
  * @param {boolean} [options.resumeVisual]
  * @param {Function} [options.prepare]
  */
-export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = cityCutDuration, presentation = 'node-cut', scene = '', art = '', holdVisual = false, resumeVisual = false, prepare }) {
+export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', title, detail = '', duration = cityCutDuration, presentation = 'node-cut', scene = '', art = '', holdVisual = false, resumeVisual = false, prepare }) {
   // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
   // 过渡后无人收拾，曾导致 game.state 卡死在 modal、侧栏按钮永久禁用
   const prevState = game.state;
@@ -230,12 +175,12 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
   const request = ++transitionRequest;
   let lifetime = null, cancelTransition = null;
   const isCurrent = () => currentContext() && request === transitionRequest && (!holdVisual || !lifetime || lifetime.current());
-  const cityCut = (presentation === 'city-cut' || !!art && tone !== 'battle') && !reduceMotion();
+  const filmKind=cinematicKind({scene,tone,presentation});
   const plainCut = usePlainBattleTransition(import.meta.env.DEV, location.search, tone, presentation);
-  const artwork = art && !plainCut ? `<img class="transition-art" src="${escAttr(art)}" alt="" decoding="async" draggable="false">` : '';
   // Business dwell/skip stays here; the shared handoff owns artwork readiness and playback.
   let heldSurface = null;
   let automaticReveal = Promise.resolve(true);
+  let filmPlayback=Promise.resolve(true);
   game.state = 'modal';
   const transition = new Promise(resolve => {
     let done = false;
@@ -257,47 +202,15 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
         resolve(true);
       };
       if (!holdVisual && !skip) automaticReveal.then(complete, () => resolve(false));
+      else if (!skip && !resumeVisual) filmPlayback.then(complete,() => resolve(false));
       else complete();
     };
-    if (cityCut && !plainCut) {
-      const battleEntry = tone === 'battle';
-      const cut = createCityCut({
-        archive: '远征档案',
-        title: battleEntry ? '旅途继续' : (title || '进入地图'),
-        subtitle: battleEntry ? 'WINTER EXPEDITION / 冬日远征' : (detail || 'EXPEDITION / 开始探索'),
-        edition: battleEntry ? 'WINTER EXPEDITION / VII' : `${eyebrow} / VII`, destination: 'EXPEDITION',
-        watermark: 'FIELD',
-        scene: scene || (battleEntry ? 'battle' : 'field'),
-      });
-      cut.querySelector('.transition-heading')?.remove();
-      cut.querySelector('.camp-entry-register')?.remove();
-      cut.insertAdjacentHTML('beforeend', transitionHeadingHTML(battleEntry ? '旅途继续' : (title || '进入地图')));
-      cut.classList.add('page-cut-waiting');
-      if (art) {
-        const image = /** @type {HTMLImageElement} */ (cut.querySelector('.camp-entry-scenery img'));
-        image.src = art;
-        image.classList.add('transition-art');
-      }
-      UI.showOverlay('', `<div class="scene flow-transition city-run-transition${holdVisual && !resumeVisual ? ' resume-hold' : ''}${art ? ' illustrated-cut' : ''} sc-${escAttr(tone)}"
-        data-presentation="city-cut" data-act="flowContinue" role="group"
-        aria-label="${escAttr(`${title || '进入区域'}。${detail}。点击跳过`)}"
-        style="--city-run-duration:${turboMs(duration)}ms">
-        ${cut.outerHTML}
-      </div>`, 'scene');
-    } else if (presentation !== 'base-arrival' || plainCut) {
-      UI.showOverlay('', `<div class="scene flow-transition expedition-cut${artwork ? ' illustrated-cut' : ''}" data-asset-key="${escAttr(asset)}" data-act="flowContinue" role="status" aria-label="${escAttr(`${title || '进入节点'}。${detail}。点击跳过`)}">${artwork}${transitionHeadingHTML(title || '进入节点')}</div>`, 'scene');
-    } else UI.showOverlay('', `
-      <div class="scene flow-transition sc-${escAttr(tone)}${artwork ? ' illustrated-cut' : ''}" data-asset-key="${escAttr(asset)}" data-presentation="${escAttr(presentation)}" data-act="flowContinue">
-        ${artwork}
-        ${presentation === 'base-arrival' ? '<div class="hub-arrival-card">' : ''}
-        <div class="flow-scan" aria-hidden="true"></div>
-        <p class="flow-eyebrow">${esc(eyebrow)}</p>
-        <h2 class="flow-title">${esc(title || '未知区域')}</h2>
-        ${detail ? `<p class="flow-detail">${esc(detail)}</p>` : ''}
-        <div class="flow-line" aria-hidden="true"><i></i></div>
-        ${presentation === 'base-arrival' ? '</div>' : ''}
-        <p class="flow-hint">点击跳过</p>
-      </div>`, 'scene');
+    const cut=plainCut ? null : createSilentNodeCut(filmKind,{duration:turboMs(duration),art});
+    if (cut && !holdVisual) cut.classList.add('page-cut-waiting');
+    UI.showOverlay('', `<div class="scene flow-transition city-run-transition${holdVisual && !resumeVisual ? ' resume-hold' : ''} sc-${escAttr(tone)}"
+      data-asset-key="${escAttr(asset)}" data-presentation="${presentation==='base-arrival' ? 'base-arrival' : 'city-cut'}" data-act="flowContinue" role="group"
+      aria-label="${escAttr(`${title || SILENT_FILMS[filmKind]?.label || '进入区域'}。${detail}。点击跳过`)}"
+      style="--city-run-duration:${turboMs(duration)}ms">${cut?.outerHTML || ''}</div>`, 'scene');
     UI.act('flowContinue', () => finish(true));
     surface = UI.el.ovBody?.querySelector('.flow-transition');
     heldSurface = surface;
@@ -310,13 +223,17 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
   });
   const preparation = prepareTransition(prepare, { signal: lifetime?.signal, isCurrent });
   // Resume artwork loads alongside restoration, rather than after the map is ready.
-  const heldArtwork = resumeVisual && heldSurface?.querySelector('.camp-entry-cut');
+  const heldArtwork = heldSurface?.querySelector('.camp-entry-cut');
   const resumeArtwork = heldArtwork ? prepareCityCut(heldArtwork, { signal:lifetime?.signal }) : Promise.resolve(true);
+  filmPlayback=resumeArtwork.then(async ok => {
+    if (ok && heldArtwork && !resumeVisual) await transitionPause(silentFilmRemaining(heldArtwork),lifetime?.signal);
+    return ok;
+  });
   if (!holdVisual && heldSurface) automaticReveal = revealTransition(heldSurface, {
     signal:lifetime?.signal, isCurrent, duration:turboMs(duration),
     ready:async () => {
       const cut = heldSurface.querySelector('.camp-entry-cut');
-      const results = await Promise.all([preparation, cut ? prepareCityCut(cut, { signal:lifetime?.signal }) : true]);
+      const results = await Promise.all([preparation, cut ? resumeArtwork : true]);
       return results[1];
     },
   });
@@ -350,8 +267,8 @@ export function enterNode(kind, done) {
   const spec = transitions[kind] || { title: '进入节点' };
   const combat = kind === 'battle' || kind === 'boss';
   const transition = showRunTransition(combat
-    ? { ...spec, duration: motionTiming.sceneEnter, holdVisual: true, prepare: ensureBattleReady }
-    : { ...spec, art: TRANSITION_ART[kind], presentation: 'node-cut', duration: motionTiming.sceneEnter, holdVisual: true });
+    ? { ...spec, duration: SILENT_FILMS[kind].duration, holdVisual: true, prepare: ensureBattleReady }
+    : { ...spec, scene:kind, art: TRANSITION_ART[kind], presentation: 'node-cut', duration: SILENT_FILMS[kind]?.duration || motionTiming.sceneEnter, holdVisual: true });
   return transition.then(async current => {
     if (!current || !transition.isCurrent()) return false;
     if (!combat) {
@@ -437,14 +354,14 @@ export function openPickupPage(kind, gain, onDone, skipSearch = false, transacti
 export function buildEncounter(layerIdx) {
   const enc = MAP.encounters[layerIdx] || MAP.encounters[0];
   let pool, size;
-  const selected=selectEncounterSpec(enc,MAP.monsters,()=>Random.random('enemy'));
+  const selected=selectEncounterSpec(enc,MAP.monsters,()=>Random.random('enemy', 'enemy'));
   if(selected.ok === false) throw new Error(`遭遇配置无效：${selected.code}`);
   const spec=selected.value;
   let strategy=spec.strategy, risk=spec.risk;
   // 2026-09-10 玩法定版：每层每种敌人有固定数量区间（一律落在 1~3 只，如 2-3 只），
-  // 区间内每个数量等概率生成（MAP.rollCount）；巨兽「荒渊」按层概率刷出（第 3 层 3%、第 4 层 10%），固定单体。
+  // 区间内每个数量等概率生成（MAP.rollCount）；二层起以当层精英替换一个位置，总数不变。
   pool=spec.enemyIds; size=spec.size;
-  const n=spec.kind==='group'?2:(MAP.rollCount ? MAP.rollCount(size, () => Random.random('enemy')) : size[0] + Math.floor(Random.random('enemy') * (size[1] - size[0] + 1)));
+  const n=spec.kind==='group'?2:(MAP.rollCount ? MAP.rollCount(size, () => Random.random('enemy', 'enemy')) : size[0] + Math.floor(Random.random('enemy', 'enemy') * (size[1] - size[0] + 1)));
   /** @type {(ReturnType<typeof scaledEnemy>[]) & {risk?:string, strategy?:string, encounterId?:string, encounterKind?:string, rewardKind?:string, fallbackReason?:string}} */
   const list = [];
   // 只对新局第三层普通遭遇轮换；独立种子盐不推进地图、掉落或遭遇随机流。
@@ -457,10 +374,14 @@ export function buildEncounter(layerIdx) {
       MAP.monsters[entry.id] && !MAP.monsters[entry.id].elite) : [];
   const rotation = alternatives.length > 1 ? hashSeed(`${game.mapSeed ?? game.seed}:third-layer-encounters:v1`) + ordinal : null;
   for (let i = 0; i < n; i++) {
-    const originalId=spec.kind==='group'?pool[i]:pool[Math.floor(Random.random('enemy') * pool.length)];
+    const originalId=spec.kind==='group'?pool[i]:pool[Math.floor(Random.random('enemy', 'enemy') * pool.length)];
     const id=rotation === null ? originalId : alternatives[(rotation + i) % alternatives.length].id;
     const tpl = MAP.monsters[id];
     list.push(scaledEnemy({ ...tpl }));
+  }
+  if (enc.guaranteedElite?.length) {
+    const id = enc.guaranteedElite[Math.floor(Random.random('enemy', 'enemy') * enc.guaranteedElite.length)];
+    list[0] = scaledEnemy({ ...MAP.monsters[id] });
   }
   // 元数据不参与战斗结算，仅用于战前预告和战斗内提示；旧敌人对象仍保持原字段。
   list.risk = risk;
@@ -546,7 +467,7 @@ export function grantEventCard(tpl, opts = {}) {
   if (tpl.id === 'tt2-apollo') {
     const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c) && c.id !== 'tt2-apollo');
     if (pool.length) {
-      const got = pool[Math.floor(Random.random('loot') * pool.length)];
+      const got = pool[Math.floor(Random.random('loot', 'reward') * pool.length)];
       UI.log('[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠另 1 张随机卡牌', 'loot');
       // 宝箱可把已掷定附赠保留为独立待领卡；本体与附赠各自记领取状态。
       if (typeof opts.deferAcquiredCard === 'function') opts.deferAcquiredCard(got);
@@ -557,8 +478,8 @@ export function grantEventCard(tpl, opts = {}) {
 }
 // ESM：循环导入下本模块体先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
 export const FIRE_RESTORABLE = (card) => card.type !== '道具' && card.type !== '装备';
-// opts = { title, icon, tone, sub }：2026-09-19 留言 #21——复原页不再一律伪装成
-// 「营火休整」（修鞋铺等事件里复原时跳成火堆页观感）；不传 opts 保持火堆口径
+// opts = { title, icon, tone, sub }：调用方传入当前来源的标题与说明。
+// 祭坛和「战地整备」复原分支各用自身身份；不传 opts 时默认「营火休整」。
 export function openPocketRestore(picks, done, opts = {}, transaction = null) {
   const record = opts.restoreRecord;
   if (record && nodeRestoreAt(game) !== record) return false;
@@ -579,12 +500,14 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     const scrollTop = surface?.querySelector('.pocket-restore-content')?.scrollTop ?? 0;
     const left = record?.left ?? txn.left;
     const list = restorable();
+    const rows = list.map(item => ({ item, card:item.card, count:item.count, name:item.card.name,
+      id:item.card.id, variant:item.variantKey || item.card.variantKey || '' }));
     const blockedN = game.usedPocket.filter(p => !FIRE_RESTORABLE(p.card)).reduce((sum, p) => sum + p.count, 0);
     const title = opts.title || '营火休整';
     const icon = opts.icon || '[[icon:fire]]';
     const cardsHTML = list.length
-      ? list.map(p => `
-          <button type="button" class="bt-card fire-restore-card${left <= 0 ? ' off' : ''}" data-act="restoreOne" data-cancel="false" data-name="${escAttr(p.card.name)}" ${left <= 0 ? 'disabled' : ''}
+      ? list.map((p, index) => `
+          <button type="button" class="bt-card fire-restore-card${left <= 0 ? ' off' : ''}" data-act="restoreOne" data-cancel="false" data-i="${index}" data-name="${escAttr(p.card.name)}" ${left <= 0 ? 'disabled' : ''}
             aria-label="${escAttr(`${p.card.name}，消耗区剩余 ${p.count} 张，复原 1 张回背包`)}" aria-description="${escAttr(p.card.desc || '')}"
             title="${escAttr(p.card.desc || p.card.name)}">
             <span class="pocket-restore-art" aria-hidden="true">${SDT.Cards.cardHTML(p.card, 'sm')}</span>
@@ -624,13 +547,19 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     };
     UI.act('restoreOne', (d) => {
       if (!live()) return;
-      const p = game.usedPocket.find(x => x.card.name === d.name && FIRE_RESTORABLE(x.card));
-      if (!p || (record?.left ?? txn.left) <= 0) return;
+      if (d.i == null && game.usedPocket.filter(item => item.card.name === d.name && FIRE_RESTORABLE(item.card)).length !== 1) return;
+      const matches = d.i == null ? rows.filter(row => row.name === d.name)
+        : Number.isInteger(Number(d.i)) ? rows.filter((_, index) => index === Number(d.i)) : [];
+      if (matches.length !== 1) return;
+      const row = matches[0], p = row.item;
+      if (!game.usedPocket.includes(p) || p.card !== row.card || p.count !== row.count || p.card.name !== row.name
+        || p.card.name !== d.name || p.card.id !== row.id || (p.variantKey || p.card.variantKey || '') !== row.variant
+        || !FIRE_RESTORABLE(p.card) || (record?.left ?? txn.left) <= 0) return;
       // 2026-09-06 #18：背包满时不能复原
       const card = p.card;
       if (!game.canReceiveCard(card)) { UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
       if (record) {
-        if (!claimNodeRestore(game, record, { name:d.name, isRestorable:FIRE_RESTORABLE,
+        if (!claimNodeRestore(game, record, { name:d.name, entry:p, isRestorable:FIRE_RESTORABLE,
           canReceive:c => game.canReceiveCard(c), newUid })) return;
         saveGame();
       } else {
@@ -639,9 +568,16 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
         game.ownedCards.push(createCardInstance(card, newUid()));
         txn.left--;
       }
-      SDT.Sound.sfx('cardRestore');
       UI.log(`[[icon:sparkles]] 【<b>${esc(card.name)}</b>】已复原，回到背包`, 'ok');
       if ((record?.left ?? txn.left) <= 0) finish(); else render();
+      const onMap = (record?.left ?? txn.left) <= 0;
+      const host = onMap ? document.getElementById('viewport') : UI.el?.ovBody;
+      const outcomeCell = `${game.layerIdx},${game.trackPos}`, body = UI.el?.ovBody, page = body?.firstElementChild;
+      playOutcomeFeedback(host,{kind:'restore',cards:[card],source:opts.title || '卡牌复原',
+        extra:opts.feedbackExtra || '',
+        surface:onMap ? host : null,blocking:!onMap,cardHTML:entry=>SDT.Cards.cardHTML(entry,'sm'),
+        isCurrent:()=>txn.current() && `${game.layerIdx},${game.trackPos}`===outcomeCell && (!onMap || !body ||
+          (UI.el?.ovBody===body && (body.firstElementChild===page || (UI.el?.overlay?.hidden && !body.firstElementChild))))});
     });
     UI.act('fireDone', finish);
     if (record) {

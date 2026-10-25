@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Random, SeededRandomService } from '../game/src/core/random.js';
 import { createBattleFoeLifecycle } from '../game/src/battle/core/battle.foe-lifecycle.js';
@@ -101,7 +103,7 @@ describe('表现与记录随机不推进规则流', () => {
     expect(Random.snapshot()).toEqual(before);
   });
 
-  it('新增命名流沿现有 seed/rngState 存读档契约继续，旧快照和仅 seed 仍可恢复', () => {
+  it('新增命名流沿现有 seed/rngState 存读档契约继续，旧快照和仅 seed 仍可恢复', async () => {
     const legacyState = Random.snapshot();
     defeatFoes(2);
     recordRun('abandon');
@@ -110,7 +112,7 @@ describe('表现与记录随机不推进规则流', () => {
     expect(savedState.streams.visual).toEqual(expect.any(Number));
     expect(savedState.streams.recording).toEqual(expect.any(Number));
     expect(savedState.streams['agent-policy']).toEqual(expect.any(Number));
-    expect(RunStorage.write(1, { seed: Random.seed, rngState: savedState })).toBe(true);
+    expect(await RunStorage.write(1, { seed: Random.seed, rngState: savedState })).toBe(true);
     const expectedRules = nextRules(Random);
     const expectedOther = [Random.random('visual'), Random.random('recording'), Random.random('agent-policy')];
 

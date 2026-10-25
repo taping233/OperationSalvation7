@@ -13,8 +13,7 @@ const SKILL_ART = Object.freeze({
 export function careerSkillButtonHTML({ skill, state, availability, effect, disabled }) {
   const mark = state === 'used' ? '✓' : state === 'targeting' ? '◎' : '';
   const label = `${skill.name}，${skill.cost}费，${availability}，${effect}；每回合一次`;
-  const note = `${skill.cost} 费 · ${availability} · 每回合一次${skill.needsTarget ? ' · 点击后选择敌人' : ' · 点击即生效'}`;
-  return `<span class="ui-tip-anchor battle-skill-help" data-ui-tip data-ui-tip-title="${escAttr(skill.name)}" data-ui-tip-text="${escAttr(skill.hint || effect)}" data-ui-tip-note="${escAttr(note)}"${disabled ? ` tabindex="0" role="group" aria-label="${escAttr(`${skill.name}，${availability}，技能说明`)}"` : ''}>
+  return `<span class="ui-tip-anchor battle-skill-help" data-ui-tip data-ui-tip-title="${escAttr(skill.name)}" data-ui-tip-text="${escAttr(skill.hint || effect)}"${disabled ? ` tabindex="0" role="group" aria-label="${escAttr(`${skill.name}，${availability}，技能说明`)}"` : ''}>
     <button type="button" class="bt-slam-btn${state === 'targeting' ? ' active' : ''}" data-act="btSlam" data-skill-state="${escAttr(state)}"
     aria-label="${escAttr(label)}"${disabled ? ' disabled' : ''}>
     <img class="battle-skill-art" src="${escAttr(SKILL_ART[skill.kind] || SKILL_ART.attack)}" alt="" draggable="false" decoding="async">

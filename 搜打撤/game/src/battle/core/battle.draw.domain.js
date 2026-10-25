@@ -1,3 +1,4 @@
+import { isStarterAttackPoolMember } from '../../cards/card-legacy-battle-policy.js';
 import { isQueuedCastSource } from './battle.card-presentation.js';
 import { directTriggerSource } from '../effects/battle.trigger-source.js';
 import { esc } from '../../core/shared.js';
@@ -25,6 +26,17 @@ function createBattleDraw({
   applyTextEffects, resolveCard, fireDrawn, fireAcquire,
   checkSealTransformation, queueCardExecution, requestBattleRender,
 }) {
+  function withinDrawBatch(action) {
+    const prior = instanceRuntime.lastDrawnUids;
+    const token = instanceRuntime.battleState.token;
+    try { return action(); }
+    finally {
+      // A nested draw owns its own immediate result; once its trigger completes,
+      // restore the outer arrivals for effects that release this whole batch.
+      if (instanceRuntime.G?.battleActive && instanceRuntime.battleState.token === token && prior !== instanceRuntime.lastDrawnUids)
+        instanceRuntime.set$lastDrawnUids([...new Set([...prior, ...instanceRuntime.lastDrawnUids])]);
+    }
+  }
   const acquiring = new Set();
   function fireCardAcquire(card) {
     const source = directTriggerSource(card, 'onAcquire');
@@ -48,7 +60,7 @@ function castDrawnCopy(uid, card) {
     }
     return queued !== false;
   }
-function drawCards(n) {
+function drawCards(n, type = null) {
     const token = instanceRuntime.battleState.token;
     let got = 0;
     let drawnToHand = 0;   // 真正入手张数（抽到即施放/灰烬符文直接释放的不占手牌，不计入）
@@ -57,10 +69,23 @@ function drawCards(n) {
       if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token) break;
       // 空库停止；消耗牌仅由明确卡牌效果取回，不随抽牌自动洗回。
       if (!instanceRuntime.drawPile.length) break;
-      const uid = instanceRuntime.drawPile.pop();
+      let sourceIndex = instanceRuntime.drawPile.length - 1;
+      // A filtered draw changes only which UID is taken. Arrival, onDraw,
+      // overflow and automatic-cast handling stay in this same dispatcher.
+      if (type !== null) {
+        while (sourceIndex >= 0) {
+          const candidateUid = instanceRuntime.drawPile[sourceIndex];
+          const candidate = findEffectiveCard?.(candidateUid) || findCard(candidateUid);
+          if (candidate && (type === '杀' || type === '初始攻击'
+            ? isStarterAttackPoolMember(candidate.card, cardCatalog.SHA.id) : candidate.card.type === type)) break;
+          sourceIndex--;
+        }
+        if (sourceIndex < 0) break;
+      }
+      const [uid] = instanceRuntime.drawPile.splice(sourceIndex, 1);
       const entry = findEffectiveCard?.(uid) || findCard(uid);
       if (entry?.card?._battleTransformMissing) {
-        instanceRuntime.drawPile.push(uid);
+        instanceRuntime.drawPile.splice(sourceIndex, 0, uid);
         instanceRuntime.G.log(`[[icon:cross]] 转换目标「${esc(entry.card._battleTransformMissing)}」缺失，本次未抽取或施放`, 'warn');
         break;
       }
@@ -86,18 +111,18 @@ function drawCards(n) {
           // 直释视同已打出：uid 必须留在牌堆簿记里，否则从所有牌区消失、无法洗回
           // （09-30 深审 BC-02；与 execPlay 普通打出的 discard.push 同口径）
           instanceRuntime.discard.push(uid);
-          resolveCard(entry.card, alive()[0] || null, true, 0);
+          withinDrawBatch(() => resolveCard(entry.card, alive()[0] || null, true, 0));
           got++;
           continue;
         }
-        instanceRuntime.drawPile.push(uid);
+        instanceRuntime.drawPile.splice(sourceIndex, 0, uid);
         break;
       }
       // M2：结构化「抽到时」触发（rules.triggers.onDraw）——与文本抽到即施放同门：直接结算，不占手牌
       if (drawTrigger?.kind === 'structured' && drawTrigger.ops?.length) {
         instanceRuntime.discard.push(uid);
         instanceRuntime.G.log(`[[icon:flask]] <b>抽到时</b>：【${esc(entry.card.name)}】触发效果`, 'sys');
-        fireDrawn(entry.card, alive()[0] || null);
+        withinDrawBatch(() => fireDrawn(entry.card, alive()[0] || null));
         got++;
         if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token) break;
         sweepDead();
@@ -110,7 +135,7 @@ function drawCards(n) {
         for (const text of drawTrigger.texts) {
           if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token || instanceRuntime.G.hp <= 0 || !alive().length) break;
           instanceRuntime.G.log(`[[icon:flask]] <b>抽到时施放</b>：【${esc(entry.card.name)}】${esc(text)}`, 'sys');
-          applyTextEffects(entry.card, text, alive()[0] || null, { triggered: true });
+          withinDrawBatch(() => applyTextEffects(entry.card, text, alive()[0] || null, { triggered: true }));
         }
         got++;
         if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token) break;
@@ -165,33 +190,9 @@ function grantSha(n) {
     for (let i = 0; i < n; i++) addTempCard(base);
   }
 function deckDraw({ n, type }) {
-    let moved = 0;
-    instanceRuntime.set$lastDrawnUids([]);
-      const rest = [];
-      while (instanceRuntime.drawPile.length && moved < n) {
-        const uid = instanceRuntime.drawPile.pop();
-        const o = findCard(uid);
-        const matches = o && (type === '杀' || type === '初始攻击'
-          ? o.card.id === cardCatalog.SHA.id || ['杀', '初始攻击'].includes(o.card.name)
-          : o.card.type === type);
-        if (matches && o.card._castOnDraw) {
-          castDrawnCopy(uid, o.card);
-          moved++;
-          if (instanceRuntime.handSelecting) break;
-        } else if (matches && (instanceRuntime.mode !== 'boss' || instanceRuntime.hand.length < instanceRuntime.effectiveHandMax(R().battleHandMax))) {
-          instanceRuntime.hand.push(uid);
-          moved++;
-          instanceRuntime.lastDrawnUids.push(uid);
-          instanceRuntime.cardAnims.push({ kind: 'draw', uid, name: o.card.name });
-        }
-        else rest.push(uid);
-      }
-      // rest 按 pop 序（顶→底）累积，直接 push 会把相对顺序翻转（原顶牌沉底）；reverse 归位
-      instanceRuntime.drawPile.push(...rest.reverse());
-      // 所有模式只实抽牌库：搜完仍不足就少抽，不从全卡池生成替代牌。
-      // （09-30 深审 BC-03——武装「从牌库中抽取 2 张装备」牌库没有装备时不得随机补足）
-      if (moved) instanceRuntime.G.log(`[[icon:cards]] 从牌库抽取 ${moved} 张【${esc(type)}】牌`, 'sys');
-      return moved;
+    const moved = drawCards(n, type);
+    if (moved && instanceRuntime.G?.battleActive) instanceRuntime.G.log(`[[icon:draw-card]] 从牌库抽取 ${moved} 张【${esc(type)}】牌`, 'sys');
+    return moved;
   }
 function releaseHandMatches(key, drawEach, max) {
     const re = key === '杀' ? /^(杀|初始攻击)$/ : new RegExp(key);

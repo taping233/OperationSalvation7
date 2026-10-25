@@ -1,10 +1,10 @@
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { expect, it } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
 const declarations = (file, selector) => {
   const result = {};
-  postcss.parse(readFileSync(file, 'utf8')).walkRules(rule => {
+  postcss.parse(readCssSource(file, 'utf8')).walkRules(rule => {
     if (rule.selectors.includes(selector)) rule.walkDecls(decl => { result[decl.prop] = decl.value; });
   });
   return result;
@@ -16,15 +16,14 @@ it('map and reward share a shrinkable viewport that reserves the expedition tool
   expect(declarations('game/css/overlays.css', '#viewport')).toMatchObject({ flex:'1', 'min-height':'0', overflow:'clip' });
 });
 it('compact picker reserves toolbar and footer while its card region can shrink and scroll', () => {
-  const file = 'game/css/chest-reward-overview.css';
-  const host = 'body #overlay .card .cqo-frame .cqp-dialog';
-  expect(declarations(file, `${host}:has(.reward-compact)`)).toMatchObject({ 'max-height':'100%', flex:'none' });
-  expect(declarations(file, `${host} .reward-compact`)).toMatchObject({ height:'0', flex:'1 1 0', 'grid-template-rows':'auto minmax(0,1fr) auto' });
+  const file = 'game/css/room-rewards.css', host = 'body #overlay .card .room-reward';
+  expect(declarations(file, `${host}.reward-replica`)).toMatchObject({ height:'100%', 'min-height':'0', overflow:'hidden' });
+  expect(declarations(file, `${host} .reward-main`)).toMatchObject({ 'grid-row':'2', 'min-height':'0', overflow:'hidden' });
   expect(declarations(file, `${host} .reward-stage`)).toMatchObject({ 'min-height':'0', overflow:'auto' });
-  expect(declarations(file, `${host} .reward-compact .reward-objects`)['align-content']).toBe('safe center');
-  expect(declarations(file, `${host} .reward-compact .reward-foot`)).toMatchObject({ 'flex-wrap':'wrap' });
-  expect(declarations(file, `${host} .reward-compact .loot-actions .reward-claim`)['min-width']).toBe('160px');
+  expect(declarations(file, `${host} .reward-foot.room-footer`)).toMatchObject({display:'grid','grid-template-columns':'minmax(0,1fr) auto'});
+  expect(declarations(file, `${host} .loot-actions .reward-claim`)['min-width']).toBe('160px');
 });
-it('standalone compact rewards retain an explicit bounded height rather than the nested flex slot', () => {
-  expect(declarations('game/css/chest-reward-overview.css', 'body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact')).toMatchObject({ height:'min(720px,calc(100% - 64px))', flex:'0 1 auto' });
+it('overview and standalone cards share the same bounded reward frame', () => {
+  expect(declarations('game/css/room-rewards.css', 'body #overlay .card .room-reward.reward-replica')).toMatchObject({ height:'100%','max-height':'100%',overflow:'hidden' });
+  expect(declarations('game/css/chest-reward-overview.css', 'body #overlay .card .cqo-frame .cqp-scroll')).toMatchObject({flex:'1','min-height':'0',overflow:'hidden'});
 });

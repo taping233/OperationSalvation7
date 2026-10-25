@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { readCssSource } from './helpers/css-source.js';
 
 const state = vi.hoisted(() => ({ snapshot: null }));
 const timers = vi.hoisted(() => []);
@@ -278,7 +279,7 @@ it('keeps a simultaneous original play and recast to one legacy flight and one l
 });
 
 it('keeps all new visual layers non-interactive and provides CSS reduced-motion fallbacks', () => {
-  const css = readFileSync('game/css/battle-stage.css', 'utf8');
+  const css = readCssSource('game/css/battle-stage.css', 'utf8');
   for (const selector of ['.bt-hand-acquired', '.bt-hand-acquired::before', '.bt-hand-page-new', '.bt-recast-feedback', '.bt-recast-feedback::before']) {
     const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     expect(css).toMatch(new RegExp(`${escaped}\\{[^}]*pointer-events:none`));

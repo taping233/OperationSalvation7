@@ -25,7 +25,7 @@ function overlay(content = '<main><header>Heading</header><section>Content</sect
 it.each([
   ['ordinary dialog', '<main><header>Heading</header><section>Content</section></main>'],
   ['backpack', '<main class="bag-v2"><nav class="bag-rail">Bag</nav><section class="bag-board">Cards</section></main>'],
-  ['reward', '<main class="entry-reward-scene"><div class="entry-reward-cards">Reward</div></main>'],
+  ['reward', '<main class="reward-v14"><div class="reward-main">Reward</div></main>'],
 ])('gives %s one opacity owner on entry and paired exit', (_name, content) => {
   const root = overlay(content);
   enterSurface(root);
@@ -47,11 +47,11 @@ it('keeps one fade when the native surface is also its own panel', () => {
   document.body.append(root);
   enterSurface(root);
   expect(visual.retargetVisual).toHaveBeenCalledWith(root,
-    { opacity: 1, y: 0, scale: 1 }, expect.objectContaining({ from: { opacity: 0, y: 10, scale: .992 } }));
+    { opacity: 1, y: 0, scale: 1 }, expect.objectContaining({ from: { opacity: 0, y: 10, scale: 1 } }));
   expect(visual.retargetVisual.mock.calls.filter(([el, target]) => el !== root && 'opacity' in target)).toHaveLength(0);
   visual.retargetVisual.mockClear();
   leaveSurface(root);
-  expect(visual.retargetVisual).toHaveBeenCalledWith(root, { opacity: 0, y: 6, scale: .992 }, expect.any(Object));
+  expect(visual.retargetVisual).toHaveBeenCalledWith(root, { opacity: 0, y: 6, scale: 1 }, expect.any(Object));
 });
 
 it('reverses the same surface immediately without reset, queued delay, or CSS keyframes', () => {
@@ -89,9 +89,9 @@ it('targets backpack and reward regions as groups while preserving caller hiding
   expect(visual.retargetVisual).toHaveBeenCalledWith(board, { x: 24, y: 0, scale: 1 }, expect.any(Object));
   expect(root.hidden).toBe(false);
   clearSurface(root);
-  root.querySelector('#ovBody').innerHTML = '<main class="entry-reward-scene"><div class="entry-reward-cards"><button>Reward</button></div></main>';
+  root.querySelector('#ovBody').innerHTML = '<main class="reward-v14"><div class="reward-main"><button>Reward</button></div></main>';
   enterSurface(root);
-  expect(root.querySelector('.entry-reward-cards').dataset.surfaceTarget).toBe('1');
+  expect(root.querySelector('.reward-main').dataset.surfaceTarget).toBe('1');
   expect(root.querySelector('button').dataset.surfaceTarget).toBeUndefined();
 });
 

@@ -79,12 +79,32 @@ function isAcquireAction(value) {
  * @returns {import('./card-rules.capability.types.js').CardRuleCapability}
  */
 export function inspectCardRuleCapability(card) {
-  card = cardRulePreflightView(card);
+  return inspectPreparedCard(cardRulePreflightView(card));
+}
+
+/** Analyze one migration candidate without validating its unchanged root twice.
+ * The receipt is local to this call; no caller-supplied validation is accepted.
+ * Registered-trigger views remain separate inputs and must be validated again.
+ * @param {unknown} card
+ * @returns {{validation: ReturnType<typeof validateCardRules>, capability: import('./card-rules.capability.types.js').CardRuleCapability}}
+ */
+export function analyzeCardRules(card) {
+  const validation = validateCardRules(card);
+  if (!validation.ok) return { validation, capability: { kind: 'invalid', ok: false, issues: validation.errors } };
+  const prepared = cardRulePreflightView(card);
+  return { validation, capability: inspectPreparedCard(prepared, prepared === card ? validation : undefined) };
+}
+
+/** @param {unknown} card
+ * @param {ReturnType<typeof validateCardRules>} [validation]
+ * @returns {import('./card-rules.capability.types.js').CardRuleCapability}
+ */
+function inspectPreparedCard(card, validation) {
   const cardId = String(field(card, 'id') ?? '<missing id>');
   if (!isObject(card)) {
     return { kind: 'invalid', ok: false, issues: [{ cardId, path: 'card', message: 'expected a card object' }] };
   }
-  const validation = validateCardRules(card);
+  validation ??= validateCardRules(card);
   if (!validation.ok) return { kind: 'invalid', ok: false, issues: validation.errors };
   const rules = field(card, 'rules');
   if (rules === undefined) return { kind: 'legacy', ok: true };

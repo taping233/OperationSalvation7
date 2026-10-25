@@ -7,9 +7,10 @@ async function setup() {
   vi.resetModules(); vi.useFakeTimers();
   document.body.innerHTML = '<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
   const body = document.getElementById('ovBody'), overlay = document.getElementById('overlay'), actions = {};
+  let pendingAction;
   body.addEventListener('click', event => {
     const button = event.target.closest('[data-act]');
-    if (button && !button.disabled) actions[button.dataset.act]?.(button.dataset);
+    if (button && !button.disabled) pendingAction=actions[button.dataset.act]?.(button.dataset);
   });
   const card = { id:'supply', name:'补给卡', type:'法术', rarity:'古朴', cost:0, desc:'' };
   const draw = vi.fn(() => card);
@@ -28,90 +29,14 @@ async function setup() {
     grantCard:vi.fn(() => true), gainCoins:vi.fn(), persistSave:vi.fn() };
   await import('../game/src/run/chests.js');
   const chests = window.SDT.Chests;
-  const click = (act, index) => {
+  const click = async (act, index) => {
     const button = body.querySelector(`[data-act="${act}"]${index === undefined ? '' : `[data-i="${index}"]`}`);
-    expect(button, act).not.toBeNull(); button.click();
+    expect(button, act).not.toBeNull(); button.click(); await pendingAction;
   };
-  const open = () => { click('chestNext'); click('chestReveal'); };
+  const open = async () => { if(body.querySelector('[data-act="chestReveal"]')) await click('chestReveal'); };
   const save = () => JSON.parse(JSON.stringify(chests.serialize(game)));
   return { body, game, chests, draw, click, open, save, actions };
 }
-
-it('金币可先独立领取，未开箱读档保持原卡牌且金币不重领', async () => {
-  const { body, game, chests, draw, click, open, save, actions } = await setup();
-  const done = vi.fn();
-  chests.open(game, [{ kind:'small' }], done, { onCell:true });
-  expect(body.querySelector('.cqo-coins')).not.toBeNull();
-  expect(body.querySelector('.cqo-boxes [data-act="chestOverviewCoins"]')).toBeNull();
-  const staleClaim = actions.chestOverviewCoins;
-  game.canReceiveCard = () => false;
-  click('chestOverviewCoins'); staleClaim();
-  expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(2);
-  expect(game.grantCard).not.toHaveBeenCalled();
-  const saved = save();
-  expect(saved.current).toMatchObject({ rewardStage:'chest', coinsReceived:true, taken:[] });
-  expect(restoreChestReward(game, saved)).not.toBeNull();
-  expect(chests.restore(game, saved, done)).toBe(true);
-  expect(body.querySelector('[data-act="chestOverviewCoins"]')).toBeNull();
-  game.canReceiveCard = () => true;
-  open();
-  expect(body.querySelector('.cqp-dialog .reward-coin-unit')).toBeNull();
-  click('chestTake1'); expect(game.state).toBe('idle'); expect(save()).toBeNull();
-  expect(game.gainCoins).toHaveBeenCalledTimes(1);
-  expect(draw).toHaveBeenCalledTimes(1);
-  expect(done).toHaveBeenCalledTimes(1);
-});
-
-
-it.each(['chestNext', 'chestOpen'])('开箱入口%s只收当前箱金币，卡牌领取不追加收币', async action => {
-  const h = await setup(), done = vi.fn();
-  h.chests.open(h.game, [{ kind:'small' }, { kind:'small' }], done, { onCell:true });
-  expect(h.draw).toHaveBeenCalledTimes(1);
-  expect(h.body.querySelector('[data-act="chestNext"]').textContent).toContain('开箱并收金币');
-  expect(h.body.querySelector('[data-act="chestOpen"]').getAttribute('aria-label')).toContain('开箱并收金币');
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('待领 2 · 已领 0');
-  const staleOpen = h.actions[action];
-  h.click(action, action === 'chestOpen' ? 0 : undefined); staleOpen({ i:0 });
-  expect(h.game.gainCoins.mock.calls.flat()).toEqual([2]);
-  expect(h.save().current.coinsReceived).toBe(true);
-  expect(h.draw).toHaveBeenCalledTimes(1);
-  h.click('chestReveal'); h.click('chestTake1');
-  expect(h.game.gainCoins.mock.calls.flat()).toEqual([2]);
-  expect(h.body.querySelector('.cqo-progress')).toBeNull();
-  expect(h.body.querySelectorAll('.cqo-box:not(:disabled)')).toHaveLength(1);
-  const saved = h.save(); expect(h.chests.restore(h.game, saved, done)).toBe(true);
-  h.open();
-  expect(h.game.gainCoins.mock.calls.flat()).toEqual([2, 2]);
-  expect(h.draw).toHaveBeenCalledTimes(2);
-  h.click('chestTake1');
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('已收下 4');
-  h.click('chestFinish'); h.actions.chestFinish();
-  expect(h.game.gainCoins.mock.calls.flat()).toEqual([2, 2]);
-  expect(done).toHaveBeenCalledTimes(1);
-});
-
-it('先独立领首箱币，再开两箱只新增第二箱币，返回地图/重载不重发', async () => {
-  const h = await setup(), done = vi.fn();
-  h.chests.open(h.game, [{ kind:'small' }, { kind:'small' }], done, { onCell:true });
-  const staleClaim = h.actions.chestOverviewCoins;
-  h.click('chestOverviewCoins');
-  expect(h.body.querySelector('[data-act="chestNext"]').textContent).toContain('打开宝箱');
-  h.open(); h.click('chestTake1');
-  expect(h.game.gainCoins.mock.calls.flat()).toEqual([2]);
-  expect(h.draw).toHaveBeenCalledTimes(1);
-  h.open();
-  expect(h.game.gainCoins.mock.calls.flat()).toEqual([2, 2]);
-  expect(h.draw).toHaveBeenCalledTimes(2);
-  await h.actions.chestReturn(); expect(h.game.state).toBe('idle');
-  staleClaim();
-  const saved = JSON.parse(JSON.stringify(h.game.nodeChestRewards['0,1']));
-  expect(restoreChestReward(h.game, saved)).toBeTruthy();
-  expect(h.chests.restore(h.game, saved, done)).toBe(true);
-  h.click('chestNext'); h.click('chestTake1');
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('已收下 4');
-  expect(h.game.gainCoins.mock.calls.flat()).toEqual([2, 2]);
-  expect(h.draw).toHaveBeenCalledTimes(2);
-});
 
 function fixedSnapshot({ screen='cards', source, taken=[] } = {}) {
   const card = { id:'a', name:'原奖励', type:'法术', rarity:'古朴' };
@@ -121,85 +46,59 @@ function fixedSnapshot({ screen='cards', source, taken=[] } = {}) {
     index:1, context:{ onCell:true }, current, screen };
 }
 
-it.each(['chestTake', 'chestLeave'])('直接恢复待领卡牌层后%s不收币，独立金币仍可完成且只收一次', async action => {
-  const h = await setup(), done = vi.fn();
-  expect(h.chests.restore(h.game, fixedSnapshot(), done)).toBe(true);
-  if (action === 'chestLeave') h.click('chestSkip');
-  const staleCard = h.actions[action];
-  h.click(action); staleCard();
-  expect(h.game.gainCoins).not.toHaveBeenCalled();
-  expect(h.save().current.coinsReceived).toBe(false);
-  expect(h.save().current[action === 'chestTake' ? 'taken' : 'lost']).toEqual([0, 1]);
-  expect(h.body.querySelector('[data-act="chestFinish"]')).toBeNull();
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('待领 3 · 已领 0');
-  expect(h.chests.restore(h.game, h.save(), done)).toBe(true);
-  const staleCoin = h.actions.chestOverviewCoins;
-  h.click('chestOverviewCoins'); staleCoin();
-  expect(h.game.gainCoins).toHaveBeenCalledExactlyOnceWith(3);
-  expect(h.chests.restore(h.game, h.save(), done)).toBe(true);
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('已收下 3');
-  h.click('chestFinish'); expect(done).toHaveBeenCalledTimes(1);
+
+it('直接开箱收币，不自动领卡；暂停读档不重抽或重复收币',async()=>{
+  const h=await setup(),done=vi.fn(); h.chests.open(h.game,[{kind:'small'}],done,{onCell:true});
+  expect(h.game.gainCoins).toHaveBeenCalledExactlyOnceWith(2);
+  expect(h.game.grantCard).not.toHaveBeenCalled(); expect(h.body.querySelector('.cqo-overview')).toBeNull();
+  const saved=h.save(); expect(saved.current).toMatchObject({rewardStage:'cards',coinsReceived:true,taken:[]});
+  expect(restoreChestReward(h.game,saved)).not.toBeNull();
+  h.chests.restore(h.game,saved,done);await h.open();
+  expect(h.draw).toHaveBeenCalledTimes(1);expect(h.game.gainCoins).toHaveBeenCalledTimes(1);
+  await h.click('chestTake1');expect(done).toHaveBeenCalledTimes(1);expect(h.game.state).toBe('idle');
 });
 
-it('旧已开卡牌从总览继续时收未领币，之后单领/重入不重发', async () => {
-  const h = await setup();
-  expect(h.chests.restore(h.game, fixedSnapshot({ screen:'overview' }), vi.fn())).toBe(true);
-  expect(h.body.querySelector('[data-act="chestNext"]').textContent).toContain('继续领取并收金币');
-  expect(h.body.querySelector('[data-act="chestOpen"]').getAttribute('aria-label')).toContain('继续领取并收金币');
-  h.click('chestNext');
-  expect(h.game.gainCoins).toHaveBeenCalledExactlyOnceWith(3);
-  h.click('chestTake1');
-  h.click('chestClosePicker');
-  expect(h.body.querySelector('[data-act="chestNext"]').textContent).toContain('继续领取');
-  expect(h.body.querySelector('[data-act="chestNext"]').textContent).not.toContain('收金币');
-  expect(h.body.querySelector('[data-act="chestOpen"]').getAttribute('aria-label')).not.toContain('收金币');
-  h.click('chestOpen', 0);
-  expect(h.chests.restore(h.game, h.save(), vi.fn())).toBe(true);
-  h.click('chestTake1', 1);
-  expect(h.game.gainCoins).toHaveBeenCalledExactlyOnceWith(3);
+it('连续两箱只在抵达各箱时收币；不重复领取，不返回总览',async()=>{
+  const h=await setup(),done=vi.fn();h.chests.open(h.game,[{kind:'small'},{kind:'small'}],done,{onCell:true});
+  expect(h.draw).toHaveBeenCalledTimes(1);expect(h.game.gainCoins.mock.calls.flat()).toEqual([2]);
+  await h.open();const stale=h.actions.chestTake1;await h.click('chestTake1');stale({i:0});
+  expect(h.draw).toHaveBeenCalledTimes(2);expect(h.game.grantCard).toHaveBeenCalledTimes(1);
+  expect(h.game.gainCoins.mock.calls.flat()).toEqual([2,2]);expect(h.body.querySelector('.cqo-overview')).toBeNull();
+  await h.open();await h.click('chestTake1');await h.click('chestContinue');
+  expect(h.game.grantCard).toHaveBeenCalledTimes(2);expect(done).toHaveBeenCalledTimes(1);
 });
 
-it('多个已生成快照金币独立汇总，仅收未领箱且不重新抽卡', async () => {
-  const h = await setup(), saved = fixedSnapshot({ screen:'overview' });
-  saved.queue.push({kind:'small', reward:{...structuredClone(saved.current), coins:5, coinsReceived:true}});
-  saved.queue.push({kind:'small', reward:{...structuredClone(saved.current), coins:7}});
-  expect(h.chests.restore(h.game, saved, vi.fn())).toBe(true);
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('待领 10 · 已领 5');
-  const stale = h.actions.chestOverviewCoins;
-  h.click('chestOverviewCoins'); stale();
-  expect(h.game.gainCoins.mock.calls.flat()).toEqual([3, 7]);
-  expect(h.chests.restore(h.game, h.save(), vi.fn())).toBe(true);
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('已收下 15');
-  h.actions.chestOverviewCoins();
-  expect(h.game.gainCoins.mock.calls.flat()).toEqual([3, 7]);
-  expect(h.draw).not.toHaveBeenCalled();
+it.each(['cards','overview'])('旧%s快照未领金币在恢复当前箱时收取一次，原卡原骰保留',async screen=>{
+  const h=await setup(),done=vi.fn();expect(h.chests.restore(h.game,fixedSnapshot({screen}),done)).toBe(true);
+  expect(h.game.gainCoins).toHaveBeenCalledExactlyOnceWith(3);expect(h.draw).not.toHaveBeenCalled();
+  h.chests.restore(h.game,h.save(),done);expect(h.game.gainCoins).toHaveBeenCalledTimes(1);
+  const stale=h.actions.chestTake1;await h.click('chestTake1',0);await stale({i:0});
+  expect(h.save().current.taken).toEqual([0]);expect(h.game.grantCard).toHaveBeenCalledTimes(1);
+  await h.click('chestTake1',1);await h.click('chestContinue');expect(done).toHaveBeenCalledTimes(1);
 });
 
-it.each(['chestTake', 'chestLeave', 'chestContinue'])('固定奖励非总览入口保留原%s收币行为且不重复', async action => {
-  const h = await setup(), done = vi.fn();
-  expect(h.chests.restore(h.game, fixedSnapshot({ source:'事件固定奖励', taken:action === 'chestContinue' ? [0, 1] : [] }), done)).toBe(true);
-  if (action === 'chestLeave') h.click('chestSkip');
-  const stale = h.actions[action]; h.click(action); stale();
+it.each(['chestTake','chestLeave'])('旧奖励%s后无需再领金币；原领取与放弃索引不变',async action=>{
+  const h=await setup(),done=vi.fn();h.chests.restore(h.game,fixedSnapshot(),done);
+  if(action==='chestLeave')await h.click('chestSkip');const stale=h.actions[action];await h.click(action);await stale();
   expect(h.game.gainCoins).toHaveBeenCalledExactlyOnceWith(3);
-  if (action !== 'chestContinue') {
-    expect(h.chests.restore(h.game, h.save(), done)).toBe(true);
-    h.click('chestContinue');
-    expect(h.game.gainCoins).toHaveBeenCalledExactlyOnceWith(3);
-  }
-  expect(done).toHaveBeenCalledTimes(1);
+  expect(h.save().current[action==='chestTake'?'taken':'lost']).toEqual([0,1]);
+  await h.click('chestContinue');expect(done).toHaveBeenCalledTimes(1);
 });
 
-it('未生成的无金币箱和已独立领币箱入口不声称收金币', async () => {
-  const h = await setup();
-  window.SDT.MAP.chestKinds.boss = { name:'首脑保险柜', cards:1, coins:null };
-  h.chests.open(h.game, [{kind:'small'}, {kind:'boss'}], vi.fn(), {onCell:true});
-  const bossButton = h.body.querySelector('[data-act="chestOpen"][data-i="1"]');
-  expect(bossButton.getAttribute('aria-label')).toContain('打开宝箱');
-  expect(bossButton.textContent).not.toContain('收金币');
-  h.click('chestOverviewCoins');
-  expect(h.body.querySelector('[data-act="chestOpen"][data-i="0"]').textContent).not.toContain('收金币');
-  h.open(); h.click('chestTake1');
-  expect(h.body.querySelector('[data-act="chestNext"]').textContent).toContain('打开宝箱');
-  expect(h.body.querySelector('[data-act="chestNext"]').textContent).not.toContain('收金币');
-  expect(h.draw).toHaveBeenCalledTimes(1);
+it('已生成多箱快照沿顺序衔接；已领币跳过，未领币不遗失，不重新抽卡',async()=>{
+  const h=await setup(),saved=fixedSnapshot({screen:'overview'}),done=vi.fn();
+  saved.queue.push({kind:'small',reward:{...structuredClone(saved.current),coins:5,coinsReceived:true}});
+  saved.queue.push({kind:'small',reward:{...structuredClone(saved.current),coins:7}});
+  h.chests.restore(h.game,saved,done);expect(h.game.gainCoins.mock.calls.flat()).toEqual([3]);
+  await h.click('chestTake');expect(h.game.gainCoins.mock.calls.flat()).toEqual([3]);
+  await h.click('chestTake');expect(h.game.gainCoins.mock.calls.flat()).toEqual([3,7]);
+  await h.click('chestTake');await h.click('chestContinue');
+  expect(h.draw).not.toHaveBeenCalled();expect(done).toHaveBeenCalledTimes(1);
+});
+
+it.each(['chestTake','chestLeave','chestContinue'])('固定来源奖励沿用%s的既有收币时机，重复回调不重复发币',async action=>{
+  const h=await setup(),done=vi.fn();h.chests.restore(h.game,fixedSnapshot({source:'固定奖励',taken:action==='chestContinue'?[0,1]:[]}),done);
+  if(action==='chestLeave')await h.click('chestSkip');const stale=h.actions[action];await h.click(action);await stale();
+  expect(h.game.gainCoins).toHaveBeenCalledExactlyOnceWith(3);
+  if(action!=='chestContinue')await h.click('chestContinue');expect(done).toHaveBeenCalledTimes(1);
 });

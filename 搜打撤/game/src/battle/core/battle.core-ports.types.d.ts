@@ -23,7 +23,7 @@ export interface CombatPort {
   addCurse(target: CombatUnit, key: string, amount: number): number;
   hasCurse(target: CombatUnit): boolean;
 }
-export interface RandomPort { random(stream?: string): number }
+export interface RandomPort { random(stream?: string, purpose?: string): number }
 export interface BattleCardLibrary {
   SHA: CoreCard;
   all(): CoreCard[];
@@ -123,7 +123,7 @@ export interface EffectCommands {
   fireConsumeTriggers(card: CoreCard, target: CoreFoe | null): void;
   replaceShaInDeck(n: number): number;
   summonAlly(name: string, atk: number, hp: number, n?: number, statless?: boolean): void;
-  queuePouchCast(uid: string): void;
+  queuePouchCast(uid: string, executionCard?: CoreCard): void;
   tryUnlockSeal(name: string): void;
   checkElementSealProgress(): void; fireCatGift(card: CoreCard): void;
   handCurseSpecs(): { key: string; n: number }[]; queueSwapCostDiscover(): void;
@@ -153,7 +153,7 @@ export interface TextEffectPorts {
   queueDiscover(value: DiscoverQueueJob): number; randomDiscoverCard: EffectCommands['randomDiscoverCard'];
   addTempCard: EffectCommands['addTempCard']; addDeckCard: EffectCommands['addDeckCard'];
   queueHandSelect(job: HandSelectJob): void;
-  restoreConsumed(n: number): number; random01(): number; allCards(): CoreCard[]; queueChoice(job: ChoiceJob): void;
+  restoreConsumed(n: number): number; random01(purpose?: string): number; allCards(): CoreCard[]; queueChoice(job: ChoiceJob): void;
   registerTurnStartText(text: string, cardName: string): void;
   setStealthStrike(value: boolean): void; setNextSpellTwice(n: number): void;
   shuffleDeck(): number; addEnergy(n: number): number; refillEnergy(): number; addEnergyCap(n: number): number;
@@ -186,7 +186,7 @@ export type ResolutionPorts = Pick<EffectCommands,
   esc(value: string): string; log(message: string, kind?: string): void; heal(amount: number): void;
   addFloat(value: BattleFloat): number; addDelayed(value: DelayedEffect): number;
   takeDeckBottom(count: number): string[]; deckBottomCount(): number; startSurge(promise: Promise<unknown>): void;
-  getAllCards(): CoreCard[]; isRandomObtainable(card: BattleCardInput): boolean; randomBattle(): number;
+  getAllCards(): CoreCard[]; isRandomObtainable(card: BattleCardInput): boolean; randomBattle(purpose?: string): number;
   getDamageTypes(): string[]; getDamageTypeMeta(): BattleCardLibrary['DMG_TYPE_META']; fixedDamageType: string;
   hasCurse(foe: CoreFoe): boolean; getAliveFoes(): CoreFoe[]; getGrowth(uid: string): number;
   getHandInfuseCount(uid: string): number; getFoeIndex(foe: CoreFoe): number;
@@ -242,7 +242,7 @@ export type InspectionState = Pick<RuntimeState, 'granted' | 'hand' | 'consumed'
 export type InspectionCards = BattleCardLibrary & { TABLETOP10?: CoreCard[]; deriveDraw(card: CoreCard): number; deriveInfuse(card: CoreCard): number };
 export type SelectionPorts = Partial<Pick<EffectCommands, 'findCard' | 'addTempCard' | 'addDeckCard' | 'queueCardExecution' | 'fireConsumeTriggers' | 'fireCatGift' | 'sweepDead'>> & {
  cards: { all(): CoreCard[]; isRandomObtainable(card: BattleCardInput): boolean; sellPrice(card: BattleCardInput): number };
- deny(): void; random01(): number; throwIfActionCancelled(signal?: AbortSignal): void;
+ deny(): void; random01(purpose?: string): number; throwIfActionCancelled(signal?: AbortSignal): void;
  session: EffectSession & { resumeTurnEnd?(): boolean };
  requestBattleRender?(): void; shuffleDeck?(): void;
  queueBattleAction?(work: (signal: AbortSignal) => Promise<void>, label?: string, onError?: (error: unknown) => void): void;
@@ -261,5 +261,6 @@ export type DrawPorts = Pick<EffectCommands, 'alive' | 'findCard' | 'sweepDead' 
 };
 export type FoeLifecyclePorts = Pick<EffectCommands, 'alive' | 'foeIdx' | 'hitFoe'> & {
  finish(victory: boolean): void; stagedDeathFx: Set<CoreFoe>;
+ onFoeDefeated?(foe: CoreFoe): void;
  executionSession: { stagedResolutionDepth: number };
 };

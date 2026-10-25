@@ -151,7 +151,7 @@ it('cross-layer arrival resolves only once after the shared curtain, without a s
   arrive(); arrive();
   expect(g).toMatchObject({state:'moving',layerIdx:1,trackPos:1,turn:2});
   expect(document.querySelectorAll('.map-layer-passage')).toHaveLength(1);
-  await vi.advanceTimersByTimeAsync(1000);
+  await vi.advanceTimersByTimeAsync(5500);
   expect(g).toMatchObject({state:'idle',layerIdx:1,trackPos:1,turn:2});
   expect(getMapTravelPresentation(g)).toBeNull();
   expect(document.querySelector('.map-layer-passage')).toBeNull();

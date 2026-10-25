@@ -4,29 +4,36 @@ import { readFileSync, writeFileSync, readdirSync, lstatSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
+const digest = buffer => createHash('sha256').update(buffer).digest('hex');
+
+function artifactInventory(root, forPublication = false) {
+  const files = new Map(), excludedHiddenPaths = [];
+  function visit(relative) {
+    for (const entry of readdirSync(path.join(root, relative), { withFileTypes: true })) {
+      const file = path.posix.join(relative, entry.name);
+      if (entry.isSymbolicLink()) throw new Error((forPublication ? 'Build artifact cannot contain symlinks: ' : 'Artifact contains symlink: ') + file);
+      // Match upload-artifact default only when preparing the publication inventory.
+      if (forPublication && entry.name.startsWith('.')) { excludedHiddenPaths.push(file); continue; }
+      if (entry.isDirectory()) visit(file);
+      else if (entry.isFile() && file !== 'build-provenance.json') {
+        const bytes = readFileSync(path.join(root, file));
+        files.set(file, { bytes: bytes.length, sha256: digest(bytes) });
+      } else if (!forPublication && !entry.isFile()) throw new Error('Unsupported artifact entry: ' + file);
+    }
+  }
+  visit('');
+  return { files, excludedHiddenPaths };
+}
+
 export function writeBuildProvenance({ outDir, sourceSha, runId, budgetOutcome, fontLicenseDir }) {
   if (!/^[a-f0-9]{40}$/.test(sourceSha || '')) throw new Error('Exact source commit SHA required');
   if (!/^\d+$/.test(runId || '')) throw new Error('Workflow run ID required');
   if (!['success', 'failure'].includes(budgetOutcome)) throw new Error('Completed budget outcome required');
   const root = path.resolve(outDir);
   if (lstatSync(root).isSymbolicLink() || !lstatSync(root).isDirectory()) throw new Error('Build root must be a regular directory');
-  const digest = buffer => createHash('sha256').update(buffer).digest('hex');
-  const files = [];
-  const excludedHiddenPaths = [];
-  function visit(relative) {
-    for (const entry of readdirSync(path.join(root, relative), { withFileTypes: true })) {
-      const file = path.posix.join(relative, entry.name);
-      if (entry.isSymbolicLink()) throw new Error('Build artifact cannot contain symlinks: ' + file);
-      // Match upload-artifact default: hidden paths are not transferred.
-      if (entry.name.startsWith('.')) { excludedHiddenPaths.push(file); continue; }
-      if (entry.isDirectory()) visit(file);
-      else if (entry.isFile() && file !== 'build-provenance.json') {
-        const bytes = readFileSync(path.join(root, file));
-        files.push({ path: file, bytes: bytes.length, sha256: digest(bytes) });
-      }
-    }
-  }
-  visit('');
+  const inventory = artifactInventory(root, true);
+  const { excludedHiddenPaths } = inventory;
+  const files = [...inventory.files].map(([path, data]) => ({ path, ...data }));
   if (!files.some(file => file.path === 'index.html') || !files.some(file => file.path.startsWith('assets/js/'))) throw new Error('Missing build entry or JavaScript assets');
   const licenses = readdirSync(fontLicenseDir).filter(name => /^LICENSE(?:[-_].+)?\.(?:txt|md)$/i.test(name));
   if (!licenses.length) throw new Error('Source font license notices missing');
@@ -55,20 +62,7 @@ export function verifyBuildArtifact({ outDir, expectedSha }) {
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
   if (manifest.schemaVersion !== 1 || manifest.sourceSha !== expectedSha || manifest.build !== 'success') throw new Error('Artifact source or build provenance mismatch');
   if (!Array.isArray(manifest.files) || !Array.isArray(manifest.notices)) throw new Error('Invalid artifact file manifest');
-  const actual = new Map();
-  function walk(relative) {
-    for (const entry of readdirSync(path.join(root, relative), { withFileTypes: true })) {
-      const file = path.posix.join(relative, entry.name);
-      if (entry.isSymbolicLink()) throw new Error('Artifact contains symlink: ' + file);
-      if (entry.isDirectory()) walk(file);
-      else if (entry.isFile() && file !== 'build-provenance.json') {
-        const bytes = readFileSync(path.join(root, file));
-        actual.set(file, { bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') });
-      }
-      else if (!entry.isFile()) throw new Error('Unsupported artifact entry: ' + file);
-    }
-  }
-  walk('');
+  const { files: actual } = artifactInventory(root);
   const seen = new Set();
   let totalBytes = 0;
   for (const file of manifest.files) {

@@ -1,6 +1,7 @@
 import { createCityCut, prepareCityCut } from './camp-entry.js';
 import { visualFrame } from './page-visual-ready.js';
 import { revealTransition } from './transition-handoff.js';
+import { startSilentFilm } from './silent-node-film.js';
 import '../../css/startup-transition.css';
 
 let activeCleanup;
@@ -37,12 +38,12 @@ export function installStartupTransition() {
       cover.setAttribute('role', 'status');
       cover.setAttribute('aria-label', '进入城市');
       cut = createCityCut({ archive: '城市档案', title: '进入城市',
-        subtitle: 'ENTER THE CITY / 冬日猜想', destination: 'CITY', watermark: 'CITY', scene: 'camp' });
+        subtitle: 'ENTER THE CITY / 冬日猜想', destination: 'CITY', watermark: 'CITY', scene: 'departure' });
       cut.classList.add('page-cut-waiting');
       cover.append(cut);
       document.body.append(cover);
       window.addEventListener('keydown', blockKeys, true);
-      await prepareCityCut(cut, { signal: controller.signal });
+      await prepareCityCut(cut, { signal: controller.signal, deferPlayback:true });
     }
     await visualFrame(controller.signal);
     await visualFrame(controller.signal);
@@ -57,6 +58,7 @@ export function installStartupTransition() {
     });
     else if (state === 'playing' && !playing) {
       playing = true;
+      startSilentFilm(cut);
       cut?.classList.remove('page-cut-waiting');
       const complete = () => { root.dataset.desktopStartup = 'complete'; finish(); };
       if (cut) revealTransition(cover, { signal:controller.signal, painted:true,

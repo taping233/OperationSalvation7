@@ -1,4 +1,6 @@
 import { motionReduced, motionTiming } from './motion-presets.js';
+import { silentFilmRemaining } from './silent-node-film.js';
+import { cinematicProfile } from './cinematic-profiles.js';
 import '../../css/transition-handoff.css';
 
 let resumePresentation = null;
@@ -20,6 +22,7 @@ export function beginResumePresentation() {
 
 // All page/scene adapters share the same paint, readiness and reveal boundary.
 // Adapters supply destination work and ownership; they do not animate the exit.
+// The whole cover fades, including opaque scene wrappers, before it is removed.
 export function transitionPause(ms, signal) {
   if (ms <= 0 || signal?.aborted) return Promise.resolve();
   return new Promise((/** @type {(value?: void) => void} */ resolve) => {
@@ -53,9 +56,20 @@ export async function revealTransition(cover, { ready = () => true, isCurrent = 
   signal, onReveal, minimum = 0, duration = 980, painted = false } = {}) {
   const current = () => !signal?.aborted && cover.isConnected && isCurrent();
   if (!current()) return false;
-  const rich = cover.matches('.camp-entry-cut') || !!cover.querySelector('.camp-entry-cut');
+  // Node cuts have already presented their destination while resources load.
+  // Keep that settled image through the handoff; only dedicated entrances replay.
+  const held = cover.matches('.city-run-transition.resume-hold')
+    || !!cover.querySelector('.city-run-transition.resume-hold');
+  const rich = !held && (cover.matches('.camp-entry-cut') || !!cover.querySelector('.camp-entry-cut'));
   const resume = cover.dataset.handoffProfile === 'resume';
-  cover.classList.add(rich ? 'transition-handoff-rich' : 'transition-handoff');
+  const richDuration=cover.dataset.handoffProfile==='brief' ? 260 : duration;
+  const silentFilm=/** @type {HTMLElement} */ (cover.matches('.silent-node-cut') ? cover : cover.querySelector('.silent-node-cut'));
+  const richExit=silentFilm ? Math.max(cover.dataset.handoffProfile === 'brief' ? cinematicProfile('loading').exitDuration : 680,
+    Number(silentFilm.dataset.filmExitDuration) || 0) : richDuration;
+  const exitDuration = silentFilm ? richExit : held ? 680 : resume ? motionTiming.resumeExit : rich ? richExit : motionTiming.handoff;
+  cover.style.setProperty('--motion-handoff', `${exitDuration}ms`);
+  cover.style.setProperty('--silent-film-exit-duration',`${richExit}ms`);
+  cover.classList.add(held ? 'transition-handoff-held' : rich ? 'transition-handoff-rich' : 'transition-handoff');
   if (!painted) {
     await transitionFrame(signal);
     await transitionFrame(signal);
@@ -71,6 +85,8 @@ export async function revealTransition(cover, { ready = () => true, isCurrent = 
   if (result === false || !current()) return false;
   await dwell;
   if (!current()) return false;
+  if (silentFilm && !held) await transitionPause(silentFilmRemaining(silentFilm),signal);
+  if (!current()) return false;
   await transitionFrame(signal);
   if (!current()) return false;
   onReveal?.();
@@ -78,6 +94,6 @@ export async function revealTransition(cover, { ready = () => true, isCurrent = 
   cover.querySelectorAll('.page-cut-waiting').forEach(cut => cut.classList.remove('page-cut-waiting'));
   cover.classList.add('leaving');
   if (!rich) cover.classList.add('transition-handoff-leaving');
-  if (!motionReduced()) await transitionPause(resume ? motionTiming.resumeExit : rich ? duration : motionTiming.handoff, signal);
+  if (!motionReduced()) await transitionPause(exitDuration, signal);
   return current();
 }

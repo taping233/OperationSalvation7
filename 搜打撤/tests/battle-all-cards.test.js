@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 全卡库真实战斗实打审计（2026-09-09 老板任务）：
  * 在真实 BattleSession（battle.core，无视图层）里逐张开战、逐张打出/使用，
  * 验证每张卡「能打出、不崩、战斗能正常收尾」。
@@ -22,7 +23,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');

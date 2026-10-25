@@ -9,6 +9,9 @@ import { captureOverlayReturnState, createOverlayReturn, restoreOverlayReturnSta
 import { clearExpeditionPanel, renderExpeditionPanel } from '../run/expedition.view.js';
 import { getOverlayRuntimeTracePanel, syncRuntimeTracePanel } from '../core/runtime-trace-panel.local.js';
 import { isAvailableControl as isAvailableOverlayFocusTarget } from './action-dispatch.js';
+import { registerScreenOwner } from './screen-owner.js';
+import { initRewardInteraction } from './reward-interaction.js';
+import { syncCommittedRunTopBar } from './run-top-bar.js';
 
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -66,6 +69,8 @@ export const overlayMethods = {
   },
 
   showOverlay(title, bodyHtml, mode, options = {}) {
+    this._releaseScreenOwner?.();
+    this._releaseScreenOwner = null;
     const revision = this._overlayRevision = (this._overlayRevision || 0) + 1;
     this._cancelPageBg?.();
     this.hideTooltip?.();
@@ -95,7 +100,8 @@ export const overlayMethods = {
     const content = options.battleBody ? options.battleBody(SDT.Icons.rich(bodyHtml)) : this.el.ovBody;
     if (!content) return;
     if (!options.battleBody) content.innerHTML = SDT.Icons.rich(bodyHtml);
-    // 广播当前弹层模式：战斗序列帧层据此做白名单（只有 battle 模式可见，2026-09-13 留言）
+    content.querySelectorAll('.room-reward').forEach(root => initRewardInteraction(root));
+    // Broadcast before committing mode so retained battle hooks can reject stale work.
     document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: mode }));
     if (options.battleBody && !options.battleBody()) return;
     // 主循环每帧读此标志判断“战斗页是否盖在画布上”；battle-stage 只会经这里进
@@ -178,7 +184,7 @@ export const overlayMethods = {
     // 同模式换页也会替换聚焦节点；在新页内已有主动焦点时保留它，
     // 显式首焦点仍优先，关闭或较新页面则取消本次延后聚焦。
     requestAnimationFrame(() => {
-      if (this.el.overlay.hidden || this._overlayRevision !== revision) return;
+      if (this.el.overlay.hidden || this.el.overlay.inert || this._overlayRevision !== revision) return;
       const explicitFocus = options.initialFocus || /** @type {HTMLElement} */ (content.querySelector('[data-initial-focus]'));
       if (!explicitFocus && this.el.overlay.contains(document.activeElement) && !document.activeElement.closest('[inert]')) return;
       const target = this._resolveOverlayInitialFocus(explicitFocus);
@@ -189,6 +195,7 @@ export const overlayMethods = {
     // 解码期间页面近乎纯黑、无任何反馈。这里读出 data-asset-key 元素的背景 URL，
     // 未就绪时挂 bg-loading 类（CSS 显示「正在进入…」微提示），图片到齐后自动摘除。
     this._checkPageBg(content);
+    if (mode !== 'battle' && !options.battleBody) this._releaseScreenOwner = registerScreenOwner({ root: this.el.overlay, priority: 10, allowNavigation: mode === 'page' && !!content.querySelector('#hubMain'), onBack: () => this.closeTopOverlayByEsc() });
     const soundTone = soundScene && [...soundScene.classList].find(name => name.startsWith('sc-'));
     SDT.Sound.scene?.(soundScene?.dataset.musicScene || (soundTone ? soundTone.slice(3) : null), soundScene?.dataset.assetKey || '', { mode });
   },
@@ -249,6 +256,8 @@ export const overlayMethods = {
   _bagCloseHook: null,
 
   hideOverlay(opts) {
+    this._releaseScreenOwner?.();
+    this._releaseScreenOwner = null;
     const immediate = !!(opts && opts.immediate);
     // 已关闭或正在淡出时，不重复广播关闭、撤销页面任务或推进返回令牌。
     if (!this._hideTimer && this.el.overlay.hidden) return;
@@ -272,8 +281,8 @@ export const overlayMethods = {
     SDT.Sound.scene?.(null);
     const card = this.el.ovBody.parentElement;
     // 不透明整屏页淡出：boss 留言 #52 要求所有界面退出都有过渡动画（200ms 淡出+下移）；
-    // room-view（战斗/房间页）例外保持瞬隐——留言 #33 实测整屏淡出每帧全屏重合成是
-    // 「继续」卡顿来源，性能口径优先（overlays.css 有同步注释）。
+    // Returning to the map keeps the departing scene for a short fade over the
+    // prepared map; internal room replacement retains synchronous cleanup.
     // T4（2026-10-04）：战斗/房间态轻弹层（战斗设置/墓地、玻璃确认）例外不瞬隐——
     // 留 160ms 给卡片层播反向动画（motion-transitions.css 只动卡片，
     // 容器不播整屏淡出，留言 #33 的整屏重合成口径保持），到点同步收场。
@@ -281,7 +290,7 @@ export const overlayMethods = {
     const btFastClose = !immediate && this.el.overlay.classList.contains('room-view') &&
       !!/** @type {HTMLElement} */ (card.querySelector?.('.bt-settings, .bt-gy-list, .glass-panel'));
     const instant = immediate || document.body.classList.contains('reduce-motion') ||
-      (this.el.overlay.classList.contains('room-view') && !btFastClose);
+      (this.el.overlay.classList.contains('room-view') && !btFastClose && !this.el.overlay.hasAttribute('data-map-return'));
     const finish = () => {
       this._hideTimer = null;
       this._finishHide = null;
@@ -405,6 +414,8 @@ export const overlayMethods = {
     const styles = new Map();
     const root = this._overlayInteractionRoot();
     const focusables = [...root.querySelectorAll(OVERLAY_FOCUS_SELECTOR)];
+    const runBar = root === this.el.ovBody && this.el.overlay.querySelector(':scope > #runTopBar');
+    if (runBar) focusables.push(...runBar.querySelectorAll(OVERLAY_FOCUS_SELECTOR));
     const panel = getOverlayRuntimeTracePanel(this.el.overlay);
     if (panel && !root.contains(panel)) focusables.push(...panel.querySelectorAll(OVERLAY_FOCUS_SELECTOR));
     return focusables.filter((el) => isAvailableOverlayFocusTarget(el, styles) && !(el.hasAttribute('tabindex') && el.tabIndex < 0));
@@ -461,7 +472,24 @@ export const overlayMethods = {
   _isolateOverlayBackground() {
     // The registered opt-in controls stay inside the modal, not exempt siblings.
     syncRuntimeTracePanel(this.el.overlay);
-    if (this._overlayInerted.length) return;
+    // Membership is settled here, after modal visibility commits. The earlier
+    // mode hook may still have observed a hidden overlay on its first opening.
+    const runBar = this.el.overlay.ownerDocument.getElementById('runTopBar');
+    if (runBar && !document.body.classList.contains('lobby')) {
+      if (runBar.parentNode !== this.el.overlay) this.el.overlay.prepend(runBar);
+      runBar.dataset.surface = this._lastMode === 'battle' || this._hasBattleStage ? 'battle' : 'room';
+    }
+    // Reparented modal members must shed only isolation owned by this overlay.
+    // Never clear another dialog's inert on the overlay itself or its ancestors.
+    this._overlayInerted = this._overlayInerted.filter(element => {
+      if (!this.el.overlay.contains(element)) return true;
+      element.removeAttribute('inert'); return false;
+    });
+    const bar = this.el.overlay.querySelector(':scope > #runTopBar');
+    const innerDialog = this._overlayInteractionRoot() !== this.el.ovBody;
+    if (bar && (innerDialog || this.el.ovBody.querySelector('.leave-run-panel')) && !bar.hasAttribute('inert')) {
+      bar.setAttribute('inert', ''); this._overlayInerted.push(bar);
+    }
     let node = this.el.overlay;
     while (node && node.parentElement) {
       for (const sibling of node.parentElement.children) {
@@ -474,9 +502,19 @@ export const overlayMethods = {
       }
       node = node.parentElement;
     }
+    syncCommittedRunTopBar(this);
   },
 
   _restoreOverlayBackground() {
+    // Close hooks run before the exit animation. A HUD refresh during that
+    // interval may have rejoined the modal; settle membership after it hides.
+    const bar = this.el.overlay.querySelector(':scope > #runTopBar');
+    if (this.el.overlay.hidden && bar) {
+      (this.el.viewport || this.el.overlay.ownerDocument.getElementById('viewport') || document.body).prepend(bar);
+      bar.dataset.surface = 'map';
+      bar.hidden = document.body.classList.contains('lobby');
+      bar.querySelector('#btnHome')?.setAttribute('aria-label', '离开对局');
+    }
     for (const el of this._overlayInerted.splice(0)) el.removeAttribute('inert');
     syncRuntimeTracePanel(this.el.overlay);
   },

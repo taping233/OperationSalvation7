@@ -315,11 +315,11 @@ describe('仓库补给物品真实页脚入口', () => {
     (await clickAction(button('stashHatch'))); (await clickAction(button('stashHatch')));
     expect(base.hatchPet).toHaveBeenCalledTimes(2); expect(document.getElementById('cardZoom')).toBeNull();
   });
-  it('拆包真实按钮受五格空位限制，最后一包需二次确认且向既有命令传5张', async () => {
-    base.data.stash = [{ card: pack, count: 1 }]; base.stashRoom = () => 4; pages.openStashCardView(0);
+  it('拆包真实按钮以净容量判断，四格空位加消耗卡包后恰好入库', async () => {
+    base.data.stash = [{ card: pack, count: 1 }]; base.stashRoom = () => 3; pages.openStashCardView(0);
     (await clickAction(button('stashOpenPack'))); (await clickAction(button('stashOpenPack')));
-    expect(base.openCardPack).not.toHaveBeenCalled(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('空位不足 5 格'), 'warn');
-    base.stashRoom = () => 5; (await clickAction(button('stashOpenPack')));
+    expect(base.openCardPack).not.toHaveBeenCalled(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('空位不足 4 格'), 'warn');
+    base.stashRoom = () => 4; (await clickAction(button('stashOpenPack')));
     expect(base.openCardPack).toHaveBeenCalledExactlyOnceWith('tt-econpack', expect.arrayContaining([expect.objectContaining({ count: 1 })]));
     expect(base.openCardPack.mock.calls[0][1]).toHaveLength(5); expect(document.getElementById('cardZoom')).toBeNull();
   });
@@ -350,7 +350,7 @@ describe('基地容量与材料信息准确性', () => {
     window.SDT.Cards.cardHTML=item=>item.name;
     const {warehouseHTML}=await import('../game/src/hub/hub.warehouse.js');
     document.querySelector('.hub-page').innerHTML=warehouseHTML();
-    expect(document.querySelector('.warehouse-rules').textContent).toMatch(/单击木材[、／]口粮[、／]钥匙卡使用\s*(一|1)\s*张，折入基地库存/);
+    expect(document.querySelector('[data-browser-key]').textContent).toContain('一把钥匙');
     expect(base.data.keys).toBe(0); expect(base.useStashMaterial).not.toHaveBeenCalled();
   });
   it.each([['木材',3],['口粮',2],['钥匙',4]])('材料详情按已有端口显示%s收益%i，不按名称猜数值', (label,amount) => {

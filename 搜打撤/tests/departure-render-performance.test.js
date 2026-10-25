@@ -5,7 +5,7 @@ vi.mock('../game/src/run/game.session.js',()=>({MAP:{rules:{starterSha:5}},MODES
   game:{stackCapOf:card=>card.id==='starter-attack'?5:card.type==='装备'?1:3},newRun:ports.start,requestClassChoice:ports.choice}));
 vi.mock('../game/src/hub/game.cardslib.js',()=>({Sfx:{tick(){}},_set_cardPageOpen:vi.fn()}));
 vi.mock('../game/src/hub/game.hub.bridge.js',()=>({slots:{renderHub:ports.hub}}));
-vi.mock('../game/src/ui/departure-transition.js',()=>({enterDepartureCut:vi.fn(),startDepartureHandoff:()=>new Promise(()=>{})}));
+vi.mock('../game/src/ui/departure-transition.js',()=>({enterDepartureCut:vi.fn(),enterDepartureStep:vi.fn(),startDepartureHandoff:()=>new Promise(()=>{})}));
 let departure,base,ui,actions,cardMemo;
 const key=id=>`card:${id}`;
 function card(id,type='法术'){return{id,name:`卡牌${id}`,type,rarity:'古朴',cost:1,desc:'原始规则'};}
@@ -110,15 +110,13 @@ describe('整备完整刷新与卡格复用',()=>{
     expect(document.getElementById('depBag').children).toHaveLength(6);
   });
 
-  it('容量拒绝、筛选和推荐按钮在复用路径保持当前值',async ()=>{
+  it('容量拒绝和筛选在复用路径保持当前值',async ()=>{
     base.bagCap=()=>2;open();add();add('b');
     expect(departure.deployPick[key('b')]).toBeUndefined();expect(document.getElementById('depStatus').textContent).toContain('背包格数已满');
     expect(document.getElementById('depCapacity').textContent).toContain('2/2');
     const filter=document.getElementById('depFilterType');filter.value='装备';filter.dispatchEvent(new Event('change'));
     expect([...document.querySelectorAll('#depPool .dep-card')].map(n=>n.hidden)).toEqual([true,true,false]);
     (await actions.depPet({id:'dog'}));expect(filter.value).toBe('装备');expect(pool('a').hidden).toBe(true);
-    expect(document.querySelector('[data-act="depRecommendApply"]').disabled).toBe(true);
-    expect(document.querySelector('[data-act="depRecommendUndo"]').disabled).toBe(true);
   });
 
   it('多轮复用只执行一次现有drop监听，重绘后的旧回调不抢新页',async ()=>{

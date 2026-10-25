@@ -72,6 +72,25 @@ async function installOverlay() {
   return { root, body, ui, closeSpy };
 }
 
+it.each([false, true])('entry supplies wait without a second scene (outgoing scene=%s)', async outgoing => {
+  vi.useFakeTimers();
+  vi.stubGlobal('requestAnimationFrame', fn => setTimeout(fn, 16));
+  vi.stubGlobal('cancelAnimationFrame', clearTimeout);
+  const { root, body, ui } = await installOverlay();
+  if (outgoing) ui.showOverlay('', '<div class="flow-transition"><div class="silent-node-cut">Previous departure</div></div>', 'scene');
+  const html = '<section class="entry-reward-scene entry-supply-strips"><header class="reward-head">Supply</header><main class="reward-main">Cards</main></section>';
+  ui.showOverlay('', html, 'page');
+  expect(document.querySelector('.page-visual-handoff')).not.toBeNull();
+  expect(document.querySelector('.page-visual-handoff .silent-node-cut')).toBeNull();
+  const page = body.firstElementChild;
+  ui.showOverlay('', html, 'page');
+  expect(body.firstElementChild).toBe(page);
+  await vi.advanceTimersByTimeAsync(1000);
+  expect(document.querySelector('.page-visual-handoff')).toBeNull();
+  expect(root.hidden).toBe(false);
+  expect(body.firstElementChild).toBe(page);
+});
+
 it('reopening during a room exit cannot let the old timer erase the new page', async () => {
   vi.useFakeTimers();
   const { root, body, ui } = await installOverlay();
@@ -121,7 +140,7 @@ it('carries the node illustration through slow destination readiness without a s
   expect(root.hidden).toBe(false);
 });
 
-const hubPage = (tab, sub = '') => `<main id="hubMain" class="base-camp"><header class="hub-head">Base</header><div class="hub-body"><nav class="hub-tabs"><button class="hub-tab on" data-tab="${tab}">Tab</button></nav><nav><button class="stash-section-tab on" data-view="${sub}">Section</button></nav><section class="hub-page"><div class="pv12-agent-strip">Strip</div><div class="pv12-agent-data">Data</div>${tab}/${sub}</section></div></main>`;
+const hubPage = (tab, sub = '') => `<main id="hubMain" class="base-camp"><header class="hub-head">Base</header><div class="hub-body"><nav class="hub-tabs"><button class="hub-tab on" data-tab="${tab}">Tab</button></nav><section class="hub-page" data-view="${tab}/${sub}"><div class="pv12-agent-strip">Strip</div><div class="pv12-agent-data">Data</div>${tab}/${sub}</section></div></main>`;
 
 it('base navigation keeps the veil and shell stable and animates only changed content', async () => {
   vi.useFakeTimers();

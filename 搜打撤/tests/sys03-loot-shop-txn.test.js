@@ -1,3 +1,4 @@
+import { chestBaseMocks } from './helpers/environment-fixtures.js';
 import { continueChestRewards, collectOverviewCoins } from './helpers/chest-actions.js';
 /* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：搜刮页与商店买卖的事务顺序。
  * 2026-10-12 领奖改为先查看再确认；grantCard 返回值仍决定入包/散落，
@@ -17,7 +18,7 @@ function bootDom() {
   ovBody.id = 'ovBody';
   ovBody.addEventListener('click', (event) => {
     const button = event.target.closest('[data-act]');
-    if (button) acts[button.dataset.act]?.(button.dataset);
+    if (button) pendingAction=acts[button.dataset.act]?.(button.dataset);
   });
   const cardShell = document.createElement('div');
   cardShell.className = 'card';
@@ -58,14 +59,7 @@ function bootSdt({ overlay, ovBody, ownedCards, grantCard, canReceiveCard }) {
       sellPrice: () => 1,
       cardHTML: () => '<div class="hs-card">测试卡</div>',
     },
-    Base: {
-      data: { eggPity: 0, eggBattles: 0 }, save: vi.fn(),
-      petEggDropChance: () => 0,
-      recordPetEggChestResult: vi.fn(),
-      bagCap: () => 10, isSha: () => false,
-    },
-    Sound: { sfx: vi.fn() },
-    Icons: { rich: (html) => html },
+    ...chestBaseMocks(() => vi),
   };
   const game = {
     state: 'idle', myClass: '', ownedCards,
@@ -79,6 +73,7 @@ function bootSdt({ overlay, ovBody, ownedCards, grantCard, canReceiveCard }) {
 }
 
 let acts = {};
+let pendingAction;
 let shopMod = null;
 afterEach(() => {
   vi.useRealTimers();
@@ -93,10 +88,9 @@ async function revealFirst(game, kind = 'small') {
   vi.resetModules();   // chests.js 顶层捕获 window.SDT：每个用例重载模块以绑定本用例的 SDT/DOM
   const { SDT: chestFacade } = await import('../game/src/run/chests.js');
   chestFacade.Chests.open(game, [{ kind }]);
-  document.querySelector('[data-act="chestNext"]').click();
-  const reveal = document.querySelector('[data-eps-search]');
-  expect(reveal).not.toBeNull();
-  reveal.click();   // 搜索演出点击立即揭晓 → render() 注册查看与领取动作
+  await pendingAction;
+  expect(document.querySelector('[data-eps-search]')).toBeNull();
+  expect(document.querySelector('.reward-v14')).not.toBeNull();
   return chestFacade;
 }
 
@@ -118,9 +112,9 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
       facade.Chests.resume();
     });
     facade = await revealFirst(game);
-    ovBody.querySelector('[data-act="chestSelect"]').click();
+    ovBody.querySelector('[data-act="chestSelect"]').click(); await pendingAction;
     expect(ovBody.querySelector('[data-act="chestOpenBag"]')).not.toBeNull();
-    ovBody.querySelector('[data-act="chestOpenBag"]').click();
+    ovBody.querySelector('[data-act="chestOpenBag"]').click(); await pendingAction;
     expect(bagOpens).toBe(1);
     expect(bagButton.disabled).toBe(false);
     expect(ovBody.querySelector('.reward-unit [data-act="chestSelect"]')).not.toBeNull();
@@ -141,11 +135,11 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
       },
     });
     await revealFirst(game);
-    ovBody.querySelector('[data-act="chestSelect"]').click();
+    ovBody.querySelector('[data-act="chestSelect"]').click(); await pendingAction;
     const take1 = () => ovBody.querySelector('[data-act="chestTake1"]');
     expect(take1()).not.toBeNull();
-    take1().click();
-    take1().click();   // 卡保持可点：失败后可重试（腾格后再收）
+    take1().click(); await pendingAction;
+    take1().click(); await pendingAction;   // 卡保持可点：失败后可重试（腾格后再收）
     expect(ownedCards).toHaveLength(0);
     expect(grantCalls).toEqual([CARD_A.name, CARD_A.name]);
     expect(game.state).toBe('modal');   // 未被静默 next()
@@ -168,20 +162,20 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     const showCount = vi.spyOn(window.SDT.UI, 'showOverlay');
     const scroll = ovBody.querySelector('.loot-scroll');
     scroll.scrollTop = 32;
-    ovBody.querySelector('[data-act="chestSelect"]').click();
+    ovBody.querySelector('[data-act="chestSelect"]').click(); await pendingAction;
     ovBody.querySelector('[data-act="chestTake1"]').focus();
-    ovBody.querySelector('[data-act="chestTake1"]').click();
+    ovBody.querySelector('[data-act="chestTake1"]').click(); await pendingAction;
     expect(ownedCards).toHaveLength(1);
     expect(showCount).not.toHaveBeenCalled();
     expect(ovBody.querySelector('.loot-scroll').scrollTop).toBe(32);
     expect(document.activeElement.dataset.act).toBe('chestTake1');
     expect(document.activeElement.dataset.i).toBe('1');
     const callsAfterTake1 = grantCalls.length;
-    acts.chestTake();   // 重绘前的批量请求仍不得重复领取已收卡。
+    await acts.chestTake();   // 重绘前的批量请求仍不得重复领取已收卡。
     expect(grantCalls.length).toBeGreaterThan(callsAfterTake1);
     expect(grantCalls.filter(n => n === CARD_A.name)).toHaveLength(1);   // 已拾取的 A 不重复发
     expect(game.state).toBe('modal');   // 结果留原位供核对
-    continueChestRewards(acts);
+    await continueChestRewards(acts);
     expect(game.state).toBe('idle');
   });
 
@@ -199,19 +193,19 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     });
     window.SDT.Cards.randomDropCard = (() => { let n = 0; return () => (n++ === 0 ? CARD_A : CARD_B); })();
     await revealFirst(game);
-    acts.chestTake();   // 全部收下（含放不下的），重绘后请求也必须守住事务边界。
+    await acts.chestTake();   // 全部收下（含放不下的），重绘后请求也必须守住事务边界。
     expect(ownedCards.map(o => o.card.name)).toEqual([CARD_A.name]);
-    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    await collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
     expect(game.gainCoins).toHaveBeenCalledWith(7);
     expect(ovBody.querySelector('.reward-final')).toBeNull();
     expect(ovBody.querySelector('.reward-capacity-note').textContent).toBe('暂时无法领取');
     expect(ovBody.querySelector('[data-act="chestContinue"]')).toBeNull();
-    ovBody.querySelector('[data-act="chestSkip"]').click();
-    ovBody.querySelector('[data-act="chestLeave"]').click();
-    expect(ovBody.querySelector('.cqo-box-rule').textContent).toContain('已领取 1 张');
-    expect(ovBody.querySelector('.cqo-box-complete').disabled).toBe(true);
+    ovBody.querySelector('[data-act="chestSkip"]').click(); await pendingAction;
+    ovBody.querySelector('[data-act="chestLeave"]').click(); await pendingAction;
+    expect(ovBody.querySelectorAll('.reward-unit.got')).toHaveLength(1);
+    expect(ovBody.querySelectorAll('.reward-unit.dropped')).toHaveLength(1);
     expect(ownedCards).toHaveLength(1);
-    continueChestRewards(acts);
+    await continueChestRewards(acts);
     expect(game.state).toBe('idle');
   });
 
@@ -226,16 +220,16 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
       grantCard(card) { grantCalls.push(card.name); return false; },
     });
     await revealFirst(game, 'medium');
-    ovBody.querySelector('[data-act="chestSelect"]').click();
-    acts.chestTake();       // 三选一不能由隐藏的批量动作越权收三张
-    continueChestRewards(acts);   // 尚有待领对象不能跳过离开确认
+    ovBody.querySelector('[data-act="chestSelect"]').click(); await pendingAction;
+    await acts.chestTake();       // 三选一不能由隐藏的批量动作越权收三张
+    await continueChestRewards(acts);   // 尚有待领对象不能跳过离开确认
     expect(grantCalls).toHaveLength(0);
     expect(game.state).toBe('modal');
     const pick = () => ovBody.querySelector('[data-act="chestPick"]');
     expect(pick()).toBeNull();   // 放不下时主动作是整理背包
     expect(ovBody.querySelector('[data-act="chestOpenBag"]')).not.toBeNull();
     // 直调旧动作也不得绕过当前容量判定。
-    acts.chestPick({ i: 0 });
+    await acts.chestPick({ i: 0 });
     expect(grantCalls).toHaveLength(1);
     expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(7);   // 开箱已收币，卡牌失败不再发币
     expect(game.state).toBe('modal');
@@ -249,35 +243,35 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     const ownedCards = [];
     const { game } = bootSdt({ overlay, ovBody, ownedCards });
     await revealFirst(game, 'medium');
-    ovBody.querySelector('[data-act="chestSelect"]').click();
-    ovBody.querySelector('[data-act="chestPick"]').click();
+    ovBody.querySelector('[data-act="chestSelect"]').click(); await pendingAction;
+    ovBody.querySelector('[data-act="chestPick"]').click(); await pendingAction;
     expect(ownedCards).toHaveLength(1);
     expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(7);
-    collectOverviewCoins(acts);
-    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    await collectOverviewCoins(acts);
+    await collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
     expect(game.state).toBe('modal');
-    continueChestRewards(acts);
+    await continueChestRewards(acts);
     expect(game.state).toBe('idle');
 
     // 第二只箱：放弃分支
     ownedCards.length = 0;
     game.gainCoins.mockClear();
     await revealFirst(game, 'medium');
-    ovBody.querySelector('[data-act="chestSkip"]').click();
+    ovBody.querySelector('[data-act="chestSkip"]').click(); await pendingAction;
     expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(7);   // 开箱已收币，离开确认不重复结算
     expect(ovBody.querySelector('.reward-leave-confirm').textContent).toContain('放弃剩余');
-    ovBody.querySelector('[data-act="chestStay"]').click();
+    ovBody.querySelector('[data-act="chestStay"]').click(); await pendingAction;
     expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(7);
-    ovBody.querySelector('[data-act="chestSkip"]').click();
-    ovBody.querySelector('[data-act="chestLeave"]').click();
+    ovBody.querySelector('[data-act="chestSkip"]').click(); await pendingAction;
+    ovBody.querySelector('[data-act="chestLeave"]').click(); await pendingAction;
     expect(ownedCards).toHaveLength(0);            // 卡散落
-    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1); // 币是无主物，跳过也收
-    continueChestRewards(acts);
+    await collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1); // 币是无主物，跳过也收
+    await continueChestRewards(acts);
     expect(game.state).toBe('idle');
   });
 });
 
-describe('宝箱开启帧与唯一揭晓', () => {
+describe('宝箱直接出牌与逐组领取', () => {
   async function animatedChest(game, chests = [{ kind:'small' }]) {
     vi.resetModules();
     const { SDT: facade } = await import('../game/src/run/chests.js');
@@ -286,61 +280,59 @@ describe('宝箱开启帧与唯一揭晓', () => {
     const show = vi.spyOn(facade.UI, 'showOverlay');
     facade.Chests.open(game, chests);
     show.mockClear();
-    facade.UI.el.ovBody.querySelector('[data-act="chestNext"]').click();
+    await pendingAction;
     return { facade, show };
   }
 
-  it('手动揭晓取消原逐帧timer，同箱只揭晓一次且不会重复排音效', async () => {
+  it('直接展示奖励，不重复重绘或排音效', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
     const { show } = await animatedChest(game);
-    ovBody.querySelector('[data-act="chestReveal"]').click();
-    expect(show).toHaveBeenCalledTimes(2);
+    expect(ovBody.querySelector('[data-eps-search]')).toBeNull(); await pendingAction;
+    expect(show).not.toHaveBeenCalled();
     vi.advanceTimersByTime(2000);
-    expect(show).toHaveBeenCalledTimes(2);
+    expect(show).not.toHaveBeenCalled();
     expect(window.SDT.Sound.sfx.mock.calls.filter(([name]) => name === 'reveal')).toHaveLength(2);
     expect(game.ownedCards).toHaveLength(0);
   });
 
-  it('依次播放开启帧，最终帧结束前不公开牌，领奖才发卡，开箱金币仅一次', async () => {
+  it('立即显示卡牌，领取才发卡，金币只收一次', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
     await animatedChest(game);
-    expect(ovBody.querySelector('.ps-chest').getAttribute('src')).toBe('unlock.webp');
-    expect(ovBody.querySelector('.reward-head')).toBeNull();
-    vi.advanceTimersByTime(300);
-    expect(ovBody.querySelector('.ps-chest').getAttribute('src')).toBe('open.webp');
-    expect(ovBody.querySelector('.reward-head')).toBeNull();
-    vi.advanceTimersByTime(100);
+    expect(ovBody.querySelector('.ps-chest')).toBeNull();
+    expect(ovBody.querySelectorAll('[data-act="chestSelect"]')).toHaveLength(2);
+    vi.advanceTimersByTime(400);
     expect(ovBody.querySelector('.reward-head')).not.toBeNull();
     expect(game.ownedCards).toHaveLength(0);
-    ovBody.querySelector('[data-act="chestTake"]').click();
+    ovBody.querySelector('[data-act="chestTake"]').click(); await pendingAction;
     vi.advanceTimersByTime(2000);
     expect(game.ownedCards).toHaveLength(2);
-    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    await collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
   });
 
-  it('开启中跳过后进下一箱，旧帧timer不串新箱或重复领奖', async () => {
+  it('领完后直接显示下一组，旧页动作不能领取新组', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
     await animatedChest(game, [{ kind:'small' }, { kind:'small' }]);
     vi.advanceTimersByTime(50);
-    ovBody.querySelector('[data-act="chestReveal"]').click();
+    expect(ovBody.querySelector('[data-eps-search]')).toBeNull(); await pendingAction;
     const staleTake = acts.chestTake;
-    ovBody.querySelector('[data-act="chestTake"]').click();
-    continueChestRewards(acts);
+    ovBody.querySelector('[data-act="chestTake"]').click(); await pendingAction;
+    await continueChestRewards(acts);
     staleTake();   // a departed box cannot claim the next box before its reveal
     vi.advanceTimersByTime(500);
-    expect(ovBody.querySelector('.cqo-box:not(:disabled) .cqo-box-art img').getAttribute('src')).toBe('closed.webp');
-    expect(ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
+    expect(ovBody.querySelector('.ps-chest')).toBeNull();
+    expect(ovBody.querySelector('.reward-source').textContent).toContain('2/2');
+    expect(ovBody.querySelectorAll('[data-act="chestSelect"]')).toHaveLength(2);
     expect(game.ownedCards).toHaveLength(2);
-    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    expect(game.gainCoins).toHaveBeenCalledTimes(2);
   });
 
-  it('开启中挂起到背包，旧timer不抢面板，恢复原结果不重抽或提前发放', async () => {
+  it('挂起到背包后不抢面板，恢复原结果不重抽或提前发放', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
@@ -353,12 +345,12 @@ describe('宝箱开启帧与唯一揭晓', () => {
     facade.Chests.resume();
     expect(ovBody.querySelector('.reward-head')).not.toBeNull();
     expect(game.ownedCards).toHaveLength(0);
-    ovBody.querySelector('[data-act="chestTake"]').click();
+    ovBody.querySelector('[data-act="chestTake"]').click(); await pendingAction;
     expect(game.ownedCards).toHaveLength(2);
-    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    await collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
   });
 
-  it('减少动态直接静态揭晓，帧等待不阻塞收取', async () => {
+  it('减少动态时同样直接显示卡牌', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
@@ -370,7 +362,7 @@ describe('宝箱开启帧与唯一揭晓', () => {
     expect(game.ownedCards).toHaveLength(0);
   });
 
-  it('切到其他节点面板作废开启timer，不抢新界面或提前领奖', async () => {
+  it('切到其他节点面板后不抢新界面或提前领奖', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
@@ -395,13 +387,13 @@ describe('宝箱开启帧与唯一揭晓', () => {
       // New open is a new reward batch; reset the prior batch's coin spy.
       game.gainCoins.mockClear();
       window.SDT.Chests.open(game, [{ kind:'small' }]);
-      ovBody.querySelector('[data-act="chestNext"]').click();
+      await pendingAction;
       vi.advanceTimersByTime(0);
       expect(ovBody.querySelector('.reward-head')).not.toBeNull();
       expect(game.ownedCards).toHaveLength(0);
-      ovBody.querySelector('[data-act="chestTake"]').click();
+      ovBody.querySelector('[data-act="chestTake"]').click(); await pendingAction;
       expect(game.ownedCards).toHaveLength(2);
-      collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
+      await collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
     } finally { setTurbo(false); }
   });
 });
@@ -464,7 +456,7 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
     expect(game.coins).toBe(100);
     expect(game.shopStock[0].sold).toBe(false);
     expect(ownedCards).toHaveLength(0);
-    acts.buyCard({ i: 0 });
+    await acts.buyCard({ i: 0 });
     expect(game.coins).toBe(95);
     expect(ownedCards).toHaveLength(1);
   });
@@ -483,7 +475,7 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
     window.SDT = { Cards: { isSellable: c => !!c.sellable, sellPrice: c => c.value || 0 }, Sound: { sfx() {} }, Icons: { rich: x => x } };
     shopMod = await import('../game/src/run/game.run.shop.js');
     const { game, acts, ownedCards } = makeShop();
-    acts.buyCard({ i: 0 });
+    await acts.buyCard({ i: 0 });
     expect(game.coins).toBe(95);
     expect(game.shopStock[0].sold).toBe(true);
     expect(ownedCards).toHaveLength(1);
@@ -498,7 +490,7 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
     expect(document.querySelector('.shop-detail .tone-limited').textContent).toBe('还差 2 币');
     expect(document.querySelector('.shop-detail-buy').disabled).toBe(true);
     expect(document.querySelector('.shop-detail-buy').getAttribute('aria-disabled')).toBe('true');
-    acts.buyCard({ i: 1 });   // 9 币的卡只有 3 币
+    await acts.buyCard({ i: 1 });   // 9 币的卡只有 3 币
     expect(game.coins).toBe(3);
     expect(game.shopStock[1].sold).toBeFalsy();
     expect(ownedCards).toHaveLength(0);
@@ -513,7 +505,7 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
     expect(document.querySelector('.shop-detail .tone-limited').textContent).toContain('背包装不下');
     expect(document.querySelector('.shop-detail-buy').disabled).toBe(true);
     expect(document.querySelector('.shop-detail-buy').getAttribute('aria-disabled')).toBe('true');
-    acts.buyCard({ i: 0 });
+    await acts.buyCard({ i: 0 });
     expect(game.coins).toBe(100);
     expect(game.shopStock[0].sold).toBeFalsy();
     expect(ownedCards).toHaveLength(0);
@@ -565,7 +557,7 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
     Object.defineProperty(entered, 'animationName', { value:'shop-detail-in' });
     detail.dispatchEvent(entered);
     expect(detail.dataset.shopMotion).toBeUndefined();
-    acts.buyCard({ i:1 });
+    await acts.buyCard({ i:1 });
     expect(detail.dataset.shopMotion).toBeUndefined();
     expect(detail.querySelector('.shop-detail-done')).not.toBeNull();
   });
@@ -618,7 +610,7 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
     const { acts } = makeShop({ coins: 10 });
     acts.shopInspect({ i: 0 });
     document.querySelector('.shop-detail-buy').focus();
-    acts.buyCard({ i: 0 });
+    await acts.buyCard({ i: 0 });
     expect(document.querySelectorAll('.shop-slot')).toHaveLength(3);
     expect(document.querySelector('.shop-slot.sold .shop-preview').getAttribute('aria-label')).toContain('货架卡甲');
     expect(document.querySelector('.shop-detail').hidden).toBe(false);
@@ -635,14 +627,14 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
       stock: [{ card: { id: 'sha', name: '初始攻击', rarity: '初始', type: '武术' }, price: 1, sold: false, shaReplenish: 5 }],
     });
     game.canReceiveCard = () => false;   // 满包：补充被拒
-    acts.buySha({ i: 0 });
+    await acts.buySha({ i: 0 });
     expect(game.coins).toBe(100);
     expect(game.shopStock[0].shaReplenish).toBe(5);
     game.canReceiveCard = () => true;
-    acts.buySha({ i: 0 });
+    await acts.buySha({ i: 0 });
     expect(game.coins).toBe(99);
     expect(game.shopStock[0].shaReplenish).toBe(4);
-    acts.closeShop();   // 取消=直接离开：无挂起扣费、页面关闭
+    await acts.closeShop();   // 取消=直接离开：无挂起扣费、页面关闭
     expect(game.coins).toBe(99);
     expect(game.state).toBe('idle');
     expect(overlayHidden.value).toBe(true);
@@ -651,10 +643,10 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
     ownedCards.push({ uid: 'coin-1', card: { id: 'c1', name: '铜币', type: '资源', value: 3, sellable: true } });
     controller.openShop('sys03');
     acts.openSell();
-    acts.sellCard({ uid: 'coin-1' });
+    await acts.sellCard({ uid: 'coin-1' });
     expect(game.coins).toBe(102);
     expect(ownedCards.some(o => o.uid === 'coin-1')).toBe(false);
-    acts.sellCard({ uid: 'coin-1' });
+    await acts.sellCard({ uid: 'coin-1' });
     expect(game.coins).toBe(102);
   });
 });

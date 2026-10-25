@@ -117,7 +117,7 @@ describe('背包道具旧行为基线', () => {
     expect(game.usedPocket.reduce((n, p) => n + p.count, 0)).toBe(1);
   });
 
-  it('背包容量不足时只复原可容纳数量，剩余留在消耗区', async () => {
+  it('复原释放一格后可装满同名三张叠', async () => {
     const uid = 'baseline-crystal-capacity';
     const filler = Array.from({ length: session.bagCap() - 1 }, (_, i) => ({
       name: `容量占位物资${i}`, value: 1, count: 1, tier: '普通',
@@ -128,8 +128,8 @@ describe('背包道具旧行为基线', () => {
     });
     await useItem('tt-crystal', uid);
     expect(game.ownedCards.some(o => o.uid === uid)).toBe(false);
-    expect(game.ownedCards.filter(o => o.card.id === sampleCard.id)).toHaveLength(1);
-    expect(game.usedPocket.reduce((n, p) => n + p.count, 0)).toBe(2);
+    expect(game.ownedCards.filter(o => o.card.id === sampleCard.id)).toHaveLength(3);
+    expect(game.usedPocket).toEqual([]);
     expect(session.usedSlots()).toBe(session.bagCap());
   });
 
@@ -180,7 +180,7 @@ describe('背包道具旧行为基线', () => {
     expect(game.usedPocket.reduce((n, p) => n + p.count, 0)).toBe(1);
   });
 
-  it('结构化复原遇到容量不足只恢复可放入数量', async () => {
+  it('结构化复原与正常收卡共用同名三张叠容量', async () => {
     const uid = 'structured-restore-capacity';
     const card = {
       ...crystal, name: '容量测试结晶', desc: '改写描述，不匹配旧规则。',
@@ -194,8 +194,8 @@ describe('背包道具旧行为基线', () => {
       usedPocket: [{ card: { ...sampleCard }, count: 3 }],
     });
     await useItem(card, uid);
-    expect(game.ownedCards.filter(o => o.card.id === sampleCard.id)).toHaveLength(1);
-    expect(game.usedPocket.reduce((n, p) => n + p.count, 0)).toBe(2);
+    expect(game.ownedCards.filter(o => o.card.id === sampleCard.id)).toHaveLength(3);
+    expect(game.usedPocket).toEqual([]);
     expect(session.usedSlots()).toBe(session.bagCap());
   });
 
@@ -250,8 +250,8 @@ describe('复原道具满包零收益保护', () => {
     expect(use.disabled).toBe(false); use.click();
     await vi.advanceTimersByTimeAsync(280);
     expect(game.ownedCards.some(o => o.uid === 'last-crystal')).toBe(false);
-    expect(game.ownedCards.filter(o => o.card.name === sampleCard.name)).toHaveLength(1);
-    expect(game.usedPocket[0].count).toBe(1);
+    expect(game.ownedCards.filter(o => o.card.name === sampleCard.name)).toHaveLength(2);
+    expect(game.usedPocket).toEqual([]);
   });
 
   it('背包帮助遵循地图营火随机复原，不混用通用手选页', () => {
@@ -270,6 +270,7 @@ it('真实卡库通行证C进入三选一，选中后才消费并获得所选传
   expect(options).toHaveLength(3);
   const chosenId = game.ownedCards[0].bagDiscover.cardIds[1];
   options[1].click();
+  document.querySelector('[data-act="bagDiscoverConfirm"]').click();
   await vi.advanceTimersByTimeAsync(280);
   expect(game.ownedCards).toHaveLength(1);
   expect(game.ownedCards[0].uid).not.toBe('token-c');

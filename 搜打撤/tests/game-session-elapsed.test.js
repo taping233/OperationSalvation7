@@ -1,3 +1,4 @@
+import { quietUiMocks } from './helpers/environment-fixtures.js';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -16,8 +17,7 @@ await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');
 await import('../game/src/hub/base.js');
 Object.assign(window.SDT.UI, {
-  log: vi.fn(), refresh() {}, clearLog() {}, hideOverlay() {}, hideScreen() {},
-  showScreen() {}, showOverlay() {}, act() {}, registerHelp() {}, helpBtn() { return ''; },
+  log: vi.fn(), refresh() {}, ...quietUiMocks(),
 });
 window.SDT.Meta = { setXpMul() {}, track() {} };
 window.SDT.Nest = { renderNestMap() {} };
@@ -40,6 +40,19 @@ beforeEach(async () => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('session play-time checkpoint', () => {
+  it('恢复较早检查点保留同局已经累计的时长，之后新游玩继续计时', async () => {
+    const { RunStorage } = await import('../game/src/hub/game.storage.js');
+    expect(await Base.syncPlayTime(50, 50, 'elapsed-rewind')).toMatchObject({ persisted:true });
+    RunStorage.readForLoad(1);
+    expect(await RunStorage.write(1, { version:2, seed:'elapsed-rewind', nestActive:true, elapsed:10,
+      elapsedTimeBaseline:0, _r2:{runId:'elapsed-rewind',revision:1} })).toBe(true);
+    const restored = session.loadGame(1);
+    expect(restored.ok).toBe(true); await restored.pendingPersistence;
+    expect(session.game.elapsed).toBe(50);
+    session.game.elapsed = 55;
+    expect(await session.syncPlayTime()).toMatchObject({ delta:5, persisted:true });
+    expect(Base.data.stats.playSeconds).toBe(105);
+  });
   it('Base写失败后保持旧的内存checkpoint策略，并阻止同一elapsed重复累加', async () => {
     const slotKey = Base.SLOT_KEY(1);
     const original = Storage.prototype.setItem;

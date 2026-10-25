@@ -1,11 +1,11 @@
+import { battleRules, damageRuleFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { consumedPileUids } from '../game/src/battle/view/battle.piles.view.js';
 import { battlePileBodyHTML } from '../game/src/battle/view/battle.decision-content.js';
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 9, battleHandMax: 200, bossDeckSize: 1, starterSha: 0,
-    battleStartDraw: 1, battleTurnDraw: 1, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(9, 200, 1, 0, 1, 1) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
@@ -14,8 +14,7 @@ const engine = await import('../game/src/battle/core/battle.engine.js');
 const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
 const hit = () => ({ id: 'consumed-owned', name: '打出消耗牌', type: '武术', cost: 1,
   dmg: 2, dmgType: 'fixed', desc: '造成2点固定伤害。',
-  rules: { version: 1, battle: { target: { side: 'enemy', area: false } },
-    triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } } });
+  rules: { ...damageRuleFields(false, 'chosenEnemy') } });
 const payment = () => {
   const card = hit();
   card.rules.battle.requirements = [{ kind: 'handCards', count: 1, type: '武术' }];

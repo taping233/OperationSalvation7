@@ -1,8 +1,424 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1610,
+  "count": 1732,
   "assets": [
+    {
+      "path": "ui/outcome/outcome-halo-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；恢复与献祭共用透明光纹）",
+      "bytes": 92340,
+      "sha256": "a6b66b24714d6c94ef4e636780cd1cb42869a43b70f467fa968780f137b83a06",
+      "source": "docs/evidence/2026-10-25-outcome-motion/asset-receipt.json"
+    },
+    {
+      "path": "cards/shop-mystery-back-1025.webp",
+      "ext": "webp",
+      "license": "项目原创（内置 imagegen）",
+      "bytes": 134864,
+      "sha256": "b436d4565810c74e25ff76b9c9b7c20974e63c37a1bc2c0db90e510b9e1142e3",
+      "source": "docs/evidence/2026-10-25-shop-trim/question-art-receipt.json"
+    },
+    {
+      "path": "scenes/cinematic/layer-descent-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI5底图 + 内置imagegen重绘）",
+      "bytes": 36804,
+      "sha256": "4f11d26a1377b909829a77c30b6841151c683ba138255e426a567ee238ceafc1",
+      "source": "docs/evidence/2026-10-25-entry-cinematics/asset-receipt.json"
+    },
+    {
+      "path": "ui/illustrated-node/choice-winter-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置 imagegen；已确认事件选项底板 v4）",
+      "bytes": 58660,
+      "sha256": "1a8e7b34e8ecfc80cc39e3b9049979f9ebc20afb5ddbff513d60927129dcbc92",
+      "source": "docs/evidence/2026-10-25-illustrated-nodes/asset-receipt.json"
+    },
+    {
+      "path": "scenes/cinematic/altar-fracture-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；认可入城画法的主题变体）",
+      "bytes": 62302,
+      "sha256": "929a162a2ff4cc2739e0c0e9ae1323ffb640a02e9f5a57b9ec3487434703736d",
+      "source": "docs/evidence/2026-10-25-unified-silent-transitions/art-source.json"
+    },
+    {
+      "path": "scenes/cinematic/event-fold-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；认可入城画法的主题变体）",
+      "bytes": 48710,
+      "sha256": "a12a3c75c7c660c468cb5e4813a8db91c25a5d8e0084a087057fd3efc74746f5",
+      "source": "docs/evidence/2026-10-25-unified-silent-transitions/art-source.json"
+    },
+    {
+      "path": "scenes/cinematic/trade-pair-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；认可入城画法的主题变体）",
+      "bytes": 36770,
+      "sha256": "d54ac0391f70f1e801c97ce083c596d35346b56b139f2ae535628c99985182d2",
+      "source": "docs/evidence/2026-10-25-unified-silent-transitions/art-source.json"
+    },
+    {
+      "path": "scenes/cinematic/gate-cleft-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；认可入城画法的主题变体）",
+      "bytes": 47304,
+      "sha256": "aead51190dc3c9f2f00c6058f15604481bd137d7b375b7f61c4b2e7e4b5bb118",
+      "source": "docs/evidence/2026-10-25-unified-silent-transitions/art-source.json"
+    },
+    {
+      "path": "scenes/cinematic/archive-leaves-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；认可入城画法的主题变体）",
+      "bytes": 58568,
+      "sha256": "07c914ebf7c1e4c8e298dd37886ae53231fd49e88d9ebb1fd2acc6b82dfe65c1",
+      "source": "docs/evidence/2026-10-25-unified-silent-transitions/art-source.json"
+    },
+    {
+      "path": "scenes/cinematic/photo-plates-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；认可入城画法的主题变体）",
+      "bytes": 60836,
+      "sha256": "c7332e0ffd298e523c2469b0b4c734d6a709a15dd252d5fca39bdc8d66328472",
+      "source": "docs/evidence/2026-10-25-unified-silent-transitions/art-source.json"
+    },
+    {
+      "path": "scenes/cinematic/camp-shelter-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；认可入城画法的主题变体）",
+      "bytes": 41202,
+      "sha256": "9850c592b72adbdce11e09e4c043b76463b86b4163bd06bcfb73cb68942b3722",
+      "source": "docs/evidence/2026-10-25-unified-silent-transitions/art-source.json"
+    },
+    {
+      "path": "scenes/departure/extraction-seam-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；沿用NAI5＋内置重绘的入城画法）",
+      "bytes": 21144,
+      "sha256": "abb85c22669a1ba60c3aa53ce2cd17b143fe8e292995e8545934e1613eb9fb85",
+      "source": "docs/evidence/2026-10-25-departure-cinematic/variants-source.json"
+    },
+    {
+      "path": "scenes/departure/boss-monolith-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；沿用NAI5＋内置重绘的入城画法）",
+      "bytes": 57306,
+      "sha256": "4c8eb9440bc523add0bbff89b5036e4939884f367b9dc04adb062c73e82d6a48",
+      "source": "docs/evidence/2026-10-25-departure-cinematic/variants-source.json"
+    },
+    {
+      "path": "scenes/departure/battle-incision-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（内置imagegen；沿用NAI5＋内置重绘的入城画法）",
+      "bytes": 33298,
+      "sha256": "719ae78a5064d9707787b2cd7fff330e778bfc13ba2ac9e3b7accfd11e008dc6",
+      "source": "docs/evidence/2026-10-25-departure-cinematic/variants-source.json"
+    },
+    {
+      "path": "scenes/departure/city-reflection-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI5起稿＋内置imagegen重绘）",
+      "bytes": 59218,
+      "sha256": "0d31cb35f13fa9fb5853c80f134ff761b5344524a89d881ab7fbaaf9ea5e9a3c",
+      "source": "docs/evidence/2026-10-25-departure-cinematic/art-source.json"
+    },
+    {
+      "path": "scenes/reward-salvage-v1.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI5起稿＋内置imagegen重绘）",
+      "bytes": 108782,
+      "sha256": "00fe6a8244e98c610ff61c03316ea2e34887e97fbc89bc3d6a4f7fd3fe460a5b",
+      "source": "docs/evidence/2026-10-25-reward-glass/backdrop-source.json"
+    },
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/far.webp",
+      "ext": "webp",
+      "license": "项目原创（沿现行NAI4.5分层构图，内置imagegen按项目默认块面厚涂重绘）",
+      "bytes": 183246,
+      "sha256": "050d9ec2fd7ffe566b576ee937d232c5cef7806a76fd9c112d0f14470996d75e",
+      "source": "docs/evidence/2026-10-25-station-default-brush/import.json"
+    },
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "ext": "webp",
+      "license": "项目原创（沿现行NAI4.5分层构图，内置imagegen按项目默认块面厚涂重绘）",
+      "bytes": 51562,
+      "sha256": "440a84fa89866250bac5211613cb1c7eebbf80bb5d48beefdb3c8cce8e72ec09",
+      "source": "docs/evidence/2026-10-25-station-default-brush/import.json"
+    },
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "ext": "webp",
+      "license": "项目原创（沿现行NAI4.5分层构图，内置imagegen按项目默认块面厚涂重绘）",
+      "bytes": 121902,
+      "sha256": "1745ba35497c047d8fbde33555fcfa12e45b835df6e43fe2905fc814389d1169",
+      "source": "docs/evidence/2026-10-25-station-default-brush/import.json"
+    },
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/foreground.webp",
+      "ext": "webp",
+      "license": "项目原创（沿现行NAI4.5分层构图，内置imagegen按项目默认块面厚涂重绘）",
+      "bytes": 151640,
+      "sha256": "66f512b3a2e18083861107c3b12430e831434c09ef34446e99b8675c51d3e679",
+      "source": "docs/evidence/2026-10-25-station-default-brush/import.json"
+    },
+    {
+      "path": "portraits/full/heixiang-coast-half-day.webp",
+      "ext": "webp",
+      "bytes": 388468,
+      "sha256": "92bd23f85548f34230eaf14b04de1897e95eb77501b5a7f8143945d53435c34e",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-25-heixiang-coast-motion/skin-import.json"
+    },
+    {
+      "path": "portraits/full/heixiang-snowline-vigil.webp",
+      "ext": "webp",
+      "bytes": 456166,
+      "sha256": "b8276de0117d754ab8176b09cf353c67cc09e9193e838853b80626e9d4da3075",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-25-heixiang-snowline/skin-import.json"
+    },
+    {
+      "path": "portraits/full/heixiang-last-seat.webp",
+      "ext": "webp",
+      "bytes": 362424,
+      "sha256": "f258bfeef3cba80047aac00cdfaf588701dc7fd177dfd44ed6e4d9388dbfd9c6",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-25-heixiang-last-seat/skin-import.json"
+    },
+    {
+      "path": "portraits/allies/migaofen-v1.webp",
+      "ext": "webp",
+      "bytes": 244716,
+      "sha256": "ece97cfb2151725c06e39cb6cc7555f8fffda3b4e084e2627e26bb0d22b28d25",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-25-migaofen-battle/receipt.json"
+    },
+    {
+      "path": "cards/creature-cmtn6ulm4boj.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 268496,
+      "sha256": "f164804eb9b9cac71a5f73a5dd00024cc0b38245865b91b0aa6de5aa842e49de",
+      "source": "docs/evidence/2026-10-25-migaofen-bear/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/rager.webp",
+      "ext": "webp",
+      "bytes": 212850,
+      "sha256": "aa4431ea0b89e7041a8f341a5cc703cd817dc4d34f0f1b145d4dc6b24cf4ad9a",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/rager.webp",
+      "ext": "webp",
+      "bytes": 64696,
+      "sha256": "ae35bbec46717d448e85b0e113c48ff75e21d1e0d23ffbeb39146a21730b7999",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/rager.webp",
+      "ext": "webp",
+      "bytes": 52660,
+      "sha256": "0a8f50d42cf465564a52d3f9f19ceb858d27da73136d00f71e3de682d3ccc26f",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/deserter.webp",
+      "ext": "webp",
+      "bytes": 249986,
+      "sha256": "c3069dacc4b1421cc9b16e6035cc71f6f44f646a08d0939e6796a9e2fc554697",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/deserter.webp",
+      "ext": "webp",
+      "bytes": 71922,
+      "sha256": "1d929f09a7f8155ceb6112e3e7e038559bbc6e9b84ef9e6e6c31f83c903e11ae",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/deserter.webp",
+      "ext": "webp",
+      "bytes": 57800,
+      "sha256": "7ad7b207a81221a23f561980a9ca2e9368bfa58a2df3aa3713895759f16a1460",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/greedy_imp.webp",
+      "ext": "webp",
+      "bytes": 190504,
+      "sha256": "3568beeac92016deeaab520d8b61d9ef938d360f46b93c9979f72a6519bd1e37",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/greedy_imp.webp",
+      "ext": "webp",
+      "bytes": 62428,
+      "sha256": "cbd3a6740d2adec44de228dc057330c545e6ffd18661c97606ff96a1d6fb24af",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/greedy_imp.webp",
+      "ext": "webp",
+      "bytes": 50518,
+      "sha256": "b490d9b23b86f1cbcf2a7708f994470fbae09d5fe075d774998bab5e962a833a",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/swaggerer.webp",
+      "ext": "webp",
+      "bytes": 225596,
+      "sha256": "2062f70ca59e86135e4e0a3d6821cc5f655e34b7672c411c434a9e5f42d6650e",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/swaggerer.webp",
+      "ext": "webp",
+      "bytes": 72334,
+      "sha256": "e8bad8479cbf811d96ddcc2d815dae3404514911fb9c7a9026a5cb9ac3fab672",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/swaggerer.webp",
+      "ext": "webp",
+      "bytes": 58904,
+      "sha256": "bb427c2f2fa1c364be6e3d651e098c4cc5155fdebda139504fd24b39dd593839",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/tin_mute.webp",
+      "ext": "webp",
+      "bytes": 245936,
+      "sha256": "09645db5ca829142ad3b503f3788822bf715a0a1e1855ff54b1cf229e0f29b95",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/tin_mute.webp",
+      "ext": "webp",
+      "bytes": 78404,
+      "sha256": "2423c858a28d4d7fc5634a99dd5381301875a4713e8f3a97f8d001a71c6ef68a",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/tin_mute.webp",
+      "ext": "webp",
+      "bytes": 61246,
+      "sha256": "ee2043edef2e6e10e237433cb1bc7d2e9321f677980d745bf83261c6c996938b",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/heavy_hammer.webp",
+      "ext": "webp",
+      "bytes": 307692,
+      "sha256": "da9e7d99ee47da90f86e2573b9d4ba41737534689834c9f10113b038ae32ab3a",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/heavy_hammer.webp",
+      "ext": "webp",
+      "bytes": 97254,
+      "sha256": "90e3859111c3c9c015107d88dcff975ab1fceee7098979fa16935ddd6a125db7",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/heavy_hammer.webp",
+      "ext": "webp",
+      "bytes": 77198,
+      "sha256": "16c71e601b16e07edb43c36e113f9285d496d426b412f6000d9ff3ed72510dc4",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/cultist.webp",
+      "ext": "webp",
+      "bytes": 101870,
+      "sha256": "dbdd64ef24e0a04a5950e10650960c4f855d4069dfe92b19aaea30fb656b7536",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/cultist.webp",
+      "ext": "webp",
+      "bytes": 35392,
+      "sha256": "b06d6a94c65c2682752b05c710235c950263ad1fb5011dadbf36fa7f30d45bea",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/cultist.webp",
+      "ext": "webp",
+      "bytes": 28950,
+      "sha256": "5fe170c589f2a0d50e4d003c0412057454bf6c37d6bede333ec03841c42327a5",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/fake_apothecary.webp",
+      "ext": "webp",
+      "bytes": 156764,
+      "sha256": "e51c60d072450ac99b6e1a8ab423774eb5b565c6f99e454be4fb0cfd7692b181",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/fake_apothecary.webp",
+      "ext": "webp",
+      "bytes": 54990,
+      "sha256": "e8f2e9f8fde17c29b51ef6f2a5f049c9abc0cf8feab36f3e048b5a105f117c41",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/fake_apothecary.webp",
+      "ext": "webp",
+      "bytes": 44460,
+      "sha256": "015e1e52ce7c7edf75f50404028c2802cf4a2d17d46c2fd85e97029297ea3bfc",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/camo_sniper.webp",
+      "ext": "webp",
+      "bytes": 162276,
+      "sha256": "ecdac04fc416c24e416a25ea2bcbaa7291e7f8fd62210870b3085492faa3e46f",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/camo_sniper.webp",
+      "ext": "webp",
+      "bytes": 52026,
+      "sha256": "3ddce2f923b19137ea4e8c96168cff16f46068527b9846b2b9dda960a142761f",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/camo_sniper.webp",
+      "ext": "webp",
+      "bytes": 42662,
+      "sha256": "adcda1d7790898e1903502d6891bc42505fcb7e3690a72157fc37f98979be975",
+      "license": "老板授权；Codex内置ImageGen原创生成",
+      "source": "docs/evidence/2026-10-24-floor-elite-art/receipt.json"
+    },
     {
       "path": "scenes/map-environment-1021/outskirts-simple.webp",
       "ext": "webp",
@@ -215,17 +631,17 @@
       "path": "cards/spell-tt13-mind-control.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 103658,
-      "sha256": "10c573b11b530c9f062173f8f0b3454b517e6f2bf1bc44664179e12f02175783",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+      "bytes": 167430,
+      "sha256": "3f214992b7b0411cb5254d491c66b4dd4d6e25ebaaca77bc82c079a2dc52e041",
+      "source": "docs/evidence/2026-10-24-mind-control-character/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt13-mind-control.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 17486,
-      "sha256": "d3c1811261afefc189bab1511195e58d708aa4cd24dce3ee401fa543aacbded8",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+      "bytes": 23380,
+      "sha256": "2048b6f4fb2dfc0a9f0b932140a36ba5c37f9bda40a57451becca85f07e66f31",
+      "source": "docs/evidence/2026-10-24-mind-control-character/receipt.json"
     },
     {
       "path": "cards/equip-tt13-flame-staff.webp",
@@ -247,65 +663,65 @@
       "path": "cards/equip-tt13-scale-armor.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 129202,
-      "sha256": "db13aa50dcef0a6f7d50b65db0abe0a0a5c030bd6e79f05d9625785ab5a9c708",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+      "bytes": 128480,
+      "sha256": "c8bd879c6c020b427a2f0a661a046ff801731487b18d7b6404e76162f76383f6",
+      "source": "docs/evidence/2026-10-25-scale-armor-no-hand/receipt.json"
     },
     {
       "path": "thumbs/cards/equip-tt13-scale-armor.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 21356,
-      "sha256": "3b86654fc81a03e3d53441e2c93b17441923bfb6a0d2162dbf468690e5d04189",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+      "bytes": 21590,
+      "sha256": "766b80bd98ecd71c7653d5af90676a4a9b58b4764c2d9f7cdae2e400e0031d0c",
+      "source": "docs/evidence/2026-10-25-scale-armor-no-hand/receipt.json"
     },
     {
       "path": "cards/equip-tt13-astrolabe.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 173242,
-      "sha256": "5bd21f08649acea543f893ce396171b4cf7440056514ea4c57086d473f69f748",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+      "bytes": 168054,
+      "sha256": "820eaa9e1e6e3f4e2a6f26ef0c7e48c02b54754a64edb8e6bc894c5d7970e987",
+      "source": "docs/evidence/2026-10-24-astrolabe-simple/receipt.json"
     },
     {
       "path": "thumbs/cards/equip-tt13-astrolabe.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 28500,
-      "sha256": "5e12e3a85e1e6a8c284573d32ec2455415ba6a8733e54c69acf7e5525a8e37e9",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+      "bytes": 27758,
+      "sha256": "5b02dbf62299013518c25805cc00cd36eb6672aae3e8d81c17b5efe6b150701a",
+      "source": "docs/evidence/2026-10-24-astrolabe-simple/receipt.json"
     },
     {
       "path": "cards/spell-tt13-soul-contract.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 224676,
-      "sha256": "4e885740f204f663516cfe6b1730cf02b17c3d27dd9e86f5581d010961f82031",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+      "bytes": 217526,
+      "sha256": "d8064617a5079a953fd9e20445c6f4c8f922141d58ee2f731fa3d7d2fa73d617",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt13-soul-contract.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 32160,
-      "sha256": "d51fc6ba82bffe7e32230abd3c4cac6bbb34a32ab43b96208612e2df288dbca4",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+      "bytes": 32750,
+      "sha256": "c57e5dca3b46fb5a9230a1984d55caa24d99e61f6b557509492e302879c25390",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt13-stellar-divination.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 176094,
-      "sha256": "9d9f9d53272cf2bdb5ebc791cd36f8190fde9914222e0932a850c15e6ee7b2c6",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/stellar-class-style/receipt.json"
+      "bytes": 190174,
+      "sha256": "4ff71f4cd05ea4d0f07da88a939f50779f44c9b3ffc299fa4234289ec39936bb",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt13-stellar-divination.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 24288,
-      "sha256": "2006f19e9825cdc0bfe52ec8829631239433dfdaf60672620e3ade59e345de75",
-      "source": "docs/evidence/2026-10-20-tt13-card-art/stellar-class-style/receipt.json"
+      "bytes": 26392,
+      "sha256": "bee34f3d91e2e24298353defca718e09ab3f1d28ca35749ef1394285e4a11cd9",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt13-chaos-deck.webp",
@@ -2010,9 +2426,9 @@
       "path": "cards/equip-tt7-darkfort.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 24332,
-      "sha256": "cb9071cd2ed8768fc69a7be122d2898b2666c969a21413b977e8a651f00f7b12",
-      "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+      "bytes": 38440,
+      "sha256": "d0f1e4b186f6acd4a1a171cb57df3c535d408f4293ba0ec78d9c236bb1227c01",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/equip-tt7-naturestaff.webp",
@@ -2121,10 +2537,10 @@
     {
       "path": "cards/hero-sacredrain.webp",
       "ext": "webp",
-      "bytes": 177832,
-      "sha256": "0dd009f3006ad7875800bef91a33d64d2d6cd0b0c4d5251cded6ad6414954f70",
+      "bytes": 311142,
+      "sha256": "84062552ea94a28fe37699c7272f80cafacf85e83048c00e11191185fdeaafb5",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-wind-bg/receipt.json"
+      "source": "docs/evidence/2026-10-24-xingyue-card-roster/receipt.json"
     },
     {
       "path": "cards/hero-sacredsword.webp",
@@ -2137,10 +2553,10 @@
     {
       "path": "cards/hero-summoner.webp",
       "ext": "webp",
-      "bytes": 177550,
+      "bytes": 159064,
       "license": "项目自有（自制/AI 生成）",
-      "sha256": "e80166824800f37c1ccc96364683e691e152717345094383ce0c39445dc28f45",
-      "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
+      "sha256": "e3725554a628f96c4e3b10460aa8e05e7254d307338c4bc2a9c9dc2cf0b876cc",
+      "source": "docs/evidence/2026-10-24-baita-one-eye-fix/receipt.json"
     },
     {
       "path": "cards/hero-sword.webp",
@@ -2307,10 +2723,10 @@
     {
       "path": "cards/lore-raving.webp",
       "ext": "webp",
-      "bytes": 168346,
-      "sha256": "01dd5ea11686c5e1d75a48c2d19d761772f9c3a837455a7bed10b938e5aec3f3",
+      "bytes": 167302,
+      "sha256": "5060e62a5ee87235ac051aad194db3f5a57045d20fa8e74918b3bf23cf517bc5",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-baita-lore-raving/images-v6.json"
+      "source": "docs/evidence/2026-10-24-lore-raving/receipt.json"
     },
     {
       "path": "cards/martial-cc-chase-slash.webp",
@@ -2379,18 +2795,18 @@
     {
       "path": "cards/martial-cmtn1i64j7y7.webp",
       "ext": "webp",
-      "bytes": 50786,
-      "sha256": "8b79b85c3ed7f3f7f058bfe69aa2c9b832f84640fc5a4f428f23ae14be6166ab",
+      "bytes": 128396,
+      "sha256": "2a688cd554b2bdce8401e9a129fa09b5e904eb49c81af47ca56a7e53a9987a44",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/martial-cmtn1wnhhym.webp",
       "ext": "webp",
-      "bytes": 154604,
-      "sha256": "3e10c60073b98739f29549501f1d8220916c9841fb57144b8a32c3085a8ff077",
+      "bytes": 198624,
+      "sha256": "34a024a251ba8661e3ba67adb06ee237c20a22009df3fc3483a8a38fe5682333",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-jianghu-class-forehead/receipt.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/martial-cmtn233trmeg.webp",
@@ -2652,25 +3068,25 @@
       "path": "cards/martial-tt7-armup.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 162914,
-      "sha256": "869752a891dad1bb8074ef50f04849a27c84dfc34dbc1323ca1130b7f2c09d05",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 260648,
+      "sha256": "31f626258960f8d83e980b9a045b33eb9747893d7e21f4cb4af233696cd79f8e",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-bloodpoison.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 104450,
-      "sha256": "a33fd10407f47b90fa00e0edf2c3e0ab8dc88572702dbda2f1c2ec5236e4378b",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 172000,
+      "sha256": "a5bcda36507a862fa6392edc87eaca94a2261945ddaff26dbb56d788554273dd",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-bulwark.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 172940,
-      "sha256": "e1a9184ac32876d9141d58ce3bc661aa8962b057808f504ce01e9265127f381b",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 237036,
+      "sha256": "871dbbb8125db12d496c006d2bf7afc86d17a3752970915582db6e8c005407ff",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-demonbreaker.webp",
@@ -2683,42 +3099,42 @@
     {
       "path": "cards/martial-tt7-fullstrike.webp",
       "ext": "webp",
-      "bytes": 115830,
-      "sha256": "ceeb4e2e189d2bcf484af11d6aee0611f30c8d8979b0b779ad84e3d332d2812c",
+      "bytes": 122004,
+      "sha256": "5bac96586037f70d8f6b44c42141f9c0893cff446c09e4ea0593fc3d93619eca",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-05-WF-fullstrike-identity-rough/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-ghostblade.webp",
       "ext": "webp",
-      "bytes": 69352,
-      "sha256": "1d69874fee4e249aa030270dede0ce9dcfd52132607aca02fc15c76054d6d302",
+      "bytes": 147914,
+      "sha256": "90085ad68069c27ac690fd545b6d4e170f656819e7e4e6e6434b8fb43e5d4c52",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-goldencicada.webp",
       "ext": "webp",
-      "bytes": 44820,
-      "sha256": "989d38efcc86dc8f464070c80397280a48d48ac3217ca8defd5c37c2e1dcdbaa",
+      "bytes": 178378,
+      "sha256": "e020b882481d560bbf4e5b16e59b85e5f3600433667abdb9525e277ce115a26a",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-imitate.webp",
       "ext": "webp",
-      "bytes": 41340,
-      "sha256": "da084556b2b4dc1d556f43595af6e7a6c23920dc561100e02056095c29f841de",
+      "bytes": 253376,
+      "sha256": "ed19397062e90a129ac9b70b3efd1a1ff963a7bd7a2aed0014a6b7bcdca661f2",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-ironcharge.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 116256,
-      "sha256": "1ed7125314d23bcb3e35c2ea0d1f1b8b1405b47ceb473784faf90611be042caf",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 129528,
+      "sha256": "07af7626b6c9527550c526ea1669a61d0fecaa9d459376a5e8ff42a6a960d987",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-ironphalanx.webp",
@@ -2732,41 +3148,41 @@
       "path": "cards/martial-tt7-marchrush.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 137670,
-      "sha256": "3069f04dd87b888a4bbac0e1a9ef7a39842c249be22b48ff442bcea130566ef1",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 133312,
+      "sha256": "28740ee234ce4bff08851ef558a201b1768ee7dedc9ca9fe8eab236ff81b15b9",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-meteorrain.webp",
       "ext": "webp",
-      "bytes": 37134,
-      "sha256": "35683467cbb9eaa5a0f9f6ebcf7a76e48ca392a31e746391c9b8ed1e1e18a5ce",
+      "bytes": 164424,
+      "sha256": "c062ee0cef787f41426b5435a363cd9f90bcce6f70a57237f00b0f19ad6336b7",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-sneak.webp",
       "ext": "webp",
-      "bytes": 49586,
-      "sha256": "6a2305d4e03268c9126e8d7f762db00916b7564ef9418f718366068792c6ec16",
+      "bytes": 186520,
+      "sha256": "fa0c5e9f09678fa87d1ec18e7567d3904cbfcd72835deae9634dd33eec9832dc",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-stealth.webp",
       "ext": "webp",
-      "bytes": 41548,
-      "sha256": "4838f19d1edf9976d314a9a73bb9c3f6400e147d85298a01fe8f209985c21ee5",
+      "bytes": 154290,
+      "sha256": "aff54b6546f9b25c70a5cee72dc7f9f6f10c5890a3a5f1016a89715b628d6591",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt7-swordimmortal.webp",
       "ext": "webp",
-      "bytes": 42246,
-      "sha256": "361d7b74b61be9a8e418c39a1cabd8ec10a648d409a7409f0b8c982cd3088c97",
+      "bytes": 169632,
+      "sha256": "8c9366b0ef14f06660cb3d52db17c18dcae4030ed95f7c7680405eb324933129",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-24-card-local-fix/receipt.json"
     },
     {
       "path": "cards/martial-tt7-throwblade.webp",
@@ -2779,18 +3195,18 @@
     {
       "path": "cards/martial-tt7-thundergrudge.webp",
       "ext": "webp",
-      "bytes": 53486,
-      "sha256": "9b222502ad6aab6373747e977eb40d856ac6302c03e469dfa1ea7a085def2e38",
+      "bytes": 152508,
+      "sha256": "68c34e1010ba6963205db8e965a33cde3ef6fd1006d271f1bb68502df1920be2",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-thundergrudge-redraw/receipt.json"
     },
     {
       "path": "cards/martial-tt7-whirlwind.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 149112,
-      "sha256": "eae62f8946c0368b76866ca0291278fa523482e4b43931f9ebd41b729f767d18",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 234546,
+      "sha256": "4bb5b293785ac640f4690854ef9e789b8cb0f7c86b7ac582ab5f416968497609",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/martial-tt8-dragonblade.webp",
@@ -2962,9 +3378,9 @@
       "path": "cards/spell-cmtn1gfhczzj.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 111690,
-      "sha256": "26c4af70afb2fe09ea60223a0542505fad0cd0ef3fbbf020a5a13574580831fa",
-      "source": "docs/evidence/2026-10-10-doom/receipt.json"
+      "bytes": 116854,
+      "sha256": "2ad9e2c2a40cccad6edeadcd64f5ed195c1a63456e8cbefc827556dc76ffe62a",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-cmtn1lbhbqi4.webp",
@@ -2978,17 +3394,17 @@
       "path": "cards/spell-cmtn1ntxzoc4.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 186816,
-      "sha256": "6377efde882f646ab6df32a107d7c3febc52c219084450c161224e931cb2dc21",
-      "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+      "bytes": 230952,
+      "sha256": "08da9d09af958c157481b027bee8a8cd5ce05c5c78789190159bf60c7d098a36",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-cmtn1p9vb5au.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 139450,
-      "sha256": "52460c035f922f33b75ee61ddcbf10eac703b284c7efde411cfc3a851c5ebe70",
-      "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+      "bytes": 179594,
+      "sha256": "491c8d7dc1d1aa0a9e8d73a0ff48c61ee9927446e5cbeb49c0a1dafddfefb4bd",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-cmtn1r10xnl1.webp",
@@ -3130,17 +3546,17 @@
       "path": "cards/spell-tt3-firm-barrier.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 102294,
-      "sha256": "ae3cb69855afb01730f88ed82d09ca77ace0cc101e354a1b553cc8c5f52d9cc8",
-      "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+      "bytes": 125716,
+      "sha256": "ddf9fd5353918393952398d9eb1e33bd72ada421ca37c55dd74318b3bf979336",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt3-flame-storm.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 139714,
-      "sha256": "c1c99ade6f1ab43412332cb56ff2950de4765f2c7dd1f735274036fae11a2e38",
-      "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+      "bytes": 261760,
+      "sha256": "f7da6822c1ec759be6e83ebfdd096dd4ea4dc7a265400367cfd4b65aa61461a1",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt3-grope.webp",
@@ -3153,10 +3569,10 @@
     {
       "path": "cards/spell-tt3-holy-shield.webp",
       "ext": "webp",
-      "bytes": 161656,
-      "sha256": "4fa2977dcc97c355fb05b13694eb54ac6373fa131323de9ecccca10f7596b5a2",
+      "bytes": 219926,
+      "sha256": "f5b701ead65a34c14d822c8b1233be5d70e80da5da6e5f85fb969e332b771106",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-05-WF-holy-shield-fast/receipt.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt3-holy-water.webp",
@@ -3185,26 +3601,26 @@
     {
       "path": "cards/spell-tt3-nature-form.webp",
       "ext": "webp",
-      "bytes": 104532,
-      "sha256": "aa204293c9336ee0cbbc7936a090a0b84ccac523e7e4ab4e726c6820a883156a",
+      "bytes": 148392,
+      "sha256": "f9892a9563e1f6c9b35a4b14d9891f426371aa692bd643c76ca88d5c72c912c4",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-fullmoon-smite/receipt.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt3-nuke-ray.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 94466,
-      "sha256": "5cad5ea9163bd36b918cb44177ead495983ab730dc10f0c596be1baf4d7e8bff",
-      "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+      "bytes": 130536,
+      "sha256": "04ce206e8378178c2edde8ee15485017b7b7490f6c95d5dd953d863deca25057",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt3-petal.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 146072,
-      "sha256": "cfb9d7a503f291ce6062d8404eb60c27b751179729cca183aa333092c4335d94",
-      "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+      "bytes": 223762,
+      "sha256": "4e6e3adac6f254daa5493b6f5b8318b986efa2295424d0accc1ec56378ecd21c",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt3-thornfield.webp",
@@ -3274,9 +3690,9 @@
       "path": "cards/spell-tt3sp-shadowshot.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 123470,
-      "sha256": "d374417a94af440d50759110201f1b1341cf94b259ce8e9f502335c90b6008d6",
-      "source": "docs/evidence/2026-10-10-shadowshot/receipt.json"
+      "bytes": 129126,
+      "sha256": "41cc658506b66b4f0085beb117c5ea23337b92daa6ac0790cbca748add467806",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt3sp-silverthorn.webp",
@@ -3290,65 +3706,65 @@
       "path": "cards/spell-tt7-abysscurse.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 133962,
-      "sha256": "af8047027ae6c5082269ceae1bfdeb7a48bad083c52d053cbc9adf82fec4948a",
-      "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+      "bytes": 140942,
+      "sha256": "1dfd90ccc54f54fd26755e98749702ea0e53d7447bd8bb81c22ad4c0e615ca1e",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-arcanebolt.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 157072,
-      "sha256": "fa42362ea3fb39b4752196e4b671bd0ae1c0c2634077a01c6912dc1b152cedb9",
-      "source": "docs/evidence/2026-10-10-shoot-arcanebolt/receipt.json"
+      "bytes": 169546,
+      "sha256": "e53b64c6a19272dbbfedf43e294caeda5bed895318c89380ffeae6ab2843bfbf",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-bladebloom.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 154696,
-      "sha256": "07e0c8fc28f218372ade6a8b0d62bba2b20fbf50375bbe2e1133aeb77cdf0f0a",
-      "source": "docs/evidence/2026-10-10-bladebloom/receipt.json"
+      "bytes": 247696,
+      "sha256": "aad52acacbf4be52ea4e9ff677cee146dc41a4a66d917b2276a0e4162c76d464",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-bloodpotion.webp",
       "ext": "webp",
-      "bytes": 120996,
-      "sha256": "086bbfc19fe32c16fa4790fed0dbce533b1044807408346f6333de4a633d5d7a",
+      "bytes": 114248,
+      "sha256": "61e66a28770437d55979992dac913c919e580e442834abab222183de37e0a2f7",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-burnharvest.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 108038,
-      "sha256": "9a5157d2bf216cf6422a2de011cb0859bd619569ae5554c25609bfa8ebe31ed3",
-      "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+      "bytes": 257096,
+      "sha256": "ef9f1608acafca3062164ba5cfd5e1379e671ec10c5afdf99680141f52532164",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-elementstorm.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 90190,
-      "sha256": "1983e655465fec9cd4fb6679d2aebb6917aac6c0a97817ed410b408cd6de48ae",
-      "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+      "bytes": 135456,
+      "sha256": "30dccfb91903d2b59f323d15d9210f65bbf8261f29ecc62da48ed04c37f20084",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-energize.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 126042,
-      "sha256": "22a0d4a71d82b4ca132493a3d76d008ce4c31ba4d14b6b65e5eff676a996e5d7",
-      "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+      "bytes": 150504,
+      "sha256": "696ed37a3f5992ec745ff99f9f4bb9a7cad71a095cdf7101b6e71cd5c4063ae5",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-frozenight.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 162896,
-      "sha256": "a55f14a60da6d4d07f461a1bc1a66ee76f35a81b81486cb361f1a3701224f669",
-      "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+      "bytes": 217580,
+      "sha256": "750597c103dfa865dac2cc4b12a4cc3df86e7bb946c5001020d9ac9ae079bd32",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-holyglow.webp",
@@ -3362,9 +3778,9 @@
       "path": "cards/spell-tt7-holyheal.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 162432,
-      "sha256": "e8dcae276b9883a2c505acff6633d7a672f97e58286fa5f89117d5853636e801",
-      "source": "docs/evidence/2026-10-10-holyheal/receipt.json"
+      "bytes": 153028,
+      "sha256": "458d3d30ac6f9215f0edcc09a407da1332d3aa9b67cb2c4d9893e5f0e8f9784f",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-livingwater.webp",
@@ -3378,41 +3794,41 @@
       "path": "cards/spell-tt7-maxsupply.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 228798,
-      "sha256": "889780cc936f8f9474e00fdb7b1dbdf24e284e5256f521368d1ed6520abe0f5d",
-      "source": "docs/evidence/2026-10-10-baita-manasupply/receipt.json"
+      "bytes": 189210,
+      "sha256": "5a58dc2f19bb30af46efcd1d22d2f8de826d586d8d233a2349815d91beff1ebb",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-meteorstrong.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 165476,
-      "sha256": "d611963142a6ecb46053c9daed51ff0845dbc1dc3bfdc19e70dccf60249c05c4",
-      "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+      "bytes": 210318,
+      "sha256": "d29cb06c9368db33c3c18120c282678e17012a3eb854cacf9cdbc2ab7027f246",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-provoke.webp",
       "ext": "webp",
-      "bytes": 128694,
-      "sha256": "15ee8d0be46eaa7c4da99e92118beab710669e14352ea65ebc627b74fd1c6e13",
+      "bytes": 111540,
+      "sha256": "b635db7a486b72ed59a1df4df0711d7dd7046d7eddeaa4368a0a85b0719ce5e3",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-recruit.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 109472,
-      "sha256": "8fb149a60dd256494f947be67bbd0ef537d272525c8e7e58c61a496ef114a383",
-      "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+      "bytes": 106148,
+      "sha256": "b8c78bf735525f515495c6e2a6598e3f70b0e1653de141dcb3cc22af2ca0c237",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-silence.webp",
       "ext": "webp",
-      "bytes": 102230,
-      "sha256": "3b61af3f98e5be1fe76c995a8cb4371ca63205362a57a6ef1b6608e3aeb26d21",
+      "bytes": 97424,
+      "sha256": "4f8685a4883e03898f57aefe1b2a44ec5d12c4ddeaaedb28b25df8b5976646f6",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-smite.webp",
@@ -3426,17 +3842,17 @@
       "path": "cards/spell-tt7-stratagem.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 197780,
-      "sha256": "cba5b895b8a6c2d05ee3bd27c58dae821d23ab88adcbe7722dbbf7630e3d4e5e",
-      "source": "docs/evidence/2026-10-11-mage-pouch-reset/receipt.json"
+      "bytes": 162874,
+      "sha256": "ad2ac7dc13a7350612ff3e27af851848d83911b6eae0b958bdcfda762a7a54da",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "cards/spell-tt7-twinfireball.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 104126,
-      "sha256": "c6af47e5342f3bee45e4855e5f0eab34915646d25c6863fca656a8ee559700e6",
-      "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+      "bytes": 208684,
+      "sha256": "fbe6d0e9fe4185a3c8bcc8fc34962a8349087705e0e6704ad4ccc7cff6fdb707",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/spell.webp",
@@ -3512,9 +3928,9 @@
       "path": "cards/studio-expanded/tt7-arcanescroll.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 70130,
-      "sha256": "5c3c306f51c851012b1adb3c8900a252dfbf48d714fab5a8f667f7ede3d91320",
-      "source": "docs/evidence/2026-10-11-studio-square-outpaint/receipt.json"
+      "bytes": 146684,
+      "sha256": "b8fcddb09e417f54c0a2ee62642c07a743631fb83b84b8b6b7ddd0d25b411485",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "cards/studio-expanded/tt8-archdemon.webp",
@@ -3549,26 +3965,26 @@
     {
       "path": "cards/wu-heavensword.webp",
       "ext": "webp",
-      "bytes": 96748,
-      "sha256": "2a3dbdd25f0250d5801751e6079ee4a5315d17f5bc3389c981abc6f5cd22bcfc",
+      "bytes": 93586,
+      "sha256": "266246dc89f3e4aa91921412e21684f6ba6221686423488099f991aefb2c8b39",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images-heaven-v4.json"
+      "source": "docs/evidence/2026-10-24-heavensword/receipt.json"
     },
     {
       "path": "cards/wu-myriadswords.webp",
       "ext": "webp",
-      "bytes": 144382,
-      "sha256": "cc3fe1d9b39340e4d83dd3882395dff4e23a65cd5928be74c90ade9fb98164cc",
+      "bytes": 149748,
+      "sha256": "627fb98aca4e6b88e9d75e753ea939c70c9600a6c6ca3ca830368aef3fe56281",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images.json"
+      "source": "docs/evidence/2026-10-24-myriadswords-identity/receipt.json"
     },
     {
       "path": "cards/wu-void.webp",
       "ext": "webp",
-      "bytes": 115644,
-      "sha256": "e2597435801ed90d2b8ac266efc0de81efa7f6a366db35494938723894fbe0c2",
+      "bytes": 175042,
+      "sha256": "52f799ebacfa9cf7dde2f8e3e8157f97a0f0907489b97e2d66a469a54f9348d0",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-24-white-plum/receipt.json"
     },
     {
       "path": "chibi/wu-v1/arm-back.webp",
@@ -4494,50 +4910,50 @@
     {
       "path": "portraits/avatars/baita.webp",
       "ext": "webp",
-      "bytes": 244096,
+      "bytes": 223026,
       "license": "项目自有（AI 生成）",
-      "sha256": "2bb8f3552a3992dbc66d5ad3befe5def78040e9984afcabb5fa26828e525e08b",
-      "source": "docs/evidence/2026-10-10-chibi-avatars/receipt.json"
+      "sha256": "c2d3f269ae5a471e8634623cec69f2a50c4ab8984eed55ead4dc3e966e2a4ccd",
+      "source": "docs/evidence/2026-10-24-chibi-avatars/receipt.json"
     },
     {
       "path": "portraits/avatars/changwuyu.webp",
       "ext": "webp",
-      "bytes": 206734,
+      "bytes": 235684,
       "license": "项目自有（AI 生成）",
-      "sha256": "d28ee58cdc8ee899cc3369d603b0df4aec9a87e9b19cfbcac7a2673dc0bb9670",
-      "source": "docs/evidence/2026-10-10-chibi-head-scale/receipt.json"
+      "sha256": "1e8625ca215e16a22ee509b470ac0dc22841ca0c6475d25072214b5948025e13",
+      "source": "docs/evidence/2026-10-24-chibi-avatars/receipt.json"
     },
     {
       "path": "portraits/avatars/heixiang.webp",
       "ext": "webp",
-      "bytes": 111060,
+      "bytes": 193602,
       "license": "项目自有（AI 生成）",
-      "sha256": "557a9d4ffe504b1fff00b81f72e7f41583a9918d0cac8396b4294771380fc169",
-      "source": "docs/evidence/2026-10-10-chibi-head-scale/receipt.json"
+      "sha256": "c379b06830002b805669a5399227ceb011cc32189f9af263202cdcc4c3a88f02",
+      "source": "docs/evidence/2026-10-24-chibi-avatars/receipt.json"
     },
     {
       "path": "portraits/avatars/wu.webp",
       "ext": "webp",
-      "bytes": 265352,
+      "bytes": 266760,
       "license": "项目自有（AI 生成）",
-      "sha256": "6327daa0f426efa105bb6481c494a16eff8d4b6d80dedb41b8df34372eec3920",
-      "source": "docs/evidence/2026-10-10-chibi-avatars/receipt.json"
+      "sha256": "33f72ce4f269ae48c08e1aa0c16279a44e17203d337ba8c55dffd492cfe93238",
+      "source": "docs/evidence/2026-10-24-chibi-avatars/receipt.json"
     },
     {
       "path": "portraits/avatars/xingyue-dark.webp",
       "ext": "webp",
-      "bytes": 235282,
+      "bytes": 227214,
       "license": "项目自有（AI 生成）",
-      "sha256": "f451b76012f69757e633687a5a2b064758909779547d71a11d298e448dc10f03",
-      "source": "docs/evidence/2026-10-10-chibi-avatars/receipt.json"
+      "sha256": "fe49d51173f8aa71c70908fd5879ee794e1014876a748cab40950c048330087e",
+      "source": "docs/evidence/2026-10-24-chibi-avatars/receipt.json"
     },
     {
       "path": "portraits/avatars/xingyue.webp",
       "ext": "webp",
-      "bytes": 258720,
+      "bytes": 246724,
       "license": "项目自有（AI 生成）",
-      "sha256": "9385c5e0576dfb9ca711006f062311fff6e12ae66c22d924082c61e2dd182dd1",
-      "source": "docs/evidence/2026-10-10-chibi-avatars/receipt.json"
+      "sha256": "0c80397923574ac4d6b52f4b5c6771ab59cd5ae83b37802ee633e9ebe6cffb4f",
+      "source": "docs/evidence/2026-10-24-chibi-avatars/receipt.json"
     },
     {
       "path": "portraits/battle/changwuyu.webp",
@@ -4550,58 +4966,58 @@
     {
       "path": "portraits/cut/enemies/archer.webp",
       "ext": "webp",
-      "bytes": 100816,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "9a304c31d798fa5c7290c7dd6be049465869d855898d8d8ab8d8b5e7f6359f02",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 58156,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "409b05730660c4bbe2bd543a9c55bce3fd00c8425d628f182fe7a53914e891cd",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/bandit.webp",
       "ext": "webp",
-      "bytes": 94856,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "deb0158fcd8239b068b9489a4d013655a0927db323ad2a7c15f0189fd95fad2a",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 51658,
+      "license": "项目原创（原NAI角色设定，内置imagegen战斗块面重绘）",
+      "sha256": "9e880cbc4feeac41d52232fc66fa79fd9444e9eb5a74f1a23b950ec3d4aafd23",
+      "source": "docs/evidence/2026-10-25-battle-cohesion/asset-receipt.json"
     },
     {
       "path": "portraits/cut/enemies/boss_elem.webp",
       "ext": "webp",
-      "bytes": 109976,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "427d6f2a7ae14a7e1906286957c44530dd2302762692951a81056bc62b82d48f",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 68218,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "8f5232539da9f85a51a8aa0200db28e5ae719abef52a4345dbfe145c42867703",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/boss_general.webp",
       "ext": "webp",
-      "bytes": 95402,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "4652ab04f8273d5e94e14a7f9183863be03de312eab9aec0513c110a22987988",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 45716,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "d6b2e812a75bd70f0a63ba3665acb55502a0e591a2856f83719819c52890b69a",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/boss_orc.webp",
       "ext": "webp",
-      "bytes": 119456,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "92b78925c83ff0a589670aeb752234dac55c3f1be0c210d7efe39694e0b25689",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 74576,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "237d10d83ef642fbdb86aa6364048e6fc2f0531a276dea9db603eca7401449e1",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/cavalry.webp",
       "ext": "webp",
-      "bytes": 90766,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "0a35abe7ba09f47bdb2e4a460399537db5c05c6dbee165b80dd53c3e74c5ceef",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 53864,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "e44c08e38d5dffadb91723fed5559d0d3361b260a980015f41ac722f1de696ee",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/dragon.webp",
       "ext": "webp",
-      "bytes": 142674,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "d07d53519b6d8d69a8b7a9df0ffb7c14b1183b415ce5046517e3662cfb5320c5",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 100966,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "cdfeaec260d7c66976cfcfb2955833f46fa842d432cb0e9bd96af618fd083739",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/esper_candle.webp",
@@ -4638,18 +5054,18 @@
     {
       "path": "portraits/cut/enemies/fire_el.webp",
       "ext": "webp",
-      "bytes": 86318,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "b8679e9094d10604087a6e4a628cde2b86b8d94cf6a247b43b91c1008ecdd462",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 88716,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "9d2fb91d2b324792e6688643819b4d2b4481bd62f1e1afafbc65268c25bc6bd5",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/grass_el.webp",
       "ext": "webp",
-      "bytes": 85770,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "b63efb342c56b411ecd5f2376531ddf843cf5e457da15b5162b2bfe8a72f1d6c",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 62164,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "239df57f9c5862604bc5c40fd3fd1d2a3d697d99a3a9c65786bc9b7dff8120a7",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/infantry.webp",
@@ -4662,10 +5078,10 @@
     {
       "path": "portraits/cut/enemies/orc_axe.webp",
       "ext": "webp",
-      "bytes": 138466,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "f6ef8d0fd6288f2ba50cfcd72b648f95ac63e36c3e0f4484cc79585269b28f25",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 79692,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "ae7f124413792d79dbaf0019f942baad760c1c3efda43f190a1cc519bccd97db",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/orc_jav.webp",
@@ -4678,74 +5094,74 @@
     {
       "path": "portraits/cut/enemies/water_el.webp",
       "ext": "webp",
-      "bytes": 107138,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "043fb44d5bfbedcede755766b1c1b27e377eb46497ec3e41cce87bac313d060a",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 61630,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "9bf01d189617e1030aedd9305c6f6f430d00b9751e18d8f8af28fc09be5ab3bb",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/cut/enemies/wolf_rider.webp",
       "ext": "webp",
-      "bytes": 124404,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "22923756c46db91dd4d67eb52edda673eb71352ddf364fd54fa06426018868fb",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 68846,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘，透明战斗派生）",
+      "sha256": "a46960674caa830258cb050ebdf7dd6cfc2bd4ec9d8b856a786e23a34c501d25",
+      "source": "docs/evidence/2026-10-25-enemy-battle-fit/receipt.json"
     },
     {
       "path": "portraits/enemies/archer.webp",
       "ext": "webp",
-      "bytes": 301536,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "8ac95823ba07360aade16d773607083a95fd93c3876ea2d7ae221d2f84bcaa8f",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 168288,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "bd0fc8c9f7bb6c0d1ef50c8f8d09ac5d1ae4f58939c428a364914c9c3018265c",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/bandit.webp",
       "ext": "webp",
-      "bytes": 279740,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "4676bb8bb067bfb85dda17f22577e30e41968488f54b723ec8823f8c42eca247",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 143278,
+      "license": "项目原创（原NAI角色设定，内置imagegen战斗块面重绘）",
+      "sha256": "f0a10ceda4ae0cc20e266142d9e0274fe8b0ee492eda2c2edd0c2c61c2ae6b94",
+      "source": "docs/evidence/2026-10-25-battle-cohesion/asset-receipt.json"
     },
     {
       "path": "portraits/enemies/boss_elem.webp",
       "ext": "webp",
-      "bytes": 317052,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "a9ff3cd7e4e97153b173707fa0070fb005ea4e3e1546f2259f76c3aebbe99248",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 202874,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "82709c4bf1422a3245b8c4155a18be6320d2fbad21f0fdaa220f339786df091a",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/boss_general.webp",
       "ext": "webp",
-      "bytes": 272988,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "1d1d54fc9d3f80b91c2248435530fbebdacec70d47300e7ea38770c4f532eb9b",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 131336,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "c1e2588f37cd3cd7e5deb9b285b547c1db5bc6d173ab8bab61cfcfa1b3dbbc55",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/boss_orc.webp",
       "ext": "webp",
-      "bytes": 355060,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "367b080c42b1e5bb242a18af3145b8205709e2c103e7023741e05e4dc03f192b",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 227490,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "84f1907419581f662b9a25a3e76f4cfa54c32ae9a418a7d0f079a26c3b75a87c",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/cavalry.webp",
       "ext": "webp",
-      "bytes": 250274,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "16ece6b30893f8b593c328174af2460e7c6f6f921e0db84d68ac26a2c151e52b",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 153072,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "0e476e03e355e515ebf6047e2b2f02513e29ef07526f181c56238e12fd57035d",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/dragon.webp",
       "ext": "webp",
-      "bytes": 426774,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "b3a3e88525786ac6a08bd9a6ce407138158257b546b5f55a282a2de08a64a789",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 308468,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "638c7675d9686222e89465ffc15a112b5adbce1af36f286e593d274c603020c1",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/esper_candle.webp",
@@ -4782,18 +5198,18 @@
     {
       "path": "portraits/enemies/fire_el.webp",
       "ext": "webp",
-      "bytes": 252630,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "06b834021596299dfc7bb962d8931586813388371f39b1d01ef90c9433eccb49",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 274808,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "4fa924c059f3d49a371f2943c63555d5d0c22ea2d39d7e3bfc31abdd10df6c2c",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/grass_el.webp",
       "ext": "webp",
-      "bytes": 240470,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "ae06aa09c4713ae7521fc795e05e4995fde99ead52669fc63fa27a52aa7f62fe",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 185732,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "3e23c992306aa33e2e60610f0eb0e7060585abddbc985f7f324fc642e9541338",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/infantry.webp",
@@ -4806,10 +5222,10 @@
     {
       "path": "portraits/enemies/orc_axe.webp",
       "ext": "webp",
-      "bytes": 412030,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "45efb9493e2881a6f95d2bb62a27bef8cd8d6d2c7f5150f01255800be7235fcf",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 223094,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "56c672a29dcb937e1b94a2f3c1fd9ee213c27200c7cc88e6e81495571ff2b5ee",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/orc_jav.webp",
@@ -4822,18 +5238,18 @@
     {
       "path": "portraits/enemies/water_el.webp",
       "ext": "webp",
-      "bytes": 316702,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "07f78900a1f9838440a0d2265bb0ab40fb15e02086a75cb55c44480086dce0d3",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 184018,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "e819a6096cb41b347b70eb01475b41d85ea5d7ba8df070301a6da26cc1cbe002",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/enemies/wolf_rider.webp",
       "ext": "webp",
-      "bytes": 373616,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "d6985aa524842090f7886937a9221e532b84e64074f27b7331d92584d3596d20",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "bytes": 210798,
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "sha256": "5c8076bf7124817f0468aa02202343d74672111839d79254131d4a6aa8b8da8a",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "portraits/expedition-roster.webp",
@@ -7052,10 +7468,10 @@
     {
       "path": "portraits/full/wu-casual-v14.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 407952,
-      "sha256": "c53156d2038291935fba357e7a04d9d31371e27be759662937deb0804db5ccb3",
-      "source": "docs/evidence/2026-10-18-wu-skins-reset/installed-brush-preserve.json"
+      "license": "项目自有（NAI V5图生图＋Codex内置ImageGen默认画风重绘，春日·机车减噪修订版）",
+      "bytes": 540558,
+      "sha256": "9c8bf804ff4f1802e13867f4d0e6314009359ae5dc62c4b21236cc0c56d8d9a6",
+      "source": "docs/evidence/2026-10-25-wu-motorcycle-clean/install-receipt.json"
     },
     {
       "path": "portraits/full/wu-spring-v15.webp",
@@ -7076,10 +7492,10 @@
     {
       "path": "portraits/full/xingyue.webp",
       "ext": "webp",
-      "bytes": 180912,
-      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
+      "bytes": 153604,
+      "sha256": "99d6c6d040b5e9698caec8539c745d4ed170897edac824a37a00a3447bca0f1d",
       "license": "项目自有（自制/AI 生成）",
-      "source": "docs/evidence/2026-10-18-roster-reference-final/restored-four.json"
+      "source": "docs/evidence/2026-10-24-xingyue-card-roster/portrait-receipt.json"
     },
     {
       "path": "reconstruction/wallpaper-ensemble-1005.webp",
@@ -7220,138 +7636,138 @@
     {
       "path": "scenes/event-bandits-anime-v2.webp",
       "ext": "webp",
-      "bytes": 273038,
-      "license": "项目自有（自制/AI 生成）",
-      "sha256": "cab87e94b210462de724cd372aad53e1e8faefa27db5a1d365c64ccee5471844",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+      "bytes": 154130,
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "sha256": "a7e7edb9958f70ab3f1b19c9ebec346484c8868bb2bdcba539c18d1f88e9df90",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-cmtn7qttxqo4.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 251196,
-      "sha256": "d0b671aff6b533deceb518df56ba100ff84efac923fdea1ab7d69a525cc57cff",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 168704,
+      "sha256": "a3618cfd8dc5c405abe719fa072660c2925ffce9ae145f705b27741bd5ed8152",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-ev19-arrows.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 198216,
-      "sha256": "914c8b626622dca32cdd4f13e91f3f031cbb2d17339959afe7a28ee86b2c7d28",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 139546,
+      "sha256": "83f0bc7e0b1014ea0567e4994e29d6cc45a58af1fdb62e0dc177a042595e9fb6",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-ev19-classchest.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 257064,
-      "sha256": "cccd3da544d73d2a10744fb57330e13fd0770e300c292ab6d0308ed1302f995e",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 124022,
+      "sha256": "5731b9d9ea3731714e66552d8153e54a24e7d9641fd117c2f713855b03fbf267",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-ev19-fireballs.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 231198,
-      "sha256": "3994e66373d42bf13555b92a82bb82692e58100569da70d3bc69c8e8e36391f7",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 136950,
+      "sha256": "c6e6f7f1e21d653af399829ee0cc04bea2e96467981cb04875718a32c1cf310b",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-ev19-gamble.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 196252,
-      "sha256": "5b6eceee56ed9e726b6ae16a2801921350c774110671c00941e137d087b9283f",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 147714,
+      "sha256": "d4105df1f4bf897c94d3b7d5d8910232e2b44fd3f009c073bb11c82664d52df9",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-ev19-pearlbox.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 258574,
-      "sha256": "9e8a641d84eac0d452413b75794b263f6c8f136510d342fcc478ad2e8603f937",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 142490,
+      "sha256": "a629a5ec1583811e254ccb4bd467ec8263d40319f0524a9193b049d22d2d94dd",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-ev19-potions.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 210142,
-      "sha256": "dae236dec42588dd3683d0a917cc76e044d886253ff37490bd86bec523118f2c",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 149028,
+      "sha256": "1ce1ce8d5754bb7771734b92ce4335d77f11559a32cf4aed5cb30d57dfdc369b",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-ev19-quartermaster.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 235916,
-      "sha256": "c9bc1f839033a81c66afec43daa9bb05dda8c5ff6dcc0286e3a4c82d31f3a787",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 143094,
+      "sha256": "b091918413b125ad4ad9d671f9a8b956ad967c18fc840a0a8864a932dcd5c4ce",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-ev19-recode.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 186546,
-      "sha256": "67858a535e18eef2470756487c38c86073f50ba802731803805b4caa4fd02cf5",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 119816,
+      "sha256": "bc1a87d48cfbccc9ad6717b44cef5817f73b7025bf4dd3e1f9692bf8d8bc98c1",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-ev19-vital.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 196426,
-      "sha256": "fbdc1bcb61869311e4335788f76b080f51d2c98a1f49fc9f97f917d767f69a71",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 96816,
+      "sha256": "63b267d2ef13be04fc62b12e4bad0a76c77983d3a07569f71c0aa2b6ff8bf4ed",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-last-lamp-1013-v1.webp",
       "ext": "webp",
-      "bytes": 99106,
-      "sha256": "d31d167fc46e6e48eaa73626ca63893eb7d168942845dd0b3e8759854a2ab630",
-      "license": "项目自有（NAI 底稿 + 内置重绘）",
-      "source": "docs/evidence/2026-10-13-WF-expedition-experience-1013/event-redraw-assets.json"
+      "bytes": 145094,
+      "sha256": "690c1a393de21d4d54e31e4b585185c70c2edf30974105bfceb2727f4e513351",
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-tt6-airdrop.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 298472,
-      "sha256": "45696509c54403824c47c326a1ee235f79a812a5f1243c9a42490aa44ae588ae",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 137914,
+      "sha256": "323e2127a446886f373ae3c895a99a262ab1602dd00a4922fa242921035c81a7",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-tt6-chestdraw.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 197786,
-      "sha256": "08e1f8dfa0ebaeeb5a852dc05fce660c27585161872c4dbee77be608f473dde4",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 104882,
+      "sha256": "7d3204a3aba6cc81b76db29cb8422dd77fac0368f549d43b98f94527b382515b",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-tt6-demondeal.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 209318,
-      "sha256": "17d09b78747805a1197e0e7b79520999c9079b87bcee8ccbe09cb8e7b27f6c5b",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 122478,
+      "sha256": "e4405f040be571c225d5f98386b225643ebf1e12995f27c50d1a7485ab64c18b",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-tt6-goldhammer.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 178954,
-      "sha256": "80b980d111f6c3dae8f8355c3dbbbe722839cba76d049b6bf07b2f4f75f16ecc",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 133546,
+      "sha256": "4c105cbe5243a80e0c2c45625739b5375c72a58b2c9162630271ebee5ca45f3d",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-tt6-goldmine-1013-v2.webp",
       "ext": "webp",
-      "bytes": 102098,
-      "sha256": "63dd597b66143e46d11ec6f00c62d33ec10d468e8db45dd04fb6c63d9da8ad62",
-      "license": "项目自有（NAI 底稿 + 内置重绘）",
-      "source": "docs/evidence/2026-10-13-WF-expedition-experience-1013/event-redraw-assets.json"
+      "bytes": 238132,
+      "sha256": "c7f856070df3157b0cf37ae289e716599f30d61f2d515718b291e0d4cf139a3e",
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-tt6-goldmine.webp",
@@ -7364,26 +7780,26 @@
     {
       "path": "scenes/event-tt6-mystery.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 224206,
-      "sha256": "f7ddd7b58ad238d24d716cee4a60a93c504c95c8ca7b2c0b73ec1ee7d6c70c2c",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 148652,
+      "sha256": "5de72ea13dcbd012e3cf92ca083bd2320ca9626f8ce34c21648d68d0ea97b96e",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-tt6-relief.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 214686,
-      "sha256": "015bb2ee85e8d4cfebd4f40d845e9686d1ae62d0dc9d83dc5fda371583866d33",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 161752,
+      "sha256": "52cf46cfe64c1488500983dd55ec1d5c3525f75bbfb93079666e6813e456c6a3",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/event-tt6-systemsupply.webp",
       "ext": "webp",
-      "license": "项目自有（AI 生成）",
-      "bytes": 168112,
-      "sha256": "b1e3e4c01f75b5d30e87bc9660cbaa33e9f43dc3470d3970e11325454f092c4f",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 150596,
+      "sha256": "bac1d4425809467f9e5a9930edf658384ae5b83eff273511a441045cad641059",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "scenes/hub-wallpaper.jpg",
@@ -7927,8 +8343,10 @@
     {
       "path": "slot-bg-knight-fantasy.webp",
       "ext": "webp",
-      "bytes": 490052,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 456266,
+      "license": "项目自有（NAI V5底稿＋Codex内置ImageGen重绘，老板授权替换选档图并接入首页第七张壁纸）",
+      "sha256": "80f2d3cd5f065616cf230b35cf056a44a7475918c6cfc61e510e8dffd2356c77",
+      "source": "docs/evidence/2026-10-25-dinner-wallpaper-install/receipt.json"
     },
     {
       "path": "thumbs/cards/bound-shadow.webp",
@@ -7950,9 +8368,9 @@
       "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 63140,
-      "sha256": "1862c83833ffa16f9460f3314690ba935fe5d053f0e2204672992b0ceb067f52",
-      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+      "bytes": 29900,
+      "sha256": "54a76a2992bb8ba1263cd664f775952a6aa78e65b8fe2d9cd9c8357d9a81b241",
+      "source": "docs/evidence/2026-10-25-migaofen-bear/receipt.json"
     },
     {
       "path": "thumbs/cards/creature-cmtn79743r2n.webp",
@@ -8222,9 +8640,9 @@
       "path": "thumbs/cards/equip-tt7-darkfort.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 3488,
-      "sha256": "d163f00ab114b9bf7c1c725bf60910d902682093c829fef7b6d387c2e627f42c",
-      "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+      "bytes": 5140,
+      "sha256": "ae73be53da306b321e8f588527ca091ff8a0f9ce7580a2d13e8596822f6915a8",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/equip-tt7-naturestaff.webp",
@@ -8365,10 +8783,10 @@
     {
       "path": "thumbs/cards/hero-sacredrain.webp",
       "ext": "webp",
-      "bytes": 27386,
-      "sha256": "7543592ff0d5a49ec593fec89ffbab00ddc4aaeb4de6e3def35c618b6b9b58d9",
+      "bytes": 25022,
+      "sha256": "fd423d3b439e7464dc170799925d4a2a0031d3e1d7d17478788c592aed9f137e",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-wind-bg/receipt.json"
+      "source": "docs/evidence/2026-10-24-xingyue-card-roster/receipt.json"
     },
     {
       "path": "thumbs/cards/hero-sacredsword.webp",
@@ -8382,9 +8800,9 @@
       "path": "thumbs/cards/hero-summoner.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 23364,
-      "sha256": "666e4f919b795f5606bdfc17fbdf60ed559f211976c2f78ca006d3e4d478c88b",
-      "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
+      "bytes": 23148,
+      "sha256": "dcd6b61941c5943f5d1fcfba37df2e1857021592792211f2a8362548e474faf2",
+      "source": "docs/evidence/2026-10-24-baita-one-eye-fix/receipt.json"
     },
     {
       "path": "thumbs/cards/hero-sword.webp",
@@ -8589,10 +9007,10 @@
     {
       "path": "thumbs/cards/lore-raving.webp",
       "ext": "webp",
-      "bytes": 22718,
-      "sha256": "250de1125caa2da3d86bfae114296a675293cd450ba296aff23b00348cbd9ba1",
+      "bytes": 25796,
+      "sha256": "de216249df97ad74791e1f8d485d990b00f708f67095d8ce9d9a584f1e5b3d3e",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-baita-lore-raving/images-v6.json"
+      "source": "docs/evidence/2026-10-24-lore-raving/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-cc-chase-slash.webp",
@@ -8661,18 +9079,18 @@
     {
       "path": "thumbs/cards/martial-cmtn1i64j7y7.webp",
       "ext": "webp",
-      "bytes": 12130,
-      "sha256": "2df5efc85e27faf8a719d63b2d12bc3ae40dbd531723f95a08e5ee3a45e1e647",
+      "bytes": 16238,
+      "sha256": "6f8228c10b287040de91add04783c170567b789a84a58abe9339cdad99a3fe28",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-cmtn1wnhhym.webp",
       "ext": "webp",
-      "bytes": 24380,
-      "sha256": "bb5d2c22569af9de651e727e070342ee7947d8dcc3a82cd576631973093036e0",
+      "bytes": 28664,
+      "sha256": "7191b3c1324fa5358a97108354514277dd1be4d65db87899b260449b3664509b",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-jianghu-class-forehead/receipt.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-cmtn233trmeg.webp",
@@ -8950,25 +9368,25 @@
       "path": "thumbs/cards/martial-tt7-armup.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 19050,
-      "sha256": "e45a7111c364dda0e755af37c0430695bc235ca26861c746db4a574f6c8ac22e",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 35158,
+      "sha256": "fcf7d8db9ec4ab5744f43cbb88959855b5a66823732c5b2df5578a915022889e",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-bloodpoison.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 12972,
-      "sha256": "ff86272069a5e864728934ac5a5f38b7a115883ea28539e3516030fd4a4454de",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 28296,
+      "sha256": "d402fb80fd14c9f0354da5880c7119fac184ec31c2743848a15ec8f39eb69402",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-bulwark.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 18574,
-      "sha256": "8ccdc292c9c9abfb3041aac7d72e5c37fb46c1c57971ed051e88caca7c3f46cc",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 26822,
+      "sha256": "c59ad5574544c858c9bf4fdeb511e38a23bc5e945fc152e00abc08b13c736f75",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-demonbreaker.webp",
@@ -8981,42 +9399,42 @@
     {
       "path": "thumbs/cards/martial-tt7-fullstrike.webp",
       "ext": "webp",
-      "bytes": 12480,
-      "sha256": "d7f27e27a8ff0a0f4f4013bec229b0d40a88b40eb6523df81d8fb7a235357612",
+      "bytes": 15102,
+      "sha256": "5b73e0f1f44fb6476a3c8dc79c64f0cd3eea4986e8196d1731aec3d7ee4cc614",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-05-WF-fullstrike-identity-rough/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-ghostblade.webp",
       "ext": "webp",
-      "bytes": 17364,
-      "sha256": "6a3613ae27ccbf42a6eff210731e42e2ede147269fa7da072d096de99af85056",
+      "bytes": 24564,
+      "sha256": "1ce758ec79fa562816563497348279b1b72e1949d5def47aaa2dbaafd107b2a6",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-goldencicada.webp",
       "ext": "webp",
-      "bytes": 12112,
-      "sha256": "486279fa770bd45af128779c5acbb33345b4e1aae411e13a5a0e2cffbb7af63d",
+      "bytes": 27388,
+      "sha256": "9d90d6d28eb8b7b029dc1270391d357c83ce287f64dc2306c57a29a9f8e4c8c5",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-imitate.webp",
       "ext": "webp",
-      "bytes": 10180,
-      "sha256": "d931d5d946ae3c3c34c7cec25e1e444a9bc10540f4531aac0724f5fd1e4a36bc",
+      "bytes": 40188,
+      "sha256": "2b2c5c30139cca7bd42c2d37bc7efac39a87a6eab1e90ef8b5e70718d60d4771",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-ironcharge.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 12060,
-      "sha256": "47efdb9bc3db19cb5826a1315d1b47c39d573181df75bdb98d991828c44a6c56",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 14686,
+      "sha256": "d3d5ecebdba7c81d1c015ea1f641b01993068652d3467af8cd70607ec6a63946",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-ironphalanx.webp",
@@ -9030,41 +9448,41 @@
       "path": "thumbs/cards/martial-tt7-marchrush.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 15216,
-      "sha256": "71db26afa8628fc6b53c25d948e3cf665994638283dec29968caa9e0c8ff950d",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 18108,
+      "sha256": "3ee34a06c41939f39a3145912df82b84411d587287c8db546ab62694c2836fdd",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-meteorrain.webp",
       "ext": "webp",
-      "bytes": 9056,
-      "sha256": "3f008936a1b7446e5d393898d21c6b377bc7175998872b9d9dd7ecf3e1dd30e5",
+      "bytes": 27490,
+      "sha256": "83865302550a1e37c042d5e8c0f031c67812aa3bac3eb6324f56a6b56725f04b",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-sneak.webp",
       "ext": "webp",
-      "bytes": 12014,
-      "sha256": "30496faf3e32f94804872cfcb61c3e894e51c00b02bc65b5af01014d1e8f6877",
+      "bytes": 29714,
+      "sha256": "9c4a9ad1be9b121551177e3b7ade79f9ab242c0499b0344577f7384296f12939",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-stealth.webp",
       "ext": "webp",
-      "bytes": 10254,
-      "sha256": "9c58567525164e5e17342ee552d5a01a05cb1bf26604ae0b489a3216f137fc0c",
+      "bytes": 21310,
+      "sha256": "f60798c3a58c14515f6c8b344e26c81db56e4d119fc846c78c3b453df2aa9f88",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
       "ext": "webp",
-      "bytes": 9960,
-      "sha256": "d5f120ff27b4da0f53aa3366cf1b2d395a255b166103df6234482f4e72955615",
+      "bytes": 27780,
+      "sha256": "f5610520466fb07f99cbcadb1be981fa1b81d257123620ad357632b8838f7c5d",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-24-card-local-fix/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-throwblade.webp",
@@ -9077,18 +9495,18 @@
     {
       "path": "thumbs/cards/martial-tt7-thundergrudge.webp",
       "ext": "webp",
-      "bytes": 13462,
-      "sha256": "e123fe387860836e0220e6c48af8e40787bdc80e3876588df50de28dae90b116",
+      "bytes": 18320,
+      "sha256": "c204cdf9da91b4f59d701ec2d92b14dc14a00c7454d56c05b8cf3b5d37dbe8e4",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-23-thundergrudge-redraw/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt7-whirlwind.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 17962,
-      "sha256": "b136632b1d7574395a49ae45af8b2d6e1d962962751c8fd00d305b8fd09ab30b",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 36144,
+      "sha256": "18e9b6aa0164b1bdc52db9acaa25820ee71a96b80e61c3e3f2a024db13f423d7",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt8-dragonblade.webp",
@@ -9326,9 +9744,9 @@
       "path": "thumbs/cards/spell-cmtn1gfhczzj.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 15854,
-      "sha256": "c2440402a5ba89765e4fc04fcf791c999e978300ae33668dfce7a721b1fce55f",
-      "source": "docs/evidence/2026-10-10-doom/receipt.json"
+      "bytes": 16798,
+      "sha256": "f4183901c50841339a052747592256b9c5654bbcc3af9df94287b47e1b051a87",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-cmtn1lbhbqi4.webp",
@@ -9342,17 +9760,17 @@
       "path": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 33002,
-      "sha256": "30f743a4e95034a9a40e4109aa8e7925972aab7892ab06dfee2f64b8f0e075ba",
-      "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+      "bytes": 36532,
+      "sha256": "043aad85e333a74c5fceecc210086b924d2362a2ede84040abb52dedd8b7f8b2",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 24868,
-      "sha256": "f4d93b57683327a2d44e47242fd28645bb493a1b6bd775b04532672d6da79a9d",
-      "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+      "bytes": 31158,
+      "sha256": "4cad1117d5b355a33951ac9f77054052a381c4335b8e198bb14a5115479222f9",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-cmtn1r10xnl1.webp",
@@ -9526,17 +9944,17 @@
       "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 17688,
-      "sha256": "c43ae18544bfcaefbaa0d63dae905e6f764347a1a645b1324f0d26739b466532",
-      "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+      "bytes": 20962,
+      "sha256": "e159cdb19cfc4096b9591987d656e9f3e3b4dc3536c72494f7b9c51c1d7ed677",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt3-flame-storm.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 18256,
-      "sha256": "17b3134ce1b45fce977599598f50103be1dd4ce1c2c5c59f01f63dc9b2689955",
-      "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+      "bytes": 38068,
+      "sha256": "caaba8fadc1f86b4c58a67e8d39cb7d5e7b49a1b73ca9aa5ad3d50f0da800710",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt3-grope.webp",
@@ -9549,10 +9967,10 @@
     {
       "path": "thumbs/cards/spell-tt3-holy-shield.webp",
       "ext": "webp",
-      "bytes": 16522,
-      "sha256": "11b24763f1a85c705babd2ddb992983565250bdd770ce3c9a4b05268515bfc65",
+      "bytes": 21974,
+      "sha256": "db6560065a741aca796b30010dae165dcf737213a57a84b66db90e8cb1dad136",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-05-WF-holy-shield-fast/receipt.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt3-holy-water.webp",
@@ -9581,26 +9999,26 @@
     {
       "path": "thumbs/cards/spell-tt3-nature-form.webp",
       "ext": "webp",
-      "bytes": 15402,
-      "sha256": "4e1a372e0ad854a3d5bdefd2ea4ace21854b66d1c6d82eb5a4a2d9da5a8153de",
+      "bytes": 19758,
+      "sha256": "12652780d3813b0744a52110fc0d5492ce9b8bdff420f0e0c01025b095afb593",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-fullmoon-smite/receipt.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt3-nuke-ray.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 12658,
-      "sha256": "a68ec65924bb508dbe90039272d8a0dc76f2906ecb1140692250439399f912d4",
-      "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+      "bytes": 17938,
+      "sha256": "28d910128f39fd217d7d98091e9bbf4045fc63fc0357907959b700b6148aec68",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt3-petal.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 21092,
-      "sha256": "e4ebbeb415559737229518ef1264d9f0e1222321fcd3d5dc88fdbc6930f2bea3",
-      "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+      "bytes": 31016,
+      "sha256": "9f1b96b14321a3b3294e2343cd932fb6a73d67e37ec83ef7a11e4643554ff450",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt3-thornfield.webp",
@@ -9678,9 +10096,9 @@
       "path": "thumbs/cards/spell-tt3sp-shadowshot.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 16420,
-      "sha256": "433577fbf864289aa0a3e2d7852eaa53e2a4e8a14f5d6cd062d492429c9e7de5",
-      "source": "docs/evidence/2026-10-10-shadowshot/receipt.json"
+      "bytes": 17306,
+      "sha256": "ce0426fb17338b95f1fa25ddfe628119a171b953f8866f5ff0c037634ef38229",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt3sp-silverthorn.webp",
@@ -9702,65 +10120,65 @@
       "path": "thumbs/cards/spell-tt7-abysscurse.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 17298,
-      "sha256": "8176dffeca42c5091a2460f82fc14dfe5bd4d4edb44dd8ae56e0cf18a41b63b9",
-      "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+      "bytes": 18528,
+      "sha256": "67f900a5f633250dfd4036796c22fd39afdd761ddbda5f0f7c5d42250a1c7df5",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-arcanebolt.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 23188,
-      "sha256": "f0e9281749aa9068b03eec9bcaaa47778af6ef8faa493e6e2e3819e14ba26e5b",
-      "source": "docs/evidence/2026-10-10-shoot-arcanebolt/receipt.json"
+      "bytes": 25786,
+      "sha256": "e95f1b825a740bd695f445e7d054d220011e11de4080b1820ed2ae2057d49a14",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-bladebloom.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 24348,
-      "sha256": "d88dcae8f4cdcc415662bcb4809494df78b5955c0497cbd000ad9e064a4dcd2f",
-      "source": "docs/evidence/2026-10-10-bladebloom/receipt.json"
+      "bytes": 37290,
+      "sha256": "e2c88823a3fd5e33f43a4bd2f37006793b1cb06debc577934c37f47600c0138f",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-bloodpotion.webp",
       "ext": "webp",
-      "bytes": 19364,
-      "sha256": "c74e3b76f580b9523c28e45da1d43a21099b45114d1c73056ebfb27380879e0f",
+      "bytes": 15232,
+      "sha256": "65596f746087b659811ff5f66a0863795972638487edbf953395d9478c9f2e09",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-burnharvest.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 13866,
-      "sha256": "a8d2b82fc376b6b863e1c9a0e2e484bf8b82e02f8041efa5e71ca3217c2ce5a3",
-      "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+      "bytes": 37868,
+      "sha256": "f08542332fe09ebe14c7a5af5938c0f3fba23d5b5fbd3a7050e29554044e18e6",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-elementstorm.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 15500,
-      "sha256": "2f9aba20d150f32c482a5793feff657761e426909c1fa24e50d73baf4dfac527",
-      "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+      "bytes": 21854,
+      "sha256": "8d302460d9928e27fb7f0190ff5606be714b99902e03a05b34daad484d951949",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-energize.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 21528,
-      "sha256": "d1b3f4f7e46ae6e17921265ec87863d325616c6264c789df6f28aa3988974f1d",
-      "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+      "bytes": 24966,
+      "sha256": "ab6f0e65cb78c7e88ba5f3432811ebe75048802d9d427fe5d045e219cd15d5ec",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-frozenight.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 25516,
-      "sha256": "b9ee8afee9987c0fe53c2cbfe7a001711aeaa4776424a7a9d90dd968b7fe39b0",
-      "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+      "bytes": 33312,
+      "sha256": "0106a81a24a6fad37a87130f0867f876514903608d010fe689c35efdc22072d5",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-holyglow.webp",
@@ -9774,9 +10192,9 @@
       "path": "thumbs/cards/spell-tt7-holyheal.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 20640,
-      "sha256": "93fda161adc562501d2324fc67200d77587d9b0b98ae6a039504a563dc8b6aa9",
-      "source": "docs/evidence/2026-10-10-holyheal/receipt.json"
+      "bytes": 21058,
+      "sha256": "3568eb7569daac45a71ad1851effa2e362916bcaf644b7023ce5e1d1c41e3525",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-livingwater.webp",
@@ -9790,41 +10208,41 @@
       "path": "thumbs/cards/spell-tt7-maxsupply.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 26284,
-      "sha256": "f7883dcce64252c2a56bc33ad243358187615710731f34242fab4481bd523f0d",
-      "source": "docs/evidence/2026-10-10-baita-manasupply/receipt.json"
+      "bytes": 27852,
+      "sha256": "e20c4fa1173872d991d17e44f45f9c24b493ba9bf2fc26e5aca1bb57e4a6fc67",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-meteorstrong.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 22570,
-      "sha256": "aa45a50b45968963c326841df345a21ef425450116fee5a4461848f9bc9c1839",
-      "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+      "bytes": 26998,
+      "sha256": "967f2e0a970f0f2284f5d0f6d734ce80bd08541a57c73a8f36f15538587c33d6",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-provoke.webp",
       "ext": "webp",
-      "bytes": 17994,
-      "sha256": "ea0d04f57d7e723b4eb23aa0a5f400e6fd8d1802607d45e35c797cb9a347a4f1",
+      "bytes": 13512,
+      "sha256": "415e8c58ad0c5858ca4246fe28987516f29cd4360a44ef0b452f9108ba5af388",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-recruit.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 18688,
-      "sha256": "90e93fe4129363dac7dbdaedac82ee0a1dbcaa244b0f40f43c1c4becde012b3e",
-      "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+      "bytes": 18880,
+      "sha256": "6cb3c265a0036332b2683618cc9d134c0c7e99ddc967605b02454d4c2ff2e028",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-silence.webp",
       "ext": "webp",
-      "bytes": 16628,
-      "sha256": "966c433e54ce412131e14ab828e5cd1d83a438159fca9d7bd26c1392bb1bbcf5",
+      "bytes": 13518,
+      "sha256": "5e0a1458ecab59ec10ef897980ab0157e3d02ca6b17350843fca28b9dad65442",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-smite.webp",
@@ -9838,17 +10256,17 @@
       "path": "thumbs/cards/spell-tt7-stratagem.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 24240,
-      "sha256": "d01b923822d020a66c59b9b1003056024231f8a23f5c5ad6493530fa269a6863",
-      "source": "docs/evidence/2026-10-11-mage-pouch-reset/receipt.json"
+      "bytes": 24164,
+      "sha256": "5388ea9065fdb4e160d8c04f4730eab887ad75f306974741e345d3dc69e25295",
+      "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell-tt7-twinfireball.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 15556,
-      "sha256": "e13f8ff4046cc02eed58964de866d18e68a8b0d8400f3c71520d6a22ef33082f",
-      "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+      "bytes": 32934,
+      "sha256": "de0b8144b7cd7a1fd9f07540f1c00b56b637d1eccf7ab2d93947e86df6e2d401",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/spell.webp",
@@ -9926,9 +10344,9 @@
       "path": "thumbs/cards/studio-expanded/tt7-arcanescroll.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 9996,
-      "sha256": "460537734eb2be3c285f3f0410ab9e4c3c19ea74523b79a9e5d81d4ab8b19613",
-      "source": "docs/evidence/2026-10-11-studio-square-outpaint/receipt.json"
+      "bytes": 21652,
+      "sha256": "0cce97fdc30188bdf181111ea200b46558664c5e68e7753d63639dff62563f3e",
+      "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
     },
     {
       "path": "thumbs/cards/studio-expanded/tt8-archdemon.webp",
@@ -9965,82 +10383,82 @@
     {
       "path": "thumbs/cards/wu-heavensword.webp",
       "ext": "webp",
-      "bytes": 13248,
-      "sha256": "3da25dac372f54aca455ae289f3e2a719a1a103091dae5ae16b9130fd479d16d",
+      "bytes": 13468,
+      "sha256": "9dabe6d1573e198e4d3ec4bba90d614f665337f928584b6cbe492290839cc103",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images-heaven-v4.json"
+      "source": "docs/evidence/2026-10-24-heavensword/receipt.json"
     },
     {
       "path": "thumbs/cards/wu-myriadswords.webp",
       "ext": "webp",
-      "bytes": 21532,
-      "sha256": "d6fc755c6861ddcbf54bfb96674e5dd9741f28741e44790700dab4211f0a1995",
+      "bytes": 22592,
+      "sha256": "0f7ea62dea3d58a93c77dbc69567f762b963079400fe850f2e0e776f4e9cbba8",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images.json"
+      "source": "docs/evidence/2026-10-24-myriadswords-identity/receipt.json"
     },
     {
       "path": "thumbs/cards/wu-void.webp",
       "ext": "webp",
-      "bytes": 12350,
-      "sha256": "0c531c7a6981f57e565172d4e70f3159a2485bcf78657aa8ed0c9e70bce206fc",
+      "bytes": 15952,
+      "sha256": "dfcad346def6490dbc9d6eb6b5269ca9576d0f9d87d3d4939ce22c374b253414",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+      "source": "docs/evidence/2026-10-24-white-plum/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/archer.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 62128,
-      "sha256": "64503c1a85f2ef1a50617a74a96d86b89e6d8b8183e5bb02099f179bb40e5620",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 45814,
+      "sha256": "2301d425b69a9072d4032adfe3f23f7dc71910e4ecb6088a7c3d99281421b628",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/bandit.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 60862,
-      "sha256": "0790006ebaee9c08130440d4f296466863874d33599481416452345136102840",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（原NAI角色设定，内置imagegen战斗块面重绘）",
+      "bytes": 12982,
+      "sha256": "b5431b0e49644f7b508638ddab4e36c966aa2dd17dd8c57b9512d069c9c908aa",
+      "source": "docs/evidence/2026-10-25-battle-cohesion/asset-receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/boss_elem.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 72192,
-      "sha256": "8b4d6af58416ef4579259907bd035cd0503ceaccbe6a762f3f4e4f874c57c4ae",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 54366,
+      "sha256": "50dbe2edbef5b5f7b89e4696e17708cfab993fd449f174df7a8e7566a6ed7baa",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/boss_general.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 62388,
-      "sha256": "2710454822d2f640742b1fe2ed1c75939fbd88d976b51be320543a8f6f17a9c5",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 36654,
+      "sha256": "d67c071974baaf94588264aed89d0709c8c9ced17af433e0752bf6907a5847fa",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/boss_orc.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 77030,
-      "sha256": "8e9625a5e61127030d41683c7c607617df63fb85b00eaddf7586cafd92fbbd9d",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 60362,
+      "sha256": "32a41e1d31071c592848f8be8d8297d0b07bbb3f96c2e636d57d1200b88fb74e",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/cavalry.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 58158,
-      "sha256": "c5524fa3cacc2ef19f33de311ff82a7bb9b3abe717f8da700d03a5051d43300d",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 42998,
+      "sha256": "b526542fd41ae424aff37211eced7925d58c857ced2e52db8499465a73a5a9cd",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/dragon.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 95048,
-      "sha256": "84c66a2b80458365d4b490dd00d66d1981de2d4fcd09280e5b1a29083a6968b6",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 78592,
+      "sha256": "d7114477a3de4b75f4a794ea48c03510022f902ac125d26c1f68c0bb9263bbe3",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/esper_candle.webp",
@@ -10077,18 +10495,18 @@
     {
       "path": "thumbs/portraits/enemies/fire_el.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 58430,
-      "sha256": "5b96ec2874ca33e4ab51f320bc4564cf348dc9666c2a9bfa9380d16d7a39a492",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 69636,
+      "sha256": "910aa305543bca6a23be560b77ce8d9b1451bf9312465ac0af43d4f39035a97a",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/grass_el.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 56214,
-      "sha256": "d36395bee205c3a2221304e2e6b1a3a11df71a67663ec38647ed1c6fbbfb26fe",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 50152,
+      "sha256": "b4ec09f3f1bc5d3c875a9f9998f7a4c50c39e6f52a33296de2918844ea23ec21",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/infantry.webp",
@@ -10101,10 +10519,10 @@
     {
       "path": "thumbs/portraits/enemies/orc_axe.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 92652,
-      "sha256": "fa7b43df37bf4d0b301b8b884f3b5dc9f6d592286ae69ea6a81ec28f83955cde",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 63460,
+      "sha256": "547d58d9c276f000b05e2a5787f08bbdefaa16134025d1ebafd5a3c730f6dab6",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/orc_jav.webp",
@@ -10117,138 +10535,138 @@
     {
       "path": "thumbs/portraits/enemies/water_el.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 71330,
-      "sha256": "d7f93e258349267fd71f05d218bc86e6c892731ee109b40f4f0d048ddadec3c4",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 49598,
+      "sha256": "cb648884ab6b34bffe185057447a75d89640a075799c5cbb5eca5827631a83be",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/wolf_rider.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 81354,
-      "sha256": "2635d91650b32a24edd2fa3051a3b296f721baf7fed984d988056315894ba0cd",
-      "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
+      "license": "项目原创（NAI4.5起稿＋内置imagegen重绘）",
+      "bytes": 53626,
+      "sha256": "2091924fed936210dc44657c815634d5a473f0f3dac33c3814483c746d8d53cc",
+      "source": "docs/evidence/2026-10-25-enemies-nai45/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-bandits-anime-v2.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 28166,
-      "sha256": "27821a77c3d446668e031a79853e222a8839a953b427f8f68c0729abfccbacbc",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 18162,
+      "sha256": "5ce1b0cc8af595d77bb0febf14187fd1237dcd8052d7278cc678dd82fad38619",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-cmtn7qttxqo4.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 27080,
-      "sha256": "015ba5473a75b4ebe4f0862d54938d59dfa2fc08e4d8462031ae4b76a642f2be",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 17470,
+      "sha256": "2bb708e7d2c89e60b8a8a714108920bea1ce0e1a4d05cd3bd7727864f0a9665a",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-ev19-arrows.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 21312,
-      "sha256": "34fd3169708695110489e5681714684061398fc0a934149b5298eb0a72028363",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 12164,
+      "sha256": "8548d54e4eae74e18cac30b8bf81322bad0abb5e8565311ee50e0fdfe4ccebeb",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-ev19-classchest.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 26682,
-      "sha256": "f323edcb1d42ff2297a1a2e322edb9e8c23b50387ab916d233de4ad4f8124f1a",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 12442,
+      "sha256": "716f241fd788a94ba082a6dfa3b61ed346724144924a69012cd6a5fd77774d5e",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-ev19-fireballs.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 25540,
-      "sha256": "f0ec35c7bbe1e395cfc26caa0890b1923d7d13dbdfc89deec83e7643eb1ac0ef",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 11304,
+      "sha256": "efc5e2a8f4aaa2de615c7ab4546af8e80b5081ced2b8b3902e5ac14d25c0ce95",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-ev19-gamble.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 19910,
-      "sha256": "74d1c0669a9bcf2cf8739af87fbf57839e749accc27a58369943f17d3ed1d0d9",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 12738,
+      "sha256": "90cba164fb18dc927074711ea6b2c239158bc20b7f53a08bbf16731870933c4a",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-ev19-pearlbox.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 27436,
-      "sha256": "9ae765e15000c664011ce2a5d7b8c0c3e90b6d311f228657787a613ad80e597c",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 15140,
+      "sha256": "97c4a1fd47c5b07695795b901068193c1808299456346591d486b372a7ca6329",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-ev19-potions.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 23960,
-      "sha256": "60d5640e81b707320c1a2386237d7835a1842fa7a0ae494eddf95b1733174463",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 16332,
+      "sha256": "256e92d0361dfac2ee205e3b9a68f880c04eca7d6693faf87df1a050d31afa68",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-ev19-quartermaster.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 25470,
-      "sha256": "f44ec2f5717918967bbda5f3f16180c1d5fb159ee5e42b3b514117900decc4ac",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 15546,
+      "sha256": "30e016975243654589450c563103530f40625f11143e0d147b45efd74efe1bfa",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-ev19-recode.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 20966,
-      "sha256": "4d1924cf72ed69f1f80ea55dea005e5fadbeb8d776af29a228b1bc874ba39b01",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 14490,
+      "sha256": "f549db7d8ea61adc78ba569a8509d7d0562129818c6825483bf7e2ec0afefeeb",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-ev19-vital.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 22072,
-      "sha256": "dfdd8a97a4aade1e56a0d150f5eda2f9dbfaddff957307b4b364ad931542daa3",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 11190,
+      "sha256": "492e73322a2d9f23198deb4dc0ae1291e95c4f720acfa5c363098cb54c66cef7",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-tt6-airdrop.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 30826,
-      "sha256": "773b909967d40d6d7050762850a74ea609b30a7e3d7f5f87760dbbe10ac9563a",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 16164,
+      "sha256": "961e633f9abec92a3fa76269186da964abf4510506ac47e0834b04eb2005f3a1",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-tt6-chestdraw.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 21770,
-      "sha256": "d5852d60fa19e6d6bf0f15388186bee21000186ea4dce459fb27a2b97cb08f52",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 13778,
+      "sha256": "ad2b88a5cfd446865ef86eb336806a603b25747eecf80de0ec280248d3138d35",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-tt6-demondeal.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 21100,
-      "sha256": "7e9960ad6f4bd1d7cf0923514dd753de32692660b9fb215e2f39f9ed26d701db",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 12664,
+      "sha256": "545cd5fb9e92a541e3918521d6a040fd6c12ea53cd003eb2cf62079c82e76e75",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-tt6-goldhammer.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 20414,
-      "sha256": "e96e8e8185600d3f5883c286827e1ae28ea8c672bf2eb2107bf0bf8e5686bd61",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 15796,
+      "sha256": "0b25460f0f300b16a783ec7f51903eb4a940431a874086a2c14f998621f7bd12",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-tt6-goldmine.webp",
@@ -10261,26 +10679,26 @@
     {
       "path": "thumbs/scenes/event-tt6-mystery.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 24782,
-      "sha256": "1cd86ea38ad534502341ff9d575e1be7bddb6c03e5ae9e1f321aa9d4f42bec40",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 14454,
+      "sha256": "53f1f2c708e729d98e49e2b4676722c736275cc30a3d34e2157305bcf1f0a77b",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-tt6-relief.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 23396,
-      "sha256": "7c6f4f378decb9e36eea81c7176a2c623913c974324de5c510cd266806af2566",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 16114,
+      "sha256": "5d048774abaa4e9f9418b36f04086c15c32c2e1e101babbbf5bb83c13fc09d76",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/event-tt6-systemsupply.webp",
       "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 20832,
-      "sha256": "77c33dfdb8dce8e8db5cb4382248d710244a26bef57a6bc7fda8602d1d895e27",
-      "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "bytes": 13462,
+      "sha256": "531d353f8bd69623321ae0848d0eb37f652562e15d2c0e1b1a5f81922d78fd6a",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     },
     {
       "path": "thumbs/scenes/hub-wallpaper.webp",
@@ -12376,34 +12794,34 @@
     {
       "path": "reconstruction/wallpaper-xingyue-piano-1020.webp",
       "ext": "webp",
-      "bytes": 484368,
-      "sha256": "5819223c5dbbddef6b2a96eed382604f651c8f4829d70fe39f3c6af807a8e393",
-      "license": "项目AI生成素材（老板指定星月钢琴扩图版添加为首页第三张壁纸）",
-      "source": "docs/evidence/2026-10-20-xingyue-piano-wallpaper/receipt.json"
+      "bytes": 370092,
+      "sha256": "2ae951b2ff94ddd75d6314d006f218a7983b56dfb542ab1da4aa507e13f97161",
+      "license": "项目AI生成素材（NAI V5底稿＋Codex内置ImageGen重绘，钢琴及双手局部修订）",
+      "source": "docs/evidence/2026-10-24-xingyue-piano-reset/receipt.json"
     },
     {
       "path": "reconstruction/wallpaper-wu-bass-1020.webp",
       "ext": "webp",
-      "bytes": 359894,
-      "sha256": "a01ec7e5a298f173decbc72b9b83999dda1ba72012f265f949803603de55d9b3",
-      "license": "Project AI-generated asset; owner authorized home wallpaper installation.",
-      "source": "docs/evidence/2026-10-20-wu-bass-polish/final-receipt.json"
+      "bytes": 484158,
+      "sha256": "477f6088a9106517d8a90ea1f1599e59b2442e2c3d56f7f489b5ec74e0d548a8",
+      "license": "项目AI生成素材（NAI V5底稿＋Codex内置ImageGen重绘，无贝斯首页第四张）",
+      "source": "docs/evidence/2026-10-24-wu-bass-reset/receipt.json"
     },
     {
       "path": "reconstruction/wallpaper-baita-station-1020.webp",
       "ext": "webp",
-      "bytes": 429580,
-      "sha256": "a93b0c9c35b3a73536b27d106f0ef6148b6b2dcb09071f2c4d9fc925ed4d261f",
-      "license": "Project AI-generated asset; owner authorized home wallpaper installation.",
-      "source": "docs/evidence/2026-10-20-baita-first-style/install-receipt.json"
+      "bytes": 369988,
+      "sha256": "ef45420901f59620c401dad7bcf5aff0a83e084270407ac5da764a1c0a54a712",
+      "license": "项目AI生成素材（NAI V5底稿＋Codex内置ImageGen重绘，白塔车站首页第五张）",
+      "source": "docs/evidence/2026-10-24-baita-station-reset/receipt.json"
     },
     {
       "path": "reconstruction/wallpaper-xingyue-reeds-1020.webp",
       "ext": "webp",
-      "bytes": 441772,
-      "sha256": "a0a603507f5b11c20fc74a57e34641bf0faf631bac036dd0c8bdb5cd715d53b5",
-      "license": "Project AI-generated asset; owner authorized home wallpaper installation.",
-      "source": "docs/evidence/2026-10-20-xingyue-reeds-light-wallpaper/install-receipt.json"
+      "bytes": 383466,
+      "sha256": "dea7e99b31a961ea1c9a74d96bc1c90b0ac186baa744597ba04e9188155ea8bf",
+      "license": "项目AI生成素材（NAI V5底稿＋Codex内置ImageGen重绘，星月芦苇换装版；扣子与NAI云层质感修订）",
+      "source": "docs/evidence/2026-10-24-xingyue-reeds-reset/button-cloud-revision.json"
     },
     {
       "path": "scenes/chests/boss-rig-v1/frame-00.webp",
@@ -13627,6 +14045,566 @@
       "bytes": 142146,
       "sha256": "3100f3e8cd7f0066c4772a3514c2bd44683da0ebb94f918d148bed768f0c2645",
       "source": "docs/evidence/2026-10-21-transition-12-16-remake/install-receipt.json"
+    },
+    {
+      "path": "ui/semantic-icons/archive.svg",
+      "ext": "svg",
+      "bytes": 311,
+      "sha256": "d0732811bac1b7fbd3ee2b7a26d8e6613df3050ba91ad0bb5bbf91715fdd8a10",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/arrow.svg",
+      "ext": "svg",
+      "bytes": 264,
+      "sha256": "7dcfe44ce9926c34949d1207d5da7a279252ff7399296ea87bc347fdc3a5221e",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/bag.svg",
+      "ext": "svg",
+      "bytes": 319,
+      "sha256": "4c6129960417fa625914250f3f42eebe8654cfb84b90e6d5f54ca51980365ea9",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/book.svg",
+      "ext": "svg",
+      "bytes": 357,
+      "sha256": "336648e14729ad8ffe203c2b0bd3eafe3be3d1e7f7dce46301c06af846ded18e",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/broom.svg",
+      "ext": "svg",
+      "bytes": 329,
+      "sha256": "10b8cfbcda580e925d06fc5f40194740affa7f7f1c9c1fb92ad975dc8ccdbaf7",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/card-back.svg",
+      "ext": "svg",
+      "bytes": 297,
+      "sha256": "6b04d723765facab0cbe262dfd8ee7a7c5d6a61cf63e298f3618a1acee1c68c1",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/card-craft.svg",
+      "ext": "svg",
+      "bytes": 365,
+      "sha256": "324c1942ab5821f2a9416033db47691f849f02a2b2ef50e50ecb837d9faeba21",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/card-library.svg",
+      "ext": "svg",
+      "bytes": 337,
+      "sha256": "90cd14eb1dab2ba30c6d857af10a197aa63ee5a7b1f5444abd46edee159a89d8",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/cards.svg",
+      "ext": "svg",
+      "bytes": 319,
+      "sha256": "8114d4e9562e2c1e4f6380a5de9b47aa13ae8af9419b89ac465d6d546f21dac3",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/chart.svg",
+      "ext": "svg",
+      "bytes": 261,
+      "sha256": "e84e676c38ca3abeb5358ac4e2051f6344d106c2f0e7cabf21a350a8f8800092",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/consumed-pile.svg",
+      "ext": "svg",
+      "bytes": 323,
+      "sha256": "15ee36fc4d37fb6914aaa13a13d866ddd6049c3281128aa11c36f4bd3431a6a9",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/crystal.svg",
+      "ext": "svg",
+      "bytes": 341,
+      "sha256": "32fd0c11bd6c91453b3471e21d5f73f7f236cb627200fe73c67b3183416063d1",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/door.svg",
+      "ext": "svg",
+      "bytes": 292,
+      "sha256": "c1e6e84dcbb5b0870f1f9e972fc084e1459ec7febd850867e19f45be411cbcee",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/draw-card.svg",
+      "ext": "svg",
+      "bytes": 323,
+      "sha256": "b0ecb454d9656c9239b5859f907dfb00b0d32d371c5c7eb495957cab21273bfe",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/draw-pile.svg",
+      "ext": "svg",
+      "bytes": 305,
+      "sha256": "fefc349b3de1a26a3776d257c80eb72c3d766f29c65b12a34caed62f8aa89232",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/exit.svg",
+      "ext": "svg",
+      "bytes": 260,
+      "sha256": "3ac55b90fef2b1a1bd401c2d5eda2caf411b0f391d8070678eb20624472d1d4a",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/folder.svg",
+      "ext": "svg",
+      "bytes": 307,
+      "sha256": "1b45a9c4595f33e7683fed1a4478546bac0a36ae5a0cf4834b9ce95fb25196cd",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/gem.svg",
+      "ext": "svg",
+      "bytes": 316,
+      "sha256": "0e797886f2b29c23ab36b9f4adbac4ee43f07e25f0c30f3253d27b9ab1105ff7",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/hand-pages.svg",
+      "ext": "svg",
+      "bytes": 356,
+      "sha256": "4ed544f7744db1a8caca0dc359f06dfcc4ecdfa57539963bc6afb492c76018ab",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/helmet.svg",
+      "ext": "svg",
+      "bytes": 362,
+      "sha256": "f030c08bda3fa79668cc4eecf60e29ca4c245890d9ea2ea14b3bfc93d905861f",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/home.svg",
+      "ext": "svg",
+      "bytes": 310,
+      "sha256": "f5e3f7705d987ca8109116e7b47842a4db8754318c60e7cd5f7c7671acb41ad0",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/hourglass.svg",
+      "ext": "svg",
+      "bytes": 312,
+      "sha256": "35f7ce54b04d1e5064b024cbfa8ac97b105d86330c8e3db0c8d7bac959b2de22",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/infinity.svg",
+      "ext": "svg",
+      "bytes": 253,
+      "sha256": "28c3eb6e0e82cf2cad7982b4addcc349cf22b72c5ebf838662314a321dad5032",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/info.svg",
+      "ext": "svg",
+      "bytes": 315,
+      "sha256": "04bbaa4fad501545b906703c1fac6dff716058975965875dccb8ab38f20720c6",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/infuse.svg",
+      "ext": "svg",
+      "bytes": 301,
+      "sha256": "129598abe54ca922f15f4bd2184ed80b9243b2a8fe27b16fb908deecad22dd05",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/lantern.svg",
+      "ext": "svg",
+      "bytes": 338,
+      "sha256": "179cd07129d891a9ecf4550d53448e4bc7a4fb0d3238037ca1f9b81b9f4891bb",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/mouse.svg",
+      "ext": "svg",
+      "bytes": 335,
+      "sha256": "2fb324358115bc4ecfce676fa632b387df64b998d30eefa7f5357e5bc29fa4df",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/notes.svg",
+      "ext": "svg",
+      "bytes": 321,
+      "sha256": "d94debfbcbebec4845d6985f063452ac80ce4ac11b357f8c7c7babbf62015f35",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/pass-fragment.svg",
+      "ext": "svg",
+      "bytes": 422,
+      "sha256": "3050c50c3a4d90ca3641be08e8fa2341c691288c87c282b407cf11a4fc9c5063",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/pearl-box.svg",
+      "ext": "svg",
+      "bytes": 447,
+      "sha256": "09d8a9314e06c0b650a5015fba662a99a201b98a7b44bccf641f388692b8128c",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/pen.svg",
+      "ext": "svg",
+      "bytes": 326,
+      "sha256": "6acbda02259578485340e29aca158c6e8e01d8760677b34838d9107d2f3e3cbc",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/pet-egg.svg",
+      "ext": "svg",
+      "bytes": 364,
+      "sha256": "fe5776cdd28dc124df591bc2907c13fd0f654548f879d60060c802ebd934ad7e",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/pin.svg",
+      "ext": "svg",
+      "bytes": 291,
+      "sha256": "65ebfc975d0748e2925005033a5a2d3a2c5c91e0c440e4ea1bb43029a07a46f1",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/plate.svg",
+      "ext": "svg",
+      "bytes": 334,
+      "sha256": "07cfdb450554a34a34c97bf7fef4b5bf24ee389c17ce73415a6b3ab67b267362",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/play.svg",
+      "ext": "svg",
+      "bytes": 240,
+      "sha256": "4619d3a357e7ba7eaf1a9e0037145928fd0c68bcaf931fc7a91aa035db4f26c1",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/pocket.svg",
+      "ext": "svg",
+      "bytes": 315,
+      "sha256": "ae04eaaacccffe6db56c7e9f49ad66f8bf3d9a27dba4cbbb4ed2b17792a97a3b",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/pouch.svg",
+      "ext": "svg",
+      "bytes": 373,
+      "sha256": "dfcbb6f214b8ad5174520afda13568216634256249d913f7a11d1cde607238bb",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/question.svg",
+      "ext": "svg",
+      "bytes": 251,
+      "sha256": "aae9b329f8214fd502a90e24270cfb5f9cc9e19013103e42e1c59433d114e0be",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/safe-slot.svg",
+      "ext": "svg",
+      "bytes": 330,
+      "sha256": "17e2e5e17d0eefc1447053bd18dcfe6fc57bc581cca9636b8c1ae36047c5b2ce",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/save.svg",
+      "ext": "svg",
+      "bytes": 309,
+      "sha256": "85fb550d18917ca97c6719706a9a83ad5caa2c35acc08f2e34a370ae01749a10",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/scroll.svg",
+      "ext": "svg",
+      "bytes": 351,
+      "sha256": "3b4a879312959031bf6cb3fc4959229af5f59150a2d39e56afd1a38077f31fdd",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/search.svg",
+      "ext": "svg",
+      "bytes": 270,
+      "sha256": "ce5ba0cc5c01550e4f56d8ddfb4d9d37164db7ec5745a8047b1655fe6cc2c829",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/sell-cards.svg",
+      "ext": "svg",
+      "bytes": 377,
+      "sha256": "881aeded16120a6681b2ebb1f39f07641197390f317dcef1b889e7c09b6f15ff",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/shield.svg",
+      "ext": "svg",
+      "bytes": 328,
+      "sha256": "591a9a8174bace45de025c9bef6ddfe740ea495f61a0af489a4483f98afb88bc",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/skip.svg",
+      "ext": "svg",
+      "bytes": 248,
+      "sha256": "0c8254bda061c3855f387955f5927813fdba066425b3d09c22590c0e8b012a18",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/sparkles.svg",
+      "ext": "svg",
+      "bytes": 343,
+      "sha256": "60a34c946474349975cbde49c421f382edc8ac2238ae5181aa8527946e54e76c",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/spell-pouch.svg",
+      "ext": "svg",
+      "bytes": 362,
+      "sha256": "8bd8542416d3891600ca84cb620d814ed48c2f065d480d47e758e2ae8d88c284",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/spell-power.svg",
+      "ext": "svg",
+      "bytes": 324,
+      "sha256": "c4a7438d670d939aa907ac60c816edb83e7bfdd22091483280b18b66da819c7c",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-armor-break.svg",
+      "ext": "svg",
+      "bytes": 354,
+      "sha256": "09b21038603993110774d2d73f32894592ee99a4844f62ba148e6131751227e1",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-atk-down.svg",
+      "ext": "svg",
+      "bytes": 319,
+      "sha256": "b3bfb4f223d1785789541ea65f3ae14b1bfb57dab9aa4c863ae44614361d8a2f",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-atk-up.svg",
+      "ext": "svg",
+      "bytes": 320,
+      "sha256": "eacc7953adbe1370a90040139cb0d1df3a3fe5c370ebc10696b8b8167a81df07",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-bleed.svg",
+      "ext": "svg",
+      "bytes": 335,
+      "sha256": "e206137d2449f11501903b7bdb773a21708b5b51447f1c0f0ac75867854454c8",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-cosmos-form.svg",
+      "ext": "svg",
+      "bytes": 372,
+      "sha256": "8ed8f6c7fbb2c63fb54d1c0f7ca03924ae885bb7cb546780872beda4be69a166",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-dodge.svg",
+      "ext": "svg",
+      "bytes": 348,
+      "sha256": "c42a90b084fde8bf67a91ef8c8c1644288572f7e48e8586438c6d60f3c9ce230",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-freeze.svg",
+      "ext": "svg",
+      "bytes": 301,
+      "sha256": "09b51d2aeae8fa37a9f0055048230fadf1dc1974126d1524d8b2fa81bd3b379e",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-heal-ban.svg",
+      "ext": "svg",
+      "bytes": 369,
+      "sha256": "218f50f48fc06b97b7f7258bdd9f52b9813640ef157296697dabba7204316de6",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-immune.svg",
+      "ext": "svg",
+      "bytes": 365,
+      "sha256": "b8f7a52d62cd9b5809681f6eeb678aa68911e92a9aaca0176cb55270b81a3d25",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-moon-form.svg",
+      "ext": "svg",
+      "bytes": 324,
+      "sha256": "239eaed04bc1cab0de15cc922cb77edab16cc47432662901316feecf979893cd",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-poison.svg",
+      "ext": "svg",
+      "bytes": 375,
+      "sha256": "75b65aaf49b9bdbf6fc51dcb9138e020b1652962f4f49dc544c4ef507a13b7b7",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-reduce.svg",
+      "ext": "svg",
+      "bytes": 359,
+      "sha256": "af6c98e6380483f8094a1f7573a9426dfaf436153b0a3af198bb7c29f503512c",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-silence.svg",
+      "ext": "svg",
+      "bytes": 236,
+      "sha256": "e539a18d3b5178d7ebf7a66026fc884667fef14e6eb9956376e2e64151d224a5",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-spell-up.svg",
+      "ext": "svg",
+      "bytes": 327,
+      "sha256": "e7df2ad3d06e9ce4bf5af22cb95fad8aab8af4f5572428f071995610448b1340",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-stealth.svg",
+      "ext": "svg",
+      "bytes": 353,
+      "sha256": "25600363d641f122ea40e37bbf17e4fdd59bdff7ec78a506d9a0037906aa6853",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/status-sword-form.svg",
+      "ext": "svg",
+      "bytes": 340,
+      "sha256": "352a9cf7d800fdebfed50673de7979abec1b43c41cd8c490e8f7e52ec945888b",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/tools.svg",
+      "ext": "svg",
+      "bytes": 291,
+      "sha256": "5bef647b79916304b56e45a9ef522980e3831cb184bed73257e59b66595f334d",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/trash.svg",
+      "ext": "svg",
+      "bytes": 278,
+      "sha256": "e3f7579ab66eba3baf16d9c40394a6d95a655c0e25cc88266dc341256beb1dda",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/upload.svg",
+      "ext": "svg",
+      "bytes": 253,
+      "sha256": "063c213a16298163f4347fde0c415975e0aead412bb384056950378a3c4ee965",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "ui/semantic-icons/warning.svg",
+      "ext": "svg",
+      "bytes": 282,
+      "sha256": "3199ce394227327e5dd5cfdd5bf101c2111b9ac32f1398e257f94c7af0134e72",
+      "license": "项目原创SVG代码绘制",
+      "source": "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023/icons.md"
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-goldmine-1013-v2.webp",
+      "ext": "webp",
+      "bytes": 18358,
+      "sha256": "e9055c2566e22b63d9632985e5cf6dca400ddf795b3e8e87a1c9afd042d1df6e",
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
+    },
+    {
+      "path": "thumbs/scenes/event-last-lamp-1013-v1.webp",
+      "ext": "webp",
+      "bytes": 9524,
+      "sha256": "4893d306105caa3c0c3cd63f8d12a844edce787d082b6fa79a703ba959de79d1",
+      "license": "项目自有（NAI4.5底稿 + 内置生图）",
+      "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
     }
   ],
   "verified": "2026-10-05"

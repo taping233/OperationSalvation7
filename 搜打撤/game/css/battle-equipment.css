@@ -1,43 +1,62 @@
-/* Compact power-style equipment icons beneath the player's existing health bar.
-   Full names and rules stay in the shared body-mounted tooltip. */
-#overlay .battle-stage.sts .sts-me .sts-unit-vitals > .sts-equips {
-  position: absolute;
-  top: calc(100% + 7px);
-  left: 50%;
-  translate: -50% 0;
-  z-index: 8;
+/* Skill/equipment use a side lane; HP stays below the figure and statuses above. */
+#overlay .battle-stage.sts .sts-me > .sts-unit-vitals{
+& {
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: column;
+  gap: 9px;
+  height: auto;
+  padding: 0;
+}
+& > .sts-hp { flex: none; }
+}
+#overlay .battle-stage.sts{
+& .sts-me .sts-unit-actions {
+  --battle-unit-control-size: 48px;
+  position: absolute;
+  left: calc(50% - 220px - var(--battle-unit-control-size) - 18px);
+  right: auto;
+  top: auto;
+  bottom: calc(100% + 18px);
+  translate: none;
+  display: flex;
+  flex-flow: column nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 5px;
-  width: max-content;
+  width: var(--battle-unit-control-size);
   max-width: none;
-  max-height: none;
+  max-height: calc(var(--battle-self-height,350px) - 28px);
   margin: 0;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  z-index: 12;
   pointer-events: auto;
 }
-#overlay .battle-stage.sts .sts-equips .sts-equip {
+& .sts-unit-actions > .sts-equips { display: contents; }
+& .sts-unit-actions :where(.sts-equip, .bt-slam-btn) {
   position: relative;
   display: inline-flex;
-  flex: 0 0 48px;
+  flex: 0 0 var(--battle-unit-control-size);
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 48px;
-  height: 48px;
+  width: var(--battle-unit-control-size);
+  height: var(--battle-unit-control-size);
   padding: 2px;
   overflow: hidden;
-  border: 2px solid #a8bec8a6;
-  border-radius: 5px;
-  background: #132733;
+  border: 1px solid #b6cbd752;
+  border-radius: 2px;
+  background: #15212c;
   color: #e8f0f1;
-  box-shadow: 0 2px 7px #051019b8, inset 0 0 0 1px #f2f4e536;
-  cursor: help;
+  box-shadow: none;
   vertical-align: middle;
 }
-#overlay .battle-stage.sts .sts-equip .sts-equip-art {
+& .sts-equips .sts-equip { cursor: help; }
+}
+#overlay .battle-stage.sts .sts-equip{
+& .sts-equip-art {
   display: block;
   width: 100%;
   height: 100%;
@@ -45,18 +64,18 @@
   border-radius: 2px;
   pointer-events: none;
 }
-#overlay .battle-stage.sts .sts-equip .sts-equip-art img {
+& .sts-equip-art img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-#overlay .battle-stage.sts .sts-equip .sts-equip-art > :is(.ic, svg) {
+& .sts-equip-art > :is(.ic, svg) {
   width: 32px;
   height: 32px;
   margin: 5px;
 }
-#overlay .battle-stage.sts .sts-equip .sts-equip-disabled-action {
+& .sts-equip-disabled-action {
   position: absolute;
   inset: 0;
   display: flex;
@@ -70,26 +89,28 @@
   color: inherit;
   cursor: default;
   pointer-events: none;
-}
-#overlay .battle-stage.sts .sts-equips .sts-equip[data-equip-state="ready"] {
+}}
+#overlay .battle-stage.sts .sts-equips .sts-equip{
+&[data-equip-state="ready"] {
   border-color: #e9cb78;
   cursor: pointer;
 }
-#overlay .battle-stage.sts .sts-equips .sts-equip[data-equip-state="busy"],
-#overlay .battle-stage.sts .sts-equips .sts-equip[data-equip-state="used"] {
+&[data-equip-state="busy"],
+&[data-equip-state="used"] {
   border-color: #82969e;
-}
-#overlay .battle-stage.sts .sts-equip:is(:hover, :focus-visible) {
+}}
+#overlay .battle-stage.sts .sts-equip{
+&:is(:hover, :focus-visible) {
   outline: 2px solid #d8edf1;
   outline-offset: 2px;
 }
-#overlay .battle-stage.sts .sts-equip:active:not(:disabled)[data-equip-state="ready"] {
+&:active:not(:disabled)[data-equip-state="ready"] {
   outline-color: #f8e3a8;
   outline-offset: 0;
 }
-#overlay .battle-stage.sts .sts-equip:disabled { cursor: default; }
-#overlay .battle-stage.sts .sts-equip[data-equip-state="used"] .sts-equip-art { opacity: .58; }
-#overlay .battle-stage.sts .sts-equip .sts-equip-state {
+&:disabled { cursor: default; }
+&[data-equip-state="used"] .sts-equip-art { opacity: .58; }
+& .sts-equip-state {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -106,14 +127,14 @@
   line-height: 1;
   pointer-events: none;
 }
-#overlay .battle-stage.sts .sts-equip[data-equip-state="busy"] .sts-equip-state,
-#overlay .battle-stage.sts .sts-equip[data-equip-state="used"] .sts-equip-state {
+&[data-equip-state="busy"] .sts-equip-state,
+&[data-equip-state="used"] .sts-equip-state {
   border-color: #b3c2c5;
   background: #687e87;
   color: #edf3f3;
 }
-#overlay .battle-stage.sts .sts-equip .sts-equip-state :is(.ic, svg) {
+& .sts-equip-state :is(.ic, svg) {
   width: 12px;
   height: 12px;
   margin: 0;
-}
+}}

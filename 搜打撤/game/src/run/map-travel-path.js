@@ -15,8 +15,8 @@ export function mapTravelCurve(from, to) {
 }
 
 // Progress is already eased by the movement owner; rendering shares this exact geometry.
-export function mapTravelPoint(from, to, progress) {
-  const { c1, c2 } = mapTravelCurve(from, to);
+export function mapTravelPoint(from, to, progress, curve = mapTravelCurve(from, to)) {
+  const { c1, c2 } = curve;
   const t = Math.max(0, Math.min(1, progress)), u = 1 - t;
   return { x: u ** 3 * from.x + 3 * u ** 2 * t * c1.x + 3 * u * t ** 2 * c2.x + t ** 3 * to.x,
     y: u ** 3 * from.y + 3 * u ** 2 * t * c1.y + 3 * u * t ** 2 * c2.y + t ** 3 * to.y };
@@ -29,7 +29,7 @@ export function setMapTravelPresentation(game, value) {
   else presentations.set(game, value);
 }
 
-// Preserve existing direct edges; longer travel only crosses known, cleared ordinary cells.
+// Preserve direct edges; longer travel crosses known transit or cleared ordinary cells.
 export function findMapTravelPath(game, target) {
   const li = game.layerIdx, start = game.trackPos;
   const layer = game.layerData?.[li];
@@ -37,12 +37,14 @@ export function findMapTravelPath(game, target) {
   if (!current || !Number.isInteger(target?.li) || !Number.isInteger(target?.idx) ||
       !game.layerData?.[target.li]?.logical?.[target.idx]) return null;
   if (target.li === li && target.idx === start) return [];
-  // 入城闸门：未进入过入城节点前，除脚下本格外哪里都不可达（点击/悬停/面板/moveTo 同源判定）。
+  // 入城补给未领完时，除脚下本格外均不可达（点击/悬停/面板/moveTo 同源判定）。
   if (entrySupplyGate(game)) return null;
   if ((current.next || []).some(([nl, idx]) => nl === target.li && idx === target.idx)) {
     return [{ li: target.li, idx: target.idx }];
   }
-  const known = idx => !!(game.seen?.[`${li},${idx}`] || game.visited?.[`${li},${idx}`]);
+  // Empty fog records use the renderer's old-save/full-visibility fallback.
+  const fogOn = !!(game.seen && Object.keys(game.seen).length);
+  const known = idx => !fogOn || !!(game.seen?.[`${li},${idx}`] || game.visited?.[`${li},${idx}`]);
   if (target.li !== li || !known(target.idx)) return null;
   const doors = new Set((layer.doors || []).map(door => door.at));
   const passable = idx => {
@@ -52,7 +54,9 @@ export function findMapTravelPath(game, target) {
         (supply.taken?.length || 0) < (supply.cardIds?.length || 0)) return false;
     if (!cell || !known(idx) || doors.has(idx) ||
         game.doorKeys?.has(`${li},${idx}`) || ['door', 'altar', 'boss'].includes(cell.def?.type)) return false;
-    return cell.def?.type === 'blank' || isConsumedMapNode(game, { li, idx, def: cell.def });
+    // A collected entry is a transit cell, just like a blank. The pending supply
+    // check above still stops travel before unclaimed entry content.
+    return ['blank','entrance'].includes(cell.def?.type) || isConsumedMapNode(game, { li, idx, def: cell.def });
   };
   const parents = new Map([[start, null]]), queue = [start], blocked = new Set();
   for (let cursor = 0; cursor < queue.length; cursor++) {

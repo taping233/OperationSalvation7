@@ -1,3 +1,4 @@
+import { playerFields } from './helpers/environment-fixtures.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -26,8 +27,7 @@ function makeGame(cards) {
     ownedCards: cards.map(card => ({ uid: `r3-${uidSeq++}`, card: { ...card }, safe: false })),
     // atk 4：2026-10-02 老板五职业分化后战士背包技能=攻击一次（伤害=攻击力），
     // 首脑战砍击守卫的「-4 伤」断言口径不变
-    hp: 99, maxHp: 99, atk: 4, spellPower: 0, coins: 0,
-    myClass: '战士', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(99, 99, 4, 0, '战士', null),
     logs, log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); },
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     addItem() {}, onBattleEnd() {},

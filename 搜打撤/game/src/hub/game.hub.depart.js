@@ -3,7 +3,7 @@
  * renderHub 回调经 game.hub.bridge.js 的 slots 间接调用，本文件不 import 壳。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { characterFor, characterName } from '../core/characters.js';
+import { characterFor } from '../core/characters.js';
 import { esc } from '../core/shared.js';
 import { MAP } from '../run/game.session.js';
 import { escAttr } from '../core/shared.js';
@@ -13,7 +13,7 @@ import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 
 import { bindDepartureFilters, updateDepartureView } from './departure.view-updates.js';
 import { departureSummary, previewRecommendedDeparture } from './departure.summary.js';
 import { baseHomeV3HTML } from './hub.home-v3.js';
-import { enterDepartureCut, startDepartureHandoff } from '../ui/departure-transition.js';
+import { enterDepartureCut, enterDepartureStep, startDepartureHandoff } from '../ui/departure-transition.js';
 import { linkedBackHTML } from '../ui/home-linked-interactions.js';
 import '../../css/departure-selected.css';
 import { bindDepartureDrag } from './departure.drag.js';
@@ -100,7 +100,12 @@ function renderDepartureCard(card) {
     // 2026-09-07 留言：仓库卡牌不再自动塞进背包——全部留在左侧，由玩家自己拖
     let entry;
     const choice = requestClassChoice({
-      onPresented: () => { if (current()) enterDepartureCut(document.querySelector('#overlay .cls2-page')); },
+      onPresented: () => {
+        if (!current()) return;
+        const page = document.querySelector('#overlay .cls2-page');
+        if (chooseAgain) enterDepartureStep(page, -1);
+        else enterDepartureCut(page);
+      },
       isCurrent: current,
       isConfirmationCurrent: () => current() && !!document.getElementById('depMain') && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'),
       initialCharacter: deployCharacter,
@@ -111,7 +116,7 @@ function renderDepartureCard(card) {
         deployCharacter = cl;
         deployStart = start;
         renderDepartPrep();
-        enterDepartureCut(document.getElementById('depMain'));
+        enterDepartureStep(document.getElementById('depMain'), 1);
       },
       beforeConfirm: async () => {
         const stage = document.getElementById('depMain');
@@ -226,13 +231,8 @@ function renderDepartureCard(card) {
           <span class="pg-spacer"></span>
         </header>
         <div class="dep-body${deployJustOpened ? ' page-in' : ''}">
-          <aside class="camp-depart-person">
-            <div class="camp-depart-person-art" data-character="${escAttr(characterFor(deployCharacter)?.id || '')}" data-skin="${escAttr(SDT.Art?.getSkin?.(deployCharacter) || 'default')}" aria-hidden="true">${SDT.Art?.classFullArt?.(characterFor(deployCharacter)?.id) || ''}</div>
-            <div class="camp-depart-person-copy"><h3 aria-label="出征人物：${escAttr(characterName(deployCharacter))}">${esc(characterName(deployCharacter))}</h3><button class="mini-btn" data-act="depBack">更换人物</button></div>
-          </aside>
           <section class="hub-card dep-storage">
             <h3>仓库候选</h3>
-            <div class="dep-recommend"><button class="mini-btn" data-act="depRecommendPreview">预览推荐装配</button><button class="mini-btn" data-act="depRecommendApply" disabled>应用预览</button><button class="mini-btn" data-act="depRecommendUndo" disabled>撤销推荐</button></div>
             <div class="dep-filters">
               <label>稀有度<select id="depFilterRarity" aria-label="按稀有度筛选仓库卡牌"></select></label>
               <label>类型<select id="depFilterType" aria-label="按类型筛选仓库卡牌"></select></label>
@@ -470,6 +470,7 @@ function renderDepartureCard(card) {
     let buttons = recommendationViews.get(root);
     if (!buttons || [buttons.apply, buttons.undo].some(node => node && !root.contains(node))) {
       const panel = root.getElementsByClassName('dep-recommend')[0];
+      if (!panel) return;
       const controls = [...(panel?.children || [])];
       buttons = { apply:controls.find(node => node.dataset.act === 'depRecommendApply'), undo:controls.find(node => node.dataset.act === 'depRecommendUndo') };
       recommendationViews.set(root, buttons);

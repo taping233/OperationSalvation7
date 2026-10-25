@@ -1,3 +1,4 @@
+import { chestBaseMocks } from './helpers/environment-fixtures.js';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const card = { id: 'fixture-card', name: '测试补给卡', rarity: '古朴', type: '法术', desc: '测试', cost: 0 };
@@ -72,32 +73,21 @@ describe('宝箱点击链路', () => {
         sellPrice: () => 1,
         cardHTML: () => '<div class="hs-card">测试卡</div>',
       },
-      Base: {
-        data: { eggPity: 0, eggBattles: 0 }, save: vi.fn(),
-        petEggDropChance: () => 0,
-        recordPetEggChestResult: vi.fn(),
-        bagCap: () => 10, isSha: () => false,
-      },
-      Sound: { sfx: vi.fn() },
-      Icons: { rich: (html) => html },
+      ...chestBaseMocks(() => vi),
     };
 
     const { SDT: chestFacade } = await import('../game/src/run/chests.js');
     chestFacade.Chests.open(game, [{ kind: 'small' }]);
-    expect(ovBody.querySelector('.cqo-overview')).not.toBeNull();
-    expect(ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
-    vi.advanceTimersByTime(5000);
+    expect(ovBody.querySelector('.cqo-overview')).toBeNull();
     expect(ovBody.querySelector('[data-eps-search]')).toBeNull();
     expect(ownedCards).toHaveLength(0);
-    ovBody.querySelector('[data-act="chestNext"]').click();
-    expect(ovBody.querySelector('[data-eps-search]')).not.toBeNull();
-    ovBody.querySelector('[data-eps-search]').click();
+    expect(ovBody.querySelector('[data-act="chestTake1"]')).not.toBeNull();
     expect(ovBody.querySelector('[data-act="chestSelect"]')).not.toBeNull();
-    expect(ovBody.querySelector('.reward-compact')).not.toBeNull();
-    expect(ovBody.querySelector('.reward-stage [data-act="chestTake1"]')).toBeNull();
-    expect(ovBody.querySelectorAll('.reward-foot [data-act="chestTake1"]')).toHaveLength(1);
+    expect(ovBody.querySelector('.reward-compact')).toBeNull();
+    expect(ovBody.querySelectorAll('.reward-stage [data-act="chestTake1"]')).toHaveLength(1);
+    expect(ovBody.querySelectorAll('.reward-foot [data-act="chestTake1"]')).toHaveLength(0);
     expect(ovBody.querySelector('.reward-foot [data-act="chestOpenBag"]')).not.toBeNull();
-    expect(ovBody.querySelector('.reward-foot [data-act="chestReturn"]')).toBeNull();
+    expect(ovBody.querySelector('.reward-foot [data-act="chestReturn"]')).not.toBeNull();
     expect(ovBody.querySelector('[data-act="chestSkip"]').closest('details').open).toBe(false);
     ovBody.querySelector('[data-act="chestSelect"]').click();
     expect(ownedCards).toHaveLength(0);   // 查看不领取
@@ -115,9 +105,10 @@ describe('宝箱点击链路', () => {
       ovBody.querySelector('[data-act="chestTake1"]').click();
     }
     expect(close).toHaveBeenCalledWith(true);
+    for (let n=0;n<8;n++) await Promise.resolve();
     expect(document.getElementById('cardZoom')).toBeNull();
     expect(ownedCards).toHaveLength(1);
-    expect(document.querySelector('.reward-completion-receipt').textContent).toContain('测试补给卡 · 已入背包');
+    expect(document.querySelector('.reward-completion-receipt').textContent).toContain('已收下');
     expect(document.querySelector('.reward-completion-receipt').getAttribute('role')).toBe('status');
     acts.chestTake1({ i:0 }); // Old receipt callback cannot re-grant or reopen the completed queue.
     expect(ownedCards).toHaveLength(1);

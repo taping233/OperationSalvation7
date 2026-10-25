@@ -1,67 +1,39 @@
+import { subscribeStateBindings } from '../../core/live-bindings.js';
 import { defaultBattleRuntime as runtime } from './battle.runtime.default.js';
 
 // Derived ESM bindings preserve existing readers; mutable data lives in runtime.
-export let battleState = runtime.battleState;
-export let G = runtime.G;
-export let foes = runtime.foes;
-export let opts = runtime.opts;
-export let mode = runtime.mode;
-export let energy = runtime.energy;
-export let maxEnergy = runtime.maxEnergy;
-export let turn = runtime.turn;
-export let pdef = runtime.pdef;
-export let pstat = runtime.pstat;
-export let busy = runtime.busy;
-export let allies = runtime.allies;
-export let battleRestartCheckpoint = runtime.battleRestartCheckpoint;
-export let restoringRestartCheckpoint = runtime.restoringRestartCheckpoint;
-export let tmpSeq = runtime.tmpSeq;
-export let activeActionSignal = runtime.activeActionSignal;
-export let surgeWaiter = runtime.surgeWaiter;
-export let lastPersistAt = runtime.lastPersistAt;
-runtime.subscribe((state, key) => {
-  switch (key) {
-    case 'battleState': battleState = state.battleState; break;
-    case 'G': G = state.G; break;
-    case 'foes': foes = state.foes; break;
-    case 'opts': opts = state.opts; break;
-    case 'mode': mode = state.mode; break;
-    case 'energy': energy = state.energy; break;
-    case 'maxEnergy': maxEnergy = state.maxEnergy; break;
-    case 'turn': turn = state.turn; break;
-    case 'pdef': pdef = state.pdef; break;
-    case 'pstat': pstat = state.pstat; break;
-    case 'busy': busy = state.busy; break;
-    case 'allies': allies = state.allies; break;
-    case 'battleRestartCheckpoint': battleRestartCheckpoint = state.battleRestartCheckpoint; break;
-    case 'restoringRestartCheckpoint': restoringRestartCheckpoint = state.restoringRestartCheckpoint; break;
-    case 'tmpSeq': tmpSeq = state.tmpSeq; break;
-    case 'activeActionSignal': activeActionSignal = state.activeActionSignal; break;
-    case 'surgeWaiter': surgeWaiter = state.surgeWaiter; break;
-    case 'lastPersistAt': lastPersistAt = state.lastPersistAt; break;
-  }
+export let {
+  battleState, G, foes, opts,
+  mode, energy, maxEnergy, turn,
+  pdef, pstat, busy, allies,
+  battleRestartCheckpoint, restoringRestartCheckpoint, tmpSeq, activeActionSignal,
+  surgeWaiter, lastPersistAt
+} = runtime;
+subscribeStateBindings(runtime, {
+  battleState: value => { battleState = value; },
+  G: value => { G = value; },
+  foes: value => { foes = value; },
+  opts: value => { opts = value; },
+  mode: value => { mode = value; },
+  energy: value => { energy = value; },
+  maxEnergy: value => { maxEnergy = value; },
+  turn: value => { turn = value; },
+  pdef: value => { pdef = value; },
+  pstat: value => { pstat = value; },
+  busy: value => { busy = value; },
+  allies: value => { allies = value; },
+  battleRestartCheckpoint: value => { battleRestartCheckpoint = value; },
+  restoringRestartCheckpoint: value => { restoringRestartCheckpoint = value; },
+  tmpSeq: value => { tmpSeq = value; },
+  activeActionSignal: value => { activeActionSignal = value; },
+  surgeWaiter: value => { surgeWaiter = value; },
+  lastPersistAt: value => { lastPersistAt = value; },
 });
-export const set$G = runtime.set$G;
-export const set$opts = runtime.set$opts;
-export const set$mode = runtime.set$mode;
-export const set$battleState = runtime.set$battleState;
-export const set$foes = runtime.set$foes;
-export const set$energy = runtime.set$energy;
-export const set$maxEnergy = runtime.set$maxEnergy;
-export const set$turn = runtime.set$turn;
-export const set$busy = runtime.set$busy;
-export const set$pdef = runtime.set$pdef;
-export const set$pstat = runtime.set$pstat;
-export const set$allies = runtime.set$allies;
-export const set$battleRestartCheckpoint = runtime.set$battleRestartCheckpoint;
-export const set$restoringRestartCheckpoint = runtime.set$restoringRestartCheckpoint;
-export const set$activeActionSignal = runtime.set$activeActionSignal;
-export const set$surgeWaiter = runtime.set$surgeWaiter;
-export const set$lastPersistAt = runtime.set$lastPersistAt;
-export const transitionTo = runtime.transitionTo;
-export const cancelTargetingState = runtime.cancelTargetingState;
-export const nextTmpSeq = runtime.nextTmpSeq;
-export const clearActionSignals = runtime.clearActionSignals;
-export const restoreBattleSession = runtime.restoreBattleSession;
-export const restoreBattleCombatants = runtime.restoreBattleCombatants;
-export const resetBattlePlayerState = runtime.resetBattlePlayerState;
+export const {
+  set$G, set$opts, set$mode, set$battleState,
+  set$foes, set$energy, set$maxEnergy, set$turn,
+  set$busy, set$pdef, set$pstat, set$allies,
+  set$battleRestartCheckpoint, set$restoringRestartCheckpoint, set$activeActionSignal, set$surgeWaiter,
+  set$lastPersistAt, transitionTo, cancelTargetingState, nextTmpSeq,
+  clearActionSignals, restoreBattleSession, restoreBattleCombatants, resetBattlePlayerState
+} = runtime;

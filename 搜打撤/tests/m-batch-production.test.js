@@ -1,3 +1,4 @@
+import { approvedCurrentCatalogBaseline, currentApprovedFieldValue, APPROVED_ELITE_CARDS } from './helpers/card-catalog-current-revisions.js';
 import approvedBatch from './fixtures/approved-card-batch-20261020.json';
 import approvedNativeExecution from './fixtures/builtin-execution-approved-20261020.json';
 const withApprovedExecution = card => ({ ...card, ...approvedNativeExecution[card.id]?.fields, ...(approvedNativeExecution[card.id] ? { rules: approvedNativeExecution[card.id].rules } : {}) });
@@ -28,7 +29,7 @@ function approvedProductionFaceBaseline(original) {
     if (!card || card[field] !== previous) throw new Error(`Unreviewed original ${id}.${field}`);
     card[field] = current;
   }
-  return baseline;
+  return approvedCurrentCatalogBaseline(baseline);
 }
 const currentBaseline = approvedProductionFaceBaseline(before);
 let Cards, storage, first;
@@ -49,15 +50,15 @@ beforeAll(async () => {
 afterAll(() => vi.unstubAllGlobals());
 
 describe('M batch production boot', () => {
-  it('covers the agreed 150-card target and leaves exactly the 51 exclusions legacy', () => {
+  it('covers the agreed 150-card target and retains the 51 historical exclusions and nine elite bestiary faces', () => {
     expect(targetIds).toHaveLength(150);
     expect(new Set(targetIds).size).toBe(150);
     expect(excludedIds).toHaveLength(51);
-    expect(first).toHaveLength(282);
+    expect(first).toHaveLength(291);
     const missing = targetIds.filter(id => !RETIRED_1010.has(id) && !first.find(card => card.id === id)?.rules);
     console.info('M missing target rules', JSON.stringify(missing));
     expect(missing).toEqual([]);
-    expect(first.filter(card => !card.rules).map(card => card.id).sort()).toEqual([...excludedIds].sort());
+    expect(first.filter(card => !card.rules).map(card => card.id).sort()).toEqual([...excludedIds, ...APPROVED_ELITE_CARDS.map(card => card.id)].sort());
     for (const card of first) {
       expect(validateCardRules(card).ok, `${card.id}: schema`).toBe(true);
       expect(inspectCardRuleCapability(card).ok, `${card.id}: capability`).toBe(true);
@@ -108,7 +109,7 @@ describe('M batch production boot', () => {
 
   it('事件与腐化之种投影精确批准值，生产初始化不扩展字段白名单', () => {
     for (const [id, field, , current] of APPROVED_1018_PRODUCTION_REVISIONS) {
-      expect(first.find(card => card.id === id)[field], `${id}.${field}`).toBe(current);
+      expect(first.find(card => card.id === id)[field], `${id}.${field}`).toBe(currentApprovedFieldValue(id,field,current));
     }
     expect(first.find(card => card.id === 'cc-rot-seed').rules).toEqual(approvedNativeExecution['cc-rot-seed'].rules);
   });

@@ -34,9 +34,9 @@ function gallery() {
 }
 
 describe('achievement nested detail dismissal', () => {
-  it('provides a visible cancel action to the real shared Escape route while the header is inert', () => {
+  it('provides a visible cancel action to shared Escape while keeping navigation interactive', () => {
     const { root, tile, detail, UI, leaveGallery } = gallery();
-    expect(root.querySelector('.ag-header').hasAttribute('inert')).toBe(true);
+    expect(root.querySelector('.ag-header').hasAttribute('inert')).toBe(false);
     expect(UI._findCancelBtn()?.closest('.ag-detail')).toBe(detail);
     expect(UI.closeTopOverlayByEsc()).toBe(true);
     expect(detail.hidden).toBe(true);
@@ -59,7 +59,7 @@ describe('achievement nested detail dismissal', () => {
     expect(overlay.hidden).toBe(false);
   });
 
-  it('the visible close button and backdrop both close the bound detail, preserving cached content', () => {
+  it('the visible close button preserves cached content and the detail has no modal backdrop', () => {
     const { root, tile, detail, leaveGallery } = gallery();
     const content = detail.querySelector('.ag-detail-content').firstElementChild;
     detail.querySelector('[data-gallery-dismiss]').click();
@@ -67,7 +67,8 @@ describe('achievement nested detail dismissal', () => {
     expect(document.activeElement).toBe(tile);
     tile.click();
     expect(detail.querySelector('.ag-detail-content').firstElementChild).toBe(content);
-    root.querySelector('.ag-detail-backdrop').click();
+    expect(root.querySelector('.ag-detail-backdrop')).toBeNull();
+    detail.querySelector('[data-gallery-dismiss]').click();
     expect(detail.hidden).toBe(true);
     expect(document.activeElement).toBe(tile);
     expect(leaveGallery).not.toHaveBeenCalled();

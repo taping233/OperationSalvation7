@@ -1,3 +1,5 @@
+import { isStarterAttackIdentity } from '../../cards/card-legacy-battle-policy.js';
+import { liveCardOptions } from '../../cards/card-state-presentation.js';
 /* 手牌视图适配：只处理分组与布局，不读写战斗状态。 */
 
 function groupHandCards(entries, infusing = null) {
@@ -7,11 +9,15 @@ function groupHandCards(entries, infusing = null) {
     ? `id:${card.id}|${card.cost}|${card.desc || ''}`
     : `legacy:${card?.name || ''}|${card?.type || ''}|${card?.cost || 0}|${card?.desc || ''}`;
   const push = (entry) => {
-    const key = stackKey(entry.card);
+    const face = entry.card._presentation || {};
+    const cost = liveCardOptions(entry.card)?.costOverride;
+    const presentation = cost || face.temporary || face.transforming || face.transformed || face.originName;
+    const key = stackKey(entry.card) + (presentation ? '|' + JSON.stringify([cost?.v, cost?.base,
+      !!face.temporary, !!face.transforming, !!face.transformed, face.originName]) : '');
     const found = byKey.get(key);
     if (found) found.uids.push(entry.uid);
     else {
-      const group = { key, card: entry.card, uids: [entry.uid], self: false };
+      const group = { key, card: entry.card, uids: [entry.uid], self: false, ...(cost ? {costOverride:cost} : {}) };
       byKey.set(key, group);
       groups.push(group);
     }
@@ -54,7 +60,7 @@ function fanLayout(index, count) {
    只改渲染权重：初始攻击最前，招式在装备之前（同类保持入手顺序、
    组间保持入手相对顺序），hand 数组语义顺序与牌局动画逻辑零改动；
    注能主卡（self 组）不参与排序、保持居尾展示。 */
-const isStarterAttackCard = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
+const isStarterAttackCard = isStarterAttackIdentity;
 const handGroupRank = group => group.self ? 5 : isStarterAttackCard(group.card) ? 0
   : ['武术', '法术'].includes(group.card?.type) ? 1 : group.card?.type === '装备' ? 4 : 2;
 function orderHandGroups(groups) {

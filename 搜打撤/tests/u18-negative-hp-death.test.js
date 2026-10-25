@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 // U18 负血+即时死亡判定验收（2026-09-30 老板拍板 PENDING #15，对齐 STS2 IsAlive=hp>0）。
 // 新语义：玩家受伤不再钳 0（数据层负血保留真实值）；伤害致 hp<=0 即时 finish(false)
 //（自己回合自伤致死同样触发，死了即死无治疗复活）；免死钩 deathSave 一次致死拦一次（逻辑照旧）；
@@ -12,7 +13,7 @@ window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = window.SDT.Icons.TYPE_ART || {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 15, 0, 5, 1) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');

@@ -1,3 +1,4 @@
+import { quietUiMocks } from './helpers/environment-fixtures.js';
 import { beforeAll,beforeEach,describe,expect,it,vi } from 'vitest';
 import { createLayeredMap } from '../game/src/run/layeredMap.js';
 import { createMapSnapshot } from '../game/src/run/map-snapshot.js';
@@ -19,22 +20,23 @@ const { RunStorage }=await import('../game/src/hub/game.storage.js');
 const { createGameMenuController }=await import('./helpers/menu-controller.js');
 
 beforeAll(()=>{
-  Object.assign(window.SDT.UI,{log(){},refresh(){},clearLog(){},hideOverlay(){},hideScreen(){},showScreen(){},showOverlay(){},act(){},registerHelp(){},helpBtn(){return'';}});
+  Object.assign(window.SDT.UI,{log(){},refresh(){},...quietUiMocks()});
   window.SDT.Meta={setXpMul(){},track(){}};
   window.SDT.Nest={renderNestMap(){}};
 });
-beforeEach(()=>localStorage.clear());
+beforeEach(async()=>{ await Promise.all([RunStorage.flushWrites(),window.SDT.Base.flushWrites()]); localStorage.clear(); });
 
 describe('R5-a real session persistence',()=>{
-  it('正式newRun走通用覆盖并保存严格v2，恢复routePlan不重算',async()=>{
+  it('正式newRun保存当前探索图快照，恢复不重算布局',async()=>{
     const slot=2; window.SDT.Base.use(slot); session._set_active_slot(slot);
-    await session.newRun('standard',[],{skipClassChoice:true});
-    expect(['applied','fallback']).toContain(session.game.routePlan.status);
-    expect(session.saveGame()).toBe(true);
+    await session.newRun('standard',{},{skipClassChoice:true});
+    expect(session.game.generatorVersion).toBe(7); expect(session.game.routePlan).toBeNull();
+    expect(await session.saveGame()).toBe(true);
     const stored=JSON.parse(localStorage.getItem(RunStorage.key(slot)));
-    expect(stored.mapSnapshot.snapshotVersion).toBe(2); expect(stored.routeVersion).toBe('r5-routes-v2');
-    const plan=structuredClone(stored.mapSnapshot.routePlan);
-    expect(session.loadGame(slot).ok).toBe(true); expect(session.game.routePlan).toEqual(plan);
+    expect(stored.mapSnapshot.snapshotVersion).toBe(1); expect(stored.routeVersion).toBeNull();
+    const plan=structuredClone(stored.mapSnapshot);
+    expect(session.loadGame(slot).ok).toBe(true); expect(session.game.routePlan).toBeNull();
+    expect(createMapSnapshot(session.game).value).toEqual(plan);
   });
 
   it('正式newRun把仓库带入与口袋清理合并为一次Base写入', async () => {
@@ -103,36 +105,39 @@ describe('R5-a real session persistence',()=>{
     }
   });
 
-  it('saveGame写canonical snapshot，loadGame恢复原拓扑与位置',()=>{
+  it('saveGame写canonical snapshot，loadGame恢复原拓扑与位置',async ()=>{
     const slot=5, seed='session-route';
     window.SDT.Base.use(slot); session._set_active_slot(slot);
     session.buildDerived(seed); session.game.runActive=true; session.game.nestActive=false; session.game.state='idle';
     session.game.layerIdx=1; session.game.trackPos=session.game.layerData[1].entrances[0];
     const expected=session.game.layerData.map(l=>l.logical.map(n=>({id:n.id,type:n.def.type,x:n.x,row:n.row,next:n.next})));
-    expect(session.saveGame()).toBe(true);
+    expect(await session.saveGame()).toBe(true);
     const stored=JSON.parse(localStorage.getItem(RunStorage.key(slot)));
     expect(stored.mapSnapshot.snapshotVersion).toBe(1);
     session.game.layerData[0].logical[0].def.type='event'; session.game.layerIdx=0; session.game.trackPos=0;
     const loaded=session.loadGame(slot);
     expect(loaded.ok).toBe(true);
+    expect(await loaded.pendingPersistence).toEqual({ok:true});
     expect(session.game.layerIdx).toBe(1);
     expect(session.game.layerData.map(l=>l.logical.map(n=>({id:n.id,type:n.def.type,x:n.x,row:n.row,next:n.next})))).toEqual(expected);
     expect(session.game.nestActive).toBe(false);
     session.game.trackPos=999;
     const oldRaw=localStorage.getItem(RunStorage.key(slot));
-    expect(session.saveGame()).toBe(false); expect(localStorage.getItem(RunStorage.key(slot))).toBe(oldRaw);
+    expect(await session.saveGame()).toBe(false); expect(localStorage.getItem(RunStorage.key(slot))).toBe(oldRaw);
   });
 
   it('跨标签存档冲突提示重新载入，而不是提示存储空间不足',async()=>{
     const slot=1; window.SDT.Base.use(slot); session._set_active_slot(slot);
     await session.newRun('standard',[],{skipClassChoice:true});
-    expect(session.saveGame()).toBe(true);
-    expect(session.loadGame(slot).ok).toBe(true);
+    expect(await session.saveGame()).toBe(true);
+    const loaded=session.loadGame(slot);
+    expect(loaded.ok).toBe(true);
+    expect(await loaded.pendingPersistence).toEqual({ok:true});
     const latest=JSON.parse(localStorage.getItem(RunStorage.key(slot)));
     latest.hp=Math.max(1,latest.hp-1); latest._r2.revision++;
     localStorage.setItem(RunStorage.key(slot),JSON.stringify(latest));
     const log=vi.fn(); window.SDT.UI.log=log;
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect(RunStorage.lastWriteIssue(slot)).toBe('STALE_SLOT');
     expect(log.mock.calls.flat().join(' ')).toContain('重新载入档位后继续');
     expect(log.mock.calls.flat().join(' ')).not.toContain('存储空间可能已满');

@@ -21,7 +21,8 @@ export function decayEffectiveCardCost(card, amount = 1) {
 
 export function calculateEffectiveCardCost(card, uid, state, readConsumedSpellCount = null) {
   // Infinite Rune applies only to battle-acquired moves and has the highest priority.
-  if (state.unlimitedRune && ['武术', '法术'].includes(card.type) && uid && String(uid).startsWith('bts')) {
+  if (state.unlimitedRune && ['武术', '法术'].includes(card.type) && uid &&
+      (String(uid).startsWith('bts') || String(uid).startsWith('btd'))) {
     return Math.max(0, (+(card.cost || 0)) - 1);
   }
   // This slot keeps Nature Staff's existing priority and exact target-turn lifetime.

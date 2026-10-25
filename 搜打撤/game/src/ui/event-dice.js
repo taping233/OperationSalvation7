@@ -1,6 +1,6 @@
 import { esc } from '../core/shared.js';
 import { Random } from '../core/random.js';
-import { hopPoint, ease } from '../core/motion-primitives.js';
+import { eventDieHTML, animateEventDie } from './event-dice-visual.js';
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import '../../css/event-dice.css';
 
@@ -13,9 +13,9 @@ export function diceStep(owner, key, outcomes, sides = outcomes.length) {
 
 export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, setReturn = undefined }) {
   let sequence = 0;
-  const persist = () => saveRunCheckpoint(save);
-  function open({ owner, key, title, outcomes, sides = undefined, done, beforeRoll = () => true, current:context = () => true }) {
-    if (!context()) return false;
+  const persist = async () => await saveRunCheckpoint(save);
+  async function open({ owner, key, title, outcomes, sides = undefined, done, beforeRoll = () => true, current:context = () => true, openingCurrent = () => true }) {
+    if (!context() || !openingCurrent()) return false;
     const step = diceStep(owner, key, outcomes, sides);
     const token = ++sequence;
     let rolling = false, continued = false;
@@ -24,7 +24,7 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
       if (token !== sequence || continued || !context()) return;
       const result = selected();
       show({ title, sub:'先看点数规则，再亲手投骰。结果会保留，离开重进不会重投。',
-        body:`<div class="event-dice-panel"><div class="event-die" data-event-die aria-label="${result ? `骰子 ${step.result} 点` : '尚未投骰'}">${result ? step.result : '？'}</div>
+        body:`<div class="event-dice-panel">${eventDieHTML(step.sides, result ? step.result : null)}
           <p class="event-dice-result" role="status">${result ? `${step.result} 点 · ${esc(result.label)}` : `D${step.sides} · 等待投骰`}</p>
           <details class="event-dice-rules" open><summary>点数与结果</summary>${step.outcomes.map((o,i) => {
             const from = Math.ceil(i * step.sides / step.outcomes.length) + 1;
@@ -40,11 +40,15 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
       const leave = () => { if (current() && !rolling) { sequence++; onLeave(); } };
       UI.act('eventDiceLeave', leave);
       UI.act('eventExit', leave);
-      UI.act('eventDiceContinue', () => {
+      UI.act('eventDiceContinue', async () => {
         if (!current() || rolling || !selected()) return;
-        if (!persist()) { render('保存未成功，请重试确认；本次结果不会改变。'); return; }
+        rolling = true;
+        const saved = await persist();
+        rolling = false;
+        if (!current()) return;
+        if (!saved) { render('保存未成功，请重试确认；本次结果不会改变。'); return; }
         continued = true;
-        if (done(selected().value) === false) {
+        if (await done(selected().value) === false) {
           continued = false;
           render('奖励尚未承接，请重试确认；本次结果不会改变。');
         }
@@ -52,31 +56,29 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
       UI.act('eventDiceRoll', async () => {
         if (!current() || rolling || step.result != null) return;
         rolling = true;
-        if (!beforeRoll()) { rolling = false; render('当前无法投骰，请检查货币。'); return; }
+        if (!await beforeRoll()) { rolling = false; if (current()) render('当前无法投骰，请检查货币。'); return; }
+        if (!current()) { rolling = false; return; }
         step.result = 1 + Math.floor(Random.random('event') * step.sides);
         // Persist payment and roll together before revealing the outcome.
-        if (!persist()) {
+        if (!await persist()) {
           rolling = false;
           render('保存未成功，结果已保留在本局；请先重试保存。');
           return;
         }
+        if (!current()) { rolling = false; return; }
         SDT.Sound?.sfx?.('scene');
         const die = /** @type {HTMLElement} */ (UI.el?.ovBody?.querySelector('[data-event-die]'));
         /** @type {NodeListOf<HTMLButtonElement>} */ (UI.el?.ovBody?.querySelectorAll('button') || []).forEach(button => button.disabled = true);
-        if (die && !SDT.Motion?.reduceMotion?.() && typeof die.animate === 'function') {
-          const frames = Array.from({ length:19 }, (_, i) => {
-            const t = i / 18, p = hopPoint(t, {x:0,y:0}, {x:0,y:0}, {height:74,curve:ease.smoother});
-            return { transform:`translateY(${p.y}px) rotate(${t * 720}deg) scale(${1 + Math.sin(t * Math.PI) * .15})`, offset:t };
-          });
-          const animation = die.animate(frames, {duration:850,easing:'ease-out'});
-          // Bounded fallback also covers interrupted or unavailable WAAPI completion.
-          await Promise.race([animation.finished.catch(() => {}), new Promise(resolve => setTimeout(resolve, 1000))]);
-        }
+        if (die && !SDT.Motion?.reduceMotion?.()
+            && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+            && !document.body.classList.contains('reduce-motion')) await animateEventDie(die, step.sides, step.result);
         rolling = false;
         if (current()) render();
       });
     }
-    if (!persist()) { onLeave(); return false; }
+    const saved = await persist();
+    if (token !== sequence || !context() || !openingCurrent()) return false;
+    if (!saved) { onLeave(); return false; }
     render();
     return true;
   }

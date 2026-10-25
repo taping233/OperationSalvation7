@@ -337,17 +337,6 @@ function stageKillBeat() {
         });
       }
       if (damage && !isSelf && allyI == null && heavy && !reduced) screenShake(body);
-      // 掉血血条槽体红闪（样式 winter.css .hp-dropping；320ms 错峰配 300ms 清除避免竞态）
-      if (damage && !reduced) {
-        const unitEl = figEl.closest('.sts-unit');
-        const bar = unitEl && /** @type {BattleElement} */ (unitEl.querySelector('.bt-hpwrap'));
-        if (bar) {
-          bar.classList.remove('hp-dropping');
-          void bar.offsetWidth;   // 强制 reflow，让连续掉血重播闪红
-          bar.classList.add('hp-dropping');
-          schedulePresentation(() => bar.classList.remove('hp-dropping'), 300);
-        }
-      }
       if (f.warm) {   // 治疗暖色滤镜（表情反馈·零美术）
         figEl.classList.add('fx-warm');
         schedulePresentationMs(() => figEl.classList.remove('fx-warm'), 950);

@@ -10,16 +10,17 @@ import '../../../css/battle-pile-view.css';
 function pileCardKey(card) {
   return JSON.stringify(card, (_key, value) => {
     if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
-    return Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]]));
+    // Presentation UID identifies ownership, not the visible/effective card variant.
+    return Object.fromEntries(Object.keys(value).filter(key => _key !== '_presentation' || key !== 'uid').sort().map(key => [key, value[key]]));
   });
 }
 
-/** @param {readonly PileEntry[]} cards @returns {PileStack[]} */
-export function buildPileStacks(cards) {
+/** @param {readonly PileEntry[]} cards @param {{group?: boolean}} [options] @returns {PileStack[]} */
+export function buildPileStacks(cards, { group = true } = {}) {
   /** @type {Map<string, PileStack>} */
   const grouped = new Map();
   for (const entry of cards) {
-    const key = pileCardKey(entry.card);
+    const key = group ? pileCardKey(entry.card) : entry.uid;
     let stack = grouped.get(key);
     if (!stack) {
       stack = { key, card:entry.card, count:0, uids:[] };
@@ -41,7 +42,7 @@ export function buildPileStacks(cards) {
  * kind: string, isBoss?: boolean }} options
  */
 export function battlePileBodyHTML({ cards, cardHTML, kind }) {
-  const stacks = buildPileStacks(cards);
+  const stacks = buildPileStacks(cards, { group:kind !== 'deck' });
   const grave = kind === 'grave';
   const list = stacks.map((stack, i) => `<button type="button" class="battle-pile-card" data-act="btDecisionInspect" data-i="${i}" aria-label="查看 ${escAttr(stack.card.name || '卡牌')}，${stack.count} 张">${cardHTML(stack.card, 'lg')}${stack.count > 1 ? `<span class="battle-pile-count">×${stack.count}</span>` : ''}</button>`).join('');
   return { stacks, html:`<section data-decision-content="pile" data-battle-pile-view data-pile-total="${cards.length}">

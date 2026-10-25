@@ -7,22 +7,21 @@ import { animateBaseRefresh, bindBaseMotion } from '../game/src/hub/base-motion-
 let root;
 beforeEach(() => {
   document.body.className = '';
-  document.body.innerHTML = `<section id="hubMain"><button data-browser-page="next">下一页</button><button class="base-command"><span class="base-command-arrow">→</span></button><input data-warehouse-filter="type"><div class="card-browser-track"></div><details class="warehouse-more-filters"><summary>筛选</summary><div>条件</div></details></section>`;
+  document.body.innerHTML = `<section id="hubMain"><button data-browser-page="next">下一页</button><button class="base-command"><span class="base-command-arrow">→</span></button><input data-warehouse-filter="type"><div class="card-browser-track"></div></section>`;
   root = document.getElementById('hubMain');
   vi.stubGlobal('matchMedia', () => ({ matches:false }));
   animate.mockReset().mockImplementation(() => ({ cancel:vi.fn(), finished:new Promise(() => {}) }));
 });
 afterEach(() => { document.body.replaceChildren(); vi.unstubAllGlobals(); });
 
-it('repeated binding keeps one command feedback and preserves the business click', () => {
+it('commands preserve their business click without replaying the retired arrow motion', () => {
   const action = vi.fn();
   const command = root.querySelector('.base-command');
   command.addEventListener('click', action);
   bindBaseMotion(root); bindBaseMotion(root);
   command.click();
   expect(action).toHaveBeenCalledOnce();
-  expect(animate).toHaveBeenCalledOnce();
-  expect(animate.mock.calls[0][0]).toBe(command.querySelector('.base-command-arrow'));
+  expect(animate).not.toHaveBeenCalled();
 });
 
 it('rapid same-page refreshes cancel the previous feedback instead of accumulating animations', () => {
@@ -34,23 +33,31 @@ it('rapid same-page refreshes cancel the previous feedback instead of accumulati
   expect(animate.mock.calls[1][0]).toBe(track);
 });
 
+it('detail and room slides keep their configured duration', () => {
+  const track = root.querySelector('.card-browser-track');
+  animateBaseRefresh(track, 0, { detail:true, duration:380, x:64 });
+  expect(animate.mock.calls[0][2].duration).toBe(380);
+  animateBaseRefresh(track, 0, { detail:false, duration:440, x:112 });
+  expect(animate.mock.calls[1][2].duration).toBe(440);
+});
+
 it('system and in-game reduced motion bypass decorative feedback while actions remain available', () => {
   bindBaseMotion(root);
   vi.stubGlobal('matchMedia', () => ({ matches:true }));
   root.querySelector('button').click();
+  animateBaseRefresh(root.querySelector('.card-browser-track'));
   vi.stubGlobal('matchMedia', () => ({ matches:false }));
   document.body.className = 'reduce-motion';
   root.querySelector('button').click();
+  animateBaseRefresh(root.querySelector('.card-browser-track'));
   expect(animate).not.toHaveBeenCalled();
   expect(root.querySelector('button').disabled).toBe(false);
 });
 
-it('disabled commands do not respond and opening filters reveals only their content', () => {
+it('disabled commands do not respond', () => {
   bindBaseMotion(root);
   const command = root.querySelector('.base-command'); command.disabled = true;
   command.dispatchEvent(new MouseEvent('click', { bubbles:true }));
   expect(animate).not.toHaveBeenCalled();
-  const details = root.querySelector('details'); details.open = true;
-  details.dispatchEvent(new Event('toggle'));
-  expect(animate.mock.calls[0][0]).toBe(details.querySelector('div'));
+
 });

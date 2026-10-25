@@ -85,9 +85,9 @@ describe('LLM decide 契约', () => {
 
   it('垃圾回复带错误重试，第二次拿到合法动作', async () => {
     requests.length = 0;
-    replies = ['先看看再说', '{"type":"move","li":1,"idx":2}'];
+    replies = ['先看看再说', '{"type":"ui","name":"evtChoice","params":{"i":"0"}}'];
     const action = await decide()(obs);
-    expect(action).toEqual({ type: 'move', li: 1, idx: 2 });
+    expect(action).toEqual({ type: 'ui', name: 'evtChoice', params: { i: '0' } });
     expect(requests.length).toBe(2);
     expect(String(requests[1].messages.at(-1).content)).toContain('动作非法');
   });

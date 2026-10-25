@@ -1,0 +1,30 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>转场渐进揭幕复核</title>
+<style>body{margin:0;font:18px system-ui;color:#f0e8d6;background:#314d57}main{padding:8vh 8vw;position:relative;z-index:1}button{padding:12px 18px;font:inherit}#result{white-space:pre-wrap}#overlay{position:fixed;inset:0;pointer-events:none}#overlay>*{pointer-events:auto}.destination{position:fixed;inset:0;background:linear-gradient(100deg,#38667d,#8b7553);display:grid;place-items:center;font-size:42px}</style>
+<div class="destination">下一幕 · 已准备完成</div><main><h1>渐进揭幕复核</h1><button data-scene="photo">照相馆</button> <button data-scene="camp">基地闸口</button> <button data-scene="held">继承场景</button> <button data-scene="departure">出征</button><p id="result">等待播放</p></main><div id="overlay"></div>
+<script type="module">
+import {createSilentNodeCut,prepareSilentFilm} from '../src/ui/silent-node-film.js';
+import {revealTransition} from '../src/ui/transition-handoff.js';
+import {createDepartureCinematic} from '../src/ui/departure-cinematic.js';
+import '../css/page-loading.css';
+import '../css/page-visual-ready.css';
+const overlay=document.querySelector('#overlay'), output=document.querySelector('#result');
+let busy=false;
+for(const button of document.querySelectorAll('button[data-scene]'))button.onclick=async()=>{
+ if(busy)return;busy=true;
+ const scene=button.dataset.scene;let cover, cinematic;
+ if(scene==='departure'){
+  cinematic=createDepartureCinematic();cover=cinematic.element;document.body.append(cover);await cinematic.play();
+ }else{
+  cover=document.createElement('div');cover.className='page-loading page-loading--city';
+  const cut=createSilentNodeCut(scene==='held'?'camp':scene,{duration:0});
+  cut.classList.add('silent-film-settled');cut.dataset.filmDuration='0';cover.append(cut);
+  if(scene==='held'){const held=document.createElement('div');held.className='city-run-transition resume-hold';held.style.cssText='position:absolute;inset:0;background:#10171b';held.append(cut);cover.append(held);}
+  overlay.append(cover);await prepareSilentFilm(cut);
+ }
+ const samples=[];let watching=true;
+ const sample=()=>{if(!watching)return;const opacity=Number(getComputedStyle(cover).opacity);if(cover.classList.contains('leaving'))samples.push(opacity);requestAnimationFrame(sample);};requestAnimationFrame(sample);
+ if(cinematic){await cinematic.reveal();}else await revealTransition(cover);
+ watching=false;cover.remove();cinematic?.dispose();busy=false;
+ output.textContent=JSON.stringify({scene,intermediateFrames:samples.filter(n=>n>.02&&n<.98).length,first:samples[0],last:samples.at(-1),removed:!cover.isConnected});
+};
+</script></html>

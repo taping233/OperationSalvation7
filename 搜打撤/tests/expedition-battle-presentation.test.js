@@ -1,3 +1,4 @@
+import { inventoryFields } from './helpers/environment-fixtures.js';
 import { beforeEach, afterEach, expect, it, vi } from 'vitest';
 
 const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
@@ -28,8 +29,7 @@ beforeEach(() => {
   UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody') };
   game = {
     ownedCards: [Cards.SHA, Cards.all().find(card => card.id === 'tt12-backupcell')].map((card, index) => ({ uid: `view-${index}`, card })),
-    inventory: [], usedPocket: [], hp: 30, maxHp: 30, atk: 4, spellPower: 0, coins: 0,
-    myClass: null, state: 'idle', battleActive: false, log() {}, heal() {}, onBattleEnd() {},
+    ...inventoryFields(30, 30, 0, null), log() {}, heal() {}, onBattleEnd() {},
     safeCap: () => 3, safeUsed: () => 0,
   };
   window.SDT.game = game;
@@ -66,7 +66,7 @@ it.each(['deck', 'bag'])('keeps the canonical full rule when inspecting the %s s
   if (kind === 'deck') {
     const trigger = root.querySelector('[data-act="btDecisionInspect"]');
     actions.get('btDecisionInspect')(trigger.dataset);
-    expect(UI.showCardZoom).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ id: 'tt12-backupcell' }), { returnFocus: trigger });
+    expect(UI.showCardZoom).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ id: 'tt12-backupcell' }), expect.objectContaining({ returnFocus: trigger, items:expect.any(Array), index:0 }));
     const zoom = document.getElementById('cardZoom');
     expect(zoom.getAttribute('role')).toBe('dialog');
     rules = zoom.querySelector('.hsc-desc').textContent;

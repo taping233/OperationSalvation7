@@ -1,10 +1,11 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -24,8 +25,7 @@ function makeGame(cards) {
   const logs = [];
   return {
     ownedCards: cards.map(card => ({ uid: `sem-${uidSeq++}`, card, safe: false })),
-    hp: 99, maxHp: 99, atk: 5, spellPower: 0, coins: 0,
-    myClass: '降临者', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(99, 99, 5, 0, '降临者', null),
     lastBattleEnd: null,
     log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs,
@@ -89,7 +89,7 @@ describe('已知效果条目的真实战斗语义', () => {
     await drain();
   });
 
-  it('tt7-holyheal：按燃料价格 3（费用 2）回复 6 点生命', async () => {
+  it('tt7-holyheal：按燃料费用 2 回复 4 点生命，售价 3 不参与治疗', async () => {
     const heal = card('tt7-holyheal');
     const fuel = card('cc-cursed-blade');
     expect(fuel.cost).toBe(2);
@@ -99,8 +99,8 @@ describe('已知效果条目的真实战斗语义', () => {
     BattleSession.start(game, [foe()], { isBoss: false });
     await drain();
     await infuseAndPlay(game, heal.id, [fuel.id], 'self');
-    expect(game.hp).toBe(56);
-    expect(game.logs.some(line => line.includes('回复 6 点生命'))).toBe(true);
+    expect(game.hp).toBe(54);
+    expect(game.logs.some(line => line.includes('回复 4 点生命'))).toBe(true);
     BattleSession.commands.flee();
     await drain();
   });

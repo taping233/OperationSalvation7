@@ -220,7 +220,7 @@ export type BattleSnapshot = {
 };
 
 export type PreviewActionInput = {
-  snapshot: Pick<BattleSnapshot, 'foes' | 'player' | 'pstat'>;
+  snapshot: Pick<BattleSnapshot, 'foes' | 'player' | 'pstat'> & { turn?: number };
   action: { kind: 'play-card'; uid?: string; targetIndex: number };
   cardContext: {
     card: SnapshotBattleCard | null;
@@ -238,6 +238,8 @@ export type PreviewActionInput = {
     wholeCardRepeats?: number;
     arrowRuneRepeat?: boolean;
     damageGrowth?: number;
+    handInfuseCount?: number;
+    freezeDamageBonus?: number;
     targetProtected?: boolean;
     aegisBlocked?: boolean;
   };

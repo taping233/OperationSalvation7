@@ -1,3 +1,4 @@
+import { overlayElements } from './helpers/environment-fixtures.js';
 import { beforeAll, beforeEach, afterEach, expect, it, vi } from 'vitest';
 import { pageMotionProfile, pageMotionBlocks } from '../game/src/ui/page-motion-profiles.js';
 
@@ -11,7 +12,7 @@ beforeEach(() => {
   document.body.innerHTML = '<main id="viewport"><div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div></main>';
   Object.assign(window.SDT, { Icons: { rich: s => s }, Sound: { sfx() {}, scene() {} } });
   ui = { ...overlayMethods, _acts: {}, el: {
-    overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle'),
+    ...overlayElements(),
   } };
   images = []; frames = [];
   vi.stubGlobal('requestAnimationFrame', fn => { frames.push(fn); return frames.length; });
@@ -92,8 +93,8 @@ it('事件、奖励和商店共用短入场并只编排区域，不逐张卡牌�
     ui.el.ovBody.innerHTML = markup;
     const profile = pageMotionProfile(ui.el.ovBody);
     expect(profile.expedition).toBe(true);
-    expect(profile.duration).toBe(240);
+    expect(profile.duration).toBe(180);
     expect(pageMotionBlocks(profile).length).toBeGreaterThanOrEqual(3);
-    expect(profile.staggerMax).toBe(48);
+    expect(profile.staggerMax).toBe(44);
   }
 });

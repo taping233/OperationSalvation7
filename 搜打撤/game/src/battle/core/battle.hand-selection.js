@@ -1,5 +1,8 @@
 // @ts-check
 /** Pure hand-selection rules and state contracts shared by battle producers and consumers. */
+let selectionSerial = 0;
+/** Stable identity for one live selection, independent of copied snapshots. */
+export const nextHandSelectionId = () => ++selectionSerial;
 
 /** @typedef {import('../battle.snapshot.types.js').BattleCardInput} HandSelectionCard */
 
@@ -18,6 +21,7 @@
  * @typedef {object} HandSelectionBase
  * @property {number} n Number of remaining cards to select.
  * @property {string | null} type Required card type, or null for any card.
+ * @property {number} [selectionId] Runtime identity; older fixtures may omit it.
  */
 
 /**

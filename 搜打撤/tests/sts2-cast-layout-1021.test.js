@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { infusionHandCards } from '../game/src/battle/view/battle.infusion-material-state.js';
 import { battleDiscoverBodyHTML } from '../game/src/battle/view/battle.discover-view.js';
+import { readCssSource } from './helpers/css-source.js';
 
 describe('in-place infusion UID projection', () => {
   const card = Object.freeze({ id:'same', name:'同名牌', type:'法术', cost:1, desc:'规则' });
@@ -55,11 +55,13 @@ describe('single-action discovery composition', () => {
     expect(root.querySelector('.battle-discover-card-notes')).toBeNull();
     expect(root.querySelector('.battle-discover-critical').textContent).toBe('未注能');
     expect(choice.getAttribute('aria-label')).toContain('直释视为已注能');
-    expect([...root.querySelectorAll('[data-act]')].map(node=>node.dataset.act)).toEqual(['btDiscover','btDecisionInspect']);
+    expect([...root.querySelectorAll('[data-act]')].map(node=>node.dataset.act)).toEqual(['btDiscover','btDiscoverCancel','btDiscoverConfirm']);
     expect(choice.dataset.discoverPage).toBe('page-1');
   });
   it('keeps contextual rules accessible without repeating them beside the cards', () => {
     const root=present();
+    expect(root.querySelector('.battle-discover-action').textContent).toBe('选择 1 张免费施放');
+    expect(root.querySelector('[data-battle-discover]').getAttribute('aria-label')).toContain('还需发现 1 次');
     expect(root.querySelector('.battle-discover-rules,.battle-discover-meta,.battle-discover-card-caption')).toBeNull();
     expect(root.querySelector('[data-battle-discover]').getAttribute('aria-label')).toContain('临时牌，费用变为 0');
     expect(root.querySelector('[data-act="btDiscover"]').getAttribute('aria-label')).toContain('候选 <甲>');
@@ -73,7 +75,7 @@ describe('combat secondary background isolation', () => {
     ['battle-discover.css', '.battle-discover-panel', 'body #overlay:has(.battle-discover-panel) #ovBody > .battle-stage.sts'],
     ['battle-pile-view.css', '[data-battle-pile-view]', 'body #overlay:has([data-battle-pile-view]) #ovBody > .battle-stage.sts'],
   ])('composites the softened %s battlefield against an opaque combat base', (file, marker, stageSelector) => {
-    const css=postcss.parse(readFileSync(`game/css/${file}`,'utf8'));
+    const css=postcss.parse(readCssSource(`game/css/${file}`,'utf8'));
     const values=selector=>{
       const found={}; css.walkRules(rule=>{ if(rule.selector===selector)rule.walkDecls(decl=>{found[decl.prop]=decl.value;}); }); return found;
     };

@@ -1,55 +1,66 @@
-/* Genshin's in-run exit dialog: one heading, a quiet sheet, separated safe and terminal actions. */
-body #overlay:has(.leave-run-panel) { background:#0610179e; backdrop-filter:blur(3px); }
-body #overlay .card:has(.leave-run-panel) {
-  width:min(860px,88%); max-width:88%; max-height:88%; height:auto; min-height:0;
+/* System menu owns one dark glass card and a separate terminal-action row. */
+body #overlay:has(.leave-run-panel) { background:#050b1373; backdrop-filter:blur(6px); }
+body #overlay .card:has(.leave-run-panel){
+& {
+  width:min(760px,88%); max-width:88%; max-height:88%; height:auto; min-height:0;
   display:flex; flex-direction:column; padding:0; overflow:hidden;
-  background:#e0e7e7; color:#253a40; border:1px solid #d9e9e9; border-radius:2px;
-  box-shadow:0 18px 72px #020a124d; clip-path:none;
+  background:var(--dialog-fill); color:#e4e9e7; border:1px solid var(--dialog-edge); border-radius:12px;
+  box-shadow:var(--dialog-shadow); clip-path:none;
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
 }
-body #overlay .card:has(.leave-run-panel) #ovTitle {
+&::before,&::after { content:none; }
+& #ovTitle {
   flex:none; display:block; margin:0; padding:28px 42px 24px;
-  border:0; border-bottom:1px solid #637e842b; color:#253a40; background:#edf1ef;
-  font:600 30px/1.4 var(--font-ui); text-align:center; letter-spacing:.05em;
+  border:0; border-bottom:1px solid #d8e7e31f; color:#f0f4ee; background:none;
+  font:600 30px/1.4 var(--font-ui); text-align:left; letter-spacing:.05em;
 }
-body #overlay .card:has(.leave-run-panel) #ovBody { min-height:0; overflow:auto; padding:0; background:none; }
-body #overlay .leave-run-panel.glass-panel { width:auto; max-width:none; margin:0; padding:32px 42px 22px; border:0; border-radius:0; box-shadow:none; background:none; color:#253a40; }
-body #overlay .card:has(.leave-run-panel) #ovCloseX { display:none; }
-body #overlay .leave-run-context { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px 22px; margin:0 0 22px; color:#547178; font:500 16px/1.4 var(--font-ui); }
-body #overlay .leave-run-context > span + span { padding-left:22px; border-left:1px solid #788e9255; }
-body #overlay .leave-run-description { max-width:660px; margin:0 auto 32px; color:#405b63; font:400 21px/1.8 var(--font-ui); text-align:center; }
-body #overlay .leave-run-actions { display:grid; grid-template-columns:1fr 1.25fr; gap:20px; margin-top:26px; }
-body #overlay .leave-run-actions button {
+& #ovBody { min-height:0; overflow:auto; padding:0; background:none; }}
+body #overlay{
+& .leave-run-panel.glass-panel { width:auto; max-width:none; margin:0; padding:28px 42px 24px; border:0; border-radius:0; box-shadow:none; background:none; color:#e4e9e7; backdrop-filter:none; }
+& .card:has(.leave-run-panel) #ovCloseX { display:none; }
+& .leave-run-context { display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:8px 22px; margin:0 0 16px; color:#a7b9b7; font:500 16px/1.4 var(--font-ui); }
+& .leave-run-context > span + span { padding-left:22px; border-left:1px solid #788e9255; }
+& .leave-run-description { max-width:660px; margin:0 0 24px; color:#c5d1cd; font:400 20px/1.7 var(--font-ui); text-align:left; }}
+body #overlay .leave-run-actions{
+& { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:24px; }
+& button {
   display:flex; align-items:center; justify-content:center; gap:12px; min-width:0; min-height:62px; padding:14px 20px;
-  border:1px solid #65808770; border-radius:2px; background:#d0dcdc; color:#35535b; box-shadow:none;
+  border:1px solid #afc8c338; border-radius:6px; background:#ffffff09; color:#dae6e0; box-shadow:none;
   font:600 21px/1.35 var(--font-ui); cursor:pointer;
   transition:transform var(--motion-press,90ms) ease-out,background-color var(--motion-hover,140ms) ease-out,box-shadow var(--motion-hover,140ms) ease-out;
 }
-body #overlay .leave-run-actions .leave-run-save { background:#294c54; color:#f0f7f2; border-color:#294c54; }
-body #overlay .leave-run-actions .leave-run-save .ic { width:22px; height:22px; }
-body #overlay .leave-run-actions .leave-run-danger { background:#a95848; color:#fff6ed; border-color:#a95848; }
-body #overlay .leave-run-actions button:hover:not(:disabled) { background:#bed3d1; box-shadow:0 3px 10px #35565f20; }
-body #overlay .leave-run-actions .leave-run-save:hover:not(:disabled) { background:#38636a; }
-body #overlay .leave-run-actions .leave-run-danger:hover:not(:disabled) { background:#bb6755; }
-body #overlay .leave-run-actions button:active:not(:disabled) { transform:translateY(2px) scale(.985); box-shadow:none; }
-body #overlay .leave-run-actions button:disabled { opacity:.55; cursor:default; }
-body #overlay .leave-run-panel [aria-busy="true"], body #overlay .leave-run-panel[aria-busy="true"] button { cursor:wait; }
-body #overlay .leave-run-panel button:focus-visible { outline:2px solid #477e86; outline-offset:4px; }
-body #overlay .leave-run-secondary { display:flex; justify-content:flex-end; margin-top:30px; padding-top:18px; border-top:1px solid #637e8424; }
-body #overlay .leave-run-secondary button { display:flex; align-items:center; gap:12px; padding:6px 0 6px 16px; border:0; background:none; color:#825c52; font:500 16px/1.4 var(--font-ui); cursor:pointer; transition:color var(--motion-hover,140ms) ease-out,transform var(--motion-press,90ms) ease-out; }
-body #overlay .leave-run-secondary button:hover:not(:disabled) { color:#a94f3b; }
-body #overlay .leave-run-secondary button:active:not(:disabled) { transform:translateY(2px); }
-body #overlay .leave-run-warning { margin:0 0 24px; color:#9a5143; font:600 22px/1.6 var(--font-ui); text-align:center; }
-body #overlay .leave-run-consequences { display:grid; gap:20px; margin:0; }
-body #overlay .leave-run-consequences > div { display:grid; grid-template-columns:86px minmax(0,1fr); gap:20px; align-items:start; }
-body #overlay .leave-run-consequences dt { padding:5px 0; color:#8e5247; font:600 18px/1.6 var(--font-ui); }
-body #overlay .leave-run-consequences > div + div dt { color:#3f746c; }
-body #overlay .leave-run-consequences dd { margin:0; color:#425e65; font:400 20px/1.8 var(--font-ui); }
-body #overlay .leave-run-status { margin:0 0 10px; padding:12px 16px; border-left:3px solid #ae5c4b; background:#b9684910; color:#8a4e40; font:400 18px/1.65 var(--font-ui); }
-body #overlay .leave-run-panel :is(.ov-note,.ov-stats) { color:#435d63; font:400 19px/1.8 var(--font-ui); }
-body #overlay .leave-run-panel .doom-loot { border:0; padding:0; margin:24px 0; background:none; }
-body #overlay .leave-run-panel .doom-loot-h { color:#3d6a60; font:500 18px/1.6 var(--font-ui); }
-body #overlay .leave-run-panel .doom-cards { justify-content:center; gap:18px; padding:24px 0; }
-body #overlay .leave-run-panel .doom-more { color:#4b666e; }
+& .leave-run-continue { background:#d4e2da; color:#18302e; border-color:#d4e2da; }
+& .leave-run-save { background:#a4c2b91a; color:#e5f2e9; border-color:#a4c2b954; }
+& .leave-run-save .ic { width:22px; height:22px; }
+& .leave-run-danger { background:#a95848; color:#fff6ed; border-color:#a95848; }
+& button:hover:not(:disabled) { background:#ffffff14; border-color:#c4ddd780; box-shadow:none; }
+& .leave-run-continue:hover:not(:disabled) { background:#e4eee7; }
+& .leave-run-save:hover:not(:disabled) { background:#a4c2b92e; }
+& .leave-run-danger:hover:not(:disabled) { background:#bb6755; }
+& button:active:not(:disabled) { transform:translateY(1px); box-shadow:none; }
+& button:disabled { opacity:.55; cursor:default; }}
+body #overlay .leave-run-panel{
+& [aria-busy="true"], &[aria-busy="true"] button { cursor:wait; }
+& button:focus-visible { outline:2px solid #b4d8ce; outline-offset:4px; }}
+body #overlay .leave-run-secondary{
+& { display:flex; justify-content:flex-end; margin-top:26px; padding-top:18px; border-top:1px solid #d8e7e31f; }
+& button { display:flex; align-items:center; gap:12px; padding:6px 0 6px 16px; border:0; background:none; color:#d0a39b; font:500 16px/1.4 var(--font-ui); cursor:pointer; transition:color var(--motion-hover,140ms) ease-out,transform var(--motion-press,90ms) ease-out; }
+& button:hover:not(:disabled) { color:#f0b5a7; }
+& button:active:not(:disabled) { transform:translateY(2px); }}
+body #overlay .leave-run-warning { margin:0 0 24px; color:#efb3a6; font:600 22px/1.6 var(--font-ui); text-align:left; }
+body #overlay .leave-run-consequences{
+& { display:grid; gap:20px; margin:0; }
+& > div { display:grid; grid-template-columns:86px minmax(0,1fr); gap:20px; align-items:start; }
+& dt { padding:5px 0; color:#e0a79b; font:600 18px/1.6 var(--font-ui); }
+& > div + div dt { color:#acd2c4; }
+& dd { margin:0; color:#c5d1cd; font:400 20px/1.8 var(--font-ui); }}
+body #overlay .leave-run-status { margin:0 0 10px; padding:12px 16px; border-left:3px solid #d88d7c; background:#b9684917; color:#e5b4a4; font:400 18px/1.65 var(--font-ui); }
+body #overlay .leave-run-panel{
+& :is(.ov-note,.ov-stats) { color:#c5d1cd; font:400 19px/1.8 var(--font-ui); }
+& .doom-loot { border:0; padding:0; margin:24px 0; background:none; }
+& .doom-loot-h { color:#acd2c4; font:500 18px/1.6 var(--font-ui); }
+& .doom-cards { justify-content:center; gap:18px; padding:24px 0; }
+& .doom-more { color:#a7b9b7; }}
 /* Opening/closing use the existing glass/confirm lifecycle; only local pointer feedback lives here. */
 body.reduce-motion #overlay .leave-run-panel button { transition:none; }
 @media (prefers-reduced-motion:reduce) { body #overlay .leave-run-panel button { transition:none; } }

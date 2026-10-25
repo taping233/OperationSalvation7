@@ -1,5 +1,5 @@
-import { readFileSync } from 'node:fs';
 import { beforeEach, afterEach, expect, it, vi } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 const timers = vi.hoisted(() => []);
 vi.mock('../game/src/battle/runtime/battle.clock.js', () => ({ schedulePresentationMs: (fn, ms) => {
   const entry = { fn, ms, cancelled: false }; timers.push(entry); return () => { entry.cancelled = true; };
@@ -63,7 +63,7 @@ it.each(['close','mode','hidden','detach'])('%s cleans all presentation and sche
 });
 
 it('keeps title styling positioned, readable and above card feedback without hit testing', () => {
-  const css = readFileSync('game/css/feedback-theme.css','utf8');
+  const css = readCssSource('game/css/feedback-theme.css','utf8');
   expect(css).toMatch(/\.bt-turn-title \{[^}]*position:absolute;[^}]*z-index:86;[^}]*pointer-events:none/);
   expect(css).toMatch(/\.sdt-feedback-theme b \{[^}]*animation:none;[^}]*font-size:54px/);
   expect(css).toContain('font-size:20px');

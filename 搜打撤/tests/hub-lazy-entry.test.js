@@ -48,7 +48,7 @@ async function setup() {
   vi.doMock('../game/src/hub/game.cardslib.page.js', async () => {
     h.cardImports();
     await h.cardGate.promise;
-    return { openCardLibrary: h.openCard, openCardDesigner: h.openCard, preparePhotoStudioEntry: async () => {} };
+    return { openCardLibrary: h.openCard, openCardDesigner: h.openCard, preparePhotoStudioEntry: async () => {}, finishPhotoStudioEntry: () => {} };
   });
   h.hub = await import('../game/src/hub/game.hub.js');
   h.selection = await import('../game/src/hub/departure.selection-state.js');
@@ -75,6 +75,28 @@ afterEach(async () => {
 });
 
 beforeEach(setup);
+
+it('选档预载未选档也能准备模块，复用同一请求且不挂载或写存档', async () => {
+  h.slot = null;
+  const before = document.body.innerHTML;
+  const write = vi.spyOn(Storage.prototype, 'setItem');
+  const first = h.hub.preloadBaseHub();
+  expect(h.hub.preloadBaseHub()).toBe(first);
+  h.hubGate.resolve(); await vi.dynamicImportSettled(); await first;
+  expect(h.hubImports).toHaveBeenCalledOnce();
+  expect(h.openHub).not.toHaveBeenCalled(); expect(h.startNewGame).not.toHaveBeenCalled();
+  expect(h.hub.baseHubLoading).toBe(false); expect(h.isOpen).toBe(false);
+  expect(document.body.innerHTML).toBe(before); expect(write).not.toHaveBeenCalled();
+});
+
+it('点击进入复用仍在进行的预载，不二次装载且只打开基地一次', async () => {
+  const prepared = h.hub.preloadBaseHub();
+  const opening = h.hub.openBaseHub('deploy');
+  await vi.advanceTimersByTimeAsync(32);
+  await finish(opening); await prepared;
+  expect(h.hubImports).toHaveBeenCalledOnce();
+  expect(h.openHub).toHaveBeenCalledExactlyOnceWith('deploy');
+});
 
 it('退役家具门面冷调用不载入 runtime、不导航、不写数据', async () => {
   const before = document.body.innerHTML;
@@ -242,7 +264,7 @@ describe('基地真实按需入口', () => {
   });
 
   it('终局回基地入口直接返回异步结果，不提前收走可重试来源按钮', () => {
-    for (const file of ['game/src/run/game.run.altar.js', 'game/src/run/game.session.death.js', 'game/src/ui/game.menu.pages.js']) {
+    for (const file of ['game/src/run/game.run.altar.js', 'game/src/run/game.session.death.js', 'game/src/ui/menu-leave.js']) {
       const source = readFileSync(file, 'utf8');
       expect(source).not.toMatch(/UI\.act\('(?:goBase|again)', \(\) => \{ UI\.hideOverlay\(\); (?:runtime\.)?openBaseHub/);
       expect(source).toMatch(/UI\.act\('goBase', \(\) => (?:runtime\.)?openBaseHub\('deploy'\)\)/);
@@ -273,7 +295,7 @@ describe('基地真实按需入口', () => {
     expect(document.querySelector('.settings-page')).not.toBeNull();
   });
 
-  it('源码只允许用户入口动态 import，样式不延迟、不 idle 预取', () => {
+  it('门面按需共享动态 import，样式保持静态且不自行安排空闲任务', () => {
     const source = readFileSync('game/src/hub/game.hub.js', 'utf8');
     expect(source).toContain("import('./game.hub.runtime.js')");
     expect(source).not.toMatch(/from ['"].*game\.hub\.runtime\.js/);

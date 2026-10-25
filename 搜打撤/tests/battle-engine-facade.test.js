@@ -7,6 +7,7 @@
  * deferEndTurn / hasPendingEndTurn，供 battle.enemy-phase 按名消费。
  * 当前选择续接、统一表现事件与手牌装备上限新增四个明确入口。
  * notifyPlayerDamaged 供 enemy-phase 的毒伤复用受伤触发宿主，避免再次形成攻击/毒伤双路径。
+ * 必要伤害/消耗入口、被动回放快照与异常检查点恢复增加四个明确端口。
  */
 import { describe, expect, it } from 'vitest';
 import * as Engine from '../game/src/battle/core/battle.engine.js';
@@ -25,9 +26,10 @@ const BASELINE_EXPORTS = [
   'queueCardExecution', 'aegisBlocked', 'foeIdx', 'hitFoe', 'matchHandSelectKey',
   'skipHandSelect', 'pickHandSelect', 'useItem', 'bagSlam', 'resolveDart',
   'resolveSlam', 'slamSkill', 'addPlayerCurse', 'usePotion', 'openBag', 'closeBag', 'pickChoice',
-  'pickDiscover', 'playerTakeHit', 'notifyPlayerDamaged', 'frenzyCurse', 'elCurse',
+  'pickDiscover', 'cancelDiscover', 'playerTakeHit', 'notifyPlayerDamaged', 'frenzyCurse', 'elCurse',
   'deferEndTurn', 'hasPendingEndTurn',
   'settlePendingSelections', 'emitBattlePresentation', 'emitRecast', 'handUnplayableReason',
+  'dealEffectDamage', 'consumeBattleCard', 'getTriggerSnapshot', 'recoverBattleFailure',
 ];
 
 describe('battle.engine 导出面守卫', () => {
@@ -35,7 +37,7 @@ describe('battle.engine 导出面守卫', () => {
     expect(Object.keys(Engine).sort()).toEqual([...BASELINE_EXPORTS].sort());
   });
 
-  it('基线数量 = 79', () => {
-    expect(BASELINE_EXPORTS.length).toBe(79);
+  it('基线数量 = 84', () => {
+    expect(BASELINE_EXPORTS.length).toBe(84);
   });
 });

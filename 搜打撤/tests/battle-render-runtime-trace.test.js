@@ -1,3 +1,4 @@
+import { battleViewMocks, overlayElements, frameMocks, inventoryFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { connectRuntimeStages } from '../game/src/core/runtime-trace-stages.local.js';
 
@@ -25,8 +26,7 @@ vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
   waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }),
 }));
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
-  attach: () => Promise.resolve(false), hide() {}, cacheStats: () => ({}),
-  play() {}, setPaused() {}, presentDeath() {}, isLiveBattleFigure: () => false, actionImpactRemaining: () => null,
+  ...frameMocks(),
 }));
 vi.mock('../game/src/battle/view/battle.hand-hit.js', async importOriginal => {
   const actual = await importOriginal();
@@ -54,11 +54,7 @@ const UI = {
   act: (name, fn) => actions.set(name, fn),
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} },
-  Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 9, 99, 5, 5),
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
@@ -80,8 +76,7 @@ function start({ many = true, suffix = '', flushFrames = true } = {}) {
   if (many) ids.push(...catalog.filter(card => ['武术', '法术'].includes(card.type) && !ids.includes(card.id)).slice(0, 8).map(card => card.id));
   game = {
     ownedCards: ids.map(id => ({ uid: id + suffix, card: catalog.find(card => card.id === id) })),
-    inventory: [], usedPocket: [], hp: 80, maxHp: 80, atk: 4, spellPower: 0, coins: 0,
-    myClass: '法师', state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {},
+    ...inventoryFields(80, 80, 0, '法师'), log() {}, heal() {}, addItem() {}, onBattleEnd() {},
   };
   window.SDT.game = game;
   BattleSession.start(game, [0, 1].map(i => ({ id: `persistent-foe-${i}`, name: `常驻舞台靶子${i}`, hp: 100, atk: 1 })), { isBoss: false });
@@ -89,7 +84,7 @@ function start({ many = true, suffix = '', flushFrames = true } = {}) {
 }
 function bodyFixture() {
   document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  UI.el = { ...overlayElements() };
   UI.el.ovBody.addEventListener('click', event => {
     const button = event.target.closest('[data-act]');
     if (button && !button.disabled && !button.closest('[inert]')) actions.get(button.dataset.act)?.(button.dataset);

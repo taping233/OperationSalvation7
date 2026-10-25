@@ -54,6 +54,9 @@ function loadPageModule() {
   return pageModulePromise;
 }
 
+// Code/CSS only: no gallery DOM, catalogue refresh or save writes during idle preload.
+export function preloadCardLibrary() { return loadPageModule(); }
+
 function enterPage(method, args) {
   if (pageEntryPromise) return pageEntryPromise;
   const request = ++pageRequest;
@@ -79,14 +82,23 @@ function enterPage(method, args) {
   activePageEntry = entry;
   cardPageLoading = true;
   setCardPageOpen(true);
+  let mountedPage = null;
+  let mountedRoot = null;
   const loading = runPageLoading({
     title: method === 'openCardDesigner' ? '制作坊' : '照相馆',
     detail: method === 'openCardDesigner' ? '正在准备编辑工作台' : '正在整理收藏档案',
     presentation: method === 'openCardDesigner' ? undefined : 'city-cut',
     signal: controller.signal,
+    prepare: method === 'openCardLibrary' ? async signal => {
+      const ready = await mountedPage?.preparePhotoStudioEntry(signal);
+      const cut = /** @type {HTMLElement} */ (document.querySelector('.page-loading [data-film-kind="photo"]'));
+      if (cut) cut.dataset.filmExitDuration = '760';
+      return ready;
+    } : undefined,
     onRevealStart: method === 'openCardLibrary' ? () => {
       const currentOverlay = document.getElementById('overlay');
       if (!controller.signal.aborted && currentOverlay?.querySelector('.studio-unified')) {
+        // Let the gallery settle while the photograph dissolves into the room.
         enterSurface(currentOverlay, { restart: true });
       }
     } : undefined,
@@ -102,13 +114,12 @@ function enterPage(method, args) {
         return false;
       }
       const result = await page[method](...args);
+      mountedPage = page;
+      mountedRoot = document.querySelector('.card-library-page');
       if (pendingPageEntry === entry) {
         entry.ready = true;
         pendingPageEntry = null;
         cardPageLoading = false;
-      }
-      if (method === 'openCardLibrary' && !controller.signal.aborted) {
-        await page.preparePhotoStudioEntry(controller.signal);
       }
       return result;
     },
@@ -133,6 +144,7 @@ function enterPage(method, args) {
     }
     return false;
   }).finally(() => {
+    if (method === 'openCardLibrary') mountedPage?.finishPhotoStudioEntry?.(mountedRoot);
     if (activePageEntry === entry) {
       releasePageEntryCancellation('cardslib', cancelPendingPageEntry);
       activePageEntry = null;

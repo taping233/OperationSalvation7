@@ -31,13 +31,10 @@ function createBattleEquipment({ cards = context.cards,
   function equipSkillText(card) {
     card = getHostedExecutionCard(card);
     // 文字只用于展示；结构化主动技能仍由 ops 单路径执行。
-    if (hasStructuredEquipField(card, 'skill')) {
-      if (!card.rules.equip?.skill?.ops?.length) return '';
-      const m = EQUIP_SKILL_PATTERN.exec(String(card.desc || ''));
-      return m ? m[1].trim() : '发动装备主动技能';
-    }
+    const structured = hasStructuredEquipField(card, 'skill');
+    if (structured && !card.rules.equip?.skill?.ops?.length) return '';
     const m = EQUIP_SKILL_PATTERN.exec(String(card && card.desc || ''));
-    return m ? m[1].trim() : '';
+    return m ? m[1].trim() : structured ? '发动装备主动技能' : '';
   }
   function registerEquip(uid, card) {
     if (!card || card.type !== '装备') return;
@@ -98,30 +95,22 @@ function createBattleEquipment({ cards = context.cards,
     if (!instanceRuntime.equipped || !instanceRuntime.equipped.length) return;
     const cursed = Combat.hasCurse(instanceRuntime.pstat);
     instanceRuntime.equipped.forEach(e => {
-      const desc = String(e.card && e.card.desc || '');
       if (e.card.type !== '装备') return;
-      // M2：结构化条件被动（rules.equip.passive.cond + aura）——与文本版同一动态核算模式
+      // 结构化声明优先；两种来源共用同一差量结算，解除诅咒时收回已加数值。
       const sr = e.card.rules && e.card.rules.equip && e.card.rules.equip.passive;
+      let atk, sp;
       if (sr && sr.cond && sr.cond.hasCurse) {
         const aura = sr.aura || {};
-        const want = cursed ? { atk: aura.atk || 0, sp: aura.spellPower || 0 } : { atk: 0, sp: 0 };
-        const had = e._condApplied || { atk: 0, sp: 0 };
-        const dAtk = want.atk - had.atk, dSp = want.sp - had.sp;
-        if (dAtk || dSp) {
-          if (dAtk) Combat.addBlessing(instanceRuntime.pstat, 'atkUp', dAtk);
-          if (dSp) Combat.addBlessing(instanceRuntime.pstat, 'spellUp', dSp);
-          e._condApplied = want;
-          instanceRuntime.G.log((want.atk || want.sp)
-            ? `[[icon:crystal]] <b>${esc(e.card.name)}</b>：身负诅咒，条件加成生效（攻 +${want.atk}${want.sp ? `，法伤 +${want.sp}` : ''}）`
-            : `[[icon:cross]] <b>${esc(e.card.name)}</b>：诅咒解除，条件加成收回`, want.atk || want.sp ? 'ok' : 'dim');
-        }
-        return;
+        atk = aura.atk || 0; sp = aura.spellPower || 0;
+      } else {
+        if (hasStructuredEquipField(e.card, 'passive')) return;
+        const desc = String(e.card.desc || '');
+        if (equipSkillText(e.card) || !CURSE_COND_EQUIP.test(desc)) return;
+        const atkM = desc.match(/攻\s*\+\s*(\d+)/) || desc.match(/攻击\s*\+\s*(\d+)/);
+        const spM = desc.match(/法伤\s*\+\s*(\d+)/);
+        atk = atkM ? +atkM[1] : 0; sp = spM ? +spM[1] : 0;
       }
-      if (hasStructuredEquipField(e.card, 'passive')) return;
-      if (equipSkillText(e.card) || !CURSE_COND_EQUIP.test(desc)) return;
-      const atkM = desc.match(/攻\s*\+\s*(\d+)/) || desc.match(/攻击\s*\+\s*(\d+)/);
-      const spM = desc.match(/法伤\s*\+\s*(\d+)/);
-      const want = cursed ? { atk: atkM ? +atkM[1] : 0, sp: spM ? +spM[1] : 0 } : { atk: 0, sp: 0 };
+      const want = cursed ? { atk, sp } : { atk: 0, sp: 0 };
       const had = e._condApplied || { atk: 0, sp: 0 };
       const dAtk = want.atk - had.atk, dSp = want.sp - had.sp;
       if (!dAtk && !dSp) return;

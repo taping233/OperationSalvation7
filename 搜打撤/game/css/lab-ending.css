@@ -3,26 +3,36 @@
  *   全屏三页：基调渐变（页底）→ 插画层（缺图 404 透明自然露出渐变）
  *   → 压暗遮罩 → 打字机字幕；ken burns 缓推 + 页间淡入。
  * ============================================================ */
-#labEnding { position: fixed; inset: 0; z-index: 9500; background: #000000; opacity: 0; transition: opacity .7s ease; cursor: pointer; overflow: hidden; }
-#labEnding.on { opacity: 1; }
+#labEnding{
+& { position: fixed; inset: 0; z-index: var(--layer-cinematic,9500); background: #000000; opacity: 0; transition: opacity .7s ease; cursor: pointer; overflow: hidden; }
+&.on { opacity: 1; }
+&:focus-visible { outline:none; }
+& .lab-end-skip:focus-visible { outline:2px solid #e7ddbe; outline-offset:4px; }
 
-#labEnding .lab-end-page { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .7s ease; }
-#labEnding .lab-end-page.on { opacity: 1; visibility: visible; }
+& .lab-end-page { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .7s ease; }
+& .lab-end-page.on { opacity: 1; visibility: visible; }
 
 /* 页底基调渐变：插画就位前/加载失败时的兜底画面（three tones：崩解/回航/深渊） */
-#labEnding .lab-tone-crisis { background: radial-gradient(120% 90% at 50% 20%, #4a2333 0%, #170c12 68%, #050305 100%); }
-#labEnding .lab-tone-flight { background: linear-gradient(180deg, #101213 0%, #2c3033 52%, #141517 100%); }
-#labEnding .lab-tone-abyss  { background: radial-gradient(130% 100% at 50% 92%, #1c1e20 0%, #0b0c0d 60%, #050505 100%); }
+& .lab-tone-crisis { background: radial-gradient(120% 90% at 50% 20%, #4a2333 0%, #170c12 68%, #050305 100%); }
+& .lab-tone-flight { background: linear-gradient(180deg, #101213 0%, #2c3033 52%, #141517 100%); }
+& .lab-tone-abyss  { background: radial-gradient(130% 100% at 50% 92%, #1c1e20 0%, #0b0c0d 60%, #050505 100%); }
 
-#labEnding .lab-end-art { position: absolute; inset: 0; background-size: cover; background-position: center; animation: labEndKen 14s ease-out forwards; }
+& .lab-end-art { position: absolute; inset: 0; background-size: cover; background-position: center; animation: labEndKen 14s ease-out forwards; }}
 @keyframes labEndKen { from { transform: scale(1) translateY(0); } to { transform: scale(1.08) translateY(-1.5%); } }
+#labEnding{
 
-#labEnding .lab-end-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.18) 0%, transparent 30%, transparent 55%, rgba(0,0,0,.84) 100%); }
+& .lab-end-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.18) 0%, transparent 30%, transparent 55%, rgba(0,0,0,.84) 100%); }
 
-#labEnding .lab-end-text { position: absolute; left: 8%; right: 8%; bottom: 9%; min-height: 4.5em; color: #e1e1df; font-size: clamp(15px, calc(var(--game-layout-height, min(100vw, 100vh)) * 0.022000000000000002), 22px); line-height: 1.9; letter-spacing: .04em; text-shadow: 0 2px 6px rgba(0,0,0,.9); }
-#labEnding .lab-end-cue { position: absolute; right: .2em; bottom: -1.7em; font-style: normal; color: #ffd138; opacity: 0; animation: labEndCue 1.2s ease-in-out infinite; }
-#labEnding .lab-end-text.done .lab-end-cue { opacity: 1; }
+& .lab-end-text { position: absolute; left: 8%; right: 8%; bottom: 9%; min-height: 4.5em; color: #e1e1df; font-size: clamp(15px, calc(var(--game-layout-height, min(100vw, 100vh)) * 0.022000000000000002), 22px); line-height: 1.9; letter-spacing: .04em; text-shadow: 0 2px 6px rgba(0,0,0,.9); }
+& .lab-end-cue { position: absolute; right: .2em; bottom: -1.7em; font-style: normal; color: #ffd138; opacity: 0; animation: labEndCue 1.2s ease-in-out infinite; }
+& .lab-end-text.done .lab-end-cue { opacity: 1; }}
 @keyframes labEndCue { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+body.reduce-motion #labEnding,
+body.reduce-motion #labEnding *,
+body.reduce-motion #labEnding *::after { animation:none !important; transition:none !important; }
+@media (prefers-reduced-motion:reduce) {
+  #labEnding, #labEnding *, #labEnding *::after { animation:none !important; transition:none !important; }
+}
 
 #labEnding .lab-end-skip { position: absolute; right: 24px; bottom: 20px; z-index: 5; border: 1px solid rgba(225,225,223,.4); font-size: 14px; cursor: pointer; }
 
@@ -31,47 +41,50 @@
  * ============================================================ */
 
 /* 字幕衬底渐变：横向两端渐隐 + 纵向下沉加深，字区可读性不再全靠页面 shade */
-#labEnding .lab-end-text {
+#labEnding .lab-end-text{
+& {
   padding: 14px 22px 15px; border-radius:0;
   background:
     linear-gradient(90deg, rgba(7,7,8,0) 0%, rgba(7,7,8,.5) 9% 91%, rgba(7,7,8,0) 100%),
     linear-gradient(180deg, rgba(7,7,8,0), rgba(7,7,8,.58) 34%, rgba(7,7,8,.74));
 }
-#labEnding .lab-end-text .lab-end-cue { bottom: -1.9em; }
+& .lab-end-cue { bottom: -1.9em; }}
 
 /* 三页金点进度：跟随 .lab-end-page.on 切换（纯 CSS，data-page 索引点亮对应点） */
-#labEnding .lab-end-page::after {
+#labEnding .lab-end-page{
+&::after {
   content: ''; position: absolute; left: 50%; bottom: 4.6%; transform: translateX(-50%);
   width: 58px; height: 7px; opacity: 0; transition: opacity .5s ease .25s; pointer-events: none;
 }
-#labEnding .lab-end-page.on::after { opacity: 1; }
-#labEnding .lab-end-page::after {
+&.on::after { opacity: 1; }
+&::after {
   background:
     radial-gradient(circle 2.4px at 6px 3.5px, rgba(230,203,118,.3), transparent 65%),
     radial-gradient(circle 2.4px at 29px 3.5px, rgba(230,203,118,.3), transparent 65%),
     radial-gradient(circle 2.4px at 52px 3.5px, rgba(230,203,118,.3), transparent 65%);
 }
-#labEnding .lab-end-page[data-page="0"].on::after {
+&[data-page="0"].on::after {
   background:
     radial-gradient(circle 3px at 6px 3.5px, #e1ddd4, transparent 70%),
     radial-gradient(circle 2.4px at 29px 3.5px, rgba(230,203,118,.3), transparent 65%),
     radial-gradient(circle 2.4px at 52px 3.5px, rgba(230,203,118,.3), transparent 65%);
 }
-#labEnding .lab-end-page[data-page="1"].on::after {
+&[data-page="1"].on::after {
   background:
     radial-gradient(circle 2.4px at 6px 3.5px, rgba(230,203,118,.3), transparent 65%),
     radial-gradient(circle 3px at 29px 3.5px, #e1ddd4, transparent 70%),
     radial-gradient(circle 2.4px at 52px 3.5px, rgba(230,203,118,.3), transparent 65%);
 }
-#labEnding .lab-end-page[data-page="2"].on::after {
+&[data-page="2"].on::after {
   background:
     radial-gradient(circle 2.4px at 6px 3.5px, rgba(230,203,118,.3), transparent 65%),
     radial-gradient(circle 2.4px at 29px 3.5px, rgba(230,203,118,.3), transparent 65%),
     radial-gradient(circle 3px at 52px 3.5px, #e1ddd4, transparent 70%);
-}
+}}
 
 /* 跳过键：对齐 .ov-btn 制式——宽字距 + 金角标线 + 冷青档案底 */
-#labEnding .lab-end-skip {
+#labEnding .lab-end-skip{
+& {
   padding: 9px 16px 9px 19px; border-radius:0; letter-spacing: .3em; text-indent: .1em;
   border-color: rgba(230,203,118,.42);
   background: linear-gradient(180deg, rgba(17,18,20,.88), rgba(13,14,15,.92));
@@ -79,12 +92,12 @@
   box-shadow: inset 0 1px 0 rgba(223,224,226,.06);
   transition: border-color .2s, color .2s, box-shadow .2s;
 }
-#labEnding .lab-end-skip::before {
+&::before {
   content: ''; position: absolute; left: 4px; top: 4px; width: 9px; height: 9px;
   border-left: 1px solid rgba(230,203,118,.75); border-top: 1px solid rgba(230,203,118,.75);
   pointer-events: none;
 }
-#labEnding .lab-end-skip:hover {
+&:hover {
   border-color: rgba(230,203,118,.8); color: #dfdcd6;
   box-shadow: inset 0 1px 0 rgba(232,229,223,.1), 0 0 12px rgba(230,203,118,.18);
-}
+}}

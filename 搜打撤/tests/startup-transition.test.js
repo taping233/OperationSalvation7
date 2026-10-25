@@ -27,7 +27,7 @@ describe('startup uses the common city cut', () => {
     let settle;
     h.prepare.mockReturnValueOnce(new Promise(resolve => { settle = resolve; }));
     document.documentElement.dataset.desktopStartup = 'preparing'; await flush();
-    expect(h.create).toHaveBeenCalledWith(expect.objectContaining({ scene: 'camp', title: '进入城市' }));
+    expect(h.create).toHaveBeenCalledWith(expect.objectContaining({ scene: 'departure', title: '进入城市' }));
     expect(document.querySelector('.page-cut-waiting')).not.toBeNull();
     expect(document.documentElement.dataset.desktopStartup).toBe('preparing');
     settle(true); await flush();

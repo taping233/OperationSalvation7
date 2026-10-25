@@ -10,6 +10,8 @@
  * Fields are optional only where the current producers omit them.
  * @typedef {object} DiscoverQueueJob
  * @property {number} n
+ * @property {DiscoverCard[]} [fixedOptions]
+ * @property {number} [confirmedIndex]
  * @property {DiscoverCard[]} [explicit]
  * @property {string[]} [explicitUids]
  * @property {boolean} [deckBottom]
@@ -39,6 +41,11 @@
  * Fields shared by discovery states built from queued random or explicit jobs.
  * Array-valued tracking fields intentionally retain the job's original references.
  * @typedef {object} QueuedDiscoverStateBase
+ * @property {boolean} [canCancel]
+ * @property {string} [cancelLabel]
+ * @property {string} [sourceCommit]
+ * @property {string | number} [roundId]
+ * @property {string} [sourceUid]
  * @property {DiscoverCard[]} options
  * @property {number} n
  * @property {string | null | undefined} rarity
@@ -61,7 +68,7 @@
 
 /** @typedef {QueuedDiscoverStateBase & { deckBottom: boolean, deckBottomUids: string[] }} ExplicitDiscoverState */
 /** @typedef {QueuedDiscoverStateBase & { deckBottom?: never, deckBottomUids?: never }} RandomDiscoverState */
-/** @typedef {{ options: DiscoverCard[], n: number, act: 'pouch', pouchUid: string, pred: null }} PouchDiscoverState */
+/** @typedef {{ options: DiscoverCard[], n: number, act: 'pouch', pouchUid: string, pred: null, canCancel?: boolean, cancelLabel?: string, sourceCommit?: string, roundId?: string | number }} PouchDiscoverState */
 /** @typedef {ExplicitDiscoverState | RandomDiscoverState | PouchDiscoverState | null} DiscoveringState */
 
 /** @param {DiscoverQueueJob} job @returns {QueuedDiscoverStateBase} */

@@ -3,7 +3,7 @@ import { createBaseState as def, normalizeBaseState as adopt } from './base-stat
 
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
-import { txPending } from './game.storage.js';
+import { RUN_KEY, txPending } from './game.storage.js';
 import { createVersionedSlotReader } from './versioned-slot-reader.js';
 import { commitBaseMutation } from './base-mutation.js';
 import { createBaseEconomy } from './base-economy.js';
@@ -14,12 +14,14 @@ import { createBaseElapsedCommands } from './base-elapsed.commands.js';
 import { createBaseMetaCommands } from './base-meta.commands.js';
 import { isCollectionProtected as collectionProtection } from './collection-protection.js';
 import { stashSalePrice } from './stash-sale-price.js';
+import { sameStoredCard, storedCardVariant } from './stored-card-identity.js';
 import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
   // 坏档备份键：解析失败时原串转存于此（基地是跨局数据，损坏比对局档更严重）
   const CORRUPT_KEY = (i) => 'sdt-base-' + i + '-corrupt';
+  const PRESERVED_KEY = i => `sdt-base-${i}-preserved`;
   // 基地 schema 版本：破坏性变更时 +1 并在 BASE_MIGRATIONS 补纯函数迁移
   const BASE_VERSION = 2;
   const BASE_MIGRATIONS = {
@@ -54,7 +56,10 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
   const rules = () => window.SDT.MAP.rules;
   // 基地成长接音（迭代评审 09-20）：升级成功=levelup；base.js 无 UI/Sound 静态导入，
   // 循 window.SDT 晚读惯例（同 :41 MAP），失败分支不播 deny（调用层 UI 已有 deny 职责）
-  const sfxLevelup = () => { if (window.SDT && window.SDT.Sound) window.SDT.Sound.sfx('levelup'); };
+  const playBaseSound = event => {
+    // Optional feedback runs after persistence; it cannot turn a committed operation into a failure.
+    try { window.SDT?.Sound?.sfx?.(event); } catch { /* sound unavailable */ }
+  };
   // 「初始攻击」初始牌：能进消耗区（对局中复原用），但永远不入卡牌仓库
   const isSha = (card) => !!card && (card.id === 'starter-attack' ||
     (card.id === undefined && card.name === '初始攻击'));
@@ -227,8 +232,9 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
 
   // 普通游玩时间保持旧checkpoint策略：先推进Base内存，再尝试保存；失败由
   // 命令结果显式标记，后续Base保存可落盘该值。此操作不属于跨档journal原子事务。
-  function persistPlaySeconds(next) {
+  function persistPlaySeconds(next, checkpoint = null) {
     data.stats.playSeconds = next;
+    if (checkpoint) data.stats.playTimeCheckpoint = checkpoint;
     if (!slot) return false;
     return save();
   }
@@ -244,34 +250,24 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
     return result.ok ? result.value : failure;
   }
 
-  // Pet-egg pity keeps its historical chest contract: a failed durable write
-  // still advances this one in-memory field while the already-rolled reward
-  // proceeds. This is explicitly not an atomic save and does not weaken mutate.
-  function persistEggPity(next) {
+  // Pet-egg counters retain their checkpoint contract: a failed durable write
+  // advances only the relevant in-memory field and does not weaken mutate.
+  /** @param {'eggPity'|'eggBattles'} field @param {number} next */
+  function persistEggCounter(field, next) {
     if (!slot) {
-      data.eggPity = next;
+      data[field] = next;
       return false;
     }
-    const saved = mutate(draft => { draft.eggPity = next; return true; }, false);
+    const saved = mutate(draft => { draft[field] = next; return true; }, false);
     if (saved === true) return true;
-    // Legacy chests changed Base.data before calling save(); keep only that
-    // narrow in-memory fallback. Protected/too-new storage is never rewritten.
-    data.eggPity = next;
+    data[field] = next;
     return false;
   }
-  // 宠物蛋战斗计数（2026-09-29 收敛）：无档位胜利的原直写路径移入命令层，
-  // 沿用保底计数同款旧语义——先内存推进，落盘失败不回滚（persisted:false）。
-  function persistEggBattles(next) {
-    if (!slot) {
-      data.eggBattles = next;
-      return false;
-    }
-    const saved = mutate(draft => { draft.eggBattles = next; return true; }, false);
-    if (saved === true) return true;
-    data.eggBattles = next;
-    return false;
-  }
-  const petEggCommands = createBasePetEggCommands({ read: () => data, persistPity: persistEggPity, persistBattles: persistEggBattles });
+  const petEggCommands = createBasePetEggCommands({
+    read: () => data,
+    persistPity: next => persistEggCounter('eggPity', next),
+    persistBattles: next => persistEggCounter('eggBattles', next),
+  });
 
   // Meta 进度端口（2026-09-29 收敛）：战斗统计/熟练度/收藏回填的规则在草稿上准备，
   // 保存成功才替换运行态；失败时同一规则在运行态补应用一次（仅内存推进，persisted:false）。
@@ -321,13 +317,21 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
 
   // 重开档位：基地回到初始状态（覆盖开新档 / 空档开新档时调用）
   // 新档案仓库预置 5 张随机卡牌（按稀有度权重抽取，不重复），让第一局就有牌可带
-  function reset(s) {
+  function reset(s, { overwrite = false } = {}) {
     if (txPending(s)) return false;
     const previous = { slot, data, random: Random.snapshot(), issue: issue(s),
       baselinePresent: writeBaseline.has(s), baseline: writeBaseline.get(s), checkpointVersion, savedCheckpointVersion };
     try {
       const currentRaw = localStorage.getItem(SLOT_KEY(s));
-      if (emptySlotObservation.has(s) && currentRaw !== emptySlotObservation.get(s)) {
+      if (currentRaw !== null) {
+        readSlot(s);
+        if (issue(s)) {
+          if (!overwrite) return false;
+          // Explicit replacement still keeps the original bytes available to export.
+          physicalWrite(s, PRESERVED_KEY(s), currentRaw);
+        }
+      }
+      if (emptySlotObservation.has(s) && (currentRaw !== emptySlotObservation.get(s) || localStorage.getItem(RUN_KEY(s)) !== null)) {
         try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 档位已在其他标签页创建，请返回选档重新进入', 'warn'); } catch { /* 门面未就绪 */ }
         return false;
       }
@@ -369,17 +373,17 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
       let card = null;
       if (weights) {
         for (let t = 0; t < 30 && !card; t++) {
-          let roll = Random.random('card') * totalW, rar = null;
+          let roll = Random.random('card', 'reward') * totalW, rar = null;
           for (const [r, w] of weights) { roll -= w; if (roll <= 0) { rar = r; break; } }
           if (!rar) rar = weights[0][0];
           const sub = pool.filter(c => c.rarity === rar && !taken.has(c.id));
-          if (sub.length) card = sub[Math.floor(Random.random('card') * sub.length)];
+          if (sub.length) card = sub[Math.floor(Random.random('card', 'reward') * sub.length)];
         }
       }
       if (!card) {
         const sub = pool.filter(c => !taken.has(c.id));
         if (!sub.length) break;
-        card = sub[Math.floor(Random.random('card') * sub.length)];
+        card = sub[Math.floor(Random.random('card', 'reward') * sub.length)];
       }
       taken.add(card.id);
       data.stash.push({ card: { ...card }, count: 1 });
@@ -430,13 +434,15 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
     activeWriteLease = lease;
     try { return save(); } finally { activeWriteLease = previousLease; }
   }
-  function _refreshExternal(i) {
+  function _refreshExternal(i, { replacement = false } = {}) {
+    if (replacement && slot === i) selectionGeneration++;
     reader.invalidate(i);
     const found = readSlot(i);
     if (found) writeBaseline.set(i, found.raw);
     else writeBaseline.delete(i);
-    if (found?.value && slot === i) {
-      data = adopt(found.value);
+    if ((found?.value || found?.raw === null) && slot === i) {
+      data = found.value ? adopt(found.value) : def();
+      if (found.raw === null) { ensureStarterPet(); if (!replacement) selectionGeneration++; }
       checkpointVersion = savedCheckpointVersion = 0;
     }
     return found?.value ? adopt(structuredClone(found.value)) : null;
@@ -444,6 +450,11 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
 
   // 删除某档位的基地数据
   function wipe(i) { if (txPending(i)) return false; try { physicalWrite(i, SLOT_KEY(i), null); return true; } catch { return false; } }
+  function _wipeLocked(i, lease) {
+    assertSlotWriteLease(lease, i);
+    if (txPending(i)) return false;
+    try { physicalWrite(i, SLOT_KEY(i), null, lease); emptySlotObservation.set(i, null); return true; } catch { return false; }
+  }
   const hasSlot = (i) => { try { return !!localStorage.getItem(SLOT_KEY(i)); } catch { return false; } };
 
   // ---------- 卡背（v0.21） ----------
@@ -485,55 +496,46 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
     (stashCap() < (rules().stashRuneSlotFrom || 50) ||
       (data.runes || []).length >= (rules().stashRuneSlotCost || 2));
 
+  function commitUpgrade(allowed, prepare) {
+    if (!allowed) return false;
+    const ok = mutate(draft => { prepare(draft); return true; });
+    if (ok) playBaseSound('levelup');
+    return ok;
+  }
+
   function upgradeBag() {
-    if (!canUpgradeBag()) return false;
-    const ok = mutate(draft => {
+    return commitUpgrade(canUpgradeBag(), draft => {
       draft.wood -= rules().bagUpgradeWood;
       draft.bagUp++;
-      return true;
     });
-    if (ok) sfxLevelup();
-    return ok;
   }
 
   function upgradePet(id) {
-    if (!canUpgradePet(id)) return false;
-    const ok = mutate(draft => {
+    return commitUpgrade(canUpgradePet(id), draft => {
       draft.rations -= petUpCost(id);
       draft.pets[id].lv = petLevel(id) + 1;
-      return true;
     });
-    if (ok) sfxLevelup();
-    return ok;
   }
 
   function upgradeStash() {
-    if (!canUpgradeStash()) return false;
-    const ok = mutate(draft => {
+    return commitUpgrade(canUpgradeStash(), draft => {
       draft.wood -= rules().stashUpgradeWood;
       if (stashCap() >= (rules().stashRuneSlotFrom || 50)) {
         draft.runes.splice(0, rules().stashRuneSlotCost || 2);
       }
       draft.stashUp++;
-      return true;
     });
-    if (ok) sfxLevelup();
-    return ok;
   }
 
   // 龙巢：符文背包升级（2 符文 + 5 币升级 1 格，10 → 25）
   function nestBagCap() { return 10 + (data.nestBagUp || 0); }
   function canUpgradeNestBag() { return nestBagCap() < 25 && (data.runes || []).length >= 2 && data.coins >= 5; }
   function upgradeNestBag() {
-    if (!canUpgradeNestBag()) return false;
-    const ok = mutate(draft => {
+    return commitUpgrade(canUpgradeNestBag(), draft => {
       draft.runes.splice(0, 2);
       draft.coins -= 5;
       draft.nestBagUp = (draft.nestBagUp || 0) + 1;
-      return true;
     });
-    if (ok) sfxLevelup();
-    return ok;
   }
 
   // ---------- 运回结算 ----------
@@ -548,7 +550,7 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
     });
   }
 
-  // 卡牌入库（同名堆叠）。toPocket = true 时进基地消耗区（待钥匙复原）。
+  // 卡牌入库按稳定 ID 与 variant 合堆，防止同名卡相互替换。toPocket=true 进基地消耗区。
   // 「初始攻击」不进卡牌仓库；需求 #6：职业卡与初始牌不进消耗区（撤离回收时直接消散）。
   function depositCards(cards, toPocket) {
     return mutate(draft => { appendCards(draft, cards, toPocket); return true; });
@@ -560,9 +562,9 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
     (cards || []).forEach(c => {
       if (isSha(c.card)) return;
       if (toPocket && c.card.rarity === '职业') return;
-      const stack = list.find(x => x.card.name === c.card.name);
+      const stack = list.find(x => sameStoredCard(x, c));
       if (stack) stack.count += c.count || 1;
-      else list.push({ card: { ...c.card }, count: c.count || 1 });
+      else list.push({ card: { ...c.card }, count: c.count || 1, ...storedCardVariant(c) });
     });
   }
 
@@ -610,7 +612,7 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
     if ((data.coins || 0) < HATCH_COST) return { ok: false, why: 'poor' };
     const unowned = PETS.filter(p => !data.pets[p.id]);
     if (!unowned.length) return { ok: false, why: 'all' };
-    const pet = unowned[Math.floor(Random.random('pet') * unowned.length)];
+    const pet = unowned[Math.floor(Random.random('pet', 'reward') * unowned.length)];
     const result = mutate(draft => {
       const stack = draft.stash[i];
       stack.count -= 1;
@@ -620,7 +622,7 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
       if (!draft.petSel) draft.petSel = pet.id;
       return { ok: /** @type {true} */ (true), pet };
     }, { ok: /** @type {false} */ (false), why: 'save' });
-    if (result.ok) window.SDT.Sound?.sfx('eggHatch');
+    if (result.ok) playBaseSound('eggHatch');
     return result;
   }
 
@@ -770,8 +772,9 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
     markAmmoTaught, ensureCollXp, applyStoredCardRenames, recordNestBoss,
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
-    issue, CORRUPT_KEY, BASE_VERSION,
-    _readForCommit, _writeCommitted, _refreshExternal, _readDepartureBaseline, _flushCheckpointForCommit,
+    issue, CORRUPT_KEY, PRESERVED_KEY, BASE_VERSION,
+    _readForCommit, _writeCommitted, _refreshExternal, _readDepartureBaseline, _flushCheckpointForCommit, _wipeLocked,
+    get _selectionGeneration() { return selectionGeneration; },
     get slot() { return slot; },
     get data() { return data; },
     bagCap, safeCap, stashCap, stashUsed, stashRoom,

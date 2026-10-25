@@ -1,3 +1,4 @@
+import { runPendingFields } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import { beforeAll, beforeEach, afterEach, expect, it, vi } from 'vitest';
 
@@ -27,9 +28,7 @@ beforeAll(async () => {
 beforeEach(() => {
   vi.clearAllMocks();
   Object.assign(game, { runActive: true, state: 'idle', myClass: '法师', inventory: [],
-    usedPocket: [], cardOrder: [], pendingExtraction: null, extractionPending: null,
-    terminalPending: null, battleActive: false, nestActive: false, hp: 20, maxHp: 30,
-    elapsed: 0, elapsedSynced: 0 });
+    ...runPendingFields() });
 });
 afterEach(() => UI.hideOverlay({ immediate: true }));
 
@@ -217,7 +216,7 @@ it('真实箱奖励直接开完整背包，Esc返回无损；存安全格后原g
   expect(session.usedSlots()).toBe(15);
   UI._acts.closeBag();
   const claim = UI._acts.chestTake1;
-  claim({i:0});
+  await claim({i:0});
   expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
   expect(game.ownedCards.find(o=>o.uid==='full-0').safe).toBe(true);
   expect(UI._acts.chestTake1).toBeUndefined();

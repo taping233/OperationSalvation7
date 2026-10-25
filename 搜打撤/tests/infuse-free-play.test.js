@@ -1,3 +1,4 @@
+import { playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -24,6 +25,7 @@ async function drain() {
   for (let i = 0; i < 400; i++) {
     await new Promise(resolve => setTimeout(resolve, 5));
     const state = BattleSession.getSnapshot();
+    if (state.discovering) return state; // Discovery preview waits for real confirmation before paying.
     if (!state.busy && state.actionQueueLength === 0) {
       await new Promise(resolve => setTimeout(resolve, 30));
       const fresh = BattleSession.getSnapshot();
@@ -35,6 +37,10 @@ async function drain() {
 
 afterEach(async () => {
   vi.restoreAllMocks();
+  if (BattleSession.getSnapshot().discovering) {
+    BattleSession.commands.cancelDiscover();
+    await drain();
+  }
   BattleSession.commands.flee();
   await drain();
 });
@@ -51,8 +57,7 @@ describe('灵能召唤获得的免注能牌：真实出牌结算', () => {
     const filler = { id: 'infuse-free-filler', type: '法术', cost: 0, name: '保留材料', desc: '回复1点生命', heal: 1 };
     const game = {
       ownedCards: [{ uid: 'source', card: source }, { uid: 'filler', card: filler }],
-      hp: 30, maxHp: 50, atk: 0, spellPower: 0, coins: 0,
-      myClass: '降临者', characterId: null, state: 'idle', battleActive: false,
+      ...playerFields(30, 50, 0, 0, '降临者', null),
       log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
       addItem() {}, onBattleEnd() {},
     };

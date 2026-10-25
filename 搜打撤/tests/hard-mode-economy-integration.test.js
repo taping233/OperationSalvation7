@@ -81,7 +81,7 @@ describe('hard reduction leaves actual economy award paths unchanged', () => {
     expect(foes.map(enemy => enemy.name)).toEqual(source.map(enemy => enemy.name));
     const node = { layerIdx:0, trackPos:1, isBoss, encounterId:isBoss ? 'hard-boss' : 'hard-group' };
     RunStorage.readForLoad(1);
-    expect(RunStorage.write(1, { mode, turn:1, layerIdx:0, trackPos:1, visited:{},
+    expect(await RunStorage.write(1, { mode, turn:1, layerIdx:0, trackPos:1, visited:{},
       ownedCards:[], elapsed:0, rngState:{ enemy:1 } })).toBe(true);
     const recovery = createRecoveryCommands({ storage:localStorage, lockManager:navigator.locks,
       baseApi:Base, runStore:RunStorage });

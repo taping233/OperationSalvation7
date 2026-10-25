@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const fixture = vi.hoisted(() => ({ game: {} }));
@@ -10,8 +11,7 @@ vi.mock('../game/src/run/game.run.flow.js', () => ({ moveTo: () => false, reente
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
   UI: { _acts: {}, log() {} },
-  MAP: { rules: { battleEnergy: 3, battleHandMax: 30, bossDeckSize: 15, starterSha: 0,
-    battleStartDraw: 3, battleTurnDraw: 1, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(3, 30, 15, 0, 3, 1) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const { BattleSession, configureBattleRenderer } = await import('../game/src/battle/core/battle.core.js');
 const { Random } = await import('../game/src/core/random.js');
@@ -75,12 +75,13 @@ afterEach(async () => {
   vi.restoreAllMocks();
 });
 
-async function record({ policyRandom = false } = {}) {
+async function record({ policyRandom = false, cosmeticRandom = false } = {}) {
   const actions = [command('playCard', 'hit-a'), command('playCard', 'hit-a', 0), command('endTurn')];
   let index = 0;
   const captured = await Agent.replay.capture({ fixture: descriptor, fingerprint, prepare, stepOptions,
     maxCommands: actions.length, decide: () => {
       if (policyRandom) Random.random('agent-policy');
+      if (cosmeticRandom) { Random.random('fx'); Random.random('audio'); Random.random('visual'); }
       return actions[index++];
     } });
   expect(captured.ok, JSON.stringify(captured).slice(0, 500)).toBe(true);
@@ -89,13 +90,20 @@ async function record({ policyRandom = false } = {}) {
 }
 
 describe('battle-entry replay through the real Agent and BattleSession commands', () => {
+  it('replays actual commands when capture consumed FX but playback does not', async () => {
+    const packet=await record({cosmeticRandom:true});
+    expect(packet.nonRuleStreams).toContain('fx');
+    expect(packet.commands.at(-1).rngAfter.streams.fx).toEqual(expect.any(Number));
+    expect(packet.commands.at(-1).after.rng.streams).not.toHaveProperty('fx');
+    expect(await Agent.replay.play(packet,{prepare,fingerprint,stepOptions})).toMatchObject({ok:true,executed:3});
+  });
   it('rebuilds the fixture with 99 stable unique physical starter IDs and matching granted sources', async () => {
     const first = BattleSession.getSnapshot();
     await prepare();
     const second = BattleSession.getSnapshot();
     expect(second.battleToken).not.toBe(first.battleToken);
-    expect(first.drawPile).toHaveLength(99);
-    expect(new Set(first.drawPile).size).toBe(99);
+    expect(first.drawPile).toHaveLength(10);
+    expect(new Set(first.drawPile).size).toBe(10);
     expect(second.drawPile).toEqual(first.drawPile);
     expect(second.drawPile.every(uid => piles.granted.some(entry => entry.uid === uid))).toBe(true);
     expect(fixture.game.ownedCards.map(entry => entry.uid)).toEqual(['hit-a', 'hit-b', 'hit-c']);

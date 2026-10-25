@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { createBattleRuntime } from '../game/src/battle/runtime/battle.runtime.factory.js';
 import { describe, expect, it } from 'vitest';
 import { parsePoolNoun, makeHitFoe } from '../game/src/battle/effects/effect-steps.ctx.js';
@@ -9,8 +10,7 @@ import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import * as Combat from '../game/src/battle/core/combat.js';
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 20, battleHandMax: 99, bossDeckSize: 8, starterSha: 0,
-    battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } } };
+  MAP: { rules: { ...battleRules(20, 99, 8, 0, 5, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } } };
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();

@@ -11,9 +11,9 @@ describe('inkjs event narrative bridge', () => {
 
   it('loads a branching event and advances the selected branch', async () => {
     const narrative = await eventNarrative('tt6-goldmine');
-    expect(narrative.intro).toContain('矿井');
-    expect(narrative.choices.map(choice => choice.label)).toEqual(['收下 3 币', '冒险挖深']);
-    expect(narrative.choices[1].choose()).toContain('富矿');
+    expect(narrative.intro).toContain('地下库');
+    expect(narrative.choices.map(choice => choice.label)).toEqual(['取走外侧硬币', '深入坍塌处']);
+    expect(narrative.choices[1].choose()).toContain('六枚硬币');
   });
 
   it('keeps unsupported legacy events on the existing fallback path', async () => {
@@ -21,7 +21,7 @@ describe('inkjs event narrative bridge', () => {
   });
 
   it('covers every tt6 event with an ink knot whose choices all carry effects', async () => {
-    // EVENT_SCENE_META 还挂着实机自定义事件卡（如修鞋铺），它们的叙事走卡面 desc，不属 ink 潜文本
+    // EVENT_SCENE_META 还包含「战地整备」等自定义事件，叙事走卡面 desc，不属 ink 潜文本。
     const ids = Object.keys(EVENT_SCENE_META).filter(id => id.startsWith('tt6-'));
     expect(ids).toHaveLength(10);
     for (const id of ids) {

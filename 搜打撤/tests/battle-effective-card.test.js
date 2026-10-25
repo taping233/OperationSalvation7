@@ -60,7 +60,7 @@ describe('approved effective-card contract', () => {
     expect(inspection.infusionFuelReason(owned.uid)).toContain('不存在的转换目标');
     expect(JSON.stringify(owned)).toBe(before);
     state.shaTransform = null;
-    expect(inspection.findEffectiveCard(owned.uid).card).toBe(owned.card);
+    expect(inspection.findEffectiveCard(owned.uid).card).toMatchObject(owned.card);
     expect(inspection.infusionFuelReason(owned.uid)).toBe('');
   });
 });
@@ -73,7 +73,7 @@ it('captured effective faces retain live UID provenance through normalization wi
   state.shaTransform = '青龙偃月斩';
   expect(inspection.findEffectiveCard(owned.uid, normalized).card.name).toBe('青龙偃月斩');
   state.shaTransform = null;
-  expect(inspection.findEffectiveCard(owned.uid, captured).card).toBe(owned.card);
+  expect(inspection.findEffectiveCard(owned.uid, captured).card).toMatchObject(owned.card);
   state.shaTransform = '不朽斩';
   state.cardOverrides.set(owned.uid, { ...dragon(), cost: 0 });
   expect(inspection.findEffectiveCard(owned.uid, captured).card).toMatchObject({ name: '青龙偃月斩', cost: 0 });
@@ -81,7 +81,7 @@ it('captured effective faces retain live UID provenance through normalization wi
   const custom = { ...starter(), cost: 7, rules: { custom: true } };
   const customFace = inspection.findEffectiveCard(owned.uid, custom).card;
   state.shaTransform = null;
-  expect(inspection.findEffectiveCard(owned.uid, customFace).card).toBe(custom);
+  expect(inspection.findEffectiveCard(owned.uid, customFace).card).toMatchObject(custom);
   state.shaTransform = '不存在的转换目标';
   expect(inspection.findEffectiveCard(owned.uid, normalized).card._battleTransformMissing).toBe('不存在的转换目标');
 });
@@ -90,8 +90,8 @@ it('a confirmed live raw capture follows a later override while an explicit raw-
   const { state, inspection, owned } = setup();
   const captured = inspection.findEffectiveCard(owned.uid).card;
   const custom = { ...starter(), cost: 7, rules: { custom: true } };
-  expect(inspection.findEffectiveCard(owned.uid, custom).card).toBe(custom);
+  expect(inspection.findEffectiveCard(owned.uid, custom).card).toMatchObject(custom);
   state.cardOverrides.set(owned.uid, { ...dragon(), cost: 0 });
   expect(inspection.findEffectiveCard(owned.uid, captured).card).toMatchObject({ name: '青龙偃月斩', cost: 0 });
-  expect(inspection.findEffectiveCard(owned.uid, custom).card).toBe(custom);
+  expect(inspection.findEffectiveCard(owned.uid, custom).card).toMatchObject(custom);
 });

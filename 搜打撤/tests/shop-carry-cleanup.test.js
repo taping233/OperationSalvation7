@@ -30,34 +30,34 @@ function fixture({ mystery = false, width = 100 } = {}) {
 }
 const flyingNodes = () => [...document.body.children].filter(node => node.style.position === 'fixed');
 
-it('removes a mystery reveal when the player leaves before its delayed flight', () => {
+it('removes a mystery reveal when the player leaves before its delayed flight', async () => {
   const { acts, game, animations, saveGame } = fixture({ mystery: true });
-  acts.buyCard({ i: 0 });
+  await acts.buyCard({ i: 0 });
   expect(flyingNodes()).toHaveLength(1);
-  acts.closeShop();
+  await acts.closeShop();
   animations[0].onfinish();
   vi.advanceTimersByTime(3000);
   expect(flyingNodes()).toHaveLength(0);
   expect(game.coins).toBe(7); expect(game.ownedCards).toHaveLength(1); expect(saveGame).toHaveBeenCalledOnce();
 });
 
-it('removes the mystery clone when animation finish never arrives', () => {
+it('removes the mystery clone when animation finish never arrives', async () => {
   const { acts, animations } = fixture({ mystery: true });
-  acts.buyCard({ i: 0 }); vi.advanceTimersByTime(3000);
+  await acts.buyCard({ i: 0 }); vi.advanceTimersByTime(3000);
   expect(flyingNodes()).toHaveLength(0);
   animations[0].onfinish();
   expect(flyingNodes()).toHaveLength(0);
 });
 
-it('does not leak a normal flying clone for a zero-width source', () => {
+it('does not leak a normal flying clone for a zero-width source', async () => {
   const { acts } = fixture({ width: 0 });
-  acts.buyCard({ i: 0 }); vi.advanceTimersByTime(3000);
+  await acts.buyCard({ i: 0 }); vi.advanceTimersByTime(3000);
   expect(flyingNodes()).toHaveLength(0);
 });
 
-it('keeps a normal mystery reveal and carry while cleaning every temporary node', () => {
+it('keeps a normal mystery reveal and carry while cleaning every temporary node', async () => {
   const { acts, animations, game, saveGame } = fixture({ mystery: true });
-  acts.buyCard({ i: 0 }); animations[0].onfinish();
+  await acts.buyCard({ i: 0 }); animations[0].onfinish();
   expect(flyingNodes()).toHaveLength(1);
   vi.advanceTimersByTime(720);
   animations[2].onfinish();
@@ -66,10 +66,10 @@ it('keeps a normal mystery reveal and carry while cleaning every temporary node'
   expect(game.coins).toBe(7); expect(game.ownedCards).toHaveLength(1); expect(saveGame).toHaveBeenCalledOnce();
 });
 
-it('cleans the clone when animation creation throws without changing the purchase', () => {
+it('cleans the clone when animation creation throws without changing the purchase', async () => {
   const { acts, game } = fixture();
   Element.prototype.animate.mockImplementation(() => { throw new Error('animation fixture'); });
-  acts.buyCard({ i: 0 });
+  await acts.buyCard({ i: 0 });
   expect(flyingNodes()).toHaveLength(0);
   expect(game.coins).toBe(7); expect(game.ownedCards).toHaveLength(1);
 });

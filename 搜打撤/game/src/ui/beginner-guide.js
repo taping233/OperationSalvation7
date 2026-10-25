@@ -1,7 +1,9 @@
 import guideData from '../../data/beginner-guide.json';
 import { beginnerGuideDiagram, bossPreparationHTML } from './beginner-guide-diagrams.js';
-import { linkedBackHTML, linkedAnimate } from './home-linked-interactions.js';
-import { motionTiming, motionEasing, motionReduced, changeFrames } from './motion-presets.js';
+import { linkedBackHTML } from './home-linked-interactions.js';
+import { transitionRegion, cancelRegionTransition } from './region-transition.js';
+import { waitPageVisual } from './page-visual-ready.js';
+import { syncViewChildren } from './view-children-sync.js';
 
 const pages = Array.isArray(guideData?.pages) ? guideData.pages : [];
 
@@ -27,7 +29,7 @@ export function beginnerGuideHTML(requestedIndex = 0) {
     <button class="bg-nav-item${itemIndex === index ? ' is-current' : ''}" type="button"
       data-act="guidePage" data-page-index="${itemIndex}" aria-current="${itemIndex === index ? 'step' : 'false'}">
       <span class="bg-nav-number">${String(itemIndex + 1).padStart(2, '0')}</span>
-      <span class="bg-nav-title">${escapeHTML(item.navTitle || item.title)}</span>
+      <span class="bg-nav-title ui-control-label">${escapeHTML(item.navTitle || item.title)}</span>
       <span class="bg-nav-mark" aria-hidden="true"></span>
     </button>`).join('');
   const steps = (Array.isArray(page.steps) ? page.steps : []).map((step, stepIndex) => `
@@ -52,7 +54,7 @@ export function beginnerGuideHTML(requestedIndex = 0) {
         </div>
         <div class="bg-content">
           <figure class="bg-illustration">
-            ${beginnerGuideDiagram(page.id) || `<img src="${escapeHTML(page.image)}" alt="${escapeHTML(page.caption)}" draggable="false">`}
+            ${beginnerGuideDiagram(page.id) || `<img data-visual-critical src="${escapeHTML(page.image)}" alt="${escapeHTML(page.caption)}" draggable="false">`}
             <figcaption><span class="bg-caption-mark" aria-hidden="true">✦</span>${escapeHTML(page.caption)}</figcaption>
           </figure>
           <div class="bg-copy">
@@ -65,30 +67,50 @@ export function beginnerGuideHTML(requestedIndex = 0) {
       </article>
     </div>
     <footer class="bg-pager">
-      <button class="bg-page-button" data-act="guidePrev" type="button"${index === 0 ? ' disabled' : ''} aria-label="上一页">← <span>上一页</span></button>
+      <button class="bg-page-button" data-act="guidePrev" type="button"${index === 0 ? ' disabled' : ''} aria-label="上一页">← <span class="ui-control-label">上一页</span></button>
       <div class="bg-page-status"><span>${String(index + 1).padStart(2, '0')}</span><i></i><span>${String(pages.length).padStart(2, '0')}</span><small>章节</small></div>
-      <button class="bg-page-button is-next" data-act="guideNext" type="button"${index === pages.length - 1 ? ' disabled' : ''} aria-label="下一页"><span>下一页</span> →</button>
+      <button class="bg-page-button is-next" data-act="guideNext" type="button"${index === pages.length - 1 ? ' disabled' : ''} aria-label="下一页"><span class="ui-control-label">下一页</span> →</button>
     </footer>
   </main>`;
 }
 
-/* 翻页只替换正文和分页器；页头、章节导航及其焦点/滚动位置保留。 */
-export function updateBeginnerGuide(root, requestedIndex) {
+const readingPositions = new WeakMap();
+/* Keep the article host, navigation and per-chapter reading position through paired changes. */
+export async function updateBeginnerGuide(root, requestedIndex) {
   const index = pageIndex(requestedIndex);
-  if (!root || root.dataset.guidePage === String(index)) return;
+  if (!root) return false;
+  const page = /** @type {HTMLElement} */ (root.querySelector('.bg-page'));
+  if (!page) return false;
+  if (root.dataset.guidePage === String(index)) { cancelRegionTransition(page); return true; }
   const direction = index - Number(root.dataset.guidePage || 0);
   const template = document.createElement('template');
   template.innerHTML = beginnerGuideHTML(index);
   const next = /** @type {HTMLElement} */ (template.content.querySelector('.beginner-guide'));
-  if (!/** @type {HTMLElement} */ (next?.querySelector('.bg-page'))) return;
-  for (const selector of ['.bg-page', '.bg-pager']) {
-    root.querySelector(selector)?.replaceWith(next.querySelector(selector));
-  }
-  root.dataset.guidePage = String(index);
-  if (!motionReduced()) linkedAnimate(/** @type {HTMLElement} */ (root.querySelector('.bg-page')), changeFrames(direction), { duration: motionTiming.change, easing: motionEasing.enter });
-  /** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-act="guidePage"]')).forEach(button => {
-    const current = button.dataset.pageIndex === String(index);
-    button.classList.toggle('is-current', current);
-    button.setAttribute('aria-current', current ? 'step' : 'false');
+  const nextPage = /** @type {HTMLElement} */ (next?.querySelector('.bg-page'));
+  if (!nextPage) return false;
+  let positions = readingPositions.get(root);
+  if (!positions) { positions = new Map(); readingPositions.set(root, positions); }
+  positions.set(root.dataset.guidePage, { page:page.scrollTop,
+    copy:page.querySelector('.bg-copy')?.scrollTop || 0 });
+  return transitionRegion(page, () => {
+    page.replaceChildren(...nextPage.childNodes);
+    page.setAttribute('aria-label', nextPage.getAttribute('aria-label') || '指南正文');
+    const pager = root.querySelector('.bg-pager'), nextPager = next.querySelector('.bg-pager');
+    if (pager && nextPager) syncViewChildren(pager, nextPager);
+    const saved = positions.get(String(index));
+    page.scrollTop = saved?.page || 0;
+    const copy = page.querySelector('.bg-copy');
+    if (copy) copy.scrollTop = saved?.copy || 0;
+    root.dataset.guidePage = String(index);
+    /** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-act="guidePage"]')).forEach(button => {
+      const current = button.dataset.pageIndex === String(index);
+      button.classList.toggle('is-current', current);
+      button.setAttribute('aria-current', current ? 'step' : 'false');
+    });
+  }, {
+    direction,
+    enterGroups:['.bg-page-heading', '.bg-illustration', '.bg-copy'],
+    isCurrent: () => root.isConnected,
+    prepare: signal => waitPageVisual(page, { signal, timeout:600 }),
   });
 }

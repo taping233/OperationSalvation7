@@ -1,10 +1,12 @@
+import { battleRules } from './helpers/environment-fixtures.js';
+import { makeRuntimeBattleGame as makeGame } from './helpers/battle-fixtures.js';
 import { showBattleCardResults } from '../game/src/battle/view/battle.card-results.js';
 // Canonical hosted card through the real battle session; no browser state is used.
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '', TYPE_ART: {} } };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 99, battleHandMax: 20, bossDeckSize: 15, starterSha: 0, battleStartDraw: 20, battleTurnDraw: 0, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(99, 20, 15, 0, 20, 0) }, items: {} };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
@@ -14,15 +16,12 @@ const R = await import('../game/src/battle/runtime/battle.runtime.js');
 beforeEach(() => { vi.useFakeTimers(); R.set$lastDeckSel([]); window.SDT.MAP.rules.battleStartDraw = 20; });
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
 const canonical = id => { const card = C.all().find(c => c.id === id); expect(card, id).toBeTruthy(); return card; };
-function makeGame(cards) {
-  return { ownedCards: cards.map((card, i) => ({ uid: `runtime-${i}`, card: { ...card }, safe: false })),
-    hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0, myClass: '战士', characterId: null,
-    state: 'idle', battleActive: false, logs: [],
-    log(message) { this.logs.push(message); }, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
-    addItem() {}, onBattleEnd() {}, };
-}
-async function settle() { await vi.advanceTimersByTimeAsync(1000); expect(R.busy).toBe(false); }
 
+async function settle() {
+  await vi.advanceTimersByTimeAsync(1000);
+  if (R.discovering) return; // Unpaid discovery previews deliberately wait inside the source action.
+  expect(R.busy).toBe(false);
+}
 
 
 it('存囊法术不进入普通初手，不能绕过锦囊直接释放，锦囊仍可正常施放', async () => {

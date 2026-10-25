@@ -1,5 +1,9 @@
+import { createMenuLeaveFlow } from '../game/src/ui/menu-leave.js';
+import { confirmAction } from '../game/src/ui/confirm-dialog.js';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { linkedBackHTML } from '../game/src/ui/home-linked-interactions.js';
+import { setRunTopBarBattleOptions } from '../game/src/ui/run-top-bar.js';
+import { mountCombatOverlay, restoreCombatScene } from '../game/src/battle/view/battle.secondary-overlay.js';
 
 window.SDT = {
   Icons: { rich: value => value },
@@ -33,6 +37,71 @@ describe('overlay dialog accessibility contract', () => {
     UI._overlayReturnFocus = null;
     UI._overlayInerted = [];
     UI.init();
+  });
+
+  it('mounts the shared run bar inside the live modal before isolation, and re-isolates it for leave/confirmation', async () => {
+    const bar=document.getElementById('runTopBar');
+    expect(bar.parentNode).toBe(document.getElementById('viewport'));
+    UI.showOverlay('战斗','<section class="battle-stage"><button id="battleAction">出牌</button></section>','battle');
+    expect(bar.parentNode).toBe(UI.el.overlay); expect(bar.hasAttribute('inert')).toBe(false);
+    expect(document.getElementById('backgroundAction').hasAttribute('inert')).toBe(true);
+    // Repeat the real hidden→mounted→isolate order without refreshing the HUD.
+    UI._isolateOverlayBackground(); expect(bar.hasAttribute('inert')).toBe(false);
+    UI.showOverlay('系统菜单','<section class="leave-run-panel"><button>继续游玩</button></section>','glass');
+    expect(bar.hasAttribute('inert')).toBe(true);
+    UI.showOverlay('战斗','<section class="battle-stage"><button>出牌</button></section>','battle');
+    expect(bar.hasAttribute('inert')).toBe(false);
+    const confirmation=confirmAction({title:'确认',message:'测试当前上层',confirmLabel:'确认'});
+    expect(document.getElementById('viewport').inert).toBe(true);
+    document.querySelector('[data-confirm-cancel]').click(); expect(await confirmation).toBe(false);
+    expect(document.getElementById('viewport').inert).toBe(false); expect(bar.hasAttribute('inert')).toBe(false);
+    expect(document.getElementById('backgroundAction').hasAttribute('inert')).toBe(true);
+    UI.hideOverlay({immediate:true});
+    expect(bar.hasAttribute('inert')).toBe(false); expect(document.getElementById('backgroundAction').hasAttribute('inert')).toBe(false);
+  });
+
+  it('commits battle option visibility after the pre-commit mode broadcast and restores it with the retained scene', () => {
+    UI.showOverlay('战斗', '<section class="battle-stage sts"><div class="sts-topbar"><details class="sts-options"><summary>选项</summary><button>战斗规则</button></details></div></section>', 'battle');
+    const scene = UI.el.ovBody.querySelector('.battle-stage'); scene._battleToken = 42;
+    const action=vi.fn(); UI.act('btSettings',action); setRunTopBarBattleOptions(UI, scene);
+    const button = document.getElementById('btnBattleOptions'); button.click();
+    expect(button.hidden).toBe(false); expect(action).toHaveBeenCalledOnce();
+    const observations=[];
+    const beforeCommit=event=>{ if(event.detail==='settings') observations.push(UI._lastMode); };
+    document.addEventListener('sdt-overlay-mode',beforeCommit);
+    try {
+      expect(mountCombatOverlay(UI,'战斗规则','<button>返回战斗</button>','settings',scene)).toBe(true);
+      expect(observations).toEqual(['battle']); expect(UI._lastMode).toBe('settings');
+      expect(button.hidden).toBe(false); button.click(); expect(action).toHaveBeenCalledOnce();
+      expect(restoreCombatScene(UI,42)).toBe(true);
+      expect(button.hidden).toBe(false);
+      UI.act('btSettings',action); button.click(); expect(action).toHaveBeenCalledTimes(2);
+    } finally { document.removeEventListener('sdt-overlay-mode',beforeCommit); UI.hideOverlay({immediate:true}); }
+  });
+
+  it('returns a temporary battle from the real system-menu flow without hiding its modal', () => {
+    const game={state:'modal',battleActive:true,runActive:true,seed:7,discoveredPairs:new Set(),ownedCards:[]};
+    const battleHTML='<section class="battle-stage"><button>出牌</button></section>';
+    UI.showOverlay('战斗',battleHTML,'battle');
+    const refreshView=vi.fn(()=>UI.showOverlay('战斗',battleHTML,'battle'));
+    const flow=createMenuLeaveFlow({UI,game,document,getActiveSlot:()=>null,esc:String,readBattle:()=>({commands:{refreshView}})});
+    flow.openLeaveMenu(); expect(document.querySelector('.battle-stage')).toBeNull();
+    expect(UI._acts.leaveCancel()).toBe(true);
+    expect(refreshView).toHaveBeenCalledOnce(); expect(game.state).toBe('modal'); expect(UI.el.overlay.hidden).toBe(false);
+    expect(document.querySelector('.battle-stage')).not.toBeNull();
+    const bar=document.getElementById('runTopBar'); expect(bar.parentNode).toBe(UI.el.overlay); expect(bar.hasAttribute('inert')).toBe(false);
+    UI.hideOverlay({immediate:true});
+  });
+
+  it('returns a shared bar re-mounted during the close animation to the viewport at final hide', () => {
+    UI.showOverlay('系统菜单','<section class="leave-run-panel"><button>继续游玩</button></section>','glass');
+    UI.hideOverlay();
+    const bar=document.getElementById('runTopBar');
+    // This is the real HUD refresh race: closing has begun but hidden is still false.
+    UI.el.overlay.prepend(bar);
+    UI.hideOverlay({immediate:true});
+    expect(UI.el.overlay.hidden).toBe(true); expect(bar.parentNode).toBe(document.getElementById('viewport'));
+    expect(bar.hasAttribute('inert')).toBe(false); expect(bar.dataset.surface).toBe('map');
   });
 
   it('axe validates actual dialog markup after repeated close and reopening', async () => {

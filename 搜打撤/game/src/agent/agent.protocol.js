@@ -55,21 +55,23 @@ function normalizeAction(input) {
   const { type } = input;
   switch (type) {
     case 'ui': {
-      const name = String(input.name || '');
+      const name = typeof input.name === 'string' ? input.name : '';
       if (!UI_NAME_RE.test(name)) return { ok: false, code: 'UI_NAME_INVALID', message: `非法 UI 动作名：${name}` };
       const params = input.params == null ? {} : input.params;
       if (!isParamsObject(params)) return { ok: false, code: 'UI_PARAMS_INVALID', message: 'params 只允许标量键值' };
       return { ok: true, action: { type: 'ui', name, params: { ...params } } };
     }
     case 'move': {
-      const li = Number(input.li), idx = Number(input.idx);
+      const coordinate = value => typeof value === 'number' ? value
+        : typeof value === 'string' && value.trim() !== '' ? Number(value) : NaN;
+      const li = coordinate(input.li), idx = coordinate(input.idx);
       if (!Number.isInteger(li) || !Number.isInteger(idx) || li < 0 || idx < 0) {
         return { ok: false, code: 'MOVE_INVALID', message: 'move 需要非负整数 li/idx' };
       }
       return { ok: true, action: { type: 'move', li, idx } };
     }
     case 'battle': {
-      const name = String(input.name || '');
+      const name = typeof input.name === 'string' ? input.name : '';
       if (!BATTLE_COMMANDS.has(name)) return { ok: false, code: 'BATTLE_COMMAND_UNKNOWN', message: `不在白名单的战斗命令：${name}` };
       const args = input.args == null ? [] : input.args;
       if (!Array.isArray(args) || args.length > 4 || args.some(v => v != null && !['string', 'number', 'boolean'].includes(typeof v))) {
@@ -78,7 +80,7 @@ function normalizeAction(input) {
       return { ok: true, action: { type: 'battle', name, args: [...args] } };
     }
     case 'sys': {
-      const name = String(input.name || '');
+      const name = typeof input.name === 'string' ? input.name : '';
       if (!SYS_COMMANDS.has(name)) return { ok: false, code: 'SYS_COMMAND_UNKNOWN', message: `未知链路命令：${name}` };
       const args = input.args == null ? [] : input.args;
       if (!Array.isArray(args) || args.length > 4 || args.some(v => v != null && !['string', 'number', 'boolean'].includes(typeof v))) {
@@ -87,7 +89,7 @@ function normalizeAction(input) {
       return { ok: true, action: { type: 'sys', name, args: [...args] } };
     }
     default:
-      return { ok: false, code: 'ACTION_TYPE_UNKNOWN', message: `未知动作类型：${String(type)}` };
+      return { ok: false, code: 'ACTION_TYPE_UNKNOWN', message: `未知动作类型：${typeof type === 'string' ? type : typeof type}` };
   }
 }
 

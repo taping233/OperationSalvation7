@@ -123,6 +123,16 @@ describe('independent archive room', () => {
     expect(JSON.stringify(base.data)).toBe(snapshot);
   });
 
+  it('distinguishes card and card-back prizes without replacing the equipped back art', () => {
+    const { meta, render } = setup(); meta.ACHIEVEMENTS[1].reward.card = 'wu-a';
+    const root = render();
+    root.querySelector('[data-act="archiveV3Medal"][data-id="kill10"]').click();
+    const prizes = root.querySelector('.av3-medal-detail .av3-detail-rewards').textContent;
+    expect(prizes).toContain('[[icon:cards]] 映雪·回身长剑');
+    expect(prizes).toContain('[[icon:card-back]] 卡背 · 狼纹');
+    expect(render('backs').querySelector('.av3-back-display .hb-classic')).not.toBeNull();
+  });
+
   it('maps the legacy classes route to global milestone records without duplicating the personnel entry or move library', () => {
     const { base, render } = setup(), snapshot = JSON.stringify(base.data);
     const root = render('classes');

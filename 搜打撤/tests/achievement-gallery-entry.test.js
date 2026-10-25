@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import data from '../game/data/achievements.json';
 import { achievementGalleryHTML, bindAchievementGallery } from '../game/src/ui/achievement-gallery.js';
 
-function openGallery(achievements = data.achievements) {
+function openGallery(achievements = data.achievements, { deferEntry = false, cover = '' } = {}) {
   document.body.className = 'reduce-motion';
   document.body.innerHTML = achievementGalleryHTML({
     achievements, base: { achClaimed: { firstExtract: true } }, slot: 1,
@@ -11,15 +11,51 @@ function openGallery(achievements = data.achievements) {
     backs: [{ id: 'wolf', name: '猎手皮纸' }], cards: [], random: () => 0,
   });
   const root = document.querySelector('.achievement-gallery');
-  const control = bindAchievementGallery(root);
+  if (deferEntry) {
+    const overlay=document.createElement('div'); overlay.id='overlay';
+    root.replaceWith(overlay); overlay.append(root);
+    if (cover) {
+      const curtain=document.createElement('div'); curtain.className=cover === 'cold' ? 'page-loading' : 'camp-entry-cut';
+      (cover === 'cold' ? document.body : overlay).append(curtain);
+    }
+  }
+  const control = bindAchievementGallery(root, {deferEntry});
   return { root, control, content: root.querySelector('.ag-detail-content') };
 }
 
 describe('achievement gallery entry work', () => {
-  it('creates only tiles and watermark on entry, with no unopened detail trees', () => {
+  it.each(['cold','warm'])('waits for the %s curtain to end and plays entry only once', async cover => {
+    const previous=HTMLElement.prototype.animate;
+    const animate=vi.fn(() => ({cancel:vi.fn(),finished:new Promise(() => {})}));
+    HTMLElement.prototype.animate=animate;
+    try {
+      const {root}=openGallery(data.achievements,{deferEntry:true,cover});
+      document.body.className='';
+      await Promise.resolve();
+      expect(root.dataset.galleryEntry).toBe('waiting'); expect(animate).not.toHaveBeenCalled();
+      document.querySelector(cover === 'cold' ? '.page-loading' : '.camp-entry-cut').remove();
+      await Promise.resolve();
+      expect(root.hasAttribute('data-gallery-entry')).toBe(false); expect(animate).toHaveBeenCalled();
+      const count=animate.mock.calls.length;
+      root.classList.add('after-entry'); await Promise.resolve();
+      expect(animate).toHaveBeenCalledTimes(count);
+    } finally {HTMLElement.prototype.animate=previous;}
+  });
+  it('leaving during curtain readiness never replays entry on the hidden page', async () => {
+    const previous=HTMLElement.prototype.animate;
+    const animate=vi.fn(); HTMLElement.prototype.animate=animate;
+    try {
+      openGallery(data.achievements,{deferEntry:true,cover:'cold'}); document.body.className='';
+      await Promise.resolve();
+      document.getElementById('overlay').hidden=true;
+      document.querySelector('.page-loading').remove(); await Promise.resolve();
+      expect(animate).not.toHaveBeenCalled();
+    } finally {HTMLElement.prototype.animate=previous;}
+  });
+  it('creates only the catalogue medals on entry, with no duplicate summary artwork or unopened detail trees', () => {
     const { root, content } = openGallery();
     expect(root.querySelectorAll('[data-gallery-item]')).toHaveLength(26);
-    expect(root.querySelectorAll('svg.ag-badge')).toHaveLength(27);
+    expect(root.querySelectorAll('svg.ag-badge')).toHaveLength(26);
     expect(root.querySelectorAll('template')).toHaveLength(0);
     expect(content.childElementCount).toBe(0);
     root.querySelector('[data-gallery-filter="locked"]').click();
@@ -45,7 +81,7 @@ describe('achievement gallery entry work', () => {
     control.closeDetail();
     root.querySelector('[data-medal-id="allBoss"]').click();
     expect(content.textContent).toContain('完成以上条件后');
-    expect(root.querySelectorAll('svg.ag-badge')).toHaveLength(28);
+    expect(root.querySelectorAll('svg.ag-badge')).toHaveLength(27);
     writes.mockRestore();
   });
 

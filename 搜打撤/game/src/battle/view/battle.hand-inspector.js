@@ -1,6 +1,6 @@
 /** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { displayCardDescription } from '../../cards/card-description-text.js';
-import { descRich } from '../../cards/cards.view.js';
+import { richResolvedDescription } from '../../cards/cards.view.js';
 import { effCostOf, findEffectiveCard as findCard, infusionFuelReason, getSnapshot, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
 
 let active = null;
@@ -58,8 +58,12 @@ export function syncHandInspector(snapshot = getSnapshot()) {
   button.textContent = action.label || '暂时无法使用';
   /** @type {BattleElement} */ (active.panel.querySelector('.bt-hand-detail-action-note')).textContent = action.reason || action.detail;
   const entry = findCard(active.uid);
-  const cost = /** @type {BattleElement} */ (active.panel.querySelector('.hsc-cost'));
-  if (cost) cost.textContent = String(effCostOf(entry.card, active.uid));
+  const art = active.panel.querySelector('.bt-hand-detail-art');
+  const html = window.SDT.Cards.cardHTML(entry.card, 'lg', { costOverride: { v: effCostOf(entry.card, active.uid), base: entry.card._baseCost ?? entry.card._presentation?.baseCost ?? entry.card.cost } });
+  if (active.faceHTML !== html) { art.innerHTML = html; active.faceHTML = html; }
+  const rules = active.panel.querySelector('.bt-hand-detail-rules');
+  if (rules) rules.innerHTML = richResolvedDescription(displayCardDescription(entry.card.desc, entry.card.id, entry.card));
+  active.panel.setAttribute('aria-label', `${entry.card.name}：卡牌详情`);
   return true;
 }
 
@@ -76,7 +80,7 @@ export function openHandInspector(uid, onUse) {
   closeHandInspector({ restoreFocus: false });
   SDT.UI.hideTooltip?.();
   const card = entry.card;
-  const description = displayCardDescription(card.desc || '暂无规则描述', card.id);
+  const description = displayCardDescription(card.desc || '暂无规则描述', card.id, card);
   const panel = document.createElement('aside');
   panel.className = 'bt-hand-detail';
   panel.setAttribute('role', 'dialog');
@@ -88,7 +92,7 @@ export function openHandInspector(uid, onUse) {
     ${description.length > 70 ? '<details class="bt-hand-detail-copy" open><summary>完整规则</summary><p class="bt-hand-detail-rules card-rules-copy"></p></details>' : ''}</div>
     <footer><p class="bt-hand-detail-action-note" role="status"></p><button type="button" class="bt-hand-detail-use">使用这张牌</button></footer></div>`;
   const fullRules = /** @type {BattleElement} */ (panel.querySelector('.bt-hand-detail-rules'));
-  if (fullRules) fullRules.innerHTML = descRich(description, card.id);
+  if (fullRules) fullRules.innerHTML = richResolvedDescription(description);
   active = { uid, token: snapshot.battleToken, stage, panel, wasInert: !!stage.inert, focus: document.activeElement };
   stage.inert = true;
   panel.addEventListener('pointerdown', event => event.stopPropagation());

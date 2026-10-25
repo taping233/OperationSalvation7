@@ -1,3 +1,4 @@
+import { isLegacyDropExcluded } from './card-compatibility.js';
 /* 由 cards.js 拆出（2026-09-22 六文件重构批2）：元数据/词条推导/经济掉落规则。
  * 逐字搬迁，属性顺序=原文件顺序；在壳 cards.js 中展开装配为 SDT.Cards，键面与数据字节不变。 */
 const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载顺序保证已存在）
@@ -176,7 +177,7 @@ export const rulesSlice = {
         c.rarity === rarity && SDT.Cards.DROP_TYPES.includes(c.type) &&
         (!typeFilter || c.type === typeFilter) &&
         SDT.Cards.isRandomObtainable(c) && !(hasTaken && taken.has(c.id)) &&
-        c.id !== 'tt-token-color');   // 员工通行证A是碎片合成材料：不进任何随机掉落/商店/发现池（2026-09-16 留言口径，源头收口）
+        !isLegacyDropExcluded(c));   // 员工通行证A是碎片合成材料：不进任何随机掉落/商店/发现池（2026-09-16 留言口径，源头收口）
       if (!pool.length) return null;
       let tw = 0;
       const weighted = pool.map(c => {
@@ -184,7 +185,7 @@ export const rulesSlice = {
           : c.type === '装备' ? (SDT.Cards.DROP_EQUIP_DISCOUNT || 0.8) : 1;
         tw += w; return [c, w];
       });
-      let roll = Random.random('loot') * tw;
+      let roll = Random.random('loot', 'reward') * tw;
       for (const [c, w] of weighted) { roll -= w; if (roll <= 0) return c; }
       return weighted[weighted.length - 1][0];
     },
@@ -198,7 +199,7 @@ export const rulesSlice = {
       const totalW = entries.reduce((a, b) => a + b[1], 0);
       for (let tries = 0; tries < 50; tries++) {
         // ① 稀有度先掷档（60:28:9:3，不受卡库各稀有度卡牌数量影响）
-        let roll = Random.random('loot') * totalW, rarity = entries[0][0];
+        let roll = Random.random('loot', 'reward') * totalW, rarity = entries[0][0];
         for (const [r, w] of entries) { roll -= w; if (roll <= 0) { rarity = r; break; } }
         // ② 档内按类型权重挑卡（道具 ×0.7）；该档无可用卡则重掷
         const c = SDT.Cards.pickOfRarity(rarity, taken, typeFilter);
@@ -271,7 +272,7 @@ export const rulesSlice = {
     randomClassCard(cls) {
       const base = cls ? this.classPool(cls) : SDT.Cards.all().filter(c => c.cls);
       const pool = base.filter(c => c.rarity === '职业' && !c.hero);
-      return pool.length ? pool[Math.floor(Random.random('card') * pool.length)] : null;
+      return pool.length ? pool[Math.floor(Random.random('card', 'reward') * pool.length)] : null;
     },
 
     // 内置初始牌「初始攻击」：每局开始固定携带 5 张（每格最多3张，共占2格背包）。

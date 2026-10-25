@@ -17,6 +17,7 @@ import { SCENE_CATALOG } from './agent.scenes.catalog.js';
 // 只在验收入口被调用时解析场景实现；清单和轮询接口在启动后立即同步可用。
 let runtimePromise = null;
 let running = false;
+let activeReportPromise = null;
 const reports = new Map();
 
 function loadRuntime() {
@@ -32,7 +33,7 @@ function loadRuntime() {
 }
 
 // 分体驱动：start（fire-and-forget，报告落 reports）→ status（轮询取结果）。
-// run 是两者的同步包装（Node 侧/页面内 await 直接拿报告）。
+// run 绑定本次执行的 Promise，避免同名重跑覆盖等待者的报告。
 function startScene(name, options = {}) {
   const verdict = { started: reports.has(name) && !reports.get(name) ? false : true, name };
   if (running) return { ok: false, ...verdict, code: 'SCENE_BUSY', message: '已有场景在跑' };
@@ -40,7 +41,7 @@ function startScene(name, options = {}) {
   // 装载期间即占用执行口，避免两次同步 start 都通过忙碌检查。
   running = true;
   reports.set(name, null);
-  loadRuntime()
+  activeReportPromise = loadRuntime()
     .then(runtime => runtime.executeScene(name, options))
     .catch(error => ({
       ok: false, pass: false, scene: name, title: SCENE_CATALOG[name].title,
@@ -50,6 +51,7 @@ function startScene(name, options = {}) {
     .then(report => {
       reports.set(name, report);
       running = false;
+      return report;
     });
   return { ok: true, ...verdict, message: '场景已在页面内后台启动，用 status 轮询' };
 }
@@ -63,11 +65,7 @@ function sceneStatus(name) {
 async function runScene(name, options = {}) {
   const boot = startScene(name, options);
   if (!boot.ok) return { ok: false, pass: false, ...boot };
-  for (;;) {
-    await new Promise(resolve => setTimeout(resolve, 400));
-    const status = sceneStatus(name);
-    if (status.done) return status.report;
-  }
+  return activeReportPromise;
 }
 
 function listScenes() {

@@ -46,6 +46,27 @@ function runFields(data, prefix = '', checkpoint = false) {
   }
   // 与地图恢复相同：仅严格 true 进入龙巢；字符串 "false" 仍走普通图。
   if (data.nestActive === true || checkpoint) {
+    if (data.nestKills != null && (!Number.isSafeInteger(data.nestKills) || data.nestKills < 0)) return bad(prefix + 'nestKills');
+    if (data.nestBossDown != null && typeof data.nestBossDown !== 'boolean') return bad(prefix + 'nestBossDown');
+    if (data.nestAltarChoice != null && (!record(data.nestAltarChoice) || data.nestAltarChoice.position !== 9
+      || !Number.isInteger(data.nestAltarChoice.remaining) || data.nestAltarChoice.remaining < 0 || data.nestAltarChoice.remaining > 2)) return bad(prefix + 'nestAltarChoice');
+    if (data.nestShopStocks != null) {
+      if (!record(data.nestShopStocks)) return bad(prefix + 'nestShopStocks');
+      for (const [position, stock] of Object.entries(data.nestShopStocks)) {
+        const path = `${prefix}nestShopStocks.${position}`;
+        if (!['3', '8'].includes(position) || !record(stock)) return bad(path);
+        for (const [field, length] of [['cardSlots', 4], ['classSlots', 3], ['runeSlots', 3]]) {
+          const slots = stock[field];
+          if (!Array.isArray(slots) || slots.length !== length) return bad(`${path}.${field}`);
+          for (const slot of slots) {
+            if (!record(slot) || !Number.isFinite(slot.price) || slot.price < 0 || typeof slot.sold !== 'boolean') return bad(`${path}.${field}`);
+            const itemIssue = field === 'runeSlots' ? runeItem(slot.rune, `${path}.${field}.rune`)
+              : slot.card !== null && recordItem(slot.card, `${path}.${field}.card`);
+            if (itemIssue) return itemIssue;
+          }
+        }
+      }
+    }
     for (const key of ['nestRunes', 'nestEquipped', 'pendingRunePick']) {
       const issue = arrayField(data[key], prefix + key, runeItem, !checkpoint || key === 'pendingRunePick');
       if (issue) return issue;

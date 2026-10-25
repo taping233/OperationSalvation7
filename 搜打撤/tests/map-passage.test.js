@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 vi.mock('../game/src/core/motion.js', () => ({reduceMotion:vi.fn(() => false)}));
 vi.mock('../game/src/core/turbo.js', () => ({isTurbo:vi.fn(() => false)}));
+vi.mock('../game/src/core/map-image-ready.js', () => ({mapImageReady:vi.fn(async () => true)}));
 import { reduceMotion } from '../game/src/core/motion.js';
 import { isTurbo } from '../game/src/core/turbo.js';
 import { showLayerPassage, cancelLayerPassage, isLayerPassageActive } from '../game/src/ui/map-passage.js';
@@ -13,6 +14,20 @@ beforeEach(() => {
   window.SDT = {Renderer:{prepare:vi.fn(async () => true)}};
 });
 afterEach(() => { cancelLayerPassage(); vi.useRealTimers(); vi.unstubAllGlobals(); document.body.replaceChildren(); });
+it('插画展示3.6秒并用700毫秒退场，播放期间保持输入保护', async () => {
+  const passage=showLayerPassage(game,0,1); game.layerIdx=1;
+  const image=document.querySelector('.map-layer-passage .silent-node-art');
+  expect(image.src).toContain('layer-descent-v1.webp');
+  expect(document.querySelector('.layer-passage-caption h2').textContent).toBe('第 2 层');
+  expect(document.querySelector('.layer-passage-caption small').textContent).toBe('继续深入');
+  await vi.advanceTimersByTimeAsync(3500);
+  expect(document.querySelector('.map-layer-passage.leaving')).toBeNull();
+  expect(isLayerPassageActive(game)).toBe(true);
+  await vi.advanceTimersByTimeAsync(200);
+  expect(document.querySelector('.map-layer-passage.leaving')).not.toBeNull();
+  await vi.advanceTimersByTimeAsync(700); await passage.done;
+  expect(isLayerPassageActive(game)).toBe(false);
+});
 it.each([[0,1],[1,0]])('%i→%i 同一幕先锁输入，首帧准备后揭幕，不更改业务状态', async (from,to) => {
   game.layerIdx=from; let prepared;
   window.SDT.Renderer.prepare.mockImplementation(() => new Promise(resolve => {prepared=resolve;}));
@@ -46,9 +61,9 @@ it('旧准备迟到不会拆新幕，换局时只取消表现不逆转位置', a
   game.discoveredPairs=new Set(); expect(isLayerPassageActive(game)).toBe(false);
   await fresh.done; expect(game.layerIdx).toBe(0); await vi.runAllTimersAsync(); expect(vi.getTimerCount()).toBe(0);
 });
-it('首帧准备挂起最多3秒释放输入，失败不回滚已跨层位置', async () => {
+it('首帧准备挂起最多6.5秒释放输入，失败不回滚已跨层位置', async () => {
   window.SDT.Renderer.prepare.mockImplementation(() => new Promise(() => {}));
   const passage=showLayerPassage(game,0,1); game.layerIdx=1;
-  await vi.advanceTimersByTimeAsync(3000); await passage.done;
+  await vi.advanceTimersByTimeAsync(6500); await passage.done;
   expect(isLayerPassageActive(game)).toBe(false); expect(game.layerIdx).toBe(1); expect(vi.getTimerCount()).toBe(0);
 });

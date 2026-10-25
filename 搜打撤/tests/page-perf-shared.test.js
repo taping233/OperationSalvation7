@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import { JSDOM } from 'jsdom';
 import { describe, expect, it, vi } from 'vitest';
+import { liveCardOptions } from '../game/src/cards/card-state-presentation.js';
 import { displayCardDescription } from '../game/src/cards/card-description-text.js';
 
 const baseline = 'docs/evidence/2026-10-18-WF-page-perf-1018/shared/baseline/';
@@ -15,7 +16,7 @@ function compileCardCache(source) {
   const render = runInNewContext(source.slice(source.indexOf('const cardHTMLMemo'), source.indexOf('function buildCardHTML'))
     .replace('export function cardHTML', 'function cardHTML') + '\ncardHTML;', {
     Map: TrackedMap,
-    displayCardDescription,
+    displayCardDescription, liveCardOptions,
     buildCardHTML: (card, cls, options) => { builds++; return card.id + '/' + cls + '/' + JSON.stringify(options); },
   });
   return { render, maps, builds: () => builds };
@@ -31,9 +32,10 @@ function mountHome(source) {
   Object.defineProperty(win.document, 'hidden', { get: () => hidden });
   const code = source.replace(/^import .*;\r?\n/gm, '')
     .replace("new URL('../../css/home-polish.css', import.meta.url).href", "'http://localhost/css/home-polish.css'");
+  const watchSurfaceActivity = runInNewContext(readFileSync('game/src/ui/surface-activity.js','utf8').split('// Only media')[0].replace(/^import .*;\r?\n/gm,'').replace('export function watchSurfaceActivity','function watchSurfaceActivity')+'\nwatchSurfaceActivity;', { MutationObserver:win.MutationObserver, queueMicrotask });
   runInNewContext(code, {
     window: win, document: win.document, MutationObserver: win.MutationObserver,
-    interfaceReducedMotion: () => false,
+    interfaceReducedMotion: () => false, watchSurfaceActivity,
     setInterval: fn => { const id = ++nextId; intervals.set(id, fn); return id; },
     clearInterval: id => intervals.delete(id),
     requestAnimationFrame: vi.fn(), cancelAnimationFrame: vi.fn(), setTimeout: vi.fn(), queueMicrotask,

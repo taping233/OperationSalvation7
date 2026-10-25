@@ -1,35 +1,73 @@
-/* Shared state cues for ordinary action and icon buttons. Keep each surface's
-   existing colour, size and transform/selection animation. */
+@import url('./secondary-ui-tokens.css');
+/* One owner for ordinary control states. Page themes supply colour and geometry. */
 :root {
-  --public-control-ring: var(--ak-blue-hi, #7fd5ff);
-  --public-control-press: var(--ak-white, #f5f6f3);
+  --public-control-ring: var(--ak-blue-hi,#7fd5ff);
+  --public-control-press: var(--ak-white,#f5f6f3);
+  --control-focus: var(--public-control-ring);
 }
-body :is(.ov-btn.ok, .hs-btn.ok, .menu-btn.primary) { --public-control-ring: var(--ak-yellow, #ffd23c); }
-body .mini-btn.danger { --public-control-ring: var(--ak-red, #ec4b3f); }
-
-body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):is(:hover, :focus-visible):not(:disabled):not([aria-disabled="true"]) {
-  outline: 2px solid var(--public-control-ring);
-  outline-offset: 2px;
+.ov-btn,.mini-btn,.ui-control {
+  transition:color var(--control-time,150ms) var(--motion-ease-enter,ease),background-color var(--control-time,150ms) var(--motion-ease-enter,ease),border-color var(--control-time,150ms) var(--motion-ease-enter,ease),box-shadow var(--control-time,150ms) var(--motion-ease-enter,ease),filter var(--control-time,150ms) var(--motion-ease-enter,ease);
 }
-body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):active:not(:disabled):not([aria-disabled="true"]) {
-  outline-color: var(--public-control-press);
-  outline-offset: 0;
+.ov-btn,.mini-btn {
+  box-sizing:border-box; border:1px solid #6e7478; border-radius:0;
+  background:#2f3336; color:#e8e8e9; cursor:pointer; box-shadow:none;
+  font-family:var(--font-ui); font-weight:600;
+  &:hover:where(:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"])):where(:not(.dis)) { background:#41464b; border-color:#d2d3d4; }
+  &.ok { --public-control-ring:var(--ak-yellow,#ffd23c); background:#e4cb7a; border-color:#e4cb7a; color:#212326; }
+  &.danger { --public-control-ring:var(--ak-red,#ec4b3f); background:#7a443e; border-color:#be8c7e; color:#f3dcd5; }
+  &.danger:hover:where(:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"])) { background:#8b4f48; border-color:#d29a8e; }
+  &.arm { border-color:#be8c7e; background:#7a443e; color:#fff; }
+  &:disabled,&[aria-disabled="true"] { opacity:.45; cursor:not-allowed; }
+  &.dis { opacity:.35; cursor:not-allowed; }
 }
-body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):is(:disabled, [aria-disabled="true"]) {
-  cursor: default;
-  outline: none;
+.ov-btn { padding:11px 18px; font-size:13.5px; }
+.ov-btn .ic { width:14px; height:14px; vertical-align:-.18em; }
+.mini-btn { padding:8px 12px; font-size:12px; letter-spacing:2px; clip-path:var(--ak-clip-sm); }
+.btn-row > .mini-btn { flex:1; }
+:where(.hs-btn.ok,.menu-btn.primary) { --public-control-ring:var(--ak-yellow,#ffd23c); }
+/* No transform belongs to these outer hit targets. Movement uses an explicit child. */
+body :is(.ov-btn,.hs-btn,.menu-btn,.mini-btn,.help-btn,.ui-control,.ui-control-compact,.ui-control-icon,.settings-tab,.bg-nav-item,.bg-page-button,.archive-back,#bagBtn):not(:where(.battle-stage *,.bt-hand-detail-surface *,.battle-decision *,#overlay[data-ui-motion="fast"] *)) {
+  --control-time:var(--motion-hover-out,320ms);
+  --linked-touch-time:var(--control-time);
+  &:is(:hover,:focus-visible):not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]):not(.dis) {
+    --control-time:var(--motion-hover-in,220ms);
+  }
+  &:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]):not(.dis) { outline:1px solid color-mix(in srgb,var(--public-control-ring) 65%,transparent); outline-offset:0; }
+  &:focus-visible:not(:disabled):not([aria-disabled="true"]) { outline:2px solid var(--control-focus); outline-offset:3px; }
+  &:active:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]):not(.dis) { --control-time:var(--motion-press,90ms); outline:2px solid var(--public-control-press); outline-offset:-2px; }
+  &[aria-busy="true"]:not(:disabled):not([aria-disabled="true"]) { cursor:progress; }
+  &:is(:disabled,[aria-disabled="true"]) { cursor:not-allowed; outline:none; }
 }
-
-/* The shared body-mounted explanation can be read and scrolled independently
-   without forwarding pointer actions into its original button. */
-body .term-tip:not([hidden]) { pointer-events: auto; overscroll-behavior: contain; }
-body .term-tip.is-action-tip { background: rgba(22,32,41,.96); }
-
-@media (prefers-reduced-motion: reduce) {
-  body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close) {
-    transition-duration: 0s;
+.ui-control:disabled,.ui-control[aria-disabled="true"] { opacity:.5; }
+.ui-control[data-ui-action] {
+  --public-control-ring:var(--interface-focus); --control-focus:var(--interface-focus);
+  --action-fill:var(--interface-secondary-fill); --action-ink:var(--interface-secondary-ink); --action-line:var(--interface-secondary-line);
+  box-sizing:border-box; min-height:44px; padding:10px 18px; border:1px solid var(--action-line); border-radius:3px;
+  background:var(--action-fill); color:var(--action-ink); cursor:pointer;
+  font:500 var(--interface-text-control)/1.5 var(--font-ui); letter-spacing:.02em; font-variant-numeric:tabular-nums;
+  &[data-ui-action="primary"] { --action-fill:var(--interface-action-fill); --action-line:var(--interface-action-fill); --action-ink:var(--interface-action-ink); font-weight:600; }
+  &[data-ui-action="danger"] { --action-fill:var(--interface-danger-fill); --action-line:var(--interface-danger-line); --action-ink:var(--interface-danger-ink); --public-control-ring:var(--interface-danger-line); font-weight:600; }
+  &[data-ui-action="quiet"] { --action-fill:transparent; --action-line:transparent; }
+  &:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) { background:color-mix(in srgb,var(--action-fill) 85%,var(--action-ink) 15%); }
+  &[data-ui-action="primary"]:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) { background:var(--interface-action-hover); }
+  &[data-ui-action="danger"]:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) { background:var(--interface-danger-hover); }
+}
+.ui-control:is([aria-pressed="true"],[aria-current="step"]) { box-shadow:inset 3px 0 0 var(--control-focus); }
+.ui-control-label {
+  display:inline-block;
+  transition:translate var(--control-time,var(--motion-hover-out,320ms)) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1));
+}
+@media (prefers-reduced-motion:no-preference) {
+  body:not(.reduce-motion) :where(.action-confirmation,#sugLayer,#overlay:not([data-ui-motion="fast"])) button:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) {
+    &:is(:hover,:focus-visible) > .ui-control-label { translate:3px 0; }
+    &:active > .ui-control-label { translate:0; }
   }
 }
-body.reduce-motion :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close) {
-  transition-duration: 0s;
+body .term-tip {
+  &:not([hidden]) { pointer-events:auto; overscroll-behavior:contain; }
+  &.is-action-tip { background:rgba(22,32,41,.96); }
 }
+@media (prefers-reduced-motion:reduce) {
+  :is(.ov-btn,.hs-btn,.menu-btn,.mini-btn,.help-btn,.ui-control,.ui-control-compact,.ui-control-icon,.settings-tab,.bg-nav-item,.bg-page-button,.archive-back,#bagBtn,.ui-control-label) { transition-duration:0s; }
+}
+body.reduce-motion :is(.ov-btn,.hs-btn,.menu-btn,.mini-btn,.help-btn,.ui-control,.ui-control-compact,.ui-control-icon,.settings-tab,.bg-nav-item,.bg-page-button,.archive-back,#bagBtn,.ui-control-label) { transition-duration:0s; }

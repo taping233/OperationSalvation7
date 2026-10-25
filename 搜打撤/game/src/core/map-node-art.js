@@ -138,12 +138,18 @@ const CONTENT_STATUS_INK={
 
 // Content labels have their own opaque support. Position/reachability glow never
 // changes this state colour, and faded visited artwork does not fade the words.
-function drawMapContentStatus(ctx,status,top,scale) {
+function mapTextWidth(ctx,text,widths) {
+  if(!widths)return ctx.measureText(text).width;
+  const key=`${ctx.font}\n${text}`;
+  if(!widths.has(key))widths.set(key,ctx.measureText(text).width);
+  return widths.get(key);
+}
+function drawMapContentStatus(ctx,status,top,scale,textWidths) {
   if(!status?.label || status.label==='未完成' || status.id==='completed')return null;
   const ink=CONTENT_STATUS_INK[status.id]||CONTENT_STATUS_INK.incomplete;
   ctx.save();ctx.translate(0,top);ctx.scale(scale,scale);
   ctx.font=NODE_STATUS_FONT;ctx.textAlign='center';ctx.textBaseline='middle';
-  const width=Math.ceil(ctx.measureText(status.label).width)+20,height=24;
+  const width=Math.ceil(mapTextWidth(ctx,status.label,textWidths))+20,height=24;
   ctx.fillStyle=ink.background;ctx.fillRect(-width/2,0,width,height);
   ctx.strokeStyle=ink.line;ctx.lineWidth=.8;ctx.strokeRect(-width/2+.4,.4,width-.8,height-.8);
   ctx.fillStyle=ink.ink;ctx.fillText(status.label,0,height/2+.5);
@@ -151,7 +157,7 @@ function drawMapContentStatus(ctx,status,top,scale) {
   return {left:-width*scale/2,right:width*scale/2,top,bottom:top+height*scale};
 }
 
-export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=false,showLabel=true,time=0,pulse=0,reachable=false,status=null,statusScale=1}={}) {
+export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=false,showLabel=true,time=0,pulse=0,reachable=false,status=null,statusScale=1,textWidths=null}={}) {
   const baseAlpha=ctx.globalAlpha;
   const style=mapNodeAppearance(state);ctx.globalAlpha*=style.alpha;
   const glowState=state==='current'?'current':state==='legal'||reachable?'legal':null;
@@ -165,7 +171,7 @@ export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=fals
   if(showLabel){
     ctx.font=NODE_LABEL_FONT;
     ctx.textAlign='center';ctx.textBaseline='middle';
-    const width=Math.ceil(ctx.measureText(label).width+12);
+    const width=Math.ceil(mapTextWidth(ctx,label,textWidths)+12);
     labelBounds={left:-width/2,right:width/2,top:labelY,bottom:labelY+labelHeight};
     if(state==='current'){
       ctx.strokeStyle='#78c8be30';ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(-width*.30,labelY+labelHeight+3);ctx.lineTo(width*.30,labelY+labelHeight+3);ctx.stroke();
@@ -181,7 +187,7 @@ export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=fals
   }
   ctx.globalAlpha=baseAlpha;
   const statusTop=(showLabel?labelY+labelHeight:empty?22:39)+6*statusScale;
-  const statusBounds=drawMapContentStatus(ctx,status,statusTop,statusScale);
+  const statusBounds=drawMapContentStatus(ctx,status,statusTop,statusScale,textWidths);
   if(!labelBounds)return statusBounds;
   if(!statusBounds)return labelBounds;
   return {left:Math.min(labelBounds.left,statusBounds.left),right:Math.max(labelBounds.right,statusBounds.right),

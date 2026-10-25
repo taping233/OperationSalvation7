@@ -1,3 +1,5 @@
+import { overlayElements } from './helpers/environment-fixtures.js';
+import { createGameBootInput } from '../game/src/core/game-boot-input.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
@@ -27,7 +29,7 @@ beforeEach(() => {
   Object.assign(h.game, { state:'modal', runActive:true, battleActive:false, discoveredPairs:[], seed:77 });
   document.body.innerHTML = '<button id="otherFocus">外按钮</button><div id="overlay"><h2 id="ovTitle">来源页</h2><div id="ovBody"><section id="source"><input id="sourceInput"><button data-act="claim">领取</button></section></div></div>';
   UI = {
-    el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody'), ovTitle:document.getElementById('ovTitle') },
+    el:{ ...overlayElements() },
     _acts:{}, _inputHandler:null, _hoverHandler:null, _lastMode:'page', _overlayRevision:1,
     act(name, handler) { this._acts[name] = handler; },
     showOverlay(title, html, mode) { this.el.overlay.hidden = false; this.el.ovTitle.innerHTML = title; this.el.ovBody.innerHTML = html; this._lastMode = mode; },
@@ -46,18 +48,18 @@ function delayRuntime(runtime = { openDevConsole:vi.fn(), devJumpNode:vi.fn(), d
 }
 
 function bootKeyHandler(loader, cardPages = {}) {
-  const source = readFileSync(path.resolve('game/src/game.boot.js'), 'utf8');
-  const ast = parse(source, { sourceType:'module', ecmaVersion:'latest' });
-  const bind = ast.body.find(node => node.type === 'FunctionDeclaration' && node.id.name === 'bindInput');
-  const call = bind.body.body.map(node => node.expression).find(node => node?.type === 'CallExpression' &&
-    node.callee.object?.name === 'window' && node.callee.property?.name === 'addEventListener' && node.arguments[0]?.value === 'keydown');
-  const callback = source.slice(call.arguments[1].start, call.arguments[1].end);
-  return new Function('deps', `with (deps) { return ${callback}; }`)({
+  let keyHandler;
+  const { bindInput } = createGameBootInput({
+    readState: () => ({ game:h.game, cam:{}, canvas:{ addEventListener() {} },
+      input:{ actionFor:() => null }, devToolsLoading:loader.devToolsLoading,
+      menuPageLoading:false, cardPageLoading:false, baseHubLoading:false, ...cardPages }),
+    window:{ addEventListener(type, callback) { if (type === 'keydown') keyHandler = callback; } },
+    document, UI, renderScheduler:{ invalidate() {} },
     openDevConsole:loader.openDevConsole, cancelPendingDevTools:loader.cancelPendingDevTools,
-    get devToolsLoading() { return loader.devToolsLoading; }, cardPageLoading:false, baseHubLoading:false,
-    cardPageOpen:false, closeCardPageTop:vi.fn(), game:h.game, UI, SDT:{ Input:{ actionFor:() => null } },
-    ...cardPages,
+    closeCardPageTop:cardPages.closeCardPageTop || vi.fn(),
   });
+  bindInput();
+  return keyHandler;
 }
 
 function startupClosure() {

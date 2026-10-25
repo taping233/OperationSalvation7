@@ -12,7 +12,7 @@ import { extractionStashHTML } from '../game/src/ui/extraction-rewards-view.js';
 const death = readFileSync('game/src/run/game.session.death.js', 'utf8');
 const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
 const depart = readFileSync('game/src/hub/game.hub.depart.js', 'utf8');
-const menu = readFileSync('game/src/ui/game.menu.pages.js', 'utf8');
+const menu = readFileSync('game/src/ui/menu-leave.js', 'utf8');
 
 let commands;
 beforeAll(async () => {
@@ -23,7 +23,7 @@ describe('A5-DEATH-01 死亡页展示关键损失明细', () => {
   it('doom-panel 消费 token.receipt.losses 逐名表达', () => {
     expect(death).toContain('token.receipt?.losses');
     expect(death).toContain('deathLoss.lostNotable.map(c => `【${esc(c.name)}】`)');
-    expect(death).toContain("uiDisclosure({label:'物资明细与保留规则',className:'doom-details'");
+    expect(death).toContain("uiDisclosure({label:'物资明细与保留规则',className:'settlement-details'");
     expect(death).toContain('${lossDetails}');
   });
 });
@@ -43,7 +43,7 @@ describe('A5-ABANDON-01 放弃页抢运清单卡面网格', () => {
   it('keptHTML 有卡分支复用 doom-loot 卡面网格形态（与死亡页同视觉语言）', () => {
     expect(menu).toContain('doom-loot');
     expect(menu).toContain('doom-cards');
-    expect(menu).toContain('SDT.Cards.cardHTML(s.card, \'sm\')');
+    expect(menu).toContain('readCards().cardHTML(s.card, \'sm\')');
     // 封顶 6 张 + 溢出行，与死亡页 token.saved 同构
     expect(menu).toContain('slice(0, 6)');
     expect(menu).toContain('doom-more');

@@ -1,32 +1,44 @@
 /* 局外卡牌详情：完整大卡与独立资料栏，沿全局横屏缩放。 */
-body:has(#viewport) #cardZoom.inventory-zoom {
+body:has(#viewport) #cardZoom.inventory-zoom{
+& {
   --inspect-card-width:400px;
   display:grid; grid-template-columns:var(--inspect-card-width) 520px;
   grid-template-rows:auto; justify-content:center; align-content:center; align-items:center;
   gap:24px 100px; padding:80px 100px; box-sizing:border-box; overflow:auto; cursor:default;
 }
-body:has(#viewport) #cardZoom.inventory-zoom .cz-backdrop { background:#080e162e; backdrop-filter:blur(18px); animation:none; }
-body:has(#viewport) #cardZoom.inventory-zoom .cz-card { grid-column:1; grid-row:1; margin:0; position:relative; width:100%; max-width:none; height:auto; aspect-ratio:272/406; filter:drop-shadow(0 20px 28px #0008); }
-body:has(#viewport) #cardZoom.inventory-zoom .cz-card > .hs-card { width:100%; }
-body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-info { position:relative; z-index:2; grid-column:2; grid-row:1; display:flex; flex-direction:column; min-height:560px; max-height:760px; padding:36px; box-sizing:border-box; background:#18232df2; border:1px solid #a9c8d629; border-radius:18px; color:#edf3f4; box-shadow:0 12px 40px #0003; }
-body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-info header { padding:0 48px 28px 0; border-bottom:1px solid #b4d3df26; }
-body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-info header small { display:block; margin-top:12px; font:14px/1.5 var(--font-ui); letter-spacing:2px; color:#9edce7; }
-body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-info h2 { display:block; margin:0; padding:0; border:0; font:700 34px/1.4 var(--font-ui); color:#edf3f4; overflow-wrap:anywhere; }
-body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-effect { padding:26px 0 32px; min-height:0; overflow:auto; scrollbar-width:thin; scrollbar-color:#65818b transparent; }
-body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-effect h3 { margin:0 0 14px; font:500 13px/1.5 var(--font-ui); letter-spacing:2px; color:#91a6b0; }
-body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-rules { font:400 var(--card-copy-size)/var(--card-copy-leading) var(--font-ui); color:var(--card-copy-ink); overflow-wrap:anywhere; }
-body:has(#viewport) #cardZoom.inventory-zoom .cz-foot { position:relative; z-index:auto; flex-shrink:0; margin:auto 0 0; width:100%; max-width:none; padding:24px 0 0; box-sizing:border-box; background:none; border:0; border-top:1px solid #b4d3df26; border-radius:0; animation:none; color:#edf3f4; text-align:left; }
-body:has(#viewport) #cardZoom.inventory-zoom .camp-card-actions { align-items:stretch; padding:0; gap:14px; background:none; border:0; color:inherit; }
-body:has(#viewport) #cardZoom.inventory-zoom .camp-card-actions .inspect-meta { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0; border:0; }
-body:has(#viewport) #cardZoom.inventory-zoom .camp-card-actions .inspect-count { font-size:16px; color:#d4dee3; }
-body:has(#viewport) #cardZoom.inventory-zoom .inspect-collection-state { padding:4px 10px; border-radius:20px; background:#9edce714; color:#9edce7; font:13px/1.5 var(--font-ui); }
-body:has(#viewport) #cardZoom.inventory-zoom .inspect-collection-hint { width:100%; margin:0; font:14px/1.7 var(--font-ui); color:#91a6b0; }
-body:has(#viewport) #cardZoom.inventory-zoom .camp-card-actions .ov-btns { display:flex; flex-wrap:wrap; justify-content:flex-start; gap:10px; width:100%; margin:4px 0 0; }
-body:has(#viewport) #cardZoom.inventory-zoom .camp-card-actions .ov-btn { flex:0 1 auto; width:auto; min-width:128px; min-height:44px; padding:10px 20px; border:1px solid #8aa6b545; background:#ffffff08; color:#dae6eb; font:500 16px/1.4 var(--font-ui); letter-spacing:0; border-radius:9px; clip-path:none; box-shadow:none; }
-body:has(#viewport) #cardZoom.inventory-zoom .camp-card-actions .ov-btn.ok { background:#9edce7; border-color:#9edce7; color:#14272c; }
-body:has(#viewport) #cardZoom.inventory-zoom .camp-card-actions .ov-btn:hover:not(:disabled) { filter:brightness(1.12); }
-body:has(#viewport) #cardZoom.inventory-zoom .cz-note:not(.has), body:has(#viewport) #cardZoom.inventory-zoom .cz-hint, body:has(#viewport) #cardZoom.inventory-zoom .cz-flash { display:none; }
-body:has(#viewport) #cardZoom.inventory-zoom .cz-note.has { grid-column:2; grid-row:2; width:100%; max-width:none; margin:0; box-sizing:border-box; }
-body:has(#viewport) #cardZoom.inventory-zoom .cz-close { position:absolute; z-index:auto; top:24px; right:24px; display:grid; place-items:center; width:40px; height:40px; padding:0; border:1px solid #b4d3df38; border-radius:50%; background:#ffffff08; color:#dce9ed; }
-body:has(#viewport) #cardZoom.inventory-zoom .cz-close:hover { background:#ffffff18; }
-body:has(#viewport) #cardZoom.inventory-zoom .cz-close:focus-visible { outline:2px solid #9edce7; outline-offset:4px; }
+/* The shared reader wraps its card. Inventory's card and added information
+   still belong to this dialog's two-column grid, not a nested flex row. */
+& .cz-reading-layout { display:contents; }
+& :is(.cz-list-nav,.cz-reference-back) { grid-column:1 / -1; justify-self:center; }
+& .cz-backdrop { background:#080e162e; backdrop-filter:blur(18px); animation:none; }
+& .cz-card { grid-column:1; grid-row:1; margin:0; position:relative; width:100%; max-width:none; height:auto; aspect-ratio:272/406; filter:drop-shadow(0 20px 28px #0008); }
+& .cz-card > .hs-card { width:100%; }
+& .inventory-zoom-info { position:relative; z-index:2; grid-column:2; grid-row:1; display:flex; flex-direction:column; min-height:420px; max-height:760px; padding:36px; box-sizing:border-box; background:#18232df2; border:1px solid #a9c8d629; border-radius:4px; color:#edf3f4; box-shadow:0 12px 40px #0003; }
+& .inventory-zoom-info header { padding:0 48px 28px 0; border-bottom:1px solid #b4d3df26; }
+& .inventory-zoom-info header small { display:block; margin-top:12px; font:14px/1.5 var(--font-ui); letter-spacing:2px; color:#9edce7; }
+& .inventory-zoom-info h2 { display:block; margin:0; padding:0; border:0; font:700 34px/1.4 var(--font-ui); color:#edf3f4; overflow-wrap:anywhere; }
+& .inventory-zoom-effect { padding:26px 0 32px; min-height:0; overflow:auto; scrollbar-width:thin; scrollbar-color:#65818b transparent; }
+& .inventory-zoom-effect h3 { margin:0 0 14px; font:500 13px/1.5 var(--font-ui); letter-spacing:2px; color:#91a6b0; }
+& .inventory-zoom-rules { font:400 var(--card-copy-size)/var(--card-copy-leading) var(--font-ui); color:var(--card-copy-ink); overflow-wrap:anywhere; }
+& .cz-foot { position:relative; z-index:auto; flex-shrink:0; margin:16px 0 0; width:100%; max-width:none; padding:24px 0 0; box-sizing:border-box; background:none; border:0; border-top:1px solid #b4d3df26; border-radius:0; animation:none; color:#edf3f4; text-align:left; }
+& .camp-card-actions { align-items:stretch; padding:0; gap:14px; background:none; border:0; color:inherit; }
+& .camp-card-actions .inspect-meta { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0; border:0; }
+& .camp-card-actions .inspect-count { font-size:16px; color:#d4dee3; }
+& .inspect-collection-state { padding:4px 10px; border-radius:20px; background:#9edce714; color:#9edce7; font:13px/1.5 var(--font-ui); }
+& .inspect-collection-hint { width:100%; margin:0; font:14px/1.7 var(--font-ui); color:#91a6b0; }
+& .camp-card-actions .ov-btns { display:flex; flex-wrap:wrap; justify-content:flex-start; gap:10px; width:100%; margin:4px 0 0; }
+& .camp-card-actions .ov-btn { flex:0 1 auto; width:auto; min-width:128px; min-height:44px; padding:10px 20px; border:1px solid #8aa6b545; background:#ffffff08; color:#dae6eb; font:500 16px/1.4 var(--font-ui); letter-spacing:0; border-radius:9px; clip-path:none; box-shadow:none; }
+& .camp-card-actions .ov-btn.ok { background:#9edce7; border-color:#9edce7; color:#14272c; }
+& .camp-card-actions .ov-btn:hover:not(:disabled) { filter:brightness(1.12); }
+& .cz-note:not(.has), & .cz-flash { display:none; }
+& .cz-note.has { grid-column:2; grid-row:2; width:100%; max-width:none; margin:0; box-sizing:border-box; }
+& .cz-close { position:absolute; z-index:auto; top:24px; right:24px; display:grid; place-items:center; width:40px; height:40px; padding:0; border:1px solid #b4d3df38; border-radius:50%; background:#ffffff08; color:#dce9ed; }
+& .cz-close:hover { background:#ffffff18; }
+& .cz-close:focus-visible { outline:2px solid #9edce7; outline-offset:4px; }}
+
+/* 卡面与右侧整组资料同时退场，避免说明滞留到弹层移除。 */
+body:has(#viewport) #cardZoom.inventory-zoom.cz-out {
+  & .cz-card { animation-duration:var(--motion-zoom-exit,260ms); animation-delay:0ms; animation-timing-function:ease; }
+  & .inventory-zoom-info { animation:czFadeOut var(--motion-zoom-exit,260ms) ease 0ms both; }
+  & .inventory-zoom-info .cz-foot { animation:none; }
+}

@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterAll, afterEach, describe, expect, it, vi } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -7,8 +8,7 @@ import path from 'node:path';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 8, starterSha: 0,
-    battleStartDraw: 99, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
+  MAP: { rules: { ...battleRules(99, 99, 8, 0, 99, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
@@ -143,17 +143,18 @@ describe('全卡描述修复回归：卡面正确结果与待裁定边界', () =
     expect(pred).toBeTypeOf('function'); expect(pred(spell)).toBe(true);
     record(id, `${noun}实际谓词对${spell.name}（${spell.type}/${spell.cost}费）`, pred(spell), true);
   });
-  it('高端研发：实际发现流程2费moves池同时包含武术与法术', () => {
+  it('高端研发：2费招式池包含普通武术与法术，并排除未声明的职业卡', () => {
     let state = null, cursor = 0;
     const jobs = [{ n: 1, pool: { kind: 'moves', cost: 2 } }];
     const flow = createBattleDiscoverFlow({
-      cards: { all: () => [byId('tt3-flame-storm'), byId('tt7-fullstrike')], isRandomObtainable: () => true },
+      cards: { all: () => [byId('tt3-thornfield'), byId('tt2-bloodblade'), byId('tt3-flame-storm'), byId('tt7-fullstrike')], isRandomObtainable: () => true },
       interaction: { getJobs: () => jobs, get: () => state, set: s => { state = s; }, requestRender() {} },
       random: { next: () => (cursor++ % 2) / 2 }, battle: { currentClass: () => '战士' }, effects: {}, output: { log() {} },
     });
     flow.processDiscoverQueue();
     expect(state.options.map(c => c.type).sort()).toEqual(['武术', '法术'].sort());
-    record('tt12-hitechrd', '实际发现流程，2费武术与2费法术各1张输入', state.options.map(c => c.type), ['武术', '法术']);
+    expect(state.options.map(c => c.id).sort()).toEqual(['tt3-thornfield', 'tt2-bloodblade'].sort());
+    record('tt12-hitechrd', '实际发现流程，2费普通武术与法术各1张，职业负对照各1张', state.options.map(c => c.type), ['武术', '法术']);
   });
   it('充能射线：新入手副本不读取入手前本场注能历史', async () => {
     await start([byId('starter-attack')]);

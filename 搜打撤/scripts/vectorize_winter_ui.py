@@ -8,6 +8,10 @@ from pathlib import Path
 
 import cv2
 import numpy as np
+if __package__:
+    from .vectorize_common import contour_path as trace_contour, layer_paths
+else:
+    from vectorize_common import contour_path as trace_contour, layer_paths
 
 
 def read_rgba(path: Path) -> np.ndarray:
@@ -43,11 +47,7 @@ def crop_to_subject(rgba: np.ndarray, mask: np.ndarray) -> tuple[np.ndarray, np.
 
 
 def contour_path(contour: np.ndarray) -> str:
-    epsilon = max(0.55, cv2.arcLength(contour, True) * 0.0015)
-    points = cv2.approxPolyDP(contour, epsilon, True).reshape(-1, 2)
-    if len(points) < 3:
-        return ""
-    return "M" + "L".join(f"{int(x)} {int(y)}" for x, y in points) + "Z"
+    return trace_contour(contour, 0.55, 0.0015)
 
 
 def trace(rgba: np.ndarray, mask: np.ndarray, colours: int, title: str) -> str:
@@ -64,23 +64,7 @@ def trace(rgba: np.ndarray, mask: np.ndarray, colours: int, title: str) -> str:
 
     paths: list[str] = []
     for index in order:
-        layer = (layers == index).astype(np.uint8) * 255
-        layer = cv2.morphologyEx(layer, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
-        contours, hierarchy = cv2.findContours(layer, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
-        if hierarchy is None:
-            continue
-        for i, contour in enumerate(contours):
-            if hierarchy[0][i][3] != -1 or cv2.contourArea(contour) < 5:
-                continue
-            pieces = [contour_path(contour)]
-            child = hierarchy[0][i][2]
-            while child != -1:
-                pieces.append(contour_path(contours[child]))
-                child = hierarchy[0][child][0]
-            path = "".join(piece for piece in pieces if piece)
-            if path:
-                colour = "#{:02x}{:02x}{:02x}".format(*palette[index])
-                paths.append(f'  <path d="{path}" fill="{colour}" fill-rule="evenodd"/>')
+        paths.extend(layer_paths(layers == index, palette[index], 5, contour_path))
 
     height, width = mask.shape
     return "\n".join((

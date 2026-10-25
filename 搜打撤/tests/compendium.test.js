@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 游戏全书生成（2026-09-16 留言「所有系统做成标准化分章节文档，与游戏一一对应」）：
  * 在 vitest jsdom 环境装配真实卡牌库后生成文档内容；仅 npm run docs:compendium 写入文件，
  * 并校验文档与运行时数据一致（卡牌计数、退役卡不出现、时点词条样例存在）。 */
@@ -11,7 +12,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -68,7 +69,7 @@ describe('游戏全书与运行时数据一一对应', () => {
     const before = readFileSync(OUT);
     expect(md).toContain('每回合 2 能量。普通战');
     expect(md).toContain('首脑战手牌上限 8');
-    expect(md).toContain('另有99张初始攻击牌库，开局和每回合不自动抽牌');
+    expect(md).toContain('另有10张初始攻击牌库，开局和每回合不自动抽牌');
     expect(md).toContain('消耗牌堆，不自动洗回，仅由卡牌效果取回');
     expect(md).not.toContain('每回合 99');
     expect(md).not.toContain('骰子面数');

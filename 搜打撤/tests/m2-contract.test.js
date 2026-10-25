@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 // M2 契约扩展验收（2026-09-27 代理E）：块1 onPlay 剩余扩展 + 块2 triggers/lifecycle/装备域。
 // 规格：docs/cards/M-BATCH-CONTRACT-SPEC-2026-09-27.md（M2 状态标注）；实现：schema/capability/m2 执行件/
 // battle.triggers.m2.js runner/engine 挂点/equipment/card-cost/enemy-phase。
@@ -16,7 +17,7 @@ window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = window.SDT.Icons.TYPE_ART || {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 15, 0, 5, 1) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -54,8 +55,7 @@ async function startGame(cards, foesArg) {
   const logs = [];
   const game = {
     ownedCards: cards.map(card => ({ uid: `m2-${uidSequence++}`, card, safe: false })),
-    hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false, lastBattleEnd: null,
+    ...playerFields(100, 100, 5, 0, '侠客', null), lastBattleEnd: null,
     log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs, heal(amount) { this.hp = Math.min(this.maxHp, this.hp + amount); },
     addItem() {}, onBattleEnd() {},
@@ -353,7 +353,7 @@ describe('M2 semantics in real BattleSession (block 1)', () => {
       ...R(SELF, [{ op: 'summon', name: '步兵', atk: 4, hp: 4, count: 2 }]) };
     const game2 = await startGame([summon, filler()], [foe('summon')]);
     await playCard(game2, summon, 'self');
-    const infantry = allies.filter(a => a.name === '步兵');
+    const infantry = allies.filter(a => a.name === '米高芬');
     expect(infantry.length).toBe(2);
   });
 

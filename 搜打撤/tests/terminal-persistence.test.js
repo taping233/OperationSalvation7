@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -5,8 +6,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music: vi.fn(), sfx: vi.fn(), setDucked: vi.fn() },
   FX: { feedback: vi.fn() }, UI: { log: vi.fn(), refresh: vi.fn(), showOverlay: vi.fn(), hideOverlay: vi.fn(), act: vi.fn() },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10,
-    bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 } },
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1) } },
 };
 await import('../game/src/cards/cards.js');
 await import('../game/src/hub/base.js');
@@ -20,10 +20,10 @@ function lockManager() { return { request: (_name, _options, callback) => callba
 
 async function harness(slotId, failAt = null) {
   localStorage.clear();
-  RunStorage.remove(slotId);
+  await RunStorage.remove(slotId);
   Base.use(slotId);
   (await Base.reset(slotId));
-  RunStorage.write(slotId, { seed: 'terminal-test', hp: 0, maxHp: 30, inventory: [], ownedCards: [], myClass: '侠客' });
+  await RunStorage.write(slotId, { seed: 'terminal-test', hp: 0, maxHp: 30, inventory: [], ownedCards: [], myClass: '侠客' });
   let activeSlot = slotId;
   let shouldFail = !!failAt;
   const storage = {
@@ -139,8 +139,8 @@ describe('死亡/放弃两键终局事务', () => {
       getActiveSlot: () => h.slotId, syncPlayTime: () => {},
     });
     const creating = commands.createAttempt({ slotId: h.slotId, command: 'run.death', cards: [{ card: safeCard }], deathClass: '侠客' });
-    RunStorage.remove(h.slotId);
-    RunStorage.write(h.slotId, { seed: 'replacement', hp: 30, maxHp: 30, inventory: [], ownedCards: [] });
+    await RunStorage.remove(h.slotId);
+    await RunStorage.write(h.slotId, { seed: 'replacement', hp: 30, maxHp: 30, inventory: [], ownedCards: [] });
     release({ ok: true, value: null });
     const result = await creating;
     expect(result.ok).toBe(false);
@@ -153,7 +153,7 @@ describe('死亡/放弃两键终局事务', () => {
     const h = await harness(4);
     const first = await h.commands.createAttempt({ slotId: 4, command: 'run.abandon', cards: [{ card: safeCard }] });
     expect((await h.commands.commitAttempt(first.attempt)).ok).toBe(true);
-    RunStorage.write(4, { seed: 'second-run', hp: 20, maxHp: 30, inventory: [], ownedCards: [] });
+    await RunStorage.write(4, { seed: 'second-run', hp: 20, maxHp: 30, inventory: [], ownedCards: [] });
     const second = await h.newCommands().createAttempt({ slotId: 4, command: 'run.abandon', cards: [{ card: safeCard }] });
     expect(second.ok).toBe(true);
     expect(second.attempt.runId).not.toBe(first.attempt.runId);

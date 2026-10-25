@@ -3,8 +3,8 @@ import { nodeActionBinding, nodeEventAt } from './node-reward-state.js';
 import { createPageSurfaceLifetime } from '../ui/page-surface-lifetime.js';
 import { beginPageEntryCancellation, cancelPendingPageEntries, releasePageEntryCancellation } from '../ui/page-entry-cancellation.js';
 
-// The synchronous reward/close path must remain available before the event deck
-// implementation loads: restore callers depend on a real boolean, not a promise.
+// The eager reward/close path remains available before the event deck loads.
+// Closing now awaits the actual persisted checkpoint before releasing its page.
 export function createEventLifecycle(ports) {
   const { game, UI, saveGame, nodeShell, nodeOpt, captureRunContext,
     createCardChoice, setBagReturnHook } = ports;
@@ -32,12 +32,18 @@ export function createEventLifecycle(ports) {
         && UI.el?.ovBody === body && (!surface || body.firstElementChild === surface)) closeEventFlow();
     });
   }
-  function closeEventFlow() {
-    game.state = 'idle';
-    if (!saveRunCheckpoint(saveGame)) {
+  async function closeEventFlow() {
+    const current = captureEventContext();
+    const body = UI.el?.ovBody, source = body?.firstElementChild;
+    const ownsPage = () => current() && UI.el?.ovBody === body && (!body || body.firstElementChild === source);
+    game.state = 'modal';
+    const saved = await saveRunCheckpoint(saveGame);
+    if (!ownsPage()) return false;
+    if (!saved) {
       renderEventSaveRetry();
       return false;
     }
+    game.state = 'idle';
     setBagReturnHook(null);
     UI.hideOverlay();
     UI.refresh(game);

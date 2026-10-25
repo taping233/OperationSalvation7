@@ -1,3 +1,4 @@
+import { quietUiMocks } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 const ctx = new Proxy({}, { get: () => () => ctx, set: () => true });
@@ -10,7 +11,7 @@ const { Random } = await import('../game/src/core/random.js');
 const { RunStorage } = await import('../game/src/hub/game.storage.js');
 const Base = window.SDT.Base;
 beforeAll(() => {
-  Object.assign(window.SDT.UI, { log() {}, refresh() {}, clearLog() {}, hideOverlay() {}, hideScreen() {}, showScreen() {}, showOverlay() {}, act() {}, registerHelp() {}, helpBtn() { return ''; } });
+  Object.assign(window.SDT.UI, { log() {}, refresh() {}, ...quietUiMocks() });
   window.SDT.Meta = { setXpMul() {}, track() {} }; window.SDT.Nest = { renderNestMap() {} };
 });
 let slot = 0;

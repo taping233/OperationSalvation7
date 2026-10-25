@@ -119,13 +119,13 @@ it('reuses one live ownership scan per effective query without stale array or ov
   expect(grantedFind).toHaveBeenCalledTimes(1);
   const replacement = { uid: 'spell', safe: true, card: { name: '替换归属', type: '法术' } };
   game.ownedCards.splice(1, 1, replacement);
-  expect(inspection.findEffectiveCard('spell')).toBe(replacement);
+  expect(inspection.findEffectiveCard('spell')).toMatchObject(replacement);
   state.cardOverrides.set('spell', { name: '新替身', type: '武术' });
   expect(inspection.findEffectiveCard('spell')).toMatchObject({ safe: true, card: { name: '新替身' } });
   state.cardOverrides.delete('spell');
   game.ownedCards = [];
   state.granted.push(replacement);
-  expect(inspection.findEffectiveCard('spell')).toBe(replacement);
+  expect(inspection.findEffectiveCard('spell')).toMatchObject(replacement);
 });
 
 it.each([

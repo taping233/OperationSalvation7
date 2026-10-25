@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { rewardCardState, rewardProgress, rewardCardStatus, rewardBoxSummary } from '../game/src/ui/reward-state.js';
-import { rewardClaimHTML, rewardReturnHTML } from '../game/src/ui/reward-scene-view.js';
+import { rewardClaimHTML, rewardReturnHTML, rewardSceneHTML } from '../game/src/ui/reward-scene-view.js';
 import { chestRewardFrameHTML } from '../game/src/ui/chest-reward-overview.js';
 
 describe('奖励呈现共享契约', () => {
@@ -15,7 +15,7 @@ describe('奖励呈现共享契约', () => {
   });
   it.each([
     [false, true, 'chestTake1', '收下'],
-    [true, true, 'chestPick', '选择这张'],
+    [true, true, 'chestPick', '选择'],
     [false, false, 'chestMakeRoom', '整理背包'],
     [true, false, 'chestMakeRoom', '整理背包'],
   ])('卡下与放大入口共用动作 choice=%s fits=%s', (choice, fits, action, label) => {
@@ -42,5 +42,11 @@ describe('奖励呈现共享契约', () => {
     expect([...document.querySelectorAll('button')].map(button => button.dataset.cancel)).toEqual(['true', 'true']);
     expect(document.querySelector('[data-organize="return"]')).not.toBeNull();
     expect(document.querySelector('[data-act="chestClosePicker"]')).not.toBeNull();
+  });
+  it('选一奖励展示独立决策标题与不可撤销提示', () => {
+    document.body.innerHTML = rewardSceneHTML({ title:'战利品', cards:'', actions:'', claimMode:'one', progress:{ choicePending:true, choiceCount:3 } });
+    expect(document.querySelector('.reward-head h3').textContent).toBe('选择 1 张');
+    expect(document.querySelector('.reward-head').getAttribute('aria-description')).toContain('其余候选将放弃');
+    expect(document.querySelector('[data-reward-choice-state]').dataset.rewardChoiceState).toBe('pending');
   });
 });

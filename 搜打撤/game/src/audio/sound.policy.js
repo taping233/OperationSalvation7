@@ -17,6 +17,7 @@ const SFX_COOLDOWN_MS = Object.freeze({
 });
 
 const SFX_PRIORITY = Object.freeze({
+  victory: 6, bossVictory: 6, defeat: 6, runClear: 6, extractionSuccess: 6,
   danger: 5, phase: 4, kill: 4, shieldBreak: 5, armorBreak: 5, rarePlay: 4, curseEnd: 4,
   hurt: 3, hit: 3, strike: 3, foeLunge: 3, shieldUp: 2, energyUp: 2, energyDown: 2,
   curse: 2, cardSelect: 1, discard: 1, burn: 1, hover: 0,

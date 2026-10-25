@@ -1,3 +1,4 @@
+import { flushEventActions } from './helpers/event-dice-async.js';
 import { describe, expect, it, vi } from 'vitest';
 import { createRunEventController } from '../game/src/run/game.run.events.js';
 
@@ -21,7 +22,7 @@ describe('event controller request ownership', () => {
     await second.controller.runEventDeck();
     expect(second.consumeCurrentCell).toHaveBeenCalledOnce();
     release(true);
-    await pending;
+    await pending; await flushEventActions();
     expect(first.consumeCurrentCell).toHaveBeenCalledOnce();
     expect(first.game.state).toBe('idle'); expect(second.game.state).toBe('idle');
   });
@@ -34,7 +35,7 @@ describe('event controller request ownership', () => {
     const earlier = h.controller.runEventDeck();
     await h.controller.runEventDeck();
     release(true);
-    await earlier;
+    await earlier; await flushEventActions();
     expect(h.consumeCurrentCell).toHaveBeenCalledOnce(); expect(h.saveGame).toHaveBeenCalledOnce();
   });
 });

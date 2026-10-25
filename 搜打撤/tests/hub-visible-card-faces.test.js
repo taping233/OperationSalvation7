@@ -32,14 +32,14 @@ describe('visible-only hub card faces',()=>{
   bindCollectionCards({root:document.querySelector('#hubMain'),base,cards,ui});
   expect(cards.cardHTML.mock.calls.every(([card])=>card.id==='card-39')).toBe(true);
  });
- it('personnel builds four of forty faces, filters through all metadata and opens the original card',()=>{
+ it('personnel builds four faces per page and opens the original card without changing inventory',()=>{
   const {cards,base,catalog,ui}=setup();const before=JSON.stringify(base.data);setPersonnelGroup('people');setPersonnelSection('pool');
   document.body.innerHTML=personnelHTML('wu');expect(cards.cardHTML).not.toHaveBeenCalled();
   bindPersonnel({ui,refresh:()=>{},sound:{tick:()=>{}}});expect(cards.cardHTML).toHaveBeenCalledTimes(4);
-  const query=document.querySelector('[data-person-pool="query"]');query.value='条件39';query.dispatchEvent(new Event('input'));
+  for(let i=0;i<9;i++)document.querySelector('[data-browser-page="next"]').click();
   const chosen=document.querySelector('[data-browser-key="card-39"]');expect(chosen.hidden).toBe(false);expect(chosen.querySelector('.hs-card')).not.toBeNull();chosen.click();
   expect(ui.showCardZoom).toHaveBeenCalledWith(catalog[39],expect.objectContaining({from:chosen}));expect(JSON.stringify(base.data)).toBe(before);
   cards.cardHTML.mockClear();document.body.innerHTML=personnelHTML('wu');bindPersonnel({ui,refresh:()=>{},sound:{tick:()=>{}}});
-  expect(cards.cardHTML.mock.calls.map(([card])=>card.id)).toEqual(['card-39']);
+  expect(cards.cardHTML.mock.calls.map(([card])=>card.id)).toEqual(['card-36','card-37','card-38','card-39']);
  });
 });

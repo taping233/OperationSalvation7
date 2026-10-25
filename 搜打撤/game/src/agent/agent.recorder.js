@@ -78,7 +78,8 @@ const STOP_KINDS = {
   'no-progress': 'stalled', 'fail-spin': 'stalled', 'alt2-cycle': 'stalled',
   'wait-limit': 'stalled', 'command-timeout': 'stalled', 'context-changed': 'stalled',
   'run-timeout': 'stalled',
-  'step-errors': 'error', 'step-exception': 'error',
+  'runner-load-timeout': 'stalled',
+  'step-errors': 'error', 'step-exception': 'error', 'runner-load-failed': 'error',
 };
 function classifyStop(code) { return STOP_KINDS[code] || 'unknown'; }
 
@@ -180,11 +181,34 @@ function cardValue(card) {
   try { return window.SDT?.Cards?.sellPrice?.(card) ?? 0; } catch { return 0; }
 }
 
-function listRuns() {
+function storedRuns() {
   try {
     const data = JSON.parse(localStorage.getItem(KEY) || '[]');
     return Array.isArray(data) ? data : [];
   } catch { return []; }
+}
+
+function listRuns() {
+    return storedRuns().filter(row => row && typeof row === 'object' && !Array.isArray(row)).map(row => {
+      const number = value => typeof value === 'number' && Number.isFinite(value) && value >= 0 ? value : 0;
+      const normalized = { ...row };
+      for (const key of ['id', 'driver', 'outcome', 'why', 'mode', 'class', 'characterId', 'deathCause']) {
+        if (normalized[key] != null && typeof normalized[key] !== 'string') normalized[key] = '';
+      }
+      if (row.ts != null && !['string', 'number'].includes(typeof row.ts)) normalized.ts = null;
+      for (const key of ['maxLayer', 'node', 'turns', 'durationSec', 'carriedValue']) {
+        if (normalized[key] != null) normalized[key] = number(normalized[key]);
+      }
+      if (row.provenance && typeof row.provenance === 'object') normalized.provenance = {
+        ...row.provenance, agentDriver: typeof row.provenance.agentDriver === 'string' ? row.provenance.agentDriver : null,
+      };
+      normalized.battles = { ...row.battles, fought: number(row.battles?.fought), won: number(row.battles?.won) };
+      normalized.carried = (Array.isArray(row.carried) ? row.carried : [])
+        .filter(card => card && typeof card === 'object' && typeof card.name === 'string')
+        .map(card => ({ ...card, rarity: typeof card.rarity === 'string' ? card.rarity : '',
+          type: typeof card.type === 'string' ? card.type : '', count: number(card.count) || 1, value: number(card.value) }));
+      return normalized;
+    });
 }
 
 function saveRuns(runs) {
@@ -233,6 +257,7 @@ function recordRun(outcome, detail = {}) {
     stopReason: stopInfo,
     outcome: receipt?.outcome || outcome,             // clear | extract | death | abandon（有回执以回执为准）
     why: detail.why || '',
+    deathCause: ['battle', 'nonBattle'].includes(detail.deathCause) ? detail.deathCause : 'unknown',
     seed: G.mapSeed ?? null,
     mode: G.nestActive ? 'nest' : (G.mode || 'standard'),
     class: G.myClass || null,
@@ -256,7 +281,7 @@ function recordRun(outcome, detail = {}) {
     carriedValue: carried.reduce((sum, c) => sum + c.value * c.count, 0),
     receipt,   // 原始回执整体留档（SYS-02：三方对账的锚点）
   };
-  const runs = listRuns();
+  const runs = storedRuns();
   runs.push(entry);
   saveRuns(runs);
   resetRunCounters();
@@ -264,7 +289,7 @@ function recordRun(outcome, detail = {}) {
 }
 
 function exportJSON() {
-  return JSON.stringify({ exportedAt: new Date().toISOString(), runs: listRuns() }, null, 2);
+  return JSON.stringify({ exportedAt: new Date().toISOString(), runs: storedRuns() }, null, 2);
 }
 
 function exportCSV() {
@@ -276,11 +301,17 @@ function exportCSV() {
     // 2026-10-03 老板（SYS-11）：来源/干预/停止三列随表尾追加，旧记录留空可对账
     'provenanceDriver', 'interventions', 'stopReason'];
   const cell = (v) => {
-    const s = v == null ? '' : String(v);
-    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    let s = '';
+    try { s = v == null ? '' : String(v); } catch { /* A damaged optional field exports as empty. */ }
+    return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  const isoTime = value => {
+    if (value == null || value === '' || !['string', 'number'].includes(typeof value)) return '';
+    const date = new Date(value);
+    return Number.isFinite(date.getTime()) ? date.toISOString() : '';
   };
   const rows = runs.map(r => [
-    r.id, new Date(r.ts).toISOString(), r.driver, r.outcome, r.why, r.seed, r.mode, r.class, r.characterId,
+    r.id, isoTime(r.ts), r.driver, r.outcome, r.why, r.seed, r.mode, r.class, r.characterId,
     r.maxLayer, r.turns, r.coins, r.hpLeft, r.durationSec, r.battles?.fought ?? 0, r.battles?.won ?? 0,
     r.carriedValue, (r.carried || []).map(c => `${c.name}x${c.count}`).join(' '),
     r.bossKilled != null ? (r.bossKilled ? 1 : 0) : '', r.firstExploreXp ?? '',

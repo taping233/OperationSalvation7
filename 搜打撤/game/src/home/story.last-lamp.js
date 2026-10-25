@@ -41,7 +41,7 @@ function validateLastLampState(story) {
       !Number.isInteger(state.stage) || state.stage < 0 || state.stage > 3 ||
       !state.segments || typeof state.segments !== 'object' || Array.isArray(state.segments) ||
       !state.runs || typeof state.runs !== 'object' || Array.isArray(state.runs)) {
-    return fail('INVALID_STORY_STATE', '《最后一盏引路灯》档案损坏，已保留原数据');
+    return fail('INVALID_STORY_STATE', '《北门灯标》档案损坏，已保留原数据');
   }
   const segmentKeys = Object.keys(state.segments).sort();
   const expectedKeys = Array.from({ length: state.stage }, (_, i) => String(i + 1));

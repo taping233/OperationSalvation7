@@ -1,3 +1,4 @@
+import { damageRuleFields } from './helpers/environment-fixtures.js';
 import { createBattleRuntime } from '../game/src/battle/runtime/battle.runtime.factory.js';
 import { describe, expect, it } from 'vitest';
 import { createBattleResolution } from '../game/src/battle/core/battle.resolution.js';
@@ -82,7 +83,7 @@ describe('battle resolution ports', () => {
   it('uses structured onPlay damage independently of description and skips legacy text damage', () => {
     const makeCard = desc => ({
       id: 'structured-simple', name: '结构伤害', type: '武术', dmg: 3, dmgType: 'fixed', desc,
-      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } },
+      rules: { ...damageRuleFields(false, 'chosenEnemy') },
     });
     const outcomes = ['造成 99 点伤害并获得护甲。', '任意展示描述，不含战斗效果。'].map(desc => {
       const target = { hp: 20, maxHp: 20, dead: false, status: {} };
@@ -131,7 +132,7 @@ describe('battle resolution ports', () => {
     });
     resolver({
       id: 'silent-structured-attack', type: '武术', dmg: 3, dmgType: 'attack', desc: '展示描述',
-      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } },
+      rules: { ...damageRuleFields(false, 'chosenEnemy') },
     }, target, false, 0, null);
     expect(events.filter(event => ['damage', 'text'].includes(event[0]))).toEqual([['damage', 3]]);
     expect(events.some(event => event[0] === 'log' && String(event[1]).includes('沉默'))).toBe(true);
@@ -571,7 +572,7 @@ describe('A3 第二批（B5 诅咒族）：结构化 onPlay curse op', () => {
     expect(kinds, 'windup→hit 演出节奏').toEqual(['windup', 'hit']);
     expect(state.target.status.bleed, 'combat.addCurse 叠层：2+3').toBe(5);
     expect(state.events.some(event => event[0] === 'text'), '结构化在位时文本诅咒句不复算').toBe(false);
-    expect(logTexts(state.events).some(t => t.includes('[[icon:blood]]') && t.includes('附加 3 层流血'))).toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:status-bleed]]') && t.includes('附加 3 层流血'))).toBe(true);
     expect(state.events.some(event => event[0] === 'cursefx'), '敌方施放推彩闪浮标（引擎同款包装）').toBe(true);
   });
 
@@ -587,7 +588,7 @@ describe('A3 第二批（B5 诅咒族）：结构化 onPlay curse op', () => {
     const fresh = setup({ foes: [{}] });
     fresh.resolver(curseCard({ op: 'curse', curse: 'freeze', duration: 2, target: 'chosenEnemy' }), fresh.target, false, 0, null);
     expect(fresh.target.status.freeze).toBe(2);
-    expect(logTexts(fresh.events).some(t => t.includes('[[icon:crystal]]') && t.includes('被冰冻 2 回合（无法行动）'))).toBe(true);
+    expect(logTexts(fresh.events).some(t => t.includes('[[icon:status-freeze]]') && t.includes('被冰冻 2 回合（无法行动）'))).toBe(true);
 
     const longer = setup({ foes: [{ status: { freeze: 3 } }] });
     longer.resolver(curseCard({ op: 'curse', curse: 'freeze', duration: 1, target: 'chosenEnemy' }), longer.target, false, 0, null);
@@ -896,7 +897,7 @@ describe('A3 第三批（B7）：结构化 onPlay blessing 与资源族 op', () 
     state.resolver(selfCard({ op: 'blessing', key: 'atkUp', stacks: 3 }, '攻（+99）。'), state.target, false, 0, null);
     expect(state.playerStatus.status.atkUp, 'combat.addBlessing value 型叠层').toBe(3);
     expect(state.playerStatus.__timedBuffs ?? null, '无 duration → 本场战斗不挂到期记录').toBeNull();
-    expect(logTexts(state.events).some(t => t.includes('[[icon:swords]]') && t.includes('攻击力 +3（本场战斗，当前加成 3）'))).toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:status-atk-up]]') && t.includes('攻击力 +3（本场战斗，当前加成 3）'))).toBe(true);
     expect(state.events.some(event => event[0] === 'text'), '结构化在位时文本攻击句不复算').toBe(false);
 
     const timed = setup();
@@ -911,14 +912,14 @@ describe('A3 第三批（B7）：结构化 onPlay blessing 与资源族 op', () 
     state.resolver(selfCard({ op: 'blessing', key: 'spellUp', stacks: 1 }), state.target, false, 0, null);
     state.resolver(selfCard({ op: 'blessing', key: 'spellUp', stacks: 2 }), state.target, false, 0, null);
     expect(state.playerStatus.status.spellUp, 'value 型 1+2=3（叠加相加，与文本路径 buff.spellUp 同一 API）').toBe(3);
-    expect(logTexts(state.events).some(t => t.includes('[[icon:crystal]]') && t.includes('法术伤害 +2（本场战斗，当前加成 3）'))).toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:status-spell-up]]') && t.includes('法术伤害 +2（本场战斗，当前加成 3）'))).toBe(true);
   });
 
   it('blessing stealth：duration 定回合数（正）；已有更长潜行取较大不缩短（反）', () => {
     const state = setup();
     state.resolver(selfCard({ op: 'blessing', key: 'stealth', duration: 2 }), state.target, false, 0, null);
     expect(state.playerStatus.status.stealth, 'timed 型：n 即回合数').toBe(2);
-    expect(logTexts(state.events).some(t => t.includes('[[icon:runner]]') && t.includes('祝福·潜行') && t.includes('2 回合内无法成为被攻击对象'))).toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:status-stealth]]') && t.includes('祝福·潜行') && t.includes('2 回合内无法成为被攻击对象'))).toBe(true);
 
     const longer = setup({ playerStatus: { name: '我', status: { stealth: 3 } } });
     longer.resolver(selfCard({ op: 'blessing', key: 'stealth', duration: 1 }), longer.target, false, 0, null);
@@ -929,7 +930,7 @@ describe('A3 第三批（B7）：结构化 onPlay blessing 与资源族 op', () 
     const state = setup();
     state.resolver(selfCard({ op: 'blessing', key: 'immune', duration: 1 }), state.target, false, 0, null);
     expect(state.playerStatus.status.immune).toBe(1);
-    expect(logTexts(state.events).some(t => t.includes('[[icon:sparkles]]') && t.includes('祝福·免疫伤害') && t.includes('1 回合内不受到任何伤害'))).toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:status-immune]]') && t.includes('祝福·免疫伤害') && t.includes('1 回合内不受到任何伤害'))).toBe(true);
 
     const stacked = setup();
     stacked.resolver(selfCard({ op: 'blessing', key: 'immune', stacks: 2 }), stacked.target, false, 0, null);
@@ -941,7 +942,7 @@ describe('A3 第三批（B7）：结构化 onPlay blessing 与资源族 op', () 
     state.resolver(selfCard({ op: 'blessing', key: 'dodge', stacks: 2 }), state.target, false, 0, null);
     expect(state.playerStatus.status.dodge).toBe(2);
     expect(state.playerStatus.__timedBuffs, '文本路径 buff.dodge 同款：turns=1 本回合到期').toEqual([{ key: 'dodge', amount: 2, turns: 1 }]);
-    expect(logTexts(state.events).some(t => t.includes('[[icon:shield]]') && t.includes('接下来 2 次攻击将被完全避开（各消耗 1 层）'))).toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:status-dodge]]') && t.includes('接下来 2 次攻击将被完全避开（各消耗 1 层）'))).toBe(true);
 
     const lasting = setup();
     lasting.resolver(selfCard({ op: 'blessing', key: 'dodge', stacks: 1, duration: 3 }), lasting.target, false, 0, null);
@@ -954,7 +955,7 @@ describe('A3 第三批（B7）：结构化 onPlay blessing 与资源族 op', () 
     state.resolver(selfCard({ op: 'blessing', key: 'reduce', stacks: 2 }), state.target, false, 0, null);
     expect(state.playerStatus.status.reduce).toBe(2);
     expect(state.playerStatus.__timedBuffs ?? null, '无 duration → 本场战斗').toBeNull();
-    expect(logTexts(state.events).some(t => t.includes('[[icon:plate]]') && t.includes('祝福·减伤') && t.includes('每次受到的伤害 -2（本场战斗）'))).toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:status-reduce]]') && t.includes('祝福·减伤') && t.includes('每次受到的伤害 -2（本场战斗）'))).toBe(true);
 
     const timed = setup();
     timed.resolver(selfCard({ op: 'blessing', key: 'reduce', stacks: 1, duration: 2 }), timed.target, false, 0, null);

@@ -11,3 +11,7 @@
 - 表现层可以演进，但玩法数值、存档和领域逻辑必须通过稳定接口隔离。
 
 完整现行规则见 [rules.md](rules.md)，代码结构见 [architecture.md](architecture.md)，未来内容见 [roadmap.md](roadmap.md)。历史版本不再混入本文件，统一记录在 [changelog.md](changelog.md)。
+
+## 剧情与人物
+
+[第一部剧情设定](production/design/STORY-PART-ONE.md)记录老板已确认的封城背景、五位人物行动、实验室入口结尾与玩家知情范围；[人设库](character-bible/README.md)维护各角色背景与关系。剧情设定已记录，具体事件改名、分支对白与流程接入尚待编写。

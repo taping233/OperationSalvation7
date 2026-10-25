@@ -1,3 +1,4 @@
+import { approvedCurrentCatalogBaseline, currentApprovedFieldValue } from './helpers/card-catalog-current-revisions.js';
 import approvedBatch from './fixtures/approved-card-batch-20261020.json';
 import approvedExecution from './fixtures/builtin-execution-approved-20261020.json';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
@@ -39,7 +40,7 @@ function approvedProductionFaceBaseline(original) {
     if (!card || card[field] !== previous) throw new Error(`Unreviewed original ${id}.${field}`);
     card[field] = current;
   }
-  return baseline;
+  return approvedCurrentCatalogBaseline(baseline);
 }
 const currentBaseline = approvedProductionFaceBaseline(beforeInventory);
 const APPROVED_FACE_BY_ID = {
@@ -298,7 +299,7 @@ describe('E8 isolated production inventory', () => {
 
   it('事件与腐化之种只接受精确批准字段，回退、扩效与额外字段均拒绝', () => {
     for (const [id, field, previous, current] of APPROVED_1018_PRODUCTION_REVISIONS) {
-      expect(inventory.production.cards.find(row => row.id === id).card[field]).toBe(current);
+      expect(inventory.production.cards.find(row => row.id === id).card[field]).toBe(currentApprovedFieldValue(id,field,current));
       for (const mutate of [
         card => { if (previous === undefined) delete card[field]; else card[field] = previous; },
         card => { card[field] = current + '额外效果'; },

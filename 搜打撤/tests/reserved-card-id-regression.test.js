@@ -1,9 +1,10 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 3, battleHandMax: 20, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
+  MAP: { rules: { ...battleRules(3, 20, 15, 0, 5, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
 };
 let { Cards, KEY } = await import('../game/src/cards/cards.js');
 const ids = ['constructor', 'toString', '__proto__'];
@@ -76,7 +77,7 @@ describe('public play after cold startup with an existing custom card (code simu
     vi.useFakeTimers();
     const game = {
       ownedCards: [{ uid: 'custom-1', card, safe: false }], inventory: [], usedPocket: [], cardOrder: ['custom-1'],
-      hp: 35, maxHp: 35, atk: 5, spellPower: 0, coins: 0, myClass: '法师', characterId: null, state: 'idle', battleActive: false,
+      ...playerFields(35, 35, 5, 0, '法师', null),
       log() {}, heal(amount) { this.hp = Math.min(this.maxHp, this.hp + amount); }, onBattleEnd() {},
     };
     const foe = { id: 'audit-foe', name: '靶子', hp: 100, atk: 1, behavior: 'strike' };

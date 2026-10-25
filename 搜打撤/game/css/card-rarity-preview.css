@@ -1,31 +1,32 @@
 /* 第一款审阅预览专用。依据炉石宝石识别与SNAP边框/镭射/亮面名称机制。
    不由游戏 index.html 加载；颜色按项目稀有度映射。 */
-.craft-card{position:relative;isolation:isolate;width:272px;height:406px;padding:3px;border:1px solid var(--shine);border-radius:9px;background:var(--rim);box-shadow:0 10px 20px #0008;color:#eef2f4;text-align:left;font-family:"Microsoft YaHei",sans-serif;overflow:visible}
-.craft-card .picture{position:absolute;inset:4px;height:auto;overflow:hidden;border:0;border-radius:5px;z-index:-1}
-.craft-card .picture img{display:block;width:100%;height:100%;object-fit:cover}
-.craft-card .picture::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 49%,#10182394 65%,#101823ec 82%,#0c131ded 100%)}
-.craft-card .cost{position:absolute;left:-9px;top:-6px;z-index:8;display:flex;align-items:center;justify-content:center;width:53px;height:53px;font:800 27px/1 Consolas,monospace;color:#effcff;background:linear-gradient(135deg,#a3c6d2,#24516a 38%,#122c42 80%);border:3px solid #c2d2d8;border-radius:12px;transform:rotate(-4deg);box-shadow:0 2px 0 #10181c,0 0 0 2px #32454f;text-shadow:0 2px 2px #000c}
-.craft-card .rarity-band{position:absolute;top:13px;right:12px;z-index:4;width:auto;height:31px;padding:2px 9px;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--tone);border-radius:3px;background:#16212be6;color:var(--shine);font-size:13px;font-weight:700;letter-spacing:.08em}
-.craft-card .gem{width:15px;height:21px;display:block;overflow:visible;filter:drop-shadow(0 1px 1px #0008)}
-.craft-card .first-copy{position:absolute;left:23px;right:23px;bottom:10px;z-index:3}
-.craft-card .name{display:block;margin-bottom:10px;text-align:center;font-size:25px;line-height:1.35;font-weight:800;letter-spacing:.04em;color:#f5f5f2;text-shadow:0 2px 2px #000b}
-.craft-card .rules{height:auto;min-height:52px;padding:0;border:0;background:none;font-size:15px;line-height:1.7;color:#f1f3f4}
-.craft-card.common{background:#8b9397;border-color:#bcc5c9;box-shadow:0 8px 15px #0006}
-.craft-card.common .rarity-band{border-color:#69747b;color:#d6dde0;background:#26323ad9}
-.craft-card.rare{border-color:#a4dcff;box-shadow:0 10px 20px #0008,0 0 0 1px #519edb,0 0 9px #3180c24d}
-.craft-card.rare .rarity-band{background:#152a3eea;box-shadow:inset 0 1px #c8e8ff3b}
-.craft-card.epic{border-color:#e0c3ff;box-shadow:0 11px 22px #0008,0 0 0 1px #9f6bdd,0 0 15px #9954dc55}
-.craft-card.epic .rarity-band{background:#2d1e43eb;box-shadow:inset 0 1px #e9d0ff55}
-.craft-card.epic .name{color:#f0defe;text-shadow:0 2px 2px #000c,0 0 10px #b489d938}
-.craft-card.legendary{border-color:#ffe49a;box-shadow:0 12px 24px #0009,0 0 0 1px #e4b44d,0 0 16px #e4ac3b4d}
-.craft-card.legendary .rarity-band{background:linear-gradient(#6b521f,#302514 48%,#55401b);color:#ffe6a3;border-color:#d6ae50;box-shadow:inset 0 1px #ffdd8a66}
-.craft-card.legendary .name{background:linear-gradient(105deg,#d09a3e 0%,#f9dd98 22%,#fff3cd 45%,#d7a947 58%,#ffe9a9 82%,#ba8730 100%);background-clip:text;-webkit-background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 1px #000)}
-.craft-card.prism{border-color:#f3e7ff;box-shadow:0 12px 24px #0009,-3px 0 12px #eda3dc4d,3px 0 12px #9ed5eb4d}
-.craft-card.prism .rarity-band{border-image:linear-gradient(100deg,#f6c7e9,#f6df9d,#a3ecda,#adc9f8,#c9b6ef) 1;color:#fff6ff;background:#26243de8}
-.craft-card.prism .picture::after{background:linear-gradient(transparent 49%,#10182394 65%,#101823ec 82%,#0c131ded 100%),linear-gradient(122deg,transparent 22%,#f9b5e937 28%,#ffe69c37 35%,#9ff5d838 42%,#a9d5ff30 48%,#d6b9ff30 54%,transparent 61%)}
-.craft-card.prism .name{background:linear-gradient(105deg,#f4b9df,#fff0c5 25%,#baf4e0 45%,#bcd6ff 68%,#e7c8ff 85%,#ffe7f8);background-clip:text;-webkit-background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 1px #000)}
-.craft-card .edge-sheen{position:absolute;inset:-1px;border-radius:9px;padding:2px;z-index:5;pointer-events:none;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;overflow:hidden}
-.craft-card .edge-sheen::before{content:'';position:absolute;inset:-80%;background:conic-gradient(from 0deg,transparent 0deg 135deg,var(--shine) 155deg,#fff5 172deg,transparent 192deg 360deg);animation:previewRimOrbit 9s linear infinite}
-.craft-card.prism .edge-sheen::before{background:conic-gradient(#f4b9df,#fff0c5,#baf4e0,#bcd6ff,#e7c8ff,#f4b9df);animation-duration:12s;opacity:.9}
+.craft-card{
+&{position:relative;isolation:isolate;width:272px;height:406px;padding:3px;border:1px solid var(--shine);border-radius:9px;background:var(--rim);box-shadow:0 10px 20px #0008;color:#eef2f4;text-align:left;font-family:"Microsoft YaHei",sans-serif;overflow:visible}
+& .picture{position:absolute;inset:4px;height:auto;overflow:hidden;border:0;border-radius:5px;z-index:-1}
+& .picture img{display:block;width:100%;height:100%;object-fit:cover}
+& .picture::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 49%,#10182394 65%,#101823ec 82%,#0c131ded 100%)}
+& .cost{position:absolute;left:-9px;top:-6px;z-index:8;display:flex;align-items:center;justify-content:center;width:53px;height:53px;font:800 27px/1 Consolas,monospace;color:#effcff;background:linear-gradient(135deg,#a3c6d2,#24516a 38%,#122c42 80%);border:3px solid #c2d2d8;border-radius:12px;transform:rotate(-4deg);box-shadow:0 2px 0 #10181c,0 0 0 2px #32454f;text-shadow:0 2px 2px #000c}
+& .rarity-band{position:absolute;top:13px;right:12px;z-index:4;width:auto;height:31px;padding:2px 9px;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--tone);border-radius:3px;background:#16212be6;color:var(--shine);font-size:13px;font-weight:700;letter-spacing:.08em}
+& .gem{width:15px;height:21px;display:block;overflow:visible;filter:drop-shadow(0 1px 1px #0008)}
+& .first-copy{position:absolute;left:23px;right:23px;bottom:10px;z-index:3}
+& .name{display:block;margin-bottom:10px;text-align:center;font-size:25px;line-height:1.35;font-weight:800;letter-spacing:.04em;color:#f5f5f2;text-shadow:0 2px 2px #000b}
+& .rules{height:auto;min-height:52px;padding:0;border:0;background:none;font-size:15px;line-height:1.7;color:#f1f3f4}
+&.common{background:#8b9397;border-color:#bcc5c9;box-shadow:0 8px 15px #0006}
+&.common .rarity-band{border-color:#69747b;color:#d6dde0;background:#26323ad9}
+&.rare{border-color:#a4dcff;box-shadow:0 10px 20px #0008,0 0 0 1px #519edb,0 0 9px #3180c24d}
+&.rare .rarity-band{background:#152a3eea;box-shadow:inset 0 1px #c8e8ff3b}
+&.epic{border-color:#e0c3ff;box-shadow:0 11px 22px #0008,0 0 0 1px #9f6bdd,0 0 15px #9954dc55}
+&.epic .rarity-band{background:#2d1e43eb;box-shadow:inset 0 1px #e9d0ff55}
+&.epic .name{color:#f0defe;text-shadow:0 2px 2px #000c,0 0 10px #b489d938}
+&.legendary{border-color:#ffe49a;box-shadow:0 12px 24px #0009,0 0 0 1px #e4b44d,0 0 16px #e4ac3b4d}
+&.legendary .rarity-band{background:linear-gradient(#6b521f,#302514 48%,#55401b);color:#ffe6a3;border-color:#d6ae50;box-shadow:inset 0 1px #ffdd8a66}
+&.legendary .name{background:linear-gradient(105deg,#d09a3e 0%,#f9dd98 22%,#fff3cd 45%,#d7a947 58%,#ffe9a9 82%,#ba8730 100%);background-clip:text;-webkit-background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 1px #000)}
+&.prism{border-color:#f3e7ff;box-shadow:0 12px 24px #0009,-3px 0 12px #eda3dc4d,3px 0 12px #9ed5eb4d}
+&.prism .rarity-band{border-image:linear-gradient(100deg,#f6c7e9,#f6df9d,#a3ecda,#adc9f8,#c9b6ef) 1;color:#fff6ff;background:#26243de8}
+&.prism .picture::after{background:linear-gradient(transparent 49%,#10182394 65%,#101823ec 82%,#0c131ded 100%),linear-gradient(122deg,transparent 22%,#f9b5e937 28%,#ffe69c37 35%,#9ff5d838 42%,#a9d5ff30 48%,#d6b9ff30 54%,transparent 61%)}
+&.prism .name{background:linear-gradient(105deg,#f4b9df,#fff0c5 25%,#baf4e0 45%,#bcd6ff 68%,#e7c8ff 85%,#ffe7f8);background-clip:text;-webkit-background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 1px #000)}
+& .edge-sheen{position:absolute;inset:-1px;border-radius:9px;padding:2px;z-index:5;pointer-events:none;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;overflow:hidden}
+& .edge-sheen::before{content:'';position:absolute;inset:-80%;background:conic-gradient(from 0deg,transparent 0deg 135deg,var(--shine) 155deg,#fff5 172deg,transparent 192deg 360deg);animation:previewRimOrbit 9s linear infinite}
+&.prism .edge-sheen::before{background:conic-gradient(#f4b9df,#fff0c5,#baf4e0,#bcd6ff,#e7c8ff,#f4b9df);animation-duration:12s;opacity:.9}}
 @keyframes previewRimOrbit{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.craft-card .edge-sheen::before{animation:none}}

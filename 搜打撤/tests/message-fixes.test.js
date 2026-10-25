@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 /* 2026-09-10 留言修复回归：
  * #25 铸甲「消耗1张装备牌，+10甲」此前双路径各加一次（结构化兜底 + thenText）实际 +20；
  * #37 法力奔涌只认新描述正则，旧档快照克隆的旧措辞描述会导致整卡无效果（识别失败）。 */
@@ -7,7 +8,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -44,8 +45,7 @@ function makeGame(cards) {
   const logs = [];
   const g = {
     ownedCards: cards.map(c => ({ uid: 'g' + (uidSeq++), card: c, safe: false })),
-    hp: 99999, maxHp: 99999, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(99999, 99999, 5, 0, '侠客', null),
     lastBattleEnd: null,
     log(m) { logs.push(String(m).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs,

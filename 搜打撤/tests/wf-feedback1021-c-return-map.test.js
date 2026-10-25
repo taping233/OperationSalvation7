@@ -6,8 +6,9 @@
 import { readFileSync } from 'node:fs';
 import { expect, it } from 'vitest';
 import postcss from 'postcss';
+import { readCssSource } from './helpers/css-source.js';
 
-const read = path => readFileSync(path, 'utf8');
+const read = path => path.endsWith('.css') ? readCssSource(path) : readFileSync(path, 'utf8');
 
 function rulesOf(path) {
   const list = [];
@@ -45,7 +46,10 @@ it('各页返回键钉为页脚行内最右一枚（order:9 覆盖全部返回�
     'game/src/run/event-lifecycle.js', 'game/src/run/event-card-choice.js', 'game/src/ui/chest-reward-overview.js',
     'game/src/run/chests.js', 'game/src/ui/node-scene-view.js', 'game/src/ui/fire-rest-view.js',
   ];
-  for (const file of files) expect(read(file)).toContain('返回地图');
+  for (const file of files) {
+    if(file==='game/src/run/game.run.flow.js') expect(read(file)).toContain('createEventLifecycle(');
+    else expect(read(file)).toContain('返回地图');
+  }
   // 商店页与资源页的返回键本就位于右侧行动列（结构保证，不需要 order 钉位）。
   expect(read('game/css/expedition-shop.css')).toMatch(/\.shop-market-footer \.shop-back \{ order:3/);
 });
@@ -59,8 +63,10 @@ it('事件载入两屏的返回地图从正文移入页脚（与其他节点页�
 
 it('奖励总览与独立拾取页的返回地图同样钉在行动行最右', () => {
   const rules = rulesOf('game/css/chest-reward-overview.css');
-  expect(declOf(rules, 'body #overlay .card .cqo-frame .cqo-overview .cqo-actions > [data-act="chestReturn"]')).toMatchObject({ order: '9' });
-  expect(declOf(rules, 'body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker .reward-footer-info > [data-act="chestReturn"]')).toMatchObject({ order: '9', 'margin-left': 'auto' });
+  expect(declOf(rules, 'body #overlay .card .cqo-frame .cqo-button-primary')).toMatchObject({ order: '10' });
+  const rewardRules = rulesOf('game/css/room-rewards.css');
+  expect(declOf(rewardRules, 'body #overlay .card .room-reward .reward-exit')).toMatchObject({ order:'10' });
+  expect(declOf(rewardRules, 'body #overlay .card .room-reward .loot-actions')).toMatchObject({ 'justify-content':'flex-end' });
   // 节点场景顶栏退出键保持统一左上（同族 archive-back 位置约定，不参与页脚行）。
   expect(read('game/src/ui/node-scene-view.js')).toContain('class="archive-back"');
 });

@@ -1,3 +1,4 @@
+import { overlayElements, resetEventGame, eventCardMocks, bindEventRoot, eventMapMocks, eventUiMocks, eventCapacityPorts, eventSaveActions } from './helpers/environment-fixtures.js';
 import { cancelLayerPassage } from '../game/src/ui/map-passage.js';
 import { bagSlots } from '../game/src/hub/game.bag.bridge.js';
 import { openRewardCapacityOrganizer } from '../game/src/ui/reward-capacity-organizer.js';
@@ -9,10 +10,7 @@ vi.mock('../game/src/core/random.js', async importOriginal => {
   return { ...actual, Random: { ...actual.Random, random: (...args) => H.random(...args) } };
 });
 vi.mock('../game/src/run/game.session.js', () => ({
-  game: H.game, MAP: { rules: { fireHeal:10, fireClassCardChance:1, bossDeckSize:15, starterSha:5, battleStartDraw:5, battleTurnDraw:1, battleHandMax:8 }, monsters:{}, altar:{ bosses:[] } }, MODES: {},
-  bagCap: () => 9, usedSlots: () => 0, newUid: () => `u${++H.uid}`, pick: a => a[0],
-  saveGame: () => { H.saves.push(JSON.parse(JSON.stringify(H.game))); return true; },
-  scaledEnemy: a => a, getActiveSlot: () => H.slot, curLayer: () => H.game.layerData[H.game.layerIdx],
+  ...eventMapMocks(H), ...eventSaveActions(H), getActiveSlot: () => H.slot, curLayer: () => H.game.layerData[H.game.layerIdx],
   cellCenter: () => ({}), markSeen() {}, modeCfg: () => ({}), gainCoins: n => H.game.coins += n,
   weighted: a => a[0], enterLayer: (...args) => { H.enter(...args); H.game.layerIdx = args[0]; }, exitToTitle() {},
 }));
@@ -25,12 +23,9 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: (...args) => H
 
 let altar, scenes, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { game: H.game, Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
-    MAP:{ chestKinds:{ small:{ name:'小宝箱' } } },
-    Cards: { DROP_WEIGHTS:{ 古朴:1 }, all: () => H.cards, classPool: () => H.cards.filter(c => c.type === '能力卡'), sellPrice:() => 1, isRandomObtainable: () => true, cardHTML: c => `<span>${c.name}</span>` } };
+  window.SDT = { ...eventCardMocks(H) };
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
-  UI = window.SDT.UI = { ...overlayMethods, _acts: {}, _baseActs: {}, _roomActive: true, el: {},
-    act: (name, fn) => UI._acts[name] = fn, refresh() {}, log() {}, showCardReward() {}, _checkPageBg() {},
+  UI = window.SDT.UI = { ...overlayMethods, ...eventUiMocks(() => UI),
   };
   ({ takeBagReturnHook, setBagReturnHook } = await import('../game/src/hub/bag-return-hook.js'));
   altar = await import('../game/src/run/game.run.altar.js');
@@ -40,24 +35,14 @@ beforeAll(async () => {
 beforeEach(() => {
   vi.useFakeTimers();
   document.body.innerHTML = '<div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
-  UI.el.ovBody.addEventListener('click', event => { const button = event.target.closest('[data-act]'); if (button) UI._acts[button.dataset.act]?.(button.dataset); });
-  UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; UI._roomActive = true; setBagReturnHook(null);
+  UI.el = { ...overlayElements() };
+  bindEventRoot(() => UI); setBagReturnHook(null);
   bagSlots.organizeReward = options => openRewardCapacityOrganizer({ ...options, UI,
-    readStacks:() => H.game.ownedCards.filter(o => !o.safe).map(o => ({card:o.card,uids:[o.uid],count:1})),
-    canReceive:() => H.game.canReceiveCard(options.card), capacity:() => '背包 9/9 格',
-    moveToSafe:stack => { H.game.ownedCards.find(o => o.uid === stack.uids[0]).safe=true; return true; },
-    discardOne:() => false,
+    ...eventCapacityPorts(H, options),
   });
   bagSlots.showBackpack = () => UI.showOverlay('背包', '<main>背包</main>', 'page');
   H.enter.mockClear(); H.begin.mockClear(); H.game.pendingExtraction = null; H.game.extractionPending = null;
-  H.saves = []; H.uid = 0; H.slot = null; H.narrative = async () => null;
-  Object.assign(H.game, { seed: 7, state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 18, fragments: 0,
-    altarActivated:false, altarRewardPending:false, altarItemSacrificed:false, nodeRewards:{}, entrySupply:null,
-    discoveredPairs: new Set(), layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'event' } }] }],
-    canReceiveCard: () => true, heal: n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),
-    grantCard: (card, opts) => scenes.grantEventCard(card, opts), bagCap:() => 9, usedSlots:() => H.game.ownedCards.length,
-  });
+  resetEventGame(H, () => scenes);
 });
 afterEach(() => { cancelLayerPassage(); UI.hideOverlay({ immediate: true }); vi.restoreAllMocks(); vi.clearAllTimers(); vi.useRealTimers(); });
 
@@ -129,7 +114,7 @@ describe('节点取消语义：关闭不能跨层或开始撤离', () => {
   it('显式点击终局撤离仍调用原撤离事务', async () => {
     openExit('final');
     UI.el.ovBody.querySelector('[data-act="payExit"]').click();
-    await Promise.resolve();
+    for(let i=0;i<8;i++) await Promise.resolve();
     expect(H.begin).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,9 +1,10 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { createBattleDecisionPresenter, bindBattleDecisionInspection } from '../game/src/battle/view/battle.decision-shell.js';
 import { battleHandSelectBodyHTML, battlePileBodyHTML } from '../game/src/battle/view/battle.decision-content.js';
+import { battleDiscoverBodyHTML } from '../game/src/battle/view/battle.discover-view.js';
+import { readCssSource } from './helpers/css-source.js';
 
 const SDT=(await import('../game/src/core/sdt-facade.js')).default;
 const {UI}=await import('../game/src/ui/ui.js');
@@ -30,7 +31,7 @@ it.each([['宝箱','chest','reward-replica'],['事件','scene','event-scene'],['
   expect(document.querySelector('#overlay:has(.battle-decision-unified)')).toBeNull();
   expect(document.querySelector('.card').classList.contains('discover')).toBe(false);
   expect(document.querySelector('#ovBody').style.cssText).toBe('');
-  const css=postcss.parse(readFileSync('game/css/battle-decision.css','utf8'));
+  const css=postcss.parse(readCssSource('game/css/battle-decision.css','utf8'));
   css.walkRules(rule=>{expect(document.querySelector(rule.selector),rule.selector).toBeNull();});
 });
 it('查看详情后关闭，原支付页、滚动、输入上下文和焦点不变',()=>{
@@ -70,4 +71,38 @@ it('returns secondary page focus to the original battlefield opener', async () =
   expect(scene.hasAttribute('inert')).toBe(true);
   expect(restoreCombatScene(UI,snapshot.battleToken)).toBe(true);
   expect(document.activeElement).toBe(opener);expect(scene.hasAttribute('inert')).toBe(false);
+});
+
+it('same discovery refresh keeps the staged choice and both scroll axes; a new round starts fresh', () => {
+  snapshot.discovering = { roundId:1 };
+  const body = token => battleDiscoverBodyHTML({ candidates:[{card},{card:{...card,id:'second',name:'另一张'}}],cardHTML:face,action:'选择 1 张',remaining:1,pageToken:token });
+  show('发现',body('round-1'),'discover',snapshot);
+  let row=document.querySelector('[data-selection-scroll]');
+  row.scrollLeft=312;row.scrollTop=18;
+  document.querySelector('[data-act="btDiscover"][data-i="1"]').click();
+  show('发现',body('round-1'),'discover',snapshot);
+  row=document.querySelector('[data-selection-scroll]');
+  expect(row.scrollLeft).toBe(312);expect(row.scrollTop).toBe(18);
+  expect(document.querySelector('[data-act="btDiscover"][data-i="1"]').getAttribute('aria-pressed')).toBe('true');
+  expect(document.querySelector('[data-act="btDiscoverConfirm"]').disabled).toBe(false);
+  snapshot.discovering = { roundId:2 };
+  show('发现',body('round-2'),'discover',snapshot);
+  expect(document.querySelector('[data-selection-scroll]').scrollLeft).toBe(0);
+  expect(document.querySelector('[data-discovery-selected="true"]')).toBeNull();
+  expect(document.querySelector('[data-act="btDiscoverConfirm"]').disabled).toBe(true);
+});
+
+it('hand-selection refresh retains its horizontal position and the next candidate focus without leaking into another selection', () => {
+  snapshot.handSelecting={selectionId:1};
+  const body=pool=>battleHandSelectBodyHTML({pool,handSelecting:{n:1,act:'copy',mandatory:false},cardHTML:face});
+  const pool=[{uid:'a',card},{uid:'b',card:{...card,id:'next',name:'下一张'}}];
+  show('选牌',body(pool),'discover',snapshot);
+  document.querySelector('[data-selection-scroll]').scrollLeft=180;
+  document.querySelector('[data-act="btPickHand"][data-uid="a"]').focus();
+  show('选牌',body(pool.slice(1)),'discover',snapshot);
+  expect(document.querySelector('[data-selection-scroll]').scrollLeft).toBe(180);
+  expect(document.activeElement.dataset.uid).toBe('b');
+  snapshot.handSelecting={selectionId:2};
+  show('选牌',body(pool),'discover',snapshot);
+  expect(document.querySelector('[data-selection-scroll]').scrollLeft).toBe(0);
 });

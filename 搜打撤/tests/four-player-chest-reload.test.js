@@ -4,7 +4,7 @@ import { serializeChestReward, restoreChestReward, nodeChestRewardAt } from '../
 import { validateRunSave } from '../game/src/hub/run-save-validation.js';
 afterEach(()=>{vi.useRealTimers();delete window.SDT;document.body.innerHTML='';});
 describe('G03 揭晓宝箱持久化',()=>{
-  it('异地保存的待领奖励按节点恢复；坐标、种子与领取索引坏档拒绝读取',()=>{
+  it('异地保存的待领奖励按节点恢复；坐标、种子与领取索引坏档拒绝读取',async () =>{
     const game={seed:17,layerIdx:1,trackPos:2};
     const current={kind:'small',cards:[{id:'a',name:'补给'}],coins:2,coinsReceived:true,taken:new Set([0]),lost:new Set()};
     const saved=serializeChestReward(game,[{kind:'small'},{kind:'small'}],1,current,{onCell:true,consumeNode:true});
@@ -19,7 +19,7 @@ describe('G03 揭晓宝箱持久化',()=>{
       expect(validateRunSave({...away,nodeChestRewards:{'1,2':broken}})).toMatchObject({ok:false,preserveRun:true});
     }
   });
-  it('揭晓未领、部分领取、收金币的快照可复原，进度不重置',()=>{
+  it('揭晓未领、部分领取、收金币的快照可复原，进度不重置',async () =>{
     const game={seed:17,layerIdx:1,trackPos:2};
     const cur={kind:'small',cards:[{id:'a',name:'法力药水'},{id:'b',name:'法杖'}],coins:2,coinsReceived:false,taken:new Set(),lost:new Set()};
     const pack=()=>serializeChestReward(game,[{kind:'small'}],1,cur,{onCell:true,consumeNode:true});
@@ -47,35 +47,34 @@ describe('G03 揭晓宝箱持久化',()=>{
       grantCard:vi.fn(()=>true),gainCoins:vi.fn(),persistSave:vi.fn()};
     Chests.open(game,[{kind:'medium'}],()=>{},{onCell:true,consumeNode:true});
     const saved=JSON.parse(JSON.stringify(Chests.serialize(game)));
-    expect(saved.current.rewardStage).toBe('chest');
+    expect(saved.current.rewardStage).toBe('cards');
     expect(saved.current.cards[0].name).toBe('原奖励');expect(game.persistSave).toHaveBeenCalled();
     draw.mockImplementation(()=>alternate);const calls=draw.mock.calls.length;
     expect(Chests.restore(game,saved,()=>{})).toBe(true);expect(draw).toHaveBeenCalledTimes(calls);
     vi.advanceTimersByTime(5000);
-    expect(body.querySelector('.cqo-overview')).not.toBeNull();
-    expect(body.textContent).not.toContain('原奖励');
-    acts.chestNext();
+    expect(body.querySelector('.cqo-overview')).toBeNull();
+    expect(body.textContent).toContain('原奖励');
     const opening=JSON.parse(JSON.stringify(Chests.serialize(game)));
-    expect(opening.current.rewardStage).toBe('opening');
+    expect(opening.current.rewardStage).toBe('cards');
     expect(Chests.restore(game,opening,()=>{})).toBe(true);
     expect(Chests.serialize(game).current.rewardStage).toBe('cards');
     expect(body.textContent).toContain('原奖励');expect(body.textContent).not.toContain('重抽奖励');
-    acts.chestSelect({i:0});acts.chestTake1({i:0});expect(game.grantCard).toHaveBeenCalledTimes(1);
+    await acts.chestSelect({i:0});await acts.chestTake1({i:0});expect(game.grantCard).toHaveBeenCalledTimes(1);
     const taken=JSON.parse(JSON.stringify(Chests.serialize(game)));
-    acts.chestReturn();
+    await acts.chestReturn();
     expect(game.state).toBe('idle');expect(Chests.isOpen()).toBe(false);expect(Chests.serialize(game)).toBeNull();
     expect(game.nodeChestRewards['0,1'].current.taken).toEqual([0]);
     const parked=JSON.parse(JSON.stringify(game.nodeChestRewards));
     game.trackPos=3;
     Chests.open(game,[{kind:'medium'}],()=>{},{onCell:true});
-    acts.chestReturn();
+    await acts.chestReturn();
     expect(Object.keys(game.nodeChestRewards)).toEqual(['0,1','0,3']);
     expect(game.nodeChestRewards['0,1']).toEqual(parked['0,1']);
     game.trackPos=1;
     game.seed=18;expect(Chests.serialize(game)).toBeNull();game.seed=17;
     game.discoveredPairs=new Set();expect(Chests.serialize(game)).toBeNull();game.discoveredPairs=undefined;
-    Chests.restore(game,taken,()=>{});acts.chestTake1({i:0});expect(game.grantCard).toHaveBeenCalledTimes(1);
-    continueChestRewards(acts);expect(game.gainCoins).toHaveBeenCalledTimes(1);expect(Chests.serialize(game)).toBeNull();
+    Chests.restore(game,taken,()=>{});await acts.chestTake1({i:0});expect(game.grantCard).toHaveBeenCalledTimes(1);
+    await continueChestRewards(acts);expect(game.gainCoins).toHaveBeenCalledTimes(2);expect(Chests.serialize(game)).toBeNull();
     expect(game.nodeChestRewards['0,1']).toBeUndefined();expect(game.nodeChestRewards['0,3']).toBeTruthy();
   });
 });

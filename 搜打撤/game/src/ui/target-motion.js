@@ -142,10 +142,15 @@ export function createTargetMotion({ run = legacyAnimate, reduced = motionReduce
     for (const element of [...active]) {
       if (!element.isConnected || element.closest('[hidden]')) { clearVisual(element); continue; }
       if (reduced()) {
-        const goal = states.get(element).target;
+        const state = states.get(element), goal = state.target;
+        // Reaching the requested static pose completes the transition. A true
+        // cancellation still uses stopVisual's false result everywhere else.
+        const resolve = state.resolve;
+        state.resolve = null;
         stopVisual(element);
         setStyles(element, goal);
-        states.get(element).settled = true;
+        state.settled = true;
+        resolve?.(true);
       }
     }
   }

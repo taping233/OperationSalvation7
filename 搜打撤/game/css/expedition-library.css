@@ -57,8 +57,9 @@
 /* 冲印质感：暖纱+暗角罩层（::after，静态一次绘制）。轻做口径——不改变卡面画风定版，
    只把高饱和原画往"银盐冲印"方向拢半步（09-23 暗卡提亮：暗角 .2→.12） */
 /* 选中=射灯打亮：金线框+暖光晕（静态样式，不碰 09-08 禁动画） */
-#overlay .lib-cardwrap:where(:not(.studio-photo)) { display:flex; justify-content:center; padding:8px; background:rgba(28,30,32,.55); border:1px solid rgba(194,199,202,.14); border-radius:0; cursor:zoom-in; }
-#overlay .lib-cardwrap:where(:not(.studio-photo)):hover { border-color:#ead282; background:#232628; }
+#overlay .lib-cardwrap:where(:not(.studio-photo)){
+& { display:flex; justify-content:center; padding:8px; background:rgba(28,30,32,.55); border:1px solid rgba(194,199,202,.14); border-radius:0; cursor:zoom-in; }
+&:hover { border-color:#ead282; background:#232628; }}
 
 #cardZoom .cz-close {
   position:absolute;
@@ -76,30 +77,28 @@
   box-shadow:0 8px 24px rgba(0,0,0,.35);
   cursor:pointer;
 }
-body.cardlib-open #cardZoom .cz-backdrop {
+body.cardlib-open #cardZoom{
+& .cz-backdrop {
   background:
     radial-gradient(110% 62% at 50% -12%, rgba(255,235,170,.10), transparent 56%),
     radial-gradient(120% 78% at 50% 114%, rgba(90,28,36,.38), transparent 62%),
     rgba(16,8,6,.84);
 }
-body.cardlib-open #cardZoom:not(.cz-photo) .cz-backdrop { background:#1008062e; backdrop-filter:blur(18px); }
-body.cardlib-open #cardZoom .cz-close {
+&:not(.cz-photo) .cz-backdrop { background:#1008062e; backdrop-filter:blur(18px); }
+& .cz-close {
   border-color:rgba(225,198,109,.45);
   color:var(--studio-gold-soft,#f4e2a8);
   background:rgba(29,21,18,.82);
 }
-body.cardlib-open #cardZoom .cz-close .ic {
+& .cz-close .ic {
   filter:grayscale(1) brightness(1.55) sepia(1) saturate(2.6) hue-rotate(-8deg);
-}
-body.cardlib-open #cardZoom .cz-hint {
-  color:#beb080;
-  letter-spacing:2.4px;
-}
+}}
 /* 快门白闪（批次四，09-20 老板反馈收敛）：从全屏近纯白降到中心轻微曝光感，
    峰值合成透明度 ~0.4 且快速向边缘衰减，只动 opacity。
    cz-flash span 是 ui.js 无条件渲染的，其他入口无本段样式=透明无感 */
 @keyframes czFlash { 0% { opacity:0; } 14% { opacity:.85; } 100% { opacity:0; } }
-body.cardlib-open #cardZoom .cz-flash {
+body.cardlib-open #cardZoom{
+& .cz-flash {
   position:absolute;
   inset:0;
   z-index:5;
@@ -109,14 +108,14 @@ body.cardlib-open #cardZoom .cz-flash {
 }
 /* 长按大图 600ms 看底片（批次四彩蛋）：负片是一次性 class 切换（cz-neg，ui.js 挂），
    非逐帧 filter 动画，不碰性能铁律 */
-body.cardlib-open #cardZoom.cz-neg .cz-card .hsc-art img {
+&.cz-neg .cz-card .hsc-art img {
   filter:invert(1) hue-rotate(180deg) sepia(.12);
 }
 /* 背签存档章（批次四）：有馆方记录的背签右下角盖一枚斜红章（纯装饰，不挡输入） */
-body.cardlib-open #cardZoom .cz-note.has {
+& .cz-note.has {
   position:relative;
 }
-body.cardlib-open #cardZoom .cz-note.has::after {
+& .cz-note.has::after {
   content:'存档';
   position:absolute;
   right:16px;
@@ -134,7 +133,7 @@ body.cardlib-open #cardZoom .cz-note.has::after {
   transform:rotate(-9deg);
   box-shadow:inset 0 0 0 1.5px rgba(174,54,44,.3);
   pointer-events:none;
-}
+}}
 #cardZoom .cz-close:hover,
 #cardZoom .cz-close:focus-visible {
   color:#e0dcd6;
@@ -142,8 +141,9 @@ body.cardlib-open #cardZoom .cz-note.has::after {
   outline:2px solid rgba(225,198,109,.8);
   outline-offset:3px;
 }
-#cardZoom .cz-note.has,
-#cardZoom .cz-note.editable {
+#cardZoom .cz-note{
+&.has,
+&.editable {
   width:min(620px,90%)!important;
   box-sizing:border-box;
   display:block!important;
@@ -158,8 +158,8 @@ body.cardlib-open #cardZoom .cz-note.has::after {
   box-shadow:0 14px 32px rgba(0,0,0,.48),inset 0 0 22px rgba(88,74,43,.08)!important;
   transform:rotate(-.35deg);
 }
-#cardZoom .cz-note.has .cz-note-tag,
-#cardZoom .cz-note.editable .cz-note-tag {
+&.has .cz-note-tag,
+&.editable .cz-note-tag {
   display:flex;
   padding:0 0 7px!important;
   margin:0 0 7px;
@@ -168,13 +168,14 @@ body.cardlib-open #cardZoom .cz-note.has::after {
   font-size:12px!important;
   letter-spacing:.18em!important;
 }
-#cardZoom .cz-note.editable {
+&.editable {
   display:grid!important;
   grid-template-columns:minmax(0,1fr);
   gap:8px!important;
   cursor:text;
-}
-#cardZoom .cz-note-input {
+}}
+#cardZoom .cz-note-input{
+& {
   width:100%;
   min-height:88px;
   box-sizing:border-box;
@@ -187,12 +188,12 @@ body.cardlib-open #cardZoom .cz-note.has::after {
   outline:none;
   font:16px/1.75 var(--font-ui); /* 09-25 小字场景弃 serif：栈尾 SimSun 点阵化发虚 */
 }
-#cardZoom .cz-note-input:focus {
+&:focus {
   border-style:solid;
   border-color:rgba(117,96,47,.75);
   background:rgba(248,247,245,.46);
   box-shadow:0 0 0 3px rgba(117,96,47,.1);
-}
+}}
 #cardZoom .cz-note-status {
   justify-self:end;
   color:rgba(70,63,48,.58);

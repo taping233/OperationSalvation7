@@ -8,19 +8,8 @@
  * marker 一次性；异常/缺定义/缺卡/存写异常保守退出不标记；不原地改热缓存对象（写时复制）；
  * 先校验（schema + capability 双门）后保存；成功后复读确认。 */
 import { KEY } from './cards.consts.js';
-import { validateCardRules } from './card-rules.schema.js';
-import { inspectCardRuleCapability } from './card-rules.capability.js';
-
-// E8/m1 同款深相等：键集一致（与键序无关）+ 逐值递归；原始类型走严格相等。
-function sameSnapshot(left, right) {
-  if (left === right) return true;
-  if (!left || !right || typeof left !== 'object' || typeof right !== 'object') return false;
-  if (Array.isArray(left) !== Array.isArray(right)) return false;
-  if (Array.isArray(left) && left.length !== right.length) return false;
-  const keys = Object.keys(left);
-  return keys.length === Object.keys(right).length && keys.every(key =>
-    Object.prototype.hasOwnProperty.call(right, key) && sameSnapshot(left[key], right[key]));
-}
+import { analyzeCardRules } from './card-rules.capability.js';
+import { sameCardSnapshot as sameSnapshot } from './card-snapshot.js';
 
 /**
  * M 批回填骨架工厂。生产无参调用（window.SDT.Cards + localStorage）；deps 仅测试注入用。
@@ -114,12 +103,11 @@ export function createRuleBackfiller({ label, markerKey, definitions, canonicalT
         }
         nextCard.rules = definition.rules;
         // 先校验后保存：schema 形状 + capability 生产能力门双保险，任一失败抛错整体退出不标记。
-        const validation = validateCardRules(nextCard);
+        const { validation, capability } = analyzeCardRules(nextCard);
         if (!validation.ok) {
           throw new Error(`${label} rule migration validation failed for ${card.id}: `
             + validation.errors.map(err => `${err.path}: ${err.message}`).join('; '));
         }
-        const capability = inspectCardRuleCapability(nextCard);
         if (!capability.ok) {
           throw new Error(`${label} rule migration capability unsupported for ${card.id}: `
             + (/** @type {Extract<import("./card-rules.capability.types").CardRuleCapability,{ok:false}>} */ (capability)).issues.map(issue => `${issue.path}: ${issue.message}`).join('; '));

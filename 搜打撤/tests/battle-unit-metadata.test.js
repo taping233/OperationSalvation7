@@ -1,3 +1,4 @@
+import { battleViewMocks, overlayElements, frameMocks, inventoryFields, mountBattleRoot } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
@@ -5,8 +6,7 @@ vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
   waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }),
 }));
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
-  attach: () => Promise.resolve(false), hide() {}, cacheStats: () => ({}), play() {},
-  setPaused() {}, presentDeath() {}, isLiveBattleFigure: () => false, actionImpactRemaining: () => null,
+  ...frameMocks(),
 }));
 const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
 const UI = {
@@ -15,10 +15,7 @@ const UI = {
   hideOverlay() { this.el.overlay.hidden = true; document.dispatchEvent(new Event('sdt-overlay-close')); },
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 9, 99, 5, 5),
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession, commands } = await import('../game/src/battle/core/battle.core.js');
@@ -45,8 +42,7 @@ async function settle() {
 async function start() {
   game = {
     ownedCards: [{ uid: 'unit-bandage', card: structuredClone(catalog.find(card => card.id === 'tt3-bandage')) }],
-    inventory: [], usedPocket: [], hp: 60, maxHp: 80, atk: 4, spellPower: 1, coins: 0, myClass: '法师',
-    state: 'idle', battleActive: false, log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
+    ...inventoryFields(60, 80, 1, '法师'), log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
   };
   window.SDT.game = game;
   BattleSession.start(game, [{ id: 'unit-target', name: '训练靶', hp: 120, atk: 3 }], { isBoss: false });
@@ -57,7 +53,7 @@ async function start() {
   })) };
 }
 function paint(snapshot, ctx = {}) {
-  updateUnits(mountUnitLayer(UI.el.ovBody, snapshot.battleToken), snapshot, ctx);
+  updateUnits(mountUnitLayer(UI.el.ovBody, snapshot.battleToken), snapshot, {turn:snapshot.turn, playerStatus:snapshot.pstat.status, ...ctx});
 }
 function observeUnits() {
   const observer = new MutationObserver(() => {});
@@ -67,10 +63,8 @@ function observeUnits() {
 beforeEach(() => {
   frames = [];
   vi.spyOn(window, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
-  Element.prototype.animate = () => ({ finished: Promise.resolve(), cancel() {}, onfinish: null });
-  localStorage.setItem('sdt-intent-legend', '1');
-  document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  mountBattleRoot();
+  UI.el = { ...overlayElements() };
   UI._lastMode = null;
 });
 afterEach(async () => {
@@ -142,7 +136,8 @@ it('updates count, index, idle phase and affix title after reordering and remova
     expect(el.dataset.eidx).toBe(String(i)); expect(el.dataset.foeId).toBe(snapshot.foes[i].id);
     expect(el.style.getPropertyValue('--foe-idle-phase')).toBe(`${-(i * 0.61)}s`);
   });
-  expect(reordered[0].title).not.toBe('');
+  expect(reordered[0].querySelector('[data-ui-tip-text]').getAttribute('data-ui-tip-text')).toContain('狂乱');
+  expect(reordered[0].title).toBe('');
   snapshot.foes = [snapshot.foes[0]]; paint(snapshot);
   expect(foeMount().dataset.count).toBe('1'); expect(foeMount().style.getPropertyValue('--battle-foe-count')).toBe('1');
   snapshot.foes[0].affix = null; paint(snapshot); expect(foes()[0].title).toBe('');

@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { downloadFeedbackRecord, feedbackExportRecord, readLocalFeedback } from '../game/src/ui/feedback.local.js';
+vi.mock('../game/src/ui/region-transition.js',()=>({transitionRegion:async(_root,render)=>{render();return true;}}));
 import { createGameMenuController } from './helpers/menu-controller.js';
 
 function setup() {
@@ -36,7 +37,7 @@ describe('R7-b 本地反馈', () => {
     document.getElementById('title').dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, clientX: 10, clientY: 20 }));
     Object.assign(document.getElementById('sugText'), { value: '<b>正文</b>' });
     document.getElementById('sugSteps').value = '步骤'; document.getElementById('sugExpected').value = '期望'; document.getElementById('sugActual').value = '实际';
-    const save = document.getElementById('sugSaveBtn'); save.onclick(); save.onclick(); await Promise.resolve();
+    const save = document.getElementById('sugSaveBtn'); save.onclick(); save.onclick(); await vi.dynamicImportSettled(); for(let i=0;i<8;i++)await Promise.resolve();
     const list = JSON.parse(localStorage.getItem('sdt-suggestions-v1'));
     expect(list).toHaveLength(1); expect(list[0]).toMatchObject({ text: '<b>正文</b>', steps: '步骤', expected: '期望', actual: '实际', version: 'v9.1' });
     expect(document.getElementById('sugLayer').hidden).toBe(true);   // 保存成功自动退出留言界面
@@ -46,7 +47,7 @@ describe('R7-b 本地反馈', () => {
   it('标题→设置→留言库→设置→标题后按可见DOM记录标题页', async () => {
     const { controller, acts, game } = setup();
     controller.openSettings(); acts.openInbox(); await Promise.resolve(); acts.sugBack(); acts.closeSettings();
-    expect(document.getElementById('title').hidden).toBe(false); expect(document.getElementById('overlay').hidden).toBe(true); expect(game.state).toBe('idle');
+    expect(document.getElementById('title').hidden).toBe(false); expect(document.getElementById('overlay').hidden).toBe(true); expect(game.state).toBe('title');
     document.getElementById('titleSettings').dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, clientX: 12, clientY: 14 }));
     document.getElementById('sugText').value = '页面位置'; await document.getElementById('sugSaveBtn').onclick();
     const entry = JSON.parse(localStorage.getItem('sdt-suggestions-v1'))[0];

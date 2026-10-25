@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
@@ -24,7 +25,7 @@ window.SDT = {
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
   Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
   Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: {} },
+  MAP: { rules: { ...battleRules(9, 99, 15, 0, 5, 1) }, items: {} },
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
@@ -67,8 +68,7 @@ async function start(card) {
       { id: 'fuel', name: '燃料牌', type: '法术', cost: 0, desc: '' },
       { id: 'barrier', name: '队列前牌', type: '法术', cost: 0, desc: '' }]
       .map((value, index) => ({ uid: `e7-${index}`, card: value })),
-    inventory: [], hp: 48, maxHp: 50, atk: 4, spellPower: 0, coins: 0,
-    myClass: null, characterId: null, state: 'idle', battleActive: false, logs: [],
+    inventory: [], ...playerFields(48, 50, 4, 0, null, null), logs: [],
     log(message, level) { this.logs.push({ message, level }); },
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
   };

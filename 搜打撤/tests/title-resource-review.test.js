@@ -43,7 +43,7 @@ describe('isolated title CSS/image diagnostic', () => {
     const oldLinks=[...original.querySelectorAll('link[rel=stylesheet]')].map(n=>n.getAttribute('href'));
     expect(links.slice(0,oldLinks.length)).toEqual(oldLinks);
     for(const href of links) expect(existsSync(resolve('game',href))).toBe(true);
-    for(const selector of ['.home-depth','.home-scene-light','.home-mist','.home-grain','.home-flash','.home-sheen','.home-slash','.home-beams','.home-ghost','.home-rail','.home-readout']) expect(doc.querySelectorAll(selector)).toHaveLength(1);
+    for(const selector of ['.home-depth','.home-mist','.home-grain','.home-flash','.home-sheen','.home-slash','.home-beams','.home-ghost','.home-rail','.home-readout']) expect(doc.querySelectorAll(selector)).toHaveLength(1);
     expect(doc.querySelectorAll('.home-spark')).toHaveLength(6);
     expect(doc.querySelectorAll('.home-near-snow i')).toHaveLength(6);
     expect(doc.querySelectorAll('.home-corner')).toHaveLength(4);

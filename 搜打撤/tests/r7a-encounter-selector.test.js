@@ -5,7 +5,7 @@ import map from '../game/data/map.json';
 const seq=(...values)=>{let i=0;return()=>values[Math.min(i++,values.length-1)];};
 describe('R7-a encounter selector',()=>{
   it('elite roll stays first and preserves existing probability path',()=>{
-    const out=selectEncounterSpec(map.encounters[3],map.monsters,seq(.05,.99));
+    const out=selectEncounterSpec({...map.encounters[3],elite:{pool:['dragon'],size:[1,1],chance:.1}},map.monsters,seq(.05,.99));
     expect(out.value).toMatchObject({kind:'elite',enemyIds:['dragon'],rewardKind:'elite'});
   });
   it('selects each reviewed group with fixed ordered enemy ids',()=>{

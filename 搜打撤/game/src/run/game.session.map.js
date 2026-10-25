@@ -4,11 +4,10 @@
  * 被开局流程（buildNewRunDerived）、读档恢复（installDerived）与 game.boot 消费。 */
 import { Random } from '../core/random.js';
 import { checkConnectivity } from './map-graph.js';
-import { createLayeredMap, createCurrentLayeredMap } from './layeredMap.js';
+import { createLayeredMap } from './layeredMap.js';
+import { createExplorationLayeredMap } from './map-exploration-adapter.js';
 import { GENERATOR_VERSION, LAYOUT_VERSION } from './map-generator.js';
-import { CURRENT_GENERATOR_VERSION, CURRENT_LAYOUT_VERSION } from './map-generation-rules.js';
-import { applyRouteOverlay, ROUTE_VERSION } from '../ui/route-overlay.js';
-import { applyGuardedRoute } from './map-route-v2.js';
+import { EXPLORATION_GENERATOR_VERSION as CURRENT_GENERATOR_VERSION, CURRENT_LAYOUT_VERSION } from './map-generation-rules.js';
 import { game } from './game.session.kernel.js';
 
 // ---------- 初始化派生数据 ----------
@@ -92,11 +91,5 @@ export function buildDerived(mapSeed = game.mapSeed ?? game.seed ?? Random.seed 
 }
 
 export function buildNewRunDerived(mapSeed) {
-  const base = createCurrentLayeredMap(mapSeed);
-  const routed = applyRouteOverlay({ seed: mapSeed, generatorVersion: CURRENT_GENERATOR_VERSION, layoutVersion: CURRENT_LAYOUT_VERSION, layerData: base, routeVersion: ROUTE_VERSION });
-  const previous = routed.ok ? routed.value : { layerData:base, routePlan:{ layerIndex:1,status:'fallback',fallbackReason:'SESSION_OVERLAY_REJECTED' } };
-  const guarded = applyGuardedRoute({ generatorVersion:CURRENT_GENERATOR_VERSION, layoutVersion:CURRENT_LAYOUT_VERSION,
-    layerData:previous.layerData, baseRoutePlan:previous.routePlan });
-  if (!guarded.ok) throw new Error('新局路线输入未通过地图质量门');
-  installDerived(guarded.value.layerData, mapSeed, CURRENT_GENERATOR_VERSION, CURRENT_LAYOUT_VERSION, guarded.value.routeVersion, guarded.value.routePlan);
+  installDerived(createExplorationLayeredMap(mapSeed), mapSeed, CURRENT_GENERATOR_VERSION, CURRENT_LAYOUT_VERSION);
 }

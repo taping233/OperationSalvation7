@@ -44,7 +44,8 @@ export function createBaseEconomy({ read, mutate, appendCards, room }) {
     if (index < 0) return { ok: false, why: 'empty' };
     const count = cards.reduce((total, stack) => total + (stack.count || 1), 0);
     if (!count) return { ok: false, why: 'empty' };
-    if (count > 0 && room() < count) return { ok: false, why: 'full' };
+    // The consumed pack releases one warehouse slot in the same draft.
+    if (count > 0 && room() + 1 < count) return { ok: false, why: 'full' };
     return mutate(draft => {
       const source = draft.stash[index];
       source.count--;

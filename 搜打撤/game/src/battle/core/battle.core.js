@@ -1,3 +1,4 @@
+import { isArrowRuneCard, isStarterAttackTextName } from '../../cards/card-legacy-battle-policy.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 import { refillDrawPile } from '../bag/battle.deck.js';
@@ -12,11 +13,11 @@ import * as replayInteraction from '../runtime/battle.runtime.interaction.js';
 import {
   battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing,
   discovering, choosing, stealthStrike, nextSpellTwice, viewingGrave, viewingDeck,
-  shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast, equipped,
+  shaTransform, growth, handInfuseCounts, nestSyn, arrowRune, allSpellsInfused, freeCast, equipped,
   battleRestartCheckpoint, tmpSeq, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
   set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
 } from '../runtime/battle.runtime.js';
-import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, handUnplayableReason as unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, slamSkill } from './battle.engine.js';
+import { getTriggerSnapshot, requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, handUnplayableReason as unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, cancelDiscover, slamSkill } from './battle.engine.js';
 import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
 import { configureBattleEngine, getCardPlayAvailability, submitCardPlay } from './battle.engine.js';
 import { endTurn, surrender } from './battle.enemy-phase.js';
@@ -266,7 +267,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     delete snapshot.battleToken;
     const data = module => Object.fromEntries(Object.entries(module).filter(([, value]) => typeof value !== 'function'));
     return copy({ battle: snapshot, rules: { piles: data(replayPiles), effects: data(replayEffects),
-      interaction: data(replayInteraction), generatedCardSequence: tmpSeq } });
+      interaction: data(replayInteraction), triggers: getTriggerSnapshot(), history: pstat?.requestedCards?.history, generatedCardSequence: tmpSeq } });
   }
 
   
@@ -354,12 +355,14 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
       isFreeCast,
       selectedFuelUids: Object.freeze(selectedFuelUids),
       damageGrowth: +(growth[uid] || 0),
+      handInfuseCount: +(handInfuseCounts[uid] || 0),
+      freezeDamageBonus: equipped.reduce((sum, entry) => sum + Number(entry?.card?.rules?.equip?.passive?.cond?.vsFreeze || 0), 0),
       wholeCardRepeats,
-      arrowRuneRepeat: !!(arrowRune && (card.name === '箭' || card.id === 'token-arrow')),
+      arrowRuneRepeat: !!(arrowRune && isArrowRuneCard(card)),
       aegisBlocked: aegisBlocked(target),
       targetProtected,
       heartsMode: !!target.heartsMode,
-      shaTransformed: !!(shaTransform && (card.name === '初始攻击' || card.name === '杀')),
+      shaTransformed: !!(shaTransform && isStarterAttackTextName(card)),
       targetIndexes: Object.freeze(targetIndexes),
       modifiers: Object.freeze({
         stealthStrike: stealthStrikeActive,
@@ -480,6 +483,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     confirmDeck: beginBoss,
     cancelDeck: cancelDeckSelection,
     pickDiscover,
+    cancelDiscover,
     pickHandSelect,
     skipHandSelect,
     pickChoice,

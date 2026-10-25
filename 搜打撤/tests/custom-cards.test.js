@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 卡牌库完整性检查（2026-09-10 需求批次 v4–v10）：
  * 跑完整 ensure 迁移链后逐张核验本会话新增/改版卡牌——字段、唯一性、随机池归属。 */
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -6,7 +7,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 3, battleHandMax: 10, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+  rules: { ...battleRules(3, 10, 15, 5, 5, 1) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');

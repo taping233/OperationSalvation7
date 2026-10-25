@@ -3,14 +3,19 @@ import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
 import { acquirePageVisualReadiness } from './page-visual-readiness-sharing.js';
 import '../../css/page-visual-ready.css';
 import { revealTransition, transitionFrame } from './transition-handoff.js';
+import { createSilentNodeCut, prepareSilentFilm } from './silent-node-film.js';
 
 let handoff = null;
 
-function visualCover(kind, returning = false) {
+function visualCover(kind, returning = false, illustrated = true) {
   const cover = document.createElement('div');
   cover.className = `page-visual-handoff${returning ? ' page-visual-return' : ''}`;
   cover.dataset.kind = kind;
   cover.setAttribute('aria-hidden', 'true');
+  if (kind==='page' && !returning && illustrated) {
+    cover.dataset.handoffProfile='brief';
+    cover.append(createSilentNodeCut('loading'));
+  }
   return cover;
 }
 
@@ -70,13 +75,14 @@ function waitBattlePresentation(stage, signal) {
   });
 }
 
-// Returning keeps the existing map visible. A transparent input shield owns
-// the resize/first-frame boundary without staging an unrelated scene or dwell.
+// Prepare the map while the departing scene still covers it. The original
+// scene fades once; the transparent shield only owns input through first paint.
 export function stageMapReturn(ui, game) {
   cancelPageVisual();
   const controller = new AbortController();
   const run = game.discoveredPairs;
   const overlay = ui.el.overlay;
+  overlay.dataset.mapReturn = '';
   const cover = visualCover('panel', true);
   cover.classList.add('page-map-return');
   document.body.append(cover);
@@ -92,7 +98,10 @@ export function stageMapReturn(ui, game) {
   const cleanup = () => {
     clearTimeout(deadline); observer.disconnect(); controller.abort(); unhide(); cover.remove();
     window.removeEventListener('keydown', block, true);
-    if (handoff === operation) handoff = null;
+    if (handoff === operation) {
+      delete overlay.dataset.mapReturn;
+      handoff = null;
+    }
   };
   const operation = { cancel: cleanup };
   handoff = operation;
@@ -100,12 +109,13 @@ export function stageMapReturn(ui, game) {
   observer.observe(overlay, { attributes: true, attributeFilter: ['hidden'] });
   const deadline = setTimeout(cleanup, 4500);
   if (overlay.hidden) unhide();
+  const prepared = Promise.resolve().then(() => window.SDT?.Renderer?.prepare?.(game, current, { resetBackdrop:false }))
+    .catch(error => { console.error('返回地图视觉准备失败：', error); return false; });
   (async () => {
     try {
       await hidden;
+      await prepared;
       await visualFrame(controller.signal);
-      if (!current()) return;
-      await window.SDT?.Renderer?.prepare?.(game, current);
       if (!current()) return;
       await revealTransition(cover, { signal:controller.signal, isCurrent:current, painted:true,
         onReveal:() => window.removeEventListener('keydown', block, true) });
@@ -115,8 +125,8 @@ export function stageMapReturn(ui, game) {
 }
 
 // Preserve the synchronous UI API: only presentation is delayed, never route/save actions.
-/** @param {typeof window.SDT.UI} ui @param {() => void} reveal @param {{kind?: string, scene?: HTMLElement}} [options] */
-export function stagePageVisual(ui, reveal, { kind = 'page', scene } = {}) {
+/** @param {typeof window.SDT.UI} ui @param {() => void} reveal @param {{kind?: string, scene?: HTMLElement, illustrated?: boolean}} [options] */
+export function stagePageVisual(ui, reveal, { kind = 'page', scene, illustrated = true } = {}) {
   cancelPageVisual();
   const overlay = ui.el.overlay;
   const body = ui.el.ovBody;
@@ -124,7 +134,7 @@ export function stagePageVisual(ui, reveal, { kind = 'page', scene } = {}) {
   const traceContext = captureRuntimeStageContext();
   const settingsTraceContext = traceContext && source.matches?.('.settings-page:not(.sugin-page)') ? traceContext : null;
   const controller = new AbortController();
-  const cover = visualCover(kind);
+  const cover = visualCover(kind, false, illustrated);
   if (scene) {
     cover.classList.add('page-visual-scene');
     cover.replaceChildren(scene);
@@ -136,7 +146,10 @@ export function stagePageVisual(ui, reveal, { kind = 'page', scene } = {}) {
   }
   overlay.dataset.visualPending = kind;
   // Retain the scene's existing #overlay styling without duplicating its IDs.
+  scene?.querySelectorAll('.silent-node-cut').forEach(cut => cut.classList.add('silent-film-settled'));
   (scene ? overlay : document.body).append(cover);
+  const coverFilm=/** @type {HTMLElement} */ (cover.querySelector('.silent-node-cut'));
+  const artworkReady=coverFilm && !scene ? prepareSilentFilm(coverFilm,{signal:controller.signal}) : Promise.resolve(true);
   const current = () => handoff === operation && !controller.signal.aborted && lifetime.current();
   const block = event => {
     if (event.key === 'Escape' || event.altKey) return;
@@ -169,6 +182,8 @@ export function stagePageVisual(ui, reveal, { kind = 'page', scene } = {}) {
           frameReady: true, revisionOwner: ui }); }
       finally { finishWait(); }
       if (!ready || !current()) return;
+      await artworkReady;
+      if (!current()) return;
       await revealTransition(cover, { signal:controller.signal, isCurrent:current, painted:true,
         onReveal:() => {
           delete overlay.dataset.visualPending;

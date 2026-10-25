@@ -1,6 +1,3 @@
-/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
-import { esc } from '../../core/shared.js';
-
 // Presentation identity only. Commands remain authoritative for eligibility,
 // target rules, material costs and submission; this module never spends resources.
 export function selectionState(snapshot, { clickUid = null, findCard = /** @type {(uid: string) => {card?: {name?: string}} | null} */ (() => null) } = {}) {
@@ -34,38 +31,9 @@ export function cancelSelection({ snapshot, commands, hasAim = false, clickUid =
   return true;
 }
 
-// One direct-child status strip for click selection, pending card/item and skills.
-// Its callback is bound to the displayed selection, so a detached/stale button
-// cannot cancel a newer card, target step or battle.
-export function syncSelectionPrompt(stage, snapshot, { clickUid = null, findCard, getCurrent, onCancel, onReturnToInfusion = null }) {
-  if (!stage) return;
-  const selection = selectionState(snapshot, { clickUid, findCard });
-  let bar = /** @type {BattleElement} */ (stage.querySelector('[data-selection-prompt]'));
-  if (stage._battleToken != null && stage._battleToken !== snapshot.battleToken
-    || !selection || selection.kind === 'infusion' || snapshot.busy || !['player', 'targeting'].includes(snapshot.phase)) {
-    bar?.remove(); return;
-  }
-  const key = selectionKey(snapshot, selection);
-  if (!bar) {
-    bar = document.createElement('div');
-    bar.className = 'bt-infuse bt-pick';
-    bar.dataset.selectionPrompt = '';
-    stage.appendChild(bar);
-  }
-  const html = `<div class="bt-infuse-copy"><p class="bt-infuse-title" role="status">${selection.name ? `已选【<b>${esc(selection.name)}</b>】：` : ''}${esc(selection.detail)}</p></div><div class="bt-infuse-actions">${selection.canReturnToInfusion && onReturnToInfusion ? '<button class="mini-btn" data-act="btPickReturnInfusion" type="button">返回选材</button>' : ''}<button class="mini-btn" data-act="btPickCancel" type="button">取消 · Esc</button></div>`;
-  if (bar.dataset.selectionKey === key && bar._selectionHTML === html) return;
-  bar.dataset.selectionKey = key;
-  bar._selectionHTML = html;
-  bar.innerHTML = html;
-  for (const button of /** @type {NodeListOf<HTMLButtonElement>} */ (bar.querySelectorAll('button'))) button.addEventListener('click', event => {
-    event.preventDefault(); event.stopPropagation();
-    const current = getCurrent();
-    if (!button.isConnected || !bar.contains(button) || !bar.isConnected || !stage.isConnected || stage.closest('[hidden], [inert], [aria-hidden="true"], .closing') || current.snapshot.busy
-      || !['player', 'targeting'].includes(current.snapshot.phase)
-      || current.stage && current.stage !== stage
-      || stage._battleToken != null && stage._battleToken !== current.snapshot.battleToken
-      || selectionKey(current.snapshot, selectionState(current.snapshot, { clickUid:current.clickUid, findCard })) !== key) return;
-    if (button.dataset.act === 'btPickReturnInfusion') onReturnToInfusion(selection.uid);
-    else onCancel({ restoreFocus:event.detail === 0 });
-  });
+// Target selection uses battlefield highlighting and existing keyboard cancellation.
+// Remove any previously mounted strip during a live update; never create a replacement.
+export function syncSelectionPrompt(stage, ..._options) {
+  void _options; // Preserve the existing renderer call signature during live updates.
+  stage?.querySelectorAll('[data-selection-prompt]').forEach(bar => bar.remove());
 }

@@ -14,12 +14,15 @@ beforeAll(async () => {
 beforeEach(() => { H.game.mode = 'elite'; H.map.rules.fireHeal = 10; H.setXpMul.mockClear(); });
 afterAll(() => { window.SDT = previousSDT; });
 
-// Hand-reviewed expected ATK/HP for the existing catalog; no proposed boss/elite data.
+// Hand-reviewed ATK/HP includes the nine approved layer elites.
 const rows = [
   ['infantry',4,4,5,5], ['archer',5,3,7,4], ['bandit',3,3,4,4], ['cavalry',5,6,7,8],
   ['orc_jav',6,4,8,5], ['wolf_rider',7,6,9,8], ['orc_axe',4,7,5,9], ['fire_el',10,7,14,9],
   ['water_el',7,10,9,14], ['esper_crow',8,5,11,7], ['esper_candle',9,6,12,8], ['grass_el',5,12,7,16],
   ['esper_silence',7,9,9,12], ['esper_echo',9,7,12,9], ['dragon',7,40,9,54],
+  ['rager',2,5,3,7], ['deserter',3,7,4,9], ['greedy_imp',4,5,5,7],
+  ['swaggerer',2,6,3,8], ['tin_mute',4,9,5,12], ['heavy_hammer',8,8,11,11],
+  ['cultist',6,6,8,8], ['fake_apothecary',5,10,7,14], ['camo_sniper',7,4,9,5],
   ['boss_general',5,50,7,68], ['boss_orc',4,45,5,61], ['boss_elem',8,48,11,65],
 ];
 const templates = [...Object.values(mapData.monsters), ...mapData.altar.bosses];

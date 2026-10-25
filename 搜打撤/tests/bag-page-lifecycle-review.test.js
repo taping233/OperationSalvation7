@@ -52,10 +52,12 @@ describe('背包旧详情/页面回调与正常返回', () => {
     expect(document.getElementById('cardZoom')).not.toBeNull();
     expect(JSON.stringify(H.game.ownedCards)).toBe(before); expect(H.save).not.toHaveBeenCalled();
   });
-  it('唯一合法安全格自动整格交换后，详情退出与背包关闭仍正常', () => {
+  it('唯一合法安全格经选择确认整格交换后，详情退出与背包关闭仍正常', () => {
     H.safeCap = 1; H.safeUsed = 1; H.bagUsed = 1;
     H.game.ownedCards = [{ uid:'spell', card:spell }, ...Array.from({ length:3 }, (_, n) => ({ uid:`safe-${n}`, card:potion, safe:true }))];
     bag.showBackpack(true); inspect(spell.name); ui._acts.zoomMoveToSafe();
+    expect(H.game.ownedCards[0].safe).not.toBe(true);
+    document.querySelector('[data-act="safeSwapPick"]').click(); ui._acts.safeSwapConfirm();
     expect(H.game.ownedCards[0].safe).toBe(true);
     expect(H.game.ownedCards.slice(1).every(entry => !entry.safe)).toBe(true);
     expect(document.getElementById('cardZoom')).toBeNull(); expect(H.save).toHaveBeenCalledTimes(1);
@@ -94,7 +96,8 @@ describe('背包旧详情/页面回调与正常返回', () => {
     bag.showBackpack(true); document.querySelector('[data-zone="safe"].bag-rz').click(); inspect(spell.name);
     const zoom = document.getElementById('cardZoom'), button = zoom.querySelector('[data-act="zoomMoveToBag"]');
     expect(button.disabled).toBe(true);
-    expect(zoom.querySelector('[role="status"]').textContent).toContain('背包放不下');
+    expect(zoom.querySelector('[role="status"]').textContent).toContain('背包基础格不足');
+    expect(zoom.querySelector('[role="status"]').textContent).toContain('资源扩展格只能存放资源');
     ui._acts.zoomMoveToBag();
     expect(document.getElementById('cardZoom')).toBe(zoom); expect(H.game.ownedCards[0].safe).toBe(true);
     expect(H.save).not.toHaveBeenCalled();
@@ -328,7 +331,7 @@ describe('新号背包真实入口反馈', () => {
     expect([...document.querySelectorAll('.bag-grid [data-stack]')].map(el => el.dataset.stack)).toEqual(['木材卡']);
     expect(document.querySelector('.bag-grid [data-supply]')).toBeNull();
     filter('装备');
-    expect(document.querySelector('.bag-empty2').textContent).toContain('该分类没有');
+    expect(document.querySelector('.bag-empty2').textContent).toContain('暂无此类卡牌');
     document.querySelector('.bag-empty2 [data-f="all"]').click();
     expect(document.querySelector('[data-stack="法术"]')).not.toBeNull();
     expect(document.querySelector('[data-stack="生物牌"]')).not.toBeNull();
@@ -381,10 +384,10 @@ describe('新号背包真实入口反馈', () => {
     expect(document.querySelector('[role="status"]').textContent).toContain('获得传说卡【传说牌】');
     expect(H.save).toHaveBeenCalledOnce();
   });
-  it('结晶使用回执保留复原名单与容量剩余，并保留装备可被结晶复原的规则', () => {
+  it('结晶使用回执保留复原名单与容量剩余，并保留装备可被结晶复原的规则', async () => {
     H.game.ownedCards = [{ uid: 'crystal', card: { id: 'tt-crystal', name: '能源结晶', type: '道具', rules: { bag: { use: [{ op: 'restoreConsumed', amount: 3 }] } } } }];
     H.game.usedPocket = [{ card: { id: 'armor', name: '盔甲', type: '装备' }, count: 1 }, { card: spell, count: 3 }];
-    bag.showBackpack(true); inspect('能源结晶'); ui._acts.useDetailCard();
+    bag.showBackpack(true); inspect('能源结晶'); await ui._acts.useDetailCard();
     expect(H.game.ownedCards.map(item => item.card.name)).toEqual(['盔甲', '法术', '法术']);
     expect(document.querySelector('[role="status"]').textContent).toContain('3 张卡牌：盔甲、法术、法术');
     filter('move'); expect(document.querySelector('[role="status"]').textContent).toContain('盔甲');

@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 const hub = ['hub/game.hub.runtime.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js']
   .map((f) => readFileSync(`game/src/${f}`, 'utf8')).join('\n');
 const altar = readFileSync('game/src/run/game.run.class-choice.page.js', 'utf8');
-const session = readFileSync('game/src/run/game.session.js', 'utf8');
+const departure = readFileSync('game/src/run/game-session-departure.js', 'utf8');
 
 describe('基地出发与选角回流回归', () => {
   it('选角预览同步初始选择，基地入口先选人物再进入卡牌整备', () => {
@@ -18,7 +18,7 @@ describe('基地出发与选角回流回归', () => {
     expect(hub).toContain('deployStart = start;');
     expect(hub).toContain('openDepartPrep');
     expect(hub).toMatch(/await newRun\(mode, picks, \{ skipClassChoice: true,[\s\S]*?isCurrent:/);
-    expect(session).toContain('if (!options.skipClassChoice) return runtime.openClassChoice()');
+    expect(departure).toContain('if (!options.skipClassChoice) return readState().runtime.openClassChoice()');
   });
 
   it('出征整备写盘失败会留在整备页并停止出发', () => {
@@ -176,7 +176,7 @@ describe('基地分页、详情返回与档位浏览状态', () => {
     const mount = vi.spyOn(courtyard, 'mountCourtyardV3').mockImplementation(() => () => {});
     const before = JSON.stringify(browsing.base.data);
     try {
-      for (const [tab, title] of Object.entries({ deploy:'基地', classes:'配置', stash:'后勤', shop:'交易所', ach:'收藏室', upgrade:'建设', courtyard:'庭院' })) {
+      for (const [tab, title] of Object.entries({ deploy:'基地', classes:'人物', stash:'后勤', shop:'交易所', ach:'收藏室', upgrade:'建设', courtyard:'庭院' })) {
         browsing.runtime.openBaseHub(tab);
         expect(browsing.host.querySelector('.camp-brand h2').textContent).toBe(title);
         const selected = browsing.host.querySelector('.base-navigation-v7 [aria-current="page"]');
@@ -215,7 +215,7 @@ describe('基地分页、详情返回与档位浏览状态', () => {
     browsing.runtime.openBaseHub();
     expect(browsing.host.querySelector('.base-navigation-v7 [data-tab="shop"]')).not.toBeNull();
     browsing.click('[data-act="hubTab"][data-tab="stash"]');
-    expect(browsing.host.querySelector('.camp-section-head h2').textContent).toBe('后勤仓库');
+    expect(browsing.host.querySelector('.warehouse-v3')).not.toBeNull();
     browsing.click('[data-act="hubTab"][data-tab="shop"]');
     expect(browsing.host.querySelector('.hub-back').getAttribute('aria-label')).toBe('返回后勤');
     browsing.click('[data-act="logisticsParent"]');
@@ -267,11 +267,11 @@ describe('基地分页、详情返回与档位浏览状态', () => {
     expect(disclosure.open).toBe(false);
     expect(disclosure.querySelector('summary').textContent).toBe('复原说明');
     expect(warehouse.querySelector('.stash-pocket-note')).toBeNull();
-    expect(warehouse.querySelector('[data-warehouse-pocket-count]').textContent).toBe('待复原 1 张');
+    expect(warehouse.querySelector('[data-warehouse-pocket-count]').textContent).toBe('1 张');
     const card = warehouse.querySelector('[data-stack-key]');
     disclosure.querySelector('summary').click();
     expect(disclosure.open).toBe(true);
-    expect(disclosure.textContent).toContain('下次出征时，未复原卡牌会清空');
+    expect(disclosure.textContent).toContain('未复原卡牌将在下次出征时清空');
     expect(warehouse.querySelector('[data-stack-key]')).toBe(card);
     expect(browsing.page().scrollTop).toBe(240);
     expect(browsing.host.querySelector('[data-act="warehouseMain"]')).not.toBeNull();
@@ -289,19 +289,13 @@ describe('基地分页、详情返回与档位浏览状态', () => {
     expect(browsing.page().scrollTop).toBe(240);
   });
 
-  it('物资打开原卡放大，关闭后仓库滚动位置和来源按钮焦点保持', async () => {
-    browsing = await createBrowsingHarness();
-    browsing.runtime.openBaseHub('stash');
-    browsing.scroll(180);
-    const page = browsing.page(), before = JSON.stringify(browsing.base.data);
-    browsing.click('[data-act="rawItem"][data-kind="wood"]');
-    expect(browsing.page()).toBe(page);
-    expect(browsing.ui.showCardZoom).toHaveBeenCalledWith(expect.objectContaining({ id: 'tt-wood', name: '木材' }), expect.objectContaining({ footer: expect.any(String) }));
-    expect(document.querySelector('#cardZoom .cz-foot').textContent).toContain('木材库存 1');
-    browsing.click('.cz-close');
-
-    expect(browsing.page().scrollTop).toBe(180);
-    expect(document.activeElement).toBe(browsing.host.querySelector('[data-act="rawItem"][data-kind="wood"]'));
+  it('物资数字支持聚焦读取，浏览不修改档案或打开卡牌', async () => {
+    browsing=await createBrowsingHarness();browsing.runtime.openBaseHub('stash');
+    const before=JSON.stringify(browsing.base.data),page=browsing.page();
+    const wood=browsing.host.querySelector('[data-resource-name="木材"]');
+    expect(wood.tabIndex).toBe(0);expect(wood.getAttribute('aria-label')).toBe('木材 1');
+    wood.focus();expect(document.activeElement).toBe(wood);
+    expect(browsing.page()).toBe(page);expect(browsing.ui.showCardZoom).not.toHaveBeenCalled();
     expect(JSON.stringify(browsing.base.data)).toBe(before);
   });
 

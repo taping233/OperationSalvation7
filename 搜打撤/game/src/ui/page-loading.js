@@ -8,34 +8,29 @@ import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
 let pending = null;
 
 /** Own cold-entry input/readiness; illustrated cuts require an explicit scene entry. */
-/** @param {{title: string, detail: string, open: () => unknown, signal?: AbortSignal, presentation?: string, onRevealStart?: () => void}} options */
-export function runPageLoading({ title, detail, open, signal, presentation, onRevealStart }) {
+/** @param {{title: string, detail: string, open: () => unknown, prepare?: (signal: AbortSignal) => unknown, signal?: AbortSignal, presentation?: string, onRevealStart?: () => void}} options */
+export function runPageLoading({ title, detail, open, prepare, signal, presentation, onRevealStart }) {
   if (signal?.aborted) return Promise.resolve(false);
   if (pending) return pending.promise;
   const cover = document.createElement('section');
   cover.className = 'page-loading';
   cover.setAttribute('role', 'status');
   cover.setAttribute('aria-live', 'polite');
-  const cinematic = presentation === 'city-cut';
-  const cityCut = cinematic && !reduceMotion();
+  const cityCut = !reduceMotion();
   let cut = null;
-  cover.classList.add(cinematic ? 'page-loading--city' : 'page-loading--interface');
+  cover.classList.add('page-loading--city');
+  if (presentation!=='city-cut') cover.dataset.handoffProfile='brief';
   cover.dataset.loadingDetail = detail;
   cover.setAttribute('aria-label', `${title}：${detail}`);
   if (cityCut) cut = createCityCut({ archive: '馆藏档案', title,
     subtitle: 'PHOTO STUDIO / 冬日影像档案', edition: 'WINTER RECORDS / VII',
-    destination: 'PHOTO STUDIO', watermark: 'PHOTO', scene: 'photo' });
+    destination: 'PHOTO STUDIO', watermark: 'PHOTO', scene: presentation==='city-cut' ? 'photo' : 'loading' });
   if (cut) {
+    if (presentation!=='city-cut') {
+      cut.dataset.filmDuration='160';
+      cut.style.setProperty('--silent-film-duration','160ms');
+    }
     cut.classList.add('page-cut-waiting'); cover.append(cut);
-  } else if (!cinematic) {
-    const copy = document.createElement('div');
-    copy.className = 'page-loading-copy';
-    const heading = document.createElement('h2');
-    heading.textContent = title;
-    const status = document.createElement('p');
-    status.textContent = detail;
-    copy.append(heading, status);
-    cover.append(copy);
   }
   document.body.appendChild(cover);
   const busyHost = document.getElementById('viewport');
@@ -89,11 +84,6 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
       // Page adapters may supply their richer, page-specific artwork to this
       // existing cover. Keep that image instead of overwriting it with general art.
       const activeCut = /** @type {HTMLElement} */ (cover.querySelector('.camp-entry-cut'));
-      if (activeCut && !cinematic) {
-        // A real scene entry can take over this loader; it does not add a second cover.
-        cover.classList.replace('page-loading--interface', 'page-loading--city');
-        cover.querySelector('.page-loading-copy')?.remove();
-      }
       const artworkReady = activeCut && activeCut !== cut
         ? prepareCityCut(activeCut, { signal:cutController.signal }) : curtainReady;
       // Non-overlay clients keep the existing loading-only contract.
@@ -103,7 +93,7 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
       const ready = await Promise.race([
         Promise.all([artworkReady, body
           ? waitPageVisual(body, { signal: cutController.signal, background: window.SDT?.UI?._pageBgReady })
-          : true]), cancelled,
+          : true, prepare ? Promise.resolve().then(() => prepare(cutController.signal)).then(result => result !== false) : true]), cancelled,
       ]);
       if (!ready || !ready.every(Boolean) || !current()) return false;
       await visualFrame(cutController.signal);

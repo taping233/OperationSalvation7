@@ -1,8 +1,8 @@
-import { readFileSync } from 'node:fs';
+import { readCssSource } from './helpers/css-source.js';
 import { parse } from 'postcss';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 const cssFiles = ['performance-settings', 'expedition-map', 'map-edge-light'];
-const css = cssFiles.map(name => parse(readFileSync(`game/css/${name}.css`, 'utf8')));
+const css = cssFiles.map(name => parse(readCssSource(`game/css/${name}.css`, 'utf8')));
 // Evaluate the explicit new pause gates independently of native CSS animation.
 // Browser composition remains the separate real-page acceptance requirement.
 function pauseGate(target, { quality = 'balanced', hidden = false } = {}) {
@@ -48,8 +48,8 @@ describe('map decorative animation budget', () => {
   it('reduced-motion still removes the animations instead of a running override', () => {
     const map = css[1].toString(), edge = css[2].toString();
     expect(map).toContain('body.reduce-motion #viewport::before,');
-    expect(map).toContain('body.reduce-motion .map-volumetric-light i { animation:none; }');
-    expect(edge).toContain('body.reduce-motion .map-edge-light i { animation:none; }');
+    expect(map).toMatch(/body\.reduce-motion \.map-volumetric-light i\s*\{\s*animation:\s*none;/);
+    expect(edge).toMatch(/body\.reduce-motion \.map-edge-light i\s*\{\s*animation:\s*none;/);
     for (const sheet of css) sheet.walkRules(rule => {
       if (!rule.selector.includes('linked-backgrounded') && !rule.selector.includes('data-render-quality="low"')) return;
       rule.walkDecls('animation-play-state', declaration => expect(declaration.value).toBe('paused'));

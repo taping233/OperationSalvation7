@@ -1,3 +1,4 @@
+import { playerFields, canvasTraps, audioGainFields } from './helpers/environment-fixtures.js';
 /* 真实启动链的道具阅读与确认契约：悬停/按住只读；点击固定详情，
  * 使用前可取消且保持原道具，明确确认后才进入原有结算/选靶。 */
 import { afterAll, describe, it, expect, vi } from 'vitest';
@@ -29,15 +30,7 @@ afterAll(async () => {
 // eslint-disable-next-line no-constant-condition
 if (!window.HTMLCanvasElement.prototype.getContext || true) {
   const noopCtx = () => new Proxy(function () {}, {
-    get: (_t, k) => {
-      if (k === 'canvas') return null;
-      if (k === 'measureText') return () => ({ width: 10 });
-      if (k === 'createLinearGradient' || k === 'createRadialGradient' ||
-          k === 'createPattern' || k === 'getImageData') return () => ({ addColorStop: () => {}, data: [] });
-      return () => noopCtx();
-    },
-    set: () => true,
-    apply: () => noopCtx(),
+    ...canvasTraps(noopCtx),
   });
   window.HTMLCanvasElement.prototype.getContext = function () { return noopCtx(); };
 }
@@ -50,7 +43,7 @@ window.Audio = class FakeAudio {
 };
 window.AudioContext = window.AudioContext || class FakeAudioContext {
   constructor() { this.currentTime = 0; this.destination = {}; this.sampleRate = 44100; }
-  createGain() { return { connect: () => {}, disconnect: () => {}, gain: { value: 0, setValueAtTime: () => {}, linearRampToValueAtTime: () => {}, cancelScheduledValues: () => {}, setTargetAtTime: () => {} } }; }
+  createGain() { return { ...audioGainFields() }; }
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }
@@ -84,8 +77,7 @@ describe('药水文字说明与使用确认', () => {
         { uid: 'tip-heal', card: { id: 'tip-heal', name: '回血药剂', type: '道具', desc: '回复 12 点生命。' } },
         { uid: 'tip-ice', card: { id: 'tip-ice', name: '冰冻药剂', type: '道具', desc: '造成 3 点固定伤害，附加冰冻。' } },
       ],
-      hp: 15, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
-      myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+      ...playerFields(15, 30, 5, 0, '侠客', null),
       log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {},
       onBattleEnd() {},
     });

@@ -39,7 +39,7 @@ export function createCardSemanticOperations(context) {
       if (played) ports.log(`[[icon:swords]] <b>${ports.esc(card.name)}</b>：直接释放了其中 ${played} 张${operation.type}`, 'ok');
       return played > 0;
     }
-    if (operation.op === 'castStored') { ports.queuePouchCast(execution.uid); return true; }
+    if (operation.op === 'castStored') { ports.queuePouchCast(execution.uid, card); return true; }
     if (operation.op === 'registerInfusionBonus') {
       const state = runtime.pstat.requestedCards ||= { damageTurn: -1, flameForms: [], astrolabes: {} };
       state.flameForms.push({ fuel: 0, every: operation.every, key: operation.key, stacks: operation.stacks });
@@ -106,17 +106,18 @@ export function createCardSemanticOperations(context) {
       return true;
     }
     if (operation.op === 'adjustCurse') {
+      const battleCombat = ports.combat || combat;
       const targets = operation.target === 'allEnemies' ? ports.getAliveFoes()
         : operation.target === 'randomEnemy' ? (() => {
           const live = ports.getAliveFoes();
-          return live.length ? [live[Math.floor(ports.randomBattle() * live.length)]] : [];
+          return live.length ? [live[Math.floor(ports.randomBattle('target') * live.length)]] : [];
         })() : target && !target.dead ? [target] : [];
       if (!targets.length) return false;
       for (const foe of targets) {
         const current = Number(foe.status?.[operation.curse]) || 0;
-        if (operation.multiply > 1 && current > 0) combat.addCurse(foe, operation.curse, current * (operation.multiply - 1));
+        if (operation.multiply > 1 && current > 0) battleCombat.addCurse(foe, operation.curse, current * (operation.multiply - 1));
         let total = 0;
-        for (let index = 0; index < (operation.burst || 0); index++) total += combat.tickPoison(foe)?.dealt || 0;
+        for (let index = 0; index < (operation.burst || 0) && !foe.dead; index++) total += battleCombat.tickPoison(foe)?.dealt || 0;
         ports.log(`[[icon:skull]] <b>${ports.esc(foe.name)}</b>：中毒 ${foe.status?.poison || 0} 层，触发毒伤 ${total}`, 'sys');
       }
       return true;

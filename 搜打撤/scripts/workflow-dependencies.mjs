@@ -92,7 +92,8 @@ export function documentationInputs(root, { archiveIndexes = [] } = {}) {
 
 export function inputInventory(root, descriptor) {
   return directoryEntries(root, descriptor.directory).filter(entry => descriptor.kind === 'source-domains'
-    ? entry.isDirectory() && entry.name !== 'generated' : descriptor.kind === 'workflow-batches'
+    ? entry.isDirectory() && entry.name !== 'generated'
+      && readdirSync(path.join(root, descriptor.directory, entry.name), { recursive:true, withFileTypes:true }).some(child => child.isFile()) : descriptor.kind === 'workflow-batches'
       ? entry.isDirectory() && /^(?:lean-)?workflow-/.test(entry.name)
       : entry.isFile() && entry.name.endsWith('.md') || descriptor.recursive && entry.isDirectory() && !/^(?:archive|evidence|previews|modules)$/.test(entry.name))
     .map(entry => ({ name: entry.name, directory: entry.isDirectory() })).sort((a, b) => a.name.localeCompare(b.name));

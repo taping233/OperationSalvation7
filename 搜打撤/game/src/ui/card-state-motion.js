@@ -22,12 +22,13 @@ export function installCardStateMotion(root = document.body) {
       || element.matches('[aria-selected="true"],[aria-pressed="true"]')
       || !!element.closest('.is-pending-target');
     const quiet = motionReduced();
+    element.dataset.cardStateActive = String(active);
     retargetVisual(element, {
-      y: active && !quiet ? -6 : 0, scale: active && !quiet ? 1.02 : 1, rotate: 0,
+      y: 0, scale: 1, rotate: 0,
     }, { duration: quiet ? 0 : active ? motionTiming.change : motionTiming.cardReturn });
   }
   function release(element) {
-    clearVisual(element); delete element.dataset.cardStateMotion; tracked.delete(element);
+    clearVisual(element); delete element.dataset.cardStateMotion; delete element.dataset.cardStateActive; tracked.delete(element);
     if (pointerCard === element) pointerCard = null;
     if (focusCard === element) focusCard = null;
   }

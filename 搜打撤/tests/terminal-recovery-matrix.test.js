@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -22,14 +24,14 @@ const makeApi = (slotId, options = {}) => createRecoveryCommands({
   ...options,
 });
 
-function seed(slotId) {
+async function seed(slotId) {
   const k = keys(slotId);
   localStorage.removeItem(k.base);
   localStorage.removeItem(k.run);
   localStorage.removeItem(k.journal);
   localStorage.setItem(k.base, JSON.stringify({ version: Base.BASE_VERSION, coins: 10, _m01: { revision: 0, requests: {} } }));
   Base.use(slotId);
-  expect(RunStorage.write(slotId, { hp: 30 })).toBe(true);
+  expect(await RunStorage.write(slotId, { hp: 30 })).toBe(true);
 
   const base = Base._readForCommit(slotId);
   const run = JSON.parse(localStorage.getItem(k.run));
@@ -51,14 +53,14 @@ function seed(slotId) {
 }
 
 describe('生产双键结算恢复边界', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     localStorage.clear();
-    for (let slotId = 1; slotId <= 5; slotId++) RunStorage.remove(slotId);
+    for (let slotId = 1; slotId <= 5; slotId++) await RunStorage.remove(slotId);
   });
 
   it.each([false, true])('终局提交或中断恢复清除旧局 prev（中断=%s）', async interrupted => {
-    const f = seed(1);
-    expect(RunStorage.write(1, { hp: 25 })).toBe(true);
+    const f = await seed(1);
+    expect(await RunStorage.write(1, { hp: 25 })).toBe(true);
     f.context.expectedRunRevision = RunStorage.readIdentity(1).value.revision;
     const prev = 'sdt-run-1-prev';
     expect(localStorage.getItem(prev)).not.toBeNull();
@@ -76,7 +78,7 @@ describe('生产双键结算恢复边界', () => {
   });
 
   it('无日志选档不需要 Web Locks；有空/坏日志或读错误时不能忽略', async () => {
-    const f = seed(1);
+    const f = await seed(1);
     const lockRequest = vi.fn(locks.request);
     const api = makeApi(1, { lockManager: { request: lockRequest } });
     expect(await api.recoverSlotIfPending(1)).toEqual({ ok: true, value: null });
@@ -99,7 +101,7 @@ describe('生产双键结算恢复边界', () => {
 
   it('真实 Base/RunStorage 下首写失败不改玩家键，随后阶段失败可重启恢复且奖励只入账一次', async () => {
     const nativeSet = Storage.prototype.setItem;
-    const first = seed(2);
+    const first = await seed(2);
     const firstWriteFailure = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(function (key, value) {
       if (key === first.k.journal) throw new Error('journal quota');
       return nativeSet.call(this, key, value);
@@ -112,7 +114,7 @@ describe('生产双键结算恢复边界', () => {
       expect(localStorage.getItem(first.k.journal)).toBeNull();
     } finally { firstWriteFailure.mockRestore(); }
 
-    const runDelete = seed(3);
+    const runDelete = await seed(3);
     const nativeRemove = Storage.prototype.removeItem;
     let failRunDelete = true;
     const removeRunFailure = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(function (key) {
@@ -137,7 +139,7 @@ describe('生产双键结算恢复边界', () => {
   });
 
   it('真实阶段日志/清理失败可恢复；不覆盖第三值的新探索身份', async () => {
-    const phase = seed(4);
+    const phase = await seed(4);
     const nativeSet = Storage.prototype.setItem;
     let journalWrites = 0;
     const phaseFailure = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(function (key, value) {
@@ -152,7 +154,7 @@ describe('生产双键结算恢复边界', () => {
     expect(JSON.parse(localStorage.getItem(phase.k.base)).coins).toBe(17);
     expect(localStorage.getItem(phase.k.run)).toBeNull();
 
-    const cleanup = seed(3);
+    const cleanup = await seed(3);
     const nativeRemove = Storage.prototype.removeItem;
     let failJournalCleanup = true;
     const cleanupFailure = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(function (key) {
@@ -168,7 +170,7 @@ describe('生产双键结算恢复边界', () => {
     expect(localStorage.getItem(cleanup.k.run)).toBeNull();
     expect(localStorage.getItem(cleanup.k.journal)).toBeNull();
 
-    const changedRun = seed(5);
+    const changedRun = await seed(5);
     let leavePending = true;
     const pending = await makeApi(5, { failpoint: point => {
       if (leavePending && point === 'after-journal') { leavePending = false; throw new Error('simulated restart'); }

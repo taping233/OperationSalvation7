@@ -1,11 +1,11 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { unplayableReasonFor } from '../game/src/battle/effects/battle.target-rules.js';
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 20, battleHandMax: 99, bossDeckSize: 15,
-  starterSha: 1, battleStartDraw: 99, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(20, 99, 15, 1, 99, 1) }, items: {} };
 await import('../game/src/cards/cards.js');
 const { BattleSession, getPreviewContext } = await import('../game/src/battle/core/battle.core.js');
 const engine = await import('../game/src/battle/core/battle.engine.js');
@@ -37,8 +37,7 @@ const canonical = id => {
 async function start(boss) {
   game = {
     ownedCards: ['tt7-imitate', 'starter-attack', 'tt3-skewer'].map((id, index) => ({ uid: `imitate-${index}`, card: canonical(id), safe: false })),
-    inventory: [], usedPocket: [], hp: 40, maxHp: 40, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+    inventory: [], usedPocket: [], ...playerFields(40, 40, 5, 0, '侠客', null),
     logs: [], log(message) { this.logs.push(message); }, heal() {}, addItem() {}, onBattleEnd() {},
   };
   BattleSession.start(game, [{ id: 'imitate-target', name: '验证靶', hp: 1000, atk: 0 }],

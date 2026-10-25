@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const fixture = vi.hoisted(() => ({ game: {} }));
@@ -9,8 +10,7 @@ vi.mock('../game/src/run/game.run.flow.js', () => ({ moveTo: () => false, reente
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} }, UI: { _acts: {}, log() {} },
-  MAP: { rules: { battleEnergy: 10, battleHandMax: 30, bossDeckSize: 15, starterSha: 0,
-    battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(10, 30, 15, 0, 5, 1) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();

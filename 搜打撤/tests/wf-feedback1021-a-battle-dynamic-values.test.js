@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 /* 反馈#11（2026-10-21 老板实测 12 条）：
  * 「所有卡牌的数值要实际计算显示 在战斗中」（反馈点为悬停卡牌长描述）。
  * 口径：战斗内描述里的伤害数字按当前实际加成重算（攻击力+攻击强化、法伤+法术强化，
@@ -13,7 +14,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 3, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 10, 0, 5, 3) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -86,8 +87,7 @@ describe('反馈#11 战斗内按当前实际加成计算', () => {
         { uid: 'dyn-0', card: byId('tt3-reshot'), safe: false },
         { uid: 'dyn-1', card: byId('tt3-ice-spike'), safe: false },
       ],
-      hp: 50, maxHp: 50, atk: 5, spellPower: 2, coins: 0,
-      myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+      ...playerFields(50, 50, 5, 2, '侠客', null),
       lastBattleEnd: null,
       log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
       addItem() {}, onBattleEnd() {},

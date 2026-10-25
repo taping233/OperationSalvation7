@@ -1,6 +1,6 @@
 # 人设库（character-bible）
 
-本库维护五角色的身份、参考来源与待定背景。角色数据见 `game/src/core/characters.js`，画风方向见[美术简报](../production/art/ART-DIRECTION-BRIEF.md)，接入要求见[视觉规范](../production/art/VISUAL-BIBLE.md)。
+本库维护五角色的外观身份、参考来源，以及已确认的游戏剧情背景与人物关系。角色数据见 `game/src/core/characters.js`，画风方向见[美术简报](../production/art/ART-DIRECTION-BRIEF.md)，接入要求见[视觉规范](../production/art/VISUAL-BIBLE.md)。
 
 ## 使用方式
 
@@ -10,15 +10,17 @@
 - 标注「待定稿」的字段 = 老板尚未提供素材，任何人不得擅自推断填充；老板改稿后及时回写本库。
 - 角色身份、指定参考图的服装与姿态、画风方向分别核对；场景或卡面小样的确认范围以该任务记录为准。历史画师串、赛璐璐用词和旧姿态不自动拼入新配方。
 
+第一部的共同故事、玩家知情范围及王诩、季渊的使用方向统一见[第一部剧情设定](../production/design/STORY-PART-ONE.md)。游戏与小说按平行宇宙处理，未定字段继续保留为未定。
+
 ## 角色索引
 
 | 角色 | id | 职业 | 立绘 | 人设状态 |
 |---|---|---|---|---|
-| [无](wu.md) | wu | 侠客 | [ref-images/wu.webp](ref-images/wu.webp) | 10-18指定原图补背后黑剑与剑带，交错站姿；性格背景待老板提供 |
-| [常无欲](changwuyu.md) | changwuyu | 降临者 | [ref-images/changwuyu.webp](ref-images/changwuyu.webp) | 10-18恢复重绘前10-13版本；扶镜、黑雾与橙火保留；性格背景待老板提供 |
-| [白塔](baita.md) | baita | 法师 | [ref-images/baita.webp](ref-images/baita.webp) | 10-20接入贝雷帽书卷版，10-21补充身份锚点，详见角色页；性格背景待老板提供 |
-| [黑像](heixiang.md) | heixiang | 战士 | [ref-images/heixiang.webp](ref-images/heixiang.webp) | 10-18恢复重绘前10-13版本；喝咖啡与背剑保留；性格背景待老板提供 |
-| [星月](xingyue.md) | xingyue | 牧师 | [ref-images/xingyue.webp](ref-images/xingyue.webp) | 10-18恢复重绘前10-13版本；胸前祝祷、长辫与星灯保留；性格背景待老板提供 |
+| [无](wu.md) | wu | 侠客 | [ref-images/wu.webp](ref-images/wu.webp) | 外观沿目标页现行锚点；10-25补救出星月、前代无家庭关系与当前知情边界 |
+| [常无欲](changwuyu.md) | changwuyu | 降临者 | [ref-images/changwuyu.webp](ref-images/changwuyu.webp) | 外观沿目标页现行锚点；10-25补升格会身份、回收目标、平民态度与无的友谊 |
+| [白塔](baita.md) | baita | 法师 | [ref-images/baita.webp](ref-images/baita.webp) | 外观沿目标页现行锚点；10-25补升格会首领身份、回收目标与前代无旧账 |
+| [黑像](heixiang.md) | heixiang | 战士 | [ref-images/heixiang.webp](ref-images/heixiang.webp) | 外观沿目标页现行锚点；10-25补退出升格会、灰域身份、对白塔私仇与夺取目标 |
+| [星月](xingyue.md) | xingyue | 牧师 | [ref-images/xingyue.webp](ref-images/xingyue.webp) | 外观沿目标页现行锚点；10-25补回城丧亲、能力觉醒、自责与救城动机 |
 
 ## 参考图说明
 

@@ -3,17 +3,19 @@ body #cardGet[data-rarity="稀有"], .bt-card-reveal[data-rarity="稀有"] { --r
 body #cardGet[data-rarity="史诗"], .bt-card-reveal[data-rarity="史诗"] { --reveal-accent:#c6a2ee; }
 body #cardGet[data-rarity="传说"], .bt-card-reveal[data-rarity="传说"] { --reveal-accent:#ebc17d; }
 body #cardGet[data-rarity="棱彩"], .bt-card-reveal[data-rarity="棱彩"] { --reveal-accent:#edbbdf; }
-body #cardGet[data-rare-reveal="true"] .lg-beam { display:block; opacity:.65; background:radial-gradient(ellipse,var(--reveal-accent),transparent 65%); filter:blur(12px); }
-body #cardGet[data-rare-reveal="true"] .lg-kicker { color:var(--reveal-accent); letter-spacing:.24em; }
-body #cardGet[data-rare-reveal="true"] .lg-card { filter:drop-shadow(0 0 26px color-mix(in srgb,var(--reveal-accent) 55%,transparent)); }
+body #cardGet[data-rare-reveal="true"]{
+& .lg-beam { display:block; opacity:.65; background:radial-gradient(ellipse,var(--reveal-accent),transparent 65%); filter:blur(12px); }
+& .lg-kicker { color:var(--reveal-accent); letter-spacing:.24em; }
+& .lg-card { filter:drop-shadow(0 0 26px color-mix(in srgb,var(--reveal-accent) 55%,transparent)); }}
 body #cardGet[data-rare-reveal="true"] .lg-card::before,
 .bt-card-reveal[data-rare-reveal="true"]::before {
   content:''; position:absolute; inset:-20px; z-index:-1; pointer-events:none;
   border:1px solid var(--reveal-accent); clip-path:polygon(0 0,26% 0,26% 2%,2% 2%,2% 28%,0 28%,0 0,100% 0,100% 100%,74% 100%,74% 98%,98% 98%,98% 72%,100% 72%,100% 0);
   animation:rareFrameReveal 750ms cubic-bezier(.2,.7,.3,1) both;
 }
-.bt-card-reveal[data-rare-reveal="true"] .bt-card-reveal-face { box-shadow:0 0 0 1px var(--reveal-accent),0 0 40px color-mix(in srgb,var(--reveal-accent) 35%,transparent); }
-.bt-card-reveal[data-rare-reveal="true"] .bt-card-reveal-caption { color:var(--reveal-accent); border-color:var(--reveal-accent); }
+.bt-card-reveal[data-rare-reveal="true"]{
+& .bt-card-reveal-face { box-shadow:0 0 0 1px var(--reveal-accent),0 0 40px color-mix(in srgb,var(--reveal-accent) 35%,transparent); }
+& .bt-card-reveal-caption { color:var(--reveal-accent); border-color:var(--reveal-accent); }}
 @keyframes rareFrameReveal { from { opacity:0; transform:scale(.78) rotate(-5deg); } 60% { opacity:1; } to { opacity:.65; transform:scale(1) rotate(0); } }
 .reduce-motion #cardGet *, .reduce-motion .bt-card-reveal[data-rare-reveal="true"]::before { animation:none!important; }
 @media(prefers-reduced-motion:reduce) { #cardGet *, .bt-card-reveal[data-rare-reveal="true"]::before { animation:none!important; } }

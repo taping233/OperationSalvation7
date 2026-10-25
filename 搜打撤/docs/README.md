@@ -36,7 +36,7 @@ Codex / ZCode 共用项目规则和事实，各自使用当前平台工具。项
 
 规范入口不明时按表定位；目标与适用规范已知就直接处理。带日期文档只说明当时时点，现行事实以源码与测试为准。
 
-| 要改什么 | 先看（现行规范） | 再看（时点依据与证据） |
+| 要改什么 | 先看（现行规范） | 按需补充（参考、覆盖或时点证据） |
 | --- | --- | --- |
 | 找代码位置 / 模块职责 | [源码导航](../game/src/README.md)、[架构](architecture.md) | [当前工作区与交付](STATUS.md)；不要按历史文件名猜现行入口 |
 | 战斗逻辑 / 数值 / 牌效 | [规则](rules.md)、[架构](architecture.md) | [质量门](quality-gates.md)（验收与全量口径） |
@@ -44,7 +44,9 @@ Codex / ZCode 共用项目规则和事实，各自使用当前平台工具。项
 | 存档 / 基地写入 | [存档契约](save-format.md) | [直写路径审计 09-29](BASE-DIRECT-WRITE-AUDIT-2026-09-29.md)（直写红线、保留簇与挂账） |
 | 性能 | [性能方法与历史基准](performance.md) | [全场景账本 09-29](PERF-LEDGER-2026-09-29.md)（19 场景+热点清单+复跑命令） |
 | 测试 / 验收门 | [质量门](quality-gates.md)、[开发指南](development.md) | [分层验收改造记录](archive/records-2026-09-28/ACCEPTANCE-FAST-GATE-RESULT-2026-09-28.md) |
-| UI / 美术 / 素材 | [当前美术方向](production/art/ART-DIRECTION-BRIEF.md)、[视觉规范](production/art/VISUAL-BIBLE.md)、[人物参考](character-bible/README.md)、[运行素材说明](../game/assets/README.md) | [界面美术指南](UI-ART-OVERHAUL-GUIDE.md)、[页面验收覆盖](production/art/UI-PAGE-COVERAGE.md)、[预览页面](previews/README.md) |
+| UI 布局 / 控件 / 跨页体验 | [视觉规范](production/art/VISUAL-BIBLE.md)对应章节；整体风格调整再读[美术方向](production/art/ART-DIRECTION-BRIEF.md) | 整体整改用[界面美术指南](UI-ART-OVERHAUL-GUIDE.md)；验收查[页面覆盖](production/art/UI-PAGE-COVERAGE.md)；不涉及人物时不读人设 |
+| 人物 / 卡面创作 | [人物参考](character-bible/README.md)中的目标人物、[视觉规范·卡面](production/art/VISUAL-BIBLE.md#卡面与出图参考) | 按当次要求选画风技能；接入运行素材时再读[素材说明](../game/assets/README.md) |
+| 素材导入 / 替换 / 编码 | [运行素材说明](../game/assets/README.md)、[美术接入工具](art-workflow-tools.md)的对应操作 | 实际引用与目标容器；涉及人物身份或风格重绘时才补人物/视觉规范 |
 | 音频 | [音频系统](audio-system.md) | — |
 | Agent 接口 / 策略 | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md) | — |
 | 并行会话 / 派工 | [热点登记](PARALLEL-REGISTRY.md)、[待拍板台账](PENDING.md)、[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) | — |

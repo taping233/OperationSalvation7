@@ -1,20 +1,21 @@
 /* 首页布局与终端按钮基底。现行色彩、字号和交互细节由 home-polish.css 承接。 */
-#title.home-composed {
+#title.home-composed{
+& {
   --home-edge: 5.4%; --home-ink: #121315;
   --home-text: #f1f0ee; --home-muted: #c7c8c9;
   color: var(--home-text); isolation: isolate;
   background: linear-gradient(180deg, #989a9c 0%, #7a7e81 24%, #1b1d1f 100%);
 }
-#title.home-composed .home-scene {
+& .home-scene {
   position: absolute; inset: 0; z-index: 0; pointer-events: none; isolation: isolate;
 }
-#title.home-composed .title-wallpaper-extension {
+& .title-wallpaper-extension {
   position: absolute; inset: -4%; z-index: 0; pointer-events: none;
   background: url('../assets/reconstruction/wallpaper-snow-road-1016.webp?v=1016b') center / cover no-repeat;
   filter: blur(40px) brightness(.7); opacity: 1;
   transition: opacity .5s ease-in-out;
 }
-#title.home-composed .title-bg {
+& .title-bg {
   /* Keep the road and right-side portrait aligned with the source composition. */
   inset: 0; z-index: 1;
   background: url('../assets/reconstruction/wallpaper-snow-road-1016.webp?v=1016b') center / cover no-repeat;
@@ -22,90 +23,94 @@
   filter: none; transform: none; opacity: 1;
   transition: opacity .5s ease-in-out;
 }
-#title.home-composed .title-bg-alternate {
+& .title-bg-alternate {
   inset: 0;
   background: url('../assets/reconstruction/wallpaper-baita-heixiang-1016.webp?v=face-v2-1016') center / cover no-repeat;
   mask-image: none; opacity: 0;
 }
-#title.home-composed[data-home-wallpaper="baita-heixiang"] .title-wallpaper-extension {
+&[data-home-wallpaper="baita-heixiang"] .title-wallpaper-extension {
   background-image: url('../assets/reconstruction/wallpaper-baita-heixiang-1016.webp?v=face-v2-1016');
 }
-#title.home-composed .title-bg-piano {
-  background-image: url('../assets/reconstruction/wallpaper-xingyue-piano-1020.webp');
+& .title-bg-piano {
+  background-image: url('../assets/reconstruction/wallpaper-xingyue-piano-1020.webp?v=nai5-piano-hands-1024');
   opacity: 0;
 }
-#title.home-composed[data-home-wallpaper="xingyue-piano"] .title-wallpaper-extension {
-  background-image: url('../assets/reconstruction/wallpaper-xingyue-piano-1020.webp');
+&[data-home-wallpaper="xingyue-piano"] .title-wallpaper-extension {
+  background-image: url('../assets/reconstruction/wallpaper-xingyue-piano-1020.webp?v=nai5-piano-hands-1024');
 }
-#title.home-composed .title-bg-bass,
-#title.home-composed[data-home-wallpaper="wu-bass"] .title-wallpaper-extension {
-  background-image: url('../assets/reconstruction/wallpaper-wu-bass-1020.webp?v=final-face-1020');
+& .title-bg-bass,
+&[data-home-wallpaper="wu-bass"] .title-wallpaper-extension {
+  background-image: url('../assets/reconstruction/wallpaper-wu-bass-1020.webp?v=nai5-bass-reset-1024');
 }
-#title.home-composed .title-bg-station,
-#title.home-composed[data-home-wallpaper="baita-station"] .title-wallpaper-extension {
-  background-image: url('../assets/reconstruction/wallpaper-baita-station-1020.webp?v=selected-5401-1020');
+& .title-bg-station,
+&[data-home-wallpaper="baita-station"] .title-wallpaper-extension {
+  background-image: url('../assets/reconstruction/wallpaper-baita-station-1020.webp?v=nai5-station-reset-1024');
 }
-#title.home-composed .title-bg-reeds,
-#title.home-composed[data-home-wallpaper="xingyue-reeds"] .title-wallpaper-extension {
-  background-image: url('../assets/reconstruction/wallpaper-xingyue-reeds-1020.webp');
+& .title-bg-reeds,
+&[data-home-wallpaper="xingyue-reeds"] .title-wallpaper-extension {
+  background-image: url('../assets/reconstruction/wallpaper-xingyue-reeds-1020.webp?v=nai5-buttons-cloud-1024');
+}
+& .title-bg-dinner,
+&[data-home-wallpaper="companions-dinner"] .title-wallpaper-extension {
+  background-image: url('../assets/slot-bg-knight-fantasy.webp?v=dinner-scar-gaze-1025');
 }
 /* Each image keeps its own layer so every pair crossfades, including wraparound. */
-#title.home-composed .title-bg[data-wallpaper-layer] { opacity: 0; }
-#title.home-composed[data-home-wallpaper="snow-road"] [data-wallpaper-layer="snow-road"],
-#title.home-composed[data-home-wallpaper="baita-heixiang"] [data-wallpaper-layer="baita-heixiang"],
-#title.home-composed[data-home-wallpaper="xingyue-piano"] [data-wallpaper-layer="xingyue-piano"],
-#title.home-composed[data-home-wallpaper="wu-bass"] [data-wallpaper-layer="wu-bass"],
-#title.home-composed[data-home-wallpaper="baita-station"] [data-wallpaper-layer="baita-station"],
-#title.home-composed[data-home-wallpaper="xingyue-reeds"] [data-wallpaper-layer="xingyue-reeds"] { opacity: 1; }
-#title.home-composed::before,
-#title.home-composed .title-bg::before,
-#title.home-composed .title-bg::after,
-#title.home-composed .title-inner::before { content: none; display: none; animation: none; }
-#title.home-composed .title-inner { inset: 0; width: auto; padding: 0; z-index: 2; }
-#title.home-composed .home-edge-band {
+& .title-bg[data-wallpaper-layer] { opacity: 0; }
+&[data-home-wallpaper="snow-road"] [data-wallpaper-layer="snow-road"],
+&[data-home-wallpaper="baita-heixiang"] [data-wallpaper-layer="baita-heixiang"],
+&[data-home-wallpaper="xingyue-piano"] [data-wallpaper-layer="xingyue-piano"],
+&[data-home-wallpaper="wu-bass"] [data-wallpaper-layer="wu-bass"],
+&[data-home-wallpaper="baita-station"] [data-wallpaper-layer="baita-station"],
+&[data-home-wallpaper="xingyue-reeds"] [data-wallpaper-layer="xingyue-reeds"],
+&[data-home-wallpaper="companions-dinner"] [data-wallpaper-layer="companions-dinner"] { opacity: 1; }
+&::before,
+& .title-bg::before,
+& .title-bg::after,
+& .title-inner::before { content: none; display: none; animation: none; }
+& .title-inner { inset: 0; width: auto; padding: 0; z-index: 2; }
+& .home-edge-band {
   position: absolute; left: -3%; right: -3%; z-index: 4; pointer-events: none;
   -webkit-backdrop-filter: blur(8px) saturate(.75);
   backdrop-filter: blur(8px) saturate(.75);
 }
-#title.home-composed .home-edge-band::after {
+& .home-edge-band::after {
   content: ''; position: absolute; inset: 0 0 2px;
 }
-#title.home-composed .home-edge-band-top {
+& .home-edge-band-top {
   --band-bleed: calc(calc(var(--game-layout-width, 100vw) * 0.012) + 4px);
   top: calc(0px - var(--band-bleed));
   transform: rotate(-.65deg); transform-origin: center top;
 }
-#title.home-composed .home-band-track {
+& .home-band-track {
   position: absolute; z-index: 1; top: 10px; left: 0; width: auto;
   display: flex; align-items: center; gap: 0;
   white-space: nowrap;
 }
-#title.home-composed .home-band-lane { flex: none; display: flex; justify-content: space-around; align-items: center; gap: 20px; }
-#title.home-composed .home-band-track b { margin: 0 10px; font-weight: 400; }
-#title.home-composed .home-brand {
-  position: relative; left: auto; top: auto; width: 100%;
+& .home-band-lane { flex: none; display: flex; justify-content: space-around; align-items: center; gap: 20px; }
+& .home-band-track b { margin: 0 10px; font-weight: 400; }
+& .home-brand {
+  position: relative; left: auto; top: auto;
   margin: 0; background: none;
   border: 0; box-shadow: none; clip-path: none;
   animation: homeCoverIn .45s ease-out both;
 }
-#title.home-composed .home-wordmark { margin: 0; line-height: 0; }
-#title.home-composed .home-wordmark img {
+& .home-wordmark { margin: 0; line-height: 0; }
+& .home-wordmark img {
   display: block; width: 100%; height: auto;
 }
-#title.home-composed .home-primary {
+& .home-primary {
   position: relative; left: auto; top: auto; width: 100%;
   display: grid;
 }
-#title.home-composed .home-secondary {
+& .home-secondary {
   position: relative; right: auto; width: 100%;
   display: grid;
 }
-#title.home-composed .home-command,
-#title.home-composed .home-support { position: absolute; isolation: isolate; }
-#title.home-composed .home-command { left: var(--home-edge); top: 12%; width: 29%; padding: 24px; }
-#title.home-composed .home-support { right: var(--home-edge); top: 30%; width: 25.5%; padding: 22px; }
-#title.home-composed .home-secondary .home-button-copy { margin-left: auto; text-align: right; }
-#title.home-composed .home-plate {
+& .home-command,
+& .home-support { position: absolute; isolation: isolate; }
+& .home-secondary .home-button-copy { margin-left: auto; text-align: right; }}
+#title.home-composed .home-plate{
+& {
   position: relative; isolation: isolate; display: flex; align-items: center;
   width: 100%; height: 86px; min-height: 0; margin: 0; padding: 12px 35px 12px 29px; gap: 18px;
   border: 0; border-radius: 0; background: none; color: var(--home-text); text-align: left;
@@ -114,165 +119,165 @@
   transition: transform .16s ease;
   animation: homeCoverIn .45s ease-out both;
 }
-#title.home-composed .home-plate::before,
-#title.home-composed .home-plate::after {
+&::before,
+&::after {
   content: ''; display: block; position: absolute; inset: 0; pointer-events: none;
   border: 0; border-radius: 0; width: auto; height: auto; transform: none; clip-path: var(--plate-shape); animation: none;
 }
-#title.home-composed .home-plate::after {
+&::after {
   -webkit-backdrop-filter: blur(10px) saturate(.8);
   backdrop-filter: blur(10px) saturate(.8);
 }
-#title.home-composed .home-plate:active::before { filter: drop-shadow(2px 2px 0 #0e0f109e); }
-#title.home-composed .home-plate:focus-visible,
-#title.home-composed .home-tool:focus-visible { outline: 3px solid #fee595; outline-offset: 6px; }
-#title.home-composed .home-plate > * { pointer-events: none; }
-#title.home-composed .home-button-copy { display: flex; flex-direction: column; min-width: 0; }
-#title.home-composed .home-button-cn { font: 750 25px/1.2 var(--font-ui); white-space: nowrap; }
-#title.home-composed .home-line-icon {
+&:active::before { filter: drop-shadow(2px 2px 0 #0e0f109e); }}
+#title.home-composed{
+& .home-plate:focus-visible,
+& .home-tool:focus-visible { outline: 3px solid #fee595; outline-offset: 6px; }
+& .home-plate > * { pointer-events: none; }
+& .home-button-copy { display: flex; flex-direction: column; min-width: 0; }
+& .home-button-cn { font: 750 25px/1.2 var(--font-ui); white-space: nowrap; }
+& .home-line-icon {
   flex: 0 0 32px; width: 32px; height: 32px; display: block;
   fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round;
 }
-#title.home-composed .home-start {
+& .home-start {
   --plate-shape: polygon(0 0, calc(100% - 25px) 0, 100% 25px, calc(100% - 9px) 100%, 0 100%);
-  height: 118px; padding: 22px 30px 22px 25px; gap: 16px;
+  padding: 22px 30px 22px 25px; gap: 16px;
 }
-#title.home-composed .home-city-icon { width: 44px; height: 44px; flex-basis: 44px; stroke-width: 1.8; }
-#title.home-composed .home-arrow { margin-left: auto; flex: 0 0 28px; width: 28px; height: 28px; color: #eeebe6; }
-#title.home-composed .home-guide { --plate-accent: #969fa5;
+& .home-city-icon { width: 44px; height: 44px; flex-basis: 44px; stroke-width: 1.8; }
+& .home-arrow { margin-left: auto; flex: 0 0 28px; width: 28px; height: 28px; color: #eeebe6; }
+& .home-guide {
   --plate-shape: polygon(0 0, calc(100% - 22px) 0, 100% 20px, calc(100% - 8px) 100%, 0 100%);
-  width: 78%; height: 90px; animation-delay: .05s;
+  animation-delay: .05s;
 }
-#title.home-composed .home-guide .home-button-cn { font-size: 27px; }
-#title.home-composed .home-ach { width: 97%; margin-left: 3%; animation-delay: .08s; }
-#title.home-composed .home-ach .home-line-icon { width: 42px; height: 42px; flex-basis: 42px; stroke-width: 1.8; }
-#title.home-composed .home-library { animation-delay: .12s; --plate-accent: #a4acb1; }
-#title.home-composed .home-settings { width: 94%; margin-left: 6%; animation-delay: .16s; --plate-accent: #babec0; }
-#title.home-composed .home-makers { width: 98%; margin-left: 2%; animation-delay: .2s; --plate-accent: #d9cb9e; }
-#title.home-composed .home-exit { width: 96%; margin-left: 4%; animation-delay: .24s; }
-#title.home-composed .home-footer {
+& .home-guide .home-button-cn { font-size: 27px; }
+& .home-ach { animation-delay: .08s; }
+& .home-ach .home-line-icon { stroke-width: 1.8; }
+& .home-library { animation-delay: .12s; }
+& .home-settings { animation-delay: .16s; }
+& .home-makers { animation-delay: .2s; }
+& .home-exit { animation-delay: .24s; }
+& .home-footer {
   position: absolute; left: var(--home-edge); right: var(--home-edge); bottom: 8%;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
-#title.home-composed .home-tools { display: flex; align-items: center; gap: 10px; }
-#title.home-composed .home-tool {
+& .home-tools { display: flex; align-items: center; gap: 10px; }}
+#title.home-composed .home-tool{
+& {
   position: relative; isolation: isolate; width: 46px; min-height: 0; padding: 0;
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   background: none; border: 0; border-radius: 0; cursor: pointer; transition: transform .16s ease;
 }
 /* 小工具钮与选项盘同语言：纸面垫层左上外露、墨描边硬投影、双斜切轮廓、金色侧条 + 毛玻璃填充 */
-#title.home-composed .home-tool::before {
+&::before {
   content: ''; display: block; position: absolute; z-index: -2; pointer-events: none; clip-path: var(--tool-shape);
 }
-#title.home-composed .home-tool::after {
+&::after {
   content: ''; display: block; position: absolute; z-index: -1; pointer-events: none;
   clip-path: var(--tool-shape);
   -webkit-backdrop-filter: blur(8px) saturate(.75);
   backdrop-filter: blur(8px) saturate(.75);
 }
-#title.home-composed .home-tool:hover { filter: none; }
-#title.home-composed .home-tool:hover::after { filter: brightness(1.1); }
-#title.home-composed .home-tool:active { transform: translate(1px, 1px); }
-#title.home-composed .home-tool:active::before { filter: drop-shadow(1px 1px 0 #0e0f109e); }
-#title.home-composed .home-tool svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
-#title.home-composed .home-inbox { width: auto; padding: 0 15px; font: 500 13px/1.3 var(--font-ui); }
-#title.home-composed .home-wallpaper { width: auto; padding: 0 12px; font: 500 13px/1.3 var(--font-ui); }
-#title.home-composed .home-wallpaper b { font-weight: 500; }
-#title.home-composed .home-wallpaper:focus-visible { outline: 2px solid var(--home-gold); outline-offset: 3px; }
-#title.home-composed .home-wallpaper-view {
+&:hover { filter: none; }
+&:hover::after { filter: brightness(1.1); }
+&:active { transform: translate(1px, 1px); }
+&:active::before { filter: drop-shadow(1px 1px 0 #0e0f109e); }
+& svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }}
+#title.home-composed{
+& .home-inbox { width: auto; padding: 0 15px; font: 500 13px/1.3 var(--font-ui); }
+& .home-wallpaper { width: auto; padding: 0 12px; font: 500 13px/1.3 var(--font-ui); }
+& .home-wallpaper b { font-weight: 500; }
+& .home-wallpaper:focus-visible { outline: 2px solid var(--home-gold); outline-offset: 3px; }
+& .home-wallpaper-view {
   position: absolute; z-index: 5; right: var(--home-edge); bottom: 8%; padding: 0 12px; font: 500 13px/1.3 var(--font-ui);
 }
-#title.home-composed .home-wallpaper-view:focus-visible { outline: 2px solid var(--home-gold); outline-offset: 3px; }
+& .home-wallpaper-view:focus-visible { outline: 2px solid var(--home-gold); outline-offset: 3px; }
 /* 只看壁纸时淡出菜单；恢复的左右入场由 home-menu-motion 接管。 */
-#title.home-composed .title-inner,
-#title.home-composed .home-edge-band {
+& .title-inner,
+& .home-edge-band {
   transition: opacity .34s cubic-bezier(.22,1,.36,1), transform .34s cubic-bezier(.22,1,.36,1), visibility 0s linear 0s;
 }
-#title.home-composed::after { transition: opacity .4s ease-in-out; }
-#title.home-composed.wallpaper-only .title-inner {
+&::after { transition: opacity .4s ease-in-out; }
+&.wallpaper-only .title-inner {
   opacity: 0; transform: none;
   visibility: hidden; pointer-events: none;
   transition: opacity .26s ease-in, transform .26s ease-in, visibility 0s linear .26s;
 }
-#title.home-composed.wallpaper-only .home-edge-band {
+&.wallpaper-only .home-edge-band {
   opacity: 0; visibility: hidden;
   transition: opacity .26s ease-in, visibility 0s linear .26s;
 }
-#title.home-composed.wallpaper-only::after { opacity: 0; }
-#title.home-composed .home-credits-dialog {
+&.wallpaper-only::after { opacity: 0; }
+& .home-credits-dialog {
   position: fixed; inset: 0; width: min(620px, calc(var(--game-layout-width, 100vw) * 0.78)); max-height: calc(var(--game-layout-height, 100vh) * 0.8); margin: auto;
   padding: 65px 48px 45px; border-radius: 0;
   font-family: var(--font-ui);
 }
-#title.home-composed .home-credits-dialog::backdrop { background: #0e0f10bd; }
-#title.home-composed .home-credits-back {
+& .home-credits-dialog::backdrop { background: #0e0f10bd; }
+& .home-credits-back {
   position: absolute; left: 25px; top: 22px; padding: 5px 8px; background: none;
   border: 0; font: 600 14px/1.4 var(--font-ui); cursor: pointer;
 }
-#title.home-composed .home-credits-back:focus-visible { outline: 2px solid #26292c; outline-offset: 3px; }
-#title.home-composed .home-credits-dialog h2 { margin: 0; font: 700 30px/1.3 var(--font-ui); }
-#title.home-composed .home-makers-list {
+& .home-credits-back:focus-visible { outline: 2px solid #26292c; outline-offset: 3px; }
+& .home-credits-dialog h2 { margin: 0; font: 700 30px/1.3 var(--font-ui); }}
+#title.home-composed .home-makers-list{
+& {
   display: grid; gap: 22px; margin: 0; padding: 32px 0;
 }
-#title.home-composed .home-makers-list div { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
-#title.home-composed .home-makers-list dt { font: 500 16px/1.5 var(--font-ui); }
-#title.home-composed .home-makers-list dd { margin: 0; font: 600 30px/1.4 var(--font-ui); }
-#title.home-composed .home-snow { z-index: -1; }
-#title.home-composed #warmupTip {
+& div { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
+& dt { font: 500 16px/1.5 var(--font-ui); }
+& dd { margin: 0; font: 600 30px/1.4 var(--font-ui); }}
+#title.home-composed{
+& .home-snow { z-index: -1; }
+& #warmupTip {
   left: 50%; right: auto; top: auto; bottom: 8%; transform: translateX(-50%);
   width: 300px; min-width: 0; max-width: 30%; padding: 9px 13px; border-radius: 0; box-shadow: none;
-}
+}}
 /* Existing compact-window support; verification stays at the current window. */
-body.reduce-motion #title.home-composed *,
-body.reduce-motion #title.home-composed *::before,
-body.reduce-motion #title.home-composed *::after { animation: none; transition: none; }
 @media (prefers-reduced-motion: reduce) {
   #title.home-composed *, #title.home-composed *::before, #title.home-composed *::after { animation: none; transition: none; }
 }
 
 /* ===== 罗德岛终端化主页：深色半透明选项盘 + 英文副标 + 蓝色选中扫光 ===== */
-#title.home-composed { --home-gold: var(--ak-yellow); }
-#title.home-composed::before { content: '' !important; display: block !important; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+#title.home-composed{
+& { --home-gold: var(--ak-yellow); }
+&::before { content: '' !important; display: block !important; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: var(--ak-tex-scan), var(--ak-tex-dots); mix-blend-mode: multiply; animation: none; }
-#title.home-composed .home-edge-band::after { background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.45)); border-bottom: 1px solid var(--ak-line-hi); }
-#title.home-composed .home-band-track { font: 700 11px/1.2 var(--font-label); letter-spacing: .42em; text-transform: uppercase; color: rgba(255,255,255,.55); }
-#title.home-composed .home-band-track b { color: var(--ak-yellow); }
-#title.home-composed .home-plate { --plate-fill: rgba(14,16,19,.82); --plate-accent: var(--ak-white); --plate-edge: rgba(255,255,255,.32);
+& .home-edge-band::after { background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.45)); border-bottom: 1px solid var(--ak-line-hi); }
+& .home-band-track { font: 700 11px/1.2 var(--font-label); letter-spacing: .42em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+& .home-band-track b { color: var(--ak-yellow); }
+& .home-plate { --plate-fill: rgba(14,16,19,.82); --plate-accent: var(--ak-white); --plate-edge: rgba(255,255,255,.32);
   --plate-shape: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px)); }
-#title.home-composed .home-primary .home-plate::before { inset: 0; background: rgba(255,255,255,.14); filter: none; }
-#title.home-composed .home-secondary .home-plate::before { inset: 0; background: rgba(255,255,255,.14); filter: none; }
-#title.home-composed .home-plate::before { filter: none; }
-#title.home-composed .home-plate:hover::before { filter: none; background: var(--ak-blue); }
-#title.home-composed .home-plate::after { background: linear-gradient(90deg, var(--plate-accent) 0 4px, transparent 4px), var(--plate-fill); }
-#title.home-composed .home-secondary .home-plate::after { background: linear-gradient(90deg, transparent calc(100% - 4px), var(--plate-accent) calc(100% - 4px)), var(--plate-fill); }
-#title.home-composed .home-plate:hover::after { filter: none;
+& .home-primary .home-plate::before,
+& .home-secondary .home-plate::before { inset: 0; background: rgba(255,255,255,.14); filter: none; }
+& .home-plate::before { filter: none; }
+& .home-plate:hover::before { filter: none; background: var(--ak-blue); }
+& .home-plate::after { background: linear-gradient(90deg, var(--plate-accent) 0 4px, transparent 4px), var(--plate-fill); }
+& .home-secondary .home-plate::after { background: linear-gradient(90deg, transparent calc(100% - 4px), var(--plate-accent) calc(100% - 4px)), var(--plate-fill); }
+& .home-plate:hover::after { filter: none;
   background: linear-gradient(90deg, var(--ak-blue) 0 6px, transparent 6px), linear-gradient(100deg, rgba(31,178,255,.22), rgba(14,16,19,.9) 60%); }
-#title.home-composed .home-button-cn { font-weight: 800; letter-spacing: .16em; text-shadow: none; }
-#title.home-composed .home-button-copy::after { display: none; }
-#title.home-composed .home-guide .home-button-copy::after { content: 'BRIEFING'; }
-#title.home-composed .home-ach .home-button-copy::after { content: 'ACHIEVEMENTS'; }
-#title.home-composed .home-settings .home-button-copy::after { content: 'SYSTEM'; }
-#title.home-composed .home-makers .home-button-copy::after { content: 'CREDITS'; }
-#title.home-composed .home-exit .home-button-copy::after { content: 'DISCONNECT'; }
-#title.home-composed .home-start { --plate-accent: #14120a; color: #14120a; }
-#title.home-composed .home-start .home-line-icon, #title.home-composed .home-start .home-arrow { color: #14120a; }
-#title.home-composed .home-start .home-button-cn { letter-spacing: .3em; text-shadow: none; }
-#title.home-composed .home-exit { --plate-accent: var(--ak-red); --plate-fill: rgba(30,14,14,.84); }
-#title.home-composed .home-ach { --plate-accent: var(--ak-yellow); }
-#title.home-composed .home-line-icon { stroke-width: 1.6; color: var(--ak-white); }
-#title.home-composed .home-plate:hover .home-line-icon { color: var(--ak-blue-hi); }
-#title.home-composed .home-start:hover .home-line-icon { color: #14120a; }
-#title.home-composed .home-tool { --tool-shape: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); color: var(--ak-white); }
-#title.home-composed .home-tool::before { background: rgba(255,255,255,.18); inset: 0; filter: none; }
-#title.home-composed .home-tool::after { inset: 1px; background: linear-gradient(90deg, var(--ak-white) 0 3px, transparent 3px), rgba(12,14,17,.86); }
-#title.home-composed .home-tool:hover { transform: translateY(-3px); }
-#title.home-composed .home-tool:hover::before { background: var(--ak-blue); filter: none; }
-#title.home-composed .home-wallpaper b { color: var(--ak-yellow); }
-#title.home-composed .home-credits-dialog { background: var(--ak-panel); color: var(--ak-white); border: 1px solid var(--ak-line-hi); clip-path: var(--ak-clip); box-shadow: none; }
-#title.home-composed .home-credits-back { color: var(--ak-blue-hi); letter-spacing: .2em; }
-#title.home-composed .home-credits-dialog h2 { font-weight: 800; letter-spacing: .3em; border-left: 5px solid var(--ak-blue); padding-left: 14px; }
-#title.home-composed .home-makers-list { border-bottom: 2px solid var(--ak-yellow); }
-#title.home-composed .home-makers-list dt { color: var(--ak-sub); letter-spacing: .12em; }
-#title.home-composed .home-makers-list dd { text-shadow: none; font-family: var(--font-ui); letter-spacing: .1em; }
-#title.home-composed #warmupTip { background: rgba(10,12,14,.92); border: 1px solid var(--ak-line-hi); border-left: 3px solid var(--ak-yellow); }
+& .home-button-cn { font-weight: 800; letter-spacing: .16em; text-shadow: none; }
+& .home-button-copy::after { display: none; }
+& .home-guide .home-button-copy::after { content: 'BRIEFING'; }
+& .home-ach .home-button-copy::after { content: 'ACHIEVEMENTS'; }
+& .home-settings .home-button-copy::after { content: 'SYSTEM'; }
+& .home-makers .home-button-copy::after { content: 'CREDITS'; }
+& .home-exit .home-button-copy::after { content: 'DISCONNECT'; }
+& .home-start { --plate-accent: #14120a; }
+& .home-start .home-line-icon, & .home-start .home-arrow { color: #14120a; }
+& .home-start .home-button-cn { letter-spacing: .3em; text-shadow: none; }
+& .home-line-icon { stroke-width: 1.6; color: var(--ak-white); }
+& .home-plate:hover .home-line-icon { color: var(--ak-blue-hi); }
+& .home-start:hover .home-line-icon { color: #14120a; }
+& .home-tool { --tool-shape: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); color: var(--ak-white); }
+& .home-tool::before { background: rgba(255,255,255,.18); inset: 0; filter: none; }
+& .home-tool::after { inset: 1px; }
+& .home-tool:hover::before { background: var(--ak-blue); filter: none; }
+& .home-wallpaper b { color: var(--ak-yellow); }
+& .home-credits-dialog { background: var(--ak-panel); color: var(--ak-white); border: 1px solid var(--ak-line-hi); clip-path: var(--ak-clip); box-shadow: none; }
+& .home-credits-back { color: var(--ak-blue-hi); letter-spacing: .2em; }
+& .home-credits-dialog h2 { font-weight: 800; letter-spacing: .3em; border-left: 5px solid var(--ak-blue); padding-left: 14px; }
+& .home-makers-list { border-bottom: 2px solid var(--ak-yellow); }
+& .home-makers-list dt { color: var(--ak-sub); letter-spacing: .12em; }
+& .home-makers-list dd { text-shadow: none; font-family: var(--font-ui); letter-spacing: .1em; }
+& #warmupTip { background: rgba(10,12,14,.92); border: 1px solid var(--ak-line-hi); border-left: 3px solid var(--ak-yellow); }}
 @keyframes homeCoverIn { from { opacity: 0; transform: translateX(-26px); clip-path: inset(0 100% 0 0); } to { opacity: 1; transform: none; clip-path: inset(0); } }

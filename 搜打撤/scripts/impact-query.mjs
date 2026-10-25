@@ -22,7 +22,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { planForPaths, reverseImports, toProjectPath } from './gate-plan.mjs';
-import { extractRegistryTokens, parseActiveRegistry, registryHits } from './registry-paths.mjs';
+import { parseActiveRegistry, registryHits } from './registry-paths.mjs';
 export { extractRegistryTokens, parseActiveRegistry, pathOverlaps, registryHits } from './registry-paths.mjs';
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');

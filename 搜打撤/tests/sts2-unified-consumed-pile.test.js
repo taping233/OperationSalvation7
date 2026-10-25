@@ -1,11 +1,11 @@
+import { battleRules, damageRuleFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readConsumedPile, takeConsumedCard } from '../game/src/battle/bag/battle.consumed-pile.js';
 import { consumedPileUids } from '../game/src/battle/view/battle.piles.view.js';
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 30, battleHandMax: 200, bossDeckSize: 99, starterSha: 0,
-    battleStartDraw: 99, battleTurnDraw: 1, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(30, 200, 99, 0, 99, 1) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
@@ -15,8 +15,7 @@ const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
 const settle = () => vi.advanceTimersByTimeAsync(3000);
 let liveGame;
 const strike = id => ({ id, name: `打出牌${id}`, type: '武术', cost: 0, dmg: 2, dmgType: 'fixed', desc: '',
-  rules: { version: 1, battle: { target: { side: 'enemy', area: false } },
-    triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } } });
+  rules: { ...damageRuleFields(false, 'chosenEnemy') } });
 const recall = amount => ({ id: 'unified-recall', name: '统一取回复活', type: '法术', cost: 0,
   desc: `复活最多${amount}张卡牌。`, rules: { version: 1, battle: { target: { side: 'self', area: false } } } });
 

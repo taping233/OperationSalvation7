@@ -13,8 +13,11 @@ describe('战斗信息减负与普通牌库', () => {
     expect(host.querySelectorAll('.bt-pile')).toHaveLength(1);
     expect(host.querySelector('[data-act=btGrave] b').textContent).toBe('2');
     expect(host.textContent).toContain('消耗牌堆');
+    expect(piles.rest).toContain('[[icon:consumed-pile]]');
+    expect(host.querySelector('.bt-pilecard').textContent).toBe('back');
     expect(host.textContent).not.toMatch(/弃牌|墓地/);
-    expect(host.querySelector('[data-act=btGrave]').title).toContain('不自动洗回，仅由卡牌效果取回');
+    expect(host.querySelector('[data-act=btGrave]').getAttribute('aria-label')).toContain('不自动洗回，仅由卡牌效果取回');
+    expect(host.querySelector('[title], [data-ui-tip], [data-ui-tip-title], [data-ui-tip-text]')).toBeNull();
   });
   it('攻法伤保留强化后的实际总值，来源转入共享说明而不重复护甲徽章', () => {
     const player = { atk:3, spellPower:2 }, status = { atkUp:4, spellUp:1 };
@@ -29,13 +32,12 @@ describe('战斗信息减负与普通牌库', () => {
     expect(player).toEqual({ atk:3, spellPower:2 });
   });
 
-  it('承伤、余血和致死保留常驻，估算边界进入可聚焦的详情', () => {
+  it('承伤、余血和致死保留常驻，估算显示不触发悬停或键盘聚焦', () => {
     const forecast = { damage:9, hpAfter:0, lethal:true, note:'未计随从攻击与回合末触发' };
     const host = surface(turnForecastHTML(forecast));
     expect(host.textContent).toContain('估算承伤 9'); expect(host.textContent).toContain('余 0 生命');
     expect(host.textContent).toContain('可能致死'); expect(host.textContent).not.toContain(forecast.note);
-    expect(host.querySelector('[data-ui-tip]').dataset.uiTipText).toBe(forecast.note);
-    expect(host.querySelector('[data-ui-tip]').tabIndex).toBe(0);
+    expect(host.querySelector('[title],[data-ui-tip],[data-ui-tip-title],[data-ui-tip-text],[tabindex]')).toBeNull();
   });
 
   it.each([99, 98, 0])('普通牌库徽章读取实际剩余%s，保留原消耗区而不引入弃牌循环', count => {
@@ -46,15 +48,26 @@ describe('战斗信息减负与普通牌库', () => {
     expect(deck.querySelector('b').textContent).toBe(String(count));
     expect(deck.getAttribute('aria-label')).toContain('仅抽牌效果取牌');
     expect(deck.title).toBe('');
+    expect(deck.querySelector('[data-ui-tip]')).toBeNull(); expect(deck.hasAttribute('data-ui-tip')).toBe(false);
     expect(piles.rest).toContain('btGrave'); expect(piles.rest).not.toContain('弃牌堆');
     expect(JSON.stringify({ draw, consumed })).toBe(before);
   });
 
-  it('普通牌库按同一卡面合并99份，空库保留返回而不构造假卡', () => {
+  it('首脑战牌库和消耗牌堆保留点击、计数及读屏说明，不显示悬浮说明', () => {
+    const piles = renderCombatPiles({ mode:'boss', drawCount:['a','b'], graveCount:['c'], pileTip:pile => `${pile.length}张`, cardBackHTML:'back', escAttr:x => x });
+    const host = surface(piles.draw + piles.rest);
+    const draw = host.querySelector('[data-act=btDeck]'), consumed = host.querySelector('[data-act=btGrave]');
+    expect(draw.tagName).toBe('BUTTON'); expect(consumed.tagName).toBe('BUTTON');
+    expect(draw.getAttribute('aria-label')).toContain('牌库：2张');
+    expect(draw.querySelector('b').textContent).toBe('2'); expect(consumed.querySelector('b').textContent).toBe('1');
+    expect(host.querySelector('[title], [data-ui-tip], [data-ui-tip-title], [data-ui-tip-text]')).toBeNull();
+  });
+
+  it('普通牌库逐张显示相同牌，空库保留返回而不构造假卡', () => {
     const entries = Array.from({ length:99 }, (_, i) => ({ uid:`sha-${i}`, card:{ id:'starter-attack', name:'初始攻击', type:'武术', desc:'攻击' } }));
     const filled = battlePileBodyHTML({ cards:entries, cardHTML:c => c.name, kind:'deck', isBoss:false });
-    expect(filled.stacks).toHaveLength(1); expect(filled.stacks[0].count).toBe(99);
-    expect(surface(filled.html).querySelector('.battle-pile-count').textContent).toBe('×99');
+    expect(filled.stacks).toHaveLength(99); expect(filled.stacks.every(stack => stack.count === 1)).toBe(true);
+    expect(surface(filled.html).querySelector('.battle-pile-count')).toBeNull();
     expect(surface(filled.html).querySelector('[data-battle-pile-view]').dataset.pileTotal).toBe('99');
     const empty = surface(battlePileBodyHTML({ cards:[], cardHTML:c => c.name, kind:'deck', isBoss:false }).html);
     expect(empty.querySelector('.battle-pile-empty').textContent).toBe('牌库已空');
@@ -62,9 +75,9 @@ describe('战斗信息减负与普通牌库', () => {
     expect(empty.querySelector('[data-act="btDeckBack"]')).not.toBeNull();
   });
 
-  it('指南说明普通99库和效果抽牌，背包操作放在战前地图', () => {
+  it('指南说明普通10库和效果抽牌，背包操作放在战前地图', () => {
     const battle = guide.pages.find(page => page.id === 'battle');
-    expect(battle.steps.map(step => step.text).join('')).toContain('99 张初始攻击');
+    expect(battle.steps.map(step => step.text).join('')).toContain('10 张初始攻击');
     expect(battle.steps.map(step => step.text).join('')).toContain('开局和每回合不自动抽牌');
     const loot = guide.pages.find(page => page.id === 'loot');
     expect(loot.steps[1].text).toContain('战斗中不能整理背包');

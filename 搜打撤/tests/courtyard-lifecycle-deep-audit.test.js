@@ -47,7 +47,7 @@ describe('courtyard owner lifecycle regression', () => {
     expect(host.isConnected).toBe(false);
     expect(canvas.width).toBe(1);
     expect(observers[0].disconnect).toHaveBeenCalledOnce();
-    expect(ownedObservers).toHaveLength(1);
+    expect(ownedObservers).toHaveLength(3); // local subtree, blocking ancestors, and connection ownership
     expect(ownedObservers.every(observer => observer.disconnect.mock.calls.length === 1)).toBe(true);
     expect(ownedFrames.every(frame => !frames.has(frame))).toBe(true);
     const handler = add.mock.calls.find(([type]) => type === 'visibilitychange')?.[1];
@@ -87,18 +87,18 @@ describe('owner visibility and active-room invariants', () => {
     await Promise.resolve(); await Promise.resolve();
     expect(canvas.width).toBe(1);
     expect(observers[0].disconnect).toHaveBeenCalledOnce();
-    expect(ownedObservers).toHaveLength(1);
+    expect(ownedObservers).toHaveLength(3); // local subtree, blocking ancestors, and connection ownership
     expect(ownedObservers.every(observer => observer.disconnect.mock.calls.length === 1)).toBe(true);
   });
   it('keeps attached room alive through preference, pause, and visibility changes', async () => {
     const { host, canvas } = await open();
     expect(canvas.width).toBe(900);
     document.body.classList.add('reduce-motion');
-    await Promise.resolve();
+    await Promise.resolve(); await Promise.resolve();
     expect(host.classList.contains('is-still')).toBe(true);
     expect(observers[0].disconnect).not.toHaveBeenCalled();
     document.body.classList.remove('reduce-motion');
-    await Promise.resolve();
+    await Promise.resolve(); await Promise.resolve();
     expect(host.classList.contains('is-still')).toBe(false);
     host.querySelector('[data-courtyard-control="pause"]').click();
     hidden.mockReturnValue(true); document.dispatchEvent(new Event('visibilitychange'));

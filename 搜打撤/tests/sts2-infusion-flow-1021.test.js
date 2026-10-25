@@ -1,10 +1,10 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { syncSelectionPrompt } from '../game/src/battle/view/battle.selection-ui.js';
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 30, battleHandMax: 99, bossDeckSize: 99, starterSha: 0,
-    battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(30, 99, 99, 0, 5, 1) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
@@ -230,7 +230,7 @@ describe('one infusion cast across default pointer, keyboard and target steps', 
 
   it('actual normal-deck material keeps its UID in the unified consumed pile without permanent ownership', async () => {
     await begin(optional(), [], 1);
-    expect(R.drawPile.filter(uid => uid.startsWith('normal-sha-'))).toHaveLength(99);
+    expect(R.drawPile.filter(uid => uid.startsWith('normal-sha-'))).toHaveLength(10);
     expect(E.drawCards(1)).toBe(1);
     const temporary = R.hand.find(uid => uid.startsWith('normal-sha-'));
     expect(temporary).toBeTruthy(); const remainingDeck = [...R.drawPile];
@@ -252,7 +252,7 @@ describe('one infusion cast across default pointer, keyboard and target steps', 
     expect(R.hand).toContain('flow-1'); expect(R.infuseFuels).toBe(0);
   });
 
-  it('the target strip returns to the same material UIDs and rejects a late button from an older step', async () => {
+  it('targeting has no strip; explicit infusion commands still preserve material UIDs', async () => {
     await begin(optional()); materialTarget();
     document.body.innerHTML = '<div class="battle-stage"></div>';
     const stage = document.querySelector('.battle-stage'); stage._battleToken = snapshot().battleToken;
@@ -260,12 +260,11 @@ describe('one infusion cast across default pointer, keyboard and target steps', 
     const cancel = vi.fn();
     const sync = () => syncSelectionPrompt(stage, snapshot(), { getCurrent:() => ({snapshot:snapshot(),stage}),
       findCard:E.findCard, onCancel:cancel, onReturnToInfusion:returnToInfusion });
-    sync(); const old = stage.querySelector('[data-act="btPickReturnInfusion"]');
-    old.click(); expect(returnToInfusion).toHaveBeenCalledTimes(1);
+    sync(); expect(stage.querySelector('[data-selection-prompt]')).toBeNull();
+    commands.beginInfusion(snapshot().pendingTarget.uid);
     expect(snapshot().infusing.picked).toEqual(['flow-1']);
     expect(commands.confirmInfusion().kind).toBe('target');
-    old.click(); expect(returnToInfusion).toHaveBeenCalledTimes(1);
-    sync(); stage.querySelector('[data-act="btPickReturnInfusion"]').click();
-    expect(returnToInfusion).toHaveBeenCalledTimes(2); expect(cancel).not.toHaveBeenCalled();
+    sync(); expect(stage.querySelector('[data-selection-prompt]')).toBeNull();
+    expect(returnToInfusion).not.toHaveBeenCalled(); expect(cancel).not.toHaveBeenCalled();
   });
 });

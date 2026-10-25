@@ -1,3 +1,4 @@
+import { isLegacySealedHero } from '../../cards/card-legacy-battle-policy.js';
 import { hasStructuredTrigger } from '../effects/battle.trigger-source.js';
 
 /** Battle setup and collection mechanics mutate only the injected live runtime. */
@@ -11,7 +12,7 @@ export function createSetupMechanics({ runtime: instanceRuntime, cards, combat: 
 
   function sealSetup(card) {
     if (card?.rules?.battle?.setup) return card.rules.battle.setup;
-    if (!hasStructuredTrigger(card, 'onPlay') && card?.id === SEALED_HERO_ID) {
+    if (!hasStructuredTrigger(card, 'onPlay') && isLegacySealedHero(card)) {
       return { mode: 'boss', injectIds: SEAL_LIMB_IDS,
         collection: { ids: [SEALED_HERO_ID, ...SEAL_LIMB_IDS], into: SOVEREIGN_ID } };
     }
@@ -40,10 +41,7 @@ export function createSetupMechanics({ runtime: instanceRuntime, cards, combat: 
       .map(entry => sealSetup(entry.card)?.collection)
       .find(rule => rule && rule.ids.every(id => ids.has(id)));
     if (!collection) return;
-    const sealedInHand = instanceRuntime.hand.filter(u => {
-      const o = findCard(u);
-      return !!o?.card && collection.ids.includes(o.card.id);
-    });
+    const sealedInHand = collection.ids.map(id => instanceRuntime.hand.find(uid => findCard(uid)?.card?.id === id));
     instanceRuntime.set$sealDone(true);
     // ① 5 张封印单卡自动消耗（进消耗区/墓地，不再可用）
     sealedInHand.forEach(u => {
@@ -91,7 +89,7 @@ export function createSetupMechanics({ runtime: instanceRuntime, cards, combat: 
       const pool = cards.all().filter(c => c.rarity === '传说' && ['武术', '法术'].includes(c.type));
       const picked = [];
       for (let k = 0; k < n && pool.length; k++) {
-        const c = pool.splice(Math.floor(Random.random('battle') * pool.length), 1)[0];
+        const c = pool.splice(Math.floor(Random.random('battle', 'generation') * pool.length), 1)[0];
         const zero = { ...c, cost: 0 };
         const uid0 = 'bts' + Date.now().toString(36) + instanceRuntime.nextTmpSeq();
         instanceRuntime.granted.push({ uid: uid0, card: zero });
@@ -105,7 +103,7 @@ export function createSetupMechanics({ runtime: instanceRuntime, cards, combat: 
     if (instanceRuntime.nestRunes.some(r => r.kind === 'morph')) {
       const forms = cards.all().filter(c => /形态/.test(String(c.name || '')) && ['武术', '法术'].includes(c.type));
       const picks = [];
-      for (let k = 0; k < 2 && forms.length; k++) picks.push(forms.splice(Math.floor(Random.random('battle') * forms.length), 1)[0]);
+      for (let k = 0; k < 2 && forms.length; k++) picks.push(forms.splice(Math.floor(Random.random('battle', 'generation') * forms.length), 1)[0]);
       if (picks.length === 2) {
         choiceQueue.push({ cardName: '变身符文', options: picks.map(c => c.desc || c.name) }); processChoice();
         instanceRuntime.G.log('[[icon:sparkles]] <b>变身符文</b>：从 2 种随机形态中选择 1 张释放', 'sys');

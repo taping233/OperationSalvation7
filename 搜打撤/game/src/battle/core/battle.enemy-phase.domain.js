@@ -3,6 +3,7 @@ import { esc } from '../../core/shared.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
 import { buildEnemyActionPlan } from './battle.enemy-plan.js';
 import { createM2Domain } from '../effects/effect-steps.m2.domain.js';
+import { dealMeasuredDamage } from './battle.measured-damage.js';
 
 /** Instance-owned state and host services are captured explicitly. */
 export function createEnemyPhaseDomain(context) {
@@ -15,7 +16,7 @@ const Combat = context.combat;
 const { waitForFeedback, waitMs } = context.presentation;
 const { demoMs } = context.presentation;
 const { recordBattleDamage } = context.summary;
-const { restoreAtkDown } = createM2Domain(context);
+const { restoreAtkDown, restoreStolenAttack } = createM2Domain(context);
 /* battle.enemy-phase.js —— 敌方阶段与回合结束（2026-09-22 六文件重构批6-C 自 battle.core.js 拆出，原行 2480-2797）。
  * 逐字搬迁（flee 因被引擎侧 finish 环调随迁 engine）；状态经 battle.runtime.js；禁 import 壳。 */
 
@@ -78,10 +79,9 @@ const { restoreAtkDown } = createM2Domain(context);
 
   function recoverAutoPhaseError(error, token, phase) {
     if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token || instanceRuntime.battleState.phase !== phase || phase === BATTLE_PHASES.VICTORY || phase === BATTLE_PHASES.DEFEAT) return;
-    console.error('Battle turn auto-effect sequence failed; restoring player phase.', error);
-    if (phase === BATTLE_PHASES.ENEMY) instanceRuntime.transitionTo(BATTLE_PHASES.PLAYER);
-    instanceRuntime.set$busy(false);
-    context.engine.requestBattleRender();
+    if (error?.name === 'BattleActionCancelledError' || error?.name === 'AbortError') return;
+    console.error('Battle turn auto-effect sequence failed; restoring checkpoint.', error);
+    context.engine.recoverBattleFailure(error, { label: '回合自动效果', battleToken: token });
   }
 
   async function resolveExtraTurn(extraTurnToken) {
@@ -107,6 +107,8 @@ const { restoreAtkDown } = createM2Domain(context);
     if ((instanceRuntime.pstat.status.swordForm || 0) > 0) {
       const got = context.engine.drawCards(1); instanceRuntime.G.log(`[[icon:sword]] <b>剑仙形态</b>：额外抽了 ${got} 张牌`, 'ok');
     }
+    await runTurnStartRunes(stillPlayerPhase);
+    if (!stillPlayerPhase()) return;
     try {
       await context.engine.processDelayed();
     } catch (error) {
@@ -129,6 +131,53 @@ const { restoreAtkDown } = createM2Domain(context);
     instanceRuntime.set$busy(false);
     context.engine.settlePendingSelections();
     context.engine.requestBattleRender();
+  }
+
+  async function runTurnStartRunes(stillCurrent) {
+    // —— 龙巢：远古龙尊阶段检定 / 时空符文 / 火球符文 ——
+    instanceRuntime.foes.forEach(f => { if (!f.dead && f.phases) context.engine.nestPhase(f); });
+    instanceRuntime.foes.forEach(f => {
+      // 只重掷活着的轮换免疫单位（写反会让免疫永不生效、尸体反被赋键）
+      if (f.dead || !f.rotateImmune) return;
+      const keys = ['bleed', 'poison', 'silence', 'abreak', 'healban'];   // 09-29 老板拍板：冰冻除外（与 lifecycle 注释对齐，原含 freeze）
+      const picked = [];
+      while (picked.length < 2) {
+        const k = keys[Math.floor(Random.random('battle', 'enemy') * keys.length)];
+        if (!picked.includes(k)) picked.push(k);
+      }
+      f.noCurseKeys = picked;
+      instanceRuntime.G.log(`[[icon:shield]] <b>${esc(f.name)}</b> 切换免疫：${picked.join('、')}`, 'warn');
+    });
+    if (instanceRuntime.timeSpaceRune && !instanceRuntime.timeSpaceUsed && instanceRuntime.drawPile.length === 0) {
+      instanceRuntime.set$timeSpaceUsed(true);
+      instanceRuntime.set$extraTurn(true);
+      instanceRuntime.G.log('[[icon:hourglass]] <b>时空符文</b>：牌库已空——额外回合！（本局限一次）', 'ok');
+    }
+    if (instanceRuntime.fireballRuneOn && instanceRuntime.drawPile.length) {
+      const bottom = instanceRuntime.drawPile[0];
+      const o = context.engine.findCard(bottom);
+      await context.engine.consumeBattleCard(bottom, 'drawPile');
+      if (!stillCurrent()) return;
+      instanceRuntime.G.log(`[[icon:fire]] <b>火球符文</b>：消耗牌库底的【${esc(o ? o.card.name : '?')}】`, 'sys');
+      const fbPool = cardCatalog.all().filter(c => String(c.name || '').includes('火球') && c.type === '法术');
+      if (fbPool.length) {
+        const fb = fbPool[Math.floor(Random.random('battle', 'enemy') * fbPool.length)];
+        const target = context.engine.alive()[0] || null;
+        if (target) {
+          instanceRuntime.cardAnims.push({ kind: 'surge', i: 1, n: 1, sourceName: '火球符文', name: fb.name, target: instanceRuntime.foes.indexOf(target), targetName: target.name, card: { ...fb } });
+          instanceRuntime.G.log(`[[icon:fire]] <b>火球符文</b>：随机释放【${esc(fb.name)}】→ <b>${esc(target.name)}</b>`, 'loot');
+        }
+        try {
+          await context.engine.resolveCardWithFeedback(fb, target, false, 0, null);
+        } catch (error) {
+          if (!stillCurrent()) return;
+          throw error;
+        }
+        if (!stillCurrent()) return;
+      }
+      if (!await awaitBattleFeedback(stillCurrent)) return;
+    }
+    if (!stillCurrent()) return;
   }
 
   async function awaitBattleFeedback(stillEnemyPhase) {
@@ -162,20 +211,24 @@ const { restoreAtkDown } = createM2Domain(context);
     context.engine.requestBattleRender();
     if (instanceRuntime.G.hp <= 0) { instanceRuntime.set$busy(false); context.engine.finish(false); return; }
     // —— 随从自动攻击（Q4 老板定向：步兵等为你自动战斗；无攻血场面物件不参与）——
-    const aliveBeforeAllies = context.engine.alive().length;
     for (const a of instanceRuntime.allies.filter(a => !a.dead && !a.statless)) {
+      if (!Combat.canAct(a)) {
+        instanceRuntime.G.log(`[[icon:crystal]] <b>${esc(a.name)}</b> 被冰冻，无法行动`, 'sys');
+        continue;
+      }
+      const beforeHit = context.engine.alive().length;
       const t = context.engine.alive()[0];
       if (!t) break;
-      const r = Combat.dealDamage({ atk: a.atk, status: a.status }, t, 0, Combat.TYPES.ATTACK);
+      const r = context.engine.dealEffectDamage({ caster: a, target: t, amount: 0, type: Combat.TYPES.ATTACK, card: { name:a.name }, source: 'ally' });
       if (r.dealt > 0) Combat.breakStealth(a);
-      recordRequestedDamage(t, r.dealt, { name:a.name }, { alive: context.engine.alive, hitFoe: context.engine.hitFoe });
+      context.engine.sweepDead();
+      context.engine.applyKillRewards(null, beforeHit - context.engine.alive().length);
       if (r.dealt > 0) instanceRuntime.floats.push({ unit: context.engine.foeIdx(t), text: '-' + r.dealt, cls: 'dmg' });
       instanceRuntime.G.log(`[[icon:swords]] <b>${esc(a.name)}</b> 自动攻击 ${esc(t.name)}：造成 <b>${r.dealt}</b> 点攻击伤害`, 'sys');
       if (!await awaitBattleFeedback(stillEnemyPhase)) return;
     }
     if (!stillEnemyPhase()) return;
     context.engine.sweepDead();
-    context.engine.applyKillRewards(null, aliveBeforeAllies - context.engine.alive().length);
     if (!stillEnemyPhase()) return;
     if (!context.engine.alive().length) { instanceRuntime.set$busy(false); context.engine.finish(true); return; }
     // —— 敌人回合：逐个行动 ——
@@ -213,7 +266,7 @@ const { restoreAtkDown } = createM2Domain(context);
         instanceRuntime.G.log(`[[icon:crystal]] <b>${esc(foe.name)}</b> 被冰冻，无法行动！`, 'sys');
       } else {
         const hits = plan.hits;
-        for (let h = 0; h < hits && instanceRuntime.G.hp > 0; h++) {
+        for (let h = 0; h < hits && instanceRuntime.G.hp > 0 && Combat.canAct(foe); h++) {
           // 潜行：无法成为被攻击对象（冰冻/潜行的敌人在自己行动后照常递减计时）
           if (Combat.isStealthed(instanceRuntime.pstat)) {
             instanceRuntime.G.log(`[[icon:runner]] 你在<b>潜行</b>中，<b>${esc(foe.name)}</b> 无法将你作为攻击对象`, 'sys');
@@ -226,15 +279,15 @@ const { restoreAtkDown } = createM2Domain(context);
           if (!stillEnemyPhase()) return;
           await waitMs(demoMs(130));
           if (!stillEnemyPhase()) return;
-          if (foe.dead || instanceRuntime.G.hp <= 0) break;
+          if (foe.dead || !Combat.canAct(foe) || instanceRuntime.G.hp <= 0) break;
           // 随从优先替主人承受伤害（Q4 老板定向：步兵「优先为主人承受伤害」；无攻血物件除外）
-          const guard = instanceRuntime.allies.find(a => !a.dead && !a.statless);
+          const guard = instanceRuntime.allies.find(a => !a.dead && !a.statless && !Combat.isStealthed(a));
           if (guard) {
             const shieldBefore = guard.defense?.shield || 0;
-            const ar = Combat.dealDamage({ atk: foe.atk }, guard, 0, Combat.TYPES.ATTACK);
+            const ar = dealMeasuredDamage(Combat, { atk: foe.atk }, guard, 0, Combat.TYPES.ATTACK);
             if (shieldBefore > 0 && !(guard.defense?.shield || 0)) hostAudio.sfx('shieldBreak');
-            hostAudio.sfx('hurt');
-            instanceRuntime.floats.push({ unit: 'ally:' + instanceRuntime.allies.indexOf(guard), text: '-' + ar.dealt, cls: 'hurt' });
+            hostAudio.sfx(ar.dealt > 0 ? 'hurt' : 'parry');
+            instanceRuntime.floats.push({ unit: 'ally:' + instanceRuntime.allies.indexOf(guard), text: ar.dealt > 0 ? '-' + ar.dealt : ar.immune ? '免疫' : ar.dodged ? '闪避' : '防御', cls: ar.dealt > 0 ? 'hurt' : 'block' });
             instanceRuntime.G.log(`[[icon:runner]] <b>${esc(guard.name)}</b> 替你承受了 <b>${ar.dealt}</b> 点攻击伤害（${Math.max(0, guard.hp)}/${guard.maxHp}）`, 'sys');
             if (guard.hp <= 0 && !guard.dead) {
               guard.dead = true;
@@ -256,7 +309,7 @@ const { restoreAtkDown } = createM2Domain(context);
           if (dealt > 0 && foe.affix === 'frenzy') context.engine.frenzyCurse(foe);
           // 龙巢：黑暗使者攻击后消耗对方 1 张手牌；远古龙尊按阶段附加诅咒/回血
           if (dealt > 0 && foe.handConsume && instanceRuntime.hand.length) {
-            const vi = Math.floor(Random.random('battle') * instanceRuntime.hand.length);
+            const vi = Math.floor(Random.random('battle', 'enemy') * instanceRuntime.hand.length);
             const vu = instanceRuntime.hand.splice(vi, 1)[0];
             const vo = context.engine.findCard(vu);
             instanceRuntime.consumed.push(vu);
@@ -269,7 +322,7 @@ const { restoreAtkDown } = createM2Domain(context);
             if (ph === 1) {
               const keys = ['bleed', 'poison', 'silence', 'abreak', 'healban'];
               hostAudio.sfx('danger');
-              context.engine.addPlayerCurse(keys[Math.floor(Random.random('battle') * keys.length)], 1, foe);
+              context.engine.addPlayerCurse(keys[Math.floor(Random.random('battle', 'enemy') * keys.length)], 1, foe);
               instanceRuntime.G.log('[[icon:fire]] 远古龙尊的吐息附加了一层随机诅咒（冰冻除外）', 'warn');
             } else if (ph === 2) {
               foe.hp = Math.min(foe.maxHp, foe.hp + 10);
@@ -313,10 +366,11 @@ const { restoreAtkDown } = createM2Domain(context);
           recordRequestedDamage(foe, er.dealt, { name:'中毒' }, { alive: context.engine.alive, hitFoe: context.engine.hitFoe });
           instanceRuntime.floats.push({ unit: instanceRuntime.foes.indexOf(foe), text: '-' + er.dealt, cls: 'dmg', tintKey: 'poison' });
           instanceRuntime.G.log(`[[icon:skull]] 中毒结算：<b>${esc(foe.name)}</b> 受到 <b>${er.dealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）${instanceRuntime.timeRune ? '（时光×2）' : ''}`, 'sys');
-          if (!await awaitBattleFeedback(stillEnemyPhase)) return;
         }
+        if (context.engine.resolveFoeDefeat(foe, '毒发倒地')) hostAudio.sfx('kill');
+        if (er?.dealt > 0 && !await awaitBattleFeedback(stillEnemyPhase)) return;
+        if (foe.dead) break;
       }
-      if (context.engine.resolveFoeDefeat(foe, '毒发倒地')) hostAudio.sfx('kill');
     }
     if (!stillEnemyPhase()) return;
     context.engine.applyKillRewards(null, aliveBeforeTick - context.engine.alive().length);   // 毒杀计入饮血剑击杀层数
@@ -329,31 +383,33 @@ const { restoreAtkDown } = createM2Domain(context);
         instanceRuntime.G.log(`[[icon:arrow]] <b>军威</b>：<b>${esc(foe.name)}</b> 攻击力增至 <b>${foe.atk}</b>`, 'warn');
       }
     });
+    for (const ally of instanceRuntime.allies.filter(a => !a.dead && !a.statless)) {
+      for (let pass = 0; pass < (instanceRuntime.timeRune ? 2 : 1) && ally.hp > 0; pass++) {
+        const result = Combat.tickPoison(ally);
+        if (result?.dealt > 0) {
+          instanceRuntime.floats.push({ unit: 'ally:' + instanceRuntime.allies.indexOf(ally), text: '-' + result.dealt, cls: 'hurt', tintKey: 'poison' });
+          instanceRuntime.G.log(`[[icon:skull]] 中毒结算：<b>${esc(ally.name)}</b> 受到 ${result.dealt} 点固定伤害`, 'warn');
+          if (!await awaitBattleFeedback(stillEnemyPhase)) return;
+        }
+      }
+      if (ally.hp <= 0) { ally.dead = true; instanceRuntime.G.log(`[[icon:skull]] <b>${esc(ally.name)}</b> 毒发阵亡`, 'warn'); }
+    }
     // —— 共享回合钟：所有计时状态在本回合结束统一递减 1 ——
     // 持续 1 回合 = 本回合结束前生效；持续 n 回合 = 从触发当回合起覆盖 n 个完整回合
     if (instanceRuntime.timeRune) instanceRuntime.G.log('[[icon:hourglass]] <b>时光符文</b>：你的增益状态在时光中凝固（不递减）', 'sys');
-    else tickDurationsLog(instanceRuntime.pstat, '你');
+    tickDurationsLog(instanceRuntime.pstat, '你', instanceRuntime.timeRune);
     instanceRuntime.foes.forEach(foe => { if (!foe.dead) tickDurationsLog(foe, foe.name); });
-    // 时光符文只保留玩家状态；活随从沿共享回合钟到期。
+    // 时光符文只保留玩家祝福；活随从沿共享回合钟到期。
     instanceRuntime.allies.forEach(ally => { if (!ally.dead && !ally.statless) tickDurationsLog(ally, ally.name); });
-    // 影噬/影蚀：偷取攻击 1 回合后还原（2026-09-16 留言 #20）
-    instanceRuntime.foes.forEach(foe => {
-      if (foe.dead || !foe._stealRestore) return;
-      if (instanceRuntime.turn > (foe._stealRestoreTurn || 0)) {
-        foe.atk += foe._stealRestore;
-        instanceRuntime.G.log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 的攻击力恢复 ${foe._stealRestore} 点（现 ${foe.atk}）`, 'sys');
-        foe._stealRestore = 0;
-      }
-    });
-    // 偷取攻击到期：与 1 回合攻强化同期还原（2026-09-09 留言 #1/#2）
-    instanceRuntime.foes.forEach(foe => {
-      if (!foe.dead || !foe._stealRestore) return;
-      foe.atk = (foe.atk || 0) + foe._stealRestore;
-      instanceRuntime.G.log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 被偷取的攻击力归还（恢复至 ${foe.atk}）`, 'dim');
-      delete foe._stealRestore;
+    // Each theft expires independently; dead foes release every remaining entry.
+    // The shared helper also reads the aggregate fields from older snapshots.
+    const attackRestorationUnits = [...instanceRuntime.foes, ...instanceRuntime.allies.filter(ally => !ally.statless)];
+    attackRestorationUnits.forEach(foe => {
+      const amount = restoreStolenAttack(foe, instanceRuntime.turn);
+      if (amount) instanceRuntime.G.log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 的攻击力恢复 ${amount} 点（现 ${foe.atk}）`, foe.dead ? 'dim' : 'sys');
     });
     // M2：atkDown（攻击降低诅咒）到期归还——tickDurations 计时归零后按扣减量还原
-    instanceRuntime.foes.forEach(foe => { restoreAtkDown(foe); });
+    attackRestorationUnits.forEach(foe => { restoreAtkDown(foe); });
     // M2：结构化 onTurnEnd 触发（登记卡「回合结束时」）
     context.engine.fireTurnEndTriggers();
     if (!await awaitBattleFeedback(stillEnemyPhase)) return;
@@ -378,48 +434,7 @@ const { restoreAtkDown } = createM2Domain(context);
       const got = context.engine.drawCards(1);
       instanceRuntime.G.log(`[[icon:sword]] <b>剑仙形态</b>：额外抽了 ${got} 张牌`, 'ok');
     }
-    // —— 龙巢：远古龙尊阶段检定 / 时空符文 / 火球符文 ——
-    instanceRuntime.foes.forEach(f => { if (!f.dead && f.phases) context.engine.nestPhase(f); });
-    instanceRuntime.foes.forEach(f => {
-      // 只重掷活着的轮换免疫单位（写反会让免疫永不生效、尸体反被赋键）
-      if (f.dead || !f.rotateImmune) return;
-      const keys = ['bleed', 'poison', 'silence', 'abreak', 'healban'];   // 09-29 老板拍板：冰冻除外（与 lifecycle 注释对齐，原含 freeze）
-      const picked = [];
-      while (picked.length < 2) {
-        const k = keys[Math.floor(Random.random('battle') * keys.length)];
-        if (!picked.includes(k)) picked.push(k);
-      }
-      f.noCurseKeys = picked;
-      instanceRuntime.G.log(`[[icon:shield]] <b>${esc(f.name)}</b> 切换免疫：${picked.join('、')}`, 'warn');
-    });
-    if (instanceRuntime.timeSpaceRune && !instanceRuntime.timeSpaceUsed && instanceRuntime.drawPile.length === 0) {
-      instanceRuntime.set$timeSpaceUsed(true);
-      instanceRuntime.set$extraTurn(true);
-      instanceRuntime.G.log('[[icon:hourglass]] <b>时空符文</b>：牌库已空——额外回合！（本局限一次）', 'ok');
-    }
-    if (instanceRuntime.fireballRuneOn && instanceRuntime.drawPile.length) {
-      const bottom = instanceRuntime.drawPile.shift();   // 牌库底
-      const o = context.engine.findCard(bottom);
-      instanceRuntime.grave.push(bottom);
-      instanceRuntime.G.log(`[[icon:fire]] <b>火球符文</b>：消耗牌库底的【${esc(o ? o.card.name : '?')}】`, 'sys');
-      const fbPool = cardCatalog.all().filter(c => String(c.name || '').includes('火球') && c.type === '法术');
-      if (fbPool.length) {
-        const fb = fbPool[Math.floor(Random.random('battle') * fbPool.length)];
-        const target = context.engine.alive()[0] || null;
-        if (target) {
-          instanceRuntime.cardAnims.push({ kind: 'surge', i: 1, n: 1, sourceName: '火球符文', name: fb.name, target: instanceRuntime.foes.indexOf(target), targetName: target.name, card: { ...fb } });
-          instanceRuntime.G.log(`[[icon:fire]] <b>火球符文</b>：随机释放【${esc(fb.name)}】→ <b>${esc(target.name)}</b>`, 'loot');
-        }
-        try {
-          await context.engine.resolveCardWithFeedback(fb, target, false, 0, null);
-        } catch (error) {
-          if (!stillEnemyPhase()) return;
-          throw error;
-        }
-        if (!stillEnemyPhase()) return;
-      }
-      if (!await awaitBattleFeedback(stillEnemyPhase)) return;
-    }
+    await runTurnStartRunes(stillEnemyPhase);
     if (!stillEnemyPhase()) return;
     if (instanceRuntime.G.hp <= 0) { context.engine.finish(false); return; }
     context.engine.sweepDead();
@@ -452,7 +467,7 @@ const { restoreAtkDown } = createM2Domain(context);
     context.engine.emitBattlePresentation({ kind: 'player-turn-start', turn: instanceRuntime.turn });
     instanceRuntime.set$busy(false);
     context.engine.settlePendingSelections();
-    if (instanceRuntime.G.persistSave && instanceRuntime.G.battleActive) { instanceRuntime.set$lastPersistAt(performance.now()); instanceRuntime.G.persistSave(); }   // 回合开始落盘（无条件，同步节流时钟）
+    if (instanceRuntime.G.persistSave && instanceRuntime.G.battleActive) { instanceRuntime.set$lastPersistAt(performance.now()); await instanceRuntime.G.persistSave(); }   // 回合开始落盘（无条件，同步节流时钟）
     if (typeof hostAudio?.setBattlePressure === 'function') {
       const hpRatio = instanceRuntime.G.maxHp > 0 ? instanceRuntime.G.hp / instanceRuntime.G.maxHp : 1;
       hostAudio.setBattlePressure(Math.max(0, Math.min(1, 1 - hpRatio)));
@@ -460,9 +475,9 @@ const { restoreAtkDown } = createM2Domain(context);
     context.engine.requestBattleRender();
   }
 
-  function tickDurationsLog(target, who) {
+  function tickDurationsLog(target, who, preserveBlessings = false) {
     const meta = (k) => Combat.CURSE_META[k] || Combat.BUFF_META[k];
-    const expired = Combat.tickDurations(target);
+    const expired = Combat.tickDurations(target, { preserveBlessings });
     expired.forEach(k => instanceRuntime.G.log(`[[icon:sparkles]] ${esc(who)} 的<b>${meta(k).name}</b>效果结束了`, 'dim'));
     if (expired.some(k => Combat.BUFF_META[k])) hostAudio.sfx('buffDown');   // 增益到期=轻碎裂提示（音频 P2#6，与挂上音成对）
     if (expired.some(k => Combat.CURSE_META[k])) hostAudio.sfx('curseEnd');

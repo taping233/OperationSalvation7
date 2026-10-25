@@ -68,7 +68,10 @@ export function createBaseDepartureCommands({ read, mutate }) {
         const stack = draftStash[index];
         const actual = Math.min(count, stack.count || 0);
         if (actual <= 0) continue;
-        cards.push({ card: stack.card, count: actual });
+        // Run admission carries card snapshots, so preserve a warehouse-level
+        // variant on that snapshot before its enclosing stack is discarded.
+        const card = stack.variantKey ? { ...stack.card, variantKey: stack.variantKey } : stack.card;
+        cards.push({ card, count: actual });
         stack.count -= actual;
         if (stack.count <= 0) draftStash.splice(index, 1);
       }

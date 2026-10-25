@@ -30,7 +30,7 @@ it('returns the visible homepage after the base clears its original menu route',
   overlay.hidden = true;
   await Promise.resolve();
   // The slower return must remain alive until its last plate has arrived.
-  await vi.advanceTimersByTimeAsync(900);
+  await vi.advanceTimersByTimeAsync(300);
   expect(title.dataset.homePhase).toBe('in');
   await vi.runOnlyPendingTimersAsync();
   expect(title.dataset.homePhase).toBe('rest');
@@ -49,7 +49,7 @@ it('returns the visible homepage after the base clears its original menu route',
 it.each([false, true])('a cancelled cold entry permits the next homepage action (observer flushed: %s)', async flushObserver => {
   vi.useFakeTimers();
   vi.resetModules();
-  document.body.innerHTML = '<div id="title"><button id="btnCardLib">Library</button><button id="mStart">Start</button></div>'
+  document.body.innerHTML = '<div id="title" class="home-composed"><button id="btnCardLib" class="home-plate">Library</button><button id="mStart" class="home-plate">Start</button></div>'
     + '<div id="overlay" hidden><div id="ovBody"></div></div>';
   await import('../game/src/ui/home-menu-motion.js');
   const title = document.getElementById('title');
@@ -63,6 +63,7 @@ it.each([false, true])('a cancelled cold entry permits the next homepage action 
   });
   document.getElementById('mStart').addEventListener('click', start);
   document.getElementById('btnCardLib').click();
+  await vi.advanceTimersByTimeAsync(300);
   await Promise.resolve();
   expect(title.dataset.homePhase).toBe('out');
   document.getElementById('mStart').click();

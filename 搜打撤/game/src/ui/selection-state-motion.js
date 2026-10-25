@@ -5,6 +5,9 @@ const definitions = [
   { group: '.bag-rail', item: '.bag-rz', selected: '.bag-rz.on', kind: 'zone' },
   { group: '.bag-tools', item: '.bag-pill', selected: '.bag-pill.on', kind: 'filter' },
   { group: '.settings-nav', item: '.settings-tab', selected: '.settings-tab[aria-selected="true"]', kind: 'settings' },
+  { group: '.bg-nav', item: '.bg-nav-item', selected: '.bg-nav-item[aria-current="step"]', kind: 'guide', tint:'206,182,107' },
+  { group: '.ag-filters', item: '[data-gallery-filter]', selected: '[data-gallery-filter][aria-pressed="true"]', kind: 'achievement-filter', tint:'255,198,11' },
+  { group: '.ag-view', item: '[data-gallery-view]', selected: '[data-gallery-view][aria-pressed="true"]', kind: 'achievement-view', tint:'57,61,57' },
 ];
 const installations = new WeakMap();
 
@@ -24,6 +27,7 @@ export function installSelectionStateMotion(root = document.body) {
     clearVisual(state.plate);
     state.plate.remove();
     delete group.dataset.selectionMotion;
+    delete group.dataset.selectionMotionReady;
     resize?.unobserve(group);
     for (const item of state.items) resize?.unobserve(item);
     groups.delete(group);
@@ -42,15 +46,16 @@ export function installSelectionStateMotion(root = document.body) {
         if (state.signature !== 'hidden') retargetVisual(state.plate, { opacity: 0 });
         state.signature = 'hidden';
         state.ready = false;
+        delete group.dataset.selectionMotionReady;
         continue;
       }
       // Rectangles include ancestor page scaling; animation coordinates belong to the group.
       const scaleX = group.offsetWidth ? bounds.width / group.offsetWidth : 1;
       const scaleY = group.offsetHeight ? bounds.height / group.offsetHeight : 1;
       const computed = getComputedStyle(selected);
-      const tint = definition.kind === 'settings'
+      const tint = definition.tint || (definition.kind === 'settings'
         ? computed.getPropertyValue('--settings-category-tint').trim() || '204,181,139'
-        : '108,155,169';
+        : '108,155,169');
       const target = {
         x: (rect.left - bounds.left) / scaleX + group.scrollLeft - group.clientLeft,
         y: (rect.top - bounds.top) / scaleY + group.scrollTop - group.clientTop,
@@ -62,6 +67,8 @@ export function installSelectionStateMotion(root = document.body) {
       retargetVisual(state.plate, target, state.ready ? {} : { duration: 0 });
       state.signature = signature;
       state.ready = true;
+      // Static business-state paint stays visible until this plate has a real pose.
+      group.dataset.selectionMotionReady = '';
     }
   }
   function refreshMembership() {
@@ -99,7 +106,7 @@ export function installSelectionStateMotion(root = document.body) {
     schedule();
   });
   observer.observe(root, { subtree: true, childList: true, attributes: true,
-    attributeFilter: ['class', 'aria-selected', 'aria-pressed', 'hidden'] });
+    attributeFilter: ['class', 'aria-selected', 'aria-pressed', 'aria-current', 'hidden'] });
   window.addEventListener('resize', schedule);
   root.addEventListener('scroll', schedule, true);
   const dispose = () => {

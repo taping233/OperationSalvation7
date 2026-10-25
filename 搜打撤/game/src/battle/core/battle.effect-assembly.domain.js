@@ -23,8 +23,12 @@ const { recordRequestedDamage, alive, hitFoe, foeIdx, dealEffectDamage, drawCard
 const combatPort = {
   ...Combat,
   tickPoison(target) {
+    if (isRuntimeFoe(target) && target.dead) return null;
     const result = Combat.tickPoison(target);
-    if (isRuntimeFoe(target)) recordRequestedDamage(target, result?.dealt || 0, { name:'中毒' }, { alive, hitFoe });
+    if (isRuntimeFoe(target)) {
+      recordRequestedDamage(target, result?.dealt || 0, { name:'中毒' }, { alive, hitFoe });
+      if (target.hp <= 0) sweepDead();
+    }
     return result;
   },
   dealDamage(attacker, target, amount, type) {
@@ -73,7 +77,7 @@ const effectPorts = {
     addDeckCard,
     queueHandSelect: job => { handSelectQueue.push(job); processHandSelect(); },
     restoreConsumed: n => restoreConsumed(n),
-    random01: () => Random.random('battle'),
+    random01: (purpose = 'generation') => Random.random('battle', purpose),
     allCards: () => cards.all(),
     // —— 抉择面板（2026-09-08 人工 N 选一）：选项入队并弹出面板 ——
     queueChoice: job => { choiceQueue.push(job); processChoice(); },
@@ -195,7 +199,7 @@ const applyTextEffects = createEffectExecutor(effectPorts);
     startSurge: promise => instanceRuntime.set$surgeWaiter(promise),
     getAllCards: () => cards.all(),
     isRandomObtainable: card => cards.isRandomObtainable(card),
-    randomBattle: () => Random.random('battle'),
+    randomBattle: (purpose = 'generation') => Random.random('battle', purpose),
     getDamageTypes: () => cards.DMG_TYPES,
     getDamageTypeMeta: () => cards.DMG_TYPE_META,
     fixedDamageType: Combat.TYPES.FIXED,

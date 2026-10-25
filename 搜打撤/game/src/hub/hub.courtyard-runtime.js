@@ -3,6 +3,8 @@ import { assetUrl } from '../core/asset-url.js';
 import { Random } from '../core/random.js';
 import { createRainTableau } from './courtyard.rain-tableau.js';
 import { createKoiPond } from './courtyard-vendor/KoiPond.js';
+import { watchSurfaceActivity } from '../ui/surface-activity.js';
+import { createVisualResourceRecovery } from '../ui/visual-resource-recovery.js';
 
 // 生命周期由基地独立页负责；返回的清理函数可重复调用。
 export function mountCourtyardV3(root) {
@@ -32,7 +34,8 @@ export function mountCourtyardV3(root) {
   let disposed = false, paused = false, frame = 0, previous = null, nextDraw = 0, image = null, feedbackTimer = 0;
   let soundEnabled = false, audio = null, noise = null, rainGain = null, rainFilter = null;
   let engine = null, koi = null;
-  const running = () => !disposed && !paused && !document.hidden && !reducedMotion();
+  let activity = null, surfaceActive = false, lastReduced = null;
+  const running = () => !disposed && !paused && surfaceActive && !reducedMotion();
   const draw = (dt = 0, animate = false) => {
     if (!engine || disposed) return;
     koi?.render(dt, animate);
@@ -71,12 +74,13 @@ export function mountCourtyardV3(root) {
     controls.querySelector('[data-pond-eaten]').textContent = `吃食 ${eaten} 次`;
   } });
   engine.resize(canvas.width, canvas.height);
-  {
-    image = new Image();
-    image.onload = () => { if (!disposed) { drawBackdrop(); draw(); } };
-    image.src = assetUrl('assets/scenes/courtyard-pond-v4.webp');
-    drawBackdrop();
-  }
+  const backdropRecovery = createVisualResourceRecovery({ host:scene, floating:true,
+    source:assetUrl('assets/scenes/courtyard-pond-v4.webp'), label:'庭院背景暂未加载',
+    isCurrent:() => !disposed && !departed(),
+    apply:loaded => { image = loaded; drawBackdrop(); draw(); },
+  });
+  backdropRecovery.load();
+  drawBackdrop();
   draw();
   const stopSound = () => {
     try { noise?.stop(); } catch { /* 尚未启动的音源也须继续释放上下文。 */ }
@@ -88,7 +92,7 @@ export function mountCourtyardV3(root) {
   };
   const soundState = () => {
     if (!audio) return;
-    const operation = document.hidden || paused ? audio.suspend() : audio.resume();
+    const operation = !surfaceActive || paused ? audio.suspend() : audio.resume();
     operation.catch(() => {});
   };
   const syncRainSound = () => {
@@ -139,7 +143,8 @@ export function mountCourtyardV3(root) {
     if (frame) cancelAnimationFrame(frame);
     frame = 0; previous = null; nextDraw = 0;
     const reduced = reducedMotion();
-    host.classList.toggle('is-still', reduced || paused);
+    lastReduced = reduced;
+    host.classList.toggle('is-still', reduced || paused || !surfaceActive);
     pauseButton.textContent = reduced ? '静态' : paused ? '继续' : '暂停';
     pauseButton.disabled = reduced; pauseButton.setAttribute('aria-pressed', String(paused));
     if (running()) frame = requestAnimationFrame(loop);
@@ -156,11 +161,13 @@ export function mountCourtyardV3(root) {
     draw();
   };
   const pointer = event => {
+    if (!surfaceActive) return;
     const bounds = canvas.getBoundingClientRect();
     interact((event.clientX - bounds.left) / Math.max(1, bounds.width) * canvas.width,
       (event.clientY - bounds.top) / Math.max(1, bounds.height) * canvas.height);
   };
   const hover = event => {
+    if (!surfaceActive) return;
     const bounds = canvas.getBoundingClientRect();
     koi.pointer((event.clientX - bounds.left) / Math.max(1, bounds.width) * canvas.width,
       (event.clientY - bounds.top) / Math.max(1, bounds.height) * canvas.height);
@@ -168,10 +175,12 @@ export function mountCourtyardV3(root) {
   };
   const leave = () => koi.pointer(null, null);
   const key = event => {
+    if (!surfaceActive) return;
     if (!['Enter', ' '].includes(event.key)) return;
     event.preventDefault(); interact(canvas.width / 2, canvas.height / 2);
   };
   const control = event => {
+    if (!surfaceActive) return;
     const action = event.target.closest('[data-courtyard-control]')?.dataset.courtyardControl;
     if (action === 'rain') {
       rain = !rain; rainCanvas.hidden = !rain;
@@ -197,33 +206,24 @@ export function mountCourtyardV3(root) {
     }
   };
   const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(resize) : null;
-  const motionObserver = typeof MutationObserver !== 'undefined' ? new MutationObserver(sync) : null;
   observer?.observe(scene);
-  // Paused/static rooms have no RAF to notice a shortcut replacing their owner.
-  // Watch only ancestor child lists, rather than every mutation in the page tree.
-  for (let parent = host.parentElement; parent; parent = parent.parentElement) {
-    const attributes = parent === document.body ? ['class']
-      : parent === overlay ? ['hidden', 'class', 'data-ui-closing'] : [];
-    motionObserver?.observe(parent, { childList: true, ...(attributes.length
-      ? { attributes: true, attributeFilter: attributes } : {}) });
-  }
   if (!observer) window.addEventListener('resize', resize);
   canvas.addEventListener('pointerdown', pointer); canvas.addEventListener('keydown', key);
   canvas.addEventListener('pointermove', hover); canvas.addEventListener('pointerleave', leave);
-  controls.addEventListener('click', control); document.addEventListener('visibilitychange', sync);
-  media?.addEventListener?.('change', sync);
+  controls.addEventListener('click', control);
   const unsubscribePerformance = onPerformanceSettingsChange(() => { resize(); sync(); });
   function dispose() {
     if (disposed) return;
     disposed = true;
+    backdropRecovery.dispose();
+    activity?.dispose(); activity = null;
     unsubscribePerformance();
     clearTimeout(feedbackTimer);
     if (frame) cancelAnimationFrame(frame); frame = 0;
-    observer?.disconnect(); motionObserver?.disconnect(); window.removeEventListener('resize', resize);
+    observer?.disconnect(); window.removeEventListener('resize', resize);
     canvas.removeEventListener('pointerdown', pointer); canvas.removeEventListener('keydown', key);
     canvas.removeEventListener('pointermove', hover); canvas.removeEventListener('pointerleave', leave);
-    controls.removeEventListener('click', control); document.removeEventListener('visibilitychange', sync);
-    media?.removeEventListener?.('change', sync);
+    controls.removeEventListener('click', control);
     if (image) { image.onload = null; image = null; }
     stopSound();
     engine.dispose();
@@ -231,6 +231,14 @@ export function mountCourtyardV3(root) {
     canvas.width = canvas.height = 1;
     if (backdrop) backdrop.width = backdrop.height = 1;
   }
-  sync();
+  activity = watchSurfaceActivity(host, {
+    onChange:value => { surfaceActive = value; sync(); },
+    onRefresh:() => {
+      if (disposed) return;
+      if (departed()) dispose();
+      else if (lastReduced !== reducedMotion()) sync();
+    },
+  });
+  if (disposed) activity.dispose();
   return dispose;
 }

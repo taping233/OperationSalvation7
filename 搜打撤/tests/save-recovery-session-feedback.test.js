@@ -1,3 +1,5 @@
+import { battleRules } from './helpers/environment-fixtures.js';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 
 const ctx = new Proxy({}, { get: () => () => ctx, set: () => true });
@@ -5,7 +7,7 @@ window.HTMLCanvasElement.prototype.getContext = () => ctx;
 document.body.innerHTML = '<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div><div id="ovBody"></div>';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {} }, FX: { feedback() {} },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
 };
 await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');
@@ -43,9 +45,11 @@ function blockKey(key) {
   });
 }
 
-beforeEach(() => {
+beforeEach(async () => {
+  installImmediateWebLocks();
+  await RunStorage.flushWrites();
   localStorage.clear();
-  for (let slot = 1; slot <= 5; slot++) RunStorage.remove(slot);
+  for (let slot = 1; slot <= 5; slot++) await RunStorage.remove(slot);
   session._set_active_slot(1);
   Base.use(1);
   Object.assign(session.game, { pendingExtraction: null, extractionPending: null, terminalPending: null,
@@ -57,7 +61,7 @@ beforeEach(() => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('备份写失败的实际装载反馈', () => {
-  it('同步拒绝并明确两串保留和可重试，恢复可写后成功进入同一探索', () => {
+  it('拒绝自动覆盖主串，明确确认完整备档后成功进入同一探索', async () => {
     const previous = ordinary({ _r2: { runId: 'ui-fallback-retry', revision: 3 } });
     const broken = '{ui fallback malformed';
     localStorage.setItem('sdt-run-1-prev', previous);
@@ -67,13 +71,14 @@ describe('备份写失败的实际装载反馈', () => {
     expect(loaded).not.toBeInstanceOf(Promise);
     expect(loaded).toMatchObject({ ok: false, code: 'RUN_UNREADABLE', preserveRun: true,
       persistence: { status: 'not_attempted', attempts: [] } });
-    expect(loaded.message).toContain('原档和已有备份未被覆盖');
-    expect(loaded.message).toContain('重试进入');
-    expect(RunStorage.loadIssueMessage(1)).toBe(loaded.message);
-    expect(UI.log.mock.calls.flat().join(' ')).toContain('损坏原串未能备份');
+    expect(loaded.message).toContain('对局存档无法读取');
     expect(localStorage.getItem(RunStorage.key(1))).toBe(broken);
     expect(localStorage.getItem('sdt-run-1-prev')).toBe(previous);
+    await RunStorage.flushWrites();
     vi.restoreAllMocks();
+    const preview = session.previewRunBackup(1);
+    expect(preview.ok).toBe(true);
+    expect(await session.restoreRunBackup(1, preview.value)).toBe(true);
     expect(session.loadGame(1).ok).toBe(true);
     expect(RunStorage.loadIssueMessage(1)).toBeNull();
     expect(RunStorage.readIdentity(1).value.runId).toBe('ui-fallback-retry');

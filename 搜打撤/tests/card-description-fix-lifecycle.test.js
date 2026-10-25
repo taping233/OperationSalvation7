@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { describe, expect, it, vi } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -6,8 +7,7 @@ import path from 'node:path';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 8, starterSha: 0,
-    battleStartDraw: 99, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
+  MAP: { rules: { ...battleRules(99, 99, 8, 0, 99, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');

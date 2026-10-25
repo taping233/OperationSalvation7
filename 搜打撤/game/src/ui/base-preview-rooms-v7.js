@@ -6,7 +6,7 @@ import { esc } from '../core/shared.js';
 export const previewCards = [
   { name:'长剑', file:'equip-tt3-longsword.webp', group:'battle', count:3 },
   { name:'冰刺', file:'spell-tt3-ice-spike.webp', group:'battle', count:2 },
-  { name:'连射', file:'martial-tt3-double-shot.webp', group:'battle', count:4 },
+  { name:'三连射', file:'martial-tt3-double-shot.webp', group:'battle', count:4 },
   { name:'血箭', file:'martial-tt3-blood-arrow.webp', group:'battle', count:2 },
   { name:'满月形态', file:'spell-tt3-nature-form.webp', group:'growth', count:1 },
 ];

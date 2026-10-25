@@ -12,8 +12,9 @@ describe('encounter-meta 遭遇池元数据', () => {
   it('四层表各自出数：risk/精英概率/组数与真实数据一致', () => {
     const risks = [0, 1, 2, 3].map(li => layerEncounterMeta(map, li).risk);
     expect(risks).toEqual(['低', '中', '高', '极高']);
-    expect(layerEncounterMeta(map, 2).eliteChance).toBe(0.03);
-    expect(layerEncounterMeta(map, 3).eliteChance).toBe(0.1);
+    expect(layerEncounterMeta(map, 1).eliteChance).toBe(1);
+    expect(layerEncounterMeta(map, 2).eliteChance).toBe(1);
+    expect(layerEncounterMeta(map, 3).eliteChance).toBe(1);
     expect(layerEncounterMeta(map, 0).eliteChance).toBe(0);
     expect(layerEncounterMeta(map, 1).groupCount).toBe(1);
   });

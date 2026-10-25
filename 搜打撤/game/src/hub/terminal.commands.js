@@ -1,6 +1,7 @@
 import { characterFor } from '../core/characters.js';
 import { addXpToProgress } from './meta.js';
 import { clone, fail } from './commands.shared.js';
+import { sameStoredCard, storedCardVariant } from './stored-card-identity.js';
 
 function applyCards(base, cards, isSha) {
   let stashed = 0;
@@ -8,9 +9,9 @@ function applyCards(base, cards, isSha) {
     const card = item && item.card;
     if (!card || isSha(card)) continue;
     const count = Math.max(1, Number(item.count) || 1);
-    const stack = base.stash.find(x => x.card && x.card.name === card.name);
+    const stack = base.stash.find(x => sameStoredCard(x, item));
     if (stack) stack.count = (Number(stack.count) || 0) + count;
-    else base.stash.push({ card: clone(card), count });
+    else base.stash.push({ card: clone(card), count, ...storedCardVariant(item) });
     stashed += count;
   }
   if (stashed) {
@@ -57,6 +58,7 @@ export function createTerminalCommands({ getBase, getRunStorage, getRecovery, ge
     // Capture identity before the first await. A same-slot new run must never inherit this call's old card payload.
     const startingIdentity = runStore.readIdentity(slotId);
     if (!startingIdentity.ok) {
+      if (startingIdentity.code === 'STORAGE_READ_FAILED') return startingIdentity;
       const recovered = await recovery.recoverSlot(slotId);
       if (!recovered.ok) return recovered;
       return fail('RETRY_REQUIRED', '存档已恢复，请重新确认终局操作');

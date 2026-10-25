@@ -2,7 +2,7 @@
 
 const DEFAULT_RULE_CONFIG = {
   map: { stepMs: 340, emergencyExitCost: 10, fireHeal: 8, fireClassCardChance: 0.3 },
-  battle: { energy: 2, startDraw: 5, turnDraw: 1, handMax: 8, bossDeckSize: 15, starterAttack: 5 },
+  battle: { energy: 2, startDraw: 5, turnDraw: 1, handMax: 8, bossDeckSize: 15, starterAttack: 5, normalStarterDeckSize: 10 },
   backpack: { start: 16, max: 30, upgradeWood: 2, safeStart: 2, safeMax: 6, safeUpgradeRations: 2 },
   base: { stashStart: 25, stashMax: 100, stashUpgradeWood: 2, stashUpgradeSlots: 3, stashRuneSlotCost: 2, stashRuneSlotFrom: 50 },
   growth: { playerMaxHp: 30, playerAtk: 4 },
@@ -65,6 +65,7 @@ function validateRuleConfig(config) {
   number(battle, 'battle', 'handMax', { min: 1, integer: true });
   number(battle, 'battle', 'bossDeckSize', { min: 1, integer: true });
   number(battle, 'battle', 'starterAttack', { integer: true });
+  number(battle, 'battle', 'normalStarterDeckSize', { min:1, integer:true });
 
   const backpack = group('backpack');
   const bagStart = number(backpack, 'backpack', 'start', { min: 1, integer: true });

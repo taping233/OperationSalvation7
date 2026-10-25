@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>探索路线 · 新版地图试作</title><link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/cards.css" />
+<link rel="stylesheet" href="css/overlays.css" />
+<link rel="stylesheet" href="css/hub.css" />
+<link rel="stylesheet" href="css/battle.css" />
+<link rel="stylesheet" href="css/scenes.css" />
+<link rel="stylesheet" href="css/lab-ending.css" />
+<link rel="stylesheet" href="css/winter.css" />
+<link rel="stylesheet" href="css/expedition.css" />
+<link rel="stylesheet" href="css/expedition-map.css" />
+<link rel="stylesheet" href="css/map-edge-light.css" />
+<link rel="stylesheet" href="css/expedition-hub.css" />
+<link rel="stylesheet" href="css/expedition-inventory.css" />
+<link rel="stylesheet" href="css/expedition-rewards.css" />
+<link rel="stylesheet" href="css/expedition-battle.css" />
+<link rel="stylesheet" href="css/expedition-library.css" />
+<link rel="stylesheet" href="css/card-v3.css" />
+<link rel="stylesheet" href="css/expedition-roster.css" />
+<link rel="stylesheet" href="css/expedition-shop.css" />
+<link rel="stylesheet" href="css/ui-scale.css" />
+<link rel="stylesheet" href="css/page-slot-select.css" />
+<link rel="stylesheet" href="css/page-settings.css" />
+<link rel="stylesheet" href="css/page-datapage.css" />
+<link rel="stylesheet" href="css/page-ach.css" />
+<link rel="stylesheet" href="css/page-cardforge.css" />
+<link rel="stylesheet" href="css/page-expedition-hud.css" />
+<link rel="stylesheet" href="css/feedback-oct12.css" />
+<link rel="stylesheet" href="css/roster-departure-v2.css" />
+<link rel="stylesheet" href="css/experience-loot.css" />
+<link rel="stylesheet" href="css/page-events.css" />
+<link rel="stylesheet" href="css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="css/page-battle-ui.css" />
+<link rel="stylesheet" href="css/character-idle.css" />
+
+<link rel="stylesheet" href="css/page-transitions.css" />
+<link rel="stylesheet" href="css/ak-skin.css" />
+<link rel="stylesheet" href="css/base-camp.css" />
+<link rel="stylesheet" href="css/base-camp-compact.css" />
+<link rel="stylesheet" href="css/card-layout-selected.css" />
+<link rel="stylesheet" href="css/battle-stage.css" /><style>.map-review-tools{position:absolute;top:12px;left:250px;z-index:1000;display:flex;gap:10px;align-items:center;color:#edf2f1;background:#0c1728ee;padding:8px 14px;font:20px sans-serif}.map-review-tools button{font:inherit;padding:8px;color:#edf2f1;background:#263d4c;border:1px solid #79939e}.map-review-tools[hidden]{display:none}#reviewMapResult{position:absolute;top:70px;left:250px;z-index:1001;background:#0c1728ed;color:white;font:20px sans-serif;padding:10px;max-width:1200px}#reviewMapResult:empty{display:none}</style><script>
+// Preferences required by renderer dependencies use empty memory; never read owner storage.
+const reviewMemory=new Map();
+Object.defineProperty(window,'localStorage',{value:{getItem:k=>reviewMemory.get(String(k))??null,setItem:(k,v)=>reviewMemory.set(String(k),String(v)),removeItem:k=>reviewMemory.delete(String(k)),clear:()=>reviewMemory.clear()}});
+Object.defineProperty(window,'sessionStorage',{value:{getItem:()=>null,setItem(){},removeItem(){},clear(){}}});
+</script></head><body><div id="app"><aside id="sidebar"></aside><main id="viewport"><canvas id="game" aria-label="新版探索地图：支路、尽头与迷雾"></canvas><nav id="expeditionChapter"></nav><div class="map-review-tools">纯呈现，不连接存档 <button data-review="layer">下一层</button><button data-review="seed">换张地图</button><button data-review="local">探索起点</button><button data-review="known">全部已知</button><button data-review="inset">切换详情留白</button><button data-review="check">检查路线结构</button><button data-review="hide">收起工具</button></div><output id="reviewMapResult"></output></main></div><script type="module" src="/dev/map-exploration-review.js"></script></body></html>

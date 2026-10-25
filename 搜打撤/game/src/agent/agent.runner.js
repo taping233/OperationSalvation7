@@ -97,6 +97,9 @@ async function autoRun(options) {
   const { driver = 'auto', runTimeoutMs = Infinity } = options;
   const previousDriver = getDriver();
   const run = new AbortController();
+  const onOuterAbort = () => run.abort();
+  options.signal?.addEventListener('abort', onOuterAbort, { once: true });
+  if (options.signal?.aborted) onOuterAbort();
   runState.abort = run;
   setDriver(driver);
   const context = commandContext();
@@ -112,6 +115,7 @@ async function autoRun(options) {
     if (error?.code === 'AGENT_RUNNER_LOAD_FAILED') noteStopReason({ code: 'runner-load-failed', steps: 0 });
     throw error;
   } finally {
+    options.signal?.removeEventListener('abort', onOuterAbort);
     if (runState.abort === run) {
       setDriver(previousDriver);
       runState.abort = null;

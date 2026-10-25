@@ -11,6 +11,7 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
 import { getQualityPreset, onPerformanceSettingsChange } from './performance-settings.js';
 import { decodeImagesIn } from './image-decode.js';
 import { createForegroundImageYield } from './art-preload-plan.js';
+import { enemyPortraitProfile } from './enemy-portrait-presentation.js';
 
   
   const ROOT = 'assets/';
@@ -216,8 +217,8 @@ import { createForegroundImageYield } from './art-preload-plan.js';
 
   // ---------- 战场立绘抠图：离线预烘，运行时只做路径映射 ----------
   // 预烘素材在 assets/portraits/cut/{classes,enemies}/（与源图同名），
-  // 由 tools/bake-cutouts.js 生成（等比降采样 + 洪泛去纸色背景）；
-  // 素材更新后重跑一次脚本即可。运行时零图像处理，预烘缺失时回退原图。
+  // 新透明敌图等比降采样，不再做去底；更新时同步战斗派生图与
+  // enemy-portrait-presentation.js 的几何/版本。运行时零图像处理，预烘缺失回退原图。
   const cutoutSrcFor = (src) => {
     // img.src 形如 "assets/portraits/<组>/<名>.webp"（image() 会补 assets/ 前缀）
     const m = /^assets\/portraits\/(classes|enemies)\/([^/]+)$/.exec(String(src || ''));
@@ -238,6 +239,11 @@ const FIGURE_FULL_ART = Object.freeze({
 });
 // 皮肤立绘（2026-09-19 老板令）：角色 id → 备选皮肤立绘。
 const SKIN_FULL_ART = Object.freeze({
+  heixiang: Object.freeze([
+    { id: 'coast-half-day', name: '离岸半日', file: 'portraits/full/heixiang-coast-half-day.webp' },
+    { id: 'snowline-vigil', name: '雪线未眠', file: 'portraits/full/heixiang-snowline-vigil.webp' },
+    { id: 'last-seat', name: '终站留席', file: 'portraits/full/heixiang-last-seat.webp' },
+  ]),
   changwuyu: Object.freeze([
     { id: 'drum-room', name: '余响·鼓房', file: 'portraits/full/changwuyu-drum-room.webp' },
   ]),
@@ -359,7 +365,10 @@ function characterArt(value, full=false, useDefault=false) {
     monsterArt(id) {
       const fid = NEST_MONSTER_ALIASES[id] || id;
       if (!MONSTER_IDS.has(fid)) return fallback('enemy', id, id || '未知敌人');
-      return image(`portraits/enemies/${fid}.webp`, 'art-portrait art-hostile', id, `enemy-${fid}`);
+      // The same revision survives the battle cutout path swap, invalidating old baked art.
+      const portrait = enemyPortraitProfile(fid);
+      const revision = portrait ? `?art=${portrait.revision}` : '';
+      return image(`portraits/enemies/${fid}.webp${revision}`, 'art-portrait art-hostile', id, `enemy-${fid}`);
     },
     has(id) { return Boolean(resolveClass(id)) || MONSTER_IDS.has(id) || !!NEST_MONSTER_ALIASES[id]; },
     // 全量卡面美术预热（2026-09-07 老板：能首次离线进内存的就不在用时计算）。

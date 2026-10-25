@@ -1,3 +1,4 @@
+import { hasLegacyMindControlTarget, isLegacyScaleArmor, isLegacyAstrolabe } from '../../cards/card-legacy-battle-policy.js';
 import { clone } from '../../core/shared.js';
 import { chooseMissingCurse, transformChaosDeck, canMindControl, advanceBiphasicAstrolabe,
   soulContractTargets } from './requested-card-batch.js';
@@ -13,7 +14,7 @@ const Random = context.random;
 const { applyAtkDown } = createM2Domain(context);
 /** Runtime integration for the 2026-10-20 card batch. All state belongs to this battle. */
 
-const random = () => Random.random('battle');
+const random = (purpose = 'generation') => Random.random('battle', purpose);
 function requestedBattleState() {
   const state = instanceRuntime.pstat.requestedCards ||= { damageTurn: -1, flameForms: [], astrolabes: {} };
   state.history ||= createBattleFacts(state.damageTurn);
@@ -30,7 +31,7 @@ function recordPlayerDamageFact(amount) {
 }
 function requestedTargetReason(card, target, foes) {
   const recruit = card?.rules?.triggers?.onPlay?.find(operation => operation.op === 'recruitEnemy');
-  if (!recruit && (card?.id !== 'tt13-mind-control' || Array.isArray(card.rules?.triggers?.onPlay))) return null;
+  if (!recruit && !hasLegacyMindControlTarget(card)) return null;
   if (!foes.some(canMindControl)) return { code:'INVALID_MIND_CONTROL_TARGET', message:'没有受伤的非BOSS敌人可以控制' };
   return target && !canMindControl(target) ? { code:'INVALID_MIND_CONTROL_TARGET', message:'只能选择受伤的非BOSS敌人' } : null;
 }
@@ -42,15 +43,15 @@ function recordRequestedDamage(foe, amount, card, { alive, hitFoe }) {
   const response = foe.damageEcho || (foe.soulContractMarked ? { amount: 2, dmgType: Combat.TYPES.TRUE } : null);
   const targets = soulContractTargets(foe, alive(), { isMarked: () => !!response, chain: !!card?._soulEcho });
   if (!targets.length) return;
-  hitFoe(targets[Math.floor(random() * targets.length)], { name:'灵魂契约', _soulEcho:true }, response.amount,
+  hitFoe(targets[Math.floor(random('target') * targets.length)], { name:'灵魂契约', _soulEcho:true }, response.amount,
     response.dmgType, '', { preserveBaseDamage:true });
 }
 function requestedPlayerDamaged(amount, { alive, hitFoe, drawCards }) {
   if (!(amount > 0) || instanceRuntime.G.hp <= 0) return;
   context.equipmentSemantics?.playerDamaged(amount);
-  for (const equipment of instanceRuntime.equipped.filter(e => !hasStructuredEquipField(e.card, 'passive') && e.card.id === 'tt13-scale-armor')) {
+  for (const equipment of instanceRuntime.equipped.filter(e => !hasStructuredEquipField(e.card, 'passive') && isLegacyScaleArmor(e.card))) {
     const targets = alive();
-    if (targets.length) hitFoe(targets[Math.floor(random() * targets.length)], equipment.card, 3,
+    if (targets.length) hitFoe(targets[Math.floor(random('target') * targets.length)], equipment.card, 3,
       Combat.TYPES.FIXED, '', { preserveBaseDamage:true });
     if (random() < 0.5) drawCards(1);
   }
@@ -60,7 +61,7 @@ function requestedCardPlayed(card) {
   if (card.type === '武术' && instanceRuntime.playedMartialThisTurn > 0) return;
   if (card.type === '法术' && instanceRuntime.playedMovesThisTurn - instanceRuntime.playedMartialThisTurn > 0) return;
   const state = requestedBattleState();
-  for (const equipment of instanceRuntime.equipped.filter(e => !hasStructuredEquipField(e.card, 'passive') && e.card.id === 'tt13-astrolabe')) {
+  for (const equipment of instanceRuntime.equipped.filter(e => !hasStructuredEquipField(e.card, 'passive') && isLegacyAstrolabe(e.card))) {
     const old = state.astrolabes[equipment.uid] || { firstTurn:instanceRuntime.turn };
     const result = advanceBiphasicAstrolabe(old, { turn: instanceRuntime.turn, type:card.type, firstType:'武术', firstTurn:old.firstTurn });
     state.astrolabes[equipment.uid] = { ...result.state, firstTurn:old.firstTurn };

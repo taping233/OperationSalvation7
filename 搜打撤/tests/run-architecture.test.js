@@ -44,7 +44,8 @@ describe('局内流程模块分层（批次 4）', () => {
     }
     expect(SHELL.split('\n').length).toBeLessThan(120);
     expect(SHELL).toContain('function bindRunMixins() {');
-    expect(SHELL).toContain('function devForceBattle(');
+    expect(SHELL).toContain("import { devForceBattle, devJumpNode, openDevConsole } from './game.run.dev-loader.js'");
+    expect(SHELL).not.toContain('function devForceBattle(');
   });
 
   it('对外导出面不变：game.boot.js / game.bag.js 依赖的符号仍从 game.run.js 出', () => {

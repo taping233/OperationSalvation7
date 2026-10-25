@@ -7,7 +7,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: {}, _set_cardPageOpen: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.bridge.js', () => ({ slots: { renderHub: ports.hub } }));
 vi.mock('../game/src/hub/departure.view-updates.js', () => ({ bindDepartureFilters: vi.fn(), updateDepartureView: vi.fn() }));
-vi.mock('../game/src/ui/departure-transition.js', () => ({ enterDepartureCut: ports.cut, startDepartureHandoff: ports.handoff }));
+vi.mock('../game/src/ui/departure-transition.js', () => ({ enterDepartureCut: ports.cut, enterDepartureStep: vi.fn(), startDepartureHandoff: ports.handoff }));
 let actions, base, departure;
 beforeEach(async () => {
   vi.resetModules(); ports.choice.mockReset(); ports.start.mockReset(); ports.hub.mockClear(); ports.handoff.mockReset(); ports.handoff.mockReturnValue(new Promise(() => {})); ports.cut.mockReset();
@@ -43,9 +43,6 @@ it('更换人物与返回模式保留草稿，重新进入可继续整备', () =
   departure.openDepartPrep();
   expect(ports.choice).toHaveBeenCalledTimes(calls);
   expect(departure.deployPick).toEqual({ 甲: 1 });
-  const characterTitle=document.querySelector('.camp-depart-person-copy h3');
-  expect(characterTitle.textContent).toBe('白塔');
-  expect(characterTitle.getAttribute('aria-label')).toBe('出征人物：白塔');
   expect(ports.start).not.toHaveBeenCalled();
 });
 it('换档清除上档整备草稿，预设导入仍保留选择', () => {

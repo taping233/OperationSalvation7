@@ -1,7 +1,8 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 window.SDT = window.SDT || { Icons: { img: () => '', TYPE_ART: {} } };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 99, battleHandMax: 20, bossDeckSize: 15, starterSha: 0, battleStartDraw: 20, battleTurnDraw: 0, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(99, 20, 15, 0, 20, 0) }, items: {} };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
@@ -15,8 +16,7 @@ const bar = () => BattleSession.getSnapshot().potionBar;
 beforeEach(() => {
   vi.useFakeTimers(); R.set$lastDeckSel([]);
   game = { ownedCards: [{ uid: 'permanent-last', card: { ...C.SHA }, safe: false }],
-    hp: 30, maxHp: 100, atk: 5, spellPower: 0, coins: 0, myClass: '战士', characterId: null,
-    state: 'idle', battleActive: false, log() {}, heal(n) { this.hp += n; }, addItem() {}, onBattleEnd: vi.fn() };
+    ...playerFields(30, 100, 5, 0, '战士', null), log() {}, heal(n) { this.hp += n; }, addItem() {}, onBattleEnd: vi.fn() };
   BattleSession.start(game, [{ id: 'target', name: '靶子', hp: 10000, atk: 1, behavior: 'strike' }], { isBoss: false });
 });
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });

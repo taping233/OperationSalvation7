@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 
@@ -8,7 +9,7 @@ window.HTMLCanvasElement.prototype.getContext = () => ctx;
 document.body.innerHTML = '<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div><div id="ovBody"></div>';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {} }, FX: { feedback() {} },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
 };
 await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');
@@ -33,6 +34,12 @@ function writeRun(changes = {}) {
   const raw = JSON.stringify(value);
   localStorage.setItem(RunStorage.key(1), raw);
   return raw;
+}
+
+async function loadComplete(slot) {
+  const result = session.loadGame(slot);
+  await result.pendingPersistence;
+  return result;
 }
 
 function ordinary(changes = {}) {
@@ -69,9 +76,10 @@ function trackBaseWrites(slot = 1) {
   return writes;
 }
 
-beforeEach(() => {
+beforeEach(async () => {
+  await RunStorage.flushWrites(); await Base.flushWrites();
   localStorage.clear();
-  for (let slot = 1; slot <= 5; slot++) RunStorage.remove(slot);
+  for (let slot = 1; slot <= 5; slot++) await RunStorage.remove(slot);
   session._set_active_slot(1);
   Base.use(1);
   Object.assign(session.game, { pendingExtraction: null, extractionPending: null, terminalPending: null,
@@ -83,18 +91,18 @@ beforeEach(() => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('E5 real session recovery and persistence results', () => {
-  it.each([-4, 0])('defeat presentation gap cannot persist lethal HP (%i) before terminal settlement starts', hp => {
+  it.each([-4, 0])('defeat presentation gap cannot persist lethal HP (%i) before terminal settlement starts', async hp => {
     ordinary({ hp: 12 });
-    expect(session.loadGame(1).ok).toBe(true);
+    expect((await loadComplete(1)).ok).toBe(true);
     const stable = localStorage.getItem(RunStorage.key(1));
     Object.assign(session.game, { hp, battleActive: false, terminalPending: null, state: 'idle' });
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect(localStorage.getItem(RunStorage.key(1))).toBe(stable);
     session.game.hp = 12;
-    expect(session.saveGame()).toBe(true);
+    expect(await session.saveGame()).toBe(true);
   });
 
-  it.each([true, false])('battle reward reload uses its victory continuation before any run rewrite (resumed=%s)', resumed => {
+  it.each([true, false])('battle reward reload uses its victory continuation before any run rewrite (resumed=%s)', async resumed => {
     const battleSettlement = { version:1, slotId:1, runId:'reward-run', node:{ layerIdx:0, trackPos:0, isBoss:false },
       opts:{ isBoss:false, foeNames:['敌人'] }, progressRecorded:false,
       victoryProgress:{ foeNames:['敌人'], isBoss:false, classId:'warrior', xpMultiplier:1 } };
@@ -114,33 +122,35 @@ describe('E5 real session recovery and persistence results', () => {
     expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
   });
 
-  it('rejected prev fallback cannot authorize the old runtime to overwrite a replacement run', () => {
+  it('rejected prev fallback cannot authorize the old runtime to overwrite a replacement run', async () => {
     writeRun({ _r2: { runId: 'old-run', revision: 3 } });
-    expect(session.loadGame(1).ok).toBe(true);
+    expect((await loadComplete(1)).ok).toBe(true);
     const seed = session.game.seed;
     const backup = JSON.stringify({ version: 2, seed: 'replacement', mapSeed: 'replacement',
       generatorVersion: 99, layoutVersion: 99, layerIdx: 0, trackPos: 0,
       _r2: { runId: 'replacement-run', revision: 7 } });
     localStorage.setItem('sdt-run-1-prev', backup);
     localStorage.setItem(RunStorage.key(1), '{broken');
-    expect(session.loadGame(1)).toMatchObject({ ok: false, code: 'UNSUPPORTED_LEGACY_MAP' });
+    expect(session.previewRunBackup(1)).toMatchObject({ ok: false, code: 'UNSUPPORTED_LEGACY_MAP' });
+    expect(session.loadGame(1)).toMatchObject({ ok: false, code: 'RUN_UNREADABLE' });
     expect(session.game.seed).toBe(seed);
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect(RunStorage.lastWriteIssue(1)).toBe('STALE_SLOT');
-    expect(localStorage.getItem(RunStorage.key(1))).toBe(backup);
+    expect(localStorage.getItem(RunStorage.key(1))).toBe('{broken');
   });
 
-  it('same-layer load preserves the selected boss in memory and storage; actual layer entry resets it', () => {
+  it('same-layer load preserves the selected boss in memory and storage; actual layer entry resets it', async () => {
     ordinary({ layerIdx: 3, bossPlan: 2 });
-    expect(session.loadGame(1).ok).toBe(true);
+    expect((await loadComplete(1)).ok).toBe(true);
     expect(session.game.bossPlan).toBe(2);
     expect(JSON.parse(localStorage.getItem(RunStorage.key(1))).bossPlan).toBe(2);
     session.enterLayer(0, 0);
+    await RunStorage.flushWrites();
     expect(session.game.bossPlan).toBeNull();
     expect(JSON.parse(localStorage.getItem(RunStorage.key(1))).bossPlan).toBeNull();
   });
 
-  it.each([true, false])('checks extraction identity after prev fallback without accepting a mismatch (%s)', matching => {
+  it.each([true, false])('checks extraction identity after prev fallback without accepting a mismatch (%s)', async matching => {
     const pending = { version: 1, runId: 'extract-run', phase: 'organizing', requestSeq: 0,
       remainingCards: [], keptPocket: [], totalPocketCount: 0, lostPocketCount: 0,
       resources: { wood: 0, rations: 0 } };
@@ -150,7 +160,13 @@ describe('E5 real session recovery and persistence results', () => {
     localStorage.setItem(RunStorage.key(1), '{broken');
     const resume = vi.fn(() => ({ ok: true }));
     session.configureGameRuntime({ resumeExtraction: resume });
-    const result = session.loadGame(1);
+    const preview = session.previewRunBackup(1);
+    let result;
+    if (matching) {
+      expect(preview.ok).toBe(true);
+      expect(await session.restoreRunBackup(1, preview.value)).toBe(true);
+      result = session.loadGame(1);
+    } else result = preview;
     if (matching) {
       expect(result.ok).toBe(true);
       expect(resume).toHaveBeenCalledWith(pending);
@@ -159,10 +175,10 @@ describe('E5 real session recovery and persistence results', () => {
       expect(result).toMatchObject({ ok: false, code: 'INVALID_EXTRACTION_IDENTITY' });
       expect(resume).not.toHaveBeenCalled();
     }
-    expect(localStorage.getItem(RunStorage.key(1))).toBe(backup);
+    expect(localStorage.getItem(RunStorage.key(1))).toBe(matching ? backup : '{broken');
   });
 
-  it('accepts a minimal historical nest with defaults and unknown extension without saving', () => {
+  it('accepts a minimal historical nest with defaults and unknown extension without saving', async () => {
     const raw = writeRun({ version: undefined, extraFutureMetadata: { untouched: true } });
     const baseSave = vi.spyOn(Base, 'save'), runWrite = trackRunWrites();
     const result = session.loadGame(1);
@@ -173,10 +189,10 @@ describe('E5 real session recovery and persistence results', () => {
     expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
   });
 
-  it('includes the existing enterLayer save for a real recoverable old 3/9 map', () => {
+  it('includes the existing enterLayer save for a real recoverable old 3/9 map', async () => {
     ordinary();
     const runWrite = trackRunWrites();
-    expect(session.loadGame(1).persistence).toEqual({ status: 'succeeded', attempts: [
+    expect((await loadComplete(1)).persistence).toEqual({ status: 'succeeded', attempts: [
       { target: 'run', reason: 'save_game', ok: true },
     ] });
     expect(runWrite).toHaveBeenCalledTimes(1);
@@ -211,20 +227,20 @@ describe('E5 real session recovery and persistence results', () => {
     expect(UI.log.mock.calls.flat().join(' ')).toContain('对局已恢复，但恢复后的部分进度未保存');
   });
 
-  it('reports real run write failure without hiding the already loaded run', () => {
+  it('reports real run write failure without hiding the already loaded run', async () => {
     const raw = ordinary();
     blockKey(RunStorage.key(1));
-    const result = session.loadGame(1);
+    const result = await loadComplete(1);
     expect(result.ok).toBe(true);
     expect(result.persistence.status).toBe('failed');
     expect(result.persistence.attempts).toEqual([expect.objectContaining({ target: 'run', ok: false })]);
     expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
   });
 
-  it('a later battle recovery write cannot erase an earlier failed write', () => {
+  it('a later battle recovery write cannot erase an earlier failed write', async () => {
     ordinary({ battle: { legacy: true } });
     const runWrite = trackRunWrites(true);
-    const result = session.loadGame(1);
+    const result = await loadComplete(1);
     expect(result.ok).toBe(true);
     expect(result.persistence.status).toBe('failed');
     expect(result.persistence.attempts.map(a => a.ok)).toEqual([false, true]);
@@ -246,7 +262,7 @@ describe('E5 real session recovery and persistence results', () => {
     expect(baseWrite).toHaveBeenCalledTimes(1); expect(runWrite).toHaveBeenCalledTimes(1);
   });
 
-  it('does not claim a run write when the existing saveGame guard rejects it', () => {
+  it('does not claim a run write when the existing saveGame guard rejects it', async () => {
     writeRun({ battle: { legacy: true } });
     window.SDT.Battle.restore.mockImplementation(() => { session.game.extractionPending = true; return true; });
     const runWrite = trackRunWrites();
@@ -255,7 +271,7 @@ describe('E5 real session recovery and persistence results', () => {
   });
 
   it.each([{ ownedCards: [null] }, { discovered: {} }, { usedPocket: [{ card: null }] }])(
-    'rejects dangerous structure %j before Random, map, Base and game mutation', fields => {
+    'rejects dangerous structure %j before Random, map, Base and game mutation', async fields => {
       const raw = ordinary(fields);
       const random = Random.snapshot(), layers = session.game.layerData, cards = session.game.ownedCards;
       const baseUse = vi.spyOn(Base, 'use'), baseSave = vi.spyOn(Base, 'save'), runWrite = trackRunWrites();
@@ -267,7 +283,7 @@ describe('E5 real session recovery and persistence results', () => {
       expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
     });
 
-  it('does not promise a backup when unreadable data cannot be backed up', () => {
+  it('does not promise a backup when unreadable data cannot be backed up', async () => {
     localStorage.setItem(RunStorage.key(1), '{bad json');
     blockKey(RunStorage.corruptKey(1));
     expect(session.loadGame(1)).toMatchObject({ ok: false, persistence: { status: 'not_attempted' } });
@@ -276,14 +292,14 @@ describe('E5 real session recovery and persistence results', () => {
     expect(localStorage.getItem(RunStorage.key(1))).toBe('{bad json');
   });
 
-  it('does not mutate completed or rejected results on later ordinary saves', () => {
+  it('does not mutate completed or rejected results on later ordinary saves', async () => {
     writeRun();
     const completed = session.loadGame(1);
-    expect(session.saveGame()).toBe(true);
+    expect(await session.saveGame()).toBe(true);
     expect(completed.persistence).toEqual({ status: 'not_attempted', attempts: [] });
     writeRun({ discovered: {} });
     const rejected = session.loadGame(1);
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect(RunStorage.lastWriteIssue(1)).toBe('STALE_SLOT');
     expect(rejected.persistence).toEqual({ status: 'not_attempted', attempts: [] });
   });
@@ -292,43 +308,43 @@ describe('E5 real session recovery and persistence results', () => {
     [{ ownedCards: [null] }, 'INVALID_RUN_STRUCTURE'],
     [{ mapSnapshot: { snapshotVersion: 999 } }, 'UNSUPPORTED_MAP_SNAPSHOT'],
     [{ pendingExtraction: { phase: 'invalid' } }, 'INVALID_EXTRACTION'],
-  ])('refused external replacement %j cannot authorize the old game to overwrite it', (changes, code) => {
+  ])('refused external replacement %j cannot authorize the old game to overwrite it', async (changes, code) => {
     ordinary();
-    expect(session.loadGame(1).ok).toBe(true);
+    expect((await loadComplete(1)).ok).toBe(true);
     const replacement = { ...JSON.parse(localStorage.getItem(RunStorage.key(1))), ...changes };
     replacement._r2.revision++;
     const raw = JSON.stringify(replacement);
     localStorage.setItem(RunStorage.key(1), raw);
     expect(session.loadGame(1)).toMatchObject({ ok: false, code,
       persistence: { status: 'not_attempted', attempts: [] } });
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect(RunStorage.lastWriteIssue(1)).toBe('STALE_SLOT');
     expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
   });
 
-  it('menu preflight of a valid replacement stays read-only until actual load adopts it', () => {
+  it('menu preflight of a valid replacement stays read-only until actual load adopts it', async () => {
     ordinary();
-    expect(session.loadGame(1).ok).toBe(true);
+    expect((await loadComplete(1)).ok).toBe(true);
     const replacement = JSON.parse(localStorage.getItem(RunStorage.key(1)));
     replacement.hp = 17; replacement._r2.revision++;
     const raw = JSON.stringify(replacement);
     localStorage.setItem(RunStorage.key(1), raw);
     expect(session.preflightRunMap(1).ok).toBe(true);
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect(RunStorage.lastWriteIssue(1)).toBe('STALE_SLOT');
     expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
-    expect(session.loadGame(1).ok).toBe(true);
+    expect((await loadComplete(1)).ok).toBe(true);
     expect(session.game.hp).toBe(17);
-    expect(session.saveGame()).toBe(true);
+    expect(await session.saveGame()).toBe(true);
   });
 
   it.each([
     [2, 'read-error', 'STORAGE_READ_FAILED'],
     [3, 'read-error', 'STORAGE_READ_FAILED'],
     [3, 'replace', 'STALE_SLOT'],
-  ])('rejects storage change at read %i (%s) before restore side effects', (readNumber, fault, code) => {
+  ])('rejects storage change at read %i (%s) before restore side effects', async (readNumber, fault, code) => {
     ordinary();
-    expect(session.loadGame(1).ok).toBe(true);
+    expect((await loadComplete(1)).ok).toBe(true);
     const replacement = JSON.parse(localStorage.getItem(RunStorage.key(1)));
     replacement.hp = 19; replacement._r2.revision++;
     let raw = JSON.stringify(replacement);
@@ -352,25 +368,25 @@ describe('E5 real session recovery and persistence results', () => {
     expect(baseUse).not.toHaveBeenCalled(); expect(baseSave).not.toHaveBeenCalled();
     expect(Random.snapshot()).toEqual(random); expect(session.game.layerData).toBe(layers);
     expect(session.game.hp).toBe(hp);
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect(RunStorage.lastWriteIssue(1)).toBe('STALE_SLOT');
     expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
   });
 
-  it('restores the enclosing collection after a nested load throws', () => {
+  it('restores the enclosing collection after a nested load throws', async () => {
     ordinary({ battle: { legacy: true } });
     localStorage.setItem(RunStorage.key(2), JSON.stringify({ version: 2, seed: 'throwing-nest', nestActive: true }));
     vi.spyOn(window.SDT.Nest, 'renderNestMap').mockImplementationOnce(() => { throw new Error('test render failure'); });
     window.SDT.Battle.restore.mockImplementation(() => {
       expect(() => session.loadGame(2)).toThrow('test render failure');
       // The outer load still owns collection after the nested exception.
-      expect(session.saveGame()).toBe(true);
+      expect(session.saveGame()).toBeInstanceOf(Promise);
       return true;
     });
-    const result = session.loadGame(1);
+    const result = await loadComplete(1);
     expect(result.persistence.status).toBe('succeeded');
     expect(result.persistence.attempts).toHaveLength(3);
-    expect(session.saveGame()).toBe(true);
+    expect(await session.saveGame()).toBe(true);
     expect(result.persistence.attempts).toHaveLength(3);
     writeRun();
     expect(session.loadGame(1).persistence).toEqual({ status: 'not_attempted', attempts: [] });
@@ -389,13 +405,14 @@ describe('E5 real menu with real session entry', () => {
 
   it('returns to the slot picker when the restored run cannot persist its Base migration', async () => {
     const raw = writeRun({ elapsed: 11 });
+    const previousNest = session.game.nestActive;
     blockKey('sdt-base-v2-slot1');
     menu().startNewGame();
     const result = await handlers.enterSlot({ slot: 1 });
     expect(result).toBe(false);
     expect(document.getElementById('slotRestoreError').textContent).toContain('原档已保留');
     expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
-    expect(session.game.nestActive).toBe(true);
+    expect(session.game.nestActive).toBe(previousNest);
   });
 
   it('preflights the real unsafe run before launch or Base.use', async () => {

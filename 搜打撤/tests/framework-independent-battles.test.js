@@ -1,3 +1,4 @@
+import { damageRuleFields } from './helpers/environment-fixtures.js';
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { createBattleEngineInstance } from '../game/src/battle/core/battle.engine.instance.js';
@@ -5,9 +6,7 @@ import { createBattleEngine } from '../game/src/battle/core/battle.engine.factor
 
 function harness({ seed = 123, damage = 3, energy = 4, presentation = {}, factory = createBattleEngineInstance } = {}) {
   const card = { id: 'independent-hit', name: '实例攻击', type: '武术', cost: 1, dmg: damage,
-    dmgType: 'fixed', desc: '只作展示', rules: { version: 1,
-      battle: { target: { side: 'enemy', area: false } },
-      triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } } };
+    dmgType: 'fixed', desc: '只作展示', rules: { ...damageRuleFields(false, 'chosenEnemy') } };
   const sha = { ...card, id: 'starter-attack', name: '初始攻击', cost: 0 };
   const cards = { all: () => [card, sha], deriveDraw: () => 0, deriveInfuse: () => 0,
     isRandomObtainable: () => true, sellPrice: () => 1, randomClassCard: () => card,
@@ -60,7 +59,7 @@ describe('independent battle instances in Node', () => {
     expect(typeof globalThis.window).toBe('undefined');
     expect(typeof globalThis.document).toBe('undefined');
     const { engine, game, ended } = harness({ factory: createBattleEngine });
-    expect(engine.runtime.drawPile).toHaveLength(99);
+    expect(engine.runtime.drawPile).toHaveLength(10);
     expect(engine.submitCardPlay('same-uid', 0).status).toBe('queued');
     expect((await settled(engine)).foes[0].hp).toBe(27);
     engine.endTurn();

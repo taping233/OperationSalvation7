@@ -6,6 +6,7 @@ import { slamSkillFor } from '../battle/bag/battle.slam-skill.js';
 import { createEntrySupply } from './node-reward-state.js';
 import { createCharacterViewMotion } from '../ui/character-view-motion.js';
 import { linkedBackHTML } from '../ui/home-linked-interactions.js';
+import { captureOverlayReturnState, restoreOverlayReturnState } from '../ui/overlay-return-state.js';
 import { Sfx } from '../hub/game.cardslib.js';
 import { captureBattleContext, ensureBattleReady } from '../battle/battle-loader.js';
 import { preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
@@ -21,7 +22,7 @@ const CLASS_STORY = {
 export function openClassChoice(options = {}) {
   const SDT = window.SDT;
   const UI = SDT.UI;
-  const characterMotion = createCharacterViewMotion();
+  const characterMotion = createCharacterViewMotion({ isCurrent:() => visible() });
   const choiceContext = captureBattleContext(game, getActiveSlot);
   const originalClass = game.myClass;
   let choiceRoot = null;
@@ -107,7 +108,7 @@ export function openClassChoice(options = {}) {
                       <button class="cls2-skin-btn${SDT.Art.getSkin(displaySel) === s.id ? ' sel' : ''}" data-act="clsSkin" data-cls="${escAttr(displaySel)}" data-skin="${escAttr(s.id)}" aria-pressed="${SDT.Art.getSkin(displaySel) === s.id}" title="${escAttr(s.name)}"><span class="cls2-skin-preview"><img src="${escAttr(SDT.Art.skinUrl(displaySel, s.id))}" alt="" loading="lazy" decoding="async"></span><span class="cls2-skin-label">${esc(s.name)}</span></button>`).join('')}
                   </div>
                 </div>` : ''}
-              <button class="ov-btn cls2-pool-btn" data-act="clsPool" ${sel ? '' : 'disabled'}>[[icon:cards]] 完整人物卡池（${poolCount(displaySel)} 张）</button>`
+              <button class="ov-btn cls2-pool-btn" data-act="clsPool" ${sel ? '' : 'disabled'}>[[icon:card-library]] 完整人物卡池（${poolCount(displaySel)} 张）</button>`
             : '<p class="cls2-hint">[[icon:medal]]<br>选择人物</p>'}
           </aside>
         </div>
@@ -145,6 +146,15 @@ export function openClassChoice(options = {}) {
   // 二级页：角色卡冬日档案索引，保留实际卡面、左侧详情预览、分页与点击放大。
   let poolPage = 0;
   let poolFilter = 'all';
+  let poolBrowse = null;
+  const rememberPoolBrowse = () => {
+    if (view !== 'pool' || !choiceRoot?.matches('.cls-pool-page')) return;
+    const index = Number(choiceRoot.querySelector('#poolPreview')?.getAttribute('data-card-index'));
+    poolBrowse = { role:sel, page:poolPage, filter:poolFilter,
+      selectedId:SDT.Cards.classPool(sel)[index]?.id,
+      presentation:captureOverlayReturnState(choiceRoot),
+    };
+  };
   const POOL_PAGE_MAX = 10;
   // 尾页均衡（2026-09-20 P0）：固定 10 会切出 10+4/10+7 的孤页——size = ceil(总数 / ceil(总数/10))，
   // 14 张→7+7、17 张→9+8，两页行数接近满格
@@ -239,9 +249,15 @@ export function openClassChoice(options = {}) {
     if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(document.querySelector('.cls-pool-page'));   // 翻页新卡显式解码，防合成黑窗
   };
   const renderPool = () => {
-    poolPage = 0;
-    poolFilter = 'all';
+    const saved = poolBrowse?.role === sel ? poolBrowse : null;
+    poolPage = saved?.page || 0;
+    poolFilter = saved?.filter || 'all';
     const pool = SDT.Cards.classPool(sel);
+    const filtered = filteredPool();
+    poolPage = Math.min(poolPage, Math.max(0, Math.ceil(filtered.length / poolPageSize(filtered)) - 1));
+    const pageCards = filtered.slice(poolPage * poolPageSize(filtered), (poolPage + 1) * poolPageSize(filtered));
+    const previewCard = pageCards.find(entry => entry.card.id === saved?.selectedId)?.card || pageCards[0]?.card;
+    const previewIndex = previewCard ? pool.findIndex(card => card.id === previewCard.id) : -1;
     const story = characterFor(sel);
     UI.showOverlay('', `
       <div class="pg cls-pool-page" data-base-departure="${!!onCancel}" style="--cls-color:${story ? story.color : '#69aec2'}">
@@ -255,7 +271,7 @@ export function openClassChoice(options = {}) {
             <div class="pv-head">
               <b class="pv-name">卡牌详情</b>
             </div>
-            <div class="pv-body" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</div>
+            <div class="pv-body" id="poolPreview" data-card-index="${previewIndex}" aria-live="polite">${poolPreviewHTML(previewCard)}</div>
           </aside>
           <section class="pool-catalog" aria-label="角色卡档案">
             <div class="pool-catalog-head"><div><b>分类索引</b></div><div class="pool-result-summary">当前档案 <strong id="poolResultCount">${pool.length}</strong> 张</div></div>
@@ -269,8 +285,10 @@ export function openClassChoice(options = {}) {
         </footer>
       </div>`, 'page');
     choiceRoot = document.querySelector('#overlay .cls-pool-page');
+    choiceRoot.querySelectorAll('.pool-card-button').forEach(button => button.classList.toggle('selected', Number(button.dataset.i) === previewIndex));
     characterMotion.enter();
     bindPoolFocusPreview();
+    if (saved) restoreOverlayReturnState(choiceRoot, saved.presentation);
     warmNextPoolPage();
     if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(document.querySelector('.cls-pool-page'));   // 首屏卡面显式解码，防 IAB 合成黑窗（同战斗手牌修法）
   };
@@ -279,6 +297,7 @@ export function openClassChoice(options = {}) {
     const c = (SDT.Cards.classPool(sel) || [])[i];
     const pv = document.getElementById('poolPreview');
     if (!c || !pv) return;
+    if (el.classList.contains('selected') && pv.dataset.cardIndex === String(i)) return;
     document.querySelectorAll('#poolGrid .pool-card-button.selected').forEach(node => node.classList.remove('selected'));
     el.classList.add('selected');
     pv.innerHTML = poolPreviewHTML(c);
@@ -293,6 +312,11 @@ export function openClassChoice(options = {}) {
     const grid = document.getElementById('poolGrid');
     if (!grid || grid.dataset.previewBound) return;
     grid.dataset.previewBound = '1';
+    grid.addEventListener('pointerleave', () => {
+      poolHoverAnchor = null;
+      if (poolPreviewTimer) clearTimeout(poolPreviewTimer);
+      poolPreviewTimer = null;
+    });
     grid.addEventListener('focusin', (e) => {
       const card = /** @type {Element} */ (e.target).closest && /** @type {Element} */ (e.target).closest('[data-act="poolZoom"]');
       if (card) showPoolPreview(card);
@@ -300,15 +324,19 @@ export function openClassChoice(options = {}) {
   };
   // 悬停大图预览（炉石式，同卡牌库）：mouseover 因子元素冒泡重复触发，90ms 去抖
   let poolPreviewTimer = null;
+  let poolHoverAnchor = null;
   UI._hoverHandler = (e) => {
     const w = /** @type {Element} */ (e.target).closest ? /** @type {Element} */ (e.target).closest('#poolGrid [data-act="poolZoom"]') : null;
-    if (!w || !visible()) return;   // 移出卡面：保留当前预览不动
-    const i = Number(/** @type {HTMLElement} */ (w).dataset.i);
+    if (!visible() || w === poolHoverAnchor) return;
+    poolHoverAnchor = w;
     if (poolPreviewTimer) clearTimeout(poolPreviewTimer);
+    poolPreviewTimer = null;
+    if (!w) return;   // 移出卡面：保留当前预览不动，取消尚未执行的切换。
+    const i = Number(/** @type {HTMLElement} */ (w).dataset.i);
     poolPreviewTimer = setTimeout(() => {
       poolPreviewTimer = null;
       const c = (SDT.Cards.classPool(sel) || [])[i];
-      if (c && visible() && w.isConnected) showPoolPreview(w, true);
+      if (c && visible() && w.isConnected && poolHoverAnchor === w) showPoolPreview(w, true);
     }, 90);
   };
   act('poolZoom', (d) => {
@@ -332,8 +360,11 @@ export function openClassChoice(options = {}) {
     renderPoolGrid();
   });
   act('selClass', (d) => {
-    if (d.cls === sel || !picks.includes(d.cls) || confirmationStarted || characterMotion.busy) return;
+    if (!picks.includes(d.cls) || confirmationStarted) return;
+    characterMotion.cancelPage();
+    if (d.cls === sel) return;
     const direction = picks.indexOf(d.cls) >= picks.indexOf(sel) ? 1 : -1;
+    poolBrowse = null;
     sel = d.cls;
     SDT.Sound.sfx('characterSelect');
     render(true, direction);
@@ -347,6 +378,7 @@ export function openClassChoice(options = {}) {
     });
   });
   act('clsBack', () => {
+    rememberPoolBrowse();
     characterMotion.page(() => {
       view = 'select';
       Sfx.tick();
@@ -428,6 +460,7 @@ export function openClassChoice(options = {}) {
       title: characterName(cl), detail: startLine, duration: 1600,
       prepare: () => SDT.Renderer?.warm?.(),
       presentation: 'city-cut',
+      scene: 'departure',
     });
     return transition.then(completed => {
       if (entryPresented || completed === false || !transition.isCurrent() || !currentContext()) return false;

@@ -34,10 +34,11 @@ function readyArtwork(cut) {
 }
 function expectSinglePass(scan, image) {
   expect({
-    scans: scan.mock.calls.filter(([selector]) => selector === 'img').length,
+    scans: scan.mock.calls.filter(([selector]) => selector === 'img[data-visual-critical]').length,
+    regularScans: scan.mock.calls.filter(([selector]) => selector === 'img:not([loading="lazy"]):not(.lib-grid img):not(.pool-grid img)').length,
     measurements: image.getBoundingClientRect.mock.calls.length,
     decodes: image.decode.mock.calls.length,
-  }).toEqual({ scans: 1, measurements: 1, decodes: 1 });
+  }).toEqual({ scans: 1, regularScans: 1, measurements: 1, decodes: 1 });
 }
 beforeEach(() => {
   vi.useFakeTimers();
@@ -79,12 +80,13 @@ describe('one resource pass per mounted destination', () => {
     const cut = createCityCut({ scene: 'general' });
     finishCut = playPreparedCut(document.querySelector('main'), cut, cityCutDuration, onFinish);
     expect(cut.isConnected).toBe(false);
-    expect(document.querySelector('.camp-entry-cut')).toBeNull();
+    expect(document.querySelectorAll('.camp-entry-cut')).toHaveLength(1);
+    expect(document.querySelector('.camp-entry-cut').closest('.page-visual-handoff')).not.toBeNull();
     expect(onFinish).toHaveBeenCalledOnce();
     await vi.advanceTimersByTimeAsync(48);
     expectSinglePass(scan, image);
     expect(reveal).not.toHaveBeenCalled();
-    decoded.resolve(); await vi.advanceTimersByTimeAsync(32);
+    decoded.resolve(); await vi.advanceTimersByTimeAsync(400);
     expect(await readiness).toBe(true);
     expect(reveal).toHaveBeenCalledOnce();
     expectSinglePass(scan, image);
@@ -102,8 +104,8 @@ describe('one resource pass per mounted destination', () => {
       finishCut = playPreparedCut(document.querySelector('main'), cut);
       expect(cut.isConnected).toBe(false);
       expect(document.querySelectorAll('.page-loading')).toHaveLength(1);
-      expect(document.querySelector('.page-loading--interface .page-loading-copy')).not.toBeNull();
-      expect(document.querySelector('.camp-entry-cut')).toBeNull();
+      expect(document.querySelector('.page-loading .camp-entry-cut').dataset.filmKind).toBe('loading');
+      expect(cut.isConnected).toBe(false);
       return 'settings';
     } });
     await vi.advanceTimersByTimeAsync(80);
@@ -153,7 +155,7 @@ describe('one resource pass per mounted destination', () => {
     expect(document.querySelector('.camp-entry-cut')).toBe(cut);
     old.decoded.resolve(); readyArtwork(cut); await vi.advanceTimersByTimeAsync(32);
     expect(ui.el.overlay.dataset.campEntry).toBe('preparing');
-    next.decoded.resolve(); await vi.advanceTimersByTimeAsync(64);
+    next.decoded.resolve(); await vi.advanceTimersByTimeAsync(850);
     expect(ui.el.overlay.dataset.campEntry).toBe('1');
     expect(cut.isConnected).toBe(true);
     await vi.advanceTimersByTimeAsync(cityCutDuration);
@@ -174,7 +176,7 @@ describe('one resource pass per mounted destination', () => {
     const nextCut = document.querySelector('.camp-entry-cut'); readyArtwork(nextCut);
     old.decoded.resolve(); await vi.advanceTimersByTimeAsync(32);
     expect(nextCut.isConnected).toBe(true); expect(ui.el.overlay.dataset.campEntry).toBe('preparing');
-    next.decoded.resolve(); await vi.advanceTimersByTimeAsync(64);
+    next.decoded.resolve(); await vi.advanceTimersByTimeAsync(850);
     expect(ui.el.overlay.dataset.campEntry).toBe('1');
   });
 });

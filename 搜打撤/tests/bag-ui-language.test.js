@@ -75,7 +75,8 @@ describe('backpack winter UI facts', () => {
       }
     });
     expect(css).not.toMatch(/z-index|pointer-events|transform:|grid-template/);
-    expect(css).toContain('outline:none !important');
+    expect(css).not.toContain('outline:none !important');
+    expect(css).toContain('outline:var(--ui-focus-width) solid var(--bag-edge)');
     expect(css).toContain('padding:var(--ui-space-6) 20px');
   });
 });

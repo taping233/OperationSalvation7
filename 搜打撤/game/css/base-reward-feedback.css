@@ -2,14 +2,15 @@
   margin:0 0 18px; padding:20px 24px; border:1px solid #75b59a; border-left:5px solid #75b59a;
   border-radius:14px; background:#172b2a; color:#f0f4f3; outline:none;
 }
-#overlay #hubMain.base-camp .reward-receipt header { display:flex; align-items:baseline; flex-wrap:wrap; gap:12px; }
-#overlay #hubMain.base-camp .reward-receipt header > span { color:#a4d5bd; font-size:var(--base-type-label,19px); font-weight:700; }
-#overlay #hubMain.base-camp .reward-receipt h3 { margin:0; font-size:22px; }
-#overlay #hubMain.base-camp .reward-receipt ul { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; list-style:none; padding:0; margin:16px 0; }
-#overlay #hubMain.base-camp .reward-receipt li { display:flex; flex-direction:column; gap:6px; padding:12px 14px; background:#ffffff08; border:1px solid #ffffff20; border-radius:8px; }
-#overlay #hubMain.base-camp .reward-receipt li b { font-size:var(--base-type-body,22px); }
-#overlay #hubMain.base-camp .reward-receipt li em { color:#bce3cc; font-style:normal; white-space:nowrap; }
-#overlay #hubMain.base-camp .reward-receipt li span { color:#c2d1cc; font-size:var(--base-type-label,19px); }
-#overlay #hubMain.base-camp .reward-receipt .base-command { min-height:44px; font-size:18px; }
-#overlay #hubMain.base-camp .reward-receipt[data-outcome="unclaimed"] { border-color:#d3b380; background:#2c2821; }
-#overlay #hubMain.base-camp .reward-receipt[data-outcome="unclaimed"] header > span { color:#e0c79f; }
+#overlay #hubMain.base-camp .reward-receipt{
+& header { display:flex; align-items:baseline; flex-wrap:wrap; gap:12px; }
+& header > span { color:#a4d5bd; font-size:var(--base-type-label,19px); font-weight:700; }
+& h3 { margin:0; font-size:22px; }
+& ul { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; list-style:none; padding:0; margin:16px 0; }
+& li { display:flex; flex-direction:column; gap:6px; padding:12px 14px; background:#ffffff08; border:1px solid #ffffff20; border-radius:8px; }
+& li b { font-size:var(--base-type-body,22px); }
+& li em { color:#bce3cc; font-style:normal; white-space:nowrap; }
+& li span { color:#c2d1cc; font-size:var(--base-type-label,19px); }
+& .base-command { min-height:44px; font-size:18px; }
+&[data-outcome="unclaimed"] { border-color:#d3b380; background:#2c2821; }
+&[data-outcome="unclaimed"] header > span { color:#e0c79f; }}

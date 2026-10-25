@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { buildHandSelectionContract } from '../game/src/battle/core/battle.hand-selection.js';
 
@@ -10,8 +11,7 @@ vi.mock('../game/src/run/game.run.flow.js', () => ({ moveTo: () => false, reente
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} }, UI: {},
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 6, battleHandMax: 30, bossDeckSize: 15, starterSha: 0,
-    battleStartDraw: 0, battleTurnDraw: 0, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(6, 30, 15, 0, 0, 0) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const { BattleSession, configureBattleRenderer } = await import('../game/src/battle/core/battle.core.js');
 const runtime = await import('../game/src/battle/runtime/battle.runtime.js');

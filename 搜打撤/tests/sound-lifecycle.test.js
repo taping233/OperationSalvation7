@@ -42,7 +42,8 @@ async function importSound(fetchImpl = async () => ({ ok: true, arrayBuffer: asy
   await import('../game/src/audio/sound.js');
   return window.SDT.Sound;
 }
-const flush = () => vi.runAllTimersAsync();
+// Flush download/decode promises without expiring the new request deadlines.
+const flush = async () => { for (let i=0;i<800;i++) await Promise.resolve(); };
 
 beforeEach(() => {
   window.SDT?.Sound?.dispose?.();

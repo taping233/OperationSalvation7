@@ -76,8 +76,14 @@ export function parseAudit(stdout, status) {
 }
 
 export function collectAudit(outputFile, summaryFile, { run = spawnSync, emit = value => process.stdout.write(value) } = {}) {
-  const result = run('npm', ['audit', '--package-lock-only', '--ignore-scripts', '--json',
-    '--registry=https://registry.npmjs.org/', '--audit-level=info'], {
+  const args = ['audit', '--package-lock-only', '--ignore-scripts', '--json',
+    '--registry=https://registry.npmjs.org/', '--audit-level=info'];
+  // Windows npm is a command shim, not a directly spawnable executable. All
+  // arguments here are fixed; no paths or caller input enter the command shell.
+  const command = process.platform === 'win32' ? 'cmd.exe' : 'npm';
+  const commandArgs = process.platform === 'win32' ? ['/d', '/c', 'npm', ...args] : args;
+  const result = run(command, commandArgs, {
+    windowsHide: true,
     encoding: 'utf8', timeout: 120_000, maxBuffer: 1024 * 1024,
   });
   if (result.error || result.signal) throw new Error('npm audit transport/process failed; no diagnostic artifact written');

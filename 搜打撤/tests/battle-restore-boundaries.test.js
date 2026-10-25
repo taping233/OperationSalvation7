@@ -34,7 +34,7 @@ it('measures real installed show wrapper and unshield/focus with ownership, erro
     UI.showOverlay('', '<div class="battle-stage sts"><button id="battleAction">end</button><div class="sts-hand"></div></div>', 'battle');
     scene = UI.el.ovBody.firstElementChild; scene._battleToken = 7;
     button = scene.querySelector('button'); button.focus();
-    show('rules', '<button data-act="btRulesBack">back</button>', 'settings'); reset();
+    show('rules', '<button data-act="btRulesBack">back</button>', 'discover'); reset();
   };
   disconnect = connectRuntimeStages({
     capture() { observed.captures++; return latest; },
@@ -53,7 +53,7 @@ it('measures real installed show wrapper and unshield/focus with ownership, erro
   document.addEventListener('sdt-overlay-mode', () => { latest = newer; }, { once: true });
   expect(restore(UI, 7, { traceContext: context })).toBe(true);
   expect(labels()).toEqual(['battle-restore-show-sync', 'battle-restore-focus-sync']);
-  expect(observed.profiles).toEqual([['battle-restore-show-sync'], ['battle-restore-show-sync']]);
+  expect(observed.profiles).toEqual([]); // Retained combat does not rerun page profiling.
   expect(observed.rows.every(row => row.finished && row.context === context)).toBe(true);
   expect(observed.captures).toBe(0); expect(focus).toHaveBeenCalledWith({ preventScroll: true }); focus.mockRestore();
   expect(UI.el.ovBody.firstElementChild).toBe(scene);

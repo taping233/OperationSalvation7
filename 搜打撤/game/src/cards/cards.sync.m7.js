@@ -9,6 +9,7 @@
  * 注意：canonical 映射中 tt8-archdemon 原文件存在 TABLETOP11/TABLETOP10 重复键
  * （Map 构造后者覆盖前者，实际取 TABLETOP10）——逐字保留该现状未改，待拍板是否为笔误。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
+import { canonicalTables } from './card-rule-definitions.js';
 
 export const M7_EQUIP_MARKER_KEY = 'sdt-cards-m7-equip-rules-v1-seeded';
 
@@ -48,17 +49,13 @@ const definitions = new Map([
   ['tt7-arcanescroll', equipTrigger({ onConsume: [{ op: 'draw', amountField: 'draw' }] })],
 ]);
 
-const CANONICAL_TABLE_BY_ID = new Map([
-  ['tt3-longsword', 'TABLETOP10'], ['tt3-staff', 'TABLETOP10'],
-  ['tt3-grass-armor', 'TABLETOP10'], ['tt3-light-mail', 'TABLETOP10'],
-  ['tt3-holy-staff', 'TABLETOP10'], ['tt8-archdemon', 'TABLETOP11'],
-  ['tt8-archdemon', 'TABLETOP10'], ['tt2-treasuremap', 'TABLETOP11'],
-  ['tt7-arcanescroll', 'TABLETOP11'], ['tt7-talisman', 'TABLETOP11'],
-  ['tt3-blooddrinker', 'TABLETOP10'], ['tt3-master-staff', 'TABLETOP10'],
-  ['tt3-twinwater-mail', 'TABLETOP10'],
-  ['tt2-apollo', 'TABLETOP10'], ['tt2-wreck', 'TABLETOP10'],
-  ['tt12-raygun', 'TABLETOP12'],
-]);
+const CANONICAL_TABLE_BY_ID = canonicalTables(definitions, 'TABLETOP10', {
+  __proto__: null,
+  'tt2-treasuremap': 'TABLETOP11',
+  'tt7-arcanescroll': 'TABLETOP11',
+  'tt7-talisman': 'TABLETOP11',
+  'tt12-raygun': 'TABLETOP12',
+});
 
 export const ensureM7EquipRules = createRuleBackfiller({
   label: 'M7',

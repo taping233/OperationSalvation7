@@ -54,10 +54,29 @@ const eventScore = (label, hpRatio, W) => {
   return score;
 };
 
-const RARITY_ORDER = { '普通': 0, '常见': 0, '稀有': 1, '史诗': 2, '传说': 3, '职业': 4 };
+const RARITY_ORDER = { '古朴': 0, '普通': 0, '常见': 0, '稀有': 1, '史诗': 2, '传说': 3, '职业': 4 };
 // 进卡组的类型（丢卡腾格时最后保留）；道具/资源/事件/生物等先丢
-const DECK_TYPES = new Set(['招式', '装备', '能力']);
+const DECK_TYPES = new Set(['武术', '法术', '装备', '能力卡', '招式', '能力']);
 const rarityRank = (r) => RARITY_ORDER[r] ?? 1;
+
+// 两种导航保留各自的目标选择，共用同层反向图与多起点距离展开。
+function layerTargetDistances(layer, li, targets) {
+  const pred = layer.map(() => []);
+  for (let i = 0; i < layer.length; i++) {
+    for (const [tl, ti] of layer[i]?.next || []) {
+      if (tl === li && ti != null) pred[ti].push(i);
+    }
+  }
+  const dist = new Map(targets.map(i => [i, 0]));
+  const queue = [...targets];
+  while (queue.length) {
+    const u = queue.shift();
+    for (const p of pred[u]) {
+      if (!dist.has(p)) { dist.set(p, dist.get(u) + 1); queue.push(p); }
+    }
+  }
+  return dist;
+}
 
 // 策略 v2（数据驱动改版，2026-09-26）：基于 45 局 v1 基线（均层2.0、73% 死于层2、
 // 战斗胜率 72% 仍全灭）——死因是续航与推进节奏，不是单场战术。三处升级：
@@ -430,7 +449,6 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       try {
         const lay = globalThis.window?.SDT?.game?.layerData?.[curLi]?.logical;
         if (lay) {
-          const pred = (lay.map(() => []));
           const targets = [];
           let lockedExit = false;   // 本层撤离被 boss 锁（R14a 破局路径判据）
           for (let i = 0; i < lay.length; i++) {
@@ -438,26 +456,16 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
             if (ty === 'extraction' && !(obs.run?.bossKilled ?? false)) lockedExit = true;
             if (ty === 'door' || ty === 'emergencyExit'
               || (ty === 'extraction' && (obs.run?.bossKilled ?? false))) targets.push(i);
-            for (const [tl, ti] of lay[i]?.next || []) {
-              if (tl === curLi && ti != null) pred[ti].push(i);   // 同层反向边
-            }
           }
-          const dist = new Map(targets.map(i => [i, 0]));
-          const queue = [...targets];
           // R14a：撤离被 boss 锁时，破局路径=打 boss（92 复现：extraction -100 不进
           // 目标集 → 梯度失效 → L4 环 277 步 no-progress）。boss 格纳入目标，
           // 打赢后锁解除、targets 自然切回 extraction
           if (lockedExit && !obs.run?.bossKilled) {
             for (let i = 0; i < lay.length; i++) {
-              if (lay[i]?.def?.type === 'boss' && !dist.has(i)) { dist.set(i, 0); queue.push(i); }
+              if (lay[i]?.def?.type === 'boss' && !targets.includes(i)) targets.push(i);
             }
           }
-          while (queue.length) {
-            const u = queue.shift();
-            for (const p of pred[u]) {
-              if (!dist.has(p)) { dist.set(p, dist.get(u) + 1); queue.push(p); }
-            }
-          }
+          const dist = layerTargetDistances(lay, curLi, targets);
           if (dist.size) {
             exitDist = dist;
             exitMax = Math.max(...dist.values());
@@ -475,24 +483,13 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       try {
         const lay = globalThis.window?.SDT?.game?.layerData?.[curLi]?.logical;
         if (lay) {
-          const pred = lay.map(() => []);
           const targets = [];
           for (let i = 0; i < lay.length; i++) {
             const ty = lay[i]?.def?.type;
             if (ty === 'fire' || ty === 'emergencyExit'
               || (ty === 'extraction' && (obs.run?.bossKilled ?? false))) targets.push(i);
-            for (const [tl, ti] of lay[i]?.next || []) {
-              if (tl === curLi && ti != null) pred[ti].push(i);
-            }
           }
-          const dist = new Map(targets.map(i => [i, 0]));
-          const queue = [...targets];
-          while (queue.length) {
-            const u = queue.shift();
-            for (const p of pred[u]) {
-              if (!dist.has(p)) { dist.set(p, dist.get(u) + 1); queue.push(p); }
-            }
-          }
+          const dist = layerTargetDistances(lay, curLi, targets);
           if (dist.size) {
             retreatDist = dist;
             retreatMax = Math.max(...dist.values());
@@ -722,7 +719,9 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     // 全部试过时按 LRU 顺序复用最旧的一个，不死锁。
     // 同页面内绕开上次被引擎拒绝的动作（obs.lastFailed，换页自动失效）
     const fail = obs.lastFailed;
-    const usable = (a) => !fail || a.id !== fail.id || JSON.stringify(a.params || {}) !== JSON.stringify(fail.params || {});
+    const usable = (a) => !fail || a.id !== fail.id
+      || JSON.stringify(a.params || {}) !== JSON.stringify(fail.params || {})
+      || JSON.stringify(a.args || []) !== JSON.stringify(fail.args || []);
     const ui = acts.filter(a => a.type === 'ui' && usable(a));
     // 瞬态等待页根治（09-26）：面板只剩 meta 关闭键（closeOverlay/openHelp/helpBack）=
     // 页面渲染未就绪或必选流程——点关闭必被拒且会自旋熔断，直接回 noop 慢等渲染到位。
@@ -748,9 +747,10 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     const discards = acts.filter(a => a.type === 'sys' && a.name === 'discardCard' && usable(a));
     if (strategic && discards.length) {
       const own = new Map((obs.run?.ownedCards || []).map(o => [o.name, o]));
+      const byUid = new Map((obs.run?.ownedCards || []).map(o => [o.uid, o]));
       const discardKey = (a) => {
         /** @type {{rarity?:string,type?:string}} */
-        const o = own.get(a.args?.[0]) || {};
+        const o = (a.args?.[1] != null ? byUid.get(a.args[1]) : own.get(a.args?.[0])) || {};
         return [rarityRank(o.rarity), DECK_TYPES.has(o.type) ? 1 : 0];
       };
       const sorted = discards.slice().sort((x, y) => {
@@ -860,7 +860,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
         && (obs.run.ownedCards || []).some(o => o.sellable)
         ? (freshPick(ui.filter(a => a.name === 'openSell'))
           || freshPick(ui.filter(a => a.name === 'sellCard').sort((x, y) => {
-            const own = new Map((obs.run.ownedCards || []).map(o => [o.uid, (/** @type {typeof o & {card?:import("../hub/game.store.types").CardSnapshot}} */ (o)).card?.rarity]));
+            const own = new Map((obs.run.ownedCards || []).map(o => [o.uid, o.rarity]));
             return rarityRank(own.get(x.params?.uid)) - rarityRank(own.get(y.params?.uid));
           })))
         : null)

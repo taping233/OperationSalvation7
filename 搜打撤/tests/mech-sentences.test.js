@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { MECH_ALL } from '../game/src/cards/mech-sentences.js';
+import { STATUS_ICONS } from '../game/src/ui/status-icons.js';
 import { createEffectExecutor } from '../game/src/battle/effects/battle.effects.js';
 
 // 元测试（性质锁定）：制作坊的每一条机制句式，都必须能被
@@ -45,6 +46,14 @@ function makeExecutor() {
 describe('机制句式 × 效果解释器（元测试）', () => {
   it('每条机制句式至少覆盖 19 项（防止清单被悄悄清空）', () => {
     expect(MECH_ALL.length).toBeGreaterThanOrEqual(19);
+  });
+
+  it('制作器状态沿战斗同义图标，抽牌不借用通用卡牌图标', () => {
+    for (const [key, icon] of Object.entries(STATUS_ICONS)) {
+      const item = MECH_ALL.find(item => item.k === key);
+      if (item) expect(item.icon).toBe(icon);
+    }
+    expect(MECH_ALL.find(item => item.k === 'drawTxt')?.icon).toBe('draw-card');
   });
 
   it.each(MECH_ALL.map(it => [it.k, it]))(

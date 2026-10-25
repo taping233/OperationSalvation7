@@ -1,103 +1,65 @@
-/* v7 基地房间：开放陈列、大立绘、单一阅读纸；只改变房间画布，不改卡牌身份与特写。 */
+/* 基地房间：开放陈列、大立绘与共用玻璃阅读层；不改卡牌身份与特写。 */
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-page:has(> :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2)) {
-  --camp-bg:#242a29; --camp-paper:#242a29; --camp-sheet:#e6e1d6;
-  --camp-ink:#eeeae1; --camp-muted:#a9b0a9; --camp-sub:#a9b0a9;
-  --camp-line:#d3d8ce24; --camp-dark:#303937; --camp-accent:#bac2b3;
-  --camp-brass:#b9c1b3; --camp-blue:#b9c1b3; --camp-action:#a76344;
-  --camp-action-hover:#bc7752; --camp-room-hover:#eeeae109; --camp-room-selected:#dfe7d111;
+  --camp-bg:#14242d; --camp-paper:var(--base-v12-glass); --camp-sheet:var(--base-v12-glass-soft);
+  --camp-ink:var(--base-v12-ink); --camp-muted:var(--base-v12-muted); --camp-sub:var(--base-v12-muted);
+  --camp-line:var(--base-v12-line); --camp-dark:#172d37; --camp-accent:var(--base-v12-accent);
+  --camp-brass:#e2c891; --camp-blue:var(--base-v12-accent); --camp-action:#e2c891;
+  --camp-action-hover:#efd8a6; --camp-room-hover:#ffffff0a; --camp-room-selected:#9edce714;
   --room-gap:clamp(28px,calc(var(--game-layout-width, 100vw) * 0.038),64px); --room-pad:clamp(28px,calc(var(--game-layout-width, 100vw) * 0.044000000000000004),76px);
-  color:var(--camp-ink); background:linear-gradient(115deg,#2b3330,#242a29 66%);
+  color:var(--camp-ink); background:transparent;
   padding:32px var(--room-pad) 40px; scrollbar-color:#a9b0a950 transparent;
 }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) {
   width:100%; max-width:none; min-width:0; margin:0; box-sizing:border-box;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.hub-archive-v3,.facilities-v2) > :is(.camp-section-head,.av3-header),
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.personnel-v2,.hub-archive-v3,.facilities-v2) > :is(.camp-section-head,.av3-header),
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .trade-v5-heading {
   display:flex; flex-direction:row; align-items:baseline; flex-wrap:wrap; gap:20px 36px;
   padding:0 0 24px; margin:0 0 30px; border:0; border-bottom:1px solid var(--camp-line);
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.hub-archive-v3,.facilities-v2,.trade-v5) > :is(.camp-section-head,.av3-header,.trade-v5-heading) h2 {
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.personnel-v2,.hub-archive-v3,.facilities-v2,.trade-v5) > :is(.camp-section-head,.av3-header,.trade-v5-heading) h2 {
   padding:0; margin:0; border:0; color:var(--camp-ink); font:500 clamp(34px,calc(var(--game-layout-width, 100vw) * 0.03),46px)/1.2 var(--font-ui);
   letter-spacing:.06em; text-shadow:none; white-space:normal;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-utilities,.av3-utilities,.warehouse-header-actions) {
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-utilities) {
   display:flex; flex-wrap:wrap; align-items:center; gap:24px; margin-left:auto;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) :is(.base-link,.person-utilities button,.av3-utilities button) {
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) :is(.base-link,.person-utilities button) {
   padding:8px 0; border:0; background:transparent; color:var(--camp-muted);
   font:500 18px/1.45 var(--font-ui); letter-spacing:.02em; transition:color 160ms ease;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) :is(.base-link,.person-utilities button,.av3-utilities button):hover:not(:disabled) { color:var(--camp-ink); }
 
 /* 浏览工具与内容共用一条基线，分类用字与下划线表达。 */
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-toolbar,.person-pool-toolbar,.collection-browse-tools,.archive-toolbar) {
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.archive-toolbar) {
   display:flex; flex-wrap:wrap; align-items:center; gap:16px 28px; margin:0 0 30px; padding:0 0 18px;
   border:0; border-bottom:1px solid var(--camp-line); background:transparent;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-toolbar,.person-pool-toolbar,.collection-browse-tools,.archive-toolbar) :is(input,select) {
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.archive-toolbar) :is(input,select) {
   box-sizing:border-box; width:auto; max-width:100%; min-height:44px; padding:8px 2px;
   border:0; border-bottom:1px solid var(--camp-line); border-radius:0; background:transparent;
   color:var(--camp-ink); font:18px/1.4 var(--font-ui); box-shadow:none;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-toolbar,.person-pool-toolbar,.collection-browse-tools) > input { flex:0 1 300px; width:300px; margin-left:0; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-toolbar,.person-pool-toolbar,.collection-browse-tools) > span { margin-left:auto; color:var(--camp-muted); font:17px/1.4 var(--font-ui); white-space:nowrap; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-toolbar,.person-pool-toolbar,.collection-browse-tools,.archive-toolbar) input::placeholder { color:var(--camp-muted); opacity:.8; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-toolbar,.person-pool-toolbar,.collection-browse-tools,.archive-toolbar) select option { background:#242a29; color:#eeeae1; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.pool-type-tabs,.warehouse-use-tabs,.archive-status,.trade-v5-modes) { display:flex; flex-wrap:wrap; gap:24px; background:none; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.pool-type-tabs,.warehouse-use-tabs,.archive-status,.trade-v5-modes) :is(button,.mini-btn) {
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.archive-toolbar) select option { background:#242a29; color:#eeeae1; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.archive-status,.trade-v5-modes) { display:flex; flex-wrap:wrap; gap:24px; background:none; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.archive-status,.trade-v5-modes) :is(button,.mini-btn) {
   width:auto; min-width:0; min-height:42px; padding:8px 0; border:0; border-bottom:1px solid transparent;
   border-radius:0; color:var(--camp-muted); background:none; box-shadow:none; font:500 19px/1.4 var(--font-ui);
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.pool-type-tabs,.warehouse-use-tabs,.archive-status,.trade-v5-modes) :is(.on,.ok,.is-selected) {
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.archive-status,.trade-v5-modes) :is(.on,.ok,.is-selected) {
   color:var(--camp-ink); background:none; border-bottom-color:var(--camp-accent); box-shadow:none;
 }
 
 /* 仓库：整页卡牌货架，筛选展开为宽工具区，画作保持原色。 */
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3 .camp-section-head .base-resource-strip { margin:0 0 0 auto; gap:18px; font-size:16px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-header-actions { gap:20px; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-capacity { display:flex; align-items:baseline; gap:18px; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3 .camp-page-stat { margin:0; color:var(--camp-muted); font:18px/1.4 var(--font-num); }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters { position:static; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters summary {
-  padding:9px 0; border:0; border-bottom:1px solid transparent; background:none; color:var(--camp-muted); font:18px/1.4 var(--font-ui);
-}
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters[open] summary { border-bottom-color:var(--camp-accent); color:var(--camp-ink); }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters > div {
-  position:absolute; z-index:6; inset:auto var(--room-pad) auto; margin-top:10px;
-  display:flex; align-items:center; flex-wrap:wrap; gap:20px 36px; width:auto; max-width:none; padding:22px 28px;
-  border:0; border-top:1px solid #c6cdc245; background:#e6e1d6; color:#303731;
-  box-shadow:0 14px 28px #11161338; backdrop-filter:none;
-}
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters > div :is(button,select) { color:#4f594f; border-color:#78817340; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-purpose {
   display:flex; align-items:center; flex-wrap:wrap; gap:18px; justify-content:space-between;
   margin:0 0 24px; padding:14px 0; border:0; border-bottom:1px solid var(--camp-line); background:none;
-}
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-skills,.collection-cards-v4) .card-browser { --card-browser-min:220px; --card-browser-gap:30px; width:100%; max-width:none; margin:0; padding:8px 0 0; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3 .stash-cell,.person-pool-card,.collection-card) {
-  position:relative; display:flex; flex-direction:column; align-items:center; gap:14px; width:100%; max-width:none;
-  padding:14px 12px 20px; border:0; border-bottom:1px solid var(--camp-line); border-radius:0;
-  color:var(--camp-ink); background:transparent; box-shadow:none; transition:background 180ms ease,border-color 180ms ease,transform 180ms ease;
-}
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3 .stash-cell,.person-pool-card,.collection-card):hover:not(:disabled) { background:var(--camp-room-hover); transform:translateY(-3px); box-shadow:none; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3 .stash-cell.selected,.person-pool-card.on) { border-bottom-color:var(--camp-accent); background:var(--camp-room-selected); box-shadow:none; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-card-art,.pool-card-art,.collection-card-art) { width:180px; max-width:100%; height:252px; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3 .warehouse-card-art { height:auto; flex:none; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-pool-card,.collection-card) > b,
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .stash-card-caption > b { font:500 21px/1.45 var(--font-ui); letter-spacing:.01em; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3 .stash-card-caption { width:100%; display:flex; align-items:baseline; gap:10px; justify-content:space-between; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3 .stash-cell .stack-count {
-  position:static; min-width:0; padding:0; border:0; border-radius:0; background:none; color:#c88661; font:500 21px/1.4 var(--font-num);
 }
 /* 主线提供独立分类节点时，采用 1999 仓库的左分类 + 宽货架骨架。 */
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3:has(> .warehouse-categories-v7) {
   display:grid; grid-template-columns:minmax(155px,16%) minmax(0,1fr); grid-template-rows:auto auto auto minmax(400px,1fr); gap:0 34px;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3:has(> .warehouse-categories-v7) > .camp-section-head { grid-column:1/-1; grid-row:1; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3:has(> .warehouse-categories-v7) > :is(.warehouse-purpose,.stash-pocket-note) { grid-column:1/-1; grid-row:2; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3:has(> .warehouse-categories-v7) > .warehouse-toolbar { grid-column:2; grid-row:3; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3:has(> .warehouse-categories-v7) > :is(.card-browser,.warehouse-no-results) { grid-column:2; grid-row:4; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3:has(> .warehouse-categories-v7) > :is(.warehouse-purpose) { grid-column:1/-1; grid-row:2; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-categories-v7 {
   display:flex; flex-direction:column; align-self:start; grid-column:1; grid-row:3/5; gap:10px; padding-top:4px;
 }
@@ -106,10 +68,7 @@
   border:0; border-radius:0; color:var(--camp-muted); background:none;
   font:500 22px/1.35 var(--font-ui); letter-spacing:.02em; cursor:pointer;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-categories-v7 button::before { content:''; width:8px; height:8px; flex:none; transform:rotate(45deg); background:#a9b0a980; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-categories-v7 :is(.on,.is-selected,[aria-pressed="true"]) { color:var(--base-v7-accent); background:none; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-categories-v7 :is(.on,.is-selected,[aria-pressed="true"])::before { background:var(--base-v7-accent); }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-categories-v7 button:hover { color:var(--camp-ink); }
 
 /* 人物：横向名册配合整张白底立绘与资料画布。 */
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-page:has(> .personnel-v2) { --camp-bg:#20282e; --camp-paper:#20282e; --camp-line:#edf1ef24; --camp-accent:#8bd0df; --camp-action:#2f6372; --camp-action-hover:#407d8e; background:#20282e; }
@@ -117,24 +76,23 @@
   display:grid; grid-template-columns:minmax(0,1.35fr) minmax(320px,.82fr); grid-template-rows:auto minmax(460px,1fr);
   gap:24px 0; min-height:620px; height:auto; align-items:stretch;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-roster,.skills-roster) {
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-roster) {
   grid-column:1/-1; display:flex; flex-direction:row; align-items:stretch; gap:16px;
   height:auto; padding:0 0 12px; overflow-x:auto; overflow-y:hidden; scrollbar-width:thin;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face,.skills-person) {
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face) {
   flex:0 0 auto; display:grid; grid-template-columns:54px auto; align-items:center; justify-items:start; gap:4px 14px;
   min-height:68px; padding:9px 18px 9px 0; border:0; border-bottom:1px solid transparent;
   border-radius:0; background:none; color:var(--camp-muted); box-shadow:none; text-align:left;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face.on,.skills-person.on) { background:none; border-bottom-color:var(--camp-accent); color:var(--camp-ink); box-shadow:none; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face-art,.skills-person > img,.skills-person > .art-avatar,.person-face > .companion-art) { grid-row:1/3; width:54px; height:54px; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face,.skills-person) b { font:500 18px/1.4 var(--font-ui); }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face.on) { background:none; border-bottom-color:var(--camp-accent); color:var(--camp-ink); box-shadow:none; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face-art,.person-face > .companion-art) { grid-row:1/3; width:54px; height:54px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face) b { font:500 18px/1.4 var(--font-ui); }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-face small { grid-column:2; font-size:15px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v2 .person-face { min-height:82px; min-width:178px; padding:10px 16px; grid-template-columns:60px auto; border-bottom:3px solid transparent; border-radius:7px; background:#151c22; transition:background 150ms,border-color 150ms,color 150ms; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v2 .person-face-art { width:60px; height:60px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v2 .person-face b { font-weight:700; font-size:20px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v2 .person-face.on { color:#bde7ef; border-bottom-color:#8bd0df; background:#30444e; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v2 .person-face:hover { color:#edf1ef; background:#30444e; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-hero,.partner-display,.companion-hatch-art) {
   position:relative; min-height:480px; height:auto; padding:0; border:0; background:#323d35; box-shadow:none;
 }
@@ -150,24 +108,28 @@
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-hero figcaption h3 { font:500 36px/1.25 var(--font-ui); margin-bottom:8px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-hero figcaption span { color:#657466; font-size:18px; }
 
-/* 纸只用于阅读与操作结果，内部不再套第二层盒子。 */
+/* 阅读与操作结果共用现行玻璃变量，避免旧纸面变量透入嵌套控件。 */
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-details,.facility-details,.av3-medal-detail,.av3-back-detail,.companion-hatch,.story-reader,.trade-v5-desk) {
-  --camp-bg:#e6e1d6; --camp-paper:#e6e1d6; --camp-sheet:#e6e1d6; --camp-ink:#303731;
-  --camp-muted:#687065; --camp-sub:#687065; --camp-line:#65715b30; --camp-accent:#68765e;
-  --av3-ink:#303731; --av3-muted:#687065; --av3-line:#65715b30; --av3-accent:#68765e;
-  min-width:0; box-sizing:border-box; padding:32px 36px; border:0; border-top:1px solid #faf5e9;
-  border-radius:0; color:var(--camp-ink); background:#e6e1d6; box-shadow:0 8px 20px #11161220;
+  --camp-bg:#14242d; --camp-paper:var(--base-v12-glass); --camp-sheet:var(--base-v12-glass-soft);
+  --camp-ink:var(--base-v12-ink); --camp-muted:var(--base-v12-muted); --camp-sub:var(--base-v12-muted);
+  --camp-line:var(--base-v12-line); --camp-accent:var(--base-v12-accent);
+  --av3-ink:var(--camp-ink); --av3-muted:var(--camp-muted); --av3-line:var(--camp-line); --av3-accent:var(--camp-accent);
+  min-width:0; box-sizing:border-box; padding:32px 36px; border:1px solid var(--camp-line);
+  border-radius:14px; color:var(--camp-ink); background:var(--base-v12-glass); box-shadow:var(--base-v12-shadow);
 }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-stage .person-details {
   display:flex; flex-direction:column; height:auto; max-height:none; overflow:visible; gap:28px; padding:32px 40px;
-  --camp-bg:#fff; --camp-paper:#fff; --camp-sheet:#fff; --camp-ink:#28343b; --camp-muted:#65717a; --camp-accent:#367386; --camp-action:#2f6372; --camp-action-hover:#407d8e;
-  background:#fff; border:0; border-left:1px solid #27362a24; box-shadow:none;
+  --camp-bg:#14242d; --camp-paper:var(--base-v12-glass); --camp-sheet:var(--base-v12-glass-soft);
+  --camp-ink:var(--base-v12-ink); --camp-muted:var(--base-v12-muted); --camp-sub:var(--base-v12-muted);
+  --camp-accent:var(--base-v12-accent); --camp-action:#e2c891; --camp-action-hover:#efd8a6;
+  background:var(--base-v12-glass); border:1px solid var(--camp-line); box-shadow:var(--base-v12-shadow);
 }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-details,.facility-details,.av3-medal-detail,.av3-back-detail,.companion-hatch,.story-reader,.trade-v5-desk) :is(h3,h4) { color:var(--camp-ink); font-weight:500; letter-spacing:.02em; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-details,.facility-details,.companion-hatch) h3 { font:500 29px/1.3 var(--font-ui); margin:0 0 12px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-details,.facility-details,.companion-hatch) h4 { font:500 21px/1.45 var(--font-ui); }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-details,.facility-details,.companion-hatch) p { color:var(--camp-ink); font:20px/1.75 var(--font-ui); margin:8px 0 16px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-details,.facility-details,.companion-hatch) .hint { color:var(--camp-muted); font-size:17px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .camp-costs .missing { color:#edc49b; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-growth-summary { padding-bottom:22px; border-bottom:1px solid var(--camp-line); }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-level { color:#367386; font:700 31px/1.3 var(--font-num); }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-details .person-perk-value { color:var(--camp-ink); font-size:22px; font-weight:500; }
@@ -177,9 +139,6 @@
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-skin { gap:10px; padding-bottom:14px; border:0; border-bottom:1px solid var(--camp-line); background:none; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-skin.on { background:none; border-bottom-color:var(--camp-accent); }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .person-skin img { height:180px; object-fit:contain; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .skills-layout { display:grid; grid-template-columns:minmax(0,1fr); gap:22px; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .skills-heading { padding:0 0 22px; margin:0 0 24px; border-bottom:1px solid var(--camp-line); }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .skills-heading h3 { font-size:30px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .partner-display { justify-content:center; gap:20px; padding:36px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .partner-display > .companion-art { width:360px; max-width:80%; max-height:65%; filter:none; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .companion-hatch-scene { grid-template-columns:minmax(0,1.3fr) minmax(320px,.85fr); gap:var(--room-gap); max-width:none; margin:0; }
@@ -214,15 +173,12 @@
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-back { border:2px solid transparent; border-radius:8px; background:#151c22; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-back.on { background:#2c4049; border-color:#8bd0df; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3[data-archive-view="cards"] { height:auto; min-height:100%; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-cards-v4 { flex:1; min-height:400px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 :is(.av3-honours-layout,.av3-backs) { grid-template-columns:minmax(0,1.5fr) minmax(340px,.85fr); gap:var(--room-gap); }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-medals { grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:28px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-medal { border:2px solid transparent; border-radius:8px; background:#151c22; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-medal.selected { background:#2c4049; border-color:#8bd0df; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-medal > button { min-height:280px; padding:24px 14px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 :is(.av3-medal-detail,.av3-back-detail) { padding:32px 36px; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-milestones { grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:28px 36px; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-collection-progress { gap:40px; padding-top:10px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-inbox-reward { margin:0; padding:28px 0; border:0; border-bottom:1px solid var(--camp-line); background:none; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .story-workspace.av3-story-layout { grid-template-columns:minmax(0,1fr); gap:24px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .story-list { flex-direction:row; gap:28px; padding:0; border:0; border-bottom:1px solid var(--camp-line); }
@@ -247,15 +203,8 @@
   color:var(--camp-ink); background:none; box-shadow:none; clip-path:none; transform:none;
   font:500 19px/1.45 var(--font-ui); transition:background 160ms ease,color 160ms ease,border-color 160ms ease;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) button.base-command[data-act]::after { content:none; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) button.base-command[data-act].base-command-primary { color:#fff5e9; background:var(--camp-action); border-color:transparent; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) button.base-command[data-act]:hover:not(:disabled) { color:var(--camp-ink); background:#7b886517; border-color:var(--camp-accent); box-shadow:none; transform:none; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) button.base-command[data-act].base-command-primary:hover:not(:disabled) { color:#fff5e9; background:var(--camp-action-hover); border-color:transparent; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) button.base-command[data-act]:disabled { opacity:.48; background:#68706513; color:var(--camp-muted); border-color:var(--camp-line); }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) button.base-command[data-act].base-command-primary { color:var(--base-v12-on-accent); background:var(--camp-action); border-color:transparent; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .trade-v5-checkout button.base-command[data-act].is-confirming { color:#fff5e9; background:#8c5038; border-color:transparent; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) :is(button,input,select,summary):focus-visible { outline:1px solid var(--camp-accent); outline-offset:4px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) [hidden] { display:none; }
 @media (prefers-reduced-motion:reduce) {
-  #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3 .stash-cell,.person-pool-card,.collection-card) { transition:none; }
-  #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3 .stash-cell,.person-pool-card,.collection-card):hover:not(:disabled) { transform:none; }
 }

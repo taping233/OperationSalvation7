@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 背包技能按钮形态（2026-09-16 老板定向按钮化；2026-10-02 老板：砸击换成技能，按五职业分化）：
  *   ① 不再向手牌自动置入「背包砸击」常驻令牌（2026-09-13 的做法作废）——手牌检测
  *      （末手判定/手牌上限/补牌到 N 张/消耗所有手牌）天然不含砸击；
@@ -6,13 +7,14 @@
  *   ③ 五职业分化口径（单源 battle.slam-skill.js）：侠客(刺客) 1 费 2 固定伤 / 战士 2 费攻击一次 /
  *      法师 1 费随机获取 / 降临者 2 费火球 / 牧师 1 费圣疗与惩戒每次使用后交替；
  *      未知职业兜底=战士口径。 */
+import { drainBattle } from './helpers/battle-fixtures.js';
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -48,25 +50,9 @@ function makeGame(cards, cls = '侠客', hp = 99999) {
 }
 const foeOf = (name, hp = 99999) => ({ id: 'infantry', name, hp, atk: 1 });
 const tick = () => new Promise(r => setTimeout(r, 0));
-const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 
-async function drain(maxLoops = 300) {
-  for (let i = 0; i < maxLoops; i++) {
-    await tick();
-    const s = snap();
-    if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
-    if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
-    if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return snap();
-}
+const drain = (maxLoops = 300) => drainBattle(BattleSession, maxLoops);
 
 function handCardNames(s) {
   return s.hand.map(u => { const o = viewApi.findCard(u); return o && o.card.name; }).filter(Boolean);

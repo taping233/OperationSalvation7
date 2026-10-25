@@ -1,11 +1,15 @@
-/* Keep the existing winter platform and geometry; reinforce figure/hand separation. */
-#overlay .battle-stage.sts[data-scenery-key="winter-platform-minimal"] .battle-stage-shade {
-  background: linear-gradient(180deg, #10202c26 0%, transparent 27%, transparent 61%, #101b2424 75%, #0d1827a6 91%, #0c1522e0 100%);
+/* Keep the sky unshaded; fade the existing shade in only across the ground below. */
+#overlay .battle-stage.sts[data-scenery-key="winter-platform-minimal"]{
+& .battle-stage-shade {
+  background:
+    radial-gradient(ellipse 62% 44% at 56% 54%, #08111a0d 0%, #08111a1f 46%, #050b128f 76%, #03070de0 100%),
+    linear-gradient(180deg, #060d1640 0%, #08111a24 35%, #08111a24 64%, #050b1280 82%, #03070de6 100%);
+  mask-image: linear-gradient(180deg, transparent 0% 54%, #000 62%);
 }
-#overlay .battle-stage.sts[data-scenery-key="winter-platform-minimal"] .sts-foe .sts-figure::after {
+& .sts-foe .sts-figure::after {
   height: 16px;
   background: radial-gradient(ellipse, #0f182d70, #15223733 46%, transparent 74%);
-}
+}}
 #overlay .battle-stage.sts .battle-victory-feedback {
   position: absolute;
   z-index: 32;

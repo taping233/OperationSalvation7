@@ -178,10 +178,10 @@ describe('single-hover raw-hand context at the command boundary', () => {
     expect(domain.getCardPlayAvailability('u0', 0, true, context).reason.code).toBe('INFUSION_REQUIRED');
     state.interaction = { kind: 'card', uid: 'u0', fuelUids: ['u1'] };
     expect(availability(1, context).status).toBe('ready');
-    expect(services.executionAvailability).toHaveBeenLastCalledWith('u0', self, ['u1'], false);
+    expect(services.executionAvailability).toHaveBeenLastCalledWith('u0', expect.objectContaining(self), ['u1'], false);
     state.freeCast.add('u0');
     expect(availability(2, context).status).toBe('ready');
-    expect(services.executionAvailability).toHaveBeenLastCalledWith('u0', self, ['u1'], true);
+    expect(services.executionAvailability).toHaveBeenLastCalledWith('u0', expect.objectContaining(self), ['u1'], true);
     state.interaction.fuelUids = [];
     expect(availability(3, context).reason.code).toBe('INFUSION_REQUIRED');
     expect(domain.submitCardPlay('u0', 0).reason.code).toBe('INFUSION_REQUIRED');

@@ -1,3 +1,4 @@
+import { altarMocks, altarStateFields } from './helpers/environment-fixtures.js';
 /* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：祭坛献祭两分支、消耗区复原、
  * 钥匙复原链与火堆自动复原（只验证不改行为）的事务顺序钉现状。
  * 审计结论：五拍齐全、无「已领/未领搞混」缺陷——
@@ -5,7 +6,7 @@
  *   弃 3 激活：卡不足 3 张拒开选卡器；确认后 markActivated+visited+saveGame；
  *   碎片兑换：先发卡后扣 2 碎片（满包拒收不扣碎片，2026-09-10 留言 #30/#532 注释口径）；
  *   奖励二选一：离开保留选择；传说+装备选择后冻结到持久化领奖页，容量失败保留；
- *   复原页 restoreOne：left 校验+满包拒绝（卡留口袋）；修鞋铺 picks=1 复原 1 张自动收尾；
+ *   复原页 restoreOne：left 校验+满包拒绝（卡留口袋）；战地整备的复原分支 picks=1，复原 1 张自动收尾；
  *   火堆（10-02 玩法批改「发现两张自动复原」，本包不动行为）：满包先检后扣口袋、
  *   consumeCurrentCell 收格、saveGame 落盘；
  *   钥匙复原（base.restore）：钥匙不足 nokey 拒绝、仓库满 full 拒绝、mutate 事务内扣钥匙入仓。
@@ -51,12 +52,7 @@ let UI, acts;
 function makeGame() {
   return {
     state: 'idle', layerIdx: 0, trackPos: 0, turn: 1, mode: 'normal', myClass: 'wu',
-    hp: 20, maxHp: 30, coins: 0, fragments: 0, visited: {},
-    ownedCards: [], usedPocket: [], inventory: [],
-    // 祭坛/火堆运行期标记：原地 assign 复用同一 game 对象时必须显式复位，
-    // 否则上一用例的激活/上锁状态会泄漏到下一用例
-    altarActivated: undefined, altarItemSacrificed: undefined, altarRewardPending: undefined,
-    bossKilled: false, _fireRestKey: undefined, nodeRewards: {},
+    hp: 20, maxHp: 30, ...altarStateFields(),
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     bagCap: () => st.bagCapN,
     usedSlots() { return this.ownedCards.length; },
@@ -91,23 +87,7 @@ beforeEach(async () => {
   };
   window.SDT = {
     UI,
-    Sound: { sfx: vi.fn(), scene: vi.fn() },
-    Icons: { rich: x => x },
-    Meta: { addXpToProgress: x => ({ after: x }), track: vi.fn() },
-    Cards: {
-      all: () => [
-        { id: 'lg1', name: '传说甲', rarity: '传说', type: '法术' },
-        { id: 'eq1', name: '装备甲', rarity: '史诗', type: '装备' },
-      ],
-      classPool: () => [{ id: 'ab1', name: '能力甲', rarity: '职业', type: '能力卡' }],
-      isRandomObtainable: () => true,
-      randomClassCard: () => null,
-      cardHTML: c => c.name,
-      sellPrice: () => 1,
-    },
-    MAP: { chestKinds:{ small:{ name:'小宝箱' } } },
-    Base: { isSha: () => false, bagCap:() => st.bagCapN },
-    Motion: undefined,
+    ...altarMocks(st, () => vi),
   };
 });
 
@@ -244,7 +224,7 @@ it('奖励② 传说+装备：满包时两张保留，整理后领取一次并�
   const take = acts.chestTake;
   take(); take();
   expect(game.ownedCards.map(o => o.card.id)).toEqual(['lg1', 'eq1']);
-  expect(document.body.textContent).toContain('2 张已入背包');
+  expect(document.querySelectorAll('.reward-unit-state.is-received')).toHaveLength(2);
   acts.chestContinue();
   expect(game.state).toBe('idle');
   expect(window.SDT.Chests.isOpen()).toBe(false);
@@ -287,9 +267,9 @@ it('紧急撤离：卡不足 3 张时 payExit 直调被拒、不开选卡器、�
   expect(st.saves.length).toBe(savesBefore);
 });
 
-/* ---------- 复原页（修鞋铺 cmtn7qttxqo4 共用链 openPocketRestore） ---------- */
+/* ---------- 复原页（战地整备 cmtn7qttxqo4 的复原分支共用 openPocketRestore） ---------- */
 
-it('复原页：picks=1（修鞋铺口径）复原 1 张自动收尾；未复原直接离开也收尾', async () => {
+it('复原页：picks=1（战地整备复原分支）复原 1 张自动收尾；未复原直接离开也收尾', async () => {
   const game = st.game;
   game.usedPocket.push({ card: { id: 'a', name: '消耗甲', type: '法术' }, count: 2 });
   const { openPocketRestore } = await importScenes();
@@ -302,7 +282,7 @@ it('复原页：picks=1（修鞋铺口径）复原 1 张自动收尾；未复原
 
   done = 0;
   openPocketRestore(1, () => { done++; });
-  acts.fireDone();   // 不复原直接「继续旅程」：幂等收尾，口袋不动
+  await acts.fireDone();   // 不复原直接「继续旅程」：幂等收尾，口袋不动
   expect(done).toBe(1);
   expect(game.usedPocket[0].count).toBe(1);
   expect(game.ownedCards).toHaveLength(1);
@@ -319,7 +299,7 @@ it('复原页：满包拒绝——口袋不动、卡不进包、可继续点收�
   acts.restoreOne({ name: '消耗甲' });
   expect(game.usedPocket.some(p => p.card.name === '消耗甲')).toBe(true);   // 留在口袋
   expect(game.ownedCards).toHaveLength(1);
-  acts.fireDone();
+  await acts.fireDone();
   expect(done).toBe(1);
 });
 
@@ -338,7 +318,7 @@ it('火堆：确认才回血复原，结算落盘且重入不重复；继续才�
   expect(game.hp).toBe(20);
   expect(game.visited['0,0']).toBeUndefined();
   const rest = acts.fireHeal;
-  rest(); rest(); acts.fireRestore();
+  await rest(); await rest(); await acts.fireRestore();
   expect(game.hp).toBe(30);   // heal 10 封顶
   expect(game.ownedCards.map(o => o.card.name)).toEqual(['消耗甲']);   // 只有可复原的那张
   expect(game.usedPocket).toHaveLength(1);   // 装备堆仍在
@@ -351,7 +331,7 @@ it('火堆：确认才回血复原，结算落盘且重入不重复；继续才�
   expect(game.nodeRewards).toEqual(result);
   expect(game.hp).toBe(30);
   expect(game.ownedCards).toHaveLength(1);
-  acts.fireDone();
+  await acts.fireDone();
   expect(game.state).toBe('idle');
 });
 
@@ -364,7 +344,7 @@ it('火堆：满包时不扣口袋（先检后扣），deny 播报后照常收�
   expect(document.body.textContent).toContain('背包空间不足');
   expect(document.querySelector('[data-act="fireBag"]')).not.toBeNull();
   expect(st.game.visited).toEqual({});
-  acts.fireHeal(); acts.fireRestore();
+  await acts.fireHeal(); await acts.fireRestore();
   expect(game.usedPocket[0].count).toBe(1);   // 口袋未扣
   expect(game.ownedCards).toHaveLength(0);
   expect(document.querySelector('[data-act="fireRestore"]').disabled).toBe(true);
@@ -386,7 +366,7 @@ it('A3文案：祭坛回赠复原保持祭坛身份，继续仍走原回调', as
   expect(document.querySelector('.battle-decision.pocket-restore')).not.toBeNull();
   expect(st.game.altarRewardPending).toBe(false);
   expect(st.game.usedPocket[0].count).toBe(1);
-  acts.fireDone();
+  await acts.fireDone();
   expect(st.game.state).toBe('idle');
   expect(st.saves.length).toBeGreaterThan(0);
 });
@@ -396,7 +376,7 @@ it('A3文案：满包火堆准确报告容量，不能谎报没有可复原牌',
   st.game.usedPocket.push({ card: { id: 'a', name: '消耗甲', type: '法术' }, count: 1 });
   const { openFireRest } = await importAltar();
   openFireRest();
-  acts.fireHeal(); acts.fireRestore();
+  await acts.fireHeal(); await acts.fireRestore();
   const messages = UI.log.mock.calls.map(c => String(c[0])).join('\n');
   expect(document.body.textContent).toContain('背包空间不足');
   expect(messages).not.toContain('没有可复原的卡牌');
@@ -405,7 +385,7 @@ it('A3文案：满包火堆准确报告容量，不能谎报没有可复原牌',
   expect(st.game.visited['0,0']).toBeUndefined();
   expect(st.game.nodeRewards['0,0'].restoreUsed).toBe(false);
   expect(st.game.state).toBe('modal');
-  acts.fireDone();
+  await acts.fireDone();
   expect(st.game.state).toBe('idle');
 });
 
@@ -429,14 +409,14 @@ it('火堆取消休整保留收益，再进入必须重新确认', async () => {
   const done = vi.fn(() => { st.game.state = 'idle'; });
   openFireRest(done);
   const oldRest = acts.fireHeal;
-  acts.fireLeave();
+  await acts.fireLeave();
   expect(st.game.hp).toBe(20);
   expect(st.game.nodeRewards).toEqual({});
   expect(done).toHaveBeenCalledWith(false);
   openFireRest(done);
   oldRest();
   expect(st.game.hp).toBe(20);
-  acts.fireHeal(); acts.fireRestore();
+  await acts.fireHeal(); await acts.fireRestore();
   expect(st.game.hp).toBe(30);
 });
 
@@ -444,7 +424,7 @@ it('入城补给直接展示待领卡牌，逐张领取与刷新满包规则保�
   const game = st.game;
   game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['lg1','eq1'], taken:[] };
   const { openEntrySupply } = await importAltar();
-  expect(openEntrySupply()).toBe(true);
+  expect(await openEntrySupply()).toBe(true);
   expect(game.ownedCards).toHaveLength(0);
   expect(document.querySelector('[data-act="clsEntryReveal"]')).toBeNull();
   expect(game.entrySupply.taken).toEqual([]);
@@ -452,55 +432,56 @@ it('入城补给直接展示待领卡牌，逐张领取与刷新满包规则保�
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('0 / 2');
   expect(document.querySelector('.entry-supply-status').getAttribute('aria-live')).toBe('polite');
   expect(document.querySelector('.reward-rule')).toBeNull();
-  expect(document.querySelector('.entry-supply-status').textContent).toBe('已领取0 / 2');
+  expect(document.querySelector('.entry-supply-status').textContent).toBe('0 / 2');
   expect(document.querySelector('.reward-notice')).toBeNull();
   expect(document.querySelector('.entry-supply-status small')).toBeNull();
   expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();
-  acts.clsEntryContinue();
+  await acts.clsEntryContinue();
   expect(game.state).toBe('modal');
   acts.clsEntryCard({ i:0 });
   expect(UI.showCardZoom.mock.lastCall[1].footer).toContain('entrySupplyTake');
   st.bagCapN = 0;
-  acts.entrySupplyTake({ i:0 });
+  await acts.entrySupplyTake({ i:0 });
   expect(game.entrySupply.taken).toEqual([]);
   expect(document.querySelector('.bt-card-reveal')).toBeNull();
   expect(document.querySelector('.reward-notice').textContent).toContain('仍保留在入口');
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('0 / 2');
   st.bagCapN = 1;
-  acts.entrySupplyTake({ i:0 });
+  await acts.entrySupplyTake({ i:0 });
   expect(game.entrySupply.taken).toEqual([0]);
   expect(document.querySelector('.bt-card-reveal-caption').textContent).toBe('传说 · 已入背包');
-  expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(1);
+  expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(2);
+  expect(document.querySelectorAll('[data-act="entrySupplyTake"]')).toHaveLength(1);
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('1 / 2');
   expect(document.querySelector('.reward-notice')).toBeNull();
   expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();
-  acts.clsEntryContinue();
+  await acts.clsEntryContinue();
   expect(game.state).toBe('modal');
   expect(game.ownedCards[0].brought).toBe(1);
   expect(game.classCard.id).toBe('lg1');
   const oldTake = acts.entrySupplyTake;
   game.entrySupply = JSON.parse(JSON.stringify(game.entrySupply));
-  openEntrySupply();
+  await openEntrySupply();
   oldTake({ i:1 });
   expect(game.ownedCards).toHaveLength(1);
-  acts.entrySupplyTake({ i:0 });
+  await acts.entrySupplyTake({ i:0 });
   expect(game.ownedCards).toHaveLength(1);
-  acts.entrySupplyTake({ i:1 });
+  await acts.entrySupplyTake({ i:1 });
   expect(game.entrySupply.taken).toEqual([0]);
   st.bagCapN = 2;
-  acts.entrySupplyTake({ i:1 });
+  await acts.entrySupplyTake({ i:1 });
   expect(game.entrySupply.taken).toEqual([0,1]);
   expect(game.visited['0,0']).toBe(1);
   expect(game.ownedCards).toHaveLength(2);
-  expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(0);
-  expect(document.querySelector('.entry-supply-status b').textContent).toBe('2 / 2');
+  expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(2);
+  expect(document.querySelector('.entry-supply-status')).toBeNull();
   expect(document.querySelector('.reward-rule')).toBeNull();
-  expect(document.querySelector('.entry-reward-complete p').textContent).toBe('补给已领齐');
+  expect([...document.querySelectorAll('.reward-unit-state')].map(node=>node.textContent)).toEqual(['已收下','已收下']);
   expect(document.querySelector('.entry-supply-status small')).toBeNull();
   expect(document.querySelector('.reward-notice')).toBeNull();
   expect(document.querySelector('[data-act="clsEntryContinue"]').textContent).toContain('继续探索');
   expect(document.querySelector('[data-act="entrySupplyTake"]')).toBeNull();
-  acts.clsEntryContinue();
+  await acts.clsEntryContinue();
   expect(game.state).toBe('idle');
   expect(document.getElementById('body').textContent).toBe('');
 });
@@ -508,32 +489,35 @@ it('入城补给直接展示待领卡牌，逐张领取与刷新满包规则保�
 it('零领取存档恢复直接展示卡牌，旧页领取回调失效且重复点击不多领', async () => {
   st.game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['lg1','eq1'], taken:[] };
   const { openEntrySupply } = await importAltar();
-  openEntrySupply();
+  await openEntrySupply();
   const oldTake = acts.entrySupplyTake;
   st.game.entrySupply = JSON.parse(JSON.stringify(st.game.entrySupply));
-  openEntrySupply();
+  await openEntrySupply();
   expect(document.querySelector('[data-act="clsEntryReveal"]')).toBeNull();
   expect(document.querySelectorAll('.reward-unit')).toHaveLength(2);
   expect(st.game.ownedCards).toHaveLength(0);
   oldTake({ i:0 });
   expect(st.game.entrySupply.taken).toEqual([]);
   const take = acts.entrySupplyTake;
-  take({ i:0 }); take({ i:0 });
+  await take({ i:0 }); await take({ i:0 });
   expect(st.game.entrySupply.taken).toEqual([0]);
   expect(st.game.ownedCards).toHaveLength(1);
-  expect(document.querySelectorAll('.reward-unit')).toHaveLength(1);
+  expect(document.querySelectorAll('.reward-unit')).toHaveLength(2);
+  expect(document.querySelectorAll('[data-act="entrySupplyTake"]')).toHaveLength(1);
 });
 
 it.each([0, 1])('入城补给仅有 %i 张时仍按实际总数显示并在全部收下后确认', async total => {
   st.game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['lg1'].slice(0, total), taken:[] };
   const { openEntrySupply } = await importAltar();
-  openEntrySupply();
-  expect(document.querySelector('.entry-supply-status b').textContent).toBe(`0 / ${total}`);
+  await openEntrySupply();
+  if(total) expect(document.querySelector('.entry-supply-status b').textContent).toBe(`0 / ${total}`);
+  else expect(document.querySelector('.entry-supply-status')).toBeNull();
   if (total) {
     expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();
-    acts.entrySupplyTake({ i:0 });
+    await acts.entrySupplyTake({ i:0 });
   }
-  expect(document.querySelector('.entry-supply-status b').textContent).toBe(`${total} / ${total}`);
+  expect(document.querySelector('.entry-supply-status')).toBeNull();
+  expect([...document.querySelectorAll('.reward-unit-state')].filter(node=>node.textContent==='已收下')).toHaveLength(total);
   expect(document.querySelector('[data-act="clsEntryContinue"]')).not.toBeNull();
   expect(st.game.ownedCards).toHaveLength(total);
 });

@@ -1,27 +1,29 @@
+import { targetedHostedRuleSnapshot } from './hosted-rule-snapshot.js';
+import { eliteBestiaryCards } from './elite-bestiary.js';
 /* 由 cards.js 拆出（2026-09-22 六文件重构批2）：卡池数据（EVENTS_0919 + TABLETOP/TT2-TT8 + BESTIARY + TT10/TT11）。
  * 逐字搬迁，属性顺序=原文件顺序；在壳 cards.js 中展开装配为 SDT.Cards，键面与数据字节不变。 */
 import { resolveCardCatalog } from './cards.catalog.js';
 export const dataSlice = {
     EVENTS_0919: [
-      { id: 'tt6-demondeal', name: '隧道血契', cost: 0, rarity: '衍生', type: '事件', desc: '-5 血，获得 1 个军用保险柜。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-bandits', name: '暴雨劫道', cost: 0, rarity: '衍生', type: '事件', battle: true, desc: '可逃离，或迎战反抗组织拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 ×2。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-mystery', name: '实验室余粮', cost: 0, rarity: '衍生', type: '事件', desc: '投骰领取：1~3 点获得员工通行证A碎片 ×1，4~6 点获得 3 币；也可离开。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-goldmine', name: '塌方采掘点', cost: 0, rarity: '衍生', type: '事件', desc: '稳妥取走 3 币，或冒险深挖获得 6 币并损失 3 血。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-goldhammer', name: '满电动力锤', cost: 0, rarity: '衍生', type: '事件', desc: '选择领取「闪金之锤」，或接受送信委托：下一家商店随机两格商品免费，排除初始攻击。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-relief', name: '临时救护站', cost: 0, rarity: '衍生', type: '事件', desc: '选择回复 6 点生命，或投骰获得 1 张随机招式。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-airdrop', name: '污染空投箱', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中选择一项。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-chestdraw', name: '熔断物资箱', cost: 0, rarity: '衍生', type: '事件', desc: '从大、中、小宝箱中随机抽取 1 个开启。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-systemsupply', name: '末班配送无人机', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片和木材卡 ×1。', value: 0, sellable: false, unrandom: true },
-      { id: 'cmtn7qttxqo4', name: '巷口修鞋匠', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片；复原 1 张卡牌。', value: 0, sellable: false, unrandom: true },
-      { id: 'ev19-vital', name: '高压急救', cost: 0, rarity: '衍生', type: '事件', desc: '生命上限 +3，并回复 3 点生命。', value: 0, sellable: false, unrandom: true },
-      { id: 'ev19-pearlbox', name: '遗落的珍珠匣', cost: 0, rarity: '衍生', type: '事件', desc: '获得卡牌「珍珠盒」。', value: 0, sellable: false, unrandom: true },
-      { id: 'ev19-fireballs', name: '双焰走私', cost: 0, rarity: '衍生', type: '事件', desc: '获得两张「火球」。', value: 0, sellable: false, unrandom: true },
-      { id: 'ev19-classchest', name: '黑箱调拨', cost: 0, rarity: '衍生', type: '事件', desc: '获得 1 个职业·密封物资箱。', value: 0, sellable: false, unrandom: true },
-      { id: 'ev19-recode', name: '故障重编', cost: 0, rarity: '衍生', type: '事件', desc: '选择 2 张招式或装备卡，随机变为同稀有度、同类型的卡牌。', value: 0, sellable: false, unrandom: true },
-      { id: 'ev19-potions', name: '避难市集药摊', cost: 0, rarity: '衍生', type: '事件', desc: '从 3 瓶随机药水中选择 1 瓶获得。', value: 0, sellable: false, unrandom: true },
-      { id: 'ev19-arrows', name: '海堤箭库', cost: 0, rarity: '衍生', type: '事件', desc: '获得 2 张随机非职业箭系列卡牌。', value: 0, sellable: false, unrandom: true },
-      { id: 'ev19-gamble', name: '地下商场黑市', cost: 0, rarity: '衍生', type: '事件', desc: '每次投入 3 币，50% 获得预览的 1 张装备和 2 张招式；第 5 次必定成功，可随时放弃。', value: 0, sellable: false, unrandom: true },
-      { id: 'ev19-quartermaster', name: '装备征用令', cost: 0, rarity: '衍生', type: '事件', desc: '花费 3 币，从 3 张随机装备卡中选择 1 张获得。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-demondeal', name: '受困运输队', cost: 0, rarity: '衍生', type: '事件', desc: '损失 5 血搬出军用保险柜，或领取 1 件普通装备，也可直接离开。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-bandits', name: '武装截查', cost: 0, rarity: '衍生', type: '事件', battle: true, desc: '可逃离，或迎战截道拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 ×2。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-mystery', name: '失联配给柜', cost: 0, rarity: '衍生', type: '事件', desc: '投骰领取：1~3 点获得员工通行证A碎片 ×1，4~6 点获得 3 币；或固定领取 2 币，也可离开。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-goldmine', name: '塌陷地下库', cost: 0, rarity: '衍生', type: '事件', desc: '取走外侧的 3 币；或损失 3 血领取 6 币；或消耗随身木材卡 ×1，安全领取 6 币。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-goldhammer', name: '中断的接应', cost: 0, rarity: '衍生', type: '事件', desc: '选择领取「闪金之锤」，或接受接应委托：下一家商店随机两格商品免费，排除初始攻击。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-relief', name: '隔离线急救', cost: 0, rarity: '衍生', type: '事件', desc: '选择回复 6 点生命，或投骰获得 1 张随机招式。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-airdrop', name: '封锁区投送', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中选择一项。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-chestdraw', name: '封存储备库', cost: 0, rarity: '衍生', type: '事件', desc: '从大、中、小宝箱中随机抽取 1 个开启，或领取木材与口粮各 1 张。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-systemsupply', name: '撤离登记台', cost: 0, rarity: '衍生', type: '事件', desc: '选择获得员工通行证A碎片 ×1 与木材卡 ×1，或碎片 ×1 与 2 币。', value: 0, sellable: false, unrandom: true },
+      { id: 'cmtn7qttxqo4', name: '战地整备', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片 ×1；另选复原 1 张卡牌或回复 3 点生命。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-vital', name: '封存针剂', cost: 0, rarity: '衍生', type: '事件', desc: '生命上限 +3 并回复 3 点生命，或只回复 8 点生命。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-pearlbox', name: '撤离遗存', cost: 0, rarity: '衍生', type: '事件', desc: '获得卡牌「珍珠盒」，或接受急救回复 6 点生命。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-fireballs', name: '封装火种', cost: 0, rarity: '衍生', type: '事件', desc: '获得两张「火球」，或获得一张「火球」并回复 3 点生命。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-classchest', name: '无署名封条', cost: 0, rarity: '衍生', type: '事件', desc: '获得 1 个职业·密封物资箱，或领取 3 币。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-recode', name: '异常改装台', cost: 0, rarity: '衍生', type: '事件', desc: '两张招式或装备随机转换为同稀有度同类型的卡；或支付 3 币，仅转换一张，候选最多三选一。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-potions', name: '应急药品站', cost: 0, rarity: '衍生', type: '事件', desc: '从 3 瓶随机药水中选择 1 瓶，或接受处理回复 6 点生命。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-arrows', name: '撤防射击位', cost: 0, rarity: '衍生', type: '事件', desc: '获得 2 张随机非职业箭系列卡牌，或从最多 3 张随机非职业箭系列卡牌中选择 1 张。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-gamble', name: '暗巷赌约', cost: 0, rarity: '衍生', type: '事件', desc: '每次投入 3 币，50% 获得预览的 1 张装备和 2 张招式，第 5 次保底；或花费 2 币购买一张可预览的普通招式。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-quartermaster', name: '转运军需', cost: 0, rarity: '衍生', type: '事件', desc: '支付 3 币从 3 张随机装备选 1 张，或交出一件随身装备换同稀有度装备，候选最多三选一；也可离开。', value: 0, sellable: false, unrandom: true },
     ],
     // 拥有伤害词条（红色伤害宝石）的类型
 
@@ -89,7 +91,7 @@ export const dataSlice = {
       { id: 'tt3-frost-slash',   name: '霜月斩',   cost: 4, rarity: '稀有', type: '武术', dmg: 2, dmgType: 'attack', desc: '攻⁺2，附加冰冻，冻结状态 2 回合。' },
       { id: 'tt3-noon-duel',     name: '正午决战', cost: 4, rarity: '稀有', type: '武术', desc: '下回合开始，连开四枪！四响。' },
       { id: 'tt3-armor-rush',    name: '破甲急袭', cost: 3, rarity: '古朴', type: '武术', dmg: 2, dmgType: 'attack', desc: '攻⁺2，附加 2 层流血。' },
-      { id: 'tt3-double-shot',   name: '连射',     cost: 2, rarity: '古朴', type: '武术', dmg: 2, desc: '2 点伤害，2 次。' },
+      { id: 'tt3-double-shot',   name: '三连射',     cost: 2, rarity: '古朴', type: '武术', dmg: 2, desc: '2 点伤害，2 次。' },
       { id: 'tt3-bandage',       name: '包扎',     cost: 2, rarity: '初始', type: '武术', desc: '+3 血，+3 甲。' },
       { id: 'tt3-purify-arrow',  name: '净化箭',   cost: 2, rarity: '古朴', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻⁺1，净化负面效果。' },
       { id: 'tt3-arrow-rain',    name: '箭雨',     cost: 2, rarity: '古朴', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻⁺1，全体攻击。' },
@@ -203,12 +205,12 @@ export const dataSlice = {
     // 设计者定版——这一类是事件，只能在棋盘的事件格中触发，无法在背包中使用，
     // 背包里会记录本局触发过哪些事件（game.js 事件格结算 + 背包「事件记录」）。
     // 因此稀有度记为「衍生」（不进商店/随机池），并全部加 unrandom 双保险；
-    // 闪金之锤角标 <事件战斗>、盗匪横行含反抗组织拾荒者×5，battle: true 供战斗结算识别。
+    // 闪金之锤角标 <事件战斗>、盗匪横行含截道拾荒者×5，battle: true 供战斗结算识别。
     // tt6 事件卡与下方桌面区同名同 id 双版并存（微信版 233 张定版口径）——两处描述必须
     // 保持一致（2026-09-19 审计 D-5 对齐），实际结算效果以 game.run.flow eventChoiceSpec V2 为准。
     TABLETOP6: [
       { id: 'tt6-demondeal',   name: '恶魔交易',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '-5血，获得1个大宝箱。' },
-      { id: 'tt6-bandits',     name: '盗匪横行',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。' },
+      { id: 'tt6-bandits',     name: '盗匪横行',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '截道拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。' },
       { id: 'tt6-mystery',     name: '神秘补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A碎片，+2 币。' },
       { id: 'tt6-goldmine',    name: '金矿',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得 3 币。' },
       { id: 'tt6-goldhammer',  name: '闪金之锤',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '造成 5 点伤害，若斩杀敌人，+2 币。' },
@@ -313,41 +315,42 @@ export const dataSlice = {
     // 生物图鉴（第九批，2026-09-04 定版：新卡牌类型「生物」——与武术/法术等并列）。
     // 2026-09-09 老板定版：新世界观命名 + 五层分布（联邦部队 / 反抗组织 / 双阵营能力者 / 变异生物体）。
     // 全部敌人信息录入：数值与 mapData.js monsters / altar.bosses 一一对应
-    // （角标「攻-血」即设计者记法，如巨兽「荒渊」7-40）；art 字段指向战场立绘 id。
+    // （角标「攻-血」即设计者记法，如封街巨躯7-40）；art 字段指向战场立绘 id。
     // 生物卡是敌人图鉴：unrandom + 衍生稀有度双重排除，不进商店/发现/随机池，
     // 也无法在对战中打出（battle.core unplayableReason）。
     BESTIARY: [
+      ...eliteBestiaryCards,
       // —— 第 1 层 外围荒地：联邦巡防 vs 反抗拾荒 ——
       { id: 'foe-infantry',   name: '联邦巡防兵',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'infantry',   desc: '攻击 4 / 生命 4。联邦·第1层。普通近战，行动无特殊之处。' },
-      { id: 'foe-archer',     name: '联邦射手',       cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'archer',     desc: '攻击 5 / 生命 3。联邦·第1层。远程攻击。' },
-      { id: 'foe-bandit',     name: '反抗组织拾荒者', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'bandit',     desc: '攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（盗匪横行 ×5）。' },
+      { id: 'foe-archer',     name: '封锁线枪手',       cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'archer',     desc: '攻击 5 / 生命 3。联邦·第1层。远程攻击。' },
+      { id: 'foe-bandit',     name: '截道拾荒者', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'bandit',     desc: '攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（盗匪横行 ×5）。' },
       // —— 第 2 层 风雪哨线：双方正规部队 ——
-      { id: 'foe-cavalry',    name: '联邦机动兵',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'cavalry',    desc: '攻击 5 / 生命 6。联邦·第2层。蓄力攻击：隔回合强化一击。' },
+      { id: 'foe-cavalry',    name: '封锁线突击兵',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'cavalry',    desc: '攻击 5 / 生命 6。联邦·第2层。蓄力攻击：隔回合强化一击。' },
       { id: 'foe-orc_jav',    name: '反抗组织掷弹兵', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'orc_jav',    desc: '攻击 6 / 生命 4。反抗·第2层。远程投掷。' },
       // —— 第 3 层 冻土遗迹：异变初现 ——
-      { id: 'foe-wolf_rider', name: '变异雪狼',       cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'wolf_rider', desc: '攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。' },
-      { id: 'foe-orc_axe',    name: '甲壳变异体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'orc_axe',    desc: '攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。' },
-      // —— 第 4 层 高危战区：元素异变体 + 双阵营能力者 ——
-      { id: 'foe-fire_el',    name: '灼热异变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'fire_el',    desc: '攻击 10 / 生命 7。变异·第4层。攻击。' },
-      { id: 'foe-water_el',   name: '腐蚀异变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'water_el',   desc: '攻击 7 / 生命 10。变异·第4层。防御/反击型，隔回合蓄势。' },
+      { id: 'foe-wolf_rider', name: '裂颚匍行体',       cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'wolf_rider', desc: '攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。' },
+      { id: 'foe-orc_axe',    name: '板壳畸变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'orc_axe',    desc: '攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。' },
+      // —— 第 4 层 高危战区：污染畸变体 + 双阵营能力者 ——
+      { id: 'foe-fire_el',    name: '灼囊畸变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'fire_el',    desc: '攻击 10 / 生命 7。变异·第4层。攻击。' },
+      { id: 'foe-water_el',   name: '渗蚀畸变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'water_el',   desc: '攻击 7 / 生命 10。变异·第4层。防御/反击型，隔回合蓄势。' },
       { id: 'foe-esper_crow',   name: '白鸦', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'esper_crow',
         desc: '攻击 8 / 生命 5。联邦能力者·第4层。碎晶齐射：远程多段攻击。' },
       { id: 'foe-esper_candle', name: '烛火', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'esper_candle',
         desc: '攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击。' },
       // —— 第 5 层 污染核心：深层异变 + 双阵营能力者 + 巨兽 ——
-      { id: 'foe-grass_el',   name: '滋生异变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'grass_el',   desc: '攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。' },
+      { id: 'foe-grass_el',   name: '囊生畸变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'grass_el',   desc: '攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。' },
       { id: 'foe-esper_silence', name: '静默', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'esper_silence',
         desc: '攻击 7 / 生命 9。联邦能力者·第5层。声场压制：攻击并施加诅咒。' },
       { id: 'foe-esper_echo',    name: '回声', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'esper_echo',
         desc: '攻击 9 / 生命 7。反抗能力者·第5层。声波叠伤：远程多段攻击。' },
-      { id: 'foe-dragon',     name: '巨兽「荒渊」',   cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'dragon', desc: '攻击 7 / 生命 40。变异·第5层精英。重击/特殊；第一回合蓄力不会攻击。' },
+      { id: 'foe-dragon',     name: '封街巨躯',   cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'dragon', desc: '攻击 7 / 生命 40。变异·第5层精英。重击/特殊；第一回合蓄力不会攻击。' },
       // —— BOSS（污染核心三首脑）——
-      { id: 'foe-boss_general', name: '肃清总督', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'boss_general',
+      { id: 'foe-boss_general', name: '封控指挥官', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'boss_general',
         desc: '攻击 5 / 生命 50。BOSS·联邦。词缀【军威】：每个回合结束时攻击力 +2。' },
-      { id: 'foe-boss_orc',   name: '变异巢母',   cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'boss_orc',
+      { id: 'foe-boss_orc',   name: '囊巢母体',   cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'boss_orc',
         desc: '攻击 4 / 生命 45。BOSS·变异。词缀【狂乱】：每回合攻击两次，每次附加 1 层流血或中毒。' },
-      { id: 'foe-boss_elem',  name: '异能领主',   cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'boss_elem',
-        desc: '攻击 8 / 生命 48。BOSS·能力者。词缀【元素庇幕】：偶数回合减免所有伤害（破甲可克制）。' },
+      { id: 'foe-boss_elem',  name: '隔离区看守',   cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'boss_elem',
+        desc: '攻击 8 / 生命 48。BOSS·变异。词缀【闭合隔膜】：偶数回合减免所有伤害（破甲可克制）。' },
     ],
 
     // 桌游手绘卡 · 第十批（2026-09-07 设计者实机定版同步）：与设计者实机卡库导出
@@ -397,7 +400,7 @@ export const dataSlice = {
       { id: 'tt3-frost-slash', name: '霜月斩', cost: 2, rarity: '史诗', type: '武术', desc: '攻（+2），附加冰冻与禁疗，持续1回合。', dmg: 2, dmgType: 'attack', value: 4 },
       { id: 'tt3-noon-duel', name: '正午决战', cost: 1, rarity: '史诗', type: '武术', desc: '下回合开始时，连开四枪！（每枪造成2点固定伤害）。', dmg: 0, value: 3 },
       { id: 'tt3-armor-rush', name: '破甲急袭', cost: 2, rarity: '稀有', type: '武术', desc: '攻（+4），附加 2 层流血。', dmg: 4, dmgType: 'attack', value: 3 },
-      { id: 'tt3-double-shot', name: '连射', cost: 1, rarity: '稀有', type: '武术', desc: '造成2 点固定伤害，触发 3 次。', dmg: 2, dmgType: 'fixed', value: 2 },
+      { id: 'tt3-double-shot', name: '三连射', cost: 1, rarity: '稀有', type: '武术', desc: '造成2 点固定伤害，触发 3 次。', dmg: 2, dmgType: 'fixed', value: 2 },
       { id: 'tt3-bandage', name: '包扎', cost: 1, rarity: '古朴', type: '武术', desc: '+3 血，+3 甲。', dmg: 0, heal: 3, armor: 3, rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'heal', amountField: 'heal' }, { op: 'armor', amountField: 'armor' }] } } },
       { id: 'tt3-purify-arrow', name: '净化箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），净化自身。', dmg: -1, dmgType: 'attack', value: 2 },
       { id: 'tt3-arrow-rain', name: '箭雨', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），目标为敌方全体。', dmg: -1, dmgType: 'attack', value: 2 },
@@ -472,7 +475,7 @@ export const dataSlice = {
       { id: 'tt4-woodify', name: '能量饮料', cost: 0, rarity: '古朴', type: '道具', desc: '回复 6 点生命。', dmg: 0, heal: 6, value: 2 },
       "tt5-galaxy-voyage",
       { id: 'tt6-demondeal', name: '恶魔交易', cost: 0, rarity: '衍生', type: '事件', desc: '-5血，获得1个大宝箱。', dmg: 0, unrandom: true },
-      { id: 'tt6-bandits', battle: true, name: '盗匪横行', cost: 0, rarity: '衍生', type: '事件', desc: '反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。', dmg: 0, unrandom: true },
+      { id: 'tt6-bandits', battle: true, name: '盗匪横行', cost: 0, rarity: '衍生', type: '事件', desc: '截道拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。', dmg: 0, unrandom: true },
       "tt6-mystery",
       { id: 'tt6-goldmine', name: '金矿', cost: 0, rarity: '衍生', type: '事件', desc: '获得 3 币。', dmg: 0, unrandom: true },
       { id: 'tt6-airdrop', name: '空中补给', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中抽取一项。', dmg: 0, unrandom: true },
@@ -582,6 +585,7 @@ export const dataSlice = {
       "cmtn1wnhhym",   // 同名不同效果版本按老板 2026-09-19 规则追加「-改」
       { id: "cmtn28jv33wx", name: "搜索大宝箱", cost: 0, rarity: "衍生", type: "法术", dmg: 0, desc: "随机获取3张卡牌", value: 3, sellable: false },
       { id: "cmtn6bge52qt", name: "复原药水", cost: 0, rarity: "稀有", type: "道具", dmg: 0, desc: "地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。", value: 3, sellable: false, rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 2 }] } } },
+      // TABLETOP11 历史定义；播种后由 EVENTS_0919 同 id 覆盖为现行「战地整备」及二选一说明。
       { id: "cmtn7qttxqo4", name: "修鞋铺", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得员工通行证A碎片；复原1张卡牌", value: 0, sellable: false },
       // —— 以下 25 张共享 id 卡取设计者稿（整卡覆盖） ——
       { id: "starter-emergency-bandage", name: "应急绷带", cost: 0, rarity: "稀有", type: "道具", dmg: 0, heal: 12, desc: "回复12 点生命。", value: 0, sellable: false },
@@ -604,11 +608,11 @@ export const dataSlice = {
       { id: "tt8-hero-ranger", cls: "侠客", hero: true, name: "天剑诛魔·云阳", cost: 2, rarity: "古朴", type: "能力卡", dmg: 0, desc: "断念：将天启剑与诛魔剑洗入牌库。", value: 8, unrandom: true },
       { id: "tt8-hero-warrior", cls: "战士", hero: true, name: "青龙化身", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, desc: "真龙降世：本局对战中，将‘初始攻击’化为‘青龙偃月斩’。", value: 8, unrandom: true },
       // 敌人图鉴 5 张（与 BESTIARY 同 id）：2026-09-09 老板定版新世界观命名，名字与描述随 BESTIARY 同步
-      { id: "foe-orc_axe", name: "甲壳变异体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。", value: 0, sellable: false, art: "orc_axe" },
-      { id: "foe-wolf_rider", name: "变异雪狼", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。", value: 0, sellable: false, art: "wolf_rider" },
-      { id: "foe-fire_el", name: "灼热异变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 10 / 生命 7。变异·第4层。攻击。", value: 0, sellable: false, art: "fire_el" },
-      { id: "foe-water_el", name: "腐蚀异变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 7 / 生命 10。变异·第4层。防御/反击型，隔回合蓄势。", value: 0, sellable: false, art: "water_el" },
-      { id: "foe-grass_el", name: "滋生异变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。", value: 0, sellable: false, art: "grass_el" },
+      { id: "foe-orc_axe", name: "板壳畸变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。", value: 0, sellable: false, art: "orc_axe" },
+      { id: "foe-wolf_rider", name: "裂颚匍行体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。", value: 0, sellable: false, art: "wolf_rider" },
+      { id: "foe-fire_el", name: "灼囊畸变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 10 / 生命 7。变异·第4层。攻击。", value: 0, sellable: false, art: "fire_el" },
+      { id: "foe-water_el", name: "渗蚀畸变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 7 / 生命 10。变异·第4层。防御/反击型，隔回合蓄势。", value: 0, sellable: false, art: "water_el" },
+      { id: "foe-grass_el", name: "囊生畸变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。", value: 0, sellable: false, art: "grass_el" },
     ], 'TABLETOP11'),
 
     // 第十二批：射线/研发系列新卡 17 张（2026-09-23 老板卡表）。全新 KEY（TT12_KEY）播种，老档启动补播。
@@ -639,7 +643,7 @@ export const dataSlice = {
     TABLETOP13: [
   { id: 'tt13-poor-meal', name: '穷鬼套餐', cost: 0, rarity: '古朴', type: '装备', value: 2,
     desc: '如果你的手牌数小于等于3，你的英雄技能变为0费。',
-    rules: { version: 1, battle: { target: { side: 'self', area: false }, hosted: ['batch13-poor-meal'] } } },
+    rules: targetedHostedRuleSnapshot("batch13-poor-meal", "self") },
   {
     "id": "tt13-spring",
     "name": "源头活水",
@@ -647,18 +651,7 @@ export const dataSlice = {
     "rarity": "古朴",
     "type": "法术",
     "desc": "复原你的英雄技能并抽1张牌。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "self",
-          "area": false
-        },
-        "hosted": [
-          "batch13-spring"
-        ]
-      }
-    }
+    "rules": targetedHostedRuleSnapshot("batch13-spring", "self")
   },
   {
     "id": "tt13-magazine",
@@ -667,18 +660,7 @@ export const dataSlice = {
     "rarity": "古朴",
     "type": "装备",
     "desc": "主动技能：随机获取两张枪术招式。本局对战只能使用一次。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "self",
-          "area": false
-        },
-        "hosted": [
-          "batch13-magazine"
-        ]
-      }
-    }
+    "rules": targetedHostedRuleSnapshot("batch13-magazine", "self")
   },
   {
     "id": "tt13-snipe",
@@ -687,18 +669,7 @@ export const dataSlice = {
     "rarity": "古朴",
     "type": "武术",
     "desc": "造成9点固定伤害，击杀敌人回复1点能量。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "enemy",
-          "area": false
-        },
-        "hosted": [
-          "batch13-snipe"
-        ]
-      }
-    },
+    "rules": targetedHostedRuleSnapshot("batch13-snipe", "enemy"),
     "dmg": 9,
     "dmgType": "fixed"
   },
@@ -709,18 +680,7 @@ export const dataSlice = {
     "rarity": "稀有",
     "type": "武术",
     "desc": "获得6点护甲，如果你本回合没有造成任何伤害，额外获得4点护甲。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "self",
-          "area": false
-        },
-        "hosted": [
-          "batch13-guard"
-        ]
-      }
-    }
+    "rules": targetedHostedRuleSnapshot("batch13-guard", "self")
   },
   {
     "id": "tt13-bitter-rain",
@@ -729,18 +689,7 @@ export const dataSlice = {
     "rarity": "稀有",
     "type": "法术",
     "desc": "对一名敌人附加2层中毒，如果其已有诅咒，额外附加1项其他诅咒。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "enemy",
-          "area": false
-        },
-        "hosted": [
-          "batch13-bitter-rain"
-        ]
-      }
-    }
+    "rules": targetedHostedRuleSnapshot("batch13-bitter-rain", "enemy")
   },
   {
     "id": "tt13-mind-control",
@@ -749,18 +698,7 @@ export const dataSlice = {
     "rarity": "职业",
     "type": "法术",
     "desc": "选择一名受伤的非BOSS敌人，使其变为己方随从。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "enemy",
-          "area": false
-        },
-        "hosted": [
-          "batch13-mind-control"
-        ]
-      }
-    },
+    "rules": targetedHostedRuleSnapshot("batch13-mind-control", "enemy"),
     "cls": "牧师",
     "unrandom": true
   },
@@ -800,18 +738,7 @@ export const dataSlice = {
     "rarity": "史诗",
     "type": "装备",
     "desc": "每次受到伤害后，对随机敌人造成3点固定伤害，并有50%概率抽1张牌。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "self",
-          "area": false
-        },
-        "hosted": [
-          "batch13-scale-armor"
-        ]
-      }
-    }
+    "rules": targetedHostedRuleSnapshot("batch13-scale-armor", "self")
   },
   {
     "id": "tt13-astrolabe",
@@ -820,18 +747,7 @@ export const dataSlice = {
     "rarity": "传说",
     "type": "装备",
     "desc": "在你本回合打出第一张武术招式后回复1点能量；下回合切换为法术，逐回合交替。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "self",
-          "area": false
-        },
-        "hosted": [
-          "batch13-astrolabe"
-        ]
-      }
-    }
+    "rules": targetedHostedRuleSnapshot("batch13-astrolabe", "self")
   },
   {
     "id": "tt13-soul-contract",
@@ -840,18 +756,7 @@ export const dataSlice = {
     "rarity": "职业",
     "type": "法术",
     "desc": "选择1名敌人并标记；其受到伤害后，对随机一名其他敌人造成2点真实伤害。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "enemy",
-          "area": false
-        },
-        "hosted": [
-          "batch13-soul-contract"
-        ]
-      }
-    },
+    "rules": targetedHostedRuleSnapshot("batch13-soul-contract", "enemy"),
     "cls": "降临者",
     "unrandom": true
   },
@@ -862,18 +767,7 @@ export const dataSlice = {
     "rarity": "职业",
     "type": "法术",
     "desc": "发现1张法术牌，并将其具有抽到时施放的2张复制洗入牌库。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "self",
-          "area": false
-        },
-        "hosted": [
-          "batch13-stellar-divination"
-        ]
-      }
-    },
+    "rules": targetedHostedRuleSnapshot("batch13-stellar-divination", "self"),
     "cls": "牧师",
     "unrandom": true
   },
@@ -884,18 +778,7 @@ export const dataSlice = {
     "rarity": "传说",
     "type": "法术",
     "desc": "将牌库中的所有招式与装备变为稀有度高1级的同类型卡牌（最高传说），随机交换费用，然后弃掉所有手牌。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "self",
-          "area": false
-        },
-        "hosted": [
-          "batch13-chaos-deck"
-        ]
-      }
-    }
+    "rules": targetedHostedRuleSnapshot("batch13-chaos-deck", "self")
   },
   {
     "id": "tt13-mercy",
@@ -904,18 +787,7 @@ export const dataSlice = {
     "rarity": "稀有",
     "type": "武术",
     "desc": "攻（+3），无法致死（至少保留1点生命）。",
-    "rules": {
-      "version": 1,
-      "battle": {
-        "target": {
-          "side": "enemy",
-          "area": false
-        },
-        "hosted": [
-          "batch13-mercy"
-        ]
-      }
-    },
+    "rules": targetedHostedRuleSnapshot("batch13-mercy", "enemy"),
     "dmg": 3,
     "dmgType": "attack"
   }

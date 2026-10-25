@@ -1,0 +1,49 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>入城演出 · 内存隔离验收</title></head><body>
+<p>正在加载入城演出内存隔离页…</p>
+<script type="module">
+// The complete real preparation/new-run path uses this page's private memory.
+// Never read or forward the player's persistent Storage objects.
+function memoryStorage() {
+  const entries = new Map();
+  return Object.create(null, {
+    length:{get:() => entries.size}, key:{value:index => [...entries.keys()][index] ?? null},
+    getItem:{value:key => entries.get(String(key)) ?? null},
+    setItem:{value:(key,value) => { entries.set(String(key),String(value)); }},
+    removeItem:{value:key => { entries.delete(String(key)); }}, clear:{value:() => entries.clear()},
+  });
+}
+Object.defineProperty(window,'localStorage',{configurable:true,value:memoryStorage()});
+Object.defineProperty(window,'sessionStorage',{configurable:true,value:memoryStorage()});
+const markup = new DOMParser().parseFromString(await (await fetch('/index.html')).text(),'text/html');
+const base = document.createElement('base'); base.href='/'; document.head.prepend(base);
+for (const style of markup.querySelectorAll('link[rel="stylesheet"],style')) document.head.append(style.cloneNode(true));
+for (const script of markup.querySelectorAll('script')) script.remove();
+document.body.innerHTML=markup.body.innerHTML;
+await import('/src/main.js');
+if (!document.body.dataset.state) document.dispatchEvent(new Event('DOMContentLoaded',{bubbles:true}));
+// Review controls use the same production film; the real departure path above
+// remains available. A held frame is explicitly labelled and never starts a run.
+const { startDepartureHandoff } = await import('/src/ui/departure-transition.js');
+const { createDepartureCinematic } = await import('/src/ui/departure-cinematic.js');
+const { CINEMATIC_PROFILES } = await import('/src/ui/cinematic-profiles.js');
+const reviewStyle=document.createElement('style');
+reviewStyle.textContent='.departure-review-controls{position:fixed;bottom:12px;left:12px;right:12px;z-index:2000;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px;background:#111b;color:#ccc;font:12px sans-serif}.departure-review-controls button{font:inherit;padding:8px 12px}body:has(.departure-film) .departure-review-controls{display:none}';
+document.head.append(reviewStyle);
+const controls=document.createElement('nav'); controls.className='departure-review-controls';
+controls.setAttribute('aria-label','入城演出隔离预览');
+const featured=['departure','camp','photo','achievement','boss','altar','extraction'];
+const brief=Object.keys(CINEMATIC_PROFILES).filter(kind => !featured.includes(kind));
+controls.innerHTML=featured.map(kind => `<button type="button" data-review="replay" data-kind="${kind}">${CINEMATIC_PROFILES[kind].label}</button>`).join('')+`<select aria-label="日常短切" data-review-cut>${brief.map(kind => `<option value="${kind}">${CINEMATIC_PROFILES[kind].label}</option>`).join('')}</select><button type="button" data-review="cut">播放短切</button><label><input type="checkbox" data-review-hold> 插画定格</label><span>仅本页内存 · 不读写真实存档</span>`;
+controls.addEventListener('click',event => {
+  const trigger=event.target.closest('[data-review]');
+  if(!trigger) return;
+  const kind=trigger.dataset.review==='cut' ? controls.querySelector('[data-review-cut]').value : trigger.dataset.kind;
+  if(!controls.querySelector('[data-review-hold]').checked || CINEMATIC_PROFILES[kind].renderer!=='image') startDepartureHandoff(() => true, null, kind);
+  else {
+    const film=createDepartureCinematic(kind); document.body.append(film.element);
+    const close=film.element.querySelector('button'); close.setAttribute('aria-label','关闭定格预览');
+    close.addEventListener('click',() => film.dispose(),{once:true}); film.play();
+  }
+});
+document.body.append(controls);
+</script></body></html>

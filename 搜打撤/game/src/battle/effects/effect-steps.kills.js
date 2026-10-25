@@ -19,10 +19,10 @@ export function killsSteps(s) {
           const cap = m[2] ? +m[2] : null;
           let targets;
           if (cap != null) {
-            targets = getAlive().filter(f => !f.dead && (f.affix ? false : true) && (f.atk || 0) <= cap).slice(0, n);
+            targets = getAlive().filter(f => !f.dead && !f.affix && !f.boss && !f.controlBoss && (f.atk || 0) <= cap).slice(0, n);
           } else {
             // 无门槛分支同样排除词缀 BOSS（卡面「消灭受伤敌人（非 BOSS）」；对齐上方门槛分支）
-            targets = getAlive().filter(f => !f.dead && (f.affix ? false : true) && f.hp > 0 && f.hp < (f.maxHp || f.hp)).slice(0, n);
+            targets = getAlive().filter(f => !f.dead && !f.affix && !f.boss && !f.controlBoss && f.hp > 0 && f.hp < (f.maxHp || f.hp)).slice(0, n);
           }
           let killed = 0;
           for (const f of targets) {

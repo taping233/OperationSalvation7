@@ -1,3 +1,4 @@
+import { damageRuleFields } from './helpers/environment-fixtures.js';
 /* M1 卡牌规则化数据迁移批 D1 锁定（2026-09-27）：cards.sync.m1.js ensureM1OnplayRules。
  * 每张迁的卡一条用例，锁定四件事：
  *   1) validateCardRules 通过；2) inspectCardRuleCapability supported；
@@ -27,9 +28,7 @@ const TABLETOP11 = rowsById(dataSlice.TABLETOP11);
 // 期望回填结果：version:1 / onPlay 有序 ops，字段风格与 ensureA3* 定义一致。
 const EXPECTED_RULES = {
   'starter-attack': {
-    version: 1,
-    battle: { target: { side: 'enemy', area: false } },
-    triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] },
+    ...damageRuleFields(false, 'chosenEnemy'),
   },
   'tt3-skewer': {
     version: 1,

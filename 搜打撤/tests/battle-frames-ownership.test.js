@@ -1,3 +1,4 @@
+import { pixiFrameMocks } from './helpers/environment-fixtures.js';
 import { expect, it, beforeEach, afterEach, afterAll, vi } from 'vitest';
 
 const pixi = vi.hoisted(() => {
@@ -36,35 +37,7 @@ const pixi = vi.hoisted(() => {
 });
 
 vi.mock('pixi.js', () => ({
-  utils: { isWebGLSupported: () => true },
-  RENDERER_TYPE: { WEBGL: 1, CANVAS: 2 },
-  Application: pixi.Application,
-  Sprite: pixi.Sprite,
-  Texture: { EMPTY: pixi.emptyTexture },
-  Assets: {
-    load: async url => {
-      pixi.loaded.push(url);
-      pixi.inFlight += 1;
-      pixi.maxInFlight = Math.max(pixi.maxInFlight, pixi.inFlight);
-      try {
-        if (pixi.loadGate) await pixi.loadGate;
-        if (pixi.blocked) await pixi.blocked(url);
-        if (pixi.loadDelayMs) await new Promise(resolve => setTimeout(resolve, pixi.loadDelayMs));
-        if ([...pixi.missing].some(path => url.includes(path))) throw new Error('missing specific frame');
-        if ([...pixi.idlePaths].some(path => url.includes(path))) {
-          if (pixi.idleEnabled) return pixi.idleTexture;
-          throw new Error('missing test idle frame');
-        }
-        if (url.includes('/sprite-v1/') && !url.includes('/neutral.webp')) return { id: url };
-        if (url.includes('/atk-wind.webp')) return pixi.extraTexture;
-        throw new Error('missing test frame');
-      } finally { pixi.inFlight -= 1; }
-    },
-    unload: async url => {
-      pixi.unloaded.push(url);
-      if (pixi.unloadGate) await pixi.unloadGate;
-    },
-  },
+  ...pixiFrameMocks(pixi),
 }));
 
 import { setPerformanceSettings } from '../game/src/core/performance-settings.js';
@@ -303,7 +276,7 @@ it('measures the next available idle when the first texture is missing and relea
 function settingsPanel(body, mode = 'settings') {
   const scene = body.querySelector('.battle-stage');
   const UI = {
-    el: { ovBody: body },
+    el: { ovBody: body, overlay:body.closest('#overlay') },
     showOverlay(title, html, nextMode, options = {}) {
       this._overlayRevision = (this._overlayRevision || 0) + 1;
       if (options.battleBody) { if (!options.battleBody(html)) return; }

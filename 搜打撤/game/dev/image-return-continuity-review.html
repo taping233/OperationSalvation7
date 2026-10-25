@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>图片恢复与返回连续性核验</title>
+<style>
+body{margin:0;background:#151d26;color:#e8eef0;font:18px/1.6 system-ui,sans-serif;padding:28px;box-sizing:border-box}main{max-width:1000px;margin:auto}h1{font-size:26px}h2{font-size:21px}section{padding:20px;margin:18px 0;border:1px solid #647786;background:#202c38}button{font:inherit;color:inherit;background:#334858;border:1px solid #91a5af;padding:7px 14px;cursor:pointer}button:disabled{opacity:.5}.cards{display:flex;gap:20px}.hsc-art{height:150px;width:130px}.hsc-art img{width:100%;height:100%;object-fit:contain}.card-browser-footer{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.browse-scroll{height:130px;overflow:auto;border:1px solid #72838d;padding:8px}.browse-scroll p{margin:14px}.status{color:#c6e2d4}.note{color:#b1bec7;font-size:15px}.visual-resource-recovery.list-image-recovery{width:100%}
+</style>
+<main><h1>图片恢复与返回连续性核验</h1><p class="note">独立开发页，使用正式恢复模块与返回模块，不读取或写入游戏存档。模拟失败按钮派发受控 error 事件，用已加载画面检查同地址恢复。</p>
+<section id="cards"><h2>局部图片恢复</h2><div class="cards"><button data-browser-key="one"><div class="hsc-art"><img src="/assets/portraits/avatars/heixiang.webp" data-asset-key="review-one" alt="黑像"></div></button><button data-browser-key="two"><div class="hsc-art"><img src="/assets/portraits/avatars/baita.webp" data-asset-key="review-two" alt="白塔"></div></button></div><div class="card-browser-footer"><button id="simulate">模拟两张图片加载失败</button><button id="other">其他可用操作</button></div><p id="imageResult" class="status" role="status">等待操作</p></section>
+<section><h2>返回恢复</h2><div id="browse"></div><p id="returnResult" class="status" role="status">等待操作</p></section></main>
+<script type="module">
+import {createListImageRecovery} from '../src/ui/list-image-recovery.js';
+import {captureOverlayReturnState,restoreOverlayReturnState} from '../src/ui/overlay-return-state.js';
+const root=document.getElementById('cards');
+createListImageRecovery({root,host:root.querySelector('.card-browser-footer'),onRecovered:()=>{
+  document.getElementById('imageResult').textContent='正式恢复模块已完成图片恢复；卡片和原地址保留';
+}});
+document.getElementById('simulate').onclick=()=>{
+  root.querySelectorAll('img').forEach(image=>image.dispatchEvent(new Event('error')));
+  document.getElementById('imageResult').textContent='两张图标记失败；画面与其他操作保留';
+};
+const browse=document.getElementById('browse');let snapshot;
+function render(settled=false){
+  browse.innerHTML=`<label>分类 <select id="category"><option>全部</option><option>装备</option></select></label> <label>页码 <input id="page" type="number" min="1" max="9" value="1" style="width:55px"></label><div id="reading" data-zone="collection" class="browse-scroll ${settled?'is-settled':'is-entering'}">${Array.from({length:15},(_,i)=>`<p>收藏条目 ${i+1}</p>`).join('')}</div><button id="detail" data-card="same-card" class="${settled?'':'selected'}">查看详情</button>`;
+  document.getElementById('detail').onclick=()=>{
+    snapshot=captureOverlayReturnState(browse,document.getElementById('detail'),{readContext:()=>({category:document.getElementById('category').value,page:document.getElementById('page').value})});
+    browse.innerHTML='<p>详情页：原列表暂时卸载</p><button id="back">返回列表</button>';
+    document.getElementById('back').onclick=()=>{render(true);restoreOverlayReturnState(browse,snapshot,{applyContext:state=>{document.getElementById('category').value=state.category;document.getElementById('page').value=state.page;}});document.getElementById('returnResult').textContent=`分类 ${document.getElementById('category').value}，第 ${document.getElementById('page').value} 页，滚动 ${document.getElementById('reading').scrollTop}，焦点 ${document.activeElement.id}`;};
+  };
+}
+render();
+</script></html>

@@ -1,3 +1,5 @@
+import { isStarterAttackPoolMember, doublesLegacyBleed } from '../../cards/card-legacy-battle-policy.js';
+import { isClassCard } from '../../cards/card-rarity.js';
 /* 由 effect-steps.js 拆出（2026-09-22 六文件重构批1）：模块级共享常量与 hitFoe 工厂。
  * 供壳 effect-steps.js 组装 shared 端口后注入各分节；外部 API（POOL_NUM_MAP/parsePoolNoun）
  * 仍由 effect-steps.js 转出，导入方路径不变。 */
@@ -40,11 +42,6 @@ export function parsePoolNoun(raw, myClass) {
   if (/^(其它|其他)职业/.test(s)) { s = ''; classNoun = true; preds.push(c => !!c.cls && !!myClass && c.cls !== myClass && c.type !== '能力卡'); }   // 江湖救急只发现其它职业的招式与装备（2026-09-16 留言）
   else if (/^本职业/.test(s)) { s = ''; classNoun = true; preds.push(c => !!c.cls && c.cls === myClass); }
   if (/^招式/.test(s)) { s = s.replace(/^招式/, ''); preds.push(c => ['武术', '法术'].includes(c.type)); }
-  // 复合池必须带「或」；纯稀有度名词仅按品质过滤。
-  // 「发现一张传说或能力卡」的名词会被上层后缀匹配吃掉「能力卡」只剩「传说或」，
-  // 因此结尾的「能力/或」都要兼容（2026-09-16 留言「神秘召唤卡池错误」修复）
-  const om = s.match(/^(传说|史诗|稀有|古朴)(?:或能力卡|或能力|或)$/);
-  if (om) { s = ''; preds.push(c => c.rarity === om[1] || c.type === '能力卡'); }
   const typeKey = ['武术', '法术', '装备', '能力卡', '道具'].find(t => s === t);
   if (typeKey) { s = ''; preds.push(c => c.type === typeKey); }
   const rarKey = ['传说', '史诗', '稀有', '古朴'].find(r => s === r);
@@ -54,7 +51,7 @@ export function parsePoolNoun(raw, myClass) {
   if (['火球', '箭', '箭矢', '药水', '杀', '禁咒', '形态', '射线'].includes(base)) {
     s = '';
     const key = base === '箭矢' ? '箭' : base;
-    if (key === '杀') preds.push(c => c.id === 'starter-attack' || c.name === '杀' || c.name === '初始攻击');
+    if (key === '杀') preds.push(c => isStarterAttackPoolMember(c));
     else if (key === '火球') preds.push(series ? (c => String(c.name || '').includes('火球')) : (c => c.name === '火球'));
     else if (key === '箭') preds.push(c => String(c.name || '').includes('箭'));
     else if (key === '药水') preds.push(c => c.type === '道具' && String(c.name || '').includes('药水'));   // 药水池定版（2026-09-09）：所有带「药水」名字的道具——法术「药水魔法」不在池内
@@ -67,7 +64,7 @@ export function parsePoolNoun(raw, myClass) {
   if (/^注能/.test(s)) { s = ''; preds.push(c => +(c.infuse || 0) > 0 || /注能/.test(String(c.desc || ''))); }
   if (!preds.length || s) return null;   // 有未识别的残留名词 → 交回通用池，避免误配
   const pred = /** @type {((card: unknown) => boolean) & { allowClassCards?: boolean }} */ (
-    (card) => preds.every(p => p(card))
+    (card) => (classNoun || !isClassCard(/** @type {import('../../cards/card-rarity.js').ClassCardInput} */ (card))) && preds.every(p => p(card))
   );
   if (classNoun) pred.allowClassCards = true;   // 显式职业池：buildDiscoverPool 放行职业卡
   return pred;
@@ -86,7 +83,7 @@ export function makeHitFoe(deps) {
       const shieldBefore = t.defense?.shield || 0;
       const source = caster.source === 'enemy' ? 'enemy' : 'player';
       const bonus = source === 'player' && typeof getFrozenTargetBonus === 'function' ? getFrozenTargetBonus(t) : 0;
-      const bleedBonus = source === 'player' && type === 'attack' && (ctx.card?.id === 'tt3-fly-arrowhawk' || /流血伤害翻倍/.test(String(ctx.card?.desc || '')))
+      const bleedBonus = source === 'player' && type === 'attack' && doublesLegacyBleed(ctx.card)
         ? Math.max(0, +t.status?.bleed || 0) : 0;
       const r = typeof dealEffectDamage === 'function'
         ? dealEffectDamage({ caster, target: t, amount: n + bonus + bleedBonus, type, card: ctx.card, source })

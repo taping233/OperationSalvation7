@@ -4,11 +4,13 @@ import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync, unlinkSync
 import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
 import { collectVerifiedChestFrameAliases, collectVerifiedRuntimeAssetAliases } from '../scripts/runtime-asset-aliases.mjs';
 
 const gameRoot = path.dirname(fileURLToPath(new URL('../game/index.html', import.meta.url)));
 const assetsRoot = path.join(gameRoot, 'assets');
 const fixtures = [];
+const manifestArray = source => Array.from(runInNewContext(source.toString().replace('export default ', 'globalThis.result = ')));
 afterEach(() => {
   for (const dir of fixtures.splice(0)) rmSync(dir, { recursive: true, force: true });
   vi.doUnmock('node:fs');
@@ -199,12 +201,12 @@ describe('byte-identical chest output aliases', () => {
     expect(buildAliases['assets/portraits/frames/changwuyu/sprite-v1/neutral.webp']).toBe('assets/portraits/battle/changwuyu.webp');
     plugin.buildStart();
     const manifestPath = path.join(gameRoot, 'src/generated/art-manifest.js');
-    expect(read(manifestPath).toString()).toContain(canonical);
-    expect(read(manifestPath).toString()).not.toContain(alias);
-    expect(read(manifestPath).toString()).toContain('frame-02.webp');
-    expect(read(manifestPath).toString()).toContain('portraits/battle/changwuyu.webp');
-    expect(read(manifestPath).toString()).not.toContain('sprite-v1/f000.webp');
-    expect(read(manifestPath).toString()).not.toContain('sprite-v1/neutral.webp');
+    expect(manifestArray(read(manifestPath))).toContain(canonical);
+    expect(manifestArray(read(manifestPath))).not.toContain(alias);
+    expect(manifestArray(read(manifestPath)).some(file => file.endsWith('/frame-02.webp'))).toBe(true);
+    expect(manifestArray(read(manifestPath))).toContain('portraits/battle/changwuyu.webp');
+    expect(manifestArray(read(manifestPath)).some(file => file.endsWith('/sprite-v1/f000.webp'))).toBe(false);
+    expect(manifestArray(read(manifestPath)).some(file => file.endsWith('/sprite-v1/neutral.webp'))).toBe(false);
     plugin.closeBundle();
     expect(files.has(path.join(config.build.outDir, 'assets', canonical))).toBe(true);
     expect(files.has(path.join(config.build.outDir, 'assets', alias))).toBe(false);
@@ -222,7 +224,7 @@ describe('byte-identical chest output aliases', () => {
     expect(nextAliases['assets/portraits/frames/changwuyu/sprite-v1/neutral.webp']).toBeUndefined();
     plugin.buildStart();
     expect(filename({ originalFileNames: [`assets/${alias}`] })).toBe(`assets/${alias}`);
-    expect(read(manifestPath).toString()).toContain(alias);
+    expect(manifestArray(read(manifestPath))).toContain(alias);
     plugin.closeBundle();
     expect(read(path.join(config.build.outDir, 'assets', alias)).toString()).toBe('redrawn');
     expect(execSync).not.toHaveBeenCalled();
@@ -346,7 +348,7 @@ describe('runtime alias plan stable boundaries', () => {
     expect(aliases['assets/cards/expedition-starters/rations.webp']).toBe('assets/cards/resources/ration.webp');
     expect(aliases['assets/thumbs/cards/expedition-starters/rations.webp']).toBe('assets/thumbs/cards/resources/ration.webp');
     f.plugin.buildStart();
-    const manifest = f.read(path.join(gameRoot, 'src/generated/thumb-manifest.js')).toString();
+    const manifest = manifestArray(f.read(path.join(gameRoot, 'src/generated/thumb-manifest.js')));
     expect(manifest).toContain('cards/expedition-starters/rations.webp');
     expect(manifest).toContain('cards/items/tt-token-color.webp');
     f.plugin.closeBundle();

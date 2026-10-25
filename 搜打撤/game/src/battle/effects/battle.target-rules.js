@@ -1,3 +1,4 @@
+import { isLegacyRotSeed, matchesStarterAttackCostName, needsLegacyImitateSource } from '../../cards/card-legacy-battle-policy.js';
 import { HAND_COST_PATTERNS, HAND_COST_CN_NUM } from './hand-cost-patterns.js';
 import { ownsBuiltinExecutionDomain } from '../../cards/builtin-card-execution.js';
 import { triggerExecutionPlan } from '../../cards/card-execution-plan.js';
@@ -31,7 +32,7 @@ function isAreaEffect(card) {
     return !!battle.target.area;
   }
   if (ownsBuiltinExecutionDomain(card)) return nativePlayOps(card).some(operation => operation.target === 'allEnemies');
-  if (card?.id === 'cc-rot-seed') return false;
+  if (isLegacyRotSeed(card)) return false;
   return AOE_PATTERN.test(String(card.desc || ''));
 }
 
@@ -65,7 +66,7 @@ function targetSideFor(card, damageTypes) {
     if (ops.some(operation => ['heal', 'armor', 'cleanse'].includes(operation.op))) return 'self';
     return null;
   }
-  if (card?.id === 'cc-rot-seed') return 'enemy';
+  if (isLegacyRotSeed(card)) return 'enemy';
   // 需求 #18（2026-09-09）：未声明结构化目标的旧装备仍指向自己。
   if (card.type === '装备') return 'self';
   const isMove = damageTypes.includes(card.type);
@@ -89,7 +90,7 @@ function handCostOf(card) {
 }
 function handCardMatches(card, type) {
   if (!type) return true;
-  if (type === '杀' || type === '初始攻击') return /^(杀|初始攻击)$/.test(card.name || '');
+  if (type === '杀' || type === '初始攻击') return matchesStarterAttackCostName(card);
   return card.type === type;
 }
 
@@ -99,7 +100,7 @@ function unplayableReasonFor(card, mode, ctx) {
   if (card.type === '生物') return '生物卡是敌人图鉴，记录敌人信息，无法打出';
   const battle = card && card.rules && card.rules.battle;
   // 原始复制卡仅在手牌内响应新打出的武术；变形后 findCard 返回被复制卡，自动解除此门。
-  if (battle?.handTransform || (!ownsBuiltinExecutionDomain(card) && card.id === 'tt7-imitate') || battle?.hosted?.includes('imitate')) {
+  if (battle?.handTransform || needsLegacyImitateSource(card, ownsBuiltinExecutionDomain(card))) {
     return '先打出一张武术牌，使本牌变形';
   }
   // 封印之牌（受缚之残影/封印肢体1-4/化形后的深渊主宰，2026-09-16 定版）：

@@ -60,7 +60,7 @@ describe('A3-PREP-01 预设摘要给出资格失败原因', () => {
     const root = mount({ stash: [{ card, count: 2 }], characters: {}, pets: {} });
     const summary = root.querySelector('.prep-summary');
     expect(summary.className).toContain('blocked');
-    expect(summary.textContent).toContain('人物尚未拥有');
+    expect(root.querySelector('.prep-qual-hint').textContent).toContain('人物尚未拥有');
   });
 
   it('人物已拥有时不追加资格提示', () => {

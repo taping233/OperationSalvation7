@@ -1,4 +1,5 @@
 /** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
+import { syncCommittedRunTopBar } from '../../ui/run-top-bar.js';
 // 每个挂载的舞台等待真正的解码/首帧结果；简化显示选择按场次保留。
 export function waitForBattleImages(root) {
   const cleanups = [];
@@ -101,6 +102,7 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
   function finish(record, state) {
     if (!current(record)) return;
     active = null; dispose(record); record.stage.dataset.battleEntry = state;
+    syncCommittedRunTopBar(record.overlay);
     completed = { token: record.token, state, stage: record.stage, overlay: record.overlay };
     if (state === 'degraded') simplified(record.stage);
     record.resolveReady(true);
@@ -128,6 +130,8 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
   function blockKeys(event) {
     if (!active) return;
     if (!current(active)) { cancel(); return; }
+    // The shared system header is outside the loading battlefield's inert root.
+    if (event.target instanceof Element && event.target.closest('#runTopBar button, #runTopBar [role="button"]')) return;
     event.stopImmediatePropagation();
     if (event.key === 'Tab') { event.preventDefault(); /** @type {HTMLButtonElement} */ (active.status.querySelector('button:not([hidden])'))?.focus(); }
   }

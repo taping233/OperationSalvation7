@@ -1,3 +1,4 @@
+import { battleRules, quietUiMocks } from './helpers/environment-fixtures.js';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 
@@ -8,7 +9,7 @@ window.HTMLCanvasElement.prototype.getContext = () => ctx;
 document.body.innerHTML = '<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div>';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {} }, FX: { feedback() {} },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
 };
 await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');
@@ -20,8 +21,7 @@ const Base = window.SDT.Base;
 const resumeHook = vi.fn(() => ({ ok: true }));
 const uiLogs = [];
 Object.assign(window.SDT.UI, {
-  log: message => uiLogs.push(String(message)), refresh: vi.fn(), clearLog() {}, hideOverlay() {}, hideScreen() {}, showScreen() {}, showOverlay() {},
-  act() {}, registerHelp() {}, helpBtn() { return ''; },
+  log: message => uiLogs.push(String(message)), refresh: vi.fn(), ...quietUiMocks(),
 });
 window.SDT.Meta = { setXpMul() {}, track() {} };
 window.SDT.Nest = { renderNestMap: vi.fn() };
@@ -34,7 +34,7 @@ const pendingFor = runId => ({
   totalPocketCount: 2, lostPocketCount: 1, resources: { wood: 1, rations: 2 },
 });
 
-function seedRun(slot) {
+async function seedRun(slot) {
   localStorage.removeItem(RunStorage.key(slot));
   Base.use(slot);
   session._set_active_slot(slot);
@@ -44,7 +44,7 @@ function seedRun(slot) {
   session.game.state = 'idle';
   session.game.layerIdx = 1;
   session.game.trackPos = session.game.layerData[1].entrances[0];
-  expect(session.saveGame()).toBe(true);
+  expect(await session.saveGame()).toBe(true);
   const raw = JSON.parse(localStorage.getItem(RunStorage.key(slot)));
   return { raw, runId: raw._r2.runId };
 }
@@ -56,9 +56,9 @@ function storePending(slot, pending) {
   return localStorage.getItem(RunStorage.key(slot));
 }
 
-beforeEach(() => {
+beforeEach(async () => {
   localStorage.clear();
-  for (let slot = 1; slot <= 5; slot++) RunStorage.remove(slot);
+  for (let slot = 1; slot <= 5; slot++) await RunStorage.remove(slot);
   session._set_active_slot(null);
   session.game.pendingExtraction = null;
   session.game.extractionPending = null;
@@ -74,9 +74,9 @@ beforeEach(() => {
 });
 
 describe('撤离整理会话恢复', () => {
-  it('合法地图与待整理记录只调用恢复 hook，不重进节点或恢复战斗；自动保存保留原串', () => {
+  it('合法地图与待整理记录只调用恢复 hook，不重进节点或恢复战斗；自动保存保留原串', async () => {
     const slot = 2;
-    const { runId } = seedRun(slot);
+    const { runId } = await seedRun(slot);
     const pending = pendingFor(runId);
     const originalRaw = storePending(slot, pending);
 
@@ -89,17 +89,17 @@ describe('撤离整理会话恢复', () => {
     expect(uiLogs.some(message => message.startsWith('—— 置身'))).toBe(false);
     expect(window.SDT.Battle.restore).not.toHaveBeenCalled();
 
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect(localStorage.getItem(RunStorage.key(slot))).toBe(originalRaw);
     session.game.pendingExtraction = null;
     session.game.extractionPending = true;
-    expect(session.saveGame()).toBe(false);
+    expect(await session.saveGame()).toBe(false);
     expect(localStorage.getItem(RunStorage.key(slot))).toBe(originalRaw);
   });
 
-  it('非法整理记录与其他 runId 均在恢复前拒绝，保留对局原串', () => {
+  it('非法整理记录与其他 runId 均在恢复前拒绝，保留对局原串', async () => {
     const slot = 3;
-    const { runId } = seedRun(slot);
+    const { runId } = await seedRun(slot);
     const invalid = pendingFor(runId);
     invalid.phase = 'completed';
     const invalidRaw = storePending(slot, invalid);
@@ -114,9 +114,9 @@ describe('撤离整理会话恢复', () => {
     expect(resumeHook).not.toHaveBeenCalled();
   });
 
-  it('有效待整理 run 遇到 pending journal 时直接读档阻断并保留两份原串', () => {
+  it('有效待整理 run 遇到 pending journal 时直接读档阻断并保留两份原串', async () => {
     const slot = 5;
-    const { runId } = seedRun(slot);
+    const { runId } = await seedRun(slot);
     const runRaw = storePending(slot, pendingFor(runId));
     const journalKey = `sdt-tx-v1-slot${slot}`;
     localStorage.setItem(journalKey, '{}');
@@ -129,10 +129,10 @@ describe('撤离整理会话恢复', () => {
 
   it('开始新 run 会清除运行态中的 pending extraction', async () => {
     const slot = 4;
-    seedRun(slot);
+    await seedRun(slot);
     session.game.pendingExtraction = pendingFor('old-run');
     session.game.extractionPending = true;
-    expect(RunStorage.remove(slot)).toBe(true); // The previous run has ended before another departure.
+    expect(await RunStorage.remove(slot)).toBe(true); // The previous run has ended before another departure.
     expect(await session.newRun('standard', [], { skipClassChoice: true })).not.toBe(false);
     expect(session.game.pendingExtraction).toBeNull();
     expect(session.game.extractionPending).toBeNull();

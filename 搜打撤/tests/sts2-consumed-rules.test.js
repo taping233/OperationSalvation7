@@ -1,11 +1,11 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { matchElsewhere } from '../game/src/battle/effects/effect-verbs.js';
 
 window.SDT ||= { Icons: { img: () => '', TYPE_ART: {} } };
 window.SDT.Icons ||= { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 30, battleHandMax: 200, bossDeckSize: 1,
-  starterSha: 0, battleStartDraw: 99, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(30, 200, 1, 0, 99, 1) }, items: {} };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
@@ -31,8 +31,7 @@ const discount = () => ({ ...spell('discount'), cost: 8, rules: { version: 1,
   triggers: { onPlay: [{ op: 'armor', amount: 1 }] } } });
 function begin(mode, cards) {
   game = { ownedCards: cards.map(card => ({ uid: card.id, card: structuredClone(card) })),
-    hp: 100, maxHp: 100, atk: 1, spellPower: 0, coins: 0, myClass: '战士',
-    characterId: null, state: 'idle', battleActive: false, inventory: [], usedPocket: [],
+    ...playerFields(100, 100, 1, 0, '战士', null), inventory: [], usedPocket: [],
     logs: [], log(value) { this.logs.push(value); }, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, onBattleEnd() {} };
   BattleSession.start(game, [{ id: 'consumed-target', name: '消耗规则靶', hp: 999, atk: 0 }],
     { isBoss: mode === 'boss', directBossStart: true });
@@ -200,7 +199,7 @@ describe.each(['normal', 'boss'])('挖宝底三张候选：%s', mode => {
   });
 });
 
-it('挖宝取到99库实体后保留 normal-sha UID，打出也不会转入战后消耗区', async () => {
+it('挖宝取到10库实体后保留 normal-sha UID，打出也不会转入战后消耗区', async () => {
   const dig = structuredClone(C.all().find(card => card.id === 'tt3-dig-treasure'));
   begin('normal', [dig]);
   const originals = R.drawPile.slice(0, 3), granted = R.granted.length;

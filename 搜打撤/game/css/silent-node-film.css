@@ -1,0 +1,126 @@
+/* Shared timing and resource ownership, distinct staging per use. No tiled image assembly. */
+@property --sf-opening { syntax:'<percentage>'; inherits:false; initial-value:0%; }
+@property --sf-edge { syntax:'<percentage>'; inherits:false; initial-value:130%; }
+:is(#overlay,.page-loading--city,.map-layer-passage,.page-visual-handoff) .camp-entry-cut.silent-node-cut {
+  position:absolute; inset:0!important; width:100%; height:100%; z-index:31; overflow:hidden;
+  background:var(--silent-film-bg,#090b0d)!important; opacity:1; clip-path:none!important;
+  transform:none!important; animation:none!important; pointer-events:none; contain:layout paint;
+}
+.silent-node-cut.silent-node-cut::before,.silent-node-cut.silent-node-cut::after { content:none!important; display:none!important; }
+:is(#overlay,.page-loading--city,.map-layer-passage,.page-visual-handoff) .silent-node-cut > .camp-entry-scenery.silent-film-scenery {
+  position:absolute; inset:0; mask-image:none; opacity:1!important; transform:none!important; animation:none!important;
+}
+.silent-film-scenery { position:absolute; inset:0; overflow:hidden; background:var(--silent-film-bg,#090b0d); }
+:is(#overlay,.page-loading--city,.map-layer-passage,.page-visual-handoff,.departure-film) .silent-film-scenery > .silent-node-art {
+  display:block; visibility:visible; width:100%; height:100%; margin:0; object-fit:cover; object-position:center;
+  opacity:0; transform:none; transform-origin:center;
+}
+.silent-film-scenery > i { display:none; position:absolute; pointer-events:none; }
+:is(.silent-film-playing,.departure-film-playing) .silent-film-scenery > img { animation:sfQuiet var(--silent-film-duration,800ms) ease-out both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="reflection"] > img { animation-name:sfReflection; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="shelter"] > img { animation-name:sfReturn; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="develop"] > img { animation-name:sfDevelop; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="raking-light"] > img { animation-name:sfArchive; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="pressure"] > img { animation-name:sfPressure; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="disturb"] > img { animation-name:sfDisturb; }
+/* A warm room is uncovered by a real curtain while the camera eases back. */
+[data-film-motion="shelter"] > .sf-plane { display:block; top:0; bottom:0; width:50.1%; background:#090b0d; }
+[data-film-motion="shelter"] > .sf-plane-a { left:0; }
+[data-film-motion="shelter"] > .sf-plane-b { right:0; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="shelter"] > .sf-plane-a { animation:sfCurtainA var(--silent-film-duration) cubic-bezier(.65,0,.2,1) both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="shelter"] > .sf-plane-b { animation:sfCurtainB var(--silent-film-duration) cubic-bezier(.65,0,.2,1) both; }
+/* Optical exposure, raking light and occlusion use the whole painting. */
+[data-film-motion="develop"] > .sf-wash { display:block; inset:0; background:#fffdf3; opacity:0; }
+[data-film-motion="raking-light"] > .sf-shade { display:block; inset:0; background:linear-gradient(100deg,#090b0d 30%,#090b0d00 44%,#090b0d00 53%,#090b0d 67%); }
+[data-film-motion="pressure"] > .sf-shade { display:block; inset:0; background:linear-gradient(#090b0d 5%,#090b0d33 58%,#090b0d 97%); }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="develop"] > .sf-wash { animation:sfExposure var(--silent-film-duration) ease-out both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="raking-light"] > .sf-shade { animation:sfRaking var(--silent-film-duration) ease-in-out both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="pressure"] > .sf-shade { animation:sfOcclusion var(--silent-film-duration) ease-out both; }
+/* Frequent actions are gestures across the screen, without another illustrated interlude. */
+[data-film-motion="breath"] > .sf-stroke { display:block; width:72px; height:1px; top:50%; left:calc(50% - 36px); background:#c5c3ba; transform-origin:center; }
+[data-film-motion="scan"] > .sf-stroke { display:block; width:1px; height:42%; left:12%; top:29%; background:linear-gradient(transparent,#c8c4b9,transparent); }
+[data-film-motion="stroke"] > .sf-stroke { display:block; width:140%; height:2px; left:-20%; top:50%; background:linear-gradient(90deg,transparent 15%,#e1dacc 49%,#8d4138 52%,transparent 85%); }
+[data-film-motion="threshold"] > .sf-stroke { display:block; width:1px; height:58%; left:50%; top:21%; background:linear-gradient(transparent,#dfd9cc,transparent); }
+[data-film-motion="glide"] > .sf-wash { display:block; inset:-20%; background:linear-gradient(100deg,transparent 40%,#53585012 50%,transparent 60%); }
+[data-film-motion="unveil"] > .sf-wash,[data-film-motion="aperture"] > .sf-wash { display:block; inset:20% 25%; background:radial-gradient(ellipse,#ddd4bd12,transparent 66%); }
+[data-film-motion="beacon"] > .sf-stroke { display:block; width:1px; height:48px; left:50%; top:calc(50% - 24px); background:#ddd9ce; }
+[data-film-motion="beacon"] > .sf-wash { display:block; inset:20%; background:radial-gradient(ellipse,#c5c2b813,transparent 68%); }
+[data-film-motion="recede"] > .sf-stroke { display:block; width:28%; height:1px; top:50%; left:36%; background:linear-gradient(90deg,transparent,#b2b5ad,transparent); }
+[data-film-motion="disturb"] > .sf-stroke { display:block; width:32%; height:1px; left:34%; top:53%; background:#873e35; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="breath"] > .sf-stroke { animation:sfBreath var(--silent-film-duration) ease both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="scan"] > .sf-stroke { animation:sfScan var(--silent-film-duration) linear both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="stroke"] > .sf-stroke { animation:sfStroke var(--silent-film-duration) cubic-bezier(.2,.65,.2,1) both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="threshold"] > .sf-stroke { animation:sfThreshold var(--silent-film-duration) ease-out both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="glide"] > .sf-wash { animation:sfGlide var(--silent-film-duration) ease both; }
+:is(.silent-film-playing,.departure-film-playing) :is([data-film-motion="unveil"],[data-film-motion="aperture"],[data-film-motion="beacon"]) > .sf-wash { animation:sfAperture var(--silent-film-duration) ease-out both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="beacon"] > .sf-stroke { animation:sfBeacon var(--silent-film-duration) ease-out both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="recede"] > .sf-stroke { animation:sfRecede var(--silent-film-duration) ease-in both; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="disturb"] > .sf-stroke { animation:sfFault var(--silent-film-duration) ease both; }
+/* Extraction is a rising light field from black to unoccupied ivory. */
+[data-film-motion="release"] { background:#090b0d; }
+[data-film-motion="release"] > .sf-wash { display:block; inset:0; background:#e8e5dd; }
+:is(.silent-film-playing,.departure-film-playing) [data-film-motion="release"] > .sf-wash { animation:sfRelease var(--silent-film-duration) cubic-bezier(.35,0,.2,1) both; }
+/* Resource holds and inherited snapshots have different animation ownership. */
+.silent-node-cut.silent-node-cut.silent-film-playing,.silent-node-cut.silent-node-cut.silent-film-playing * { animation-play-state:running!important; }
+.silent-film-settled .silent-film-scenery > * { animation:none!important; }
+.silent-film-settled .silent-film-scenery > img { opacity:1!important; transform:none!important; filter:none!important; clip-path:none!important; }
+.silent-film-settled .silent-film-scenery > :is(.sf-plane,.sf-stroke,.sf-shade) { visibility:hidden; }
+.silent-film-settled [data-film-motion="pressure"] > img { transform:scale(1.08)!important; }
+.silent-film-settled [data-film-motion="release"] > .sf-wash { transform:none; }
+.silent-film-settled [data-film-motion="develop"] > .sf-wash { opacity:0; }
+/* All revealing masks operate only after the existing readiness gate releases. */
+:is(#overlay,.page-loading--city,.page-visual-handoff,.map-layer-passage) .camp-entry-cut.silent-node-cut.leaving,
+:is(#overlay,.page-loading--city,.page-visual-handoff).leaving .camp-entry-cut.silent-node-cut,
+#overlay :is(.transition-handoff-rich,.transition-handoff-held).leaving .camp-entry-cut.silent-node-cut { opacity:1; transition:none; animation:var(--sf-exit,sfExit-fade) var(--silent-film-exit-duration,240ms) ease-in-out both!important; }
+.departure-film.departure-film-revealing {
+  animation:var(--sf-exit,sfExit-fade) var(--silent-film-exit-duration,680ms) ease-in-out both,
+    sfExit-fade var(--silent-film-exit-duration,680ms) ease-in-out both!important;
+}
+[data-film-exit="gate"].leaving,.leaving [data-film-exit="gate"] { mask-image:linear-gradient(90deg,#000 calc(50% - var(--sf-opening)),transparent calc(50% - var(--sf-opening)) calc(50% + var(--sf-opening)),#000 calc(50% + var(--sf-opening))); }
+[data-film-exit="iris"].leaving,.leaving [data-film-exit="iris"] { mask-image:radial-gradient(ellipse at center,transparent 0 var(--sf-opening),#000 calc(var(--sf-opening) + .1%)); }
+[data-film-exit="slash"].leaving,.leaving [data-film-exit="slash"] { mask-image:linear-gradient(125deg,#000 calc(var(--sf-edge) - 1%),transparent var(--sf-edge)); }
+[data-film-exit="slide"].leaving,.leaving [data-film-exit="slide"] { mask-image:linear-gradient(90deg,#000 calc(var(--sf-edge) - 1%),transparent var(--sf-edge)); }
+[data-film-exit="lift"].leaving,.leaving [data-film-exit="lift"] { mask-image:linear-gradient(#000 calc(var(--sf-edge) - 1%),transparent var(--sf-edge)); }
+.departure-film.silent-film-light .departure-film-skip { color:#555a5a; border-color:#555a5a55; }
+.departure-film-skipped .silent-film-scenery > * { animation:none!important; }
+.departure-film-skipped .silent-film-scenery > img { opacity:1; transform:none; filter:none; clip-path:none; }
+.silent-node-cut[data-scenery="fallback"] .sf-plane { display:none; }
+#overlay[data-camp-entry] > .card.page:has(#hubMain.base-camp)::after { display:none; }
+@keyframes sfQuiet { from { opacity:0; } to { opacity:1; } }
+@keyframes sfReflection { 0% { opacity:0; transform:scale(.96); clip-path:inset(0 100% 0 0); } 60% { opacity:1; clip-path:inset(0); } 100% { opacity:1; transform:scale(1.025); clip-path:inset(0); } }
+@keyframes sfReturn { from { opacity:1; transform:scale(1.09); } to { opacity:1; transform:none; } }
+@keyframes sfCurtainA { 0%,12% { transform:none; } to { transform:translateX(-101%); } }
+@keyframes sfCurtainB { 0%,12% { transform:none; } to { transform:translateX(101%); } }
+@keyframes sfDevelop { 0% { opacity:0; filter:blur(12px) brightness(1.5); } 28% { opacity:.55; filter:blur(5px) brightness(1.25); } 70%,100% { opacity:1; filter:blur(0) brightness(1); } }
+@keyframes sfExposure { 0% { opacity:.1; } 16% { opacity:.23; } 60%,100% { opacity:0; } }
+@keyframes sfArchive { from { opacity:.15; clip-path:inset(0 100% 0 0); } to { opacity:1; clip-path:inset(0); } }
+@keyframes sfRaking { from { transform:translateX(-90%); } to { transform:translateX(100%); } }
+@keyframes sfPressure { 0%,12% { opacity:0; transform:perspective(900px) translateZ(-180px) scale(.8); } 35% { opacity:.55; } 100% { opacity:1; transform:scale(1.08); } }
+@keyframes sfOcclusion { from { opacity:1; } to { opacity:.2; } }
+@keyframes sfDisturb { 0% { opacity:0; filter:blur(3px); transform:skewX(-.7deg); } 35% { opacity:.8; filter:blur(.5px); transform:skewX(.4deg); } 65%,100% { opacity:1; filter:blur(0); transform:none; } }
+@keyframes sfFault { 0%,20%,75%,100% { opacity:0; transform:scaleX(.2); } 35% { opacity:.7; transform:scaleX(1); } }
+@keyframes sfBreath { from { opacity:0; transform:scaleX(.1); } 65% { opacity:.55; transform:scaleX(1); } to { opacity:.2; transform:scaleX(.7); } }
+@keyframes sfScan { from { opacity:0; transform:translateX(0); } 20% { opacity:.6; } to { opacity:0; transform:translateX(76vw); } }
+@keyframes sfStroke { from { opacity:0; transform:translate(-40%,24vh) rotate(-22deg); } 35% { opacity:1; } to { opacity:0; transform:translate(25%,-24vh) rotate(-22deg); } }
+@keyframes sfThreshold { from { opacity:0; transform:scaleY(.1); } 75%,100% { opacity:.65; transform:scaleY(1); } }
+@keyframes sfGlide { from { opacity:0; transform:translateX(-80%); } 35% { opacity:1; } to { opacity:0; transform:translateX(80%); } }
+@keyframes sfAperture { from { opacity:0; transform:scale(.3); } to { opacity:1; transform:scale(1.6); } }
+@keyframes sfBeacon { from { opacity:0; transform:scaleY(.1); } 60% { opacity:.8; transform:scaleY(1); } to { opacity:.4; transform:scaleY(.8); } }
+@keyframes sfRecede { from { opacity:.65; transform:perspective(500px) translateZ(100px); } to { opacity:0; transform:perspective(500px) translateZ(-400px); } }
+@keyframes sfRelease { 0%,10% { transform:translateY(100%); } 85%,100% { transform:none; } }
+@keyframes sfExit-fade { from { opacity:1; } to { opacity:0; } }
+@keyframes sfExit-gate { from { --sf-opening:0%; } to { --sf-opening:50%; } }
+@keyframes sfExit-iris { from { --sf-opening:0%; } to { --sf-opening:150%; } }
+@keyframes sfExit-slash { from { --sf-edge:150%; } to { --sf-edge:-20%; } }
+@keyframes sfExit-slide { from { --sf-edge:105%; } to { --sf-edge:0%; } }
+@keyframes sfExit-lift { from { --sf-edge:105%; } to { --sf-edge:0%; } }
+body.reduce-motion .silent-film-scenery > * { animation:none!important; filter:none!important; transform:none!important; }
+body.reduce-motion .silent-film-scenery > img { opacity:1; clip-path:none; }
+body.reduce-motion .silent-film-scenery > :is(.sf-plane,.sf-shade,.sf-stroke) { display:none; }
+body.reduce-motion [data-film-motion="develop"] > .sf-wash { display:none; }
+@media (prefers-reduced-motion:reduce) {
+  .silent-film-scenery > * { animation:none!important; filter:none!important; transform:none!important; }
+  .silent-film-scenery > img { opacity:1; clip-path:none; }
+  .silent-film-scenery > :is(.sf-plane,.sf-shade,.sf-stroke) { display:none; }
+  [data-film-motion="develop"] > .sf-wash { display:none; }
+}

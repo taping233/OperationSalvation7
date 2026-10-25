@@ -5,7 +5,7 @@ import { RULE_CONFIG } from '../core/rule-config.js';
  *
  * 口径唯一权威：hub/extraction.commands.js 的 calculateBaseAndPending（结算本体）。
  * 这里是给地图态 UI（体验线「随身口袋」状态条等）的期望值投影：
- *   - usedPocket：结算按份逐张按 pocketKeepChance 保留 → 期望值 = Σcount × pocketKeepChance；
+ *   - usedPocket：初始攻击与职业卡不可带回，其余逐张按 pocketKeepChance 保留；
  *   - ownedCards：100% 带回，唯一豁免是 Base.isSha（初始攻击，结算时不入 remainingCards）；
  *   - 木材/口粮 100%；随身币不带回（结算只记 bestRunCoins 统计）。
  * 纯只读：不碰状态、不消费随机流、不判玩法（撤离资格仍由引擎判定，
@@ -28,6 +28,7 @@ export function previewExtraction(game, baseApi) {
 
   const pocket = Array.isArray(game && game.usedPocket) ? game.usedPocket : [];
   const pocketTotal = pocket.reduce((a, p) => a + (p && p.card ? (p.count || 1) : 0), 0);
+  const eligiblePocket = pocket.reduce((a, p) => a + (p?.card && !isSha(p.card) && p.card.rarity !== '职业' ? (p.count || 1) : 0), 0);
 
   const inventory = Array.isArray(game && game.inventory) ? game.inventory : [];
   let wood = 0;
@@ -42,7 +43,7 @@ export function previewExtraction(game, baseApi) {
     bagTotal,
     bagCap: baseApi && typeof baseApi.bagCap === 'function' ? baseApi.bagCap() : null,
     pocketTotal,
-    expectedKept: pocketTotal * RULE_CONFIG.extraction.pocketKeepChance,   // 展示层自行格式化（如「≈2 张」）
+    expectedKept: eligiblePocket * RULE_CONFIG.extraction.pocketKeepChance,   // 展示层自行格式化（如「≈2 张」）
     wood,
     rations,
     coins: (game && game.coins) || 0,

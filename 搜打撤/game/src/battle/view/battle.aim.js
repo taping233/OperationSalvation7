@@ -188,7 +188,22 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   // 指针处的有效目标（enemy 卡找活着的敌人 / self 卡找自己的立绘）
   // side 显式传入：endAim 时全局 aim 已清空，不能再依赖它
   // 指向期间沿用当前快照；若战场重绘，resumeAimAfterRender 会换成新快照。
+  function aimReadingSurface(el) {
+    return el?.closest?.('.status-chip-list, .status-chip-summary, .term-tip, [data-term], [data-ui-tip], .battle-skill-help');
+  }
+  function aimReadingPointer(e) {
+    // Pointer capture can retarget the event to overlay while a status or tip
+    // is underneath. Both the event path and the geometric hit are reading UI.
+    const hit = document.elementFromPoint?.(e.clientX, e.clientY);
+    // A held skill/potion captures its own pointer. Its explanatory wrapper
+    // must not turn that action's release into a reading gesture; actual status
+    // and tooltip surfaces under the pointer still keep their input isolation.
+    const sourceAction = aim && !aim.follow ? aim.el : null;
+    return (!sourceAction?.contains(e.target) && aimReadingSurface(e.target))
+      || (!sourceAction?.contains(hit) && aimReadingSurface(hit));
+  }
   function aimHoverAt(x, y, session) {
+    if (aimReadingSurface(document.elementFromPoint?.(x, y))) return null;
     const hit = session?.hitAt(x, y) || null;
     if (hit?.kind === 'any' && document.elementFromPoint(x, y)?.closest('.sts-hand, .bt-slot, .bt-card, .sts-hand-tools, .battle-skill-help, [data-act], [data-ui-tip]')) return null;
     return hit;
@@ -200,7 +215,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       getTargets: () => getSnapshot().foes,
       onHover(next, previous) {
         if (previous) {
-          previous.el.classList.remove('drag-over', 'drop-here', 'drop-any');
+          previous.el.classList.remove('drag-over', 'drop-here');
           if (previous.kind === 'enemy') clearFoePreview(previous.el);
           if (a.fieldPlayable && a.side === 'enemy') /** @type {NodeListOf<BattleElement>} */ (a.stage.querySelectorAll('.bt-foe')).forEach(clearFoePreview);
         }
@@ -288,7 +303,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (a) {
       if (!keepPose) a.el.classList.remove('aim-lift');
       if (a.hover) {
-        a.hover.el.classList.remove('drag-over', 'drop-here', 'drop-any');
+        a.hover.el.classList.remove('drag-over', 'drop-here');
         if (a.hover.kind === 'enemy') clearFoePreview(a.hover.el);
       }
       a.targetSession?.cancel();
@@ -576,6 +591,12 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     // Mouse, pen and touch may each be primary. A held gesture keeps its owner;
     // after release, a fresh pointer may still confirm the existing pickup.
     if (a.leftDown && e.pointerId !== a.pointerId) return;
+    if (aimReadingPointer(e)) {
+      a.readingPointerId = e.pointerId;
+      a.targetSession.setHover(null);
+      return;
+    }
+    a.readingPointerId = null;
     a.pointerId = e.pointerId; a.lastX = e.clientX; a.lastY = e.clientY; a.leftDown = true;
     if (a.follow && a.mode === 'multi' && a.targetMode === 'click') {
       aimPlayedAt = Date.now();
@@ -597,14 +618,24 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     const x = (pose.x - base.x) / base.scale;
     // CSS 以卡底为缩放原点；把 holder 中心坐标转换为同一布局坐标。
     const y = (pose.y - base.y) / base.scale + (pose.scale - 1) * base.height / 2;
-    a.el.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) scale(${pose.scale.toFixed(4)})`;
+    const transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) scale(${pose.scale.toFixed(4)})`;
+    // CSSOM may normalize spaces/numbers. Remember its serialized value too,
+    // while still repainting if a hand refresh has changed the inline pose.
+    if (a.lastPaintInput === transform && a.el.style.transform === a.lastPaintValue) return;
+    a.el.style.transform = transform;
+    a.lastPaintInput = transform;
+    a.lastPaintValue = a.el.style.transform;
   }
   function advanceCardPose(a, target, delta, base = cardLayoutBase(a.el)) {
     // Exponential following composes over elapsed time: 30/60/144Hz reach the same pose.
-    // Keep the established 60Hz response while preserving the latest pose on retarget.
+    // STS2's holder rate (7/8) stays with docking/return. Direct pointer control
+    // uses a tighter response so a moving mouse does not drag a long easing tail.
+    const followsPointer = a === aim && (a.mode === 'drag' || a.mode === 'multi');
+    const positionRate = followsPointer ? 26 : 7;
+    const scaleRate = followsPointer ? 12 : 8;
     const elapsedFrames = Math.max(0, delta) * 60;
-    const alpha = 1 - Math.pow(1 - 7 / 60, elapsedFrames);
-    const scaleAlpha = 1 - Math.pow(1 - 8 / 60, elapsedFrames);
+    const alpha = 1 - Math.pow(1 - positionRate / 60, elapsedFrames);
+    const scaleAlpha = 1 - Math.pow(1 - scaleRate / 60, elapsedFrames);
     a.motion.x += (target.x - a.motion.x) * alpha;
     a.motion.y += (target.y - a.motion.y) * alpha;
     a.motion.scale += (target.scale - a.motion.scale) * scaleAlpha;
@@ -629,13 +660,21 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     const delta = motionTime ? Math.max(0, (now - motionTime) / 1000) : 1 / 60;
     motionTime = now;
     if (aim) aimPointerFrame(delta);
+    // Sample all returning holders before any return writes its transform.
+    // Several cards can be returning together after rapid retarget/cancellation.
+    const returns = [];
     returningCards.forEach((record, el) => {
-      if (!el.isConnected || UI.el.overlay.hidden || !record.stage?.isConnected || SDT.Motion?.reduceMotion?.()) { finishCardReturn(el, record); return; }
+      if (!el.isConnected || UI.el.overlay.hidden || !record.stage?.isConnected || SDT.Motion?.reduceMotion?.()) {
+        returns.push({ el, record, base:null, target:null }); return;
+      }
       const base = cardLayoutBase(el), target = {
         x:base.x + record.rest.x * base.scale, y:base.y + record.rest.y * base.scale, scale:record.rest.scale,
       };
-      if (advanceCardPose(record, target, delta, base)) finishCardReturn(el, record);
+      returns.push({ el, record, base, target });
     });
+    for (const { el, record, base, target } of returns) {
+      if (!base || advanceCardPose(record, target, delta, base)) finishCardReturn(el, record);
+    }
     if (aim || returningCards.size) ensureMotionFrame();
     else motionTime = 0;
   }
@@ -669,14 +708,13 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       }
       if (a.hasEnteredPlay && eY <= cancelZoneY()) a.hasLeftCancel = true;
       if (a.hasEnteredPlay && a.hasLeftCancel && eY > cancelZoneY()) { cancelAim(); return; }
-      if (a.mode === 'multi') a.stage.classList.toggle('drop-any', eY < a.playY);
       advanceCardPose(a, targetCardPose(a, base), delta, base);
     }
 
     // 悬停检测：瞄准态（含药水全程）高亮目标；drag 态 STS2 无悬停反馈
     const targeting = !a.follow || a.mode === 'target' || a.mode === 'clickTarget'
       || a.mode === 'multi' && a.fieldPlayable && a.side === 'enemy' && eY < a.playY;
-    const hit = targeting ? aimHoverAt(eX, eY, a.targetSession) : null;
+    const hit = targeting && a.readingPointerId == null ? aimHoverAt(eX, eY, a.targetSession) : null;
     if (a.playBlockedReason && a.mode !== 'drag' && !a.reasonShown) {
       showThoughtBubble(a.playBlockedReason, true);
       a.reasonShown = true;
@@ -728,7 +766,6 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     document.removeEventListener('compositionstart', cancelAim, true);
     document.removeEventListener('keydown', onAimKeydown, true);
     a.captureHost?.removeEventListener('lostpointercapture', onAimLostCapture);
-    a.stage?.classList.remove('drop-any');
     aimCleanup(a, keepPose);
     releaseAimCapture(a);
     if (!keepPose) restoreCardPose(a, returnToHand);
@@ -828,7 +865,22 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   }
   function endAim(e) {
     const a = aim;
-    if (!a || e.pointerId !== a.pointerId) return;
+    if (!a || e.pointerId !== a.pointerId && e.pointerId !== a.readingPointerId) return;
+    // A reading press remains a reading gesture even if released over a foe.
+    // Releasing a captured card drag onto reading UI keeps the picked card and
+    // changes only its next confirmation mode; the tooltip still gets its click.
+    if (e.pointerId === a.readingPointerId || aimReadingPointer(e)) {
+      a.readingPointerId = null;
+      a.leftDown = false;
+      if (a.follow) {
+        a.targetMode = 'click';
+        if (a.mode === 'target') a.mode = 'clickTarget';
+      }
+      a.targetSession.setHover(null);
+      releaseAimCapture(a);
+      ensureMotionFrame();
+      return;
+    }
     // 最后一次 move 与 up 可在同一帧；先以最终坐标推进状态，再依松手模式确认。
     moveAim(e);
     if (a.moved) aimPointerFrame();
@@ -880,7 +932,10 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     finishAim(a, true);
     clearThoughtBubble();
   }
-  function onAimPointerCancel(e) { if (aim && e.pointerId === aim.pointerId) cancelAim(); }
+  function onAimPointerCancel(e) {
+    if (aim?.readingPointerId === e.pointerId) { aim.readingPointerId = null; return; }
+    if (aim && e.pointerId === aim.pointerId) cancelAim();
+  }
   function onAimLostCapture(e) {
     if (aim && e.pointerId === aim.pointerId && (!aim.follow || aim.leftDown)) cancelAim();
   }

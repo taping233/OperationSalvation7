@@ -50,7 +50,7 @@ describe('角色卡池与收购台交互契约', () => {
   const shop = src('game/src/run/game.run.shop.js');
 
   it('角色卡池默认提供预览，并用原生按钮支持键盘焦点', () => {
-    expect(altar).toContain('poolPreviewHTML(pool[0])');
+    expect(altar).toContain('poolPreviewHTML(previewCard)');
     expect(altar).toContain('<button class="lib-cardwrap pool-card-button');
     expect(altar).toContain("grid.addEventListener('focusin'");
     expect(altar).toContain('aria-label="查看 ${escAttr(c.name)} 详情"');
@@ -69,7 +69,7 @@ describe('照相馆陈列交互', () => {
   const index = src('game/index.html');
   const css = src('game/css/photo-studio-unified.css');
   const mounts = src('game/css/photo-studio-mounts.css');
-  const ui = src('game/src/ui/ui.js');
+  const ui = src('game/src/ui/card-zoom-controller.js') + src('game/src/ui/card-zoom-content.js');
 
   it('标题入口与页面名称统一为照相馆（10-04 主页构图批口径：home-plate 按钮）', () => {
     expect(index).toContain('id="btnCardLib"');
@@ -78,14 +78,14 @@ describe('照相馆陈列交互', () => {
   });
 
   it('门头突出馆名与馆藏数，照片分类、搜索及结果计数清晰分层（studio-unified 批口径）', () => {
-    expect(library).toContain('<h2>照相馆</h2>');
+    expect(library).toContain("collectionHeaderHTML({title:'照相馆'");
     expect(library).toContain('aria-label="馆藏 ${libCards.length} 张照片"');
     expect(library).toContain('馆藏 <b>${libCards.length}</b> 张照片');
     expect(library).toContain('role="tablist" aria-label="照片分类"');
-    expect(library).toContain('aria-label="照片搜索与筛选"');
+    expect(library).toContain("label:'照片搜索与筛选'");
     expect(library).toContain('id="libResultCount"');
-    expect(library).toContain("linkedBackHTML('closeCardPage', '关闭照相馆'");
-    expect(library).toContain('placeholder="名称、效果或关键词"');
+    expect(library).toContain("linkedBackHTML('closeCardPage','关闭照相馆'");
+    expect(library).toContain('placeholder="模糊搜索名称或效果，空格分隔关键词"');
     expect(library).toContain("import '../../css/photo-studio-unified.css'");
     expect(library).not.toContain('photo-studio-archive.css');
     expect(index).not.toContain('css/page-cardslib.css');
@@ -120,10 +120,10 @@ describe('照相馆陈列交互', () => {
   });
 
   it('筛选横置、桌面保留选片台，并将编辑工具隔离到编辑模式', () => {
-    expect(library).toContain('class="studio-filterbar"');
+    expect(library).toContain("className:'studio-filterbar'");
     expect(library).toContain('aria-label="选中卡牌详情"');
     expect(library).toContain('let libEditMode = false');
-    expect(library).toContain('game.devMode && libEditMode');
+    expect(library).toContain('game.devMode ? `<button');
     expect(library).toContain("grid.addEventListener('keydown'");
   });
 
@@ -132,6 +132,6 @@ describe('照相馆陈列交互', () => {
     expect(ui).toContain("el.setAttribute('aria-modal', 'true')");
     expect(ui).toContain('class="cz-close"');
     expect(ui).toContain("e.stopPropagation()");
-    expect(ui).toContain('previousFocus.focus({ preventScroll: true })');
+    expect(ui).toContain('previousFocus.focus({ preventScroll:true })');
   });
 });

@@ -14,15 +14,15 @@ const fixture = name => JSON.parse(readFileSync(resolve(process.cwd(), `tests/fi
 const Base = window.SDT.Base;
 
 describe('固定旧档兼容样本', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     localStorage.clear();
-    for (let slot = 1; slot <= 5; slot++) RunStorage.remove(slot);
+    for (let slot = 1; slot <= 5; slot++) await RunStorage.remove(slot);
   });
 
-  it('v1 单档迁入档位 1，并完整保留未完成对局字段', () => {
+  it('v1 单档迁入档位 1，并完整保留未完成对局字段', async () => {
     const legacy = fixture('save-v1-run.json');
     localStorage.setItem('sdt-save-v1', JSON.stringify(legacy));
-    RunStorage.migrateLegacy();
+    await RunStorage.migrateLegacy();
     // 旧档无 version 字段 → 读取时按 0 处理并逐级盖章升到当前 SAVE_VERSION；
     // 1→2 迁移把「杀」旧 id（builtin-sha）归一为 starter-attack，卡内容不动
     expect(RunStorage.read(1)).toEqual({
@@ -34,13 +34,13 @@ describe('固定旧档兼容样本', () => {
     expect(localStorage.getItem('sdt-save-v1')).toBeNull();
   });
 
-  it('v2 五槽按槽读取且不会互相覆盖', () => {
+  it('v2 五槽按槽读取且不会互相覆盖', async () => {
     const slot2 = fixture('save-v2-slot2-run.json');
     expect(SLOT_COUNT).toBe(5);
     // write 统一盖章 version（schema 版本契约）
-    RunStorage.write(2, slot2);
-    RunStorage.write(3, { ...slot2, slot: 3, myClass: '剑仙' });
-    RunStorage.write(5, { ...slot2, slot: 5, myClass: '法师' });
+    await RunStorage.write(2, slot2);
+    await RunStorage.write(3, { ...slot2, slot: 3, myClass: '剑仙' });
+    await RunStorage.write(5, { ...slot2, slot: 5, myClass: '法师' });
     expect(RunStorage.read(1)).toBeNull();
     expect(RunStorage.read(2)).toEqual({ ...slot2, myClass: '牧师', characterId: 'xingyue', version: RunStorage.SAVE_VERSION });
     expect(RunStorage.read(3).myClass).toBe('剑仙');
@@ -48,13 +48,17 @@ describe('固定旧档兼容样本', () => {
     expect(RunStorage.read(5).myClass).toBe('法师');
   });
 
-  it('损坏存档：原串备份到 corrupt 键并返回 null', () => {
+  it('损坏存档：原串备份到 corrupt 键并返回 null', async () => {
     localStorage.setItem('sdt-save-v2-slot1', '{broken json');
     expect(RunStorage.read(1)).toBeNull();
     expect(RunStorage.issue(1)).toBe('corrupt');
+    await RunStorage.flushWrites();
     expect(localStorage.getItem(RunStorage.corruptKey(1))).toBe('{broken json');
-    // 下一次成功写入后备份与异常标记清除
-    RunStorage.write(1, { hp: 10 });
+    // 普通保存不得覆盖异常原串；明确删除重开后才能保存新局。
+    expect(await RunStorage.write(1, { hp: 10 })).toBe(false);
+    expect(localStorage.getItem(RunStorage.key(1))).toBe('{broken json');
+    expect(await RunStorage.remove(1)).toBe(true);
+    expect(await RunStorage.write(1, { hp: 10 })).toBe(true);
     expect(RunStorage.issue(1)).toBeNull();
     expect(localStorage.getItem(RunStorage.corruptKey(1))).toBeNull();
   });
@@ -67,59 +71,59 @@ describe('固定旧档兼容样本', () => {
     expect(localStorage.getItem('sdt-save-v2-slot2')).toBe(future);
   });
 
-  it('旧标签页加载对局后发现档位已更新时拒绝覆盖', () => {
+  it('旧标签页加载对局后发现档位已更新时拒绝覆盖', async () => {
     RunStorage.readForLoad(4); // 旧标签看到空档
     const newer = JSON.stringify({ version: RunStorage.SAVE_VERSION, hp: 27,
       _r2: { runId: 'other-tab-run', revision: 0 } });
     localStorage.setItem(RunStorage.key(4), newer); // 模拟另一标签先写入
     RunStorage.read(4); // 列表只读重查不得替旧内存快照推进基线
-    expect(RunStorage.write(4, { hp: 10 })).toBe(false);
+    expect(await RunStorage.write(4, { hp: 10 })).toBe(false);
     expect(localStorage.getItem(RunStorage.key(4))).toBe(newer);
   });
 
-  it('重新载入另一标签保存的最新对局后允许继续保存', () => {
+  it('重新载入另一标签保存的最新对局后允许继续保存', async () => {
     RunStorage.readForLoad(5);
     const latest = JSON.stringify({ version: RunStorage.SAVE_VERSION, hp: 27,
       _r2: { runId: 'latest-run', revision: 2 } });
     localStorage.setItem(RunStorage.key(5), latest);
     expect(RunStorage.read(5).hp).toBe(27); // 列表读取不移动旧编辑基线
-    expect(RunStorage.write(5, { hp: 10 })).toBe(false);
+    expect(await RunStorage.write(5, { hp: 10 })).toBe(false);
     expect(RunStorage.readForLoad(5).hp).toBe(27); // 真正载入时接受最新基线
-    expect(RunStorage.write(5, { hp: 26 })).toBe(true);
+    expect(await RunStorage.write(5, { hp: 26 })).toBe(true);
     expect(RunStorage.read(5).hp).toBe(26);
   });
 
-  it('prev 备份键：覆盖前转存上一版原串；首次写入不产生；remove 一并清理', () => {
+  it('prev 备份键：覆盖前转存上一版原串；首次写入不产生；remove 一并清理', async () => {
     // 首次写入（无旧档）：主档落盘但不产生 prev
-    expect(RunStorage.write(2, { hp: 1 })).toBe(true);
+    expect(await RunStorage.write(2, { hp: 1 })).toBe(true);
     const first = localStorage.getItem(RunStorage.key(2));
     expect(first).not.toBeNull();
     expect(localStorage.getItem('sdt-run-2-prev')).toBeNull();
     // 第二次覆盖：prev = 上一版完整原串（含身份盖章，逐字未动）
-    expect(RunStorage.write(2, { hp: 2 })).toBe(true);
+    expect(await RunStorage.write(2, { hp: 2 })).toBe(true);
     const second = localStorage.getItem(RunStorage.key(2));
     expect(second).not.toBe(first);
     expect(localStorage.getItem('sdt-run-2-prev')).toBe(first);
     // 再次覆盖：prev 滚动为最近的旧版（新旧交替的中间版）
-    expect(RunStorage.write(2, { hp: 3 })).toBe(true);
+    expect(await RunStorage.write(2, { hp: 3 })).toBe(true);
     expect(localStorage.getItem('sdt-run-2-prev')).toBe(second);
     // 删除档位：prev 一并删除，不悬挂
-    expect(RunStorage.remove(2)).toBe(true);
+    expect(await RunStorage.remove(2)).toBe(true);
     expect(localStorage.getItem(RunStorage.key(2))).toBeNull();
     expect(localStorage.getItem('sdt-run-2-prev')).toBeNull();
   });
 
-  it('新局首写清除历史终局遗留 prev，坏主档不能复活旧局', () => {
+  it('新局首写清除历史终局遗留 prev，坏主档不能复活旧局', async () => {
     const prev = 'sdt-run-2-prev';
     localStorage.setItem(prev, JSON.stringify({ version: 2, hp: 10, _r2: { runId: 'completed-run', revision: 1 } }));
-    expect(RunStorage.write(2, { hp: 50 })).toBe(true);
+    expect(await RunStorage.write(2, { hp: 50 })).toBe(true);
     expect(localStorage.getItem(prev)).toBeNull();
     localStorage.setItem(RunStorage.key(2), '{broken-new-run');
     expect(RunStorage.read(2)).toBeNull();
     expect(localStorage.getItem(RunStorage.key(2))).toBe('{broken-new-run');
   });
 
-  it('旧备份无法清理时拒绝新局首写，保留原键与其他档位', () => {
+  it('旧备份无法清理时拒绝新局首写，保留原键与其他档位', async () => {
     const prev = 'sdt-run-2-prev';
     const old = JSON.stringify({ version: 2, hp: 10 });
     localStorage.setItem(prev, old);
@@ -130,7 +134,7 @@ describe('固定旧档兼容样本', () => {
       return remove.call(this, key);
     });
     try {
-      expect(RunStorage.write(2, { hp: 50 })).toBe(false);
+      expect(await RunStorage.write(2, { hp: 50 })).toBe(false);
       expect(RunStorage.lastWriteIssue(2)).toBe('STORAGE');
       expect(localStorage.getItem(RunStorage.key(2))).toBeNull();
       expect(localStorage.getItem(prev)).toBe(old);
@@ -138,11 +142,11 @@ describe('固定旧档兼容样本', () => {
     } finally { blocked.mockRestore(); }
   });
 
-  it('无编辑基线时也拒绝覆盖另一标签刚创建的对局', () => {
+  it('无编辑基线时也拒绝覆盖另一标签刚创建的对局', async () => {
     const latest = JSON.stringify({ version: RunStorage.SAVE_VERSION, hp: 27,
       _r2: { runId: 'new-slot-run', revision: 0 } });
     localStorage.setItem(RunStorage.key(4), latest);
-    expect(RunStorage.write(4, { hp: 10 })).toBe(false);
+    expect(await RunStorage.write(4, { hp: 10 })).toBe(false);
     expect(localStorage.getItem(RunStorage.key(4))).toBe(latest);
   });
 

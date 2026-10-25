@@ -1,11 +1,11 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
   MAP: {
-    rules: { battleEnergy: 2, battleHandMax: 30, bossDeckSize: 15, starterSha: 0,
-      battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+    rules: { ...battleRules(2, 30, 15, 0, 5, 1) },
     items: { rations: { name: '口粮' }, wood: { name: '木材' } },
   },
 };
@@ -52,8 +52,7 @@ function start(cards, { hp, swift = true, energy = 2 } = {}) {
   const game = {
     ownedCards: cards.map((card, index) => ({ uid: `card-${index}`, card, safe: false })),
     inventory: [], usedPocket: [], cardOrder: cards.map((_, index) => `card-${index}`),
-    hp: 50, maxHp: 50, atk: 5, spellPower: 0, coins: 0,
-    myClass: '法师', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(50, 50, 5, 0, '法师', null),
     logs: [], observations: [], lastBattleEnd: null,
     log(message) {
       const state = BattleSession.getSnapshot();

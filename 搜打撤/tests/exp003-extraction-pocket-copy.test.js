@@ -10,7 +10,7 @@ import SDT from '../game/src/core/sdt-facade.js';
 // Keep probability, actual retained counts, and key cost truthful across current presentation modules.
 const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
 const bag = readFileSync('game/src/hub/game.bag.js', 'utf8') + readFileSync('game/src/hub/game.bag.view2.js', 'utf8');
-const session = readFileSync('game/src/run/game.session.js', 'utf8');
+const departure = readFileSync('game/src/run/game-session-departure.js', 'utf8');
 const render = html => { document.body.innerHTML = html; return document.body.textContent; };
 
 describe('EXP-003 撤离消耗区文案与规则一致', () => {
@@ -75,6 +75,6 @@ describe('EXP-003 撤离消耗区文案与规则一致', () => {
 
   it('结算日志报告实际带回与全部散失，出发提示未复原卡消散', () => {
     expect(altar).toContain('张逐张以 1/3 概率结算；实际带回 ${pocket.keptCount} 张待复原，散失 ${pocket.lostCount} 张');
-    expect(session).toContain('张未复原的卡牌消散了');
+    expect(departure).toContain('张未复原的卡牌消散了');
   });
 });

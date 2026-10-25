@@ -1,5 +1,6 @@
 import { STAGED_BOSS_DEFEAT, throwIfActionCancelled } from '../runtime/battle.playback.js';
 import { esc } from '../../core/shared.js';
+import { applyEliteDeath, syncEliteAuras } from './battle.elite-mechanics.js';
 
 /** Instance-owned state and host services are captured explicitly. */
 export function createFoeLifecycleDomain(context) {
@@ -20,7 +21,7 @@ const KILL_CHEER = ['漂亮！', '好剑！', '干净利落！'];
  * @returns {{ resolveFoeDefeat, sweepDead, transferPoisonLegacy, nestRevive, nestKillCheck, nestPhase }}
  */
 function createBattleFoeLifecycle({
-  alive, foeIdx, finish, executionSession, stagedDeathFx, hitFoe,
+  alive, foeIdx, finish, executionSession, stagedDeathFx, hitFoe, onFoeDefeated,
 }) {
 function resolveFoeDefeat(foe, cause = '被击倒') {
     if (!foe || foe.dead || foe.hp > 0) return false;
@@ -29,10 +30,16 @@ function resolveFoeDefeat(foe, cause = '被击倒') {
     instanceRuntime.floats.push({ unit: foeIdx(foe), text: '', cls: 'stk sticker-boom' });
     // 喝彩只改变表现，不能推进后续牌效/选靶使用的 battle 随机流。
     instanceRuntime.floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('visual') * KILL_CHEER.length)], cls: 'stk stk-late stk-cheer' });
-    // 固定死亡触发顺序：复活替代死亡 → 遗产转移 → 同回合复活击杀 → 首脑胜利。
+    // 固定死亡触发顺序：复活替代 → 精英死亡响应 → 遗产转移 → 同回合复活击杀 → 首脑胜利。
     if (nestRevive(foe)) return false;
+    applyEliteDeath(instanceRuntime.foes, foe, {
+      gainEnergy: n => instanceRuntime.set$energy(instanceRuntime.energy + n),
+      log: (message, kind) => instanceRuntime.G.log(message, kind),
+      resolveDefeat: resolveFoeDefeat,
+    });
     transferPoisonLegacy(foe);
     nestKillCheck(foe);
+    onFoeDefeated?.(foe);
     if (executionSession.stagedResolutionDepth > 0) stagedDeathFx.add(foe);
     if (foe.boss) {
       // 立刻截断本卡余句，但保留致命一击的反馈，待演出后再清场胜利。
@@ -46,6 +53,7 @@ function resolveFoeDefeat(foe, cause = '被击倒') {
   }
 function sweepDead() {
     instanceRuntime.foes.forEach(f => resolveFoeDefeat(f));
+    syncEliteAuras(instanceRuntime.foes);
   }
 function transferPoisonLegacy(deadFoe) {
     if (deadFoe.deathBurst || deadFoe.rotSeedMarked) {
@@ -79,7 +87,14 @@ function nestRevive(foe) {
     foe.hp = foe.revive.hearts;
     foe.atk = foe.revive.atk;
     foe.status = {};
+    delete foe._stealRestorations;
+    delete foe._stealRestore;
+    delete foe._stealRestoreTurn;
+    delete foe._atkDownAmount;
+    delete foe._atkDownPending;
+    delete foe.__timedBuffs;
     delete foe.rotSeedMarked;
+    delete foe.deathBurst;
     foe.reviveTurn = instanceRuntime.turn;
     instanceRuntime.G.log('[[icon:fire]] <b>完全形态·元素领主</b>：死亡不是终结——以 8 攻 8 心复活（诅咒尽散）。借过！', 'warn');
     return true;

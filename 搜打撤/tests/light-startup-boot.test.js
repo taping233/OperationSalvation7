@@ -17,7 +17,7 @@ vi.mock('../game/src/run/game.run.js', () => ({ bindRunMixins: vi.fn(), devForce
 vi.mock('../game/src/ui/game.menu.js', () => ({ get menuPageLoading() { return h.menuLoading; }, cancelPendingMenuPageOpen: h.cancelMenu }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ PRELOAD_SCENES: Object.fromEntries(['battle', 'coin', 'wood', 'rations', 'key', 'fire'].map(key => [key, `scene-${key}.webp`])) }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ resumeExtraction: vi.fn() }));
-vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn(), baseHubLoading: false }));
+vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn(), preloadBaseHub: vi.fn(async () => {}), baseHubLoading: false }));
 vi.mock('../game/src/hub/game.bag.js', () => ({ bindBagMixins: vi.fn(), resumeBattleRewards: vi.fn(),
   showBackpack: vi.fn(), showBackpackSection: vi.fn(), setBagReturnHook: vi.fn() }));
 vi.mock('../game/src/run/game.run.shop.js', () => ({ configureShopRuntime: vi.fn() }));
@@ -29,7 +29,6 @@ vi.mock('../game/src/hub/game.cardslib.js', () => ({ cardPageOpen: false, cardPa
 vi.mock('../game/src/run/game.session.browser.js', () => ({ createGameCanvas: () => ({ canvas: h.canvas, ctx: h.ctx }) }));
 vi.mock('../game/src/agent/agent.js', () => ({}));
 vi.mock('../game/src/ui/quick-nav.js', () => ({}));
-vi.mock('../game/src/experience/pocket-strip.js', () => ({ startPocketStrip: vi.fn() }));
 
 const deferred = () => {
   let resolve, reject;
@@ -53,7 +52,7 @@ beforeAll(async () => {
   const noop = () => {};
   art = { collectCardAssets: vi.fn(() => ['unvisited-portrait.webp']),
     collectThumbnailAssets: vi.fn(() => ['unvisited-thumb.webp']), collectManifestAssets: vi.fn(() => ['unvisited-catalogue.webp']),
-    warmBatched: vi.fn(() => sceneGate.promise), prefetchBatched: vi.fn(() => fetchGate.promise) };
+    warm: vi.fn(), warmBatched: vi.fn(() => sceneGate.promise), prefetchBatched: vi.fn(() => fetchGate.promise) };
   window.SDT = { UI: { el: { overlay: document.getElementById('overlay'), viewport: document.getElementById('viewport') },
     init: noop, refresh: noop, hideTooltip: noop, showTooltip: noop, log: noop },
     Sound: { muted: false, sfx: noop }, Camera: class { constructor() { return h.cam; } },
@@ -65,6 +64,14 @@ beforeAll(async () => {
 afterAll(() => { vi.clearAllTimers(); vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe('light startup uses actual boot wiring without gating menu entry', () => {
+  it('空闲预热当前基地背景，交给已有受限解码池且不等待首屏预取', () => {
+    expect(typeof h.runtime.preloadBaseHub).toBe('function');
+    const task=requestIdleCallback.mock.calls.find(([callback]) => callback.name === 'warmHubWallpaper');
+    expect(task).toBeDefined();
+    expect(art.warm).not.toHaveBeenCalled();
+    task[0]();
+    expect(art.warm).toHaveBeenCalledExactlyOnceWith([expect.stringContaining('base-operations-v5.webp')]);
+  });
   it('never creates startup scene warm tasks or enumerates unvisited catalogues', () => {
     expect(art.warmBatched).not.toHaveBeenCalled();
     expect(art.collectCardAssets).not.toHaveBeenCalled();

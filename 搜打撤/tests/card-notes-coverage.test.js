@@ -2,7 +2,7 @@
  *
  * 对已有条目做守卫，空对象是有效底稿：
  *   1. 备注条目的 id 都必须存在于现役卡库；
- *   2. 文案非空、≤60 字、全库无重复句。
+ *   2. 文案非空、≤60 字；仅保留老板已写的明确同文组，其余不重复。
  * 同步链与 battle-all-cards.test.js 同口径（ensureSha/Starters/Tabletop 含 TT11 退役替换），
  * all() 结果即实机现役卡库。
  */
@@ -45,16 +45,33 @@ describe('卡牌备注守卫：文案质量底线', () => {
     expect(bad, `以下条目文案为空或超过 60 字: ${bad.join(', ')}`).toEqual([]);
   });
 
-  it('全库无重复文案', () => {
+  it('除老板原文的明确同文组外，全库无重复文案', () => {
+    const authoredGroups = [
+      { text: '某位古神的肢体之一', ids: ['tt8-curseimmune', 'tt8-energycap', 'tt8-nofocus', 'tt8-healplus'] },
+      { text: '克劳泽开发的禁术，对使用者有不可逆的影响', ids: ['tt8-curse1', 'tt8-curse2', 'tt8-curse3', 'tt8-curse4'] },
+      { text: '维克斯托克藏品之一，对使用者似乎有特殊的意义', ids: ['tt2-frostsword', 'tt3-twinwater-mail'] },
+    ];
     const seen = new Map();
     const dup = [];
     for (const [id, v] of Object.entries(notesData.notes)) {
       const key = String(v).trim();
-      if (seen.has(key)) dup.push(`${seen.get(key)} ↔ ${id}`);
+      if (seen.has(key) && !authoredGroups.some(group => group.text === key && group.ids.includes(id) && group.ids.includes(seen.get(key)))) dup.push(`${seen.get(key)} ↔ ${id}`);
       else seen.set(key, id);
     }
     expect(dup, `发现重复文案（防偷懒复制）: ${dup.join(', ')}`).toEqual([]);
   });
+});
+
+it('永久底稿逐条保留老板 Edge 中提取的23条原文', () => {
+  const source = JSON.parse(readFileSync(path.join(ROOT, 'docs/evidence/2026-10-24-photo-notes/original-notes.json'), 'utf8'));
+  expect(Object.keys(source.notes)).toHaveLength(23);
+  for (const [id, text] of Object.entries(source.notes)) expect(notesData.notes[id]).toBe(text);
+});
+
+it('永久底稿逐条保留第二次同步的32条原文', () => {
+  const source = JSON.parse(readFileSync(path.join(ROOT, 'docs/evidence/2026-10-24-photo-notes/sync-32-notes.json'), 'utf8'));
+  expect(Object.keys(source.notes)).toHaveLength(32);
+  for (const [id, text] of Object.entries(source.notes)) expect(notesData.notes[id]).toBe(text);
 });
 
 describe('卡牌备注运行链：photoNoteFor 两层优先级', () => {

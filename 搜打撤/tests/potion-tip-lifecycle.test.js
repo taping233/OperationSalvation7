@@ -1,5 +1,11 @@
+import { battleViewMocks } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+// These lifecycle cases start on an interactive battlefield; readiness has its own integration suite.
+vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
+ createBattleEntryGate: () => ({begin(){},wait(){},cancel(){},dispose(){},pending:()=>false,ready:()=>true}),
+ waitForBattleImages: () => ({promise:Promise.resolve(true),cancel(){}}),
+}));
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
   attach: vi.fn(() => Promise.resolve(false)), hide: vi.fn(), cacheStats: () => ({}),
   play: vi.fn(), setPaused: vi.fn(), presentDeath: vi.fn(), isLiveBattleFigure: () => false,
@@ -24,11 +30,7 @@ body.addEventListener('click', event => {
   if (source) actions[source.dataset.act]?.(source.dataset);
 });
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} },
-  Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 2, battleHandMax: 8, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 2, 8, 5, 5),
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession, getSnapshot } = await import('../game/src/battle/core/battle.core.js');

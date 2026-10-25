@@ -1,3 +1,4 @@
+import { overlayElements, inventoryFields } from './helpers/environment-fixtures.js';
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -37,7 +38,7 @@ beforeEach(() => {
   frames = []; actions.clear();
   vi.spyOn(window, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
   document.body.innerHTML = '<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"><div class="battle-stage sts"><div class="sts-hud"><div class="sts-hand"></div></div></div></div></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  UI.el = { ...overlayElements() };
   UI._lastMode = null;
 });
 afterEach(() => {
@@ -188,7 +189,7 @@ describe('battle page input and DOM work', () => {
     const readyWrites = observer.takeRecords().length; observer.disconnect();
     expect(panel.getAttribute('aria-busy')).toBe('false');
     expect([...panel.querySelectorAll('[data-act="btDiscover"]')].every(button => !button.hasAttribute('aria-disabled'))).toBe(true);
-    expect(UI.el.ovBody.querySelector('.battle-discover-progress').textContent).toBe('1');
+    expect(UI.el.ovBody.querySelector('[data-battle-discover]').getAttribute('aria-label')).toContain('还需发现 1 次');
     console.log('BATTLE_DISCOVER_PERF', JSON.stringify({ openingFrames: 20, candidates: 2, openingWrites, readyWrites }));
     if (process.env.BATTLE_PAGE_PERF_BASELINE !== '1') expect(openingWrites).toBe(0);
   });
@@ -222,8 +223,7 @@ describe('battle page input and DOM work', () => {
 function handPage(count) {
   game = { ownedCards: Array.from({ length: count }, (_, i) => ({ uid: `hand-${i}`,
     card: { id: `page-perf-${i}`, name: `性能测试${i}`, type: '法术', cost: 1, rarity: '古朴', desc: '造成1点伤害', dmg: 1, dmgType: 'spell' } })),
-    inventory: [], usedPocket: [], hp: 30, maxHp: 30, atk: 4, spellPower: 0, coins: 0, myClass: null,
-    state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
+    ...inventoryFields(30, 30, 0, null), log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
   window.SDT.game = game;
   BattleSession.start(game, [{ id: 'target', name: '靶子', hp: 100, atk: 1 }], { isBoss: false });
   const snapshot = BattleSession.getSnapshot();

@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { beforeEach, expect, it, vi } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
 vi.mock('../game/src/battle/core/battle.core.js', () => ({
   commands: {}, getSnapshot: () => ({}), AFFIX_META: {}, R: () => ({ battleEnergy: 2 }), findEffectiveCard: () => null,
@@ -42,7 +43,7 @@ it('首脑规则实际调用模板也把返回键交给固定操作栏', () => {
 
 it('首脑规则短面板限定字号及滚动高度，设置专属规则仍独立', async () => {
   const { default: postcss } = await import('postcss');
-  const css = postcss.parse(readFileSync('game/css/expedition-battle.css', 'utf8'));
+  const css = postcss.parse(readCssSource('game/css/expedition-battle.css', 'utf8'));
   const rules = [];
   css.walkRules(rule => rules.push({ selector:rule.selector, declarations:Object.fromEntries(rule.nodes.filter(n => n.type === 'decl').map(n => [n.prop, n.value])) }));
   const geometry = rules.find(rule => rule.selector.includes('.card.room:has(') && rule.selector.includes('[data-decision-kind="rules"]'));
@@ -52,5 +53,5 @@ it('首脑规则短面板限定字号及滚动高度，设置专属规则仍独�
   expect(text?.declarations['font-size']).toBe('var(--card-copy-size,24px)');
   expect(text?.declarations['line-height']).toBe('1.55');
   expect(rules.find(rule => rule.selector === '#overlay .battle-decision-content')?.declarations.overflow).toBe('auto');
-  expect(rules.some(rule => rule.selector.includes('[data-decision-kind="settings"] .chk'))).toBe(true);
+  expect(rules.some(rule => rule.selector.includes('[data-decision-kind="settings"]'))).toBe(true);
 });

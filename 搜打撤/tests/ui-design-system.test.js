@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { fireRestDecisionHTML } from '../game/src/ui/fire-rest-view.js';
 import { uiDisclosure } from '../game/src/ui/ui-disclosure.js';
 import { extractionStashHTML } from '../game/src/ui/extraction-rewards-view.js';
+import { readCssSource } from './helpers/css-source.js';
 
 const show = overrides => {
-  document.body.innerHTML = fireRestDecisionHTML({ heal:10, chance:30, restorable:5, fits:true, capacity:'16/16 格', ...overrides });
+  document.body.innerHTML = fireRestDecisionHTML({ heal:10, hp:15, maxHp:30, chance:30, restorable:5, fits:true, capacity:'16/16 格', ...overrides });
 };
 const visibleText = () => {
   const copy = document.body.cloneNode(true);
@@ -17,7 +17,7 @@ const visibleText = () => {
 describe('opt-in winter decision language', () => {
   it('keeps decision facts and irreversible risks outside collapsed explanations', () => {
     show();
-    expect(visibleText()).toContain('最多 +10');
+    expect(visibleText()).toContain('15 → 25 · 实际回复 10');
     expect(visibleText()).toContain('至多 2 张');
     expect(document.querySelector('details').textContent).toContain('30%');
     expect(visibleText()).toContain('16/16 格');
@@ -56,7 +56,7 @@ describe('opt-in winter decision language', () => {
     expect(document.querySelector('[data-act="exFinish"]').textContent).toContain('放弃 3 张');
   });
   it('limits shared styles to opt-in vocabulary and never resizes cards or owns battle interaction', () => {
-    const css = readFileSync('game/css/ui-design-system.css','utf8');
+    const css = readCssSource('game/css/ui-design-system.css','utf8');
     const root = postcss.parse(css);
     root.walkRules(rule => {
       expect(rule.selector).toMatch(/ui-design-system|exr-page|sc-fire|ui-node-decision/);

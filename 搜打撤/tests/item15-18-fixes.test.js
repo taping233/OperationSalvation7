@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 2026-09-16 批次验证（Item 15~18 + 09-13 留言修复）：
  *   15 职业卡重复收藏：重复获得经验（Meta.onCollect 不再有 once 门槛）、收藏即用掉（hub 侧移除仓库记录）
  *   16 消耗区：局内 100% 进入（衍生卡排除）；离开对局（doExtract）只剩 1/3
@@ -11,7 +12,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -58,8 +59,8 @@ describe('Item 17：分层配额下限与物资格', () => {
 });
 
 describe('Item 18：储备币不进局', () => {
-  it('出发流程不再把储备币带进局（game.session 不再调用 takeReserveCoins）', async () => {
-    const src = (await import('node:fs')).readFileSync('game/src/run/game.session.js', 'utf8');
+  it('出发流程不再把储备币带进局（departure 不再调用 takeReserveCoins）', async () => {
+    const src = (await import('node:fs')).readFileSync('game/src/run/game-session-departure.js', 'utf8');
     expect(src.includes('takeReserveCoins')).toBe(false);
   });
   it('储备币仍用于孵蛋（base.js 孵蛋口径不变）', async () => {

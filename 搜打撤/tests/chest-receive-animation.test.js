@@ -1,3 +1,4 @@
+import { chestBaseMocks } from './helpers/environment-fixtures.js';
 import { afterEach, expect, it, vi } from 'vitest';
 const feedback=vi.hoisted(()=>vi.fn());
 vi.mock('../game/src/ui/reward-card-feedback.js',()=>({showRewardCardFeedback:feedback}));
@@ -34,9 +35,7 @@ it.each(['all','one'])('%s animates only committed rewards after render and neve
     Cards: { RARITIES:['古朴','稀有','史诗','传说'], all:() => [card, otherCard], randomDropCard:dropCard,
       pickOfRarity:() => card, classPool:() => [], rarityOf:item => item.rarity,
       sellPrice:() => 1, cardHTML:() => '<div>队列测试卡</div>' },
-    Base: { data:{eggPity:0,eggBattles:0}, save:vi.fn(), petEggDropChance:() => 0,
-      recordPetEggChestResult:vi.fn(), bagCap:() => 10, isSha:() => false },
-    Sound: { sfx:vi.fn() }, Icons: { rich:html => html },
+    ...chestBaseMocks(() => vi),
   };
   const { SDT } = await import('../game/src/run/chests.js');
 
@@ -44,14 +43,14 @@ it.each(['all','one'])('%s animates only committed rewards after render and neve
   game.grantCard.mockImplementation(item=>{if(item.id==='queue-card-2')return false;game.ownedCards.push({card:item});return true;});
   const reward={kind:'small',cards:[card,card,otherCard],coins:0,coinsReceived:true,rewardStage:'cards',claimMode,selected:null,taken:[],lost:[]};
   expect(SDT.Chests.restore(game,{version:1,seed:1,layerIdx:0,trackPos:1,queue:[{kind:'small',isClass:claimMode==='one',reward}],index:1,current:reward,context:{onCell:true},screen:'cards'},done)).toBe(true);
-  if(claimMode==='all')actions.chestTake();else actions.chestPick({i:0});
+  if(claimMode==='all')await actions.chestTake();else await actions.chestPick({i:0});
   expect(game.ownedCards).toHaveLength(claimMode==='all'?2:1);expect(game.grantCard).toHaveBeenCalledTimes(claimMode==='all'?3:1);
   expect(feedback).toHaveBeenLastCalledWith(ovBody,claimMode==='all'?[card,card]:[card],{token:game});
   if(claimMode==='all'){
-    expect(ovBody.textContent).toContain('剩余 1 张待处理');
+    expect(ovBody.querySelectorAll('.reward-unit:not(.got):not(.dropped) .reward-card')).toHaveLength(1);
     expect(ovBody.querySelector('.reward-capacity-note')?.textContent).toBe('暂时无法领取');
     expect(ovBody.querySelector('[data-act="chestTake1"][data-i="2"]')).not.toBeNull();
   }
-  feedback.mockClear();actions.chestTake1({i:2});expect(feedback).not.toHaveBeenCalled();
-  actions.chestTake1({i:0});expect(feedback).not.toHaveBeenCalled();expect(game.ownedCards).toHaveLength(claimMode==='all'?2:1);
+  feedback.mockClear();await actions.chestTake1({i:2});expect(feedback).not.toHaveBeenCalled();
+  await actions.chestTake1({i:0});expect(feedback).not.toHaveBeenCalled();expect(game.ownedCards).toHaveLength(claimMode==='all'?2:1);
 });

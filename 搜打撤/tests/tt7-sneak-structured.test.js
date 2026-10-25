@@ -1,3 +1,4 @@
+import { battleRules, playerFields, damageRuleFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 
@@ -6,7 +7,7 @@ window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = window.SDT.Icons.TYPE_ART || {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 15, 0, 5, 1) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -42,8 +43,7 @@ async function startAndPlay(card) {
   const logs = [];
   const game = {
     ownedCards: [{ uid: `sneak-${sequence++}`, card, safe: false }],
-    hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false, lastBattleEnd: null,
+    ...playerFields(100, 100, 5, 0, '侠客', null), lastBattleEnd: null,
     log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); }, logs,
     heal(amount) { this.hp = Math.min(this.maxHp, this.hp + amount); }, addItem() {}, onBattleEnd() {},
   };
@@ -88,9 +88,7 @@ describe('tt7-sneak structured onPlay', () => {
     const card = {
       id: 'tt7-sneak', name: '偷袭', cost: 0, type: '武术', dmg: -1, dmgType: 'attack',
       desc: '描述改写为攻击 99 次并造成 99 点伤害。',
-      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [
-        { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
-      ] } },
+      rules: { ...damageRuleFields(false, 'chosenEnemy') },
     };
     const { state, logs } = await startAndPlay(card);
     expect(state.foes[0].hp).toBe(96);

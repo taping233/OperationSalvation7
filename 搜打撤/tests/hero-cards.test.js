@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 /* 英雄卡（能力卡，11 张）与「直接释放」类卡牌真战斗实打审计（2026-09-11 老板任务）。
  * 生效口径 = cards.js v10 设计者稿批次（整卡覆盖）。
  * 覆盖：每张英雄卡的核心效果可观测发生（状态/牌库/手牌/日志/血量），
@@ -11,7 +12,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 8, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 99, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 8, 0, 5, 99) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -41,8 +42,7 @@ function makeGame(cards, over = {}) {
   const logs = [];
   const g = {
     ownedCards: cards.map(c => ({ uid: 'g' + (uidSeq++), card: c, safe: false })),
-    hp: 300, maxHp: 99999, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(300, 99999, 5, 0, '侠客', null),
     lastBattleEnd: null,
     log(m) { logs.push(String(m).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs,
@@ -165,7 +165,7 @@ describe('英雄卡实打 · 侠客', () => {
     await drain();
     const after = snap().foes[0].hp;
     expect(seen(g, '破隐一击'), slice(g)).toBe(true);
-    expect(before - after).toBe(2 * m.dmg + 5);
+    expect(before - after).toBe(2 * (m.dmg + 5)); // The strike doubles attack power as well as printed damage.
     expect(snap().pstat.status.stealth || 0).toBe(0);      // 造成伤害后潜行破除
     BattleSession.commands.flee();
     await drain(20);
@@ -293,7 +293,8 @@ describe('英雄卡实打 · 牧师', () => {
       expect(/置入 \d+ 张随机卡牌/.test(slice(g)), slice(g)).toBe(true);
       const insertedSpells = s.hand.filter(uid => viewApi.findCard(uid)?.card?.type === '法术').length;
       expect(insertedSpells, '固定种子应确实直接置入法术，不能以未回血放过').toBeGreaterThan(0);
-      expect(g.hp, '固定种子0直接置入3张法术，应回复9血').toBe(109);
+      expect(insertedSpells, '当前 generation 随机流种子0直接置入2张法术').toBe(2);
+      expect(g.hp, '直接置入2张法术，应回复6血').toBe(106);
       expect(g.hp, '每张置入法术回复 3；没有置入法术时不回血').toBe(100 + insertedSpells * 3);
       BattleSession.commands.flee();
       await drain(20);
@@ -453,7 +454,9 @@ describe('直接释放家族实打', () => {
     BattleSession.commands.pickDiscover(0);
     const after = await drain();
     expect(after.drawPile).toEqual(before.drawPile.slice(0, -2));
-    expect(after.hand).toEqual([...before.hand, ...drawn]);
+    const sourceUid = uidOf(g, ym);
+    expect(before.hand).toContain(sourceUid); // The discovery preview has not paid the source yet.
+    expect(after.hand).toEqual([...before.hand.filter(uid => uid !== sourceUid), ...drawn]);
     expect(after.hand.some(uid => viewApi.findCard(uid)?.card.id === 'tt3-mind-potion')).toBe(false);
     const spentPotions = after.consumedPile.filter(uid =>
       viewApi.findCard(uid)?.card.id === 'tt3-mind-potion');

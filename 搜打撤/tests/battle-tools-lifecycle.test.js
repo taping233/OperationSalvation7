@@ -1,3 +1,4 @@
+import { battleViewMocks, overlayElements, frameMocks, inventoryFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
@@ -5,8 +6,7 @@ vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
   waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }),
 }));
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
-  attach: () => Promise.resolve(false), hide() {}, cacheStats: () => ({}),
-  play() {}, setPaused() {}, presentDeath() {}, isLiveBattleFigure: () => false, actionImpactRemaining: () => null,
+  ...frameMocks(),
 }));
 // Observe one connected button's gesture dispatch without constructing a drag session.
 vi.mock('../game/src/battle/view/battle.aim.js', async importOriginal => ({
@@ -22,14 +22,10 @@ const UI = {
     if (options.battleBody) { if (!options.battleBody(rich(html))) return; }
     else this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode; },
   hideOverlay() { this.el.overlay.hidden = true; }, hideTooltip() {}, showTooltip() {}, refresh() {}, log() {},
-  act: (name, fn) => actions.set(name, fn),
+  act(name, fn) { (this._acts ||= {})[name] = fn; actions.set(name, fn); },
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} },
-  Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 9, 99, 5, 5),
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
@@ -60,8 +56,7 @@ function start({ many = true } = {}) {
   if (many) cards.push(...catalog.filter(card => ['武术', '法术'].includes(card.type) && !cards.includes(card.id)).slice(0, 8).map(card => card.id));
   game = {
     ownedCards: cards.map(id => ({ uid: id, card: catalog.find(card => card.id === id) })),
-    inventory: [], usedPocket: [], hp: 80, maxHp: 80, atk: 4, spellPower: 0, coins: 0,
-    myClass: '法师', state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {},
+    ...inventoryFields(80, 80, 0, '法师'), log() {}, heal() {}, addItem() {}, onBattleEnd() {},
   };
   window.SDT.game = game;
   BattleSession.start(game, [0, 1].map(i => ({ id: `tools-foe-${i}`, name: `工具栏靶子${i}`, hp: 100, atk: 1 })), { isBoss: false });
@@ -70,7 +65,7 @@ function start({ many = true } = {}) {
 function expectUniqueTools({ ready = true, pages = true } = {}) {
   const tools = stage().querySelectorAll('.sts-hand-tools');
   expect(tools).toHaveLength(1);
-  expect(tools[0].parentElement).toBe(stage().querySelector('#btSelf'));
+  expect(tools[0].parentElement).toBe(stage().querySelector('#btSelf .sts-unit-actions'));
   expect(stage().querySelector('.sts-hud > .sts-hand-tools')).toBeNull();
   expect(stage().querySelectorAll('[data-act="btSlam"]')).toHaveLength(1);
   expect(skill().disabled).toBe(!ready);
@@ -97,7 +92,7 @@ beforeEach(() => {
   window.requestAnimationFrame = callback => { frames.push(callback); return frames.length; };
   Element.prototype.animate = () => ({ finished: Promise.resolve(), cancel() {}, onfinish: null });
   document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  UI.el = { ...overlayElements() };
   UI.el.ovBody.addEventListener('click', event => {
     const button = event.target.closest('[data-act]');
     if (button && !button.disabled && !button.closest('[inert]')) actions.get(button.dataset.act)?.(button.dataset);
@@ -136,7 +131,7 @@ describe('battle tools template ownership', () => {
     for (let i = 0; i < 4; i++) {
       const oldTools = expectUniqueTools(), scene = stage();
       if (open === 'btGrave') BattleSession.commands.openGrave();
-      else UI.el.ovBody.querySelector(`[data-act="${open}"]`).click();
+      else actions.get(open)({});
       flush();
       expectCoveredStage(scene);
       UI.el.ovBody.querySelector(`[data-act="${close}"]`).click(); flush();
@@ -178,8 +173,9 @@ describe('battle tools template ownership', () => {
     start();
     BattleSession.commands.playCard('tt3-treasure-hunt', 0); await settle();
     expect(snapshot().discovering?.options.length).toBeGreaterThan(0); expectCoveredStage();
-    await new Promise(resolve => setTimeout(resolve, 360));
-    UI.el.ovBody.querySelector('[data-act="btDiscover"][data-i="0"]').click(); await settle();
+    await new Promise(resolve => setTimeout(resolve, 360)); flush();
+    UI.el.ovBody.querySelector('[data-act="btDiscover"][data-i="0"]').click();
+    UI.el.ovBody.querySelector('[data-act="btDiscoverConfirm"]').click(); await settle();
     expect(snapshot().discovering).toBeNull(); expectUniqueTools();
     set$energy(0); render();
     expectUniqueTools({ ready: false }); expect(skill().dataset.skillState).toBe('unaffordable');
@@ -223,7 +219,7 @@ describe('battle tools template ownership', () => {
       expect(document.activeElement).toBe(page());
       page().click(); expect(page().textContent).toBe(firstPage); expectUniqueTools();
       expect(document.activeElement).toBe(page());
-      UI.el.ovBody.querySelector('[data-act="btSettings"]').click();
+      actions.get('btSettings')({});
       UI.el.ovBody.querySelector('[data-act="btSettingsBack"]').click();
       expect(button.isConnected).toBe(true); expect(skill()).toBe(button); expectUniqueTools();
     }
@@ -235,14 +231,14 @@ describe('battle tools template ownership', () => {
     start();
     for (let i = 0; i < 3; i++) {
       render();
-      UI.el.ovBody.querySelector('[data-act="btSettings"]').click();
+      actions.get('btSettings')({});
       UI.el.ovBody.querySelector('[data-act="btSettingsBack"]').click();
     }
     const energy = snapshot().energy;
     skill().click(); skill().click(); await settle();
     expect(snapshot().energy).toBe(energy - 1);
     expectUniqueTools({ ready: false }); expect(skill().dataset.skillState).toBe('used');
-    UI.el.ovBody.querySelector('[data-act="btSettings"]').click();
+    actions.get('btSettings')({});
     UI.el.ovBody.querySelector('[data-act="btSettingsBack"]').click();
     expectUniqueTools({ ready: false }); expect(skill().getAttribute('aria-label')).toContain('已使用');
     skill().click(); await settle(); expect(snapshot().energy).toBe(energy - 1);

@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { describe, expect, it } from 'vitest';
 import { KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
@@ -7,8 +8,7 @@ import { ensureM10HostedEquipmentRules, M10_HOSTED_EQUIPMENT_MARKER_KEY } from '
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
-window.SDT.MAP = { rules: { battleEnergy: 6, battleHandMax: 8, bossDeckSize: 15,
-  starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+window.SDT.MAP = { rules: { ...battleRules(6, 8, 15, 5, 5, 1) },
 items: { rations: { name: '口粮' }, wood: { name: '木材' } } };
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;

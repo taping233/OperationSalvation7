@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
 import { bindSettingsAudio } from '../game/src/ui/settings-audio.js';
+import { readCssSource } from './helpers/css-source.js';
 
 let cleanup;
 function setup(initial) {
@@ -18,7 +18,7 @@ afterEach(() => { cleanup?.(); document.body.innerHTML = ''; });
 const failed = { enabled: true, requested: 'title', playing: false, canRetry: true, error: { stage: 'load' } };
 describe('settings music recovery feedback', () => {
   it('keeps the retry hidden despite the theme button display rule', () => {
-    expect(readFileSync('game/css/settings-audio.css', 'utf8')).toMatch(/#overlay \.pg\.settings-page #setMusicRetry\[hidden\]\s*\{\s*display:\s*none;/);
+    expect(readCssSource('game/css/settings-audio.css', 'utf8')).toMatch(/#overlay \.pg\.settings-page #setMusicRetry\[hidden\]\s*\{\s*display:\s*none;/);
   });
   it('shows failure, disables repeated loading clicks and follows asynchronous success/failure', () => {
     const h = setup(failed); expect(h.status.textContent).toContain('加载失败'); expect(h.retry.hidden).toBe(false);

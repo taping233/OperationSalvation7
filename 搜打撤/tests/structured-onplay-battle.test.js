@@ -1,3 +1,4 @@
+import { battleRules, playerFields, damageRuleFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { pstat, set$pstat } from '../game/src/battle/runtime/battle.runtime.js';
@@ -7,7 +8,7 @@ window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = window.SDT.Icons.TYPE_ART || {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 15, 0, 5, 1) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -28,8 +29,7 @@ function makeGame(cards) {
   const logs = [];
   const game = {
     ownedCards: cards.map(card => ({ uid: `structured-${uidSequence++}`, card, safe: false })),
-    hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(100, 100, 5, 0, '侠客', null),
     lastBattleEnd: null,
     log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs,
@@ -85,15 +85,11 @@ afterEach(async () => {
 
 const singleDamage = (desc, id = 'structured-single') => ({
   id, name: '结构固定伤害', cost: 0, type: '武术', dmg: 3, dmgType: 'fixed', desc,
-  rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: {
-    onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }],
-  } },
+  rules: { ...damageRuleFields(false, 'chosenEnemy') },
 });
 const areaDamage = (desc, id = 'structured-area') => ({
   id, name: '结构群体伤害', cost: 0, type: '武术', dmg: 4, dmgType: 'fixed', desc,
-  rules: { version: 1, battle: { target: { side: 'enemy', area: true } }, triggers: {
-    onPlay: [{ op: 'damage', amountField: 'dmg', target: 'allEnemies' }],
-  } },
+  rules: { ...damageRuleFields(true, 'allEnemies') },
 });
 const armorCard = (desc, id = 'structured-armor') => ({
   id, name: '结构护甲', cost: 0, type: '法术', armor: 5, desc,

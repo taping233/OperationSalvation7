@@ -83,8 +83,7 @@ async function runAttack(openRules) {
   BattleSession.commands.beginCardInteraction('rules-attack', 0);
   expect(BattleSession.getSnapshot().busy).toBe(true);
   if (openRules) {
-    scene.querySelector('.sts-options').open = true;
-    scene.querySelector('[data-act="btBossRules"]').click();
+    UI._acts.btBossRules({});
     expect(UI.el.ovBody.querySelector('[data-decision-kind="rules"]')).not.toBeNull();
     expect(scene.hasAttribute('inert')).toBe(true);
     expect(scene.getAttribute('aria-hidden')).toBe('true');

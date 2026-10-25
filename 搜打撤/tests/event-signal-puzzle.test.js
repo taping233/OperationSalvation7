@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { createSignalPuzzleState, signalPuzzleConnected, mountEventSignalPuzzle } from '../game/src/ui/event-signal-puzzle.js';
 import { eventSceneHTML } from '../game/src/ui/node-scene-view.js';
 import { Random } from '../game/src/core/random.js';
+import { readCssSource } from './helpers/css-source.js';
 
 let mounted;
 afterEach(() => { mounted?.dispose(); mounted = null; document.body.innerHTML = ''; vi.restoreAllMocks(); });
@@ -146,7 +147,7 @@ describe('无人机可选信号屏：独立展示规则', () => {
   });
 
   it('减少动态保留静态亮线和指示灯，无循环动画', () => {
-    const css = readFileSync('game/css/event-signal-puzzle.css', 'utf8');
+    const css = readCssSource('game/css/event-signal-puzzle.css', 'utf8');
     expect(css).toContain('body.reduce-motion .event-signal-puzzle');
     expect(css).toContain('@media (prefers-reduced-motion:reduce)');
     expect(css).toContain('.event-signal-puzzle.is-connected .signal-drone-lamp');

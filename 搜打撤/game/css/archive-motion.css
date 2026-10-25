@@ -1,69 +1,79 @@
 /* 城市退场 → 金线揭幕 → 档案列阵。只覆盖选档，通用动效参数保持原值。
    入场使用 backwards，结束释放 transform 给真实悬停/聚焦。 */
+/* Cold and warm entries hold the same first pose until resource readiness releases the cover. */
+body:has(.page-loading:not(.leaving)) #overlay#overlay#overlay#overlay#overlay[data-archive-motion] .slot-page:not(.camp-entry-ghost) {
+  &, & *, &::before, &::after, & *::before, & *::after { animation-play-state: paused !important; }
+}
 @media (prefers-reduced-motion: no-preference) {
   body:not(.reduce-motion) #title#title.home-composed[data-home-pick="mStart"] {
     --dive: 1.035; --dim: .82; --blur: 0px; --flash-op: 0;
   }
-  body:not(.reduce-motion) #title#title#title.home-composed[data-home-phase="out"][data-home-pick="mStart"] .home-plate[data-surface-block] {
+body:not(.reduce-motion) #title#title#title.home-composed[data-home-phase="out"][data-home-pick="mStart"] .home-plate{
+  &[data-surface-block] {
     animation: archiveHomeOut .26s cubic-bezier(.4,0,.8,.4) var(--hd,0ms) both !important;
   }
-  body:not(.reduce-motion) #title#title#title.home-composed[data-home-phase="out"][data-home-pick="mStart"] .home-plate.is-picked[data-surface-block] {
+  &.is-picked[data-surface-block] {
     animation: archivePress .3s ease-out both !important;
-  }
-  body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion]:not([data-surface-phase="out"]) {
+  }}
+body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion]{
+  &:not([data-surface-phase="out"]) {
     animation: none !important;
     background: transparent; backdrop-filter: none;
   }
-  body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion] > .card {
+  & > .card {
     animation: none !important; background: transparent;
   }
-  body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion] .slot-page:not(.camp-entry-ghost) {
+  & .slot-page:not(.camp-entry-ghost) {
     background: transparent; isolation: isolate;
-  }
+  }}
   /* 底色独立揭开，首页仍能完成退场；已有雪粒继续运动。 */
-  body:not(.reduce-motion) #overlay[data-archive-motion] .slot-page:not(.camp-entry-ghost) .slot-bg {
+body:not(.reduce-motion) #overlay[data-archive-motion] .slot-page:not(.camp-entry-ghost){
+  & .slot-bg {
     background: radial-gradient(ellipse at 50% 28%, #34383c, #1f2123 62%, #141517);
     animation: archiveBackdrop .38s ease-out .08s backwards;
   }
-  body:not(.reduce-motion) #overlay[data-archive-motion] .slot-page:not(.camp-entry-ghost)::after {
+  &::after {
     animation: archiveBackdrop .38s ease-out .08s backwards;
   }
-  body:not(.reduce-motion) #overlay[data-archive-motion] .slot-page:not(.camp-entry-ghost)::before {
+  &::before {
     inset: 0 auto 0 -24%; width: 18%; height: 100%; z-index: 1;
     background: linear-gradient(90deg, transparent, #101315c9 90%, #e6cb76 90%, #e6cb76 91%, transparent 91%);
     transform: skewX(-12deg); pointer-events: none;
     animation: archiveSweep .46s cubic-bezier(.3,0,.2,1) .1s both;
-  }
-  body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion] .slot-page-head[data-surface-role] {
+  }}
+body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion]{
+  & .slot-page-head[data-surface-role] {
     animation: archiveHeading .34s cubic-bezier(.16,1,.3,1) .16s backwards !important;
   }
-  body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion] .slot-card[data-surface-role] {
+  & .slot-card[data-surface-role] {
     animation: archiveDeal .42s cubic-bezier(.16,1,.3,1) var(--archive-delay) backwards !important;
     transition: transform .16s ease-out, border-color .16s ease-out, box-shadow .16s ease-out;
-  }
-  body:not(.reduce-motion) #overlay[data-archive-motion] .slot-card :is(.slot-card-name,.slot-card-sub,.slot-card-status,.slot-card-desc,.slot-card-cta,.slot-card-ops) {
+  }}
+body:not(.reduce-motion) #overlay[data-archive-motion] .slot-card{
+  & :is(.slot-card-name,.slot-card-status,.slot-card-desc,.slot-card-cta,.slot-card-ops) {
     animation: archiveDetails .22s ease-out var(--archive-detail-delay) backwards;
   }
-  body:not(.reduce-motion) #overlay[data-archive-motion] .slot-card .slot-card-art {
+  & .slot-card-art {
     animation: archiveSeal .3s cubic-bezier(.16,1,.3,1) var(--archive-detail-delay) backwards;
   }
-  body:not(.reduce-motion) #overlay[data-archive-motion] .slot-card .slot-ico {
+  & .slot-ico {
     animation: none; transition: transform .16s ease-out;
   }
-  body:not(.reduce-motion) #overlay[data-archive-motion] .slot-card.slot-recent::before {
+  &.slot-recent::before {
     animation: archiveAccent .24s ease-out .64s backwards;
-  }
-  body:not(.reduce-motion) #overlay#overlay[data-archive-motion] .slot-card:is(:hover,:focus-within) {
-    transform: translateY(-4px); border-color: #d6bd70;
+  }}
+body:not(.reduce-motion) #overlay{
+  &#overlay[data-archive-motion] .slot-card:is(:hover,:focus-within) { border-color: #d6bd70;
     box-shadow: 0 9px 20px #0a0d104d;
   }
-  body:not(.reduce-motion) #overlay[data-archive-motion] .slot-card:is(:hover,:focus-within) .slot-ico { transform: scale(1.035); }
-  body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion][data-surface-phase="out"] .slot-card[data-surface-role] {
+  &[data-archive-motion] .slot-card:is(:hover,:focus-within) .slot-ico { transform: scale(1.035); }}
+body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion][data-surface-phase="out"]{
+  & .slot-card[data-surface-role] {
     animation: archiveFold .16s ease-in both !important;
   }
-  body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion][data-surface-phase="out"] .slot-page-head[data-surface-role] {
+  & .slot-page-head[data-surface-role] {
     animation: archiveHeadingOut .16s ease-in both !important;
-  }
+  }}
 }
 @keyframes archiveHomeOut { to { opacity: 0; transform: translateX(var(--surface-x,-32px)); } }
 @keyframes archivePress {

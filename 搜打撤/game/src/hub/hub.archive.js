@@ -59,6 +59,6 @@ export function bindArchive(ui, { openAchievements = () => /** @type {HTMLElemen
     try { narrative = await lastLampNarrative(segment); } catch { narrative = null; }
     if (!reader.isConnected || base.slot !== currentSlot || request !== storyRequest) return;
     const ending = segment === 3 ? checked.value.ending === 'open_beacon' ? '你让灯光越过风雪，公共疏散线也随之暴露。' : '你让窄光留在墙边，近路仍隐蔽，远处却看不见出口。' : '';
-    reader.innerHTML = `<small>CHAPTER 0${segment} / 已记录</small><h3>最后一盏引路灯</h3>${narrative?.intro ? narrative.intro.split(/\n+/).filter(Boolean).map(text => `<p>${esc(text)}</p>`).join('') : '<p>正文暂时无法载入，段落记录仍在。重新选取此段可以重试。</p>'}${ending ? `<blockquote>${ending}</blockquote>` : ''}`;
+    reader.innerHTML = `<small>CHAPTER 0${segment} / 已记录</small><h3>北门灯标</h3>${narrative?.intro ? narrative.intro.split(/\n+/).filter(Boolean).map(text => `<p>${esc(text)}</p>`).join('') : '<p>正文暂时无法载入，段落记录仍在。重新选取此段可以重试。</p>'}${ending ? `<blockquote>${ending}</blockquote>` : ''}`;
   });
 }

@@ -1,3 +1,4 @@
+import { overlayElements } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { claimResourceReward } from '../game/src/run/node-reward-state.js';
 
@@ -7,7 +8,7 @@ beforeEach(async () => {
   vi.resetModules(); vi.useFakeTimers();
   document.body.innerHTML = '<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
   actions = {};
-  UI = { el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody'), ovTitle:document.getElementById('ovTitle') },
+  UI = { el:{ ...overlayElements() },
     act:(name, fn) => actions[name] = fn, refresh() {}, log() {},
     showOverlay(_title, html) { this.el.ovBody.innerHTML = html; this.el.overlay.hidden = false; },
     hideOverlay() { this.el.overlay.hidden = true; },
@@ -26,10 +27,11 @@ beforeEach(async () => {
 });
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); delete window.SDT; });
 
-function openFixed({ coins = 0, context = { onCell:true }, options = {}, done = vi.fn() } = {}) {
+async function openFixed({ coins = 0, context = { onCell:true }, options = {}, done = vi.fn() } = {}) {
   const snapshot = { version:1, seed:7, layerIdx:0, trackPos:1, queue:[{ kind:'small' }], index:1, context,
     current:{ kind:'small', cards:[card], coins, coinsReceived:false, taken:[], lost:[], source:'固定奖励', title:'领取奖励' } };
   expect(Chests.restore(game, snapshot, done, options)).toBe(true);
+  await actions.chestRetrySave();
   return done;
 }
 function failSaves(kind) {
@@ -37,24 +39,24 @@ function failSaves(kind) {
 }
 
 describe('领奖进度、失败回执与最终节点检查点', () => {
-  it.each(['false', 'throw'])('单卡领取后保存%s，保留已领事实且可以原位重试保存', kind => {
-    openFixed(); failSaves(kind);
-    expect(() => actions.chestTake1({ i:'0' })).not.toThrow();
+  it.each(['false', 'throw'])('单卡领取后保存%s，保留已领事实且可以原位重试保存', async kind => {
+    await openFixed(); failSaves(kind);
+    await expect(actions.chestTake1({ i:'0' })).resolves.toBeUndefined();
     expect(game.ownedCards).toHaveLength(1);
     expect(Chests.serialize(game).current.taken).toEqual([0]);
     expect(UI.el.ovBody.textContent).toContain('尚未保存成功');
     expect(UI.el.ovBody.querySelector('[data-act="chestRetrySave"]')).not.toBeNull();
-    game.persistSave.mockReturnValue(true); actions.chestRetrySave();
+    game.persistSave.mockReturnValue(true); await actions.chestRetrySave();
     expect(UI.el.ovBody.textContent).not.toContain('尚未保存成功');
     expect(game.grantCard).toHaveBeenCalledTimes(1);
   });
 
-  it.each(['false', 'throw'])('最终完成保存%s时保留原页和续流，成功重试才清理待领奖', kind => {
-    const done = openFixed({ options:{ beforeComplete:() => { game.visited['0,1'] = 1; } } });
-    actions.chestTake1({ i:'0' });
+  it.each(['false', 'throw'])('最终完成保存%s时保留原页和续流，成功重试才清理待领奖', async kind => {
+    const done = await openFixed({ options:{ beforeComplete:() => { game.visited['0,1'] = 1; } } });
+    await actions.chestTake1({ i:'0' });
     const before = structuredClone(game.nodeChestRewards['0,1']);
     failSaves(kind);
-    expect(() => actions.chestContinue()).not.toThrow();
+    await expect(actions.chestContinue()).resolves.toBe(false);
     expect(done).not.toHaveBeenCalled();
     expect(game.state).toBe('modal'); expect(UI.el.overlay.hidden).toBe(false);
     expect(Chests.serialize(game).current.taken).toEqual([0]);
@@ -67,16 +69,16 @@ describe('领奖进度、失败回执与最终节点检查点', () => {
       committed = { state:game.state, current:Chests.serialize(game), nodes:{ ...game.nodeChestRewards }, visited:{ ...game.visited } };
       return true;
     });
-    actions.chestContinue(); actions.chestContinue();
+    await actions.chestContinue(); actions.chestContinue();
     expect(done).toHaveBeenCalledTimes(1); expect(game.grantCard).toHaveBeenCalledTimes(1);
     expect(committed).toEqual({ state:'idle', current:null, nodes:{}, visited:{ '0,1':1 } });
     expect(Chests.serialize(game)).toBeNull();
   });
 
-  it('总览同样显示保存错误和重试入口，旧保存按钮不能覆盖替换页面', () => {
+  it('总览同样显示保存错误和重试入口，旧保存按钮不能覆盖替换页面', async () => {
     Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true });
-    failSaves('throw'); actions.chestNext(); actions.chestReveal();
-    actions.chestTake1({ i:'0' });
+    failSaves('throw'); await Promise.resolve();
+    await actions.chestTake1({ i:'0' });
     const retry = actions.chestRetrySave;
     expect(UI.el.ovBody.textContent).toContain('尚未保存成功');
     expect(UI.el.ovBody.querySelector('[data-act="chestRetrySave"]')).not.toBeNull();
@@ -85,24 +87,24 @@ describe('领奖进度、失败回执与最终节点检查点', () => {
     expect(UI.el.ovBody.textContent).toBe('替换页面');
   });
 
-  it('授予卡牌期间旧单领和批量动作重入不重复授予', () => {
-    openFixed(); const take = actions.chestTake1, all = actions.chestTake;
+  it('授予卡牌期间旧单领和批量动作重入不重复授予', async () => {
+    await openFixed(); const take = actions.chestTake1, all = actions.chestTake;
     game.grantCard.mockImplementation(value => {
       take({ i:'0' }); all(); game.ownedCards.push({ uid:'once', card:value }); return true;
     });
-    take({ i:'0' });
+    await take({ i:'0' });
     expect(game.grantCard).toHaveBeenCalledTimes(1); expect(game.ownedCards).toHaveLength(1);
   });
 
-  it('金币入账通知期间的重入不再领取同一份金币', () => {
-    openFixed({ coins:2 });
+  it('金币入账通知期间的重入不再领取同一份金币', async () => {
+    await openFixed({ coins:2 });
     const collect = actions.chestCoins;
     game.gainCoins.mockImplementation(amount => { game.coins += amount; collect(); });
     collect(); expect(game.coins).toBe(2); expect(game.gainCoins).toHaveBeenCalledTimes(1);
   });
 
-  it('最终保存替换对局后不清理新页、不执行旧节点续流', () => {
-    const done = openFixed(); actions.chestTake1({ i:'0' });
+  it('最终保存替换对局后不清理新页、不执行旧节点续流', async () => {
+    const done = await openFixed(); await actions.chestTake1({ i:'0' });
     game.persistSave.mockImplementation(() => {
       game.discoveredPairs = new Set(); UI.showOverlay('', '<main>新对局页面</main>'); return true;
     });
@@ -112,7 +114,7 @@ describe('领奖进度、失败回执与最终节点检查点', () => {
 });
 
 describe('资源二选一共用领取边界', () => {
-  it('授予回调同步重入时只结算一次，失败仍可另选', () => {
+  it('授予回调同步重入时只结算一次，失败仍可另选', async () => {
     const record = { cardIds:['a','b'], taken:null };
     const nested = vi.fn();
     expect(claimResourceReward(record, 0, () => {
@@ -121,7 +123,7 @@ describe('资源二选一共用领取边界', () => {
     expect(record.taken).toBeNull(); expect(nested).not.toHaveBeenCalled();
     expect(claimResourceReward(record, 1, () => true)).toBe(true); expect(record.taken).toBe(1);
   });
-  it('授予异常释放本次调用占用，不把临时锁写入存档', () => {
+  it('授予异常释放本次调用占用，不把临时锁写入存档', async () => {
     const record = { cardIds:['a'], taken:null };
     expect(() => claimResourceReward(record, 0, () => { throw new Error('receive failed'); })).toThrow('receive failed');
     expect(JSON.parse(JSON.stringify(record))).toEqual({ cardIds:['a'], taken:null });

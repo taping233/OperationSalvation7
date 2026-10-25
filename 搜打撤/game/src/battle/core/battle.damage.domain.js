@@ -1,4 +1,6 @@
-import { esc, clone as cloneData } from '../../core/shared.js';
+import { usesNonLethalDamage, doublesLegacyBleed } from '../../cards/card-legacy-battle-policy.js';
+import { esc } from '../../core/shared.js';
+import { dealMeasuredDamage } from './battle.measured-damage.js';
 
 /** Instance-owned state and host services are captured explicitly. */
 export function createDamageDomain(context) {
@@ -44,24 +46,8 @@ function createBattleDamage({ readState, sound, alive, recordRequestedDamage, re
   }
 
   // 提交已经准备好数值的一段伤害。文本、结构化牌效和敌人互殴共用目标防御与心数口径。
-  function commitFoeDamage(foe, card, attacker, amount, type) {
-    if (foe.heartsMode) {
-      const isTrue = type === Combat.TYPES.TRUE;
-      const abreakOn = (foe.status.abreak || 0) > 0;
-      let loss;
-      if (isTrue) loss = Math.max(0, amount);
-      else {
-        const shadow = { id: foe.id, status: { ...foe.status },
-          defense: cloneData(foe.defense || { shield: 0, armor: 0, guard: false }) };
-        const probe = Combat.dealDamage(attacker, shadow, amount, type);
-        loss = abreakOn ? Math.max(0, probe.dealt) : (probe.dealt >= 8 ? 2 : (probe.dealt >= 1 ? 1 : 0));
-      }
-      if (card?._cardDamagePolicy?.nonLethal || card?.id === 'tt13-mercy' && !Array.isArray(card.rules?.triggers?.onPlay)) loss = Math.min(loss, Math.max(0, foe.hp - 1));
-      foe.hp -= loss;
-      recordRequestedDamage(foe, loss, card, { alive, hitFoe });
-      return { dealt: loss, hearts: true, log: [] };
-    }
-    const result = Combat.dealDamage(attacker, foe, amount, type, { nonLethal: !!card?._cardDamagePolicy?.nonLethal || card?.id === 'tt13-mercy' && !Array.isArray(card.rules?.triggers?.onPlay) });
+  function commitFoeDamage(foe, card, attacker, amount, type, multiplier = 1) {
+    const result = dealMeasuredDamage(Combat, attacker, foe, amount, type, { nonLethal: usesNonLethalDamage(card), multiplier });
     recordRequestedDamage(foe, result.dealt, card, { alive, hitFoe });
     return result;
   }
@@ -79,10 +65,8 @@ function createBattleDamage({ readState, sound, alive, recordRequestedDamage, re
     // 破隐一击（白梅落影·妄）：自己处于潜行中发动的攻击伤害 ×2
     const stealthedBefore = Combat.isStealthed(readState().pstat);
     let amt = amount;
-    if (!preserveBaseDamage && readState().stealthStrike && stealthedBefore && amount > 0) {
-      amt *= 2;
-      readState().G.log(`[[icon:runner]] <b>破隐一击</b>：从潜行中发动，伤害翻倍（${amount} → ${amt}）`, 'ok');
-    }
+    const multiplier = !preserveBaseDamage && readState().stealthStrike && stealthedBefore ? 2 : 1;
+    if (multiplier > 1) readState().G.log('[[icon:runner]] <b>破隐一击</b>：从潜行中发动，本段伤害翻倍', 'ok');
     // 法伤加成（含祝福）；「受法伤加成翻倍」（爆燃火球）在此翻倍。
     // 2026-09-09 修复：spellUp 不再预加进 spellPower——dealDamage 会从 status 再加一次，
     // 此前法术强化被双重计数；现在 bonus 一次性算清并置空 status.spellUp，卡面显示口径一致
@@ -104,7 +88,7 @@ function createBattleDamage({ readState, sound, alive, recordRequestedDamage, re
     }
     // 「触发的流血伤害翻倍」（飞身劈）：流血加成部分再叠一次。
     // M2：registerRule bleedAmp 旗标（readState().pstat.status.bleedAmp）——结构化规则的同一翻倍口径
-    if (!preserveBaseDamage && type === Combat.TYPES.ATTACK && card && (card.id === 'tt3-fly-arrowhawk' || /流血伤害翻倍/.test(String(card.desc || ''))) && (foe.status.bleed || 0) > 0) {
+    if (!preserveBaseDamage && type === Combat.TYPES.ATTACK && card && doublesLegacyBleed(card) && (foe.status.bleed || 0) > 0) {
       amt += foe.status.bleed;
       readState().G.log(`[[icon:blood]] <b>流血伤害翻倍</b>：流血加成 ${foe.status.bleed} → ${foe.status.bleed * 2}`, 'sys');
     } else if (!preserveBaseDamage && type === Combat.TYPES.ATTACK && (readState().pstat.status.bleedAmp || 0) > 0 && (foe.status.bleed || 0) > 0) {
@@ -127,7 +111,7 @@ function createBattleDamage({ readState, sound, alive, recordRequestedDamage, re
       const hpBefore = foe.hp;
       const isTrue = type === Combat.TYPES.TRUE;
       const abreakOn = (foe.status.abreak || 0) > 0;
-      const { dealt: loss } = commitFoeDamage(foe, card, { atk: readState().G.atk, spellPower: sp, status: statusForHit }, amt, type);
+      const { dealt: loss } = commitFoeDamage(foe, card, { atk: readState().G.atk, spellPower: sp, status: statusForHit }, amt, type, multiplier);
       if (loss > 0) readState().floats.push({ unit: foeIdx(foe), text: '-' + loss + '♥', cls: 'dmg', type,
         hpBefore, hpAfter: foe.hp, maxHp: foe.maxHp });
       readState().G.log(`[[icon:play]] <b>${esc(card.name)}</b> → ${esc(foe.name)}：${isTrue || abreakOn ? '真伤/破甲，' : ''}击碎 <b>${loss}</b> 颗心（余 ${Math.max(0, foe.hp)} 心）`, 'sys');
@@ -137,7 +121,7 @@ function createBattleDamage({ readState, sound, alive, recordRequestedDamage, re
     }
     const hpBefore = foe.hp;
     const shieldBefore = foe.defense?.shield || 0;
-    const r = commitFoeDamage(foe, card, { atk: readState().G.atk, spellPower: sp, status: statusForHit }, amt, type);
+    const r = commitFoeDamage(foe, card, { atk: readState().G.atk, spellPower: sp, status: statusForHit }, amt, type, multiplier);
     if (r.stealthed) {
       sound('parry');
       readState().floats.push({ unit: foeIdx(foe), text: '未命中', cls: 'block' });

@@ -72,9 +72,11 @@ test('collector pins official audit endpoint and info threshold; affected succes
   report.vulnerabilities.example.fixAvailable.unknown = 'discard';
   let emitted = '';
   collectAudit(output, summary, { run: (command, args, options) => {
-    assert.equal(command, 'npm');
-    assert.deepEqual(args, ['audit', '--package-lock-only', '--ignore-scripts', '--json',
-      '--registry=https://registry.npmjs.org/', '--audit-level=info']);
+    assert.equal(command, process.platform === 'win32' ? 'cmd.exe' : 'npm');
+    const auditArgs = ['audit', '--package-lock-only', '--ignore-scripts', '--json',
+      '--registry=https://registry.npmjs.org/', '--audit-level=info'];
+    assert.deepEqual(args, process.platform === 'win32' ? ['/d', '/c', 'npm', ...auditArgs] : auditArgs);
+    assert.equal(options.windowsHide, true);
     assert.equal(options.timeout, 120000); assert.equal(options.maxBuffer, 1024 * 1024);
     return { status: 1, stdout: JSON.stringify(report), stderr: 'fixture stderr must not persist' };
   }, emit: value => { emitted += value; } });

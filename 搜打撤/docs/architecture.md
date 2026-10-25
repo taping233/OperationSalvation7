@@ -8,6 +8,10 @@
 
 背包、局内商店与基地操作提示共用 `ui/operation-notice.js`：每个所属页面保留一个提示通道，新结果替换旧提示与计时器；成功提示显示3200ms，警告由所属页面显式替换或清除，保存失败不会自动消失。提示文案按纯文本转义，配色、状态播报与减少动态效果规则由公共样式维护，位置和业务结果由页面提供。
 
+`ui/screen-owner.js`登记房间、卡牌特写和独立确认层的输入优先级，Esc只由当前最上层处理；基地普通页面允许全局切页快捷键，确认和卡牌特写仍拦截。确认层保留来源页面、暂时隔离背景输入，提交期间禁止重复执行，失败后留层重试。设置用四类横向导航，输入页调用已有动作绑定；单字母快捷键可关闭，提示读取实际绑定。地图沿用原版HUD布局，进入房间才将原生命、金币与系统控件合入公共玻璃顶栏，退出后恢复原父级和顺序。保存回执区分对局检查点和整档结果；对局保存成功不能清除整档保存失败，地图只在保存失败时显示重试入口。
+
+卡牌解释由`ui/term-definitions.js`集中维护，词条提示与`card-tip-groups.js`共用规则内容。普通特写可由来源提供`items/index/getItems/optionsForItem`启用连续浏览；切牌默认清除旧操作页脚，操作前检查来源仍有效。照片展示保留独立流程。大字阅读只放大说明层，不改变地图与战斗坐标。手牌保持横向布局，悬停阅读与选靶继续复用固定命中区域。
+
 `index.html` 只加载 `src/main.js`。首页展示、全局界面控制器、游戏内核和启动展示都由该入口按 `BOOT_ORDER` 装配；启动集成测试加载同一入口，契约同时检查 HTML 入口与导入顺序。所有源码均为 ESM，模块自身使用显式 `import` 描述依赖。
 
 源码按功能域分目录：`core/` 管规则、随机、输入与绘图底座；`ui/` 管全局界面；`experience/` 管章节风险徽标；`cards/` 管卡库、同步与规则；`run/` 管局内地图与流程；`hub/` 管基地、背包与存档；`home/` 管首页与叙事；`audio/` 管音频；`agent/` 管自动游玩与统计。根层保留装配入口和 `generated/`。
@@ -32,7 +36,7 @@ runtime 基线通过 `core/sdt-facade.typecheck.d.ts` 和 `runtime-env.d.ts` 读
 
 `cards/card-instance.js` 供商店、事件收牌和卡面刷新深拷贝嵌套数据，UID由原调用方提供。`card-instance-fields.js` 明确已知字段的局内、战斗、单次施放和展示生命周期；刷新保留锦囊与未知历史扩展，清除已知临时字段，缺少模板的自定义牌不改。自然法杖在 `zeroFeeUntil` 写入明确的目标回合改费记录，费用查询仍兼容旧数字，保持原费用优先级与目标回合内重复生效规则。
 
-随机服务按用途隔离命名流：击杀喝彩使用 `visual`，终局记录 ID 使用 `recording`，默认随机策略使用 `agent-policy`；这些调用不推进玩法流。新增流沿现有 seed/rngState 保存，不改变随机算法或存档格式。默认随机策略与击杀后的规则序列相对旧实现会变化，旧实验基线须区分本次实现。
+随机服务在 `rngState.version` 记录流语义版本：新局 `reseed` 使用 v2，洗牌、奖励、随机目标、战斗生成及敌方行为分别使用 `shuffle/reward/target/generation/enemy`。调用以 `Random.random(旧流名, 用途)` 标注；恢复缺版本或仅 seed 的旧档使用 v1，忽略用途并继续原命名流的准确位置。未标用途的地图/生成流保持原键和算法。`core/random-streams.js` 统一登记展示流 `visual/fx/audio/scene`、记录流 `recording` 与策略流 `agent-policy`；这些流不进入回放规则比较，原始随机快照仍完整记录。v2 的规则随机结果与旧局不同，旧实验应沿原版本恢复比较。
 
 ## 稳定接口
 
@@ -58,8 +62,8 @@ runtime 基线通过 `core/sdt-facade.typecheck.d.ts` 和 `runtime-env.d.ts` 读
 - `run/shop-commands.js` 接收当前状态、容量、UID、价格与保存端口，承接购买、补充初始攻击、出售及委托优惠的状态更新；命令提交前复检资源与对象身份，页面控制器保留浏览、生命周期和反馈。保存失败保留完整内存成交，由原页面提示重试。
 - `run/event-commands.js` 承接事件支付、奖励准入、整批重编及结算预留；`game.run.events.js` 持有单个事件控制器的确定性抽取、页面身份、中间选择和奖励承接，`game.run.resources.js` 持有资源领取。`game.run.flow.js` 首次普通事件入口通过 `event-runtime.js` 加载事件控制器、骰子与剧情呈现，并注入会话和呈现服务；冷入口支持取消、重试、超时及对局身份检查。待领奖恢复仍在 `event-lifecycle.js` 同步返回布尔值；移动和落脚编排保留在 flow。
 - `shop-browse-state.js` 只捕获商店背包往返的DOM浏览位置、详情规则展开与焦点动作标识；控制器在同会话和新页面身份仍有效时恢复，不写入对局状态或存档。
-- `core/run-checkpoint.js` 统一局内同步保存的失败结果，保留旧端口无返回值兼容；它不回滚已经完成的内存结算。商店购买与出售核对原商品/报价、owned/UID及当前会话并阻止重入；保存失败保留本局完整成交并提示重试，离店失败留页。委托优惠应用失败回退尚未提交的价格草稿，保留已掷定格位。
-- `battle/view/battle.scenery.js` 按本场 token 固定场景配置。当前普通战与首脑战统一使用 `platform-minimal-1016` 的远景、透明站台地面与透明前景；`game.run.data.js` 预载同一组三图。分层模式按完整画幅叠放，人物站位与战斗动作仍由原视图和动画层持有；本轮接入及待统一验收范围见[场景记录](evidence/2026-10-16-WF-battle-platform-minimal/README.md)。
+- `core/run-checkpoint.js` 等待局内保存端口实际完成并统一失败结果，保留旧端口无返回值兼容；它不回滚已经完成的内存结算。商店购买与出售核对原商品/报价、owned/UID及当前会话并阻止重入；保存失败保留本局完整成交并提示重试，离店失败留页。委托优惠应用失败回退尚未提交的价格草稿，保留已掷定格位。
+- `battle/view/battle.scenery.js` 按本场 token 固定场景配置。当前普通战与首脑战统一使用 `platform-minimal-1016` 的远景、透明站台地面与透明前景；`game.run.data.js` 预载同一组三图，预战遭遇页也使用同组图层。分层模式按1672×941完整画幅叠放，角色站位与尺寸继续由现行战斗公共样式维护，主角头顶信息及接地影使用播放器已有的人物可见高与脚底留白，战斗动作沿用原动画层；恢复范围和未核项见[恢复昨日场景记录](evidence/2026-10-25-battle-scene-restore/README.md)。
 - `game.hub.js` 是基地轻门面，选档后首次进入才动态加载 `game.hub.runtime.js`；后者装配出征整备、页签与中立桥；`game.bag.js` 装配拖拽、战后结算与背包中立桥。基地与照相馆的待开页请求通过 `ui/page-entry-cancellation.js` 互斥，返回标题、选档或更新导航会取消旧请求；加载失败可重试，档案状态不复制。基地样式仍静态加载。对应切片以 `game.hub.*.js`、`game.bag.*.js` 命名；切片通过桥互调，contracts 检查循环依赖。
 - 正常基地和整备通过 `hub/command-errors.js` 格式化错误，不加载退役家具的 presenter、命令或控制器。兼容出口 `renderHomeScene` 返回 false，不导航、不取消正常基地加载、不写存档；退役模块、旧数据和收据保留。
 - `run/game.run.altar.js` 保留祭坛、火堆、撤离恢复的同步入口，并把 `openClassChoice()` 转交给选角轻门面 `run/game.run.class-choice.js`；人物与卡池页面 `game.run.class-choice.page.js` 及人物翻页动效仅在实际请求选角时动态装载，无标题/基地 idle 预取。入口 Promise 在页面就绪后完成；出征切幕等待该结果。`loadGame()` 同步返回恢复分支与持久化明细，异步 Base 写入由 `pendingPersistence` 确认；未选角存档另附 `classChoiceEntry` 供选档 await，Promise 不写入游戏或存档状态。选角下载与其他待开页互斥；取消、换档/换局和来源宿主变化废弃旧结果，失败保留 pending run 与可重试入口。
@@ -75,6 +79,7 @@ runtime 基线通过 `core/sdt-facade.typecheck.d.ts` 和 `runtime-env.d.ts` 读
 下文战斗模块文件名相对上方五个子目录；具体路径按[源码目录说明](../game/src/README.md)定位。
 
 - `battle.core.js`：浏览器战斗装配与命令门面；默认状态在 `battle.runtime.js`，独立状态由 `battle.runtime.factory.js` 创建。引擎及敌方阶段共用对应领域工厂；纯引擎不访问 DOM 或依赖战斗视图，BOSS 编组和消耗牌堆页面由快照驱动。
+- `core/live-bindings.js` 按实例状态表装配只读访问器，普通写入口按显式白名单生成；需要复制或明确类型约束的 setter 仍在运行态工厂中实现。`battle.engine.js` 的兼容导出在每次调用时取得当前配置引擎，并保留调用接收者、函数元数据及 `resolveCard.steps`；换引擎不会留下绑定旧实例的代理。
 - `battle.effects.js` + `effect-steps.js`（有序步骤表本体，拆片 `effect-steps.<节>.js` 按原序 concat——顺序即语义）：文本时点解析与效果执行器；执行器只通过显式端口改变战斗状态，不访问 DOM。
 - `cards/card-trigger-contract.js` 维护时点词表和声明所有权；纯 `cards/card-execution-plan.js` 统一时点、装备与打出效果的来源计划、注册快照、基础字段所有权及隔离执行视图。`battle.trigger-source.js`、触发 runner、装备及 resolver 共同消费该计划；显式空数组仍拥有对应时点，其他尚未迁移的时点保留文本兼容。获取、抽到、消耗由当事卡直调，其余七个触发时点由 runner 登记；打出效果在 resolver 执行。capability 入口恢复执行卡保留的完整声明后预检；schema 保留原执行视图导出。复杂文本效果体仍由原解释器执行。
 - `battle.triggers.m2.js` 按本次事件的登记快照同步派发，执行前预留持续次数，阻止同一登记同一时点的递归重入；战斗身份变化、取消和结束使旧派发失效。回合开始的延迟任务固定当前批次，新产生的任务留给后续回合；恢复仍重演入场检查点，不新增中途触发器存档。
@@ -111,6 +116,8 @@ runtime 基线通过 `core/sdt-facade.typecheck.d.ts` 和 `runtime-env.d.ts` 读
 - 事件节点在核心结算前预留完成凭据，使首次待领奖保存同时记录事件完成；未承接且尚未发放时恢复原选择，已经发放的内容不因保存失败重新结算。事件选牌、骰子和重编的旧回调核对当前上下文；保存失败留页重试，原骰结果及已支付事实保留。
 
 样式级联以 `game/index.html` 的 `<link rel="stylesheet">` 实际顺序为准：基础与功能层之后加载缩放和页面覆盖层。按当前引用定位样式文件，并检查目标页面的计算样式。
+
+重复的单一父选择器可集中为组件作用域，子规则使用 `&`。`scripts/css-component-scopes.mjs` 在 Vite PostCSS 和独立 CSS 资产输出时展开这类作用域，保留原选择器、权重、声明与规则顺序；开发请求和关闭压缩的构建同样处理，不增加本轮样式对原生 nesting 的浏览器要求。多父列表、父伪元素、混排声明及其他原有 native nesting 继续沿原链处理。源码样式契约通过 `tests/helpers/css-source.js` 检查相同的展开视图。
 
 模块之间不得直接修改另一模块的私有变量；需要跨模块行为时应暴露命名命令、只读快照或一次性配置接口。
 

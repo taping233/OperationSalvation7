@@ -82,15 +82,15 @@ describe('R2-a production facade contract with isolated adapter', () => {
     expect((await createRecoveryCommands({...f,lockManager:locks,keyFactory:keys}).recoverSlot(1)).code).toBe('STORAGE_READ_FAILED');
   });
 
-  it('RunStorage.remove 的真实删除异常返回 false，空串 pending 也阻止旧同步写删', () => {
+  it('RunStorage.remove 的真实删除异常返回 false，空串 pending 也阻止旧同步写删', async () => {
     const slot=4, runKey=RunStorage.key(slot), txKey=`sdt-tx-v1-slot${slot}`;
     localStorage.setItem(runKey,'{}'); localStorage.setItem(txKey,'');
-    expect(RunStorage.write(slot,{hp:1})).toBe(false);
-    expect(RunStorage.remove(slot)).toBe(false);
+    expect(await RunStorage.write(slot,{hp:1})).toBe(false);
+    expect(await RunStorage.remove(slot)).toBe(false);
     localStorage.removeItem(txKey);
     const original=Storage.prototype.removeItem;
     Storage.prototype.removeItem=function(key){if(key===runKey) throw Error('remove'); return original.call(this,key);};
-    try { expect(RunStorage.remove(slot)).toBe(false); } finally { Storage.prototype.removeItem=original; localStorage.removeItem(runKey); }
+    try { expect(await RunStorage.remove(slot)).toBe(false); } finally { Storage.prototype.removeItem=original; localStorage.removeItem(runKey); }
   });
 
   it('Base.reset 与旧迁移在空串 pending 下先拒绝且不切档或搬移旧数据', async () => {
@@ -115,20 +115,20 @@ describe('R2-a production facade contract with isolated adapter', () => {
     expect(conflict.code).toBe('REQUEST_ID_CONFLICT');
   });
 
-  it('旧同步存储保留稳定runId/递增revision，pending时拒写与拒删', () => {
+  it('旧同步存储保留稳定runId/递增revision，pending时拒写与拒删', async () => {
     const slot=5, runKey=RunStorage.key(slot), txKey=`sdt-tx-v1-slot${slot}`;
     localStorage.removeItem(runKey); localStorage.removeItem(txKey);
-    expect(RunStorage.write(slot,{hp:10})).toBe(true);
+    expect(await RunStorage.write(slot,{hp:10})).toBe(true);
     const first=JSON.parse(localStorage.getItem(runKey));
     expect(first._r2.revision).toBe(0);
-    expect(RunStorage.write(slot,{hp:9})).toBe(true);
+    expect(await RunStorage.write(slot,{hp:9})).toBe(true);
     const second=JSON.parse(localStorage.getItem(runKey));
     expect(second._r2).toEqual({runId:first._r2.runId,revision:1});
     localStorage.setItem(txKey,'{}');
-    expect(RunStorage.write(slot,{hp:8})).toBe(false);
-    expect(RunStorage.remove(slot)).toBe(false);
+    expect(await RunStorage.write(slot,{hp:8})).toBe(false);
+    expect(await RunStorage.remove(slot)).toBe(false);
     expect(localStorage.getItem(runKey)).toBe(JSON.stringify(second));
-    localStorage.removeItem(txKey); RunStorage.remove(slot);
+    localStorage.removeItem(txKey); await RunStorage.remove(slot);
   });
 
   it('缺Web Locks明确拒绝，不写日志或玩家键', async () => {

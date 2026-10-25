@@ -1,6 +1,8 @@
+import { RULE_CONFIG } from '../../core/rule-config.js';
 import { esc } from '../../core/shared.js';
 import { createDeckOperations } from '../bag/battle.deck.factory.js';
 import { BATTLE_PHASES, createBattleState, transitionBattle } from '../runtime/battle.state.js';
+import { initializeEliteEnemies, blocksPlayerPowerGain, syncEliteAuras } from './battle.elite-mechanics.js';
 
 /** Instance-owned state and host services are captured explicitly. */
 export function createLifecycleDomain(context) {
@@ -10,6 +12,12 @@ const cardCatalog = context.cards;
 const traceRestoreStep = context.traceRestoreStep;
 const Random = context.random;
 const Combat = context.combat;
+Combat.COMBAT_HOOKS.canAddBlessing = (target, key, amount) => {
+  const blocked = target === instanceRuntime.pstat && amount > 0 && ['atkUp', 'spellUp'].includes(key)
+    && blocksPlayerPowerGain(instanceRuntime.foes);
+  if (blocked) instanceRuntime.G.log('[[icon:skull]] <b>封识信徒</b>：主人公无法获得攻击强化与法术强化', 'warn');
+  return !blocked;
+};
 const busEmit = context.emitEvent;
 const presentBattleDefeat = context.presentBattleDefeat;
 const { clearFeedback } = context.presentation;
@@ -87,6 +95,7 @@ function createBattleLifecycle({
     instanceRuntime.restoreBattleSession(nextGame, data, R().battleEnergy);
     instanceRuntime.restoreBattlePiles(data);
     instanceRuntime.restoreBattleCombatants(data, intentFor);
+    syncEliteAuras(instanceRuntime.foes);
     instanceRuntime.restorePilesBookkeeping(data);
     instanceRuntime.restoreEffectState(data);
     // —— 2026-09-09 机制审计补实装：新战斗规则变量恢复 ——
@@ -135,7 +144,7 @@ function createBattleLifecycle({
     const playedCopy = instanceRuntime.played.slice();
     const consumedCopy = instanceRuntime.consumed.slice();
     const spentUids = new Set([...playedCopy, ...consumedCopy]);
-    // 99 库只属于本场；其已出/注能记录保留，但不提供可被战后消耗区入库的卡模板。
+    // 普通临时牌库只属于本场；其已出/注能记录保留，但不提供可被战后消耗区入库的卡模板。
     instanceRuntime.opts.spentCards = instanceRuntime.granted.filter(entry => spentUids.has(entry.uid) && !entry.uid.startsWith('normal-sha-'))
       .map(entry => ({ uid: entry.uid, card: { ...entry.card } }));
     instanceRuntime.clearBattlePiles(); instanceRuntime.set$hand([]);
@@ -163,14 +172,26 @@ function createBattleLifecycle({
       deck: instanceRuntime.opts.isBoss ? instanceRuntime.lastDeckSel.map(uid => instanceRuntime.G.ownedCards?.find(o => o.uid === uid)?.card?.name || uid) : null,
     });
     hostAudio.music('board');   // 战斗结束切回行军氛围
-    // 战斗结束广播（2026-09-11 批次 5）：订阅方各自响应（背包结算/基地/统计），
-    // 战斗核心不再直接依赖 game.onBattleEnd 的实现；无人订阅时回退旧回调（审计 harness 兼容）
+    // Necessary settlement has an explicit completion port; observers run only after success.
     const endedGame = instanceRuntime.G, endedOpts = instanceRuntime.opts;
     const notifyEnd = () => {
       if (instanceRuntime.G !== endedGame || instanceRuntime.opts !== endedOpts || endedGame.battleActive) return;
-      if (!busEmit('battle:end', endedOpts, playedCopy, win, consumedCopy) && typeof endedGame.onBattleEnd === 'function') {
-        endedGame.onBattleEnd(endedOpts, playedCopy, win, consumedCopy);
-      }
+      const settle = endedOpts.nest ? endedGame.onNestBattleEnd : endedGame.onBattleEnd;
+      const fail = error => {
+        console.error('[battle] 必要战后结算失败', error);
+        endedGame.log('[[icon:cross]] 战后结算尚未完成，请保留当前页面并重试；进度未确认为已保存。', 'warn');
+        return false;
+      };
+      const complete = result => {
+        if (result === false) return fail(new Error('Settlement reported incomplete'));
+        busEmit('battle:end', endedOpts, playedCopy, win, consumedCopy);
+        return true;
+      };
+      if (typeof settle !== 'function') return fail(new Error('Missing necessary battle settlement port'));
+      try {
+        const result = settle.call(endedGame, endedOpts, playedCopy, win, consumedCopy);
+        return result && typeof result.then === 'function' ? Promise.resolve(result).then(complete, fail) : complete(result);
+      } catch (error) { return fail(error); }
     };
     // 逻辑死亡和中止仍立即完成；仅在实页有倒地演出时推迟结算页通知。
     const presentation = win === false ? presentBattleDefeat({ hp: endedGame.hp, maxHp: endedGame.maxHp }) : null;
@@ -245,12 +266,15 @@ function createBattleLifecycle({
         revive: d.revive || undefined, revived: undefined, protects: d.protects || undefined,
         protected: d.protected || undefined, reviveTurn: undefined,
         atk: d.atk || 2, affix: d.affix || null, affixName: d.affixName || null, behavior: d.behavior || null, dead: false,
+        elite: d.elite || undefined, eliteSkill: d.eliteSkill, desc: d.desc, damageCap: d.damageCap,
         status: {}, defense: { shield: 0, armor: 0, guard: false },
       };
       f.intent = intentFor(f, 1);
       Combat.ensureStatus(f);
       return f;
     }));
+    initializeEliteEnemies(instanceRuntime.foes);
+    instanceRuntime.foes.forEach(f => { f.intent = intentFor(f, 1); });
     instanceRuntime.set$interaction(null);
     hostAudio.music('battle');   // 切入战斗氛围
     hostAudio.sfx(instanceRuntime.opts.isBoss ? 'bossReveal' : 'battleEnter');
@@ -259,7 +283,11 @@ function createBattleLifecycle({
     // entry effects/rendering; restoreGame retains ownership of its final save.
     if (!instanceRuntime.restoringRestartCheckpoint && instanceRuntime.battleRestartCheckpoint && typeof instanceRuntime.G.persistSave === 'function') {
       try {
-        if (instanceRuntime.G.persistSave() === false) instanceRuntime.G.log('[[icon:cross]] 本场入场检查点未保存，重新载入仍以此前存档为准', 'warn');
+        const sourceGame = instanceRuntime.G;
+        const warn = () => sourceGame.log('[[icon:cross]] 本场入场检查点未保存，重新载入仍以此前存档为准', 'warn');
+        const pendingSave = sourceGame.persistSave();
+        if (pendingSave && typeof pendingSave.then === 'function') pendingSave.then(saved => { if (saved === false) warn(); }, warn);
+        else if (pendingSave === false) warn();
       } catch (error) {
         console.warn('[battle] 入场检查点保存失败', error);
         instanceRuntime.G.log('[[icon:cross]] 本场入场检查点未保存，重新载入仍以此前存档为准', 'warn');
@@ -298,7 +326,7 @@ function createBattleLifecycle({
     if (!instanceRuntime.restoringRestartCheckpoint) emitBattlePresentation?.({ kind: 'player-turn-start', turn: instanceRuntime.turn });
     // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡不进普通战手牌（对 BOSS 编组不受限）
     if (alive().length > 1) instanceRuntime.G.log('[[icon:question]] 以一敌多：单体伤害牌选择敌人；全体牌可拖到<b>战场空地</b>或选择敌人。需要注能时先选材料，再确认释放', 'sys');
-    instanceRuntime.G.log(`[[icon:cards]] 随身 <b>${instanceRuntime.hand.length}</b> 张战斗卡直接入手；另有 <b>99</b> 张本场临时初始攻击牌库，仅由抽牌效果取牌，开局与每回合不固定抽牌 · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费`, 'sys');
+    instanceRuntime.G.log(`[[icon:cards]] 随身 <b>${instanceRuntime.hand.length}</b> 张战斗卡直接入手；另有 <b>${RULE_CONFIG.battle.normalStarterDeckSize}</b> 张本场临时初始攻击牌库，仅由抽牌效果取牌，开局与每回合不固定抽牌 · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费`, 'sys');
     requestBattleRender();
   }
 
@@ -374,13 +402,17 @@ function createBattleLifecycle({
 
   function toggleDeckCard(uid) {
     if (!instanceRuntime.selectingDeck || !instanceRuntime.selPool.some(entry => entry.uid === uid)) return;
-    if (!instanceRuntime.sel.has(uid) && instanceRuntime.sel.size >= instanceRuntime.selDeckMax) return;   // 混沌之眼上限之外不可再编入
+    const proposed = new Set(instanceRuntime.sel);
+    if (proposed.has(uid)) proposed.delete(uid); else proposed.add(uid);
+    const capacity = R().bossDeckSize + deckCapBonus(proposed);
+    if (!instanceRuntime.sel.has(uid) && proposed.size > capacity) return;
     const entry = instanceRuntime.selPool.find(o => o.uid === uid);
     if (!instanceRuntime.sel.has(uid) && isBattleStartEquip(entry.card) && selectedStartEquipCount() >= equipCap()) {
       instanceRuntime.G.log(`[[icon:cross]] 开战装备占用装备栏，最多编入 ${equipCap()} 件；请先移出一件开战装备`, 'warn');
       return;
     }
     if (instanceRuntime.sel.has(uid)) instanceRuntime.sel.delete(uid); else instanceRuntime.sel.add(uid);
+    instanceRuntime.set$selDeckMax(capacity);
     requestBattleRender();
   }
 
@@ -391,6 +423,15 @@ function createBattleLifecycle({
   }
 
   function beginBoss() {
+    if (!instanceRuntime.opts.nest) {
+      instanceRuntime.set$selDeckMax(R().bossDeckSize + deckCapBonus(instanceRuntime.sel));
+      if (instanceRuntime.sel.size > instanceRuntime.selDeckMax) {
+        instanceRuntime.G.log(`[[icon:cross]] 所选卡牌超过牌库上限 ${instanceRuntime.selDeckMax} 张，请调整编组后开战`, 'warn');
+        instanceRuntime.set$selectingDeck(true);
+        requestBattleRender();
+        return;
+      }
+    }
     if (!instanceRuntime.opts.nest && selectedStartEquipCount() > equipCap()) {
       instanceRuntime.G.log(`[[icon:cross]] 开战装备超过 ${equipCap()} 件，请调整编组后开战`, 'warn');
       instanceRuntime.set$selectingDeck(true);
@@ -418,8 +459,8 @@ function createBattleLifecycle({
     instanceRuntime.G.state = 'modal';
     if (resetTriggers) resetTriggers();   // 与 beginNormal 对齐：上一场战斗的 M2 触发登记不得跨战斗泄漏
     instanceRuntime.G.log(instanceRuntime.opts.nest
-      ? `[[icon:cards]] <b>牌盒即牌库</b>：${instanceRuntime.drawPile.length} 张 · 开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费`
-      : `[[icon:cards]] 牌库编成：${instanceRuntime.opts.directBossStart ? '自动编入' : '自选'} ${instanceRuntime.sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${instanceRuntime.drawPile.length}</b> 张 ·
+      ? `[[icon:draw-pile]] <b>牌盒即牌库</b>：${instanceRuntime.drawPile.length} 张 · 开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费`
+      : `[[icon:draw-pile]] 牌库编成：${instanceRuntime.opts.directBossStart ? '自动编入' : '自选'} ${instanceRuntime.sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${instanceRuntime.drawPile.length}</b> 张 ·
       开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费`, 'sys');
     injectSealCards();   // 受缚之残影：编组带着才发动——4 张封印肢体洗入牌库（本牌已随编组在库），开局抽牌前洗入
     applyNestRunes();    // 龙巢符文：羁绊与符文效果开战结算
@@ -433,7 +474,8 @@ function createBattleLifecycle({
   }
 
   return {
-    flee, restore, finish, start, toggleDeckCard, cancelDeckSelection, beginBoss,
+    flee, restore, finish, start, toggleDeckCard, cancelDeckSelection,
+    beginBoss: () => { if (instanceRuntime.selectingDeck) beginBoss(); },
     prepareDeckSelection, deckCapBonus,
   };
 }

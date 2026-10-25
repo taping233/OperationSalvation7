@@ -21,7 +21,7 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
       <div class="reward-organizer-list">${stacks.map((stack, i) => `<article>
         <strong>${esc(stack.card.name)} ×${stack.count}</strong>
         <div>${pending === stack.uids[0]
-          ? `<span>丢弃 1 张，无法取回</span><button type="button" data-organize="confirm" data-index="${i}">确认丢弃</button><button type="button" data-organize="keep">保留</button>`
+          ? `<span>丢弃 1 张，无法取回</span><button type="button" data-organize="keep">保留</button><button type="button" data-organize="confirm" data-index="${i}">确认丢弃</button>`
           : `<button type="button" data-organize="safe" data-index="${i}"${safeStates[i].ok ? '' : ' disabled'} title="${esc(safeStates[i].reason)}">移入安全格</button>${safeStates[i].ok ? '' : `<small class="reward-safe-reason">${esc(safeStates[i].reason)}</small>`}<button type="button" data-organize="discard" data-index="${i}">丢弃1张</button>`}</div>
       </article>`).join('') || '<p>没有可直接腾位的卡牌，可打开完整背包整理道具。</p>'}</div>
       <footer>${rewardReturnHTML({ action:"return", organize:true })}
@@ -70,6 +70,6 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
     }
   }
   render();
-  /** @type {HTMLElement} */ (root.querySelector('[data-organize="return"]'))?.focus();
+  /** @type {HTMLElement} */ (root.querySelector('[data-organize="return"]'))?.focus({ preventScroll:true });
   return root;
 }

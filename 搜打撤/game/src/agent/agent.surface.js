@@ -21,16 +21,16 @@ function overlayVisible() {
   return !!overlay && !overlay.hidden;
 }
 
-// label 抽取按元素缓存（09-26 速度优化）：textContent 是每步 DOM 开销大头——
-// 同一次渲染内的多步观察（事件/商店等多步同页）全部命中缓存
+// Reuse normalization while the source text is unchanged; controls may update in place.
 const labelCache = new WeakMap();
 const textLabel = (el) => {
+  const raw = el.getAttribute('aria-label') || el.textContent || '';
   const hit = labelCache.get(el);
-  if (hit !== undefined) return hit;
-  const text = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim();
+  if (hit?.raw === raw) return hit.val;
+  const text = raw.replace(/\s+/g, ' ').trim();
   // 120：事件选项的收益/风险在 label+detail 里，截太短会丢决策依据
   const val = text.length > 120 ? text.slice(0, 119) + '…' : text;
-  labelCache.set(el, val);
+  labelCache.set(el, { raw, val });
   return val;
 };
 

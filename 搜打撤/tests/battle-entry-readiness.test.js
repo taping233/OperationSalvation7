@@ -1,9 +1,10 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
 import { createBattleEntryGate, waitForBattleImages } from '../game/src/battle/view/battle.presentation-ready.js';
+import { installRunTopBar, setRunTopBarBattleOptions, syncCommittedRunTopBar } from '../game/src/ui/run-top-bar.js';
+import { readCssSource } from './helpers/css-source.js';
 
 let gate, overlay, stage, style;
-const battleCss = readFileSync('game/css/battle.css', 'utf8');
+const battleCss = readCssSource('game/css/battle.css', 'utf8');
 const deferred = () => { let resolve; const promise = new Promise(done => { resolve = done; }); return { promise, resolve }; };
 const flush = async () => { for (let i = 0; i < 5; i++) await Promise.resolve(); };
 beforeEach(() => {
@@ -13,6 +14,20 @@ beforeEach(() => {
   gate = createBattleEntryGate({ timeoutMs: 8000 });
 });
 afterEach(() => { gate.dispose(); style?.remove(); style = null; vi.useRealTimers(); });
+
+it.each(['ready','degraded'])('restores the options entry after the real entry gate releases inert (%s)', async state => {
+  const body=document.createElement('div'); body.id='ovBody'; overlay.append(body); body.append(stage);
+  stage.innerHTML='<div class="sts-topbar"><details class="sts-options"><summary>选项</summary><button>战斗规则</button></details></div>';
+  const UI={el:{overlay,ovBody:body},_lastMode:'battle'}, bar=installRunTopBar(UI).bar;
+  const action=vi.fn();UI._acts={btSettings:action};setRunTopBarBattleOptions(UI,stage);
+  const button=bar.querySelector('#btnBattleOptions'); expect(button.hidden).toBe(false);
+  gate.begin(stage,1,overlay); syncCommittedRunTopBar(UI);
+  expect(stage.inert).toBe(true); expect(button.hidden).toBe(true);
+  gate.wait(stage,1,[Promise.resolve(state==='ready')]); await flush();
+  if(state==='degraded') overlay.querySelector('.battle-entry-status button').click();
+  expect(await gate.ready(stage,1)).toBe(true); expect(stage.inert).toBe(false);
+  expect(button.hidden).toBe(false); button.click();expect(action).toHaveBeenCalledOnce();
+});
 
 it('waits for actual readiness without mounting a second cutscene or reveal animation', async () => {
   const resource = deferred();

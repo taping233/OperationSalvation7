@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { buildEnemyActionPlan } from '../game/src/battle/core/battle.enemy-plan.js';
 import { calculateEnemyIntent } from '../game/src/battle/core/battle.enemy-intent.js';
@@ -6,8 +7,7 @@ import { readBattleSummary } from '../game/src/battle/core/battle.summary.js';
 
 window.SDT ||= { Icons: { img: () => '', TYPE_ART: {} } };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 3, battleHandMax: 30, bossDeckSize: 15,
-  starterSha: 0, battleStartDraw: 3, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(3, 30, 15, 0, 3, 1) }, items: {} };
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
@@ -42,7 +42,7 @@ function begin(overrides = {}) {
   // Real curse admission remains active; this flag keeps frenzy's random curses out of the fixed-damage fixture.
   R.set$playerCurseImmune(true);
   expect(BattleSession.getSnapshot().phase).toBe('player');
-  expect(BattleSession.getSnapshot().drawPile).toHaveLength(99);
+  expect(BattleSession.getSnapshot().drawPile).toHaveLength(10);
 }
 
 async function verifyNextTurn(expectedHits) {
@@ -69,7 +69,7 @@ async function verifyNextTurn(expectedHits) {
   expect(game.hp).toBe(forecast.hpAfter);
   expect(R.pstat.status.bleed || 0).toBe(0);
   expect(R.pstat.status.poison || 0).toBe(0);
-  expect(BattleSession.getSnapshot().drawPile).toHaveLength(99);
+  expect(BattleSession.getSnapshot().drawPile).toHaveLength(10);
   return { plan, intent, forecast };
 }
 

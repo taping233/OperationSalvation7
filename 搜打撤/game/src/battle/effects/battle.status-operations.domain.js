@@ -39,7 +39,7 @@ export function createStatusOperations({ combat, getAliveFoes, randomBattle, get
       if (operation.target === 'allEnemies') return getAliveFoes();
       if (operation.target === 'randomEnemy') {
         const alive = getAliveFoes();
-        return alive.length ? [alive[Math.floor(randomBattle() * alive.length)]] : [];
+        return alive.length ? [alive[Math.floor(randomBattle('target') * alive.length)]] : [];
       }
       if (operation.bindTarget === 'prevDamage') {
         return (boundTargets || []).filter(foe => foe && !foe.dead);
@@ -80,7 +80,9 @@ export function createStatusOperations({ combat, getAliveFoes, randomBattle, get
     const cue = attackCue(type, card);
     yield { kind: 'windup', targets: windupTargets, ...(cue ? { cue } : {}) };
     // windup 后重算目标（damage 段同款：演出等待期间点选目标可能倒下——同卡先前的 damage 段即可致死）
-    const targets = pickTargets().filter(foe => foe && !foe.dead);
+    const candidates = operation.target === 'randomEnemy' && windupTargets.some(foe => !foe.dead && foe.hp > 0)
+      ? windupTargets : pickTargets();
+    const targets = candidates.filter(foe => foe && !foe.dead);
     if (!targets.length) return false;
     const appliedKinds = new Map();
     const applyCurseTo = (foe, kind, amount, track = true) => {
@@ -171,7 +173,7 @@ export function createStatusOperations({ combat, getAliveFoes, randomBattle, get
       for (const foe of targets) {
         let total = 0;
         for (let i = 0; i < operation.burst; i++) total += combat.tickPoison(foe)?.dealt || 0;
-        log(`[[icon:skull]] ${nameOf(foe)} 毒伤引爆 ${operation.burst} 次，共 <b>${total}</b> 点固定伤害（${+(foe.status?.poison || 0)} 层中毒保留）`, 'sys');
+        log(`[[icon:status-poison]] ${nameOf(foe)} 毒伤引爆 ${operation.burst} 次，共 <b>${total}</b> 点固定伤害（${+(foe.status?.poison || 0)} 层中毒保留）`, 'sys');
       }
     }
     // —— M2：atkDown 侧效——挂诅咒后按 amount 扣攻并登记归还量（到期由回合管线归还）。
@@ -209,9 +211,9 @@ export function createStatusOperations({ combat, getAliveFoes, randomBattle, get
         : Number.isInteger(operation.stacks) ? operation.stacks : 1;
       combat.addBlessing(pstat, key, turns);
       if (key === 'stealth') {
-        log(`[[icon:runner]] <b>祝福·潜行</b>：${turns} 回合内无法成为被攻击对象（造成伤害会破除）`, 'ok');
+        log(`[[icon:status-stealth]] <b>祝福·潜行</b>：${turns} 回合内无法成为被攻击对象（造成伤害会破除）`, 'ok');
       } else {
-        log(`[[icon:sparkles]] <b>祝福·免疫伤害</b>：${turns} 回合内不受到任何伤害`, 'ok');
+        log(`[[icon:status-immune]] <b>祝福·免疫伤害</b>：${turns} 回合内不受到任何伤害`, 'ok');
       }
       return true;
     }
@@ -220,15 +222,15 @@ export function createStatusOperations({ combat, getAliveFoes, randomBattle, get
     combat.addBlessing(pstat, key, amount, turns);
     const durLabel = turns > 0 ? `${turns} 回合` : '本场战斗';
     if (key === 'atkUp') {
-      log(`[[icon:swords]] <b>祝福·攻击力增加</b>：攻击力 +${amount}（${durLabel}，当前加成 ${pstat.status.atkUp}）`, 'ok');
+      log(`[[icon:status-atk-up]] <b>祝福·攻击力增加</b>：攻击力 +${amount}（${durLabel}，当前加成 ${pstat.status.atkUp}）`, 'ok');
     } else if (key === 'spellUp') {
-      log(`[[icon:crystal]] <b>祝福·法伤增加</b>：法术伤害 +${amount}（${durLabel}，当前加成 ${pstat.status.spellUp}）`, 'ok');
+      log(`[[icon:status-spell-up]] <b>祝福·法伤增加</b>：法术伤害 +${amount}（${durLabel}，当前加成 ${pstat.status.spellUp}）`, 'ok');
     } else if (key === 'reduce') {
-      log(`[[icon:plate]] <b>祝福·减伤</b>：每次受到的伤害 -${amount}（${durLabel}）`, 'ok');
+      log(`[[icon:status-reduce]] <b>祝福·减伤</b>：每次受到的伤害 -${amount}（${durLabel}）`, 'ok');
     } else {
       // dodge：日志逐字对齐文本路径 buff.dodge（默认本回合口径不加回合括注；显式 duration≠1 时补注）
       const durNote = Number.isInteger(operation.duration) && operation.duration !== 1 ? `（持续 ${turns} 回合）` : '';
-      log(`[[icon:shield]] <b>闪避</b>：接下来 ${amount} 次攻击将被完全避开${amount > 1 ? '（各消耗 1 层）' : ''}${durNote}`, 'ok');
+      log(`[[icon:status-dodge]] <b>闪避</b>：接下来 ${amount} 次攻击将被完全避开${amount > 1 ? '（各消耗 1 层）' : ''}${durNote}`, 'ok');
     }
     return true;
   }

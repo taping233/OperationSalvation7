@@ -1,3 +1,4 @@
+import { extractionMocks } from './helpers/environment-fixtures.js';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 import { beforeEach, expect, it, vi } from 'vitest';
@@ -46,10 +47,10 @@ beforeEach(async () => {
   const Base = window.SDT.Base;
   Base.use(2);
   (await Base.reset(2));
-  RunStorage.write(2, { seed: 'extract-ui', rngState: UIState.game.rngState, hp: 20, maxHp: 30,
+  await RunStorage.write(2, { seed: 'extract-ui', rngState: UIState.game.rngState, hp: 20, maxHp: 30,
     inventory: UIState.game.inventory, ownedCards: UIState.game.ownedCards, usedPocket: [], myClass: 'wu',
     mode: 'normal', bossKilled: false, turn: 3, coins: 5, elapsed: 1 });
-  UIState.saveGame = vi.fn(() => UIState.saveResult && RunStorage.write(2, {
+  UIState.saveGame = vi.fn(async () => UIState.saveResult && await RunStorage.write(2, {
     ...RunStorage.read(2), seed: UIState.game.seed, rngState: UIState.game.rngState,
     hp: UIState.game.hp, maxHp: UIState.game.maxHp, inventory: UIState.game.inventory,
     ownedCards: UIState.game.ownedCards, usedPocket: UIState.game.usedPocket,
@@ -78,16 +79,33 @@ beforeEach(async () => {
   }));
   vi.doMock('../game/src/battle/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
   vi.doMock('../game/src/run/game.run.scenes.js', () => ({
-    FIRE_RESTORABLE: [], consumeCurrentCell: vi.fn(), finishInstant: vi.fn(), grantEventCard: vi.fn(),
-    nodeOpt: (act, label) => `<button data-act="${act}">${label}</button>`,
-    nodeShell: ({ body = '', foot = '' }) => window.SDT.UI.showOverlay('', `${body}${foot}`),
-    openPocketRestore: vi.fn(), openShop: vi.fn(), preloadAllNodeShellBgs: vi.fn(), showRunTransition: vi.fn(),
+    ...extractionMocks(() => vi),
   }));
   vi.doMock('../game/src/hub/recovery.commands.js', () => ({
     commitBaseAndRun: (...args) => recovery.commitBaseAndRun(...args),
     readSettlementReceipt: (...args) => recovery.readSettlementReceipt(...args),
     recoverSlot: (...args) => recovery.recoverSlot(...args),
   }));
+});
+
+it('撤离充能演出开始前已有持久化整理快照，期间重复撤离不再支付或入库', async()=>{
+  UIState.failAfterBase=false;
+  const {doExtract}=await import('../game/src/run/game.run.altar.js');
+  const {RunStorage}=await import('../game/src/hub/game.storage.js');
+  let release;
+  const pause=new Promise(resolve=>{release=resolve;});
+  const beforeReveal=vi.fn(()=>{
+    expect(UIState.game.pendingExtraction).toMatchObject({phase:'organizing'});
+    expect(RunStorage.read(2).pendingExtraction).toMatchObject({phase:'organizing'});
+    return pause;
+  });
+  const result=doExtract({beforeReveal});
+  await vi.waitFor(()=>expect(beforeReveal).toHaveBeenCalledOnce());
+  expect(await doExtract()).toBe(false);
+  expect(window.SDT.Base.data.stats.extracts).toBe(1);
+  expect(document.querySelector('#exMain')).toBeNull();
+  release(true);expect(await result).toBe(true);
+  expect(document.querySelector('#exMain')).not.toBeNull();
 });
 
 it.each(['exStash', 'exAll', 'exSmart'])('完成事务中断后点击 %s 保留可重试整理页，完成重试可进入结算', async action => {

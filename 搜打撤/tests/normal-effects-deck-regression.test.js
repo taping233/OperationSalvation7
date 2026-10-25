@@ -1,8 +1,8 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { beforeEach, afterEach, expect, it, vi } from 'vitest';
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  MAP: { rules: { battleEnergy: 99, battleHandMax: 200, bossDeckSize: 15, starterSha: 0,
-    battleStartDraw: 0, battleTurnDraw: 0, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(99, 200, 15, 0, 0, 0) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
@@ -27,14 +27,14 @@ async function playOwned() {
 it('real 铁甲阵 shuffles five real cards into the normal pile and later drawing consumes those exact entities', async () => {
   start('tt7-ironphalanx');
   const original = new Set(R.drawPile);
-  expect(original.size).toBe(99);
+  expect(original.size).toBe(10);
   await playOwned();
-  expect(R.drawPile).toHaveLength(104);
+  expect(R.drawPile).toHaveLength(15);
   const inserted = R.drawPile.filter(uid => !original.has(uid));
   expect(inserted).toHaveLength(5);
   expect(inserted.every(uid => E.findCard(uid)?.card)).toBe(true);
   const grantedBeforeDraw = R.granted.length;
-  expect(E.drawCards(104)).toBe(104);
+  expect(E.drawCards(15)).toBe(15);
   expect(R.drawPile).toHaveLength(0);
   expect(inserted.every(uid => R.hand.includes(uid))).toBe(true);
   expect(E.drawCards(2)).toBe(0);
@@ -47,7 +47,7 @@ it('real 武装 cannot invent equipment or starter replacements when the normal 
   await playOwned();
   expect(R.hand).toHaveLength(0);
   expect(R.drawPile).toEqual(original);
-  expect(R.granted).toHaveLength(99);
+  expect(R.granted).toHaveLength(10);
 });
 
 it('normal deck browsing opens and returns without moving any cards', () => {

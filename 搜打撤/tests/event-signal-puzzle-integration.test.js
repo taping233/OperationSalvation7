@@ -1,3 +1,4 @@
+import { overlayElements, resetEventGame, eventCardMocks, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventCapacityPorts, eventSaveActions } from './helpers/environment-fixtures.js';
 import { bagSlots } from '../game/src/hub/game.bag.bridge.js';
 import { openRewardCapacityOrganizer } from '../game/src/ui/reward-capacity-organizer.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -8,12 +9,7 @@ vi.mock('../game/src/core/random.js', async importOriginal => {
   return { ...actual, Random: { ...actual.Random, random: (...args) => H.random(...args) } };
 });
 vi.mock('../game/src/run/game.session.js', () => ({
-  game: H.game, MAP: { rules: { fireHeal:10, fireClassCardChance:1, bossDeckSize:15, starterSha:5, battleStartDraw:5, battleTurnDraw:1, battleHandMax:8 }, monsters:{}, altar:{ bosses:[] } }, MODES: {},
-  bagCap: () => 9, usedSlots: () => 0, newUid: () => `u${++H.uid}`, pick: a => a[0],
-  saveGame: () => { H.saves.push(JSON.parse(JSON.stringify(H.game))); return true; },
-  scaledEnemy: a => a, getActiveSlot: () => H.slot, curLayer: () => H.game.layerData[H.game.layerIdx],
-  cellCenter: () => ({}), markSeen() {}, modeCfg: () => ({}), gainCoins: n => H.game.coins += n,
-  weighted: a => a[0], enterLayer() {}, exitToTitle() {},
+  ...eventMapMocks(H), ...eventSaveActions(H), getActiveSlot: () => H.slot, ...eventMapActions(H),
 }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick() {}, ding() {} }, _set_cardPageOpen() {}, cardHTML: c => `<span>${c.name}</span>` }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub() {} }));
@@ -24,12 +20,9 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: (...args) => H
 
 let flow, scenes, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { game: H.game, Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
-    MAP:{ chestKinds:{ small:{ name:'小宝箱' } } },
-    Cards: { DROP_WEIGHTS:{ 古朴:1 }, all: () => H.cards, classPool: () => H.cards.filter(c => c.type === '能力卡'), sellPrice:() => 1, isRandomObtainable: () => true, cardHTML: c => `<span>${c.name}</span>` } };
+  window.SDT = { ...eventCardMocks(H) };
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
-  UI = window.SDT.UI = { ...overlayMethods, _acts: {}, _baseActs: {}, _roomActive: true, el: {},
-    act: (name, fn) => UI._acts[name] = fn, refresh() {}, log() {}, showCardReward() {}, _checkPageBg() {},
+  UI = window.SDT.UI = { ...overlayMethods, ...eventUiMocks(() => UI),
   };
   ({ takeBagReturnHook, setBagReturnHook } = await import('../game/src/hub/bag-return-hook.js'));
   flow = await import('../game/src/run/game.run.flow.js');
@@ -39,24 +32,14 @@ beforeAll(async () => {
 beforeEach(() => {
   vi.useFakeTimers();
   document.body.innerHTML = '<div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
-  UI.el.ovBody.addEventListener('click', event => { const button = event.target.closest('[data-act]'); if (button) UI._acts[button.dataset.act]?.(button.dataset); });
-  UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; UI._roomActive = true; setBagReturnHook(null);
+  UI.el = { ...overlayElements() };
+  bindEventRoot(() => UI); setBagReturnHook(null);
   bagSlots.organizeReward = options => openRewardCapacityOrganizer({ ...options, UI,
-    readStacks:() => H.game.ownedCards.filter(o => !o.safe).map(o => ({card:o.card,uids:[o.uid],count:1})),
-    canReceive:() => H.game.canReceiveCard(options.card), capacity:() => '背包 9/9 格',
-    moveToSafe:stack => { H.game.ownedCards.find(o => o.uid === stack.uids[0]).safe=true; return true; },
-    discardOne:() => false,
+    ...eventCapacityPorts(H, options),
   });
   bagSlots.showBackpack = () => UI.showOverlay('背包', '<main>背包</main>', 'page');
   H.random = vi.fn(() => 0.9);
-  H.saves = []; H.uid = 0; H.slot = null; H.narrative = async () => null;
-  Object.assign(H.game, { seed: 7, state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 18, fragments: 0,
-    altarActivated:false, altarRewardPending:false, altarItemSacrificed:false, nodeRewards:{}, entrySupply:null,
-    discoveredPairs: new Set(), layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'event' } }] }],
-    canReceiveCard: () => true, heal: n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),
-    grantCard: (card, opts) => scenes.grantEventCard(card, opts), bagCap:() => 9, usedSlots:() => H.game.ownedCards.length,
-  });
+  resetEventGame(H, () => scenes);
 });
 afterEach(() => { UI.hideOverlay({ immediate: true }); vi.restoreAllMocks(); vi.clearAllTimers(); vi.useRealTimers(); });
 
@@ -89,7 +72,7 @@ describe('真实无人机事件接入：纯UI与业务边界', () => {
     await openEvent('tt6-systemsupply', [wood]);
     expect(UI.el.ovBody.querySelectorAll('.event-signal-puzzle')).toHaveLength(1);
     expect(UI.el.ovBody.querySelector('.event-signal-puzzle').open).toBe(false);
-    expect([...UI.el.ovBody.querySelectorAll('.evt-opt b')].map(el => el.textContent)).toEqual(['碎片与木材', '碎片与货币']);
+    expect([...UI.el.ovBody.querySelectorAll('.evt-opt b')].map(el => el.textContent)).toEqual(['领取建材补给包', '领取轻装补给包']);
     expect(UI.el.ovBody.querySelectorAll('.evt-opt')).toHaveLength(2);
     expect(UI.el.ovBody.querySelector('.event-choice-confirm').disabled).toBe(true);
     UI._acts.eventExit(); await openEvent('tt6-mystery');

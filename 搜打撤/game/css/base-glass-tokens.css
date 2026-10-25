@@ -1,0 +1,10 @@
+/* Base and reward pages share one glass material and backdrop. */
+:root {
+  --base-v12-glass:linear-gradient(135deg,#dceff01f,transparent 46%,#05141c26),linear-gradient(120deg,#152a359e,#0b1823bf);
+  --base-v12-glass-soft:linear-gradient(125deg,#dceff014,#9edce708 42%,#08182030);
+  --base-v12-line:#d2e3e32e; --base-v12-accent:#9edce7;
+  --base-v12-filter:blur(22px) saturate(1.18);
+  --base-v12-shadow:inset 0 1px #ffffff24,inset 0 -1px #d8eef009,0 12px 32px #07151b26;
+  --base-v12-backdrop:linear-gradient(#15202832,#1520285c),url('../assets/scenes/base-operations-v5.webp') center/cover;
+  --base-v12-ink:#f2f5f0; --base-v12-muted:#b5c2c8; --base-v12-on-accent:#14242d;
+}

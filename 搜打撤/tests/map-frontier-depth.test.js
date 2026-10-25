@@ -1,0 +1,22 @@
+import { afterEach,expect,it,vi } from 'vitest';
+import { drawMapFrontierDepth } from '../game/src/core/map-frontier-depth.js';
+afterEach(()=>vi.restoreAllMocks());
+it('雾缘只用已揭示坐标，平移复用缓存，全部揭示后完全退出',()=>{
+  const gradient={addColorStop:vi.fn()};
+  const paint=Object.fromEntries(['scale','translate','fillRect','drawImage','save','restore'].map(key=>[key,vi.fn()]));
+  paint.createRadialGradient=vi.fn(()=>gradient);
+  vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue(paint);
+  const created=vi.spyOn(document,'createElement');
+  const ctx={save:vi.fn(),restore:vi.fn(),fillRect:vi.fn(),drawImage:vi.fn()};
+  const game={layerIdx:0,layerData:[{logical:Array(7)}],cam:{cx:400,cy:400,zoom:1,viewW:1280,viewH:720}};
+  Object.defineProperty(game,'nodes',{get(){throw new Error('hidden node geometry read');}});
+  const known={nodes:[{li:0,x:180,y:180},{li:0,x:360,y:180}]};
+  drawMapFrontierDepth(ctx,game,known);
+  expect(created).toHaveBeenCalledTimes(1);expect(ctx.drawImage).toHaveBeenCalledTimes(1);
+  const bakes=paint.createRadialGradient.mock.calls.length;
+  game.cam.cx+=40;drawMapFrontierDepth(ctx,game,known);
+  expect(created).toHaveBeenCalledTimes(1);expect(paint.createRadialGradient).toHaveBeenCalledTimes(bakes);
+  const clear={nodes:Array.from({length:7},(_,i)=>({li:0,x:180+i*180,y:180}))};
+  drawMapFrontierDepth(ctx,game,clear);
+  expect(created).toHaveBeenCalledTimes(1);expect(ctx.drawImage).toHaveBeenCalledTimes(2);
+});

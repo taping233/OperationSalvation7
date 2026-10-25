@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { assertSlotWriteLease, withSlotWriteLock } from '../game/src/hub/slot-write-lock.js';
 
@@ -89,7 +91,7 @@ describe('Base所有持久写入共用同槽锁', () => {
 
   it.each(['single', 'pair'])('已准备的%s事务等待锁时不会覆盖刚推进的checkpoint', async kind => {
     RunStorage.readForLoad(1);
-    expect(RunStorage.write(1, { seed: 'checkpoint-race', _r2: { runId: 'checkpoint-run', revision: 0 } })).toBe(true);
+    expect(await RunStorage.write(1, { seed: 'checkpoint-race', _r2: { runId: 'checkpoint-run', revision: 0 } })).toBe(true);
     const recovery = createRecoveryCommands({ lockManager: locks });
     const submit = () => {
       const snapshot = readBase(1), run = JSON.parse(localStorage.getItem(RunStorage.key(1)));
@@ -247,7 +249,7 @@ describe('Base所有持久写入共用同槽锁', () => {
 
   it('两键恢复提交与普通Base购买使用同一锁序，不互相覆盖', async () => {
     RunStorage.readForLoad(1);
-    expect(RunStorage.write(1, { seed: 'pair', _r2: { runId: 'pair-run', revision: 0 } })).toBe(true);
+    expect(await RunStorage.write(1, { seed: 'pair', _r2: { runId: 'pair-run', revision: 0 } })).toBe(true);
     const run = JSON.parse(localStorage.getItem(RunStorage.key(1)));
     const base = Base._readForCommit(1);
     const recovery = createRecoveryCommands({ lockManager: locks });

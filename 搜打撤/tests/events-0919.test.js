@@ -19,7 +19,7 @@ beforeAll(() => {
 });
 
 describe('0919 都市污染事件池', () => {
-  it('暴雨劫道编译剧情同时提供迎战和无奖励逃离', async () => {
+  it('武装截查编译剧情同时提供迎战和无奖励逃离', async () => {
     const {eventNarrative}=await import('../game/src/home/narrative.js');
     const narrative=await eventNarrative('tt6-bandits');
     expect(narrative.choices.map(choice=>choice.effect)).toEqual(['bandits_fight','bandits_escape']);
@@ -27,7 +27,7 @@ describe('0919 都市污染事件池', () => {
   });
 
   it('旧档事件描述更新为现行选项，自定义描述保留', () => {
-    const marker='sdt-events-0919-v2-seeded';const old=localStorage.getItem(marker);localStorage.setItem(marker,'1');
+    const marker='sdt-events-0919-v3-seeded';const old=localStorage.getItem(marker);localStorage.setItem(marker,'1');
     let stored=[{id:'tt6-mystery',name:'实验室余粮',desc:'你获得员工通行证A碎片和 2 币。'},{id:'tt6-relief',desc:'我的自定义救护站'}];
     const all=vi.spyOn(C,'all').mockImplementation(()=>stored);
     const save=vi.spyOn(C,'saveAll').mockImplementation(cards=>{stored=structuredClone(cards);return true;});
@@ -65,18 +65,18 @@ describe('0919 都市污染事件池', () => {
 });
 
 
-describe('熔断物资箱标题', () => {
+describe('封存储备库标题', () => {
   it('定版标题与三种箱随机一个的现行规则一致', () => {
     const card = C.EVENTS_0919.find(c => c.id === 'tt6-chestdraw');
-    expect(card.name).toBe('熔断物资箱');
-    expect(card.desc).toBe('从大、中、小宝箱中随机抽取 1 个开启。');
+    expect(card.name).toBe('封存储备库');
+    expect(card.desc).toBe('从大、中、小宝箱中随机抽取 1 个开启，或领取木材与口粮各 1 张。');
     const source = readFileSync(path.join(ROOT, 'game/src/run/game.run.events.js'), 'utf8');
     expect(source).toContain("{label:'小型物资箱',value:'small'},{label:'密封物资箱',value:'medium'},{label:'军用保险柜',value:'large'}");
     expect(source).toContain("openChestsOnCell([{ kind }], '你投骰选中的物资箱')");
   });
 
   it.each(['false', 'throw'])('已盖旧章只改旧标题，保存 %s 后可重试且幂等', failure => {
-    const marker = 'sdt-events-0919-v2-seeded';
+    const marker = 'sdt-events-0919-v3-seeded';
     const prior = localStorage.getItem(marker);
     localStorage.setItem(marker, '1');
     const original = [
@@ -93,7 +93,7 @@ describe('熔断物资箱标题', () => {
       C.ensureEvents0919();
       expect(stored).toEqual(original);
       C.ensureEvents0919();
-      expect(stored).toEqual([{ ...original[0], name: '熔断物资箱' }, original[1]]);
+      expect(stored).toEqual([{ ...original[0], name: '封存储备库' }, original[1]]);
       C.ensureEvents0919();
       expect(save).toHaveBeenCalledTimes(2);
       stored[0].name = '我的箱子';

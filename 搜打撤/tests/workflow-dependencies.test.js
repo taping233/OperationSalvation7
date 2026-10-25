@@ -85,6 +85,11 @@ describe('定向输入范围', () => {
     const next = fingerprint(root, scope), nextReport = { schemaVersion: 1, exitCode: 0, before: next, after: next };
     put('docs/archive/workflow-example/original.md', 'changed retained source');
     expect(freshness(nextReport, fingerprint(root, scope)).eligibleForReview).toBe(false);
+    const stable = fingerprint(root, scope), stableReport = { schemaVersion:1, exitCode:0, before:stable, after:stable };
+    mkdirSync(path.join(root, 'game/src/empty'), { recursive:true });
+    expect(freshness(stableReport, fingerprint(root, scope)).eligibleForReview).toBe(true);
+    put('game/src/empty/current.js', 'export const value = 1;');
+    expect(freshness(stableReport, fingerprint(root, scope)).eligibleForReview).toBe(false);
   });
   it('关联依赖受监控，音效会话的无关源码变化不使定向代码证据失效', () => {
     const root = fixture(), scope = { roots: ['tests/target.test.js'] };

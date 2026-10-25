@@ -1,21 +1,22 @@
+import { isLegacySearchChestOperation, legacyDeckBottomCandidateCount } from '../../cards/card-legacy-battle-policy.js';
 import { parsePoolNoun } from './effect-steps.ctx.js';
 
 /** Card acquisition uses the caller's discover queue, deck and random source. */
 export function createAcquireOperation({ getAllCards, getMyClass, deckBottomCount, takeDeckBottom,
-  findCard, queueDiscoverTracked, randomDiscoverCard, addDeckCard, shuffleDeck, addTempCard, esc, log }) {
+  findCard, queueDiscoverTracked, prepareDiscoverJob = (_card, job) => job, randomDiscoverCard, addDeckCard, shuffleDeck, addTempCard, esc, log }) {
   // —— A3 第三批（G3 acquire 族，2026-09-25）：结构化 acquire/coins 结算 ——
-  // 语义真源：docs/cards/card-rules-v2-taxonomy-2026-09-25.md §3「卡牌获取与牌库」25 张效果一句话 + G3 行。
+  // 池范围按现行卡牌文本与对应结构化规则；现行文案见 docs/game-compendium.md。
   // 池谓词（B6 定版「池谓词复用 parsePoolNoun 语义；注意 isRandomObtainable 口径」）：
   //   {kind:'moves', cost?} —— v1 discover 结构化池形状，与 selection-flow structuredPred 同款（武术/法术 + 可选费用）；
   //   其他非空 kind —— 中文池名词直透 parsePoolNoun（'武术'/'装备'/'火球'/'2费招式'/'能施加诅咒的招式'/
-  //   '传说或能力卡'…）；parsePoolNoun 未识别时再试 named 具体卡名通道（'二次爆炸'/'流光照影'——
+  //   '传说'…）；parsePoolNoun 未识别时再试 named 具体卡名通道（'二次爆炸'/'流光照影'——
   //   文本路径 deck.gainNamed 的 find-by-name 口径，parsePoolNoun 名词清单不含具体卡名）；
   //   仍无命中 → null = 通用随机池。
   // 随机抽卡单源 randomDiscoverCard（battle.discover-flow → buildDiscoverPool）：
   //   pred 指定池排除 生物/事件/资源/衍生，非职业卡沿历史口径不叠 isRandomObtainable
   //   （三重火球「2 张火球」等指定获取语义不受资格门影响）；
   //   职业卡门（2026-10-21 反馈#2）：指定池里的职业卡（isClassCard，含带 cls 的卡）
-  //   必须再过 isRandomObtainable——生产口径恒 false，除非谓词带 allowClassCards
+  //   一律排除，除非谓词带 allowClassCards
   //   （parsePoolNoun「本职业/其它职业」等显式声明职业池的名词）；
   //   无 pred 通用池仍走 isRandomObtainable（排除 初始/职业/衍生/棱彩/能力卡/生物/unrandom）
   //   并另排 道具/资源——与文本路径发现/随机获取同源。
@@ -53,11 +54,10 @@ export function createAcquireOperation({ getAllCards, getMyClass, deckBottomCoun
     const myClass = typeof getMyClass === 'function' ? getMyClass() : null;
     // M2：pool.kind '牌库底'——只从本场实际牌库底发现，空库不降级随机获取。
     // 搜索大宝箱的旧迁移仍声明随机入手三张；该精确旧形状沿已定版 BOSS 牌库底三选一。
-    const legacySearchChest = card.id === 'cmtn28jv33wx' && operation.n === 3 &&
-      operation.pool?.kind === '随机' && operation.dest === 'hand' && operation.act === undefined && operation.filter === undefined;
+    const legacySearchChest = isLegacySearchChestOperation(card, operation);
     if (operation.pool?.kind === '牌库底' || legacySearchChest) {
       // 挖宝的旧实例曾存 n:1；它表示选一张，实际候选固定读取底部三张。
-      const takeCount = card.id === 'tt3-dig-treasure' ? 3 : operation.n;
+      const takeCount = legacyDeckBottomCandidateCount(card, operation.n);
       const take = Math.min(takeCount, deckBottomCount());
       const uids = takeDeckBottom(take);
       const cards = uids.map(u => { const o = findCard(u); return o ? o.card : null; }).filter(Boolean);
@@ -83,6 +83,9 @@ export function createAcquireOperation({ getAllCards, getMyClass, deckBottomCoun
     } : null;
     const pred = basePred && filterPred ? candidate => basePred(candidate) && filterPred(candidate)
       : (filterPred || basePred);
+    if (pred && /** @type {{ allowClassCards?: boolean } | null} */ (/** @type {unknown} */ (basePred))?.allowClassCards === true) {
+      /** @type {{ allowClassCards?: boolean }} */ (/** @type {unknown} */ (pred)).allowClassCards = true;
+    }
     const dest = operation.dest || 'discover';
     const act = operation.act;
     // 面板日志的池名（文本路径 discover.pool 同款：名词去尾「的」+ 限制池括注）
@@ -104,60 +107,42 @@ export function createAcquireOperation({ getAllCards, getMyClass, deckBottomCoun
     };
 
     if (dest === 'discover') {
-      queueDiscoverTracked({
+      queueDiscoverTracked(prepareDiscoverJob(card, {
         n: operation.n,
         pred,
         act: ['play', 'playKeep', 'dup', 'noInfuse'].includes(act) ? act : undefined,
         zeroCost: act === 'zeroCost' ? true : undefined,
         decayEachTurn: act === 'decay' ? true : undefined,
         sourceCardId: card.id,
-      });
+      }));
       const actLabel = act === 'play' ? '发现并直接施放' : act === 'playKeep' ? '发现（施放 1 张，其余入手）'
         : act === 'noInfuse' ? '发现（所选牌无需注能）' : act === 'zeroCost' ? '发现（入手后费用变为 0）' : act === 'decay' ? '发现（每回合开始费用 -1）' : '发现';
       log(`[[icon:question]] <b>${esc(card.name)}</b>：${actLabel} ${operation.n} 张${poolSuffix}卡牌`, 'sys');
       return true;
     }
 
-    if (dest === 'deck') {
-      // 所有模式都洗入真实牌库，不改变为直接入手。
-      const gained = [];
-      for (let k = 0; k < operation.n; k++) {
-        const c = drawOne();
-        if (!c) break;
-        const tpl = decorate(c);
-        for (let copy = 0; copy < (act === 'dup' ? 2 : 1); copy++) {
-          addDeckCard(act === 'dup' && copy === 1 ? { ...tpl } : tpl);
-        }
-        gained.push(c.name);
-      }
-      if (gained.length) {
-        const counts = {};
-        gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });
-        const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');
-        const deckSize = shuffleDeck();
-        log(`[[icon:recycle]] <b>${esc(card.name)}</b>：将 ${detail} 洗入牌库（牌库 ${deckSize} 张，已洗混）`, 'sys');
-      } else {
-        log(`[[icon:question]] <b>${esc(card.name)}</b>：卡池里没有符合条件的卡牌`, 'dim');
-      }
-      return true;
-    }
-
-    // dest:'hand'——随机/指定直发置入手牌（同名可重复：三重火球「2 张火球」必需）
+    // 直发逐张取卡并立即入区；dup 副本在首份入区后克隆，保持获取触发顺序。
+    const toDeck = dest === 'deck';
+    const addCard = toDeck ? addDeckCard : addTempCard;
     const gained = [];
     for (let k = 0; k < operation.n; k++) {
       const c = drawOne();
       if (!c) break;
-      // dup 复制体同样基于 decorate 后的模板（与 deck 路径对齐）：否则 zeroCost/noInfuse 修饰只在首张生效
       const tpl = decorate(c);
-      addTempCard(tpl);
-      if (act === 'dup') addTempCard({ ...tpl });
+      addCard(tpl);
+      if (act === 'dup') addCard({ ...tpl });
       gained.push(c.name);
     }
     if (gained.length) {
       const counts = {};
       gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });
       const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');
-      log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${detail}${poolSuffix ? `（${esc(label)}池）` : ''}（战斗内临时卡，战后消散）`, 'loot');
+      if (toDeck) {
+        const deckSize = shuffleDeck();
+        log(`[[icon:recycle]] <b>${esc(card.name)}</b>：将 ${detail} 洗入牌库（牌库 ${deckSize} 张，已洗混）`, 'sys');
+      } else {
+        log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${detail}${poolSuffix ? `（${esc(label)}池）` : ''}（战斗内临时卡，战后消散）`, 'loot');
+      }
     } else {
       log(`[[icon:question]] <b>${esc(card.name)}</b>：卡池里没有符合条件的卡牌`, 'dim');
     }

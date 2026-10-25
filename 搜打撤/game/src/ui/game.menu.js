@@ -7,6 +7,7 @@ import { runPageLoading } from './page-loading.js';
 let modulePromise = null;
 let currentEntry = null;
 export let menuPageLoading = false;
+const preparedMenuMethods = new Set(['startNewGame', 'openSettings', 'openTitleGuide', 'openTitleAchievements', 'openSuggestionInbox']);
 
 export function preloadMenuPages() {
   if (!modulePromise) {
@@ -39,7 +40,9 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     cancelPendingPageEntries();
     // Explicit factory injection composes an already-materialized implementation; normal startup has none.
     if (pageFactory) createPages(pageFactory);
-    if (pageController) return pageController[method](...args);
+    // These page entries paint feedback before constructing content on every
+    // visit, while reusing the loaded controller. Explicit composition stays sync.
+    if (pageController && (pageFactory || !preparedMenuMethods.has(method))) return pageController[method](...args);
     const originBody = UI.el?.ovBody;
     const originRoot = originBody?.firstElementChild;
     const originOverlayHidden = UI.el?.overlay?.hidden;
@@ -65,13 +68,14 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     menuPageLoading = true;
     beginPageEntryCancellation('menu', cancelPendingMenuPageOpen);
     const loading = runPageLoading({
-      title: '正在打开页面', detail: '正在准备菜单内容', signal: controller.signal,
+      title: method === 'startNewGame' ? '进入城市' : '正在打开页面',
+      detail: method === 'startNewGame' ? '正在准备城市档案' : '正在准备菜单内容', signal: controller.signal,
       open: async () => {
-        const finishModule = method === 'openSettings' ? beginRuntimeStage('settings-module-wait', traceContext) : () => {};
+        const finishModule = method === 'openSettings' && !pageController ? beginRuntimeStage('settings-module-wait', traceContext) : () => {};
         let page;
-        try { page = await loadPages(); } finally { finishModule(); }
+        try { if (!pageController) page = await loadPages(); } finally { finishModule(); }
         if (!isCurrent()) return false;
-        const result = withRuntimeStageContext(traceContext, () => createPages(page.createGameMenuPages)[method](...args));
+        const result = withRuntimeStageContext(traceContext, () => (pageController || createPages(page.createGameMenuPages))[method](...args));
         entry.ready = true;
         menuPageLoading = false;
         return result;
@@ -117,6 +121,8 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     game.state = 'title';
     game.path = null;
     game.runActive = false;
+    game.nestActive = false;
+    game.battleActive = false;
     setActiveSlot(null);
     setLobby(true);
     UI.showScreen(/** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title')));
@@ -185,14 +191,10 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
       /** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title'))?.addEventListener('click', (e) => {
       if (!(e.target instanceof Element)) return;
         const play = (el, cls) => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
-        const wordmark = e.target.closest?.('.winter-wordmark');
-        if (wordmark) { play(wordmark, 'wm-jolt'); SDT.Sound.sfx('hover'); return; }
         const sec = e.target.closest?.('.ak-sec');
         if (sec) { play(/** @type {import("./ui.dom.types.js").UIElement} */ (sec.querySelector('b')) || sec, 'sec-pop'); SDT.Sound.sfx('gain'); return; }
         const word = e.target.closest?.('.ak-word');
         if (word) { play(word, 'word-glint'); return; }
-        const kicker = e.target.closest?.('.title-kicker');
-        if (kicker) { play(kicker, 'kick-blink'); return; }
       });
       document.addEventListener('contextmenu', (e) => {
       if (!(e.target instanceof Element)) return;
@@ -288,14 +290,6 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     const latestTotal = Math.max(base?.stats?.playSeconds || 0, run?.elapsed || 0);
     set('akSlotNo', latest ? `0${latest.slot}` : '--');
     set('akPlaytime', latest ? (latestTotal > 0 ? `游玩 ${fmtPlayTime(latestTotal)}` : '新档案 · 尚无对局') : '尚无档案');
-    const tag = document.getElementById('akLastTag');
-    if (tag) {
-      if (run?.savedAt) {
-        const d = new Date(run.savedAt);
-        const p = (n) => String(n).padStart(2, '0');
-        tag.textContent = `继续对局 · ${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
-      } else tag.textContent = base ? '基地档案已建立' : '暂无档案 · 等待远征';
-    }
     const achN = base ? SDT.Meta.ACHIEVEMENTS.filter(a => SDT.Meta.isUnlocked(a, base)).length : 0;
     set('akAchTag', `${achN}/${SDT.Meta.ACHIEVEMENTS.length}`);
     set('akCollect', String(Object.keys(base?.collection || {}).length));

@@ -1,3 +1,4 @@
+import { battleViewMocks } from './helpers/environment-fixtures.js';
 import { afterAll, afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
@@ -22,11 +23,7 @@ const UI = {
   hideTooltip() {}, showTooltip() {}, refresh() {}, log() {}, act(name, fn) { actions.set(name, fn); },
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} },
-  Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 2, battleHandMax: 8, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 2, 8, 5, 5),
 };
 const animateDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'animate');
 const imageDescriptors = Object.fromEntries(['complete', 'naturalWidth', 'decode'].map(name => [name, Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, name)]));
@@ -109,7 +106,7 @@ it('preserves decoded winter scenery through simplified entry and rerenders, ret
   expect(frames.attach).toHaveBeenCalledTimes(1); expect(expectPaintedScenery()).toEqual(firstScenery);
   expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(firstDecodeCount);
   BattleSession.commands.openGrave(); frame(); await flush();
-  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('inert')).toBe(true);
+  expect(stage()).toBe(firstStage);expect(firstStage.hasAttribute('inert')).toBe(true);
   expect(firstStage.getAttribute('aria-hidden')).toBe('true'); expect(scenery()).toEqual(firstScenery);
   BattleSession.commands.closeGrave(); frame(); await flush();
   expect(stage()).toBe(firstStage); expect(stage()._battleToken).toBe(token);
@@ -140,15 +137,16 @@ it('keeps folded hand names synchronized with their printed faces and intent in 
   const foe = stage().querySelector('.sts-foe');
   const intent = foe.querySelector('.sts-intent');
   expect(intent.parentElement).toBe(foe.querySelector('.sts-nameplate'));
-  expect(intent.getAttribute('role')).toBe('button');
+  expect(intent.getAttribute('role')).toBeNull();
+  expect(foe.querySelector('[data-ui-tip-title]')).not.toBeNull();
   expect(intent.getAttribute('aria-label')).toContain('入场回归靶子的意图');
   intent.click();
-  expect(intent.classList.contains('is-open')).toBe(true);
+  expect(intent.classList.contains('is-open')).toBe(false);
   expect(BattleSession.getSnapshot().pendingTarget).toBeFalsy();
   BattleSession.commands.setPendingHint('folded-name-rerender'); frame(); await flush();
   expect(stage().querySelector('.sts-hand .bt-card')).toBe(cards[0]);
   expect(stage().querySelector('.sts-intent')).toBe(intent);
-  expect(intent.classList.contains('is-open')).toBe(true);
+  expect(intent.classList.contains('is-open')).toBe(false);
 });
 
 it('keeps truly failed winter scenery hidden and reports the failure while simplified combat remains available', async () => {
@@ -233,13 +231,13 @@ it.each(['ready', 'degraded'])('keeps the %s stage during payment and charges on
   const firstStage = stage(), token = firstStage._battleToken, firstScenery = scenery();
   const decodeCount = HTMLImageElement.prototype.decode.mock.calls.length;
   BattleSession.commands.beginCardInteraction('ready-payment-source', 0); frame(); await flush();
-  expect(stage()).toBe(firstStage); expect(body.textContent).toContain('支付代价');
-  expect(firstStage.hasAttribute('inert')).toBe(true); expect(firstStage.getAttribute('aria-hidden')).toBe('true');
+  expect(stage()).toBe(firstStage); expect(stage().querySelector('[data-infusion-workspace]')).not.toBeNull();
+  expect(firstStage.hasAttribute('inert')).toBe(false);expect(firstStage.hasAttribute('data-infusion-mode')).toBe(true);
   expect(scenery()).toEqual(firstScenery);
   const fuel = BattleSession.getSnapshot().hand.filter(uid => uid !== 'ready-payment-source').slice(0, 2);
   const randomBefore = Random.snapshot();
   BattleSession.commands.pickHandSelect(fuel[0]); frame(); await flush();
-  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('inert')).toBe(true);
+  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('data-infusion-mode')).toBe(true);
   expect(BattleSession.getSnapshot()).toMatchObject({ energy: 2 });
   expect(battlePiles.consumed).toEqual([]); expect(BattleSession.getSnapshot().foes[0].hp).toBe(50);
   expect(Random.snapshot().streams.gameplay).toBe(randomBefore.streams.gameplay);
@@ -267,7 +265,7 @@ it('cleans up the retained stage on real departure without charging an incomplet
   BattleSession.commands.beginCardInteraction('cancel-payment-source', 0); frame(); await flush();
   const fuel = BattleSession.getSnapshot().hand.filter(uid => uid !== 'cancel-payment-source').slice(0, 2);
   BattleSession.commands.pickHandSelect(fuel[0]); frame(); await flush();
-  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('inert')).toBe(true);
+  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('data-infusion-mode')).toBe(true);
   expect(BattleSession.getSnapshot().energy).toBe(2); expect(battlePiles.consumed).toEqual([]);
   BattleSession.commands.flee(); UI.showOverlay('地图', '', 'map'); await flush();
   while (rafQueue.length) frame(); await flush();

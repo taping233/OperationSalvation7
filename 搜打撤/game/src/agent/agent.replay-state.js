@@ -3,9 +3,9 @@
 import { game } from '../run/game.session.js';
 import { Random, hashSeed } from '../core/random.js';
 import { isTurbo } from '../core/turbo.js';
+import { rulesRandomSnapshot } from '../core/random-streams.js';
 import { observe } from './agent.state.js';
 
-const NON_RULE_STREAMS = new Set(['agent-policy', 'recording', 'visual']);
 const RUN_KEYS = ['runActive', 'nestActive', 'battleActive', 'state', 'mode', 'mapSeed', 'turn',
   'hp', 'maxHp', 'atk', 'spellPower', 'coins', 'myClass', 'characterId', 'layerIdx', 'trackPos',
   'ownedCards', 'inventory', 'cardOrder', 'usedPocket', 'cardBox', 'nestRunes', 'nestEquipped',
@@ -37,11 +37,6 @@ function plainData(value, callbacks = false, ancestors = new WeakSet()) {
   } finally { ancestors.delete(value); }
 }
 
-function rulesRng(snapshot) {
-  return { seed: snapshot.seed, streams: Object.fromEntries(Object.entries(snapshot.streams || {})
-    .filter(([name]) => !NON_RULE_STREAMS.has(name))) };
-}
-
 // Rebuilt fixtures have fresh interaction identities. Keep current/stale battle
 // membership and every rule field, without comparing process-local sequence IDs.
 function replayInteraction(value, currentToken) {
@@ -66,7 +61,7 @@ function readReplayState(obs = observe()) {
   return plainData({ phase: obs.phase, turbo: isTurbo(), battle,
     battleRules,
     run: Object.fromEntries(RUN_KEYS.filter(key => game[key] !== undefined).map(key => [key, game[key]])),
-    rules: window.SDT?.MAP?.rules || {}, rng: rulesRng(Random.snapshot()) }, true);
+    rules: window.SDT?.MAP?.rules || {}, rng: rulesRandomSnapshot(Random.snapshot()) }, true);
 }
 
 function firstDifference(expected, actual, path = '$') {

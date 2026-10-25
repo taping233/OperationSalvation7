@@ -11,12 +11,12 @@ beforeEach(() => {
 });
 afterEach(() => { dispose(); document.body.replaceChildren(); document.body.className = ''; vi.unstubAllGlobals(); });
 const pointer = (node, type, relatedTarget = null) => node.dispatchEvent(new MouseEvent(type, { bubbles: true, relatedTarget }));
-it('retargets quick pointer reversal and keeps keyboard focus raised after pointer leaves', () => {
+it('retargets quick pointer reversal and keeps keyboard focus active with fixed geometry after pointer leaves', () => {
   pointer(reward, 'pointerover'); pointer(reward, 'pointerout'); pointer(reward, 'pointerover');
-  expect(motion.retargetVisual.mock.calls.map(call => call[1].y)).toEqual([-6, 0, -6]);
+  expect(motion.retargetVisual.mock.calls.map(call => call[1].y)).toEqual([0, 0, 0]);
   expect(motion.retargetVisual.mock.calls.map(call => call[2].duration)).toEqual([160, 120, 160]);
   reward.focus(); pointer(reward, 'pointerout');
-  expect(motion.retargetVisual.mock.lastCall[1].y).toBe(-6);
+  expect(motion.retargetVisual.mock.lastCall[1].y).toBe(0);
   bag.focus(); expect(motion.retargetVisual.mock.lastCall[0]).toBe(bag);
 });
 it('releases a card as soon as dragging starts and never targets battle hand cards', async () => {
@@ -27,10 +27,20 @@ it('releases a card as soon as dragging starts and never targets battle hand car
   motion.retargetVisual.mockClear(); pointer(document.querySelector('.bt-card'), 'pointerover');
   expect(motion.retargetVisual).not.toHaveBeenCalled();
 });
+it('releases claimed rewards and never raises claimed or dropped cards for reading', async () => {
+  pointer(reward, 'pointerover'); reward.closest('article').classList.add('got'); await Promise.resolve();
+  expect(motion.clearVisual).toHaveBeenCalledWith(reward);
+  expect(reward.dataset.cardStateMotion).toBeUndefined();
+  motion.retargetVisual.mockClear(); reward.focus(); pointer(reward, 'pointerover');
+  expect(motion.retargetVisual).not.toHaveBeenCalled();
+  reward.closest('article').classList.replace('got', 'dropped');
+  pointer(reward, 'pointerout'); pointer(reward, 'pointerover');
+  expect(motion.retargetVisual).not.toHaveBeenCalled();
+});
 it('keeps the selected reward stable after blur and clears removed cards and uninstall', async () => {
   reward.focus(); reward.closest('article').classList.add('is-pending-target'); bag.focus(); await Promise.resolve();
   const rewardCalls = motion.retargetVisual.mock.calls.filter(call => call[0] === reward);
-  expect(rewardCalls.at(-1)[1].y).toBe(-6);
+  expect(rewardCalls.at(-1)[1].y).toBe(0);
   reward.remove(); await Promise.resolve(); expect(motion.clearVisual).toHaveBeenCalledWith(reward);
   dispose(); expect(bag.dataset.cardStateMotion).toBeUndefined();
   motion.retargetVisual.mockClear(); pointer(bag, 'pointerover'); expect(motion.retargetVisual).not.toHaveBeenCalled();
@@ -57,7 +67,7 @@ it('returns a raised card to neutral geometry when the system enables reduced mo
 it('preserves face material without creating an outline on hover or reversal', () => {
   bag.innerHTML = '<div class="hs-card" style="--paper-wash:#c79824"></div>';
   pointer(bag, 'pointerover');
-  expect(motion.retargetVisual.mock.lastCall[1]).toEqual({y:-6,scale:1.02,rotate:0});
+  expect(motion.retargetVisual.mock.lastCall[1]).toEqual({y:0,scale:1,rotate:0});
   expect(bag.querySelector('.hs-card').style.getPropertyValue('--paper-wash')).toBe('#c79824');
   pointer(bag, 'pointerout');
   expect(motion.retargetVisual.mock.lastCall[1]).toEqual({y:0,scale:1,rotate:0});

@@ -1,16 +1,16 @@
-import { esc, escAttr } from '../core/shared.js';
+import { esc } from '../core/shared.js';
 import { Random } from '../core/random.js';
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import { showRewardCardFeedback } from '../ui/reward-card-feedback.js';
 import { claimResourceReward, resourceRewardAt, nodeActionBinding } from './node-reward-state.js';
-import { patchRewardScene, rewardClaimHTML, rewardExitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
+import { patchRewardScene, rewardClaimHTML, rewardExitHTML, rewardCardUnitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
 
 export function createRunResourceController({
   game, UI, dom, getCards, rich, saveGame, captureRunContext, grantEventCard,
   consumeCurrentCell, setBagReturnHook, bagSlots,
 }) {
 // 物资格先按通用掉落权重抽稀有度，再在档内均分；两张候选同名去重。
-function openResourcePick(done) {
+async function openResourcePick(done) {
   const weights = getCards().DROP_WEIGHTS;
   const pool = getCards().all().filter(c => c.type === '资源' && getCards().isRandomObtainable(c));
   const pickOne = (taken) => {
@@ -21,13 +21,13 @@ function openResourcePick(done) {
     })).filter(tier => tier.cards.length && tier.weight > 0);
     const total = tiers.reduce((sum, tier) => sum + tier.weight, 0);
     if (!total) return null;
-    let roll = Random.random('loot') * total;
+    let roll = Random.random('loot', 'reward') * total;
     let selected = tiers[tiers.length - 1];
     for (const tier of tiers) {
       roll -= tier.weight;
       if (roll <= 0) { selected = tier; break; }
     }
-    return selected.cards[Math.floor(Random.random('loot') * selected.cards.length)];
+    return selected.cards[Math.floor(Random.random('loot', 'reward') * selected.cards.length)];
   };
   const record = resourceRewardAt(game, () => {
     const first = pickOne(null);
@@ -38,14 +38,26 @@ function openResourcePick(done) {
   const current = captureRunContext();
   const key = `${game.layerIdx},${game.trackPos}`;
   game.state = 'modal';
-  let saved = saveRunCheckpoint(saveGame);
+  const sourceBody = UI.el?.ovBody, source = sourceBody?.firstElementChild;
+  const overlay = UI.el?.overlay, revision = UI._overlayRevision;
+  const mayClear = overlay?.hidden || overlay?.dataset?.uiClosing || overlay?.classList?.contains('closing')
+    || source?.matches?.('.flow-transition');
+  let saved = await saveRunCheckpoint(saveGame);
+  if (!current() || game.state !== 'modal' || UI.el?.ovBody !== sourceBody || UI.el?.overlay !== overlay
+    || (sourceBody?.firstElementChild !== source && !(mayClear && !sourceBody?.firstElementChild))
+    || (UI._overlayRevision !== revision && !(mayClear && overlay?.hidden && !sourceBody?.firstElementChild
+      && UI._overlayRevision === revision + 1))) return false;
   const claimActions = { pick:'resTake', organize:'resBag' };
   let active;
-  const take = i => {
-    if (!active() || !claimResourceReward(record, i, id => grantEventCard(getCards().all().find(card => card.id === id), { silent:true }))) return;
+  const take = async i => {
+    if (!active()) return;
+    const previous = new Set(game.ownedCards);
+    if (!claimResourceReward(record, i, id => grantEventCard(getCards().all().find(card => card.id === id), { silent:true }),
+      () => game.ownedCards.some(entry => !previous.has(entry) && entry.card?.id === record.cardIds[i]))) return;
     dom.getElementById('cardZoom')?._closeCardZoom?.(true);
     consumeCurrentCell();
-    saved = saveRunCheckpoint(saveGame);
+    saved = await saveRunCheckpoint(saveGame);
+    if (!active()) return false;
     UI.refresh(game);
     UI.log(`[[icon:gem]] 物资格：带走了【<b>${esc(cards[i].name)}</b>】`, 'loot');
     render();
@@ -59,9 +71,9 @@ function openResourcePick(done) {
       const fits = game.canReceiveCard?.(card) !== false;
       const action = finished ? `<span class="reward-unit-state">${record.taken === i ? '已入背包' : '已永久放弃'}</span>`
         : rewardClaimHTML({ index:i, cardName:card.name, choice:true, fits, actions:claimActions }) + (!fits ? '<span class="reward-capacity-note">当前放不下</span>' : '');
-      return `<article class="reward-unit${finished ? record.taken === i ? ' got' : ' dropped' : ''}" data-reward-index="${i}" data-reward-card="${escAttr(card.id || card.name)}" data-reward-rarity="${escAttr(card.rarity)}"><button class="reward-card" data-act="resRead" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${getCards().cardHTML(card)}</button>${action}</article>`;
+      return rewardCardUnitHTML({card,face:getCards().cardHTML(card),index:i,readAction:'resRead',action,className:finished ? record.taken === i ? 'got' : 'dropped' : ''});
     }).join(''),
-    actions:rewardExitHTML('resSkip', finished ? '继续探索' : '返回地图'), footer:`<button class="reward-bag" data-act="resBag" data-card-receive-anchor="bag">整理背包</button>${!saved ? '<button class="reward-bag" data-act="resRetrySave">重试保存</button>' : ''}<span class="reward-notice" role="status">${!saved ? '物资进度尚未保存成功，请重试保存；暂勿刷新页面。' : finished ? '领取完成 · 1 张已入背包，其余卡牌已永久放弃' : '两张资源卡中选择一张，其余永久放弃；未领取时保留在此处'}</span>`,
+    actions:rewardExitHTML('resSkip', finished ? '继续探索' : '返回地图'), footer:`<button class="reward-bag" data-act="resBag" data-card-receive-anchor="bag">整理背包</button>${!saved ? '<button class="reward-bag" data-act="resRetrySave">重试保存</button>' : ''}<span class="reward-notice" role="status">${!saved ? '物资进度尚未保存成功，请重试保存；暂勿刷新页面。' : finished ? '' : '两张资源卡中选择一张，其余永久放弃；未领取时保留在此处'}</span>`,
   });
   const currentBody = UI.el?.ovBody;
   const focused = currentBody?.contains(dom.activeElement) ? dom.activeElement : null;
@@ -85,10 +97,11 @@ function openResourcePick(done) {
     dom.getElementById('cardZoom')?._closeCardZoom?.(true);
     bagSlots.showBackpack();
   });
-  UI.act('resRetrySave', () => { if (active()) { saved = saveRunCheckpoint(saveGame); render(); } });
-  UI.act('resSkip', () => {
+  UI.act('resRetrySave', async () => { if (active()) { saved = await saveRunCheckpoint(saveGame); if (active()) render(); } });
+  UI.act('resSkip', async () => {
     if (!active()) return;
-    saved = saveRunCheckpoint(saveGame);
+    saved = await saveRunCheckpoint(saveGame);
+    if (!active()) return false;
     if (!saved) { render(); return false; }
     setBagReturnHook(null); UI.hideOverlay(); done(record.taken !== null);
     return true;

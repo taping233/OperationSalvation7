@@ -1,3 +1,4 @@
+import { damageRuleFields } from './helpers/environment-fixtures.js';
 import { describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 
@@ -344,7 +345,7 @@ describe('card rules schema (v2 merged)', () => {
         'rules.triggers.onPlay[0].foo'],
       // randomEnemy 扩展后的 battle.target 交叉契约
       [{ id: 'v2-random-target', type: '武术', dmg: 2, dmgType: 'fixed',
-        rules: { version: 1, battle: { target: { side: 'enemy', area: true } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'randomEnemy' }] } } },
+        rules: { ...damageRuleFields(true, 'randomEnemy') } },
         'rules.battle.target.area'],
       // 装备域未知键
       [{ id: 'v2-equip-unknown', type: '法术', armor: 2,

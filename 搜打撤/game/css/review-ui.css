@@ -1,0 +1,27 @@
+@import './interface-components.css';
+/* Shared glass surfaces and reading controls; scene illustrations stay visible. */
+:root{--surface-panel:#192b33b8;--surface-raised:#233942b8;--surface-edge:#a7c1cb66;--surface-copy:#e8e9de;--surface-label:#d5c89d;--surface-focus:#e9d48b}
+#sdt-term-tip{
+&{background:var(--surface-panel);border:1px solid var(--surface-edge);color:var(--surface-copy);backdrop-filter:blur(16px) saturate(115%)}
+&>b{color:#ffe2a3}
+&[hidden]{display:none!important}}
+#cardZoom .cz-reading-layout{display:flex;align-items:center;gap:32px;position:relative;z-index:1;max-width:calc(100% - 64px)}
+body :is(.hs-card,.card-rules-copy,.cz-photo-info,.pv-desc) [data-term],body .d-term[data-term]{cursor:inherit;}
+#cardZoom .cz-list-nav{
+&{display:flex;align-items:center;justify-content:center;gap:32px;position:relative;z-index:2;color:var(--surface-copy);font-size:22px}
+& button{background:var(--surface-panel);border:1px solid var(--surface-edge);color:var(--surface-label);font-size:36px;width:64px;height:54px;cursor:pointer}
+& [hidden]{visibility:hidden;display:inline-block}
+& :focus-visible{outline:3px solid var(--surface-focus)}}
+.slot-card-archive{line-height:1.6}
+.slot-archive-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px 0}
+.save-status{
+&{display:flex;align-items:center;gap:8px;color:var(--surface-copy);font:18px/1.4 "Microsoft YaHei",sans-serif}
+&[data-state="failed"]{color:#ffd09b}
+& button{background:transparent;color:inherit;border:1px solid currentColor;padding:5px 10px;font:inherit}}
+.reading-large .card-rule-tip p,.reading-large #sdt-term-tip,.reading-large #log,.reading-large .confirmation-panel p{font-size:26px!important;line-height:1.7}
+#topBtns>.save-status{
+&:not([data-state="failed"]){display:none}
+&[data-state="failed"]{padding:8px 12px;background:var(--surface-panel);border:1px solid var(--surface-edge);backdrop-filter:blur(16px)}}
+#overlay:has(.node-pg,.reward-scene,.battle-stage) .pg-head{padding-top:90px}
+.slot-card-archive{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font-size:15px}
+.slot-state-error .slot-card-status{color:#f0bf8f}

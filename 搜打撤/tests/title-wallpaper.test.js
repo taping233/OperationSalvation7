@@ -22,7 +22,7 @@ describe('home wallpaper preference', () => {
     localStorage.removeItem('sdt-title-wallpaper');
     await boot();
     expect(selection()).toBe('wu-bass');
-    expect(button().textContent).toContain('4/6');
+    expect(button().textContent).toContain('4/7');
   });
   it('temporarily hides the interface and restores it without changing wallpaper or saves', async () => {
     localStorage.setItem('sdt-title-wallpaper', 'baita-heixiang');
@@ -44,34 +44,36 @@ describe('home wallpaper preference', () => {
     expect({ ...localStorage }).toEqual(stored);
   });
 
-  it('keeps the snow road first and cycles all six wallpapers without changing game saves', async () => {
+  it('keeps the snow road first and cycles all seven wallpapers without changing game saves', async () => {
     localStorage.setItem('game-save-fixture', 'untouched');
     await boot();
     expect(selection()).toBe('snow-road');
     expect(button().disabled).toBe(false);
     expect(button().hidden).toBe(false);
-    expect(button().textContent).toContain('1/6');
+    expect(button().textContent).toContain('1/7');
     button().click();
     expect(selection()).toBe('baita-heixiang');
-    expect(button().getAttribute('aria-label')).toContain('当前第2张，共6张');
-    expect(button().textContent).toContain('2/6');
+    expect(button().getAttribute('aria-label')).toContain('当前第2张，共7张');
+    expect(button().textContent).toContain('2/7');
     expect(localStorage.getItem('sdt-title-wallpaper')).toBe('baita-heixiang');
     button().click();
     expect(selection()).toBe('xingyue-piano');
-    expect(button().getAttribute('aria-label')).toContain('当前第3张，共6张');
-    expect(button().textContent).toContain('3/6');
+    expect(button().getAttribute('aria-label')).toContain('当前第3张，共7张');
+    expect(button().textContent).toContain('3/7');
     expect(localStorage.getItem('sdt-title-wallpaper')).toBe('xingyue-piano');
     button().click();
     expect(selection()).toBe('wu-bass');
     button().click();
     expect(selection()).toBe('baita-station');
-    expect(button().textContent).toContain('5/6');
+    expect(button().textContent).toContain('5/7');
     expect(localStorage.getItem('sdt-title-wallpaper')).toBe('baita-station');
     button().click();
     expect(selection()).toBe('xingyue-reeds');
     button().click();
+    expect(selection()).toBe('companions-dinner');
+    button().click();
     expect(selection()).toBe('snow-road');
-    expect(button().textContent).toContain('1/6');
+    expect(button().textContent).toContain('1/7');
     expect(localStorage.getItem('game-save-fixture')).toBe('untouched');
   });
 
@@ -88,7 +90,7 @@ describe('home wallpaper preference', () => {
       expect(delay('mStart')).toBeLessThan(delay('mGuide'));
       expect(delay('mGuide')).toBeLessThan(delay('mAch'));
       expect(delay('mAch')).toBeLessThan(delay('btnCardLib'));
-      await vi.advanceTimersByTimeAsync(1000);
+      await vi.advanceTimersByTimeAsync(700);
       expect(title.dataset.homePhase).toBe('in');
       await vi.advanceTimersByTimeAsync(500);
       expect(title.dataset.homePhase).toBe('rest');
@@ -103,11 +105,11 @@ describe('home wallpaper preference', () => {
   });
 
   it.each([
-    ['baita-heixiang', 1, '2/6'],
-    ['xingyue-piano', 2, '3/6'],
-    ['wu-bass', 3, '4/6'],
-    ['baita-station', 4, '5/6'],
-    ['xingyue-reeds', 5, '6/6'],
+    ['baita-heixiang', 1, '2/7'],
+    ['xingyue-piano', 2, '3/7'],
+    ['wu-bass', 3, '4/7'],
+    ['baita-station', 4, '5/7'],
+    ['xingyue-reeds', 5, '6/7'],
   ])('restores wallpaper %s on a new page load', async (wallpaper, clicks, count) => {
     await boot();
     for (let i = 0; i < clicks; i++) button().click();
@@ -127,6 +129,8 @@ describe('home wallpaper preference', () => {
     button().click();
     expect(selection()).toBe('xingyue-reeds');
     button().click();
+    expect(selection()).toBe('companions-dinner');
+    button().click();
     expect(selection()).toBe('snow-road');
   });
 
@@ -139,6 +143,8 @@ describe('home wallpaper preference', () => {
     expect(selection()).toBe('baita-station');
     button().click();
     expect(selection()).toBe('xingyue-reeds');
+    button().click();
+    expect(selection()).toBe('companions-dinner');
     button().click();
     expect(selection()).toBe('snow-road');
     button().click();

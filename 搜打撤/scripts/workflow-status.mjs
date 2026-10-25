@@ -161,11 +161,11 @@ export function pendingAging(rows, { now = new Date(), alertDays = 7 } = {}) {
     const match = (row.cells[2] ?? '').match(/(?:(\d{4})-)?(\d{2})-(\d{2})/);
     if (!match) continue;
     const month = Number(match[2]) - 1, day = Number(match[3]);
-    let year = match[1] ? Number(match[1]) : now.getFullYear();
+    const year = match[1] ? Number(match[1]) : now.getFullYear();
     const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
     let raised = new Date(Date.UTC(year, month, day));
     if (raised.getUTCMonth() !== month || raised.getUTCDate() !== day) continue;
-    if (!match[1] && raised.getTime() > today) raised = new Date(Date.UTC(--year, month, day));
+    if (!match[1] && raised.getTime() > today) raised = new Date(Date.UTC(year - 1, month, day));
     if (raised.getTime() > today) continue;
     dated.push({ key: row.key ?? row.cells[0] ?? '?', item: (row.cells[1] ?? '').slice(0, 36), ageDays: Math.floor((today - raised.getTime()) / 86400000) });
   }

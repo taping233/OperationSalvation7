@@ -3,7 +3,7 @@
  *
  * 装配全部生产页面模块；HTML 与启动集成测试共同加载本入口。
  * 首页、游戏内核与启动展示沿用原 HTML 的模块求值顺序。
- * 模块间依赖由各文件顶部的 import 显式声明（见 scripts/esm-convert.mjs）。
+ * 模块间依赖由各文件顶部的 import 显式声明；模块职责见本目录 README.md。
  * MAP/FX 等内核依赖由 ESM 直接声明；其余兼容页面仍按下列顺序装配。
  * 入口清单须与 boot-order.js 的独立 BOOT_ORDER 合同一致
  * （tests/contracts.test.js 有守护断言，勿随意调换）。

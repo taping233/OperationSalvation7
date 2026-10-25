@@ -5,6 +5,7 @@ import { SampleOnlyPlayer } from './sound.samples.player.js';
 import { shouldPlaySfx } from './sound.policy.js';
 import { MUSIC_TRACKS, overlayMusicScene, resolveMusicScene } from './sound.music.catalog.js';
 import { SceneMusicPlayer } from './sound.music.player.js';
+import { decodeSampleWithDeadline } from './sound.decode.js';
 import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   const diagnosticBgmOff = bgmDiagnosticDisabled(import.meta.env.DEV, typeof location === 'undefined' ? '' : location.search);
   // 同一页面重复初始化时，先释放旧实例，避免旧曲和监听继续运行。
@@ -47,7 +48,8 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
     sfxTame = ctx.createBiquadFilter();
     sfxTame.type = 'highshelf'; sfxTame.frequency.value = 4500; sfxTame.gain.value = -4;
     sfxGain.connect(sfxTame); sfxTame.connect(master);
-    samples = new SampleOnlyPlayer(ctx, sfxGain);
+    samples = new SampleOnlyPlayer(ctx, sfxGain, { onStateChange: () => document.dispatchEvent(new Event('sdt-sfx-state')) });
+    samples.setEnabled(!document.hidden && !muted && !sfxOff);
     samples.load(url => decodeQueued(assetUrl(url)));
     return true;
   }
@@ -63,20 +65,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
       const job = decodeQueue.shift();
       activeDecodes++;
       const audioContext = ctx;
-      fetch(job.url, { signal: soundEvents.signal })
-        .then(r => {
-          if (disposed) throw new Error('Sound disposed');
-          if (!r.ok) throw new Error(String(r.status));
-          return r.arrayBuffer();
-        })
-        .then(ab => {
-          if (disposed || audioContext.state === 'closed') throw new Error('Sound disposed');
-          return audioContext.decodeAudioData(ab);
-        })
-        .then(buf => {
-          if (disposed) throw new Error('Sound disposed');
-          return buf;
-        })
+      decodeSampleWithDeadline({ url: job.url, context: audioContext, signal: soundEvents.signal })
         .then(job.resolve, job.reject)
         .finally(() => {
           activeDecodes--;
@@ -105,7 +94,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
       || document.getElementById('cardZoom') || document.querySelector('dialog[open]');
   }
   function sfx(name, opts) {
-    if (muted || sfxOff) return;
+    if (disposed || muted || sfxOff || document.hidden) return;
     // 子页面不播放通用点击/悬停音；具名的奖励、交易及战斗反馈仍按各自配置播放。
     if ((name === 'click' || name === 'hover') && isSubpageOpen()) return;
     const stamp = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now();
@@ -138,11 +127,21 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
       enabled: on,
       volume: BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1),
       immediate: muted || musicOff || diagnosticBgmOff || !visible,
+      preservePosition: !visible && !muted && !musicOff && !diagnosticBgmOff,
     });
   }
   function retryMusic() {
     if (disposed || muted || musicOff || diagnosticBgmOff || document.hidden) return false;
     return musicPlayer.retryFailed();
+  }
+  function retrySamples() {
+    if (disposed || muted || sfxOff || document.hidden || !ensure()) return false;
+    return samples?.retryFailed() || false;
+  }
+  function syncAudioVisibility() {
+    samples?.setEnabled(!document.hidden && !muted && !sfxOff);
+    if (document.hidden) lastSfxAt.clear();
+    syncBgm();
   }
   function scene(tone, asset = '', metadata = {}) {
     const next = overlayMusicScene(tone, { ...metadata, asset }, sceneTone);
@@ -161,6 +160,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
     muted = !!m;
     try { localStorage.setItem('sdt-muted', muted ? '1' : '0'); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
     if (master) master.gain.value = muted ? 0 : 1;
+    samples?.setEnabled(!document.hidden && !muted && !sfxOff);
     Howler.mute(muted);
     syncBgm();
   }
@@ -195,6 +195,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   // 只关音效（设置页）
   function setSfxMuted(m) {
     sfxOff = !!m;
+    samples?.setEnabled(!document.hidden && !muted && !sfxOff);
     if (sfxGain) sfxGain.gain.value = sfxOff ? 0 : BASE_SFX * dbGain(sfxVol);
     try { localStorage.setItem('sdt-sfx-off', sfxOff ? '1' : '0'); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
   }
@@ -211,6 +212,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   }
   // 首次输入恢复被浏览器挂起的上下文，并重试未能开始的当前 BGM。
   function kick() {
+    if (disposed || document.hidden) return;
     if (!muted && !sfxOff && !ensure()) return;
     musicPlayer.retryBlocked();
     // 已解锁且 BGM 正常播放、WebAudio 也未挂起时，后续每次按键/点击直接跳过——
@@ -225,7 +227,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   }
   document.addEventListener('pointerdown', kick, { capture: true, signal: soundEvents.signal });
   document.addEventListener('keydown', kick, { capture: true, signal: soundEvents.signal });
-  document.addEventListener('visibilitychange', syncBgm, { signal: soundEvents.signal });
+  document.addEventListener('visibilitychange', syncAudioVisibility, { signal: soundEvents.signal });
 
   // 页面入口同样静音，避免在新页面打开前的 pointerdown 阶段先响点击音。
   const silentNavigationButtons = '.home-plate, #mBack, #btnHome, #btnHelp, '
@@ -244,6 +246,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
     sfx('hover');
   }, { signal: soundEvents.signal });
   document.addEventListener('pointerout', (e) => {
+    if (e.relatedTarget instanceof Node && lastHoverBtn?.contains(e.relatedTarget)) return;
     if (lastHoverBtn && e.target && (/** @type {Element} */ (e.target)).closest && (/** @type {Element} */ (e.target)).closest('button') === lastHoverBtn) lastHoverBtn = null;
   }, { signal: soundEvents.signal });
   // 全局事件委托：复选框/开关切换播放开关音
@@ -268,7 +271,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   if (import.meta.hot) import.meta.hot.dispose(dispose);
 
   export const Sound = sdtDefine('Sound', {
-    sfx, music, scene, retryMusic, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, setBattlePressure, ensure, dispose,
+    sfx, music, scene, retryMusic, retrySamples, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, setBattlePressure, ensure, dispose,
     get muted() { return muted; },
     get musicMuted() { return musicOff; },
     get sfxMuted() { return sfxOff; },
@@ -276,6 +279,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
     get sfxVolume() { return sfxVol; },
     get musicSource() { return musicSource; },
     get musicScene() { return currentMusicScene(); },
+    get sfxPlayback() { return { ...(samples?.snapshot() || { loading: false, loaded: 0, pending: 0, failed: 0, canRetry: false, failedFiles: [] }), muted: muted || sfxOff, hidden: document.hidden }; },
     get musicPlayback() { return { ...musicPlayer.snapshot(), muted: muted || musicOff || diagnosticBgmOff, diagnosticOverride: diagnosticBgmOff ? 'bgm-off' : null }; },
   });
 

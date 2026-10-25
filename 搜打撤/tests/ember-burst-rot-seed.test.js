@@ -1,14 +1,16 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 余烬爆裂（cc-ember-burst）+ 腐化之种（cc-rot-seed，2026-09-16 需求批次 v19）真实战斗实打：
  * 2 费稀有法术——「对全体敌人造成 2 点法术伤害；若击杀敌人，再施放一次」；
  * 1 费史诗法术——「对 1 名敌人附加 2 层中毒；其死亡时，将中毒层数转移给另一名敌人」。
  * 覆盖：入库字段 / 随机池资格 / 实打 AOE 与击杀连锁 / 中毒死亡转移。 */
+import { createBattleGameFactory, drainBattle } from './helpers/battle-fixtures.js';
 import { describe, it, expect, beforeAll } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -24,43 +26,12 @@ beforeAll(() => {
   C.ensureEffectFields();
 });
 
-let uidSeq = 0;
-function makeGame(cards) {
-  const logs = [];
-  const g = {
-    ownedCards: cards.map(c => ({ uid: 'g' + (uidSeq++), card: c, safe: false })),
-    hp: 99999, maxHp: 99999, atk: 5, spellPower: 2, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
-    lastBattleEnd: null,
-    log(m) { logs.push(String(m).replace(/\[\[[^\]]+\]\]/g, '')); },
-    logs,
-    heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
-    addItem() {},
-    onBattleEnd() {},
-  };
-  return g;
-}
+
+const makeGame = createBattleGameFactory();
 const foeDef = (name, hp) => ({ id: 'infantry', name: name || '靶子', hp: hp || 99999, atk: 1 });
-const tick = () => new Promise(r => setTimeout(r, 0));
-const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 
-async function drain(maxLoops = 300) {
-  for (let i = 0; i < maxLoops; i++) {
-    await tick();
-    const s = snap();
-    if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
-    if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
-    if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return snap();
-}
+const drain = (maxLoops = 300) => drainBattle(BattleSession, maxLoops);
 
 const ember = () => C.all().find(c => c.id === 'cc-ember-burst');
 const rot = () => C.all().find(c => c.id === 'cc-rot-seed');

@@ -31,5 +31,6 @@ export function eventOptionHTML(choice, index, game) {
   const { state, note } = eventOptionState(choice, game);
   // Keep one detail span so the existing selection summary includes the live warning.
   const detail = [choice.detail, note].filter(Boolean).join('；');
-  return `<button type="button" class="evt-opt ${escAttr(choice.tone || '')}" data-act="evtChoice" data-i="${index}" data-option-state="${state}"><b>${esc(choice.label)}</b>${detail ? `<span>${esc(detail)}</span>` : ''}</button>`;
+  const stateLabel = { ready:'可选择', cost:'有代价', limited:'需整理', lethal:'致命风险' }[state];
+  return `<button type="button" class="evt-opt ${escAttr(choice.tone || '')}" data-act="evtChoice" data-i="${index}" data-option-state="${state}"><span class="evt-opt-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span><span class="evt-opt-copy"><b>${esc(choice.label)}</b>${detail ? `<span class="evt-opt-detail">${esc(detail)}</span>` : ''}</span><span class="evt-opt-state">${stateLabel}</span></button>`;
 }

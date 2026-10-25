@@ -60,7 +60,8 @@ function structuralFindings(root) {
   const src = path.join(root, 'game/src');
   if (existsSync(path.join(src, 'README.md'))) {
     const listed = [...readFileSync(path.join(src, 'README.md'), 'utf8').matchAll(/^\|\s*`([^`]+)\/`\s*\|/gm)].map(match => match[1]);
-    const actual = readdirSync(src, { withFileTypes: true }).filter(item => item.isDirectory() && item.name !== 'generated').map(item => item.name);
+    const actual = readdirSync(src, { withFileTypes: true }).filter(item => item.isDirectory() && item.name !== 'generated'
+      && readdirSync(path.join(src, item.name), { recursive:true, withFileTypes:true }).some(child => child.isFile())).map(item => item.name);
     if (new Set(listed).size !== listed.length || JSON.stringify(listed.sort()) !== JSON.stringify(actual.sort())) fail('game/src/README.md', 'domain-table-drift', '域表与顶层目录不一致（generated 除外）');
   }
   return findings;

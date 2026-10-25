@@ -49,11 +49,11 @@ describe('lazy event entry ownership', () => {
     const h = harness(); const reward = h.game.nodeRewards['0,1'] = pendingReward();
     expect(await h.entry.runEventDeck()).toBe(true);
     h.saveGame.mockImplementation(() => { if (mode === 'throw') throw new Error('save'); return false; });
-    h.UI.acts.eventCardPick({ i:'0' });
+    await h.UI.acts.eventCardPick({ i:'0' });
     expect(reward.taken).toBe(0); expect(h.game.ownedCards).toHaveLength(1);
     expect(h.entry.resumeEventCardChoice()).toBe(true);
     expect(h.UI.el.ovBody.textContent).toContain('不会再次发牌');
-    h.saveGame.mockReturnValue(true); h.UI.acts.eventCardSaveRetry();
+    h.saveGame.mockReturnValue(true); await h.UI.acts.eventCardSaveRetry(); await flush();
     expect(h.game.ownedCards).toHaveLength(1); expect(h.game.state).toBe('idle');
     expect(h.createCardChoice).toHaveBeenCalledOnce(); expect(h.load).not.toHaveBeenCalled();
   });
@@ -92,7 +92,7 @@ describe('lazy event entry ownership', () => {
     const h = harness(); const opening = h.entry.runEventDeck(); await flush(); h.context[kind]++;
     const reward = h.game.nodeRewards['0,1'] = pendingReward();
     expect(h.entry.resumeEventCardChoice()).toBe(true); await flush();
-    h.UI.acts.eventCardPick({ i:'0' }); h.UI.acts.eventCardPick({ i:'0' });
+    const first = h.UI.acts.eventCardPick({ i:'0' }); h.UI.acts.eventCardPick({ i:'0' }); await first;
     expect(reward.taken).toBe(0); expect(h.game.ownedCards).toHaveLength(1); expect(h.game.state).toBe('idle');
     expect(await opening).toBe(false); h.gate.resolve({}); await flush(); expect(h.create).not.toHaveBeenCalled();
   });

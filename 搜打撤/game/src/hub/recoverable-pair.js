@@ -116,6 +116,10 @@ export function createRecoverablePair(options) {
     const existing = readJournal(slotId);
     if (existing.ok === false) return existing;
     if (existing.value) return fail('RECOVERY_REQUIRED', '该档位存在待恢复提交', true, { slotId });
+    // Refuse a stale/unreadable pair before creating any recovery obligation.
+    // The check after writing the journal still detects later competing writes.
+    const preflight = stateOf(slotId, journal);
+    if (preflight.ok === false) return preflight;
     const keys = keyFor(slotId);
     let journalWritten = false;
     try {

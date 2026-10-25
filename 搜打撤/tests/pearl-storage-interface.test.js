@@ -1,3 +1,4 @@
+import { runPendingFields } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -36,8 +37,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   Object.assign(game, { seed: 'pearl-ui-run', discoveredPairs: new Set(), runActive: true, state: 'idle', myClass: '战士', inventory: [],
     ownedCards: [...copies(pearl, 1), ...copies(wood, 2), ...copies(food, 1, { stored: 1 })],
-    usedPocket: [], cardOrder: [], pendingExtraction: null, extractionPending: null, terminalPending: null,
-    battleActive: false, nestActive: false, hp: 20, maxHp: 30, elapsed: 0, elapsedSynced: 0 });
+    ...runPendingFields() });
   UI.beginRoom(); open();
 });
 afterEach(() => {
@@ -151,16 +151,21 @@ describe('珍珠盒可读存取界面', () => {
   });
 
   it('CSS只加珍珠盒域，说明和控件沿1920逻辑坐标可读，内容保留共享滚动区', () => {
-    const css = postcss.parse(readFileSync('game/css/expedition-inventory.css', 'utf8'));
+    const css = postcss.parse(readFileSync('game/css/container-store.css', 'utf8'));
     const values = selector => {
-      const result = {}; css.walkRules(selector, rule => rule.walkDecls(d => { result[d.prop] = d.value; })); return result;
+      const result = {}; css.walkRules(selector, rule => {
+        if(rule.parent.selector === '#overlay .collection-workspace[data-collection-variant="container"]') rule.walkDecls(d => { result[d.prop] = d.value; });
+      }); return result;
     };
-    const scope = 'body #overlay .pearl-store';
-    expect(values(`${scope} .pearl-store-columns`)['grid-template-columns']).toBe('repeat(2,minmax(0,1fr))');
+    const scope = '&';
+    expect(values(`${scope} .collection-columns`)['grid-template-columns']).toBe('repeat(2,minmax(0,1fr))');
     expect(values(`${scope} .battle-decision-summary .ov-note`)['font-size']).toBe('var(--card-copy-size,24px)');
     expect(parseFloat(values(`${scope} .pearl-store-hint`)['font-size']) * 1188 / 1920).toBeGreaterThanOrEqual(13);
-    expect(parseFloat(values(`${scope} .battle-decision-actions .ov-btn`)['min-height']) * 1188 / 1920).toBeGreaterThanOrEqual(36);
-    expect(values(`${scope} .pearl-store-card`).width).toBe('272px');
+    const tokens = postcss.parse(readFileSync('game/css/secondary-ui-tokens.css','utf8'));
+    let controlHeight;tokens.walkDecls('--ui-control-height',decl=>{controlHeight=decl.value;});
+    expect(values(`${scope} .battle-decision-actions .ov-btn`)['min-height']).toBe('var(--ui-control-height)');
+    expect(parseFloat(controlHeight) * 1188 / 1920).toBeGreaterThanOrEqual(36);
+    expect(values(`${scope} .pearl-store-card`).width).toBe('300px');
     expect(parseFloat(values(`${scope} .pearl-store-card`).width) * 1188 / 1920).toBeGreaterThan(160);
     expect(document.querySelector('.pearl-store-columns').classList.contains('battle-decision-content')).toBe(true);
   });

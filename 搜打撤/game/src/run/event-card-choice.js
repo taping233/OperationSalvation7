@@ -7,12 +7,12 @@ import { createEventCommands } from './event-commands.js';
 
 const PRESENTATIONS = {
   'ev19-potions': {
-    title:'避难市集药摊', asset:'scene-event-potions', paidCoins:0,
-    sub:'污染区药师只能保住一瓶——从 3 瓶随机药水中选择 1 瓶。',
+    title:'应急药品站', asset:'scene-event-potions', paidCoins:0,
+    sub:'庇护所的存量有限——从 3 瓶随机药水中选择 1 瓶。',
   },
   'ev19-quartermaster': {
-    title:'装备征用令', asset:'scene-event-quartermaster', paidCoins:3,
-    sub:'已支付 3 币。从军需官摆出的 3 件装备中选择 1 件。',
+    title:'转运军需', asset:'scene-event-quartermaster', paidCoins:3,
+    sub:'已支付 3 币转运费。从货位上的 3 件装备中选择 1 件。',
   },
 };
 
@@ -24,7 +24,15 @@ export function createEventCardChoiceController({
   let viewSequence = 0;
   let choiceZoomToken = null;
   const pendingSaves = new WeakSet();
-  const persist = () => saveRunCheckpoint(saveGame);
+  const persist = async () => await saveRunCheckpoint(saveGame);
+  const capturePage = () => {
+    const body = UI.el?.ovBody, surface = body?.firstElementChild, overlay = UI.el?.overlay, revision = UI._overlayRevision;
+    const mayClear = overlay?.hidden || overlay?.dataset?.uiClosing || overlay?.classList?.contains('closing');
+    return () => UI.el?.ovBody === body && UI.el?.overlay === overlay
+      && (body?.firstElementChild === surface || (mayClear && !body?.firstElementChild))
+      && (UI._overlayRevision === revision || (mayClear && overlay?.hidden && !body?.firstElementChild
+        && UI._overlayRevision === revision + 1));
+  };
   const commands = createEventCommands({ state:game, grantCard:grantEventCard });
   const closeChoiceZoom = () => {
     // 引用卡往返会重建特写 DOM；按当前详情动作的归属关闭，不持有旧节点。
@@ -48,12 +56,13 @@ export function createEventCardChoiceController({
     const active = () => current() && token === viewSequence && binding() && game.nodeRewards?.[key] === record
       && (!page || UI.el?.ovBody?.firstElementChild === page);
     setBagReturnHook(() => renderSaveRetry(record, current));
-    const retry = () => {
+    const retry = async () => {
       if (!active()) return false;
-      if (!persist()) return renderSaveRetry(record, current);
-      pendingSaves.delete(record);
-      close();
-      return true;
+      const saved = await persist();
+      if (saved) pendingSaves.delete(record);
+      if (!active()) return false;
+      if (!saved) return renderSaveRetry(record, current);
+      return await close() !== false;
     };
     UI.act('eventCardSaveRetry', retry);
     UI.act('eventExit', retry);
@@ -102,8 +111,9 @@ export function createEventCardChoiceController({
     });
     const choiceCurrent = () => current() && String(viewSequence) === viewToken
       && game.nodeRewards?.[key] === record && record.taken === null;
-    const pick = index => {
+    const pick = async index => {
       if (!choiceCurrent()) return false;
+      const ownsPage = capturePage();
       const card = cards[index];
       if (!Number.isInteger(index) || !card) return false;
       closeChoiceZoom();
@@ -147,10 +157,11 @@ export function createEventCardChoiceController({
         return false;
       }
       consumeCurrentCell();
-      if (!persist()) {
-        pendingSaves.add(record);
-        renderSaveRetry(record, current);
-      } else close();
+      const saved = await persist();
+      if (!saved) pendingSaves.add(record);
+      if (!current() || !ownsPage()) return true;
+      if (!saved) renderSaveRetry(record, current);
+      else if (await close() === false) return true;
       try { UI.showCardReward(card); }
       catch (error) { console.warn('[event-choice] 卡牌已领取，演出未完成', error); }
       return true;
@@ -185,7 +196,7 @@ export function createEventCardChoiceController({
     return record ? render(record) : false;
   }
 
-  function open(eventId, candidates) {
+  async function open(eventId, candidates) {
     if (resume()) return true;
     const spec = PRESENTATIONS[eventId];
     const cards = candidates.filter(Boolean);
@@ -202,10 +213,12 @@ export function createEventCardChoiceController({
     };
     consumeCurrentCell(); // 事件选项已确定；未领取候选仍由上方 resume 入口承接。
     game.state = 'modal';
-    const saved = persist();
+    const current = captureContext(), ownsPage = capturePage();
+    const saved = await persist();
+    if (!current() || !ownsPage()) return false;
     const notice = saved === false && getActiveSlot()
       ? '候选已留在当前对局，但尚未保存成功。请检查存储状态，刷新前先重试保存。' : '';
-    return render(record, captureContext(), notice);
+    return render(record, current, notice);
   }
 
   return { open, resume };

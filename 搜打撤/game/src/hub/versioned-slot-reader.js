@@ -60,6 +60,7 @@ export function createVersionedSlotReader({
           corruptBackups.set(index, { raw, backedUp: false });
           result.then(ok => {
             if (corruptBackups.get(index)?.raw === raw) corruptBackups.set(index, { raw, backedUp: ok === true });
+            if (ok !== true) console.warn(`${logTag} 档位 ${index} 备份失败，原档已保留`);
           }).catch(() => {});
           console.warn(`${logTag} 档位 ${index} 存档数据损坏，原档已保留，备份等待存档锁`);
           return null;

@@ -1,3 +1,4 @@
+import { suppressLegacyImmediateText } from './card-compatibility.js';
 import { hasStructuredTrigger, hasStructuredEquipField, triggerDeclarations, REGISTERED_TRIGGER_POINTS } from './card-trigger-contract.js';
 
 /** Select a trigger's sole authority. Empty declarations still suppress legacy text.
@@ -78,11 +79,8 @@ export function cardPlayExecutionPlan(card) {
     const { ops } = equipment(point);
     return Array.isArray(ops) && ops.some(operation => operation.op === field || operation.amountField === field);
   });
-  const venomStaffPassive = card.id === 'tt2-venomstaff'
-    && card.rules?.battle?.hosted?.includes('venom-staff')
-    && !card.rules?.triggers && !card.rules?.equip && !card.rules?.bag;
   return { onPlay, equipment, ownsField,
-    suppressImmediateText: onPlay.kind === 'structured' || equipment('onEquip').kind === 'structured' || !!venomStaffPassive };
+    suppressImmediateText: onPlay.kind === 'structured' || equipment('onEquip').kind === 'structured' || suppressLegacyImmediateText(card) };
 }
 
 /** @template {object} T @template {keyof T & string} K @overload @param {T} value @param {K} key @returns {T[K]} */

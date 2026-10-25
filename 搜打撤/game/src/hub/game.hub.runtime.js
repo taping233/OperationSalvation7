@@ -14,6 +14,7 @@ import { homeErrorMessage } from './command-errors.js';
 import { createHubPreparationAdapter } from './game.hub.preparation-ports.js';
 import '../../css/base-camp-rework.css';
 import { presentHub, bindHubBrowse, restoreHubFocus } from './hub.presentation.js';
+import { afterOutcomeFeedback } from '../ui/outcome-feedback.js';
 import { bindWarehouse, clearWarehouseFilters, focusWarehouseForCharacter } from './hub.warehouse.js';
 import { resourceStripHTML } from './hub.materials.js';
 import { bindArchiveV3, refreshArchiveBacks } from './hub.archive-v3.js';
@@ -37,14 +38,14 @@ import { bindArchive } from './hub.archive.js';
 import { cancelPendingPageEntries } from '../ui/page-entry-cancellation.js';
 import { slots, homeRequestId } from './game.hub.bridge.js';
 import { hubDeployHTML, openDepartPrep, setDeployPick } from './game.hub.depart.js';
-import { hubStashHTML, openStashCardView, openRawItem, hubUpgradeHTML, hubClassesHTML, hubAchHTML, HUB_SHOP_GOODS, hubShopGoodsCard } from './game.hub.pages.js';
+import { hubStashHTML, openStashCardView, openRawItem, hubUpgradeHTML, hubClassesHTML, hubAchHTML, HUB_SHOP_GOODS } from './game.hub.pages.js';
 slots.renderHub = renderHub;   // 切片经桥回调重绘（勿直接 import 壳，contracts 拒环）
 let preparationFeature = null;
 const disposePreparation = () => preparationFeature?.dispose();
 
 // 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）
 let hubTab = 'deploy';
-const hubRoomTitles = Object.freeze({ deploy:'基地', classes:'配置', stash:'后勤', shop:'交易所', ach:'收藏室', upgrade:'建设', courtyard:'庭院' });
+const hubRoomTitles = Object.freeze({ deploy:'基地', classes:'人物', stash:'后勤', shop:'交易所', ach:'收藏室', upgrade:'建设', courtyard:'庭院' });
 let hubRenderRevision = 0;
 let hubCollectionView = 'cards';
 let achievementReturn = 'rewards';
@@ -181,32 +182,6 @@ preparationFeature = createHubPreparationAdapter({
     if (currentFocus) hubFocus.set(viewKey, currentFocus);
     zoomFocusObserver?.disconnect();
     zoomFocusObserver = restoreHubFocus(viewKey, hubFocus);
-    // 局外商店购买（2026-09-16 留言「局外商店提供基础卡牌」）：储备币直购，货入卡牌仓库
-    hubWrite('shopBuy', async (d) => {
-      const g = HUB_SHOP_GOODS[+d.i];
-      if (!g) return;
-      const B = SDT.Base;
-      const card = g.material ? null : hubShopGoodsCard(g);
-      const result = await B.purchase({ price: g.price, material: g.material, card });
-      if (!currentHub()) return false;
-      if (!result.ok) {
-        UI.log(/** @type {Extract<typeof result, {ok:false}>} */ (result).why === 'poor' ? '[[icon:coin]] 储备币不足，无法购买'
-          : /** @type {Extract<typeof result, {ok:false}>} */ (result).why === 'full' ? '[[icon:archive]] 仓库已满，无法入库'
-            : /** @type {Extract<typeof result, {ok:false}>} */ (result).msg || '商品暂不可购买', 'warn');
-        return;
-      }
-      if (g.material) {
-        notice(`购入${g.name} ×1 · 储备 −${g.price} 币`);
-        Sfx.ding();
-        UI.log(`[[icon:coin]] 购入<b>${esc(g.name)}</b> ×1 → 基地物资（${esc(g.name)} ${B.data[g.material]} · 储备余 ${B.data.coins} 币）`, 'loot');
-        renderHub();
-        return;
-      }
-      Sfx.ding();
-      notice(`已入库：${card.name} ×1 · 储备 −${g.price} 币`);
-      UI.log(`[[icon:coin]] 购入【<b>${esc(card.name)}</b>】×1 → 卡牌仓库（储备余 ${B.data.coins} 币）`, 'loot');
-      renderHub();
-    });
     hubAct('hubTab', (d) => {
       const next = d.tab === 'home' ? 'deploy' : d.tab;
       if (!pages.includes(next)) return;
@@ -242,12 +217,6 @@ preparationFeature = createHubPreparationAdapter({
     });
     hubAct('hubHome', () => { hubTab = 'deploy'; renderHub(); });
     hubAct('hubRetryView', () => renderHub());
-    hubAct('shopPreview', d => {
-      const goods = HUB_SHOP_GOODS[Number(d.i)];
-      const card = goods && hubShopGoodsCard(goods);
-      const from = /** @type {HTMLElement} */ (document.querySelector(`[data-act="shopPreview"][data-i="${Number(d.i)}"]`));
-      if (card) { UI.showCardZoom(card, { presentation:'inventory', from }); decorateInventoryZoom(card); }
-    });
     hubAct('hubCollectionView', (d) => {
       if (!['cards', 'rewards', 'backs', 'achievements', 'classes', 'stories'].includes(d.view)) return;
       if (d.view === hubCollectionView) return;
@@ -350,6 +319,7 @@ preparationFeature = createHubPreparationAdapter({
       if (!stack) return;
       if (d.count && Number(d.count) !== (stack.count || 1)) { UI.log('消耗区数量已变化，请重新打开详情', 'warn'); return; }
       /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
+      const restoreCost = B.pocketKeyCost(stack), restoredCards = Array.from({length:stack.count || 1},()=>({...stack.card}));
       const r = await B.restore(index);
       if (!currentHub()) return false;
       if (r === true) { Sfx.ding(); UI.log(`[[icon:key]] 消耗 <b>${B.pocketKeyCost(stack)}</b> 把钥匙，卡牌已复原，回到卡牌仓库`, 'ok'); }
@@ -357,6 +327,9 @@ preparationFeature = createHubPreparationAdapter({
       else if (r === 'full') UI.log(`[[icon:archive]] 仓库容量不足（${B.stashUsed()}/${B.stashCap()} 张），先卖出或升级仓库`, 'warn');
       else if (r && /** @type {typeof r & {why?:string,cost?:number}} */ (r).why === 'nokey') UI.log(`[[icon:key]] 钥匙不足：复原这堆卡牌需要 <b>${/** @type {typeof r & {cost?:number}} */ (r).cost}</b> 把钥匙（现有 ${B.keyCount ? B.keyCount() : 0}）——可在仓库把钥匙材料卡「使用」折入储备`, 'warn');
       else if (!r) UI.log('卡牌复原未保存，请重试。', 'warn');
+      if (r === true) return afterOutcomeFeedback(UI.el?.ovBody,{kind:'restore',destination:'仓库',blocking:true,
+        cards:restoredCards,cost:`钥匙 −${restoreCost}`,
+        source:'基地复原',cardHTML:card=>SDT.Cards.cardHTML(card,'sm'),isCurrent:currentHub},()=>renderHub());
       if (r) renderHub();
     });
     hubWrite('claimAch', async (d) => {
@@ -379,7 +352,7 @@ preparationFeature = createHubPreparationAdapter({
       if (!selected) { UI.log('卡背选择未保存，请重试。', 'warn'); return false; }
       const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === d.id);
       Sfx.ding();
-      UI.log(`[[icon:cards]] 已装备卡背【<b>${bd ? bd.name : d.id}</b>】——背包翻面与牌库堆即刻生效`, 'ok');
+      UI.log(`[[icon:card-back]] 已装备卡背【<b>${bd ? bd.name : d.id}</b>】——背包翻面与牌库堆即刻生效`, 'ok');
       if (!refreshArchiveBacks({ base:B2, meta:M, cards:SDT.Cards })) renderHub();
     });
     hubWrite('claimColl', async (d) => {

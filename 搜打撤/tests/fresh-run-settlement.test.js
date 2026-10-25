@@ -83,15 +83,15 @@ it('reports the final failure XP even when it crosses a level', async () => {
 
 it('keeps zero losses and zero rescued cards visible without three empty statistic tiles', async () => {
   await doDeath(); document.body.innerHTML=html();
-  const stats=document.querySelector('.doom-stats');
-  expect(stats.querySelectorAll('.doom-stat')).toHaveLength(2);
+  const stats=document.querySelector('.ui-facts');
+  expect(stats.querySelectorAll('.ui-facts > div')).toHaveLength(2);
   expect(stats.textContent).toContain('卡牌散失0 张');
-  expect(stats.textContent).toContain('消耗区另散失 0 张');
+  expect(document.querySelector('.settlement-notes').textContent).toContain('消耗区另散失 0 张');
   expect(stats.textContent).toContain('抢运回基地0 张');
-  expect(stats.textContent).toContain('安全格占用 1/2');
+  expect(document.querySelector('.settlement-notes').textContent).toContain('安全格占用 1/2');
   expect(stats.textContent).not.toContain('估值损失');
-  expect(document.querySelector('.doom-details').open).toBe(false);
-  expect(document.querySelector('.doom-details summary').textContent).toBe('物资明细与保留规则');
+  expect(document.querySelector('.settlement-details').open).toBe(false);
+  expect(document.querySelector('.settlement-details summary').textContent).toBe('物资明细与保留规则');
 });
 
 it('keeps long loss lists and full damage attribution in native details after the review summary', async () => {
@@ -99,11 +99,11 @@ it('keeps long loss lists and full damage attribution in native details after th
   game.usedPocket=[{count:37}];
   await doDeath({battleSummary:{round:6,remainingFoes:[{name:'首脑',hp:17,maxHp:45}],damageTaken:[{source:'中毒',damage:3}]},battleIsBoss:true});
   document.body.innerHTML=html();
-  const panel=document.querySelector('.doom-panel');
-  const review=panel.querySelector('.doom-review');
-  const details=panel.querySelector('.doom-details');
-  expect(panel.querySelector('.doom-stats').textContent).toContain('卡牌散失1 张');
-  expect(panel.querySelector('.doom-stats').textContent).toContain('消耗区另散失 37 张');
+  const panel=document.querySelector('.settlement-content');
+  const review=panel.querySelector('.settlement-review');
+  const details=panel.querySelector('.settlement-details');
+  expect(panel.querySelector('.ui-facts').textContent).toContain('卡牌散失1 张');
+  expect(panel.querySelector('.settlement-notes').textContent).toContain('消耗区另散失 37 张');
   expect(details.textContent).toContain('极长的传说卡牌名称<不可执行>');
   expect(details.querySelector('不可执行')).toBeNull();
   expect([...panel.children].indexOf(review)).toBeLessThan([...panel.children].indexOf(details));

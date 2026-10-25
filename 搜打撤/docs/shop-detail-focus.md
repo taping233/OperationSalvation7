@@ -1,5 +1,13 @@
 # Shop detail covered-region keyboard isolation
 
+## Current interaction
+
+货架上的卡面用于查看商品详情，独立的“购买/免费领取”按钮才提交交易；卡面点击不扣币或发牌。详情页仍提供购买、收起与必要的整理背包入口。金币不足和售罄的购买按钮不可提交，背包装不下时货架提供整理入口。卡牌完整规则较长时可展开阅读。
+
+商品详情不再重复展示当前/购买后余额和默认入包去向；余额保留在商店页头，详情只保留金币不足、背包容量及售罄等状态。神秘货箱在货架和详情中共用夸张手绘问号卡背，成交后显示真实卡牌。购买刷新复用原按钮时，将新可用状态交给保存锁收尾，避免旧状态重新启用已买不起的补货按钮。商店短转场使用暗色底，保留原滑光和淡出节奏。
+
+详情遮罩覆盖的货架与商人区域暂时退出键盘焦点范围，可见页头和页尾仍可使用。收起详情后焦点回到原商品；离页、重绘或打开背包会清理旧详情的遮罩状态。2026-10-23本轮只核对源码和现有DOM回归，没有新的实页验收结论。以下2026-10-20记录保留其当时的验证范围。
+
 ## Evidence and scope (2026-10-20)
 
 The private v14 browser check reported by the parent confirmed that, while a wood item detail remained open, Tab could reach a shelf checkbox behind the shade. The visible page header and footer are outside that shade and remain usable. Merely reaching “返回地图” is therefore not treated as a defect.

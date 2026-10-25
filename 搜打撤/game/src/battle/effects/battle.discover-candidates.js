@@ -18,12 +18,9 @@ import { isClassCard } from '../../cards/card-rarity.js';
  * Specified predicates use the historical restricted-pool rules. General pools
  * retain the historical `otherCls` fallback's operator precedence.
  *
- * 职业卡门（2026-10-21 反馈#2）：指定池（pred）历史上不叠 isRandomObtainable，
- * 因此「招式/武术/2费…」等随机池会漏出职业卡。现在指定池同样按职业卡口径收口：
- * isClassCard(card) 的卡必须再过一次目录门 isRandomObtainable（生产口径下职业卡恒 false），
- * 除非谓词显式声明职业池——显式职业池谓词（parsePoolNoun「本职业/其它职业」、
- * otherCls 发现任务）带 allowClassCards 标记跳过本门。
- * 非职业卡维持历史口径（不叠目录门），能力卡/棱彩特殊池（如「传说或能力卡」）不受影响。
+ * 普通随机和指定发现池直接排除职业卡，不由目录回调重新放行。
+ * 只有明确职业池（谓词 allowClassCards、otherCls 或职业稀有度）可放行。
+ * 非职业卡按调用方的明确池谓词筛选，不额外叠加目录门。
  * @param {readonly DiscoverCandidateCard[]} catalog
  * @param {DiscoverPoolOptions} options
  * @returns {DiscoverCandidateCard[]}
@@ -32,17 +29,26 @@ export function buildDiscoverPool(catalog, {
   myClass, pred, rarity, otherCls, isRandomObtainable,
 }) {
   if (pred) {
-    const allowClassCards =
-      /** @type {{ allowClassCards?: boolean }} */ (/** @type {unknown} */ (pred)).allowClassCards === true;
     return catalog.filter(card =>
       card.rarity !== '衍生' && card.type !== '生物' && card.type !== '事件' && card.type !== '资源' &&
-      (allowClassCards || !isClassCard(card) || isRandomObtainable(card)) && pred(card));
+      isDiscoverClassAllowed(card, { pred, rarity, otherCls }) && pred(card));
   }
-  return catalog.filter(card =>
+  return catalog.filter(card => isDiscoverClassAllowed(card, { rarity, otherCls }) && (
     card.rarity !== '衍生' && card.type !== '资源' && card.type !== '道具' && isRandomObtainable(card) &&
     (!rarity || card.rarity === rarity) &&
     (!otherCls || (card.cls && card.cls !== myClass)) ||
-    (otherCls && card.rarity === '职业' && card.cls && card.cls !== myClass));
+    (otherCls && card.rarity === '职业' && card.cls && card.cls !== myClass)));
+}
+
+/**
+ * The same profession gate applies to generated and retained preview candidates.
+ * @param {DiscoverCandidateCard} card
+ * @param {{ pred?: DiscoverCardPredicate | null, rarity?: string | null, otherCls?: boolean | null }} [options]
+ * @returns {boolean}
+ */
+export function isDiscoverClassAllowed(card, { pred, rarity, otherCls } = {}) {
+  return !isClassCard(card) || !!otherCls || rarity === '职业'
+    || /** @type {{ allowClassCards?: boolean } | null | undefined} */ (/** @type {unknown} */ (pred))?.allowClassCards === true;
 }
 
 /**

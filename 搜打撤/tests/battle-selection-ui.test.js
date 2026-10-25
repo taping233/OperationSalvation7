@@ -2,10 +2,10 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import { selectionState, selectionKey, cancelSelection, syncSelectionPrompt } from '../game/src/battle/view/battle.selection-ui.js';
 const base = () => ({ battleToken:'one', phase:'player', hand:['a'], busy:false });
 const findCard = () => ({ card:{ name:'测试牌' } });
-let stage, current;
+let stage;
 beforeEach(() => {
   document.body.innerHTML = '<div id="overlay"><div class="battle-stage"></div></div>';
-  stage = document.querySelector('.battle-stage'); current = { snapshot:base(), clickUid:null };
+  stage = document.querySelector('.battle-stage');
 });
 it.each([
   ['click', {}, 'a'], ['card', { pendingTarget:{ uid:'a', card:{name:'牌'}, hint:'选另一敌人 · Esc 取消', excludedTargetIndex:0 } }],
@@ -34,44 +34,17 @@ it.each(['click','item','card','slam','dart','infusion','aim'])('cancels %s once
   if(kind==='click') expect(clearClick).toHaveBeenCalledWith({restoreFocus:true});
   expect(clearFeedback).toHaveBeenCalledTimes(1);expect(commands.submitCardPlay).not.toHaveBeenCalled();expect(JSON.stringify(snapshot)).toBe(before);
 });
-function sync(onCancel=vi.fn()) { syncSelectionPrompt(stage,current.snapshot,{...current,findCard,getCurrent:()=>current,onCancel}); return onCancel; }
-it('updates one shared strip without replacing an unchanged focused control',()=>{
-  current.clickUid='a'; sync(); const button=stage.querySelector('button');button.focus();sync();
-  expect(stage.querySelectorAll('[data-selection-prompt]')).toHaveLength(1);expect(stage.querySelector('button')).toBe(button);expect(document.activeElement).toBe(button);
-  current={snapshot:{...base(),pendingItem:{uid:'p',card:{name:'药水'}}},clickUid:null};const cancel=sync();
-  expect(stage.querySelectorAll('[data-selection-prompt]')).toHaveLength(1);expect(stage.textContent).toContain('点击一名敌人');stage.querySelector('button').click();expect(cancel).toHaveBeenCalledTimes(1);
-});
-it.each(['battle','uid','step','hidden','inert','detached','busy','closing','aria-hidden'])('rejects stale cancellation after %s changes',change=>{
-  current.snapshot.pendingTarget={uid:'a',card:{name:'牌'},excludedTargetIndex:0};const cancel=sync();const button=stage.querySelector('button');
-  if(change==='battle')current.snapshot.battleToken='two';
-  if(change==='uid')current.snapshot.pendingTarget.uid='b';
-  if(change==='step')current.snapshot.pendingTarget.excludedTargetIndex=1;
-  if(change==='hidden')document.getElementById('overlay').hidden=true;
-  if(change==='inert')stage.setAttribute('inert','');
-  if(change==='detached')stage.remove();
-  if(change==='closing')document.getElementById('overlay').classList.add('closing');
-  if(change==='aria-hidden')stage.setAttribute('aria-hidden','true');
-  if(change==='busy')current.snapshot.busy=true;
-  button.click();expect(cancel).not.toHaveBeenCalled();
-});
-it('clears the strip on idle, infusion and resolution without cancelling any core operation',()=>{
-  for(const state of [{}, {infusing:{uid:'a'}}, {busy:true}]){
-    current={snapshot:base(),clickUid:'a'};sync();expect(stage.querySelector('button')).not.toBeNull();
-    current={snapshot:{...base(),...state},clickUid:null};const cancel=sync();expect(stage.querySelector('button')).toBeNull();expect(cancel).not.toHaveBeenCalled();
-  }
-});
-it.each(['stage-token','current-stage'])('rejects a still-connected old stage: %s', change => {
-  current.clickUid='a';const cancel=sync();const button=stage.querySelector('button');
-  if(change==='stage-token')stage._battleToken='another';else current.stage=document.createElement('div');
-  button.click();expect(cancel).not.toHaveBeenCalled();
-});
-it('distinguishes keyboard activation from a pointer cancellation',()=>{
-  current.clickUid='a';const cancel=sync();const button=stage.querySelector('button');
-  button.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1}));expect(cancel).toHaveBeenLastCalledWith({restoreFocus:false});
-  button.click();expect(cancel).toHaveBeenLastCalledWith({restoreFocus:true});
-});
-it('rejects an old button after cancelling and reselecting the same UID',()=>{
-  current.clickUid='a';const cancel=sync();const old=stage.querySelector('button');
-  current.clickUid=null;sync();current.clickUid='a';sync(cancel);
-  old.click();expect(cancel).not.toHaveBeenCalled();stage.querySelector('button').click();expect(cancel).toHaveBeenCalledTimes(1);
+it.each([
+  {clickUid:'a'}, {pendingTarget:{uid:'a'}}, {pendingItem:{uid:'p'}},
+  {slamPending:true}, {dartPending:true}, {infusing:{uid:'a'}},
+])('does not create a target prompt or invoke commands for %j', state => {
+  const cancel=vi.fn(),returnToInfusion=vi.fn();
+  const snapshot={...base(),...state},before=JSON.stringify(snapshot);
+  stage.innerHTML='<div data-selection-prompt><button>取消</button></div><div class="battle-content">战场</div>';
+  syncSelectionPrompt(stage,snapshot,{onCancel:cancel,onReturnToInfusion:returnToInfusion});
+  syncSelectionPrompt(stage,snapshot,{});
+  expect(stage.querySelector('[data-selection-prompt]')).toBeNull();
+  expect(stage.querySelector('.battle-content').textContent).toBe('战场');
+  expect(cancel).not.toHaveBeenCalled();expect(returnToInfusion).not.toHaveBeenCalled();
+  expect(JSON.stringify(snapshot)).toBe(before);
 });

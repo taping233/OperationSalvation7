@@ -1,4 +1,5 @@
 import { cardBrowserItems, isCardBrowserCurrent } from './card-browser-state.js';
+import { createCollectionArt } from './collection-view-art.js';
 import { escAttr } from '../core/shared.js';
 import '../../css/card-browser.css';
 
@@ -7,7 +8,7 @@ const positions = new Map();
 // Per-mounted-browser callbacks must not enter the cross-page position cache.
 const artRenderers = new WeakMap();
 export function cardBrowserHTML(id, label, itemsHTML, { rows = 2, columns = 0 } = {}) {
-  return `<section class="card-browser" data-card-browser="${escAttr(id)}" data-browser-rows="${rows}" data-browser-columns="${columns}" aria-label="${escAttr(label)}"><div class="card-browser-track">${itemsHTML}</div><footer class="card-browser-footer"><div><button type="button" class="card-browser-page" data-browser-page="previous" aria-label="上一页卡牌">←</button><span class="card-browser-position" role="status" aria-live="polite"></span><button type="button" class="card-browser-page" data-browser-page="next" aria-label="下一页卡牌">→</button></div></footer></section>`;
+  return `<section class="card-browser" data-card-browser="${escAttr(id)}" data-browser-rows="${rows}" data-browser-columns="${columns}" aria-label="${escAttr(label)}"><div class="card-browser-track collection-list">${itemsHTML}</div><footer class="card-browser-footer"><div><button type="button" class="card-browser-page" data-browser-page="previous" aria-label="上一页卡牌">←</button><span class="card-browser-position" role="status" aria-live="polite"></span><button type="button" class="card-browser-page" data-browser-page="next" aria-label="下一页卡牌">→</button></div></footer></section>`;
 }
 export function refreshCardBrowser(root, { reset = false, items: suppliedItems = null, page: requestedPage = null } = {}) {
   const state = instances.get(root);
@@ -39,15 +40,9 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
   nextPage = reset ? 0 : Math.max(0, Math.min(nextPage, pages - 1));
   const first = nextPage * perPage;
   const art = artRenderers.get(root);
-  const pendingArt = [];
+  const pendingArt = art?.prepare(visible.slice(first,first + perPage)) || [];
   // Prepare every new face before changing the visible page or its saved position.
   // A genuine renderer error propagates, leaving the previous page usable for retry.
-  if (art) for (const item of visible.slice(first, first + perPage)) {
-    const host = /** @type {HTMLElement} */ (item.querySelector('[data-browser-art]'));
-    if (!host || art.rendered.has(host)) continue;
-    const html = art.render(item);
-    if (html != null) pendingArt.push([host, window.SDT?.Icons?.rich?.(html) ?? html]);
-  }
   state.perPage = perPage;
   state.page = nextPage;
   const gridColumns = `repeat(${columns}, minmax(0, ${fixedColumns ? '1fr' : `${minimum}px`}))`;
@@ -57,10 +52,7 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
     const hidden = index === undefined || index < first || index >= first + perPage;
     if (item.hidden !== hidden) item.hidden = hidden;
   }
-  for (const [host, html] of pendingArt) {
-    host.innerHTML = html;
-    art.rendered.add(host);
-  }
+  art?.commit(pendingArt);
   const empty = String(!visible.length);
   if (root.dataset.empty !== empty) root.dataset.empty = empty;
   const previous = /** @type {HTMLButtonElement} */ (root.querySelector('[data-browser-page="previous"]'));
@@ -77,17 +69,17 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
     else { root.tabIndex = -1; root.focus({ preventScroll:true }); }
   }
 }
-/** @param {HTMLElement} root @param {{onOpen?: (key: string, item: HTMLElement) => void, onPage?: () => void, renderArt?: (item: HTMLElement) => string}} [options] */
-export function bindCardBrowser(root, { onOpen, onPage, renderArt } = {}) {
+/** @param {HTMLElement} root @param {{onOpen?: (key: string, item: HTMLElement) => void, onPage?: () => void, renderArt?: (item: HTMLElement) => string, prepareArt?:(items:HTMLElement[]) => (item:HTMLElement)=>string}} [options] */
+export function bindCardBrowser(root, { onOpen, onPage, renderArt, prepareArt } = {}) {
   if (!root || instances.has(root)) return;
   const key = `${window.SDT?.Base?.slot || ''}/${root.dataset.cardBrowser}`;
   const state = { ...(positions.get(key) || { page: 0 }) };
   positions.delete(key); positions.set(key, state);
   while (positions.size > 64) positions.delete(positions.keys().next().value);
   instances.set(root, state);
-  if (renderArt) artRenderers.set(root, { render: renderArt, rendered: new WeakSet() });
   let loadFrame = 0, disposed = false;
   const track = /** @type {HTMLElement} */ (root.querySelector('.card-browser-track'));
+  if (renderArt || prepareArt) artRenderers.set(root,createCollectionArt({root,track,current:() => isCardBrowserCurrent(root),host:'[data-browser-art]',render:renderArt,prepareRender:prepareArt,rich:true,filterHidden:false}));
   let measuredWidth = track.clientWidth;
   const schedule = () => {
     if (disposed || !isCardBrowserCurrent(root) || loadFrame || track.clientWidth <= 0) return;
@@ -112,6 +104,7 @@ export function bindCardBrowser(root, { onOpen, onPage, renderArt } = {}) {
   const lifetime = new MutationObserver(() => {
     if (root.isConnected) return;
     disposed = true;
+    artRenderers.get(root)?.dispose();
     artRenderers.delete(root);
     resize?.disconnect(); lifetime.disconnect();
     window.removeEventListener('resize', resized);
@@ -137,6 +130,8 @@ export function bindCardBrowser(root, { onOpen, onPage, renderArt } = {}) {
     const direction = event.key === 'PageDown' ? 'next' : event.key === 'PageUp' ? 'previous' : null;
     if (direction) { event.preventDefault(); /** @type {HTMLButtonElement} */ (root.querySelector(`[data-browser-page="${direction}"]`)).click(); }
   });
-  root.addEventListener('load', schedule, true);
+  // Pagination depends on track width, not on how many card images finish.
+  // Keep the width guard for load events as well as ResizeObserver callbacks.
+  root.addEventListener('load', resized, true);
   refreshCardBrowser(root);
 }

@@ -1,3 +1,4 @@
+import { canvasTraps, audioGainFields } from './helpers/environment-fixtures.js';
 /* 回归测试（2026-09-20 老板定版）：节点完成结算后立即变普通；未触发退出仍可重进；商店离开才消耗。
  * 地图边是双向的（map-generator addEdge 双向登记），走回头路是合法移动——
  * 此前 resolveCell 无 visited 拦截，返回旧格会重刷宝箱/火堆/事件等。
@@ -16,15 +17,7 @@ installImmediateWebLocks();
 // eslint-disable-next-line no-constant-condition
 if (true) {
   const noopCtx = () => new Proxy(function () {}, {
-    get: (_t, k) => {
-      if (k === 'canvas') return null;
-      if (k === 'measureText') return () => ({ width: 10 });
-      if (k === 'createLinearGradient' || k === 'createRadialGradient' ||
-          k === 'createPattern' || k === 'getImageData') return () => ({ addColorStop: () => {}, data: [] });
-      return () => noopCtx();
-    },
-    set: () => true,
-    apply: () => noopCtx(),
+    ...canvasTraps(noopCtx),
   });
   window.HTMLCanvasElement.prototype.getContext = function () { return noopCtx(); };
 }
@@ -34,7 +27,7 @@ window.Audio = class FakeAudio {
 };
 window.AudioContext = window.AudioContext || class FakeAudioContext {
   constructor() { this.currentTime = 0; this.destination = {}; this.sampleRate = 44100; }
-  createGain() { return { connect: () => {}, disconnect: () => {}, gain: { value: 0, setValueAtTime: () => {}, linearRampToValueAtTime: () => {}, cancelScheduledValues: () => {}, setTargetAtTime: () => {} } }; }
+  createGain() { return { ...audioGainFields() }; }
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }
@@ -257,20 +250,20 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
       game.layerData[0].logical[idx].def=originalDef; // 旧资源入口不是现行地图生成类型；待领记录独立于地图投影。
       game.layerData[0].logical[neighbor].def=originalNeighborDef; // 返回地图会保存，先恢复完整合法地图。
       expect(pending.current.cards).toHaveLength(1);expect(game.visited[key]).toBeFalsy();
-      expect(clickAct('chestReturn')).toBe(true);expect(game.state).toBe('idle');
+      expect(clickAct('chestReturn')).toBe(true);await tick(0);expect(game.state).toBe('idle');
       game.layerData[0].logical[neighbor].def={type:'entrance',name:'测试安全位置',extraction:false};
       expect(moveTo(0,neighbor)).toBe(true);await tick(30);
       game.layerData[0].logical[neighbor].def=originalNeighborDef; // 安全落位只供此夹具，不污染持久化地图配额。
-      expect(session.saveGame()).toBe(true);
-      expect(session.loadGame(slot).ok).toBe(true);
+      expect(await session.saveGame()).toBe(true);
+      expect((await session.loadGame(slot)).ok).toBe(true);
       expect(game.trackPos).toBe(neighbor);expect(game.nodeChestRewards[key]).toEqual(pending);
       game.ownedCards.pop();
       expect(moveTo(0,idx)).toBe(true);await tick(30);
       expect(document.querySelector('[data-act="chestTake1"]')).toBeTruthy();
-      expect(clickAct('chestTake1')).toBe(true);expect(clickAct('chestContinue')).toBe(true);
+      expect(clickAct('chestTake1')).toBe(true);await tick(0);expect(clickAct('chestContinue')).toBe(true);await tick(0);
       expect(game.visited[key]).toBe(1);expect(game.nodeChestRewards[key]).toBeUndefined();
       const count=game.ownedCards.length;reenterCell();await tick(30);expect(game.ownedCards.length).toBe(count);
-    } finally { session._set_active_slot(null);RunStorage.remove(slot); }
+    } finally { session._set_active_slot(null);await RunStorage.remove(slot); }
   });
   it('门旁商队关闭重进保留购买记录，穿门后旧店关闭且旧购买动作失效', async () => {
     await newRun('standard',[],{skipClassChoice:true});game.myClass='武';game.characterId='wu';game.state='idle';game.entrySupply=null;game.coins=999;
@@ -281,12 +274,12 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     const stockKey=`door:${door.pair}`,stock=game.shopStocks[stockKey];
     const buyIndex=stock.findIndex(slot=>slot.card&&!slot.empty&&!slot.sold&&!slot.mystery&&slot.shaReplenish==null);
     expect(buyIndex).toBeGreaterThanOrEqual(0);
-    window.SDT.UI._acts.buyCard({i:String(buyIndex)});
+    await window.SDT.UI._acts.buyCard({i:String(buyIndex)});
     expect(stock[buyIndex].sold).toBe(true);
     const oldBuy=window.SDT.UI._acts.buyCard,coins=game.coins,before=JSON.stringify(stock);
-    expect(clickAct('closeShop')).toBe(true);reenterCell();await tick(30);expect(clickAct('doorShop')).toBe(true);
+    expect(clickAct('closeShop')).toBe(true);await tick(0);reenterCell();await tick(30);expect(clickAct('doorShop')).toBe(true);
     expect(JSON.stringify(game.shopStocks[stockKey])).toBe(before);expect(game.visited[key]).toBeFalsy();
-    expect(clickAct('closeShop')).toBe(true);reenterCell();await tick(30);expect(clickAct('goDoor')).toBe(true);
+    expect(clickAct('closeShop')).toBe(true);await tick(0);reenterCell();await tick(30);expect(clickAct('goDoor')).toBe(true);
     expect(game.visited[key]).toBe(1);oldBuy({i:String(buyIndex)});expect(game.coins).toBe(coins);
     enterLayer(0,idx);reenterCell();await tick(30);
     expect(document.querySelector('[data-act="doorShop"]')).toBeNull();
@@ -297,7 +290,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     const { Random } = await import('../game/src/core/random.js');
     const { buildEncounter } = await import('../game/src/run/game.run.scenes.js');
     const slot = 5;
-    RunStorage.remove(slot);
+    await RunStorage.remove(slot);
     session._set_active_slot(slot); window.SDT.Base.use(slot);
     try {
       expect(await newRun('standard', [], { skipClassChoice:true })).not.toBe(false);
@@ -305,23 +298,28 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
       expect(game.encounterRotationVersion).toBe(1);
       const battle = game.layerData[2].logical.findIndex(cell => cell.def.type === 'battle');
       enterLayer(2, battle);
-      expect(session.saveGame()).toBe(true);
+      expect(await session.saveGame()).toBe(true);
       const modern = RunStorage.read(slot);
       expect(modern.encounterRotationVersion).toBe(1);
       game.encounterRotationVersion = 0;
-      expect(session.loadGame(slot).ok).toBe(true);
+      expect((await session.loadGame(slot)).ok).toBe(true);
       expect(game.encounterRotationVersion).toBe(1);
       const stableMap = JSON.stringify(game.layerData.map(layer => layer.logical.map(cell => [cell.id, cell.x, cell.row, cell.def, cell.next])));
       const state = Random.snapshot();
       const first = buildEncounter(2);
       Random.restore(state);
       expect(buildEncounter(2)).toEqual(first);
+      game.encounterRotationVersion = 0;
+      Random.restore(state);
+      const legacyEncounter = buildEncounter(2);
+      expect(legacyEncounter.filter(enemy => enemy.elite)).toHaveLength(1);
+      game.encounterRotationVersion = 1;
       // 新4/9必须保留快照：缺失时拒绝恢复，并完整保留原存档以便修复。
       const damaged = JSON.parse(JSON.stringify(modern));
       delete damaged.mapSnapshot; delete damaged.routeVersion;
-      expect(RunStorage.write(slot, damaged)).toBe(true);
+      expect(await RunStorage.write(slot, damaged)).toBe(true);
       const rawBeforeRejectedLoad = localStorage.getItem(`sdt-run-${slot}`);
-      expect(session.loadGame(slot)).toMatchObject({ ok: false, preserveRun: true, code: 'UNSUPPORTED_LEGACY_MAP' });
+      expect(await session.loadGame(slot)).toMatchObject({ ok: false, preserveRun: true, code: 'UNSUPPORTED_LEGACY_MAP' });
       expect(localStorage.getItem(`sdt-run-${slot}`)).toBe(rawBeforeRejectedLoad);
       for (const legacySeedOnly of [false, true]) {
         const legacy = JSON.parse(JSON.stringify(modern));
@@ -330,19 +328,19 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
           delete legacy.mapSnapshot; delete legacy.routeVersion;
           legacy.generatorVersion = 3; legacy.layoutVersion = 9; // 真正旧seed-only身份，不伪造新4/9丢失快照。
         }
-        expect(RunStorage.write(slot, legacy)).toBe(true);
+        expect(await RunStorage.write(slot, legacy)).toBe(true);
         game.encounterRotationVersion = 1;
-        expect(session.loadGame(slot).ok).toBe(true);
+        expect((await session.loadGame(slot)).ok).toBe(true);
         expect(game.encounterRotationVersion).toBe(0);
         if (!legacySeedOnly) expect(JSON.stringify(game.layerData.map(layer => layer.logical.map(cell => [cell.id, cell.x, cell.row, cell.def, cell.next])))).toBe(stableMap);
         Random.restore(state);
         const old = buildEncounter(2);
         expect(old.encounterId.startsWith('rotation:')).toBe(false);
-        expect(new Set(old.map(enemy => enemy.id)).size).toBe(1);
+        expect(old).toEqual(legacyEncounter);
       }
     } finally {
       session._set_active_slot(null);
-      RunStorage.remove(slot);
+      await RunStorage.remove(slot);
     }
   });
 });

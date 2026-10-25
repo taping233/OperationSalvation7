@@ -163,6 +163,9 @@ export function createBattleSettlementCommands(options) {
         !isRecord(snapshot.visited) || snapshot.visited[nodeKey(node)] !== 1) {
       return fail('INVALID_ARGUMENT', 'afterRun 必须包含当前节点坐标及已完成 visited 标记');
     }
+    if (snapshot.elapsed !== undefined && (!Number.isFinite(snapshot.elapsed) || snapshot.elapsed < 0)) {
+      return fail('INVALID_ARGUMENT', 'afterRun.elapsed 必须是非负有限数');
+    }
     // Capture run ownership before awaiting recovery; never bind a stale snapshot to a newly opened run.
     const startingIdentity = readIdentity(slotId);
     if (startingIdentity.ok === false) {
@@ -190,12 +193,13 @@ export function createBattleSettlementCommands(options) {
         stillCurrent.value.revision !== liveIdentity.value.revision) return fail('STALE_RUN', '对局已变化，旧结算已取消');
     if (prior.replay) return { ok: true, replay: true, receipt: prior.value };
 
-    const baseSnapshot = clone(base.value);
+    const baseSnapshot = base.value;
     const stats = isRecord(baseSnapshot.stats) ? baseSnapshot.stats : {};
     const oldSeconds = Number(stats.playSeconds);
     const nextStats = {
       ...stats,
       playSeconds: (Number.isFinite(oldSeconds) ? oldSeconds : 0) + elapsedDelta,
+      ...(snapshot.elapsed === undefined ? {} : { playTimeCheckpoint: { runId: liveIdentity.value.runId, elapsed: snapshot.elapsed } }),
     };
     const eggBattles = (Number(baseSnapshot.eggBattles) || 0) + 1;
     let afterBase = { ...baseSnapshot, stats: nextStats, eggBattles };
@@ -209,7 +213,7 @@ export function createBattleSettlementCommands(options) {
     /** @type {BattleSettlementAttempt} */
     const attempt = freezeDeep({
       context, command: COMMAND, runId: liveIdentity.value.runId, payload,
-      afterBase, afterRun: clone(snapshot), output: { eggBattles, ...(progression ? { progression } : {}) },
+      afterBase, afterRun: snapshot, output: { eggBattles, ...(progression ? { progression } : {}) },
     });
     const finalIdentity = readIdentity(slotId);
     if (getActiveSlot() !== slotId || getBase().slot !== slotId) return fail('STALE_SLOT', '档位已切换，旧结算已取消');

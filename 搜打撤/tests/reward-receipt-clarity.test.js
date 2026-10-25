@@ -2,8 +2,8 @@ import { describe, it, expect, vi } from 'vitest';
 import { chestRewardOverviewHTML } from '../game/src/ui/chest-reward-overview.js';
 import { stackTransferSlotDelta } from '../game/src/core/card-capacity.js';
 import { createRewardOrganizer } from '../game/src/hub/game.reward-organizer.js';
-import fs from 'node:fs';
 import postcss from 'postcss';
+import { readCssSource } from './helpers/css-source.js';
 
 describe('本批收获摘要与安全格可用性',()=>{
   it('领取完成保留继续探索入口，不显示入包汇总块',()=>{
@@ -50,10 +50,12 @@ describe('本批收获摘要与安全格可用性',()=>{
     expect(JSON.stringify(game.ownedCards)).toBe(before);
     expect(document.body.textContent).toContain('整叠需 0 格，安全格余 0 格');
   });
-  it('四项保留四列阅读宽度，移除完成摘要样式',()=>{
-    const css=postcss.parse(fs.readFileSync('game/css/chest-reward-overview.css','utf8'));
+  it('多项使用共用300px卡列并允许换行，完成摘要不占独立区域',()=>{
+    const css=postcss.parse(readCssSource('game/css/room-rewards.css','utf8'));
     const values=selector=>{const result={};css.walkRules(rule=>{if(rule.selectors.includes(selector))rule.walkDecls(decl=>result[decl.prop]=decl.value);});return result;};
-    expect(values('body #overlay .card .cqo-frame .cqp-dialog .reward-replica[data-reward-count="4"] .reward-objects')).toMatchObject({'grid-template-columns':'repeat(4,280px)','max-width':'none'});
+    expect(values('body #overlay .card .room-reward .reward-objects')).toMatchObject({'display':'flex','flex-wrap':'wrap','justify-content':'center'});
+    expect(values('body #overlay .card .room-reward .reward-unit')).toMatchObject({flex:'0 0 300px',width:'300px'});
+    expect(values('body #overlay .card .room-reward .reward-unit .reward-card')).toMatchObject({'min-width':'300px','max-width':'300px'});
     const receipt=values('body #overlay .card .cqo-frame .cqo-receipt');
     expect(receipt).toEqual({});
   });

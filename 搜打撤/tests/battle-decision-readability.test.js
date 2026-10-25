@@ -1,11 +1,12 @@
 // @vitest-environment node
-import { readFileSync } from 'node:fs';
 import { JSDOM } from 'jsdom';
 import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
-const hand = readFileSync(new URL('../game/css/battle-hand-overhaul.css', import.meta.url), 'utf8');
-const battle = readFileSync(new URL('../game/css/battle-stage.css', import.meta.url), 'utf8');
+const hand = readCssSource(new URL('../game/css/battle-hand-overhaul.css', import.meta.url), 'utf8');
+const battle = readCssSource(new URL('../game/css/battle-stage.css', import.meta.url), 'utf8');
+const equipment = readCssSource(new URL('../game/css/battle-equipment.css', import.meta.url));
 const stage = '#overlay .battle-stage.sts';
 const liftSelector = `${stage} :where(.sts-hand:not([data-hand-hit="fixed"])) .bt-slot:hover .bt-card:not(.aim-lift),${stage} .bt-slot:is(.hand-reading,:has(:focus-visible)) .bt-card:not(.aim-lift)`;
 function declarations(css, selector) {
@@ -26,7 +27,7 @@ describe('battle decision reading CSS contract', () => {
     expect(slot).toContain('260px * var(--fs,1)');
     expect(slot).not.toContain('rotate(');
     expect(declarations(battle, `${stage} .bt-card:not(.aim-lift)`)).toContain('var(--hand-rest,64px)');
-    expect(declarations(battle, liftSelector)).toContain('translateY(0)');
+    expect(declarations(battle, liftSelector)).toContain('translateY(-30px)');
     expect(declarations(battle, liftSelector)).not.toContain('scale(');
     expect(hand).not.toMatch(/bt-hand-inspect/);
   });
@@ -43,7 +44,7 @@ describe('battle decision reading CSS contract', () => {
 
   it('retires the winter hover conflict and leaves inline drag transforms alone', () => {
     const legacySelector = 'body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift)';
-    const legacy = postcss.parse(readFileSync(new URL('../game/css/winter.css', import.meta.url), 'utf8'));
+    const legacy = postcss.parse(readCssSource(new URL('../game/css/winter.css', import.meta.url), 'utf8'));
     const old = [];
     legacy.walkRules(rule => { if (rule.selector === legacySelector) old.push(rule); });
     expect(old).toHaveLength(0);
@@ -65,15 +66,16 @@ describe('battle decision reading CSS contract', () => {
     // 字号与短规则节选由共用卡面 CSS 管理，手牌皮肤不得再覆写 .hsc-desc；完整规则
     // 阅读面仍走 .bt-hand-detail 弹层并沿用共享字号令牌（见下一定义与末个用例）。
     expect(hand).not.toMatch(/hsc-desc/);
-    expect(declarations(battle, `${stage} .bt-card`)).toContain('transition:transform .16s');
+    expect(declarations(battle, `${stage} .bt-card`)).toContain('transition:transform var(--motion-hand-hover-out,420ms)');
     expect(battle).toContain('prefers-reduced-motion:reduce');
     expect(declarations(battle, `${stage} .bt-card.aim-lift`)).toContain('transition:none');
   });
 
   it('keeps object labels on a local dark reading surface and career controls at the player feet', () => {
     expect(declarations(battle, `${stage} .sts-nameplate`)).toContain('background:none');
-    expect(declarations(battle, `${stage} .sts-hp>span`)).toContain('font-size:22px');
+    expect(declarations(battle, `${stage} .sts-hp>span`)).toContain('font-size:20px');
     expect(declarations(battle, `${stage} .sts-intent`)).toContain('position:relative');
+    expect(declarations(battle, `${stage} .sts-nameplate`)).toContain('bottom:calc(100% + 20px)');
     expect(declarations(battle, `${stage} .sts-intent`)).not.toContain('100% + 120px');
     expect(declarations(battle, `${stage} .sts-resource-dock`)).toContain('display:contents');
     expect(declarations(battle, `${stage} .sts-resource-dock`)).toContain('--battle-page-space:0px');
@@ -91,14 +93,14 @@ describe('battle decision reading CSS contract', () => {
     const unframed = declarations(battle, 'body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.sts-hud-l>.bt-pile,.bt-hand-page,.sts-energy-wrap)');
     expect(unframed).toContain('border:0'); expect(unframed).toContain('background:none'); expect(unframed).toContain('box-shadow:none');
     expect(declarations(battle, 'body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.bt-pile,.bt-hand-page,.sts-energy,.bt-hand-page-step):focus-visible')).toContain('outline:2px solid');
-    expect(declarations(battle, `${stage} #btSelf>.sts-hand-tools`)).toContain('left:4px');
-    expect(declarations(battle, `${stage} #btSelf>.sts-hand-tools`)).toContain('top:calc(100% - 170px)');
+    expect(declarations(equipment, `${stage} .sts-me .sts-unit-actions`)).toContain('flex-flow:column nowrap');
+    expect(declarations(equipment, `${stage} .sts-me .sts-unit-actions`)).toContain('bottom:calc(100% + 18px)');
   });
 
   it('reads the printed card directly without an overlapping folded-name label', () => {
     expect(declarations(battle, `${stage} .bt-rest-name`)).toBe('');
     expect(declarations(battle, `${stage} .bt-card:not(.aim-lift)`)).toContain('64px');
-    expect(declarations(battle, liftSelector)).toContain('translateY(0)');
+    expect(declarations(battle, liftSelector)).toContain('translateY(-30px)');
     expect(battle).not.toMatch(/\.hsc-(?:name|cost|desc)\s*\{/);
     expect(battle).not.toContain('!important');
   });
@@ -108,12 +110,7 @@ describe('battle decision reading CSS contract', () => {
     expect(declarations(battle, `${stage} .sts-headrow>b`)).toContain('overflow-wrap:anywhere');
     expect(declarations(battle, `${stage} .sts-intent`)).toContain('flex-wrap:wrap');
     expect(declarations(battle, `${stage} .bt-intent-part`)).toContain('display:inline-grid');
-    expect(declarations(battle, `${stage} .bt-intent-condition`)).toContain('grid-column:1/-1');
-    expect(declarations(battle, `${stage} .bt-intent-condition`)).toContain('white-space:nowrap');
-    expect(declarations(battle, `${stage} .bt-intent-condition`)).toContain('word-break:keep-all');
-    expect(declarations(battle, `${stage} .bt-intent-detail`)).toContain('display:none');
-    expect(declarations(battle, `${stage} .bt-intent-detail`)).toContain('position:absolute');
-    expect(declarations(battle, `${stage} .bt-intent-detail`)).toContain('overflow:auto');
+    expect(declarations(battle, `${stage} .bt-intent-detail`)).toBe(''); // Unit-name tooltip owns the complete explanation.
     expect(declarations(battle, `${stage} .sts-stats>.sts-stat`)).toContain('white-space:nowrap');
   });
 
@@ -137,13 +134,13 @@ describe('battle decision reading CSS contract', () => {
   });
 
   it('keeps the skill icon, fee and disabled state legible with the explanation supplied by hover/focus', () => {
-    expect(declarations(battle, `${stage} .battle-skill-help`)).toContain('width:104px');
-    expect(declarations(battle, `${stage} .battle-skill-fee`)).toContain('22px');
+    expect(declarations(battle, `${stage} .battle-skill-help`)).toContain('width:var(--battle-unit-control-size,48px)');
+    expect(declarations(battle, `${stage} .battle-skill-fee`)).toContain('12px');
     expect(declarations(battle, `${stage} .battle-skill-art`)).toContain('pointer-events:none');
     expect(declarations(battle, `${stage} .bt-slam-btn:disabled`)).toContain('opacity:1');
     expect(declarations(battle, `${stage} .bt-slam-btn:disabled .battle-skill-art`)).toContain('opacity:.4');
     expect(declarations(battle, `${stage} .bt-infchip`)).toContain('top:56px');
-    expect(declarations(battle, `${stage} .bt-turn-forecast b`)).toContain('font-size:30px');
+    expect(declarations(battle, `${stage} .bt-turn-forecast b`)).toContain('font-size:26px');
   });
 
   it('keeps full long rules scrollable and uses the same copy tokens with fixed footer controls', () => {

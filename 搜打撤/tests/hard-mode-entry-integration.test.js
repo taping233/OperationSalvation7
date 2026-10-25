@@ -60,17 +60,17 @@ afterEach(() => { UI.hideOverlay(); vi.clearAllTimers(); vi.useRealTimers(); });
 afterAll(() => { window.SDT = previousSDT; });
 
 const hard = { infantry:[5,5], archer:[7,4], bandit:[4,4], cavalry:[7,8], orc_jav:[8,5],
-  wolf_rider:[9,8], orc_axe:[5,9], fire_el:[14,9], water_el:[9,14], grass_el:[7,16], dragon:[9,54] };
+  wolf_rider:[9,8], orc_axe:[5,9], fire_el:[14,9], water_el:[9,14], grass_el:[7,16], dragon:[9,54], rager:[3,7],deserter:[4,9],greedy_imp:[5,7],swaggerer:[3,8],tin_mute:[5,12],heavy_hammer:[11,11],cultist:[8,8],fake_apothecary:[7,14],camo_sniper:[9,5] };
 const metaKeys = ['risk','strategy','encounterId','encounterKind','rewardKind','fallbackReason'];
 const metadata = list => Object.fromEntries(metaKeys.map(key => [key,list[key]]));
 const encounters = [
   ['first-layer ordinary',0,0,[0,0,0,0],['bandit','bandit'],'entry',4],
-  ['second-layer group',1,0,[0.99],['archer','cavalry'],'group',1],
-  ['third-layer old single',2,0,[0.9,0.1,0,0.1],['wolf_rider'],'entry',4],
-  ['third-layer fresh rotation',2,1,[0.9,0.5,0.6,0.1,0.2,0.3],null,'entry',6],
-  ['fourth-layer special elite',3,0,[0.05,0,0.1],['dragon'],'elite',3],
-  ['fourth-layer group',3,0,[0.99,0.99],['fire_el','grass_el'],'group',2],
-  ['fourth-layer ordinary',3,0,[0.99,0,0,0.1],['water_el'],'entry',4],
+  ['second-layer group',1,0,[0.99],['deserter','cavalry'],'group',2],
+  ['third-layer old single',2,0,[0.9,0.1,0,0.1],['tin_mute','orc_jav'],'entry',5],
+  ['third-layer fresh rotation',2,1,[0.9,0.5,0.6,0.1,0.2,0.3],['swaggerer','wolf_rider','orc_axe'],'entry',6],
+  ['fourth-layer special elite',3,0,[0.05,0,0.1],['fake_apothecary'],'entry',4],
+  ['fourth-layer group',3,0,[0.99,0.99],['camo_sniper','grass_el'],'group',2],
+  ['fourth-layer ordinary',3,0,[0.99,0,0,0.1],['cultist','grass_el'],'group',2],
 ];
 describe('same selection inputs preserve encounter construction, not whole-playthrough RNG', () => {
   it.each(encounters)('%s', async (_label, layer, rotation, values, ids, kind, draws) => {

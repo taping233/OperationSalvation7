@@ -1,6 +1,7 @@
 import { rotSeedDescription } from './rot-seed-revision.js';
 import { structuredCardDescription } from './structured-card-description.js';
 import { readBattleValues } from './battle-value-context.js';
+import { currentCardDescription } from './card-state-presentation.js';
 // 卡牌展示文案。只替换已审阅的 id + 原始描述；简单结构化句式从规则填数值。
 // 自定义或复杂描述保留原入口行为；旧存档腐化之种沿现行定版。
 // 文案审阅依据：docs/evidence/2026-10-11-card-description-unification/。
@@ -10,20 +11,32 @@ import { readBattleValues } from './battle-value-context.js';
  * 加成 = 基础属性 + 本场祝福（与 combat.dealDamage 同口径：atk+atkUp、spellPower+spellUp），
  * 目标侧（流血加成/冰冻增伤/暗羁绊）随目标变化，不在静态描述里预判。
  * 非战斗场景（地图/图鉴/文档生成）readBattleValues() 返回 null → 逐字静态。 */
-function applyBattleValues(text, values) {
+export function spellDamageBonus(card, bonus, description = card?.desc || '') {
+  const damage = card?.rules?.triggers?.onPlay?.filter(operation => operation.op === 'damage') || [];
+  const multiplier = damage.length === 1 ? damage[0].spellPowerMul || 1
+    : /受(?:到的)?法伤加成翻倍/.test(description) ? 2 : 1;
+  return (Number(bonus) || 0) * multiplier;
+}
+
+function applyBattleValues(text, values, card) {
   if (!values || !text) return text;
   const atk = (Number(values.atk) || 0);
-  const spell = (Number(values.spellPower) || 0);
+  const spell = spellDamageBonus(card, values.spellPower, text);
+  const spellAmount = value => Math.max(0, Number(value) + spell);
+  const spellRange = (low, separator, high) => separator
+    ? `${spellAmount(low)}${separator}${spellAmount(high)}` : String(spellAmount(low));
   return text
     // 攻击伤害句：造成（你的攻击力 ±N）点攻击伤害 → 实际值（与 dealDamage 同为下限 0）
     .replace(/造成（你的攻击力\s*([+-])\s*(\d+)）点攻击伤害/g,
       (_match, sign, bonus) => `造成 ${Math.max(0, atk + (sign === '-' ? -1 : 1) * Number(bonus))} 点攻击伤害`)
     // 「造成等同于你的攻击力的攻击伤害」（初始攻击等）→ 实际值
     .replace(/造成等同于你的攻击力的攻击伤害/g, () => `造成 ${Math.max(0, atk)} 点攻击伤害`)
-    // 法术伤害句：造成 N 点法术伤害 → N + 法伤加成
-    .replace(/造成\s*(\d+)\s*点法术伤害/g, (_match, n) => `造成 ${Number(n) + spell} 点法术伤害`)
+    // 区间两端与单值均沿真实加成/倍率计算，伤害最低为0。
+    .replace(/造成\s*(\d+)(?:\s*([-~～–—])\s*(\d+))?\s*点法术伤害/g,
+      (_match, low, separator, high) => `造成 ${spellRange(low, separator, high)} 点法术伤害`)
     // 未审阅卡面的原始素记号「N′」同样是法术伤害 → 实际值（保留素记号形状）
-    .replace(/(\d+)′/g, (prime, n) => `${Number(n) + spell}′`);
+    .replace(/(?<![\d′])(\d+)(?:\s*([-~～–—])\s*(\d+))?′(?!′)/g,
+      (_match, low, separator, high) => `${spellRange(low, separator, high)}′`);
 }
 
 const descriptions = new Map([
@@ -153,7 +166,7 @@ const descriptions = new Map([
   ["tt7-silence", ["沉默 1 名角色 1 回合，抽 1 张牌。", "沉默 1 名角色，持续 1 回合，并抽 1 张牌。"]],
   ["cc-demon", ["7′，损失 2 点生命。", "造成 7 点法术伤害；你损失 2 点生命。"]],
   ["tt7-holyglow", ["将自身血量回复至 12 血。", "将你的生命回复至 12 点。"]],
-  ["tt7-holyheal", ["注能（1）：回复 2 倍于被注能卡牌价格的血量。", "注能（1）：你回复等同于被注能卡牌价格 2 倍的生命。"]],
+  ["tt7-holyheal", ["注能（1）：回复 2 倍于被注能卡牌价格的血量。", "注能（1）：你回复等同于被注能卡牌费用 2 倍的生命。"]],
   ["tt7-provoke", ["选择2 名敌人，迫使其相互攻击一次。", "依次选择 2 名敌人：前者攻击后者，后者存活时反击 1 次。"]],
   ["tt7-bloodpotion", ["3′，回复等量生命。", "造成 3 点法术伤害；你按结算后伤害回复生命（含过量伤害）。"]],
   ["tt7-smite", ["10′，对血量一半及以下的敌人伤害增加50%。", "造成 10 点法术伤害；若目标的生命不超过其生命上限的一半，本次伤害增加 50%。"]],
@@ -162,7 +175,7 @@ const descriptions = new Map([
   ["tt7-frozenight", ["冰冻所有敌人，持续 1 回合。", "对全体敌人附加冰冻，持续 1 回合。"]],
   ["tt7-stratagem", ["自带1*3空间，可以置入3张法术牌；打出时选择其中 1 张直接施放。", "本牌内置 1×3 格空间，可存放 3 张法术牌；打出本牌时，选择其中 1 张，直接施放。"]],
   ["tt7-bladebloom", ["发现并直接施放 1 张牌，获取剩下两张。", "发现 1 张卡牌并直接施放；你获得其余 2 张候选卡牌。"]],
-  ["tt7-recruit", ["召唤步兵（4-4） ×2为你抵挡伤害并自动战斗。", "召唤 2 名「步兵」（攻击力 4 点，生命 4 点），为你抵挡伤害并自动战斗。"]],
+  ["tt7-recruit", ["召唤步兵（4-4） ×2为你抵挡伤害并自动战斗。", "召唤 2 只「米高芬」（攻击力 4 点，生命 4 点），为你抵挡伤害并自动战斗。"]],
   ["tt7-elementstorm", ["下一张法术施放 2 次。", "你施放的下 1 张法术牌施放 2 次。"]],
   ["tt7-burnharvest", ["5′，受法伤加成翻倍；", "造成 5 点法术伤害；本牌受到的法伤加成翻倍。"]],
   ["tt7-twinfireball", ["4′，将2张‘火球’置入手牌。", "造成 4 点法术伤害；将 2 张「火球」置入你的手牌。"]],
@@ -183,9 +196,9 @@ const descriptions = new Map([
   ["tt8-curse2", ["抽到时施放：冰冻。", "你抽到本牌时，对第一名存活敌人附加冰冻，持续 1 回合。"]],
   ["tt8-curse3", ["抽到时施放：中毒，流血。", "你抽到本牌时，对第一名存活敌人附加 1 层中毒和 1 层流血。"]],
   ["tt8-curse4", ["抽到时施放：沉默 1 回合。", "你抽到本牌时，对第一名存活敌人附加沉默，持续 1 回合。"]],
-  ["tt8-demonslay", ["抽到该牌时攻击全体敌人；···以天启诛魔剑覆盖你的所有武器。", "你抽到本牌时，对全体敌人造成等同于你的攻击力的攻击伤害。「天启剑」与「诛魔剑」的合成效果尚未定稿。"]],
+  ["tt8-demonslay", ["抽到该牌时攻击全体敌人；···以天启诛魔剑覆盖你的所有武器。", "你抽到本牌时，对全体敌人造成等同于你的攻击力的攻击伤害。集齐「天启剑」与「诛魔剑」两张牌后，合并为「天启诛魔剑」。"]],
   ["tt8-archdemon", ["获得 1 点攻击力，获得3张重斩。", "你的攻击力增加 1 点，并获得 3 张「重斩」。"]],
-  ["tt8-heavensword", ["抽到该牌时额外抽 1 张牌；在你抽到天启剑与诛魔剑后……", "你抽到本牌时，额外抽 1 张牌。「天启剑」与「诛魔剑」的合成效果尚未定稿。"]],
+  ["tt8-heavensword", ["抽到该牌时额外抽 1 张牌；在你抽到天启剑与诛魔剑后……", "你抽到本牌时，额外抽 1 张牌。集齐「天启剑」与「诛魔剑」两张牌后，合并为「天启诛魔剑」。"]],
   ["tt8-dragonblade", ["攻+6，附加破甲与 1 层流血。", "造成（你的攻击力 + 6）点攻击伤害；对目标附加破甲与 1 层流血。"]],
   ["cmtn0pbkmnvc", ["对方身上每有一层诅咒，释放一次‘初始攻击’", "目标每有 1 层诅咒，对目标施放 1 次「初始攻击」。"]],
   ["cmtn1epgt20j", ["发现一张注能卡，使其无需注能", "发现 1 张注能卡牌，并使该牌无需注能。"]],
@@ -267,5 +280,5 @@ export function displayCardDescription(value, id, card) {
     .replaceAll('对应消耗区为空时', '对应牌区为空时')
     .replaceAll('弃牌堆', '消耗牌堆').replaceAll('墓地', '消耗牌堆')
     .replaceAll('消耗牌堆或消耗牌堆', '消耗牌堆');
-  return applyBattleValues(cleaned, readBattleValues());
+  return currentCardDescription(applyBattleValues(cleaned, readBattleValues(), card), card || { id });
 }

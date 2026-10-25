@@ -213,6 +213,8 @@ describe('explicit local diagnostic controls within the modal boundary', () => {
   });
 
   it('does not count diagnostic subtree updates or relocation as gameplay mutations, but keeps mixed app changes', async () => {
+    // Isolate diagnostic relocation from the independently tested HUD relocation.
+    document.getElementById('runTopBar')?.remove();
     install(); open(); await flushMutations();
     document.getElementById('gameFirst').click();
     control('sync').click(); await flushMutations();

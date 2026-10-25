@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { Random } from '../game/src/core/random.js';
 import { groupHandCards } from '../game/src/battle/core/battle.hand.js';
@@ -7,8 +8,7 @@ import { assertCardRulesExecutable } from '../game/src/battle/effects/battle.rul
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 20, battleHandMax: 99, bossDeckSize: 15,
-  starterSha: 2, battleStartDraw: 99, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(20, 99, 15, 2, 99, 1) }, items: {} };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const engine = await import('../game/src/battle/core/battle.engine.js');
@@ -40,8 +40,7 @@ async function start(boss = true) {
   game = {
     ownedCards: ['tt2-treasuremap', 'starter-attack', 'tt5-galaxy-voyage', 'starter-attack', 'tt7-imitate']
       .map((id, index) => ({ uid: `equip-${index}`, card: canonical(id), safe: false })),
-    inventory: [], usedPocket: [], hp: 40, maxHp: 40, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+    inventory: [], usedPocket: [], ...playerFields(40, 40, 5, 0, '侠客', null),
     logs: [], log(message) { this.logs.push(message); }, heal() {}, addItem() {}, onBattleEnd() {},
   };
   BattleSession.start(game, [{ id: 'equip-target', name: '验证靶', hp: 1000, atk: 0 }],
@@ -88,7 +87,7 @@ describe('寻宝图真实 BattleSession 主动技能', () => {
   it('可抽到已有初始攻击的同名牌，手牌总数增加而可见分组数不变', async () => {
     await start();
     const before = await wearMap();
-    Random.reseed(2);
+    Random.reseed(3); // 当前 shuffle 随机流：抽到已有同名牌，宝箱仍留在牌库。
     const beforeGroups = groupHandCards(before.hand.map(uid => engine.findCard(uid)));
     BattleSession.commands.useEquipSkill('equip-0');
     const after = await idle();
@@ -114,7 +113,7 @@ describe('寻宝图真实 BattleSession 主动技能', () => {
     expect(after.drawPile).toHaveLength(0);
   });
 
-  it('普通战可装备寻宝图，并从本场99张实体牌库抽牌', async () => {
+  it('普通战可装备寻宝图，并从本场10张实体牌库抽牌', async () => {
     await start(false);
     const before = BattleSession.getSnapshot();
     expect(engine.unplayableReason(engine.findCard('equip-0').card)).toBeNull();
@@ -129,7 +128,7 @@ describe('寻宝图真实 BattleSession 主动技能', () => {
     const box = piles.granted.find(entry => entry.card.id === 'cmtn28jv33wx');
     expect([...worn.drawPile, box.uid]).toContain(gained[0]);
     expect(after.drawPile).toHaveLength(worn.drawPile.length);
-    expect(piles.granted.filter(entry => entry.uid.startsWith('normal-sha-'))).toHaveLength(99);
+    expect(piles.granted.filter(entry => entry.uid.startsWith('normal-sha-'))).toHaveLength(10);
     expect(after.energy).toBe(before.energy);
     expect(after.equipped[0].used).toBe(true);
   });

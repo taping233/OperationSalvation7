@@ -82,6 +82,12 @@ export interface ShopSlot {
   [field: string]: unknown;
 }
 
+export interface NestShopStock {
+  cardSlots: { card: CardSnapshot | null; price: number; sold: boolean }[];
+  classSlots: { card: CardSnapshot | null; price: number; sold: boolean }[];
+  runeSlots: { rune: Rune; price: number; sold: boolean }[];
+}
+
 export interface InventorySlot {
   name: string;
   value: number;
@@ -148,8 +154,9 @@ export interface CameraPort {
 }
 export interface ExtractionPending {
  version: 1; runId: string; phase: 'organizing'; requestSeq: number;
- remainingCards: {card: CardSnapshot; count: number}[];
- keptPocket: {card: CardSnapshot; count: number}[];
+ sourceIdentityVersion?: 1;
+ remainingCards: {card: CardSnapshot; count: number; variantKey?: string}[];
+ keptPocket: {card: CardSnapshot; count: number; variantKey?: string}[];
  totalPocketCount: number; lostPocketCount: number;
  resources: {wood: number; rations: number};
 }
@@ -200,6 +207,8 @@ export interface GameState {
   nestBoss?: NestEnemy;
   nestBossName?: string;
   nestTargetedBox?: number;
+  nestAltarChoice?: {position:9; remaining:number} | null;
+  nestShopStocks?: Record<string, NestShopStock>;
   nestKills?: number;
   nestBossDown?: boolean;
   nodeChestRewards?: Record<string, object>;
@@ -229,7 +238,8 @@ export interface GameState {
   grantCard?: (card: CardSnapshot, options?: {silent?: boolean; reason?: string; deferAcquiredCard?: (card: CardSnapshot) => void}) => boolean;
   discardCard?: (name: string, fromSafe?: boolean, uid?: string) => boolean;
   onBattleEnd?: (options: object, playedUids: string[], win: boolean, consumedUids?: string[]) => Promise<boolean | void>;
-  persistSave?: () => boolean;
+  onNestBattleEnd?: (options: object, playedUids: string[], win: boolean, consumedUids?: string[]) => boolean | void | Promise<boolean | void>;
+  persistSave?: () => boolean | void | Promise<boolean | void>;
   saveGame?: () => boolean;
 
   map: GameMap;
@@ -268,6 +278,7 @@ export interface GameState {
   time: number;
   elapsed: number;
   elapsedSynced: number;
+  elapsedTimeBaseline?: number;
 }
 
 export type SnapshotShopStock = {

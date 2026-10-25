@@ -1,11 +1,13 @@
 /* Move only the selected control's paint; layout, hit targets and glass stay authored. */
-[data-selection-motion] { position: relative; isolation: isolate; }
-[data-selection-motion] > .selection-state-plate {
+[data-selection-motion]{
+& { position: relative; isolation: isolate; }
+& > .selection-state-plate {
   position: absolute; top: 0; left: 0; z-index: -1; pointer-events: none;
-  border-radius: 6px; opacity: 0;
+  border-radius: 6px; opacity: 0; visibility: hidden;
   background: linear-gradient(140deg, color-mix(in srgb, currentColor 45%, transparent), #2c616da3);
   box-shadow: inset 0 1px 0 #d9f5ec40, inset 0 -2px #c9b477a6, 0 4px 12px #071a2526;
-}
+}}
+[data-selection-motion-ready] > .selection-state-plate { visibility: visible; }
 [data-selection-motion="zone"] > .selection-state-plate {
   background: linear-gradient(140deg, #669aa96b, #30616ba3);
   box-shadow: inset 2px 0 var(--bag-gold), inset 0 1px 0 #d5f5ef38, 0 4px 12px #061b2533;
@@ -15,25 +17,44 @@
   background: linear-gradient(100deg, color-mix(in srgb, currentColor 23%, transparent), color-mix(in srgb, currentColor 6%, transparent));
   box-shadow: inset 3px 0 currentColor, inset 0 1px 0 #e8f3ff21, inset 0 -1px 0 #03080e33, 0 8px 22px #0205094d;
 }
-body #overlay [data-selection-motion] > :is(.bag-rz.on,.bag-pill.on,.settings-tab[aria-selected="true"]) {
-  background: transparent !important; box-shadow: none !important;
+[data-selection-motion="guide"] > .selection-state-plate {
+  border-radius:2px; background:#2a2d30; box-shadow:inset 4px 0 #ceb66b;
 }
-body #overlay [data-selection-motion="settings"]::before { display: none; }
-body #overlay [data-selection-motion="settings"] > .settings-tab small {
-  color: rgba(var(--settings-category-tint,var(--settings-tint)),.68);
+[data-selection-motion="achievement-filter"] > .selection-state-plate {
+  border-radius:3px; background:var(--interface-selection-fill); box-shadow:inset 0 -3px var(--interface-focus);
 }
-body #overlay [data-selection-motion="settings"] > .settings-tab[aria-selected="true"] small {
-  color: rgb(var(--settings-category-tint,var(--settings-tint)));
+[data-selection-motion="achievement-view"] > .selection-state-plate {
+  border-radius:3px; background:var(--interface-selection-fill); box-shadow:inset 0 -3px var(--interface-focus);
 }
-body #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab),
-body #overlay [data-selection-motion] > .settings-tab small {
-  transition-property: color, border-color;
+/* The authored selected style is the fallback before layout and without motion.
+   Only a measured plate may take over its fill. */
+@media (prefers-reduced-motion: no-preference) {
+  body:not(.reduce-motion) #overlay [data-selection-motion-ready] > :is(.bag-rz.on,.bag-pill.on,[data-gallery-filter][aria-pressed="true"],[data-gallery-view][aria-pressed="true"]) {
+    background: transparent !important; box-shadow: none !important;
+  }
+  body:not(.reduce-motion) [data-selection-motion-ready]:is([data-selection-motion="settings"],[data-selection-motion="guide"]){ --selection-control-fill: transparent; --selection-control-shadow: none; --selection-marker-content: none;}
+}
+body #overlay{
+& [data-selection-motion] > :is(.bag-rz,.bag-pill,[data-gallery-filter],[data-gallery-view]) {
+  transition-property: background, color, border-color, box-shadow;
   transition-duration: var(--motion-change,160ms);
   transition-timing-function: var(--motion-ease-enter,cubic-bezier(.22,1,.36,1));
 }
-body.reduce-motion #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab),
-body.reduce-motion #overlay [data-selection-motion] > .settings-tab small { transition: none; }
+/* Match the inventory host's scope so its older hover transform cannot compete
+   with the measured selection plate or reintroduce a second motion owner. */
+& .card.bag-page .bag-v2 :is(.bag-rail,.bag-tools)[data-selection-motion] > button:is(.bag-rz,.bag-pill) {
+  transform:none;
+  transition-property:background, color, border-color, box-shadow;
+  transition-duration:var(--motion-change,160ms);
+  transition-timing-function:var(--motion-ease-enter,cubic-bezier(.22,1,.36,1));
+}}
+body.reduce-motion{
+& [data-selection-motion] > .selection-state-plate { visibility: hidden; }
+& #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,[data-gallery-filter],[data-gallery-view]) { transition: none; }
+& #overlay .card.bag-page .bag-v2 :is(.bag-rail,.bag-tools)[data-selection-motion] > button:is(.bag-rz,.bag-pill) { transition:none; transform:none; }}
 @media (prefers-reduced-motion: reduce) {
-  body #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab),
-  body #overlay [data-selection-motion] > .settings-tab small { transition: none; }
+  [data-selection-motion] > .selection-state-plate { visibility: hidden; }
+body #overlay{
+  & [data-selection-motion] > :is(.bag-rz,.bag-pill,[data-gallery-filter],[data-gallery-view]) { transition: none; }
+  & .card.bag-page .bag-v2 :is(.bag-rail,.bag-tools)[data-selection-motion] > button:is(.bag-rz,.bag-pill) { transition:none; transform:none; }}
 }

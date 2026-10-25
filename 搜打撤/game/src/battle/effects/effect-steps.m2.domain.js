@@ -1,4 +1,5 @@
 import { hasStructuredTrigger } from '../../cards/card-trigger-contract.js';
+import { currentCreatureName } from '../../core/creature-identity.js';
 import { foeFightTargets, validFoeFightTargets } from './battle.foe-fight.js';
 
 /** Instance-owned state and host services are captured explicitly. */
@@ -19,8 +20,9 @@ const instanceRuntime = context.runtime;
  * battle.runtime（结算侧先例同 exec-play）。
  * ============================================================ */
 
-/** 手牌招式诅咒：规则优先，未迁移卡沿旧描述识别；叠层求和、计时取最大。 */
-function scanHandMoveCurses(deps) {
+/** curse.source:'handMoves'：聚合手牌规则/旧文案诅咒及其数量。
+ * 规则优先，未迁移卡沿旧描述识别；叠层求和、计时取最大。 */
+function handMoveCurses(deps) {
   const merged = new Map();
   /** @type {[string, RegExp, number][]} */
   const legacySpecs = [
@@ -102,7 +104,7 @@ function resolveStealAtk(card, operation, preferredTarget, deps) {
     if (!alive.length) return false;
     if (operation.target === 'randomEnemy') {
       if (typeof deps.random !== 'function') throw new Error('resolveStealAtk: deps.random 未注入');
-      targets = [alive[Math.floor(deps.random() * alive.length)]];
+      targets = [alive[Math.floor(deps.random('target') * alive.length)]];
     } else targets = alive;
   } else {
     const target = preferredTarget && !preferredTarget.dead ? preferredTarget : deps.getAliveFoes()[0];
@@ -124,14 +126,42 @@ function resolveStealAtk(card, operation, preferredTarget, deps) {
       deps.log(`[[icon:arrow]] <b>${deps.esc(card.name)}</b>：${deps.esc(t.name)} 没有可偷取的攻击力`, 'dim');
       continue;
     }
-    t._stealRestore = (t._stealRestore || 0) + stolen;
-    // 归还门在 enemy-phase 回合末管线（turn > _stealRestoreTurn）——duration=1（影噬「本回合偷取」缺省）
-    // 须当回合末归还，故 -2；旧文本路径 ctx.turn 恒 undefined、经 || 0 恰好同为当回合末归还
-    t._stealRestoreTurn = deps.getTurn() + duration - 2;
+    const restorations = stolenAttackRestorations(t);
+    restorations.push({ amount: stolen, returnTurn: deps.getTurn() + duration - 1 });
+    storeStolenAttackRestorations(t, restorations);
     deps.combat.addBlessing(deps.getPlayerStatus(), 'atkUp', stolen, duration);
     deps.log(`[[icon:arrow]] <b>${deps.esc(card.name)}</b>：偷取 <b>${deps.esc(t.name)}</b> ${stolen} 点攻击力（${duration} 回合后归还）`, 'sys');
   }
   return true;
+}
+
+// Old snapshots retain one aggregate amount/deadline. Adopt that entry before
+// adding new grants, so an old pending reduction keeps its original expiry.
+function stolenAttackRestorations(foe) {
+  return Array.isArray(foe._stealRestorations) ? foe._stealRestorations : foe._stealRestore > 0
+    ? [{ amount: foe._stealRestore, returnTurn: (foe._stealRestoreTurn || 0) + 1 }] : [];
+}
+function storeStolenAttackRestorations(foe, restorations) {
+  if (!restorations.length) {
+    delete foe._stealRestorations;
+    delete foe._stealRestore;
+    delete foe._stealRestoreTurn;
+    return;
+  }
+  foe._stealRestorations = restorations;
+  // Keep the legacy aggregate for snapshot readers that still inspect it.
+  foe._stealRestore = restorations.reduce((sum, entry) => sum + entry.amount, 0);
+  foe._stealRestoreTurn = Math.max(...restorations.map(entry => entry.returnTurn)) - 1;
+}
+function restoreStolenAttack(foe, turn) {
+  const pending = [], due = [];
+  for (const entry of stolenAttackRestorations(foe)) {
+    (foe.dead || entry.returnTurn <= turn ? due : pending).push(entry);
+  }
+  const amount = due.reduce((sum, entry) => sum + entry.amount, 0);
+  if (amount) foe.atk = (foe.atk || 0) + amount;
+  storeStolenAttackRestorations(foe, pending);
+  return amount;
 }
 
 /** noDrawNext：下回合开始不抽牌（破浪斩）——runtime noDrawNext 旗标，回合管线消费。 */
@@ -266,7 +296,7 @@ function restoreAtkDown(foe) {
  * perCurseKinds=true 时消灭数量锚定目标诅咒种类数；onKill 奖励复用击杀奖励键。
  */
 function matchesExecuteCap(foe, cap = {}) {
-  return !foe.affix && (cap.atk === undefined || (foe.atk || 0) <= cap.atk) &&
+  return !foe.affix && !foe.boss && !foe.controlBoss && (cap.atk === undefined || (foe.atk || 0) <= cap.atk) &&
     (cap.wounded !== true || foe.hp < foe.maxHp) &&
     (cap.maxHpBelow === undefined || (foe.maxHp || 0) < cap.maxHpBelow);
 }
@@ -282,7 +312,7 @@ function executeTargetReason(card, target, aliveFoes) {
   const candidates = target ? aliveFoes.filter(foe => foe === target) : aliveFoes;
   if (candidates.some(foe => !foe.dead && matchesExecuteCap(foe, op.cap))) return null;
   const cap = op.cap || {};
-  const message = target?.affix ? '不能选择 BOSS 敌人' : cap.atk !== undefined
+  const message = target && (target.affix || target.boss || target.controlBoss) ? '不能选择 BOSS 敌人' : cap.atk !== undefined
     ? `只能选择攻击力不高于${cap.atk}的非 BOSS 敌人`
     : cap.maxHpBelow !== undefined ? `只能选择最大生命低于${cap.maxHpBelow}的非 BOSS 敌人`
       : '没有可以消灭的非 BOSS 敌人';
@@ -327,7 +357,7 @@ function resolveExecute(card, operation, preferredTarget, deps) {
     if (killed >= count) break;
     if (foe.dead) continue;
     deps.hitFoe(foe, { ...card, desc: '' }, foe.hp + 9999, 'true', '（消灭）');
-    killed++;
+    if (foe.dead || foe.hp <= 0) killed++;
   }
   if (killed > 0) {
     deps.log(`[[icon:skull]] <b>${deps.esc(card.name)}</b>：消灭了 ${killed} 个符合条件的敌人`, 'sys');
@@ -402,12 +432,13 @@ function countCurseKinds(foe, deps) {
 }
 
 /**
- * summon：召唤随从（征召「召唤步兵（4-4）×2」）——engine summonAlly 同一随从位。
+ * summon：召唤随从（征召米高芬4/4×2）——engine summonAlly 同一随从位。
  * statless 物件（封印肢体）不带攻血、taunt 优先承伤（随从位自带语义）。
  */
 function resolveSummon(card, operation, deps) {
-  deps.summonAlly(operation.name, operation.atk || 0, operation.hp || 1, operation.count, operation.statless === true);
-  deps.log(`[[icon:paw]] <b>${deps.esc(card.name)}</b>：召唤 ${operation.count} 名【${deps.esc(operation.name)}】为你而战`, 'sys');
+  const name = currentCreatureName(operation.name);
+  deps.summonAlly(name, operation.atk || 0, operation.hp || 1, operation.count, operation.statless === true);
+  deps.log(`[[icon:paw]] <b>${deps.esc(card.name)}</b>：召唤 ${operation.count} 名【${deps.esc(name)}】为你而战`, 'sys');
   return true;
 }
 
@@ -415,7 +446,7 @@ function resolveSummon(card, operation, deps) {
  * armor.consumeEquip：消耗手牌中 1 张装备牌作为代价（铸甲「消耗 1 张装备牌，+10甲」）。
  * 无装备在手时效果无效（与文本路径 hand-cost 语义一致：付不出就不白拿甲）。
  */
-function resolveConsumeEquip(card, deps) {
+function* resolveConsumeEquipSteps(card, deps) {
   const equipUid = instanceRuntime.hand.find(uid => {
     const o = deps.findCard(uid);
     return o && o.card.type === '装备';
@@ -430,12 +461,14 @@ function resolveConsumeEquip(card, deps) {
   if (instanceRuntime.mode === 'boss') instanceRuntime.grave.push(equipUid);
   const o = deps.findCard(equipUid);
   deps.log(`[[icon:flask]] <b>${deps.esc(card.name)}</b>：消耗了手牌中的【<b>${deps.esc(o ? o.card.name : '?')}</b>】`, 'sys');
+  if (o) yield* (deps.onHandConsumed?.(o.card, equipUid) || []);
   return true;
 }
-
-/** curse.source:'handMoves'：聚合手牌规则/旧文案诅咒及其数量。 */
-function handMoveCurses(deps) {
-  return scanHandMoveCurses(deps);
+function resolveConsumeEquip(card, deps) {
+  const steps = resolveConsumeEquipSteps(card, deps);
+  let result = steps.next();
+  while (!result.done) result = steps.next();
+  return result.value;
 }
 
 /**
@@ -450,5 +483,5 @@ function isLastHandCard(uid, deps) {
   });
   return others.length === 0;
 }
-return { resolveStealAtk, resolveNoDrawNext, resolveExtraTurn, resolveRegisterRule, applyDamageOnKill, applyAtkDown, restoreAtkDown, matchesExecuteCap, executeTargetReason, resolveExecute, resolveFoeFight, resolveFoeFightSteps, resolveCopyRandom, countCurseKinds, resolveSummon, resolveConsumeEquip, handMoveCurses, isLastHandCard };
+return { resolveStealAtk, restoreStolenAttack, resolveNoDrawNext, resolveExtraTurn, resolveRegisterRule, applyDamageOnKill, applyAtkDown, restoreAtkDown, matchesExecuteCap, executeTargetReason, resolveExecute, resolveFoeFight, resolveFoeFightSteps, resolveCopyRandom, countCurseKinds, resolveSummon, resolveConsumeEquip, resolveConsumeEquipSteps, handMoveCurses, isLastHandCard };
 }

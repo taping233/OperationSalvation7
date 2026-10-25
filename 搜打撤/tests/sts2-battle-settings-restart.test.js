@@ -1,3 +1,4 @@
+import { battleRules, overlayElements, damageRuleFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createGameMenuController } from './helpers/menu-controller.js';
 import { battleRestartHTML, bindBattleRestart } from '../game/src/ui/settings-battle-restart.js';
@@ -15,15 +16,13 @@ const SDT = window.SDT = { UI, Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {}, musicMuted: false, sfxMuted: false,
     musicVolume: 0.7, sfxVolume: 0.6, setMusicMuted() {}, setSfxMuted() {}, setMusicVolume() {}, setSfxVolume() {} },
   Notes: { clearAll() {} },
-  MAP: { rules: { battleEnergy: 3, battleHandMax: 30, bossDeckSize: 2, starterSha: 0,
-    battleStartDraw: 2, battleTurnDraw: 1, diceSides: 6 }, items: {} } };
+  MAP: { rules: { ...battleRules(3, 30, 2, 0, 2, 1) }, items: {} } };
 await import('../game/src/cards/cards.js');
 const { BattleSession, configureBattleRenderer } = await import('../game/src/battle/core/battle.core.js');
 const { Random } = await import('../game/src/core/random.js');
 const { setTurbo } = await import('../game/src/core/turbo.js');
 const hit = index => ({ id: `settings-hit-${index}`, name: `重开验证${index}`, cost: 1, type: '武术', dmg: 2, dmgType: 'fixed',
-  desc: '造成2点固定伤害。', rules: { version: 1, battle: { target: { side: 'enemy', area: false } },
-    triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } } });
+  desc: '造成2点固定伤害。', rules: { ...damageRuleFields(false, 'chosenEnemy') } });
 const settle = () => vi.advanceTimersByTimeAsync(1000);
 const flush = async () => { for (let i = 0; i < 12; i++) await Promise.resolve(); };
 
@@ -53,8 +52,7 @@ function openSettings() {
 beforeEach(async () => {
   vi.useFakeTimers(); actions = {}; releaseAction = null;
   document.body.innerHTML = '<div id="overlay" hidden><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'),
-    ovTitle: document.getElementById('ovTitle') };
+  UI.el = { ...overlayElements() };
   configureBattleRenderer(snapshot => UI.showOverlay('', `<section class="battle-stage" data-token="${snapshot.battleToken}"></section>`, 'battle'));
   SDT.Cards.ensureSha(); SDT.Cards.ensureStarters(); SDT.Cards.ensureDmgTypes(); SDT.Cards.ensureEffectFields();
   setTurbo(true); start(); await settle(); UI.hideOverlay.mockClear();

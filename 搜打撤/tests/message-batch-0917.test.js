@@ -1,6 +1,6 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 /* 2026-09-17 留言落实批次回归（提取自桌面端留言墙未落实项）：
- * - 「神秘召唤卡池错误」：「发现一张传说或能力卡」的名词被后缀匹配截成「传说或」，
- *   复合池正则失配后回落通用池——现已兼容「传说或/传说或能力/传说或能力卡」收尾；
+ * - 神秘召唤按现行文本「发现 1 张传说卡牌」筛选，旧复合池语法已退役。
  * - 「血毒双镖应该能选择两次目标」：首段（攻+1 附加流血）随出牌目标结算，
  *   二段（攻+1 附加中毒）进入点选（resolveDart），可另选或重复选择同一目标；
  * - 「法力奔涌应当慢动作打出4张卡牌」：每发产出 surge 演出事件（vitest 下节拍为 0 不拖慢测试）；
@@ -11,7 +11,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -35,8 +35,7 @@ function makeGame(cards) {
   const logs = [];
   const g = {
     ownedCards: cards.map(c => ({ uid: 'g' + (uidSeq++), card: c, safe: false })),
-    hp: 99999, maxHp: 99999, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(99999, 99999, 5, 0, '侠客', null),
     lastBattleEnd: null,
     log(m) { logs.push(String(m).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs,
@@ -71,18 +70,25 @@ async function drain(maxLoops = 300, pickUid = null) {
   return snap();
 }
 
-describe('神秘召唤卡池（2026-09-16 留言「神秘召唤卡池错误」）', () => {
-  it('「传说或」收尾名词解析为复合池：传说稀有度或能力卡', () => {
-    const pred = parsePoolNoun('传说或', '侠客');
-    expect(pred, '此前返回 null 回落通用池，应返回复合池谓词').toBeTypeOf('function');
-    expect(pred({ name: 'A', rarity: '传说', type: '武术' })).toBe(true);
-    expect(pred({ name: 'B', rarity: '职业', type: '能力卡' })).toBe(true);
-    expect(pred({ name: 'C', rarity: '古朴', type: '武术' })).toBe(false);
+describe('神秘召唤按现行文本限定传说池', () => {
+  it('纯传说谓词不扩成能力卡或其他稀有度，也不放行职业卡', () => {
+    const pred=parsePoolNoun('传说卡牌','侠客');
+    expect(pred).toBeTypeOf('function');
+    expect(pred({name:'传说武术',rarity:'传说',type:'武术'})).toBe(true);
+    expect(pred({name:'稀有能力',rarity:'稀有',type:'能力卡'})).toBe(false);
+    expect(pred({name:'职业能力',rarity:'职业',type:'能力卡'})).toBe(false);
+    expect(pred({name:'普通招式',rarity:'古朴',type:'武术'})).toBe(false);
+    expect(pred.allowClassCards).not.toBe(true);
+  });
+  it('退役复合池及其截断写法不再作为受支持的池语法', () => {
+    for(const rarity of ['传说','史诗','稀有','古朴'])for(const suffix of ['或','或能力','或能力卡'])expect(parsePoolNoun(rarity+suffix,'侠客')).toBeNull();
   });
 
   it('实打：神秘召唤发现面板仅提供传说卡', async () => {
     const mystic = C.all().find(c => c.name === '神秘召唤');
     expect(mystic).toBeTruthy();
+    expect(mystic.desc).toBe('发现一张传说卡。');
+    expect(mystic.rules.triggers.onPlay[0].pool.kind).toBe('传说');
     const g = makeGame([mystic]);
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '神秘召唤测试' });
     await drain();

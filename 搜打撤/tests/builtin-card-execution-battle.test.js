@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import * as runtime from '../game/src/battle/runtime/battle.runtime.js';
 import { Random } from '../game/src/core/random.js';
@@ -7,8 +8,7 @@ import { isBuiltinExecutableCard } from '../game/src/cards/builtin-card-identiti
 window.SDT ||= {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { sfx() {}, music() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15,
-  starterSha: 0, battleStartDraw: 0, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(99, 99, 15, 0, 0, 1) }, items: {} };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const Cards = window.SDT.Cards;

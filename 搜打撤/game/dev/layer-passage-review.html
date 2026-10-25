@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>跨层插画过场复核</title>
+<style>body{margin:0;background:#18242a;color:#e4e1d7;font:18px system-ui}main{padding:8vh 8vw}button{font:inherit;padding:14px 24px}#result{margin-top:24px}</style>
+<main><h1>跨层过场</h1><p>使用生产跨层控制器与运行插画，构造第1层到第2层的位置变更。</p><button id="play">进入下一层</button><p id="result">等待播放</p></main>
+<script type="module">
+import { showLayerPassage, isLayerPassageActive } from '../src/ui/map-passage.js';
+const game={runActive:true,state:'idle',layerIdx:0,layerData:[{},{}],discoveredPairs:new Set()};
+window.SDT={Renderer:{prepare:async()=>true}};
+document.querySelector('#play').onclick=async()=>{
+  game.layerIdx=0;
+  const started=performance.now();
+  const operation=showLayerPassage(game,0,1);
+  game.layerIdx=1;
+  document.querySelector('#result').textContent='跨层播放中';
+  await operation?.done;
+  document.querySelector('#result').textContent=JSON.stringify({elapsedMs:Math.round(performance.now()-started),layer:game.layerIdx+1,inputReleased:!isLayerPassageActive(game)});
+};
+</script>
+</html>

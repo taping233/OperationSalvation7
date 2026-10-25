@@ -1,3 +1,4 @@
+import { playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
 
@@ -44,8 +45,7 @@ const { waitForFeedback, clearFeedback } = await import('../game/src/battle/view
 
 function makeFixture() {
   return {
-    ownedCards: [], inventory: [], hp: 50, maxHp: 50, atk: 4, spellPower: 0, coins: 0,
-    myClass: null, characterId: null, state: 'idle', battleActive: false, logs: [],
+    ownedCards: [], inventory: [], ...playerFields(50, 50, 4, 0, null, null), logs: [],
     log(message) { this.logs.push(String(message)); },
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     addItem() {}, onBattleEnd() {},

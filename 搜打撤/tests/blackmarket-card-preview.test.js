@@ -1,4 +1,5 @@
-import { rollEventDice } from './helpers/event-dice.js';
+import { overlayElements, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
+import { rollEventDice, flushEventActions } from './helpers/event-dice-async.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const H = vi.hoisted(() => ({ game: {}, cards: [], saves: [], uid: 0, random: () => 0.9 }));
@@ -7,12 +8,7 @@ vi.mock('../game/src/core/random.js', async importOriginal => {
   return { ...actual, Random: { ...actual.Random, random: (...args) => H.random(...args) } };
 });
 vi.mock('../game/src/run/game.session.js', () => ({
-  game: H.game, MAP: { rules: { fireHeal:10, fireClassCardChance:1, bossDeckSize:15, starterSha:5, battleStartDraw:5, battleTurnDraw:1, battleHandMax:8 }, monsters:{}, altar:{ bosses:[] } }, MODES: {},
-  bagCap: () => 9, usedSlots: () => 0, newUid: () => `u${++H.uid}`, pick: a => a[0],
-  saveGame: () => { H.saves.push(JSON.parse(JSON.stringify(H.game))); return true; },
-  scaledEnemy: a => a, getActiveSlot: () => null, curLayer: () => H.game.layerData[H.game.layerIdx],
-  cellCenter: () => ({}), markSeen() {}, modeCfg: () => ({}), gainCoins: n => H.game.coins += n,
-  weighted: a => a[0], enterLayer() {}, exitToTitle() {},
+  ...eventMapMocks(H), ...eventSaveActions(H), getActiveSlot: () => null, ...eventMapActions(H),
 }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick() {}, ding() {} }, _set_cardPageOpen() {}, cardHTML: c => `<span>${c.name}</span>` }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub() {} }));
@@ -33,8 +29,7 @@ beforeAll(async () => {
     Cards:{ DROP_WEIGHTS:{ 古朴:1 }, all:() => H.cards, classPool:() => [], sellPrice:() => 1, isRandomObtainable:() => true,
       cardHTML:(c, size = '') => `<div class="hs-card" data-card-id="${c.id}" data-size="${size}"><b>${c.name}</b><p class="hsc-desc">${c.desc || ''}</p></div>` } };
   const { UI: standardUI } = await import('../game/src/ui/ui.js');
-  UI = window.SDT.UI = { ...standardUI, _acts:{}, _baseActs:{}, _roomActive:true, el:{},
-    act:(name, fn) => UI._acts[name] = fn, refresh() {}, log() {}, showCardReward() {}, _checkPageBg() {},
+  UI = window.SDT.UI = { ...standardUI, ...eventUiMocks(() => UI),
   };
   ({ takeBagReturnHook, setBagReturnHook } = await import('../game/src/hub/bag-return-hook.js'));
   flow = await import('../game/src/run/game.run.flow.js');
@@ -44,9 +39,8 @@ beforeAll(async () => {
 beforeEach(() => {
   vi.useFakeTimers();
   document.body.innerHTML = '<div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
-  UI.el = { overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody'), ovTitle:document.getElementById('ovTitle') };
-  UI.el.ovBody.addEventListener('click', event => { const button = event.target.closest('[data-act]'); if (button) UI._acts[button.dataset.act]?.(button.dataset); });
-  UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; UI._roomActive = true; setBagReturnHook(null);
+  UI.el = { ...overlayElements() };
+  bindEventRoot(() => UI); setBagReturnHook(null);
   H.random = vi.fn(() => 0.9); H.saves = []; H.uid = 0;
   Object.assign(H.game, { seed:7, state:'idle', layerIdx:0, trackPos:1, hp:35, maxHp:35, visited:{}, ownedCards:[], usedPocket:[], myClass:'武', runActive:true, coins:18, fragments:0,
     altarActivated:false, altarRewardPending:false, nodeRewards:{}, entrySupply:null, discoveredPairs:new Set(),
@@ -62,7 +56,7 @@ afterEach(() => {
 async function openBlackMarket() {
   H.cards = [{ id:'ev19-gamble', name:'地下商场黑市', type:'事件' }, ...prizes];
   const opening = flow.runEventDeck(); await vi.dynamicImportSettled(); await vi.advanceTimersByTimeAsync(1000); await opening;
-  UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
+  await UI._acts.evtChoice({ i:'0' }); await rollEventDice(UI);
 }
 const readers = () => [...UI.el.ovBody.querySelectorAll('[data-act="eventGambleRead"]')];
 function closeZoom(kind = 'escape') {
@@ -115,16 +109,16 @@ describe('黑市投入前卡牌详情', () => {
   it('四次失败后详情和背包返回仍保留保底，第五次只扣3币并保留原三张待领', async () => {
     await openBlackMarket();
     H.random.mockReturnValue(0.1);
-    for (let i = 0; i < 4; i++) { readers()[i % 3].click(); closeZoom(); UI._acts.eventGambleTry(); rollEventDice(UI); }
+    for (let i = 0; i < 4; i++) { readers()[i % 3].click(); closeZoom(); await UI._acts.eventGambleTry(); await rollEventDice(UI); }
     expect(H.game.coins).toBe(6); expect(UI.el.ovBody.textContent).toContain('已尝试 4/5');
     const oldRead = UI._acts.eventGambleRead;
-    UI.showOverlay('背包', '<main>背包</main>', 'page'); UI.hideOverlay(); takeBagReturnHook()();
+    UI.showOverlay('背包', '<main>背包</main>', 'page'); UI.hideOverlay(); await takeBagReturnHook()(); await flushEventActions();
     oldRead({ i:'0' }); expect(document.getElementById('cardZoom')).toBeNull();
     readers()[2].click(); closeZoom();
     expect(UI.el.ovBody.textContent).toContain('已尝试 4/5');
     expect(UI.el.ovBody.querySelector('[data-act="eventGambleTry"]').textContent).toContain('本次保底');
     const rolls = H.random.mock.calls.length, staleRead = UI._acts.eventGambleRead;
-    UI._acts.eventGambleTry(); rollEventDice(UI);
+    await UI._acts.eventGambleTry(); await rollEventDice(UI);
     expect(H.game.coins).toBe(3); expect(H.game.ownedCards).toHaveLength(0);
     expect(H.random).toHaveBeenCalledTimes(rolls + 1);
     const pending = window.SDT.Chests.serialize(H.game);
@@ -137,7 +131,7 @@ describe('黑市投入前卡牌详情', () => {
   it.each(['leave', 'new-page', 'new-run', 'new-node'])('%s 后失效详情回调不能打开旧奖品或改变当前流程', async change => {
     await openBlackMarket();
     const read = UI._acts.eventGambleRead;
-    if (change === 'leave') UI._acts.eventGambleLeave();
+    if (change === 'leave') { await UI._acts.eventGambleLeave(); await flushEventActions(); }
     if (change === 'new-page') UI.showOverlay('新页', '<main>新页</main>', 'page');
     if (change === 'new-run') H.game.discoveredPairs = new Set();
     if (change === 'new-node') H.game.trackPos = 2;

@@ -114,7 +114,9 @@ describe('expedition view DOM rendering', () => {
     expect(strip.querySelector('b').textContent).toBe('遭遇战');
     expect(strip.textContent).toContain('可以前往');
     expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
-    expect(strip.querySelectorAll('button')).toHaveLength(2);
+    expect(strip.querySelector('.expedition-preview-badge').textContent).toBe('可以前往');
+    expect(strip.querySelector('.expedition-preview-action').contains(strip.querySelector('[data-route-enter]'))).toBe(true);
+    expect(strip.querySelectorAll('button')).toHaveLength(1);
     expect(document.getElementById('routePanel')).toBeNull();
   });
 
@@ -267,5 +269,6 @@ it('移动期间侧栏不改取景与inset，抵达后的侧栏改动平滑取�
   expect(cam.frameMode).toBe('travel');expect(cam.setDetailInset).not.toHaveBeenCalled();expect(cam.frameExploration).not.toHaveBeenCalled();
   cam.frameMode='routes';g.state='idle';
   renderExpeditionPanel(null,g,icon=>icon);
-  expect(cam.frameExploration).toHaveBeenCalledWith(g,false,{glide:true});
+  expect(cam.setDetailInset).toHaveBeenCalledWith(570,{deferFrame:true});
+  expect(cam.frameExploration).not.toHaveBeenCalled();
 });

@@ -56,7 +56,7 @@ beforeEach(async () => {
   expect((await Base.save())).toBe(true);
 
   RunStorage.readForLoad(activeSlot);
-  expect(RunStorage.write(activeSlot, {
+  expect(await RunStorage.write(activeSlot, {
     nestActive: true, nestPos: 11, nestRunes: [{ name: '带回符文', rarity: '稀有', attrs: ['水'] }],
     nestEquipped: [], nestBossName: '测试所主', seed: 'nest-transaction-run', elapsed: 50,
   })).toBe(true);

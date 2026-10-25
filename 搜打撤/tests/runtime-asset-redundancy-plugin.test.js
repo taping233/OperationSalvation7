@@ -2,12 +2,14 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import { runInNewContext } from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { RUNTIME_REDUNDANCY_REVIEW } from '../scripts/runtime-asset-redundancy-review.mjs';
 import artMapping from '../game/data/art-mapping.json';
 
 const gameRoot = path.dirname(fileURLToPath(new URL('../game/index.html', import.meta.url)));
 const root = path.dirname(gameRoot);
+const manifestEntries = (fixture, kind) => runInNewContext(fixture.read(fixture.generated(kind)).toString().replace('export default', ''));
 afterEach(() => {
   for (const module of ['node:fs', 'node:child_process', '../scripts/runtime-asset-redundancy.mjs']) vi.doUnmock(module);
   vi.resetModules();
@@ -131,8 +133,8 @@ describe('reviewed asset omissions through real Vite hooks without a build', () 
     expect(aliases['assets/thumbs/cards/expedition-starters/rations.webp']).toBe('assets/thumbs/cards/resources/ration.webp');
     expect(Object.entries(aliases).flat().some(asset => /-rig-(?:640-v1|v1)\//.test(asset))).toBe(false);
     f.plugin.buildStart();
-    const artManifest = f.read(f.generated('art')).toString();
-    const thumbManifest = f.read(f.generated('thumb')).toString();
+    const artManifest = manifestEntries(f, 'art');
+    const thumbManifest = manifestEntries(f, 'thumb');
     for (const { path: asset } of RUNTIME_REDUNDANCY_REVIEW.candidates) expect(artManifest).not.toContain(asset);
     expect(artManifest).toContain('portraits/frames/wu/sprite-v1/frame-001.webp');
     expect(artManifest).toContain('scenes/transition-battle-v2.webp');
@@ -179,7 +181,7 @@ describe('reviewed asset omissions through real Vite hooks without a build', () 
       const isThumbnail = asset.startsWith('thumbs/');
       const id = path.posix.basename(asset, '.webp').replace(/^(spell|equip)-/, '');
       const replacement = `${isThumbnail ? 'thumbs/' : ''}${artMapping.cardArtOverrides[id]}`;
-      const manifest = f.read(f.generated(isThumbnail ? 'thumb' : 'art')).toString();
+      const manifest = manifestEntries(f, isThumbnail ? 'thumb' : 'art');
       expect(manifest).not.toContain(isThumbnail ? asset.slice('thumbs/'.length) : asset);
       expect(manifest).toContain(artMapping.cardArtOverrides[id]);
       expect(f.files.has(f.published(asset))).toBe(false);
@@ -193,7 +195,7 @@ describe('reviewed asset omissions through real Vite hooks without a build', () 
     for (const { path: asset } of reviewed) f.restore(asset);
     f.plugin.config({}, { command: 'build' }); f.plugin.buildStart(); f.plugin.closeBundle.call(f.context);
     for (const { path: asset } of reviewed) {
-      const manifest = f.read(f.generated(asset.startsWith('thumbs/') ? 'thumb' : 'art')).toString();
+      const manifest = manifestEntries(f, asset.startsWith('thumbs/') ? 'thumb' : 'art');
       expect(manifest).toContain(asset.startsWith('thumbs/') ? asset.slice('thumbs/'.length) : asset);
       expect(f.read(f.published(asset))).toEqual(Buffer.from(`retained source: ${asset}`));
     }
@@ -226,7 +228,7 @@ describe('reviewed asset omissions through real Vite hooks without a build', () 
     expect(aliases['assets/cards/expedition-starters/rations.webp']).toBeUndefined();
     expect(aliases['assets/thumbs/cards/expedition-starters/rations.webp']).toBeUndefined();
     f.plugin.buildStart(); f.plugin.closeBundle.call(f.context);
-    expect(f.read(f.generated('art')).toString()).toContain(asset);
+    expect(manifestEntries(f, 'art')).toContain(asset);
     expect(f.files.has(f.published(asset))).toBe(true);
     expect(f.read(f.published('cards/expedition-starters/rations.webp'))).toEqual(Buffer.from('redrawn cards'));
     expect(f.read(f.published('thumbs/cards/expedition-starters/rations.webp'))).toEqual(Buffer.from('redrawn thumbs/cards'));
@@ -243,7 +245,7 @@ describe('reviewed asset omissions through real Vite hooks without a build', () 
       const bytes = f.read(path.join(gameRoot, 'assets', candidate.path));
       expect(createHash('sha256').update(bytes).digest('hex')).toBe(sourceHashes.get(candidate.path));
       expect(f.files.has(f.published(candidate.path))).toBe(false);
-      expect(f.read(f.generated('art')).toString()).not.toContain(candidate.path);
+      expect(manifestEntries(f, 'art')).not.toContain(candidate.path);
       expect(aliases[`assets/${candidate.path}`]).toBeUndefined();
     }
     expect(Object.values(aliases).some(asset => /rig-v1|slot-weather/.test(asset))).toBe(false);
@@ -263,7 +265,7 @@ describe('reviewed asset omissions through real Vite hooks without a build', () 
     for (const candidate of f.retainedCandidates.filter(item => item.category === 'chests')) {
       const canonical = aliases[`assets/${candidate.path}`]?.slice('assets/'.length) || candidate.path;
       expect(f.files.has(f.published(canonical)), canonical).toBe(true);
-      expect(f.read(f.generated('art')).toString()).toContain(canonical);
+      expect(manifestEntries(f, 'art')).toContain(canonical);
     }
   });
 
@@ -274,7 +276,7 @@ describe('reviewed asset omissions through real Vite hooks without a build', () 
     f.plugin.config({}, { command: 'build' }); f.plugin.buildStart(); f.plugin.closeBundle.call(f.context);
     for (const candidate of f.retainedCandidates.filter(item => item.category === 'slot-weather')) {
       expect(f.read(f.published(candidate.path))).toEqual(f.read(path.join(gameRoot, 'assets', candidate.path)));
-      expect(f.read(f.generated('art')).toString()).toContain(candidate.path);
+      expect(manifestEntries(f, 'art')).toContain(candidate.path);
     }
     expect(f.files.has(f.published('scenes/chests/small-rig-v1/frame-00.webp'))).toBe(false);
   });

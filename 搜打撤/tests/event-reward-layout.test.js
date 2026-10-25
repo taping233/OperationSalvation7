@@ -1,9 +1,10 @@
 import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { expect, it } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
-const css = postcss.parse(readFileSync('game/css/chest-reward-overview.css', 'utf8'));
-const prefix = 'body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica';
+const css = postcss.parse(readCssSource('game/css/room-rewards.css', 'utf8'));
+const prefix = 'body #overlay .card .room-reward';
 const values = suffix => {
   const result = {};
   css.walkRules(rule => {
@@ -12,29 +13,26 @@ const values = suffix => {
   return result;
 };
 it('固定事件共享居中舞台与明确操作，空操作栏不占侧列，滚动仅在卡区', () => {
-  expect(values(' .reward-main')).toMatchObject({ display:'flex', 'flex-direction':'column' });
-  expect(values(' .reward-objects:has(> .reward-unit:only-child)')).toMatchObject({ 'justify-content':'center', 'grid-template-columns':'280px' });
-  expect(values(' .loot-actions:empty').display).toBe('none');
+  expect(values('.reward-replica')).toMatchObject({ display:'grid', 'grid-template-columns':'minmax(0,1fr)', overflow:'hidden' });
+  expect(values(' .reward-main')).toMatchObject({ display:'flex', 'min-height':'0',overflow:'hidden' });
+  expect(values(' .reward-objects')).toMatchObject({ 'justify-content':'center','flex-wrap':'wrap' });
   expect(values(' .reward-stage')).toMatchObject({ 'container-type':'size', overflow:'auto', flex:'1 1 0' });
-  expect(values(' .reward-foot')).toMatchObject({ flex:'none', 'flex-wrap':'wrap' });
-  expect(values(' :is(.reward-exit,.reward-secondary,.reward-bag)')).toMatchObject({ 'min-height':'44px', 'border-radius':'6px' });
-  expect(values(' .reward-claim')['min-height']).toBe('46px');
-  expect(values(' .reward-head').display).toBe('block');
-  expect(values(' .reward-head .reward-source').display).toBe('block');
-  expect(values('')['--cqo-accent']).toBe('#aab5bf');
+  expect(values(' .reward-foot.room-footer')).toMatchObject({ display:'grid','grid-template-columns':'minmax(0,1fr) auto',overflow:'visible' });
+  expect(values(' .loot-actions')).toMatchObject({ display:'flex','justify-content':'flex-end' });
+  expect(values(' :is(.reward-bag,.reward-secondary)')['min-height']).toBe('52px');
+  expect(values(' .reward-claim')['min-height']).toBe('52px');
+  expect(values(' .reward-head').display).toBe('flex');
+  expect(values(' .reward-exit').order).toBe('10');
 });
-it('共享规则只显式接入独立领取，不改变其他奖励入口或战斗箱既有声明', () => {
-  const sceneLayers = new Set([
-    'body #overlay .card .cqo-frame.reward-replica',
-    'body #overlay .card .cqo-frame.reward-replica::before',
-  ]);
+it('统一奖励规则限定在显式room-reward，不扩散到其他页面', () => {
   let shared = 0;
   css.walkRules(rule => {
     if (!rule.selectors.some(selector => selector.startsWith(prefix))) return;
-    expect(rule.selectors.every(selector => selector.startsWith(prefix) || selector.startsWith('body #overlay .card .cqo-frame .cqp-dialog ') || sceneLayers.has(selector))).toBe(true);
-    if (rule.selectors.length === 2) shared++;
+    expect(rule.selectors.every(selector => selector.startsWith(prefix))).toBe(true);
+    shared++;
   });
   expect(shared).toBeGreaterThan(20);
+  expect(readFileSync('game/src/ui/reward-scene-view.js','utf8')).toContain('room-reward');
   const source = readFileSync('game/src/run/chests.js', 'utf8');
   expect(source).toContain("overviewMode ? '' : ' reward-standalone-picker'");
   expect(source).toContain('overviewMode = !(cur.source || cur.title);');

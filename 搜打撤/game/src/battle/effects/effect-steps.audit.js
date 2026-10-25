@@ -17,7 +17,7 @@ export function auditSteps(s) {
             if (!g) break;
             gotN += g;
           }
-          log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：抽了 ${gotN} 张牌（手牌 ${getHandSize()} 张）`, 'sys');
+          log(`[[icon:draw-card]] <b>${esc(ctx.card.name)}</b>：抽了 ${gotN} 张牌（手牌 ${getHandSize()} 张）`, 'sys');
           ctx.did = true;
         },
       },
@@ -73,7 +73,7 @@ export function auditSteps(s) {
         id: 'deck.capUp', gate: 'always', label: '牌库上限 +N（BOSS 编组时生效，仅识别）',
         when: (ctx) => ctx.desc.match(/牌库上限\s*\+\s*(\d+)/),
         run: (ctx, m) => {
-          log(`[[icon:cards]] 牌库上限 +${m[1]}（BOSS 编组时生效）`, 'sys');
+          log(`[[icon:draw-pile]] 牌库上限 +${m[1]}（BOSS 编组时生效）`, 'sys');
           ctx.did = true;
         },
       },

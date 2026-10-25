@@ -31,7 +31,7 @@ export function showRewardCompletionReceipt(cards) {
   receipt = document.createElement('aside');
   receipt.className = 'reward-completion-receipt';
   receipt.setAttribute('role', 'status'); receipt.setAttribute('aria-live', 'polite');
-  receipt.textContent = `${names.join('、')} · 已入背包`;
+  receipt.textContent = '已收下';
   document.body.append(receipt);
   receiptTimer = setTimeout(clearRewardCompletionReceipt, 1800);
 }

@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 import { cancelPageVisual } from '../game/src/ui/page-visual-ready.js';
@@ -7,7 +8,7 @@ window.HTMLCanvasElement.prototype.getContext = () => ctx;
 document.body.innerHTML = '<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div><div id="overlay"><div id="ovBody"></div></div>';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {} }, FX: { feedback() {} },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
 };
 await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');
@@ -25,10 +26,10 @@ window.SDT.Meta = { setXpMul() {}, track() {}, ACHIEVEMENTS: [], isUnlocked: () 
 window.SDT.Nest = { renderNestMap() { session.game.state = 'idle'; } };
 window.SDT.Battle = { restore: vi.fn(() => true) };
 
-beforeEach(() => {
+beforeEach(async () => {
   installImmediateWebLocks();
   localStorage.clear();
-  for (let slot = 1; slot <= 5; slot++) RunStorage.remove(slot);
+  for (let slot = 1; slot <= 5; slot++) await RunStorage.remove(slot);
   session._set_active_slot(1);
   Base.use(1);
   Object.assign(session.game, { pendingExtraction: null, extractionPending: null, terminalPending: null,
@@ -62,9 +63,13 @@ function failRemove(name) {
   });
 }
 
-function confirmed(action, fields) {
-  handlers[action](fields);
-  return handlers[action](fields);
+async function confirmed(action, fields) {
+  const pending = handlers[action](fields);
+  const submit = document.querySelector('[data-confirm-submit]');
+  expect(submit).not.toBeNull(); submit.click();
+  await vi.waitFor(() => expect(submit.isConnected && submit.disabled).toBe(false));
+  document.querySelector('[data-confirm-cancel]')?.click();
+  return await pending;
 }
 
 describe('整档删除结果与菜单消费', () => {
@@ -119,7 +124,7 @@ describe('整档删除结果与菜单消费', () => {
     expect(document.getElementById('slotRestoreError').textContent).toContain('对局已删除，基地数据未能删除');
     expect(UI.log.mock.calls.flat().join(' ')).not.toContain('已删除【档位 1】');
     blocked.mockRestore();
-    await handlers.delSlot({ slot: 1 });
+    await confirmed('delSlot', { slot: 1 });
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBeNull();
     expect(UI.log.mock.calls.flat().join(' ')).toContain('已删除【档位 1】');
   });
@@ -164,7 +169,7 @@ describe('整档删除结果与菜单消费', () => {
     expect(logs).toContain('档位 2');
     expect(logs).not.toContain('已清空全部五个档位的存档');
     block.mockRestore();
-    await handlers.wipeSave({});
+    await confirmed('wipeSave', {});
     expect(localStorage.getItem(RunStorage.key(1))).toBeNull();
     expect(localStorage.getItem(Base.SLOT_KEY(2))).toBeNull();
     expect(UI.log.mock.calls.flat().join(' ')).toContain('已清空全部五个档位的存档');

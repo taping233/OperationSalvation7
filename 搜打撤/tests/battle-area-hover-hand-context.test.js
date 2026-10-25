@@ -1,3 +1,4 @@
+import { battleViewMocks, overlayElements, frameMocks, inventoryFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
@@ -5,8 +6,10 @@ vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
   waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }),
 }));
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
-  attach: () => Promise.resolve(false), hide() {}, cacheStats: () => ({}), play() {}, setPaused() {},
-  presentDeath() {}, isLiveBattleFigure: () => false, actionImpactRemaining: () => null,
+  ...frameMocks(),
+}));
+vi.mock('../game/src/battle/view/battle.anim.view.js', async importOriginal => ({
+  ...(await importOriginal()), animateBattleTransition: () => ({ flightMs:0 }),
 }));
 vi.mock('../game/src/ui/ui-scale.js', async importOriginal => ({ ...(await importOriginal()), scale: () => 1, viewport: () => ({ width: 1920, height: 1080 }) }));
 const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
@@ -15,10 +18,7 @@ const UI = { el: {}, _lastMode: null, hideTooltip() {}, showTooltip() {}, refres
   hideOverlay() { this.el.overlay.hidden = true; document.dispatchEvent(new Event('sdt-overlay-close')); },
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 99, 99, 0, 5),
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession, commands, findCard } = await import('../game/src/battle/core/battle.core.js');
@@ -52,8 +52,7 @@ function begin() {
 }
 function restore(count = 9, first = areaCard(0), overrides = {}) {
   const ownedCards = Array.from({ length: count }, (_, i) => ({ uid: `u${i}`, card: i ? areaCard(i) : first }));
-  game = { ownedCards, inventory: [], usedPocket: [], hp: 99, maxHp: 99, atk: 4, spellPower: 0, coins: 0, myClass: '战士',
-    state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
+  game = { ownedCards, ...inventoryFields(99, 99, 0, '战士'), log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
   window.SDT.game = game;
   expect(BattleSession.restore(game, {
     opts: { isBoss: false, name: '群体悬停检查' }, mode: 'normal', turn: 1, maxEnergy: 99, energy: 99,
@@ -86,7 +85,7 @@ beforeEach(() => {
   document.elementFromPoint = () => hit;
   localStorage.setItem('sdt-intent-legend', '1');
   document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  UI.el = { ...overlayElements() };
   UI._lastMode = null;
   UI.el.overlay.getBoundingClientRect = () => ({ left: 0, top: 0, width: 1920, height: 1080 });
   UI.el.overlay.setPointerCapture = () => {}; UI.el.overlay.hasPointerCapture = () => true; UI.el.overlay.releasePointerCapture = () => {};
@@ -108,7 +107,7 @@ it.each([9, 30, 60])('one real empty-field pointer hover resolves %i raw hand en
   expect(BattleSession.serialize()).toEqual(before);
   console.info('POINTER_HAND_COUNTS', JSON.stringify({ cards: count, ...counts, text: previews() }));
   // Owned UID reads include the non-shared per-target preview/availability lookups.
-  expect(counts.uidReads).toBe(count * (count + 1) / 2 + 20);
+  expect(counts.uidReads).toBe(count * (count + 1) / 2 + 28);
   if (counts.lookups != null) expect(counts).toMatchObject({ handProjection: 1, lookups: count + 16, cost: 8, capability: 8 });
   expect(measure(step).uidReads).toBe(0); // No new transition: no batch at all.
   leave();
@@ -125,7 +124,7 @@ it('uses the current catalog 风暴火球 with unchanged damage, cost and play w
   const counts = measure(enter);
   console.info('CATALOG_POINTER_HAND_COUNTS', JSON.stringify({ cardId: card.id, ...counts, text: previews() }));
   previews().forEach(text => { expect(text).toContain('直接伤害：4'); expect(text).toContain('费2'); expect(text).toContain('松手打出'); });
-  expect(counts.uidReads).toBe(65);
+  expect(counts.uidReads).toBe(73);
   if (counts.lookups != null) expect(counts).toMatchObject({ handProjection: 1, lookups: 25, cost: 8, capability: 8 });
 });
 
@@ -192,4 +191,91 @@ it('fresh batch uses replacement card identity and does not survive a new battle
   restore(); expect(BattleSession.getSnapshot().battleToken).not.toBe(token);
   step(); expect(Aim.aim).toBeNull();
   begin(); enter(); previews().forEach(text => expect(text).toContain('松手打出'));
+});
+
+function readingSurface(kind) {
+  const host = document.createElement('div');
+  const surfaces = {
+    status: '<div class="status-chip-list"><span class="status-chip"><i>状态</i></span></div>',
+    summary: '<span class="status-chip-summary"><i>2项</i></span>',
+    term: '<span data-term="poison"><i>中毒</i></span>',
+    dynamic: '<span data-ui-tip data-ui-tip-text="状态说明"><i>说明</i></span>',
+    skill: '<div class="battle-skill-help"><i>职业说明</i></div>',
+    tooltip: '<aside class="term-tip"><i>词条正文</i></aside>',
+  };
+  host.innerHTML = surfaces[kind];
+  (kind === 'tooltip' ? document.body : foeNodes()[0]).append(host);
+  return host.querySelector('i');
+}
+function pickupForClick(area) {
+  const card = areaCard(0);
+  if (!area) {
+    card.rules.battle.target.area = false;
+    card.rules.triggers.onPlay[0].target = 'chosenEnemy';
+  }
+  restore(1, card); begin();
+  expect(Aim.aim.playBlockedReason).toBe('');
+  // Release over the hand, then enter the playfield: the real pickup switches
+  // to click confirmation rather than submitting this initial release.
+  hit = document.querySelector('.sts-hand');
+  window.dispatchEvent(pointer('pointerup', 320, 950));
+  hit = foeNodes()[0];
+  window.dispatchEvent(pointer('pointermove', 800, 450)); step();
+  expect(Aim.aim?.targetMode).toBe('click');
+}
+
+it.each([true, false])('keeps an already picked %s-area card while reading status and tooltip surfaces', async area => {
+  pickupForClick(area);
+  const before = BattleSession.serialize(), held = Aim.aim;
+  for (const kind of ['status', 'summary', 'term', 'dynamic', 'skill', 'tooltip']) {
+    const surface = readingSurface(kind);
+    hit = surface;
+    surface.dispatchEvent(pointer('pointermove', 800, 450)); step();
+    expect(Aim.aim?.hover, kind).toBeNull();
+    surface.dispatchEvent(pointer('pointerdown', 800, 450));
+    surface.dispatchEvent(pointer('pointerup', 800, 450));
+    surface.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true, detail:1, clientX:800, clientY:450 }));
+    expect(Aim.aim === held, kind).toBe(true);
+    expect(BattleSession.serialize(), kind).toEqual(before);
+    surface.parentElement.parentElement.remove();
+  }
+  // The next intentional target click is still accepted.
+  hit = foeNodes()[0];
+  hit.dispatchEvent(pointer('pointerdown', 800, 450));
+  hit.dispatchEvent(pointer('pointerup', 800, 450));
+  expect(Aim.aim).toBeNull();
+  await vi.waitFor(() => expect(BattleSession.getSnapshot().hand).not.toContain('u0'));
+});
+
+it.each([true, false])('does not turn a %s-area reading press into a play when released over an enemy', area => {
+  pickupForClick(area);
+  const before = BattleSession.serialize(), held = Aim.aim;
+  const surface = readingSurface('status');
+  hit = surface;
+  surface.dispatchEvent(pointer('pointerdown', 800, 450));
+  hit = foeNodes()[0];
+  hit.dispatchEvent(pointer('pointermove', 800, 450)); step();
+  hit.dispatchEvent(pointer('pointerup', 800, 450));
+  expect(Aim.aim === held).toBe(true);
+  expect(BattleSession.serialize()).toEqual(before);
+});
+
+it.each([true, false])('keeps a %s-area drag release over a status reading surface from submitting', area => {
+  const card = areaCard(0);
+  if (!area) {
+    card.rules.battle.target.area = false;
+    card.rules.triggers.onPlay[0].target = 'chosenEnemy';
+  }
+  restore(1, card); begin();
+  const before = BattleSession.serialize(), held = Aim.aim;
+  const surface = readingSurface('status');
+  hit = surface;
+  // Pointer capture retargets the event to overlay; geometric hit testing must
+  // still detect the reading surface underneath that captured pointer.
+  UI.el.overlay.dispatchEvent(pointer('pointermove', 800, 450)); step();
+  UI.el.overlay.dispatchEvent(pointer('pointerup', 800, 450));
+  expect(Aim.aim === held).toBe(true);
+  expect(Aim.aim?.leftDown).toBe(false);
+  expect(Aim.aim?.targetMode).toBe('click');
+  expect(BattleSession.serialize()).toEqual(before);
 });

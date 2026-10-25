@@ -179,6 +179,27 @@ it('预览以后数量改变不会按更新整堆意外扣钥匙', async () => {
   (await harness.ui._acts.restoreCard({stackKey:'card:card',count:'2',name:'复原',i:'0'}));
   expect(harness.base.restore).not.toHaveBeenCalled(); expect(harness.ui.log).toHaveBeenCalledWith('消耗区数量已变化，请重新打开详情','warn');
 });
+it('基地复原用支付前的卡面与钥匙费用演出，结束后才重绘且不重复提交',async()=>{
+  vi.useFakeTimers();
+  try{
+    harness=await createBrowsingHarness();
+    harness.base.pocketKeyCost=stack=>stack.count;
+    harness.base.data.pocket=[{card:{id:'receipt-card',name:'恢复样本'},count:2}];
+    harness.runtime.openBaseHub('stash');
+    harness.ui.el.ovBody=harness.host;
+    harness.ui.el.ovBody.firstElementChild.animate=vi.fn();
+    const action=harness.ui._acts.restoreCard;
+    const result=action({stackKey:'card:receipt-card',count:'2',name:'恢复样本',i:'0'});
+    await Promise.resolve();await Promise.resolve();
+    expect(document.querySelector('.outcome-feedback').textContent).toContain('钥匙 −2');
+    expect(document.querySelector('.outcome-feedback').textContent).toContain('已回到仓库');
+    await action({stackKey:'card:receipt-card',count:'2',name:'恢复样本',i:'0'});
+    expect(harness.base.restore).toHaveBeenCalledOnce();
+    await vi.advanceTimersByTimeAsync(900);await result;
+    expect(document.querySelector('.outcome-feedback')).toBeNull();
+    expect(harness.base.restore).toHaveBeenCalledOnce();
+  }finally{vi.clearAllTimers();vi.useRealTimers();}
+});
 it('同页重绘后最新扩建handler仍能正常提交，旧handler已失效', async () => {
   harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); const previous=harness.ui._acts.upStash;
   (await previous()); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(1); (await previous()); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(1);

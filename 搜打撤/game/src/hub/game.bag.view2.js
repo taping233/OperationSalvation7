@@ -46,7 +46,7 @@ function stackIcon(name, type, supply) {
 export function tileHTML(t, resourceCards = null) {
   const rc = t.supply ? '#aebfc9' : (RARITY_TINT[t.rarity] || '#9fb0ba');
   const select = t.supply ? '' : ` role="button" aria-label="查看${escAttr(t.name)}，${t.count}张${t.zone === 'pocket' ? '，已消耗' : ''}" data-act="inspectStack" data-name="${escAttr(t.name)}" data-safe="${t.safe ? 1 : 0}"${t.zone === 'pocket' ? ' data-pocket="1"' : ''}`;
-  const identity = Array.isArray(t.uids) ? ` data-pane-key="${escAttr(JSON.stringify(t.uids))}"` : '';
+  const identity = Array.isArray(t.uids) ? ` data-pane-key="${escAttr(JSON.stringify(t.uids))}" data-uid="${escAttr(t.uids[0] || '')}"` : '';
   const stack = t.supply ? ` data-supply="${escAttr(t.name)}"` : ` data-stack="${escAttr(t.name)}"`;
   const spent = t.zone === 'pocket' ? ' spent' : '';
   const state = t.zone === 'safe' ? '押运' : t.zone === 'pocket' ? (['道具', '装备'].includes(t.type) ? '火堆不可复原' : '火堆可复原') : (t.type === '道具' ? (t.useStatus?.badge || { map: '可用', battle: '战斗使用' }[bagUseLocation(t.card)] || '查看用法') : '');
@@ -105,22 +105,26 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
       <header class="bag-head2">
         <div class="bag-title"><h2>${zoneNames[m.bagZone]} ${window.SDT.UI.helpBtn('bag')}</h2></div>
         <div class="bag-capchip" aria-label="${zoneCap == null ? '消耗区卡牌数量' : '占格与卡牌张数'}">
-          <span class="bag-capk">${zoneCap == null ? '卡牌' : '占格'}</span><span class="bag-capbar"><i style="width:${pct}%"></i></span>
+          <span class="bag-capk">${zoneCap == null ? '卡牌' : '占格'}</span>${zoneCap == null ? '' : `<span class="bag-capbar" aria-hidden="true"><i style="width:${pct}%"></i></span>`}
           <b>${zoneUsed}</b><small>${zoneCap == null ? ' 张 · 不限容量' : `/${zoneCap} 格`}${m.bagZone === 'bag' && ext ? ` · ${m.capacityText ? esc(m.capacityText) : `扩展+${ext}`}` : ''}${m.bagZone === 'bag' && ext ? ` · 盒内 ${m.pearlStoredN || 0}/${ext} 张（不占格）` : ''}</small>
           ${zoneCap == null ? '' : `<span class="bag-count-summary">卡牌 <strong>${cardCount}</strong> 张${m.bagZone === 'bag' && m.supplyN ? ` · 散装物资 ${m.supplyN} 件` : ''}</span>`}
         </div>
       </header>`;
+  const sortName = m.bagSortKey === 'rarity' ? '稀有度' : '种类';
+  const nextSortName = m.bagSortKey === 'rarity' ? '种类' : '稀有度';
+  const canSort = cardCount > 0 || m.safeCardN > 0;
+  const sortDisabled = canSort ? '' : ' disabled';
   const tools = m.bagZone === 'bag' ? `
       <div class="bag-tools">
         ${pills}<span class="bag-tgap"></span>
-        <button class="bag-icbtn ui-control-icon" data-act="bagSortCycle" aria-label="切换背包排序" title="排序：稀有度 ⇄ 种类（当前${m.bagSortKey === 'rarity' ? '稀有度' : '种类'}）">${svgIcon(RAIL_ICONS.sort, 'currentColor')}</button>
-        <button class="bag-icbtn gold ui-control-icon" data-act="bagTidy" aria-label="按稀有度整理背包" title="一键整理（按稀有度）">${svgIcon(RAIL_ICONS.tidy, 'currentColor')}</button>
+        <button class="bag-icbtn ui-control-icon" data-act="bagSortCycle" aria-label="按${nextSortName}排序，当前${sortName}" title="${canSort ? `按${nextSortName}排序（当前${sortName}）` : '暂无卡牌可排序'}"${sortDisabled}>${svgIcon(RAIL_ICONS.sort, 'currentColor')}</button>
+        <button class="bag-icbtn gold ui-control-icon" data-act="bagTidy" aria-label="按稀有度整理背包" title="${canSort ? '按稀有度整理' : '暂无卡牌可整理'}"${sortDisabled}>${svgIcon(RAIL_ICONS.tidy, 'currentColor')}</button>
       </div>` : '';
   const board = `
       <div class="bag-board">
         ${m.receiptHTML || ''}
         <div class="bag-grid" data-zone="${m.bagZone}">${m.tiles.map(tile => tileHTML(tile, resourceCards)).join('')}</div>
-        ${m.tiles.length ? '' : `<p class="bag-empty2">${m.bagZone === 'bag' && m.bagFilter !== 'all' ? '该分类没有卡牌或物资。<button class="bag-pill" data-act="bagFilter" data-f="all">显示全部</button>' : `（${zoneNames[m.bagZone]}是空的）`}</p>`}
+        ${m.tiles.length ? '' : `<p class="bag-empty2">${m.bagZone === 'bag' && m.bagFilter !== 'all' ? '暂无此类卡牌<button class="bag-pill" data-act="bagFilter" data-f="all">显示全部</button>' : '暂无物品'}</p>`}
       </div>`;
   const exit = linkedBackHTML('closeBag', '关闭背包', '', 'button', { shortcut:'B / Esc' });
   return `<div class="bag-view bag-v2 ui-design-system bag-art-v3">

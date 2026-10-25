@@ -8,9 +8,6 @@ body.reduce-motion.cardlib-open #overlay.closing .card.page:has(.studio-archive)
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo {
   --font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Noto Sans SC',sans-serif;
   --serif:'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun','STSong',serif;
-  --studio-paper:#dddbd8;
-  --studio-paper-light:#e8e7e4;
-  --studio-paper-edge:rgba(104,92,64,.38);
   font-family:var(--font-ui);
   cursor:default;
   gap:12px;
@@ -113,10 +110,7 @@ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title {
   padding-bottom:16px;
   padding-right:42px;
   margin-bottom:16px;
-  border-bottom:1px solid rgba(210,189,117,.25);
-  font-size:26px;
-  line-height:1.4;
-  color:#30302e!important; border-bottom-color:var(--sa-rule)}
+  border-bottom:1px solid rgba(210,189,117,.25); border-bottom-color:var(--sa-rule)}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-details {
   margin:0 0 18px; display:flex; flex-wrap:wrap; gap:10px 18px; align-items:baseline}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-detail {
@@ -135,7 +129,6 @@ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules {
   white-space:pre-wrap;
   overflow-wrap:anywhere; font:18px/1.8 var(--sa-serif)}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-kw { color:#4a5980 !important; font-weight:700}
-body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term[data-term] { color:#2d6561 !important}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note.has,
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note.editable {
   width:100%!important;
@@ -183,7 +176,7 @@ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-closing .cz-p
   transition-duration:180ms}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo:is(.cz-out,.cz-photo-closing) .cz-backdrop {
   animation:czFadeOut var(--cz-photo-close-ms,320ms) ease both}
-body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-closing :is(.cz-hint,.cz-close) {
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-closing :is(.cz-close) {
   opacity:0;
   transition:opacity 140ms ease}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-out :is(.cz-photo-layout,.cz-photo-paper,.cz-photo-info,.cz-note) {
@@ -193,10 +186,6 @@ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-reduced :is(.
   transition:none}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-close:active {
   background:#ad977630!important}
-body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-hint {
-  color:#c9c1a5;
-  font:400 16px/1.5 var(--font-ui);
-  letter-spacing:.08em}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-index {
   margin:0 0 10px;
   font:500 14px/1.5 var(--font-ui);
@@ -222,39 +211,30 @@ body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) 
 body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="棱彩"] { --rarity-ink:#78377c; --rarity-bright:#e8b4e7}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo [data-studio-rarity] { color:var(--rarity-bright)!important}
 /* Sole gallery layout and presentation owner; mount assets and zoom lifecycle stay separate. */
-body.cardlib-open #overlay .studio-archive { --su-line:#abadae; font-family:var(--font-ui);
-  --su-wall:#252527; --su-night:#1b1b1e; --su-paper:#e9e1d3;
-  --su-controls:transparent; --su-pane:transparent; --su-ink:#e5ddcd;
-  --su-muted:#b1a99b; --su-accent:#bd6240;
-  --sa-paper-ink:#30302e; --sa-unit:8px; --sa-control-height:42px
+body.cardlib-open #overlay .studio-archive { --collection-header-bg:linear-gradient(115deg,#eaf5ee12,#b8d4c907 52%,#15251d66),#15251d61; --collection-ink:#f1e6d1; --collection-muted:#b9b09d; --collection-line:#bdc3ac30; --collection-accent:var(--interface-focus); --collection-hover:#f1e6d10a; font-family:var(--font-ui); --su-ink:#e5ddcd;
+  --su-muted:#b1a99b;
+  --sa-paper-ink:#30302e; --sa-control-height:42px
 ;
   position:relative; display:flex; flex-direction:column; width:100%; height:100%;
-  min-height:0; min-width:0; margin:0; padding:0!important; overflow:hidden; color:var(--su-ink); background:radial-gradient(ellipse at 16% 0%,#edca8847,transparent 62%),radial-gradient(ellipse at 10% 94%,#6c91b43b,transparent 53%),radial-gradient(ellipse at 79% 80%,#d4aa6436,transparent 34%),linear-gradient(90deg,#121b17db 0%,#121b179e 46%,#121b1755 78%,#121b17b0),linear-gradient(180deg,#151d19 0 18%,#151d19a0 34%,transparent 56%,#0b141045),var(--studio-room-image) center calc(100% + 140px)/cover no-repeat,#151d19!important; --studio-selection-ink:#d1ac78}
+  min-height:0; min-width:0; margin:0; padding:0!important; overflow:hidden; color:var(--su-ink); background:radial-gradient(ellipse at 16% 0%,#edca8847,transparent 62%),radial-gradient(ellipse at 10% 94%,#6c91b43b,transparent 53%),radial-gradient(ellipse at 79% 80%,#d4aa6436,transparent 34%),linear-gradient(90deg,#121b17db 0%,#121b179e 46%,#121b1755 78%,#121b17b0),linear-gradient(180deg,#151d19 0 18%,#151d19a0 34%,transparent 56%,#0b141045),var(--studio-room-image) center calc(100% + 140px)/cover no-repeat,#151d19!important; --studio-selection-ink:var(--interface-focus)}
+/* One bounded glass surface for the title and category strip. */
+body.cardlib-open #overlay .studio-archive > .collection-page-header {
+  -webkit-backdrop-filter:blur(16px) saturate(120%);
+  backdrop-filter:blur(16px) saturate(120%);
+  border-bottom-color:#dfefe32e;
+  box-shadow:inset 0 1px 0 #f1fff61f,inset 0 -1px 0 #f1fff60a,0 8px 24px #07120c24;
+}
 /* Static lamp spill stays behind the page contents. */
 body.cardlib-open #overlay .studio-archive::before { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:conic-gradient(from 155deg at 15% -8%,transparent 0deg,#f8dda824 7deg,#f8dda80b 22deg,transparent 40deg,transparent 360deg); mix-blend-mode:screen }
-body.cardlib-open #overlay .studio-archive .library-head {
-  display:grid; z-index:1; flex:0 0 auto; align-items:center; min-height:90px; backdrop-filter:blur(18px) saturate(.8); position:relative; border:0 !important; border-bottom:0 !important; box-shadow:none !important; grid-template-areas:'photos tools' !important; margin:0; width:100%; box-sizing:border-box; padding:0 80px !important; background:linear-gradient(90deg,#0f1916a0,#23302570 48%,#121b1778) !important; grid-template-columns:minmax(0,7fr) minmax(0,2.6fr) !important; gap:132px !important
-}
-body.cardlib-open #overlay .studio-archive .library-head::before { display:none!important; }
-body.cardlib-open #overlay .studio-archive .studio-exit {
-  position:static!important; background:transparent!important;
-  border:0!important; color:#ebebeb!important; box-shadow:none!important; clip-path:none!important; display:grid; place-items:center
-}
-body.cardlib-open #overlay .studio-archive .studio-exit::after { display:none!important
-}
-body.cardlib-open #overlay .studio-archive .studio-exit:hover { background:transparent!important; color:#fff!important
-}
-body.cardlib-open #overlay .studio-archive .studio-exit-anchor { z-index:20; justify-self:center; align-self:center; display:grid; place-items:center; position:absolute !important; top:50% !important; left:110px !important; transform:translateY(-50%)
-}
 body.cardlib-open #overlay .studio-archive .clib-main {
   display:grid; position:relative; z-index:1;
   grid-template-rows:minmax(0,1fr); min-height:0; overflow:hidden;
   box-shadow:none!important;
   flex:1; min-width:0; align-items:stretch;
   background:transparent !important;
-  padding:80px 80px 48px !important;
+  padding:32px 56px 36px !important;
   grid-template-columns:minmax(0,7fr) minmax(0,2.6fr) !important;
-  gap:132px !important
+  gap:40px !important
 }
 body.cardlib-open #overlay .studio-archive .clib-main::before,
 body.cardlib-open #overlay .studio-archive .clib-main::after { display:none!important
@@ -263,54 +243,16 @@ body.cardlib-open #overlay .studio-archive .studio-catalog { display:flex; flex-
 }
 /* A quiet felt receiver gives the clips a physical support without boxing each photo. */
 body.cardlib-open #overlay .studio-archive .studio-catalog::before { content:none; display:none; }
-body.cardlib-open #overlay .studio-archive .studio-filterbar {
-  position:relative; z-index:12; flex:0 0 auto; overflow:visible!important; gap:12px;
-  border-image:none!important; border-radius:0; outline:none!important; border:0!important;
-  background:transparent!important; box-shadow:none!important; display:block; color:var(--su-ink); padding:0 !important; border-bottom:0 !important; margin-top:-24px; margin-bottom:0
-}
-body.cardlib-open #overlay .studio-archive .studio-filterbar::before,
-body.cardlib-open #overlay .studio-archive .studio-filterbar::after { display:none!important
-}
-body.cardlib-open #overlay .studio-archive .studio-index-heading {
-  display:flex; align-items:center; color:var(--su-muted)!important; flex:0 0 auto; min-height:38px; margin:0; margin-left:auto; gap:18px
-}
-body.cardlib-open #overlay .studio-archive .studio-index-heading>span:first-child {
-  padding:0!important; background:none!important; border:0!important;
-  letter-spacing:.03em; box-shadow:none!important; -webkit-text-fill-color:currentColor;
-  align-items:baseline; gap:6px; color:#b1a99b!important; font:20px/1.4 var(--font-ui)!important; white-space:nowrap
-}
 body.cardlib-open #overlay .studio-archive .studio-clear {
   margin-left:auto;
   border-radius:0;
   font:20px/1.3 var(--font-ui)!important; box-shadow:none!important; border-color:#8e7d68!important; color:#d2c7b1!important; border:0 !important; background:transparent !important; font-size:20px !important; min-height:32px; padding:6px 8px !important
 }
-body.cardlib-open #overlay .studio-archive .clib-tabs { display:flex; overflow:visible!important; min-width:0; border-bottom:0!important; flex-wrap:nowrap; white-space:nowrap; flex:0 1 auto; gap:10px !important; padding:0 !important; grid-area:photos; position:static; left:auto; top:auto; transform:none; justify-self:center
-}
-body.cardlib-open #overlay .studio-archive .type-tab {
-  min-height:35px!important; border:1px solid transparent!important;
-  border-radius:0; background:transparent!important; box-shadow:none!important; flex:0 0 auto; cursor:pointer; font:500 20px/1.4 var(--sa-serif) !important; font-size:20px !important; padding:10px 18px !important; color:#acae9e !important; display:inline-flex; align-items:center; justify-content:center; gap:8px
-}
-body.cardlib-open #overlay .studio-archive .type-tab:hover { background:#dde4cf0a !important
-}
-body.cardlib-open #overlay .studio-archive .type-tab.on,
-body.cardlib-open #overlay .studio-archive .type-tab.on:hover { box-shadow:none !important; background:transparent !important; border-color:transparent !important; color:#ead4af !important
-}
-body.cardlib-open #overlay .studio-archive .clib-tabs[data-studio-marker='ready']::after {
-  content:''; position:absolute; left:0; top:0; width:1px; height:2px; pointer-events:none;
-  background:#d4b85c; transform-origin:left center;
-  transform:translate(var(--studio-tab-x),var(--studio-tab-y)) scaleX(var(--studio-tab-width));
-  transition:transform var(--motion-change,280ms) var(--motion-ease-enter)!important
-}
-body.cardlib-open #overlay .studio-archive .clib-tabs[data-studio-marker='ready'] .type-tab.on { box-shadow:none!important
-}
-body.cardlib-open #overlay .studio-archive .studio-search-row { display:flex; align-items:center; grid-template-columns:none; margin-top:0; padding-left:2px; gap:14px
-}
 body.cardlib-open #overlay .studio-archive .studio-field { display:flex; flex-direction:column; min-width:0; gap:5px
 }
 body.cardlib-open #overlay .studio-archive .studio-search,
 body.cardlib-open #overlay .studio-archive .studio-select-shell {
-  position:relative; display:block; min-width:0; min-height:44px;
-  border:1px solid #abadae!important; border-radius:0; background:#f4f4f4!important; box-shadow:none!important
+  position:relative; display:block; min-width:0; border-radius:0; box-shadow:none!important
 }
 body.cardlib-open #overlay .studio-archive .studio-select-shell::after { display:none!important
 }
@@ -320,7 +262,7 @@ body.cardlib-open #overlay .studio-archive .studio-search::before { position:abs
 body.cardlib-open #overlay .studio-archive #cardSearch {
   width:100%!important; height:44px!important; min-width:0; padding:10px 12px 10px 40px!important;
   border:0!important; border-radius:0; outline:none; background:none!important;
-  color:var(--su-ink)!important; font:21px/1.5 var(--font-ui)!important; box-shadow:none!important
+  color:var(--su-ink)!important; font:var(--interface-text-control)/1.5 var(--font-ui)!important; box-shadow:none!important
 }
 body.cardlib-open #overlay .studio-archive #cardSearch::placeholder { color:#b6ab99!important; opacity:1
 }
@@ -332,7 +274,7 @@ body.cardlib-open #overlay .studio-archive .studio-choice { position:relative; m
 }
 body.cardlib-open #overlay .studio-archive .studio-choice-trigger {
   display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:44px;
-  padding:10px 13px; color:var(--su-ink); font:21px/1.5 var(--font-ui); list-style:none; cursor:pointer
+  padding:10px 13px; color:var(--su-ink); font:var(--interface-text-control)/1.5 var(--font-ui); list-style:none; cursor:pointer
 }
 body.cardlib-open #overlay .studio-archive .studio-choice-trigger::-webkit-details-marker { display:none
 }
@@ -346,7 +288,7 @@ body.cardlib-open #overlay .studio-archive .studio-choice[open] .studio-choice-t
 }
 body.cardlib-open #overlay .studio-archive .studio-choice-menu {
   position:absolute; z-index:40; top:calc(100% + 7px); left:-1px; right:-1px;
-  display:grid; max-height:300px; overflow-y:auto; border-radius:0; scrollbar-width:thin; padding:8px; gap:0; border:1px solid #cbd3be30; background:linear-gradient(135deg,#d8dec211,transparent 48%),#1c2925ed; color:#e0dfcd; backdrop-filter:blur(16px) saturate(.75); box-shadow:inset 0 1px 0 #d8dec218,0 8px 18px #080e0960
+  display:grid; max-height:300px; overflow-y:auto; border-radius:0; scrollbar-width:thin; padding:8px; gap:0; border:1px solid #cbd3be30; background:linear-gradient(135deg,#d8dec211,transparent 48%), #1c2925; color:#e0dfcd; backdrop-filter:none; box-shadow:inset 0 1px 0 #d8dec218,0 8px 18px #080e0960
 }
 body.cardlib-open #overlay .studio-archive .studio-choice:not([open]) .studio-choice-menu { display:none!important
 }
@@ -354,14 +296,14 @@ body.cardlib-open #overlay .studio-archive .studio-choice.opens-up .studio-choic
 }
 body.cardlib-open #overlay .studio-archive .studio-choice-option {
   display:flex; align-items:center; gap:9px; width:100%;
-  border:0!important; border-radius:0; background:transparent!important; text-align:left; cursor:pointer; box-shadow:none!important; min-height:40px; font:21px/1.4 var(--sa-serif) !important; padding:10px 9px !important; color:#e0dfcd !important; border-bottom:1px solid #c5ccb716 !important
+  border:0!important; border-radius:0; background:transparent!important; text-align:left; cursor:pointer; box-shadow:none!important; min-height:40px; font:var(--interface-text-control)/1.5 var(--font-ui) !important; padding:10px 9px !important; color:#e0dfcd !important; border-bottom:1px solid #c5ccb716 !important
 }
 body.cardlib-open #overlay .studio-archive .studio-choice-option:hover,
 body.cardlib-open #overlay .studio-archive .studio-choice-option:focus-visible { background:#d0d8bc16 !important
 }
 body.cardlib-open #overlay .studio-archive .studio-choice-option[aria-selected="true"] { background:#d0d8bc20 !important
 }
-body.cardlib-open #overlay .studio-archive .studio-choice-option[aria-selected="true"]::after { content:'✓'; margin-left:auto; color:#dab890
+body.cardlib-open #overlay .studio-archive .studio-choice-option[aria-selected="true"]::after { content:'✓'; margin-left:auto; color:var(--interface-focus)
 }
 body.cardlib-open #overlay .studio-archive .studio-choice-option[data-rarity]::before {
   content:''; width:7px; height:7px; flex:0 0 7px; background:var(--su-rarity,#929395); transform:rotate(45deg)
@@ -479,26 +421,22 @@ body.cardlib-open #overlay .studio-archive .pv-note { margin:0!important; backgr
 }
 body.cardlib-open #overlay .studio-archive .pv-nav { padding:0!important; display:grid; align-items:center; gap:8px; margin-top:0!important; grid-template-columns:1fr 32px auto 1fr
 }
-body.cardlib-open #overlay .studio-archive .pv-navbtn,
-body.cardlib-open #overlay .studio-archive .studio-zoom,
-body.cardlib-open #overlay .studio-archive .library-tools .hs-btn {
+body.cardlib-open #overlay .studio-archive .pv-navbtn {
   min-height:39px; padding:10px 12px!important; border:1px solid #a7a8a9!important; border-image:none!important;
   border-radius:0; background:#e1e2e2!important; color:#3d4247!important;
   font:14px/1.4 var(--font-ui)!important; text-shadow:none!important; box-shadow:none!important; cursor:pointer
 }
-body.cardlib-open #overlay .studio-archive .pv-pos { color:#766b58!important; font-variant-numeric:tabular-nums; font-size:20px!important; white-space:nowrap
+body.cardlib-open #overlay .studio-archive .pv-pos { color:#766b58!important; font-variant-numeric:tabular-nums; font-size:var(--interface-text-label)!important; white-space:nowrap
 }
-body.cardlib-open #overlay .studio-archive .studio-zoom { margin-top:10px!important; border-color:#34383c!important;
+body.cardlib-open #overlay .studio-archive .studio-zoom { margin-top:10px!important;
   display:flex; align-items:stretch; justify-content:space-between; min-height:44px; padding:0!important;
-  width:100%; border:0!important; color:#fff0d9 !important; letter-spacing:.08em; background:linear-gradient(180deg,#edbd8628 0 1px,transparent 1px),linear-gradient(105deg,#b3734beb,#945b3afa),url('../assets/ui/photo-studio/paper-grain.png') center/180px !important
+  width:100%; border:0!important; letter-spacing:.08em
 }
 body.cardlib-open #overlay .studio-archive .pv-navbtn:disabled { opacity:.4; cursor:default
 }
 body.cardlib-open #overlay .studio-archive :is(button,summary):focus-visible { outline:2px solid #545a61!important; outline-offset:3px
 }
 body.cardlib-open #overlay .studio-archive .pv-navbtn:hover:not(:disabled) { background:#d4c7b1!important
-}
-body.cardlib-open #overlay .studio-archive .studio-zoom:hover { background:linear-gradient(105deg,#bc8055eb,#a66a46fa),url('../assets/ui/photo-studio/paper-grain.png') center/180px !important
 }
 body.cardlib-open #overlay .studio-archive [data-studio-rarity] { text-shadow:none!important; -webkit-text-fill-color:currentColor!important; background-image:none!important
 }
@@ -560,19 +498,14 @@ body.cardlib-open #overlay .studio-archive .lib-cardwrap[aria-current='true'] .s
 }
 body.reduce-motion.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap { transition:none!important; transform:none!important
 }
-body.reduce-motion.cardlib-open #overlay .studio-archive .clib-tabs::after { transition:none!important
-}
 @media (prefers-reduced-motion:reduce) {
   body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap,
-  body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap:is(:hover,:active) { transition:none!important; transform:none!important
-  }
-  body.cardlib-open #overlay .studio-archive .clib-tabs[data-studio-marker='ready']::after { transition:none!important
+body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap:is(:hover,:active) { transition:none!important; transform:none!important
   }
 }
 body.cardlib-open #overlay .studio-archive,
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo {
-  --sa-serif:'Noto Serif SC','Source Han Serif SC','SimSun',serif;
-  --sa-stock:#e4dccd; --sa-stock-inset:#d8cfbe; --sa-rule:#b7ad9b;
+  --sa-serif:'Noto Serif SC','Source Han Serif SC','SimSun',serif; --sa-rule:#b7ad9b;
   --studio-art-matte:#252527;
   --studio-room-image:url('../assets/scenes/transition-photo-v2.webp')
 }
@@ -583,8 +516,6 @@ body.cardlib-open #overlay .studio-archive .studio-clear:hover:not(:disabled) { 
 body.cardlib-open #overlay .studio-archive .studio-clear:disabled { opacity:.35; cursor:default; display:none
 }
 body.cardlib-open #overlay .studio-archive:has(.lib-grid.is-empty) .studio-clear { display:none }
-body.cardlib-open #overlay .studio-archive .clib-tabs::after { background:#bd6240!important; transition:transform var(--motion-change,280ms) var(--motion-ease-enter)!important
-}
 body.cardlib-open #overlay .studio-archive .studio-search {
   min-height:var(--sa-control-height); background:linear-gradient(135deg,#d8dec211,transparent 48%),#1c292540!important; border:1px solid #cbd3be30!important; box-shadow:inset 0 1px 0 #d8dec218!important
 }
@@ -651,7 +582,7 @@ body.cardlib-open #overlay .studio-archive .studio-dossier-title { background:tr
   border:0; border-bottom:0; margin:0 0 18px; padding:0
 }
 body.cardlib-open #overlay .studio-archive .studio-dossier-name {
-  display:block!important; padding:0!important; border:0; text-align:left; text-shadow:none; overflow-wrap:anywhere; font:500 30px/1.35 var(--sa-serif) !important; color:#30382e; letter-spacing:.06em; margin:0 !important; font-size:32px !important
+  display:block!important; padding:0!important; border:0; text-align:left; text-shadow:none; overflow-wrap:anywhere; font:600 var(--interface-text-object)/1.4 var(--sa-serif) !important; color:#30382e; letter-spacing:.06em; margin:0 !important
 }
 body.cardlib-open #overlay .studio-archive .studio-file-field {
   display:flex; min-height:0; min-width:0;
@@ -667,28 +598,16 @@ body.cardlib-open #overlay .studio-archive .pv-note>b { display:block; margin-bo
 }
 body.cardlib-open #overlay .studio-archive .pv-navbtn { min-height:36px; color:#4b4337!important; border:0 !important; background:transparent !important; border-color:transparent !important; font-size:26px !important; line-height:1 !important; padding:2px 8px !important
 }
-body.cardlib-open #overlay .studio-archive .studio-zoom>span { align-self:center; min-width:0; text-align:left; overflow-wrap:anywhere; font-size:16px; font-family:var(--sa-serif); padding:12px 16px; letter-spacing:.08em
+body.cardlib-open #overlay .studio-archive .studio-zoom>span { align-self:center; min-width:0; text-align:left; overflow-wrap:anywhere; font-size:var(--interface-text-control); font-family:var(--font-ui); padding:12px 16px; letter-spacing:.08em
 }
-body.cardlib-open #overlay .studio-archive .studio-zoom>i { display:grid; place-items:center; color:#fff0da; font:22px/1 var(--font-ui); font-style:normal; background:transparent; flex:0 0 48px
+body.cardlib-open #overlay .studio-archive .studio-zoom>i { display:grid; place-items:center; color:inherit; font:22px/1 var(--font-ui); font-style:normal; background:transparent; flex:0 0 48px
 }
 body.cardlib-open #overlay .studio-archive .studio-shutter { width:24px; height:24px; flex:0 0 auto }
 body.cardlib-open #overlay .studio-archive .clib-empty .studio-shutter { width:48px; height:48px; color:#d1ac78; opacity:.8 }
-body.cardlib-open #overlay .studio-archive .studio-zoom:hover>i { background:transparent
-}
 body.cardlib-open #overlay .studio-archive :is(button,summary):focus-visible,
-body.cardlib-open #overlay .studio-archive .studio-search:focus-within { outline-color:#c78b56!important
-}
-body.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.studio-choice-trigger,.pv-navbtn,.studio-zoom) { transition:background-color var(--motion-feedback,180ms) var(--motion-ease-enter),color var(--motion-feedback,180ms) var(--motion-ease-enter),border-color var(--motion-feedback,180ms) var(--motion-ease-enter)!important
-}
-body.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.pv-navbtn,.studio-zoom):active:not(:disabled) { filter:brightness(.94)
-}
-body.reduce-motion.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.studio-choice-trigger,.pv-navbtn,.studio-zoom),
-body.reduce-motion.cardlib-open #overlay .studio-archive .clib-tabs::after { transition:none!important
+body.cardlib-open #overlay .studio-archive .studio-search:focus-within { outline-color:var(--interface-focus)!important
 }
 @media (prefers-reduced-motion:reduce) {
-  body.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.studio-choice-trigger,.pv-navbtn,.studio-zoom),
-  body.cardlib-open #overlay .studio-archive .clib-tabs::after { transition:none!important
-  }
 }
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] { background:radial-gradient(ellipse at 8% 0%,#fff1d065,transparent 68%),radial-gradient(ellipse at 100% 100%,#7e9aaf24,transparent 66%),linear-gradient(125deg,#e4e5d9a6,#aab3a5a6),url('../assets/ui/photo-studio/paper-grain.png') center/var(--studio-grain-size,160px) repeat,linear-gradient(125deg,#dde1d3,#c7cebd)!important; background-blend-mode:normal,normal,normal,multiply,normal
 }
@@ -714,11 +633,8 @@ body.cardlib-open #overlay .card.page:has(.studio-archive) {
   width:100%; height:100%; max-width:none; max-height:none; padding:0!important;
   border:0!important; border-radius:0; background:#1b1b1e; overflow:hidden;
 }
-body.cardlib-open #overlay .studio-archive .library-tools { grid-area:tools; display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; min-width:0; gap:8px; }
-body.cardlib-open #overlay .studio-archive .studio-head-summary { display:flex; align-items:baseline; gap:14px; white-space:nowrap; }
-body.cardlib-open #overlay .studio-archive .studio-head-summary h2 { margin:0; color:#f1e6d1; font:600 25px/1.25 var(--sa-serif); letter-spacing:.04em; }
-body.cardlib-open #overlay .studio-archive .studio-head-total { color:#b9b09d; font:15px/1.4 var(--font-ui); }
-body.cardlib-open #overlay .studio-archive .studio-head-total b { color:#e8d4aa; font:600 21px/1 var(--sa-serif); font-variant-numeric:tabular-nums; }
+body.cardlib-open #overlay .studio-archive .studio-head-total { color:#b9b09d; font:var(--interface-text-label)/1.4 var(--font-ui); }
+body.cardlib-open #overlay .studio-archive .studio-head-total b { color:var(--collection-ink); font:600 var(--interface-text-number)/1 var(--font-ui); font-variant-numeric:tabular-nums; }
 body.cardlib-open #overlay .studio-archive .clib-search { width:100%; padding:10px 12px 10px 34px; border:0; outline:0; background:transparent; font-family:var(--font-ui); }
 body.cardlib-open #overlay .studio-archive .lib-grid.is-empty { grid-template-columns:1fr; place-items:center; align-content:center; }
 body.cardlib-open #overlay .studio-archive .lib-item {
@@ -750,7 +666,6 @@ body.cardlib-open #overlay .studio-archive .studio-effect-metrics dd small { fon
 body.cardlib-open #overlay .studio-archive .studio-photo:focus-visible .studio-photo-paper { outline:2px solid #e3c094!important; outline-offset:5px!important; }
 @media (prefers-reduced-motion:reduce) { body.cardlib-open #overlay .studio-archive .studio-choice-trigger::after { transition:none; } }
 body.reduce-motion.cardlib-open #overlay .studio-archive .studio-choice-trigger::after { transition:none; }
-body.cardlib-open #overlay .studio-archive .library-head::after { content:''; display:block!important; position:absolute; left:0; right:0; bottom:0; height:1px; pointer-events:none; background:linear-gradient(90deg,transparent,#bdc3ac30 28%,#bdc3ac18 72%,transparent); }
 body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-choice-menu) { --studio-scroll-top:#d7bf94dd; --studio-scroll-bottom:#ae8d5bbf; --studio-scroll-rail:#d7c8a10d; --studio-scroll-hover-top:#efd4a9e6; --studio-scroll-hover-bottom:#bea06ed9; }
 body.cardlib-open #overlay .studio-archive .studio-dossier-scroll { flex:1 1 auto; --studio-scroll-top:#927744cc; --studio-scroll-bottom:#705d45aa; --studio-scroll-rail:#8b77551a; --studio-scroll-hover-top:#80633ce6; --studio-scroll-hover-bottom:#6b5038d9; }
 body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu) { scrollbar-gutter:stable; scrollbar-width:thin; scrollbar-color:var(--studio-scroll-top) transparent; }
@@ -766,9 +681,12 @@ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-num
 body.cardlib-open #overlay .studio-archive .studio-browse-controls[hidden] { display:none!important; }
 body.cardlib-open #overlay .studio-archive .studio-quick-rarity { flex:0 0 180px; }
 body.cardlib-open #overlay .studio-archive .studio-quick-sort { flex:0 0 200px; }
-body.cardlib-open #overlay .studio-archive .pv-desc .d-term[data-term], body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term[data-term] { color:#2d6561!important; font-weight:600; border-bottom:1px dotted #2d656166!important; }
+body.cardlib-open #overlay .studio-archive .pv-desc .d-term[data-term],
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term[data-term] { color:#2d6561!important; font-weight:600; border-bottom:1px dotted #2d656166!important; }
 body.cardlib-open #overlay .studio-archive .studio-quick-person { flex:0 0 200px; }
-body.cardlib-open #overlay .studio-archive .pv-desc .d-term, body.cardlib-open #overlay .studio-archive .pv-desc .d-num, body.cardlib-open #overlay .studio-archive .studio-value,
+body.cardlib-open #overlay .studio-archive .pv-desc .d-term,
+body.cardlib-open #overlay .studio-archive .pv-desc .d-num,
+body.cardlib-open #overlay .studio-archive .studio-value,
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules :is(.d-term,.d-num) { white-space:nowrap; }
 /* The film rail is decorative; the scrollbar retains its native input contract. */
 @supports selector(::-webkit-scrollbar) {
@@ -784,12 +702,10 @@ body.cardlib-open #overlay .studio-archive .studio-effect-metrics.is-single dd {
 body.cardlib-open #overlay .studio-archive .lib-grid .studio-photo-art { z-index:1; margin:calc(var(--mount-border) * -.35); width:calc(100% + var(--mount-border) * .7); }
 body.cardlib-open #overlay .studio-archive .studio-photo-caption { z-index:1; }
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-main .cz-photo-image { z-index:1!important; max-width:none !important; width:calc(100% + (var(--mount-space) - var(--mount-border) * .7) * 2) !important; margin-inline:calc(var(--mount-border) * .7 - var(--mount-space)); margin-block:calc((var(--mount-border) * .7 - var(--mount-space)) / var(--cz-photo-ratio,1)); max-height:calc(var(--game-layout-height, 100vh) - 190px + (var(--mount-space) - var(--mount-border) * .7) * 2 / var(--cz-photo-ratio,1)) !important; }
-body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-hint { z-index:6!important; position:relative; }
 /* Printed identity replaces the existing rarity label; it is not a numeric grade. */
 body.cardlib-open #overlay .studio-archive #libPreview .studio-file-field .studio-rarity-stamp[data-studio-rarity] { display:inline-block; border:1px solid currentColor!important; padding:3px 8px!important; background:none!important; font:600 14px/1.3 var(--sa-serif)!important; letter-spacing:.08em; transform:rotate(-2deg); white-space:nowrap; outline:none; }
 body.cardlib-open #overlay .studio-archive #libPreview .studio-rarity-stamp:is([data-studio-rarity="职业"],[data-studio-rarity="衍生"]) { transform:none; border-style:dashed!important; outline:0; }
 body.cardlib-open #overlay .studio-archive .studio-tab-badge { display:none; flex:0 0 18px; width:18px; height:18px; }
-body.cardlib-open #overlay .studio-archive .type-tab.on .studio-tab-badge { display:inline-flex; }
 body.cardlib-open #overlay .studio-archive .studio-tab-badge svg { display:block; width:100%; height:100%; }
 /* Thumbnail identity sits on the paper caption, never over illustration pixels. */
 body.cardlib-open #overlay .studio-archive .studio-photo-footer { display:flex; justify-content:space-between; align-items:center; gap:10px; width:100%; min-height:23px; padding:2px 2px 0; }

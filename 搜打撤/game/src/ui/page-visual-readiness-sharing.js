@@ -1,8 +1,12 @@
+import { offerCriticalImageRecovery, watchCriticalImageRecovery } from './visual-resource-recovery.js';
+
 // Share resource work only while callers still own the same mounted destination.
 // Each caller keeps its own background, deadline, abort signal and presentation frame.
 const pending = new WeakMap();
 
 function imageReady(image, signal) {
+  const src = image.currentSrc || image.src;
+  watchCriticalImageRecovery(image);
   return new Promise(resolve => {
     let settled = false;
     const finish = ready => {
@@ -11,6 +15,11 @@ function imageReady(image, signal) {
       image.removeEventListener?.('load', loaded);
       image.removeEventListener?.('error', failed);
       signal.removeEventListener('abort', failed);
+      // Cancellation is not an image failure and cannot repaint a later page.
+      if (!signal.aborted && image.isConnected && (image.currentSrc || image.src) === src) {
+        image.dataset.visualState = ready ? 'ready' : 'unavailable';
+        if (!ready) offerCriticalImageRecovery(image);
+      }
       resolve(ready);
     };
     const loaded = () => finish(image.naturalWidth > 0);
@@ -30,14 +39,35 @@ function imageReady(image, signal) {
 
 function representativeImages(root, extraRoots) {
   const images = [];
-  for (const host of [root, ...extraRoots]) {
-    for (const image of host.querySelectorAll('img')) {
-      if (images.length >= 12) break;
-      if (!image.src || image.loading === 'lazy' || image.closest('[hidden], .lib-grid, .pool-grid')) continue;
-      const rect = image.getBoundingClientRect();
-      if (rect.width && rect.height && rect.bottom > 0 && rect.right > 0
-        && rect.top < window.innerHeight && rect.left < window.innerWidth) images.push(image);
+  const hosts = [root, ...extraRoots];
+  const seen = new Set();
+  function* candidates() {
+    // Critical art keeps priority even inside a lazy collection. Stop collecting
+    // once the representative limit is met instead of copying every gallery image.
+    for (const host of hosts) {
+      if (!host) continue;
+      if (host.matches('img')) yield host;
+      yield* host.querySelectorAll('img[data-visual-critical]');
     }
+    for (const host of hosts) {
+      if (host) yield* host.querySelectorAll('img:not([loading="lazy"]):not(.lib-grid img):not(.pool-grid img)');
+    }
+  }
+  for (const image of candidates()) {
+    if (images.length >= 12) break;
+    if (seen.has(image)) continue;
+    seen.add(image);
+    if (!image.src || image.closest('[hidden]')) continue;
+    if (image.hasAttribute('data-visual-critical')) {
+      // Opt-in critical artwork participates even when a shared template defaults to lazy.
+      image.loading = 'eager';
+      images.push(image);
+      continue;
+    }
+    if (image.loading === 'lazy' || image.closest('.lib-grid,.pool-grid')) continue;
+    const rect = image.getBoundingClientRect();
+    if (rect.width && rect.height && rect.bottom > 0 && rect.right > 0
+      && rect.top < window.innerHeight && rect.left < window.innerWidth) images.push(image);
   }
   return images;
 }

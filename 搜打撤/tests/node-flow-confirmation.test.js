@@ -47,14 +47,15 @@ it('战斗格先走通用节点过场再开战，无确认页且不预抽遭遇'
   expect(st.acts.nodeDecisionLeave).toBeUndefined();
   expect(st.game.state).toBe('modal');              // 战斗接管前锁住地图
 });
-it('宝箱必须确认搜索；返回不发奖励，双击搜索只打开一次', () => {
+it('宝箱进入即开启，重复进入仍由 modal 闸门挡住且不注册搜索确认', () => {
   st.layer.logical[0].def.type = 'chest';
-  reenter(); expect(st.chests).not.toHaveBeenCalled();
-  st.acts.nodeDecisionLeave();
-  reenter(); const search = st.acts.nodeChestSearch;
-  search(); search();
+  reenter(); reenter();
   expect(st.chests).toHaveBeenCalledTimes(1);
+  expect(st.chests.mock.lastCall[0][0].kind).toMatch(/^(small|medium)$/);
   expect(st.chests.mock.lastCall[2]).toEqual({ consumeNode:true });
+  expect(st.acts.nodeChestSearch).toBeUndefined();
+  expect(st.acts.nodeDecisionLeave).toBeUndefined();
+  expect(st.game.state).toBe('modal');
 });
 it('点击实际入口才派发补给页，旧档与旁边节点不合成补给', () => {
   st.game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['a'], taken:[] };

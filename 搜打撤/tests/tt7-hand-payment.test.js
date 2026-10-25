@@ -1,3 +1,4 @@
+import { playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -36,8 +37,7 @@ const starter = () => ({ id: `test-starter-${uidSequence}`, name: '初始攻击'
 function makeGame(cards) {
   const game = {
     ownedCards: cards.map(card => ({ uid: `payment-${uidSequence++}`, card, safe: false })),
-    hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0, myClass: '侠客', characterId: null,
-    state: 'idle', battleActive: false, lastBattleEnd: null,
+    ...playerFields(30, 30, 5, 0, '侠客', null), lastBattleEnd: null,
     log(message) { (this.logs ||= []).push(String(message)); }, heal(amount) { this.hp = Math.min(this.maxHp, this.hp + amount); },
     onBattleEnd(opts, played, win, consumed) { this.lastBattleEnd = { opts, played, win, consumed }; },
   };

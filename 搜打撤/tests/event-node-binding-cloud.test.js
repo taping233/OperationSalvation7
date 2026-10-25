@@ -1,4 +1,5 @@
-import { rollEventDice } from './helpers/event-dice.js';
+import { overlayElements, eventCardMocks, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks } from './helpers/environment-fixtures.js';
+import { rollEventDice, flushEventActions } from './helpers/event-dice-async.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const H = vi.hoisted(() => ({ game: {}, cards: [], saves: [], uid: 0, slot: null, narrative: async () => null, random: () => 0.9, pick: a => a[0] }));
@@ -7,12 +8,9 @@ vi.mock('../game/src/core/random.js', async importOriginal => {
   return { ...actual, Random: { ...actual.Random, random: (...args) => H.random(...args) } };
 });
 vi.mock('../game/src/run/game.session.js', () => ({
-  game: H.game, MAP: { rules: { fireHeal:10, fireClassCardChance:1, bossDeckSize:15, starterSha:5, battleStartDraw:5, battleTurnDraw:1, battleHandMax:8 }, monsters:{}, altar:{ bosses:[] } }, MODES: {},
-  bagCap: () => 9, usedSlots: () => 0, newUid: () => `u${++H.uid}`, pick: (...args) => H.pick(...args),
+  ...eventMapMocks(H), newUid: () => `u${++H.uid}`, pick: (...args) => H.pick(...args),
   saveGame: () => { H.saves.push(JSON.parse(JSON.stringify(H.game))); return true; },
-  scaledEnemy: a => a, getActiveSlot: () => H.slot, curLayer: () => H.game.layerData[H.game.layerIdx],
-  cellCenter: () => ({}), markSeen() {}, modeCfg: () => ({}), gainCoins: n => H.game.coins += n,
-  weighted: a => a[0], enterLayer() {}, exitToTitle() {},
+  scaledEnemy: a => a, getActiveSlot: () => H.slot, ...eventMapActions(H),
 }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick() {}, ding() {} }, _set_cardPageOpen() {}, cardHTML: c => `<span>${c.name}</span>` }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub() {} }));
@@ -23,12 +21,9 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: (...args) => H
 
 let flow, scenes, UI, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { game: H.game, Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
-    MAP:{ chestKinds:{ small:{ name:'小宝箱' } } },
-    Cards: { DROP_WEIGHTS:{ 古朴:1 }, all: () => H.cards, classPool: () => H.cards.filter(c => c.type === '能力卡'), sellPrice:() => 1, isRandomObtainable: () => true, cardHTML: c => `<span>${c.name}</span>` } };
+  window.SDT = { ...eventCardMocks(H) };
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
-  UI = window.SDT.UI = { ...overlayMethods, _acts: {}, _baseActs: {}, _roomActive: true, el: {},
-    act: (name, fn) => UI._acts[name] = fn, refresh() {}, log() {}, showCardReward() {}, _checkPageBg() {},
+  UI = window.SDT.UI = { ...overlayMethods, ...eventUiMocks(() => UI),
   };
   ({ setBagReturnHook } = await import('../game/src/hub/bag-return-hook.js'));
   flow = await import('../game/src/run/game.run.flow.js');
@@ -38,9 +33,8 @@ beforeAll(async () => {
 beforeEach(() => {
   vi.useFakeTimers();
   document.body.innerHTML = '<div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
-  UI.el.ovBody.addEventListener('click', event => { const button = event.target.closest('[data-act]'); if (button) UI._acts[button.dataset.act]?.(button.dataset); });
-  UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; UI._roomActive = true; setBagReturnHook(null);
+  UI.el = { ...overlayElements() };
+  bindEventRoot(() => UI); setBagReturnHook(null);
   H.random = () => 0.9; H.pick = a => a[0];
   H.saves = []; H.uid = 0; H.slot = null; H.narrative = async () => null;
   for (const key of Object.keys(H.game)) delete H.game[key];
@@ -64,7 +58,7 @@ const potionCards = [1, 2, 3].map(i => ({ id: `p${i}`, name: `药水${i}`, type:
 
 const events = [
   { id:'ev19-quartermaster', name:'装备征用令', type:'事件', desc:'从三件装备选择一件' },
-  { id:'tt6-demondeal', name:'隧道血契', type:'事件', desc:'交易或拒绝' },
+  { id:'tt6-demondeal', name:'受困运输队', type:'事件', desc:'交易或拒绝' },
 ];
 async function openBoundEvent() {
   const pending = flow.runEventDeck(); await vi.dynamicImportSettled();
@@ -72,7 +66,7 @@ async function openBoundEvent() {
 }
 
 describe('事件卡足额生命代价', () => {
-  it.each([1, 5, 6])('隧道血契从%s血足额扣5，致死不打开宝箱或覆盖终局状态', async hp => {
+  it.each([1, 5, 6])('受困运输队从%s血足额扣5，致死不打开宝箱或覆盖终局状态', async hp => {
     H.cards = [events[1]];
     H.game.hp = hp;
     const open = vi.spyOn(window.SDT.Chests, 'open').mockImplementation(() => { H.game.state = 'modal'; });
@@ -82,13 +76,13 @@ describe('事件卡足额生命代价', () => {
     expect(option.textContent).toContain(hp <= 5 ? '会致死' : '剩余 1');
     expect(H.game.hp).toBe(hp);
     expect(H.game.damage).not.toHaveBeenCalled();
-    UI._acts.evtChoice({ i:'0' });
+    await UI._acts.evtChoice({ i:'0' }); await flushEventActions();
     expect(H.game.damage).toHaveBeenCalledTimes(1);
-    expect(H.game.damage).toHaveBeenCalledWith(5, '隧道血契');
+    expect(H.game.damage).toHaveBeenCalledWith(5, '搬运途中擦伤');
     expect(H.game.hp).toBe(hp - 5);
     if (hp <= 5) {
       expect(open).not.toHaveBeenCalled();
-      expect(H.game.terminalPending).toMatchObject({ kind:'death', endReason:'隧道血契' });
+      expect(H.game.terminalPending).toMatchObject({ kind:'death', endReason:'搬运途中擦伤' });
       expect(H.game.state).toBe('terminalPending');
       expect(H.saves.every(save => save.hp > 0)).toBe(true);
     } else {
@@ -96,32 +90,32 @@ describe('事件卡足额生命代价', () => {
       expect(H.game.state).toBe('modal');
       expect(H.game.terminalPending).toBeUndefined();
     }
-    UI._acts.evtChoice?.({ i:'0' });
+    await UI._acts.evtChoice?.({ i:'0' }); await flushEventActions();
     expect(H.game.damage).toHaveBeenCalledTimes(1);
   });
 
-  it.each([1, 3, 4])('塌方采掘点从%s血足额扣3，不能由收尾复活', async hp => {
-    H.cards = [{ id:'tt6-goldmine', name:'塌方采掘点', type:'事件', desc:'获得6币并损失3点生命' }];
+  it.each([1, 3, 4])('塌陷地下库从%s血足额扣3，不能由收尾复活', async hp => {
+    H.cards = [{ id:'tt6-goldmine', name:'塌陷地下库', type:'事件', desc:'获得6币并损失3点生命' }];
     H.game.hp = hp;
     H.narrative = async () => ({ intro:'矿洞', choices:[
       { label:'稳妥', effect:'goldmine_safe', choose:() => '' },
       { label:'深挖', effect:'goldmine_deep', choose:() => '' },
     ] });
     await openBoundEvent();
-    UI._acts.evtChoice({ i:'1' });
+    await UI._acts.evtChoice({ i:'1' }); await flushEventActions();
     expect(H.game.damage).toHaveBeenCalledTimes(1);
-    expect(H.game.damage).toHaveBeenCalledWith(3, '塌方采掘点');
+    expect(H.game.damage).toHaveBeenCalledWith(3, '塌陷地下库');
     expect(H.game.hp).toBe(hp - 3);
     expect(H.game.coins).toBe(24);
     if (hp <= 3) {
-      expect(H.game.terminalPending).toMatchObject({ kind:'death', endReason:'塌方采掘点' });
+      expect(H.game.terminalPending).toMatchObject({ kind:'death', endReason:'塌陷地下库' });
       expect(H.game.state).toBe('terminalPending');
       expect(H.saves.every(save => save.hp > 0)).toBe(true);
     } else {
       expect(H.game.state).toBe('idle');
       expect(H.game.terminalPending).toBeUndefined();
     }
-    UI._acts.evtChoice?.({ i:'1' });
+    await UI._acts.evtChoice?.({ i:'1' }); await flushEventActions();
     expect(H.game.damage).toHaveBeenCalledTimes(1);
   });
 });
@@ -134,12 +128,12 @@ describe('未知节点首次事件绑定', () => {
     expect(H.pick.mock.calls[0][0]).toEqual(events);
     expect(H.game.nodeRewards['0,1']).toEqual({ version:1, type:'event', eventId:'ev19-quartermaster' });
     expect(H.saves.at(-1).nodeRewards['0,1'].eventId).toBe('ev19-quartermaster');
-    UI._acts.eventExit(); await vi.advanceTimersByTimeAsync(400);
+    await UI._acts.eventExit(); await flushEventActions(); await vi.advanceTimersByTimeAsync(400);
     H.pick.mockClear().mockImplementation(deck => deck.at(-1));
     expect(flow.reenterCell()).toBe(true);
     await vi.advanceTimersByTimeAsync(1000);
     expect(UI.el.ovBody.textContent).toContain('装备征用令');
-    expect(UI.el.ovBody.textContent).not.toContain('隧道血契');
+    expect(UI.el.ovBody.textContent).not.toContain('受困运输队');
     expect(H.pick).not.toHaveBeenCalled();
     expect(H.game.visited).toEqual({});
     expect(H.game.coins).toBe(18);
@@ -147,9 +141,9 @@ describe('未知节点首次事件绑定', () => {
 
   it('正常JSON刷新重建后同位置仍恢复原事件，不从旧历史日志猜节点', async () => {
     H.cards = events;
-    H.game.eventLog = [{ name:'隧道血契', desc:'其他节点历史', turn:0 }];
+    H.game.eventLog = [{ name:'受困运输队', desc:'其他节点历史', turn:0 }];
     H.pick = vi.fn(deck => deck[0]);
-    await openBoundEvent(); UI._acts.eventExit();
+    await openBoundEvent(); await UI._acts.eventExit(); await flushEventActions();
     const snapshot = JSON.parse(JSON.stringify(H.saves.at(-1)));
     const mapSeed = H.game.mapSeed = 'binding-map-seed';
     snapshot.mapSeed = mapSeed;
@@ -167,7 +161,7 @@ describe('未知节点首次事件绑定', () => {
     H.cards = events;
     H.game.eventLog = [{ name:'装备征用令', turn:1 }];
     H.pick = vi.fn(deck => deck[1]);
-    await openBoundEvent(); UI._acts.eventExit();
+    await openBoundEvent(); await UI._acts.eventExit(); await flushEventActions();
     expect(H.game.nodeRewards['0,1'].eventId).toBe('tt6-demondeal');
     H.game.trackPos = 2;
     H.game.layerData[0].logical.push({ def:{ type:'event' } });
@@ -191,18 +185,18 @@ describe('未知节点首次事件绑定', () => {
     expect(H.game.nodeRewards['0,1'].eventId).toBe('removed-event');
     H.cards = []; await openBoundEvent();
     expect(UI.el.ovBody.textContent).toContain('此处事件暂不可用');
-    UI._acts.eventExit();
+    await UI._acts.eventExit(); await flushEventActions();
     expect(H.game.state).toBe('idle');
   });
 
   it('药摊/征用从绑定事件升级为固定候选，付款后再开事件入口不重扣或重抽', async () => {
     H.cards = [events[0], ...potionCards.map(c => ({ ...c, type:'装备' }))];
-    await openBoundEvent(); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
+    await openBoundEvent(); await UI._acts.evtChoice({ i:'0' }); await flushEventActions(); await rollEventDice(UI);
     const pending = JSON.parse(JSON.stringify(H.game.nodeRewards['0,1']));
     expect(pending.type).toBe('event-choice');
     expect(pending.eventId).toBe('ev19-quartermaster');
     expect(H.game.coins).toBe(15);
-    UI._acts.eventExit();
+    await UI._acts.eventExit(); await flushEventActions();
     H.pick = vi.fn(deck => deck[0]);
     await flow.runEventDeck();
     expect(H.game.nodeRewards['0,1']).toEqual(pending);
@@ -211,7 +205,7 @@ describe('未知节点首次事件绑定', () => {
 
   it('已完成事件仍按visited禁重复触发，非法绑定结构拒绝存档', async () => {
     H.cards = events; H.pick = vi.fn(deck => deck[1]);
-    await openBoundEvent(); UI._acts.evtChoice({ i:'1' });
+    await openBoundEvent(); await UI._acts.evtChoice({ i:'1' }); await flushEventActions();
     expect(H.game.visited).toEqual({ '0,1':1 });
     H.pick.mockClear(); flow.reenterCell();
     expect(H.pick).not.toHaveBeenCalled();

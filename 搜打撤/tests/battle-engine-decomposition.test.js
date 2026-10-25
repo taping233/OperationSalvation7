@@ -134,12 +134,12 @@ describe('shared damage boundary ports', () => {
     return { state, flow, order };
   }
 
-  it('commits heart damage once, preserves actual defenses during conversion, and records before defeat', () => {
+  it('commits heart damage once, consumes actual defenses during conversion, and records before defeat', () => {
     const foe = { name: '心', hp: 4, maxHp: 4, heartsMode: true, status: {}, defense: { armor: 1 } };
     const { state, flow, order } = harness(foe);
     const card = { name: 'hit' };
     expect(flow.hitFoe(foe, card, 10, 'attack')).toBe(2);
-    expect(foe.defense.armor).toBe(1);
+    expect(foe.defense.armor).toBe(0);
     expect(order).toEqual([['record', 2, 2], ['defeat', 2]]);
     expect(state.floats[0]).toMatchObject({ text: '-2♥', hpBefore: 4, hpAfter: 2 });
   });

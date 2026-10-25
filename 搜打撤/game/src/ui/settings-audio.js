@@ -4,6 +4,8 @@ import '../../css/settings-audio.css';
 export function bindSettingsAudio(root, overlay, sound) {
   const status = /** @type {HTMLElement} */ (root.querySelector('#setMusicStatus'));
   const retry = /** @type {HTMLButtonElement} */ (root.querySelector('#setMusicRetry'));
+  const sfxStatus = root.querySelector('#setSfxStatus');
+  const sfxRetry = /** @type {HTMLButtonElement | null} */ (root.querySelector('#setSfxRetry'));
   const events = new AbortController();
   const current = () => root.isConnected && !overlay.hidden && overlay.contains(root);
   const stop = () => { events.abort(); observer.disconnect(); };
@@ -21,15 +23,31 @@ export function bindSettingsAudio(root, overlay, sound) {
     else if (state?.enabled && state.requested && (!state.playing || state.current !== state.requested)) message = '正在加载音乐…';
     else if (state?.playing) message = '音乐播放正常。';
     if (status.textContent !== message) status.textContent = message;
+    if (sfxStatus && sfxRetry) {
+      const state = sound.sfxPlayback;
+      const canRetry = !!state?.canRetry && !state?.muted && !state?.hidden;
+      sfxRetry.hidden = !canRetry; sfxRetry.disabled = !canRetry;
+      const message = state?.muted ? '音效已静音。' : state?.hidden ? '页面隐藏时暂停音效。'
+        : state?.loading ? `正在加载音效（${state.loaded || 0} 项已就绪）…`
+        : state?.failed ? `${state.failed} 项音效加载失败，可手动重试。`
+        : state?.loaded ? '音效已就绪。' : '首次点击或按键后加载音效。';
+      if (sfxStatus.textContent !== message) sfxStatus.textContent = message;
+    }
   };
   const observer = new MutationObserver(() => { if (!current()) stop(); });
   observer.observe(overlay, { attributes: true, attributeFilter: ['hidden'], childList: true, subtree: true });
+  document.addEventListener('sdt-sfx-state', update, { signal: events.signal });
   document.addEventListener('sdt-music-state', update, { signal: events.signal });
   document.addEventListener('sdt-overlay-close', stop, { signal: events.signal });
   retry.addEventListener('click', () => {
     if (!current()) { stop(); return; }
     if (!sound.musicPlayback?.canRetry) { update(); return; }
     sound.retryMusic();
+    update();
+  }, { signal: events.signal });
+  sfxRetry?.addEventListener('click', () => {
+    if (!current()) { stop(); return; }
+    if (sound.sfxPlayback?.canRetry) sound.retrySamples?.();
     update();
   }, { signal: events.signal });
   update();

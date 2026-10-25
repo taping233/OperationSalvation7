@@ -2,6 +2,10 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import postcss from 'postcss';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { readCompiledCssSource } from './helpers/css-source.js';
+import { matchesCssSelector } from './helpers/css-match.js';
+import selectorParser from 'postcss-selector-parser';
+import { selectorSpecificity } from '@csstools/selector-specificity';
 
 // Parse every linked sheet in actual load order, including the late runtime sheet.
 // jsdom has no layout engine, so this checks the relevant declaration cascade only.
@@ -15,7 +19,7 @@ stylesheetPaths.push(path.normalize(path.join('game/src/ui', motionSheet)));
 function loadSheet(file, ancestors = []) {
   file = file.replaceAll('\\', '/');
   if (ancestors.includes(file)) throw new Error(`Cyclic stylesheet import: ${file}`);
-  const root = postcss.parse(readFileSync(file, 'utf8'), { from: file });
+  const root = postcss.parse(readCompiledCssSource(file), { from: file });
   const imported = [];
   let sawRule = false;
   for (const node of root.nodes) {
@@ -28,8 +32,8 @@ function loadSheet(file, ancestors = []) {
   return [...imported, { file, root }];
 }
 const sheets = stylesheetPaths.flatMap(file => loadSheet(file));
-const barSelector = '#overlay .battle-stage.sts>.bt-potions';
-const tipSelector = '#overlay .battle-stage.sts .bt-potion-tip';
+const barSelector = '#overlay .battle-stage.sts>.sts-topbar>.bt-potions';
+
 
 function resolvedSelectors(rule) {
   let parent = rule.parent;
@@ -40,13 +44,8 @@ function resolvedSelectors(rule) {
 }
 
 function specificity(selector) {
-  // All matching position/transform selectors are simple in the current sheets.
-  // Fail explicitly if that changes instead of silently misranking a functional pseudo.
-  if (/[:&|]/.test(selector)) throw new Error(`Unsupported matching cascade selector: ${selector}`);
-  const ids = (selector.match(/#[\w-]+/g) || []).length;
-  const classes = (selector.match(/\.[\w-]+|\[[^\]]+\]/g) || []).length;
-  const types = selector.replace(/#[\w-]+|\.[\w-]+|\[[^\]]+\]|\*/g, '').match(/[a-zA-Z][\w-]*/g)?.length || 0;
-  return [ids, classes, types];
+  const {a,b,c}=selectorSpecificity(selectorParser().astSync(selector).first);
+  return [a,b,c];
 }
 
 function cascade(element, property, { withoutReset = false } = {}) {
@@ -67,12 +66,12 @@ function cascade(element, property, { withoutReset = false } = {}) {
       for (const selector of resolvedSelectors(rule)) {
         // Pseudo-elements style generated boxes, never the element itself.
         if (/::[\w-]+/.test(selector)) continue;
-        if (!element.matches(selector)) continue;
+        if (!matchesCssSelector(element, selectorParser().astSync(selector).first)) continue;
         if (rule.parent.type !== 'root') {
           throw new Error(`Conditional/nested matching cascade needs explicit coverage: ${file}:${rule.source.start.line} ${selector}`);
         }
         if (withoutReset && file === 'game/css/battle-stage.css'
-          && [barSelector, tipSelector].includes(selector) && property === 'transform') continue;
+          && selector.replaceAll(/\s*>\s*/g,'>')===barSelector && property === 'transform') continue;
         matches.push({ file, selector, value: declaration.value, weight: [Number(!!declaration.important), ...specificity(selector), order] });
       }
     });
@@ -85,16 +84,16 @@ function cascade(element, property, { withoutReset = false } = {}) {
 }
 
 beforeEach(() => {
-  document.body.innerHTML = '<div id="overlay" class="room-view"><div class="card room battle"><div id="ovBody"><div class="battle-stage sts"><div class="bt-potions"><span class="bt-potions-label">道具</span><div class="bt-potion" role="button">恢复药水</div><div class="bt-potion-tip">回复生命并获得能量</div></div></div></div></div></div>';
+  document.body.innerHTML = '<div id="overlay" class="room-view"><div class="card room battle"><div id="ovBody"><div class="battle-stage sts"><div class="sts-topbar"><div class="bt-potions"><span class="bt-potions-label">道具</span><div class="bt-potion" role="button">恢复药水</div></div></div></div></div></div></div>';
 });
 afterEach(() => { document.body.innerHTML = ''; });
 
 describe('battle potion left-anchor cascade', () => {
-  it('keeps count, label and emphasized tooltip text light on the dark item surfaces', () => {
+  it('keeps count and label light on the dark item surfaces', () => {
     const potion = document.querySelector('.bt-potion');
     potion.innerHTML += '<span class="bt-potion-n">×3</span>';
-    const tip = document.querySelector('.bt-potion-tip'); tip.innerHTML = '<b>回复生命</b>';
-    for (const selector of ['.bt-potion-n', '.bt-potions-label', '.bt-potion-tip b']) {
+
+    for (const selector of ['.bt-potion-n', '.bt-potions-label']) {
       expect(cascade(document.querySelector(selector), 'color').winner).toMatchObject({file:'game/css/battle-stage.css',value:'#fff'});
     }
     const label = document.querySelector('.bt-potions-label');
@@ -106,29 +105,19 @@ describe('battle potion left-anchor cascade', () => {
     const bar = document.querySelector('.bt-potions');
     const transform = cascade(bar, 'transform');
     expect(transform.matches).toContainEqual(expect.objectContaining({ file: 'game/css/battle.css', value: 'translateX(-50%)' }));
-    expect(transform.winner).toMatchObject({ file: 'game/css/battle-stage.css', selector: barSelector, value: 'none' });
-    expect(cascade(bar, 'left').winner.value).toBe('62px');
+    expect(transform.winner).toMatchObject({ file: 'game/css/battle-stage.css', value: 'none' });
+    expect(cascade(bar, 'left').winner.value).toBe('0');
+    expect(cascade(bar, 'position').winner.value).toBe('relative');
+    expect(cascade(bar, 'grid-row').winner.value).toBe('2');
     expect(cascade(bar, 'max-width').winner.value).toBe('420px');
   });
 
-  it('keeps the visible tooltip anchored to the bar instead of half its own width left', () => {
-    const tip = document.querySelector('.bt-potion-tip');
-    expect(cascade(tip, 'transform').matches).toContainEqual(expect.objectContaining({ file: 'game/css/battle.css', value: 'translateX(-50%)' }));
-    expect(cascade(tip, 'transform').winner).toMatchObject({ file: 'game/css/battle-stage.css', selector: tipSelector, value: 'none' });
-    expect(cascade(tip, 'left').winner.value).toBe('0');
-  });
 
-  it('retains the more specific reset when the later runtime hidden-tip rule matches', () => {
-    const tip = document.querySelector('.bt-potion-tip');
-    tip.hidden = true;
-    const transform = cascade(tip, 'transform');
-    expect(transform.matches).toContainEqual(expect.objectContaining({ file: 'game/css/motion-transitions.css', value: 'translateY(4px)' }));
-    expect(transform.winner).toMatchObject({ file: 'game/css/battle-stage.css', selector: tipSelector, value: 'none' });
-    expect(cascade(tip, 'display').winner.value).toBe('none');
-  });
 
-  it('reproduces both original horizontal offsets when only the canonical resets are removed', () => {
-    for (const selector of ['.bt-potions', '.bt-potion-tip']) {
+
+
+  it('reproduces the original bar offset when its canonical reset is removed', () => {
+    for (const selector of ['.bt-potions']) {
       expect(cascade(document.querySelector(selector), 'transform', { withoutReset: true }).winner)
         .toMatchObject({ file: 'game/css/battle.css', value: 'translateX(-50%)' });
     }

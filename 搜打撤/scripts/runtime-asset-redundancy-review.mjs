@@ -1,3 +1,7 @@
+// 2026-10-23 card zoom split: current paths/templates/probe sources reviewed; omission rules unchanged.
+// Evidence: docs/evidence/2026-10-23-WF-module-boundaries-1023/asset-review.json
+// 2026-10-23 reviewed consumer paths and audio file sources unchanged; 286 candidates retained.
+// Evidence: docs/evidence/2026-10-23-WF-review-remediation-1023/asset-review.json
 // 2026-10-21 performance integration: retained-source hashes and current selectors reviewed.
 // Evidence: docs/evidence/2026-10-21-WF-github-perf-integrate-1021/asset-review.json
 // 2026-10-21 type rollout consumer re-review: exact asset-constructor ASTs retained;
@@ -8,6 +12,10 @@
 // docs/evidence/2026-10-20-WF-portable-clean-1020/assets/review.json
 // 2026-10-19 background timers: only visibility/cleanup scheduling changed; asset paths and selectors unchanged.
 // Reviewed selectors and opaque dynamic paths; re-audit before changing fingerprints.
+// 2026-10-23 module consolidation: menu slots retain inline SLOT_EMBLEMS/SVG;
+// settings retains the same literal audio-source link. Art mapping changes only
+// cardArtRevisions. Manual source review: WF-module-consolidation-1023/README.md;
+// this registration does not claim that the asset audit has been executed.
 // Approved historical sources were deleted under docs/evidence/2026-10-19-unused-cleanup/.
 // Historical path protections remain: an unreviewed/changed selector preserves its assets.
 // Submission uses the reviewed committed consumer versions; concurrent edits remain unstaged.
@@ -20,98 +28,36 @@
 // dynamic asset constructors, role/catalog inputs or excluded candidates. Evidence:
 // docs/evidence/2026-10-20-WF-battle-flow-1020/effects.md (including the preceding sts-polish patch).
 // Retired chest rigs: docs/evidence/2026-10-16-WF-cloud-performance-review/README.md
+const retiredChest640Frames = ['small', 'medium', 'large', 'class', 'boss'].flatMap(kind =>
+  Array.from({ length: 18 }, (_, index) => ({
+    path: `scenes/chests/${kind}-rig-640-v1/frame-${String(index).padStart(2, '0')}.webp`,
+    category: 'chests',
+  })));
+
+const shadowedCardArt = [
+  'spell-tt8-curse1',
+  'spell-tt8-curse2',
+  'spell-tt8-curse3',
+  'spell-tt8-curse4',
+  'equip-tt3-staff',
+  'equip-tt3-fate-wheel',
+  'equip-tt3-wolf-bow',
+  'equip-tt3-twinwater-mail',
+  'equip-tt3-grass-armor',
+  'equip-tt3-blooddrinker',
+  'equip-tt8-demonslay',
+  'equip-tt8-archdemon',
+  'equip-tt8-heavensword',
+  'equip-tt7-arcanescroll',
+  'equip-tt12-raygun',
+].flatMap(name => ['cards/', 'thumbs/cards/'].map(prefix => ({
+  path: `${prefix}${name}.webp`,
+  category: 'shadowed-card-art',
+})));
+
 export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   candidates: [
-    {"path":"scenes/chests/small-rig-640-v1/frame-00.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-01.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-02.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-03.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-04.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-05.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-06.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-07.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-08.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-09.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-10.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-11.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-12.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-13.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-14.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-15.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-16.webp","category":"chests"},
-    {"path":"scenes/chests/small-rig-640-v1/frame-17.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-00.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-01.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-02.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-03.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-04.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-05.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-06.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-07.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-08.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-09.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-10.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-11.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-12.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-13.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-14.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-15.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-16.webp","category":"chests"},
-    {"path":"scenes/chests/medium-rig-640-v1/frame-17.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-00.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-01.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-02.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-03.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-04.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-05.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-06.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-07.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-08.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-09.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-10.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-11.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-12.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-13.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-14.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-15.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-16.webp","category":"chests"},
-    {"path":"scenes/chests/large-rig-640-v1/frame-17.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-00.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-01.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-02.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-03.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-04.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-05.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-06.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-07.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-08.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-09.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-10.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-11.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-12.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-13.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-14.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-15.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-16.webp","category":"chests"},
-    {"path":"scenes/chests/class-rig-640-v1/frame-17.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-00.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-01.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-02.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-03.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-04.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-05.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-06.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-07.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-08.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-09.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-10.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-11.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-12.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-13.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-14.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-15.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-16.webp","category":"chests"},
-    {"path":"scenes/chests/boss-rig-640-v1/frame-17.webp","category":"chests"},
+    ...retiredChest640Frames,
     {"path":"portraits/frames/wu/atk-hit-1.webp","category":"frames","role":"wu"},
     {"path":"portraits/frames/wu/atk-hit.webp","category":"frames","role":"wu"},
     {"path":"portraits/frames/wu/atk-wind-1.webp","category":"frames","role":"wu"},
@@ -187,36 +133,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     {"path":"thumbs/scenes/scene-chest-large-anime-v1.webp","category":"retired-scenes"},
     {"path":"thumbs/scenes/scene-chest-medium-anime-v1.webp","category":"retired-scenes"},
     {"path":"thumbs/scenes/scene-chest-small-anime-v1.webp","category":"retired-scenes"},
-    {"path":"cards/spell-tt8-curse1.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/spell-tt8-curse1.webp","category":"shadowed-card-art"},
-    {"path":"cards/spell-tt8-curse2.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/spell-tt8-curse2.webp","category":"shadowed-card-art"},
-    {"path":"cards/spell-tt8-curse3.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/spell-tt8-curse3.webp","category":"shadowed-card-art"},
-    {"path":"cards/spell-tt8-curse4.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/spell-tt8-curse4.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt3-staff.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt3-staff.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt3-fate-wheel.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt3-fate-wheel.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt3-wolf-bow.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt3-wolf-bow.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt3-twinwater-mail.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt3-twinwater-mail.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt3-grass-armor.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt3-grass-armor.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt3-blooddrinker.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt3-blooddrinker.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt8-demonslay.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt8-demonslay.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt8-archdemon.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt8-archdemon.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt8-heavensword.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt8-heavensword.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt7-arcanescroll.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt7-arcanescroll.webp","category":"shadowed-card-art"},
-    {"path":"cards/equip-tt12-raygun.webp","category":"shadowed-card-art"},
-    {"path":"thumbs/cards/equip-tt12-raygun.webp","category":"shadowed-card-art"},
+    ...shadowedCardArt,
     // Retained source assets: fixed bytes reviewed for production-only omission.
     {"path":"scenes/chests/boss-rig-v1/frame-00.webp","category":"chests","sourceBytes":751734,"sourceSha256":"03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb"},
     {"path":"scenes/chests/boss-rig-v1/frame-01.webp","category":"chests","sourceBytes":751734,"sourceSha256":"03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb"},
@@ -313,83 +230,93 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   consumerFingerprints: {
     "slot-weather": {
       "game/src/ui/slot-emblems.js": "92c305263c9d1be295636540db4286e4b8305a699c34570f9cb0d1562702566a",
-      "game/src/ui/game.menu.pages.js": "1e7881f718e735acb4b3cf482a63919eadd3ece44f40bac6ec488bd4a979251b"
+      "game/src/ui/game.menu.pages.js": "d90af2be5ac4478e1af7d73a04ecc26c35dc48c4492f3c68a36633ecc48ce36c",
+      "game/src/ui/menu-slots.js": "5538540d1674b699dfb59b042a885504a1d9aa078051e1c56130e1bab31b9ecf",
+      "game/src/ui/menu-slot-view.js": "6c4a5e7462e51032e6ffb1444a19feb656fe3506ffc13b66edab2c8acf3371bc"
     },
     "shadowed-card-art": {
-      "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "game/src/core/art.js": "4e5c6d53f56e208b15ebb7eba68e83932d385f672b06b9c5959771228de03d6b",
       "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd",
-      "game/data/art-mapping.json": "a7d5b045fdcc015c8998462fc3f41f4cf2215531826e616d753e7ae68978c530"
+      "game/data/art-mapping.json": "2081834e80ccb45e8e24707bd91b83981725eae7192c02888e7ee96444479a82"
     },
     "retired-scenes": {
-      "game/data/art-mapping.json": "a7d5b045fdcc015c8998462fc3f41f4cf2215531826e616d753e7ae68978c530",
-      "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
-      "game/src/run/chests.js": "0ba9d81b735786027eba8d29e79665b8b0bb8ee32d83893f5105b26fa89114b1",
+      "game/data/art-mapping.json": "2081834e80ccb45e8e24707bd91b83981725eae7192c02888e7ee96444479a82",
+      "game/src/core/art.js": "4e5c6d53f56e208b15ebb7eba68e83932d385f672b06b9c5959771228de03d6b",
+      "game/src/run/chests.js": "4f196b98137b04f6b8354cb5c52b648e0a81e1b66abca8419ca203ed5cd3ccb7",
       "game/src/run/chest-opening-art.js": "52a385710f39ee8fa20b49612bb34cddf11730821a5e5351b07c2316c0717300",
       "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
-      "game/src/run/game.run.scenes.js": "30156d27125bd99479aed07b2c0d1483288a70592ab28f3ef243215008a7ca5e",
-      "game/src/battle/view/battle.scenery.js": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f",
-      "game/src/run/game.session.death.js": "3f6c1730a96401615a6b19d059a210f2ac8ec9a821bfde85cce6c49c428dcadc",
-      "game/css/entry-events.css": "ee51cbc68d981d15a32b088ba1334ce6ff84982f1ddc658eabb7e81a79273d66",
-      "game/css/scenes.css": "73f3fff72ac854241af55a9a21a3694a6a7f97ccb9f8684c5c48862341eb8bd9"
+      "game/src/run/game.run.scenes.js": "8491c20c3e47ccf1d8d1f3687b4aa63a0e1d68323d20b9d231b24dc5825b8f6e",
+      "game/src/battle/view/battle.scenery.js": "6094ec54ba82accd0a0cd86383de9d36ef6147f2f8201daac3e1a66b2f572bd7",
+      "game/src/run/game.session.death.js": "7940a8fc7a2b3ef16b90ea6a17773509c7165739ff15bd94c6f4f4dab75e987d",
+      "game/css/entry-events.css": "c43428a01099475ee93933a72e4ab45d95e2fda2535598d8a8bc774516f4e965",
+      "game/css/scenes.css": "9b6b5b9d20a9a6fb4c80d94db3fe880fc9ed07e5c10188ee33a95432a2585cad"
     },
     "chests": {
-      "game/src/run/chests.js": "0ba9d81b735786027eba8d29e79665b8b0bb8ee32d83893f5105b26fa89114b1",
+      "game/src/run/chests.js": "4f196b98137b04f6b8354cb5c52b648e0a81e1b66abca8419ca203ed5cd3ccb7",
       "game/src/run/chest-opening-art.js": "52a385710f39ee8fa20b49612bb34cddf11730821a5e5351b07c2316c0717300"
     },
     "frames": {
-      "game/src/battle/view/battle.frames.js": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989",
+      "game/src/battle/view/battle.frames.js": "17fbfa29a5f8cd562e01c053473aa7a2a7c45facb87615141a4601940b417bf9",
       "game/src/battle/view/battle.frame-catalog.js": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0",
       "game/src/battle/view/battle.frame-catalog-changwuyu.js": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d",
       "game/src/battle/view/battle.frame-catalog-three-role.js": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
     },
     "map": {
-      "game/src/core/map-node-art.js": "2ae15c7523db9e8c65780db75362df394bab0aca00c710208ee482c826c71609",
-      "game/src/core/renderer.js": "0420bb53acab8b2967b1e873349802d4e12aa00b2a1ee09465764feb62b4eff7",
+      "game/src/core/map-node-art.js": "f6e3a76a14debcd5c811aaa4e02bbcddafe7284efae904ebeb354c84f2f0ab09",
+      "game/src/core/renderer.js": "b5ae9222fb5afe5f27ce6a521795bdfcc651c60d0e389ea489a8cba2cf786fe6",
       "game/src/core/map-city-atmosphere.js": "4c024fe3be5539e4a942c5c1a71c73f141698ccad9bd79c6f84424054f2aaa02",
-      "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "game/src/core/art.js": "4e5c6d53f56e208b15ebb7eba68e83932d385f672b06b9c5959771228de03d6b",
       "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd"
     },
     "transitions": {
-      "game/src/ui/camp-entry.js": "e2e93537b0345a1eda5a382d3548ef04980927bead0fbea19fd7bf4dbd8ddc55",
-      "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "game/src/ui/camp-entry.js": "3ec6be4d3a4e455529ca342d1af0a9760d752ae176802342ad9f2b6a033f27c9",
+      "game/src/core/art.js": "4e5c6d53f56e208b15ebb7eba68e83932d385f672b06b9c5959771228de03d6b",
       "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd"
     }
   },
   // Reviewed callback inputs to sound.js's assetUrl(url), not inferred approvals.
   // See docs/evidence/2026-10-17-audio-asset-guard/REPORT.md.
   opaqueConsumerDependencies: {
+    'game/src/ui/card-zoom-controller.js': {
+      'game/src/ui/ui.js': '925d1ff1c88ba58503f7380b16dad45de9c117deb2cc8e92d57c4fd94d0578eb',
+      'game/src/ui/card-zoom-content.js': '619bc55c32b0a455fe380cb0205b4dcfb37c4134cb6da306ebc03ca6d0475f94',
+      'game/src/ui/card-zoom-photo-source.js': '3a9c9d09743935e4f5e4f8287f33439bce16b7ece6652129bdde99b1e3f7928f',
+    },
     'game/src/audio/sfx-review.js': {
-      'game/src/audio/sound.samples.catalog.js': '37225368ded0124bb43f50ddf164ca71babe04444439d1573fd374996dc6e850',
+      'game/src/audio/sound.samples.catalog.js': "64753bbe0eeae4c2582b64e86d8e054622d4bd78d3b4522ae2167046ac99e861",
     },
     'game/src/audio/sound.js': {
-      'game/src/audio/sound.samples.player.js': 'dccb8a01db9faf97dfb48ad33aaf6b5eb36a77c353053bf203669caffb15e26b',
-      'game/src/audio/sound.samples.catalog.js': '37225368ded0124bb43f50ddf164ca71babe04444439d1573fd374996dc6e850',
+      'game/src/audio/sound.samples.player.js': "2d4eb248c2666ce9abae900b5306458673a456393620e13a345bc946cf740ebc",
+      'game/src/audio/sound.samples.catalog.js': "64753bbe0eeae4c2582b64e86d8e054622d4bd78d3b4522ae2167046ac99e861",
     },
   },
   opaqueConsumers: {
     "game/src/audio/sfx-review.js": "91922e0a75469d116682c1815a91e7bd50594194eb41b8c25edd138cb9c7fbf4",
-    "game/src/ui/game.menu.pages.js": "28b5da3f5e4fccb656b7b0a59334d992473afcf9de8dcfaef783474b0fbcad67",
-    "game/src/hub/hub.personnel.js": "0feead0d3df274cd9b39056c2326946b7bd0f264e64d8b645886f4d538282a1e",
+    "game/src/ui/game.menu.pages.js": "d90af2be5ac4478e1af7d73a04ecc26c35dc48c4492f3c68a36633ecc48ce36c",
+    "game/src/ui/menu-settings.js": "39eb16b7fd1c2e57644396d8636eaea1e6c7b8640dad0a48614f7ecc772d8125",
+    "game/src/hub/hub.personnel.js": "c1c826e3ff6f69b532f71ea01e0069e5d4651c3d0d672babd3d20ef59527be2d",
     "game/src/core/art-preload-plan.js": "1b7cc057cdb5c307a3eea5601a45a1bb8837dcedcec8486eb6d1fc56701f75fe",
-    "game/src/hub/game.bag.view2.js": "39a44f1467d79fa18141e7045e0c6a36bf2e608fb19866b20d6c775fb2af4e58",
+    "game/src/hub/game.bag.view2.js": "0148b468095e7006f6abca2d824aaa976b8283dad9ab27abf91610b134d9bff9",
     "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
     "game/src/audio/sfx-audition.js": "498052cc8d781e8df1d3ffd22238c48c768974cee1809b9dc45d661db65f0eb4",
-    "game/src/audio/sound.js": "5aa85e7c58a7445a19f8a09357b15f7ccab50a58ab3327532caba22ed679c509",
-    "game/src/battle/view/battle.frames.js": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989",
-    "game/src/battle/view/battle.layers.js": "bc24fc0b7e1621821d8dc513e43c21daa24378da6a03c515ae7569c0804b1a47",
-    "game/src/battle/view/battle.vfx.js": "2eb08c4b872952f377e369749e73dad86058a45b015a247e7a82ef7902dc6b12",
+    "game/src/audio/sound.js": "2d2347cb2513ab3e4a0ff29055d464f849d6eee8f1eda14bfe97a22025696f11",
+    "game/src/battle/view/battle.frames.js": "17fbfa29a5f8cd562e01c053473aa7a2a7c45facb87615141a4601940b417bf9",
+    "game/src/battle/view/battle.layers.js": "bf4990129b51f54c1f82b49e55d27f59a6ecd60cd58bf689e23994a178dcd6e4",
+    "game/src/battle/view/battle.vfx.js": "3adca0a12f969e89e6a9580909a3d212ad7e213dec94d5ab6ab62f1184c5fc64",
     "game/src/cards/card-frame-presentation.js": "4a05cb2499db1ffa0b3ee20d18b30493f1d4df58edb58df4f6c632ccbc7dc196",
-    "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
-    "game/src/core/icons-bitmap.js": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a",
+    "game/src/core/art.js": "4e5c6d53f56e208b15ebb7eba68e83932d385f672b06b9c5959771228de03d6b",
+    "game/src/core/icons-bitmap.js": "c0efeda56e5fc74caa2dcbcd2405ea681af33129cdfc9b0658b7dda050edcc1e",
+    "game/src/core/semantic-icons.js": "18f153eebe05797f8e23295f04e65b8bb2f6d70fbb67c360eafc7617ba082d54",
     "game/src/home/home.scene.js": "d87d3ff2394d7022b0ead06485af881ccb4bbd07f4b6f76f36a964aa8d957cdd",
     "game/src/hub/base-chibi-v2.skin.js": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86",
-    "game/src/hub/hub.presentation.js": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6",
+    "game/src/hub/hub.presentation.js": "9b452d577d7e7ae4ceb01a1809ea9c5b2ccd57ac650fe266a0aba2964dee85e6",
     "game/src/hub/hub.visuals.js": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
     "game/src/rarity-design-lab.js": "c08b5825430c4fff3c69dec6bb556d918aa05afe05134c3875dad4d6013d2c09",
-    "game/src/run/lab.ending.js": "d2e3f0158200b1b722a852f6221078b9c3ccac7074740f535310a7e3a9729809",
-    "game/src/ui/base-preview-rooms-v7.js": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
-    "game/src/ui/game.menu.js": "a5ebd60111d4edd1c4ea99f6f051eddce4eb103265406f0021cb1b4144896045",
-    "game/src/ui/ui.js": "f5db4dc8e31eef14d3abba25abe291b4dba539d89613e34fa74256afc98c1d73",
+    "game/src/run/lab.ending.js": "3d2950de2ac3c7218fdb18fc34a38644e5257b2ccce34aea68a3c77e1a63c4d2",
+    "game/src/ui/base-preview-rooms-v7.js": "fa399583e2b15e6cdd0324d431b238f9ed28376467ae7a729bff0b2e713067d6",
+    "game/src/ui/game.menu.js": "a78f7fc24bcab247c1c7e473367f10a44b2c329233f60e5007b92a84ca8e8392",
+    "game/src/ui/ui.js": "925d1ff1c88ba58503f7380b16dad45de9c117deb2cc8e92d57c4fd94d0578eb",
+    "game/src/ui/card-zoom-controller.js": "564b8cb49766940b922e6aa8316fa513dea39bef80a5a5d564b48c5b900b0ff5",
     "game/src/wu-career-frame-preview.js": "44545a9f6bc8763e097cc6bea8f191007702ad89192307d8842f8abfffa94892"
   },
 });

@@ -1,3 +1,4 @@
+import { battleViewMocks, overlayElements } from './helpers/environment-fixtures.js';
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 // 本文件验输入，资源就绪由 battle-entry-readiness 专门控制未兑现的加载 Promise 验证。
@@ -19,11 +20,7 @@ const UI = {
   act: (name, fn) => actions.set(name, fn),
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} },
-  Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 9, 99, 5, 5),
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
@@ -66,7 +63,7 @@ beforeEach(async () => {
   window.requestAnimationFrame = callback => { frames.push(callback); return frames.length; };
   Element.prototype.animate = () => ({ finished: Promise.resolve(), cancel() {}, onfinish: null });
   document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  UI.el = { ...overlayElements() };
   UI.el.ovBody.addEventListener('click', event => {
     const button = event.target.closest('[data-act]');
     if (button && !button.closest('[inert]')) actions.get(button.dataset.act)?.(button.dataset);

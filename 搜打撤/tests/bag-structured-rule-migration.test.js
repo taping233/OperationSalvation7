@@ -191,13 +191,13 @@ describe('原始定版背包规则与旧档回填', () => {
     try {
       window.SDT.Base.use(slot);
       session._set_active_slot(slot);
-      RunStorage.remove(slot);
+      await RunStorage.remove(slot);
       expect(await session.newRun('standard', [], { skipClassChoice: true })).not.toBe(false);
       const source = Cards.all().find(card => card.id === 'tt-crystal');
       const stale = { ...source, name: '旧档旧名', desc: '旧档旧描述。' };
       delete stale.rules;
       game.ownedCards = [{ uid: 'legacy-crystal-uid', card: stale }];
-      expect(session.saveGame()).toBe(true);
+      expect(await session.saveGame()).toBe(true);
 
       expect(session.loadGame(slot).ok).toBe(true);
 
@@ -206,8 +206,8 @@ describe('原始定版背包规则与旧档回填', () => {
       expect(restored.name).toBe(source.name);
       expect(restored.desc).toBe(source.desc);
     } finally {
-      if (originalRun) RunStorage.write(slot, originalRun);
-      else RunStorage.remove(slot);
+      if (originalRun) await RunStorage.write(slot, originalRun);
+      else await RunStorage.remove(slot);
       if (originalBaseRaw == null) localStorage.removeItem(baseKey);
       else localStorage.setItem(baseKey, originalBaseRaw);
       session._set_active_slot(null);

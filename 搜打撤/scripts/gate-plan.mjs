@@ -18,6 +18,8 @@ const AGENT_TOOL_TESTS = new Map([
 ]);
 // Known tools have direct contracts; other scripts retain contract/reference/sentinel fallback.
 export const WORKFLOW_TESTS = new Map([
+  ['scripts/asset-manifest-source.mjs', ['tests/asset-manifest-source.test.js']],
+  ['scripts/css-component-scopes.mjs', ['tests/css-component-scopes.test.js']],
   ['scripts/dependency-audit-diagnostics.mjs', ['tests/dependency-audit-diagnostics.test.js']],
   ['scripts/check-type-coverage.mjs', ['tests/type-coverage.test.js', 'tests/workflow-cli-integration.test.js']],
   ['scripts/build-artifact-manifest.mjs', ['tests/build-artifact-manifest.test.js']],
@@ -68,8 +70,6 @@ export const EXEMPT_SCRIPTS = new Set([
   'scripts/doc-retirement-candidates.mjs', // 手动文档退役候选报告
   'scripts/electron-gpu-info.cjs',      // 桌面版冻结域工具
   'scripts/electron-title-smoke.mjs',   // 桌面版冻结域工具
-  'scripts/esm-convert.mjs',            // 一次性迁移工具
-  'scripts/esm-fix-setters.mjs',        // 一次性迁移工具
   'scripts/iab-drive.mjs',              // 内置浏览器驱动（手动验收路径）
   'scripts/perf-benchmark.cjs',         // 手动性能基准
   'scripts/perf-budget.cjs',            // build 后置步骤（build 链路自带验证）

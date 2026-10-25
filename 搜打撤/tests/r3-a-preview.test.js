@@ -1,11 +1,13 @@
+import { battleRules, damageRuleFields } from './helpers/environment-fixtures.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 import fs from 'node:fs';
+import { readCssSource } from './helpers/css-source.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -81,7 +83,7 @@ describe('R3-a 可信伤害预览', () => {
   });
   it('视图预览不再复用 aim.snap 或命中旧气泡早退，三敌气泡宽度受单位格约束', () => {
     const viewSource = fs.readFileSync('game/src/battle/view/battle.view.js', 'utf8');
-    const cssSource = fs.readFileSync('game/css/battle.css', 'utf8');
+    const cssSource = readCssSource('game/css/battle.css', 'utf8');
     expect(viewSource).not.toMatch(/showFoePreview\([^\n]*aim\.snap/);
     expect(viewSource).not.toContain("if (el.querySelector('.bt-fpreview')) return");
     expect(cssSource).toMatch(/\.bt-fpreview[^}]*width:\s*calc\(100% - 8px\)[^}]*min-width:\s*0/s);
@@ -220,18 +222,18 @@ describe('R3-a 可信伤害预览', () => {
     BattleSession.commands.flee();
   });
 
-  it('core 将流血增伤旗标传给预览，避免裸 Combat 伪精确', async () => {
+  it('core 将流血增伤纳入精确预览', async () => {
     const card = Cards.all().find(entry => entry.id === 'starter-attack');
     const { game, uid } = gameWith(card);
     restore(game, uid, { hp: 20, status: { bleed: 2 } }, { bleedAmp: 1 });
     expect(viewApi.getPreviewContext(uid, 0).modifiers.bleedAmp).toBe(true);
-    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
+    expect(preview(uid)).toMatchObject({ confidence: 'exact', damage: { total: 8 } });
     BattleSession.commands.playCard(uid, 0);
     expect((await settle()).foes[0].hp).toBe(12);
     BattleSession.commands.flee();
   });
 
-  it('穿戴合法冰冻增伤装备后由 core 降级；实际 hitFoe 仍按原规则增伤', async () => {
+  it('穿戴冰冻增伤装备后预览与实际伤害一致', async () => {
     const attack = Cards.all().find(entry => entry.id === 'starter-attack');
     const equipment = { id: 'preview-frost-equipment', name: '冰冻增伤测试装备', type: '装备', cost: 0, dmg: 0,
       rules: { version: 1, equip: { onEquip: [], passive: { cond: { vsFreeze: 2 } } } } };
@@ -241,20 +243,33 @@ describe('R3-a 可信伤害预览', () => {
     BattleSession.commands.playCard('preview-equipment', 'self');
     await settle();
     expect(viewApi.getPreviewContext(uid, 0).modifiers.vsFreezeBonus).toBe(true);
-    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
+    expect(preview(uid)).toMatchObject({ confidence: 'exact', damage: { total: 6 } });
     BattleSession.commands.playCard(uid, 0);
     expect((await settle()).foes[0].hp).toBe(14);
     BattleSession.commands.flee();
   });
 
-  it('后续可转向目标带流血增伤时也降级，不只检查当前选中目标', () => {
+  it('结构化伤害不从旧冰冻增伤文案注入额外规则，预览与结算一致', async () => {
+    const card = { id: 'preview-frost-strike', name: '寒冰斩', type: '武术', cost: 0, dmg: 0, dmgType: 'attack',
+      desc: '对冰冻角色伤害 +3', rules: { ...damageRuleFields(false, 'chosenEnemy') } };
+    const { game, uid } = gameWith(card);
+    restore(game, uid, { hp: 20, status: { freeze: 1 } });
+    expect(viewApi.getPreviewContext(uid, 0).freezeDamageBonus).toBe(0);
+    const result = preview(uid);
+    expect(result).toMatchObject({ confidence: 'exact', damage: { total: 4, hpAfter: 16 } });
+    BattleSession.commands.playCard(uid, 0);
+    expect((await settle()).foes[0].hp).toBe(result.damage.hpAfter);
+    BattleSession.commands.flee();
+  });
+
+  it('转向目标带流血增伤时逐段精确预览', () => {
     const card = Cards.all().find(entry => entry.id === 'tt7-meteorrain');
     const { game, uid } = gameWith(card);
     const foe = (hp, bleed = 0) => ({ id: 'target', name: '目标', hp, maxHp: hp, atk: 1,
       dead: false, status: { bleed }, defense: { shield: 0, armor: 0, guard: false } });
     restore(game, uid, { hp: 1 }, { bleedAmp: 1 }, { foes: [foe(1), foe(20, 2)] });
     expect(viewApi.getPreviewContext(uid, 0).modifiers.bleedAmp).toBe(true);
-    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
+    expect(preview(uid)).toMatchObject({ confidence: 'exact', damage: { hits: [3, 7], targetIndexesByHit: [0, 1] } });
     BattleSession.commands.flee();
   });
 
@@ -328,14 +343,14 @@ describe('R3-a 可信伤害预览', () => {
     BattleSession.commands.flee();
   });
 
-  it('暗1即使初始未过半也降级，避免多段中途跨阈值伪精确', () => {
+  it('暗1逐段判断跨半血阈值', () => {
     const card = Cards.all().find(entry => entry.id === 'tt3-double-shot');
     const { game, uid } = gameWith(card);
     restore(game, uid, { hp: 7, maxHp: 10 });
     const snapshot = BattleSession.getSnapshot();
     const context = { ...viewApi.getPreviewContext(uid, 0), modifiers: { nestDark1: true } };
     const result = previewAction({ snapshot, action: { kind: 'play-card', uid, targetIndex: 0 }, cardContext: context });
-    expect(result).toMatchObject({ confidence: 'unknown', damage: null, reasons: ['黑暗羁绊会逐段改变伤害'] });
+    expect(result).toMatchObject({ confidence: 'exact', damage: { hits: [2, 3, 3], total: 8 } });
     BattleSession.commands.flee();
   });
 

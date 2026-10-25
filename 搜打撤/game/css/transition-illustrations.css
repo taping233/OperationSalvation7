@@ -1,15 +1,17 @@
 /* Illustrations decorate existing covers; their owners retain readiness and timing. */
-.map-layer-passage.map-layer-passage {
+.map-layer-passage.map-layer-passage{
+& {
   background: linear-gradient(90deg, #08101c99, #08101c33), url('../assets/scenes/transitions-1021/layer-passage.webp') center / cover no-repeat #101b28;
 }
-.map-layer-passage.map-layer-passage > :is(small, b, span) {
+& > :is(small, b, span) {
   position: relative;
   text-shadow: 0 2px 12px #08101c;
-}
-.page-loading.page-loading:not(.page-loading--city):not(.page-loading--interface) {
+}}
+.page-loading{
+&.page-loading:not(.page-loading--city):not(.page-loading--interface) {
   background: linear-gradient(90deg, #08101cbb, #08101c55), url('../assets/scenes/transitions-1021/loading.webp') center / cover no-repeat #111214;
 }
-.page-loading:not(.page-loading--city):not(.page-loading--interface) .page-loading-copy {
+&:not(.page-loading--city):not(.page-loading--interface) .page-loading-copy {
   position: relative;
   text-shadow: 0 2px 12px #08101c;
-}
+}}

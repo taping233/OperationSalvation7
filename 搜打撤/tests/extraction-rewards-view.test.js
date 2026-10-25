@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
 import { extractionDoneHTML, extractionStashHTML } from '../game/src/ui/extraction-rewards-view.js';
 import { esc } from '../game/src/core/shared.js';
+import { readCssSource } from './helpers/css-source.js';
 const cardHTML = c => `<div class="hs-card">${esc(c.name)}</div>`;
 const common = { id: 'c', name: '普通卡', rarity: '古朴' }, rare = { id: 'l', name: '传说卡', rarity: '传说' };
 const show = opts => { document.body.innerHTML = extractionStashHTML({ cardHTML, ...opts }); };
@@ -72,7 +72,7 @@ describe('extraction reward presentation', () => {
 
 // The legacy full-page shell hides all h2 elements. This flow must explicitly restore its success heading.
 it('restores its success heading and full-size shell without reopening unrelated page headings', () => {
-  const css=readFileSync('game/css/extraction-rewards.css','utf8');
+  const css=readCssSource('game/css/extraction-rewards.css','utf8');
   document.body.innerHTML=`<style>#overlay .card.page h2{display:none}${css}</style><div id="overlay"><div class="card page"><h2 id="ovTitle">Legacy title</h2><div id="ovBody">${extractionStashHTML({cardHTML})}</div></div></div>`;
   expect(getComputedStyle(document.querySelector('.exr-success-title')).display).toBe('block');
   expect(getComputedStyle(document.querySelector('#ovTitle')).display).toBe('none');
@@ -129,7 +129,7 @@ it('estimate wording is explicit and loss confirmation escapes every name with b
   expect(document.querySelector('[data-act=exFinish]')).toBeNull();
   expect(document.querySelector('[data-act=exCancelFinish]').classList.contains('exr-primary')).toBe(true);
   expect(document.querySelector('[data-act=exConfirmFinish]').textContent).toBe('确认放弃 12 张并完成');
-  const css = readFileSync('game/css/extraction-rewards.css', 'utf8');
+  const css = readCssSource('game/css/extraction-rewards.css', 'utf8');
   expect(css).toMatch(/\.exr-confirm-list\s*\{[^}]*max-height:120px;[^}]*overflow-y:auto/);
   expect(document.querySelector('.exr-confirm-actions').closest('.exr-confirm-list')).toBeNull();
 });

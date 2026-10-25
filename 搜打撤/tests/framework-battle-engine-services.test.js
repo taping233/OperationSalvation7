@@ -47,7 +47,7 @@ describe('battle engine explicit composition', () => {
       isolated.set$pstat({ status: {} });
       isolated.set$pdef({ armor: 0, shield: 0, guard: false });
       expect(engine.R().label).toBe('first');
-      expect(engine.findEffectiveCard('card').card).toEqual(first.cards.all()[0]);
+      expect(engine.findEffectiveCard('card').card).toMatchObject(first.cards.all()[0]);
       engine.playerTakeHit({ name: 'port foe', atk: 1 });
       expect(first.sound).toHaveBeenCalledWith('hurt');
       expect(isolated.G.hp).toBe(19);

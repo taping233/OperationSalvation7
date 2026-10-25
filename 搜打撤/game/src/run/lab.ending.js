@@ -9,6 +9,12 @@
 import { assetUrl } from '../core/asset-url.js';
 import SDT from '../core/sdt-facade.js';
 import { isTurbo } from '../core/turbo.js';
+import { bindDialogSurface } from '../ui/dialog-surface.js';
+import { currentScreenOwner } from '../ui/screen-owner.js';
+import { watchSurfaceActivity } from '../ui/surface-activity.js';
+import { motionReduced } from '../ui/motion-presets.js';
+import '../../css/lab-ending.css';
+import '../../css/interface-components.css';
 
 const PAGES = [
   {
@@ -33,12 +39,15 @@ export function playLabEnding(onDone) {
   if (isTurbo()) { onDone?.(); return; }
   const root = document.createElement('div');
   root.id = 'labEnding';
+  root.setAttribute('role', 'dialog');
+  root.setAttribute('aria-modal', 'true');
+  root.setAttribute('aria-label', '研究所通关演出');
   root.innerHTML = `
     ${PAGES.map((p, i) => `
       <div class="lab-end-page lab-tone-${p.tone}${i === 0 ? ' on' : ''}" data-page="${i}">
-        <div class="lab-end-art" style="background-image:url('${assetUrl(p.img)}')"></div>
+        <div class="lab-end-art" data-ui-ambient style="background-image:url('${assetUrl(p.img)}')"></div>
         <div class="lab-end-shade"></div>
-        <div class="lab-end-text"><span class="lab-end-typed"></span><i class="lab-end-cue">▼</i></div>
+        <div class="lab-end-text"><span class="lab-end-typed"></span><i class="lab-end-cue" data-ui-ambient>▼</i></div>
       </div>`).join('')}
     <button class="lab-end-skip" type="button">跳过 »</button>`;
   document.body.appendChild(root);
@@ -46,6 +55,7 @@ export function playLabEnding(onDone) {
   const pages = [...root.querySelectorAll('.lab-end-page')];
   const sfx = (n) => { try { if (SDT.Sound) SDT.Sound.sfx(n); } catch { /* 静音环境忽略 */ } };
   let idx = 0, timer = null, typed = false, finished = false, typedCount = 0, revealFrame = 0;
+  let activity = null, surfaceActive = false, releaseDialog = () => {};
 
   const stopType = () => { if (timer) { clearInterval(timer); timer = null; } };
   const completePage = () => {
@@ -56,16 +66,17 @@ export function playLabEnding(onDone) {
     el.parentElement.classList.add('done');
   };
   const resumeType = () => {
-    if (finished || typed || timer || document.hidden || !root.isConnected) return;
+    if (finished || typed || timer || !surfaceActive || !root.isConnected) return;
+    if (motionReduced()) { completePage(); return; }
     const el = pages[idx].querySelector('.lab-end-typed');
     const full = PAGES[idx].text;
     timer = setInterval(() => {
-      if (document.hidden || !root.isConnected) { stopType(); return; }
+      if (!surfaceActive || !root.isConnected) { stopType(); return; }
       el.textContent = full.slice(0, ++typedCount);
       if (typedCount >= full.length) completePage();
     }, 30);
   };
-  const onVisibility = () => { if (document.hidden) stopType(); else resumeType(); };
+  const syncType = () => { if (!surfaceActive) stopType(); else resumeType(); };
   const type = (el) => {
     stopType();
     typed = false;
@@ -85,23 +96,32 @@ export function playLabEnding(onDone) {
     finished = true;
     stopType();
     cancelAnimationFrame(revealFrame);
-    document.removeEventListener('visibilitychange', onVisibility);
-    document.removeEventListener('keydown', onKey, true);
+    activity?.dispose();
+    root.removeEventListener('keydown', onKey);
+    releaseDialog();
     root.remove();
     if (onDone) onDone();
   };
   const advance = () => { if (finished) return; if (typed) { idx + 1 < PAGES.length ? show(idx + 1) : finish(); } else completePage(); };
-  const onKey = (e) => {
-    if (e.key === 'Escape') { finish(); return; }
-    if (e.key === 'Enter' || e.key === ' ') { advance(); }
+  const ownsInput = () => !finished && !root.inert && currentScreenOwner()?.root === root;
+  const onKey = e => {
+    if (!ownsInput() || e.defaultPrevented || e.isComposing || e.keyCode === 229 || e.repeat) return;
+    if (e.target instanceof Element && e.target.closest('input,textarea,select,[contenteditable="true"],button')) return;
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); advance(); }
   };
-
-  root.addEventListener('click', (e) => {
-    if (/** @type {Element} */ (e.target).closest('.lab-end-skip')) { finish(); return; }
+  root.addEventListener('click', e => {
+    if (!ownsInput()) return;
+    if (e.target instanceof Element && e.target.closest('.lab-end-skip')) { finish(); return; }
     advance();
   });
-  document.addEventListener('keydown', onKey, true);
-  document.addEventListener('visibilitychange', onVisibility);
-  revealFrame = requestAnimationFrame(() => { revealFrame = 0; if (!finished) root.classList.add('on'); });   // 触发淡入
+  root.addEventListener('keydown', onKey);
   show(0);
+  releaseDialog = bindDialogSurface(root, { initialFocus:root, priority:60, onBack:finish });
+  activity = watchSurfaceActivity(root, {
+    onChange:value => { surfaceActive = value; syncType(); },
+    onRefresh:() => {
+      if (surfaceActive && motionReduced() && !typed) completePage();
+    },
+  });
+  revealFrame = requestAnimationFrame(() => { revealFrame = 0; if (!finished) root.classList.add('on'); });   // 触发淡入
 }

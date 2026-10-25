@@ -103,7 +103,7 @@ it('settings readiness timing retains original input and stays separate from syn
     button.click(); stagePageVisual(ui, reveal);
     await vi.advanceTimersByTimeAsync(48);
     expect(trace.read().records.some(row => row.kind === 'stage')).toBe(false);
-    button.click(); release(); await vi.advanceTimersByTimeAsync(32);
+    button.click(); release(); await vi.advanceTimersByTimeAsync(400);
     expect(reveal).toHaveBeenCalledOnce();
     const rows = trace.read().records.filter(row => row.kind === 'stage');
     expect(rows).toHaveLength(1);

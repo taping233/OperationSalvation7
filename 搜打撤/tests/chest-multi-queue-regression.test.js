@@ -1,3 +1,4 @@
+import { chestBaseMocks } from './helpers/environment-fixtures.js';
 import { continueChestRewards } from './helpers/chest-actions.js';
 import { afterEach, expect, it, vi } from 'vitest';
 
@@ -34,16 +35,13 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
     Cards: { RARITIES:['古朴','稀有','史诗','传说'], all:() => [card, otherCard], randomDropCard:seen => seen.has(card.id) ? otherCard : card,
       pickOfRarity:() => card, classPool:() => [], rarityOf:item => item.rarity,
       sellPrice:() => 1, cardHTML:() => '<div>队列测试卡</div>' },
-    Base: { data:{eggPity:0,eggBattles:0}, save:vi.fn(), petEggDropChance:() => 0,
-      recordPetEggChestResult:vi.fn(), bagCap:() => 10, isSha:() => false },
-    Sound: { sfx:vi.fn() }, Icons: { rich:html => html },
+    ...chestBaseMocks(() => vi),
   };
   const { SDT } = await import('../game/src/run/chests.js');
   SDT.Chests.open(game, [{kind:'small'}, {kind:'small'}], done);
   expect(ovBody.querySelector('.cqo-progress')).toBeNull();
-  expect(ovBody.querySelectorAll('.cqo-box:not(:disabled)')).toHaveLength(2);
-  ovBody.querySelector('[data-act="chestNext"]').click();
-  ovBody.querySelector('[data-act="chestReveal"]').click();
+  expect(ovBody.querySelector('.reward-source').textContent).toContain('1/2');
+  expect(ovBody.querySelector('[data-eps-search]')).toBeNull();
   const previews = [...ovBody.querySelectorAll('[data-act="chestSelect"]')];
   const claims = [...ovBody.querySelectorAll('[data-act="chestTake1"]')];
   expect(previews).toHaveLength(2);
@@ -63,13 +61,10 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
   ovBody.querySelector('[data-act="chestSkip"]').click();
   expect(ovBody.querySelector('[data-act="chestLeave"]')).not.toBeNull();
   ovBody.querySelector('[data-act="chestLeave"]').click();
-  expect(ovBody.querySelector('.cqo-overview')).not.toBeNull();
-  continueChestRewards(actions);
-  expect(ovBody.querySelector('.cqo-progress')).toBeNull();
-  expect(ovBody.querySelectorAll('.cqo-box:not(:disabled)')).toHaveLength(1);
-  expect(ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
-  ovBody.querySelector('[data-act="chestNext"]').click();
-  ovBody.querySelector('[data-act="chestReveal"]').click();
+  expect(ovBody.querySelector('.cqo-overview')).toBeNull();
+  expect(ovBody.querySelector('[data-eps-search]')).toBeNull();
+  expect(ovBody.querySelectorAll('[data-act="chestSelect"]')).toHaveLength(2);
+  expect(ovBody.querySelector('.reward-source').textContent).toContain('2/2');
   expect(ovBody.querySelector('[data-act="chestTake"]')).not.toBeNull();
   ovBody.querySelector('[data-act="chestTake"]').click();
   expect(game.grantCard).toHaveBeenCalledTimes(2);

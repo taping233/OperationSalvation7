@@ -1,14 +1,16 @@
 /* Scene readiness uses a quiet cover; interface navigation never adds a curtain. */
-.page-visual-handoff { position:fixed; inset:0; z-index:980; pointer-events:auto; overflow:hidden; }
-.page-visual-handoff[data-kind="page"] { background:#10171b; }
-.page-visual-handoff.leaving { pointer-events:none; }
-#overlay > .page-visual-scene { z-index:1000; background:#10171b; opacity:1; transition:opacity var(--motion-handoff,180ms) ease-out; }
-#overlay > .page-visual-scene.transition-handoff-leaving { opacity:0; }
-#overlay > .page-visual-scene > .flow-transition { position:absolute; inset:0; width:100%; height:100%; margin:0; }
+.page-visual-handoff{
+& { position:fixed; inset:0; z-index:980; pointer-events:auto; overflow:hidden; }
+&[data-kind="page"] { background:#10171b; }
+&.leaving { pointer-events:none; }}
+#overlay > .page-visual-scene{
+& { z-index:1000; background:#10171b; opacity:1; transition:opacity var(--motion-handoff,180ms) ease-out; }
+&.transition-handoff-leaving { opacity:0; }
+& > .flow-transition { position:absolute; inset:0; width:100%; height:100%; margin:0; }}
 .page-visual-handoff[data-kind="panel"] { background:none; }
 #overlay[data-visual-pending="panel"] > .card { visibility:hidden; }
 .camp-entry-cut.page-cut-waiting,
-.camp-entry-cut.page-cut-waiting * { animation-play-state:paused!important; }
+.camp-entry-cut.page-cut-waiting *,
 #overlay[data-camp-entry="preparing"] #hubMain *,
 #overlay[data-camp-entry="preparing"] .camp-entry-ghost,
 #overlay[data-camp-entry="preparing"] > .card::after { animation-play-state:paused!important; }

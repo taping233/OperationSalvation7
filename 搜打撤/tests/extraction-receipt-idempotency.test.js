@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 /* SYS-02 结算回执·幂等（2026-10-03）：真实两键事务台架（extraction-recovery.test.js 同款）。
@@ -11,8 +12,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music: vi.fn(), sfx: vi.fn(), setDucked: vi.fn() },
   FX: { feedback: vi.fn() }, UI: { log: vi.fn(), refresh: vi.fn(), showOverlay: vi.fn(), hideOverlay: vi.fn(), act: vi.fn() },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10,
-    bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6,
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1),
     stashStart: 20, stashMax: 100, stashUpgradeSlots: 5 } },
 };
 await import('../game/src/cards/cards.js');
@@ -30,7 +30,7 @@ async function harness(slot = 2, failpoint = null) {
   localStorage.clear();
   Base.use(slot);
   (await Base.reset(slot));
-  RunStorage.write(slot, { seed: 'receipt-test', rngState: { seed: 'receipt-test', streams: { pocket: 0 } },
+  await RunStorage.write(slot, { seed: 'receipt-test', rngState: { seed: 'receipt-test', streams: { pocket: 0 } },
     hp: 20, maxHp: 30, inventory: [], ownedCards: [], myClass: 'wu' });
   const game = {
     pendingExtraction: null, runActive: true, extractionPending: false, mode: 'normal',

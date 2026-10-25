@@ -27,7 +27,7 @@ const GAME_PARTS = ['run/game.session.js', 'ui/game.menu.js', 'ui/game.menu.page
   'cards/cards.consts.js', 'cards/cards.rules.js', 'cards/cards.data.js', 'cards/cards.sync.js',
   'hub/game.hub.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js', 'hub/game.hub.bridge.js',
   'hub/game.bag.js', 'hub/game.bag.drag.js', 'hub/game.bag.settle.js', 'hub/game.bag.bridge.js', 'hub/game.bag.view2.js',
-  'hub/game.notes.js', 'hub/game.cardslib.js', 'game.boot.js'];
+  'ui/menu-slot-view.js', 'hub/game.notes.js', 'hub/game.cardslib.js', 'game.boot.js'];
 const BATTLE_PARTS = ['battle/core/battle.core.js', 'battle/runtime/battle.runtime.js', 'battle/core/battle.engine.js', 'battle/core/battle.engine.factory.js', 'battle/core/battle.enemy-phase.js',
   'battle/core/battle.engine.instance.js', 'battle/core/battle.engine.factory.domain.js', 'battle/core/battle.enemy-phase.domain.js', 'battle/runtime/battle.runtime.factory.js',
   'battle/view/battle.view.js', 'battle/view/battle.overlays.js', 'battle/view/battle.layers.js',
@@ -61,8 +61,7 @@ const mapJson = readJson('map.json');
 const scenesJson = readJson('scenes.json');
 const mapRisks = new Set(mapJson.encounters.map(e => e.risk));
 check('关卡·三环风险梯度已声明', mapRisks.has('低') && mapRisks.has('中') && mapRisks.has('高'), true);
-const eliteChances = mapJson.encounters.filter(e => e.elite).map(e => e.elite.chance);
-check('关卡·巨兽精英概率已声明（第3层3% / 第4层10%）', eliteChances.includes(0.03) && eliteChances.includes(0.10), true);
+check('关卡·第二至第四层各声明三种固定精英', mapJson.encounters.slice(1).every(e=>e.guaranteedElite?.length===3 && e.guaranteedElite.every(id=>mapJson.monsters[id]?.elite)), true);
 const mapStrategies = mapJson.encounters.map(e => e.strategy || '');
 check('遭遇·策略预告元数据', mapStrategies.some(s => s.startsWith('试探')) && mapStrategies.some(s => s.startsWith('核心区')), true);
 const eventSceneIds = JSON.stringify(scenesJson.eventSceneMeta);
@@ -84,7 +83,7 @@ check('敌人·全部图鉴具备行为钩子', Object.values(mapJson.monsters).
 check('事件·二选一与三选一分支', (() => {
   // v0.52 起事件分支文本真源在 narrative/events.ink（经 scripts/compile-narrative.mjs 编译）
   const ink = fs.readFileSync(path.join(HERE, '..', 'narrative', 'events.ink'), 'utf8');
-  return /tt6_goldmine[\s\S]*?收下 3 币/.test(ink) && /tt6_airdrop[\s\S]*?应急处理/.test(ink) && /tt6_chestdraw[\s\S]*?密封物资箱/.test(ink);
+  return gameSource.includes("'tt6-goldmine': () =>") && gameSource.includes("'tt6-chestdraw': () =>") && gameSource.includes("branchChoices.open('arrows')") && gameSource.includes('不启动开箱，获得木材与口粮各 1 张');
 })(), true);
 check('兼容·未知事件仍走旧效果', /return null;/.test(gameSource) && /applyEventEffect\(card\)/.test(gameSource), true);
 // 2026-10-01（ROOT-06）：bossCleanupPending 已随整理背包（Item 16）退役；现行契约是
@@ -122,7 +121,7 @@ check('BOSS·胜利领奖完成后直接保存结算', (() => {
 check('BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）', !/showBossPackCleanup\s*\(/.test(gameSource), true);
 check('档位概览仅展示游玩时间与已解锁成就', /游玩时间/.test(gameSource) && /已解锁成就/.test(gameSource), true);
 check('背包入口支持再次点击关闭', /if \(!refreshOnly && backpackOpen/.test(gameSource), true);
-check('背包缩略卡点击进入详情', /data-act="inspectStack"/.test(gameSource) && /function showBagCardDetail/.test(gameSource), true);
+check('背包缩略卡点击进入详情', /data-act="inspectStack"/.test(gameSource) && /bagAct\('inspectStack',\s*d => openBagZoom\(d\.name, d\.safe === '1', d\.pocket === '1', null, d\.uid\)\)/.test(gameSource) && /function openBagZoom\(/.test(gameSource), true);
 check('道具使用入口只在详情页生成', !/data-act="useStack"/.test(gameSource) && /data-act="useDetailCard"/.test(gameSource), true);
 // 2026-10-01（ROOT-06）：丢弃确认现经 bagSlots 门面调用（hub/game.bag.drag.js）。
 check('拖出背包弹出丢弃确认', /if \(!t\) \{ bagSlots\.showDiscardConfirm\(d\.name, d\.fromSafe\)/.test(gameSource), true);

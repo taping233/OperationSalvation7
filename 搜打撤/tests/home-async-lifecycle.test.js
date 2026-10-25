@@ -27,8 +27,8 @@ vi.mock('../game/src/hub/preparation.view.js', () => ({ buildPreparationViewMode
 vi.mock('../game/src/hub/game.hub.bridge.js', () => ({ slots: {}, homeRequestId: (type) => type }));
 vi.mock('../game/src/hub/game.hub.depart.js', () => ({ hubDeployHTML: () => '<div>deploy</div>', openDepartPrep: vi.fn(), deployPick: {}, setDeployPick: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.pages.js', () => ({
-  hubShopHTML: () => '', hubStashHTML: () => '', openStashCardView: vi.fn(), openRawItem: vi.fn(),
-  hubUpgradeHTML: () => '', hubClassesHTML: () => '', hubAchHTML: () => '', HUB_SHOP_GOODS: [], hubShopGoodsCard: vi.fn(),
+  hubStashHTML: () => '', openStashCardView: vi.fn(), openRawItem: vi.fn(),
+  hubUpgradeHTML: () => '', hubClassesHTML: () => '', hubAchHTML: () => '', HUB_SHOP_GOODS: [],
 }));
 vi.mock('../game/src/home/home.scene.js', () => { throw new Error('Retired Home scene evaluated'); });
 

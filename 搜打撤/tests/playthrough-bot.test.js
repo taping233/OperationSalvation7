@@ -1,10 +1,12 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 实机游玩（确定性指挥）：三局对局全部通过真实 BattleSession 逐张打出。
  * 断言底线：无崩溃 / 无 NaN / 战斗正常收尾；胜负都算有效对局。 */
+import { drainBattle } from './helpers/battle-fixtures.js';
 import { describe, it, expect, beforeAll } from 'vitest';
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
-window.SDT.MAP = { rules: { battleEnergy: 3, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } };
+window.SDT.MAP = { rules: { ...battleRules(3, 99, 15, 0, 5, 2) }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } };
 import fs from 'node:fs';
 await import('../game/src/cards/cards.js');
 const { BattleSession, viewApi } = await import('../game/src/battle/core/battle.core.js');
@@ -22,22 +24,8 @@ function makeGame(cards, cls, hp) {
     onBattleEnd(opts, played, win) { this.battleActive = false; this.lastBattleEnd = { win: !!win }; } };
   return g;
 }
-const tick = () => new Promise(r => setTimeout(r, 0));
-const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
-async function drain(maxLoops = 500) {
-  for (let i = 0; i < maxLoops; i++) { await tick(); const s = snap();
-    if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
-    if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
-    if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    } }
-  return snap();
-}
+const drain = (maxLoops = 500) => drainBattle(BattleSession, maxLoops);
 
 describe('实机游玩机器人（3 局）', () => {
   it('第一局：一图推进（L1 联邦遭遇 → 变异巢母首脑）', { timeout: 120_000 }, async () => {

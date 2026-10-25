@@ -47,13 +47,16 @@ describe('battle equipment power icons', () => {
     expect(host.querySelector('[data-act]')).toBeNull();
   });
 
-  it('anchors a bounded no-wrap icon row below vitals, outside the nameplate', () => {
+  it('keeps health below the figure and equipment in the shared side lane', () => {
     const css = readFileSync('game/css/battle-equipment.css', 'utf8');
     const view = readFileSync('game/src/battle/view/battle.layers.js', 'utf8');
-    expect(css).toMatch(/\.sts-unit-vitals\s*>\s*\.sts-equips\s*\{[^}]*flex-flow:\s*row nowrap/s);
-    expect(css).toMatch(/\.sts-unit-vitals\s*>\s*\.sts-equips\s*\{[^}]*pointer-events:\s*auto/s);
-    expect(css).toMatch(/\.sts-equips\s+\.sts-equip\s*\{[^}]*width:\s*48px/s);
-    expect(view).toContain('parts.vitals.appendChild(parts.equips)');
+    expect(css).toMatch(/\.sts-me \.sts-unit-actions\s*\{[^}]*flex-flow:\s*column nowrap/s);
+    expect(css).toContain('--battle-unit-control-size: 48px');
+    expect(css).toContain('width: var(--battle-unit-control-size)');
+    expect(css).toContain('pointer-events: auto');
+    expect(view).toContain('parts.vitals.appendChild(parts.hp)');
+    expect(view).toContain('parts.actions.appendChild(parts.equips)');
+    expect(view).toContain('parts.vitals.appendChild(parts.actions)');
     expect(view).not.toContain('np.appendChild(parts.equips)');
   });
 });

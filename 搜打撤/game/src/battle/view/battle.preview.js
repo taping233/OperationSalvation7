@@ -1,5 +1,6 @@
 // @ts-check
 import * as Combat from '../core/combat.js';
+import { dealMeasuredDamage } from '../core/battle.measured-damage.js';
 
 /** @typedef {import('../battle.snapshot.types.js').SnapshotBattleCard} SnapshotBattleCard */
 /** @typedef {import('../battle.snapshot.types.js').SnapshotFoe} SnapshotFoe */
@@ -31,7 +32,7 @@ function normalizeDesc(value) {
 /** @type {Record<string, string>} */
 const DAMAGE_TYPE_NAMES = Combat.TYPE_NAME;
 
-const EXACT_DAMAGE_KEYS = new Set(['op', 'amount', 'amountField', 'target', 'hitCount', 'hits', 'retarget']);
+const EXACT_DAMAGE_KEYS = new Set(['op', 'amount', 'amountField', 'target', 'hitCount', 'hits', 'retarget', 'infuseBonus', 'perInfusedInHand', 'spellPowerMul', 'when']);
 const FOLLOWUP_OPS = new Set(['curse', 'draw', 'cleanse', 'registerRule', 'blessing', 'armor', 'heal', 'coins']);
 
 // 只接纳完整扫描后可证明的单个 damage op；新参数默认降级，不能忽略后再宣称精确。
@@ -45,6 +46,8 @@ function structuredDamageSpec(card) {
   const damageOps = operations.filter(item => item?.op === 'damage');
   if (damageOps.length !== 1) return { unknown: true, reason: '包含多个或未声明的直接伤害流程，暂未完整预演' };
   const operation = damageOps[0];
+  if (operation.when && (Object.keys(operation.when).some(key => key !== 'infused') || typeof operation.when.infused !== 'boolean')) return { unknown: true };
+  for (const key of ['infuseBonus', 'perInfusedInHand', 'spellPowerMul']) if (operation[key] !== undefined && !Number.isFinite(operation[key])) return { unknown: true };
   if (Object.keys(operation).some(key => !EXACT_DAMAGE_KEYS.has(key)) ||
       (operation.target !== undefined && !['chosenEnemy', 'allEnemies'].includes(operation.target)) ||
       (operation.retarget !== undefined && operation.retarget !== 'livingFoes') ||
@@ -164,7 +167,7 @@ function declaredStatusEffects(card, mode) {
 /** @param {SnapshotFoe} foe */
 function cloneTarget(foe) {
   return {
-    hp: +foe.hp || 0,
+    hp: +foe.hp || 0, heartsMode: !!foe.heartsMode, damageCap: foe.damageCap,
     status: { ...(foe.status || {}) },
     defense: { shield: +(foe.defense?.shield || 0), armor: +(foe.defense?.armor || 0), guard: !!foe.defense?.guard },
   };
@@ -202,14 +205,8 @@ function previewAction({ snapshot, action, cardContext }) {
     unknownEffects: Object.freeze((cardContext.wholeCardRepeats || 1) !== 1 || cardContext.arrowRuneRepeat
       ? ['本次会重复结算'] : []), reasons: Object.freeze([]),
   });
-  if (cardContext.heartsMode) return unknown(cost, frozenTargets, '心形生命的伤害换算暂不支持预览');
-  if (cardContext.modifiers?.stealthStrike) return unknown(cost, frozenTargets, '破隐一击会改变本次伤害');
-  if (cardContext.modifiers?.nestDark1 || cardContext.modifiers?.nestDark3) return unknown(cost, frozenTargets, '黑暗羁绊会逐段改变伤害');
-  if (cardContext.modifiers?.bleedAmp || cardContext.modifiers?.vsFreezeBonus) return unknown(cost, frozenTargets, '流血或冰冻增伤尚未纳入直接伤害预览');
   if (cardContext.modifiers?.specialLifecycle) return unknown(cost, frozenTargets, '目标带有复活等特殊生命流程，暂未完整预演');
-  if (cardContext.modifiers?.allSpellsInfused || cardContext.selectedFuelUids?.length) return unknown(cost, frozenTargets, '注能会改变这张牌的伤害');
-  if ((cardContext.wholeCardRepeats || 1) !== 1) return unknown(cost, frozenTargets, '这张牌会整体重复结算');
-  if (cardContext.arrowRuneRepeat) return unknown(cost, frozenTargets, '箭矢符文会重复结算这张牌');
+  if (cardContext.modifiers?.vsFreezeBonus && !Number.isFinite(cardContext.freezeDamageBonus)) return unknown(cost, frozenTargets, '冰冻目标的伤害加成尚未提供');
 
   // AOE 数字仅对应当前指向目标；随机、未建模参数与额外伤害流程不猜数字。
   const exactSpec = semanticMatch(card, cardContext);
@@ -218,16 +215,16 @@ function previewAction({ snapshot, action, cardContext }) {
   const dmgType = card.dmgType;
   const cardDamage = Number(card.dmg);
   const damageGrowth = Number(cardContext.damageGrowth) || 0;
-  if (damageGrowth > 0) return unknown(cost, frozenTargets, '本场成长会改变这张牌的伤害');
   if (!dmgType || !DAMAGE_TYPE_NAMES[dmgType] || (!Number.isFinite(cardDamage) && exactSpec.amount === undefined)) {
     return unknown(cost, frozenTargets, '这张牌没有可预览的固定伤害流程');
   }
 
-  const hitsPlanned = exactSpec.hits;
-  const hasRetargetSpecial = exactSpec.retarget && hitsPlanned > 1 && snapshot.foes.some((candidate, index) => index !== targetIndex
-    && !candidate.dead && candidate.hp > 0
-    && (candidate.heartsMode || candidate.protected || candidate.affix === 'aegis'));
-  if (hasRetargetSpecial) return unknown(cost, frozenTargets, '后续转向目标带有特殊免伤或生命规则，无法精确预览');
+  const repeats = Math.max(1, cardContext.wholeCardRepeats || 1) + (cardContext.arrowRuneRepeat ? 1 : 0);
+  if (repeats > 1 && exactSpec.unknownEffects?.length) return unknown(cost, frozenTargets, '附加效果会在重放之间改变局面，仅基础伤害可确定');
+  const damageOp = card.rules?.triggers?.onPlay?.find(item => item.op === 'damage');
+  const infused = !!(cardContext.modifiers?.allSpellsInfused || cardContext.selectedFuelUids?.length);
+  const condition = /** @type {{ infused?: boolean } | undefined} */ (damageOp?.when);
+  const hitsPlanned = condition?.infused !== undefined && condition.infused !== infused ? 0 : exactSpec.hits * repeats;
   const targetsByIndex = snapshot.foes.map(cloneTarget);
   const target = targetsByIndex[targetIndex];
   const hpBefore = target.hp;
@@ -246,8 +243,12 @@ function previewAction({ snapshot, action, cardContext }) {
     for (let i = 0; i < hitsPlanned; i++) { hits.push(0); targetIndexesByHit.push(targetIndex); }
   } else {
     const attacker = { atk: +(snapshot.player?.atk || 0), spellPower: +(snapshot.player?.spellPower || 0), status: { ...(snapshot.pstat?.status || {}) } };
-    const amount = (exactSpec.amount ?? (cardDamage || 0)) + damageGrowth;
+    const amount = (exactSpec.amount ?? (cardDamage || 0)) + damageGrowth
+      + (infused ? Number(damageOp?.infuseBonus || 0) : 0)
+      + Number(cardContext.handInfuseCount || 0) * Number(damageOp?.perInfusedInHand || 0)
+      + Math.max(0, attacker.spellPower + Number(attacker.status.spellUp || 0)) * (Number(damageOp?.spellPowerMul ?? 1) - 1);
     let currentIndex = targetIndex;
+    let stealthed = !!cardContext.modifiers?.stealthStrike;
     for (let i = 0; i < hitsPlanned; i++) {
       if (!exactSpec.retarget && target.hp <= 0) break;
       let hitIndex = currentIndex;
@@ -255,7 +256,15 @@ function previewAction({ snapshot, action, cardContext }) {
       if (hitIndex < 0 || !targetsByIndex[hitIndex]) break;
       const hitTarget = targetsByIndex[hitIndex];
       const hpBeforeHit = hitTarget.hp;
-      const result = Combat.dealDamage(attacker, hitTarget, amount, dmgType);
+      const original = snapshot.foes[hitIndex];
+      const protectedTarget = original.protected && snapshot.foes.some((candidate, index) => candidate.protects && !candidate.dead && targetsByIndex[index].hp > 0);
+      const aegis = original.affix === 'aegis' && Number(snapshot.turn || 1) % 2 === 0 && !(Number(hitTarget.status.abreak) > 0);
+      let modified = amount;
+      if (Number(hitTarget.status.freeze) > 0) modified += Number(cardContext.freezeDamageBonus || 0);
+      if (cardContext.modifiers?.bleedAmp && dmgType === 'attack') modified += Number(hitTarget.status.bleed || 0);
+      if (modified > 0 && (cardContext.modifiers?.nestDark3 || cardContext.modifiers?.nestDark1 && original.maxHp && hitTarget.hp <= Number(original.maxHp) / 2)) modified += 1;
+      const result = protectedTarget || aegis ? { dealt: 0, log: [protectedTarget ? '庇护' : '免伤'] } : dealMeasuredDamage(Combat, attacker, hitTarget, modified, dmgType, { multiplier: stealthed ? 2 : 1 });
+      if (result.dealt > 0) stealthed = false;
       hits.push(result.dealt);
       targetIndexesByHit.push(hitIndex);
       if (hpBeforeHit > 0 && hitTarget.hp <= 0) defeatedTargetIndexes.push(hitIndex);

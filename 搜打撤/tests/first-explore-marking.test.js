@@ -1,3 +1,4 @@
+import { canvasTraps, audioGainFields } from './helpers/environment-fixtures.js';
 /* SYS-01 探索奖励（2026-10-03）：moveTo 首踏入格打标 explored 的真实链路行为。
  *   ① 已探索格间安全往返（回头路合法）：explored 不涨——撤离经验的计酬基数不变；
  *   ② 首次踏入新格：explored 入账——正激励保留；
@@ -13,15 +14,7 @@ installImmediateWebLocks();
 // eslint-disable-next-line no-constant-condition
 if (true) {
   const noopCtx = () => new Proxy(function () {}, {
-    get: (_t, k) => {
-      if (k === 'canvas') return null;
-      if (k === 'measureText') return () => ({ width: 10 });
-      if (k === 'createLinearGradient' || k === 'createRadialGradient' ||
-          k === 'createPattern' || k === 'getImageData') return () => ({ addColorStop: () => {}, data: [] });
-      return () => noopCtx();
-    },
-    set: () => true,
-    apply: () => noopCtx(),
+    ...canvasTraps(noopCtx),
   });
   window.HTMLCanvasElement.prototype.getContext = function () { return noopCtx(); };
 }
@@ -31,7 +24,7 @@ window.Audio = class FakeAudio {
 };
 window.AudioContext = window.AudioContext || class FakeAudioContext {
   constructor() { this.currentTime = 0; this.destination = {}; this.sampleRate = 44100; }
-  createGain() { return { connect: () => {}, disconnect: () => {}, gain: { value: 0, setValueAtTime: () => {}, linearRampToValueAtTime: () => {}, cancelScheduledValues: () => {}, setTargetAtTime: () => {} } }; }
+  createGain() { return { ...audioGainFields() }; }
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }

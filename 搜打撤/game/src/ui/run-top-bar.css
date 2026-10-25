@@ -1,0 +1,129 @@
+/* Shared physical header for map and modal battle/room surfaces. */
+body #runTopBar.run-topbar {
+  position:absolute; inset:0 0 auto; z-index:210; height:104px;
+  display:flex; align-items:center; gap:20px;
+  padding:0 24px 0 var(--archive-back-left); box-sizing:border-box;
+  background:none; border:0; box-shadow:none;
+  backdrop-filter:none; -webkit-backdrop-filter:none;
+  color:#eff4f6; pointer-events:none;
+}
+body #runTopBar.run-topbar > :is(.run-top-actions,.run-top-person,.run-top-resources,.run-top-detail) { pointer-events:auto; }
+body #runTopBar.run-topbar[hidden] { display:none!important; }
+/* Illustrated scenes can place white artwork directly beneath the shared HUD. */
+body:has(#overlay:not([hidden]) .illustrated-node) #runTopBar.run-topbar {
+  background:linear-gradient(180deg,#080f19ed 0%,#080f19d9 65%,#080f1900 100%);
+}
+body:has(#overlay:not([hidden]) .illustrated-node) #runTopBar #expeditionChapter {
+  color:#f3f5f6; text-shadow:0 1px 3px #000c;
+}
+body:has(#overlay:not([hidden]) .illustrated-node) #runTopBar #expeditionChapter :is(.chapter-phase,.chapter-phase span) {
+  color:#d8e0e5;
+}
+/* Shared flow: system keys including battle options, avatar/health, then resources. */
+#runTopBar.run-topbar > .run-top-actions {
+  position:static; display:flex; flex:none; flex-flow:row nowrap; align-items:center;
+  justify-content:flex-start; width:max-content; min-width:108px; gap:12px;
+}
+#runTopBar .run-top-person { flex:none; width:max-content; display:flex; align-items:center; justify-content:center; gap:14px; min-width:0; }
+#runTopBar .run-top-resources { display:flex; flex:none; align-items:center; margin-left:auto; gap:14px; }
+#runTopBar .run-top-secondary { position:absolute; top:100%; right:24px; display:flex; align-items:center; font-size:12px; pointer-events:none; }
+#runTopBar .run-top-secondary button { pointer-events:auto; }
+#runTopBar #heroAva { display:block!important; position:relative!important; inset:auto!important; transform:none!important; width:var(--archive-back-height)!important; min-width:var(--archive-back-height)!important; height:var(--archive-back-height)!important; flex:0 0 var(--archive-back-height)!important; padding:0; border:0; background:transparent; box-shadow:none; clip-path:none; overflow:visible!important; cursor:pointer; }
+#runTopBar #heroAva img { display:block; width:100%; height:100%; object-fit:cover; object-position:center top; mask-image:linear-gradient(#000 78%,transparent 100%); }
+#runTopBar #heroAva::after { content:none; }
+/* The moved health node keeps one appearance on map, battle and room surfaces.
+   Legacy body flags may still theme the original map controls, not this header. */
+body #runTopBar #hpHud {
+  position:relative!important; display:flex!important; order:0;
+  flex:0 0 164px; width:164px; min-width:164px; height:var(--archive-back-height);
+  align-items:center; gap:0; box-sizing:border-box;
+  padding:0; margin:0!important; inset:auto!important; transform:none!important;
+  border:0; border-radius:0; background:transparent; box-shadow:none; clip-path:none;
+  overflow:visible; isolation:isolate; cursor:default;
+}
+body #runTopBar #hpHud .hp-hud-body {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  width:100%; min-width:0; height:var(--archive-back-height); box-sizing:border-box; gap:4px; padding:0;
+  border:0; background:transparent; box-shadow:none;
+}
+body #runTopBar #hpHud .map-health-heading {
+  display:flex; flex:none; align-items:center; gap:7px; height:14px; margin:0; padding:0;
+  color:#aebfc9; background:transparent; font:500 13px/14px var(--font-ui); letter-spacing:.03em;
+}
+body #runTopBar #hpHud #hpText {
+  position:static; inset:auto; display:block; flex:none; width:100%; height:28px;
+  margin:0; padding:0; transform:none; text-align:left; white-space:nowrap;
+  color:#eff4f6; font:600 26px/28px var(--font-num); font-variant-numeric:tabular-nums;
+  letter-spacing:0; text-shadow:none;
+}
+body #runTopBar #hpHud #hpText .hp-rest { color:inherit; font:inherit; letter-spacing:inherit; text-shadow:none; }
+body #runTopBar #hpHud #hpBarWrap {
+  position:relative; display:block; flex:none; width:100%; height:4px;
+  margin:0; padding:0; border:0; border-radius:0; overflow:hidden;
+  background:#a9c2bd33; box-shadow:none; animation:none; transform:none; will-change:auto;
+}
+body #runTopBar #hpHud #hpBar {
+  position:relative; display:block; width:100%; height:100%; border:0; border-radius:0;
+  background:#91b5b0; box-shadow:none; overflow:hidden; transition:width 260ms ease;
+}
+body #runTopBar #hpHud #hpBar::after { content:none; }
+#runTopBar #resHud { position:static!important; display:flex!important; align-items:center; gap:20px; order:0; padding:0!important; background:none!important; border:0!important; box-shadow:none!important; transform:none!important; }
+#runTopBar #expeditionChapter { position:static!important; display:flex!important; flex:none; order:0; flex-flow:row nowrap; align-items:center; justify-content:flex-start; gap:12px; transform:none!important; width:auto!important; padding:0; border:0; background:none; box-shadow:none; text-align:left; white-space:nowrap; pointer-events:none; }
+#runTopBar #expeditionChapter .chapter-phase { margin:0; }
+#runTopBar .save-status { display:flex; align-items:center; gap:10px; font-size:12px; opacity:.85; }
+#runTopBar .save-status button { width:auto; min-height:24px; height:auto; font-size:12px; }
+#runTopBar .run-top-detail { position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%); width:380px; max-width:calc(100% - 40px); box-sizing:border-box; padding:20px; border:1px solid #b7cbbd; border-radius:4px; background:#182c36; box-shadow:0 12px 32px #07131c80; }
+#runTopBar .run-top-detail[hidden] { display:none; }
+#runTopBar .run-top-detail h2 { margin:0 0 10px; font-size:20px; }
+#runTopBar .run-top-detail p { font-size:15px; line-height:1.65; }
+#runTopBar .run-top-detail button { width:auto; padding:0 18px; height:36px; }
+#runTopBar :is(button,[role="button"]):focus-visible { outline:2px solid #f3d996; outline-offset:3px; }
+body:not(.lobby) #topBtns { top:116px; }
+/* Explanations open on activation, including when the header is inside battle. */
+#runTopBar #resHud .map-resource-tip { display:none!important; }
+#runTopBar #hpHud .map-resource-tip { display:none!important; }
+/* Legacy archive/map buttons used absolute coordinates. Shared navigation owns
+   their geometry in both surfaces, including high-specificity archive skins. */
+#runTopBar .run-top-actions > :is(#btnHome,#btnMute,#btnBattleOptions) {
+  position:static!important; inset:auto!important; translate:none!important;
+  transform:none!important; margin:0!important; padding:0!important;
+  display:inline-flex!important; align-items:center; justify-content:center;
+  flex:0 0 var(--archive-back-width); width:var(--archive-back-width)!important; height:var(--archive-back-height)!important;
+  min-width:var(--archive-back-width)!important; min-height:var(--archive-back-height)!important; max-width:var(--archive-back-width);
+}
+
+/* Button semantics retain the existing map resource presentation and intrinsic width. */
+#runTopBar #resHud .chip-mini { display:inline-flex; align-items:center; width:auto; cursor:pointer; }
+
+/* Header lifecycle visibility belongs to this component alone. */
+body.lobby #runTopBar, body:has(#cardZoom) #runTopBar, body:has(#actionConfirmation) #runTopBar { display:none; }
+/* Focused pages provide their own return/selection navigation. Keep room reward
+   summaries on the shared resource header and leave the card grid unchanged. */
+body #overlay:has(.shop-pg.sc-shop) > #runTopBar.run-topbar,
+body #overlay.bag-full > #runTopBar.run-topbar,
+body #overlay:has(.pg.settings-page.settings-tabbed .settings-layout > .settings-nav) > #runTopBar.run-topbar,
+body #overlay:has(.battle-decision[data-decision-kind="discover"] [data-battle-discover]):has(.battle-decision[data-decision-kind="discover"] .battle-decision-actions [data-act="btDiscoverCancel"]) > #runTopBar.run-topbar { display:none; }
+body.reduce-motion #runTopBar #hpHud #hpBar { transition:none; }
+@media (prefers-reduced-motion:reduce) {
+  body #runTopBar #hpHud #hpBar { transition:none; }
+}
+/* System controls keep transparent hit targets, with no idle frames. */
+#runTopBar .run-top-actions > :is(#btnHome,#btnMute) {
+  border:0; background:transparent; box-shadow:none;
+}
+#runTopBar .run-top-actions > :is(#btnHome,#btnMute)::before,
+#runTopBar .run-top-actions > :is(#btnHome,#btnMute)::after { content:none; }
+/* Match the exit glyph's canvas, stroke and contrast in both audio states. */
+#runTopBar #btnMute { color:#eff4f6; }
+#runTopBar #btnMute > svg { width:24px; height:24px; flex:none; }
+#runTopBar #btnBattleOptions { color:#eff4f6; border:0; background:transparent; box-shadow:none; cursor:pointer; }
+#runTopBar #btnBattleOptions > svg { display:block; width:24px; height:24px; flex:none; }
+#runTopBar #btnBattleOptions[hidden] { display:none!important; }
+#runTopBar #btnBattleOptions::before,#runTopBar #btnBattleOptions::after { content:none; }
+
+#runTopBar .run-top-location { position:absolute; left:50%; top:var(--archive-back-top); height:var(--archive-back-height); display:flex; align-items:center; transform:translateX(-50%); pointer-events:none; }
+
+#runTopBar .save-status:not([data-state="failed"]):not([data-state="saving"]) { display:none; }
+
+/* The merchant and acquisition desk use their own heading and resources. */
+body:not(.lobby):has(#runTopBar:not([hidden])) #overlay:has(.shop-pg.sc-shop) { padding-top:0; }

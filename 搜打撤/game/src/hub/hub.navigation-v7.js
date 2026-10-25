@@ -2,7 +2,7 @@ import { esc } from '../core/shared.js';
 import { baseHomeIconV10 } from './hub.home-icons-v10.js';
 
 const rooms = [
-  ['deploy', '基地'], ['classes', '配置'], ['stash', '后勤'], ['shop', '交易所'],
+  ['deploy', '基地'], ['classes', '人物'], ['stash', '后勤'], ['shop', '交易所'],
   ['ach', '收藏室'], ['upgrade', '建设'], ['courtyard', '庭院'],
 ];
 

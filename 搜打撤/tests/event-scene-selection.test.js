@@ -23,7 +23,7 @@ describe('事件选项阅读与执行边界', () => {
     page.innerHTML = scene('<button class="evt-opt" data-act="choose" data-i="0"><b>接通</b><span>获得补给</span></button><button class="evt-opt" data-act="choose" data-i="1"><b>离开</b><span>保持现状</span></button>');
     expect(page.querySelector('.event-scene').dataset.eventChoiceCount).toBe('2');
     expect(page.querySelector('.event-choice-confirm').disabled).toBe(true);
-    expect(page.querySelectorAll('.node-summary > .evt-opt')).toHaveLength(2);
+    expect(page.querySelectorAll('.node-summary .evt-opt')).toHaveLength(2);
     expect(page.querySelector('.evt-opt span').textContent).toBe('获得补给');
     expect(page.querySelector('.event-resources')).toBeNull();
     expect(page.querySelector('.event-decisions .node-summary')).not.toBeNull();

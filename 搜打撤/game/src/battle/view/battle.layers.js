@@ -1,6 +1,7 @@
 /** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { isTargetableEnemy } from '../core/battle.target-session.js';
 import { requiresInfusion } from '../effects/battle.infusion.js';
+import { statusChipsHTML, reconcileStatusChips } from './battle.status-chips.js';
 import { isHandArrivalEvent } from '../core/battle.card-presentation.js';
 /* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：手牌与单位区常驻层（批次A/B 差分更新）+ 状态角标 statusChips/curseChips（随用迁入）。
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
@@ -10,13 +11,17 @@ import { rect as uiRect, scale as uiScale } from '../../ui/ui-scale.js';
 import { characterName } from '../../core/characters.js';
 import { esc, escAttr } from '../../core/shared.js';
 import { assetUrl } from '../../core/asset-url.js';
+import { enemyPortraitProfile } from '../../core/enemy-portrait-presentation.js';
 import { fanLayout } from '../core/battle.hand.js';
 import { createHandHitController } from './battle.hand-hit.js';
 import { handDisplayLayout as referenceHandLayout } from './battle.hand-layout.js';
 import { calculateEnemyIntent } from '../core/battle.enemy-intent.js';
-import { intentViewModel } from './battle.intent.view.js';
+import { intentViewModel, intentSummary } from './battle.intent.view.js';
+import { enemyDetails } from './battle.enemy-details.js';
 import { equipmentInfoHTML } from '../../ui/equipment-info.js';
+import { registerCardStateProvider } from '../../cards/card-state-presentation.js';
 import { playerCombatStatsHTML } from '../../ui/battle-hud-info.js';
+import { setRunTopBarBattleStats } from '../../ui/run-top-bar.js';
 import { isAreaEffect, itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { storeGet, storeSet } from '../../core/storage.js';
 /* W5-03（2026-09-27 R2）：首次意图图例样式（battle.css 冻结 → head 注入，W2-01 同款）。 */
@@ -52,6 +57,7 @@ function showIntentLegend({ devSample, battleToken }) {
   return true;
 }
 import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, findEffectiveCard as findCard, infusionFuelReason, infuseOf, targetSide, unplayableReason, handCurseSpecs } from '../core/battle.core.js';
+registerCardStateProvider(() => window.SDT.game?.battleActive ? { get snapshot() { return getSnapshot(); }, effCostOf } : null);
   const resolveSlam = commands.resolveSlam;
   const resolveDart = commands.resolveDart;   // 血毒双镖二段点选（2026-09-16 留言）
   const useItemCmd = commands.useItem;
@@ -108,30 +114,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     e.stopPropagation();
     targets[(index + (e.key === 'ArrowRight' ? 1 : -1) + targets.length) % targets.length].focus();
   }
-  // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
-  // compact（敌方名牌收纳，迭代评审 09-20）：总数>4 时退化为「图标+层数」——纯图标会丢层数（美术岗复核口径）；
-  // 玩家名牌不传 compact，维持原样。09-20 老板：词条触摸讲解——data-term 交 term-tips.js 弹自绘讲解框
-  // （系统 title 已被 game.boot 全局移除，触屏也无效），讲解框自带全名+全文，compact 不再需要分叉文案
-  function statusChips(status, opts) {
-    const compactAll = !!(opts && opts.compact);
-    const activeBuffs = Combat.BUFFS.filter(k => (status[k] || 0) > 0);
-    const activeCurses = Combat.CURSES.filter(k => (status[k] || 0) > 0);
-    const compact = compactAll && (activeBuffs.length + activeCurses.length) > 4;
-    const buffs = activeBuffs.map(k => {
-      const m = Combat.BUFF_META[k];
-      const v = m.timed ? ` ${status[k]}回合` : (m.flag ? '' : ` ${status[k]}`);
-      const label = compact ? `${status[k]}${m.timed ? '回合' : ''}` : `${m.name}${v}`;
-      return `<span class="bt-buff b-${k}" data-term="${k}">${m.icon} ${label}</span>`;
-    });
-    const curses = activeCurses.map(k => {
-      const m = Combat.CURSE_META[k];
-      const txt = m.stack ? `${m.name} ${status[k]}` : `${m.name} ${status[k]}回合`;
-      const label = compact ? (m.stack ? `${status[k]}` : `${status[k]}回合`) : txt;
-      return `<span class="bt-curse c-${k}" data-term="${k}">${m.icon} ${label}</span>`;
-    });
-    return buffs.concat(curses).join(' ');
-  }
-  const curseChips = statusChips;   // 兼容旧调用名
+  const curseChips = (status, opts) => statusChipsHTML(status, Combat, opts);
   // ---------- 手牌常驻层（架构批次A：手牌区不随整屏重渲染重建） ----------
   // ovBody 每次渲染整块重建，但 .sts-hand 由本模块持有、跨渲染复用（showOverlay 之后
   // replaceWith 挂回新舞台）。每叠同名卡一个常驻槽位节点：
@@ -263,7 +246,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const isSelf = infusingNow && g.self;
     const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
     const targeted = !infusingNow && pendingTarget && pendingTarget.uid === uid;
-    const effCost = effCostOf(g.card, uid);
+    const effCost = g.costOverride?.v ?? effCostOf(g.card, uid);
     const blocked = infusingNow ? (!isSelf && infusionFuelReason(uid)) : unplayableReason(g.card, ctx.handRuleContext);   // 无法使用的卡：虚化禁用
     const blockedReason = blocked || (infusingNow ? '' : busy ? '当前动作正在结算' : effCost > energy ? `能量不足：需要 ${effCost}，当前 ${energy}` : '');
     const rawSide = (!infusingNow && !blocked) ? targetSide(g.card) : null;
@@ -298,11 +281,10 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     // 需求 #16：费用变动显示在卡牌左上角费用处——降低 = 绿字，提高 = 红字
     // （天狼长弓等「变为0费」的临时卡带 _baseCost：按原费用对比显示绿色 0）
     const baseCost = (g.card._baseCost != null) ? g.card._baseCost : g.card.cost;
-    const costDiff = effCost !== baseCost;
     // 注能角标直接进入选材料，不消耗卡牌。
     const infChip = (!infusingNow && !blocked && infN > 0)
       ? `<button class="bt-infchip" data-act="btInfuseStart" data-uid="${uid}"
-          title="开始注能(${infN})，点击手牌选择材料">[[icon:crystal]] 注能${infN}</button>`
+          title="开始注能(${infN})，点击手牌选择材料">[[icon:infuse]] 注能${infN}</button>`
       : '';
     const cnt = g.uids.length > 1 ? `<span class="bt-count" title="同名卡 ${g.uids.length} 张堆叠为一叠">×${g.uids.length}</span>` : '';
     // 诅咒之刃（2026-09-10 需求）：卡面规则阅读区显示手牌招式（武术+法术）提供的全部诅咒
@@ -323,7 +305,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
         })()
       : '';
     const inner = SDT.Cards.cardHTML(g.card, 'sm', {
-        ...(costDiff ? { costOverride: { v: effCost, base: baseCost } } : {}),
+        costOverride: { v: effCost, base: baseCost },
         ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0
           ? { dmgOverride: { bonus: spellBonus } } : {}),
       })
@@ -656,41 +638,30 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     // A rebuilt HUD owns the fresh tools; the retained player may still carry the
     // previous stage's tools. Replace those rather than selecting them first.
     // Incremental renders have no HUD placeholder and keep the live tools intact.
+    const toolsHost = selfParts.actions;
     const cachedTools = mounts?.tools;
-    const validTools = cachedTools && (cachedTools.parentElement === hud || cachedTools.parentElement === selfUnit);
+    const validTools = cachedTools && (cachedTools.parentElement === hud || cachedTools.parentElement === toolsHost || cachedTools.parentElement === selfUnit);
     if (validTools) ensureMountClass(cachedTools, 'sts-hand-tools');
     const careerTools = mounts
-      ? (validTools ? cachedTools : hud.querySelector(':scope > .sts-hand-tools') || selfUnit.querySelector(':scope > .sts-hand-tools')
+      ? (validTools ? cachedTools : hud.querySelector(':scope > .sts-hand-tools') || toolsHost.querySelector(':scope > .sts-hand-tools') || selfUnit.querySelector(':scope > .sts-hand-tools')
         || (cachedTools?.nodeType === 1 ? cachedTools : null))
-      : body.querySelector('.sts-hud > .sts-hand-tools');
+      : body.querySelector('.sts-hud > .sts-hand-tools') || toolsHost.querySelector(':scope > .sts-hand-tools');
     if (careerTools) ensureMountClass(careerTools, 'sts-hand-tools');
-    if (careerTools && careerTools.parentElement !== selfUnit) {
-      const previousTools = selfUnit.querySelector(':scope > .sts-hand-tools');
+    if (careerTools && careerTools.parentElement !== toolsHost) {
+      const previousTools = toolsHost.querySelector(':scope > .sts-hand-tools');
       if (previousTools) previousTools.replaceWith(careerTools);
-      else selfUnit.appendChild(careerTools);
+      else toolsHost.prepend(careerTools);
     }
     if (mounts) mounts.tools = careerTools;
     return { alliesMount, foesMount };
   }
-  // 单位节点固定骨架：立绘、脚下生命条与装备图标、上方属性/状态/敌方意图，各段按签名差分。
+  // 单位固定骨架：立绘、脚下生命条与技能/装备共同行、上方属性/状态/意图，各段按签名差分。
   function makeUnitSkeleton(slot, opts = {}) {
     const parts = {};
     if (opts.intent) {
       parts.intent = document.createElement('div');
       parts.intent.className = 'sts-intent';
       parts.intent.style.display = 'none';
-      parts.intent.tabIndex = 0;
-      parts.intent.setAttribute('role', 'button');
-      parts.intent.setAttribute('aria-expanded', 'false');
-      parts.intent.addEventListener('click', event => {
-        event.stopPropagation(); // 查看意图不触发单位身上的出牌确认
-        parts.intent.setAttribute('aria-expanded', String(parts.intent.classList.toggle('is-open')));
-      });
-      parts.intent.addEventListener('keydown', event => {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
-        event.preventDefault(); event.stopPropagation();
-        parts.intent.setAttribute('aria-expanded', String(parts.intent.classList.toggle('is-open')));
-      });
     }
     parts.fig = document.createElement('div');
     parts.fig.className = 'sts-figure';
@@ -699,8 +670,15 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     np.className = 'sts-nameplate';
     parts.head = document.createElement('div');
     parts.head.className = 'sts-headrow';
-    parts.head.hidden = true;
-    parts.head.style.display = 'none';
+    if (opts.intent) {
+      parts.head.tabIndex = 0;
+      parts.head.setAttribute('data-ui-tip', '');
+      parts.head.addEventListener('click', event => event.stopPropagation());
+      parts.head.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); event.stopPropagation(); }
+      });
+    }
+
     parts.hp = document.createElement('div');
     parts.hp.className = 'bt-hpwrap sts-hp';
     parts.hpGhost = document.createElement('i');   // STS2 式幽灵条：掉血时延迟收缩的黄尾
@@ -719,19 +697,28 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     parts.vitals.className = 'sts-unit-vitals';
     parts.vitals.appendChild(parts.hp);
     slot.appendChild(parts.vitals);
-    parts.stats = document.createElement('div');
-    parts.stats.className = 'sts-stats';
-    parts.chips = document.createElement('div');
-    parts.chips.className = 'sts-chips';
-    np.appendChild(parts.head); np.appendChild(parts.stats); np.appendChild(parts.chips);
+    np.appendChild(parts.head);
+    if (!opts.intent) {
+      parts.stats = document.createElement('div');
+      parts.stats.className = 'sts-stats';
+      parts.chips = document.createElement('div');
+      parts.chips.className = 'sts-chips';
+      np.appendChild(parts.stats); np.appendChild(parts.chips);
+    }
     if (opts.equips) {
+      parts.actions = document.createElement('div');
+      parts.actions.className = 'sts-unit-actions';
+      parts.actions.setAttribute('role', 'group');
+      parts.actions.setAttribute('aria-label', '技能与装备');
       parts.equips = document.createElement('div');
       parts.equips.className = 'sts-equips';
       parts.equips.style.display = 'none';
-      parts.vitals.appendChild(parts.equips);
+      parts.actions.appendChild(parts.equips);
+      parts.vitals.appendChild(parts.actions);
     }
-    // 姓名、属性、状态与意图仍同组；生命条独立放在立绘之后，由布局锚定脚下。
-    // The intent retains its own input handlers and never confirms a target.
+    // Head-level information has its own anchor; HP and equipment stay below
+    // the figure, so growing equipment rows cannot move or cover combat status.
+    // Enemy details belong to the name; intent icons remain passive readouts.
     if (parts.intent) np.appendChild(parts.intent);
     slot.appendChild(np);
     return parts;
@@ -741,6 +728,11 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     if (sig[key] === html) return;
     sig[key] = html;
     el.innerHTML = SDT.Icons.rich(html);
+  }
+  function setStatusSection(el, sig, html) {
+    if (sig.chips === html) return;
+    sig.chips = html;
+    reconcileStatusChips(el, html, value => SDT.Icons.rich(value));
   }
   // Compare live DOM values so retained or externally changed nodes stay authoritative.
   // Unlike optional hand attributes, native metadata setters stringify null/undefined.
@@ -774,6 +766,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     if (sig.hpTxt !== txt) { sig.hpTxt = txt; parts.hpTxt.textContent = txt; }
   }
   function updateUnits(mounts, snapshot, ctx) {
+    setRunTopBarBattleStats(UI, snapshot);
     ctx = { ...ctx, devSample: !!snapshot.opts?.devSample, battleToken: snapshot.battleToken,
       turn: snapshot.turn || 1, playerStatus: snapshot.pstat?.status || null };
     updateSelfUnit(snapshot, ctx);
@@ -786,6 +779,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     setSection(selfParts.fig, sig, 'fig',
       player.myClass && SDT.Art.has(player.myClass) ? (SDT.Art.battleArt ? SDT.Art.battleArt(player.myClass) : SDT.Art.classArt(player.myClass)) : SDT.Icons.img('helmet'));
     const playerName = characterName(player.characterId || player.myClass);
+    setUnitAttribute(selfUnit, 'data-character-id', player.characterId || '');
     setUnitAttribute(selfParts.fig, 'role', 'img');
     setUnitAttribute(selfParts.fig, 'aria-label', playerName);
     setUnitHP(selfParts, sig, player.hp, player.maxHp, !sig.init);
@@ -795,8 +789,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     setUnitAttribute(selfParts.armor, 'aria-label', `护甲 ${pdef.armor || 0}`);
     // 常驻显示合计，强化来源可聚焦查看；护甲已在生命栏旁显示。
     setSection(selfParts.stats, sig, 'stats', playerCombatStatsHTML(player, pdef, pstat.status));
-    setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status) + (snapshot.playerEffects || []).map(effect =>
-      `<span class="bt-buff" tabindex="0" data-player-effect="${escAttr(effect.key)}" data-term="${escAttr(effect.key)}" data-ui-tip data-ui-tip-title="${escAttr(effect.name)}" data-ui-tip-text="${escAttr(effect.description)}" data-ui-tip-note="${escAttr(effect.duration)}">[[icon:${escAttr(effect.icon)}]] ${esc(effect.name)} ${esc(effect.duration)}</span>`).join(' '));
+    setStatusSection(selfParts.chips, sig, curseChips(pstat.status) + (snapshot.playerEffects || []).map(effect =>
+      `<span class="bt-buff" tabindex="0" data-status-key="effect:${escAttr(effect.key)}" data-player-effect="${escAttr(effect.key)}" data-term="${escAttr(effect.key)}" data-ui-tip data-ui-tip-title="${escAttr(effect.name)}" data-ui-tip-text="${escAttr(effect.description)}" data-ui-tip-note="${escAttr(effect.duration)}">[[icon:${escAttr(effect.icon)}]] ${esc(effect.name)} ${esc(effect.duration)}</span>`).join(' '));
     // 状态挂件（P2）：玩家自己被冰冻时同样点亮常驻状态光
     selfUnit.classList.toggle('fx-frozen', (pstat.status.freeze || 0) > 0);
     const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
@@ -804,18 +798,38 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     setTargetable(selfUnit, !!((pendingCard && targetSide(pendingCard.card) === 'self') || (clickCard && targetSide(clickCard.card) === 'self')), `${playerName}，自己，按 Enter 确认目标`);
     if (!selfUnit.classList.contains('can-target')) selfUnit.setAttribute('aria-label', `${playerName}，自己`);
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
-    const equipsHTML = (equipped || []).map(e => equipmentInfoHTML(e, snapshot.busy)).join('');
+    const equipsHTML = (equipped || []).map(e => equipmentInfoHTML(e, snapshot.busy, snapshot)).join('');
     setSection(selfParts.equips, sig, 'equips', equipsHTML);
     const equipsDisplay = equipsHTML ? '' : 'none';
     if (selfParts.equips.style.display !== equipsDisplay) selfParts.equips.style.display = equipsDisplay;
     sig.init = true;
   }
-  // 随从位（Q4 老板定向：征召步兵等——替你承伤、每回合自动攻击）
+  // 随从替你承伤、每回合自动攻击；旧召唤名称也可匹配现行形象。
   function allyFigure(name) {
     if (SDT.game?.nestActive) return SDT.Icons.img('runner');
     const source = {
+      '米高芬': 'assets/portraits/allies/migaofen-v1.webp',
+      '步兵': 'assets/portraits/allies/migaofen-v1.webp',
       '联邦巡防兵': 'assets/portraits/allies/federal-patrol-v1.webp',
       '联邦射手': 'assets/portraits/allies/federal-shooter-v1.webp',
+      '封锁线枪手': 'assets/portraits/enemies/archer.webp',
+      '截道拾荒者': 'assets/portraits/enemies/bandit.webp',
+      '硬化感染者': 'assets/portraits/enemies/orc_axe.webp',
+      '增生感染者': 'assets/portraits/enemies/grass_el.webp',
+      '封锁线突击兵': 'assets/portraits/enemies/cavalry.webp',
+      '裂颚匍行体': 'assets/portraits/enemies/wolf_rider.webp',
+      '板壳畸变体': 'assets/portraits/enemies/orc_axe.webp',
+      '囊生畸变体': 'assets/portraits/enemies/grass_el.webp',
+      '灼囊畸变体': 'assets/portraits/enemies/fire_el.webp',
+      '渗蚀畸变体': 'assets/portraits/enemies/water_el.webp',
+      '封街巨躯': 'assets/portraits/enemies/dragon.webp',
+      '封控指挥官': 'assets/portraits/enemies/boss_general.webp',
+      '囊巢母体': 'assets/portraits/enemies/boss_orc.webp',
+      '隔离区看守': 'assets/portraits/enemies/boss_elem.webp',
+      '拾能囊虫': 'assets/portraits/enemies/greedy_imp.webp',
+      '覆板缄默者': 'assets/portraits/enemies/tin_mute.webp',
+      '封识信徒': 'assets/portraits/enemies/cultist.webp',
+      '黑诊配药人': 'assets/portraits/enemies/fake_apothecary.webp',
       '封印肢体': 'assets/portraits/allies/sealed-limb-v1.webp',
     }[name];
     return typeof source === 'string'
@@ -854,7 +868,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
         setUnitHP(rec.parts, rec.sig, a.hp, a.maxHp, !rec.sig.init);
         setSection(rec.parts.stats, rec.sig, 'stats', `[[icon:swords]] 攻 ${a.atk}`);
       }
-      setSection(rec.parts.chips, rec.sig, 'chips', '');
+      setSection(rec.parts.head, rec.sig, 'head', esc(a.name));
+      setStatusSection(rec.parts.chips, rec.sig, curseChips(a.status || {}, {compact:true}));
       rec.sig.init = true;
       ordered.push(rec);
     });
@@ -871,6 +886,14 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   function updateFoes(mount, foes, ctx) {
     setUnitVariable(mount, '--battle-foe-count', String(Math.max(1, foes.length)));
     setUnitAttribute(mount, 'data-count', String(foes.length));
+    const portraits = foes.map(foe => enemyPortraitProfile(foe.id) || {
+      height:ctx.isBoss ? 318 : 236, aspect:.65, imageScale:1, bottom:0, x:-50,
+    });
+    // All bodies share one fitted unit. Wide silhouettes must not be scaled
+    // down again by their individual slot while narrow silhouettes keep height.
+    const packWidth = portraits.reduce((sum, portrait) => sum + Math.max(180, portrait.height * portrait.aspect) + 24, 0);
+    setUnitVariable(mount, '--enemy-pack-width', Math.max(1, packWidth));
+    setUnitVariable(mount, '--enemy-pack-gaps', `${Math.max(0, foes.length - 1) * 28}px`);
     const ordered = [];
     const seen = {};
     foes.forEach((f, idx) => {
@@ -922,8 +945,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       const reattached = !slot.isConnected;
       if (reattached) { sig.hpPct = null; sig.hpTxt = null; }
       const aff = f.affix && AFFIX_META[f.affix];
+      if (slot.hasAttribute('title')) slot.removeAttribute('title');
       const immune = aegisBlocked(f);
-      slot.classList.toggle('is-boss', !!(ctx.isBoss || f.affix));
       slot.classList.toggle('dead', !!f.dead);
       slot.classList.toggle('bt-death-pending', !!f.deathFxPending);
       slot.classList.toggle('aegis', !!immune);
@@ -937,9 +960,15 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       setTargetable(slot, !!(cardTargetsEnemy || itemTargetsEnemy || ctx.slamPending || ctx.dartPending) && isTargetableEnemy(f, idx, ctx.pendingTarget?.excludedTargetIndex), `${f.name}，按 Enter 确认目标`);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
       if (!slot.classList.contains('can-target')) slot.setAttribute('aria-label', `${f.name}${f.dead ? '，已倒下' : '，敌方单位'}`);
       setUnitAttribute(slot, 'data-foe-id', f.id || f.name);
+      const portrait = portraits[idx];
+      setUnitVariable(slot, '--enemy-body-height', portrait.height);
+      setUnitVariable(slot, '--enemy-body-width', portrait.height * portrait.aspect);
+      setUnitVariable(slot, '--enemy-body-aspect', portrait.aspect);
+      setUnitVariable(slot, '--enemy-image-scale', portrait.imageScale);
+      setUnitVariable(slot, '--enemy-art-bottom', portrait.bottom);
+      setUnitVariable(slot, '--enemy-art-x', `${portrait.x}%`);
       setUnitAttribute(slot, 'data-eidx', idx);
       setUnitVariable(slot, '--foe-idle-phase', `${-(idx * 0.61)}s`);
-      setUnitAttribute(slot, 'title', aff ? aff.name + '：' + aff.desc : '');
       // 残留的指向预览气泡清掉（常驻节点上它不会随重建消失）
       const fp = /** @type {BattleElement} */ (slot.querySelector('.bt-fpreview'));
       if (fp) fp.remove();
@@ -953,27 +982,24 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       slot.classList.toggle('fx-frozen', frozen);
       /** @type {{icon: string, label: string, damage?: number | null, kind: string, hits?: number, totalDamage?: number, bleedBonus?: number}[]} */
       const intents = frozen
-        ? [{ icon: '[[icon:crystal]]', label: '冰冻·无法行动', damage: null, kind: 'frozen' }]
+        ? [{ icon: '[[icon:status-freeze]]', label: '冰冻·无法行动', damage: null, kind: 'frozen' }]
         // 意图伤害渲染时现算（U12-b/2026-09-29 夜班 F2）：foe.intent 仍是回合末快照
         // （快照序列化/读档/AI 顾问消费契约不动），角标按实时 foe.atk+玩家流血重算——
         // 玩家回合内挂 atkDown 后显示值与 playerTakeHit 实伤一致（STS2 RefreshIntents 的渲染层等价）。
         : intentViewModel(calculateEnemyIntent(f, ctx.turn || 1, ctx.playerStatus));
-      // 常驻摘要保留实际动作与阶段条件，完整详情可悬停、聚焦或点击展开。
-      // 基础攻击、流血来源和总伤放在同一份详情内，不挤占姓名行。
+      // All enemies share one visible name and one hover/focus explanation.
+      setSection(parts.head, sig, 'head', esc(f.name));
+      setUnitAttribute(parts.head, 'data-ui-tip-title', f.name);
+      setUnitAttribute(parts.head, 'data-ui-tip-text', enemyDetails(f, intents, Combat, aff));
       if (!f.dead && intents.length) {
-        const intentDetail = intents.map(intent => `${intent.label}${intent.damage == null ? '' : ` · ${intent.damage}${intent.hits > 1 ? ` ×${intent.hits}（共${intent.totalDamage}）` : ''}`}${intent.bleedBonus ? ` · 流血 ${intent.bleedBonus} 层` : ''}`).join('；') + (f.affix === 'aegis' ? '。元素庇幕：偶数回合减免所有伤害；对其施加破甲可克制。' : '');
-        const baseAttack = `基础攻击 ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}`;
         setSection(parts.intent, sig, 'intent',
           intents.map(intent => {
             // 摘要保留复合效果；流血加成来源与多段总伤仍在完整说明中。
-            const [actionLabel, ...conditions] = intent.label.split(/[·并]/);
-            const action = intent.kind === 'frozen' ? '冰冻中' : actionLabel;
-            const condition = intent.kind === 'frozen' ? '' : conditions.join('·').replace(/^施加/, '');
-            const actionText = `${action}${intent.damage == null ? '' : ` ${intent.damage}${intent.hits > 1 ? `×${intent.hits}` : ''}`}`;
-            return `<span class="bt-intent-part" data-intent-kind="${escAttr(intent.kind)}">${intent.icon}<span class="bt-intent-short"><span class="bt-intent-action">${esc(actionText)}</span>${condition ? `<span class="bt-intent-condition"> · ${esc(condition)}</span>` : ''}</span></span>`;
-          }).join('') +
-          `<span class="bt-intent-detail"><span class="sts-atkbadge"${f.affix === 'frenzy' ? ' data-term="frenzy"' : ''}>[[icon:swords]] ${esc(baseAttack)}</span><span class="bt-intent-rules">${esc(intentDetail)}</span></span>`);
-        setUnitAttribute(parts.intent, 'aria-label', `${f.name}的意图：${intentDetail}。${baseAttack}。点击查看完整说明`);
+
+            const actionText = intent.damage == null ? '' : `${intent.damage}${intent.hits > 1 ? `×${intent.hits}` : ''}`;
+            return `<span class="bt-intent-part" data-intent-kind="${escAttr(intent.kind)}">${intent.icon}<span class="bt-intent-short"><span class="bt-intent-action">${esc(actionText)}</span></span></span>`;
+          }).join(''));
+        setUnitAttribute(parts.intent, 'aria-label', `${f.name}的意图：${intentSummary(intents)}`);
         if (parts.intent.style.display !== '') parts.intent.style.display = '';
         // W5-03（2026-09-27 R2，B-4）：一次性解释图例；QA/devSample 与玩家偏好隔离。
         try { showIntentLegend({ devSample: !!ctx.devSample, battleToken: ctx.battleToken }); }
@@ -982,20 +1008,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       setSection(parts.fig, sig, 'fig', f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime'));
       setUnitAttribute(parts.fig, 'role', 'img');
       setUnitAttribute(parts.fig, 'aria-label', f.name);
-      // 姓名保留在可访问身份中；上方呈现攻击、意图和状态，生命条仍在脚下。
+      // Name and attack readout stay above the figure; HP stays at the feet.
       setUnitHP(parts, sig, f.hp, f.maxHp, reattached || !sig.init);
-      const simpleAttack = intents.length === 1 && intents[0].label === '攻击'
-        && intents[0].damage === Math.max(0, f.atk || 0) && intents[0].hits === 1 && !intents[0].bleedBonus;
-      const attackStat = simpleAttack ? '' : `<span class="sts-stat">[[icon:swords]] 攻 ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>`;
-      setSection(parts.stats, sig, 'stats', `${attackStat}${immune ? '<span class="sts-stat">[[icon:crystal]] 庇幕免伤中</span>' : ''}`);
-      // 反馈1021·10：状态诅咒/祝福与词缀之外，标记类负面状态此前一个角标都不出——
-      // 腐化之种（deathBurst）与灵魂契约（damageEcho / soulContractMarked）在运行时被
-      // 明确当作「已标记」参与结算，视图却只认 rotSeedMarked，敌人身上看不出挂了什么。
-      const echoMark = f.damageEcho || (f.soulContractMarked ? { amount: 2 } : null);
-      setSection(parts.chips, sig, 'chips', (aff ? `<span class="bt-affix" data-term="${f.affix}">${aff.icon} ${aff.name}</span>` : '')
-        + (f.rotSeedMarked || f.deathBurst ? '<span class="bt-affix" title="死亡时，对所有敌人造成等同于此时中毒层数的真实伤害">[[icon:skull]] 腐化标记</span>' : '')
-        + (echoMark ? `<span class="bt-affix">[[icon:sparkles]] 契约回响 ${+echoMark.amount || 2}</span>` : '')
-        + curseChips(f.status, { compact: true }));
       sig.init = true;
       ordered.push(rec);
     });

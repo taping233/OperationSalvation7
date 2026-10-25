@@ -2,20 +2,9 @@
 import '../../css/camp-entry.css';
 import { waitPageVisual } from './page-visual-ready.js';
 import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
-import { mapImageReady } from '../core/map-image-ready.js';
-import { GENERAL_TRANSITION_ART } from './general-transition.js';
-import { transitionHeadingHTML } from './transition-heading.js';
+import { createSilentNodeCut, prepareSilentFilm } from './silent-node-film.js';
 import { revealTransition } from './transition-handoff.js';
 import { pageMotionProfile } from './page-motion-profiles.js';
-const CUT_SCENES = {
-  camp: new URL('../../assets/scenes/transition-camp-v2.webp', import.meta.url).href,
-  photo: new URL('../../assets/scenes/transition-photo-v2.webp', import.meta.url).href,
-  field: new URL('../../assets/scenes/transition-field-v2.webp', import.meta.url).href,
-  general: GENERAL_TRANSITION_ART,
-  battle: new URL('../../assets/scenes/transition-battle-v2.webp', import.meta.url).href,
-  boss: new URL('../../assets/scenes/transition-boss-v2.webp', import.meta.url).href,
-  achievement: new URL('../../assets/scenes/transition-achievement-v2.webp', import.meta.url).href,
-};
 // Load artwork only for the cut that is actually requested; prepareCityCut owns readiness.
 
 let cleanup = null;
@@ -82,55 +71,29 @@ function transferIdentity(overlay, ghost) {
   return () => { motion?.cancel(); identity.remove(); };
 }
 
-// 共用斜切编排，画面、文案与水印按目的页选择。
-export function createCityCut({ archive = '基地档案', title = '返回基地',
-  subtitle = 'BASE CAMP / 冬日远征档案室', edition = 'WINTER EXPEDITION / VII',
-  destination = 'BASE CAMP', watermark = 'BASE', scene = 'camp' } = {}) {
-  const cut = document.createElement('div');
-  cut.className = 'camp-entry-cut';
-  cut.setAttribute('aria-hidden', 'true');
-  cut.inert = true;
-  cut.setAttribute('aria-label', `${archive} / ${title} / ${subtitle}`);
-  const register = document.createElement('div');
-  register.className = 'camp-entry-register';
-  register.dataset.watermark = watermark;
-  const issue = document.createElement('small');
-  issue.textContent = edition;
-  const folio = document.createElement('span');
-  folio.textContent = `${archive} / ${destination}`;
-  register.append(issue, folio);
-  const scenery = document.createElement('div');
-  scenery.className = 'camp-entry-scenery';
-  const image = document.createElement('img');
-  image.src = CUT_SCENES[scene] || CUT_SCENES.camp;
-  image.style.objectPosition = 'center';
-  image.alt = '';
-  image.decoding = 'async';
-  scenery.append(image);
-  cut.append(scenery, register);
-  cut.insertAdjacentHTML('beforeend', transitionHeadingHTML(title));
+// Existing page adapters retain their readiness/lifetime API; the public film
+// selects symbolic imagery and motion, with no decorative words or folios.
+/** @param {{archive?:string,title?:string,subtitle?:string,edition?:string,destination?:string,watermark?:string,scene?:string}} [options] */
+export function createCityCut({archive='基地档案',title='返回基地',subtitle='',scene='camp'}={}) {
+  const cut=createSilentNodeCut(scene==='general' ? 'loading' : scene);
+  cut.setAttribute('aria-label',`${archive} / ${title}${subtitle ? ` / ${subtitle}` : ''}`);
   return cut;
 }
 
 export const cityCutDuration = 980;
 
 // The curtain's own artwork must be ready before the destination is revealed.
-// A failed decorative image falls back to the cut's opaque colour and lettering.
-/** @param {HTMLElement} cut @param {{signal?: AbortSignal}} [options] */
-export async function prepareCityCut(cut, { signal } = {}) {
-  const image = /** @type {HTMLImageElement} */ (cut?.querySelector('.camp-entry-scenery img'));
-  if (!image || signal?.aborted) return false;
-  const ready = await mapImageReady(image, { signal, timeout: 3000 });
-  if (signal?.aborted) return false;
-  if (!ready) { image.style.display = 'none'; cut.dataset.scenery = 'fallback'; }
-  return true;
+// A failed decorative image falls back to the cut's opaque colour.
+/** @param {HTMLElement} cut @param {{signal?: AbortSignal,deferPlayback?:boolean}} [options] */
+export async function prepareCityCut(cut, { signal, deferPlayback=false } = {}) {
+  return prepareSilentFilm(cut,{signal,deferPlayback});
 }
 
 // A mounted city cut holds its first pose until the destination's representative assets settle.
 export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish) {
-  // Page semantics are shared with interface-motion. Legacy adapters cannot
-  // reintroduce scene curtains over ordinary navigation surfaces.
-  if (pageMotionProfile(page?.closest('#ovBody'))?.navigation) {
+  // 成就保留独立荣誉档案过场；其他普通导航仍不使用场景遮幕。
+  const profile = pageMotionProfile(page?.closest('#ovBody'));
+  if (profile?.navigation && profile.key !== 'achievements') {
     cut.remove();
     onFinish?.();
     return () => {};
@@ -172,7 +135,7 @@ export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish)
 export function enterAchievementCut(page, reduced) {
   const overlay = page?.closest('#overlay');
   const card = page?.closest('.card');
-  if (reduced || !overlay || !card || pageMotionProfile(page.closest('#ovBody'))?.navigation) return () => {};
+  if (reduced || !overlay || !card) return () => {};
   const cut = createCityCut({ scene: 'achievement', archive: '荣誉档案', title: '成就总览',
     subtitle: 'ACHIEVEMENTS / 远征荣誉陈列', destination: 'ACHIEVEMENTS', watermark: 'HONOR' });
   return playPreparedCut(page, cut);

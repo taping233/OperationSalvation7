@@ -1,3 +1,6 @@
+import { withPreparedDiscovery } from '../effects/battle.discover-preview.js';
+import { isLegacyRotSeed, isArrowRuneCard, isLegacyBloodpoison } from '../../cards/card-legacy-battle-policy.js';
+import { BATTLE_PHASES } from '../runtime/battle.state.js';
 import { createRequestedDomain } from '../effects/requested-card-runtime.domain.js';
 import { foeFightTargets, validFoeFightTargets, withFoeFightTargets } from '../effects/battle.foe-fight.js';
 import { esc } from '../../core/shared.js';
@@ -7,7 +10,7 @@ import { throwIfActionCancelled } from '../runtime/battle.playback.js';
 import { rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
 import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
 import { hasStructuredTrigger, hasStructuredEquipField, triggerDeclarations } from '../../cards/card-trigger-contract.js';
-import { isHandPaymentCandidate } from './battle.hand-selection.js';
+import { isHandPaymentCandidate, nextHandSelectionId } from './battle.hand-selection.js';
 import { createInfusionDomain } from '../effects/battle.infusion.domain.js';
 
 /** Instance-owned state and host services are captured explicitly. */
@@ -35,7 +38,7 @@ function createBattleExecPlay({
   resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
   takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
   beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
-  triggersM2,
+  triggersM2, previewDiscovery = (...args) => { void args; return null; },
 }) {
   function effectiveExecutionCard(uid, card) {
     const effective = prepareExecutionCard ? prepareExecutionCard(uid, card) : findEffectiveCard?.(uid, card)?.card || card;
@@ -90,6 +93,7 @@ function createBattleExecPlay({
     /** @type {((value:import('../battle.play-submission.types.js').CardPlayFinal)=>void)|null} */
     let resolveSettled = null;
     let completed = false;
+    let paid = false;
     /** @param {'committed'|'rejected'|'cancelled'} status @param {import('../battle.play-submission.types.js').CardPlayReason} [reason] */
     const settle = (status, reason) => {
       if (!receipt || completed) return;
@@ -111,10 +115,13 @@ function createBattleExecPlay({
         const settled = new Promise(/** @param {(value:import('../battle.play-submission.types.js').CardPlayFinal)=>void} resolve */ resolve => { resolveSettled = resolve; });
         result = Object.freeze({ status:'queued', uid, battleToken, receipt, settled });
       },
+      paid() { paid = true; },
       commit() { settle('committed'); },
+      cancel() { settle('cancelled', { code: 'DISCOVERY_CANCELLED', message: '发现预览已取消，本次未扣费或消耗卡牌' }); },
       error(error) {
         const cancelled = error?.name === 'BattleActionCancelledError' || error?.name === 'AbortError';
-        settle(cancelled ? 'cancelled' : 'rejected', { code:cancelled ? 'ACTION_CANCELLED' : 'EXECUTION_ERROR', message:cancelled ? '本次出牌已取消' : '本次打出未完成，请重试' });
+        if (cancelled && paid) { settle('committed'); return; }
+        settle(cancelled ? 'cancelled' : 'rejected', { code:cancelled ? 'ACTION_CANCELLED' : 'EXECUTION_ERROR', message:cancelled ? '本次出牌已取消' : '本次打出未完成，已回到战斗开始检查点' });
       },
     };
   }
@@ -147,6 +154,7 @@ function createBattleExecPlay({
     if (check.paymentNeeded) {
       const excludedUids = check.excludedUids;
       instanceRuntime.set$handSelecting({
+        selectionId: nextHandSelectionId(),
         act: 'payment', mandatory: true, n: handRequirement.count, type: handRequirement.type || null,
         excludedUids, selectedUids: [],
         payment: { uid, card, fuelUids: [...(fuelUids || [])], target, freeCost, onResolved, directRelease },
@@ -161,12 +169,16 @@ function createBattleExecPlay({
     // 返回动作 promise：调用方（如极速符文回环）可 await 出牌完成
     return queueBattleAction(async signal => {
       const resolved = await execPlay(uid, submittedCard, fuelUids, target, freeCost, signal, receipt, paymentUids, submission, directRelease);
+      submission?.commit();
       throwIfActionCancelled(signal);
       if (resolved && onResolved && instanceRuntime.G?.battleActive) onResolved();
-    }, '出牌动作', submission ? error => submission.error(error) : null);
+    }, '出牌动作', submission ? error => {
+      if (error?.name === 'BattleActionCancelledError' && [BATTLE_PHASES.VICTORY, BATTLE_PHASES.DEFEAT].includes(instanceRuntime.battleState.phase)) submission.commit();
+      else submission.error(error);
+    } : null);
   }
 
-  async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids = [], submission = null, directRelease = false) {
+  async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids = [], submission = null, directRelease = false, preparedDiscovery = null) {
     instanceRuntime.set$activeActionSignal(signal);
     markCardResolving(uid, signal, true);
     try {
@@ -209,6 +221,16 @@ function createBattleExecPlay({
       submission?.reject(requestedIssue.code, requestedIssue.message);
       instanceRuntime.G.log(requestedIssue.message, 'warn'); requestBattleRender(); return false;
     }
+    if (!preparedDiscovery && !directRelease && instanceRuntime.hand.includes(uid)) {
+      const preview = previewDiscovery(card, uid, signal, () => effectiveExecutionCard(uid, card));
+      if (preview) {
+        const prepared = await preview;
+        throwIfActionCancelled(signal);
+        if (prepared === false) { submission?.cancel?.(); return false; }
+        // Revalidate all costs, material/source identities and target after the user's wait.
+        if (prepared) return await execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids, submission, directRelease, prepared);
+      }
+    }
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
     if (handRequirement) {
       const handUids = new Set(instanceRuntime.hand);
@@ -247,36 +269,46 @@ function createBattleExecPlay({
     // M2：剥离时点容器供 resolver（resolver 守卫：非 onPlay 容器必须经 triggers 登记管线；
     // 登记在结算完成后以原卡进行——见下方 triggersM2.registerCard）。
     // 原卡无 onPlay 容器时剥离后不保留 onPlay 键（空 triggers 合法）。
-    const resolverCard = (() => {
+    const resolverCard = withPreparedDiscovery((() => {
       const t = triggerDeclarations(card);
       if (!t || !Object.keys(t).some(k => k !== 'onPlay' && k !== 'duration')) return card;
       const stripped = Object.prototype.hasOwnProperty.call(t, 'onPlay') ? { onPlay: t.onPlay } : {};
       // 保留已完成 preflight 所需的声明视图给 resolver 守卫；实际执行视图仍只带 onPlay，
       // 非 onPlay 时点已经由 runner 登记，不能在 resolver 内再次运行。
       return { ...card, _registeredTriggers: t, rules: { ...card.rules, triggers: stripped } };
-    })();
+    })(), preparedDiscovery);
     if (effCost !== card.cost) instanceRuntime.G.log(`[[icon:sparkles]] <b>费用变化</b>：【${esc(card.name)}】按 <b>${effCost}</b> 费打出（原 ${card.cost} 费）`, 'sys');
     if (!freeCost) instanceRuntime.set$energy(instanceRuntime.energy - effCost);
     instanceRuntime.played.push(uid);
     hostAudio.sfx('card');
     removeUid(instanceRuntime.hand, uid);
-    submission?.commit();
+    submission?.paid?.();
     instanceRuntime.cardAnims.push({
       kind: 'play', uid, name: card.name, type: card.type,
       side: targetSideFor(card, cardCatalog.DMG_TYPES),
       target: target && !target.dead ? instanceRuntime.foes.indexOf(target) : null,
       receipt,
     });
+    // Price effects use the current fuel face's printed cost, not its sale value.
+    // Capture it before consumption callbacks can transform or replace a card.
+    const fuelCostSum = fuelUids.reduce((total, fuelUid) => {
+      const entry = findEffectiveCard(fuelUid) || findCard(fuelUid);
+      return total + Math.max(0, +(entry?.card?.cost || 0));
+    }, 0);
     fuelUids.forEach(f => removeUid(instanceRuntime.hand, f));
-    for (const f of fuelUids) {
+    const fuelEntries = fuelUids.map(fuelUid => ({ uid: fuelUid, entry: findCard(fuelUid) }));
+    // All selected fuel is one payment. Final-boss defeat in the first card's
+    // consumption trigger must not leave later fuel absent from settlement.
+    for (const { uid: f, entry: o } of fuelEntries) {
       instanceRuntime.consumed.push(f);
-      instanceRuntime.recordHandInfusion(instanceRuntime.hand);
-      requestedInfusion();
       // v0.25：被消耗的牌进入墓地——墓地不参与洗回，战胜 BOSS 后可在整理背包放回
       if (instanceRuntime.mode === 'boss') instanceRuntime.grave.push(f);
-      const o = findCard(f);
       instanceRuntime.cardAnims.push({ kind: 'burn', uid: f, name: o ? o.card.name : '' });
       instanceRuntime.G.log(`[[icon:flask]] <b>${esc(card.name)}</b> 注能：消耗了【<b>${esc(o ? o.card.name : '?')}</b>】${instanceRuntime.mode === 'boss' ? '（进墓地，不参与洗回）' : '（战后进消耗区；道具、装备不可在火堆复原）'}`, 'sys');
+    }
+    for (const { entry: o } of fuelEntries) {
+      instanceRuntime.recordHandInfusion(instanceRuntime.hand);
+      requestedInfusion();
       // 被牺牲的牌并没有被「使用」：不结算主效果，只结算它的「被注能时」条件效果
       if (o) resolveInfusedFuel(o.card, target);
       throwIfActionCancelled(signal);
@@ -288,10 +320,6 @@ function createBattleExecPlay({
       if (instanceRuntime.consumeFireballN > 0) await runStagedSteps(consumeFireballSteps(instanceRuntime.consumeFireballN), signal);
     }
     if (instanceRuntime.mode === 'boss') instanceRuntime.discard.push(uid);
-    const fuelCostSum = fuelUids.reduce((a, f) => {
-      const o = findCard(f);
-      return a + (o ? Math.max(0, +(cardCatalog.sellPrice(o.card) || 0)) : 0);
-    }, 0);
     // 免注能实例、「招式均已注能」与「直接释放/直接施放」词条均按已注能结算（反馈#5b 老板定版：
     // 直释注能卡视为已注能——允许释放、按已注能效果结算）；材料消耗及累计计数仍只由实际燃料驱动，
     // 直释不消耗注能材料、不增加累计注能计数。
@@ -348,7 +376,7 @@ function createBattleExecPlay({
         hosted.includes('charge-fireball'))) instanceRuntime.growthNames.add(card.name);
     if (legacyPlayEffects && !hasStructuredTrigger(card, 'onKill') && /每消灭\s*1\s*个敌人[^。]*?\+\s*1\s*点?攻击力/.test(String(card.desc || ''))) instanceRuntime.set$killAtkUp(instanceRuntime.killAtkUp + 1);
     if (legacyPlayEffects && !hasStructuredTrigger(card, 'onPlayCard') && /每当你使用一张法术牌[^。]*中毒/.test(String(card.desc || ''))) instanceRuntime.set$poisonOnSpell(true);
-    if (card.id !== 'cc-rot-seed' && legacyPlayEffects && /死亡时[^。；]*中毒层数转移/.test(String(card.desc || ''))) instanceRuntime.set$poisonLegacy(true);
+    if (!isLegacyRotSeed(card) && legacyPlayEffects && /死亡时[^。；]*中毒层数转移/.test(String(card.desc || ''))) instanceRuntime.set$poisonLegacy(true);
     if (legacyPlayEffects && !hasStructuredTrigger(card, 'onPlayCard') && hosted.includes('venom-staff')) instanceRuntime.set$poisonOnSpell(true);
     if (legacyPlayEffects && !hasStructuredTrigger(card, 'onConsume') && hosted.includes('consume-fireball')) instanceRuntime.set$consumeFireballN(1);
     if (legacyPlayEffects && hosted.includes('assassin')) instanceRuntime.set$stealthStrike(true);
@@ -381,7 +409,7 @@ function createBattleExecPlay({
       instanceRuntime.G.log('[[icon:paw]] 四条<b>封印肢体</b>重现世间——如天国之门般无攻无血的场面物件', 'sys');
     }
     // 箭矢符文：你的「箭」释放 2 次（第二段免费用）
-    if (instanceRuntime.arrowRune && (card.name === '箭' || card.id === 'token-arrow')) {
+    if (instanceRuntime.arrowRune && isArrowRuneCard(card)) {
       instanceRuntime.G.log('[[icon:runner]] <b>箭矢符文</b>：箭再度释放', 'sys');
       emitRecast({ card, uid, source: '箭矢符文', repeatIndex: 1, repeatTotal: 1 });
       await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
@@ -426,7 +454,7 @@ function createBattleExecPlay({
       triggersM2.registerCard(card, uid, { battleStarted: true });
       triggersM2.firePlayCard();
     }
-    if (card.id === 'tt7-bloodpoison' && !pickOps.length) beginDartStrike();   // 旧双镖二段点选
+    if (isLegacyBloodpoison(card) && !pickOps.length) beginDartStrike();   // 旧双镖二段点选
     if (!alive().length) { finish(true); return false; }
     processChoice();
     processDiscoverQueue();

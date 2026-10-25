@@ -13,8 +13,13 @@ import { entrySupplyGate } from '../run/node-reward-state.js';
 import { collectUiActions, collectActionKeys, overlayBody, overlayVisible } from './agent.surface.js';
 import { actionId } from './agent.protocol.js';
 import { getBattleCount } from './agent.recorder.js';
+import { bindObservedAction, getObservedActionTarget } from '../ui/action-dispatch.js';
 
-const withId = (action) => ({ ...action, id: actionId(action) });
+const withId = (action) => {
+  const identified = { ...action, id: actionId(action) };
+  const target = getObservedActionTarget(action);
+  return target ? bindObservedAction(identified, target) : identified;
+};
 
 // ---------- 阶段判定（settle 稳定性与驱动范围都看这里） ----------
 function phaseOf() {
@@ -288,7 +293,7 @@ function bagActions() {
   for (const o of owned) {
     if (!o.card || o.safe || o.stored) continue;
     if (o.card.name === '初始攻击') continue;
-    acts.push(withId({ type: 'sys', name: 'discardCard', args: [o.card.name], label: `丢弃【${o.card.name}】（腾背包格）` }));
+    acts.push(withId({ type: 'sys', name: 'discardCard', args: [o.card.name, o.uid], label: `丢弃【${o.card.name}】（腾背包格）` }));
   }
   return acts;
 }
@@ -337,7 +342,7 @@ function runBrief() {
 let uiFailure = null;
 function markUiFailure(fail) {
   // 时间窗（09-26 改）：sig 比对会被页面闪变/揭晓重渲染打断导致记忆秒失效，
-  // 3 秒 TTL 内同 id 一律绕开——覆盖瞬态页连点窗口，过期自动恢复可重试
+  // 3 秒 TTL 内绕开同 id、params 与 args 的精确动作，过期自动恢复可重试。
   if (fail && fail.id) uiFailure = { fail, ts: Date.now() };
 }
 

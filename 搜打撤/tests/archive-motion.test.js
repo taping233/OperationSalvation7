@@ -25,12 +25,14 @@ function picker() {
   return { overlay, body };
 }
 
-it('achievement browsing keeps the navigation surface free of scene curtains', () => {
+it('achievement browsing owns its silent archive entry and releases it on departure', () => {
   const { overlay, body } = picker();
   body.innerHTML = '<main class="achievement-gallery">Awards</main>';
-  enterAchievementCut(body.firstElementChild, false);
+  const finish = enterAchievementCut(body.firstElementChild, false);
+  expect(overlay.querySelector('[data-film-kind="achievement"]')).not.toBeNull();
+  finish();
   expect(overlay.querySelector('.camp-entry-cut')).toBeNull();
-  enterAchievementCut(body.firstElementChild, false);
+  enterAchievementCut(body.firstElementChild, false)();
   expect(overlay.querySelector('.camp-entry-cut')).toBeNull();
 });
 
@@ -95,17 +97,17 @@ it('cleans the old handoff before a second camp entry and leaves the new entry a
   enterCamp(overlay, ghost, false);
   const cut = overlay.querySelector('.camp-entry-cut');
   expect(cut.getAttribute('aria-hidden')).toBe('true');
-  expect(cut.querySelector('.camp-entry-register').textContent).toContain('档位 01');
-  expect(cut.querySelector('.transition-heading')).not.toBeNull();
+  expect(cut.getAttribute('aria-label')).toContain('档位 01');
+  expect(cut.querySelector('.transition-heading')).toBeNull();
   expect(cut.querySelector('[data-act]')).toBeNull();
   await vi.advanceTimersByTimeAsync(300);
   enterCamp(overlay, null, false);
   expect(ghost.isConnected).toBe(false);
   expect(cut.isConnected).toBe(false);
-  await vi.advanceTimersByTimeAsync(680);
+  await vi.advanceTimersByTimeAsync(850);
   expect(overlay.dataset.campEntry).toBe('1');
   expect(body.querySelector('.page-in')).toBeNull();
-  await vi.advanceTimersByTimeAsync(300);   // 新切幕先等视觉就绪再计时长，仍在原时长内保持
+  await vi.advanceTimersByTimeAsync(100);   // 新切幕先等视觉就绪再计时长，仍在原时长内保持
   expect(overlay.dataset.campEntry).toBe('1');
   await vi.advanceTimersByTimeAsync(700);   // 播满后才清理
   expect(overlay.dataset.campEntry).toBeUndefined();

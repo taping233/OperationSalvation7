@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { hand } from '../game/src/battle/runtime/battle.runtime.piles.js';
 import { Random } from '../game/src/core/random.js';
@@ -5,8 +6,7 @@ import { Random } from '../game/src/core/random.js';
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15,
-  starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+window.SDT.MAP = { rules: { ...battleRules(99, 99, 15, 0, 5, 1) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } } };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
@@ -37,8 +37,7 @@ function canonical(id) {
 }
 async function start(cards, boss = false) {
   active = { ownedCards: cards.map((card, index) => ({ uid: `mb-${index}`, card, safe: false })),
-    hp: 40, maxHp: 100, atk: 5, spellPower: 0, coins: 0, myClass: '侠客',
-    characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(40, 100, 5, 0, '侠客', null),
     logs: [], log(message) { this.logs.push(message); }, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {} };
   BattleSession.start(active, [{ id: 'mb-target', name: '验证靶', hp: 1000, maxHp: 1000, atk: 0 }],
     { isBoss: boss, name: '规则消费验收' });

@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import beforeCatalog from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
 
@@ -14,8 +15,7 @@ vi.stubGlobal('localStorage', storage);
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15,
-  starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(9, 99, 15, 0, 5, 1) }, items: {} };
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
@@ -41,8 +41,7 @@ afterEach(async () => { await finish(); vi.restoreAllMocks(); });
 async function start(card, { hp = 50, status = {}, boss = false, hand = true } = {}) {
   await finish();
   activeGame = { ownedCards: [{ uid: 'e8-card', card: clone(card), safe: false }],
-    hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0, myClass: '侠客',
-    characterId: null, state: 'idle', battleActive: false, logs: [], healCalls: [],
+    ...playerFields(100, 100, 5, 0, '侠客', null), logs: [], healCalls: [],
     log(message) { this.logs.push(message); },
     heal(amount) { this.healCalls.push(amount); this.hp = Math.min(this.maxHp, this.hp + amount); },
     addItem() {}, onBattleEnd() {} };

@@ -6,18 +6,22 @@ export const motionTiming = Object.freeze({
   navigation: 260, navigationDetail: 220, navigationStagger: 22, navigationStaggerMax: 66,
   panelExit: 160, handoff: 180, sceneEnter: 450,
   cardReturn: 120, acquire: 340,
+  fireHeal: 1400, fireRestore: 1700,
+  outcomeShort: 720, outcomeRitual: 1500,
   photoEnter: 140, photoAtelierEnter: 420, photoExit: 120,
   zoomExit: 260, completionSlack: 60, notice: 3200,
   resumeExit: 360,
+  hoverIn: 220, hoverOut: 320, press: 90, regionExit: 90, regionSwap: 180,
+  handHoverIn: 300, handHoverOut: 420,
 });
 export const motionEasing = Object.freeze({
   enter: 'cubic-bezier(.22,1,.36,1)',
   exit: 'cubic-bezier(.4,0,.7,1)',
   travel: 'cubic-bezier(.32,0,.18,1)',
 });
-export function motionReduced() {
-  return document.body.classList.contains('reduce-motion')
-    || !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+export function motionReduced(doc = document) {
+  return !!doc.body?.classList.contains('reduce-motion')
+    || !!doc.defaultView?.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
 export function changeFrames(direction = 0) {
   return [

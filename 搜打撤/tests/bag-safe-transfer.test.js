@@ -26,23 +26,42 @@ beforeEach(() => {
 });
 
 describe('安全格按最终双方容量原子交换一格', () => {
-  it('背包和安全格均满，交换完整三张叠不会先取出失败', () => {
+  it('直接取回新法术叠不能借用资源扩展格，未满同名叠仍可补入', () => {
+    limits.bag = 2;
+    const pearl = entries({ ...card('珍珠盒', '道具'), id:'tt2-pearlbox' }, 1, true);
+    const outgoing = entries(card('火球', '法术'), 1, true);
+    game.ownedCards = [...entries(attack, 1), ...entries(guard, 1), ...pearl, ...outgoing];
+    expect(transfer.move('火球', false)).toBe(false);
+    expect(outgoing[0].safe).toBe(true);
+    game.ownedCards = [...entries(card('火球', '法术'), 1), ...entries(guard, 1), ...pearl, ...outgoing];
+    expect(transfer.move('火球', false)).toBe(true);
+    expect(outgoing[0].safe).toBe(false);
+  });
+  it('背包和安全格均满，单候选也先选择确认，再原子交换完整三张叠', async () => {
     limits.bag = 1;
     const incoming = entries(attack, 3), outgoing = entries(guard, 3, true);
     game.ownedCards = [...incoming, ...outgoing];
-    expect(transfer.move(attack.name, true)).toBe(true);
+    expect(transfer.move(attack.name, true)).toBe(false);
+    expect(UI.el.ovBody.querySelectorAll('[data-act="safeSwapPick"]')).toHaveLength(1);
+    expect(UI.el.ovBody.querySelector('[data-act="safeSwapConfirm"]').disabled).toBe(true);
+    expect(incoming.every(entry => !entry.safe)).toBe(true); expect(ports.save).not.toHaveBeenCalled();
+    UI._acts.safeSwapPick({i:'0'});
+    expect(incoming.every(entry => !entry.safe)).toBe(true); expect(ports.save).not.toHaveBeenCalled();
+    expect(await UI._acts.safeSwapConfirm()).toBe(true);
+    expect(await UI._acts.safeSwapConfirm()).toBe(false);
     expect(incoming.every(entry => entry.safe)).toBe(true); expect(outgoing.every(entry => !entry.safe)).toBe(true);
     expect(ports.save).toHaveBeenCalledTimes(1); expect(ports.refresh).toHaveBeenCalledTimes(1);
     expect(ports.receipt).toHaveBeenCalledWith(expect.stringContaining('格挡 ×3已回背包'));
     expect(UI.el.ovBody.querySelector('[data-act="safeSwapPick"]')).toBeNull();
   });
-  it('同名分成两格，只换选中的一格，不跨格换出全部同名牌', () => {
+  it('同名分成两格，只换确认选择的一格，不跨格换出全部同名牌', async () => {
     limits.safe = 2;
     const incoming = entries(attack, 1), outgoing = entries(guard, 6, true);
     game.ownedCards = [...incoming, ...outgoing];
     expect(transfer.move(attack.name, true)).toBe(false);
     expect(UI.el.ovBody.querySelectorAll('[data-act="safeSwapPick"]')).toHaveLength(2);
     UI._acts.safeSwapPick({ i:'1' });
+    await UI._acts.safeSwapConfirm();
     expect(outgoing.slice(0, 3).every(entry => entry.safe)).toBe(true);
     expect(outgoing.slice(3).every(entry => !entry.safe)).toBe(true);
     expect(incoming[0].safe).toBe(true);
@@ -56,12 +75,13 @@ describe('安全格按最终双方容量原子交换一格', () => {
     expect(JSON.stringify(game.ownedCards)).toBe(before); expect(ports.save).not.toHaveBeenCalled();
     expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('换出一格仍放不下'), 'warn');
   });
-  it('移入同名两格，但已有一格空位时允许仅换出一格', () => {
+  it('移入同名两格，但已有一格空位时允许仅换出一格', async () => {
     const incoming = entries(attack, 4), outgoing = entries(guard, 3, true);
     game.ownedCards = [...incoming, ...outgoing]; limits.safe = 2;
     const plan = planSafeCardSwap(game, incoming, outgoing, 2, 2);
     expect(plan.safeUsed).toBe(2); expect(plan.bagUsed).toBe(1);
-    expect(transfer.move(attack.name, true)).toBe(true);
+    expect(transfer.move(attack.name, true)).toBe(false);
+    UI._acts.safeSwapPick({i:'0'}); expect(await UI._acts.safeSwapConfirm()).toBe(true);
   });
   it('换回卡牌与已有同名叠合并，按实际新增格判断', () => {
     const incoming = entries(attack, 3), bagGuard = entries(guard, 2, false, 'bag'), outgoing = entries(guard, 1, true, 'safe');
@@ -97,30 +117,32 @@ function multiChoice() {
   return { incoming, first, second };
 }
 describe('换入选择的真实所有权与同步调用边界', () => {
-  it('多格候选显示卡名和数量，点击后只交换选择格并保存一次', () => {
+  it('多格候选显示卡名和数量，确认后只交换选择格并保存一次', async () => {
     const { incoming, first, second } = multiChoice();
     expect(UI.el.ovBody.textContent).toContain('格挡 ×3'); expect(UI.el.ovBody.textContent).toContain('盔甲 ×1');
     expect(ports.save).not.toHaveBeenCalled(); expect(incoming[0].safe).toBe(false);
     UI._acts.safeSwapPick({ i:'0' });
+    expect(incoming[0].safe).toBe(false); expect(ports.save).not.toHaveBeenCalled();
+    await UI._acts.safeSwapConfirm();
     expect(incoming[0].safe).toBe(true); expect(first.every(entry => !entry.safe)).toBe(true); expect(second[0].safe).toBe(true);
     expect(ports.save).toHaveBeenCalledTimes(1);
-    UI._acts.safeSwapPick({ i:'1' }); expect(ports.save).toHaveBeenCalledTimes(1);
+    UI._acts.safeSwapPick({ i:'1' }); await UI._acts.safeSwapConfirm(); expect(ports.save).toHaveBeenCalledTimes(1);
   });
-  it('返回取消不移动、不保存，旧选择也不再生效', () => {
-    multiChoice(); const pick = UI._acts.safeSwapPick, before = JSON.stringify(game.ownedCards);
-    UI._acts.safeSwapCancel(); pick({ i:'0' });
+  it('返回取消不移动、不保存，旧选择和确认也不再生效', async () => {
+    multiChoice(); const pick = UI._acts.safeSwapPick, confirm = UI._acts.safeSwapConfirm, before = JSON.stringify(game.ownedCards);
+    pick({i:'0'}); UI._acts.safeSwapCancel(); pick({ i:'0' }); await confirm();
     expect(JSON.stringify(game.ownedCards)).toBe(before); expect(ports.save).not.toHaveBeenCalled();
   });
-  it.each(['run', 'page', 'cards', 'battle'])('%s失效后旧选择不能交换', change => {
-    multiChoice(); const pick = UI._acts.safeSwapPick;
+  it.each(['run', 'page', 'cards', 'battle'])('%s失效后旧选择和确认不能交换', async change => {
+    multiChoice(); const pick = UI._acts.safeSwapPick, confirm = UI._acts.safeSwapConfirm; pick({i:'0'});
     if (change === 'run') sameRun = false;
     if (change === 'page') UI.el.ovBody.innerHTML = '<section>其他页面</section>';
     if (change === 'cards') game.ownedCards = game.ownedCards.map(entry => ({ ...entry }));
     if (change === 'battle') game.battleActive = true;
-    const before = JSON.stringify(game.ownedCards); pick({ i:'0' });
+    const before = JSON.stringify(game.ownedCards); pick({ i:'0' }); await confirm();
     expect(JSON.stringify(game.ownedCards)).toBe(before); expect(ports.save).not.toHaveBeenCalled();
   });
-  it.each(['capacity', 'incoming-card', 'outgoing-card', 'incoming-uid'])('%s变化后执行复检失败保留选择与卡牌', change => {
+  it.each(['capacity', 'incoming-card', 'outgoing-card', 'incoming-uid'])('%s变化后执行复检失败保留选择与卡牌', async change => {
     const { incoming, first } = multiChoice();
     if (change === 'capacity') limits.safe = 0;
     if (change === 'incoming-card') incoming[0].card = { ...attack };
@@ -128,7 +150,20 @@ describe('换入选择的真实所有权与同步调用边界', () => {
     if (change === 'incoming-uid') incoming[0].uid = 'new-id';
     const root = UI.el.ovBody.firstElementChild, before = JSON.stringify(game.ownedCards);
     UI._acts.safeSwapPick({ i:'0' });
+    await UI._acts.safeSwapConfirm();
     expect(UI.el.ovBody.firstElementChild).toBe(root); expect(UI.el.ovBody.querySelector('[role="status"]').textContent).toContain('未移动');
+    expect(JSON.stringify(game.ownedCards)).toBe(before); expect(ports.save).not.toHaveBeenCalled();
+  });
+  it('单候选也可取消，不自动交换或保存', async () => {
+    limits.bag = 1;
+    game.ownedCards = [...entries(attack,3),...entries(guard,3,true)];
+    const before = JSON.stringify(game.ownedCards);
+    expect(transfer.move(attack.name,true)).toBe(false);
+    const confirm = UI._acts.safeSwapConfirm;
+    UI.el.ovBody.querySelector('[data-act="safeSwapPick"]').click();
+    expect(JSON.stringify(game.ownedCards)).toBe(before);
+    UI._acts.safeSwapCancel();
+    expect(await confirm()).toBe(false);
     expect(JSON.stringify(game.ownedCards)).toBe(before); expect(ports.save).not.toHaveBeenCalled();
   });
   it('refresh:false奖励整理合同只返回false，不自动交换或打开选择', () => {

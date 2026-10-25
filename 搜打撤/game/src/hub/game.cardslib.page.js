@@ -6,7 +6,10 @@
  * ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
+import { createCollectionModel } from '../ui/collection-view.js';
 import { linkedBackHTML } from '../ui/home-linked-interactions.js';
+import { collectionHeaderHTML, collectionToolbarHTML } from '../ui/collection-chrome.js';
+import { syncViewChildren } from '../ui/view-children-sync.js';
 
 // DEV 诊断钩子（照相馆性能专项 09-29，与 ?photoFps 同款 DEV 门，生产构建零开销）：
 // ?libPerfDiag=nofilter|noshadow|nooverlay|noimg|alllayer 注入对应覆盖样式，
@@ -40,7 +43,7 @@ import { characterName } from '../core/characters.js';
 import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, photoNotePending, savePhotoNoteResult, exportNotes } from '../cards/card-photo-notes.js';
 import { photoMountFor } from './photo-studio-presentation.js';
 import { createPhotoCatalogCache } from './photo-studio-catalog-cache.js';
-import { CARD_DESIGNER_WRITES_ENABLED, Sfx, cardPageOpen, setCardPageOpen, configureCardPageClosers, cancelPendingCardPageEntry } from './game.cardslib.common.js';
+import { Sfx, cardPageOpen, setCardPageOpen, configureCardPageClosers, cancelPendingCardPageEntry } from './game.cardslib.common.js';
 import {
   photoFpsEnabled, configurePhotoFps, stopPhotoFpsProbe, samplePhotoFps,
   clearPhotoFpsSettledTimer, scheduleSettledPhotoFps,
@@ -63,12 +66,13 @@ const compareChinese = new Intl.Collator('zh').compare;
 const TYPES = SDT.Cards.TYPES;
 const DMG_TYPES = SDT.Cards.DMG_TYPES;
 let cardPagePrevState = null;  // 打开库/制作坊前的游戏状态（从标题界面打开时关回 'title'）
-let lastSavedId = null;        // 刚保存的卡，库中高亮
+const lastSavedId = null;        // 刚保存的卡，库中高亮
 let libPreviewTimer = null;
 let libHoveredId = null;
 let libDescriptionRenderer = createCardDescriptionRenderer();
 let libCatalog = [];           // 此次照相馆数据刷新使用的浅数组快照
 let libCards = [];             // 库页面缓存（悬停预览用）
+const libFilterFields = { cardSearch:'q', libRar:'rar', libCls:'cls', libSort:'sort' };
 let libFilter = { tab: '全部', rar: '全部', cls: '全部', q: '', sort: 'rarity' };
 let libSelectedId = null;     // 照相馆选片台当前陈列卡
 let libEditMode = false;      // 开发者工具与日常浏览分离，避免每张卡常驻危险操作
@@ -94,27 +98,23 @@ function libAct(name, callback) {
   UI.act(name, action);
 }
 
-function matchesLibFilters(card, includeTab, q) {
-  return (!includeTab || libFilter.tab === '全部' || card.type === libFilter.tab) &&
-    (libFilter.rar === '全部' || libRarityOf(card) === libFilter.rar) &&
-    (libFilter.cls === '全部' || (libFilter.cls === '通用' ? !card.cls : card.cls === libFilter.cls)) &&
-    (!q || (_libSearchText.get(card) || '').includes(q));
-}
-
-let libCategoryCache = null, libCategoryCacheCards = null, libCategoryCacheKey = '';
+const libModel = createCollectionModel({
+  keyOf:card => card.id, exclude:card => card.id === 'tt-token-color',
+  searchOf:card => `${card.name || ''}\n${card.desc || ''}\n${displayCardDescription(card.desc,card.id)}`,
+  matches:(card,filter,skip) => (skip === 'tab' || filter.tab === '全部' || card.type === filter.tab)
+    && (filter.rar === '全部' || libRarityOf(card) === filter.rar)
+    && (filter.cls === '全部' || (filter.cls === '通用' ? !card.cls : card.cls === filter.cls)),
+  compare:(a,b,filter) => {
+    if (filter.sort === 'name') return compareChinese(String(a.name),String(b.name));
+    if (filter.sort === 'cost') return (a.cost - b.cost) || compareChinese(String(a.name),String(b.name));
+    return RARITIES.indexOf(libRarityOf(b)) - RARITIES.indexOf(libRarityOf(a))
+      || compareChinese(String(a.type),String(b.type)) || compareChinese(String(a.name),String(b.name));
+  },
+});
 function libCategoryCounts() {
-  const q = libFilter.q.trim().toLowerCase();
-  const key = JSON.stringify([libFilter.rar, libFilter.cls, q]);
-  if (libCategoryCacheCards === libCards && libCategoryCacheKey === key && libCategoryCache) return libCategoryCache;
-  const counts = { 全部: 0 };
-  for (const card of libCards) {
-    if (!matchesLibFilters(card, false, q)) continue;
-    counts.全部++;
-    counts[card.type] = (counts[card.type] || 0) + 1;
-  }
-  libCategoryCacheCards = libCards;
-  libCategoryCacheKey = key;
-  return (libCategoryCache = counts);
+  const counts = {全部:0};
+  for (const card of libModel.project(libFilter,'tab').items) { counts.全部++; counts[card.type] = (counts[card.type] || 0) + 1; }
+  return counts;
 }
 
 function rememberLibBrowse() {
@@ -142,16 +142,9 @@ function refreshLibCatalog() {
     libTileMetrics.clear();
     libCatalog = catalog.slice();
     refreshLibRenderContext(libCatalog);
-    const seenIds = new Set();
-    libCards = libCatalog.filter(c => {
-      if (c.id === 'tt-token-color' || seenIds.has(c.id)) return false;
-      seenIds.add(c.id); return true;
-    });
-    _libSearchText = new WeakMap(libCards.map(c => [c, `${c.name || ''}\n${c.desc || ''}\n${displayCardDescription(c.desc, c.id)}`.toLowerCase()]));
-    libCardById = new Map(libCards.map(card => [card.id, card]));
+    libCards = libModel.replace(libCatalog);
     libDescriptionRenderer = createCardDescriptionRenderer(libCatalog);
     libTileHTMLByCard = new WeakMap();
-    _libFilteredCache = null; _libFilteredKey = '';
   });
 }
 
@@ -161,13 +154,9 @@ function libRarityOf(card) {
 
 // 切片装配：探针只读卡页开关；制作坊经工厂注入开关访问器与开/关页回调，壳↔切片零回环
 configurePhotoFps({ isCardPageOpen: () => cardPageOpen });
-const { openCardDesigner, closeDesigner, showCardsExportOverlay, showCardsImportOverlay } = createCardDesigner({
-  getCardPageOpen: () => cardPageOpen,
+const { openCardDesigner, closeDesigner, showCardsExportOverlay } = createCardDesigner({
   setCardPageOpen,
-  setCardPagePrevState: (v) => { cardPagePrevState = v; },
-  setLastSavedId: (v) => { lastSavedId = v; },
   openCardLibrary,
-  renderCardLibrary,
   closeLibPage,
 });
 
@@ -182,26 +171,11 @@ function openCardLibrary() {
 
 // 过滤+排序结果缓存（用空间换时间）：筛选条件与卡库规模不变时直接复用，
 // 翻页/重绘不再重复全量 sort。renderCardLibrary 重新取 libCards 时失效。
-let _libFilteredCache = null, _libFilteredKey = '';
 let libFilteredPositionById = new Map();
-let _libSearchText = new WeakMap();
 function libFiltered() {
-  const key = `${libFilter.tab}|${libFilter.rar}|${libFilter.cls}|${libFilter.q}|${libFilter.sort}|${libCards.length}`;
-  if (_libFilteredCache && key === _libFilteredKey) return _libFilteredCache;
-  const q = libFilter.q.trim().toLowerCase();
-  _libFilteredCache = libCards.filter(c => matchesLibFilters(c, true, q)).sort((a, b) => {
-    if (libFilter.sort === 'name') return compareChinese(String(a.name), String(b.name));
-    if (libFilter.sort === 'cost') return (a.cost - b.cost) || compareChinese(String(a.name), String(b.name));
-    return (RARITIES.indexOf(libRarityOf(b)) - RARITIES.indexOf(libRarityOf(a))) ||
-      compareChinese(String(a.type), String(b.type)) || compareChinese(String(a.name), String(b.name));
-  });
-  _libFilteredKey = key;
-  libFilteredPositionById = new Map();
-  for (let index = 0; index < _libFilteredCache.length; index++) {
-    const id = _libFilteredCache[index].id;
-    if (!libFilteredPositionById.has(id)) libFilteredPositionById.set(id, index);
-  }
-  return _libFilteredCache;
+  const projection = libModel.project(libFilter);
+  libFilteredPositionById = projection.positions;
+  return projection.items;
 }
 
 // 连续照片墙以照片 ID 定位；分类与筛选上下文独立保存浏览锚点。
@@ -224,6 +198,7 @@ const LIB_SHELL_BATCH = 60;
 let _libShellQueue = [];
 let _libShellScheduled = false;
 let _libShellGeneration = 0;
+let libEntryPending = false;
 
 function libDossierDescription(c, showDamage, damage) {
   let description = displayCardDescription(c.desc, c.id);
@@ -273,10 +248,6 @@ function libPreviewHTML(c) {
     drawN ? ['抽卡', drawN] : null, infN ? ['注能', infN] : null,
     healN ? ['回复', healN] : null, armorN ? ['护甲', armorN] : null,
   ].filter(Boolean);
-  const actions = CARD_DESIGNER_WRITES_ENABLED && game.devMode && libEditMode ? `<div class="studio-edit-actions">
-    <button class="hs-btn" data-act="editCard" data-id="${escAttr(c.id)}">编辑卡牌</button>
-    <button class="hs-btn danger" data-act="delCard" data-id="${escAttr(c.id)}">删除</button>
-  </div>` : '';
   // The dossier carries text; the photograph stays in the wall and the zoom view.
   const note = photoNoteFor(c);
   const cost = c.cost == null ? 0 : c.cost;
@@ -293,7 +264,7 @@ function libPreviewHTML(c) {
     ${hasDrawExplanation(c, drawN) ? `<p class="studio-draw-explanation">${esc(DRAW_EXPLANATION)}</p>` : ''}
     ${note ? `<div class="pv-note"><b>备注</b>${esc(note)}</div>` : ''}
     </div><div class="studio-preview-actions"><div class="studio-browse-controls"${list.length <= 1 ? ' hidden' : ''}><div class="pv-nav"><button type="button" class="pv-navbtn" data-act="libPrev" aria-label="上一片" title="上一片"${idx <= 0 ? ' disabled' : ''}><span aria-hidden="true">‹</span></button><button type="button" class="studio-locate" data-act="libLocate" aria-label="定位当前照片" title="定位当前照片"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button><span class="pv-pos" aria-label="当前筛选结果中的第${idx + 1}张，共${list.length}张">${pos}</span><button type="button" class="pv-navbtn" data-act="libNext" aria-label="下一片" title="下一片"${idx < 0 || idx >= list.length - 1 ? ' disabled' : ''}><span aria-hidden="true">›</span></button></div></div>
-    <button class="studio-zoom" data-act="libInspect" aria-label="查看大图与背签" data-photo-zoom-source data-card="${escAttr(c.id)}"><span>查看照片</span><i aria-hidden="true">${STUDIO_SHUTTER_ICON}</i></button>${actions}</div></div>`;
+    <button class="studio-zoom ui-control" data-ui-action="primary" data-act="libInspect" aria-label="查看大图与背签" data-photo-zoom-source data-card="${escAttr(c.id)}"><span>查看照片</span><i aria-hidden="true">${STUDIO_SHUTTER_ICON}</i></button></div></div>`;
 }
 
 function libActiveFiltersHTML() {
@@ -373,7 +344,6 @@ function libGridHTML() {
   return `<div class="lib-grid${all.length ? '' : ' is-empty'}" id="libGrid" role="tabpanel" aria-label="馆藏照片">${libGridContentsHTML(all)}</div>`;
 }
 
-let libCardById = new Map();
 let libCardNodeById = new Map();
 let libShellNodeById = new Map();
 let libTileHTMLByCard = new WeakMap();
@@ -386,7 +356,7 @@ function stopLibTileObserver() {
 }
 
 function observeLibTiles(grid, roots = null) {
-  if (!grid || !libWindowed) return;
+  if (!grid || !libWindowed || libEntryPending) return;
   if (libTileObserver && libTileObserverGrid !== grid) stopLibTileObserver();
   if (!libTileObserver) {
     const generation = _libShellGeneration;
@@ -422,8 +392,17 @@ function invalidateLibShellWork() {
 // ~100ms 内滚动高度一次到位。不用 requestIdleCallback：面板遮挡/后台页 rIC 不触发，
 // 壳会滞留首窗（实测 scrollH 停在 5290）；rAF 在页面不可见时同样不跑但用户也看不到，
 // 恢复可见即续。每批 append 后重挂 IO 观察（幂等，新壳纳入挂载窗口）。
+function appendLibShellBatch(grid, count) {
+  const previousLast = grid.lastElementChild;
+  const batch = _libShellQueue.splice(0, count);
+  grid.insertAdjacentHTML('beforeend', batch.map(({ card, index }) => libShellHTML(card, index)).join(''));
+  const roots = [];
+  for (let shell = previousLast ? previousLast.nextElementSibling : grid.firstElementChild; shell; shell = shell.nextElementSibling) roots.push(shell);
+  observeLibTiles(grid, roots);
+}
+
 function appendLibShellsIdle() {
-  if (!libWindowed || !_libShellQueue.length || _libShellScheduled) return;
+  if (!libWindowed || libEntryPending || !_libShellQueue.length || _libShellScheduled) return;
   _libShellScheduled = true;
   const generation = _libShellGeneration;
   const step = () => {
@@ -431,12 +410,7 @@ function appendLibShellsIdle() {
     _libShellScheduled = false;
     const grid = document.getElementById('libGrid');
     if (!grid || !_libShellQueue.length) return;
-    const batch = _libShellQueue.splice(0, LIB_SHELL_BATCH);
-    const previousLast = grid.lastElementChild;
-    grid.insertAdjacentHTML('beforeend', batch.map(({ card, index }) => libShellHTML(card, index)).join(''));
-    const roots = [];
-    for (let shell = previousLast ? previousLast.nextElementSibling : grid.firstElementChild; shell; shell = shell.nextElementSibling) roots.push(shell);
-    observeLibTiles(grid, roots);
+    appendLibShellBatch(grid, LIB_SHELL_BATCH);
     if (_libShellQueue.length) appendLibShellsIdle();
   };
   requestAnimationFrame(step);
@@ -447,19 +421,14 @@ function flushLibShellsNow(targetId = null) {
   if (!_libShellQueue.length) return;
   const grid = document.getElementById('libGrid');
   if (!grid) { _libShellQueue = []; return; }
-  const previousLast = grid.lastElementChild;
   const targetIndex = targetId ? _libShellQueue.findIndex(({ card }) => card.id === targetId) : -1;
   if (targetId && targetIndex < 0) return;
-  const batch = _libShellQueue.splice(0, targetId ? targetIndex + 1 : _libShellQueue.length);
-  grid.insertAdjacentHTML('beforeend', batch.map(({ card, index }) => libShellHTML(card, index)).join(''));
-  const roots = [];
-  for (let shell = previousLast ? previousLast.nextElementSibling : grid.firstElementChild; shell; shell = shell.nextElementSibling) roots.push(shell);
-  observeLibTiles(grid, roots);
+  appendLibShellBatch(grid, targetId ? targetIndex + 1 : _libShellQueue.length);
 }
 
 // 壳就近注入卡面；返回是否真的挂了
 function mountLibTile(shell) {  if (!shell || !shell.classList.contains('lib-ph')) return false;
-  const card = libCardById.get(shell.dataset.cardId);
+  const card = libModel.get(shell.dataset.cardId);
   if (!card) return false;
   shell.insertAdjacentHTML('beforeend', photoTileInnerHTML(card));
   shell.classList.remove('lib-ph');
@@ -561,10 +530,10 @@ function replayStudioMotion(node, options = {}) {
   libMotion.play(node, options);
 }
 function syncStudioTabMarker() {
-  updatePhotoStudioTabMarker(document.querySelector('.studio-unified .clib-tabs'));
+  updatePhotoStudioTabMarker(document.querySelector('.studio-unified .studio-category-tabs'));
 }
 function setLibSelection(id, playSound = false, refreshPreview = false, motion = { reason: 'hover' }) {
-  const card = libCardById.get(id) || null;
+  const card = libModel.get(id) || null;
   const previousId = libSelectedId;
   const selectionChanged = previousId !== (card ? card.id : null);
   libSelectedId = card ? card.id : null;
@@ -591,14 +560,17 @@ function setLibSelection(id, playSound = false, refreshPreview = false, motion =
   // 壳注入卡面时按 libSelectedId 自动带上选中态，选中态在窗口化下依然无损。
   const preview = document.getElementById('libPreview');
   if (preview && (selectionChanged || refreshPreview)) {
-    libMotion.cancelTree(preview);
+    if (selectionChanged) libMotion.cancelTree(preview);
     const dossier = preview.querySelector('.studio-preview-copy');
     const oldReading = preview.querySelector('.studio-dossier-scroll')?.scrollTop || 0;
     if (card && dossier) {
       // Keep the footer buttons connected while changing their content/state.
       const template = document.createElement('template');
       template.innerHTML = libPreviewHTML(card);
-      dossier.querySelector('.studio-dossier-scroll').innerHTML = template.content.querySelector('.studio-dossier-scroll').innerHTML;
+      const reading = dossier.querySelector('.studio-dossier-scroll');
+      const nextReading = template.content.querySelector('.studio-dossier-scroll');
+      if (!selectionChanged) syncViewChildren(reading, nextReading);
+      else if (reading.innerHTML !== nextReading.innerHTML) reading.innerHTML = nextReading.innerHTML;
       const freshActions = template.content.querySelector('.studio-preview-actions');
       const actions = dossier.querySelector('.studio-preview-actions');
       /** @type {HTMLElement} */ (actions.querySelector('.studio-browse-controls')).hidden = /** @type {HTMLElement} */ (freshActions.querySelector('.studio-browse-controls')).hidden;
@@ -614,7 +586,8 @@ function setLibSelection(id, playSound = false, refreshPreview = false, motion =
       pos.setAttribute('aria-label', freshPos.getAttribute('aria-label'));
       dossier.querySelector('.studio-dossier-scroll').scrollTop = selectionChanged ? 0 : oldReading;
     } else {
-      preview.innerHTML = libPreviewHTML(card);
+      const html = libPreviewHTML(card);
+      if (preview.innerHTML !== html) preview.innerHTML = html;
     }
     preview.classList.toggle('has-preview', !!card);
     if (selectionChanged) {
@@ -735,12 +708,12 @@ function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {})
 
 // 侧栏筛选控件同步到当前 libFilter（局部重绘时不重建侧栏，得手动回写控件状态）
 function syncLibFilterUI() {
-  const q = document.getElementById('cardSearch'); if (q) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (q).value = libFilter.q;
-  const rar = document.getElementById('libRar'); if (rar) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (rar).value = libFilter.rar;
-  const cls = document.getElementById('libCls'); if (cls) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (cls).value = libFilter.cls;
-  const sort = document.getElementById('libSort'); if (sort) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (sort).value = libFilter.sort;
+  for (const [id, field] of Object.entries(libFilterFields)) {
+    const input = /** @type {HTMLInputElement | HTMLSelectElement} */ (document.getElementById(id));
+    if (input) input.value = libFilter[field];
+  }
   const counts = libCategoryCounts();
-  document.querySelectorAll('.clib-tabs .type-tab').forEach(b => {
+  document.querySelectorAll('.studio-category-tabs .type-tab').forEach(b => {
     const active = /** @type {HTMLElement} */ (b).dataset.t === libFilter.tab;
     b.classList.toggle('on', active);
     b.setAttribute('aria-pressed', String(active));
@@ -766,6 +739,7 @@ function libHoloEgg() {
 
 function renderCardLibrary() {
   releaseLibPageResources();
+  libEntryPending = !!document.querySelector('.page-loading--city');
   libFilterKeyController = new AbortController();
   const photoOpenStarted = photoFpsEnabled ? performance.now() : 0;
   setCardPageOpen(true);
@@ -782,19 +756,15 @@ function renderCardLibrary() {
     `<button type="button" id="libType${index}" role="tab" aria-label="${t === '能力卡' ? '能力' : t}，${counts[t] || 0}张" aria-controls="libGrid" aria-selected="${libFilter.tab === t}" tabindex="${libFilter.tab === t ? 0 : -1}" class="type-tab${libFilter.tab === t ? ' on' : ''}" data-act="libTab" data-t="${t}" aria-pressed="${libFilter.tab === t}">
     ${studioCategoryBadgeHTML(t)}${t === '能力卡' ? '能力' : t}
     </button>`).join('');
-  const editorTools = game.devMode ? `<button class="hs-btn studio-edit-toggle${libEditMode ? ' on' : ''}" data-act="libEditMode" aria-pressed="${libEditMode}">${libEditMode ? '收起工具' : '导出工具'}</button>${libEditMode ? `<button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button>${CARD_DESIGNER_WRITES_ENABLED ? '<button class="hs-btn gold" data-act="newCard">＋ 制作新卡</button><button class="hs-btn" data-act="importCards">[[icon:download]] 导入</button>' : ''}` : ''}` : '';
+  const editorTools = game.devMode ? `<button class="hs-btn studio-edit-toggle${libEditMode ? ' on' : ''}" data-act="libEditMode" aria-pressed="${libEditMode}">${libEditMode ? '收起工具' : '导出工具'}</button>${libEditMode ? `<button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button>` : ''}` : '';
   const first = libFiltered()[0] || null;
   const restoredBrowse = libBrowseHistory.restore(libFilter, libFiltered());
   if (restoredBrowse) libSelectedId = restoredBrowse.selectedId;
   if (!libSelectedId || !libFiltered().some(c => c.id === libSelectedId)) libSelectedId = first?.id || null;
-  const selectedPreview = libCardById.get(libSelectedId) || first;
+  const selectedPreview = libModel.get(libSelectedId) || first;
   UI.showOverlay('', `
     <div class="pg card-library-page photo-studio-v3 studio-index-layout studio-unified studio-archive${libEditMode ? ' edit-mode' : ''}${libFilter.tab !== '全部' ? ' studio-single-type' : ''}">
-      <div class="studio-exit-anchor">${linkedBackHTML('closeCardPage', '关闭照相馆', 'studio-exit')}</div>
-      <header class="pg-head library-head">
-        <div class="clib-tabs" role="tablist" aria-label="照片分类">${tabs}</div>
-        <div class="library-tools"><div class="studio-head-summary"><h2>照相馆</h2><span class="studio-head-total" aria-label="馆藏 ${libCards.length} 张照片">馆藏 <b>${libCards.length}</b> 张照片</span></div>${libEditMode ? '<button class="hs-btn" data-act="exportNotes" aria-label="导出全部照片备注">[[icon:download]] 导出备注</button>' : ''}${editorTools}</div>
-      </header>
+      ${collectionHeaderHTML({title:'照相馆',back:linkedBackHTML('closeCardPage','关闭照相馆','studio-exit'),navigation:`<nav class="studio-category-tabs" role="tablist" aria-label="照片分类">${tabs}</nav>`,summary:`<span class="studio-head-total" aria-label="馆藏 ${libCards.length} 张照片">馆藏 <b>${libCards.length}</b> 张照片</span>`,actions:`${libEditMode ? '<button class="hs-btn" data-act="exportNotes" aria-label="导出全部照片备注">[[icon:download]] 导出备注</button>' : ''}${editorTools}`})}
       <div class="clib-main">
         <div class="studio-room-scene" aria-hidden="true">
           <i class="room-gantry"></i><i class="room-beam"></i><i class="room-beam second"></i>
@@ -802,12 +772,8 @@ function renderCardLibrary() {
           ${Array.from({ length: 12 }, (_, i) => `<i class="room-dust" style="--dust-x:${19 + (i * 13) % 57}%;--dust-y:${21 + (i * 19) % 62}%;--dust-duration:${18 + i % 7}s;--dust-delay:-${i * 2.3}s"></i>`).join('')}
         </div>
         <section class="studio-catalog" aria-label="馆藏照片">
-          <section class="studio-filterbar" aria-label="照片搜索与筛选">
-            <div class="studio-search-row"><label class="studio-field studio-query"><span class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="名称、效果或关键词" value="${escAttr(libFilter.q)}"></span></label>
-              <label class="studio-field studio-quick studio-quick-rarity"><span class="studio-select-shell"><select id="libRar" class="pg-select library-select" aria-label="按稀有度筛选"><option value="全部">不限稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select></span></label><label class="studio-field studio-quick studio-quick-sort"><span class="studio-select-shell"><select id="libSort" class="pg-select" aria-label="照片排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>稀有度</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>费用</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>名称</option></select></span></label><label class="studio-field studio-quick studio-quick-person"><span class="studio-select-shell"><select id="libCls" class="pg-select library-select" aria-label="按人物筛选"><option value="全部">不限人物</option><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(c => c && c !== '通用'))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select></span></label>
-              <div class="studio-index-heading"><span class="lib-show"${libFiltered().length === libCards.length ? ' hidden' : ''}><b id="libResultCount">${libFiltered().length}</b> 张</span><button type="button" class="studio-clear" data-act="libClearFilter">重置</button></div>
-            </div><div class="studio-active-filters" id="libActiveFilters">${libActiveFiltersHTML()}</div>
-          </section>
+          ${collectionToolbarHTML({search:`<label class="studio-field studio-query"><span class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="模糊搜索名称或效果，空格分隔关键词" value="${escAttr(libFilter.q)}"></span></label>`,filters:`<label class="studio-field studio-quick studio-quick-rarity"><span class="studio-select-shell"><select id="libRar" class="pg-select library-select" aria-label="按稀有度筛选"><option value="全部">不限稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select></span></label><label class="studio-field studio-quick studio-quick-sort"><span class="studio-select-shell"><select id="libSort" class="pg-select" aria-label="照片排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>稀有度</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>费用</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>名称</option></select></span></label><label class="studio-field studio-quick studio-quick-person"><span class="studio-select-shell"><select id="libCls" class="pg-select library-select" aria-label="按人物筛选"><option value="全部">不限人物</option><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(c => c && c !== '通用'))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select></span></label>`,results:`<span class="lib-show"${libFiltered().length === libCards.length ? ' hidden' : ''}><b id="libResultCount">${libFiltered().length}</b> 张</span><button type="button" class="studio-clear" data-act="libClearFilter">重置</button>`,className:'studio-filterbar',label:'照片搜索与筛选'})}
+          <div class="studio-active-filters" id="libActiveFilters">${libActiveFiltersHTML()}</div>
           ${libGridHTML()}
         </section>
         <aside class="library-inspector" aria-label="选中卡牌详情"><div class="library-preview${selectedPreview ? ' has-preview' : ''}" id="libPreview" aria-live="polite">${libPreviewHTML(selectedPreview)}</div></aside>
@@ -821,9 +787,8 @@ function renderCardLibrary() {
     if (!page.isConnected || document.querySelector('.card-library-page') !== page) releaseLibPageResources(true);
   }, { signal });
   document.addEventListener('sdt-overlay-close', () => releaseLibPageResources(true), { signal });
-  lastSavedId = null;
   bindPhotoStudioControls(document.querySelector('.studio-unified'));
-  releaseLibTabMarker = bindPhotoStudioTabMarker(document.querySelector('.studio-unified .clib-tabs'));
+  releaseLibTabMarker = bindPhotoStudioTabMarker(document.querySelector('.studio-unified .studio-category-tabs'));
   // 整页重建的网格同样走窗口挂载：还有剩余就挂上哨兵观察
   const libGrid = document.getElementById('libGrid');
   rebuildLibNodeMap(libGrid);
@@ -839,7 +804,7 @@ function renderCardLibrary() {
   // 昨晚"悬停去重"改动曾在此赋值触发 TDZ ReferenceError，导致后续全部 UI.act
   // 注册被跳过，卡牌库整页按钮（含右上关闭钮）无响应（老板留言：退出点不动）。
   libAct('closeCardPage', closeLibPage);
-  libAct('newCard', () => { if (CARD_DESIGNER_WRITES_ENABLED) openCardDesigner(null); });
+  libAct('newCard', () => {});
   // 切页签/清筛选只重绘卡格区：整页 renderCardLibrary() 会重建 245 张卡面的 HTML
   // （实测主线程阻塞 ~100ms）并重挂全部事件，而这两处改动只影响卡格与页签高亮
   libAct('libTab', (d) => {
@@ -885,11 +850,7 @@ function renderCardLibrary() {
     const referenced = libDescriptionRenderer.getCard(data.cardReference);
     if (referenced) UI.showCardZoom(referenced, { ...libReferenceOptions(referenced), returnFocus: trigger });
   });
-  libAct('editCard', (d) => {
-    if (!CARD_DESIGNER_WRITES_ENABLED) return;
-    const card = SDT.Cards.all().find(c => c.id === (d.card || d.id));
-    if (card) openCardDesigner(card);
-  });
+  libAct('editCard', () => {});
   libAct('libInspect', (d, trigger) => {
     const card = libCards.find(c => c.id === d.card);
     // 快门声+白闪是照相馆的「取照片」仪式（sfx('shutter')，静音/音效开关由 Sound 统一把关）
@@ -934,24 +895,9 @@ function renderCardLibrary() {
       });
     }
   });
-  libAct('delCard', (d) => {
-    if (!CARD_DESIGNER_WRITES_ENABLED) return;
-    const btn = [...document.querySelectorAll('.card-library-page [data-act="delCard"][data-id]')].find(el => /** @type {HTMLElement} */ (el).dataset.id === d.id);
-    if (btn && !/** @type {HTMLElement} */ (btn).dataset.confirm) {
-      /** @type {HTMLElement} */ (btn).dataset.confirm = '1'; btn.textContent = '确认删除？'; btn.classList.add('arm');
-      setTimeout(() => {
-        if (btn.isConnected) { delete /** @type {HTMLElement} */ (btn).dataset.confirm; btn.textContent = '删除'; btn.classList.remove('arm'); }
-      }, 2600);
-      return;
-    }
-    const card = libCards.find(c => c.id === d.id);
-    SDT.Cards.remove(d.id);
-    Sfx.tick();
-    UI.log(`[[icon:trash]] 已删除卡牌【<b>${esc(card ? card.name : '')}</b>】`, 'warn');
-    renderCardLibrary();
-  });
+  libAct('delCard', () => {});
   libAct('exportCards', () => showCardsExportOverlay());
-  libAct('importCards', () => { if (CARD_DESIGNER_WRITES_ENABLED) showCardsImportOverlay(); });
+  libAct('importCards', () => {});
   // 备注同步闭环（2026-09-20 老板定版）：导出 底稿+手写 合并的完整 card-notes.json，
   // 老板整文件回填 data/ 提交即完成"改的东西进数据库"
   libAct('exportNotes', () => {
@@ -966,19 +912,18 @@ function renderCardLibrary() {
   // 搜索 / 稀有度筛选：只重绘卡格，保持输入焦点
   UI._inputHandler = session.inputHandler = (e) => {
     if (!isCurrentLibPage(session)) return;
-    let prism = false;   // 彩蛋 2 的触发条件：筛到「棱彩」
-    if (/** @type {HTMLElement} */ (e.target).id === 'cardSearch') {
-      libFilter.q = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value;
+    const target = /** @type {HTMLInputElement | HTMLSelectElement} */ (e.target);
+    const field = Object.hasOwn(libFilterFields, target.id) ? libFilterFields[target.id] : null;
+    if (!field) return;
+    libFilter[field] = target.value;
+    if (field === 'q') {
       clearTimeout(libSearchTimer);
       libSearchTimer = null;
       if (!/** @type {KeyboardEvent} */ (e).isComposing && !libSearchComposing) libSearchTimer = setTimeout(() => renderLibGrid({ reason: 'search' }), 120);
       return;
     }
-    else if (/** @type {HTMLElement} */ (e.target).id === 'libRar') { libFilter.rar = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value; prism = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value === '棱彩'; }
-    else if (/** @type {HTMLElement} */ (e.target).id === 'libCls') { libFilter.cls = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value; }
-    else if (/** @type {HTMLElement} */ (e.target).id === 'libSort') { libFilter.sort = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value; }
-    else return;
-    renderLibGrid({ reason: /** @type {HTMLElement} */ (e.target).id === 'libSort' ? 'sort' : 'filter' });
+    const prism = field === 'rar' && target.value === '棱彩';
+    renderLibGrid({ reason: field === 'sort' ? 'sort' : 'filter' });
     if (prism) libHoloEgg();
   };
   // 悬停大图预览（炉石式）。mouseover 会因子元素冒泡重复触发：
@@ -1000,7 +945,7 @@ function renderCardLibrary() {
     libPreviewTimer = setTimeout(() => {
       libPreviewTimer = null;
       if (!isCurrentLibPage(session)) return;
-      const card = libCardById.get(id);
+      const card = libModel.get(id);
       if (card) setLibSelection(card.id, true);
     }, 90);
   };
@@ -1053,6 +998,14 @@ export async function preparePhotoStudioEntry(signal) {
   const grid = document.getElementById('libGrid');
   if (!grid || signal?.aborted) return;
   const bounds = grid.getBoundingClientRect();
+  // The curtain hides the gallery. Start its visible prints directly rather than
+  // relying on the next observer delivery before their readiness deadline.
+  const visibleTiles = Array.from(grid.children).filter(tile => {
+    const rect = tile.getBoundingClientRect();
+    return rect.bottom > bounds.top && rect.top < bounds.bottom;
+  });
+  visibleTiles.forEach(mountLibTile);
+  warmLibArt({ roots: visibleTiles, preview: false, nearViewport: true });
   const images = Array.from(grid.querySelectorAll('.studio-photo-art img')).filter(image => {
     const rect = image.getBoundingClientRect();
     return rect.bottom > bounds.top && rect.top < bounds.bottom;
@@ -1084,8 +1037,18 @@ export async function preparePhotoStudioEntry(signal) {
   }
 }
 
+// Offscreen shells and the larger observer window resume after the illustrated
+// cut finishes, so their template/layout work cannot consume its animation frames.
+export function finishPhotoStudioEntry(root) {
+  if (!libEntryPending || !isCurrentLibPage() || libPageSession.root !== root) return;
+  libEntryPending = false;
+  observeLibTiles(document.getElementById('libGrid'));
+  appendLibShellsIdle();
+}
+
 // Replacing the host overlay also retires this page, without changing its successor's state.
 function releaseLibPageResources(removePageClass = false) {
+  libEntryPending = false;
   rememberLibBrowse();
   const session = libPageSession;
   libPageSession = null;

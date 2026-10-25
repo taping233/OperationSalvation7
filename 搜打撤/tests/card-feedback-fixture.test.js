@@ -6,7 +6,7 @@ it.each(['card-feedback-review.html','infusion-review.html'])('%s keeps controls
  const parsed=new DOMParser().parseFromString(html,'text/html');
  document.body.innerHTML=parsed.body.innerHTML;
  const overlay=document.querySelector('#overlay'), controls=document.querySelector('#fixtureControls');
- const ui={el:{overlay},_overlayInerted:[]};
+ const ui={...overlayMethods,el:{overlay},_overlayInerted:[]};
  overlayMethods._isolateOverlayBackground.call(ui);
  expect(overlay.contains(controls)).toBe(true);
  expect(controls.closest('[inert]')).toBeNull();

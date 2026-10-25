@@ -1,6 +1,7 @@
 /* Configured LLM execution: loaded only on the first configured, non-cancelled decision. */
 import { normalizeAction } from './agent.protocol.js';
 import { parseActionReply } from './agent.llm-parser.js';
+import { bindObservedAction, getObservedActionTarget } from '../ui/action-dispatch.js';
 
 const SYSTEM_PROMPT = `你是《搜打撤》游戏 AI。读局面 JSON，回一个动作 JSON，不要输出别的。
 游戏目标：在四层地图走到终局撤离点撤离（或击败首脑后撤离）；死亡会丢失大部分带入卡牌。
@@ -51,6 +52,22 @@ const MAX_RETRIES = 3;
 // COMMAND_TIMEOUT，决策段无任何上限）。可用 options.timeoutMs 覆盖（测试用）。
 const DECIDE_TIMEOUT_MS = 30000;
 
+function availableAction(action, actions = []) {
+  return actions.find(candidate => {
+    const normalized = normalizeAction(candidate);
+    if (!normalized.ok) return false;
+    const offered = normalized.action;
+    if (action.type !== offered.type || action.name !== offered.name) return false;
+    if (action.type === 'move') return action.li === offered.li && action.idx === offered.idx;
+    const actual = action.type === 'ui' ? action.params : action.args;
+    const expected = action.type === 'ui' ? offered.params : offered.args;
+    const keys = Object.keys(actual);
+    return keys.length === Object.keys(expected).length
+      && keys.every(key => Object.hasOwn(expected, key) && (action.type === 'ui'
+        ? String(actual[key] ?? '') === String(expected[key] ?? '') : actual[key] === expected[key]));
+  });
+}
+
 // 组合取消源：调用方 signal（stopRun 链）+ 墙钟超时 → 单一 fetch signal。
 // 不用 AbortSignal.any（Chromium 116+，高于项目 105 基线），手动桥接。
 function abortableFetchSignal(signal, timeoutMs) {
@@ -95,8 +112,13 @@ async function decideConfigured(obs, config, fallback, options, extras) {
     }
     const parsed = parseActionReply(text);
     const norm = parsed.ok ? normalizeAction(parsed.raw) : { ok: false, code: parsed.code, message: parsed.message };
-    if (norm.ok) return norm.action;
-    lastError = `${norm.code}: ${norm.message}`;
+    const offered = norm.ok && availableAction(norm.action, obs.actions);
+    if (offered) {
+      const target = getObservedActionTarget(offered);
+      return target ? bindObservedAction(norm.action, target) : norm.action;
+    }
+    lastError = norm.ok ? 'ACTION_UNAVAILABLE: 动作及其参数不在当前 actions 清单中'
+      : `${norm.code}: ${norm.message}`;
     messages.push({ role: 'assistant', content: text });
     messages.push({ role: 'user', content: `动作非法（${lastError}）。请只回一个当前 actions 清单里存在的动作 JSON。` });
   }

@@ -1,0 +1,33 @@
+/* Terminal reports reuse the shared dialog, facts, disclosure and action components. */
+body #overlay.fx-doom .card:has(.settlement-report) {
+  display:flex; align-items:center; justify-content:center; width:100%; height:100%;
+  max-width:none; max-height:none; padding:24px; box-sizing:border-box;
+  border:0; background:none; box-shadow:none;
+  & > #ovTitle { display:none; }
+  & > #ovBody { width:100%; height:100%; min-height:0; margin:0; padding:0; overflow:hidden; display:grid; place-items:center; }
+}
+#overlay .settlement-report.ui-dialog-panel {
+  display:flex; flex-direction:column; gap:var(--ui-space-6); width:min(1000px,100%);
+  max-height:100%; min-height:0; overflow:hidden; color:var(--dialog-copy);
+  & .settlement-heading { display:flex; align-items:center; gap:var(--ui-space-6); flex:none; }
+  & .settlement-heading > div { min-width:0; }
+  & .settlement-heading h2 { color:var(--ui-risk); }
+  & .settlement-heading p { margin:var(--ui-space-2) 0 0; }
+  & .settlement-banner { width:28%; height:100px; object-fit:cover; border-radius:var(--ui-radius); }
+  & .settlement-content { min-height:0; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; display:flex; flex-direction:column; gap:var(--ui-space-6); padding-right:var(--ui-space-2); }
+  & .ui-facts { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  & .settlement-notes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--ui-space-6); }
+  & .settlement-notes p { margin:0; }
+  & :is(.settlement-review,.settlement-xp) { border-top:1px solid var(--dialog-edge); padding-top:var(--ui-space-4); }
+  & :is(.settlement-review > b,.settlement-xp-h,.settlement-loot-h) { display:block; margin:0; color:var(--dialog-title); font-size:var(--ui-text-body); }
+  & :is(.settlement-review p,.settlement-xp-note) { margin:var(--ui-space-2) 0 0; }
+  & :is(.settlement-review small,.settlement-more) { color:var(--ui-muted); font-size:var(--ui-text-label); line-height:var(--ui-leading-body); }
+  & .settlement-xp-bar { height:6px; margin-top:var(--ui-space-3); background:var(--ui-line); overflow:hidden; border-radius:var(--ui-radius); }
+  & .settlement-xp-bar i { display:block; height:100%; background:var(--ui-blue); }
+  & .settlement-details-body { display:grid; gap:var(--ui-space-4); }
+  & .settlement-details-body p { margin:0; }
+  & .settlement-cards { display:flex; flex-wrap:wrap; gap:var(--ui-space-4); margin-top:var(--ui-space-3); }
+  & .settlement-card { display:inline-flex; }
+  & .settlement-actions { flex:none; margin:0; padding-top:var(--ui-space-4); flex-wrap:nowrap; }
+  & .settlement-actions .ui-action { flex:1; justify-content:center; }
+}

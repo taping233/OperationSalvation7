@@ -2,68 +2,43 @@
    confirmation keep distinct actions. */
 /* Measured standard-art bounds. The framed roster stage consumes these values;
    scene skins use the same frame with their original composition contained. */
-#overlay .cls2-fullart img.art-figure[src*="/full/wu.webp"] {
+#overlay .cls2-fullart img.art-figure{
+&[src*="/full/wu.webp"] {
   --portrait-height:95.115%; --portrait-bottom:2.257%; --portrait-center:-57.764%;
 }
-#overlay .cls2-fullart img.art-figure[src*="/full/changwuyu.webp"] {
+&[src*="/full/changwuyu.webp"] {
   --portrait-height:95.796%; --portrait-bottom:2.268%; --portrait-center:-50.664%;
 }
-#overlay .cls2-fullart img.art-figure[src*="/full/baita.webp"] {
+&[src*="/full/baita.webp"] {
   --portrait-height:100.192%; --portrait-bottom:2.026%; --portrait-center:-49.434%;
 }
-#overlay .cls2-fullart img.art-figure[src*="/full/heixiang.webp"] {
+&[src*="/full/heixiang.webp"] {
   --portrait-height:95.932%; --portrait-bottom:3%; --portrait-center:-50.02%;
 }
-#overlay .cls2-fullart img.art-figure[src*="/full/xingyue.webp"] {
+&[src*="/full/xingyue.webp"] {
   --portrait-height:95%; --portrait-bottom:2.5%; --portrait-center:-50%;
-}
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-face {
+}}
+#overlay .card.page .pg.cls2-page.roster-reference{
+& .cls2-face {
   clip-path:none; border:1px solid transparent; box-shadow:none;
 }
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-face.sel {
+& .cls2-face.sel {
   border-color:#e0ceb0; outline:2px solid #e0ceb0; outline-offset:3px;
   box-shadow:none; transform:none;
 }
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-face b {
+& .cls2-face b {
   background:#172832e8; color:#e9edf0; text-align:center;
 }
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-mechanism > b { font-size:30px; }
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-mechanism > p { margin:8px 0 18px; }
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-example {
-  display:grid; grid-template-columns:140px minmax(0,1fr); align-items:center; gap:20px;
-  width:100%; padding:8px 0 14px; margin:0; border:0; background:none;
-  text-align:left; box-shadow:none; color:inherit;
-}
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-art { width:140px; }
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-art .hs-card {
-  width:140px; margin:0; font-size:14px; transform:none;
-}
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-copy {
-  display:flex; flex-direction:column; gap:12px; color:#426171;
-}
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-copy > span { font-size:22px; }
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-copy small { font-size:20px; line-height:1.5; }
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-example:focus-visible {
-  outline:3px solid #8b6c3e; outline-offset:4px;
-}
+& .cls2-mechanism > b { font-size:30px; }
+& .cls2-mechanism > p { margin:8px 0 18px; }
 /* Existing camp examples make every direct span span both columns. This
    example has real card art, so pin its copy to the second column explicitly. */
-#overlay .card.page .pg.cls2-page.roster-reference[data-base-departure] .cls2-example {
-  grid-template-columns:140px minmax(0,1fr); min-height:0; height:auto;
-  overflow:visible; white-space:normal;
-}
-#overlay .card.page .pg.cls2-page.roster-reference[data-base-departure] .cls2-example > .cls2-example-art {
-  grid-column:1; grid-row:1; min-width:0;
-}
-#overlay .card.page .pg.cls2-page.roster-reference[data-base-departure] .cls2-example > .cls2-example-copy {
-  grid-column:2; grid-row:1; min-width:0;
-}
-#overlay .card.page .pg.cls2-page.roster-reference[data-base-departure] .cls2-face.sel {
+&[data-base-departure] .cls2-face.sel {
   border:2px solid #e0ceb0; outline:2px solid #e0ceb0; outline-offset:-4px;
 }
-#overlay .card.page .pg.cls2-page.roster-reference[data-base-departure] .cls2-face.sel::before {
+&[data-base-departure] .cls2-face.sel::before {
   content:'✓'; position:absolute; inset:6px 6px auto auto; z-index:4;
   width:26px; height:26px; display:grid; place-items:center;
   color:#172832; background:#e0ceb0; font:700 20px/1 var(--font-ui);
   pointer-events:none;
-}
+}}

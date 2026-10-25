@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 
@@ -8,9 +9,7 @@ window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music: vi.fn(), sfx: vi.fn(), setDucked: vi.fn() },
   FX: { feedback: vi.fn() },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2,
-    battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5,
-    battleTurnDraw: 1, diceSides: 6 } },
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1) } },
 };
 await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');
@@ -40,7 +39,7 @@ describe('死亡终局幂等', () => {
     window.SDT.Base.data.characters = { wu: { lv: 1, xp: 47 } };
     (await window.SDT.Base.save());
     session._set_active_slot(2);
-    RunStorage.write(2, { seed: 'terminal-death', hp: 0, maxHp: 30, inventory: [], ownedCards: [], myClass: '侠客' });
+    await RunStorage.write(2, { seed: 'terminal-death', hp: 0, maxHp: 30, inventory: [], ownedCards: [], myClass: '侠客' });
     game.runActive = true;
     game.state = 'idle';
     game.myClass = '侠客';

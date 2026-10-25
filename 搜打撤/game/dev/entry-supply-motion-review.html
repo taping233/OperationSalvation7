@@ -1,0 +1,68 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>Entry supply motion review</title><link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/cards.css" />
+<link rel="stylesheet" href="css/overlays.css" />
+<link rel="stylesheet" href="css/hub.css" />
+<link rel="stylesheet" href="css/battle.css" />
+<link rel="stylesheet" href="css/scenes.css" />
+<link rel="stylesheet" href="css/lab-ending.css" />
+<link rel="stylesheet" href="css/winter.css" />
+<link rel="stylesheet" href="css/expedition.css" />
+<link rel="stylesheet" href="css/expedition-map.css" />
+<link rel="stylesheet" href="css/map-edge-light.css" />
+<link rel="stylesheet" href="css/expedition-hub.css" />
+<link rel="stylesheet" href="css/expedition-inventory.css" />
+<link rel="stylesheet" href="css/expedition-rewards.css" />
+<link rel="stylesheet" href="css/expedition-battle.css" />
+<link rel="stylesheet" href="css/expedition-library.css" />
+<link rel="stylesheet" href="css/card-v3.css" />
+<link rel="stylesheet" href="css/expedition-roster.css" />
+<link rel="stylesheet" href="css/expedition-shop.css" />
+<link rel="stylesheet" href="css/ui-scale.css" />
+<link rel="stylesheet" href="css/page-slot-select.css" />
+    <link rel="stylesheet" href="css/page-settings.css" />
+    <link rel="stylesheet" href="css/page-datapage.css" />
+<link rel="stylesheet" href="css/page-ach.css" />
+<link rel="stylesheet" href="css/page-cardforge.css" />
+<link rel="stylesheet" href="css/page-expedition-hud.css" />
+<link rel="stylesheet" href="css/feedback-oct12.css" />
+<link rel="stylesheet" href="css/roster-departure-v2.css" />
+<link rel="stylesheet" href="css/experience-loot.css" />
+<link rel="stylesheet" href="css/page-events.css" />
+<link rel="stylesheet" href="css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="css/page-battle-ui.css" />
+<link rel="stylesheet" href="css/character-idle.css" />
+<link rel="stylesheet" href="css/page-transitions.css" />
+<link rel="stylesheet" href="css/ak-skin.css" />
+<link rel="stylesheet" href="css/base-camp.css" />
+<link rel="stylesheet" href="css/base-camp-compact.css" />
+<link rel="stylesheet" href="css/card-layout-selected.css" />
+<link rel="stylesheet" href="css/battle-stage.css" />
+<link rel="stylesheet" href="css/transition-illustrations.css" /><style>html,body{margin:0;width:100%;height:100%;overflow:hidden}#viewport{position:fixed;inset:0}#overlay{position:absolute;inset:0;padding:0}#overlay>.card{width:100%;height:100%;margin:0;padding:0}#ovBody{height:100%}.review-tools{position:fixed;bottom:8px;left:12px;z-index:20000;display:flex;gap:8px;padding:8px;background:#10212beb;color:#e4ebed}.review-tools button{color:inherit;background:#263b47;padding:8px;border:1px solid #8ca1af}</style></head><body><div id="viewport"><div id="overlay" class="room-view" hidden><div class="card page"><div id="ovBody"></div></div></div></div><nav class="review-tools"><button id="home">Home</button><button id="supply">Entry supply</button><output id="status"></output></nav><script type="module">
+import SDT,{sdtDefine} from '/src/core/sdt-facade.js';
+import '/src/core/icons-bitmap.js';
+import '/src/core/art.js';
+import '/src/ui/ui-scale.js';
+import {baseHomeV3HTML} from '/src/hub/hub.home-v3.js';
+import {rewardSceneHTML,rewardCardUnitHTML,rewardClaimHTML} from '/src/ui/reward-scene-view.js';
+import {rulesSlice} from '/src/cards/cards.rules.js';
+import {dataSlice} from '/src/cards/cards.data.js';
+import {cardHTML} from '/src/cards/cards.view.js';
+const catalog=Object.values(dataSlice).filter(Array.isArray).flat();
+sdtDefine('Cards',{...rulesSlice,all:()=>catalog,cardHTML});
+const overlay=document.querySelector('#overlay'),body=document.querySelector('#ovBody');
+const ui={el:{overlay,ovBody:body},_overlayRevision:0,showOverlay(heading,html,mode){body.innerHTML=SDT.Icons.rich(html);overlay.hidden=false;this._lastMode=mode;this._overlayRevision++;},hideOverlay(){overlay.hidden=true;body.replaceChildren();}};
+sdtDefine('UI',ui);
+await import('/src/ui/interface-motion.js');
+const base={data:{stash:[],pocket:[],ammoTaught:true}};
+const options={base,meta:{pendingColl:()=>[],pendingAch:()=>[]},modes:{standard:{id:'standard'}},mode:'standard',prepared:false};
+let peak=0;
+const report=()=>{peak=Math.max(peak,document.querySelectorAll('.silent-node-cut').length);document.querySelector('#status').textContent=`Extra scene peak: ${peak}`;};
+new MutationObserver(changes=>{if(changes.some(change=>!document.querySelector('#status').contains(change.target)))report();}).observe(document.body,{childList:true,subtree:true});
+document.querySelector('#home').onclick=()=>{ui.showOverlay('',baseHomeV3HTML(options),'page');report();};
+document.querySelector('#supply').onclick=()=>{
+ const cards=['tt3-ice-spike','tt3-azure-sword'].map(id=>catalog.find(card=>card.id===id));
+ const html=rewardSceneHTML({className:'pg entry-reward-scene entry-supply-strips',title:'\u968f\u884c\u8865\u7ed9',cards:cards.map((card,index)=>rewardCardUnitHTML({card,index,face:cardHTML(card),readAction:'inspect',action:rewardClaimHTML({index,cardName:card.name})})).join(''),footer:'8 / 16',actions:'<button>Continue</button>'});
+ peak=0;ui.showOverlay('',html,'page');report();Promise.resolve().then(()=>ui.showOverlay('',html,'page'));
+};
+document.querySelector('#home').click();
+</script></body></html>

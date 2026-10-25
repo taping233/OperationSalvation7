@@ -28,7 +28,7 @@ describe('explicit card browser columns', () => {
       Array.from({ length: 12 }, (_, i) => `<button data-browser-key="${i}"><img alt=""></button>`).join(''),
       { rows: 1, columns: 4 });
     const root = document.querySelector('[data-card-browser]');
-    Object.defineProperty(root.querySelector('.card-browser-track'), 'clientWidth', { value: 900 });
+    Object.defineProperty(root.querySelector('.card-browser-track'), 'clientWidth', { value: 900, configurable:true });
     const items = [...root.querySelectorAll('[data-browser-key]')];
     const shown = () => items.filter(item => !item.hidden).map(item => item.dataset.browserKey);
     bindCardBrowser(root);
@@ -37,6 +37,9 @@ describe('explicit card browser columns', () => {
 
     items.slice(0, 10).forEach(item => { item.dataset.browseFiltered = 'true'; });
     for (let i = 0; i < 100; i++) items[i % items.length].querySelector('img').dispatchEvent(new Event('load'));
+    expect(frames).toHaveLength(0); // Fixed columns do not depend on image height.
+    Object.defineProperty(root.querySelector('.card-browser-track'),'clientWidth',{value:850,configurable:true});
+    window.dispatchEvent(new Event('resize'));
     expect(frames).toHaveLength(1);
     expect(shown()).toEqual(['4', '5', '6', '7']);
     frames[0]();
@@ -44,6 +47,8 @@ describe('explicit card browser columns', () => {
     expect(root.querySelector('[data-browser-page="next"]').disabled).toBe(true);
 
     items[10].querySelector('img').dispatchEvent(new Event('load'));
+    Object.defineProperty(root.querySelector('.card-browser-track'),'clientWidth',{value:800,configurable:true});
+    window.dispatchEvent(new Event('resize'));
     expect(frames).toHaveLength(2);
     root.remove();
     vi.stubGlobal('getComputedStyle', () => { throw new Error('detached browser refreshed'); });

@@ -1,6 +1,11 @@
 import { clone, fail } from './commands.shared.js';
 import { RULE_CONFIG } from '../core/rule-config.js';
 import { LEVEL_MAX, xpForNext } from './meta-progression.js';
+import { sameStoredCard, storedCardVariant } from './stored-card-identity.js';
+
+// New extraction drafts distinguish source identities before any warehouse merge.
+export const extractionSourceKey = stack => JSON.stringify([stack.card.id || null,
+  stack.variantKey || stack.card.variantKey || '', stack.card.id ? null : stack.card.name]);
 
 function validStack(stack) {
   return !!stack && typeof stack === 'object' && !Array.isArray(stack) &&
@@ -16,6 +21,9 @@ function validateSelections(selections) {
         !Number.isSafeInteger(selection.count) || selection.count <= 0) {
       return fail('INVALID_ARGUMENT', '入库选择须包含卡牌名称和正整数数量');
     }
+    if (Object.hasOwn(selection, 'sourceKey') && (typeof selection.sourceKey !== 'string' || !selection.sourceKey)) {
+      return fail('INVALID_ARGUMENT', '入库来源须为非空稳定标识');
+    }
   }
   return { ok: true };
 }
@@ -25,10 +33,14 @@ export function validatePendingExtraction(pending) {
   if (pending.version !== 1 || typeof pending.runId !== 'string' || !pending.runId.trim() || pending.phase !== 'organizing') {
     return fail('INVALID_EXTRACTION', '撤离整理记录版本、身份或阶段无效');
   }
+  if (pending.sourceIdentityVersion != null && pending.sourceIdentityVersion !== 1) return fail('INVALID_EXTRACTION', '撤离来源身份版本无效');
   if (!Number.isInteger(pending.requestSeq) || pending.requestSeq < 0 ||
       !Array.isArray(pending.remainingCards) || !pending.remainingCards.every(validStack) ||
       !Array.isArray(pending.keptPocket) || !pending.keptPocket.every(validStack)) {
     return fail('INVALID_EXTRACTION', '撤离整理卡牌或请求序号无效');
+  }
+  if (pending.sourceIdentityVersion === 1 && new Set(pending.remainingCards.map(extractionSourceKey)).size !== pending.remainingCards.length) {
+    return fail('INVALID_EXTRACTION', '撤离整理来源身份重复');
   }
   if (!Number.isInteger(pending.totalPocketCount) || pending.totalPocketCount < 0 ||
       !Number.isInteger(pending.lostPocketCount) || pending.lostPocketCount < 0 ||
@@ -45,11 +57,11 @@ export function validatePendingExtraction(pending) {
   return { ok: true };
 }
 
-const stackInto = (list, stack) => {
+const stackInto = (list, stack, preserveIdentity = false) => {
   if (!stack || !stack.card || !stack.count) return;
-  const found = list.find(item => item.card.name === stack.card.name);
+  const found = list.find(item => preserveIdentity ? sameStoredCard(item, stack) : item.card.name === stack.card.name);
   if (found) found.count += stack.count;
-  else list.push({ card: { ...stack.card }, count: stack.count });
+  else list.push({ card: { ...stack.card }, count: stack.count, ...(preserveIdentity ? storedCardVariant(stack) : {}) });
 };
 
 function addXp(base, cls, amount, characterFor, addXpToProgress) {
@@ -96,16 +108,18 @@ export function extractionXp(moves, xpMul) {
   return Math.round((20 + moves * 2) * (Number(xpMul) || 1));
 }
 
-// 整理命令按名称堆叠候选；只有真实入库才会扣减 remainingCards。
+// 新整理按稳定来源堆叠；旧草稿保留原名称堆叠。只有真实入库才扣减 remainingCards。
 // 在 finish 清理 pending 前固化差集，不把初攻、未入库卡或仓库往局持有计入本局。
-function savedExtractionCards(game, remaining, isSha) {
+function savedExtractionCards(game, remaining, isSha, preserveIdentity = false) {
   const candidates = [];
   for (const entry of game.ownedCards || []) {
-    if (entry?.card && !isSha(entry.card)) stackInto(candidates, { card: entry.card, count: 1 });
+    if (entry?.card && !isSha(entry.card)) stackInto(candidates, { card: entry.card, count: 1,
+      ...(preserveIdentity ? storedCardVariant(entry) : {}) }, preserveIdentity);
   }
-  const leftByName = new Map(remaining.map(stack => [stack.card.name, stack.count]));
-  return clone(candidates.map(stack => ({ card: stack.card,
-    count: Math.max(0, stack.count - (leftByName.get(stack.card.name) || 0)),
+  const keyOf = preserveIdentity ? extractionSourceKey : stack => stack.card.name;
+  const leftByKey = new Map(remaining.map(stack => [keyOf(stack), stack.count]));
+  return clone(candidates.map(stack => ({ ...stack,
+    count: Math.max(0, stack.count - (leftByKey.get(keyOf(stack)) || 0)),
   })).filter(stack => stack.count > 0));
 }
 
@@ -144,7 +158,7 @@ export function buildExtractionReceipt({ game, pending, isSha = /** @type {(card
     actions: Math.max(0, (Number(game.turn) || 0) - 1),
     firstExplore: { moves, xp: extractionXp(moves, xpMul) },
     ...(pending?.growth ? { growth: clone(pending.growth) } : {}),
-    savedCards: savedExtractionCards(game, remaining, isSha),   // 随事务回执保留最终入库集合，供跑局记录使用
+    savedCards: savedExtractionCards(game, remaining, isSha, pending?.sourceIdentityVersion === 1),
     netTake: {
       cardsStashed: Math.max(0, ownedNonSha - remainingCount),   // 本局真实入库张数（与携出候选、仓库原持有区分）
       pocketKept: pocket.keptCount,
@@ -171,17 +185,15 @@ function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, c
     const count = stack.count || 1;
     totalPocketCount += count;
     for (let i = 0; i < count; i++) {
-      if (random() < RULE_CONFIG.extraction.pocketKeepChance) stackInto(keptPocket, { card: stack.card, count: 1 });
+      if (random() < RULE_CONFIG.extraction.pocketKeepChance) stackInto(keptPocket, { card: stack.card, count: 1, ...storedCardVariant(stack) }, true);
       else lostPocketCount++;
     }
   });
-  const byName = new Map();
+  const remainingCards = [];
   (game.ownedCards || []).forEach(entry => {
     const card = entry && entry.card;
     if (!card || baseApi.isSha(card)) return;
-    const stack = byName.get(card.name);
-    if (stack) stack.count++;
-    else byName.set(card.name, { card: { ...card }, count: 1 });
+    stackInto(remainingCards, { card, count:1, ...storedCardVariant(entry) }, true);
   });
   const resources = { wood: 0, rations: 0 };
   (game.inventory || []).forEach(item => {
@@ -191,12 +203,12 @@ function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, c
   });
   const pending = {
     version: 1, runId, phase: 'organizing', requestSeq: 0,
-    remainingCards: [...byName.values()], keptPocket, lostPocketCount, totalPocketCount, resources,
+    sourceIdentityVersion:1, remainingCards, keptPocket, lostPocketCount, totalPocketCount, resources,
   };
   const base = clone(baseSnapshot);
   base.wood += resources.wood;
   base.rations += resources.rations;
-  extractionPocketOutcome(pending, baseApi.isSha).keptCards.forEach(stack => stackInto(base.pocket, stack));
+  extractionPocketOutcome(pending, baseApi.isSha).keptCards.forEach(stack => stackInto(base.pocket, stack, true));
   base.stats.extracts++;   // 09-24 定版：撤离不再解锁研究所（改钥匙开门，见 game.nest.openNestPrep）
   base.stats.bestRunCoins = Math.max(base.stats.bestRunCoins, game.coins || 0);
   const elapsedNow = Math.max(0, Number(game.elapsed) || 0);
@@ -343,10 +355,14 @@ export function createExtractionCommands({
     let room = Math.max(0, baseApi.stashCap() - used);
     let count = 0;
     for (const selection of selections) {
-      const stack = next.remainingCards.find(item => item.card.name === selection.name);
+      const matches = next.remainingCards.filter(item => item.card.name === selection.name);
+      if (selection.sourceKey != null && pending.sourceIdentityVersion !== 1) return fail('INVALID_ARGUMENT', '旧整理记录只接受原名称选择');
+      if (pending.sourceIdentityVersion === 1 && selection.sourceKey == null && matches.length > 1) return fail('AMBIGUOUS_SELECTION', '同名卡牌存在不同来源，请按当前卡牌重新选择');
+      const stack = selection.sourceKey == null ? matches[0]
+        : matches.find(item => extractionSourceKey(item) === selection.sourceKey);
       const take = Math.min(stack?.count || 0, selection.count, room);
       if (!stack || take <= 0) continue;
-      stackInto(afterBase.stash, { card: stack.card, count: take });
+      stackInto(afterBase.stash, { ...stack, count: take }, true);
       stack.count -= take;
       room -= take;
       count += take;
@@ -362,14 +378,26 @@ export function createExtractionCommands({
       { nextPending: next, count }) };
   }
 
-  async function updateCards(selections, expectedRunId = game.pendingExtraction?.runId, expectedSlotId = getActiveSlot()) {
-    const checkedSelections = validateSelections(selections);
-    if (!checkedSelections.ok) return checkedSelections;
-    // 在异步读档前冻结本次有效输入；后续调用方修改原数组不能污染待提交快照。
-    selections = selections.map(selection => ({ name: selection.name, count: selection.count }));
+  async function organize(command, selections, expectedRunId = game.pendingExtraction?.runId, expectedSlotId = getActiveSlot()) {
+    const stashing = command === 'extractStash';
+    if (stashing) {
+      const checkedSelections = validateSelections(selections);
+      if (!checkedSelections.ok) return checkedSelections;
+      // 在异步读档前冻结本次有效输入；后续调用方修改原数组不能污染待提交快照。
+      selections = selections.map(selection => ({ name: selection.name, count: selection.count,
+        ...(Object.hasOwn(selection, 'sourceKey') ? { sourceKey:selection.sourceKey } : {}) }));
+    }
     const slotId = getActiveSlot();
     if (!slotId) {
       if (expectedSlotId !== null) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');
+      if (!stashing) {
+        // 内存投影局也产回执，页面与记录走同一条读数路径。
+        const receipt = game.pendingExtraction
+          ? buildExtractionReceipt({ game, pending: game.pendingExtraction, isSha: baseApi.isSha, xpMul: xpMultiplier() })
+          : null;
+        game.pendingExtraction = null; game.runActive = false;
+        return { ok: true, ephemeral: true, ...(receipt ? { receipt } : {}) };
+      }
       const checked = validatePendingExtraction(game.pendingExtraction);
       if (!checked.ok) return checked;
       const attempt = prepareCardAttempt({ slotId: null, identity: { runId: game.pendingExtraction.runId, revision: 0 }, run: { pendingExtraction: game.pendingExtraction },
@@ -387,60 +415,36 @@ export function createExtractionCommands({
       const current = await readPending(slotId);
       if (!current.ok) return current;
       if (current.pending.runId !== expectedRunId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');
-      const prepared = prepareCardAttempt(current, selections);
-      if (!prepared.ok || prepared.unchanged) return prepared;
-      attempt = prepared.attempt;
+      if (stashing) {
+        const prepared = prepareCardAttempt(current, selections);
+        if (!prepared.ok || prepared.unchanged) return prepared;
+        attempt = prepared.attempt;
+      } else {
+        // 回执随 extractFinish 事务持久化；已提交过则重放原值，不重复累计。
+        const receipt = buildExtractionReceipt({ game, pending: current.pending, isSha: baseApi.isSha, xpMul: xpMultiplier() });
+        attempt = makeAttempt(slotId, current, `terminal:extract:${expectedRunId}:${current.pending.requestSeq}:finish`,
+          'extractFinish', { requestSeq: current.pending.requestSeq }, current.base, null, { output: { receipt } });
+      }
       inFlight.set(key, attempt);
     }
-    if (attempt.command !== 'extractStash') return fail('REQUEST_PENDING', '完成整理正在等待重试，请点击「完成整理」继续恢复', true);
+    if (attempt.command !== command) return fail('REQUEST_PENDING', stashing
+      ? '完成整理正在等待重试，请点击「完成整理」继续恢复' : '上一项整理正在重试，请稍后再操作', true);
     const receipt = await commitAttempt(attempt);
-    // 日志前的修订拒绝可丢弃；after-base/after-run 等中断或未确认结果必须
-    // 保留同一令牌，经恢复日志和 receipt 重放保证卡牌只入库一次。
+    // 日志前的修订拒绝可丢弃；中断或结果未确认仍保留原令牌等待恢复/重放。
     if (!receipt.ok) {
       if (receipt.code === 'STALE_REVISION' && inFlight.get(key) === attempt) inFlight.delete(key);
       return receipt;
     }
     applyAttempt(attempt);
     inFlight.delete(key);
-    return { ok: true, value: attempt.nextPending, count: attempt.count, replayed: !!receipt.replayed };
+    return stashing
+      ? { ok: true, value: attempt.nextPending, count: attempt.count, replayed: !!receipt.replayed }
+      : { ok: true, value: receipt.value, replayed: !!receipt.replayed };
   }
 
-  async function finish(expectedRunId = game.pendingExtraction?.runId, expectedSlotId = getActiveSlot()) {
-    const slotId = getActiveSlot();
-    if (!slotId) {
-      if (expectedSlotId !== null) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');
-      // 2026-10-03 老板（SYS-02）：测试投影局也产回执（内存态），页面与记录走同一条读数路径
-      const receipt = game.pendingExtraction
-        ? buildExtractionReceipt({ game, pending: game.pendingExtraction, isSha: baseApi.isSha, xpMul: xpMultiplier() })
-        : null;
-      game.pendingExtraction = null; game.runActive = false;
-      return { ok: true, ephemeral: true, ...(receipt ? { receipt } : {}) };
-    }
-    if (expectedSlotId !== slotId) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');
-    if (expectedRunId !== game.pendingExtraction?.runId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');
-    const key = `${slotId}:${expectedRunId}`;
-    let attempt = inFlight.get(key);
-    if (!attempt) {
-      const current = await readPending(slotId);
-      if (!current.ok) return current;
-      if (current.pending.runId !== expectedRunId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');
-      // 2026-10-03 老板（SYS-02）：结算回执随 extractFinish 事务收据持久化（output 位）——
-      // 重试/刷新后重建 attempt 重算结果一致；已提交过则经 readSettlementReceipt 原样重放，不重复累计。
-      const receipt = buildExtractionReceipt({ game, pending: current.pending, isSha: baseApi.isSha, xpMul: xpMultiplier() });
-      attempt = makeAttempt(slotId, current, `terminal:extract:${expectedRunId}:${current.pending.requestSeq}:finish`,
-        'extractFinish', { requestSeq: current.pending.requestSeq }, current.base, null, { output: { receipt } });
-      inFlight.set(key, attempt);
-    }
-    if (attempt.command !== 'extractFinish') return fail('REQUEST_PENDING', '上一项整理正在重试，请稍后再操作', true);
-    const receipt = await commitAttempt(attempt);
-    if (!receipt.ok) {
-      if (receipt.code === 'STALE_REVISION' && inFlight.get(key) === attempt) inFlight.delete(key);
-      return receipt;   // 其余失败与 updateCards 一样保留恢复令牌
-    }
-    applyAttempt(attempt);
-    inFlight.delete(key);
-    return { ok: true, value: receipt.value, replayed: !!receipt.replayed };
-  }
+  // 直接绑定同一异步内核，不额外包一层 await；默认值与校验仍在 async 内求值。
+  const updateCards = organize.bind(null, 'extractStash');
+  const finish = organize.bind(null, 'extractFinish', undefined);
 
   return Object.freeze({ begin, updateCards, finish });
 }

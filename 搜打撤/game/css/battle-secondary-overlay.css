@@ -7,7 +7,8 @@ body #overlay:has(> .card > #ovBody > .battle-secondary-layer) {
   position:fixed!important; inset:0!important; padding:0!important; z-index:100; overflow:clip;
   background:transparent!important; backdrop-filter:none!important;
 }
-body #overlay .card.card:has(> #ovBody > .battle-secondary-layer) {
+body #overlay .card.card:has(> #ovBody > .battle-secondary-layer){
+& {
   position:relative!important; inset:auto!important; display:block!important; flex-direction:row!important; width:100%!important; height:100%!important;
   min-width:auto!important; min-height:auto!important; max-width:none!important; max-height:none!important;
   padding:0!important; margin:0!important; border:0!important; border-radius:0!important;
@@ -15,17 +16,18 @@ body #overlay .card.card:has(> #ovBody > .battle-secondary-layer) {
   /* This full-screen shield is not the discover glass panel. */
   backdrop-filter:none!important; -webkit-backdrop-filter:none!important;
 }
-body #overlay .card.card:has(> #ovBody > .battle-secondary-layer)::before { content:none!important; }
-body #overlay .card.card:has(> #ovBody > .battle-secondary-layer) > :is(h2,.ov-x) { display:none!important; }
-body #overlay .card.card:has(> #ovBody > .battle-secondary-layer) > #ovBody {
+&::before { content:none!important; }
+& > :is(h2,.ov-x) { display:none!important; }
+& > #ovBody {
   position:relative!important; display:block!important; width:100%!important; height:100%!important;
   min-width:auto!important; min-height:auto!important; flex:0 1 auto!important; max-width:none!important; max-height:none!important; margin:0!important; padding:0!important; overflow:clip!important;
-}
+}}
 body #overlay .battle-secondary-layer {
   position:absolute; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;
   box-sizing:border-box; padding:54px 40px; background:transparent; isolation:isolate;
 }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel {
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel{
+& {
   --feedback-panel:var(--ui-glass-surface);
   flex:0 1 auto!important; width:max-content!important; max-width:min(1280px,100%)!important;
   height:auto!important; max-height:100%!important; min-height:0!important;
@@ -34,49 +36,50 @@ body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel {
   backdrop-filter:blur(var(--ui-glass-blur)); -webkit-backdrop-filter:blur(var(--ui-glass-blur));
   box-shadow:0 12px 32px #07101d55; overflow:hidden;
 }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-head { padding:var(--ui-space-4) var(--ui-space-6) var(--ui-space-2); gap:var(--ui-space-6); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-head h3 { font-size:var(--ui-text-dialog-title); color:var(--ui-ink); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-head > span { font-size:var(--ui-text-label); color:var(--ui-blue); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-summary { padding:6px 24px 10px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-summary .ov-stats { font-size:23px!important; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-content { flex:0 1 auto; padding:var(--ui-space-4) var(--ui-space-6); overflow:auto!important; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-actions { padding:var(--ui-space-3) var(--ui-space-6); background:transparent!important; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-actions .ov-btn { min-width:160px; min-height:var(--ui-control-compact); font-size:var(--ui-text-body); border-radius:var(--ui-radius); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-actions .ov-btn.ok { background:var(--ui-blue); border-color:var(--ui-line); color:var(--ui-on-primary); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel :is(.battle-decision-source,.battle-decision-guidance,.battle-pile-context,.battle-pile-note) { font-size:var(--ui-text-body); color:var(--ui-muted); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-guidance { margin-top:10px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .choice-list { flex-wrap:nowrap; gap:18px; padding:16px 0; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .choice-opt { flex:1 1 280px; min-width:220px; min-height:220px; max-width:380px; padding:20px 24px; border-radius:4px; border-color:var(--feedback-line); background:transparent; box-shadow:none; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .choice-opt:is(:hover,:focus-visible) { background:#b6cbd714; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-option-text { font-size:27px; padding:18px 0; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-option-action { font-size:var(--ui-text-body); color:var(--ui-blue); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-discover-options { justify-content:safe center!important; align-items:start!important; gap:24px!important; padding:12px 6px!important; overflow:auto!important; max-height:none!important; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-discover-slot { flex:0 0 240px!important; width:240px!important; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-discover-card.bt-card { width:100%!important; flex:0 0 auto!important; gap:6px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-discover-card.bt-card > .hs-card { width:240px!important; max-width:100%!important; font-size:24px!important; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel :is(.battle-discover-meta,.battle-discover-rules) { font-size:var(--ui-text-label); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-select-grid.bt-hand { grid-template-columns:repeat(auto-fit,240px)!important; gap:20px!important; padding:16px 6px!important; min-width:min(780px,100%); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-select-slot { width:240px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-select-slot .hs-card { font-size:24px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-card-inspect { min-height:var(--ui-control-compact); font-size:var(--ui-text-body); background:transparent; color:var(--feedback-blue); border-color:var(--feedback-line); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-pile-layout { grid-template-columns:minmax(440px,1fr) minmax(280px,320px); gap:24px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .bt-gy-list { grid-template-columns:repeat(auto-fit,220px); gap:20px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-pile-card { width:220px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-pile-card .hs-card { font-size:22px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-inspect { padding:var(--ui-space-4); background:transparent; border-color:var(--feedback-line); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-inspect-rules { font-size:var(--ui-text-body); }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-empty { min-height:140px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="infusion"] { width:1160px!important; }
-body #overlay .battle-secondary-panel [data-infusion-workspace] { grid-template-columns:260px minmax(0,1fr); gap:20px; }
-body #overlay .battle-secondary-panel .infusion-source { padding:16px; border-color:var(--feedback-line); background:transparent; box-shadow:none; }
-body #overlay .battle-secondary-panel .infusion-materials { max-height:440px; }
-body #overlay .battle-secondary-panel .infusion-footer { flex-wrap:wrap; gap:12px; }
-body #overlay .battle-secondary-panel .infusion-footer p { flex-basis:240px; }
+& .battle-decision-head { padding:var(--ui-space-4) var(--ui-space-6) var(--ui-space-2); gap:var(--ui-space-6); }
+& .battle-decision-head h3 { font-size:var(--ui-text-dialog-title); color:var(--ui-ink); }
+& .battle-decision-head > span { font-size:var(--ui-text-label); color:var(--ui-blue); }
+& .battle-decision-summary { padding:6px 24px 10px; }
+& .battle-decision-summary .ov-stats { font-size:23px!important; }
+& .battle-decision-content { flex:0 1 auto; padding:var(--ui-space-4) var(--ui-space-6); overflow:auto!important; }
+& .battle-decision-actions { padding:var(--ui-space-3) var(--ui-space-6); background:transparent!important; }
+& .battle-decision-actions .ov-btn { min-width:160px; min-height:var(--ui-control-compact); font-size:var(--ui-text-body); border-radius:var(--ui-radius); }
+& .battle-decision-actions .ov-btn.ok { background:var(--ui-blue); border-color:var(--ui-line); color:var(--ui-on-primary); }
+& :is(.battle-decision-source,.battle-decision-guidance) { font-size:var(--ui-text-body); color:var(--ui-muted); }
+& .battle-decision-guidance { margin-top:10px; }
+& .choice-list { flex-wrap:nowrap; gap:18px; padding:16px 0; }
+& .choice-opt { flex:1 1 280px; min-width:220px; min-height:220px; max-width:380px; padding:20px 24px; border-radius:4px; border-color:var(--feedback-line); background:transparent; box-shadow:none; }
+& .choice-opt:is(:hover,:focus-visible) { background:#b6cbd714; }
+& .battle-option-text { font-size:27px; padding:18px 0; }
+& .battle-option-action { font-size:var(--ui-text-body); color:var(--ui-blue); }
+& .battle-discover-options { justify-content:safe center!important; align-items:start!important; gap:24px!important; padding:12px 6px!important; overflow:auto!important; max-height:none!important; }
+& .battle-discover-slot { flex:0 0 240px!important; width:240px!important; }
+& .battle-discover-card.bt-card { width:100%!important; flex:0 0 auto!important; gap:6px; }
+& .battle-discover-card.bt-card > .hs-card { width:240px!important; max-width:100%!important; font-size:24px!important; }
+& .battle-select-grid.bt-hand { grid-template-columns:none!important; grid-auto-columns:240px; gap:20px!important; padding:16px 6px!important; min-width:0; }
+& .battle-select-slot { width:240px; }
+& .battle-select-slot .hs-card { font-size:24px; }
+& .battle-card-inspect { min-height:var(--ui-control-compact); font-size:var(--ui-text-body); background:transparent; color:var(--feedback-blue); border-color:var(--feedback-line); }
+& .battle-pile-card { width:220px; }
+& .battle-pile-card .hs-card { font-size:22px; }
+& .battle-decision-inspect { padding:var(--ui-space-4); background:transparent; border-color:var(--feedback-line); }
+& .battle-decision-inspect-rules { font-size:var(--ui-text-body); }
+&[data-decision-kind="infusion"] { width:1160px!important; }}
+body #overlay .battle-secondary-panel{
+& [data-infusion-workspace] { grid-template-columns:260px minmax(0,1fr); gap:20px; }
+& .infusion-source { padding:16px; border-color:var(--feedback-line); background:transparent; box-shadow:none; }
+& .infusion-footer { flex-wrap:wrap; gap:12px; }
+& .infusion-footer p { flex-basis:240px; }}
 /* Inner sections stay unpainted: the outer panel alone owns glass and blur. */
 /* Existing details preserve their own focus/return semantics, same winter skin. */
-body #overlay .bt-hand-detail .bt-hand-detail-scrim { background:transparent; backdrop-filter:none; }
-body #overlay .bt-hand-detail .bt-hand-detail-surface { background:var(--ui-glass-surface); backdrop-filter:blur(var(--ui-glass-blur)); -webkit-backdrop-filter:blur(var(--ui-glass-blur)); border:1px solid var(--ui-glass-line); border-radius:6px; box-shadow:0 12px 32px #07101d55; }
-body #overlay .bt-hand-detail :is(.bt-hand-detail-close,.bt-hand-detail-use) { border-radius:4px; border:1px solid #9bafbc66; }
-body #overlay .bt-hand-detail .bt-hand-detail-use { background:var(--ui-blue); color:var(--ui-on-primary); }
-body:has(#overlay .battle-stage) #cardZoom:not(.cz-photo) .cz-backdrop { background:transparent; backdrop-filter:none; }
-body:has(#overlay .battle-stage) #cardZoom:not(.cz-photo) .cz-close { background:#15212cef; color:#eef1ed; border:1px solid #9bafbc66; border-radius:4px; }
+body #overlay .bt-hand-detail{
+& .bt-hand-detail-scrim { background:transparent; backdrop-filter:none; }
+& .bt-hand-detail-surface { background:var(--ui-glass-surface); backdrop-filter:blur(var(--ui-glass-blur)); -webkit-backdrop-filter:blur(var(--ui-glass-blur)); border:1px solid var(--ui-glass-line); border-radius:6px; box-shadow:0 12px 32px #07101d55; }
+& :is(.bt-hand-detail-close,.bt-hand-detail-use) { border-radius:4px; border:1px solid #9bafbc66; }
+& .bt-hand-detail-use { background:var(--ui-blue); color:var(--ui-on-primary); }}
+body:has(#overlay .battle-stage) #cardZoom:not(.cz-photo){
+& .cz-backdrop { background:transparent; backdrop-filter:none; }
+& .cz-close { background:#15212cef; color:#eef1ed; border:1px solid #9bafbc66; border-radius:4px; }}
+
+/* The shared reader keeps one predictable return edge across rules and choices. */
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-actions .ov-btns { justify-content:flex-end; }

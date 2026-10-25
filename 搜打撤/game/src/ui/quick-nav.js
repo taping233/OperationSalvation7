@@ -7,6 +7,7 @@
  * 输入焦点在文本框时自动让路（与 game.boot 的键位守卫同口径）。
  * ============================================================ */
 import { cancelPendingPageEntries } from './page-entry-cancellation.js';
+import { pageNavigationAllowed } from './screen-owner.js';
 import { game, openSettings, openSuggestionInbox, openDataPageUi } from '../run/game.session.js';
 import { openBaseHub } from '../hub/game.hub.js';
 import { openCardLibrary, cancelPendingCardPageOpen } from '../hub/game.cardslib.js';
@@ -61,6 +62,7 @@ async function jump(id) {
 
 function installQuickNav() {
   window.addEventListener('keydown', (e) => {
+    if (e.defaultPrevented || e.isComposing || e.keyCode === 229 || !pageNavigationAllowed()) return;
     if (!e.altKey || e.ctrlKey || e.metaKey) return;
     const target = e.target instanceof Element ? e.target : null;
     const tag = target?.tagName;

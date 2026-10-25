@@ -119,19 +119,11 @@ describe('R6-a 最后一盏引路灯', () => {
     expect(final.choices[1].detail).toMatch(/近路保持隐蔽.*远处找不到/);
   });
 
-  it('事件接线先提交 Base，再消费节点；保存失败路径撤销 visited 并保留重试页', () => {
-    const source = fs.readFileSync('game/src/run/game.run.events.js', 'utf8');
-    expect(source).toMatch(/await storyCommands\.record[\s\S]*renderLastLampResult\(record, resultText, binding\)/);
-    expect(source).toMatch(/UI\.act\('lastLampFinish'[\s\S]*consumeCurrentCell\(\);/);
-    expect(source).toContain("if (!wasVisited && game.visited) delete game.visited[key]");
-    expect(source).toContain("if (!narrative || !narrative.choices?.length) return false");
-    const submit = source.indexOf('await storyCommands.record');
-    expect(source.lastIndexOf('currentLastLampPage(binding)', submit)).toBeGreaterThan(-1);
-    expect(source.indexOf('currentLastLampPage(binding)', submit)).toBeGreaterThan(submit);
-    expect(source).toContain('setBagReturnHook(() => { if (currentLastLampPage(binding).ok) tryLastLampEvent(current); })');
-    expect(source).toContain('showChoiceError(result.message');
-    expect(source).toContain('if (!activeChoice()) return;');
-    expect(source).toContain('if (!binding.current())');
-    expect(source.match(/asset: 'story-last-lamp'/g)).toHaveLength(4);
+  it('现行事件入口只抽普通事件，旧剧情数据与 Ink 阅读接口仍独立保留',()=>{
+    const source=fs.readFileSync('game/src/run/game.run.events.js','utf8');
+    expect(source).toContain("getCards().all().filter(c => c.type === '事件')");
+    expect(source).toContain('bindNodeEvent(game, card.id)');
+    expect(source).not.toContain('storyCommands.record');
+    expect(source).not.toContain("UI.act('lastLamp");
   });
 });

@@ -4,7 +4,7 @@
  *
  * T1 斜纹闸门：#t1Gate 单例层（本模块注入 body），--hazard 渐变臂 transform
  * 斜向扫过 0.55s --ease-pop；进行时 #overlay 挂 gate-live（关 backdrop-filter
- * 同帧叠加，计划 R1）与 gate-squeeze（内容轻微 scaleX 挤压）；will-change 只在
+ * 同帧叠加，计划 R1）与 gate-squeeze（仅保留生命周期标记，不挤压内容）；will-change 只在
  * .on 动画期存在（CSS 侧），animationend/兜底 timer 摘类即除。
  *
  * T3 界面即过场：闸门盖住切换瞬间的三类链路——

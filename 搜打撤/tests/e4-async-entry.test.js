@@ -79,20 +79,20 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
   });
   it('new transitions use the standard title and art without a presentation option', async () => {
     const pending = scenes.showRunTransition({ title: '新区域 <入口>', art: '/new-art.webp', detail: '说明', duration: 450 });
-    expect(document.querySelector('.transition-heading h2').textContent).toBe('新区域 <入口>');
-    expect(document.querySelector('.transition-art').getAttribute('src')).toBe('/new-art.webp');
+    expect(document.querySelector('.flow-transition').getAttribute('aria-label')).toContain('新区域 <入口>');
+    expect(document.querySelector('.silent-node-cut').dataset.filmKind).toBe('battle');
+    expect(document.querySelector('.transition-heading,.transition-art')).toBeNull();
     expect(document.querySelector('.flow-eyebrow, .flow-detail, .flow-title')).toBeNull();
     expect(document.querySelector('.flow-transition').getAttribute('aria-label')).toContain('说明');
-    await vi.advanceTimersByTimeAsync(449);
-    expect(UI.hideOverlay).not.toHaveBeenCalled();
-    await vi.advanceTimersByTimeAsync(1);
+    handlers.flowContinue();
     expect(await pending).toBe(true);
   });
 
   it.each(['door', 'altar', 'shop'])('%s displays its approved transition art and continues once on skip', async kind => {
     const done = vi.fn(() => true);
     const pending = scenes.enterNode(kind, done);
-    expect(document.querySelector('.illustrated-cut .transition-art').src).toContain(`/transitions-1021/${kind}.webp`);
+    expect(document.querySelector('.silent-node-cut').dataset.filmKind).toBe(kind);
+    expect(document.querySelector('.silent-film-scenery').dataset.filmRenderer).toBe(kind==='altar'?'image':'procedural');
     expect(done).not.toHaveBeenCalled();
     handlers.flowContinue();
     expect(await pending).toBe(true);
@@ -101,8 +101,8 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
 
   it('enters a node through the real transition and lazy loader', async () => {
     const request = scenes.enterNode('battle', () => scenes.openBattleCell(null, [{ name: 'foe' }]));
-    expect(document.querySelector('.camp-entry-scenery img').src).toContain('transition-battle-v2.webp');
-    expect(document.querySelector('.transition-heading h2').textContent).toBe('旅途继续');
+    expect(document.querySelector('[data-film-kind="battle"]')).not.toBeNull();
+    expect(document.querySelector('.flow-transition').getAttribute('aria-label')).toContain('旅途继续');
     expect(document.querySelector('.camp-entry-caption')).toBeNull();
     handlers.flowContinue(); await entered.promise; gate.resolve();
     expect(await request).toBe(true); expect(battle.start).toHaveBeenCalledOnce();
@@ -148,8 +148,8 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     const fight = handlers.bossGateFight;
     const request = fight();
     expect(document.querySelector('.city-run-transition')).not.toBeNull();
-    expect(document.querySelector('.transition-heading h2').textContent).toBe('旅途继续');
-    expect(document.querySelector('.camp-entry-scenery img').src).toContain('transition-boss-v2.webp');
+    expect(document.querySelector('.flow-transition').getAttribute('aria-label')).toContain('旅途继续');
+    expect(document.querySelector('.camp-entry-scenery img').src).toContain('boss-monolith-v1.webp');
     expect(game.bossPlan).toBeUndefined();
     expect(battle.start).not.toHaveBeenCalled();
     fight();
@@ -273,17 +273,17 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
       expect(game.ownedCards).toHaveLength(1);
       expect(saveGame).toHaveBeenCalledTimes(2);
       const { openEntrySupply } = await import('../game/src/run/game.run.altar.js');
-      expect(openEntrySupply()).toBe(true);
+      expect(await openEntrySupply()).toBe(true);
       expect(document.querySelector('[data-act="clsEntryReveal"]')).toBeNull();
       expect(document.querySelector('.entry-reward-scene')).not.toBeNull();
-      handlers.clsEntryContinue(); expect(game.state).toBe('modal');
+      await handlers.clsEntryContinue(); expect(game.state).toBe('modal');
       expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();
-      handlers.entrySupplyTake({ i: '0' });
+      await handlers.entrySupplyTake({ i: '0' });
       expect(game.entrySupply.taken).toEqual([0]);
       expect(document.querySelector('[data-act="clsEntryContinue"]')).not.toBeNull();
-      handlers.clsEntryContinue(); expect(game.state).toBe('idle');
+      await handlers.clsEntryContinue(); expect(game.state).toBe('idle');
       saveGame.mockClear(); game.discoveredPairs = new Set(); game.state = 'modal';
-      handlers.clsEntryContinue(); expect(saveGame).not.toHaveBeenCalled(); expect(game.state).toBe('modal');
+      await handlers.clsEntryContinue(); expect(saveGame).not.toHaveBeenCalled(); expect(game.state).toBe('modal');
     } else {
       expect(UI.showOverlay).not.toHaveBeenCalled();
       expect(saveGame).toHaveBeenCalledOnce(); // 过场前冻结待领补给；过期回调不再保存。
@@ -355,15 +355,15 @@ describe('迟到选角操作失效', () => {
 
 describe('DEV plain battle transition diagnostic', () => {
   afterEach(() => { history.replaceState(null, '', '/'); });
-  it.each(['battle', 'boss'])('uses plain artwork for %s while retaining the current 450ms combat timer', async kind => {
+  it.each(['battle', 'boss'])('uses plain artwork for %s while retaining the current cinematic combat timer', async kind => {
     history.replaceState(null, '', '/?perfProbe=1&flightRecord=1&transitionDiagnostic=plain');
     const motion = await import('../game/src/core/motion.js');
     vi.spyOn(motion, 'reduceMotion').mockReturnValue(false);
     gate.resolve();
     const done = vi.fn(); const request = scenes.enterNode(kind, done);
-    expect(UI.el.ovBody.querySelector('.expedition-cut')).toBeTruthy();
+    expect(UI.el.ovBody.querySelector('.flow-transition')).toBeTruthy();
     expect(UI.el.ovBody.querySelector('.camp-entry-cut')).toBeNull();
-    await vi.advanceTimersByTimeAsync(449); expect(done).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(kind==='battle'?299:1499); expect(done).not.toHaveBeenCalled();
     await vi.advanceTimersByTimeAsync(1); await request; expect(done).toHaveBeenCalledTimes(1);
   });
   it('uses the shared painted-frame and 180ms reveal for a held transition', async () => {
@@ -371,25 +371,25 @@ describe('DEV plain battle transition diagnostic', () => {
     const motion = await import('../game/src/core/motion.js');
     vi.spyOn(motion, 'reduceMotion').mockReturnValue(false);
     const request = scenes.showRunTransition({ tone: 'battle', presentation: 'city-cut', duration: 900, holdVisual: true });
-    expect(UI.el.ovBody.querySelector('.expedition-cut')).toBeTruthy();
+    expect(UI.el.ovBody.querySelector('.flow-transition')).toBeTruthy();
     await vi.advanceTimersByTimeAsync(900); await request;
     expect(UI.hideOverlay).not.toHaveBeenCalled();
     const released = request.release();
     await vi.advanceTimersByTimeAsync(180); expect(UI.hideOverlay).not.toHaveBeenCalled();
-    await vi.advanceTimersByTimeAsync(150); await released;
+    await vi.advanceTimersByTimeAsync(540); await released;
     expect(UI.hideOverlay).toHaveBeenCalledExactlyOnceWith({ immediate: true });
   });
 });
 
 // These clocks establish overlap/ownership, not real browser latency.
 describe('combat transition preparation overlap', () => {
-  it.each(['battle','boss'])('%s starts module preparation before the unchanged 650ms timer and holds the old surface while slow', async kind => {
+  it.each(['battle','boss'])('%s starts module preparation before the current cinematic timer and holds the old surface while slow', async kind => {
     const motion = await import('../game/src/core/motion.js'); vi.spyOn(motion,'reduceMotion').mockReturnValue(false);
     const done=vi.fn(() => { game.battleActive=true; UI.showOverlay('战斗','<main class="battle-stage"></main>'); return true; });
     const pending=scenes.enterNode(kind,done);
     await vi.advanceTimersByTimeAsync(0); await entered.promise;
     expect(done).not.toHaveBeenCalled(); expect(UI.hideOverlay).not.toHaveBeenCalled();
-    await vi.advanceTimersByTimeAsync(650);
+    await vi.advanceTimersByTimeAsync(kind==='boss'?1500:650);
     expect(done).not.toHaveBeenCalled(); expect(UI.el.overlay.hidden).toBe(false); expect(game.state).toBe('modal');
     await vi.advanceTimersByTimeAsync(350); gate.resolve();
     expect(await pending).toBe(true); expect(done).toHaveBeenCalledOnce();

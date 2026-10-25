@@ -21,7 +21,6 @@ import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/rec
 import { createNestSettlementCommands } from '../hub/nest-settlement.commands.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { rollRune, rollAttribute } from '../battle/runes.js';
-import { on as busOn } from '../core/event-bus.js';
 import { playLabEnding } from './lab.ending.js';
 
 const B = () => SDT.Base;
@@ -174,12 +173,20 @@ export function openNestPrep() {
 function enterNestPrep() {
   const Bn = B();
   game.state = 'modal';
-  const picks = new Set();
+  const picks = new Map();
   const eligible = () => Bn.data.stash.filter(s2 =>
-    (s2.card.type === '武术' || s2.card.type === '法术' || s2.card.type === '装备') && !s2.card.cls);
+    (s2.card.type === '武术' || s2.card.type === '法术' || s2.card.type === '装备') && !s2.card.cls && s2.count > 0);
+  const syncPicks = available => {
+    const names = new Set();
+    for (const [entry, card] of picks) {
+      if (!available.includes(entry) || entry.card !== card || names.has(card.name)) picks.delete(entry);
+      else names.add(card.name);
+    }
+  };
   const render = () => {
+    syncPicks(eligible());
     const list = eligible().map((s2, i) => {
-      const on = picks.has(i);
+      const on = picks.has(s2);
       return `<button class="ov-btn ${on ? 'ok' : 'ghost'}" data-act="nestPick${i}" style="width:100%;text-align:left">
         ${on ? '[[icon:check]]' : '[[icon:cards]]'} ${esc(s2.card.name)} ×${s2.count}${on ? '（已选）' : ''}</button>`;
     }).join('');
@@ -198,12 +205,13 @@ function enterNestPrep() {
         <button class="ov-btn" data-act="nestBack">返回基地</button>
       </div>`, true);
     const active = nestPageBinding();
-    eligible().forEach((s2, i) => UI.act('nestPick' + i, () => {
+    eligible().forEach((s2, i) => { const card = s2.card; UI.act('nestPick' + i, () => {
       if (!active()) return;
-      if (picks.has(i)) picks.delete(i);
-      else if (picks.size < 10) picks.add(i);
+      if (!eligible().includes(s2) || s2.card !== card) { render(); return; }
+      if (picks.has(s2)) picks.delete(s2);
+      else if (picks.size < 10 && ![...picks.values()].some(chosen => chosen.name === card.name)) picks.set(s2, card);
       render();
-    }));
+    }); });
     (Bn.data.runes || []).slice(0, 9).forEach((r2, i) => UI.act('nestRune' + i, () => {
       if (!active()) return;
       game.nestEquipped = game.nestEquipped || [];
@@ -213,7 +221,12 @@ function enterNestPrep() {
       render();
     }));
     UI.act('nestBack', () => { if (!active()) return; game.state = 'idle'; exitToTitle(); });   // 09-20：去手工 hideOverlay——exitToTitle 自带 immediate 同步关层
-    UI.act('nestGo', () => { if (active() && picks.size === 10) startNestRun(eligible().filter((s2, i) => picks.has(i)).map(s2 => s2.card)); });
+    UI.act('nestGo', () => {
+      if (!active()) return;
+      syncPicks(eligible());
+      if (picks.size !== 10) { render(); return; }
+      startNestRun([...picks.values()]);
+    });
   };
   game.nestEquipped = [];
   render();
@@ -245,7 +258,9 @@ function startNestRun(boxCards) {
   // 曾被带入下一局白拿——与 game.session 读档恢复对称
   game.pendingRunePick = null;
   game.nestTargetedBox = 0;
-  game.nestKills = 0;        // 09-24 结算分数：局内击杀累计（读档续战不回填，从续战点起算）
+  game.nestAltarChoice = null;
+  game.nestShopStocks = {};
+  game.nestKills = 0;        // 结算分数：本局击杀累计，随断点保存。
   game.nestBossDown = false;
   pickNestBoss();
   game.cardBox = boxCards.map(c => ({ ...c }));
@@ -345,7 +360,10 @@ export function bindBattleStart(fn) { battleStartFn = fn; }
 const cell = () => NEST_MAP[game.nestPos] || NEST_MAP[0];   // 当前格（此前调用未定义的 cell() 会让每场龙巢战斗静默崩溃——2026-09-18 第1局实测）
 
 function startNestBattle(def, battleCell = cell()) {
-  if (!game.nestBoss) pickNestBoss();
+  if (!game.nestBoss) {
+    game.nestBoss = NEST_BOSSES.find(boss => boss.name === game.nestBossName) || null;
+    if (!game.nestBoss) pickNestBoss();
+  }
   const isBossCell = battleCell.type === 'boss';
   const current = captureBattleContext(game, getActiveSlot);
   nestPageRequest++;
@@ -388,7 +406,7 @@ function restoredNestBattleCell(opts) {
   return name && opts.name === name ? next : cell();
 }
 
-// 龙巢战斗结算（总线订阅；一图战后流程在 bag 侧对龙巢战斗让位）。
+// 龙巢必要战后结算端口；战斗核心确认完成后再通知表现观察者。
 // 胜利：回满血 → 发奖励 → 推进并回龙巢地图；失败/撤退：回满血留在原格可再次挑战。
 function nestBattleEnd(opts, played, win) {
   if (!game.nestActive || !opts?.nest || settledNestBattles.has(opts)) return;
@@ -422,7 +440,7 @@ function nestBattleEnd(opts, played, win) {
     renderNestMap();
   }
 }
-busOn('battle:end', nestBattleEnd);
+game.onNestBattleEnd = nestBattleEnd;
 let nestBattleCtx = null;
 
 function nestBossRewards() {
@@ -523,34 +541,37 @@ function openRuneCircle(done) {
 
 /* —— 龙巢祭坛：1 英雄卡 + 1 职业卡；或 3 次改变符文属性 —— */
 function openNestAltar(done) {
-  let rerolls = 3;
+  const position = 9;
+  const rerollChoice = () => game.nestAltarChoice?.position === position;
+  const remaining = () => rerollChoice() ? game.nestAltarChoice?.remaining ?? 3 : 3;
   const render = () => {
     UI.showOverlay('[[icon:altar]] 研究所祭坛', `
-      <p class="ov-note">抉择：获得 1 张<b>英雄卡</b>与 1 张<b>职业卡</b>；或获得 <b>3</b> 次改变任一符文属性的机会（剩 ${rerolls} 次）。</p>
+      <p class="ov-note">抉择：获得 1 张<b>英雄卡</b>与 1 张<b>职业卡</b>；或获得 <b>3</b> 次改变任一符文属性的机会（剩 ${remaining()} 次）。</p>
       <div class="ov-btns">
-        <button class="ov-btn ok" data-act="naHero">获得英雄卡与职业卡</button>
-        <button class="ov-btn" data-act="naReroll" ${rerolls <= 0 || !game.nestRunes.length ? 'disabled' : ''}>改变一块符文的属性（-1 次）</button>
+        <button class="ov-btn ok" data-act="naHero" ${rerollChoice() ? 'disabled' : ''}>获得英雄卡与职业卡</button>
+        <button class="ov-btn" data-act="naReroll" ${remaining() <= 0 || !game.nestRunes.length ? 'disabled' : ''}>改变一块符文的属性（-1 次）</button>
         <button class="ov-btn" data-act="naBack">离开祭坛</button>
       </div>`, true);
     const active = nestPageBinding();
     UI.act('naHero', () => {
-      if (!active()) return;
+      if (!active() || rerollChoice()) return;
       const hero = SDT.Cards.all().find(c => c.hero);
       const cls = SDT.Cards.all().filter(c => c.rarity === '职业' && !c.hero);
-      if (hero) game.cardBox.push({ ...hero });
-      if (cls.length) game.cardBox.push({ ...cls[ri(cls.length)] });
+      if (!hero || !cls.length) { UI.log('祭坛奖励卡池暂不可用，尚未选择或消耗本节点。', 'warn'); return; }
+      game.cardBox.push({ ...hero }, { ...cls[ri(cls.length)] });
       UI.log('[[icon:helmet]] 祭坛赐下英雄卡与职业卡（入牌盒）', 'loot');
       done();
     });
     UI.act('naReroll', () => {
-      if (!active() || rerolls <= 0) return;
+      if (!active() || remaining() <= 0) return;
       const r = game.nestRunes[ri(game.nestRunes.length)];
       if (!r) return;
       const old = r.attrs.join('');
       r.attrs = [rollAttribute(() => Random.random('nest'))];
       if (Random.random('nest') < 0.007) r.attrs.push(rollAttribute(() => Random.random('nest'), r.attrs));
-      rerolls--;
+      game.nestAltarChoice = { position, remaining:remaining() - 1 };
       UI.log(`[[icon:sparkles]] 【${esc(r.name)}】属性 ${old} → ${r.attrs.join('')}`, 'loot');
+      saveGame();
       render();
     });
     UI.act('naBack', () => { if (active()) done(); });
@@ -560,14 +581,22 @@ function openNestAltar(done) {
 
 /* —— 龙巢神秘商店：4 随机卡 + 3 职业卡 + 3 符文栏位 —— */
 function openNestShop(done) {
-  const lib = SDT.Cards.all().filter(c => c.rarity !== '衍生' && !c.unrandom && SDT.Cards.isRandomObtainable(c));
-  const taken = new Set();
-  const pickCard = () => { for (let k = 0; k < 50; k++) { const c = lib[ri(lib.length)]; if (c && !taken.has(c.name)) { taken.add(c.name); return c; } } return null; };
-  const classPool = SDT.Cards.all().filter(c => c.rarity === '职业' && !c.hero);
-  const cardSlots = Array.from({ length: 4 }, () => ({ card: pickCard(), price: 3, sold: false }));
-  const classSlots = Array.from({ length: 3 }, () => ({ card: classPool.length ? classPool[ri(classPool.length)] : null, price: 4, sold: false }));
-  const runePrice = r => (r.rarity === '古朴' ? 4 : r.rarity === '稀有' ? 5 : 6) * (r.attrs.length > 1 ? 2 : 1);
-  const runeSlots = Array.from({ length: 3 }, () => { const r = rollRune(() => Random.random('nest')); return { rune: r, price: runePrice(r), sold: false }; });
+  const shopKey = String(game.nestPos + 1);
+  game.nestShopStocks ||= {};
+  let stock = game.nestShopStocks[shopKey];
+  if (!stock) {
+    const lib = SDT.Cards.all().filter(c => c.rarity !== '衍生' && !c.unrandom && SDT.Cards.isRandomObtainable(c));
+    const taken = new Set();
+    const pickCard = () => { for (let k = 0; k < 50; k++) { const c = lib[ri(lib.length)]; if (c && !taken.has(c.name)) { taken.add(c.name); return c; } } return null; };
+    const classPool = SDT.Cards.all().filter(c => c.rarity === '职业' && !c.hero);
+    const cardSlots = Array.from({ length: 4 }, () => ({ card: pickCard(), price: 3, sold: false }));
+    const classSlots = Array.from({ length: 3 }, () => ({ card: classPool.length ? classPool[ri(classPool.length)] : null, price: 4, sold: false }));
+    const runePrice = r => (r.rarity === '古朴' ? 4 : r.rarity === '稀有' ? 5 : 6) * (r.attrs.length > 1 ? 2 : 1);
+    const runeSlots = Array.from({ length: 3 }, () => { const r = rollRune(() => Random.random('nest')); return { rune: r, price: runePrice(r), sold: false }; });
+    stock = game.nestShopStocks[shopKey] = { cardSlots, classSlots, runeSlots };
+    saveGame();
+  }
+  const { cardSlots, classSlots, runeSlots } = stock;
   const render = () => {
     UI.showOverlay('[[icon:coin]] 研究所 · 神秘商店', `
       <p class="ov-stats">随身币 <b>${game.coins}</b></p>
@@ -588,6 +617,7 @@ function openNestShop(done) {
       slot.sold = true;
       if (act === 'rune') { game.nestRunes.push(slot.rune); UI.log(`[[icon:gem]] 购入符文【${esc(slot.rune.name)}】`, 'coin'); }
       else { game.cardBox.push({ ...slot.card }); UI.log(`[[icon:coin]] 购入【${esc(slot.card.name)}】入牌盒`, 'coin'); }
+      saveGame();
       render();
     };
     cardSlots.forEach((s2, i) => UI.act('nsC' + i, () => buy(s2, 'card')));

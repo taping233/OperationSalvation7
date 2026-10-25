@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 /* N1 回归（2026-09-25 老板定版）：注能选牌按 uid 精确 toggle。
  * 缺陷：旧「组级 toggle」（组内非空即 delete 最后一张）让「同名堆叠 ×need≥2」
  * 永远选不满燃料——tt12 实机走查 N1（docs/tt12-live-walkthrough-2026-09-24.md）：
@@ -12,7 +13,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 1, 0, 5, 2) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -32,8 +33,7 @@ function makeGame(cards) {
   const logs = [];
   return {
     ownedCards: cards.map(card => ({ uid: `n1-${uidSeq++}`, card, safe: false })),
-    hp: 999, maxHp: 999, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(999, 999, 5, 0, '侠客', null),
     lastBattleEnd: null,
     log(m) { logs.push(String(m).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs, heal() {}, addItem() {}, onBattleEnd() {},

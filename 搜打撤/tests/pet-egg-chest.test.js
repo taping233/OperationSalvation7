@@ -46,7 +46,7 @@ describe('宝箱宠物蛋结算', () => {
     expect(result.eggHit).toBeUndefined();
     expect(base.recordPetEggChestResult).toHaveBeenCalledExactlyOnceWith({ eggGranted: false });
     expect(random).toHaveBeenCalledTimes(2);
-    expect(random.mock.calls).toEqual([['loot'], ['loot']]);
+    expect(random.mock.calls).toEqual([['loot','reward'], ['loot','reward']]);
   });
 
   it('蛋已作为普通候选出现时不重复加入，仍记录为未实际出蛋', () => {
@@ -89,7 +89,7 @@ describe('宝箱宠物蛋结算', () => {
     expect(result.eggHit).toBe(true);
     expect(base.recordPetEggChestResult).toHaveBeenCalledExactlyOnceWith({ eggGranted: true });
     expect(random).toHaveBeenCalledTimes(3);
-    expect(random.mock.calls).toEqual([['loot'], ['loot'], ['loot']]);
+    expect(random.mock.calls).toEqual([['loot','reward'], ['loot','reward'], ['loot','reward']]);
   });
 
   it.each(['medium', 'large', 'boss'].flatMap(kind => [false, true].map(withEgg => ({ kind, withEgg }))))(

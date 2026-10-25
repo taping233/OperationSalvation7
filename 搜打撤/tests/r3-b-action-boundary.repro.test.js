@@ -1,3 +1,4 @@
+import { playerFields } from './helpers/environment-fixtures.js';
 /* R3-b regression: duplicate commands are inert, while a UID that is genuinely
  * back in hand remains reusable and receives a fresh presentation receipt. */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -30,8 +31,7 @@ function setup(cardId, mode = 'normal', energy = 3, foeCount = 1) {
   const logs = [];
   const game = {
     ownedCards: cards.map((ownedCard, index) => ({ uid: uids[index], card: { ...ownedCard }, safe: false })),
-    hp: 99, maxHp: 99, atk: 4, spellPower: 0, coins: 0,
-    myClass: '战士', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(99, 99, 4, 0, '战士', null),
     logs, log(message) { logs.push(String(message)); }, heal() {}, addItem() {}, onBattleEnd() {},
   };
   const restored = BattleSession.restore(game, {

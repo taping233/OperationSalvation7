@@ -21,15 +21,15 @@ describe('祭坛原创图标接入', () => {
     await import('../game/src/core/icons-bitmap.js');
     expect(window.SDT.Icons.url('altar')).toContain('altar-symbol-1017-v2.webp');
     expect(window.SDT.Icons.rich('[[icon:altar]]')).toContain('icon-altar');
-    expect(window.SDT.Icons.url('crystal')).toContain('ui/icons/crystal.png');
-    expect(window.SDT.Icons.url('sparkles')).toContain('ui/icons/sparkles.png');
+    expect(window.SDT.Icons.url('crystal')).toContain('ui/semantic-icons/crystal.svg');
+    expect(window.SDT.Icons.url('sparkles')).toContain('ui/semantic-icons/sparkles.svg');
     vi.unstubAllGlobals();
   });
   it('祭坛页面使用专用图标，共用撤离献祭不变', () => {
     const source=readFileSync('game/src/run/game.run.altar.js','utf8');
     expect(source).toContain("icon: '[[icon:altar]]', title: '污染祭坛'");
     expect(source).toContain("UI.showOverlay('[[icon:crystal]] 选择要献祭的卡牌'");
-    expect(source).toContain('[[icon:crystal]] 确认献祭');
+    expect(source).toContain("confirmLabel:'确认献祭'");
     expect(readFileSync('game/src/run/game.nest.js','utf8')).toContain('[[icon:altar]] 研究所祭坛');
   });
   it('资源清单含准确字节、SHA和可用来源', () => {

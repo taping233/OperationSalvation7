@@ -4,6 +4,7 @@ import { createRecoverablePair } from './recoverable-pair.js';
 import { DEPARTURE_COMMAND, validateDepartureJournal } from './departure-persistence.js';
 import { guardSlotStorage, withSlotWriteLock } from './slot-write-lock.js';
 import { clone, fail, stable, successReceipt, validSlot } from './commands.shared.js';
+import { retainRunReceipts } from './receipt-retention.js';
 
 const Base = () => window.SDT.Base;
 
@@ -67,11 +68,11 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
     validateJournal,
     onChanged: slotId => { baseApi._refreshExternal(slotId); runStore._invalidate(slotId); },
   });
-  const locked = async (slotId, fn) => {
+  const locked = async (slotId, fn, isCurrent = () => true) => {
     const result = await withSlotWriteLock(slotId, lease => {
       writeOwner = { slotId, lease };
       try { return fn(lease); } finally { writeOwner = null; }
-    }, { lockManager });
+    }, { lockManager, isCurrent });
     return result.ok ? result.value : result;
   };
   const validateContext = context => {
@@ -125,6 +126,7 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
     if (invalid || !prepared || typeof prepared.command !== 'string' || typeof prepared.runId !== 'string' ||
         !prepared.afterBase || typeof prepared.afterBase !== 'object' || Array.isArray(prepared.afterBase) ||
         !Object.hasOwn(prepared, 'afterRun') || (prepared.afterRun !== null && (typeof prepared.afterRun !== 'object' || Array.isArray(prepared.afterRun)))) return invalid || fail('INVALID_ARGUMENT', 'prepared 事务无效');
+    const generation = baseApi._selectionGeneration, selectedSlot = baseApi.slot;
     return locked(context.slotId, lease => {
       const recovered = recoverInside(context.slotId);
       if (!recovered.ok) return recovered;
@@ -151,7 +153,7 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
       let currentRun = runParsed.value;
       if (!currentRun) return fail('INVALID_STATE', '没有可提交的进行中对局');
       if (!currentRun._r2) {
-        if (!runStore.write(context.slotId, currentRun)) return fail('SAVE_FAILED', '旧对局身份升级失败', true);
+        if (!runStore._writeLocked(context.slotId, currentRun, lease)) return fail('SAVE_FAILED', '旧对局身份升级失败', true);
         try { runRaw = storage.getItem(k.run); currentRun = JSON.parse(runRaw); }
         catch { return fail('STORAGE_READ_FAILED', '无法读取升级后的对局存档', true); }
       }
@@ -165,7 +167,7 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
       catch { return fail('INVALID_ARGUMENT', '事务快照必须是可序列化纯数据'); }
       const result = successReceipt({ requestId: context.requestId, command: prepared.command, baseRevision: baseRevision + 1, runRevision: runRevision + 1, runId: prepared.runId, output }, baseRevision + 1);
       nextBase.version = baseVersion;
-      nextBase._m01 = { revision: baseRevision + 1, requests: { ...currentBase._m01.requests, [requestKey]: { fingerprint, result } } };
+      nextBase._m01 = { revision: baseRevision + 1, requests: retainRunReceipts({ ...currentBase._m01.requests, [requestKey]: { fingerprint, result } }, nextRun ? prepared.runId : null) };
       if (nextRun) { nextRun.version = runVersion; nextRun._r2 = { runId: prepared.runId, revision: runRevision + 1 }; }
       let afterBaseRaw, afterRunRaw;
       try { afterBaseRaw = JSON.stringify(nextBase); afterRunRaw = nextRun === null ? null : JSON.stringify(nextRun); }
@@ -180,7 +182,7 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
       };
       const committed = pair.commit(context.slotId, journal);
       return committed.ok ? committed.value : committed;
-    });
+    }, () => baseApi._selectionGeneration === generation && baseApi.slot === selectedSlot);
   };
   return Object.freeze({ recoverSlot, recoverSlotIfPending, readSettlementReceipt, commitBaseAndRun });
 }

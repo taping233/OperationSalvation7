@@ -1,19 +1,30 @@
-/* The motion service owns transforms while a reward/bag card is being browsed. */
-body #overlay .card .reward-replica .reward-unit .reward-card[data-card-state-motion="true"],
-body [data-card-state-motion="true"].bag-tile.card-face {
+/* Browsing feedback changes paint while the reward/bag hit region stays fixed. */
+body #overlay .card{
+& .reward-replica .reward-unit .reward-card[data-card-state-motion="true"],
+&.bag-page .bag-v2 .bag-tile.card-face[data-card-state-motion="true"] {
   transition-property: opacity, filter, box-shadow;
   transform-origin: center;
 }
+/* Browsing a reward does not claim it. All pending cards keep their contrast;
+   the business-owned got/dropped filter remains in room-rewards.css. */
+& .reward-replica .reward-unit .reward-card[data-card-state-active="true"],
+&.bag-page .bag-v2 .bag-tile.card-face[data-card-state-active="true"] {
+  box-shadow: 0 0 0 2px #b8dce0, 0 0 14px #8ac9d126;
+}
+& .reward-replica .reward-unit .reward-card:focus-visible {
+  outline:3px solid #c5e3ed; outline-offset:5px;
+}}
 .reward-acquisition-card {
   position: fixed; z-index: 10020; pointer-events: none;
   margin: 0; padding: 0; border: 0; background: none;
   transform-origin: center; overflow: visible;
 }
-.reward-acquisition-body {
+.reward-acquisition-body{
+& {
   width: 100%; height: 100%; position: relative; transform-origin: center;
   animation: rewardAcquisitionLift var(--reward-flight-duration,340ms) linear both;
 }
-.reward-acquisition-body > .hs-card { width: 100%; height: 100%; max-width: none; }
+& > .hs-card { width: 100%; height: 100%; max-width: none; }}
 /* A small lift makes ownership legible; shrink mainly during the approach. */
 @keyframes rewardAcquisitionLift {
   0% { transform: translateY(0) scale(1); opacity: 1; }

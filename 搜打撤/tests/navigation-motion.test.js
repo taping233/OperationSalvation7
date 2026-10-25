@@ -17,7 +17,7 @@ it('returning through room and detail navigation reverses the spatial direction'
 });
 
 it('base entry has bounded travel independent of viewport position and includes the heading', () => {
-  document.body.innerHTML = '<div id="overlay"><div id="ovBody"><main id="hubMain" class="base-camp" data-page="stash"><button class="hub-tab on" data-tab="stash"></button><section class="hub-page" data-view="stash/cards"><header class="camp-section-head">Cards</header><nav class="warehouse-controls-v12">Filters</nav><div class="warehouse-inventory-v12">Inventory</div><aside class="warehouse-reading-v12">Details</aside></section></main></div></div>';
+  document.body.innerHTML = '<div id="overlay"><div id="ovBody"><main id="hubMain" class="base-camp" data-page="stash"><button class="hub-tab on" data-tab="stash"></button><section class="hub-page" data-view="stash/cards"><header class="camp-section-head">Cards</header><nav class="facility-map">Filters</nav><div class="facility-v12-stage">Inventory</div><aside class="facility-details">Details</aside></section></main></div></div>';
   const root = document.getElementById('overlay');
   const hub = document.getElementById('hubMain');
   expect(navigationState(hub)).toEqual({ room: 'stash', view: 'stash/cards' });
@@ -28,10 +28,10 @@ it('base entry has bounded travel independent of viewport position and includes 
   expect(regions).toHaveLength(4);
   expect(regions[0].dataset.surfaceRole).toBe('heading');
   for (const region of regions) {
-    expect(region.style.getPropertyValue('--base-region-x')).toBe('-28px');
+    expect(region.style.getPropertyValue('--base-region-x')).toBe('-112px');
     expect(parseFloat(region.style.getPropertyValue('--surface-delay'))).toBeLessThanOrEqual(navigationTiming.staggerMax);
   }
   enterSurface(root, { navigation: navigationChange(navigationState(hub), { room: 'stash', view: 'stash/pocket' }) });
-  expect(regions[0].style.getPropertyValue('--base-region-x')).toBe('14px');
-  expect(regions[0].style.getPropertyValue('--surface-region-in')).toBe('220ms');
+  expect(regions[0].style.getPropertyValue('--base-region-x')).toBe('64px');
+  expect(regions[0].style.getPropertyValue('--surface-region-in')).toBe('380ms');
 });

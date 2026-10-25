@@ -7,7 +7,7 @@ it('acknowledges a successful receipt without focus, actions or another confirma
   const map = document.getElementById('map'); map.focus();
   showRewardCompletionReceipt([{ name:'<img src=x>' }]);
   const receipt = document.querySelector('.reward-completion-receipt');
-  expect(receipt.textContent).toBe('<img src=x> · 已入背包');
+  expect(receipt.textContent).toBe('已收下');
   expect(receipt.getAttribute('role')).toBe('status'); expect(receipt.querySelector('img,button')).toBeNull();
   expect(document.activeElement).toBe(map); vi.advanceTimersByTime(1800); expect(receipt.isConnected).toBe(false);
 });
@@ -15,7 +15,7 @@ it('replaces old receipts and clears them when a new overlay mode opens', () => 
   vi.useFakeTimers(); showRewardCompletionReceipt([{name:'甲'}]); vi.advanceTimersByTime(1000);
   showRewardCompletionReceipt([{name:'乙'}]); vi.advanceTimersByTime(801);
   expect(document.querySelectorAll('.reward-completion-receipt')).toHaveLength(1);
-  expect(document.querySelector('.reward-completion-receipt').textContent).toContain('乙');
+  expect(document.querySelector('.reward-completion-receipt').textContent).toBe('已收下');
   document.dispatchEvent(new CustomEvent('sdt-overlay-mode', {detail:'battle'}));
   expect(document.querySelector('.reward-completion-receipt')).toBeNull();
 });

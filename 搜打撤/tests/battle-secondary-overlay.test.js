@@ -1,9 +1,9 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { mountCombatOverlay } from '../game/src/battle/view/battle.secondary-overlay.js';
 import { createBattleDecisionPresenter, restoreCombatScene } from '../game/src/battle/view/battle.decision-shell.js';
+import { readCssSource } from './helpers/css-source.js';
 const SDT=(await import('../game/src/core/sdt-facade.js')).default;
 const {UI}=await import('../game/src/ui/ui.js');
 let show,scene,snapshot;
@@ -56,7 +56,7 @@ it('new battle and noncombat navigation never recover a stale retained scene',()
   expect(scene.isConnected).toBe(false);expect(restoreCombatScene(UI,7)).toBe(false);
 });
 it('shared CSS has transparent shield and content-sized panel without full-height surface',()=>{
-  const css=postcss.parse(readFileSync('game/css/battle-secondary-overlay.css','utf8'));
+  const css=postcss.parse(readCssSource('game/css/battle-secondary-overlay.css','utf8'));
   const rules=[];css.walkRules(r=>{const d={};r.walkDecls(x=>d[x.prop]=x.value);rules.push({selector:r.selector,d});});
   expect(rules.find(r=>r.selector==='body #overlay .battle-secondary-layer').d.background).toBe('transparent');
   const panel=rules.find(r=>r.selector==='body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel');
@@ -65,7 +65,7 @@ it('shared CSS has transparent shield and content-sized panel without full-heigh
 
 it('full-screen secondary card clears legacy discover filters without changing small panels',()=>{
   const selector='body #overlay .card.card:has(> #ovBody > .battle-secondary-layer)';
-  const css=postcss.parse(readFileSync('game/css/battle-secondary-overlay.css','utf8'));
+  const css=postcss.parse(readCssSource('game/css/battle-secondary-overlay.css','utf8'));
   const rules=[];css.walkRules(rule=>{if(rule.selector===selector)rules.push(rule);});
   expect(rules).toHaveLength(1);
   for(const prop of ['backdrop-filter','-webkit-backdrop-filter']){
@@ -76,7 +76,7 @@ it('full-screen secondary card clears legacy discover filters without changing s
   }
   // Two IDs in this exact selector outrank the legacy discover rule's one ID,
   // even when both declarations are important and discover CSS loads later.
-  const legacy=postcss.parse(readFileSync('game/css/battle-discover.css','utf8'));
+  const legacy=postcss.parse(readCssSource('game/css/battle-discover.css','utf8'));
   const glass=[];legacy.walkRules(rule=>{
     rule.walkDecls('backdrop-filter',decl=>{if(decl.value.includes('blur('))glass.push(rule.selector);});
   });
@@ -213,7 +213,7 @@ it.each(['rules','settings','discover'])('native DOM styles keep %s shield in vi
   // jsdom checks CSS declarations/selector lifecycle, not layout, pixels or timings.
   const style=document.createElement('style');
   style.textContent=['overlays','battle-stage','expedition-battle','battle-decision','battle-secondary-overlay'].map(name=>
-    readFileSync(`game/css/${name}.css`,'utf8').replace(/@import[^;]+;/g,'')).join('\n');
+    readCssSource(`game/css/${name}.css`,'utf8').replace(/@import[^;]+;/g,'')).join('\n');
   document.head.append(style);
   try {
     show('面板',`<section data-decision-content="${kind}"><button>返回</button></section>`,kind==='discover'?'discover':'settings');

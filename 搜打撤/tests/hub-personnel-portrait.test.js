@@ -1,6 +1,5 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 
 const owned = vi.hoisted(() => new Map());
@@ -10,6 +9,7 @@ vi.mock('../game/src/hub/collection.commands.js', () => ({ getCharacter: (_data,
 import { CHARACTERS } from '../game/src/core/characters.js';
 import { personnelHTML, bindPersonnel, setPersonnelGroup, setPersonnelSection } from '../game/src/hub/hub.personnel.js';
 import { presentHub } from '../game/src/hub/hub.presentation.js';
+import { readCssSource } from './helpers/css-source.js';
 
 let slot = 0;
 let skinUrl;
@@ -78,15 +78,15 @@ describe('shared default portraits in personnel', () => {
     expect(JSON.stringify(owned.get('wu'))).toBe(before);
   });
 
-  it('uses white backing and normal blending only for default portraits', () => {
+  it('uses a neutral stage and multiply blending only for default portraits', () => {
     const rules = [];
-    postcss.parse(readFileSync('game/css/base-personnel-v12.css', 'utf8')).walkRules(rule => {
+    postcss.parse(readCssSource('game/css/base-personnel-v12.css', 'utf8')).walkRules(rule => {
       if (rule.selector.includes('[data-skin="default"]')) rules.push(rule);
     });
     const values = rule => Object.fromEntries(rule.nodes.filter(node => node.type === 'decl').map(node => [node.prop, node.value]));
-    expect(rules.some(rule => values(rule).background === '#fff')).toBe(true);
-    expect(rules.some(rule => values(rule)['mix-blend-mode'] === 'normal')).toBe(true);
-    const stageRule = rules.find(rule => values(rule).background === '#fff');
+    expect(rules.some(rule => values(rule).background === '#c4ccc9')).toBe(true);
+    expect(rules.some(rule => values(rule)['mix-blend-mode'] === 'multiply')).toBe(true);
+    const stageRule = rules.find(rule => values(rule).background === '#c4ccc9');
     document.body.innerHTML = `<div id="overlay"><div id="hubMain" class="base-frame-v7">${personnelHTML('wu')}</div></div>`;
     expect(document.querySelector('.pv12-agent-image-stage').matches(stageRule.selector)).toBe(true);
     owned.get('wu').selectedSkinId = 'casual';
@@ -134,5 +134,54 @@ describe('shared default portraits in personnel', () => {
     show('heixiang');
     expect(pending).toHaveLength(requests);
     expect(hero.dataset.portraitAlpha).toBe('false');
+  });
+});
+
+describe('current personnel appearance loading', () => {
+  let pending, ui, image;
+  const page = () => `<div id="hubMain" class="pg hub base-frame-v7" data-page="classes"><header><span class="hub-slot-label">01</span><span class="hub-res">资源</span></header><main class="hub-page" data-view="classes/wu/appearance">${personnelHTML('wu')}</main><nav class="hub-tabs"><button class="hub-tab on" data-tab="classes" aria-pressed="true">配置</button></nav></div>`;
+  beforeEach(() => {
+    setPersonnelSection('appearance');
+    pending = [];
+    vi.stubGlobal('matchMedia', () => ({ matches: true }));
+    vi.stubGlobal('Image', class {
+      constructor() {
+        const loading = document.createElement('img');
+        loading.decode = vi.fn(() => Promise.resolve());
+        pending.push(loading);
+        return loading;
+      }
+    });
+    document.body.innerHTML = `<div id="overlay">${page()}</div>`;
+    ui = { el: { overlay: document.querySelector('#overlay') }, showOverlay: vi.fn(), _acts: {} };
+    image = document.querySelector('.pv12-agent-image-stage img');
+  });
+  const preview = skin => {
+    owned.get('wu').selectedSkinId = skin;
+    presentHub(ui, page(), { rich: value => value });
+  };
+  it.each(['load', 'error'])('keeps the decoded illustration visible through a replacement %s', async type => {
+    const hero = image.closest('.pv12-agent-art');
+    preview('casual');
+    expect(document.querySelector('.pv12-agent-image-stage img')).toBe(image);
+    expect(image.getAttribute('src')).toBe(defaultUrl);
+    expect(image.style.opacity).not.toBe('0');
+    pending.at(-1).dispatchEvent(new Event(type));
+    await Promise.resolve();
+    expect(image.src).toBe(new URL(type === 'load' ? '/original/侠客/casual.webp' : defaultUrl, document.baseURI).href);
+    expect(image.style.opacity).not.toBe('0');
+    expect(document.querySelector('.pv12-agent-art')).toBe(hero);
+    expect(document.querySelector('[data-portrait-echo]')).toBeNull();
+  });
+  it('keeps the latest decoded preview when an earlier image finishes afterwards', async () => {
+    preview('casual'); const earlier = pending.at(-1);
+    preview('spring'); const latest = pending.at(-1);
+    latest.dispatchEvent(new Event('load')); await Promise.resolve();
+    const expected = new URL('/original/侠客/spring.webp', document.baseURI).href;
+    expect(image.src).toBe(expected);
+    earlier.dispatchEvent(new Event('load')); await Promise.resolve();
+    expect(image.src).toBe(expected);
+    expect(image.style.opacity).not.toBe('0');
+    expect(document.querySelectorAll('[data-portrait-echo]')).toHaveLength(0);
   });
 });

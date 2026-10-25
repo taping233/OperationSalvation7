@@ -1,6 +1,6 @@
 # 庭院运行时核心
 
-此目录保存锦鲤庭院运行时正本，由相邻 `hub.courtyard-v3.js` 相对导入。首次迁入与资产目录的审核副本逐文件 SHA256 一致；原始 MIT 许可证随代码保存。观雨改用项目自有 `courtyard.rain-tableau.js`；本目录的 `RainSimulation.js` 与 `RainRenderer.js` 保留为历史 MIT 审核源码，不再由庭院导入。
+此目录保存锦鲤庭院运行时正本，由相邻 `hub.courtyard-v3.js` 相对导入。首次迁入与资产目录的审核副本逐文件 SHA256 一致；原始 MIT 许可证随代码保存。观雨使用项目自有 `courtyard.rain-tableau.js`；未被导入的旧雨模拟与渲染模块已移出运行源码，来源审核副本仍保留在资产目录。
 
 上游固定提交、来源文件和改编内容见 [来源记录](../../../assets/vendor/base-courtyard/SOURCE.md)。`game/assets/vendor/base-courtyard/` 的 JavaScript 是保留的来源审核副本，不作为运行时模块导入。
 

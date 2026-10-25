@@ -15,7 +15,7 @@ it('reports same-input effective-face and pocket-cost lookup work', () => {
     playedMartialThisTurn: 0, playedMovesThisTurn: 0 };
   const inspection = createBattleCardInspection({ cards: {}, readState: () => state, curseMeta: {} });
   const counts = {};
-  for (let i = 0; i < 100; i++) expect(inspection.findEffectiveCard('uid-59').card).toBe(ownedCards[59].card);
+  for (let i = 0; i < 100; i++) expect(inspection.findEffectiveCard('uid-59').card).toMatchObject(ownedCards[59].card);
   counts.effectiveFace100 = uidComparisons;
   uidComparisons = 0;
   for (let i = 0; i < 100; i++) expect(inspection.effCostOf(card, 'uid-59')).toBe(10);

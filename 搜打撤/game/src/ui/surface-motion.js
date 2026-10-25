@@ -2,7 +2,7 @@
 // Gameplay, focus restoration and actual hiding stay with their existing owners.
 import { pageMotionProfile, pageMotionBlocks } from './page-motion-profiles.js';
 import { motionTiming, motionEasing } from './motion-presets.js';
-import { navigationTiming } from './navigation-motion.js';
+import { navigationTiming, baseNavigationTiming, baseNavigationEasing } from './navigation-motion.js';
 import { retargetVisual, clearVisual } from './target-motion.js';
 export const surfaceTiming = { enter: motionTiming.pageEnter, stagger: motionTiming.stagger, exit: motionTiming.exit, fastEnter: motionTiming.fastEnter, fastExit: motionTiming.fastExit };
 
@@ -23,7 +23,7 @@ function releaseVisual(root) {
   visualSurfaces.delete(root);
 }
 
-function targetSurface(root, regions, profile, fast, restart, phase) {
+function targetSurface(root, regions, profile, fast, restart, phase, delay, retainedCombat = false) {
   // Fast close preparation can omit the page profile. Read the live content too,
   // so archive dealing and saved-run cuts never receive inline animation:none.
   const dedicatedScene = root.id === 'overlay' && /** @type {HTMLElement} */ (root.querySelector(
@@ -48,14 +48,16 @@ function targetSurface(root, regions, profile, fast, restart, phase) {
       ? motionTiming.detailEnter : surfaceTiming.enter);
   const entries = new Map();
   const panel = root.id === 'overlay' ? /** @type {HTMLElement} */ (root.querySelector(':scope > .card')) : root;
-  // One opacity owner per content chain: the surface reveals/hides the whole layer.
-  // Shells and regions only move, so their alpha curves cannot multiply the veil.
-  entries.set(root, { from: { opacity: profile ? 1 : 0 }, target: { opacity: 1 }, exit: { opacity: 0 }, delay: 0 });
+  const persistentHeader = root.id === 'overlay' && !!root.querySelector(':scope > #runTopBar:not([hidden])');
+  const panelOwnsOpacity = persistentHeader && !retainedCombat;
+  // Keep persistent navigation opaque. Its content panel owns the fade instead;
+  // retained combat uses only the secondary panel as its opacity owner.
+  entries.set(root, { from: { opacity: profile || retainedCombat || persistentHeader ? 1 : 0 }, target: { opacity: 1 }, exit: { opacity: retainedCombat || persistentHeader ? 1 : 0 }, delay: 0 });
   if (panel) {
     const shell = {
-      from: profile ? { y: 0, scale: 1 } : { y: 10, scale: .992 },
-      target: { y: 0, scale: 1 },
-      exit: profile ? { y: 0, scale: 1 } : { y: 6, scale: .992 }, delay: 0,
+      from: { y: profile || retainedCombat ? 0 : 10, scale:1, ...(panelOwnsOpacity ? { opacity:profile ? 1 : 0 } : {}) },
+      target: { y:0, scale:1, ...(panelOwnsOpacity ? { opacity:1 } : {}) },
+      exit: { y: profile || retainedCombat ? 0 : 6, scale:1, ...(panelOwnsOpacity ? { opacity:0 } : {}) }, delay: 0,
     };
     if (panel === root) {
       for (const part of ['from', 'target', 'exit']) Object.assign(shell[part], entries.get(root)[part]);
@@ -71,14 +73,14 @@ function targetSurface(root, regions, profile, fast, restart, phase) {
       y = profile.rise ?? 12;
       if (el.dataset.surfaceRole === 'heading') y = -8;
       if (el.dataset.surfaceRole === 'nav') { x = -12; y = 0; }
-      if (el.dataset.surfaceRole === 'portrait') { x = -24; y = 0; scale = 1.025; }
+      if (el.dataset.surfaceRole === 'portrait') { x = -24; y = 0; }
       if (el.dataset.surfaceRole === 'actions') y = 8;
       if (profile.expedition) { x = 8; y = 0; scale = 1; }
       if (profile.key === 'backpack') { x = 24; y = 0; }
     }
     entries.set(el, {
-      from: { x, y, scale }, target: { x: 0, y: 0, scale: 1 },
-      exit: profile?.key === 'backpack' ? { x: 24, y: 0, scale: 1 }
+      from: retainedCombat ? { opacity:0, x:0, y:4, scale:1 } : { x, y, scale }, target: retainedCombat ? { opacity:1, x:0, y:0, scale:1 } : { x: 0, y: 0, scale: 1 },
+      exit: retainedCombat ? { opacity:0, x:0, y:4, scale:1 } : profile?.key === 'backpack' ? { x: 24, y: 0, scale: 1 }
         : { x: 0, y: -6, scale: 1 },
       delay: fast ? 0 : parseFloat(el.style.getPropertyValue('--surface-delay')) || 0,
     });
@@ -102,10 +104,10 @@ function targetSurface(root, regions, profile, fast, restart, phase) {
     el.style.setProperty('animation', 'none', 'important');
     if (continuing && previous && !reversing) continue;
     retargetVisual(el, entry.target, {
-      duration, delay: continuing || preparingExit ? 0 : entry.delay,
+      duration, delay: continuing || preparingExit ? 0 : delay + entry.delay,
       // Refresh/contentOnly can leave visible regions unregistered until closing.
       // Enrol those at rest; the paired leave call supplies their actual exit.
-      from: preparingExit && !previous ? entry.target : entry.from,
+      from: (preparingExit && !previous) || (retainedCombat && !restart) ? entry.target : entry.from,
     });
   }
 }
@@ -127,7 +129,7 @@ function blocks(root) {
   return regions.slice(0, 8);
 }
 
-export function enterSurface(root, { restart = true, fast = false, contentOnly = false, navigation = null } = {}) {
+export function enterSurface(root, { restart = true, fast = false, contentOnly = false, navigation = null, delay = 0, retainedCombat = false } = {}) {
   if (!root) return;
   root.dataset.surfaceMotion = fast ? 'fast' : 'page';
   const phase = root.dataset.surfacePhase;
@@ -148,7 +150,8 @@ export function enterSurface(root, { restart = true, fast = false, contentOnly =
       choreography = [{ el: profile.page, role: 'content', delay: 0 }];
     }
   }
-  const regions = profile ? choreography.map(region => region.el) : blocks(root);
+  const combatPanel = retainedCombat ? /** @type {HTMLElement} */ (root.querySelector('#ovBody > .battle-secondary-layer > .battle-secondary-panel')) : null;
+  const regions = retainedCombat ? (combatPanel ? [combatPanel] : []) : profile ? choreography.map(region => region.el) : blocks(root);
   if (profile) {
     /** @type {NodeListOf<HTMLElement>} */ (profile.page.querySelectorAll('.page-in')).forEach(el => el.classList.remove('page-in'));
     // 只让选中的信息区展开，祖先布局容器不叠加旧的大幅滑入。
@@ -166,10 +169,10 @@ export function enterSurface(root, { restart = true, fast = false, contentOnly =
       const region = choreography[index];
       el.dataset.surfaceRole = region.role;
       if (profile.key === 'base-content') {
-        el.style.setProperty('--base-region-x', `${navigation?.x ?? 28}px`);
+        el.style.setProperty('--base-region-x', `${Math.sign(navigation?.x || 1) * (navigation?.detail ? 64 : 112)}px`);
       }
       el.style.setProperty('--surface-delay', `${Math.min(region.delay, profile.staggerMax ?? navigationTiming.staggerMax)}ms`);
-      el.style.setProperty('--surface-region-in', `${navigation?.duration ?? profile.duration ?? navigationTiming.enter}ms`);
+      el.style.setProperty('--surface-region-in', `${profile.key === 'base-content' ? (navigation?.detail ? baseNavigationTiming.detail : baseNavigationTiming.enter) : navigation?.duration ?? profile.duration ?? navigationTiming.enter}ms`);
       el.style.setProperty('--surface-region-rise', `${profile.rise ?? 12}px`);
     }
     // Home keeps its picked-control priority and the distance-based delays.
@@ -180,7 +183,7 @@ export function enterSurface(root, { restart = true, fast = false, contentOnly =
       el.style.setProperty('--surface-clip', right ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)');
     }
   });
-  targetSurface(root, regions, profile, fast, restart, phase);
+  targetSurface(root, regions, profile, fast, restart, phase, delay, retainedCombat);
   if (restart && phase && !reduced() && !visualSurfaces.has(root)) {
     // 同一帧内关闭/重开或连续换页会合并样式更新，a→b→a可能被当作未变化。
     // 先提交无入场标记的样式，再给本次页面设置新阶段，确保重播。
@@ -269,15 +272,15 @@ body #title.home-composed[data-surface-motion][data-surface-motion][data-surface
 body #title.home-composed[data-surface-motion][data-surface-motion][data-surface-phase="out"][data-surface-phase][data-home-pick] .is-picked[data-surface-block][data-surface-block] {
   animation-duration: var(--motion-exit,180ms) !important; animation-delay: 0ms !important;
 }
-@keyframes surfacePanelIn { from { opacity: 0; transform: translateY(10px) scale(.992); } to { opacity: 1; transform: none; } }
-@keyframes surfacePanelInB { from { opacity: 0; transform: translateY(10px) scale(.992); } to { opacity: 1; transform: none; } }
-@keyframes surfacePanelOut { to { opacity: 0; transform: translateY(6px) scale(.992); } }
+@keyframes surfacePanelIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes surfacePanelInB { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes surfacePanelOut { to { opacity: 0; transform: translateY(6px); } }
 @keyframes surfaceVeilIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes surfaceVeilInB { from { opacity: 0; } to { opacity: 1; } }
 @keyframes surfaceVeilOut { to { opacity: 0; } }
 @keyframes surfaceBlockIn { from { opacity: 0; transform: translateX(var(--surface-x,-10px)); } to { opacity: 1; transform: none; } }
 @keyframes surfaceBlockInB { from { opacity: 0; transform: translateX(var(--surface-x,-10px)); } to { opacity: 1; transform: none; } }
-@keyframes surfaceBlockOut { to { opacity: 0; transform: translateX(var(--surface-x,-10px)) scale(.97); } }
+@keyframes surfaceBlockOut { to { opacity: 0; transform: translateX(var(--surface-x,-10px)); } }
 @keyframes surfacePickedOut { 0% { opacity: 1; transform: none; } 28% { opacity: 1; transform: scale(1.035); } 100% { opacity: 0; transform: scale(1.12); } }
 body #title.home-composed[data-surface-motion][data-surface-motion][data-surface-phase]:not([data-surface-phase="out"]) .home-plate[data-surface-block][data-surface-block] {
   animation-name: surfaceHomeIn !important;
@@ -299,7 +302,7 @@ body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role] {
 }
 body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role="heading"] { --page-y: -8px; }
 body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role="nav"] { --page-x: -12px; --page-y: 0px; }
-body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role="portrait"] { --page-x: -24px; --page-y: 0px; --page-scale: 1.025; }
+body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role="portrait"] { --page-x: -24px; --page-y: 0px; --page-scale: 1; }
 body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role="actions"] { --page-y: 8px; }
 body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="b"] [data-surface-role] { animation-name: surfacePageInB !important; }
 /* 远征页只让信息区短距离展开；背景和货架不重复闪回，主动作最迟48ms开始。 */
@@ -319,8 +322,9 @@ body #overlay#overlay#overlay#overlay[data-surface-layout="backpack"][data-surfa
 @keyframes surfacePanelReturn { to { opacity: 0; transform: translateX(24px); } }
 /* 玻璃父层只动画 transform，opacity 两端均为 1 也不纳入动画。 */
 body #overlay#overlay#overlay#overlay[data-surface-layout="base-content"] [data-surface-role] {
-  --page-x: var(--base-region-x,28px); --page-y: 0px; --page-scale: 1;
+  --page-x: var(--base-region-x,112px); --page-y: 0px; --page-scale: 1;
   animation-name: surfaceGlassIn !important;
+  animation-timing-function: ${baseNavigationEasing} !important;
 }
 body #overlay#overlay#overlay#overlay[data-surface-layout="base-content"][data-surface-phase="b"] [data-surface-role] { animation-name: surfaceGlassInB !important; }
 @keyframes surfaceGlassIn { from { transform: translateX(var(--page-x)); } to { transform: none; } }
@@ -332,8 +336,8 @@ body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="o
 body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="out"] [data-surface-role] {
   animation: surfacePageOut var(--page-out,140ms) ease-out both !important;
 }
-@keyframes surfacePageIn { from { opacity: 0; transform: translate(var(--page-x),var(--page-y)) scale(var(--page-scale)); } to { opacity: 1; transform: none; } }
-@keyframes surfacePageInB { from { opacity: 0; transform: translate(var(--page-x),var(--page-y)) scale(var(--page-scale)); } to { opacity: 1; transform: none; } }
+@keyframes surfacePageIn { from { opacity: 0; transform: translate(var(--page-x),var(--page-y)); } to { opacity: 1; transform: none; } }
+@keyframes surfacePageInB { from { opacity: 0; transform: translate(var(--page-x),var(--page-y)); } to { opacity: 1; transform: none; } }
 @keyframes surfacePageOut { to { opacity: 0; transform: translateY(-6px); } }
 `.replaceAll('body ', 'body:not(.reduce-motion) ');
 style.textContent = `@media (prefers-reduced-motion: no-preference) { ${style.textContent} }`;
@@ -376,7 +380,8 @@ const lifecycle = new MutationObserver(records => {
       else if (credits.dataset.homeMotion === 'out') leaveSurface(credits);
       else enterSurface(credits, { restart: false });
     } else if (target === sug && attributeName === 'hidden') {
-      if (sug.hidden) clearSurface(sug); else enterSurface(sug);
+      if (sug.hidden) clearSurface(sug);
+      else if (!sug.dataset.surfacePhase || sug.dataset.surfacePhase === 'out') enterSurface(sug);
     } else if (target === document.body && reduced()) {
       // CSS disables motion immediately, including a preference changed mid-transition.
       clearSurface(title);

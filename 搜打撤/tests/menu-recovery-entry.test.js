@@ -13,7 +13,7 @@ function setup(recoverSlotIfPending) {
     showOverlay(_title, html) { document.body.innerHTML = `<div id="ovBody">${html}</div>`; },
     hideOverlay() { document.body.innerHTML = ''; },
     registerHelp() {}, helpBtn() { return ''; }, act(name, fn) { handlers[name] = fn; },
-    log: vi.fn(), clearLog() {}, hideScreen: vi.fn(), showScreen() {}, refresh() {},
+    log: vi.fn(), clearLog() {}, hideScreen: vi.fn(), showScreen() {}, refresh() {}, confirmAction:vi.fn(async()=>true),
   };
   const setActiveSlot = vi.fn(slot => { activeSlot = slot; });
   const game = { state: 'title' };
@@ -31,6 +31,15 @@ function setup(recoverSlotIfPending) {
 }
 
 describe('选档恢复门禁', () => {
+  it.each(['overwriteSlot','delSlot'])('%s确认等待期间来源页面失效，迟到批准不删除或初始化档案',async action=>{
+    const h=setup();let approve;
+    h.UI.confirmAction.mockImplementation(()=>new Promise(resolve=>{approve=resolve;}));
+    const pending=h.handlers[action]({slot:1});
+    document.getElementById('ovBody').innerHTML='<section class="settings-page">设置</section>';
+    approve(true);expect(await pending).toBe(false);
+    expect(h.clearSlot).not.toHaveBeenCalled();expect(h.base.reset).not.toHaveBeenCalled();
+    expect(document.querySelector('.settings-page')).not.toBeNull();
+  });
   it('先恢复事务，再检查是否还有进行中对局并载入基地', async () => {
     let finish;
     const recover = vi.fn(() => new Promise(resolve => { finish = resolve; }));
@@ -78,7 +87,6 @@ describe('选档恢复门禁', () => {
     const h = setup();
     h.base.reset.mockReturnValueOnce(false).mockReturnValue(true);
     const picker = document.querySelector('.slot-page');
-    if (action === 'overwriteSlot') h.handlers[action]({ slot: 1 }); // 首次只确认
     expect(await h.handlers[action]({ slot: 1 })).toBe(false);
     expect(h.openBaseHub).not.toHaveBeenCalled();
     expect(h.setActiveSlot).not.toHaveBeenCalled();
@@ -103,8 +111,9 @@ describe('基地异步入口的选档锁和结果', () => {
     const hide = vi.spyOn(h.UI, 'hideOverlay').mockImplementation(() => {});
     const pendingWrite = new Promise(resolve => { finish = resolve; });
     if (action === 'newSlot') h.base.reset.mockReturnValue(pendingWrite);
-    else { h.clearSlot.mockReturnValue(pendingWrite); await h.handlers[action]({ slot:1 }); }
+    else { h.clearSlot.mockReturnValue(pendingWrite); }
     const pending = h.handlers[action]({ slot:1 });
+    if (action !== 'newSlot') await vi.waitFor(()=>expect(h.clearSlot).toHaveBeenCalledOnce());
     h.handlers.slotBack();
     expect(page.isConnected).toBe(true);
     finish(action === 'newSlot' ? true : { ok:true });
@@ -139,8 +148,8 @@ describe('基地异步入口的选档锁和结果', () => {
   it('覆盖删除等待时离开选档，已完成删除不会触发迟到初始化', async () => {
     const h = setup(); let finish;
     h.clearSlot.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
-    await h.handlers.overwriteSlot({ slot:1 });
     const pending = h.handlers.overwriteSlot({ slot:1 });
+    await vi.waitFor(()=>expect(h.clearSlot).toHaveBeenCalledOnce());
     document.getElementById('ovBody').innerHTML = '<section class="settings-page">设置</section>';
     finish({ ok:true });
     expect(await pending).toBe(false);
@@ -152,7 +161,6 @@ describe('基地异步入口的选档锁和结果', () => {
     const h = setup();
     let finish;
     h.openBaseHub.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
-    if (action === 'overwriteSlot') h.handlers[action]({ slot: 1 });
     const entry = h.handlers[action]({ slot: 1 });
     await vi.waitFor(() => expect(finish).toBeTypeOf('function'));
     await h.handlers.newSlot({ slot: 1 });

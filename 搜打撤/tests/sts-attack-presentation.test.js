@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { attackCue } from '../game/src/battle/view/battle.attack-cues.js';
 import { impactProfile } from '../game/src/battle/view/battle.attack-profiles.js';
@@ -6,8 +7,7 @@ import { playEnemyMotion } from '../game/src/battle/view/battle.enemy-motion.js'
 window.SDT ||= {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 99, battleHandMax: 20, bossDeckSize: 15,
-  starterSha: 0, battleStartDraw: 20, battleTurnDraw: 1, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(99, 20, 15, 0, 20, 1) }, items: {} };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
@@ -26,9 +26,7 @@ it.each([
     rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: {
       onPlay: [{ op: 'damage', amount, target: 'chosenEnemy', hitCount }],
     } } };
-  const game = { ownedCards: [{ uid: 'sample', card, safe: false }], hp: 100, maxHp: 100,
-    atk: 0, spellPower: 0, coins: 0, myClass: '战士', characterId: null, state: 'idle',
-    battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
+  const game = { ownedCards: [{ uid: 'sample', card, safe: false }], ...playerFields(100, 100, 0, 0, '战士', null), log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
   const observed = [];
   R.bindBattleRenderer(() => { observed.push(...takeFloats()); });
   BattleSession.start(game, [{ id: 'bandit', name: '强盗', hp: 100, atk: 0 }], { isBoss: false });
@@ -55,8 +53,7 @@ it('rejects unknown cue kinds and keeps combo hits free of repeated freezes', ()
 it('real 迅疾箭 presents its windup in an earlier RAF render than the damage and still draws from the real pile', async () => {
   const card = C.all().find(card => card.id === 'tt2-swiftarrow'); expect(card).toBeTruthy();
   const game = { ownedCards: [{ uid: 'real-swiftarrow', card: structuredClone(card) }],
-    hp: 100, maxHp: 100, atk: 4, spellPower: 0, coins: 0, myClass: '战士', characterId: null,
-    state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
+    ...playerFields(100, 100, 4, 0, '战士', null), log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
   const observed = [];
   R.bindBattleRenderer(() => {
     const floats = takeFloats();
@@ -64,6 +61,7 @@ it('real 迅疾箭 presents its windup in an earlier RAF render than the damage 
   });
   BattleSession.start(game, [{ id: 'bandit', name: '强盗', hp: 35, atk: 0 }], { isBoss: false });
   await vi.advanceTimersByTimeAsync(100); takeFloats(); observed.length = 0;
+  const drawBefore = R.drawPile.length;
   BattleSession.commands.playCard('real-swiftarrow', 0);
   await vi.advanceTimersByTimeAsync(2000);
   const windup = observed.findIndex(row => row.floats.some(f => f.cls === 'windupfx'));
@@ -71,7 +69,7 @@ it('real 迅疾箭 presents its windup in an earlier RAF render than the damage 
   expect(windup).toBeGreaterThanOrEqual(0); expect(hit).toBeGreaterThan(windup);
   expect(observed[windup].hp).toBe(35); expect(observed[hit].hp).toBe(32);
   expect(observed[windup].floats.find(f => f.cls === 'windupfx').cue.attacker).toBe('player-attack');
-  expect(R.drawPile).toHaveLength(98); expect(R.busy).toBe(false);
+  expect(R.drawPile).toHaveLength(drawBefore - 1); expect(R.busy).toBe(false);
 });
 
 it('enemy sample only replaces bandit actions and cancels on preference changes or close', async () => {

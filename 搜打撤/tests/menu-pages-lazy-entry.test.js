@@ -61,7 +61,7 @@ describe('菜单真实按需入口', () => {
       expect(rows.map(row => [row.stage, row.interaction])).toEqual([
         ['settings-module-wait', 1], ['settings-overlay-sync', 1],
       ]);
-      button.click(); h.menu.openSettings();
+      button.click(); const warm=h.menu.openSettings(); await vi.runAllTimersAsync(); await warm;
       expect(trace.read().records.filter(row => row.stage === 'settings-module-wait')).toHaveLength(1);
       expect(trace.read().records.at(-1)).toMatchObject({ stage:'settings-overlay-sync', interaction:3 });
     } finally { trace.destroy(); window.history.replaceState({}, '', '/'); }
@@ -90,7 +90,7 @@ describe('菜单真实按需入口', () => {
     expect(h.imports).not.toHaveBeenCalled(); expect(h.factory).not.toHaveBeenCalled();
   });
 
-  it('冷入口有可见反馈，同请求合并，热入口同步复用同一工厂', async () => {
+  it('冷入口有可见反馈，同请求合并，热入口复用同一工厂', async () => {
     const game=h.game, base=h.base;
     const request=h.menu.openSettings();
     expect(h.menu.openSettings()).toBe(request);
@@ -103,7 +103,7 @@ describe('菜单真实按需入口', () => {
     expect(h.methods.openSettings).toHaveBeenCalledOnce(); expect(h.facade.menuPageLoading).toBe(false);
     expect(document.querySelector('.page-loading')).toBeNull();
     expect(document.getElementById('viewport').hasAttribute('aria-busy')).toBe(false);
-    expect(h.menu.openTitleGuide()).toBeUndefined();
+    const warm=h.menu.openTitleGuide(); await vi.runAllTimersAsync(); await warm;
     expect(h.methods.openTitleGuide).toHaveBeenCalledOnce(); expect(h.factory).toHaveBeenCalledOnce();
     expect(window.SDT.game).toBe(game); expect(window.SDT.Base).toBe(base);
     expect(h.save).not.toHaveBeenCalled(); expect(h.clear).not.toHaveBeenCalled();
@@ -155,6 +155,31 @@ describe('菜单真实按需入口', () => {
     const second=h.menu.startNewGame(); await vi.runAllTimersAsync(); await second;
     expect(h.imports).toHaveBeenCalledOnce(); expect(h.factory).toHaveBeenCalledOnce();
     expect(h.methods.startNewGame).toHaveBeenCalledOnce();
+  });
+
+  it('进入城市热重开也先画反馈，合并点击且不重新导入菜单', async () => {
+    await finish(h.menu.startNewGame());
+    h.deps.UI.hideOverlay(); h.game.state='title';
+    const opening=h.menu.startNewGame();
+    expect(h.menu.startNewGame()).toBe(opening);
+    expect(h.methods.startNewGame).toHaveBeenCalledOnce();
+    expect(document.querySelector('.page-loading')).not.toBeNull();
+    await vi.runAllTimersAsync(); await opening;
+    expect(h.methods.startNewGame).toHaveBeenCalledTimes(2);
+    expect(h.imports).toHaveBeenCalledOnce(); expect(h.factory).toHaveBeenCalledOnce();
+    expect(document.querySelector('.page-loading')).toBeNull();
+  });
+
+  it('进入城市热重开在首帧前取消，不读取或挂载新档案页', async () => {
+    await finish(h.menu.startNewGame());
+    h.deps.UI.hideOverlay(); h.game.state='title';
+    const opening=h.menu.startNewGame();
+    h.facade.cancelPendingMenuPageOpen();
+    await vi.runAllTimersAsync();
+    expect(await opening).toBe(false);
+    expect(h.methods.startNewGame).toHaveBeenCalledOnce();
+    expect(h.game.state).toBe('title'); expect(h.deps.UI.el.overlay.hidden).toBe(true);
+    expect(document.querySelector('.page-loading')).toBeNull();
   });
 
   it('导入失败保留来源并给出反馈，下一次请求真正重试且可成功', async () => {

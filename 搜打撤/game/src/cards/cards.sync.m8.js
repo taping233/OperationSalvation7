@@ -1,74 +1,53 @@
 // @ts-check
-/* M8 回迁：接收执行器收编后有真实消费端的普通武术/法术规则。
- * 每张卡都以 live canonical 整卡深相等为迁移前提，双门通过后才保存。
- * 花瓣法阵依据 2026-09-29 老板裁决 heal:3（覆盖 09-27 保留 heal:2 的旧裁决）；持续 3 次回合开始触发。
- * 卡面数值以 TABLETOP11 定版为真源（本文件不再携带 face 副本）；已回填老档的卡面刷新
- * 由 cards.sync.face-refresh.js ensureCanonicalFaceRefresh 幂等处理（cards.js 接线）。
- *
- * 2026-09-29 重构：入口骨架收敛到 cards.sync.backfiller.js createRuleBackfiller，
- * 本文件只保留 definitions 数据与批次参数；迁移数据行为不变（m8-data.test.js 守护）。 */
+// M8 规则迁移；逐卡依据见 docs/archive/card-migration-2026-09-27/M8-RESULT.md。
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
+import { canonicalTables, triggerDefinition } from './card-rule-definitions.js';
 
 const M8_MARKER_KEY = 'sdt-cards-m8-rule-backfill-v1-seeded';
 
+const SELF = { target: { side: 'self', area: false } };
+const ENEMY_ONE = { target: { side: 'enemy', area: false } };
+// onPlay: [] 抑制文本重复执行；卡面由 canonical 来源及 face-refresh 维护。
 const definitions = new Map([
-  ['cmtn1r10xnl1', { rules: { version: 1, triggers: { onPlay: [{ op: 'registerRule', rule: 'discoverPlus' }] } } }],
-  ['tt7-elementstorm', { rules: { version: 1, triggers: { onPlay: [{ op: 'registerRule', rule: 'doubleNextSpell' }] } } }],
-  ['tt3-petal', {
-    rules: {
-      version: 1,
-      triggers: {
-        onTurnStart: [{ op: 'draw', amountField: 'draw' }, { op: 'heal', amountField: 'heal' }],
-        duration: 3,
-        onPlay: [],
-      },
-    },
-  }],
-  ['tt7-swordimmortal', { rules: { version: 1, triggers: {
+  ['cmtn1r10xnl1', triggerDefinition({ onPlay: [{ op: 'registerRule', rule: 'discoverPlus' }] })],
+  ['tt7-elementstorm', triggerDefinition({ onPlay: [{ op: 'registerRule', rule: 'doubleNextSpell' }] })],
+  ['tt3-petal', triggerDefinition({
+    onTurnStart: [{ op: 'draw', amountField: 'draw' }, { op: 'heal', amountField: 'heal' }],
+    duration: 3,
+    onPlay: [],
+  })],
+  ['tt7-swordimmortal', triggerDefinition({
     onTurnStart: [{ op: 'draw', amountField: 'draw' }], onPlay: [],
-  } } }],
-  ['tt7-goldencicada', { rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: {
+  })],
+  ['tt7-goldencicada', triggerDefinition({
     onPlay: [{ op: 'draw', amount: 3, handOps: [{ op: 'consumeHand' }] }],
-  } } }],
-  ['cmtn0pbkmnvc', { rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: {
+  }, SELF)],
+  ['cmtn0pbkmnvc', triggerDefinition({
     onPlay: [{ op: 'execute', what: 'starterAttack', perCurseStacks: true }],
-  } } }],
-  ['cmtn2jc142dj', { rules: { version: 1, triggers: {
+  }, ENEMY_ONE)],
+  ['cmtn2jc142dj', triggerDefinition({
     onTurnStart: [{ op: 'copyRandom' }], onPlay: [],
-  } } }],
-  ['tt3-grope', { rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: {
-    onPlay: [{ op: 'draw', range: [2, 3] }],
-  } } }],
-  ['tt7-abysscurse', { rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: {
-    onPlay: [
-      { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
-      { op: 'curse', curse: 'healban', duration: 1, target: 'chosenEnemy' },
-      { op: 'draw', perCurseKinds: true },
-    ],
-  } } }],
-  ['tt7-demonbreaker', { rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: {
-    onPlay: [
-      { op: 'damage', amountField: 'dmg', target: 'chosenEnemy', onKill: { armor: 4 } },
-      { op: 'curse', curse: 'abreak', duration: 2, target: 'chosenEnemy' },
-    ],
-  } } }],
-]);
-const CANONICAL_TABLE_BY_ID = new Map([
-  ['cmtn1r10xnl1', 'TABLETOP11'],
-  ['tt7-elementstorm', 'CARDS_SYNC'],
-  ['tt3-petal', 'TABLETOP11'],
-  ['tt7-swordimmortal', 'TABLETOP10'],
-  ['tt7-goldencicada', 'TABLETOP10'],
-  ['cmtn0pbkmnvc', 'TABLETOP10'],
-  ['cmtn2jc142dj', 'TABLETOP10'],
-  ['tt3-grope', 'TABLETOP10'],
-  ['tt7-abysscurse', 'TABLETOP10'],
-  ['tt7-demonbreaker', 'CARDS_SYNC'],
+  })],
+  ['tt3-grope', triggerDefinition({ onPlay: [{ op: 'draw', range: [2, 3] }] }, SELF)],
+  ['tt7-abysscurse', triggerDefinition({ onPlay: [
+    { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
+    { op: 'curse', curse: 'healban', duration: 1, target: 'chosenEnemy' },
+    { op: 'draw', perCurseKinds: true },
+  ] }, ENEMY_ONE)],
+  ['tt7-demonbreaker', triggerDefinition({ onPlay: [
+    { op: 'damage', amountField: 'dmg', target: 'chosenEnemy', onKill: { armor: 4 } },
+    { op: 'curse', curse: 'abreak', duration: 2, target: 'chosenEnemy' },
+  ] }, ENEMY_ONE)],
 ]);
 
 export const ensureM8RuleBackfill = createRuleBackfiller({
   label: 'M8',
   markerKey: M8_MARKER_KEY,
   definitions,
-  canonicalTableById: CANONICAL_TABLE_BY_ID,
+  canonicalTableById: canonicalTables(definitions, 'TABLETOP10', {
+    'cmtn1r10xnl1': 'TABLETOP11',
+    'tt7-elementstorm': 'CARDS_SYNC',
+    'tt3-petal': 'TABLETOP11',
+    'tt7-demonbreaker': 'CARDS_SYNC',
+  }),
 });

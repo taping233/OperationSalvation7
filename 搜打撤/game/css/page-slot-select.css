@@ -1,8 +1,8 @@
-/* EXP @import url('./slots-cover.css'); */
 
 /* 选档留白：五卡略放宽，卡间、信息区与操作区各留独立间隔。 */
 /* 档案卡金属边沿：斜向亮暗外框、内圈刻线与短角饰，最近游玩用暖金。 */
-#overlay .slot-page .slot-card {
+#overlay .slot-page .slot-card{
+& {
   --slot-rim-light: #b5bec1;
   --slot-rim-mid: #626f76;
   --slot-rim-dark: #293238;
@@ -12,7 +12,7 @@
   box-shadow: 0 0 0 1px #10181c, 0 12px 28px #070b0e80,
     inset 0 0 0 1px #d2d8d224, inset 0 0 0 5px #131b2059;
 }
-#overlay .slot-page .slot-card::after {
+&::after {
   content: ''; position: absolute; inset: 7px; z-index: 3; pointer-events: none;
   border: 1px solid #a4b2b329;
   background:
@@ -26,37 +26,39 @@
     linear-gradient(var(--slot-corner), var(--slot-corner)) left bottom / 1px 13px no-repeat;
   opacity: .72;
 }
-#overlay .slot-page .slot-card.slot-recent {
+&.slot-recent {
   --slot-rim-light: #efe0b1; --slot-rim-mid: #b69b60; --slot-rim-dark: #514a37;
   --slot-corner: #eed59b;
 }
-#overlay .slot-page .slot-card:is(:hover, :focus-within) {
+&:is(:hover, :focus-within) {
   --slot-rim-light: #e1e6e4;
   box-shadow: 0 0 0 1px #10181c, 0 16px 32px #070b0e99,
     inset 0 0 0 1px #d2d8d245, inset 0 0 0 5px #131b2059;
 }
-#overlay .slot-page .slot-card.slot-recent:is(:hover, :focus-within) { --slot-rim-light: #fff0c5; }
+&.slot-recent:is(:hover, :focus-within) { --slot-rim-light: #fff0c5; }}
 #overlay .card .pg.slot-page .slot-deck {
   gap: clamp(24px, calc(var(--game-layout-width, 100vw) * 0.024), 44px);
   padding-inline: clamp(24px, calc(var(--game-layout-width, 100vw) * 0.03), 56px);
 }
-#overlay .slot-page .slot-card {
+#overlay .slot-page{
+& .slot-card {
   flex-basis: 264px;
   max-width: 280px;
   padding: clamp(24px, calc(var(--game-layout-height, 100vh) * 0.036000000000000004), 38px) 22px 24px;
 }
-#overlay .slot-page .slot-card-name { margin-top: 18px; }
-#overlay .slot-page .slot-card-status { margin-top: 14px; }
-#overlay .slot-page .slot-card-rule { margin-block: 16px; }
-#overlay .slot-page .slot-card-desc { line-height: 1.8; }
-#overlay .slot-page .slot-card-desc .si-line { margin-bottom: 16px; }
-#overlay .slot-page .slot-card-desc .si-progress { margin-bottom: 16px; padding-block: 10px; }
-#overlay .slot-page .slot-card-cta { margin-top: 20px; }
-#overlay .slot-page .slot-card-ops { margin-top: 14px; gap: 12px; }
+& .slot-card-name { margin-top: 18px; }
+& .slot-card-status { margin-top: 14px; }
+& .slot-card-rule { margin-block: 16px; }
+& .slot-card-desc { line-height: 1.8; }
+& .slot-card-desc .si-line { margin-bottom: 16px; }
+& .slot-card-desc .si-progress { margin-bottom: 16px; padding-block: 10px; }
+& .slot-card-cta { margin-top: 20px; }
+& .slot-card-ops { margin-top: 14px; gap: 12px; }}
 
 /* 选档背景：两层雪粒持续飘落；装饰层不接收输入，关闭页面后随 DOM 释放。 */
-.slot-page .slot-bg::before,
-.slot-page .slot-bg::after {
+.slot-page .slot-bg{
+&::before,
+&::after {
   content: '';
   position: absolute;
   inset: -360px -60px;
@@ -69,12 +71,12 @@
   opacity: .48;
   animation: slotSnowFar 18s linear infinite;
 }
-.slot-page .slot-bg::after {
+&::after {
   background-size: 390px 360px;
   opacity: .38;
   filter: blur(.6px);
   animation: slotSnowNear 12s linear -6s infinite;
-}
+}}
 @keyframes slotSnowFar {
   from { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(16px, 180px, 0); }
@@ -119,7 +121,8 @@ body.reduce-motion .slot-page::before {
 }
 
 /* W1b 雾光层 retint：蓝紫雾 → 冷青雾（动画沿用原 slotMist，纯 transform） */
-.slot-page::before {
+.slot-page{
+&::before {
   background:
     radial-gradient(ellipse 42% 34% at 30% 62%, rgba(132,144,152,.26), transparent 68%),
     radial-gradient(ellipse 38% 30% at 72% 40%, rgba(162,173,180,.15), transparent 70%),
@@ -127,7 +130,7 @@ body.reduce-motion .slot-page::before {
 }
 
 /* W1c 四角暗角（对标标题页 W1b）：视线收向中央卡组 */
-.slot-page::after {
+&::after {
   background:
     radial-gradient(120% 90% at 50% 42%, transparent 50%, rgba(8,9,9,.48) 88%, rgba(7,7,8,.64) 100%),
     linear-gradient(90deg, rgba(11,12,13,.48) 0%, transparent 22%, transparent 78%, rgba(11,12,13,.48) 100%),
@@ -135,20 +138,21 @@ body.reduce-motion .slot-page::before {
 }
 
 /* W1d 光斑 retint：冷白偏青（剪影保持暖白 #f4f3f1，与金线同一暖点缀语言） */
-.slot-page .slot-bg .bokeh {
+& .slot-bg .bokeh {
   background: radial-gradient(circle at 38% 34%, rgba(245,246,247,.85), rgba(189,197,203,.26) 55%, transparent 72%);
-}
+}}
 
 /* ── W2 暖金装饰语言：页头分隔线（原银蓝 #ced0d3 → var(--gold-main) 金线 + 端点光点呼吸） ── */
-.slot-page .slot-page-rule {
+.slot-page .slot-page-rule{
+& {
   background: linear-gradient(90deg, transparent, #e6cb76a1 26%, #e6cb76c4 50%, #e6cb76a1 74%, transparent);
   box-shadow: 0 0 6px #e6cb7633;
 }
-.slot-page .slot-page-rule::after {
+&::after {
   background: var(--gold-bright);
   box-shadow: 0 0 10px #e6cb76d9, 0 0 22px #e6cb7655;
   animation: slotGemBreath 5s ease-in-out infinite alternate;
-}
+}}
 @keyframes slotGemBreath { from { opacity: .55; } to { opacity: 1; } }
 
 /* W2b 卡内分隔线（原蓝白 → 金短线，同一语言） */
@@ -157,111 +161,102 @@ body.reduce-motion .slot-page::before {
 }
 
 /* W2c SLOT 编号行仪式感：两侧金短线（对标标题页 ak-sec「始于/驻足于」） */
-.slot-page .slot-card-sub {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  color: #9da1a3;
-}
-.slot-page .slot-card-sub::before,
-.slot-page .slot-card-sub::after {
-  content: ''; display: block; width: 16px; height: 1px;
-  background: linear-gradient(90deg, transparent, #e6cb76a8);
-  box-shadow: 0 0 4px #e6cb7655;
-}
-.slot-page .slot-card-sub::after { transform: scaleX(-1); }
 
 /* W2d 卡顶金线：档案章的"封条"（空档极淡、有档可辨、hover/最近游玩点亮） */
-.slot-page .slot-card::before {
+.slot-page .slot-card{
+&::before {
   content: ''; position: absolute; top: 0; left: 14%; right: 14%; height: 1px; z-index: 3;
   pointer-events: none;
   background: linear-gradient(90deg, transparent, #e6cb76cc, transparent);
   opacity: .14;
 }
-.slot-page .slot-card.filled::before { opacity: .42; }
-.slot-page .slot-card.slot-recent::before { opacity: .85; }
-.slot-page .slot-card:hover::before { opacity: .75; }
+&.filled::before { opacity: .42; }
+&.slot-recent::before { opacity: .85; }
+&:hover::before { opacity: .75; }}
 
 /* W2e 底部两角金饰线（四角收束：上角已有返回键/? 键坐镇，只补下方空角） */
-.slot-page .slot-deck::before,
-.slot-page .slot-deck::after {
+.slot-page .slot-deck{
+&::before,
+&::after {
   content: ''; position: absolute; z-index: 3; pointer-events: none;
   bottom: clamp(14px, calc(var(--game-layout-height, 100vh) * 0.03), 30px);
   width: 54px; height: 20px;
   opacity: .6;
   animation: slotGemBreath 6s ease-in-out infinite alternate;
-}
-.slot-page .slot-deck::before {
-  left: clamp(22px, calc(var(--game-layout-width, 100vw) * 0.03), 56px);
   background:
     radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), var(--gold-bright) 40%, transparent 75%),
     linear-gradient(90deg, #e6cb76b3, transparent) left bottom / 100% 1px no-repeat,
     linear-gradient(0deg, #e6cb76b3, transparent) left bottom / 1px 100% no-repeat;
   filter: drop-shadow(0 0 4px #e6cb7638);
 }
-.slot-page .slot-deck::after {
+&::before {
+  left: clamp(22px, calc(var(--game-layout-width, 100vw) * 0.03), 56px);
+}
+&::after {
   right: clamp(22px, calc(var(--game-layout-width, 100vw) * 0.03), 56px);
   transform: scaleX(-1);
-  background:
-    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), var(--gold-bright) 40%, transparent 75%),
-    linear-gradient(90deg, #e6cb76b3, transparent) left bottom / 100% 1px no-repeat,
-    linear-gradient(0deg, #e6cb76b3, transparent) left bottom / 1px 100% no-repeat;
-  filter: drop-shadow(0 0 4px #e6cb7638);
   animation-delay: -3s;
-}
+}}
 
 /* ── W3 信息排版仪式感 ── */
 /* W3a 档名（主信息）提亮 + 一丝金晕 */
-.slot-page .slot-card-name {
+.slot-page{
+& .slot-card-name {
   text-shadow: 0 0 12px rgba(242,230,190,.3), 0 2px 6px rgba(6,6,7,.65);
 }
 
 /* W3b 档案信息块贴合按钮：art 吃掉弹性留白，desc 自然高度——消除卡内中段死板空区 */
-.slot-page .slot-card-desc { flex: 0 0 auto; }
+& .slot-card-desc { flex: 0 0 auto; }
 
 /* W3c 空档提示在信息区垂直居中（不再顶头悬着 + 下方大空白） */
-.slot-page .slot-card:not(.filled) .slot-card-desc {
+& .slot-card:not(.filled) .slot-card-desc {
   display: flex; align-items: center; justify-content: center;
-}
+}}
 
 /* W3d 层级分离：标签（em）小而灰、值（b）大而亮、数值（b.num）暖米金呼应档案语言 */
-.slot-page .slot-card-desc .si-line { margin-bottom: 10px; }
-.slot-page .slot-card-desc .si-line + .si-line {
+.slot-page .slot-card-desc .si-line{
+& { margin-bottom: 10px; }
+& + .si-line {
   border-top: 1px solid rgba(170,174,177,.16);
   padding-top: 9px;
 }
-.slot-page .slot-card-desc .si-line em {
+& em {
   font-size: 10px; letter-spacing: .18em; color: #92979a;
 }
-.slot-page .slot-card-desc .si-line b { color: #f4f4f4; }
-.slot-page .slot-card-desc .si-line b.num { color: #e3e1de; }
-.slot-page .slot-card-desc .si-sub { color: #979b9e; }
+& b { color: #f4f4f4; }
+& b.num { color: #e3e1de; }}
+.slot-page{
+& .slot-card-desc .si-sub { color: #979b9e; }
 
 /* W3e 空档提示 retint：蓝紫灰 → 冷青灰（与标签同一族） */
-.slot-page .slot-empty { color: #9da1a3; }
+& .slot-empty { color: #9da1a3; }
 
 /* ── W4 细节密度 ── */
 /* W4a 遗物落影（对标标题页 W3b）：有档图标"立在"卡面里 */
-.slot-page .slot-card.filled .slot-card-art::after {
+& .slot-card.filled .slot-card-art::after {
   content: ''; position: absolute; left: 50%; bottom: 5%;
   width: 74%; height: 13%; transform: translateX(-50%);
   pointer-events: none;
   background: radial-gradient(ellipse 58% 36% at 50% 58%, rgba(7,8,8,.5), transparent 74%);
-}
+}}
 
 /* W4b CTA：暖金按钮的仪式感收口（金渐变高光 + hover 金晕；.en 英文字距） */
-#overlay .slot-page .slot-card-cta {
+#overlay .slot-page .slot-card-cta{
+& {
   letter-spacing: 3px;
   box-shadow: inset 0 1px 0 rgba(226,222,213,.45);
   transition: background var(--slot-fast), border-color var(--slot-fast), color var(--slot-fast),
     box-shadow var(--slot-fast), transform var(--slot-fast), filter var(--slot-fast);
 }
-#overlay .slot-page .slot-card-cta:hover,
-#overlay .slot-page .slot-card-cta:focus-visible {
+&:hover,
+&:focus-visible {
   box-shadow: inset 0 1px 0 rgba(235,233,227,.55), 0 0 18px rgba(230,203,118,.28);
-}
-.slot-page .slot-card-cta .en { letter-spacing: .18em; margin-left: 4px; opacity: .82; }
+}}
+.slot-page{
+& .slot-card-cta .en { letter-spacing: .18em; margin-left: 4px; opacity: .82; }
 
 /* W4c hover 边框/辉光 retint：蓝紫 → 青白 + 微金 */
-.slot-page .slot-card:hover {
+& .slot-card:hover {
   border-color: rgba(213,214,215,.72);
   box-shadow: 0 0 22px rgba(168,177,183,.18), 0 0 14px rgba(230,203,118,.1),
     0 18px 38px rgba(7,7,8,.65);
@@ -279,27 +274,28 @@ body.reduce-motion .slot-page::before {
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=卡片抬升，press=按下方向 ── */
-.slot-page {
+& {
   --slot-fast: .18s cubic-bezier(.33, 1, .68, 1);
   --slot-lift: .32s cubic-bezier(.22, 1, .36, 1);
   --slot-press: .1s ease-out;
-}
+}}
 
 /* ── T1 按压态 ── */
 /* 先修一个隐性 bug：winter 的 slotIn 入场用 both 填充，结束后 transform:none 被动画
    填充永久钉死（级联上压过 :hover/:active 的 transform），卡片悬停抬升与按压缩放
    全部失效。这里以同特异性 + 更晚加载改为 backwards 填充：入场错峰上浮不变，
    动画结束后释放 transform 给交互态。 */
-.slot-page .slot-card { animation: slotIn .5s cubic-bezier(.22, 1, .36, 1) backwards; }
+.slot-page .slot-card{
+& { animation: slotIn .5s cubic-bezier(.22, 1, .36, 1) backwards; }
 /* 卡：按下轻缩+金线微亮（快进），松手沿 lift 曲线弹性回位 */
-.slot-page .slot-card {
+& {
   transition: border-color var(--slot-lift), box-shadow var(--slot-lift), transform var(--slot-lift);
 }
-.slot-page .slot-card:active {
+&:active {
   transform: scale(.985);
   border-color: rgba(230,203,118,.5);
   transition: transform var(--slot-press), border-color var(--slot-press), box-shadow var(--slot-press);
-}
+}}
 /* CTA：按下下沉+提亮（快 click 松手后 .18s 回弹） */
 #overlay .slot-page .slot-card-cta:active {
   transform: translateY(1px) scale(.97);
@@ -312,44 +308,47 @@ body.reduce-motion .slot-page::before {
   transition-duration: .08s;
 }
 /* 返回键 / 帮助键：按下轻缩（补 transform 过渡） */
-#overlay .pg.slot-page .pg-back {
+#overlay .pg.slot-page .pg-back{
+& {
   transition: color var(--slot-fast), border-color var(--slot-fast), filter var(--slot-fast), transform var(--slot-fast);
 }
-#overlay .pg.slot-page .pg-back:active { transform: scale(.94); }
-.slot-page .slot-page-help .help-btn { transition: color var(--slot-fast), border-color var(--slot-fast), box-shadow var(--slot-fast), transform var(--slot-fast); }
-.slot-page .slot-page-help .help-btn:active { transform: scale(.9); }
+&:active { transform: scale(.94); }}
 
 /* ── T2 焦点态：键盘导航金线焦点环（覆盖全局裸 outline，hover 底金不冲突） ── */
-#overlay .slot-page .slot-card-cta:focus-visible,
-#overlay .slot-page .slot-card-ops .mini-btn:focus-visible,
-#overlay .pg.slot-page .pg-back:focus-visible,
-#overlay .slot-page .slot-page-help .help-btn:focus-visible {
+#overlay{
+& .slot-page .slot-card-cta:focus-visible,
+& .slot-page .slot-card-ops .mini-btn:focus-visible,
+& .pg.slot-page .pg-back:focus-visible {
   outline: 1px solid #e6cb76cc;
   outline-offset: 2px;
   box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(230,203,118,.35);
 }
-#overlay .pg.slot-page .pg-back:focus-visible { border-color: rgba(230,203,118,.4); }
+& .pg.slot-page .pg-back:focus-visible { border-color: rgba(230,203,118,.4); }}
 
 /* ── T3 统一过渡节奏：全页收在 fast/lift 两族曲线里 ── */
-.slot-page .slot-card .slot-card-bg,
-.slot-page .slot-card .slot-card-light { transition: opacity var(--slot-lift), filter var(--slot-lift); }
-.slot-page .slot-card::before { transition: opacity var(--slot-fast); }
-.slot-page .slot-card-ops { transition: opacity var(--slot-fast), transform var(--slot-fast); }
-.slot-page .slot-card-ops .mini-btn {
+.slot-page .slot-card{
+& .slot-card-bg,
+& .slot-card-light { transition: opacity var(--slot-lift), filter var(--slot-lift); }
+&::before { transition: opacity var(--slot-fast); }}
+.slot-page .slot-card-ops{
+& { transition: opacity var(--slot-fast), transform var(--slot-fast); }
+& .mini-btn {
   transition: color var(--slot-fast), background var(--slot-fast), border-color var(--slot-fast),
     box-shadow var(--slot-fast), transform var(--slot-fast), filter var(--slot-fast);
-}
+}}
 
 /* 已存档管理轨：保持可发现，主行动仍由上方暖金 CTA 承担。 */
-#overlay .slot-page .slot-card-ops {
+#overlay .slot-page{
+& .slot-card-ops {
   width: 100%;
   opacity: .88;
   transform: none;
   pointer-events: auto;
 }
-#overlay .slot-page .slot-card:hover .slot-card-ops,
-#overlay .slot-page .slot-card:focus-within .slot-card-ops { opacity: 1; }
-#overlay .slot-page .slot-card-ops .mini-btn {
+& .slot-card:hover .slot-card-ops,
+& .slot-card:focus-within .slot-card-ops { opacity: 1; }}
+#overlay .slot-page .slot-card-ops .mini-btn{
+& {
   flex: 1 1 0;
   min-width: 0;
   min-height: 31px;
@@ -361,17 +360,17 @@ body.reduce-motion .slot-page::before {
   background: rgba(26,28,30,.74);
   border-color: rgba(156,163,168,.34);
 }
-#overlay .slot-page .slot-card-ops .mini-btn.danger {
+&.danger {
   color: #e5b5aa;
   background: rgba(75,34,32,.3);
   border-color: rgba(191,112,100,.36);
 }
-#overlay .slot-page .slot-card-ops .mini-btn.arm:not(.danger) {
+&.arm:not(.danger) {
   color: #e2e0db;
   background: rgba(88,72,36,.68);
   border-color: rgba(236,208,116,.66);
   box-shadow: inset 0 2px 0 rgba(248,222,137,.46);
-}
+}}
 
 /* ── T4 弹层出入场：淡入 + 8px 上移；关闭淡出下沉（覆盖 winter pgIn/pgOut 的 slot 分支） ── */
 #overlay .card.page:has(.slot-page) {
@@ -404,22 +403,27 @@ body.reduce-motion .slot-page::before {
 /* ── T5 悬停细节补全：卡内次要按钮单独 hover；删除用暖红警示 ──
    （带 #overlay 前缀：expedition-inventory.css 的 #overlay .mini-btn.danger 是
    ID 特异性且加载更晚，裸类选择器的 hover 压不过它的底色） */
-#overlay .slot-page .slot-card-ops .mini-btn:hover {
+#overlay .slot-page .slot-card-ops .mini-btn{
+&:hover {
   background: #484d53;
   border-color: #c1c5c8;
   color: #f2f2f2;
   box-shadow: 0 0 8px rgba(168,177,183,.16);
-  transform: translateY(-1px);
 }
-#overlay .slot-page .slot-card-ops .mini-btn.danger:hover {
+&.danger:hover {
   background: linear-gradient(160deg, #8a3a31, #63251e);
   border-color: #c96f5c;
   color: #ffd9cf;
   box-shadow: 0 0 10px rgba(190,84,62,.3);
-}
+}}
 
 /* ── T6 光标反馈自查：CTA（button 默认 cursor）补 pointer ── */
-#overlay .slot-page .slot-card-cta { cursor: pointer; }
+#overlay .slot-page{
+& .slot-card-cta { cursor: pointer; }
+
+& .slot-archive { flex-shrink: 0; width: 100%; margin-top: 10px; font-size: 12px; }
+& .slot-archive summary { cursor: pointer; text-align: center; }
+& .slot-archive-actions { display: grid; gap: 6px; padding-top: 8px; }}
 
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -429,7 +433,8 @@ body.reduce-motion .slot-page::before {
    ═══════════════════════════════════════════════════════════════════ */
 
 /* 空档底图斜纹：45° 细发丝档案纹，随空档底图一起被压暗，不抢主体 */
-.slot-page .slot-card:not(.filled) .slot-card-bg::before {
+.slot-page{
+& .slot-card:not(.filled) .slot-card-bg::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
     repeating-linear-gradient(45deg, rgba(170,174,177,.07) 0 1px, transparent 1px 13px),
@@ -437,7 +442,7 @@ body.reduce-motion .slot-page::before {
 }
 
 /* 空态图标下方：竖排 NEW GAME + 金色端线（装饰性档案批注语言） */
-.slot-page .slot-state-empty .slot-card-art::after {
+& .slot-state-empty .slot-card-art::after {
   content: 'NEW GAME';
   position: absolute; left: 50%; bottom: 4%;
   transform: translateX(-50%);
@@ -446,4 +451,4 @@ body.reduce-motion .slot-page::before {
   color: rgba(230,203,118,.5); text-shadow: 0 1px 3px rgba(0,0,0,.7);
   padding-top: 12px;
   background: linear-gradient(180deg, #e6cb76b3, transparent) center top / 1px 10px no-repeat;
-}
+}}

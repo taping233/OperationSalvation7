@@ -1,5 +1,7 @@
 import { getQualityPreset } from './performance-settings.js';
 import { drawMapBrushRoad, mapBrushRoadInView } from './map-brush-art.js';
+import { drawMapRouteTerrain } from './map-route-terrain.js';
+import { drawMapFrontierDepth } from './map-frontier-depth.js';
 
 import { font, hash2 } from './renderer.primitives.js';
 import { revealProgress } from './map-reveals.js';
@@ -308,6 +310,8 @@ const SDT = window.SDT;
   // Artwork and type names remain small relative to the complete viewport.
   function drawIcons(ctx,game,g,statuses,path){
     const z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW);
+    // Text metrics belong to this draw only, including its current font state.
+    const textWidths=new Map();
     renderedLabelBounds.clear();labelBoundsGame=game;labelBoundsNodes=game.nodes;labelBoundsLayer=game.layerIdx;
     const travel=getMapTravelPresentation(game);
     const preview=travel?.path?.at(-1)||getExpeditionPreview(game)||game.moveTarget;
@@ -346,7 +350,7 @@ const SDT = window.SDT;
       ctx.save();ctx.translate(n.x,n.y);ctx.scale(scale,scale);ctx.globalAlpha=rv<1?Math.min(1,rv*1.4):1;
       const labelBounds=drawMapNodeBadge(ctx,type,name,state,{
         completed,reachable:legal,
-        status,statusScale:1/detailScale,
+        status,statusScale:1/detailScale,textWidths,
         note:game.noteMap?.has(`${game.map?.boardId}|${key}`),
         showLabel:current||selected||(type!=='blank'&&!routed&&(legal?z>=.65:z>=.85)),
         time:game.time||0,pulse:glowPulse(game.time||0),
@@ -383,13 +387,14 @@ const SDT = window.SDT;
       return {x:(marked?60:56)*unit/z,top:56*unit/z,bottom:(hasStatus?100:78)*unit/z};
     };
     const outside=(p,n,box)=>Math.abs(p.x-n.x)>Math.min(box.x,len*.32)||p.y-n.y < -Math.min(box.top,len*.32)||p.y-n.y > Math.min(box.bottom,len*.32);
-    const exit=(origin,target)=>{
+    const curve=mapTravelCurve(from,to),reverse=mapTravelCurve(to,from);
+    const exit=(origin,target,prepared)=>{
       let low=0,high=.49;const box=pad(origin);
-      for(let i=0;i<12;i++){const mid=(low+high)/2;if(outside(mapTravelPoint(origin,target,mid),origin,box))high=mid;else low=mid;}
+      for(let i=0;i<12;i++){const mid=(low+high)/2;if(outside(mapTravelPoint(origin,target,mid,prepared),origin,box))high=mid;else low=mid;}
       return high;
     };
-    const start=exit(from,to),end=1-exit(to,from);
-    const curve=mapTravelCurve(from,to),section=mapCurveSection(curve,start,end);
+    const start=exit(from,to,curve),end=1-exit(to,from,reverse);
+    const section=mapCurveSection(curve,start,end);
     return {curve,start,end,section,path:mapCurvePath(section)};
   }
 
@@ -420,6 +425,10 @@ const SDT = window.SDT;
     for(let i=1;i<path.length;i++)planned.set(mapEdgeKey(path[i-1],path[i]),mapKey(path[i-1]));
     const travel=getMapTravelPresentation(game),moving=travel?.phase==='moving';
     ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+    // Paint below all roads and icons; never reveal an unknown connection through scenery.
+    for(const road of cached.roads){
+      if(mapBrushRoadInView(road.curve,1.4*unit/z,view))drawMapRouteTerrain(ctx,road,unit/z,curLi);
+    }
     for (const road of g.fogRoads) drawMapBrushRoad(ctx,road,unit/z,{alpha:.12,view});
     for(const descriptor of cached.roads){
       if(!mapBrushRoadInView(descriptor.curve,unit/z,view))continue;
@@ -517,6 +526,7 @@ const SDT = window.SDT;
     // the next frame, while labels, clipping and badges share this frame's work.
     const g=nodeGeo(game),statuses=new Map(g.nodes.map(n=>[mapKey(n),mapNodeStatus(game,n)]));
     const path=selectedMapPath(game);
+    drawMapFrontierDepth(ctx,game,g);
     drawLinks(ctx, game, g, statuses, path);
     drawIcons(ctx, game, g, statuses, path);
     drawPlayer(ctx, game, g);
@@ -554,14 +564,16 @@ const SDT = window.SDT;
     return Promise.all([mapImageReady(mapAtmosphere), drawMapCityAtmosphere.ready(), prepareMapNodeArt()]);
   }
 
-  async function prepare(game, isCurrent = () => true) {
+  async function prepare(game, isCurrent = () => true, { resetBackdrop = true } = {}) {
     await warm();
     if (rendererDisposed || !isCurrent()) return false;
     // 续局初帧不复用上一局的壁纸/尺寸防抖，也不播旧层交叉溶解。
-    clearBackdropResize();
-    if (backdropFadeFrame) cancelAnimationFrame(backdropFadeFrame);
-    backdropFadeFrame = 0; backdropFadeDriving = false;
-    backdropCanvas = null; backdropFade.snap = null;
+    if (resetBackdrop) {
+      clearBackdropResize();
+      if (backdropFadeFrame) cancelAnimationFrame(backdropFadeFrame);
+      backdropFadeFrame = 0; backdropFadeDriving = false;
+      backdropCanvas = null; backdropFade.snap = null;
+    }
     const canvas = /** @type {HTMLCanvasElement | null} */ (document.getElementById('game'));
     const ctx = canvas?.getContext('2d');
     if (!ctx || !game.cam || !game.nodes?.length) return false;

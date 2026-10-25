@@ -2,10 +2,11 @@
 import { describe, it, expect } from 'vitest';
 
 import * as Combat from '../game/src/battle/core/combat.js';
+import { runCombatSelfTest } from './helpers/combat-self-test.js';
 
-describe('combat.selfTest（内置四类伤害/诅咒用例）', () => {
+describe('combat（四类伤害/诅咒用例）', () => {
   it('全部通过', () => {
-    const t = Combat.selfTest();
+    const t = runCombatSelfTest(Combat);
     console.log(t.lines.join(' | '));
     expect(t.pass, t.failed?.join('; ')).toBe(true);
   });

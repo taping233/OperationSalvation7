@@ -11,6 +11,7 @@ import { RULES } from '../game/src/core/rules.js';
 import SDT from '../game/src/core/sdt-facade.js';
 vi.mock('../game/src/run/game.session.js', () => ({ MAP: { rules: { safeStart: 2, safeMax: 6 } } }));
 import { personnelHTML, bindPersonnel, setPersonnelGroup } from '../game/src/hub/hub.personnel.js';
+import { readCssSource } from './helpers/css-source.js';
 await import('../game/src/hub/base.js');
 
 const Base = SDT.Base;
@@ -220,16 +221,16 @@ describe('伙伴页接线与数值隔离', () => {
     expect(runtime.match(/disposePersonnel\(\); disposePersonnel = \(\) => \{\};/g)).toHaveLength(2);
     expect(runtime.indexOf('disposePersonnel();', runtime.indexOf('function renderHub()'))).toBeLessThan(runtime.indexOf('const B = SDT.Base;', runtime.indexOf('function renderHub()')));
     expect(runtime.indexOf('disposePersonnel();', runtime.indexOf('function closeBase()'))).toBeLessThan(runtime.indexOf('UI.hideOverlay();', runtime.indexOf('function closeBase()')));
-    expect(readFileSync('game/src/game.boot.js', 'utf8')).toContain("if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest?.('button,summary,[role=\"button\"]')) return;");
+    expect(readFileSync('game/src/core/game-boot-input.js', 'utf8')).toContain("if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest?.('button,summary,[role=\"button\"]')) return;");
   });
 
   it('scopes motion and focus styles to the portrait and disables it for both reduced-motion paths', () => {
-    const css = postcss.parse(readFileSync('game/css/base-personnel-v12.css', 'utf8'));
+    const css = postcss.parse(readCssSource('game/css/base-personnel-v12.css', 'utf8'));
     const animationRules = [], names = [];
     css.walkRules(rule => { if (rule.selector.includes('.partner-play')) animationRules.push(rule); });
     css.walkAtRules('keyframes', rule => { if (rule.params.startsWith('partner-play-')) names.push(rule.params); });
     expect(names).toEqual(['partner-play-tilt', 'partner-play-hop', 'partner-play-nuzzle']);
-    expect(animationRules.some(rule => rule.selector.includes(':focus-visible') && rule.nodes.some(node => node.prop === 'outline'))).toBe(true);
+    expect(readCssSource('game/css/base-camp.css')).toMatch(/:is\(button, summary\):focus-visible[^}]*outline: 3px solid/s);
     expect(animationRules.some(rule => rule.selector.startsWith('body.reduce-motion') && rule.nodes.some(node => node.prop === 'animation' && node.value === 'none'))).toBe(true);
     expect(animationRules.some(rule => rule.parent.name === 'media' && rule.parent.params === '(prefers-reduced-motion:reduce)' && rule.selector.includes('.partner-play[data-reaction]') && rule.nodes.some(node => node.prop === 'animation' && node.value === 'none'))).toBe(true);
   });

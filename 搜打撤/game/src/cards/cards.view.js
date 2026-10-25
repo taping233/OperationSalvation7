@@ -8,15 +8,16 @@
 import SDT from '../core/sdt-facade.js';
 import { termKeyFor } from '../ui/term-tips.js';
 import { esc, escAttr } from '../core/shared.js';
-import { displayCardDescription } from './card-description-text.js';
+import { displayCardDescription, spellDamageBonus } from './card-description-text.js';
 import { cardFramePresentation } from './card-frame-presentation.js';
+import { liveCardOptions } from './card-state-presentation.js';
 
 // 描述富文本：对原文识别数字、术语与句首关键字，再逐段转义。
 // 不对生成的 HTML 二次替换，避免把 &#39; 等转义实体拆成数值标签。
 // 时点短语整体标蓝（2026-09-16 留言）：「对战开始时/回合开始时/回合结束时」必须排在
 // 「回合」等单词前面，交替分支按序尝试，长词才会整体命中而不是只染前两个字。
 // （09-23 自 buildCardHTML 体内上移模块顶层并导出——选片台描述复用，卡面行为不变。）
-const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '攻击伤害', '法术伤害', '固定伤害', '真实伤害', '冰冻', '冻结', '中毒', '流血', '护甲', '法伤', '招式', '潜行', '生命', '伤害', '诅咒', '净化', '沉默', '禁疗', '充能', '注能', '发现', '限定', '主动技能', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
+const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '攻击伤害', '法术伤害', '固定伤害', '真实伤害', '冰冻', '冻结', '中毒', '流血', '破甲', '护甲', '法伤', '招式', '潜行', '生命', '伤害', '诅咒', '净化', '沉默', '禁疗', '充能', '注能', '发现', '限定', '主动技能', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
 // 词表与数值规则只编译一次；matchAll 复制正则状态，反复渲染不共享游标。
 const DESC_TOKEN_RE = new RegExp('(' + DESC_TERMS.join('|') + ')|([⁺⁻+-]?[0-9]+(?:\\.[0-9]+)?)', 'g');
 function richDescriptionFragment(text) {
@@ -81,6 +82,7 @@ const cardHTMLMemo = new WeakMap();
 // 卡库对象可存活整个会话，动态费用/加伤的旧变体只保留最近生成的 32 份。
 const CARD_HTML_VARIANTS_LIMIT = 32;
 export function cardHTML(c, cls, opts) {
+  opts = liveCardOptions(c, opts);
   const description = displayCardDescription(c.desc, c.id, c);
   let key;
   try { key = (cls || '') + '|' + JSON.stringify(opts || null) + '|' + description; }
@@ -100,9 +102,10 @@ export function cardHTML(c, cls, opts) {
 function buildCardHTML(c, cls, opts, description) {
   // 2026-09-28 代码线：体内同名局部 esc/escAttr（3 字符/缺单引号）已删，统一走顶层 core/shared 满配版
   const hideCost = c.type === '资源' || (!!(opts && opts.hideCost) && SDT.Cards.NO_COST_TYPES.includes(c.type));
-  const costBase = (opts && opts.costOverride && opts.costOverride.base != null) ? +opts.costOverride.base : (c.cost || 0);
-  const costMod = (opts && opts.costOverride && +opts.costOverride.v !== costBase)
-    ? { v: +opts.costOverride.v, base: costBase, down: +opts.costOverride.v < costBase } : null;
+  const costBase = (opts && opts.costOverride && opts.costOverride.base != null) ? +opts.costOverride.base : +(c._baseCost ?? c.cost ?? 0);
+  const currentCost = +(opts?.costOverride?.v ?? c.cost ?? 0);
+  const costMod = currentCost !== costBase
+    ? { v: currentCost, base: costBase, down: currentCost < costBase } : null;
   const dmg = +(c.dmg || 0);
   const isDmgType = SDT.Cards.DMG_TYPES.includes(c.type);
   // 稀有度展示（2026-09-04 定版）：有效稀有度一律经 rarityOf 推导——
@@ -122,7 +125,8 @@ function buildCardHTML(c, cls, opts, description) {
   // 数字略微放大以示区别——由 battle.view 传入 dmgOverride = { bonus }
   const dmgOverride = opts && opts.dmgOverride;
   const dmgUp = !!(showDmg && dmgOverride && +(dmgOverride.bonus || 0) > 0);
-  if (dmgUp) mark = { ...mark, text: SDT.Cards.DMG_TYPE_META[c.dmgType].fmt(dmg + dmgOverride.bonus) };
+  const bonus = dmgUp ? c.dmgType === 'spell' ? spellDamageBonus(c, dmgOverride.bonus) : dmgOverride.bonus : 0;
+  if (dmgUp) mark = { ...mark, text: SDT.Cards.DMG_TYPE_META[c.dmgType].fmt(dmg + bonus) };
   const ghostDmg = !showDmg && isDmgType && c._preview;
   // 桌游道具卡的币值角标（右下角金色硬币）
   const val = SDT.Cards.sellPrice(c);
@@ -140,12 +144,12 @@ function descLenCls(description) {
 const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
   const healN = +(c.heal || 0), armN = +(c.armor || 0);
   const kwArr = [];
-  if (drawN > 0) kwArr.push(`<span class="kw-draw" title="从本场牌库抽 ${drawN} 张牌">${SDT.Icons.img('cards')}抽 ${drawN}</span>`);
+  if (drawN > 0) kwArr.push(`<span class="kw-draw" title="从本场牌库抽 ${drawN} 张牌">${SDT.Icons.img('draw-card')}抽 ${drawN}</span>`);
   if (infN > 0) {
     const alt = SDT.Cards.infuseAlt(c);
     kwArr.push(`<span class="kw-infuse${alt ? ' alt' : ''}" title="${escAttr(alt
       ? `注能(${infN})：打出时需先选择 ${infN} 张手牌消耗。该卡注能前后效果不同——${alt}`
-      : `注能(${infN})：打出时需先选择 ${infN} 张手牌消耗才能发动`)}">${SDT.Icons.img('crystal')}注能 ${infN}</span>`);
+      : `注能(${infN})：打出时需先选择 ${infN} 张手牌消耗才能发动`)}">${SDT.Icons.img('infuse')}注能 ${infN}</span>`);
   }
   if (healN > 0) kwArr.push(`<span class="kw-heal" title="回复 ${healN} 点生命（禁疗时无效）">${SDT.Icons.img('heart')}回 ${healN}</span>`);
   if (armN > 0) kwArr.push(`<span class="kw-armor" title="获得 ${armN} 点护甲">${SDT.Icons.img('plate')}甲 ${armN}</span>`);
@@ -159,8 +163,14 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
   const frame = cardFramePresentation(ro, c.cls);
   const costHTML = hideCost ? '' : costMod
     ? `<div class="hsc-cost cost-mod ${costMod.down ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${costMod.v} 费打出（原 ${costMod.base} 费）">${costMod.v}</div>`
-    : (c.cost != null ? `<div class="hsc-cost">${c.cost}</div>` : '');
-  return `<div class="hs-card tp${ti} ${rvCls}${CF_SLUGS[c.cls] ? ' ' + CF_SLUGS[c.cls] : ''}${cls ? ' ' + cls : ''}" data-card-layout="split" data-card-id="${escAttr(c.id || '')}" data-rarity="${escAttr(ro)}" data-frame="${frame.key}" data-has-description="${!!description}" data-rule-density="${ruleDensity}">
+    : (c.cost != null ? `<div class="hsc-cost">${currentCost}</div>` : '');
+  const state = c._presentation || {};
+  const transforming = state.transforming || !!c.rules?.battle?.handTransform || c.id === 'tt7-imitate';
+  const stateClass = `${state.temporary ? ' is-temporary' : ''}${transforming || state.transformed ? ' is-transforming' : ''}`;
+  const stateLabels = [state.temporary ? '临时' : '', transforming ? '随动变形' : state.transformed ? '已变形' : ''].filter(Boolean);
+  const stateTitle = [state.temporary ? '本场临时牌，按来源规则到期消散或消耗' : '', transforming ? `随操作改变卡名与卡面${state.originName ? `；来源：${state.originName}` : ''}` : state.transformed ? `由「${state.originName || '原卡'}」变化而来` : ''].filter(Boolean).join('；');
+  return `<div class="hs-card tp${ti} ${rvCls}${CF_SLUGS[c.cls] ? ' ' + CF_SLUGS[c.cls] : ''}${cls ? ' ' + cls : ''}${stateClass}" data-card-layout="split" data-card-id="${escAttr(c.id || '')}" data-rarity="${escAttr(ro)}" data-frame="${frame.key}" data-has-description="${!!description}" data-rule-density="${ruleDensity}">
+    ${stateLabels.length ? `<i class="hsc-state-aura" aria-hidden="true"></i><span class="hsc-state-label" title="${escAttr(stateTitle)}">${stateLabels.join(' · ')}</span>` : ''}
     ${isPrism ? '<i class="hsc-prism-halo" aria-hidden="true"></i>' : ''}
     ${ro === '传说' ? '<i class="hsc-gold-halo" aria-hidden="true"></i>' : ''}
     ${costHTML ? `<div class="hsc-cost-layer" style="${frame.style}">${costHTML}</div>` : ''}
@@ -175,7 +185,7 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
     ${kwHTML}</div></div>
     <img class="hsc-frame" src="${escAttr(frame.src)}" width="${frame.width}" height="${frame.height}" alt="" aria-hidden="true" decoding="async"${opts?.defer ? ' loading="lazy"' : ''}>
     ${showDmg ? `<div class="hsc-dmg${dmgUp ? ' dmg-up' : ''}" title="${escAttr(dmgUp
-      ? `${mark.tip}（含法伤加成 +${dmgOverride.bonus}）`
+      ? `${mark.tip}（含法伤加成 +${bonus}）`
       : (c.dmgType === 'spell' ? `${mark.tip} · 受法伤加成` : mark.tip))}">${mark.icon}<b>${mark.text}</b>${c.dmgType === 'spell' ? '<i data-term="spellPower">法伤</i>' : ''}</div>` : ''}
     ${ghostDmg ? `<div class="hsc-dmg ghost">${SDT.Icons.img('swords')}<b>0</b></div>` : ''}
     ${showVal ? `<div class="hsc-val" title="币值 ${val}${SDT.Cards.isSellable(c) ? ' · 可出售' : ' · 不可出售'}"><i>[[icon:coin]]</i><b>${val}</b></div>` : ''}

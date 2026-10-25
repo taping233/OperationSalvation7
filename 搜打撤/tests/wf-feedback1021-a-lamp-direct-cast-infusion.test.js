@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 /* 反馈#5（2026-10-21 老板实测 12 条）复现与回归：
  * (a)「神灯的描述一和效果改为发现招式」——定版文案、抉择标签、招式池三处同步；
  * (b)「直接释放词条的效果要把注能视为已注能」（老板 10-21 补充口径：是需求不是 bug）：
@@ -16,7 +17,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 3, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 10, 0, 5, 3) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');

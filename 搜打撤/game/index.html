@@ -41,7 +41,6 @@
 <link rel="stylesheet" href="css/page-expedition-hud.css" />
 <link rel="stylesheet" href="css/feedback-oct12.css" />
 <link rel="stylesheet" href="css/roster-departure-v2.css" />
-<link rel="stylesheet" href="css/pocket-strip.css" />
 <link rel="stylesheet" href="css/experience-loot.css" />
 <link rel="stylesheet" href="css/page-events.css" />
 <link rel="stylesheet" href="css/page-rewards-bag-help.css" />
@@ -62,7 +61,7 @@
 <div id="app">
   <aside id="sidebar">
     <section class="panel" id="charPanel">
-      <div class="hero-ava" id="heroAva">医</div>
+      <button type="button" class="hero-ava" id="heroAva" aria-label="人物详情">医</button>
     </section>
 
     <section class="panel" id="statsPanel">
@@ -102,16 +101,16 @@
     <nav id="expeditionChapter" aria-label="远征章节"></nav>
     <!-- 09-24 留言 #8：「已知区域 G」按键移除（G 键镜头总览保留，见 input.js camOverview） -->
     <div id="resHud">
-      <span class="chip-mini res-gold" data-tip="持有金币" tabindex="0" aria-label="持有金币" aria-describedby="mapGoldTip">
+      <button type="button" class="chip-mini res-gold" data-tip="持有金币" tabindex="0" aria-label="持有金币" aria-describedby="mapGoldTip">
         <img class="res-ic map-resource-art" src="assets/ui/map-hud-1015/gold-is7-v2.webp" alt="" aria-hidden="true" width="64" height="64" draggable="false">
         <b id="charCoins">0</b>
         <span class="map-resource-tip" id="mapGoldTip" role="tooltip"><strong>金币</strong><span>持有的金币，可用于商店交易。</span></span>
-      </span>
-      <span class="chip-mini res-atk" data-tip="攻击力" tabindex="0" aria-label="攻击力" aria-describedby="mapAttackTip">
+      </button>
+      <button type="button" class="chip-mini res-atk" data-tip="攻击力" tabindex="0" aria-label="攻击力" aria-describedby="mapAttackTip">
         <img class="res-ic map-resource-art" src="assets/ui/map-hud-1015/attack-is7-v2.webp" alt="" aria-hidden="true" width="64" height="64" draggable="false">
         <b id="charAtk">4</b>
         <span class="map-resource-tip" id="mapAttackTip" role="tooltip"><strong>攻击力</strong><span>攻击伤害按卡牌数值加你的攻击力结算。</span></span>
-      </span>
+      </button>
     </div>
     <div id="topBtns">
       <button id="btnLocate" title="镜头回到当前位置（F）">
@@ -131,13 +130,13 @@
         </svg>
       </button>
       <button id="btnMute" title="音效 / 背景乐开关">
-        <svg class="ic-sound-on" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-          <path d="M4.5 9.5v5h3l4.5 4V5.5l-4.5 4h-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M15.2 9.2a4.4 4.4 0 0 1 0 5.6M17.8 7a8 8 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        <svg class="ic-sound-on" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path d="M3 8.5v7h4l5 4.5V4L7 8.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
         </svg>
-        <svg class="ic-sound-off" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-          <path d="M4.5 9.5v5h3l4.5 4V5.5l-4.5 4h-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        <svg class="ic-sound-off" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path d="M3 8.5v7h4l5 4.5V4L7 8.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
         </svg>
       </button>
       <div id="hpHud" tabindex="0" aria-label="生命值" aria-describedby="mapHealthTip">
@@ -158,6 +157,7 @@
         <div class="title-bg title-bg-bass" data-wallpaper-layer="wu-bass"></div>
         <div class="title-bg title-bg-station" data-wallpaper-layer="baita-station"></div>
         <div class="title-bg title-bg-reeds" data-wallpaper-layer="xingyue-reeds"></div>
+        <div class="title-bg title-bg-dinner" data-wallpaper-layer="companions-dinner"></div>
       </div>
       <button type="button" class="home-tool home-wallpaper-view" id="btnTitleWallpaperView" aria-pressed="false" title="隐藏界面，只看壁纸">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>只看壁纸</span>
@@ -177,25 +177,6 @@
             <svg class="home-line-icon home-city-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M5 34V17h8V9h14v8h8v17M13 17h14M16 34v-9a4 4 0 0 1 8 0v9M4 34h32M17 13h6M9 22v3M31 22v3M17 4v5M23 4v5"/></svg>
             <span class="home-button-copy"><span class="home-button-cn">进入城市</span></span>
             <svg class="home-arrow" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 16h21M18 7l9 9-9 9" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
-            <svg class="home-city-current" viewBox="0 0 220 240" aria-hidden="true" focusable="false">
-              <defs>
-                <linearGradient id="cityBeacon" x1="0" y1="1" x2="0" y2="0"><stop stop-color="#dceef4" stop-opacity=".7"/><stop offset=".5" stop-color="#c4dee9" stop-opacity=".18"/><stop offset="1" stop-color="#c4dee9" stop-opacity="0"/></linearGradient>
-                <filter id="citySoft" x="-.5" y="-.3" width="2" height="1.6"><feGaussianBlur stdDeviation="3"/></filter>
-                <clipPath id="citySignalClip"><path d="M100 184L108 30H150L146 184Z"/></clipPath>
-              </defs>
-              <path class="city-beam" fill="url(#cityBeacon)" d="M100 184L108 30H150L146 184Z"/>
-              <path class="city-beam-soft" fill="url(#cityBeacon)" filter="url(#citySoft)" d="M94 184L105 38H154L153 184Z"/>
-              <path fill="#162332" stroke="#a5bbc766" stroke-width="1" d="M93 185L137 171L154 184L109 199Z"/>
-              <path fill="#314351" d="M93 185L109 193L154 180V188L109 202L93 194Z"/>
-              <path class="city-emitter" fill="none" stroke="#edf7f8" stroke-width="2.5" d="M102 185L137 175L146 181L111 192"/>
-              <path fill="none" stroke="#d8edf2" stroke-width="5" opacity=".45" filter="url(#citySoft)" d="M102 185L137 175L146 181L111 192"/>
-              <g clip-path="url(#citySignalClip)" fill="none" stroke="#d7edf4" stroke-width="1.2">
-                <path class="city-signal signal-a" d="M102 166H119M127 166H148M103 170H111"/>
-                <path class="city-signal signal-b" d="M104 166H131M139 166H148"/>
-              </g>
-              <path class="city-guide-line" fill="none" stroke="#b3ccd3" stroke-width=".8" d="M78 196H97M158 176H173V168M113 207H149"/>
-              <g fill="#e3f0f3"><circle class="city-mote mote-a" cx="116" cy="74" r="1.5"/><circle class="city-mote mote-b" cx="148" cy="115" r="1"/><circle cx="78" cy="196" r="1.4"/></g>
-            </svg>
           </button>
           <button class="home-plate home-guide" id="mGuide" title="生存指南" aria-label="打开生存指南">
             <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 7c4-2 8-2 12 0 4-2 8-2 12 0v20c-4-2-8-2-12 0-4-2-8-2-12 0zM16 7v20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -288,10 +269,10 @@
         <p class="td-tip">开发者模式专属 · 测试局不写入存档</p>
       </div>
     </div>
-    <div id="sugLayer" hidden>
-      <div class="sug-panel">
+    <div id="sugLayer" role="dialog" aria-modal="true" aria-labelledby="sugHead" aria-describedby="sugWhere" tabindex="-1" hidden>
+      <div class="sug-panel ui-dialog-panel">
         <h3 class="sug-head" id="sugHead">记录试玩反馈</h3>
-        <p class="sug-where" id="sugWhere"></p>
+        <p class="sug-where" id="sugWhere" role="status" aria-live="polite"></p>
         <p class="sug-tip">只保存在当前浏览器，不会自动发送。保存后请到留言信箱点击「全部导出」或「导出此条」，再把 JSON 交给制作者。</p>
         <label class="sug-label" for="sugText">反馈正文（必填）</label>
         <textarea id="sugText" class="sug-textarea" rows="6" maxlength="2000"
@@ -300,8 +281,8 @@
         <label class="sug-label" for="sugExpected">期望结果（可选）</label><textarea id="sugExpected" class="sug-textarea sug-small" maxlength="800"></textarea>
         <label class="sug-label" for="sugActual">实际结果（可选）</label><textarea id="sugActual" class="sug-textarea sug-small" maxlength="800"></textarea>
         <div class="sug-btns">
-          <button class="ov-btn ok" id="sugSaveBtn">保存 <i class="en">SAVE</i></button>
-          <button class="ov-btn" id="sugCancelBtn">返回 <i class="en">BACK</i></button>
+          <button type="button" class="ui-control" data-ui-action="secondary" id="sugCancelBtn"><span class="ui-control-label">返回</span> <i class="en">BACK</i></button>
+          <button type="button" class="ui-control" data-ui-action="primary" id="sugSaveBtn"><span class="ui-control-label">保存</span> <i class="en">SAVE</i></button>
         </div>
       </div>
     </div>

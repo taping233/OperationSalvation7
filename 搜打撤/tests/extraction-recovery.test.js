@@ -1,3 +1,4 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -5,8 +6,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music: vi.fn(), sfx: vi.fn(), setDucked: vi.fn() },
   FX: { feedback: vi.fn() }, UI: { log: vi.fn(), refresh: vi.fn(), showOverlay: vi.fn(), hideOverlay: vi.fn(), act: vi.fn() },
-  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10,
-    bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6,
+  MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, ...battleRules(2, 10, 10, 0, 5, 1),
     stashStart: 20, stashMax: 100, stashUpgradeSlots: 5 } },
 };
 await import('../game/src/cards/cards.js');
@@ -22,10 +22,10 @@ const card = { id: 'extract-recovery-card', name: '撤离测试卡', type: '法�
 
 async function harness(slot = 2, failpoint = null) {
   localStorage.clear();
-  RunStorage.remove(slot); // clear the module's optimistic write baseline between repeated-slot fixtures
+  await RunStorage.remove(slot); // clear the module's optimistic write baseline between repeated-slot fixtures
   Base.use(slot);
   (await Base.reset(slot));
-  expect(RunStorage.write(slot, { seed: 'extract-test', rngState: { seed: 'extract-test', streams: { pocket: 0 } },
+  expect(await RunStorage.write(slot, { seed: 'extract-test', rngState: { seed: 'extract-test', streams: { pocket: 0 } },
     hp: 20, maxHp: 30, inventory: [], ownedCards: [], myClass: 'wu' })).toBe(true);
   const game = {
     pendingExtraction: null, runActive: true, extractionPending: false, mode: 'normal',
@@ -303,7 +303,7 @@ describe('撤离整理 paired recovery', () => {
     expect(base.stats.extracts).toBe(1);
     expect(RunStorage.read(1)).toBeNull();
 
-    expect(RunStorage.write(1, { seed: 'next-run', hp: 30, maxHp: 30 })).toBe(true);
+    expect(await RunStorage.write(1, { seed: 'next-run', hp: 30, maxHp: 30 })).toBe(true);
     expect(RunStorage.readIdentity(1).value.runId).not.toBe(runId);
   });
 
@@ -335,8 +335,8 @@ describe('撤离整理 paired recovery', () => {
       addXpToProgress: (progress, amount) => ({ after: { lv: progress.lv, xp: progress.xp + amount } }), xpMultiplier: () => 1,
     });
     const pending = commands.begin();
-    RunStorage.remove(5);
-    RunStorage.write(5, { seed: 'replacement-run', hp: 30, maxHp: 30, inventory: [], ownedCards: [], myClass: 'wu' });
+    await RunStorage.remove(5);
+    await RunStorage.write(5, { seed: 'replacement-run', hp: 30, maxHp: 30, inventory: [], ownedCards: [], myClass: 'wu' });
     release({ ok: true, value: null });
     const result = await pending;
     expect(result.ok).toBe(false);

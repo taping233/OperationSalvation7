@@ -21,17 +21,17 @@ describe('R7-a real scenes encounter-to-opts chain',()=>{
     try {
       scenes.preloadCellScene({logical:[{def:{type:'battle'}}]},0);
       expect(images).toEqual(['far.webp','mid.webp','ground.webp','foreground.webp',
-        new URL('/game/assets/scenes/transitions-1021/retreat.webp', window.location.href).href]);
+        new URL('/game/assets/scenes/departure/battle-incision-v1.webp', window.location.href).href]);
     } finally {vi.unstubAllGlobals();}
   });
   it('builds L2 mixed group and forwards identity into battle opts',async()=>{
     values=[.99]; const list=scenes.buildEncounter(1);
-    expect(list.map(x=>x.id)).toEqual(['archer','cavalry']); expect(list.encounterId).toBe('l2-archer-cavalry');
+    expect(list.map(x=>x.id)).toEqual(['rager','cavalry']); expect(list.encounterId).toBe('l2-archer-cavalry');
     await scenes.openBattleCell(null,list);
     expect(started.foes).toBe(list); expect(started.opts).toMatchObject({encounterId:'l2-archer-cavalry',encounterKind:'group',rewardKind:'normal'});
   });
   it('keeps L4 elite roll before mixed group selection',()=>{
-    values=[.05]; expect(scenes.buildEncounter(3).map(x=>x.id)).toEqual(['dragon']);
-    values=[.99,.99]; expect(scenes.buildEncounter(3).map(x=>x.id)).toEqual(['fire_el','grass_el']);
+    values=[.05]; expect(scenes.buildEncounter(3).map(x=>x.id)).toEqual(['cultist']);
+    values=[.99,.99]; expect(scenes.buildEncounter(3).map(x=>x.id)).toEqual(['camo_sniper','grass_el']);
   });
 });

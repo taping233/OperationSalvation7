@@ -29,10 +29,16 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
     }
     return false;
   }
-  function currentPage() {
-    return !!stage && !!bar && isInteractiveBattlePage(UI, stage) && UI._lastMode === 'battle'
+  // Entry readiness and temporary visibility suspend interaction, not ownership.
+  // Keep the binding until this battlefield is actually replaced or closed.
+  function ownsPage() {
+    return !!stage?.isConnected && !!bar && UI._lastMode === 'battle' && !UI.el.overlay?.hidden
+      && !UI.el.overlay?.classList.contains('closing')
       && UI.el.ovBody?.querySelector('.battle-stage.sts') === stage
-      && stage.querySelector(':scope > .bt-potions') === bar && stage._battleToken === token
+      && stage.querySelector(':scope > .sts-topbar > .bt-potions') === bar && stage._battleToken === token;
+  }
+  function currentPage() {
+    return ownsPage() && !!stage && !!bar && !stage.inert && isInteractiveBattlePage(UI, stage)
       && !bar.closest('[hidden], [inert], [aria-hidden="true"]') && visible(bar);
   }
   function currentSnapshot() {
@@ -187,7 +193,7 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
   /** @param {BattleElement | null} nextStage @param {BattleSnapshot} snapshot @param {readonly Potion[] | null} [potions] */
   function sync(nextStage, snapshot, potions = snapshot.potionBar) {
     if (disposed) return;
-    const nextBar = nextStage?.querySelector(':scope > .bt-potions');
+    const nextBar = nextStage?.querySelector(':scope > .sts-topbar > .bt-potions');
     if (stage !== nextStage || bar !== nextBar || token !== snapshot.battleToken) {
       leavePage();
       if (!nextStage || !(nextBar instanceof HTMLElement)) return;
@@ -205,7 +211,10 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
       document.addEventListener('sdt-overlay-close', leavePage);
       window.addEventListener('blur', onBlur);
       if (typeof MutationObserver !== 'undefined' && UI.el.overlay) {
-        observer = new MutationObserver(() => { if (!currentPage()) leavePage(); });
+        observer = new MutationObserver(() => {
+          if (!ownsPage()) leavePage();
+          else if (!currentPage()) close();
+        });
         observer.observe(UI.el.overlay, { subtree: true, childList: true, attributes: true, attributeFilter: ['hidden', 'inert', 'aria-hidden', 'class', 'style'] });
       }
     }

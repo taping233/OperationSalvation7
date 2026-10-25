@@ -4,6 +4,7 @@ import { dataSlice } from '../game/src/cards/cards.data.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import postcss from 'postcss';
+import { readCssSource } from './helpers/css-source.js';
 window.SDT ||= { Icons: { img: () => '' } };
 await import('../game/src/cards/cards.js');
 let cards;
@@ -62,7 +63,7 @@ describe('shared card presentation', () => {
     for (const entry of fs.readdirSync('game/css', { recursive: true, withFileTypes: true })) {
       if (!entry.isFile() || !entry.name.endsWith('.css') || entry.name === 'card-layout-selected.css') continue;
       const file = path.join(entry.parentPath || entry.path, entry.name);
-      postcss.parse(fs.readFileSync(file, 'utf8')).walkRules(rule => {
+      postcss.parse(readCssSource(file, 'utf8')).walkRules(rule => {
         if (/\.hsc-(?:name|desc|type|cost|frame|copy|prism)/.test(rule.selector)) overrides.push(file + ': ' + rule.selector);
       });
     }

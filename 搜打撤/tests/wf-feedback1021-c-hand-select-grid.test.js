@@ -9,8 +9,9 @@ import { readFileSync } from 'node:fs';
 import { expect, it } from 'vitest';
 import postcss from 'postcss';
 import { battleHandSelectBodyHTML } from '../game/src/battle/view/battle.decision-content.js';
+import { readCssSource } from './helpers/css-source.js';
 
-const css = postcss.parse(readFileSync('game/css/battle-decision.css', 'utf8'));
+const css = postcss.parse(readCssSource('game/css/battle-decision.css', 'utf8'));
 const rules = [];
 css.walkRules(r => rules.push(r));
 const declOf = selector => {
@@ -26,12 +27,11 @@ it('选择手牌网格单行排布：不纵向翻页，宽度均分、超宽才�
   const grid = declOf(`${prefix}.battle-select-grid.bt-hand`);
   expect(grid).toMatchObject({
     display: 'grid!important',
-    'container-type': 'size',
-    height: '100%',
+        height: 'auto',
     'grid-auto-flow': 'column!important',
     'grid-template-columns': 'none!important',
-    'grid-auto-columns': 'minmax(190px,1fr)',
-    'grid-template-rows': 'minmax(0,1fr)',
+    'grid-auto-columns': 'minmax(240px,1fr)',
+    'grid-template-rows': 'auto',
     gap: '24px!important',
   });
   // 滚动兜底交给外层（既有契约：.battle-decision-content overflow auto）。
@@ -41,7 +41,7 @@ it('选择手牌网格单行排布：不纵向翻页，宽度均分、超宽才�
 
 it('卡面随槽宽放大：少卡更大、字号按容器宽度缩放，单卡有 520px 上限', () => {
   const slot = declOf(`${prefix}.battle-select-slot`);
-  expect(slot).toMatchObject({ display: 'flex', width: 'auto', 'min-width': '0', 'max-width': '520px', 'container-type': 'inline-size' });
+  expect(slot).toMatchObject({ display: 'flex', width: '100%', 'min-width': '0', 'max-width': '520px', 'container-type': 'inline-size' });
   expect(slot.width).not.toBe('300px'); // 旧固定 300px 槽已撤下
   const face = declOf(`${prefix}.battle-select-slot .hs-card`);
   expect(face['font-size']).toBe('min(30px,calc(100cqw * .096))');

@@ -1,3 +1,11 @@
+import { playerFields } from './helpers/environment-fixtures.js';
+function startRuleBattle(makeGame, card, session, foeId, foeName, hp, maxHp, uid) {
+const strongFoe = { id: foeId, name: foeName, hp: hp, maxHp: maxHp, atk: 0 };
+    const game = makeGame([{ uid: uid, card: card, safe: false }]);
+    session.start(game, [strongFoe], { isBoss: false });
+  return { local1: game };
+}
+
 /* A3 卡牌规则迁移第一批锁定（2026-09-25）：B1 纯伤害 / B2 多段与重复 / B3 治疗护甲吸血。
  * 23 张文本路径卡经 ensureA3BattleRules 回填结构化 rules（解释器 v2 分支已接线：
  * battle.resolution.js castSegment）。本文件锁定：
@@ -54,8 +62,7 @@ function makeGame(ownedCards) {
   const logs = [];
   return {
     ownedCards,
-    hp: 50, maxHp: 50, atk: 5, spellPower: 0, coins: 0,
-    myClass: '降临者', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(50, 50, 5, 0, '降临者', null),
     lastBattleEnd: null,
     log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs,
@@ -150,18 +157,14 @@ describe('A3 迁移第一批：播种终态 rules 在位且通过 schema', () =>
 describe('A3 迁移第一批：真实战斗结算', () => {
   it('斩杀：9 血以上无效果，9 血及以下造成 9 点真实伤害', async () => {
     const card = byId('tt3-execute');
-    const strongFoe = { id: 'a3-strong', name: '满血靶', hp: 30, maxHp: 30, atk: 0 };
-    const game = makeGame([{ uid: 'exe-1', card, safe: false }]);
-    BattleSession.start(game, [strongFoe], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-strong', '满血靶', 30, 30, 'exe-1');
     await drain();
     BattleSession.commands.playCard('exe-1', 0);
     const untouched = await drain();
     expect(untouched.foes[0].hp, '30 血靶不满足 foeHpBelow:9，应无伤害').toBe(30);
     endBattleSafe(game);
 
-    const weakFoe = { id: 'a3-weak', name: '残血靶', hp: 8, maxHp: 30, atk: 0 };
-    const game2 = makeGame([{ uid: 'exe-2', card, safe: false }]);
-    BattleSession.start(game2, [weakFoe], { isBoss: false });
+    const { local1: game2 } = startRuleBattle(makeGame, card, BattleSession, 'a3-weak', '残血靶', 8, 30, 'exe-2');
     await drain();
     BattleSession.commands.playCard('exe-2', 0);
     await drain();
@@ -172,9 +175,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('惩击：基础 10 点全额，半血靶加成 50% 至 15 点', async () => {
     const card = byId('tt7-smite');
-    const fullFoe = { id: 'a3-full', name: '满血靶', hp: 50, maxHp: 50, atk: 0 };
-    const game = makeGame([{ uid: 'smite-1', card, safe: false }]);
-    BattleSession.start(game, [fullFoe], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-full', '满血靶', 50, 50, 'smite-1');
     await drain();
     BattleSession.commands.playCard('smite-1', 0);
     await drain();
@@ -182,9 +183,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
     expect(afterFull.foes[0].hp, '满血靶只受基础 10 点').toBe(40);
     endBattleSafe(game);
 
-    const halfFoe = { id: 'a3-half', name: '半血靶', hp: 50, maxHp: 50, atk: 0 };
-    const game2 = makeGame([{ uid: 'smite-2', card, safe: false }]);
-    BattleSession.start(game2, [halfFoe], { isBoss: false });
+    const { local1: game2 } = startRuleBattle(makeGame, card, BattleSession, 'a3-half', '半血靶', 50, 50, 'smite-2');
     await drain();
     // 引擎把敌方 maxHp 规范为初始 hp——先用开发者指令打掉一半再验证半血加成
     BattleSession.commands.dev('damageAll', 25);
@@ -199,9 +198,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('连射：固定 2 点触发 3 段', async () => {
     const card = byId('tt3-double-shot');
-    const target = { id: 'a3-burst', name: '连射靶', hp: 30, maxHp: 30, atk: 0 };
-    const game = makeGame([{ uid: 'burst-1', card, safe: false }]);
-    BattleSession.start(game, [target], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-burst', '连射靶', 30, 30, 'burst-1');
     await drain();
     BattleSession.commands.playCard('burst-1', 0);
     await drain();
@@ -228,9 +225,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('坚盾：获得 8 点护甲并注册回合衰减 4 点的延迟段', async () => {
     const card = byId('tt7-bulwark');
-    const target = { id: 'a3-wall', name: '坚盾靶', hp: 30, maxHp: 30, atk: 0 };
-    const game = makeGame([{ uid: 'wall-1', card, safe: false }]);
-    BattleSession.start(game, [target], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-wall', '坚盾靶', 30, 30, 'wall-1');
     const state = await drain();
     expect(state.pdef.armor, '打出前无护甲').toBe(0);
     BattleSession.commands.playCard('wall-1', 'self');
@@ -241,9 +236,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('不变应万变：guard 降伤旗与 4 点护甲同时到位', async () => {
     const card = byId('cc-unmoved');
-    const target = { id: 'a3-guard', name: 'guard 靶', hp: 30, maxHp: 30, atk: 0 };
-    const game = makeGame([{ uid: 'guard-1', card, safe: false }]);
-    BattleSession.start(game, [target], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-guard', 'guard 靶', 30, 30, 'guard-1');
     await drain();
     BattleSession.commands.playCard('guard-1', 'self');
     const after = await drain();
@@ -269,9 +262,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('毒箭：伤害后附加 1 层中毒，与文本路径同一状态袋', async () => {
     const card = byId('tt3-venom-arrow');
-    const target = { id: 'a3-venom', name: '毒箭靶', hp: 30, maxHp: 30, atk: 0 };
-    const game = makeGame([{ uid: 'venom-1', card, safe: false }]);
-    BattleSession.start(game, [target], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-venom', '毒箭靶', 30, 30, 'venom-1');
     await drain();
     BattleSession.commands.playCard('venom-1', 0);
     const after = await drain();
@@ -281,9 +272,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('霜月斩：冰冻与禁疗双诅咒各持续 1 回合', async () => {
     const card = byId('tt3-frost-slash');
-    const target = { id: 'a3-frost', name: '霜月靶', hp: 30, maxHp: 30, atk: 0 };
-    const game = makeGame([{ uid: 'frost-1', card, safe: false }]);
-    BattleSession.start(game, [target], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-frost', '霜月靶', 30, 30, 'frost-1');
     await drain();
     BattleSession.commands.playCard('frost-1', 0);
     const after = await drain();
@@ -310,9 +299,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('致命射线：8 点法伤后附加恰好 3 种随机诅咒', async () => {
     const card = byId('tt3-nuke-ray');
-    const target = { id: 'a3-nuke', name: '射线靶', hp: 40, maxHp: 40, atk: 0 };
-    const game = makeGame([{ uid: 'nuke-1', card, safe: false }]);
-    BattleSession.start(game, [target], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-nuke', '射线靶', 40, 40, 'nuke-1');
     await drain();
     BattleSession.commands.playCard('nuke-1', 0);
     const after = await drain();
@@ -325,9 +312,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('聚能：获得 1 点能量', async () => {
     const card = byId('tt7-energize');
-    const target = { id: 'a3-energy', name: '能量靶', hp: 30, maxHp: 30, atk: 0 };
-    const game = makeGame([{ uid: 'energy-1', card, safe: false }]);
-    BattleSession.start(game, [target], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-energy', '能量靶', 30, 30, 'energy-1');
     const before = await drain();
     BattleSession.commands.playCard('energy-1', 'self');
     const after = await drain();
@@ -337,9 +322,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('潜匿：抽 1 张并进入潜行 1 回合（blessing+draw 组合）', async () => {
     const card = byId('tt7-stealth');
-    const target = { id: 'a3-stealth', name: '潜匿靶', hp: 30, maxHp: 30, atk: 0 };
-    const game = makeGame([{ uid: 'stealth-1', card, safe: false }]);
-    BattleSession.start(game, [target], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-stealth', '潜匿靶', 30, 30, 'stealth-1');
     const before = await drain();
     const handBefore = before.hand.length;
     BattleSession.commands.playCard('stealth-1', 'self');
@@ -366,9 +349,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
 
   it('熔岩爆破：9 点伤害并获得指定卡「二次爆炸」入手', async () => {
     const card = byId('cc-lava-blast');
-    const target = { id: 'a3-lava', name: '熔岩靶', hp: 40, maxHp: 40, atk: 0 };
-    const game = makeGame([{ uid: 'lava-1', card, safe: false }]);
-    BattleSession.start(game, [target], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'a3-lava', '熔岩靶', 40, 40, 'lava-1');
     const before = await drain();
     const handBefore = before.hand.length;
     BattleSession.commands.playCard('lava-1', 0);
@@ -400,9 +381,7 @@ describe('A3 第二批（B5 诅咒族）：真实战斗结算', () => {
     };
     const check = validateCardRules(card);
     expect(check.ok, `毒箭结构化 rules 应过 schema：${JSON.stringify(check.errors)}`).toBe(true);
-    const foe = { id: 'b5-venom', name: '毒箭靶', hp: 30, maxHp: 30, atk: 0 };
-    const game = makeGame([{ uid: 'venom-1', card, safe: false }]);
-    BattleSession.start(game, [foe], { isBoss: false });
+    const { local1: game } = startRuleBattle(makeGame, card, BattleSession, 'b5-venom', '毒箭靶', 30, 30, 'venom-1');
     await drain();
     BattleSession.commands.playCard('venom-1', 0);
     const after = await drain();

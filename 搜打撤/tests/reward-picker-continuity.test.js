@@ -5,7 +5,7 @@ vi.mock('../game/src/ui/reward-card-feedback.js', () => ({ showRewardCardFeedbac
 let body, overlay, game, acts, chests;
 const cards = Array.from({length:6}, (_, index) => ({id:`continuity-${index}`,name:`测试奖励${index}`,type:'法术',rarity:'稀有',desc:'测试',cost:0}));
 const action = (name, index) => body.querySelector(`[data-act="${name}"]${index == null ? '' : `[data-i="${index}"]`}`);
-function activate(name, index) { const button = action(name,index); button.focus(); button.click(); }
+async function activate(name, index) { const button = action(name,index); button.focus(); button.click(); for (let n=0;n<8;n++) await Promise.resolve(); }
 function restore({choice = false, count = 6, battleSummary} = {}) {
   const reward = {kind:'large',source:'连续领奖测试',title:'领取奖励',cards:cards.slice(0,count),coins:0,coinsReceived:true,
     claimMode:choice ? 'one' : 'all',choiceCount:choice ? 3 : count,taken:[],lost:[],rewardStage:'cards',selected:null,battleSummary};
@@ -31,7 +31,7 @@ describe('奖励连续领取', () => {
   it.each([false, true])('领取及择一按钮和放大动作都含实际卡名 choice=%s', choice => {
     restore({ choice, count:3 });
     const act = choice ? 'chestPick' : 'chestTake1';
-    const label = choice ? '选择这张' : '收下';
+    const label = choice ? '选择' : '收下';
     for (let i = 0; i < 3; i++) {
       expect(action(act, i).getAttribute('aria-label')).toBe(`${label}：${cards[i].name}`);
       expect(action(act, i).textContent).toBe(label);
@@ -44,7 +44,7 @@ describe('奖励连续领取', () => {
     expect(footer.querySelector('button').dataset.act).toBe(act);
     expect(game.grantCard).not.toHaveBeenCalled();
   });
-  it('领取更新状态时保留所有卡面、图片、横竖滚动容器和位置，并聚焦下一张', () => {
+  it('领取更新状态时保留所有卡面、图片、横竖滚动容器和位置，并聚焦下一张', async () => {
     restore();
     const faces = [...body.querySelectorAll('.reward-card')], images = [...body.querySelectorAll('.reward-card img')];
     const stage = body.querySelector('.loot-scroll'), row = body.querySelector('.reward-objects');
@@ -52,45 +52,45 @@ describe('奖励连续领取', () => {
     expect(body.querySelector('.reward-foot > .loot-actions [data-act="chestTake"]')).not.toBeNull();
     expect(body.querySelector('.reward-foot > .reward-footer-info .reward-capacity')).not.toBeNull();
     stage.scrollTop = 140; row.scrollLeft = 260;
-    activate('chestTake1',0);
+    await activate('chestTake1',0);
     expect([...body.querySelectorAll('.reward-card')]).toEqual(faces);
     expect([...body.querySelectorAll('.reward-card img')]).toEqual(images);
     expect(body.querySelector('.loot-scroll')).toBe(stage); expect(stage.scrollTop).toBe(140);
     expect(body.querySelector('.reward-objects')).toBe(row); expect(row.scrollLeft).toBe(260);
     expect(document.activeElement).toBe(action('chestTake1',1));
     expect(body.querySelectorAll('[data-act="chestTake"]')).toHaveLength(1);
-    document.activeElement.click();
+    document.activeElement.click(); for (let n=0;n<8;n++) await Promise.resolve();
     expect(game.grantCard).toHaveBeenCalledTimes(2); expect(document.activeElement).toBe(action('chestTake1',2));
   });
-  it('同一页面的旧领取闭包在更新后失效，不能重复发奖或领取下一张', () => {
+  it('同一页面的旧领取闭包在更新后失效，不能重复发奖或领取下一张', async () => {
     restore(); const previous = acts.chestTake1;
-    activate('chestTake1',0); previous({i:'1'});
+    await activate('chestTake1',0); previous({i:'1'});
     expect(game.grantCard).toHaveBeenCalledTimes(1);
-    activate('chestTake1',1); expect(game.grantCard).toHaveBeenCalledTimes(2);
+    await activate('chestTake1',1); expect(game.grantCard).toHaveBeenCalledTimes(2);
   });
-  it('择一后只保留附赠操作焦点，不因焦点恢复自动领牌', () => {
-    restore({choice:true,count:4}); activate('chestPick',1);
+  it('择一后只保留附赠操作焦点，不因焦点恢复自动领牌', async () => {
+    restore({choice:true,count:4}); await activate('chestPick',1);
     expect(document.activeElement).toBe(action('chestTake1',3));
     expect(game.grantCard).toHaveBeenCalledTimes(1);
     expect(body.querySelectorAll('.reward-unit.dropped')).toHaveLength(2);
     expect(body.querySelectorAll('.reward-unit.got')).toHaveLength(1);
   });
-  it('取消放弃回到放弃入口，卡面不重建且不发生领取或丢弃', () => {
+  it('取消放弃回到放弃入口，卡面不重建且不发生领取或丢弃', async () => {
     restore(); const faces = [...body.querySelectorAll('.reward-card')];
-    activate('chestSkip'); expect(document.activeElement).toBe(action('chestStay'));
-    activate('chestStay'); expect(document.activeElement).toBe(action('chestSkip'));
+    await activate('chestSkip'); expect(document.activeElement).toBe(action('chestStay'));
+    await activate('chestStay'); expect(document.activeElement).toBe(action('chestSkip'));
     expect([...body.querySelectorAll('.reward-card')]).toEqual(faces); expect(game.grantCard).not.toHaveBeenCalled();
     expect(chests.serialize(game).current.lost).toEqual([]);
   });
-  it('展开的战斗去向在领取时保留，切换不同奖励快照时更新详情', () => {
+  it('展开的其他操作在领取时保留，切换奖励快照时更新卡牌', async () => {
     restore({battleSummary:{cardOutcome:{pocket:['旧牌'],gone:[],retained:[]}}});
-    const details = body.querySelector('.loot-outcome'); details.open = true;
-    activate('chestTake1',0); expect(body.querySelector('.loot-outcome')).toBe(details); expect(details.open).toBe(true);
-    restore({battleSummary:{cardOutcome:{pocket:['新牌'],gone:[],retained:[]}}});
-    expect(body.querySelector('.loot-outcome').textContent).toContain('新牌');
-    expect(body.querySelector('.loot-outcome').textContent).not.toContain('旧牌');
+    const details = body.querySelector('.reward-secondary-options'); details.open = true;
+    await activate('chestTake1',0); expect(body.querySelector('.reward-secondary-options')).toBe(details); expect(details.open).toBe(true);
+    restore({count:3});
+    expect(body.querySelectorAll('.reward-unit')).toHaveLength(3);
+    expect(body.textContent).not.toContain('测试奖励5');
   });
-  it('长横排的下一张操作仅在奖励滚动容器内移动到可视边缘', () => {
+  it('长横排的下一张操作仅在奖励滚动容器内移动到可视边缘', async () => {
     body.innerHTML = '<div class="loot-scroll"><div class="reward-objects"><button data-act="chestTake1" data-i="5">收下</button></div></div>';
     const row = body.querySelector('.reward-objects'), button = action('chestTake1',5);
     Object.defineProperties(row,{scrollWidth:{value:1600},clientWidth:{value:1000},scrollHeight:{value:400},clientHeight:{value:400}});

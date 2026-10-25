@@ -9,16 +9,18 @@ body.interface-motion #overlay[data-ui-shell="content"]:not([data-ui-closing]) >
   transform: none;
 }
 /* 存档交接时外壳不露浅色底或通用卡片亮边，切幕超出上下各2px覆盖像素缝。 */
-#overlay[data-camp-entry] > .card.page:has(#hubMain.base-camp) {
+#overlay[data-camp-entry] > .card.page:has(#hubMain.base-camp){
+& {
   border: 0; border-radius: 0; outline: 0; box-shadow: none;
   background: #10191f; overflow: clip;
 }
-#overlay[data-camp-entry] > .card.page:has(#hubMain.base-camp)::before,
-#overlay[data-camp-entry] > .card.page:has(#hubMain.base-camp)::after { content: none; display: none; }
-#overlay[data-camp-entry] .camp-entry-ghost { border: 0; outline: 0; box-shadow: none; }
-#overlay[data-camp-entry] .camp-entry-cut { top: -2px; bottom: -2px; }
+&::before,
+&::after { content: none; display: none; }}
+#overlay[data-camp-entry]{
+& .camp-entry-ghost { border: 0; outline: 0; box-shadow: none; }
+& .camp-entry-cut { top: -2px; bottom: -2px; }
 /* 斜切右上缺口用壁纸同系冷蓝灰玻璃承接，随切幕离场揭开基地。 */
-#overlay[data-camp-entry] > .card.page:has(#hubMain.base-camp)::after {
+& > .card.page:has(#hubMain.base-camp)::after {
   content: ''; display: block; position: absolute; inset: 0; z-index: 29;
   width: auto; height: auto; border: 0; box-shadow: none;
   background: linear-gradient(135deg, #617d8ed9, #3f596dd1 58%, #718897cc);
@@ -26,32 +28,28 @@ body.interface-motion #overlay[data-ui-shell="content"]:not([data-ui-closing]) >
   -webkit-backdrop-filter: blur(24px) saturate(.65);
   pointer-events: none;
   animation: campUnderlayReveal .8s cubic-bezier(.65,0,.2,1) both;
-}
+}}
 @keyframes campUnderlayReveal {
   0%, 38% { transform: translateX(0); }
   100% { transform: translateX(127%); }
 }
-#overlay[data-camp-entry] #hubMain.base-camp :is(.hub-head, .hub-body, .hub-page) {
+#overlay[data-camp-entry] #hubMain.base-camp{
+& :is(.hub-head, .hub-body, .hub-page) {
   animation: none !important;
 }
-#overlay[data-camp-entry] #hubMain.base-camp :is(.camp-brand, .hub-slot-label, .hub-res) {
+& :is(.camp-brand, .hub-slot-label, .hub-res) {
   animation: campHeaderSettle .48s cubic-bezier(.16,1,.3,1) .28s backwards;
 }
-#overlay[data-camp-entry] #hubMain.base-camp .hub-res { animation-delay: .32s; }
-#overlay[data-camp-entry] #hubMain.base-camp .hub-slot-label { animation-delay: .56s; animation-duration: .22s; }
-#overlay[data-camp-entry] #hubMain.base-camp :is(.camp-nav-caption, .camp-nav-foot) {
-  animation: campNavSettle .48s cubic-bezier(.16,1,.3,1) .3s backwards;
-}
-#overlay[data-camp-entry] #hubMain.base-camp .hub-tab {
+& .hub-res { animation-delay: .32s; }
+& .hub-slot-label { animation-delay: .56s; animation-duration: .22s; }
+& .hub-tab {
   animation: campNavSettle .48s cubic-bezier(.16,1,.3,1) .28s backwards;
 }
-#overlay[data-camp-entry] #hubMain.base-camp .hub-tab:nth-of-type(2) { animation-delay: .24s; }
-#overlay[data-camp-entry] #hubMain.base-camp .hub-tab:nth-of-type(3) { animation-delay: .28s; }
-#overlay[data-camp-entry] #hubMain.base-camp .hub-tab:nth-of-type(4) { animation-delay: .32s; }
-#overlay[data-camp-entry] #hubMain.base-camp .hub-tab:nth-of-type(5) { animation-delay: .36s; }
-#overlay[data-camp-entry] #hubMain.base-camp .hub-tab:nth-of-type(6) { animation-delay: .4s; }
-#overlay[data-camp-entry] #hubMain.base-camp .camp-depart-readiness { animation-delay: .44s; }
-#overlay[data-camp-entry] #hubMain.base-camp .camp-depart-actions { animation-delay: .48s; }
+& .hub-tab:nth-of-type(2) { animation-delay: .24s; }
+& .hub-tab:nth-of-type(3) { animation-delay: .28s; }
+& .hub-tab:nth-of-type(4) { animation-delay: .32s; }
+& .hub-tab:nth-of-type(5) { animation-delay: .36s; }
+& .hub-tab:nth-of-type(6) { animation-delay: .4s; }}
 /* 装饰副本仅存在 980ms；档案号从原位置移到基地标识，所有副本无交互。 */
 #overlay .card .pg.slot-page.camp-entry-ghost {
   position: absolute;
@@ -63,13 +61,14 @@ body.interface-motion #overlay[data-ui-shell="content"]:not([data-ui-closing]) >
   pointer-events: none;
   animation: campArchiveExit .52s cubic-bezier(.65,0,.25,1) forwards !important;
 }
-#overlay .camp-entry-ghost .slot-card {
+#overlay .camp-entry-ghost .slot-card{
+& {
   animation: campOtherArchiveExit .32s cubic-bezier(.4,0,.2,1) forwards !important;
 }
-#overlay .camp-entry-ghost .slot-card.archive-picked {
+&.archive-picked {
   transform-origin: 50% 55%;
   animation: campPickedArchiveExit .48s cubic-bezier(.65,0,.25,1) forwards !important;
-}
+}}
 @keyframes campArchiveExit {
   0%, 18% { opacity: 1; clip-path: polygon(0 0,100% 0,100% 100%,0 100%); }
   88%, 100% { opacity: 0; clip-path: polygon(100% 0,100% 0,120% 100%,120% 100%); }
@@ -82,7 +81,8 @@ body.interface-motion #overlay[data-ui-shell="content"]:not([data-ui-closing]) >
   to { opacity: 0; transform: translateX(64px) translateY(-12px) scale(1.08); }
 }
 /* 单个不透明切面负责视觉交接，细边与字牌随同一运动离场。 */
-:is(#overlay, .page-loading--city) .camp-entry-cut {
+:is(#overlay, .page-loading--city) .camp-entry-cut{
+& {
   position: absolute; inset: 0 -20% 0 -20%; z-index: 31;
   pointer-events: none; contain: layout paint;
   background:
@@ -91,35 +91,37 @@ body.interface-motion #overlay[data-ui-shell="content"]:not([data-ui-closing]) >
   clip-path: polygon(0 0,84% 0,100% 100%,0 100%);
   animation: campCutReveal .8s cubic-bezier(.65,0,.2,1) both;
 }
-:is(#overlay, .page-loading--city) .camp-entry-cut::before {
+&::before {
   content: ''; position: absolute; inset: 0; z-index: 4;
   background:
     repeating-linear-gradient(135deg, transparent 0 14px, #ffffff06 14px 15px),
     #224c57;
   clip-path: polygon(78% 0,84% 0,100% 100%,94% 100%);
 }
-:is(#overlay, .page-loading--city) .camp-entry-cut::after {
+&::after {
   content: ''; position: absolute; inset: 0; z-index: 4;
   background: #9f8a59;
   clip-path: polygon(77.7% 0,78% 0,94% 100%,93.7% 100%);
-}
-:is(#overlay, .page-loading--city) .camp-entry-scenery {
+}}
+:is(#overlay, .page-loading--city) .camp-entry-scenery{
+& {
   position: absolute; inset: 0 14.285%; z-index: 1;
   pointer-events: none; overflow: hidden;
   mask-image: linear-gradient(90deg, transparent 0, #000 28% 88%, transparent 100%);
   animation: campSceneryPass .74s cubic-bezier(.22,1,.36,1) both;
 }
-:is(#overlay, .page-loading--city) .camp-entry-scenery img {
+& img {
   display: block; width: 100%; height: 100%; margin: 0; object-fit: cover; object-position: right center;
   opacity: .85; transform: scale(1.04); transform-origin: 70% 60%;
-}
+}}
 @keyframes campSceneryPass {
   0%, 8% { opacity: 0; transform: translate3d(-32px,12px,0); }
   32% { opacity: 1; transform: translate3d(0,0,0); }
   72% { opacity: .85; transform: translate3d(24px,-4px,0); }
   100% { opacity: 0; transform: translate3d(44px,-8px,0); }
 }
-:is(#overlay, .page-loading--city) .camp-entry-register {
+:is(#overlay, .page-loading--city) .camp-entry-register{
+& {
   position: absolute; inset: 13% 27% 14% 30%; z-index: 2;
   display: flex; flex-direction: column; justify-content: space-between;
   text-align: left; color: #6a8088; font: 10px/1.5 var(--font-mono); letter-spacing: .22em;
@@ -127,58 +129,60 @@ body.interface-motion #overlay[data-ui-shell="content"]:not([data-ui-closing]) >
   padding: 13px 0; pointer-events: none;
   animation: campRegisterReveal .7s cubic-bezier(.16,1,.3,1) both;
 }
-:is(#overlay, .page-loading--city) .camp-entry-register small { font: inherit; }
-:is(#overlay, .page-loading--city) .camp-entry-register span { align-self: flex-end; color: #7f8b87; letter-spacing: .12em; }
-:is(#overlay, .page-loading--city) .camp-entry-register::before {
+& small { font: inherit; }
+& span { align-self: flex-end; color: #7f8b87; letter-spacing: .12em; }
+&::before {
   content: attr(data-watermark); position: absolute; left: -2%; top: 15%;
   font: 900 clamp(100px,calc(var(--game-layout-width, 100vw) * 0.18),260px)/1 var(--font-ui); letter-spacing: -.065em;
   color: #7b90990e; transform: skewY(-5deg);
 }
-:is(#overlay, .page-loading--city) .camp-entry-register::after {
+&::after {
   content: ''; position: absolute; left: 0; right: 0; top: -3px; height: 5px;
   background:
     linear-gradient(to right, #9f8a59 0 22px, transparent 22px 97%, #9f8a59 97%),
     repeating-linear-gradient(to right, #435963 0 1px, transparent 1px 18px);
   transform-origin: left;
   animation: campEntryRule .48s cubic-bezier(.16,1,.3,1) .08s backwards;
-}
+}}
 @keyframes campRegisterReveal {
   0%, 10% { opacity: 0; transform: translateX(-16px); }
   30%, 65% { opacity: 1; transform: none; }
   100% { opacity: 0; transform: translateX(12px); }
 }
-:is(#overlay, .page-loading--city) .camp-entry-caption {
+:is(#overlay, .page-loading--city) .camp-entry-caption{
+& {
   position: absolute; left: 30%; top: 43%; z-index: 3; display: grid; gap: 12px;
   color: #dddfd8; text-align: left; transform: rotate(-5deg);
   animation: campEntryCaption .76s cubic-bezier(.16,1,.3,1) both;
 }
-:is(#overlay, .page-loading--city) .camp-entry-caption small {
+& small {
   justify-self: start; padding: 4px 9px; border: 1px solid #9f8a5950;
   background: #9f8a590c; font: 13px/1.4 var(--font-mono); letter-spacing: .2em; color: #aa986b;
 }
-:is(#overlay, .page-loading--city) .camp-entry-caption strong {
+& strong {
   justify-self: start; padding: 6px 20px 10px 0;
   background: linear-gradient(100deg, #10191fee 70%, #10191f00);
   font: 800 clamp(40px,calc(var(--game-layout-width, 100vw) * 0.06),86px)/1.1 var(--font-ui); letter-spacing: .06em;
   animation: campTitleReveal .38s cubic-bezier(.16,1,.3,1) .12s backwards;
-}
+}}
 @keyframes campTitleReveal {
   from { opacity: 0; transform: translateX(-14px); clip-path: inset(0 100% 0 0); }
   to { opacity: 1; transform: none; clip-path: inset(0); }
 }
-:is(#overlay, .page-loading--city) .camp-entry-caption span { font: 11px/1.5 var(--font-mono); letter-spacing: .16em; color: #859da3; }
-:is(#overlay, .page-loading--city) .camp-entry-caption::before {
+:is(#overlay, .page-loading--city) .camp-entry-caption{
+& span { font: 11px/1.5 var(--font-mono); letter-spacing: .16em; color: #859da3; }
+&::before {
   content: ''; position: absolute; left: -22px; top: 3px; bottom: 3px; width: 5px;
   background: linear-gradient(to bottom, #9f8a59 0 20%, #36525c 20% 84%, transparent 84%);
 }
-:is(#overlay, .page-loading--city) .camp-entry-caption::after {
+&::after {
   content: ''; display: block; width: 100%; height: 7px; margin-top: 5px;
   background:
     linear-gradient(to right, #9f8a59 0 28px, transparent 28px) left bottom / 100% 2px no-repeat,
     repeating-linear-gradient(to right, #52646c 0 1px, transparent 1px 12px) left top / 100% 1px no-repeat;
   animation: campEntryRule .54s cubic-bezier(.16,1,.3,1) .12s backwards;
   transform-origin: left;
-}
+}}
 @keyframes campEntryRule {
   from { opacity: 0; transform: scaleX(.15); }
   to { opacity: 1; transform: scaleX(1); }
@@ -206,48 +210,41 @@ body.interface-motion #overlay[data-ui-shell="content"]:not([data-ui-closing]) >
   from { opacity: 0; transform: translateX(-28px); }
   to { opacity: 1; transform: none; }
 }
-@keyframes campPortraitSettle {
-  from { opacity: 0; transform: translateX(-46px) scale(1.055); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes campCopySettle {
-  from { opacity: 0; transform: translateX(32px) translateY(8px); }
-  to { opacity: 1; transform: none; }
-}
 /* 地图/战斗场景只替换视觉，自动结束与点击跳过仍归原节点入口。 */
 body.interface-motion #overlay#overlay#overlay:has(.city-run-transition):not([data-ui-closing]),
 body.interface-motion #overlay#overlay#overlay:has(.city-run-transition):not([data-ui-closing]) > .card {
   animation: none !important; opacity: 1; transform: none;
 }
-#overlay:has(.city-run-transition) { padding: 0; background: transparent; backdrop-filter: none; }
-#overlay .card.scene:has(.city-run-transition) {
+#overlay{
+&:has(.city-run-transition) { padding: 0; background: transparent; backdrop-filter: none; }
+& .card.scene:has(.city-run-transition) {
   position: relative; width: 100%; height: 100%; max-width: none; max-height: none;
   margin: 0; padding: 0; overflow: hidden; border: 0; border-radius: 0; background: transparent; box-shadow: none;
 }
-#overlay #ovBody:has(.city-run-transition) { position: absolute; inset: 0; height: 100%; padding: 0; overflow: hidden; }
-#overlay .flow-transition.city-run-transition {
+& #ovBody:has(.city-run-transition) { position: absolute; inset: 0; height: 100%; padding: 0; overflow: hidden; }
+& .flow-transition.city-run-transition {
   position: absolute; inset: 0; width: 100%; height: 100%; min-height: 100%; margin: 0; padding: 0;
   overflow: hidden; background: transparent !important;
-}
-#overlay .city-run-transition::before, #overlay .city-run-transition::after { content: none; }
-#overlay .city-run-transition .city-run-hint {
-  position: absolute; right: 30px; bottom: 24px; z-index: 35; margin: 0;
-  font: 12px/1.5 var(--font-ui); color: #a9b4b8; letter-spacing: .12em;
-}
-body.reduce-motion #overlay[data-camp-entry] #hubMain.base-camp *,
-body.reduce-motion #overlay .camp-entry-ghost { animation: none !important; }
-body.reduce-motion #overlay .camp-entry-ghost { display: none; }
-body.reduce-motion .camp-entry-identity { display: none; }
-body.reduce-motion :is(#overlay, .page-loading--city) .camp-entry-cut { display: none; }
-body.reduce-motion :is(#overlay, .page-loading--city) .camp-entry-caption::after { animation: none; }
-body.reduce-motion :is(#overlay, .page-loading--city) :is(.camp-entry-register, .camp-entry-scenery, .camp-entry-caption strong),
-body.reduce-motion :is(#overlay, .page-loading--city) .camp-entry-register::after { animation: none; }
+}}
+#overlay .city-run-transition{
+&::before, &::after { content: none; }}
+body.reduce-motion{
+& #overlay[data-camp-entry] #hubMain.base-camp *,
+& #overlay .camp-entry-ghost { animation: none !important; }
+& #overlay .camp-entry-ghost,
+& .camp-entry-identity { display: none; }}
+body.reduce-motion :is(#overlay, .page-loading--city){
+& .camp-entry-cut { display: none; }
+& .camp-entry-caption::after,
+& :is(.camp-entry-register, .camp-entry-scenery, .camp-entry-caption strong),
+& .camp-entry-register::after { animation: none; }}
 @media (prefers-reduced-motion: reduce) {
   #overlay[data-camp-entry] #hubMain.base-camp * { animation: none !important; }
-  #overlay .camp-entry-ghost { display: none; }
-  .camp-entry-identity { display: none; }
-  :is(#overlay, .page-loading--city) .camp-entry-cut { display: none; }
-  :is(#overlay, .page-loading--city) .camp-entry-caption::after { animation: none; }
-  :is(#overlay, .page-loading--city) :is(.camp-entry-register, .camp-entry-scenery, .camp-entry-caption strong),
-  :is(#overlay, .page-loading--city) .camp-entry-register::after { animation: none; }
+  #overlay .camp-entry-ghost,
+.camp-entry-identity { display: none; }
+:is(#overlay, .page-loading--city){
+  & .camp-entry-cut { display: none; }
+  & .camp-entry-caption::after,
+& :is(.camp-entry-register, .camp-entry-scenery, .camp-entry-caption strong),
+  & .camp-entry-register::after { animation: none; }}
 }

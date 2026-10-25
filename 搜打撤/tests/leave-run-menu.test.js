@@ -34,8 +34,8 @@ beforeEach(() => {
 describe('离开对局：保存结果与分级确认', () => {
   it('打开时不声称已保存，继续游玩只关闭面板', () => {
     const { actions, game, UI, saveSession } = mountLeaveMenu();
-    expect(document.getElementById('ovTitle').textContent).toBe('离开对局');
-    expect(document.querySelector('.leave-run-description').textContent).not.toContain('已保存');
+    expect(document.getElementById('ovTitle').textContent).toBe('系统菜单');
+    expect(document.querySelector('.leave-run-panel').textContent).not.toContain('已保存');
     expect(document.querySelector('.leave-run-actions button').dataset.act).toBe('leaveCancel');
     expect(UI.showOverlay.mock.calls[0][3].initialFocus).toBe('[data-act="leaveCancel"]');
     actions.get('leaveCancel')();

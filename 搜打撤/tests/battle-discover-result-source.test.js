@@ -1,10 +1,11 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { showBattleCardResults } from '../game/src/battle/view/battle.card-results.js';
 // Canonical hosted card through the real battle session; no browser state is used.
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '', TYPE_ART: {} } };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
-window.SDT.MAP = { rules: { battleEnergy: 99, battleHandMax: 20, bossDeckSize: 15, starterSha: 0, battleStartDraw: 20, battleTurnDraw: 0, diceSides: 6 }, items: {} };
+window.SDT.MAP = { rules: { ...battleRules(99, 20, 15, 0, 20, 0) }, items: {} };
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
@@ -16,12 +17,19 @@ afterEach(() => { vi.restoreAllMocks(); vi.clearAllTimers(); vi.useRealTimers();
 const canonical = id => { const card = C.all().find(c => c.id === id); expect(card, id).toBeTruthy(); return card; };
 function makeGame(cards) {
   return { ownedCards: cards.map((card, i) => ({ uid: `runtime-${i}`, card: { ...card }, safe: false })),
-    hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0, myClass: '战士', characterId: null,
-    state: 'idle', battleActive: false, logs: [],
+    ...playerFields(100, 100, 5, 0, '战士', null), logs: [],
     log(message) { this.logs.push(message); }, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     addItem() {}, onBattleEnd() {}, };
 }
-async function settle() { await vi.advanceTimersByTimeAsync(1000); expect(R.busy).toBe(false); }
+async function settle() {
+  await vi.advanceTimersByTimeAsync(1000);
+  const preview = R.discovering?.sourceCommit === 'preview';
+  expect(R.busy).toBe(preview);
+  if (preview) {
+    expect(R.discovering.cancelLabel).toBe('取消使用');
+    expect(R.played).not.toContain('runtime-0');
+  }
+}
 
 
 
@@ -50,7 +58,7 @@ it.each(['structured','legacy'])('灵能召唤%s路径先候选后授予，只�
  const source={...canonical('cmtn1epgt20j')};if(path==='legacy')delete source.rules;
  const options=[1,2,3].map(i=>({id:`choice-${i}`,name:`注能候选${i}`,type:'法术',rarity:'稀有',cost:1,infuse:1,desc:'注能(1)：回复2点生命。'}));
  const game=makeGame([source]);BattleSession.start(game,[{id:'foe',name:'靶',hp:50,atk:0}],{isBoss:false});
- const before=R.granted.length;expect(before).toBe(99);
+ const before=R.granted.length;expect(before).toBe(10);
  vi.spyOn(C,'all').mockReturnValue(options);BattleSession.commands.playCard('runtime-0','self');await settle();
  expect(R.discovering.act).toBe('noInfuse');expect(R.discovering.options.length).toBe(3);expect(R.granted).toHaveLength(before);
  const chosen=R.discovering.options[1].id;BattleSession.commands.pickDiscover(1);await settle();
@@ -63,7 +71,7 @@ it('连续免注能发现每轮独立实例，退出后不授予旧候选',async
  const source={...canonical('cmtn1epgt20j'),rules:structuredClone(canonical('cmtn1epgt20j').rules)};source.rules.triggers.onPlay[0].n=2;
  const option={id:'repeat-infuse',name:'连续候选',type:'法术',rarity:'稀有',cost:1,infuse:1,desc:'注能(1)：回复2点生命。'};
  const game=makeGame([source]);BattleSession.start(game,[{id:'foe',name:'靶',hp:50,atk:0}],{isBoss:false});
- const before=R.granted.length;expect(before).toBe(99);
+ const before=R.granted.length;expect(before).toBe(10);
  vi.spyOn(C,'all').mockReturnValue([option]);BattleSession.commands.playCard('runtime-0','self');await settle();
  BattleSession.commands.pickDiscover(0);await settle();expect(R.discovering.act).toBe('noInfuse');expect(R.granted).toHaveLength(before+1);
  BattleSession.commands.pickDiscover(0);await settle();expect(R.granted).toHaveLength(before+2);expect(R.granted[before].uid).not.toBe(R.granted[before+1].uid);expect(R.granted[before].card).not.toBe(R.granted[before+1].card);expect(option._noInfuse).toBeUndefined();

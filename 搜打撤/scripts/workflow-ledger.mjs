@@ -37,13 +37,14 @@ function identifier(cells, kind) {
 }
 
 export { classifyLedgerRow, withoutReleasedText } from './registry-paths.mjs';
-import { classifyLedgerRow } from './registry-paths.mjs';
+import { classifyLedgerRow, registryProseRows } from './registry-paths.mjs';
 
 export function readLedger(root, kind) {
   const config = LEDGERS[kind];
   if (!config) throw new Error('台账仅支持 registry / pending');
   const markdown = readFileSync(path.join(root, config.file), 'utf8');
-  const rows = table(markdown, config.active).rows.map(row => ({ key: identifier(row.cells, kind) ?? null, cells: row.cells,
+  const sourceRows = [...table(markdown, config.active).rows, ...(kind === 'registry' ? registryProseRows(markdown) : [])].sort((a, b) => a.index - b.index);
+  const rows = sourceRows.map(row => ({ key: identifier(row.cells, kind) ?? null, cells: row.cells,
     ...classifyLedgerRow(row, kind) }));
   const states = kind === 'registry' ? ['editing', 'complete-uncommitted', 'settled', 'released'] : ['open', 'resolved'];
   const groups = Object.fromEntries(states.map(state => [state, rows.filter(row => row.state === state)]));
@@ -66,6 +67,8 @@ export function planLedger(root, { kind, action, key, owner, cells }) {
   if (kind === 'registry' && (!owner || !cells[0].startsWith(owner + '（'))) throw new Error('第一列须为 owner（任务说明 WF-编号）');
   const markdown = readFileSync(path.join(root, config.file), 'utf8');
   const active = table(markdown, config.active);
+  const paragraph = kind === 'registry' && registryProseRows(markdown).find(row => identifier(row.cells, kind) === key);
+  if (paragraph) throw new Error(action === 'add' ? '编号已存在于段落登记，不得重复登记' : '段落登记须按原文维护，禁止表格操作覆盖');
   const all = [active, table(markdown, config.closed)];
   const matches = all.flatMap(section => section.rows).filter(row => identifier(row.cells, kind) === key);
   const row = active.rows.find(candidate => identifier(candidate.cells, kind) === key);

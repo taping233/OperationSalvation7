@@ -1,7 +1,7 @@
 /* Synchronous Agent command routing and completion tracking. Shared by the eager facade and lazy runner. */
 import { normalizeAction, actionId } from './agent.protocol.js';
 import { findUiElement } from './agent.surface.js';
-import { getObservedActionTarget, invokeUiAction } from '../ui/action-dispatch.js';
+import { bindObservedAction, getObservedActionTarget, invokeUiAction } from '../ui/action-dispatch.js';
 import { markUiFailure } from './agent.state.js';
 import { moveTo, reenterCell } from '../run/game.run.flow.js';
 import { startNewGame, game, getActiveSlot } from '../run/game.session.js';
@@ -49,11 +49,15 @@ async function awaitCommand(accepted, options) {
   if (!completion) return accepted;
   const requested = options.commandTimeoutMs;
   const timeoutMs = Number.isFinite(requested) && requested > 0 ? requested : 20000;
-  let timer;
+  let timer, onAbort;
   try {
     const result = await Promise.race([completion.promise, new Promise(resolve => {
       timer = setTimeout(() => resolve({ ok: false, id: accepted.id, async: true, completed: false,
         code: 'COMMAND_TIMEOUT', message: '命令仍未完成；自动驱动已停止，不能立即重派' }), timeoutMs);
+    }), new Promise(resolve => {
+      onAbort = () => resolve({ ok: false, id: accepted.id, code: 'RUN_CANCELLED', completed: false });
+      options.signal?.addEventListener('abort', onAbort, { once: true });
+      if (options.signal?.aborted) onAbort();
     })]);
     if (!sameContext(completion.context)) return { ok: false, id: accepted.id, async: true,
       completed: false, code: 'CONTEXT_CHANGED', message: '对局归属已改变，丢弃旧命令结果' };
@@ -61,6 +65,7 @@ async function awaitCommand(accepted, options) {
   } finally {
     completion.active = false;
     clearTimeout(timer);
+    options.signal?.removeEventListener('abort', onAbort);
   }
 }
 
@@ -68,6 +73,8 @@ function act(input) {
   const norm = normalizeAction(input);
   if (!norm.ok) return { ok: false, code: norm.code, message: norm.message };
   const action = norm.action;
+  const observedTarget = getObservedActionTarget(input);
+  if (observedTarget) bindObservedAction(action, observedTarget);
   const id = actionId(action);
   const context = commandContext();
   const page = document.getElementById('ovBody')?.firstChild;
@@ -78,11 +85,11 @@ function act(input) {
       && title === document.getElementById('ovTitle')?.textContent
       && (!button || button === findUiElement(action.name, action.params))
       && (action.type === 'ui' || action.type === 'sys')) {
-      markUiFailure({ id, params: action.params || {} });
+      markUiFailure({ id, params: action.params || {}, ...(action.args ? { args: [...action.args] } : {}) });
     }
   };
   try {
-    const out = dispatch(action, id, getObservedActionTarget(input));
+    const out = dispatch(action, id, observedTarget);
     const completion = completions.get(out);
     if (completion) {
       completion.promise = completion.promise.then(result => {
@@ -166,7 +173,9 @@ function dispatch(action, id, observedTarget) {
           : { ok: false, id, code: 'BACKPACK_REJECTED', message: `开背包被拒（state=${window.SDT?.game?.state}）` };
       }
       if (action.name === 'discardCard') {
-        const ok = window.SDT.game?.discardCard?.(action.args?.[0]);
+        const ok = action.args?.[1] != null
+          ? window.SDT.game?.discardCard?.(action.args[0], false, action.args[1])
+          : window.SDT.game?.discardCard?.(action.args?.[0]);
         return ok ? { ok: true, id } : { ok: false, id, code: 'DISCARD_REJECTED', message: '丢弃失败（卡不存在/初始牌保护/需先开背包）' };
       }
       return { ok: true, id };   // noop

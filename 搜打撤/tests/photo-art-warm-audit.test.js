@@ -1,11 +1,27 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-afterEach(() => { vi.unstubAllGlobals(); document.body.replaceChildren(); });
+afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); document.body.replaceChildren(); });
 const deferred = () => { let resolve; const promise = new Promise(done => { resolve = done; }); return { resolve, promise }; };
 const flush = async () => { for (let i = 0; i < 8; i++) await Promise.resolve(); };
 
 describe('照相馆图片队列隔离', () => {
+  it('两次自动尝试后提供手动恢复，重置页面即移除入口并隔离旧完成', async () => {
+    vi.resetModules();vi.useFakeTimers();vi.stubGlobal('IntersectionObserver',undefined);
+    document.body.innerHTML='<section><div id="libGrid"><button><span class="studio-photo-art"><img data-lib-src="/missing.webp"></span></button></div></section>';
+    const image=document.querySelector('img');image.decode=vi.fn(()=>Promise.reject(new Error('unavailable')));
+    const {warmLibArt,resetLibArtWarmup}=await import('../game/src/hub/game.cardslib.art-warm.js');
+    warmLibArt();await flush();
+    expect(document.querySelector('.list-image-recovery')).toBeNull();
+    await vi.advanceTimersByTimeAsync(350);await flush();
+    expect(image.decode).toHaveBeenCalledTimes(2);
+    const retry=document.querySelector('.list-image-recovery button');
+    expect(retry).not.toBeNull();expect(retry.closest('#libGrid')).toBeNull();
+    resetLibArtWarmup();
+    expect(document.querySelector('.list-image-recovery')).toBeNull();
+    await vi.advanceTimersByTimeAsync(3000);
+    expect(image.decode).toHaveBeenCalledTimes(2);
+  });
   it('解码最多并发四张，旧页重置后迟到完成不启动旧队列', async () => {
     vi.resetModules(); vi.stubGlobal('IntersectionObserver', undefined);
     document.body.innerHTML = '<div id="libGrid"></div><div id="libPreview"></div>';

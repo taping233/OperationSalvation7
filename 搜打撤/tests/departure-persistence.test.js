@@ -25,6 +25,7 @@ beforeAll(() => {
   session.configureGameRuntime({ openClassChoice: () => Promise.resolve(true) });
 });
 beforeEach(async () => {
+  await Promise.all([Base.flushWrites(), RunStorage.flushWrites()]);
   vi.restoreAllMocks();
   installImmediateWebLocks();
   localStorage.clear();
@@ -36,7 +37,7 @@ beforeEach(async () => {
   Object.assign(session.game, { seed: 'before-departure', runActive: false, nestActive: false, state: 'modal', battleActive: false });
   UI.log.mockClear(); UI.refresh.mockClear(); UI.clearLog.mockClear(); window.SDT.Sound.music.mockClear();
 });
-afterEach(() => vi.restoreAllMocks());
+afterEach(async () => { await Promise.all([Base.flushWrites(), RunStorage.flushWrites()]); vi.restoreAllMocks(); });
 
 function failWrites(key, once = false) {
   let failures = 0;
@@ -190,9 +191,11 @@ describe('出征的真实 Base/Run 可恢复提交', () => {
     const first = session.newRun('standard', picks, options);
     const second = session.newRun('standard', picks, options);
     expect(second).toBe(first);
+    expect(request).toHaveBeenCalledOnce(); // 锁仍占用时只申请一次出征提交。
     release();
     expect(await first).toBeUndefined();
-    expect(request).toHaveBeenCalledOnce();
+    await RunStorage.flushWrites();
+    expect(request).toHaveBeenCalledTimes(2); // 已提交后另在同槽锁下清理上一局备档。
     expect(storedBase().stash[0].count).toBe(1);
     expect(UI.clearLog).toHaveBeenCalledOnce();
   });

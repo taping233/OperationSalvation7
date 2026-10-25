@@ -59,62 +59,47 @@ async function setup(kind = 'small') {
   };
   await import('../game/src/run/chests.js');
   const chests = window.SDT.Chests;
-  chests.open(game, [{ kind }], vi.fn(), { onCell:true }); actions.chestNext();
+  chests.open(game, [{ kind }], vi.fn(), { onCell:true });
   return { body, game, actions, sfx };
 }
 
-it.each(['small', 'medium', 'large'])('实际%s开箱立即解锁→爆光→余辉切帧，不提前领取卡牌', async kind => {
-  const { body, game, sfx } = await setup(kind);
-  const surface = body.querySelector('[data-eps-search]');
-  const check = (frame, phase) => {
-    expect(surface.dataset.chestPhase).toBe(phase);
-    expect(surface.querySelector('.ps-chest').src).toContain(`/supply-opening-v6/${kind}/frame-0${frame}.webp`);
-    expect(surface.querySelector('.safe-burst').src).toContain(`/supply-opening-v6/fx/frame-0${frame}.webp`);
-  };
-  check(1, 'opening'); // Starts immediately: no initial 780ms hold.
-  vi.advanceTimersByTime(160); check(2, 'burst');
-  expect(sfx.mock.calls.filter(([name]) => name === 'chestBurst')).toHaveLength(1);
-  vi.advanceTimersByTime(140); check(3, 'settle');
-  vi.advanceTimersByTime(699); expect(body.querySelector('[data-eps-search]')).toBe(surface);
-  vi.advanceTimersByTime(1); expect(body.querySelector('.reward-v14')).not.toBeNull();
-  expect(game.grantCard).not.toHaveBeenCalled(); expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(1);
-  vi.advanceTimersByTime(3000);
-  expect(sfx.mock.calls.filter(([name]) => name === 'chestBurst')).toHaveLength(1);
-});
-
-it('点击跳过后旧计时器不重播、不提前领取卡牌', async () => {
-  const { body, game, actions } = await setup();
-  actions.chestReveal();
-  expect(body.querySelector('.reward-v14')).not.toBeNull();
-  vi.advanceTimersByTime(5000);
+it.each(['small', 'medium', 'large', 'class', 'boss'])('opens %s directly as cards without chest animation or automatic grants', async kind => {
+  const { body, game, actions, sfx } = await setup(kind);
   expect(body.querySelector('[data-eps-search]')).toBeNull();
-  expect(game.grantCard).not.toHaveBeenCalled(); expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(1);
+  expect(body.querySelector('.reward-v14 .reward-card')).not.toBeNull();
+  expect(actions.chestReveal).toBeUndefined();
+  expect(window.SDT.Chests.serialize(game).current.rewardStage).toBe('cards');
+  expect(game.grantCard).not.toHaveBeenCalled();
+  expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(1);
+  vi.advanceTimersByTime(5000);
+  expect(sfx.mock.calls.some(([name]) => ['chestShake','chestBurst'].includes(name))).toBe(false);
+  expect(game.grantCard).not.toHaveBeenCalled();
 });
 
-it('开箱中返回总览立即取消后续帧，避免覆盖总览', async () => {
-  const { body, actions } = await setup();
-  vi.advanceTimersByTime(780); actions.chestClosePicker();
-  expect(body.querySelector('.cqo-overview')).not.toBeNull();
-  vi.advanceTimersByTime(3000);
-  expect(body.querySelector('.cqp-dialog')).toBeNull();
+it('does not wait for chest artwork decoding before showing rewards', async () => {
+  const decode = vi.fn(() => new Promise(() => {}));
+  vi.stubGlobal('Image', class { decode = decode; });
+  const { body, game, actions } = await setup();
+  expect(decode).not.toHaveBeenCalled();
+  expect(body.querySelector('[data-act="chestTake1"]')).not.toBeNull();
+  await actions.chestReturn();
+  expect(document.getElementById('overlay').hidden).toBe(true);
+  vi.advanceTimersByTime(5000);
+  expect(document.getElementById('overlay').hidden).toBe(true);
+  expect(game.grantCard).not.toHaveBeenCalled();
 });
 
-it('减少动态时不播放逐帧，仍进入原奖励', async () => {
-  vi.stubGlobal('matchMedia', () => ({ matches:true }));
+it.each(['chest','opening'])('resumes legacy %s saves as cards without redrawing rewards', async stage => {
   const { body, game } = await setup();
-  expect(body.querySelector('.reward-v14')).not.toBeNull();
-  expect(game.grantCard).not.toHaveBeenCalled(); expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(1);
-});
-
-it('解码未完成仍可立即跳过，旧解码回调不重播/重复收币或发卡',async()=>{
-  const complete=[];
-  vi.stubGlobal('Image',class {decode(){return new Promise(resolve=>complete.push(resolve));}});
-  const {body,game,actions,sfx}=await setup();
-  expect(body.querySelector('[data-eps-search]')).not.toBeNull();
-  actions.chestReveal();
-  expect(body.querySelector('.reward-v14')).not.toBeNull();
-  const content=body.innerHTML;
-  complete.forEach(resolve=>resolve());await Promise.resolve();await Promise.resolve();
-  expect(body.innerHTML).toBe(content);expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(1);
-  expect(game.grantCard).not.toHaveBeenCalled();expect(sfx.mock.calls.filter(([name])=>name==='chestBurst')).toHaveLength(0);
+  const saved = window.SDT.Chests.serialize(game);
+  const cards = saved.current.cards;
+  saved.current.rewardStage = stage;
+  saved.queue[0].reward = saved.current;
+  const draw = vi.spyOn(window.SDT.Cards, 'randomDropCard');
+  expect(window.SDT.Chests.restore(game, saved, vi.fn())).toBe(true);
+  expect(body.querySelector('[data-eps-search]')).toBeNull();
+  expect(window.SDT.Chests.serialize(game).current.cards).toEqual(cards);
+  expect(window.SDT.Chests.serialize(game).current.rewardStage).toBe('cards');
+  expect(draw).not.toHaveBeenCalled();
+  expect(game.gainCoins).toHaveBeenCalledTimes(1);
 });

@@ -1,3 +1,4 @@
+import { quietUiMocks } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 
@@ -11,18 +12,19 @@ await import('../game/src/hub/base.js');
 const session = await import('../game/src/run/game.session.js');
 const { RunStorage } = await import('../game/src/hub/game.storage.js');
 const { Base, UI } = window.SDT;
-Object.assign(UI, { log: vi.fn(), refresh() {}, clearLog() {}, hideOverlay() {}, hideScreen() {}, showScreen() {}, showOverlay() {}, act() {}, registerHelp() {}, helpBtn() { return ''; } });
+Object.assign(UI, { log: vi.fn(), refresh() {}, ...quietUiMocks() });
 window.SDT.Meta = { setXpMul() {}, track() {} };
 session.configureGameRuntime({ openClassChoice: () => Promise.resolve(true) });
 
 beforeEach(async () => {
+  await Promise.all([Base.flushWrites(), RunStorage.flushWrites()]);
   vi.restoreAllMocks(); installImmediateWebLocks();
   localStorage.clear(); Base.use(1); session._set_active_slot(1);
   expect(await Base.save()).toBe(true);
   expect(await session.newRun('standard', {}, { skipClassChoice: true })).toBeUndefined();
   Object.assign(session.game, { myClass: '战士', characterId: 'heixiang', elapsed: 0, elapsedSynced: 0 });
 });
-afterEach(async () => { await Base.flushWrites(); vi.restoreAllMocks(); });
+afterEach(async () => { await Promise.all([Base.flushWrites(), RunStorage.flushWrites()]); vi.restoreAllMocks(); });
 
 function failBase() {
   const original = Storage.prototype.setItem;
@@ -33,19 +35,23 @@ function failBase() {
 }
 async function seedElapsedMigration() {
   session.game.elapsed = 30;
-  expect(session.saveGame()).toBe(true);
+  expect(await session.saveGame()).toBe(true);
   await Base.flushWrites();
   Base.data.stats.playSeconds = 0;
+  delete Base.data.stats.playTimeCheckpoint;
   expect(await Base.save()).toBe(true);
+  const legacyRun = JSON.parse(localStorage.getItem(RunStorage.key(1)));
+  delete legacyRun.elapsedTimeBaseline;
+  localStorage.setItem(RunStorage.key(1), JSON.stringify(legacyRun));
 }
 
-describe('同步Run检查点与完整Base保存回执', () => {
-  it('saveGame仍同步只确认Run，saveSession等待Base失败并明确返回失败', async () => {
+describe('异步Run检查点与完整Base保存回执', () => {
+  it('saveGame等待Run落盘，saveSession等待Base失败并明确返回失败', async () => {
     session.game.elapsed = 10;
     const failure = failBase();
     const runOnly = session.saveGame();
-    expect(runOnly).toBe(true);
-    expect(runOnly).not.toBeInstanceOf(Promise);
+    expect(runOnly).toBeInstanceOf(Promise);
+    expect(await runOnly).toBe(true);
     expect(JSON.parse(localStorage.getItem(RunStorage.key(1))).elapsed).toBe(10);
     const full = await session.saveSession();
     expect(full).toMatchObject({ ok: false, code: 'BASE_SAVE_FAILED' });

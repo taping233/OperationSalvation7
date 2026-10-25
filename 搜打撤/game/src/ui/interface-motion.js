@@ -9,12 +9,18 @@ import { motionTiming } from './motion-presets.js';
 import { hasVisualMotion, installTargetMotionLifecycle } from './target-motion.js';
 import { installCardStateMotion } from './card-state-motion.js';
 import { installSelectionStateMotion } from './selection-state-motion.js';
+import { manageSurfaceActivity } from './surface-activity.js';
+import '../../css/interface-motion.css';
+import '../../css/interface-components.css';
 const installed = new WeakSet();
+const entrySupplyRefreshes = new WeakMap();
 const overlay = document.getElementById('overlay');
 let pendingClose = null;
 let withinShow = false;
 let enterFlip = false;
 let screenFlip = false;
+let releaseActivity = null;
+let activityRoot = null;
 
 export function interfaceReducedMotion() {
   return !!(document.body.classList.contains('reduce-motion')
@@ -32,8 +38,7 @@ function kindFor(ui, mode, body) {
 function tabKey(hub) {
   if (!hub) return '';
   const main = /** @type {import("./ui.dom.types.js").UIElement} */ (hub.querySelector('.hub-tab.on'))?.dataset.tab || '';
-  const sub = /** @type {HTMLButtonElement} */ (hub.querySelector('.stash-section-tab.on, .person-tab.on, .collection-tabs button.on'));
-  return `${main}/${sub?.dataset.view || sub?.dataset.character || ''}`;
+  return main;
 }
 
 function markEntry(kind, restart) {
@@ -87,6 +92,41 @@ function install(ui = window.SDT?.UI) {
       this._hoverHandler = hover;
     }
     const body = document.getElementById('ovBody');
+    const entrySupply = mode === 'page' && typeof html === 'string' && html.includes('entry-supply-strips');
+    // Claiming cards stays in the current node: wait for resources without
+    // inserting the destination-loading film and its minimum playback.
+    const rewardPage = mode === 'page' && typeof html === 'string'
+      && (html.includes('reward-replica') || html.includes('cqo-overview'));
+    const supplyRefresh = entrySupplyRefreshes.get(this);
+    // Entry checkpoint completion can request exactly the same page again.
+    // Retain its mounted images and readiness owner instead of restarting both.
+    if (entrySupply && !overlay.hidden && !overlay.classList.contains('closing')
+        && this._lastMode === mode && this._motionHeading === heading && supplyRefresh?.html === html
+        && supplyRefresh.root === body?.firstElementChild && supplyRefresh.revision === this._overlayRevision
+        && (options?.motionKey || null) === this._motionKey) return;
+    entrySupplyRefreshes.delete(this);
+    if (options?.battleBody) {
+      const contentRefresh = !overlay.hidden && this._lastMode === mode && this._motionHeading === heading
+        && !!body?.querySelector(':scope > .battle-secondary-layer');
+      // A combat dialog retains its battlefield and header. Only the new panel
+      // enters; replaying the shared shell would fade and move that live scene.
+      cancelPageVisual();
+      clearSurface(overlay);
+      delete overlay.dataset.uiEnter;
+      delete overlay.dataset.uiClosing;
+      delete overlay.dataset.uiInstantClose;
+      delete overlay.dataset.surfaceMotion;
+      delete overlay.dataset.surfaceLayout;
+      this._motionHeading = heading;
+      this._motionKey = options.motionKey || null;
+      withinShow = true;
+      let result;
+      try { result = showOverlay.call(this, heading, html, mode, options); }
+      finally { withinShow = false; }
+      enterSurface(overlay, { fast:true, retainedCombat:true, restart:!contentRefresh });
+      cancelLegacyCardTween();
+      return result;
+    }
     // Keep the outgoing node illustration through the destination's resource
     // gate, rather than replacing it with a second, unrelated black curtain.
     const outgoingScene = !overlay.hidden && mode !== 'scene'
@@ -125,6 +165,9 @@ function install(ui = window.SDT?.UI) {
     try { result = showOverlay.call(this, heading, html, mode, options); }
     finally { withinShow = false; }
     const currentBody = document.getElementById('ovBody');
+    if (entrySupply) entrySupplyRefreshes.set(this, {
+      html, root:currentBody?.firstElementChild, revision:this._overlayRevision,
+    });
     const profile = pageMotionProfile(currentBody);
     // An empty/reused heading does not make two different pages the same page.
     if (contentRefresh && mode === 'page' && oldProfile !== profile?.key) {
@@ -132,6 +175,11 @@ function install(ui = window.SDT?.UI) {
       markEntry(kindFor(this, mode, currentBody), true);
     }
     overlay.dataset.uiMotion = kindFor(this, mode, currentBody);
+    const glass = currentBody?.querySelector('.glass-panel');
+    const shell = currentBody?.parentElement;
+    shell?.classList.toggle('ui-dialog-panel', overlay.dataset.uiMotion === 'confirm' && !glass);
+    // The system menu owns its full card; do not frame its inner section again.
+    glass?.classList.toggle('ui-dialog-panel', !glass.matches('.leave-run-panel'));
     overlay.dataset.uiShell = profile?.shell || 'surface';
     // Presentation semantics remain independent of the business mode/route.
     overlay.dataset.uiTransition = mode === 'bagpage' ? 'panel'
@@ -164,7 +212,7 @@ function install(ui = window.SDT?.UI) {
       }
     } else if (/** @type {import("./ui.dom.types.js").UIElement} */ (currentBody?.querySelector('.city-run-transition, .expedition-cut')) ||
         (/** @type {import("./ui.dom.types.js").UIElement} */ (currentBody?.querySelector('.studio-unified')) && /** @type {import("./ui.dom.types.js").UIElement} */ (document.querySelector('.page-loading')))) {
-      // 挂载时不提前播放；照相馆在揭幕开始时接共用区域滑入，结束后不重播。
+      // 挂载时不提前播放；照相馆由门面延至切幕移开时接共用区域滑入。
       delete overlay.dataset.uiEnter;
       clearSurface(overlay);
       delete overlay.dataset.surfaceMotion;
@@ -186,23 +234,29 @@ function install(ui = window.SDT?.UI) {
       clearSurface(overlay, { preserveVisual:true });
       delete overlay.dataset.uiEnter;
       stagePageVisual(this, reveal, { kind: mode === 'bagpage' ? 'panel' : 'page',
-        scene: /** @type {HTMLElement} */ (outgoingScene) });
+        illustrated: !entrySupply && !rewardPage,
+        scene: entrySupply ? undefined : /** @type {HTMLElement} */ (outgoingScene) });
     } else {
       cancelPageVisual();
       reveal();
     }
     cancelLegacyCardTween();
+    if (currentBody !== activityRoot) {
+      releaseActivity?.();
+      activityRoot = currentBody;
+      releaseActivity = currentBody ? manageSurfaceActivity(currentBody) : null;
+    }
     return result;
   };
 
   ui.hideOverlay = function (options) {
+    entrySupplyRefreshes.delete(this);
     cancelPageVisual();
     const game = window.SDT?.game;
-    if (!options?.immediate && !overlay.hidden && game?.runActive && !game.battleActive && !game.nestActive
+    const returningMap = !options?.immediate && !interfaceReducedMotion() && !overlay.hidden && game?.runActive && !game.battleActive && !game.nestActive
       && (overlay.classList.contains('opaque') || overlay.dataset.surfaceContext === 'expedition'
-        || !!/** @type {import("./ui.dom.types.js").UIElement} */ (this.el.ovBody?.querySelector('.node-pg:not(.flow-transition), .event-scene, .reward-replica, .cqo-overview, .shop-market')))) {
-      stageMapReturn(this, game);
-    }
+        || !!/** @type {import("./ui.dom.types.js").UIElement} */ (this.el.ovBody?.querySelector('.node-pg:not(.flow-transition), .event-scene, .reward-replica, .cqo-overview, .shop-market')));
+    if (returningMap) stageMapReturn(this, game);
     clearCampEntry();
     if (pendingClose) {
       if (!options?.immediate) return;
@@ -213,8 +267,8 @@ function install(ui = window.SDT?.UI) {
     overlay.dataset.uiClosing = '1';
     const card = document.getElementById('ovBody')?.parentElement;
     const nativeFastClose = !!/** @type {import("./ui.dom.types.js").UIElement} */ (card?.querySelector('.bt-settings, .bt-gy-list, .glass-panel'));
-    const instantRoom = overlay.classList.contains('room-view') && !nativeFastClose;
-    const exitDuration = overlay.dataset.uiTransition === 'panel' ? motionTiming.panelExit
+    const instantRoom = overlay.classList.contains('room-view') && !nativeFastClose && !returningMap;
+    const exitDuration = returningMap ? motionTiming.detailEnter : overlay.dataset.uiTransition === 'panel' ? motionTiming.panelExit
       : nativeFastClose ? motionTiming.fastExit : motionTiming.exit;
     this._motionExitDuration = exitDuration;
     overlay.style.setProperty('--page-out', `${exitDuration}ms`);
@@ -261,17 +315,15 @@ if (overlay) {
   installTargetMotionLifecycle(document.body);
   installCardStateMotion(document.body);
   installSelectionStateMotion(document.body);
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = new URL('../../css/interface-motion.css', import.meta.url).href;
-  link.dataset.interfaceMotion = '1';
-  document.head.appendChild(link);
   document.body.classList.add('interface-motion');
   // 旧宿主安装中的闸门只清理一次；后续转场由当前控制器独占。
   overlay.classList.remove('gate-live', 'gate-squeeze');
   new MutationObserver(() => {
     if (!overlay.dataset.uiMotion) return;
     if (overlay.hidden) {
+      releaseActivity?.();
+      releaseActivity = null;
+      activityRoot = null;
       clearArchiveMotion(overlay);
       clearSurface(overlay);
       delete overlay.dataset.uiClosing;
@@ -296,3 +348,5 @@ if (overlay) {
     cancelLegacyCardTween();
   });
 }
+
+if (import.meta.hot) import.meta.hot.dispose(() => releaseActivity?.());

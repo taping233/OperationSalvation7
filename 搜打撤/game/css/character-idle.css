@@ -1,13 +1,14 @@
 /* 选人页立绘缓慢水平待机；无粒子画布或光效。 */
 
 /* 立绘主体层与水平平移动画。 */
-.cls2-fullart.idle-stage .art-figure-wrap { z-index: 1; will-change: transform; }
+.cls2-fullart.idle-stage{
+& .art-figure-wrap { z-index: 1; will-change: transform; }
 
 /* ---------- 人物待机：老板 10-04 改为极慢的小幅水平平移 ---------- */
-.cls2-fullart.idle-stage .art-figure-wrap { transform-origin: 50% 100%; }
+& .art-figure-wrap { transform-origin: 50% 100%; }
 
 /* 一次往返 40 秒，只在水平方向移动 ±3px，不升降、旋转或缩放。 */
-.cls2-fullart.idle-stage[data-idle-motion='wu'] .art-figure-wrap { animation: idleWu 40s ease-in-out infinite; }
+&[data-idle-motion='wu'] .art-figure-wrap { animation: idleWu 40s ease-in-out infinite; }}
 @keyframes idleWu { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
 
 /* 常无欲 · 降临者 */

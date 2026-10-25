@@ -1,3 +1,4 @@
+import { playerFields, canvasTraps, audioGainFields } from './helpers/environment-fixtures.js';
 /* 反馈12条·B组（6/9）真实启动链：敌方指向道具的目标点选必须能收口，
  * 不能把 pendingItem 永久挂在快照里——那会让道具栏此后完全点不动。 */
 import { afterAll, describe, it, expect, vi } from 'vitest';
@@ -27,15 +28,7 @@ afterAll(async () => {
 // eslint-disable-next-line no-constant-condition
 if (!window.HTMLCanvasElement.prototype.getContext || true) {
   const noopCtx = () => new Proxy(function () {}, {
-    get: (_t, k) => {
-      if (k === 'canvas') return null;
-      if (k === 'measureText') return () => ({ width: 10 });
-      if (k === 'createLinearGradient' || k === 'createRadialGradient' ||
-          k === 'createPattern' || k === 'getImageData') return () => ({ addColorStop: () => {}, data: [] });
-      return () => noopCtx();
-    },
-    set: () => true,
-    apply: () => noopCtx(),
+    ...canvasTraps(noopCtx),
   });
   window.HTMLCanvasElement.prototype.getContext = function () { return noopCtx(); };
 }
@@ -48,7 +41,7 @@ window.Audio = class FakeAudio {
 };
 window.AudioContext = window.AudioContext || class FakeAudioContext {
   constructor() { this.currentTime = 0; this.destination = {}; this.sampleRate = 44100; }
-  createGain() { return { connect: () => {}, disconnect: () => {}, gain: { value: 0, setValueAtTime: () => {}, linearRampToValueAtTime: () => {}, cancelScheduledValues: () => {}, setTargetAtTime: () => {} } }; }
+  createGain() { return { ...audioGainFields() }; }
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: { value: 0 }, knee: { value: 0 }, ratio: { value: 0 }, attack: { value: 0 }, release: { value: 0 } }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false, playbackRate: { value: 1 } }; }
@@ -90,8 +83,7 @@ describe('道具栏：选目标与结算收口', () => {
   it('多敌时敌方指向道具点选敌人后结算；未点选期间其它道具仍可打开', { timeout: 20_000 }, async () => {
     const game = Object.assign(window.SDT.game, {
       ownedCards: [],
-      hp: 30, maxHp: 40, atk: 5, spellPower: 0, coins: 0,
-      myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+      ...playerFields(30, 40, 5, 0, '侠客', null),
       log(msg) { LOGS.push(String(msg).replace(/<[^>]+>/g, '')); },
       heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {},
       onBattleEnd() {},

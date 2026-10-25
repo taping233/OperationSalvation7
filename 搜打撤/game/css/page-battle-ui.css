@@ -68,32 +68,23 @@
 
 /* 墓地/牌库列表：档案表格化（发丝分隔 + 冷青灰元信息）；discover 卡格容器
    的间距/分隔线是 09-15 定版磨砂玻璃面板语言，不碰 */
-.bt-gy-list { border-top-color: rgba(170,174,177,.16); }
-.bt-gy-row { border-bottom-color: rgba(170,174,177,.1); }
-.bt-gy-row b { color: #f1f1f1; }
-.bt-gy-row .bt-gy-meta { color: #92979a; font-variant-numeric: tabular-nums; }
-/* 战斗设置行卡片：hover 金线反馈 */
-.bt-settings .chk {
-  transition: background var(--bt-fast), border-color var(--bt-fast);
-}
-.bt-settings .chk:hover { border-color: rgba(230,203,118,.4); }
 /* 抉择选项钮：与战术幽灵键同族三态（.card.discover 只在战斗语境出现） */
-#overlay .card.discover .choice-list .ov-btn {
+#overlay .card.discover .choice-list .ov-btn{
+& {
   transition: color var(--bt-fast), border-color var(--bt-fast),
     background var(--bt-fast), box-shadow var(--bt-fast), transform var(--bt-fast);
 }
-#overlay .card.discover .choice-list .ov-btn:hover:not(:disabled) {
+&:hover:not(:disabled) {
   filter: none;
   color: #f4f4f4;
   border-color: rgba(230,203,118,.62);
   background: rgba(21,23,24,.88);
   box-shadow: 0 0 10px rgba(230,203,118,.16);
-  transform: translateY(-1px);
 }
-#overlay .card.discover .choice-list .ov-btn:active:not(:disabled) {
+&:active:not(:disabled) {
   transform: translateY(0) scale(.97);
   transition-duration: var(--bt-press);
-}
+}}
 
 /* ═════════ T2 焦点态：键盘导航金线焦点环（战斗全部可焦元素） ═════════ */
 #overlay .card.discover .choice-list .ov-btn:focus-visible,

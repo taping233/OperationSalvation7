@@ -1,10 +1,10 @@
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
 import { pageHTML } from '../game/src/hub/game.bag.view2.js';
+import { readCssSource } from './helpers/css-source.js';
 
-const css = postcss.parse(readFileSync('game/css/expedition-inventory.css', 'utf8'));
-const feedback = postcss.parse(readFileSync('game/css/feedback-1018.css', 'utf8'));
+const css = postcss.parse(readCssSource('game/css/expedition-inventory.css', 'utf8'));
+const feedback = postcss.parse(readCssSource('game/css/feedback-1018.css', 'utf8'));
 const rail = 'body #overlay .card.bag-page .bag-v2 .bag-rail';
 const exit = 'body #overlay#overlay#overlay .card.bag-page .bag-v2 .bag-rail > .archive-back';
 const declarations = selector => {
@@ -26,7 +26,7 @@ describe('backpack rail owns its in-flow exit geometry', () => {
   });
 
   it('overrides the shared three-ID absolute positioning only inside the backpack rail', () => {
-    const shared = readFileSync('game/css/archive-back.css', 'utf8');
+    const shared = readCssSource('game/css/archive-back.css', 'utf8');
     expect(shared).toContain('#overlay#overlay#overlay');
     expect(declarations(exit)).toMatchObject({ position:'static', inset:'auto', flex:'none',
       margin:'0 0 20px', width:'64px', height:'64px' });

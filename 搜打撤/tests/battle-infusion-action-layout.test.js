@@ -1,6 +1,7 @@
-import { readFileSync } from 'node:fs';
+import { battleViewMocks, overlayElements, inventoryFields } from './helpers/environment-fixtures.js';
 import postcss from 'postcss';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
   createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }),
@@ -19,11 +20,7 @@ const UI = {
   act: (name, fn) => actions.set(name, fn),
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} },
-  Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 9, 99, 5, 5),
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
@@ -58,8 +55,7 @@ function start({ name = '血蝠风暴', potion = false, cardId = 'tt3sp-bloodsto
       { uid: 'infusion', card: infusion }, { uid: 'fuel-a', card: Cards.SHA }, { uid: 'fuel-b', card: Cards.SHA },
       ...(potion ? [{ uid: 'potion', card: Cards.all().find(card => card.id === 'tt3-iceheart-potion') }] : []),
     ],
-    inventory: [], usedPocket: [], hp: 30, maxHp: 30, atk: 4, spellPower: 0, coins: 0,
-    myClass: null, state: 'idle', battleActive: false, log: vi.fn(), heal() {}, addItem() {}, onBattleEnd() {},
+    ...inventoryFields(30, 30, 0, null), log: vi.fn(), heal() {}, addItem() {}, onBattleEnd() {},
   };
   window.SDT.game = game;
   BattleSession.start(game, [0, 1].map(i => ({ id: `foe-${i}`, name: `靶子${i}`, hp: 100, atk: 1 })), { isBoss: false });
@@ -70,7 +66,7 @@ beforeEach(() => {
   window.requestAnimationFrame = callback => { frames.push(callback); return frames.length; };
   Element.prototype.animate = () => ({ finished: Promise.resolve(), cancel() {}, onfinish: null });
   document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  UI.el = { ...overlayElements() };
   UI.el.ovBody.addEventListener('click', event => {
     const button = event.target.closest('[data-act]');
     if (button && !button.closest('[inert]')) actions.get(button.dataset.act)?.(button.dataset);
@@ -369,17 +365,15 @@ describe('shared infusion action bar', () => {
 
   it('uses the same two groups for targeted items and preserves cancellation without spending the item', () => {
     start({ potion: true }); BattleSession.commands.usePotion('potion'); flush();
-    expect(bar().classList.contains('bt-pick')).toBe(true);
-    expect(bar().querySelector('.bt-infuse-copy').textContent).toContain('点击一名敌人');
-    expect(bar().querySelectorAll('.bt-infuse-actions button')).toHaveLength(1);
-    bar().querySelector('[data-act="btPickCancel"]').click(); flush();
+    expect(snapshot().pendingItem).not.toBeNull(); expect(bar()).toBeNull();
+    document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true})); flush();
     expect(snapshot().pendingItem).toBeNull(); expect(bar()).toBeNull();
     expect(game.ownedCards.some(entry => entry.uid === 'potion')).toBe(true);
   });
 
   it('locks the potion rail during material selection and restores it after cancellation', () => {
     start({ potion:true });
-    const potions = () => stage()?.querySelector(':scope > .bt-potions');
+    const potions = () => stage()?.querySelector(':scope > .sts-topbar > .bt-potions');
     expect(potions().inert).toBe(false);
     BattleSession.commands.beginInfusion('infusion'); flush();
     expect(potions().inert).toBe(true);
@@ -387,15 +381,15 @@ describe('shared infusion action bar', () => {
     bar().querySelector('[data-act="btInfuseCancel"]').click(); flush();
     expect(potions().inert).toBe(false);
     BattleSession.commands.usePotion('potion'); flush();
-    expect(bar().classList.contains('bt-pick')).toBe(true);
+    expect(snapshot().pendingItem).not.toBeNull(); expect(bar()).toBeNull();
     expect(potions().inert).toBe(false);
-    bar().querySelector('[data-act="btPickCancel"]').click(); flush();
+    document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true})); flush();
     expect(potions().inert).toBe(false);
   });
 });
 
 describe('visible forecast uncertainty', () => {
-  it('keeps the damage estimate visible and exposes excluded actions through focused details', () => {
+  it('keeps the damage estimate visible without hover or focus interaction', () => {
     start();
     const before = snapshot(), expected = forecastEnemyTurn(before);
     expect(before.allies).toHaveLength(0);
@@ -404,8 +398,9 @@ describe('visible forecast uncertainty', () => {
     expect(forecast.querySelector('.bt-forecast-damage').textContent).toBe(`估算承伤 ${expected.damage}`);
     expect(forecast.querySelector('.bt-forecast-hp>b').textContent).toBe(String(expected.hpAfter));
     expect(forecast.querySelector('.bt-forecast-note')).toBeNull();
-    expect(forecast.tabIndex).toBe(0);
-    expect(forecast.dataset.uiTipText).toBe(expected.note); expect(forecast.classList.contains('lethal')).toBe(expected.lethal);
+    expect(forecast.hasAttribute('tabindex')).toBe(false);
+    expect(forecast.matches('[title],[data-ui-tip],[data-ui-tip-title],[data-ui-tip-text]')).toBe(false);
+    expect(forecast.classList.contains('lethal')).toBe(expected.lethal);
     expect(snapshot()).toEqual(before);
   });
 
@@ -450,7 +445,7 @@ describe('visible forecast uncertainty', () => {
 });
 
 describe('infusion reading and nonshrinking CSS contract', () => {
-  const css = postcss.parse(readFileSync('game/css/battle-stage.css', 'utf8'));
+  const css = postcss.parse(readCssSource('game/css/battle-stage.css', 'utf8'));
   function declarations(selector) {
     const found = {};
     css.walkRules(rule => { if (rule.selector === selector) rule.walkDecls(decl => { found[decl.prop] = decl.value; }); });
@@ -466,8 +461,7 @@ describe('infusion reading and nonshrinking CSS contract', () => {
     expect(declarations(`${prefix} .bt-infuse-actions .mini-btn`)).toMatchObject({ flex: '0 0 auto', 'min-width': '96px', 'min-height': '48px', 'white-space': 'nowrap', margin: '0', font: '600 20px/1.3 var(--font-ui,sans-serif)' });
     expect(declarations(`${prefix} .bt-infuse-actions .mini-btn:disabled`)).toMatchObject({ opacity: '1', cursor: 'default' });
   });
-  it('keeps the forecast limitation readable in the existing auto-sized tactics column', () => {
-    expect(declarations(`${prefix} .bt-forecast-note`)).toMatchObject({ display: 'block', 'font-size': '18px', 'font-weight': '400', 'line-height': '1.4' });
+  it('keeps tactics in its existing auto-sized column', () => {
     expect(declarations(`${prefix} .sts-tactics`)).toMatchObject({ 'grid-row': '3', 'align-self': 'end' });
   });
 });
@@ -537,12 +531,14 @@ describe('discovery source presentation and restoration copy', () => {
     const piles = renderCombatPiles({ mode: 'normal', drawCount: [], discardCount: [], graveCount: ['spent'],
       pileTip: () => '', cardBackHTML: '', escAttr: value => value });
     const host = document.createElement('div'); host.innerHTML = piles.rest;
-    expect(host.querySelector('.bt-pile:last-child').title).toBe('消耗牌堆：（不自动洗回，仅由卡牌效果取回；点击查看）');
+    const grave = host.querySelector('.bt-pile:last-child');
+    expect(grave.title).toBe('');
+    expect(grave.getAttribute('aria-label')).toBe('消耗牌堆：（不自动洗回，仅由卡牌效果取回；点击查看）');
   });
 });
 
 describe('focused infusion workspace layout contract', () => {
-  const css = postcss.parse(readFileSync('game/css/battle-infusion.css', 'utf8'));
+  const css = postcss.parse(readCssSource('game/css/battle-infusion.css', 'utf8'));
   function declarations(selector) {
     const found = {};
     css.walkRules(rule => { if (rule.selector === selector) rule.walkDecls(decl => { found[decl.prop] = decl.value; }); });
@@ -551,11 +547,11 @@ describe('focused infusion workspace layout contract', () => {
   it('keeps source and selected cards over the retained battlefield with a separate hand rail', () => {
     expect(declarations('body #overlay .battle-stage.sts[data-infusion-mode] [data-infusion-workspace]')).toMatchObject({ position:'absolute', inset:'0', 'pointer-events':'none' });
     expect(declarations('body #overlay .infusion-selected-cards')).toMatchObject({ overflow:'auto', 'min-height':'0', display:'flex', 'overscroll-behavior':'contain' });
-    expect(declarations('body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand')).toMatchObject({ display:'flex', overflow:'auto', height:'340px' });
+    expect(declarations('body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand')).toMatchObject({ display:'flex', overflow:'hidden', height:'350px' });
     expect(declarations('body #overlay .infusion-source-card .hs-card')).toMatchObject({ width:'300px' });
   });
   it('gives selected cards a distinct outline and full-card withdrawal affordance', () => {
-    expect(declarations('body #overlay .infusion-card-face .hs-card')).toMatchObject({ outline:'2px solid #bfe3e1', 'pointer-events':'none' });
+    expect(declarations('body #overlay .infusion-card-face .hs-card')).toMatchObject({ outline:'3px solid #e9d59a', 'pointer-events':'none' });
     expect(declarations('body #overlay .infusion-card-return')).toMatchObject({ position:'absolute' });
     expect(declarations('body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-slot')).toMatchObject({ position:'relative', transform:'none' });
   });

@@ -1,6 +1,39 @@
 // Shared registry lifecycle and path parsing. Pure functions: no files, Git, or gate dependencies.
 export const withoutReleasedText = value => String(value ?? '').replace(/~~[^~]*~~/g, '');
 
+// Concurrent writers also register plain paragraphs above the table. Keep these
+// read-only claims visible; table writers must not silently replace their prose.
+export function registryProseRows(registryText) {
+  const lines = registryText.split(/\r?\n/), rows = [];
+  let active = false, paragraph = [], index = 0, fenced = false;
+  const flush = () => {
+    const line = paragraph.join(' ').trim(); paragraph = [];
+    if (!line || !/^[\p{L}\p{N}]/u.test(line)) return;
+    const key = line.match(/WF-[a-zA-Z0-9-]+/);
+    if (!key || key.index > 200 || /[。\n]/.test(line.slice(0, key.index))) return;
+    // The final lifecycle marker is current: e.g. retain earlier completed
+    // increments, then freeze the new source for integration, is still occupied.
+    const markers = [...line.matchAll(/完成未提交|complete-uncommitted|编辑占用释放|编辑释放|已落库|已交付|已归档|已提交|编辑中|待验收|集成验证中|源码已冻结|代码已冻结|运行中/g)];
+    let status = markers.at(-1)?.[0] || '状态未明（段落登记）';
+    if (/^编辑(?:占用)?释放$/.test(status)) status = '完成未提交、' + status;
+    const ownerEnd = line.indexOf('：', key.index);
+    const owner = ownerEnd < 0 ? line.slice(0, key.index + key[0].length) : line.slice(0, ownerEnd);
+    rows.push({ index, line, source: 'paragraph', cells: [owner, line, line, line.match(/20\d{2}-\d{2}-\d{2}/)?.[0] || '', status] });
+  };
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i], trimmed = line.trim();
+    if (/^```|^~~~/.test(trimmed)) { flush(); fenced = !fenced; continue; }
+    if (fenced) continue;
+    if (line.startsWith('## ')) { flush(); active = line.slice(3).startsWith('活跃登记'); continue; }
+    if (!active) continue;
+    if (!trimmed || /^[|>#]/.test(trimmed)) { flush(); continue; }
+    if (!paragraph.length) index = i;
+    paragraph.push(trimmed);
+  }
+  flush();
+  return rows;
+}
+
 // Classification describes the active table, never moves rows or authorizes overwriting them.
 // Unknown registry states keep a conservative edit claim; completed work keeps ownership.
 export function classifyLedgerRow(row, kind) {
@@ -52,6 +85,12 @@ export function parseActiveRegistry(registryText, { includeSettled = false } = {
     if (cells.length < 5) continue;
     const [session, territory, matter, , status] = cells;
     const lifecycle = classifyLedgerRow({ cells }, 'registry');
+    if (!lifecycle.isOpen && !includeSettled) continue;
+    rows.push({ session, status, matter, tokens: extractRegistryTokens(withoutReleasedText(territory)), ...lifecycle });
+  }
+  for (const row of registryProseRows(registryText)) {
+    const [session, territory, matter, , status] = row.cells;
+    const lifecycle = classifyLedgerRow(row, 'registry');
     if (!lifecycle.isOpen && !includeSettled) continue;
     rows.push({ session, status, matter, tokens: extractRegistryTokens(withoutReleasedText(territory)), ...lifecycle });
   }

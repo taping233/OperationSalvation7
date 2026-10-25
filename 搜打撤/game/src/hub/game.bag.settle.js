@@ -10,7 +10,6 @@ import { RunStorage } from './game.storage.js';
 import { createBattleSettlementCommands } from './battle-settlement.commands.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from './recovery.commands.js';
 import { Random } from '../core/random.js';
-import { on as busOn } from '../core/event-bus.js';
 import { showRunTransition } from '../run/game.run.js';
 import { TRANSITION_ART } from '../ui/transition-art.js';
 import { bagSlots } from './game.bag.bridge.js';
@@ -194,7 +193,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
         if (!sameRun()) return false;
         if (settlement.victoryCommitted) {
           game.state = parking ? 'modal' : 'idle';
-          if (saveGame() === false && getActiveSlot()) return retry();
+          if (await saveGame() === false && getActiveSlot()) return retry();
           settlement.phase = parking ? 'chests' : 'done';
           UI.refresh(game);
           if (!parking) teachAmmoOnce();
@@ -260,7 +259,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
         } else {
           // 无档位胜利和非胜利仍保留原有内存/普通保存语义，不创建永久结算键。
           game.state = 'idle';
-          if (saveGame() === false && getActiveSlot()) return retry();
+          if (await saveGame() === false && getActiveSlot()) return retry();
         }
 
         settlement.phase = 'done';
@@ -297,6 +296,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
       if (settlement.phase === 'pocket') {
         const shown = await showRunTransition({
           tone: 'exit', asset: 'scene-extract-bg', art: TRANSITION_ART.retreat, presentation: 'node-cut',
+          scene: 'retreat',
           eyebrow: 'TACTICAL RETREAT', title: '全身而退',
           detail: opts.isBoss ? '你撤出了 BOSS战 · 已结算的战利品完好保存' : '撤出战斗 · 打出过的卡照常结算',
           duration: 1050,
@@ -392,11 +392,11 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
       if (!settlement.extraLegendaryPrepared) {
         const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));
         let legends = opts.isBoss ? 1 : 0;
-        if (slewDragon && Random.random('loot') < RULE_CONFIG.rewards.beastLegendaryChance) legends += 1;
+        if (slewDragon && Random.random('loot', 'reward') < RULE_CONFIG.rewards.beastLegendaryChance) legends += 1;
         const cards = [];
         for (let i = 0; i < legends; i++) {
           const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
-          if (pool.length) cards.push(pool[Math.floor(Random.random('loot') * pool.length)]);
+          if (pool.length) cards.push(pool[Math.floor(Random.random('loot', 'reward') * pool.length)]);
         }
         settlement.extraLegendaryPrepared = true;
         if (cards.length) {
@@ -422,7 +422,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
             settlement.phase = 'rewardsReady';
             return afterRewards();
           }, { beforeMapReturn });
-          if (opened && settlement.slotId && saveGame() === false) {
+          if (opened && settlement.slotId && await saveGame() === false) {
             settlement.phase = 'rewardsReady';
             return retry(new Error('额外传说待领奖快照未保存'));
           }
@@ -457,8 +457,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
     settlement.promise = run().catch(retry).finally(() => { settlement.promise = null; });
     return settlement.promise;
   };
-  // 战斗结束改经总线广播订阅（批次 5）；G.onBattleEnd 保留为无订阅方时的回退路径
-  busOn('battle:end', onBattleEnd);
+  // Required settlement port: battle lifecycle awaits it before notifying observers.
   game.onBattleEnd = onBattleEnd;
   restoreBattleReward = saved => {
     const continuation = saved?.context?.battleSettlement;

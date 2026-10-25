@@ -2,8 +2,9 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import postcss from 'postcss';
 import { resolve } from 'node:path';
+import { readCssSource } from './helpers/css-source.js';
 
-const css = fs.readFileSync(resolve('game/css/base-framework-v7.css'), 'utf8');
+const css = readCssSource(resolve('game/css/base-framework-v7.css'), 'utf8');
 const ast = postcss.parse(css);
 describe('base subpage header contrast', () => {
   it.each([
@@ -14,8 +15,10 @@ describe('base subpage header contrast', () => {
     ast.walkRules(rule => { if (rule.selector.includes(selector)) rules.push(rule); });
     expect(rules).toHaveLength(1);
     const values = Object.fromEntries(rules[0].nodes.filter(node => node.type === 'decl').map(node => [node.prop, node.value]));
-    expect(values.background).toBe('rgba(22,29,35,.90)');
-    expect(values['min-height']).toBe('60px');
+    if(selector.includes('courtyard')){expect(values.display).toBe('none');return;}
+    expect(values.background).toBe('var(--base-v12-glass)');
+    expect(values['backdrop-filter']).toBe('var(--base-v12-filter)');
+    expect(values['min-height']).toBe('64px');
     expect(rules[0].selector).toContain('.base-subpage');
   });
   it('targets the classes emitted by the current courtyard and personnel renderers', () => {

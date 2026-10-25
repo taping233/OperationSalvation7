@@ -1,12 +1,12 @@
 // @vitest-environment node
-import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { JSDOM } from 'jsdom';
 import { describe, expect, it } from 'vitest';
+import { readCssSource } from './helpers/css-source.js';
 
-const css = postcss.parse(readFileSync(new URL('../game/css/expedition-rewards.css', import.meta.url), 'utf8'));
+const css = postcss.parse(readCssSource(new URL('../game/css/expedition-rewards.css', import.meta.url), 'utf8'));
 const doom = 'body #overlay.fx-doom';
-const result = 'body #overlay #exMain.result-pg';
+
 function declarations(selector) {
   const values = {};
   css.walkRules(rule => {
@@ -81,27 +81,13 @@ describe('终局结算的阅读与固定操作契约', () => {
     }
   });
 
-  it('成功整理页两栏独立滚动，为完成整理和智能整理留固定操作槽', () => {
-    expect(declarations('body #overlay .card.page #exMain.result-pg')).toMatchObject({ overflow:'hidden', 'min-height':'0' });
-    expect(declarations(`${result} .result-columns`)).toMatchObject({
-      '--result-actions-width':'520px', position:'relative', flex:'1 1 auto',
-      'min-height':'0', 'grid-template-columns':'minmax(0,1fr) var(--result-actions-width)', overflow:'hidden',
-    });
-    expect(declarations(`${result} .hub-card`)).toMatchObject({ 'min-height':'0', 'max-height':'100%', overflow:'auto' });
-    expect(declarations(`${result} .hub-card:has(.dep-foot)`)).toMatchObject({ position:'static', 'padding-bottom':'200px' });
-    expect(declarations(`${result} .dep-foot`)).toMatchObject({
-      position:'absolute', inset:'auto 24px 24px auto', width:'calc(var(--result-actions-width) - 48px)',
-    });
-    expect(declarations(`${result} :is(.res-chip,.result-summary span:last-child,.hub-card-tip,.pk-row,.dim,.ov-note,.ov-empty)`)['font-size']).toBe('22px');
-    expect(declarations(`${result} :is(.ov-btn,#btnDeploy)`)['min-height']).toBe('64px');
-  });
+
 
   it('结算作用域不命中普通奖励、入城补给条列或战斗舞台，也不改全局缩放', () => {
     const dom = new JSDOM('<body><div id="overlay"><div class="card page"><div class="entry-supply-strips reward-replica"></div><div class="battle-stage sts"></div><div class="reward-v14"></div></div></div></body>');
     expect(dom.window.document.querySelector(`${doom} .card:has(.doom-panel)`)).toBeNull();
-    expect(dom.window.document.querySelector(result)).toBeNull();
     css.walkRules(rule => {
-      if (rule.selector.startsWith(doom) || rule.selector.startsWith(result)) {
+      if (rule.selector.startsWith(doom)) {
         rule.walkDecls('zoom', () => { throw new Error('Terminal reports must use the shared UI scale'); });
       }
     });

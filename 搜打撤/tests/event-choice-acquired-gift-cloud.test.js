@@ -1,4 +1,7 @@
-import { rollEventDice } from './helpers/event-dice.js';
+import { overlayElements } from './helpers/environment-fixtures.js';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+import { flushEventActions } from './helpers/event-dice-async.js';
+import { rollEventDice } from './helpers/event-dice-async.js';
 // Real session/loadGame/RunStorage, event flow/choice, fixed rewards and Chests.
 // Canvas, narrative lookup and presentation are isolated; no browser/player data.
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -39,13 +42,14 @@ const ownCount=id=>session.game.ownedCards.filter(owned=>owned.card.id===id).len
 function fill(n){return Array.from({length:n},(_,i)=>({uid:`filler-${i}`,card:{id:`filler-${i}`,name:`不同已有卡${i}`,type:'法术',rarity:'古朴'}}));}
 async function openQuartermaster(card=apollo){
   catalog=[event,card,bonus];const opening=flow.runEventDeck(); await vi.dynamicImportSettled();await vi.advanceTimersByTimeAsync(1000);await opening;
-  acts.evtChoice({i:'0'}); rollEventDice(UI);expect(session.game.coins).toBe(15);expect(saved().nodeRewards[key]).toMatchObject({paidCoins:3,taken:null});
+  await acts.evtChoice({i:'0'}); await flushEventActions(); await rollEventDice(UI);expect(session.game.coins).toBe(15);expect(saved().nodeRewards[key]).toMatchObject({paidCoins:3,taken:null});
 }
 function reload(){session.game.state='title';const result=session.loadGame(1);expect(result,JSON.stringify(result)).toMatchObject({ok:true});}
-beforeEach(()=>{
-  vi.useFakeTimers();vi.clearAllMocks();localStorage.clear();for(let slot=1;slot<=5;slot++)RunStorage.remove(slot);
+beforeEach(async ()=>{
+  installImmediateWebLocks();
+  vi.useFakeTimers();vi.clearAllMocks();localStorage.clear();for(let slot=1;slot<=5;slot++)await RunStorage.remove(slot);
   document.body.innerHTML='<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div><div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
-  UI.el={overlay:document.getElementById('overlay'),ovBody:document.getElementById('ovBody'),ovTitle:document.getElementById('ovTitle')};
+  UI.el={...overlayElements()};
   UI.el.ovBody.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b)acts[b.dataset.act]?.(b.dataset);});
   for(const name of Object.keys(acts))delete acts[name];logs.length=0;setBagReturnHook(null);
   window.SDT.MAP.chestKinds={small:{name:'小宝箱'}};UI._roomActive=true;
@@ -56,36 +60,36 @@ beforeEach(()=>{
     pendingExtraction:null,extractionPending:null,terminalPending:null,battleActive:false,hp:35,maxHp:35,fragments:0});
   key=`0,${session.game.trackPos}`;session.game.grantCard=scenes.grantEventCard;session.game.persistSave=session.saveGame;
   session.configureGameRuntime({resumeEventCardChoice:flow.resumeEventCardChoice,resumeChestsOnCell:scenes.resumeChestsOnCell,openClassChoice:vi.fn()});
-  Random.reseed('quartermaster-gift-cloud');session.game.seed=Random.seed;expect(session.saveGame()).toBe(true);
+  Random.reseed('quartermaster-gift-cloud');session.game.seed=Random.seed;expect(await session.saveGame()).toBe(true);
 });
 afterEach(()=>{vi.restoreAllMocks();vi.clearAllTimers();vi.useRealTimers();});
 
 describe('装备征用阿猫整体交接固定待领奖',()=>{
   it('主卡选择锁定与待领快照同份保存；旧关闭不覆盖新页，实际主卡/附赠分别领取',async()=>{
     await openQuartermaster();const oldPick=acts.eventCardPick,oldExit=acts.eventExit;const rng=Random.snapshot();
-    UI.el.ovBody.querySelector('[data-act="eventCardPick"]').click();
+    UI.el.ovBody.querySelector('[data-act="eventCardPick"]').click(); await flushEventActions();
     expect(ownCount(apollo.id)).toBe(0);expect(Random.snapshot()).toEqual(rng);expect(UI.el.ovBody.querySelector('.reward-v14')).toBeTruthy();
     expect(saved().nodeRewards[key]).toMatchObject({paidCoins:3,taken:0});expect(saved().visited[key]).toBe(1);
     expect(saved().chestReward.current.cards.map(card=>card.id)).toEqual([apollo.id]);expect(saved().chestReward.current.taken).toEqual([]);
-    const page=UI.el.ovBody.firstElementChild;oldPick({i:0});oldExit();expect(UI.el.ovBody.firstElementChild).toBe(page);expect(session.game.coins).toBe(15);
-    acts.chestTake1({i:0});expect(ownCount(apollo.id)).toBe(1);expect(ownCount(bonus.id)).toBe(0);expect(saved().chestReward.current.cards[1].id).toBe(bonus.id);
-    session.game.ownedCards.splice(0,1);Chests.resume();acts.chestTake1({i:1});acts.chestTake1({i:1});
+    const page=UI.el.ovBody.firstElementChild;await oldPick({i:0});await flushEventActions();await oldExit(); await flushEventActions();expect(UI.el.ovBody.firstElementChild).toBe(page);expect(session.game.coins).toBe(15);
+    await acts.chestTake1({i:0}); await flushEventActions();expect(ownCount(apollo.id)).toBe(1);expect(ownCount(bonus.id)).toBe(0);expect(saved().chestReward.current.cards[1].id).toBe(bonus.id);
+    session.game.ownedCards.splice(0,1);Chests.resume();await acts.chestTake1({i:1});await flushEventActions();acts.chestTake1({i:1}); await flushEventActions();
     expect(ownCount(apollo.id)).toBe(1);expect(ownCount(bonus.id)).toBe(1);expect(session.game.coins).toBe(15);
   });
 
   it('真实loadGame在主卡未领和附赠待领两阶段均优先恢复chest，不重付或重领',async()=>{
-    await openQuartermaster();acts.eventCardPick({i:0});reload();
+    await openQuartermaster();await acts.eventCardPick({i:0}); await flushEventActions();reload();
     expect(session.game.nodeRewards[key].taken).toBe(0);expect(ownCount(apollo.id)).toBe(0);expect(UI.el.ovBody.querySelector('.reward-v14')).toBeTruthy();
-    acts.chestTake1({i:0});const rng=Random.snapshot();catalog=[event,apollo,{...bonus,id:'changed',name:'改池奖励'}];reload();
-    expect(ownCount(apollo.id)).toBe(1);expect(saved().chestReward.current.cards[1].id).toBe(bonus.id);acts.chestTake1({i:0});expect(ownCount(apollo.id)).toBe(1);
-    session.game.ownedCards.splice(0,1);Chests.resume();acts.chestTake1({i:1});expect(ownCount(bonus.id)).toBe(1);expect(session.game.coins).toBe(15);expect(Random.snapshot().streams.loot).toBe(rng.streams.loot);expect(Random.snapshot().streams.event).toBe(rng.streams.event);
-    reload();acts.chestTake1({i:1});expect(ownCount(bonus.id)).toBe(1);
+    await acts.chestTake1({i:0}); await flushEventActions();const rng=Random.snapshot();catalog=[event,apollo,{...bonus,id:'changed',name:'改池奖励'}];reload();
+    expect(ownCount(apollo.id)).toBe(1);expect(saved().chestReward.current.cards[1].id).toBe(bonus.id);await acts.chestTake1({i:0}); await flushEventActions();expect(ownCount(apollo.id)).toBe(1);
+    session.game.ownedCards.splice(0,1);Chests.resume();await acts.chestTake1({i:1}); await flushEventActions();expect(ownCount(bonus.id)).toBe(1);expect(session.game.coins).toBe(15);expect(Random.snapshot().streams.loot).toBe(rng.streams.loot);expect(Random.snapshot().streams.event).toBe(rng.streams.event);
+    reload();await acts.chestTake1({i:1}); await flushEventActions();expect(ownCount(bonus.id)).toBe(1);
   });
 
   it('完全满包也只锁定主卡待领，不实际发本体或附赠；整理后才发',async()=>{
-    session.game.ownedCards=fill(Base.bagCap());await openQuartermaster();acts.eventCardPick({i:0});const rng=Random.snapshot();acts.chestTake1({i:0});
+    session.game.ownedCards=fill(Base.bagCap());await openQuartermaster();await acts.eventCardPick({i:0}); await flushEventActions();const rng=Random.snapshot();await acts.chestTake1({i:0}); await flushEventActions();
     expect(ownCount(apollo.id)).toBe(0);expect(Chests.serialize(session.game).current.taken).toEqual([]);expect(Random.snapshot()).toEqual(rng);
-    session.game.ownedCards.pop();Chests.resume();acts.chestTake1({i:0});expect(ownCount(apollo.id)).toBe(1);expect(Chests.serialize(session.game).current.cards).toHaveLength(2);
+    session.game.ownedCards.pop();Chests.resume();await acts.chestTake1({i:0}); await flushEventActions();expect(ownCount(apollo.id)).toBe(1);expect(Chests.serialize(session.game).current.cards).toHaveLength(2);
   });
 
   it.each(['missing','missing-serialize','false','throw-before'])('承接器%s时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留',async failure=>{
@@ -94,7 +98,7 @@ describe('装备征用阿猫整体交接固定待领奖',()=>{
     else if(failure==='missing-serialize')Chests.serialize=undefined;
     else vi.spyOn(Chests,'restore').mockImplementation(()=>{if(failure==='throw-before')throw new Error('before adoption');return false;});
     try{
-      acts.eventCardPick({i:0});expect(ownCount(apollo.id)).toBe(0);expect(ownCount(bonus.id)).toBe(0);expect(session.game.nodeRewards[key].taken).toBeNull();
+      await acts.eventCardPick({i:0}); await flushEventActions();expect(ownCount(apollo.id)).toBe(0);expect(ownCount(bonus.id)).toBe(0);expect(session.game.nodeRewards[key].taken).toBeNull();
       expect(session.game.visited[key]).toBe(1);expect(session.game.coins).toBe(15);expect(Random.snapshot()).toEqual(rng);
       expect(saved().nodeRewards[key]).toEqual(before.nodeRewards[key]);expect(saved().chestReward).toBeNull();expect(UI.el.ovBody.querySelector('[data-event-capacity]').textContent).toMatch(/保留/);
     }finally{if(failure==='missing')Chests.restore=originalRestore;if(failure==='missing-serialize')Chests.serialize=originalSerialize;}
@@ -102,7 +106,7 @@ describe('装备征用阿猫整体交接固定待领奖',()=>{
 
   it('承接已建立并保存后才抛异常时保留已锁选择与待领，不回滚成可重选',async()=>{
     await openQuartermaster();vi.spyOn(Chests,'restore').mockImplementation((...args)=>{originalRestore(...args);throw new Error('after adoption');});
-    acts.eventCardPick({i:0});expect(session.game.nodeRewards[key].taken).toBe(0);expect(saved().nodeRewards[key].taken).toBe(0);
+    await acts.eventCardPick({i:0}); await flushEventActions();expect(session.game.nodeRewards[key].taken).toBe(0);expect(saved().nodeRewards[key].taken).toBe(0);
     expect(saved().chestReward.current.cards[0].id).toBe(apollo.id);expect(UI.el.ovBody.querySelector('.reward-v14')).toBeTruthy();expect(ownCount(apollo.id)).toBe(0);
   });
 
@@ -112,25 +116,25 @@ describe('装备征用阿猫整体交接固定待领奖',()=>{
       if(storageKey===RunStorage.key(1)){writes++;attempts.push(JSON.parse(value));if(failedWrites.includes(writes))throw new Error('isolated transfer save failure');}
       return original.call(this,storageKey,value);
     });
-    acts.eventCardPick({i:0});expect(writes).toBe(1);expect(ownCount(apollo.id)).toBe(0);
+    await acts.eventCardPick({i:0}); await flushEventActions();expect(writes).toBe(1);expect(ownCount(apollo.id)).toBe(0);
     for(const attempt of attempts){expect(attempt.nodeRewards[key]).toMatchObject({taken:0,paidCoins:3});expect(attempt.visited[key]).toBe(1);expect(attempt.chestReward.current.cards[0].id).toBe(apollo.id);}
     if(failedWrites.includes(1)){expect(localStorage.getItem(RunStorage.key(1))).toBe(beforeRaw);expect(session.game.nodeRewards[key].taken).toBe(0);expect(Chests.serialize(session.game).current.cards[0].id).toBe(apollo.id);}
     else{expect(saved().nodeRewards[key].taken).toBe(0);expect(saved().chestReward.current.cards[0].id).toBe(apollo.id);}
-    failure.mockRestore();expect(session.saveGame()).toBe(true);reload();acts.chestTake1({i:0});expect(ownCount(apollo.id)).toBe(1);expect(session.game.coins).toBe(15);
+    failure.mockRestore();expect(await session.saveGame()).toBe(true);reload();await acts.chestTake1({i:0}); await flushEventActions();expect(ownCount(apollo.id)).toBe(1);expect(session.game.coins).toBe(15);
   });
 
   it('普通非阿猫选择保持原即时发卡/关闭/保存，不依赖固定领奖端口',async()=>{
     await openQuartermaster(plain);Chests.restore=undefined;
-    try{acts.eventCardPick({i:0});expect(ownCount(plain.id)).toBe(1);expect(saved().nodeRewards[key].taken).toBe(0);expect(saved().chestReward).toBeNull();expect(UI.el.overlay.hidden).toBe(true);}
+    try{await acts.eventCardPick({i:0}); await flushEventActions();expect(ownCount(plain.id)).toBe(1);expect(saved().nodeRewards[key].taken).toBe(0);expect(saved().chestReward).toBeNull();expect(UI.el.overlay.hidden).toBe(true);}
     finally{Chests.restore=originalRestore;}
   });
 
   it('整理返回同候选、交接后旧背包回调不覆盖固定领奖页，完成重进无新付款',async()=>{
     await openQuartermaster();const ids=[...session.game.nodeRewards[key].cardIds];
-    bagSlots.showBackpack=()=>{UI.showOverlay('背包','<main class="bag-view">背包</main>');};acts.eventCardBag();const oldReturn=takeBagReturnHook();oldReturn();
-    expect(session.game.nodeRewards[key].cardIds).toEqual(ids);acts.eventCardPick({i:0});const page=UI.el.ovBody.firstElementChild;oldReturn();expect(UI.el.ovBody.firstElementChild).toBe(page);
-    acts.chestTake1({i:0});session.game.ownedCards.splice(0,1);acts.chestTake1({i:1});acts.chestContinue();expect(session.game.state).toBe('idle');
-    flow.reenterCell();expect(session.game.coins).toBe(15);expect(ownCount(apollo.id)).toBe(1);expect(ownCount(bonus.id)).toBe(1);
+    bagSlots.showBackpack=()=>{UI.showOverlay('背包','<main class="bag-view">背包</main>');};await acts.eventCardBag(); await flushEventActions();const oldReturn=takeBagReturnHook();oldReturn();
+    expect(session.game.nodeRewards[key].cardIds).toEqual(ids);await acts.eventCardPick({i:0}); await flushEventActions();const page=UI.el.ovBody.firstElementChild;oldReturn();expect(UI.el.ovBody.firstElementChild).toBe(page);
+    await acts.chestTake1({i:0}); await flushEventActions();session.game.ownedCards.splice(0,1);await acts.chestTake1({i:1});await flushEventActions();await acts.chestContinue(); await flushEventActions();expect(session.game.state).toBe('idle');
+    await flow.reenterCell(); await flushEventActions();expect(session.game.coins).toBe(15);expect(ownCount(apollo.id)).toBe(1);expect(ownCount(bonus.id)).toBe(1);
   });
 });
 const originalRestore=Chests.restore,originalSerialize=Chests.serialize;

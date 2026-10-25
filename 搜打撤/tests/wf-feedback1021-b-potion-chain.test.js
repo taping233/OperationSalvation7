@@ -1,9 +1,10 @@
+import { battleRules } from './helpers/environment-fixtures.js';
 // 反馈12条·B组（6/9）：战斗道具/药水使用链路探针——药水栏结算必须真正落到引擎效果。
 import { expect, it, vi } from 'vitest';
 const s = vi.hoisted(() => ({ game: {} }));
 vi.mock('../game/src/run/game.session.js', () => ({ game: s.game, getActiveSlot: () => null, saveGame: () => true, createRunSavePayload: () => ({}), setBattleSettlementPending() {}, clearBattleSettlementPending() {}, doDeath() {} }));
 vi.mock('../game/src/run/game.run.js', () => ({ showRunTransition: async () => {} }));
-window.SDT = { Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} }, UI: { log() {}, hideOverlay() {}, refresh() {}, act() {}, showOverlay() {} }, MAP: { rules: { battleEnergy: 99, battleHandMax: 20, bossDeckSize: 15, starterSha: 0, battleStartDraw: 0, battleTurnDraw: 0, diceSides: 6 }, items: {} }, Meta: { track() {} }, Base: { data: { ammoTaught: true }, recordEggBattle() {}, save() {} }, Chests: { rollDrops: () => [], dropText: () => '', open() {} }, Battle: { presentVictory: async () => {} } };
+window.SDT = { Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} }, UI: { log() {}, hideOverlay() {}, refresh() {}, act() {}, showOverlay() {} }, MAP: { rules: { ...battleRules(99, 20, 15, 0, 0, 0) }, items: {} }, Meta: { track() {} }, Base: { data: { ammoTaught: true }, recordEggBattle() {}, save() {} }, Chests: { rollDrops: () => [], dropText: () => '', open() {} }, Battle: { presentVictory: async () => {} } };
 
 await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;

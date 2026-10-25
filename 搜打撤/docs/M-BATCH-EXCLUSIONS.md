@@ -1,5 +1,7 @@
 # M 批排除清单（51 张，老板 2026-09-27 拍板）
 
+> 历史基线：下表保留2026-09-27的名称、效果与源码位置，不作当前玩法依据。现行事件名称及分支见[玩家规则](rules.md)与 `game/src/cards/cards.data.js` 的 EVENTS_0919 定义。
+
 - 基线：HEAD `a8e91e6`，生产卡库 272 张（71 有 rules / 201 legacy）。数据源 `docs/evidence/e8-card-migration-2026-09-27/legacy-201-scratch.json`（201 张全量）。
 - 排除口径：这 51 张的效果**已由各自专属系统实现**，不进规则化（card-rules schema/解释器）目标池；其余 150 张见 `docs/M-BATCH-MATRIX.md`。两清单合计 201，与 legacy-201-scratch.json 逐 id 对齐（末节自校验）。
 - 行号均按 HEAD `a8e91e6` 工作区实读核实（rg/读码），非转抄。注意：工作区另有并行未提交改动（`game/src/battle/battle.core.js`、`battle.layers.js`、`battle.resolution.js`、`game/src/hub/game.hub.depart.js`、新增 `game/src/battle/effect-steps.m1.js`），本文引用不受其影响，但若行号漂移以语义定位为准。

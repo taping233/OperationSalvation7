@@ -404,6 +404,14 @@ function layout(preRead) {
   // 包围盒探测失败仍以实际帧画布绘制，不能把首帧承诺兑现成空人物。
   const bounds = box && box.y1 > box.y0 ? box : { y0: 0, y1: size.height };
   if (fixedFrameRole(cur.role)) cur.imgBottom = r.top - cur.ovTop + r.height * bounds.y1 / size.height;
+  // 头顶信息和接地影使用实际人物高度/脚底，避开帧画布的透明留白。
+  const unitStyle = cur.fig.parentElement?.style;
+  if (unitStyle) {
+    const height = `${Math.round(cur.baseCharH * 100) / 100}px`;
+    const footInset = `${Math.round(Math.max(0, r.top - cur.ovTop + r.height - cur.imgBottom) * 100) / 100}px`;
+    if (unitStyle.getPropertyValue('--battle-actor-height') !== height) unitStyle.setProperty('--battle-actor-height', height);
+    if (unitStyle.getPropertyValue('--battle-actor-foot-inset') !== footInset) unitStyle.setProperty('--battle-actor-foot-inset', footInset);
+  }
   const h = cur.baseCharH * (size.height / (bounds.y1 - bounds.y0));
   sprite.height = h;
   sprite.width = h * (size.width / size.height);
@@ -870,6 +878,11 @@ function armBattleEndHide() {
 // any other page, discarded scene, overlay close, or battle end still releases ownership.
 document.addEventListener('sdt-overlay-mode', (e) => {
   if (/** @type {CustomEvent} */ (e).detail !== 'battle' && !suspendSettingsScene(/** @type {CustomEvent} */ (e).detail)) hide();
+});
+document.addEventListener('sdt-battle-settings-open', event => {
+  const scene = /** @type {CustomEvent} */ (event).detail?.stage;
+  if (scene === document.querySelector('#ovBody > .battle-stage')
+      && document.querySelector('#ovBody > [data-local-battle-settings]')) suspendSettingsScene(true);
 });
 document.addEventListener('sdt-overlay-close', hide);
 

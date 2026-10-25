@@ -1,58 +1,80 @@
 /* Rich city/photo cuts retain their artwork, masks and complete animation. */
 /* Resume is a quiet profile of the same handoff: stable artwork while loading,
    then one fade. It never starts scenery/title entrance during departure. */
-#overlay .flow-transition[data-handoff-profile="resume"] {
+#overlay .flow-transition[data-handoff-profile="resume"]{
+& {
   background:#10171b!important; opacity:1;
   animation:none!important; transform:none!important;
   transition:opacity var(--motion-resume-exit,360ms) var(--motion-ease-exit,ease-out)!important;
 }
-#overlay .flow-transition[data-handoff-profile="resume"].leaving { background:#10171b!important; opacity:0!important; }
-#overlay [data-handoff-profile="resume"] .camp-entry-cut {
+&.leaving { background:#10171b!important; opacity:0!important; }}
+#overlay [data-handoff-profile="resume"]{
+& .camp-entry-cut {
   animation:none!important; transform:none!important;
   clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
 }
-#overlay [data-handoff-profile="resume"] .camp-entry-scenery {
+& .camp-entry-scenery {
   animation:none!important; opacity:.85; transform:none;
 }
-#overlay [data-handoff-profile="resume"] .camp-entry-cut::before,
-#overlay [data-handoff-profile="resume"] .camp-entry-cut::after { display:none; }
-#overlay [data-handoff-profile="resume"] .transition-heading { transition:opacity var(--motion-change,160ms) ease-out; }
-#overlay [data-handoff-profile="resume"] .transition-heading * { animation:none!important; }
-#overlay [data-handoff-profile="resume"].leaving .transition-heading { opacity:0; }
-body[data-map-presentation="restoring"] :is(#sidebar,#layerBanner,#expeditionChapter,#resHud,#topBtns,#hpHud) {
+& .camp-entry-cut::before,
+& .camp-entry-cut::after { display:none; }
+& .transition-heading { transition:opacity var(--motion-change,160ms) ease-out; }
+& .transition-heading * { animation:none!important; }
+&.leaving .transition-heading { opacity:0; }}
+body[data-map-presentation="restoring"] :is(#sidebar,#layerBanner,#expeditionChapter,#resHud,#topBtns,#hpHud){
+& {
   visibility:hidden!important; pointer-events:none!important;
 }
-body[data-map-presentation="restoring"] :is(#sidebar,#layerBanner,#expeditionChapter,#resHud,#topBtns,#hpHud),
-body[data-map-presentation="restoring"] :is(#sidebar,#layerBanner,#expeditionChapter,#resHud,#topBtns,#hpHud) * {
+&,
+& * {
   animation:none!important; transition:none!important;
-}
+}}
 .reduce-motion #overlay .flow-transition[data-handoff-profile="resume"] { transition:none!important; }
 @media (prefers-reduced-motion:reduce) {
   #overlay .flow-transition[data-handoff-profile="resume"] { transition:none!important; }
 }
-.transition-handoff-rich:not(.leaving),
-.transition-handoff-rich:not(.leaving) * { animation-play-state:paused!important; }
-.transition-handoff-rich.leaving { pointer-events:none; }
-#overlay .city-run-transition.resume-hold.transition-handoff-rich.leaving { background:transparent!important; }
-#overlay .city-run-transition.resume-hold.transition-handoff-rich.leaving .camp-entry-cut { animation:campCutReveal .8s cubic-bezier(.65,0,.2,1) both!important; }
-#overlay .page-visual-scene.transition-handoff-rich.leaving { background:transparent; transition:none; }
-#overlay .transition-handoff-rich.leaving .city-run-transition.resume-hold { background:transparent!important; }
-#overlay .transition-handoff-rich.leaving .city-run-transition.resume-hold .camp-entry-cut { animation:campCutReveal .8s cubic-bezier(.65,0,.2,1) both!important; }
-#overlay .card.scene:has(.city-run-transition) { background:transparent!important; }
+.transition-handoff-rich{
+& { opacity:1; transition:opacity var(--motion-handoff,680ms) ease-in-out!important; }
+&:not(.leaving),
+&:not(.leaving) * { animation-play-state:paused!important; }
+&.leaving { opacity:0!important; pointer-events:none; }}
+#overlay{
+& .page-visual-scene.transition-handoff-rich.leaving { background:transparent; transition:none; }
+& .card.scene:has(.city-run-transition) { background:transparent!important; }}
+/* Held node artwork is readable on its first frame, including after the destination
+   inherits it. Readiness releases one fade, never a second scenery/title entrance. */
+#overlay .city-run-transition.resume-hold{
+& .camp-entry-cut {
+  animation:none!important; transform:none!important;
+  clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+}
+& .camp-entry-scenery,
+& .transition-heading * {
+  animation:none!important; opacity:1; transform:none;
+}}
+#overlay .transition-handoff-held.transition-handoff-held{
+& {
+  opacity:1; animation:none!important; transform:none!important;
+  transition:opacity var(--motion-handoff,680ms) ease-in-out;
+}
+&.leaving { opacity:0; pointer-events:none; }}
 /* Plain covers use the same readiness boundary and a compositor fade. */
-.transition-handoff.transition-handoff:not(.page-visual-return) { opacity:1!important; transform:none!important; animation:none!important; transition:opacity var(--motion-handoff,180ms) var(--motion-ease-enter,ease-out)!important; }
-.transition-handoff.transition-handoff-leaving { pointer-events:none!important; }
+.transition-handoff{
+&.transition-handoff:not(.page-visual-return) { opacity:1!important; transform:none!important; animation:none!important; transition:opacity var(--motion-handoff,180ms) var(--motion-ease-enter,ease-out)!important; }
+&.transition-handoff-leaving { pointer-events:none!important; }}
 .transition-handoff.transition-handoff-leaving:not(.page-visual-return),
 .page-visual-return[data-kind="panel"].transition-handoff-leaving { opacity:0!important; }
-.reduce-motion .transition-handoff { transition:none!important; }
-@media (prefers-reduced-motion:reduce) { .transition-handoff { transition:none!important; } }
-body.reduce-motion .page-visual-return.page-visual-return.page-visual-return {
+.reduce-motion :is(.transition-handoff,.transition-handoff-held) { transition:none!important; }
+@media (prefers-reduced-motion:reduce) { :is(.transition-handoff,.transition-handoff-held) { transition:none!important; } }
+body.reduce-motion .page-visual-return{
+&.page-visual-return.page-visual-return {
   animation:none!important; transition:none!important; transform:none!important;
 }
-body.reduce-motion .page-visual-return.transition-handoff-leaving { opacity:0!important; }
+&.transition-handoff-leaving { opacity:0!important; }}
 @media (prefers-reduced-motion:reduce) {
-  .page-visual-return.page-visual-return.page-visual-return {
+.page-visual-return{
+  &.page-visual-return.page-visual-return {
     animation:none!important; transition:none!important; transform:none!important;
   }
-  .page-visual-return.transition-handoff-leaving { opacity:0!important; }
+  &.transition-handoff-leaving { opacity:0!important; }}
 }

@@ -7,7 +7,7 @@
 选人界面运行立绘为 `game/assets/portraits/full/wu.webp`，本页 ref-images 为同图副本。2026-10-18按老板指定的10-16原图补背后黑剑与固定剑带，保持1024×1536白底、交错站姿；来源及验证见[背剑修订记录](../evidence/2026-10-18-wu-back-sword/README.md)。画风方向见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)，接入要求见[视觉规范](../production/art/VISUAL-BIBLE.md)。
 
 - **身高与体态**：身高约170厘米，身形修长；大腿与小腿略显丰润，膝部和脚踝自然收束，皮肤白皙。
-- **脸与神态**：青蓝色眼睛，额前碎刘海露出双眼；带笑、自信，嘴角露小尖牙。
+- **脸与神态**：青蓝色眼睛；额发分开或向两侧梳理，额头明确露出，双眼与眉部可读。2026-10-23老板再次明确露额头；不只满足“两眼可见”，不画覆盖额头的厚刘海。带笑、自信，嘴角露小尖牙。
 - **头发与头饰**：银白色长发束成高马尾，蓝色缎带蝴蝶结系在马尾根部；黑蔷薇位于角色左侧头发边（画面右侧），靠近太阳穴上方。黑色圆框墨镜架在头顶，普通眼镜结构，两片深色圆镜片、细镜框与镜腿；镜片带灰白反光。2026-10-16 老板再次明确为墨镜，生图使用 `sunglasses`，护目镜加入人物专属负面。
 - **服装**：黑灰色露肩长袖短裙，领口、袖口和裙摆有层叠荷叶边，腰间黑色系带收腰；前后及两侧裙摆均止于膝上，大腿与膝盖清楚露出。层叠荷叶边只在短裙范围内形成不规则轮廓，不延长后摆，不带拖尾。本版没有可见蓝星纹内衬。
 - **腿脚与姿态**：裸腿，穿黑色短靴；双手自然垂落，双腿交错站立。
@@ -19,7 +19,7 @@
 
 ### 现行头饰与服装提示词（2026-10-16 明确墨镜及短裙边界）
 
-头饰正向：`black round sunglasses on head, thin black round frames, dark tinted lenses, sunglasses pushed up onto her hair`。双眼完整露出；墨镜架在头顶。
+发型正向：`silver-white high ponytail, swept-aside parted front hair, visibly exposed forehead, eyebrows and both eyes visible`。墨镜等配饰可按场景择用；需要墨镜时用 `black round sunglasses on head, thin black round frames, two separate dark round lenses connected by one nose bridge, sunglasses pushed up onto her hair`，普通眼镜结构，架在头顶，不变成护目镜、额冠或多片镜片。
 
 正向：`black charcoal off-shoulder long-sleeved short dress, layered ruffles at neckline and cuffs, black tied waist, short layered ruffled skirt, front, back and side hems all end above the knees, thighs and knees clearly visible, bare legs, black ankle boots`。
 
@@ -74,9 +74,11 @@
 - **腿脚**：裸腿；**黑色厚底踝靴**（翻边+拉链质感）。
 - **姿态**：右手叉腰（手背朝外）、正面偏三分视角、双腿微分站立、嚣张笑露虎牙。
 
-## 性格与背景（待老板提供）
+## 游戏剧情与人物关系（2026-10-25确认）
 
-- 性格：立绘神态可参考「嚣张、自信」，完整定稿文字待老板提供。
-- 背景故事：待老板提供。
-- 与其他角色的关系：待老板提供。
-- 口头禅 / 语言习惯：待老板提供。
+第一部共同背景、结尾与玩家知情范围见[第一部剧情设定](../production/design/STORY-PART-ONE.md)。以下是游戏设定，小说作为平行宇宙参考。
+
+- 经历：曾救出受困的星月，并与王诩护送她回到原居城市。污染爆发后，星月父母感染成为怪物，由无击杀。无与身份未明示的王诩随后帮助星月前往处理污染。
+- 家庭：前代无是现任无的母亲。母亲死亡的旧账见[白塔](baita.md)；第一部里，无暂时不知道白塔造成了母亲的死亡。
+- 关系：与星月一起行动；与常无欲关系很好。星月对父母之死感到悲痛、自责，不怨恨无。
+- 性格与口吻：现有外观神态可参考自信、带笑；完整性格、口头禅与语言习惯尚待确定。

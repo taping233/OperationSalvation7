@@ -1,4 +1,4 @@
-/* 基地轻门面：选档后首次进入才装载页面；共享态仍由 session / depart 单独持有。 */
+/* 基地轻门面：选档页空闲预载逻辑，进入时才挂载页面；共享态仍由 session / depart 单独持有。 */
 import { game, getActiveSlot, startNewGame } from '../run/game.session.js';
 import { captureBattleContext } from '../battle/battle-loader.js';
 import { cardPageOpen, setCardPageOpen } from './game.cardslib.common.js';
@@ -24,7 +24,6 @@ import '../../css/base-page-motion-v7.css';
 import '../../css/base-home-v7.css';
 import '../../css/departure-selected.css';
 import '../../css/roster-reference.css';
-import '../../css/base-shop-v3.css';
 import '../../css/base-archive-v3.css';
 import { deployPick } from './departure.selection-state.js';
 
@@ -34,7 +33,7 @@ let pageRequest = 0;
 let activeEntry = null;
 export let baseHubLoading = false;
 
-function loadHubModule() {
+export function preloadBaseHub() {
   if (!modulePromise) {
     const loading = import('./game.hub.runtime.js');
     const retryable = loading.then(page => { pageModule = page; return page; }).catch(error => {
@@ -90,7 +89,7 @@ function enterHub(method, args) {
     document.getElementById('overlay')?.hidden === entry.originOverlayHidden &&
     document.getElementById('ovBody') === entry.originBody && entry.originBody?.firstElementChild === entry.originRoot;
   const open = async () => {
-    const page = await loadHubModule();
+    const page = await preloadBaseHub();
     if (!isCurrent()) {
       if (activeEntry === entry) cancelPendingBaseHubOpen();
       return false;

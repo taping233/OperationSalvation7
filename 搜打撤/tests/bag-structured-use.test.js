@@ -40,7 +40,7 @@ let showBackpack;
 beforeEach(async () => {
   vi.resetModules();
   state.uid = 0;
-  state.saveGame = vi.fn();
+  state.saveGame = vi.fn(() => true);
   Object.assign(state.game ??= {}, {
     runActive: true, myClass: 'test', state: 'idle', battleActive: false, cap: 6,
     inventory: [], ownedCards: [], usedPocket: [], cardOrder: [], fragments: 0,
@@ -71,24 +71,24 @@ function useCard() {
   showBackpack(true);
   state.ui.acts.inspectStack({ name: potion.card.name, safe: '0' });
   expect(state.ui.acts.useDetailCard).toBeTypeOf('function');
-  state.ui.acts.useDetailCard();
+  return state.ui.acts.useDetailCard();
 }
 
 describe('背包结构化道具用法', () => {
-  it('基线：旧档复原药水仍按当前名称/描述复原最多两张', () => {
+  it('基线：旧档复原药水仍按当前名称/描述复原最多两张', async () => {
     state.game.ownedCards.push({ uid: 'old-potion', card: {
       id: 'cmtn6bge52qt', name: '复原药水', type: '道具', desc: '在背包中才能使用，复原最多两张卡牌',
     } });
     state.game.usedPocket.push({ card: { id: 'used-card', name: '消耗卡' }, count: 3 });
 
-    useCard();
+    await useCard();
 
     expect(state.game.ownedCards.map(entry => entry.card.name)).toEqual(['消耗卡', '消耗卡']);
     expect(state.game.usedPocket[0].count).toBe(1);
     expect(state.saveGame).toHaveBeenCalledOnce();
   });
 
-  it('稳定 id cmtn6bge52qt 按规则复原两张，忽略改名和改写描述', () => {
+  it('稳定 id cmtn6bge52qt 按规则复原两张，忽略改名和改写描述', async () => {
     const card = {
       id: 'cmtn6bge52qt', name: '改名后的道具', type: '道具', desc: '此文本没有复原规则。',
       rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 2 }] } },
@@ -96,7 +96,7 @@ describe('背包结构化道具用法', () => {
     state.game.ownedCards.push({ uid: 'potion-1', card });
     state.game.usedPocket.push({ card: { id: 'used-card', name: '消耗卡' }, count: 3 });
 
-    useCard();
+    await useCard();
 
     expect(state.game.ownedCards.map(entry => entry.card.name)).toEqual(['消耗卡', '消耗卡']);
     expect(state.game.ownedCards.map(entry => entry.uid)).toEqual(['new-1', 'new-2']);
@@ -105,7 +105,7 @@ describe('背包结构化道具用法', () => {
     expect(state.saveGame).toHaveBeenCalledOnce();
   });
 
-  it('复原时受背包空位限制，剩余卡继续留在消耗区', () => {
+  it('复原时同名牌共用一格，达到道具数量上限后其余牌留在消耗区', async () => {
     state.game.cap = 2;
     const overlayPages = [];
     state.ui.showOverlay = (_title, html) => { state.ui.el.overlay.hidden = false; overlayPages.push(html); };
@@ -115,13 +115,13 @@ describe('背包结构化道具用法', () => {
     );
     state.game.usedPocket.push({ card: { id: 'used-card', name: '消耗卡' }, count: 3 });
 
-    useCard();
+    await useCard();
 
-    expect(state.game.ownedCards.map(entry => entry.card.name)).toEqual(['占位卡', '消耗卡']);
-    expect(state.game.usedPocket[0].count).toBe(2);
-    expect(state.ui.log).toHaveBeenCalledWith(expect.stringContaining('剩 2 张留在消耗区'), 'ok');
+    expect(state.game.ownedCards.map(entry => entry.card.name)).toEqual(['占位卡', '消耗卡', '消耗卡']);
+    expect(state.game.usedPocket[0].count).toBe(1);
+    expect(state.ui.log).toHaveBeenCalledWith(expect.stringContaining('剩 1 张留在消耗区'), 'ok');
     expect(overlayPages.at(-1)).toContain('role="status"');
-    expect(overlayPages.at(-1)).toContain('剩 2 张留在消耗区');
+    expect(overlayPages.at(-1)).toContain('剩 1 张留在消耗区');
     expect(state.saveGame).toHaveBeenCalledOnce();
   });
 });

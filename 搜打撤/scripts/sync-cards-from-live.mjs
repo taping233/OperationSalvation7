@@ -41,8 +41,10 @@ const SYNC_JSON = path.join(ROOT, 'game', 'data', 'cards-sync.json');
 // 六文件重构（2026-09-22）后的拼接顺序：被依赖者在前；cards.js 是壳（引用其余全部）。
 const CARDS_MODULE_ORDER = [
   'cards.consts.js',       // 键/常量，无依赖
+  'card-rarity.js',        // rulesSlice 的稀有度/职业判定依赖
   'cards.catalog.js',      // resolveCardCatalog（依赖 DATA.cardsSync）
   'builtin-card-identities.js',
+  'hosted-rule-snapshot.js', // 共享历史/定版规则构造
   'builtin-card-previous-rules.js',
   'builtin-card-previous-variants.js',
   'builtin-equipment-previous-rules.js',
@@ -53,17 +55,27 @@ const CARDS_MODULE_ORDER = [
   'builtin-card-numeric-fields.js',
   'card-semantic-contract.js',
   'card-trigger-contract.js', // schema/capability 共用的纯时点契约
+  'card-compatibility.js', // 执行计划与掉落规则共用的历史兼容入口
   'card-execution-plan.js', // schema re-export 与 capability 共用的纯执行视图
+  'card-healing-program.js', // 自身效果 sources/keys 元数据，供 schema 消费
   'card-rules.schema.js',  // validateCardRules（依赖时点契约）
+  'elite-bestiary.js',     // cards.data 的精英图鉴依赖，读取同一份地图数据
   'cards.data.js',         // dataSlice（依赖 catalog）
   'cards.rules.js',        // rulesSlice（依赖 consts/Random/DATA/window.SDT）
+  'card-snapshot.js',     // 比较器函数先于使用它的迁移族
+  'cards.sync.persistence.js', // marker 确认助手，读取注入的沙箱 storage
+  'cards.sync.catalog.js',
+  'cards.sync.renames.js',
+  'cards.sync.numeric.js',
+  'cards.sync.rule-backfill.js', // 各族以工厂作用域隔离私有绑定，真源同浏览器
   'cards.sync.js',         // syncSlice（依赖 consts/Random/DATA/schema/window.SDT）
   'cards.js',              // 壳：SDT.Cards 存取层 + ensureTabletop 播种链
 ];
-// cards.js 的 ensureTabletop 引用这些 import bindings。每个迁移模块拥有私有
+// card-migrations.js 的有序清单引用这些 import bindings。每个迁移模块拥有私有
 // MARKER/definitions 等同名常量，故逐模块 IIFE 隔离；只把被 cards.js 调用的函数
 // 作为全局桥接导出，模拟 ESM import，而不是把模块源码直接拼进同一词法作用域。
 const MIGRATION_MODULES = [
+  ['pierce-arrow-revision.js', 'ensurePierceArrowRevision'],
   ['cards.sync.m1.js', 'ensureM1OnplayRules'],
   ['cards.sync.m2.js', 'ensureM2OnplayRules'],
   ['cards.sync.m3.js', 'ensureM3OnplayRules'],
@@ -78,7 +90,8 @@ const MIGRATION_MODULES = [
   ['rot-seed-revision.js', 'ensureRotSeedRevision'],
   ['cards.sync.builtin.js', 'ensureBuiltinExecutionRules'],
 ];
-const CAPABILITY_MODULE = ['card-rules.capability.js', 'inspectCardRuleCapability'];
+/** @type {[string, string[]]} */
+const CAPABILITY_MODULE = ['card-rules.capability.js', ['inspectCardRuleCapability', 'analyzeCardRules']];
 // 2026-09-29 沙箱失真修复：cards.sync.js 的 backfillStructuredRuleDefinitions 依赖
 // core/shared.js 的 clone（深拷贝唯一权威，2026-09-28 收敛）。剥 import 后沙箱缺该
 // 绑定 → 迁移链每轮在 normalizeForCompare 处 ReferenceError（stderr 刷「clone is not
@@ -88,7 +101,10 @@ const SHARED_CORE_FILE = path.join(ROOT, 'game', 'src', 'core', 'shared.js');
 // 2026-09-29 重构新增的共享模块：M 批回填骨架工厂 + 定版卡面刷新器。
 // 被 cards.js（ensureCanonicalFaceRefresh）与各 cards.sync.m*.js（createRuleBackfiller）
 // 以裸名引用，剥 import 后须进共享词法作用域（与 baseBody 同层，先于迁移 IIFE）。
-const SHARED_MODULES = ['cards.sync.backfiller.js', 'cards.sync.face-refresh.js'];
+const SHARED_MODULES = ['card-rule-definitions.js', 'cards.sync.backfiller.js', 'cards.sync.face-refresh.js'];
+// 清单初始化立即读取各迁移函数，必须在上面的 IIFE 桥接全部建立后求值。
+// 使用生产清单真源，工具不复制步骤或维护第二份运行次序。
+const MIGRATION_MANIFEST = 'card-migrations.js';
 
 function fail(message) { throw new Error(`[sync-cards] ${message}`); }
 function arg(name, argv) { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : undefined; }
@@ -138,7 +154,9 @@ function sourceCardLibrary() {
   const baseBody = CARDS_MODULE_ORDER.map(name => {
     const file = path.join(CARDS_DIR, name);
     if (!fs.existsSync(file)) fail(`卡库模块缺失: ${name}（六文件重构后的卡库真源在 game/src/cards/）`);
-    return stripModule(fs.readFileSync(file, 'utf8'), seenLines);
+    const source = stripModule(fs.readFileSync(file, 'utf8'), seenLines);
+    // 手动装配保留迁移模块使用的 ESM 导入别名。
+    return name === 'card-snapshot.js' ? `${source}\nconst sameSnapshot = sameCardSnapshot;` : source;
   });
   const migrationBody = MIGRATION_MODULES.map(([name, exportName]) => {
     const file = path.join(CARDS_DIR, name);
@@ -146,23 +164,28 @@ function sourceCardLibrary() {
     const isolated = stripModule(fs.readFileSync(file, 'utf8'), new Set());
     return `(() => {\n${isolated}\nglobalThis.${exportName} = ${exportName};\n})();`;
   });
-  const [capabilityName, capabilityExport] = CAPABILITY_MODULE;
+  const [capabilityName, capabilityExports] = CAPABILITY_MODULE;
   const capabilityFile = path.join(CARDS_DIR, capabilityName);
   if (!fs.existsSync(capabilityFile)) fail(`卡牌规则能力模块缺失: ${capabilityName}`);
   const capabilitySource = stripModule(fs.readFileSync(capabilityFile, 'utf8'), new Set());
-  const capabilityBody = `(() => {\n${capabilitySource}\nglobalThis.${capabilityExport} = ${capabilityExport};\n})();`;
+  const capabilityBody = `(() => {\n${capabilitySource}\n${capabilityExports.map(name => `globalThis.${name} = ${name};`).join('\n')}\n})();`;
   const sharedBody = SHARED_MODULES.map(name => {
     const file = path.join(CARDS_DIR, name);
     if (!fs.existsSync(file)) fail(`卡库共享模块缺失: ${name}`);
     return stripModule(fs.readFileSync(file, 'utf8'), seenLines);
   });
+  const manifestFile = path.join(CARDS_DIR, MIGRATION_MANIFEST);
+  if (!fs.existsSync(manifestFile)) fail(`卡库迁移清单缺失: ${MIGRATION_MANIFEST}`);
+  const manifestBody = stripModule(fs.readFileSync(manifestFile, 'utf8'), seenLines);
   // cards.js 壳初始化只声明/暴露 API；迁移仅在下方主动调用 ensureTabletop 时才运行。
   // 因此 capability bridge 必须在调用 ensureTabletop 前建立。
-  const body = [sharedCoreBody, ...baseBody, ...sharedBody, capabilityBody, ...migrationBody].join('\n;\n');
+  // M1/M2/M3 import onPlayDefinition as R; stripping imports must retain that binding.
+  const body = [sharedCoreBody, ...baseBody, ...sharedBody, 'const R = onPlayDefinition;', capabilityBody, ...migrationBody, manifestBody].join('\n;\n');
   const sandbox = {
     console,
     window: { SDT: { Icons: { img: n => `[[icon:${n}]]`, TYPE_ART: {} } } },
     DATA: { cardsSync: readSyncDoc() },
+    mapData: JSON.parse(fs.readFileSync(path.join(ROOT, 'game', 'data', 'map.json'), 'utf8')),
     // cards.js 的卡面渲染已外迁（cards.view.js，2026-09-11 批次 1）；拼接剥掉 import 后
     // 这两个名字会变成未定义引用，按「不渲染只取数据」的口径补空实现。
     cardHTML: () => '',

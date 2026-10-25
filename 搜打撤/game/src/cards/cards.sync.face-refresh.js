@@ -15,6 +15,7 @@ import { ensurePierceArrowRevision } from './pierce-arrow-revision.js';
 
 /** id → 允许重刷的卡面字段列表。 */
 const FACE_REFRESH_BY_ID = new Map([
+  ['tt3-double-shot', ['name']],    // 2026-10-24 老板定名三连射，旧档同步展示名。
   ['tt3-petal', ['heal', 'desc']],   // 2026-09-29 老板裁决 heal 2→3（覆盖 09-27 保留 heal:2 旧裁决）
   ['cc-demon', ['dmg', 'desc']],     // 2026-10-06 老板拍板 4→7 法伤（m2 rules 用 amountField:'dmg'，卡面刷新即生效）
   ['tt3sp-shadowbug', ['rarity']],   // 2026-10-21 反馈#1 影噬调史诗（TT10 marker 已置的老档不会重播，按 id 重刷稀有度）
@@ -23,6 +24,7 @@ const FACE_REFRESH_BY_ID = new Map([
 
 /** id → canonical 定版数组名（SDT.Cards 上的表）。 */
 const FACE_REFRESH_TABLE_BY_ID = new Map([
+  ['tt3-double-shot', 'TABLETOP10'],
   ['tt3-petal', 'TABLETOP11'],
   ['cc-demon', 'TABLETOP7'],
   ['tt3sp-shadowbug', 'TABLETOP10'],

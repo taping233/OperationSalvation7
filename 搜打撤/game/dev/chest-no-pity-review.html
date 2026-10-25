@@ -26,7 +26,6 @@
 <link rel="stylesheet" href="/css/page-expedition-hud.css">
 <link rel="stylesheet" href="/css/feedback-oct12.css">
 <link rel="stylesheet" href="/css/roster-departure-v2.css">
-<link rel="stylesheet" href="/css/pocket-strip.css">
 <link rel="stylesheet" href="/css/experience-loot.css">
 <link rel="stylesheet" href="/css/page-events.css">
 <link rel="stylesheet" href="/css/page-rewards-bag-help.css">
@@ -41,7 +40,7 @@
 <link rel="stylesheet" href="/css/battle-stage.css"><link rel="stylesheet" href="/css/chest-reward-overview.css?review=reward-card-flight-r1"><style>
 .fixture-controls{position:absolute;left:30px;top:20px;z-index:10000;background:#111e30;color:white;padding:10px 16px;font:14px sans-serif;display:flex;gap:12px;align-items:center}.fixture-controls button{font:inherit;min-height:32px;padding:6px 12px}.fixture-result{padding:50px;font-size:26px;color:#e5f1ff}body{background:#111c2c}
 </style><script>{const memory=new Map();Object.defineProperty(window,'localStorage',{value:{getItem:key=>memory.get(key)??null,setItem:(key,value)=>memory.set(key,String(value)),removeItem:key=>memory.delete(key)}});}</script></head><body>
-<div id="app"><main id="viewport"><div id="overlay" class="pick-veil" role="dialog" aria-modal="true" aria-labelledby="ovTitle"><nav class="fixture-controls">全古朴受控抽卡 / 隔离存档 <button id="small">小箱</button><button id="class">职业小箱</button><button id="medium">中箱</button><button id="large">大箱</button><button id="boss">首脑箱</button><button id="full">满包小箱</button><button id="room">腾出位置</button><button id="reload">重载奖励</button><button id="legacy">旧三选一</button></nav><div class="card wide chest"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div></main></div>
+<div id="app"><main id="viewport"><div id="overlay" class="pick-veil" role="dialog" aria-modal="true" aria-labelledby="ovTitle"><nav class="fixture-controls">全古朴受控抽卡 / 隔离存档 <button id="small">小箱</button><button id="class">职业小箱</button><button id="medium">中箱</button><button id="large">大箱</button><button id="multi">多组奖励</button><button id="boss">首脑箱</button><button id="full">满包小箱</button><button id="room">腾出位置</button><button id="reload">重载奖励</button><button id="legacy">旧三选一</button></nav><div class="card wide chest"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div></main></div>
 <script type="module">
 import '/src/ui/ui-scale.js';
 import SDT from '/src/core/sdt-facade.js';
@@ -67,9 +66,9 @@ const blob=URL.createObjectURL(new Blob([source],{type:'text/javascript'}));
 try{await import(/* @vite-ignore */ blob);}finally{URL.revokeObjectURL(blob);}
 body.addEventListener('click',event=>{const b=event.target.closest('[data-act]');if(b&&!b.disabled)acts[b.dataset.act]?.(b.dataset);});
 function scenario(mode){document.dispatchEvent(new Event('sdt-overlay-close'));full=mode==='full';game.ownedCards=[];game.coins=0;game.nodeChestRewards={};game.state='idle';randomCalls=0;drawCalls=0;
- SDT.Chests.open(game,[{kind:['medium','large','boss'].includes(mode)?mode:'small',isClass:mode==='class'}],()=>{body.innerHTML='<p class="fixture-result">已完成隔离奖励</p>';},{onCell:true});
+ SDT.Chests.open(game,mode==='multi'?[{kind:'medium'},{kind:'small'}]:[{kind:['medium','large','boss'].includes(mode)?mode:'small',isClass:mode==='class'}],()=>{body.innerHTML='<p class="fixture-result">已完成隔离奖励</p>';},{onCell:true});
  if(mode==='legacy'){const save=SDT.Chests.serialize(game);for(const reward of [save.current,save.queue[0].reward])Object.assign(reward,{cards,claimMode:'one',choiceCount:3,rewardStage:'cards'});save.screen='cards';SDT.Chests.restore(game,save,()=>{});}}
-for(const mode of ['small','class','medium','large','boss','full','legacy'])document.getElementById(mode).onclick=()=>scenario(mode);
+for(const mode of ['small','class','medium','large','boss','full','legacy','multi'])document.getElementById(mode).onclick=()=>scenario(mode);
 document.getElementById('room').onclick=()=>{full=false;SDT.Chests.resume();};
 document.getElementById('reload').onclick=()=>{const save=JSON.parse(JSON.stringify(SDT.Chests.serialize(game)));SDT.Chests.restore(game,save,()=>{});};
 window.smallChestReview={game,counts:()=>({randomCalls,drawCalls}),snapshot:()=>SDT.Chests.serialize(game)};

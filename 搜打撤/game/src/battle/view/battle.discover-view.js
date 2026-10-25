@@ -1,3 +1,4 @@
+import { discoveryActionsHTML } from '../../ui/discovery-selection.js';
 import { esc, escAttr } from '../../core/shared.js';
 import '../../../css/battle-discover.css';
 
@@ -7,10 +8,10 @@ export function battleDiscoverBodyHTML({ candidates, cardHTML, action, remaining
     <div class="battle-discover-slot"><button type="button" class="bt-card battle-discover-card" data-act="btDiscover" data-i="${index}" data-discover-page="${escAttr(pageToken)}" data-cancel="false"
       aria-label="${escAttr([card.name, action, sourceNote, infusionNote, equipmentNote].filter(Boolean).join('，'))}">
       ${cardHTML(card, 'lg')}
-    </button>${infusionNote ? `<span class="battle-discover-critical">${esc(infusionNote.startsWith('未注能') ? '未注能' : infusionNote)}</span>` : ''}<button type="button" class="battle-card-inspect" data-act="btDecisionInspect" data-i="${index}" data-cancel="false" aria-label="查看 ${escAttr(card.name)} 详情">⌕</button></div>`).join('');
+    </button>${infusionNote ? `<span class="battle-discover-critical">${esc(infusionNote.startsWith('未注能') ? '未注能' : infusionNote)}</span>` : ''}</div>`).join('');
   const context = [action, source, note, ...modifiers].filter(Boolean).join('，');
-  return `<p class="ov-stats battle-discover-summary"><span class="battle-discover-progress" aria-label="还需发现 ${remaining} 次">${remaining}</span></p>
-    <section class="battle-discover-panel" data-battle-discover data-discover-page="${escAttr(pageToken)}" aria-label="${escAttr(context)}">
-      <div class="bt-hand battle-discover-options" role="group" aria-label="${escAttr(action)}">${options}</div>
-    </section>`;
+  return `<p class="ov-stats battle-discover-summary"><strong class="battle-discover-action">${esc(action)}</strong></p>
+    <section class="battle-discover-panel" data-battle-discover data-discover-page="${escAttr(pageToken)}" aria-label="${escAttr(context)}，还需发现 ${remaining} 次">
+      <div class="bt-hand battle-discover-options" data-selection-scroll role="group" aria-label="${escAttr(action)}">${options}</div>
+    </section>${discoveryActionsHTML({ confirmAct:'btDiscoverConfirm', cancelAct:'btDiscoverCancel' })}`;
 }

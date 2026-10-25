@@ -1,10 +1,10 @@
-import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import postcss from 'postcss';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { pageHTML } from '../game/src/hub/game.bag.view2.js';
+import { readCssSource } from './helpers/css-source.js';
 
-const css = postcss.parse(readFileSync(resolve('game/css/expedition-inventory.css'), 'utf8'));
+const css = postcss.parse(readCssSource(resolve('game/css/expedition-inventory.css'), 'utf8'));
 const page = 'body #overlay .card.bag-page';
 const view = `${page} .bag-v2`;
 const zoom = 'body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom';

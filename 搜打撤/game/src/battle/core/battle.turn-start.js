@@ -1,3 +1,4 @@
+import { repeatsLegacyTurnStart } from '../../cards/card-legacy-battle-policy.js';
 import { esc } from '../../core/shared.js';
 import { withBlessingChoices } from '../effects/random-blessings.js';
 import { decayEffectiveCardCost } from '../effects/battle.card-cost.js';
@@ -17,7 +18,7 @@ export function createBattleTurnStart({ throwIfActionCancelled, readState, alive
     const formLike = card.type === '能力卡' || /形态/.test(String(card.name || ''));
     items.forEach(it => {
       const dur = +(((String(it.text).match(/持续\s*(\d+)\s*回合/)) || [])[1] || 0) || descDur;
-      let repeat = card.type === '装备' || card.id === 'cmtn7err0a7' || it.each || formLike;
+      let repeat = card.type === '装备' || repeatsLegacyTurnStart(card) || it.each || formLike;
       let left = null;
       if (!repeat && dur > 0) { repeat = true; left = dur; }   // 持续 N 回合 = 重复 N 次
       readState().delayed.push({ text: withBlessingChoices(it.text, card.desc), cardName: card.name, repeat, left, targetIndex: foeIdx(target) });
@@ -79,9 +80,16 @@ export function createBattleTurnStart({ throwIfActionCancelled, readState, alive
       if (q.special === 'triggerOps' || q.special === 'choiceOps') {
         // 到期标记剥离后复用同一合成器与沉默门，避免继承原卡无关字段或再次调度自身。
         const ops = q.ops.map(op => { const rest = { ...op }; delete rest.schedule; return rest; });
-        const synthetic = createCardRuleExecution(q.srcCard || { name: q.cardName }, ops);
+        // Bag operations keep their own supported keys and ignore-silence semantics.
+        // A scheduled heal duration belongs to this job, not an onPlay heal declaration.
+        const synthetic = q.srcCard?.rules?.bag?.use
+          ? { ...q.srcCard, rules: { version: 1, bag: { use: ops } } }
+          : createCardRuleExecution(q.srcCard || { name: q.cardName }, ops);
         await resolveCardWithFeedback(synthetic, delayedTarget, false, 0, 'm2-scheduled', signal);
-        if (q.special === 'choiceOps' && q.repeat) keep.push(q);
+        if (q.repeat) {
+          if (typeof q.left === 'number') { q.left -= 1; if (q.left > 0) keep.push(q); }
+          else keep.push(q);
+        }
         continue;
       }
       // 神秘药水已在本道具入口消费；专用任务兑现产卡，不属于受沉默限制的法术技能。

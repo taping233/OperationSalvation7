@@ -24,7 +24,7 @@ const normalHosted = { mode: 'normal', hostedExecutionVerified: true };
 
 describe('damage preview trust boundary', () => {
   it.each([
-    ['spellPowerMul', 2], ['perInfusedInHand', 2], ['infuseBonus', 3], ['perTargetPrice', true],
+    ['spellPowerMul', NaN], ['perInfusedInHand', '2'], ['infuseBonus', Infinity], ['perTargetPrice', true],
     ['cond', { anyCurse: true }], ['bonus', { amount: 2 }], ['range', [4, 6]],
     ['lifesteal', true], ['graveyard', { type: '法术', perCard: 1 }],
     ['recast', { on: 'kill', times: 1 }], ['schedule', 'nextTurn'], ['pick', 'new'],
@@ -81,8 +81,26 @@ describe('damage preview trust boundary', () => {
     expect(result.unknownEffects.join('')).toContain('后续触发未计入');
   });
 
-  it.each(['bleedAmp', 'vsFreezeBonus', 'specialLifecycle'])('does not ignore hitFoe-only context %s', key => {
+  it.each(['vsFreezeBonus', 'specialLifecycle'])('does not ignore incomplete hitFoe-only context %s', key => {
     expect(preview(structured(), { context: { modifiers: { [key]: true } } })).toMatchObject({ confidence: 'unknown', damage: null });
+  });
+
+  it.each([
+    [{ spellPowerMul: 2 }, { spellPower: 2 }, 9],
+    [{ spellPowerMul: 0 }, { spellPower: 2 }, 5],
+    [{ perInfusedInHand: 2 }, { context: { handInfuseCount: 3 } }, 11],
+    [{ infuseBonus: 3 }, { context: { selectedFuelUids: ['fuel'] } }, 8],
+    [{ infuseBonus: 3 }, {}, 5],
+  ])('computes supported fixed damage parameters %#', (operation, options, total) => {
+    expect(preview(structured([damage(operation)]), options)).toMatchObject({ confidence: 'exact', damage: { total } });
+  });
+
+  it('uses complete bleed and frozen-target context without mutating the target', () => {
+    const card = { ...structured(), type: '武术', dmgType: 'attack' };
+    expect(preview(card, { status: { bleed: 2 }, context: { modifiers: { bleedAmp: true } } }))
+      .toMatchObject({ confidence: 'exact', damage: { total: 13 } });
+    expect(preview(structured(), { status: { freeze: 1 }, context: { modifiers: { vsFreezeBonus: true }, freezeDamageBonus: 3 } }))
+      .toMatchObject({ confidence: 'exact', damage: { total: 8 } });
   });
 
   it('supports only the verified ordinary-battle 奥术弹 identity and direct damage', () => {

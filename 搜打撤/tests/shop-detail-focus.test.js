@@ -34,7 +34,7 @@ function shop({ save = () => true, stored = false, coins = 20, canReceive = () =
 afterEach(() => { document.body.replaceChildren(); vi.useRealTimers(); vi.restoreAllMocks(); configureShopRuntime({ openBag: undefined }); });
 
 describe('shop detail covered-region focus isolation', () => {
-  it('keeps focus in the top detail dialog, excluding shelf, merchant and parent navigation', () => {
+  it('keeps focus in the top detail dialog, excluding shelf, merchant and parent navigation', async () => {
     const { acts, host, UI } = shop({ renderCard: () => '<input type="checkbox" aria-label="灵能召唤">' });
     acts.shopInspect({ i: 0 });
     const focusables = overlayMethods._overlayFocusable.call(UI);
@@ -46,7 +46,7 @@ describe('shop detail covered-region focus isolation', () => {
     expect(focusables).toContain(host.querySelector('.shop-detail [data-act=buyCard]'));
   });
 
-  it('restores shelf accessibility and the original preview after reduced-motion close', () => {
+  it('restores shelf accessibility and the original preview after reduced-motion close', async () => {
     const { acts, host, SDT, UI } = shop();
     SDT.Motion = { reduceMotion: () => true };
     acts.shopInspect({ i: 1 });
@@ -60,7 +60,7 @@ describe('shop detail covered-region focus isolation', () => {
     expect(overlayMethods._overlayFocusable.call(UI)).toContain(host.querySelector('[data-act=closeShop]'));
   });
 
-  it('keeps the shade background blocked through exit and ignores a cancelled close on quick reopen', () => {
+  it('keeps the shade background blocked through exit and ignores a cancelled close on quick reopen', async () => {
     vi.useFakeTimers();
     const { acts, host } = shop();
     acts.shopInspect({ i: 0 });
@@ -76,7 +76,7 @@ describe('shop detail covered-region focus isolation', () => {
     expect(document.activeElement).toBe(host.querySelector('.shop-preview[data-i="1"]'));
   });
 
-  it('preserves a preexisting inert merchant across repeated opens', () => {
+  it('preserves a preexisting inert merchant across repeated opens', async () => {
     const { acts, host, SDT } = shop();
     SDT.Motion = { reduceMotion: () => true };
     const merchant = host.querySelector('.shop-merchant');
@@ -88,7 +88,7 @@ describe('shop detail covered-region focus isolation', () => {
     expect(host.querySelector('.shop-board').hasAttribute('inert')).toBe(false);
   });
 
-  it('reapplies covered-region isolation when returning from help redraws an open detail', () => {
+  it('reapplies covered-region isolation when returning from help redraws an open detail', async () => {
     const { acts, host, UI } = shop();
     acts.shopInspect({ i: 0 });
     const registration = UI.registerHelp.mock.calls.at(-1);
@@ -98,13 +98,13 @@ describe('shop detail covered-region focus isolation', () => {
     expect(host.querySelector('.shop-board').hasAttribute('inert')).toBe(true);
     expect(overlayMethods._overlayFocusable.call(UI).some(node => node.closest('.shop-merchant'))).toBe(false);
   });
-  it('releases owned inert on leaving but preserves preexisting inert', () => {
+  it('releases owned inert on leaving but preserves preexisting inert', async () => {
     const { acts, host } = shop();
     const board = host.querySelector('.shop-board');
     const merchant = host.querySelector('.shop-merchant');
     merchant.setAttribute('inert', '');
     acts.shopInspect({ i: 0 });
-    acts.closeShop();
+    await acts.closeShop();
     expect(board.hasAttribute('inert')).toBe(false);
     expect(merchant.hasAttribute('inert')).toBe(true);
   });
@@ -128,11 +128,12 @@ describe('shop detail covered-region focus isolation', () => {
     expect(host.querySelector('.shop-detail').hidden).toBe(false);
   });
 
-  it('keeps purchased detail isolated and continues browsing without charging twice', () => {
+  it('keeps purchased detail isolated and continues browsing without charging twice', async () => {
     const { acts, host, SDT, game, saveGame } = shop();
     SDT.Motion = { reduceMotion: () => true };
     acts.shopInspect({ i: 0 });
     host.querySelector('.shop-detail-buy').click();
+    for (let n=0;n<10;n++) await Promise.resolve();
     expect(game.coins).toBe(15);
     expect(saveGame).toHaveBeenCalledTimes(1);
     expect(host.querySelector('.shop-board').hasAttribute('inert')).toBe(true);
@@ -140,16 +141,16 @@ describe('shop detail covered-region focus isolation', () => {
     host.querySelector('.shop-detail-done').click();
     expect(document.activeElement).toBe(host.querySelector('.shop-preview[data-i="0"]'));
     expect(host.querySelector('.shop-board').hasAttribute('inert')).toBe(false);
-    acts.buyCard({ i: 0 }); // A stale buy callback still cannot repurchase sold stock.
+    await acts.buyCard({ i: 0 }); // A stale buy callback still cannot repurchase sold stock.
     expect(game.coins).toBe(15);
     expect(saveGame).toHaveBeenCalledTimes(1);
   });
 
-  it('returns focus to detail close when replenishment becomes unaffordable', () => {
+  it('returns focus to detail close when replenishment becomes unaffordable', async () => {
     const { acts, host, game, SDT } = shop({ coins: 1 });
     SDT.Motion = { reduceMotion: () => true };
     acts.shopInspect({ i: 1 });
-    const buy = host.querySelector('.shop-detail-buy'); buy.focus(); buy.click();
+    const buy = host.querySelector('.shop-detail-buy'); buy.focus(); buy.click(); for (let n=0;n<10;n++) await Promise.resolve();
     expect(game.coins).toBe(0);
     expect(host.querySelector('.shop-detail-buy').disabled).toBe(true);
     expect(document.activeElement).toBe(host.querySelector('.shop-detail-close'));
@@ -158,14 +159,14 @@ describe('shop detail covered-region focus isolation', () => {
     expect(document.activeElement).toBe(host.querySelector('.shop-preview[data-i="1"]'));
   });
 
-  it('preserves an available buy action and does not steal visible header focus', () => {
+  it('preserves an available buy action and does not steal visible header focus', async () => {
     const { acts, host, game } = shop({ coins: 3 });
     acts.shopInspect({ i: 1 });
-    const buy = host.querySelector('.shop-detail-buy'); buy.focus(); buy.click();
+    const buy = host.querySelector('.shop-detail-buy'); buy.focus(); buy.click(); for (let n=0;n<10;n++) await Promise.resolve();
     expect(game.coins).toBe(2);
     expect(document.activeElement).toBe(host.querySelector('.shop-detail-buy'));
     const help = host.querySelector('[data-act=help]'); help.focus();
-    acts.buySha({ i: 1 });
+    await acts.buySha({ i: 1 });
     expect(document.activeElement).toBe(help);
   });
 

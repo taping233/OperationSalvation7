@@ -1,22 +1,14 @@
 // 成就页内部反馈独立于整页入场；不修改筛选结果、奖章状态或奖励。
 import { rect } from './ui-scale.js';
 import { trackLinkedAnimation } from './home-linked-interactions.js';
-import { motionTiming, motionEasing } from './motion-presets.js';
-
-const reduced = () => document.body.classList.contains('reduce-motion')
-  || !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+import { motionTiming, motionEasing, motionReduced as reduced } from './motion-presets.js';
 
 export function createAchievementMotion(root) {
   const scroll = /** @type {HTMLElement} */ (root.querySelector('.ag-scroll'));
   const grid = /** @type {HTMLElement} */ (root.querySelector('.ag-grid'));
   const empty = /** @type {HTMLElement} */ (root.querySelector('.ag-empty'));
-  const detail = /** @type {HTMLElement} */ (root.querySelector('.ag-detail'));
-  const backdrop = /** @type {HTMLElement} */ (root.querySelector('.ag-detail-backdrop'));
   let listAnimation = null;
-  let detailAnimations = [];
-  let detailEpoch = 0;
   let source = null;
-  let detailOrigin = { x: 0, y: 0 };
   let tileAnimations = [];
   let categoryAnimation = null;
   let categoryMarker = null;
@@ -27,10 +19,6 @@ export function createAchievementMotion(root) {
   const animate = (el, frames, options) => {
     if (!el?.isConnected || reduced() || typeof el.animate !== 'function') return null;
     return trackLinkedAnimation(el.animate(frames, { easing: motionEasing.enter, fill: 'backwards', ...options }));
-  };
-  const cancelDetail = () => {
-    detailAnimations.forEach(animation => animation?.cancel());
-    detailAnimations = [];
   };
   const settleEntry = () => {
     /** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-surface-role]')).forEach(el => {
@@ -78,7 +66,7 @@ export function createAchievementMotion(root) {
     categoryNav.appendChild(marker);
     categoryMarker = marker;
     categoryAnimation = animate(marker, [
-      { transform: `translate(${oldRect.left - newRect.left}px,${oldRect.top - newRect.top}px) scale(${oldRect.width / newRect.width},${oldRect.height / newRect.height})`, opacity: .7 },
+      { transform: `translate(${oldRect.left - newRect.left}px,${oldRect.top - newRect.top}px)`, opacity: .7 },
       { transform: 'none', opacity: 1 },
     ], { duration: motionTiming.change });
     if (categoryAnimation) categoryAnimation.finished.then(() => marker.remove()).catch(() => marker.remove());
@@ -128,49 +116,14 @@ export function createAchievementMotion(root) {
     scroll.scrollTop += rect(target).top - rect(scroll).top - (target === anchor.tile ? anchor.offset : 0);
   };
   const openDetail = tile => {
-    settleEntry();
-    cancelTiles();
-    listAnimation?.cancel();
-    detailEpoch++;
-    cancelDetail();
     source?.classList.remove('is-detail-source');
     source = tile;
     source.classList.add('is-detail-source');
-    const art = /** @type {HTMLElement} */ (detail.querySelector('.ag-detail-art'));
-    const from = rect(/** @type {HTMLElement} */ (tile.querySelector('.ag-emblem')) || tile);
-    const to = rect(art);
-    detailOrigin = {
-      x: Math.max(-24, Math.min(24, (from.left + from.width / 2 - to.left - to.width / 2) * .12)),
-      y: Math.max(-12, Math.min(12, (from.top + from.height / 2 - to.top - to.height / 2) * .08)),
-    };
-    detailAnimations = [
-      animate(backdrop, [{ opacity: 0 }, { opacity: 1 }], { duration: motionTiming.feedback }),
-      animate(detail, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter }),
-      animate(art, [{ opacity: 0, transform: `translate(${detailOrigin.x}px,${detailOrigin.y}px) scale(.95)` }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter }),
-      animate(/** @type {HTMLElement} */ (detail.querySelector('.ag-detail-copy')), [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter, delay: motionTiming.stagger }),
-    ];
   };
   const closeDetail = finish => {
-    const epoch = ++detailEpoch;
-    // 快速关闭从当前进度收回，不能先取消入场再跳到完全展开状态。
-    const current = { opacity: getComputedStyle(detail).opacity, transform: getComputedStyle(detail).transform };
-    const shadeOpacity = getComputedStyle(backdrop).opacity;
-    const art = /** @type {HTMLElement} */ (detail.querySelector('.ag-detail-art'));
-    const artCurrent = { opacity: getComputedStyle(art).opacity, transform: getComputedStyle(art).transform };
-    cancelDetail();
-    const animation = animate(detail, [current, { opacity: 0, transform: 'translateY(5px)' }], { duration: motionTiming.exit, easing: motionEasing.exit, fill: 'forwards' });
-    const shade = animate(backdrop, [{ opacity: shadeOpacity }, { opacity: 0 }], { duration: motionTiming.exit, easing: motionEasing.exit, fill: 'forwards' });
-    const medal = animate(art, [artCurrent, { opacity: 0, transform: `translate(${detailOrigin.x * .5}px,${detailOrigin.y * .5}px) scale(.98)` }], { duration: motionTiming.exit, easing: motionEasing.exit, fill: 'forwards' });
-    detailAnimations = [animation, shade, medal];
-    const complete = () => {
-      if (epoch !== detailEpoch) return;
-      finish();
-      source?.classList.remove('is-detail-source');
-      source = null;
-      cancelDetail();
-    };
-    if (!animation) complete();
-    else animation.finished.then(complete).catch(() => {});
+    source?.classList.remove('is-detail-source');
+    source = null;
+    finish();
   };
   const enterGallery = () => {
     revealTiles(true);

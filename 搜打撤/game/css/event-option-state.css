@@ -1,7 +1,8 @@
 /* Risk remains readable before hover and in the existing selection summary. */
-#overlay .card.page .pg.node-pg.event-scene .evt-opt[data-option-state="lethal"] {
+#overlay .card.page .pg.node-pg.event-scene .evt-opt{
+&[data-option-state="lethal"] {
   outline: 2px solid #f0a8a1;
   outline-offset: -2px;
 }
-#overlay .card.page .pg.node-pg.event-scene .evt-opt[data-option-state="lethal"] > span { color: #ffd1c9; }
-#overlay .card.page .pg.node-pg.event-scene .evt-opt[data-option-state="limited"] > span { color: #e2c593; }
+&[data-option-state="lethal"] > span { color: #ffd1c9; }
+&[data-option-state="limited"] > span { color: #e2c593; }}

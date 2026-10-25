@@ -6,7 +6,7 @@ export type ShopSlot = { card?: RunCard; price:number; sold?:boolean; free?:bool
 export type ShopQuote = { slot:ShopSlot; card?:RunCard; price:number; free?:boolean; replenish:boolean };
 export type ShopState = { coins:number; ownedCards:RunOwnedCard[]; shopStock:ShopSlot[] };
 export type TradeRejected = { ok:false; reason:string };
-export type TradeAccepted = { ok:true; entry:RunOwnedCard; price:number; saved:boolean };
+export type TradeAccepted = { ok:true; entry:RunOwnedCard; price:number; saved:boolean; bonusReward?:object };
 export type TradeResult = TradeRejected | TradeAccepted;
 export type ShopPorts = {
   state:ShopState;
@@ -15,6 +15,7 @@ export type ShopPorts = {
   isSellable:(card:RunCard) => boolean;
   sellPrice:(card:RunCard) => number;
   save:() => unknown;
+  prepareAcquiredReward?:(card:RunCard) => { snapshot:object; commit:() => void; current?:() => boolean } | null;
 };
 export type BuyInput = { index:number; quote:ShopQuote; replenish?:boolean; current?:() => boolean };
 export type SellInput = { uid:string; quote:{ owned:RunOwnedCard; card:RunCard }; current?:() => boolean };

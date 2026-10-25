@@ -89,7 +89,7 @@ describe('背包单 render 派生', () => {
     expect(snapshot.orderIndex.get('法术')).toBe(0);
     expect(bagCardOrderIndex(['a', 'b', 'a']).get('a')).toBe(0);
     expect(syncBagCardOrder([], [], ['stale'])).toEqual([]);
-    expect(bagUseStatus(crystal, 'missing', { ...livePorts(game, 1), renderState:snapshot }).reason).toBe('');
+    expect(bagUseStatus(crystal, 'missing', { ...livePorts(game, 1), renderState:snapshot })).toEqual(bagUseStatus(crystal, 'missing', livePorts(game, 1)));
     expect(bagUseStatus(crystal, 'duplicate', { ...livePorts(game, 1), renderState:snapshot }))
       .toEqual(bagUseStatus(crystal, 'duplicate', livePorts(game, 1)));
   });

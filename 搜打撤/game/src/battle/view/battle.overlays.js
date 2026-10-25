@@ -27,14 +27,15 @@ const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R })
     const need = Math.min(deckSelection.need, deckSelection.cards.length);
     const isStartEquip = (card) => card && card.type === '装备' && /对战开始时/.test(String(card.desc || ''));
     const cardsHTML = deckSelection.cards.length
-      ? deckSelection.cards.map(entry => {
+      ? deckSelection.cards.map((entry, index) => {
           // 「对战开始时」装备已并入套牌池（2026-09-16 定版）：编入即生效，挂角标提示
           const startEquip = isStartEquip(entry.card);
           return `
-          <button type="button" class="bt-card${selected.includes(entry.uid) ? ' sel' : ''}" data-act="bossSel" data-uid="${entry.uid}" aria-label="编入或移出 ${escAttr(entry.card.name)}" aria-pressed="${selected.includes(entry.uid)}" title="点击 编入/移出 牌库${startEquip ? '——「对战开始时」装备：编入即在本场开战自动生效' : ''}">
+          <div class="battle-select-slot"><button type="button" class="bt-card${selected.includes(entry.uid) ? ' sel' : ''}" data-act="bossSel" data-uid="${escAttr(entry.uid)}" aria-label="编入或移出 ${escAttr(entry.card.name)}" aria-pressed="${selected.includes(entry.uid)}" title="点击 编入/移出 牌库${startEquip ? '——「对战开始时」装备：编入即在本场开战自动生效' : ''}">
             ${SDT.Cards.cardHTML(entry.card, 'sm')}
-            ${startEquip ? '<span class="bt-count">[[icon:bolt]] 开战被动 · 编入即生效</span>' : ''}
-          </button>`;
+            <span class="battle-card-action boss-selection-state">${selected.includes(entry.uid) ? '已编入' : '点击编入'}</span>
+            ${startEquip ? '<span class="boss-start-note">开战自动装配 · 占装备栏</span>' : ''}
+          </button><button type="button" class="battle-card-inspect" data-act="btDecisionInspect" data-i="${index}" aria-label="查看 ${escAttr(entry.card.name)} 详情">查看详情</button></div>`;
         }).join('')
       : '<p class="ov-empty">背包里没有可编入的非道具卡牌……</p>';
     const boss = deckSelection.boss;
@@ -47,6 +48,7 @@ const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R })
         const on = selected.includes(button.dataset.uid);
         button.classList.toggle('sel', on);
         button.setAttribute('aria-pressed', String(on));
+        button.querySelector('.boss-selection-state').textContent = on ? '已编入' : '点击编入';
       }
       /** @type {BattleElement} */ (mounted.querySelector('.boss-formation-progress strong')).innerHTML = `${selected.length}<small> / ${need}</small>`;
       const confirm = /** @type {HTMLButtonElement} */ (mounted.querySelector('[data-act="bossGo"]'));
@@ -61,12 +63,13 @@ const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R })
       ${deckSelection.cards.length < deckSelection.need ? `<p class="ov-note">携带 ${deckSelection.cards.length} 张可编卡牌，全部选入后即可迎战。</p>` : ''}
       <details class="boss-formation-rules"><summary>查看编组与抽牌规则</summary><p>开局抽 ${R().battleStartDraw} 张 · 每回合抽 ${R().battleTurnDraw} 张 · 每回合 ${R().battleEnergy} 能量。</p><p>道具、资源、事件与初始攻击不可选入。固定初始攻击不足部分由本场补给，不占背包格。「对战开始时」装备编入即生效。</p>${deckSelection.max > R().bossDeckSize ? `<p>混沌之眼：可编牌库上限增加 5，最多选择 ${deckSelection.max} 张。</p>` : ''}</details>
       <h3 class="set-h">携带卡牌 <span class="bs-count">点击编入 / 再点移出</span></h3>
-      <div class="bt-hand">${cardsHTML}</div>
+      <div class="bt-hand boss-formation-grid" data-selection-scroll>${cardsHTML}</div>
       <div class="ov-btns">
         <button class="ov-btn ok" data-act="bossGo" ${ready ? '' : 'disabled'}>${ready ? `[[icon:swords]] 开始战斗（牌库 ${selected.length + deckSelection.starterCount} 张）` : `还需选择 ${need - selected.length} 张…`}</button>
         <button class="ov-btn" data-act="bossCancel">↩ 放弃挑战</button>
       </div>`, true, snapshot);
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'bossSel', data => selectDeckCard(data.uid));
+    bindBattleDecisionInspection({ UI, getSnapshot, snapshot, cards:deckSelection.cards.map(entry => entry.card) });
     const formation = /** @type {BattleElement} */ (UI.el.ovBody.querySelector('[data-decision-kind="formation"]'));
     if (formation) formation._formationPoolKey = poolKey;
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'bossGo', confirmDeck);
@@ -77,7 +80,7 @@ const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R })
   function renderGrave(snapshot) {
     const cards = consumedPileUids(snapshot).map(findCard).filter(Boolean);
     const { html, stacks } = battlePileBodyHTML({ cards, cardHTML:SDT.Cards.cardHTML, kind:'grave', isBoss:!!snapshot.opts.isBoss });
-    showBattleDecision(`[[icon:skull]] ${BATTLE_CONSUMED_LABEL}`, html, true, snapshot);
+    showBattleDecision(`[[icon:consumed-pile]] ${BATTLE_CONSUMED_LABEL}`, html, true, snapshot);
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btGraveBack', closeGrave);
     bindBattleDecisionInspection({ UI, getSnapshot, cards:stacks.map(stack => stack.card), snapshot });
     UI.refresh(SDT.game);
@@ -87,7 +90,7 @@ const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R })
   function renderDeckPileView(snapshot) {
     const cards = snapshot.drawPile.map(findCard).filter(Boolean);
     const { html, stacks } = battlePileBodyHTML({ cards, cardHTML:SDT.Cards.cardHTML, kind:'deck', isBoss:!!snapshot.opts.isBoss });
-    showBattleDecision('[[icon:cards]] 剩余牌库', html, true, snapshot);
+    showBattleDecision('[[icon:draw-pile]] 剩余牌库', html, true, snapshot);
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDeckBack', closeDeckView);
     bindBattleDecisionInspection({ UI, getSnapshot, cards:stacks.map(stack => stack.card), snapshot });
     UI.refresh(SDT.game);
@@ -131,7 +134,7 @@ const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R })
             title="${escAttr(`将「${st.card.name}」×${st.uids.length} 整组存入安全格（撤离失败时安全运回）${fits ? '' : '——安全格空位不足'}`)}">
             ${SDT.Cards.cardHTML(st.card, 'sm')}
             ${st.uids.length > 1 ? `<span class="bt-count">×${st.uids.length}</span>` : ''}
-            <span class="bt-count" style="top:auto;bottom:3px">[[icon:lock]] 存入</span>
+            <span class="bt-count" style="top:auto;bottom:3px">[[icon:safe-slot]] 存入</span>
           </button><button type="button" class="battle-bag-inspect" data-act="btInspectBag" data-i="${stacks.length + i}">查看规则</button></div>`;
         }).join('')
       : '<p class="ov-empty">背包里没有可存入的卡牌。</p>';
@@ -158,9 +161,9 @@ const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R })
       if (!group.length) return;
       const name = group[0].card.name;
       const free = Math.max(0, ((g.safeCap && g.safeCap()) || 0) - ((g.safeUsed && g.safeUsed()) || 0));
-      if (group.length > free) { UI.log(`[[icon:lock]] 安全格空位不足（${free} 格）——存不进「${esc(name)}」×${group.length}`, 'warn'); SDT.Sound.sfx('deny'); return; }
+      if (group.length > free) { UI.log(`[[icon:safe-slot]] 安全格空位不足（${free} 格）——存不进「${esc(name)}」×${group.length}`, 'warn'); SDT.Sound.sfx('deny'); return; }
       group.forEach(o => { o.safe = true; });
-      UI.log(`[[icon:lock]] 【${esc(name)}】×${group.length} 已存入安全格（撤离失败时安全运回）`, 'sys');
+      UI.log(`[[icon:safe-slot]] 【${esc(name)}】×${group.length} 已存入安全格（撤离失败时安全运回）`, 'sys');
       if (g.saveGame) g.saveGame();
       renderBattleBag(getSnapshot());
     });

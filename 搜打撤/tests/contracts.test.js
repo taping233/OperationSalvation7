@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
@@ -95,15 +97,15 @@ describe('规则与接口契约', () => {
 });
 
 describe('旧对局存档迁移', () => {
-  it('v1 迁入空的档位 1，并保留已有 v2 数据', () => {
+  it('v1 迁入空的档位 1，并保留已有 v2 数据', async () => {
     localStorage.clear();
     localStorage.setItem('sdt-save-v1', JSON.stringify({ turn: 7 }));
-    RunStorage.migrateLegacy();
+    await RunStorage.migrateLegacy();
     expect(RunStorage.read(1).turn).toBe(7);
     expect(localStorage.getItem('sdt-save-v1')).toBeNull();
 
     localStorage.setItem('sdt-save-v1', JSON.stringify({ turn: 99 }));
-    RunStorage.migrateLegacy();
+    await RunStorage.migrateLegacy();
     expect(RunStorage.read(1).turn).toBe(7);
   });
 });

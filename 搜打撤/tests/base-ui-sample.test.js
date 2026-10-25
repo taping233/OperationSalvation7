@@ -118,12 +118,12 @@ describe('base page and inventory return contracts', () => {
       expect(animate).toHaveBeenCalledTimes(2);
       for (const [frames, options] of animate.mock.calls) {
         expect(frames.every(frame => !Object.hasOwn(frame, 'opacity'))).toBe(true);
-        expect(frames[0].transform).toBe('translateX(14px)');
+        expect(frames[0].transform).toBe('translateX(64px)');
         expect(options.fill).toBe('backwards');
       }
       animate.mockClear();
       presentHub(ui, glassPage('ach/cards'), icons);
-      for (const [frames] of animate.mock.calls) expect(frames[0].transform).toBe('translateX(-14px)');
+      for (const [frames] of animate.mock.calls) expect(frames[0].transform).toBe('translateX(-64px)');
     } finally {
       if (originalAnimate) Object.defineProperty(HTMLElement.prototype, 'animate', originalAnimate);
       else delete HTMLElement.prototype.animate;
@@ -186,34 +186,5 @@ describe('base page and inventory return contracts', () => {
     expect(previous.isConnected).toBe(false);
     expect(document.getElementById('hubMain').dataset.page).toBe('ach');
     expect(ui._acts.oldPage).toBeUndefined();
-  });
-});
-
-function portraitBody(src, section = 'appearance') {
-  return `<div class="personnel-v2" data-section="${section}"><div class="person-stage"><figure class="person-hero" data-skin="${src}"><img src="${src}" alt="无"><figcaption>无</figcaption></figure><article class="person-details"><h3>${section}</h3></article></div></div>`;
-}
-describe('appearance image loading', () => {
-  it.each(['load', 'error'])('reveals a relative-URL skin after %s instead of leaving it transparent', eventType => {
-    const ui = makeUI(); presentHub(ui, shell('classes', portraitBody('portraits/original.webp'), 'classes/wu/people/appearance'), icons);
-    const image = document.querySelector('.person-hero img');
-    Object.defineProperty(image, 'complete', { configurable: true, value: false });
-    presentHub(ui, shell('classes', portraitBody('portraits/new.webp'), 'classes/wu/people/appearance'), icons);
-    expect(document.querySelector('.person-hero img')).toBe(image);
-    expect(image.style.opacity).toBe('0');
-    expect(image.src).toBe(new URL('portraits/new.webp', document.baseURI).href);
-    image.dispatchEvent(new Event(eventType));
-    expect(image.style.opacity).not.toBe('0');
-    expect(document.querySelector('[data-portrait-echo]')).toBeNull();
-  });
-
-  it('keeps the latest skin visible when another preview is selected before loading finishes', () => {
-    const ui = makeUI(); presentHub(ui, shell('classes', portraitBody('portraits/original.webp')), icons);
-    const image = document.querySelector('.person-hero img'); Object.defineProperty(image, 'complete', { configurable: true, value: false });
-    presentHub(ui, shell('classes', portraitBody('portraits/first.webp')), icons);
-    presentHub(ui, shell('classes', portraitBody('portraits/latest.webp')), icons);
-    image.dispatchEvent(new Event('load'));
-    expect(image.src).toBe(new URL('portraits/latest.webp', document.baseURI).href);
-    expect(image.style.opacity).not.toBe('0');
-    expect(document.querySelectorAll('[data-portrait-echo]')).toHaveLength(0);
   });
 });

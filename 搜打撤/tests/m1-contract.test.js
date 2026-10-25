@@ -1,3 +1,4 @@
+import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 // M1 契约扩展验收（2026-09-27 代理E）：新 op / 新字段 / 混合目标契约的能力门与实战结算。
 // 规格：docs/cards/M-BATCH-CONTRACT-SPEC-2026-09-27.md；实现：card-rules.schema.js、card-rules.capability.js、
 // battle.resolution.js 注册点 + effect-steps.m1.js 执行件。
@@ -12,7 +13,7 @@ window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = window.SDT.Icons.TYPE_ART || {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
+  rules: { ...battleRules(99, 99, 15, 0, 5, 1) },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
@@ -33,8 +34,7 @@ function makeGame(cards) {
   const logs = [];
   const game = {
     ownedCards: cards.map(card => ({ uid: `m1-${uidSequence++}`, card, safe: false })),
-    hp: 100, maxHp: 100, atk: 5, spellPower: 0, coins: 0,
-    myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+    ...playerFields(100, 100, 5, 0, '侠客', null),
     lastBattleEnd: null,
     log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs,

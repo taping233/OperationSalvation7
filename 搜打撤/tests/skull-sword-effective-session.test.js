@@ -1,3 +1,4 @@
+import { battleViewMocks, overlayElements, inventoryFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 // 本文件验输入，资源就绪由 battle-entry-readiness 专门控制未兑现的加载 Promise 验证。
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
@@ -16,11 +17,7 @@ const UI = {
   act: (name, fn) => actions.set(name, fn),
 };
 window.SDT = {
-  UI, Icons: { img: () => '', rich, TYPE_ART: {} },
-  Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
-  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
-  Meta: { track() {} }, Motion: { reduceMotion: () => true },
-  MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+  UI, ...battleViewMocks(rich, true, 9, 99, 5, 5),
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession, configureBattleRenderer, findEffectiveCard, infusionFuelReason, findCard, pileTip } = await import('../game/src/battle/core/battle.core.js');
@@ -58,7 +55,7 @@ beforeEach(async () => {
   window.requestAnimationFrame = callback => { frames.push(callback); return frames.length; };
   Element.prototype.animate = () => ({ finished: Promise.resolve(), cancel() {}, onfinish: null });
   document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
-  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  UI.el = { ...overlayElements() };
   UI.el.ovBody.addEventListener('click', event => {
     const button = event.target.closest('[data-act]');
     if (button && !button.closest('[inert]')) actions.get(button.dataset.act)?.(button.dataset);
@@ -78,8 +75,7 @@ async function swordBattle(boss = true, sword = true, extraIds = []) {
   const cards = [...(sword ? ['tt3-immortal-blade'] : []), 'tt3sp-silverthorn',
     'starter-attack', 'starter-attack', 'starter-attack', 'starter-attack', ...extraIds];
   game = { ownedCards: cards.map((id, i) => ({ uid: `sword-${i}`, baseUid: `base-${i}`, card: canonical(id) })),
-    inventory: [], usedPocket: [], hp: 100, maxHp: 100, atk: 4, spellPower: 0, coins: 0,
-    myClass: null, state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
+    ...inventoryFields(100, 100, 0, null), log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
   window.SDT.game = game;
   window.SDT.MAP.rules.battleStartDraw = 99;
   runtime.set$lastDeckSel([]);
@@ -300,14 +296,13 @@ it('其他手牌支付保持原有初始攻击资格，同时选牌面显示有�
   const source = game.ownedCards.find(entry => entry.card.id === 'tt7-thundergrudge');
   BattleSession.commands.playCard(source.uid, 0); await settle();
   expect(BattleSession.getSnapshot().handSelecting?.act).toBe('payment');
-  const choices = [...document.querySelectorAll('[data-act="btPickHand"]')];
-  // 2026-10-21 反馈 #7：5 张同名有效卡合并为一张 ×N 展示；点击仍按实际 uid 逐张消耗。
-  expect(choices).toHaveLength(1);
-  expect(choices[0].querySelector('.bt-count')?.textContent).toBe('×5');
+  const choices = [...document.querySelectorAll('.battle-stage[data-infusion-mode] .sts-hand .bt-slot:not(.infusion-dup):not([hidden]) .bt-card')];
+  // Four owned cards share one stack; the temporary card retains its separate state mark.
+  expect(choices).toHaveLength(2);
+  expect(choices.map(node=>node.getAttribute('aria-label'))).toEqual(expect.arrayContaining([expect.stringContaining('第1/4张'),expect.stringContaining('第1/1张')]));
   for (const choice of choices) {
     expect(choice.textContent).toContain('不朽斩');
     expect(choice.getAttribute('aria-label')).toContain('不朽斩');
-    expect(choice.getAttribute('aria-label')).toContain('同名 5 张');
   }
   BattleSession.commands.pickHandSelect(originals[0]);
   BattleSession.commands.pickHandSelect(originals[1]); await settle();
@@ -515,7 +510,7 @@ it('BOSS牌库与统一消耗牌堆摘要按有效卡计数，打开查看不改
     expect(node.querySelector('b').textContent).toBe(String(count));
   }
   expect(draw.title).toBe('');
-  expect(grave.getAttribute('aria-label')).toBe(grave.title);
+  expect(grave.title).toBe(''); expect(grave.getAttribute('aria-label')).toContain('消耗牌堆：骷髅王剑×1，不朽斩×2');
   expect(pileTip(before.drawPile)).toBe('不朽斩×2');
   expect(before.consumedPile).toHaveLength(3); // Two attacks plus the already played sword.
   expect(pileTip(before.consumedPile)).toContain('不朽斩×2');

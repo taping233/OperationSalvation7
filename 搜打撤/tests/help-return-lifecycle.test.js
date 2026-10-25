@@ -71,6 +71,23 @@ describe('公共帮助返回生命周期，真实商店消费者（jsdom合成�
     restoreOverlayReturnState(root,snapshot);
     expect([...root.children].every(element => element.scrollTop === 0)).toBe(true);
   });
+  it('稳定id跨视觉class变化恢复滚动和焦点，仍拒绝不同来源和重复id', () => {
+    const root=UI.el.ovBody;
+    root.innerHTML='<section id="cards" class="is-entering" data-zone="safe"><button id="inspect" class="on" data-card="one">详情</button></section>';
+    root.querySelector('#cards').scrollTop=187;
+    const snapshot=captureOverlayReturnState(root,root.querySelector('#inspect'));
+    root.innerHTML='<section id="cards" class="is-settled" data-zone="safe"><button id="inspect" data-card="one">详情</button></section>';
+    restoreOverlayReturnState(root,snapshot);
+    expect(root.querySelector('#cards').scrollTop).toBe(187);
+    expect(document.activeElement.id).toBe('inspect');
+    root.innerHTML='<section id="cards" data-zone="bag"><button id="inspect" data-card="two">另一张</button><button id="safe">返回</button></section>';
+    root.querySelector('#safe').focus();restoreOverlayReturnState(root,snapshot);
+    expect(root.querySelector('#cards').scrollTop).toBe(0);
+    expect(document.activeElement.id).toBe('safe');
+    root.innerHTML='<section id="cards" data-zone="safe"></section><section id="cards" data-zone="safe"></section>';
+    restoreOverlayReturnState(root,snapshot);
+    expect([...root.children].every(element=>element.scrollTop===0)).toBe(true);
+  });
   it('帮助往返保留展开/收起状态，重排也不改变其他说明', () => {
     const render = () => UI.showOverlay('收纳说明', '<details id="closed" open><summary>原先收起</summary></details><details id="opened"><summary>原先展开</summary></details>'+UI.helpBtn('disclosures'));
     render(); UI.el.ovBody.querySelector('#closed').open=false; UI.el.ovBody.querySelector('#opened').open=true;

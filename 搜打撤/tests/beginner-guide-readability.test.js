@@ -1,9 +1,9 @@
-import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
 import { beginnerGuideHTML, beginnerGuidePageCount } from '../game/src/ui/beginner-guide.js';
-const ast = postcss.parse(readFileSync(resolve('game/css/beginner-guide.css'), 'utf8'));
+import { readCssSource } from './helpers/css-source.js';
+const ast = postcss.parse(readCssSource(resolve('game/css/beginner-guide.css'), 'utf8'));
 function values(selector) {
   const result = {};
   ast.walkRules(rule => { if (rule.selector === selector) rule.walkDecls(d => { result[d.prop] = d.value; }); });

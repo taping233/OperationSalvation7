@@ -1,98 +1,47 @@
-.preparation-module{--prep-line:rgba(170,174,177,.26);--prep-accent:var(--gold-main);color:#e2e0dc;display:grid;gap:14px}.preparation-module>header{display:flex;align-items:end;justify-content:space-between}.preparation-module h2{margin:2px 0}.preparation-module small{color:#cdb461;letter-spacing:.12em}.prep-count{padding:7px 10px;border:1px solid var(--prep-line);border-radius:999px}.prep-goals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.prep-goals article,.prep-preset{background:#181a1c;border:1px solid var(--prep-line);border-radius:0;padding:14px}.prep-goals article{display:flex;justify-content:space-between;gap:10px}.prep-goals p{color:#b7ab83;margin:5px 0}.prep-goal-add,.prep-add,.prep-actions,.prep-fields,.prep-preset-head{display:flex;gap:9px;align-items:end}.prep-goal-add select,.prep-add select{flex:1}.preparation-module select,.preparation-module input,.preparation-module button{min-height:42px;border:1px solid rgba(170,174,177,.26);border-radius:0;background:#1f2123;color:inherit;padding:8px 10px}.preparation-module button:focus-visible,.preparation-module select:focus-visible,.preparation-module input:focus-visible{outline:1px solid #e6cb76cc;outline-offset:2px}.preparation-module button[disabled]{opacity:.4}.prep-presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.prep-preset{display:grid;gap:11px}.prep-preset-head{justify-content:space-between}.prep-preset-head label,.prep-fields label{display:grid;gap:4px;flex:1}.prep-picks{display:grid;gap:7px}.prep-pick{display:grid;grid-template-columns:1fr auto auto;gap:9px;align-items:center;padding:9px;border-left:3px solid #8e9498;background:#121315}.prep-pick.missing,.prep-pick.forbidden{border-left-color:#c96a5e}.prep-pick small{color:#c4b687}.prep-summary{display:flex;justify-content:space-between;padding:9px 11px;border-left:3px solid #8e9498;background:#1a1c1e}.prep-summary.blocked{border-color:#c96a5e}.prep-error{padding:10px;border-left:4px solid #c96a5e;background:#2a1c1c}.prep-empty{color:#b5a87d}.prep-add input{width:76px}.prep-actions{justify-content:flex-end}
-
-/* ═══════════════════════════════════════════════════════════════════
-   备战页美术大修（2026-09-25 二波 B 组·P0）——套用 page-slot-select W1
-   背景配方 + page-deploy .hub-card 面板语言：
-   ① W1 冷青底色（radial 家族，与选档页同一族）+ prep-desk 桌面底图压暗铺底
-      （图未落盘时渐变层独立成立，视觉不断）
-   ② 四角暗角视线收束
-   ③ 预设卡 = hub-card 语言：冷青渐变面板 + 顶缘封条发丝线 + 眉题金化 + 金 hover
-   ④ 摘要条金/青双色语义（ready=金=可行动；blocked=青=待处理，硬错误仍走红）
-   ⑤ prep-goals 空态占位框
-   动画仅 transform/opacity/border-color 过渡，零逐帧重绘。
-   ═══════════════════════════════════════════════════════════════════ */
-
-.preparation-shell {
-  position: relative; isolation: isolate;
-  min-height: 100%;
-  padding: 20px clamp(16px, calc(var(--game-layout-width, 100vw) * 0.03), 42px) 36px;
+/* Preset page owns its presentation; persistent commands remain in preparation.commands. */
+.preparation-shell { --collection-header-bg:#15222b; --collection-ink:#e4ecec; --collection-muted:#b7c6cc; --collection-line:#a8bbc92e; --collection-accent:var(--interface-focus);
+  position:relative; isolation:isolate; display:flex; flex-direction:column; width:100%; height:100%; min-height:0; padding:0; overflow:hidden;
+  background:linear-gradient(135deg,#14212ceb,#18232bf2),url('../assets/scenes/ui-loop-0925/prep-desk.webp') center / cover; color:#e4ecec; }
+#preparationRoot { flex:1; min-height:0; overflow-y:auto; width:100%; padding:32px; scrollbar-width:thin; scrollbar-color:#647b88 transparent; }
+.preparation-module { --prep-line:#a8bbc92e; --decision-fill:#ffffff08;
+  max-width:1500px; margin:0 auto; display:flex; flex-direction:column; gap:24px; color:#e4ecec;
+  & * { box-sizing:border-box; }
+  & :is(h3,p) { margin:0; }
+  & .prep-goals-head { display:flex; align-items:center; justify-content:space-between; gap:24px; }
+  & .prep-goals-head h3 { font-size:var(--interface-text-object); }
+  & .prep-count { font-size:var(--interface-text-label); color:#b7c6cc; }
+  & :is(select,input,button) { min-height:44px; padding:10px 14px; border:1px solid #a8bbc940; border-radius:3px; background:#1d303b; color:inherit; font:var(--interface-text-label)/1.5 var(--font-ui); }
+  & select { color-scheme:dark; min-width:0; max-width:100%; }
+  & input { min-width:0; max-width:100%; }
+  & button { cursor:pointer; }
+  & button:disabled { opacity:.45; cursor:not-allowed; }
+  & :is(button,select,input,summary):focus-visible { outline:2px solid var(--interface-focus); outline-offset:3px; }
+  & .prep-goals { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+  & .prep-goals article { display:flex; align-items:start; justify-content:space-between; gap:16px; padding:18px 20px; border:1px solid var(--prep-line); border-radius:3px; background:#ffffff05; }
+  & .prep-goals article b { font-size:var(--interface-text-body); }
+  & .prep-goals article p { margin-top:8px; color:#b7c6cc; font-size:var(--interface-text-label); line-height:1.6; }
+  & .prep-goal-add { display:flex; gap:16px; }
+  & .prep-goal-add select { flex:1; }
+  & .prep-goals .prep-empty { grid-column:1/-1; padding:24px; border:1px dashed var(--prep-line); text-align:center; }
+  & .prep-presets { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; align-items:start; }
+  & .prep-preset { min-width:0; display:flex; flex-direction:column; gap:20px; padding:24px; border:1px solid var(--prep-line); border-radius:3px; background:#182932db; }
+  & .prep-preset-head h3 { font-size:var(--interface-text-object); line-height:1.4; }
+  & .prep-preset-head p { margin-top:8px; font-size:var(--interface-text-label); color:#b7c6cc; }
+  & .prep-preset-editor { border-top:1px solid var(--prep-line); border-bottom:1px solid var(--prep-line); }
+  & .prep-preset-editor > summary { padding:16px 0; color:#c6d5dc; font-size:var(--interface-text-control); cursor:pointer; }
+  & .prep-editor-body { display:flex; flex-direction:column; gap:18px; padding:8px 0 20px; }
+  & :is(.prep-name,.prep-fields label) { min-width:0; display:flex; flex:1; flex-direction:column; gap:8px; font-size:var(--interface-text-label); color:#b7c6cc; }
+  & .prep-fields { display:flex; gap:16px; }
+  & .prep-add { display:flex; flex-wrap:wrap; gap:12px; }
+  & .prep-add select { flex:1 1 220px; }
+  & .prep-add input { width:84px; }
+  & .prep-picks { display:flex; flex-direction:column; gap:10px; }
+  & .prep-pick { display:flex; align-items:center; flex-wrap:wrap; gap:10px 16px; padding:12px 14px; border-left:2px solid #91a5ad; background:#0b17224a; font-size:var(--interface-text-label); }
+  & .prep-pick > span { flex:1; min-width:120px; }
+  & .prep-pick small { color:#b7c6cc; font-size:var(--interface-text-caption); }
+  & .prep-pick:is(.missing,.forbidden) { border-left-color:#d6a79d; }
+  & .prep-empty { color:#b7c6cc; font-size:var(--interface-text-label); line-height:1.6; }
+  & .prep-next-step { font-size:var(--interface-text-caption); }
+  & .prep-qual-hint { color:var(--interface-warning); font-size:var(--interface-text-label); line-height:1.6; }
+  & .prep-error { padding:16px 20px; border-left:3px solid var(--interface-danger-line); background:#6c34332b; font-size:var(--interface-text-control); line-height:1.6; }
 }
-
-/* W1 底：桌面底图（压暗但可辨）+ 冷青 radial 渐变族 + W1c 四角暗角，同挂 ::before/::after */
-.preparation-shell::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(ellipse 120% 90% at 50% 24%, rgba(52,56,60,.6) 0%, rgba(41,44,47,.74) 36%, rgba(29,32,34,.86) 64%, rgba(17,18,20,.94) 100%),
-    linear-gradient(180deg, rgba(14,15,16,.68), rgba(11,12,13,.84)),
-    url('../assets/scenes/ui-loop-0925/prep-desk.webp') center / cover no-repeat;
-}
-.preparation-shell::after {
-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(120% 90% at 50% 38%, transparent 52%, rgba(8,9,9,.44) 88%, rgba(7,7,8,.6) 100%),
-    linear-gradient(90deg, rgba(11,12,13,.4) 0%, transparent 20%, transparent 80%, rgba(11,12,13,.4) 100%);
-}
-
-/* ── 预设卡：page-deploy .hub-card 面板语言移植 ── */
-.prep-preset {
-  position: relative; overflow: hidden;
-  background: linear-gradient(180deg, rgba(26,28,30,.93), rgba(20,22,23,.95));
-  border-color: rgba(194,199,202,.2);
-  box-shadow: 0 14px 34px rgba(7,7,8,.35), inset 0 1px 0 rgba(223,224,226,.05);
-  transition: border-color .18s cubic-bezier(.33,1,.68,1), transform .18s cubic-bezier(.33,1,.68,1), box-shadow .18s cubic-bezier(.33,1,.68,1);
-}
-.prep-preset::before {
-  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; z-index: 2; pointer-events: none;
-  background: linear-gradient(90deg, transparent, #e6cb76b8, transparent);
-  opacity: .35; transition: opacity .18s cubic-bezier(.33,1,.68,1);
-}
-.prep-preset:hover {
-  border-color: rgba(230,203,118,.5); transform: translateY(-2px);
-  box-shadow: 0 16px 38px rgba(7,7,8,.42), 0 0 14px rgba(230,203,118,.09),
-    inset 0 1px 0 rgba(232,229,223,.06);
-}
-.prep-preset:hover::before { opacity: .8; }
-/* 眉题（preset-1/preset-2 编号）：金色字距批注 */
-.prep-preset-head span {
-  color: var(--gold-main); font-size: 10.5px; font-weight: 700; letter-spacing: .26em;
-  padding-left: 9px; border-left: 1px solid rgba(230,203,118,.45);
-  text-transform: uppercase; align-self: center;
-}
-
-/* ── 摘要条：金/青双色语义 ── */
-.prep-summary { flex-wrap: wrap; gap: 6px 10px; border-left-width: 3px; border-radius:0; font-variant-numeric: tabular-nums; }
-.prep-summary > b { flex-shrink: 0; }
-.prep-summary > span { flex: 1 1 200px; min-width: 0; }
-.prep-summary.ready {
-  border-left-color: var(--gold-main);
-  background: linear-gradient(90deg, rgba(84,65,22,.45), rgba(30,25,12,.55) 72%);
-  color: #dfdcd6;
-}
-.prep-summary.ready b { color: var(--gold-bright); }
-.prep-summary.blocked {
-  border-left-color: #8e9498;
-  background: rgba(21,22,24,.8);
-  color: #c2c5c7;
-}
-.prep-summary.blocked b { color: #d1d2d4; }
-
-/* ── prep-goals 空态占位框 ── */
-.prep-goals .prep-empty {
-  grid-column: 1 / -1; margin: 0; padding: 18px 14px; text-align: center;
-  border: 1px dashed rgba(170,174,177,.32); border-radius:0;
-  background:
-    repeating-linear-gradient(0deg, rgba(170,174,177,.04) 0 1px, transparent 1px 26px),
-    repeating-linear-gradient(90deg, rgba(170,174,177,.04) 0 1px, transparent 1px 26px),
-    rgba(170,174,177,.02);
-  color: #888c8e; letter-spacing: .06em;
-}
-@media (prefers-reduced-motion: reduce) {
-  .prep-preset, .prep-preset::before { transition: none; }
-  .prep-preset:hover { transform: none; }
-}
-
-/* ── prep-summary 资格提示（预设人物/宠物未收录或未拥有时给出一行原因） ── */
-.prep-summary .prep-qual-hint {
-  flex-basis: 100%; margin-top: 4px; color: #d0a394; font-size: 12px;
-}
-.prep-summary.ready .prep-qual-hint { color: #c4b687; }

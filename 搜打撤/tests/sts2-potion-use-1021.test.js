@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createBattlePotionUse } from '../game/src/battle/view/battle.potion-use.js';
+import { createBattleEntryGate } from '../game/src/battle/view/battle.presentation-ready.js';
 
 let UI, snapshot, stage, bar, potion, commands, controller;
 const makePotion = (extra = {}) => ({ uid: 'item-1', name: '回复药水', desc: '回复 5 点生命。', count: 2, aim: null, usable: true, why: '', ...extra });
@@ -7,7 +8,7 @@ const pointer = (type, target = document, options = {}) => target.dispatchEvent(
 const popup = () => bar.querySelector('[data-potion-use]');
 const confirm = () => popup().querySelector('.bt-potion-use-confirm');
 function mount(token = snapshot.battleToken) {
-  UI.el.ovBody.innerHTML = '<div class="battle-stage sts"><div class="bt-potions"><div class="bt-potion" role="button" tabindex="0" data-act="btPotion" data-uid="item-1" data-potion-idx="0">回复药水 ×2</div></div><div class="sts-unit" data-target="0">敌人</div></div>';
+  UI.el.ovBody.innerHTML = '<div class="battle-stage sts"><div class="sts-topbar"><div class="bt-potions"><div class="bt-potion" role="button" tabindex="0" data-act="btPotion" data-uid="item-1" data-potion-idx="0">回复药水 ×2</div></div></div><div class="sts-unit" data-target="0">敌人</div></div>';
   stage = UI.el.ovBody.firstElementChild; stage._battleToken = token;
   bar = stage.querySelector('.bt-potions'); potion = bar.querySelector('.bt-potion');
   controller.sync(stage, snapshot);
@@ -83,6 +84,44 @@ describe('道具先检查再确认', () => {
 });
 
 describe('仅当前战场当前道具可提交', () => {
+  it('真实入场门禁在sync后触发DOM变化，ready后无需重绑即可查看并确认', async () => {
+    const gate = createBattleEntryGate();
+    try {
+      gate.begin(stage, snapshot.battleToken, UI.el.overlay);
+      controller.sync(stage, snapshot);
+      stage.classList.add('bt-entrance');
+      await Promise.resolve();
+      expect(stage.inert).toBe(true);
+      expect(controller.open('item-1')).toBe(false);
+      expect(popup()).toBeNull();
+      const ready = gate.ready(stage, snapshot.battleToken);
+      gate.wait(stage, snapshot.battleToken, [Promise.resolve(true)]);
+      expect(await ready).toBe(true);
+      await Promise.resolve();
+      expect(stage.inert).toBe(false);
+      potion.click();
+      expect(popup()).not.toBeNull();
+      confirm().click();
+      expect(commands.usePotion).toHaveBeenCalledExactlyOnceWith('item-1');
+    } finally { gate.dispose(); }
+  });
+
+  it('临时inert收起旧详情并保留绑定，真正替换舞台后不复活旧监听', async () => {
+    potion.click(); const oldUse = confirm();
+    stage.setAttribute('inert', '');
+    await Promise.resolve();
+    expect(popup()).toBeNull();
+    oldUse.click(); expect(commands.usePotion).not.toHaveBeenCalled();
+    stage.removeAttribute('inert');
+    await Promise.resolve();
+    potion.click(); expect(popup()).not.toBeNull();
+    const removedStage = stage;
+    removedStage.remove(); await Promise.resolve();
+    UI.el.ovBody.append(removedStage); await Promise.resolve();
+    expect(controller.open('item-1')).toBe(false);
+    expect(popup()).toBeNull();
+  });
+
   it.each([
     ['busy', { busy: true }], ['queue', { actionQueueLength: 1 }], ['enemy', { phase: 'enemy' }],
     ['start', { phase: 'start' }], ['finished', { phase: 'victory' }], ['targeting', { phase: 'targeting' }],

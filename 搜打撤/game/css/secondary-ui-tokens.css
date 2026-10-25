@@ -1,4 +1,13 @@
 /* Shared secondary UI vocabulary, scoped to explicit consumers. Design-canvas pixels. */
+:root {
+  --interface-text-page:30px; --interface-text-object:26px; --interface-text-body:22px;
+  --interface-text-control:20px; --interface-text-label:18px; --interface-text-caption:16px; --interface-text-number:24px;
+  --interface-action-fill:#b9d6e3; --interface-action-hover:#d0e5ed; --interface-action-ink:#172b36;
+  --interface-secondary-fill:#ffffff08; --interface-secondary-line:#b4c6d04d; --interface-secondary-ink:#dce7ee;
+  --interface-danger-fill:#593638; --interface-danger-hover:#704043; --interface-danger-line:#b97d7b; --interface-danger-ink:#ffe2dd;
+  --interface-selection-rgb:108,155,169; --interface-selection-fill:#29424e; --interface-selection-ink:#f0f5f7; --interface-focus:#8fc6d8;
+  --interface-ready:#bad8c4; --interface-warning:#e4c293;
+}
 :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind="discover"])) {
   --ui-ink:#eef1ed; --ui-muted:#b9c9d2; --ui-blue:#b6cbd7; --ui-gold:#c6b487;
   --ui-panel:#15212cef; --ui-line:#a8bbc238; --ui-risk:#e4bea8;
