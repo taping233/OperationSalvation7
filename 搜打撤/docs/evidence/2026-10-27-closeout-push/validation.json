@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-27",
+  "commits": [
+    {
+      "scope": "completed-code-and-docs",
+      "commit": "12611b0d5876189f668899061cd81822f9a6562a",
+      "files": 774
+    }
+  ],
+  "full": {
+    "outcome": "passed",
+    "exitCode": 0,
+    "files": "959 passed (959)",
+    "tests": "9567 passed | 41 skipped (9608)",
+    "report": {
+      "path": "docs/evidence/2026-10-27-staged-check/2026-10-26T19-16-00.059Z-61c9b494-staged.json",
+      "sha256": "26dc409024277a2eee2af60f6fcf5fa4d43e733e7c8a30e84512856fcdb5604f",
+      "retrieval": "本地保留；超过1MB不入库，按冻结暂存门命令可重跑"
+    },
+    "log": {
+      "path": "docs/evidence/2026-10-27-staged-check/2026-10-26T19-16-00.059Z-61c9b494-staged.log",
+      "sha256": "c84f47b38f779c5029fe39479f7fd4312964c2ce9e86343eb27182df6d4a8cb5",
+      "retrieval": "本地保留，完整冻结门原始输出"
+    }
+  },
+  "build": {
+    "tree": "ebcfeaba76b39a547b2a9918dc7cb9b9c0a38399",
+    "project": "D:\\素材\\代号柒\\搜打撤\\.tmp\\closeout-1027\\build-snapshot-zip",
+    "exitCode": 0,
+    "endedAt": "2026-10-26T18:53:48.039Z",
+    "productionDeltaSinceBuild": [
+      "搜打撤/game/selftest.js"
+    ],
+    "log": {
+      "path": ".tmp/closeout-1027/build-frozen-zip.log",
+      "sha256": "5df02ff35f51e356da35491eab5d811d1d61cfefaf76ebc463c59d1677a38945",
+      "retrieval": "本地保留，冻结源码npm run build"
+    }
+  },
+  "browser": {
+    "source": "Codex内置浏览器，当前窗口",
+    "image": "hp-runtime.png",
+    "scope": "仅血条正式样式；结束回合HP30变23、回合2，未改其他样板样式"
+  },
+  "excluded": {
+    "tracked": [
+      "game/css/character-idle.css",
+      "game/src/battle/view/battle.frames.js",
+      "game/src/ui/character-idle.js",
+      "tests/character-idle.test.js"
+    ],
+    "reason": "WF-wu-action-1027在途动作素材；待拍板、临时和超限证据另见excluded-evidence.json"
+  },
+  "targeted": {
+    "path": ".tmp/closeout-1027/final-two-tests.log",
+    "sha256": "98753fd86b7108425f8c81188b1ba97818d19ee1714a96a8d9986956119d272d",
+    "passed": 35,
+    "reason": "随机手牌按UID定位，清理行尾空格"
+  },
+  "registry": {
+    "closedProse": 96,
+    "moved": 96
+  },
+  "push": {
+    "target": "origin/master",
+    "verification": "交付时git ls-remote refs/heads/master与本地HEAD对比；实际结果见收官简报及本地push-result.json"
+  }
+}

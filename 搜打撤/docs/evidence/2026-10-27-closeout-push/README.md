@@ -10,4 +10,4 @@
 
 保留本地：未完成idle/动作帧4个文件与其证据、待拍板/PV目录、备份和临时文件。大文件证据索引见 excluded-evidence.json。现有5200服务继续复用，没有创建新游戏服务。
 
-验证：完整冻结门尚在执行；最终结果另写 validation.json。
+验证：完整冻结门通过，959份测试文件全绿，9567项通过、41项跳过；生产构建与性能预算通过。提交与原始证据哈希见 [validation.json](validation.json)。当前内置窗口血条运行截图见 [hp-runtime.png](hp-runtime.png)。
