@@ -1,0 +1,15 @@
+/* Built-in muted brush repaint; sixteen isolated cells in one transparent 4×4 atlas. */
+#overlay .bt-fx-art{display:block;position:absolute;z-index:78;pointer-events:none;width:160px;height:160px;transform:translate(-50%,-50%);background-repeat:no-repeat;background-size:400% 400%;mix-blend-mode:normal;contain:layout style;will-change:transform,opacity}
+#overlay .bt-fx-art.fx-art-death{z-index:79}
+#overlay .bt-hand-acquired.bt-fx-art,#overlay .bt-hand-page-new.bt-fx-art{position:absolute;left:50%;top:45%;width:110px;height:110px;padding:0;margin:0;border:0;border-radius:0;box-shadow:none;animation:btArtArrival .85s ease-out both;background-color:transparent;display:block;font-size:0}
+#overlay .bt-hand-acquired.bt-fx-art::before{content:none}
+#overlay .bt-hand-page-new.bt-fx-art{width:54px;height:54px;left:auto;right:-20px;top:50%;animation:none}
+@keyframes btArtArrival{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}25%,65%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-60%) scale(1.2)}}
+#overlay .battle-stage.fx-dread .battle-stage-shade{animation:none}
+#overlay .battle-stage.fx-dread .sts-arena::after{content:'';position:absolute;left:50%;top:38%;width:340px;height:340px;translate:-50% -50%;z-index:2;pointer-events:none;background:url('../assets/battle/fx-atlas.webp?v=muted-brush-20261026') 100% 100%/400% 400% no-repeat;animation:btBossArt 1.4s ease-out both}
+@keyframes btBossArt{0%{opacity:0;transform:scale(.8)}20%{opacity:.5}100%{opacity:0;transform:scale(1.18)}}
+/* A death burst now carries the disappearance; retain a calm body fade beneath it. */
+#overlay .battle-stage .sts-foe.dead .sts-figure{animation:btBodyDissolve .65s ease-out both}
+@keyframes btBodyDissolve{from{opacity:1}to{opacity:0;transform:translateY(8px)}}
+#overlay .bt-hand-acquired.bt-fx-art[data-reduced-motion="true"]{animation:none;opacity:.7}
+@media(prefers-reduced-motion:reduce){#overlay .bt-fx-art,#overlay .bt-hand-acquired.bt-fx-art{animation:none;will-change:auto}#overlay .battle-stage.fx-dread .sts-arena::after{animation:none;opacity:.25}}

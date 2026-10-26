@@ -1,0 +1,38 @@
+[
+  {
+    "path": "battle/fx-slash.webp",
+    "ext": "webp",
+    "bytes": 133286,
+    "sha256": "2c76dad6a663da8c70361a32e65cdece583ac40cf97dc07d845e6ce6908ff1fb",
+    "license": "项目自有（NAI5起稿＋内置重绘）",
+    "source": "docs/evidence/2026-10-26-battle-fit-fx/receipt.json",
+    "input": "C:/Users/太平/.codex/generated_images/01a17885-5817-7192-b282-396a22335960/exec-eeddb69c-e8b4-489c-8eca-b7c580cd5b2d.png",
+    "originalSha256": "aa346ddf563dc61f680570549e6f6af4cbd112253fba3eb914e9ce6a8630fce4",
+    "outputSize": [
+      768,
+      768
+    ],
+    "alphaRange": [
+      0,
+      255
+    ]
+  },
+  {
+    "path": "battle/fx-block.webp",
+    "ext": "webp",
+    "bytes": 137550,
+    "sha256": "905c8920d12a2dfa8e5f5c29b40a85a0df24650e7dbb31e5f48e0da13e0b95b6",
+    "license": "项目自有（NAI5起稿＋内置重绘）",
+    "source": "docs/evidence/2026-10-26-battle-fit-fx/receipt.json",
+    "input": "C:/Users/太平/.codex/generated_images/01a17885-5817-7192-b282-396a22335960/exec-2c835c93-beb7-4cff-afbd-8aac2471a04f.png",
+    "originalSha256": "59743038005ca221f34790b3c373b26026d24853c92ad3b33921e124a7295886",
+    "outputSize": [
+      768,
+      768
+    ],
+    "alphaRange": [
+      0,
+      255
+    ]
+  }
+]

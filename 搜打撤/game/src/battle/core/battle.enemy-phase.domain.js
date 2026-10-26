@@ -4,6 +4,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
 import { buildEnemyActionPlan } from './battle.enemy-plan.js';
 import { createM2Domain } from '../effects/effect-steps.m2.domain.js';
 import { dealMeasuredDamage } from './battle.measured-damage.js';
+import { applyBossTurnStart, cleanseBlockerAfterAttack } from './battle.boss-mechanics.js';
 
 /** Instance-owned state and host services are captured explicitly. */
 export function createEnemyPhaseDomain(context) {
@@ -95,6 +96,7 @@ const { restoreAtkDown, restoreStolenAttack } = createM2Domain(context);
     if (!stillPlayerPhase()) return;
     if (!context.engine.alive().length) { context.engine.finish(true); return; }
     instanceRuntime.set$turn(instanceRuntime.turn + 1);
+    applyBossTurnStart(context);
     instanceRuntime.pdef.guard = false;   // 格挡只覆盖施放当回合，额外回合同样到期。
     instanceRuntime.foes.forEach(foe => { if (!foe.dead) foe.intent = context.engine.intentFor(foe, instanceRuntime.turn); });
     instanceRuntime.set$energy(instanceRuntime.maxEnergy);
@@ -285,6 +287,8 @@ const { restoreAtkDown, restoreStolenAttack } = createM2Domain(context);
           if (guard) {
             const shieldBefore = guard.defense?.shield || 0;
             const ar = dealMeasuredDamage(Combat, { atk: foe.atk }, guard, 0, Combat.TYPES.ATTACK);
+            const cleansed = cleanseBlockerAfterAttack(foe, Combat, Random, restoreAtkDown);
+            if (cleansed) instanceRuntime.G.log(`[[icon:skull]] <b>${esc(foe.name)}</b>攻击后清除 1 层${cleansed}`, 'sys');
             if (shieldBefore > 0 && !(guard.defense?.shield || 0)) hostAudio.sfx('shieldBreak');
             hostAudio.sfx(ar.dealt > 0 ? 'hurt' : 'parry');
             instanceRuntime.floats.push({ unit: 'ally:' + instanceRuntime.allies.indexOf(guard), text: ar.dealt > 0 ? '-' + ar.dealt : ar.immune ? '免疫' : ar.dodged ? '闪避' : '防御', cls: ar.dealt > 0 ? 'hurt' : 'block' });
@@ -301,6 +305,8 @@ const { restoreAtkDown, restoreStolenAttack } = createM2Domain(context);
           }
           const shieldBefore = instanceRuntime.pdef.shield || 0;
           const dealt = context.engine.playerTakeHit(foe);
+          const cleansed = cleanseBlockerAfterAttack(foe, Combat, Random, restoreAtkDown);
+          if (cleansed) instanceRuntime.G.log(`[[icon:skull]] <b>${esc(foe.name)}</b>攻击后清除 1 层${cleansed}`, 'sys');
           if (shieldBefore > 0 && !(instanceRuntime.pdef.shield || 0)) hostAudio.sfx('shieldBreak');
           // 敌人造成伤害也会破除它自己的潜行
           if (dealt > 0 && Combat.breakStealth(foe)) {
@@ -329,7 +335,7 @@ const { restoreAtkDown, restoreStolenAttack } = createM2Domain(context);
               instanceRuntime.G.log('[[icon:fire]] 远古龙尊回复了 10 点生命', 'warn');
             }
           }
-          // 行为型附加：滋生异变体（攻击并施加诅咒）
+          // 行为型附加：囊生畸变体（攻击并施加诅咒）
           if (dealt > 0 && foe.behavior === 'curse') {
             context.engine.elCurse(foe);
           }
@@ -376,7 +382,7 @@ const { restoreAtkDown, restoreStolenAttack } = createM2Domain(context);
     context.engine.applyKillRewards(null, aliveBeforeTick - context.engine.alive().length);   // 毒杀计入饮血剑击杀层数
     if (!stillEnemyPhase()) return;
     if (!context.engine.alive().length) { instanceRuntime.set$busy(false); context.engine.finish(true); return; }
-    // 军威（肃清总督）：回合结束时攻击力 +2
+    // 军威（封控指挥官）：回合结束时攻击力 +2
     instanceRuntime.foes.forEach(foe => {
       if (!foe.dead && foe.affix === 'grow') {
         foe.atk += 2;
@@ -419,6 +425,7 @@ const { restoreAtkDown, restoreStolenAttack } = createM2Domain(context);
     if (!context.engine.alive().length) { context.engine.finish(true); return; }
     context.engine.syncCurseCondEquips();   // 条件装备（深海印记类）随诅咒状态变化重新核算
     instanceRuntime.set$turn(instanceRuntime.turn + 1);
+    applyBossTurnStart(context);
     instanceRuntime.pdef.guard = false;   // 敌方本回合所有伤害结算后，在新玩家回合清除。
     instanceRuntime.foes.forEach(foe => { if (!foe.dead) foe.intent = context.engine.intentFor(foe, instanceRuntime.turn); });
     instanceRuntime.set$energy(instanceRuntime.maxEnergy);

@@ -1,4 +1,4 @@
-import { overlayElements, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
+import { overlayElements, resetEventGame, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
 import { rollEventDice, flushEventActions } from './helpers/event-dice-async.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -25,7 +25,7 @@ const prizes = [
 let flow, scenes, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
   window.SDT = { game:H.game, Icons:{ rich:x => x }, Sound:{ sfx() {} }, Meta:{ track() {}, addXpToProgress() {} }, Base:{ bagCap:() => 9 },
-    MAP:{ chestKinds:{ small:{ name:'小宝箱' } } }, UiScale:{ rect:el => el.getBoundingClientRect() },
+    MAP:{ chestKinds:{ small:{ name:'小型物资箱' } } }, UiScale:{ rect:el => el.getBoundingClientRect() },
     Cards:{ DROP_WEIGHTS:{ 古朴:1 }, all:() => H.cards, classPool:() => [], sellPrice:() => 1, isRandomObtainable:() => true,
       cardHTML:(c, size = '') => `<div class="hs-card" data-card-id="${c.id}" data-size="${size}"><b>${c.name}</b><p class="hsc-desc">${c.desc || ''}</p></div>` } };
   const { UI: standardUI } = await import('../game/src/ui/ui.js');
@@ -42,7 +42,7 @@ beforeEach(() => {
   UI.el = { ...overlayElements() };
   bindEventRoot(() => UI); setBagReturnHook(null);
   H.random = vi.fn(() => 0.9); H.saves = []; H.uid = 0;
-  Object.assign(H.game, { seed:7, state:'idle', layerIdx:0, trackPos:1, hp:35, maxHp:35, visited:{}, ownedCards:[], usedPocket:[], myClass:'武', runActive:true, coins:18, fragments:0,
+  resetEventGame(H, () => scenes, { seed:7, state:'idle', layerIdx:0, trackPos:1, hp:35, maxHp:35, visited:{}, ownedCards:[], usedPocket:[], myClass:'武', runActive:true, coins:18, fragments:0,
     altarActivated:false, altarRewardPending:false, nodeRewards:{}, entrySupply:null, discoveredPairs:new Set(),
     layerData:[{ logical:[{ def:{ type:'entrance' } }, { def:{ type:'event' } }] }],
     canReceiveCard:() => true, heal:n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),

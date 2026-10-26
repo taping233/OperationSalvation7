@@ -1,0 +1,464 @@
+{
+  "node": {
+    "before": {
+      "files": 69,
+      "passed": 656,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "wallMilliseconds": 27506.7602
+    },
+    "after": {
+      "files": 69,
+      "passed": 656,
+      "failed": 0,
+      "skipped": 0,
+      "success": true,
+      "wallMilliseconds": 14461.613800000001
+    },
+    "identicalCasesAndStatuses": true,
+    "improvementPercent": 47.42523766939299,
+    "environmentFiles": [
+      {
+        "file": "tests/agent-batch-llm-timeout.test.js",
+        "beforeSha256": "ca2f19d164bf46a1bc54cae3b88072bc9e7723838ae08c082972ecf3563ad87b",
+        "afterSha256": "f8dd1ef25a82e95fe23f6d88125049ffe31f8d8f14165e9159c9e73b5f68a948",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/architecture-boundaries.test.js",
+        "beforeSha256": "577a9cc241729b758e0b66b4fabb750700bc44eb099a7768abf9b0af43c85ffb",
+        "afterSha256": "8d965702694b368c093ac4e9be0f60a8274030cf1e33bfce4181d63e075dd039",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/asset-audit.test.js",
+        "beforeSha256": "6e179893de4342493887e9d9971aacbc62bdd3ae53af644d293c5dc8d4ccc661",
+        "afterSha256": "b82acaa48f04b064c0c2afe7971603874a35ebdc3677fe84e058e66af6b6aa49",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/bag-inventory-commands.test.js",
+        "beforeSha256": "c94b117eb963dc86bafb50e0c3a0a8c14318af889abaded541ce47d5761bb29f",
+        "afterSha256": "5a0b9c859ce1247a271915dcba6aa23a5ee82f0fe592f36aba122ad845274e6a",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/bag-token-craft.test.js",
+        "beforeSha256": "a68a9cbd0549baecaad7727c94778c3775fdb64ed1fdea9aa16e3228647beb70",
+        "afterSha256": "b47113293d94bffd34484acf3b50b76ca45fd5045ecae475f25668c40455a1e9",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-action-runner-readiness.test.js",
+        "beforeSha256": "a889ac4bef518ede8465190e74d91e15cdcaec49ad4e28b29fa4157d9ab8aa24",
+        "afterSha256": "07430c3505bd96776c3bb942500a26dc79c4440d10b138e0998b787e83eb9cef",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-action-timing.test.js",
+        "beforeSha256": "011033768a9e4089092a81045551626bae5436eded43061e5a17daa5a9f73a8c",
+        "afterSha256": "b1d5abe29d4bf5af5b818790816345e0a3d854d75e7e07219746d08ffd16b2cb",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-effective-card.test.js",
+        "beforeSha256": "2c535e77912eb033308702e37cecec2f35149c7f88cc8fab07ee69b699c8dd05",
+        "afterSha256": "28b71ecfa5423cb588c6fe9d32040ca5b66e2e510059e88b5a089a2d63c87cec",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-execution-card-guard.test.js",
+        "beforeSha256": "42d1061b40b50ef2a1918702d6ef6d6af63af86d6417a5ba8449b411b0528525",
+        "afterSha256": "03611d6693f7ad4f24c57ac85d80926bc4c50e3ef483bd8b973dde80dd84cc42",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-feedback-view.test.js",
+        "beforeSha256": "d2260d39dc4c0cb14f1a07da5febf169403bf206117214dc74e7f9115b9e78d0",
+        "afterSha256": "42f754e3d447cc22225d5b9536548b2a37a56c80757824e0961cded37add5613",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-frame-assets.test.js",
+        "beforeSha256": "7d2875e3d43a6a04fc907a3d627c29f3ed74b5bb32c9aa2871fd9694ed453459",
+        "afterSha256": "258a969cf12a37d1a38595bbe0bddf093ee22d498bdd8758f14830b841a758c1",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-frame-resolution.test.js",
+        "beforeSha256": "220f2a3d63602d321e32b9b5b2b6d4a7c56e7221e4c8debcdd9d3215ce6b3fb7",
+        "afterSha256": "700992249b02a4576762a4fcf17a1a5e78aaf35234f9a2472755b1bc27e26fef",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-frames-diagnostic-policy.test.js",
+        "beforeSha256": "65dd6fa2eb84bb3e455f51f1e62c5fdeda68b6c9909a4c2105103fd8de39185a",
+        "afterSha256": "37db72ed8d3062e54a0d13a41a73a21dc0dde0a84cbe0ee18f1dca4ce24045c1",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-hand-group-index.test.js",
+        "beforeSha256": "3c6fbfeb7343e537aaad2c5f1ba53c247770e005f11f9f5d24f68366e747748d",
+        "afterSha256": "bfc915c5d4a10da54878e4095e04763273938443c1d5b5055588f7315dadec3f",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-hand-layout.test.js",
+        "beforeSha256": "4f2d1e7225a5b45c1fc13611463bc26b90d0b743aa94d95288bb2e171b9ed1c4",
+        "afterSha256": "5302c77ba37acf948fb458b3896f7dba08351b6de0055274356705c176c8d9bb",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-infusion-material-state.test.js",
+        "beforeSha256": "fef77bf7bd9b845c966377b193fb9679b492d70ec8a5304f88172b64e9a3f55d",
+        "afterSha256": "20482f38f78c45b4e5a23bc23ed78c4ef048ead3419898d06772156f80bb11cd",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-query-cost-benchmark.test.js",
+        "beforeSha256": "303c7d9f66babbef16eb84dadcf1d26438aff18046c9c4ab559fe1231293e23c",
+        "afterSha256": "1438e2920fcd6f456f9fa5d8947ff5e8f6f52a3e2d870b3d5b8bea282ff9dc29",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-scenery.test.js",
+        "beforeSha256": "e9bb285a1f7333b8ba414928b9db5e112770b5b00e5a6ea26436aad4728fc45e",
+        "afterSha256": "10eebd5b510d5acc11e736980e8c5bf7a2a132169e924e922e941dd969ec9e42",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-status-preview.test.js",
+        "beforeSha256": "0863559e5fee212385f4fa8bc1215d34f8c73d30f4b4f451496283fdb38a4be7",
+        "afterSha256": "6fc06b5621096a5f009be03f090d33369a9c971374578cc6996726daa6d3cd0f",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-three-role-sprites.test.js",
+        "beforeSha256": "63c41341c13fdbe3451a0ce0b49ed31665c09d9cf17e4eb009290c61dfa2e238",
+        "afterSha256": "0a6606fcc5f9985a7bb494b5d958bddb8de8c65017feb3bb1885d32d29375946",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-turn-effects-domain.test.js",
+        "beforeSha256": "24d46d8561dc7e0dd97a41049f684a653d5aa77369d9f57ff9fb5c1f5afee5e1",
+        "afterSha256": "fd511997d0db93673c79ac2e3bdc2aedc5895e18f5d2c79e907e08ba3fec3219",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/battle-wu-sprite.test.js",
+        "beforeSha256": "289d00b7c320b88710fa01456f8d8b36cdca9203034b482c8d84771bfa9e6526",
+        "afterSha256": "ebfec7910fd64c8e3b83f24a66bbfa910c690fe7c7fc9d50a4118ced0580b383",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/card-compatibility-boundary.test.js",
+        "beforeSha256": "7afd535d2ad120db89881350ce3a014247eee8572fcd393a9346e09be0683b28",
+        "afterSha256": "fecb938391c2ee408d2ac26cfbd066cf0f87f6a9a0acbbefc8f1fc8de6f38fcc",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/card-execution-plan.test.js",
+        "beforeSha256": "022c9615e1ed9bf33faddd5f146c7e27662a962fac3c28ed08547bf2b52e5b18",
+        "afterSha256": "146f38691e60b7e3596820451d2a4a25b09d3aa0e24115df9c9229e662de2e76",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/card-fixes-1010.test.js",
+        "beforeSha256": "51bdbe67b2fb348c7d6a32e66e0f178936b93c5f0511dbd709efe74e0c7ad4df",
+        "afterSha256": "c648a7a85a9554b3e6b61280e821a7f49a31b3e2f06a64fbce7dd36a83905bbe",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/card-sync-slices.test.js",
+        "beforeSha256": "ae89ccef592f60d56a0ce95e3a50fcf29ec4de4193ea57c58164be8bb887d6c0",
+        "afterSha256": "12e602f814a73dedd37162e55a4951b2c5df4beea115073bcdad355d7e90f0e6",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/check-types.test.js",
+        "beforeSha256": "fc63d1a599ea5512b9147c8d7aed7a372a258269dc5c06bf3cf9b22328cd6f66",
+        "afterSha256": "f55e8de6cd522b2e266b322b9353d1917e046c7a01a0ce3157177b39cdfe9920",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/code-lean-stage1-cards-schema.test.js",
+        "beforeSha256": "c1fb256ad3641603f65064e64c247cb56f89157b6337bc4a661d801cb721a753",
+        "afterSha256": "4c34200b908c9e98b8148b0ac2d8c5fe8555c780ee001f6b2cf42e5c9e5b9693",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/courtyard-rain-tableau.test.js",
+        "beforeSha256": "5ee7cf8a23a55e4345d77b550d544b5fbfa06155429b73f5e6b989ccb75a2445",
+        "afterSha256": "170889247e13df37f6770838d6c382fce3f6c53f6334164494edd99bbbadb773",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/departure-summary.test.js",
+        "beforeSha256": "f9366c04e430ca1852587371a21b86a3ea99feb0527ffb5f7ae7f8dc34e1ded0",
+        "afterSha256": "b035b9cbfc52839c1ff9d23443a97dccd5e4a2b96788a00caae3d6626e2b67a0",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/dependency-audit-diagnostics.test.js",
+        "beforeSha256": "4999ce943e95d38a9b0de85875abe44004fcf6ece3e4d51f33adbfcecdb8f13e",
+        "afterSha256": "59f7ebfbe8181db931f41418e48f509bc5143c5c9de8f05362971dd31b13a9a7",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/desktop-file-protocol.test.js",
+        "beforeSha256": "a57818634a7b1fac77ed8c3015c274c6a70f3bed692abda27017d1fb35a0fa9f",
+        "afterSha256": "9c3abda93c34d7e8d9fadc418de2d77669c8fc77ba5ebd9e7c39a80c12362176",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/execute-target.test.js",
+        "beforeSha256": "efacd6c2959a8b3b5cf5a0875c9b58691a6a24d66a398aa375459933f4a7a7e5",
+        "afterSha256": "1810fc84552ad623eebb7d5058a5c4111ad914fc8d38ce7f4182502a41bbfb02",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/facade-snapshot-drift.test.js",
+        "beforeSha256": "0e5cb669cbd4b9334abae6e9a65e3186528304b7db636b0b0f1107bb70d303d7",
+        "afterSha256": "09b7f6acbf83629a5530380810a4e4c7370c595001c2e76bc8946f2f2b3888b6",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/feedback-1026-discovery.test.js",
+        "beforeSha256": "1f4cdc01fbe1f7659d134791a399ad6c403f70b16727bde2ebdabf2733a07895",
+        "afterSha256": "11ca82fe6903813f6413879800fd1a860be57f475ecffc0ab07937712a6bc3e4",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/four-player-music-fallback.test.js",
+        "beforeSha256": "7b0d98995b151be026dac69607fd47aab6e661683bdf52a2460b73e68c190f1f",
+        "afterSha256": "b434c0f67e52227f33ed2ddb066ae6f8985aabf5cf23cfc78ed7d646155d6d4e",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/frame-assets-cancellation-perf.test.js",
+        "beforeSha256": "7291dc131df9b1decae95c3f26b356992d0c65b0bfd11201ae083e7e7bba7d1a",
+        "afterSha256": "db8f863226e35ffefcb08fe7f9a90272cd96653b7ae67c718d5474923b7230b7",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/game-session-slices.test.js",
+        "beforeSha256": "04d53d94eb50756a76dabd44af976bd15a59ef47fda263a5c68687bfe4690cb5",
+        "afterSha256": "91f2980794b4f814ebdd5cd356cc813ff1e3f6402b33f416d217920b245ef30e",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/hand-pointer-review.test.js",
+        "beforeSha256": "df8ba61772df653f558b1e7e3c59abfba56d1a2bc79ba52e11a801cd6f926797",
+        "afterSha256": "7f56d689ceed6feaa18bc984201f1a8b351711e4f1bd45a8a7ad18e259b550a4",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/hub-architecture.test.js",
+        "beforeSha256": "00c2df1bc2ccfc3231e4f8e2ee01e6f780aa13fb7ad1e732f88cd5c6ca018605",
+        "afterSha256": "69daff421344434f26c062a93aeaf8523543a8b29fe5dfd0b7803b7f732a117a",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/impact-query.test.js",
+        "beforeSha256": "efc00014d6e3831664a6f75481b1a117afeca3e6601223e28880db115c4b0e6d",
+        "afterSha256": "f3af147780b9653f562f5593a8c36c11eb65d2364005bb70a1cdb3e4767b8ed1",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/legacy-battle-policy.test.js",
+        "beforeSha256": "d4828ef6714e3edebe618a9e791d2718f9e2dd5250d840e2008a04df6894e1bd",
+        "afterSha256": "0b394d36873ed30aafece7134ab4ff64efaeaa02dde06ccc41df0a1bda04ec64",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/map-facilities-burn-removal.test.js",
+        "beforeSha256": "aae00ef071fef83504c0dd9ced890136632d78b2935e388382beff4d93ac7ebe",
+        "afterSha256": "9a78440640258ee5663e30ba58810e90e9510d07a051c28afc4425c007737550",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/map-fire-pacing.test.js",
+        "beforeSha256": "6d759ad92b78941aaed12cb8c65c4ccc27675198ebebf08d18c6a8f7c8d68821",
+        "afterSha256": "7fecf49b045a2341466751c08cff6a86ca137863d02f0b5ba8e826fe0a752659",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/map-snapshot-copy-cost.test.js",
+        "beforeSha256": "efcc6f97a6e280120354cf8a92eb27cf53afab3c5252e218fc1878c2a2ce592c",
+        "afterSha256": "3f35efee4f940e0e570a73b5697b9cb4c793d1b76ac0bcb2c883aa5f58ce3854",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/map-type-annotation-freeze.test.js",
+        "beforeSha256": "965480fcce80ddcd295c0cc2e50c159e323354641890f54cefd222197a04f781",
+        "afterSha256": "43f2f42daf54ea190b65cca97252779cb9592c06e7c7f2e480127c0a7ed6ef58",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/node-restore-state.test.js",
+        "beforeSha256": "b8ab74893bb38a25cbee805685fba370412e433b08c9f087f99f020c613b55e6",
+        "afterSha256": "ec2945b0635988aa85b238e0bc7a0d52d8f078739cd2eb8321de309295d813a7",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/node-reward-state.test.js",
+        "beforeSha256": "5ba9e7344215731e2f5eeb717737a1df05e82bcee064bdd2957a778ebf879deb",
+        "afterSha256": "91bd583d57ce99701c0a1de1369d770c27c20916bc0bdcb0a1534b57ecfef8e9",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/page-entry-cancellation.test.js",
+        "beforeSha256": "8f835aadfc039af65b8984b1b90a7c83aafa2beaf02bafdc9f64ee1054bec21f",
+        "afterSha256": "c222c13cb28fd224d778bd8e0841ca63cf678b480e205db2f51f707f35ccb9c0",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/photo-studio-catalog-cache.test.js",
+        "beforeSha256": "83fde6bed756910b910ea6cd32089a55c3dea9cbe3b98ad366c16d2e559acdfc",
+        "afterSha256": "f84e3852b36cccc2117692ba6c5cda6d250b0dcf6c59dc45925ab7ec9bff5efe",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/project-bug-sweep-round2-container-discard.test.js",
+        "beforeSha256": "035ba6c9f55c7090879793c516b82b0414f469d091d14cd8b7859ac0294844b5",
+        "afterSha256": "abc3c3147ec5bb2f008222c79b0e3f2fd0f7e50b31aadf013836a33670d46914",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/project-bug-sweep-token-craft.test.js",
+        "beforeSha256": "817beb537f35c2ae527c13a4df76dbff8105bbd6015b8299efd03149d6dc4a31",
+        "afterSha256": "9541185a89fb8770c449b5a03d273dd007ee89449ec648a6214b369d8e6dea18",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/quality-config.test.js",
+        "beforeSha256": "e04f3e6dd042b83574c8f2219bf57f34c8a922074b841b5bf5fb0ae4b7cc0165",
+        "afterSha256": "ce0fda323b577459248e76005c0bfaea93e2da7b8eb4a24754bc9824da702fe6",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/r7a-qa-host.test.js",
+        "beforeSha256": "4e6f98e1ef3f1a0f55cce2c603d495ded43a3779950ccb38fdda16e1466e008d",
+        "afterSha256": "1bed2c8c768a8915786819296213ae7660bba12daa80db78222fa01961204ab9",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/requested-card-batch.test.js",
+        "beforeSha256": "66c7061bf4c9b43374b56dd8e0aedfefe04d6b5584a90e0e779be0122bc4fdd7",
+        "afterSha256": "fe378334be4d469c07005fe5b7482f2c7c2f5e074ab4c194ae1f9487c743fe7c",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/run-architecture.test.js",
+        "beforeSha256": "aa52249fae06d1de83e7b476d37122597f514ecc8fc85d86dbe197516bd63083",
+        "afterSha256": "6a179316873cbd16647566dadef815fc62a974ff16d7c1e5c733035a4b47349f",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/sound-diagnostic-policy.test.js",
+        "beforeSha256": "94d2d41b1b71122dc79a953cbbda9baaaad459f7108d785d9fd5f2fffe17ea3a",
+        "afterSha256": "6bc79ff48376442fc3a6efed4279eebd6bde0f87d0cc142661ccfaf7ac64a309",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/sound-f4ngy-draw.test.js",
+        "beforeSha256": "27d942343440918be10cb017b8052d1da119f2bebd8f9917dd0d740d69578eb4",
+        "afterSha256": "4ad32ec6f7024d800aa9da6a27f81f068a2713363b7a211b23697dfaefcfd38f",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/sound-real-foley.test.js",
+        "beforeSha256": "2ef2bdbcfce591d747e078937a8910c401e7df057714931baff96da1669a8f43",
+        "afterSha256": "e40f8ebf7e3f8aa6df2f2996b1fa7727e95a3ecddda29c24131a1f5bc7a6a85c",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/sound-safe-slot-foley.test.js",
+        "beforeSha256": "47c5d1c20ca20442ed6399d4e31405c863d36baf3d284ac886397b2bf4ffa124",
+        "afterSha256": "97347338ed54e92400ebdfcc9aec95cf288c1282739c97d63d106192ae7a08dd",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/sound-sample-only.test.js",
+        "beforeSha256": "bd926a129e9e6472d0b418866ac1ab92bce57f7ace1c25b60384522497ac2cca",
+        "afterSha256": "a48b730b19374bc172d51ec68720be868e3a72367e427de7bd34b3b86b9f82f6",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/sound-web-library.test.js",
+        "beforeSha256": "c98a65d0faae7cf1e6297887507008dbfff8ca5b7cd775064774db4c21fa8bc0",
+        "afterSha256": "5dc9bc13de254cbb5e5d4a3b0198f478421c543be980335ce2d8c3150a73606e",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/startup-guard.test.js",
+        "beforeSha256": "86b7977fc53941702372c0106d4bba45e94cbc1d2450f21c624a064cdf131719",
+        "afterSha256": "ffe3f847d051a28a83d905da97cf5bfdde63fb1e5a2efe5b9f6e1e7fc79fea5a",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/status-icon-consistency.test.js",
+        "beforeSha256": "042d3a6354616158ad7f11668c207fc9a0c5dddb8746b31990cd573f3e3fdc53",
+        "afterSha256": "ca17b3af3653dbc2b726e06ece6021ed59a93614e8d16f2c5fa24b3c7a6bd92b",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/sync-cards-from-live.test.js",
+        "beforeSha256": "d3b76af57e07becf7eea129c320bca243ec47edeb9c260ca7e7c284c8b0c4000",
+        "afterSha256": "2e73477659144ed7d651939a521211ce71c4916e56c2e233fe3e6233cf93a31b",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/transition-diagnostic-policy.test.js",
+        "beforeSha256": "dd35eb674fdeaf332096cfa39811ae422608cf92eaf26b5a20a465de2bd4dcd5",
+        "afterSha256": "3c4a10b23e5b5532008f1b08bc801761f2677244901dbe700220845a315c4bf3",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/transition-preparation.test.js",
+        "beforeSha256": "a6f106d10891b4241e19e0bcf66a44c71d5fc23ea8a8ca42fe71d9c48d3dcbfc",
+        "afterSha256": "3aa85776de845561d81baebc9a3acc0ee07e346d73f785126b0c825b35728cb9",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/visible-playback.test.js",
+        "beforeSha256": "8085ca3d93d463711ba25f24053c26f2ff90917a9e0de03a79a196dadcd9ed6b",
+        "afterSha256": "2ae613cb5d75dc711f82ec83f5c9f9960f788278e8b34b2d3920fca00ccc43fa",
+        "onlyDeclarationChanged": true
+      },
+      {
+        "file": "tests/workflow-task-input.test.js",
+        "beforeSha256": "c6debf7d464d278ebe0e1b22710970c69171891c796e04e88ba2d22551aa8844",
+        "afterSha256": "2ffc7d2669c2ab1b4c9b06f47314c7bff214569e5fb33eea80acbc8ff9851b89",
+        "onlyDeclarationChanged": true
+      }
+    ]
+  },
+  "fixture": {
+    "before": {
+      "files": 2,
+      "passed": 23,
+      "failed": 0,
+      "skipped": 35,
+      "success": true,
+      "wallMilliseconds": 34898.3748
+    },
+    "after": {
+      "files": 2,
+      "passed": 23,
+      "failed": 0,
+      "skipped": 35,
+      "success": true,
+      "wallMilliseconds": 31228.658400000008
+    },
+    "identicalCasesAndStatuses": true,
+    "improvementPercent": 10.51543638072221,
+    "inputsUnchanged": true
+  },
+  "limits": [
+    "同一配置与依赖下各做一组依次对照，耗时受机器负载与缓存影响",
+    "局部用例提速比例不等于整库提速比例",
+    "Node 对照只改文件级环境声明，流程对照通过内存转换读取本轮修改前源码，未回退工作区"
+  ]
+}

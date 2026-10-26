@@ -1,5 +1,6 @@
 import { isLegacySearchChestOperation, legacyDeckBottomCandidateCount } from '../../cards/card-legacy-battle-policy.js';
 import { parsePoolNoun } from './effect-steps.ctx.js';
+import { scavengeText } from '../../core/scavenge-terminology.js';
 
 /** Card acquisition uses the caller's discover queue, deck and random source. */
 export function createAcquireOperation({ getAllCards, getMyClass, deckBottomCount, takeDeckBottom,
@@ -30,8 +31,9 @@ export function createAcquireOperation({ getAllCards, getMyClass, deckBottomCoun
     if (noun) return noun;
     // named 具体卡名（熔岩爆破「获得 1 张『二次爆炸』」/流光斩「将流光照影洗入牌库」）：
     // 精确同名卡存在才收窄为指定池，否则维持 null 交回通用池（与文本路径「未识别 → 通用池」一致）
-    const named = typeof getAllCards === 'function' && getAllCards().find(c => c.name === pool.kind);
-    return named ? card => card.name === pool.kind : null;
+    const name = scavengeText(pool.kind);
+    const named = typeof getAllCards === 'function' && getAllCards().find(c => scavengeText(c.name) === name);
+    return named ? card => scavengeText(card.name) === name : null;
   }
 
   // dest 三向（G3 行「去向 hand|deck|discover」，缺省 discover——发现面板三选一是本域辨识度最高的
@@ -53,7 +55,7 @@ export function createAcquireOperation({ getAllCards, getMyClass, deckBottomCoun
   function resolveAcquireOperation(card, operation) {
     const myClass = typeof getMyClass === 'function' ? getMyClass() : null;
     // M2：pool.kind '牌库底'——只从本场实际牌库底发现，空库不降级随机获取。
-    // 搜索大宝箱的旧迁移仍声明随机入手三张；该精确旧形状沿已定版 BOSS 牌库底三选一。
+    // 搜索军用保险柜的旧迁移仍声明随机入手三张；该精确旧形状沿已定版 BOSS 牌库底三选一。
     const legacySearchChest = isLegacySearchChestOperation(card, operation);
     if (operation.pool?.kind === '牌库底' || legacySearchChest) {
       // 挖宝的旧实例曾存 n:1；它表示选一张，实际候选固定读取底部三张。
@@ -89,14 +91,14 @@ export function createAcquireOperation({ getAllCards, getMyClass, deckBottomCoun
     const dest = operation.dest || 'discover';
     const act = operation.act;
     // 面板日志的池名（文本路径 discover.pool 同款：名词去尾「的」+ 限制池括注）
-    const label = pred ? String(operation.pool.kind === 'moves' ? '招式' : operation.pool.kind).replace(/的$/, '') : '';
+    const label = pred ? scavengeText(operation.pool.kind === 'moves' ? '招式' : operation.pool.kind).replace(/的$/, '') : '';
     const poolSuffix = pred ? `【${esc(label)}】（限制卡池）` : '';
     // named 精确同名卡优先直取：「获得/将指定卡…」（熔岩爆破二次爆炸/三重火球火球/流光斩流光照影）
     // 是指定获取语义，与文本路径 deck.gainNamed/insertHand 同款——不得被发现池的
     // rarity=衍生/职业/unrandom 资格边界滤空（pred 谓词来自 named 兜底分支时才走此捷径，
     // parsePoolNoun 类型/系列谓词仍走随机池口径）。仅影响 acquire 路径，不碰 discover op。
     const namedExact = typeof getAllCards === 'function' && pred
-      ? getAllCards().find(c => c.name === operation.pool.kind) : null;
+      ? getAllCards().find(c => scavengeText(c.name) === scavengeText(operation.pool.kind)) : null;
     const drawOne = namedExact ? () => ({ ...namedExact }) : () => randomDiscoverCard(pred);
     // act 在直发路径的模板修饰：zeroCost 固定为0，costMinusOne 原费用减1；noInfuse 透传 _noInfuse
     const decorate = tpl => {

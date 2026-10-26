@@ -1,0 +1,87 @@
+{
+  "status": "generated",
+  "request": {
+    "input": "solo, 1woman, adult female urban necromantic superhuman, exhausted calm face, short uneven ash-gray hair, black medical mortuary coat over desaturated plum work clothes, pale latex gloves, dark boots, a few restrained cold cyan threads wrapped around her left hand. She leans forward slightly in a wary battle stance, whole body and face pointing toward screen-left in three-quarter side view, left hand reaching toward screen-left, right hand curled close to chest. Restrained eerie presence, no floating people, no skeleton army, no staff, no medieval fantasy armor.\n\nOne complete full-body battle character illustration on a truly transparent background.\n\nBody, face, gaze, feet and any forward-reaching limbs point toward SCREEN-LEFT. One complete centered figure with clean empty margins. Entire head, hands, feet and appendages inside canvas. Eye-level camera, no floor, no stage, no scenery. Full body, not a portrait crop.\n\nMuted ivory, charcoal and restrained cool accents; readable broad shapes, dark cloth with grouped shadows, controlled warm skin and matte material transitions.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1730265003,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, looking at viewer, facing right, back view, cropped feet, cropped head, floor, scenery, lettering",
+      "characterPrompts": [
+        {
+          "prompt": "",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "solo, 1woman, adult female urban necromantic superhuman, exhausted calm face, short uneven ash-gray hair, black medical mortuary coat over desaturated plum work clothes, pale latex gloves, dark boots, a few restrained cold cyan threads wrapped around her left hand. She leans forward slightly in a wary battle stance, whole body and face pointing toward screen-left in three-quarter side view, left hand reaching toward screen-left, right hand curled close to chest. Restrained eerie presence, no floating people, no skeleton army, no staff, no medieval fantasy armor.\n\nOne complete full-body battle character illustration on a truly transparent background.\n\nBody, face, gaze, feet and any forward-reaching limbs point toward SCREEN-LEFT. One complete centered figure with clean empty margins. Entire head, hands, feet and appendages inside canvas. Eye-level camera, no floor, no stage, no scenery. Full body, not a portrait crop.\n\nMuted ivory, charcoal and restrained cool accents; readable broad shapes, dark cloth with grouped shadows, controlled warm skin and matte material transitions.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, looking at viewer, facing right, back view, cropped feet, cropped head, floor, scenery, lettering",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\boss-art-1026\\boss_necromancer-nai.png",
+  "seed": 1730265003,
+  "sha256": "e07759248f72515f87ca0fa3dee5274b932d4dd275a91c8b2cf8e6003b359169"
+}

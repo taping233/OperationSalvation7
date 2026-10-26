@@ -1,0 +1,32 @@
+[
+  {
+    "key": "recovery",
+    "source": "C:/Users/太平/.codex/generated_images/01a178c0-b82f-71b2-a588-817bb970d9a0/exec-95a6baeb-2870-453e-b262-c128a019bf16.png",
+    "prompt": "Create a SMALL TRANSPARENT GAMEPLAY HEALING EFFECT, a local effect beside a health bar, never a cinematic or scene. Input 1 is the NAI5 concept: borrow ONLY its warm-ivory repair seam and muted silver-sage leaf colors. Completely discard the stone disc, buildings, environment, dark background and presentation layout. Paint three short tapering upward swipes of muted ivory and sage, one tiny fresh leaf between them, a very small warm join of light. Open asymmetrical silhouette, airy real transparent negative space between separate brush strokes. Loose opaque hand-painted anime brushwork, matte controlled low saturation matching a charcoal/ivory game. Roughly square isolated effect cluster, designed to read at 56 to 80 pixels, no frame. No circle, no circular halo, no glowing orb, no large core, no plus sign, no text or numbers, no hand or person, no city, no architecture. Actual transparent background and no shadow rectangle. This is a restrained local healing cue lasting less than a second.",
+    "nai_request": "nai-recovery.json",
+    "references": [
+      ".tmp/nai/layer-cinematics-1026/recovery.png"
+    ],
+    "asset": "ui/outcome/recovery-v2.webp"
+  },
+  {
+    "key": "restoration",
+    "source": "C:/Users/太平/.codex/generated_images/01a178c0-b82f-71b2-a588-817bb970d9a0/exec-8606f3c5-68b8-4b3f-96ca-6fe3abb41b2d.png",
+    "prompt": "A SMALL LOCAL CARD-RESTORATION EFFECT on real TRANSPARENT background. Input NAI5 concept supplies only the blank ivory plates and repair seam. Discard all backdrop and framing. Create two or three slim broken ivory brush fragments aligning toward a short warm-gold seam, with a faint suggestion of a single card corner, not a solid complete card icon. Airy asymmetric open painted strokes, matte warm grey ivory, very low saturation, small controlled gold accent. It will appear at only 56-72 pixels beside actual restored cards. No environment, no city, no stone building, no black rectangle, no full-screen scene, no ring, no halo, no orb, no lettering, no symbols or numbers. Broad confident hand-painted brush marks with selective sharp edges, isolated compact effect with generous genuine alpha between strokes. Do not draw substitute game cards, no card suits, no UI, no border, no watermark.",
+    "nai_request": "nai-restoration.json",
+    "references": [
+      ".tmp/nai/layer-cinematics-1026/restoration.png"
+    ],
+    "asset": "ui/outcome/restoration-v2.webp"
+  },
+  {
+    "key": "offering",
+    "source": "C:/Users/太平/.codex/generated_images/01a178c0-b82f-71b2-a588-817bb970d9a0/exec-4b20ecae-8094-4fef-a3aa-f0400535dafb.png",
+    "prompt": "A SMALL LOCAL OFFERING/ACTIVATION GAMEPLAY EFFECT on genuine TRANSPARENT background. Input NAI5 draft supplies only the three grey chips converging to a muted rust-red seam. REMOVE the entire human hand, pedestal, environment, ground and backdrop. Just three tiny angular warm-grey chips and two short tapered muted rust-red/ivory brush streaks converging toward one very small gap of warm light. Open asymmetric directional silhouette, matte hand-painted brushwork with controlled low saturation, readable at 56-72 pixels beside actual sacrificed cards. No architecture, no stone monument, no magic circle, no rune, no diamond icon, no orb or large bright core. No people, body, hands, lettering, text, numbers, UI, border or watermark. Minimal, quiet, local effect, plenty of transparent negative space between separate marks; no background rectangle.",
+    "nai_request": "nai-offering.json",
+    "references": [
+      ".tmp/nai/layer-cinematics-1026/offering.png"
+    ],
+    "asset": "ui/outcome/offering-v2.webp"
+  }
+]

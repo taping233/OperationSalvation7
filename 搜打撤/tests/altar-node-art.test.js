@@ -29,7 +29,7 @@ describe('祭坛原创图标接入', () => {
     const source=readFileSync('game/src/run/game.run.altar.js','utf8');
     expect(source).toContain("icon: '[[icon:altar]]', title: '污染祭坛'");
     expect(source).toContain("UI.showOverlay('[[icon:crystal]] 选择要献祭的卡牌'");
-    expect(source).toContain("confirmLabel:'确认献祭'");
+    expect(source).toContain("confirmLabel:emergency ? '献祭并撤离' : '确认献祭'");
     expect(readFileSync('game/src/run/game.nest.js','utf8')).toContain('[[icon:altar]] 研究所祭坛');
   });
   it('资源清单含准确字节、SHA和可用来源', () => {

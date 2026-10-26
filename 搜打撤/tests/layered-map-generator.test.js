@@ -53,7 +53,7 @@ describe('四层种子化地图生成器', () => {
         const battles = layer.nodes.filter(n => n.type === 'battle').length;
         const events = layer.nodes.filter(n => n.type === 'event').length;
         expect(chests, `seed=${seed} 第${li + 1}层物资格数量异常`).toBeGreaterThanOrEqual(1);
-        expect(chests, `seed=${seed} 第${li + 1}层宝箱格超过 4`).toBeLessThanOrEqual(4);
+        expect(chests, `seed=${seed} 第${li + 1}层搜刮点格超过 4`).toBeLessThanOrEqual(4);
         expect(battles, `seed=${seed} 第${li + 1}层敌人格超过 4`).toBeLessThanOrEqual(4);
         // 2026-09-13：每层事件格 ≤3（第 3 层受战斗/搜刮上限约束结构性最少 4 个，放宽到 ≤4）
         expect(events, `seed=${seed} 第${li + 1}层事件格超过 ${li === 2 ? 4 : 3}`).toBeLessThanOrEqual(li === 2 ? 4 : 3);

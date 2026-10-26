@@ -5,6 +5,7 @@ import { showBattleCardResults } from '../game/src/battle/view/battle.card-resul
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '', TYPE_ART: {} } };
+window.SDT.Icons ||= { img: () => '', TYPE_ART: {} };
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {}, setBoss() {} };
 window.SDT.MAP = { rules: { ...battleRules(99, 20, 15, 0, 20, 0) }, items: {} };
 await import('../game/src/cards/cards.js');

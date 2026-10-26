@@ -26,7 +26,6 @@ await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const { render } = await import('../game/src/battle/view/battle.view.js');
 const Aim = await import('../game/src/battle/view/battle.aim.js');
-const { openHandInspector, closeHandInspector } = await import('../game/src/battle/view/battle.hand-inspector.js');
 const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
 const { set$energy, set$turn } = await import('../game/src/battle/runtime/battle.runtime.session.js');
 const Cards = window.SDT.Cards;
@@ -34,8 +33,6 @@ Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureD
 const originalRaf = window.requestAnimationFrame;
 const originalAnimate = Element.prototype.animate;
 let frames, game;
-// The retained inspector is exercised through its API; battle no longer exposes a details button.
-const inspectCard = uid => openHandInspector(uid, selected => actions.get('btPlay')({ uid:selected }));
 const stage = () => UI.el.ovBody.querySelector('.battle-stage');
 const card = () => UI.el.ovBody.querySelector('.sts-hand .bt-card');
 function flush() { for (let i = 0; frames.length && i < 30; i++) frames.shift()(performance.now()); }
@@ -70,7 +67,7 @@ beforeEach(async () => {
   });
 });
 afterEach(async () => {
-  closeHandInspector({ restoreFocus: false }); Aim.cancelAim(); Aim.cancelClickSelection(); clearFeedback();
+  Aim.cancelAim(); Aim.cancelClickSelection(); clearFeedback();
   if (game?.battleActive) BattleSession.commands.flee();
   await settle();
   frames = []; actions.clear(); window.requestAnimationFrame = originalRaf; Element.prototype.animate = originalAnimate;
@@ -94,8 +91,7 @@ it('compares real mixed combat inputs without keeping derived rules across rende
   expect(card().dataset.handState).toBe('blocked');
   expect(card().getAttribute('aria-label')).toContain('能量不足');
   set$energy(9); render(); checkpoint('energy-restored');
-  inspectCard('inspect-card');
-  document.querySelector('.bt-hand-detail-use').click(); checkpoint('target-selection');
+  card().click(); checkpoint('target-selection');
   expect(Aim.clickSelectedUid).toBe('inspect-card');
   Aim.cancelClickSelection(); render(); checkpoint('cancel-selection');
   BattleSession.commands.playCard('inspect-card', 0); await settle(); checkpoint('play');

@@ -1,0 +1,53 @@
+{
+  "previousCurrentHits": 31,
+  "remainingOriginalReferences": [],
+  "preservedExemptions": [
+    {
+      "file": "game/src/cards/cards.consts.js",
+      "old": "邪渊主宰",
+      "preserved": true
+    },
+    {
+      "file": "docs/modules/R7-A-DELIVERY.md",
+      "old": "联邦射手",
+      "preserved": true
+    },
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "old": "联邦射手",
+      "preserved": true
+    },
+    {
+      "file": "docs/modules/R7-A-DELIVERY.md",
+      "old": "联邦机动兵",
+      "preserved": true
+    },
+    {
+      "file": "docs/modules/R7-A-DELIVERY.md",
+      "old": "灼热异变体",
+      "preserved": true
+    },
+    {
+      "file": "docs/modules/R7-A-DELIVERY.md",
+      "old": "滋生异变体",
+      "preserved": true
+    },
+    {
+      "file": "docs/modules/R3-A-PREVIEW-CONTRACT-PLAN.md",
+      "old": "异能领主",
+      "preserved": true
+    },
+    {
+      "file": "docs/modules/R3-A-PREVIEW-CONTRACT-PLAN.md",
+      "old": "异能领主",
+      "preserved": true
+    },
+    {
+      "file": "docs/modules/R6-A-DELIVERY.md",
+      "old": "暴雨劫道",
+      "preserved": true
+    }
+  ],
+  "sourceDescription": "      { id: 'foe-bandit',     name: '截道拾荒者', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'bandit',     desc: '攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（武装截查 ×5）。' },",
+  "compendiumDescription": "| 截道拾荒者 | 0 | 衍生 | 通用 | 攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（武装截查 ×5）。 |"
+}

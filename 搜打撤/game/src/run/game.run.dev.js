@@ -44,15 +44,35 @@ async function devForceBattle(isBoss) {
 }
 
 const DEV_NODE_LABEL = {
-  battle: '遭遇战', boss: 'BOSS 战', shop: '商店', 'chest-small': '小宝箱', 'chest-medium': '中宝箱',
-  'chest-large': '大宝箱', event: '事件', fire: '火堆', altar: '祭坛',
+  battle: '遭遇战', boss: 'BOSS 战', shop: '商店', 'chest-small': '小型物资箱', 'chest-medium': '密封物资箱',
+  'chest-large': '军用保险柜', event: '事件', fire: '火堆', altar: '祭坛',
 };
 
 
+let devDeparturePublication = null;
 async function devEnsureRun() {
   if (game.battleActive) { UI.log('[[icon:lock]] 战斗进行中——先打完或退出战斗再跳节点', 'warn'); return false; }
-  if (game.runActive) return true;
-  if (await newRun('standard') === false) return false;
+  let resumed = false;
+  if (devDeparturePublication) {
+    const pending = devDeparturePublication;
+    if (!pending.isCurrent()) devDeparturePublication = null;
+    else {
+      resumed = await pending.retry();
+      if (!pending.isCurrent()) { devDeparturePublication = null; return false; }
+      if (!resumed) { UI.log('测试远征已创建，地图尚未打开；再次选择节点可继续。', 'warn'); return false; }
+      devDeparturePublication = null;
+    }
+  }
+  if (!resumed && game.runActive) return true;
+  if (!resumed) {
+    const started = await newRun('standard');
+    if (started === false) return false;
+    if (started?.status === 'departure-pending' && started.committed === true) {
+      devDeparturePublication = started;
+      UI.log('测试远征已创建，地图尚未打开；再次选择节点可继续。', 'warn');
+      return false;
+    }
+  }
   document.getElementById('title').hidden = true;
   // 节点测试绕过了正常的选人流程；补齐一个真实角色，避免战斗 HUD 落入“未选择人物”。
   game.characterId = 'heixiang';

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-26T12:31:45.892Z",
+  "inputKind": "real-input",
+  "detail": "进入档位02→人物→星月→外观；补白画布contain导致人物缩小",
+  "screenshot": {
+    "path": "ratio-before.png",
+    "bytes": 142359,
+    "sha256": "c847ef2e6ec5346a46c959e54b63d463923dc741fcc61267442c090d06c93e96"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [],
+  "console": []
+}

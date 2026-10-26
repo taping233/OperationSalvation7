@@ -1,12 +1,5 @@
-/* M6 卡牌规则化数据迁移批 D8 锁定（2026-09-27）：cards.sync.m6.js ensureM6BagRules。
- * 13 张 bag 道具卡逐卡三条用例：
- *   1) validateCardRules + inspectCardRuleCapability 双门通过（回填后的 rules 形状）；
- *   2) 回填函数对 canonical 卡生效（rules 逐键一致、卡面不动、落库复读一致、marker 盖章）；
- *   3) 保守跳过：被改名 / 改字段 / 已有自有 rules 的卡一律不回填。
- * 用例 1/2 依赖 bag.use 扩展 op（energy/blessing/curse/draw/damage/execute/acquire/discover/flee）
- * 的在途实现——运行时探测双门：未放行的卡自动 skip 并在标题标注等待的契约项（合入后自动转正）；
- * 用例 3 与批次级保守语义不依赖双门，无条件锁定。
- * 纯单元：依赖注入 storage/library，不启动 cards.js 播种链。 */
+/* M6 道具规则迁移：逐卡校验现行规则和自定义保护，整批只回填一次。
+ * bag.use 扩展已完成；schema 或消费者退化必须报错，不按能力自动跳过。 */
 import { describe, expect, it } from 'vitest';
 import { KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
@@ -46,20 +39,6 @@ const EXPECTED_RULES = {
 const canonicalById = new Map([...TABLETOP10, ...TABLETOP11].map(card => [card.id, card]));
 const ALL_IDS = [...canonicalById.keys()];
 const freshCards = () => ALL_IDS.map(id => ({ ...canonicalById.get(id) }));
-
-// 双门探测：bag.use 扩展 op 由并行批在途实现，未放行的卡在运行时标记「等待收编」。
-const probe = Object.fromEntries(ALL_IDS.map((id) => {
-  const card = { ...canonicalById.get(id), rules: EXPECTED_RULES[id] };
-  const validation = validateCardRules(card);
-  if (!validation.ok) {
-    return [id, { ok: false, reason: validation.errors.map(err => `${err.path}: ${err.message}`).join('; ') }];
-  }
-  const capability = inspectCardRuleCapability(card);
-  return [id, capability.ok
-    ? { ok: true, reason: '' }
-    : { ok: false, reason: capability.issues.map(issue => `${issue.path}: ${issue.message}`).join('; ') }];
-}));
-const ALL_SUPPORTED = ALL_IDS.every(id => probe[id].ok);
 
 function makeStorage(initial = {}) {
   const map = new Map(Object.entries(initial));
@@ -114,29 +93,31 @@ describe('M6 数据迁移批 D8：每张迁的卡', () => {
     expect(harness.cards().find(card => card.id === flame.id)).toEqual(flame);
   });
 
+  it('整批只迁移和保存一次，逐卡校验规则、卡面及持久化', () => {
+    expect(ALL_IDS.slice().sort()).toEqual(Object.keys(EXPECTED_RULES).sort());
+    const harness = makeHarness(freshCards());
+    ensureM6BagRules(harness);
+    for (const id of ALL_IDS) {
+      const card = harness.cards().find(entry => entry.id === id);
+      expect(card.rules, `${id} 应被回填结构化 rules`).toEqual(EXPECTED_RULES[id]);
+      // 除 rules 外卡面一字未动
+      const face = Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules'));
+      expect(face).toEqual(canonicalById.get(id));
+    }
+    expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(harness.cards()));
+    expect(harness.storage.getItem(MARKER)).toBe('1');
+    expect(harness.library.saves).toBe(1);
+  });
+
   for (const id of ALL_IDS) {
     describe(id, () => {
-      it.skipIf(!probe[id].ok)(`双门通过：schema 校验 ok 且 capability supported【${probe[id].reason}】`, () => {
+      it('schema 校验与实际消费均受支持', () => {
         const card = { ...canonicalById.get(id), rules: EXPECTED_RULES[id] };
         const validation = validateCardRules(card);
         expect(validation.ok, `${id} schema 校验失败：${JSON.stringify(validation.errors)}`).toBe(true);
         const capability = inspectCardRuleCapability(card);
         expect(capability.ok, `${id} 能力门拒绝：${JSON.stringify(capability.issues)}`).toBe(true);
         expect(capability.kind).toBe('supported');
-      });
-
-      it.skipIf(!probe[id].ok)(`回填生效：rules 逐键一致、卡面不动、落库复读一致、marker 盖章【等待契约键：${probe[id].reason}】`, () => {
-        const harness = makeHarness(freshCards());
-        ensureM6BagRules(harness);
-        const card = harness.cards().find(entry => entry.id === id);
-        expect(card.rules, `${id} 应被回填结构化 rules`).toEqual(EXPECTED_RULES[id]);
-        // 除 rules 外卡面一字未动
-        const face = Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules'));
-        expect(face).toEqual(canonicalById.get(id));
-        // 成功后复读确认：storage 串与库内容一致；全批一次保存、单枚 marker
-        expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(harness.cards()));
-        expect(harness.storage.getItem(MARKER)).toBe('1');
-        expect(harness.library.saves).toBe(1);
       });
 
       it('保守跳过：被改名 / 改字段 / 已有自有 rules 的卡一律不回填', () => {
@@ -159,24 +140,14 @@ describe('M6 数据迁移批 D8：每张迁的卡', () => {
 });
 
 describe('M6 数据迁移批 D8：批次级保守语义', () => {
-  it('marker 一次性：盖章后重复执行不再写库；双门未收编时保守退出', () => {
+  it('marker 一次性：成功盖章后重复执行不再写库', () => {
     const harness = makeHarness(freshCards());
     ensureM6BagRules(harness);
-    expect(harness.library.saves).toBe(ALL_SUPPORTED ? 1 : 0);
-    expect(harness.storage.getItem(MARKER)).toBe(ALL_SUPPORTED ? '1' : null);
+    expect(harness.library.saves).toBe(1);
+    expect(harness.storage.getItem(MARKER)).toBe('1');
     ensureM6BagRules(harness);
     ensureM6BagRules(harness);
-    expect(harness.library.saves, '重复执行不得再 saveAll').toBe(ALL_SUPPORTED ? 1 : 0);
-  });
-
-  it.skipIf(ALL_SUPPORTED)('等待收编形态：双门未放行时十三张数据全部不动、无 marker', () => {
-    const harness = makeHarness(freshCards());
-    ensureM6BagRules(harness);
-    expect(harness.library.saves).toBe(0);
-    expect(harness.storage.getItem(MARKER)).toBe(null);
-    for (const card of harness.cards()) {
-      expect(card.rules, `${card.id} 在扩展键收编前不得写入 rules`).toBeUndefined();
-    }
+    expect(harness.library.saves, '重复执行不得再 saveAll').toBe(1);
   });
 
   it('库内缺卡：整体保守退出，不标记、不部分回填', () => {
@@ -216,12 +187,8 @@ describe('M6 数据迁移批 D8：批次级保守语义', () => {
     // 旧副本卡面与 TABLETOP10 定版深不相等 → 按 id 计数在批内但深等校验不过 → 保守跳过
     expect(harness.cards().find(card => card.id === 'tt3-blue-potion')).toEqual(legacy);
     expect(harness.cards().find(card => card.id === 'tt3-blue-potion').rules).toBeUndefined();
-    if (ALL_SUPPORTED) {
-      for (const id of ALL_IDS.filter(id => id !== 'tt3-blue-potion')) {
-        expect(harness.cards().find(card => card.id === id).rules).toEqual(EXPECTED_RULES[id]);
-      }
-    } else {
-      expect(harness.storage.getItem(MARKER)).toBe(null);
+    for (const id of ALL_IDS.filter(id => id !== 'tt3-blue-potion')) {
+      expect(harness.cards().find(card => card.id === id).rules).toEqual(EXPECTED_RULES[id]);
     }
   });
 });

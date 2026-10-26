@@ -1,23 +1,20 @@
 /** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { bindBattlePageAction } from './battle.page-activity.js';
 import { BATTLE_CONSUMED_LABEL, consumedPileUids } from './battle.piles.view.js';
-/* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：独立弹层渲染（renderDeckSelection / renderGrave / renderBattleBag + 卡身份键）。
+/* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：独立弹层渲染（renderDeckSelection / renderGrave / renderDeckPileView）。
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { createBattleDecisionPresenter, bindBattleDecisionInspection } from './battle.decision-shell.js';
-import { battlePileBodyHTML, pileDetailHTML, cardIdentityKey } from './battle.decision-content.js';
+import { battlePileBodyHTML } from './battle.decision-content.js';
 import { esc } from '../../core/shared.js';
 import { escAttr } from '../../core/shared.js';
 import { commands, getSnapshot, AFFIX_META, R, findEffectiveCard as findCard } from '../core/battle.core.js';
-  const closeBagCmd = commands.closeBag;
-  const useItemCmd = commands.useItem;
   const closeGrave = commands.closeGrave;
   const closeDeckView = commands.closeDeckView;
   const selectDeckCard = commands.selectDeckCard;
   const confirmDeck = commands.confirmDeck;
   const cancelDeck = commands.cancelDeck;
-const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
 const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R });
 
 
@@ -96,79 +93,4 @@ const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R })
     UI.refresh(SDT.game);
   }
 
-  // 战斗背包（2026-09-09 老板：战斗中开背包使用道具；2026-09-09 玩法定版：
-  // 新增「存入安全格」——撤离判负前把卡牌转移进安全格，失败抢运时才保得住）
-  function renderBattleBag(snapshot) {
-    const byName = new Map();
-    (SDT.game.ownedCards || []).forEach(o => {
-      if (!o.card || o.card.type !== '道具' || o.safe) return;
-      const key = cardIdentityKey(o.card);
-      if (!byName.has(key)) byName.set(key, { key, card: o.card, uids: [] });
-      byName.get(key).uids.push(o.uid);
-    });
-    const stacks = [...byName.values()];
-    const cardsHTML = stacks.length
-      ? stacks.map((st, i) => `<div class="battle-bag-entry">
-          <button type="button" class="bt-card bag-slot filled battle-bag-slot" data-act="btUseItem" data-uid="${st.uids[0]}" aria-label="使用 ${escAttr(st.card.name)}"
-            title="${escAttr(st.card.desc || st.card.name)}——点击使用">
-            ${SDT.Cards.cardHTML(st.card, 'sm')}
-            ${st.uids.length > 1 ? `<span class="bt-count" title="同名道具 ${st.uids.length} 件">×${st.uids.length}</span>` : ''}
-          </button><button type="button" class="battle-bag-inspect" data-act="btInspectBag" data-i="${i}">查看规则</button></div>`).join('')
-      : '<p class="ov-empty">背包里没有道具卡……（道具卡可从宝箱 / 商店获得）</p>';
-    // —— 安全格转移（同名堆叠整组存入；容量在基地用口粮升级）——
-    const cap = (SDT.game.safeCap && SDT.game.safeCap()) || 0;
-    const used = (SDT.game.safeUsed && SDT.game.safeUsed()) || 0;
-    const bySafe = new Map();
-    (SDT.game.ownedCards || []).forEach(o => {
-      if (!o.card || o.safe || o.stored || isStarterAttack(o.card)) return;   // 珍珠盒存放中的卡不在此列出（2026-09-10 #29）
-      const key = cardIdentityKey(o.card);
-      if (!bySafe.has(key)) bySafe.set(key, { key, card: o.card, uids: [] });
-      bySafe.get(key).uids.push(o.uid);
-    });
-    const safeStacks = [...bySafe.values()];
-    const room = Math.max(0, cap - used);
-    const safeHTML = safeStacks.length
-      ? safeStacks.map((st, i) => {
-          const fits = st.uids.length <= room;
-          return `<div class="battle-bag-entry"><button type="button" class="bt-card bag-slot filled battle-bag-slot${fits ? '' : ' off'}" data-act="btSafeMove" data-card-key="${escAttr(st.key)}" aria-label="存入安全格 ${escAttr(st.card.name)}，${st.uids.length} 张${fits ? '' : '，空位不足'}"
-            title="${escAttr(`将「${st.card.name}」×${st.uids.length} 整组存入安全格（撤离失败时安全运回）${fits ? '' : '——安全格空位不足'}`)}">
-            ${SDT.Cards.cardHTML(st.card, 'sm')}
-            ${st.uids.length > 1 ? `<span class="bt-count">×${st.uids.length}</span>` : ''}
-            <span class="bt-count" style="top:auto;bottom:3px">[[icon:safe-slot]] 存入</span>
-          </button><button type="button" class="battle-bag-inspect" data-act="btInspectBag" data-i="${stacks.length + i}">查看规则</button></div>`;
-        }).join('')
-      : '<p class="ov-empty">背包里没有可存入的卡牌。</p>';
-    const inspectCards = [...stacks, ...safeStacks];
-    showBattleDecision(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · [[icon:bag]] 战斗背包`, `
-      ${inspectCards.length ? `<p class="ov-note">查看规则只展开详情；使用或存入需点击卡牌。</p>${pileDetailHTML({ card:inspectCards[0].card, count:inspectCards[0].uids.length })}` : ''}
-      <section class="battle-bag-section"><h4>使用道具</h4><p class="ov-stats">点击使用；无法在战斗中使用的道具需回地图使用。</p>
-      <div class="bag-grid battle-bag-grid">${cardsHTML}</div>
-      </section><section class="battle-bag-section"><h4>保护卡牌 <span>安全格 ${used}/${cap} · 空位 ${room}</span></h4>
-      <p class="ov-stats">点击把整组存入安全格；撤离失败时，安全格里的卡牌抢运回基地。</p>
-      <div class="bag-grid battle-bag-grid">${safeHTML}</div></section>
-      <div class="ov-btns"><button class="ov-btn ok" data-act="btBagBack">↩ 返回战斗（B）</button></div>`, true, snapshot);
-    (() => { const card = /** @type {BattleElement} */ (document.querySelector('#overlay .card')); if (card) card.classList.add('battle-bag'); })();
-    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btUseItem', (d) => useItemCmd(d.uid));
-    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btInspectBag', data => {
-      const stack = inspectCards[+data.i];
-      const detail = /** @type {BattleElement} */ (UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="bag"] .battle-decision-inspect'));
-      if (stack && detail) detail.outerHTML = pileDetailHTML({ card:stack.card, count:stack.uids.length });
-    });
-    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btSafeMove', (d) => {
-      if (!safeStacks.some(stack => stack.key === d.cardKey)) return;
-      const g = SDT.game;
-      const group = (g.ownedCards || []).filter(o => o.card && !o.safe && !o.stored && cardIdentityKey(o.card) === d.cardKey);
-      if (!group.length) return;
-      const name = group[0].card.name;
-      const free = Math.max(0, ((g.safeCap && g.safeCap()) || 0) - ((g.safeUsed && g.safeUsed()) || 0));
-      if (group.length > free) { UI.log(`[[icon:safe-slot]] 安全格空位不足（${free} 格）——存不进「${esc(name)}」×${group.length}`, 'warn'); SDT.Sound.sfx('deny'); return; }
-      group.forEach(o => { o.safe = true; });
-      UI.log(`[[icon:safe-slot]] 【${esc(name)}】×${group.length} 已存入安全格（撤离失败时安全运回）`, 'sys');
-      if (g.saveGame) g.saveGame();
-      renderBattleBag(getSnapshot());
-    });
-    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btBagBack', closeBagCmd);
-    UI.refresh(SDT.game);
-  }
-
-export { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView, showBattleDecision };
+export { renderDeckSelection, renderGrave, renderDeckPileView, showBattleDecision };

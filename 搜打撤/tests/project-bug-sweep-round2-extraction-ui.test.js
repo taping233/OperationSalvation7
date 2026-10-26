@@ -29,7 +29,7 @@ beforeEach(async () => {
   UI = { el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody') },
     log:vi.fn(), refresh(){}, registerHelp(){}, helpBtn:() => '', act:(name, fn) => { handlers[name] = fn; },
     showOverlay:(_title, html) => { UI.el.ovBody.innerHTML = html; } };
-  window.SDT = { UI, Base:{ isSha:() => false, stashRoom:() => H.room, stashCap:() => 25,
+  window.SDT = { UI, Icons:{rich:html=>html}, Base:{ isSha:() => false, stashRoom:() => H.room, stashCap:() => 25,
     stashUsed:() => 25 - H.room }, Meta:{ addXpToProgress(){} },
     Cards:{ cardHTML:card => card.name, rarityOf:card => card.rarity, sellPrice:card => card.value },
     Sound:{ sfx(){}, music(){} } };

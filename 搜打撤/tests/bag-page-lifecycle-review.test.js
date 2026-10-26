@@ -1,3 +1,4 @@
+import { confirmAction } from '../game/src/ui/confirm-dialog.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 const H = vi.hoisted(() => ({ game: {}, save: vi.fn(), uid: 0, bagUsed:0, safeUsed:0, bagCap:16, safeCap:6 }));
 vi.mock('../game/src/run/game.session.js', () => ({
@@ -24,7 +25,7 @@ beforeEach(async () => {
     usedPocket: [], cardOrder: [], hp: 10, maxHp: 30, coins: 0, fragments: 0, stackCapOf: () => 3, heal: vi.fn(n => { H.game.hp += n; }) });
   document.body.innerHTML = '<div id="overlay" hidden><div id="ovBody"></div></div>';
   const overlay = document.getElementById('overlay'), body = document.getElementById('ovBody');
-  ui = { el: { overlay, ovBody: body }, _acts: {}, helpTopics: {}, act(name, fn) { this._acts[name] = fn; }, log: vi.fn(), refresh: vi.fn(), helpBtn: id => `<button class="help-btn" data-help="${id}">?</button>`, registerHelp(id, def) { this.helpTopics[id] = def; },
+  ui = { confirmAction, el: { overlay, ovBody: body }, _acts: {}, helpTopics: {}, act(name, fn) { this._acts[name] = fn; }, log: vi.fn(), refresh: vi.fn(), helpBtn: id => `<button class="help-btn" data-help="${id}">?</button>`, registerHelp(id, def) { this.helpTopics[id] = def; },
     showOverlay(_title, html, mode) { document.getElementById('cardZoom')?.remove(); overlay.hidden = false; overlay.classList.remove('closing'); overlay.classList.toggle('bag-full', mode === 'bagpage'); body.innerHTML = html; },
     hideOverlay() { overlay.hidden = true; },
     showCardZoom(_card, options) { document.getElementById('cardZoom')?.remove(); const zoom = document.createElement('div'); zoom.id = 'cardZoom'; zoom.classList.toggle('inventory-zoom', options.presentation === 'inventory'); zoom.innerHTML = `<button class="cz-backdrop"></button><button class="cz-close"></button><div class="cz-card"></div><div class="cz-foot">${options.footer}</div>`; zoom.querySelector('.cz-backdrop').onclick = () => { zoom.remove(); options.returnFocus?.focus(); }; document.body.append(zoom); },
@@ -36,7 +37,7 @@ beforeEach(async () => {
   bag = await import('../game/src/hub/game.bag.js'); drag = await import('../game/src/hub/game.bag.drag.js'); bag.showBackpack(true);
 });
 afterEach(() => { drag.resetBagDrag(); document.body.replaceChildren(); vi.unstubAllGlobals(); });
-function inspect(name = potion.name) { document.querySelector(`[data-act="inspectStack"][data-name="${name}"]`).click(); }
+function inspect(name = potion.name) { const target=document.querySelector(`[data-act="inspectStack"][data-name="${name}"]`); target.focus();target.click(); }
 function pointer(type, target, id = 1, x = 20) { const event = new Event(type, { bubbles: true, cancelable: true }); Object.assign(event, { pointerId: id, button: 0, clientX: x, clientY: 20 }); target.dispatchEvent(event); }
 function startDrag() { const source = document.querySelector('[data-stack="木材卡"]'); pointer('pointerdown', source); pointer('pointermove', window, 1, 200); frames.at(-1)(); return source; }
 describe('背包旧详情/页面回调与正常返回', () => {
@@ -208,7 +209,7 @@ describe('背包旧详情/页面回调与正常返回', () => {
     expect(JSON.stringify(H.game.ownedCards)).toBe(before); expect(document.getElementById('newPage')).not.toBeNull(); expect(H.save).not.toHaveBeenCalled();
   });
   it('旧丢弃确认换局后不丢新局同名卡', async () => {
-    const { bagSlots } = await import('../game/src/hub/game.bag.bridge.js'); bagSlots.showDiscardConfirm(potion.name, false); const confirm = ui._acts.confirmDragDiscard;
+    const { bagSlots } = await import('../game/src/hub/game.bag.bridge.js'); bagSlots.showDiscardConfirm(potion.name, false); const confirm = ()=>document.querySelector('[data-confirm-submit]').click();
     H.game.discoveredPairs = new Set(); H.game.ownedCards = structuredClone(H.game.ownedCards); const before = JSON.stringify(H.game.ownedCards); confirm();
     expect(JSON.stringify(H.game.ownedCards)).toBe(before); expect(H.save).not.toHaveBeenCalled();
   });
@@ -278,13 +279,13 @@ describe('背包旧详情/页面回调与正常返回', () => {
     expect(document.querySelector('.bag-board').scrollTop).toBe(240);
     expect(document.activeElement.dataset.stack).toBe(name);
   });
-  it('丢弃取消返回原卡，确认后返回邻卡且保留背包位置', () => {
+  it('丢弃取消返回原卡，确认后返回邻卡且保留背包位置', async () => {
     document.querySelector('.bag-board').scrollTop = 180;
-    inspect(spell.name); ui._acts.detailDiscard(); ui._acts.cancelDragDiscard();
+    inspect(spell.name); ui._acts.detailDiscard(); document.querySelector('[data-confirm-cancel]').click();
     expect(document.querySelector('.bag-board').scrollTop).toBe(180);
     expect(document.activeElement.dataset.stack).toBe(spell.name);
     expect(H.game.ownedCards.some(x => x.uid === 'spell')).toBe(true);
-    inspect(spell.name); ui._acts.detailDiscard(); ui._acts.confirmDragDiscard();
+    inspect(spell.name); ui._acts.detailDiscard(); document.querySelector('[data-confirm-submit]').click(); await vi.waitFor(()=>expect(H.game.ownedCards.some(x=>x.uid==='spell')).toBe(false));
     expect(document.querySelector('.bag-board').scrollTop).toBe(180);
     expect(document.activeElement.matches('.bag-tile')).toBe(true);
     expect(document.activeElement.dataset.stack).not.toBe(spell.name);
@@ -370,8 +371,8 @@ describe('新号背包真实入口反馈', () => {
     expect(H.game.fragments).toBe(4);
     expect(document.querySelector('[data-act="bagSortCycle"]').getAttribute('aria-label')).toBeTruthy();
     inspect(); ui._acts.detailDiscard();
-    expect(document.getElementById('ovBody').textContent).toContain('永久丢弃');
-    expect(document.getElementById('ovBody').textContent).not.toContain('拖到了');
+    expect(document.getElementById('actionConfirmation').textContent).toContain('无法从消耗区或消耗牌堆取回');
+    expect(document.getElementById('actionConfirmation').textContent).not.toContain('拖到了');
   });
   it('通行证B结构化使用获取传说且保留棱彩与禁随机排除规则', () => {
     const token = { id: 'tt-token-gold', name: '员工通行证B', type: '道具', rules: { bag: { use: [{ op: 'acquire', pool: { kind: 'legendary' } }] } } };
@@ -391,7 +392,7 @@ describe('新号背包真实入口反馈', () => {
     expect(H.game.ownedCards.map(item => item.card.name)).toEqual(['盔甲', '法术', '法术']);
     expect(document.querySelector('[role="status"]').textContent).toContain('3 张卡牌：盔甲、法术、法术');
     filter('move'); expect(document.querySelector('[role="status"]').textContent).toContain('盔甲');
-    H.game.ownedCards = []; bag.showBackpack(true); expect(document.querySelector('[role="status"]')).toBeNull();
+    H.game.ownedCards = []; bag.showBackpack(true); expect(document.querySelector('.bag-receipt').textContent).toBe('');
   });
 });
 
@@ -580,7 +581,7 @@ it.each([['mixed',false], ['tt-crystal',false], ['mixed',true], ['tt-crystal',tr
   expect(document.querySelector('[data-act="useDetailCard"]').disabled).toBe(false);
   ui._acts.useDetailCard();
   if (full) { expect(H.game.heal).not.toHaveBeenCalled(); expect(H.game.ownedCards[0].card.id).toBe(spell.id); }
-  else expect(H.game.heal).toHaveBeenCalledWith(3);
+  else expect(H.game.heal).toHaveBeenCalledWith(3, { deferFeedback: expect.any(Function) });
   expect(H.save).toHaveBeenCalledOnce();
 });
 

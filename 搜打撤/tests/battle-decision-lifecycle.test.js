@@ -22,7 +22,7 @@ beforeEach(()=>{
 });
 afterEach(()=>{document.querySelector('#cardZoom')?._closeCardZoom?.(true);UI._cancelPageBg?.();vi.clearAllTimers();vi.useRealTimers();document.body.replaceChildren();document.body.className='';});
 
-it.each([['宝箱','chest','reward-replica'],['事件','scene','event-scene'],['基地','page','base-camp']])('战斗二级页替换为%s后不残留宽壳、标题或选择器命中',(_name,mode,cls)=>{
+it.each([['搜刮点','chest','reward-replica'],['事件','scene','event-scene'],['基地','page','base-camp']])('战斗二级页替换为%s后不残留宽壳、标题或选择器命中',(_name,mode,cls)=>{
   show('剩余牌库',battlePileBodyHTML({cards:[{uid:'a',card}],cardHTML:face,kind:'deck',isBoss:true}).html,true,snapshot);
   expect(document.querySelector('#overlay:has(.battle-decision-unified)')).not.toBeNull();
   UI.showOverlay(_name,`<section class="${cls}"><button>本页操作</button></section>`,mode);
@@ -51,7 +51,7 @@ it('查看详情后关闭，原支付页、滚动、输入上下文和焦点不�
 it('旧详情动作在换页、隐藏或换战斗后无效',()=>{
   const html=battleHandSelectBodyHTML({pool:[{uid:'a',card}],handSelecting:{n:1,act:'copy',mandatory:false},cardHTML:face});
   const open=()=>{show('选牌',html,'discover',snapshot);bindBattleDecisionInspection({UI,getSnapshot:()=>snapshot,cards:[card],snapshot});return UI._acts.btDecisionInspect;};
-  const old=open();UI.showOverlay('宝箱','<button>领取</button>','chest');old({i:'0'});expect(document.querySelector('#cardZoom')).toBeNull();
+  const old=open();UI.showOverlay('搜刮点','<button>领取</button>','chest');old({i:'0'});expect(document.querySelector('#cardZoom')).toBeNull();
   const hidden=open();UI.el.overlay.hidden=true;hidden({i:'0'});expect(document.querySelector('#cardZoom')).toBeNull();
   const stale=open();snapshot={...snapshot,battleToken:100};stale({i:'0'});expect(document.querySelector('#cardZoom')).toBeNull();
 });
@@ -105,4 +105,41 @@ it('hand-selection refresh retains its horizontal position and the next candidat
   snapshot.handSelecting={selectionId:2};
   show('选牌',body(pool),'discover',snapshot);
   expect(document.querySelector('[data-selection-scroll]').scrollLeft).toBe(0);
+});
+
+it('a pending discovery keeps its current root through same-round refresh and retries an asynchronous rejection', async () => {
+  snapshot.discovering={roundId:'pending-round'};
+  const body=()=>battleDiscoverBodyHTML({candidates:[{card}],cardHTML:face,action:'发现',remaining:1,pageToken:'pending-page'});
+  show('发现',body(),'discover',snapshot);
+  const root=document.querySelector('.battle-decision'), choice=root.querySelector('[data-act="btDiscover"]');
+  root.querySelector('[data-selection-scroll]').scrollLeft=210;
+  let finish;
+  const submit=vi.fn(() => new Promise(resolve => {finish=resolve;})); UI._acts.btDiscover=submit;
+  choice.click(); const pending=UI._acts.btDiscoverConfirm();
+  show('发现',body(),'discover',snapshot);
+  expect(document.querySelector('.battle-decision')).toBe(root);
+  expect(root.querySelector('[data-selection-scroll]').scrollLeft).toBe(210);
+  expect(await UI._acts.btDiscoverConfirm()).toBe(false); expect(submit).toHaveBeenCalledOnce();
+  finish(undefined); expect(await pending).toBe(false);
+  expect(choice.dataset.discoverySelected).toBe('true');
+  expect(root.querySelector('[data-act="btDiscoverConfirm"]').disabled).toBe(false);
+  submit.mockImplementationOnce(() => {snapshot={...snapshot,discovering:null};});
+  expect(await UI._acts.btDiscoverConfirm()).toBe(true); expect(submit).toHaveBeenCalledTimes(2);
+});
+
+it('a new discovery round replaces a pending old page and keeps its selection after the old result', async () => {
+  snapshot.discovering={roundId:'old-round'};
+  const body=token=>battleDiscoverBodyHTML({candidates:[{card}],cardHTML:face,action:'发现',remaining:1,pageToken:token});
+  show('发现',body('old-page'),'discover',snapshot);
+  let finish;
+  UI._acts.btDiscover=vi.fn(() => new Promise(resolve => {finish=resolve;}));
+  document.querySelector('[data-act="btDiscover"]').click(); const pending=UI._acts.btDiscoverConfirm();
+  snapshot={...snapshot,discovering:{roundId:'new-round'}};
+  show('发现',body('new-page'),'discover',snapshot);
+  const next=document.querySelector('.battle-decision'); next.querySelector('[data-act="btDiscover"]').click();
+  finish(undefined); await pending;
+  expect(document.querySelector('.battle-decision')).toBe(next);
+  expect(next.querySelector('[data-act="btDiscover"]').dataset.discoverySelected).toBe('true');
+  expect(next.querySelector('[data-act="btDiscoverConfirm"]').disabled).toBe(false);
+  expect(next.querySelector('.discovery-selection-status')).toBeNull();
 });

@@ -40,7 +40,7 @@ it('复原呈现实际卡快照和重复张数，卡名转义且卡面不占焦�
 it('子动画结束不提前结束整场演出，主动画结束后释放计时器', async () => {
   const result = playFireRestFeedback(root, { kind:'heal' });
   const event = () => { const end = new Event('animationend', { bubbles:true }); Object.defineProperty(end,'animationName',{value:'fire-rest-feedback'}); return end; };
-  scene.querySelector('.fire-heal-sigil').dispatchEvent(event());
+  scene.querySelector('.fire-heal-meter').dispatchEvent(event());
   expect(scene.querySelector('.fire-rest-feedback')).not.toBeNull();
   scene.querySelector('.fire-rest-feedback').dispatchEvent(event());
   expect(await result).toBe(true);

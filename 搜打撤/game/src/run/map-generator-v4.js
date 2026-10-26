@@ -10,7 +10,7 @@ export const MAX_CURRENT_MAP_ATTEMPTS = 64;
 const FALLBACK_TOPOLOGY_SEED = 'map-v4-fallback-20261017';
 // 冻结旧函数的默认值让 TS 推成 number；实际历史契约同时接受字符串 seed。
 const legacyMap = /** @type {(seed: string | number) => ReturnType<typeof generateLayeredMap>} */ (generateLayeredMap);
-const NAMES = { battle: '战斗', event: '事件', fire: '火堆', chest: '宝箱', shop: '补给站',
+const NAMES = { battle: '战斗', event: '事件', fire: '火堆', chest: '搜刮点', shop: '补给站',
   emergencyExit: '紧急撤离点', altar: '祭坛', boss: '首脑', resource: '物资格' };
 
 function shuffled(values, random) {

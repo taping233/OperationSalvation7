@@ -105,7 +105,10 @@ export interface EntrySupply {
   entered?: boolean;
 }
 
-export type NodeReward = { version: 1; settled?: boolean; actionChoice?: number } & (
+export type NodeReward = { version: 1; settled?: boolean; actionChoice?: number;
+  altarFragmentChoice?: { characterId: string; cardIds: [string]; taken: null | 0 } } & (
+  | { type: 'closed' }
+  | { type: 'altar' }
   | { type: 'resource'; cardIds: string[]; taken: number | null }
   | { type: 'event'; eventId: string }
   | { type: 'event-choice'; eventId: 'ev19-potions' | 'ev19-quartermaster';
@@ -232,11 +235,12 @@ export interface GameState {
   canAcceptCard?: (card: CardSnapshot) => boolean;
   canReceiveCard?: (card: CardSnapshot) => boolean;
   gainCoins?: (amount: number) => void;
-  addItem?: (item: { name: string; value?: number; tier?: string }, count?: number) => InventorySlot;
-  heal?: (amount: number) => void;
+  addItem?: (item: { name: string; value?: number; tier?: string }, count?: number,
+    options?: { deferFeedback?: (feedback: () => void) => void }) => InventorySlot;
+  heal?: (amount: number, options?: { deferFeedback?: (feedback: () => void) => void }) => void;
   damage?: (amount: number, reason?: string) => void;
   grantCard?: (card: CardSnapshot, options?: {silent?: boolean; reason?: string; deferAcquiredCard?: (card: CardSnapshot) => void}) => boolean;
-  discardCard?: (name: string, fromSafe?: boolean, uid?: string) => boolean;
+  discardCard?: (name: string, fromSafe?: boolean, uid?: string) => boolean | Promise<boolean>;
   onBattleEnd?: (options: object, playedUids: string[], win: boolean, consumedUids?: string[]) => Promise<boolean | void>;
   onNestBattleEnd?: (options: object, playedUids: string[], win: boolean, consumedUids?: string[]) => boolean | void | Promise<boolean | void>;
   persistSave?: () => boolean | void | Promise<boolean | void>;

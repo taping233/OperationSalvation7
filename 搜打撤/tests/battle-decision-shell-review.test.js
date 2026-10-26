@@ -23,7 +23,7 @@ it.each([
   ['hand-select', '<button data-act="btPickHand">卡牌</button>'],
   ['choice', '<div class="choice-list"><button>选项</button></div>'],
   ['pile', '<div class="bt-gy-list"></div>'],
-  ['bag', '<div class="battle-bag-section"></div>'],
+  ['other', '<div class="battle-bag-section"></div>'],
   ['settings', '<div class="bt-settings"></div>'],
 ])('其他 %s 弹窗继续使用各自类型', (kind, body) => {
   showBattleDecision('决策', `${body}<div class="ov-btns"><button>返回</button></div>`, true, { turn: 3, energy: 1, maxEnergy: 2 });

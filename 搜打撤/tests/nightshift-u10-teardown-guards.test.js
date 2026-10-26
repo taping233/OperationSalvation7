@@ -53,7 +53,7 @@ describe('U10 H2 chests 逐卡揭晓音效守卫', () => {
     };
     window.SDT = {
       UI,
-      MAP: { chestKinds: { small: { name: '小宝箱', cards: 1, coins: [0, 0] } } },
+      MAP: { chestKinds: { small: { name: '小型物资箱', cards: 1, coins: [0, 0] } } },
       Cards: {
         RARITIES: ['古朴', '稀有', '史诗', '传说'],
         all: () => [card], randomDropCard: () => card, pickOfRarity: () => card, classPool: () => [],

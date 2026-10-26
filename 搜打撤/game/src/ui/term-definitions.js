@@ -34,7 +34,7 @@ export const TERM_TIPS = {
   moves:      { name: '招式',     text: '武术与法术的统称：「所有招式」类效果对两种牌同时生效。' },
   exhaust:    { name: '消耗',     text: '被消耗的牌进入消耗牌堆，不自动洗回牌库，只能由卡牌效果取回。消耗本牌还是其他牌，以卡面说明为准。' },
   equipSkill: { name: '主动技能', text: '装备打出即穿戴；技能在角色信息区以按钮发动，每场战斗限一次。' },
-  ability:    { name: '能力卡',   text: '只能收藏，普通战不会进入手牌；仅可编入 BOSS 战牌库使用。' },
+  ability:    { name: '能力卡',   text: '可收藏或在战斗中使用；普通战随身携带后直接入手，BOSS 战需编入牌库。' },
   // —— 敌方词缀（battle.core AFFIX）——
   grow:       { name: '军威',     icon: 'arrow',   text: '该敌人每个回合结束时攻击力 +2。' },
   frenzy:     { name: '狂乱',     icon: 'tools',   text: '该敌人每回合攻击两次，每次附加 1 层流血或中毒。' },

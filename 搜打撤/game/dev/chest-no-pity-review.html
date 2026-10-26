@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><base href="/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>取消宝箱稀有度保底 · 真实控制器隔离验证</title><link rel="stylesheet" href="/css/base.css">
+<!doctype html><html lang="zh-CN"><head><base href="/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>取消搜刮点稀有度保底 · 真实控制器隔离验证</title><link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/cards.css">
 <link rel="stylesheet" href="/css/overlays.css">
 <link rel="stylesheet" href="/css/hub.css">
@@ -49,7 +49,7 @@ import {setRandomService} from '/src/core/random.js';
 const map = await (await fetch('/data/map.json?review=no-rarity-pity-1018')).json();
 const body=document.querySelector('#ovBody'),overlay=document.querySelector('#overlay'),acts={};
 const UI={el:{ovBody:body,overlay,ovTitle:document.querySelector('#ovTitle')},showOverlay(title,html){this.el.ovTitle.textContent=title;body.innerHTML=html;overlay.hidden=false;SDT.Icons?.hydrate(body);},hideOverlay(){overlay.hidden=true;},act:(name,fn)=>acts[name]=fn,refresh(){},log(){}};
-const cards=['冰刺','冰封千里','火球','寒霜','冰墙'].map((name,i)=>({id:'fixture'+i,name,type:'法术',rarity:'古朴',cost:1,desc:'隔离测试卡面；生成与领取使用真实宝箱控制器。',value:2}));
+const cards=['冰刺','冰封千里','火球','寒霜','冰墙'].map((name,i)=>({id:'fixture'+i,name,type:'法术',rarity:'古朴',cost:1,desc:'隔离测试卡面；生成与领取使用真实搜刮点控制器。',value:2}));
 const career=cards.map((card,i)=>({...card,id:'class'+i,name:'职业招式'+(i+1),rarity:'职业'}));
 let full=false,randomCalls=0,drawCalls=0;
 Object.assign(SDT,{UI,Icons:{rich:html=>html,img:()=>'<span aria-hidden="true">❄</span>',TYPE_ART:{}},Sound:{sfx(){}},Cards:{cardHTML,all:()=>cards,RARITIES:['古朴','稀有','史诗','传说'],TYPES:['法术'],NO_COST_TYPES:[],DMG_TYPES:[],rarityOf:c=>c.rarity,isSellable:()=>true,sellPrice:()=>2,infuseAlt:()=>false,classPool:()=>career,randomDropCard:seen=>{drawCalls++;return cards.find(c=>!seen.has(c.id));},pickOfRarity:()=>({...cards[0],id:'unexpected-upgrade',name:'不应出现的保底牌',rarity:'史诗'})},Base:{slot:null,data:{},bagCap:()=>16,isSha:()=>false,petEggDropChance:()=>0,recordPetEggChestResult(){}},MAP:map});

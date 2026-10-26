@@ -82,7 +82,7 @@ async function setup({ kind='small', withEgg=true, pool=ordinary, isClass=false,
   return { game, Chests, body, acts, click, saved, reload, reveal, draw, random, pity, done };
 }
 
-describe('真实小/中宝箱的基础候选与附赠边界', () => {
+describe('真实小/密封物资箱的基础候选与附赠边界', () => {
   it.each(['medium'].flatMap(kind => [false, true].map(withEgg => ({ kind, withEgg }))))(
     '$kind 出蛋=$withEgg：仅基础三选一，开箱前/选择后重载保留边界且不重发', async ({ kind, withEgg }) => {
       const h = await setup({ kind, withEgg });

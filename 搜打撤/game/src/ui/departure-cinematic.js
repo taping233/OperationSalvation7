@@ -22,6 +22,7 @@ export function createDepartureCinematic(kind = 'departure') {
   element.setAttribute('aria-modal', 'true');
   element.setAttribute('aria-label', `${profile.label}演出`);
   element.innerHTML = `${silentFilmSceneryHTML(kind,'departure-film-art')}
+    ${kind === 'extraction' ? '<p class="departure-film-caption">撤离成功</p>' : ''}
     <button type="button" class="departure-film-skip" aria-label="跳过${profile.label}演出"><span aria-hidden="true">↗</span></button>
     <span class="departure-film-status" role="status" aria-live="polite"></span>`;
   const button = element.querySelector('button');

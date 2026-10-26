@@ -2,6 +2,8 @@ import { esc, escAttr } from '../core/shared.js';
 import { resourceValueHTML } from './hub.materials.js';
 import { departureStackKey } from './base-departure.commands.js';
 import { stashSalePrice as salePrice } from './stash-sale-price.js';
+import { descRich } from '../cards/cards.view.js';
+import { holdHubOperationControls, runHubOperation } from './hub.presentation.js';
 
 const MATERIAL_CARD_IDS = { wood: 'tt-wood', rations: 'tt-rations' };
 const GOOD_KEY = good => String(good.material || good.id || '');
@@ -60,7 +62,7 @@ function deskHTML({ base, cards, goods, state, stacks }) {
     <header class="trade-v5-desk-heading"><span>${buying ? '购入商品' : '出售卡牌'} · ${material ? '基地物资' : esc([card?.rarity, card?.type].filter(Boolean).join(' · '))}</span><h3>${esc(name)}</h3></header>
     <div class="trade-v5-reading">
     <div class="trade-v5-art" aria-label="${escAttr(name)}卡面">${illustration(cards, card)}</div>
-    <p class="trade-v5-description">${esc(material ? good.tip || card?.desc || '' : card?.desc || '')}</p>
+    <p class="trade-v5-description">${material && good.tip ? esc(good.tip) : descRich(card?.desc || '', card?.id, card)}</p>
     <p class="trade-v5-owned">当前持有 <b>${count}</b>${material ? good.material === 'wood' ? ' 个' : ' 份' : ' 张'}</p></div>
     <div class="trade-v5-settlement" aria-label="${buying ? '购入' : '出售'}账面">
     <dl class="trade-v5-balance"><div><dt>单价</dt><dd>${price} 储备币</dd></div><div><dt>${buying ? '购入' : '出售'}数量</dt><dd>1${material ? good.material === 'wood' ? ' 个' : ' 份' : ' 张'}</dd></div><div class="trade-v5-total"><dt>${buying ? '总花费' : '总收入'}</dt><dd>${price} 储备币</dd></div><div><dt>当前余额</dt><dd>${base.data.coins} 储备币</dd></div>${!buying && count > 1 ? `<div><dt>整堆 ${count} 张收入</dt><dd>${price * count} 储备币</dd></div>` : ''}</dl>
@@ -93,9 +95,9 @@ export function tradeShopV5HTML({ base, cards, art, goods, state }) {
 // 根壳在换页/重绘前调用返回的 dispose；state 仅保留界面选择，换档由根壳重建。
 export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, notice, sound }) {
   if (!root) return () => {};
-  const slot = base.slot;
+  const slot = base.slot, generation = base._selectionGeneration;
   let active = true, confirmation = null, timer = null, busy = false;
-  const live = () => active && root.isConnected && base.slot === slot;
+  const live = () => active && root.isConnected && base.slot === slot && base._selectionGeneration === generation;
   const currentStack = () => {
     const matches = base.data.stash.filter(stack => STACK_KEY(stack) === state.sellKey);
     return matches.length === 1 ? matches[0] : null;
@@ -110,46 +112,74 @@ export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, n
     }
     confirmation = null;
   };
-  const redraw = () => { disarm(); render(); };
+  const redraw = ({ resetList = false, resetReading = false } = {}) => {
+    const positions = ['.trade-v5-modes', '.trade-v5-list', '.trade-v5-reading'].map(selector => {
+      const pane = root.querySelector(selector);
+      const reset = selector === '.trade-v5-list' && resetList || selector === '.trade-v5-reading' && resetReading;
+      return { selector, top: reset ? 0 : pane?.scrollTop || 0, left: reset ? 0 : pane?.scrollLeft || 0 };
+    });
+    disarm(); render();
+    const nextRoot = root.ownerDocument.querySelector('.trade-v5');
+    for (const position of positions) {
+      const pane = nextRoot?.querySelector(position.selector);
+      if (pane) { pane.scrollTop = position.top; pane.scrollLeft = position.left; }
+    }
+  };
+  const failureMessage = (result, fallback) => {
+    const reasons = { poor: '储备币不足', full: '仓库已满', collected: '收藏卡牌受保护', material: '材料不可出售', empty: '该卡牌已不在仓库', identity: '卡牌身份已变化，请重新选择', save: '基地存档未保存，请重试' };
+    return result?.msg || reasons[result?.why] || fallback;
+  };
   const failure = (result, fallback) => {
-    const reasons = { poor: '储备币不足', full: '仓库已满', collected: '收藏卡牌受保护', material: '材料不可出售', empty: '该卡牌已不在仓库', identity: '卡牌身份已变化，请重新选择', save: '基地存档未保存，请重新载入后重试' };
-    notice(result?.msg || reasons[result?.why] || fallback, 'warn');
+    notice(failureMessage(result, fallback), 'warn');
     redraw();
+  };
+  const lockCheckout = () => {
+    const release = holdHubOperationControls(root.querySelectorAll('.trade-v5-checkout button'));
+    busy = true;
+    return () => {
+      busy = false;
+      release();
+    };
   };
   const register = (name, handler) => ui.act(name, data => { if (live() && !busy) return handler(data || {}); });
   register('tradeShopMode', data => {
     if (!['buy', 'sell'].includes(data.mode) || state.mode === data.mode) return;
-    state.mode = data.mode; sound.tick?.(); redraw();
+    state.mode = data.mode; sound.tick?.(); redraw({ resetList:true, resetReading:true });
   });
   register('tradeShopCategory', data => {
     if (!['', 'supplies', 'battle'].includes(data.category) || state.category === data.category) return;
-    state.category = data.category; sound.tick?.(); redraw();
+    state.category = data.category; sound.tick?.(); redraw({ resetList:true, resetReading:true });
   });
   register('tradeShopSelectGood', data => {
     if (state.mode !== 'buy' || !goods.some(good => GOOD_KEY(good) === data.key)) return;
-    state.goodKey = data.key; sound.tick?.(); redraw();
-    // Selecting goods only updates the detail pane.
+    const changed = state.goodKey !== data.key;
+    state.goodKey = data.key; sound.tick?.(); redraw({ resetReading:changed });
   });
   register('tradeShopSelectStack', data => {
     if (state.mode !== 'sell' || !base.data.stash.some(stack => STACK_KEY(stack) === data.key && sellableStack(base, stack))) return;
-    state.sellKey = data.key; sound.tick?.(); redraw();
-    // Selecting inventory only updates the detail pane.
+    const changed = state.sellKey !== data.key;
+    state.sellKey = data.key; sound.tick?.(); redraw({ resetReading:changed });
   });
   register('tradeShopBuy', async () => {
     if (state.mode !== 'buy') return;
     const good = selectedGood(), blocked = purchaseBlock(base, cards, good);
     if (blocked) { failure(null, blocked); return; }
-    busy = true;
     const card = good.material ? null : goodCard(cards, good);
-    let result;
-    try { result = await base.purchase({ price: good.price, material: good.material, card }); }
-    catch { result = { ok:false, why:'save' }; }
-    finally { busy = false; }
-    if (!live()) return false;
-    if (!result.ok) { failure(result, '商品暂不可购买'); return; }
     const name = good.material ? good.name : card.name;
-    sound.ding?.(); notice(`购入${name} ×1 · 储备 −${good.price} 币`);
-    ui.log?.(`[[icon:coin]] 购入【${esc(name)}】×1`, 'loot'); redraw();
+    const unlock = lockCheckout();
+    try {
+      return await runHubOperation({
+        run: () => base.purchase({ price: good.price, material: good.material, card }),
+        isCurrent: live, notice, pending: `正在购入${name}…`,
+        success: `购入${name} ×1 · 储备 −${good.price} 币`,
+        failure: (result, error) => failureMessage(result, error ? '基地存档未保存，请重试' : '商品暂不可购买'),
+        onSuccess: () => {
+          sound.ding?.();
+          ui.log?.(`[[icon:coin]] 购入【${esc(name)}】×1`, 'loot');
+        },
+        refresh: () => redraw(), refreshOnFailure: true,
+      });
+    } finally { unlock(); }
   });
   const sell = async all => {
     if (state.mode !== 'sell') return;
@@ -171,15 +201,31 @@ export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, n
       button.classList.add('is-confirming'); button.dataset.confirming = 'true';
       timer = setTimeout(disarm, 2600); return;
     }
-    disarm(); busy = true;
-    let result;
-    try { result = await base.sellStashCards(stack.card.name, qty, state.sellKey); }
-    catch { result = { ok:false, why:'save' }; }
-    finally { busy = false; }
-    if (!live()) return false;
-    if (!result.ok) { failure(result, '出售未完成'); return; }
-    sound.ding?.(); notice(`出售${stack.card.name} ×${result.qty ?? qty} · 储备 +${result.coins ?? price * qty} 币`);
-    ui.log?.(`[[icon:coin]] 已售出【${esc(stack.card.name)}】×${result.qty ?? qty}`, 'coin'); redraw();
+    const visibleStacks = () => base.data.stash.filter(item => sellableStack(base, item) && inCategory(base, state, item.card));
+    const selectedIndex = visibleStacks().findIndex(item => STACK_KEY(item) === state.sellKey);
+    const sellKey = state.sellKey;
+    disarm();
+    const unlock = lockCheckout();
+    let selectionChanged = false;
+    try {
+      return await runHubOperation({
+        run: () => base.sellStashCards(stack.card.name, qty, sellKey),
+        isCurrent: live, notice, pending: `正在出售${stack.card.name} ×${qty}…`,
+        success: result => `出售${stack.card.name} ×${result.qty ?? qty} · 储备 +${result.coins ?? price * qty} 币`,
+        failure: (result, error) => failureMessage(result, error ? '基地存档未保存，请重试' : '出售未完成'),
+        onSuccess: result => {
+          const remaining = visibleStacks();
+          selectionChanged = !remaining.some(item => STACK_KEY(item) === sellKey);
+          if (selectionChanged) {
+            const neighbor = remaining[Math.max(0, Math.min(selectedIndex, remaining.length - 1))];
+            state.sellKey = neighbor ? STACK_KEY(neighbor) : '';
+          }
+          sound.ding?.();
+          ui.log?.(`[[icon:coin]] 已售出【${esc(stack.card.name)}】×${result.qty ?? qty}`, 'coin');
+        },
+        refresh: () => redraw({ resetReading:selectionChanged }), refreshOnFailure: true,
+      });
+    } finally { unlock(); }
   };
   register('tradeShopSellOne', () => sell(false));
   register('tradeShopSellAll', () => sell(true));

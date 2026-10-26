@@ -20,8 +20,8 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: vi.fn(), lastL
 vi.mock('../game/src/home/story.last-lamp.js', () => ({ makeLastLampEventInstanceId: vi.fn() }));
 vi.mock('../game/src/hub/game.storage.js', () => ({ RunStorage: {} }));
 vi.mock('../game/src/home/story.commands.js', () => ({ storyCommands: {} }));
-vi.mock('../game/src/hub/bag-return-hook.js', () => ({ setBagReturnHook: vi.fn() }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ startBattle: vi.fn() }));
+vi.mock('../game/src/hub/bag-return-hook.js', async importOriginal => ({ ...await importOriginal(), setBagReturnHook: vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), startBattle: vi.fn() }));
 vi.mock('../game/src/core/turbo.js', () => ({ isTurbo: () => false }));
 vi.mock('../game/src/core/render-scheduler.js', () => ({ renderScheduler: { invalidate: vi.fn(), invalidateAnimation: vi.fn() } }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ openDoorModal: vi.fn(), openFireRest: vi.fn(), openAltarRitual: vi.fn(), openBossGate: vi.fn(), openEmergencyModal: vi.fn(), resumeNodeRestore:vi.fn(() => false) }));
@@ -131,7 +131,7 @@ describe('continuous travel commits stable nodes', () => {
     expect(g.state).toBe('moving');
     expect(harness.safePage).not.toHaveBeenCalled();
     vi.advanceTimersByTime(700);   // 看门狗兜底：提交稳定节点并结算目的格
-    expect(saved).toEqual([{ state:'idle', trackPos:1, turn:2, pos:{x:120,y:0}, visited:{'0,2':1} }]);
+    expect(saved).toEqual([{ state:'idle', trackPos:1, turn:2, pos:{x:120,y:0}, visited:{'0,0':1,'0,1':1,'0,2':1,'1,1':1} }]);
     expect(g).toMatchObject({ state:'idle', trackPos:2, turn:3 });
     expect(harness.safePage).not.toHaveBeenCalled();
     expect(getMapTravelPresentation(g)).toBeNull();

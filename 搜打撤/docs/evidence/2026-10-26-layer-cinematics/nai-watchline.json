@@ -1,0 +1,56 @@
+{
+  "status": "generated",
+  "request": {
+    "input": "scenery, no humans, An isolated broken military checkpoint silhouette: a low horizontal barricade, two unequal watchtower slabs and a narrow passage through their middle. Wind-swept white snow planes crossing horizontally. No soldiers, no weapons.\n\nSymbolic game layer-entry cinematic, one isolated architectural emblem in a nearly black empty field, same restrained visual series as a fractured city reflection.\n\nWide landscape. Architectural emblem on the right half, occupying one third of canvas width and half its height. Left forty percent quiet almost black for an existing caption. Broad simple silhouettes, enormous uninterrupted black negative space.\n\nMatte charcoal, warm grey, ivory and extremely sparse muted rust-red. Broad opaque painted planes, selective rough edges, restrained contrast, no tiny surface details.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 26102610,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, character, typography, panels, full-screen environment, dense architecture, tiny windows, pipes, cables, lens flare, blue light, magic circle",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "scenery, no humans, An isolated broken military checkpoint silhouette: a low horizontal barricade, two unequal watchtower slabs and a narrow passage through their middle. Wind-swept white snow planes crossing horizontally. No soldiers, no weapons.\n\nSymbolic game layer-entry cinematic, one isolated architectural emblem in a nearly black empty field, same restrained visual series as a fractured city reflection.\n\nWide landscape. Architectural emblem on the right half, occupying one third of canvas width and half its height. Left forty percent quiet almost black for an existing caption. Broad simple silhouettes, enormous uninterrupted black negative space.\n\nMatte charcoal, warm grey, ivory and extremely sparse muted rust-red. Broad opaque painted planes, selective rough edges, restrained contrast, no tiny surface details.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, character, typography, panels, full-screen environment, dense architecture, tiny windows, pipes, cables, lens flare, blue light, magic circle",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\搜打撤\\.tmp\\nai\\layer-cinematics-1026\\watchline.png",
+  "sha256": "f8977ca7c3960ed19d8e27575dbae947a7472ab77046df0174701051fa5ecfb4"
+}

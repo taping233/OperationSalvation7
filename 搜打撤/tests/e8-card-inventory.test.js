@@ -428,7 +428,8 @@ describe('E8 isolated production inventory', () => {
     expect(['', 'after']).toContain(process.env.SDT_E8_WRITE_INVENTORY || '');
   });
 
-  it.runIf(process.env.SDT_E8_WRITE_INVENTORY === 'after')('explicitly generates only after evidence', async () => {
+  it('explicitly generates only after evidence', async context => {
+    if (process.env.SDT_E8_WRITE_INVENTORY !== 'after') context.skip('证据写入需显式SDT_E8_WRITE_INVENTORY=after；默认只读');
     const { execFileSync } = await import('node:child_process');
     const { mkdirSync, writeFileSync, readFileSync } = await import('node:fs');
     const { createHash } = await import('node:crypto');

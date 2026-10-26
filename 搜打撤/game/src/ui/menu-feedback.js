@@ -230,7 +230,9 @@ export function createMenuFeedbackPages({ UI, game, esc, getActiveSlot, openSett
   }
 
   // W1-11：fromTitle=true（标题页入口进入）时，返回键回标题而非设置页
-  function openSuggestionInbox(fromTitle = false, returnToSettings = /** @type {(()=>void)|null} */ (null)) {
+  function openSuggestionInbox(fromTitle = false, returnToSettings = /** @type {(()=>unknown)|null} */ (null),
+    { onRender = (_page) => { void _page; }, isCurrent = () => true } = {}) {
+    if (!isCurrent()) return false;
     sugCache = null; feedbackPage = 0;
     game.state = 'modal';
     UI.showOverlay('', `
@@ -241,9 +243,12 @@ export function createMenuFeedbackPages({ UI, game, esc, getActiveSlot, openSett
         <div class="settings" id="sugBox" data-region-managed><p class="ov-empty">读取中…</p></div>
       </div>`, 'page');
     const inboxBody = document.getElementById('sugBox');
+    const inboxRoot = inboxBody.closest('.sugin-page');
+    const inboxRevision = UI._overlayRevision;
     const inboxContext = captureBattleContext(game, getActiveSlot);
     let deleting = false, readRevision = 0;
-    const inboxCurrent = () => inboxContext() && document.getElementById('sugBox') === inboxBody && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
+    const inboxCurrent = () => isCurrent() && inboxContext() && UI._overlayRevision === inboxRevision
+      && document.getElementById('sugBox') === inboxBody && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
     const readInbox = box => {
       if (deleting || !inboxCurrent()) return;
       const revision = ++readRevision;
@@ -253,8 +258,9 @@ export function createMenuFeedbackPages({ UI, game, esc, getActiveSlot, openSett
       });
     };
     UI.act('sugBack', () => {
+      if (!inboxCurrent()) return false;
       if (fromTitle) { UI.hideOverlay(); game.state = 'title'; return; }
-      if (returnToSettings) returnToSettings(); else openSettings();
+      return returnToSettings ? returnToSettings() : openSettings();
     });
     const turnPage = delta => {
       if (deleting || !inboxCurrent() || !Array.isArray(sugCache)) return;
@@ -319,7 +325,9 @@ export function createMenuFeedbackPages({ UI, game, esc, getActiveSlot, openSett
         renderSugBox();
       } finally { deleting = false; }
     });
+    onRender({ root:inboxRoot, revision:inboxRevision, isCurrent:inboxCurrent });
     readInbox(inboxBody);
+    return inboxRoot;
   }
 
   return { openSuggestionInbox, openSuggestionBox };

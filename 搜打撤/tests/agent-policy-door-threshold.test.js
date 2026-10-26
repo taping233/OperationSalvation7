@@ -16,7 +16,7 @@ function observation(hp, label = 'door') {
     run: { hp, maxHp: 100, layer: 1, node: 0, used: 0, bagCap: 16,
       ownedCards: [{}, {}, {}], bossKilled: false },
     // Both doors have equal immediate value. Only the second has a rewarding next step.
-    actions: [move(1), move(2, [{ li: 0, idx: 3, label: '宝箱（chest）', visited: false }])],
+    actions: [move(1), move(2, [{ li: 0, idx: 3, label: '搜刮点（chest）', visited: false }])],
   };
 }
 

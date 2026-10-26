@@ -25,6 +25,8 @@ const { BattleSession } = await import('../game/src/battle/core/battle.core.js')
 await import('../game/src/battle/view/battle.view.js');
 const { createHandMaterialSelection } = await import('../game/src/battle/view/battle.hand-material-selection.js');
 const { nextHandSelectionId } = await import('../game/src/battle/core/battle.hand-selection.js');
+const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
+const { render } = await import('../game/src/battle/view/battle.view.js');
 const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
 const Aim = await import('../game/src/battle/view/battle.aim.js');
 const Cards = window.SDT.Cards;
@@ -33,7 +35,7 @@ const originalRaf = window.requestAnimationFrame;
 const originalAnimate = Element.prototype.animate;
 let frames, game;
 const stage = () => UI.el.ovBody.querySelector('.battle-stage');
-const bar = () => stage()?.querySelector('[data-infusion-workspace]') || stage()?.querySelector(':scope > .bt-infuse');
+const bar = () => stage()?.querySelector('[data-hand-selection]');
 const material = uid => stage()?.querySelector(`.sts-hand .bt-card[data-uid="${uid}"]`);
 const snapshot = () => BattleSession.getSnapshot();
 function flush() { for (let i = 0; frames.length && i < 30; i++) frames.shift()(performance.now()); }
@@ -78,23 +80,45 @@ afterEach(async () => {
   vi.unstubAllGlobals();
 });
 
-describe('hand consumption uses the shared material workspace', () => {
+describe('hand selection stays in the battle hand', () => {
+  it.each(['copy', 'zero', 'play'])('%s waits for confirmation and supports cancellation in the hand', async act => {
+    start(); await settle();
+    runtime.set$handSelecting({ selectionId:nextHandSelectionId(), n:1, type:'武术', act, mandatory:false, thenText:'', srcCard:null, target:null });
+    render(); flush();
+    const before = snapshot();
+    expect(UI.el.ovBody.querySelector('.battle-secondary-layer')).toBeNull();
+    material('fuel-a').click(); flush();
+    expect(material('fuel-a').classList.contains('hand-effect-selected')).toBe(true);
+    expect(snapshot().hand).toEqual(before.hand);
+    bar().querySelector('[data-act="btHandSelectCancel"]').click(); flush();
+    expect(snapshot().handSelecting).toBeNull();
+    expect(snapshot().hand).toEqual(before.hand);
+    runtime.set$handSelecting({ selectionId:nextHandSelectionId(), n:1, type:'武术', act, mandatory:false, thenText:'', srcCard:null, target:null });
+    render(); flush(); material('fuel-a').click(); flush();
+    bar().querySelector('[data-act="btHandSelectConfirm"]').click(); await settle();
+    expect(snapshot().handSelecting).toBeNull();
+    if (act === 'copy') expect(snapshot().hand.length).toBe(before.hand.length + 1);
+    if (act === 'play') expect(snapshot().hand).not.toContain('fuel-a');
+    if (act === 'zero') expect(snapshot().hand).toEqual(before.hand);
+  });
   it('payment stages and withdraws exact copies, then pays only on confirmation', async () => {
     start({ cardId:'tt7-thundergrudge' });
     BattleSession.commands.playCard('infusion', 0); flush();
     const before = snapshot();
     expect(before.infusing).toBeNull(); expect(before.handSelecting.act).toBe('payment');
     expect(bar().getAttribute('aria-label')).toBe('选择消耗代价');
+    expect(stage().querySelector('[data-infusion-workspace]')).toBeNull();
+    expect(UI.el.ovBody.querySelector('.battle-secondary-layer')).toBeNull();
     expect(bar().querySelector('[data-act="btInfuseDirect"]')).toBeNull();
-    expect(bar().querySelector('[data-act="btInfuseCancel"]')).toBeNull();
+    expect(bar().querySelector('[data-act="btHandSelectCancel"]').disabled).toBe(true);
     material('fuel-a').click(); flush(); material('fuel-b').querySelector('.hs-card').dispatchEvent(new KeyboardEvent('keydown', { key:'Enter', bubbles:true })); flush();
     expect(snapshot().energy).toBe(before.energy); expect(snapshot().hand).toEqual(before.hand);
     expect(snapshot().handSelecting.selectedUids).toEqual([]);
-    expect(bar().querySelectorAll('.infusion-selected-card')).toHaveLength(2);
-    bar().querySelector('[data-act="btInfuseRemove"][data-uid="fuel-a"]').click(); flush();
-    expect(bar().querySelectorAll('.infusion-selected-card')).toHaveLength(1);
-    expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(true);
-    material('fuel-a').click(); flush(); bar().querySelector('[data-act="btInfuseGo"]').click();
+    expect(stage().querySelectorAll('.hand-effect-selected')).toHaveLength(2);
+    material('fuel-a').click(); flush();
+    expect(stage().querySelectorAll('.hand-effect-selected')).toHaveLength(1);
+    expect(bar().querySelector('[data-act="btHandSelectConfirm"]').disabled).toBe(true);
+    material('fuel-a').click(); flush(); bar().querySelector('[data-act="btHandSelectConfirm"]').click();
     await settle();
     expect(snapshot().handSelecting).toBeNull(); expect(snapshot().infuseFuels).toBe(before.infuseFuels);
     expect(snapshot().consumed.filter(uid => ['fuel-a','fuel-b'].includes(uid)).sort()).toEqual(['fuel-a','fuel-b']);
@@ -111,7 +135,7 @@ describe('hand consumption uses the shared material workspace', () => {
     expect(material('fuel-a').classList.contains('off')).toBe(false);
     material('fuel-a').click(); flush();
     expect(snapshot().pdef.armor).toBe(0);
-    bar().querySelector('[data-act="btInfuseGo"]').click(); await settle();
+    bar().querySelector('[data-act="btHandSelectConfirm"]').click(); await settle();
     expect(snapshot().pdef.armor).toBe(10); expect(snapshot().hand).toContain('fuel-b');
   });
 
@@ -126,7 +150,7 @@ describe('hand consumption uses the shared material workspace', () => {
     material('fuel-a').click(); flush(); material('fuel-b').click(); flush();
     expect(snapshot().consumed).toEqual(before.consumed);
     game.onBattleEnd = vi.fn();
-    bar().querySelector('[data-act="btInfuseGo"]').click(); await settle();
+    bar().querySelector('[data-act="btHandSelectConfirm"]').click(); await settle();
     expect(game.battleActive).toBe(false);
     const consumed = game.onBattleEnd.mock.calls[0][3];
     expect(consumed).toEqual(['fuel-a', 'fuel-b']);

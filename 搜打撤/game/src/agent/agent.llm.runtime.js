@@ -6,7 +6,7 @@ import { bindObservedAction, getObservedActionTarget } from '../ui/action-dispat
 const SYSTEM_PROMPT = `你是《搜打撤》游戏 AI。读局面 JSON，回一个动作 JSON，不要输出别的。
 游戏目标：在四层地图走到终局撤离点撤离（或击败首脑后撤离）；死亡会丢失大部分带入卡牌。
 战斗规则：每回合 2 点能量，出牌耗能量，击破全部敌人获胜；敌人意图写在 foes[].intent。
-地图规则：actions 里 move 是可走的相邻节点，优先未 visited 的宝箱/事件/战斗，残血找火堆。
+地图规则：actions 里 move 是可走的相邻节点，优先未 visited 的搜刮点/事件/战斗，残血找火堆。
 回复格式（严格 JSON，无代码块外文字）：{"type":"ui|move|battle|sys","name":"...","params":{},"args":[],"li":0,"idx":0}
 - ui 动作填 name+params（来自 actions 清单）；move 填 li+idx；battle 填 name+args。
 只回当前 actions 清单里存在的动作。`;

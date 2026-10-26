@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const card = { id: 'fixture-card', name: '测试补给卡', rarity: '古朴', type: '法术', desc: '测试', cost: 0 };
 
-describe('宝箱点击链路', () => {
+describe('搜刮点点击链路', () => {
   afterEach(() => {
     vi.useRealTimers();
     delete window.SDT;
@@ -62,7 +62,7 @@ describe('宝箱点击链路', () => {
     };
     window.SDT = {
       UI,
-      MAP: { chestKinds: { small: { name: '小宝箱', cards: 1, coins: [0, 0] } } },
+      MAP: { chestKinds: { small: { name: '小型物资箱', cards: 1, coins: [0, 0] } } },
       Cards: {
         RARITIES: ['古朴', '稀有', '史诗', '传说'],
         all: () => [card],

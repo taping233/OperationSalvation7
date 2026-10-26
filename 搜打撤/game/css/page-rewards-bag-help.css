@@ -11,7 +11,7 @@
                                 可领取卡与「全部收下」用最亮的金）
      域二 远征中背包 ………… 根 #overlay .card.bag-page（mode 'bagpage' 专属类；
                                 B 键远征背包。基地仓库页签走 page-stash.css
-                                的 .hub-page 域，战斗中 .battle-bag 不在此列）
+                                的 .hub-page 域）
      域三 帮助手册/快速参考 … 根 #title .ak-quickref（标题页胶囊键）+
                                 #overlay .card:has(.expedition-manual)（远征手册，
                                 标题页 mGuide 与对局 btnHelp 共用）+
@@ -108,7 +108,7 @@
 }
 /* 「全部收下」：收获时刻的最亮金（#e6cb76 族提亮 + 金晕），warn 态保留橙警示边 */
 
-/* W8 出入场：首次揭晓（未收过卡=无 .no-anim）时清点行→战报→宝箱→页脚→按钮错峰上浮；
+/* W8 出入场：首次揭晓（未收过卡=无 .no-anim）时清点行→战报→搜刮点→页脚→按钮错峰上浮；
    单卡拾取重渲染（.no-anim）不再重播。战斗胜利 1.4s fx-victory 入场不受影响。 */
 &:has(.bt-hand:not(.no-anim)) .loot-footer-note { animation: rbhRiseIn .45s cubic-bezier(.22, 1, .36, 1) .18s backwards; }}
 @keyframes rbhRiseIn {
@@ -302,7 +302,7 @@
   justify-content: center;
 }}
 
-/* ═══ W2-05（2026-09-27 R2）：宝箱三档档位色带 ═══
+/* ═══ W2-05（2026-09-27 R2）：搜刮点三档档位色带 ═══
    类钩子 .tier-{kind} 由 chests.js markChestTier 挂（small/medium/large，弹层卡
    节点跨次复用故先清后挂）；色语义沿用既有稀有度制式：古朴灰→稀有蓝→传说金。
    三维度：标题底边线、标题字色、卡片描边（本文件的壳描边 !important 在后加载，
@@ -335,7 +335,7 @@
 /* ═══ W3-01/W3 预案（2026-09-27 R2）：结算页阶梯序列（A6×C1） ═══
    面 B 终局页：.doom-panel 子元素按 --i/固定 delay 错峰（rise+fade）；
    面 A 胜利搜刮页：.card.chest:has(.battle-banner) 作用域（LEG-6b 横幅=战斗胜利标记），
-   普通宝箱零影响。全部 transform/opacity 合成器通道；reduced-motion 直出终值；
+   普通搜刮点零影响。全部 transform/opacity 合成器通道；reduced-motion 直出终值；
    动画纯呈现不阻塞点击（A6 可打断铁律）。 */
 @keyframes w3-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes w3-band { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -360,15 +360,6 @@
 @media (prefers-reduced-motion: reduce) {
   #overlay .doom-panel .doom-sub, #overlay .doom-panel .doom-stats, #overlay .doom-panel .doom-stat, #overlay .doom-panel .doom-xp, #overlay .doom-panel .doom-xp-bar i, #overlay .doom-panel .doom-loot, #overlay .doom-panel .doom-card, #overlay .doom-panel .doom-btns, #overlay .card.chest:has(.battle-banner) .loot-footer-note { animation: none; }
 }
-
-/* ═══ ART-002（2026-09-28 01:1x 美术 UI 线；02:4x 依独立复核修订）═══
-   复核结论修正：winter.css「战斗背包=主页背包同款大卡网格」为老板留言定版设计
-   （09-13 留言 #11，.battle-bag 槽位含 aspect-ratio/cqw 卡面/.off 灰暗态，特异性 1,3,0），
-   槽位级制式化=与定版设计冲突，**已撤下**原槽位底座/hover/.off 红缘/.bt-count 覆写。
-   保留（容器级、与定版不冲突的纯增量语义层）：
-   ①安全格区左缘金标+淡金衬底（「带出去保底」可视化，钩子 .battle-bag-grid:has(+ .ov-btns)）；
-   ②安全格统计行暖金化；③道具空态跨列一行化（布局缺陷修复）。
-   构建 JS 在 battle.overlays.js（M 批属地不碰）；:has() 沿用本文件 W3 先例（Chromium 105）。 */
 
 /* ═══ ART-005（2026-09-28 04:4x，美术 UI 线）：标题页装饰层拦截 CTA 点击修复 ═══
    全页清扫发现：expedition.css:184 给 #title .ak-start 内的装饰行 .st-row 设了 position:relative;
@@ -406,31 +397,6 @@
 & .card .ov-stats,
 & .card .ov-empty { font-size: 12.5px; line-height: 1.75; letter-spacing: .03em; }
 & .card .ov-stats b { font-variant-numeric: tabular-nums; }
-
-/* 安全格区 = 紧邻按钮行的最后一格 grid：左缘金标 + 淡金衬底（保底语义可视化） */
-& .battle-bag-grid:has(+ .ov-btns) {
-  padding: 6px 10px 8px;
-  background: linear-gradient(90deg, rgba(230,203,118,.055), transparent 46%);
-  border-radius:0;
-  box-shadow: inset 2px 0 0 rgba(230,203,118,.5);
-}
-/* 安全格统计行同步暖金，与道具行区分（注意：:has() 内不可再嵌 :has——原嵌套选择器整条失效，
-   02:4x 改为「全部暖金 + 首条 p.ov-stats 回冷」的反选写法） */
-& .card.battle-bag .ov-stats { color: #c8af5c; }
-& .card.battle-bag p.ov-stats:first-of-type { color: #bfc2c5; }
-
-/* 空态排版修正（原 ov-empty 直出换行生硬；且在 bag-grid 里被压成窄列——跨满整行） */
-& .battle-bag-grid .ov-empty {
-  grid-column: 1 / -1;
-  margin: 4px 0;
-  padding: 14px 16px;
-  color: #92979a;
-  font-size: 12.5px;
-  line-height: 1.7;
-  border: 1px dashed rgba(170,174,177,.22);
-  border-radius:0;
-  background: rgba(17,18,20,.45);
-}
 
 /* ═══ ART-003（2026-09-28 01:2x，美术 UI 线）：撤离打包屏「完成整理」竖排文字修复 ═══
    体验线 bug 报告：长文本「完成整理（N 张将丢失）」在 winter.css 的 letter-spacing:5px +

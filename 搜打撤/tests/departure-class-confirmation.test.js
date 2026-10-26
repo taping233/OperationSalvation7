@@ -37,7 +37,10 @@ describe('选角确认的出征整备守卫', () => {
       const { captureBattleContext } = await vi.importActual('../game/src/battle/battle-loader.js');
       return { captureBattleContext, ensureBattleReady: vi.fn(async () => {}), startBattle: vi.fn() };
     });
-    const showRunTransition = vi.fn(() => transition);
+    const showRunTransition = vi.fn(() => {
+      ui.showOverlay('', '<div class="flow-transition"></div>');
+      return Object.assign(transition.then(value=>{if(value){ui.el.overlay.hidden=true;ui.el.ovBody.replaceChildren();ui._overlayRevision++;}return value;}),{isCurrent:()=>true});
+    });
     vi.doMock('../game/src/run/game.run.scenes.js', () => ({
       FIRE_RESTORABLE: [], consumeCurrentCell: vi.fn(), finishInstant: vi.fn(), grantEventCard: vi.fn(),
       nodeOpt: vi.fn(), nodeShell, openPocketRestore: vi.fn(), openShop: vi.fn(),
@@ -49,9 +52,10 @@ describe('选角确认的出征整备守卫', () => {
     }));
 
     const ui = {
-      act(name, handler) { handlers[name] = handler; },
+      el:{}, act(name, handler) { handlers[name] = handler; },
       showOverlay: vi.fn((_title, html) => {
         document.body.innerHTML = `<div id="overlay"><div id="ovBody">${html}</div></div>`;
+        ui.el={overlay:document.getElementById("overlay"),ovBody:document.getElementById("ovBody")}; ui._overlayRevision=(ui._overlayRevision||0)+1;
       }), hideOverlay,
       showCardZoom: vi.fn(),
       log: vi.fn(), refresh: vi.fn(),
@@ -166,7 +170,7 @@ describe('选角确认的出征整备守卫', () => {
     expect(document.querySelector('.cls2-stats').textContent).toContain('生命上限 24');
     expect(document.querySelector('.cls2-stats').textContent).toContain('基础攻击 3');
     expect(document.querySelector('.cls2-skill').textContent).toContain('刺击');
-    expect(document.querySelector('.cls2-skill').textContent).toContain('不消耗卡牌');
+    expect(document.querySelector('.cls2-skill').textContent).not.toContain('不消耗卡牌');
     expect(document.querySelector('.cls2-supply-rules')).toBeNull();
     expect(document.querySelector('.cls2-growth summary').textContent).toContain('熟练成长');
     expect(document.querySelectorAll('.cls2-face[aria-pressed="true"]')).toHaveLength(1);
@@ -204,9 +208,13 @@ describe('选角确认的出征整备守卫', () => {
       expect(randomClassCard).toHaveBeenCalledTimes(2);
       await transition;
       await Promise.resolve();
+      expect(game.state).toBe('modal');
+      expect(document.querySelector('[data-act=retryClassConfirmation]')).not.toBeNull();
+      saveGame.mockReturnValue(true);
+      await handlers.retryClassConfirmation();
       if (!completed) {
         expect(nodeShell).not.toHaveBeenCalled();
-        expect(saveGame).toHaveBeenCalledTimes(1);
+        expect(saveGame).toHaveBeenCalledTimes(2);
         expect(game.ownedCards).toEqual([]);
         return;
       }
@@ -217,7 +225,7 @@ describe('选角确认的出征整备守卫', () => {
       expect(nodeShell).not.toHaveBeenCalled();
       expect(ui.showCardZoom).not.toHaveBeenCalled();
       expect(randomClassCard).toHaveBeenCalledTimes(2);
-      expect(saveGame).toHaveBeenCalledTimes(2);
+      expect(saveGame).toHaveBeenCalledTimes(3);
       expect(ui.refresh).toHaveBeenCalledWith(game);
       expect(handlers.clsGrantGo).toBeUndefined();
     }

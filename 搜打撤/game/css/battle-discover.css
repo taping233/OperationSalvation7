@@ -1,4 +1,30 @@
 @import url('./secondary-ui-tokens.css');
+/* Reveal fits within the existing 350 ms input gate; snapshot refreshes resume it. */
+@keyframes battle-discover-reveal {
+  from { opacity:0; transform:translateY(22px) scale(.94); filter:brightness(1.5); }
+  65% { opacity:1; filter:brightness(1.12); }
+  to { opacity:1; transform:translateY(0) scale(1); filter:brightness(1); }
+}
+@keyframes battle-discover-glint {
+  from { opacity:0; transform:translateX(-80%) skewX(-18deg); }
+  32% { opacity:.65; }
+  to { opacity:0; transform:translateX(80%) skewX(-18deg); }
+}
+body #overlay .battle-discover-slot {
+  position:relative;
+  animation:battle-discover-reveal 280ms cubic-bezier(.16,.7,.25,1) var(--discover-reveal-delay,0ms) both;
+}
+body #overlay .battle-discover-slot::after {
+  content:''; position:absolute; inset:0; border-radius:10px; pointer-events:none;
+  background:linear-gradient(105deg,transparent 36%,#ecdfc04d 48%,#f3eedb99 50%,transparent 62%);
+  animation:battle-discover-glint 280ms ease-out var(--discover-reveal-delay,0ms) both;
+}
+@media (prefers-reduced-motion:reduce) {
+  body #overlay .battle-discover-slot { animation:none; }
+  body #overlay .battle-discover-slot::after { display:none; animation:none; }
+}
+body.reduce-motion #overlay .battle-discover-slot { animation:none; }
+body.reduce-motion #overlay .battle-discover-slot::after { display:none; animation:none; }
 /* Battle discovery owns its glass surface; other discover-mode producers keep their own UI. */
 body #overlay .card.discover:has(.battle-decision[data-decision-kind="discover"]){
 & {
@@ -62,6 +88,7 @@ body #overlay .battle-decision[data-decision-kind="discover"]{
 }}
 body #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-card.bt-card{
 & {
+  --discovery-focus-offset:10px;
   position:relative; display:flex; flex:0 0 360px; flex-direction:column; align-items:stretch; gap:14px;
   width:360px!important; height:auto!important; min-width:0; min-height:0; margin:0; padding:0!important;
   appearance:none; border:0!important; border-radius:10px; background:none!important; color:var(--discover-ink); box-shadow:none;
@@ -70,8 +97,7 @@ body #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-c
 & > .hs-card {
   display:block; width:100%!important; max-width:none!important; height:auto!important; margin:0; font-size:24px!important;
   filter:drop-shadow(0 12px 20px rgba(3,8,12,.28));
-}
-&:focus-visible { outline:3px solid var(--discover-accent); outline-offset:10px; }}
+}}
 @media (prefers-reduced-motion:reduce) {
   body #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-card.bt-card,
   body #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-card.bt-card:hover { transition:none; transform:none; }

@@ -1,7 +1,7 @@
 import { battleRules } from './helpers/environment-fixtures.js';
 /* 受缚之残影（tt8-hero-sealer）定版重做（2026-09-16 老板定版，v21/v22）真实战斗实打：
  * 深海封印——BOSS 编组带着时，开局把本牌与封印肢体1-4洗入牌库；5 张封印单卡无效果且
- * 无法打出（普通战无法使用能力卡 → 封印只在 BOSS 战发动）；手牌集齐 5 张 → 化为
+ * 无法打出（封印洗入按卡牌自身规则只在 BOSS 战发动）；手牌集齐 5 张 → 化为
  * 「深渊主宰·妲莉薇特」（2 费可打出）：旧日再临——抽到 6 张 / 免疫诅咒 / 能量上限+1 /
  * 法伤+1 / 可注能与必须注能的招式均视为已注能；打出时 5 张封印单卡早已消耗，
  * 并召唤 4 名无攻血封印肢体（同天国之门口径，不自动攻击、不替主人承伤）。 */
@@ -100,11 +100,12 @@ describe('受缚之残影 → 深渊主宰·妲莉薇特', () => {
     expect(unplayableReasonFor(sovereign(), 'boss', {})).toBeFalsy();
   });
 
-  it('普通战无法使用能力卡：受缚之残影不进手牌、封印不发动', async () => {
+  it('普通战受缚之残影进入手牌，封印洗入仍限定BOSS', async () => {
     const g = makeGame([sealer()]);
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '普通战对照' });
     await drain();
-    expect(handNames()).not.toContain('受缚之残影');
+    expect(handNames()).toContain('受缚之残影');
+    expect(unplayableReasonFor(sealer(), 'normal', {})).toContain('封印');
     expect(handNames()).not.toContain('深渊主宰·妲莉薇特');
     expect(g.logs.some(l => l.includes('深海封印'))).toBe(false);
     BattleSession.commands.flee();

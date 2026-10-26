@@ -1,0 +1,589 @@
+{
+  "sourceSha256": "6C45C94CB777E4FF26242CA89911ED495EB3A0080BD99CE9C1C99FC81D9E2075",
+  "range": [
+    2151,
+    4314
+  ],
+  "edits": [
+    {
+      "old": "- when the user said “收藏室的卡背切换，每次上面的玻璃模糊要重新加载” -> for local player-visible updates, preserve the page shell, glass panels, and DOM identity rather than rebuilding the full page. [Task 1]",
+      "new": "- when the user said “收藏室的卡背切换，每次上面的玻璃模糊要重新加载” -> for local player-visible updates, update locally while preserving the page shell, glass panels, and DOM identity. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when the user reported “这里太紧凑了”“招式区无法翻页” -> pagination must remain visible and information labels need clear separation; verify the actual interaction and computed layout, not only the CSS source. [Task 2]",
+      "new": "- when the user reported “这里太紧凑了”“招式区无法翻页” -> pagination must remain visible and information labels need clear separation; verify the actual interaction and computed layout alongside the CSS source. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Evidence achieved: `tests/hub-archive-v3.test.js` targeted 2 checks passed; `tests/base-ui-sample.test.js` 11 checks passed; changed JS passed `node --check`; changed CSS passed PostCSS; browser pagination went `1/3 → 2/3 → 3/3 → 2/3` and the last next button disabled. These are focused checks, not a full suite. [Task 1][Task 2][Task 3]",
+      "new": "- Evidence achieved: `tests/hub-archive-v3.test.js` targeted 2 checks passed; `tests/base-ui-sample.test.js` 11 checks passed; changed JS passed `node --check`; changed CSS passed PostCSS; browser pagination went `1/3 → 2/3 → 3/3 → 2/3` and the last next button disabled. Coverage: focused checks; the full suite remains unrun. [Task 1][Task 2][Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: ESLint fails on `hub.archive-v3.js:54 milestonesHTML is defined but never used`, or on unused `direction`/`before` in `hub.presentation.js` -> these were pre-existing unrelated findings; record them instead of expanding a UI-fix task. [Task 1][Task 3]",
+      "new": "- Symptom: ESLint fails on `hub.archive-v3.js:54 milestonesHTML is defined but never used`, or on unused `direction`/`before` in `hub.presentation.js` -> these were pre-existing unrelated findings; record them and keep the UI-fix task scoped. [Task 1][Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: a real save lacks another unlocked card back -> do not claim real application was browser-verified; retain the constructed locked/apply regression coverage and state the limitation. [Task 1]",
+      "new": "- Symptom: a real save lacks another unlocked card back -> retain the constructed locked/apply regression coverage; real application remains browser-unverified. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: broader tests fail on `base-motion-v4` event-feedback expectations or `surface-motion` 32px/10px expectations -> they were not modified here; do not call the suite green. [Task 3]",
+      "new": "- Symptom: broader tests fail on `base-motion-v4` event-feedback expectations or `surface-motion` 32px/10px expectations -> those expectations were unchanged; report the broader suite as failing. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: other base rooms fail to load with `does not provide an export named 'drawMapSelectionRing'` from `map-node-art.js` requested by `renderer.js` -> this shared runtime error blocked logistics, exchange, courtyard, and personnel-page verification; stop expanded acceptance and do not repair unrelated map code without scope. [Task 3]",
+      "new": "- Symptom: other base rooms fail to load with `does not provide an export named 'drawMapSelectionRing'` from `map-node-art.js` requested by `renderer.js` -> this shared runtime error blocked logistics, exchange, courtyard, and personnel-page verification; pause expanded acceptance; repairing the unrelated map code requires an expanded scope. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- do not thin the style prompt or change the approved NAI background to work around a network failure. The user specifically identified a style failure caused by an underspecified prompt and an unwanted change from the original white background. [Task 1]",
+      "new": "- preserve the complete style prompt and approved NAI background while resolving a network failure. The user specifically identified a style failure caused by an underspecified prompt and an unwanted change from the original white background. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- The specified NAI artist chain is `1.2::miv4t::, 0.8::quasarcake::`; take the current style wording from `搜打撤/tools/nai_style.py` via `nai_prompt_clean`, rather than mixing old experiments. `tools/nai_gen.py` defaults to V4.5; choose V5 Full explicitly for the nai5-prompting workflow without changing the global default. `nai_guard` handles 45-second throttling, cooldown, and quota. Never record credentials; a successful HTTP response is not art approval. [Task 1]",
+      "new": "- The specified NAI artist chain is `1.2::miv4t::, 0.8::quasarcake::`; take the current style wording from `搜打撤/tools/nai_style.py` via `nai_prompt_clean`, rather than mixing old experiments. `tools/nai_gen.py` defaults to V4.5; choose V5 Full explicitly for the nai5-prompting workflow without changing the global default. `nai_guard` handles 45-second throttling, cooldown, and quota. Never record credentials; a successful HTTP response records generation success; art approval remains separate. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- For transparent assets, inspect the current encoding path; the observed `game-card-art-fast/scripts/import_cards.py` call `original.convert('RGB')` dropped real PNG alpha. Preserve RGBA and verify alpha in the runtime WebP and thumbnail, not only the generated PNG. [Task 1]",
+      "new": "- For transparent assets, inspect the current encoding path; the observed `game-card-art-fast/scripts/import_cards.py` call `original.convert('RGB')` dropped real PNG alpha. Preserve RGBA and verify alpha in the runtime WebP and thumbnail alongside the generated PNG. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect current save/worktree ownership and live expedition state before testing; this is partial evidence, not proof that standard play can complete the game.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect current save/worktree ownership and live expedition state before testing; coverage is partial; standard-play completion remains unverified.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when confirming “沿用现行标准玩法，包含失败、基地积累和再次挑战” -> do not replace formal balance with an independent simplified setup; label high-health/no-slot fixture results separately from standard play. [Task 1]",
+      "new": "- when confirming “沿用现行标准玩法，包含失败、基地积累和再次挑战” -> preserve formal balance for standard play and label high-health/no-slot fixture results separately. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Real-browser coverage reached new-game prep, ordinary battle, loot, shop, campfire, gates through layers 1–3, events, save recovery, fourth-layer entrance, altar activation, boss assembly, and boss entry. Standard failure-return retained safe-slot cards and proficiency and could re-enter hub prep. Keep evidence labels distinct: standard-numerical whole run, failure-return, and no-slot high-health terminal fixture. The fixture proved boss/reward/terminal wiring only; it cannot establish normal-player completion. [Task 1]",
+      "new": "- Real-browser coverage reached new-game prep, ordinary battle, loot, shop, campfire, gates through layers 1–3, events, save recovery, fourth-layer entrance, altar activation, boss assembly, and boss entry. Standard failure-return retained safe-slot cards and proficiency and could re-enter hub prep. Keep evidence labels distinct: standard-numerical whole run, failure-return, and no-slot high-health terminal fixture. Fixture coverage: boss/reward/terminal wiring; normal-player completion remains unverified. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: constructed high-health, Agent, or developer skip-node run clears the boss → report terminal-chain evidence only; the normal run did not complete the standard acceptance criterion. [Task 1]",
+      "new": "- Symptom: constructed high-health, Agent, or developer skip-node run clears the boss → report terminal-chain coverage and the normal run’s incomplete standard acceptance criterion. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: altar “复原 3 张消耗卡” / “继续旅程” renders but does not respond → `UI._acts` was once empty, yet a single-point reproduction later exposed normal actions; it was not stably reproduced or fixed, so record it for retest rather than claiming resolution. [Task 1]",
+      "new": "- Symptom: altar “复原 3 张消耗卡” / “继续旅程” renders but does not respond → `UI._acts` was once empty, yet a single-point reproduction later exposed normal actions; stable reproduction and repair remain open; record it for retest. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: scripted strategy stops with `stopReason=stay` at low health/full inventory, or a locator hits duplicate “初始攻击” cards → this is not flow proof; use visible filtering, `data-uid`, or a scoped card container. [Task 1]",
+      "new": "- Symptom: scripted strategy stops with `stopReason=stay` at low health/full inventory, or a locator hits duplicate “初始攻击” cards → flow completion remains unverified; use visible filtering, `data-uid`, or a scoped card container. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when directing “确定 Demo 和第一版范围” -> do not repeat completed project research or core-gameplay definition. [Task 1]",
+      "new": "- when directing “确定 Demo 和第一版范围” -> reuse the completed project research and core-gameplay definition. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Feishu overview must separate completed records, current work, reference process, and unconfirmed suggestions. Links were collaborator-only when checked; do not assume any document is public. Prefer verified plain-text editing because raw HTML paste was displayed as text. [Task 2]",
+      "new": "- Feishu overview must separate completed records, current work, reference process, and unconfirmed suggestions. Links were collaborator-only when checked; verify access before treating a document as public. Prefer verified plain-text editing because raw HTML paste was displayed as text. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: mixed worktree/Node mismatch makes build or full test tempting → do not mutate files or global setup; establish isolation and Node 22/24 compatibility first. GitHub is only a backup of pushed content, not proof that local commits, uncommitted edits, or ignored assets are recoverable. [Task 3]",
+      "new": "- Symptom: mixed worktree/Node mismatch makes build or full test tempting → preserve files and global setup while establishing isolation and Node 22/24 compatibility. GitHub backup coverage is pushed content; verify recovery separately for local commits, uncommitted edits, and ignored assets. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: improved stereo/dynamic metrics or more layers but music still sounds cluttered -> prioritize clear lead phrase, sustained quiet accompaniment, and phrase-boundary rests; do not equate numeric metrics or density with clarity. [Task 1]",
+      "new": "- Symptom: improved stereo/dynamic metrics or more layers but music still sounds cluttered -> assess clarity by listening for a clear lead phrase, sustained quiet accompaniment, and phrase-boundary rests. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: a delegated analysis exists -> do not call current v7 comparison complete until its final report shows v7 plus the selected references only. [Task 2]",
+      "new": "- Symptom: a delegated analysis exists -> confirm that the final report compares current v7 with the selected references before marking the v7 comparison complete. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Do not remove piano merely because the user says they may remove it; preserve the candidate until explicit approval. [Task 1]",
+      "new": "- Preserve the piano candidate until the user explicitly approves its removal. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when asking “ci没有通过” / “需要怎么修改呢” -> locate the exact commit and failed remote logs first, then give prioritized fixes; do not equate local Windows success with Linux CI success. [Task 2]",
+      "new": "- when asking “ci没有通过” / “需要怎么修改呢” -> locate the exact commit and failed remote logs first, then give prioritized fixes; report local Windows and Linux CI results separately. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- `npm run handoff -- --details` is a handoff/status brief, not a cleanliness claim; pair it with `git status --short`. For ledger cleanup, archive originals and verify SHA before changing current records; use `docs:check`, ledger JSON, and `git diff --check` for document-level verification. [Task 4]",
+      "new": "- Use `npm run handoff -- --details` for the handoff/status brief and `git status --short` for worktree cleanliness. For ledger cleanup, archive originals and verify SHA before changing current records; use `docs:check`, ledger JSON, and `git diff --check` for document-level verification. [Task 4]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- The rollout only diagnosed CI failures; implement and validate Linux compatibility and artifact slimming before claiming remote closure. [Task 2]",
+      "new": "- Coverage: CI-failure diagnosis. Remote closure requires implemented and validated Linux compatibility and artifact slimming. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: Windows temporary Python script with Chinese source fails, or `Path.write_text(..., newline=...)` fails on Python 3.8 -> explicitly read UTF-8 and write with `open(..., newline='\\\\n')`. Use `rg -g` or PowerShell enumeration rather than unsupported wildcard paths. Ledger closeout does not prove a clean worktree, commit, push, resource deletion, or real-page acceptance. [Task 4]",
+      "new": "- Symptom: Windows temporary Python script with Chinese source fails, or `Path.write_text(..., newline=...)` fails on Python 3.8 -> explicitly read UTF-8 and write with `open(..., newline='\\\\n')`. Use `rg -g` or PowerShell enumeration rather than unsupported wildcard paths. Ledger-closeout coverage is document verification; worktree cleanliness, commit, push, resource deletion, and real-page acceptance require their own evidence. [Task 4]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect the live feedback schema, storage and UI ownership first; reuse the dated targeted/browser evidence only for this export contract, not for whole-project or desktop acceptance.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect the live feedback schema, storage and UI ownership first; dated targeted/browser evidence covers this export contract; whole-project and desktop acceptance require separate evidence.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: a successful click is called a completed native-download test -> the browser download event timed out after 15 seconds. Blob body creation was verified, but disk landing location was not; if that is required, inspect the browser download directory as a separate acceptance step. [Task 1]",
+      "new": "- Native-download coverage: the browser download event timed out after 15 seconds; Blob body creation was verified. Disk landing location remains unverified; inspect the browser download directory if that acceptance step is required. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "scope: Commit integrated scene music, then produce and integrity-check a portable Electron EXE without a source archive; use for this delivery sequence, not as desktop startup or full-game acceptance.",
+      "new": "scope: Commit integrated scene music, then produce and integrity-check a portable Electron EXE without a source archive; coverage is this delivery sequence; desktop startup and full-game acceptance remain separate.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: artifact/hash checks are described as released-game acceptance -> this EXE was not desktop-started and no complete run was exercised; state “未实机启动验收”. [Task 1][Task 2]",
+      "new": "- Coverage: artifact/hash checks. Desktop startup and a complete run remain unverified; state “未实机启动验收”. [Task 1][Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=read the live inventory/evidence and current ownership first; reuse only if the current request preserves the same frozen and research-institute boundaries, and do not treat the dated source-only implementation as browser or gameplay proof.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=read the live inventory/evidence and current ownership first; reuse only if the current request preserves the same frozen and research-institute boundaries, with dated coverage limited to source implementation; browser and gameplay validation remain open.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: static source review looks clean -> it is not proof of visual layout, clipping, scrolling, animation, interaction, performance, or research isolation. This rollout ran no browser, tests, lint, build, or functional check; retain the pending user visual-acceptance boundary. [Task 1]",
+      "new": "- Coverage: static source review. This rollout ran no browser, tests, lint, build, or functional check. Visual layout, clipping, scrolling, animation, interaction, performance, and research isolation await user visual acceptance. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: one write to `game/index.html` fails -> retry after checking the actual write state; do not infer that the file is immutable. [Task 1]",
+      "new": "- Symptom: one write to `game/index.html` fails -> check the actual write state before retrying. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect live handoff, ownership, Git state, and current evidence before restoring; the listed hashes and test result are dated evidence, not a substitute for a live check.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect live handoff, ownership, Git state, and current evidence before restoring; the listed hashes and test result are dated evidence; confirm the live state before reuse.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when the user asks to \"restore the home page to the previous version I liked\" after noticing unexplained changes -> restore the specifically approved version first; do not keep iterating on a replacement design. [Task 1]",
+      "new": "- when the user asks to \"restore the home page to the previous version I liked\" after noticing unexplained changes -> restore the specifically approved version first. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- A locator deadline during screenshot/return navigation is not proof of failure: refresh the accessibility state to confirm that the browser returned home, then keep the evidence boundary explicit. [Task 1]",
+      "new": "- After a locator deadline during screenshot/return navigation, refresh the accessibility state to confirm whether the browser returned home; report the observed result. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: an automated transcript extraction reports `Original CSS write not found` -> custom tool-call data may be in an `input` field; inspect the actual event shape, or restore from the recorded evidence and validate hashes instead of declaring recovery impossible. [Task 1]",
+      "new": "- Symptom: an automated transcript extraction reports `Original CSS write not found` -> custom tool-call data may be in an `input` field; inspect the actual event shape, or restore from the recorded evidence and validate hashes. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: a targeted restore is presented as full product closure -> it only had homepage/browser proof, 15/15 `boot.test.js`, and `git diff --check`; retain the no-commit/no-push/no-full-suite/no-CI boundary. [Task 1]",
+      "new": "- Restore coverage: homepage/browser proof, 15/15 `boot.test.js`, and `git diff --check`. Commit, push, full-suite, and CI execution were outside scope. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "scope: 2026-10-01 implementation/review of task records, evidence, archive, staged-Git isolation, acceptance-gate selection, and dependency invalidation; use for workflow tooling only, not gameplay acceptance.",
+      "new": "scope: 2026-10-01 implementation/review of task records, evidence, archive, staged-Git isolation, acceptance-gate selection, and dependency invalidation; coverage is workflow tooling; gameplay acceptance requires separate evidence.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when investigating latency, the user asked “哪些是模型的推理时间，哪些是因为提示词和流程拖延的时间” -> inspect JSONL/local logs and quantify observable stages; do not infer from model labels alone or invoke unrelated documentation workflows. [Task 3]",
+      "new": "- when investigating latency, the user asked “哪些是模型的推理时间，哪些是因为提示词和流程拖延的时间” -> inspect JSONL/local logs and quantify observable stages within the latency-analysis scope. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- `skip` means not executed, never passed. For a direct contract script, map to a direct test; unknown scripts or state/storage/save boundaries select full validation. `acceptance-gate.mjs` treats `battle/core` and `battle/runtime` as full-gate paths. [Task 1][Task 2]",
+      "new": "- `skip` records an unexecuted check. For a direct contract script, map to a direct test; unknown scripts or state/storage/save boundaries select full validation. `acceptance-gate.mjs` treats `battle/core` and `battle/runtime` as full-gate paths. [Task 1][Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- `doctor --json` is a read-only preflight, not acceptance: it checks project/Node/Git/npm/dependencies/entrypoints/hooks/docs/ledger and must report unrun CI, full-game tests, builds, and real pages as `not-checked`. `verify --full` must plan/execute full validation and reject absent tests, invalid paths, and invalid report types during preview. [Task 3]",
+      "new": "- `doctor --json` provides read-only preflight coverage: it checks project/Node/Git/npm/dependencies/entrypoints/hooks/docs/ledger and must report unrun CI, full-game tests, builds, and real pages as `not-checked`. `verify --full` must plan/execute full validation and reject absent tests, invalid paths, and invalid report types during preview. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: a tool-specific test passes but the full suite fails/times out in unrelated gameplay or another session's work -> report the exact boundary and leave the rollout/task partial; do not present it as a full closeout. [Task 2]",
+      "new": "- Symptom: a tool-specific test passes but the full suite fails/times out in unrelated gameplay or another session's work -> report the tool-specific pass and broader failures/timeouts separately; keep the rollout/task partial. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when asking whether “全量检查” was run, distinguish key-path checks, full tests, and full-repository audit; never let any one green result stand for all three. [Task 1]",
+      "new": "- when asking whether “全量检查” was run, report key-path checks, full tests, and full-repository audit as three separate results. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- The dated fix validation recorded 119 focused tests and 255 test files / 2082 passed / 2 skipped plus syntax/build/lint; do not treat counts as live state. Run `game/selftest.js` only from its expected project cwd. [Task 1]",
+      "new": "- The dated fix validation recorded 119 focused tests and 255 test files / 2082 passed / 2 skipped plus syntax/build/lint; verify live state before reusing those counts. Run `game/selftest.js` only from its expected project cwd. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: Vitest/esbuild fails with `spawn EPERM` in the sandbox -> record it as an environment/permission block and rerun through the approved route; it is not a product-test result. [Task 1]",
+      "new": "- Symptom: Vitest/esbuild fails with `spawn EPERM` in the sandbox -> record an environment/permission block and rerun through the approved route to obtain a product-test result. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: a static/JSdom audit is described as browser acceptance -> retain its static-only boundary and verify a representative real-page flow before closure. [Task 2]",
+      "new": "- Static/JSdom audit coverage is static-only; verify a representative real-page flow for browser acceptance. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: an unfinished audit is reported complete -> retain the `doing` task state, open findings, and unreviewed/untested file list; do not silently close it because parallel agents produced reports. [Task 2]",
+      "new": "- Symptom: an unfinished audit is reported complete -> retain the `doing` task state, open findings, and unreviewed/untested file list until the audit’s completion criteria are met. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- The current project entrypoints are `D:\\素材\\代号柒\\搜打撤\\docs\\STATUS.md` and `docs\\README.md`; `docs\\DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md` records migration, fixed paths, deferred items, and cleanup boundaries. Historical `ENGINEERING-*`, M-batch, handoff, and three-track paths were moved; do not treat old paths or counts as current. [Task 1]",
+      "new": "- The current project entrypoints are `D:\\素材\\代号柒\\搜打撤\\docs\\STATUS.md` and `docs\\README.md`; `docs\\DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md` records migration, fixed paths, deferred items, and cleanup boundaries. Historical `ENGINEERING-*`, M-batch, handoff, and three-track paths were moved; verify current paths and counts before reuse. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- The scoped validation was `git diff --check`, path/reference/Git/hash checks, and a Markdown scan that skips fenced and inline code: 183 Markdown files, 261 actual local links, 0 missing targets. This is not test, build, or browser/product acceptance. [Task 1]",
+      "new": "- The scoped validation was `git diff --check`, path/reference/Git/hash checks, and a Markdown scan that skips fenced and inline code: 183 Markdown files, 261 actual local links, 0 missing targets. Coverage: document integrity; tests, build, and browser/product acceptance remain outside this validation. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "scope: 2026-09-28 chest click/settlement repair, class-selection visual cleanup, renderer dependency slice, and scoped local commits; dated implementation evidence, not a complete architecture program or natural-route chest acceptance.",
+      "new": "scope: 2026-09-28 chest click/settlement repair, class-selection visual cleanup, renderer dependency slice, and scoped local commits; dated coverage is implementation; a complete architecture program and natural-route chest acceptance remain separate.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when the user says “这是 bug” and asks “有没有长架构的问题” -> separate a reproduced functional defect, structural risk, and merely unverified risk; do not present a short-term bug fix as architecture governance. [Task 3]",
+      "new": "- when the user says “这是 bug” and asks “有没有长架构的问题” -> separate a reproduced functional defect, structural risk, and merely unverified risk; label the repair by the structural scope it actually covers. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Use file/patch-level staging in the shared worktree. Dated commits `f03be53` (repair/UI/slice/tests) and `9fb155a` (project memory) deliberately left unrelated dirty/untracked work untouched; the pre-commit rerun passed 204 test files, 1672 tests, 2 skipped, but is not a live-state claim. [Task 3]",
+      "new": "- Use file/patch-level staging in the shared worktree. Dated commits `f03be53` (repair/UI/slice/tests) and `9fb155a` (project memory) deliberately left unrelated dirty/untracked work untouched; the pre-commit rerun passed 204 test files, 1672 tests, 2 skipped, and requires live-state verification before reuse. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: automation hits a class-selection card decoration layer -> do not infer that shared click delegation is broken; distinguish locator hit-testing from the business event chain and verify the AX state/keyboard activation. [Task 2]",
+      "new": "- Symptom: automation hits a class-selection card decoration layer -> distinguish locator hit-testing from the business event chain and verify the AX state/keyboard activation. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: reporting the repair as browser natural-route acceptance -> the browser did not naturally reach a chest; call this isolated-test coverage, not that broader claim. [Task 1]",
+      "new": "- Repair coverage: isolated tests. The browser did not naturally reach a chest, so natural-route acceptance remains open. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- 当前结构清单272张=71有rules+201legacy；onPlay56不增，sync另55全legacy。仅三治疗道具新增地图bag.use规则，战斗背包仍文本；其余269生产+55sync消费/文本/测试证据unknown，不能称全部规则化。[Task 1]",
+      "new": "- 当前结构清单272张=71有rules+201legacy；onPlay56不增，sync另55全legacy。仅三治疗道具新增地图bag.use规则，战斗背包仍文本；其余269生产+55sync消费/文本/测试证据unknown，全库规则化状态待核实。[Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=dated E7 evidence only; inspect live Git, current QA origin/localStorage, file ownership, and acceptance plan before reuse; never treat this limited QA run as player-save or full-game acceptance.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=dated E7 evidence only; inspect live Git, current QA origin/localStorage, file ownership, and acceptance plan before reuse; coverage is the limited QA run; player-save and full-game acceptance require separate evidence.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- distinguish natural flow, QA setup, fault injection, and real player operation in the result; do not call limited samples a long-run or whole-game pass. [Task 2]",
+      "new": "- report natural flow, QA setup, fault injection, and real player operation separately, with the duration and scope each sample covers. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: E2 is reported completely passed -> hover was deliberately skipped and remains unverified; the E7 run does not alter that boundary. Keep large event logs as a compressed summary, key events, and evidence paths rather than copying the roughly 5.7 MB log. [Task 2]",
+      "new": "- E2 coverage: hover was deliberately skipped and remains unverified after the E7 run. Keep large event logs as a compressed summary, key events, and evidence paths rather than copying the roughly 5.7 MB log. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when the user required real-window evidence, keyboard focus, clicks, or scripted events must not stand in for hover -> mark tool-limited hover as manual pending instead of claiming success. [Task 1]",
+      "new": "- when the user required real-window hover evidence -> mark tool-limited hover as manual pending; keyboard focus, clicks, and scripted events cover their respective interactions. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: isolated DOM/VFX evidence is called complete E2 acceptance -> retain the boundaries: real hover needs manual action, old player saves 04/05 were not attributed, and the independent-origin new-slot flow included E3 work-in-progress, so it is not a pure E2 baseline. [Task 1]",
+      "new": "- E2 evidence scope: isolated DOM/VFX checks; real hover needs manual action; old player saves 04/05 remain unattributed. The independent-origin new-slot flow covers mixed E2/E3 work-in-progress. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when validating a repair, the user required a real storage-failure reproduction and separate automated, type, full-gate, and page evidence -> never present mocks or the full test suite as cross-refresh/browser acceptance. [Task 2]",
+      "new": "- when validating a repair, the user required a real storage-failure reproduction and separate automated, type, full-gate, and page evidence -> report mocks, the full test suite, and cross-refresh/browser acceptance as separate evidence. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- `loadGame.persistence` separately reports actual writes as `not_attempted`, `succeeded`, or `failed`; include indirect `enterLayer`, Base, and battle-recovery writes. Release collection context in `finally`; a usable load (`loadGame.ok`) is not proof that persistence succeeded. [Task 1]",
+      "new": "- `loadGame.persistence` separately reports actual writes as `not_attempted`, `succeeded`, or `failed`; include indirect `enterLayer`, Base, and battle-recovery writes. Release collection context in `finally`; report load usability (`loadGame.ok`) and persistence success separately. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: a recovery test proves the original gap or a WeakMap retries in one JS instance -> neither validates post-fix, cross-refresh consistency. Use a staged real-fault matrix; WeakMap cannot bridge instances. [Task 2]",
+      "new": "- A reproduction of the original gap or a WeakMap retry covers one JS instance. Validate post-fix, cross-refresh consistency with a staged real-fault matrix; WeakMap state remains instance-local. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "scope: M 批已完成 150 张目标卡接线；用于结构化规则、hosted 执行器、迁移器或残留审计，不能据此宣称全项目不再解析文本。",
+      "new": "scope: M 批已完成 150 张目标卡接线；用于结构化规则、hosted 执行器、迁移器或残留审计，全项目文本解析仍需按现行源码核对。",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=use only after inspecting current card data, sync output, and concurrent ownership; do not claim full migration from representative-card tests.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=use only after inspecting current card data, sync output, and concurrent ownership; representative-card tests cover their named cards; full migration requires the complete inventory.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- M batch production inventory: 272 total cards, 221 with executable `rules`, 51 agreed exclusions, and all 150 target cards covered. The mixed result is 92 structural-operation cards plus 58 named `hosted` branches that still reuse the old text executor; this is not full text-parser removal. [Task 1]",
+      "new": "- M batch production inventory: 272 total cards, 221 with executable `rules`, 51 agreed exclusions, and all 150 target cards covered. The mixed result is 92 structural-operation cards plus 58 named `hosted` branches that still reuse the old text executor; the text parser remains in use by those hosted branches. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: representative rules are described as a completed card migration -> most active cards still relied on text parsing; designer write closure, non-battle integration, full tests/build, and real browser validation were not evidenced in this rollout. [Task 2]",
+      "new": "- Migration coverage: representative rules; most active cards still relied on text parsing. Designer write closure, non-battle integration, full tests/build, and real browser validation remain unevidenced in this rollout. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: merging `base.js`/`game.bag.js` from the `6f5b` worktree overwrites parallel work -> compare hunk-by-hunk and retain the structured restoration-potion `saveGame()` behavior. A created closeout thread is not evidence that the work finished. [Task 2]",
+      "new": "- Symptom: merging `base.js`/`game.bag.js` from the `6f5b` worktree overwrites parallel work -> compare hunk-by-hunk and retain the structured restoration-potion `saveGame()` behavior. Confirm the closeout thread’s final result before recording completion. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: six full-suite failures after a migration -> first repair shared execution semantics (notably curse aggregation), then update stale structural/log/random assertions; do not label expected migration-output changes as regressions. Initial coverage parsing also included a Markdown header and exposed 58 missing cards: fix the selector and continue the m7–m11 inventory. [Task 1]",
+      "new": "- Symptom: six full-suite failures after a migration -> first repair shared execution semantics (notably curse aggregation), then update stale structural/log/random assertions; classify expected migration-output changes separately from regressions. Initial coverage parsing also included a Markdown header and exposed 58 missing cards: fix the selector and continue the m7–m11 inventory. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "scope: Static architecture review plus isolated delivery of settlement/recovery and terminal-turn safeguards; validation did not include runtime tests or browser acceptance.",
+      "new": "scope: Static architecture review plus isolated delivery of settlement/recovery and terminal-turn safeguards; coverage was static; runtime tests and browser acceptance remain unverified.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Agent evaluation: compare variants/champion only within the same code, seed batch, and probe setting; formal statistics keep probe off and decisions use paired deltas, not historical absolute rates. Clear batch slots via `RunStorage.remove`, not bare `removeItem`, to avoid `STALE_SLOT`. Vitest zeroes presentation, so it cannot prove page animation/stall behavior. [Task 3] [ad-hoc note]",
+      "new": "- Agent evaluation: compare variants/champion only within the same code, seed batch, and probe setting; formal statistics keep probe off and decisions use paired deltas, not historical absolute rates. Clear batch slots via `RunStorage.remove`, not bare `removeItem`, to avoid `STALE_SLOT`. Vitest zeroes presentation; verify page animation/stall behavior in the browser. [Task 3] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- UI status: `.ui-loop-0926/FINAL-REPORT.md` recorded 39 closed, 7 open handoffs, and 1 gameplay item, not “all 47 closed”; `STATE.md` is stale relative to that report. Treat reported 241 cases/W7 as historical evidence, not a new all-suite/build/browser acceptance. [Task 3] [ad-hoc note]",
+      "new": "- UI status: `.ui-loop-0926/FINAL-REPORT.md` recorded 39 closed, 7 open handoffs, and 1 gameplay item; use these counts to replace “all 47 closed”. `STATE.md` is stale relative to that report. Reported 241 cases/W7 are historical evidence; current all-suite/build/browser acceptance requires current checks. [Task 3] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: an older handoff says battle selection flow is unwired, V5 is the art default, or all 47 UI items are closed -> superseded by the dated 2026-09-27 current-state refresh; verify its stated files live rather than repeating those obsolete claims. [Task 3] [ad-hoc note]",
+      "new": "- Symptom: an older handoff says battle selection flow is unwired, V5 is the art default, or all 47 UI items are closed -> superseded by the dated 2026-09-27 current-state refresh; verify its stated files against the live checkout. [Task 3] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=Vite battle code only; first inspect root AGENTS.md, current diff, and live module wiring. Do not treat dated static checks as behavioral acceptance or apply to Godot/Unity.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=Vite battle code only; first inspect root AGENTS.md, current diff, and live module wiring. Coverage is dated static checks; behavioral acceptance requires separate evidence. Godot/Unity remain outside scope.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when the user accepted “只做代码和静态检查，不运行测试、构建或浏览器” -> report that boundary plainly; static checks do not establish behavior acceptance. [Task 2]",
+      "new": "- when the user accepted “只做代码和静态检查，不运行测试、构建或浏览器” -> report static-check results and mark behavioral acceptance unverified. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: staged playback, drag, save restore, terminal cleanup, or flash-card behavior is called done -> only `node --check` and `git diff --check` were recorded; run targeted tests, build, and real browser flows before claiming acceptance. The view agent did not complete stable local redraw, and `battle.view.js` still rebuilds main HTML through `UI.showOverlay`. [Task 2]",
+      "new": "- Coverage for staged playback, drag, save restore, terminal cleanup, and flash-card behavior: `node --check` and `git diff --check`. Behavioral acceptance requires targeted tests, build, and real browser flows. Stable local redraw remains incomplete; `battle.view.js` still rebuilds main HTML through `UI.showOverlay`. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: dated 2026-09-24 notes are used to claim `battle.selection-flow.js` is still unverified/unwired -> newer state evidence says it is wired; recheck the live checkout for behavioral acceptance instead of repeating the obsolete uncertainty. [Task 3] [ad-hoc note]",
+      "new": "- Symptom: dated 2026-09-24 notes are used to claim `battle.selection-flow.js` is still unverified/unwired -> newer state evidence says it is wired; recheck the live checkout for behavioral acceptance. [Task 3] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Delivery snapshot: local commit d32a7d6 (fix: recover terminal and extraction settlements atomically) changed 18 files and was clean at 2026-09-23 12:44, but was not pushed. terminal.commands.js covers death/abandonment; extraction.commands.js covers extraction start, batched storage, and completion cleanup, reusing paired Base+Run transactions and receipts. Read current AGENTS.md, live code, and docs/settlement-recovery-plan-2026-09-23.md before follow-up; do not treat that plan's old checklist as current state. [Task 1] [ad-hoc note]",
+      "new": "- Delivery snapshot: local commit d32a7d6 (fix: recover terminal and extraction settlements atomically) changed 18 files and was clean at 2026-09-23 12:44, but was not pushed. terminal.commands.js covers death/abandonment; extraction.commands.js covers extraction start, batched storage, and completion cleanup, reusing paired Base+Run transactions and receipts. Read current AGENTS.md, live code, and docs/settlement-recovery-plan-2026-09-23.md before follow-up; verify the plan's checklist against current state. [Task 1] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Evidence boundary for d32a7d6: isolated baseline 275937e plus this patch had 118 files / 652 tests passing before final UI/timer additions; final targeted three files / nine tests passed in both main and isolated worktrees, with an isolated UI test 1/1. Do not collapse that into “final single full run 653/653”. Syntax passed for 150 files; isolated production build/performance budget passed, and one internal-browser slot-02 death-to-base refresh flow had no old battle or error log. [Task 1] [ad-hoc note]",
+      "new": "- Evidence boundary for d32a7d6: isolated baseline 275937e plus this patch had 118 files / 652 tests passing before final UI/timer additions; final targeted three files / nine tests passed in both main and isolated worktrees, with an isolated UI test 1/1. The shorthand “final single full run 653/653” combines separate runs; retain the run-by-run results. Syntax passed for 150 files; isolated production build/performance budget passed, and one internal-browser slot-02 death-to-base refresh flow had no old battle or error log. [Task 1] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: a focused suite or agent report is presented as project-wide acceptance -> distinguish it from the current full run. This phase recorded 582/591 full tests with nine failures and only targeted post-change verification; do not alter unrelated red tests merely to obtain green. [Task 3]",
+      "new": "- Report focused suites, agent findings, and the current full run separately. This phase recorded 582/591 full tests with nine failures and only targeted post-change verification; do not alter unrelated red tests merely to obtain green. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: “all gameplay is complete” after normal progression or failure-only testing -> separately verify departure, successful evacuation, death, abandonment, save restore, and resource/count effects. The current vertical slices are not a whole-game overhaul. [Task 3]",
+      "new": "- Symptom: “all gameplay is complete” after normal progression or failure-only testing -> separately verify departure, successful evacuation, death, abandonment, save restore, and resource/count effects. Coverage remains the current vertical slices; a whole-game overhaul requires those additional flows. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: animation/prototype is described as finished -> black-image rig visual acceptance failed and was not integrated; the 2.5D base is functional prototype, not finished furniture art. [Task 3]",
+      "new": "- Animation/prototype status: black-image rig visual acceptance failed and integration remained undone; the 2.5D base is a functional prototype with furniture art unfinished. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: P0 settlement work is called merged or fully accepted -> it was uncommitted in the shared main worktree, had no full-main-worktree run, and did not complete the real four-floor successful-extraction/refresh/re-departure path. [Task 4]",
+      "new": "- P0 settlement status: uncommitted in the shared main worktree; full-main-worktree verification and the real four-floor successful-extraction/refresh/re-departure path remained incomplete. [Task 4]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- The previous V5 workflow is historical. The 2026-09-27 state check found `tools/nai_gen.py` defaulting to `nai-diffusion-4-5-full` with small images (832×1216 / 1344×768); request V5 explicitly as `model='nai-diffusion-5-full'`. Recheck service availability and project rules rather than treating this dated configuration as permanent. [Task 1] [ad-hoc note]",
+      "new": "- The previous V5 workflow is historical. The 2026-09-27 state check found `tools/nai_gen.py` defaulting to `nai-diffusion-4-5-full` with small images (832×1216 / 1344×768); request V5 explicitly as `model='nai-diffusion-5-full'`. Recheck service availability and project rules before reusing this dated configuration. [Task 1] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Keep character appearance in the Character field; put action, composition, scene, and lighting in subject/scene layers. Treat `docs/character-bible/README.md` plus `shuangling.md`, `baiqi.md`, `lituan.md`, `xuanli.md`, and `dengkui.md` as the five-character appearance authority; do not condense anchors from memory. [Task 1] [ad-hoc note]",
+      "new": "- Keep character appearance in the Character field; put action, composition, scene, and lighting in subject/scene layers. Treat `docs/character-bible/README.md` plus `shuangling.md`, `baiqi.md`, `lituan.md`, `xuanli.md`, and `dengkui.md` as the five-character appearance authority; read the current anchors directly from those sources. [Task 1] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Large-image free-area limits were recorded as 20 images per natural day; the script has a counter guard. This was not a live service check. [Task 1] [ad-hoc note]",
+      "new": "- Large-image free-area limits were recorded as 20 images per natural day; the script has a counter guard. Coverage: recorded limits and script guard; live service limits remain unverified. [Task 1] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when the user asks “保持现在的视觉效果，再做同条件对照看看实际改善多少” -> preserve animation/interaction parameters and report controlled before/after data; do not turn shorter interaction latency into an FPS claim. [Task 4]",
+      "new": "- when the user asks “保持现在的视觉效果，再做同条件对照看看实际改善多少” -> preserve animation/interaction parameters and report controlled before/after latency; FPS requires its own measurement. [Task 4]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: PixiJS jsdom output says `Unable to auto-detect a suitable renderer` while the targeted tests pass -> treat it as environment stderr, not a Photo Studio regression. [Task 1]",
+      "new": "- Symptom: PixiJS jsdom output says `Unable to auto-detect a suitable renderer` while the targeted tests pass -> record it as environment stderr alongside the passing targeted tests. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: added Photo Studio CSS seems absent -> `winter.css` may override it. Confirm `game/index.html` load order and browser computed styles; do not infer from source rules. Avoid ongoing blur, heavy filters, or full-wall animation. [Task 2][Task 3]",
+      "new": "- Symptom: added Photo Studio CSS seems absent -> `winter.css` may override it. Confirm the effect through `game/index.html` load order and browser computed styles. Avoid ongoing blur, heavy filters, or full-wall animation. [Task 2][Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: performance comparison changes DPR or runs before UI/resources are ready -> discard the sample; fix viewport/DPR first and wait until source/target are visible. A focus-token failure needs fresh browser state, not a product diagnosis. Use a read-only isolated Vite baseline rather than reverting a shared dirty worktree. Long-task count did not stably fall, so do not claim FPS or all stutter is solved. [Task 4]",
+      "new": "- Symptom: performance comparison changes DPR or runs before UI/resources are ready -> discard the sample; fix viewport/DPR first and wait until source/target are visible. Refresh browser state after a focus-token failure. Use a read-only isolated Vite baseline and preserve the shared dirty worktree. Long-task count did not stably fall; FPS improvement and complete stutter resolution remain unverified. [Task 4]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when improving this game, the user allowed the agent to “随时开内部浏览器自己玩和体验” -> make actual browser play and observation part of the workflow, not only code/static review. [Task 1]",
+      "new": "- when improving this game, the user allowed the agent to “随时开内部浏览器自己玩和体验” -> include actual browser play and observation alongside code/static review. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: browser acceptance is inconsistent -> 5175 and 5176 served competing states, while a requested 1280×720 viewport still reported 1440×900. Run only one marked acceptance server and do not claim breakpoint or interaction coverage that was not observed. [Task 1]",
+      "new": "- Symptom: browser acceptance is inconsistent -> 5175 and 5176 served competing states, while a requested 1280×720 viewport still reported 1440×900. Run one marked acceptance server and report the actual breakpoint and interactions observed. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: a generated replacement looks finished on disk -> `xuanli`/`dengkui` battle WebP assets still require alpha and in-game compositing checks. Generation/write success is not asset acceptance. [Task 1]",
+      "new": "- Symptom: a generated replacement looks finished on disk -> `xuanli`/`dengkui` battle WebP assets still require alpha and in-game compositing checks. Coverage: generation/write; asset acceptance awaits those checks. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=apply whenever the user refers ambiguously to the current game/project/code/items; do not use historical task or asset details without fresh inspection.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=apply whenever the user refers ambiguously to the current game/project/code/items; verify historical task and asset details against current sources before reuse.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Portable repository sources include `docs/architecture.md`, `development.md`, `rules.md`, `design.md`, `save-format.md`, `performance.md`, `roadmap.md`, and `changelog.md`; `docs/game-compendium.md` was regenerated 2026-09-19 for 246 cards. `docs/character-bible/` is the authoritative five-character visual anchor. The local `.zcode` memory directory changes over time, so do not treat its previously observed 63 Markdown files as a fixed count. [Task 2] [ad-hoc note]",
+      "new": "- Portable repository sources include `docs/architecture.md`, `development.md`, `rules.md`, `design.md`, `save-format.md`, `performance.md`, `roadmap.md`, and `changelog.md`; `docs/game-compendium.md` was regenerated 2026-09-19 for 246 cards. `docs/character-bible/` is the authoritative five-character visual anchor. The local `.zcode` memory directory previously contained 63 Markdown files; recount it when the current total matters. [Task 2] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect the current checkout and audit before extending; this records a partial state, not a finished combat rewrite.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect the current checkout and audit before extending; coverage is a partial combat-rewrite state.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- on execution work, the user repeatedly said “继续”“全部执行完再告诉我”“继续直到所有完成” -> keep advancing through the stated complete scope and avoid premature final-completion language. [Task 1]",
+      "new": "- on execution work, the user repeatedly said “继续”“全部执行完再告诉我”“继续直到所有完成” -> advance through the stated complete scope and report completion against its criteria. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when requesting an evaluation or migration, the user expects code, targeted tests, and actual play evidence; do not replace real-page/real-play conclusions with a static impression or green tests, and state precisely what card families remain outside the migration. [Task 2]",
+      "new": "- when requesting an evaluation or migration, the user expects code, targeted tests, and actual play evidence; report static, test, and real-page/real-play evidence separately, and name the card families still outside the migration. [Task 2]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Do not inject pile `data-act` by HTML string replacement; make `renderPileBadge` accept a `dataAct` parameter. [Task 1]",
+      "new": "- Pass pile `data-act` through a `dataAct` parameter on `renderPileBadge`, keeping it out of HTML string replacement. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- This is not complete: card flight, enemy attack animation, a full VFX queue, and further `battle.view.js` decomposition remain. Do not state that the user's “全部” request was delivered until these are checked. [Task 1]",
+      "new": "- Remaining for the user's “全部” request: card flight, enemy attack animation, a full VFX queue, and further `battle.view.js` decomposition; check these before recording completion. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- M 批迁移口径和验收边界见对应 PLAN/RESULT：hosted 卡仍复用文本执行器，不能按当前规则覆盖或全量通过解释历史落库。[Task 1]",
+      "new": "- M 批迁移口径和验收边界见对应 PLAN/RESULT：hosted 卡仍复用文本执行器；历史落库按当时规则覆盖与验证结果记录。[Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- 消耗口袋每张独立 1/3 概率带回，状态条显示期望值；撤离屏仍误写“已自动回收”，页面状态条的元页遮挡判定尚未接线。审计曾误报 inFlight 卡死，相关删除已撤销；不能将其列为修复。[Task 1]",
+      "new": "- 消耗口袋每张独立 1/3 概率带回，状态条显示期望值；撤离屏仍误写“已自动回收”，页面状态条的元页遮挡判定尚未接线。审计曾误报 inFlight 卡死，相关删除已撤销；该项按误报记录。[Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Symptom: historical gate totals, a shared-worktree visual check, or the M-batch commit is presented as later release acceptance -> they are dated evidence only. Re-run the relevant checks against live Git; do not call the reverted `inFlight` finding fixed, or the still-unwired overlay/withdrawal copy complete. [Task 1]",
+      "new": "- Historical gate totals, the shared-worktree visual check, and the M-batch commit are dated evidence. Re-run relevant checks against live Git for later release acceptance. Status: the `inFlight` finding was reverted; overlay wiring and withdrawal copy remain incomplete. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=仅复用于 NAI 网络失败诊断和提示词对照；每次先复核项目 `tools/NAI-PROMPTS.md` 与 `docs/evidence/2026-10-13-wu-nai45-prompt-compare/README.md`，不要把本轮沙箱/网络结论推广为永久服务状态。",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=仅复用于 NAI 网络失败诊断和提示词对照；每次先复核项目 `tools/NAI-PROMPTS.md` 与 `docs/evidence/2026-10-13-wu-nai45-prompt-compare/README.md`，本轮沙箱/网络结论按当时环境记录，服务现状另行核对。",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- 当前 `nai_gen.py` 从环境 `HTTPS_PROXY` / `ALL_PROXY` 取代理，不再硬编码旧端口。持续项目网络配置即使写了域名白名单，本轮测试仍未能证明拦截非 NAI 连接；配置已恢复原字节，不应把实验补丁当成修复。需要当前授权时对特定命令申请扩展权限，仍走 `nai_guard` 节流与额度。[Task 1] [ad-hoc note]",
+      "new": "- 当前 `nai_gen.py` 从环境 `HTTPS_PROXY` / `ALL_PROXY` 取代理，不再硬编码旧端口。持续项目网络配置即使写了域名白名单，本轮测试仍未能证明拦截非 NAI 连接；实验以恢复配置原字节收尾，修复尚未验证。需要当前授权时对特定命令申请扩展权限，仍走 `nai_guard` 节流与额度。[Task 1] [ad-hoc note]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- 当前来源优先顺序：`搜打撤/docs/character-bible/wu.md` 当前段、`docs/production/art/ART-DIRECTION-BRIEF.md`、`game/assets/portraits/full/wu.webp`；`artifact-template-wu/SKILL.md` 与 `references/wu-anchors.md` 的旧正面图不代表现行状态。[Task 1]",
+      "new": "- 当前来源优先顺序：`搜打撤/docs/character-bible/wu.md` 当前段、`docs/production/art/ART-DIRECTION-BRIEF.md`、`game/assets/portraits/full/wu.webp`；`artifact-template-wu/SKILL.md` 与 `references/wu-anchors.md` 的旧正面图保留为历史参考。[Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=check current ownership, worktree, and docs before reuse; focused/static evidence is not player acceptance.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=check current ownership, worktree, and docs before reuse; focused/static evidence covers its named checks; player acceptance requires separate evidence.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- A request to run the EXE and prevent recurrence -> verify the real failure pattern, not package contents alone. [Task 3]",
+      "new": "- A request to run the EXE and prevent recurrence -> verify the real failure pattern alongside package integrity. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Register skin art through `SKIN_FULL_ART`; distinguish `asset-audit --scope selected` from global results, preserve native exit codes, and treat browser `observed` evidence as below gameplay/build/CI. `portable.unpackDirName: true` fixed shared NSIS extraction after a real two-instance close test. Wu uses Pixi frames; `wu-parts-v1` is draft/reference, not accepted runtime animation. [Task 3]",
+      "new": "- Register skin art through `SKIN_FULL_ART`; distinguish `asset-audit --scope selected` from global results, preserve native exit codes, and report browser `observed`, gameplay, build, and CI evidence separately. `portable.unpackDirName: true` fixed shared NSIS extraction after a real two-instance close test. Wu uses Pixi frames; `wu-parts-v1` is draft/reference, not accepted runtime animation. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Tool/file checks do not prove natural animation: obtain v4 visual acceptance first, then integrate. [Task 3]",
+      "new": "- Coverage: tool/file checks. Obtain v4 visual acceptance for natural animation, then integrate. [Task 3]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when the user asks to blend several attachments “into the existing default art style” -> retain that established style and incorporate reference traits; do not replace it with a standalone imitation of the attachments. [Task 1]",
+      "new": "- when the user asks to blend several attachments “into the existing default art style” -> incorporate reference traits into the established style. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=use only after checking the current catalogue and the newest stated boundaries; this is design documentation, not implementation, balance, or playtest evidence.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=use only after checking the current catalogue and the newest stated boundaries; coverage is design documentation; implementation, balance, and playtesting remain unverified.",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- when the user asks for fast production -> settle structure, constraints and example style before batch-writing; do not spend time exploring rejected drafts. [Task 1]",
+      "new": "- when the user asks for fast production -> settle structure, constraints and example style before batch-writing, using the current approved references. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- A previous “no followers” direction does not override the newest examples: `精神控制` explicitly turns an enemy into a follower. Latest explicit instruction wins. [Task 1]",
+      "new": "- Follow the newest explicit examples over the previous “no followers” direction: `精神控制` explicitly turns an enemy into a follower. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    },
+    {
+      "old": "- Validation recorded continuous numbering, 50 unique names, no martial-arts infusion, all equipment at 0 cost, 26 relative links, and `npm run docs:check` with 632 links/no findings. It does not validate fun, strength, novelty, implementation or balance. [Task 1]",
+      "new": "- Validation recorded continuous numbering, 50 unique names, no martial-arts infusion, all equipment at 0 cost, 26 relative links, and `npm run docs:check` with 632 links/no findings. Fun, strength, novelty, implementation, and balance remain unvalidated. [Task 1]",
+      "reason": "Replace repeated denial with an action or explicit evidence coverage; preserve facts and constraints."
+    }
+  ]
+}

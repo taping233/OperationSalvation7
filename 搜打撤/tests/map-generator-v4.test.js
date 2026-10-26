@@ -12,7 +12,7 @@ function assertRules(map) {
   expect(map.layers.map(layer => layer.nodes.length)).toEqual([7, 11, 16, 16]);
   expect(map.layers.map(layer => layer.nodes.filter(node => node.type === 'resource').length)).toEqual([0, 1, 1, 1]);
   expect(map.layers.map(layer => layer.nodes.filter(node => node.type === 'event').length)).toEqual([1, 2, 3, 2]);
-  expect(map.layers.every(layer => layer.nodes.filter(node => node.type === 'chest').every(node => node.name.includes('宝箱')))).toBe(true);
+  expect(map.layers.every(layer => layer.nodes.filter(node => node.type === 'chest').every(node => node.name.includes('搜刮点')))).toBe(true);
   map.layers.forEach((layer, li) => {
     const counts = {};
     const adjacent = idx => layer.nodes[idx].next.filter(([to]) => to === li).map(([, next]) => next);

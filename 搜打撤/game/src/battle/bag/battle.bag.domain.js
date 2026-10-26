@@ -7,6 +7,8 @@ import { readConsumedPile, takeConsumedCard as takeFromConsumedPile } from './ba
 import { triggerExecutionPlan } from '../../cards/card-execution-plan.js';
 import { createCardRuleExecution } from '../effects/battle.rule-guard.js';
 
+/** @typedef {boolean | { status: 'needs-input' } | Promise<boolean>} BattleItemUseResult */
+
 /** Instance-owned state and host services are captured explicitly. */
 export function createBagDomain(context) {
 const instanceRuntime = context.runtime;
@@ -21,6 +23,7 @@ const { matchesExecuteCap } = createM2Domain(context);
 
 function createBattleBag({
   requestBattleRender, clearTargetSession, cancelInteraction, beginSpecialTargeting, interactionOf,
+  emitBattlePresentation = event => { void event; },
   queueBattleAction, runStagedSteps, singleTargetHitSteps, applyTextEffects, hitFoe, resolveCardSteps,
   sweepDead, finish, alive, addTempCard, addDeckCard, fireCatGift, applyKillRewards,
   throwIfActionCancelled, findCard,
@@ -68,7 +71,7 @@ function createBattleBag({
   }
   function reserveBattleItem(uid) {
     if (!battleBagItems().some(o => o.uid === uid)) return null;
-    const marker = { uid, game: instanceRuntime.G, token: instanceRuntime.battleState.token };
+    const marker = { uid, game: instanceRuntime.G, token: instanceRuntime.battleState.token, consumed: false };
     pendingItems.set(uid, marker);
     markCardResolving(uid, marker, true);
     return marker;
@@ -93,6 +96,7 @@ function createBattleBag({
       if (instanceRuntime.hand[i] === uid) instanceRuntime.hand.splice(i, 1);
     }
     if (!instanceRuntime.played.includes(uid)) instanceRuntime.played.push(uid);
+    marker.consumed = true;
     return marker;
   }
   // 道具栏可用性（2026-09-09 老板 #10）：不可用的道具在栏内虚化并说明原因，点击不再消耗
@@ -109,24 +113,23 @@ function createBattleBag({
     if (itemTargetSideFor(card) === 'enemy' && !alive().length) return { usable: false, why: '场上没有敌人可用' };
     return { usable: true, why: '' };
   }
+  /** @returns {BattleItemUseResult} */
   function useItem(uid, side) {
-    if (!instanceRuntime.G?.battleActive) return;
+    if (!instanceRuntime.G?.battleActive) return false;
     const entry = battleBagItems().find(o => o.uid === uid);
-    if (!entry) return;
-    if (instanceRuntime.busy || instanceRuntime.infusing || instanceRuntime.discovering || instanceRuntime.choosing || instanceRuntime.handSelecting) return;
+    if (!entry) return false;
+    if (instanceRuntime.busy || instanceRuntime.infusing || instanceRuntime.discovering || instanceRuntime.choosing || instanceRuntime.handSelecting) return false;
     const card = getHostedExecutionCard(entry.card);
     // G-1（2026-09-29 夜班）：入口复检可用性——视图层拦截（药水栏 .off / BOSS 战背包拒开）之外的
     // agent 命令通道（useItem 直达引擎）不再绕过 BOSS 战禁逃等口径，三条使用通道同闸。
     const usability = itemUsability(card);
-    if (!usability.usable) { instanceRuntime.G.log(`[[icon:lock]] 【${esc(card.name)}】${usability.why}，道具未消耗`, 'dim'); return; }
+    if (!usability.usable) { instanceRuntime.G.log(`[[icon:lock]] 【${esc(card.name)}】${usability.why}，道具未消耗`, 'dim'); return false; }
     const desc = String(card.desc || '');
     if (Array.isArray(card.rules?.bag?.use)) {
-      useBattleEffectItem({ ...entry, card }, side);
-      return;
+      return useBattleEffectItem({ ...entry, card }, side);
     }
     if (triggerExecutionPlan(card, 'onPlay').kind === 'structured') {
-      useBattleEffectItem({ ...entry, card }, side);
-      return;
+      return useBattleEffectItem({ ...entry, card }, side);
     }
     const healM = desc.match(/回复\s*(\d+)\s*点生命/);
     const isCrystal = card.id === 'tt-crystal' || /复活最多\s*3\s*张卡牌/.test(desc);
@@ -135,13 +138,14 @@ function createBattleBag({
     const wm = desc.match(/木材\s*[×x]\s*(\d+)/);
     if (!healM && !isCrystal && !isPotion && !rm && !wm) {
       // 2026-09-12：战斗效果类道具（药水/TNT/烟雾弹/通行证C/员工通行证A）走药水栏结算
-      useBattleEffectItem({ ...entry, card }, side);
-      return;
+      return useBattleEffectItem({ ...entry, card }, side);
     }
     // 先扣再用（与地图侧道具一致）：用掉即从背包移除
     clearTargetSession();
     const marker = consumeBattleItem(entry.uid);
-    if (!marker) return;
+    if (!marker) return false;
+    // 已消费后的结算或展示失败仍须返回消费事实，避免调用方再次使用同一张道具。
+    try {
     try {
     instanceRuntime.G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】`, 'sys');
     if (healM) healPlayer(+healM[1]);
@@ -171,6 +175,8 @@ function createBattleBag({
     if (wm) instanceRuntime.G.addItem(context.items.wood, +wm[1]);
     requestBattleRender();
     } finally { finishBattleItem(marker); }
+    } catch (error) { console.error('[battle] 道具结算异常：', error); }
+    return marker.consumed;
   }
   // M3（执行器收编轮）：rules.bag.use 结构化分派——战斗内药水/道具按 ops 结算，
   // 沉默封印口径与文本道具一致（药水不受沉默影响，无技能句）；op 集与 schema BAG_SUPPORTED_OPS 对齐
@@ -197,6 +203,10 @@ function createBattleBag({
   function* resolveBagOperations(card, target, { settle = false, aliveBefore = alive().length } = {}) {
     const ops = card.rules?.bag?.use;
     if (!Array.isArray(ops)) return false;
+    emitBattlePresentation({ kind:'item-use', name:card.name,
+      targets:ops.some(op => op.target === 'allEnemies') ? alive().map(foe => instanceRuntime.foes.indexOf(foe))
+        : ops.some(op => ['curse', 'damage', 'execute'].includes(op.op) && op.target !== 'self') && target
+          ? [instanceRuntime.foes.indexOf(target)] : ['self'] });
     for (const op of ops) {
       if (!op || typeof op !== 'object') continue;
       const amount = Number.isInteger(op.amount) ? op.amount
@@ -303,17 +313,18 @@ function createBattleBag({
     return foe ? ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'atkDown'].filter(k => (foe.status?.[k] || 0) > 0).length : 0;
   }
   // 战斗效果类道具（2026-09-12 药水栏批次）：描述交真实执行器结算，敌方指向道具可拖/点选目标
+  /** @returns {BattleItemUseResult} */
   function useBattleEffectItem(entry, side) {
     const card = entry.card;
     const needsEnemy = itemTargetSideFor(card) === 'enemy';
     void needsEnemy;
     if (needsEnemy && side == null) {
       const n = alive().length;
-      if (!n) { instanceRuntime.G.log(`[[icon:cross]] 场上没有敌人可以使用`, 'warn'); return; }
+      if (!n) { instanceRuntime.G.log(`[[icon:cross]] 场上没有敌人可以使用`, 'warn'); return false; }
       if (n > 1) {
         beginSpecialTargeting('item', entry.uid, card);
         instanceRuntime.G.log(`[[icon:flask]] <b>${esc(card.name)}</b>：点击一名敌人使用（或把它拖到敌人身上）`, 'sys');
-        return;
+        return { status: 'needs-input' };
       }
       side = instanceRuntime.foes.indexOf(alive()[0]);
     }
@@ -322,14 +333,14 @@ function createBattleBag({
       if (alive().length) beginSpecialTargeting('item', entry.uid, card);
       else cancelInteraction();
       instanceRuntime.G.log(`[[icon:cross]] 【${esc(card.name)}】的目标已失效，${alive().length ? '请重新选择存活敌人' : '场上已无敌人，道具未消耗'}`, 'warn');
-      return;
+      return alive().length ? { status: 'needs-input' } : false;
     }
     const target = chosen && !chosen.dead ? chosen : (alive()[0] || null);
     clearTargetSession();
     const marker = reserveBattleItem(entry.uid);
-    if (!marker) return;
+    if (!marker) return false;
     try {
-    queueBattleAction(async signal => {
+    const action = queueBattleAction(async signal => {
       try {
       if (!sameBattle(marker) || pendingItem(entry.uid) !== marker) return;
       throwIfActionCancelled(signal);
@@ -362,6 +373,8 @@ function createBattleBag({
         return;
       }
       if (!consumeBattleItem(current.uid, marker)) return;
+      emitBattlePresentation({ kind:'item-use', name:card.name,
+        targets:needsEnemy && target ? [instanceRuntime.foes.indexOf(target)] : ['self'] });
       instanceRuntime.G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】${target ? `→ ${esc(target.name)}` : ''}`, 'sys');
       const onPlay = triggerExecutionPlan(current.card, 'onPlay');
       if (onPlay.kind === 'structured') {
@@ -390,7 +403,14 @@ function createBattleBag({
       requestBattleRender();
       } finally { finishBattleItem(marker); }
     }, '道具动作', () => finishBattleItem(marker));
-    } catch (error) { finishBattleItem(marker); throw error; }
+    // 队列会处理并吞掉结算异常；本次消费只以唯一消费入口写入的标记为准。
+    return action.then(() => marker.consumed, () => marker.consumed);
+    } catch (error) {
+      try { finishBattleItem(marker); }
+      catch (finishError) { console.error('[battle] 道具收尾异常：', finishError); }
+      console.error('[battle] 道具入队异常：', error);
+      return marker.consumed;
+    }
   }
   // —— 背包技能（2026-10-02 老板：背包砸击换成技能，按五职业分化；原砸击=2 费 4 固定伤）——
   // 技能表单源在 battle.slam-skill.js（view 按钮/aim 拖拽/agent 策略共用）；本文件只管结算。
@@ -568,24 +588,24 @@ function createBattleBag({
   }
 
   // 药水栏点击：敌方指向道具在多敌时进入点选模式，其余直接生效
+  /** @returns {BattleItemUseResult} */
   function usePotion(uid) {
-    if (!instanceRuntime.G?.battleActive) return;
+    if (!instanceRuntime.G?.battleActive) return false;
     const entry = battleBagItems().find(o => o.uid === uid);
-    if (!entry) return;
-    if (instanceRuntime.busy || instanceRuntime.infusing || instanceRuntime.discovering || instanceRuntime.choosing || instanceRuntime.handSelecting || instanceRuntime.viewingGrave || instanceRuntime.selectingDeck) return;
-    if (interactionOf('item')?.uid === uid) { cancelInteraction(); return; }
+    if (!entry) return false;
+    if (instanceRuntime.busy || instanceRuntime.infusing || instanceRuntime.discovering || instanceRuntime.choosing || instanceRuntime.handSelecting || instanceRuntime.viewingGrave || instanceRuntime.selectingDeck) return false;
+    if (interactionOf('item')?.uid === uid) { cancelInteraction(); return false; }
     if (itemTargetSideFor(entry.card) === 'enemy') {
       const n = alive().length;
-      if (!n) { instanceRuntime.G.log(`[[icon:cross]] 场上没有敌人可以使用`, 'warn'); return; }
+      if (!n) { instanceRuntime.G.log(`[[icon:cross]] 场上没有敌人可以使用`, 'warn'); return false; }
       if (n > 1) {
         beginSpecialTargeting('item', entry.uid, entry.card);
         instanceRuntime.G.log(`[[icon:flask]] <b>${esc(entry.card.name)}</b>：点击一名敌人使用（或把它拖到敌人身上）`, 'sys');
-        return;
+        return { status: 'needs-input' };
       }
-      useItem(uid, instanceRuntime.foes.indexOf(alive()[0]));
-      return;
+      return useItem(uid, instanceRuntime.foes.indexOf(alive()[0]));
     }
-    useItem(uid, null);
+    return useItem(uid, null);
   }
   function openBag() {
     instanceRuntime.G?.log('[[icon:lock]] 战斗中无法打开背包；战斗结束后可回地图整理', 'warn');

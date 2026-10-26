@@ -59,7 +59,7 @@ describe('independent battle instances in Node', () => {
     expect(typeof globalThis.window).toBe('undefined');
     expect(typeof globalThis.document).toBe('undefined');
     const { engine, game, ended } = harness({ factory: createBattleEngine });
-    expect(engine.runtime.drawPile).toHaveLength(10);
+    expect(engine.runtime.drawPile).toHaveLength(5);
     expect(engine.submitCardPlay('same-uid', 0).status).toBe('queued');
     expect((await settled(engine)).foes[0].hp).toBe(27);
     engine.endTurn();

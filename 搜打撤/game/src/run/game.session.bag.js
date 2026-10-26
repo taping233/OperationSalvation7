@@ -60,17 +60,18 @@ game.stackCapOf = stackCapOf;
 game.safeCap = safeCap;
 game.usedSlots = usedSlots;
 game.safeUsed = safeUsed;
-game.gainCoins = gainCoins;   // 宝箱等模块发币（含飘字与日志）
+game.gainCoins = gainCoins;   // 搜刮点等模块发币（含飘字与日志）
 
-game.addItem = function (tpl, n) {
+game.addItem = function (tpl, n, { deferFeedback } = {}) {
+  const feedback = action => deferFeedback ? deferFeedback(action) : action();
   n = n || 1;
   // 散装物资同名每 3 件占一格；批量领取也先检查完整所需空间。
   let slot = game.inventory.find(it => it.name === tpl.name && it.tier === (tpl.tier || 'C'));
   const count = slot?.count || 0;
   const addedSlots = Math.ceil((count + n) / 3) - Math.ceil(count / 3);
   if (usedSlots() + addedSlots > bagCap()) {
-    SDT.Sound.sfx('deny');
-    UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，可在基地用木材扩建），无法获得 <b>${tpl.name}</b>`, 'warn');
+    const message = `[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，可在基地用木材扩建），无法获得 <b>${tpl.name}</b>`;
+    feedback(() => { SDT.Sound.sfx('deny'); UI.log(message, 'warn'); });
     return null;
   }
   if (!slot) {
@@ -78,8 +79,8 @@ game.addItem = function (tpl, n) {
     game.inventory.push(slot);
   }
   slot.count += n;
-  UI.log(`获得 <b>${tpl.name}${slot.count > 1 ? ` ×${slot.count}` : ''}</b>（价值 ${(tpl.value || 0) * slot.count}）`, 'loot');
-  UI.refresh(game);
+  const message = `获得 <b>${tpl.name}${slot.count > 1 ? ` ×${slot.count}` : ''}</b>（价值 ${(tpl.value || 0) * slot.count}）`;
+  feedback(() => { UI.log(message, 'loot'); UI.refresh(game); });
   return slot;
 };
 

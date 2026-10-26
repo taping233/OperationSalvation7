@@ -28,7 +28,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
 }));
 vi.mock('../game/src/core/random.js', () => ({ Random: { random: () => 0 } }));
 vi.mock('../game/src/core/event-bus.js', () => ({ on: vi.fn() }));
-vi.mock('../game/src/hub/bag-return-hook.js', () => ({ setBagReturnHook: vi.fn(), takeBagReturnHook: vi.fn() }));
+vi.mock('../game/src/hub/bag-return-hook.js', async importOriginal => ({ ...await importOriginal(), setBagReturnHook: vi.fn(), takeBagReturnHook: vi.fn() }));
 vi.mock('../game/src/run/game.run.js', () => ({ showRunTransition: vi.fn() }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ _set_cardPageOpen: vi.fn() }));
 vi.mock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots: { bindBagDrag: vi.fn() } }));

@@ -1,6 +1,60 @@
-import { validNodeRestore } from './node-restore-state.js';
+import { validAltarFragmentChoice, validNodeRestore } from './node-restore-state.js';
+export { validAltarFragmentChoice } from './node-restore-state.js';
 const ids = value => Array.isArray(value) && value.every(id => typeof id === 'string' && id.length > 0);
 const coordinate = value => Number.isInteger(value) && value >= 0;
+const endedRewardRecords = new WeakSet();
+
+export function nodeContentEndedAt(game, li = game.layerIdx, idx = game.trackPos) {
+  const record = game.nodeRewards?.[`${li},${idx}`];
+  return record?.version === 1 && record.type === 'closed';
+}
+
+// 供实际移动提交与旧档离开记录迁移调用；关闭面板与整理背包不结束内容。
+export function endNodeContent(game, li, idx) {
+  if (!coordinate(li) || !coordinate(idx)) return false;
+  const key = `${li},${idx}`, record = game.nodeRewards?.[key];
+  if (record && typeof record === 'object') endedRewardRecords.add(record);
+  if (record?.altarFragmentChoice) endedRewardRecords.add(record.altarFragmentChoice);
+  game.visited ||= {};
+  game.visited[key] = 1;
+  game.nodeRewards ||= {};
+  if (!nodeContentEndedAt(game, li, idx)) game.nodeRewards[key] = { version:1, type:'closed' };
+  if (game.nodeChestRewards) delete game.nodeChestRewards[key];
+  if (game.entrySupply?.layerIdx === li && game.entrySupply.trackPos === idx) game.entrySupply = null;
+  const sourceType = game.layerData?.[li]?.logical?.[idx]?.def?.type;
+  if (sourceType === 'altar') game.altarRewardPending = false;
+  // 移动提交可先写目的坐标；事件记录与源节点类型仍能确认战利品归属。
+  if (!game.nestActive && (sourceType === 'event' || ['event','event-choice'].includes(record?.type)
+    || game.layerIdx === li && game.trackPos === idx)) game.pendingEventLoot = null;
+  if (game.layerIdx === li && game.trackPos === idx) {
+    actionTokens.delete(game);
+  }
+  return true;
+}
+
+// 旧档只迁移已有内容或访问凭据的离开节点；当前节点与仅见过的节点保持原状。
+export function endAbandonedNodeContent(game) {
+  const currentKey = `${game.layerIdx},${game.trackPos}`;
+  const keys = new Set([
+    ...Object.keys(game.nodeRewards || {}),
+    ...Object.keys(game.nodeChestRewards || {}),
+    ...Object.entries(game.visited || {}).filter(([, visited]) => visited).map(([key]) => key),
+  ]);
+  const supply = game.entrySupply;
+  if (coordinate(supply?.layerIdx) && coordinate(supply?.trackPos)) keys.add(`${supply.layerIdx},${supply.trackPos}`);
+  const pendingEventLoot = game.pendingEventLoot;
+  const currentAltar = game.layerData?.[game.layerIdx]?.logical?.[game.trackPos]?.def?.type === 'altar';
+  const altarRewardPending = game.altarRewardPending;
+  for (const key of keys) {
+    if (key === currentKey || !/^\d+,\d+$/.test(key)) continue;
+    const [li, idx] = key.split(',').map(Number);
+    if (li === game.layerIdx && idx === game.trackPos) continue;
+    endNodeContent(game, li, idx);
+  }
+  // 这些无坐标字段由当前节点持有，旧节点迁移不能清掉当前续流。
+  game.pendingEventLoot = pendingEventLoot;
+  if (currentAltar) game.altarRewardPending = altarRewardPending;
+}
 
 export function validEntrySupply(value) {
   return !!value && value.version === 1 && value.layerIdx === 0 && coordinate(value.trackPos)
@@ -17,6 +71,7 @@ export function createEntrySupply(game, cards) {
 }
 
 export function entrySupplyAt(game) {
+  if (nodeContentEndedAt(game)) return null;
   const value = game.entrySupply;
   return validEntrySupply(value) && value.layerIdx === game.layerIdx && value.trackPos === game.trackPos ? value : null;
 }
@@ -67,6 +122,7 @@ export function nodeEventAt(game) {
 }
 
 export function bindNodeEvent(game, eventId) {
+  if (nodeContentEndedAt(game)) return null;
   const existing = nodeEventAt(game);
   if (existing) return existing;
   game.nodeRewards ||= {};
@@ -79,6 +135,9 @@ export function validNodeRewards(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
   return Object.entries(value).every(([key, item]) => {
     if (!/^\d+,\d+$/.test(key) || !item || item.version !== 1) return false;
+    if (item.type === 'closed') return true;
+    if (item.altarFragmentChoice !== undefined && !validAltarFragmentChoice(item.altarFragmentChoice)) return false;
+    if (item.type === 'altar') return validAltarFragmentChoice(item.altarFragmentChoice);
     if (item.type === 'restore') return validNodeRestore(item);
     if (item.type === 'event') return typeof item.eventId === 'string' && item.eventId.length > 0;
     if (item.type === 'event-choice') return validEventChoiceReward(item);
@@ -93,6 +152,29 @@ export function validNodeRewards(value) {
   });
 }
 
+export function altarFragmentChoiceAt(game) {
+  const record = game.nodeRewards?.[`${game.layerIdx},${game.trackPos}`];
+  if (record?.type === 'restore' ? !validNodeRestore(record)
+    : record?.version !== 1 || record.type !== 'altar') return null;
+  return validAltarFragmentChoice(record.altarFragmentChoice) ? record.altarFragmentChoice : null;
+}
+
+export function reserveAltarFragmentChoice(game, { characterId, drawCard }) {
+  const choice = altarFragmentChoiceAt(game);
+  if (choice) return choice;
+  const key = `${game.layerIdx},${game.trackPos}`, existing = game.nodeRewards?.[key];
+  if (existing != null && !validNodeRestore(existing)) return null;
+  if (typeof characterId !== 'string' || !characterId.length || typeof drawCard !== 'function') return null;
+  const card = drawCard();
+  if (typeof card?.id !== 'string' || !card.id.length) return null;
+  const reserved = { characterId, cardIds:[card.id], taken:null };
+  game.nodeRewards ||= {};
+  const record = existing ?? { version:1, type:'altar' };
+  record.altarFragmentChoice = reserved;
+  game.nodeRewards[key] = record;
+  return reserved;
+}
+
 export function resourceRewardAt(game, drawCards) {
   game.nodeRewards ||= {};
   const key = `${game.layerIdx},${game.trackPos}`;
@@ -104,7 +186,8 @@ export function resourceRewardAt(game, drawCards) {
 
 const resourceClaims = new WeakSet();
 export function claimResourceReward(record, index, receive, received = () => false) {
-  if (!record || record.taken !== null || !Number.isInteger(index) || !record.cardIds[index]) return false;
+  if (!record || endedRewardRecords.has(record) || record.type === 'closed'
+    || record.taken !== null || !Number.isInteger(index) || !record.cardIds[index]) return false;
   if (resourceClaims.has(record)) return false;
   resourceClaims.add(record);
   try {
@@ -126,6 +209,6 @@ export function nodeActionBinding(game, UI, act) {
   const page = {}, map = game.layerData;
   actionTokens.set(game, page);
   const seed = game.seed, token = game.discoveredPairs, layer = game.layerIdx, index = game.trackPos;
-  return () => actionTokens.get(game) === page && game.layerData === map && game.seed === seed && game.discoveredPairs === token && game.layerIdx === layer && game.trackPos === index
+  return () => (act === 'goDoor' || !nodeContentEndedAt(game, layer, index)) && actionTokens.get(game) === page && game.layerData === map && game.seed === seed && game.discoveredPairs === token && game.layerIdx === layer && game.trackPos === index
     && game.state === 'modal' && (!UI.el?.ovBody || !!UI.el.ovBody.querySelector(`[data-act="${act}"]`));
 }

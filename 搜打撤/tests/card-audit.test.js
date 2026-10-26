@@ -160,6 +160,7 @@ describe('全卡库描述实装审计', () => {
     console.log(`\n===== 未识别句式的战斗卡：${bad.length} 张 =====\n` + lines.join('\n') + '\n');
     const actual = bad.flatMap(r => r.unrecognized.map(clause => ({ id: r.card.id, clause })));
     const availableIds = new Set(C.all().map(card => card.id));
+    expect(knownAuditFindings.allowMissingCardIds, '正式卡库已合入，不能再使用旧工程分支的缺卡豁免').toEqual([]);
     const { unknown, stale } = compareEffectAuditFindings(actual, knownAuditFindings, availableIds);
     const badReasons = knownAuditFindings.known.filter(item =>
       !['unsupported', 'audit_context'].includes(item.reason?.kind) || !item.reason.detail?.trim());
@@ -176,6 +177,9 @@ describe('全卡库描述实装审计', () => {
     const supported = { id: 'supported-card', clause: '已识别效果句式', reason: { kind: 'unsupported', detail: 'fixture example' } };
     expect(compareEffectAuditFindings([], { known: [supported], allowMissingCardIds: [] },
       new Set([supported.id])).stale).toEqual([supported]);
+
+    expect(compareEffectAuditFindings([], { known: [supported], allowMissingCardIds: [] },
+      new Set()).stale).toEqual([supported]);
 
     const optional = { id: 'tt12-optional-sample', clause: '分支特有句式', reason: { kind: 'unsupported', detail: 'fixture example' } };
     expect(compareEffectAuditFindings([], { known: [optional], allowMissingCardIds: [optional.id] }, new Set()).stale).toEqual([]);

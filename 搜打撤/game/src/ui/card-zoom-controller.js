@@ -80,7 +80,9 @@ export function createCardZoomController({ readCards, readArt, readScale, readSo
       back.setAttribute('aria-label', '返回上一张卡牌');
       back.addEventListener('click', event => {
         event.preventDefault(); event.stopPropagation();
+        if (closed || opts.canNavigate?.() === false) return;
         const parent = referenceTrail[referenceTrail.length - 1];
+        if (parent.options.onReopen) { parent.options.onReopen(); return; }
         host.showCardZoom(parent.card, { ...parent.options, referenceTrail: referenceTrail.slice(0, -1), returnFocus: previousFocus });
       });
       el.appendChild(back);
@@ -89,10 +91,27 @@ export function createCardZoomController({ readCards, readArt, readScale, readSo
     let releaseOwner = () => {};
     const items = opts.getItems?.() || opts.items || [];
     const itemIndex = opts.index ?? items.findIndex(item => item === card || item.id === card.id);
+    const readItems = () => opts.getItems?.() || items;
+    const readIndex = () => opts.getIndex?.() ?? itemIndex;
+    /** @type {HTMLElement | null} */ let navigation = null;
+    const refreshBrowse = () => {
+      if (closed || !navigation) return;
+      const live = readItems(), index = readIndex();
+      const available = Number.isInteger(index) && index >= 0 && index < live.length;
+      navigation.hidden = !available || live.length < 2;
+      navigation.style.display = navigation.hidden ? 'none' : '';
+      const previous = /** @type {HTMLButtonElement} */ (navigation.querySelector('[data-cz-prev]'));
+      const next = /** @type {HTMLButtonElement} */ (navigation.querySelector('[data-cz-next]'));
+      previous.hidden = index <= 0; next.hidden = index >= live.length - 1;
+      previous.disabled = next.disabled = opts.canNavigate?.() === false;
+      navigation.querySelector('span').textContent = `${available ? index + 1 : 0} / ${live.length}`;
+    };
     const browse = direction => {
-      if (photoMode || closed) return;
-      const live = opts.getItems?.() || items;
-      const targetIndex = itemIndex + direction;
+      if (photoMode || closed || opts.canNavigate?.() === false) return;
+      const live = readItems(), index = readIndex();
+      refreshBrowse();
+      if (!Number.isInteger(index) || index < 0 || index >= live.length) return;
+      const targetIndex = index + direction;
       if (!live[targetIndex] || (opts.from instanceof Element && !opts.from.isConnected)) return;
       const target = live[targetIndex];
       // Inventory presenters rebuild their current metadata and guarded actions.
@@ -101,12 +120,14 @@ export function createCardZoomController({ readCards, readArt, readScale, readSo
       // Mutating actions belong to their current source card, never to a prior footer.
       host.showCardZoom(target, { ...opts, footer: undefined, ...extra, items:live, index:targetIndex, returnFocus:previousFocus });
     };
-    if (!photoMode && items.length > 1 && itemIndex >= 0) {
+    if (!photoMode && (opts.getItems || items.length > 1)) {
       const nav = document.createElement('nav'); nav.className = 'cz-list-nav'; nav.setAttribute('aria-label', '浏览同一列表');
-      nav.innerHTML = `<button type="button" data-cz-prev${itemIndex === 0 ? ' hidden' : ''} aria-label="上一张卡牌">‹</button><span>${itemIndex + 1} / ${items.length}</span><button type="button" data-cz-next${itemIndex === items.length - 1 ? ' hidden' : ''} aria-label="下一张卡牌">›</button>`;
+      nav.innerHTML = '<button type="button" data-cz-prev aria-label="上一张卡牌">‹</button><span></span><button type="button" data-cz-next aria-label="下一张卡牌">›</button>';
       nav.querySelector('[data-cz-prev]').addEventListener('click', event => { event.stopPropagation(); browse(-1); });
       nav.querySelector('[data-cz-next]').addEventListener('click', event => { event.stopPropagation(); browse(1); });
       el.append(nav);
+      navigation = nav;
+      refreshBrowse();
     }
     let removed = false;
     let noteSaveTimer = null;
@@ -242,6 +263,7 @@ export function createCardZoomController({ readCards, readArt, readScale, readSo
       });
     };
     el._closeCardZoom = close;
+    el._refreshCardZoomBrowse = refreshBrowse;
     // 特写挂在 body（overlay 之外），footer 按钮的 data-act 走不到 ovBody 的全局委托；
     // 且不用 {once:true}：点按钮会白白消费掉监听，之后（含 bagZoomRemove 的模拟 backdrop
     // 点击）再也关不掉 → 整页卡死（2026-09-07 老板实测）。故监听常驻：非按钮区域总能收回，
@@ -252,7 +274,7 @@ export function createCardZoomController({ readCards, readArt, readScale, readSo
       const reference = /** @type {HTMLElement} */ (e.target.closest('[data-card-reference]'));
       if (reference) {
         e.preventDefault(); e.stopPropagation();
-        if (closed) return;
+        if (closed || opts.canNavigate?.() === false) return;
         const target = descriptionRenderer.getCard(reference.dataset.cardReference);
         if (!target) return;
         const parentOptions = { ...opts };
@@ -283,7 +305,7 @@ export function createCardZoomController({ readCards, readArt, readScale, readSo
       close();
     });
     el.addEventListener('keydown', (e) => {
-      if (!e.isComposing && !e.ctrlKey && !e.altKey && !e.metaKey && items.length > 1 && e.target instanceof Element && !e.target.closest('input,textarea,[contenteditable="true"]') && ['ArrowLeft', 'ArrowRight'].includes(e.key)) {
+      if (!e.isComposing && !e.ctrlKey && !e.altKey && !e.metaKey && readItems().length > 1 && e.target instanceof Element && !e.target.closest('input,textarea,[contenteditable="true"]') && ['ArrowLeft', 'ArrowRight'].includes(e.key)) {
         e.preventDefault(); e.stopPropagation(); browse(e.key === 'ArrowLeft' ? -1 : 1); return;
       }
       if (e.key === 'Escape') {

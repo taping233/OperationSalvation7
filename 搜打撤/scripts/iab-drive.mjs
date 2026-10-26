@@ -92,7 +92,7 @@ const clickJs = name => `(() => {
   b.click(); return true;
 })()`;
 
-/** dev 面板跳节点（遭遇战/BOSS 战/商店/事件/小宝箱/中宝箱/大宝箱/火堆/祭坛）。 */
+/** dev 面板跳节点（遭遇战/BOSS 战/商店/事件/小型物资箱/密封物资箱/军用保险柜/火堆/祭坛）。 */
 export async function clickDevButton(tab, name, settleMs = 3000) {
   await tab.playwright.evaluate(clickJs(name));
   await tab.playwright.waitForTimeout(settleMs);

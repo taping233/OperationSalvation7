@@ -102,8 +102,8 @@ describe('battle-entry replay through the real Agent and BattleSession commands'
     await prepare();
     const second = BattleSession.getSnapshot();
     expect(second.battleToken).not.toBe(first.battleToken);
-    expect(first.drawPile).toHaveLength(10);
-    expect(new Set(first.drawPile).size).toBe(10);
+    expect(first.drawPile).toHaveLength(5);
+    expect(new Set(first.drawPile).size).toBe(5);
     expect(second.drawPile).toEqual(first.drawPile);
     expect(second.drawPile.every(uid => piles.granted.some(entry => entry.uid === uid))).toBe(true);
     expect(fixture.game.ownedCards.map(entry => entry.uid)).toEqual(['hit-a', 'hit-b', 'hit-c']);

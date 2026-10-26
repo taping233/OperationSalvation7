@@ -230,7 +230,7 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
       if (body && /** @type {import("./ui.dom.types.js").UIElement} */ (body.querySelector('.cls2-page'))) return { id: 'classselect', name: '选人页' };
       const title = ((UI.el.ovTitle && UI.el.ovTitle.textContent) || '').trim();
       if (title) return { id: 'overlay:' + title, name: title };
-      const modeName = { page: '全屏页', battle: '战斗弹层', bag: '背包弹层', bagpage: '背包页', chest: '宝箱浮层', scene: '场景弹层', wide: '宽幅弹层' }[UI._lastMode] || '弹层';
+      const modeName = { page: '全屏页', battle: '战斗弹层', bag: '背包弹层', bagpage: '背包页', chest: '搜刮点浮层', scene: '场景弹层', wide: '宽幅弹层' }[UI._lastMode] || '弹层';
       return { id: 'mode:' + (UI._lastMode || ''), name: modeName };
     }
     // 设置→留言库→返回设置的旧状态恢复会留下 idle，但标题屏本身仍真实可见。

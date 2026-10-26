@@ -395,7 +395,7 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     let extraReward = null;
     window.SDT.Chests = {
       restore:vi.fn((_game, saved, done) => { extraReward = { saved, done }; return true; }),
-      rollDrops: vi.fn(() => [{ kind: 'boss' }]), dropText: () => '首脑宝箱',
+      rollDrops: vi.fn(() => [{ kind: 'boss' }]), dropText: () => '首脑搜刮点',
       open: vi.fn((_game, _drops, done) => { settleHarness.chestDone = done; }),
     };
 

@@ -18,8 +18,8 @@ body #overlay .card .room-reward .reward-foot.room-footer{
 & .room-footer-actions:has(.discovery-selection-actions) {
   width:100%; min-width:0; justify-content:stretch;
 }}
-/* A single quiet frame and explicit mark express business selection. Keyboard
-   focus stays on the real button and can move without changing that selection. */
+/* A single quiet frame and explicit mark express business selection. This
+   component owns keyboard focus; hosts configure its offset independently. */
 body #overlay .card button[data-discovery-option]{
 & {
   --discover-accent:#c5e3ed;
@@ -39,7 +39,7 @@ body #overlay .card button[data-discovery-option]{
 }
 &[data-discovery-selected="true"][aria-pressed="true"] > .discovery-selection-mark { opacity:1; }
 &:focus-visible {
-  outline:3px solid var(--discover-accent); outline-offset:6px;
+  outline:3px solid var(--discover-accent); outline-offset:var(--discovery-focus-offset,6px);
 }}
 [data-discovery-busy="true"] .discovery-selection-actions { opacity:.7; }
 body.reduce-motion [data-discovery-option] > :is(.discovery-selection-frame,.discovery-selection-mark) { transition:none; }

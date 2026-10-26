@@ -96,7 +96,7 @@ beforeEach(() => {
     Cards: { SHA: { id: 'starter-attack' }, all: () => [{ id: 'legend', name:'额外传说', type:'装备', rarity: '传说' }], isRandomObtainable: () => true, cardHTML: () => '' },
     Meta: { track: vi.fn(), xpMultiplier: () => 1, publishBattleProgress: vi.fn() },
     Chests: {
-      rollDrops: vi.fn(() => [{ kind: 'small' }]), dropText: () => '小宝箱',
+      rollDrops: vi.fn(() => [{ kind: 'small' }]), dropText: () => '小型物资箱',
       open: vi.fn((_game, _drops, done) => { state.chestDone = done; }),
       restore:vi.fn((_game, saved, done) => { state.extraReward = { saved, done }; return true; }),
     },
@@ -160,7 +160,7 @@ describe('真实战斗奖励刷新续流', () => {
     UI.showOverlay = (_title, html) => { UI.el.ovBody.innerHTML = html; };
     const cards = [0, 1].map(i => ({ id:`battle-loot-${i}`, name:`战利品${i}`, type:'法术', rarity:'古朴', cost:0, desc:'战斗中获得的奖励' }));
     const draw = vi.fn().mockImplementationOnce(() => cards[0]).mockImplementation(() => cards[1]);
-    Object.assign(window.SDT, { MAP:{ chestKinds:{ small:{ name:'小宝箱', cards:2, coins:[1,1] } } }, Sound:{ sfx() {} }, Icons:{ rich:html => html } });
+    Object.assign(window.SDT, { MAP:{ chestKinds:{ small:{ name:'小型物资箱', cards:2, coins:[1,1] } } }, Sound:{ sfx() {} }, Icons:{ rich:html => html } });
     Object.assign(window.SDT.Cards, { RARITIES:['古朴','稀有','史诗','传说'], randomDropCard:draw,
       pickOfRarity:() => cards[0], classPool:() => [], rarityOf:c => c.rarity, sellPrice:() => 1, cardHTML:c => `<div>${c.name}</div>` });
     Object.assign(window.SDT.Base, { petEggDropChance:() => 0, recordPetEggChestResult:vi.fn(), bagCap:() => 16 });
@@ -299,7 +299,7 @@ describe('战后结算事务接线与失败重试', () => {
     expect(state.game).not.toHaveProperty('cardOutcome');
   });
 
-  it('重复通知与事务失败重试复用固定attempt，不重复发奖励、重开宝箱或增计数', async () => {
+  it('重复通知与事务失败重试复用固定attempt，不重复发奖励、重开搜刮点或增计数', async () => {
     const onBattleEnd = await bind();
     let releaseTransition;
     state.transition.mockImplementationOnce(() => new Promise(resolve => { releaseTransition = resolve; }));

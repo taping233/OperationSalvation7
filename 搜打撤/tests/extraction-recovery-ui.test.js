@@ -68,7 +68,7 @@ beforeEach(async () => {
     exitToTitle: vi.fn(), newUid: vi.fn(), saveGame: UIState.saveGame, scaledEnemy: vi.fn(), syncPlayTime: vi.fn(),
   }));
   vi.doMock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => ({ id: 'wu' }), characterName: () => '侠客', migrateRunCharacter: value => value }));
-  vi.doMock('../game/src/core/shared.js', () => ({ clone: value => structuredClone(value), esc: String, escAttr: String }));
+  vi.doMock('../game/src/core/shared.js', () => ({ clone: value => structuredClone(value), esc: String, escAttr: value => String(value).replaceAll('"', '&quot;') }));
   vi.doMock('../game/src/audio/sound.js', () => ({ tone: vi.fn() }));
   vi.doMock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn() }));
   vi.doMock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
@@ -77,7 +77,7 @@ beforeEach(async () => {
     SeededRandomService: class { constructor(seed) { this.state = { seed, streams: { pocket: 0 } }; }
       restore(snapshot) { this.state = snapshot; } random() { return 0.1; } snapshot() { return this.state; } },
   }));
-  vi.doMock('../game/src/battle/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+  vi.doMock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
   vi.doMock('../game/src/run/game.run.scenes.js', () => ({
     ...extractionMocks(() => vi),
   }));

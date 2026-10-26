@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-26T12:33:30.682Z",
+  "inputKind": "real-input",
+  "detail": "真实点击暗牧预览，未装备；按高度等比显示，头发/双手/裙摆/靴子完整",
+  "screenshot": {
+    "path": "ratio-dark-after.png",
+    "bytes": 124279,
+    "sha256": "0693fb067cbe6a58c8efffaf667cc5d34b1164a9c6e46ee87056509ca6f959e4"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1536,
+      "src": "http://localhost:5200/assets/portraits/full/xingyue-dark-priestess.webp?v=0.60.0",
+      "width": 2731
+    }
+  ],
+  "console": []
+}

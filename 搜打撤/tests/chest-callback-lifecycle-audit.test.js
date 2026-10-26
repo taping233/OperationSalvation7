@@ -22,7 +22,7 @@ beforeEach(async () => {
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); delete window.SDT; });
 async function open() { Chests.open(game, [{ kind: 'small' }], vi.fn(), { onCell: true }); }
 
-describe('宝箱回调与探索身份审计', () => {
+describe('搜刮点回调与探索身份审计', () => {
   it('直接展示卡牌不自动领取，旧领取不能跨局修改页面', async () => {
     Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true });
     const oldTake = actions.chestTake1, before = UI.el.ovBody.innerHTML;
@@ -33,7 +33,7 @@ describe('宝箱回调与探索身份审计', () => {
     expect(game.grantCard).not.toHaveBeenCalled();
   });
 
-  it('领取宝箱双击只启动一次并收币一次，未选前不发卡', async () => {
+  it('领取搜刮点双击只启动一次并收币一次，未选前不发卡', async () => {
     Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true });
     const draws = drawn.mock.calls.length;
     Chests.suspend(); Chests.resume(); Chests.resume();

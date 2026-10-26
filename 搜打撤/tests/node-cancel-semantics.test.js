@@ -60,34 +60,34 @@ function openExit(kind) {
 }
 
 describe('节点取消语义：关闭不能跨层或开始撤离', () => {
-  it.each([false, true])('正/反向闸门 reverse=%s 取消留在当前层，显式主按钮仍换层', reverse => {
+  it.each([false, true])('正/反向闸门 reverse=%s 取消留在当前层，显式主按钮仍换层', async reverse => {
     openDoor(reverse);
     const initialLayer = H.game.layerIdx;
     expect(UI._findCancelBtn()?.dataset.act).toBe('doorBack');
     expect(UI.closeTopOverlayByEsc()).toBe(true);
     expect(H.enter).not.toHaveBeenCalled();
     expect(H.game.layerIdx).toBe(initialLayer);
-    expect(H.game.state).toBe('idle');
+    await vi.waitFor(() => expect(H.game.state).toBe('idle'));
     expect(takeBagReturnHook()).toBeNull();
     openDoor(reverse);
-    UI.el.ovBody.querySelector('[data-act="goDoor"]').click();
+    await UI._acts.goDoor();
     expect(document.querySelectorAll('.map-layer-passage')).toHaveLength(1);
     expect(document.querySelector('.page-visual-return')).toBeNull();
-    expect(H.enter).toHaveBeenCalledExactlyOnceWith(reverse ? 0 : 1, 0, { glideCam: true });
+    expect(H.enter).toHaveBeenCalledExactlyOnceWith(reverse ? 0 : 1, 0, { glideCam: true, endPreviousNode:true });
     expect(H.game.layerIdx).toBe(reverse ? 0 : 1);
   });
-  it.each(['emergency', 'final'])('%s 撤离页取消不献祭、不付款、不撤离', kind => {
+  it.each(['emergency', 'final'])('%s 撤离页取消不献祭、不付款、不撤离', async kind => {
     openExit(kind);
     const cards = [...H.game.ownedCards], coins = H.game.coins;
     expect(UI._findCancelBtn()?.dataset.act).toBe('stayHere');
     expect(UI.closeTopOverlayByEsc()).toBe(true);
-    expect(H.game.state).toBe('idle');
+    await vi.waitFor(() => expect(H.game.state).toBe('idle'));
     expect(H.game.ownedCards).toEqual(cards);
     expect(H.game.coins).toBe(coins);
     expect(H.begin).not.toHaveBeenCalled();
     expect(UI.el.ovBody.querySelector('[data-act="sacConfirm"]')).toBeNull();
   });
-  it.each(['insufficient', 'inactive', 'boss-locked'])('%s 撤离限制仍可取消且主操作限制保持', condition => {
+  it.each(['insufficient', 'inactive', 'boss-locked'])('%s 撤离限制仍可取消且主操作限制保持', async condition => {
     openExit(condition === 'boss-locked' ? 'final' : 'emergency');
     if (condition === 'insufficient') H.game.ownedCards = H.game.ownedCards.slice(0, 2);
     if (condition === 'inactive') { H.game.layerIdx = 1; H.game.layerData[1].logical[0].def.type = 'emergencyExit'; }
@@ -98,13 +98,14 @@ describe('节点取消语义：关闭不能跨层或开始撤离', () => {
     else expect(pay).toBeNull();
     expect(UI._findCancelBtn()?.dataset.act).toBe('stayHere');
     expect(UI.closeTopOverlayByEsc()).toBe(true);
-    expect(H.game.state).toBe('idle');
+    await vi.waitFor(() => expect(H.game.state).toBe('idle'));
     expect(H.begin).not.toHaveBeenCalled();
   });
-  it('显式点击紧急撤离仍进入三张献祭选择，取消不损失牌', () => {
+  it('显式点击紧急撤离仍进入三张献祭选择，取消不损失牌', async () => {
     openExit('emergency');
     const cards = [...H.game.ownedCards];
-    UI.el.ovBody.querySelector('[data-act="payExit"]').click();
+    await UI._acts.payExit();
+    await vi.advanceTimersByTimeAsync(1000);
     expect(UI.el.ovTitle.textContent).toContain('选择要献祭的卡牌');
     expect(UI.el.ovBody.querySelectorAll('[data-act="sacPick"]')).toHaveLength(3);
     UI.el.ovBody.querySelector('[data-act="sacCancel"]').click();

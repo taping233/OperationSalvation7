@@ -1,0 +1,32 @@
+{
+  "result": "passed",
+  "cause": "2731x1536 padded canvas was fit by width with contain; shared CSS now uses cover and center for Xingyue in both portrait surfaces",
+  "checks": [
+    "Stylelint target passed",
+    "Current IAB window, real clicks, slot02: personnel appearance default and dark preview",
+    "Current IAB window, real clicks: departure roster default and dark; restored standard skin before leaving"
+  ],
+  "limits": [
+    "Current window only",
+    "No run started; no build or commit",
+    "Earlier ratio-before capture was invalidated by page reload; not used as visual evidence"
+  ],
+  "screenshots": [
+    {
+      "path": "ratio-light-after.png",
+      "sha256": "307bb4d840357165479d89fec28c90e1d88bdd0a09c0aec9b49f4b069186effb"
+    },
+    {
+      "path": "ratio-dark-after.png",
+      "sha256": "0693fb067cbe6a58c8efffaf667cc5d34b1164a9c6e46ee87056509ca6f959e4"
+    },
+    {
+      "path": "ratio-roster-light-after.png",
+      "sha256": "552ff3fb45ae422c18089c7c4857d847945f224a816aed4ddf2d2bf794873596"
+    },
+    {
+      "path": "ratio-roster-dark-after.png",
+      "sha256": "e8b1afac049b8bf50109ff6b3ca3593ffab7ab9d535b346db8f1d484e432cfae"
+    }
+  ]
+}

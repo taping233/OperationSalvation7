@@ -1,14 +1,16 @@
 import { escAttr } from '../core/shared.js';
 import { currentCardDescription } from '../cards/card-state-presentation.js';
+import { displayCardDescription } from '../cards/card-description-text.js';
 import '../../css/battle-equipment.css';
 
 export function equipmentInfoHTML(equipment, busy = false, snapshot = null) {
   const e = equipment;
   const disabled = busy || e.used;
   const note = e.skill ? (e.used ? '主动技能本场已用过' : busy ? '行动结算中，暂不可发动' : '点击发动主动技能') : '被动装备';
-  const baseDescription = e.skill && !(e.desc || '').includes(e.skill)
-    ? [e.desc, `主动技能：${e.skill}`].filter(Boolean).join('；') : e.desc || '';
-  const description = currentCardDescription(baseDescription, e.card, e.uid, snapshot ? { snapshot } : null);
+  const baseDescription = displayCardDescription(e.desc || '', e.card?.id, e.card);
+  const skillDescription = e.skill && !(e.desc || '').includes(e.skill)
+    ? [baseDescription, `主动技能：${e.skill}`].filter(Boolean).join('；') : baseDescription;
+  const description = currentCardDescription(skillDescription, e.card, e.uid, snapshot ? { snapshot } : null);
   const tip = `data-ui-tip data-ui-tip-title="${escAttr(e.name)}" data-ui-tip-text="${escAttr(description)}" data-ui-tip-note="${escAttr(note)}"`;
   const state = !e.skill ? 'passive' : e.used ? 'used' : busy ? 'busy' : 'ready';
   const status = state === 'used' ? '已使用' : state === 'busy' ? '结算中' : state === 'ready' ? '可发动' : '被动';

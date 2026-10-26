@@ -95,8 +95,11 @@ describe('卡面展示数值与生产战斗效果一致', () => {
         rules: card.rules || null }));
       expect(catalog.length).toBeGreaterThan(100);
       expect(catalog.every(card => card.id && typeof card.displayed === 'string')).toBe(true);
-      fs.mkdirSync(evidence, { recursive: true });
-      fs.writeFileSync(path.join(evidence, 'runtime-card-catalog.json'), JSON.stringify(catalog, null, 2));
+      // Normal verification leaves the historical review snapshot unchanged.
+      if (process.env.CARD_EFFECT_CONSISTENCY_EVIDENCE === '1') {
+        fs.mkdirSync(evidence, { recursive: true });
+        fs.writeFileSync(path.join(evidence, 'runtime-card-catalog.json'), JSON.stringify(catalog, null, 2));
+      }
     } finally { registerBattleValueProvider(previous); }
   });
 });

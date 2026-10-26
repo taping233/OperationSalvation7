@@ -58,7 +58,7 @@ beforeAll(async () => {
     hideOverlay:()=>H.UI.el.overlay.hidden=true,refresh(){},log:vi.fn(),showCardReward:vi.fn(),_checkPageBg(){} });
   window.SDT ||= {}; Object.assign(window.SDT,{ game:H.game,UI:H.UI,Icons:{rich:html=>html},Sound:{sfx(){}},Meta:{},
     Base:{slot:1,bagCap:()=>18,safeCap:()=>3,isSha:()=>false,data:{}},
-    MAP:{chestKinds:{small:{name:'小宝箱'},medium:{name:'中宝箱',pickFrom:3}}},
+    MAP:{chestKinds:{small:{name:'小型物资箱'},medium:{name:'密封物资箱',pickFrom:3}}},
     Cards:{all:()=>[ordinary],cardHTML:card=>`<span>${card.name}</span>`,rarityOf:card=>card.rarity,sellPrice:()=>1},
   });
   Bag=await import('../game/src/run/game.session.bag.js'); scenes=await import('../game/src/run/game.run.scenes.js');

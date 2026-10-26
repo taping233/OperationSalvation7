@@ -417,7 +417,7 @@ describe('combat transition preparation overlap', () => {
   it('class departure starts map warmup under its existing 1600ms curtain', async () => {
     SDT.Battle=battle; SDT.Renderer={warm:vi.fn(async () => true)};
     const {openClassChoice}=await import('../game/src/run/game.run.class-choice.page.js');
-    openClassChoice(); handlers.pickClass(); await Promise.resolve(); await Promise.resolve();
+    openClassChoice(); handlers.pickClass(); await vi.advanceTimersByTimeAsync(0);
     expect(SDT.Renderer.warm).toHaveBeenCalledOnce(); expect(game.state).toBe('modal');
     expect(document.querySelector('.flow-transition')).not.toBeNull();
     handlers.flowContinue(); await Promise.resolve();

@@ -1,0 +1,35 @@
+[
+  {
+    "key": "watchline",
+    "source": "C:/Users/太平/.codex/generated_images/01a178c0-b82f-71b2-a588-817bb970d9a0/exec-9d766ae7-ef49-4261-ac6d-1aaeba5d91ed.png",
+    "prompt": "Create a production layer-entry cinematic for layer 2, Blizzard Watchline. Input 1 is the NAI5 draft, use its low horizontal snow shelf and two unequal vertical slabs as the composition starting point; correct their appearance into a clearly recognizable abandoned military checkpoint: two broad broken watchtower silhouettes with simple overhanging lookout heads connected visually by a single low barricade with an open gap. Input 2 city reflection and Input 3 layer descent are STRICT STYLE references. Match their almost-black empty field, matte warm-grey/ivory architectural silhouettes, restrained painted chipped planes, tiny muted rust-red seam. Do not copy their circular outline or stair gateway composition. Keep the complete isolated checkpoint emblem inside the right half, centered at x=68%, width about 35%, height about 47%; no object touching canvas edges. Left 40% uninterrupted black for existing game captions. A few broad slanted snow planes express the wind; no flying particles. No full-screen scenery, no dense windows, no tiny masonry details, no people, weapons, flags, symbols, lettering, text, border or watermark. Wide 16:9, opaque almost-black background. This must read as the same illustrator's suite as inputs 2 and 3.",
+    "nai_request": "nai-watchline.json",
+    "references": [
+      ".tmp/nai/layer-cinematics-1026/watchline.png",
+      "game/assets/scenes/departure/city-reflection-v1.webp",
+      "game/assets/scenes/cinematic/layer-descent-v1.webp"
+    ]
+  },
+  {
+    "key": "ruins",
+    "source": "C:/Users/太平/.codex/generated_images/01a178c0-b82f-71b2-a588-817bb970d9a0/exec-db007524-5387-4e45-8d1a-9b33b1971071.png",
+    "prompt": "Production cinematic for layer 3, Permafrost Ruins. Input 1 is NAI5 draft, retain ONLY its layered terraces and cantilever idea; remove ALL tower, castle, cone, triangular diagram, icon and markings. Redesign as a sunken modern concrete city fragment: three broad RECTANGULAR broken floor slabs stepping downward around a dark rectangular well, one short broken cantilever, two small buried rectangular city silhouettes. The top view and visible slab thickness make the descent into the square hollow immediately clear. Inputs 2 city reflection and 3 old descent are strict visual-family references: near-black empty space, warm ivory/grey chipped painted concrete, matte charcoal shadow, one extremely thin subdued rust-red seam. The ruin emblem sits completely within x=48%-87% and y=23%-77%, no edge contact. Left forty percent quiet uninterrupted black for game captions. Coarse architectural planes, very selective frost on top edges, no dense cracks, no rubble particles, no full-screen scene, no people or magic symbols. This image must be visibly different from a checkpoint or gateway and share the same illustrator and restrained finish as inputs 2 and 3. Wide 16:9. No letters, text, labels, UI, watermark or border. Opaque background.",
+    "nai_request": "nai-ruins.json",
+    "references": [
+      ".tmp/nai/layer-cinematics-1026/ruins.png",
+      "game/assets/scenes/departure/city-reflection-v1.webp",
+      "game/assets/scenes/cinematic/layer-descent-v1.webp"
+    ]
+  },
+  {
+    "key": "core",
+    "source": "C:/Users/太平/.codex/generated_images/01a178c0-b82f-71b2-a588-817bb970d9a0/exec-008a7b7f-2979-42d9-a8e1-de88383ab59f.png",
+    "prompt": "Production cinematic for layer 4, Polluted Core. Input 1 NAI5 draft supplies ONLY the tall looming monolith and vertical opening concept. Remove the apparent hand/human shape in the gap and any figure. Inputs 2 city reflection and 3 old descent STRICTLY define the visual family: isolated warm-grey/ivory painted concrete, almost-black empty field, matte chipped broad planes, very sparse muted rust red. Redesign a sealed laboratory threshold as one tall dark split monolith with a narrow warm-ivory slit, two much lower asymmetrical buttress slabs, a short thin dark rust-red fissure at the base; no horizontal snowy terraces or checkpoint watchtowers. Light is a restrained slit, not a brilliant portal. Small concrete silhouette in the right half occupying about one third canvas width and 60% height; whole shape within frame. Leave left 40% uninterrupted near-black for existing captions. Emphasize closed-in vertical pressure and withheld depth, no depiction or revelation of the pollution source. Broad quiet painted faces, a few chipped edges, selective surface detail matching input 2. No fine cables, pipes, dense machinery, particle effects, magic circles, eyes, creatures, humans, hands, symbols, text, numbers, lettering, border, UI or watermark. Wide 16:9, opaque background.",
+    "nai_request": "nai-core.json",
+    "references": [
+      ".tmp/nai/layer-cinematics-1026/core.png",
+      "game/assets/scenes/departure/city-reflection-v1.webp",
+      "game/assets/scenes/cinematic/layer-descent-v1.webp"
+    ]
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "path": "ui/outcome/recovery-v2.webp",
+    "ext": "webp",
+    "bytes": 32664,
+    "sha256": "02ac16a04536e15a7cd8a39afe365d3557dbcc42b0f129e174d2e6828b27fd9d",
+    "license": "项目自有（NAI5 起稿＋内置透明重绘）",
+    "source": "docs/evidence/2026-10-26-layer-cinematics/local-receipt.json",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a178c0-b82f-71b2-a588-817bb970d9a0\\exec-95a6baeb-2870-453e-b262-c128a019bf16.png",
+    "original_sha256": "0226dea91461f0efb9b10b9327b9217fdc74f73febbff2392d31ddcac6898f52",
+    "size": [
+      512,
+      512
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "method": "NAI5 draft then built-in transparent local-effect repaint, RGBA WebP encoding"
+  },
+  {
+    "path": "ui/outcome/restoration-v2.webp",
+    "ext": "webp",
+    "bytes": 22256,
+    "sha256": "062f35f710bf9371b498f7c9dd2542655f49bf152897401a0e8cc7b6953df8ae",
+    "license": "项目自有（NAI5 起稿＋内置透明重绘）",
+    "source": "docs/evidence/2026-10-26-layer-cinematics/local-receipt.json",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a178c0-b82f-71b2-a588-817bb970d9a0\\exec-8606f3c5-68b8-4b3f-96ca-6fe3abb41b2d.png",
+    "original_sha256": "bcde08e9074c8fc4f64dce693aa46eef82b0c3f4bab6abace456e2145810a377",
+    "size": [
+      512,
+      341
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "method": "NAI5 draft then built-in transparent local-effect repaint, RGBA WebP encoding"
+  },
+  {
+    "path": "ui/outcome/offering-v2.webp",
+    "ext": "webp",
+    "bytes": 12626,
+    "sha256": "e91176cdf6859a4133baa2752445af4bf7b88ba6486a59301106fa69fc26f901",
+    "license": "项目自有（NAI5 起稿＋内置透明重绘）",
+    "source": "docs/evidence/2026-10-26-layer-cinematics/local-receipt.json",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a178c0-b82f-71b2-a588-817bb970d9a0\\exec-4b20ecae-8094-4fef-a3aa-f0400535dafb.png",
+    "original_sha256": "aa057663432850f1cab8151e109779bba805a5109472d07fc3abb8068fed945c",
+    "size": [
+      512,
+      293
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "method": "NAI5 draft then built-in transparent local-effect repaint, RGBA WebP encoding"
+  }
+]

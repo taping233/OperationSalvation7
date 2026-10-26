@@ -2,6 +2,7 @@ import { rotSeedDescription } from './rot-seed-revision.js';
 import { structuredCardDescription } from './structured-card-description.js';
 import { readBattleValues } from './battle-value-context.js';
 import { currentCardDescription } from './card-state-presentation.js';
+import { scavengeText } from '../core/scavenge-terminology.js';
 // 卡牌展示文案。只替换已审阅的 id + 原始描述；简单结构化句式从规则填数值。
 // 自定义或复杂描述保留原入口行为；旧存档腐化之种沿现行定版。
 // 文案审阅依据：docs/evidence/2026-10-11-card-description-unification/。
@@ -49,7 +50,7 @@ const descriptions = new Map([
   ["tt2-apollo", ["发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌。", "你发现或随机获得本牌时，回复 1 点能量，并随机获得另 1 张卡牌。"]],
   ["tt2-pearlbox", ["内置3*3空间，可以容纳所有类型的资源卡牌。", "本牌内置 3×3 格空间，可容纳所有类型的资源卡牌。"]],
   ["tt2-wreck", ["消耗该牌时，获取 2张随机卡牌。", "本牌被消耗时，你随机获得 2 张卡牌。"]],
-  ["tt2-treasuremap", ["主动技能：将 1张‘搜索大宝箱’洗入牌库，抽1张牌。", "主动技能：将 1 张「搜索大宝箱」洗入你的牌库，并抽 1 张牌。"]],
+  ["tt2-treasuremap", ["主动技能：将 1张‘搜索军用保险柜’洗入牌库，抽1张牌。", "主动技能：将 1 张「搜索军用保险柜」洗入你的牌库，并抽 1 张牌。"]],
   ["tt2-venomstaff", ["每当你使用一张法术牌，为1名随机敌人附加中毒", "每当你打出 1 张法术牌，对 1 名随机敌人附加 1 层中毒。"]],
   ["tt2-frostsword", ["对冰冻角色伤害 +2。", "你对冰冻角色造成的伤害增加 2 点。"]],
   ["tt2-jianghu", ["发现 1 张其它职业的卡牌并直接施放。", "发现 1 张其他职业的卡牌，并直接施放。"]],
@@ -86,6 +87,7 @@ const descriptions = new Map([
   ["tt3-treasure-hunt", ["造成4点法术伤害，发现 1 张牌。", "造成 4 点法术伤害，并发现 1 张卡牌。"]],
   ["tt3-flame-storm", ["对全体敌人每人释放1次火球。", "对每名敌人施放 1 次「火球」。"]],
   ["tt3-nature-form", ["本局战斗中，能量上限 +1。", "本场战斗中，你的能量上限增加 1 点。"]],
+  ["tt3-mind-potion", ["抽 2 张牌。", "抽 2 张牌。"]],
   ["tt3-python-potion", ["对所有敌人造成2点法伤", "对全体敌人造成 2 点法术伤害。"]],
   ["tt3-chain-lightning", ["3′，触发 2 次。", "造成 3 点法术伤害；本牌的伤害效果触发 2 次。"]],
   ["tt3-houyi-potion", ["获得 2 点攻击力。持续 1 回合。", "你的攻击力增加 2 点，持续 1 回合。"]],
@@ -144,7 +146,7 @@ const descriptions = new Map([
   ["tt6-goldhammer", ["获得卡牌「闪金之锤」。", "你获得 1 张「闪金之锤」。"]],
   ["tt6-relief", ["回复 6 点生命。", "你回复 6 点生命。"]],
   ["tt6-airdrop", ["从木材、口粮、能量饮料、随机药水中选择一项。", "从「木材」「口粮」「能量饮料」和随机药水中选择 1 项获得。"]],
-  ["tt6-chestdraw", ["从大、中、小宝箱中随机抽取 1 个开启。", "随机开启 1 个宝箱：军用保险柜、密封物资箱或小型物资箱。"]],
+  ["tt6-chestdraw", ["从军用保险柜、密封物资箱、小型物资箱中随机抽取 1 个开启。", "随机开启 1 个搜刮点：军用保险柜、密封物资箱或小型物资箱。"]],
   ["tt6-systemsupply", ["获得员工通行证A碎片和木材卡 ×1。", "你获得员工通行证A碎片和 1 张「木材」。"]],
   ["tt7-throwblade", ["攻（-3），附加流血，抽 1 张牌。", "造成（你的攻击力 - 3）点攻击伤害；对目标附加 1 层流血，并抽 1 张牌。"]],
   ["tt7-goldencicada", ["消耗所有手牌，抽 3 张。", "消耗你的所有手牌，并抽 3 张牌。"]],
@@ -213,6 +215,7 @@ const descriptions = new Map([
   ["tt7-arcanescroll", ["消耗该牌时抽 3 张牌。", "本牌被消耗时，你抽 3 张牌。"]],
   ["tt7-talisman", ["对战开始时，额外抽 2 张牌。", "对战开始时，你额外抽 2 张牌。"]],
   ["tt7-ironcharge", ["+12 甲，抽 2 张牌。", "你获得 12 点护甲，并抽 2 张牌。"]],
+  ["tt7-livingwater", ["抽 5 张牌。", "抽 5 张牌。"]],
   ["tt7-maxsupply", ["抽牌，直到有 4 张手牌。", "抽牌，直到你有 4 张手牌。"]],
   ["tt7-imitate", ["在手牌中时，本牌变为打出的上一张武术牌的1费复制。", "本牌在你的手牌中时，变为你上一张打出的武术牌的复制，且费用为 1 费。"]],
   ["cmtmvq6ss84l", ["获取本职业的能力卡", "你获得本职业的能力卡。"]],
@@ -267,12 +270,12 @@ const descriptions = new Map([
 
 export function displayCardDescription(value, id, card) {
   value = rotSeedDescription({ id, desc:value });
-  const source = String(value || '').replaceAll('消耗口袋', '消耗区');
+  const source = scavengeText(value).replaceAll('消耗口袋', '消耗区');
   const revision = descriptions.get(String(id || ''));
   const reviewed = revision && source === revision[0] ? revision[1] : source;
   const approvedSource = revision && (source === revision[0] || source === revision[1]);
   const approvedCard = card && String(card.id) === String(id) && revision &&
-    (card.desc === revision[0] || card.desc === revision[1]);
+    (scavengeText(card.desc) === revision[0] || scavengeText(card.desc) === revision[1]);
   const text = approvedSource && approvedCard ? structuredCardDescription(card, reviewed) ?? reviewed : reviewed;
   const cleaned = text.replace('（不计之前战斗的消耗区或普通弃牌；仅进入墓地的牌不计）', '')
     .replaceAll('本场战斗消耗牌中', '消耗牌堆中')

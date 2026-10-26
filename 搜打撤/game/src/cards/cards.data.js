@@ -12,7 +12,7 @@ export const dataSlice = {
       { id: 'tt6-goldhammer', name: '中断的接应', cost: 0, rarity: '衍生', type: '事件', desc: '选择领取「闪金之锤」，或接受接应委托：下一家商店随机两格商品免费，排除初始攻击。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-relief', name: '隔离线急救', cost: 0, rarity: '衍生', type: '事件', desc: '选择回复 6 点生命，或投骰获得 1 张随机招式。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-airdrop', name: '封锁区投送', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中选择一项。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-chestdraw', name: '封存储备库', cost: 0, rarity: '衍生', type: '事件', desc: '从大、中、小宝箱中随机抽取 1 个开启，或领取木材与口粮各 1 张。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-chestdraw', name: '封存储备库', cost: 0, rarity: '衍生', type: '事件', desc: '从军用保险柜、密封物资箱、小型物资箱中随机抽取 1 个开启，或领取木材与口粮各 1 张。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-systemsupply', name: '撤离登记台', cost: 0, rarity: '衍生', type: '事件', desc: '选择获得员工通行证A碎片 ×1 与木材卡 ×1，或碎片 ×1 与 2 币。', value: 0, sellable: false, unrandom: true },
       { id: 'cmtn7qttxqo4', name: '战地整备', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片 ×1；另选复原 1 张卡牌或回复 3 点生命。', value: 0, sellable: false, unrandom: true },
       { id: 'ev19-vital', name: '封存针剂', cost: 0, rarity: '衍生', type: '事件', desc: '生命上限 +3 并回复 3 点生命，或只回复 8 点生命。', value: 0, sellable: false, unrandom: true },
@@ -41,7 +41,7 @@ export const dataSlice = {
       { id: 'tt-gold',       name: '金币',     cost: 0, rarity: '史诗', type: '道具', desc: '贵重货币，可出售。', value: 9, unrandom: true },
       { id: 'tt-econpack',   name: '经济卡包', cost: 2, rarity: '传说', type: '资源', desc: '带入战场时，以 5 张随机卡牌开局。可出售。', value: 10, sellable: true, unrandom: true }, // 资源标注重拍：卡面明确「可出售 10币」
       { id: 'tt-silver',     name: '银币',     cost: 0, rarity: '古朴', type: '道具', desc: '可出售。', value: 6, unrandom: true },
-      { id: 'tt-key',        name: '钥匙',     cost: 0, rarity: '初始', type: '资源', desc: '解锁神秘宝箱。', value: 2, rules: { version: 1, base: { material: { kind: 'keys', amount: 1 } } } },
+      { id: 'tt-key',        name: '钥匙',     cost: 0, rarity: '初始', type: '资源', desc: '解锁神秘搜刮点。', value: 2, rules: { version: 1, base: { material: { kind: 'keys', amount: 1 } } } },
       // —— 第三排 ——
       { id: 'tt-crystal',    name: '能源结晶', cost: 1, rarity: '古朴', type: '道具', desc: '地图背包：从消耗区复原最多3张卡牌；战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。', value: 3, rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 3 }] } } },
       { id: 'tt-key-one',    name: '一把钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×3。', value: 6, rules: { version: 1, base: { material: { kind: 'keys', amount: 3 } } } },
@@ -205,18 +205,18 @@ export const dataSlice = {
     // 设计者定版——这一类是事件，只能在棋盘的事件格中触发，无法在背包中使用，
     // 背包里会记录本局触发过哪些事件（game.js 事件格结算 + 背包「事件记录」）。
     // 因此稀有度记为「衍生」（不进商店/随机池），并全部加 unrandom 双保险；
-    // 闪金之锤角标 <事件战斗>、盗匪横行含截道拾荒者×5，battle: true 供战斗结算识别。
+    // 闪金之锤角标 <事件战斗>、武装截查含截道拾荒者×5，battle: true 供战斗结算识别。
     // tt6 事件卡与下方桌面区同名同 id 双版并存（微信版 233 张定版口径）——两处描述必须
     // 保持一致（2026-09-19 审计 D-5 对齐），实际结算效果以 game.run.flow eventChoiceSpec V2 为准。
     TABLETOP6: [
-      { id: 'tt6-demondeal',   name: '恶魔交易',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '-5血，获得1个大宝箱。' },
+      { id: 'tt6-demondeal',   name: '恶魔交易',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '-5血，获得1个军用保险柜。' },
       { id: 'tt6-bandits',     name: '盗匪横行',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '截道拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。' },
       { id: 'tt6-mystery',     name: '神秘补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A碎片，+2 币。' },
       { id: 'tt6-goldmine',    name: '金矿',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得 3 币。' },
       { id: 'tt6-goldhammer',  name: '闪金之锤',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '造成 5 点伤害，若斩杀敌人，+2 币。' },
       { id: 'tt6-relief',      name: '爱心救济站', cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '回复 6 血。' },
       { id: 'tt6-airdrop',     name: '空中补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从木材、口粮、能量饮料、随机药水中抽取一项。' },
-      { id: 'tt6-chestdraw',   name: '宝箱',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从大，中，小宝箱中抽取 1 个。' },
+      { id: 'tt6-chestdraw',   name: '搜刮点',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从军用保险柜、密封物资箱、小型物资箱中抽取 1 个。' },
       { id: 'tt6-systemsupply', name: '系统补给',  cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A碎片，木材 ×1。' },
     ],
 
@@ -323,7 +323,7 @@ export const dataSlice = {
       // —— 第 1 层 外围荒地：联邦巡防 vs 反抗拾荒 ——
       { id: 'foe-infantry',   name: '联邦巡防兵',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'infantry',   desc: '攻击 4 / 生命 4。联邦·第1层。普通近战，行动无特殊之处。' },
       { id: 'foe-archer',     name: '封锁线枪手',       cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'archer',     desc: '攻击 5 / 生命 3。联邦·第1层。远程攻击。' },
-      { id: 'foe-bandit',     name: '截道拾荒者', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'bandit',     desc: '攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（盗匪横行 ×5）。' },
+      { id: 'foe-bandit',     name: '截道拾荒者', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'bandit',     desc: '攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（武装截查 ×5）。' },
       // —— 第 2 层 风雪哨线：双方正规部队 ——
       { id: 'foe-cavalry',    name: '封锁线突击兵',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'cavalry',    desc: '攻击 5 / 生命 6。联邦·第2层。蓄力攻击：隔回合强化一击。' },
       { id: 'foe-orc_jav',    name: '反抗组织掷弹兵', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'orc_jav',    desc: '攻击 6 / 生命 4。反抗·第2层。远程投掷。' },
@@ -474,12 +474,12 @@ export const dataSlice = {
       { id: 'tt4-smoke-bomb', name: '烟雾弹', cost: 0, rarity: '稀有', type: '道具', desc: '非 BOSS 战逃跑一次。', dmg: 0, value: 3 },
       { id: 'tt4-woodify', name: '能量饮料', cost: 0, rarity: '古朴', type: '道具', desc: '回复 6 点生命。', dmg: 0, heal: 6, value: 2 },
       "tt5-galaxy-voyage",
-      { id: 'tt6-demondeal', name: '恶魔交易', cost: 0, rarity: '衍生', type: '事件', desc: '-5血，获得1个大宝箱。', dmg: 0, unrandom: true },
+      { id: 'tt6-demondeal', name: '恶魔交易', cost: 0, rarity: '衍生', type: '事件', desc: '-5血，获得1个军用保险柜。', dmg: 0, unrandom: true },
       { id: 'tt6-bandits', battle: true, name: '盗匪横行', cost: 0, rarity: '衍生', type: '事件', desc: '截道拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。', dmg: 0, unrandom: true },
       "tt6-mystery",
       { id: 'tt6-goldmine', name: '金矿', cost: 0, rarity: '衍生', type: '事件', desc: '获得 3 币。', dmg: 0, unrandom: true },
       { id: 'tt6-airdrop', name: '空中补给', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中抽取一项。', dmg: 0, unrandom: true },
-      { id: 'tt6-chestdraw', name: '宝箱', cost: 0, rarity: '衍生', type: '事件', desc: '从大，中，小宝箱中抽取 1 个。', dmg: 0, unrandom: true },
+      { id: 'tt6-chestdraw', name: '搜刮点', cost: 0, rarity: '衍生', type: '事件', desc: '从军用保险柜、密封物资箱、小型物资箱中抽取 1 个。', dmg: 0, unrandom: true },
       "tt6-systemsupply",
       { id: 'tt7-throwblade', cls: '侠客', name: '飞刃偷袭', cost: 0, rarity: '职业', type: '武术', desc: '攻（-3），附加流血，抽 1 张牌。', dmg: -3, dmgType: 'attack', draw: 1, value: 3, unrandom: true },
       { id: 'tt7-stealth', cls: '侠客', name: '潜匿', cost: 1, rarity: '职业', type: '武术', desc: '进入潜行状态 1 回合，抽1张牌。', dmg: 0, draw: 1, value: 3, unrandom: true },
@@ -583,14 +583,14 @@ export const dataSlice = {
       { id: "cmtn1p9vb5au", cls: "法师", name: "千变万化", cost: 2, rarity: "职业", type: "法术", dmg: 0, desc: "发现一种形态并释放", value: 3, sellable: false, unrandom: true },
       { id: "cmtn1r10xnl1", cls: "降临者", name: "黑暗形态", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "本局对战中，每当你发现卡牌时，增加1个可选项", value: 2, sellable: false, unrandom: true },
       "cmtn1wnhhym",   // 同名不同效果版本按老板 2026-09-19 规则追加「-改」
-      { id: "cmtn28jv33wx", name: "搜索大宝箱", cost: 0, rarity: "衍生", type: "法术", dmg: 0, desc: "随机获取3张卡牌", value: 3, sellable: false },
+      { id: "cmtn28jv33wx", name: "搜索军用保险柜", cost: 0, rarity: "衍生", type: "法术", dmg: 0, desc: "随机获取3张卡牌", value: 3, sellable: false },
       { id: "cmtn6bge52qt", name: "复原药水", cost: 0, rarity: "稀有", type: "道具", dmg: 0, desc: "地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。", value: 3, sellable: false, rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 2 }] } } },
       // TABLETOP11 历史定义；播种后由 EVENTS_0919 同 id 覆盖为现行「战地整备」及二选一说明。
       { id: "cmtn7qttxqo4", name: "修鞋铺", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得员工通行证A碎片；复原1张卡牌", value: 0, sellable: false },
       // —— 以下 25 张共享 id 卡取设计者稿（整卡覆盖） ——
       { id: "starter-emergency-bandage", name: "应急绷带", cost: 0, rarity: "稀有", type: "道具", dmg: 0, heal: 12, desc: "回复12 点生命。", value: 0, sellable: false },
       { id: "tt-econpack", name: "经济卡包", cost: 0, rarity: "史诗", type: "资源", dmg: 0, desc: "只能在仓库界面点击使用，获得5张随机卡牌", value: 10, sellable: false, unrandom: true },
-      { id: "tt2-treasuremap", name: "寻宝图", cost: 0, rarity: "古朴", type: "装备", dmg: 0, draw: 1, desc: "主动技能：将 1张‘搜索大宝箱’洗入牌库，抽1张牌。", value: 2, sellable: false },
+      { id: "tt2-treasuremap", name: "寻宝图", cost: 0, rarity: "古朴", type: "装备", dmg: 0, draw: 1, desc: "主动技能：将 1张‘搜索军用保险柜’洗入牌库，抽1张牌。", value: 2, sellable: false },
       { id: "tt3-flame-storm", cls: "降临者", name: "风暴火球", cost: 2, rarity: "职业", type: "法术", dmg: 4, dmgType: "spell", desc: "对全体敌人每人释放1次火球。", value: 3, sellable: false, unrandom: true },
       "tt3-fireball", // 衍生牌（2026-09-16 留言「初始不给火球，把火球设定成衍生」）：不再每局携带；unrandom 双保险——不进发现/随机/商店池
       { id: "tt3-nuke-ray", cls: "降临者", name: "致命射线", cost: 2, rarity: "职业", type: "法术", dmg: 8, dmgType: "spell", desc: "造成8点法术伤害，对其附加3种随机诅咒", value: 3, sellable: false, unrandom: true },

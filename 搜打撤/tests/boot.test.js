@@ -17,9 +17,8 @@ installImmediateWebLocks();
 
 // ---- 环境补桩（必须在动态 import main.js 之前就位） ----
 // 2D 上下文：所有方法返回可链式/可读的哑值
-// 故意恒真：jsdom 无 canvas，无论原生 getContext 是否存在都强制换成本桩（lint 静音，不改逻辑）
-// eslint-disable-next-line no-constant-condition
-if (!window.HTMLCanvasElement.prototype.getContext || true) {
+// jsdom Canvas 始终使用受控上下文。
+{
   const noopCtx = () => new Proxy(function () {}, {
     ...canvasTraps(noopCtx),
   });

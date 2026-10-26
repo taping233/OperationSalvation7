@@ -31,7 +31,7 @@ it.each(['all','one'])('%s animates only committed rewards after render and neve
   };
   const dropCard = () => card;
   window.SDT = {
-    UI, MAP: { chestKinds: { small: { name:'小宝箱', cards:1, coins:[2, 2] } } },
+    UI, MAP: { chestKinds: { small: { name:'小型物资箱', cards:1, coins:[2, 2] } } },
     Cards: { RARITIES:['古朴','稀有','史诗','传说'], all:() => [card, otherCard], randomDropCard:dropCard,
       pickOfRarity:() => card, classPool:() => [], rarityOf:item => item.rarity,
       sellPrice:() => 1, cardHTML:() => '<div>队列测试卡</div>' },

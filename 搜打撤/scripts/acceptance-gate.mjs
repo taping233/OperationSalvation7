@@ -182,8 +182,10 @@ async function main() {
   const args = process.argv.slice(2);
   const explicitFull = args.includes('--full');
   const forceFull = args.includes('--force-full');
+  const changed = args.includes('--changed');
+  if (changed && ['--full', '--paths', '--staged', '--target-tests'].some(flag => args.includes(flag))) throw new Error('--changed 不能与其他范围选择混用');
   if (explicitFull && (args.includes('--paths') || args.includes('--staged') || args.includes('--target-tests'))) throw new Error('--full 不能与 --paths、--staged、--target-tests 混用');
-  if (forceFull && (explicitFull || args.includes('--target-tests') || (!args.includes('--staged') && !args.includes('--paths')))) throw new Error('--force-full 只允许与 --staged 或 --paths 混用');
+  if (forceFull && (explicitFull || args.includes('--target-tests') || (!args.includes('--staged') && !args.includes('--paths') && !changed))) throw new Error('--force-full 只允许与 --staged、--paths 或 --changed 混用');
   const receiptIndex = args.indexOf('--reuse');
   const receipt = receiptIndex >= 0 ? args[receiptIndex + 1] : process.env.GATE_RECEIPT;
   if (receiptIndex >= 0 && (!receipt || receipt.startsWith('--'))) throw new Error('--reuse 必须指定冻结 index 报告');
@@ -205,19 +207,25 @@ async function main() {
       if (!test.startsWith('tests/') || !test.endsWith('.test.js')
         || !existsSync(path.join(PROJECT_ROOT, test))) throw new Error('无效测试文件：' + test);
     }
-    runNode(['node_modules/vitest/vitest.mjs', 'run', ...tests, '--reporter=dot'], '指定 Vitest', { env: vitestEnvironment() });
+    runNode(['node_modules/vitest/vitest.mjs', 'run', ...tests], '指定 Vitest', { env: vitestEnvironment() });
     return;
   }
   const pathIndex = args.indexOf('--paths');
-  if (pathIndex < 0 && !args.includes('--staged') && !explicitFull) {
-    throw new Error('用法：acceptance-gate.mjs --full|--staged|--paths <路径...> --plan|--run');
+  if (pathIndex < 0 && !args.includes('--staged') && !explicitFull && !changed) {
+    throw new Error('用法：acceptance-gate.mjs --full|--staged|--changed|--paths <路径...> --plan|--run');
   }
-  const staged = pathIndex < 0 && !explicitFull ? stagedChanges() : null;
+  const staged = pathIndex < 0 && !explicitFull && !changed ? stagedChanges() : null;
   if (staged) checkCommitBoundary(staged.paths);  // R1 提交边界守卫：无主物品阻断（26a5254 事故防线）
   // R6：--paths 统一接受空格与逗号分隔（与 workflow verify 的逗号风格互通）。
   const rawPaths = pathIndex >= 0 ? args.slice(pathIndex + 1).filter(a => !a.startsWith('--')) : null;
-  const paths = pathIndex >= 0
+  const paths = changed ? (await import('./test-changed.mjs')).changedProjectPaths(PROJECT_ROOT) : pathIndex >= 0
     ? rawPaths.flatMap(a => a.split(',').map(s => s.trim()).filter(Boolean)) : staged?.paths ?? [];
+  if (changed && !paths.length) {
+    const plan = { mode: 'skip', paths: [], tests: [], reasons: ['当前项目没有未提交改动；未执行检查'] };
+    if (args.includes('--json')) process.stdout.write(JSON.stringify(plan) + '\n');
+    else printPlan(plan);
+    return;
+  }
   if (pathIndex >= 0 && !paths.length) throw new Error('--paths 后必须给出至少一个项目内路径');
   if (pathIndex >= 0) {
     for (const value of paths) {
@@ -253,7 +261,7 @@ async function main() {
   // 理由同上：隔离副本字节口径与审计指纹不匹配，staged 门跳过，工作树门与 CI 兜底。
   if (!staged) runNode(['scripts/asset-audit.cjs', '--check', '--paths-json', JSON.stringify(plan.paths)], '增量素材检查');
   const testArgs = ['node_modules/vitest/vitest.mjs', 'run',
-    ...(plan.mode === 'quick' ? plan.tests : []), '--reporter=dot', '--silent'];
+    ...(plan.mode === 'quick' ? plan.tests : []), '--silent'];
   if (plan.mode === 'full' || plan.tests.length) {
     // 逃生口只在门进程内生效：Vitest 夹具会经 {...process.env} 继承它，导致混树/无主拒绝
     // 测试被无声放行（10-03 实测泄漏事故）——只对子进程剔除，门进程保留给两次 stagedChanges 复核。

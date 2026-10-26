@@ -1,0 +1,81 @@
+{
+  "input": "A game VFX sprite atlas, exactly twelve isolated abstract energy symbols laid out in a regular FOUR COLUMN THREE ROW grid. Only visual effects, absolutely no human or humanoid subjects.\n\nPure black background, no text, no cell borders. Each complete effect is small, centered within its own cell with large black padding. All twelve effects must stay separated.\n\nRead left to right. TOP ROW: (1) amber ivory crescent slash with contact spark; (2) cyan broken shield ring and three shards; (3) violet magical vortex burst; (4) orange flame impact. MIDDLE ROW: (5) pale blue ice shatter with broad crystal shards; (6) violet white branching lightning strike; (7) acid green poison splash; (8) mint green healing spiral rising leaves. BOTTOM ROW: (9) dark violet curse thorn spiral; (10) ivory amber thin expanding turn-transition wave; (11) cyan curved comet trail; (12) pale grey violet dissolving death dust burst.\n\nUnified hand-painted large brush planes and energetic tapered silhouettes, small concentrated white cores, controlled glow, readable broad strokes, no busy particles. Every cell is an abstract VFX glyph only.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+  "model": "nai-diffusion-5-full",
+  "action": "generate",
+  "parameters": {
+    "params_version": 3,
+    "width": 1344,
+    "height": 768,
+    "scale": 5.5,
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "variety_plus": false,
+    "n_samples": 1,
+    "ucPresetId": "none",
+    "qualityPresetId": "none",
+    "autoSmea": false,
+    "straight_alpha": false,
+    "dynamic_thresholding": false,
+    "controlnet_strength": 1,
+    "legacy": false,
+    "legacy_v3_extend": false,
+    "legacy_uc": false,
+    "add_original_image": true,
+    "cfg_rescale": 0.0,
+    "noise_schedule": "karras",
+    "use_coords": false,
+    "normalize_reference_strength_multiple": true,
+    "inpaintImg2ImgStrength": 1.0,
+    "seed": 261026312,
+    "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, 3::person, character, human, face, eyes, hair, body, hand, costume, girl, boy::, letters, numbers, captions, panel borders, weapons, buildings, scenery",
+    "characterPrompts": [
+      {
+        "prompt": "",
+        "uc": "",
+        "center": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "enabled": true
+      }
+    ],
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "A game VFX sprite atlas, exactly twelve isolated abstract energy symbols laid out in a regular FOUR COLUMN THREE ROW grid. Only visual effects, absolutely no human or humanoid subjects.\n\nPure black background, no text, no cell borders. Each complete effect is small, centered within its own cell with large black padding. All twelve effects must stay separated.\n\nRead left to right. TOP ROW: (1) amber ivory crescent slash with contact spark; (2) cyan broken shield ring and three shards; (3) violet magical vortex burst; (4) orange flame impact. MIDDLE ROW: (5) pale blue ice shatter with broad crystal shards; (6) violet white branching lightning strike; (7) acid green poison splash; (8) mint green healing spiral rising leaves. BOTTOM ROW: (9) dark violet curse thorn spiral; (10) ivory amber thin expanding turn-transition wave; (11) cyan curved comet trail; (12) pale grey violet dissolving death dust burst.\n\nUnified hand-painted large brush planes and energetic tapered silhouettes, small concentrated white cores, controlled glow, readable broad strokes, no busy particles. Every cell is an abstract VFX glyph only.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, 3::person, character, human, face, eyes, hair, body, hand, costume, girl, boy::, letters, numbers, captions, panel borders, weapons, buildings, scenery",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true
+  }
+}

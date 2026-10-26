@@ -1,3 +1,4 @@
+import { drainBattle } from './helpers/battle-fixtures.js';
 import { battleRules } from './helpers/environment-fixtures.js';
 /* 反馈#5（2026-10-21 老板实测 12 条）复现与回归：
  * (a)「神灯的描述一和效果改为发现招式」——定版文案、抉择标签、招式池三处同步；
@@ -56,8 +57,6 @@ function makeGame(cards, myClass = '侠客') {
   return g;
 }
 const foeDef = () => ({ id: 'infantry', name: '直释注能靶', hp: 99999, atk: 1 });
-const tick = () => new Promise(r => setTimeout(r, 0));
-const nap = ms => new Promise(r => setTimeout(r, ms));
 const snap = () => BattleSession.getSnapshot();
 const logsJoin = g => g.logs.join('\n');
 const sideFor = c => {
@@ -66,22 +65,7 @@ const sideFor = c => {
 };
 const endBattle = g => { try { if (g.battleActive && !snap().busy) BattleSession.commands.flee(); } catch { /* 已终局 */ } };
 
-async function drain(maxLoops = 300, stopPanel = false) {
-  for (let i = 0; i < maxLoops; i++) {
-    await tick();
-    const s = snap();
-    if (stopPanel && (s.discovering || s.handSelecting || s.choosing)) return s;
-    if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
-    if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
-    if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) {
-      await nap(30);
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-    }
-  }
-  return snap();
-}
+const drain = (maxLoops = 300, stopPanel = false) => drainBattle(BattleSession, maxLoops, { stopAt: stopPanel ? ['discovering', 'handSelecting', 'choosing'] : [] });
 
 // 可选注能招式：基础 5 伤，注能(1) 时 +3（infuseBonus 声明消费卡面 infuse）
 const OPTIONAL = {

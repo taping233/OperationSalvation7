@@ -1,3 +1,4 @@
+import { drainBattle } from './helpers/battle-fixtures.js';
 import { battleRules, damageRuleFields } from './helpers/environment-fixtures.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 import fs from 'node:fs';
@@ -47,21 +48,8 @@ function restore(game, uid, foe, playerStatus = {}, overrides = {}) {
     ...overrides,
   });
 }
-const tick = () => new Promise(resolve => setTimeout(resolve, 0));
-const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
-async function settle(max = 200) {
-  for (let i = 0; i < max; i++) {
-    await tick();
-    const snapshot = BattleSession.getSnapshot();
-    if (!snapshot.busy && snapshot.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = BattleSession.getSnapshot();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return BattleSession.getSnapshot();
-}
+
+const settle = (max = 200) => drainBattle(BattleSession, max, { stopAt: ['discovering', 'choosing', 'handSelecting'] });
 function preview(uid, targetIndex = 0) {
   const snapshot = BattleSession.getSnapshot();
   return previewAction({ snapshot, action: { kind: 'play-card', uid, targetIndex }, cardContext: viewApi.getPreviewContext(uid, targetIndex) });

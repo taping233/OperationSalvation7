@@ -3,16 +3,17 @@
 <meta charset="utf-8">
 <title>跨层插画过场复核</title>
 <style>body{margin:0;background:#18242a;color:#e4e1d7;font:18px system-ui}main{padding:8vh 8vw}button{font:inherit;padding:14px 24px}#result{margin-top:24px}</style>
-<main><h1>跨层过场</h1><p>使用生产跨层控制器与运行插画，构造第1层到第2层的位置变更。</p><button id="play">进入下一层</button><p id="result">等待播放</p></main>
+<main><h1>跨层过场</h1><p>使用生产控制器分别播放四层目标画面；构造位置，不读写玩家存档。</p><button data-to="0">外围荒地</button> <button data-to="1">风雪哨线</button> <button data-to="2">冻土遗迹</button> <button data-to="3">污染核心</button><p id="result">等待播放</p></main>
 <script type="module">
 import { showLayerPassage, isLayerPassageActive } from '../src/ui/map-passage.js';
-const game={runActive:true,state:'idle',layerIdx:0,layerData:[{},{}],discoveredPairs:new Set()};
+const game={runActive:true,state:'idle',layerIdx:0,layerData:[{name:'外围荒地'},{name:'风雪哨线'},{name:'冻土遗迹'},{name:'污染核心'}],discoveredPairs:new Set()};
 window.SDT={Renderer:{prepare:async()=>true}};
-document.querySelector('#play').onclick=async()=>{
-  game.layerIdx=0;
+for (const button of document.querySelectorAll('[data-to]')) button.onclick=async()=>{
+  const to=Number(button.dataset.to), from=to===0?1:to-1;
+  game.layerIdx=from;
   const started=performance.now();
-  const operation=showLayerPassage(game,0,1);
-  game.layerIdx=1;
+  const operation=showLayerPassage(game,from,to);
+  game.layerIdx=to;
   document.querySelector('#result').textContent='跨层播放中';
   await operation?.done;
   document.querySelector('#result').textContent=JSON.stringify({elapsedMs:Math.round(performance.now()-started),layer:game.layerIdx+1,inputReleased:!isLayerPassageActive(game)});

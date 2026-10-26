@@ -59,7 +59,7 @@ function makeLayer(li, target, width, random) {
   nodes[entry].type = 'entrance'; nodes[entry].name = li === 0 ? '外围入口' : `第${li + 1}层入口`;
   nodes[exit].type = li === 3 ? 'extraction' : 'door'; nodes[exit].name = li === 3 ? '终局撤离点' : `通往第${li + 2}层`;
   // —— 数量与位置定版（2026-09-10 玩法定版）——
-  //   野生敌人格 ≤4、露天宝箱格（物资格）≤4（超出降级为事件格，后续战斗下限仍会补回 3 场）；
+  //   野生敌人格 ≤4、露天搜刮点格（物资格）≤4（超出降级为事件格，后续战斗下限仍会补回 3 场）；
   //   火堆/补给站不生成在入口附近（x < 2 的先降级，保底逻辑在 x ≥ 2 的深处补回）。
   { let battles = 0, chests = 0;
     const minFacilityX = width <= 4 ? 1 : 2;   // L1 七格（宽 4）：设施远离入口的约束放宽到 x≥1，否则保底放不下
@@ -84,7 +84,7 @@ function makeLayer(li, target, width, random) {
   // （实测出现过相邻双火堆、三格两家补给站，收益重叠体验很差）。两条规则：
   //   1) 功能房（火堆/补给站）互不相邻，相邻的后者降级为战斗；
   //   2) 每层保底至少 1 个火堆、1 个补给站（缺就补在普通格上，尽量不贴功能房）。
-  // 搜刮点（宝箱）不参与间距约束：它与商店相邻不算扎堆。
+  // 搜刮点不参与间距约束：它与商店相邻不算扎堆。
   const SPECIAL = new Set(['entrance', 'door', 'extraction']);
   const KEY_ROOMS = new Set(['fire', 'shop']);
   const FACILITY = new Set(['fire', 'chest', 'shop']);
@@ -127,7 +127,7 @@ function makeLayer(li, target, width, random) {
     }
     if (pool.length) { pool[0].type = type; placed.push(pool[0]); }
   }
-  // —— 物资格保底（2026-09-10 玩法定版：每层至少 1 个搜刮点/宝箱格）——
+  // —— 物资格保底（2026-09-10 玩法定版：每层至少 1 个搜刮点）——
   // 均匀随机可能整层没有搜刮点；缺就补在普通格上（优先吃事件格，战斗不足 3 场时不动战斗格）。
   // 搜刮点不参与火堆/补给站的间距约束，也允许与功能房相邻。
   if (!nodes.some(n => n.type === 'chest')) {
@@ -167,7 +167,7 @@ function makeLayer(li, target, width, random) {
   // 战斗格、且这些邻居也没别的战斗邻居」的格子，保证既不制造三连战（上限不被下限打穿）。
   for (let guard = 0; guard < 16 && nodes.filter(n => n.type === 'battle').length < 3; guard++) {
     // L1 七格下事件格可能被功能房吃光（2026-09-13 1000 seed 实测 0.4% 零战斗层）：
-    // event 优先，event 用尽时征用多余宝箱格（单 chest 保底始终保留）
+    // event 优先，event 用尽时征用多余搜刮点格（单 chest 保底始终保留）
     const spareChestLeft = nodes.filter(n => n.type === 'chest').length > 1;
     const cand = nodes.find(n => {
       if (n.type !== 'event' && !(spareChestLeft && n.type === 'chest')) return false;
@@ -234,7 +234,7 @@ function makeLayer(li, target, width, random) {
     const isConvert = (n) => !SPECIAL.has(n.type) && !placed.includes(n) && n.type !== 'altar' && n.type !== 'boss';
     const ensure = (type, min) => {
       for (let guard = 0; cnt(type) < min && guard < 24; guard++) {
-        // 捐献顺序：事件优先；宝箱/战斗仅在高于自身下限时让出（宝箱 ≥1、战斗 ≥3 既有保底不动）
+        // 捐献顺序：事件优先；搜刮点/战斗仅在高于自身下限时让出（搜刮点 ≥1、战斗 ≥3 既有保底不动）
         let pool = nodes.filter(n => isConvert(n) && n.type === 'event' && cnt('event') > FLOOR.event);
         if (!pool.length) pool = nodes.filter(n => isConvert(n) &&
           ((n.type === 'chest' && cnt('chest') > FLOOR.chest) || (n.type === 'battle' && cnt('battle') > FLOOR.battle)));
@@ -291,8 +291,8 @@ function quality(layers) {
     if (li === 3 && layer.nodes.filter(n => n.type === 'altar').length !== 1) issues.push(`层 4 缺少祭坛格`);
     if (li === 3 && layer.nodes.filter(n => n.type === 'boss').length !== 1) issues.push(`层 4 缺少首脑格`);
     if (layer.nodes.filter(n => n.type === 'battle').length > 4) issues.push(`层 ${li + 1} 战斗格超过 4`);
-    if (layer.nodes.filter(n => n.type === 'chest').length > 4) issues.push(`层 ${li + 1} 宝箱格（物资格）超过 4`);
-    if (layer.nodes.filter(n => n.type === 'chest').length < 1) issues.push(`层 ${li + 1} 缺少物资格（宝箱格）`);
+    if (layer.nodes.filter(n => n.type === 'chest').length > 4) issues.push(`层 ${li + 1} 搜刮点格（物资格）超过 4`);
+    if (layer.nodes.filter(n => n.type === 'chest').length < 1) issues.push(`层 ${li + 1} 缺少物资格（搜刮点格）`);
     if (layer.nodes.filter(n => n.type === 'event').length > (li === 2 ? 4 : 3)) issues.push(`层 ${li + 1} 事件格超过 ${li === 2 ? 4 : 3}`);
     if (layer.nodes.some(n => (n.type === 'fire' || n.type === 'shop') && n.x < (layer.gridBounds.maxX + 1 <= 4 ? 1 : 2))) issues.push(`层 ${li + 1} 火堆/补给站贴着入口`);
   });

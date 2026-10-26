@@ -1,84 +1,52 @@
-/* Temporary campfire effect surface. The controller retains settlement ownership. */
+/* Local outcome cues; settlement and scene ownership stay in the controller. */
 .outcome-feedback {
-  position:absolute;inset:0;z-index:12;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
-  color:#deeddf;background:radial-gradient(ellipse at 50% 48%,#243d39ed,#0b141ae8 72%);
+  --outcome-light:#c6d0bc;
+  position:absolute;inset:auto 24px 72px auto;z-index:120;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  width:min(340px,calc(100% - 32px));height:auto;min-height:96px;
+  box-sizing:border-box;padding:14px 18px;isolation:isolate;overflow:hidden;
+  color:#d8d3c7;background:#090b0de6;border:1px solid #b8b1a12b;border-radius:3px;
   pointer-events:none;animation:fire-rest-feedback var(--fire-rest-duration) linear both;
 }
-.fire-rest-feedback .fire-feedback-copy { display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center; }
-.fire-rest-feedback .fire-feedback-copy p { margin:0;font-size:24px;letter-spacing:.24em; }
-.fire-rest-feedback .fire-feedback-copy strong { font-size:64px;font-weight:500;line-height:1.1;color:#b5edc6;text-shadow:0 0 32px #83edb466; }
-.fire-rest-feedback .fire-feedback-copy small { font-size:20px;color:#c0cec5; }
-.fire-rest-feedback .fire-heal-sigil {
-  position:relative;display:grid;place-items:center;width:144px;height:144px;border:1px solid #b4e6c35c;border-radius:50%;
-  box-shadow:0 0 55px #86d9a029,inset 0 0 32px #8adb9b18;animation:fire-heal-sigil 1000ms ease-out both;
+.outcome-feedback.is-heal,.outcome-feedback.is-activate { flex-direction:row;gap:12px; }
+.outcome-feedback.is-restore,.outcome-feedback.is-activate { --outcome-light:#d5c7a7; }
+.outcome-feedback.is-sacrifice { --outcome-light:#ba8f7e; }
+.outcome-feedback .outcome-art { width:64px;height:64px;flex:0 0 64px;pointer-events:none; }
+.outcome-art img { display:block;width:100%;height:100%;object-fit:contain;animation:outcome-fragment 700ms ease-out both; }
+.outcome-feedback.is-restore .outcome-art,.outcome-feedback.is-sacrifice .outcome-art {
+  position:absolute;right:6px;top:6px;width:48px;height:48px;opacity:.3;z-index:-1;
 }
-.fire-heal-sigil > span { font-size:108px;line-height:1;font-weight:300;color:#c6f4d7; }
-.fire-rest-feedback .fire-heal-sigil i {
-  position:absolute;left:calc(8% + var(--i)*16%);top:65%;font-style:normal;font-size:25px;color:#c2f7cd;
-  opacity:0;animation:fire-heal-mote 850ms calc(var(--i)*70ms) ease-out both;
-}
-.fire-rest-feedback .fire-heal-meter { width:240px;height:6px;overflow:hidden;background:#8bafa12e; }
+.fire-rest-feedback .fire-feedback-copy { display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;min-width:0; }
+.fire-rest-feedback .fire-feedback-copy p { margin:0;font-size:16px;letter-spacing:.12em; }
+.fire-rest-feedback .fire-feedback-copy strong { font-size:28px;font-weight:500;line-height:1.1;color:var(--outcome-light); }
+.fire-rest-feedback .fire-feedback-copy small { font-size:12px;color:#bcb9af; }
+.fire-rest-feedback .fire-heal-meter { width:144px;height:3px;overflow:hidden;background:#8bafa12e; }
 .fire-rest-feedback .fire-heal-meter span {
-  display:block;width:100%;height:100%;background:#b5edc6;transform-origin:left;
-  animation:fire-heal-fill 850ms 120ms cubic-bezier(.22,1,.36,1) both;
+  display:block;width:100%;height:100%;background:#b6c4af;transform-origin:left;
+  animation:fire-heal-fill 550ms 40ms cubic-bezier(.22,1,.36,1) both;
 }
-.fire-rest-feedback .fire-rest-reveal { display:flex;justify-content:center;gap:32px;perspective:900px; }
-.fire-rest-feedback .fire-rest-reveal-card { position:relative;width:200px;text-align:center;animation:fire-card-reform 950ms calc(var(--i)*180ms) cubic-bezier(.22,1,.36,1) both; }
-.fire-rest-feedback .fire-rest-reveal-card .hs-card { width:200px;margin:0;pointer-events:none; }
-.fire-rest-feedback .fire-rest-reveal-card > span { display:block;margin-top:14px;font-size:20px; }
-.fire-rest-feedback .fire-rest-reveal-card::after {
-  content:'';position:absolute;inset:0 0 35px;border:1px solid #d8e9ba;box-shadow:0 0 38px #badd9566;pointer-events:none;
-  animation:fire-card-ring 1050ms calc(var(--i)*180ms) ease-out both;
+.fire-rest-feedback .fire-rest-reveal { display:flex;justify-content:center;gap:12px;perspective:900px; }
+.fire-rest-feedback .fire-rest-reveal-card {
+  position:relative;width:64px;text-align:center;
+  animation:fire-card-reform 480ms calc(var(--i)*75ms) cubic-bezier(.22,1,.36,1) both;
 }
-.fire-rest-feedback.is-restore { background:radial-gradient(ellipse at 50% 45%,#3d4134ed,#10171ce8 72%); }
-.fire-rest-feedback.is-restore .fire-feedback-copy strong { font-size:44px;color:#e3e5be; }
-@keyframes fire-rest-feedback { 0%{opacity:0} 12%,84%{opacity:1} 100%{opacity:0} }
-@keyframes fire-heal-sigil { from{opacity:0;transform:scale(.7)} 50%{opacity:1;transform:scale(1.06)} to{opacity:1;transform:scale(1)} }
-@keyframes fire-heal-mote { 0%{opacity:0;transform:translateY(16px) scale(.6)} 25%{opacity:.9} 100%{opacity:0;transform:translateY(-115px) scale(1)} }
+.fire-rest-feedback .fire-rest-reveal-card .hs-card { width:64px;margin:0;pointer-events:none;font-size:9px; }
+.fire-rest-feedback .fire-rest-reveal-card > span { display:block;margin-top:5px;font-size:11px; }
+.outcome-feedback .outcome-cost { color:var(--outcome-light);font-size:12px; }
+.outcome-feedback .outcome-source { color:#c3c5c2;font-size:11px; }
+.outcome-feedback .outcome-source-payment {
+  position:absolute;left:6px;top:6px;width:32px;pointer-events:none;
+  animation:outcome-item-spent 460ms ease-in both;
+}
+.outcome-feedback .outcome-source-payment .hs-card { width:32px;margin:0;font-size:6px; }
+.outcome-feedback.is-sacrifice .fire-rest-reveal-card {
+  animation:outcome-sacrifice 560ms calc(var(--i)*75ms) ease-in both;
+}
+@keyframes fire-rest-feedback { 0%{opacity:0} 12%,80%{opacity:1} 100%{opacity:0} }
 @keyframes fire-heal-fill { from{transform:scaleX(var(--fire-hp-before))} to{transform:scaleX(var(--fire-hp-after))} }
-@keyframes fire-card-reform { 0%{opacity:0;filter:grayscale(1) brightness(2);transform:translateY(45px) rotateY(-28deg) scale(.86)} 55%{opacity:1;filter:grayscale(.5) brightness(1.4)} 100%{opacity:1;filter:none;transform:none} }
-@keyframes fire-card-ring { 0%{opacity:0;transform:scale(.94)} 35%{opacity:.9} 100%{opacity:0;transform:scale(1.08)} }
+@keyframes fire-card-reform { from{opacity:0;transform:translateY(10px) rotateY(-12deg) scale(.96)} to{opacity:1;transform:none} }
+@keyframes outcome-fragment { from{opacity:0;transform:translateY(7px) scale(.9)} 30%{opacity:1} to{opacity:0;transform:translateY(-7px) scale(1)} }
+@keyframes outcome-sacrifice { from{opacity:1;transform:none} to{opacity:0;transform:translateY(18px) scale(.5)} }
+@keyframes outcome-item-spent { from{opacity:.8;transform:none} to{opacity:0;transform:translateY(-12px) scale(.5)} }
 @media (prefers-reduced-motion:reduce) { .fire-rest-feedback,.fire-rest-feedback * { animation:none!important; } }
 .reduce-motion .fire-rest-feedback,.reduce-motion .fire-rest-feedback * { animation:none!important; }
-
-/* One painted halo and one cadence across recovery, restoration and sacrifice. */
-.outcome-feedback { --outcome-light:#a8edc6;isolation:isolate;overflow:hidden; }
-.outcome-feedback.is-restore,.outcome-feedback.is-activate { --outcome-light:#eadcaf; }
-.outcome-feedback.is-activate { background:radial-gradient(ellipse at 50% 45%,#3b3b2cef,#10171cec 72%); }
-.outcome-feedback.is-activate .fire-feedback-copy strong { color:var(--outcome-light); }
-.outcome-feedback.is-sacrifice { --outcome-light:#d2bdea;background:radial-gradient(ellipse at 50% 45%,#343047f2,#10171cec 72%); }
-.outcome-feedback .outcome-halo {
-  position:absolute;z-index:-1;left:50%;top:46%;width:450px;height:450px;background:var(--outcome-light);opacity:.3;
-  mask:url('../assets/ui/outcome/outcome-halo-v1.webp') center/contain no-repeat;
-  animation:outcome-halo var(--fire-rest-duration) cubic-bezier(.22,1,.36,1) both;pointer-events:none;
-}
-.outcome-feedback .outcome-cost { color:var(--outcome-light);font-size:22px;letter-spacing:.08em; }
-.outcome-feedback .outcome-source { color:#c3c5c2;font-size:17px; }
-.outcome-feedback .outcome-source-payment { position:absolute;left:16px;top:14px;width:48px;pointer-events:none;animation:outcome-item-spent 460ms ease-in both; }
-.outcome-feedback .outcome-source-payment .hs-card { width:48px;margin:0;font-size:7px; }
-.outcome-feedback .outcome-activation { font-size:94px;line-height:1;color:var(--outcome-light);text-shadow:0 0 28px #eadcaf66; }
-.outcome-feedback.is-sacrifice .fire-feedback-copy strong { color:#dfc9f1;font-size:42px; }
-.outcome-feedback.is-sacrifice .fire-rest-reveal-card { animation:outcome-sacrifice 1100ms calc(var(--i)*110ms) cubic-bezier(.4,0,.2,1) both; }
-.outcome-feedback.is-sacrifice .fire-rest-reveal-card::after { border-color:#d8bbf0;box-shadow:0 0 38px #c39ee866; }
-.outcome-feedback.is-compact {
-  inset:auto 28px 68px auto;width:min(410px,calc(100% - 48px));height:auto;min-height:150px;box-sizing:border-box;
-  padding:22px 28px;gap:14px;border:1px solid #b5d6c74d;border-radius:3px;
-  background:radial-gradient(ellipse at 50% 45%,#233c37f5,#0e1a23f5 85%);box-shadow:0 12px 40px #03090d66;z-index:120;
-}
-.outcome-feedback.is-compact.is-restore { background:radial-gradient(ellipse at 50% 45%,#3a3b2cf5,#101a22f5 85%);border-color:#ddcc974d; }
-.outcome-feedback.is-compact .outcome-halo { width:245px;height:245px;opacity:.18; }
-.outcome-feedback.is-compact .fire-heal-sigil { display:none; }
-.outcome-feedback.is-compact .fire-feedback-copy { gap:6px; }
-.outcome-feedback.is-compact .fire-feedback-copy p { font-size:20px; }
-.outcome-feedback.is-compact .fire-feedback-copy strong { font-size:38px; }
-.outcome-feedback.is-compact .fire-feedback-copy small { font-size:16px; }
-.outcome-feedback.is-compact .fire-heal-meter { width:200px; }
-.outcome-feedback.is-compact .fire-heal-meter span { animation-duration:550ms;animation-delay:40ms; }
-.outcome-feedback.is-compact .fire-rest-reveal { gap:16px; }
-.outcome-feedback.is-compact .fire-rest-reveal-card { width:84px;animation-duration:480ms;animation-delay:calc(var(--i)*75ms); }
-.outcome-feedback.is-compact .fire-rest-reveal-card .hs-card { width:84px;font-size:10px; }
-.outcome-feedback.is-compact .fire-rest-reveal-card > span { font-size:13px;margin-top:7px; }
-.outcome-feedback.is-compact .fire-rest-reveal-card::after { inset:0 0 22px;animation-duration:600ms;animation-delay:calc(var(--i)*75ms); }
-@keyframes outcome-halo { 0%{opacity:0;transform:translate(-50%,-50%) scale(.65) rotate(-16deg)} 45%{opacity:.3} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.14) rotate(12deg)} }
-@keyframes outcome-sacrifice { 0%,12%{opacity:1;filter:none;transform:translateY(0) scale(1)} 55%{opacity:.75;filter:brightness(1.9);transform:translateY(14px) scale(.75)} 100%{opacity:0;filter:brightness(2);transform:translateY(65px) scale(.08)} }
-@keyframes outcome-item-spent { from{opacity:.8;transform:translateY(0) scale(1)} to{opacity:0;transform:translateY(-24px) scale(.4);filter:brightness(1.8)} }

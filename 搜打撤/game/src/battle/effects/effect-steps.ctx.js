@@ -61,7 +61,7 @@ export function parsePoolNoun(raw, myClass) {
     //（type 过滤排除射线枪自身（装备）；unrandom 排除职业版致命射线，职业卡不进发现池）
     else if (key === '射线') preds.push(c => c.type === '法术' && !c.unrandom && String(c.name || '').includes('射线'));
   }
-  if (/^注能/.test(s)) { s = ''; preds.push(c => +(c.infuse || 0) > 0 || /注能/.test(String(c.desc || ''))); }
+  if (/^注能/.test(s)) { s = ''; preds.push(c => +(c.infuse || 0) > 0 || /注能\s*[（(]\s*(?:[1-9]\d*|小)\s*[)）]/.test(String(c.desc || ''))); }
   if (!preds.length || s) return null;   // 有未识别的残留名词 → 交回通用池，避免误配
   const pred = /** @type {((card: unknown) => boolean) & { allowClassCards?: boolean }} */ (
     (card) => (classNoun || !isClassCard(/** @type {import('../../cards/card-rarity.js').ClassCardInput} */ (card))) && preds.every(p => p(card))

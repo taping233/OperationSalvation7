@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { KEY } from '../game/src/cards/cards.consts.js';
 import { createCatalogCardMigrations } from '../game/src/cards/cards.sync.catalog.js';

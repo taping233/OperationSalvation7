@@ -69,7 +69,7 @@ describe('游戏全书与运行时数据一一对应', () => {
     const before = readFileSync(OUT);
     expect(md).toContain('每回合 2 能量。普通战');
     expect(md).toContain('首脑战手牌上限 8');
-    expect(md).toContain('另有10张初始攻击牌库，开局和每回合不自动抽牌');
+    expect(md).toContain('另有5张初始攻击牌库，开局和每回合不自动抽牌');
     expect(md).toContain('消耗牌堆，不自动洗回，仅由卡牌效果取回');
     expect(md).not.toContain('每回合 99');
     expect(md).not.toContain('骰子面数');

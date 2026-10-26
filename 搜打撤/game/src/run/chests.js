@@ -20,8 +20,8 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
   const UI = SDT.UI;
 
   let G = null;        // game 主对象
-  let queue = [];      // 待开宝箱 [{kind}]
-  let cur = null;      // 当前宝箱 {kind, cards, coins}
+  let queue = [];      // 待开搜刮点 [{kind}]
+  let cur = null;      // 当前搜刮点 {kind, cards, coins}
   let idx = 0;         // 已开到第几个
   let onDone = null;   // 全部开完后的续流回调
   let saveContext = null;
@@ -160,7 +160,7 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
     };
   }
 
-  // 掷一个宝箱的完整内容：cards=开出的卡（中宝箱为 3 选 1 候选），coins=内含币
+  // 掷一个搜刮点的完整内容：cards=开出的卡（密封物资箱为 3 选 1 候选），coins=内含币
   function rollContents(kind, isClass) {
     const K = KINDS()[kind] || KINDS().small;
     const c = { kind, cards: [], coins: 0, isClass: !!isClass, claimMode:K.pickFrom ? 'one' : 'all' };
@@ -189,7 +189,7 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
         }
       });
     };
-    // 职业宝箱：只掉落本职业的职业卡牌（2026-09-06）
+    // 职业搜刮点：只掉落本职业的职业卡牌（2026-09-06）
     if (isClass && kind !== 'boss') {
       const pool = (G && G.myClass ? SDT.Cards.classPool(G.myClass) : []).filter(x => x.rarity === '职业');
       const n0 = K.pickFrom || K.cards || 0;
@@ -212,7 +212,7 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
     // 随机卡池（2026-09-08 定版爆率）：只开 武术/法术/装备/道具/资源 五类，
     // 稀有度 古朴:稀有:史诗:传说 = 60:28:9:3，同稀有度内均分、道具 ×0.7；
     // 初始/职业/衍生/棱彩/生物不直接生成
-    // （统一走 SDT.Cards.randomDropCard，职业卡只能从职业卡池获取）；同一宝箱内不重复
+    // （统一走 SDT.Cards.randomDropCard，职业卡只能从职业卡池获取）；同一搜刮点内不重复
     const n = K.pickFrom || K.cards || 0;
     for (let i = 0; i < n; i++) {
       let card = null;
@@ -231,7 +231,7 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
     // Every chest reward advances the same hard-pity counter, including class chests.
     rollPetEgg();
     if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);
-    // BOSS宝箱额外附赠金币/银币/铜币卡之一，直接并入 cards。
+    // BOSS搜刮点额外附赠金币/银币/铜币卡之一，直接并入 cards。
     // 注意：币名要先取好再 find——把随机取名写进 find 回调会对每张库卡重新随机
     const lib = SDT.Cards.all();
     if (K.coinCards && K.coinCards.length) {
@@ -242,8 +242,8 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
     return c;
   }
 
-  // ---------- 掉落掷骰：opts = { isBoss, layer } → 宝箱实例 [{kind}] ----------
-  // 职业宝箱概率（需求 #3/#4）：基础 25%；携带宠物「猎鹰宝宝」时提高至 35%
+  // ---------- 掉落掷骰：opts = { isBoss, layer } → 搜刮点实例 [{kind}] ----------
+  // 职业搜刮点概率（需求 #3/#4）：基础 25%；携带宠物「猎鹰宝宝」时提高至 35%
   const classChestChance = () => {
     const B = window.SDT.Base;
     const pet = B && B.carriedPet && B.carriedPet();
@@ -251,7 +251,7 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
   };
   function rollDrops(opts) {
     if (opts && opts.isBoss) return [{ kind: 'boss' }];
-    // 巨兽「荒渊」（第 3/4 层精英，2026-09-09 玩法定版）：固定奖励 2 个大宝箱
+    // 封街巨躯（第 3/4 层精英，2026-09-09 玩法定版）：固定奖励 2 个军用保险柜
     // （30% 概率额外 1 张传说卡在战后结算 game.bag.js settle 里判发）
     const names = (opts && opts.foeNames) || [];
     if (names.some(n => String(n).includes('巨兽'))) return [{ kind: 'large' }, { kind: 'large' }];
@@ -274,15 +274,15 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
     const chests = weighted(spec.count, e => e.n);
     for (let i = 0; i < chests; i++) {
       const kind = weighted(spec.types, e => e.k);
-      // 职业宝箱（2026-09-06）：黑箱，只掉落职业卡牌；2026-09-09 降到 25%，猎鹰宝宝 35%
+      // 职业搜刮点（2026-09-06）：黑箱，只掉落职业卡牌；2026-09-09 降到 25%，猎鹰宝宝 35%
       const isClass = Random.random('loot', 'reward') < classChestChance();
       out.push({ kind, isClass });
     }
-    if (out.some(c => c.isClass)) UI.log('[[icon:archive]] 出现黑色<b>职业宝箱</b>——只掉落职业卡牌！', 'loot');
+    if (out.some(c => c.isClass)) UI.log('[[icon:archive]] 出现黑色<b>职业搜刮点</b>——只掉落职业卡牌！', 'loot');
     return out;
   }
 
-  // 掉落摘要文案：小宝箱×2、大宝箱×1
+  // 掉落摘要文案：小型物资箱×2、军用保险柜×1
   function dropText(chests) {
     const counts = {};
     chests.forEach(c => { const k = c.kind + (c.isClass ? ':cls' : ''); counts[k] = (counts[k] || 0) + 1; });
@@ -291,7 +291,7 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
       .join('，');
   }
 
-  // 宝箱总览持有整批进度；卡牌弹层的关闭不结束节点或胜利续流。
+  // 搜刮点总览持有整批进度；卡牌弹层的关闭不结束节点或胜利续流。
   function open(game, chests, done, opts) {
     overviewPosition = null;
     clearNoticeContext();
@@ -422,7 +422,7 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
       const hasCoins = box ? box.coins > 0 && !box.coinsReceived : (K.coins?.[1] || 0) > 0;
       return box && box.rewardStage !== 'chest'
         ? hasCoins ? '继续领取并收金币' : '继续领取'
-        : hasCoins ? '开箱并收金币' : '打开宝箱';
+        : hasCoins ? '开箱并收金币' : '搜刮物资';
     };
     const complete = !queue.length || allBoxesResolved();
     return chestRewardOverviewHTML({

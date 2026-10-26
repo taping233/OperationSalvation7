@@ -34,6 +34,22 @@ function shop({ save = () => true, stored = false, coins = 20, canReceive = () =
 afterEach(() => { document.body.replaceChildren(); vi.useRealTimers(); vi.restoreAllMocks(); configureShopRuntime({ openBag: undefined }); });
 
 describe('shop detail covered-region focus isolation', () => {
+  it('购买保存中的提示留在页脚，补货后保留货架、卡面和详情宿主', async () => {
+    let resolveSave;
+    const { acts, host } = shop({ save:() => new Promise(resolve => { resolveSave = resolve; }),
+      renderCard:() => '<div class="hs-card"><img src="/test.webp"></div>' });
+    acts.shopInspect({ i:1 });
+    const root = host.querySelector('.shop-market'), slot = host.querySelectorAll('.shop-slot')[1];
+    const art = slot.querySelector('img'), detail = host.querySelector('.shop-detail');
+    const buying = acts.buySha({ i:1 });
+    expect(root.querySelector(':scope > .room-saving')).toBeNull();
+    expect(root.querySelector('.shop-live .room-saving')).not.toBeNull();
+    resolveSave(true); await buying;
+    expect(host.querySelector('.shop-market')).toBe(root);
+    expect(host.querySelectorAll('.shop-slot')[1]).toBe(slot);
+    expect(slot.querySelector('img')).toBe(art);
+    expect(host.querySelector('.shop-detail')).toBe(detail);
+  });
   it('keeps focus in the top detail dialog, excluding shelf, merchant and parent navigation', async () => {
     const { acts, host, UI } = shop({ renderCard: () => '<input type="checkbox" aria-label="灵能召唤">' });
     acts.shopInspect({ i: 0 });

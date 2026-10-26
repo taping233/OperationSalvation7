@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { discardInventoryCard, transferContainerStack } from '../game/src/hub/bag-inventory-commands.js';
 import { cardStacksForZone } from '../game/src/core/bag-render-derivation.js';

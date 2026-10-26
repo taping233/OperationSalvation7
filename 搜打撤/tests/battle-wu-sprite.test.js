@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { WU_FRAME_SEQUENCES, wuTimeline } from '../game/src/battle/view/battle.frame-catalog.js';
 import { registerDefeatPresenter, presentBattleDefeat } from '../game/src/battle/core/battle.presentation.js';

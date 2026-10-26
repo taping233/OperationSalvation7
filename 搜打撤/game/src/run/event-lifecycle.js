@@ -1,4 +1,5 @@
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
+import { beginRoomSave } from '../ui/room-footer.js';
 import { nodeActionBinding, nodeEventAt } from './node-reward-state.js';
 import { createPageSurfaceLifetime } from '../ui/page-surface-lifetime.js';
 import { beginPageEntryCancellation, cancelPendingPageEntries, releasePageEntryCancellation } from '../ui/page-entry-cancellation.js';
@@ -8,7 +9,7 @@ import { beginPageEntryCancellation, cancelPendingPageEntries, releasePageEntryC
 export function createEventLifecycle(ports) {
   const { game, UI, saveGame, nodeShell, nodeOpt, captureRunContext,
     createCardChoice, setBagReturnHook } = ports;
-  let request = 0, cardChoices = null;
+  let request = 0, cardChoices = null, closing = null;
   const eventSettling = new WeakSet();
   const captureEventContext = () => {
     const generation = request, current = captureRunContext();
@@ -28,41 +29,69 @@ export function createEventLifecycle(ports) {
     nodeShell(spec);
     const body = UI.el?.ovBody, surface = body?.firstElementChild;
     UI.act('eventExit', () => {
-      if (current() && game.state === 'modal' && !eventSettling.has(nodeEventAt(game))
-        && UI.el?.ovBody === body && (!surface || body.firstElementChild === surface)) closeEventFlow();
+      if (!current() || game.state !== 'modal' || eventSettling.has(nodeEventAt(game))
+        || UI.el?.ovBody !== body || (surface && body.firstElementChild !== surface)) return false;
+      return closeEventFlow();
     });
   }
-  async function closeEventFlow() {
+  function closeEventFlow() {
+    if (closing?.ownsPage()) return closing.promise;
     const current = captureEventContext();
+    if (!current()) return false;
     const body = UI.el?.ovBody, source = body?.firstElementChild;
-    const ownsPage = () => current() && UI.el?.ovBody === body && (!body || body.firstElementChild === source);
+    const overlay = UI.el?.overlay, revision = UI._overlayRevision;
+    let savingSurface = null;
+    const ownsPage = () => current() && UI.el?.ovBody === body && (!body || body.firstElementChild === source || (!source && body.firstElementChild === savingSurface))
+      && UI.el?.overlay === overlay && UI._overlayRevision === revision;
     game.state = 'modal';
-    const saved = await saveRunCheckpoint(saveGame);
-    if (!ownsPage()) return false;
-    if (!saved) {
-      renderEventSaveRetry();
-      return false;
-    }
-    game.state = 'idle';
-    setBagReturnHook(null);
-    UI.hideOverlay();
-    UI.refresh(game);
-    return true;
+    const flight = { ownsPage, promise:null };
+    closing = flight;
+    // Publish the promise before calling storage: even a synchronous save port
+    // can re-enter an action, and must join this departure rather than save twice.
+    flight.promise = Promise.resolve().then(async () => {
+      if (!ownsPage()) return false;
+      const finishSave = beginRoomSave(source || body);
+      // The saving indicator may be the only child when returning from a closed reward page.
+      if (!source) savingSurface = body?.firstElementChild;
+      try {
+        const saved = await saveRunCheckpoint(saveGame);
+        if (!ownsPage()) return false;
+        if (!saved) {
+          renderEventSaveRetry(current);
+          return false;
+        }
+        game.state = 'idle';
+        // Persistence has completed. Presentation failures cannot turn this
+        // departure into another settlement/save attempt in an awaiting caller.
+        try { setBagReturnHook(null); }
+        catch (error) { console.warn('[event] 进度已保存，返回入口清理未完成', error); }
+        try { UI.hideOverlay(); }
+        catch (error) { console.warn('[event] 进度已保存，关闭事件页未完成', error); }
+        try { UI.refresh(game); }
+        catch (error) { console.warn('[event] 进度已保存，界面刷新未完成', error); }
+        return true;
+      } finally {
+        try { finishSave(); }
+        catch (error) { console.warn('[event] 保存等待状态清理未完成', error); }
+      }
+    }).finally(() => { if (closing === flight) closing = null; });
+    return flight.promise;
   }
-  function renderEventSaveRetry() {
-    const current = captureEventContext();
+  function renderEventSaveRetry(current = captureEventContext()) {
     const render = () => {
-      if (!current()) return;
+      if (!current()) return false;
       game.state = 'modal';
       eventNodeShell({ tone:'event', icon:'[[icon:notes]]', title:'事件进度尚未保存',
         sub:'本局已完成的领取、花费与投骰结果会保留。请重试保存，成功后返回地图。',
-        body:nodeOpt('eventSaveRetry', '重试保存并返回地图', '本次操作只保存进度，不重新结算') });
+        body:nodeOpt('eventSaveRetry', '重试保存并返回地图', '本次操作只保存进度，不重新结算') }, current);
       const active = eventPageBinding('eventSaveRetry', current);
       setBagReturnHook(render);
-      UI.act('eventSaveRetry', () => { if (active()) closeEventFlow(); });
-      UI.refresh(game);
+      UI.act('eventSaveRetry', () => active() ? closeEventFlow() : false);
+      try { UI.refresh(game); }
+      catch (error) { console.warn('[event] 保存重试入口已就绪，界面刷新未完成', error); }
+      return true;
     };
-    render();
+    return render();
   }
   function eventCardChoiceController() {
     return cardChoices ||= createCardChoice({

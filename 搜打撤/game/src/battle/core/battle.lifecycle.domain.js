@@ -3,6 +3,7 @@ import { esc } from '../../core/shared.js';
 import { createDeckOperations } from '../bag/battle.deck.factory.js';
 import { BATTLE_PHASES, createBattleState, transitionBattle } from '../runtime/battle.state.js';
 import { initializeEliteEnemies, blocksPlayerPowerGain, syncEliteAuras } from './battle.elite-mechanics.js';
+import { applyBossOpening } from './battle.boss-mechanics.js';
 
 /** Instance-owned state and host services are captured explicitly. */
 export function createLifecycleDomain(context) {
@@ -312,8 +313,8 @@ function createBattleLifecycle({
     instanceRuntime.clearBattlePiles();
     // 道具/资源/事件/生物卡默认不进手牌（v0.32：手牌只放可直接打出的战斗卡）；
     // 「对战开始时」装备（Q1 老板定向：持有即自动生效）不进手牌、改为开战被动
-    // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡与道具/资源/事件/生物一样不进普通战手牌
-    instanceRuntime.set$hand(instanceRuntime.G.ownedCards.filter(o => !o.stored && !o.pouchOf && !['道具', '资源', '事件', '生物', '能力卡'].includes(o.card.type) && !isBattleStartEquip(o.card)).map(o => o.uid));
+    // 随身能力卡与招式一同进入普通战手牌，按各自卡牌条件使用。
+    instanceRuntime.set$hand(instanceRuntime.G.ownedCards.filter(o => !o.stored && !o.pouchOf && !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isBattleStartEquip(o.card)).map(o => o.uid));
     resetBattleEntryState();
     const starters = createNormalStarterDeck(cardCatalog.SHA, instanceRuntime.battleState.token, cloneData);
     instanceRuntime.granted.push(...starters);
@@ -321,10 +322,10 @@ function createBattleLifecycle({
     instanceRuntime.transitionTo(BATTLE_PHASES.PLAYER);
     instanceRuntime.G.state = 'modal';
     if (resetTriggers) resetTriggers();
+    applyBossOpening(context);
     applyBattleStartPassives();
     if (runBattleStartTriggers) runBattleStartTriggers();   // M2：结构化 onBattleStart（能力卡/迎装规则）
     if (!instanceRuntime.restoringRestartCheckpoint) emitBattlePresentation?.({ kind: 'player-turn-start', turn: instanceRuntime.turn });
-    // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡不进普通战手牌（对 BOSS 编组不受限）
     if (alive().length > 1) instanceRuntime.G.log('[[icon:question]] 以一敌多：单体伤害牌选择敌人；全体牌可拖到<b>战场空地</b>或选择敌人。需要注能时先选材料，再确认释放', 'sys');
     instanceRuntime.G.log(`[[icon:cards]] 随身 <b>${instanceRuntime.hand.length}</b> 张战斗卡直接入手；另有 <b>${RULE_CONFIG.battle.normalStarterDeckSize}</b> 张本场临时初始攻击牌库，仅由抽牌效果取牌，开局与每回合不固定抽牌 · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费`, 'sys');
     requestBattleRender();
@@ -466,6 +467,7 @@ function createBattleLifecycle({
     applyNestRunes();    // 龙巢符文：羁绊与符文效果开战结算
     drawCards(R().battleStartDraw);
     applyVoidRune();     // 虚空符文：开局抽牌后复制 0 费招式
+    applyBossOpening(context);
     // 冰冻监听由 engine 持续装配，开局抽牌与之后各战斗沿同一宿主。
     applyBattleStartPassives();   // 已编入的开战装备先统一消耗，再按顺序执行开战效果
     if (runBattleStartTriggers) runBattleStartTriggers();   // M2：结构化 onBattleStart（能力卡/迎装规则）

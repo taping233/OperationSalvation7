@@ -1,0 +1,18 @@
+{
+  "experiment": "仅临时测试进程将蓝瓶药水、扰敌的能力判定替换为unsupported；未修改生产源码或正式测试配置",
+  "expectedExit": 1,
+  "actualExit": 1,
+  "expectedFailures": 2,
+  "actualFailures": 2,
+  "detected": [
+    {
+      "file": "m5-data.test.js",
+      "test": "现行卡库中已落地的规则能力 tt7-provoke 现行规则有实际消费者，关键行为与卡面一致"
+    },
+    {
+      "file": "m6-data.test.js",
+      "test": "M6 数据迁移批 D8：每张迁的卡 tt3-blue-potion schema 校验与实际消费均受支持"
+    }
+  ],
+  "result": "两个预期回归均被测试拒绝；不计作正常验证通过"
+}

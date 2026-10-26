@@ -1,5 +1,5 @@
 /* 由 game.bag.js 拆出（2026-09-22 六文件重构批4）：战后结算（battle.js 回调）——
- * bindBagMixins 装配（onBattleEnd：消耗区回充 / 掉宝箱续流 / 撤退拾回）。
+ * bindBagMixins 装配（onBattleEnd：消耗区回充 / 掉搜刮点续流 / 撤退拾回）。
  * 逐字搬迁；对壳本体的调用经 game.bag.bridge.js 的 bagSlots（禁 import 壳）。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -21,7 +21,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
   // win = true 胜利 / false 战败 / null 撤退。
   // 小怪战：使用过的卡进消耗区；BOSS 战：卡牌完好保留；
   // 注能消耗的卡（consumedUids）：无论战斗类型都进消耗区（可在火堆复原）。
-  // 胜利 100% 掉宝箱（按所在环层 / BOSS 固定 BOSS宝箱），开完宝箱再续流。
+  // 胜利 100% 掉搜刮点（按所在环层 / BOSS 固定 BOSS搜刮点），开完搜刮点再续流。
   // ESM：循环导入下本模块体可能先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
   function bindBagMixins() {
   // Esc/遮罩关背包的唯一收口（迭代评审 09-20 C-P1）：ui.js 的 Esc 分支回调 bagSlots.closeBackpack，
@@ -172,7 +172,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
               <span class="at-dot">·</span>
               <span class="at-node"><span class="at-ico">[[icon:bag]]</span><b>常逛商店</b></span>
             </div>
-            <p class="at-txt">牌快用完时，去宝箱或商店补牌。</p>
+            <p class="at-txt">牌快用完时，去搜刮点或商店补牌。</p>
           </section>
         </div>
         <div class="ov-btns"><button class="ov-btn ok" data-act="ammoTeachOk">[[icon:check]] 知道了</button></div>`, 'discover');
@@ -184,7 +184,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
       });
       UI.refresh(game);
     };
-    // 开完宝箱后的续流：普通战/首脑战（第四层 boss 格发起）都回待机
+    // 开完搜刮点后的续流：普通战/首脑战（第四层 boss 格发起）都回待机
     const settle = (preserveRewards = false) => {
       settlement.parkingRewards ||= preserveRewards;
       const parking = settlement.parkingRewards;
@@ -290,7 +290,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
       return settlement.commitPromise;
     };
     if (settlement.phase === 'saving') return settle();
-    if (win !== true) {   // 撤退：不发宝箱、不发事件奖励
+    if (win !== true) {   // 撤退：不发搜刮点、不发事件奖励
       game.pendingEventLoot = null;
       // 2026-09-07 留言：撤退要有文案和动画——复用启程过渡（撤离点场景）
       if (settlement.phase === 'pocket') {
@@ -344,7 +344,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
       });
       settlement.progressRecorded = true;
     }
-    // 事件奖励（如盗匪横行的中宝箱 ×2，开真宝箱）
+    // 事件奖励（如武装截查的密封物资箱 ×2，开真搜刮点）
     let eventChests = [];
     if (game.pendingEventLoot) {
       const loot = game.pendingEventLoot;
@@ -361,7 +361,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
     settlement.eventChests = eventChests;
     settlement.phase = 'rewardsReady';
     }
-    // 战胜 100% 掉宝箱（按所在环层 / BOSS 宝箱）
+    // 战胜 100% 掉搜刮点（按所在环层 / BOSS 搜刮点）
     const rewardContinuation = () => ({
       version:1, slotId:settlement.slotId, runId:settlement.runId, node:settlement.node,
       opts:{ isBoss:!!opts.isBoss, foeNames:(opts.foeNames?.length ? opts.foeNames : [opts.name || '敌人']).slice(),

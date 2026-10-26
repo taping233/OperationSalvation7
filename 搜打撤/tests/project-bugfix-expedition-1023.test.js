@@ -26,7 +26,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
 vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn() }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn(), ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ captureBattleContext: () => () => true, ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), captureBattleContext: () => () => true, ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
 vi.mock('../game/src/run/game.run.data.js', () => ({
   IMMEDIATE_SCENES: {}, NODE_BG: { fire: 'scene-fire-bg', altar: 'scene-altar-bg', event: 'scene-event' },
   PICKUP_BG: {}, PRELOAD_SCENES: [], SCENES: { coin:{ icon:'', title:'硬币', lines:['风雪里的零钱'] } },
@@ -93,7 +93,7 @@ beforeEach(async () => {
       cardHTML: c => c.name,
       sellPrice: () => 1,
     },
-    MAP: { chestKinds:{ small:{ name:'小宝箱' } } },
+    MAP: { chestKinds:{ small:{ name:'小型物资箱' } } },
     Base: { isSha: () => false, bagCap:() => st.bagCapN },
     Motion: undefined,
   };
@@ -169,7 +169,7 @@ it('营火回血演出中连点和退出不重复结算，演出结束才开放�
   try {
     const { openFireRest } = await importAltar(); const done = vi.fn();
     openFireRest(done); document.querySelector('.sc-fire').animate = vi.fn();
-    const healing = acts.fireHeal();
+    const healing = acts.fireHeal(); await vi.advanceTimersByTimeAsync(0);
     expect(document.querySelector('.fire-rest-feedback.is-heal')).not.toBeNull();
     expect(st.game.hp).toBe(30);
     await acts.fireHeal(); await acts.fireRestore(); await acts.fireDone();
@@ -188,7 +188,7 @@ it('营火复原演出用消耗区实际卡，切页后迟到完成不重绘旧�
     const card = { id:'variant-missing-from-catalog', name:'强化过的旧牌', type:'武术', desc:'强化快照' };
     st.game.usedPocket = [{ card, count:2 }];
     openFireRest(); document.querySelector('.sc-fire').animate = vi.fn();
-    const restoring = acts.fireRestore();
+    const restoring = acts.fireRestore(); await vi.advanceTimersByTimeAsync(0);
     expect(document.querySelectorAll('.fire-rest-reveal-card')).toHaveLength(2);
     expect(document.querySelector('.fire-rest-feedback').textContent).toContain(card.name);
     expect(st.game.ownedCards).toHaveLength(2); expect(st.game.usedPocket).toHaveLength(0);
@@ -235,7 +235,7 @@ it('祭坛献祭先保存已支付状态，演出中不重复扣牌，换页不�
     st.game.ownedCards=Array.from({length:3},(_,i)=>({uid:`s${i}`,card:{id:`c${i}`,name:`祭品${i}`,type:'法术'}}));
     openAltarRitual();acts.altarOn3();UI.el.ovBody.animate=vi.fn();
     for(let i=0;i<3;i++)acts.sacPick({uid:`s${i}`});
-    const result=acts.sacConfirm();
+    const result=acts.sacConfirm();await vi.advanceTimersByTimeAsync(0);
     expect(st.game.ownedCards).toEqual([]);expect(st.game.altarActivated).toBe(true);expect(st.game.altarRewardPending).toBe(true);
     expect(st.saves).toHaveLength(1);expect(document.querySelectorAll('.fire-rest-reveal-card')).toHaveLength(3);
     acts.sacConfirm();expect(st.saves).toHaveLength(1);

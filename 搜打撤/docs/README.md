@@ -11,7 +11,7 @@
 | 制作目标与方案 | [制作资料](production/README.md)、[路线图](roadmap.md)、[UI 提案](UI-TOKEN-SYSTEM-PROPOSAL.md) | 区分已确认目标、候选方案与待核实实现 |
 | 状态与决策 | [STATUS](STATUS.md)、[REGISTRY](PARALLEL-REGISTRY.md)、[PENDING](PENDING.md) | 分别导航交付、记录占用归属、记录待决策事项 |
 | 生成资料 | [游戏全书](game-compendium.md) | 查内容数据；通过生成器更新 |
-| 历史与证据 | [archive](archive/README.md)、[evidence](evidence/README.md)、[模块记录](modules/README.md)、`nightshift/` | 有具体证据或经验缺口时查阅；只代表记录时点 |
+| 历史与证据 | [archive](archive/README.md)、[evidence](evidence/README.md)、[模块记录](modules/README.md)、`nightshift/` | 按具体缺口查阅，记录对应版本和时点 |
 | 工具与参考 | [工具箱](AGENT-TOOLBOX.md)、[界面美术指南](UI-ART-OVERHAUL-GUIDE.md)、[预览](previews/README.md) | 按任务选择能力或参考，核对其适用范围 |
 
 ## 双端工作流
@@ -30,7 +30,7 @@ Codex / ZCode 共用项目规则和事实，各自使用当前平台工具。项
 | PENDING.md | 唯一待决策台账；backlog 归 roadmap，已决记录回写来源 |
 | 平台记忆 | 稳定经验与历史依据；现行架构归 docs，热点/活账只放指针 |
 
-当前资料不能回答问题时，再从[工具箱的记忆入口](AGENT-TOOLBOX.md#意图--工具)检索指定主题。历史经验使用前核对适用条件与当前实现。
+现行资料存在经验缺口时，从[工具箱的记忆入口](AGENT-TOOLBOX.md#意图--工具)检索指定主题，结合当前实现核对适用条件。
 
 ## 按改动找文档
 
@@ -38,7 +38,7 @@ Codex / ZCode 共用项目规则和事实，各自使用当前平台工具。项
 
 | 要改什么 | 先看（现行规范） | 按需补充（参考、覆盖或时点证据） |
 | --- | --- | --- |
-| 找代码位置 / 模块职责 | [源码导航](../game/src/README.md)、[架构](architecture.md) | [当前工作区与交付](STATUS.md)；不要按历史文件名猜现行入口 |
+| 找代码位置 / 模块职责 | [源码导航](../game/src/README.md)、[架构](architecture.md) | [当前工作区与交付](STATUS.md)，以现行源码确认入口 |
 | 战斗逻辑 / 数值 / 牌效 | [规则](rules.md)、[架构](architecture.md) | [质量门](quality-gates.md)（验收与全量口径） |
 | 卡牌数据 / 规则文本 | [卡牌入口](cards/README.md)、[术语](terminology.md)，先核对运行卡库与解释器 | [迁移矩阵](M-BATCH-MATRIX.md)、[排除清单](M-BATCH-EXCLUSIONS.md)（测试固定路径）、[M 批结果](archive/card-migration-2026-09-27/README.md) |
 | 存档 / 基地写入 | [存档契约](save-format.md) | [直写路径审计 09-29](BASE-DIRECT-WRITE-AUDIT-2026-09-29.md)（直写红线、保留簇与挂账） |
@@ -54,7 +54,7 @@ Codex / ZCode 共用项目规则和事实，各自使用当前平台工具。项
 | 新特性 / 制作目标 | [项目章程](production/project/CHARTER.md)、[玩法概览](production/design/GDD.md)、[路线图](roadmap.md) | [UI Token 提案](UI-TOKEN-SYSTEM-PROPOSAL.md)（候选方案）、[旧规格流程](archive/SPEC-PROCESS.md) |
 | 叙事 / 事件 | [设计入口](design.md)、`narrative/events.ink` | [游戏全书](game-compendium.md)（生成物，不手改） |
 | 文档编辑 / 归档 | 根 [文档规则](../../AGENTS.md#文档写作与维护)、[流程指南](WORKFLOW-TOOLS.md#归档与替代) | [09-28 归档审阅记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)（涉及该批次文件时核对） |
-| 已删资源、旧包与临时目录在哪里 | [清理后文件与当前交付](CLEANUP-STATUS.md) | 各批精确清单、原始指纹和执行回执沿该入口查询；历史路径不代表当前可用 |
+| 已删资源、旧包与临时目录在哪里 | [清理后文件与当前交付](CLEANUP-STATUS.md) | 沿入口查询批次清单、原始指纹与执行回执，使用前核对当前路径 |
 
 ## 现行说明
 

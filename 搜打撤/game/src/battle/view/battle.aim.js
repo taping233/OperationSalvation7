@@ -31,9 +31,6 @@ import { commands, getSnapshot, getBattleLiveness, findEffectiveCard as findCard
     if (reason) showThoughtBubble(reason);
     return !!reason;
   }
-  // 兼容旧调用名；战斗手牌不再打开独立详情层。
-  function closeHandCardDetails() { return false; }
-  function showHandCardDetails() { return false; }
 import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble } from './battle.hover.js';
 import { createTargetSession, isTargetableEnemy } from '../core/battle.target-session.js';
 import { isAreaEffect, isRandomEnemyEffect, itemTargetSideFor } from '../effects/battle.target-rules.js';
@@ -508,7 +505,6 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
 
   function startAim(e, el, kind) {
     if (e.button !== 0 || e.isPrimary === false || e.isComposing) return;
-    if (/** @type {BattleElement} */ (document.querySelector('#overlay .bt-hand-detail'))) return;
     const snap = getSnapshot();
     const { busy, infusing, discovering, choosing } = snap;
     syncSubmittedCardPoses();
@@ -978,4 +974,4 @@ if (!document.getElementById('btMisTargetStyle')) {
   document.head.insertAdjacentHTML('beforeend',
     '<style id="btMisTargetStyle">@keyframes bt-mis-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}88%{transform:translateX(2px)}}.bt-foe.mis-target{animation:bt-mis-shake .45s cubic-bezier(.36,.07,.19,.97) both;outline:2px solid #d05b4b;outline-offset:3px;border-radius:6px;filter:drop-shadow(0 0 8px rgba(208,91,75,.65))!important}</style>');
 }
-export { cancelBattleSelection, aim, aimPlayedAt, clickSelectedUid, updateClickSelectionUI, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, showHandCardDetails, closeHandCardDetails, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, cancelClickSelection, setClickSelectedUid, syncSubmittedCardPoses };
+export { cancelBattleSelection, aim, aimPlayedAt, clickSelectedUid, updateClickSelectionUI, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, cancelClickSelection, setClickSelectedUid, syncSubmittedCardPoses };

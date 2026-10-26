@@ -4,7 +4,7 @@ const rotations = [[0,0],[-90,0],[0,-90],[0,90],[90,0],[0,180]];
 const pips = [[5],[1,9],[1,5,9],[1,3,7,9],[1,3,5,7,9],[1,3,4,6,7,9]];
 const pose = (value, extra = 0) => {
   const [x,y] = rotations[(value || 1) - 1] || rotations[0];
-  return `rotateX(-16deg) rotateY(-20deg) rotateX(${x + extra}deg) rotateY(${y + extra * 1.5}deg)`;
+  return `rotateX(-32deg) rotateY(-20deg) rotateX(90deg) rotateX(${x + extra}deg) rotateY(${y + extra * 1.5}deg)`;
 };
 
 /** @param {number} sides @param {number | null} result */

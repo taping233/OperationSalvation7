@@ -1,8 +1,17 @@
 const SOURCES = { 'altar-reward':3, 'altar-offering':2 };
 const keyAt = game => `${game.layerIdx},${game.trackPos}`;
 
+export function validAltarFragmentChoice(value) {
+  return !!value && typeof value === 'object' && !Array.isArray(value)
+    && typeof value.characterId === 'string' && value.characterId.length > 0
+    && Array.isArray(value.cardIds) && value.cardIds.length === 1
+    && typeof value.cardIds[0] === 'string' && value.cardIds[0].length > 0
+    && (value.taken === null || value.taken === 0);
+}
+
 export function validNodeRestore(record) {
   return !!record && record.version === 1 && record.type === 'restore'
+    && (record.altarFragmentChoice === undefined || validAltarFragmentChoice(record.altarFragmentChoice))
     && Object.hasOwn(SOURCES, record.source)
     && Number.isInteger(record.total) && record.total > 0 && record.total <= SOURCES[record.source]
     && Number.isInteger(record.left) && record.left >= 0 && record.left <= record.total
@@ -28,11 +37,13 @@ export function beginNodeRestore(game, { source, picks }) {
   if (validNodeRestore(existing)) {
     if (existing.source === source) return existing;
     if (!existing.finished) return null;
-  } else if (existing) return null;
+  } else if (existing != null && !(existing.version === 1 && existing.type === 'altar'
+    && validAltarFragmentChoice(existing.altarFragmentChoice))) return null;
   const hpBefore = game.hp;
-  if (source === 'altar-reward') game.heal(10);
+  if (source === 'altar-reward') game.heal(10, { deferFeedback:() => {} });
   const record = { version:1, type:'restore', source, total:picks, left:picks, restoredIds:[],
     hpBefore, hpAfter:game.hp, hpGain:Math.max(0, game.hp - hpBefore), finished:false };
+  if (existing?.altarFragmentChoice !== undefined) record.altarFragmentChoice = existing.altarFragmentChoice;
   game.nodeRewards[key] = record;
   return record;
 }

@@ -39,7 +39,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
 vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn() }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn(), ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ captureBattleContext: () => () => true, ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), captureBattleContext: () => () => true, ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
 vi.mock('../game/src/run/game.run.data.js', () => ({
   IMMEDIATE_SCENES: {}, NODE_BG: { fire: 'scene-fire-bg', altar: 'scene-altar-bg', event: 'scene-event' },
   PICKUP_BG: {}, PRELOAD_SCENES: [], SCENES: { coin:{ icon:'', title:'硬币', lines:['风雪里的零钱'] } },
@@ -123,17 +123,17 @@ it('献祭道具：确认后上锁+道具移除+复原页打开，复原 min(2, 
   acts.sacPick({ uid: 'item-1' });
   expect(document.querySelector('[data-act="sacPick"]').getAttribute('aria-pressed')).toBe('true');
   expect(document.activeElement).toBe(document.querySelector('[data-act="sacPick"]'));
-  acts.sacConfirm();
+  await acts.sacConfirm();
   expect(game.altarItemSacrificed).toBe(true);          // 确认才上锁
   expect(game.ownedCards.some(o => o.uid === 'item-1')).toBe(false);   // 道具已献
   const savesAtConfirm = st.saves.length;
   expect(savesAtConfirm).toBeGreaterThan(0);
   // 复原页：可复原=消耗甲/消耗乙（装备被滤掉），picks=min(2,2)=2
   expect(document.querySelector('[data-act="restoreOne"]')).not.toBeNull();
-  acts.restoreOne({ name: '消耗甲' });
+  await acts.restoreOne({ name: '消耗甲' });
   expect(game.usedPocket.some(p => p.card.name === '消耗甲')).toBe(false);
   expect(game.ownedCards.some(o => o.card.name === '消耗甲')).toBe(true);
-  acts.restoreOne({ name: '消耗乙' });
+  await acts.restoreOne({ name: '消耗乙' });
   expect(game.ownedCards.some(o => o.card.name === '消耗乙')).toBe(true);
   // left=0 自动收尾 → done 回调重开祭坛主面板（未激活 → 弃3 选项仍在）
   expect(document.querySelector('[data-act="altarOn3"]')).not.toBeNull();
@@ -183,7 +183,7 @@ it('弃 3 激活：卡不足 3 张拒开选卡器；满 3 张确认后激活+消
   game.ownedCards.push({ uid: '2', card: { name: '卡2', type: '法术' } });
   acts.altarOn3();
   ['0', '1', '2'].forEach(uid => acts.sacPick({ uid }));
-  acts.sacConfirm();
+  await acts.sacConfirm();
   expect(game.altarActivated).toBe(true);
   expect(game.visited['0,0']).toBe(1);   // 激活成功才消耗本格
   expect(game.ownedCards).toHaveLength(0);
@@ -238,14 +238,15 @@ it('碎片兑换：满包拒收不扣 2 碎片不上锁；有格时发卡+扣碎
   game.bagCapN = 0;
   st.bagCapN = 0;
   const { openAltarRitual } = await importAltar();
+  const all=window.SDT.Cards.all;window.SDT.Cards.all=()=>[...all(),...window.SDT.Cards.classPool()];
   openAltarRitual(st.curLayer.logical[0].def);
-  acts.altarFragHero();
+  await acts.altarFragHero();
   expect(game.fragments).toBe(2);            // 发卡被拒 → 不白扣碎片（532 行注释口径）
   expect(game.altarActivated).toBeFalsy();
   expect(game.ownedCards).toHaveLength(0);
 
   st.bagCapN = 10;
-  acts.altarFragHero();
+  await acts.altarFragHero();
   expect(game.ownedCards.map(o => o.card.name)).toEqual(['能力甲']);
   expect(game.fragments).toBe(0);
   expect(game.altarActivated).toBe(true);
@@ -275,7 +276,7 @@ it('复原页：picks=1（战地整备复原分支）复原 1 张自动收尾；
   const { openPocketRestore } = await importScenes();
   let done = 0;
   openPocketRestore(1, () => { done++; });
-  acts.restoreOne({ name: '消耗甲' });
+  await acts.restoreOne({ name: '消耗甲' });
   expect(done).toBe(1);   // left=0 自动 finish，不重复收尾
   expect(game.usedPocket[0].count).toBe(1);   // 同名堆只扣 1 张
   expect(game.ownedCards).toHaveLength(1);
@@ -296,7 +297,7 @@ it('复原页：满包拒绝——口袋不动、卡不进包、可继续点收�
   const { openPocketRestore } = await importScenes();
   let done = 0;
   openPocketRestore(2, () => { done++; });
-  acts.restoreOne({ name: '消耗甲' });
+  await acts.restoreOne({ name: '消耗甲' });
   expect(game.usedPocket.some(p => p.card.name === '消耗甲')).toBe(true);   // 留在口袋
   expect(game.ownedCards).toHaveLength(1);
   await acts.fireDone();

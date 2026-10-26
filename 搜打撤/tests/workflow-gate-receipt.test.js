@@ -1,14 +1,13 @@
+// @vitest-environment node
+import { createFixtureCopies } from './helpers/fixture-copies.js';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { chmodSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, symlinkSync, unlinkSync, writeFileSync } from 'node:fs';
-import os from 'node:os';
+import { chmodSync, lstatSync, mkdirSync, readFileSync, readlinkSync, symlinkSync, unlinkSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterAll, describe, expect, it } from 'vitest';
 import { runStaged, stagedPlan } from '../scripts/workflow-staged.mjs';
 import { dependencyBytes, gateInputScope, gateReceipt, inspectGateReceipt, verifyGateReceipt } from '../scripts/workflow-gate-receipt.mjs';
 
-const roots = [];
-function fixture() {
-  const repo = mkdtempSync(path.join(os.tmpdir(), 'sdt-receipt-test-')); roots.push(repo);
+function initializeFixture(repo) {
   const root = path.join(repo, '搜打撤');
   for (const dir of ['scripts', 'tests', 'node_modules', 'docs']) mkdirSync(path.join(root, dir), { recursive: true });
   const git = (...args) => execFileSync('git', ['-c', 'core.autocrlf=false', ...args], { cwd: repo, encoding: 'utf8' });
@@ -27,14 +26,40 @@ else if(readFileSync('scripts/value.mjs','utf8')!=='staged') process.exitCode=9;
 else console.log('fixture gate passed');`);
   git('init', '-q'); git('add', '.'); git('-c', 'user.name=fixture', '-c', 'user.email=f@x.invalid', 'commit', '-qm', 'base');
   writeFileSync(path.join(root, 'scripts/value.mjs'), 'staged'); git('add', '搜打撤/scripts/value.mjs');
+}
+const fixtureCopies = createFixtureCopies('sdt-receipt-test-', initializeFixture);
+afterAll(() => fixtureCopies.dispose());
+function fixture() {
+  const repo = fixtureCopies.create();
+  const root = path.join(repo, '搜打撤');
+  const git = (...args) => execFileSync('git', ['-c', 'core.autocrlf=false', ...args], { cwd: repo, encoding: 'utf8' });
   return { root, repo, git, verify: file => verifyGateReceipt(root, file, stagedPlan(root)) };
 }
 const options = { task: 'receipt', date: '2026-10-02', json: true };
+let linkUnavailable;
+function linkCase(body) {
+  return context => {
+    if (linkUnavailable === undefined) {
+      linkUnavailable = null;
+      if (process.platform === 'win32') {
+        const probe = fixtureCopies.createEmpty();
+        writeFileSync(path.join(probe, 'target'), 'probe');
+        try { symlinkSync('target', path.join(probe, 'link'), 'file'); }
+        catch (error) {
+          if (!['EPERM', 'EACCES', 'ENOTSUP'].includes(error.code)) throw error;
+          linkUnavailable = `Windows符号链接不可用（${error.code}），保留真实链接验证`;
+        }
+      }
+    }
+    if (linkUnavailable) context.skip(linkUnavailable);
+    return body(context);
+  };
+}
 function linkOrSkip(context, target, location, type = 'file') {
   try { symlinkSync(target, location, type); }
   catch (error) {
     if (process.platform === 'win32' && ['EPERM', 'EACCES', 'ENOTSUP'].includes(error.code)) {
-      context.skip();
+      context.skip(`Windows符号链接不可用（${error.code}），保留真实链接验证`);
     } else throw error;
   }
 }
@@ -56,16 +81,6 @@ function nestedExecutable(f, { container = 'global-prefix/node_modules', pkg = '
   writeFileSync(file, '#!/usr/bin/env node\n');
   return { modules, packageRoot, manifest, file, link: path.join(modules, '.bin', command), target: '../' + pkg + '/bin/which' };
 }
-afterEach(() => {
-  for (const root of roots.splice(0)) {
-    const relative = path.relative(os.tmpdir(), root);
-    if (!relative.startsWith('sdt-receipt-test-') || relative.includes(path.sep)) throw new Error('拒绝清理非自有 fixture');
-    rmSync(root, { recursive: true, force: true });
-    if (existsSync(root) && process.platform === 'win32') execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command',
-      'Remove-Item -LiteralPath $env:SDT_RECEIPT_TEST_CLEANUP_PATH -Recurse -Force -ErrorAction Stop'], { env: { ...process.env, SDT_RECEIPT_TEST_CLEANUP_PATH: root } });
-  }
-});
-
 describe('冻结 index 成功报告的严格复用', () => {
   it('静态资产审计锁完整资产目录与债务登记，质量配置变更范围也进指纹', () => {
     const f = fixture(), plan = stagedPlan(f.root);
@@ -82,7 +97,7 @@ describe('冻结 index 成功报告的严格复用', () => {
       expect(gateReceipt(changed, gate, 'dependencies', scope).changesSha256, file).not.toBe(receipt.changesSha256);
     }
   });
-  it('标准 npm .bin 文件链接保留文本与目标字节，隔离副本摘要一致', context => {
+  it('标准 npm .bin 文件链接保留文本与目标字节，隔离副本摘要一致', linkCase(context => {
     const f = fixture(), bin = executable(f);
     linkOrSkip(context, '../example/bin/cli.js', bin.link);
     const copiedRoot = path.join(f.repo, 'copy');
@@ -94,8 +109,8 @@ describe('冻结 index 成功报告的严格复用', () => {
     expect(dependencyBytes(copiedRoot)).toBe(before);
     writeFileSync(bin.file, 'changed target');
     expect(dependencyBytes(f.root)).not.toBe(before);
-  });
-  it('标准 npm 嵌套 which bin 可冻结且复制后摘要一致', context => {
+  }));
+  it('标准 npm 嵌套 which bin 可冻结且复制后摘要一致', linkCase(context => {
     const f = fixture();
     const nested = path.join(f.root, 'node_modules/global-prefix/node_modules');
     mkdirSync(path.join(nested, '.bin'), { recursive: true });
@@ -109,21 +124,21 @@ describe('冻结 index 成功报告的严格复用', () => {
     expect(dependencyBytes(copy)).toBe(before);
     writeFileSync(path.join(nested, 'which/bin/which'), 'changed nested executable');
     expect(dependencyBytes(f.root)).not.toBe(before);
-  });
+  }));
   for (const opts of [
     { container: '@scope/parent/node_modules', pkg: '@tools/which' },
     { container: 'parent/node_modules/child/node_modules', pkg: '@tools/which', command: 'lookup', bin: { lookup: './bin/which' } },
-  ]) it('支持 scoped 包及多层 npm bin：' + opts.container, context => {
+  ]) it('支持 scoped 包及多层 npm bin：' + opts.container, linkCase(context => {
     const f = fixture(), bin = nestedExecutable(f, opts);
     linkOrSkip(context, bin.target, bin.link);
     expect(dependencyBytes(f.root)).toMatch(/^[a-f0-9]{64}$/);
-  });
+  }));
   for (const [kind, target] of [
     ['根逃逸', '../../../../outside.js'], ['跨本层 node_modules', '../../../example/bin/cli.js'],
     ['绝对路径', 'absolute'], ['Windows 绝对路径', 'C:\\tools\\which'], ['反斜线', '../which\\bin/which'],
     ['路径回退', '../which/bin/../bin/which'], ['悬空', '../which/bin/missing'],
     ['目录', '../which/bin'], ['自循环', '../.bin/which'], ['缓存', '../.cache/which'],
-  ]) it('嵌套 bin 拒绝' + kind, context => {
+  ]) it('嵌套 bin 拒绝' + kind, linkCase(context => {
     const f = fixture(), bin = nestedExecutable(f);
     executable(f);
     writeFileSync(path.join(f.root, 'outside.js'), 'outside');
@@ -131,29 +146,29 @@ describe('冻结 index 成功报告的严格复用', () => {
     writeFileSync(path.join(bin.modules, '.cache/which'), 'cache');
     linkOrSkip(context, target === 'absolute' ? bin.file : target, bin.link, kind === '目录' ? 'dir' : 'file');
     expect(() => dependencyBytes(f.root)).toThrow();
-  });
+  }));
   for (const binDeclaration of [undefined, { other: 'bin/which' }, { which: 'bin/other' },
     { which: '../which/bin/which' }, { which: '/bin/which' }, { which: 'C:\\bin\\which' }, { which: 7 }]) {
-    it('嵌套 bin 必须有匹配且安全的包声明：' + JSON.stringify(binDeclaration), context => {
+    it('嵌套 bin 必须有匹配且安全的包声明：' + JSON.stringify(binDeclaration), linkCase(context => {
       const f = fixture(), bin = nestedExecutable(f);
       writeFileSync(bin.manifest, JSON.stringify({ name: 'which', bin: binDeclaration }));
       linkOrSkip(context, bin.target, bin.link);
       expect(() => dependencyBytes(f.root)).toThrow('bin 声明');
-    });
+    }));
   }
-  it('字符串 bin 声明不得冒充另一命令', context => {
+  it('字符串 bin 声明不得冒充另一命令', linkCase(context => {
     const f = fixture(), bin = nestedExecutable(f, { command: 'spoof' });
     linkOrSkip(context, bin.target, bin.link);
     expect(() => dependencyBytes(f.root)).toThrow('bin 声明');
-  });
+  }));
   for (const container of ['global-prefix', 'global-prefix/tools/node_modules', 'global-prefix/.cache/node_modules']) {
-    it('拒绝非 npm 层级的伪 .bin：' + container, context => {
+    it('拒绝非 npm 层级的伪 .bin：' + container, linkCase(context => {
       const f = fixture(), bin = nestedExecutable(f, { container });
       linkOrSkip(context, bin.target, bin.link);
       expect(() => dependencyBytes(f.root)).toThrow('非受控');
-    });
+    }));
   }
-  it('嵌套 bin 拒绝链式目标、目录中转、manifest 链接与普通包内链接', context => {
+  it('嵌套 bin 拒绝链式目标、目录中转、manifest 链接与普通包内链接', linkCase(context => {
     const f = fixture(), bin = nestedExecutable(f);
     const alias = path.join(bin.packageRoot, 'bin/alias');
     linkOrSkip(context, 'which', alias);
@@ -171,8 +186,8 @@ describe('冻结 index 成功报告的严格复用', () => {
     linkOrSkip(context, 'manifest.json', bin.manifest);
     linkOrSkip(context, bin.target, bin.link);
     expect(() => dependencyBytes(f.root)).toThrow('包声明必须是普通文件');
-  });
-  it('相同目标字节也锁定链接文本，并在 POSIX 锁定执行位', context => {
+  }));
+  it('相同目标字节也锁定链接文本，并在 POSIX 锁定执行位', linkCase(context => {
     const f = fixture(), bin = executable(f);
     linkOrSkip(context, '../example/bin/cli.js', bin.link);
     const before = dependencyBytes(f.root);
@@ -184,11 +199,11 @@ describe('冻结 index 成功报告的严格复用', () => {
       chmodSync(bin.file, 0o755);
       expect(dependencyBytes(f.root)).not.toBe(linked);
     }
-  });
+  }));
   for (const [kind, value] of [
     ['越界', '../../outside.js'], ['绝对路径', 'absolute'], ['悬空', '../example/bin/missing.js'],
     ['目录', '../example/bin'], ['自循环', '../.bin/example'], ['缓存', '../.cache/cli.js'],
-  ]) it('拒绝' + kind + ' .bin 链接', context => {
+  ]) it('拒绝' + kind + ' .bin 链接', linkCase(context => {
     const f = fixture(), bin = executable(f);
     writeFileSync(path.join(f.root, 'outside.js'), 'outside');
     mkdirSync(path.join(f.root, 'node_modules/.cache'), { recursive: true });
@@ -196,8 +211,8 @@ describe('冻结 index 成功报告的严格复用', () => {
     const target = value === 'absolute' ? bin.file : value;
     linkOrSkip(context, target, bin.link, kind === '目录' ? 'dir' : 'file');
     expect(() => dependencyBytes(f.root)).toThrow();
-  });
-  it('拒绝包内链接、链式文件链接与目录中转链接', context => {
+  }));
+  it('拒绝包内链接、链式文件链接与目录中转链接', linkCase(context => {
     const f = fixture(), bin = executable(f);
     const alias = path.join(f.root, 'node_modules/example/bin/alias.js');
     linkOrSkip(context, 'cli.js', alias);
@@ -210,7 +225,7 @@ describe('冻结 index 成功报告的严格复用', () => {
     linkOrSkip(context, 'bin', directory, 'dir');
     linkOrSkip(context, '../example/linked/cli.js', bin.link);
     expect(() => dependencyBytes(f.root)).toThrow('普通文件');
-  });
+  }));
   it('拒绝依赖包目录链接，包括无需管理员权限的 Windows junction', context => {
     const f = fixture();
     executable(f);
@@ -218,7 +233,7 @@ describe('冻结 index 成功报告的严格复用', () => {
       process.platform === 'win32' ? 'junction' : 'dir');
     expect(() => dependencyBytes(f.root)).toThrow('非受控');
   });
-  it('带真实 .bin 链接的隔离验收可复用，目标字节变化使报告失效', async context => {
+  it('带真实 .bin 链接的隔离验收可复用，目标字节变化使报告失效', linkCase(async context => {
     const f = fixture(), bin = executable(f);
     linkOrSkip(context, '../example/bin/cli.js', bin.link);
     const result = await runStaged(f.root, options);
@@ -226,7 +241,7 @@ describe('冻结 index 成功报告的严格复用', () => {
     expect(f.verify(result.report).mode).toBe('quick');
     writeFileSync(bin.file, 'changed executable');
     expect(() => f.verify(result.report)).toThrow('依赖字节');
-  }, 60_000);
+  }), 60_000);
   it('真实隔离报告可复用；证据、状态暂存和纯状态 HEAD 前进不废弃代码证据', async () => {
     const f = fixture(), start = performance.now(), result = await runStaged(f.root, options);
     const isolatedMs = performance.now() - start, verifyStart = performance.now();

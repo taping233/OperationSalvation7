@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it, vi } from 'vitest';
 import { SceneMusicPlayer } from '../game/src/audio/sound.music.player.js';
 it('G10 媒体解码失败只报告一次、不切换解码后端，旧回调/取消不会启动已离场音乐',()=>{

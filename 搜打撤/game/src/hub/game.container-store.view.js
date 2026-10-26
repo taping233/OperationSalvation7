@@ -4,7 +4,7 @@ import '../../css/collection-workspace.css';
 import { esc, escAttr } from '../core/shared.js';
 
 // Shared presentation for the two actual backpack containers. Transfers remain caller-owned.
-export function containerStoreHTML({ title, icon, prefix, count, cap, stored, available, type, cardHTML, reason, help }) {
+export function containerStoreHTML({ title, icon, prefix, count, cap, stored, available, type, cardHTML, reason, help, notice = '' }) {
   let index = 0;
   const cards = (stacks, take) => stacks.map(st => {
     const i = index++, action = take ? '整叠取出' : '整叠存入';
@@ -25,16 +25,17 @@ export function containerStoreHTML({ title, icon, prefix, count, cap, stored, av
       <section><header class="container-column-head"><h4>${title}中</h4></header><div class="pearl-store-list collection-list">${cards(stored, true)}</div></section>
       <section><header class="container-column-head"><h4>随身背包</h4></header><div class="pearl-store-list collection-list">${cards(available, false)}</div></section>
     </div>
-    <footer class="battle-decision-actions"><details class="container-store-help"><summary>收纳说明</summary><p>${esc(help)}</p></details>
+    <footer class="battle-decision-actions">${notice}<details class="container-store-help"><summary>收纳说明</summary><p>${esc(help)}</p></details>
       <div class="ov-btns"><button type="button" class="ov-btn ok" data-act="${prefix}Back" data-cancel="true" aria-label="收好${title}，返回背包">[[icon:arrow]] 返回背包</button></div></footer>
   </section>`;
 }
 
 export function captureContainerView(root) {
   if (!root) return null;
-  const active = root.contains(document.activeElement) ? document.activeElement : null;
+  const active = root.contains(document.activeElement) ? /** @type {HTMLElement} */ (document.activeElement) : null;
   return {
-    focused: active ? { .../** @type {HTMLElement} */ (active).dataset, summary: active.tagName === 'SUMMARY' } : null,
+    focused: active ? { .../** @type {HTMLElement} */ (active).dataset, summary: active.tagName === 'SUMMARY',
+      order:[...root.querySelectorAll('button[data-act]:not(:disabled)')].filter(button => button.dataset.act === active.dataset.act).indexOf(active) } : null,
     helpOpen: !!root.querySelector('details')?.open,
     scroll: [root.parentElement, ...root.querySelectorAll('.battle-decision-content, .pearl-store-list')]
       .map(el => ({ top: el.scrollTop, left: el.scrollLeft })),
@@ -53,6 +54,8 @@ export function restoreContainerFocus(root, state, back) {
   if (!focused) return;
   if (focused.summary) { help?.querySelector('summary')?.focus({ preventScroll:true }); return; }
   const buttons = [...root.querySelectorAll('button[data-act]:not(:disabled)')];
+  const sameAction = buttons.filter(button => button.dataset.act === focused.act);
   (buttons.find(b => b.dataset.act === focused.act && b.dataset.name === focused.name)
-    || buttons.find(b => b.dataset.act === focused.act) || buttons.find(b => b.dataset.act === back))?.focus({ preventScroll: true });
+    || sameAction[Math.max(0, Math.min(focused.order ?? 0, sameAction.length - 1))]
+    || buttons.find(b => b.dataset.act === back))?.focus({ preventScroll: true });
 }

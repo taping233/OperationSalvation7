@@ -1,3 +1,4 @@
+// @vitest-environment node
 // One bridge runs eight offline node:test fixtures; the TAP guard has its own contract.
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';

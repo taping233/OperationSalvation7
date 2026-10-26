@@ -79,7 +79,7 @@ it('购买等待真实回执，连点不重复成交；迟到回执不刷新新�
   await click('tradeShopBuy');
   expect(base.purchase).toHaveBeenCalledOnce();
   expect(sound.ding).not.toHaveBeenCalled();
-  expect(notice).not.toHaveBeenCalled();
+  expect(notice).toHaveBeenCalledWith('正在购入普通卡…');
   const renders = render.mock.calls.length;
   base.slot = 2; finish({ ok:true }); await pending;
   expect(render).toHaveBeenCalledTimes(renders);
@@ -234,7 +234,7 @@ describe('独立交易所的现行经济与同页交易台', () => {
     expect(base.data).toEqual(before); expect(notice).toHaveBeenLastCalledWith('写盘失败', 'warn');
     sellMode(); base.sellStashCards.mockReturnValue({ ok: false, why: 'save' }); await click('tradeShopSellOne');
     expect(base.data).toEqual(before);
-    expect(notice).toHaveBeenLastCalledWith('基地存档未保存，请重新载入后重试', 'warn');
+    expect(notice).toHaveBeenLastCalledWith('基地存档未保存，请重试', 'warn');
     expect(host.querySelector('.trade-v5-desk h3').textContent).toBe('普通卡');
   });
 

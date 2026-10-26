@@ -7,7 +7,7 @@
 
 const SLAM_SKILLS = {
   '侠客': { kind: 'fixed',    name: '刺击', icon: 'swords', cost: 1, dmg: 2, needsTarget: true,
-            hint: '1 费 · 造成 2 点固定伤害 · 不消耗卡牌', aimDesc: '2 点固定伤害' },
+            hint: '1 费 · 造成 2 点固定伤害', aimDesc: '2 点固定伤害' },
   '战士': { kind: 'attack',   name: '猛击', icon: 'swords', cost: 2, needsTarget: true,
             hint: '2 费 · 攻击一次（等同打出一张初始攻击）· 不消耗卡牌', aimDesc: '攻击一次' },
   '法师': { kind: 'acquire',  name: '搜刮', icon: 'cards',  cost: 1, needsTarget: false,

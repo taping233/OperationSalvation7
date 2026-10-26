@@ -18,7 +18,7 @@ import { isClassCard } from '../../cards/card-rarity.js';
  * Specified predicates use the historical restricted-pool rules. General pools
  * retain the historical `otherCls` fallback's operator precedence.
  *
- * 普通随机和指定发现池直接排除职业卡，不由目录回调重新放行。
+ * 普通随机和指定发现池直接排除职业卡及棱彩能力卡，不由目录回调重新放行。
  * 只有明确职业池（谓词 allowClassCards、otherCls 或职业稀有度）可放行。
  * 非职业卡按调用方的明确池谓词筛选，不额外叠加目录门。
  * @param {readonly DiscoverCandidateCard[]} catalog
@@ -47,7 +47,7 @@ export function buildDiscoverPool(catalog, {
  * @returns {boolean}
  */
 export function isDiscoverClassAllowed(card, { pred, rarity, otherCls } = {}) {
-  return !isClassCard(card) || !!otherCls || rarity === '职业'
+  return (!isClassCard(card) && card.type !== '能力卡') || !!otherCls || rarity === '职业'
     || /** @type {{ allowClassCards?: boolean } | null | undefined} */ (/** @type {unknown} */ (pred))?.allowClassCards === true;
 }
 

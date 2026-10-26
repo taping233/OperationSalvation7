@@ -19,7 +19,7 @@ beforeEach(async () => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('Base 宠物蛋保底命令', () => {
-  it('固定基础概率不受未出次数或战斗次数影响，第 150 次宝箱奖励触发硬保底', () => {
+  it('固定基础概率不受未出次数或战斗次数影响，第 150 次搜刮点奖励触发硬保底', () => {
     Base.data.eggPity = 40;
     Base.data.eggBattles = 500;
     expect(Base.petEggDropChance()).toBe(RULES.rewards.petEggBaseChance);

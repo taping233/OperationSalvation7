@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { framesDiagnosticStatic, summarizeFrameTextures } from '../game/src/battle/view/battle.frames-diagnostic-policy.js';
 describe('frame diagnostic policy and non-loading texture accounting', () => {

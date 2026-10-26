@@ -102,10 +102,10 @@ describe('allocation-light stage validation', () => {
 
     snapshot.hand.push('hidden-b');
     presenter.show(input); feedback([{kind:'draw',uid:'hidden-b',battleToken:7}]);
-    expect(page.querySelector('.bt-hand-page-new')).toBe(badge); expect(badge.textContent).toBe('新增 2');
+    expect(page.querySelector('.bt-hand-page-new')).toBe(badge); expect(badge.getAttribute('aria-label')).toBe('新增 2');
     presenter.show({...input,pageHTML:input.pageHTML.replace('第 1/2', '第 2/2')});
     records[0].group.uids = ['hidden-a']; feedback([]);
-    expect(page.querySelector('.bt-hand-page-new')).toBe(badge); expect(badge.textContent).toBe('新增 1');
+    expect(page.querySelector('.bt-hand-page-new')).toBe(badge); expect(badge.getAttribute('aria-label')).toBe('新增 1');
     expect(page.textContent).toContain('第 2/2 栏'); expect(badge.querySelector('svg')).toBe(icon);
     records[0].group.uids = ['hidden-a','hidden-b']; feedback([]);
     expect(badge.isConnected).toBe(false); expect(page.getAttribute('aria-label')).not.toContain('新增');

@@ -11,7 +11,7 @@ const base = {
 };
 window.SDT = {
   UI: { showOverlay: vi.fn(), hideOverlay: vi.fn(), act: vi.fn(), refresh: vi.fn(), log: vi.fn(), el: {} },
-  MAP: { chestKinds: { small: { name: '小宝箱', cards: 0, coins: [0, 0] } } },
+  MAP: { chestKinds: { small: { name: '小型物资箱', cards: 0, coins: [0, 0] } } },
   Cards: {
     RARITIES: ['古朴', '稀有', '史诗', '传说'],
     all: () => [egg],
@@ -35,8 +35,8 @@ afterEach(() => {
   base.petEggDropChance.mockReturnValue(1);
 });
 
-describe('宝箱宠物蛋结算', () => {
-  it('空宝箱命中但蛋目录缺失时累加 pity，仍只消耗原随机序列', () => {
+describe('搜刮点宠物蛋结算', () => {
+  it('空搜刮点命中但蛋目录缺失时累加 pity，仍只消耗原随机序列', () => {
     window.SDT.Cards.all = () => [];
     const random = vi.fn(() => 0.5);
     setRandomService({ random, reseed: vi.fn(), snapshot: vi.fn(), restore: vi.fn() });
@@ -74,7 +74,7 @@ describe('宝箱宠物蛋结算', () => {
     expect(base.recordPetEggChestResult).toHaveBeenCalledExactlyOnceWith({ eggGranted: true });
   });
 
-  it('职业宝箱奖励也推进同一保底计数', () => {
+  it('职业搜刮点奖励也推进同一保底计数', () => {
     const classCard = { id: 'class-card', name: '职业牌', rarity: '职业', type: '武术' };
     window.SDT.MAP.chestKinds.small.pickFrom = 1;
     window.SDT.MAP.chestKinds.small.cards = 1;

@@ -12,7 +12,7 @@ async function createBrowsingHarness() {
   const host = document.createElement('div'); host.id = 'overlay';
   document.body.replaceChildren(host);
   const ui = {
-    el: { overlay: host }, _acts: {},
+    el: { overlay: host, ovBody:host }, _acts: {},
     showOverlay(_title, html) { host.innerHTML = html; this._acts = {}; },
     hideOverlay() { document.getElementById('cardZoom')?._closeCardZoom?.(true); host.innerHTML = ''; },
     log: vi.fn(), act(name, handler) { this._acts[name] = handler; },
@@ -123,7 +123,7 @@ describe('伙伴升级回执', () => {
       upgradePet: vi.fn(() => false),
     });
     harness.runtime.openBaseHub('stash');(await harness.ui._acts.upPet({id:'robot'}));
-    expect(harness.ui.log).toHaveBeenCalledWith('伙伴升级未保存或口粮不足，请重试。', 'warn');
+    expect(harness.host.textContent).toContain('还需 2 口粮，补充后可培养。');
     expect(harness.host.textContent).not.toContain('机器人 Lv.');
   });
 });
@@ -144,7 +144,7 @@ describe('基地恢复、扩建与外观旧动作', () => {
   it('合法复原仍调用真实当前索引；后续旧回调不能重复提交同名新堆', async () => {
     harness = await createBrowsingHarness(); harness.base.pocketKeyCost = stack => stack.count;
     harness.base.data.pocket = [{ card:pocketCard, count:2 }]; harness.runtime.openBaseHub('stash');
-    const previous = harness.ui._acts.restoreCard; (await previous({ name:pocketCard.name }));
+    harness.ui.showCardZoom(pocketCard); const previous = harness.ui._acts.restoreCard; (await previous({ name:pocketCard.name }));
     expect(harness.base.restore).toHaveBeenCalledExactlyOnceWith(0);
     (await previous({ name:pocketCard.name })); expect(harness.base.restore).toHaveBeenCalledTimes(1);
   });
@@ -161,7 +161,7 @@ describe('基地恢复、扩建与外观旧动作', () => {
   it('合法当前外观保存仍播报结果', async () => {
     harness = await createBrowsingHarness(); ports.select.mockResolvedValue({ ok:true, value:{ assetFallback:false } });
     harness.runtime.openBaseHub('stash'); await harness.ui._acts.selectCharacterSkin({ character:'wu', skin:'casual' });
-    expect(harness.ui.log).toHaveBeenCalledWith('人物皮肤已保存。', 'ok');
+    expect(harness.host.textContent).toContain('人物外观已保存。');
   });
 });
 
@@ -171,13 +171,15 @@ it('复原稳定引用在索引移动之后只提交预览的ID和variant堆', a
   const first={card:{id:'same-id',variantKey:'first',name:'同名'},count:9};
   const second={card:{id:'same-id',variantKey:'second',name:'同名'},count:2};
   harness.base.data.pocket=[first,second]; harness.runtime.openBaseHub('stash');
+  harness.ui.showCardZoom(harness.base.data.pocket.at(-1).card);
   (await harness.ui._acts.restoreCard({stackKey:'card:same-id:second',count:'2',name:'同名',i:'0'}));
   expect(harness.base.restore).toHaveBeenCalledExactlyOnceWith(1);
 });
 it('预览以后数量改变不会按更新整堆意外扣钥匙', async () => {
   harness=await createBrowsingHarness(); harness.base.data.pocket=[{card:{id:'card',name:'复原'},count:3}]; harness.runtime.openBaseHub('stash');
+  harness.ui.showCardZoom(harness.base.data.pocket[0].card);
   (await harness.ui._acts.restoreCard({stackKey:'card:card',count:'2',name:'复原',i:'0'}));
-  expect(harness.base.restore).not.toHaveBeenCalled(); expect(harness.ui.log).toHaveBeenCalledWith('消耗区数量已变化，请重新打开详情','warn');
+  expect(harness.base.restore).not.toHaveBeenCalled(); expect(harness.ui.log).toHaveBeenCalledWith('待复原数量已变化，请重新选择卡牌。','warn');
 });
 it('基地复原用支付前的卡面与钥匙费用演出，结束后才重绘且不重复提交',async()=>{
   vi.useFakeTimers();
@@ -188,6 +190,7 @@ it('基地复原用支付前的卡面与钥匙费用演出，结束后才重绘�
     harness.runtime.openBaseHub('stash');
     harness.ui.el.ovBody=harness.host;
     harness.ui.el.ovBody.firstElementChild.animate=vi.fn();
+    harness.ui.showCardZoom(harness.base.data.pocket[0].card);
     const action=harness.ui._acts.restoreCard;
     const result=action({stackKey:'card:receipt-card',count:'2',name:'恢复样本',i:'0'});
     await Promise.resolve();await Promise.resolve();
@@ -208,7 +211,7 @@ it('同页重绘后最新扩建handler仍能正常提交，旧handler已失效',
 it('合法外观保存抛错给失败反馈并允许重新提交', async () => {
   harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); ports.select.mockRejectedValueOnce(new Error('disk'));
   await harness.ui._acts.selectCharacterSkin({character:'wu',skin:'casual'});
-  expect(harness.ui.log).toHaveBeenCalledWith('皮肤选择未保存，请重试','warn');
+  expect(harness.host.textContent).toContain('人物外观未保存，请重试。');
   ports.select.mockResolvedValue({ok:true,value:{assetFallback:false}});
   await harness.ui._acts.selectCharacterSkin({character:'wu',skin:'casual'}); expect(ports.select).toHaveBeenCalledTimes(2);
 });
@@ -224,6 +227,6 @@ it('现行皮肤选择读取失败仍使用原错误文案且不调用选择命�
   harness.runtime.openBaseHub('stash');
   ports.read.mockReturnValue({ ok: false, code: 'STALE_REVISION' });
   await harness.ui._acts.selectCharacterSkin({ character: 'wu', skin: 'casual' });
-  expect(harness.ui.log).toHaveBeenCalledWith('基地资料已变化，请刷新后重试。', 'warn');
+  expect(harness.host.textContent).toContain('基地资料已变化，请刷新后重试。');
   expect(ports.select).not.toHaveBeenCalled();
 });

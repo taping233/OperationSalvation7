@@ -1,5 +1,6 @@
 # 并行会话热点登记（PARALLEL-REGISTRY）
 
+
 > **规则（09-29 起；10-01 精简：动作先行）**：
 > 1. 会话改**共享文件**（AGENTS.md / docs 公共文档 / MEMORY.md / 其他会话热点）或开**长任务**（工作树 / 端口服务 / 后台进程）：动作先行，登记行同轮紧随补齐——不缺席、不阻塞启动（10-01 老板拍板）；登记表或 `npm run handoff` 显示他人活跃占用同一属地时，先协调再动手。收官/释放后把行移入「近期已释放」。单会话活跃（`npm run handoff` 占用仅本会话）时小额共享台账修改可直接编辑+收官核对，免登记免两段式。
 > 2. 发现**无主改动/文件**（归属不明的 M 文件、陌生未跟踪产物）登记到「无主物品」，**只记录勿动**，等认领或老板处置；认领者把行移入活跃登记。
@@ -7,6 +8,103 @@
 > 4. 服务登记工作目录/端口/PID/创建会话；收官只停本会话创建且身份确认的服务。完成事项移至已释放，工作树等仍需处置的资源保留登记。日期/PID 是记录时点，使用前核实身份。
 
 ## 活跃登记
+
+Friday（全任务收官提交 WF-closeout-push-1027；01a1791c），2026-10-27：编辑中；老板授权盘点全部完成未提交、修复、提交并推送；范围为ship确认的完成代码/文档、交付门修复与本轮证据，排除仍在途动作帧、待拍板及临时产物；复用5200，不启动新游戏服务。证据 `docs/evidence/2026-10-27-closeout-push/`。
+
+Friday（无动作帧重出 WF-wu-action-1027），2026-10-27：编辑中；范围 `game/src/battle/view/battle.frames.js`、`game/src/ui/character-idle.js`、`game/css/character-idle.css`、`tests/character-idle.test.js`、`docs/evidence/2026-10-27-wu-action-frames/`、`.tmp/nai/wu-action-frames-20261027/`；老板确认选人页与战斗待机一起取消；最新出图要求为简约赛璐璐、站直持剑朝右，NAI5仅出单张站姿底图，后续内置逐帧单张绘制。旧帧表与屈膝底稿不作为候选，无新服务/提交。
+
+Friday（入库闪烁续修与稀有度入库 WF-stash-stable-r2-1027），2026-10-27：完成未提交、编辑释放；范围`game/src/run/game.run.altar.js`、`game/src/ui/{extraction-stash-update,extraction-rewards-view}.js`、`game/css/extraction-rewards.css`。保留页面外壳与动画属性、保存时不再禁用卡面预览、预留提示行高度；加回按稀有度批量入库，复用原容量/来源/保存入口。按老板要求不测试/实页/build/提交，保留既有增量；记录`docs/evidence/2026-10-27-stash-stable-r2/README.md`。
+
+Friday（入库局部更新 WF-stash-stable-1027），2026-10-27：完成未提交、编辑释放；`game/src/run/game.run.altar.js`、`game/src/ui/extraction-rewards-view.js`、新增`game/src/ui/extraction-stash-update.js`。入库保存后复用整理页与未变卡面，局部更新数值/按钮/列表，保留滚动及折叠，停止重复入场；保留既有增量，按要求不测试/实页/build/提交；记录`docs/evidence/2026-10-27-stash-stable/README.md`。
+
+Friday（整理页不渲染顶栏 WF-stash-no-topbar-1027），2026-10-27：完成未提交、编辑释放；`game/src/ui/run-top-bar.js`在`#exMain`整理页将共享远征状态栏停放至离屏DocumentFragment，不渲染、不参与交互；离开整理页后复用原节点恢复，保留监听与HUD引用。沿老板要求无测试/实页/build/提交；记录 `docs/evidence/2026-10-27-stash-no-topbar/README.md`。
+
+Friday（献祭玻璃与撤离结果精简 WF-extraction-clean-1027），2026-10-27：完成未提交、编辑释放；范围 `game/src/ui/{emergency-exit-view,extraction-rewards-view}.js`、`game/src/run/game.run.altar.js`、`game/css/{emergency-exit,extraction-rewards}.css`。献祭页透明玻璃、精简标题/进度/动作；入库页聚焦卡牌与容量，完成页四项收获+简洁成长，卡牌清单/待复原/散失折叠，单一返回基地动作；保留原结算与已有增量，沿老板要求无测试/实页/build/提交；记录 `docs/evidence/2026-10-27-extraction-clean/README.md`。
+
+Friday（紧急撤离页面排版 WF-emergency-layout-1027），2026-10-27：完成未提交、编辑释放；范围 `game/src/run/game.run.altar.js`、新增 `game/src/ui/emergency-exit-view.js`、`game/css/emergency-exit.css`。复用正式插画事件/选项/底栏，左侧叙事与3张代价/可用数量，右侧双选项；献祭页已选/3、独立滚动卡区及明确确认/返回动作。保留既有增量，按要求无测试/实页/build/提交；记录 `docs/evidence/2026-10-27-emergency-layout/README.md`。
+
+Friday（紧急撤离接入事件页 WF-emergency-event-1027），2026-10-27：完成未提交、编辑释放；`game/src/run/game.run.altar.js`第三层撤离点接入正式事件场景与选择确认、事件生命周期保存返回和背包回流，同步`docs/rules.md`；献祭3张、第三层限制及终局撤离沿原规则。保留既有增量；按老板要求未测试/实页/build/提交；记录 `docs/evidence/2026-10-27-emergency-event/README.md`。
+
+Friday（发现短演出 WF-discover-reveal-1027），2026-10-27：完成未提交、编辑释放；范围 `game/src/battle/view/battle.discover-view.js`、`battle.view.js`与`game/css/battle-discover.css`，候选牌轻浮现和短扫光在既有350ms防误触期内完成，按原输入票据续播，减少动态效果时关闭。保留既有增量；沿老板“不用测试收尾”要求未跑测试/实页/build/提交，记录 `docs/evidence/2026-10-27-discover-reveal/README.md`。
+
+Friday（普通战能力卡与5张攻击库 WF-normal-ability-1026），2026-10-27：完成未提交、编辑释放；解除普通战能力卡入手过滤与出牌限制，普通战临时初始攻击牌库改5张，同步指南、术语、规则及生成全书；范围 `game/src/core/rule-config.js`、`battle/core/battle.lifecycle.domain.js`、`battle/effects/battle.target-rules.js`、`ui/{term-definitions,beginner-guide-diagrams}.js`、`game/data/beginner-guide.json`、对应测试及 `game/dev/normal-ability-review.{html,js}`。保留既有增量；此前94项定向、13项全书与目标lint通过，后续扩展结果及实页范围见 `docs/evidence/2026-10-27-normal-ability/README.md`；老板要求不用测试收尾，停止后续检查。复用5200，无新服务/build/提交。
+
+Friday（现行卡名统一 WF-current-card-names-1026），2026-10-26：完成未提交、编辑释放；依原卡名检查统一31处现行旧名，补图鉴源描述/注释和双敌组合完整称呼；范围 `docs/{rules,terminology,save-format,game-compendium}.md`、`game/src/cards/cards.data.js`及原清单列出的11个源码文件，逐行范围 `docs/evidence/2026-10-26-current-card-names/edit-plan.json`。旧引用复查0残留，9处历史/兼容保留；全书生成13项、文档检查、目标lint/空白检查通过，未做本轮实页。保留他人增量，无新服务/build/提交。
+
+Friday（满月形态修正与卡名检查 WF-fullmoon-name-audit-1026），2026-10-26：完成未提交、编辑释放；修正满月形态立即获能量的文案与效果，保留上限+1，范围 `cards/card-energy-policy.js`、`cards/structured-card-description.js`、`battle/core/{battle.effect-assembly.domain,battle.resolution.domain,battle.core-ports.types.d.ts}`、`battle/effects/effect-steps.tail.js`、`tests/battle-equipment-skill-synthesis.test.js`对应用例、`docs/rules.md`/全书及 `docs/evidence/2026-10-26-fullmoon-name-audit/`。83项定向与13项全书检查、目标lint/空白检查通过；未补本轮实页。卡名只读检查291张卡、65个已知旧称，发现31处现行旧名引用，9处历史/兼容另列。保留他人增量，无新服务/build/提交。
+
+Friday（手牌原位选牌 WF-hand-inline-1026），2026-10-26：完成未提交、编辑释放；范围 game/src/battle/view/battle.{view,layers,hand-material-selection,hand-selection-view,status-chips}.js、game/css/battle-hand-selection.css、game/dev/hand-selection-review.{html,js}、tests/{hand-material-selection-window,battle-status-presentation}.test.js、docs/infusion-material-controls.md及docs/evidence/2026-10-26-hand-inline/。原位选牌抬升、左取消右确认，按钮放大至220×88并置战场中线，后续按老板要求左右贴边（left/right为0）；移除状态与标记通用说明浮框。42项定向、目标lint/样式/docs检查通过；当前内置窗口鼠标选牌/取消及键盘选牌后确认消耗通过，其他实页范围见证据。保留既有增量，复用5200，无新服务/build/提交。
+
+
+Friday（搜刮点术语统一 WF-scavenge-terminology-1026），2026-10-26：完成未提交、编辑释放；范围见 `docs/evidence/2026-10-26-scavenge-terminology/changes.json`，中文文案、注释、现行文档及测试/预览对照，生成全书沿原生成器。新增 `core/scavenge-terminology.js`、`tests/scavenge-terminology-compat.test.js` 并接入卡牌展示/获取/旧卡库定名，保留内部chest字段及历史快照。153项定向、13项全书、最终11项兼容/装备检查通过，数据/文档检查与当前内置窗口隔离页面通过；扩展1项自然形态文案失败、祭坛2处既有空块lint未扩改，详见本任务README。保留既有增量，无新服务/build/提交。
+
+Friday（神秘人商店台词 WF-shop-talk-1026），2026-10-26：完成未提交、编辑释放；范围 `game/src/run/game.run.shop.js`、`game/css/expedition-shop.css`及 `docs/evidence/2026-10-26-shop-talk/`。冬境行商改神秘人，点击对话区依序循环老板指定五句；商店原有11项测试、目标lint及当前内置窗口真实点击五句循环通过。保留交易反馈等已有完成增量，未改测试，无新服务/build/提交。
+
+Friday（侠客与敌人姓名提示 WF-tooltip-trim-1026），2026-10-26：完成未提交、编辑释放；范围 `game/src/battle/bag/battle.slam-skill.js`、`game/src/battle/view/battle.enemy-details.js`、`tests/departure-class-confirmation.test.js`、`tests/battle-hand-inspector.test.js`对应提示断言。移除侠客技能“不消耗卡牌”及姓名提示中的攻击方式/基础攻击，保留特殊效果与状态；11项姓名提示测试通过，整组103通过/7失败（注能与出征流程，未证明历史基线），目标lint通过。当前内置窗口确认侠客文案，样板入口返回标题，敌人真实悬停待验；记录 `docs/evidence/2026-10-26-tooltip-trim/README.md`。保留既有增量，无新服务/build/提交。
+
+
+
+
+Friday（事件六面骰 WF-event-d6-1026；01a17884），2026-10-26：完成未提交，编辑释放；范围 `game/src/ui/event-dice{,-visual}.js`、`game/css/event-dice.css`、`tests/event-dice.test.js`、`docs/rules.md` 对应投骰条目及 `docs/evidence/2026-10-26-event-d6/`。统一顶面结果、后台六候选与恢复兼容、投骰文字对比度；87项定向测试、目标lint/样式/文档检查及当前窗口内置实页通过；5318隔离服务已停止并复核释放，保留他人增量，未build/提交。
+
+Friday（主角战斗比例与全套特效 WF-battle-fit-fx-1026；01a17885），2026-10-26：完成未提交，编辑释放；范围 `game/css/{battle-stage,battle,combat-feedback,battle-fx-art}.css`、`game/src/battle/view/{battle.vfx,battle.fx-art,battle.effect-feedback,battle.card-feedback,battle.anim.view}.js`、`scripts/runtime-asset-redundancy-review.mjs`仅vfx指纹、`game/assets/README.md`、`game/assets/battle/fx-{slash,block,atlas}.webp`、清单目标条目。最终按老板改用内置生图，全套16格为低饱和开放笔锋/碎片，去圆环旋涡团块；移除旧飘字/欢呼贴纸/入手/道具/追加施放文字特效，保留回合大字。五位主角按身体边界调整比例与脚底。记录 `docs/evidence/2026-10-26-battle-fit-fx/`；按后续明确要求未再测试、实页或build。早期验证仅对应初版；NAI等待会话77817已中断，69800和编码会话已结束，无新服务，无提交推送。
+
+
+
+
+Friday（首页第四张壁纸修手 WF-wu-bass-hand-1026），2026-10-26：完成未提交，编辑释放；只去除原图按弦手右下角多余指尖，保留原手型。范围 game/assets/reconstruction/wallpaper-wu-bass-1020.webp、game/assets/asset-manifest.json（仅目标条目）、game/assets/README.md、game/css/title-p0.css（缓存标记）；来源/提示词/哈希及检查 docs/evidence/2026-10-26-wu-bass-hand/。目标素材审计通过；首页已打开4/7，老板要求直接收尾，未继续截图/实页验收。未build/提交。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Friday（星月暗牧压迫姿势 WF-xingyue-dark-pose-1026；01a177be），2026-10-26：单张候选已交付、编辑释放；内置imagegen去提灯，改低机位稳站、空手前伸下压和俯视神态。原图根 `.tmp/nai/xingyue-nai5-reset-20261026/dark-imposing.png`，完整提示词及来源/哈希 `docs/evidence/2026-10-26-xingyue-nai5-reset/dark-{pose-prompt.txt,pose-request.json}`；未替换游戏素材、未测试/build/提交。
+
+
+
+Friday（星月暗牧竖版 WF-xingyue-dark-1026；01a177be），2026-10-26：单张候选已交付、编辑释放；内置imagegen沿本轮修脸立绘构图和禁咒I/IV身份，生成紫瞳、黑灰神官服、紫金披肩、黑手套版。原图根 `.tmp/nai/xingyue-nai5-reset-20261026/dark-priestess.png`，完整提示词和来源/哈希 `docs/evidence/2026-10-26-xingyue-nai5-reset/dark-priestess-{prompt.txt,request.json}`；未替换游戏素材、未测试/build/提交。
+
+Friday（星月禁咒脸部对齐 WF-xingyue-face-1026；01a177be），2026-10-26：单张候选已交付、编辑释放；内置imagegen以本轮立绘为目标，对照禁咒I/IV修脸，保留金瞳和竖版全身。原图根 `.tmp/nai/xingyue-nai5-reset-20261026/builtin-face-fix.png`，提示词及来源/哈希 `docs/evidence/2026-10-26-xingyue-nai5-reset/face-fix-{prompt.txt,request.json}`；改动较克制，相似度待老板确认。未替换游戏素材、未测试/build/提交。
+
+Friday（星月内置卡面画法重绘成功 WF-xingyue-builtin-1026；01a177be），2026-10-26：候选已交付、编辑释放；老板再次授权重试后内置imagegen成功，竖版全身，以圣盾脸部和圣疗笔触重绘NAI底稿。原图根 `.tmp/nai/xingyue-nai5-reset-20261026/builtin-card-style.png`，完整提示词和来源/哈希 `docs/evidence/2026-10-26-xingyue-nai5-reset/builtin-{prompt.txt,request.json}`；未替换游戏立绘、未测试/build/提交。此条更新前次网络阻塞结论。
+
+
+
+
+
+Friday（星月内置卡面画法重绘 WF-xingyue-builtin-1026；01a177be），2026-10-26：网络失败、编辑释放；内置imagegen返回 `network error: error sending request`，未产图。沿用本轮NAI竖版构图，以现行圣盾/圣疗卡面控制脸部和画法；失败记录 `docs/evidence/2026-10-26-xingyue-nai5-reset/builtin-request.json`。未替换运行素材、未测试/build/提交。
+
+Friday（星月NAI5竖版修订 WF-xingyue-nai5-reset-1026；01a177be），2026-10-26：候选已交付、编辑释放；按老板“只出竖版”要求改832×1216，沿用同画师串/人设/seed，HTTP200。完整请求 `docs/evidence/2026-10-26-xingyue-nai5-reset/request-portrait.json`，原图根 `.tmp/nai/xingyue-nai5-reset-20261026/candidate-portrait.png`；后续本轮立绘仅出竖版。未替换游戏素材、未测试/build/提交。
+
+Friday（星月NAI5立绘重置 WF-xingyue-nai5-reset-1026；01a177be），2026-10-26：候选已交付、编辑释放；NAI5 Full现行v3.4，1344×768/28步/CFG5.5，seed1730261026，HTTP200。白底全身、长辫、白金裙/青绿披肩、星灯与祝祷命中，月饰偏头顶中央、人物偏右；完整请求与观察 `docs/evidence/2026-10-26-xingyue-nai5-reset/request.json`，原图根 `.tmp/nai/xingyue-nai5-reset-20261026/candidate.png`。待老板看图，未替换运行素材，未测试/build/提交。
+
+Friday（老板拉起主线 WF-mainline-up-1026；当前会话），2026-10-26：主线服务运行中，按老板要求保留；工作目录 `D:/素材/代号柒/搜打撤`，端口5200，PID29060，`npm run web -- --skip-compile` 独立后台启动。项目入口、PNG图标与WebP立绘响应有效；运行记录 `node_modules/.cache/web-up-5200.json`。本轮只启动服务与打开内置页面，无源码修改、build或提交。
+
+
+
+
+
+
+
+
+
+Friday（导出反馈修复 WF-feedback-1026；01a173db），2026-10-26：完成未提交，编辑释放；`game/src/run/game.run.shop.js`、`game.run.events.js`，`game/src/ui/room-footer.js`、`departure-cinematic.js`及对应CSS，`game/src/battle/effects/battle.discover-candidates.js`、`effect-steps.ctx.js`、`bag/battle.bag.domain.js`、`core/battle.engine.factory.domain.js`、`view/battle.layers.js`、`battle.effect-feedback.js`、`game/css/battle-status-chips.css`及相关定向测试，`docs/rules.md`、`docs/modules/secondary-ui-style.md`、自有证据 `docs/evidence/2026-10-26-feedback/`。商店原位更新与保存提示归页脚、发现池排除能力卡并收紧注能资格、药水演出与敌方图标状态栏、事件整局去重、撤离文字。老板要求自行实测后停止全部验证；此前106通过/1旧契约失败，断言已改未重跑，不记整批通过。未新建服务/build/提交推送，保留其他会话改动。
 
 
 Friday（战斗样板临时预览 WF-battle-cohesion-preview-1025），2026-10-25：已结束；本会话独立Vite端口5317，工作目录D:/素材/代号柒/搜打撤，PID19172、托管会话91632。禁用HMR及监听完成内存隔离样板当前窗口取证；收官核对进程命令行含createServer/5317后停止，端口复核已释放。未操作共享5200，无build/发布。
@@ -284,6 +382,60 @@ Friday / WF-card-feedback-v2-1023 (01a16808)，2026-10-23：12张内置修订、
 
 
 ## 近期已释放
+
+Friday（战斗血条精修 WF-battle-polish-preview-1027），2026-10-27：完成未提交、编辑释放；老板仅选定血条，正式范围 `game/css/battle-stage.css` 血条底槽、端点、数字与高度，保留此前增量。独立样板 `game/dev/battle-polish-preview.{html,css,js}` 留存对照，其他候选未接入。样式解析/脚本语法/目标空白检查通过，当前内置窗口完成拖牌与回合操作并截图确认仅血条实装；证据 `docs/evidence/2026-10-27-battle-polish-preview/README.md`。复用5200，无新服务/build/提交。
+
+Friday（前往下一节点即结束 WF-flow-goals-round24-1026；01a176cb），2026-10-26：完成未提交、编辑释放；修改 `game/src/run/node-reward-state.js`、`game/src/core/map-node-state.js`、`game/src/hub/game.store.types.d.ts`、`game/src/run/game.run.flow.js`、`game/src/run/game.session.js`、`game/src/run/game.run.altar.js`、`game/src/run/game.run.scenes.js`、`game/src/run/game-session-restoration.js`、`game/src/run/expedition.view.js`、`game/src/run/game.run.resources.js`、`game/src/battle/battle-loader.js`、`game/src/ui/node-decision-view.js`、`game/src/ui/fire-rest-view.js`、`docs/rules.md`、`docs/map-travel.md`、`docs/save-format.md`、`docs/modules/secondary-ui-style.md`，证据 `docs/evidence/2026-10-26-flow-goals-round24/README.md`。按老板新规则真实抵达/穿门统一closed，源未领内容作废；同节点整理继续、旧档已知非当前记录处理、节点入口与迟到启动阻断、门通行保留，现行提示规范同步。子代理6.1-sol/high；本项后收尾停止持续推进，未运行测试/lint/build/检查脚本/实页，无新增服务或提交推送。
+
+Friday（祭坛候选随存档沿用 WF-flow-goals-round23-1026；01a176cb），2026-10-26：完成未提交、编辑释放；修改 `game/src/run/game.run.altar.js`、`game/src/ui/node-decision-view.js`、`game/src/run/node-reward-state.js`、`game/src/run/node-restore-state.js`、`game/src/hub/game.store.types.d.ts`、`docs/save-format.md`、`docs/modules/secondary-ui-style.md`，证据 `docs/evidence/2026-10-26-flow-goals-round23/README.md`。候选沿nodeRewards保存，与restore同节点继承；既有claimResourceReward消费及原检查点，满包/返回/读档沿用，确定卡名显示，WeakMap退出；只读核对原保存/恢复整体承载。子代理6.1-sol/high与medium，未运行测试/lint/build/实页，无新增服务或提交推送。
+
+Friday（节点保存后继续 WF-flow-goals-round22-1026；01a176cb），2026-10-26：完成未提交、编辑释放；修改 `game/src/ui/room-actions.js`、`game/src/ui/overlay.js`、`game/src/run/game.run.altar.js`、`game/src/run/game.run.scenes.js`、`game/src/run/node-restore-state.js`、`game/src/run/event-lifecycle.js`、`game/src/run/game.run.shop.js`、`docs/modules/secondary-ui-style.md`，证据 `docs/evidence/2026-10-26-flow-goals-round22/README.md`。公共保存后继续接祭坛/复原，逐次保存与单次收尾，火堆保存/演出分开及原页重试，事件离开归并、商店结果透传与单次离店，发卡/公共开关窗声音异常独立。未成交碎片候选重开沿用待后续，当前运行缓存已接；子代理6.1-sol/high与medium，无测试/lint/build/实页/新增服务/提交推送。
+
+Friday（已保存远征继续发布 WF-flow-goals-round21-1026；01a176cb），2026-10-26：完成未提交、编辑释放；修改 `game/src/run/game-session-departure.js`、`game/src/run/game.run.class-choice.page.js`、`game/src/hub/game.hub.depart.js`、`game/src/run/game.run.dev.js`、`docs/modules/secondary-ui-style.md`，证据 `docs/evidence/2026-10-26-flow-goals-round21/README.md`。已提交候选按阶段继续发布，pending对象/retry保持同局身份与并发归并；人物确认接回原prepared/saved/transitioned，等待及刷新故障原页重试，基地教学收尾与dev消费者补接。只读确认既有重新选档恢复入口，无新增持久化格式；子代理6.1-sol/high与medium，未运行测试/lint/build/实页，无新增服务/提交推送。
+
+Friday（整备选择与实际出征 WF-flow-goals-round20-1026；01a176cb），2026-10-26：完成未提交、编辑释放；修改 `game/src/hub/game.hub.depart.js`、`game/src/hub/game.hub.preparation.js`、`game/src/hub/preparation.view.js`、`game/src/hub/preparation.types.d.ts`、`game/src/hub/preparation.commands.js`、`game/src/hub/departure.summary.js`、`game/src/run/game-session-departure.js`、`docs/modules/secondary-ui-style.md`，证据 `docs/evidence/2026-10-26-flow-goals-round20/README.md`。整备/推荐/预设计格统一，资源专用容量、正式库存版本分配与精确移除、预览应用同源、伙伴等待与来源衔接；出征音效日志等装饰异常独立处理。必要地图发布失败的显式继续仍待下一批接齐，已记证据。子代理6.1-sol/high与medium；未运行测试/lint/build/实页，无新增服务或提交推送。
+
+Friday（基地保存结果与反馈 WF-flow-goals-round19-1026；01a176cb），2026-10-26：完成未提交、编辑释放；修改 `game/src/hub/hub.presentation.js`、`game/src/hub/game.hub.runtime.js`、`game/src/hub/hub.trade-shop-v5.js`、`game/src/hub/hub.personnel.js`、`docs/ui/shared-interface-components.md`，证据 `docs/evidence/2026-10-26-flow-goals-round19/README.md`。保存结果及页内反馈/按钮等待共用入口，接齐交易/伙伴/扩建/玩法/外观/卡背；保存后声音日志或成就异常与已保存结果分开，仓库反馈含符文实际消耗及格位。保留原Base事务、确认与浏览状态；子代理6.1-sol/high与medium，按老板要求未运行测试/lint/build/实页，无新增服务/提交推送。
+
+Friday（授权删除旧手牌实现 WF-flow-goals-round18-1026；01a176cb），2026-10-26：完成未提交、编辑释放；按老板“相关的旧实现代码可以删除”授权删除 `game/src/battle/view/battle.hand-inspector.js`；修改 `tests/battle-hand-inspector.test.js`、`tests/battle-render-derivation.test.js`、`tests/skull-sword-effective-session.test.js`、`game/src/README.md`、`docs/modules/secondary-ui-style.md`，记录 `docs/evidence/2026-10-26-flow-goals-round18/README.md`。移除旧模块/API/弹层依赖，保留现役输入、渲染、费用、变形覆盖及他人chips增量，历史证据保留。子代理6.1-sol/high与medium；按老板要求未运行测试/lint/build/实页，无新增服务或提交推送。
+
+Friday（停用战斗界面退役 WF-flow-goals-round17-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`game/src/battle/view/battle.hand-inspector.js`、`game/src/battle/view/battle.aim.js`、`game/src/battle/view/battle.overlays.js`、`game/src/battle/view/battle.view.js`、`game/src/battle/view/battle.decision-shell.js`、`game/src/battle/view/battle.decision-content.js`；`game/css/battle-hand-overhaul.css`、`game/css/battle-secondary-overlay.css`、`game/css/public-controls.css`、`game/css/secondary-ui-tokens.css`、`game/css/cover-battle-shell.css`、`game/css/expedition-battle.css`、`game/css/page-rewards-bag-help.css`、`game/css/winter.css`、`game/css/battle-decision.css`；`game/src/README.md`、`docs/modules/secondary-ui-style.md`，记录 `docs/evidence/2026-10-26-flow-goals-round17/README.md`。退出停用手牌层/战斗背包渲染、动作与专属样式，保留薄兼容与当前药水/牌堆/手牌输入，提示及说明对齐；源码/恢复引用作依据。子代理6.1-sol/high；按老板要求未运行测试/lint/build/实页，旧弹层测试待统一验收更新，无文件删除/新增服务/提交推送。
+
+Friday（地图道具可用性同源 WF-flow-goals-round16-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`game/src/hub/game.bag.rules.js`、`game/src/hub/bag-item-effects.js`、`game/src/hub/bag-legacy-use.js`、`game/src/hub/game.bag.js`、`docs/modules/secondary-ui-style.md`，记录 `docs/evidence/2026-10-26-flow-goals-round16/README.md`。地图角标/详情/执行资格同源；混合治疗复原按当前实际有效项，恢复药水战斗回能不计入地图用途，复原沿有效记录与真实格位；保留原事务/随机/兼容。子代理6.1-sol/high与medium；按老板要求未运行测试/lint/build/实页，无新增服务或提交推送。
+
+Friday（背包与整备浏览收拢 WF-flow-goals-round15-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`game/src/hub/game.bag.js`、`game/src/hub/game.bag.view2.js`、`game/src/hub/game.hub.depart.js`、`game/src/hub/hub.warehouse.js`、`game/src/hub/game.hub.runtime.js`、`docs/modules/secondary-ui-style.md`、`docs/warehouse-rendering.md`，记录 `docs/evidence/2026-10-26-flow-goals-round15/README.md`。背包/安全格实时堆与消耗区明确记录连续浏览；整备选中堆只读复核；引用返回重建实际动作；待复原等待导航与关闭后列表同步。子代理6.1-sol/high；按老板要求未运行测试/lint/build/实页，无新增服务或提交推送。
+
+Friday（仓库连续详情与增量库存 WF-flow-goals-round14-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`game/src/hub/hub.warehouse.js`、`game/src/hub/game.hub.pages.js`、`game/src/ui/card-zoom-controller.js`、`game/src/ui/collection-view-art.js`、`game/src/ui/ui.dom.types.d.ts`、`docs/warehouse-rendering.md`，记录 `docs/evidence/2026-10-26-flow-goals-round14/README.md`。仓库详情接实时筛选翻卡；五类操作局部完整同步，新堆及筛选选项原位接入、旧卡图保留；原卡图窗口观察新增节点；导航序号/等待与引用返回重建统一，详情关闭后保存完成仍同步仓库。子代理6.1-sol/high，按老板要求未运行测试/lint/build/实页，无新增服务或提交推送。
+
+Friday（基地领奖与继续浏览 WF-flow-goals-round13-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`game/src/hub/hub.reward-feedback.js`、`game/src/hub/game.hub.runtime.js`、`game/src/hub/hub.archive-v3.js`、`docs/ui/shared-interface-components.md`，记录 `docs/evidence/2026-10-26-flow-goals-round13/README.md`。领奖等待实际异步结果，退出点击时序/日志推断；保存中反馈、真实收据与仓库/扩建/新卡背导航接齐；奖励/里程碑稳定选择与目录内部滚动保留。子代理6.1-sol/high；按老板要求未运行测试/lint/build/实页，旧收据测试接口待统一验收更新，无新增服务或提交推送。
+
+Friday（战斗查看与使用衔接 WF-flow-goals-round12-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`game/src/battle/bag/battle.bag.domain.js`、`game/src/battle/core/battle.engine.factory.domain.js`、`game/src/battle/view/battle.potion-use.js`、`game/src/battle/view/battle.view.js`、`game/src/battle/view/battle.decision-shell.js`、`game/src/battle/view/battle.decision-content.js`、`docs/modules/secondary-ui-style.md`，记录 `docs/evidence/2026-10-26-flow-goals-round12/README.md`。药水命令按本次消费返回结果、失败/取消恢复详情与焦点；牌堆/选卡/编组同正文刷新保留详情、稳定身份恢复浏览。失活战斗背包与独立手牌详情保留现行状态。子代理6.1-sol/high，按上下文更换核心代理；按老板要求未运行测试/lint/build/实页，待统一验收，无新增服务或提交推送。
+
+Friday（规则说明入口统一 WF-flow-goals-round11-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`game/src/cards/structured-card-description.js`、`game/src/cards/card-description-text.js`、`game/src/cards/card-description-links.js`、`game/src/ui/card-zoom-content.js`、`game/src/ui/equipment-info.js`、`game/src/ui/card-tip-groups.js`、`game/src/hub/hub.trade-shop-v5.js`、`game/src/hub/game.cardslib.page.js`、`game/src/hub/hub.personnel.js`、`game/src/battle/view/battle.overlays.js`、`game/src/battle/view/battle.view.js`、`docs/cards/README.md`、`docs/cards/card-display.md`，记录 `docs/evidence/2026-10-26-flow-goals-round11/README.md`。精神药水/满月形态规则取值；基地及战斗提示统一当前卡；药水栏取有效条目.card；选片台复用renderResolved避免重复解析，卡牌/照片按已解析说明显示。子代理6.1-sol/high；按老板要求未运行测试/lint/build/实页，待统一验收，无新增服务或提交推送。
+
+Friday（结算后衔接 WF-flow-goals-round10-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`game/src/ui/terminal-settlement.js`、`game/src/ui/settlement-report.js`、`game/src/ui/menu-leave.js`、`game/src/run/game.session.death.js`、`game/src/run/game.run.altar.js`、`game/src/hub/game.hub.js`、`game/src/hub/game.hub.runtime.js`、`game/src/run/game.session.kernel.types.d.ts`、`docs/ui/shared-interface-components.md`，记录 `docs/evidence/2026-10-26-flow-goals-round10/README.md`。三类结算共用退出等待和失败反馈，保存与结果重显分离，死亡再出发接既有角色/携带整备、抢运预览与实际清单一致，撤离整理保留双栏浏览/展开及具体失败原因。子代理6.1-sol/high；按老板要求未运行测试/lint/build/实页，待统一验收，无新增服务或提交推送。
+
+Friday（交易与培养连续操作 WF-flow-goals-round9-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`game/src/hub/hub.trade-shop-v5.js`、`game/src/hub/hub.personnel.js`、`game/src/hub/game.hub.pages.js`、`docs/warehouse-rendering.md`、`docs/ui/shared-interface-components.md`，记录 `docs/evidence/2026-10-26-flow-goals-round9/README.md`。购售保持局部滚动与邻项；培养及孵化区分保存结果与成就检查；仓库卡包/蛋保存中反馈、失败原位重试、有余量继续详情并显示实际所得。子代理6.1-sol/high；按老板要求未运行测试/lint/build/实页，待统一验收，无新增服务或提交推送。
+
+Friday（仓库整备第八批 WF-flow-goals-round8-1026；01a176cb），2026-10-26：完成未提交，编辑释放，待老板统一验收。game/src/hub/hub.warehouse.js、game/src/hub/game.hub.runtime.js、game/src/hub/game.hub.pages.js材料/复原与局部反馈；game/src/hub/game.hub.preparation.js、game/src/hub/game.hub.preparation-ports.js预设实际导航；game/src/hub/game.hub.depart.js、game/src/hub/hub.home-v3.js正式整备返回及携带预设入口。材料原位更新与连续详情，复原成功再关/失败留页，预设等待目标接管后释放、失败保留编辑，出征区复用现成样式新增入口。现行docs/ui/shared-interface-components.md、docs/warehouse-rendering.md与自有docs/evidence/2026-10-26-flow-goals-round8/同步。本批未测试/lint/build/实页，未新增测试、服务、提交或推送；持续目标保留。
+
+Friday（角色选择第七批 WF-flow-goals-round7-1026；01a176cb），2026-10-26：完成未提交，编辑释放，待老板统一验收。game/src/run/game.run.class-choice.page.js确认、保存、继续页与卡池浏览；game/src/hub/game.hub.depart.js整备就绪及已发布起局清理。确认等待真实结果，角色/职业卡/熟练度只应用一次，保存失败继续当前阶段，在途拦角色/皮肤/卡池导航。卡池复用syncViewChildren并保留有效预览，计数/空态/当前预览表达接齐；轻入口及运动组件沿用未改。现行docs/ui/shared-interface-components.md与自有docs/evidence/2026-10-26-flow-goals-round7/同步。本批未测试/lint/build/实页，未新增测试、服务、提交或推送；持续目标保留。
+
+Friday（设置子页第六批 WF-flow-goals-round6-1026；01a176cb），2026-10-26：完成未提交，编辑释放，待老板统一验收。设置/子页game/src/ui/menu-settings.js、game/src/ui/menu-feedback.js、game/src/ui/menu-data.js及game/src/agent/agent.data.js，键盘操作game/src/ui/settings-input.js。设置子页复用公共返回与真实渲染归属，完整绑定后恢复呈现；数据页清空重建沿同次返回，退出MutationObserver、CSS身份猜测及私有一次性返回标记；改键取消提示、Tab离开、旧确认结果与控件可用性接齐。现行docs/ui/shared-interface-components.md与自有docs/evidence/2026-10-26-flow-goals-round6/同步。本批未测试/lint/build/实页，未新增测试、服务、提交或推送；持续目标保留，后续沿角色选择等其余临时流程推进。
+
+Friday（确认与返回第五批 WF-flow-goals-round5-1026；01a176cb），2026-10-26：完成未提交，编辑释放，待老板统一验收。临时返回game/src/ui/overlay-return-state.js、game/src/ui/overlay.js；背包来源game/src/hub/bag-return-hook.js、game/src/hub/game.bag.js；商店/收购台/整理帮助game/src/run/game.run.shop.js、game/src/run/game.run.altar.js；事件来源后置game/src/run/game.run.events.js、game/src/run/event-card-choice.js、game/src/run/event-branch-choice.js；公共焦点game/src/ui/dialog-surface.js、game/src/ui/confirm-dialog.js。临时返回等待真实结果、失败保留重试，异步目标显式认领；背包返源成功后消费hook和清标记，失败留原页，在途共享结果并复用输入隔离；商店渲染完成后提交返回身份，6处事件登记后置使满包同栈开背包可认领。现行docs/ui/shared-interface-components.md与自有docs/evidence/2026-10-26-flow-goals-round5/同步。本批未测试/lint/build/实页，未新增测试、服务、提交或推送；持续目标保留，后续沿设置子页等临时返回推进。
+
+Friday（普通道具流程第四批 WF-flow-goals-round4-1026；01a176cb），2026-10-26：完成未提交，编辑释放，待老板统一验收。普通使用game/src/hub/bag-legacy-use.js、game/src/hub/game.bag.rules.js、新增game/src/hub/bag-item-use.js和game/src/hub/bag-item-effects.js；领域延后反馈game/src/run/game.session.death.js、game/src/run/game.session.bag.js及game/src/hub/game.store.types.d.ts；主壳game/src/hub/game.bag.js；演出归属game/src/ui/outcome-feedback.js；当前快照说明game/src/ui/inventory-zoom.js、game/src/ui/card-zoom-content.js和game/src/cards/card-description-links.js。普通结构化与旧卡兼容共用消耗、保存、失败恢复、随机计划及成功呈现，退出重复执行；原heal/addItem保留计算与默认行为，详情使用保存后再关闭，失败原位重试。公共演出closing取消及完成归属接齐；详情说明传当前规则快照。现行docs/ui/shared-interface-components.md与自有docs/evidence/2026-10-26-flow-goals-round4/同步。本批未测试/lint/build/实页，未新增测试、服务、提交或推送。持续目标保留，后续沿确认与返回入口推进。
+
+Friday（高频流程第三批 WF-flow-goals-round3-1026；01a176cb），2026-10-26：完成未提交，编辑释放，待老板统一验收。背包发现game/src/hub/game.bag.rules.js；安全格/奖励整理game/src/hub/game.bag.safe-transfer.js、game/src/hub/game.reward-organizer.js、game/src/ui/reward-capacity-organizer.js；容器game/src/hub/bag-container-pages.js、game/src/hub/bag-inventory-commands.js、game/src/hub/game.container-store.view.js；库存操作新增game/src/hub/bag-inventory-actions.js并接入game/src/hub/game.bag.js，更新game/src/hub/game.store.types.d.ts；公共保存game/src/core/run-checkpoint.js；选卡/事件确认game/src/ui/discovery-selection.js、game/src/ui/event-choice-selection.js、game/src/run/game.run.scenes.js、game/src/run/game.run.events.js、game/src/run/event-card-choice.js；Agent丢弃结果game/src/agent/agent.action-router.js；发现焦点样式game/css/discovery-selection.css、game/css/battle-discover.css、game/css/expedition-battle.css、game/css/card-layout-selected.css。文档docs/ui/shared-interface-components.md、docs/agent-protocol.md与自有证据docs/evidence/2026-10-26-flow-goals-round3/。保存、恢复、成功反馈与返回接齐；奖励整理旧同步成功分支、私有丢弃确认页和发现重复焦点声明已退出。本批未测试/lint/build/实页，未新增测试，未启动服务、提交或推送。持续目标保留，下一批沿普通道具与旧快照兼容入口推进。
+
+Friday（高频流程第二批 WF-flow-goals-round2-1026；01a176cb），2026-10-26：修改完成未提交，编辑释放，待老板统一验收；图片恢复 list-image-recovery/visual-resource-recovery、真实选卡入口 game.bag.rules/game.bag.safe-transfer/battle.decision-shell、规则说明 structured-card-description 及对应测试；现行 docs/ui/shared-interface-components.md、docs/cards/README.md 和自有证据 docs/evidence/2026-10-26-flow-goals-round2/。保存失败恢复与原位重试、图片队列续跑、聚能声明驱动说明已接齐。停止验收前13文件310项、相关ESLint/文档链接/定向diff检查通过，第二批实页未核验；老板接管统一验收后停止后续检查。本次恢复未启动服务，无build/提交/推送。
+
+Friday（本周高频问题落实 WF-flow-goals-1026；01a176cb），2026-10-26：完成未提交、编辑释放；源码 `game/src/ui/{motion-completion,overlay,interface-motion,transitions-director,discovery-selection}.js`、`game/src/cards/{structured-card-description,card-description-text}.js`；测试 `tests/{motion-completion,transition-gate-lifetime,discovery-selection-rebind,sts2-structured-description}.test.js`、`tests/tools/overlay-lifecycle.property.test.js`；文档 `docs/ui/shared-interface-components.md`、`docs/cards/README.md`、`docs/WORKFLOW-TOOLS.md`、本轮证据及登记。三路分别完成关闭会话、9张卡同源说明和6类选卡边界修复；定向结果与当前窗口正式组件真实点击复验见 `docs/evidence/2026-10-26-flow-goals/`。自有5338/PID40384（exec93512）已核身份停止、端口释放；临时内置页已关闭。
+
+Friday（原则与记忆措辞清理 WF-positive-language-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`../AGENTS.md`、`docs/{README,QUICKSTART,WORKFLOW-TOOLS,quality-gates}.md`、`docs/evidence/2026-10-26-positive-language/`及自有登记，`C:/Users/太平/.codex/AGENTS.md`、`memories/MEMORY.md`。已改写229条记忆和现行说明，流程四页缩减1398字节；文档770链接、预算、UTF-8、引用/数字/代码符号及104任务组检查通过，现有测试提速增量保持。
+
+Friday（工作方式与记忆收敛 WF-workflow-memory-1026；01a176cb），2026-10-26：完成未提交、编辑释放；`../AGENTS.md`、`docs/WORKFLOW-TOOLS.md`、`docs/evidence/2026-10-26-workflow-memory/README.md`及自有登记，`C:/Users/太平/.codex/AGENTS.md`、`memories/memory_summary.md`、`memories/MEMORY.md`。已合并完整流程与复用原则、压缩摘要59.6%、更新长期经验和实机录像入口；文档、预算、UTF-8、历史组与diff检查通过，其他会话测试入口原样保留。
 
 Friday（撤离失败公共组件 WF-death-components-1025），2026-10-25：完成未提交、编辑释放；`game/src/run/game.session.death.js`、新增 `game/src/ui/settlement-report.js` 与 `game/css/settlement-report.css`、`docs/modules/secondary-ui-style.md` 对应说明。撤离失败接入公共玻璃面板、统计、折叠说明与主次按钮，正文独立滚动、操作保留在底部；保留结算及原有deathCause增量。仅人工核对目标diff；遵照老板不用测试，本轮未跑测试、构建或实页验收，无新服务/提交。
 
@@ -1767,6 +1919,14 @@ Friday（Codex 地图天气 01a13c12），2026-10-15：game/css/expedition-map.c
 
 | 会话/来源 | 属地 | 事项 | 状态 |
 |---|---|---|---|
+| Friday（老板37条备注实装 WF-card-notes-sync-1026） | 2026-10-26 | 完成未提交；编辑释放；game/data/card-notes.json、tests/card-notes-coverage.test.js、docs/evidence/2026-10-26-card-notes/ | 已同步37条老板原文，其他254条不变；已备份导出/原底稿；7项定向测试通过含正式读取；未改浏览器存档或静态页 |
+| Friday（备注静态审阅版 WF-card-notes-static-1026） | 2026-10-26 | 完成未提交；编辑释放；game/card-notes-review-static.HTML、game/tools/card-notes-review/build-static.mjs、docs/evidence/2026-10-26-card-notes/ | 静态响应逐字一致、无开发客户端；CSP/语法/存储兼容验证通过；内置实页已显示且老板正在编辑，停止交互；复用5200无自建进程 |
+| Friday（卡牌备注补全与审阅页 WF-card-notes-1026） | 2026-10-26 | 完成未提交；编辑释放；game/data/card-notes.json、game/card-notes-review.html、game/tools/card-notes-review/、docs/evidence/2026-10-26-card-notes/ | 291张覆盖；32原文保留；259草稿；6项定向测试通过；内置浏览器搜索/筛选/分页/保存/导出通过；复用5200无自建进程；证据 docs/evidence/2026-10-26-card-notes/verification.json |
+| Friday（回归修复与测试继续提速 WF-test-repair-speed-1026） | 2026-10-26 | 完成未提交、编辑释放 | 自有测试夹具/事件重置与状态栏断言、69个纯逻辑文件Node声明、scripts/runtime-asset-redundancy-review.mjs单一已审查指纹、docs/quality-gates.md及docs/evidence/2026-10-26-test-repair-speed/。原72项失败修复，954文件9486通过/0失败/37有说明跳过，进程异常0；完整门454.32秒。局部同名同状态对照：656项27.51→14.46秒，两慢文件34.90→31.23秒；新增隔离/清理契约通过。1957个输入及HEAD未漂移；index字节哈希变化单列，收尾暂存内容与HEAD一致。保留游戏源码及他人增量，无仓库文件删除、build、提交/推送或新增长驻服务。 |
+| Friday（测试流程提速 WF-test-flow-speed-1026） | 2026-10-26 | 完成未提交、编辑释放 | 自有package.json、vite.config.js、scripts/{acceptance-gate,gate-plan,workflow-evidence,test-changed,test-timing-reporter}.mjs，workflow-staged/gate-receipt/acceptance-gate与E8/性能条件测试、fixture-copies/test-changed/test-timing-reporter新测试及helper，docs/quality-gates与WORKFLOW-TOOLS及docs/evidence/2026-10-26-test-flow-speed/，完整路径/指纹见verification.json。按改动入口沿原门选择；独立夹具与前置权限探测；当次耗时/跳过报告。相关7文件165项及日常入口通过；配对81.81→55.79秒、用例状态相同。完整门9412过/72失败/37跳过、1通信超时，未记通过；只读对照定位69项到现行事件/战斗增量、3项素材指纹未审查。未改游戏源码/审计基线/预算，无删除仓库文件/build/提交/推送或新增长驻服务。 |
+| Friday（旧测试流程与断言维护 WF-test-maintenance-1025） | 2026-10-25 | 完成未提交、编辑释放 | 老板确认原聊天结束后全部接手；自有15个测试文件与tests/helpers/battle-fixtures.js、vite.config.js、docs/quality-gates.md及docs/evidence/2026-10-25-test-maintenance/（完整路径与指纹见verification.json）；保留上一轮成果。合并8个等待实现、修14个静默到期分支、移除2个旧能力静默返回与2项弱守卫，恢复实际性能计数；配置收集950文件不漏不重。完整质量门9470通过/37条件跳过；最终7文件71项补验通过；无文件删除、游戏源码修改、build、暂存/提交/推送，无新增长驻服务。 |
+| Friday（测试现行化续清 WF-test-modernization-r2-1025） | 2026-10-25 | 已释放；老板停止后保留现场 | 原聊天01a172ea-d69a-7491-8925-ecee2494e01e最后已按老板停止指令结束；本轮未新增测试修改。测试维护由老板新开的当前聊天01a173a2-6034-7770-a661-3e2117094bcb接手，上一轮完成未提交改动原位保留。 |
+| Friday（现行测试梳理与精简 WF-test-modernization-1025） | 2026-10-25 | 完成未提交、编辑释放 | 静态扫描949文件；更新19个测试文件与缺卡fixture及质量门说明；合并67重复用例并移除1过期等待，正常整批迁移89次降8次，清除5项过期缺卡豁免。31文件570项定向通过、两项故障注入被拒绝；lint/docs/空白检查通过。证据 docs/evidence/2026-10-25-test-modernization/。未改游戏源码、正式卡库及正式门禁；本轮未重跑全库、未暂存/提交/推送。 |
 | Friday（冻结提交依赖补齐 WF-full-submit-deps-1025） | 2026-10-25 | 已随源码本地提交、编辑释放 | 源码导航移除已空域，目录检查与冻结输入清单忽略空目录并保留实际新增域漂移守卫；13份已完成备注/文档资料随代码同组；5文件定向 37 项通过；记录见 docs/evidence/2026-10-25-full-submit/，待决及其他服务保留。 源码提交 ef97fe53754e5436b21a49a261f9469a94eff208；真实暂存完整门9524项通过、42项既有跳过，无失败或未处理异常；未推送。 |
 | Friday（完整提交与测试 WF-full-submit-1025） | 2026-10-25 | 源码与必需资料已本地提交、编辑释放；其余文档证据随本轮文档笔落库 | 老板授权全部完成改动合拢与测试修复，续令按现行文本删除旧复合池与旧断言；源码、测试及相关文档已修复，定向148项与最后问题67项通过，实页真实输入、构建及预算证据见 docs/evidence/2026-10-25-full-submit/；保留待决候选、配置备份、PV中间产物与他人服务；未授权推送。 源码提交 ef97fe53754e5436b21a49a261f9469a94eff208；真实暂存完整门9524项通过、42项既有跳过，无失败或未处理异常；未推送。 |
 | Friday（已验证增量准备 WF-next-verified-main-1021） | 2026-10-25老板确认没有在途内容；现有增量交WF-full-submit-1025合拢，编辑占用释放；原验收局限保留，统一以本轮冻结结果为准。 | 2026-10-25 | 源码归属随本轮提交；历史候选证据保留 |
@@ -2031,3 +2191,16 @@ Friday / 存档首进预加载修复 WF-first-slot-preload-1025，2026-10-25：�
 Friday / 米高芬玩偶熊改名重绘 WF-migaofen-bear-1025，2026-10-25：完成未提交、编辑释放。cmtn6ulm4boj卡图/缩略图替换棕色布艺玩偶熊，mapping本卡revision、manifest两条及count更新；game/src/core/creature-identity.js集中现行名称与旧名兼容，cards.sync.renames.js按ID更新卡库/存档副本，card-description-text.js同步征召，battle.engine.factory.domain.js与effect-steps.m2.domain.js同步召唤名称/日志，battle.layers.js添加熊图与旧名形象映射；稳定ID、4/4及承伤/自动攻击逻辑保留。官方入口重生成图鉴，cards/m2-contract/ally-dom与图鉴共71项、6份源码ESLint通过；证据docs/evidence/2026-10-25-migaofen-bear/。未手改cards-sync.json，未实页/build/提交/推送，保留他人增量。
 
 Friday / 米高芬朝右透明战斗立绘 WF-migaofen-battle-1025，2026-10-25：完成未提交、编辑释放。新增game/assets/portraits/allies/migaofen-v1.webp，1024×1536 RGBA、朝右全身站立，Alpha范围0–255/四角0；battle.layers.js将米高芬/步兵两项随从映射改为本立绘，manifest新增本图及count。保留玩偶熊身份、现有卡图和4/4行为；来源/提示词/备份见docs/evidence/2026-10-25-migaofen-battle/。11项随从DOM测试通过；未实页/build/提交/推送。
+
+Friday（无存档便携交付 WF-portable-clean-1025）：已交付、编辑释放；desktop-app/dist/代号柒-v0.60.0-便携无存档-20261025.exe；隔离副本根.tmp/portable-clean-1025/保留。独立空资料目录；构建/预算、资源/封装、双启动及复制SHA通过，证据docs/evidence/2026-10-25-WF-portable-clean-1025/。此前9个完成提交已推送origin/master至17317a7b，其他会话活跃测试维护原位保留，无服务。
+
+Friday（星月立绘接手续装 WF-xingyue-install-1026；01a17822），2026-10-26：完成未提交、编辑释放；默认立绘/人设参考副本、art.js星月皮肤条目、asset-manifest对应两条、自有docs/evidence/2026-10-26-xingyue-install/；光牧修脸版替换默认，原机位空手暗牧加入皮肤。两图原尺寸居中左右补白至2731×1536，人物像素完整保留；来源、备份、尺寸与哈希见receipt.json；未测试/build/实页/提交，无新服务。
+
+
+
+Friday（星月实机比例修正 WF-xingyue-ratio-1026；01a17822），2026-10-26：完成未提交、编辑释放；仅game/css/roster-departure-v2.css星月默认/暗牧双入口补白适配。原contain将补白计入宽度导致人物缩小，现按高度等比显示、裁去侧边白边。当前内置窗口真实进入档位02，人物外观与正式出征选人两页默认/暗牧四状态目视复核完整全身，Stylelint通过；未起局/未build/未提交。证据docs/evidence/2026-10-26-xingyue-install/ratio-verification.json。
+
+Friday（四位新首脑 WF-boss10-13-1026；01a17822），2026-10-26：完成未提交、编辑释放。四位新首脑加入map.json原池，不保留编号；boss-mechanics/lifecycle/enemy-phase/combat.factory/enemy-intent机制接齐，新增core/enemy-mode-scaling.js供召唤和run/game.session.modes.js共用。四张NAI5＋内置朝左透明立绘、四张战斗派生、art-mapping与asset-manifest新条目、enemy-portrait-presentation几何已接入，Art临时别名已撤。自有新专测及hard-mode-entry/reduction对应扩展，规则/剧情说明和game/dev/boss-roster-review.{html,js}内存验收页；证据docs/evidence/2026-10-26-boss10-13/README.md。七文件121项通过，随后相关四文件95项通过含新专测9项（重叠不累加）；定向lint/数据及战斗结算/基础类型通过；全局类型范围外错误保留。内置页仅教皇正式入口DOM确认，全部实页与完整战斗未覆盖，老板要求收尾后停止扩展。未build/提交/推送，无新服务，复用5200。
+`nFriday（分层跨层过场 WF-layer-cinematics-1026），2026-10-26：完成未提交、编辑释放；game/src/ui/map-passage.js、新game/src/ui/layer-passage-profiles.js、game/css/map-passage.css、game/dev/layer-passage-review.html、tests/map-passage.test.js、新增scenes/cinematic/layer-*-v2.webp、asset-manifest仅本批条目/count、自有docs/evidence/2026-10-26-layer-cinematics/。老板授权各层差异演出，NAI5起稿＋内部重绘，统一既有黑底灰白暗红剪影；不碰活跃run流程属地，不提交，无服务。
+Friday（恢复系列统一 WF-layer-cinematics-1026追加），2026-10-26：完成未提交、编辑释放；game/src/ui/outcome-feedback.js、game/css/fire-rest-feedback.css、新ui/outcome/*-v2.webp、asset-manifest仅本批条目/count与自有分层过场证据（secondary-ui-style由其他活跃会话占用，未改，现行差异另记）。老板追加回血等风格统一，NAI5＋内部重绘；不改结算/付款/生命周期，沿明确不用测试，不测试/lint/实页/build/提交。
+Friday / WF-layer-cinematics-1026收官补充：三张分层过场NAI5＋内置重绘已接入；回血/复原/献祭激活按老板纠正改为局部小反馈，上限340px容器、48–64px透明特效，默认≤900ms，无整页遮罩。实际卡面和结算归属保留。来源/全部范围/旧检查失败及最终未验边界见docs/evidence/2026-10-26-layer-cinematics/README.md；停止指示后未再测试/lint/实页/build，无新服务、未提交。前期整幅回血候选未接入。两项自有占用均释放。

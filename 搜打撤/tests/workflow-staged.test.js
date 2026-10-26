@@ -1,11 +1,10 @@
+import { createFixtureCopies } from './helpers/fixture-copies.js';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
-import os from 'node:os';
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, describe, expect, it } from 'vitest';
 import { runStaged, stagedPlan } from '../scripts/workflow-staged.mjs';
 
-const roots = [];
 const activeCases = new Set();
 function asyncCase(body) {
   return () => {
@@ -16,8 +15,7 @@ function asyncCase(body) {
   };
 }
 const git = (root, args, input) => execFileSync('git', args, { cwd: root, input, encoding: 'utf8' });
-function fixture() {
-  const root = mkdtempSync(path.join(os.tmpdir(), 'sdt-staged-test-')); roots.push(root);
+function initializeFixture(root) {
   git(root, ['init', '-q']); git(root, ['config', 'core.autocrlf', 'false']);
   git(root, ['config', 'user.email', 'fixture@example.invalid']); git(root, ['config', 'user.name', 'fixture']);
   const project = path.join(root, '搜打撤');
@@ -44,20 +42,19 @@ else console.log('snapshot passed');
 }
 `);
   git(root, ['add', '.']); git(root, ['commit', '-qm', 'fixture']);
+}
+const fixtureCopies = createFixtureCopies('sdt-staged-test-', initializeFixture);
+afterAll(() => fixtureCopies.dispose());
+function fixture() {
+  const root = fixtureCopies.create();
+  const project = path.join(root, '搜打撤');
   return { root, project, value: path.join(project, 'scripts/value.txt') };
 }
 const options = { task: 'fixture', date: '2026-09-30', json: true };
 afterEach(async () => {
   // Vitest timeout does not cancel the test promise. Await its entire body, including later runs,
-  // before deleting a fixture used by a still-running Git/Node process.
+  // before the next case and file cleanup can touch its Git/Node fixture.
   await Promise.allSettled([...activeCases]);
-  for (const root of roots.splice(0)) {
-    const relative = path.relative(os.tmpdir(), root);
-    if (!relative.startsWith('sdt-staged-test-') || relative.includes(path.sep)) throw new Error('拒绝清理非自有 fixture');
-    rmSync(root, { recursive: true, force: true });
-    if (existsSync(root) && process.platform === 'win32') execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command',
-      'Remove-Item -LiteralPath $env:SDT_STAGED_TEST_CLEANUP_PATH -Recurse -Force -ErrorAction Stop'], { env: { ...process.env, SDT_STAGED_TEST_CLEANUP_PATH: root } });
-  }
 }, 90_000);
 
 describe('Git index 隔离验收', () => {

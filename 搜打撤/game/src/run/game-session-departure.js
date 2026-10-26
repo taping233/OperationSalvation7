@@ -30,6 +30,8 @@ function grantStarterSha(log = /** @param {Parameters<ReturnType<typeof readUI>[
 
 let pendingDeparture = null;
 let departureInFlight = null;
+let pendingPublication = null;
+let publicationGeneration = 0;
 
 function restoreDepartureState(state, random) {
   for (const key of Object.keys(readState().game)) if (!Object.hasOwn(state, key)) delete readState().game[key];
@@ -37,35 +39,108 @@ function restoreDepartureState(state, random) {
   Random.restore(random);
 }
 
-function publishDeparture(candidate, options) {
-  restoreDepartureState(candidate.state, candidate.random);
-  nextTerminalGeneration();
-  resetRunCounters();
-  applyModeRules();
-  setLobby(false);
-  readServices().Sound.music('board');
-  readUI().clearLog();
-  candidate.logs.forEach(args => readUI().log(.../** @type {Parameters<ReturnType<typeof readUI>['log']>} */ (args)));
-  enterLayer(readState().game.layerIdx, readState().game.trackPos, { preserveBossPlan: true, deferSave: true });
-  if (!options.skipClassChoice) return readState().runtime.openClassChoice();
+async function publishDeparture(publication) {
+  const { candidate, options } = publication;
+  // Keep completed stages in the live run: retries must not restore stale card,
+  // Map/Set or RNG snapshots over work already completed by character confirmation.
+  /** @type {Array<() => unknown>} */
+  const stages = [
+    () => { publication.restored = true; restoreDepartureState(candidate.state, candidate.random); },
+    () => nextTerminalGeneration(),
+    () => resetRunCounters(),
+    () => applyModeRules(),
+    () => setLobby(false),
+    () => presentDeparture(candidate),
+    () => enterLayer(readState().game.layerIdx, readState().game.trackPos, { preserveBossPlan: true, deferSave: true }),
+    () => options.skipClassChoice || readState().game.myClass ? undefined : readState().runtime.openClassChoice(),
+  ];
+  while (publication.stage < stages.length) {
+    if (!publication.handle.isCurrent()) return false;
+    const value = await stages[publication.stage]();
+    if (value === false) return false;
+    publication.value = value;
+    publication.stage++;
+  }
+  return publication.handle.isCurrent();
 }
 
+function presentDeparture(candidate) {
+  // 出征存档已提交；单项声音或日志失败仍须继续发布地图与人物确认。
+  try { readServices().Sound.music('board'); }
+  catch (error) { console.warn('[departure] 出征音乐未播放', error); }
+  try { readUI().clearLog(); }
+  catch (error) { console.warn('[departure] 出征日志未清空', error); }
+  candidate.logs.forEach(args => {
+    try { readUI().log(.../** @type {Parameters<ReturnType<typeof readUI>['log']>} */ (args)); }
+    catch (error) { console.warn('[departure] 出征日志未显示', error); }
+  });
+}
+
+function retainPublication(candidate, options, contextCurrent, originCurrent, generation) {
+  const publication = { candidate, options, stage: 0, restored: false, done: false, invalid: false, flight: null, value: undefined, handle: null };
+  const isCurrent = () => {
+    const game = readState().game;
+    const valid = !publication.invalid && publicationGeneration === generation && contextCurrent() &&
+      (!options.isPublicationCurrent ? !options.isCurrent || options.isCurrent() : options.isPublicationCurrent()) &&
+      (publication.restored
+        ? game.seed === candidate.state.seed && game.discoveredPairs === candidate.state.discoveredPairs &&
+          game.runActive && !game.pendingExtraction && !game.extractionPending && !game.terminalPending &&
+          !['title', 'done', 'terminalPending'].includes(game.state)
+        : originCurrent());
+    if (!valid) {
+      publication.invalid = true;
+      if (pendingPublication === publication) pendingPublication = null;
+    }
+    return !!valid;
+  };
+  const retry = () => {
+    if (publication.flight) return publication.flight;
+    if (!isCurrent() || publication.done) return Promise.resolve(publication.done && isCurrent());
+    const flight = Promise.resolve().then(() => publishDeparture(publication)).then(ok => {
+      if (ok) {
+        publication.done = true;
+        if (pendingPublication === publication) pendingPublication = null;
+      }
+      return ok;
+    }).catch(error => {
+      console.warn('[departure] 已保存的出征尚未完成发布', error);
+      return false;
+    }).finally(() => { if (publication.flight === flight) publication.flight = null; });
+    publication.flight = flight;
+    return flight;
+  };
+  publication.handle = { status: 'departure-pending', committed: true, retry, isCurrent };
+  pendingPublication = publication;
+  return publication;
+}
+
+// 已提交而发布未完成时返回 departure-pending；retry 只继续该候选的发布。
+// isCurrent 属于原入口，isPublicationCurrent 延续转交后的同一次远征。
 function newRun(mode, picks, options = {}) {
+  if (pendingPublication?.handle.isCurrent()) return Promise.resolve(pendingPublication.handle);
   const slot = readState().activeSlot;
+  const base = readServices().Base, baseGeneration = base._selectionGeneration;
+  const originGame = readState().game;
   const seed = readState().game.seed;
   const originState = readState().game.state, originPairs = readState().game.discoveredPairs;
-  const current = () => readState().activeSlot === slot && (slot == null || readServices().Base.slot === slot) && readState().game.seed === seed &&
-    readState().game.state === originState && readState().game.discoveredPairs === originPairs && (!options.isCurrent || options.isCurrent());
+  const contextCurrent = () => readState().game === originGame && readState().activeSlot === slot && readServices().Base === base && base._selectionGeneration === baseGeneration && (slot == null || base.slot === slot);
+  const originCurrent = () => readState().game.seed === seed && readState().game.state === originState && readState().game.discoveredPairs === originPairs;
+  const current = () => contextCurrent() && originCurrent() && (!options.isCurrent || options.isCurrent());
   const request = JSON.stringify([slot, mode, picks, !!options.skipClassChoice]);
   if (departureInFlight) return departureInFlight.request === request ? departureInFlight.promise : Promise.resolve(false);
+  const generation = ++publicationGeneration;
   const persistence = slot ? createDeparturePersistence({
     storage: readStorage(), baseApi: readServices().Base, runStore: RunStorage, txKey: TX_KEY,
   }) : null;
   const work = () => prepareNewRun(mode, picks, persistence, slot);
   const promise = (persistence ? persistence.withLock(slot, current, work) : Promise.resolve(current() ? work() : false))
     .then(result => {
+      if (result?.candidate) {
+        const publication = retainPublication(result.candidate, options, contextCurrent, originCurrent, generation);
+        if (!current()) return publication.handle;
+        return publication.handle.retry().then(ok => ok ? publication.value : publication.handle);
+      }
       if (!current()) return false;
-      if (result?.candidate) return publishDeparture(result.candidate, options);
       if (result?.ok === false) readUI().log(`[[icon:cross]] ${result.message}`, 'warn');
       return false;
     }).finally(() => { if (departureInFlight?.promise === promise) departureInFlight = null; });
@@ -163,7 +238,7 @@ function initializeNewRun(mode, departure, log) {
   readState().game.bossPlan = null;   // 本层首脑预案（进层时重 roll，见 enterLayer）
   readState().game.surrenderedRun = false;   // 本局是否因主动撤离判负（区分战败/撤离失败文案）
   readState().game.bossKilled = false;   // 第四层击败首脑后才能终局撤离
-  readState().game.visited = {};   // 已结算过的一次性格（防回头路重刷战斗/宝箱/事件）
+  readState().game.visited = {};   // 已结算过的一次性格（防回头路重刷战斗/搜刮点/事件）
   readState().game.seen = {};      // 战争迷雾：走过的节点 + 当前相邻节点可见，其余隐藏
   readState().game.explored = {};   // 2026-10-03 老板（SYS-01）：首次踏入过的格（撤离经验只算首探量，防安全往返刷经验）
   log(`欢迎来到<b>代号7</b>：本次玩法【<b>${modeCfg().name}</b>】——${modeCfg().ckpt}`, 'sys');

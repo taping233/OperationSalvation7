@@ -95,7 +95,7 @@ describe('L2有战斗门槛与休整时序的route-v2',()=>{
       const v1={...made,layers:previous.baseLayers,routeVersion:'r5-routes-v1',routePlan:made.routePlan.baseRoutePlan};
       expect(validateMapSnapshot(v1).ok).toBe(true);
     }
-    const protectedFiles={'game/src/run/layeredMap.js':'a9bd0bea6807d6402c811aedf658a66e38f0a0e545982ff3bf10459187a671ab','game/src/ui/route-overlay.js':'89e7c2a4b0c952e7de0327df85100f9fffb7bed2dd6eeb491ddd9c282b69eb21'};
+    const protectedFiles={'game/src/run/layeredMap.js':'a9bd0bea6807d6402c811aedf658a66e38f0a0e545982ff3bf10459187a671ab','game/src/ui/route-overlay.js':'40f37da91e97636ce6f646ee53070c1fd0e98e4d423117b7cf67775a175b7767'};
     for(const[path,hash]of Object.entries(protectedFiles))expect(createHash('sha256').update(readFileSync(path,'utf8').replaceAll('\r\n','\n')).digest('hex')).toBe(hash);
   });
   it('指纹不受next数组顺序变化影响，但边或类型改变一定被本例拒绝',()=>{

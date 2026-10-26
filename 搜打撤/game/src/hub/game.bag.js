@@ -1,6 +1,6 @@
 import { createLegacyBagUse } from './bag-legacy-use.js';
 import { createBagContainerPages } from './bag-container-pages.js';
-import { discardInventoryCard, craftInventoryToken } from './bag-inventory-commands.js';
+import { createBagInventoryActions } from './bag-inventory-actions.js';
 import { sameStoredCard } from './stored-card-identity.js';
 import { patchBackpackPane, captureBackpackPosition, restoreBackpackPosition } from './bag-pane-view.js';
 import { deriveBagRenderState, syncBagCardOrder } from '../core/bag-render-derivation.js';
@@ -12,16 +12,18 @@ import { MAP, bagCap, safeCap } from '../run/game.session.js';
 import { escAttr } from '../core/shared.js';
 import { cardStacks, game, newUid, safeUsed, saveGame, usedSlots } from '../run/game.session.js';
 import { Random } from '../core/random.js';
-import { setBagReturnHook as _setBagReturnHook, takeBagReturnHook } from './bag-return-hook.js';
+import { setBagReturnHook as _setBagReturnHook, claimBagReturnHook, returnToBagSource } from './bag-return-hook.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 import { bagSlots } from './game.bag.bridge.js';
 import { bagDrag, resetBagDrag } from './game.bag.drag.js';
-import { bagUseStatus } from './game.bag.rules.js';
+import { bagUseStatus, mapBagUseHint } from './game.bag.rules.js';
+import { isBagItemUsePending } from './bag-item-use.js';
 import { pageHTML as bagV2PageHTML, rarityOf as bagV2Rarity } from './game.bag.view2.js';
 import { captureBattleContext } from '../battle/battle-loader.js';
 import { createRewardOrganizer } from './game.reward-organizer.js';
 import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
 import { createOperationNotice } from '../ui/operation-notice.js';
+import { claimInputIsolation } from '../ui/input-isolation.js';
 import { createSafeTransfer } from './game.bag.safe-transfer.js';
 function closeBagZoom() {
   const zoom = document.getElementById('cardZoom');
@@ -52,19 +54,25 @@ const { button:safeTransferButton, move:moveStackSafe } = createSafeTransfer({
   captureContext:() => captureBattleContext(game), beforeSelection:rememberBagPosition,
   cardHTML:card => SDT.Cards.cardHTML(card), sound:kind => SDT.Sound.sfx(kind), receipt:setBagReceipt,
 });
-function setBagReceipt(text) {
+function setBagReceipt(text, tone = 'ok') {
   bagReceipt = { cards:game.ownedCards };
-  bagNotice.set(text);
+  bagNotice.set(text, tone);
 }
 let bagReturnPosition = null;
 function rememberBagPosition(name) {
   const position = captureBackpackPosition(UI.el.ovBody, name);
   if (position) bagReturnPosition = { position, current:captureBattleContext(game), cards:game.ownedCards };
 }
+const { discardOwnedCard, showDiscardConfirm, craftBagToken } = createBagInventoryActions({
+  UI, game, readCards:() => SDT.Cards, newUid, baseCap:() => SDT.Base.bagCap(), saveGame, showBackpack,
+  captureContext:() => captureBattleContext(game), captureBagView, rememberBagPosition,
+  closeZoom:closeBagZoom, setReceipt:setBagReceipt,
+});
+game.discardCard = discardOwnedCard;
 function showBackpackSection(section) {
   if (game.battleActive) return;
   requestedBagSection = ['safe', 'pocket'].includes(section) ? section : 'main';
-  showBackpack();
+  return showBackpack();
 }
 bagSlots.moveStackOrder = moveStackOrder;
 bagSlots.moveStackSafe = moveStackSafe;
@@ -74,9 +82,11 @@ bagSlots.organizeReward = createRewardOrganizer({ UI, game, shaName:SDT.Cards.SH
 bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用（contracts 拒环）
 const { useOwnedCard } = createLegacyBagUse({ UI, game, readCards:() => SDT.Cards, baseCap:() => SDT.Base.bagCap(),
   items:MAP.items, Random, newUid, saveGame, showBackpack, usedSlots, bagCap,
-  captureContext:() => captureBattleContext(game), setBagReceipt });
+  captureContext:() => captureBattleContext(game), setBagReceipt,
+  beforePresent:() => { closeBagZoom(); return captureBagView(); } });
 const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, readCards:() => SDT.Cards,
   sound:kind => SDT.Sound.sfx(kind), baseCap:() => SDT.Base.bagCap(), cardStacks,
+  captureContext:() => captureBattleContext(game),
   usedSlots, bagCap, saveGame, showBackpack, rememberBagPosition, captureBagView, bagAct, decorateInventoryZoom });
 
 
@@ -113,68 +123,44 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
   }
 
   function closeBackpack() {
-    bagReturnPosition = null;
+    if (!backpackOpen || !UI.el.ovBody?.querySelector('.bag-view') || !bagRunCurrent?.()) return false;
+    if (bagClosePending?.owner === bagReturnOwner && bagClosePending.current === bagRunCurrent) return bagClosePending.promise;
+    const owner = bagReturnOwner, sameBag = captureBagView(), body = UI.el.ovBody;
+    const root = /** @type {HTMLElement} */ (body.firstElementChild), revision = UI._overlayRevision, current = bagRunCurrent;
     rememberBagPosition();
-    backpackOpen = false;
-    resetBagDrag();
-    UI.hideOverlay();
-    // 从搜刮界面打开的背包：关闭后回到当前搜刮面板继续开箱（2026-09-09 留言 #13）
-    if (bagOverChest) {
+    const finish = () => {
+      backpackOpen = false;
       bagOverChest = false;
-      game.state = 'modal';
-      if (SDT.Chests && SDT.Chests.resume) SDT.Chests.resume();
+      bagReturnOwner = null;
+      bagRunCurrent = null;
+      resetBagDrag();
       UI.refresh(game);
-      return;
+      return true;
+    };
+    if (owner) {
+      const closing = { owner, current, promise:null };
+      const releaseInput = claimInputIsolation(root);
+      closing.promise = returnToBagSource(owner, { isCurrent:sameBag,
+        didReturn:() => current() && UI.el.ovBody === body && UI._overlayRevision === revision + 1
+          && body.firstElementChild !== root && !body.querySelector('.bag-view')
+          && !UI.el.overlay.hidden && !UI.el.overlay.classList?.contains('closing') }).then(returned => {
+        if (bagReturnOwner !== owner || bagRunCurrent !== current || !current()) return false;
+        if (!returned) {
+          if (sameBag()) setBagReceipt('来源页面暂未恢复，请再次点击返回；背包与待领进度已保留。', 'warn');
+          return false;
+        }
+        return finish();
+      }).finally(() => {
+        releaseInput();
+        if (bagClosePending === closing) bagClosePending = null;
+      });
+      bagClosePending = closing;
+      return closing.promise;
     }
-    // 从其他页面（商店/事件/物资格页等）打开的背包：关闭后调用返回钩子回到原页面（2026-09-12 留言 #31；
-    // 来源恢复协议 09-20——钩子消费即清空，由 bag-return-hook.js 中立模块承载）
-    const returnHook = takeBagReturnHook();
-    if (returnHook) {
-      returnHook();
-      return;
-    }
+    if (!sameBag()) return false;
+    UI.hideOverlay();
     game.state = 'idle';
-    UI.refresh(game);
-  }
-
-  function discardOwnedCard(name, fromSafe, uid = null) {
-    const result = discardInventoryCard(game, { name, fromSafe, uid }, SDT.Cards.SHA);
-    if (result.ok === false) {
-      if (result.code === 'protected') UI.log('[[icon:lock]] 初始牌「初始攻击」不可丢弃', 'warn');
-      if (result.code === 'container-not-empty') UI.log('[[icon:bag]] 请先取出容器内所存卡牌，再丢弃最后一个容器', 'warn');
-      return false;
-    }
-    const { card } = result;
-    UI.log(`[[icon:trash]] 已丢弃【<b>${esc(card.name)}</b>】×1（无法取回）`, 'warn');
-    saveGame();
-    return true;
-  }
-  // Agent 接口面：跳过拖拽直接丢弃（背包满腾格）——docs/agent-protocol.md
-  game.discardCard = discardOwnedCard;
-
-  function showDiscardConfirm(name, fromSafe) {
-    rememberBagPosition(name);
-    backpackOpen = false;
-    game.state = 'modal';
-    // 2026-09-19 留言 #25：确认页背景透明——走 fx-glass 暗纱 + 中性玻璃面板
-    UI.showOverlay('[[icon:question]] 丢弃卡牌？', `
-      <div class="glass-panel">
-        <p class="ov-note">确认后将永久丢弃【<b>${esc(name)}</b>】1 张，无法从消耗区或消耗牌堆取回。</p>
-        <div class="ov-btns">
-          <button class="ov-btn" data-act="cancelDragDiscard" data-cancel="true">取消，放回背包</button>
-          <button class="ov-btn danger" data-act="confirmDragDiscard" data-cancel="false">确认丢弃</button>
-        </div>
-      </div>`, 'glass', { initialFocus: '[data-act="cancelDragDiscard"]' });
-    bagAct('confirmDragDiscard', () => { discardOwnedCard(name, fromSafe); showBackpack(true); });
-    bagAct('cancelDragDiscard', () => showBackpack(true));
-  }
-
-  function craftBagToken(kind, sourceUid) {
-    const result = craftInventoryToken(game, { kind, sourceUid }, { cards:() => SDT.Cards.all(), newUid, baseCap:() => SDT.Base.bagCap() });
-    if (result.ok === false) { if ('reason' in result) UI.log(result.reason, 'warn'); return; }
-    UI.log(result.message, 'loot');
-    saveGame();
-    showBackpack(true);
+    return finish();
   }
 
 
@@ -215,7 +201,7 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
       return sortStacksByOrder(safeStacks, orderIndex).map(st => ({ uids:st.uids, name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 1, zone: 'safe' }));
     }
     if (bagZone === 'pocket') {
-      return game.usedPocket.map(p => ({ name: p.card.name, card: p.card, rarity: bagV2Rarity(p.card), type: p.card.type, cost: p.card.cost, count: p.count, zone: 'pocket' }));
+      return game.usedPocket.map((p, pocketIndex) => ({ pocketIndex, name: p.card.name, card: p.card, rarity: bagV2Rarity(p.card), type: p.card.type, cost: p.card.cost, count: p.count, zone: 'pocket' }));
     }
     const supplies = game.inventory.flatMap(it => Array.from({ length:Math.ceil((it.count || 1) / 3) }, (_, index) =>
       ({ name:it.name, value:it.value, tier:it.tier, count:Math.min(3, (it.count || 1) - index * 3), supply:1, zone:'bag' })));
@@ -230,26 +216,53 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
   }
   // 看卡操作台（2026-10-15 老板定向：右侧复用基地仓库同款 inventory-zoom 界面）：
   // 点格子直接开 presentation:'inventory' 特写——大真卡面 + camp-card-actions 页脚。
-  function openBagZoom(name, safe, pocket = false, returnFocus = null, uid = null) {
+  function openBagZoom(name, safe, pocket = false, returnFocus = null, uid = null, pocketIndex = null) {
+    const visibleEntries = () => pocket ? game.usedPocket : bagZoneTiles(deriveBagRenderState(game, SDT.Base.bagCap())).filter(tile => tile.card);
+    const entry = pocket ? (Number.isInteger(pocketIndex) ? game.usedPocket[pocketIndex] : null) : findBagStack(name, safe, uid);
+    if (!entry?.card) return;   // 物资格不开浮层：名称/等级/价值在格子与 tooltip 上
+    const representativeUid = pocket ? null : entry.uids[0];
+    const currentEntry = () => visibleEntries().find(item => pocket ? item === entry : item.uids.includes(representativeUid));
+    const getIndex = () => visibleEntries().findIndex(item => pocket ? item === entry : item.uids.includes(representativeUid));
     const tiles = [.../** @type {NodeListOf<HTMLElement>} */ (UI.el.ovBody?.querySelectorAll('.bag-tile[data-stack]') || [])];
-    const source = tiles.find(tile => uid ? tile.dataset.uid === uid : tile.dataset.stack === name);
+    const source = tiles.find(tile => pocket ? Number(tile.dataset.pocketIndex) === pocketIndex
+      : representativeUid ? tile.dataset.uid === representativeUid : tile.dataset.stack === name);
     const focus = returnFocus || source;
+    const root = /** @type {HTMLElement} */ (UI.el.ovBody?.firstElementChild), zone = bagZone, filter = bagFilter;
+    const sourceView = captureBagView(() => root);
+    const sourceCurrent = () => sourceView() && bagZone === zone && bagFilter === filter;
+    /** @type {import('../ui/ui.dom.types.js').CardZoomElement | null} */
+    let zoom = null;
     let browseCurrent = () => false;
-    const liveStacks = pocket ? game.usedPocket : cardStacks(!!safe);
-    const displayed = tiles.map(tile => liveStacks.find(stack => tile.dataset.uid ? stack.uids?.includes(tile.dataset.uid) : stack.card.name === tile.dataset.stack)).filter(Boolean);
-    const onBrowse = (card, index) => { if (browseCurrent()) openBagZoom(card.name, safe, pocket, focus, displayed[index]?.uids?.[0]); };
+    const writing = () => isBagItemUsePending(game) || root?.inert || zoom?.getAttribute('aria-busy') === 'true';
+    const canNavigate = () => sourceCurrent() && browseCurrent() && !writing();
+    const refreshBrowse = () => { if (zoom && document.getElementById('cardZoom') === zoom) zoom._refreshCardZoomBrowse?.(); };
+    const reopen = next => openBagZoom(next.card.name, safe, pocket, focus,
+      pocket ? null : next.uids[0], pocket ? game.usedPocket.indexOf(next) : null);
+    const browse = {
+      getItems:() => visibleEntries().map(item => item.card), getIndex, canNavigate,
+      onBrowse:(card, index) => {
+        if (!canNavigate()) return;
+        const next = visibleEntries()[index];
+        if (next?.card === card) reopen(next);
+      },
+      onReopen:() => {
+        if (!sourceCurrent() || writing()) return false;
+        const current = currentEntry();
+        if (!current) return false;
+        reopen(current);
+        return true;
+      },
+    };
     if (pocket) {
-      const entry = game.usedPocket.find(item => item.card.name === name);
-      if (entry) {
-        UI.showCardZoom(entry.card, { items:game.usedPocket.map(item => item.card), onBrowse, presentation: 'inventory', from: source, returnFocus: focus,
-          footer: `<div class="camp-detail"><p>已消耗 ${entry.count} 张 · ${['道具', '装备'].includes(entry.card.type) ? '火堆不可复原；能源结晶可按顺序复原' : '可在火堆或使用复原道具取回'}。</p></div>` });
-        decorateInventoryZoom(entry.card);
-        browseCurrent = captureBagView();
-      }
+      UI.showCardZoom(entry.card, { ...browse, presentation: 'inventory', from: source, returnFocus: focus,
+        footer: `<div class="camp-detail"><p>已消耗 ${entry.count} 张 · ${['道具', '装备'].includes(entry.card.type) ? '火堆不可复原；能源结晶可按顺序复原' : '可在火堆或使用复原道具取回'}。</p></div>` });
+      zoom = /** @type {import('../ui/ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'));
+      decorateInventoryZoom(entry.card);
+      browseCurrent = captureBagView();
+      refreshBrowse();
       return;
     }
-    const st = findBagStack(name, safe, uid);
-    if (!st || !st.card) return;   // 物资格不开浮层：名称/等级/价值在格子与 tooltip 上
+    const st = entry;
     const card = st.card, safeFlag = !!safe;
     const usable = !safeFlag && card.type === '道具';
     const isSha = card.id === SDT.Cards.SHA.id;
@@ -267,26 +280,32 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
     const material = SDT.Base.materialInfo?.(card);
     const hint = safeFlag ? '撤离失败也能带回基地。'
       : material ? '不计入散装物资估值；带回后在仓库使用，计入基地库存。'
-      : card.type === '道具' ? '治疗、复原与通行证B/C可在背包使用；其余道具依效果在战斗使用。'
+      : card.type === '道具' ? mapBagUseHint(card) || '治疗、复原与通行证B/C可在背包使用；其余道具依效果在战斗使用。'
       : '';
     UI.showCardZoom(card, {
-      items:displayed.map(stack => stack.card), index:displayed.findIndex(stack => stack.uids.includes(st.uids[0])),
-      onBrowse,
+      ...browse,
       presentation: 'inventory',
       from: source, returnFocus: focus,
-      footer: `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>×${st.count}</b> 张</span><span class="inspect-collection-state">${zoneLabel}</span></div>${hint ? `<p class="inspect-collection-hint">${hint}</p>` : ''}${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}</div>`,
+      footer: `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>×${st.count}</b> 张</span><span class="inspect-collection-state">${zoneLabel}</span></div>${hint ? `<p class="inspect-collection-hint">${esc(hint)}</p>` : ''}${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}${bagNotice.html({ className:'bag-receipt', keepEmpty:true })}</div>`,
+    });
+    zoom = /** @type {import('../ui/ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'));
+    const detailAct = (action, handler) => bagAct(action, data => {
+      const result = handler(data);
+      refreshBrowse();
+      return result && typeof result.then === 'function' ? Promise.resolve(result).finally(refreshBrowse) : result;
     });
     // 特写页动作：特写打开时注册（旧守卫语义——特写被新详情替换即失效，生命周期测试锚定）
-    bagAct('useDetailCard', () => { rememberBagPosition(card.name); closeZoom(); return useOwnedCard(st.uids[0]); });
-    if (safeFlag) bagAct('zoomMoveToBag', () => moveStackSafe(card.name, false, { beforeMove:closeZoom }));
-    else if (!isSha) bagAct('zoomMoveToSafe', () => moveStackSafe(card.name, true, { beforeMove:closeZoom, onCancel:() => openBagZoom(card.name, false) }));
-    if (card.id === 'tt2-pearlbox') bagAct('pearlStoreZoom', () => { closeZoom(); openPearlStore(); });
-    if (card.id === 'tt7-stratagem' && !safeFlag) bagAct('pouchStoreZoom', () => { closeZoom(); openPouchStore(); });
-    bagAct('detailDiscard', () => { closeZoom(); showDiscardConfirm(card.name, safeFlag); });
-    bagAct('craftColorToken', () => { closeZoom(); craftBagToken('gold'); });
-    bagAct('craftColorTokenByFragments', () => { closeZoom(); craftBagToken('fragments'); });
+    detailAct('useDetailCard', () => { rememberBagPosition(card.name); return useOwnedCard(st.uids[0], captureBagView()); });
+    if (safeFlag) detailAct('zoomMoveToBag', () => moveStackSafe(card.name, false, { beforeMove:closeZoom }));
+    else if (!isSha) detailAct('zoomMoveToSafe', () => moveStackSafe(card.name, true, { beforeMove:closeZoom, onCancel:() => openBagZoom(card.name, false, false, focus, representativeUid) }));
+    if (card.id === 'tt2-pearlbox') detailAct('pearlStoreZoom', () => { closeZoom(); openPearlStore(); });
+    if (card.id === 'tt7-stratagem' && !safeFlag) detailAct('pouchStoreZoom', () => { closeZoom(); openPouchStore(); });
+    detailAct('detailDiscard', () => showDiscardConfirm(card.name, safeFlag));
+    detailAct('craftColorToken', () => craftBagToken('gold'));
+    detailAct('craftColorTokenByFragments', () => craftBagToken('fragments'));
     decorateInventoryZoom(card);
     browseCurrent = captureBagView();
+    refreshBrowse();
   }
   function showBackpack(refreshOnly) {
     if (game.battleActive) {
@@ -309,12 +328,9 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
     // 2026-09-09 留言 #13：搜刮界面也能打开背包整理 / 丢弃卡牌——
     // 挂起开箱流程（作废搜索演出计时器），关闭背包时回到当前搜刮面板继续开箱。
     // 旧版直接拦截是因为关背包会吞掉后续奖励，现在用 Chests.suspend/resume 保住流程
-    if (!refreshOnly && SDT.Chests && SDT.Chests.isOpen && SDT.Chests.suspend && SDT.Chests.isOpen()) {
-      bagOverChest = SDT.Chests.suspend();
-    }
-    if (!refreshOnly && backpackOpen && game.state === 'modal' && !UI.el.overlay.hidden) {
-      closeBackpack();
-      return;
+    const bagVisible = !!UI.el.ovBody?.querySelector('.bag-view') && !UI.el.overlay.hidden;
+    if (!refreshOnly && backpackOpen && bagVisible && game.state === 'modal') {
+      return closeBackpack();
     }
     if (game.state !== 'idle' && game.state !== 'modal') {
       // 不再静默返回：状态卡死（如移动链中断停在 moving）时玩家点击无任何反馈，
@@ -322,8 +338,18 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
       if (!refreshOnly) UI.log(`[[icon:hourglass]] 当前动作进行中（${game.state}），稍候再打开背包`, 'warn');
       return;
     }
+    if (!bagVisible) {
+      const source = claimBagReturnHook();
+      if (!refreshOnly || !backpackOpen || !bagRunCurrent?.() || source) {
+        bagOverChest = !!(!source && UI.el.ovBody?.querySelector('.cqo-overview, .reward-v14')
+          && SDT.Chests?.isOpen?.() && SDT.Chests?.suspend?.());
+        bagReturnOwner = bagOverChest ? claimBagReturnHook(() => SDT.Chests?.resume?.()) : source;
+        bagRunCurrent = captureBattleContext(game);
+      }
+    }
     // 拖拽进行中重开背包：清理浮影等残留状态
     if (bagDrag) resetBagDrag();
+    if (bagReceipt?.cards !== game.ownedCards) { bagReceipt = null; bagNotice.clear(); }
     game.state = 'modal';
     backpackOpen = true;
     _set_cardPageOpen(false);
@@ -348,14 +374,15 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
         <p class="help-item"><b>用道具复原</b>能源结晶按消耗区顺序复原最多 3 张，也能复原道具和装备。背包要放得下。</p>
         <details><summary>撤离后怎么处理？</summary><p>成功撤离时，消耗区逐张以 1/3 概率结算；初始攻击和职业卡即使掷中也不带回基地消耗区，其余实际带回的牌可用钥匙复原。初始攻击和职业卡仍可在局内复原。下次出发时，基地消耗区中未复原的牌会消散。</p></details>
         <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
-      back: () => { if (helpCurrent() && game.ownedCards === helpCards && UI.el.ovBody?.querySelector('.help-body')) {
-        showBackpack(true);
-      } },
+      back: () => {
+        if (!helpCurrent() || game.ownedCards !== helpCards || !UI.el.ovBody?.querySelector('.help-body')) return false;
+        return showBackpack(true);
+      },
     });
     const markup = bagV2PageHTML({
       bagZone, bagFilter, bagSortKey,
       cap, baseCap, pearlStoredN, capacityText, total, safeUsedN, sCap, pkN,
-      petName: SDT.Base.carriedPet?.()?.name || '随行伙伴', receiptHTML: bagReceipt?.cards === game.ownedCards ? bagNotice.html({ className:'bag-receipt' }) : '',
+      petName: SDT.Base.carriedPet?.()?.name || '随行伙伴', receiptHTML: bagNotice.html({ className:'bag-receipt', keepEmpty:true }),
       used, coins: game.coins, fragments: game.fragments || 0, bagCardN, safeCardN, supplyN,
       tiles: bagZoneTiles(renderState),
     });
@@ -378,12 +405,15 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
     bagAct('bagSortCycle', () => { bagSortKey = bagSortKey === 'rarity' ? 'type' : 'rarity'; sortBagBy(bagSortKey); });
     bagAct('bagTidy', () => { bagSortKey = 'rarity'; sortBagBy('rarity'); });
     bagAct('closeBag', closeBackpack);
-    bagAct('inspectStack', d => openBagZoom(d.name, d.safe === '1', d.pocket === '1', null, d.uid));
+    bagAct('inspectStack', d => openBagZoom(d.name, d.safe === '1', d.pocket === '1', null, d.uid,
+      d.pocketIndex === undefined ? null : Number(d.pocketIndex)));
     bagSlots.bindBagDrag();   // v0.21：拖拽排序 / 左栏分区钮拖放跨区 / 点格子开看卡操作台
+    return true;
   }
 
   let backpackOpen = false;   // 背包弹窗开关（必须声明：showBackpack 打开路径会读取它）
   let bagOverChest = false;   // 背包是否从搜刮界面打开（关闭时回搜刮面板，2026-09-09 留言 #13）
+  let bagReturnOwner = null, bagRunCurrent = null, bagClosePending = null;
   // 来源页返回钩子迁移到 bag-return-hook.js 中立模块（迭代评审 09-20）：事件页/物资格页
   // 也要登记恢复路径，而 scenes/flow 不能反向 import 本模块（会经 game.run 成环）
 

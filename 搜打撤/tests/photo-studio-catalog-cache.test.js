@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { createPhotoCatalogCache } from '../game/src/hub/photo-studio-catalog-cache.js';
 

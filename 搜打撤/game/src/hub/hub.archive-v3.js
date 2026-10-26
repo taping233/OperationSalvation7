@@ -5,14 +5,17 @@ import { achievementFiltersHTML, createAchievementProgressReader } from './hub.a
 import { validateLastLampState } from '../home/story.last-lamp.js';
 import { collectionCardsHTML, bindCollectionCards } from './hub.collection-v4.js';
 import { animateBaseSwitch } from './base-motion-v4.js';
+import { captureOverlayReturnState, restoreOverlayReturnState } from '../ui/overlay-return-state.js';
 
 // The legacy classes route now represents shared collection milestones, not a second character library.
 const SECTIONS = [['cards', '已收藏'], ['rewards', '奖励'], ['achievements', '成就目标'], ['classes', '收藏里程碑'], ['backs', '卡背'], ['stories', '故事']];
 let slot, medalId = '', backId = '';
+const recordSelection = new Map(), presentations = new Map();
 const stateLabel = (unlocked, claimed) => claimed ? '已领取' : unlocked ? '可领取' : '未达成';
 const resetForSlot = base => {
   if (slot === base.slot) return;
   slot = base.slot; medalId = ''; backId = '';
+  recordSelection.clear(); presentations.clear();
 };
 const progressBar = (value, total, label) => `<div class="av3-progress" role="progressbar" aria-label="${escAttr(label)}" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${value}"><i style="width:${total ? Math.min(100, value / total * 100).toFixed(1) : 0}%"></i></div>`;
 
@@ -32,8 +35,15 @@ function medalDetailHTML(achievement, progressText, meta, cardById, backById) {
 function inboxRewardHTML(label, name, condition, reward, action, id) {
   return `<article class="av3-inbox-reward"><div><small>${label} · 可领取</small><h3>${name}</h3>${condition}<span class="av3-prize-label">奖励预览</span><div class="av3-inbox-prize">${reward}</div></div><button class="mini-btn ok base-command base-command-primary" data-act="${action}" data-id="${escAttr(id)}">领取奖励</button></article>`;
 }
-function recordHTML(index, label, name, status, detail) {
-  return `<button type="button" class="av12-record${index === 0 ? ' on' : ''}" data-act="archiveV12Record" data-index="${index}" aria-pressed="${index === 0}"><small>${label}</small><b>${name}</b><span>${status} ›</span></button><template data-record-source="${index}">${detail}</template>`;
+function selectedRecord(view, entries) {
+  const previous = recordSelection.get(view);
+  const index = entries.findIndex(item => item.id === previous?.id);
+  const selected = index >= 0 ? index : Math.min(previous?.index || 0, Math.max(0, entries.length - 1));
+  recordSelection.set(view, { id: entries[selected]?.id || '', index: selected });
+  return selected;
+}
+function recordHTML(index, label, name, status, detail, id, selected) {
+  return `<button type="button" id="archive-record-${escAttr(id)}" class="av12-record${selected ? ' on' : ''}" data-act="archiveV12Record" data-id="${escAttr(id)}" data-index="${index}" aria-pressed="${selected}"><small>${label}</small><b>${name}</b><span>${status} ›</span></button><template data-record-source="${escAttr(id)}">${detail}</template>`;
 }
 
 function rewardInboxHTML(meta, cards) {
@@ -43,8 +53,9 @@ function rewardInboxHTML(meta, cards) {
   const collection = (meta.COLL_MILESTONES || []).filter(item => meta.collMsReached(item) && !meta.isCollClaimed(item.id));
   const rows = achievements.map(item => inboxRewardHTML('成就', esc(item.name), `<p class="av3-condition">${esc(item.desc)}</p>`, rewardHTML(item, cardById, backById), 'claimAch', item.id))
     .concat(collection.map(item => inboxRewardHTML('收藏', meta.collMsNeed(item) === meta.collTotal() ? '收集完成' : `收集 ${meta.collMsNeed(item)} 张`, '', meta.collRewardText(item), 'claimColl', item.id)));
-  const records = [...achievements.map(item => ({ name:item.name, label:'成就奖励' })), ...collection.map(item => ({ name:meta.collMsNeed(item) === meta.collTotal() ? '收集完成' : `收集 ${meta.collMsNeed(item)} 张`, label:'收藏奖励' }))];
-  return `<section class="av3-reward-inbox av12-record-workspace" data-empty="${rows.length === 0}"><div class="av12-record-list"><header><h3>待领取</h3><b>${rows.length}</b></header>${records.map((item, index) => recordHTML(index, item.label, esc(item.name), '可领取', rows[index])).join('')}<nav class="av3-reward-browse"><button class="base-link" data-act="hubCollectionView" data-view="achievements">成就目标 ›</button><button class="base-link" data-act="hubCollectionView" data-view="classes">收藏里程碑 ›</button></nav></div><aside class="av12-record-detail" aria-live="polite">${rows[0] || '<div class="av3-inbox-empty"><h3>当前没有待领取奖励</h3><p>奖励领完后仍可在成就目标与收藏里程碑查看记录。</p></div>'}</aside></section>`;
+  const records = [...achievements.map(item => ({ id:`achievement-${item.id}`, name:item.name, label:'成就奖励' })), ...collection.map(item => ({ id:`collection-${item.id}`, name:meta.collMsNeed(item) === meta.collTotal() ? '收集完成' : `收集 ${meta.collMsNeed(item)} 张`, label:'收藏奖励' }))];
+  const selected = selectedRecord('rewards', records);
+  return `<section class="av3-reward-inbox av12-record-workspace" data-empty="${rows.length === 0}"><div class="av12-record-list"><header><h3>待领取</h3><b>${rows.length}</b></header>${records.map((item, index) => recordHTML(index, item.label, esc(item.name), '可领取', rows[index], item.id, index === selected)).join('')}<nav class="av3-reward-browse"><button class="base-link" data-act="hubCollectionView" data-view="achievements">成就目标 ›</button><button class="base-link" data-act="hubCollectionView" data-view="classes">收藏里程碑 ›</button></nav></div><aside class="av12-record-detail" aria-live="polite">${rows[selected] || '<div class="av3-inbox-empty"><h3>当前没有待领取奖励</h3><p>奖励领完后仍可在成就目标与收藏里程碑查看记录。</p></div>'}</aside></section>`;
 }
 
 function achievementsHTML(base, meta, cards) {
@@ -68,9 +79,10 @@ function collectionHTML(meta) {
     const need = meta.collMsNeed(milestone), reached = meta.collMsReached(milestone), claimed = meta.isCollClaimed(milestone.id);
     const name = need === total ? '收集完成' : `收集 ${need} 张`;
     const detail = `<div class="av12-milestone-detail"><span class="av3-eyebrow">收藏里程碑 ${String(index + 1).padStart(2, '0')} · ${stateLabel(reached, claimed)}</span><h3>${name}</h3><div class="av12-milestone-value">${Math.min(progress, need)}<small> / ${need}</small></div>${progressBar(Math.min(progress, need), need, name)}<div class="av3-detail-rewards"><span>奖励预览</span>${meta.collRewardText(milestone)}</div>${claimed ? '<span class="av3-seal">[[icon:check]] 已领取</span>' : reached ? `<button type="button" class="mini-btn ok base-command base-command-primary" data-act="claimColl" data-id="${escAttr(milestone.id)}">领取奖励</button>` : '<span class="av3-seal pending">待完成</span>'}</div>`;
-    return { name, detail, status:claimed ? '已领取' : reached ? '可领取' : `未达成 · ${Math.min(progress, need)} / ${need}` };
+    return { id:`collection-${milestone.id}`, name, detail, status:claimed ? '已领取' : reached ? '可领取' : `未达成 · ${Math.min(progress, need)} / ${need}` };
   });
-  return `<section class="av3-collection-overview" aria-label="全员收藏奖励"><div class="av12-summary"><span>已收藏</span><strong>${progress}<small> / ${total}</small></strong>${progressBar(progress, total, '全员收藏进度')}</div><div class="av12-record-workspace"><div class="av12-record-list">${entries.map((item, index) => recordHTML(index, String(index + 1).padStart(2, '0'), item.name, item.status, item.detail)).join('')}</div><aside class="av12-record-detail" aria-live="polite">${entries[0]?.detail || '<h3>暂无收藏里程碑</h3>'}</aside></div></section>`;
+  const selected = selectedRecord('classes', entries);
+  return `<section class="av3-collection-overview" aria-label="全员收藏奖励"><div class="av12-summary"><span>已收藏</span><strong>${progress}<small> / ${total}</small></strong>${progressBar(progress, total, '全员收藏进度')}</div><div class="av12-record-workspace"><div class="av12-record-list">${entries.map((item, index) => recordHTML(index, String(index + 1).padStart(2, '0'), item.name, item.status, item.detail, item.id, index === selected)).join('')}</div><aside class="av12-record-detail" aria-live="polite">${entries[selected]?.detail || '<h3>暂无收藏里程碑</h3>'}</aside></div></section>`;
 }
 
 function backsHTML(base, meta, cards) {
@@ -93,11 +105,25 @@ function storiesHTML(base) {
 /** Presentation only. Rewards, card-back application and card preview stay in the parent hub. */
 export function archiveV3HTML({ base, meta, cards, view = 'cards' }) {
   resetForSlot(base);
+  const previous = /** @type {HTMLElement} */ (globalThis.document?.querySelector('#hubMain .hub-archive-v3'));
+  if (previous?.dataset.archiveSlot === String(base.slot)) {
+    const presentation = captureOverlayReturnState(previous);
+    // The hub and reward receipt own focus; this adapter only restores inner scrolling.
+    presentations.set(previous.dataset.archiveView, { ...presentation, focus: null });
+  }
   const currentView = SECTIONS.some(([key]) => key === view) ? view : 'cards';
   const content = currentView === 'cards' ? collectionCardsHTML(base, cards) : currentView === 'rewards' ? rewardInboxHTML(meta, cards) : currentView === 'classes' ? collectionHTML(meta) : currentView === 'backs' ? backsHTML(base, meta, cards) : currentView === 'stories' ? storiesHTML(base) : achievementsHTML(base, meta, cards);
   const heading = SECTIONS.find(([key]) => key === currentView)[1];
   const navigation = `<nav class="av12-directory" aria-label="收藏室目录">${SECTIONS.map(([key, title], index) => `<button type="button" class="${currentView === key ? 'on' : ''}" data-act="hubCollectionView" data-view="${key}" aria-pressed="${currentView === key}"><small>${String(index + 1).padStart(2, '0')}</small><b>${title}</b><span aria-hidden="true">›</span></button>`).join('')}</nav>`;
-  return `<section class="hub-archive-v3 archive-v12" data-archive-view="${currentView}"><header class="av3-header"><h2>收藏室</h2><span>${heading}</span></header><div class="av12-workspace">${navigation}<main class="av12-content">${content}</main></div></section>`;
+  return `<section class="hub-archive-v3 archive-v12" data-archive-view="${currentView}" data-archive-slot="${escAttr(base.slot)}"><header class="av3-header"><h2>收藏室</h2><span>${heading}</span></header><div class="av12-workspace">${navigation}<main class="av12-content">${content}</main></div></section>`;
+}
+
+/** Receipt destinations can reveal a newly unlocked back without applying it. */
+export function selectArchiveBack(id, base, cards) {
+  resetForSlot(base);
+  if (!(cards.CARD_BACKS || []).some(back => back.id === id) || !base.isBackUnlocked(id)) return false;
+  backId = id;
+  return true;
 }
 
 /** Update card-back contents without remounting the archive's glass panels. */
@@ -133,14 +159,17 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
   bindRewardFeedback({ root, base, meta, cards, ui });
   bindCollectionCards({ root, base, cards, ui });
   ui.act('archiveV12Record', data => {
-    const source = root.querySelector(`template[data-record-source="${Number(data.index)}"]`);
+    const records = [...root.querySelectorAll('[data-act="archiveV12Record"]')];
+    const button = records.find(item => data.id ? /** @type {HTMLElement} */ (item).dataset.id === data.id : item.getAttribute('data-index') === String(data.index));
+    const id = /** @type {HTMLElement} */ (button)?.dataset.id;
+    const source = [...root.querySelectorAll('template[data-record-source]')].find(item => /** @type {HTMLElement} */ (item).dataset.recordSource === id);
     const detail = root.querySelector('.av12-record-detail');
     if (!source || !detail) return;
-    const records = [...root.querySelectorAll('[data-act="archiveV12Record"]')];
     const from = records.findIndex(button => button.getAttribute('aria-pressed') === 'true');
-    const to = records.findIndex(button => button.getAttribute('data-index') === String(data.index));
+    const to = records.indexOf(button);
+    recordSelection.set(root.dataset.archiveView, { id, index: to });
     root.querySelectorAll('[data-act="archiveV12Record"]').forEach(button => {
-      const on = /** @type {HTMLElement} */ (button).dataset.index === data.index;
+      const on = /** @type {HTMLElement} */ (button).dataset.id === id;
       button.classList.toggle('on', on); button.setAttribute('aria-pressed', String(on));
     });
     if (recordMarkup !== source.innerHTML) {
@@ -203,4 +232,7 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
   });
   // Keep the reader useful immediately; the parent loader guards slot and async request identity.
   if (root.dataset.archiveView === 'stories') /** @type {HTMLElement} */ ([...root.querySelectorAll('.story-entry.recorded')].at(-1))?.click();
+  restoreOverlayReturnState(root, presentations.get(root.dataset.archiveView), {
+    isCurrent: () => root.isConnected && slot === base.slot && (!ui.isCurrent || ui.isCurrent()),
+  });
 }

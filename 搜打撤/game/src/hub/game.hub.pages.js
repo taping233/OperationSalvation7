@@ -8,6 +8,7 @@ import { facilitiesHTML } from './hub.facilities.js';
 
 import { archiveV3HTML } from './hub.archive-v3.js';
 import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
+import { createOperationNotice } from '../ui/operation-notice.js';
 import '../../css/base-archive-v3.css';
 import { esc } from '../core/shared.js';
 import { Sfx } from './game.cardslib.js';
@@ -40,30 +41,37 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
   function hubStashHTML(view = 'cards') { return warehouseHTML(view === 'pocket' ? 'pocket' : 'cards'); }
 
   // 仓库看卡·操作台（2026-10-06 二次改版，老板反馈「不要回到旧弹窗、要看得清」）：
-  // 点卡直接开大卡特写，卖出 / 收藏 / 使用 / 孵化全部在特写页脚完成——卡始终是
-  // 大图，没有第二层小卡弹窗。不可回退操作（高价/最后一张/整堆/收藏用掉）改按钮
+  // 点卡直接开大卡特写，保护 / 转化 / 使用 / 孵化在特写页脚完成。
+  // 最后一张、整堆与转化消费通过按钮
   // 就地二次确认（变红 2.6s 内再点才执行），不再跳确认页。动作前按稳定库存引用重读仓库
   // 按稳定库存引用重读堆；收藏后就地刷新页脚，出售统一由交易所负责。
-  /** @param {number} i @param {{from?: HTMLElement}} [options] */
-  function openStashCardView(i, { from } = {}) {
+  /** @param {number} i @param {{from?: HTMLElement, refreshInventory?:(focus?:boolean)=>boolean, notify?:(text:string,tone?:string)=>void, browse?:Pick<import('../ui/ui.dom.types.js').CardZoomOptions,'getItems'|'getIndex'|'index'|'onBrowse'>}} [options] */
+  function openStashCardView(i, { from, refreshInventory, notify = () => {}, browse } = {}) {
     const B = SDT.Base;
     const s = B.data.stash[i];
     if (!s) { hubBridge.renderHub(); return; }
     const card = s.card;
-    const slotId = B.slot, stackKey = stackKeyOf(s);
+    const slotId = B.slot, selectionGeneration = B._selectionGeneration, stackKey = stackKeyOf(s);
     const host = document.getElementById('hubMain');
     const viewKey = /** @type {HTMLElement} */ (host?.querySelector('.hub-page'))?.dataset.view;
     let zoom;
-    const currentDetail = () => SDT.Base === B && B.slot === slotId && !!zoom &&
-      document.getElementById('cardZoom') === zoom && !zoom.classList.contains('cz-out') &&
+    const detailNotice = createOperationNotice();
+    const currentSource = () => SDT.Base === B && B.slot === slotId && B._selectionGeneration === selectionGeneration &&
       (!host || document.getElementById('hubMain') === host && /** @type {HTMLElement} */ (host.querySelector('.hub-page'))?.dataset.view === viewKey);
+    const currentDetail = () => currentSource() && !!zoom && document.getElementById('cardZoom') === zoom && !zoom.classList.contains('cz-out');
+    const refreshBrowse = () => {
+      if (currentDetail()) /** @type {import('../ui/ui.dom.types.js').CardZoomElement} */ (zoom)._refreshCardZoomBrowse?.();
+    };
     let detailWriting = false;
     const detailAct = (name, action) => UI.act(name, async (...args) => {
       if (!currentDetail() || detailWriting) return false;
       detailWriting = true;
       try { return await action(...args); }
-      catch { if (currentDetail()) UI.log('基地操作未保存，请重试。', 'warn'); return false; }
-      finally { detailWriting = false; }
+      catch {
+        if (currentDetail()) { detailNotice.set('基地操作未完成，请重试。', 'warn'); UI.log('基地操作未完成，请重试。', 'warn'); }
+        return false;
+      }
+      finally { detailWriting = false; refreshBrowse(); }
     });
     const mat = B.materialInfo ? B.materialInfo(card) : null;
     const isEgg = card.id === B.PET_EGG_ID;
@@ -94,7 +102,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
         btns.push(`<button class="ov-btn ok" data-act="stashUseMat">使用 1 张 → ${gain}</button>`);
         if (n > 1) btns.push(`<button class="ov-btn" data-act="stashUseMatAll">使用整堆 · ${n} 张</button>`);
       } else if (isEgg) {
-        btns.push('<button class="ov-btn ok" data-act="stashHatch">孵化 1 枚 · 消耗 50 储备币</button>');
+        btns.push(`<button class="ov-btn ok" data-act="stashHatch">孵化 1 枚 · 消耗 ${B.HATCH_COST} 储备币</button>`);
       } else if (isPack) {
         btns.push('<button class="ov-btn ok" data-act="stashOpenPack">拆开 1 包 · 获得 5 张随机卡牌</button>');
       } else {
@@ -111,13 +119,54 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
           : conversion.code === 'CHARACTER_MAXED' ? '人物熟练度已满且图鉴已收录，已停止经验转化，卡牌保留。'
           : `${marked ? '图鉴已收录；重复卡仍可转化经验。' : '首次转化会同时收录图鉴。'}${n > conversion.maxCount && conversion.maxCount > 0 ? `批量最多消耗 ${conversion.maxCount} 张，余下 ${n - conversion.maxCount} 张保留。` : ''}`
         : protectedCard ? '取消保护不影响图鉴收录。' : '保护不消耗卡牌，不增加经验。';
-      return `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>${n}</b> 张</span><span class="inspect-collection-state">${marked ? '图鉴已收录' : '尚未收录'}${protectedCard ? ' · 已保护' : ''}</span></div><p class="inspect-collection-hint">${hint}</p>${conversion ? `<p class="inspect-collection-hint" data-conversion-preview role="status">${collectionConversionHTML(conversion)}</p>` : ''}${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}</div>`;
+      return `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>${n}</b> 张</span><span class="inspect-collection-state">${marked ? '图鉴已收录' : '尚未收录'}${protectedCard ? ' · 已保护' : ''}</span></div><p class="inspect-collection-hint">${hint}</p>${conversion ? `<p class="inspect-collection-hint" data-conversion-preview role="status">${collectionConversionHTML(conversion)}</p>` : ''}${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}${detailNotice.html({ keepEmpty:true })}</div>`;
     };
     const refreshZoom = () => {
       if (!currentDetail()) return;
       if (!freshStack()) { closeZoom(); return; }
       const foot = zoom.querySelector('.cz-foot');
-      if (foot) foot.innerHTML = footerHTML();
+      if (foot) {
+        const active = document.activeElement;
+        const action = active instanceof HTMLElement && foot.contains(active) ? active.dataset.act : '';
+        foot.innerHTML = footerHTML();
+        if (action) /** @type {HTMLElement} */ (foot.querySelector(`[data-act="${action}"]`) || foot.querySelector('button:not(:disabled)'))?.focus({ preventScroll:true });
+      }
+      refreshBrowse();
+    };
+    const warnDetail = message => {
+      detailNotice.set(message, 'warn'); UI.log(message, 'warn'); return false;
+    };
+    const writeDetail = async (message, write) => {
+      const focused = document.activeElement;
+      const buttons = [...zoom.querySelectorAll('.cz-foot button, .cz-list-nav button')].map(button => ({ button, disabled:button.disabled }));
+      buttons.forEach(({ button }) => { button.disabled = true; button.setAttribute('aria-busy', 'true'); });
+      detailNotice.set(message);
+      try { return await write(); }
+      finally {
+        if (currentDetail()) {
+          buttons.forEach(({ button, disabled }) => {
+            if (button.isConnected) { button.disabled = disabled; button.removeAttribute('aria-busy'); }
+          });
+          const restore = buttons.find(({ button, disabled }) => button === focused && !disabled && button.isConnected);
+          if (restore && document.activeElement === document.body) restore.button.focus({ preventScroll:true });
+          refreshBrowse();
+        } else if (currentSource()) refreshInventory?.();
+      }
+    };
+    const refreshConsumedDetail = () => {
+      const exhausted = !freshStack();
+      if (exhausted) {
+        const close = /** @type {HTMLElement & {_closeCardZoom?: (immediate?:boolean)=>void}} */ (zoom)._closeCardZoom;
+        if (close) close(true); else closeZoom();
+      }
+      const updated = refreshInventory?.(exhausted);
+      if (!updated) hubBridge.renderHub();
+      if (!exhausted) refreshZoom();
+      return true;
+    };
+    const checkDetailUnlocks = async message => {
+      try { await SDT.Meta.checkUnlocks(); }
+      catch { if (currentDetail()) warnDetail(message); }
     };
 
     // 就地二次确认：首点变红「确认？」，2.6s 内再点才执行（页脚刷新会自然解除）
@@ -157,17 +206,18 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       if (!B.isCollected(card) && card.cls && (card.rarity === '职业' || card.type === '能力卡')) {
         UI.log('职业卡或能力卡需通过消耗卡牌转化后首次收录', 'warn'); return;
       }
-      const now = await B.collectToggle(card);
+      const now = await writeDetail('保护状态保存中…', () => B.collectToggle(card));
       if (!currentDetail()) return false;
-      if (now === null) { UI.log('基地存档未保存，保护状态未改变', 'warn'); return; }
+      if (now === null) return warnDetail('基地存档未保存，保护状态未改变');
+      const message = `${now ? '已保护' : '已取消保护'} · ${card.name} · 卡牌保留`;
+      detailNotice.set(message); notify(message);
       Sfx.ding();
       UI.log(now
         ? `[[icon:sparkles]] 已保护【<b>${esc(card.name)}</b>】（卡牌保留，不获得人物经验）${special ? '（特殊收藏品）' : ''}`
         : `[[icon:sparkles]] 已取消【<b>${esc(card.name)}</b>】的保护，图鉴收录保留`, now ? 'loot' : 'dim');
-      await SDT.Meta.checkUnlocks();
-      if (!currentDetail()) return false;
-      hubBridge.renderHub();
-      refreshZoom();
+      refreshConsumedDetail();
+      await checkDetailUnlocks('保护状态已保存，成就状态稍后刷新。');
+      return true;
     });
     let converting = false;
     const convertStash = async (preview) => {
@@ -182,18 +232,20 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
         UI.log(latest.canConvert ? '人物进度或保护状态已变化，请重新确认转化预览' : latest.message, 'warn'); refreshZoom(); return;
       }
       converting = true;
-      zoom?.querySelectorAll('.cz-foot button').forEach(button => { button.disabled = true; });
       let result;
-      try { result = await convertCollection({ slotId, requestId: homeRequestId('stash-collect'), expectedRevision: read.revision }, { stackKey: stackKeyOf(cur), count: preview.count }); }
+      try { result = await writeDetail('卡牌转化中…', () => convertCollection({ slotId, requestId: homeRequestId('stash-collect'), expectedRevision: read.revision }, { stackKey: stackKeyOf(cur), count: preview.count })); }
       catch { result = { ok:false, message:'归档未保存，请重试' }; }
       finally { converting = false; }
       if (!currentDetail()) return;
-      if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); refreshZoom(); return; }
+      if (!result.ok) { warnDetail(result.message || '转化失败，卡牌未消耗'); refreshZoom(); return false; }
       Sfx.ding();
       const actual = result.value?.conversion || latest;
+      const message = `转化成功 · ${card.name} ×${actual.count} · ${actual.registrationOnly ? '仅收录图鉴，经验 +0' : `实际经验 +${actual.actualXp}`}`;
+      detailNotice.set(message); notify(message);
       UI.log(`[[icon:medal]] ${esc(actual.characterName)}：消耗【<b>${esc(card.name)}</b>】×${actual.count}，${actual.registrationOnly ? '仅收录图鉴，经验 +0' : `实际经验 +${actual.actualXp}`}${actual.overflowXp ? `（末张溢出 ${actual.overflowXp}）` : ''} · Lv.${actual.before.lv} / ${actual.before.xp} XP → Lv.${actual.after.lv} / ${actual.after.xp} XP`, 'loot');
-      hubBridge.renderHub();
-      refreshZoom();
+      refreshConsumedDetail();
+      await checkDetailUnlocks('卡牌已转化，成就状态稍后刷新。');
+      return true;
     };
     const conversionPreview = (batch = false) => {
       const cur = freshStack();
@@ -220,13 +272,20 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       if (!cur) { closeZoom(); return; }
       // 旧材料命令以名字定位，名字重叠时不能让另一个堆承担消费。
       if (B.data.stash.filter(stack => stack.card.name === card.name).length !== 1) {
-        UI.log('库存引用不唯一，请刷新仓库', 'warn'); return;
+        detailNotice.set('库存引用不唯一，请刷新仓库', 'warn'); UI.log('库存引用不唯一，请刷新仓库', 'warn'); return;
       }
-      const r = await B.useStashMaterial(card.name, all);
+      let r;
+      try { r = await writeDetail('材料使用中…', () => B.useStashMaterial(card.name, all)); }
+      catch { r = { ok:false, msg:'材料未保存，未消耗，请重试。' }; }
       if (!currentDetail()) return false;
-      if (r.ok === true) { Sfx.ding(); UI.log(r.msg, 'loot'); closeZoom(); hubBridge.renderHub(); }
-      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
-      if (!r.ok) refreshZoom();
+      if (r.ok === true) {
+        const message = `使用${card.name} ×${r.qty} · ${r.label} +${r.total}`;
+        detailNotice.set(message); notify(message); Sfx.ding(); UI.log(r.msg, 'loot');
+        return refreshConsumedDetail();
+      } else {
+        const message = r.msg || '材料未使用，请重试。';
+        detailNotice.set(message, 'warn'); UI.log(`[[icon:cross]] ${message}`, 'warn'); refreshZoom();
+      }
     };
     detailAct('stashUseMat', () => {
       const cur = freshStack();
@@ -235,24 +294,27 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     });
     detailAct('stashUseMatAll', () => armOrRun('stashUseMatAll', () => useMat(true)));
 
-    // —— 宠物蛋孵化（消耗 1 蛋 + 50 币，随机未拥有宠物）——
+    // 孵化成本沿Base配置，成功后可继续消费剩余蛋。
     detailAct('stashHatch', () => armOrRun('stashHatch', async () => {
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
-      if (B.data.stash.filter(stack => stack.card.id === card.id).length !== 1) { UI.log('库存引用不唯一，请刷新仓库', 'warn'); return; }
-      const r = await B.hatchPet();
+      if (B.data.stash.filter(stack => stack.card.id === card.id).length !== 1) return warnDetail('库存引用不唯一，请刷新仓库');
+      const r = await writeDetail('伙伴孵化中…', () => B.hatchPet());
       if (!currentDetail()) return false;
       if (r.ok === true) {
+        const message = `孵化成功 · 获得${r.pet.name} · 储备币 −${B.HATCH_COST}`;
+        detailNotice.set(message); notify(message);
         Sfx.ding();
-        UI.log(`[[icon:paw]] 孵化成功！获得宠物<b>「${esc(r.pet.name)}」</b>——${esc(r.pet.desc)}（可在仓库页携带 / 升级页升级）`, 'loot');
-        await SDT.Meta.checkUnlocks();
-        if (!currentDetail()) return false;
-      } else if (r.why === 'poor') UI.log('[[icon:coin]] 储备币不足 50，无法孵化（卖出仓库卡牌攒币）', 'warn');
-      else if (r.why === 'all') UI.log('[[icon:paw]] 已经集齐全部宠物了', 'dim');
-      else if (r.why === 'save') UI.log('基地存档未保存，宠物蛋与储备币均未消耗', 'warn');
-      else UI.log('[[icon:pet-egg]] 仓库里没有宠物蛋了', 'warn');
-      if (r.ok === true) { closeZoom(); hubBridge.renderHub(); }
-      else refreshZoom();
+        UI.log(`[[icon:paw]] 孵化成功！获得伙伴<b>「${esc(r.pet.name)}」</b>——${esc(r.pet.desc)}（可在人物页的伙伴栏携带与培养）`, 'loot');
+        refreshConsumedDetail();
+        await checkDetailUnlocks('伙伴已获得，成就状态稍后刷新。');
+        return true;
+      }
+      const message = r.why === 'poor' ? `孵化需要 ${B.HATCH_COST} 储备币，现有 ${B.data.coins}。`
+        : r.why === 'all' ? '已集齐全部伙伴。'
+        : r.why === 'save' ? '孵化未保存，请重试。'
+        : '仓库中没有宠物蛋了。';
+      return warnDetail(message);
     }));
 
     // —— 经济卡包使用（2026-09-09 审计补实装）：获得 5 张随机卡牌，必须入卡牌仓库——
@@ -260,20 +322,25 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     const openPack = async () => {
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
-      if (B.data.stash.filter(stack => stack.card.id === card.id).length !== 1) { UI.log('库存引用不唯一，请刷新仓库', 'warn'); return; }
-      if (B.stashRoom() + 1 < 5) { UI.log(`[[icon:archive]] 仓库空位不足 4 格（现 ${B.stashRoom()}；拆包另释放 1 格）——先卖出或扩建仓库再拆包`, 'warn'); return; }
+      if (B.data.stash.filter(stack => stack.card.id === card.id).length !== 1) return warnDetail('库存引用不唯一，请刷新仓库');
+      if (B.stashRoom() + 1 < 5) return warnDetail(`拆包需要 4 格空位，现有 ${B.stashRoom()} 格。可先出售卡牌或扩建仓库。`);
       const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
-      if (!pool.length) { UI.log('[[icon:cards]] 卡牌库是空的，没有可获得的卡牌', 'warn'); return; }
+      if (!pool.length) return warnDetail('当前没有可获得的卡牌。');
       const cards = [];
       for (let k = 0; k < 5; k++) {
         cards.push({ card: { ...pool[Math.floor(Random.random('loot', 'reward') * pool.length)] }, count: 1 });
       }
-      const result = await B.openCardPack(card.id, cards);
+      const result = await writeDetail('卡包打开中…', () => B.openCardPack(card.id, cards));
       if (!currentDetail()) return false;
-      if (!result.ok) { UI.log(/** @type {Extract<typeof result, {ok:false}>} */ (result).msg || '卡包已变化，请重新打开仓库', 'warn'); return; }
-      UI.log('[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）', 'loot');
-      closeZoom();
-      hubBridge.renderHub();
+      if (!result.ok) {
+        const failure = /** @type {Extract<typeof result, {ok:false}>} */ (result);
+        return warnDetail(failure.msg || (failure.why === 'full' ? '仓库空位不足，请整理后重试。' : '卡包已变化，请重新选择。'));
+      }
+      const names = cards.map(entry => entry.card.name || entry.card.id).join('、');
+      detailNotice.set(`拆包成功 · ${names}`); notify(`拆包成功 · ${cards.length} 张卡牌已入仓库`);
+      Sfx.ding();
+      UI.log(`[[icon:cards]] <b>经济卡包</b>：获得 ${cards.length} 张卡牌——${esc(names)}（已入仓库）`, 'loot');
+      return refreshConsumedDetail();
     };
     detailAct('stashOpenPack', () => {
       const cur = freshStack();
@@ -281,9 +348,26 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       return openPack();
     });
 
-    UI.showCardZoom(card, { presentation:'inventory', footer: footerHTML(), from, returnFocus:from });
+    UI.showCardZoom(card, { presentation:'inventory', footer: footerHTML(), from, returnFocus:from,
+      canNavigate:() => currentDetail() && !detailWriting,
+      onReopen:() => {
+        if (!currentSource()) return false;
+        const current = freshStack();
+        if (!current) return false;
+        const index = B.data.stash.indexOf(current);
+        if (index < 0) return false;
+        openStashCardView(index, { from, browse, refreshInventory, notify });
+        return true;
+      },
+      ...(browse ? { getItems:browse.getItems, getIndex:browse.getIndex, index:browse.index,
+        onBrowse:(nextCard, nextIndex) => {
+          if (currentDetail() && !detailWriting) browse.onBrowse?.(nextCard, nextIndex);
+        },
+      } : {}),
+    });
     zoom = document.getElementById('cardZoom');
     decorateInventoryZoom(card);
+    refreshBrowse();
   }
   // 基地物资（木材/口粮）：材料不可卖出换币（2026-09-08 定版）——只作展示说明
   /** @param {string} kind @param {{from?: HTMLElement}} [options] */

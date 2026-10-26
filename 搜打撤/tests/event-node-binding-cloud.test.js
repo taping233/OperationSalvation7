@@ -66,7 +66,7 @@ async function openBoundEvent() {
 }
 
 describe('事件卡足额生命代价', () => {
-  it.each([1, 5, 6])('受困运输队从%s血足额扣5，致死不打开宝箱或覆盖终局状态', async hp => {
+  it.each([1, 5, 6])('受困运输队从%s血足额扣5，致死不搜刮物资或覆盖终局状态', async hp => {
     H.cards = [events[1]];
     H.game.hp = hp;
     const open = vi.spyOn(window.SDT.Chests, 'open').mockImplementation(() => { H.game.state = 'modal'; });
@@ -157,10 +157,10 @@ describe('未知节点首次事件绑定', () => {
     expect(validateRunSave(snapshot).ok).toBe(true);
   });
 
-  it('旧档没有节点记录时首次补建，其他节点各自抽一次互不覆盖', async () => {
+  it('旧档历史与节点绑定共同去重，事件用尽后不再重复抽取', async () => {
     H.cards = events;
     H.game.eventLog = [{ name:'装备征用令', turn:1 }];
-    H.pick = vi.fn(deck => deck[1]);
+    H.pick = vi.fn(deck => deck[0]);
     await openBoundEvent(); await UI._acts.eventExit(); await flushEventActions();
     expect(H.game.nodeRewards['0,1'].eventId).toBe('tt6-demondeal');
     H.game.trackPos = 2;
@@ -168,8 +168,11 @@ describe('未知节点首次事件绑定', () => {
     H.pick.mockImplementation(deck => deck[0]);
     await openBoundEvent();
     expect(H.game.nodeRewards['0,1'].eventId).toBe('tt6-demondeal');
-    expect(H.game.nodeRewards['0,2'].eventId).toBe('ev19-quartermaster');
-    expect(H.pick).toHaveBeenCalledTimes(2);
+    expect(H.game.nodeRewards['0,2']).toBeUndefined();
+    expect(UI.el.ovBody.textContent).toContain('此处已无新的见闻');
+    expect(H.pick).toHaveBeenCalledTimes(1);
+    await UI._acts.eventPoolLeave(); await flushEventActions();
+    expect(H.game.visited['0,2']).toBeTruthy();
   });
 
   it('已绑定但卡库移除的事件保持ID，明确返回地图且不软锁或静默重抽', async () => {

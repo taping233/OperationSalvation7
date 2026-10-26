@@ -88,7 +88,7 @@ describe('仓库保留卡槽，延迟构造邻屏复杂卡面', () => {
     expect(f.cards.cardHTML).toHaveBeenCalledTimes(8);
     expect(f.track.children[199]).toBe(f.tiles[199]);
     f.tiles[199].focus(); f.tiles[199].click();
-    expect(document.activeElement).toBe(f.tiles[199]); expect(f.openCard).toHaveBeenCalledWith(199, { from:f.tiles[199] });
+    expect(document.activeElement).toBe(f.tiles[199]); expect(f.openCard).toHaveBeenCalledWith(199, expect.objectContaining({ from:f.tiles[199] }));
     f.input('没有匹配'); enter(f.tiles[90]);
     expect(f.tiles[90].querySelector('.hs-card')).toBeNull();
   });

@@ -93,7 +93,7 @@ describe('通行证C地图发现事务', () => {
   });
   it('首次候选保存失败明确提示，源牌未消费，确认时可重试保存', async () => {
     ports.saveGame.mockReturnValueOnce(false);
-    open(); await Promise.resolve();
+    open(); await vi.waitFor(()=>expect(ports.UI.el.ovBody.textContent).toContain('候选尚未保存'));
     expect(game.ownedCards[0].uid).toBe('source'); expect(ports.UI.el.ovBody.textContent).toContain('候选尚未保存');
     expect(await pick(0)).toBe(true); expect(game.ownedCards[0].uid).toBe('reward');
   });
@@ -112,4 +112,56 @@ it('structured classAbility discovery uses explicit selection and confirmation, 
   expect(game.ownedCards[0].uid).toBe('source'); expect(ports.newUid).not.toHaveBeenCalled();
   expect(await acts.bagDiscoverConfirm()).toBe(true);
   expect(game.ownedCards[0].card.id).toBe(chosen); expect(ports.newUid).toHaveBeenCalledOnce();
+});
+
+it('candidate-save feedback keeps the selected card and current scroll position', async () => {
+  let finish;
+  ports.saveGame.mockImplementationOnce(() => new Promise(resolve => {finish=resolve;}));
+  open(); await vi.waitFor(()=>expect(finish).toBeTypeOf('function')); const root=ports.UI.el.ovBody.firstElementChild;
+  root.scrollTop=140; acts.bagDiscoverPick({i:'1'});
+  finish(false); await vi.waitFor(()=>expect(root.querySelector('.reward-notice').textContent).toContain('候选尚未保存'));
+  expect(ports.UI.el.ovBody.firstElementChild).toBe(root);
+  expect(root.scrollTop).toBe(140);
+  expect(root.querySelector('[data-i="1"]').dataset.discoverySelected).toBe('true');
+  expect(root.querySelector('.reward-notice').textContent).toContain('候选尚未保存');
+});
+
+it('a failed confirmation retries the same selected card without rebuilding the discovery page', async () => {
+  open(); const root=ports.UI.el.ovBody.firstElementChild, source=game.ownedCards[0];
+  root.scrollTop=90; acts.bagDiscoverPick({i:'1'});
+  const confirm=acts.bagDiscoverConfirm;
+  ports.saveGame.mockReturnValueOnce(false);
+  expect(await confirm()).toBe(false);
+  expect(ports.UI.el.ovBody.firstElementChild).toBe(root); expect(root.scrollTop).toBe(90);
+  expect(root.querySelector('[data-i="1"]').dataset.discoverySelected).toBe('true');
+  expect(game.ownedCards).toEqual([source]);
+  expect(await confirm()).toBe(true);
+  expect(game.ownedCards).toHaveLength(1); expect(game.ownedCards[0].card.id).toBe(source.bagDiscover.cardIds[1]);
+});
+
+it.each([false,true])('a late save result %s leaves a replacement page in place', async saved => {
+  open(); await vi.waitFor(()=>expect(ports.UI.el.ovBody.querySelector('.reward-notice').textContent).not.toContain('正在保存')); const source=game.ownedCards[0];
+  let finish;
+  ports.saveGame.mockImplementationOnce(() => new Promise(resolve => {finish=resolve;}));
+  acts.bagDiscoverPick({i:'0'}); const pending=acts.bagDiscoverConfirm();
+  await vi.waitFor(()=>expect(finish).toBeTypeOf('function'));
+  ports.UI.el.ovBody.innerHTML='<section id="new-view">其他页面</section>';
+  const next=ports.UI.el.ovBody.firstElementChild;
+  await vi.waitFor(()=>expect(finish).toBeTypeOf('function')); finish(saved); expect(await pending).toBe(saved);
+  expect(ports.UI.el.ovBody.firstElementChild).toBe(next); expect(ports.showBackpack).not.toHaveBeenCalled();
+  expect(game.ownedCards).toHaveLength(1);
+  expect(game.ownedCards[0].uid).toBe(saved ? 'reward' : source.uid);
+});
+
+it.each(['false','throw','reject'])('a %s cancellation failure preserves selection for retry', async failure => {
+  open(); const root=ports.UI.el.ovBody.firstElementChild;
+  acts.bagDiscoverPick({i:'1'});
+  if (failure === 'false') ports.showBackpack.mockReturnValueOnce(false);
+  else if (failure === 'throw') ports.showBackpack.mockImplementationOnce(() => {throw new Error('return failed');});
+  else ports.showBackpack.mockRejectedValueOnce(new Error('return rejected'));
+  expect(await acts.bagDiscoverCancel()).toBe(false);
+  expect(ports.UI.el.ovBody.firstElementChild).toBe(root);
+  expect(root.querySelector('[data-i="1"]').dataset.discoverySelected).toBe('true');
+  expect(await acts.bagDiscoverCancel()).toBe(true);
+  expect(game.ownedCards[0].uid).toBe('source');
 });

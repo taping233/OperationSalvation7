@@ -75,9 +75,9 @@ describe('战斗信息减负与普通牌库', () => {
     expect(empty.querySelector('[data-act="btDeckBack"]')).not.toBeNull();
   });
 
-  it('指南说明普通10库和效果抽牌，背包操作放在战前地图', () => {
+  it('指南说明普通5库和效果抽牌，背包操作放在战前地图', () => {
     const battle = guide.pages.find(page => page.id === 'battle');
-    expect(battle.steps.map(step => step.text).join('')).toContain('10 张初始攻击');
+    expect(battle.steps.map(step => step.text).join('')).toContain('5 张初始攻击');
     expect(battle.steps.map(step => step.text).join('')).toContain('开局和每回合不自动抽牌');
     const loot = guide.pages.find(page => page.id === 'loot');
     expect(loot.steps[1].text).toContain('战斗中不能整理背包');

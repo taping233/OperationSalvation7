@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { assertCardRulesExecutable } from '../game/src/battle/effects/battle.rule-guard.js';
 

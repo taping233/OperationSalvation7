@@ -42,7 +42,7 @@ import { canReceiveCardFromBag } from '../core/card-capacity.js';
 import { clampIndex, installDerived, buildNewRunDerived } from './game.session.map.js';
 import { markSeen } from './game.session.board.js';
 import { createDeathSettlement } from './game.session.death.js';
-import { eventChoiceRewardAt } from './node-reward-state.js';
+import { endNodeContent, eventChoiceRewardAt } from './node-reward-state.js';
 
 // ---------- 档位与终局代数（会话内可变绑定；跨模块只经访问器读写） ----------
 let activeSlot = null;                // 当前游玩的档位（1..5），标题界面为 null
@@ -153,9 +153,14 @@ function enterLayer(li, atIdx, opts = null) {
   const safeIdx = layer?.logical?.[atIdx]
     ? atIdx
     : (layer?.entrances?.[0] ?? clampIndex(atIdx, layer?.logical?.length || 1, 0));
+  const fromLi = game.layerIdx, fromIdx = game.trackPos;
+  const position = cellCenter(safeLayer, safeIdx);
   game.layerIdx = safeLayer;
   game.trackPos = safeIdx;
-  game.pos = cellCenter(safeLayer, safeIdx);
+  game.pos = position;
+  if (opts?.endPreviousNode === true && (fromLi !== safeLayer || fromIdx !== safeIdx)) {
+    endNodeContent(game, fromLi, fromIdx);
+  }
   markSeen(safeLayer, safeIdx);
   game.activeLayerBounds = game.layerBounds?.[safeLayer] || null;
   game.hop = 0;

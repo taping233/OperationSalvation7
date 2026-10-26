@@ -4,6 +4,60 @@ import { pageMotionProfile, pageMotionBlocks } from '../ui/page-motion-profiles.
 import { animateBaseRefresh } from './base-motion-v4.js';
 import { refreshCardBrowser } from '../ui/card-browser.js';
 import { navigationState, baseNavigationChange as navigationChange, baseNavigationTiming as navigationTiming, baseNavigationEasing } from '../ui/navigation-motion.js';
+
+/** @param {Iterable<Element>} controls */
+export function holdHubOperationControls(controls) {
+  const previous = [...controls].map(element => {
+    const control = /** @type {HTMLButtonElement} */ (element);
+    return { control, disabled:control.disabled, busy:control.getAttribute('aria-busy') };
+  });
+  for (const { control } of previous) {
+    control.disabled = true;
+    control.setAttribute('aria-busy', 'true');
+  }
+  return () => {
+    for (const { control, disabled, busy } of previous) {
+      control.disabled = disabled;
+      if (busy === null) control.removeAttribute('aria-busy');
+      else control.setAttribute('aria-busy', busy);
+    }
+  };
+}
+
+// 命令决定保存结果；提示、声音及页面刷新分别完成自己的呈现。
+/**
+ * @template T
+ * @param {{run: () => T | PromiseLike<T>, isCurrent?: () => boolean,
+ * isSuccess?: (result:T) => boolean, notice?: (message:string, tone?:string) => void,
+ * pending?:string, success?:string | ((result:T) => string),
+ * failure?:string | ((result:T | undefined, error:unknown) => string),
+ * onSuccess?: (result:T) => void, refresh?: () => unknown, refreshOnFailure?:boolean}} options
+ * @returns {Promise<boolean>}
+ */
+export async function runHubOperation({ run, isCurrent = () => true,
+  isSuccess = result => result === true || /** @type {{ok?:boolean} | null | undefined} */ (result)?.ok === true,
+  notice = () => {}, pending = '正在保存…', success = '', failure = '操作未保存，请重试。',
+  onSuccess = () => {}, refresh = () => {}, refreshOnFailure = false }) {
+  const present = action => {
+    if (!isCurrent()) return;
+    try { action(); }
+    catch (error) { console.warn('基地操作呈现未完成', error); }
+  };
+  present(() => notice(pending));
+  let result, error, saved = false;
+  try { result = await run(); saved = isSuccess(result); }
+  catch (reason) { error = reason; }
+  if (!saved) {
+    present(() => notice(typeof failure === 'function' ? failure(result, error) : failure, 'warn'));
+    if (refreshOnFailure) present(refresh);
+    return false;
+  }
+  present(() => notice(typeof success === 'function' ? success(result) : success));
+  present(() => onSuccess(result));
+  present(refresh);
+  return true;
+}
+
 // 基地壳只挂载一次；浏览状态留在界面，交易继续使用原命令入口。
 let portraitRequest = 0;
 const readingPositions = new Map();

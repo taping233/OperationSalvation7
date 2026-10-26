@@ -276,7 +276,7 @@ describe('混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全�
     expect(calls[0][0]).toContain('compile-narrative.mjs');
     expect(calls.slice(1, 5).map(c => path.basename(c[0])).sort()).toEqual(['check-syntax.mjs', 'check-types.mjs', 'eslint.js', 'validate-data.mjs']);
     expect(calls.some(c => c[0].includes('asset-audit'))).toBe(false);
-    expect(calls[5].slice(1)).toEqual(['run', '--reporter=dot', '--silent']);
+    expect(calls[5].slice(1)).toEqual(['run', '--silent']);
     expect(result.stdout).toContain('PASS：full');
   });
   it('Vitest环境复制清除Git local-env-vars，保留全局与非Git配置且不修改原对象', () => {
@@ -471,7 +471,7 @@ describe('planner 显式 root 与查询故障隔离', () => {
     expect(executed).toHaveLength(7);
     expect(executed.some(command => command[0].endsWith('compile-narrative.mjs'))).toBe(true);
     const vitest = executed.find(command => command[0].endsWith('vitest.mjs'));
-    expect(vitest.slice(1)).toEqual(['run', '--reporter=dot', '--silent']);
+    expect(vitest.slice(1)).toEqual(['run', '--silent']);
     expect(run.stdout).toContain('PASS：full');
     const mixed = spawnSync(process.execPath, [path.join(root, 'scripts/acceptance-gate.mjs'), '--full', '--paths', 'scripts/acceptance-gate.mjs', '--plan'], { cwd: root, encoding: 'utf8', env });
     expect(mixed.status).not.toBe(0);

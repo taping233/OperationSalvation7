@@ -14,10 +14,25 @@ beforeEach(() => {
   window.SDT = {Renderer:{prepare:vi.fn(async () => true)}};
 });
 afterEach(() => { cancelLayerPassage(); vi.useRealTimers(); vi.unstubAllGlobals(); document.body.replaceChildren(); });
+it.each([
+  [1,0,'layer-descent-v1.webp','layer-descent'],
+  [0,1,'layer-watchline-v2.webp','layer-watchline'],
+  [1,2,'layer-ruins-v2.webp','layer-ruins'],
+  [2,3,'layer-core-v2.webp','layer-core'],
+  [3,2,'layer-ruins-v2.webp','layer-ruins'],
+])('%i→%i 由目标层选择插画和演出，兼容旧档回程', async (from,to,asset,motion) => {
+  game.layerData=[{},{},{},{}]; game.layerIdx=from;
+  const passage=showLayerPassage(game,from,to); game.layerIdx=to;
+  expect(document.querySelector('.map-layer-passage .silent-node-art').src).toContain(asset);
+  expect(document.querySelector('.map-layer-passage [data-film-motion]').dataset.filmMotion).toBe(motion);
+  expect(document.querySelector('.layer-passage-caption h2').textContent).toBe(`第 ${to+1} 层`);
+  await vi.runAllTimersAsync(); await passage.done;
+  expect(isLayerPassageActive(game)).toBe(false);
+});
 it('插画展示3.6秒并用700毫秒退场，播放期间保持输入保护', async () => {
   const passage=showLayerPassage(game,0,1); game.layerIdx=1;
   const image=document.querySelector('.map-layer-passage .silent-node-art');
-  expect(image.src).toContain('layer-descent-v1.webp');
+  expect(image.src).toContain('layer-watchline-v2.webp');
   expect(document.querySelector('.layer-passage-caption h2').textContent).toBe('第 2 层');
   expect(document.querySelector('.layer-passage-caption small').textContent).toBe('继续深入');
   await vi.advanceTimersByTimeAsync(3500);

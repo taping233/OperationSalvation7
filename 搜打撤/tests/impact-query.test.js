@@ -1,3 +1,4 @@
+// @vitest-environment node
 /* impact-query（npm run impact）测试：属地撞线解析、反向闭包、命令生成三块核心口径。
  * 端到端用真实仓库文件断言（agent.scenes.js ← agent.js 引用是稳定事实）。 */
 import { describe, expect, it } from 'vitest';

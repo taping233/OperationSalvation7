@@ -17,7 +17,7 @@ export function previewRecommendedDeparture(options) {
     if (findDepartureStack(options.stash, key) !== stack || Object.entries(picks).some(([selected, n]) => n > 0 && findDepartureStack(options.stash, selected)?.card.name === stack.card.name)) continue;
     const next = { ...picks, [key]: 1 }, summary = departureSummary({ ...options, picks: next });
     const preview = options.previewDeployment({ baseSnapshot: { stash: options.stash, petSel: options.pet?.id }, preset: presetFor(next), cardCatalog: options.stash.map(item => item.card), pets: options.pet ? [options.pet] : [], bagCapacity: options.capacity, starterCount: options.starterCount, starterCard: options.starterCard });
-    if (!preview.canStart || summary.slots > Math.max(0, options.capacity - 3)) continue;
+    if (!preview.canStart || !summary.capacityOk || summary.slots > Math.max(0, options.capacity - 3)) continue;
     picks[key] = 1; added.push(stack.card.name);
   }
   return { picks, added, summary: departureSummary({ ...options, picks }) };
@@ -46,5 +46,12 @@ export function departureSummary({ starterCount, starterCard, fireball, pet, sta
     const cap = stackCapOf(entry.card);
     return Array.from({ length: Math.ceil(entry.count / cap) }, (_, index) => ({ card: entry.card, stackKey: entry.stackKey, count: Math.min(cap, entry.count - index * cap), fixed: entry.card.name === starter.name }));
   });
-  return { starter, starterCount: count, extraCount, knownCount: count + extraCount, slots: cells.length, capacity: capacity + resourceBonus, resourceBonus, cells };
+  const resourceSlots = cells.filter(cell => cell.card.type === '资源').length;
+  const ordinarySlots = cells.length - resourceSlots;
+  const totalCapacity = capacity + resourceBonus;
+  // Initial admission pushes the complete selection; validate its final layout.
+  // As in card-capacity, ordinary cards need base slots and only resources use the bonus.
+  const capacityOk = ordinarySlots <= capacity && cells.length <= totalCapacity;
+  return { starter, starterCount: count, extraCount, knownCount: count + extraCount, slots: cells.length,
+    baseCapacity: capacity, capacity: totalCapacity, resourceBonus, ordinarySlots, resourceSlots, capacityOk, cells };
 }

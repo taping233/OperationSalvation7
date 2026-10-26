@@ -103,7 +103,7 @@ describe('结构化战斗出牌前规则', () => {
     const deck = { type: '法术', desc: '可以在牌库外打出', rules: { version: 1, battle: { requirements: [{ kind: 'deckOnly' }] } } };
     expect(unplayableReasonFor(deck, 'normal')).toBe(null);
     expect(unplayableReasonFor(deck, 'boss')).toBe(null);
-    expect(unplayableReasonFor({ type: '能力卡', rules: { version: 1, battle: { requirements: [] } } }, 'normal')).toContain('能力卡');
+    expect(unplayableReasonFor({ type: '能力卡', rules: { version: 1, battle: { requirements: [] } } }, 'normal')).toBeNull();
 
     const discard = { type: '武术', desc: '无需手牌', rules: { version: 1, battle: { requirements: [{ kind: 'handCards', count: 2, type: '初始攻击' }] } } };
     const handCards = [{ card: { name: '初始攻击' } }, { card: { name: '初始攻击' } }];

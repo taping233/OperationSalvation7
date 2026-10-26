@@ -4,11 +4,12 @@
  * 由 game.run.js 拆出。层位最底（L0）：只依赖会话/数据/UI 模块，
  * 不依赖 altar / flow；ALTAR 与 FLOW 反向依赖本文件。
  * 内容：场景预加载与整页壳（nodeShell/nodeOpt）、
- *       行军转场、即时节点落定、拾取页、战斗/宝箱格、事件发牌、火堆复原页。
+ *       行军转场、即时节点落定、拾取页、战斗/搜刮点格、事件发牌、火堆复原页。
  * 商店控制器也在此装配（openShop 唯一实例，供 ALTAR/FLOW 复用）。
  * ============================================================ */
 import { esc, escAttr } from '../core/shared.js';
 import { playOutcomeFeedback } from '../ui/outcome-feedback.js';
+import { createRoomCheckpoint } from '../ui/room-actions.js';
 import { createCardInstance } from '../cards/card-instance.js';
 import { MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } from './game.session.js';
 import { _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
@@ -20,7 +21,7 @@ import { createShopController } from './game.run.shop.js';
 import { captureBattleContext, ensureBattleReady, startBattle } from '../battle/battle-loader.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { bagSlots } from '../hub/game.bag.bridge.js';
-import { nodeActionBinding } from './node-reward-state.js';
+import { nodeActionBinding, nodeContentEndedAt } from './node-reward-state.js';
 import { claimNodeRestore, finishNodeRestore, nodeRestoreAt } from './node-restore-state.js';
 import { selectEncounterSpec } from './encounter-selector.js';
 import { turboMs } from '../core/turbo.js';
@@ -35,6 +36,7 @@ import { motionTiming } from '../ui/motion-presets.js';
 import { revealTransition, transitionPause } from '../ui/transition-handoff.js';
 import { TRANSITION_ART } from '../ui/transition-art.js';
 import { wireEventChoiceSelection } from '../ui/event-choice-selection.js';
+import { invokeUiAction } from '../ui/action-dispatch.js';
 import { eventSceneHTML } from '../ui/node-scene-view.js';
 import '../../css/entry-events.css';
 import '../../css/expedition-transitions.css';
@@ -125,12 +127,14 @@ export function nodeShell(o) {
     const key = `${game.mapSeed}|${game.turn}|${game.layerIdx},${game.trackPos}|${o.title}|${bg}|${o.sub || ''}`;
     if (o.tone === 'event') {
       const root = UI.el?.ovBody?.querySelector('.event-scene');
-      if (root) wireEventChoiceSelection(root, key, game.discoveredPairs || game.layerData || game);
+      if (root) wireEventChoiceSelection(root, key, game.discoveredPairs || game.layerData || game,
+        option => invokeUiAction(UI, option));
     }
     UI.act('eventExit', () => {
       if (game.state !== 'modal') return;
-      const page = UI.el?.ovBody?.querySelector('.event-scene');
+      const page = /** @type {HTMLElement} */ (UI.el?.ovBody?.querySelector('.event-scene'));
       if (!page) return;
+      if (page.dataset.eventChoiceBusy === 'true') return;
       /** @type {HTMLElement & {_clearEventChoice?: () => void}} */ (page)._clearEventChoice?.();
       setBagReturnHook(null);
       UI.hideOverlay();
@@ -415,8 +419,9 @@ export function openBattleCell(def, encounter) {
     rewardKind:list.rewardKind, fallbackReason:list.fallbackReason });
 }
 
-// 宝箱格 / 事件卡开真宝箱：开完回待机并存档（场景演出后由本函数自行收尾）
+// 搜刮点 / 事件卡搜刮容器：处理完回待机并存档（场景演出后由本函数自行收尾）
 export function openChestsOnCell(chests, text, opts) {
+  if (nodeContentEndedAt(game)) return false;
   UI.log(`[[icon:archive]] ${text || '回收了' + SDT.Chests.dropText(chests)}`, 'loot');
   SDT.Chests.open(game, chests, () => {
     game.state = 'idle';
@@ -425,13 +430,15 @@ export function openChestsOnCell(chests, text, opts) {
 }
 
 export function resumeChestsOnCell(saved) {
+  if (nodeContentEndedAt(game)) return false;
   return SDT.Chests.restore(game, saved, () => {
     game.state = 'idle'; UI.refresh(game);
   }, { beforeComplete:() => { if (saved.context.consumeNode) consumeCurrentCell(); } });
 }
 
-// 固定奖励复用宝箱的逐张领取与存档恢复，不重新掷卡，也不因容量不足丢失。
+// 固定奖励复用搜刮点的逐张领取与存档恢复；同地点可整理后继续，前往下一节点后结束。
 export function openFixedRewardsOnCell(cards, source, { consumeNode = false } = {}) {
+  if (nodeContentEndedAt(game)) return false;
   const saved = { version:1, seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos,
     queue:[{ kind:'small' }], index:1, context:{ onCell:true, consumeNode },
     current:{ kind:'small', cards:cards.filter(Boolean), coins:0, coinsReceived:false,
@@ -444,34 +451,37 @@ export function openFixedRewardsOnCell(cards, source, { consumeNode = false } = 
 
 // 即时效果（经场景演出后结算）；after = 效果完成后的续流回调
 // 拾取类在场景里用大字标明结算（v0.22：明确告诉玩家发生了什么）
-// opts.silent：跳过获得演出（宝箱/基地等调用方自带卡牌展示界面，2026-09-13）
+// opts.silent：跳过获得演出（搜刮点/基地等调用方自带卡牌展示界面，2026-09-13）
 export function grantEventCard(tpl, opts = {}) {
   if (!tpl) return false;
+  const feedback = action => {
+    try { action(); } catch (error) { console.warn('[reward] 获得反馈未完成', error); }
+  };
   const canReceive = game.canReceiveCard
     ? game.canReceiveCard(tpl)
     : (game.ownedCards.some(o => o.card.name === tpl.name) || game.canAcceptCard(tpl));
   if (!canReceive) {
     // 2026-09-09 老板 #12：收不下要当场给提示（音效+日志，口径同 addItem），不能只默默掉在原地
-    SDT.Sound.sfx('deny');
-    UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}${tpl.type !== '资源' ? '；新普通牌需通用空格，同名未满仍可叠放' : ''}），【${esc(tpl.name)}】未领取，请整理背包后重试`, 'warn');
+    feedback(() => SDT.Sound.sfx('deny'));
+    feedback(() => UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}${tpl.type !== '资源' ? '；新普通牌需通用空格，同名未满仍可叠放' : ''}），【${esc(tpl.name)}】未领取，请整理背包后重试`, 'warn'));
     return false;
   }
   game.ownedCards.push(createCardInstance(tpl, newUid()));
-  UI.log(`[[icon:archive]] 获得卡牌【<b>${esc(tpl.name)}</b>】`, 'loot');
+  feedback(() => UI.log(`[[icon:archive]] 获得卡牌【<b>${esc(tpl.name)}</b>】`, 'loot'));
   // 2026-09-13 老板：发卡要有奖励动画，不能静默进背包——统一走获得演出
   //（传说卡保留金色光柱 + legend 音效，普通卡中性演出；多张连发自动排队逐张播）
   // opts.reason：获得原因文字（2026-09-20 老板：火堆等发牌点要说明"为什么给这张牌"），可省略
-  if (!opts.silent) UI.showCardReward(tpl, opts.reason);
+  if (!opts.silent) feedback(() => UI.showCardReward(tpl, opts.reason));
   // 阿猫的礼物（2026-09-12 实装）：「发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌」
   // 地图侧没有能量概念，只结算附赠卡；战斗内触发走 battle.core fireCatGift（含能量）
   if (tpl.id === 'tt2-apollo') {
     const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c) && c.id !== 'tt2-apollo');
     if (pool.length) {
       const got = pool[Math.floor(Random.random('loot', 'reward') * pool.length)];
-      UI.log('[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠另 1 张随机卡牌', 'loot');
-      // 宝箱可把已掷定附赠保留为独立待领卡；本体与附赠各自记领取状态。
+      feedback(() => UI.log('[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠另 1 张随机卡牌', 'loot'));
+      // 搜刮点可把已掷定附赠保留为独立待领卡；本体与附赠各自记领取状态。
       if (typeof opts.deferAcquiredCard === 'function') opts.deferAcquiredCard(got);
-      else grantEventCard(got);   // 旧非宝箱入口保留原行为；池内排除自身，无递归风险
+      else grantEventCard(got);   // 旧非搜刮点入口保留原行为；池内排除自身，无递归风险
     }
   }
   return true;
@@ -481,6 +491,7 @@ export const FIRE_RESTORABLE = (card) => card.type !== '道具' && card.type !==
 // opts = { title, icon, tone, sub }：调用方传入当前来源的标题与说明。
 // 祭坛和「战地整备」复原分支各用自身身份；不传 opts 时默认「营火休整」。
 export function openPocketRestore(picks, done, opts = {}, transaction = null) {
+  if (nodeContentEndedAt(game)) return false;
   const record = opts.restoreRecord;
   if (record && nodeRestoreAt(game) !== record) return false;
   const txn = transaction || { left: record?.left ?? picks, finished: false, current: captureBattleContext(game) };
@@ -488,16 +499,91 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
   game.state = 'modal';
   // 背包返回恢复本页并保留剩余复原次数（09-30 深审 WORLD-002）：关闭背包不再兜底回
   // idle 导致节点未消耗、火堆奖励可被反复重领
-  setBagReturnHook(() => openPocketRestore(picks, done, opts, txn));
+  setBagReturnHook(() => txn.checkpoint ? false : openPocketRestore(picks, done, opts, txn));
   const restorable = () => game.usedPocket.filter(p => FIRE_RESTORABLE(p.card));
+  const cell = `${game.layerIdx},${game.trackPos}`;
+  const sourceCurrent = () => txn.current() && (!record || game.nodeRewards?.[cell] === record);
   let surface;
+  const rememberView = () => {
+    if (UI.el?.ovBody?.firstElementChild !== surface || !surface?.querySelector('.pocket-restore-content')) return;
+    const buttons = [...surface.querySelectorAll('button[data-act="restoreOne"]')];
+    const focused = surface.contains(document.activeElement) ? document.activeElement : null;
+    txn.view = { focused:!!focused, name:/** @type {HTMLElement} */ (focused)?.dataset.name,
+      index:buttons.indexOf(focused), scrollTop:surface.querySelector('.pocket-restore-content').scrollTop };
+  };
+  const refreshMap = () => {
+    try { UI.refresh(game); } catch (error) { console.warn('[restore] 地图刷新未完成', error); }
+  };
+  const checkpoint = (kind, card = null) => {
+    rememberView();
+    const mapDone = kind === 'return' || !done || done === finishInstant;
+    let continued = false;
+    if (kind !== 'claim' && mapDone) {
+      if (game.chainMove) cancelLegacyChainMove();
+      game.state = 'idle';
+    }
+    const pending = createRoomCheckpoint({
+      UI, save:saveGame, isCurrent:sourceCurrent,
+      renderRetry:({ saved, run, isCurrent }) => {
+        UI.showOverlay('', `<section class="battle-decision pocket-restore" data-decision-kind="pocket-restore">
+          <header class="battle-decision-head"><h3>${opts.icon || '[[icon:fire]]'} ${opts.title || '营火休整'}</h3></header>
+          <div class="battle-decision-content"><p class="ov-note" role="status">${saved
+            ? '复原进度已保存，继续页面尚未完成。' : '本次复原结果已保留，保存尚未完成。'}</p></div>
+          <footer class="battle-decision-actions"><button type="button" class="ov-btn ok" data-act="restoreRetry">${saved ? '继续' : '重试保存'}</button></footer>
+        </section>`, 'discover');
+        UI.act('restoreRetry', () => isCurrent() ? run() : false);
+      },
+      complete:async isCurrent => {
+        if (!isCurrent()) return false;
+        let showCard = kind === 'claim';
+        if (kind === 'claim') {
+          render();
+          txn.checkpoint = null;
+        } else {
+          const result = mapDone || continued ? true : await done();
+          if (result === false) return false;
+          continued = true;
+          // A destination opened by done owns its own hook and overlay now.
+          if (isCurrent()) {
+            const body = UI.el?.ovBody, page = body?.firstElementChild, overlay = UI.el?.overlay;
+            try { UI.hideOverlay(); } catch (error) { console.warn('[restore] 复原页面关闭未完成', error); }
+            if (isCurrent()) return false;
+            if (sourceCurrent() && UI.el?.ovBody === body && UI.el?.overlay === overlay &&
+                body?.firstElementChild === page && !overlay?.hidden && !overlay?.classList.contains('closing')) return false;
+            if (sourceCurrent() && UI.el?.ovBody === body && UI.el?.overlay === overlay &&
+                (body?.firstElementChild === page || !body?.firstElementChild) &&
+                (overlay?.hidden || overlay?.classList.contains('closing'))) {
+              setBagReturnHook(null);
+              const revision = UI._overlayRevision;
+              refreshMap();
+              showCard = UI._overlayRevision === revision;
+            }
+          }
+          txn.finished = true;
+          txn.checkpoint = null;
+        }
+        if (card && showCard && sourceCurrent()) {
+          const onMap = kind !== 'claim';
+          const host = onMap ? document.getElementById('viewport') : UI.el?.ovBody;
+          const body = UI.el?.ovBody, page = body?.firstElementChild, revision = UI._overlayRevision;
+          try {
+            playOutcomeFeedback(host,{kind:'restore',cards:[card],source:opts.title || '卡牌复原',
+              extra:opts.feedbackExtra || '', surface:onMap ? host : null,blocking:!onMap,
+              cardHTML:entry=>SDT.Cards.cardHTML(entry,'sm'),
+              isCurrent:()=>sourceCurrent() && UI.el?.ovBody === body && UI._overlayRevision === revision &&
+                (body?.firstElementChild === page || (onMap && UI.el?.overlay?.hidden && !body?.firstElementChild))});
+          } catch (error) { console.warn('[restore] 复原演出未完成', error); }
+        }
+        return true;
+      },
+    });
+    txn.checkpoint = pending;
+    return pending.run();
+  };
   const render = () => {
-    if (txn.finished || !txn.current()) return;
-    const oldButtons = [...(surface?.querySelectorAll('button[data-act="restoreOne"]') || [])];
-    const focused = surface?.contains(document.activeElement) ? document.activeElement : null;
-    const focusedName = /** @type {HTMLElement} */ (focused)?.dataset.name;
-    const focusedIndex = oldButtons.indexOf(focused);
-    const scrollTop = surface?.querySelector('.pocket-restore-content')?.scrollTop ?? 0;
+    if (txn.finished || !sourceCurrent()) return;
+    if (!txn.checkpoint) rememberView();
+    const view = txn.view || { focused:false, scrollTop:0 };
     const left = record?.left ?? txn.left;
     const list = restorable();
     const rows = list.map(item => ({ item, card:item.card, count:item.count, name:item.card.name,
@@ -526,24 +612,20 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     surface = UI.el?.ovBody?.firstElementChild;
     surface?.querySelectorAll('.pocket-restore-art [tabindex]').forEach(el => el.removeAttribute('tabindex'));
     const content = surface?.querySelector('.pocket-restore-content');
-    if (content) content.scrollTop = scrollTop;
-    if (focused) {
+    if (content) content.scrollTop = view.scrollTop;
+    if (view.focused) {
       const buttons = [...surface.querySelectorAll('button[data-act="restoreOne"]')];
-      (buttons.find(button => button.dataset.name === focusedName)
-        || buttons[Math.min(focusedIndex, buttons.length - 1)] || surface.querySelector('[data-act="fireDone"]'))?.focus({ preventScroll:true });
+      (buttons.find(button => button.dataset.name === view.name)
+        || buttons[Math.min(view.index, buttons.length - 1)] || surface.querySelector('[data-act="fireDone"]'))?.focus({ preventScroll:true });
     }
     const active = nodeActionBinding(game, UI, 'fireDone');
     const renderedSurface = surface;
-    const live = () => active() && txn.current() && !txn.finished &&
-      (!record || game.nodeRewards?.[`${game.layerIdx},${game.trackPos}`] === record) &&
+    const live = () => active() && sourceCurrent() && !txn.finished && !txn.checkpoint &&
       (!renderedSurface || UI.el?.ovBody?.firstElementChild === renderedSurface);
     const finish = () => {
-      if (!live()) return;
-      if (record && !finishNodeRestore(game, record)) return;
-      txn.finished = true;
-      setBagReturnHook(null);
-      UI.hideOverlay();
-      if (done) done();
+      if (!live()) return false;
+      if (record && !finishNodeRestore(game, record)) return false;
+      return checkpoint('finish');
     };
     UI.act('restoreOne', (d) => {
       if (!live()) return;
@@ -561,34 +643,26 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
       if (record) {
         if (!claimNodeRestore(game, record, { name:d.name, entry:p, isRestorable:FIRE_RESTORABLE,
           canReceive:c => game.canReceiveCard(c), newUid })) return;
-        saveGame();
       } else {
+        const restored = createCardInstance(card, newUid());
         p.count--;
         if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
-        game.ownedCards.push(createCardInstance(card, newUid()));
+        game.ownedCards.push(restored);
         txn.left--;
       }
-      UI.log(`[[icon:sparkles]] 【<b>${esc(card.name)}</b>】已复原，回到背包`, 'ok');
-      if ((record?.left ?? txn.left) <= 0) finish(); else render();
-      const onMap = (record?.left ?? txn.left) <= 0;
-      const host = onMap ? document.getElementById('viewport') : UI.el?.ovBody;
-      const outcomeCell = `${game.layerIdx},${game.trackPos}`, body = UI.el?.ovBody, page = body?.firstElementChild;
-      playOutcomeFeedback(host,{kind:'restore',cards:[card],source:opts.title || '卡牌复原',
-        extra:opts.feedbackExtra || '',
-        surface:onMap ? host : null,blocking:!onMap,cardHTML:entry=>SDT.Cards.cardHTML(entry,'sm'),
-        isCurrent:()=>txn.current() && `${game.layerIdx},${game.trackPos}`===outcomeCell && (!onMap || !body ||
-          (UI.el?.ovBody===body && (body.firstElementChild===page || (UI.el?.overlay?.hidden && !body.firstElementChild))))});
+      try { UI.log(`[[icon:sparkles]] 【<b>${esc(card.name)}</b>】已复原，回到背包`, 'ok'); }
+      catch (error) { console.warn('[restore] 复原播报未完成', error); }
+      const finished = (record?.left ?? txn.left) <= 0;
+      if (finished && record) finishNodeRestore(game, record);
+      return checkpoint(finished ? 'finish' : 'claim', card);
     });
     UI.act('fireDone', finish);
     if (record) {
       UI.act('restoreReturn', () => {
         if (!live()) return;
-        txn.finished = true;
-        setBagReturnHook(null);
-        UI.hideOverlay();
-        finishInstant();
+        return checkpoint('return');
       });
-      UI.act('restoreBag', () => { if (live()) bagSlots.showBackpack(); });
+      UI.act('restoreBag', () => { if (live()) { rememberView(); bagSlots.showBackpack(); } });
     }
   };
   render();

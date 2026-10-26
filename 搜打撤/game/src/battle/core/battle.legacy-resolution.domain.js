@@ -67,7 +67,7 @@ export function createLegacyResolution({ combat, log, esc, getHandSize, randomDi
       }
       return true;
     }
-    // 搜索大宝箱「探宝」（2026-09-17 留言「探宝没有从牌库底发现卡牌，而是随机发现」）：
+    // 搜索军用保险柜「探宝」（2026-09-17 留言「探宝没有从牌库底发现卡牌，而是随机发现」）：
     // 三张候选就是牌库底的真实卡牌，选 1 张入手、其余按原顺序放回牌库底。
     // 探宝只有发现效果，结算完直接收尾；空库不会随机补足。
     if (!hasStructuredOnPlay && isLegacySearchChest(card)) {

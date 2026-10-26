@@ -1,3 +1,4 @@
+// @vitest-environment node
 // Deterministic operation counts, not a browser FPS or elapsed-time benchmark.
 import { expect, it } from 'vitest';
 import { createBattleCardInspection } from '../game/src/battle/effects/battle.card-inspection.js';

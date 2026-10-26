@@ -4,7 +4,7 @@
 
 ## 身份与参考使用
 
-运行立绘 `game/assets/portraits/full/xingyue.webp` 于2026-10-24按老板要求参考圣盾、圣疗卡面的脸部与笔触重绘，1024×1536；本页图片为同图副本，保留胸前单手祝祷、长辫、星灯与白底全身构图。老板最终选用衣鞋局部简化前的一版；来源与备份见[立绘收据](../evidence/2026-10-24-xingyue-card-roster/portrait-receipt.json)，本轮按要求未检测。当前通用画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)；历史姿态和配方保留在下方版本描述。
+运行立绘 `game/assets/portraits/full/xingyue.webp` 于2026-10-26替换为本轮对照禁咒系列修脸的光牧版；本页图片为同图副本。竖版人物保持原尺寸，左右补纯白边至2731×1536，保留完整全身；原机位空手叉腰的暗牧版以同样方式加入可选皮肤「暗牧」。来源与备份见[接入收据](../evidence/2026-10-26-xingyue-install/receipt.json)，尚未进行游戏实页验收。当前通用画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)。
 
 ## 卡面光牧与暗牧外观（2026-10-10老板确认）
 

@@ -14,7 +14,7 @@ export function decorateInventoryZoom(card, { description = card.desc || '' } = 
   const startHint = battleStartExplanation(card);
   const info = document.createElement('article');
   info.className = 'inventory-zoom-info';
-  info.innerHTML = `<header><h2>${esc(card.name)}</h2><small>${esc(card.type || '')} · ${esc(card.rarity || '')}</small></header><section class="inventory-zoom-effect"><h3>卡牌效果</h3><div class="inventory-zoom-rules card-rules-copy">${descRich(description, card.id)}</div>${startHint ? `<p class="inventory-zoom-start-hint">${esc(startHint)}</p>` : ''}</section>`;
+  info.innerHTML = `<header><h2>${esc(card.name)}</h2><small>${esc(card.type || '')} · ${esc(card.rarity || '')}</small></header><section class="inventory-zoom-effect"><h3>卡牌效果</h3><div class="inventory-zoom-rules card-rules-copy">${descRich(description, card.id, card)}</div>${startHint ? `<p class="inventory-zoom-start-hint">${esc(startHint)}</p>` : ''}</section>`;
   /** @type {import("./ui.dom.types.js").UIElement} */ (zoom.querySelector('.cz-card'))?.insertAdjacentElement('afterend', info);
   const close = /** @type {import("./ui.dom.types.js").UIElement} */ (zoom.querySelector('.cz-close'));
   if (close) info.prepend(close);

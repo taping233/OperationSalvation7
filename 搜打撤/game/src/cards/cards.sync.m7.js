@@ -27,7 +27,7 @@ const definitions = new Map([
     { op: 'cleanse', target: 'self' }, { op: 'heal', amountField: 'heal' },
   ] } })],
   ['tt2-treasuremap', equip({ skill: { oncePerBattle: true, ops: [
-    { op: 'acquire', n: 1, pool: { kind: '搜索大宝箱' }, dest: 'deck' },
+    { op: 'acquire', n: 1, pool: { kind: '搜索军用保险柜' }, dest: 'deck' },
     { op: 'draw', amountField: 'draw' },
   ] } })],
   ['tt12-raygun', equip({ skill: { oncePerBattle: true, ops: [

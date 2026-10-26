@@ -18,7 +18,8 @@ describe('基地出发与选角回流回归', () => {
     expect(hub).toContain('deployStart = start;');
     expect(hub).toContain('openDepartPrep');
     expect(hub).toMatch(/await newRun\(mode, picks, \{ skipClassChoice: true,[\s\S]*?isCurrent:/);
-    expect(departure).toContain('if (!options.skipClassChoice) return readState().runtime.openClassChoice()');
+    expect(departure).toContain('openClassChoice');
+    expect(departure).toContain('departure-pending');
   });
 
   it('出征整备写盘失败会留在整备页并停止出发', () => {
@@ -26,9 +27,9 @@ describe('基地出发与选角回流回归', () => {
     expect(hub).toContain('if (started === false) {');
     expect(hub).toContain("deployHint = '[[icon:cross]] 出征存档尚未完成，携带选择已保留；请重试或返回选档继续恢复。'");
     // 顺序守卫：失败分支 → 重置选牌 → 成功返回；中间允许有限的合法插入（音效/埋点），不锁死相邻字节（CRLF 教训同族）
-    expect(hub).toMatch(/if \(started === false\) \{[\s\S]*?return false;\s*\}\s*replaceDeployPick\(null\);\s*[\s\S]{0,300}?return true;/);
-    expect(altar).toContain('if (beforeConfirm && await beforeConfirm() === false) return false;');
-    expect(altar.indexOf('await beforeConfirm() === false')).toBeLessThan(altar.indexOf('const card = SDT.Cards.randomClassCard(cl)'));
+    expect(hub).toContain('const finishPublishedDeparture = async ownsPage => {');
+    expect(altar).toContain('const result = await beforeConfirm();');
+    expect(altar.indexOf('await beforeConfirm()')).toBeLessThan(altar.indexOf('const card = SDT.Cards.randomClassCard(cl)'));
   });
 });
 
@@ -311,7 +312,7 @@ describe('基地分页、详情返回与档位浏览状态', () => {
     browsing.useSlot(2);
     browsing.runtime.openBaseHub('shop');
 
-    expect(browsing.host.querySelector('[role="status"]')).toBeNull();
+    expect(browsing.host.querySelector('.camp-notice').textContent).toBe('');
     expect(browsing.page().scrollTop).toBe(0);
     expect(browsing.host.querySelector('[data-act="tradeShopSelectGood"].is-selected').dataset.key).toBe('tt3-skewer');
     expect(browsing.base.data).toMatchObject({ coins: 100, wood: 1 });

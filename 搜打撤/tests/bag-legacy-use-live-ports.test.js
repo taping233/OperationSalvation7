@@ -15,7 +15,7 @@ describe('bag use current library port', () => {
       captureContext: () => () => true, setBagReceipt: vi.fn() });
     const reward = { id: 'new-legend', name: '当前传说', rarity: '传说' };
     current = { all: vi.fn(() => [reward]), isRandomObtainable: () => true };
-    expect(controller.useOwnedCard('source')).toBeUndefined();
+    expect(controller.useOwnedCard('source')).toBe(true);
     expect(oldCards.all).not.toHaveBeenCalled();
     expect(current.all).toHaveBeenCalledOnce();
     expect(game.ownedCards).toEqual([{ uid: 'reward', card: reward }]);

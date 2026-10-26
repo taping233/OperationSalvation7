@@ -514,6 +514,9 @@ it.each(['settings', true])('stops geometry polling and queued renderer wakes fo
   expect(vi.getTimerCount()).toBeGreaterThan(0);
   const back = settingsPanel(body, mode);
   await flush();
+  // The settings panel owns a finite entry transition; renderer polling must
+  // remain stopped after that transition and throughout the suspension.
+  await vi.advanceTimersByTimeAsync(1000);
   expect(vi.getTimerCount()).toBe(0);
   const started = pixi.started;
   window.dispatchEvent(new Event('resize'));

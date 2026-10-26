@@ -1,7 +1,6 @@
-// One name tooltip owns enemy attack and special-effect descriptions.
+// Name tooltips show special effects and current statuses.
 export function enemyDetails(foe, intents, combat, affix) {
-  const attack = intents.map(intent => `${intent.label}${intent.damage == null ? '' : ` · ${intent.damage}${intent.hits > 1 ? ` ×${intent.hits}（共${intent.totalDamage}）` : ''}`}${intent.bleedBonus ? ` · 流血 ${intent.bleedBonus} 层` : ''}`).join('；');
-  const details = [`攻击方式：${attack || '无行动'}。基础攻击 ${foe.atk}${foe.affix === 'frenzy' ? '×2' : ''}`];
+  const details = [];
   if (foe.desc) details.push(foe.desc);
   if (affix) details.push(`${affix.name}：${affix.desc}`);
   if (foe.rotSeedMarked || foe.deathBurst) details.push('腐化标记：死亡时，对所有敌人造成等同于此时中毒层数的真实伤害');

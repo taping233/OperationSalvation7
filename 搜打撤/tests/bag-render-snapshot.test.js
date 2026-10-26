@@ -47,6 +47,7 @@ beforeEach(async () => {
     showOverlay(_title, html) { document.getElementById('cardZoom')?.remove(); overlay.hidden = false; body.innerHTML = html; },
     hideOverlay() { overlay.hidden = true; },
     showCardZoom(_card, options) {
+      document.getElementById('cardZoom')?.remove();
       const zoom = document.createElement('div'); zoom.id = 'cardZoom';
       zoom.innerHTML = `<button class="cz-backdrop"></button><div class="cz-card"></div><div class="cz-foot">${options.footer}</div>`;
       zoom.querySelector('.cz-backdrop').onclick = () => zoom.remove(); document.body.append(zoom);

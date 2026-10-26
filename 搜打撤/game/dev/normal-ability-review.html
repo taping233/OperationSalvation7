@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<base href="/">
+<style>.cohesion-review-controls{position:fixed;left:8px;bottom:8px;z-index:20000;display:flex;gap:8px;padding:6px;background:#0c161fe8;color:#eee;font:13px sans-serif}.cohesion-review-controls[hidden]{display:none}</style>
+<script>
+const cohesionStorage = new Map();
+Object.defineProperty(window,'localStorage',{value:{getItem:k=>cohesionStorage.get(String(k))??null,setItem:(k,v)=>cohesionStorage.set(String(k),String(v)),removeItem:k=>cohesionStorage.delete(String(k)),clear:()=>cohesionStorage.clear(),key:i=>[...cohesionStorage.keys()][i]??null,get length(){return cohesionStorage.size;}}});
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/png" href="assets/brand-mark-codename7.png" />
+<!-- 首屏关键资源提前预载：标题壁纸与字标是首屏核心视觉；
+     其余资源（BGM/立绘/卡面）保持按需加载，避免挤占启动带宽 -->
+<link rel="preload" as="image" href="assets/reconstruction/wallpaper-snow-road-1016.webp?v=1016b" />
+<link rel="preload" as="image" href="assets/title-wordmark.png" />
+<link rel="preload" as="font" type="font/ttf" href="assets/fonts/HarmonyOS_Sans_SC_Regular.ttf" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cascadia-code-400.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/oxanium-latin-700-normal.woff2" crossorigin />
+<title>升格会的冬日猜想</title>
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/cards.css" />
+<link rel="stylesheet" href="css/overlays.css" />
+<link rel="stylesheet" href="css/hub.css" />
+<link rel="stylesheet" href="css/battle.css" />
+<link rel="stylesheet" href="css/scenes.css" />
+<link rel="stylesheet" href="css/lab-ending.css" />
+<link rel="stylesheet" href="css/winter.css" />
+<link rel="stylesheet" href="css/expedition.css" />
+<link rel="stylesheet" href="css/expedition-map.css" />
+<link rel="stylesheet" href="css/map-edge-light.css" />
+<link rel="stylesheet" href="css/expedition-hub.css" />
+<link rel="stylesheet" href="css/expedition-inventory.css" />
+<link rel="stylesheet" href="css/expedition-rewards.css" />
+<link rel="stylesheet" href="css/expedition-battle.css" />
+<link rel="stylesheet" href="css/expedition-library.css" />
+<link rel="stylesheet" href="css/card-v3.css" />
+<link rel="stylesheet" href="css/expedition-roster.css" />
+<link rel="stylesheet" href="css/expedition-shop.css" />
+<link rel="stylesheet" href="css/ui-scale.css" />
+<!-- 09-24 美术排版流水线：各界面增量层（子代理产出，主代理统一挂载；须在 ui-scale.css 之后） -->
+<link rel="stylesheet" href="css/page-slot-select.css" />
+    <link rel="stylesheet" href="css/page-settings.css" />
+    <link rel="stylesheet" href="css/page-datapage.css" />
+<link rel="stylesheet" href="css/page-ach.css" />
+<link rel="stylesheet" href="css/page-cardforge.css" />
+<link rel="stylesheet" href="css/page-expedition-hud.css" />
+<link rel="stylesheet" href="css/feedback-oct12.css" />
+<link rel="stylesheet" href="css/roster-departure-v2.css" />
+<link rel="stylesheet" href="css/experience-loot.css" />
+<link rel="stylesheet" href="css/page-events.css" />
+<link rel="stylesheet" href="css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="css/page-battle-ui.css" />
+<link rel="stylesheet" href="css/character-idle.css" />
+<!-- EXP: <link rel="stylesheet" href="css/cover-remaining.css" /> -->
+<link rel="stylesheet" href="css/page-transitions.css" />
+<link rel="stylesheet" href="css/ak-skin.css" />
+<link rel="stylesheet" href="css/base-camp.css" />
+<link rel="stylesheet" href="css/base-camp-compact.css" />
+<link rel="stylesheet" href="css/card-layout-selected.css" />
+<link rel="stylesheet" href="css/battle-stage.css" />
+<link rel="stylesheet" href="css/transition-illustrations.css" />
+<link rel="preload" as="image" href="assets/scenes/transitions-1021/layer-passage.webp" fetchpriority="low" />
+<link rel="preload" as="image" href="assets/scenes/transitions-1021/loading.webp" fetchpriority="low" />
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <section class="panel" id="charPanel">
+      <button type="button" class="hero-ava" id="heroAva" aria-label="人物详情">医</button>
+    </section>
+
+    <section class="panel" id="statsPanel">
+      <canvas id="miniMap" width="560" height="112" aria-label="已探明区域简图"></canvas>
+      <div class="stat stat-duo"><label>行动 · 价值</label>
+        <b><span id="statTurn">0</span><em class="duo-sep">/</em><span id="statValue" class="gold">¥0</span></b>
+      </div>
+    </section>
+
+    <section class="panel" id="devPanel" hidden>
+      <div id="devTools" class="dev-tools" hidden>
+        <div class="dev-battle-row">
+          <button id="devBattle" type="button">强制遭遇战</button>
+          <button id="devBoss" type="button">强制BOSS战</button>
+        </div>
+      </div>
+    </section>
+
+  </aside>
+
+  <main id="viewport">
+    <canvas id="game"></canvas>
+    <div class="map-volumetric-light" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="map-edge-light" aria-hidden="true">
+      <i style="--x:24%;--y:28%;--t:7s;--delay:-2s"></i>
+      <i style="--x:31%;--y:63%;--t:9s;--delay:-6s"></i>
+      <i style="--x:43%;--y:47%;--t:8s;--delay:-7s"></i>
+      <i style="--x:48%;--y:76%;--t:12s;--delay:-3s"></i>
+      <i style="--x:61%;--y:57%;--t:7s;--delay:-5s"></i>
+      <i style="--x:68%;--y:22%;--t:10s;--delay:-8s"></i>
+      <i style="--x:74%;--y:71%;--t:13s;--delay:-4s"></i>
+    </div>
+    <div id="layerBanner" aria-hidden="true">
+      <div class="lb-zh" id="layerBannerZh">—</div>
+      <div class="lb-en" id="layerBannerEn"></div>
+    </div>
+    <nav id="expeditionChapter" aria-label="远征章节"></nav>
+    <!-- 09-24 留言 #8：「已知区域 G」按键移除（G 键镜头总览保留，见 input.js camOverview） -->
+    <div id="resHud">
+      <button type="button" class="chip-mini res-gold" data-tip="持有金币" tabindex="0" aria-label="持有金币" aria-describedby="mapGoldTip">
+        <img class="res-ic map-resource-art" src="assets/ui/map-hud-1015/gold-is7-v2.webp" alt="" aria-hidden="true" width="64" height="64" draggable="false">
+        <b id="charCoins">0</b>
+        <span class="map-resource-tip" id="mapGoldTip" role="tooltip"><strong>金币</strong><span>持有的金币，可用于商店交易。</span></span>
+      </button>
+      <button type="button" class="chip-mini res-atk" data-tip="攻击力" tabindex="0" aria-label="攻击力" aria-describedby="mapAttackTip">
+        <img class="res-ic map-resource-art" src="assets/ui/map-hud-1015/attack-is7-v2.webp" alt="" aria-hidden="true" width="64" height="64" draggable="false">
+        <b id="charAtk">4</b>
+        <span class="map-resource-tip" id="mapAttackTip" role="tooltip"><strong>攻击力</strong><span>攻击伤害按卡牌数值加你的攻击力结算。</span></span>
+      </button>
+    </div>
+    <div id="topBtns">
+      <button id="btnLocate" title="镜头回到当前位置（F）">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <circle cx="12" cy="12" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+          <path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button id="btnHome" class="archive-back" title="离开对局（可保存或放弃） / 回主菜单" aria-label="离开对局">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button id="btnMute" title="音效 / 背景乐开关">
+        <svg class="ic-sound-on" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path d="M3 8.5v7h4l5 4.5V4L7 8.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <svg class="ic-sound-off" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path d="M3 8.5v7h4l5 4.5V4L7 8.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div id="hpHud" tabindex="0" aria-label="生命值" aria-describedby="mapHealthTip">
+        <div class="hp-hud-body">
+          <b id="hpText">30/30</b>
+          <div id="hpBarWrap"><div id="hpBar"></div></div>
+        </div>
+        <span class="map-resource-tip" id="mapHealthTip" role="tooltip"><strong>生命值</strong><span>当前生命 / 生命上限。下方细条显示剩余生命比例。</span></span>
+      </div>
+    </div>
+    <div id="tooltip" hidden></div>
+    <div id="title" class="home-composed">
+      <div class="home-scene" aria-hidden="true">
+        <div class="title-wallpaper-extension"></div>
+        <div class="title-bg" data-wallpaper-layer="snow-road"></div>
+        <div class="title-bg title-bg-alternate" data-wallpaper-layer="baita-heixiang"></div>
+        <div class="title-bg title-bg-piano" data-wallpaper-layer="xingyue-piano"></div>
+        <div class="title-bg title-bg-bass" data-wallpaper-layer="wu-bass"></div>
+        <div class="title-bg title-bg-station" data-wallpaper-layer="baita-station"></div>
+        <div class="title-bg title-bg-reeds" data-wallpaper-layer="xingyue-reeds"></div>
+        <div class="title-bg title-bg-dinner" data-wallpaper-layer="companions-dinner"></div>
+      </div>
+      <button type="button" class="home-tool home-wallpaper-view" id="btnTitleWallpaperView" aria-pressed="false" title="隐藏界面，只看壁纸">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>只看壁纸</span>
+      </button>
+      <div class="home-edge-band home-edge-band-top" aria-hidden="true">
+        <div class="home-band-track">
+          <span class="home-band-lane"><span>冬日猜想 <b>/</b> CODE NAME 7</span></span>
+        </div>
+      </div>
+      <div class="title-inner">
+        <section class="home-command" aria-label="主菜单">
+        <header class="home-brand">
+          <h1 class="home-wordmark"><img src="assets/title-wordmark.png" alt="升格会的冬日猜想" draggable="false"></h1>
+        </header>
+        <nav class="home-primary" aria-label="开始与指南">
+          <button class="home-plate home-start" id="mStart" title="进入城市">
+            <svg class="home-line-icon home-city-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M5 34V17h8V9h14v8h8v17M13 17h14M16 34v-9a4 4 0 0 1 8 0v9M4 34h32M17 13h6M9 22v3M31 22v3M17 4v5M23 4v5"/></svg>
+            <span class="home-button-copy"><span class="home-button-cn">进入城市</span></span>
+            <svg class="home-arrow" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 16h21M18 7l9 9-9 9" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+          </button>
+          <button class="home-plate home-guide" id="mGuide" title="生存指南" aria-label="打开生存指南">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 7c4-2 8-2 12 0 4-2 8-2 12 0v20c-4-2-8-2-12 0-4-2-8-2-12 0zM16 7v20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span class="home-button-copy"><span class="home-button-cn">生存指南</span></span>
+          </button>
+        </nav>
+        </section>
+        <aside class="home-support" aria-label="收藏与系统">
+        <nav class="home-secondary home-collection" aria-label="收藏">
+          <button class="home-plate home-ach" id="mAch" title="成就总览">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="12" r="7"/><path d="m16 8 1.2 2.5 2.8.4-2 1.9.5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-1.9 2.8-.4zM11 18l-2 10 7-4 7 4-2-10"/></svg>
+            <span class="home-button-copy"><span class="home-button-cn">成就总览</span></span>
+          </button>
+          <button class="home-plate home-library" id="btnCardLib" title="照相馆">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 10h6l2-4h8l2 4h6v17H4z"/><circle cx="16" cy="18" r="5"/><path d="M24 13h1"/></svg>
+            <span class="home-button-copy"><span class="home-button-cn">照相馆</span></span>
+          </button>
+        </nav>
+        <nav class="home-secondary home-system" aria-label="系统工具">
+          <button class="home-plate home-settings" id="mSettings" title="设置">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20M6 16h20M6 24h20M12 4v8M22 12v8M11 20v8"/></svg>
+            <span class="home-button-copy"><span class="home-button-cn">设置</span></span>
+          </button>
+          <button class="home-plate home-makers" id="mCredits" title="制作名单" aria-haspopup="dialog" aria-controls="homeCredits">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="12" cy="10" r="4"/><path d="M4 27v-4a8 8 0 0 1 16 0v4M22 7a4 4 0 0 1 0 8M24 19a7 7 0 0 1 4 6v2"/></svg>
+            <span class="home-button-copy"><span class="home-button-cn">制作名单</span></span>
+          </button>
+          <button class="home-plate home-exit" id="btnTitleExit" title="退出游戏" aria-label="退出游戏">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13 5h13v22H13M4 16h16M9 10l-6 6 6 6"/></svg>
+            <span class="home-button-copy"><span class="home-button-cn">退出游戏</span></span>
+          </button>
+        </nav>
+        </aside>
+        <footer class="home-footer">
+          <div class="home-tools">
+            <button class="home-tool" id="btnTitleMute" title="音效 / 背景乐开关" aria-label="音效 / 背景乐开关">
+              <svg class="ic-sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5l-5 4zM16 9a5 5 0 0 1 0 6M19 6a9 9 0 0 1 0 12"/></svg>
+              <svg class="ic-sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5l-5 4zM16 9l6 6M22 9l-6 6"/></svg>
+            </button>
+            <button class="home-tool home-inbox" id="mInbox" title="留言信箱">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v13H3zM3 6l9 7 9-7"/></svg><span>留言信箱</span>
+            </button>
+            <button type="button" class="home-tool home-wallpaper" id="btnTitleWallpaper" title="切换壁纸" aria-label="切换壁纸，当前第1张，共1张">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 16l5-5 4 4 4-6 5 7"/><circle cx="8" cy="9" r="1"/></svg><span>壁纸 <b data-wallpaper-count aria-live="polite">1/1</b></span>
+            </button>
+          </div>
+        </footer>
+        <dialog class="home-credits-dialog" id="homeCredits" aria-labelledby="homeCreditsTitle">
+          <form method="dialog"><button class="home-credits-back" aria-label="返回主页"><span aria-hidden="true">←</span> 返回主页</button></form>
+          <header class="credits-heading"><h2 id="homeCreditsTitle">制作名单</h2></header>
+          <h3 class="credits-section-title">制作团队</h3>
+          <dl class="home-makers-list">
+            <div><dt>制作人</dt><dd>太平</dd></div>
+            <div><dt>游戏设计师</dt><dd>创</dd></div>
+          </dl>
+          <h3 class="credits-section-title">特别鸣谢</h3>
+          <dl class="home-makers-list credits-thanks">
+            <div><dt>精神支柱</dt><dd>Tang</dd></div>
+          </dl>
+          <section class="credits-models" aria-labelledby="creditsModelsTitle">
+          <h3 class="credits-section-title" id="creditsModelsTitle">额外感谢 <span class="credits-model-label">大模型</span></h3>
+          <ul class="credits-extra-thanks" aria-label="额外感谢的大模型">
+            <li>Gpt</li><li>Glm</li><li>Mimo</li><li>Claude</li><li>Deepseek</li>
+          </ul>
+          </section>
+        </dialog>
+        <div class="title-snow home-snow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div id="warmupTip" hidden aria-live="polite">
+          <div class="warmup-head"><span class="warmup-spark" aria-hidden="true">❄</span>首用资源准备中 <b id="warmupNum">0/0</b></div>
+          <div class="warmup-reason">正在准备通用卡框与常见场景</div>
+          <div class="warmup-track"><div id="warmupBar"></div></div>
+        </div>
+        <p class="title-ver" hidden>ASCENSION COUNCIL · <span id="gameVersion">v…</span></p>
+      </div>
+      <!-- 开发者节点测试面板：仅「设置 → 开发者模式」开启后可见，一键跳到各类节点
+           （隐藏 = 普通玩家看不到；测试局不占档位、不写存档） -->
+      <div id="titleDev" class="title-dev" hidden>
+        <div class="td-head"><span>[[icon:tools]] 节点测试</span></div>
+        <div class="td-grid">
+          <button type="button" data-dev-node="battle">遭遇战</button>
+          <button type="button" data-dev-node="boss">BOSS 战</button>
+          <button type="button" data-dev-node="shop">商店</button>
+          <button type="button" data-dev-node="event">事件</button>
+          <button type="button" data-dev-node="chest-small">小型物资箱</button>
+          <button type="button" data-dev-node="chest-medium">密封物资箱</button>
+          <button type="button" data-dev-node="chest-large">军用保险柜</button>
+          <button type="button" data-dev-node="fire">火堆</button>
+          <button type="button" data-dev-node="altar">祭坛</button>
+        </div>
+        <p class="td-tip">开发者模式专属 · 测试局不写入存档</p>
+      </div>
+    </div>
+    <div id="sugLayer" role="dialog" aria-modal="true" aria-labelledby="sugHead" aria-describedby="sugWhere" tabindex="-1" hidden>
+      <div class="sug-panel ui-dialog-panel">
+        <h3 class="sug-head" id="sugHead">记录试玩反馈</h3>
+        <p class="sug-where" id="sugWhere" role="status" aria-live="polite"></p>
+        <p class="sug-tip">只保存在当前浏览器，不会自动发送。保存后请到留言信箱点击「全部导出」或「导出此条」，再把 JSON 交给制作者。</p>
+        <label class="sug-label" for="sugText">反馈正文（必填）</label>
+        <textarea id="sugText" class="sug-textarea" rows="6" maxlength="2000"
+          placeholder="例如：这个按钮太小，容易误触……"></textarea>
+        <label class="sug-label" for="sugSteps">复现步骤（可选）</label><textarea id="sugSteps" class="sug-textarea sug-small" maxlength="1200"></textarea>
+        <label class="sug-label" for="sugExpected">期望结果（可选）</label><textarea id="sugExpected" class="sug-textarea sug-small" maxlength="800"></textarea>
+        <label class="sug-label" for="sugActual">实际结果（可选）</label><textarea id="sugActual" class="sug-textarea sug-small" maxlength="800"></textarea>
+        <div class="sug-btns">
+          <button type="button" class="ui-control" data-ui-action="secondary" id="sugCancelBtn"><span class="ui-control-label">返回</span> <i class="en">BACK</i></button>
+          <button type="button" class="ui-control" data-ui-action="primary" id="sugSaveBtn"><span class="ui-control-label">保存</span> <i class="en">SAVE</i></button>
+        </div>
+      </div>
+    </div>
+    <div id="exitScr" hidden>
+      <div class="title-inner">
+        <p class="exit-msg">信号已断开。</p>
+        <button class="menu-btn" id="mBack">重 新 进 入</button>
+      </div>
+    </div>
+    <div id="overlay" role="dialog" aria-modal="true" aria-labelledby="ovTitle" tabindex="-1" hidden>
+      <div class="card">
+        <button id="ovCloseX" class="ov-x" aria-label="关闭" hidden>×</button>
+        <h2 id="ovTitle"></h2>
+        <div id="ovBody"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // 启动看护：3s 未就绪显示中性提示，12s 后提示耗时较长，继续等待晚就绪自愈。
+  // SDT 命名空间早于完整启动创建；标题控件已绑定且游戏离开 boot 才视为就绪。
+  // SCRIPT/LINK 的真实资源错误单独报告，不被慢启动提示或就绪检查抹掉。
+  (function () {
+    var bar = null;
+    var barTone = null;
+    var guardTimer = null;
+    var started = Date.now();
+    function removeBar() {
+      if (bar && bar.isConnected) bar.remove();
+      bar = null;
+    }
+    function stopTimer() {
+      if (guardTimer !== null) clearInterval(guardTimer);
+      guardTimer = null;
+    }
+    function stopGuard() {
+      stopTimer();
+      window.removeEventListener('error', onResourceError, true);
+      window.removeEventListener('pagehide', dismiss);
+    }
+    function dismiss() {
+      removeBar();
+      stopGuard();
+    }
+    function showBar(text, tone, closable) {
+      if (barTone === tone) return;         // 只在提示阶段改变时更新，不每 400ms 重建
+      removeBar();
+      barTone = tone;
+      var el = document.createElement('div');
+      el.textContent = text;
+      el.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9999;'
+        + 'padding:8px 18px;border-radius:6px;'
+        + (tone === 'fail'
+            ? 'background:#3a1216;color:#ffd9d4;border:1px solid #a4524a;'
+            : 'background:#12262f;color:#b2c4c9;border:1px solid #48667455;')
+        + 'font:13px/1.6 system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.5)';
+      if (closable) {
+        var close = document.createElement('button');
+        close.textContent = '×';
+        close.setAttribute('aria-label', '收起启动提示');
+        close.style.cssText = 'margin-left:12px;background:none;border:0;color:inherit;font:inherit;cursor:pointer';
+        close.addEventListener('click', dismiss);
+        el.appendChild(close);
+      }
+      document.body.appendChild(el);
+      bar = el;
+    }
+    function onResourceError(e) {
+      if (e && e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK')) {
+        stopTimer();                       // 已证实失败，不再用计时或就绪覆盖它
+        showBar('资源加载失败——请刷新页面重试', 'fail', true);
+      }
+    }
+    window.addEventListener('error', onResourceError, true);
+    window.addEventListener('pagehide', dismiss);
+    guardTimer = setInterval(function () {
+      var sdt = window.SDT;
+      var title = document.getElementById('title');
+      if (sdt && sdt.game && sdt.game.state && sdt.game.state !== 'boot'
+          && title && title.dataset.controlsBound === 'true') {
+        removeBar();                       // 晚就绪也撤条停表，真实资源错误仍可报告
+        stopTimer();
+        return;
+      }
+      var elapsed = Date.now() - started;
+      if (elapsed >= 12000) {
+        showBar('加载耗时较长——仍在等待启动完成；可继续稍候，或刷新页面重试', 'slow', true);
+      } else if (elapsed >= 3000) {
+        showBar('资源加载中……首次启动需要预热美术素材，请稍候', 'wait', false);
+      }
+    }, 400);
+  })();
+</script>
+<script type="module" src="./src/main.js"></script>
+<script type="module" src="/dev/normal-ability-review.js"></script>
+</body>
+</html>

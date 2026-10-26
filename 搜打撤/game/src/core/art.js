@@ -20,7 +20,7 @@ import { enemyPortraitProfile } from './enemy-portrait-presentation.js';
   // classIds/monsterIds/cardFamilies/resourceArt/heroCardArt/spellCardArt/martialCardArt/
   // creatureCardArt/equipCardArt/eventCardArt/itemArt 全部改由 data-loader 供给；
   // 关键口径注释：「千变万化」=cmtn1p9vb5au（实机定版 id）；降临者 6 张按实机制作坊新 id；
-  // 盗匪横行用既有 event-bandits-anime-v2.webp；creature 映射只覆盖 foe-* 立绘外的图鉴生物。
+  // 武装截查用既有 event-bandits-anime-v2.webp；creature 映射只覆盖 foe-* 立绘外的图鉴生物。
   const CLASS_IDS = Object.freeze({ ...DATA.art.classIds });
   const CLASS_NAMES = Object.freeze(Object.fromEntries(Object.entries(CLASS_IDS).map(([name, id]) => [id, name])));
   const MONSTER_IDS = new Set(DATA.art.monsterIds);
@@ -239,6 +239,9 @@ const FIGURE_FULL_ART = Object.freeze({
 });
 // 皮肤立绘（2026-09-19 老板令）：角色 id → 备选皮肤立绘。
 const SKIN_FULL_ART = Object.freeze({
+  xingyue: Object.freeze([
+    { id: 'dark-priestess', name: '暗牧', file: 'portraits/full/xingyue-dark-priestess.webp' },
+  ]),
   heixiang: Object.freeze([
     { id: 'coast-half-day', name: '离岸半日', file: 'portraits/full/heixiang-coast-half-day.webp' },
     { id: 'snowline-vigil', name: '雪线未眠', file: 'portraits/full/heixiang-snowline-vigil.webp' },

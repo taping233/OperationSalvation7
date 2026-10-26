@@ -10,8 +10,8 @@ vi.mock('../game/src/hub/game.cardslib.js',()=>({Sfx:{tick(){}},_set_cardPageOpe
 vi.mock('../game/src/run/game.run.data.js',()=>({IMMEDIATE_SCENES:new Set(),NODE_BG:{},PICKUP_BG:{},PRELOAD_SCENES:{},WINTER_BATTLE_LAYERS:['far.webp','mid.webp','ground.webp','foreground.webp'],SCENES:{},SCENE_META:{}}));
 vi.mock('../game/src/core/random.js',()=>({Random:{random:()=>values.shift()??0}}));
 vi.mock('../game/src/run/game.run.shop.js',()=>({createShopController:()=>({openShop(){}})}));
-vi.mock('../game/src/battle/battle-loader.js',()=>({startBattle:async(_game,foes,opts)=>{started={foes,opts};return true;}}));
-vi.mock('../game/src/hub/bag-return-hook.js',()=>({setBagReturnHook(){}}));
+vi.mock('../game/src/battle/battle-loader.js',async importOriginal => ({ ...await importOriginal(),startBattle:async(_game,foes,opts)=>{started={foes,opts};return true;}}));
+vi.mock('../game/src/hub/bag-return-hook.js',async importOriginal => ({ ...await importOriginal(),setBagReturnHook(){}}));
 const scenes=await import('../game/src/run/game.run.scenes.js');
 
 describe('R7-a real scenes encounter-to-opts chain',()=>{

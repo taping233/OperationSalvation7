@@ -28,6 +28,7 @@ let shopOnClose = null;
 const shopNotice = createOperationNotice();
 let shopPage = 'main';   // 'main' | 'sell'：从背包返回时回到离开前的那一页
 let selectedShopIndex = null;
+const merchantLines = ['我很看好你哦', '这是上一个人卖给我的，想知道他后来怎么样吗', '赊账？下次我考虑一下', '消费是世界进步的源泉', '想要变得更强吗'];
 
 function createShopController({
   UI,
@@ -128,7 +129,7 @@ function createShopController({
   function generateShopStock() {
     const lib = SDT.Cards.all().filter(card => SDT.Cards.isRandomObtainable(card)
       && SDT.Cards.DROP_TYPES.includes(card.type) && card.id !== 'tt-token-color');
-    // 稀有度权重与宝箱爆率同源（2026-09-08 定版：古朴60/稀有28/史诗9/传说3），
+    // 稀有度权重与搜刮点爆率同源（2026-09-08 定版：古朴60/稀有28/史诗9/传说3），
     // 档内挑卡走 pickOfRarity（类型均分，道具 ×0.7）
     const weights = SDT.Cards.SHOP_WEIGHTS;
     const total = Object.values(weights).reduce((sum, weight) => sum + weight, 0);
@@ -201,7 +202,7 @@ function createShopController({
       game.shopStock = generateShopStock();
     }
     shopSession = { stock: game.shopStock, ownedCards: game.ownedCards, seed: game.seed, slot: SDT.Base?.slot,
-      layerIdx:game.layerIdx, trackPos:game.trackPos };
+      layerIdx:game.layerIdx, trackPos:game.trackPos, merchantLine:0 };
     bagReturn = null;
     shopNotice.clear();
     shelfReturn = null;
@@ -406,20 +407,11 @@ function createShopController({
   }
 
   function renderShop() {
-    if (!currentSession(shopSession)) return;
+    if (!currentSession(shopSession)) return false;
     cancelInspectionMotion();
-    const version = ++pageVersion, session = shopSession;
-    bagReturn = null;
-    shopPage = 'main';
+    const version = pageVersion + 1, session = shopSession;
     const slots = game.shopStock.map(slotHTML).join('');
     const sellableCount = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card) && !owned.stored).length;
-    UI.registerHelp('shop', {
-      title: '商店说明',
-      html: `
-        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 能量饮料（2 币，回 6 血） + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
-        <p class="help-item"><b>收购台</b>补给站的收购台可挑卡卖掉。默认卡牌不可出售；只有带「可出售」备注的卡才能卖，收购价 = 卡面币值。</p>`,
-      back: () => { if (version === pageVersion && currentSession(session) && document.querySelector('.help-body')) renderShop(); },
-    });
     UI.showOverlay('', `
       <div class="pg shop-pg shop-market shop-v14 shop-replica node-pg sc-shop ui-scale-system" data-asset-key="scene-shop-bg">
         <header class="pg-head">
@@ -432,8 +424,8 @@ function createShopController({
             ${slots}
           </div>
         </div>
-        <aside class="shop-merchant" aria-label="行商服务">
-          <div class="shop-merchant-caption"><span>冬境行商</span><p>“风雪还没停。<br>带上用得着的，再走吧。”</p></div>
+        <aside class="shop-merchant" aria-label="神秘人服务">
+          <button type="button" class="shop-merchant-caption" data-act="shopTalk" aria-label="与神秘人交谈"><span>神秘人</span><span class="shop-merchant-line" aria-live="polite">“${merchantLines[session.merchantLine]}”</span></button>
           <div class="shop-services">
             <button class="shop-sellpost" data-act="openSell" title="打开收购台，挑卡卖掉">
               ${coinIconHTML()}<span class="sellpost-copy"><span class="sellpost-name">出售卡牌</span><span class="sellpost-hint">${sellableCount ? `${sellableCount} 张可出售` : '暂无可出售卡牌'}</span></span>
@@ -446,6 +438,17 @@ function createShopController({
         </div>
         <footer class="shop-market-footer">${shopNotice.html({ className:'shop-live', tag:'span', elementId:'shopLive', keepEmpty:true })}${linkedBackHTML('closeShop', '返回地图', 'shop-back', 'button', { text:'返回地图' })}</footer>
       </div>`, 'page');
+    pageVersion = version;
+    shopPage = 'main';
+    bagReturn = null;
+    UI.registerHelp('shop', {
+      title: '商店说明',
+      html: `
+        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 能量饮料（2 币，回 6 血） + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
+        <p class="help-item"><b>收购台</b>补给站的收购台可挑卡卖掉。默认卡牌不可出售；只有带「可出售」备注的卡才能卖，收购价 = 卡面币值。</p>`,
+      back: () => version === pageVersion && currentSession(session) && document.querySelector('.help-body')
+        ? renderShop() : false,
+    });
     const shopRoot = document.querySelector('.shop-replica');
     setInspectionBackground(shopRoot, selectedShopIndex != null);
     registerShopActs(shopRoot);
@@ -464,15 +467,14 @@ function createShopController({
       closeShopInspection();
     });
     UI.refresh(game);
+    return true;
   }
 
   // 卖牌处二级界面：收购台（2026-09-10 留言 #23：只列出可以卖的牌，不再把不可卖的也铺出来置灰）
   function renderSellPage() {
-    if (!currentSession(shopSession)) return;
+    if (!currentSession(shopSession)) return false;
     cancelInspectionMotion();
-    const version = ++pageVersion, session = shopSession;
-    bagReturn = null;
-    shopPage = 'sell';
+    const version = pageVersion + 1, session = shopSession;
     const sellableOwned = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card) && !owned.stored);   // 珍珠盒中存放的资源卡不在此列出（2026-09-10 #29）
     const total = sellableOwned.length;
     const totalValue = sellableOwned.reduce((sum, owned) => sum + SDT.Cards.sellPrice(owned.card), 0);
@@ -486,11 +488,6 @@ function createShopController({
     const grid = total
       ? `<div class="shop-sell">${rows}</div>`
       : `<p class="shop-sell-empty">背包里没有可以卖的卡牌（持有 ${ownedAll} 张）——只有带「可出售」备注的卡（货币卡等）商店才收。</p>`;
-    UI.registerHelp('shopSell', {
-      title: '卖牌处说明',
-      html: `<p class="help-item"><b>收购规则</b>这里只显示可以卖的牌；默认卡牌不可出售，只有带「可出售」备注的卡（货币/宝石类等）才能卖给商店，收购价 = 卡面币值。</p>`,
-      back: () => { if (version === pageVersion && currentSession(session) && document.querySelector('.help-body')) renderSellPage(); },
-    });
     UI.showOverlay('', `
       <div class="pg shop-pg shop-exchange node-pg sc-shop" data-asset-key="scene-shop-bg">
         <header class="pg-head">
@@ -515,8 +512,18 @@ function createShopController({
         </div>
         <footer class="shop-market-footer">${shopNotice.html({ className:'shop-live', tag:'span', keepEmpty:true })}${linkedBackHTML('backShop', '返回商店', 'shop-back', 'button', { text:'返回商店' })}</footer>
       </div>`, 'page');
+    pageVersion = version;
+    shopPage = 'sell';
+    bagReturn = null;
+    UI.registerHelp('shopSell', {
+      title: '卖牌处说明',
+      html: `<p class="help-item"><b>收购规则</b>这里只显示可以卖的牌；默认卡牌不可出售，只有带「可出售」备注的卡（货币/宝石类等）才能卖给商店，收购价 = 卡面币值。</p>`,
+      back: () => version === pageVersion && currentSession(session) && document.querySelector('.help-body')
+        ? renderSellPage() : false,
+    });
     registerShopActs(document.querySelector('.shop-exchange'));
     UI.refresh(game);
+    return true;
   }
 
   // 购买后只重绘该货位/详情，原位同步其他商品状态与余额，不重播整页入场。
@@ -526,7 +533,12 @@ function createShopController({
     const hadFocus = el?.contains(document.activeElement);
     if (el) {
       const html = slotHTML(game.shopStock[index], index);
-      el.outerHTML = SDT.Icons?.rich?.(html) || html;
+      const template = el.ownerDocument.createElement('template');
+      template.innerHTML = SDT.Icons?.rich?.(html) || html;
+      const next = template.content.firstElementChild;
+      el.className = next.className;
+      el.setAttribute('data-availability', next.getAttribute('data-availability'));
+      syncViewChildren(el, next);
       if (hadFocus) {
         const current = document.querySelectorAll('.shop-board-grid .shop-slot')[index];
         (/** @type {HTMLElement} */ (current?.querySelector('.shop-preview') || document.querySelector('.shop-market .shop-bag-btn')))?.focus({ preventScroll:true });
@@ -614,10 +626,20 @@ function createShopController({
     // 页面重绘、离店、换店或换档后，旧动作不能按新货架索引继续成交。
     const live = () => root?.isConnected && version === pageVersion && currentSession(session);
     const register = createRoomActions(UI, () => !transacting && live(), { emptyData:true });
+    register('shopTalk', () => {
+      if (selectedShopIndex != null) return false;
+      const line = root.querySelector('.shop-merchant-line');
+      if (!line) return false;
+      session.merchantLine = (session.merchantLine + 1) % merchantLines.length;
+      line.textContent = `“${merchantLines[session.merchantLine]}”`;
+    });
     const registerTrade = (name, handler) => register(name, async data => {
       transacting = true;
-      const finishSave = beginRoomSave(root);
-      try { await handler(data); } finally { transacting = false; finishSave(); }
+      let finishSave = () => {};
+      try {
+        finishSave = beginRoomSave(root, root.querySelector('.shop-live'));
+        return await handler(data);
+      } finally { transacting = false; publish(finishSave); }
     });
     const quotedSlot = (value, replenish) => {
       const index = Number(value), quote = offers[index], slot = game.shopStock[index];
@@ -661,14 +683,15 @@ function createShopController({
       const browseState = captureShopBrowseState(root, UI.el.ovBody, selectedShopIndex != null);
       cancelInspectionMotion();
       const onReturn = () => {
-        if (bagReturn !== onReturn || version !== pageVersion || !currentSession(session)) return;
+        if (bagReturn !== onReturn || version !== pageVersion || !currentSession(session)) return false;
         // 普通背包关闭时仍留有退出中的 .bag-view；减少动态时弹层已同步清空。
-        if (!document.querySelector('.bag-view') && !UI.el?.overlay?.hidden) return;
-        bagReturn = null;
-        (returnPage === 'sell' ? renderSellPage : renderShop)();
+        if (!document.querySelector('.bag-view') && !UI.el?.overlay?.hidden) return false;
+        if (!(returnPage === 'sell' ? renderSellPage : renderShop)()) return false;
         const selector = returnPage === 'sell' ? '.shop-exchange' : '.shop-market';
         const restoredRoot = UI.el.ovBody.querySelector(selector);
+        if (!restoredRoot) return false;
         restoreBrowseOnFrame(restoredRoot, browseState, session, selector);
+        return true;
       };
       bagReturn = onReturn;
       openBackpack(onReturn);
@@ -678,26 +701,26 @@ function createShopController({
     // messages and the replenishment/bonus continuation differ.
     const buy = async (data, replenish) => {
       const slot = quotedSlot(data.i, replenish);
-      if (!slot || (replenish && (!Number.isInteger(slot.shaReplenish) || slot.shaReplenish <= 0))) return;
+      if (!slot || (replenish && (!Number.isInteger(slot.shaReplenish) || slot.shaReplenish <= 0))) return false;
       if (game.coins < slot.price) {
         UI.log('币不够，买不起', 'warn');
         SDT.Sound.sfx('error');
         denySlotFeedback(+data.i, `币不够——${replenish ? '补一张初始攻击要' : '这张要'} ${slot.price} 币，身上只有 ${game.coins} 币`);
-        return;
+        return false;
       }
       if (!canReceive(slot.card)) {
         UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格；${replenish ? '初始攻击每格最多叠 3 张，堆满后另占一格），补充不了' : '装备每张占 1 格，其他同名每格最多叠 3 张，堆满后另占一格），买不下这张卡'}`, 'warn');
         SDT.Sound.sfx('error');
         denySlotFeedback(+data.i, `${replenish ? '补不了——背包已满' : '背包装不下'}（${usedSlots()}/${bagCap()} 格）`);
-        return;
+        return false;
       }
       const result = await trades.buy({ index:Number(data.i), quote:offers[Number(data.i)], replenish, current:live });
-      if (!result.ok) return;
+      if (!result.ok || !live()) return result;
       const price = result.price, name = replenish ? '' : result.entry.card.name;
-      tradeReceipt(session, replenish
+      publish(() => tradeReceipt(session, replenish
         ? `已补充初始攻击 ×1 · 已入本次远征背包 · 支出 ${price} 币 · 剩余 ${game.coins} 币`
-        : `${price === 0 ? '免费领取' : '已购入'}「${name}」 · 已入本次远征背包 · ${price === 0 ? '未扣币' : `支出 ${price} 币`} · 剩余 ${game.coins} 币`, result.saved);
-      if (!live()) return;
+        : `${price === 0 ? '免费领取' : '已购入'}「${name}」 · 已入本次远征背包 · ${price === 0 ? '未扣币' : `支出 ${price} 币`} · 剩余 ${game.coins} 币`, result.saved));
+      if (!live()) return result;
       publish(() => SDT.Sound.sfx('tradeBuy'));
       publish(() => UI.log(replenish
         ? `[[icon:bag]] 补充初始攻击 ×1（- ${price} 币，剩 ${game.coins} · 本站还可补 ${slot.shaReplenish} 张）`
@@ -710,42 +733,46 @@ function createShopController({
           game.state = 'idle'; UI.refresh(game);
         }));
       }
+      return result;
     };
     registerTrade('buyCard', data => buy(data, false));
     registerTrade('buySha', data => buy(data, true));
     registerTrade('sellCard', async data => {
       const index = game.ownedCards.findIndex(owned => owned.uid === data.uid);
-      if (index < 0) return;
+      if (index < 0) return false;
       const owned = game.ownedCards[index];
       const quote = saleEntries.get(data.uid);
-      if (!quote || quote.owned !== owned || quote.card !== owned.card || game.ownedCards.filter(item => item.uid === data.uid).length !== 1) return;
+      if (!quote || quote.owned !== owned || quote.card !== owned.card || game.ownedCards.filter(item => item.uid === data.uid).length !== 1) return false;
       if (!SDT.Cards.isSellable(owned.card)) {
         UI.log(`卡牌【${esc(owned.card.name)}】不可出售`, 'warn');
-        return;
+        return false;
       }
-      if (owned.stored) return;   // 珍珠盒存放中的卡不可出售（G-2，2026-09-29 夜班：与收购台渲染过滤同口径，直调 act 不再放行）
+      if (owned.stored) return false;   // 珍珠盒存放中的卡不可出售（G-2，2026-09-29 夜班：与收购台渲染过滤同口径，直调 act 不再放行）
       const sellRoot = document.querySelector('.shop-exchange');
       const browseState = captureShopBrowseState(sellRoot, UI.el?.ovBody);
       const rulesOpen = !!/** @type {HTMLDetailsElement} */ (sellRoot?.querySelector('.sell-ledger-rule'))?.open;
       const saleButtons = [...(sellRoot?.querySelectorAll('[data-act="sellCard"]') || [])];
       const saleIndex = saleButtons.findIndex(button => /** @type {HTMLElement} */ (button).dataset.uid === owned.uid);
       const result = await trades.sell({ uid:data.uid, quote, current:live });
-      if (!result.ok) return;
+      if (!result.ok || !live()) return result;
       const price = result.price;
-      tradeReceipt(session, `已从背包出售「${owned.card.name}」 · 收入 ${price} 币 · 当前 ${game.coins} 币`, result.saved);
-      if (!live()) return;
+      publish(() => tradeReceipt(session, `已从背包出售「${owned.card.name}」 · 收入 ${price} 币 · 当前 ${game.coins} 币`, result.saved));
+      if (!live()) return result;
       publish(() => SDT.Sound.sfx('tradeSell'));
       publish(() => UI.log(`[[icon:coin]] 出售卡牌【<b>${esc(owned.card.name)}</b>】（+ ${price} 币，现有 ${game.coins}）`, 'coin'));
-      renderSellPage();
-      const restoredRoot = document.querySelector('.shop-exchange');
-      const restoredRules = restoredRoot?.querySelector('.sell-ledger-rule');
-      if (restoredRules) /** @type {HTMLDetailsElement} */ (restoredRules).open = rulesOpen;
-      const remaining = [...(restoredRoot?.querySelectorAll('[data-act="sellCard"]') || [])];
-      if (browseState?.focus?.keys?.act === 'sellCard') {
-        const next = remaining[Math.min(saleIndex, remaining.length - 1)];
-        browseState.focus.keys = next ? {act:'sellCard',uid:/** @type {HTMLElement} */ (next).dataset.uid} : {act:'backShop'};
-      }
-      restoreBrowseOnFrame(restoredRoot, browseState, session);
+      publish(() => {
+        if (!renderSellPage()) return;
+        const restoredRoot = document.querySelector('.shop-exchange');
+        const restoredRules = restoredRoot?.querySelector('.sell-ledger-rule');
+        if (restoredRules) /** @type {HTMLDetailsElement} */ (restoredRules).open = rulesOpen;
+        const remaining = [...(restoredRoot?.querySelectorAll('[data-act="sellCard"]') || [])];
+        if (browseState?.focus?.keys?.act === 'sellCard') {
+          const next = remaining[Math.min(saleIndex, remaining.length - 1)];
+          browseState.focus.keys = next ? {act:'sellCard',uid:/** @type {HTMLElement} */ (next).dataset.uid} : {act:'backShop'};
+        }
+        restoreBrowseOnFrame(restoredRoot, browseState, session);
+      });
+      return result;
     });
     register('openSell', () => {
       shelfReturn = captureShopBrowseState(root, UI.el?.ovBody, selectedShopIndex != null);
@@ -758,25 +785,39 @@ function createShopController({
       const restoredRoot = UI.el?.ovBody?.querySelector('.shop-market');
       restoreBrowseOnFrame(restoredRoot, snapshot, session, '.shop-market');
     });
+    let closing = false;
     register('closeShop', async () => {
-      const saved = !session.unsaved || await persistShop(session);
-      if (!live()) return false;
-      if (!saved) {
-        shopNotice.set('本局已成交，保存仍未成功；请重试保存后离开', 'warn');
-        publish(() => UI.log(shopNotice.text, 'warn'));
-        (shopPage === 'sell' ? renderSellPage : renderShop)();
-        return;
+      if (closing) return false;
+      closing = true;
+      transacting = true;
+      let finishSave = () => {};
+      let cb;
+      try {
+        finishSave = beginRoomSave(root, root.querySelector('.shop-live'));
+        const saved = !session.unsaved || await persistShop(session);
+        if (!live()) return false;
+        if (!saved) {
+          publish(() => shopNotice.set('本局已成交，保存仍未成功；请再次点击返回地图重试保存', 'warn'));
+          publish(() => UI.log(shopNotice.text, 'warn'));
+          return false;
+        }
+        shopSession = null;
+        bagReturn = null;
+        shelfReturn = null;
+        pageVersion++;
+        cb = shopOnClose; shopOnClose = null;
+        publish(cancelInspectionMotion);
+        publish(() => UI.hideOverlay());
+        game.state = 'idle';
+      } finally {
+        transacting = false;
+        closing = false;
+        publish(finishSave);
       }
-      shopSession = null;
-      bagReturn = null;
-      shelfReturn = null;
-      pageVersion++;
-      cancelInspectionMotion();
-      UI.hideOverlay();
-      game.state = 'idle';
-      const cb = shopOnClose; shopOnClose = null;
-      // 2026-09-06 #20：商队逛完回到节点选择界面（环间门 / 祭坛入口）
-      if (cb) cb(); else UI.refresh(game);
+      // Release the old page's save lock before its continuation can open a new room.
+      // A presentation failure cannot undo the completed save and departure.
+      try { if (cb) await cb(); else await UI.refresh(game); } catch { /* Departure is committed. */ }
+      return true;
     });
   }
 

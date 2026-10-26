@@ -1,10 +1,16 @@
 /** Properties installed on generated UI containers by the owning presenter. */
 export interface UIElement extends HTMLElement { _scrHiding?: boolean; _openToken?: symbol; _inventoryActions?: object; }
-export interface CardZoomElement extends HTMLDivElement { _closeCardZoom?: (immediate?: boolean) => void; }
+export interface CardZoomElement extends HTMLDivElement {
+ _closeCardZoom?: (immediate?: boolean) => void;
+ _refreshCardZoomBrowse?: () => void;
+}
 
 export interface CardZoomOptions {
  items?: import('../hub/game.store.types.js').CardSnapshot[]; index?: number;
  getItems?: () => import('../hub/game.store.types.js').CardSnapshot[];
+ getIndex?: () => number;
+ canNavigate?: () => boolean;
+ onReopen?: () => void | boolean;
  optionsForItem?: (card: import('../hub/game.store.types.js').CardSnapshot, index: number) => CardZoomOptions;
  onBrowse?: (card: import('../hub/game.store.types.js').CardSnapshot, index: number) => void;
  referenceTrail?: {card: import('../hub/game.store.types.js').CardSnapshot, options: CardZoomOptions}[];
@@ -53,6 +59,7 @@ export type UILazyState = Partial<Pick<import('./hud.js').HudThis, '_lastMode' |
  _hideTimer?: number; _overlayRevision?: number; _motionHeading?: string; _motionKey?: string;
  _motionExitDuration?: number; _pageBgReady?: Promise<unknown>; _hasBattleStage?: () => boolean;
  _releaseScreenOwner?: () => void;
+ _finishHide?: (() => void) | null;
  _retrySave?: () => unknown;
 };
 export type MountedHudMethods = { [K in keyof typeof import('./hud.js').hudMethods]: OmitThisParameter<(typeof import('./hud.js').hudMethods)[K]> };

@@ -24,8 +24,8 @@ beforeEach(() => { document.body.innerHTML = '<aside id="sidebar"></aside>'; });
 
 describe('祭坛完成态的地图信息与脚下入口', () => {
   it.each([
-    ['未激活', false, false, '完成前可回地图整理后重进。'],
-    ['已激活待领奖', true, true, '可回地图整理，回到此节点继续领取。'],
+    ['未激活', false, false, '可在当前节点整理后重进，前往下一节点后内容结束。'],
+    ['已激活待领奖', true, true, '可在当前节点整理后继续领取，前往下一节点后未领奖励作废。'],
   ])('%s仍可查看本地内容，不误写已完成，离开返回保留状态', (_label, active, pending, hint) => {
     const g = makeGame({ altarActivated:active, altarRewardPending:pending });
     const before = JSON.stringify(g), local = preview(g);
@@ -59,7 +59,7 @@ describe('祭坛完成态的地图信息与脚下入口', () => {
     expect(strip.querySelector('[data-route-enter]').disabled).toBe(true);
     g.altarRewardPending = true; renderExpeditionPanel(null, g, icon => icon);
     expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
-    expect(strip.querySelector('.expedition-preview-hint').textContent).toBe('可回地图整理，回到此节点继续领取。');
+    expect(strip.querySelector('.expedition-preview-hint').textContent).toBe('可在当前节点整理后继续领取，前往下一节点后未领奖励作废。');
   });
 
   it('完成祭坛仍能直接进入/离开，现有多跳路径不穿越祭坛规则不变', () => {

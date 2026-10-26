@@ -50,6 +50,8 @@ describe('卡牌备注守卫：文案质量底线', () => {
       { text: '某位古神的肢体之一', ids: ['tt8-curseimmune', 'tt8-energycap', 'tt8-nofocus', 'tt8-healplus'] },
       { text: '克劳泽开发的禁术，对使用者有不可逆的影响', ids: ['tt8-curse1', 'tt8-curse2', 'tt8-curse3', 'tt8-curse4'] },
       { text: '维克斯托克藏品之一，对使用者似乎有特殊的意义', ids: ['tt2-frostsword', 'tt3-twinwater-mail'] },
+      { text: '我想你应该知道怎么做', ids: ['tt-keys-bunch', 'tt-key-one'] },
+      { text: '装备部开发的辅助道具之一', ids: ['tt2-swiftarrow', 'tt3-blood-arrow', 'tt3-venom-arrow', 'tt3-python-potion', 'tt3-mystery-potion'] },
     ];
     const seen = new Map();
     const dup = [];
@@ -72,6 +74,16 @@ it('永久底稿逐条保留第二次同步的32条原文', () => {
   const source = JSON.parse(readFileSync(path.join(ROOT, 'docs/evidence/2026-10-24-photo-notes/sync-32-notes.json'), 'utf8'));
   expect(Object.keys(source.notes)).toHaveLength(32);
   for (const [id, text] of Object.entries(source.notes)) expect(notesData.notes[id]).toBe(text);
+});
+
+it('永久底稿逐条保留老板在静态审阅页修改的37条原文', async () => {
+  const source = JSON.parse(readFileSync(path.join(ROOT, 'docs/evidence/2026-10-26-card-notes/reviewed-notes-37.json'), 'utf8'));
+  const { photoNoteFor } = await import('../game/src/cards/card-photo-notes.js');
+  expect(Object.keys(source.notes)).toHaveLength(37);
+  for (const [id, text] of Object.entries(source.notes)) {
+    expect(notesData.notes[id]).toBe(text);
+    expect(photoNoteFor({ id })).toBe(text);
+  }
 });
 
 describe('卡牌备注运行链：photoNoteFor 两层优先级', () => {

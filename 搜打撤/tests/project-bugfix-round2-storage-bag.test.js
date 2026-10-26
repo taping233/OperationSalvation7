@@ -107,11 +107,11 @@ it('直接安全格转移等待保存时重复同向操作不重存，晚失败�
   const transfer = createSafeTransfer({ game, UI: { log: vi.fn() }, shaName: '初始攻击',
     bagCap: () => state().cap, baseCap: () => 2, safeCap: () => 2, usedSlots: () => state().used,
     safeUsed: () => state().safeStacks.length, refresh, save, sound: vi.fn(), receipt: vi.fn(), captureContext: () => () => true });
-  expect(transfer.move(spell.name, true)).toBe(true); expect(transfer.move(spell.name, true)).toBe(false);
-  expect(save).toHaveBeenCalledOnce(); expect(refresh).toHaveBeenCalledOnce();
+  const pending=transfer.move(spell.name,true);expect(pending).toBeInstanceOf(Promise);expect(transfer.move(spell.name,true)).toBe(false);
+  expect(save).toHaveBeenCalledOnce(); expect(refresh).not.toHaveBeenCalled();
   const fresh = entry('fresh', spell); game.ownedCards = [fresh];
-  complete(false); await Promise.resolve();
-  expect(game.ownedCards).toEqual([fresh]); expect(refresh).toHaveBeenCalledOnce();
+  complete(false); await pending;
+  expect(game.ownedCards).toEqual([fresh]); expect(refresh).not.toHaveBeenCalled();
 });
 
 it.each([undefined, 'duplicate'])('旧档 UID=%s 时容器只移动当前可见的一叠，不误选其他区域', uid => {
@@ -144,7 +144,7 @@ it.each([undefined, 'duplicate'])('旧档 UID=%s 时安全格交换按所选格�
   expect(incoming.safe).toBe(true); expect(outgoing.safe).toBe(false); expect(save).toHaveBeenCalledOnce();
 });
 
-function discoveryHarness() {
+async function discoveryHarness() {
   const source = entry('source', { id: 'tt4-shine-token', name: '通行证', type: '道具' });
   source.bagDiscover = { version: 1, cardIds: ['legend'] };
   const reward = { id: 'legend', name: '传说', rarity: '传说', type: '法术' };
@@ -155,29 +155,33 @@ function discoveryHarness() {
     log: vi.fn(), act: (name, fn) => { acts[name] = fn; },
     showOverlay: (_title, html) => { UI.el.ovBody.innerHTML = html; } };
   let complete, sameRun = true;
-  const saveGame = vi.fn(() => new Promise(resolve => { complete = resolve; }));
+  const saveGame = vi.fn().mockReturnValueOnce(true).mockImplementation(() => new Promise(resolve => { complete = resolve; }));
   const showBackpack = vi.fn();
   openBagLegendaryDiscovery(source.card, 0, { game, UI,
     SDT: { Base: { bagCap: () => 4 }, Cards: { all: () => [reward], isRandomObtainable: () => true, cardHTML: card => card.name } },
     Random: { random: () => 0 }, newUid: () => 'reward', saveGame, showBackpack, usedSlots: () => 1, bagCap: () => 4,
     captureContext: () => () => sameRun });
+  await vi.waitFor(()=>expect(saveGame).toHaveBeenCalledOnce());
+  for(let i=0;i<8;i++)await Promise.resolve();
   return { game, source, acts, saveGame, showBackpack, finish: value => complete(value), expire: () => { sameRun = false; } };
 }
 
 it('发现保存等待期间奖励被移走，失败回滚不能删除后来获得的无关卡', async () => {
-  const h = discoveryHarness();
+  const h = await discoveryHarness();
   h.acts.bagDiscoverPick({ i: '0' }); const pending = h.acts.bagDiscoverConfirm();
+  await vi.waitFor(()=>expect(h.saveGame).toHaveBeenCalledTimes(2));
   expect(await h.acts.bagDiscoverConfirm()).toBe(false);
   h.game.ownedCards.splice(0, 1);
   const later = entry('later', spell); h.game.ownedCards.push(later);
   h.finish(false); expect(await pending).toBe(false);
   expect(h.game.ownedCards).toEqual([h.source, later]);
-  expect(h.saveGame).toHaveBeenCalledOnce();
+  expect(h.saveGame).toHaveBeenCalledTimes(2);
 });
 
 it('发现保存等待期间换局，即使复用背包数组也不能回填旧局通行证', async () => {
-  const h = discoveryHarness();
+  const h = await discoveryHarness();
   h.acts.bagDiscoverPick({ i: '0' }); const pending = h.acts.bagDiscoverConfirm();
+  await vi.waitFor(()=>expect(h.saveGame).toHaveBeenCalledTimes(2));
   h.expire(); const fresh = entry('fresh', spell); h.game.ownedCards.splice(0, 1, fresh);
   h.finish(false); expect(await pending).toBe(false);
   expect(h.game.ownedCards).toEqual([fresh]); expect(h.showBackpack).not.toHaveBeenCalled();

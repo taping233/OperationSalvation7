@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { createBattleTurnEffects } from '../game/src/battle/core/battle.turn-effects.domain.js';
 

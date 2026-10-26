@@ -14,9 +14,9 @@ const departure = readFileSync('game/src/run/game-session-departure.js', 'utf8')
 const render = html => { document.body.innerHTML = html; return document.body.textContent; };
 
 describe('EXP-003 撤离消耗区文案与规则一致', () => {
-  it('规则权威为 1/3，现行整理页、完成页与帮助均明确概率', () => {
+  it('规则权威为 1/3，整理页按真实待复原卡展示概率，完成页显示实际结果', () => {
     expect(RULE_CONFIG.extraction.pocketKeepChance).toBeCloseTo(1 / 3);
-    for (const html of [extractionStashHTML({}), extractionDoneHTML({})]) {
+    for (const html of [extractionStashHTML({pocketKept:1})]) {
       expect(render(html)).toContain('逐张 1/3 概率保留');
       expect(document.body.textContent).not.toContain('自动回收');
       expect(document.body.textContent).toContain('用钥匙复原后才能携带');
@@ -49,8 +49,8 @@ describe('EXP-003 撤离消耗区文案与规则一致', () => {
     expect(document.querySelectorAll('[data-act=exPocketInspect]')).toHaveLength(1);
     expect(document.querySelector('[data-act=exPocketInspect]').textContent).toContain('普通卡');
     render(extractionDoneHTML({ receipt: { netTake: { pocketKept: 3 }, losses: { pocketLost: 7, pocketRuleLost: 3 } } }));
-    expect(document.querySelector('.exr-pocket-count').textContent).toBe('3 张');
-    expect(document.querySelector('.exr-loss').textContent).toContain('消耗区散失 7 张');
+    expect(document.querySelector('.exr-receipt-details summary').textContent).toContain('待复原 3 张');
+    expect(document.querySelector('.exr-receipt-details').textContent).toContain('消耗区散失 7 张');
     expect(altar).toContain('pocketKept: pocket.keptCount, pocketLost: pocket.lostCount, pocketRuleLost: pocket.ruleLost');
   });
 

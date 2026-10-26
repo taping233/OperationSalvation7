@@ -81,7 +81,7 @@ describe('真实存档装载恢复事件候选', () => {
     expect(session.game.visited[key]).toBeUndefined();
   });
 
-  it('其他位置的待领奖励不会强弹，回到原节点才能恢复', async () => {
+  it('读档清除已离开节点的待领内容，不强弹旧奖励', async () => {
     const { key, record } = await seedRun();
     const raw = RunStorage.read(1);
     raw.nodeRewards = { ['1,0']:record };
@@ -89,6 +89,6 @@ describe('真实存档装载恢复事件候选', () => {
     expect(session.loadGame(1).ok).toBe(true);
     expect(resumeHook).not.toHaveBeenCalled();
     expect(session.game.nodeRewards[key]).toBeUndefined();
-    expect(session.game.nodeRewards['1,0']).toEqual(record);
+    expect(session.game.nodeRewards['1,0']).toEqual({version:1,type:'closed'});
   });
 });

@@ -17,7 +17,7 @@ beforeEach(() => {
   document.body.innerHTML = '<div id="overlay"><div id="ovBody"></div></div>';
   UI = { el: { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody') }, _lastMode: 'battle' };
   snapshot = { battleToken: 4, phase: 'player', busy: false, actionQueueLength: 0, potionBar: [makePotion()], energy: 3, hand: ['card-1'] };
-  commands = { usePotion: vi.fn() };
+  commands = { usePotion: vi.fn(()=>true) };
   controller = createBattlePotionUse({ UI, getSnapshot: () => snapshot, commands });
   UI.el.ovBody.addEventListener('click', event => {
     const source = event.target.closest('[data-act="btPotion"]');

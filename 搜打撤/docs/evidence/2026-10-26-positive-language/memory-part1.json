@@ -1,0 +1,574 @@
+{
+  "sourceSha256": "6C45C94CB777E4FF26242CA89911ED495EB3A0080BD99CE9C1C99FC81D9E2075",
+  "range": [
+    1,
+    2150
+  ],
+  "edits": [
+    {
+      "old": "scope: Build and evidence a Windows x64 single-file portable EXE with an empty isolated profile, then push the scoped delivery; integrity evidence is not native gameplay acceptance.",
+      "new": "scope: Build and evidence a Windows x64 single-file portable EXE with an empty isolated profile, then push the scoped delivery. Coverage: package integrity; native gameplay remains unverified.",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=recheck live Git/CI and build inputs; the dated artifact and commit are historical evidence, not current release state.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=recheck live Git/CI and build inputs; use the dated artifact and commit as historical delivery evidence.",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when the user asks for “无存档的exe便携文件” -> use an isolated profile so first launch is empty and never delete or overwrite existing saves. [Task 1]",
+      "new": "- when the user asks for “无存档的exe便携文件” -> use an isolated profile so first launch is empty and existing saves stay intact. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Re-query `gh run list --repo taping233/OperationSalvation7 --commit 850bae931a400a7da5cb52e92a4711c4c86a3c9f` for CI; do not rely on the closeout state. [Task 2]",
+      "new": "- Re-query `gh run list --repo taping233/OperationSalvation7 --commit 850bae931a400a7da5cb52e92a4711c4c86a3c9f` for current CI state. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- A 0-byte intermediate `.7z` during electron-builder compression is not failure; wait for completion and inspect the final EXE. Clean-profile/resource/dual-launch checks do not prove native window rendering, a full run, or audio. [Task 1]",
+      "new": "- A 0-byte intermediate `.7z` can occur during electron-builder compression; wait for completion and inspect the final EXE. Coverage: clean profile, resources and dual launch; native window rendering, a full run and audio remain unverified. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when the user says “旧的样式动效没删干净” -> remove shared obsolete residue while preserving the confirmed glass layout, horizontal navigation, and business actions; do not broaden into a redesign. [Task 1]",
+      "new": "- when the user says “旧的样式动效没删干净” -> scope cleanup to shared obsolete residue and preserve the confirmed glass layout, horizontal navigation and business actions. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Port 5200 returned `ERR_CONNECTION_REFUSED` during an added readback: preserve earlier evidence but do not count that read as passed or start/stop another session’s service. [Task 1]",
+      "new": "- Port 5200 returned `ERR_CONNECTION_REFUSED` during an added readback: retain earlier evidence, record this readback as failed, and leave another session’s service under its owner’s control. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Direction/stretch, scenery, combat controls, discovery semantics and enemy scaling had no tests/lint/build/real-page checks by request; do not inherit the earlier 67-check result. Validate `灵能召唤`, ordinary/explicit pools, deck-bottom selection, 1–6+ formations, bosses and container-query support before acceptance. [Task 2][Task 3][Task 4]",
+      "new": "- Direction/stretch, scenery, combat controls, discovery semantics and enemy scaling had no tests/lint/build/real-page checks by request; the earlier 67-check result predates these edits. Acceptance requires cases for `灵能召唤`, ordinary/explicit pools, deck-bottom selection, 1–6+ formations, bosses and container-query support. [Task 2][Task 3][Task 4]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- `showLayerPassage(game, from, to)` is presentation-only: do not roll back committed location, turn, or save. The accepted passage advances about 3.6s, fades 700ms, and has a 6.5s input-release fallback. [Task 2]",
+      "new": "- `showLayerPassage(game, from, to)` owns presentation and preserves committed location, turn and save. The accepted passage advances about 3.6s, fades 700ms, and has a 6.5s input-release fallback. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- HMR disrupted stable final Photo Studio dim/exit review; do not claim that exact end-to-end interaction accepted. `screen-entry-performance.test.js` retained old timing assertions; direct esbuild CSS handling in jsdom hit a TypedArray invariant, so use `scripts/css-component-scopes.mjs` `expandComponentScopes` in target tests. [Task 1][Task 3]",
+      "new": "- HMR disrupted the final Photo Studio dim/exit review, leaving that end-to-end interaction unverified. `screen-entry-performance.test.js` retained old timing assertions; direct esbuild CSS handling in jsdom hit a TypedArray invariant, so use `scripts/css-component-scopes.mjs` `expandComponentScopes` in target tests. [Task 1][Task 3]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=use current transition ownership and story/art documents; the final unified implementation is source-only by explicit user request and is not acceptance evidence.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=use current transition ownership and story/art documents; the final unified implementation has source-only coverage by explicit user request and awaits acceptance.",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when the user corrected “不是雪原，只是冬天的城市” -> read the current story first and make the visual serve the sealed/polluted winter city, not a default snowfield, mountains, or wilderness. [Task 1]",
+      "new": "- when the user corrected “不是雪原，只是冬天的城市” -> read the current story first and ground the visual in its sealed/polluted winter city. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when the user asked “可以抽象一点，留白留黑做多一点” and said the words “破坏了高级感” -> use restrained abstraction, large near-black/negative space and symbolic urban imagery; do not put titles, serial numbers, English watermarks, or explanatory copy in the transition image. Keep only necessary accessibility labels and a minimal skip control. [Task 1]",
+      "new": "- when the user asked “可以抽象一点，留白留黑做多一点” and said the words “破坏了高级感” -> use restrained abstraction, large near-black/negative space and symbolic urban imagery. Keep the transition image free of titles, serial numbers, English watermarks and explanatory copy; retain necessary accessibility labels and a minimal skip control. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when the user repeatedly says “不用测试，做完即可” for a visual delivery -> do not run unsolicited test/build/real-page work; report the implementation as awaiting user acceptance rather than claiming it works. [Task 1][Task 2]",
+      "new": "- when the user repeatedly says “不用测试，做完即可” for a visual delivery -> complete the implementation within that scope and report it as awaiting user acceptance, with test/build/real-page work unrun. [Task 1][Task 2]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- Reserve fuller image treatments for entry city/base/image/collection/boss/extraction and use approximately 0.16–0.42 second procedural line-scan, diagonal-cut, slide or aperture cuts for high-frequency loading/continue/battle/trade/discovery paths. Mark inherited completed copies `silent-film-settled` so target-page takeover does not replay them. [Task 2]",
+      "new": "- Reserve fuller image treatments for entry city/base/image/collection/boss/extraction and use approximately 0.16–0.42 second procedural line-scan, diagonal-cut, slide or aperture cuts for high-frequency loading/continue/battle/trade/discovery paths. Mark inherited completed copies `silent-film-settled` so target-page takeover retains their settled state. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- The final shared transition rewrite was not run through tests, build, or final real pages by request; early browser observations also contained pre-existing HUD and Howler audio-pool warnings. Do not use this rollout to claim all entrances work or a zero-error browser. [Task 1][Task 2]",
+      "new": "- Coverage: the final shared transition rewrite remained source-only; tests, build and final real-page checks were unrun by request. Early browser observations included pre-existing HUD and Howler audio-pool warnings; entrance behavior and browser-error status require their own verification. [Task 1][Task 2]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- Static readback is not performance proof: these changes did not run tests, lint, types, asset audit, build, benchmark, browser pages or battle pages. Do not state that loading is faster, map/reward shifts are gone, or enemy proportions are correct. [Task 1][Task 2]",
+      "new": "- Coverage: static readback. Tests, lint, types, asset audit, build, benchmark, browser pages and battle pages were unrun; loading speed, map/reward stability and enemy proportions remain unverified. [Task 1][Task 2]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=apply to shared public UI only after reading current ownership and `docs/ui/shared-interface-components.md`; targeted evidence is not a whole-site, multi-size or build conclusion.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=apply to shared public UI after reading current ownership and `docs/ui/shared-interface-components.md`; report targeted checks separately from whole-site, multi-size and build verification.",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when the user says “不要覆盖样式，而是不需要的删除重新写” -> change the owning definition, delete duplicate/obsolete rules, and do not keep stacking late-file overrides or new `!important` layers. [Task 1]",
+      "new": "- when the user says “不要覆盖样式，而是不需要的删除重新写” -> change the owning definition and replace duplicate/obsolete rules at their source, including late-file overrides or new `!important` layers. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when unifying cross-page public UI -> standardize operation roles, typography and state colours but retain each page's material, rarity, reward and business semantics; do not force every page into one texture or colour. [Task 1]",
+      "new": "- when unifying cross-page public UI -> standardize operation roles, typography and state colours while retaining each page's material, rarity, reward and business semantics. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Do not turn current-window representative pages into a full-site claim: multi-size layouts, performance, reduced dynamic switching, full tests, type checks and build were not run. [Task 1]",
+      "new": "- Coverage: representative pages in the current window. Multi-size layouts, performance, reduced dynamic switching, full tests, type checks and build were unrun. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=begin from current player flow, source, ownership and live evidence; use 2026-10-24 service/test observations only as historical routing, not current acceptance.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=begin from current player flow, source, ownership and live evidence; use 2026-10-24 service/test observations as historical routing.",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when the user said “改得太少了”“从进入地图起很多操作都不流畅合理”“界面设计也有问题 配色不好看”“对照代码继续改” -> inspect and improve the complete map-entry → node/room → reward → bag → map-return chain; do not close with small CSS, colour, border or copy changes. [Task 2]",
+      "new": "- when the user said “改得太少了”“从进入地图起很多操作都不流畅合理”“界面设计也有问题 配色不好看”“对照代码继续改” -> inspect and improve the complete map-entry → node/room → reward → bag → map-return chain as one deliverable. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when the user said “派给新任务干” after rejecting the scope -> create and track the dedicated implementation task, but do not describe a started subtask as a delivered redesign. [Task 3]",
+      "new": "- when the user said “派给新任务干” after rejecting the scope -> create and track the dedicated implementation task; record it as dispatched until its redesign result is delivered. [Task 3]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Dated acceptance evidence is `docs/evidence/2026-10-24-WF-p3-ui-complete-1024/{README.md,FINAL-ACCEPTANCE.md,inputs.json}`. At rollout time, the isolated preview was 5320 and mainline 5200; do not stop an old 5319 or another owner’s service. Source was `complete-uncommitted`, not built or pushed. [Task 2]",
+      "new": "- Dated acceptance evidence is `docs/evidence/2026-10-24-WF-p3-ui-complete-1024/{README.md,FINAL-ACCEPTANCE.md,inputs.json}`. At rollout time, the isolated preview was 5320 and mainline 5200; leave old 5319 and other sessions’ services under their owners’ control. Source was `complete-uncommitted`; build and push were unrun. [Task 2]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- Do not claim touch input, full-bag drag, every Boss/special object, all 16 status lifecycle paths, or FPS/frame performance from this work; screenshots are not performance evidence. [Task 2]",
+      "new": "- Unverified scope: touch input, full-bag drag, every Boss/special object, all 16 status lifecycle paths and FPS/frame performance. Screenshots cover the captured visual states. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Symptom: map-only CSS leaves event/battle/room consumers untouched or later styles restore the old slab -> find DOM owner, lifecycle and all CSS sources before editing the shared source; do not stack a map-limited override. [Task 4]",
+      "new": "- Symptom: map-only CSS leaves event/battle/room consumers untouched or later styles restore the old slab -> trace the DOM owner, lifecycle and all CSS sources, then edit the shared source. [Task 4]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- The cross-page map/event/menu edits were source-inspected only: do not claim visual smoothness or completion until normal event, reward, shop, battle return, reduced-motion, menu open/return/settings/help/save-failure/abandon flows are exercised on the real page. Watch for black screens, duplicate framing and top-bar flashes. [Task 4]",
+      "new": "- Coverage: source inspection of cross-page map/event/menu edits. Visual smoothness and completion await real-page cases for normal event, reward, shop, battle return, reduced-motion, menu open/return/settings/help/save-failure/abandon flows; watch for black screens, duplicate framing and top-bar flashes. [Task 4]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "applies_to: cwd=C:\\Users\\太平\\Documents\\Codex\\2026-10-25\\new-chat; reuse_rule=皮肤导入及动效目标为 D:\\素材\\代号柒\\搜打撤；先核对当前角色设定、素材登记、属地和实页状态，历史测试不覆盖后续未验证改动。",
+      "new": "applies_to: cwd=C:\\Users\\太平\\Documents\\Codex\\2026-10-25\\new-chat; reuse_rule=皮肤导入及动效目标为 D:\\素材\\代号柒\\搜打撤；先核对当前角色设定、素材登记、属地和实页状态，历史测试适用于当时修订，后续动效改动单列待验。",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when a skin concept was criticised as “主题不够鲜明 意象不够明确 环境看不出地方 没有剧情” -> make the theme, place, visible motif, event and causal chain legible in the image; do not offer a wardrobe-only reskin. [Task 1]",
+      "new": "- when a skin concept was criticised as “主题不够鲜明 意象不够明确 环境看不出地方 没有剧情” -> make the theme, place, visible motif, event and causal chain legible in the image. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Symptom: generation reports success but hand/cup/weapon contact is wrong -> visually inspect local relationships; NAI output is not proof that those constraints were met. [Task 1]",
+      "new": "- Symptom: generation reports success but hand/cup/weapon contact is wrong -> inspect those local relationships visually after generation. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Selected-asset audit and `tests/m02-collection-commands.test.js` (10 passed) predate later motion work; the user asked not to test, so later visual/motion changes are implemented but unverified, unbuilt and uncommitted. Do not call their runtime behaviour accepted. [Task 2][Task 3]",
+      "new": "- Selected-asset audit and `tests/m02-collection-commands.test.js` (10 passed) predate later motion work; the user asked not to test, so later visual/motion changes remain implemented but unverified, unbuilt and uncommitted. [Task 2][Task 3]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- Do not make every base refresh slide: pure state changes should preserve the relevant subtree; only real navigation or selected-content changes get directional local motion. Check `docs/PARALLEL-REGISTRY.md` before shared UI edits because `collection-view.js` / `region-transition.js` may be owned elsewhere. [Task 3]",
+      "new": "- Preserve the relevant subtree during pure base-state refreshes; apply directional local motion to real navigation or selected-content changes. Check `docs/PARALLEL-REGISTRY.md` before shared UI edits because `collection-view.js` / `region-transition.js` may be owned elsewhere. [Task 3]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=read current architecture/quality/workflow docs and evidence before resuming; do not call post-freeze safe-slot/copy work accepted.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=read current architecture/quality/workflow docs and evidence before resuming; post-freeze safe-slot/copy work awaits specific acceptance.",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when the user says “你是制作人，请你确定好主线……后续需求改动但是请不要因此转移忘记你的主目标” -> retain the core journey as the integrating objective and add new requests as increments, not replacements. [Task 1]",
+      "new": "- when the user says “你是制作人，请你确定好主线……后续需求改动但是请不要因此转移忘记你的主目标” -> retain the core journey as the integrating objective and incorporate new requests within it. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when the user says “完成这一批改动后暂停并向我汇报成果” and then “不用实页检查 直接暂停汇报吧” -> stop, preserve the scene, and separate implemented, validated, and unverified work; do not call the journey complete. [Task 1]",
+      "new": "- when the user says “完成这一批改动后暂停并向我汇报成果” and then “不用实页检查 直接暂停汇报吧” -> stop, preserve the scene, and report implemented, validated and unverified work separately. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when the user clarifies a full safe slot should “替换一个出来” -> swap the visible one slot/stack only (normal same-card stack up to 3; equipment 1); let the player choose among candidates, never lose cards or auto-swap multiple slots. [Task 1]",
+      "new": "- when the user clarifies a full safe slot should “替换一个出来” -> swap the visible one slot/stack only (normal same-card stack up to 3; equipment 1), let the player choose the candidate, and preserve all cards in that single-slot exchange. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Symptom: shared worktree changes are attributed to this task -> use `handoff --paths`, ownership registration, and isolated play copies; do not equate `git status` with task output. [Task 1]",
+      "new": "- Symptom: shared worktree changes are attributed to this task -> use `handoff --paths`, ownership registration and isolated play copies to attribute the task’s diff; use `git status` for worktree inventory. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=use the current character bible and receipt/art metadata before making acceptance claims; never infer metadata synchronization from imported images alone.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=use the current character bible and receipt/art metadata to verify character identity, image installation and metadata synchronization separately.",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- character accessories are optional styling, not default identity anchors; do not mark an image wrong merely for missing sunglasses, hair ornament, earrings, or brooch unless specifically requested. [Task 1]",
+      "new": "- Treat accessories as optional styling; assess missing sunglasses, hair ornament, earrings or brooch only when specifically requested as part of the image. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=verify the exact browser origin and current storage/data state; do not generalize to the feedback inbox or other homepage effects.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=verify the exact browser origin and current storage/data state; keep card notes, the feedback inbox and other homepage effects as separate scopes.",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when asked to cancel “主页选项的流光特效” -> remove only the sheen visual; do not broaden into unrelated home animation/function work. [Task 1]",
+      "new": "- when asked to cancel “主页选项的流光特效” -> remove the sheen visual and preserve other home animation and functions. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Symptom: a duplicate phrase causes a coverage failure -> preserve the user’s original; exempt only exact known duplicate ID groups, never rewrite notes. [Task 1]",
+      "new": "- Symptom: a duplicate phrase causes a coverage failure -> preserve the user’s original notes and exempt only exact known duplicate ID groups. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- “现在没有其他代码在改动 你可以帮忙清账” -> update shared ledgers/document navigation, but do not delete history, stop other sessions' services or decide pending gameplay/disposition items. [Task 2]",
+      "new": "- “现在没有其他代码在改动 你可以帮忙清账” -> update shared ledgers/document navigation, preserve history, leave services under their owners’ control, and retain pending gameplay/disposition items for decision. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Fix the candidate SHA, back up original bytes, do a three-way module review and inspect resource-consumer fingerprints. Never cherry-pick a remote performance branch wholesale into a mixed tree. Resource protection is fail-closed: changed expression or missing approved fingerprint means retain the resource. [Task 1]",
+      "new": "- Fix the candidate SHA, back up original bytes, do a three-way module review and inspect resource-consumer fingerprints; integrate the reviewed performance changes individually in a mixed tree. Resource protection is fail-closed: changed expression or missing approved fingerprint means retain the resource. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- The verified version anchor was the official 2026-10-16 expansion announcement; PRTS supplied event detail. Explain choices as reward/movement/追猎 risk, resource exchange, side effects, escalating choices, special fights, cross-event `笼控器` links and the `谒日之祈` route—not a raw event-text dump. [Task 1]",
+      "new": "- The verified version anchor was the official 2026-10-16 expansion announcement; PRTS supplied event detail. Explain choices as reward/movement/追猎 risk, resource exchange, side effects, escalating choices, special fights, cross-event `笼控器` links and the `谒日之祈` route. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Community index pages can time out or be marked still editing; cite the official announcement for version timing and flag community details as potentially evolving. Search results can mix older themes, so do not answer before version lock. [Task 1]",
+      "new": "- Community index pages can time out or be marked still editing; lock the version against the official announcement before answering and flag evolving community details. Search results may mix older themes. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Source locations are `game/data/map.json`, `game/src/run/encounter-selector.js`, `game.run.scenes.js`, and `game.session.modes.js`. `scaledEnemy` applies 1.5× attack/HP with rounding in elite mode; current `volley`, `charge`, and `guard` names do not themselves prove extra enemy behavior. [Task 1]",
+      "new": "- Source locations are `game/data/map.json`, `game/src/run/encounter-selector.js`, `game.run.scenes.js`, and `game.session.modes.js`. `scaledEnemy` applies 1.5× attack/HP with rounding in elite mode; verify extra enemy behavior in the implementation of `volley`, `charge` and `guard`. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Verify a DOCX both structurally and visually; inspect the actual rendered page list. A Windows GBK `UnicodeDecodeError` warning is nonfatal only if files exist, but it does not prove the layout passed. [Task 1]",
+      "new": "- Verify a DOCX structurally and inspect its actual rendered page list. A Windows GBK `UnicodeDecodeError` warning is nonfatal only if files exist; layout acceptance comes from rendered-page inspection. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- “把体积预算增大百分之五十” -> adjust the approved byte gates only; do not silently change image quality or warming strategy. [Task 1]",
+      "new": "- “把体积预算增大百分之五十” -> adjust the approved byte gates while preserving image quality and warming strategy. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- A package/resource/startup check is not native Electron full-play acceptance; require user retest on the new EXE before claiming all-page frame drops are eliminated. [Task 1][Task 2]",
+      "new": "- Coverage: package, resource and startup checks. Native Electron full-play and all-page frame-drop acceptance require user retest on the new EXE. [Task 1][Task 2]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=start from current project docs/source and live player path; do not apply stale preview/service/test status as current.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=start from current project docs/source and live player path; use preview/service/test observations as dated history.",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- “ui 动效、各种接口、美术覆盖面” and “你第一步要做什么” -> first inspect `整备→地图→战斗→奖励→背包→撤离` with real inputs and name a player-visible break; do not make an isolated asset or enemy redraw the first deliverable. [Task 1]",
+      "new": "- “ui 动效、各种接口、美术覆盖面” and “你第一步要做什么” -> first inspect `整备→地图→战斗→奖励→背包→撤离` with real inputs and make a player-visible break in that flow the first deliverable. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- “不用验证” -> stop tests/browser/build checks immediately and label the exact resulting boundary; it is not permission to claim acceptance. [Task 2][Task 3][Task 4]",
+      "new": "- “不用验证” -> stop tests/browser/build checks immediately and report the resulting implementation and unverified scope. [Task 2][Task 3][Task 4]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- Copy project ImageGen outputs into the workspace, record request/source/dimensions/SHA256, and do not overwrite existing material. NAI HTTP 402 is a recorded failed attempt, not a cue to retry or bypass the guarded client. [Task 2]",
+      "new": "- Copy project ImageGen outputs into the workspace under fresh filenames, preserve existing material, and record request/source/dimensions/SHA256. Record NAI HTTP 402 as a failed attempt and stop that guarded-client request. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Art diagnosis priority is enemies first (dragon/ice wolf/elements/orc chief), then boss/base/achievement scene language, pickup backgrounds, sprites, chest identity, then select old card art. Retain main portraits/recent homepage/approved indoor shop; do not repaint the whole card library. [Task 5]",
+      "new": "- Art diagnosis priority is enemies first (dragon/ice wolf/elements/orc chief), then boss/base/achievement scene language, pickup backgrounds, sprites, chest identity, then selected old card art. Retain main portraits, recent homepage art, the approved indoor shop and other card-library art. [Task 5]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Simplifying a common transition erased the photo/city visual base -> abstract only handoff sequencing, never replace the complex approved baseline. Scope “退出过场图” to `node-map-return`, not every shared transition. [Task 3]",
+      "new": "- Simplifying a common transition erased the photo/city visual base -> abstract handoff sequencing while preserving the approved complex baseline. Scope “退出过场图” to `node-map-return` and preserve other shared transitions. [Task 3]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Source/asset diagnosis lacks live clipping/mask/scale/motion proof -> present it as ranked diagnostic, not visual acceptance. [Task 5]",
+      "new": "- Source/asset review produces a ranked diagnostic; live clipping, mask, scale and motion remain unverified. [Task 5]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- “不用实页验证，你就读代码就行” -> do not launch browser/game/audio checks; use source, static call chains and pure-logic reproduction, and do not infer visual, sound or runtime-performance acceptance. [Task 1]",
+      "new": "- “不用实页验证，你就读代码就行” -> limit the work to source, static call chains and pure-logic reproduction; browser/game/audio checks stay unrun, with visual, sound and runtime performance unverified. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- The user’s code-only boundary supersedes a failed embedded-browser connection; do not pivot to an external browser or call visuals/feel/performance verified. [Task 1]",
+      "new": "- Continue the user’s code-only scope after an embedded-browser connection failure. Keep browser use within the platform’s internal route; visuals, feel and performance remain unverified. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when the user says “提交后推送到github” and, after a gate failure, “修复后推送” -> retain the delivery authorization but repair and rerun the required gate; never bypass it or represent a local fix as a push. [Task 1]",
+      "new": "- when the user says “提交后推送到github” and, after a gate failure, “修复后推送” -> retain the delivery authorization, repair and rerun the required gate, then push and confirm the remote result. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- “不用实页验证” -> stop browser/live-page acceptance and label visual, interaction, and audio status unverified; automated checks are not acceptance. [Task 3]",
+      "new": "- “不用实页验证” -> stop browser/live-page acceptance and report visual, interaction and audio status as unverified; list automated-check coverage separately. [Task 3]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- A local type or focused-test pass cannot authorize submission when startup, storage, combat and types route the gate to full tests. The delivery remains blocked until a fresh full gate passes. [Task 1]",
+      "new": "- When startup, storage, combat and types route the gate to full tests, submission requires a fresh full-gate pass; report local type and focused-test results within their own scope. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Windows `npm ci`/build can be locked by Vite/esbuild/Rollup files -> identify PID, port and start command, request authorization to pause only those services, then restore them. Sandbox temporary-Git failures require a writable environment, not a false pass. [Task 2]",
+      "new": "- Windows `npm ci`/build can be locked by Vite/esbuild/Rollup files -> identify PID, port and start command, obtain authorization to pause the affected services, then restore them. Sandbox temporary-Git failures require a writable environment and an executed result. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Do not call the 66-file remediation rerun a new full-suite pass: the first full run had 60 failed files/216 failures and 3 unhandled rejections. Build, commit, push, final visual/interaction/audio checks were not performed. [Task 3]",
+      "new": "- Coverage: a 66-file targeted remediation rerun. The first full run had 60 failed files/216 failures and 3 unhandled rejections; build, commit, push and final visual/interaction/audio checks were unrun. [Task 3]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- Do not call any task here a production build, remote CI, committed, or pushed delivery: shared-tree boundaries differed by task and the closeout intentionally did not build, commit, push, or run remote CI. [Task 1][Task 2][Task 3][Task 4]",
+      "new": "- Report each task’s shared-tree boundary separately. Production build, commit, push and remote CI were intentionally unrun at closeout. [Task 1][Task 2][Task 3][Task 4]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- An isolated refactor can fail at integration through TDZ ordering, direct DOM reads in a controller, or old card-count fixtures. Run the architecture/minimal-port tests before merging; a repaired subset does not replace rerunning the promised whole gate. [Task 2]",
+      "new": "- An isolated refactor can fail at integration through TDZ ordering, direct DOM reads in a controller, or old card-count fixtures. Run architecture/minimal-port tests before merging, then rerun the promised whole gate after repairing the subset. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect current ownership, dirty worktree, receipts, and player-facing state first; focused tests/docs checks are not player acceptance.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect current ownership, dirty worktree, receipts and player-facing state first; report focused-test/docs coverage separately from player acceptance.",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when the user says “不用验证” -> distinguish code implementation from overall verification and do not claim it passed. [Task 1]",
+      "new": "- when the user says “不用验证” -> report code implementation and leave overall verification marked unverified. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- Do not equate a full test gate with visual or player completion; motion/equipment/player-flow acceptance is bounded where stated. [Task 1][Task 3]",
+      "new": "- Report full-test-gate coverage separately from the stated motion, equipment and player-flow acceptance. [Task 1][Task 3]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "scope: 按用户试听反馈替换指定 SFX、维护试听页和静音子页面通用 UI 声；不覆盖音乐或未点名的 cue。",
+      "new": "scope: 按用户试听反馈替换指定 SFX、维护试听页和静音子页面通用 UI 声；音乐及其他 cue 保持原状。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=先以当前 catalog 和用户指定 cue ID 为准；已标为未验证的最终音效改动不得当作试听通过。",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=先以当前 catalog 和用户指定 cue ID 为准；已标为未验证的最终音效改动单列待试听。",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when the user asks to remove “音效署名” from credits -> do not restore it to `game/index.html`; keep provenance in `SOURCES.md` and evidence. [Task 2]",
+      "new": "- when the user asks to remove “音效署名” from credits -> keep `game/index.html` credits in that approved state and retain provenance in `SOURCES.md` and evidence. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Symptom: user rejects a large batch of replacements -> do not swap all 106 events before representative samples are approved. [Task 1]",
+      "new": "- Symptom: user rejects a large batch of replacements -> obtain representative-sample approval before expanding to all 106 events. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Final selected/muted cues plus generic subpage click/hover/navigation and archive-animation suppression were not tested after the user took over listening; do not claim sound acceptance. [Task 1]",
+      "new": "- Final selected/muted cues plus generic subpage click/hover/navigation and archive-animation suppression remained untested after the user took over listening; sound acceptance awaits that listening feedback. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when the user says “后端弄，不要前端” -> restrict work to Electron main process, resource protocol, packaging, and backend tests; do not open or operate the game UI. [Task 1]",
+      "new": "- when the user says “后端弄，不要前端” -> scope work to Electron main process, resource protocol, packaging and backend tests; preserve the game UI without opening or operating it. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=只在用户指定相同元素/效果时复用；先核对当前 CSS，历史 18px 模糊不是其他控件的默认值。",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=只在用户指定相同元素/效果时复用，先核对当前 CSS；历史 18px 模糊仅适用于当时指定控件。",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- Symptom: a request names one effect but an implementation changes component geometry -> use a minimal CSS override, not a component redesign. [Task 1]",
+      "new": "- Symptom: a request names one effect but an implementation changes component geometry -> scope the change to a minimal CSS override and preserve component geometry. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- 资产审计的`paths`不是全局过滤器：它会把所选历史债重新判为错误，全局新增债仍会阻断。`--scope selected`是独立目标报告，须同时说明`global`结果；不能拿目标通过宣称全局门通过。",
+      "new": "- 资产审计的`paths`会把所选历史债重新判为错误，全局新增债仍会阻断。`--scope selected`提供独立目标报告；分别报告目标与`global`结果。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- 原生子命令必须逐项保留退出码，依赖步骤失败即停；PowerShell后续命令成功不代表前一步成功。`tools/art-check.mjs`提供限于素材审计和显式Vitest文件的无shell执行链，不运行build或git。",
+      "new": "- 原生子命令逐项保留退出码，依赖步骤失败即停，并逐步判定执行结果。`tools/art-check.mjs`提供限于素材审计和显式Vitest文件的无shell执行链，build和git保持未执行。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Symptom: an asset-audit target passes while global debt still exists -> report `--scope selected` and global results as different claims; do not call the target result a global gate.",
+      "new": "- Symptom: an asset-audit target passes while global debt still exists -> report `--scope selected` and global results separately.",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=代码规则和新局配额可复用前先读现行数据/生成器；所有伤害与资源数字均受本轮明确假设限制，不能当作自然通关实测。",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=复用代码规则和新局配额前先读现行数据/生成器；伤害与资源数字适用于本轮明确假设，自然通关表现另行实测。",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- when calculating card damage, the user progressively fixed assumptions such as “中毒/流血每层按1–2伤”“群攻按2名敌人”“雷殛按2费11伤” -> write the assumption table first; do not add battle duration, existing-state, or chain-kill assumptions. [Task 2]",
+      "new": "- when calculating card damage, the user progressively fixed assumptions such as “中毒/流血每层按1–2伤”“群攻按2名敌人”“雷殛按2费11伤” -> write the assumption table first and calculate within those explicit assumptions; keep battle duration, existing-state and chain-kill assumptions outside the model. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when the user says “排除9种箭类，计算其余中立伤害招式” -> confirm the retained/excluded set before calculating; do not reverse an ambiguous “排除” phrase. [Task 2]",
+      "new": "- when the user says “排除9种箭类，计算其余中立伤害招式” -> confirm the retained/excluded set before calculating, especially when “排除” is ambiguous. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- In the stated fourth-floor model, four ordinary battles expect ~72.25 HP and ordinary+boss ~119.92; at 4.49 damage/cost this is ~17/~27 one-cost equivalents. Expected spells+equipment are ~15.05 from battles, 3.61 from four chests, 5.12 post-boss, 23.78 total; altar’s ~1.82 does not deduct its three-card sacrifice. [Task 4]",
+      "new": "- In the stated fourth-floor model, four ordinary battles expect ~72.25 HP and ordinary+boss ~119.92; at 4.49 damage/cost this is ~17/~27 one-cost equivalents. Expected spells+equipment are ~15.05 from battles, 3.61 from four chests, 5.12 post-boss, 23.78 total; altar’s ~1.82 is gross yield before its three-card sacrifice. [Task 4]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Do not use cards obtained after the boss to pay for the boss, or present static expectations as natural-play results; boss mechanics, draw order, shops, events, recovery, and overkill were excluded. [Task 4]",
+      "new": "- Budget the boss using resources available before it. Coverage: static expectations with boss mechanics, draw order, shops, events, recovery and overkill excluded; natural-play results require a separate run. [Task 4]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=服务和源码入口可复用；混合工作树不得据此直接打包，原生 Electron 窗口交接仍须在干净获授权基线实测。",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=复用服务和源码入口前核对当前基线；打包及原生 Electron 窗口交接实测使用干净获授权基线。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Browser preview proves the in-page transition DOM/lifecycle, not native Electron splash-to-main-window handoff. In a mixed worktree do not build; later use a clean, authorized baseline for `npm run dist`, then test self-extraction, window switching, and transition handoff. [Task 2]",
+      "new": "- Coverage: in-page transition DOM/lifecycle in browser preview; native Electron splash-to-main-window handoff remains unverified. Schedule `npm run dist` on a clean, authorized baseline outside the mixed worktree, then test self-extraction, window switching and transition handoff. [Task 2]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- A `docs:check` failure pointing at pre-existing out-of-scope evidence links is not a failure of this change; report the exact scope and do not repair unrelated documentation without authorization. [Task 2]",
+      "new": "- A `docs:check` failure pointing at pre-existing out-of-scope evidence links belongs to that existing documentation scope; report it separately and handle repairs under the relevant authorization. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- 容量规则由`core/card-capacity.js`统一；所有`stackCapOf`调用必须传完整卡牌，不能只传`{name}`，否则装备丢失type后会使用普通叠放上限。安全格转移、奖励整理、整备和道具替换均需核对。",
+      "new": "- 容量规则由`core/card-capacity.js`统一；所有`stackCapOf`调用传完整卡牌以保留type，仅传`{name}`会使装备使用普通叠放上限。核对安全格转移、奖励整理、整备和道具替换的调用。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- 地图侧栏inset更新不得在travel期间覆盖镜头模式；诅咒之刃附加信息放卡面规则阅读区，避免角标覆盖插画。自然跑局、构造状态与真实输入的证据分开报告。",
+      "new": "- 地图侧栏inset更新在travel期间保留镜头模式；诅咒之刃附加信息放卡面规则阅读区，保持插画清楚。自然跑局、构造状态与真实输入的证据分开报告。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when the user asked “全面优化一下游戏性能” -> establish a same-window baseline before optimizing; do not lower visual quality by intuition. [Task 1]",
+      "new": "- when the user asked “全面优化一下游戏性能” -> establish a same-window baseline before optimizing and preserve visual quality throughout the change. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- A zero-size canvas made direct draw benchmarking fail at `drawImage` -> initialize the browser surface first, then sample. Targeted checks do not establish full-gate success. [Task 1]",
+      "new": "- A zero-size canvas made direct draw benchmarking fail at `drawImage` -> initialize the browser surface first, then sample; report targeted-check coverage separately from full-gate results. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- `STAGED_INVALIDATED` after a seemingly passing full suite meant tests rewrote evidence -> remove the write side effect and rerun the frozen gate; do not commit beforehand. Trailing whitespace in raw `.diff` will fail the evidence commit hook, so retain it losslessly as JSON instead. [Task 2]",
+      "new": "- `STAGED_INVALIDATED` after a seemingly passing full suite meant tests rewrote evidence -> remove the write side effect and rerun the frozen gate before committing. Trailing whitespace in raw `.diff` will fail the evidence commit hook, so retain it losslessly as JSON instead. [Task 2]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=路径、EXE 和资源清单随版本变化，先核对当前资产、manifest、Git 状态和真实运行；勿将未启动包当作实机验收。",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=路径、EXE和资源清单随版本变化，先核对当前资产、manifest、Git状态和实际运行；未启动包标为待实机验收。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Earlier `createBattleEntryGate`/`showRunTransition` checks passed while true entry never displayed the transition -> replay a new run/node path and trace DOM lifetime/call path before reporting completion. After the last style edit the user requested no tests, so the preceding 119 tests do not validate that final revision. [Task 3]",
+      "new": "- Earlier `createBattleEntryGate`/`showRunTransition` checks passed while true entry never displayed the transition -> replay a new run/node path and trace DOM lifetime/call path. The user requested no tests after the last style edit; the preceding 119 tests cover the earlier revision, leaving the final edit unverified. [Task 3]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "scope: 优化共享 icon hydration、图片 decode 生命周期和可证明的 CSS 冗余；适用于混合工作树中的性能/清理任务，不覆盖战斗或宝箱等已有属地。",
+      "new": "scope: 优化共享 icon hydration、图片 decode 生命周期和可证明的 CSS 冗余；在混合工作树中限定本次性能/清理属地，保留战斗和宝箱的已有归属。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when other sessions have uncommitted active paths -> preserve their scene and do not modify battle/chest ownership merely to make a wider performance claim. [Task 1]",
+      "new": "- when other sessions have uncommitted active paths -> preserve their scene and keep performance work within its owned paths, leaving battle/chest changes to their owners. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Symptom: `tests/battle-entry-view.test.js` has four failures (three scenery-layer expectations `3` versus observed `2`, plus a missing expected warning) -> it replaces `Art.decodeIn` and `Icons.rich`, so it does not exercise this optimization. Treat it as an external battle-task issue; do not change expectations or battle code without ownership coordination. [Task 1]",
+      "new": "- Symptom: `tests/battle-entry-view.test.js` has four failures (three scenery-layer expectations `3` versus observed `2`, plus a missing expected warning) -> its replacements for `Art.decodeIn` and `Icons.rich` leave this optimization unexercised. Route the external battle-task issue to its owner and coordinate before changing expectations or battle code. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- Symptom: focused tests or a local/synthetic benchmark are reported as whole-game performance acceptance -> no production build, full suite, battle/reward playthrough, or remote CI ran. State those bounds and do not claim FPS, first-screen, final bundle, or general stutter gains. [Task 1]",
+      "new": "- Coverage: focused tests and local/synthetic benchmarking. Production build, full suite, battle/reward playthrough and remote CI were unrun; FPS, first-screen, final bundle and general stutter gains remain unverified. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- 代号柒当前游戏全局静音接口为 `SDT.Sound.setMuted(true)`，用 `SDT.Sound.muted === true` 核验。全局静音同时关闭背景音乐与游戏音效；不要只关闭 BGM。庭院独立环境声默认关闭，测试时保持关闭。",
+      "new": "- 代号柒当前游戏全局静音接口为 `SDT.Sound.setMuted(true)`，用 `SDT.Sound.muted === true` 核验；它同时关闭背景音乐与游戏音效。庭院独立环境声默认关闭，测试时保持关闭。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=先核对现行源码、根 AGENTS、占用和服务身份；本条是迭代方法与验收边界，历史测试不代表当前版本完成。2026-10-13 直接工作区变更提供当前策略。",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=先核对现行源码、根 AGENTS、占用和服务身份；复用本条迭代方法时，历史测试按当时版本记录。2026-10-13 直接工作区变更提供当前策略。",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- 源码一轮完成后还要和已核实的真实二游参考同场景对照再迭代；统一验收同时是下一轮找问题的起点。测试通过或按钮齐全不等于审美通过，老板否决就返工。 [Task 1]",
+      "new": "- 源码一轮完成后，与已核实的真实二游参考同场景对照再迭代；统一验收同时作为下一轮找问题的起点。测试通过和按钮齐全记录为功能证据，审美以对照及老板验收为准；老板否决就返工。 [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- 全流程先手动走一条纵向链，再用游戏控制台到其他分支；构造首脑击破不能写成自然通关。CSS 解析、定向测试、构造截图与真实输入各自只证明一层。四层历史路线已验证失败回城和第四层入口，但标准自然通关未完成。 [Task 1]",
+      "new": "- 全流程先手动走一条纵向链，再用游戏控制台到其他分支；构造首脑击破归入构造证据。分别记录 CSS 解析、定向测试、构造截图与真实输入覆盖。四层历史路线已验证失败回城和第四层入口，标准自然通关未完成。 [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- 快照 514 文件复制时 `drift=0` 不代表后续定向覆盖后 manifest 仍有效；交付前再冻结。沙箱 Vitest/Vite/junction 出现 EPERM 时，同命令按审批正常权限重跑；零用例不能算通过。 [Task 1]",
+      "new": "- 快照 514 文件复制时的 `drift=0` 只记录当时一致性；后续定向覆盖后，交付前重新冻结 manifest。沙箱 Vitest/Vite/junction 出现 EPERM 时，同命令按审批正常权限重跑；零用例结果标为未通过。 [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- 浏览器 AX 可先于转场稳定帧，首个截图可能是空立绘/旧页；等待稳定再判断。跨聊天 tab 句柄不可复用；被安全策略拒绝的原始 CDP 调用不得绕过，未运行的自动剧本不计覆盖。 [Task 1]",
+      "new": "- 浏览器 AX 可先于转场稳定帧，首个截图可能是空立绘/旧页；等待稳定再判断。跨聊天重新获取 tab 句柄；保留安全策略拒绝的原始 CDP 阻塞，自动剧本覆盖以实际运行项计。 [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- 当前共享源码未修改；`docs/evidence/2026-10-13-WF-four-player-fixes-1013/`、`core-fixes.patch` 与 `ui-fixes.patch` 是 prepared-not-applied 证据。定向回归、语法和文档守卫不等于自然完整通关、全量 CI、多尺寸、所有事件组合、完整拖拽/键盘或音频听感。 [Task 2]",
+      "new": "- 当前共享源码未修改；`docs/evidence/2026-10-13-WF-four-player-fixes-1013/`、`core-fixes.patch` 与 `ui-fixes.patch` 记录 prepared-not-applied 状态。覆盖：定向回归、语法和文档守卫；自然完整通关、全量 CI、多尺寸、所有事件组合、完整拖拽/键盘及音频听感仍待验证。 [Task 2]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "scope: Read current unfinished in-game feedback through the designated code path and resolve it by default; this does not replace the project's in-app browser requirement for visual acceptance.",
+      "new": "scope: Read current unfinished in-game feedback through the designated code path and resolve it by default; visual acceptance uses the project's in-app browser.",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- when unread feedback is found, the user authorized default resolution without asking item by item -> fix it within normal project boundaries; still request direction for genuinely unclear gameplay meaning or another active owner's conflict, and do not infer permission to delete, commit, or push. [Task 1]",
+      "new": "- when unread feedback is found, the user authorized default resolution without asking item by item -> fix it within normal project boundaries and request direction for unclear gameplay meaning or another active owner's conflict. Deletion, commit and push retain their separate authorization conditions. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- The browser feedback key is `sdt-suggestions-v1` and must be read against the actual origin; the current game origin is `http://127.0.0.1:5200`. Desktop `suggestions.json` is a distinct source and cannot stand in for current browser feedback. [Task 1]",
+      "new": "- Read browser feedback key `sdt-suggestions-v1` against the actual origin, recorded here as `http://127.0.0.1:5200`; read desktop `suggestions.json` as a separate source. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "- `python C:/Users/太平/.codex/memories/read_game_feedback.py` is a read-only extractor for Codex Chromium LevelDB WAL/SST values: it selects the highest sequence for the exact origin/key and prints pending records. It cannot see content not saved or flushed to disk, and it is not game source. [Task 1]",
+      "new": "- `python C:/Users/太平/.codex/memories/read_game_feedback.py` is a read-only helper outside game source. It selects the highest sequence for the exact origin/key in Codex Chromium LevelDB WAL/SST and prints pending records persisted to disk; unsaved or unflushed content is outside its read coverage. [Task 1]",
+      "reason": "明确证据范围，合并重复否定"
+    },
+    {
+      "old": "- Symptom: the extractor cannot find a matching persisted value -> report that read limitation; do not silently fall back to browser UI or substitute desktop `suggestions.json`. [Task 1]",
+      "new": "- Symptom: the extractor cannot find a matching persisted value -> report the missing value through the designated extraction route; browser UI and desktop `suggestions.json` stay outside this request’s read scope. [Task 1]",
+      "reason": "以正面动作和条件替代重复否定，保留事实与约束"
+    },
+    {
+      "old": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect current source, CSS ownership, shared-worktree state, and the live 5200 service before reuse; targeted/browser checks here are not whole-project acceptance.",
+      "new": "applies_to: cwd=D:\\素材\\代号柒\\搜打撤; reuse_rule=inspect current source, CSS ownership, shared-worktree state and the live 5200 service before reuse; report targeted/browser-check coverage for the tested slice.",
+      "reason": "明确证据范围，合并重复否定"
+    }
+  ]
+}

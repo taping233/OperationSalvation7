@@ -1,6 +1,5 @@
 import { createPreparationCommands, getPreparation, previewDeployment } from './preparation.commands.js';
 import { buildPreparationViewModel, mountPreparationView } from './preparation.view.js';
-import { departureStackKey } from './base-departure.commands.js';
 
 /**
  * 基地整备功能控制器。它只接收会话数据、页面宿主和导航能力；不读取 SDT、UI、document 或 window。
@@ -18,8 +17,12 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
   let root = null;
   let generation = 0;
   let activeSlot = null;
+  let sessionCurrent = () => true;
+  /** @type {(commit?: (render: () => unknown) => unknown) => boolean | Promise<boolean>} */
+  let back = () => false;
 
-  const isCurrent = token => generation === token && root && root.isConnected !== false && data.slotId() === activeSlot;
+  const isCurrent = token => generation === token && root && root.isConnected !== false && data.slotId() === activeSlot
+    && sessionCurrent() && view.isCurrent?.(root) !== false;
 
   function dispose() {
     generation++;
@@ -27,12 +30,15 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
     controller = null;
     root = null;
     activeSlot = null;
+    sessionCurrent = () => true;
+    back = () => false;
   }
 
   function makeModel(snapshot, preparation, error = '', busy = false) {
     return buildModel({
       baseSnapshot: snapshot,
       preparation,
+      mode: snapshot.selMode || 'standard',
       cardCatalog: data.cardCatalog(),
       characters: data.characters(),
       pets: data.pets(),
@@ -65,6 +71,10 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
     const token = ++generation;
     root = panelRoot;
     activeSlot = slotId;
+    sessionCurrent = data.captureCurrent?.() || (() => true);
+    // A successful destination can detach this root before its Promise settles.
+    // Release only this generation; a newer preparation page owns its own controller.
+    const release = () => { if (generation === token) dispose(); };
     // A3-PREP-04（2026-10-03）：整备页 busy 态——异步 intent 执行期间以 busy:true 重绘
     // （视图 paint 据 current.busy 置 root[aria-busy]），命令 settle 后回 false，异常经
     // finally 同样复位，aria-busy 不卡 true。busy 翻转的推帧复用 lastSnapshot/lastError
@@ -93,6 +103,24 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
         controller?.update(makeModel(lastSnapshot, getPreparation(lastSnapshot), lastError, busy));
       }
     };
+    back = async commit => {
+      if (!isCurrent(token) || busy) return false;
+      try {
+        setBusy(true);
+        const opened = await navigation.returnToBase({ isCurrent: () => isCurrent(token), commit });
+        if (opened !== true || isCurrent(token)) {
+          if (isCurrent(token)) repaint('返回基地出发页未完成，当前预设与编辑已保留，请重试。');
+          return false;
+        }
+        release();
+        return true;
+      } catch {
+        if (isCurrent(token)) repaint('返回基地出发页未完成，当前预设与编辑已保留，请重试。');
+        return false;
+      } finally {
+        setBusy(false);
+      }
+    };
 
     controller = mountView(panelRoot, {
       model: makeModel(current.value, getPreparation(current.value)),
@@ -101,6 +129,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
         const slot = slotId;
         const fresh = data.readBase(slot);
         if (!fresh.ok) { reportError(formatError(fresh)); return; }
+        let selectionApplied = false;
         // A3-PREP-04：同步卫语句过后才进 busy；setBusy 在 try 内首行——update 在 busy:true 帧
         // 同步抛错也走 finally 复位；慢命令 await 期间视图持 busy:true，终态 repaint 后由 finally 复位。
         try {
@@ -116,9 +145,9 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
           } else if (type === 'preset-field' && preset) {
             result = await commands.savePreset(context, { ...preset, presetId: preset.id, [payload.field]: payload.value });
           } else if ((type === 'preset-pick-add' || type === 'preset-pick-remove') && preset) {
-            const existing = preset.picks.filter(item => item.card.cardId !== payload.cardId);
+            const existing = preset.picks.filter(item => item.card.cardId !== payload.cardId || (item.card.variantKey || '') !== (payload.variantKey || ''));
             const picks = type === 'preset-pick-add' && payload.cardId
-              ? existing.concat({ card: { cardId: payload.cardId }, count: payload.count })
+              ? existing.concat({ card: { cardId: payload.cardId, ...(payload.variantKey ? { variantKey: payload.variantKey } : {}) }, count: payload.count })
               : existing;
             result = await commands.savePreset(context, { ...preset, presetId: preset.id, picks });
           } else if (type === 'preset-preview') {
@@ -128,6 +157,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
             const preview = previewDeployment({
               baseSnapshot: fresh.value,
               preset,
+              mode: fresh.value.selMode || 'standard',
               cardCatalog: data.cardCatalog(),
               characters: data.characters(),
               pets: data.pets(),
@@ -136,30 +166,34 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
               starterCard: data.starterCard?.(),
             });
             if (!preview.canStart) { repaint('库存或资格已变化，预设无法应用。'); return; }
-            const picks = {};
-            for (const item of preview.resolvedPicks.filter(item => item.status === 'ready' && item.appliedCount === item.requestedCount)) {
-              const candidates = fresh.value.stash.filter(entry => entry.card?.id === item.card.cardId && (!item.card.variantKey || (entry.variantKey || entry.card.variantKey) === item.card.variantKey));
-              if (candidates.length !== 1) { repaint('库存堆身份已变化，预设无法应用。'); return; }
-              const stack = candidates[0];
-              picks[departureStackKey(stack)] = item.appliedCount;
-            }
+            const picks = { ...preview.deploymentPicks };
             if (!isCurrent(token)) return;
             const selection = {};
             if (preset.characterId) selection.characterId = preset.characterId;
             if (preset.petId) selection.petId = preset.petId;
             const applied = await navigation.applyPicks(picks, selection, () => isCurrent(token));
             if (!isCurrent(token)) return;
-            if (applied === false) { repaint('人物或宠物设置未能应用，请检查选择并重试；携带卡牌未改变。'); return; }
-            dispose();
-            navigation.openDeparture();
+            if (applied === false) { repaint('整备设置未能完成，请检查当前人物、伙伴与携带选择后重试。'); return; }
+            selectionApplied = true;
+            const opened = await navigation.openDeparture({ isCurrent: () => isCurrent(token) });
+            if (opened !== true || isCurrent(token)) {
+              if (isCurrent(token)) repaint('预设已应用，整备页未能打开；请重试「应用到整备」继续。');
+              return;
+            }
+            release();
             return;
           } else if (type === 'preset-start' && preset) {
-            result = await commands.startDeployment(context, { presetId: preset.id, mode: 'standard', expectedRunRevision: 0 });
+            result = await commands.startDeployment(context, { presetId: preset.id, mode: fresh.value.selMode || 'standard', expectedRunRevision: 0 });
           } else {
             return;
           }
 
           if (isCurrent(token)) repaint(result?.ok ? '' : (result?.message || '操作失败'));
+        } catch {
+          if (isCurrent(token)) repaint(type === 'preset-apply'
+            ? selectionApplied ? '预设已应用，整备页未能打开；请重试「应用到整备」继续。'
+              : '整备设置未能完成，请检查当前人物、伙伴与携带选择后重试。'
+            : '操作未完成，当前编辑已保留，请重试。');
         } finally {
           setBusy(false);
         }
@@ -168,12 +202,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
     return true;
   }
 
-  function returnToBase() {
-    if (!controller || !isCurrent(generation)) return false;
-    dispose();
-    navigation.returnToBase();
-    return true;
-  }
+  function returnToBase(commit) { return back(commit); }
 
   return Object.freeze({ open, dispose, returnToBase });
 }

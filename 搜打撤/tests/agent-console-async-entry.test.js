@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 const h = vi.hoisted(() => ({ jump: vi.fn() }));
 vi.mock('../game/src/ui/quick-nav.js', () => ({ jump: h.jump, listPages: () => [{ id: 'hubDeploy', name: '基地', key: '1' }] }));
-vi.mock('../game/src/core/shared.js', () => ({ esc: String, escAttr: String }));
+vi.mock('../game/src/core/shared.js', () => ({ esc: String, escAttr: value => String(value).replaceAll('"', '&quot;') }));
 import { bindKeysTab } from '../game/src/agent/agent.console.js';
 
 let handler, render, log;

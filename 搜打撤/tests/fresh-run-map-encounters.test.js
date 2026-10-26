@@ -7,7 +7,7 @@ vi.mock('../game/src/core/random.js', () => ({ Random:{ random:() => { H.draws++
 vi.mock('../game/src/run/game.session.js', () => ({ game:H.game, MAP:H.map, bagCap:() => 16,
   newUid:() => 'fixture', pick:a => a[0], saveGame() {}, scaledEnemy:enemy => ({ ...enemy, scaled:true }), usedSlots:() => 0 }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ _set_cardPageOpen() {}, cardHTML:() => '', Sfx:{} }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ captureBattleContext:() => () => true, startBattle() {} }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), captureBattleContext:() => () => true, startBattle() {} }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ IMMEDIATE_SCENES:{}, NODE_BG:{}, PICKUP_BG:{}, PRELOAD_SCENES:[], SCENES:{}, WINTER_BATTLE_LAYERS:[] }));
 
 let buildEncounter;

@@ -1,0 +1,15 @@
+{
+  "status": "generated",
+  "tool": "built-in image_gen",
+  "source": "C:/Users/太平/.codex/generated_images/01a177be-ad81-7590-ab07-a971539f2f81/exec-ed5d9ad8-88eb-498f-90b5-291d142d466b.png",
+  "output": "D:/素材/代号柒/.tmp/nai/xingyue-nai5-reset-20261026/dark-priestess.png",
+  "sha256": "852C28A539B13DD4B4330C9388A89C1F1E3E669DF8845AB95BE037F3F8F5D339",
+  "prompt": "dark-priestess-prompt.txt",
+  "references": [
+    "../.tmp/nai/xingyue-nai5-reset-20261026/builtin-face-fix.png",
+    "game/assets/cards/curse-drain.webp",
+    "game/assets/cards/curse-silence.webp"
+  ],
+  "observation": "竖版全身，紫瞳/深色月饰/黑灰高领神官服/紫金披肩/黑手套及靴命中，浅发色参考禁咒，保留长辫祝祷与星灯，待老板评价。",
+  "integration": "candidate only"
+}

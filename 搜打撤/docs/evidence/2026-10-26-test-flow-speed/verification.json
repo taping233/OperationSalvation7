@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 1,
+  "owner": "Friday / 01a173a2-6034-7770-a661-3e2117094bcb",
+  "baseline": "850bae931a400a7da5cb52e92a4711c4c86a3c9f",
+  "scope": "按老板执行授权优化测试入口、两个慢流程夹具与默认运行报告；保留其他未提交内容",
+  "changedFiles": [
+    "package.json",
+    "vite.config.js",
+    "scripts/acceptance-gate.mjs",
+    "scripts/gate-plan.mjs",
+    "scripts/workflow-evidence.mjs",
+    "scripts/test-changed.mjs",
+    "scripts/test-timing-reporter.mjs",
+    "tests/helpers/fixture-copies.js",
+    "tests/fixture-copies.test.js",
+    "tests/test-changed.test.js",
+    "tests/test-timing-reporter.test.js",
+    "tests/workflow-staged.test.js",
+    "tests/workflow-gate-receipt.test.js",
+    "tests/acceptance-gate.test.js",
+    "tests/e8-card-inventory.test.js",
+    "tests/resource-presentation-benchmark.test.js",
+    "docs/quality-gates.md",
+    "docs/WORKFLOW-TOOLS.md"
+  ],
+  "changes": {
+    "dailyCommand": "npm run test:changed [-- --paths <CSV或路径> --plan --json]",
+    "selection": "复用原quick/full/skip选择器与静态门，阈值/公共边界/CI/超时/并发未降低；零改动明确skip",
+    "fixtureReuse": "一次准备并缓存普通文件字节，每例独立复制工作文件和完整.git；未共享索引/refs/对象存储",
+    "windowsLinkProbe": "权限探测前置并缓存；普通链接用例准确跳过，junction用例仍独立执行",
+    "report": "默认入口按当次Vitest结束事件记录各文件与前10慢项、失败文件、未完成及逐项跳过原因"
+  },
+  "comparison": {
+    "beforeSeconds": 81.8097060546875,
+    "afterSeconds": 55.7934990234375,
+    "reductionPercent": 31.800880709507616,
+    "identicalCasesAndOutcomes": true,
+    "passed": 23,
+    "skipped": 35,
+    "method": "依次执行相同两个文件；before通过内存转换读850bae931a中的原测试，after使用当前测试；两边使用现行脚本、依赖及配置，未回退共享工作区",
+    "initialBaselineSeconds": 51.455134521484375,
+    "limit": "单组配对记录；机器负载和缓存会波动，不作为固定速度保证，初次基线与后续脚本/测试配置不同"
+  },
+  "validation": {
+    "related": {
+      "files": 7,
+      "passed": 165,
+      "failed": 0,
+      "skipped": 0,
+      "filesCovered": [
+        "tests/fixture-copies.test.js",
+        "tests/test-changed.test.js",
+        "tests/test-timing-reporter.test.js",
+        "tests/quality-config.test.js",
+        "tests/acceptance-gate.test.js",
+        "tests/workflow-tools.test.js",
+        "tests/scripts-contract.test.js"
+      ]
+    },
+    "changedCommand": {
+      "exit": 0,
+      "mode": "quick",
+      "testFiles": 1,
+      "passed": 3,
+      "log": ".tmp/test-flow-1026/changed-command.log"
+    },
+    "fullGate": {
+      "command": "node scripts/acceptance-gate.mjs --full --run",
+      "exit": 1,
+      "outcome": "failed",
+      "wallSeconds": 662.835,
+      "vitestSeconds": 617.45,
+      "totalFiles": 954,
+      "fileCounts": {
+        "passed": 946,
+        "failed": 8,
+        "skipped": 0,
+        "pending": 0
+      },
+      "counts": {
+        "passed": 9412,
+        "failed": 72,
+        "skipped": 37,
+        "pending": 0
+      },
+      "unhandledErrors": 1,
+      "completed": false,
+      "staticChecks": "剧情编译、语法、数据、类型/覆盖、ESLint、素材检查均通过；Vitest失败",
+      "failedFiles": [
+        {
+          "file": "tests/battle-hand-inspector.test.js",
+          "failed": 1
+        },
+        {
+          "file": "tests/runtime-asset-redundancy.test.js",
+          "failed": 3
+        },
+        {
+          "file": "tests/event-callback-lifecycle-audit.test.js",
+          "failed": 23
+        },
+        {
+          "file": "tests/event-choice-recovery-cloud.test.js",
+          "failed": 20
+        },
+        {
+          "file": "tests/event-signal-puzzle-integration.test.js",
+          "failed": 6
+        },
+        {
+          "file": "tests/blackmarket-card-preview.test.js",
+          "failed": 7
+        },
+        {
+          "file": "tests/event-recode-selection-continuity.test.js",
+          "failed": 1
+        },
+        {
+          "file": "tests/event-choice-acquired-gift-cloud.test.js",
+          "failed": 11
+        }
+      ],
+      "inputConsistency": {
+        "headBefore": "850bae931a400a7da5cb52e92a4711c4c86a3c9f",
+        "headAfter": "850bae931a400a7da5cb52e92a4711c4c86a3c9f",
+        "drift": [],
+        "added": []
+      }
+    },
+    "skips": {
+      "count": 37,
+      "allHaveReasons": true,
+      "byReason": {
+        "证据写入需显式SDT_E8_WRITE_INVENTORY=after；默认只读": 1,
+        "按需性能实验；设置RESOURCE_PRESENTATION_BENCH后执行": 1,
+        "Windows符号链接不可用（EPERM），保留真实链接验证": 35
+      }
+    },
+    "currentGameConfirmation": {
+      "files": 8,
+      "passed": 171,
+      "failed": 72,
+      "skipped": 0
+    },
+    "readOnlyHeadModuleProbe": {
+      "files": 8,
+      "passed": 240,
+      "failed": 3,
+      "method": "同一现行测试流程，在内存中仅使用850bae931a的game.run.events.js与battle.layers.js；共享源码原位未修改",
+      "finding": "69项事件/战斗界面失败随这两个未提交模块的HEAD对照恢复；3项素材消费者指纹失败仍保留，因该守卫读取真实工作区源文件"
+    },
+    "eslint": "passed",
+    "documentation": "passed",
+    "whitespace": "passed"
+  },
+  "outstanding": [
+    {
+      "kind": "game-working-tree-regression",
+      "cases": 69,
+      "paths": [
+        "game/src/run/game.run.events.js",
+        "game/src/battle/view/battle.layers.js"
+      ],
+      "status": "现行未提交增量与现有回归不一致；本轮未改这些源码或覆盖相应归属"
+    },
+    {
+      "kind": "asset-consumer-review",
+      "cases": 3,
+      "path": "game/src/battle/view/battle.layers.js",
+      "status": "源码变更后审核指纹不匹配，保留素材是守卫的当前行为；未放宽守卫或重写审核基线"
+    },
+    {
+      "kind": "full-run-worker-rpc",
+      "error": "[vitest-worker]: Timeout calling onTaskUpdate",
+      "status": "完整轮次出现1次；8文件定向确认未观察到同条错误；原因未定，未提高超时上限"
+    }
+  ],
+  "fileFingerprints": [
+    {
+      "file": "package.json",
+      "sha256": "34aaa6e61fbaae1f08e3560e109d0ef34bd2c5b03d053059b52e5aa412a20304"
+    },
+    {
+      "file": "vite.config.js",
+      "sha256": "5ea038301f44f596cb465bbe6918cba7a27ba3e8143d88eda27bb5739344156f"
+    },
+    {
+      "file": "scripts/acceptance-gate.mjs",
+      "sha256": "88c2b82d076b5b07d38c849d1c2b3c245dcbc4c0aa4169f389788f3b8fe82129"
+    },
+    {
+      "file": "scripts/gate-plan.mjs",
+      "sha256": "610c27437a26d38df797f653d7006a790c7c9a3f6fafcf8cceadece4d120fad3"
+    },
+    {
+      "file": "scripts/workflow-evidence.mjs",
+      "sha256": "56bc3a37abc9b731b03655b387dc6dd57310856cd0ee11f1bf8796b32946d69c"
+    },
+    {
+      "file": "scripts/test-changed.mjs",
+      "sha256": "52077ff8a328475785bb2d4f87858e9e99acbe26939b90fd4eee797daa616053"
+    },
+    {
+      "file": "scripts/test-timing-reporter.mjs",
+      "sha256": "fdf5ffc96ab453402a2b32884a31e7de95bbcb4155b11169e0a39d3e34a8a05d"
+    },
+    {
+      "file": "tests/helpers/fixture-copies.js",
+      "sha256": "aca0685b223521d6e35c35943c4b278b4906d7d1b1b12f0d39bfa568cc1ecc29"
+    },
+    {
+      "file": "tests/fixture-copies.test.js",
+      "sha256": "5aedb4e12e3d092096ea05bffb1b2fa9b4f55a7ca9aae927a43ff6dc958d7243"
+    },
+    {
+      "file": "tests/test-changed.test.js",
+      "sha256": "8033a2961af9761a0eb54c5f75d24c155199c3446951453105d4537d843a6fbc"
+    },
+    {
+      "file": "tests/test-timing-reporter.test.js",
+      "sha256": "ab1193bd28f51f37b8fbae72a3095cf602470ddfa32f2745753a6340043432c7"
+    },
+    {
+      "file": "tests/workflow-staged.test.js",
+      "sha256": "a945fd6dc8bc1d387f6c2fdfba9f2b10f72ef1c4fc8b972a3d8fd9c24ea8b936"
+    },
+    {
+      "file": "tests/workflow-gate-receipt.test.js",
+      "sha256": "65e2006d897e3ebc5472c700e864e85c042584c3239f537fa75b1f07fbdb3dd9"
+    },
+    {
+      "file": "tests/acceptance-gate.test.js",
+      "sha256": "c6dddbeda3341add954c6c7fcb7323dad8ac1f9cab7c2d1ab5a6f75244285f85"
+    },
+    {
+      "file": "tests/e8-card-inventory.test.js",
+      "sha256": "e751f467bd9a0df245d034934c2dc6b49066cefc08114a741aef8084db11e3eb"
+    },
+    {
+      "file": "tests/resource-presentation-benchmark.test.js",
+      "sha256": "d9d78d14e1a40975ae2d5ea1229324e8443fff6e3a6e2f77750bb81c171717c8"
+    },
+    {
+      "file": "docs/quality-gates.md",
+      "sha256": "e99382a623d0591533c373d8319948cf1b63a84d503a1f19888ae101083fbccf"
+    },
+    {
+      "file": "docs/WORKFLOW-TOOLS.md",
+      "sha256": "5eaa1b99dc31f063827bf1e9a0b7172a464d64781849e555c62b39c0510873e2"
+    }
+  ],
+  "rawEvidence": [
+    {
+      "path": ".tmp/test-flow-1026/before.json",
+      "bytes": 19433,
+      "sha256": "5fea5ff21bb59fc04b08609e8c1ba5923b4132a7e5a53deb0754b4467884014e",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": ".tmp/test-flow-1026/after-fixtures-fixed.json",
+      "bytes": 20254,
+      "sha256": "b58bef91ae88e93c264ffcf11d6b82363b7587d6510f46b61c3418ab20c76a28",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": ".tmp/test-flow-1026/paired-before.json",
+      "bytes": 19405,
+      "sha256": "fe9c6953e3bf652ccfecdc80ba10ede346a2b4ff1fad0210c5e69317b26a7b01",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": ".tmp/test-flow-1026/paired-after.json",
+      "bytes": 19496,
+      "sha256": "54d6ec96076e062f80d89c6c848d75784957eea297091b4225689fd943d0bc73",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": ".tmp/test-flow-1026/contracts-final.json",
+      "bytes": 57328,
+      "sha256": "4d12933b6d2be5f16fccfbc0cb02695199d47ee23cabcf60567c8fa30d33ced9",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": ".tmp/test-flow-1026/game-failure-confirmation.json",
+      "bytes": 110676,
+      "sha256": "71492111eb097e48ccd91b7d4d2a85c5deebfa0b8b58cdd055f7dcbb74243f17",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": ".tmp/test-flow-1026/game-head-confirmation.json",
+      "bytes": 87152,
+      "sha256": "b1091492c637e9ca34076d61b488628de937b15a7220565086bdc28197807ea2",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": ".tmp/test-flow-1026/full-inputs.json",
+      "bytes": 247823,
+      "sha256": "71fdf429b558cd97161857104a54e924c7f046955c0b2df1e5e239ff28c6d72d",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": ".tmp/test-flow-1026/changed-command.log",
+      "bytes": 1860,
+      "sha256": "bb364dc6561487f97ad0dae360346550797e237afda315ca8b219bfaba22fc9f",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": ".tmp/test-flow-1026/report-integration.log",
+      "bytes": 2284,
+      "sha256": "f66517abd3fd5bd1552035ce037eed4d4e26cdb93cf13457b256841246c75856",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": "node_modules/.cache/test-reports/2026-10-25T17-00-16.941Z-f6285c94.json",
+      "bytes": 343319,
+      "sha256": "0e62069f14d86ca6d13e4c7b1f690148078e10665d9332a076ce64072dbf2604",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": "docs/evidence/2026-10-26-test-flow-speed/full-tests.json",
+      "bytes": 343319,
+      "sha256": "0e62069f14d86ca6d13e4c7b1f690148078e10665d9332a076ce64072dbf2604",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    },
+    {
+      "path": "docs/evidence/2026-10-26-test-flow-speed/full-gate.log",
+      "bytes": 73841,
+      "sha256": "7a9d25dc8c4dcba796880dea8382a4bb1df24e45320b8a132c601eb075ccb5ee",
+      "obtain": "原路径保留；对应命令与对照方法见本目录README和comparison.json"
+    }
+  ],
+  "limits": [
+    "工作树验证，未做冻结index验收、提交、推送或build",
+    "未修改游戏源码、已有审计债、资源审核指纹或任何测试预算",
+    "配对测试单次记录，不等于整库提速；完整轮次失败不能记为通过",
+    "未删除仓库文件、未安装依赖、无新增长驻服务"
+  ]
+}

@@ -58,7 +58,7 @@ export function createGameBootLoop({ readState, readRenderer, UI, frameStats, FX
     // 全屏不透明页（事件/节点/背包页/房间战斗）盖住画布时同样跳帧，不重绘被遮挡的画布。
     // 战斗页 room-view 已是完全不透明 #0c0c0c 全屏层（overlays.css），画布根本不可见——
     // 也并入 covered 停画（旧逻辑给战斗页留 60fps 重绘是 backdrop blur 时代的注释，已过时）。
-    // 宝箱浮层（chest）底下隔着 blur(6px)，冻结与运动在模糊后无感，停画省下整幅重绘。
+    // 搜刮点浮层（chest）底下隔着 blur(6px)，冻结与运动在模糊后无感，停画省下整幅重绘。
     const ov = UI.el.overlay;
     // 战斗页标志由 UI.showOverlay 唯一入口缓存（曾在此每帧 querySelector 全子树扫描）
     const battleBehind = !ov.hidden && !!UI._hasBattleStage;

@@ -11,7 +11,7 @@ import { firstExploreMoves } from '../hub/extraction.commands.js';
 import { esc } from '../core/shared.js';
 import { uiDisclosure } from '../ui/ui-disclosure.js';
 import { uiDecisionFacts } from '../ui/ui-decision.js';
-import { settlementReportHTML } from '../ui/settlement-report.js';
+import { bindSettlementActions, settlementReportHTML } from '../ui/settlement-report.js';
 
 // 终局失败车队横幅（LEG-6b，2026-09-26 W1 批件）：挂「撤离失败」终局页顶部作正脸
 // 结算演出（判负撤离与倒下共用本页，均为失败语义）。素材只读引用，不改结算语义。
@@ -91,13 +91,19 @@ export function createDeathSettlement({
 }) {
   const fxAt = () => ({ x: game.pos.x, y: game.pos.y });
 
-  game.heal = function (n) {
-    if (game.hp >= game.maxHp) { UI.log('[[icon:heart]] 生命值已满', 'dim'); return; }
+  /** @param {number} n
+   * @param {{deferFeedback?: (action: () => void) => void}} [options] */
+  game.heal = function (n, { deferFeedback } = {}) {
+    const feedback = action => deferFeedback ? deferFeedback(action) : action();
+    if (game.hp >= game.maxHp) { feedback(() => UI.log('[[icon:heart]] 生命值已满', 'dim')); return; }
     const real = Math.min(n, game.maxHp - game.hp);
     game.hp += real;
-    SDT.Sound.sfx('heal');
-    UI.log(`[[icon:heart]] 恢复 <b>${real}</b> 点生命（${game.hp}/${game.maxHp}）`, 'heal');
-    UI.refresh(game);
+    const message = `[[icon:heart]] 恢复 <b>${real}</b> 点生命（${game.hp}/${game.maxHp}）`;
+    feedback(() => {
+      SDT.Sound.sfx('heal');
+      UI.log(message, 'heal');
+      UI.refresh(game);
+    });
   };
 
   game.damage = function (n, reason) {
@@ -151,6 +157,10 @@ export function createDeathSettlement({
 
     const current = () => game.terminalPending === token && token.generation === getTerminalGeneration() && getActiveSlot() === token.slotId
       && (!slotId || (SDT.Base === sourceBase && (sourceBase.slot == null || sourceBase.slot === slotId)));
+    let finalized = false;
+    const finishCurrent = () => finalized && !game.runActive && !game.terminalPending &&
+      token.generation === getTerminalGeneration() && getActiveSlot() === token.slotId &&
+      (!slotId || (SDT.Base === sourceBase && (sourceBase.slot == null || sourceBase.slot === slotId)));
     const announceLevelUps = levels => {
       if (!levels || !game.myClass) return;
       const meta = SDT.Meta;
@@ -158,22 +168,24 @@ export function createDeathSettlement({
       UI.log(`[[icon:medal]] <b>${characterName(game.myClass)}</b> 熟练度提升！现在是 <b>Lv.${meta.classLv(game.myClass)}</b>（出征 ${meta.perkText(meta.classLv(game.myClass))}）`, 'ok');
     };
     const finish = (levels = 0) => {
-      if (!current()) return false;
-      game.terminalPending = null;
-      game.state = 'done';
-      game.runActive = false;
-      game.surrenderedRun = false;
-      // 2026-10-03 老板（SYS-11）：死亡收益读回执口径（netTake/losses/首探随 token.receipt），
-      // savedCards 仍作 carried 既有口径；无回执调用（旧测试兜底）行为不变
-      SDT.Agent?.recorder?.recordRun('death', { why: token.why, deathCause: token.deathCause, savedCards: token.saved, receipt: token.receipt });   // 跑局统计（数据分析系统）
-    SDT.Sound.sfx('extractionFail');
-      SDT.Sound.music('title');
-      if (token.ephemeral) {
-        UI.log('[[icon:info]] 测试结算仅更新内存，没有写入基地存档', 'sys');
-        announceLevelUps(levels);
-      } else {
-        announceLevelUps(levels);
-        try { Promise.resolve(SDT.Meta.checkUnlocks()).catch(() => {}); } catch { /* 提交已完成，成就提示不能回滚终局 */ }
+      if (!current() && !finishCurrent()) return false;
+      if (!finalized) {
+        finalized = true;
+        game.terminalPending = null;
+        game.state = 'done';
+        game.runActive = false;
+        game.surrenderedRun = false;
+        // 跑局统计沿原快照，结果重显只重建页面。
+        SDT.Agent?.recorder?.recordRun('death', { why: token.why, deathCause: token.deathCause, savedCards: token.saved, receipt: token.receipt });
+        SDT.Sound.sfx('extractionFail');
+        SDT.Sound.music('title');
+        if (token.ephemeral) {
+          UI.log('[[icon:info]] 测试结算仅更新内存，没有写入基地存档', 'sys');
+          announceLevelUps(levels);
+        } else {
+          announceLevelUps(levels);
+          try { Promise.resolve(SDT.Meta.checkUnlocks()).catch(() => {}); } catch { /* 成就提示独立于已保存的结算。 */ }
+        }
       }
       // A5-DEATH-02（2026-10-03）：抢运张数与死亡回执同口径——token.cards（doDeath 抢运清单，
       // 含珍珠盒中 stored 资源卡，每条 count:1）即 buildDeathReceipt 的 rescuedCards，页面
@@ -221,20 +233,22 @@ export function createDeathSettlement({
             <div class="settlement-details-body">
               ${lossDetails}
               <p class="ov-note settlement-material-note">散装物资估值损失：<b>${token.lost.toLocaleString()}</b>（不含卡牌）。<br>散装物资散失：${token.looseItems || '无'}。资源卡按卡牌清单计数。${token.savedResources ? `<br>已抢运资源卡：${token.savedResources}。` : ''}</p>
-              ${token.saved.length
-                ? `<div class="settlement-loot"><p class="settlement-loot-h">${esc(token.partnerName)}抢运回基地</p><div class="settlement-cards">${token.saved.slice(0, 6).map((s, i) =>
-                    `<span class="settlement-card" style="--i:${i}">${SDT.Cards.cardHTML(s.card, 'sm')}</span>`).join('')}${token.saved.length > 6 ? `<span class="settlement-more">还有 ${token.saved.length - 6} 张</span>` : ''}</div></div>`
+              ${token.cards.length
+                ? `<div class="settlement-loot"><p class="settlement-loot-h">${esc(token.partnerName)}抢运回基地</p><div class="settlement-cards">${token.cards.slice(0, 6).map((s, i) =>
+                    `<span class="settlement-card" style="--i:${i}">${SDT.Cards.cardHTML(s.card, 'sm')}</span>`).join('')}${token.cards.length > 6 ? `<span class="settlement-more">还有 ${savedN - 6} 张</span>` : ''}</div></div>`
                 : (token.hadCards ? '<p class="ov-note">安全格里没有卡牌。把卡存进背包安全格（基地用口粮升级），倒下时才抢得回来。</p>' : '')}
               <p class="ov-note">木材、口粮、钥匙资源卡入基地仓库后，需在仓库“使用”才折入基地材料数字；散装木材与口粮仅在成功撤离时直接折入。</p>
             </div>`})}
         ` }), 'doom');
-      UI.act('goBase', () => runtime.openBaseHub('deploy'));
-      UI.act('again', () => runtime.openBaseHub('deploy'));
+      bindSettlementActions({ UI, isCurrent:finishCurrent, actions:{
+        goBase: () => runtime.openBaseHub('deploy'),
+        again: () => runtime.openBaseHub('departure'),
+      } });
       UI.refresh(game);
       return true;
     };
     return runTerminalSettlement({
-      token, current, game, UI, finish,
+      token, current, finishCurrent, game, UI, finish,
       command: 'run.death', retryAct: 'retryTerminalDeath',
       slotId: token.slotId, extraPayload: { deathClass: token.deathClass },
       terminalCommands,

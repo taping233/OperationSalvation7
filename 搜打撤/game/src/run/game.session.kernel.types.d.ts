@@ -1,6 +1,6 @@
 export interface GameRuntime {
   openClassChoice(options?: { recoveringRun?: boolean }): unknown;
-  openBaseHub(options?: { immediate?: boolean }): unknown;
+  openBaseHub(tab?: string): unknown;
   preloadBaseHub?(): Promise<unknown>;
   rebuildNotes(): void;
   resize(): void;

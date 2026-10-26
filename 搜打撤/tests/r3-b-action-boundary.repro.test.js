@@ -1,3 +1,4 @@
+import { drainBattle } from './helpers/battle-fixtures.js';
 import { playerFields } from './helpers/environment-fixtures.js';
 /* R3-b regression: duplicate commands are inert, while a UID that is genuinely
  * back in hand remains reusable and receives a fresh presentation receipt. */
@@ -46,21 +47,7 @@ function setup(cardId, mode = 'normal', energy = 3, foeCount = 1) {
   return { game, uid, uids, card, cards };
 }
 
-const tick = () => new Promise(resolve => setTimeout(resolve, 0));
-const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
-async function settle(max = 300) {
-  for (let i = 0; i < max; i++) {
-    await tick();
-    const snapshot = BattleSession.getSnapshot();
-    if (!snapshot.busy && snapshot.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = BattleSession.getSnapshot();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return BattleSession.getSnapshot();
-}
+const settle = (max = 300) => drainBattle(BattleSession, max, { stopAt: ['discovering', 'choosing', 'handSelecting'] });
 
 async function playAndSettle(uid) {
   BattleSession.commands.playCard(uid, 0);

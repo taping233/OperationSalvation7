@@ -69,7 +69,7 @@ describe('封存储备库标题', () => {
   it('定版标题与三种箱随机一个的现行规则一致', () => {
     const card = C.EVENTS_0919.find(c => c.id === 'tt6-chestdraw');
     expect(card.name).toBe('封存储备库');
-    expect(card.desc).toBe('从大、中、小宝箱中随机抽取 1 个开启，或领取木材与口粮各 1 张。');
+    expect(card.desc).toBe('从军用保险柜、密封物资箱、小型物资箱中随机抽取 1 个开启，或领取木材与口粮各 1 张。');
     const source = readFileSync(path.join(ROOT, 'game/src/run/game.run.events.js'), 'utf8');
     expect(source).toContain("{label:'小型物资箱',value:'small'},{label:'密封物资箱',value:'medium'},{label:'军用保险柜',value:'large'}");
     expect(source).toContain("openChestsOnCell([{ kind }], '你投骰选中的物资箱')");

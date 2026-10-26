@@ -5,7 +5,6 @@ import { beforeAll, beforeEach, expect, it, vi } from 'vitest';
 const harness = globalThis.__r6Flow = {
   activeSlot: 1, game: { layerIdx: 0, trackPos: 1, visited: {}, state: 'idle' },
   acts: {}, pages: [], consumed: 0, finish: 0, saveResult: true,
-  narrative: async () => ({ intro: '灯', choices: [{ label: '继续', detail: '继续调查', effect: 'continue', choose: () => '记录' }] }),
 };
 
 vi.mock('../game/src/run/game.session.js', () => ({
@@ -31,7 +30,7 @@ vi.mock('../game/src/core/render-scheduler.js', () => ({ renderScheduler: { inva
 vi.mock('../game/src/audio/sound.js', () => ({ tone: () => '' }));
 vi.mock('../game/src/core/random.js', () => ({ Random: { random: () => 0 } }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ EVENT_SCENE_META: {} }));
-vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => null, lastLampNarrative: (...args) => harness.narrative(...args) }));
+vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => null, lastLampNarrative: () => { throw Error('Retired series must not intercept ordinary events'); } }));
 
 let runEventDeck, RunStorage, Base;
 beforeAll(async () => {
@@ -56,7 +55,7 @@ beforeEach(()=>{
   Object.assign(harness.game,{layerIdx:0,trackPos:1,visited:{},state:'idle'});
 });
 
-it.each([true,false,'reject'])('retired-series fallback checkpoint from old run cannot clear or finish the new run (%s)',async result=>{
+it.each([true,false,'reject'])('ordinary-event checkpoint from old run cannot clear or finish the new run (%s)',async result=>{
   await seedRun(1,'old-story');
   let resolve,reject;harness.saveResult=new Promise((yes,no)=>{resolve=yes;reject=no;});
   const pending=runEventDeck();for(let i=0;i<8;i++)await Promise.resolve();

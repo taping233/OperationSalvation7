@@ -102,7 +102,7 @@ describe('shop settlement ownership and checkpoint receipts', () => {
 
   it.each(['throw', 'duplicate'])('卡牌UID%s时准备失败，不留下扣款或售出标记', async mode => {
     const h = shop({ newUid:() => { if (mode === 'throw') throw new Error('uid'); return 'owned-coin'; } });
-    await expect(h.acts.buyCard({ i:0 })).resolves.toBeUndefined();
+    await expect(h.acts.buyCard({ i:0 })).resolves.toMatchObject({ok:false,reason:"uid"});
     expect(h.game.coins).toBe(20); expect(h.game.ownedCards).toHaveLength(1);
     expect(h.game.shopStock[0].sold).toBe(false); expect(h.saveGame).not.toHaveBeenCalled();
   });
@@ -111,7 +111,7 @@ describe('shop settlement ownership and checkpoint receipts', () => {
     const h = shop();
     h.UI.log.mockImplementation(() => { throw new Error('notification'); });
     h.SDT.Sound.sfx.mockImplementation(() => { throw new Error('sound'); });
-    await expect(h.acts.buyCard({ i:0 })).resolves.toBeUndefined();
+    await expect(h.acts.buyCard({ i:0 })).resolves.toMatchObject({ok:true});
     expect(h.saveGame).toHaveBeenCalledTimes(1); expect(h.game.coins).toBe(15);
     expect(h.game.ownedCards).toHaveLength(2); expect(h.game.shopStock[0].sold).toBe(true);
   });

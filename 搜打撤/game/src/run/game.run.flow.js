@@ -15,9 +15,9 @@ import { renderScheduler } from '../core/render-scheduler.js';
 import { findMapTravelPath, setMapTravelPresentation } from './map-travel-path.js';
 import { createTravelMotion, createArrivalFeedback } from './map-travel-motion.js';
 import { showLayerPassage, isLayerPassageActive } from '../ui/map-passage.js';
-import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene, resumeChestsOnCell } from './game.run.scenes.js';
+import { cancelLegacyChainMove, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene, resumeChestsOnCell } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply, resumeNodeRestore } from './game.run.altar.js';
-import { entrySupplyAt, entrySupplyGate } from './node-reward-state.js';
+import { endAbandonedNodeContent, endNodeContent, entrySupplyAt, entrySupplyGate, nodeContentEndedAt } from './node-reward-state.js';
 import { createEventCardChoiceController } from './event-card-choice.js';
 import { createEventLifecycle, createLazyEventEntry } from './event-lifecycle.js';
 import { nodeChestRewardAt } from './chest-reward-save.js';
@@ -35,6 +35,7 @@ const moveUsesReducedMotion = () => {
   catch { return false; }
 };
 export function moveTo(toLi, toIdx) {
+  endAbandonedNodeContent(game);
   if (activeMove && game.state !== 'moving') activeMove.cancel?.();
   if (game.state !== 'idle' || activeMove || isLayerPassageActive(game)) return false;
   if (entrySupplyGate(game)) { UI.log('[[icon:door]] 领完入城补给后才能前往其他地点', 'warn'); return false; }
@@ -82,14 +83,13 @@ export function moveTo(toLi, toIdx) {
   };
   const commitNode = () => {
     const from = route[committed], to = route[++committed];
-    const current = game.layerData[from.li]?.logical[from.idx];
     if (!reduced && from.li !== to.li) passage = showLayerPassage(game, from.li, to.li);
     game.pos = { x: to.x, y: to.y };
     game.layerIdx = to.li;
     game.trackPos = to.idx;
+    endNodeContent(game, from.li, from.idx);
     markSeen(to.li, to.idx);
     if (game.explored) game.explored[to.li + ',' + to.idx] = 1;
-    if (current?.def?.type === 'shop') consumeCell(from.li, from.idx);
     game.turn++;
     game.activeLayerBounds = game.layerBounds?.[to.li] || null;
     SDT.Meta.track('action');
@@ -177,14 +177,14 @@ export function moveTo(toLi, toIdx) {
   return true;
 }
 
-// 点击脚下所在格可重开尚未完成的内容；完成结算的节点已写 visited，商店则在离开时写入。
+// 留在脚下可重开未完成内容；实际离开后的节点只保留通行。
 export function reenterCell() {
   if (game.state !== 'idle' || activeMove || isLayerPassageActive(game)) return false;
   resolveCell();
   return true;
 }
 
-// 即时效果类（币/木材/宝箱/口粮/钥匙/火堆/事件）：拾取或场景演出后再继续
+// 即时效果类（币/木材/搜刮点/口粮/钥匙/火堆/事件）：拾取或场景演出后再继续
 const INSTANT_TYPES = ['coin', 'wood', 'chest', 'rations', 'key', 'fire', 'event', 'resource'];
 
 function resolveCell() {
@@ -193,12 +193,17 @@ function resolveCell() {
   const def = lc ? lc.def : undefined;
   const door = (layer.doors || []).find(d => d.at === idx);
 
-  // 一次性内容防重刷：奖励/事件/战斗完成后立即写 visited；未实际触发就退出仍可重进。
-  // 商店例外：在店内可反复浏览，离开所在格才写 visited。进度型节点自管"可再来"语义：门、
-  // 祭坛（未激活可再来，激活/领奖由 altarActivated 自判）、撤离点（面板自管）。
+  // 完成结算沿用 visited；真正离开写 closed，优先阻止旧奖励、复原与休整恢复。
   game.visited = game.visited || {};
   const vKey = game.layerIdx + ',' + idx;
   const consumed = !!game.visited[vKey];
+  if (nodeContentEndedAt(game)) {
+    UI.beginRoom();
+    if (door) { enterNode('door', () => openDoorModal(door, def)); return; }
+    UI.log('[[icon:exit]] 该节点已结束，现已变为普通节点', 'dim');
+    openSafeNode();
+    return;
+  }
   const pendingReward = nodeChestRewardAt(game);
   if (pendingReward) {
     UI.beginRoom();
@@ -302,7 +307,7 @@ function runInstant(def, after) {
       const cnt = def.n || 1;
       openFixedRewardsOnCell(Array.from({ length:cnt }, () => card).filter(Boolean), '木材补给', { consumeNode:true });
     } break;
-    // 宝箱：70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1），使用通用卡牌池。
+    // 搜刮点：70% 小型物资箱（随机 1 张）/ 30% 密封物资箱（3 选 1），使用通用卡牌池。
     case 'chest': openChestsOnCell([Random.random('loot', 'reward') < 0.7 ? { kind:'small' } : { kind:'medium' }], null, { consumeNode:true }); break;
     // 物资格（2026-09-16 Item 17 定版）：按爆率刷新 2 张随机资源卡，二选一带走
     case 'resource': openResourcePick(done); break;

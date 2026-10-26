@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it } from 'vitest';
 import { frameImpactRemaining, queueCardAction, takeCardAction } from '../game/src/battle/view/battle.action-timing.js';
 import { wuTimeline } from '../game/src/battle/view/battle.frame-catalog.js';

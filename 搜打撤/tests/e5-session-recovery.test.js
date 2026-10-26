@@ -452,8 +452,9 @@ describe('未选角 pending run 的同步恢复契约', () => {
     const choice = vi.fn(() => pending);
     session.configureGameRuntime({ openClassChoice:choice });
     const opening = session.newRun('standard', { 随行卡:1 });
-    expect(opening).toBeInstanceOf(Promise); await expect(opening).resolves.toBe(false);
-    expect(choice).toHaveBeenCalledOnce(); expect(Base.data.stash[0].count).toBe(1);
+    expect(opening).toBeInstanceOf(Promise); const handle=await opening;expect(handle).toMatchObject({status:'departure-pending',committed:true});
+    expect(await handle.retry()).toBe(false);
+    expect(choice).toHaveBeenCalledTimes(2); expect(Base.data.stash[0].count).toBe(1);
     expect(session.game.runActive).toBe(true); expect(session.game.myClass).toBeNull();
     const saved = JSON.parse(localStorage.getItem(RunStorage.key(1)));
     expect(saved.myClass).toBeNull(); expect(saved.classChoiceEntry).toBeUndefined();

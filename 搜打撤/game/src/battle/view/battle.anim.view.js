@@ -10,6 +10,7 @@ import { showBattleCardResults } from './battle.card-results.js';
 import { showBattleEffectFeedback } from './battle.effect-feedback.js';
 import { showTurnFeedback } from './battle.turn-feedback.js';
 import { quietFeedback } from '../../ui/feedback-theme.js';
+import { emitBattleArt, emitBattleTrail } from './battle.fx-art.js';
   // ---------- 牌局动画（2026-09-09）：离场克隆飞行 / 新牌飞入 / 幸存者归位 / 手牌区显隐 ----------
   // 渲染是整块重建，跨渲染的位移全部走 WAAPI：离场牌在 overlay 常驻层放克隆体飞行，
   // 入场/归位用 composite:'add' 加法合成——不破坏槽位自身的扇形 transform。
@@ -143,12 +144,7 @@ import { quietFeedback } from '../../ui/feedback-theme.js';
       if (!isNaN(now) && now !== prev.energy && orb) {
         SDT.Sound.sfx(now > prev.energy ? 'energyUp' : 'energyDown');
         if (!quiet && orb.animate && !events.some(event => ['player-turn-start', 'extra-turn-start'].includes(event.kind))) {
-          if (energyEl) animateSafe(energyEl,
-            [{ transform:'scale(1)', filter:'brightness(1)' }, { transform:'scale(1.24)', filter:'brightness(1.6)' }, { transform:'scale(1)', filter:'brightness(1)' }],
-            { duration:380, easing:'cubic-bezier(.2,.8,.3,1)' });
-          orb.animate(
-            [{ filter: 'brightness(1)' }, { filter: 'brightness(1.9) saturate(1.3)' }, { filter: 'brightness(1)' }],
-            { duration: 380, easing: 'ease-out' });
+          emitBattleArt(stage, 'pulse', { anchor: orb, size: 120, duration: 380 });
         }
       }
     }
@@ -177,6 +173,9 @@ import { quietFeedback } from '../../ui/feedback-theme.js';
       const old = prev && (prev.cards[ev.uid] || Object.values(prev.cards).find(c => c.name === ev.name));
       if (!old) return;
       const sink = exitSinkFor(ev, old.rect, body, ovR);
+      const from = { x: old.rect.left + old.rect.width / 2, y: old.rect.top + old.rect.height / 2 };
+      if (!quiet && sink.burn) emitBattleArt(stage, 'death', { at: from, size: 130, duration: sink.dur });
+      else if (!quiet) emitBattleTrail(stage, from, { x: sink.x, y: sink.y }, { duration: sink.dur, size: 100 });
       const clone = document.createElement('div');
       clone.className = 'sts-cardfly';
       clone.style.cssText = `left:${old.rect.left}px;top:${old.rect.top}px;width:${old.rect.width}px;height:${old.rect.height}px`;

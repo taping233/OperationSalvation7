@@ -16,7 +16,7 @@ export function fireRestDecisionHTML({ heal, chance, restorable, fits, capacity,
     </div>
     <div class="fire-effect-preview"><p id="fire-effect-preview" role="status">${esc(healUsed ? restoreLabel : healLabel)}</p><small>首次成功操作有 ${chance}% 概率额外获得职业卡；每处营火判定一次。</small></div>
     <p class="fire-rest-inline-capacity">生命 ${hp} / ${maxHp} · 背包 ${esc(capacity)}</p>
-    ${uiDisclosure({ label:'休整说明', content:`<p>回血、复原各可使用一次，返回地图后保留未用机会。</p><p>首次成功操作有 ${chance}% 概率获得职业卡；每处火堆仅判定一次，额外职业卡放不下时不会获得。</p><p>复原从消耗区随机取至多 2 张可接收卡牌，不复原道具与装备。无法复原时不消耗机会。</p>` })}
+    ${uiDisclosure({ label:'休整说明', content:`<p>回血、复原各可使用一次；停留当前地点时可关闭面板或整理后继续。成功前往下一地点后，剩余机会作废，火堆不可重进。</p><p>首次成功操作有 ${chance}% 概率获得职业卡；每处火堆仅判定一次，额外职业卡放不下时不会获得。</p><p>复原从消耗区随机取至多 2 张可接收卡牌，不复原道具与装备。无法复原时不消耗机会。</p>` })}
   </section>`;
 }
 

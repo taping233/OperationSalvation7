@@ -1,0 +1,26 @@
+{
+  "status": "installed",
+  "mode": "built-in imagegen",
+  "request": "只去掉原图按弦手右下角多余指尖，保留原手型",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17864-93bd-7f42-8d2c-a13d75b46253\\exec-8c11500d-1dea-449c-b2e3-988befca5fa6.png",
+  "sourceSha256": "b28b317457fbb21ef61b58ebffd716fb0d6c441e1cfe9dd8ab0cb4cc7a0d5060",
+  "beforeSha256": "477f6088a9106517d8a90ea1f1599e59b2442e2c3d56f7f489b5ec74e0d548a8",
+  "beforeBackup": ".tmp/wu-bass-hand-1026/before.webp",
+  "asset": "game\\assets\\reconstruction\\wallpaper-wu-bass-1020.webp",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 476976,
+  "sha256": "95a572de56736ea2bc3b3bfabc9158e6d79f232b088fc817006983812e71875d",
+  "encoding": "RGB WebP quality95 method6",
+  "prompt": "prompt-final.txt",
+  "verification": {
+    "assetAudit": "selected asset passed, exit 0",
+    "visual": "generated image inspected: extra lower-right fingertip removed, original grip retained",
+    "browser": "homepage opened at 4/7; screenshot and full visual verification not completed; user requested immediate closeout",
+    "build": "not run",
+    "tests": "not run; image replacement only"
+  },
+  "commit": "not authorized"
+}

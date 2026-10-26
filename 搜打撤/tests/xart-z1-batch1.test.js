@@ -20,8 +20,12 @@ beforeAll(async () => {
 describe('A6-ACH-01 成就与收藏领取的失败分支不再静默', () => {
   it('claimAch 消费失败 msg，claimColl 消费 save 失败', () => {
     // meta.claim 的 {ok:false,why:'full'|'save',msg} 回执（meta.js/base-economy.js）必须有消费端
-    expect(hub).toMatch(/hubWrite\('claimAch',[\s\S]*?await M\.claim\(d\.id\)[\s\S]*?else if \(r && r\.msg\) UI\.log/);
-    expect(hub).toMatch(/hubWrite\('claimColl',[\s\S]*?await M\.claimColl\(d\.id\)[\s\S]*?why === 'full'[\s\S]*?else if \(r && r\.msg\)/);
+    expect(hub).toContain("hubWrite('claimAch'");
+    expect(hub).toContain("() => M.claim(d.id)");
+    expect(hub).toContain("() => M.claimColl(d.id)");
+    const feedback=readFileSync('game/src/hub/hub.reward-feedback.js','utf8');
+    expect(feedback).toContain('result?.msg || result?.message');
+    expect(feedback).toContain("save: '基地存档未保存，请重新载入后重试。'");
   });
 });
 

@@ -103,7 +103,7 @@ describe('仓库双排浏览与原特写事务边界', () => {
     expect(source.getAttribute('aria-pressed')).toBe('true');
     expect(JSON.stringify(base.data)).toBe(before);
     const from = source;
-    expect(openCard).toHaveBeenCalledWith(1, { from });
+    expect(openCard).toHaveBeenCalledWith(1, expect.objectContaining({ from }));
     expect(ui.showCardZoom).toHaveBeenLastCalledWith(rare, expect.objectContaining({ from, returnFocus: from }));
     expect(JSON.stringify(base.data)).toBe(before);
     expect(footer('stashSellOne')).toBeNull();

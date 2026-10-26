@@ -284,7 +284,7 @@ export function createCardRenameMigrations({ library, storage, random }) {
     // 现役卡定名：同名不同效果追加「-改」；点名角色按稳定 id 更新身份。
     // 按稳定 id 迁移，避免名称本身再次参与身份判断；每次启动幂等执行，防止后续同步覆盖回旧名。
     applyDuplicateRenames(cards) {
-      const names = { 'tt7-imitate': '不变应万变-改', 'cmtn1wnhhym': '江湖救急-改', [MIGAO_FEN_ID]: MIGAO_FEN_NAME };
+      const names = { 'tt7-imitate': '不变应万变-改', 'cmtn1wnhhym': '江湖救急-改', 'cmtn28jv33wx': '搜索军用保险柜', [MIGAO_FEN_ID]: MIGAO_FEN_NAME };
       let dirty = false;
       (Array.isArray(cards) ? cards : []).forEach(card => {
         const name = card && Object.hasOwn(names, card.id) ? names[card.id] : undefined;

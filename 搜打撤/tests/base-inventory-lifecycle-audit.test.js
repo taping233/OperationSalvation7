@@ -49,7 +49,7 @@ beforeEach(async () => {
   ports.read.mockImplementation(() => ({ ok: true, value: structuredClone(base.data), revision: 4 }));
   ports.convert.mockResolvedValue({ ok: false, message: '保持库存' });
   base = {
-    slot: 1, data: { stash: [], collection: {} }, PET_EGG_ID: 'egg',
+    slot: 1, data: { stash: [], collection: {} }, PET_EGG_ID: 'egg', HATCH_COST:50,
     materialInfo: item => item.type === '资源' ? { kind: 'wood' } : null,
     isCollected: item => !!base.data.collection[item.id],
     collectToggle: vi.fn(item => {
@@ -293,7 +293,7 @@ describe('仓库补给物品真实页脚入口', () => {
     });
     const stale = ui._acts.stashUseMat; (await clickAction(button('stashUseMat')));
     expect(base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('木材', false);
-    expect(base.data.wood).toBe(1); expect(document.getElementById('cardZoom')).toBeNull();
+    expect(base.data.wood).toBe(1); expect(document.getElementById('cardZoom')).not.toBeNull();
     pages.openStashCardView(0); const current = document.getElementById('cardZoom'); stale();
     expect(base.useStashMaterial).toHaveBeenCalledTimes(1); expect(document.getElementById('cardZoom')).toBe(current);
     (await clickAction(button('stashUseMat'))); expect(button('stashUseMat').textContent).toBe('确认？');
@@ -310,16 +310,16 @@ describe('仓库补给物品真实页脚入口', () => {
     open(egg); expect(button('stashHatch').textContent).toContain('50 储备币');
     (await clickAction(button('stashHatch'))); expect(base.hatchPet).not.toHaveBeenCalled();
     (await clickAction(button('stashHatch'))); expect(base.hatchPet).toHaveBeenCalledOnce();
-    expect(document.getElementById('cardZoom')).not.toBeNull(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('不足 50'), 'warn');
-    base.hatchPet.mockReturnValue({ ok: true, pet: { name: '旺财', desc: '伙伴' } });
-    (await clickAction(button('stashHatch'))); (await clickAction(button('stashHatch')));
+    expect(document.getElementById('cardZoom')).not.toBeNull(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('孵化需要 50'), 'warn');
+    base.hatchPet.mockImplementation(()=>{base.data.stash=[];return {ok:true,pet:{name:'旺财',desc:'伙伴'}};});
+    (await clickAction(button('stashHatch')));
     expect(base.hatchPet).toHaveBeenCalledTimes(2); expect(document.getElementById('cardZoom')).toBeNull();
   });
   it('拆包真实按钮以净容量判断，四格空位加消耗卡包后恰好入库', async () => {
     base.data.stash = [{ card: pack, count: 1 }]; base.stashRoom = () => 3; pages.openStashCardView(0);
     (await clickAction(button('stashOpenPack'))); (await clickAction(button('stashOpenPack')));
-    expect(base.openCardPack).not.toHaveBeenCalled(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('空位不足 4 格'), 'warn');
-    base.stashRoom = () => 4; (await clickAction(button('stashOpenPack')));
+    expect(base.openCardPack).not.toHaveBeenCalled(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('拆包需要 4 格空位'), 'warn');
+    base.stashRoom = () => 4; base.openCardPack.mockImplementation(()=>{base.data.stash=[];return {ok:true};}); (await clickAction(button('stashOpenPack')));
     expect(base.openCardPack).toHaveBeenCalledExactlyOnceWith('tt-econpack', expect.arrayContaining([expect.objectContaining({ count: 1 })]));
     expect(base.openCardPack.mock.calls[0][1]).toHaveLength(5); expect(document.getElementById('cardZoom')).toBeNull();
   });
@@ -378,7 +378,7 @@ it('仓库资源卡单击使用一张，刷新页面，旧页面不能再消费'
   feature.bindWarehouse({ui,base,sound:{tick:vi.fn()},refresh});
   const tile=document.querySelector('.stash-cell');tile.click(); await flush();
   expect(base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('木材',false);
-  expect(refresh).toHaveBeenCalledOnce();expect(document.getElementById('cardZoom')).toBeNull();
+  expect(refresh).not.toHaveBeenCalled();expect(document.getElementById('cardZoom')).toBeNull();
   base.slot=2;tile.click();expect(base.useStashMaterial).toHaveBeenCalledTimes(1);
 });
 

@@ -231,13 +231,13 @@ it.each(['ready', 'degraded'])('keeps the %s stage during payment and charges on
   const firstStage = stage(), token = firstStage._battleToken, firstScenery = scenery();
   const decodeCount = HTMLImageElement.prototype.decode.mock.calls.length;
   BattleSession.commands.beginCardInteraction('ready-payment-source', 0); frame(); await flush();
-  expect(stage()).toBe(firstStage); expect(stage().querySelector('[data-infusion-workspace]')).not.toBeNull();
-  expect(firstStage.hasAttribute('inert')).toBe(false);expect(firstStage.hasAttribute('data-infusion-mode')).toBe(true);
+  expect(stage()).toBe(firstStage); expect(stage().querySelector('[data-hand-selection]')).not.toBeNull();
+  expect(firstStage.hasAttribute('inert')).toBe(false);expect(firstStage.hasAttribute('data-hand-selecting')).toBe(true);
   expect(scenery()).toEqual(firstScenery);
   const fuel = BattleSession.getSnapshot().hand.filter(uid => uid !== 'ready-payment-source').slice(0, 2);
   const randomBefore = Random.snapshot();
   BattleSession.commands.pickHandSelect(fuel[0]); frame(); await flush();
-  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('data-infusion-mode')).toBe(true);
+  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('data-hand-selecting')).toBe(true);
   expect(BattleSession.getSnapshot()).toMatchObject({ energy: 2 });
   expect(battlePiles.consumed).toEqual([]); expect(BattleSession.getSnapshot().foes[0].hp).toBe(50);
   expect(Random.snapshot().streams.gameplay).toBe(randomBefore.streams.gameplay);
@@ -265,7 +265,7 @@ it('cleans up the retained stage on real departure without charging an incomplet
   BattleSession.commands.beginCardInteraction('cancel-payment-source', 0); frame(); await flush();
   const fuel = BattleSession.getSnapshot().hand.filter(uid => uid !== 'cancel-payment-source').slice(0, 2);
   BattleSession.commands.pickHandSelect(fuel[0]); frame(); await flush();
-  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('data-infusion-mode')).toBe(true);
+  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('data-hand-selecting')).toBe(true);
   expect(BattleSession.getSnapshot().energy).toBe(2); expect(battlePiles.consumed).toEqual([]);
   BattleSession.commands.flee(); UI.showOverlay('地图', '', 'map'); await flush();
   while (rafQueue.length) frame(); await flush();

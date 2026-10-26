@@ -112,7 +112,7 @@ describe('整备完整刷新与卡格复用',()=>{
 
   it('容量拒绝和筛选在复用路径保持当前值',async ()=>{
     base.bagCap=()=>2;open();add();add('b');
-    expect(departure.deployPick[key('b')]).toBeUndefined();expect(document.getElementById('depStatus').textContent).toContain('背包格数已满');
+    expect(departure.deployPick[key('b')]).toBeUndefined();expect(document.getElementById('depStatus').textContent).toContain('普通背包格已满');
     expect(document.getElementById('depCapacity').textContent).toContain('2/2');
     const filter=document.getElementById('depFilterType');filter.value='装备';filter.dispatchEvent(new Event('change'));
     expect([...document.querySelectorAll('#depPool .dep-card')].map(n=>n.hidden)).toEqual([true,true,false]);

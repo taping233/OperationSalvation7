@@ -5,16 +5,24 @@
 // T4 全界面开合成对动画（2026-10-04 D9-T4）：纯副作用 import——模块向 document.head
 // 注入 css/motion-transitions.css <link>（恒在 winter.css 等静态样式之后生效）
 import './motion-transitions.js';
+import { completeSurfaceMotion } from './motion-completion.js';
+import { motionReduced } from './motion-presets.js';
 import { captureOverlayReturnState, createOverlayReturn, restoreOverlayReturnState } from './overlay-return-state.js';
 import { clearExpeditionPanel, renderExpeditionPanel } from '../run/expedition.view.js';
 import { getOverlayRuntimeTracePanel, syncRuntimeTracePanel } from '../core/runtime-trace-panel.local.js';
-import { isAvailableControl as isAvailableOverlayFocusTarget } from './action-dispatch.js';
+import { invokeUiAction, isAvailableControl as isAvailableOverlayFocusTarget } from './action-dispatch.js';
 import { registerScreenOwner } from './screen-owner.js';
 import { initRewardInteraction } from './reward-interaction.js';
 import { syncCommittedRunTopBar } from './run-top-bar.js';
+import { createOperationNotice } from './operation-notice.js';
+
+const closeSessions = new WeakMap();
 
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
+const overlaySound = action => {
+  try { action(); } catch (error) { console.warn('[overlay] 声音反馈未完成', error); }
+};
 
 const OVERLAY_FOCUS_SELECTOR =
   'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
@@ -29,7 +37,7 @@ export const overlayMethods = {
   // ---------- ? 帮助弹层：页面说明文字统一收进二级界面 ----------
   // 页面渲染时 registerHelp(id, {title, html, before?, back})，并在页头放 helpBtn(id)；
   // 默认保留滚动与帮助入口焦点；back 负责原页面重建和领域有效性检查。
-  // 可选 before() 捕获额外页面状态，交给 back(state)；旧返回动作不能跨页面复用。
+  // before() 捕获额外状态交给 back(state, commit)；异步准备后用 commit(render) 重建目标页。
   registerHelp(id, def) { this.helpTopics[id] = def; },
   helpBtn(id) {
     if (id === 'bag') return '<button class="bag-guide-trigger bag-icbtn" data-act="openHelp" data-page="bag" aria-label="背包使用指南" title="背包使用指南"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h6l2 2 2-2h6v15h-6l-2 2-2-2H4Z"/><path d="M12 6v15M7 8h2M7 12h2M15 8h2M15 12h2"/></svg></button>';
@@ -42,14 +50,16 @@ export const overlayMethods = {
     const focusTarget = [.../** @type {NodeListOf<HTMLElement>} */ (this.el.ovBody.querySelectorAll('[data-act="openHelp"]'))].find(element => element.dataset.page === page);
     const presentation = captureOverlayReturnState(this.el.overlay, focusTarget);
     const returnState = typeof t.before === 'function' ? t.before() : undefined;
+    const returnNotice = createOperationNotice();
     this.showOverlay(`[[icon:question]] ${t.title}`, `
       <div class="help-body${page === 'bag' ? ' bag-guide' : ''}">${page === 'bag' ? '<header class="bag-guide-heading"><h2>收纳与押运</h2></header>' : ''}${t.html}</div>
-      <div class="ov-btns"><button class="ov-btn ok" data-act="helpBack" data-cancel="true">↩ 返回</button></div>`, true);
+      <div class="ov-btns"><button class="ov-btn ok" data-act="helpBack" data-cancel="true">↩ 返回</button></div>${returnNotice.html({ keepEmpty:true })}`, true);
     this.act('helpBack', createOverlayReturn({
       revision: this._overlayRevision, getRevision: () => this._overlayRevision,
       isOpen: () => !this.el.overlay.hidden && !this.el.overlay.classList.contains('closing'),
-      back: typeof t.back === 'function' ? () => t.back(returnState) : undefined,
-      restore: () => restoreOverlayReturnState(this.el.overlay, presentation),
+      back: typeof t.back === 'function' ? commit => t.back(returnState, commit) : undefined,
+      onFailure: () => returnNotice.set('返回未完成，请重试。', 'warn'),
+      restore: isCurrent => restoreOverlayReturnState(this.el.overlay, presentation, { isCurrent }),
     }));
   },
 
@@ -78,6 +88,8 @@ export const overlayMethods = {
     if (options.battleBody && !options.battleBody()) return;
     // 失败/清空类标题用红色语义
     if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
+    closeSessions.get(this)?.cancel();
+    closeSessions.delete(this);
     this._finishHide = null;
     const wasOpen = !this.el.overlay.hidden;
     const refreshHub = wasOpen && mode === 'page' &&
@@ -116,11 +128,11 @@ export const overlayMethods = {
     card.classList.toggle('bag-page', mode === 'bagpage');
     card.classList.toggle('page', mode === 'page');
     card.classList.toggle('scene', mode === 'scene');
-    // 宝箱浮层悬在原画面上：即使处于房间结算流也不吃全屏 room 样式
+    // 搜刮点浮层悬在原画面上：即使处于房间结算流也不吃全屏 room 样式
     card.classList.toggle('room', this._roomActive && mode !== 'page' && mode !== 'bag' && mode !== 'bagpage' && mode !== 'chest' && mode !== 'discover');
     // 战斗弹窗也按房间页处理：主循环据此冻结棋盘渲染/暂停壁纸解码，
     // 并关掉 #overlay 的大面积 backdrop blur（非房间路径开战时的卡顿源）
-    // 宝箱/发现浮层例外：不吃 room-view，保留暗纱+blur 衬托悬浮面板
+    // 搜刮点/发现浮层例外：不吃 room-view，保留暗纱+blur 衬托悬浮面板
     this.el.overlay.classList.toggle('room-view', mode === 'battle' || (this._roomActive && mode !== 'chest' && mode !== 'discover'));
     this.el.overlay.classList.toggle('bag-full', mode === 'bagpage');
     this.el.overlay.classList.toggle('opaque', mode === 'page' || mode === 'bagpage');
@@ -148,7 +160,7 @@ export const overlayMethods = {
     this.el.overlay.hidden = false;
     clearExpeditionPanel(this.el.overlay.ownerDocument);
     this._isolateOverlayBackground();
-    // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/宝箱）：被盖住的主页动画一律暂停
+    // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/搜刮点）：被盖住的主页动画一律暂停
     // （2026-09-07 老板：动画不出现在画面中就暂停，回到页面再恢复）。
     // 实测卡牌库打开时标题雪花+余烬继续跑，帧率被拖到 10fps。
     // 半透明弹窗（背包/事件/场景）底下画面可见，不置位。
@@ -179,7 +191,7 @@ export const overlayMethods = {
     const soundScene = /** @type {HTMLElement} */ (content.querySelector('.node-pg, .flow-transition'));
     // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
     if (!wasOpen || prevMode !== mode) {
-      if (!soundScene) SDT.Sound.sfx('open');
+      if (!soundScene) overlaySound(() => SDT.Sound.sfx('open'));
     }
     // 同模式换页也会替换聚焦节点；在新页内已有主动焦点时保留它，
     // 显式首焦点仍优先，关闭或较新页面则取消本次延后聚焦。
@@ -197,7 +209,7 @@ export const overlayMethods = {
     this._checkPageBg(content);
     if (mode !== 'battle' && !options.battleBody) this._releaseScreenOwner = registerScreenOwner({ root: this.el.overlay, priority: 10, allowNavigation: mode === 'page' && !!content.querySelector('#hubMain'), onBack: () => this.closeTopOverlayByEsc() });
     const soundTone = soundScene && [...soundScene.classList].find(name => name.startsWith('sc-'));
-    SDT.Sound.scene?.(soundScene?.dataset.musicScene || (soundTone ? soundTone.slice(3) : null), soundScene?.dataset.assetKey || '', { mode });
+    overlaySound(() => SDT.Sound.scene?.(soundScene?.dataset.musicScene || (soundTone ? soundTone.slice(3) : null), soundScene?.dataset.assetKey || '', { mode }));
   },
 
   // U1：整页背景就绪检测。_bgReady 缓存已确认加载过的 URL，重复打开零开销。
@@ -260,25 +272,17 @@ export const overlayMethods = {
     this._releaseScreenOwner = null;
     const immediate = !!(opts && opts.immediate);
     // 已关闭或正在淡出时，不重复广播关闭、撤销页面任务或推进返回令牌。
-    if (!this._hideTimer && this.el.overlay.hidden) return;
-    if (this._hideTimer) {
-      if (immediate) {
-        clearTimeout(this._hideTimer);
-        this._finishHide();
-      }
+    const previous = closeSessions.get(this);
+    if (previous) {
+      if (immediate) previous.finish();
       return;
     }
+    if (this.el.overlay.hidden) return;
+    const overlay = this.el.overlay;
     this._overlayRevision = (this._overlayRevision || 0) + 1;
-    this._cancelPageBg?.();
-    this.hideTooltip?.();
-    /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
-    document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
-    this._lastMode = null;
-    this._acts = {};
-    this._inputHandler = null;
-    this._hoverHandler = null;
-    SDT.Sound.sfx('close');
-    SDT.Sound.scene?.(null);
+    const closing = { cancel: () => {}, finish: () => {} };
+    closeSessions.set(this, closing);
+    const current = () => closeSessions.get(this) === closing && this.el.overlay === overlay;
     const card = this.el.ovBody.parentElement;
     // 不透明整屏页淡出：boss 留言 #52 要求所有界面退出都有过渡动画（200ms 淡出+下移）；
     // Returning to the map keeps the departing scene for a short fade over the
@@ -289,9 +293,12 @@ export const overlayMethods = {
     // immediate（exitToTitle 收口）同样走同步：跳转不允许留任何异步尾巴
     const btFastClose = !immediate && this.el.overlay.classList.contains('room-view') &&
       !!/** @type {HTMLElement} */ (card.querySelector?.('.bt-settings, .bt-gy-list, .glass-panel'));
-    const instant = immediate || document.body.classList.contains('reduce-motion') ||
+    const instant = immediate || motionReduced(overlay.ownerDocument) ||
       (this.el.overlay.classList.contains('room-view') && !btFastClose && !this.el.overlay.hasAttribute('data-map-return'));
     const finish = () => {
+      if (!current()) return;
+      closing.cancel();
+      closeSessions.delete(this);
       this._hideTimer = null;
       this._finishHide = null;
       document.body.classList.remove('page-covered');
@@ -333,21 +340,41 @@ export const overlayMethods = {
         returnFocus.focus({ preventScroll: true });
       }
     };
+    closing.finish = finish;
+    this._finishHide = finish;
+    this._cancelPageBg?.();
+    if (!current()) return;
+    this.hideTooltip?.();
+    if (!current()) return;
+    /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
+    if (!current()) return;
+    this._lastMode = null;
+    this._acts = {};
+    this._inputHandler = null;
+    this._hoverHandler = null;
+    document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
+    if (!current()) return;
+    overlaySound(() => SDT.Sound.sfx('close'));
+    if (!current()) return;
+    overlaySound(() => SDT.Sound.scene?.(null));
+    if (!current()) return;
     if (instant) { finish(); return; }
     this.el.overlay.classList.add('closing');
     // 等淡出动画播完再真正隐藏并还原布局类，避免淡出期间跳版；
     // 期间 hidden 仍为 false，输入拦截逻辑不受影响
-    this._finishHide = finish;
     // 公共编排提供实际退出时长；未安装公共编排时沿用原生窗口。
     // 原生普通窗口保留225ms裕量（对 boot.test.js:256 固定等 230ms
     // 留出容错，避免同到期零裕量竞态；opaque 卡片 0.24s 尾段 15ms 在容器已透明后，
     // 截断不可辨）
-    this._hideTimer = setTimeout(finish, this._motionExitDuration ?? (btFastClose ? 160 : 225));
+    closing.cancel = completeSurfaceMotion(overlay, finish, {
+      duration: this._motionExitDuration ?? (btFastClose ? 160 : 225), slack: 0,
+      event: overlay.dataset.uiClosing ? 'animationend' : null, name: 'uiVeilOut',
+    });
   },
 
   // Esc 关闭当前浮层（2026-09-09 老板：浮层要能按 Esc 关）。
   // 返回 true 表示已处理。战斗页与结算类页面（没有取消按钮可代点）一律不关，
-  // 避免把必须做出选择的流程（撤离失败 / 宝箱强选 / BOSS 编组）跳过。
+  // 避免把必须做出选择的流程（撤离失败 / 搜刮点强选 / BOSS 编组）跳过。
   closeTopOverlayByEsc() {
     // Inspection owns cancellation above its source page, including backdrop/X calls.
     const zoom = /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'));
@@ -365,10 +392,15 @@ export const overlayMethods = {
       if (!battleStillOn) { this.hideOverlay(); return true; }
       return false;
     }
-    // 优先模拟页面上的「取消语义」按钮：宝箱「跳过」、环间门「留下」、商店「离开」等。
+    // 优先模拟页面上的「取消语义」按钮：搜刮点「跳过」、环间门「留下」、商店「离开」等。
     // 图标关闭钮（背包 × / 卡池 ×）文本为空，按 data-act 与 aria-label/title 兜底匹配
     const cancelBtn = this._findCancelBtn();
-    if (cancelBtn) { cancelBtn.click(); return true; }
+    if (cancelBtn) {
+      // Escape invokes the explicit cancellation, rather than selecting it for confirmation.
+      if (cancelBtn.dataset.cancel === 'true' && cancelBtn.closest('.event-scene[data-event-choice-count]')) invokeUiAction(this, cancelBtn);
+      else cancelBtn.click();
+      return true;
+    }
     // A mandatory inner dialog never falls through to the underlying page/bag.
     if (this._overlayInteractionRoot() !== this.el.ovBody) return false;
     // 背包这类只有信息没有按钮的浮层：走 bag 侧注册的关闭回调（closeBackpack 唯一收口，

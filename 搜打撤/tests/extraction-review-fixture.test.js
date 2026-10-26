@@ -31,7 +31,7 @@ it('actual fixture bulk action deposits seven and finishes with the same receipt
   await h.finish();
   expect(h.state().finalReceipt.netTake).toMatchObject({cardsStashed:7,wood:2,rations:3,pocketKept:20});
   expect(h.state().finalReceipt.losses.lostCount).toBe(12);
-  expect(document.querySelector('.exr-section-title').textContent).toContain('已入库 7 张');
+  expect(document.querySelector('.exr-totals').textContent).toContain('卡牌入库7 张');
   expect(document.querySelector('[data-act=goBase]')).not.toBeNull();
 });
 
@@ -49,8 +49,8 @@ it('single stack stores two of five without swallowing the remaining three', asy
   document.querySelector('[data-act=exStash]').click();
   await vi.waitFor(() => expect(h.state().base.data.stats.stashTotal).toBe(2));
   expect(h.state().game.pendingExtraction.remainingCards[0].count).toBe(3);
-  expect(document.querySelector('.exr-brought').textContent).toBe('出发曾带入 ×2');
-  expect(document.querySelector('.exr-brought').title).toContain('不代表剩余卡的来源');
+  expect(document.querySelector('.exr-brought')).toBeNull();
+  expect(document.querySelector('.exr-item b').textContent).toBe('×3');
   await h.finish();
   expect(h.state().finalReceipt.netTake.cardsStashed).toBe(2);
   expect(h.state().finalReceipt.losses.lostCount).toBe(3);
@@ -68,7 +68,7 @@ it('empty rewards and the final-receipt control both complete using real command
     levelsGained: 2, effects: [{ label: '出征生命加成', before: 0, after: 2 }] });
   expect(h.state().base.data.characters.wu).toEqual({ lv: 3, xp: 68 });
   expect(document.querySelector('.exr-growth').closest('details')).toBeNull();
-  expect(document.querySelector('.exr-growth').textContent).toContain('撤离经验 +168');
+  expect(document.querySelector('.exr-totals').textContent).toContain('人物经验+168');
   expect(document.querySelector('.exr-growth-effects').textContent).toContain('出征生命加成+0 → +2');
 });
 

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { craftInventoryToken } from '../game/src/hub/bag-inventory-commands.js';
 

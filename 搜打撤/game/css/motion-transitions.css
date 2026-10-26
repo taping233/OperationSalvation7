@@ -91,7 +91,7 @@
 
 &.room-view.closing:has(.bt-settings),
 &.room-view.closing:has(.glass-panel) { animation: none; opacity: 1; }
-/* 发现类关闭：容器暗纱随卡片同步 .14s（chest 宝箱仍走标准 0.22s——按内容类区分，
+/* 发现类关闭：容器暗纱随卡片同步 .14s（chest 搜刮点仍走标准 0.22s——按内容类区分，
    不按 pick-veil 共享类一刀切） */
 &.closing:has(.card.discover) { animation-duration: .14s; }
 /* 药水说明浮出栏（battle.view.js 自绘提示，hidden 切换 display）：

@@ -22,6 +22,8 @@ for (;;) {
 
 满包丢弃动作 `sys.discardCard` 使用 `args:[卡名,实例UID]`，只丢弃观察时对应的普通背包实例；旧的单卡名调用继续兼容。动作回复含解释文字时提取首个完整可解析JSON对象，字符串内的花括号和转义引号不会截断对象。
 
+丢弃完成结果包含保存结果；异步保存沿公共命令完成通道等待，失败返回拒绝，卡牌由库存操作入口恢复后可重试。
+
 ### 战斗命令复现
 
 `SDT.Agent.replay.capture()` 与 `.play()` 用于受控战斗 fixture 的开发复现。两者都要求可信的本地 `prepare(fixture)` 适配器：它负责识别 fixture ID、恢复种子和规则输入，并通过正常入口重建空闲的第 1 回合。调用会重建测试场景，应在隔离测试对局使用；复现包只含数据，不执行其中的脚本，也不直接写回战斗私有状态。
@@ -84,7 +86,7 @@ if (captured.ok) {
 
 | 型 | 形状 | 语义 | 走的命令面 |
 |---|---|---|---|
-| `ui` | `{ "type":"ui", "name":"evtChoice", "params":{ "i":"0" } }` | 点当前弹层按钮（事件选项/商店/宝箱/撤离整理/选角…） | `UI._acts[name](dataset)`（与点击同源） |
+| `ui` | `{ "type":"ui", "name":"evtChoice", "params":{ "i":"0" } }` | 点当前弹层按钮（事件选项/商店/搜刮点/撤离整理/选角…） | `UI._acts[name](dataset)`（与点击同源） |
 | `move` | `{ "type":"move", "li":1, "idx":4 }` | 移动到相邻节点 | `moveTo(li, idx)`（引擎内校验合法性） |
 | `battle` | `{ "type":"battle", "name":"playCard", "args":["u1", 0] }` | 战斗命令 | `SDT.Battle.commands[name](...args)` |
 | `sys` | `{ "type":"sys", "name":"startGame" }` | 链路控制：`startGame`（标题起步）/ `reenter`（重开脚下格）/ `noop` / `discardCard [卡名]`（**背包满腾格直接丢弃**，经 game.discardCard，绕过拖拽 UI） | 会话入口 |

@@ -1,0 +1,290 @@
+{
+  "baseline": "17317a7b82b04cc6c030343159017dae39c669e9",
+  "owner": "Friday / 01a173a2-6034-7770-a661-3e2117094bcb",
+  "scope": "承接原聊天已停止的测试维护，保留上一轮19文件及迁移精简成果；当前任务只修改测试、Vite测试配置与工程说明",
+  "changedTestFiles": 15,
+  "changedFiles": [
+    "tests/base-departure.test.js",
+    "tests/battle-area-hover-hand-context.test.js",
+    "tests/battle-fixtures.test.js",
+    "tests/battle-resolution.test.js",
+    "tests/direct-cast.test.js",
+    "tests/hero-cards.test.js",
+    "tests/message-batch-0917.test.js",
+    "tests/message-batch-0920-late.test.js",
+    "tests/message-fixes.test.js",
+    "tests/quality-config.test.js",
+    "tests/r3-0-command-guards.test.js",
+    "tests/r3-a-preview.test.js",
+    "tests/r3-b-action-boundary.repro.test.js",
+    "tests/r7a-battle-orders.test.js",
+    "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js",
+    "tests/helpers/battle-fixtures.js",
+    "vite.config.js",
+    "docs/quality-gates.md"
+  ],
+  "changes": {
+    "duplicateWaitImplementationsMerged": 8,
+    "softWaitCompletionBranchesFixed": 14,
+    "obsoleteSilentFeatureReturnsRemoved": 2,
+    "duplicateGuardCasesRemoved": 2,
+    "supportedRuleRegressions": [
+      "graveyard",
+      "schedule",
+      "untilHandN",
+      "summon"
+    ],
+    "specificRejections": [
+      "schema-invalid",
+      "unsupported hits.perFoe",
+      "onDraw registration required",
+      "unsupported acquire dest/act"
+    ],
+    "realHoverProjectionMeasurement": true
+  },
+  "collection": {
+    "before": 950,
+    "after": 950,
+    "identical": true,
+    "duplicates": 0,
+    "projects": {
+      "node": 91,
+      "dom": 859
+    }
+  },
+  "validation": {
+    "baselineSubset": {
+      "files": 6,
+      "total": 162,
+      "passed": 162,
+      "failed": 0,
+      "skipped": 0
+    },
+    "expanded": {
+      "files": 42,
+      "total": 361,
+      "passed": 361,
+      "failed": 0,
+      "skipped": 0
+    },
+    "fullGate": {
+      "command": "node scripts/acceptance-gate.mjs --full --run",
+      "exit": 0,
+      "filesPassed": 949,
+      "filesSkipped": 1,
+      "totalFiles": 950,
+      "passed": 9470,
+      "skipped": 37,
+      "total": 9507,
+      "durationSeconds": 451.39,
+      "static": [
+        "narrative compilation",
+        "syntax",
+        "data validation",
+        "all type checks and coverage audit",
+        "ESLint",
+        "asset audit"
+      ],
+      "assetAudit": {
+        "errors": 0,
+        "unchangedHistoricalWarnings": 569
+      }
+    },
+    "finalWaitDelta": {
+      "files": 7,
+      "total": 71,
+      "passed": 71,
+      "failed": 0,
+      "skipped": 0
+    },
+    "skipReview": {
+      "files": 3,
+      "total": 24,
+      "passed": 22,
+      "failed": 0,
+      "skipped": 2
+    },
+    "postFullScope": {
+      "fullGateInputs": 1742,
+      "changesAfterFullGate": [
+        "tests/message-batch-0917.test.js",
+        "tests/message-batch-0920-late.test.js",
+        "tests/message-fixes.test.js",
+        "tests/r3-0-command-guards.test.js",
+        "tests/r3-a-preview.test.js",
+        "tests/r3-b-action-boundary.repro.test.js",
+        "tests/r7a-battle-orders.test.js"
+      ],
+      "validation": ".tmp/test-maintenance-1025/final-waits.json",
+      "scope": "全量门后只修改这7个测试文件；共用helper、配置与游戏源码未变，7文件71项单独补验"
+    },
+    "eslint": "passed (expanded scope + final seven files)",
+    "documentation": "passed",
+    "diffWhitespace": "passed"
+  },
+  "waitAudit": {
+    "remaining": [
+      {
+        "file": "tests/card-effect-semantics.test.js",
+        "name": "infuseAndPlay",
+        "line": 60
+      }
+    ],
+    "classification": "infuseAndPlay逐个处理给定燃料，结束前已await drain；不是到期返回成功的等待循环",
+    "confirmedSoftWaitBranchesUpdated": 14
+  },
+  "skippedCoverage": {
+    "fullRun": 37,
+    "confirmedAlwaysConditional": [
+      {
+        "file": "tests/e8-card-inventory.test.js",
+        "reason": "写证据需显式SDT_E8_WRITE_INVENTORY=after，默认跳过1项"
+      },
+      {
+        "file": "tests/resource-presentation-benchmark.test.js",
+        "reason": "性能实验需显式RESOURCE_PRESENTATION_BENCH，默认跳过1项"
+      }
+    ],
+    "otherConditionalBoundaries": [
+      "workflow-gate-receipt链接用例在Windows缺少符号链接权限时context.skip",
+      "perf-ledger-port-occupancy的IPv6不可用条件",
+      "video-review依赖ffmpeg/ffprobe可用性"
+    ],
+    "limit": "完整门dot日志未列逐项跳过清单；37项均单列未计通过。本轮3文件补验实际22通过/2跳过，不能据此认定完整门中其余35项逐项已核实。"
+  },
+  "fileFingerprints": [
+    {
+      "file": "tests/base-departure.test.js",
+      "sha256": "2e1b788e35a6c178d2e50d1a96d6c495347d996b430489e578d64a87c532fc05"
+    },
+    {
+      "file": "tests/battle-area-hover-hand-context.test.js",
+      "sha256": "3758c40dea62cd08f8e373304abc3f3f304fe03368acd08defca23cb7154b204"
+    },
+    {
+      "file": "tests/battle-fixtures.test.js",
+      "sha256": "d6d5eadde1aa6ffb3acbfb286c874f4c9a30629cecd53f982dd3b3984f298b40"
+    },
+    {
+      "file": "tests/battle-resolution.test.js",
+      "sha256": "643487d03202fdc7d75cc68fc713713ff1621647f4735ee5c05211942b96b3f2"
+    },
+    {
+      "file": "tests/direct-cast.test.js",
+      "sha256": "a03ec2c987df37240bc2419efa4664e1cabb0561dcfc2677d8f2e90dcfddd856"
+    },
+    {
+      "file": "tests/hero-cards.test.js",
+      "sha256": "29a463cfdbfe3d1764ce8af5645329c98b3587ce201ff3db6c7038fdfc300b6d"
+    },
+    {
+      "file": "tests/message-batch-0917.test.js",
+      "sha256": "c00b40124ff0c5340caced4bc056bdbb31fc712c311372285497d065178ecc1f"
+    },
+    {
+      "file": "tests/message-batch-0920-late.test.js",
+      "sha256": "86fffaeb1e0da48fa22886b2ad2b8b8916e39822cffc2148dd0562a4e7309f08"
+    },
+    {
+      "file": "tests/message-fixes.test.js",
+      "sha256": "5c46ff6f0c0849e73580b6d51e85188062677f90bf20a30726b7ff24e80851ac"
+    },
+    {
+      "file": "tests/quality-config.test.js",
+      "sha256": "e04f3e6dd042b83574c8f2219bf57f34c8a922074b841b5bf5fb0ae4b7cc0165"
+    },
+    {
+      "file": "tests/r3-0-command-guards.test.js",
+      "sha256": "bd1e37ee7d58b3ca085a1de524cc6c576057d2b3221ec8653662ef743b623609"
+    },
+    {
+      "file": "tests/r3-a-preview.test.js",
+      "sha256": "36532c4f5797cd6fd956546700fcc62154117fe587dad538ae2b617fcc7d49fb"
+    },
+    {
+      "file": "tests/r3-b-action-boundary.repro.test.js",
+      "sha256": "e16a75ef8067fafe0c6e47d0c77426c3cfe27df8977ed6bceebbcd797c1bfd6c"
+    },
+    {
+      "file": "tests/r7a-battle-orders.test.js",
+      "sha256": "ee1039f1858488874d081b45f353a8670ed825e5fbde4c85133f44d143b5f4bf"
+    },
+    {
+      "file": "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js",
+      "sha256": "69e362e56486b92264c94e12dd68196c9764e9a256910d436b0542b1b44f1b2a"
+    },
+    {
+      "file": "tests/helpers/battle-fixtures.js",
+      "sha256": "08fa95ef7e45091dea110daa21e328ba278fe541d3689665a06a21df909daf23"
+    },
+    {
+      "file": "vite.config.js",
+      "sha256": "943ba116b543bb2a14458e46e898c2f0f8930ebdc4970ed307f00055c016be34"
+    },
+    {
+      "file": "docs/quality-gates.md",
+      "sha256": "94afa74dd24c64159082b3d5d666faaed187a834c73c3f3ee7c77896a84c61e7"
+    }
+  ],
+  "rawEvidence": [
+    {
+      "path": ".tmp/test-maintenance-1025/before.json",
+      "bytes": 59280,
+      "sha256": "cdda1b19f9d3056cdefe95e1354fa9071bd9082a7dea7a2e4af6ab69a7211a13",
+      "obtain": "原路径保留；按本汇总的对应Vitest命令或collection命令可重新生成新结果"
+    },
+    {
+      "path": ".tmp/test-maintenance-1025/after-fixed.json",
+      "bytes": 42156,
+      "sha256": "4622fde64002e6b42a8d617f5eda37e4aeb39133556e5692776f814fb4e2782e",
+      "obtain": "原路径保留；按本汇总的对应Vitest命令或collection命令可重新生成新结果"
+    },
+    {
+      "path": ".tmp/test-maintenance-1025/expanded.json",
+      "bytes": 120734,
+      "sha256": "cd36bbf6bac4b3aa21065bb71ee6ff38b4cfb9f213da6c6c5967d101d4995ef2",
+      "obtain": "原路径保留；按本汇总的对应Vitest命令或collection命令可重新生成新结果"
+    },
+    {
+      "path": ".tmp/test-maintenance-1025/final-waits.json",
+      "bytes": 24110,
+      "sha256": "09c6a042ff6d815f3d8e7d47e3b7be29ac6dba408b384fc16717ab05d88e4757",
+      "obtain": "原路径保留；按本汇总的对应Vitest命令或collection命令可重新生成新结果"
+    },
+    {
+      "path": ".tmp/test-maintenance-1025/skip-review.json",
+      "bytes": 9132,
+      "sha256": "eccbfe868f35caa7471b49bfb2ac8e9fa6b720571479918e62ae7bf4c1cacc8b",
+      "obtain": "原路径保留；按本汇总的对应Vitest命令或collection命令可重新生成新结果"
+    },
+    {
+      "path": ".tmp/test-maintenance-1025/full-inputs.json",
+      "bytes": 246614,
+      "sha256": "b1bb2875eecb7e6a04d2a1416410a745250ca7809a9154c70c6affa5eb831327",
+      "obtain": "原路径保留；按本汇总的对应Vitest命令或collection命令可重新生成新结果"
+    },
+    {
+      "path": ".tmp/test-maintenance-1025/files-before.json",
+      "bytes": 85409,
+      "sha256": "331210ef70fe173aad7240abd0ff3295ade32032ecdaf1527735c2b24b0897d7",
+      "obtain": "原路径保留；按本汇总的对应Vitest命令或collection命令可重新生成新结果"
+    },
+    {
+      "path": ".tmp/test-maintenance-1025/files-after.json",
+      "bytes": 110200,
+      "sha256": "28ef20cfd330177f2380445c0b6f340970dfbf0f929ba4a49084c5eefd1ffab3",
+      "obtain": "原路径保留；按本汇总的对应Vitest命令或collection命令可重新生成新结果"
+    },
+    {
+      "path": "docs/evidence/2026-10-25-test-maintenance/full-gate.log",
+      "bytes": 25616,
+      "sha256": "9a70c148c5b4a4a219c57ff71dfc3255b5b1c69f11283e3be73e9477312ad01c",
+      "obtain": "本轮原始完整质量门输出，保留全部阶段与最终计数"
+    }
+  ],
+  "limits": [
+    "全量门通过后只改7个测试文件，71项定向回归覆盖该最终增量；没有重复运行整个套件",
+    "未修改游戏源码、正式卡库、CI、门禁预算；未删除任何文件",
+    "未暂存、提交、推送或build；无新增长驻服务"
+  ]
+}

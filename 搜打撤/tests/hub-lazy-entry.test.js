@@ -267,7 +267,8 @@ describe('基地真实按需入口', () => {
     for (const file of ['game/src/run/game.run.altar.js', 'game/src/run/game.session.death.js', 'game/src/ui/menu-leave.js']) {
       const source = readFileSync(file, 'utf8');
       expect(source).not.toMatch(/UI\.act\('(?:goBase|again)', \(\) => \{ UI\.hideOverlay\(\); (?:runtime\.)?openBaseHub/);
-      expect(source).toMatch(/UI\.act\('goBase', \(\) => (?:runtime\.)?openBaseHub\('deploy'\)\)/);
+      expect(source).toContain('bindSettlementActions({');
+      expect(source).toMatch(/goBase:\s*\(\) => (?:runtime\.)?openBaseHub\('deploy'\)/);
     }
   });
 

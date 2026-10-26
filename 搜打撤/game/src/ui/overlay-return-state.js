@@ -1,3 +1,5 @@
+import { isAvailableControl } from './action-dispatch.js';
+
 // Temporary overlay pages retain presentation state only, never game data or old DOM.
 function identity(element) {
   if (!element) return null;
@@ -34,10 +36,13 @@ export function captureOverlayReturnState(root, focusTarget, { readContext = () 
   };
 }
 
-export function restoreOverlayReturnState(root, snapshot, { applyContext = /** @type {(context: unknown) => void} */ (() => {}) } = {}) {
-  if (!root || !snapshot) return;
+export function restoreOverlayReturnState(root, snapshot, {
+  applyContext = /** @type {(context: unknown) => void} */ (() => {}), isCurrent = /** @type {() => boolean} */ (() => true),
+} = {}) {
+  if (!root || !snapshot || !isCurrent()) return;
   // Restore filters/category before resolving scroll, disclosures and focus identities.
   if (snapshot.context != null) applyContext(snapshot.context);
+  if (!isCurrent()) return;
   // Expand before restoring scroll so layout changes do not displace the saved position.
   for (const saved of snapshot.disclosures || []) {
     const element = resolve(root, saved.key);
@@ -48,21 +53,61 @@ export function restoreOverlayReturnState(root, snapshot, { applyContext = /** @
     if (element) { element.scrollTop = saved.top; element.scrollLeft = saved.left; }
   }
   const target = resolve(root, snapshot.focus);
-  if (target && !target.matches(':disabled') && !target.closest('[hidden], [aria-hidden="true"], [inert]')) {
+  if (target && isCurrent() && isAvailableControl(target)) {
     target.focus({ preventScroll: true });
   }
 }
 
-/** Return once, only from the temporary page that created this action.
- * The owner keeps its domain/session guard in back(); only one synchronous page
- * replacement permits presentation restoration. No callback means the legacy no-op.
+/** Return once after actually leaving the temporary page that created this action.
+ * The owner keeps its domain/session guard in back(). After asynchronous preparation,
+ * back(commit) uses commit(render) for the synchronous target-page replacement.
+ * Only that replacement (or a synchronous legacy back) can own restored presentation.
  */
-export function createOverlayReturn({ revision, getRevision, isOpen, back, restore }) {
+export function createOverlayReturn({ revision, getRevision, isOpen, back, restore, onFailure = () => {} }) {
   let consumed = false;
+  let pending = null;
+  const sourceCurrent = () => isOpen() && getRevision() === revision;
   return () => {
-    if (consumed || !isOpen() || getRevision() !== revision || typeof back !== 'function') return;
-    consumed = true;
-    back();
-    if (isOpen() && getRevision() === revision + 1) restore();
+    if (consumed || pending || !sourceCurrent() || typeof back !== 'function') return false;
+    const attempt = {};
+    pending = attempt;
+    let targetRevision = null;
+    const captureTarget = () => {
+      if (isOpen() && getRevision() === revision + 1) targetRevision = getRevision();
+    };
+    const commit = render => {
+      if (pending !== attempt || !sourceCurrent() || typeof render !== 'function') return false;
+      const value = render();
+      captureTarget();
+      return value;
+    };
+    const finish = value => {
+      pending = null;
+      // A declined return or an unchanged temporary page can be retried.
+      if (value === false || sourceCurrent()) {
+        if (sourceCurrent()) onFailure();
+        return false;
+      }
+      consumed = true;
+      const targetCurrent = () => targetRevision !== null && isOpen() && getRevision() === targetRevision;
+      if (targetCurrent()) restore(targetCurrent);
+      return value;
+    };
+    const fail = () => {
+      pending = null;
+      if (sourceCurrent()) onFailure();
+      return false;
+    };
+    try {
+      const value = back(commit);
+      // Capture only the page produced in this call stack. An unrelated page that
+      // appears while a Promise is pending must never inherit the old presentation.
+      captureTarget();
+      return value && typeof value.then === 'function'
+        ? Promise.resolve(value).then(finish, fail)
+        : finish(value);
+    } catch {
+      return fail();
+    }
   };
 }

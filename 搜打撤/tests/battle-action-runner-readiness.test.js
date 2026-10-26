@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it, vi } from 'vitest';
 import { createBattleActionRunner } from '../game/src/battle/runtime/battle.action-runner.js';
 import { createBattleExecutionSession } from '../game/src/battle/runtime/battle.execution-session.js';

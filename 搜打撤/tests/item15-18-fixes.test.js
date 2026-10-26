@@ -45,7 +45,7 @@ describe('Item 17：分层配额下限与物资格', () => {
         const cnt = t => layer.nodes.filter(n => n.type === t).length;
         const f = FLOORS[li];
         expect(cnt('battle'), `seed=${seed} L${li + 1} 敌人格 ≥ ${f.battle}`).toBeGreaterThanOrEqual(f.battle);
-        expect(cnt('chest'), `seed=${seed} L${li + 1} 宝箱格 ≥ ${f.chest}`).toBeGreaterThanOrEqual(f.chest);
+        expect(cnt('chest'), `seed=${seed} L${li + 1} 搜刮点格 ≥ ${f.chest}`).toBeGreaterThanOrEqual(f.chest);
         expect(cnt('event'), `seed=${seed} L${li + 1} 事件格 ≥ ${f.event}`).toBeGreaterThanOrEqual(f.event);
         expect(cnt('resource'), `seed=${seed} L${li + 1} 物资格 ≥ ${f.resource}`).toBeGreaterThanOrEqual(f.resource);
         expect(cnt('fire')).toBe(1);

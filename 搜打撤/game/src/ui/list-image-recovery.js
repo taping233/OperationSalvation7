@@ -6,19 +6,20 @@ export function createListImageRecovery({ root, selector = '.hsc-art img[data-as
   host = root, current = () => true, source = image => image.getAttribute('src') || '',
   listen = true, onRecovered = /** @type {(image: HTMLImageElement, src: string) => void} */ (() => {}) }) {
   const records = new Map(), queue = [];
-  let disposed = false, active = 0, notice = null, pumping = false, retryFocus = false;
+  const doc = root.ownerDocument;
+  let disposed = false, active = 0, notice = null, pumping = false, pumpQueued = false, retryFocus = false;
   const live = () => !disposed && root.isConnected && current();
   const present = (image, src) => live() && root.contains(image) && source(image) === src;
   const removeNotice = focusImage => {
     if (!notice) return;
-    const focused = notice.panel.contains(document.activeElement)
-      || (retryFocus && document.activeElement === document.body);
+    const focused = notice.panel.contains(doc.activeElement)
+      || (retryFocus && doc.activeElement === doc.body);
     notice.panel.remove(); notice = null;
     retryFocus = false;
     if (focused && live()) {
-      const target = focusImage?.closest('button,[tabindex="0"]')
-        || root.querySelector('button:not(:disabled),[tabindex="0"]');
-      if (target && !target.closest('[hidden],[inert],[aria-hidden="true"]')) target.focus({ preventScroll:true });
+      const target = [focusImage?.closest('button,[tabindex="0"]'), ...root.querySelectorAll('button:not(:disabled),[tabindex="0"]')]
+        .find(node => node && !node.matches(':disabled') && !node.closest('[hidden],[inert],[aria-hidden="true"]'));
+      target?.focus({ preventScroll:true });
     }
   };
   const sync = focusImage => {
@@ -33,9 +34,17 @@ export function createListImageRecovery({ root, selector = '.hsc-art img[data-as
     if (notice.button.disabled !== waiting) notice.button.disabled = waiting;
     if (notice.button.hasAttribute('aria-busy') !== waiting) notice.button.toggleAttribute('aria-busy', waiting);
   };
+  const schedulePump = () => {
+    if (disposed || pumpQueued) return;
+    pumpQueued = true;
+    queueMicrotask(() => { pumpQueued = false; pump(); });
+  };
   const release = record => {
     if (!record.pending) return;
     record.pending = false; active = Math.max(0, active - 1);
+    // Removal clears record identity before its recovery emits cancelled.
+    // The released slot therefore owns scheduling the next queued image.
+    schedulePump();
   };
   const remove = (image, record) => {
     if (records.get(image) !== record) return;
@@ -56,7 +65,7 @@ export function createListImageRecovery({ root, selector = '.hsc-art img[data-as
   }
   function retry() {
     if (!live()) return;
-    retryFocus = !!notice?.panel.contains(document.activeElement);
+    retryFocus = !!notice?.panel.contains(doc.activeElement);
     for (const [image, record] of records) {
       if (!present(image, record.src)) { remove(image, record); continue; }
       if (!record.pending && !record.queued) { record.queued = true; queue.push([image, record]); }
@@ -78,7 +87,7 @@ export function createListImageRecovery({ root, selector = '.hsc-art img[data-as
         if (records.get(image) !== record || status === 'loading') return;
         release(record);
         if (status === 'ready' || status === 'cancelled') remove(image, record);
-        queueMicrotask(pump); sync(status === 'ready' ? image : null);
+        schedulePump(); sync(status === 'ready' ? image : null);
       },
     });
     sync();
@@ -87,7 +96,7 @@ export function createListImageRecovery({ root, selector = '.hsc-art img[data-as
   const loaded = event => {
     const image = event.target, record = records.get(image);
     if (record && present(image, record.src) && image.naturalWidth > 0) {
-      image.dataset.visualState = 'ready'; remove(image, record); sync(image); queueMicrotask(pump);
+      image.dataset.visualState = 'ready'; remove(image, record); sync(image); schedulePump();
     }
   };
   const refresh = () => {

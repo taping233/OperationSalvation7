@@ -47,7 +47,6 @@ describe('Base 出征准备事务', () => {
     const result = h.commands.prepareDeparture({ 同名卡: 2.9, 库存卡: 99.7 });
 
     expect(result.ok).toBe(true);
-    if (!result.ok) return;
     expect(result.cards).toEqual([
       { card: first.card, count: 1 },
       { card: capped.card, count: 2 },

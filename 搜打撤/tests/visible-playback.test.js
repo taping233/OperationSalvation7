@@ -1,9 +1,10 @@
+// @vitest-environment node
 import { readFileSync } from 'node:fs';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { VISIBLE_PLAYBACK_VERSION, planVisibleStep, runVisibleSteps } from '../scripts/visible-playback.mjs';
 
 const button = (name, suffix = '') => `- button "${name}"${suffix}`;
-const offer = ['- heading "获得宝箱" [level=3]', '- text: 领取宝箱后揭晓卡牌', '- text: 待领取宝箱 · 1 个', button('领取宝箱')].join('\n');
+const offer = ['- heading "获得搜刮点" [level=3]', '- text: 领取搜刮点后揭晓卡牌', '- text: 待领取搜刮点 · 1 个', button('领取搜刮点')].join('\n');
 const reward = (buttons = [button('收下')]) => ['- heading "搜刮完成" [level=3]', '- complementary "奖励操作":', ...buttons].join('\n');
 const done = reward([button('继续探索'), '- status: 1 张已入背包']);
 const fixture = name => readFileSync(`docs/evidence/2026-10-16-WF-visible-playback/fixtures/${name}.txt`, 'utf8');
@@ -34,11 +35,11 @@ function fakeTab(snapshots, { clickError = null, waitError = null, clickAdvance 
 }
 
 describe('visible playback pure planner', () => {
-  it.each([[offer, '领取宝箱'], [reward(), '收下'], [done, '继续探索'], [preview, '进入该地点'],
+  it.each([[offer, '领取搜刮点'], [reward(), '收下'], [done, '继续探索'], [preview, '进入该地点'],
     [reward([button('返回地图'), '- paragraph: 这里没有奖励']), '返回地图']])('allows a named transition only in a matching known state', (snapshot, label) => {
     expect(planVisibleStep(snapshot)).toMatchObject({ kind: 'action', action: { label, exact: true } });
   });
-  it.each(['领取宝箱', '继续探索', '返回地图', '进入该地点', '收下'])('rejects a label alone: %s', name => {
+  it.each(['领取搜刮点', '继续探索', '返回地图', '进入该地点', '收下'])('rejects a label alone: %s', name => {
     expect(planVisibleStep(button(name)).kind).toBe('stop');
   });
   it('supports the exact known rest-complete button description without widening labels', () => {
@@ -61,7 +62,7 @@ describe('visible playback pure planner', () => {
     expect(planVisibleStep(`${reward()}\n- paragraph: 奖励可分别领取`).reason).toBe('multiple-or-blocked-rewards');
   });
   it('allows only the exact future chest-choice disclosure, not an active or conflicting choice', () => {
-    const future = offer.replace('领取宝箱后揭晓卡牌', '领取宝箱后，从 3 张卡牌中选择 1 张');
+    const future = offer.replace('领取搜刮点后揭晓卡牌', '领取搜刮点后，从 3 张卡牌中选择 1 张');
     expect(planVisibleStep(future).kind).toBe('action');
     expect(planVisibleStep(`${future}\n- heading "选择收获"`).reason).toBe('card-choice');
     expect(planVisibleStep(`${offer}\n${button('收下')}`).reason).toBe('conflicting-states');
@@ -118,8 +119,8 @@ describe('visible playback pure planner', () => {
     expect(planVisibleStep(`${offer}\n${button(name)}`).reason).toBe('protected-action');
   });
   it('rejects disabled and duplicate transition buttons', () => {
-    expect(planVisibleStep(offer.replace(button('领取宝箱'), button('领取宝箱', ' [disabled]'))).reason).toBe('disabled-button');
-    expect(planVisibleStep(`${offer}\n${button('领取宝箱')}`).reason).toBe('ambiguous-button');
+    expect(planVisibleStep(offer.replace(button('领取搜刮点'), button('领取搜刮点', ' [disabled]'))).reason).toBe('disabled-button');
+    expect(planVisibleStep(`${offer}\n${button('领取搜刮点')}`).reason).toBe('ambiguous-button');
   });
   it('stops unknown event decisions and visible failures', () => {
     expect(planVisibleStep(`${done}\n- region "事件选项"`).reason).toBe('event-or-irreversible-choice');
@@ -136,8 +137,8 @@ describe('visible playback pure planner', () => {
     expect(planVisibleStep(offer, { allowedActions: ['购买'] }).reason).toBe('invalid-options');
   });
   it('identifies known opening animation without a clickable action', () => {
-    const snapshot = '- heading "搜寻物资 · 小宝箱"\n- paragraph: 正在解锁封存物资。';
-    expect(planVisibleStep(snapshot)).toMatchObject({ kind: 'wait', waitFor: { role: 'heading', name: '搜寻物资 · 小宝箱', state: 'hidden' } });
+    const snapshot = '- heading "搜寻物资 · 小型物资箱"\n- paragraph: 正在解锁封存物资。';
+    expect(planVisibleStep(snapshot)).toMatchObject({ kind: 'wait', waitFor: { role: 'heading', name: '搜寻物资 · 小型物资箱', state: 'hidden' } });
   });
   it('waits for travel only with explicit progress, one disabled entry and one preview close', () => {
     expect(planVisibleStep(travel)).toMatchObject({ kind: 'wait', reason: 'known-travel-transition', state: 'traveling',
@@ -163,18 +164,18 @@ describe('visible playback bounded runner (fake tab, no browser)', () => {
     const { tab, calls } = fakeTab([offer, reward(), done, '- heading "探索地图"']);
     const result = await runVisibleSteps(tab, { maxSteps: 3 });
     expect(result.reason).toBe('unknown-state');
-    expect(result.steps.map(step => step.action.label)).toEqual(['领取宝箱', '收下', '继续探索']);
+    expect(result.steps.map(step => step.action.label)).toEqual(['领取搜刮点', '收下', '继续探索']);
     expect(result.steps.every(step => step.before && step.after && step.result === 'clicked')).toBe(true);
     expect(calls.filter(call => call[0] === 'snapshot')).toHaveLength(4);
     expect(calls.filter(call => call[0] === 'locator').every(call => call[2].exact === true)).toBe(true);
   });
   it('waits for observed animation state, without fixed sleeps', async () => {
-    const animation = '- heading "搜寻物资 · 小宝箱"\n- paragraph: 正在解锁封存物资。';
+    const animation = '- heading "搜寻物资 · 小型物资箱"\n- paragraph: 正在解锁封存物资。';
     const { tab, calls } = fakeTab([offer, animation, reward(), '- heading "未知决策"']);
     const result = await runVisibleSteps(tab);
     expect(result.waits).toHaveLength(1);
     expect(result.waits[0].result).toBe('settled');
-    expect(calls.find(call => call[0] === 'waitFor')).toEqual(['waitFor', '搜寻物资 · 小宝箱', { state: 'hidden', timeoutMs: 5000 }]);
+    expect(calls.find(call => call[0] === 'waitFor')).toEqual(['waitFor', '搜寻物资 · 小型物资箱', { state: 'hidden', timeoutMs: 5000 }]);
   });
   it('returns control at the first multi-reward page', async () => {
     const { tab, calls } = fakeTab([offer, reward([button('收下'), button('收下')]), done]);
@@ -183,7 +184,7 @@ describe('visible playback bounded runner (fake tab, no browser)', () => {
     expect(calls.filter(call => call[0] === 'click')).toHaveLength(1);
   });
   it('never clicks disabled or destructive pages', async () => {
-    for (const snapshot of [offer.replace(button('领取宝箱'), button('领取宝箱', ' [disabled]')), `${offer}\n${button('删除存档')}`]) {
+    for (const snapshot of [offer.replace(button('领取搜刮点'), button('领取搜刮点', ' [disabled]')), `${offer}\n${button('删除存档')}`]) {
       const { tab, calls } = fakeTab([snapshot]);
       expect((await runVisibleSteps(tab)).steps).toHaveLength(0);
       expect(calls.some(call => call[0] === 'click')).toBe(false);
@@ -299,8 +300,8 @@ describe('visible playback bounded runner (fake tab, no browser)', () => {
     expect(calls.filter(call => call[0] === 'click')).toHaveLength(1);
   });
   it('resumes a disappeared button only through a newly observed known wait, without retrying', async () => {
-    const { tab, calls } = fakeTab([offer, animation('小宝箱'), '- heading "选择收获"'], { count: 0 });
-    const snapshots = [offer, animation('小宝箱'), '- heading "选择收获"'];
+    const { tab, calls } = fakeTab([offer, animation('小型物资箱'), '- heading "选择收获"'], { count: 0 });
+    const snapshots = [offer, animation('小型物资箱'), '- heading "选择收获"'];
     tab.playwright.domSnapshot = async () => snapshots.shift();
     const result = await runVisibleSteps(tab);
     expect(result.reason).toBe('card-choice');
@@ -311,7 +312,7 @@ describe('visible playback bounded runner (fake tab, no browser)', () => {
   it('shares a ten-second wall-clock budget across all conditional waits', async () => {
     let now = 100;
     vi.spyOn(Date, 'now').mockImplementation(() => now);
-    const { tab, calls } = fakeTab([travel, animation('小宝箱'), animation('密封物资箱'), reward()], { onWait() { now += now === 100 ? 6000 : 4000; } });
+    const { tab, calls } = fakeTab([travel, animation('小型物资箱'), animation('密封物资箱'), reward()], { onWait() { now += now === 100 ? 6000 : 4000; } });
     const result = await runVisibleSteps(tab, { timeoutMs: 7000 });
     expect(result.reason).toBe('wait-budget-exhausted');
     expect(result.waits.map(wait => wait.timeoutMs)).toEqual([7000, 4000]);
@@ -326,7 +327,7 @@ describe('visible playback bounded runner (fake tab, no browser)', () => {
   it('charges post-click closing waits to the same total budget as animation waits', async () => {
     let now = 100;
     vi.spyOn(Date, 'now').mockImplementation(() => now);
-    const { tab, calls } = fakeTab([done, `${done}\n- text: 工具栏已更新`, animation('小宝箱'), animation('密封物资箱')],
+    const { tab, calls } = fakeTab([done, `${done}\n- text: 工具栏已更新`, animation('小型物资箱'), animation('密封物资箱')],
       { onWait() { now += now === 100 ? 6000 : 4000; } });
     const result = await runVisibleSteps(tab);
     expect(result.reason).toBe('wait-budget-exhausted');
@@ -342,7 +343,7 @@ describe('visible playback bounded runner (fake tab, no browser)', () => {
     expect(calls.some(call => call[0] === 'click')).toBe(false);
   });
   it('returns control on an animation wait error', async () => {
-    const animation = '- heading "搜寻物资 · 小宝箱"\n- paragraph: 正在解锁封存物资。';
+    const animation = '- heading "搜寻物资 · 小型物资箱"\n- paragraph: 正在解锁封存物资。';
     const { tab } = fakeTab([offer, animation], { waitError: new Error('timeout') });
     const result = await runVisibleSteps(tab);
     expect(result.reason).toBe('wait-error');

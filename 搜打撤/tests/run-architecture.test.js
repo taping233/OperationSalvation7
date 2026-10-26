@@ -1,3 +1,4 @@
+// @vitest-environment node
 /* 局内流程模块的架构守护（2026-09-11 架构批次 4）
  *
  * game.run.js 曾是 1400 行 God module，现拆为「装配壳 + 三层」：

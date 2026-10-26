@@ -34,10 +34,10 @@ describe('结算成长真实快照', () => {
     document.body.innerHTML = extractionDoneHTML({ receipt });
     const summary = document.querySelector('.exr-growth');
     expect(summary.closest('details')).toBeNull();
-    expect(summary.textContent).toContain('本次结算成长');
-    expect(summary.textContent).toContain('撤离经验 +20');
-    expect(summary.textContent).toContain('Lv.2 → Lv.2');
-    expect(summary.textContent).toContain('距 Lv.3 还差 60 XP');
+    expect(summary.getAttribute('aria-label')).toBe('人物成长');
+    expect(document.querySelector('.exr-totals').textContent).toContain('人物经验+20');
+    expect(summary.textContent).toContain('Lv.2');
+    expect(summary.textContent).toContain('30 / 90 XP');
     expect(summary.querySelector('.exr-growth-effects')).toBeNull();
     expect(summary.querySelector('[role=progressbar]').getAttribute('aria-valuenow')).toBe('30');
   });
@@ -54,7 +54,7 @@ describe('结算成长真实快照', () => {
       effects: [{ label: '出征生命加成', before: 0, after: 1 }] });
     document.body.innerHTML = extractionDoneHTML({ receipt });
     expect(document.querySelector('.exr-growth-effects').textContent).toContain('出征生命加成+0 → +1');
-    expect(document.querySelector('.exr-growth').textContent).toContain('下次出征生效');
+    expect(document.querySelector('.exr-growth-heading').textContent).toContain('Lv.1 → Lv.2');
     expect(document.querySelector('.exr-growth').textContent).not.toContain('Lv.8');
   });
 
@@ -70,14 +70,14 @@ describe('结算成长真实快照', () => {
     expect(maxed.growth).toMatchObject({ awardedXp: 20, actualXp: 0, overflowXp: 20,
       before: { lv: 10, xp: 77 }, after: { lv: 10, xp: 77 }, maxed: true, xpToNext: 0 });
     document.body.innerHTML = extractionDoneHTML({ receipt: maxed });
-    expect(document.querySelector('.exr-growth').textContent).toContain('撤离经验 +0');
-    expect(document.querySelector('.exr-growth').textContent).toContain('本次撤离未增加经验');
-    expect(document.querySelector('.exr-growth-overflow').textContent).toContain('奖励 20 XP，实际用于成长 0 XP；溢出 20 XP');
-    expect(document.querySelector('.exr-run-facts').textContent).toContain('撤离经验 +0');
+    expect(document.querySelector('.exr-totals').textContent).toContain('人物经验+0');
+    expect(document.querySelector('.exr-growth-note').textContent).toBe('已满级');
+    expect(document.querySelector('.exr-growth-progress').getAttribute('aria-valuenow')).toBe('100');
+    expect(document.querySelector('.exr-growth-heading').textContent).toContain('Lv.10 · MAX');
     const reachedMax = await settle(harness({ lv: 9, xp: 360 }));
     expect(reachedMax.growth).toMatchObject({ actualXp: 10, overflowXp: 10, after: { lv: 10, xp: 10 }, maxed: true });
     document.body.innerHTML = extractionDoneHTML({ receipt: reachedMax });
-    expect(document.querySelector('.exr-growth').textContent).toContain('熟练度已满');
+    expect(document.querySelector('.exr-growth').textContent).toContain('已满级');
     expect(document.querySelector('.exr-growth').textContent).not.toContain('未增加经验');
   });
 
@@ -88,8 +88,8 @@ describe('结算成长真实快照', () => {
     expect(receipt.growth).toMatchObject({ awardedXp: 20, actualXp: 3, overflowXp: 17,
       before: { lv: 9, xp: 367 }, after: { lv: 10, xp: 17 }, levelsGained: 1, maxed: true });
     document.body.innerHTML = extractionDoneHTML({ receipt });
-    expect(document.querySelector('.exr-growth-heading').textContent).toContain('撤离经验 +3');
-    expect(document.querySelector('.exr-growth-overflow').textContent).toContain('奖励 20 XP，实际用于成长 3 XP；溢出 17 XP');
+    expect(document.querySelector('.exr-totals').textContent).toContain('人物经验+3');
+    expect(document.querySelector('.exr-growth-note').textContent).toBe('已满级');
   });
 
   it('旧整理快照和旧收据不推算未保存的等级变化', async () => {
@@ -100,9 +100,8 @@ describe('结算成长真实快照', () => {
     const receipt = (await h.commands.finish()).receipt;
     expect(receipt).not.toHaveProperty('growth');
     document.body.innerHTML = extractionDoneHTML({ receipt });
-    expect(document.querySelector('.exr-growth').textContent).toContain('首探经验 +20');
-    expect(document.querySelector('.exr-growth').textContent).toContain('旧结算记录未保存等级变化明细');
-    expect(document.querySelector('.exr-growth').textContent).not.toContain('Lv.9');
+    expect(document.querySelector('.exr-totals').textContent).toContain('人物经验+20');
+    expect(document.querySelector('.exr-growth')).toBeNull();
   });
 
   it('回执冻结原成长快照且展示文本转义', async () => {

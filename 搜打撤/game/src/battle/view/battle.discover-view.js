@@ -3,9 +3,10 @@ import { esc, escAttr } from '../../core/shared.js';
 import '../../../css/battle-discover.css';
 
 // Presentation only. Candidate identity, order and selection effects stay in the battle flow.
-export function battleDiscoverBodyHTML({ candidates, cardHTML, action, remaining, source = '', note = '', modifiers = [], pageToken = '' }) {
+export function battleDiscoverBodyHTML({ candidates, cardHTML, action, remaining, source = '', note = '', modifiers = [], pageToken = '', revealMs = 350 }) {
+  const elapsed = 350 - Math.max(0, Math.min(350, Number(revealMs) || 0));
   const options = candidates.map(({ card, sourceNote = '', equipmentNote = '', infusionNote = '' }, index) => `
-    <div class="battle-discover-slot"><button type="button" class="bt-card battle-discover-card" data-act="btDiscover" data-i="${index}" data-discover-page="${escAttr(pageToken)}" data-cancel="false"
+    <div class="battle-discover-slot" style="--discover-reveal-delay:${Math.min(index, 4) * 15 - elapsed}ms"><button type="button" class="bt-card battle-discover-card" data-act="btDiscover" data-i="${index}" data-discover-page="${escAttr(pageToken)}" data-cancel="false"
       aria-label="${escAttr([card.name, action, sourceNote, infusionNote, equipmentNote].filter(Boolean).join('，'))}">
       ${cardHTML(card, 'lg')}
     </button>${infusionNote ? `<span class="battle-discover-critical">${esc(infusionNote.startsWith('未注能') ? '未注能' : infusionNote)}</span>` : ''}</div>`).join('');

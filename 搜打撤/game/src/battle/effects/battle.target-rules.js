@@ -112,7 +112,6 @@ function unplayableReasonFor(card, mode, ctx) {
     : /无法打出/.test(String(card.desc || ''))) {
     return '封印之牌：抽到时无效果，集齐 5 张封印之牌后破除封印';
   }
-  if (mode === 'normal' && card.type === '能力卡') return '能力卡只能在对 BOSS 战时使用（普通战无法使用能力卡）';
   if (mode === 'boss' && card.type === '道具') return '道具卡只能在普通战斗中使用（BOSS 战牌库不含道具）';
   // Both battle modes have a real draw pile; deckOnly is satisfied in either.
   // 手牌代价不足（快意恩仇「消耗 2 张初始攻击」等）：整张卡不可打出，避免白消耗一张牌

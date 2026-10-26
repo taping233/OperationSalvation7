@@ -1,6 +1,7 @@
 import { captureBattleContext } from '../battle/battle-loader.js';
 import { runTerminalSettlement } from './terminal-settlement.js';
 import { beginnerGuideHTML } from './beginner-guide.js';
+import { bindSettlementActions } from './settlement-report.js';
 
 /** Leaving a run owns save retry and terminal settlement, with source-view guards. */
 export function createMenuLeaveFlow({ UI, game, runtime, esc, saveSession, getActiveSlot, terminalCommands, showTitle, openSettings, document, readCards, readSound, readAgent, readBattle = () => null }) {
@@ -119,15 +120,22 @@ export function createMenuLeaveFlow({ UI, game, runtime, esc, saveSession, getAc
     game.terminalPending = token;
     game.state = 'terminalPending';
     const current = () => game.terminalPending === token && getActiveSlot() === token.slotId;
+    let finalized = false, completedContext = null;
+    const finishCurrent = () => finalized && !game.terminalPending && completedContext?.();
     const finish = () => {
-      if (!current()) return false;
-      game.terminalPending = null;
-      game.state = 'done';
-      game.runActive = false;
-      readAgent()?.recorder?.recordRun('abandon', { savedCards: token.cards });   // 跑局统计（数据分析系统）
-      readSound().sfx('defeat');
-      readSound().music('title');
-      if (token.ephemeral) UI.log('[[icon:info]] 测试结算仅更新内存，没有写入基地存档', 'sys');
+      if (!current() && !finishCurrent()) return false;
+      if (!finalized) {
+        finalized = true;
+        game.terminalPending = null;
+        game.state = 'done';
+        game.runActive = false;
+        completedContext = captureBattleContext(game, getActiveSlot);
+        readAgent()?.recorder?.recordRun('abandon', { savedCards: token.cards });   // 跑局统计（数据分析系统）
+        readSound().sfx('defeat');
+        readSound().music('title');
+        if (token.ephemeral) UI.log('[[icon:info]] 测试结算仅更新内存，没有写入基地存档', 'sys');
+        UI.log('<b>[[icon:flag]] 已放弃对局</b>：带入的卡牌全部遗失，物资与金币散失', 'warn');
+      }
       const kept = token.cards;
       const keptMap = new Map();
       kept.forEach(o => {
@@ -136,7 +144,6 @@ export function createMenuLeaveFlow({ UI, game, runtime, esc, saveSession, getAc
         keptMap.get(k).count++;
       });
       const keptList = [...keptMap.values()];
-      UI.log('<b>[[icon:flag]] 已放弃对局</b>：带入的卡牌全部遗失，物资与金币散失', 'warn');
       // 抢运回的卡用卡面网格（A5-ABANDON-01，与死亡页 doom-loot 同构；样式复用 overlays.css 无作用域
       // 的 .doom-loot/.doom-cards 家族；禁止套死亡页的外层 doom 玻璃容器——会改变放弃页标准弹层外观）；
       // 散失损失仍走 ov-stats/ov-note 文本行（散失=文本是既定口径）
@@ -153,13 +160,19 @@ export function createMenuLeaveFlow({ UI, game, runtime, esc, saveSession, getAc
           <button type="button" class="leave-run-continue" data-act="goBase">回基地</button>
           <button type="button" class="leave-run-save" data-act="toTitle">回主菜单</button>
         </div></section>`, 'glass', { initialFocus:'[data-act="goBase"]' });
-      UI.act('goBase', () => runtime.openBaseHub('deploy'));
-      UI.act('toTitle', () => { UI.hideOverlay(); showTitle(); });
+      bindSettlementActions({ UI, isCurrent:finishCurrent, actions:{
+        goBase: () => runtime.openBaseHub('deploy'),
+        toTitle: async () => {
+          const result = await showTitle();
+          if (result !== false) UI.hideOverlay();
+          return result;
+        },
+      } });
       UI.refresh(game);
       return true;
     };
     return runTerminalSettlement({
-      token, current, game, UI, finish: () => finish(),
+      token, current, finishCurrent, game, UI, finish: () => finish(),
       command: 'run.abandon', retryAct: 'retryAbandon',
       slotId, terminalCommands,
     });

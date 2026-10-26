@@ -1,3 +1,5 @@
+import { endAbandonedNodeContent, endNodeContent, nodeContentEndedAt } from './node-reward-state.js';
+
 /** Synchronous restoration admission and field replay. Presentation and storage
  * commands are ports so restoration keeps its original order without importing UI. */
 export function createSessionRestoration({ readState, readServices, readUI, development,
@@ -165,19 +167,25 @@ function restoreGame(slot) {
   readState().game.nestActive = false;
   const safeLayer = s.layerIdx;
   const safeIdx = s.trackPos;
+  readState().game.layerIdx = safeLayer;
+  readState().game.trackPos = safeIdx;
+  endAbandonedNodeContent(readState().game);
+  const ended = nodeContentEndedAt(readState().game);
+  if (ended) endNodeContent(readState().game, safeLayer, safeIdx);
+  const pendingChest = ended ? null : s.chestReward;
   // Reattach a pending reward before allowing enterLayer to write a run snapshot.
-  enterLayer(safeLayer, safeIdx, { preserveBossPlan:true, deferSave:!!s.chestReward });
+  enterLayer(safeLayer, safeIdx, { preserveBossPlan:true, deferSave:!!pendingChest });
   readServices().Sound.music('board');
   readUI().log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
   if (!readState().game.myClass) return { ok:true, value:true, classChoiceEntry:readState().runtime.openClassChoice({ recoveringRun:true }) };   // 同步恢复结果附带选角就绪，不把 Promise 写入 game/存档
-  else if (s.chestReward) {
-    const resume = s.chestReward.context?.battleSettlement ? readState().runtime.resumeBattleRewards : readState().runtime.resumeChestsOnCell;
-    if (!resume?.(s.chestReward)) {
+  else if (pendingChest) {
+    const resume = pendingChest.context?.battleSettlement ? readState().runtime.resumeBattleRewards : readState().runtime.resumeChestsOnCell;
+    if (!resume?.(pendingChest)) {
       readState().game.state = 'modal';
       readUI().log('[[icon:cross]] 待领奖励恢复未完成，原档已保留，请重新进入此档位', 'warn');
       return { ok:false, code:'REWARD_RESTORE_FAILED', preserveRun:true };
     }
-    readUI().log('[[icon:archive]] 已恢复揭晓的宝箱奖励，内容与已领取进度不变', 'ok');
+    readUI().log('[[icon:archive]] 已恢复揭晓的搜刮点奖励，内容与已领取进度不变', 'ok');
   }
   else if (eventChoiceRewardAt(readState().game)) {
     if (!readState().runtime.resumeEventCardChoice()) {
@@ -186,7 +194,7 @@ function restoreGame(slot) {
       return { ok:false, code:'EVENT_CHOICE_RESTORE_FAILED', preserveRun:true };
     }
   }
-  else if (s.battle && readServices().Battle && typeof readServices().Battle.restore === 'function') {
+  else if (!ended && s.battle && readServices().Battle && typeof readServices().Battle.restore === 'function') {
     if (readServices().Battle.restore(readState().game, s.battle)) {
       saveGame();   // 恢复后立刻回写，防二次退出丢进度
     }

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it, vi } from 'vitest';
 import { resolveExecute, executeTargetReason } from '../game/src/battle/effects/effect-steps.m2.js';
 

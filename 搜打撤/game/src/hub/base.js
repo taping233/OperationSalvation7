@@ -740,7 +740,7 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
   const isCollectionProtected = card => collectionProtection(data, card);
 
   // ---------- 宝藏大门 ----------
-  // 钥匙计数：真实钥匙储备 + 仓库里的钥匙类卡牌（「一串钥匙」= 2 把，其余钥匙 = 1 把）
+  // 钥匙计数：真实钥匙储备 + 仓库里的钥匙类卡牌（「两把钥匙」= 2 把，其余钥匙 = 1 把）
   const KEY_NEEDED = 10;
   const progressionCommands = createBaseProgressionCommands({
     read: () => data,

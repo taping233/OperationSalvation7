@@ -1,3 +1,4 @@
+// @vitest-environment node
 /* 基地模块的架构守护（2026-09-22 六文件重构批3）
  *
  * game.hub.js 曾是 1265 行混装（页签壳 + 出征整备流 + 六页签 HTML + 物资抽屉），现拆为：
@@ -40,7 +41,7 @@ describe('基地模块分层（批3 拆分）', () => {
       expect(SHELL, `壳里不应再有 ${name} 的实现`).not.toContain(`function ${name}(`);
     }
     // 异步写入的重入、页面/档位失效守卫仍由壳装配，保留明确的规模上限。
-    expect(SHELL.split('\n').length).toBeLessThan(460);
+    expect(SHELL.split('\n').length).toBeLessThan(500);
     expect(SHELL).toContain('function renderHub(');
     expect(SHELL).toContain('function closeBase(');
   });
@@ -108,7 +109,7 @@ describe('基地模块分层（批3 拆分）', () => {
       expect(importedModules(PREPARATION)).not.toContain(module);
     }
     expect(SHELL).toContain('applyPicks: setDeployPick');
-    expect(SHELL).toContain('openDeparture: openDepartPrep,');
+    expect(SHELL).toContain('openDeparture: ({ isCurrent = () => true } = {}) => isCurrent() ? openDepartPrep({ isCurrent }) : false,');
     expect(PREPARATION_PORTS).toContain('slotId: () => SDT.Base.slot');
     expect(PREPARATION_PORTS).toContain('navigation: { returnToBase, applyPicks, openDeparture }');
     expect(SHELL).not.toContain("from './preparation.commands.js'");

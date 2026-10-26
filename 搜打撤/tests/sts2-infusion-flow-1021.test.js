@@ -230,7 +230,7 @@ describe('one infusion cast across default pointer, keyboard and target steps', 
 
   it('actual normal-deck material keeps its UID in the unified consumed pile without permanent ownership', async () => {
     await begin(optional(), [], 1);
-    expect(R.drawPile.filter(uid => uid.startsWith('normal-sha-'))).toHaveLength(10);
+    expect(R.drawPile.filter(uid => uid.startsWith('normal-sha-'))).toHaveLength(5);
     expect(E.drawCards(1)).toBe(1);
     const temporary = R.hand.find(uid => uid.startsWith('normal-sha-'));
     expect(temporary).toBeTruthy(); const remainingDeck = [...R.drawPile];

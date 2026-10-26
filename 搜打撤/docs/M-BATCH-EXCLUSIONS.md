@@ -73,7 +73,7 @@
 
 ## 组 4：资源卡（7 张，type='资源' 全部）
 
-排除理由：资源卡是**经济/基地物资/孵化材料**，由仓库出售、宝箱掉落与基地系统消费，不走战斗规则引擎。
+排除理由：资源卡是**经济/基地物资/孵化材料**，由仓库出售、搜刮点掉落与基地系统消费，不走战斗规则引擎。
 
 | id | 名称 | 排除理由 | 效果真实消费入口（文件:行号） |
 |---|---|---|---|
@@ -83,7 +83,7 @@
 | tt3-diamond | 钻石 | 同上 | 同上（sellPrice/hub 卖出） |
 | tt3-garnet-marble | 石榴弹珠 | 同上（unrandom 修正见 cards.sync.js:356-366） | 同上（sellPrice/hub 卖出） |
 | tt-econpack | 经济卡包 | 仓库界面专用使用入口 | game.hub.pages.js:22（SPECIAL_COLLECT_IDS）、:303（使用按钮）、:318,334（econpackUse 结算：5 张随机卡） |
-| pet-egg | 宠物蛋 | 孵化材料，基地宠物系统消费 | 宝箱掉落 game/src/run/chests.js:111（保底爆率）；孵化弹窗 game.hub.pages.js:197-227（hatchEgg→B.hatchPet）；meta.js:177 |
+| pet-egg | 宠物蛋 | 孵化材料，基地宠物系统消费 | 搜刮点掉落 game/src/run/chests.js:111（保底爆率）；孵化弹窗 game.hub.pages.js:197-227（hatchEgg→B.hatchPet）；meta.js:177 |
 
 ## 自校验
 

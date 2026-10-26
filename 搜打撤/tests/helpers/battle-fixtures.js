@@ -28,18 +28,24 @@ export function makeRuntimeBattleGame(cards) {
 }
 
 // A second idle snapshot spans the scheduler gap before reporting completion.
-export async function drainBattle(session, maxLoops = 300) {
+// Tests waiting to drive a panel themselves must stop explicitly at that panel.
+export async function drainBattle(session, maxLoops = 300, { stopAt = [] } = {}) {
+  const hasInteraction = state => state.discovering || state.choosing || state.handSelecting;
+  const shouldStop = state => stopAt.some(key => !!state[key]);
   for (let i = 0; i < maxLoops; i++) {
     await new Promise(resolve => setTimeout(resolve, 0));
     const state = session.getSnapshot();
+    if (shouldStop(state)) return state;
     if (state.discovering) { session.commands.pickDiscover(0); continue; }
     if (state.choosing) { session.commands.pickChoice(0); continue; }
     if (state.handSelecting) { session.commands.skipHandSelect(); continue; }
     if (!state.busy && state.actionQueueLength === 0) {
       await new Promise(resolve => setTimeout(resolve, 30));
       const fresh = session.getSnapshot();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
+      if (shouldStop(fresh)) return fresh;
+      if (!fresh.busy && fresh.actionQueueLength === 0 && !hasInteraction(fresh)) return fresh;
     }
   }
-  return session.getSnapshot();
+  const state = session.getSnapshot();
+  throw new Error(`战斗等待超时（${maxLoops} 轮）：phase=${state.phase}, busy=${state.busy}, queue=${state.actionQueueLength}, discovering=${!!state.discovering}, choosing=${!!state.choosing}, handSelecting=${!!state.handSelecting}`);
 }

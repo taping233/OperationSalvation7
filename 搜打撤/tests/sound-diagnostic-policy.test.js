@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, it, expect } from 'vitest';
 import { bgmDiagnosticDisabled } from '../game/src/audio/sound.diagnostic-policy.js';
 describe('nonpersistent diagnostic BGM override', () => {

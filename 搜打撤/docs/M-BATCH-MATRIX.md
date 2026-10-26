@@ -66,7 +66,7 @@
 | cmtn1lbhbqi4 | 充能火球 | 法术 | hosted:charge-fireball（onPlay[damage amount:4 dmgType:spell] + 手牌中每回合伤害+1） | 混合实现（宿主充能卡清单 battle.core.js:87） | XL | B-M4 | 手牌内成长是常驻回合钩子，非 onPlay |
 | cmtn1p9vb5au | 千变万化 | 法术 | onPlay[discover {count:1, pool:{kind:'form'}, act:'play'}] | 规格新增:pool.kind='form'（形态卡池） | M | B-M2 | 形态=自然形态/剑仙形态/黑暗形态等场域卡的子集定义需规格 |
 | cmtn1r10xnl1 | 黑暗形态 | 法术 | 规格新增 registerRule:{rule:'discoverPlus'}（本局每次发现可选项+1） | 规格/接线:registerRule（键位 schema:68 现三种，解释器 pending） | L | B-M4 | 本局全局规则；「增加可选项」作用于 discover 交互 |
-| cmtn28jv33wx | 搜索大宝箱 | 法术 | onPlay[acquire {n:3, pool:random}] | 现有能力 | S | B-M1 | 与 tt2-treasuremap（寻宝图洗牌）和 ev19 生态联动 |
+| cmtn28jv33wx | 搜索军用保险柜 | 法术 | onPlay[acquire {n:3, pool:random}] | 现有能力 | S | B-M1 | 与 tt2-treasuremap（寻宝图洗牌）和 ev19 生态联动 |
 | tt12-breakthrough | 突破进展 | 法术 | onPlay[acquire n:1 pool{moves,cost:0}, acquire n:1 pool{moves,cost:1}, acquire n:1 pool{moves,cost:2}] | 现有能力 | S | B-M1 | acquire.pool{kind:'moves',cost} 现有（DISCOVER/acquire 池 schema:54） |
 | tt12-chargeray | 充能射线 | 法术 | onPlay[damage amount:5 dmgType:spell, bonus amount:'perInfusedInHand×2'] | 规格新增:damage 动态源 perInfusedInHand | M | B-M2 | 「本牌在手牌中时每注能过 1 张」需手牌注能计数 |
 | tt12-felguard | 邪能护体 | 法术 | onPlay[draw amountField:draw, blessing {key:'immune', duration:1}] | 现有能力 | S | B-M1 | 本回合临时免疫与深渊主宰永久免疫的文案差异宿主已有（battle.engine.js:1383-1388）；注能(2) 门由描述句承担（schema:661 不允许保留 infuse 字段） |
@@ -119,7 +119,7 @@
 | tt3-light-mail | 急速跑鞋 | 装备 | equip.skill {ops:[draw amount:3]}（每场一次口径待定） | 规格/接线:装备域（EQUIP_SKILL_KEYS oncePerBattle schema:75） | L | B-M3 | 「主动技能」统一走 skill 域 |
 | tt3-holy-staff | 圣杖 | 装备 | equip.skill {ops:[cleanse self, heal 5]} | 规格/接线:装备域 + cleanse（并行M1 在途） | L | B-M3 | — |
 | tt12-raygun | 射线枪 | 装备 | equip.skill {ops:[discover {pool:{kind:'ray'}, act:'play'}]} | 规格/接线:装备域 + pool.kind='ray'（射线系列） | L | B-M3 | 射线=tt12-*ray 系列子集，需规格成池 |
-| tt2-treasuremap | 寻宝图 | 装备 | equip.skill {ops:[acquire {n:1, pool:named:'搜索大宝箱', dest:'deck'}, draw amountField:draw]} | 规格/接线:装备域 + pool.named（现有 pool 无指名） | L | B-M3 | 与 cmtn28jv33wx 联动 |
+| tt2-treasuremap | 寻宝图 | 装备 | equip.skill {ops:[acquire {n:1, pool:named:'搜索军用保险柜', dest:'deck'}, draw amountField:draw]} | 规格/接线:装备域 + pool.named（现有 pool 无指名） | L | B-M3 | 与 cmtn28jv33wx 联动 |
 | tt3-crimson-pouch | 深红丝袋 | 装备 | equip.skill {ops:[handOps:{dup:'choose'}]} | 规格/接线:装备域 + 选择式复制交互 | L | B-M3 | — |
 | tt3-fate-wheel | 命运钟表 | 装备 | equip.skill {ops:[draw handOps consumeHand, extraTurn]} | 规格/接线:extraTurn（键位 schema:64，解释器 pending；宿主 flag battle.core.js:91）+ handOps | L | B-M3 | 额外回合=跳过敌方阶段一次 |
 | tt3eq-boiler | 魔法锅炉 | 装备 | equip.skill {ops:[acquire {n:3, pool:random}]}（注能(2) 门） | 规格/接线:装备域 | L | B-M3 | 注能门在描述 |

@@ -37,7 +37,7 @@ function restoreReward(reward) {
   if (reward.rewardStage != null && !['chest','opening','cards'].includes(reward.rewardStage)) return null;
   if (['chest','opening'].includes(reward.rewardStage) && (reward.taken.length || reward.lost.length)) return null;
   const copy = JSON.parse(JSON.stringify(reward));
-  copy.rewardStage ||= 'cards'; // 旧固定奖励已进入卡牌页，不重新掷卡或再领取宝箱。
+  copy.rewardStage ||= 'cards'; // 旧固定奖励已进入卡牌页，不重新掷卡或再领取搜刮点。
   copy.claimMode ??= copy.kind === 'medium' ? 'one' : 'all';
   copy.taken = new Set(copy.taken); copy.lost = new Set(copy.lost);
   return copy;

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 it('命中夹具复用真实布局/CSS并只记录可见DOM事件，不替代生产发牌',()=>{

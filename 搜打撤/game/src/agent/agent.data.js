@@ -111,11 +111,12 @@ function dataPanelHTML() {
 }
 
 // 数据面板动作（导出/清空）：独立数据页与控制台「数据」页签共用
-function bindDataActions(render) {
+function bindDataActions(render, isCurrent = () => true) {
   const UI = window.SDT.UI;
-  UI.act('dataExportJSON', () => download(`sdt-runs-${Date.now()}.json`, exportJSON(), 'application/json'));
-  UI.act('dataExportCSV', () => download(`sdt-runs-${Date.now()}.csv`, exportCSV(), 'text/csv'));
+  UI.act('dataExportJSON', () => isCurrent() && download(`sdt-runs-${Date.now()}.json`, exportJSON(), 'application/json'));
+  UI.act('dataExportCSV', () => isCurrent() && download(`sdt-runs-${Date.now()}.csv`, exportCSV(), 'text/csv'));
   UI.act('dataClear', (d) => {
+    if (!isCurrent()) return false;
     if (d.confirm !== '1') {
       // 两步确认：首点变「确认清空？」，与危险操作同款防误触
       const btn = /** @type {HTMLElement | null} */ (document.querySelector('#ovBody [data-act="dataClear"]'));
@@ -124,17 +125,28 @@ function bindDataActions(render) {
     }
     clearRuns();
     UI.log('[[icon:tools]] 跑局记录已清空', 'sys');
-    render();
+    return render();
   });
 }
 
-function openDataPage() {
+function openDataPage({ onRender = (_page) => { void _page; }, isCurrent = () => true } = {}) {
   const UI = window.SDT.UI;
+  let page = null, revision;
+  const pageCurrent = () => isCurrent() && !!page?.isConnected && UI.el.ovBody.querySelector('.pg') === page
+    && UI._overlayRevision === revision && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
   const render = () => {
+    if (!isCurrent() || page && !pageCurrent()) return false;
     UI.showOverlay('[[icon:chart]] 跑局数据', `<div class="pg hub">${dataPanelHTML()}</div>`, 'page');
-    bindDataActions(render);
+    page = UI.el.ovBody.querySelector('.pg');
+    revision = UI._overlayRevision;
+    // Capture each concrete render so detached buttons cannot act on its successor.
+    const root = page, renderedRevision = revision;
+    const renderedCurrent = () => pageCurrent() && page === root && revision === renderedRevision;
+    bindDataActions(render, renderedCurrent);
+    onRender({ root, revision, isCurrent:renderedCurrent });
+    return root;
   };
-  render();
+  return render();
 }
 
 export { openDataPage, dataPanelHTML, bindDataActions, download };

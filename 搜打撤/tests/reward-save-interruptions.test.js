@@ -182,7 +182,7 @@ it('固定奖励最终写盘失败保留可重试原页；成功完成时节点�
   await restore(); expect(count(reward.id)).toBe(1); expect(Chests.isOpen()).toBe(false);
 });
 
-it('真实宝箱授予经读档进入撤离整理，入库后重建commands再完成只入仓一次', async () => {
+it('真实搜刮点授予经读档进入撤离整理，入库后重建commands再完成只入仓一次', async () => {
   await open(); await Promise.resolve(); await UI._acts.chestTake1({i:0}); await restore();
   expect(saved().chestReward).toBeNull();
   const { createRecoveryCommands } = await import('../game/src/hub/recovery.commands.js');

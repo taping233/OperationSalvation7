@@ -28,7 +28,7 @@ describe('legacy bag compatibility and structured priority', () => {
   it('runs native structured healing before a conflicting legacy name', () => {
     const h = scenario({ name:'复原药水', type:'道具', rules:{ bag:{ use:[{op:'heal',amount:3}] } } });
     h.useOwnedCard('source');
-    expect(h.game.heal).toHaveBeenCalledWith(3); expect(h.game.ownedCards).toEqual([]);
+    expect(h.game.heal).toHaveBeenCalledWith(3, { deferFeedback: expect.any(Function) }); expect(h.game.ownedCards).toEqual([]);
     expect(h.saveGame).toHaveBeenCalledOnce(); expect(h.newUid).not.toHaveBeenCalled();
   });
 

@@ -4,9 +4,9 @@ import { visualFrame } from './page-visual-ready.js';
 import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
 import '../../css/map-passage.css';
 import { createSilentNodeCut, prepareSilentFilm, silentFilmRemaining } from './silent-node-film.js';
+import { layerPassageProfile } from './layer-passage-profiles.js';
 
 let active = null;
-const passageArt = new URL('../../assets/scenes/cinematic/layer-descent-v1.webp', import.meta.url).href;
 const passageDuration = 3600;
 const passageExit = 700;
 export function cancelLayerPassage() { active?.dispose(); }
@@ -29,6 +29,7 @@ export function showLayerPassage(game, from, to) {
   if (from === to || reduceMotion() || isTurbo()) return null;
   cancelLayerPassage();
   const token = game.discoveredPairs, map = game.layerData;
+  const profile = layerPassageProfile(to);
   const layer = document.createElement('div');
   layer.className = 'map-layer-passage';
   layer.setAttribute('role', 'status'); layer.setAttribute('aria-live', 'polite');
@@ -36,10 +37,10 @@ export function showLayerPassage(game, from, to) {
   const film=createSilentNodeCut('passage', { duration: passageDuration });
   // This illustrated entrance owns its staging independently of short node cuts.
   const scenery = /** @type {HTMLElement} */ (film.querySelector('.silent-film-scenery'));
-  scenery.dataset.filmMotion = 'layer-descent';
+  scenery.dataset.filmMotion = profile.motion;
   scenery.dataset.filmRenderer = 'image';
   const image = document.createElement('img');
-  image.className = 'silent-node-art'; image.src = passageArt;
+  image.className = 'silent-node-art'; image.src = profile.art;
   image.alt = ''; image.decoding = 'async'; image.draggable = false;
   scenery.prepend(image);
   film.dataset.filmExit = 'fade';

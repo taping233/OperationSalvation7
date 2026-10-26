@@ -1,0 +1,82 @@
+[
+  {
+    "role": "wu",
+    "path": "game/assets/portraits/frames/wu/sprite-v1/neutral.webp",
+    "size": [
+      512,
+      342
+    ],
+    "alpha32Box": [
+      131,
+      12,
+      486,
+      324
+    ],
+    "targetBodyHeight": 278,
+    "sha256": "57ffd12fac024595631df559179eef54deb95db8ba183a9602f8dd721d072071"
+  },
+  {
+    "role": "changwuyu",
+    "path": "game/assets/portraits/frames/changwuyu/sprite-v1/neutral.webp",
+    "size": [
+      768,
+      512
+    ],
+    "alpha32Box": [
+      246,
+      21,
+      544,
+      490
+    ],
+    "targetBodyHeight": 286,
+    "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e"
+  },
+  {
+    "role": "baita",
+    "path": "game/assets/portraits/frames/baita/sprite-v1/neutral.webp",
+    "size": [
+      512,
+      342
+    ],
+    "alpha32Box": [
+      97,
+      46,
+      311,
+      324
+    ],
+    "targetBodyHeight": 270,
+    "sha256": "c93ce03668e093c4b0d61358b7f2a094d24e3983c9c2711795d273ad93e8e94b"
+  },
+  {
+    "role": "heixiang",
+    "path": "game/assets/portraits/frames/heixiang/sprite-v1/neutral.webp",
+    "size": [
+      512,
+      342
+    ],
+    "alpha32Box": [
+      124,
+      106,
+      455,
+      324
+    ],
+    "targetBodyHeight": 252,
+    "sha256": "232e345a47572c2dfc991b929f159e8ff3a88c6b986a7c3f88d3eb6ac6fc6f28"
+  },
+  {
+    "role": "xingyue",
+    "path": "game/assets/portraits/frames/xingyue/sprite-v1/neutral.webp",
+    "size": [
+      512,
+      342
+    ],
+    "alpha32Box": [
+      84,
+      56,
+      387,
+      324
+    ],
+    "targetBodyHeight": 270,
+    "sha256": "6821803c9b3250625a8248c1c1bd008b56c2817fb565cc4dd0e72694818dce68"
+  }
+]

@@ -6,7 +6,7 @@ vi.mock('../game/src/run/game.session.js', () => ({ game:fixture.game, MAP:{}, n
 vi.mock('../game/src/run/game.run.scenes.js', () => ({ buildEncounter:vi.fn(), openChestsOnCell:vi.fn(), openShop:vi.fn() }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ openAltarRitual:vi.fn(), openFireRest:vi.fn() }));
 vi.mock('../game/src/run/game.run.flow.js', () => ({ runEventDeck:vi.fn() }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ captureBattleContext:vi.fn(), startBattle:vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), captureBattleContext:vi.fn(), startBattle:vi.fn() }));
 vi.mock('../game/src/agent/agent.console.js', () => ({
   agentTabHTML:() => '<p>Agent</p>', keysTabHTML:() => '<p>快捷键</p>',
   bindAgentTab:vi.fn(), bindKeysTab:vi.fn(),

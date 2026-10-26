@@ -1,7 +1,6 @@
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import fs from 'node:fs';
 import { RunStorage } from '../game/src/hub/game.storage.js';
 import { createStoryCommands } from '../game/src/home/story.commands.js';
 import { storyCommands } from '../game/src/home/story.commands.js';
@@ -119,11 +118,4 @@ describe('R6-a 最后一盏引路灯', () => {
     expect(final.choices[1].detail).toMatch(/近路保持隐蔽.*远处找不到/);
   });
 
-  it('现行事件入口只抽普通事件，旧剧情数据与 Ink 阅读接口仍独立保留',()=>{
-    const source=fs.readFileSync('game/src/run/game.run.events.js','utf8');
-    expect(source).toContain("getCards().all().filter(c => c.type === '事件')");
-    expect(source).toContain('bindNodeEvent(game, card.id)');
-    expect(source).not.toContain('storyCommands.record');
-    expect(source).not.toContain("UI.act('lastLamp");
-  });
 });

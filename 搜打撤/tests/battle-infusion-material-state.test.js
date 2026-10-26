@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { infusionMaterialState } from '../game/src/battle/view/battle.infusion-material-state.js';
 const group = { uids:['a','b'] };

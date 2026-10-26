@@ -1,12 +1,15 @@
 import { damageRuleFields } from './helpers/environment-fixtures.js';
 import { createBattleRuntime } from '../game/src/battle/runtime/battle.runtime.factory.js';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { createBattleResolution } from '../game/src/battle/core/battle.resolution.js';
 import * as Combat from '../game/src/battle/core/combat.js';
+import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
+import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
+import { createCardRuleExecutionView } from '../game/src/cards/card-execution-plan.js';
 
 function makeResolver(state) {
   const events = [];
-  const resolver = createBattleResolution({ runtime: createBattleRuntime(),
+  const resolver = createBattleResolution({ runtime: state.runtime || createBattleRuntime(),
     readState: () => state.current,
     getPlayerStatus: () => state.playerStatus || { status: {} },
     esc: value => String(value),
@@ -19,7 +22,10 @@ function makeResolver(state) {
     randomBattle: () => 0, getDamageTypes: () => ['武术'], getDamageTypeMeta: () => ({}), fixedDamageType: 'fixed',
     // U16：允许用例注入真实口径的存活过滤（引擎侧为 foes.filter(!dead)，engine.js:103）
     hasCurse: () => false, getAliveFoes: state.getAliveFoes || (() => state.foes || [state.target]), getGrowth: uid => state.growth?.[uid] || 0,
-    findCard: () => null,
+    findCard: uid => state.cards?.[uid] || null,
+    getTurn: () => state.turn ?? 1,
+    getFoeIndex: foe => (state.foes || [state.target]).indexOf(foe),
+    summonAlly: (...args) => events.push(['summon', ...args]),
     addTempCard: tpl => { events.push(['temp', tpl.name]); return `temp-${events.length}`; },
     queueDiscover: job => events.push(['discover', job]),
     // G3（A3 第三批）：acquire 族替身——洗入/洗混/随机池抽卡/金币/职业名；
@@ -40,7 +46,7 @@ function makeResolver(state) {
     splitClauses: state.splitClauses || (() => ({ immediate: ['可观察顺序'], turnStart: [], battle: [], onInfused: [], onDraw: [], skill: [] })),
     applyTextEffects: () => { events.push(['text']); state.onText?.(); return { did: true }; },
     registerTurnStart: () => {}, registerBattle: () => false, castRandomSpells: () => Promise.resolve(),
-    drawCards: count => { events.push(['draw', count]); return Math.min(count, state.drawnCount ?? count); },
+    drawCards: state.drawCards || (count => { events.push(['draw', count]); return Math.min(count, state.drawnCount ?? count); }),
     grantSha: count => events.push(['sha', count]),
     hitFoe: (foe, card, amount) => {
       events.push(['damage', amount]);
@@ -275,33 +281,74 @@ describe('battle resolution ports', () => {
     expect(events.filter(event => ['text', 'armor'].includes(event[0]))).toEqual([['text'], ['armor', 4]]);
   });
 
-  it('throws on schema v2 keys the interpreter has not wired yet (guard against silent mis-resolution)', () => {
+  it('格式合法但尚未支持的 hits.perFoe 必须按准确原因拒绝，且不产生副作用', () => {
     const target = { hp: 20, dead: false, status: {} };
-    const callState = { current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target };
-    const { resolver } = makeResolver(callState);
-    const base = { type: '武术', dmg: 3, dmgType: 'fixed', desc: '' };
-    for (const card of [
-      // B1-B3 已接线键（amount/range/cond/bonus/lifesteal/hits.count/randomEnemy、heal/armor 的
-      // v2 键）不再抛错——见下方行为用例；这里锁死仍 pending 的键：
-      // damage.graveyard（B10 墓地域）、damage.schedule（B2 延迟段）、hits.perFoe（每人释放一段）
-      { ...base, id: 'guard-damage-graveyard', rules: { version: 1, triggers: { onPlay: [
-        { op: 'damage', amount: 3, target: 'chosenEnemy', graveyard: { type: '法术', perCard: 1 } },
-      ] } } },
-      { ...base, id: 'guard-damage-schedule', rules: { version: 1, triggers: { onPlay: [
-        { op: 'damage', amount: 3, target: 'chosenEnemy', schedule: 'nextTurn' },
-      ] } } },
-      { ...base, id: 'guard-damage-perfoe', rules: { version: 1, triggers: { onPlay: [
+    const { resolver, events } = makeResolver({ current: { mode: 'boss', grave: [] }, target });
+    const card = { id: 'unsupported-per-foe', type: '武术', dmg: 3, dmgType: 'fixed', desc: '',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [
         { op: 'damage', amount: 3, target: 'chosenEnemy', hits: { perFoe: 1 } },
-      ] } } },
-      // draw 的全部 v2 键（B4：boss/普通战双口径未结构化前不放行）
-      { ...base, id: 'guard-draw-untilhandn', type: '法术', rules: { version: 1, triggers: { onPlay: [{ op: 'draw', untilHandN: 4 }] } } },
-      // v2 新操作族（schema 放行、解释器未接线）
-      { ...base, id: 'guard-pending-op', rules: { version: 1, triggers: { onPlay: [{ op: 'summon', name: '步兵', count: 1 }] } } },
-      // G13 时点触发器（无任何运行时消费者）
-      { ...base, id: 'guard-pending-trigger', rules: { version: 1, triggers: { onPlay: [], onTurnStart: [] } } },
-    ]) {
-      expect(() => resolver(card, target, false, 0, null), card.id).toThrow(TypeError);
-    }
+      ] } } };
+    expect(validateCardRules(card)).toMatchObject({ ok: true });
+    expect(inspectCardRuleCapability(card)).toMatchObject({ kind: 'unsupported', issues: [{ path: 'rules.triggers.onPlay[0].hits.perFoe' }] });
+    expect(() => resolver(card, target, false, 0, null)).toThrow(/Unsupported card rules:.*hits.perFoe/);
+    expect(events).toEqual([]);
+    expect(target.hp).toBe(20);
+  });
+
+  it('已支持的 graveyard 按真实消耗牌类型增加伤害', () => {
+    const target = { hp: 20, dead: false, status: {} };
+    const { resolver, events } = makeResolver({ current: { mode: 'boss', grave: ['spell', 'move', 'spell2'] }, target,
+      hitFoe: (foe, amount) => { foe.hp -= amount; return amount; },
+      cards: { spell: { card: { type: '法术' } }, move: { card: { type: '武术' } }, spell2: { card: { type: '法术' } } } });
+    const card = { id: 'supported-graveyard', type: '武术', dmgType: 'fixed', desc: '',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [
+        { op: 'damage', amount: 3, target: 'chosenEnemy', graveyard: { type: '法术', perCard: 2 } },
+      ] } } };
+    expect(validateCardRules(card)).toMatchObject({ ok: true });
+    resolver(card, target, false, 0, null);
+    expect(events.filter(event => event[0] === 'damage')).toEqual([['damage', 7]]);
+    expect(target.hp).toBe(13);
+  });
+
+  it('已支持的 schedule 只登记下回合开始效果，不提前造成伤害', () => {
+    const target = { hp: 20, dead: false, status: {} };
+    const { resolver, events } = makeResolver({ current: { mode: 'boss', grave: [] }, target, turn: 3 });
+    const operation = { op: 'damage', amount: 3, target: 'chosenEnemy', schedule: 'nextTurn' };
+    const card = { id: 'supported-schedule', type: '武术', dmgType: 'fixed', desc: '',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [operation] } } };
+    expect(validateCardRules(card)).toMatchObject({ ok: true });
+    resolver(card, target, false, 0, null);
+    expect(events.filter(event => event[0] === 'delayed')).toEqual([['delayed', expect.objectContaining({
+      special: 'triggerOps', ops: [operation], targetIndex: 0, notBeforeTurn: 4,
+    })]]);
+    expect(events.filter(event => event[0] === 'damage')).toEqual([]);
+    expect(target.hp).toBe(20);
+  });
+
+  it('已支持的 untilHandN 抽到目标手牌数量', () => {
+    const runtime = createBattleRuntime();
+    runtime.hand.push('first', 'second');
+    const drawCards = vi.fn(count => { runtime.hand.push('draw-' + runtime.hand.length); return count; });
+    const target = { hp: 20, dead: false, status: {} };
+    const { resolver } = makeResolver({ runtime, drawCards, current: { mode: 'boss', grave: [] }, target });
+    const card = { id: 'supported-until-hand', name: '补牌', type: '法术', desc: '',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'draw', untilHandN: 4 }] } } };
+    expect(validateCardRules(card)).toMatchObject({ ok: true });
+    resolver(card, target, false, 0, null);
+    expect(runtime.hand).toHaveLength(4);
+    expect(drawCards.mock.calls).toEqual([[1], [1]]);
+  });
+
+  it('已支持的 summon 调用随从端口，保留数量和攻血', () => {
+    const target = { hp: 20, dead: false, status: {} };
+    const { resolver, events } = makeResolver({ current: { mode: 'boss', grave: [] }, target });
+    const card = { id: 'supported-summon', type: '法术', desc: '',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [
+        { op: 'summon', name: '步兵', atk: 4, hp: 4, count: 2 },
+      ] } } };
+    expect(validateCardRules(card)).toMatchObject({ ok: true });
+    resolver(card, target, false, 0, null);
+    expect(events.filter(event => event[0] === 'summon')).toEqual([['summon', '米高芬', 4, 4, 2, false]]);
   });
 
   it('resolves literal, conditional, and bonus damage from v2 keys (B1)', () => {
@@ -707,16 +754,17 @@ describe('A3 第二批（B5 诅咒族）：结构化 onPlay curse op', () => {
     expect(logTexts(clean.events).some(t => t.includes('目标未被冰冻，延长无效'))).toBe(true);
   });
 
-  it('守卫：curse op 已放行，G13 时点触发器仍逐键抛出', () => {
-    const ok = setup({ foes: [{}] });
-    expect(() => ok.resolver(
-      curseCard({ op: 'curse', curse: 'bleed', stacks: 1, target: 'chosenEnemy' }), ok.target, false, 0, null,
-    )).not.toThrow();
-
-    const pending = setup({ foes: [{}] });
+  it('onDraw 格式与能力受支持，但必须先登记时点再结算 onPlay', () => {
+    const state = setup({ foes: [{}] });
     const card = curseCard({ op: 'curse', curse: 'bleed', stacks: 1, target: 'chosenEnemy' });
     card.rules.triggers.onDraw = [];
-    expect(() => pending.resolver(card, pending.target, false, 0, null)).toThrow(TypeError);
+    expect(validateCardRules(card)).toMatchObject({ ok: true });
+    expect(inspectCardRuleCapability(card)).toMatchObject({ kind: 'supported' });
+    expect(() => state.resolver(card, state.target, false, 0, null)).toThrow(/Trigger 'onDraw' must be registered via battle.triggers.m2.js/);
+    expect(state.events).toEqual([]);
+    expect(state.target.status.bleed).toBeUndefined();
+    state.resolver(createCardRuleExecutionView(card, card.rules.triggers.onPlay), state.target, false, 0, null);
+    expect(state.target.status.bleed).toBe(1);
   });
 });
 
@@ -741,14 +789,7 @@ describe('A3 第三批（G3 acquire 族）：结构化 onPlay acquire/coins op',
   const logTexts = events => events.filter(event => event[0] === 'log').map(event => String(event[1]));
   const CARD = name => ({ id: `pool-${name}`, name, type: '法术', rarity: '稀有', desc: '造成 1 点法术伤害。' });
 
-  it('守卫摘除：acquire 与 coins 不再被 PENDING 守卫抛出，其余 pending op 仍抛出', () => {
-    const state = setup({ discoverPool: [CARD('火球')] });
-    expect(() => state.resolver(acquireCard({ op: 'acquire', n: 1, pool: { kind: '随机' } }), state.callState.target, false, 0, null)).not.toThrow();
-    expect(() => state.resolver(acquireCard({ op: 'coins', n: 2 }), state.callState.target, false, 0, null)).not.toThrow();
-    // 其余 pending 族不动：summon 仍必须炸出（守卫存在目的回归锚点）
-    //（blessing 已随 B7 G4 批接线放行，不再充当 pending 锚点——见下方 B7 describe）
-    expect(() => state.resolver(acquireCard({ op: 'summon', name: '步兵', count: 1 }), state.callState.target, false, 0, null)).toThrow(TypeError);
-  });
+
 
   it('dest 缺省 discover：queueDiscover 收到 n/pred 面板任务（实打）', () => {
     const wushu = { ...CARD('斩'), type: '武术' };
@@ -833,12 +874,12 @@ describe('A3 第三批（G3 acquire 族）：结构化 onPlay acquire/coins op',
     expect(() => pendingHand.resolver(
       acquireCard({ op: 'acquire', n: 1, dest: 'hand', act: 'play', pool: { kind: '随机' } }),
       pendingHand.callState.target, false, 0, null,
-    )).toThrow(TypeError);
+    )).toThrow(/Unsupported acquire act 'play' for dest 'hand'/);
     const pendingDeck = setup({ discoverPool: [CARD('牌')] });
     expect(() => pendingDeck.resolver(
       acquireCard({ op: 'acquire', n: 1, dest: 'deck', act: 'decay', pool: { kind: '随机' } }),
       pendingDeck.callState.target, false, 0, null,
-    )).toThrow(TypeError);
+    )).toThrow(/Unsupported acquire act 'decay' for dest 'deck'/);
     const supportedDiscoverNoInfuse = setup({ discoverPool: [CARD('牌')] });
     supportedDiscoverNoInfuse.resolver(
       acquireCard({ op:'acquire', n:1, dest:'discover', act:'noInfuse', pool:{kind:'随机'} }),
@@ -1034,20 +1075,7 @@ describe('A3 第三批（B7）：结构化 onPlay blessing 与资源族 op', () 
     expect(logTexts(silenced.events).some(t => t.includes('祝福·攻击力增加'))).toBe(false);
   });
 
-  it('守卫：B7 五 op 已放行不再抛错；summon 等 pending 族仍逐 op 抛出', () => {
-    const ok = setup();
-    for (const operation of [
-      { op: 'blessing', key: 'atkUp', stacks: 1 },
-      { op: 'energy', n: 1 },
-      { op: 'energyCap', n: 1 },
-      { op: 'maxHp', n: 1 },
-      { op: 'deckCap', n: 1 },
-    ]) {
-      expect(() => ok.resolver(selfCard(operation), ok.target, false, 0, null), operation.op).not.toThrow();
-    }
-    const pending = setup();
-    expect(() => pending.resolver(selfCard({ op: 'summon', name: '步兵', count: 1 }), pending.target, false, 0, null)).toThrow(TypeError);
-  });
+
 
   // —— U16（PENDING #14 老板 2026-09-30 拍板）：STS2 IsEnding 同款终局守卫 ——
   // 敌人全灭后该卡余下 op 一律中止；未全灭时行为逐字不变。

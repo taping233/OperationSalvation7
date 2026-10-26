@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { resolve } from 'node:path';
 import { analyzeModule, buildModuleGraph, assertAcyclic, architectureViolations, deadGuardKeys, readModuleSources } from '../scripts/architecture-graph.mjs';

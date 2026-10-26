@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { beginPageEntryCancellation, cancelPendingPageEntries, releasePageEntryCancellation } from '../game/src/ui/page-entry-cancellation.js';
 

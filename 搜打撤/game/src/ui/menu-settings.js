@@ -6,7 +6,7 @@ import { captureBattleContext } from '../battle/battle-loader.js';
 import { storeGet, storeSet } from '../core/storage.js';
 import { bindSettingsAudio } from './settings-audio.js';
 import { captureSettingsNavigation, initSettingsNavigation, settingsLayoutHTML } from './settings-navigation.js';
-import { captureOverlayReturnState, restoreOverlayReturnState } from './overlay-return-state.js';
+import { captureOverlayReturnState, createOverlayReturn, restoreOverlayReturnState } from './overlay-return-state.js';
 import { linkedBackHTML } from './home-linked-interactions.js';
 
 function settingsToggleHTML(label, id, checked) {
@@ -22,7 +22,7 @@ export function createMenuSettingsPage({
   battleRestartHTML, bindBattleRestart, readCards, readSound, readMotion, readNotes
 }) {
   // ---------- 设置（标题界面调用） ----------
-  function openSettings(options = {}, returnState = null, sourceState = game.state) {
+  function openSettings(options = {}, navigationState = null, sourceState = game.state) {
     cancelPendingPageEntries('menu');
     const prev = sourceState;
     game.state = 'modal';
@@ -95,8 +95,7 @@ export function createMenuSettingsPage({
     try { UI.showOverlay('', settingsHTML, 'page'); } finally { finishOverlay(); }
     const finishNavigation = beginRuntimeStage('settings-navigation-sync');
     const settingsRoot = /** @type {import("./ui.dom.types.js").UIElement} */ (UI.el.ovBody.querySelector('.settings-page'));
-    try { initSettingsNavigation(settingsRoot, returnState?.context); } finally { finishNavigation(); }
-    if (returnState) restoreOverlayReturnState(settingsRoot, returnState);
+    try { initSettingsNavigation(settingsRoot, navigationState); } finally { finishNavigation(); }
     bindPerformanceSettings(UI.el.ovBody);
     bindBattleRestart({ isCurrentContext: captureBattleContext(game, getActiveSlot),
       page: /** @type {import("./ui.dom.types.js").UIElement} */ (UI.el.ovBody.querySelector('.settings-page')) });
@@ -123,25 +122,40 @@ export function createMenuSettingsPage({
     // 设置页入口固定为「返回设置」语义：UI 点击委托会把按钮 dataset 对象当作首参传入，
     // 直接挂函数引用时 fromTitle=!!dataset 恒为真，返回键误回标题页（09-30 深审 WORLD-004）
     const childSettingsOptions = { ...options };
-    const openChild = (open, isRefreshedChild = () => false) => {
-      if (!settingsRoot.isConnected || settingsRoot !== UI.el.ovBody.querySelector('.settings-page')) return;
+    const openChild = open => {
+      if (!settingsRoot.isConnected || settingsRoot !== UI.el.ovBody.querySelector('.settings-page')) return false;
       const contextCurrent = captureBattleContext(game, getActiveSlot);
       const snapshot = captureOverlayReturnState(settingsRoot, document.activeElement, {
         readContext:() => captureSettingsNavigation(settingsRoot),
       });
-      let returned = false, childRevision;
-      open(() => {
-        if (returned || !contextCurrent() || UI._overlayRevision !== childRevision && !isRefreshedChild() || UI.el.overlay.hidden
-          || UI.el.overlay.classList.contains('closing')) return;
-        returned = true;
-        openSettings(childSettingsOptions, snapshot, prev);
-      });
-      childRevision = UI._overlayRevision;
+      let childBack = () => false;
+      // Only the child renderer can hand over a fresh page; a similar page never
+      // inherits this settings snapshot merely by sharing its classes.
+      const onRender = ({ root, revision, isCurrent }) => {
+        if (!contextCurrent() || !isCurrent()) return false;
+        let targetRoot = null;
+        childBack = createOverlayReturn({
+          revision, getRevision:() => UI._overlayRevision,
+          isOpen:() => !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'),
+          back:commit => {
+            if (!contextCurrent() || !root.isConnected || !isCurrent()) return false;
+            return commit(() => {
+              targetRoot = openSettings(childSettingsOptions, snapshot.context, prev);
+              return targetRoot;
+            });
+          },
+          onFailure:() => UI.log('返回设置未完成，请重试。', 'warn'),
+          restore:targetCurrent => restoreOverlayReturnState(targetRoot, snapshot, {
+            isCurrent:() => targetCurrent() && contextCurrent() && !!targetRoot?.isConnected,
+          }),
+        });
+        return true;
+      };
+      return open(() => childBack(), { onRender, isCurrent:contextCurrent });
     };
-    UI.act('openInbox', () => openChild(back => openSuggestionInbox(false, back)));
-    UI.act('openDataPageUi', () => openChild(back => openDataPageUi(true, back),
-      () => !!UI.el.ovBody.querySelector('.data-tuned .doom-stats')));
-    UI.act('closeSettings', () => { if (typeof options.returnTo === 'function') { options.returnTo(); return; } UI.hideOverlay(); game.state = prev === 'modal' ? 'idle' : prev; });
+    UI.act('openInbox', () => openChild((back, navigation) => openSuggestionInbox(false, back, navigation)));
+    UI.act('openDataPageUi', () => openChild((back, navigation) => openDataPageUi(true, back, navigation)));
+    UI.act('closeSettings', () => { if (typeof options.returnTo === 'function') return options.returnTo(); UI.hideOverlay(); game.state = prev === 'modal' ? 'idle' : prev; });
     bindInputSettings(UI.el.ovBody.querySelector('.settings-page'), UI.confirmAction);
     const onInput = (id, eventName, apply) => {
       const input = document.getElementById(id);
@@ -190,6 +204,7 @@ export function createMenuSettingsPage({
     bindVolume('setMusicVol', 'setMusicVolume');
     const sfxVolEl = bindVolume('setSfxVol', 'setSfxVolume');
     sfxVolEl.addEventListener('change', () => readSound().sfx('ding'));
+    return settingsRoot;
   }
   return { openSettings };
 }

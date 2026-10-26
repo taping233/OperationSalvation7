@@ -1,3 +1,4 @@
+// @vitest-environment node
 // Historical 19:58 integration snapshot; superseded by the Mixkit selection.
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';

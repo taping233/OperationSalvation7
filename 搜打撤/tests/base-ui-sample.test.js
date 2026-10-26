@@ -148,7 +148,7 @@ describe('base page and inventory return contracts', () => {
     const source = document.querySelector('[data-name="乙"]'); source.focus(); source.click();
     // 单击卡面直接打开该堆操作台。
     expect(document.querySelector('[data-act="warehousePick"]')).toBeNull();
-    expect(openCard).toHaveBeenCalledWith(1, { from: source });
+    expect(openCard).toHaveBeenCalledWith(1, expect.objectContaining({ from: source }));
     expect(document.getElementById('cardZoom')._returnSource).toBe(source);
     expect(focus.get('stash/cards')?.browserKey).toBe('乙');
     presentHub(ui, shell('stash', warehouseHTML()), icons);

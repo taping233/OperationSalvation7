@@ -33,7 +33,7 @@ it.each([[false,false],[true,false],[false,true],[true,true]])('armup boss=%s te
  expect(reason).toBeFalsy();expect(R.energy).toBe(before.energy-1);
  if(boss){expect(R.hand).toContain('runtime-1');expect(R.hand).toContain('runtime-2');expect(R.drawPile).not.toContain('runtime-1');}
  else {
-   expect(R.granted.filter(o=>o.card.id==='starter-attack')).toHaveLength(10);
+   expect(R.granted.filter(o=>o.card.id==='starter-attack')).toHaveLength(5);
    expect(R.drawPile).toEqual(before.deck);
    expect(R.hand).toEqual(before.hand.filter(uid=>uid!=='runtime-0'));
  }
@@ -41,12 +41,12 @@ it.each([[false,false],[true,false],[false,true],[true,true]])('armup boss=%s te
 });
 
 
-it.each([['法术',0],['武术',2]])('旧文本定向抽%s只从本场10张初始攻击牌库筛选',async(type,drawn)=>{
+it.each([['法术',0],['武术',2]])('旧文本定向抽%s只从本场5张初始攻击牌库筛选',async(type,drawn)=>{
  const custom={id:'custom-draw',name:'自定义定向抽牌',type:'法术',rarity:'古朴',cost:2,desc:`从牌库中抽取 2 张${type}牌。`};
  const game=makeGame([custom]);BattleSession.start(game,[{id:'foe',name:'靶',hp:999,atk:0}],{isBoss:false});
  const energy=R.energy;BattleSession.commands.playCard('runtime-0','self');await settle();
- expect(R.energy).toBe(energy-2);expect(R.granted).toHaveLength(10);
- expect(R.hand).toHaveLength(drawn);expect(R.drawPile).toHaveLength(10-drawn);
+ expect(R.energy).toBe(energy-2);expect(R.granted).toHaveLength(5);
+ expect(R.hand).toHaveLength(drawn);expect(R.drawPile).toHaveLength(5-drawn);
  expect(R.hand.every(uid=>R.granted.find(entry=>entry.uid===uid)?.card.id==='starter-attack')).toBe(true);
  BattleSession.commands.flee();await settle();
 });

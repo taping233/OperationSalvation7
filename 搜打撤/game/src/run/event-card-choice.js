@@ -80,7 +80,6 @@ export function createEventCardChoiceController({
     const capacity = game.bagCapacityText?.() || `${game.usedSlots?.() ?? 0}/${game.bagCap?.() ?? SDT.Base.bagCap()} 格`;
     const noFit = !cards.some(card => card && game.canReceiveCard(card));
     game.state = 'modal';
-    setBagReturnHook(() => render(record, current, '', selectedIndex));
     nodeShell({
       tone:'event', asset:spec.asset, icon:'[[icon:cards]]', title:spec.title, sub:spec.sub,
       body:`<div class="bt-hand event-choice-hand">${cards.map((card, i) => card ? `
@@ -93,6 +92,7 @@ export function createEventCardChoiceController({
         <button type="button" class="ov-btn" data-act="eventCardBag">整理背包</button>
         <p class="reward-notice" data-event-capacity role="status" aria-live="polite">${esc(notice || (noFit ? '当前候选都放不下，请先整理背包；候选和已支付的货币会保留。' : ''))}</p>`,
     });
+    setBagReturnHook(() => render(record, current, '', selectedIndex));
     const page = UI.el?.ovBody?.firstElementChild;
     const binding = nodeActionBinding(game, UI, 'eventCardPick');
     const active = () => current() && binding() && game.nodeRewards?.[key] === record && record.taken === null
@@ -118,7 +118,7 @@ export function createEventCardChoiceController({
       if (!Number.isInteger(index) || !card) return false;
       closeChoiceZoom();
       if (card.id === 'tt2-apollo') {
-        // 先锁定选择再建立同一份 Run 的待领快照；主卡和附赠都由宝箱逐张承接。
+        // 先锁定选择再建立同一份 Run 的待领快照；主卡和附赠都由搜刮点逐张承接。
         // 交接失败且未建立待领时只还原此节点，既不发主卡也不重新抽候选。
         if (typeof openFixedRewardsOnCell !== 'function' || typeof SDT.Chests?.restore !== 'function' || typeof SDT.Chests?.serialize !== 'function') {
           render(record, current, '领奖页暂未就绪，主卡与已支付货币均已保留，请稍后重试。');
@@ -174,11 +174,12 @@ export function createEventCardChoiceController({
         closeChoiceZoom();
         setBagReturnHook(null);
         bagSlots.organizeReward({ card, current:choiceCurrent,
-          onReturn:() => { if (choiceCurrent()) render(record, current, '', index); },
-          onClaim:() => { if (choiceCurrent()) pick(index); },
-          onFullBag:() => { if (choiceCurrent()) {
-            render(record, current, '', index); bagSlots.showBackpack();
-          } },
+          onReturn:() => choiceCurrent() ? render(record, current, '', index) : false,
+          onClaim:() => choiceCurrent() ? pick(index) : false,
+          onFullBag:() => {
+            if (!choiceCurrent() || !render(record, current, '', index)) return false;
+            return bagSlots.showBackpack();
+          },
         });
         return false;
       }

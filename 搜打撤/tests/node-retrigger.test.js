@@ -1,7 +1,7 @@
 import { canvasTraps, audioGainFields } from './helpers/environment-fixtures.js';
 /* 回归测试（2026-09-20 老板定版）：节点完成结算后立即变普通；未触发退出仍可重进；商店离开才消耗。
  * 地图边是双向的（map-generator addEdge 双向登记），走回头路是合法移动——
- * 此前 resolveCell 无 visited 拦截，返回旧格会重刷宝箱/火堆/事件等。
+ * 此前 resolveCell 无 visited 拦截，返回旧格会重刷搜刮点/火堆/事件等。
  * 口径：
  *   1) 收益节点完成领取即写 visited，站在格上也不能重刷；
  *   2) 商店关闭后仍可重开，离开商店格时才写 visited。
@@ -73,7 +73,7 @@ async function sweep(max = 120) {
     }
   }
 }
-// 通用收益计数：币 + 背包卡总张数 + 物资栏总数（宝箱开出的卡/币都会入账）
+// 通用收益计数：币 + 背包卡总张数 + 物资栏总数（搜刮点开出的卡/币都会入账）
 const lootCount = () => game.coins
   + game.ownedCards.reduce((a, o) => a + (o.count || 1), 0)
   + (game.inventory || []).reduce((a, b) => a + (b.count || 1), 0);
@@ -104,7 +104,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
 
   it('收益完成即锁；商店离开才锁；返回均不重复触发', async () => {
     // 层内类型布局按局随机（种子固定但 skipClassChoice/上游随机源演进都会平移消耗序列，
-    // 固定种子不再保证「第 1 层=直线图」的旧前提），动态选目标格：优先宝箱/物资格
+    // 固定种子不再保证「第 1 层=直线图」的旧前提），动态选目标格：优先搜刮点/物资格
     // （收益可计数），兜底商店（页面可观测），且其邻格存在可正常结算的格子
     // （仅入口/空白/商店/营火，不进入需要独立选择与确认的随机事件）。enterLayer 只置位不触发内容，用来构造
     // 「站在目标格」的起点。目标格可能落在任意层：逐层扫描；整局都没有合法格是
@@ -133,7 +133,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
       game.state = 'idle';
       target = findTarget();
     }
-    expect(target, '整局应存在邻格可正常结算的宝箱/物资/商店格（重摇 5 次后仍无则地图生成有问题）').toBeTruthy();
+    expect(target, '整局应存在邻格可正常结算的搜刮点/物资/商店格（重摇 5 次后仍无则地图生成有问题）').toBeTruthy();
     const { li, cellIdx, leaveIdx, kind } = target;
     enterLayer(li, cellIdx);
     await tick(30);
@@ -251,14 +251,12 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
       game.layerData[0].logical[neighbor].def=originalNeighborDef; // 返回地图会保存，先恢复完整合法地图。
       expect(pending.current.cards).toHaveLength(1);expect(game.visited[key]).toBeFalsy();
       expect(clickAct('chestReturn')).toBe(true);await tick(0);expect(game.state).toBe('idle');
-      game.layerData[0].logical[neighbor].def={type:'entrance',name:'测试安全位置',extraction:false};
-      expect(moveTo(0,neighbor)).toBe(true);await tick(30);
-      game.layerData[0].logical[neighbor].def=originalNeighborDef; // 安全落位只供此夹具，不污染持久化地图配额。
+      // Keep the current node while saving; entering another node expires its rewards.
       expect(await session.saveGame()).toBe(true);
       expect((await session.loadGame(slot)).ok).toBe(true);
-      expect(game.trackPos).toBe(neighbor);expect(game.nodeChestRewards[key]).toEqual(pending);
+      expect(game.trackPos).toBe(idx);expect(game.nodeChestRewards[key]).toEqual(pending);
       game.ownedCards.pop();
-      expect(moveTo(0,idx)).toBe(true);await tick(30);
+      expect(reenterCell()).toBe(true);await tick(30);
       expect(document.querySelector('[data-act="chestTake1"]')).toBeTruthy();
       expect(clickAct('chestTake1')).toBe(true);await tick(0);expect(clickAct('chestContinue')).toBe(true);await tick(0);
       expect(game.visited[key]).toBe(1);expect(game.nodeChestRewards[key]).toBeUndefined();

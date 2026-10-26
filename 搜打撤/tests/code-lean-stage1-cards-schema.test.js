@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 

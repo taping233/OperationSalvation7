@@ -1,3 +1,4 @@
+import { drainBattle } from './helpers/battle-fixtures.js';
 import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 /* 英雄卡（能力卡，11 张）与「直接释放」类卡牌真战斗实打审计（2026-09-11 老板任务）。
  * 生效口径 = cards.js v10 设计者稿批次（整卡覆盖）。
@@ -78,37 +79,9 @@ async function discoverFixedPotion(g, spell, potionId) {
   }
 }
 
-async function drain(maxLoops = 400) {
-  for (let i = 0; i < maxLoops; i++) {
-    await tick();
-    const s = snap();
-    if (s.choosing) continue;                       // 抉择留给用例自己决定
-    if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
-    if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return snap();
-}
+const drain = (maxLoops = 400) => drainBattle(BattleSession, maxLoops, { stopAt: ['choosing'] });
 // 等待结算空闲但不代选手牌（供「选择手牌」类用例在半途断言）
-async function waitIdle(maxLoops = 400) {
-  for (let i = 0; i < maxLoops; i++) {
-    await tick();
-    const s = snap();
-    if (s.handSelecting || s.choosing) return s;
-    if (!s.busy && s.actionQueueLength === 0 && !s.discovering) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0 && !fresh.discovering) return fresh;
-      continue;
-    }
-  }
-  return snap();
-}
+const waitIdle = (maxLoops = 400) => drainBattle(BattleSession, maxLoops, { stopAt: ['discovering', 'handSelecting', 'choosing'] });
 // 等待回到玩家阶段（敌方阶段异步推进 + 回合开始效果排队）
 async function nextTurn(maxLoops = 400) {
   for (let i = 0; i < maxLoops; i++) {
@@ -124,7 +97,8 @@ async function nextTurn(maxLoops = 400) {
       continue;
     }
   }
-  return snap();
+  const state = snap();
+  throw new Error(`等待玩家回合超时（${maxLoops} 轮）：phase=${state.phase}, busy=${state.busy}, queue=${state.actionQueueLength}`);
 }
 async function startBoss(cards, over = {}) {
   const g = makeGame(cards, over);
@@ -249,7 +223,7 @@ describe('英雄卡实打 · 战士', () => {
     BattleSession.commands.playCard(uidOf(g, hero('tt8-hero-warrior')), null);
     await drain();
     expect(seen(g, '化为'), slice(g)).toBe(true);
-    // 普通战发牌段随能力卡禁入普通战而失效（2026-09-16 规则）；化为登记在 BOSS 战照常生效
+    // 此处验证 BOSS 战中的初始攻击转化登记。
     expect(seen(g, '化为'), slice(g)).toBe(true);
     BattleSession.commands.flee();
     await drain(20);
@@ -417,24 +391,7 @@ describe('直接释放家族实打', () => {
     const hand = snap().hand.map(u => (viewApi.findCard(u) || {}).card).filter(Boolean).map(c => c.name);
     expect(hand.includes(picked.name), `选中的【${picked.name}】应被直接释放而非留在手牌：${slice(g)}`).toBe(false);
     const foe0 = snap().foes[0];
-    const st = foe0.status || {};
-    // 药水池（parsePoolNoun('药水')=带「药水」名字的道具）逐瓶的可观测信号：
-    //   伤害/诅咒类 → 敌掉血/冰冻/中毒/流血；回复类 → hp>300（满血 99999 不存在）；
-    //   攻击/法伤强化 → atkUp/spellUp；抽牌类另以真实牌库 UID 差分精确验证（见下一用例）；
-    //   巨蟒药水 →「召唤」；转势药水「附加陷阱牌」暂无结算分支 → 走「占位」日志（管线确实跑过该牌）。
-    //   复原药水在战斗内是合法无操作（本场没有可复原的消耗堆），与满血回复同样豁免。
-    const noOpInBattle = picked.name === '复原药水';
-    const healingAtFull = picked.name === '恢复药水' && g.hp >= g.maxHp;
-    const observable = noOpInBattle || healingAtFull || foe0.hp < foe0.maxHp
-      || (st.freeze || 0) > 0 || (st.poison || 0) > 0 || (st.bleed || 0) > 0
-      || g.hp > 300
-      || (snap().pstat.status && ((snap().pstat.status.spellUp || 0) > 0 || (snap().pstat.status.atkUp || 0) > 0))
-      || slice(g).includes('祝福')
-      || slice(g).includes('神秘药水')
-      || slice(g).includes('初始攻击')
-      || slice(g).includes('召唤')
-      || slice(g).includes('占位');
-    expect(observable, `释放应有可观测效果：${slice(g)}`).toBe(true);
+    // 固定发现输入；只接受真正释放后的伤害与离手结果。
     expect(picked.name).toBe('火焰药水');
     expect(foe0.hp).toBe(foe0.maxHp - 2);
     BattleSession.commands.flee();

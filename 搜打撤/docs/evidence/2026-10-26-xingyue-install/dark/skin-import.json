@@ -1,0 +1,29 @@
+{
+  "identity": {
+    "character": "xingyue",
+    "id": "dark-priestess",
+    "name": "暗牧",
+    "source_sha256": "ad532d809d34a5118376e544b5345164a4316f6d0fe66352ddf7b2b6c0b10064",
+    "asset": "portraits/full/xingyue-dark-priestess.webp",
+    "quality": 94
+  },
+  "source": "D:\\素材\\代号柒\\.tmp\\xingyue-install-1026\\dark-padded.png",
+  "source_size": [
+    2731,
+    1536
+  ],
+  "default_sha256": "7c7ccf51f73869859603cb826df8fd75f38e3ca6d56a24683c6cf85242e2d820",
+  "asset": {
+    "path": "portraits/full/xingyue-dark-priestess.webp",
+    "ext": "webp",
+    "bytes": 173064,
+    "sha256": "2ab923c8ed89b8f7b63ee901bbe15eb676a1e168da27c8efe064d6c53cab9008",
+    "license": "项目自有（AI 生成）",
+    "source": "docs/evidence/2026-10-26-xingyue-install/dark/skin-import.json"
+  },
+  "operations": [],
+  "status": "imported",
+  "default_unchanged": true,
+  "git_mutation": false,
+  "processing": "RGB WebP; full canvas, no crop or resize"
+}

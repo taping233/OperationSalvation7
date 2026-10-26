@@ -2,6 +2,7 @@ import { readBase, readBaseReceipt, commitBase } from './base.commands.js';
 import { clone, fail, freezeDeep } from './commands.shared.js';
 import { stackCapOf } from '../core/card-capacity.js';
 import { departureSummary } from './departure.summary.js';
+import { departureStackKey, findDepartureStack } from './base-departure.commands.js';
 
 const PRESET_IDS = Object.freeze(['preset-1', 'preset-2']);
 const DEFAULT_PRESETS = Object.freeze({
@@ -52,35 +53,57 @@ export function getPreparation(baseSnapshot) {
 }
 
 function catalogMap(cardCatalog = []) { return new Map(cardCatalog.filter(Boolean).map(card => [card.id, card])); }
-function stashCount(baseSnapshot, ref) {
-  return (baseSnapshot?.stash || []).reduce((sum, stack) => {
-    const id = stack?.card?.id;
-    const variant = stack?.variantKey || stack?.card?.variantKey;
-    return id === ref.cardId && (!ref.variantKey || variant === ref.variantKey) ? sum + Math.max(0, Number(stack.count) || 0) : sum;
-  }, 0);
+const variantOf = stack => stack.variantKey || stack.card?.variantKey || '';
+
+// Only advertise stacks that the departure command can resolve unambiguously.
+export function preparationStacks(baseSnapshot) {
+  const stash = baseSnapshot?.stash || [];
+  return stash.filter(stack => stack?.card?.id && Number.isInteger(stack.count) && stack.count > 0
+    && findDepartureStack(stash, departureStackKey(stack)) === stack);
 }
 
 /** @param {import('./preparation.types.js').PreviewOptions} [options] */
-export function previewDeployment({ baseSnapshot, preset, mode = 'standard', cardCatalog = [], characters = [], pets = [], bagCapacity = Infinity, starterCount = 5, starterCard } = {}) {
+export function previewDeployment({ baseSnapshot, preset, mode = baseSnapshot?.selMode || 'standard', cardCatalog = [], characters = [], pets = [], bagCapacity = Infinity, starterCount = 5, starterCard } = {}) {
   const picks = normalizePicks(preset?.picks);
-  if (!baseSnapshot || !preset || !picks) return freezeDeep({ resolvedPicks: [], missing: [], forbidden: [], costs: { stashCards: 0, slotsUsed: 0, extraStackSlots: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
+  if (!baseSnapshot || !preset || !picks) return freezeDeep({ mode, resolvedPicks: [], deploymentPicks: {}, missing: [], forbidden: [], costs: { stashCards: 0, slotsUsed: 0, extraStackSlots: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
   const cards = catalogMap(cardCatalog);
-  const missing = [], forbidden = [], resolvedPicks = [], previewStacks = [];
-  for (const pick of picks) {
-    const card = cards.get(pick.card.cardId) || (baseSnapshot.stash || []).find(s => s?.card?.id === pick.card.cardId)?.card || null;
-    const availableCount = stashCount(baseSnapshot, pick.card);
+  const missing = [], forbidden = [], resolved = new Map(), deploymentPicks = {};
+  const stash = preparationStacks(baseSnapshot).map(stack => ({ ...stack, card: { ...clone(stack.card), ...(variantOf(stack) ? { variantKey: variantOf(stack) } : {}) } }));
+  const remaining = new Map(stash.map(stack => [departureStackKey(stack), stack.count]));
+  // Explicit variants reserve first. Historical ID-only wishes then use base stacks
+  // before other variants, preserving warehouse order within each group.
+  const ordered = [...picks.filter(pick => pick.card.variantKey), ...picks.filter(pick => !pick.card.variantKey)];
+  for (const pick of ordered) {
+    const candidates = stash.filter(stack => stack.card.id === pick.card.cardId && (!pick.card.variantKey || variantOf(stack) === pick.card.variantKey))
+      .sort((a, b) => Number(!!variantOf(a)) - Number(!!variantOf(b)));
+    const eligible = candidates.filter(stack => stack.card.rarity !== '职业');
+    const card = eligible[0]?.card || candidates[0]?.card || cards.get(pick.card.cardId) || null;
+    const availableCount = eligible.reduce((sum, stack) => sum + remaining.get(departureStackKey(stack)), 0);
     const name = card?.name || pick.card.cardId;
     let status = 'ready', appliedCount = pick.count;
-    if (card?.rarity === '职业') {
+    const allocations = [];
+    if (!eligible.length && card?.rarity === '职业') {
       status = 'forbidden'; appliedCount = 0;
       forbidden.push({ card: pick.card, name, requestedCount: pick.count, code: 'CLASS_CARD_FORBIDDEN' });
     } else if (availableCount < pick.count) {
       status = 'missing'; appliedCount = 0;
       missing.push({ card: pick.card, name, requestedCount: pick.count, availableCount, missingCount: pick.count - availableCount, code: availableCount ? 'INSUFFICIENT_CARDS' : 'CARD_NOT_OWNED' });
     }
-    resolvedPicks.push({ card: pick.card, name, requestedCount: pick.count, availableCount, appliedCount, status });
-    if (status === 'ready') previewStacks.push({ stackKey: `preview:${previewStacks.length}`, card: card || { id: pick.card.cardId, name }, count: appliedCount });
+    let needed = pick.count;
+    for (const stack of eligible) {
+      const stackKey = departureStackKey(stack), count = Math.min(needed, remaining.get(stackKey));
+      if (!count) continue;
+      remaining.set(stackKey, remaining.get(stackKey) - count);
+      needed -= count;
+      if (status === 'ready') {
+        allocations.push({ stackKey, card: stack.card, count });
+        deploymentPicks[stackKey] = (deploymentPicks[stackKey] || 0) + count;
+      }
+      if (!needed) break;
+    }
+    resolved.set(refKey(pick.card), { card: pick.card, name, requestedCount: pick.count, availableCount, appliedCount, status, allocations });
   }
+  const resolvedPicks = picks.map(pick => resolved.get(refKey(pick.card)));
   const characterKnown = !preset.characterId || characters.some(item => item.id === preset.characterId);
   const characterOwned = !preset.characterId || !!baseSnapshot.characters?.[preset.characterId];
   const petKnown = !preset.petId || pets.some(item => item.id === preset.petId);
@@ -92,15 +115,15 @@ export function previewDeployment({ baseSnapshot, preset, mode = 'standard', car
     starterCard: starterCard || cards.get('starter-attack') || cardCatalog.find(card => card?.name === '初始攻击') || { id: 'starter-attack', name: '初始攻击', type: '武术' },
     fireball: cards.get('tt3-fireball'),
     pet: pets.find(pet => pet.id === (preset.petId || baseSnapshot.petSel)),
-    stash: previewStacks,
-    picks: Object.fromEntries(previewStacks.map(stack => [stack.stackKey, stack.count])),
+    stash,
+    picks: deploymentPicks,
     capacity: bagCapacity,
     stackCapOf,
   });
   const slotsUsed = summary.slots;
   const extraStackSlots = slotsUsed - new Set(summary.cells.map(cell => cell.card.name)).size;
-  const capacityOk = !Number.isFinite(summary.capacity) || slotsUsed <= summary.capacity;
-  return freezeDeep({ mode, resolvedPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, extraStackSlots, bagCapacity: summary.capacity }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
+  const capacityOk = summary.capacityOk;
+  return freezeDeep({ mode, resolvedPicks, deploymentPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, extraStackSlots, bagCapacity: summary.capacity, baseCapacity: summary.baseCapacity, ordinarySlots: summary.ordinarySlots, resourceSlots: summary.resourceSlots }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
 }
 
 export function createPreparationCommands(deps = {}) {
@@ -142,7 +165,7 @@ export function createPreparationCommands(deps = {}) {
     if (!preset) return fail('NOT_FOUND', '找不到出征预设');
     const preview = previewDeployment({ baseSnapshot: current.value, preset, mode: input.mode, cardCatalog: deps.cardCatalog || [], characters: deps.characters || [], pets: deps.pets || [], bagCapacity: typeof deps.bagCapacity === 'function' ? deps.bagCapacity(current.value) : deps.bagCapacity });
     if (!preview.canStart) return fail('INVALID_STATE', '预设当前不可出征，请处理缺卡、禁带或资格问题', false, { preview });
-    return deps.startDeployment(context, { presetId: input.presetId, mode: input.mode, expectedRunRevision: input.expectedRunRevision, resolvedPicks: preview.resolvedPicks, characterId: preset.characterId, petId: preset.petId });
+    return deps.startDeployment(context, { presetId: input.presetId, mode: preview.mode, expectedRunRevision: input.expectedRunRevision, resolvedPicks: preview.resolvedPicks, deploymentPicks: preview.deploymentPicks, characterId: preset.characterId, petId: preset.petId });
   };
 
   return { getPreparation: slotId => { const result = port.readBase(slotId); return result.ok ? { ...result, value: getPreparation(result.value) } : result; }, setTrackedGoals, savePreset, startDeployment };

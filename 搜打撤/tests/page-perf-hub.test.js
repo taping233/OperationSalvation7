@@ -2,6 +2,7 @@ import { isCardBrowserCurrent, cardBrowserItems, filterCardBrowserItems, selectC
 import { uiDisclosure } from '../game/src/ui/ui-disclosure.js';
 import { mountCollectionView, collectionItemHTML, collectionWorkspaceHTML } from '../game/src/ui/collection-view.js';
 import { createCollectionArt } from '../game/src/ui/collection-view-art.js';
+import { syncViewChildren } from '../game/src/ui/view-children-sync.js';
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -17,10 +18,10 @@ const bagCurrent = readFileSync(resolve('game/src/hub/game.bag.view2.js'), 'utf8
 function mountWarehouse(source, size = 200, pocket = false) {
   const keyOf = vi.fn(stack => `card:${stack.card.id}${stack.card.variantKey ? `:${stack.card.variantKey}` : ''}`);
   const factory = new Function('esc', 'escAttr', 'stackKeyOf', 'characterFor', 'bindCardNavigation',
-    'decorateInventoryZoom', 'warehouseCategoriesV7HTML', 'animateBaseRefresh', 'uiDisclosure', 'cardBrowserItems', 'filterCardBrowserItems', 'selectCardBrowserItems', 'isCardBrowserCurrent', 'mountCollectionView', 'collectionItemHTML', 'collectionWorkspaceHTML', 'createCollectionArt',
+    'decorateInventoryZoom', 'warehouseCategoriesV7HTML', 'animateBaseRefresh', 'uiDisclosure', 'cardBrowserItems', 'filterCardBrowserItems', 'selectCardBrowserItems', 'isCardBrowserCurrent', 'mountCollectionView', 'collectionItemHTML', 'collectionWorkspaceHTML', 'createCollectionArt', 'syncViewChildren',
     source.replace(/^import .*;\r?$/gm, '').replace(/export /g, '') + '\nreturn { warehouseHTML, bindWarehouse };');
   const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[char]);
-  const feature = factory(escape, escape, keyOf, () => null, () => {}, () => {}, () => '', () => {}, uiDisclosure, cardBrowserItems, filterCardBrowserItems, selectCardBrowserItems, isCardBrowserCurrent, mountCollectionView, collectionItemHTML, collectionWorkspaceHTML, createCollectionArt);
+  const feature = factory(escape, escape, keyOf, () => null, () => {}, () => {}, () => '', () => {}, uiDisclosure, cardBrowserItems, filterCardBrowserItems, selectCardBrowserItems, isCardBrowserCurrent, mountCollectionView, collectionItemHTML, collectionWorkspaceHTML, createCollectionArt, syncViewChildren);
   const stacks = Array.from({ length:size }, (_, index) => ({
     card:{ id:`test-${index}`, name:`卡牌${index}`, type:'法术', rarity:'古朴' }, count:2,
   }));
@@ -117,7 +118,8 @@ describe('warehouse bounded work and live inventory', () => {
     document.querySelector('.stash-cell').click();
     expect(fixture.base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('卡牌0', false);
     expect(fixture.openCard).not.toHaveBeenCalled();
-    await vi.waitFor(() => expect(fixture.refresh).toHaveBeenCalledTimes(1));
+    await vi.waitFor(() => expect(fixture.sound.ding).toHaveBeenCalledOnce());
+    expect(fixture.refresh).not.toHaveBeenCalled();
     expect(fixture.sound.tick).toHaveBeenCalledTimes(1);
   });
 

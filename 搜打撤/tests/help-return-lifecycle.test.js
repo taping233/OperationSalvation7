@@ -51,10 +51,10 @@ describe('公共帮助返回生命周期，真实商店消费者（jsdom合成�
     if (change !== 'new-page' && change !== 'new-help') expect(document.activeElement).toBe(focus);
   });
   it('兼容 before/back(state)，返回一次；没有back仍为无操作', () => {
-    const back = vi.fn(), before = vi.fn(() => ({custom:7}));
+    const back = vi.fn((_state,commit)=>commit(()=>UI.showOverlay('返回','<main>来源</main>'))), before = vi.fn(() => ({custom:7}));
     UI.registerHelp('custom',{title:'自定义',html:'内容', before,back}); UI.showHelp('custom');
     UI._acts.helpBack(); UI._acts.helpBack();
-    expect(before).toHaveBeenCalledOnce(); expect(back).toHaveBeenCalledExactlyOnceWith({custom:7});
+    expect(before).toHaveBeenCalledOnce(); expect(back).toHaveBeenCalledExactlyOnceWith({custom:7},expect.any(Function));
     UI.registerHelp('none',{title:'说明',html:'内容'}); UI.showHelp('none');
     const content = UI.el.ovBody.firstElementChild; UI._acts.helpBack(); expect(UI.el.ovBody.firstElementChild).toBe(content);
   });

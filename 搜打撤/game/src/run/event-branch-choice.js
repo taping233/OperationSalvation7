@@ -40,13 +40,13 @@ export function createEventBranchChoiceController({
       const price = kind === 'purchase' ? 2 : kind === 'recode' ? 3 : 0;
       const entry = record.source ? game.ownedCards.find(item => item.uid === record.source.uid) : null;
       game.state = 'modal';
-      setBagReturnHook(() => render());
       eventNodeShell({ tone:'event', asset:assetOf(), icon:'[[icon:cards]]', title:titleOf(kind),
         sub:record.source ? `以「${esc(record.source.name)}」换取一张同类型、同稀有度的卡牌${price ? '，确认时支付 3 币' : ''}。原卡在确认前保留。`
           : price ? '这张招式售价 2 币，可以先查看；确认购买时才扣币。' : `从以下 ${cards.length} 张卡中选择 1 张。`,
         body:`<div class="bt-hand event-choice-hand">${cards.map((card, index) => card ? `<div class="event-choice-option"><button type="button" class="bt-card event-choice-card" data-act="eventBranchRead" data-i="${index}" aria-label="查看${escAttr(card.name)}详情">${getCards().cardHTML(card, 'sm')}</button><button type="button" class="ov-btn ok" data-act="eventBranchPick" data-i="${index}" ${price > (game.coins || 0) ? 'disabled' : ''}>${record.source ? '确认更换' : price ? '支付 2 币购买' : '领取此牌'}</button></div>` : '<p>该候选暂不可用。</p>').join('')}</div>`,
         foot:`<button type="button" class="ov-btn" data-act="eventBranchLeave">放弃并离开</button><button type="button" class="ov-btn" data-act="eventBranchBag">整理背包</button><p class="reward-notice" role="status">${esc(notice || (record.source && !recodeSourceMatches(entry, record.source) ? '原卡已变化，请放弃本次更换。' : ''))}</p>`,
       });
+      setBagReturnHook(() => render());
       const active = eventPageBinding('eventBranchPick', current);
       UI.act('eventBranchRead', data => {
         if (!saving && active() && cards[Number(data.i)]) UI.showCardZoom(cards[Number(data.i)]);
@@ -114,13 +114,13 @@ export function createEventBranchChoiceController({
       const render = () => {
         if (selected || !current() || nodeEventAt(game) !== owner) return;
         game.state = 'modal';
-        setBagReturnHook(render);
         eventNodeShell({ tone:'event', asset:assetOf(), icon:'[[icon:recycle]]', title:titleOf(kind),
           sub:kind === 'recode' ? '先选一张招式或装备，投骰抽出最多三张同类型、同稀有度的候选。确认更换时支付 3 币。'
             : '选择一件随身装备，换取最多三件同稀有度候选中的一件。安全格、容器与已收纳装备不参与交换。',
           body:`<div class="bt-hand event-choice-hand">${eligible.map((entry, index) => `<button type="button" class="bt-card event-choice-card" data-act="eventBranchSource" data-i="${index}" aria-label="选择${escAttr(entry.card.name)}">${getCards().cardHTML(entry.card, 'sm')}</button>`).join('')}</div>`,
           foot:'<button type="button" class="ov-btn" data-act="eventBranchCancel">放弃并离开</button>',
         });
+        setBagReturnHook(render);
         const active = eventPageBinding('eventBranchSource', current);
         UI.act('eventBranchCancel', () => { if (!selected && active()) finishEventRoll(() => { game.state = 'idle'; }); });
         UI.act('eventBranchSource', data => {

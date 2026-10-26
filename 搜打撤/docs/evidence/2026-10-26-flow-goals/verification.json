@@ -1,0 +1,38 @@
+{
+  "documents": "passed",
+  "links": 770,
+  "diff": "passed",
+  "flowFourBytes": 35008.0,
+  "runtimeHashes": [
+    {
+      "path": "game/src/ui/motion-completion.js",
+      "sha256": "0EE28737BE4C01A45A7D39E67626FD053400F69EE4E880AB8765FA8B5D171174"
+    },
+    {
+      "path": "game/src/ui/overlay.js",
+      "sha256": "A42A04A028BFC2A492D60CA64243054D20C4EE63D5BA90D7BE15FEE2AA608F03"
+    },
+    {
+      "path": "game/src/ui/interface-motion.js",
+      "sha256": "919C1FA974A9D7D12E712315DF749E5FB634D2EF5ED5B7BC5BC2D2083B4A9C3C"
+    },
+    {
+      "path": "game/src/ui/transitions-director.js",
+      "sha256": "8757736C20E371B6B70E496902544AB36057D21A3A410A1EEE139C741AE2F4B6"
+    },
+    {
+      "path": "game/src/ui/discovery-selection.js",
+      "sha256": "564665713B6456F6B3254DFC7AFB5F5BD21DB9E00165A73C1FAF1B1D4897A9D2"
+    },
+    {
+      "path": "game/src/cards/structured-card-description.js",
+      "sha256": "120CD2DE275DAF8D4575C188052F42EB3E49BEB2901794C2EF9C60F1DF1E5A21"
+    },
+    {
+      "path": "game/src/cards/card-description-text.js",
+      "sha256": "E71C40A3385293392ABBCBFBF40F5EB32DE99E8F8E201A591848FD36763D0CA2"
+    }
+  ],
+  "screenshotBytes": 62279,
+  "previewCleanup": "PID40384 identity checked and stopped; port5338 released"
+}

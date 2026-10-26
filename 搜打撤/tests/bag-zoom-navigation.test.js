@@ -63,7 +63,7 @@ it('next-card click rebuilds the current inventory metadata and executes only it
   expect(zoom().querySelector('.inventory-zoom-info h2').textContent).toBe('药剂');
   expect(zoom().querySelector('.inspect-count').textContent).toContain('×2');
   zoom().querySelector('[data-act="useDetailCard"]').click();
-  expect(H.game.heal).toHaveBeenCalledWith(3);
+  expect(H.game.heal).toHaveBeenCalledWith(3, { deferFeedback: expect.any(Function) });
   expect(H.game.ownedCards.map(item => item.uid)).toEqual(['spell','potion-2']);
 });
 

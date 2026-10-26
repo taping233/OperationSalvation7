@@ -106,10 +106,14 @@ describe('same selection inputs preserve encounter construction, not whole-playt
   });
 });
 
-const bosses = [['boss_general',0.1,0,5,50,7,68], ['boss_orc',0.5,1,4,45,5,61], ['boss_elem',0.9,2,8,48,11,65]];
+const bosses = [
+  ['boss_general',0,0,5,50,7,68], ['boss_orc',0,1,4,45,5,61], ['boss_elem',0,2,8,48,11,65],
+  ['boss_witness_pope',0,3,1,60,1,81], ['boss_mutation_mother',0,4,6,45,8,61],
+  ['boss_mysterious_blocker',0,5,5,55,7,74], ['boss_necromancer',0,6,5,75,7,101],
+];
 describe.each(['standard','elite'])('public altar confirmation in %s', mode => {
   it.each(bosses)('%s selects once and reuses bossPlan', async (id, random, index, atk, hp, hardAtk, hardHp) => {
-    H.game.mode = mode; H.streams.boss = [random];
+    H.game.mode = mode; H.streams.boss = [(index + 0.5) / H.map.altar.bosses.length];
     const original = structuredClone(H.map.altar.bosses[index]);
     expect(original.id).toBe(id);
     altar.openBossGate(); expect(H.draws).toEqual([]);

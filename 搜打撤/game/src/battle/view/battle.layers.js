@@ -88,7 +88,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const el = handLayer.querySelector(`.bt-card[data-hand-index="${e.key}"]`);
     if (!el) return;
     e.preventDefault();
-    if (getSnapshot().infusing) {
+    if (getSnapshot().handSelecting) { handPlay?.({ uid:el.dataset.uid }); }
+    else if (getSnapshot().infusing) {
       const rec = [...handSlots.values()].find(entry => entry.card === el);
       const uid = infuseRotateUid(rec?.group, getSnapshot().infusing);
       if (uid) commands.selectInfusion(uid);
@@ -419,6 +420,16 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     pageGroups.forEach((g, i) => {
       const key = handSlotKey(g);
       const st = handGroupState(g, ctx);
+      const selection = extra?.materialSelection;
+      if (selection) {
+        const picked = selection.selection.picked.includes(st.uid);
+        st.blockedReason = selection.reason(st.uid);
+        st.side = null;
+        st.cls = st.blockedReason ? ' off' : picked ? ' hand-effect-selected' : '';
+        st.handState = st.blockedReason ? 'blocked' : picked ? 'selected' : 'ready';
+        st.tip = st.blockedReason || (picked ? '已选中，再点撤选' : '点击选择这张手牌');
+        st.inner = st.inner.replace(/<button class="bt-infchip"[\s\S]*?<\/button>/g, '');
+      }
       // Keep card identity and shortcut assignment; close visual gaps after a card leaves.
       const L = handDisplayLayout(i, pageGroups.length, handWidth);
       let rec = handSlots.get(key);
@@ -435,7 +446,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
           if (!face || e.target !== face) return;
           e.preventDefault();
           if (e.shiftKey) return;
-          if (getSnapshot().infusing) {
+          if (getSnapshot().handSelecting) { handPlay?.({ uid:rec.card.dataset.uid }); }
+          else if (getSnapshot().infusing) {
             const uid = infuseRotateUid(rec.group, getSnapshot().infusing);
             if (uid) commands.selectInfusion(uid);
           } else selectCardByClick(rec.card.dataset.uid, true, { autoSingleTarget: false });
@@ -496,7 +508,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
         setHandAttribute(face, 'aria-label', `${rec.__name}。${st.ruleHint} ${st.tip}`);
         setHandAttribute(face, 'aria-pressed', st.infusingNow
           ? st.pickedN === g.uids.length ? 'true' : st.pickedN ? 'mixed' : 'false'
-          : clickSelectedUid === st.uid ? 'true' : 'false');
+          : selection ? selection.selection.picked.includes(st.uid) ? 'true' : 'false' : clickSelectedUid === st.uid ? 'true' : 'false');
       }
       ordered.push(rec);
     });
@@ -560,7 +572,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     handSlots.forEach((rec, key) => {
       if (keptKeys.has(key)) return;
       handSlots.delete(key);
-      if (played.has(rec.card.dataset.uid) || !rec.slot.isConnected) { rec.slot.remove(); return; }
+      if (extra?.materialSelection || rec.group.key.startsWith('hand-choice:') || played.has(rec.card.dataset.uid) || !rec.slot.isConnected) { rec.slot.remove(); return; }
       animateSafe(rec.slot, [
         { transform: 'translate(0px,0px)', opacity: 1 },
         { transform: 'translateY(46px)', opacity: 0 },
@@ -701,10 +713,11 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     if (!opts.intent) {
       parts.stats = document.createElement('div');
       parts.stats.className = 'sts-stats';
-      parts.chips = document.createElement('div');
-      parts.chips.className = 'sts-chips';
-      np.appendChild(parts.stats); np.appendChild(parts.chips);
+      np.appendChild(parts.stats);
     }
+    parts.chips = document.createElement('div');
+    parts.chips.className = 'sts-chips';
+    np.appendChild(parts.chips);
     if (opts.equips) {
       parts.actions = document.createElement('div');
       parts.actions.className = 'sts-unit-actions';
@@ -1006,6 +1019,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
         catch { /* 页面销毁等 DOM 异常时不影响战斗渲染 */ }
       } else if (parts.intent.style.display !== 'none') parts.intent.style.display = 'none';
       setSection(parts.fig, sig, 'fig', f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime'));
+      setStatusSection(parts.chips, sig, f.dead ? '' : curseChips(f.status || {}, { compact:true }));
       setUnitAttribute(parts.fig, 'role', 'img');
       setUnitAttribute(parts.fig, 'aria-label', f.name);
       // Name and attack readout stay above the figure; HP stays at the feet.

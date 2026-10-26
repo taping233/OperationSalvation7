@@ -1,3 +1,4 @@
+import { drainBattle } from './helpers/battle-fixtures.js';
 import { playerFields } from './helpers/environment-fixtures.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 
@@ -34,22 +35,9 @@ function makeGame(cards) {
   };
 }
 const foe = (name, hp = 30) => ({ id: 'infantry', name, hp, atk: 1 });
-const tick = () => new Promise(resolve => setTimeout(resolve, 0));
-const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
+
 const snap = () => BattleSession.getSnapshot();
-async function settle(max = 300) {
-  for (let i = 0; i < max; i++) {
-    await tick();
-    const state = snap();
-    if (!state.busy && state.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return snap();
-}
+const settle = (max = 300) => drainBattle(BattleSession, max, { stopAt: ['discovering', 'choosing', 'handSelecting'] });
 async function leaveBattle() {
   if (snap().deckSelection) BattleSession.commands.cancelDeck();
   else if (snap().player) BattleSession.commands.flee();

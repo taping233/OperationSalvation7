@@ -309,13 +309,13 @@ function markCardResolving(uid, signal, active) {
 }
 function restoreConsumed(n) { return bag.restoreConsumed(n); }
 function itemUsability(card) { return bag.itemUsability(card); }
-function useItem(uid, side) { if (!hasPendingEndTurn()) return bag.useItem(uid, side); }
+function useItem(uid, side) { return hasPendingEndTurn() ? false : bag.useItem(uid, side); }
 function bagSlam() { if (!hasPendingEndTurn()) return bag.bagSlam(); }
 function beginDartStrike(extra) { return bag.beginDartStrike(extra); }
 function resolveDart(side) { return bag.resolveDart(side); }
 function resolveSlam(side) { return bag.resolveSlam(side); }
 function slamSkill() { return bag.slamSkill(); }   // 2026-10-02 老板：砸击换五职业分化技能，视图读当前口径
-function usePotion(uid) { if (!hasPendingEndTurn()) return bag.usePotion(uid); }
+function usePotion(uid) { return hasPendingEndTurn() ? false : bag.usePotion(uid); }
 function openBag() { return bag.openBag(); }
 function closeBag() { return bag.closeBag(); }
 
@@ -705,6 +705,7 @@ function closeBag() { return bag.closeBag(); }
     triggersM2,
   });
   const bag = createBattleBag({
+    emitBattlePresentation,
     resolveCardSteps: (/** @type {Parameters<typeof resolveCard.steps>} */ ...args) => resolveCard.steps(...args),
     requestBattleRender, clearTargetSession, cancelInteraction, beginSpecialTargeting, interactionOf,
     queueBattleAction, runStagedSteps, singleTargetHitSteps, applyTextEffects, hitFoe,
@@ -829,7 +830,7 @@ function closeBag() { return bag.closeBag(); }
     return r.dealt;
   }
 
-  // 附加 1 层流血或中毒（变异巢母狂乱用）
+  // 附加 1 层流血或中毒（囊巢母体狂乱用）
   function frenzyCurse(foe) {
     const key = Random.random('status', 'generation') < 0.5 ? 'bleed' : 'poison';
     addPlayerCurse(key, 1, foe);
@@ -837,7 +838,7 @@ function closeBag() { return bag.closeBag(); }
     instanceRuntime.G.log(`[[icon:bolt]] <b>${esc(foe.name)}</b> 的攻击附加了 <b>1</b> 层${Combat.CURSE_META[key].name}`, 'warn');
   }
 
-  // 附加 1 层随机诅咒（滋生异变体「攻击并施加诅咒」用）
+  // 附加 1 层随机诅咒（囊生畸变体「攻击并施加诅咒」用）
   function elCurse(foe) {
     const keys = ['bleed', 'poison'];
     const key = keys[Math.floor(Random.random('status', 'generation') * keys.length)];

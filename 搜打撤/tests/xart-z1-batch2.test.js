@@ -55,15 +55,14 @@ describe('A5-ABANDON-01 放弃页抢运清单卡面网格', () => {
 });
 
 describe('A5-EXSTASH-01 整理页带入卡角标', () => {
-  it('renderExtractStash 按 o.brought 计数，纯展示页标注出发曾带入记录', () => {
+  it('保留带入卡账本，整理页不推断混堆后剩余卡的来源', () => {
     expect(altar).toContain('broughtByName');
     expect(altar).toContain('if (o.brought) broughtByName.set(o.card.name');
     const card={id:'brought-card',name:'携入卡',rarity:'稀有',type:'武术'};
     const options={remainingCards:[{card,count:3}],room:3,cardHTML:item=>item.name};
     const html=extractionStashHTML({...options,broughtByName:new Map([[card.name,2]])});
-    expect(html).toContain('class="exr-brought"');
-    expect(html).toContain('出发曾带入 ×2');
-    expect(html).toContain('不代表剩余卡的来源');
+    expect(html).not.toContain('class="exr-brought"');
+    expect(html).toContain('完成时将丢失 3 张未入库卡');
     expect(extractionStashHTML(options)).not.toContain('class="exr-brought"');
   });
 });
@@ -92,7 +91,7 @@ describe('A3-PREP-02 预设预览按分段占格计容', () => {
   });
 
   it('整备文案不再把来源封顶说成局内规则（帮助分段已按 10-04 老板令整体移除，保留上限提示口径）', () => {
-    expect(depart).toContain('同名每格叠放上限');
+    expect(depart).toContain('普通背包格已满');
     expect(depart).not.toContain('超出部分另占一格');
   });
 });

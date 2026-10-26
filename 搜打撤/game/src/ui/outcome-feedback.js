@@ -4,7 +4,16 @@ import { motionReduced, motionTiming } from './motion-presets.js';
 import '../../css/fire-rest-feedback.css';
 
 const active = new WeakMap();
+const outcomeArt = {
+  heal:new URL('../../assets/ui/outcome/recovery-v2.webp',import.meta.url).href,
+  restore:new URL('../../assets/ui/outcome/restoration-v2.webp',import.meta.url).href,
+  sacrifice:new URL('../../assets/ui/outcome/offering-v2.webp',import.meta.url).href,
+  activate:new URL('../../assets/ui/outcome/offering-v2.webp',import.meta.url).href,
+};
 const idle = () => Object.assign(Promise.resolve(false), { started:false });
+const sceneFor = (root, surface) => surface || root?.firstElementChild;
+const ownsScene = (root, scene) => !!scene?.isConnected && (!root || root.contains(scene))
+  && !scene.closest('[hidden], .closing, [data-ui-closing]');
 
 /** @typedef {{kind:'heal'|'restore'|'sacrifice'|'activate', hpBefore?:number, hpAfter?:number, maxHp?:number,
  * cards?:any[], cardHTML?:(card:any)=>string, isCurrent?:()=>boolean, compact?:boolean, blocking?:boolean,
@@ -15,18 +24,17 @@ const idle = () => Object.assign(Promise.resolve(false), { started:false });
 /** @param {HTMLElement|null|undefined} root @param {OutcomeOptions} options @returns {Promise<boolean> & {started:boolean}} */
 export function playOutcomeFeedback(root, { kind, hpBefore = 0, hpAfter = 0, maxHp = 1,
   cards = [], cardHTML = card => esc(card.name), isCurrent = () => true,
-  compact = true, blocking = false, surface = null, duration,
+  blocking = false, surface = null, duration,
   destination = '背包', cost = '', source = '', activate = false, extra = '', sourceCard = null }) {
-  const scene = surface || /** @type {HTMLElement} */ (root?.firstElementChild);
-  if (!scene?.isConnected || !isCurrent()) return idle();
+  const scene = /** @type {HTMLElement} */ (sceneFor(root, surface));
+  if (!ownsScene(root, scene) || !isCurrent()) return idle();
   active.get(scene)?.();
   if (kind === 'restore' && cards.length) window.SDT?.Sound?.sfx?.('cardRestore');
   if (motionReduced() || typeof scene.animate !== 'function') return idle();
   const healing = kind === 'heal', sacrificing = kind === 'sacrifice';
-  const timing = duration ?? (compact ? motionTiming.outcomeShort
-    : healing ? motionTiming.fireHeal : kind === 'restore' ? motionTiming.fireRestore : motionTiming.outcomeRitual);
+  const timing = duration ?? Math.min(motionTiming.outcomeShort, 900);
   const doc = scene.ownerDocument, stage = doc.createElement('div');
-  stage.className = `outcome-feedback fire-rest-feedback is-${kind}${compact ? ' is-compact' : ''}${activate ? ' is-activating' : ''}`;
+  stage.className = `outcome-feedback fire-rest-feedback is-${kind} is-compact${activate ? ' is-activating' : ''}`;
   stage.style.setProperty('--fire-rest-duration', `${timing}ms`);
   stage.setAttribute('role', 'status'); stage.setAttribute('aria-live', 'polite');
   const ratio = hp => Math.max(0, Math.min(1, hp / Math.max(1, maxHp)));
@@ -38,11 +46,9 @@ export function playOutcomeFeedback(root, { kind, hpBefore = 0, hpAfter = 0, max
   const summary = healing ? `+${Math.max(0, hpAfter - hpBefore)}` : kind === 'activate' ? '已激活' : `${cards.length} 张`;
   const detail = healing ? `${hpBefore} → ${hpAfter} / ${maxHp}` : sacrificing
     ? (activate ? `${destination}已激活` : `${destination}充能完成`) : kind === 'activate' ? '献礼已收下' : `已回到${destination}`;
-  stage.innerHTML = `<div class="outcome-halo" aria-hidden="true"></div>${cost ? `<div class="outcome-cost">${esc(cost)}</div>` : ''}`
+  stage.innerHTML = `<div class="outcome-art" aria-hidden="true"><img src="${outcomeArt[kind]}" alt="" decoding="async" draggable="false"></div>${cost ? `<div class="outcome-cost">${esc(cost)}</div>` : ''}`
     + (sourceCard ? `<div class="outcome-source-payment" aria-hidden="true">${renderCard(sourceCard)}</div>` : '')
-    + (healing ? `<div class="fire-heal-sigil" aria-hidden="true"><span>＋</span>${Array.from({length:6},(_,i)=>`<i style="--i:${i}">＋</i>`).join('')}</div>`
-      : kind === 'activate' ? '<div class="outcome-activation" aria-hidden="true">◇</div>'
-        : `<div class="fire-rest-reveal">${cardList}</div>`)
+    + (healing || kind === 'activate' ? '' : `<div class="fire-rest-reveal">${cardList}</div>`)
     + `<div class="fire-feedback-copy">${source ? `<small class="outcome-source">${esc(source)}</small>` : ''}<p>${heading}</p><strong>${summary}</strong>`
     + (healing ? '<div class="fire-heal-meter" aria-hidden="true"><span></span></div>' : '')
     + `<small>${esc(detail)}</small>${extra ? `<small>${esc(extra)}</small>` : ''}</div>`;
@@ -57,8 +63,9 @@ export function playOutcomeFeedback(root, { kind, hpBefore = 0, hpAfter = 0, max
   /** @type {Promise<boolean>} */
   const promise = new Promise(resolve => {
     let cancelMotion = () => {}, settled = false;
+    const current = () => ownsScene(root, scene) && stage.isConnected && isCurrent();
     const observer = new MutationObserver(() => {
-      if (!stage.isConnected || !isCurrent() || scene.closest('[hidden]')) finish(false);
+      if (!current()) finish(false);
     });
     const finish = current => {
       if (settled) return;
@@ -73,15 +80,19 @@ export function playOutcomeFeedback(root, { kind, hpBefore = 0, hpAfter = 0, max
     };
     const cancel = () => finish(false);
     active.set(scene,cancel);
-    observer.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','data-ui-closing']});
-    cancelMotion = completeSurfaceMotion(stage,()=>finish(isCurrent()),{duration:timing,name:'fire-rest-feedback'});
+    observer.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','class','data-ui-closing']});
+    cancelMotion = completeSurfaceMotion(stage,()=>finish(current()),{duration:timing,name:'fire-rest-feedback'});
   });
   return Object.assign(promise,{started:true});
 }
 
 // Keep existing synchronous commands synchronous when motion cannot run.
 export function afterOutcomeFeedback(root, options, next) {
+  const scene = sceneFor(root, options.surface);
   const playback = playOutcomeFeedback(root,options);
-  const proceed = () => { if (!options.isCurrent || options.isCurrent()) return next(); return false; };
+  const proceed = () => {
+    if (ownsScene(root, scene) && (!options.isCurrent || options.isCurrent())) return next();
+    return false;
+  };
   return playback.started ? playback.then(current => current ? proceed() : false) : proceed();
 }

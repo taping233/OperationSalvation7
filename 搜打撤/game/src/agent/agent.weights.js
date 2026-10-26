@@ -25,7 +25,7 @@ export const DEFAULT_WEIGHTS = {
     def: 15,
     fireHi: 95, fireLo: 45,            // hp >= gate.fire ? Hi : Lo
     chestFull: 12, chestOk: 60,        // 背包满 / 未满
-    chestLowCards: 90,                 // 09-27 R18：卡<3 张时宝箱分（攒卡保撤离赎卡能力）
+    chestLowCards: 90,                 // 09-27 R18：卡<3 张时搜刮点分（攒卡保撤离赎卡能力）
     event: 50,
     shopHi: 85, shopLo: 45,
     battleHi: 40, battleMid: 15, battleLo: 5, battleFled: 6,

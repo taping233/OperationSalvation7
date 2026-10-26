@@ -34,7 +34,7 @@ export function createGameTitleController({ readState, readSound, UI, document, 
 
   // ---------- 后台冻结兜底（2026-09-19 交互走查 B3） ----------
   // 后台标签/最小化窗口时 document 时间线冻结，纯 CSS 入场动画（首帧 opacity:0，
-  // 如宝箱 chestFlyIn / 弹层入场）会停在透明态，浮层看似黑屏死机——WAAPI 已有
+  // 如搜刮点 chestFlyIn / 弹层入场）会停在透明态，浮层看似黑屏死机——WAAPI 已有
   // animateSafe 兜底（battle.view.js），CSS 动画补这里：回到前台时把 overlay 与
   // body 直挂浮层（cardZoom/legendGet/cardGet）内的动画跳到终态。
   function bindVisibilityRecovery() {

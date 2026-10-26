@@ -6,7 +6,7 @@ export function rulesSteps(s) {
   return [
       /* ============ 战斗规则登记段 ============ */
       {
-        id: 'rule.shaTransform', gate: 'always', label: '「杀」化为另一张卡（不朽神剑/青龙化身）',
+        id: 'rule.shaTransform', gate: 'always', label: '「杀」化为另一张卡（骷髅王剑/青龙化身）',
         when: (ctx) => ctx.desc.match(/[‘’“”「」]?(?:杀|初始攻击)[‘’“”「」]?\s*化为\s*[‘’“”「」]?(?:(\d+)\s*张)?([^\s，。；;、‘’“”「」]{1,8})/),
         run: (ctx, m) => {
           if (typeof setShaTransform !== 'function') return;

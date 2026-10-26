@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createLayeredMap } from '../game/src/run/layeredMap.js';
 import { createMapSnapshot, hydrateMapSnapshot, planMapRestore } from '../game/src/run/map-snapshot.js';

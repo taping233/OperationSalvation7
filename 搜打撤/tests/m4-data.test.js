@@ -1,6 +1,5 @@
 /* M4 卡牌规则化数据迁移批 D6 锁定（2026-09-27）：cards.sync.m4.js ensureM4EquipRules。
- * B-M3 装备批派工 27 张，实迁 2 张（tt3-deep-diary / tt3-deep-seal，矩阵陷阱 T6 同草案同测）；
- * 跳过 25 张的逐卡原因见 docs/archive/card-migration-2026-09-27/M4-D6-RESULT.md（本文件不为其立用例）。
+ * 现行迁移对象只有深海咒印，已退役深海印记不再保留期望规则。
  * 每张迁的卡三条用例，锁定四件事：
  *   1) validateCardRules 通过；2) inspectCardRuleCapability supported；
  *   3) 回填函数对 canonical 卡生效（rules 与定义逐键一致、落库复读一致、marker 盖章）；
@@ -28,15 +27,6 @@ const TABLETOP10 = dataSlice.TABLETOP10.filter(card => card?.id && M4_IDS.includ
 // aura 双数值——由 syncCurseCondEquips 动态核算（rules 分支短路 desc 文本旧读法）。
 const EXPECTED_RULES = {
   'tt3-deep-diary': {
-    version: 1,
-    equip: {
-      passive: {
-        cond: { hasCurse: true },
-        aura: { atk: 2, spellPower: 2 },
-      },
-    },
-  },
-  'tt3-deep-seal': {
     version: 1,
     equip: {
       passive: {
@@ -78,6 +68,22 @@ function makeHarness(cards) {
 }
 
 describe('M4 数据迁移批 D6：每张迁的卡', () => {
+  it('整批只迁移和保存一次，逐卡校验规则、卡面及持久化', () => {
+    expect(ALL_IDS.slice().sort()).toEqual(Object.keys(EXPECTED_RULES).sort());
+    const harness = makeHarness(freshCards());
+    ensureM4EquipRules(harness);
+    for (const id of ALL_IDS) {
+      const card = harness.cards().find(entry => entry.id === id);
+      expect(card.rules, `${id} 应被回填结构化 rules`).toEqual(EXPECTED_RULES[id]);
+      // 除 rules 外卡面一字未动
+      const face = Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules'));
+      expect(face).toEqual(TABLETOP10.find(entry => entry.id === id));
+    }
+    expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(harness.cards()));
+    expect(harness.storage.getItem(MARKER)).toBe('1');
+    expect(harness.library.saves).toBe(1);
+  });
+
   for (const id of ALL_IDS) {
     describe(id, () => {
       it('validateCardRules 通过且 inspectCardRuleCapability supported（回填后的 rules 形状）', () => {
@@ -87,20 +93,6 @@ describe('M4 数据迁移批 D6：每张迁的卡', () => {
         const capability = inspectCardRuleCapability(card);
         expect(capability.ok, `${id} 能力门拒绝：${JSON.stringify(capability.issues)}`).toBe(true);
         expect(capability.kind).toBe('supported');
-      });
-
-      it('回填函数对 canonical 卡生效：rules 逐键一致、卡面不动、落库复读一致、marker 盖章', () => {
-        const harness = makeHarness(freshCards());
-        ensureM4EquipRules(harness);
-        const card = harness.cards().find(entry => entry.id === id);
-        expect(card.rules, `${id} 应被回填结构化 rules`).toEqual(EXPECTED_RULES[id]);
-        // 除 rules 外卡面一字未动
-        const face = Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules'));
-        expect(face).toEqual(TABLETOP10.find(entry => entry.id === id));
-        // 成功后复读确认：storage 串与库内容一致；全批一次保存、单枚 marker
-        expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(harness.cards()));
-        expect(harness.storage.getItem(MARKER)).toBe('1');
-        expect(harness.library.saves).toBe(1);
       });
 
       it('保守跳过：被改名 / 改字段 / 已有自有 rules 的卡一律不回填', () => {

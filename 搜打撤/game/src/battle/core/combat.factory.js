@@ -162,11 +162,23 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'at
       dmg = target.damageCap;
       r.log.push(`伤害上限 ${target.damageCap}`);
     }
+    // Necromancer exposure multiplies the final result, after all reductions.
+    if (target.status.necroticExposure > 1) {
+      dmg *= target.status.necroticExposure;
+      r.log.push(`最终承伤 ×${target.status.necroticExposure}`);
+    }
     if (options.nonLethal && target.hp != null) dmg = Math.min(dmg, Math.max(0, target.hp - 1));
     r.dealt = dmg;
     if (dmg > 0 && target.hp != null) {
       target.hp -= dmg;
       if (target.hp < 0) { r.overkill = -target.hp; target.hp = 0; }
+    }
+    if (dmg > 0 && target.hp > 0 && target.behavior === 'witness_pope' && !(target.status.silence > 0)) {
+      if (type === TYPES.ATTACK) { target.atk += 1; r.log.push('见证会教皇攻击力 +1'); }
+      if (type === TYPES.SPELL && !(target.status.healban > 0)) {
+        target.hp = Math.min(target.maxHp, target.hp + 1);
+        r.log.push('见证会教皇回复 1 点生命');
+      }
     }
     return r;
   }
@@ -234,7 +246,8 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'at
     if ((target.status.immune || 0) > 0) {
       return { poisonStacks: stacks, dealt: 0, immune: true, log: ['免疫伤害'] };
     }
-    const damage = target.damageCap > 0 && !(target.status.abreak > 0) ? Math.min(stacks, target.damageCap) : stacks;
+    const damage = (target.damageCap > 0 && !(target.status.abreak > 0) ? Math.min(stacks, target.damageCap) : stacks)
+      * Math.max(1, target.status.necroticExposure || 1);
     const r = { poisonStacks: stacks, dealt: damage, log: [] };
     if (target.hp != null) {
       target.hp -= damage;

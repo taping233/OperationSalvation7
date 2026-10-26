@@ -5,6 +5,7 @@ import '../../css/run-experience.css';
 import { previousRoutePlan, routeChoicePreview } from './route-choice-preview.js';
 import { mapNodeInfo } from '../core/node-info.js';
 import { isConsumedMapNode, mapNodeStatus } from '../core/map-node-state.js';
+import { nodeContentEndedAt } from './node-reward-state.js';
 import '../../css/map-node-status.css';
 import { mapNodeArtHTML, mapNodeIconDataUrl } from '../core/map-node-art.js';
 import { findMapTravelPath, getMapTravelPresentation } from './map-travel-path.js';
@@ -67,8 +68,15 @@ export function expeditionObjective(game) {
   if (game.hp > 0 && game.hp / game.maxHp <= .25) return { tone: 'danger', text: '生命危急 · 留意火堆与治疗补给' };
   if (game.layerIdx === 2) return { tone: 'safe', text: '献祭 3 张卡牌可紧急撤离 · 或经闸门深入第四层，挑战首脑' };
   if (game.layerIdx >= 3) {
-    if (!game.altarActivated) return { tone: 'gold', text: '最终区域 · 前往祭坛，弃 3 张卡牌解锁首脑' };
-    if (game.altarRewardPending) return { tone: 'gold', text: '祭坛已激活 · 返回祭坛领取奖励，再挑战首脑' };
+    const ended = type => {
+      const idx = game.layerData?.[game.layerIdx]?.logical?.findIndex(cell => cell.def?.type === type) ?? -1;
+      return idx >= 0 && nodeContentEndedAt(game, game.layerIdx, idx);
+    };
+    if (ended('boss')) return { tone:'quiet', text:'首脑节点已结束 · 本局未击破首脑' };
+    if (!game.altarActivated) return ended('altar')
+      ? { tone:'quiet', text:'祭坛内容已结束 · 首脑封印尚未解除' }
+      : { tone: 'gold', text: '最终区域 · 前往祭坛，弃 3 张卡牌解锁首脑' };
+    if (game.altarRewardPending) return { tone: 'gold', text: '祭坛已激活 · 当前可领取回赠，前往下一节点后作废' };
     return { tone: 'gold', text: '祭坛已激活 · 前往首脑巢穴，编组牌库迎战' };
   }
   // W1-10（2026-09-27 R2）：闸门方向信号。此前目标文案零导航信息（评审三轮走查

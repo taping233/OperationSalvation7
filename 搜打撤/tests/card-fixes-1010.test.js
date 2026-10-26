@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { sourceCardLibrary } from '../scripts/sync-cards-from-live.mjs';
 import sync from '../game/data/cards-sync.json';

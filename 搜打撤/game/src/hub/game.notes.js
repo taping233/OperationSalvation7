@@ -206,7 +206,7 @@ import { game } from '../run/game.session.js';
 
   const TYPE_NAME = {
     coin: '硬币', wood: '木材', battle: '战斗', event: '随机事件', shop: '商店',
-    fire: '火堆', chest: '宝箱', rations: '口粮', key: '钥匙',
+    fire: '火堆', chest: '搜刮点', rations: '口粮', key: '钥匙',
     emergencyExit: '紧急撤离点', door: '隔离闸门', altar: '污染核心', boss: '首脑', entrance: '清扫口',
   };
   // ESM：延迟绑定（同 bindRunMixins 注释）

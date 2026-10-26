@@ -1,0 +1,27 @@
+{
+  "scope": "selected",
+  "ok": true,
+  "selected": [
+    "battle/fx-slash.webp",
+    "battle/fx-block.webp"
+  ],
+  "errors": [],
+  "assets": [
+    {
+      "path": "battle/fx-block.webp",
+      "bytes": 137550,
+      "sha256": "905c8920d12a2dfa8e5f5c29b40a85a0df24650e7dbb31e5f48e0da13e0b95b6"
+    },
+    {
+      "path": "battle/fx-slash.webp",
+      "bytes": 133286,
+      "sha256": "2c76dad6a663da8c70361a32e65cdece583ac40cf97dc07d845e6ce6908ff1fb"
+    }
+  ],
+  "global": {
+    "ok": true,
+    "errorCount": 0,
+    "historicalWarningCount": 567,
+    "manifestIssues": []
+  }
+}

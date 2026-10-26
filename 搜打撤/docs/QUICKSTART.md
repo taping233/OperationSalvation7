@@ -1,6 +1,6 @@
 # QUICKSTART：搜打撤开发入口
 
-本页只指路。日常路径为 **按目标 → 主动作 → 定向反馈 → 按授权收官**，完整办法只在 [WORKFLOW-TOOLS](WORKFLOW-TOOLS.md) 维护；权限与项目边界见根 AGENTS.md。
+日常路径为 **核对现状 → 复用实施 → 集中反馈 → 按授权收官**，步骤统一见 [WORKFLOW-TOOLS](WORKFLOW-TOOLS.md)；权限与项目边界见根 AGENTS.md。
 
 | 当前需要 | 最短入口 |
 | --- | --- |
@@ -14,6 +14,6 @@
 | 并行派工 | [派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) |
 | 查看工具能力、查指定历史经验 | [Agent 工具箱](AGENT-TOOLBOX.md)；`npm run --silent workflow -- memory --source codex --query "关键词" --limit 3 --json`（Codex 默认 codex，ZCode 用 zcode；跨端经验才选 both） |
 
-新机器才核对环境：Node 22、现有依赖与锁文件，以及 `git config core.hooksPath` 是否指向 `搜打撤/.githooks`。缺失项按任务授权补齐；命令示例不授权安装或改 Git 配置。不要每轮重做环境初始化。
+新机器核对 Node 22、现有依赖与锁文件，以及 `git config core.hooksPath` 是否指向 `搜打撤/.githooks`；缺失项按任务授权补齐，后续复用已确认环境。
 
 交付列实际检查、结果与未核项；不同检查的覆盖边界见[质量门](quality-gates.md#ci-状态)。

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it } from 'vitest';
 import * as Combat from '../game/src/battle/core/combat.js';
 import { generateCurrentLayeredMap } from '../game/src/run/map-generator-v4.js';

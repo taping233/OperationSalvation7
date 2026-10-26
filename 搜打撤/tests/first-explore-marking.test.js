@@ -111,7 +111,7 @@ describe('moveTo 首探打标（SYS-01 撤离经验锚定首次有效探索）',
     const { li, chain } = found;
     ctx.li = li;
     ctx.chain = chain;
-    // 链上格子一律清成普通空格，防宝箱/商店/事件页干扰移动计测（node-retrigger 同款手法）
+    // 链上格子一律清成普通空格，防搜刮点/商店/事件页干扰移动计测（node-retrigger 同款手法）
     for (const idx of chain) game.layerData[li].logical[idx].def = undefined;
     enterLayer(li, chain[0]);
     await tick(30);

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { claimEntrySupply, claimResourceReward, createEntrySupply, entrySupplyAt, entrySupplyGate, nodeActionBinding, resourceRewardAt, validEntrySupply } from '../game/src/run/node-reward-state.js';
 import { validateRunSave } from '../game/src/hub/run-save-validation.js';

@@ -1,0 +1,15 @@
+{
+  "status": "generated",
+  "tool": "built-in image_gen",
+  "source": "C:/Users/太平/.codex/generated_images/01a177be-ad81-7590-ab07-a971539f2f81/exec-5f61c841-f599-4cbb-803c-209937160131.png",
+  "output": "D:/素材/代号柒/.tmp/nai/xingyue-nai5-reset-20261026/builtin-face-fix.png",
+  "sha256": "D23215D0370C8F58A68032F743AF676D54EA3DA2A839D6CB32D091146F9788B1",
+  "prompt": "face-fix-prompt.txt",
+  "references": [
+    "../.tmp/nai/xingyue-nai5-reset-20261026/builtin-card-style.png",
+    "game/assets/cards/curse-drain.webp",
+    "game/assets/cards/curse-silence.webp"
+  ],
+  "observation": "按禁咒系列调整脸部，眼睑与神态趋缓，金瞳保留，改动较克制；身份相似度待老板确认。",
+  "integration": "candidate only"
+}

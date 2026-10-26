@@ -12,7 +12,7 @@ export function createBaseState() {
     nestUnlocked: false,   // 经典生命研究所：钥匙开门（消耗 KEY_NEEDED 把真实储备）后永久通行
     runes: [],      // 仓库符文 [{kind,name,rarity,attrs,desc}]（每块占 1 仓库格）
     nestBagUp: 0,   // 符文背包升级次数（10 + n 格，上限 25）
-    eggPity: 0,     // 宠物蛋硬保底：连续未实际加入蛋的宝箱奖励次数（第 150 次保底，加入蛋归零）
+    eggPity: 0,     // 宠物蛋硬保底：连续未实际加入蛋的搜刮点奖励次数（第 150 次保底，加入蛋归零）
     stash: [],      // 卡牌仓库 [{card, count}]——出发时自选携带；「初始攻击」不可入库
     pocket: [],     // 基地消耗区 [{card, count}]，用钥匙复原后才回仓库
     pets: {},       // 已拥有宠物 [宠物id] => { lv, ts }（宠物蛋孵化；初始宠物旺财自动获得）

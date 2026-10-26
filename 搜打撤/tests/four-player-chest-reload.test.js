@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { serializeChestReward, restoreChestReward, nodeChestRewardAt } from '../game/src/run/chest-reward-save.js';
 import { validateRunSave } from '../game/src/hub/run-save-validation.js';
 afterEach(()=>{vi.useRealTimers();delete window.SDT;document.body.innerHTML='';});
-describe('G03 揭晓宝箱持久化',()=>{
+describe('G03 揭晓搜刮点持久化',()=>{
   it('异地保存的待领奖励按节点恢复；坐标、种子与领取索引坏档拒绝读取',async () =>{
     const game={seed:17,layerIdx:1,trackPos:2};
     const current={kind:'small',cards:[{id:'a',name:'补给'}],coins:2,coinsReceived:true,taken:new Set([0]),lost:new Set()};

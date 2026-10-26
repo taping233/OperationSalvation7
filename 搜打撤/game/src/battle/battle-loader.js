@@ -1,5 +1,6 @@
 import { sdtDefine } from '../core/sdt-facade.js';
 import { recordDiagnostic } from '../core/diagnostics.local.js';
+import { nodeContentEndedAt } from '../run/node-reward-state.js';
 
 // 战斗域按需加载边界。
 // 标题、基地与地图不解析战斗核心；首次开战或恢复存档时才拉取完整战斗模块。
@@ -59,9 +60,12 @@ async function ensureBattleReady() {
 
 async function startBattle(game, foes, options) {
   const currentContext = captureBattleContext(game);
+  // 离开前发起的节点战斗不再复活；已结束地点上的显式命令仍沿原条件。
+  const endedAtRequest = nodeContentEndedAt(game);
   const request = {};
   startRequests.set(game, request);
-  const isCurrent = () => currentContext() && startRequests.get(game) === request && game.state !== 'title';
+  const isCurrent = () => currentContext() && startRequests.get(game) === request && game.state !== 'title'
+    && (endedAtRequest || !nodeContentEndedAt(game));
   try {
     const battle = await ensureBattleReady();
     if (!isCurrent()) return false;

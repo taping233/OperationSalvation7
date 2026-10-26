@@ -41,7 +41,7 @@ describe('已消耗地图节点展示', () => {
     expect(isConsumedMapNode(source, node('altar'))).toBe(completed);
     expect(mapNodeInfo(source, node('altar'))[0]).toBe('祭坛');
     expect(mapNodeStatus(source, node('altar')).label).toBe(completed ? '已完成' : state.altarRewardPending ? '待领奖' : '未完成');
-    if (state.altarActivated && state.altarRewardPending) expect(mapNodeInfo(source, node('altar'))[1]).toBe('待领奖 · 可回地图整理，回到此节点继续领取。');
+    if (state.altarActivated && state.altarRewardPending) expect(mapNodeInfo(source, node('altar'))[1]).toBe('待领奖 · 可在当前节点整理后继续领取，前往下一节点后未领奖励作废。');
     expect(JSON.stringify(source)).toBe(before);
   });
 

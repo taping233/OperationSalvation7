@@ -125,7 +125,7 @@ describe('single-render raw-hand eligibility context', () => {
     const ability = simple({ type: '能力卡' });
     expect(domain.unplayableReason(ability, context)).toBeNull();
     state.mode = 'normal';
-    expect(domain.unplayableReason(ability, context)).toContain('能力卡');
+    expect(domain.unplayableReason(ability, context)).toBeNull();
     const fight = simple({ rules: { triggers: { onPlay: [{ op: 'foeFight', pick: 'two' }] } } });
     expect(domain.unplayableReason(fight, context)).toBeNull();
     state.foes[1].dead = true;

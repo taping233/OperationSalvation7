@@ -157,7 +157,7 @@
 /* showOverlay(..., true) also carries .room when battle began in a room.
    These exact battle-only roots need a full shell in both .wide and .room
    variants: cover-system intentionally excludes .room. */
-:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])){
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(:has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])){
 & {
   display: block; width: min(1140px, 94%); height: auto; min-height: 0; max-width: 94%; max-height: 90%;
   padding: 30px 34px; margin: auto; border: 2px solid #2a2d30; border-radius: 0;
@@ -201,15 +201,6 @@
 :where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):has(.bt-settings) { width: min(740px, 94%); }
 
 /* Interiors remain independently anchored to their real component roots. */
-:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle-bag{
-& .battle-bag-grid { gap: 20px; padding: 14px 0 24px; background: none; }
-& .battle-bag-slot {
-  background: #e2e3e4; border-color: #b3b5b7; border-radius: 0; box-shadow: 3px 3px 0 #2d31341c;
-}
-& .battle-bag-slot:hover:not(.off) { border-color: #b9a050; box-shadow: 3px 3px 0 #2d31341c; }
-& .battle-bag-slot .bt-count {
-  background: #2a2d30; color: #f7e7b5; border-color: #ceb66b80; border-radius: 0; text-shadow: none;
-}}
 :where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='bossGo']){
 & .set-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 20px; }
 & .bs-count { color: #555b61; font-size: 14px; font-weight: 500; line-height: 1.6; }

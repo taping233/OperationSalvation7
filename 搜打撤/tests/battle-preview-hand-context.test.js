@@ -150,7 +150,7 @@ describe('single-hover raw-hand context at the command boundary', () => {
     self.rules.triggers.onPlay.push({ op: 'futureUnsupportedOperation' });
     expect(availability(2, context).reason.code).toMatch(/^RULE_/);
     self.rules.triggers.onPlay = []; self.dmg = 0; self.type = '能力卡'; state.mode = 'normal';
-    expect(availability(3, context).reason.message).toContain('能力卡');
+    expect(availability(3, context).status).toBe('ready');
   });
 
   it('reruns requested target, execution target, and execution availability in their existing order', () => {

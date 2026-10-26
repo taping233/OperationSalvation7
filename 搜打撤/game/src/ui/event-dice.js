@@ -5,9 +5,24 @@ import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import '../../css/event-dice.css';
 
 // Outcomes and the result live in the caller's run record, never in animation state.
-export function diceStep(owner, key, outcomes, sides = outcomes.length) {
+export function diceStep(owner, key, outcomes, sides = 6) {
   owner.dice ||= {};
   if (!owner.dice[key]) owner.dice[key] = { sides, outcomes, result:null };
+  const step = owner.dice[key];
+  if (step.sides !== 6 || step.outcomes.length > 6) {
+    // Preserve a legacy roll's reward while moving its display to a six-sided die.
+    const chosen = step.result == null ? null : step.outcomes[Math.floor((step.result - 1) * step.outcomes.length / step.sides)];
+    if (step.outcomes.length > 6) {
+      const pool = step.outcomes.filter(outcome => outcome !== chosen);
+      const candidates = chosen ? [chosen] : [];
+      while (candidates.length < 6 && pool.length) {
+        candidates.push(pool.splice(Math.floor(Random.random('event') * pool.length), 1)[0]);
+      }
+      step.outcomes = candidates;
+    }
+    step.sides = 6;
+    if (chosen) step.result = Math.ceil(step.outcomes.indexOf(chosen) * 6 / step.outcomes.length) + 1;
+  }
   return owner.dice[key];
 }
 

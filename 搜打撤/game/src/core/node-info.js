@@ -4,7 +4,7 @@ export const NODE_INFO = {
   blank: ['空白节点', '沿道路继续探索', 'map', 'quiet'],
   battle: ['遭遇战', '准备迎敌 · 胜利后搜刮', 'swords', 'danger'],
   boss: ['首脑', '终局挑战 · 检查随身卡牌', 'skull', 'danger'],
-  chest: ['宝箱', '开启宝箱 · 获取随机卡牌', 'gem', 'gold'],
+  chest: ['搜刮点', '搜刮物资 · 获取随机卡牌', 'gem', 'gold'],
   resource: ['物资格', '按爆率刷新 2 张随机资源卡 · 选 1 带走', 'gem', 'gold'],
   fire: ['火堆', '恢复生命 · 复原消耗卡牌', 'fire', 'warm'],
   shop: ['商店', '用金币补充装备与卡牌', 'coin', 'safe'],

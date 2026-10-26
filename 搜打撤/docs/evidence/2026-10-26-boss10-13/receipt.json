@@ -1,0 +1,199 @@
+{
+  "method": "NAI5 Full current v3.4 -> built-in ImageGen transparent redraw; complete left-facing battle assets",
+  "items": [
+    {
+      "id": "boss_witness_pope",
+      "naiSource": "D:\\素材\\代号柒\\.tmp\\boss-art-1026\\boss_witness_pope-nai.png",
+      "builtinSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17822-775b-7241-ba71-13829ffba4f6\\exec-dd3924b7-0c50-48f1-801b-c02b6e70d7f2.png",
+      "raw": "D:\\素材\\代号柒\\.tmp\\boss-art-1026\\boss_witness_pope-builtin.png",
+      "rawSha256": "64d72840f68fc0383abf14cba8678a4e59568b2db94be3151afb8a8a1aa2aa61",
+      "size": [
+        1319,
+        1193
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "facing": "left",
+      "assets": [
+        {
+          "path": "portraits/enemies/boss_witness_pope.webp",
+          "ext": "webp",
+          "bytes": 194118,
+          "sha256": "9892cac0086a4bed6de1ab43b106add3b92f95b1f249d1d0c4c2fb5189f82cc3",
+          "license": "项目自有（NAI5 起稿＋内置重绘）",
+          "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+        },
+        {
+          "path": "portraits/cut/enemies/boss_witness_pope.webp",
+          "ext": "webp",
+          "bytes": 87882,
+          "sha256": "9e1fc15d9cb979f4bd9c8054c7d3aa041692af41d83ceffcaed6544be7f14bed",
+          "license": "项目自有（NAI5 起稿＋内置重绘）",
+          "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+        }
+      ],
+      "alphaBox": [
+        65,
+        21,
+        712,
+        669
+      ],
+      "layout": {
+        "height": 350,
+        "aspect": 0.998457,
+        "imageScale": 1.060185,
+        "bottom": -0.027778,
+        "x": -51.118421,
+        "revision": "9e1fc15d9cb9"
+      }
+    },
+    {
+      "id": "boss_mutation_mother",
+      "naiSource": "D:\\素材\\代号柒\\.tmp\\boss-art-1026\\boss_mutation_mother-nai.png",
+      "builtinSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17822-775b-7241-ba71-13829ffba4f6\\exec-1669ab52-f965-43b2-b086-df83dee0e133.png",
+      "raw": "D:\\素材\\代号柒\\.tmp\\boss-art-1026\\boss_mutation_mother-builtin.png",
+      "rawSha256": "9aa525ac0c31cd32bd45d77b2e737da5f94a170f844066d46b3f75fb3dcb5b6b",
+      "size": [
+        1536,
+        1024
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "facing": "left",
+      "assets": [
+        {
+          "path": "portraits/enemies/boss_mutation_mother.webp",
+          "ext": "webp",
+          "bytes": 329560,
+          "sha256": "fbf5b9f38ed244ab58603b7a5d75a9d6027c4465624fc8a5e9d1fe49f26e8721",
+          "license": "项目自有（NAI5 起稿＋内置重绘）",
+          "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+        },
+        {
+          "path": "portraits/cut/enemies/boss_mutation_mother.webp",
+          "ext": "webp",
+          "bytes": 123840,
+          "sha256": "04cd3fefb62ffd112b606326daec28d3fd0292c2e56726c68928222007951c0d",
+          "license": "项目自有（NAI5 起稿＋内置重绘）",
+          "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+        }
+      ],
+      "alphaBox": [
+        2,
+        1,
+        759,
+        506
+      ],
+      "layout": {
+        "height": 392,
+        "aspect": 1.49901,
+        "imageScale": 1.00396,
+        "bottom": -0.00198,
+        "x": -50.065789,
+        "revision": "04cd3fefb62f"
+      }
+    },
+    {
+      "id": "boss_mysterious_blocker",
+      "naiSource": "D:\\素材\\代号柒\\.tmp\\boss-art-1026\\boss_mysterious_blocker-nai.png",
+      "builtinSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17822-775b-7241-ba71-13829ffba4f6\\exec-8803255b-f1b8-4cab-b6ed-09ee4646214d.png",
+      "raw": "D:\\素材\\代号柒\\.tmp\\boss-art-1026\\boss_mysterious_blocker-builtin.png",
+      "rawSha256": "75a1a0cffbd24c030625d201976ab8393e4c3ef07df3570b4ac19800489d3257",
+      "size": [
+        1199,
+        1312
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "facing": "left",
+      "assets": [
+        {
+          "path": "portraits/enemies/boss_mysterious_blocker.webp",
+          "ext": "webp",
+          "bytes": 201402,
+          "sha256": "d9ae7360544de8799e8632e64ad0d002a11275c7e7f84ee39b72bf6a8033f366",
+          "license": "项目自有（NAI5 起稿＋内置重绘）",
+          "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+        },
+        {
+          "path": "portraits/cut/enemies/boss_mysterious_blocker.webp",
+          "ext": "webp",
+          "bytes": 86304,
+          "sha256": "8112c6b9477541bd3305211dacbb2847699190203a0a6a044aafe0d1aa5a053c",
+          "license": "项目自有（NAI5 起稿＋内置重绘）",
+          "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+        }
+      ],
+      "alphaBox": [
+        28,
+        14,
+        676,
+        750
+      ],
+      "layout": {
+        "height": 350,
+        "aspect": 0.880435,
+        "imageScale": 1.032609,
+        "bottom": -0.013587,
+        "x": -50.647482,
+        "revision": "8112c6b94775"
+      }
+    },
+    {
+      "id": "boss_necromancer",
+      "naiSource": "D:\\素材\\代号柒\\.tmp\\boss-art-1026\\boss_necromancer-nai.png",
+      "builtinSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17822-775b-7241-ba71-13829ffba4f6\\exec-d5695a94-62ed-4cde-bdc7-0993bfaed913.png",
+      "raw": "D:\\素材\\代号柒\\.tmp\\boss-art-1026\\boss_necromancer-builtin.png",
+      "rawSha256": "21027fe567568bd6a0e544a35d954d55ba35060764b718ea4c7a295ae2427d87",
+      "size": [
+        1402,
+        1122
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "facing": "left",
+      "assets": [
+        {
+          "path": "portraits/enemies/boss_necromancer.webp",
+          "ext": "webp",
+          "bytes": 261428,
+          "sha256": "d771656d548ca7727a6b0dfc1b69f0ab230e43457442a23dc54fc100732b1c03",
+          "license": "项目自有（NAI5 起稿＋内置重绘）",
+          "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+        },
+        {
+          "path": "portraits/cut/enemies/boss_necromancer.webp",
+          "ext": "webp",
+          "bytes": 104018,
+          "sha256": "118cc1b154c8f29207ce65d505cc785d0280021d03f874ffefc91bd39a2fcb20",
+          "license": "项目自有（NAI5 起稿＋内置重绘）",
+          "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+        }
+      ],
+      "alphaBox": [
+        34,
+        2,
+        753,
+        596
+      ],
+      "layout": {
+        "height": 350,
+        "aspect": 1.210438,
+        "imageScale": 1.023569,
+        "bottom": -0.020202,
+        "x": -51.776316,
+        "revision": "118cc1b154c8"
+      }
+    }
+  ],
+  "originals": "Raw PNG files kept outside git under root .tmp/boss-art-1026; sources and SHA256 recorded above",
+  "metadata": "Only 8 new asset rows, 4 art IDs and 4 geometry profiles added; existing assets preserved"
+}

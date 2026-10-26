@@ -176,7 +176,9 @@ function dispatch(action, id, observedTarget) {
         const ok = action.args?.[1] != null
           ? window.SDT.game?.discardCard?.(action.args[0], false, action.args[1])
           : window.SDT.game?.discardCard?.(action.args?.[0]);
-        return ok ? { ok: true, id } : { ok: false, id, code: 'DISCARD_REJECTED', message: '丢弃失败（卡不存在/初始牌保护/需先开背包）' };
+        const result = saved => saved ? { ok:true, id }
+          : { ok:false, id, code:'DISCARD_REJECTED', message:'丢弃未完成（卡不存在、受保护或保存失败）' };
+        return commandResult(isThenable(ok) ? Promise.resolve(ok).then(result) : result(ok), id, action);
       }
       return { ok: true, id };   // noop
     }

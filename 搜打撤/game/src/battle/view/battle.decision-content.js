@@ -1,18 +1,7 @@
 import { esc, escAttr } from '../../core/shared.js';
-import { displayCardDescription } from '../../cards/card-description-text.js';
-import { battleStartExplanation } from '../../cards/card-battle-start-explanation.js';
 export { battlePileBodyHTML } from './battle.pile-view.js';
 
 export const cardIdentityKey = card => card?.id ? `id:${card.id}` : `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
-
-export function pileDetailHTML(stack) {
-  if (!stack) return '';
-  return `<aside class="battle-decision-inspect" aria-live="polite">
-    <span class="battle-decision-inspect-kicker">卡牌规则</span><h4>${esc(stack.card.name)}</h4>
-    <p class="battle-decision-inspect-meta">${esc(stack.card.type || '卡牌')} · ${stack.card.cost ?? 0} 费 · ${stack.count} 张</p>
-    <p class="battle-decision-inspect-rules">${esc(displayCardDescription(stack.card.desc || '暂无规则描述', stack.card.id))}</p>
-    ${battleStartExplanation(stack.card) ? `<p class="ov-note">${esc(battleStartExplanation(stack.card))}</p>` : ''}</aside>`;
-}
 
 export function battleChoiceBodyHTML(choosing) {
   return `<p class="ov-stats battle-task-summary"><span>选择 <b>1</b> 项效果</span><span class="battle-task-progress">${choosing.options.length} 项可选</span></p>
@@ -37,8 +26,8 @@ export function battleHandSelectBodyHTML({ pool, handSelecting, cardHTML }) {
     if (hit) hit.count += 1;
     else groups.set(key, { entry, index, count: 1 });
   });
-  const grid = [...groups.values()].map(({ entry, index, count }) =>
-    `<div class="battle-select-slot"><button type="button" class="bt-card" data-act="btPickHand" data-uid="${escAttr(entry.uid)}" data-cancel="false" aria-label="选择 ${escAttr(entry.card.name)}${count > 1 ? `，同名 ${count} 张` : ''}">${cardHTML(entry.card,'lg')}${count > 1 ? `<span class="bt-count">×${count}</span>` : ''}<span class="battle-card-action">选择此牌</span></button><button type="button" class="battle-card-inspect" data-act="btDecisionInspect" data-i="${index}" data-cancel="false" aria-label="查看 ${escAttr(entry.card.name)} 详情">查看详情</button></div>`).join('');
+  const grid = [...groups.entries()].map(([key, { entry, index, count }]) =>
+    `<div class="battle-select-slot"><button type="button" class="bt-card" data-act="btPickHand" data-uid="${escAttr(entry.uid)}" data-card-key="${escAttr(key)}" data-cancel="false" aria-label="选择 ${escAttr(entry.card.name)}${count > 1 ? `，同名 ${count} 张` : ''}">${cardHTML(entry.card,'lg')}${count > 1 ? `<span class="bt-count">×${count}</span>` : ''}<span class="battle-card-action">选择此牌</span></button><button type="button" class="battle-card-inspect" data-act="btDecisionInspect" data-i="${index}" data-card-key="${escAttr(key)}" data-cancel="false" aria-label="查看 ${escAttr(entry.card.name)} 详情">查看详情</button></div>`).join('');
   return `<p class="ov-stats battle-task-summary"><span>还需选择 <b>${handSelecting.n}</b> 张${handSelecting.type ? ` ${esc(handSelecting.type)}` : ''}</span><span class="battle-task-progress">${payment ? `已选 ${selected} 张` : action}</span></p>
     <section data-decision-content="hand-select">${source ? `<p class="battle-decision-source">来自 <b>${esc(source)}</b>${payment ? ` · ${action}` : ''}</p>` : `<p class="battle-decision-source">从当前手牌中选择${payment ? ` · ${action}` : ''}</p>`}
     <div class="bt-hand battle-select-grid" data-selection-scroll>${grid || '<p class="ov-empty">手牌中没有符合条件的卡牌</p>'}</div>

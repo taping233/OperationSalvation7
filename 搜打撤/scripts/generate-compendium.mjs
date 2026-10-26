@@ -70,7 +70,7 @@ ${ch('6', '局外系统索引')}
 | --- | --- | --- |
 | 基地/仓库/升级/商店 | \`game/src/hub/game.hub.js\`、\`base.js\` | 出发整备、仓库卖/藏、木材口粮升级、口袋钥匙复原、局外商店（储备币购基础卡） |
 | 背包/安全格/容器 | \`game/src/hub/game.bag.js\` | 背包格、安全格（抢运保护，界面位于消耗口袋下方）、消耗口袋、珍珠盒（3×3 资源空间）、锦囊（存 3 法术）、放大界面点击移动 |
-| 对局地图 | \`game/src/run/game.run.flow.js\`、\`map-generator.js\`、\`expedition.view.js\` | 节点行军、物资格/宝箱/事件/商店/火堆/祭坛/撤离点 |
+| 对局地图 | \`game/src/run/game.run.flow.js\`、\`map-generator.js\`、\`expedition.view.js\` | 节点行军、物资格/搜刮点/事件/商店/火堆/祭坛/撤离点 |
 | 商店（局内） | \`game/src/run/game.run.shop.js\` | 战术补给站、收购台、神秘货箱（问号卡面、面板内不重复刷新、买后亮卡） |
 | 祭坛 | \`game/src/run/game.run.altar.js\` | 碎片兑换能力卡、献祭、复原、撤离整理（全部入库 / 智能整理） |
 | 四层首脑战 | \`game/src/battle/core/battle.core.js\`、\`game/src/battle/core/battle.lifecycle.js\` | 编组、战斗、首脑奖励与战后整理；完成状态查对应任务证据 |

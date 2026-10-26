@@ -191,7 +191,7 @@ async function runDevKind(kind, { check, options, seen, finishOk, awaitReady, pr
     decide,
     maxSteps: options.maxSteps ?? 600,
     runTimeoutMs: options.runTimeoutMs ?? 120000,
-    spinLimit: 40,   // 宝箱多箱队列每箱一页+780ms 演出,战斗掉落+格子宝箱可叠十几页连点(默认 6 严重误杀)
+    spinLimit: 40,   // 搜刮点多箱队列每箱一页+780ms 演出,战斗掉落+格子搜刮点可叠十几页连点(默认 6 严重误杀)
     driver: `scene:${kind}`,
     until: (r) => seenTarget && finishOk(r.obs),
   });
@@ -287,14 +287,14 @@ async function sceneAltar(ctx) {
   return { ...out, final: finalSnapshot() };
 }
 
-// ---------- 场景：宝箱 ----------
+// ---------- 场景：搜刮点 ----------
 async function sceneChest(ctx) {
   const out = await runDevKind('chest-medium', {
     ...ctx,
     seen: (obs) => hasUi(obs, 'chestSkip') || hasUi(obs, 'pickupGo'),
     finishOk: overlayClosed,
   });
-  ctx.check('宝箱页已收口', overlayClosed(observe()));
+  ctx.check('搜刮点页已收口', overlayClosed(observe()));
   return { ...out, final: finalSnapshot() };
 }
 
@@ -367,7 +367,7 @@ async function sceneExtract(ctx) {
     if (sacConfirm) { sacrificed = true; return sacConfirm; }
     const sacPick = acts.find(a => a.type === 'ui' && a.name === 'sacPick');
     if (sacPick) return sacPick;
-    // 战斗外的弹层（宝箱搜刮页/首胜教学页等）顺手关掉——greedy 点不掉
+    // 战斗外的弹层（搜刮点奖励页/首胜教学页等）顺手关掉——greedy 点不掉
     // 「知道了」类按钮会原地 spin。closeOverlay 兜底被拒（必选过场页）时不连发：
     // fail-spin 10 连拒实测 171ms 就熔死在接敌过场页——noop 等它自己过去
     if (obs.ui?.open && obs.phase !== 'battle') {

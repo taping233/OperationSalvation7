@@ -78,7 +78,26 @@ async function runEventDeck(current = lifecycle.beginRequest()) {
     await closeEventFlow();
     return;
   }
-  const card = pick(deck);
+  const used = new Set(Object.values(game.nodeRewards || {})
+    .filter(record => ['event', 'event-choice'].includes(record?.type)).map(record => record.eventId));
+  // Existing node bindings survive save/load and layer travel. Legacy logs have
+  // names only, so compare their encounter names as well as the catalog name.
+  const history = game.eventLog || [];
+  const available = deck.filter(card => {
+    const encounterName = eventEncounterText(card.id, game.characterId || game.myClass).name;
+    return !used.has(card.id) && !history.some(entry => entry.id === card.id
+      || entry.name === card.name || (encounterName && entry.name === encounterName));
+  });
+  if (!available.length) {
+    game.state = 'modal';
+    eventNodeShell({ tone:'event', icon:'[[icon:notes]]', title:'此处已无新的见闻',
+      sub:'本局的事件已经全部遇见。', body:nodeOpt('eventPoolLeave', '继续前进', '返回地图') });
+    const active = eventPageBinding('eventPoolLeave', current);
+    UI.act('eventPoolLeave', () => { if (active()) { consumeCurrentCell(); closeEventFlow(); } });
+    UI.refresh(game);
+    return;
+  }
+  const card = pick(available);
   bindNodeEvent(game, card.id);
   const waitingPage = captureEventPresentation({ allowClosing:true });
   // 保存失败仍保留本局已抽事件；结算前的检查点会再次保存。
@@ -105,7 +124,7 @@ async function triggerEventCard(card, current) {
   const encounter = eventEncounterText(card.id, game.characterId || game.myClass);
   if (encounter.name) card = { ...card, name: encounter.name };
   game.eventLog = game.eventLog || [];
-  game.eventLog.push({ name: card.name, desc: card.desc || '', turn: game.turn });
+  game.eventLog.push({ id: card.id, name: card.name, desc: card.desc || '', turn: game.turn });
   // 封顶：eventLog 随对局只增不减，而每次落盘都会全量 JSON.stringify——
   // 长局会让每次 persistSave 的同步序列化越来越慢。留 200 条足够回溯。
   if (game.eventLog.length > 200) game.eventLog = game.eventLog.slice(-200);
@@ -150,13 +169,13 @@ async function triggerEventCard(card, current) {
     if (evtSettled || !current()) return;
     const revision = ++pageRevision;
     game.state = 'modal';
-    setBagReturnHook(() => renderEventPage());
     eventNodeShell({
       tone: 'event', asset: sceneMeta[2], icon: '[[icon:dice]]', title: card.name,
       sub: esc(encounter.intro || (narrative && narrative.intro) || card.desc || '神秘事件发生了……'),
       body: optionHTML(),
       foot:'<button class="ov-btn" data-act="evtReturn">返回地图</button><button class="ov-btn" data-act="evtBag">整理背包</button><p class="reward-notice" data-event-capacity role="status"></p>',
     });
+    setBagReturnHook(() => renderEventPage());
     const active = eventPageBinding(choices ? 'evtChoice' : 'evtNext', current);
     const choiceCurrent = () => !evtSettled && current() && pageRevision === revision;
     if (signalPuzzle) mountEventSignalPuzzle(UI.el?.ovBody?.firstElementChild, signalPuzzle, () => choiceCurrent() && active());
@@ -188,7 +207,6 @@ async function triggerEventCard(card, current) {
           }
           if (!active() || pageRevision !== revision || nodeEventAt(game) !== record) return false;
           setBagReturnHook(null);
-          UI.hideOverlay();
           await choice.run();
           return true;
         } finally { eventSettling.delete(record); }
@@ -196,7 +214,6 @@ async function triggerEventCard(card, current) {
       setBagReturnHook(null);
       const completed = await settleEventAction(() => {
         if (choice.claim && !choice.claim()) return false;
-        UI.hideOverlay();
         return choice.run();
       }, record, !choice.deferConsume);
       if (!completed) {
@@ -212,27 +229,31 @@ async function triggerEventCard(card, current) {
       return true;
     };
     UI.act('evtChoice', (d) => {
-      if (!choices || evtSettled || !active()) return;
+      if (!choices || evtSettled || !active()) return false;
       const index = Number(d.i), choice = choices[index];
-      if (!choice) return;
+      if (!choice) return false;
       selectedChoice = index;
       if (choice.capacityCard && !game.canReceiveCard(choice.capacityCard)) {
         setBagReturnHook(null);
         bagSlots.organizeReward({ card:choice.capacityCard, current:choiceCurrent,
-          onReturn:() => { if (choiceCurrent()) renderEventPage(); },
+          onReturn:() => choiceCurrent() ? renderEventPage() : false,
           onClaim:() => executeChoice(index),
-          onFullBag:() => { if (choiceCurrent()) { renderEventPage(); bagSlots.showBackpack(); } },
+          onFullBag:() => {
+            if (!choiceCurrent()) return false;
+            renderEventPage();
+            return bagSlots.showBackpack();
+          },
         });
         return;
       }
-      executeChoice(index);
+      return executeChoice(index);
     });
     UI.act('evtNext', async () => {
       if (choices || evtSettled || !active()) return;
       evtSettled = true;
       setBagReturnHook(null);
       const body = UI.el?.ovBody, source = body?.firstElementChild, overlayRevision = UI._overlayRevision;
-      if (!await settleEventAction(() => { UI.hideOverlay(); applyEventEffect(card); })) {
+      if (!await settleEventAction(() => { applyEventEffect(card); })) {
         evtSettled = false;
         if (current() && pageRevision === revision && UI.el?.ovBody === body
           && (!body?.firstElementChild || body.firstElementChild === source)
@@ -311,12 +332,11 @@ function eventDice(title, key, outcomes, done, sides, beforeRoll) {
 function finishEventRoll(run) {
   return settleEventAction(() => {
     setBagReturnHook(null);
-    UI.hideOverlay();
     return run();
   });
 }
 
-// Each card uses a numbered die with exactly one face per eligible card.
+// The dice controller freezes up to six random candidates before the player rolls.
 // Frozen candidate IDs and completed dice are reused on reentry, including partial sequences.
 function drawEventCards(title, key, pools, done, unique = true) {
   const owner = nodeEventAt(game), drawn = [];
@@ -398,7 +418,6 @@ function openEventRecode() {
   const render = () => {
     if (settled || !current()) return;
     game.state = 'modal';
-    setBagReturnHook(render);
     eventNodeShell({
       tone: 'event', asset: 'scene-event-recode', icon: '[[icon:recycle]]', title: '异常改装台',
       sub: `选择 <b>${need}</b> 张招式或装备卡，将其随机变为同稀有度、同类型的卡牌（<span data-recode-count>${selected.size}</span>/${need}）`,
@@ -409,6 +428,7 @@ function openEventRecode() {
         </button>`).join('')}</div>
         <div class="scene-ops"><button class="ov-btn" data-act="eventRecodeLeave">放弃转换</button><button class="ov-btn ok" data-act="eventRecodeGo" ${selected.size !== need ? 'disabled' : ''}>启动重编</button></div>`,
     });
+    setBagReturnHook(render);
     const active = eventPageBinding('eventRecodePick', current);
     const page = UI.el.ovBody;
     const syncSelection = () => {
@@ -506,13 +526,13 @@ function openEventGamble() {
   const render = (lastMiss = false) => {
     if (settled || !current()) return;
     game.state = 'modal';
-    setBagReturnHook(() => render(lastMiss));
     eventNodeShell({
       tone: 'event', asset: 'scene-event-gamble', icon: '[[icon:dice]]', title: '暗巷赌约',
       sub: `每次投入 <b>3 币</b>后亲手投骰：<b>1～3 点落空，4～6 点拿走三张卡（50%）</b>；第 <b>5</b> 次任意点数都成功。已尝试 ${attempts}/5 次。${lastMiss ? '<br><b class="danger">骰子停下，这次没中。</b>' : ''}`,
       body: `<div class="bt-hand event-choice-hand">${prizes.map((c, i) => `<button type="button" class="bt-card event-choice-card" data-act="eventGambleRead" data-i="${i}" aria-label="放大查看${escAttr(c.name)}" aria-haspopup="dialog">${getCards().cardHTML(c, 'sm')}</button>`).join('')}</div>
         <div class="scene-ops"><button class="ov-btn" data-act="eventGambleLeave">放弃并离开</button><button class="ov-btn ok" data-act="eventGambleTry" ${(game.coins || 0) < 3 || !prizes.length ? 'disabled' : ''}>[[icon:coin]] 投入 3 币${attempts === 4 ? '（本次保底）' : ''}</button></div>`,
     });
+    setBagReturnHook(() => render(lastMiss));
     const active = eventPageBinding('eventGambleTry', current);
     UI.act('eventGambleRead', d => {
       const i = Number(d.i), card = prizes[i];

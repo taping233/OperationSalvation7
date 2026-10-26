@@ -416,7 +416,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
   let backToPrevStreak = 0;   // 连续「首选=回刚离开的格」次数（A→B→A 连发判拉锯）
   const decideMap = (obs) => {
     const moves = (obs.actions || []).filter(a => a.type === 'move');
-    // 背包满先开包腾格（09-26 断链修复①）：满包让所有宝箱/事件奖励作废，
+    // 背包满先开包腾格（09-26 断链修复①）：满包让所有搜刮点/事件奖励作废，
     // 开包-丢卡-关包三步无游戏时间代价（地图步不消耗回合），优先于一切走位
     if (strategic) {
       const ob = (obs.actions || []).find(a => a.type === 'sys' && a.name === 'openBackpack');
@@ -546,7 +546,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       if (strategic && doorUsed.has(`${a.li}:${a.idx}`)) return W.geo.seen + (a.idx > cIdx ? W.geo.seenFwd : 0);
       const t = (a.label || '').match(/（(\w+)）/)?.[1] || '';
       // seen 提前返回只对「层出口」破例（09-26 修根因③·二版）：
-      // 一版让滞环时所有 seen 落完整打分——已清火堆/商店/宝箱因此拿到 85-95 分压过
+      // 一版让滞环时所有 seen 落完整打分——已清火堆/商店/搜刮点因此拿到 85-95 分压过
       // 未访格（实测 13 分），造出 3→6→7→6 已清节点死循环（scdbg 探针抓到）。
       // 只给 door/extraction 解锁分：门 -40 在血线<75% 时低于 seen 保底 2 分，
       // 整层踏完后永远进不去 → 60 步无新格 no-progress（R2 实测 17/40 的真正根因）。
@@ -564,11 +564,11 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
         // R2 深层续航调参（R1 基线：87% 死、死亡主力层3×42/层1×18——带伤进硬层是主因）
         // 09-26 起分档与阈值全部读 W（见 agent.weights.js），DEFAULT 与原字面量逐值相等
         if (t === 'fire') base = hpRatio < W.gate.fire ? W.base.fireHi : W.base.fireLo;
-        // v3：背包满时宝箱降分（收不进奖励白跑一趟）
+        // v3：背包满时搜刮点降分（收不进奖励白跑一趟）
         else if (t === 'chest') {
           base = ((obs.run?.used ?? 0) >= (obs.run?.bagCap ?? 99)) ? W.base.chestFull : W.base.chestOk;
           // R18 攒卡优先（09-27 startCards 埋点：29% 场次开战卡<3 张——紧急撤离献 3 卡
-          // 的门槛卡死撤离选项）：卡不足时宝箱提分提前攒卡，保住 L3 撤离赎卡能力
+          // 的门槛卡死撤离选项）：卡不足时搜刮点提分提前攒卡，保住 L3 撤离赎卡能力
           if (strategic && (obs.run?.ownedCards || []).length < 3) base = W.base.chestLowCards;
         }
         else if (t === 'event') base = W.base.event;
@@ -602,7 +602,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
           const doorStallOk = stalled && a.li >= cLi;
           base = hpRatio >= W.gate.fire ? W.base.doorHi : doorStallOk ? W.base.doorStall
             : hpRatio >= W.gate.battleMid ? W.base.doorMid : W.base.doorLow;
-          // 扫图偏好：本层还有未收的宝箱/事件先收完再进层（攒卡组厚度）
+          // 扫图偏好：本层还有未收的搜刮点/事件先收完再进层（攒卡组厚度）
           if (base > 0 && hasUnexplored) base -= W.gate.doorUnexplored;
         }
       } else if (hpRatio < 0.5 && t === 'fire') base = 100;
@@ -633,7 +633,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       const forceProgress = stalled && !a.visited && !(a.li === cLi && a.idx === cPrev) ? W.geo.forceProgress : 0;
       return base + fwd - backtrack - crossBack + forceProgress + exitGrad + retreatGrad;
     };
-    // v2 扫图判定：候选里还有未访的宝箱/事件（同层）
+    // v2 扫图判定：候选里还有未访的搜刮点/事件（同层）
     const hasUnexplored = strategic && moves.some(m =>
       !m.visited && m.li === curLi && /（(chest|event)）/.test(m.label || ''));
     // alt2 弃局根因修复（09-26）：血线把前进项（门 -32）压到已访保底分 2 之下时，
@@ -644,7 +644,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     let banPrev = false;
     // 2步前瞻价值（09-26 架构升级②）：value(a) = score(a) + γ·max邻居score（以 a 为站位视角）
     // ——把「贪心单步」换成 depth-2 rollout：单步高分但两步内是死胡同的候选会被
-    // 「单步略低但两步内有火堆/宝箱/出口」的候选压过。γ=W.geo.lookahead（默认0.5，
+    // 「单步略低但两步内有火堆/搜刮点/出口」的候选压过。γ=W.geo.lookahead（默认0.5，
     // γ=0 严格退化为原贪心——消融开关）
     const gamma = strategic ? W.geo.lookahead : 0;
     const value = (a, ctx = null) => {
@@ -714,7 +714,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     if (obs.phase !== countPhase) { countPhase = obs.phase; overlaySteps = 0; }
     overlaySteps += 1;
 
-    // 弹层通用（事件/商店/宝箱/火堆/撤离整理/结算）：优先推进语义，回避弃局语义。
+    // 弹层通用（事件/商店/搜刮点/火堆/撤离整理/结算）：优先推进语义，回避弃局语义。
     // pick 只选「最近没点过」的动作（LRU 跨面板记忆，只回看不复点）；
     // 全部试过时按 LRU 顺序复用最旧的一个，不死锁。
     // 同页面内绕开上次被引擎拒绝的动作（obs.lastFailed，换页自动失效）
@@ -797,12 +797,12 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     // 卡牌特写是盲巷：先关再继续（关闭机制本身是动作面里的 czClose）
     const zoomClose = ui.find(a => a.name === 'czClose');
     if (zoomClose) return zoomClose;
-    // 宝箱选卡优先（09-27 全流程审计：三选一宝箱的选卡按钮 chestPick 在 DOM 中排
-    // 在跳过按钮之后，freshPick 永远先点 chestSkip——实测 77004 一局 10 个宝箱全被
+    // 搜刮点选卡优先（09-27 全流程审计：三选一搜刮点的选卡按钮 chestPick 在 DOM 中排
+    // 在跳过按钮之后，freshPick 永远先点 chestSkip——实测 77004 一局 10 个搜刮点全被
     // 跳过，卡牌资源全弃→卡组薄→砸击 9 次。选卡是收益动作，优先于跳过）
     const chestPick = ui.find(a => a.name === 'chestPick' && usable(a));
     if (chestPick) return chestPick;
-    // 跳过的宝箱记入 nodeSet（09-27 盲区修复）：引擎对「跳过宝箱」不写 visited——
+    // 跳过的搜刮点记入 nodeSet（09-27 盲区修复）：引擎对「跳过搜刮点」不写 visited——
     // 格子地图上仍是 chest（策略打分 chestOk 60 分），AI 会白走回头路再跳一次。
     // 跳过时把当前格计入 nodeSet（seen 判定同源），此后按已清格 2 分处理
     if (ui.some(a => a.name === 'chestSkip') && obs.run?.layer != null && obs.run?.node != null) {

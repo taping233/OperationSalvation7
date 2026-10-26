@@ -12,7 +12,7 @@ vi.mock('../game/src/run/game.run.scenes.js', () => ({
 }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ openEntrySupply:st.supply, openDoorModal:vi.fn(), openFireRest:vi.fn(), openAltarRitual:vi.fn(), openBossGate:vi.fn(), openEmergencyModal:vi.fn(), resumeNodeRestore:vi.fn(() => false) }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ _set_cardPageOpen:vi.fn() }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ startBattle:vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), startBattle:vi.fn() }));
 vi.mock('../game/src/core/render-scheduler.js', () => ({ renderScheduler:{ invalidate:vi.fn() } }));
 vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative:vi.fn(), lastLampNarrative:vi.fn() }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ EVENT_SCENE_META:{} }));
@@ -47,7 +47,7 @@ it('战斗格先走通用节点过场再开战，无确认页且不预抽遭遇'
   expect(st.acts.nodeDecisionLeave).toBeUndefined();
   expect(st.game.state).toBe('modal');              // 战斗接管前锁住地图
 });
-it('宝箱进入即开启，重复进入仍由 modal 闸门挡住且不注册搜索确认', () => {
+it('搜刮点进入即开启，重复进入仍由 modal 闸门挡住且不注册搜索确认', () => {
   st.layer.logical[0].def.type = 'chest';
   reenter(); reenter();
   expect(st.chests).toHaveBeenCalledTimes(1);

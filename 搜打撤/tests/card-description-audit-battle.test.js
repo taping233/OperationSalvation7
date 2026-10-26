@@ -226,6 +226,8 @@ describe('全卡描述修复回归：卡面正确结果与待裁定边界', () =
     await engine.processDelayed(); await drain();
     const repeated = effect === 'acquire' ? id === 'tt7-arcanescroll' ? runtime.hand.length - beforeHand + 1 : runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp;
     expect(repeated).toBe(n);
+    // Normal starters now contain five cards; replenish one independent draw for the second 3-card control.
+    if(id==='tt7-arcanescroll'){const extra=engine.addTempCard(plain);runtime.set$hand(runtime.hand.filter(item=>item!==extra));runtime.drawPile.push(extra);}
     engine.fireConsumeTriggers(consumedCard, runtime.foes[0]); await drain();
     const control = (effect === 'acquire' ? id === 'tt7-arcanescroll' ? runtime.hand.length - beforeHand + 1 : runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp) - repeated;
     expect(control).toBe(n);

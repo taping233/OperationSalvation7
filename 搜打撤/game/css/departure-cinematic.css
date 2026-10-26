@@ -14,6 +14,7 @@
 .departure-film-skip:disabled { cursor:wait; color:#878984; }
 .departure-film-status { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
 .departure-film-playing .departure-film-art { opacity:1; }
+.departure-film-caption { position:absolute; inset:58% 0 auto; margin:0; text-align:center; color:#213038; font:600 38px/1.5 var(--font-ui); letter-spacing:.3em; text-indent:.3em; }
 .departure-film-revealing { opacity:0; transition:opacity 680ms cubic-bezier(.4,0,.3,1); }
 .departure-film-revealing .departure-film-art { transition:transform 680ms ease-in,opacity 500ms ease-in; transform:scale(1.06); opacity:0; animation:none; }
 .departure-film-skipped { transition-duration:180ms; }

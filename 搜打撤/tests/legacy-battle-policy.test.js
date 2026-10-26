@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { isStarterAttackIdentity, isStarterAttackTextName, isStarterAttackPoolMember,
   usesNonLethalDamage, doublesLegacyBleed, hasLegacySealUnlock, isLegacySearchChestOperation,

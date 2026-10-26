@@ -46,13 +46,13 @@ afterEach(() => {
 });
 
 describe('珍珠盒可读存取界面', () => {
-  it('真实容量和存入守卫读取结构声明，改写卡文不改变规则', () => {
+  it('真实容量和存入守卫读取结构声明，改写卡文不改变规则', async () => {
     const box = game.ownedCards.find(entry => entry.card.id === pearl.id);
     box.card = { ...pearl, desc:'任意展示文字', rules:{ version:1, equip:{ container:{ slots:2, accepts:'资源' } } } };
     open();
     expect(session.bagCap()).toBe(18);
     const before = JSON.stringify(game.ownedCards);
-    UI._acts.pearlPut({ name:wood.name });
+    await UI._acts.pearlPut({ name:wood.name });
     expect(JSON.stringify(game.ownedCards)).toBe(before);
     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('1/2'), 'warn');
   });
@@ -78,58 +78,58 @@ describe('珍珠盒可读存取界面', () => {
     expect(button('pearlTake').title).not.toContain('一个空背包格');
   });
 
-  it('正常按钮存取整叠，盒中计数更新且安全格保护与UID原样保留', () => {
+  it('正常按钮存取整叠，盒中计数更新且安全格保护与UID原样保留', async () => {
     // 构造已在安全格的标记，确认存取展示和回调不会改变现有保护归属。
     game.ownedCards.find(o => o.card.id === pearl.id).safe = true;
     const before = game.ownedCards.map(o => o.uid);
-    button('pearlPut', wood.name).click();
+    button('pearlPut', wood.name).click(); await settleContainer();
     expect(game.ownedCards.filter(o => o.card.id === wood.id && o.stored)).toHaveLength(2);
     expect(document.querySelector('.pearl-store [role="status"]').textContent.replace(/\s/g, '')).toContain('3/9');
-    button('pearlTake', wood.name).click();
+    button('pearlTake', wood.name).click(); await settleContainer();
     expect(game.ownedCards.filter(o => o.card.id === wood.id && o.stored)).toHaveLength(0);
     expect(document.querySelector('.pearl-store [role="status"]').textContent.replace(/\s/g, '')).toContain('1/9');
     expect(game.ownedCards.map(o => o.uid)).toEqual(before);
     expect(game.ownedCards.find(o => o.card.id === pearl.id).safe).toBe(true);
   });
 
-  it('最后一张同方向按钮消失后焦点回返回键，不跳到相反存取动作', () => {
-    const put = button('pearlPut', wood.name); put.focus(); put.click();
+  it('最后一张同方向按钮消失后焦点回返回键，不跳到相反存取动作', async () => {
+    const put = button('pearlPut', wood.name); put.focus(); put.click(); await settleContainer();
     expect(document.activeElement).toBe(button('pearlBack'));
     expect(document.activeElement.dataset.act).not.toBe('pearlTake');
   });
 
-  it('同方向仍有候选时重绘维持存取区域的原生焦点', () => {
+  it('同方向仍有候选时重绘维持存取区域的原生焦点', async () => {
     game.ownedCards.push(...copies({ ...food, id: 'extra-food', name: '额外口粮卡' }, 1));
-    open(); const put = button('pearlPut', wood.name); put.focus(); put.click();
+    open(); const put = button('pearlPut', wood.name); put.focus(); put.click(); await settleContainer();
     expect(document.activeElement.dataset.act).toBe('pearlPut');
     expect(document.activeElement.dataset.name).toBe('额外口粮卡');
   });
 
-  it('盒容量不足仍整叠拒收，按钮不改卡与焦点', () => {
+  it('盒容量不足仍整叠拒收，按钮不改卡与焦点', async () => {
     game.ownedCards = [...copies(pearl, 1), ...copies(food, 8, { stored: 1 }), ...copies(wood, 2)]; open();
     const target = button('pearlPut', wood.name), before = JSON.stringify(game.ownedCards), focus = button('pearlBack');
     expect(target.disabled).toBe(true);
     expect(target.getAttribute('aria-label')).toContain('剩余 1 张空间，放不下整叠');
     expect(target.closest('.container-store-slot').querySelector('.container-store-blocked').textContent).toBe('剩余 1 张空间，放不下整叠');
-    focus.focus(); UI.log.mockClear(); target.click();
+    focus.focus(); UI.log.mockClear(); target.click(); await settleContainer();
     expect(JSON.stringify(game.ownedCards)).toBe(before);
     expect(document.activeElement).toBe(focus); expect(UI.log).not.toHaveBeenCalled();
     // 绕过禁用按钮调用当前动作时，执行层仍须拒绝整叠。
-    UI._acts.pearlPut({ name:wood.name });
+    await UI._acts.pearlPut({ name:wood.name });
     expect(JSON.stringify(game.ownedCards)).toBe(before); expect(document.activeElement).toBe(focus);
     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('珍珠盒放不下'), 'warn');
   });
 
-  it('背包空间不足仍拒绝整叠取出，不受新布局影响', () => {
+  it('背包空间不足仍拒绝整叠取出，不受新布局影响', async () => {
     game.ownedCards = [...copies(pearl, 1), ...copies(wood, 9, { stored: 1 }), ...copies(food, 69)]; open();
     expect(session.usedSlots()).toBe(24); expect(session.bagCap()).toBe(25);
     const before = JSON.stringify(game.ownedCards), target = button('pearlTake', wood.name), focus = button('pearlBack');
     expect(target.disabled).toBe(true);
     expect(target.closest('.container-store-slot').querySelector('.container-store-blocked').textContent).toBe('背包空间不足，整叠需 3 格');
-    focus.focus(); UI.log.mockClear(); target.click();
+    focus.focus(); UI.log.mockClear(); target.click(); await settleContainer();
     expect(JSON.stringify(game.ownedCards)).toBe(before); expect(document.activeElement).toBe(focus);
     expect(UI.log).not.toHaveBeenCalled();
-    UI._acts.pearlTake({ name:wood.name });
+    await UI._acts.pearlTake({ name:wood.name });
     expect(JSON.stringify(game.ownedCards)).toBe(before);
     expect(session.usedSlots()).toBe(24); expect(document.activeElement).toBe(focus);
     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('背包放不下'), 'warn');
@@ -170,3 +170,5 @@ describe('珍珠盒可读存取界面', () => {
     expect(document.querySelector('.pearl-store-columns').classList.contains('battle-decision-content')).toBe(true);
   });
 });
+
+const settleContainer = () => vi.waitFor(() => expect(document.querySelector('.pearl-store[aria-busy="true"], .pouch-store[aria-busy="true"]')).toBeNull());

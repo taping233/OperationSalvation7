@@ -5,7 +5,7 @@ import mapData from '../../data/map.json' with { type: 'json' };
 /* ============================================================
  * 搜打撤 —— 地图静态数据表
  *
- * 物品/宝箱表、怪物图鉴、遭遇表与祭坛 BOSS 数据来自 game/data/map.json；
+ * 物品/搜刮点表、怪物图鉴、遭遇表与祭坛 BOSS 数据来自 game/data/map.json；
  * 本文件只做组装与行为注入。
  * 新局由 run/map-generator-v7.js 生成，经 map-exploration-adapter.js 安装探索支路；
  * 节点数量与约束以 run/map-generation-rules.js 为准。

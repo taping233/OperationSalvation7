@@ -1,7 +1,7 @@
 // Pure visible-DOM planner + bounded built-in-tab runner. No browser bootstrap,
 // page evaluation, storage, game API, synthetic input, timers or external clients.
 export const VISIBLE_PLAYBACK_VERSION = '20261016-r2.3';
-const LABELS = ['领取宝箱', '继续探索', '返回地图', '进入该地点', '收下'];
+const LABELS = ['领取搜刮点', '继续探索', '返回地图', '进入该地点', '收下'];
 const tidy = value => value.replace(/\s+/gu, ' ').trim();
 const canonical = name => tidy(name).replace(/^✓\s*/u, '').replace(/\s*→$/u, '')
   .replace(/^继续探索\s+本处休整已经完成$/u, '继续探索');
@@ -66,8 +66,8 @@ export function planVisibleStep(snapshot, options = {}) {
   if (/事件选项|先选择一个选项|点击选项查看已知结果|选择后确认|永久放弃剩余.*离开后无法找回/u.test(text)) return stop('event-or-irreversible-choice');
   // Opening a known sealed chest is allowed even if its future cards require a
   // choice. Actual reward-selection screens always stop, including one fit card.
-  const chestOffer = /获得宝箱|战斗胜利/u.test(text) && /待领取宝箱/u.test(text) && /领取宝箱后/u.test(text);
-  const decisions = text.replace(/领取宝箱后[，,]?\s*从\s*\d+\s*张卡牌中选择\s*1\s*张/gu, '领取宝箱后揭晓卡牌');
+  const chestOffer = /获得搜刮点|战斗胜利/u.test(text) && /待领取搜刮点/u.test(text) && /领取搜刮点后/u.test(text);
+  const decisions = text.replace(/领取搜刮点后[，,]?\s*从\s*\d+\s*张卡牌中选择\s*1\s*张/gu, '领取搜刮点后揭晓卡牌');
   if (/选择收获|选择卡牌|请选择.*(?:卡牌|奖励)|选择\s*(?:一|1)\s*张|(?:二|三|\d)选(?:一|1)|任选\s*1\s*张|两张资源卡中选择一张|其余(?:卡牌)?永久放弃|从\s*\d+\s*张卡牌中选择/u.test(decisions)) return stop('card-choice');
   const takes = buttons.filter(node => node.label === '收下');
   if (takes.length > 1) return stop('multiple-rewards');
@@ -81,7 +81,7 @@ export function planVisibleStep(snapshot, options = {}) {
   const rewardButtons = dialogs.length === 1 ? nodesOf(rewardText, 'button') : buttons;
   if (fixedReward && rewardButtons.filter(node => node.label === '收下').length !== takes.length) return stop('conflicting-states');
   const reward = nodesOf(rewardText, 'complementary').some(node => node.name === '奖励操作')
-    && (nodesOf(rewardText, 'heading').some(node => ['搜刮完成', '战斗胜利', '随行补给', '获得宝箱'].includes(node.name)) || fixedReward);
+    && (nodesOf(rewardText, 'heading').some(node => ['搜刮完成', '战斗胜利', '随行补给', '获得搜刮点'].includes(node.name)) || fixedReward);
   if (reward && takes.length === 1 && (/奖励可分别领取|放不下|当前候选都/u.test(text) || buttons.filter(node => node.label === '整理背包').length > 1)) return stop('multiple-or-blocked-rewards');
   const entryComplete = !fixedReward && /随行补给/u.test(text) && /已领取所有奖励|补给已齐备/u.test(text);
   const rewardComplete = reward && !takes.length && !/待领取|放不下|奖励可分别领取|尚未领取/u.test(rewardText)
@@ -92,7 +92,7 @@ export function planVisibleStep(snapshot, options = {}) {
   const preview = /可以前往/u.test(text) && buttons.some(node => node.name === '关闭地点预览');
   if ((chestOffer && (takes.length || rewardComplete || buttons.some(node => ['继续探索', '返回地图'].includes(node.label)))) || (preview && (chestOffer || reward || rested))) return stop('conflicting-states');
   let label, state;
-  if (chestOffer) { label = '领取宝箱'; state = 'sealed-chest'; }
+  if (chestOffer) { label = '领取搜刮点'; state = 'sealed-chest'; }
   else if (reward && takes.length === 1) { label = '收下'; state = 'single-reward'; }
   else if (entryComplete || rewardComplete || rested) {
     label = buttons.some(node => node.label === '继续探索') ? '继续探索' : '返回地图'; state = 'completed';

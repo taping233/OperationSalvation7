@@ -27,7 +27,7 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative:(...args) => H.
 let UI, flow, scenes, setBagReturnHook, registeredChests;
 beforeAll(async () => {
   window.SDT = { game:H.game, Icons:{ rich:x => x }, Sound:{ sfx() {} }, Meta:{ track() {}, addXpToProgress() {} }, Base:{ bagCap:() => 9 },
-    MAP:{ chestKinds:{ small:{ name:'小宝箱' } } },
+    MAP:{ chestKinds:{ small:{ name:'小型物资箱' } } },
     Cards:{ DROP_WEIGHTS:{ 古朴:1 }, all:() => H.cards, classPool:() => [], sellPrice:() => 1,
       isRandomObtainable:() => true, cardHTML:c => `<span>${c.name}</span>` } };
   const { overlayMethods } = await import('../game/src/ui/overlay.js');

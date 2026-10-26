@@ -2,7 +2,7 @@ import { esc } from '../core/shared.js';
 import { Random } from '../core/random.js';
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import { showRewardCardFeedback } from '../ui/reward-card-feedback.js';
-import { claimResourceReward, resourceRewardAt, nodeActionBinding } from './node-reward-state.js';
+import { claimResourceReward, resourceRewardAt, nodeActionBinding, nodeContentEndedAt } from './node-reward-state.js';
 import { patchRewardScene, rewardClaimHTML, rewardExitHTML, rewardCardUnitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
 
 export function createRunResourceController({
@@ -11,6 +11,7 @@ export function createRunResourceController({
 }) {
 // 物资格先按通用掉落权重抽稀有度，再在档内均分；两张候选同名去重。
 async function openResourcePick(done) {
+  if (nodeContentEndedAt(game)) return false;
   const weights = getCards().DROP_WEIGHTS;
   const pool = getCards().all().filter(c => c.type === '资源' && getCards().isRandomObtainable(c));
   const pickOne = (taken) => {
@@ -73,7 +74,7 @@ async function openResourcePick(done) {
         : rewardClaimHTML({ index:i, cardName:card.name, choice:true, fits, actions:claimActions }) + (!fits ? '<span class="reward-capacity-note">当前放不下</span>' : '');
       return rewardCardUnitHTML({card,face:getCards().cardHTML(card),index:i,readAction:'resRead',action,className:finished ? record.taken === i ? 'got' : 'dropped' : ''});
     }).join(''),
-    actions:rewardExitHTML('resSkip', finished ? '继续探索' : '返回地图'), footer:`<button class="reward-bag" data-act="resBag" data-card-receive-anchor="bag">整理背包</button>${!saved ? '<button class="reward-bag" data-act="resRetrySave">重试保存</button>' : ''}<span class="reward-notice" role="status">${!saved ? '物资进度尚未保存成功，请重试保存；暂勿刷新页面。' : finished ? '' : '两张资源卡中选择一张，其余永久放弃；未领取时保留在此处'}</span>`,
+    actions:rewardExitHTML('resSkip', finished ? '继续探索' : '返回地图'), footer:`<button class="reward-bag" data-act="resBag" data-card-receive-anchor="bag">整理背包</button>${!saved ? '<button class="reward-bag" data-act="resRetrySave">重试保存</button>' : ''}<span class="reward-notice" role="status">${!saved ? '物资进度尚未保存成功，请重试保存；暂勿刷新页面。' : finished ? '' : '两张资源卡中选择一张，其余放弃；前往下一节点后未领取内容作废'}</span>`,
   });
   const currentBody = UI.el?.ovBody;
   const focused = currentBody?.contains(dom.activeElement) ? dom.activeElement : null;

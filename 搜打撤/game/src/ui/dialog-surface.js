@@ -1,5 +1,6 @@
 import { registerScreenOwner, currentScreenOwner } from './screen-owner.js';
 import { claimInputIsolation } from './input-isolation.js';
+import { isAvailableControl } from './action-dispatch.js';
 
 // Rich forms and confirmations share input ownership without replacing the source page.
 /** @param {HTMLElement} root
@@ -20,10 +21,11 @@ export function bindDialogSurface(root, { initialFocus, returnFocus = document.a
     isCurrent:() => !root.hidden });
   const trap = event => {
     if (event.key !== 'Tab') return;
+    const styles = new Map();
     const items = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll(
       'button,input,textarea,select,a[href],[tabindex]:not([tabindex="-1"])',
-    ))].filter(node => !node.matches(':disabled,[aria-disabled="true"]')
-      && !node.closest('[hidden],[inert]') && node.getClientRects().length);
+    ))].filter(node => !node.closest('[aria-disabled="true"], .closing, [data-ui-closing]')
+      && isAvailableControl(node, styles));
     if (!items.length) { event.preventDefault(); root.focus({ preventScroll:true }); return; }
     const first = items[0], last = items.at(-1);
     if (!items.includes(/** @type {HTMLElement} */ (document.activeElement)) || event.shiftKey && document.activeElement === first) {
@@ -31,7 +33,8 @@ export function bindDialogSurface(root, { initialFocus, returnFocus = document.a
     } else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   };
   root.addEventListener('keydown', trap);
-  initialFocus?.focus({ preventScroll:true });
+  if (initialFocus && !initialFocus.closest('[aria-disabled="true"]') && isAvailableControl(initialFocus)) initialFocus.focus({ preventScroll:true });
+  else root.focus({ preventScroll:true });
   let released = false;
   return ({ restoreFocus = true } = {}) => {
     if (released) return;
@@ -43,7 +46,8 @@ export function bindDialogSurface(root, { initialFocus, returnFocus = document.a
     const owner = currentScreenOwner();
     if (restoreFocus && returnFocus instanceof HTMLElement && returnFocus.isConnected
       && (!owner || owner.root.contains(returnFocus))
-      && !returnFocus.matches(':disabled') && !returnFocus.closest('[hidden],[inert],[aria-hidden="true"]')) {
+      && !returnFocus.closest('[aria-disabled="true"], .closing, [data-ui-closing]')
+      && isAvailableControl(returnFocus)) {
       returnFocus.focus({ preventScroll:true });
     }
   };

@@ -1,0 +1,11 @@
+{
+  "beforeSeconds": 81.8097060546875,
+  "afterSeconds": 55.7934990234375,
+  "reductionPercent": 31.800880709507616,
+  "identicalCasesAndOutcomes": true,
+  "passed": 23,
+  "skipped": 35,
+  "method": "依次执行相同两个文件；before通过内存转换读850bae931a中的原测试，after使用当前测试；两边使用现行脚本、依赖及配置，未回退共享工作区",
+  "initialBaselineSeconds": 51.455134521484375,
+  "limit": "单组配对记录；机器负载和缓存会波动，不作为固定速度保证，初次基线与后续脚本/测试配置不同"
+}

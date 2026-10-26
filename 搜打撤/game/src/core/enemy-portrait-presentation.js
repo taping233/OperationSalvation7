@@ -2,6 +2,10 @@
 // Artwork revisions match the actual baked battle files. No runtime image scanning.
 // Source and geometry: docs/evidence/2026-10-25-enemy-battle-fit/receipt.json
 const ENEMY_PORTRAITS = Object.freeze({
+  boss_witness_pope: {"height": 350, "aspect": 0.998457, "imageScale": 1.060185, "bottom": -0.027778, "x": -51.118421, "revision": "9e1fc15d9cb9"},
+  boss_mutation_mother: {"height": 392, "aspect": 1.49901, "imageScale": 1.00396, "bottom": -0.00198, "x": -50.065789, "revision": "04cd3fefb62f"},
+  boss_mysterious_blocker: {"height": 350, "aspect": 0.880435, "imageScale": 1.032609, "bottom": -0.013587, "x": -50.647482, "revision": "8112c6b94775"},
+  boss_necromancer: {"height": 350, "aspect": 1.210438, "imageScale": 1.023569, "bottom": -0.020202, "x": -51.776316, "revision": "118cc1b154c8"},
   infantry: { height: 286, aspect: 0.490541, imageScale: 1.027027, bottom: -0.010811, x: -49.424184, revision: '5ffcce039377' },
   archer: { height: 278, aspect: 0.576294, imageScale: 1.035422, bottom: -0.012262, x: -47.403846, revision: '409b05730660' },
   bandit: { height: 264, aspect: 0.499272, imageScale: 1.106259, bottom: -0.029112, x: -51.442308, revision: '9e880cbc4fee' },

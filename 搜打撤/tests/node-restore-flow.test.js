@@ -10,7 +10,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
 vi.mock('../game/src/core/characters.js', () => ({ characterFor:() => null, characterName:() => '' }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub:vi.fn() }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx:{ tick:vi.fn(), ding:vi.fn() }, _set_cardPageOpen:vi.fn(), cardHTML:c => c.name }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(),
   startBattle:vi.fn(), captureBattleContext:game => { const token = game.discoveredPairs; return () => token === game.discoveredPairs; },
 }));
 vi.mock('../game/src/run/game.run.data.js', () => ({
@@ -55,27 +55,27 @@ it('祭坛复原：满包返回地图，读档与部分领取后再次读档均�
   const { openAltarRitual, resumeNodeRestore } = await import('../game/src/run/game.run.altar.js');
   const { isConsumedMapNode } = await import('../game/src/core/map-node-state.js');
   const { validateRunSave } = await import('../game/src/hub/run-save-validation.js');
-  openAltarRitual(); acts.altarRewardRestore();
+  openAltarRitual(); await acts.altarRewardRestore();
   const record = st.game.nodeRewards['3,0'];
   expect(record).toMatchObject({ source:'altar-reward', total:3, left:3, hpGain:10, finished:false });
   expect(st.game.hp).toBe(22); expect(st.game.altarRewardPending).toBe(false);
-  acts.restoreOne({ name:move.name });
+  await acts.restoreOne({ name:move.name });
   expect(record.left).toBe(3); expect(st.game.usedPocket[0].count).toBe(4);
   expect(document.querySelector('[data-act="restoreReturn"]')).not.toBeNull();
-  acts.restoreReturn();
+  await acts.restoreReturn();
   expect(st.game.state).toBe('idle');
   expect(isConsumedMapNode(st.game, { li:3, idx:0, def:{ type:'altar' } })).toBe(false);
   expect(validateRunSave(st.saves.at(-1)).ok).toBe(true);
   readSnapshot(); st.capacity = 10;
   expect(resumeNodeRestore()).toBe(true);
   const stale = acts.restoreOne;
-  acts.restoreOne({ name:move.name }); stale({ name:move.name });
+  await acts.restoreOne({ name:move.name }); stale({ name:move.name });
   expect(st.game.nodeRewards['3,0'].left).toBe(2);
   expect(st.game.ownedCards).toHaveLength(1);
-  acts.restoreReturn(); readSnapshot();
+  await acts.restoreReturn(); readSnapshot();
   expect(resumeNodeRestore()).toBe(true);
   expect(document.body.textContent).toContain('还可复原 2 张');
-  acts.restoreOne({ name:move.name }); acts.restoreOne({ name:move.name });
+  await acts.restoreOne({ name:move.name }); await acts.restoreOne({ name:move.name });
   expect(st.game.ownedCards).toHaveLength(3); expect(st.game.usedPocket[0].count).toBe(1);
   expect(st.game.hp).toBe(22); expect(st.game.nodeRewards['3,0'].finished).toBe(true);
   expect(st.game.state).toBe('idle'); expect(resumeNodeRestore()).toBe(false);
@@ -87,14 +87,14 @@ it('道具献祭：确认只扣一次，满包暂离并读档后保留两次同�
   st.game.ownedCards = [{ uid:'offering', card:{ id:'potion', name:'献祭药水', type:'道具' } }];
   const { openAltarRitual, resumeNodeRestore } = await import('../game/src/run/game.run.altar.js');
   openAltarRitual(); acts.altarItemRestore(); acts.sacPick({ uid:'offering' });
-  const confirm = acts.sacConfirm; confirm(); confirm();
+  const confirm = acts.sacConfirm; const pending=confirm(); confirm(); await pending;
   expect(st.game.ownedCards).toHaveLength(0);
   expect(st.game.altarItemSacrificed).toBe(true);
   expect(st.game.nodeRewards['3,0']).toMatchObject({ source:'altar-offering', total:2, left:2, hpGain:0 });
-  acts.restoreReturn(); readSnapshot(); st.capacity = 10;
+  await acts.restoreReturn(); readSnapshot(); st.capacity = 10;
   expect(resumeNodeRestore()).toBe(true);
-  acts.restoreOne({ name:move.name }); acts.restoreReturn(); readSnapshot();
-  expect(resumeNodeRestore()).toBe(true); acts.restoreOne({ name:move.name });
+  await acts.restoreOne({ name:move.name }); await acts.restoreReturn(); readSnapshot();
+  expect(resumeNodeRestore()).toBe(true); await acts.restoreOne({ name:move.name });
   expect(st.game.hp).toBe(12); expect(st.game.ownedCards).toHaveLength(2);
   expect(st.game.nodeRewards['3,0']).toMatchObject({ left:0, finished:true, restoredIds:[move.id, move.id] });
   expect(document.querySelector('[data-act="altarOn3"]')).not.toBeNull();

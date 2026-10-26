@@ -18,14 +18,17 @@ export function playerFields(hp, maxHp, atk, spellPower, myClass, characterId) {
     myClass: myClass, characterId: characterId, state: 'idle', battleActive: false };
 }
 
-export function resetEventGame(holder, readEvents) {
-holder.saves = []; holder.uid = 0; holder.slot = null; holder.narrative = async () => null;
+export function resetEventGame(holder, readEvents, overrides = {}) {
+  holder.saves = []; holder.uid = 0; holder.slot = null; holder.narrative = async () => null;
+  // A new case is a fresh run. Preserve the captured game object, not prior
+  // event history, pending state or ad-hoc fields left by another case.
+  for (const key of Object.keys(holder.game)) delete holder.game[key];
   Object.assign(holder.game, { seed: 7, state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 18, fragments: 0,
-    altarActivated:false, altarRewardPending:false, altarItemSacrificed:false, nodeRewards:{}, entrySupply:null,
+    altarActivated:false, altarRewardPending:false, altarItemSacrificed:false, nodeRewards:{}, eventLog:[], entrySupply:null,
     discoveredPairs: new Set(), layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'event' } }] }],
     canReceiveCard: () => true, heal: n => holder.game.hp = Math.min(holder.game.maxHp, holder.game.hp + n),
     grantCard: (card, opts) => (readEvents()).grantEventCard(card, opts), bagCap:() => 9, usedSlots:() => holder.game.ownedCards.length,
-  });
+  }, overrides);
 }
 
 export function damageRuleFields(area, target) {
@@ -34,7 +37,7 @@ export function damageRuleFields(area, target) {
 
 export function eventCardMocks(holder) {
   return { game: holder.game, Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
-    MAP:{ chestKinds:{ small:{ name:'小宝箱' } } },
+    MAP:{ chestKinds:{ small:{ name:'小型物资箱' } } },
     Cards: { DROP_WEIGHTS:{ 古朴:1 }, all: () => holder.cards, classPool: () => holder.cards.filter(c => c.type === '能力卡'), sellPrice:() => 1, isRandomObtainable: () => true, cardHTML: c => `<span>${c.name}</span>` } };
 }
 
@@ -86,7 +89,7 @@ export function altarMocks(holder, readVi) {
       cardHTML: c => c.name,
       sellPrice: () => 1,
     },
-    MAP: { chestKinds:{ small:{ name:'小宝箱' } } },
+    MAP: { chestKinds:{ small:{ name:'小型物资箱' } } },
     Base: { isSha: () => false, bagCap:() => holder.bagCapN },
     Motion: undefined };
 }

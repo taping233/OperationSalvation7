@@ -1,6 +1,6 @@
 import { flushEventActions } from './helpers/event-dice-async.js';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createEventDiceController } from '../game/src/ui/event-dice.js';
+import { createEventDiceController, diceStep } from '../game/src/ui/event-dice.js';
 import { Random } from '../game/src/core/random.js';
 import { openShopCommission, commissionEligibleSlots } from '../game/src/run/shop-commission.js';
 import { rollEventDice } from './helpers/event-dice-async.js';
@@ -23,6 +23,38 @@ function harness() {
 afterEach(()=>vi.restoreAllMocks());
 
 describe('玩家投骰',()=>{
+  it('大池先后台不放回抽六项，保存后重进不再抽样，六点均能结算对应奖励',async ()=>{
+    for (let point=1;point<=6;point++) {
+      const rng=vi.spyOn(Random,'random').mockReturnValue(.9),h=harness();
+      const outcomes=Array.from({length:20},(_,i)=>({label:`装备${i}`,value:`gear${i}`}));
+      await h.open({outcomes,sides:20});
+      const step=h.owner.dice.reward;
+      expect(step.sides).toBe(6);expect(step.outcomes).toHaveLength(6);
+      expect(new Set(step.outcomes.map(o=>o.value)).size).toBe(6);
+      expect(step.outcomes[0].value).toBe('gear18');expect(outcomes).toHaveLength(20);
+      expect(h.UI.el.ovBody.querySelectorAll('.event-die-face')).toHaveLength(6);
+      expect(h.UI.el.ovBody.querySelectorAll('.event-dice-rules p')).toHaveLength(6);
+      const owner=JSON.parse(JSON.stringify(h.owner)),calls=rng.mock.calls.length;
+      await h.open({owner,outcomes:[],sides:20});expect(rng.mock.calls.length).toBe(calls);
+      rng.mockReturnValue((point-.5)/6);
+      await h.UI._acts.eventDiceRoll();await h.UI._acts.eventDiceContinue();
+      expect(h.done).toHaveBeenCalledExactlyOnceWith(step.outcomes[point-1].value);
+    }
+  });
+  it.each([1,2,3,4,5,6])('不足六个候选也用六面骰：%s点始终有结果',point=>{
+    const step=diceStep({},'small',Array.from({length:5},(_,value)=>({value})));
+    expect(step.sides).toBe(6);
+    expect(step.outcomes[Math.floor((point-1)*step.outcomes.length/step.sides)]).toBeDefined();
+  });
+  it('旧多面骰已投奖励迁移后保持不变，未投候选只抽样一次',()=>{
+    vi.spyOn(Random,'random').mockReturnValue(.5);
+    const outcomes=Array.from({length:20},(_,value)=>({value}));
+    const owner={dice:{old:{sides:20,outcomes,result:17}}};
+    const step=diceStep(owner,'old',[]);
+    expect(step.sides).toBe(6);expect(step.outcomes).toHaveLength(6);
+    expect(step.outcomes[step.result-1].value).toBe(16);
+    const saved=JSON.parse(JSON.stringify(step));diceStep(owner,'old',[]);expect(step).toEqual(saved);
+  });
   it.each([1,2,3,4,5,6])('%s 点准确对应两档，确认前不结算，旧按钮不重复结算',async point=>{
     vi.spyOn(Random,'random').mockReturnValue((point-.5)/6);
     const h=harness();await h.open();

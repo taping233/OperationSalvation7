@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { GUN_POOL_IDS, advanceBiphasicAstrolabe, canMindControl, capNonLethalDamage, chooseMissingCurse, nextChaosRarity, soulContractTargets, transformChaosDeck } from '../game/src/battle/effects/requested-card-batch.js';
 

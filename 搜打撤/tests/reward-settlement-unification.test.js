@@ -20,7 +20,7 @@ beforeEach(async () => {
   };
   window.SDT = { game, UI, Icons:{ rich:String }, Sound:{ sfx() {} },
     Base:{ slot:1, data:{}, bagCap:() => 16, isSha:() => false, petEggDropChance:() => 0, recordPetEggChestResult() {} },
-    MAP:{ chestKinds:{ small:{ name:'小宝箱', cards:1 } } },
+    MAP:{ chestKinds:{ small:{ name:'小型物资箱', cards:1 } } },
     Cards:{ all:() => [card], randomDropCard:() => card, rarityOf:value => value.rarity, sellPrice:() => 1, cardHTML:value => `<span>${value.name}</span>` },
   };
   await import('../game/src/run/chests.js'); Chests = window.SDT.Chests;

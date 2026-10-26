@@ -130,12 +130,15 @@ it.each(['safe', 'pocket'])('%s 分区按钮关闭重开仍聚焦原分区按钮
   expect(document.activeElement.dataset.zone).toBe(zone);
 });
 
-it('关闭按钮重开后恢复关闭按钮焦点，关闭返回来源仍只调用一次', () => {
-  const back = vi.fn(() => { H.game.state = 'idle'; });
+it('关闭按钮重开后恢复关闭按钮焦点，关闭返回来源仍只调用一次', async () => {
+  await ui._acts.closeBag();
+  const back = vi.fn(() => { H.game.state = 'idle'; ui.showOverlay('来源', '<main>来源</main>'); });
+  ui.showOverlay('来源', '<main>来源</main>');
   bag.setBagReturnHook(back);
+  bag.showBackpack(); flushFrames();
   document.querySelector('.bag-board').scrollTop = 157;
   document.querySelector('[data-act="closeBag"]').focus();
-  click('[data-act="closeBag"]'); flushFrames();
+  await ui._acts.closeBag(); flushFrames();
   expect(back).toHaveBeenCalledTimes(1);
   bag.showBackpack(); flushFrames();
   expect(document.querySelector('.bag-board').scrollTop).toBe(157);

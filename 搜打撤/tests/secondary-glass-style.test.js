@@ -33,7 +33,7 @@ describe('secondary glass and unboxed capacity presentation contracts', () => {
     expect(declaration('battle-secondary-overlay', 'body #overlay .card.card:has(> #ovBody > .battle-secondary-layer)', 'backdrop-filter')).toBe('none');
   });
   it('removes nested opaque panels while retaining clear action and hover cues', () => {
-    for (const child of ['.choice-opt', '.battle-decision-inspect']) {
+    for (const child of ['.choice-opt']) {
       expect(declaration('battle-secondary-overlay', `${panel} ${child}`, 'background')).toBe('transparent');
       expect(declaration('battle-secondary-overlay', `${panel} ${child}`, 'backdrop-filter')).toBeUndefined();
     }

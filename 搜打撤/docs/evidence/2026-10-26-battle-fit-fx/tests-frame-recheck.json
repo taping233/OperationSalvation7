@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "kind": "test-timing-summary",
+  "startedAt": "2026-10-26T14:14:51.322Z",
+  "endedAt": "2026-10-26T14:14:57.420Z",
+  "wallMilliseconds": 6098,
+  "reason": "failed",
+  "unhandledErrors": 0,
+  "totalFiles": 1,
+  "counts": {
+    "passed": 46,
+    "failed": 1,
+    "skipped": 0,
+    "pending": 0
+  },
+  "fileCounts": {
+    "passed": 0,
+    "failed": 1,
+    "skipped": 0,
+    "pending": 0
+  },
+  "completed": false,
+  "slowestFiles": [
+    {
+      "file": "tests/battle-frames-ownership.test.js",
+      "project": "dom",
+      "state": "failed",
+      "passed": 46,
+      "failed": 1,
+      "skipped": 0,
+      "pending": 0,
+      "milliseconds": 2817.64,
+      "collectionMilliseconds": 1923.42,
+      "environmentMilliseconds": 949.36,
+      "preparationMilliseconds": 152.09
+    }
+  ],
+  "files": [
+    {
+      "file": "tests/battle-frames-ownership.test.js",
+      "project": "dom",
+      "state": "failed",
+      "passed": 46,
+      "failed": 1,
+      "skipped": 0,
+      "pending": 0,
+      "milliseconds": 2817.64,
+      "collectionMilliseconds": 1923.42,
+      "environmentMilliseconds": 949.36,
+      "preparationMilliseconds": 152.09
+    }
+  ],
+  "skipped": [],
+  "limits": [
+    "每个文件耗时可并发重叠，不能相加作为整轮时间",
+    "跳过和未完成用例未计入通过；缺少说明的跳过明确标记"
+  ]
+}

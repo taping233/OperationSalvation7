@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it, vi } from 'vitest';
 import { prepareTransition } from '../game/src/ui/transition-preparation.js';
 it('does not launch already obsolete preparation', async () => {

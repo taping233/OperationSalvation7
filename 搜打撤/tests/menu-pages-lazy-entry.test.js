@@ -236,7 +236,7 @@ describe('菜单真实按需入口', () => {
 
   it.each([false, true])('数据页公共返回保留回流且不重复注入（来自设置：%s）', async fromSettings => {
     const real = await vi.importActual('../game/src/ui/game.menu.pages.js');
-    h.deps.openDataPage = () => h.deps.UI.showOverlay('', '<section class="pg"><div class="doom-stats">数据</div></section>');
+    h.deps.openDataPage = ({onRender}) => {h.deps.UI.showOverlay('', '<section class="pg"><div class="doom-stats">数据</div></section>');const root=h.deps.UI.el.ovBody.firstElementChild;return onRender({root,revision:h.deps.UI._overlayRevision,isCurrent:()=>root.isConnected});};
     const menu = h.facade.createGameMenuController(h.deps, { pageFactory:real.createGameMenuPages });
     menu.openDataPageUi(fromSettings);
     const back = document.querySelector('.archive-back[data-act="dataPageBack"]');

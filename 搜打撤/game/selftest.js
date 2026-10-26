@@ -121,7 +121,7 @@ check('BOSS·胜利领奖完成后直接保存结算', (() => {
 check('BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）', !/showBossPackCleanup\s*\(/.test(gameSource), true);
 check('档位概览仅展示游玩时间与已解锁成就', /游玩时间/.test(gameSource) && /已解锁成就/.test(gameSource), true);
 check('背包入口支持再次点击关闭', /if \(!refreshOnly && backpackOpen/.test(gameSource), true);
-check('背包缩略卡点击进入详情', /data-act="inspectStack"/.test(gameSource) && /bagAct\('inspectStack',\s*d => openBagZoom\(d\.name, d\.safe === '1', d\.pocket === '1', null, d\.uid\)\)/.test(gameSource) && /function openBagZoom\(/.test(gameSource), true);
+check('背包缩略卡点击进入详情', /data-act="inspectStack"/.test(gameSource) && /bagAct\('inspectStack',\s*d => openBagZoom\(d\.name, d\.safe === '1', d\.pocket === '1', null, d\.uid,[\s\S]*?d\.pocketIndex === undefined \? null : Number\(d\.pocketIndex\)\)\)/.test(gameSource) && /function openBagZoom\(/.test(gameSource), true);
 check('道具使用入口只在详情页生成', !/data-act="useStack"/.test(gameSource) && /data-act="useDetailCard"/.test(gameSource), true);
 // 2026-10-01（ROOT-06）：丢弃确认现经 bagSlots 门面调用（hub/game.bag.drag.js）。
 check('拖出背包弹出丢弃确认', /if \(!t\) \{ bagSlots\.showDiscardConfirm\(d\.name, d\.fromSafe\)/.test(gameSource), true);

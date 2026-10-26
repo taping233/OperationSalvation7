@@ -70,7 +70,7 @@ describe('地图3/9冻结与现行6/9明确分派', () => {
 
   it('旧生成器源文件字节冻结，防维护时误把新规则并回旧身份', () => {
     const bytes = readFileSync('game/src/run/map-generator.js','utf8').replaceAll('\r\n','\n');
-    expect(createHash('sha256').update(bytes).digest('hex')).toBe('96b71377d001d5086332df4e9fcb50229dfeb6ba7821e88c7152ad56f619af0c');
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe('fba8e187b1e485eaa523d74ca706136904eb53d55075d64d045591bfd77f7e58');
     const adapter = readFileSync('game/src/run/layeredMap.js', 'utf8').replace(/\r\n/g, '\n');
     const oldFunction = adapter.slice(adapter.indexOf('export function createLayeredMap'), adapter.indexOf('// 新局入口独立')).trim();
     expect(createHash('sha256').update(oldFunction).digest('hex')).toBe('1377e373720c9673f0d4154b9f20e942c3c8a1b85ffbdf92cf86f4741c9a8e4f');

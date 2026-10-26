@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "edits": 229,
+  "beforeBytes": 426977,
+  "afterBytes": 425155,
+  "sourceSha256": "6C45C94CB777E4FF26242CA89911ED495EB3A0080BD99CE9C1C99FC81D9E2075",
+  "resultSha256": "35F6ED6486C42308722A5BBE6FACDC761424A1944770AF7DE42B6905FC957FD0",
+  "historyGroups": 104,
+  "guards": [
+    "unique original lines",
+    "original line ranges",
+    "code symbols",
+    "numbers",
+    "quoted text",
+    "task references",
+    "task groups",
+    "UTF-8",
+    "source fingerprint"
+  ],
+  "documentCheck": {
+    "ok": true,
+    "checkedRelativeLinks": 770,
+    "flowFourBytes": 34955,
+    "flowFourLimit": 36864,
+    "rootRuleBytes": 5114,
+    "rootRuleLimit": 6144
+  }
+}

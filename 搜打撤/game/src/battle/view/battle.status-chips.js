@@ -83,10 +83,7 @@ export function reconcileStatusChips(container, html, rich = value => value) {
   }
   container.setAttribute('role', 'group');
   container.setAttribute('aria-label', `状态与标记，共${desired.length}项。超出区域可上下滚动，或按 Tab 逐项查看。`);
-  container.dataset.uiTip = '';
-  container.dataset.uiTipTitle = '状态与标记';
-  container.dataset.uiTipText = `共${desired.length}项。所有状态和标记都保留在当前列表中。`;
-  container.dataset.uiTipNote = '超出区域可上下滚动；按 Tab 逐项聚焦查看。';
+  for (const key of ['uiTip', 'uiTipTitle', 'uiTipText', 'uiTipNote']) delete container.dataset[key];
   const caption = `${desired.length}项↕`;
   if (summary.textContent !== caption) summary.textContent = caption;
   const keep = new Set(desired);

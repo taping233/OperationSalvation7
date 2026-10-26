@@ -1,0 +1,278 @@
+{
+  "formerlyBlocked": [
+    {
+      "id": "tt7-swordimmortal",
+      "name": "剑仙形态",
+      "desc": "本局对战中，回合开始时额外抽 1 张牌。",
+      "hasRules": true,
+      "valid": true,
+      "capability": {
+        "kind": "supported",
+        "ok": true
+      },
+      "rules": {
+        "version": 1,
+        "triggers": {
+          "onTurnStart": [
+            {
+              "op": "draw",
+              "amountField": "draw"
+            }
+          ],
+          "onPlay": []
+        }
+      }
+    },
+    {
+      "id": "tt3-petal",
+      "name": "花瓣法阵",
+      "desc": "回合开始时额外抽1张牌并回复 3 点生命，持续 3 回合。",
+      "hasRules": true,
+      "valid": true,
+      "capability": {
+        "kind": "supported",
+        "ok": true
+      },
+      "rules": {
+        "version": 1,
+        "triggers": {
+          "onTurnStart": [
+            {
+              "op": "draw",
+              "amountField": "draw"
+            },
+            {
+              "op": "heal",
+              "amountField": "heal"
+            }
+          ],
+          "duration": 3,
+          "onPlay": []
+        }
+      }
+    },
+    {
+      "id": "cmtn1r10xnl1",
+      "name": "黑暗形态",
+      "desc": "本局对战中，每当你发现卡牌时，增加1个可选项",
+      "hasRules": true,
+      "valid": true,
+      "capability": {
+        "kind": "supported",
+        "ok": true
+      },
+      "rules": {
+        "version": 1,
+        "triggers": {
+          "onPlay": [
+            {
+              "op": "registerRule",
+              "rule": "discoverPlus"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tt7-elementstorm",
+      "name": "元素风暴",
+      "desc": "下一张法术施放 2 次。",
+      "hasRules": true,
+      "valid": true,
+      "capability": {
+        "kind": "supported",
+        "ok": true
+      },
+      "rules": {
+        "version": 1,
+        "triggers": {
+          "onPlay": [
+            {
+              "op": "registerRule",
+              "rule": "doubleNextSpell"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tt2-apollo",
+      "name": "阿猫的礼物",
+      "desc": "发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌。",
+      "hasRules": true,
+      "valid": true,
+      "capability": {
+        "kind": "supported",
+        "ok": true
+      },
+      "rules": {
+        "version": 1,
+        "equip": {
+          "onEquip": []
+        },
+        "triggers": {
+          "onAcquire": [
+            {
+              "op": "energy",
+              "n": 1
+            },
+            {
+              "op": "acquire",
+              "n": 1,
+              "pool": {
+                "kind": "随机"
+              },
+              "filter": {
+                "exceptIds": [
+                  "tt2-apollo"
+                ]
+              },
+              "dest": "hand"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "cmtn2jc142dj",
+      "name": "刀剑形态",
+      "desc": "回合开始时，获得一张随机手牌的复制",
+      "hasRules": true,
+      "valid": true,
+      "capability": {
+        "kind": "supported",
+        "ok": true
+      },
+      "rules": {
+        "version": 1,
+        "triggers": {
+          "onTurnStart": [
+            {
+              "op": "copyRandom"
+            }
+          ],
+          "onPlay": []
+        }
+      }
+    },
+    {
+      "id": "cmtn1wnhhym",
+      "name": "江湖救急-改",
+      "desc": "随机获得3张临时卡牌，回合开始时将其消耗。",
+      "hasRules": true,
+      "valid": true,
+      "capability": {
+        "kind": "supported",
+        "ok": true
+      },
+      "rules": {
+        "version": 1,
+        "battle": {
+          "target": {
+            "side": null,
+            "area": false
+          }
+        },
+        "triggers": {
+          "onPlay": [
+            {
+              "op": "acquire",
+              "n": 3,
+              "pool": {
+                "kind": "随机"
+              },
+              "dest": "hand",
+              "expire": "nextTurnStart"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tt7-provoke",
+      "name": "扰敌",
+      "desc": "选择2 名敌人，迫使其相互攻击一次。",
+      "hasRules": true,
+      "valid": true,
+      "capability": {
+        "kind": "supported",
+        "ok": true
+      },
+      "rules": {
+        "version": 1,
+        "battle": {
+          "target": {
+            "side": "enemy",
+            "area": false
+          }
+        },
+        "triggers": {
+          "onPlay": [
+            {
+              "op": "foeFight",
+              "pick": "two"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "cmtn233trmeg",
+      "name": "不朽斩",
+      "desc": "攻（+1），永远被保留在手牌中，无法用于注能",
+      "hasRules": true,
+      "valid": true,
+      "capability": {
+        "kind": "supported",
+        "ok": true
+      },
+      "rules": {
+        "version": 1,
+        "battle": {
+          "target": {
+            "side": "enemy",
+            "area": false
+          },
+          "keepInHand": true,
+          "fuelAllowed": false
+        },
+        "triggers": {
+          "onPlay": [
+            {
+              "op": "damage",
+              "amountField": "dmg",
+              "target": "chosenEnemy"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "formerlyOptional": [
+    {
+      "id": "tt12-raydragon",
+      "present": true,
+      "name": "龙焰射线"
+    },
+    {
+      "id": "tt12-saturate",
+      "present": true,
+      "name": "饱和打击"
+    },
+    {
+      "id": "tt12-felguard",
+      "present": true,
+      "name": "邪能护体"
+    },
+    {
+      "id": "tt12-chargeray",
+      "present": true,
+      "name": "充能射线"
+    },
+    {
+      "id": "tt12-freezeray",
+      "present": true,
+      "name": "冷冻射线"
+    }
+  ]
+}

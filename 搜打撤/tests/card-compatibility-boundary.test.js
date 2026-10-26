@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { suppressLegacyImmediateText, isLegacyDropExcluded } from '../game/src/cards/card-compatibility.js';
 import { cardPlayExecutionPlan } from '../game/src/cards/card-execution-plan.js';

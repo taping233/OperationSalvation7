@@ -2,6 +2,7 @@ import { bindDialogSurface } from './dialog-surface.js';
 import { esc } from '../core/shared.js';
 import { completeSurfaceMotion } from './motion-completion.js';
 import { motionTiming } from './motion-presets.js';
+import { isAvailableControl } from './action-dispatch.js';
 import '../../css/interface-components.css';
 
 // A separate top layer keeps the source page, action closures and reading position.
@@ -43,6 +44,7 @@ export function confirmAction({ title, message, confirmLabel = '确认', onConfi
     cancel.addEventListener('click', () => finish(false));
     submit.addEventListener('click', async () => {
       if (busy || done) return;
+      const hadFocus = root.ownerDocument.activeElement === submit;
       busy = true; cancel.disabled = submit.disabled = true;
       submit.setAttribute('aria-busy', 'true');
       root.querySelector('.confirmation-status').textContent = '正在处理…';
@@ -54,6 +56,8 @@ export function confirmAction({ title, message, confirmLabel = '确认', onConfi
         busy = false; cancel.disabled = submit.disabled = false;
         submit.removeAttribute('aria-busy');
         root.querySelector('.confirmation-status').textContent = error instanceof Error ? error.message : '操作未完成，请重试。';
+        if (hadFocus && root.isConnected && root.ownerDocument.activeElement === root.ownerDocument.body
+          && isAvailableControl(submit)) submit.focus({ preventScroll:true });
       }
     });
     document.body.append(root);

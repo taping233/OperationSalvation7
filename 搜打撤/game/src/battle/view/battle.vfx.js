@@ -1,20 +1,19 @@
 /** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
-/* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：战斗特效（飘字/抖动/红闪/火花——自闭合，唯一对外入口 spawnFloats）。
- * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
+/* 消费既有战斗反馈队列，驱动图集、动作与血条；沿用 spawnFloats 对外接口。
+ * 此处不创建飘字或贴纸，图形生命周期由 battle.fx-art.js 维护。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { rect as uiRect, scale as uiScale } from '../../ui/ui-scale.js';
-import { Random } from '../../core/random.js';
+import { rect as uiRect } from '../../ui/ui-scale.js';
 import { demoMs, getPace } from '../runtime/battle.pace.js';
 import { schedulePresentation, schedulePresentationMs, waitHitStop } from '../runtime/battle.clock.js';
 import { FEEDBACK_DELTA_MS, enqueueFeedback, feedbackClass, feedbackDelay, feedbackShakeDuration, waitMs } from './battle.feedback.js';
 import { play as playUnitFrames } from './battle.frames.js';
 import { takeCardAction } from './battle.action-timing.js';
-import { assetUrl } from '../../core/asset-url.js';
 import { storeGet } from '../../core/storage.js';
 import { takeFloats } from '../core/battle.core.js';
 import { impactProfile } from './battle.attack-profiles.js';
 import { playEnemyMotion } from './battle.enemy-motion.js';
+import { battleFigureRect as feedbackRect, emitBattleArt, emitBattleTrail, damageArtKind } from './battle.fx-art.js';
 const foeHurtTimers = new WeakMap();
 const shakeAnimations = new WeakMap();
 
@@ -33,7 +32,7 @@ function stageKillBeat() {
     kf.push({ transform: `translate(${(Math.sin(i * 2.7) * 3 * decay).toFixed(1)}px, ${(Math.cos(i * 3.3) * 2 * decay).toFixed(1)}px)` });
   }
   stage.animate(kf, { duration: 230, easing: 'linear' });
-  stage.animate([{ filter: 'brightness(1)' }, { filter: 'brightness(1.07)' }, { filter: 'brightness(1)' }], { duration: 210, easing: 'ease-out' });
+  emitBattleArt(stage, 'pulse', { size: 360, duration: 260 });
 }
   // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------
   // 飘字挂在 #overlay 层而不是 ovBody——ovBody 每次渲染整块重建，飘字动画会被腰斩
@@ -66,7 +65,7 @@ function stageKillBeat() {
     const kf = [
       { transform: 'translateX(0)', filter: 'none', offset: 0 },
       { transform: 'translateX(0)', filter: 'none', offset: lead },
-      { transform: `translateX(${(-8 * power).toFixed(1)}px)`, filter: 'brightness(1.6) saturate(1.6) drop-shadow(0 0 14px rgba(255,90,70,.8))', offset: lead + 0.25 * (1 - lead) },
+      { transform: `translateX(${(-8 * power).toFixed(1)}px)`, filter: 'brightness(1.08)', offset: lead + 0.25 * (1 - lead) },
       { transform: `translateX(${(-3 * power).toFixed(1)}px)`, filter: 'brightness(1.15)', offset: lead + 0.6 * (1 - lead) },
       { transform: 'translateX(0)', filter: 'none', offset: 1 },
     ];
@@ -100,128 +99,21 @@ function stageKillBeat() {
       { transform: 'translateX(0)' },
     ], { duration: demoMs(260), easing: 'cubic-bezier(.3,.7,.4,1)' });
   }
-  // 诅咒施加彩闪（P1）：按诅咒 key 上色的边缘光一闪（替代已删除的粒子喷发）
-  const CURSE_TINT = {
-    bleed: 'rgba(220,60,70,', poison: 'rgba(140,200,90,',
-    freeze: 'rgba(140,215,255,', silence: 'rgba(170,140,200,', abreak: 'rgba(200,170,90,',
-    healban: 'rgba(180,90,160,',
-  };
-  function curseFlash(figEl, cls) {
-    if (!figEl || !figEl.animate) return;
-    const key = (String(cls).match(/curse-(\w+)/) || [])[1];
-    const col = CURSE_TINT[key] || 'rgba(200,120,255,';
-    figEl.animate([
-      { filter: 'none' },
-      { filter: `brightness(1.25) drop-shadow(0 0 18px ${col}.9)`, offset: 0.3 },
-      { filter: `brightness(1.25) drop-shadow(0 0 18px ${col}.9)`, offset: 0.55 },
-      { filter: 'none' },
-    ], { duration: demoMs(700), easing: 'ease-out' });
-  }
-  // 伤害类型染色（P1）：按伤害类型给命中贴图着色——攻击=原生琥珀不染、固定=炽橙、
-  // 法术=青蓝、真实=纯白；中毒 DoT 走 tintKey 优先（贴图黑底走 screen 混合，filter 只染纹样）。
-  // freeze/thunder 键为冰/雷系预留（迭代评审 09-20 美术岗）：卡片透传 tintKey 即生效
-  const IMPACT_TINT = {
-    fixed: 'sepia(1) saturate(2.8) hue-rotate(-15deg) brightness(1.25)',
-    spell: 'sepia(1) saturate(2.4) hue-rotate(160deg) brightness(1.15)',
-    true: 'saturate(0) brightness(1.9)',
-    poison: 'sepia(1) saturate(2.2) hue-rotate(55deg) brightness(1.1)',
-    freeze: 'sepia(1) saturate(2.6) hue-rotate(150deg) brightness(1.5)',
-    thunder: 'sepia(1) saturate(1.6) hue-rotate(215deg) brightness(1.7)',
-  };
-  // 元素三系火花参数包（迭代评审 09-20 美术岗 Top3）：颜色/数量/速度差分——
-  // tintKey 命中即换包（毒=绿缓、冰=蓝疏慢、雷=紫白密更快），未命中走默认琥珀
-  const SPARK_PRESETS = {
-    poison: { color: '#8cc85a', count: 10, speed: 0.85 },
-    freeze: { color: '#bfe8ff', count: 12, speed: 0.7 },
-    thunder: { color: '#e8e0ff', count: 18, speed: 1.4 },
-  };
   const CUE_ATTACKER_ACTION = Object.freeze({ 'player-attack': 'atk', 'player-spell': 'cast' });
   const CUE_HIT_SOUND = Object.freeze({ hit: 'hit', strike: 'strike',
     ...Object.fromEntries(['attackSlash', 'attackArrow', 'attackBlunt', 'attackBossHeavy', 'attackFire',
       'attackIce', 'attackLightning', 'attackPierce', 'attackPoison', 'attackPsychic'].map(id => [id, id])) });
-  // 轻量受击火花（P2 补回，替代已删除的 Pixi 粒子通道）：WAAPI 预采样抛散+重力+淡出，
-  // 一次性元素即抛即毁、纯 transform/opacity 走合成器，不建常驻渲染管线
-  function spawnSparks(ov, figEl, { color = '#ffb34d', count = 12, speed = 1 } = {}) {
-    if (!ov || !figEl) return;
-    const r = uiRect(figEl);
-    const ovR = uiRect(ov);
-    const cx = r.left - ovR.left + r.width / 2, cy = r.top - ovR.top + r.height * 0.42;
-    for (let i = 0; i < count; i++) {
-      const p = document.createElement('i');
-      p.className = 'sts-spark';
-      const sz = (3 + Random.random('fx') * 4).toFixed(1);
-      p.style.cssText = `left:${cx.toFixed(1)}px;top:${cy.toFixed(1)}px;width:${sz}px;height:${sz}px;background:${color}`;
-      ov.appendChild(p);
-      const ang = Random.random('fx') * Math.PI * 2;
-      const v = (70 + Random.random('fx') * 150) * speed;
-      const vx = Math.cos(ang) * v, vy = Math.sin(ang) * v - 60;
-      const baseDur = 420 + Random.random('fx') * 260;
-      const dur = demoMs(baseDur);
-      const N = 10, kf = [];
-      for (let k = 0; k <= N; k++) {
-        const u = k / N, t = (u * baseDur) / 1000;
-        kf.push({
-          transform: `translate(${(vx * t).toFixed(1)}px,${(vy * t + 480 * t * t).toFixed(1)}px) scale(${(1 - u * 0.7).toFixed(2)})`,
-          opacity: u < 0.55 ? 0.95 : Math.max(0, 0.95 * (1 - (u - 0.55) / 0.45)),
-          offset: u,
-        });
-      }
-      p.animate(kf, { duration: dur, easing: 'linear', fill: 'forwards' }).onfinish = () => p.remove();
-      schedulePresentation(() => p.remove(), baseDur + 150);   // 兜底清理
-    }
+  function curseFlash(fig, cls) {
+    const key = (String(cls).match(/curse-(\w+)/) || [])[1];
+    const kind = { freeze: 'ice', poison: 'poison', abreak: 'debuff', bleed: 'debuff', healban: 'debuff' }[key] || 'curse';
+    emitBattleArt(fig.closest('.battle-stage'), kind, { anchor: fig, size: 160, duration: 680 });
   }
-  // 敌方攻击弹道（P2）：前摇同刻从敌人立绘到玩家立绘闪现一道上弓弧线+箭头，快速淡出
-  //（多敌混战时读得出这一刀是谁砍的；一次性 canvas，与指向施法的 #aimArrow 无关）
-  function foeAttackLine(body, figEl) {
-    const ov = UI.el.overlay;
-    const me = /** @type {BattleElement} */ (body.querySelector('#btSelf .sts-figure'));
-    if (!ov || !me) return;
-    const ovR = uiRect(ov);
-    const a = uiRect(figEl), b = uiRect(me);
-    const x1 = a.left - ovR.left + a.width * 0.35, y1 = a.top - ovR.top + a.height * 0.42;
-    const x2 = b.left - ovR.left + b.width * 0.65, y2 = b.top - ovR.top + b.height * 0.42;
-    const w = Math.max(2, Math.ceil(ovR.width)), h = Math.max(2, Math.ceil(ovR.height));
-    // uiRect 是逻辑坐标：位图密度为显示 zoom × DPR，小窗允许低于逻辑 1 倍。
-    const ratio = (window.devicePixelRatio || 1) * uiScale();
-    const cv = document.createElement('canvas');
-    cv.className = 'sts-attack-line';
-    cv.width = Math.max(1, Math.round(w * ratio)); cv.height = Math.max(1, Math.round(h * ratio));
-    cv.style.width = w + 'px'; cv.style.height = h + 'px';
-    ov.appendChild(cv);
-    const ctx = cv.getContext('2d');
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    const mx = (x1 + x2) / 2, my = (y1 + y2) / 2 - 46;   // 弓背朝上
-    ctx.strokeStyle = '#ff6659';
-    ctx.lineCap = 'round';
-    ctx.globalAlpha = .16; ctx.lineWidth = 9;
-    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.quadraticCurveTo(mx, my, x2, y2); ctx.stroke();
-    ctx.globalAlpha = .85; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.quadraticCurveTo(mx, my, x2, y2); ctx.stroke();
-    const tx = x2 - mx, ty = y2 - my, tl = Math.hypot(tx, ty) || 1;
-    const ux = tx / tl, uy = ty / tl;
-    ctx.globalAlpha = .95;
-    ctx.beginPath();
-    ctx.moveTo(x2, y2);
-    ctx.lineTo(x2 - ux * 13 - uy * 6, y2 - uy * 13 + ux * 6);
-    ctx.lineTo(x2 - ux * 13 + uy * 6, y2 - uy * 13 - ux * 6);
-    ctx.closePath(); ctx.fillStyle = '#ff6659'; ctx.fill();
-    cv.animate([{ opacity: 1 }, { opacity: 0 }], { duration: demoMs(420), easing: 'ease-out', fill: 'forwards' })
-      .onfinish = () => cv.remove();
-    schedulePresentation(() => cv.remove(), 580);   // 兜底清理
-  }
-  // NDamageNumVfx：伤害数字抛体——随机初速上抛 + 重力下坠 + 后半程淡出（WAAPI 预采样）。
-  // 随机全部走种子随机服务（random.test 禁 Math.random），'fx' 流不进对局存档口径
-  // 数字保持在对象附近；连续命中由落点槽错位，动画只提示从受击点上浮。
-  function physicsFloat(span, opts = {}) {
-    const vx = Random.random('fx') * 12 - 6;
-    const baseDur = opts.longLife ? 1150 : 850;
-    const dur = demoMs(baseDur);
-    span.animate([
-      { transform: 'translate(-50%,-50%) translate(0,6px) scale(.92)', opacity: 0 },
-      { transform: 'translate(-50%,-50%) translate(0,0) scale(1)', opacity: 1, offset: .14 },
-      { transform: `translate(-50%,-50%) translate(${vx.toFixed(1)}px,-28px)`, opacity: 1, offset: .62 },
-      { transform: `translate(-50%,-50%) translate(${vx.toFixed(1)}px,-44px)`, opacity: 0 },
-    ], { duration: dur, easing: 'ease-out', fill: 'forwards' });
+  function foeAttackLine(body, fig) {
+    const stage = body.querySelector('.battle-stage'), me = body.querySelector('#btSelf .sts-figure');
+    if (!stage || !me) return;
+    const origin = uiRect(UI.el.overlay), a = feedbackRect(fig), b = feedbackRect(me);
+    emitBattleTrail(stage, { x: a.left - origin.left + a.width / 2, y: a.top - origin.top + a.height * .42 },
+      { x: b.left - origin.left + b.width / 2, y: b.top - origin.top + b.height * .42 }, { duration: demoMs(300), size: 130 });
   }
   async function globalHitStop(ms, signal) {
     if (!(ms > 0) || SDT.Motion?.reduceMotion() || signal?.aborted) return;
@@ -250,8 +142,6 @@ function stageKillBeat() {
     const supportAction = takeCardAction(body, list);
     if (supportAction) playUnitFrames(supportAction);
     if (!list.length) return;
-    const ov = UI.el.overlay;
-    const ovR = uiRect(ov);   // 布局口径：飘字/贴图定位
     const perUnit = {};   // #19：同单位多段伤害错峰呈现
     const damageBeatCounts = new Map();
     let previousDue = 0;
@@ -282,7 +172,11 @@ function stageKillBeat() {
           schedulePresentation(() => figEl.classList.remove('bt-hit-anticipate'), 130);
           const attackerAction = CUE_ATTACKER_ACTION[f.cue?.attacker];
           // A combo can continue the same live action without resetting its frames.
-          if (attackerAction) playUnitFrames(attackerAction, { continueActive: !!f.cue?.replayAttacker });
+          if (attackerAction) {
+            playUnitFrames(attackerAction, { continueActive: !!f.cue?.replayAttacker });
+            const caster = body.querySelector('#btSelf .sts-figure');
+            if (caster) emitBattleArt(caster.closest('.battle-stage'), attackerAction === 'cast' ? 'magic' : 'buff', { anchor: caster, size: 110, duration: 260 });
+          }
         }
         return;
       }
@@ -298,7 +192,7 @@ function stageKillBeat() {
       const stk = (f.cls || '').includes('stk');
       const isBlock = (f.cls || '').includes('block');
       const damage = !f.warm && !stk && !isBlock;
-      const amt = parseInt(String(f.text).replace(/[^\d-]/g, ''), 10) || 0;
+      const amt = Math.abs(parseInt(String(f.text).replace(/[^\d-]/g, ''), 10) || 0);
       const heavy = damage && amt >= 10;   // 重击：≥10 点——更大命中贴图 + 更猛抖动 + 顿帧
       const finisher = damage && feedbackClass(f).includes('fx-finisher');
       // 击杀保留独立停顿；普通连击不逐击暂停，避免多段伤害被拉长。
@@ -329,75 +223,18 @@ function stageKillBeat() {
           }
         }
       }
-      if (!reduced && damage) {
-        const preset = SPARK_PRESETS[f.tintKey];
-        spawnSparks(ov, figEl, preset ? { ...preset, count: Math.ceil(preset.count / 2) } : {
-          color: (isSelf || allyI != null) ? '#ff6659' : '#ffb34d',
-          count: heavy ? 9 : 5,
-        });
-      }
       if (damage && !isSelf && allyI == null && heavy && !reduced) screenShake(body);
-      if (f.warm) {   // 治疗暖色滤镜（表情反馈·零美术）
-        figEl.classList.add('fx-warm');
-        schedulePresentationMs(() => figEl.classList.remove('fx-warm'), 950);
-      }
-      const r = uiRect(figEl);
-      // 命中特效贴图：格挡/免伤=护盾碎裂，治疗不出，其余伤害=斩击（黑底图走 screen 混合）
-      const impactCls = isBlock ? 'fx-block'
-        : (f.warm || stk) ? null : 'fx-slash';
-      if (impactCls && !reduced) {
-        const imp = document.createElement('div');
-        imp.className = 'sts-impact ' + impactCls;
-        const sz = Math.round(132 * impact.impactScale), half = sz / 2;
-        imp.style.width = imp.style.height = sz + 'px';
-        imp.style.margin = `${-half}px 0 0 ${-half}px`;
-        imp.style.left = (r.left - ovR.left + r.width / 2) + 'px';
-        imp.style.top = (r.top - ovR.top + r.height * 0.4) + 'px';
-        // 方向收敛（P1）：以贴图原生斜向为基准 ±22° 抖动（读得出「斩击」而非乱转的贴图）；
-        // 自伤/我方受击转 180° 镜像方向。伤害类型染色（攻击=原生琥珀不染）
-        const baseRot = (isSelf || allyI != null) ? 180 : 0;
-        imp.style.setProperty('--imp-rot', Math.floor(baseRot + Random.random('fx') * 44 - 22) + 'deg');
-        const tint = cue?.hit === 'target-magic' ? IMPACT_TINT.spell : IMPACT_TINT[f.tintKey || f.type];
-        if (tint) imp.style.filter = tint;
-        ov.appendChild(imp);
-        imp.addEventListener('animationend', () => imp.remove(), { once: true });
-        schedulePresentationMs(() => imp.remove(), 900);
-      }
-      const span = document.createElement('span');
-      span.className = 'sts-float ' + feedbackClass(f);
-      if (reduced) span.classList.add('is-reduced');
-      span.dataset.feedbackUnit = String(f.unit);
-      // SVG 贴纸（P2，替代 emoji）：cls 带 sticker-* 时渲染对应手绘贴纸图
-      const sticker = (String(f.cls || '').match(/sticker-(\w+)/) || [])[1];
-      if (sticker) {
-        span.classList.add('sticker');
-        span.innerHTML = `<img src="${assetUrl('assets/battle/fx-sticker-' + sticker + '.svg')}" alt="">`;
-      } else {
-        if (f.label) {
-          const label = document.createElement('small');
-          label.textContent = f.label + ' ';
-          span.appendChild(label);
-        }
-        span.appendChild(document.createTextNode(f.text));
-      }
-      // 活跃文字占用四个相邻槽位；多段结算仍沿原队列，不以动画结束阻塞规则。
-      const used = new Set(Array.from(/** @type {NodeListOf<BattleElement>} */ (ov.querySelectorAll('.sts-float[data-feedback-unit]')))
-        .filter(el => el.dataset.feedbackUnit === String(f.unit)).map(el => Number(el.dataset.feedbackLane)));
-      const lane = [0, 1, 2, 3].find(index => !used.has(index)) ?? 0;
-      const [dx, dy] = [[-38, 0], [38, 0], [-20, -32], [20, -32]][lane];
-      span.dataset.feedbackLane = String(lane);
-      const x = r.left - ovR.left + r.width / 2 + dx;
-      const y = r.top - ovR.top + r.height * (stk ? 0.12 : 0.34) + dy;
-      span.style.left = Math.max(54, Math.min(ovR.width - 54, x)) + 'px';
-      span.style.top = Math.max(35, Math.min(ovR.height - 35, y)) + 'px';
-      ov.appendChild(span);
-      if (damage && !reduced && span.animate) {
-        span.classList.add('phys');   // 抑制 CSS 上飘动画，走抛体
-        physicsFloat(span, { longLife: finisher || amt >= 10 });   // W5-04：终结/重击跳字加长寿命
-        schedulePresentation(() => span.remove(), finisher || amt >= 10 ? 1200 : 900);
-      } else {
-        span.addEventListener('animationend', () => span.remove(), { once: true });
-        schedulePresentationMs(() => span.remove(), 1400);   // CSS 动画不按倍速缩短，兜底也保持原时长
+      const stage = figEl.closest('.battle-stage');
+      // Consume the existing settled feedback queue without constructing floating text or stickers.
+      // Damage values remain in health bars and the combat log.
+      if (!String(f.cls || '').includes('sticker-hurt')) {
+        const kind = f.warm ? 'heal' : isBlock ? 'block' : killBoom ? 'death'
+          : stk ? 'buff' : damageArtKind(f);
+        emitBattleArt(stage, kind, { anchor: figEl,
+          size: Math.round((killBoom ? 210 : f.warm ? 170 : 145) * impact.impactScale),
+          duration: demoMs(killBoom ? 780 : f.warm ? 760 : 440),
+          angle: isSelf && kind === 'slash' ? 180 : 0,
+          tint: f.type === 'true' ? 'saturate(0) brightness(1.2)' : undefined });
       }
       await globalHitStop(stopMs, signal);
       };

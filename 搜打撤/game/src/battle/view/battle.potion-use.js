@@ -7,16 +7,19 @@ import { isInteractiveBattlePage } from './battle.page-activity.js';
 /** @typedef {NonNullable<BattleSnapshot['potionBar']>[number]} Potion */
 /** @typedef {{ el: { overlay?: HTMLElement | null, ovBody?: HTMLElement | null }, _lastMode?: string | null }} PotionUI */
 /** @typedef {{ uid: string, source: HTMLElement, panel: HTMLElement, pinned: boolean, submitted: boolean }} Inspection */
+/** @typedef {boolean | { status: 'needs-input' } | Promise<boolean>} PotionUseResult */
+/** @typedef {{ uid: string, stage: BattleElement, token: number, awaiting: boolean }} UseOrigin */
 
 // Inspecting never enters the domain. Only the current popup's Use button can
 // invoke the existing command, which retains targeting, ownership and cost rules.
-/** @param {{ UI: PotionUI, getSnapshot: () => BattleSnapshot, commands: { usePotion: (uid: string) => unknown } }} options */
+/** @param {{ UI: PotionUI, getSnapshot: () => BattleSnapshot, commands: { usePotion: (uid: string) => PotionUseResult } }} options */
 export function createBattlePotionUse({ UI, getSnapshot, commands }) {
   /** @type {BattleElement | null} */ let stage = null;
   /** @type {HTMLElement | null} */ let bar = null;
   /** @type {number | null} */ let token = null;
   /** @type {readonly Potion[]} */ let presented = [];
   /** @type {Inspection | null} */ let inspection = null;
+  /** @type {UseOrigin | null} */ let useOrigin = null;
   /** @type {MutationObserver | null} */ let observer = null;
   let disposed = false;
 
@@ -69,6 +72,32 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
     previous.source.setAttribute('aria-expanded', 'false');
     if (restoreFocus && currentPage() && previous.source.isConnected) previous.source.focus({ preventScroll: true });
   }
+  function restoreUseOrigin() {
+    const origin = useOrigin;
+    if (!origin || origin.awaiting) return;
+    const snapshot = getSnapshot();
+    if (!currentPage() || stage !== origin.stage || token !== origin.token || snapshot.battleToken !== origin.token) {
+      useOrigin = null;
+      return;
+    }
+    // A successful target confirmation may still be resolving. Its original UID
+    // only becomes authoritative again when the existing command flow is idle.
+    if (snapshot.busy || snapshot.actionQueueLength || snapshot.pendingItem?.uid === origin.uid) return;
+    const live = currentSnapshot()?.potionBar?.find(potion => potion.uid === origin.uid);
+    useOrigin = null;
+    if (!live || inspection || !inspect(origin.uid, true)) return;
+    const hint = bar?.querySelector('.bt-potion-use-hint');
+    if (hint && live.usable !== false) hint.textContent = '药水已保留，可重试或取消。';
+    const button = bar?.querySelector(live.usable === false ? '.bt-potion-use-cancel' : '.bt-potion-use-confirm');
+    if (button instanceof HTMLElement) button.focus({ preventScroll: true });
+  }
+  /** @param {UseOrigin} origin @param {boolean | { status: 'needs-input' }} result */
+  function finishUse(origin, result) {
+    if (useOrigin !== origin) return;
+    origin.awaiting = false;
+    if (result === true) useOrigin = null;
+    else restoreUseOrigin();
+  }
   /** @param {string} uid @param {boolean} pinned @param {HTMLElement | null} [source] */
   function inspect(uid, pinned, source = null) {
     const snapshot = currentSnapshot();
@@ -80,6 +109,7 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
       || source.closest('[hidden], [inert], [aria-hidden="true"]') || !visible(source)) return false;
     if (inspection?.uid === uid && (inspection.pinned || !pinned)) return true;
     if (inspection?.pinned && !pinned) return false;
+    if (pinned) useOrigin = null;
     close();
     const shown = presented.find(potion => potion.uid === uid) || live;
     const panel = document.createElement('section');
@@ -122,8 +152,22 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
         || source.closest('[hidden], [inert], [aria-hidden="true"]') || !visible(source)) { close(); return; }
       opened.submitted = true;
       use.disabled = true;
+      if (!stage || token == null) return;
+      const origin = { uid, stage, token, awaiting: true };
+      useOrigin = origin;
       close();
-      commands.usePotion(uid);
+      try {
+        const result = commands.usePotion(uid);
+        if (result instanceof Promise) {
+          result.then(value => finishUse(origin, value)).catch(error => {
+            finishUse(origin, false);
+            console.error('[battle] 道具使用未完成', error);
+          });
+        } else finishUse(origin, result);
+      } catch (error) {
+        finishUse(origin, false);
+        console.error('[battle] 道具使用异常', error);
+      }
     });
     cancel.addEventListener('click', event => { event.preventDefault(); event.stopPropagation(); if (inspection === opened) close(true); });
     bar.append(panel);
@@ -171,8 +215,8 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
     if (event.type === 'contextmenu') { event.preventDefault(); close(true); return; }
     if (!(event.target instanceof Node) || !bar?.contains(event.target)) close();
   }
-  function leavePage() { close(); unbind(); }
-  function onBlur() { close(); }
+  function leavePage() { useOrigin = null; close(); unbind(); }
+  function onBlur() { useOrigin = null; close(); }
   function onMode() { if (UI._lastMode !== 'battle') leavePage(); }
   function unbind() {
     observer?.disconnect(); observer = null;
@@ -213,12 +257,13 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
       if (typeof MutationObserver !== 'undefined' && UI.el.overlay) {
         observer = new MutationObserver(() => {
           if (!ownsPage()) leavePage();
-          else if (!currentPage()) close();
+          else if (!currentPage()) { useOrigin = null; close(); }
         });
         observer.observe(UI.el.overlay, { subtree: true, childList: true, attributes: true, attributeFilter: ['hidden', 'inert', 'aria-hidden', 'class', 'style'] });
       }
     }
     presented = potions || [];
+    restoreUseOrigin();
     if (inspection && (!currentSnapshot()?.potionBar?.some(potion => potion.uid === inspection?.uid)
       || !inspection.source.isConnected || !inspection.panel.isConnected || !bar?.contains(inspection.panel))) close();
   }
@@ -229,5 +274,9 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
     return !!inspection && inspection.panel === node && bar === parent
       && node.parentNode === parent && currentPage();
   }
-  return { sync, open, ownsPanel, close: () => close(), dispose() { leavePage(); disposed = true; } };
+  return {
+    sync, open, ownsPanel, onPotionsChange: () => close(),
+    close() { useOrigin = null; close(); },
+    dispose() { leavePage(); disposed = true; },
+  };
 }

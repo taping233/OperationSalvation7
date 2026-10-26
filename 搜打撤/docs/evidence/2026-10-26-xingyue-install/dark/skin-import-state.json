@@ -1,0 +1,16 @@
+{
+  "identity": {
+    "character": "xingyue",
+    "id": "dark-priestess",
+    "name": "暗牧",
+    "source_sha256": "ad532d809d34a5118376e544b5345164a4316f6d0fe66352ddf7b2b6c0b10064",
+    "asset": "portraits/full/xingyue-dark-priestess.webp",
+    "quality": 94
+  },
+  "status": "complete",
+  "completed": [
+    "game\\assets\\portraits\\full\\xingyue-dark-priestess.webp",
+    "game\\src\\core\\art.js",
+    "game\\assets\\asset-manifest.json"
+  ]
+}

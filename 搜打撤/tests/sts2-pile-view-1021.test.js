@@ -154,7 +154,7 @@ describe('pile reading and return lifecycle through the existing UI', () => {
     if(state==='closing')UI.el.overlay.classList.add('closing');
     if(state==='inert')UI.el.overlay.setAttribute('inert','');
     if(state==='token')snapshot={...snapshot,battleToken:1022};
-    if(state==='page')UI.showOverlay('宝箱','<button>领取</button>','chest');
+    if(state==='page')UI.showOverlay('搜刮点','<button>领取</button>','chest');
     const before=JSON.stringify(snapshot); old.inspect({i:'0'});
     expect(document.querySelector('#cardZoom')).toBeNull(); expect(JSON.stringify(snapshot)).toBe(before);
   });

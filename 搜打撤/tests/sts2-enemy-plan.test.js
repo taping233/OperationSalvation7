@@ -42,7 +42,7 @@ function begin(overrides = {}) {
   // Real curse admission remains active; this flag keeps frenzy's random curses out of the fixed-damage fixture.
   R.set$playerCurseImmune(true);
   expect(BattleSession.getSnapshot().phase).toBe('player');
-  expect(BattleSession.getSnapshot().drawPile).toHaveLength(10);
+  expect(BattleSession.getSnapshot().drawPile).toHaveLength(5);
 }
 
 async function verifyNextTurn(expectedHits) {
@@ -69,7 +69,7 @@ async function verifyNextTurn(expectedHits) {
   expect(game.hp).toBe(forecast.hpAfter);
   expect(R.pstat.status.bleed || 0).toBe(0);
   expect(R.pstat.status.poison || 0).toBe(0);
-  expect(BattleSession.getSnapshot().drawPile).toHaveLength(10);
+  expect(BattleSession.getSnapshot().drawPile).toHaveLength(5);
   return { plan, intent, forecast };
 }
 

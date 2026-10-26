@@ -60,7 +60,7 @@ describe('基地材料旧档行为基线', () => {
       rules: { version: 1, base: { material: { kind: 'wood', amount: 4 } } },
     };
     const keyCard = {
-      id: 'synthetic-key-material', name: '木材宝箱', type: '资源', desc: '木材 ×99。',
+      id: 'synthetic-key-material', name: '木材搜刮点', type: '资源', desc: '木材 ×99。',
       rules: { version: 1, base: { material: { kind: 'keys', amount: 3 } } },
     };
     Base.data.stash = [

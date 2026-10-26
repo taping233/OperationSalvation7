@@ -66,3 +66,15 @@ it('keeps holder reads live and external object identity intact', () => {
   expect(h.game.coins).toBe(7);
   expect(fixtures.eventSaveActions(h).newUid()).toBe('u1');
 });
+
+it('fresh event cases clear prior history and pending fields while keeping captured identity', () => {
+  const h = holder(), captured = h.game, services = fixtures.eventCardMocks(h);
+  Object.assign(h.game, { eventLog: [{ id: 'old-event' }], nodeRewards: { '0,1': { eventId: 'old-event' } }, staleRequest: true });
+  fixtures.resetEventGame(h, () => ({ grantEventCard: () => true }), { hp: 35 });
+  expect(h.game).toBe(captured); expect(services.game).toBe(captured);
+  expect(h.game.eventLog).toEqual([]); expect(h.game.nodeRewards).toEqual({});
+  expect(h.game).not.toHaveProperty('staleRequest');
+  expect(h.game.hp).toBe(35);
+  h.game.eventLog.push({ id: 'new-event' });
+  expect(services.game.eventLog).toEqual([{ id: 'new-event' }]);
+});

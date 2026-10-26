@@ -9,21 +9,25 @@ const PEARL_ID = 'tt2-pearlbox';
  * @typedef {{ ok:false, code:'inactive'|'protected'|'missing'|'container-not-empty' }} DiscardFailure
  * @typedef {{ card:InventoryCard, count:number, capacity:number, storedCount:number }} TransferDetails
  * @typedef {{ delta:number, limit:number, used:number }} RetrievalCapacity
+ * @typedef {{stored:{present:boolean,value:unknown},pouchOf:{present:boolean,value:unknown}}} ContainerPosition
+ * @typedef {{entry:{stored?:unknown,pouchOf?:unknown},before:ContainerPosition,after:ContainerPosition}} ContainerMove
  * @typedef {{ ok:false, code:'inactive'|'container'|'missing' }} TransferUnavailable
  * @typedef {TransferDetails & { ok:false, code:'container-full' }} ContainerFull
  * @typedef {TransferDetails & RetrievalCapacity & { ok:false, code:'bag-full' }} BagFull
- * @typedef {TransferDetails & { ok:true }} TransferSuccess
+ * @typedef {TransferDetails & { ok:true, moves:ContainerMove[] }} TransferSuccess
  * @typedef {TransferUnavailable|ContainerFull|BagFull|TransferSuccess} TransferResult
  */
 /** @template {string} Code @param {Code} code @returns {{ ok:false, code:Code }} */
 const rejected = code => ({ ok:false, code });
 const unavailable = (state, current) => state.battleActive || (current && !current());
+const containerPosition = entry => ({ stored:{present:Object.hasOwn(entry,'stored'),value:entry.stored},
+  pouchOf:{present:Object.hasOwn(entry,'pouchOf'),value:entry.pouchOf} });
 
 // Commands own inventory writes only. The caller owns confirmations, feedback,
 // persistence and rendering, and can supply its captured view/run validity port.
 /**
  * @param {{ name:string, fromSafe:boolean, uid?:string|null, current?:()=>boolean }} request
- * @returns {DiscardFailure|{ ok:true, card:InventoryCard }}
+ * @returns {DiscardFailure|{ ok:true, card:InventoryCard, entry:object, index:number }}
  */
 export function discardInventoryCard(state, request, sha) {
   const { name, fromSafe, uid = null, current } = request;
@@ -41,12 +45,12 @@ export function discardInventoryCard(state, request, sha) {
     if (hasContents && !hasRemainingContainer) return rejected('container-not-empty');
   }
   const [entry] = state.ownedCards.splice(index, 1);
-  return { ok:true, card:entry.card };
+  return { ok:true, card:entry.card, entry, index };
 }
 
 /**
  * @param {{ kind:string, sourceUid?:string, current?:()=>boolean }} request
- * @returns {{ ok:false, code:'inactive' }|{ ok:false, code:'recipe'|'bag-full', reason:string }|{ ok:true, card:InventoryCard, message:string }}
+ * @returns {{ ok:false, code:'inactive' }|{ ok:false, code:'recipe'|'bag-full', reason:string }|{ ok:true, card:InventoryCard, message:string, output:object, sources:{entry:object,index:number}[], fragmentsSpent:number }}
  */
 export function craftInventoryToken(state, request, { cards, newUid, baseCap = null }) {
   const { kind, sourceUid, current } = request;
@@ -54,8 +58,9 @@ export function craftInventoryToken(state, request, { cards, newUid, baseCap = n
   const plan = planBagTokenCraft(state, kind, cards(), sourceUid);
   if (!plan.ok) return { ok:false, code:'recipe', reason:plan.reason };
   // Consume exactly the planned entries: historical UIDs may be missing or shared by other cards.
-  const sources = new Set(plan.sourceIndices.map(index => state.ownedCards[index]));
-  const remaining = state.ownedCards.filter(entry => !sources.has(entry));
+  const sources = plan.sourceIndices.map(index => ({ entry:state.ownedCards[index], index }));
+  const sourceEntries = new Set(sources.map(source => source.entry));
+  const remaining = state.ownedCards.filter(entry => !sourceEntries.has(entry));
   if (baseCap) {
     const projected = deriveBagRenderState({ ownedCards:remaining, inventory:state.inventory || [] }, baseCap());
     if (!canReceiveCardFromBag(plan.card, { ownedCards:remaining,
@@ -68,7 +73,7 @@ export function craftInventoryToken(state, request, { cards, newUid, baseCap = n
   state.ownedCards = remaining;
   state.ownedCards.push(output);
   if (plan.fragments) state.fragments -= plan.fragments;
-  return { ok:true, card:output.card, message:plan.message };
+  return { ok:true, card:output.card, message:plan.message, output, sources, fragmentsSpent:plan.fragments || 0 };
 }
 
 /**
@@ -109,9 +114,10 @@ export function transferContainerStack(state, request, ports) {
     Object.assign(result, { delta, limit, used });
     if ((!pouch || delta > 0) && used + delta > limit) return { ...result, delta, limit, used, ...rejected('bag-full') };
   }
+  const moves = entries.map(entry => ({entry,before:containerPosition(entry)}));
   for (const entry of entries) {
     if (take) { delete entry.stored; if (pouch) delete entry.pouchOf; }
     else { entry.stored = 1; if (pouch) entry.pouchOf = POUCH_ID; }
   }
-  return { ...result, ok:true };
+  return { ...result, ok:true, moves:moves.map(move => ({...move,after:containerPosition(move.entry)})) };
 }

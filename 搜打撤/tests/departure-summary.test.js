@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { departureSummary } from '../game/src/hub/departure.summary.js';
 const starter = { id: 'starter-attack', name: '初始攻击' };

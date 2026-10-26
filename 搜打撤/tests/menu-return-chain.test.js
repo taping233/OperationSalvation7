@@ -17,7 +17,7 @@ function setup() {
 afterEach(()=>document.body.replaceChildren());
 
 describe('settings child return ownership',()=>{
-  it.each(['inbox','data'])('%s retains its original settings return chain despite a newer settings open',kind=>{
+  it.each(['inbox','data'])('%s rejects a return from a child whose page was replaced',kind=>{
     const {UI,game,acts}=setup(), inbox=vi.fn(),data=vi.fn(),original=vi.fn(),newer=vi.fn();
     const flow=createMenuSettingsPage({UI,game,document,runtime:{syncDevVisibility:()=>{}},getActiveSlot:()=>1,
       openSuggestionInbox:inbox,openDataPageUi:data,battleRestartHTML:()=>'',bindBattleRestart:()=>{},
@@ -26,7 +26,7 @@ describe('settings child return ownership',()=>{
     const [entryFlag,back]=(kind==='inbox'?inbox:data).mock.calls[0];
     expect(entryFlag).toBe(kind==='data');
     flow.openSettings({returnTo:newer}); back(); acts.closeSettings();
-    expect(original).toHaveBeenCalledOnce(); expect(newer).not.toHaveBeenCalled();
+    expect(original).not.toHaveBeenCalled(); expect(newer).toHaveBeenCalledOnce();
   });
 
   it('inbox title entry keeps title return while a settings entry invokes its captured return',()=>{
@@ -41,7 +41,7 @@ describe('settings child return ownership',()=>{
   it('data page returns through its own settings callback',()=>{
     const {UI}=setup(),back=vi.fn(),fallback=vi.fn();
     const flow=createMenuDataPage({UI,document,openSettings:fallback,readIcons:()=>({rich:String}),
-      openDataPage:()=>{UI.el.ovBody.innerHTML='<section class="pg"><div class="doom-stats"></div></section>';}});
+      openDataPage:({onRender})=>{UI.el.ovBody.innerHTML='<section class="pg"><div class="doom-stats"></div></section>';const root=UI.el.ovBody.firstElementChild;onRender({root,isCurrent:()=>root.isConnected,revision:UI._overlayRevision});}});
     flow.openDataPageUi(true,back); UI.el.ovBody.querySelector('.ak-back-tl').click();
     expect(back).toHaveBeenCalledOnce(); expect(fallback).not.toHaveBeenCalled();
   });

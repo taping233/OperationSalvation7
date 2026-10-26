@@ -13,7 +13,7 @@ vi.mock('../game/src/run/game.run.data.js', () => ({
   IMMEDIATE_SCENES:new Set(), NODE_BG:{}, PICKUP_BG:{}, PRELOAD_SCENES:[], SCENES:{}, WINTER_BATTLE_LAYERS:[],
 }));
 vi.mock('../game/src/run/game.run.shop.js', () => ({ createShopController:() => ({ openShop:vi.fn() }) }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(),
   startBattle:vi.fn(), captureBattleContext:() => { const token = st.game.discoveredPairs; return () => st.game.discoveredPairs === token; },
 }));
 vi.mock('../game/src/core/motion.js', () => ({ reduceMotion:() => true }));
@@ -27,10 +27,11 @@ const button = name => [...document.querySelectorAll('button[data-act="restoreOn
 const content = () => document.querySelector('.pocket-restore-content');
 const remaining = () => document.querySelector('.pocket-restore [role="status"]').textContent;
 const doneButton = () => document.querySelector('[data-act="fireDone"]');
-function activate(target, detail = 1) {
+async function activate(target, detail = 1) {
   target.focus({ preventScroll:true });
   // jsdom does not synthesize Enter/Space's browser-default click. detail=0 covers its resulting event.
   target.dispatchEvent(new MouseEvent('click', { bubbles:true, detail }));
+  await vi.advanceTimersByTimeAsync(2000);
 }
 
 beforeAll(async () => {
@@ -105,7 +106,7 @@ describe('消耗卡复原公共选择界面', () => {
     const done = vi.fn(), protectedCards = structuredClone(st.game.ownedCards);
     openPocketRestore(3, done);
     content().scrollTop = 1229.899;
-    activate(button('复原卡a'), detail);
+    await activate(button('复原卡a'), detail);
     expect(st.game.usedPocket[0].count).toBe(2); expect(st.game.ownedCards).toHaveLength(3);
     expect(st.game.ownedCards.slice(0, 2)).toEqual(protectedCards);
     expect(st.game.ownedCards[2]).toEqual({ uid:'restored-1', card:card('a') });
@@ -113,40 +114,40 @@ describe('消耗卡复原公共选择界面', () => {
     expect(content().scrollTop).toBe(1229.899); expect(document.activeElement).toBe(button('复原卡a'));
     await vi.advanceTimersByTimeAsync(32);
     expect(content().scrollTop).toBe(1229.899); expect(document.activeElement).toBe(button('复原卡a'));
-    activate(button('复原卡a'), detail);
+    await activate(button('复原卡a'), detail);
     expect(st.game.usedPocket[0].count).toBe(1); expect(st.game.ownedCards).toHaveLength(4);
     expect(remaining()).toContain('还可复原 1 张');
-    expect(done).not.toHaveBeenCalled(); expect(st.saves).not.toHaveBeenCalled();
+    expect(done).not.toHaveBeenCalled(); expect(st.saves).toHaveBeenCalled();
   });
 
-  it('候选耗尽后焦点就近续接，全部候选用完仍可继续；完成回调只运行一次', () => {
+  it('候选耗尽后焦点就近续接，全部候选用完仍可继续；完成回调只运行一次', async () => {
     const done = vi.fn(); st.game.usedPocket = [stack('a'), stack('b')];
     openPocketRestore(3, done);
-    activate(button('复原卡a'));
+    await activate(button('复原卡a'));
     expect(document.activeElement).toBe(button('复原卡b'));
-    activate(button('复原卡b'), 0);
+    await activate(button('复原卡b'), 0);
     expect(document.activeElement).toBe(doneButton()); expect(content().textContent).toContain('没有可复原');
     expect(remaining()).toContain('还可复原 1 张'); expect(done).not.toHaveBeenCalled();
-    const finish = UI._acts.fireDone; activate(doneButton()); finish();
+    const finish = UI._acts.fireDone; await activate(doneButton()); finish();
     expect(done).toHaveBeenCalledTimes(1); expect(takeBagReturnHook()).toBeNull();
   });
 
-  it('满包拒收不重绘、不消耗口袋牌与次数，腾位后仍能恢复全部额度', () => {
+  it('满包拒收不重绘、不消耗口袋牌与次数，腾位后仍能恢复全部额度', async () => {
     const done = vi.fn(); st.game.canReceiveCard = () => false;
     openPocketRestore(2, done); const target = button(), before = JSON.stringify(st.game);
-    content().scrollTop = 777.25; activate(target, 0);
+    content().scrollTop = 777.25; await activate(target, 0);
     expect(JSON.stringify(st.game)).toBe(before); expect(document.activeElement).toBe(target);
     expect(content().scrollTop).toBe(777.25); expect(remaining()).toContain('还可复原 2 张');
     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('背包放不下'), 'warn');
     st.game.canReceiveCard = () => true;
-    activate(target); activate(button('复原卡a'));
+    await activate(target); await activate(button('复原卡a'));
     expect(st.game.ownedCards).toHaveLength(4); expect(st.game.usedPocket[0].count).toBe(1);
-    expect(done).toHaveBeenCalledTimes(1); expect(st.saves).not.toHaveBeenCalled();
+    expect(done).toHaveBeenCalledTimes(1); expect(st.saves).toHaveBeenCalled();
   });
 
-  it('每次重绘与背包返回均废止旧动作，返回保留剩余次数，换局后旧hook不盖新页', () => {
+  it('每次重绘与背包返回均废止旧动作，返回保留剩余次数，换局后旧hook不盖新页', async () => {
     const done = vi.fn(); openPocketRestore(2, done); const old = UI._acts.restoreOne;
-    activate(button('复原卡a')); old({ name:'复原卡a' });
+    await activate(button('复原卡a')); old({ name:'复原卡a' });
     expect(st.game.ownedCards).toHaveLength(3);
     const oldAfterRender = UI._acts.restoreOne, back = takeBagReturnHook();
     UI.showOverlay('背包', '<main>背包</main>', 'bag'); back();
@@ -158,7 +159,7 @@ describe('消耗卡复原公共选择界面', () => {
     expect(document.getElementById('new-run')).not.toBeNull(); expect(st.game.ownedCards).toHaveLength(3); expect(done).not.toHaveBeenCalled();
   });
 
-  it.each([['卡名', 'Escape'], ['规则', 'Escape'], ['卡名', '×'], ['规则', '×']])('%s含取消语义时%s只继续旅程，不复原或消费次数', (source, action) => {
+  it.each([['卡名', 'Escape'], ['规则', 'Escape'], ['卡名', '×'], ['规则', '×']])('%s含取消语义时%s只继续旅程，不复原或消费次数', async (source, action) => {
     const custom = source === '卡名' ? { ...card('custom'), name:'返回之术' } : { ...card('custom'), desc:'取消负面效果，然后将此牌返回牌库' };
     st.game.usedPocket = [{ card:custom, count:3 }];
     const done = vi.fn(); openPocketRestore(2, done);
@@ -168,6 +169,7 @@ describe('消耗卡复原公共选择界面', () => {
     if (action === 'Escape') {
       button().dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true }));
     } else document.getElementById('ovCloseX').click();
+    await vi.advanceTimersByTimeAsync(1);
     restore({ name:custom.name });
     expect(JSON.stringify(st.game)).toBe(before); expect(done).toHaveBeenCalledTimes(1);
     expect(st.uid).toBe(0); expect(takeBagReturnHook()).toBeNull();
@@ -184,9 +186,9 @@ describe('消耗卡复原公共选择界面', () => {
     expect(cancel).toHaveBeenCalledTimes(2);
   });
 
-  it('额度用尽自动结束，旧复原/继续动作无法多发卡或重复推进', () => {
+  it('额度用尽自动结束，旧复原/继续动作无法多发卡或重复推进', async () => {
     const done = vi.fn(); openPocketRestore(1, done); const restore = UI._acts.restoreOne, finish = UI._acts.fireDone;
-    activate(button(), 0); restore({ name:'复原卡a' }); finish();
+    await activate(button(), 0); restore({ name:'复原卡a' }); finish();
     expect(st.game.ownedCards).toHaveLength(3); expect(st.game.usedPocket[0].count).toBe(2); expect(done).toHaveBeenCalledTimes(1);
     expect(takeBagReturnHook()).toBeNull();
   });

@@ -52,11 +52,11 @@ beforeEach(async ()=>{
   UI.el={...overlayElements()};
   UI.el.ovBody.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b)acts[b.dataset.act]?.(b.dataset);});
   for(const name of Object.keys(acts))delete acts[name];logs.length=0;setBagReturnHook(null);
-  window.SDT.MAP.chestKinds={small:{name:'小宝箱'}};UI._roomActive=true;
+  window.SDT.MAP.chestKinds={small:{name:'小型物资箱'}};UI._roomActive=true;
   catalog=[event,apollo,bonus];vi.spyOn(Cards,'all').mockImplementation(()=>catalog);vi.spyOn(Cards,'cardHTML').mockImplementation(card=>`<span>${card.name}</span>`);
   Base.use(1);session._set_active_slot(1);session.buildDerived('quartermaster-gift-cloud');
   Object.assign(session.game,{runActive:true,nestActive:false,state:'idle',layerIdx:0,trackPos:session.game.layerData[0].entrances[0],myClass:'warrior',coins:18,
-    ownedCards:fill(Base.bagCap()-1),usedPocket:[],inventory:[],nodeRewards:{},discoveredPairs:new Set(),visited:{},entrySupply:null,
+    ownedCards:fill(Base.bagCap()-1),usedPocket:[],inventory:[],nodeRewards:{},eventLog:[],discoveredPairs:new Set(),visited:{},entrySupply:null,
     pendingExtraction:null,extractionPending:null,terminalPending:null,battleActive:false,hp:35,maxHp:35,fragments:0});
   key=`0,${session.game.trackPos}`;session.game.grantCard=scenes.grantEventCard;session.game.persistSave=session.saveGame;
   session.configureGameRuntime({resumeEventCardChoice:flow.resumeEventCardChoice,resumeChestsOnCell:scenes.resumeChestsOnCell,openClassChoice:vi.fn()});

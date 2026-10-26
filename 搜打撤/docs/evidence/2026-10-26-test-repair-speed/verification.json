@@ -1,0 +1,144 @@
+{
+  "task": "WF-test-repair-speed-1026",
+  "fullGate": {
+    "startedAt": "2026-10-25T17:40:05.668Z",
+    "endedAt": "2026-10-25T17:47:39.985Z",
+    "wallMilliseconds": 454315.4836,
+    "nodeVersion": "v24.13.0",
+    "exitCode": 0,
+    "signal": null,
+    "head": "850bae931a400a7da5cb52e92a4711c4c86a3c9f",
+    "headUnchanged": true,
+    "indexUnchanged": false,
+    "inputCount": 1957,
+    "changedInputs": []
+  },
+  "tests": {
+    "files": 954,
+    "counts": {
+      "passed": 9486,
+      "failed": 0,
+      "skipped": 37,
+      "pending": 0
+    },
+    "fileCounts": {
+      "passed": 954,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0
+    },
+    "unhandledErrors": 0,
+    "wallMilliseconds": 440430
+  },
+  "repairedTarget": {
+    "files": 10,
+    "passed": 282,
+    "failed": 0,
+    "skipped": 0
+  },
+  "fixtureContracts": {
+    "passed": 4,
+    "failed": 0
+  },
+  "documentationCheck": {
+    "ok": true
+  },
+  "skipReasons": {
+    "证据写入需显式SDT_E8_WRITE_INVENTORY=after；默认只读": 1,
+    "按需性能实验；设置RESOURCE_PRESENTATION_BENCH后执行": 1,
+    "Windows符号链接不可用（EPERM），保留真实链接验证": 35
+  },
+  "artifacts": [
+    {
+      "source": "node_modules/.cache/test-reports/2026-10-25T17-47-39.523Z-91740be9.json",
+      "savedAs": "full-tests.json",
+      "bytes": 342505,
+      "sha256": "454eaebc6d2a9a02fd827ed1dc23635f489a36a1f5d30fe031fe273282da1485"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/full-gate.log",
+      "savedAs": "full-gate.log",
+      "bytes": 25960,
+      "sha256": "a47d8e840738620c0e18cf5c2c0a6c71d6dbdb7983fd29e8b104def0eac88f08"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/full-gate-start.json",
+      "savedAs": "inputs.json",
+      "bytes": 217645,
+      "sha256": "343d8685f970ad8782e5136ce525205157672144409eba3f20b441e31883996e"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/comparison-summary.json",
+      "savedAs": "comparison.json",
+      "bytes": 21509,
+      "sha256": "7cfa4d9b9dfface8cb91380d7f5e4036966a4642463354369d6b38a01f6a6f5f"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/asset-consumer-review.json",
+      "savedAs": "asset-consumer-review.json",
+      "bytes": 477,
+      "sha256": "ab02663ff19b4e6554360f1e05c448d7fe99593e8b44aa789083233f06b2745b"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/repaired.json",
+      "savedAs": null,
+      "bytes": 93757,
+      "sha256": "d89aad058f9068dc70a90ee6680cdf1f47b0288e268e862d5ea1344810b6be36"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/fixture-contracts.json",
+      "savedAs": null,
+      "bytes": 1589,
+      "sha256": "27e95679db9af3c112cc0ead982db6720a26ce130a0fc2adf4b72d3a6fe346b7"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/node-before.json",
+      "savedAs": null,
+      "bytes": 221498,
+      "sha256": "c99c71fbba7e35b2c253fe9704bab7eca8ae0e38d60c4093cc1536a2c1ffb713"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/node-after.json",
+      "savedAs": null,
+      "bytes": 221457,
+      "sha256": "3ccc17cabc3dbba70c4c5957d7962ca8e94723aa0be40c72d2b5d3ab60ccd361"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/fixture-before.json",
+      "savedAs": null,
+      "bytes": 19502,
+      "sha256": "b4ca532fe32cbeadb6c33a8d7d114cfe157c788dcf5b05481e32bcf9137f1c60"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/fixture-after.json",
+      "savedAs": null,
+      "bytes": 19507,
+      "sha256": "bc2d93909edfd4dfd07d3de6c2b655ac3b9a5b657c165c55389111b74d0fc596"
+    },
+    {
+      "source": ".tmp/test-repair-speed-1026/full-gate-static-attempt.log",
+      "savedAs": null,
+      "bytes": 1329,
+      "sha256": "0102cd5ef7cc5e8cdae6eb53a0d278c8bae2401f5fe6b6a14da46ae89c2eb799"
+    }
+  ],
+  "commands": [
+    "node node_modules/vitest/vitest.mjs run tests/battle-hand-inspector.test.js tests/blackmarket-card-preview.test.js tests/environment-fixtures.test.js tests/event-callback-lifecycle-audit.test.js tests/event-choice-acquired-gift-cloud.test.js tests/event-choice-recovery-cloud.test.js tests/event-node-binding-cloud.test.js tests/event-recode-selection-continuity.test.js tests/event-signal-puzzle-integration.test.js tests/runtime-asset-redundancy.test.js --reporter=json",
+    "node .tmp/test-repair-speed-1026/run-node-candidates.mjs before",
+    "node .tmp/test-repair-speed-1026/run-node-candidates.mjs after",
+    "node .tmp/test-repair-speed-1026/run-fixture-comparison.mjs",
+    "node scripts/acceptance-gate.mjs --full --run"
+  ],
+  "limits": [
+    "仅本机锁定依赖验证；未提交、未推送，未验证远端 CI",
+    "历史素材警告登记为既有债务；本轮无新增错误",
+    "计时对照每组一次，受机器负载和缓存影响，不承诺固定耗时",
+    "临时原始报告按 source 路径和 SHA256 留索引；默认耗时报告已另存 full-tests.json"
+  ],
+  "stagedContentAtEnd": {
+    "empty": true,
+    "diffFromHEAD": "",
+    "indexBytesUnchanged": false,
+    "note": "本轮是工作树完整门；index字节哈希有变化，结束时暂存内容仍与HEAD一致，不作为冻结index复用凭证"
+  }
+}

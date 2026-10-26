@@ -1,0 +1,27 @@
+{
+  "url": "http://127.0.0.1:5338/__flow-goals",
+  "source": "Codex in-app browser",
+  "input": "real clicks on production components in a constructed scene",
+  "cards": "包扎：你回复 3 点生命，并获得 3 点护甲。\n坚守：你获得 5 点护甲，并抽 1 张牌。\n厉兵秣马：你获得 12 点护甲，并抽 2 张牌。\n圣光之源：抽 5 张牌。\n治愈：你回复 5 点生命，并净化自身。\n应急绷带：你回复 12 点生命。\n金疮药：你回复 20 点生命。\n斗神酒：你回复 99 点生命。\n能量饮料：你回复 6 点生命。\n动态抽牌：抽 7 张牌。",
+  "motion": "旧完成回调隔离：通过\n关闭广播中新页保留：通过\n关闭广播只发生一次：通过\n新页真实按钮：通过",
+  "selection": {
+    "反馈": "",
+    "提交次数": 2,
+    "确认禁用": true,
+    "等待": "false",
+    "选中": "1"
+  },
+  "viewport": {
+    "height": 720,
+    "width": 1265
+  },
+  "logs": [
+    {
+      "level": "error",
+      "message": "TypeError: Cannot read properties of undefined (reading 'img')\n    at http://127.0.0.1:5338/src/cards/cards.rules.js:42:45",
+      "timestamp": "2026-10-26T07:08:08.472Z",
+      "url": "http://127.0.0.1:5338/__flow-goals"
+    }
+  ],
+  "logReview": "Initial fixture Icons bootstrap was completed before reloading and validating the final document."
+}

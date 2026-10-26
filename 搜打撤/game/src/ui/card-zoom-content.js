@@ -20,6 +20,7 @@ export function createCardZoomContent(card, opts, descriptionRenderer, { readCar
       <p class="cz-note-text">${note ? esc(note) : '暂无备注'}</p>
     </div>`;
   const photoMode = opts.presentation === 'photo';
+  const descriptionHTML = descriptionRenderer.render(card.desc || '', card.id, opts.descriptionQuery || '', card);
   const photoArt = photoMode && readArt()?.cardIcon ? readArt().cardIcon(card, { low: true }) : '';
   let photoFullSrc = '';
   if (photoMode && readArt()?.cardIcon) {
@@ -57,7 +58,7 @@ export function createCardZoomContent(card, opts, descriptionRenderer, { readCar
       <h2 class="cz-photo-title"><span>${esc(card.name || '未命名卡牌')}</span></h2>
       ${photoIndex}
       <div class="cz-photo-details">${photoDetails}</div>
-      ${card.desc ? `<div class="cz-photo-rules">${descriptionRenderer.render(card.desc, card.id, opts.descriptionQuery || '')}</div>` : ''}
+      ${descriptionHTML ? `<div class="cz-photo-rules">${descriptionHTML}</div>` : ''}
       ${hasDrawExplanation(card, readCards().deriveDraw?.(card)) ? `<p class="studio-draw-explanation">${esc(DRAW_EXPLANATION)}</p>` : ''}
       ${noteHTML}
     </aside>
@@ -72,9 +73,9 @@ export function createCardZoomContent(card, opts, descriptionRenderer, { readCar
       // Keep the dismissal control beside the back-sign, within the same photo group.
       /** @type {HTMLElement} */ (el.querySelector('.cz-photo-info')).prepend(/** @type {HTMLElement} */ (el.querySelector('.cz-close')));
     }
-    if (!photoMode && card.desc) {
+    if (!photoMode && descriptionHTML) {
       const description = /** @type {HTMLElement} */ (el.querySelector('.cz-card .hsc-desc'));
-      if (description) description.innerHTML = '<span>' + descriptionRenderer.render(card.desc, card.id, opts.descriptionQuery || '') + '</span>';
+      if (description) description.innerHTML = '<span>' + descriptionHTML + '</span>';
     }
   };
   return { noteLabel, photoMode, photoFullSrc, fill };

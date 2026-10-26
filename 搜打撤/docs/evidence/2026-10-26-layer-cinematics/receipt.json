@@ -1,0 +1,47 @@
+[
+  {
+    "path": "scenes/cinematic/layer-watchline-v2.webp",
+    "ext": "webp",
+    "bytes": 57186,
+    "sha256": "35e81b051930b5406b01d86e1a32b6238f62cf3a1a3fa319b5948072b5601870",
+    "license": "项目自有（NAI5 起稿＋内置重绘）",
+    "source": "docs/evidence/2026-10-26-layer-cinematics/receipt.json",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a178c0-b82f-71b2-a588-817bb970d9a0\\exec-9d766ae7-ef49-4261-ac6d-1aaeba5d91ed.png",
+    "original_sha256": "11897f756a4ce61f10e17b0b383bc507df74d07bd02d3da8029dbb490c560705",
+    "size": [
+      1344,
+      768
+    ],
+    "method": "NAI5 draft then built-in imagegen repaint; RGB WebP encoding"
+  },
+  {
+    "path": "scenes/cinematic/layer-ruins-v2.webp",
+    "ext": "webp",
+    "bytes": 76870,
+    "sha256": "79fb0af9b466625d5c7fc936d4938713479098b17d26ec16b8b250ae90472737",
+    "license": "项目自有（NAI5 起稿＋内置重绘）",
+    "source": "docs/evidence/2026-10-26-layer-cinematics/receipt.json",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a178c0-b82f-71b2-a588-817bb970d9a0\\exec-db007524-5387-4e45-8d1a-9b33b1971071.png",
+    "original_sha256": "4a2e5a7743c71f67646227bdb3e614e2b0579ecd1aad647a62fafa22254b49e5",
+    "size": [
+      1344,
+      768
+    ],
+    "method": "NAI5 draft then built-in imagegen repaint; RGB WebP encoding"
+  },
+  {
+    "path": "scenes/cinematic/layer-core-v2.webp",
+    "ext": "webp",
+    "bytes": 68838,
+    "sha256": "dfda5449d5f2e4d3a834dcf9116c3e6f7f9bcecfe70d3908cc47148968427126",
+    "license": "项目自有（NAI5 起稿＋内置重绘）",
+    "source": "docs/evidence/2026-10-26-layer-cinematics/receipt.json",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a178c0-b82f-71b2-a588-817bb970d9a0\\exec-008a7b7f-2979-42d9-a8e1-de88383ab59f.png",
+    "original_sha256": "aee8b198dce3be8ce82f605bfd5555b86f737a6e6347ecb71bea39ff011b05e6",
+    "size": [
+      1344,
+      768
+    ],
+    "method": "NAI5 draft then built-in imagegen repaint; RGB WebP encoding"
+  }
+]

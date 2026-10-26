@@ -5,6 +5,10 @@ const INTENT_META = {
   guard: ['[[icon:swords]]', '攻击'], curse: ['[[icon:skull]]', '攻击并施加诅咒'],
   dragon: ['[[icon:demon]]', '攻击·阶段效果'], general: ['[[icon:arrow]]', '攻击·回合末强化'],
   orc_boss: ['[[icon:tools]]', '双击并施加诅咒'], element_boss: ['[[icon:crystal]]', '攻击·偶数回合庇幕'],
+  witness_pope: ['[[icon:skull]]', '攻击·受击强化／法伤回血'],
+  mutation_mother: ['[[icon:skull]]', '攻击·第2/4/6回合召唤'],
+  mysterious_blocker: ['[[icon:skull]]', '攻击后清除自身一层诅咒'],
+  necromancer: ['[[icon:skull]]', '攻击·第3/6/9回合撕牌并倍增承伤'],
 };
 
 export function calculateEnemyIntent(def, round, playerStatus) {

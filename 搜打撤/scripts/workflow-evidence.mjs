@@ -160,7 +160,7 @@ export function checkArguments({ tests, paths, full, suite }) {
   for (const list of [tests, paths]) if (list && (!Array.isArray(list) || !list.length || list.some(item => typeof item !== 'string' || !item.trim()))) throw new Error('测试/路径列表不能为空');
   if (tests) return ['scripts/acceptance-gate.mjs', '--target-tests', ...tests];
   if (paths) return ['scripts/acceptance-gate.mjs', '--paths', ...paths, '--run'];
-  if (suite) return ['node_modules/vitest/vitest.mjs', 'run', '--reporter=dot', '--silent'];
+  if (suite) return ['node_modules/vitest/vitest.mjs', 'run', '--silent'];
   return ['scripts/acceptance-gate.mjs', '--full', '--run'];
 }
 

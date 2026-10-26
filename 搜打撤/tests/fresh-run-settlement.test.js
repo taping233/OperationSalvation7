@@ -1,7 +1,7 @@
 import { beforeEach, expect, it, vi } from 'vitest';
 
 const actions = new Map();
-const UI = { showOverlay:vi.fn(), log:vi.fn(), refresh:vi.fn(), act:(name, fn) => actions.set(name,fn) };
+const UI = { el:{}, showOverlay:vi.fn((_title,html)=>{document.body.innerHTML=`<div id="overlay"><div id="ovBody">${html}</div></div>`;UI.el={overlay:document.getElementById("overlay"),ovBody:document.getElementById("ovBody")};}), log:vi.fn(), refresh:vi.fn(), act:(name, fn) => actions.set(name,fn) };
 window.SDT = { UI, Sound:{sfx:vi.fn(),music:vi.fn()}, FX:{feedback:vi.fn()},
   Cards:{cardHTML:card => `<span>${card.name}</span>`} };
 const { createDeathSettlement, buildDeathReceipt } = await import('../game/src/run/game.session.death.js');
@@ -115,10 +115,10 @@ it('keeps long loss lists and full damage attribution in native details after th
 });
 
 it('keeps both terminal actions unique and opens the same deployment destination', async () => {
-  await doDeath(); document.body.innerHTML=html();
+  await doDeath();
   for (const action of ['goBase','again']) {
     expect(document.querySelectorAll(`[data-act="${action}"]`)).toHaveLength(1);
-    actions.get(action)();
+    await actions.get(action)();
   }
-  expect(openBaseHub.mock.calls).toEqual([['deploy'],['deploy']]);
+  expect(openBaseHub.mock.calls).toEqual([['deploy'],['departure']]);
 });

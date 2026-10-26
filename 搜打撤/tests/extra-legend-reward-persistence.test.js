@@ -47,7 +47,7 @@ beforeEach(async () => {
       hideOverlay:vi.fn(() => { window.SDT.UI.el.overlay.hidden = true; }),
     },
     Icons:{ rich:html => html }, Sound:{ sfx:vi.fn() },
-    MAP:{ rules:{ bagSize:16, bagMax:16 }, chestKinds:{ small:{ name:'小宝箱', cards:1, coins:[1,1] } } },
+    MAP:{ rules:{ bagSize:16, bagMax:16 }, chestKinds:{ small:{ name:'小型物资箱', cards:1, coins:[1,1] } } },
     Cards:{ SHA:{ id:'starter-attack' }, all:() => [legend], isRandomObtainable:() => true,
       RARITIES:['古朴','稀有','史诗','传说'], randomDropCard:vi.fn(() => loot), rarityOf:card => card.rarity,
       cardHTML:card => `<div>${card.name}</div>`, sellPrice:() => 1 },

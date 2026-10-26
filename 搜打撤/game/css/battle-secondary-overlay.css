@@ -62,8 +62,6 @@ body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel{
 & .battle-card-inspect { min-height:var(--ui-control-compact); font-size:var(--ui-text-body); background:transparent; color:var(--feedback-blue); border-color:var(--feedback-line); }
 & .battle-pile-card { width:220px; }
 & .battle-pile-card .hs-card { font-size:22px; }
-& .battle-decision-inspect { padding:var(--ui-space-4); background:transparent; border-color:var(--feedback-line); }
-& .battle-decision-inspect-rules { font-size:var(--ui-text-body); }
 &[data-decision-kind="infusion"] { width:1160px!important; }}
 body #overlay .battle-secondary-panel{
 & [data-infusion-workspace] { grid-template-columns:260px minmax(0,1fr); gap:20px; }
@@ -72,11 +70,6 @@ body #overlay .battle-secondary-panel{
 & .infusion-footer p { flex-basis:240px; }}
 /* Inner sections stay unpainted: the outer panel alone owns glass and blur. */
 /* Existing details preserve their own focus/return semantics, same winter skin. */
-body #overlay .bt-hand-detail{
-& .bt-hand-detail-scrim { background:transparent; backdrop-filter:none; }
-& .bt-hand-detail-surface { background:var(--ui-glass-surface); backdrop-filter:blur(var(--ui-glass-blur)); -webkit-backdrop-filter:blur(var(--ui-glass-blur)); border:1px solid var(--ui-glass-line); border-radius:6px; box-shadow:0 12px 32px #07101d55; }
-& :is(.bt-hand-detail-close,.bt-hand-detail-use) { border-radius:4px; border:1px solid #9bafbc66; }
-& .bt-hand-detail-use { background:var(--ui-blue); color:var(--ui-on-primary); }}
 body:has(#overlay .battle-stage) #cardZoom:not(.cz-photo){
 & .cz-backdrop { background:transparent; backdrop-filter:none; }
 & .cz-close { background:#15212cef; color:#eef1ed; border:1px solid #9bafbc66; border-radius:4px; }}

@@ -11,48 +11,7 @@ body #overlay .battle-stage.battle-sts .bt-fpreview{
 & span { color:#d5e1e3;font-size:12px;line-height:1.4; }
 & .bt-fpreview-tip { color:#afcdd1;font-size:11px; }}
 
-/* 手牌规则只占一层前景；关闭后原战斗 DOM 和选择状态仍在。 */
-body #overlay{
-& .bt-hand-detail { position:absolute;inset:0;z-index:120;display:grid;place-items:center;pointer-events:auto; }
-& .bt-hand-detail-scrim { position:absolute;inset:0;background:rgba(5,13,19,.5); }
-& .bt-hand-detail-surface {
-  position:relative;width:min(1080px,86%);max-height:92%;overflow:visible;
-  display:flex;flex-direction:column;background:none;border:0;box-shadow:none;color:#e3eceb;
-}}
-body #overlay .bt-hand-detail{
-& header,
-& footer {
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:12px 20px;background:none;border:0;
-  font-size:20px;color:#c3d8dc;
-}
-& header { justify-content:flex-end; }
-& footer { flex-direction:column;gap:10px; }}
-body #overlay .bt-hand-detail-close{
-& {
-  min-height:48px;padding:10px 16px;border:1px solid #9bb6bd;background:#18323d;color:#e3eceb;font-size:20px;font-weight:700;cursor:pointer;
-}
-&:focus-visible { outline:3px solid #fff0be;outline-offset:3px; }}
-body{
-& #overlay .bt-hand-detail-body {
-  position:relative;display:flex;justify-content:center;align-items:center;
-  min-height:0;overflow:visible;padding:12px 24px;
-}
-&:has(#viewport) #overlay .bt-hand-detail-art .hs-card { width:420px!important;font-size:42px!important;max-width:100%;filter:drop-shadow(0 10px 24px #0009); }
-& #overlay .bt-hand-detail-body:has(.bt-hand-detail-copy) { gap:72px;align-items:flex-start; }}
-body #overlay .bt-hand-detail-copy{
-& { position:relative;flex:0 0 320px;width:320px;max-height:560px;overflow:auto;overscroll-behavior:contain;margin:12px 0 0;padding:20px 24px;background:#10232cf2;border:1px solid #9ebfc652;box-sizing:border-box; }
-& summary { font-size:22px;color:#d7e8ea;cursor:pointer; }
-&[open] summary { margin-bottom:14px; }}
-body #overlay{
-& .bt-hand-detail-rules { margin:0;white-space:pre-wrap;font-family:var(--font-ui);line-height:var(--card-copy-leading,1.55);font-size:var(--card-copy-size,24px);font-weight:400;color:var(--card-copy-ink,#e8edef); }
-& .bt-hand-detail-action-note { margin:0;max-width:32ch;line-height:1.45;color:#c3d8dc; }}
-body #overlay .bt-hand-detail-use{
-& { flex-shrink:0;width:420px;max-width:100%;min-height:64px;padding:14px 24px;border:1px solid #ecdca8;background:#d6c48e;color:#1b2a31;font-size:24px;font-weight:800;cursor:pointer; }
-&:disabled { opacity:.55;cursor:default; }
-&:focus-visible { outline:3px solid #b6e8ff;outline-offset:3px; }}
-
-/* 发现、抉择、牌堆、背包沿用同一阅读面，动作停在固定页脚。 */
+/* 发现、抉择、牌堆沿用同一阅读面，动作停在固定页脚。 */
 body #overlay{
 & .battle-decision {
   background:#10232b;color:#e5eeee;border:1px solid rgba(170,196,201,.62);
@@ -71,15 +30,7 @@ body #overlay .battle-decision{
 & .choice-opt:focus-visible { background:#36515a;outline:2px solid #e7d39d;outline-offset:2px; }
 & .battle-pile-card { cursor:pointer;border:1px solid transparent;background:rgba(26,46,55,.5);padding:6px; }
 & .battle-pile-card.is-inspected { border-color:#e2d19b;background:rgba(226,209,155,.12); }
-& .battle-pile-card:focus-visible { outline:3px solid #ead99f;outline-offset:3px; }
-& .battle-decision-inspect {
-  position:sticky;top:10px;min-width:0;padding:20px;background:#1c3640;
-  border:1px solid #819fa8;border-left:3px solid #e1c98d;color:#e7eeee;
-}
-& .battle-decision-inspect-kicker { color:#b9ced2;font-size:13px;letter-spacing:.12em; }
-& .battle-decision-inspect h4 { margin:8px 0;color:#f0e0b8;font-size:21px; }
-& .battle-decision-inspect-meta { color:#bdd0d5;font-size:14px; }
-& .battle-decision-inspect-rules { white-space:pre-wrap;line-height:1.6;font-size:16px; }}
+& .battle-pile-card:focus-visible { outline:3px solid #ead99f;outline-offset:3px; }}
 /* 牌库与消耗牌共用阅读尺寸；长规则留在中部阅读区，不挤走返回动作。 */
 body #overlay .card:has(.battle-decision[data-decision-kind="pile"]){
 & {
@@ -100,37 +51,17 @@ body #overlay .battle-decision[data-decision-kind="pile"]{
 }
 & .battle-pile-card .hs-card { width:100%;max-width:100%;margin:0;font-size:32px; }
 & .bt-count { font-size:22px;padding:4px 8px; }
-& .battle-decision-inspect {
-  box-sizing:border-box;max-height:calc(var(--game-layout-height,100vh) * .94 - 332px);overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding:12px;overflow-wrap:anywhere;
-}
-& .battle-decision-inspect-kicker { font-size:20px; }
-& .battle-decision-inspect h4 { font-size:30px;line-height:1.4; }
-& .battle-decision-inspect-meta { font-size:22px;line-height:1.5; }
-& .battle-decision-inspect-rules,
 & .battle-decision-content .ov-note,
 & .ov-empty { font-size:var(--card-copy-size,24px);line-height:var(--card-copy-leading,1.55);overflow-wrap:anywhere; }
 & .battle-decision-actions .ov-btn { min-height:64px;min-width:240px;max-width:100%;font-size:24px; }}
-body #overlay .battle-decision[data-decision-kind="bag"]{
-& .battle-decision-inspect { position:static;margin:0 0 18px; }
-& .battle-bag-entry { display:flex;flex-direction:column;align-items:center;gap:6px; }
-& .battle-bag-inspect {
-  width:100%;min-height:34px;background:#294651;border:1px solid #8fadb4;
-  color:#e1eceb;font-size:14px;cursor:pointer;
-}
-& .battle-bag-inspect:hover,
-& .battle-bag-inspect:focus-visible {
-  background:#d7c58e;color:#1b2c34;outline:2px solid #f5e4ae;outline-offset:2px;
-}}
 @media (max-width:900px) {
 body #overlay .battle-decision{
-  & .battle-decision-inspect { position:static; }
-  &[data-decision-kind="pile"] .battle-decision-inspect { position:static;max-height:none;overflow:visible; }
   &[data-decision-kind="pile"] .battle-decision-actions .ov-btn { min-width:0;width:100%; }}
 }
 
 /* 同一手牌保留原卡框；StS2位置表适配的低弧让九叠身份区全部可见。 */
 /* winter 的历史 hover 使用 important；当前阅读态增加 viewport 作用域并同级覆盖，拖拽仍完全排除。 */
-/* 短规则悬停/焦点全文可读；密集规则保留节选与明确的完整规则入口。 */
+/* 同槽抬牌负责悬停与焦点阅读，规则保留在卡面上。 */
 
 /* 首脑编组先看对手与进度，再选择卡牌；抽牌细则按需展开。 */
 body #overlay{

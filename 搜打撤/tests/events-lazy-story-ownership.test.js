@@ -13,7 +13,7 @@ function harness() {
     UI.el.ovBody.innerHTML=`<section><h1>${spec.title}</h1><p>${spec.sub||''}</p>${spec.body}${spec.foot||''}</section>`;});
   const story=deferred(),commit=deferred();let back;
   const ports={game,UI,nodeShell,enterNode:async()=>true,getCards:()=>({all:()=>[card]}),pick:deck=>deck[0],
-    eventOptionHTML:(_choice,index)=>`<button data-act="evtChoice" data-i="${index}">继续</button>`,eventNarrative:vi.fn(()=>story.promise),lastLampNarrative:vi.fn(),storyCommands:{record:vi.fn()},
+    eventOptionHTML:(_choice,index)=>`<button data-act="evtChoice" data-i="${index}">继续</button>`,eventNarrative:vi.fn(()=>story.promise),
     captureRunContext:()=>()=>true,createCardChoice:()=>({resume:()=>false}),setBagReturnHook:fn=>{back=fn;},
     setCardPageOpen:vi.fn(),bagSlots:{showBackpack:()=>nodeShell({title:'背包',body:''})},
     saveGame:vi.fn(()=>true),consumeCurrentCell:vi.fn(),sound:vi.fn(),serializeReward:()=>({})};
@@ -21,7 +21,7 @@ function harness() {
 }
 const replace=h=>h.nodeShell({title:'设置',body:''});
 afterEach(()=>document.body.replaceChildren());
-describe('普通事件叙事所有权与旧系列退役',()=>{
+describe('普通事件的页面所有权与异步生命周期',()=>{
   it('drops late narrative after another same-node page takes ownership',async()=>{
     const h=harness(),opening=h.controller.runEventDeck();await flush();replace(h);h.story.resolve(narrative('旧叙事'));await opening;
     expect(h.UI.el.ovBody.textContent).toBe('设置');expect(h.consumeCurrentCell).not.toHaveBeenCalled();
@@ -46,17 +46,17 @@ describe('普通事件叙事所有权与旧系列退役',()=>{
     if(change==='page')replace(h);if(change==='closing')h.UI.el.overlay.classList.add('closing');if(change==='uiClosing')h.UI.el.overlay.dataset.uiClosing='1';if(change==='detached')h.UI.el.overlay.remove();
     const count=h.nodeShell.mock.calls.length;h.commit.resolve(true);await opening;
     expect(h.nodeShell).toHaveBeenCalledTimes(count);expect(h.eventNarrative).not.toHaveBeenCalled();expect(h.consumeCurrentCell).not.toHaveBeenCalled();
-    expect(h.game.nodeRewards['0,1'].eventId).toBe('ownership-custom-event');expect(h.lastLampNarrative).not.toHaveBeenCalled();expect(h.storyCommands.record).not.toHaveBeenCalled();
+    expect(h.game.nodeRewards['0,1'].eventId).toBe('ownership-custom-event');
   });
   it('old ordinary-event actions cannot settle another page',async()=>{
     const h=harness();h.story.resolve(narrative('叙事'));await h.controller.runEventDeck();const stale=h.UI.acts.evtChoice;replace(h);await stale({i:0});expect(h.consumeCurrentCell).not.toHaveBeenCalled();
   });
-  it('a failed checkpoint cannot redraw another page or restore the retired series',async()=>{
+  it('a failed ordinary-event checkpoint cannot redraw another page',async()=>{
     const h=harness();h.UI.el.ovBody.innerHTML='<main>当前页面</main>';h.saveGame.mockReturnValueOnce(h.commit.promise);const opening=h.controller.runEventDeck();await flush();replace(h);h.commit.resolve(false);await opening;
-    expect(h.UI.el.ovBody.textContent).toBe('设置');expect(h.storyCommands.record).not.toHaveBeenCalled();expect(h.UI.acts.lastLampChoiceRetry).toBeUndefined();
+    expect(h.UI.el.ovBody.textContent).toBe('设置');expect(h.consumeCurrentCell).not.toHaveBeenCalled();
   });
   it('bag return uses a fresh ordinary page and invalidates its old finish action',async()=>{
     const h=harness();h.story.resolve(narrative('叙事'));await h.controller.runEventDeck();const stale=h.UI.acts.evtChoice;h.UI.acts.evtBag();await stale({i:0});expect(h.consumeCurrentCell).not.toHaveBeenCalled();
-    h.back();expect(h.UI.el.ovBody.textContent).toContain('叙事');await h.UI.acts.evtChoice({i:0});await flush();expect(h.consumeCurrentCell).toHaveBeenCalledOnce();expect(h.storyCommands.record).not.toHaveBeenCalled();
+    h.back();expect(h.UI.el.ovBody.textContent).toContain('叙事');await h.UI.acts.evtChoice({i:0});await flush();expect(h.consumeCurrentCell).toHaveBeenCalledOnce();
   });
 });

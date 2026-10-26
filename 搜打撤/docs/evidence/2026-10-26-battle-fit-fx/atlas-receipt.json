@@ -1,0 +1,37 @@
+{
+  "path": "battle/fx-atlas.webp",
+  "ext": "webp",
+  "bytes": 477318,
+  "sha256": "ada270c4f0e550b009f4870f9a311a6988234d9774aeed5cf6b8d7c1187c903c",
+  "license": "项目自有（内置生图）",
+  "source": "docs/evidence/2026-10-26-battle-fit-fx/atlas-receipt.json",
+  "input": "C:\\Users\\太平\\.codex\\generated_images\\01a17885-5817-7192-b282-396a22335960\\exec-3ebb00c7-49e2-41a5-bada-0995af642387.png",
+  "inputSha256": "63482385501de3f0976cab0a276a4f091845df1eeec77ebc02ee579d7bb5bb61",
+  "size": [
+    1254,
+    1254
+  ],
+  "grid": [
+    4,
+    4
+  ],
+  "generation": "built-in imagegen; muted directional revision",
+  "kinds": [
+    "slash",
+    "block",
+    "magic",
+    "fire",
+    "ice",
+    "lightning",
+    "poison",
+    "heal",
+    "curse",
+    "pulse",
+    "trail",
+    "death",
+    "buff",
+    "debuff",
+    "draw",
+    "boss"
+  ]
+}

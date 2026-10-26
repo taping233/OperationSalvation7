@@ -5,7 +5,6 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 const harness = globalThis.__r6Flow = {
   activeSlot: 1, game: { layerIdx: 0, trackPos: 1, visited: {}, state: 'idle' },
   acts: {}, pages: [], consumed: 0, finish: 0, saveResult: true,
-  narrative: async () => ({ intro: '灯', choices: [{ label: '继续', detail: '继续调查', effect: 'continue', choose: () => '记录' }] }),
 };
 
 vi.mock('../game/src/run/game.session.js', () => ({
@@ -31,7 +30,7 @@ vi.mock('../game/src/core/render-scheduler.js', () => ({ renderScheduler: { inva
 vi.mock('../game/src/audio/sound.js', () => ({ tone: () => '' }));
 vi.mock('../game/src/core/random.js', () => ({ Random: { random: () => 0 } }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ EVENT_SCENE_META: {} }));
-vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => null, lastLampNarrative: (...args) => harness.narrative(...args) }));
+vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => null, lastLampNarrative: () => { throw Error('Retired series must not intercept ordinary events'); } }));
 
 let runEventDeck, RunStorage, Base;
 beforeAll(async () => {
@@ -57,10 +56,10 @@ describe('旧系列退役后的真实事件 flow',()=>{
   it.each([0,1,2,3,'complete','missing'])('旧档阶段 %s 不再抢占普通事件或写入故事',async stage=>{
     await seedRun(1,'retired-'+stage);
     if(stage!=='missing')Base.data.story.outcomes['last-lamp']={stage,choiceId:'continue'};
-    const before=JSON.stringify(Base.data.story);const narrative=vi.fn(harness.narrative);harness.narrative=narrative;
+    const before=JSON.stringify(Base.data.story);
     await runEventDeck();
     expect(harness.consumed).toBe(1);expect(harness.game.visited['0,1']).toBe(1);
     expect(harness.acts.lastLampChoice).toBeUndefined();expect(harness.acts.lastLampFinish).toBeUndefined();
-    expect(narrative).not.toHaveBeenCalled();expect(JSON.stringify(Base.data.story)).toBe(before);
+    expect(JSON.stringify(Base.data.story)).toBe(before);
   });
 });

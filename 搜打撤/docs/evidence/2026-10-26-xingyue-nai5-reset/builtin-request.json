@@ -1,0 +1,26 @@
+{
+  "status": "generated",
+  "tool": "built-in image_gen",
+  "error": "network error: error sending request",
+  "target": "D:/素材/代号柒/.tmp/nai/xingyue-nai5-reset-20261026/candidate-portrait.png",
+  "references": [
+    "game/assets/cards/spell-tt3-holy-shield.webp",
+    "game/assets/cards/spell-tt7-holyheal.webp"
+  ],
+  "output": "D:/素材/代号柒/.tmp/nai/xingyue-nai5-reset-20261026/builtin-card-style.png",
+  "scope": "单张竖版全身，以圣盾脸部和圣疗笔触重绘；保留NAI底稿构图衣装星灯",
+  "integration": "未替换运行素材",
+  "retry": {
+    "authorization": "老板明确要求重新试一次",
+    "status": "failed",
+    "error": "network error: error sending request",
+    "output": null
+  },
+  "successful_retry": {
+    "authorization": "老板再次尝试",
+    "source": "C:/Users/太平/.codex/generated_images/01a177be-ad81-7590-ab07-a971539f2f81/exec-b99133db-5871-4c9d-9e64-c72a312cab13.png",
+    "sha256": "1931D1F855C8B68BE3F1FEA6DBEAD335ABA5E36BF7C10A55CE434EA7942D59BC",
+    "prompt": "builtin-prompt.txt",
+    "observation": "竖版全身、白底、长辫、金瞳与月饰、祝祷和星灯保留；衣料和头发转为卡面块面厚涂，脸部保持沉静。未替换游戏立绘。"
+  }
+}

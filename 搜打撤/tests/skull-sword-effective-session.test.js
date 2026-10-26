@@ -23,7 +23,6 @@ await import('../game/src/cards/cards.js');
 const { BattleSession, configureBattleRenderer, findEffectiveCard, infusionFuelReason, findCard, pileTip } = await import('../game/src/battle/core/battle.core.js');
 const { render } = await import('../game/src/battle/view/battle.view.js');
 const Aim = await import('../game/src/battle/view/battle.aim.js');
-const { openHandInspector, closeHandInspector } = await import('../game/src/battle/view/battle.hand-inspector.js');
 const { UI: zoomUI } = await import('../game/src/ui/ui.js');
 UI.showCardZoom = zoomUI.showCardZoom;
 window.SDT.UI = UI;
@@ -38,7 +37,6 @@ window.SDT.Icons = mockedIcons;
 const originalRaf = window.requestAnimationFrame;
 const originalAnimate = Element.prototype.animate;
 let frames, game;
-const panel = () => document.querySelector('.bt-hand-detail');
 function flush() { for (let i = 0; frames.length && i < 30; i++) frames.shift()(performance.now()); }
 async function settle() {
   for (let i = 0; i < 100; i++) {
@@ -63,7 +61,7 @@ beforeEach(async () => {
 });
 afterEach(async () => {
   document.getElementById('cardZoom')?._closeCardZoom?.(true);
-  closeHandInspector({ restoreFocus: false }); Aim.cancelAim(); Aim.cancelClickSelection(); clearFeedback();
+  Aim.cancelAim(); Aim.cancelClickSelection(); clearFeedback();
   if (game?.battleActive) { BattleSession.commands.cancelInfusion(); BattleSession.commands.flee(); }
   await settle();
   frames = []; actions.clear(); window.requestAnimationFrame = originalRaf; Element.prototype.animate = originalAnimate;
@@ -105,10 +103,11 @@ it('BOSS逐UID变形含临时初始牌，卡面/详情/aria/选敌同源且重�
   expect(Aim.aim.card.name).toBe('不朽斩');
   expect(Aim.aim.card.dmg).toBe(1);
   Aim.cancelAim();
-  openHandInspector(representative);
-  expect(panel().getAttribute('aria-label')).toBe('不朽斩：卡牌详情');
-  expect(panel().textContent).toContain('无法用于注能');
-  closeHandInspector();
+  UI.showCardZoom(findEffectiveCard(representative).card);
+  const zoom = document.getElementById('cardZoom');
+  expect(zoom.getAttribute('aria-label')).toContain('不朽斩大图');
+  expect(zoom.textContent).toContain('无法用于注能');
+  zoom._closeCardZoom(true);
   Aim.selectCardByClick(representative, false, { autoSingleTarget: false });
   expect(node.classList.contains('click-selected')).toBe(true);
   expect(node.getAttribute('aria-label')).toContain('不朽斩');
@@ -296,10 +295,10 @@ it('其他手牌支付保持原有初始攻击资格，同时选牌面显示有�
   const source = game.ownedCards.find(entry => entry.card.id === 'tt7-thundergrudge');
   BattleSession.commands.playCard(source.uid, 0); await settle();
   expect(BattleSession.getSnapshot().handSelecting?.act).toBe('payment');
-  const choices = [...document.querySelectorAll('.battle-stage[data-infusion-mode] .sts-hand .bt-slot:not(.infusion-dup):not([hidden]) .bt-card')];
-  // Four owned cards share one stack; the temporary card retains its separate state mark.
-  expect(choices).toHaveLength(2);
-  expect(choices.map(node=>node.getAttribute('aria-label'))).toEqual(expect.arrayContaining([expect.stringContaining('第1/4张'),expect.stringContaining('第1/1张')]));
+  const choices = [...document.querySelectorAll('.battle-stage[data-hand-selecting] .sts-hand .bt-slot:not(.infusion-dup):not([hidden]) .bt-card[data-hand-state="ready"]')];
+  // Material selection exposes each candidate UID independently.
+  expect(choices).toHaveLength(5);
+  expect(new Set(choices.map(node=>node.dataset.uid)).size).toBe(5);
   for (const choice of choices) {
     expect(choice.textContent).toContain('不朽斩');
     expect(choice.getAttribute('aria-label')).toContain('不朽斩');
@@ -319,8 +318,8 @@ it('内部免费释放按已显示不朽斩结算并同UID回手', async () => {
   BattleSession.commands.playCard(source.uid, 0); await settle();
   expect(BattleSession.getSnapshot().handSelecting?.act).toBe('play');
   const uid = originals[0];
-  // 2026-10-21 反馈 #7：同名有效卡合并为一张展示（卡面仍是不朽斩）；实际选择继续按 uid 提交。
-  const option = document.querySelector('[data-act="btPickHand"]');
+  // 原位选牌按 UID 展示；随机手牌顺序不影响选定的不朽斩。
+  const option = document.querySelector(`.sts-hand [data-act="btPlay"][data-uid="${uid}"]`);
   expect(option).not.toBeNull();
   expect(option.textContent).toContain('不朽斩');
   const before = BattleSession.getSnapshot();

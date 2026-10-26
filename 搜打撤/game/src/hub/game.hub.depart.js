@@ -1,5 +1,5 @@
 /* 由 game.hub.js 拆出（2026-09-22 六文件重构批3）：出发页与出征整备流
- * （hubDeployHTML / openDepartPrep / renderDepartPrep / deploySlotsUsed + deployPick 暂存态）。
+ * （hubDeployHTML / openDepartPrep / renderDepartPrep + deployPick 暂存态）。
  * renderHub 回调经 game.hub.bridge.js 的 slots 间接调用，本文件不 import 壳。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -20,6 +20,9 @@ import { bindDepartureDrag } from './departure.drag.js';
 import { departureStackKey, findDepartureStack } from './base-departure.commands.js';
 import { deployPick, replaceDeployPick } from './departure.selection-state.js';
 import { stackCapOf } from '../core/card-capacity.js';
+import { saveRunCheckpoint } from '../core/run-checkpoint.js';
+import { captureBattleContext } from '../battle/battle-loader.js';
+import { holdHubOperationControls, runHubOperation } from './hub.presentation.js';
 import '../../css/roster-reference.css';
 const departureFaces = new WeakMap();
 const recommendationViews = new WeakMap();
@@ -37,11 +40,11 @@ function renderDepartureCard(card) {
   // 基地首页：房间入口、行动难度与出征整备。
   function hubDeployHTML() {
     const B = SDT.Base;
-    const prepared = !!(deployCharacter && deploymentSlot === B.slot);
+    const prepared = !!(deployCharacter && deploymentCurrent(B));
     return baseHomeV3HTML({ base:B, meta:SDT.Meta, modes:MODES,
       mode:MODES[B.data.selMode] ? B.data.selMode : 'standard', prepared,
       character:characterFor(prepared ? deployCharacter : 'wu'),
-      picks:Object.values(deployPick || {}).reduce((sum, count) => sum + count, 0) });
+      picks:deploymentCurrent(B) ? Object.values(deployPick || {}).reduce((sum, count) => sum + count, 0) : 0 });
   }
 
   // ---------- 出征整备：先选择人物，再选择从仓库携带的卡牌 ----------
@@ -51,19 +54,23 @@ function renderDepartureCard(card) {
   async function setDeployPick(v, { characterId = null, petId = null } = {}, isCurrent = () => true) {
     const character = characterId ? characterFor(characterId) : null;
     if (characterId && !character) return false;
-    const base = SDT.Base, slot = base.slot, generation = ++departureGeneration;
+    const base = SDT.Base, slot = base.slot, generation = departureGeneration, baseGeneration = base._selectionGeneration;
     if (petId && !await base.setPet(petId)) return false;
-    if (SDT.Base !== base || base.slot !== slot || generation !== departureGeneration || !isCurrent()) return false;
+    if (SDT.Base !== base || base.slot !== slot || base._selectionGeneration !== baseGeneration || generation !== departureGeneration || !isCurrent()) return false;
+    departureGeneration++;
     replaceDeployPick(v == null ? null : Object.fromEntries(Object.entries(v).map(([key, count]) => {
       const stack = findDepartureStack(SDT.Base.data.stash, key);
       return [stack ? departureStackKey(stack) : key, count];
     })));
-    deployPickFresh = true; deploymentSlot = SDT.Base.slot; deployCharacter = character?.rulesetId || null; deployStart = null;
+    deployPickFresh = true; deploymentSlot = base.slot; deploymentBase = base; deploymentBaseGeneration = baseGeneration;
+    deployCharacter = character?.rulesetId || null; deployStart = null;
     return true;
   }
   let deployCharacter = null;
   let deployStart = null;
   let deploymentSlot = null;
+  let deploymentBase = null, deploymentBaseGeneration = null;
+  const deploymentCurrent = base => deploymentBase === base && deploymentSlot === base.slot && deploymentBaseGeneration === base._selectionGeneration;
   let deploySubmitting = false;
   let deployHint = '';      // 页内提示（容量不足等）
   let deployRecommendation = null, deployUndo = null;
@@ -72,19 +79,20 @@ function renderDepartureCard(card) {
   let departureEntry = null;
   let deployJustOpened = false;   // 出发准备页刚打开（只播一次入场动画）
 
-  function openDepartPrep({ chooseAgain = false } = {}) {
+  function openDepartPrep({ chooseAgain = false, isCurrent:sourceCurrent = /** @type {() => boolean} */ (() => true) } = {}) {
+    if (!sourceCurrent()) return false;
     if (departureEntry?.slot === SDT.Base.slot && departureEntry.current() && !departureEntry.picked) return departureEntry.promise;
-    if (!chooseAgain && deploymentSlot === SDT.Base.slot && deployCharacter && deployStart && deployPick) {
+    if (!chooseAgain && deploymentCurrent(SDT.Base) && deployCharacter && deployStart && deployPick) {
       deploySubmitting = false;
       deployJustOpened = true; renderDepartPrep();
       enterDepartureCut(document.getElementById('depMain'));
-      return;
+      return !!document.getElementById('depMain') && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
     }
     const generation = ++departureGeneration;
-    const slot = SDT.Base.slot;
-    const current = () => departureGeneration === generation && SDT.Base.slot === slot && deploymentSlot === slot;
-    if (deploymentSlot !== SDT.Base.slot) {
-      deploymentSlot = SDT.Base.slot;
+    const base = SDT.Base, slot = base.slot, baseGeneration = base._selectionGeneration;
+    const current = () => departureGeneration === generation && SDT.Base === base && base._selectionGeneration === baseGeneration && base.slot === slot && deploymentCurrent(base);
+    if (!deploymentCurrent(base)) {
+      deploymentSlot = slot; deploymentBase = base; deploymentBaseGeneration = baseGeneration;
       replaceDeployPick(null); deployCharacter = null; deployStart = null; deployPickFresh = false;
     }
     deploySubmitting = false;
@@ -109,14 +117,17 @@ function renderDepartureCard(card) {
       isCurrent: current,
       isConfirmationCurrent: () => current() && !!document.getElementById('depMain') && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'),
       initialCharacter: deployCharacter,
-      onCancel: () => { if (current()) hubBridge.renderHub(); },
+      onCancel: () => current() ? hubBridge.renderHub() : false,
       onSelect: (cl, start) => {
-        if (!current()) return;
-        if (entry) entry.picked = true;
+        if (!current()) return false;
         deployCharacter = cl;
         deployStart = start;
         renderDepartPrep();
-        enterDepartureStep(document.getElementById('depMain'), 1);
+        const stage = document.getElementById('depMain');
+        if (!current() || !stage?.isConnected || UI.el.overlay.hidden || UI.el.overlay.classList.contains('closing')) return false;
+        if (entry) entry.picked = true;
+        enterDepartureStep(stage, 1);
+        return true;
       },
       beforeConfirm: async () => {
         const stage = document.getElementById('depMain');
@@ -127,17 +138,19 @@ function renderDepartureCard(card) {
           deployJustOpened = true; renderDepartPrep();
           return false;
         }
+        if (!departurePreview().capacityOk) {
+          deploySubmitting = false;
+          deployHint = '普通卡牌占用基础格，额外容量仅放资源。请移出超出容量的卡牌后出发。';
+          renderDepartPrep();
+          return false;
+        }
         const mode = SDT.Base.data.selMode;
         const picks = { ...(deployPick || {}) };
         const started = await newRun(mode, picks, { skipClassChoice: true,
           isCurrent: () => current() && stage.isConnected && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'),
+          isPublicationCurrent:current,
         });
         if (!current() || !stage.isConnected) return false;
-        if (started !== false && !SDT.Base.data.ammoTaught) {
-          const taught = await SDT.Base.markAmmoTaught?.();
-          if (!current() || !stage.isConnected) return false;
-          if (taught === false) UI.log('教学记录未保存，远征已保留；下次进入时可重试。', 'warn');
-        }
         if (started === false) {
           deploySubmitting = false;
           document.getElementById('depMain')?.classList.remove('dep-tearing');
@@ -147,10 +160,48 @@ function renderDepartureCard(card) {
           renderDepartPrep();
           return false;
         }
-        replaceDeployPick(null);
-        deployStart = null;
-        SDT.Sound.sfx('deployStart');
-        return true;
+        const finishPublishedDeparture = async ownsPage => {
+          if (!current() || !ownsPage()) return false;
+          replaceDeployPick(null);
+          deployStart = null;
+          // 已发布远征的后续只处理教学和提示，人物确认沿原入口继续。
+          const runCurrent = captureBattleContext(game);
+          try {
+            if (!base.data.ammoTaught) {
+              const taught = await saveRunCheckpoint(() => base.markAmmoTaught?.());
+              if (!current() || !ownsPage() || !runCurrent()) return false;
+              if (!taught) UI.log('教学记录未保存，远征已保留；下次进入时可重试。', 'warn');
+            }
+          } catch (error) { console.warn('[departure] 出征已保存，教学提示未完成', error); }
+          if (!current() || !ownsPage() || !runCurrent()) return false;
+          try { SDT.Sound.sfx('deployStart'); }
+          catch (error) { console.warn('[departure] 出征音效未完成', error); }
+          return true;
+        };
+        if (started?.status === 'departure-pending' && started.committed === true) {
+          const publicationCurrent = () => current() && started.isCurrent();
+          let completion = null, completed = false;
+          return {
+            status:'departure-pending', committed:true, isCurrent:publicationCurrent,
+            retry:() => {
+              if (completion) return completion;
+              if (!publicationCurrent() || completed) return Promise.resolve(completed && publicationCurrent());
+              const body = UI.el.ovBody, overlay = UI.el.overlay;
+              const page = body.firstElementChild, revision = UI._overlayRevision;
+              const ownsPage = () => publicationCurrent() && UI.el.ovBody === body && UI.el.overlay === overlay &&
+                body.firstElementChild === page && UI._overlayRevision === revision && !overlay.hidden && !overlay.classList.contains('closing');
+              const work = Promise.resolve().then(() => started.retry()).then(async opened => {
+                if (opened !== true || !ownsPage()) return false;
+                completed = await finishPublishedDeparture(ownsPage);
+                return completed;
+              }).finally(() => { if (completion === work) completion = null; });
+              completion = work;
+              return work;
+            },
+          };
+        }
+        return finishPublishedDeparture(() => stage.isConnected && document.getElementById('depMain') === stage &&
+          !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'));
       },
     });
     entry = { slot, current, picked:false, promise: null };
@@ -209,7 +260,7 @@ function renderDepartureCard(card) {
         [[icon:${p.icon}]] <b>${esc(p.name)}</b><span class="pet-chip-lv">Lv.${B.petLevel(p.id)}</span>
       </button>`;
     }).join('');
-    const capacityHtml = `[[icon:bag]] 已装 <b>${slots}/${preview.capacity}</b> 格${full ? ' · 背包已满' : ` · 余 ${preview.capacity - slots} 格`}`;
+    const capacityHtml = `[[icon:bag]] 已装 <b>${slots}/${preview.capacity}</b> 格${preview.resourceBonus ? ` · 普通 ${preview.ordinarySlots}/${preview.baseCapacity} 格` : ''}${!preview.capacityOk ? ' · 请调整超出容量的卡牌' : full ? ' · 背包已满' : ` · 余 ${preview.capacity - slots} 格`}`;
     const summaryHtml = `<b>${esc(MODES[B.data.selMode]?.name || '标准模式')}</b> · ${esc(preview.starter.name)} ×${preview.starterCount} · 额外 ${preview.extraCount} 张<br>入城随机获得最多 2 张不同职业卡，实际占格届时计入<br>${B.carriedPet() ? esc(B.carriedPet().desc) : '无宠物加成'}${B.safeCap ? ` · 安全格 ${B.safeCap()} 格` : ''}${preview.resourceBonus ? ` · 珍珠盒额外 ${preview.resourceBonus} 格仅放资源卡` : ''}`;
     const currentStage = document.getElementById('depMain');
     if (!deployJustOpened && currentStage?.dataset.departureView === 'cover-v3'
@@ -219,7 +270,7 @@ function renderDepartureCard(card) {
         slots, capacity: preview.capacity, capacityHtml, hint: deployHint,
         summaryHtml, petId: B.carriedPet()?.id || '', rich: html => SDT.Icons.rich(html),
       });
-      if (updated !== false) { syncRecommendationButtons(currentStage); return; }
+      if (updated !== false) { syncDepartureActions(currentStage); return; }
     }
     const bagCells = Array.from({ length:Math.max(preview.capacity, preview.cells.length) }, (_, i) => renderCell(preview.cells[i])).join('');
     UI.showOverlay('', `
@@ -256,9 +307,9 @@ function renderDepartureCard(card) {
           <button id="btnDeploy" class="ui-control" data-act="confirmDeploy">出发 <span aria-hidden="true">→</span></button>
         </footer>
       </div>`, 'page');
-    const stage = document.getElementById('depMain'), slot = B.slot, generation = departureGeneration;
-    syncRecommendationButtons(stage);
-    const current = () => generation === departureGeneration && SDT.Base.slot === slot && stage?.isConnected
+    const stage = document.getElementById('depMain'), slot = B.slot, generation = departureGeneration, baseGeneration = B._selectionGeneration;
+    syncDepartureActions(stage);
+    const current = () => generation === departureGeneration && SDT.Base === B && B._selectionGeneration === baseGeneration && B.slot === slot && stage?.isConnected
       && document.getElementById('depMain') === stage && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
     const act = (name, handler) => UI.act(name, data => { if (current()) return handler(data); });
     const signature = recommendationSignature;
@@ -303,7 +354,6 @@ function renderDepartureCard(card) {
       const stack = findDepartureStack(B2.data.stash, key);
       if (!stack) return;
       key = departureStackKey(stack);
-      const name = stack.card.name;
       if (stack.card.rarity === '职业') {
         deployHint = '[[icon:cross]] 职业卡不能带入对局——可在仓库归档培养或出售。';
         renderDepartPrep();
@@ -311,17 +361,9 @@ function renderDepartureCard(card) {
       }
       const cur = deployPick[key] || 0;
       if (cur >= stack.count) return;
-      // 同名每格叠放上限（装备 1，其余 3，见 game.session stackCapOf；局内第 cap+1 张起另占一格）——
-      // 整备来源上按此封顶（2026-09-19 审计）；预设路径的超限多占格已改由 previewDeployment 分段计入（A3-PREP-02）
-      const stackCap = game.stackCapOf ? game.stackCapOf(stack.card) : 3;
-      const sameNameCount = Object.entries(deployPick).reduce((sum, [pickedKey, count]) => sum + (findDepartureStack(B2.data.stash, pickedKey)?.card.name === name ? count : 0), 0);
-      if (sameNameCount >= stackCap) {
-        deployHint = `[[icon:cross]] 整备同名卡牌最多携带 ${stackCap} 张（每格上限）。`;
-        renderDepartPrep();
-        return;
-      }
-      if (sameNameCount === 0 && deploySlotsUsed() >= B2.bagCap()) {
-        deployHint = `[[icon:bag]] 背包格数已满（${B2.bagCap()} 格）——先移出其他卡牌，或回基地用木材扩建背包。`;
+      const next = departureSummary({ ...departureOptions(), picks:{ ...deployPick, [key]:cur + 1 } });
+      if (!next.capacityOk) {
+        deployHint = `[[icon:bag]] ${stack.card.type === '资源' ? '资源可用格已满' : '普通背包格已满'}；先移出其他卡牌，或回基地扩建背包。`;
         renderDepartPrep();
         return;
       }
@@ -335,6 +377,13 @@ function renderDepartureCard(card) {
       key = stack ? departureStackKey(stack) : key;
       const cur = deployPick[key] || 0;
       if (cur <= 0) return;
+      const before = departurePreview();
+      const next = departureSummary({ ...departureOptions(), picks:{ ...deployPick, [key]:cur - 1 } });
+      if (next.capacity < before.capacity && !next.capacityOk) {
+        deployHint = '移出容器会减少资源专用格，请先移出超出的资源卡。';
+        renderDepartPrep();
+        return false;
+      }
       deployPick[key] = cur - 1;
       deployHint = '';
       renderDepartPrep();
@@ -345,30 +394,78 @@ function renderDepartureCard(card) {
     act('depPet', async (d) => {
       if (petSelecting) return false;
       petSelecting = true;
-      let selected;
-      try { selected = await B.setPet(d.id); }
-      catch { selected = false; }
-      finally { petSelecting = false; }
-      if (!current()) return false;
-      if (!selected) { UI.log('伙伴选择未保存，请重试。', 'warn'); return false; }
-      Sfx.tick();
-      const pet = SDT.Base.petById(d.id);
-      UI.log(`[[icon:paw]] 本局携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc)}`, 'ok');
-      renderDepartPrep();
+      stage.dataset.petSaving = 'true';
+      const release = holdHubOperationControls(stage.querySelectorAll('[data-act="depPet"], [data-act="confirmDeploy"]'));
+      const pet = B.petById(d.id);
+      try {
+        return await runHubOperation({
+          run:() => B.setPet(d.id), isCurrent:current,
+          notice:message => {
+            deployHint = esc(message);
+            const status = /** @type {HTMLElement} */ (stage.querySelector('#depStatus'));
+            if (status) { status.hidden = !message; status.textContent = message; }
+          },
+          pending:'正在保存携带伙伴…', success:() => `已携带${pet.name} · 安全格 ${B.safeCap()} 格`,
+          failure:'伙伴选择未保存，请重试。',
+          onSuccess:() => { Sfx.tick(); UI.log(`[[icon:paw]] 本局携带伙伴<b>「${esc(pet.name)}」</b>：${esc(pet.desc)}`, 'ok'); },
+          refresh:renderDepartPrep,
+        });
+      } finally {
+        petSelecting = false; delete stage.dataset.petSaving; release();
+        if (current()) syncDepartureActions(stage);
+      }
     });
     // 放大层只展示卡面；额外携带卡拖回左侧移除。
     act('bagZoom', (d) => {
-      const preview = departurePreview();
-      const isSha = preview.starter.name === d.name;
-      const extra = deployPick[d.stackKey || d.name] || 0;
-      const n = (isSha ? preview.starterCount : 0) + extra;
-      if (n <= 0) return;
-      const stack = isSha ? { card: preview.starter } : findDepartureStack(B.data.stash, d.stackKey || d.name);
-      if (!stack) return;
-      UI.showCardZoom(stack.card, {
-        // 初始攻击固定携带：详情只读，不给「移出背包」按钮（2026-09-07 留言：初始攻击也要能点击详情）
-        footer: '',
-      });
+      const sameContext = captureBattleContext(game), baseGeneration = B._selectionGeneration;
+      const picks = deployPick, picked = JSON.stringify(picks);
+      const zoomCurrent = () => current() && sameContext() && SDT.Base === B
+        && B._selectionGeneration === baseGeneration && deploymentSlot === slot
+        && deployPick === picks && JSON.stringify(deployPick) === picked;
+      const carried = () => {
+        if (!zoomCurrent()) return [];
+        const preview = departurePreview();
+        const selected = Object.entries(deployPick || {}).flatMap(([key, count]) => {
+          const stack = findDepartureStack(B.data.stash, key);
+          return Math.floor(Number(count) || 0) > 0 && stack?.count > 0 && stack.card.rarity !== '职业'
+            ? [{ key:departureStackKey(stack), card:stack.card }] : [];
+        });
+        // 整备格按同名合并；浏览仍保留每个正式卡堆的 variant 身份，顺序沿当前格序。
+        return [...new Set(preview.cells.map(cell => cell.card.name))].flatMap(name => [
+          ...(name === preview.starter.name && preview.starterCount > 0 ? [{ key:null, card:preview.starter }] : []),
+          ...selected.filter(row => row.card.name === name),
+        ]);
+      };
+      const sourceFor = row => {
+        const cells = /** @type {HTMLElement[]} */ ([...stage.querySelectorAll('#depBag [data-act="bagZoom"]')]);
+        return cells.find(cell => cell.dataset === d && (row.key ? cell.dataset.stackKey === row.key : !cell.dataset.stackKey && cell.dataset.name === row.card.name))
+          || cells.find(cell => row.key ? cell.dataset.stackKey === row.key : !cell.dataset.stackKey && cell.dataset.name === row.card.name)
+          || cells.find(cell => cell.dataset.name === row.card.name);
+      };
+      const open = key => {
+        if (!zoomCurrent()) return false;
+        const rows = carried(), row = rows.find(item => item.key === key);
+        if (!row) return false;
+        const from = sourceFor(row);
+        if (!from?.isConnected) return false;
+        UI.showCardZoom(row.card, {
+          // 初始攻击与额外携带均只读；移除继续使用原有拖回仓库操作。
+          footer:'', from, returnFocus:from,
+          getItems:() => carried().map(item => item.card),
+          getIndex:() => carried().findIndex(item => item.key === key),
+          canNavigate:zoomCurrent,
+          onBrowse:(card, index) => {
+            const next = carried()[index];
+            if (next?.card === card) return open(next.key);
+            return false;
+          },
+          onReopen:() => open(key),
+          createReferenceOptions:() => ({ canNavigate:zoomCurrent }),
+        });
+        return true;
+      };
+      const key = d.stackKey || (departurePreview().starter.name === d.name ? null : d.name);
+      return open(key);
     });
     // 拖拽：仓库卡面 → 背包格带入；背包卡面拖回仓库区移除
     const pool = document.getElementById('depPool');
@@ -435,11 +532,12 @@ function renderDepartureCard(card) {
       });
     }
     act('confirmDeploy', () => {
-      if (deploySubmitting || !deployStart) return;
+      if (deploySubmitting || !deployStart || stage.dataset.petSaving === 'true' || !departurePreview().capacityOk) return false;
       deploySubmitting = true;
-      const button = /** @type {HTMLButtonElement} */ (/** @type {HTMLButtonElement} */ (/** @type {HTMLButtonElement} */ (/** @type {HTMLButtonElement} */ (document.querySelector('#depMain [data-act="confirmDeploy"]')))));
+      const button = /** @type {HTMLButtonElement} */ (document.querySelector('#depMain [data-act="confirmDeploy"]'));
       if (button) button.disabled = true;
-      SDT.Sound.sfx('prepReady');
+      try { SDT.Sound.sfx('prepReady'); }
+      catch (error) { console.warn('[departure] 整备音效未完成', error); }
       if (!deployStart) return;
       const startChoice = deployStart;
       const recover = error => {
@@ -465,8 +563,10 @@ function renderDepartureCard(card) {
     return JSON.stringify([SDT.Base.slot, SDT.Base.data.selMode, SDT.Base.carriedPet()?.id, SDT.Base.bagCap(), departurePreview().starterCount,
       SDT.Base.data.stash.map(stack => [departureStackKey(stack), stack.count, stack.card.name, stack.card.rarity]), deployPick]);
   }
-  function syncRecommendationButtons(root) {
+  function syncDepartureActions(root) {
     if (!root) return;
+    const confirm = root.querySelector('[data-act="confirmDeploy"]');
+    if (confirm) confirm.disabled = deploySubmitting || root.dataset.petSaving === 'true' || !departurePreview().capacityOk;
     let buttons = recommendationViews.get(root);
     if (!buttons || [buttons.apply, buttons.undo].some(node => node && !root.contains(node))) {
       const panel = root.getElementsByClassName('dep-recommend')[0];
@@ -491,8 +591,6 @@ function renderDepartureCard(card) {
       stash: B.data.stash, picks: deployPick, capacity: B.bagCap(),
       stackCapOf: game.stackCapOf || stackCapOf };
   }
-  function deploySlotsUsed() { return departurePreview().slots; }
-
   // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗区 + 物资 ——
 
 export { hubDeployHTML, openDepartPrep, deployPick, setDeployPick };

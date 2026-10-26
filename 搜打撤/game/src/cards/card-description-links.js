@@ -76,23 +76,28 @@ export function createCardDescriptionRenderer(cards = []) {
     for (const [token, link] of replacements) html = html.split(token).join(link);
     return html;
   }
+  // Resolved copy keeps battle values and state expansion at the owning display entry.
+  const renderResolved = (value, currentId, query = '') => {
+    const text = String(value || '');
+    const queryText = query.trim();
+    const needle = queryText.toLowerCase();
+    const key = JSON.stringify([String(currentId), text, queryText]);
+    if (renderCache.has(key)) return renderCache.get(key);
+    const pieces = needle ? text.match(/[^。！？；;\n]+[。！？；;\n]*|[。！？；;\n]+/g) || [] : null;
+    const html = pieces ? pieces.map(piece => {
+      const html = fragment(piece, currentId, queryText);
+      return piece.toLowerCase().includes(needle)
+        ? '<span class="studio-search-sentence">' + html + '</span>' : html;
+    }).join('') : fragment(text, currentId, '');
+    if (renderCache.size >= 128) renderCache.delete(renderCache.keys().next().value);
+    renderCache.set(key, html);
+    return html;
+  };
   return {
     getCard: id => byId.get(String(id)) || null,
-    render(value, currentId, query = '') {
-      const text = displayCardDescription(value, currentId, byId.get(String(currentId)));
-      const queryText = query.trim();
-      const needle = queryText.toLowerCase();
-      const key = JSON.stringify([String(currentId), text, queryText]);
-      if (renderCache.has(key)) return renderCache.get(key);
-      const pieces = needle ? text.match(/[^。！？；;\n]+[。！？；;\n]*|[。！？；;\n]+/g) || [] : null;
-      const html = pieces ? pieces.map(piece => {
-        const html = fragment(piece, currentId, queryText);
-        return piece.toLowerCase().includes(needle)
-          ? '<span class="studio-search-sentence">' + html + '</span>' : html;
-      }).join('') : fragment(text, currentId, '');
-      if (renderCache.size >= 128) renderCache.delete(renderCache.keys().next().value);
-      renderCache.set(key, html);
-      return html;
+    render(value, currentId, query = '', card = byId.get(String(currentId))) {
+      return renderResolved(displayCardDescription(value, currentId, card), currentId, query);
     },
+    renderResolved,
   };
 }

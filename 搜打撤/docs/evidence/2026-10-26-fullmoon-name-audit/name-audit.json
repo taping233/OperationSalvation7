@@ -1,0 +1,699 @@
+{
+  "effectiveCards": 291,
+  "checkedAliases": 65,
+  "scanFiles": 767,
+  "pairs": [
+    {
+      "id": "tt-keys-bunch",
+      "old": "一串钥匙",
+      "current": "两把钥匙"
+    },
+    {
+      "id": "tt2-apollo",
+      "old": "阿波罗的礼物",
+      "current": "阿猫的礼物"
+    },
+    {
+      "id": "tt2-wreck",
+      "old": "沉船宝藏",
+      "current": "沉船宝盒"
+    },
+    {
+      "id": "tt2-venomstaff",
+      "old": "毒木杖",
+      "current": "毒杖"
+    },
+    {
+      "id": "tt2-turtlearmor",
+      "old": "龟寿甲",
+      "current": "铸甲"
+    },
+    {
+      "id": "tt3-frostfall",
+      "old": "剑落纷霜",
+      "current": "剑荡妖邪"
+    },
+    {
+      "id": "tt3-blue-potion",
+      "old": "蓝瓶药水",
+      "current": "恢复药水"
+    },
+    {
+      "id": "tt3-flame-storm",
+      "old": "火焰风暴",
+      "current": "风暴火球"
+    },
+    {
+      "id": "tt3-nature-form",
+      "old": "自然升华",
+      "current": "满月形态"
+    },
+    {
+      "id": "tt3-python-potion",
+      "old": "巨蟒药水",
+      "current": "火焰药水"
+    },
+    {
+      "id": "tt3-houyi-potion",
+      "old": "后羿药水",
+      "current": "狂暴药水"
+    },
+    {
+      "id": "tt3-iceheart-potion",
+      "old": "冰心药水",
+      "current": "冰冻药水"
+    },
+    {
+      "id": "tt3-demon-potion",
+      "old": "魔化药水",
+      "current": "法力药水"
+    },
+    {
+      "id": "tt3-nuke-ray",
+      "old": "核爆射线",
+      "current": "致命射线"
+    },
+    {
+      "id": "tt3-turnabout-potion",
+      "old": "转势药水",
+      "current": "剧毒药水"
+    },
+    {
+      "id": "tt3-mixed-potion",
+      "old": "混血药水",
+      "current": "流血药水"
+    },
+    {
+      "id": "tt3sp-magicoil",
+      "old": "魔法药水",
+      "current": "药水魔法"
+    },
+    {
+      "id": "tt3sp-bloodstorm",
+      "old": "血腥风暴",
+      "current": "血蝠风暴"
+    },
+    {
+      "id": "tt3-immortal-blade",
+      "old": "不朽神剑",
+      "current": "骷髅王剑"
+    },
+    {
+      "id": "tt3-master-staff",
+      "old": "大师的神杖",
+      "current": "大法师之杖"
+    },
+    {
+      "id": "tt3-silver-runesword",
+      "old": "魔纹银剑",
+      "current": "诅咒之剑"
+    },
+    {
+      "id": "tt3-sapper-bomb",
+      "old": "石工炸药",
+      "current": "矿工炸药"
+    },
+    {
+      "id": "tt3-twinwater-mail",
+      "old": "二水甲",
+      "current": "冰甲"
+    },
+    {
+      "id": "tt3-deep-diary",
+      "old": "深衍日记",
+      "current": "深海咒印"
+    },
+    {
+      "id": "tt3-garnet-marble",
+      "old": "石榴石弹珠",
+      "current": "石榴弹珠"
+    },
+    {
+      "id": "tt6-demondeal",
+      "old": "恶魔交易",
+      "current": "受困运输队"
+    },
+    {
+      "id": "tt6-bandits",
+      "old": "盗匪横行",
+      "current": "武装截查"
+    },
+    {
+      "id": "tt6-mystery",
+      "old": "神秘补给",
+      "current": "失联配给柜"
+    },
+    {
+      "id": "tt6-relief",
+      "old": "爱心救济站",
+      "current": "隔离线急救"
+    },
+    {
+      "id": "tt6-airdrop",
+      "old": "空中补给",
+      "current": "封锁区投送"
+    },
+    {
+      "id": "tt6-systemsupply",
+      "old": "系统补给",
+      "current": "撤离登记台"
+    },
+    {
+      "id": "tt8-hero-sealer",
+      "old": "邪渊主宰",
+      "current": "受缚之残影"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "old": "修鞋铺",
+      "current": "战地整备"
+    },
+    {
+      "id": "foe-archer",
+      "old": "联邦射手",
+      "current": "封锁线枪手"
+    },
+    {
+      "id": "foe-bandit",
+      "old": "反抗组织拾荒者",
+      "current": "截道拾荒者"
+    },
+    {
+      "id": "foe-cavalry",
+      "old": "联邦机动兵",
+      "current": "封锁线突击兵"
+    },
+    {
+      "id": "foe-wolf_rider",
+      "old": "变异雪狼",
+      "current": "裂颚匍行体"
+    },
+    {
+      "id": "foe-orc_axe",
+      "old": "甲壳变异体",
+      "current": "板壳畸变体"
+    },
+    {
+      "id": "foe-fire_el",
+      "old": "灼热异变体",
+      "current": "灼囊畸变体"
+    },
+    {
+      "id": "foe-water_el",
+      "old": "腐蚀异变体",
+      "current": "渗蚀畸变体"
+    },
+    {
+      "id": "foe-grass_el",
+      "old": "滋生异变体",
+      "current": "囊生畸变体"
+    },
+    {
+      "id": "foe-dragon",
+      "old": "巨兽「荒渊」",
+      "current": "封街巨躯"
+    },
+    {
+      "id": "foe-boss_general",
+      "old": "肃清总督",
+      "current": "封控指挥官"
+    },
+    {
+      "id": "foe-boss_orc",
+      "old": "变异巢母",
+      "current": "囊巢母体"
+    },
+    {
+      "id": "foe-boss_elem",
+      "old": "异能领主",
+      "current": "隔离区看守"
+    },
+    {
+      "id": "tt6-demondeal",
+      "old": "隧道血契",
+      "current": "受困运输队"
+    },
+    {
+      "id": "tt6-bandits",
+      "old": "暴雨劫道",
+      "current": "武装截查"
+    },
+    {
+      "id": "tt6-mystery",
+      "old": "实验室余粮",
+      "current": "失联配给柜"
+    },
+    {
+      "id": "tt6-goldmine",
+      "old": "塌方采掘点",
+      "current": "塌陷地下库"
+    },
+    {
+      "id": "tt6-goldhammer",
+      "old": "满电动力锤",
+      "current": "中断的接应"
+    },
+    {
+      "id": "tt6-relief",
+      "old": "临时救护站",
+      "current": "隔离线急救"
+    },
+    {
+      "id": "tt6-airdrop",
+      "old": "污染空投箱",
+      "current": "封锁区投送"
+    },
+    {
+      "id": "tt6-chestdraw",
+      "old": "熔断物资箱",
+      "current": "封存储备库"
+    },
+    {
+      "id": "tt6-systemsupply",
+      "old": "末班配送无人机",
+      "current": "撤离登记台"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "old": "巷口修鞋匠",
+      "current": "战地整备"
+    },
+    {
+      "id": "ev19-vital",
+      "old": "高压急救",
+      "current": "封存针剂"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "old": "遗落的珍珠匣",
+      "current": "撤离遗存"
+    },
+    {
+      "id": "ev19-fireballs",
+      "old": "双焰走私",
+      "current": "封装火种"
+    },
+    {
+      "id": "ev19-classchest",
+      "old": "黑箱调拨",
+      "current": "无署名封条"
+    },
+    {
+      "id": "ev19-recode",
+      "old": "故障重编",
+      "current": "异常改装台"
+    },
+    {
+      "id": "ev19-potions",
+      "old": "避难市集药摊",
+      "current": "应急药品站"
+    },
+    {
+      "id": "ev19-arrows",
+      "old": "海堤箭库",
+      "current": "撤防射击位"
+    },
+    {
+      "id": "ev19-gamble",
+      "old": "地下商场黑市",
+      "current": "暗巷赌约"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "old": "装备征用令",
+      "current": "转运军需"
+    },
+    {
+      "id": "tt3-nature-form",
+      "old": "自然形态",
+      "current": "满月形态"
+    }
+  ],
+  "findings": [
+    {
+      "id": "tt-keys-bunch",
+      "old": "一串钥匙",
+      "current": "两把钥匙",
+      "file": "game/src/hub/base.js",
+      "line": 743,
+      "text": "// 钥匙计数：真实钥匙储备 + 仓库里的钥匙类卡牌（「一串钥匙」= 2 把，其余钥匙 = 1 把）",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt3-immortal-blade",
+      "old": "不朽神剑",
+      "current": "骷髅王剑",
+      "file": "game/src/battle/core/battle.core.js",
+      "line": 103,
+      "text": "// 「'杀'化为X」战斗规则（不朽神剑/青龙偃月斩，打出初始攻击时替换）",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt3-immortal-blade",
+      "old": "不朽神剑",
+      "current": "骷髅王剑",
+      "file": "game/src/battle/effects/effect-steps.rules.js",
+      "line": 9,
+      "text": "id: 'rule.shaTransform', gate: 'always', label: '「杀」化为另一张卡（不朽神剑/青龙化身）',",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt3-immortal-blade",
+      "old": "不朽神剑",
+      "current": "骷髅王剑",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 524,
+      "text": "// 同一奖励内不得重复（2026-09-13 老板口径）：传说装备卡（不朽神剑/混沌之眼等）同时",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-demondeal",
+      "old": "恶魔交易",
+      "current": "受困运输队",
+      "file": "docs/terminology.md",
+      "line": 15,
+      "text": "| 小型物资箱 / 密封物资箱 / 军用保险柜 | 搜刮点内三档物资容器的实装名；**单指容器时用实装名**（如恶魔交易「获得 1 个军用保险柜」）；列举语境可用小/中/大，首次出现注明映射（docs/rules.md §1） |",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-bandits",
+      "old": "盗匪横行",
+      "current": "武装截查",
+      "file": "docs/game-compendium.md",
+      "line": 355,
+      "text": "| 截道拾荒者 | 0 | 衍生 | 通用 | 攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（盗匪横行 ×5）。 |",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-bandits",
+      "old": "盗匪横行",
+      "current": "武装截查",
+      "file": "game/src/core/art.js",
+      "line": 23,
+      "text": "// 盗匪横行用既有 event-bandits-anime-v2.webp；creature 映射只覆盖 foe-* 立绘外的图鉴生物。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-bandits",
+      "old": "盗匪横行",
+      "current": "武装截查",
+      "file": "game/src/hub/game.bag.settle.js",
+      "line": 347,
+      "text": "// 事件奖励（如盗匪横行的密封物资箱 ×2，开真搜刮点）",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt8-hero-sealer",
+      "old": "邪渊主宰",
+      "current": "受缚之残影",
+      "file": "game/src/cards/cards.consts.js",
+      "line": 37,
+      "text": "const CC_KEY = 'sdt-cards-cc3-seeded';         // 职业整合迁移（2026-09-05 定版）：11 职业 → 5 职业，逐卡改归属；v2：邪渊主宰·妲莉薇特改归降临者并撤下「九尾焚天·妲」占位卡；v3：奥术残卷归法师、黑暗吊坠归降临者（2026-09-09 老板拍板收编）",
+      "classification": "historical"
+    },
+    {
+      "id": "foe-archer",
+      "old": "联邦射手",
+      "current": "封锁线枪手",
+      "file": "docs/modules/R7-A-DELIVERY.md",
+      "line": 5,
+      "text": "L2 新增固定双人组：联邦射手（5攻3血）+联邦机动兵（5攻6血）。两者不增加新AI；差异来自低血快速减员与厚血目标投入。L2/L3 原来暗示蓄力、冲锋、防守的 strategy 已改为玩家实际可感知的攻击、生命与减员取舍。",
+      "classification": "historical"
+    },
+    {
+      "id": "foe-archer",
+      "old": "联邦射手",
+      "current": "封锁线枪手",
+      "file": "game/src/battle/view/battle.layers.js",
+      "line": 827,
+      "text": "'联邦射手': 'assets/portraits/allies/federal-shooter-v1.webp',",
+      "classification": "compatibility"
+    },
+    {
+      "id": "foe-bandit",
+      "old": "反抗组织拾荒者",
+      "current": "截道拾荒者",
+      "file": "docs/rules.md",
+      "line": 46,
+      "text": "- 事件「暴雨劫道」可选择逃离，不进入战斗也不领奖；选择迎战时，反抗组织拾荒者数量随层数缩放（第 1 层 ×3 → 第 3 层起 ×5），战胜奖励密封物资箱 ×2；事件战斗不受常规遭遇的 2-3 只区间限制。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-cavalry",
+      "old": "联邦机动兵",
+      "current": "封锁线突击兵",
+      "file": "docs/modules/R7-A-DELIVERY.md",
+      "line": 5,
+      "text": "L2 新增固定双人组：联邦射手（5攻3血）+联邦机动兵（5攻6血）。两者不增加新AI；差异来自低血快速减员与厚血目标投入。L2/L3 原来暗示蓄力、冲锋、防守的 strategy 已改为玩家实际可感知的攻击、生命与减员取舍。",
+      "classification": "historical"
+    },
+    {
+      "id": "foe-fire_el",
+      "old": "灼热异变体",
+      "current": "灼囊畸变体",
+      "file": "docs/modules/R7-A-DELIVERY.md",
+      "line": 7,
+      "text": "L4 新增固定双人组：灼热异变体（10攻7血，普通攻击）+滋生异变体（5攻12血，实际造成伤害后附1层随机诅咒）。没有穿透伤害时不附状态，未修改原状态时钟。",
+      "classification": "historical"
+    },
+    {
+      "id": "foe-fire_el",
+      "old": "灼热异变体",
+      "current": "灼囊畸变体",
+      "file": "docs/rules.md",
+      "line": 93,
+      "text": "- 诅咒包括流血、中毒、冰冻、沉默、破甲、禁疗和攻击降低；净化清除全部诅咒。被冰冻的敌人头顶显示「冰冻·无法行动」专用图标，替代原攻击预告。灼烧已移除，不再施加、计入随机诅咒或结算伤害；旧战斗存档中的遗留状态在状态初始化时清理。灼热异变体与烛火改为普通攻击，攻击力与生命不变。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-grass_el",
+      "old": "滋生异变体",
+      "current": "囊生畸变体",
+      "file": "docs/modules/R7-A-DELIVERY.md",
+      "line": 7,
+      "text": "L4 新增固定双人组：灼热异变体（10攻7血，普通攻击）+滋生异变体（5攻12血，实际造成伤害后附1层随机诅咒）。没有穿透伤害时不附状态，未修改原状态时钟。",
+      "classification": "historical"
+    },
+    {
+      "id": "foe-grass_el",
+      "old": "滋生异变体",
+      "current": "囊生畸变体",
+      "file": "docs/rules.md",
+      "line": 28,
+      "text": "- 第 2 层另有射手与机动兵的双敌组合，第 4 层另有灼热与滋生异变体的双敌组合；每组各取一个敌人。精英突袭将适用远征模式缩放的敌人和首脑攻血乘 1.35 后以 `Math.round` 一次取整；倍率较原先降低 10%，取整后的每项整数数值不保证恰好降低 10%。遭遇数量、奖励公式与倍率不变，战斗结果变化仍可能影响整局所得；龙巢实验室沿用独立数值，不应用该模式缩放。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-grass_el",
+      "old": "滋生异变体",
+      "current": "囊生畸变体",
+      "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "line": 338,
+      "text": "// 行为型附加：滋生异变体（攻击并施加诅咒）",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-grass_el",
+      "old": "滋生异变体",
+      "current": "囊生畸变体",
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "line": 841,
+      "text": "// 附加 1 层随机诅咒（滋生异变体「攻击并施加诅咒」用）",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-dragon",
+      "old": "巨兽「荒渊」",
+      "current": "封街巨躯",
+      "file": "docs/rules.md",
+      "line": 35,
+      "text": "巨兽「荒渊」击败奖励 2 个军用保险柜，另有 30% 概率额外 1 张传说卡。开箱掉币：小 1 币、中 1-2 币、大 2-3 币。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-dragon",
+      "old": "巨兽「荒渊」",
+      "current": "封街巨躯",
+      "file": "game/src/run/chests.js",
+      "line": 254,
+      "text": "// 巨兽「荒渊」（第 3/4 层精英，2026-09-09 玩法定版）：固定奖励 2 个军用保险柜",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-boss_general",
+      "old": "肃清总督",
+      "current": "封控指挥官",
+      "file": "docs/rules.md",
+      "line": 45,
+      "text": "- 首脑格需先激活祭坛。标准模式随机选择肃清总督 5-50、变异巢母 4-45 或异能领主 8-48，进入时告知；精英模式按上方倍率缩放。编组与战斗规则见第 3 节。胜利后终局撤离点放行，奖励首脑保险柜（5 张随机卡牌）和 1 张传说卡。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-boss_general",
+      "old": "肃清总督",
+      "current": "封控指挥官",
+      "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "line": 385,
+      "text": "// 军威（肃清总督）：回合结束时攻击力 +2",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-boss_orc",
+      "old": "变异巢母",
+      "current": "囊巢母体",
+      "file": "docs/rules.md",
+      "line": 45,
+      "text": "- 首脑格需先激活祭坛。标准模式随机选择肃清总督 5-50、变异巢母 4-45 或异能领主 8-48，进入时告知；精英模式按上方倍率缩放。编组与战斗规则见第 3 节。胜利后终局撤离点放行，奖励首脑保险柜（5 张随机卡牌）和 1 张传说卡。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-boss_orc",
+      "old": "变异巢母",
+      "current": "囊巢母体",
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "line": 833,
+      "text": "// 附加 1 层流血或中毒（变异巢母狂乱用）",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-boss_elem",
+      "old": "异能领主",
+      "current": "隔离区看守",
+      "file": "docs/modules/R3-A-PREVIEW-CONTRACT-PLAN.md",
+      "line": 54,
+      "text": "- 异能领主 `affix=aegis + turn + abreak`：复用战斗层计算出的 `aegisBlocked` 布尔上下文，不在预览模块另写回合奇偶公式。",
+      "classification": "historical"
+    },
+    {
+      "id": "foe-boss_elem",
+      "old": "异能领主",
+      "current": "隔离区看守",
+      "file": "docs/modules/R3-A-PREVIEW-CONTRACT-PLAN.md",
+      "line": 122,
+      "text": "- 至少覆盖：攻击/法术/固定单段；闪避后第二段命中；首段耗尽护盾、后段扣血；护甲/格挡/减伤/破甲/免伤/潜行；异能领主庇幕开/关。",
+      "classification": "historical"
+    },
+    {
+      "id": "foe-boss_elem",
+      "old": "异能领主",
+      "current": "隔离区看守",
+      "file": "docs/rules.md",
+      "line": 45,
+      "text": "- 首脑格需先激活祭坛。标准模式随机选择肃清总督 5-50、变异巢母 4-45 或异能领主 8-48，进入时告知；精英模式按上方倍率缩放。编组与战斗规则见第 3 节。胜利后终局撤离点放行，奖励首脑保险柜（5 张随机卡牌）和 1 张传说卡。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "foe-boss_elem",
+      "old": "异能领主",
+      "current": "隔离区看守",
+      "file": "game/src/battle/core/battle.damage.domain.js",
+      "line": 14,
+      "text": "// 敌人免伤判定（异能领主：偶数回合全免伤，破甲克制）",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-demondeal",
+      "old": "隧道血契",
+      "current": "受困运输队",
+      "file": "docs/rules.md",
+      "line": 98,
+      "text": "- 隧道血契损失5点生命，塌方采掘点深挖损失3点生命，均足额扣除并可致死。致死接入非战斗死亡结算，不继续开箱或回到可操作地图。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-bandits",
+      "old": "暴雨劫道",
+      "current": "武装截查",
+      "file": "docs/modules/R6-A-DELIVERY.md",
+      "line": 53,
+      "text": "- QA01：第一局L2事件3→第一段，结果页刷新后点原节点恢复同一结果；背包在选择页/结果页均正确回到原页；同局下一事件是原暴雨劫道，没有读第二段。正常战死后基地1/3。第二局L2事件12→第二段，正常放弃后2/3。第三局L2事件2→开放远射，放弃回基地实际显示“北门远灯记录”。",
+      "classification": "historical"
+    },
+    {
+      "id": "tt6-bandits",
+      "old": "暴雨劫道",
+      "current": "武装截查",
+      "file": "docs/rules.md",
+      "line": 46,
+      "text": "- 事件「暴雨劫道」可选择逃离，不进入战斗也不领奖；选择迎战时，反抗组织拾荒者数量随层数缩放（第 1 层 ×3 → 第 3 层起 ×5），战胜奖励密封物资箱 ×2；事件战斗不受常规遭遇的 2-3 只区间限制。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-mystery",
+      "old": "实验室余粮",
+      "current": "失联配给柜",
+      "file": "docs/rules.md",
+      "line": 126,
+      "text": "- 实验室余粮可投骰领取或离开：六面骰1～3点获得员工通行证A碎片×1，4～6点获得3币。临时救护站可回复6血，或放弃治疗，投骰获得一张普通随机池中的武术/法术牌。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-goldmine",
+      "old": "塌方采掘点",
+      "current": "塌陷地下库",
+      "file": "docs/rules.md",
+      "line": 98,
+      "text": "- 隧道血契损失5点生命，塌方采掘点深挖损失3点生命，均足额扣除并可致死。致死接入非战斗死亡结算，不继续开箱或回到可操作地图。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-goldhammer",
+      "old": "满电动力锤",
+      "current": "中断的接应",
+      "file": "docs/rules.md",
+      "line": 127,
+      "text": "- 满电动力锤可领取闪金之锤，或接受送信委托，两项互斥。接受后下一次进店先播放交付剧情，由玩家投骰选出两个不同的未售付费货位，改为免费并用金色边框标记；初始攻击和已免费货位不参与。免单与已售状态随本局保存，不在其他商店重复兑现；可免单货位不足两个时保留凭据至下一家。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-relief",
+      "old": "临时救护站",
+      "current": "隔离线急救",
+      "file": "docs/rules.md",
+      "line": 126,
+      "text": "- 实验室余粮可投骰领取或离开：六面骰1～3点获得员工通行证A碎片×1，4～6点获得3币。临时救护站可回复6血，或放弃治疗，投骰获得一张普通随机池中的武术/法术牌。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "tt6-chestdraw",
+      "old": "熔断物资箱",
+      "current": "封存储备库",
+      "file": "docs/rules.md",
+      "line": 128,
+      "text": "- 事件的随机药水、药摊/征用候选、箭库、故障重编和黑市货物由玩家投骰抽取；统一使用六面骰，停稳后顶面为结果；超过六个候选时先在后台不放回随机抽出六项，再展示点数规则供玩家投骰。少于六项时连续点数分组对应候选，具体概率以投骰前的规则为准。熔断物资箱用六面骰1～2点开小箱、3～4点开密封箱、5～6点开军用保险柜。黑市每次3币，六面骰1～3点落空、4～6点成功，第五次任意点数成功。已投点数、候选、付款与尝试次数随本局保存，暂离或读档不重投、不重复收费；搜刮点内部掉落继续使用通用搜刮点规则。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "ev19-recode",
+      "old": "故障重编",
+      "current": "异常改装台",
+      "file": "docs/rules.md",
+      "line": 128,
+      "text": "- 事件的随机药水、药摊/征用候选、箭库、故障重编和黑市货物由玩家投骰抽取；统一使用六面骰，停稳后顶面为结果；超过六个候选时先在后台不放回随机抽出六项，再展示点数规则供玩家投骰。少于六项时连续点数分组对应候选，具体概率以投骰前的规则为准。熔断物资箱用六面骰1～2点开小箱、3～4点开密封箱、5～6点开军用保险柜。黑市每次3币，六面骰1～3点落空、4～6点成功，第五次任意点数成功。已投点数、候选、付款与尝试次数随本局保存，暂离或读档不重投、不重复收费；搜刮点内部掉落继续使用通用搜刮点规则。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "ev19-recode",
+      "old": "故障重编",
+      "current": "异常改装台",
+      "file": "docs/rules.md",
+      "line": 129,
+      "text": "- 故障重编选择原卡时原地更新选中状态、数量与确认按钮，保留候选卡面、焦点和滚动；停留当前地点时关闭再打开选择页保留已选项。投骰产生的新卡在结果页浏览，确认后才替换原卡，同地点重开不重抽；成功前往下一地点后结束本次事件。",
+      "classification": "current-stale-reference"
+    },
+    {
+      "id": "ev19-gamble",
+      "old": "地下商场黑市",
+      "current": "暗巷赌约",
+      "file": "docs/save-format.md",
+      "line": 83,
+      "text": "地下商场黑市命中后，三张已确定奖品进入现有 `chestReward` 卡牌领奖快照；停留当前地点时，容量不足与部分领取均保留未领奖品。恢复沿用原奖品与已领索引，不重新投币或掷命中结果；成功前往下一地点后未领奖品作废，领奖页主动放弃仍沿用现有确认规则。",
+      "classification": "current-stale-reference"
+    }
+  ],
+  "summary": {
+    "currentReferences": 31,
+    "distinctOldNames": 20,
+    "historicalOrCompatible": 9
+  }
+}

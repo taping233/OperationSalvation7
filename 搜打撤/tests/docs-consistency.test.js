@@ -93,10 +93,10 @@ describe('文档一致性守卫', () => {
       expect(position, step).toBeGreaterThan(previous);
       previous = position;
     }
-    expect(example).toContain('空 index 或纯文档 skip 不是 passed receipt');
-    expect(example).toContain('已有明确提交授权');
+    expect(example).toContain('passed receipt 来自实际执行通过的检查，空 index 和纯文档 skip 单列状态');
+    expect(example).toContain('按明确提交授权和已核对计划执行');
     expect(example).toContain('$ship.receiptValidity.eligible');
-    expect(example).toContain('不自动重试');
+    expect(example).toContain('失败保留现场');
   });
 
   // 隔离快照只含已暂存文件且按 index 字节落盘，档案原文/链接可达在快照内不成立；staged 门内跳过，工作树门与 CI 覆盖。

@@ -24,6 +24,8 @@ const rows = [
   ['swaggerer',2,6,3,8], ['tin_mute',4,9,5,12], ['heavy_hammer',8,8,11,11],
   ['cultist',6,6,8,8], ['fake_apothecary',5,10,7,14], ['camo_sniper',7,4,9,5],
   ['boss_general',5,50,7,68], ['boss_orc',4,45,5,61], ['boss_elem',8,48,11,65],
+  ['boss_witness_pope',1,60,1,81], ['boss_mutation_mother',6,45,8,61],
+  ['boss_mysterious_blocker',5,55,7,74], ['boss_necromancer',5,75,7,101],
 ];
 const templates = [...Object.values(mapData.monsters), ...mapData.altar.bosses];
 

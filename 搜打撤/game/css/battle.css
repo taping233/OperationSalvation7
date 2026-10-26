@@ -189,22 +189,7 @@
 /* v0.32.1 修：能量球数字与 /上限 重叠、手牌底部被截断 */   /* 09-25：改百分比随球径缩放（原 8px/14px 在 56-88px 档压住数字） */
 
 /* ============ v0.32.2 战斗特效 + 性能 ============ */
-/* 伤害/受击飘字（挂在 overlay 层，躲过 ovBody 整块重建） */
-.sts-float{
-& { position:absolute; z-index:80; transform:translate(-50%,-50%); pointer-events:none;
-  font-family:var(--cal); font-size:30px; font-weight:900; letter-spacing:1px;
-  text-shadow:0 0 6px rgba(0,0,0,.9), 0 2px 4px rgba(0,0,0,.8);
-  animation:stsFloatUp .95s var(--ease-float) forwards; }
-&.phys { animation:none; }   /* 伤害数字走 JS 抛体（physicsFloat），抑制 CSS 上飘 */
-&.dmg { color:var(--fx-dmg); }
-&.hurt { color:var(--fx-dmg-strong); font-size:34px; }
-&.block { color:var(--fx-block); font-size:22px; }
-& small { display:block; font:700 11px/1.1 var(--cal); letter-spacing:.04em; color:#e4e1d8; }}
-@keyframes stsFloatUp {
-  0% { opacity:0; transform:translate(-50%,-30%) scale(.6); }
-  18% { opacity:1; transform:translate(-50%,-55%) scale(1.12); }
-  100% { opacity:0; transform:translate(-50%,-160%) scale(1); }
-}
+/* 战斗反馈由 battle-fx-art.css 的透明图集维护。 */
 /* 单位受击抖动走 WAAPI（battle.view.js stsShake/stsSelfHit）；旧 .fx-hit/.fx-hit-self
    CSS 类从未被挂载，2026-09-19 随死样式清理删除——新增受击表现请进 JS 抖动函数 */
 /* 全屏受击红闪（径向暗角） */
@@ -217,25 +202,6 @@
   100% { transform:translate(0,0); } }
 /* 性能：去掉名牌 backdrop-filter（大面积实时模糊是战斗卡顿主因之一），立绘上 GPU 层 */
 
-/* ============ v0.5 表情差分贴纸（零美术情绪反馈） ============ */
-/* 表情贴纸：Q 弹摔落式弹出，盖过数字飘字 */
-.sts-float.stk{
-& { font-size:42px; font-family:"Segoe UI Emoji","Noto Color Emoji",sans-serif;
-  font-weight:400; letter-spacing:0; text-shadow:0 3px 6px rgba(0,0,0,.6);
-  animation:stkPop 1s var(--ease-pop) forwards; }
-&.stk-late { opacity:0; animation-delay:.16s; }}
-@keyframes stkPop {
-  0% { opacity:0; transform:translate(-50%,-50%) scale(.2) rotate(-14deg); }
-  22% { opacity:1; transform:translate(-50%,-60%) scale(1.3) rotate(7deg); }
-  40% { transform:translate(-50%,-56%) scale(.95) rotate(-3deg); }
-  100% { opacity:0; transform:translate(-50%,-170%) scale(1.05) rotate(0deg); }
-}
-/* 治疗反馈：立绘暖光涌动 */
-.sts-figure.fx-warm { animation:fxWarm .9s ease; }
-@keyframes fxWarm {
-  0%,100% { filter:none; }
-  30% { filter:brightness(1.28) saturate(1.3) drop-shadow(0 0 18px rgba(130,200,235,.8)); }
-}
 /* BOSS 登场：竖线阴影自暗处压过场景 */
 .battle-stage.fx-dread .battle-stage-shade { animation:stsDread 2.4s ease forwards; }
 @keyframes stsDread {
@@ -283,18 +249,7 @@
 & .hs-card { font-size:16px; }   /* 与手牌内卡面同尺寸（脱离 .sts-hand 上下文后需补回） */
 & .bt-card { width:100%; height:100%; }}
 /* 回合标题由 feedback-theme.css 维护，与卡牌结果共用冬日色板。 */
-/* 命中特效贴图（NAI 生成，黑底 + screen 混合当发光层）：伤害=斩击，格挡/免伤=护盾碎裂 */
-.sts-impact{
-& { position:absolute; z-index:78; width:150px; height:150px; margin:-75px 0 0 -75px;
-  pointer-events:none; mix-blend-mode:screen; background:center/contain no-repeat;
-  animation:stsImpact .34s cubic-bezier(.2,.8,.4,1) forwards; }
-&.fx-slash { background-image:url('../assets/battle/fx-slash.webp'); }
-&.fx-block { background-image:url('../assets/battle/fx-block.webp'); }}
-@keyframes stsImpact {
-  0% { opacity:0; transform:scale(.5) rotate(var(--imp-rot,0deg)); }
-  25% { opacity:1; }
-  100% { opacity:0; transform:scale(1.35) rotate(var(--imp-rot,0deg)); }
-}
+/* 命中、状态、卡牌流转共用 battle.fx-art.js；回合大字沿用原样。 */
 /* 手牌描述显隐已由紧凑/展开双态接管（2026-09-12）：compact display:none、expanded 全显，
    旧「不点击不上屏」opacity 方案退役 */
 
@@ -322,24 +277,7 @@
 
 /* 洗入牌动画：卡背克隆体从战场中央旋飞向牌库图标 */
 
-/* ===== 2026-09-19 P2 补强批次：火花 / 弹道线 / 氛围尘 / 状态挂件 / SVG 贴纸 ===== */
-/* 受击火花（替代已删除的 Pixi 粒子通道）：一次性元素，JS 内联定位/着色/关键帧 */
-.sts-spark { position:absolute; z-index:79; border-radius:50%; pointer-events:none; }
-/* 敌方攻击弹道：一次性 canvas 闪现弧线+箭头，层级在卡牌飞行(75)之下 */
-.sts-attack-line { position:absolute; inset:0; z-index:74; pointer-events:none; }
-/* 状态挂件：诅咒持续期间的常驻状态光（冰冻=青晶边光）。
-   与交互高亮（can-target 等）是覆盖关系，指向时可被高亮临时接管 */
-.sts-foe.fx-frozen .sts-figure, .sts-me.fx-frozen .sts-figure {
-  filter:saturate(.8) brightness(1.05) drop-shadow(0 0 12px rgba(140,217,255,.8)); }
-/* SVG 贴纸（替代 emoji）：尺寸由图定，stkPop 动画照常作用于整个 span */
-.sts-float.stk{
-&.sticker { font-size:0; }
-&.sticker img { width:46px; height:46px;
-  filter:drop-shadow(0 3px 6px rgba(0,0,0,.55)); }
-/* 击杀文字欢呼（替代 👍✌️✨ emoji）：小号金色， stkPop 弹出 */
-&.stk-cheer { font-size:19px; font-family:var(--cal); font-weight:800;
-  letter-spacing:2px; color:var(--fx-dmg-crit);
-  text-shadow:0 0 8px rgba(0,0,0,.85), 0 2px 4px rgba(0,0,0,.8); }}
+/* 命中、状态与击败反馈使用独立图集，不再创建贴纸或欢呼文字。 */
 
 /* Battle settings owns its row appearance; page shells own only panel geometry. */
 .bt-settings-title { display:inline-flex; align-items:center; gap:12px; color:#fff; }

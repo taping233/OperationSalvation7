@@ -22,7 +22,7 @@ window.SDT.MAP = {
 };
 
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const { BattleSession, findCard } = await import('../game/src/battle/core/battle.core.js');
 const { validateCardRules } = await import('../game/src/cards/card-rules.schema.js');
 const Cards = window.SDT.Cards;
 
@@ -356,16 +356,17 @@ describe('A3 迁移第一批：真实战斗结算', () => {
     const after = await drain();
     expect(after.foes[0].hp, '9 点法伤').toBe(40 - 9);
     expect(after.hand.length, '净变化：-1 本体 +1 二次爆炸').toBe(handBefore);
-    const gained = after.hand.map(uid => after.cards?.find?.(c => c.uid === uid)?.card?.name).filter(Boolean);
+    const gained = after.hand.map(uid => findCard(uid)?.card).filter(Boolean);
     expect(game.logs.some(l => l.includes('二次爆炸')), '日志含指定卡名').toBe(true);
-    expect(gained === undefined || gained.includes('二次爆炸') || gained.length >= 0, '手牌有增量').toBe(true);
+    expect(gained.filter(card => card.id === 'cc-double-boom'), '指定卡真实进入手牌且只获取一次').toHaveLength(1);
+    expect(after.hand).not.toContain('lava-1');
     endBattleSafe(game);
   });
 
 });
 
 /* —— A3 第二批（B5 诅咒族，2026-09-25）：结构化 curse op 的引擎端到端接线 ——
- * 卡数据尚未迁移（真源归主会话），这里在真实卡上合成迁移后的 rules 形状，锁三件事：
+ * 正式卡已迁移；这里刻意覆盖为两层中毒，和卡面文本的一层形成对照，锁三件事：
  *   1) createBattleResolution 的 combat 端口接线（engine combatPort 包装）真实可用；
  *   2) 先伤害后诅咒（hp 公式按 damage 段结算）；
  *   3) 文本诅咒句不复算——desc 带「附加 …中毒」，若文本路径也跑，层数会变 3 而非 2。 */

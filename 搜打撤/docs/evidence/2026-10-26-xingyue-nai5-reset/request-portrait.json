@@ -1,0 +1,97 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "solo, full body, standing, front three-quarter view, looking at viewer, composed expression. Her left hand is raised before her chest in a gentle blessing gesture, fingers together; her right hand extends toward screen-left holding the ring handle of a small lantern with a glowing gold star inside. The long braid curves loosely behind the body, both eyes and both hands clearly visible.\n\nSingle complete character illustration for a game character selection screen, plain white background.\n\nVertical portrait composition, one centered figure, entire head, braid, skirt, boots and lantern inside the canvas. The figure fills about 88 percent of the canvas height, clean complete silhouette, no scenery.\n\nSoft neutral daylight, warm gold lantern light on nearby white cloth. White, deep teal and muted gold palette, clear face and readable costume layers.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1730261026,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, halo, floating hair ornament, multiple girls",
+      "characterPrompts": [
+        {
+          "prompt": "1girl, young adult woman, pale blonde hair, golden eyes, calm expression, straight bangs, long sidelocks, a single very long thick low braid reaching her calves. A white crescent moon hairpin clipped flat into the hair just above the bangs, slightly off-center to the viewer's right, tilted against the hair. White high-neck priestess dress with long bell sleeves and layered ankle-length skirt, deep teal short shoulder cape with gold edging, restrained gold star ornament, dark wrist cuffs, dark tights, white gray lace-up ankle boots.",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "solo, full body, standing, front three-quarter view, looking at viewer, composed expression. Her left hand is raised before her chest in a gentle blessing gesture, fingers together; her right hand extends toward screen-left holding the ring handle of a small lantern with a glowing gold star inside. The long braid curves loosely behind the body, both eyes and both hands clearly visible.\n\nSingle complete character illustration for a game character selection screen, plain white background.\n\nVertical portrait composition, one centered figure, entire head, braid, skirt, boots and lantern inside the canvas. The figure fills about 88 percent of the canvas height, clean complete silhouette, no scenery.\n\nSoft neutral daylight, warm gold lantern light on nearby white cloth. White, deep teal and muted gold palette, clear face and readable costume layers.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "1girl, young adult woman, pale blonde hair, golden eyes, calm expression, straight bangs, long sidelocks, a single very long thick low braid reaching her calves. A white crescent moon hairpin clipped flat into the hair just above the bangs, slightly off-center to the viewer's right, tilted against the hair. White high-neck priestess dress with long bell sleeves and layered ankle-length skirt, deep teal short shoulder cape with gold edging, restrained gold star ornament, dark wrist cuffs, dark tights, white gray lace-up ankle boots.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, halo, floating hair ornament, multiple girls",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\xingyue.webp",
+      "sha256": "99d6c6d040b5e9698caec8539c745d4ed170897edac824a37a00a3447bca0f1d",
+      "purpose": "Local visual identity and pose reference; not uploaded"
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\xingyue-nai5-reset-20261026\\candidate-portrait.png",
+  "acquisition": "tools/nai_gen.py generate_image; NAI5 text-to-image",
+  "integration": "candidate only",
+  "seed": 1730261026,
+  "sha256": "f1ebea83d707b3de05ee90610298da4eb8692d62e8f423b1d88b993a2468d13d"
+}

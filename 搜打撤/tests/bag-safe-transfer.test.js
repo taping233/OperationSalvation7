@@ -175,3 +175,66 @@ describe('换入选择的真实所有权与同步调用边界', () => {
     expect(ports.save).not.toHaveBeenCalled();
   });
 });
+
+describe('安全格选择的保存与取消结果', () => {
+  it.each(['false','throw','reject'])('保存%s恢复原位置，并保留选中以便重试', async failure => {
+    const {incoming,first}=multiChoice(), root=UI.el.ovBody.firstElementChild;
+    root.scrollTop=80; UI._acts.safeSwapPick({i:'0'});
+    const before=JSON.stringify(game.ownedCards), confirm=UI._acts.safeSwapConfirm;
+    if (failure === 'false') ports.save.mockReturnValueOnce(false);
+    else if (failure === 'throw') ports.save.mockImplementationOnce(() => {throw new Error('save failed');});
+    else ports.save.mockRejectedValueOnce(new Error('save rejected'));
+    expect(await confirm()).toBe(false);
+    expect(JSON.stringify(game.ownedCards)).toBe(before); expect(UI.el.ovBody.firstElementChild).toBe(root);
+    expect(root.scrollTop).toBe(80); expect(root.querySelector('[data-i="0"]').dataset.discoverySelected).toBe('true');
+    expect(ports.sound).not.toHaveBeenCalled(); expect(ports.receipt).not.toHaveBeenCalled();
+    expect(await confirm()).toBe(true);
+    expect(incoming[0].safe).toBe(true); expect(first.every(entry => !entry.safe)).toBe(true);
+    expect(ports.sound).toHaveBeenCalledOnce(); expect(ports.receipt).toHaveBeenCalledOnce();
+    expect(await confirm()).toBe(false); expect(ports.save).toHaveBeenCalledTimes(2);
+  });
+
+  it.each([false,true])('异步保存%s期间只提交一次，结束后保留新页面', async saved => {
+    const {incoming,first}=multiChoice(); let finish;
+    ports.save.mockImplementationOnce(() => new Promise(resolve => {finish=resolve;}));
+    UI._acts.safeSwapPick({i:'0'}); const confirm=UI._acts.safeSwapConfirm, pending=confirm();
+    expect(await confirm()).toBe(false); expect(UI._acts.safeSwapCancel()).toBe(false);
+    UI.el.ovBody.innerHTML='<section id="new-view">其他页面</section>'; const next=UI.el.ovBody.firstElementChild;
+    finish(saved); expect(await pending).toBe(saved);
+    expect(UI.el.ovBody.firstElementChild).toBe(next); expect(ports.refresh).not.toHaveBeenCalled();
+    expect(incoming[0].safe).toBe(saved); expect(first.every(entry => entry.safe)).toBe(!saved);
+    expect(ports.save).toHaveBeenCalledOnce();
+  });
+
+  it('换局后旧保存失败保留新局数组与反馈', async () => {
+    multiChoice(); let finish;
+    ports.save.mockImplementationOnce(() => new Promise(resolve => {finish=resolve;}));
+    UI._acts.safeSwapPick({i:'0'}); const pending=UI._acts.safeSwapConfirm();
+    sameRun=false; const fresh=entries(card('新局卡'),1)[0]; game.ownedCards.splice(0,game.ownedCards.length,fresh);
+    finish(false); expect(await pending).toBe(false);
+    expect(game.ownedCards).toEqual([fresh]); expect(ports.refresh).not.toHaveBeenCalled(); expect(ports.receipt).not.toHaveBeenCalled();
+  });
+
+  it.each(['false','throw','reject'])('取消返回%s时保留原选择，重试返回明确成功', async failure => {
+    multiChoice(); const root=UI.el.ovBody.firstElementChild;
+    UI._acts.safeSwapPick({i:'0'}); const cancel=UI._acts.safeSwapCancel;
+    if (failure === 'false') ports.refresh.mockReturnValueOnce(false);
+    else if (failure === 'throw') ports.refresh.mockImplementationOnce(() => {throw new Error('return failed');});
+    else ports.refresh.mockRejectedValueOnce(new Error('return rejected'));
+    expect(await cancel()).toBe(false); expect(UI.el.ovBody.firstElementChild).toBe(root);
+    expect(root.querySelector('[data-i="0"]').dataset.discoverySelected).toBe('true');
+    expect(await cancel()).toBe(true); expect(ports.save).not.toHaveBeenCalled();
+  });
+
+  it('异步取消结束前换局时沿用新页面，并结束旧返回通知', async () => {
+    limits.safe=1; game.ownedCards=[...entries(attack,1),...entries(guard,3,true)];
+    const onCancel=vi.fn(); transfer.move(attack.name,true,{onCancel});
+    let finish; ports.refresh.mockImplementationOnce(() => new Promise(resolve => {finish=resolve;}));
+    const pending=UI._acts.safeSwapCancel();
+    sameRun=false; UI.el.ovBody.innerHTML='<section id="new-view">新局页面</section>';
+    const next=UI.el.ovBody.firstElementChild;
+    finish(true); expect(await pending).toBe(true);
+    expect(onCancel).not.toHaveBeenCalled(); expect(UI.el.ovBody.firstElementChild).toBe(next);
+    expect(ports.save).not.toHaveBeenCalled();
+  });
+});

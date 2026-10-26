@@ -54,6 +54,7 @@ export function createCollectionArt({root,track,current,host,render = null,prepa
     if (disposed || !current()) return;
     const items = [...track.children].filter(item => !item.hidden && !rendered.has(item.querySelector(host)));
     if (!observer) {hydrate(items);return;}
+    for (const item of items) observer.observe(item);
     const viewport = track.getBoundingClientRect();
     if (viewport.width <= 0 || viewport.height <= 0) return;
     const visible = [], nearby = [];

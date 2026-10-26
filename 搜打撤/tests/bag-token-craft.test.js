@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { planBagTokenCraft } from '../game/src/hub/game.bag.token-craft.js';
 const gold = { id:'tt-token-gold', name:'员工通行证B', type:'道具' };

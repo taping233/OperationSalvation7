@@ -48,7 +48,7 @@ function bootSdt({ overlay, ovBody, ownedCards, grantCard, canReceiveCard }) {
   function cardTitle() { return overlay.querySelector('#ovTitle'); }
   window.SDT = {
     UI,
-    MAP: { chestKinds: { small: { name: '小宝箱', cards: 2, coins: [7, 7] }, medium: { name: '中宝箱', pickFrom: 3, coins: [7, 7] } } },
+    MAP: { chestKinds: { small: { name: '小型物资箱', cards: 2, coins: [7, 7] }, medium: { name: '密封物资箱', pickFrom: 3, coins: [7, 7] } } },
     Cards: {
       RARITIES: ['古朴', '稀有', '史诗', '传说'],
       all: () => [CARD_A, CARD_B],
@@ -271,7 +271,7 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
   });
 });
 
-describe('宝箱直接出牌与逐组领取', () => {
+describe('搜刮点直接出牌与逐组领取', () => {
   async function animatedChest(game, chests = [{ kind:'small' }]) {
     vi.resetModules();
     const { SDT: facade } = await import('../game/src/run/chests.js');

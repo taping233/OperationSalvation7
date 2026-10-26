@@ -100,7 +100,7 @@ function libAct(name, callback) {
 
 const libModel = createCollectionModel({
   keyOf:card => card.id, exclude:card => card.id === 'tt-token-color',
-  searchOf:card => `${card.name || ''}\n${card.desc || ''}\n${displayCardDescription(card.desc,card.id)}`,
+  searchOf:card => `${card.name || ''}\n${displayCardDescription(card.desc,card.id,card)}`,
   matches:(card,filter,skip) => (skip === 'tab' || filter.tab === '全部' || card.type === filter.tab)
     && (filter.rar === '全部' || libRarityOf(card) === filter.rar)
     && (filter.cls === '全部' || (filter.cls === '通用' ? !card.cls : card.cls === filter.cls)),
@@ -201,13 +201,13 @@ let _libShellGeneration = 0;
 let libEntryPending = false;
 
 function libDossierDescription(c, showDamage, damage) {
-  let description = displayCardDescription(c.desc, c.id);
+  let description = displayCardDescription(c.desc, c.id, c);
   // Remove only a matching leading damage shorthand; preserve all conditions and effects.
   const leading = description.match(/^([+-]?\d+(?:\.\d+)?)[ \t]*[′'][ \t]*[，,；;]?[ \t]*/);
   if (showDamage && leading && Number(leading[1]) === damage) description = description.slice(leading[0].length);
   const fullDamage = description.match(/^造成\s*(\d+)\s*点(?:法术|固定|真实)伤害[。；，]?\s*/);
   if (showDamage && fullDamage && Number(fullDamage[1]) === damage) description = description.slice(fullDamage[0].length);
-  return libDescriptionRenderer.render(description, c.id, libFilter.q).replace(/(<b class="d-num">[^<]+<\/b>)([ \t]*(?:%|％|′|点|次|张|层|秒))/g,
+  return libDescriptionRenderer.renderResolved(description, c.id, libFilter.q).replace(/(<b class="d-num">[^<]+<\/b>)([ \t]*(?:%|％|′|点|次|张|层|秒))/g,
     '<span class="studio-value">$1$2</span>');
 }
 

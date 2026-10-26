@@ -89,7 +89,7 @@ function candidates(layer) {
   return out.sort((x,y)=>[x.start,x.rejoin,x.supply,x.risk].join(',').localeCompare([y.start,y.rejoin,y.supply,y.risk].join(','),undefined,{numeric:true}));
 }
 
-/** 路线覆盖层入口：对第 2 层做「支线格 ↔ 宝箱格」换位制造支线环，失败则原样降级（fallback）。
+/** 路线覆盖层入口：对第 2 层做「支线格 ↔ 搜刮点格」换位制造支线环，失败则原样降级（fallback）。
  * @param {object} p
  * @param {number} p.generatorVersion  生成器版本（旧 3/5 或新局 6，各走对应版本的最终质量门）
  * @param {number} p.layoutVersion  布局版本（须为 9，否则拒绝输入）

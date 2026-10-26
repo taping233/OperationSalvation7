@@ -45,7 +45,7 @@ describe('远征页查询开销', () => {
     let reads = 0, reward;
     Object.defineProperty(game.nodeRewards, `0,${blocked}`, { get() { reads++; return reward; } });
     expect(findMapTravelPath(game, target(end))).toBeNull();
-    expect(reads).toBe(2);
+    expect(reads).toBe(3);
     game.visited[`0,${blocked}`] = 1;
     reward = { type: 'event-choice', taken: null };
     expect(findMapTravelPath(game, target(end))).toBeNull();
@@ -127,7 +127,7 @@ describe('选角页图片入口', () => {
     vi.doMock('../game/src/run/game.session.js', () => ({ game, MAP: { rules: { playerMaxHp: 24, playerAtk: 3 } },
       getActiveSlot: () => 1, exitToTitle: vi.fn(), saveGame: vi.fn(),
     }));
-    vi.doMock('../game/src/battle/battle-loader.js', () => ({ captureBattleContext: context, ensureBattleReady: vi.fn(async () => {}) }));
+    vi.doMock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), captureBattleContext: context, ensureBattleReady: vi.fn(async () => {}) }));
     vi.doMock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn() } }));
     vi.doMock('../game/src/run/game.run.scenes.js', () => ({ preloadAllNodeShellBgs: vi.fn(), showRunTransition: vi.fn() }));
     vi.doMock('../game/src/ui/character-view-motion.js', () => ({ createCharacterViewMotion: () => ({ busy: false, enter() {}, preview() {}, cancelPage() {},

@@ -11,33 +11,33 @@ import { roomFooterHTML } from './room-footer.js';
 export function chestRewardOverviewHTML({ boxes = [], coins = null, source = '', title = '本次收获', footer = '', complete = false, primaryAction = null, notice = '' } = {}) {
   const primaryBox = primaryAction && boxes.find(box => box.index === primaryAction.index);
   const nextButton = primaryAction && primaryBox
-    ? `<button type="button" class="cqo-button cqo-button-primary" data-act="chestNext" data-i="${escAttr(String(primaryAction.index))}" aria-label="${escAttr(`${primaryAction.label}：${primaryBox.name || '宝箱'}`)}">${esc(primaryAction.label)} <span aria-hidden="true">→</span></button>` : '';
+    ? `<button type="button" class="cqo-button cqo-button-primary" data-act="chestNext" data-i="${escAttr(String(primaryAction.index))}" aria-label="${escAttr(`${primaryAction.label}：${primaryBox.name || '搜刮点'}`)}">${esc(primaryAction.label)} <span aria-hidden="true">→</span></button>` : '';
   const actions = complete
     ? '<button type="button" class="cqo-button cqo-button-primary" data-act="chestFinish">继续探索 <span aria-hidden="true">→</span></button>'
     : `<button type="button" class="cqo-button cqo-button-quiet" data-act="chestReturn" aria-description="未领取的奖励将暂存">返回地图</button><button type="button" class="cqo-button" data-act="chestOverviewBag">整理背包</button>${boxes.length === 1 ? '' : nextButton}`;
   const pending = boxes.filter(box => !box.completed).length;
   const boxHTML = boxes.map(box => {
-    const name = box.name || `宝箱 ${box.index + 1}`;
+    const name = box.name || `搜刮点 ${box.index + 1}`;
     const rule = rewardBoxSummary(box);
     const status = box.completed ? '已结束' : (box.takenCount || box.lostCount) ? '领取中' : box.status || (box.completed ? '已收取' : box.opened ? '待领取' : '待开启');
-    const action = box.completed ? status : box.actionLabel || (box.opened ? '继续领取' : '打开宝箱');
+    const action = box.completed ? status : box.actionLabel || (box.opened ? '继续领取' : '搜刮物资');
     return `<button type="button" class="illustrated-choice cqo-box${box.completed ? ' cqo-box-complete' : ''}${box.active ? ' cqo-box-active' : ''}" data-act="chestOpen" data-i="${escAttr(String(box.index))}" data-claim-mode="${box.choice ? 'one' : 'all'}" aria-label="${escAttr(`${name}，${box.choice ? '只选一张' : '全部可领'}，${action}`)}" aria-pressed="${box.active ? 'true' : 'false'}"${box.completed ? ' disabled' : ''}>
       ${illustratedChoiceContent({label:name,labelClass:'cqo-box-name',detailClass:'cqo-box-rule',art:box.choice ? 'cards' : 'chest',detail:`${esc(rule)}<span class="cqo-box-action">${esc(action)}</span>`})}
     </button>`;
   }).join('');
-  const story = `<div class="cqo-intro"><header class="cqo-heading" aria-label="${escAttr(`${title}，${pending} 个宝箱待领取`)}"><div class="cqo-heading-copy"><h3 class="cqo-title">${esc(title)}</h3>${source ? `<p class="cqo-source">${esc(source)}</p>` : ''}</div>
+  const story = `<div class="cqo-intro"><header class="cqo-heading" aria-label="${escAttr(`${title}，${pending} 个搜刮点待领取`)}"><div class="cqo-heading-copy"><h3 class="cqo-title">${esc(title)}</h3>${source ? `<p class="cqo-source">${esc(source)}</p>` : ''}</div>
     </header>
     <p class="cqo-notice" role="status" aria-live="polite">${esc(notice)}</p>
     </div>`;
   const content = `<div class="cqo-rewards">
       ${coins?.total ? `<section class="cqo-coins" aria-label="金币奖励"><span class="cqo-coin-art" aria-hidden="true">[[icon:coin]]</span><b>×${esc(String(coins.pending || coins.total))}</b>${coins.pending ? '<button type="button" class="cqo-button" data-act="chestOverviewCoins">收下</button>' : '<span>✓</span>'}</section>` : ''}
-      <div class="cqo-boxes" aria-label="物资箱奖励">${boxHTML || '<p class="cqo-empty">本批没有待领取的宝箱</p>'}</div>
+      <div class="cqo-boxes" aria-label="物资箱奖励">${boxHTML || '<p class="cqo-empty">本批没有待领取的搜刮点</p>'}</div>
     </div>`;
   const foot = `${roomFooterHTML({ className:'cqo-footer', info:footer ? `<div class="cqo-footer-note">${footer}</div>` : '', actions:`<nav class="cqo-actions" aria-label="奖励操作">${actions}</nav>` })}`;
   return `<section class="cqo-overview illustrated-node" aria-label="奖励总览">${illustratedNodeLayout({story,content,footer:foot})}</section>`;
 }
 
-export function chestRewardFrameHTML({ overview = '', picker = '', label = '宝箱收获' } = {}) {
+export function chestRewardFrameHTML({ overview = '', picker = '', label = '搜刮点收获' } = {}) {
   return `<div class="cqo-frame reward-replica ui-design-system${picker ? ' cqo-picker-open' : ''}">
     <div class="cqo-background"${picker ? ' inert aria-hidden="true"' : ''}>${overview}</div>
     ${picker ? `<div class="cqp-shade">

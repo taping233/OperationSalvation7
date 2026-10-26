@@ -1,10 +1,26 @@
-import { readFileSync } from 'node:fs';
+// @vitest-environment node
+import { readFileSync, readdirSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import path from 'node:path';
 import { ESLint } from 'eslint';
 import { describe, expect, it } from 'vitest';
 import { isGateRelevantPath, planForPaths } from '../scripts/gate-plan.mjs';
 
 describe('质量配置的可执行正确性边界', () => {
   const eslint = new ESLint();
+  it('Vitest 两个环境项目完整且互斥，每个测试文件只收集一次', () => {
+    const result = spawnSync(process.execPath, ['node_modules/vitest/vitest.mjs', 'list', '--filesOnly', '--json'], {
+      cwd: process.cwd(), encoding: 'utf8', timeout: 20_000,
+    });
+    expect(result.status, result.error?.message || result.stderr).toBe(0);
+    const collected = JSON.parse(result.stdout);
+    const files = collected.map(entry => entry.file.replaceAll('\\', '/')).sort();
+    const expected = readdirSync('tests', { recursive: true }).filter(file => file.endsWith('.test.js'))
+      .map(file => path.resolve('tests', file).replaceAll('\\', '/')).sort();
+    expect(new Set(files).size).toBe(files.length);
+    expect(files).toEqual(expected);
+    expect(new Set(collected.map(entry => entry.projectName))).toEqual(new Set(['node', 'dom']));
+  });
   it.each(['scripts/fixture.js', 'scripts/fixture.mjs', 'scripts/fixture.cjs', 'game/tools/fixture.mjs'])(
     '%s 的未定义变量不能被忽略', async filePath => {
       const [result] = await eslint.lintText('missingQualityVariable();', { filePath });

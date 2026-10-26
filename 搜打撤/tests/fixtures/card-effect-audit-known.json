@@ -1,11 +1,5 @@
 {
-  "allowMissingCardIds": [
-    "tt12-raydragon",
-    "tt12-saturate",
-    "tt12-felguard",
-    "tt12-chargeray",
-    "tt12-freezeray"
-  ],
+  "allowMissingCardIds": [],
   "known": [
     {
       "id": "tt3sp-shadowbug",

@@ -1,4 +1,4 @@
-import { acquireRuleFields } from './helpers/environment-fixtures.js';
+import { sourceCardLibrary } from '../scripts/sync-cards-from-live.mjs';
 /* M5 卡牌规则化数据迁移批 D7 锁定（2026-09-27）：cards.sync.m5.js ensureM5DelayedRules。
  * 每张迁的卡一条用例组，锁定四件事：
  *   1) validateCardRules 通过；2) inspectCardRuleCapability supported；
@@ -6,9 +6,8 @@ import { acquireRuleFields } from './helpers/environment-fixtures.js';
  *      卡面改写 dmg/dmgType）、落库复读一致、marker 盖章）；
  *   4) 对被改名 / 改字段 / 已有自有 rules 的卡保守跳过。
  * 批次级另锁：marker 一次性、缺卡/缺 canonical/saveAll 失败/无原库串/热缓存不一致整体保守
- * 退出不标记。末组锁定 9 张跳过卡的契约缺口（schema/capability 现场确实拒，或双结算死锁，
- * 防止误判可迁）。回填器为 A3 式全批语义（definitions 六张齐备才落库），故运行夹具一律放
- * 全量六张 canonical 卡。纯单元：依赖注入 storage/library，不启动 cards.js 播种链。 */
+ * 退出不标记。末组直接校验现行卡库的九张卡，防止已落地能力被旧草案误判为不支持。
+ * 回填器为全批语义，运行夹具包含全部六张 canonical 卡。纯单元：依赖注入 storage/library，不启动 cards.js 播种链。 */
 import { describe, expect, it } from 'vitest';
 import { KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
@@ -67,8 +66,7 @@ const EXPECTED_RULES = {
 };
 
 // 定版卡面改写（A3 canonicalFieldsById 先例，回填时以描述定版值覆盖卡面）：
-//   noon-duel：dmg:0→2、补 dmgType:'fixed'（与「每枪造成2点固定伤害」对齐）；
-//   petal：09-29 裁决 heal:3（M8 收编；旧档卡面由 cards.sync.face-refresh.js 幂等刷新）。
+// noon-duel：dmg:0→2、补 dmgType:'fixed'（与「每枪造成2点固定伤害」对齐）。
 const EXPECTED_FACE_OVERRIDES = {
   'tt3-noon-duel': { dmg: 2, dmgType: 'fixed' },
 };
@@ -106,6 +104,22 @@ function makeHarness(cards) {
 }
 
 describe('M5 数据迁移批 D7：每张迁的卡', () => {
+  it('整批只迁移和保存一次，逐卡校验规则、卡面及持久化', () => {
+    expect(ALL_IDS.slice().sort()).toEqual(Object.keys(EXPECTED_RULES).sort());
+    const harness = makeHarness(freshCards());
+    ensureM5DelayedRules(harness);
+    for (const id of ALL_IDS) {
+      const card = harness.cards().find(entry => entry.id === id);
+      expect(card.rules, `${id} 应被回填结构化 rules`).toEqual(EXPECTED_RULES[id]);
+      // 卡面按定版（noon-duel 例外：定版卡面改写，A3 canonicalFieldsById 先例）
+      const face = Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules'));
+      expect(face).toEqual({ ...canonicalById.get(id), ...(EXPECTED_FACE_OVERRIDES[id] ?? {}) });
+    }
+    expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(harness.cards()));
+    expect(harness.storage.getItem(MARKER)).toBe('1');
+    expect(harness.library.saves).toBe(1);
+  });
+
   for (const id of ALL_IDS) {
     describe(id, () => {
       it('validateCardRules 通过且 inspectCardRuleCapability supported（回填后的 rules 形状）', () => {
@@ -115,20 +129,6 @@ describe('M5 数据迁移批 D7：每张迁的卡', () => {
         const capability = inspectCardRuleCapability(card);
         expect(capability.ok, `${id} 能力门拒绝：${JSON.stringify(capability.issues)}`).toBe(true);
         expect(capability.kind).toBe('supported');
-      });
-
-      it('回填函数对 canonical 卡生效：rules 逐键一致、卡面符合定版、落库复读一致、marker 盖章', () => {
-        const harness = makeHarness(freshCards());
-        ensureM5DelayedRules(harness);
-        const card = harness.cards().find(entry => entry.id === id);
-        expect(card.rules, `${id} 应被回填结构化 rules`).toEqual(EXPECTED_RULES[id]);
-        // 卡面按定版（noon-duel / petal 例外：定版卡面改写，A3 canonicalFieldsById 先例）
-        const face = Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules'));
-        expect(face).toEqual({ ...canonicalById.get(id), ...(EXPECTED_FACE_OVERRIDES[id] ?? {}) });
-        // 成功后复读确认：storage 串与库内容一致；全批一次保存、单枚 marker
-        expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(harness.cards()));
-        expect(harness.storage.getItem(MARKER)).toBe('1');
-        expect(harness.library.saves).toBe(1);
       });
 
       it('保守跳过：被改名 / 改字段 / 已有自有 rules 的卡一律不回填', () => {
@@ -209,70 +209,23 @@ describe('M5 数据迁移批 D7：批次级保守语义', () => {
   });
 });
 
-describe('M5 数据迁移批 D7：跳过卡的契约缺口锁定', () => {
-  // 9 张跳过卡按矩阵草案的「最贴近表达」构造 rules，锁定 schema/capability 现场确实拒绝
-  // （或文本宿主双结算死锁）——契约扩集之前这些卡不可迁，防止后续误判。
-  const rejected = (card, gate) => {
-    if (gate === 'schema') {
-      const validation = validateCardRules(card);
-      expect(validation.ok).toBe(false);
-    } else {
-      const validation = validateCardRules(card);
-      expect(validation.ok, 'schema 形状应放行，拒点在能力门').toBe(true);
-      const capability = inspectCardRuleCapability(card);
-      expect(capability.ok).toBe(false);
-    }
-  };
-
-  const supported = card => {
-    const validation = validateCardRules(card);
-    expect(validation.ok, JSON.stringify(validation.errors)).toBe(true);
-    expect(inspectCardRuleCapability(card)).toEqual({ kind: 'supported', ok: true });
-  };
-
-  it('tt7-swordimmortal 剑仙形态：空 onPlay 可抑制文本，回合开始抽牌规则通过双门', () => {
-    supported({ id: 'tt7-swordimmortal', type: '武术', dmg: 0, draw: 1,
-      rules: { version: 1, battle: { target: { side: 'self', area: false } },
-        triggers: { onTurnStart: [{ op: 'draw', amountField: 'draw' }], onPlay: [] } } });
-  });
-
-  it('tt3-petal 花瓣法阵：按卡面 heal:3 执行三次回合开始效果，空 onPlay 通过双门', () => {
-    supported({ id: 'tt3-petal', type: '法术', dmg: 0, draw: 1, heal: 3,
-      rules: { version: 1, battle: { target: { side: 'self', area: false } },
-        triggers: { onTurnStart: [{ op: 'draw', amountField: 'draw' }, { op: 'heal', amountField: 'heal' }], duration: 3, onPlay: [] } } });
-  });
-
-  it('cmtn1r10xnl1 黑暗形态：discoverPlus 已由 schema 与发现队列消费', () => {
-    const card = { id: 'cmtn1r10xnl1', type: '法术', rules: { version: 1, triggers: { onPlay: [{ op: 'registerRule', rule: 'discoverPlus' }] } } };
-    expect(validateCardRules(card).ok).toBe(true);
-    expect(inspectCardRuleCapability(card)).toEqual({ kind: 'supported', ok: true });
-  });
-
-  it('tt7-elementstorm 元素风暴：doubleNextSpell 已由 schema 与施法覆盖消费', () => {
-    const card = { id: 'tt7-elementstorm', type: '法术', rules: { version: 1, triggers: { onPlay: [{ op: 'registerRule', rule: 'doubleNextSpell' }] } } };
-    expect(validateCardRules(card).ok).toBe(true);
-    expect(inspectCardRuleCapability(card)).toEqual({ kind: 'supported', ok: true });
-  });
-
-  it('tt2-apollo 阿猫的礼物：onAcquire 已由 schema 与获取卡牌入口消费（数据迁移另由装备批处理）', () => {
-    const card = { id: 'tt2-apollo', type: '装备', rules: { version: 1, triggers: { onAcquire: [{ op: 'energy', n: 1 }] } } };
-    expect(validateCardRules(card).ok).toBe(true);
-    expect(inspectCardRuleCapability(card)).toEqual({ kind: 'supported', ok: true });
-  });
-
-  it('cmtn2jc142dj 刀剑形态：handOps copyRandom 解释器未消费（capability 拒）', () => {
-    rejected({ id: 'cmtn2jc142dj', type: '武术', rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'draw', amount: 1, handOps: [{ op: 'copyRandom' }] }] } } }, 'capability');
-  });
-
-  it('cmtn1wnhhym 江湖救急-改：acquire dest hand 无 decay act（capability 拒）', () => {
-    rejected({ id: 'cmtn1wnhhym', type: '武术', rules: { ...acquireRuleFields(3, '随机', 'hand', 'decay') } }, 'capability');
-  });
-
-  it('tt7-provoke 扰敌：敌对敌攻击域无 foeFight op（schema 拒）', () => {
-    rejected({ id: 'tt7-provoke', type: '法术', rules: { version: 1, triggers: { onPlay: [{ op: 'foeFight', count: 2 }] } } }, 'schema');
-  });
-
-  it('cmtn233trmeg 不朽斩：keepInHand 自指无 damage op 键位（schema 拒）', () => {
-    rejected({ id: 'cmtn233trmeg', type: '武术', dmg: 1, dmgType: 'attack', rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy', keepInHand: true }] } } }, 'schema');
+describe('现行卡库中已落地的规则能力', () => {
+  const cards = new Map(sourceCardLibrary().map(card => [card.id, card]));
+  it.each([
+    ['tt7-swordimmortal', { triggers:{ onTurnStart:[{ op:'draw', amountField:'draw' }], onPlay:[] } }],
+    ['tt3-petal', { triggers:{ onTurnStart:[{ op:'draw', amountField:'draw' },{ op:'heal', amountField:'heal' }], duration:3, onPlay:[] } }],
+    ['cmtn1r10xnl1', { triggers:{ onPlay:[{ op:'registerRule', rule:'discoverPlus' }] } }],
+    ['tt7-elementstorm', { triggers:{ onPlay:[{ op:'registerRule', rule:'doubleNextSpell' }] } }],
+    ['tt2-apollo', { triggers:{ onAcquire:[{ op:'energy', n:1 },{ op:'acquire', n:1, pool:{ kind:'随机' }, filter:{ exceptIds:['tt2-apollo'] }, dest:'hand' }] } }],
+    ['cmtn2jc142dj', { triggers:{ onTurnStart:[{ op:'copyRandom' }], onPlay:[] } }],
+    ['cmtn1wnhhym', { triggers:{ onPlay:[{ op:'acquire', n:3, pool:{ kind:'随机' }, dest:'hand', expire:'nextTurnStart' }] } }],
+    ['tt7-provoke', { triggers:{ onPlay:[{ op:'foeFight', pick:'two' }] } }],
+    ['cmtn233trmeg', { battle:{ keepInHand:true, fuelAllowed:false }, triggers:{ onPlay:[{ op:'damage', amountField:'dmg', target:'chosenEnemy' }] } }],
+  ])('%s 现行规则有实际消费者，关键行为与卡面一致', (id, expected) => {
+    const card = cards.get(id);
+    expect(card, id + ' must remain in the current catalogue').toBeDefined();
+    expect(card.rules, id).toMatchObject(expected);
+    expect(validateCardRules(card), id).toMatchObject({ ok:true, errors:[] });
+    expect(inspectCardRuleCapability(card), id).toEqual({ kind:'supported', ok:true });
   });
 });

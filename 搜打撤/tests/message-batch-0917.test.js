@@ -67,7 +67,8 @@ async function drain(maxLoops = 300, pickUid = null) {
       continue;
     }
   }
-  return snap();
+  const state = snap();
+  throw new Error(`战斗等待超时（${maxLoops} 轮）：phase=${state.phase}, busy=${state.busy}, queue=${state.actionQueueLength}`);
 }
 
 describe('神秘召唤按现行文本限定传说池', () => {

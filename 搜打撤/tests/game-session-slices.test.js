@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { createSessionPersistence } from '../game/src/run/game-session-persistence.js';
 import { createSessionRestoration } from '../game/src/run/game-session-restoration.js';

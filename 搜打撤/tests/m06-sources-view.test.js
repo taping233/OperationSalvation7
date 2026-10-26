@@ -29,7 +29,7 @@ describe('M06 mountable view', () => {
     });
     const view = mountPreparationView(root, { model });
     expect(root.textContent).toContain('占 5/4 格');
-    expect(root.textContent).toContain('背包容量不足');
+    expect(root.textContent).toContain('普通卡牌超出基础背包容量');
     expect(root.querySelector('[data-action="preset-apply"]').disabled).toBe(true);
     expect(root.textContent).toContain('应用后，在整备页确认人物、伙伴与卡牌。');
     expect(root.textContent).not.toContain('人物仍在出发后选择');

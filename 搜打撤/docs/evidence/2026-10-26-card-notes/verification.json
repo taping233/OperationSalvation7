@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-26",
+  "cards": 291,
+  "original": 32,
+  "added": 259,
+  "tests": {
+    "passed": 6,
+    "failed": 0
+  },
+  "browser": "Codex当前窗口内置浏览器",
+  "checked": [
+    "搜索火球得到7张",
+    "原文筛选32张",
+    "翻页25—48",
+    "修改后刷新保留",
+    "恢复测试文字及审阅标记",
+    "导出291张与底稿逐条一致",
+    "浏览器错误日志为空"
+  ],
+  "screenshot": {
+    "path": "review.png",
+    "bytes": 142340,
+    "sha256": "1c6518001af15b9dba9d7cdca05cfbc5878402b375a1f2008ea3f52e26565a8f"
+  }
+}

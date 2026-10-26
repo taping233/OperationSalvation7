@@ -1,0 +1,13 @@
+body #overlay .battle-stage.sts[data-hand-selecting] {
+  & [data-hand-selection] {
+    position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+    display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:110;pointer-events:none;
+  }
+  & [data-hand-selection] .ov-btn { min-width:220px;min-height:88px;padding:18px 32px;font-size:30px;pointer-events:auto; }
+  & [data-hand-selection] [role="status"] { color:#f0e0b8;background:#10232be8;padding:8px 16px;border-radius:4px; }
+  & .bt-slot:has(.hand-effect-selected) { z-index:80; }
+  & .bt-card.hand-effect-selected:not(.aim-lift) { transform:translateY(-42px);outline:3px solid #e0c98e;outline-offset:3px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  body #overlay .battle-stage.sts[data-hand-selecting] .bt-card { transition:none; }
+}

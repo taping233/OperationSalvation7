@@ -10,7 +10,7 @@ body :is(.hs-card,.bt-card,.bag-tile.card-face,.reward-card,.sac-card,.dep-card,
 }
 body :is(.hs-card,.bt-card,.bag-tile.card-face,.reward-card,.sac-card,.dep-card,
   .battle-pile-card,.infusion-card-face,
-  .lib-cardwrap:not(.studio-photo),:has(> .hs-card[data-card-layout="split"])):focus-visible {
+  .lib-cardwrap:not(.studio-photo),:has(> .hs-card[data-card-layout="split"])):not([data-discovery-option]):focus-visible {
   outline:2px solid #e8dcba; outline-offset:4px;
 }
 @font-face {

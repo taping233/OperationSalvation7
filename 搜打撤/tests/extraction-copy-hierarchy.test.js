@@ -30,9 +30,9 @@ it('keeps zero-loot wording truthful and leaves irreversible warnings visible', 
 
 it('receipt gallery shows the count once in its heading and keeps final save confirmation', () => {
   document.body.innerHTML = extractionDoneHTML({ cardHTML, receipt:{ savedCards:[stack], netTake:{ cardsStashed:2 } } });
-  expect(document.querySelector('.exr-section-title').textContent).toContain('已入库 2 张');
-  expect(document.querySelector('.exr-section-title p')).toBeNull();
-  expect(document.querySelector('.exr-eyebrow').textContent).toContain('收获已保存');
-  expect(document.querySelector('.exr-finish-note').textContent).toContain('本次收获已保存');
+  expect(document.querySelector('.exr-totals').textContent).toContain('卡牌入库2 张');
+  expect(document.querySelector('.exr-done-cards summary').textContent).toBe('入库卡牌');
+  expect(document.querySelector('.exr-done-cards').open).toBe(false);
+  expect(document.querySelector('.exr-saved-state').textContent).toContain('已保存');
   expect(document.querySelector('[data-act="goBase"]')).not.toBeNull();
 });

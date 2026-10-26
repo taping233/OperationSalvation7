@@ -240,7 +240,7 @@ body.page-opaque #sidebar{visibility:hidden}
 .fire-done-btn{
 &{padding:14px 34px;font-size:17px;letter-spacing:2px;display:inline-flex;align-items:center;gap:9px}
 & .svg-ic{width:20px;height:20px;flex:0 0 auto}}
-/* 宝箱页操作条：全部收下右移 + 左侧跳过 */
+/* 搜刮点页操作条：全部收下右移 + 左侧跳过 */
 /* 空白安全节点提示页 */
 .blank-safe-gain{display:flex;flex-direction:column;align-items:center;gap:10px}
 /* 内联 SVG 图标通用尺寸 */
@@ -693,17 +693,6 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 & #ovBody{background:transparent}
 & .ov-stats,& .ov-note{color:#e4e4e5;text-shadow:0 1px 6px #000000}}
 
-/* #11 战斗背包 = 主页背包同款大卡网格（2026-09-13 留言：直接调用主页背包的逻辑/样式）
-   2026-09-15 同步背包 v2：格子容器化 + 卡面 cqw 等比满格（修黑边/变形，费用角标可见） */
-#overlay .card.battle-bag{
-&{background:rgba(13,14,15,.92)}
-& .battle-bag-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-& .battle-bag-slot{position:relative;container-type:inline-size;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;aspect-ratio:2/3;border:1.5px solid rgba(194,199,202,.22);border-radius: var(--radius-panel);background:#161819;cursor:pointer;transition:border-color .12s, transform .12s}
-& .battle-bag-slot:hover{border-color:#e3c871}
-& .battle-bag-slot.off{opacity:.45;filter:grayscale(.8);cursor:default}
-& .battle-bag-slot .hs-card{margin:0;width:100%;font-size:calc(100cqw / 13.08)}
-& .bt-count{position:absolute;top:.5em;right:.5em;z-index:3;color:#ffdf76;font-weight:700;font-size:max(10px,min(calc(9.1cqw*.78),16px));text-shadow:0 1px 3px #000000;background:rgba(14,15,16,.85);border:1px solid rgba(228,203,122,.45);border-radius:999px;padding:.1em .5em}}
-
 /* ===== 2026-09-13 留言复检追加 ===== */
 /* 血条黑框彻底去除：名牌容器（黑底+灰边）与内槽全部透明化，名字加深色描边保可读 */
 /* 「第 N 回合」条贴到页面最顶端：absolute 定位（expedition 后加载的 flex 流规则压不住） */
@@ -767,7 +756,7 @@ body.reduce-motion #layerBanner { animation: none !important; }
 /* ═══════════════════════════════════════════════════════════════
    2026-09-15 发现/选卡浮层统一重做（老板四点：卡距太近 / 卡太小 /
    说明文字太多 / 背景应是透明虚化遮罩）
-   覆盖：战斗发现 · 战斗选牌/抉择 · 宝箱搜刮 · 祭坛献祭（后三者统一走
+   覆盖：战斗发现 · 战斗选牌/抉择 · 搜刮点搜刮 · 祭坛献祭（后三者统一走
    discover 模式）。层级说明：本文件在 expedition-rewards.css 之前加载，
    压不赢处一律加 !important。
    ═══════════════════════════════════════════════════════════════ */

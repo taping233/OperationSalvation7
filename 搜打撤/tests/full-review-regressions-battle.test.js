@@ -96,7 +96,7 @@ describe('09-30 深审 BC 组修复回归', () => {
     expect(R.pdef.armor).toBe(9);
   });
 
-  it('BC-05 搜索大宝箱：牌库底三选一后不再追加随机发现', async () => {
+  it('BC-05 搜索军用保险柜：牌库底三选一后不再追加随机发现', async () => {
     const chest = C.all().find(c => c.id === 'cmtn28jv33wx');
     const g = begin([chest, basic('bottom1'), basic('bottom2'), basic('bottom3')], true);
     R.set$hand([g.ownedCards[0].uid]);

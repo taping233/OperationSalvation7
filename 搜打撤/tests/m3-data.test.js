@@ -225,6 +225,22 @@ function makeHarness(cards) {
 }
 
 describe('M3 数据迁移批 D5：每张迁的卡', () => {
+  it('整批只迁移和保存一次，逐卡校验规则、卡面及持久化', () => {
+    expect(ALL_IDS.slice().sort()).toEqual(Object.keys(EXPECTED_RULES).sort());
+    const harness = makeHarness(freshCards());
+    ensureM3OnplayRules(harness);
+    for (const id of ALL_IDS) {
+      const card = harness.cards().find(entry => entry.id === id);
+      expect(card.rules, `${id} 应被回填结构化 rules`).toEqual(EXPECTED_RULES[id]);
+      // 除 rules 外卡面一字未动
+      const face = Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules'));
+      expect(face).toEqual(canonicalById.get(id));
+    }
+    expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(harness.cards()));
+    expect(harness.storage.getItem(MARKER)).toBe('1');
+    expect(harness.library.saves).toBe(1);
+  });
+
   for (const id of ALL_IDS) {
     describe(id, () => {
       it('validateCardRules 通过且 inspectCardRuleCapability supported（回填后的 rules 形状）', () => {
@@ -234,20 +250,6 @@ describe('M3 数据迁移批 D5：每张迁的卡', () => {
         const capability = inspectCardRuleCapability(card);
         expect(capability.ok, `${id} 能力门拒绝：${JSON.stringify(capability.issues)}`).toBe(true);
         expect(capability.kind).toBe('supported');
-      });
-
-      it('回填函数对 canonical 卡生效：rules 逐键一致、卡面不动、落库复读一致、marker 盖章', () => {
-        const harness = makeHarness(freshCards());
-        ensureM3OnplayRules(harness);
-        const card = harness.cards().find(entry => entry.id === id);
-        expect(card.rules, `${id} 应被回填结构化 rules`).toEqual(EXPECTED_RULES[id]);
-        // 除 rules 外卡面一字未动
-        const face = Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules'));
-        expect(face).toEqual(canonicalById.get(id));
-        // 成功后复读确认：storage 串与库内容一致；全批一次保存、单枚 marker
-        expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(harness.cards()));
-        expect(harness.storage.getItem(MARKER)).toBe('1');
-        expect(harness.library.saves).toBe(1);
       });
 
       it('保守跳过：被改名 / 改字段 / 已有自有 rules 的卡一律不回填', () => {

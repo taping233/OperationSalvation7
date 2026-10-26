@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { beginNodeRestore, claimNodeRestore, finishNodeRestore, nodeRestoreAt, validNodeRestore } from '../game/src/run/node-restore-state.js';
 

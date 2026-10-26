@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it } from 'vitest';
 import { handDisplayLayout } from '../game/src/battle/view/battle.hand-layout.js';
 

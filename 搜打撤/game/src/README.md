@@ -12,7 +12,7 @@
 | `ui/` | 全局 UI | UI 工具、缩放、词条浮框、页面生命周期与揭幕、路线浮层、标题菜单 |
 | `battle/` | 战斗 | `core/`（装配/引擎/结算/快照）、`effects/`（效果流水线 effect-steps.*）、`runtime/`（运行态）、`view/`（渲染）、`bag/`（牌堆/卡费）；懒装载器、符文与快照类型定义在 `battle/` 根 |
 | `cards/` | 卡库 | 卡数据/同步/规则/schema/视图、备注、机制句式 |
-| `run/` | 局内流程 | 对局会话、地图生成与快照、遭遇、宝箱、祭坛/商店/撤离 |
+| `run/` | 局内流程 | 对局会话、地图生成与快照、遭遇、搜刮点、祭坛/商店/撤离 |
 | `hub/` | 基地/局外 | 仓库、背包、存档、商店、整备、收藏、各类命令、照相馆呈现 |
 | `home/` | 叙事/退役家具兼容 | ink 叙事与剧情命令；`home.*` 家具场景保留兼容和直测，正常基地不再装配 |
 | `audio/` | 音频 | 音频门面、场景曲目、按需配乐播放器、短音效策略与声景 |
@@ -26,7 +26,7 @@
 | --- | --- |
 | 启动与标题 | `game.boot.js` 装配启动；输入、地图选择和主循环在 `core/game-boot-input.js`、`game-map-selection.js`、`game-boot-loop.js`，侧栏和标题生命周期在 `ui/game-map-controls.js`、`game-title-controller.js`；`ui/game.menu.js` 持有菜单懒入口，`game.menu.pages.js` 装配 `menu-*.js` 各职责页 |
 | 战斗规则与快照 | `battle/core/battle.core.js` 提供命令和快照；实例实现位于 `*.domain.js`，持续规则和临时牌到期回收由 `battle.turn-effects.domain.js` 组合回合调度，效果解析在 `battle/effects/` |
-| 战斗手牌与交互 | `battle/view/battle.view.js` 装配；`battle.layers.js` 更新手牌/单位，`battle.infusion-view.js`、`battle.hand-inspector.js`、`battle.pile-view.js` 分别持有注能、详情和牌堆呈现 |
+| 战斗手牌与交互 | `battle/view/battle.view.js` 装配；`battle.layers.js` 更新手牌/单位，`battle.aim.js` 承接拿牌与目标输入，`battle.infusion-view.js`、`battle.pile-view.js`、`battle.potion-use.js` 分别持有注能、牌堆与药水详情 |
 | 地图与事件 | `run/game.run.flow.js` 编排移动/落脚；地图数据与生成在 `core/mapData.js`、`run/map-*.js`，普通事件经 `run/event-runtime.js` 按需加载 |
 | 奖励与商店 | `run/chests.js`、`run/game.run.shop.js` 接页面；`run/shop-commands.js`、`run/event-commands.js` 承接业务写入，公共展示在 `ui/reward-*.js` |
 | 基地与整备 | `hub/game.hub.js` 轻门面、`game.hub.runtime.js` 壳、`game.hub.pages.js` 页签、`game.hub.preparation*.js` 整备；错误文案在 `hub/command-errors.js` |

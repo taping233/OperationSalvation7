@@ -1,6 +1,6 @@
 # 日常开发流程
 
-日常路径：**按目标 → 主动作 → 定向反馈 → 按授权收官**。项目权限、属地与资源边界见根 AGENTS.md；本页维护流程命令和登记条件，验证分级与覆盖解释见[质量门](quality-gates.md)。
+日常路径：**核对现状 → 复用实施 → 集中反馈 → 按授权收官**。项目边界见根 AGENTS.md；本页维护操作步骤，验证分级见[质量门](quality-gates.md)。
 
 ## 信息只维护一次
 
@@ -12,15 +12,17 @@
 | 规则、契约、设计决定 | 对应现行规范 |
 | 交付摘要 / 原始证据与历史 | [STATUS](STATUS.md) 只作导航 / 任务证据目录与 `docs/archive/` |
 
-读取台账时用 `workflow ledger registry list` / `ledger pending list` 的状态分组；按路径接手用 `workflow status --paths ...`。REGISTRY 的近期已释放段和 PENDING 的已决段供历史追溯，按具体任务查阅。`task summary` 的 `skipped` 单列无法读取的记录，汇总不据此推断其完成状态；旧记录保留原文且占用原任务编号。
+台账按 `workflow ledger registry list` / `ledger pending list` 的状态分组读取，按路径接手用 `workflow status --paths ...`。已释放、已决记录按任务追溯；`task summary` 的 `skipped` 标明读取缺口，保留原文和任务编号。
 
 ## 按目标
 
-先确定可观察结果和任务边界。单问直接答，路径已知直接查目标，范围不明再查[任务路由](README.md#按改动找文档)；接手/占用核对将 `handoff` 与独立定位合并，范围均在项目内加 `-- --paths "路径1,路径2"`，改根规则用全局（`--paths` 拒绝上级路径）。同轮简报复用，同属地他人活跃先协调。影响面/历史经验有缺口才查 `impact` / `workflow memory --source codex --query "关键词" --limit 3 --json`（Codex 默认 codex，ZCode 用 zcode，明确查跨端经验才选 both）；无query只发现库，不组成开场清单。
+先核对现码及对应版本验收，在简报中说清已有成果、本轮差距和完成标准。小修直查目标，范围不明查[任务路由](README.md#按改动找文档)。接手合并 `handoff` 与定位；项目内加 `-- --paths "路径1,路径2"`，改根规则用全局。同轮复用简报，同属地活跃先协调。影响面缺口查 `impact`；经验缺口用 `workflow memory --source codex --query "关键词" --limit 3 --json`，ZCode 用 zcode，跨端检索才用 both。
 
-工具编排遵循全局工作约定的依赖边界；逐项核对退出码，`fulfilled` 不等于命令成功。共享同路径写入不并行，预览/SHA/index 守卫仍先核对。局部素材接入一次取得尺寸、透明度、切分位置与现行引用，再顺序完成处理、接线、清单和必要登记；脚本失败先修复，再继续依赖步骤。实测见[请求合并对照](evidence/2026-10-05-WF-request-batching/README.md)与[实际任务迭代](evidence/2026-10-05-WF-flow-practice/README.md)。
+工具按全局约定批量读取、顺序修改，逐项检查退出码及预览/SHA/index。素材一次取得尺寸、透明度、切分位置与现行引用，再顺序处理、接线和登记。实测见[请求合并对照](evidence/2026-10-05-WF-request-batching/README.md)与[实际任务迭代](evidence/2026-10-05-WF-flow-practice/README.md)。
 
-读取顺序：已注入规则直接沿用；按目标路由取现行规范章节和相关源码，能决定改法就实施。整体 UI 整改的技能参考按诊断、实现、复核阶段展开，已加载技能不再读取仓库副本；需要人物或素材资料时才补对应入口。只在存在具体经验缺口时检索记忆；已有输入与环境未变的读取和验证结果沿用，目标、属地或相关输入变化，或新失败/未解决问题影响原结论时才重查。
+已注入规则直接沿用；按目标读现行章节和源码，资料够用即实施。技能按当前阶段取用，人物、素材资料按需补充。相关输入和环境相同时复用读取与验证；变化或新失败影响结论时补查。
+
+体验观察优先使用老板实机录像，按时间戳记录操作、预期与实际，再关联现码和本轮差距；复验聚焦对应片段及差异场景。录屏工具见[工具箱](AGENT-TOOLBOX.md#本地录屏分析)。
 
 ## 登记与豁免
 
@@ -35,13 +37,15 @@
 
 每个完整流程批次复用同一份问题与验收记录，不为每个小点另建报告：
 
-1. 先写玩家遇到的问题、复现条件与可观察验收；对照现码防止重复改。Spec Kit 的问题/验收模板用于查漏，不能代替事实。
-2. 核对玩法规则、自定义内容与旧存档边界；新增/删除同时查静态和动态引用、迁移兼容、资源清单及来源许可。Knip/jscpd 只提供候选，不能单凭无引用或重复率删除。
-3. 共性问题先改公共模块，再成批接入相关页面；按完整玩家流程收拢更改，及时保存完成内容。
-4. 按影响集中验证：纯逻辑用定向回归，状态序列可用 fast-check；UI 合并 Stylelint、axe 与平台实页；关键守卫按需 Stryker，不追单函数满分。资源消费者变化必须重新审查指纹及排除清单；不降低质量门、预算或关闭 CI。
-5. 同步必要文档，列明真实验证与阻碍；按已有授权冻结完成清单、提交推送、回读 SHA 并核对该 SHA 的 CI。新结果与原日志分开，不把未验项写成通过。
+1. 按完整玩家流程确定问题、复现条件与可观察结果，区分尚未实现、已有待补和验收后变化。日常小修直接简报，跨会话批次共用一份记录。
+2. 优先复用现有公共模块、正式组件、导入工具与外部库；新增基础能力说清替代对象和接入范围。增删核对玩法、自定义内容、旧档、静态/动态引用和来源许可；Knip/jscpd 提供核查候选。
+3. 公共机制由一人收拢，独立规则、素材和验证并行；先做正式组件样板，再接各入口，同步收拢旧分支。预览直接复用正式组件；同类问题回到共同入口修正，按授权处理退役文件。
+4. 并行批次先汇总全部修改与待验项，由主会话统一选集、集中验证正式输出与状态变化：定向回归、fast-check、Stylelint/axe 与平台实页各司其职；架构和资源保留必要静态契约，关键守卫按需 Stryker。消费者变化同步审查资源指纹与排除清单，沿用质量门与预算。
+5. 同步现行描述，以对应版本和实际覆盖报告结果；按授权冻结、提交推送、回读 SHA 并核对 CI。完成以流程接齐、共性实现收拢和可观察结果为准，删减比例作辅助。
 
 ## 定向反馈
+
+日常不清楚测试文件时，用 `npm run test:changed -- --plan` 查看当前项目选集，再运行 `npm run test:changed`。共享工作树优先指定本轮改动，例如 `npm run test:changed -- --paths game/src/battle/view/battle.hover.js`；需要只读预览加 `--plan --json`。该入口沿用质量门选择器，公共边界或配置变化仍可升级 full；测试文件已明确时继续使用 `test:target` 或下方 `verify --tests`。
 
 | 改动 | 最短反馈 |
 | --- | --- |
@@ -56,38 +60,38 @@ npm run --silent workflow -- verify --task <编号> --tests <逗号分隔测试>
 npm run --silent docs:check -- --json
 ```
 
-改动涉及多处时可用 `workflow review --paths <CSV> --json` 汇总现行文档、测试和UI用例候选；加 `--input <verify报告>` 核验已有结果，详见[改动核验清单](CHANGE-REVIEW.md)。无Git恢复副本必须显式给路径，报告标 `snapshot`，不提供HEAD/index/CI证明。
+多处改动用 `workflow review --paths <CSV> --json` 汇总文档、测试和UI用例候选；加 `--input <verify报告>` 核验已有结果，详见[改动核验清单](CHANGE-REVIEW.md)。无Git副本显式给路径并标 `snapshot`；HEAD/index/CI 证据由对应 Git 与远端记录提供。
 
-恢复副本、依赖链接变更或冻结交付前，先运行 `npm run workflow -- doctor --staged --json`：沿用冻结计划核对 Git/index 与全部适用锁依赖，输出阻塞、可运行性及待快照选择模式，不执行测试或复制依赖。无 Git、缺包与锁不匹配先修复，空 index 也不表示通过。普通 `doctor` 核关键工具和全部直接依赖，并显示 node_modules 是否为链接；链接可读不代表内容与锁一致。预检不替代既有门禁、依赖字节校验或实页，路径/测试预览与 `--staged` 互斥。
+恢复副本、依赖链接变更或冻结交付前，运行 `npm run workflow -- doctor --staged --json` 核对 Git/index、全部适用锁依赖及可运行性；缺 Git、缺包或锁不匹配时先修复，空 index 按待快照选择处理。普通 `doctor` 核关键工具、全部直接依赖及 node_modules 链接；链接同时核对可读性和锁定字节。预检、测试、依赖字节校验与实页各自记录结果，路径/测试预览与 `--staged` 互斥。
 
-明确测试列表可直接 `verify --tests`；影响面/门级别不明才用 `--plan`，示例不是必跑清单。skip、失败和中断不算通过；相同相关内容与环境复用证据，不相关改动不扩大定向闭包。工作树 verify 结果是复用候选，不能直接免除暂存门。混树提交前先 `npm run check:staged:isolate -- --plan --json` 核对再显式运行；有效报告的 gateReceipt 须精确匹配 index、选择范围、输入、环境与依赖后才可 `GATE_RECEIPT` 复用，任一不符补验，不绕过门禁。
+测试已明确时直接 `verify --tests`，影响面或门级别待定时用 `--plan`。结果按通过、skip、失败和中断分别记录；相同相关内容与环境复用证据，定向范围沿实际依赖确定。工作树 verify 提供复用候选，提交走暂存门：先用 `npm run check:staged:isolate -- --plan --json` 核对再运行；gateReceipt 精确匹配 index、范围、输入、环境与依赖后用 `GATE_RECEIPT` 复用，差异项补验。
 
-按路径或完整门预检最多等待 60 秒，容纳首次依赖图扫描；超时立即停止并提示直接运行原计划命令定位耗时，不自动重试或缩小范围。该上限只管生成计划，未执行检查。
+按路径或完整门生成计划的预检上限为 60 秒；超时结束本次预检，直接运行原计划命令定位耗时，保留原定检查范围。
 
-单张皮肤导入、目标素材检查、保留原始退出码的定向检查与当前内置页面取证，见[美术接入工具](art-workflow-tools.md)。目标检查和全局资产门分别报告，不互相替代。
+单张皮肤导入、目标素材与定向检查、当前内置页面取证见[美术接入工具](art-workflow-tools.md)；保留原始退出码，目标检查和全局资产门分别报告。
 
-收官汇总、NAI请求记录/只读预检、可续跑的当前内置人物外观操作，见[常用工作流短入口](workflow-recipes.md)；复用现有任务/台账/证据机制，不自动替代负责人判断。
+收官汇总、NAI请求记录/只读预检、可续跑的当前内置人物外观操作见[常用工作流短入口](workflow-recipes.md)；工具复用现有任务、台账与证据，负责人据报告判断结果。
 
 ## 按授权收官
 
-达到完成标准就收官：说明改动、实测范围、未核项；释放自有编辑/服务占用，完成未提交保留路径和归属；收官只停本会话创建且身份核实的服务，复核端口。新发现入 backlog 或 PENDING，不扩大本轮。完成任务本身不构成提交授权。
+达到完成标准就收官：说明改动、实测范围、未核项，释放自有编辑/服务占用，完成未提交保留路径和归属。停止本会话创建且身份核实的服务并复核端口；新发现归 backlog 或 PENDING，提交按老板明确授权执行。
 
-老板明确授权提交后，按根规则打包全部完成未提交改动；ship 默认只盘点计划，核对完成归属、在途 mtime、原 index 后才执行，单组失败就停后续，不自动推送：
+老板明确授权提交后，按根规则打包全部完成未提交改动；ship 默认盘点计划，核对完成归属、在途 mtime、原 index 后执行，单组失败即停；推送按明确授权执行：
 
 ```powershell
 npm run --silent workflow -- ship --json
 npm run --silent workflow -- ship --apply --expect <planSha256> --json
 ```
 
-需明确范围加 `--paths <逗号分隔路径>`，冻结报告复用加 `--receipt <报告>`；源码/mtime、HEAD/index、登记与任务/待决基线变化拒绝执行。CI 只覆盖已推送版本；未推送增量明确列未覆盖。
+限定范围加 `--paths <逗号分隔路径>`，复用冻结报告加 `--receipt <报告>`；源码/mtime、HEAD/index、登记与任务/待决基线变化时重新冻结。CI 结果对应已推送版本，本地增量单列状态。
 
 ## 两条操作路径
 
-示例是操作模板，不产生实际提交授权；普通小修不因模板新增 task 或 stage 仪式。
+以下模板按已有任务授权取用；普通小修直接处理目标、验证并简报。
 
 ### 普通小修：工程文档修正
 
-查目标 → 改目标 → 验相关文档 → 简报完成未提交，到此收官；无提交授权不 stage/commit。内部脚本小修把 docs:check 换成对应定向契约测试，玩家可见变化按质量门补实页。
+查目标 → 改目标 → 验相关文档 → 简报完成未提交；stage/commit 按提交授权执行。内部脚本采用对应定向契约测试，玩家可见变化按质量门补实页。
 
 ```powershell
 git diff -- docs/AGENT-TOOLBOX.md
@@ -96,7 +100,7 @@ npm run --silent docs:check -- --json
 
 ### 混树：已授权提交的完成代码包
 
-先确认完成归属和提交授权，审查工作树/index 后预览候选范围；`--paths` 不自动扩展文档，测试读取的相关文档纳入同一代码组：
+确认完成归属和提交授权，审查工作树/index 后预览候选范围；代码及测试读取的文档显式同组列入 `--paths`：
 
 ```powershell
 npm run handoff
@@ -120,7 +124,7 @@ $ship = npm run --silent workflow -- ship --paths $completePaths --receipt $rece
 if ($ship.status -ne 'ready' -or -not $ship.receiptValidity.eligible) { throw $ship.nextAction }
 ```
 
-空 index 或纯文档 skip 不是 passed receipt；相关文档随代码同组，不在冻结后补 stage；输入/任务基线变化重新预览补验。**仅在已有明确提交授权且刚才计划已核对时执行**，原参数与预览 SHA 不变；失败保留已完成提交和剩余现场，按 details.nextAction 处理，不自动重试：
+passed receipt 来自实际执行通过的检查，空 index 和纯文档 skip 单列状态。相关文档随代码同组冻结，输入或任务基线变化时重新预览补验。**按明确提交授权和已核对计划执行**，沿用原参数与预览 SHA；失败保留现场，按 details.nextAction 处理后再决定下一步：
 
 ```powershell
 npm run --silent workflow -- ship --paths $completePaths --receipt $receipt --apply --expect $ship.planSha256 --json
@@ -135,7 +139,7 @@ npm run --silent workflow -- ship --paths $completePaths --receipt $receipt --ap
 npm run --silent workflow -- task start --task WF-example --owner Friday --goal "修正任务工具及其说明" --paths "scripts/workflow-task.mjs,tests/workflow-task.test.js,docs/WORKFLOW-TOOLS.md" --done-when "相关契约测试通过" --done-when "说明与实际接口一致" --stage doing --apply --expect absent --json
 ```
 
-完成仍是未提交：先 close 释放占用，再 stage 冻结。close 同样先预览，核对后用同一参数加 `--apply --expect $closePlan.expectedSha256` 应用；partial 收官改 `--stage partial`，失败/未核验检查如实填写。任何 close 都不产生提交授权。
+完成先 close 释放占用，再按已有提交授权 stage 冻结。close 先预览，核对后用同一参数加 `--apply --expect $closePlan.expectedSha256` 应用；partial 收官用 `--stage partial`，分别填写失败及未核验检查。
 
 ```powershell
 # task-close-example
@@ -145,4 +149,4 @@ npm run --silent workflow -- task close --task WF-example --owner Friday --stage
 
 ## 归档与替代
 
-旧办法被明确替代或历史入口误导时才归档，不覆盖旧档；manifest 的 target 原字节 SHA256 与 replacedBy 现行入口必须可核对，实际移动/删除沿项目授权。原文来源见[减负归档](archive/lean-workflow-2026-09-30/README.md)。
+旧办法被明确替代或历史入口误导时归档并保留原文；manifest 的 target 原字节 SHA256 与 replacedBy 现行入口可核对，移动/删除沿项目授权。原文来源见[减负归档](archive/lean-workflow-2026-09-30/README.md)。

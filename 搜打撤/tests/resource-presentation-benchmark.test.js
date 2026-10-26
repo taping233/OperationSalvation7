@@ -51,7 +51,8 @@ function pass(context, rounds=1) {
   }
   return output;
 }
-it.skipIf(!process.env.RESOURCE_PRESENTATION_BENCH)('compares complete mixed catalog card construction, cold and warm', () => {
+it('compares complete mixed catalog card construction, cold and warm', context => {
+  if (!process.env.RESOURCE_PRESENTATION_BENCH) context.skip('按需性能实验；设置RESOURCE_PRESENTATION_BENCH后执行');
   for (const name of ['ensureStarters','ensureSha','ensureTabletop','ensureDmgTypes','ensureEffectFields']) window.SDT.Cards[name]();
   catalog = window.SDT.Cards.all();
   const before=create(false), after=create(true);

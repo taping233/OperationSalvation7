@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it, vi } from 'vitest';
 import { groupHandCards } from '../game/src/battle/core/battle.hand.js';
 

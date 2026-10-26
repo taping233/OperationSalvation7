@@ -156,7 +156,7 @@ export interface TextEffectPorts {
   restoreConsumed(n: number): number; random01(purpose?: string): number; allCards(): CoreCard[]; queueChoice(job: ChoiceJob): void;
   registerTurnStartText(text: string, cardName: string): void;
   setStealthStrike(value: boolean): void; setNextSpellTwice(n: number): void;
-  shuffleDeck(): number; addEnergy(n: number): number; refillEnergy(): number; addEnergyCap(n: number): number;
+  shuffleDeck(): number; addEnergy(n: number): number; refillEnergy(): number; addEnergyCap(n: number, grantCurrent?: boolean): number;
   isRandomObtainable(card: BattleCardInput): boolean; getPlayerHp(): number; getHandSize(): number;
   getHandCards(): (CardEntry | null)[]; burstPoison(target: CoreFoe): DamageResult | null;
   deckDraw: EffectCommands['deckDraw']; fleeBattle(): void; sweepDead(): void; armorMul(): number;
@@ -193,7 +193,7 @@ export type ResolutionPorts = Pick<EffectCommands,
   applyStatus(foe: CoreFoe, status: string, duration: number): number;
   onHandConsumed: EffectCommands['onHandConsumed']; queueDiscover(value: DiscoverQueueJob): number;
   applyTextEffects: ApplyTextEffects; shuffleDeck(): number; addCoins(n: number): void; getMyClass(): string | null;
-  addEnergy(n: number): number; refillEnergy(): number; addEnergyCap(n: number): number; addPlayerMaxHp(n: number): void;
+  addEnergy(n: number): number; refillEnergy(): number; addEnergyCap(n: number, grantCurrent?: boolean): number; addPlayerMaxHp(n: number): void;
   combat: CombatPort; canApplyPlayerCurse(): boolean;
   foeDealDamage(caster: CombatCaster, target: CoreFoe, amount: number, card: CoreCard): DamageResult;
   getPlayerHp(): number; countDrawnSpells(): number; addArmor(amount: number, options?: { guard?: boolean }): void;

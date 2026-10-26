@@ -119,7 +119,15 @@ function enterHub(method, args) {
   return operation;
 }
 
-function openBaseHub(tab) { return enterHub('openBaseHub', [tab]); }
+function openBaseHub(tab) {
+  if (tab !== 'departure') return enterHub('openBaseHub', [tab]);
+  const currentContext = captureBattleContext(game, getActiveSlot);
+  // Complete the existing base entry before the character page takes loading ownership.
+  return enterHub('openBaseHub', ['deploy']).then(opened => {
+    if (opened === false || !currentContext()) return false;
+    return pageModule?.openDepartureFromBase() ?? false;
+  });
+}
 // Retired furniture entry: do not load a page, navigate, or touch saved data.
 function renderHomeScene() { return Promise.resolve(false); }
 function renderHub() { return pageModule?.renderHub() ?? false; }

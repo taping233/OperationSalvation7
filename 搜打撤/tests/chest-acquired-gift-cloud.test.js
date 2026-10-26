@@ -48,7 +48,7 @@ beforeAll(async () => {
     hideOverlay:()=>H.UI.el.overlay.hidden=true, refresh(){}, log:vi.fn(), showCardReward:vi.fn(), _checkPageBg(){} });
   window.SDT ||= {}; Object.assign(window.SDT, { game:H.game, UI:H.UI, Icons:{ rich:html=>html }, Sound:{ sfx(){} }, Meta:{},
     Base:{ slot:1, bagCap:()=>16, safeCap:()=>3, isSha:()=>false, data:{} },
-    MAP:{ chestKinds:{ small:{ name:'小宝箱' }, medium:{ name:'中宝箱', pickFrom:3 } } },
+    MAP:{ chestKinds:{ small:{ name:'小型物资箱' }, medium:{ name:'密封物资箱', pickFrom:3 } } },
     Cards:{ all:()=>H.cards, isRandomObtainable:()=>true, cardHTML:card=>`<span>${card.name}</span>`, rarityOf:card=>card.rarity, sellPrice:()=>1 },
   });
   Bag=await import('../game/src/run/game.session.bag.js');
@@ -74,7 +74,7 @@ beforeEach(async () => {
 });
 afterEach(()=>{ vi.restoreAllMocks(); vi.clearAllTimers(); vi.useRealTimers(); });
 
-describe('宝箱/固定奖励阿猫附赠独立待领', () => {
+describe('搜刮点/固定奖励阿猫附赠独立待领', () => {
   it('15/16格收本体后附赠固定在原快照；满包失败不变，腾位返回后可单独领一次', async () => {
     await open(); const beforeRng=Random.snapshot();
     H.UI.el.ovBody.querySelector('[data-act="chestTake1"][data-i="0"]').click(); await pendingAction;
@@ -178,7 +178,7 @@ describe('宝箱/固定奖励阿猫附赠独立待领', () => {
     expect(Chests.serialize(H.game).current).toMatchObject({ taken:[0], lost:[1] });
   });
 
-  it('不提供延后端口的旧非宝箱调用保持原可容纳时即时附赠行为', async () => {
+  it('不提供延后端口的旧非搜刮点调用保持原可容纳时即时附赠行为', async () => {
     H.game.ownedCards=[]; expect(scenes.grantEventCard(apollo)).toBe(true);
     expect(count(apollo.id)).toBe(1); expect(count(bonus.id)).toBe(1); expect(H.UI.showCardReward).toHaveBeenCalledTimes(2);
   });

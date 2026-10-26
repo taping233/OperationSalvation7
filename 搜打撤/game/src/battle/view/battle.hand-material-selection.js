@@ -1,5 +1,5 @@
-// A draft for the shared material workspace. Only pickHandSelect spends cards.
-export const isHandMaterialSelection = snapshot => ['payment', 'consume'].includes(snapshot?.handSelecting?.act);
+// In-place hand-selection draft. Only pickHandSelect applies the chosen effect.
+export const isHandMaterialSelection = snapshot => !!snapshot?.handSelecting;
 const faceKey = card => JSON.stringify(card);
 const identity = snapshot => {
   const state = snapshot?.handSelecting;
@@ -19,6 +19,8 @@ export function createHandMaterialSelection({ getSnapshot, commands, findCard, r
     }
     const owner = draft;
     const sourceUid = state.act === 'payment' ? state.payment.uid : `hand-material-source:${owner.serial}`;
+    // Free plays resolve one at a time, allowing each card's nested choices to finish.
+    const need = state.act === 'play' ? 1 : state.n;
     const sourceCard = state.payment?.card || state.srcCard || {
       id:'hand-material-effect', name:state.sourceCardName || '消耗手牌', type:'武术', cost:0, desc:'选择手牌消耗',
     };
@@ -30,8 +32,7 @@ export function createHandMaterialSelection({ getSnapshot, commands, findCard, r
         ? '卡牌已变化，请撤回后重新选择' : '';
     const entries = [...new Set([...(state.candidateUids || []), ...owner.picked.keys()])]
       .map(uid => live.get(uid) || owner.picked.get(uid)?.entry).filter(Boolean);
-    entries.push({ uid:sourceUid, card:sourceCard });
-    const selection = { uid:sourceUid, card:sourceCard, need:state.n, picked:[...owner.picked.keys()],
+    const selection = { uid:sourceUid, card:sourceCard, need, picked:[...owner.picked.keys()],
       selectionId:owner.serial, targetIndex:null };
     const current = now => !submitting && draft === owner && identity(now) === owner.key
       && progress(now.handSelecting) === owner.progress ? project(now)?.selection : null;
@@ -42,14 +43,14 @@ export function createHandMaterialSelection({ getSnapshot, commands, findCard, r
       else {
         const entry = findCard(uid);
         if (!entry || !now.handSelecting.candidateUids?.includes(uid) || !now.hand.includes(uid)
-          || owner.picked.size >= now.handSelecting.n) return;
+          || owner.picked.size >= need) return;
         owner.picked.set(uid, { entry, face:faceKey(entry.card) });
       }
       requestRender();
     };
     const confirm = () => {
       const now = getSnapshot();
-      if (!current(now) || owner.picked.size !== now.handSelecting.n) return;
+      if (!current(now) || owner.picked.size !== need) return;
       const uids = [...owner.picked.keys()];
       if (uids.some(uid => !now.handSelecting.candidateUids?.includes(uid) || !now.hand.includes(uid)
         || !findCard(uid) || owner.picked.get(uid).face !== faceKey(findCard(uid).card))) {
@@ -74,7 +75,7 @@ export function createHandMaterialSelection({ getSnapshot, commands, findCard, r
     };
     return { selection, entries, reason, current, toggle, confirm, cancel,
       canCancel:state.canCancel === true, canConfirm:selection.picked.length === selection.need && !selection.picked.some(reason),
-      label:state.act === 'payment' ? '选择消耗代价' : '选择消耗手牌', confirmLabel:'确认消耗' };
+      label:({ payment:'选择消耗代价', consume:'选择消耗手牌', play:'选择免费施放的手牌', copy:'选择复制的手牌', zero:'选择变为零费的手牌' })[state.act] || '选择手牌', confirmLabel:'确定' };
   }
   return { project, isSubmitting:() => submitting };
 }

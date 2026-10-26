@@ -39,7 +39,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
 vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn() }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn(), ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ captureBattleContext: () => () => true, ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), captureBattleContext: () => () => true, ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
 vi.mock('../game/src/run/game.run.data.js', () => ({
   IMMEDIATE_SCENES: {}, NODE_BG: { fire: 'scene-fire-bg', altar: 'scene-altar-bg', event: 'scene-event' },
   PICKUP_BG: {}, PRELOAD_SCENES: [], SCENES: { coin:{ icon:'', title:'硬币', lines:['风雪里的零钱'] } },
@@ -156,7 +156,7 @@ it('道具献祭同时按类型和位置筛选，安全/储藏道具与普通非
   expect(document.querySelector('[data-act="sacPick"]')).toBe(candidate);
   expect(candidate.getAttribute('aria-pressed')).toBe('true');
   expect(st.game.ownedCards).toHaveLength(4);
-  const currentConfirm = acts.sacConfirm; currentConfirm(); currentConfirm();
+  const currentConfirm = acts.sacConfirm; const pending=currentConfirm(); currentConfirm(); await pending;
   expect(st.game.ownedCards).toEqual([spell, ...protectedItems]);
   expect(st.game.altarItemSacrificed).toBe(true);
   expect(document.querySelector('[data-act="restoreOne"]')).not.toBeNull();
@@ -204,7 +204,8 @@ it('第三层紧急撤离预检沿用普通背包计数，受保护卡不增加�
   st.game.layerIdx = 2; st.curLayer = { logical:[{ def:{ type:'emergencyExit' } }] };
   const { openEmergencyModal } = await importAltar(); openEmergencyModal();
   expect(document.querySelector('[data-act="payExit"]').disabled).toBe(true);
-  expect(document.body.textContent).toContain('现有 2/3');
+  expect(document.querySelector('.emergency-exit-availability b').textContent).toContain('2');
+  expect(document.body.textContent).toContain('还需 1 张');
   acts.payExit();
   expect(document.querySelector('[data-act="sacConfirm"]')).toBeNull();
   expect(st.game.ownedCards).toHaveLength(4);

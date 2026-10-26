@@ -7,7 +7,7 @@ export const SCENE_CATALOG = Object.freeze({
   event:   { title: '事件', desc: '测试局直跳事件并走完分支' },
   fire:    { title: '火堆', desc: '测试局直跳火堆并完成' },
   altar:   { title: '祭坛', desc: '测试局直跳祭坛并完成仪式' },
-  chest:   { title: '宝箱', desc: '测试局直跳中宝箱并开完' },
+  chest:   { title: '搜刮点', desc: '测试局直跳密封物资箱并开完' },
   extract: { title: '撤离结算链', desc: '开局 BFS 走到第三层紧急撤离点→献祭撤离→结算' },
   fullrun: { title: 'greedy 完整局', desc: 'strategic+turbo 打到撤离或死亡，断言自然收口', turbo: true },
 });

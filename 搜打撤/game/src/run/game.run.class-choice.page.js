@@ -10,6 +10,10 @@ import { captureOverlayReturnState, restoreOverlayReturnState } from '../ui/over
 import { Sfx } from '../hub/game.cardslib.js';
 import { captureBattleContext, ensureBattleReady } from '../battle/battle-loader.js';
 import { preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
+import { syncViewChildren } from '../ui/view-children-sync.js';
+import { saveRunCheckpoint } from '../core/run-checkpoint.js';
+import { createOperationNotice } from '../ui/operation-notice.js';
+import { holdHubOperationControls } from '../hub/hub.presentation.js';
 
 // 选人页机制简介（2026-09-12 留言：按各职业卡池真实机制写，键 = characters.js 的 id）
 const CLASS_STORY = {
@@ -31,7 +35,10 @@ export function openClassChoice(options = {}) {
     !document.getElementById('overlay')?.classList.contains('closing') &&
     document.querySelector('#overlay .cls2-page, #overlay .cls-pool-page') === choiceRoot;
   const visible = () => current() && choiceVisible();
-  const act = (name, handler) => UI.act(name, data => { if (visible()) return handler(data); });
+  const act = (name, handler) => UI.act(name, data => {
+    if (!visible() || name !== 'pickClass' && (confirmationStarted || confirmationPending || selectionPending)) return false;
+    return handler(data);
+  });
   const onCancel = typeof options.onCancel === 'function' ? options.onCancel : null;
   const onSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
   const confirmLabel = onSelect ? '下一步：选择卡牌' : '出发';
@@ -51,7 +58,12 @@ export function openClassChoice(options = {}) {
   let sel = previous && picks.includes(previous.rulesetId) ? previous.rulesetId : picks[0];
   let confirmationStarted = false;
   let confirmationPending = false;
+  let selectionPending = false;
   let entryPresented = false;
+  let confirmation = null;
+  let departurePending = null;
+  let selectionGeneration = 0;
+  const confirmationNotice = createOperationNotice();
   let view = 'select'; // 'select' 主选角页 | 'pool' 二级卡池页
   const poolCount = cl => SDT.Cards.classPool(cl).length;
   // 主选角页（2026-09-06 留言重做，排版参考杀戮尖塔 2 选人界面）：
@@ -117,6 +129,7 @@ export function openClassChoice(options = {}) {
             ${SDT.Art.classAvatarArt ? SDT.Art.classAvatarArt(cl) : SDT.Art.classArt(cl, true)}<b>${esc(c.name)}</b>
           </button>`).join('')}</div>
         ${linkedBackHTML('cls2Quit', onSelect ? '返回基地' : onCancel ? '返回出发整备' : '返回标题界面', '', 'button', { cancel:true })}
+        ${confirmationNotice.html({ keepEmpty:true })}
         <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? confirmLabel : '请先选择角色'}" aria-label="${sel ? confirmLabel : '请先选择角色'}"><span>${sel ? confirmLabel : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>`;
     const mounted = local && document.querySelector('#overlay .cls2-page');
@@ -151,7 +164,7 @@ export function openClassChoice(options = {}) {
     if (view !== 'pool' || !choiceRoot?.matches('.cls-pool-page')) return;
     const index = Number(choiceRoot.querySelector('#poolPreview')?.getAttribute('data-card-index'));
     poolBrowse = { role:sel, page:poolPage, filter:poolFilter,
-      selectedId:SDT.Cards.classPool(sel)[index]?.id,
+      selectedId:choiceRoot.querySelector('#poolPreview')?.getAttribute('data-card-id') || SDT.Cards.classPool(sel)[index]?.id,
       presentation:captureOverlayReturnState(choiceRoot),
     };
   };
@@ -173,7 +186,7 @@ export function openClassChoice(options = {}) {
     const items = [{ key: 'all', label: '全部档案', count: pool.length }, ...types.map(type => ({
       key: type, label: type, count: pool.filter(card => (card.type || '未分类') === type).length,
     }))];
-    return items.map(({ key, label, count }) => `<button class="pool-filter${poolFilter === key ? ' active' : ''}" data-act="poolFilter" data-filter="${escAttr(key)}" aria-pressed="${poolFilter === key ? 'true' : 'false'}"><span>${esc(label)}</span><b>${count}</b></button>`).join('');
+    return items.map(({ key, label, count }) => `<button class="pool-filter${poolFilter === key ? ' active' : ''}" data-target-id="pool-filter-${escAttr(key)}" data-act="poolFilter" data-filter="${escAttr(key)}" aria-pressed="${poolFilter === key ? 'true' : 'false'}"><span>${esc(label)}</span><b>${count}</b></button>`).join('');
   };
   const poolPagerHTML = () => {
     const pool = filteredPool();
@@ -210,7 +223,7 @@ export function openClassChoice(options = {}) {
     if (!cards.length) return '<div class="pool-grid pool-grid-empty" id="poolGrid"><p>当前档案暂无卡牌</p></div>';
     return `<div class="pool-grid" id="poolGrid">${cards.map(({ card: c, index }, i) => {
       const ro = SDT.Cards.rarityOf(c);   // 衍生牌全量扫卡库，单卡只调一次
-      return `<div class="pool-cell"><span class="pool-rarity-tag${ro === '棱彩' ? ' prism' : ''}">${esc(ro)}</span><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${index}" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`;
+      return `<div class="pool-cell" data-card-id="${escAttr(c.id || `${sel}:${index}`)}"><span class="pool-rarity-tag${ro === '棱彩' ? ' prism' : ''}">${esc(ro)}</span><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${index}" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`;
     }).join('')}</div>`;
   };
   // 预解码下一页插画（翻页零解码等待，同卡牌库 warmNextLibPage）
@@ -227,21 +240,44 @@ export function openClassChoice(options = {}) {
     warm(urls);
   };
   // 翻页/重进只重绘卡格区与页脚分页状态（整页 showOverlay 会重置预览栏）
+  const poolFragment = html => {
+    const template = document.createElement('template');
+    template.innerHTML = SDT.Icons?.rich ? SDT.Icons.rich(html) : html;
+    return template.content;
+  };
+  const markPoolPreview = index => {
+    choiceRoot?.querySelectorAll('.pool-card-button').forEach(button => {
+      const selected = Number(button.dataset.i) === index;
+      button.classList.toggle('selected', selected);
+      if (selected) button.setAttribute('aria-current', 'true'); else button.removeAttribute('aria-current');
+    });
+  };
+  const paintPoolPreview = entry => {
+    const preview = choiceRoot?.querySelector('#poolPreview');
+    if (!preview) return;
+    syncViewChildren(preview, poolFragment(poolPreviewHTML(entry?.card)));
+    preview.setAttribute('data-card-index', String(entry?.index ?? -1));
+    preview.setAttribute('data-card-id', entry?.card?.id || '');
+    markPoolPreview(entry?.index ?? -1);
+  };
   const renderPoolGrid = () => {
+    const preview = choiceRoot?.querySelector('#poolPreview');
+    const selectedId = preview?.getAttribute('data-card-id') || (SDT.Cards.classPool(sel) || [])[Number(preview?.getAttribute('data-card-index'))]?.id;
     const grid = document.getElementById('poolGrid');
-    if (grid) grid.outerHTML = poolGridHTML();
-    const filters = document.getElementById('poolFilters');
-    if (filters) filters.innerHTML = poolFilterHTML();
-    const pagerEl = document.getElementById('poolPager');
-    if (pagerEl) pagerEl.innerHTML = poolPagerHTML();
-    const pool = filteredPool();
-    const first = pool[poolPage * poolPageSize(pool)];
-    const preview = document.getElementById('poolPreview');
-    if (first && preview) {
-      preview.innerHTML = poolPreviewHTML(first.card);
-      preview.dataset.cardIndex = String(first.index);
-      characterMotion.preview(preview);
+    if (grid) {
+      const next = /** @type {HTMLElement} */ (poolFragment(poolGridHTML()).firstElementChild);
+      grid.className = next.className;
+      syncViewChildren(grid, next);
     }
+    const filters = document.getElementById('poolFilters');
+    if (filters) syncViewChildren(filters, poolFragment(poolFilterHTML()));
+    const pagerEl = document.getElementById('poolPager');
+    if (pagerEl) syncViewChildren(pagerEl, poolFragment(poolPagerHTML()));
+    const pool = filteredPool();
+    const pageCards = pool.slice(poolPage * poolPageSize(pool), (poolPage + 1) * poolPageSize(pool));
+    const selected = pageCards.find(entry => entry.card.id === selectedId) || pageCards[0];
+    paintPoolPreview(selected);
+    if (preview && selected?.card.id !== selectedId) characterMotion.preview(preview);
     const count = document.getElementById('poolResultCount');
     if (count) count.textContent = String(pool.length);
     bindPoolFocusPreview();
@@ -271,10 +307,10 @@ export function openClassChoice(options = {}) {
             <div class="pv-head">
               <b class="pv-name">卡牌详情</b>
             </div>
-            <div class="pv-body" id="poolPreview" data-card-index="${previewIndex}" aria-live="polite">${poolPreviewHTML(previewCard)}</div>
+            <div class="pv-body" id="poolPreview" data-card-index="${previewIndex}" data-card-id="${escAttr(previewCard?.id || '')}" aria-live="polite">${poolPreviewHTML(previewCard)}</div>
           </aside>
           <section class="pool-catalog" aria-label="角色卡档案">
-            <div class="pool-catalog-head"><div><b>分类索引</b></div><div class="pool-result-summary">当前档案 <strong id="poolResultCount">${pool.length}</strong> 张</div></div>
+            <div class="pool-catalog-head"><div><b>分类索引</b></div><div class="pool-result-summary">当前档案 <strong id="poolResultCount">${filtered.length}</strong> 张</div></div>
             <nav class="pool-filters" id="poolFilters" aria-label="按卡牌类型筛选">${poolFilterHTML(pool)}</nav>
             ${poolGridHTML()}
           </section>
@@ -285,7 +321,7 @@ export function openClassChoice(options = {}) {
         </footer>
       </div>`, 'page');
     choiceRoot = document.querySelector('#overlay .cls-pool-page');
-    choiceRoot.querySelectorAll('.pool-card-button').forEach(button => button.classList.toggle('selected', Number(button.dataset.i) === previewIndex));
+    markPoolPreview(previewIndex);
     characterMotion.enter();
     bindPoolFocusPreview();
     if (saved) restoreOverlayReturnState(choiceRoot, saved.presentation);
@@ -298,10 +334,7 @@ export function openClassChoice(options = {}) {
     const pv = document.getElementById('poolPreview');
     if (!c || !pv) return;
     if (el.classList.contains('selected') && pv.dataset.cardIndex === String(i)) return;
-    document.querySelectorAll('#poolGrid .pool-card-button.selected').forEach(node => node.classList.remove('selected'));
-    el.classList.add('selected');
-    pv.innerHTML = poolPreviewHTML(c);
-    pv.dataset.cardIndex = String(i);
+    paintPoolPreview({ card:c, index:i });
     fitPoolDescriptions();
     characterMotion.preview(pv);
     if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(pv);   // 侧栏 lg 大图变体显式解码，防 IAB 合成黑窗（网格小卡已解码不代表大尺寸变体可用，2026-09-20 走查实锤）
@@ -366,12 +399,13 @@ export function openClassChoice(options = {}) {
     const direction = picks.indexOf(d.cls) >= picks.indexOf(sel) ? 1 : -1;
     poolBrowse = null;
     sel = d.cls;
+    selectionGeneration++;
     SDT.Sound.sfx('characterSelect');
     render(true, direction);
   });
   act('clsPool', () => {
     if (!sel) return;
-    characterMotion.page(() => {
+    return characterMotion.page(() => {
       view = 'pool';
       Sfx.tick();
       render();
@@ -379,7 +413,7 @@ export function openClassChoice(options = {}) {
   });
   act('clsBack', () => {
     rememberPoolBrowse();
-    characterMotion.page(() => {
+    return characterMotion.page(() => {
       view = 'select';
       Sfx.tick();
       render();
@@ -406,77 +440,191 @@ export function openClassChoice(options = {}) {
     // immediate 同步关层，淡出窗口竞态在 ui.js 层根治
     exitToTitle();
   });
-  const confirmClass = async cl => {
-    if (confirmationStarted || confirmationPending || !current()) return false;
-    if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !visible()) return false;
+  const confirmClass = async (cl, generation = selectionGeneration) => {
+    if (confirmationPending || entryPresented) return false;
+    if (generation !== selectionGeneration || cl !== sel) return false;
+    if (confirmation ? !ownsConfirmationPage() : departurePending ? !ownsPendingDeparturePage() : !current()) return false;
+    if (!confirmation && !departurePending && (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !visible())) return false;
     const confirmationSlot = getActiveSlot();
     confirmationPending = true;
     try {
-      if (beforeConfirm && await beforeConfirm() === false) return false;
-      // Deferred beforeConfirm creates the run; its preparation page owns the new battle seed.
-      if (getActiveSlot() !== confirmationSlot || (options.isCurrent && !options.isCurrent())) return false;
-      if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !visible()) return false;
-    } finally { confirmationPending = false; }
-    confirmationStarted = true;
-    if (!SDT.Base?.data?.ammoTaught) {
-      // beforeConfirm may create the run; only its resulting context owns this awaited confirmation.
-      const confirmationContext = captureBattleContext(game, getActiveSlot);
-      const marked = await SDT.Base?.markAmmoTaught?.();
-      if (!confirmationContext() || getActiveSlot() !== confirmationSlot || (options.isCurrent && !options.isCurrent())) return false;
-      if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !choiceVisible()) return false;
-      if (marked === false && confirmationSlot != null) UI.log('[[icon:cross]] 教学标记尚未保存，请重试保存', 'warn');
-    }
-    game.myClass = cl;
-    game.characterId = characterFor(cl).id;
-    game.classCard = null;
-    const card = SDT.Cards.randomClassCard(cl);
-    // 2026-09-06：开局获得 2 张本职业卡牌（原 1 张），尽量不重复
-    let card2 = SDT.Cards.randomClassCard(cl);
-    for (let i = 0; i < 8 && card2 && card && card2.id === card.id; i++) card2 = SDT.Cards.randomClassCard(cl);
-    UI.hideOverlay();
-    UI.log(`[[icon:medal]] 本局角色：<b>${esc(characterName(cl))}</b>`, 'ok');
-    // 熟练度加成：每级（Lv.1 起）生命上限 +1（2026-09-09 需求 #5），立即生效
-    const lv = SDT.Meta.classLv(cl);
-    if (lv > 1) {
-      const bonus = (lv - 1) * 1;
-      game.maxHp += bonus; game.hp += bonus;
-      UI.log(`[[icon:medal]] ${esc(characterName(cl))} 熟练度 <b>Lv.${lv}</b>：生命上限 +${bonus}（${game.maxHp}）`, 'ok');
-    }
-    game.entrySupply = createEntrySupply(game, [card, card2]);
-    saveGame();   // Freeze the pending cards before the departure transition.
-    // 2026-09-07 留言：选人进局要有过渡动画——复用节点过场（大门场景 + 角色名揭晓）；
-    // 启程文案按人物区分（对应各自 tag 的语气）
-    const START_LINES = {
-      wu: '刀锋出鞘，踏雪先行',
-      changwuyu: '契约既成，答案待启',
-      baita: '口袋里的星图，亮了',
-      heixiang: '最后一道防线，就位',
-      xingyue: '灯已点亮，照归途',
-    };
-    const startLine = START_LINES[characterFor(cl).id] || '整备完毕，探索开始';
-    const currentContext = captureBattleContext(game, getActiveSlot);
-    const transition = showRunTransition({
-      tone: 'door', asset: 'scene-door-bg', eyebrow: 'EXPEDITION START',
-      title: characterName(cl), detail: startLine, duration: 1600,
-      prepare: () => SDT.Renderer?.warm?.(),
-      presentation: 'city-cut',
-      scene: 'departure',
-    });
-    return transition.then(completed => {
-      if (entryPresented || completed === false || !transition.isCurrent() || !currentContext()) return false;
+      if (!confirmation) {
+        const confirmationBase = SDT.Base;
+        if (departurePending) {
+          const pending = departurePending;
+          const release = holdHubOperationControls(pending.page.root?.querySelectorAll('[data-act="retryClassConfirmation"]') || []);
+          let published;
+          try {
+            confirmationNotice.set('正在打开地图…');
+            published = await pending.handle.retry();
+          } finally { release(); }
+          if (!ownsPendingDeparturePage()) return false;
+          if (published !== true) { showPendingDepartureRetry(); return false; }
+          confirmationNotice.clear();
+        } else if (beforeConfirm) {
+          const page = captureConfirmationPage();
+          const baseSlot = confirmationBase?.slot;
+          const baseGeneration = confirmationBase?._selectionGeneration;
+          const result = await beforeConfirm();
+          if (result?.status === 'departure-pending' && result.committed === true &&
+            typeof result.retry === 'function' && typeof result.isCurrent === 'function') {
+            departurePending = { handle:result, cl, generation, slot:confirmationSlot, base:confirmationBase,
+              baseSlot, baseGeneration, page };
+            confirmationStarted = true;
+            if (ownsPendingDeparturePage()) showPendingDepartureRetry();
+            return false;
+          }
+          if (result === false) return false;
+        }
+        // Deferred beforeConfirm owns newRun; its completed run is never created again on retry.
+        if (getActiveSlot() !== confirmationSlot || SDT.Base !== confirmationBase || generation !== selectionGeneration || cl !== sel) return false;
+        if (departurePending ? !ownsPendingDeparturePage() :
+          (options.isCurrent && !options.isCurrent()) || (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !visible())) return false;
+        confirmation = { cl, current:captureBattleContext(game, getActiveSlot), base:confirmationBase,
+          slot:confirmationSlot, baseSlot:confirmationBase?.slot, baseGeneration:confirmationBase?._selectionGeneration,
+          generation, departureHandle:departurePending?.handle, page:captureConfirmationPage(), prepared:false, saved:false, transitioned:false };
+      }
+      if (!confirmation.prepared) {
+        // 恢复句柄已完成基地教学处理；这里只承担普通入口的教学标记。
+        if (!confirmation.departureHandle && !SDT.Base?.data?.ammoTaught) {
+          const marked = await saveRunCheckpoint(() => SDT.Base?.markAmmoTaught?.());
+          if (!ownsConfirmationPage() || (onSelect && options.isConfirmationCurrent && !options.isConfirmationCurrent())) return false;
+          if (!marked && confirmationSlot != null) UI.log('[[icon:cross]] 教学标记尚未保存，请重试保存', 'warn');
+        }
+        const card = SDT.Cards.randomClassCard(cl);
+        // 开局两张职业卡只抽取一次，保存失败后沿用同一份入城补给。
+        let card2 = SDT.Cards.randomClassCard(cl);
+        for (let i = 0; i < 8 && card2 && card && card2.id === card.id; i++) card2 = SDT.Cards.randomClassCard(cl);
+        const supply = createEntrySupply(game, [card, card2]);
+        const lv = SDT.Meta.classLv(cl);
+        const bonus = lv > 1 ? (lv - 1) * 1 : 0;
+        game.myClass = cl;
+        game.characterId = characterFor(cl).id;
+        game.classCard = null;
+        game.maxHp += bonus; game.hp += bonus;
+        game.entrySupply = supply;
+        confirmation.prepared = true;
+        confirmationStarted = true;
+        UI.log(`[[icon:medal]] 本局角色：<b>${esc(characterName(cl))}</b>`, 'ok');
+        // 熟练度加成：每级（Lv.1 起）生命上限 +1（2026-09-09 需求 #5），立即生效
+        if (lv > 1) {
+          UI.log(`[[icon:medal]] ${esc(characterName(cl))} 熟练度 <b>Lv.${lv}</b>：生命上限 +${bonus}（${game.maxHp}）`, 'ok');
+        }
+      }
+      if (!confirmation.saved) {
+        const saved = await saveRunCheckpoint(saveGame);
+        if (!ownsConfirmationPage()) return false;
+        if (!saved) { showConfirmationRetry('人物与初始职业卡已保留，出征进度尚未保存；请重试保存后出发。'); return false; }
+        confirmation.saved = true;
+      }
+      if (!confirmation.transitioned) {
+        // 2026-09-07 留言：选人进局要有过渡动画——复用节点过场（大门场景 + 角色名揭晓）；
+        // 启程文案按人物区分（对应各自 tag 的语气）
+        const START_LINES = {
+          wu: '刀锋出鞘，踏雪先行',
+          changwuyu: '契约既成，答案待启',
+          baita: '口袋里的星图，亮了',
+          heixiang: '最后一道防线，就位',
+          xingyue: '灯已点亮，照归途',
+        };
+        const startLine = START_LINES[characterFor(cl).id] || '整备完毕，探索开始';
+        const transition = showRunTransition({
+          tone: 'door', asset: 'scene-door-bg', eyebrow: 'EXPEDITION START',
+          title: characterName(cl), detail: startLine, duration: 1600,
+          prepare: () => SDT.Renderer?.warm?.(),
+          presentation: 'city-cut',
+          scene: 'departure',
+        });
+        confirmation.page = captureConfirmationPage();
+        const completed = await transition;
+        if (!confirmation.current() || !transition.isCurrent() || !confirmationOwnerCurrent()) return false;
+        if (completed === false) {
+          if (ownsConfirmationPage()) showConfirmationRetry('出发演出尚未完成，人物与初始职业卡已保留，请继续出发。');
+          return false;
+        }
+        // 成功过场只关闭自己的那一层；resolve 后新打开的页面仍属于新入口。
+        const page = confirmation.page;
+        if (UI.el?.ovBody !== page.body || UI.el?.overlay !== page.overlay || !page.overlay?.hidden || page.body?.firstElementChild ||
+          (Number.isFinite(page.revision) && UI._overlayRevision !== page.revision + 1)) return false;
+        confirmation.transitioned = true;
+        confirmation.page = captureConfirmationPage();
+      }
+      // 地图在最终保存完成后开放；存档不持久化临时页面状态。
+      game.state = 'modal';
+      const saved = await saveRunCheckpoint(saveGame);
+      if (!ownsConfirmationPage()) return false;
+      if (!saved) { showConfirmationRetry('出征已准备完成，进度尚未保存；请重试保存后继续探索。'); return false; }
       entryPresented = true;
+      confirmationNotice.clear();
       UI.hideOverlay();
       game.state = 'idle';
-      saveGame();
       UI.refresh(game);
       return true;
-    });
+    } catch (error) {
+      console.warn('[选角] 确认未完成，保留当前进度。', error);
+      if (confirmation && ownsConfirmationPage()) showConfirmationRetry('出发尚未完成，已完成的人物与补给进度保留，请重试。');
+      else if (departurePending && ownsPendingDeparturePage()) showPendingDepartureRetry();
+      else if (!confirmation && visible()) confirmationNotice.set('人物确认尚未完成，当前选择已保留，请重试。', 'warn');
+      return false;
+    } finally { confirmationPending = false; }
   };
-  act('pickClass', () => {
-    if (!sel || characterMotion.busy) return;
+  const captureConfirmationPage = () => ({ body:UI.el?.ovBody, overlay:UI.el?.overlay,
+    root:UI.el?.ovBody?.firstElementChild, hidden:UI.el?.overlay?.hidden, revision:UI._overlayRevision });
+  const ownsPage = page => !!page && UI.el?.ovBody === page.body && UI.el?.overlay === page.overlay &&
+    page.body?.firstElementChild === page.root && page.overlay?.hidden === page.hidden && UI._overlayRevision === page.revision &&
+    !page.overlay?.classList.contains('closing');
+  const ownsPendingDeparturePage = () => {
+    const pending = departurePending;
+    return !!pending && pending.handle.isCurrent() && pending.generation === selectionGeneration && pending.cl === sel &&
+      getActiveSlot() === pending.slot && SDT.Base === pending.base && SDT.Base?.slot === pending.baseSlot &&
+      SDT.Base?._selectionGeneration === pending.baseGeneration && ownsPage(pending.page);
+  };
+  const showPendingDepartureRetry = () => {
+    if (!ownsPendingDeparturePage()) return;
+    game.state = 'modal';
+    confirmationNotice.set('远征已保存，地图尚未打开；请继续同一次出征。', 'warn');
+    UI.showOverlay('', `<div class="pg"><h2>继续出征</h2>${confirmationNotice.html()}<button class="ov-btn ok" data-act="retryClassConfirmation">重试打开地图</button></div>`, 'page');
+    departurePending.page = captureConfirmationPage();
+    UI.act('retryClassConfirmation', () => ownsPendingDeparturePage() && confirmClass(departurePending.cl, departurePending.generation));
+    try { UI.refresh(game); }
+    catch (error) { console.warn('[选角] 地图刷新未完成，保留继续出征页面。', error); }
+  };
+  const confirmationOwnerCurrent = () => !!confirmation && confirmation.generation === selectionGeneration && confirmation.cl === sel &&
+    getActiveSlot() === confirmation.slot && SDT.Base === confirmation.base && SDT.Base?.slot === confirmation.baseSlot &&
+    SDT.Base?._selectionGeneration === confirmation.baseGeneration &&
+    (confirmation.departureHandle ? confirmation.departureHandle.isCurrent() : !options.isCurrent || options.isCurrent());
+  const ownsConfirmationPage = () => {
+    const page = confirmation?.page;
+    return !!page && confirmation.current() && confirmationOwnerCurrent() && ownsPage(page);
+  };
+  const showConfirmationRetry = message => {
+    if (!ownsConfirmationPage()) return;
+    game.state = 'modal';
+    confirmationNotice.set(message, 'warn');
+    UI.showOverlay('', `<div class="pg"><h2>继续出发</h2>${confirmationNotice.html()}<button class="ov-btn ok" data-act="retryClassConfirmation">${confirmation.transitioned ? '重试保存并继续探索' : '重试保存并出发'}</button></div>`, 'page');
+    confirmation.page = captureConfirmationPage();
+    UI.act('retryClassConfirmation', () => ownsConfirmationPage() && confirmClass(confirmation.cl, confirmation.generation));
+    try { UI.refresh(game); }
+    catch (error) { console.warn('[选角] 地图刷新未完成，保留出发重试页面。', error); }
+  };
+  act('pickClass', async () => {
+    if (!sel || characterMotion.busy || selectionPending || confirmationPending || confirmationStarted) return false;
     const cl = sel;
-    if (onSelect) { onSelect(cl, () => confirmClass(cl)); return; }
-    return confirmClass(cl);
+    const generation = ++selectionGeneration;
+    if (onSelect) {
+      selectionPending = true;
+      confirmationNotice.clear();
+      try {
+        const result = await onSelect(cl, () => confirmClass(cl, generation));
+        if (result === false && visible()) confirmationNotice.set('整备页面尚未打开，当前人物选择已保留，请重试。', 'warn');
+        return result !== false;
+      } catch (error) {
+        console.warn('[选角] 整备入口未完成。', error);
+        if (visible()) confirmationNotice.set('整备页面尚未打开，当前人物选择已保留，请重试。', 'warn');
+        return false;
+      } finally { selectionPending = false; }
+    }
+    return confirmClass(cl, generation);
   });
   render();
   return true;

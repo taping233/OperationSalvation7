@@ -59,7 +59,7 @@ export const hudMethods = {
   refresh(game) {
     // 地图工具只属于真实地图界面；非地图刷新也要卸载旧工具，避免浮层后残留。
     renderExpeditionPanel($('routePanel'), game, /** @type {(name: string) => string} */ (name => SDT.Icons.img(name)));
-    // 格子结算链回到 idle，才真正退出房间页；战斗→宝箱等中间切页不会闪回地图。
+    // 格子结算链回到 idle，才真正退出房间页；战斗→搜刮点等中间切页不会闪回地图。
     if (game.state === 'idle' && this._roomActive) this.endRoom();
     const layer = game.curLayer ? game.curLayer() : null;
     // 顶部居中环层横幅：仅在换层时触碰 DOM

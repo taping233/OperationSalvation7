@@ -19,7 +19,7 @@ function createHarness({ availableCards = 2, failCommit = false, commitGate = nu
   };
   const root = { isConnected: true };
   const view = {
-    openPanel: vi.fn(() => root),
+    openPanel: vi.fn(() => { root.isConnected = true; return root; }),
     buildModel: vi.fn(input => input),
     mount: vi.fn((mountedRoot, options) => {
       const controller = { update: vi.fn(), dispose: vi.fn() };
@@ -30,7 +30,7 @@ function createHarness({ availableCards = 2, failCommit = false, commitGate = nu
     lastIntent: null,
     controller: null,
   };
-  const navigation = { applyPicks: vi.fn(), openDeparture: vi.fn(), returnToBase: vi.fn() };
+  const navigation = { applyPicks: vi.fn(), openDeparture: vi.fn(() => { root.isConnected = false; return true; }), returnToBase: vi.fn() };
   const reportError = vi.fn();
   const commitBase = vi.fn(async (_context, command) => {
     if (failCommit) return { ok: false, message: '保存失败' };
@@ -170,7 +170,8 @@ describe('基地整备功能端口', () => {
   it('A3-PREP-04 命令抛异常同样回 busy:false（try/finally 兜底）', async () => {
     const h = createHarness({ commitGate: () => { throw new Error('boom'); } });
     h.feature.open();
-    await expect(h.view.lastIntent({ type: 'goal-add', payload: { targetId: 'card-a' } })).rejects.toThrow('boom');
+    await h.view.lastIntent({ type: 'goal-add', payload: { targetId: 'card-a' } });
+    expect(h.view.controller.update.mock.calls.at(-1)[0].error).toContain('当前编辑已保留');
     const frames = h.view.controller.update.mock.calls.map(([model]) => model.busy);
     expect(frames).toContain(true);
     expect(frames.at(-1)).toBe(false);

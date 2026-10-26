@@ -19,6 +19,7 @@
  * 战斗域零接触：lastMode==='battle'（sdt-overlay-mode 广播）一律不起闸门；
  * 弹层标识不命中链路集合自然排除。reduce（core/motion.js 权威口径）下整体直出。 */
 import { reduceMotion } from '../core/motion.js';
+import { completeSurfaceMotion } from './motion-completion.js';
 
 // ── T1 闸门单例 ──
 let gateBusy = false;
@@ -41,20 +42,12 @@ export function gateSweep() {
   const arm = gate.firstElementChild;
   gateBusy = true;
   overlay?.classList.add('gate-live', 'gate-squeeze');
-  let settled = false;
-  const settle = () => {
-    if (settled) return;
-    settled = true;
-    clearTimeout(timer);
-    arm.removeEventListener('animationend', settle);
+  gate.classList.add('on');
+  completeSurfaceMotion(arm, () => {
     gate.classList.remove('on');
     overlay?.classList.remove('gate-live', 'gate-squeeze');
     gateBusy = false;
-  };
-  arm.addEventListener('animationend', settle, { once: true });
-  // Either completion path releases the other; stale work cannot finish a later sweep.
-  const timer = setTimeout(settle, 700);   // 兜底：animationend 被后台标签页/reduce 竞态吞掉时
-  gate.classList.add('on');
+  }, { duration: 700, slack: 0 });
 }
 
 // ── 链路标识与观测 ──

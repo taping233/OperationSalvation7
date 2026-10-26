@@ -1,5 +1,7 @@
 /* ZZZ agents reference: large subject, separate identity and portrait roster. */
 /* Eager stylesheet: both character screens share focus without depending on hub entry. */
+/* 星月白底全身图左右补白；按画框高度显示，裁去横向白边。 */
+#overlay :is(.pv12-agent-art:has(img[src*="portraits/full/xingyue"]),.cls2-fullart[data-character="xingyue"]) { --skin-fit:cover; --skin-focus:center; }
 #overlay :is(.pv12-agent-art,.cls2-fullart,.person-skin,.cls2-skin-btn):is([data-skin="casual"],[data-skin="spring"],[data-skin="beach"],[data-skin="drum-room"],[data-skin="last-seat"],[data-skin="snowline-vigil"],[data-skin="coast-half-day"]) { --skin-fit:cover; }
 #overlay :is(.pv12-agent-art,.cls2-fullart,.person-skin,.cls2-skin-btn)[data-skin="casual"] { --skin-focus:62% center; --skin-preview-focus:62% 28%; }
 #overlay :is(.pv12-agent-art,.cls2-fullart,.person-skin,.cls2-skin-btn)[data-skin="spring"] { --skin-focus:68% center; --skin-preview-focus:68% 25%; }

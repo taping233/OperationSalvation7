@@ -26,9 +26,8 @@ afterAll(async () => {
 });
 
 // ---- 环境补桩（与 boot.test.js 同族：jsdom 无 canvas/Audio/WebAudio） ----
-// 故意恒真：jsdom 无 canvas，无论原生 getContext 是否存在都强制换成本桩（lint 静音，不改逻辑）
-// eslint-disable-next-line no-constant-condition
-if (!window.HTMLCanvasElement.prototype.getContext || true) {
+// jsdom Canvas 始终使用受控上下文。
+{
   const noopCtx = () => new Proxy(function () {}, {
     ...canvasTraps(noopCtx),
   });

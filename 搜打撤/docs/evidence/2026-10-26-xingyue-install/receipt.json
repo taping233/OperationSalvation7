@@ -1,0 +1,74 @@
+{
+  "sources": [
+    {
+      "source": "D:\\素材\\代号柒\\.tmp\\nai\\xingyue-nai5-reset-20261026\\builtin-face-fix.png",
+      "sourceSha256": "d23215d0370c8f58a68032f743af676d54ea3da2a839d6cb32d091146f9788b1",
+      "size": [
+        2731,
+        1536
+      ],
+      "padding": [
+        853,
+        854
+      ],
+      "padded": "D:\\素材\\代号柒\\.tmp\\xingyue-install-1026\\light-padded.png"
+    },
+    {
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a177be-ad81-7590-ab07-a971539f2f81\\exec-b3f0610a-9334-490f-abc3-86214bbadafc.png",
+      "sourceSha256": "8cde7ec5a5bf75f322135bf79e49d12f3ffeb4a640a82ff45fab0524cf926256",
+      "size": [
+        2731,
+        1536
+      ],
+      "padding": [
+        853,
+        854
+      ],
+      "padded": "D:\\素材\\代号柒\\.tmp\\xingyue-install-1026\\dark-padded.png"
+    }
+  ],
+  "backups": [
+    {
+      "path": "D:\\素材\\代号柒\\.tmp\\xingyue-install-1026\\xingyue.webp.99d6c6d040b5.before",
+      "sha256": "99d6c6d040b5e9698caec8539c745d4ed170897edac824a37a00a3447bca0f1d"
+    }
+  ],
+  "default": {
+    "path": "portraits/full/xingyue.webp",
+    "ext": "webp",
+    "bytes": 184604,
+    "sha256": "7c7ccf51f73869859603cb826df8fd75f38e3ca6d56a24683c6cf85242e2d820",
+    "license": "项目自有（自制/AI 生成）",
+    "source": "docs/evidence/2026-10-26-xingyue-install/receipt.json"
+  },
+  "dark": {
+    "identity": {
+      "character": "xingyue",
+      "id": "dark-priestess",
+      "name": "暗牧",
+      "source_sha256": "ad532d809d34a5118376e544b5345164a4316f6d0fe66352ddf7b2b6c0b10064",
+      "asset": "portraits/full/xingyue-dark-priestess.webp",
+      "quality": 94
+    },
+    "source": "D:\\素材\\代号柒\\.tmp\\xingyue-install-1026\\dark-padded.png",
+    "source_size": [
+      2731,
+      1536
+    ],
+    "default_sha256": "7c7ccf51f73869859603cb826df8fd75f38e3ca6d56a24683c6cf85242e2d820",
+    "asset": {
+      "path": "portraits/full/xingyue-dark-priestess.webp",
+      "ext": "webp",
+      "bytes": 173064,
+      "sha256": "2ab923c8ed89b8f7b63ee901bbe15eb676a1e168da27c8efe064d6c53cab9008",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-26-xingyue-install/dark/skin-import.json"
+    },
+    "operations": [],
+    "status": "imported",
+    "default_unchanged": true,
+    "git_mutation": false,
+    "processing": "RGB WebP; full canvas, no crop or resize"
+  },
+  "verification": "补白前后人物像素一致；输出尺寸和清单哈希已核对；未运行测试/build/实页，未提交"
+}

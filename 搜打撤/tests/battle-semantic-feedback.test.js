@@ -134,14 +134,14 @@ it('真实追加事件驱动展示DOM，不改变结算后的手牌和费用', a
   const stage = document.querySelector('.battle-stage'); stage._battleToken = R.battleState.token;
   const energy = R.energy, hand = [...R.hand];
   showBattleEffectFeedback(stage, events);
-  const notice = stage.querySelector('.bt-recast-feedback');
-  expect(notice.textContent).toContain('1/1'); expect(notice.textContent).toContain('元素风暴');
-  expect(notice.textContent).toContain('反馈法术');
+  const notice = document.querySelector('.fx-art-magic');
+  expect(notice).not.toBeNull(); expect(notice.textContent).toBe('');
+  expect(notice.style.backgroundImage).toContain('fx-atlas.webp');
   showBattleEffectFeedback(stage, events);
-  expect(stage.querySelectorAll('.bt-recast-feedback')).toHaveLength(1);
+  expect(document.querySelectorAll('.fx-art-magic')).toHaveLength(1);
   expect(R.energy).toBe(energy); expect(R.hand).toEqual(hand);
   document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
-  expect(stage.querySelector('.bt-recast-feedback')).toBeNull();
+  expect(document.querySelector('.fx-art-magic')).toBeNull();
   document.body.innerHTML = '';
 });
 

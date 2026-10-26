@@ -449,7 +449,7 @@ function nestBossRewards() {
   addRuneChest('large');
   // 定向大符文箱：使用时选 1 个属性，获得 3 张该属性的随机符文（0.7% 出含该属性的双属性符文）
   game.nestTargetedBox = (game.nestTargetedBox || 0) + 1;
-  UI.log('[[icon:gem]] 战胜所主：BOSS 宝箱 ×2 · 定向大符文箱 ×1', 'loot');
+  UI.log('[[icon:gem]] 战胜所主：BOSS 搜刮点 ×2 · 定向大符文箱 ×1', 'loot');
   if (game.nestBoss) {
     const slot = SDT.Base.slot, seed = game.seed;
     Promise.resolve(SDT.Base.recordNestBoss(game.nestBoss.name)).then(async result => {
@@ -460,12 +460,12 @@ function nestBossRewards() {
   }
 }
 
-/* —— 奖励：宝箱与符文箱 —— */
+/* —— 奖励：搜刮点与符文箱 —— */
 function grantNestRewards(reward) {
   if (!reward) return;
   (reward.chests || []).forEach(() => {
     const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
-    if (pool.length) { const c = pool[ri(pool.length)]; game.cardBox.push({ ...c }); UI.log(`[[icon:cards]] 宝箱开出【${esc(c.name)}】入牌盒`, 'loot'); }
+    if (pool.length) { const c = pool[ri(pool.length)]; game.cardBox.push({ ...c }); UI.log(`[[icon:cards]] 搜刮点开出【${esc(c.name)}】入牌盒`, 'loot'); }
   });
   (reward.runes || []).forEach(kind => addRuneChest(kind));
   if (reward.coins) game.coins += reward.coins;

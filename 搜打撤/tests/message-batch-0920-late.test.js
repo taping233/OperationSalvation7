@@ -1,3 +1,4 @@
+import { drainBattle } from './helpers/battle-fixtures.js';
 import { battleRules } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -29,21 +30,8 @@ function makeGame(cards) {
   };
 }
 const foe = (name) => ({ id: 'infantry', name, hp: 100, atk: 1 });
-const tick = () => new Promise(resolve => setTimeout(resolve, 0));
-const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
-async function settle(max = 200) {
-  for (let i = 0; i < max; i++) {
-    await tick();
-    const s = BattleSession.getSnapshot();
-    if (!s.busy && s.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = BattleSession.getSnapshot();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return BattleSession.getSnapshot();
-}
+
+const settle = (max = 200) => drainBattle(BattleSession, max, { stopAt: ['discovering', 'choosing', 'handSelecting'] });
 const card = id => C.all().find(entry => entry.id === id);
 
 describe('2026-09-20 晚间留言卡牌数据', () => {

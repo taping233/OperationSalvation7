@@ -75,7 +75,7 @@ it('能源结晶入队后本场消耗堆被清空，执行前复检保留药水�
   R.set$hand([]); R.set$consumed(['runtime-0']);
   // Pause at the real bag executor's scheduling boundary, then change its live pile.
   let execute;
-  const queueBattleAction = vi.fn(action => { execute = action; });
+  const queueBattleAction = vi.fn(action => { execute = action;  return Promise.resolve(); });
   const bag = createBattleBag({ alive:() => R.foes, clearTargetSession:vi.fn(), queueBattleAction,
     throwIfActionCancelled:vi.fn(), interactionOf:() => null });
   expect(bag.itemUsability(game.ownedCards[1].card).usable).toBe(true);

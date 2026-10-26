@@ -6,6 +6,7 @@ import { enterArchive, clearArchiveMotion } from './archive-motion.js';
 import { navigationState, navigationChange } from './navigation-motion.js';
 import { stagePageVisual, stageMapReturn, cancelPageVisual } from './page-visual-ready.js';
 import { motionTiming } from './motion-presets.js';
+import { completeSurfaceMotion } from './motion-completion.js';
 import { hasVisualMotion, installTargetMotionLifecycle } from './target-motion.js';
 import { installCardStateMotion } from './card-state-motion.js';
 import { installSelectionStateMotion } from './selection-state-motion.js';
@@ -82,7 +83,7 @@ function install(ui = window.SDT?.UI) {
 
   ui.showOverlay = function (heading, html, mode, options) {
     if (pendingClose) {
-      clearTimeout(pendingClose.timer);
+      pendingClose.cancel();
       pendingClose = null;
       // hide 请求时已解绑旧页；保留调用方在 show 前登记的新页动作。
       const acts = this._acts, input = this._inputHandler, hover = this._hoverHandler;
@@ -260,7 +261,7 @@ function install(ui = window.SDT?.UI) {
     clearCampEntry();
     if (pendingClose) {
       if (!options?.immediate) return;
-      clearTimeout(pendingClose.timer);
+      pendingClose.cancel();
       pendingClose = null;
     }
     if (overlay.hidden) return hideOverlay.call(this, options);
@@ -275,7 +276,7 @@ function install(ui = window.SDT?.UI) {
     enterSurface(overlay, { restart: false, fast: instantRoom || nativeFastClose || overlay.dataset.uiMotion === 'fast' });
     leaveSurface(overlay);
     // Explicit synchronous cleanup and reduced-motion paths retain their original semantics.
-    if (options?.immediate || interfaceReducedMotion() || this._hideTimer || !instantRoom) {
+    if (options?.immediate || interfaceReducedMotion() || this._finishHide || !instantRoom) {
       return hideOverlay.call(this, options);
     }
     overlay.dataset.uiInstantClose = '1';
@@ -283,13 +284,13 @@ function install(ui = window.SDT?.UI) {
     this._acts = {};
     this._inputHandler = null;
     this._hoverHandler = null;
-    const closing = { timer: null };
+    const closing = { cancel: () => {} };
     pendingClose = closing;
-    closing.timer = setTimeout(() => {
+    closing.cancel = completeSurfaceMotion(overlay, () => {
       if (pendingClose !== closing) return;
       pendingClose = null;
       hideOverlay.call(this, { ...options, immediate: true });
-    }, exitDuration);
+    }, { duration: exitDuration, slack: 0, name: 'uiVeilOut' });
   };
 
   if (showScreen) ui.showScreen = function (element) {

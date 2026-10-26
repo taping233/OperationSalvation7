@@ -1,4 +1,4 @@
-import { overlayElements, eventCardMocks, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventCapacityPorts } from './helpers/environment-fixtures.js';
+import { overlayElements, resetEventGame, eventCardMocks, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventCapacityPorts } from './helpers/environment-fixtures.js';
 import { flushEventActions } from './helpers/event-dice-async.js';
 import { rollEventDice } from './helpers/event-dice-async.js';
 import { bagSlots } from '../game/src/hub/game.bag.bridge.js';
@@ -48,7 +48,7 @@ beforeEach(() => {
   });
   bagSlots.showBackpack = () => UI.showOverlay('背包', '<main>背包</main>', 'page');
   H.saves = []; H.saveFailure = null; H.uid = 0; H.slot = null; H.random = () => 0.9; H.narrative = async () => null;
-  Object.assign(H.game, { seed: 7, state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 18, fragments: 0,
+  resetEventGame(H, () => scenes, { seed: 7, state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 18, fragments: 0,
     altarActivated:false, altarRewardPending:false, altarItemSacrificed:false, nodeRewards:{}, entrySupply:null,
     discoveredPairs: new Set(), layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'event' } }] }],
     canReceiveCard: () => true, heal: n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),
@@ -99,7 +99,7 @@ describe('物资格保存失败回执与记录身份', () => {
 it('动力锤委托与领锤互斥，委托随已消费节点保存且旧按钮不重复接受', async () => {
   const hammer={id:'cmtn0xt0zr7',name:'闪金之锤',type:'装备',rarity:'传说'};
   await openEvent('tt6-goldhammer',[hammer]);
-  const choose=UI._acts.evtChoice;choose({i:'1'});choose({i:'0'});choose({i:'1'});
+  const choose=UI._acts.evtChoice;await choose({i:'1'});await choose({i:'0'});await choose({i:'1'});
   expect(H.game.nodeRewards['0,1'].commission).toEqual({status:'pending'});
   expect(H.game.ownedCards).toHaveLength(0);
   expect(H.game.visited['0,1']).toBe(1);
@@ -195,12 +195,12 @@ describe('事件等待与回调生命周期审计', () => {
     H.cards = [{ id: 'tt6-airdrop', name: '补给', type: '事件' }];
     const pending = flow.runEventDeck(); await vi.dynamicImportSettled(); await vi.advanceTimersByTimeAsync(1500);
     resolveNarrative(null); await pending;
-    UI.el.ovBody.querySelector('[data-act="evtChoice"][data-i="2"]').click(); await flushEventActions();
+    UI.el.ovBody.querySelector('[data-act="evtChoice"][data-i="2"]').click(); await flushEventActions(); await flushEventActions();
     expect(H.game.hp).toBe(1);
-    UI.el.ovBody.querySelector('.event-choice-clear').click(); await flushEventActions();
+    UI.el.ovBody.querySelector('.event-choice-clear').click(); await flushEventActions(); await flushEventActions();
     expect(UI.el.ovBody.querySelector('.event-choice-confirm').disabled).toBe(true);
-    UI.el.ovBody.querySelector('[data-act="evtChoice"][data-i="2"]').click(); await flushEventActions();
-    const confirm = UI.el.ovBody.querySelector('.event-choice-confirm'); confirm.click(); await flushEventActions(); confirm.click(); await flushEventActions();
+    UI.el.ovBody.querySelector('[data-act="evtChoice"][data-i="2"]').click(); await flushEventActions(); await flushEventActions();
+    const confirm = UI.el.ovBody.querySelector('.event-choice-confirm'); confirm.click(); await flushEventActions(); await flushEventActions(); confirm.click(); await flushEventActions(); await flushEventActions();
     expect(H.game.hp).toBe(7); expect(H.game.state).toBe('idle'); expect(H.game.visited).toEqual({ '0,1': 1 });
   });
   it('自定义单项事件正常领取后回待机，旧回调不能消费下一节点', async () => {
@@ -262,7 +262,7 @@ describe('事件等待与回调生命周期审计', () => {
     const done = vi.fn(); scenes.openPocketRestore(1, done); const old = UI._acts.restoreOne;
     UI.showOverlay('背包', '<main>背包</main>', 'page'); await returnFromBag();
     old({ name: '复原样本' }); expect(H.game.ownedCards).toHaveLength(0);
-    const current = UI._acts.restoreOne; current({ name: '复原样本' }); old({ name: '复原样本' }); current({ name: '复原样本' });
+    const current = UI._acts.restoreOne; await current({ name: '复原样本' }); old({ name: '复原样本' }); await current({ name: '复原样本' });
     expect(H.game.ownedCards).toHaveLength(1); expect(H.game.usedPocket[0].count).toBe(2); expect(done).toHaveBeenCalledTimes(1);
   });
   it('F02 满包动力锤保留固定奖励，重载后可整理重试且不重复发卡', async () => {
@@ -289,17 +289,17 @@ describe('事件等待与回调生命周期审计', () => {
     H.game.canReceiveCard = () => !full;
     await openEvent('tt6-systemsupply', [{ id:'tt-wood', name:'木材', type:'资源', rarity:'古朴' }]);
     const choose = UI._acts.evtChoice;
-    choose({ i:'0' });
+    await choose({ i:'0' });
     if (full) {
       expect(H.game.fragments).toBe(0);
       expect(H.game.visited).toEqual({});
       expect(UI.el.ovBody.textContent).toContain('待领取：木材');
-      UI.el.ovBody.querySelector('[data-organize=return]').click(); await flushEventActions();
+      UI.el.ovBody.querySelector('[data-organize=return]').click(); await flushEventActions(); await flushEventActions();
       expect(H.game.ownedCards).toHaveLength(0);
-      const retry=UI._acts.evtChoice; retry({ i:'1' }); retry({ i:'1' }); choose({ i:'0' });
+      const retry=UI._acts.evtChoice; await retry({ i:'1' }); await retry({ i:'1' }); await choose({ i:'0' });
       expect(H.game.coins).toBe(20);
     } else {
-      choose({ i:'0' }); choose({ i:'1' });
+      await choose({ i:'0' }); await choose({ i:'1' });
       expect(H.game.ownedCards.map(o => o.card.id)).toEqual(['tt-wood']);
       expect(H.game.coins).toBe(18);
     }
@@ -516,7 +516,7 @@ describe('事件等待与回调生命周期审计', () => {
   });
   it('F06 三选一明确永久放弃，其余候选刷新后仍不可领取', async () => {
     H.cards = [1, 2, 3].map(i => ({ id:`pick${i}`, name:`候选${i}`, type:'法术', rarity:'古朴' }));
-    window.SDT.MAP.chestKinds.medium = { name:'中型宝箱', pickFrom:3 };
+    window.SDT.MAP.chestKinds.medium = { name:'中型搜刮点', pickFrom:3 };
     await scenes.openFixedRewardsOnCell(H.cards, '测试三选一'); await flushEventActions();
     const saved = window.SDT.Chests.serialize(H.game);
     saved.queue[0].kind = saved.current.kind = 'medium';

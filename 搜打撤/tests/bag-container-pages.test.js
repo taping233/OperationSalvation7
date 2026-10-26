@@ -14,7 +14,8 @@ function setup(kind) {
   const ports = { UI,game,cards:{cardHTML:card => `<span>${card.name}</span>`},sound:vi.fn(),baseCap:() => 4,
     cardStacks:safe => cardStacksForZone(game.ownedCards,safe),usedSlots:() => 1,bagCap:() => 4,
     saveGame:vi.fn(),showBackpack:vi.fn(),rememberBagPosition:vi.fn(),decorateInventoryZoom:vi.fn(),
-    captureBagView:rootFor => () => active && body.firstElementChild === rootFor(),
+    captureContext:() => () => active,
+    captureBagView:rootFor => { const root = body.firstElementChild; return () => active && body.firstElementChild === (rootFor ? rootFor() : root); },
     bagAct:(name, handler, current) => { acts[name] = data => { if(current()) return handler(data); }; } };
   return {...ports,...createBagContainerPages({...ports,readCards:() => ports.cards}),acts,item,setCards:cards => { ports.cards=cards; },invalidate:() => { active=false; }};
 }

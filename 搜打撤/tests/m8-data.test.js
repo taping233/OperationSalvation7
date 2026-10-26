@@ -60,17 +60,11 @@ function harness(cards) {
 }
 
 describe('M8 rule data backfill', () => {
-  for (const source of ALL) {
-    const { id } = source;
-    it(`${id}: rules pass schema and real-consumer capability gates`, () => {
-      const card = { ...source, rules: RULES[id] };
-      const validation = validateCardRules(card);
-      expect(validation.ok, JSON.stringify(validation.errors)).toBe(true);
-      expect(inspectCardRuleCapability(card)).toEqual({ kind: 'supported', ok: true });
-    });
-    it(`${id}: canonical card is migrated and rereads with marker`, () => {
-      const h = harness(fresh());
-      ensureM8RuleBackfill(h);
+  it('整批只迁移和保存一次，逐卡校验规则、卡面及持久化', () => {
+    expect(ALL.map(card => card.id).slice().sort()).toEqual(Object.keys(RULES).sort());
+    const h = harness(fresh());
+    ensureM8RuleBackfill(h);
+    for (const id of ALL.map(card => card.id)) {
       const card = h.cards().find(item => item.id === id);
       expect(card.rules).toEqual(RULES[id]);
       if (id === 'tt3-petal') {
@@ -78,9 +72,19 @@ describe('M8 rule data backfill', () => {
         expect(card.heal).toBe(canonicalPetal.heal);
         expect(card.desc).toBe(canonicalPetal.desc);
       }
-      expect(h.storage.getItem(KEY)).toBe(JSON.stringify(h.cards()));
-      expect(h.storage.getItem(MARKER)).toBe('1');
-      expect(h.library.saves).toBe(1);
+    }
+    expect(h.storage.getItem(KEY)).toBe(JSON.stringify(h.cards()));
+    expect(h.storage.getItem(MARKER)).toBe('1');
+    expect(h.library.saves).toBe(1);
+  });
+
+  for (const source of ALL) {
+    const { id } = source;
+    it(`${id}: rules pass schema and real-consumer capability gates`, () => {
+      const card = { ...source, rules: RULES[id] };
+      const validation = validateCardRules(card);
+      expect(validation.ok, JSON.stringify(validation.errors)).toBe(true);
+      expect(inspectCardRuleCapability(card)).toEqual({ kind: 'supported', ok: true });
     });
     it(`${id}: modified face or owned rules are conservatively skipped`, () => {
       for (const changed of [

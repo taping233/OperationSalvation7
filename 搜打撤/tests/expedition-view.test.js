@@ -47,7 +47,7 @@ describe('expedition view route projection', () => {
   it('第四层按祭坛未激活、奖励待领和首脑已解锁分别提示下一步', () => {
     const g = makeGame({ layerIdx: 3 });
     expect(expeditionObjective(g).text).toContain('弃 3 张卡牌');
-    expect(expeditionObjective({ ...g, altarActivated: true, altarRewardPending: true }).text).toContain('领取奖励');
+    expect(expeditionObjective({ ...g, altarActivated: true, altarRewardPending: true }).text).toContain('当前可领取回赠');
     expect(expeditionObjective({ ...g, altarActivated: true, altarRewardPending: false }).text).toContain('编组牌库');
   });
 

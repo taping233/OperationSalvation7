@@ -7,7 +7,7 @@ let UI, closed;
 function setup() {
   document.body.className = '';
   document.body.innerHTML = '<main><button id="opener">打开</button><div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div></main>';
-  UI = { ...overlayMethods, _overlayInerted: [], _overlayRevision: 0, _roomActive: false,
+  UI = { ...overlayMethods, _acts: {}, _overlayInerted: [], _overlayRevision: 0, _roomActive: false,
     el: Object.fromEntries(['overlay', 'ovTitle', 'ovBody'].map(id => [id, document.getElementById(id)])),
     hideTooltip: vi.fn(), _cancelPageBg: vi.fn(),
   };
@@ -53,6 +53,50 @@ it('generated open/close/immediate/tick sequences preserve model state and one c
 });
 
 it('reopen during fade remains visible', () => { open(); UI.hideOverlay(); open(); expect(UI.el.overlay.hidden).toBe(false); vi.advanceTimersByTime(300); expect(UI.el.overlay.hidden).toBe(false); });
+
+it('an obsolete close completion cannot clear a newer page', () => {
+  open(); UI.hideOverlay();
+  const oldFinish = UI._finishHide;
+  UI.showOverlay('New', '<button data-act="next">New</button>', 'page');
+  const action = vi.fn(); UI._acts.next = action;
+  oldFinish();
+  vi.advanceTimersByTime(300);
+  expect(UI.el.overlay.hidden).toBe(false);
+  expect(UI.el.ovBody.textContent).toBe('New');
+  expect(UI._acts.next).toBe(action);
+});
+
+it('a page opened during the close broadcast keeps its actions and content', () => {
+  open();
+  const action = vi.fn();
+  document.addEventListener('sdt-overlay-close', () => {
+    UI.showOverlay('New', '<button data-act="next">New</button>', 'page');
+    UI._acts.next = action;
+  }, { once: true });
+  UI.hideOverlay();
+  vi.advanceTimersByTime(300);
+  expect(UI.el.overlay.hidden).toBe(false);
+  expect(UI.el.ovBody.textContent).toBe('New');
+  expect(UI._acts.next).toBe(action);
+  expect(closed).toHaveBeenCalledTimes(1);
+});
+
+it('a repeated close inside the close broadcast settles the same session', () => {
+  open();
+  document.addEventListener('sdt-overlay-close', () => UI.hideOverlay(), { once: true });
+  UI.hideOverlay();
+  vi.advanceTimersByTime(225);
+  expect(UI.el.overlay.hidden).toBe(true);
+  expect(closed).toHaveBeenCalledTimes(1);
+});
+
+it('a rejected battle-body replacement leaves the existing close able to finish', () => {
+  open(); UI.hideOverlay();
+  UI.showOverlay('Missing battle', '', 'settings', { battleBody: () => null });
+  vi.advanceTimersByTime(225);
+  expect(UI.el.overlay.hidden).toBe(true);
+  expect(closed).toHaveBeenCalledTimes(1);
+});
 
 it('a real close advances the return token once and cancels owned feedback once', () => {
   open();

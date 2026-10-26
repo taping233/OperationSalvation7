@@ -15,7 +15,8 @@ window.SDT = {
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const { selectCardByClick, cancelClickSelection } = await import('../game/src/battle/view/battle.aim.js');
-const { renderDeckPileView, renderBattleBag } = await import('../game/src/battle/view/battle.overlays.js');
+const overlays = await import('../game/src/battle/view/battle.overlays.js');
+const { renderDeckPileView } = overlays;
 const { UI: zoomUI } = await import('../game/src/ui/ui.js');
 UI.showCardZoom = vi.fn(zoomUI.showCardZoom);
 window.SDT.UI = UI;
@@ -56,11 +57,11 @@ it('highlights targets without reviving the retired secondary caption and clears
   expect(UI.el.ovBody.querySelectorAll('.can-target')).toHaveLength(0);
 });
 
-it.each(['deck', 'bag'])('keeps the canonical full rule when inspecting the %s surface', kind => {
+it.each(['deck'])('keeps the canonical full rule when inspecting the %s surface', kind => {
   const before = BattleSession.getSnapshot(), ownedUids = game.ownedCards.map(entry => entry.uid);
   const snapshot = { ...before, drawPile: ['view-1'] };
   if (kind === 'deck') renderDeckPileView(snapshot);
-  else renderBattleBag(snapshot);
+
   const root = UI.el.ovBody.querySelector('.battle-decision');
   let rules;
   if (kind === 'deck') {
@@ -99,61 +100,7 @@ it.each(['reopen', 'hidden', 'inert', 'closing', 'other-page'])('rejects obsolet
   expect(BattleSession.getSnapshot()).toEqual(before);
 });
 
-it('stores only the visible carried group when stored cards share the same id', () => {
-  const original = game.ownedCards[1].card;
-  const carried = [{ uid: 'carried-one', card: original }, { uid: 'carried-two', card: original }];
-  const stored = { uid: 'stored-hidden', card: original, stored: true, safe: false };
-  game.ownedCards = [...carried, stored]; game.safeCap = () => 2;
-  renderBattleBag(BattleSession.getSnapshot());
-  const button = UI.el.ovBody.querySelector('[data-act="btSafeMove"]');
-  expect(button.textContent).toContain('×2'); expect(button.classList.contains('off')).toBe(false);
-  actions.get('btSafeMove')(button.dataset);
-  expect(carried.every(entry => entry.safe)).toBe(true); expect(stored.safe).toBe(false);
-});
-
-it('keeps all cards unchanged when the carried group does not fit in the safe capacity', () => {
-  const original = game.ownedCards[1].card;
-  const carried = [{ uid: 'large-one', card: original }, { uid: 'large-two', card: original }];
-  const stored = { uid: 'stored-hidden', card: original, stored: true, safe: false };
-  game.ownedCards = [...carried, stored]; game.safeCap = () => 1;
-  renderBattleBag(BattleSession.getSnapshot());
-  const button = UI.el.ovBody.querySelector('[data-act="btSafeMove"]');
-  expect(button.classList.contains('off')).toBe(true); actions.get('btSafeMove')(button.dataset);
-  expect(carried.some(entry => entry.safe)).toBe(false); expect(stored.safe).toBe(false);
-});
-
-it('does not expose a purely stored group or mutate it through a stale safe-move action', () => {
-  const original = game.ownedCards[1].card;
-  const stored = { uid: 'stored-only', card: original, stored: true, safe: false };
-  game.ownedCards = [stored]; renderBattleBag(BattleSession.getSnapshot());
-  expect(UI.el.ovBody.querySelector('[data-act="btSafeMove"]')).toBeNull();
-  actions.get('btSafeMove')({ cardKey: `id:${original.id}` });
-  expect(stored.safe).toBe(false);
-});
-
-it('transfers the complete carried group while preserving existing safe and stored entries', () => {
-  const original = game.ownedCards[1].card;
-  const carried = [{ uid: 'legal-one', card: original }, { uid: 'legal-two', card: original }];
-  const safe = { uid: 'already-safe', card: original, safe: true };
-  const stored = { uid: 'stored-hidden', card: original, stored: true, safe: false };
-  game.ownedCards = [...carried, safe, stored]; game.safeCap = () => 3;
-  game.safeUsed = () => game.ownedCards.filter(entry => entry.safe).length;
-  renderBattleBag(BattleSession.getSnapshot());
-  actions.get('btSafeMove')(UI.el.ovBody.querySelector('[data-act="btSafeMove"]').dataset);
-  expect(carried.every(entry => entry.safe)).toBe(true); expect(safe.safe).toBe(true); expect(stored.safe).toBe(false);
-  expect(game.safeUsed()).toBe(3); expect(UI.el.ovBody.querySelector('[data-act="btSafeMove"]')).toBeNull();
-});
-
-it.each(['reopen','hidden','inert','closing','other-page'])('does not move or save cards through an obsolete bag action: %s', state => {
-  let saves=0; game.saveGame=()=>{saves++;};
-  renderBattleBag(BattleSession.getSnapshot());
-  const button=UI.el.ovBody.querySelector('[data-act="btSafeMove"]'), data={...button.dataset};
-  const oldMove=actions.get('btSafeMove');
-  if(state==='reopen')renderBattleBag(BattleSession.getSnapshot());
-  if(state==='other-page')UI.showOverlay('宝箱','<button>领取</button>');
-  if(state==='hidden')UI.el.overlay.hidden=true;
-  if(state==='inert')UI.el.overlay.setAttribute('inert','');
-  if(state==='closing')UI.el.overlay.classList.add('closing');
-  oldMove(data);
-  expect(game.ownedCards.some(entry=>entry.safe)).toBe(false);expect(saves).toBe(0);
+it('retired battle bag has no transfer endpoint; inventory stays owned by the backpack', () => {
+  expect(overlays).not.toHaveProperty('renderBattleBag');
+  expect(actions.has('btSafeMove')).toBe(false);
 });

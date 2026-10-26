@@ -13,9 +13,9 @@ vi.mock('../game/src/ui/motion-transitions.js', () => ({}));
 vi.mock('../game/src/ui/expedition-feedback.js', () => ({ installExpeditionFeedback:vi.fn() }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub:vi.fn() }));
 vi.mock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots:{ showBackpack:vi.fn() } }));
-vi.mock('../game/src/hub/bag-return-hook.js', () => ({ setBagReturnHook:fn => { st.hook = fn; } }));
+vi.mock('../game/src/hub/bag-return-hook.js', async importOriginal => ({ ...await importOriginal(), setBagReturnHook:fn => { st.hook = fn; } }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx:{ tick:st.tick }, _set_cardPageOpen:vi.fn() }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ startBattle:vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), startBattle:vi.fn() }));
 vi.mock('../game/src/hub/game.storage.js', () => ({ RunStorage:{} }));
 vi.mock('../game/src/hub/recovery.commands.js', () => ({ commitBaseAndRun:vi.fn(), readSettlementReceipt:vi.fn(), recoverSlot:vi.fn() }));
 vi.mock('../game/src/run/game.run.scenes.js', () => ({

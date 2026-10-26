@@ -55,7 +55,7 @@
   @keyframes flowTitleIn { from { opacity: 0; transform: scale(1.14); filter: blur(7px); } }
   @keyframes flowTextIn { from { opacity: 0; transform: translateY(8px); } }
   @keyframes flowLine { from { transform: scaleX(0); } }
-  /* 场景分色：战斗红火 / 商店金 / 事件青 / 火堆橙 / 宝箱金 / 门紫 / 祭坛深紫 / 撤离绿 / 拾获淡琥珀 */
+  /* 场景分色：战斗红火 / 商店金 / 事件青 / 火堆橙 / 搜刮点金 / 门紫 / 祭坛深紫 / 撤离绿 / 拾获淡琥珀 */
   .sc-battle { --sc-ring: #565656; --sc-core: #222222; --sc-glow: rgba(138,138,138,.30); }
   .sc-shop   { --sc-ring: #868686; --sc-core: #2d2d2d; --sc-glow: rgba(196,196,196,.30); }
   .sc-event  { --sc-ring: #787878; --sc-core: #292929; --sc-glow: rgba(175,175,175,.26); }
@@ -125,10 +125,10 @@
   @keyframes gainPop { 0% { transform: scale(.5); opacity: 0; } 70% { transform: scale(1.12); } 100% { transform: scale(1); } }
 
 
-  /* ============ v0.25 开宝箱动画 ============ */
+  /* ============ v0.25 开搜刮点动画 ============ */
   @keyframes chestFlyIn { 0% { transform: translateY(70px) translateX(14px) rotate(-10deg) scale(.5); opacity: 0; }
     60% { transform: translateY(-8px) rotate(2deg) scale(1.06); opacity: 1; } 100% { transform: none; opacity: 1; } }
-  /* 宝箱卡描述与币值角标（2026-09-25 审计 P0-1）：desc 限高防溢出卡底；
+  /* 搜刮点卡描述与币值角标（2026-09-25 审计 P0-1）：desc 限高防溢出卡底；
      币值角标收进卡内（cards.css 负偏移挂在卡外，压住描述末行） */
   /* 开出行提示图标与数字间距（2026-09-25 审计 P1-4）：币图标贴数字被读成「0 1 币」 */
 
@@ -235,7 +235,7 @@
   }
   @keyframes psFill { to { width: 100%; } }
   @keyframes psBlink { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
-  /* 宝箱立绘（2026-09-20 老板令：奖励界面宝箱专门放图片和动画）——
+  /* 搜刮点立绘（2026-09-20 老板令：奖励界面搜刮点专门放图片和动画）——
      搜索态=大图居中轻晃（被翻检的手感，替换旧提灯图标替身）；
      揭晓态=缩到卡牌上方，出场爆闪一次 + 盖缝金光呼吸（::before 径向光斑）。
      动画只走 transform/opacity 合成器通道（性能三铁律） */

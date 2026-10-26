@@ -31,21 +31,21 @@ async function play(value, target = 'self') {
 beforeEach(() => { vi.useFakeTimers(); R.set$lastDeckSel([]); });
 afterEach(() => { if (R.G?.battleActive) E.finish(null); vi.clearAllTimers(); vi.useRealTimers(); });
 
-it('普通开局随身牌直接入手，10张初始攻击是独立的唯一临时实体', () => {
+it('普通开局随身牌直接入手，5张初始攻击是独立的唯一临时实体', () => {
   const game = start([C.SHA]);
-  expect(R.hand).toEqual(['owned-0']); expect(R.drawPile).toHaveLength(10);
-  expect(new Set(R.drawPile).size).toBe(10);
-  expect(R.granted).toHaveLength(10);
+  expect(R.hand).toEqual(['owned-0']); expect(R.drawPile).toHaveLength(5);
+  expect(new Set(R.drawPile).size).toBe(5);
+  expect(R.granted).toHaveLength(5);
   expect(R.drawPile.every(uid => E.findCard(uid)?.card.id === C.SHA.id)).toBe(true);
   expect(game.ownedCards).toHaveLength(1);
 });
 
-it('抽n实际从10库移动实体，抽空后不生成替代牌', () => {
+it('抽n实际从5库移动实体，抽空后不生成替代牌', () => {
   start(); const original = new Set(R.drawPile);
-  expect(E.drawCards(7)).toBe(7); expect(R.drawPile).toHaveLength(3);
+  expect(E.drawCards(3)).toBe(3); expect(R.drawPile).toHaveLength(2);
   expect(R.hand.every(uid => original.has(uid))).toBe(true);
-  expect(E.drawCards(200)).toBe(3); expect(R.drawPile).toHaveLength(0);
-  expect(E.drawCards(3)).toBe(0); expect(R.hand).toHaveLength(10); expect(R.granted).toHaveLength(10);
+  expect(E.drawCards(200)).toBe(2); expect(R.drawPile).toHaveLength(0);
+  expect(E.drawCards(3)).toBe(0); expect(R.hand).toHaveLength(5); expect(R.granted).toHaveLength(5);
 });
 
 it.each([{ isBoss: false }, { isBoss: true, directBossStart: true }, { isBoss: true, nest: true }])(
@@ -72,32 +72,32 @@ it('普通随身手牌超过BOSS的8张上限后仍可实抽，保持原普通�
   try {
     start(Array.from({ length: 10 }, () => C.SHA));
     expect(R.hand).toHaveLength(10);
-    expect(E.drawCards(2)).toBe(2); expect(R.hand).toHaveLength(12); expect(R.drawPile).toHaveLength(8);
+    expect(E.drawCards(2)).toBe(2); expect(R.hand).toHaveLength(12); expect(R.drawPile).toHaveLength(3);
     await play(card([{ op: 'draw', amount: 2, filter: { type: '武术' } }]));
-    expect(R.hand).toHaveLength(14); expect(R.drawPile).toHaveLength(6);
+    expect(R.hand).toHaveLength(14); expect(R.drawPile).toHaveLength(1);
   } finally { rules.battleHandMax = previous; }
 });
 
 it('常规与额外回合都不自动补牌或补库', async () => {
   start(); E.drawCards(3); const uids = [...R.hand];
   BattleSession.commands.endTurn(); await settle();
-  expect(R.turn).toBe(2); expect(R.hand).toEqual(uids); expect(R.drawPile).toHaveLength(7);
+  expect(R.turn).toBe(2); expect(R.hand).toEqual(uids); expect(R.drawPile).toHaveLength(2);
   R.set$extraTurn(true); BattleSession.commands.endTurn(); await settle();
-  expect(R.turn).toBe(3); expect(R.hand).toEqual(uids); expect(R.drawPile).toHaveLength(7);
+  expect(R.turn).toBe(3); expect(R.hand).toEqual(uids); expect(R.drawPile).toHaveLength(2);
 });
 
 it('结构化抽牌与指定类型抽牌都使用真实库，不匹配类型不随机补足', async () => {
   start(); await play(card([{ op: 'draw', amount: 3 }]));
-  expect(R.drawPile).toHaveLength(7); expect(R.hand).toHaveLength(3);
+  expect(R.drawPile).toHaveLength(2); expect(R.hand).toHaveLength(3);
   await play(card([{ op: 'draw', amount: 2, filter: { type: '装备' } }]));
-  expect(R.drawPile).toHaveLength(7); expect(R.hand).toHaveLength(3);
+  expect(R.drawPile).toHaveLength(2); expect(R.hand).toHaveLength(3);
   await play(card([{ op: 'draw', amount: 2, filter: { type: '杀' } }]));
-  expect(R.drawPile).toHaveLength(5); expect(R.hand).toHaveLength(5);
+  expect(R.drawPile).toHaveLength(0); expect(R.hand).toHaveLength(5);
 });
 
 it('补到指定手牌数只消耗实库，手牌不足但空库时停止', async () => {
   start(); await play(card([{ op: 'draw', untilHandN: 4 }]));
-  expect(R.hand).toHaveLength(4); expect(R.drawPile).toHaveLength(6);
+  expect(R.hand).toHaveLength(4); expect(R.drawPile).toHaveLength(1);
   R.set$drawPile([]);
   await play(card([{ op: 'draw', untilHandN: 8 }]));
   expect(R.hand).toHaveLength(4); expect(R.drawPile).toHaveLength(0);
@@ -108,30 +108,32 @@ it('随身道具的结构化抽牌使用实际库，空库不会凭空获取', a
   potion.rules.bag = { use: [{ op: 'draw', amount: 3 }] };
   start([potion]);
   BattleSession.commands.usePotion('owned-0'); await settle();
-  expect(R.drawPile).toHaveLength(7); expect(R.hand).toHaveLength(3);
+  expect(R.drawPile).toHaveLength(2); expect(R.hand).toHaveLength(3);
   R.set$drawPile([]);
   const uid = E.addTempCard(potion);
   BattleSession.commands.usePotion(uid); await settle();
   expect(R.hand).toHaveLength(3); expect(R.drawPile).toHaveLength(0);
 });
 
-it('普通战仍无墓地，能力卡与库存类型不进普通手牌', () => {
+it('普通战能力卡直接入手并可打出，资源仍不进手牌', async () => {
   start([C.SHA, card([], { type: '能力卡' }), card([], { type: '资源' })]);
-  expect(R.hand).toEqual(['owned-0']); expect(R.grave).toEqual([]);
+  expect(R.hand).toEqual(['owned-0', 'owned-1']); expect(R.grave).toEqual([]);
+  expect(E.unplayableReason(E.findCard('owned-1').card)).toBeFalsy();
+  BattleSession.commands.playCard('owned-1', 'self'); await settle();
+  expect(R.hand).not.toContain('owned-1'); expect(R.played).toContain('owned-1');
   BattleSession.commands.openGrave(); // 普通沿用查看消耗区的入口，不创建墓地实体。
   expect(R.grave).toEqual([]);
-  expect(E.unplayableReason(card([], { type: '能力卡' }))).toContain('BOSS');
 });
 
 it('洗入操作只增加牌库，库底发现候选来自真实实体且空库不随机发现', async () => {
   start();
   await play(card([{ op: 'acquire', n: 1, pool: { kind: '初始攻击' }, dest: 'deck' }]));
-  expect(R.drawPile).toHaveLength(11); expect(R.hand).toHaveLength(0);
+  expect(R.drawPile).toHaveLength(6); expect(R.hand).toHaveLength(0);
   await play(card([{ op: 'acquire', n: 3, pool: { kind: '牌库底' } }]));
   expect(R.discovering).toBeTruthy();
   expect(R.discovering.options.every(value => value.id === C.SHA.id)).toBe(true);
   BattleSession.commands.pickDiscover(0); await settle();
-  expect(R.drawPile).toHaveLength(10); expect(R.hand).toHaveLength(1);
+  expect(R.drawPile).toHaveLength(5); expect(R.hand).toHaveLength(1);
   R.set$drawPile([]);
   await play(card([{ op: 'acquire', n: 3, pool: { kind: '牌库底' } }]));
   expect(R.discovering).toBeNull(); expect(R.drawPile).toHaveLength(0);
@@ -148,25 +150,25 @@ it('普通打出临时攻击保持已出区去向，不进墓地且不回收到�
   expect(BattleSession.serialize()).toBeNull();
 });
 
-it('正式检查点JSON恢复重建10实体，不把临时库写进随身卡', () => {
+it('正式检查点JSON恢复重建5实体，不把临时库写进随身卡', () => {
   const game = start([C.SHA]); E.drawCards(4);
   const checkpoint = JSON.parse(JSON.stringify(BattleSession.serialize()));
   expect(checkpoint.run.ownedCards).toHaveLength(1);
   expect(BattleSession.restore(game, checkpoint)).toBe(true);
-  expect(R.drawPile).toHaveLength(10); expect(new Set(R.drawPile).size).toBe(10);
+  expect(R.drawPile).toHaveLength(5); expect(new Set(R.drawPile).size).toBe(5);
   expect(R.drawPile.every(uid => E.findCard(uid)?.card.id === C.SHA.id)).toBe(true);
   expect(R.hand).toEqual(['owned-0']); expect(game.ownedCards).toHaveLength(1);
 });
 
-it('牌区JSON往返保留全部10UID与卡实体', () => {
+it('牌区JSON往返保留全部5UID与卡实体', () => {
   start(); const uids = [...R.drawPile];
   const data = JSON.parse(JSON.stringify({ hand: R.hand, drawPile: R.drawPile, granted: R.granted }));
   restoreBattlePiles(data);
-  expect(R.drawPile).toEqual(uids); expect(R.granted).toHaveLength(10);
+  expect(R.drawPile).toEqual(uids); expect(R.granted).toHaveLength(5);
   expect(R.drawPile.every(uid => E.findCard(uid)?.card.id === C.SHA.id)).toBe(true);
 });
 
-it('BOSS保留固定开局与每回合抽牌，不注入10普通库', async () => {
+it('BOSS保留固定开局与每回合抽牌，不注入5普通库', async () => {
   start([C.SHA, card([], { type: '武术' }), card([], { type: '法术' })], { isBoss: true, directBossStart: true });
   expect(R.hand).toHaveLength(2); expect(R.drawPile.length + R.hand.length).toBe(4);
   expect(R.granted.filter(entry => entry.uid.startsWith('normal-sha-'))).toHaveLength(0);

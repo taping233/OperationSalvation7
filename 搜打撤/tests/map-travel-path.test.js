@@ -19,7 +19,7 @@ describe('known map travel path', () => {
     setExpeditionPreview(game, target(1));
     renderExpeditionPanel(null, game, icon => icon);
     expect(document.querySelector('.expedition-preview-copy b').textContent).toBe('入城补给');
-    expect(document.querySelector('.expedition-preview-hint').textContent).toBe('可回地图整理，回到此节点继续领取。');
+    expect(document.querySelector('.expedition-preview-hint').textContent).toBe('可在当前节点整理后继续领取，前往下一节点后未领奖励作废。');
     expect(game.layerData[0].logical[1].def.type).toBe('blank');
     game.entrySupply.taken = [0];
     expect(findMapTravelPath(game, target(2))).toEqual([target(1), target(2)]);

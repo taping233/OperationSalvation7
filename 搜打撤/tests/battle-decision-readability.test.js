@@ -73,7 +73,7 @@ describe('battle decision reading CSS contract', () => {
 
   it('keeps object labels on a local dark reading surface and career controls at the player feet', () => {
     expect(declarations(battle, `${stage} .sts-nameplate`)).toContain('background:none');
-    expect(declarations(battle, `${stage} .sts-hp>span`)).toContain('font-size:20px');
+    expect(declarations(battle, `${stage} .sts-hp>span`)).toContain('font-size:21px');
     expect(declarations(battle, `${stage} .sts-intent`)).toContain('position:relative');
     expect(declarations(battle, `${stage} .sts-nameplate`)).toContain('bottom:calc(100% + 20px)');
     expect(declarations(battle, `${stage} .sts-intent`)).not.toContain('100% + 120px');
@@ -143,12 +143,9 @@ describe('battle decision reading CSS contract', () => {
     expect(declarations(battle, `${stage} .bt-turn-forecast b`)).toContain('font-size:26px');
   });
 
-  it('keeps full long rules scrollable and uses the same copy tokens with fixed footer controls', () => {
-    const full = declarations(hand, 'body #overlay .bt-hand-detail-rules');
-    expect(full).toContain('font-size:var(--card-copy-size,24px)');
-    expect(full).toContain('line-height:var(--card-copy-leading,1.55)');
-    expect(declarations(hand, 'body #overlay .bt-hand-detail-copy')).toContain('overflow:auto');
-    expect(declarations(hand, 'body #overlay .bt-hand-detail-use')).toContain('min-height:64px');
-    expect(declarations(hand, 'body #overlay .bt-hand-detail-close')).toContain('min-height:48px');
-  });
-});
+  it('keeps rules on the canonical card face without reviving the retired detail popup', () => {
+    expect(hand).not.toContain('.bt-hand-detail-rules');
+    const face = readCssSource('game/css/card-layout-selected.css');
+    expect(face).toContain('--card-copy-size: 24px');
+    expect(face).toContain('white-space: pre-wrap; overflow-wrap: anywhere');
+  });});

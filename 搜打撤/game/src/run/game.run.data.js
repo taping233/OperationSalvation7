@@ -31,7 +31,7 @@ const WINTER_BATTLE_LAYERS = Object.freeze([
     emergencyExit: new URL('../../assets/scenes/scene-extract-anime-v2.webp', import.meta.url).href,
     door: new URL('../../assets/scenes/scene-door-anime-v2.webp', import.meta.url).href,
     altar: new URL('../../assets/scenes/scene-altar-anime-v2.webp', import.meta.url).href,
-    // 事件/宝箱整页（nodeShell）背景：与 css/scenes.css 里 scene-event-bg / scene-chest-bg 同图，
+    // 事件/搜刮点整页（nodeShell）背景：与 css/scenes.css 里 scene-event-bg / scene-chest-bg 同图，
     // 不预载的话打开页面时 CSS background-image 才发请求，大图期间整页近乎黑屏。
     // 2026-09-10 留言 #18：事件通用底图换为独立事件场景图（不再与祭坛共用）；轮换图 a/b/c 在此一并预载
     event: new URL('../../assets/scenes/event-tt6-mystery.webp', import.meta.url).href,

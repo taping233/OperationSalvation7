@@ -36,7 +36,7 @@ describe('shared node decision pages', () => {
   it('reward choice distinguishes quantity, capacity, once-only choice and saved pending rewards', () => {
     show(altarRewardHTML({capacity:'16/16 格',restorable:1}));
     const text = visibleText();
-    for (const fact of ['16/16 格','复原至多 1 张','回复 10 血','只能选一次','另一项不可领取','离开可保留','随机获取各 1 张','放不下的奖励保留待领']) expect(text).toContain(fact);
+    for (const fact of ['16/16 格','复原至多 1 张','回复 10 血','只能选一次','另一项不可领取','成功前往下一地点后，未领奖励作废','随机获取各 1 张','放不下时可在当前地点整理后继续领取']) expect(text).toContain(fact);
     expect(document.querySelector('[data-act="altarRewardRestore"]').disabled).toBe(false);
   });
   it('empty restore pool keeps the alternative visible and disabled', () => {

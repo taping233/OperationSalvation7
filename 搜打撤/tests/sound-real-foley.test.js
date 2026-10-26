@@ -1,3 +1,4 @@
+// @vitest-environment node
 // Historical credit assertions use the fixed pre-replacement page, alongside before.catalog.js.
 // Historical integration provenance; current runtime replacement is covered by sound-web-library.test.js.
 import { describe, expect, it } from 'vitest';

@@ -70,12 +70,17 @@ function measure(action) {
   game.ownedCards.forEach((entry, i) => Object.defineProperty(entry, 'uid', {
     configurable: true, enumerable: true, get() { uidReads++; return `u${i}`; },
   }));
-  globalThis.__previewHandCounts = { lookups: 0, cost: 0, capability: 0, handProjection: 0 };
-  action();
-  const counts = { ...(globalThis.__previewHandCounts.lookups ? globalThis.__previewHandCounts : {}), uidReads };
-  globalThis.__previewHandCounts = null;
-  game.ownedCards.forEach((entry, i) => Object.defineProperty(entry, 'uid', { configurable: true, enumerable: true, writable: true, value: `u${i}` }));
-  return counts;
+  const projection = vi.spyOn(Runtime.hand, 'map');
+  try {
+    action();
+    const handProjection = projection.mock.results.filter(result => Array.isArray(result.value)
+      && result.value.length > 0 && result.value.every(entry => entry && typeof entry === 'object'
+        && 'uid' in entry && 'card' in entry)).length;
+    return { uidReads, handProjection };
+  } finally {
+    projection.mockRestore();
+    game.ownedCards.forEach((entry, i) => Object.defineProperty(entry, 'uid', { configurable: true, enumerable: true, writable: true, value: `u${i}` }));
+  }
 }
 beforeEach(() => {
   frames = new Map(); frameId = 0; clock = 0; hit = null;
@@ -91,7 +96,6 @@ beforeEach(() => {
   UI.el.overlay.setPointerCapture = () => {}; UI.el.overlay.hasPointerCapture = () => true; UI.el.overlay.releasePointerCapture = () => {};
 });
 afterEach(() => {
-  globalThis.__previewHandCounts = null;
   Aim.cancelAim(); Aim.cancelClickSelection(); clearFeedback();
   if (game?.battleActive) commands.flee();
   for (let i = 0; i < 100 && frames.size; i++) step();
@@ -105,10 +109,9 @@ it.each([9, 30, 60])('one real empty-field pointer hover resolves %i raw hand en
   expect(previews()).toHaveLength(4);
   previews().forEach(text => { expect(text).toContain('直接伤害：3'); expect(text).toContain('松手打出'); });
   expect(BattleSession.serialize()).toEqual(before);
-  console.info('POINTER_HAND_COUNTS', JSON.stringify({ cards: count, ...counts, text: previews() }));
   // Owned UID reads include the non-shared per-target preview/availability lookups.
   expect(counts.uidReads).toBe(count * (count + 1) / 2 + 28);
-  if (counts.lookups != null) expect(counts).toMatchObject({ handProjection: 1, lookups: count + 16, cost: 8, capability: 8 });
+  expect(counts.handProjection).toBe(1);
   expect(measure(step).uidReads).toBe(0); // No new transition: no batch at all.
   leave();
   expect(measure(enter)).toEqual(counts); // A new entry materializes a new projection, even without a state edit.
@@ -122,10 +125,9 @@ it('uses the current catalog 风暴火球 with unchanged damage, cost and play w
   const card = structuredClone(Cards.all().find(entry => entry.id === 'tt3-flame-storm'));
   restore(9, card); begin();
   const counts = measure(enter);
-  console.info('CATALOG_POINTER_HAND_COUNTS', JSON.stringify({ cardId: card.id, ...counts, text: previews() }));
   previews().forEach(text => { expect(text).toContain('直接伤害：4'); expect(text).toContain('费2'); expect(text).toContain('松手打出'); });
   expect(counts.uidReads).toBe(73);
-  if (counts.lookups != null) expect(counts).toMatchObject({ handProjection: 1, lookups: 25, cost: 8, capability: 8 });
+  expect(counts.handProjection).toBe(1);
 });
 
 it('new pointer entries see changed hand, raw overrides, requirements, energy and target death', () => {

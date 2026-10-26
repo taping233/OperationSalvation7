@@ -46,7 +46,8 @@ function stackIcon(name, type, supply) {
 export function tileHTML(t, resourceCards = null) {
   const rc = t.supply ? '#aebfc9' : (RARITY_TINT[t.rarity] || '#9fb0ba');
   const select = t.supply ? '' : ` role="button" aria-label="查看${escAttr(t.name)}，${t.count}张${t.zone === 'pocket' ? '，已消耗' : ''}" data-act="inspectStack" data-name="${escAttr(t.name)}" data-safe="${t.safe ? 1 : 0}"${t.zone === 'pocket' ? ' data-pocket="1"' : ''}`;
-  const identity = Array.isArray(t.uids) ? ` data-pane-key="${escAttr(JSON.stringify(t.uids))}" data-uid="${escAttr(t.uids[0] || '')}"` : '';
+  const identity = Array.isArray(t.uids) ? ` data-pane-key="${escAttr(JSON.stringify(t.uids))}" data-uid="${escAttr(t.uids[0] || '')}"`
+    : Number.isInteger(t.pocketIndex) ? ` data-pocket-index="${t.pocketIndex}"` : '';
   const stack = t.supply ? ` data-supply="${escAttr(t.name)}"` : ` data-stack="${escAttr(t.name)}"`;
   const spent = t.zone === 'pocket' ? ' spent' : '';
   const state = t.zone === 'safe' ? '押运' : t.zone === 'pocket' ? (['道具', '装备'].includes(t.type) ? '火堆不可复原' : '火堆可复原') : (t.type === '道具' ? (t.useStatus?.badge || { map: '可用', battle: '战斗使用' }[bagUseLocation(t.card)] || '查看用法') : '');

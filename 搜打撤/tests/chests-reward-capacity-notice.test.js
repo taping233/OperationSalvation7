@@ -53,7 +53,7 @@ beforeAll(async () => {
     hideOverlay:()=>H.UI.el.overlay.hidden=true, refresh(){}, log:vi.fn(), showCardReward:vi.fn(), _checkPageBg(){} });
   window.SDT ||= {}; Object.assign(window.SDT, { game:H.game, UI:H.UI, Icons:{ rich:html=>html }, Sound:{ sfx(){} }, Meta:{},
     Base:{ slot:1, bagCap:()=>18, safeCap:()=>3, isSha:()=>false, data:{} },
-    MAP:{ chestKinds:{ small:{ name:'小宝箱' }, medium:{ name:'中宝箱', pickFrom:3 } } },
+    MAP:{ chestKinds:{ small:{ name:'小型物资箱' }, medium:{ name:'密封物资箱', pickFrom:3 } } },
     Cards:{ all:()=>cards, cardHTML:card=>`<span>${card.name}</span>`, rarityOf:card=>card.rarity, sellPrice:()=>1 },
   });
   Bag=await import('../game/src/run/game.session.bag.js');
@@ -82,7 +82,7 @@ beforeEach(async () => {
 afterEach(()=>{ vi.clearAllTimers(); vi.useRealTimers(); });
 
 describe('整理背包返回时奖励容量 notice 与真实容量同步', () => {
-  it.each(['普通宝箱','地下商场黑市'])('%s：18/18批量领2张，丢木材回17/18只保留领取成功事实', async source => {
+  it.each(['普通搜刮点','地下商场黑市'])('%s：18/18批量领2张，丢木材回17/18只保留领取成功事实', async source => {
     if (source==='地下商场黑市') expect(scenes.openFixedRewardsOnCell(cards,source)).toBe(true);
     else await open();
     await acts.chestTake();
@@ -166,7 +166,7 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
     try {
       SDT.Base={ ...oldBase, petEggDropChance:()=>0, recordPetEggChestResult(){} };
       SDT.Cards={ ...oldCards, RARITIES:['古朴','稀有','史诗','传说'], randomDropCard:()=>cards[0] };
-      SDT.MAP.chestKinds.small={ name:'小宝箱', cards:1 };
+      SDT.MAP.chestKinds.small={ name:'小型物资箱', cards:1 };
       await open({ rewards:[cards[0]] }); H.game.grantCard.mockReturnValue(false); await acts.chestTake();
       expect(notice()).toBe('暂时无法领取');
       Chests.open(H.game,[{kind:'small'},{kind:'small'}],()=>{},{onCell:true});

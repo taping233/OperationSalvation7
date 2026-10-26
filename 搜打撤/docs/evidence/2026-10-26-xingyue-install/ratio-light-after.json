@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-26T12:33:05.846Z",
+  "inputKind": "real-input",
+  "detail": "当前窗口档位02人物外观，真实点击星月默认，核对全身比例和完整边界",
+  "screenshot": {
+    "path": "ratio-light-after.png",
+    "bytes": 120846,
+    "sha256": "307bb4d840357165479d89fec28c90e1d88bdd0a09c0aec9b49f4b069186effb"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1536,
+      "src": "http://localhost:5200/assets/portraits/full/xingyue.webp?v=0.60.0",
+      "width": 2731
+    }
+  ],
+  "console": []
+}

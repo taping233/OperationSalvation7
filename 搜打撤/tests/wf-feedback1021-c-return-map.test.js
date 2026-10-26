@@ -48,6 +48,8 @@ it('各页返回键钉为页脚行内最右一枚（order:9 覆盖全部返回�
   ];
   for (const file of files) {
     if(file==='game/src/run/game.run.flow.js') expect(read(file)).toContain('createEventLifecycle(');
+    else if(file==='game/src/ui/fire-rest-view.js') expect(read(file)).toContain('fireRestDecisionHTML');
+    else if(file==='game/src/ui/chest-reward-overview.js') expect(read(file)).toContain('rewardReturnHTML');
     else expect(read(file)).toContain('返回地图');
   }
   // 商店页与资源页的返回键本就位于右侧行动列（结构保证，不需要 order 钉位）。

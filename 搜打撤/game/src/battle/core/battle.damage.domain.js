@@ -11,7 +11,7 @@ const Combat = context.combat;
  * readState is live so recursive requested damage and defeat callbacks observe the same battle.
  */
 function createBattleDamage({ readState, sound, alive, recordRequestedDamage, resolveFoeDefeat }) {
-  // 敌人免伤判定（异能领主：偶数回合全免伤，破甲克制）
+  // 敌人免伤判定（隔离区看守：偶数回合全免伤，破甲克制）
   function aegisBlocked(foe) {
     return foe.affix === 'aegis' && readState().turn % 2 === 0 && (foe.status.abreak || 0) <= 0;
   }

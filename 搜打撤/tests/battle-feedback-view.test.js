@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { intentSummary, intentViewModel } from '../game/src/battle/view/battle.intent.view.js';
 

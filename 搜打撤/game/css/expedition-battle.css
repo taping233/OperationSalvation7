@@ -50,11 +50,6 @@
 #overlay .battle-decision-content{
 & .battle-decision-source { color:#b9cbd4; font-size:17px; margin:0 0 8px; }
 & .battle-pile-card { position:relative; display:block; padding:0; background:none; border:0; }}
-#overlay .battle-decision-content .battle-bag-section{
-& + .battle-bag-section { margin-top:28px; border-top:1px solid #acc1cb33; padding-top:20px; }
-& h4 { margin:0; color:#e4edf0; font-size:22px; }
-& h4 span { margin-left:16px; font-size:17px; font-weight:400; color:#b9cbd4; }}
-
 /* Battle-only temporary gain: retain the shared queue and show the object beside the arena. */
 #cardGet[data-combat="true"]{
 & { inset:76px 24px auto auto; width:290px; min-height:0; height:auto; padding:18px 20px; gap:12px; background:#122631f2; border:1px solid #a8c2cc66; box-shadow:0 14px 38px #0007; border-radius:0; }
@@ -68,10 +63,10 @@
 /* 三组操作台的显式格位：旧手牌/技能的第二列钉位不可沿用。 */
 body #overlay .battle-decision-content{
 & .bt-hand { display:flex; flex-wrap:wrap; justify-content:center; }
-& .bt-card:focus-visible,
+& .bt-card:not([data-discovery-option]):focus-visible,
 & .battle-pile-card:focus-visible { outline:3px solid #e0c986; outline-offset:5px; }}
 
-/* 战斗已有战术台背包入口，地图浮钮不得盖住结束回合或附加面板。 */
+/* 战斗中隐藏地图背包浮钮，避免盖住结束回合或附加面板。 */
 
 /* 仅景层本身按arena裁边；角色、目标与意图仍可越出arena。 */
 
@@ -96,7 +91,7 @@ body #overlay .battle-decision[data-decision-kind="discover"]{
 & .bt-card { position:relative; padding:10px; border-bottom:2px solid #b5ccd24d; }}
 body #overlay .battle-decision-content{
 & button.bt-card:hover { outline:2px solid #e4d49c; outline-offset:5px; filter:brightness(1.06); }
-& :is(.bt-hand,.battle-bag-grid) { gap:24px; }}
+& .bt-hand { gap:24px; }}
 body #overlay .battle-decision{
 &[data-decision-kind="hand-select"] .bt-hand { display:grid; grid-template-columns:repeat(auto-fit,190px); justify-content:center; align-items:start; padding:20px 0; }
 &:is([data-decision-kind="hand-select"],[data-decision-kind="pile"]) .hs-card { width:190px; }}
@@ -108,9 +103,6 @@ body #overlay .battle-decision-actions{
 & .ov-btn { flex:0 1 auto; min-width:190px; }
 & .ov-btn.ok { order:2; }}
 body #overlay .battle-decision-content .bt-count { background:#14252ee8; color:#d9e6e8; border:1px solid #a4bbc555; }
-body #overlay .battle-decision[data-decision-kind="bag"]{
-& .battle-bag-grid { display:flex; flex-wrap:wrap; align-items:flex-start; padding:18px 0; }
-& .battle-bag-slot .hs-card { width:185px; }}
 #cardGet[data-combat="true"]{
 & .lg-card { padding:9px; background:#0b1b2366; }
 &[data-rarity="传说"] { border-left:3px solid #e4c778; }

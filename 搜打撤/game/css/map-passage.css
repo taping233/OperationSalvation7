@@ -24,5 +24,47 @@
   16% { opacity:1; }
   100% { opacity:1; transform:scale(1.085); }
 }
+.map-layer-passage .silent-film-playing [data-film-motion="layer-watchline"] > img {
+  animation:layerWatchlineTraverse var(--silent-film-duration,3600ms) ease-out both;
+  transform-origin:68% 52%;
+}
+.map-layer-passage .silent-film-playing [data-film-motion="layer-ruins"] > img {
+  animation:layerRuinsSink var(--silent-film-duration,3600ms) cubic-bezier(.2,.55,.3,1) both;
+  transform-origin:67% 60%;
+}
+.map-layer-passage .silent-film-playing [data-film-motion="layer-core"] > img {
+  animation:layerCorePressure var(--silent-film-duration,3600ms) cubic-bezier(.25,.1,.5,1) both;
+  transform-origin:68% 48%;
+}
+.map-layer-passage [data-film-motion="layer-watchline"] > .sf-shade,
+.map-layer-passage [data-film-motion="layer-ruins"] > .sf-shade,
+.map-layer-passage [data-film-motion="layer-core"] > .sf-shade {
+  display:block; inset:0; background:radial-gradient(ellipse at 68% 50%,transparent 24%,#090b0d66 90%);
+}
+.map-layer-passage .silent-film-playing [data-film-motion="layer-watchline"] > .sf-shade {
+  background:linear-gradient(110deg,transparent 30%,#e8e5dd0a 48%,transparent 64%);
+  animation:layerWatchlineWind var(--silent-film-duration,3600ms) ease-out both;
+}
+@keyframes layerWatchlineTraverse {
+  0% { opacity:0; transform:translateX(2.4%) scale(1.045); }
+  18% { opacity:1; }
+  100% { opacity:1; transform:translateX(-1%) scale(1.045); }
+}
+@keyframes layerWatchlineWind {
+  from { transform:translateX(-36%); opacity:0; }
+  35% { opacity:1; }
+  to { transform:translateX(26%); opacity:0; }
+}
+@keyframes layerRuinsSink {
+  0% { opacity:0; transform:translateY(2.6%) scale(1.025); }
+  20% { opacity:1; }
+  100% { opacity:1; transform:translateY(-1.4%) scale(1.075); }
+}
+@keyframes layerCorePressure {
+  0% { opacity:0; transform:scale(.94); filter:brightness(.45); }
+  24% { opacity:1; filter:brightness(.65); }
+  78% { filter:brightness(1.06); }
+  100% { opacity:1; transform:scale(1.065); filter:brightness(.9); }
+}
 .reduce-motion .map-layer-passage { display:none; }
 @media (prefers-reduced-motion:reduce) { .map-layer-passage { display:none; } }

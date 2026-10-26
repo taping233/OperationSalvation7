@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it } from 'vitest';
 import { previewAction } from '../game/src/battle/view/battle.preview.js';
 const curse = { op: 'curse', curse: 'poison', stacks: 2, target: 'chosenEnemy' };

@@ -1,6 +1,7 @@
 /* 由 effect-steps.js 拆出（2026-09-22 六文件重构批1）。原第 1449-1472 行，逐字搬迁。
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
- * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
+ * 共享端口由壳经参数 s 注入；能量上限是否同时补充当前能量沿用卡牌统一策略。 */
+import { energyCapGrantsCurrent } from '../../cards/card-energy-policy.js';
 export function tailSteps(s) {
   const {log, addEnergy, addEnergyCap, matchElsewhere, refillEnergy} = s;
   return [
@@ -23,7 +24,7 @@ export function tailSteps(s) {
         id: 'res.energyCap', gate: 'always', label: '能量上限 +N',
         when: (ctx) => ctx.desc.match(/能量上限\s*\+\s*(\d+)/),
         run: (ctx, m) => {
-          const currentMax = addEnergyCap(+m[1]);
+          const currentMax = addEnergyCap(+m[1], energyCapGrantsCurrent(ctx.card));
           log(`[[icon:bolt]] 本场战斗能量上限 +${m[1]}（每回合 ${currentMax} 费）`, 'sys');
           ctx.did = true;
         },

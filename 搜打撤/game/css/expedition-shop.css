@@ -118,9 +118,9 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { wi
 & .shop-detail-buy.short:disabled { border-color:#b19a8055; background:#3a3330; color:#ddb5a5; opacity:1; cursor:not-allowed; }
 & .shop-detail-bag { width:100%; min-height:var(--ui-control-compact); border:1px solid #a6afb155; border-radius:0; background:#30383b; color:#e1e6e6; font:500 var(--ui-text-label)/1.4 var(--font-ui); cursor:pointer; }
 & .shop-merchant { grid-column:1; grid-row:1; display:flex; flex-direction:column; justify-content:flex-end; min-width:0; min-height:0; padding:0 20px 0 0; gap:26px; }
-& .shop-merchant-caption { padding:18px 6px; border:0; background:linear-gradient(90deg,#07151aac,transparent); }
-& .shop-merchant-caption > span { color:#c4e0d5; font-size:23px; font-weight:600; }
-& .shop-merchant-caption p { margin:10px 0 0; color:#e0e6e0; font-size:21px; line-height:1.65; }
+& .shop-merchant-caption { display:block; width:100%; padding:18px 6px; border:0; background:linear-gradient(90deg,#07151aac,transparent); font:inherit; text-align:left; cursor:pointer; }
+& .shop-merchant-caption > span:first-child { color:#c4e0d5; font-size:23px; font-weight:600; }
+& .shop-merchant-line { display:block; margin:10px 0 0; color:#e0e6e0; font-size:21px; line-height:1.65; }
 & .shop-services { display:grid; gap:10px; }
 & .shop-sellpost { position:relative; grid-column:auto; justify-self:stretch; align-self:stretch; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:12px; min-width:0; min-height:68px; margin:0; padding:12px 4px; border:0; border-top:1px solid #b6cfca66; border-radius:0; background:#16282b5e; color:var(--shop-ink); text-align:left; box-shadow:none; cursor:pointer; }
 & .sellpost-copy { display:grid; gap:6px; }

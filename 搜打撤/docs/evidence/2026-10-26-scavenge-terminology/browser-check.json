@@ -1,0 +1,13 @@
+{
+  "platform": "Codex in-app browser",
+  "map": {
+    "url": "http://localhost:5200/dev/map-node-rules-review.html",
+    "scope": "isolated current label presentation, generator 6/9 fixture",
+    "errors": []
+  },
+  "reward": {
+    "url": "http://localhost:5200/dev/small-chest-review.html",
+    "scope": "real reward controller in isolated memory fixture",
+    "errors": []
+  }
+}

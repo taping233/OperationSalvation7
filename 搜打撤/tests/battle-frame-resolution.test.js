@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { frameResolutionFor, resizeFrameSurface } from '../game/src/battle/view/battle.frame-resolution.js';
 

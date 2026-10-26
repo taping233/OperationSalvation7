@@ -31,7 +31,7 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
     refresh: vi.fn(), log: vi.fn(),
   };
   window.SDT = {
-    UI, MAP: { chestKinds: { small: { name:'小宝箱', cards:2, coins:[2, 2] } } },
+    UI, MAP: { chestKinds: { small: { name:'小型物资箱', cards:2, coins:[2, 2] } } },
     Cards: { RARITIES:['古朴','稀有','史诗','传说'], all:() => [card, otherCard], randomDropCard:seen => seen.has(card.id) ? otherCard : card,
       pickOfRarity:() => card, classPool:() => [], rarityOf:item => item.rarity,
       sellPrice:() => 1, cardHTML:() => '<div>队列测试卡</div>' },

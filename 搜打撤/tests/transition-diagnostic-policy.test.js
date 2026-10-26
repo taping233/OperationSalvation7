@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it } from 'vitest';
 import { transitionDiagnosticPlain, usePlainBattleTransition } from '../game/src/ui/transition-diagnostic-policy.js';
 const query = '?perfProbe=1&flightRecord=1&transitionDiagnostic=plain';

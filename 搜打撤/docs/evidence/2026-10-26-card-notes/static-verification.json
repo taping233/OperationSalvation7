@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-26",
+  "url": "http://127.0.0.1:5200/card-notes-review-static.HTML",
+  "storageKey": "sdt-card-notes-review-20261026-v1",
+  "existingNotesAndStatuses": "通过隔离存储种子验证保留，未改动真实浏览器存档",
+  "rawHtml": true,
+  "noDevelopmentClient": true,
+  "cspHash": "passed",
+  "syntax": "passed",
+  "sharedServer": "复用5200，未改配置或重启",
+  "limitation": "仅保留同一浏览器同一源已保存的修改；原编辑页保留，未强制跳转"
+}

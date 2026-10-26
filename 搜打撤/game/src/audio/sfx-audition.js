@@ -21,7 +21,7 @@ const packs = [
   { id: 'cc0-action', label: 'C · 动作材质', note: '现成开放许可声音 · 材料与动作' },
 ];
 const roleNames = {click:'按钮点击',confirm:'操作确认',card:'出牌',attackSlash:'斩击命中',
-  parry:'格挡',shieldBreak:'护盾崩裂',heal:'治疗恢复',eventEnter:'进入事件',chestBurst:'宝箱开启',bossReveal:'首脑登场'};
+  parry:'格挡',shieldBreak:'护盾崩裂',heal:'治疗恢复',eventEnter:'进入事件',chestBurst:'搜刮点开启',bossReveal:'首脑登场'};
 const descriptions = {
   'arknights-adjusted': {click:'音色略沉，点击更紧凑',confirm:'确认候选，音高略升、收束更短',card:'纸牌滑动略快，尾音稍短',
     attackSlash:'挥击更紧，音色略沉',parry:'格挡候选，降低音高与尾音亮度',shieldBreak:'碎裂略快，减少尖亮',

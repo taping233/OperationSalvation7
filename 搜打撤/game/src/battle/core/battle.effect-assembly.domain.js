@@ -9,6 +9,12 @@ import { esc } from '../../core/shared.js';
 export function createBattleEffectAssembly({ runtime: instanceRuntime, cards, combat: Combat, random: Random,
   executionSession, createBattleResolution, sound, commands }) {
 const { handSelectQueue, choiceQueue } = executionSession;
+/** @param {number} amount */
+const addEnergyCap = (amount, grantCurrent = true) => {
+  instanceRuntime.set$maxEnergy(instanceRuntime.maxEnergy + amount);
+  if (grantCurrent) instanceRuntime.set$energy(instanceRuntime.energy + amount);
+  return instanceRuntime.maxEnergy;
+};
 /** @param {import('./battle.core-ports.types.js').CombatUnit} target
  * @returns {target is import('./battle.core-ports.types.js').CoreFoe} */
 const isRuntimeFoe = target => instanceRuntime.foes.includes(/** @type {import('./battle.core-ports.types.js').CoreFoe} */ (target));
@@ -88,7 +94,7 @@ const effectPorts = {
     shuffleDeck: () => { instanceRuntime.set$drawPile(shuffle(instanceRuntime.drawPile)); return instanceRuntime.drawPile.length; },
     addEnergy: amount => { instanceRuntime.set$energy(instanceRuntime.energy + (amount)); return instanceRuntime.energy; },
     refillEnergy: () => { instanceRuntime.set$energy(instanceRuntime.maxEnergy); return instanceRuntime.maxEnergy; },
-    addEnergyCap: amount => { instanceRuntime.set$maxEnergy(instanceRuntime.maxEnergy + (amount)); instanceRuntime.set$energy(instanceRuntime.energy + (amount)); return instanceRuntime.maxEnergy; },
+    addEnergyCap,
     // 招式池谓词复用卡库判定。
     isRandomObtainable: c => cards.isRandomObtainable(c),
     // —— 2026-09-08 补线：以下端口此前从未传入，相关描述一打就崩 ——
@@ -238,7 +244,7 @@ const applyTextEffects = createEffectExecutor(effectPorts);
     // 保证结构化 op 与文本路径对同一引擎状态（energy/maxEnergy/G.maxHp）结算一致。
     addEnergy: amount => { instanceRuntime.set$energy(instanceRuntime.energy + (amount)); return instanceRuntime.energy; },
     refillEnergy: () => { instanceRuntime.set$energy(instanceRuntime.maxEnergy); return instanceRuntime.maxEnergy; },
-    addEnergyCap: amount => { instanceRuntime.set$maxEnergy(instanceRuntime.maxEnergy + (amount)); instanceRuntime.set$energy(instanceRuntime.energy + (amount)); return instanceRuntime.maxEnergy; },
+    addEnergyCap,
     addPlayerMaxHp: n => {
       instanceRuntime.G.maxHp += n;
       instanceRuntime.G.heal(n);

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { EventEmitter } from 'node:events';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL, URL as NodeURL } from 'node:url';

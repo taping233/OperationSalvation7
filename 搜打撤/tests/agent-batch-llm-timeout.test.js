@@ -1,3 +1,4 @@
+// @vitest-environment node
 /* INFRA-04 + INFRA-05 回归（真实跑 agent-batch.mjs，jsdom 无头全量启动）：
  * ① --policy llm 且配置完整（环境变量）时，决策必须走 Agent.llm.decide 工厂——
  *   用桩 LLM 端点计数：llm 命中数 >0（旧 bug 回落 greedy 则为 0）。

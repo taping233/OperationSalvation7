@@ -95,7 +95,7 @@ it.each([
 
 function delayedBag(extra = {}) {
   let execute;
-  const queue = vi.fn(action => { execute = action; });
+  const queue = vi.fn(action => { execute = action; return Promise.resolve(); });
   const bag = createBattleBag({ requestBattleRender: vi.fn(), clearTargetSession: vi.fn(),
     interactionOf: () => null, queueBattleAction: queue,
     throwIfActionCancelled: signal => { if (signal.aborted) throw new Error('cancelled'); },
@@ -141,7 +141,7 @@ it('旧战斗延迟动作不向新战同名UID写入消耗账本，也不阻塞�
 it('同步效果异常仍保留已提交消耗账本，finally解除取回屏蔽', async () => {
   await start([healing]);
   game.onHeal = () => { throw new Error('injected heal failure'); };
-  expect(() => BattleSession.commands.usePotion('item-0')).toThrow('injected heal failure');
+  BattleSession.commands.usePotion('item-0'); await settle();
   expect(pool()).toContain('item-0');
   expect(runtime.played.filter(uid => uid === 'item-0')).toHaveLength(1);
   expect(sourceCount('item-0')).toBe(1);

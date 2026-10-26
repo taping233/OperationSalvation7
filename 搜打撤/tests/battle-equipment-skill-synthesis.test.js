@@ -64,6 +64,23 @@ afterEach(async () => {
   randomBefore = null;
 });
 
+it('满月形态只增加能量上限，支付费用后不立即返还能量，下回合按新上限恢复', async () => {
+  await start();
+  const moon = canonical('tt3-nature-form');
+  expect(moon.name).toBe('满月形态');
+  game.ownedCards[0].card = moon;
+  piles.set$hand(['equip-0']);
+  piles.set$drawPile([]);
+  const before = BattleSession.getSnapshot();
+  BattleSession.commands.playCard('equip-0', 'self');
+  const after = await idle();
+  expect(after.maxEnergy).toBe(before.maxEnergy + 1);
+  expect(after.energy).toBe(before.energy - moon.cost);
+  BattleSession.commands.endTurn();
+  const next = await idle();
+  expect(next.energy).toBe(after.maxEnergy);
+});
+
 describe('寻宝图真实 BattleSession 主动技能', () => {
   it('洗入1张、抽1张；连续点击和结算后重复点击均不重复发动', async () => {
     await start();
@@ -87,7 +104,7 @@ describe('寻宝图真实 BattleSession 主动技能', () => {
   it('可抽到已有初始攻击的同名牌，手牌总数增加而可见分组数不变', async () => {
     await start();
     const before = await wearMap();
-    Random.reseed(3); // 当前 shuffle 随机流：抽到已有同名牌，宝箱仍留在牌库。
+    Random.reseed(3); // 当前 shuffle 随机流：抽到已有同名牌，搜刮点仍留在牌库。
     const beforeGroups = groupHandCards(before.hand.map(uid => engine.findCard(uid)));
     BattleSession.commands.useEquipSkill('equip-0');
     const after = await idle();
@@ -102,7 +119,7 @@ describe('寻宝图真实 BattleSession 主动技能', () => {
     expect(after.hand.length).toBe(before.hand.length + 1);
   });
 
-  it('牌库原本为空时抽到刚洗入的宝箱', async () => {
+  it('牌库原本为空时抽到刚洗入的搜刮点', async () => {
     await start();
     const before = await wearMap([]);
     BattleSession.commands.useEquipSkill('equip-0');
@@ -113,7 +130,7 @@ describe('寻宝图真实 BattleSession 主动技能', () => {
     expect(after.drawPile).toHaveLength(0);
   });
 
-  it('普通战可装备寻宝图，并从本场10张实体牌库抽牌', async () => {
+  it('普通战可装备寻宝图，并从本场5张实体牌库抽牌', async () => {
     await start(false);
     const before = BattleSession.getSnapshot();
     expect(engine.unplayableReason(engine.findCard('equip-0').card)).toBeNull();
@@ -128,7 +145,7 @@ describe('寻宝图真实 BattleSession 主动技能', () => {
     const box = piles.granted.find(entry => entry.card.id === 'cmtn28jv33wx');
     expect([...worn.drawPile, box.uid]).toContain(gained[0]);
     expect(after.drawPile).toHaveLength(worn.drawPile.length);
-    expect(piles.granted.filter(entry => entry.uid.startsWith('normal-sha-'))).toHaveLength(10);
+    expect(piles.granted.filter(entry => entry.uid.startsWith('normal-sha-'))).toHaveLength(5);
     expect(after.energy).toBe(before.energy);
     expect(after.equipped[0].used).toBe(true);
   });

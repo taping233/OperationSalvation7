@@ -40,6 +40,16 @@ afterEach(() => {
 const end = () => arm.dispatchEvent(new Event('animationend', { bubbles: true }));
 
 describe('transition gate owns both completion paths', () => {
+  it('ignores a child animation ending before the gate sweep', () => {
+    const child = document.createElement('span'); arm.append(child);
+    gateSweep();
+    child.dispatchEvent(new Event('animationend', { bubbles: true }));
+    expect(gate.classList.contains('on')).toBe(true);
+    end();
+    expect(gate.classList.contains('on')).toBe(false);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
   it('releases every lost-animation listener after 100 fallback-only navigation cycles', () => {
     for (let cycle = 0; cycle < 100; cycle += 1) {
       gateSweep();

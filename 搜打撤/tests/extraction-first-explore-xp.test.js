@@ -15,7 +15,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
   saveGame: vi.fn(), scaledEnemy: vi.fn(), syncPlayTime: vi.fn(),
 }));
 vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
-vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String, escAttr: String }));
+vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String, escAttr: value => String(value).replaceAll('"', '&quot;') }));
 vi.mock('../game/src/audio/sound.js', () => ({ tone: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn() }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
@@ -28,7 +28,7 @@ vi.mock('../game/src/core/random.js', () => ({
     snapshot() { return this.state; }
   },
 }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
 vi.mock('../game/src/run/game.run.scenes.js', () => ({
   ...extractionMocks(() => vi),
 }));

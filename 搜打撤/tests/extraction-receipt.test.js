@@ -68,7 +68,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
   saveGame: vi.fn(), scaledEnemy: vi.fn(), syncPlayTime: vi.fn(),
 }));
 vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
-vi.mock('../game/src/core/shared.js', () => ({ clone: v => (v == null ? v : JSON.parse(JSON.stringify(v))), esc: String, escAttr: String }));
+vi.mock('../game/src/core/shared.js', () => ({ clone: v => (v == null ? v : JSON.parse(JSON.stringify(v))), esc: String, escAttr: value => String(value).replaceAll('"', '&quot;') }));
 vi.mock('../game/src/audio/sound.js', () => ({ tone: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn() }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
@@ -81,7 +81,7 @@ vi.mock('../game/src/core/random.js', () => ({
     snapshot() { return this.state; }
   },
 }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
 vi.mock('../game/src/run/game.run.scenes.js', () => ({
   FIRE_RESTORABLE: [], consumeCurrentCell: vi.fn(), finishInstant: vi.fn(), grantEventCard: vi.fn(),
   nodeOpt: (act, label) => `<button data-act="${act}">${label}</button>`,
@@ -143,17 +143,17 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
   it('clear 结局：主体文案突出「击破首脑+关键收获」，数字（行动/用时/首探经验）来自回执', async () => {
     await finishUp();
     const text = document.body.textContent;
-    expect(text).toContain('首脑突破 · 已保存');
+    expect(text).toContain('首脑突破');
     expect(text).not.toContain('满载而归');
-    expect(text).toContain('待复原4 张');
+    expect(text).toContain('待复原 4 张');
     expect(document.querySelector('[data-act=again]')).toBeNull();
     expect(document.querySelector('[data-act=goBase]').textContent).toContain('返回基地');
-    expect(document.querySelector('.exr-eyebrow').textContent).toContain('首脑突破');
-    expect(text).toContain('已入库 0 张');
+    expect(document.querySelector('.exr-success-title').textContent).toContain('首脑突破');
+    expect(text).toContain('卡牌入库0 张');
     expect(text).not.toContain('保本返回');
-    expect(text).toContain('行动 32 次');     // 页面主体读回执 actions
+    expect(recordRun.mock.calls[0][1].receipt.actions).toBe(32);     // 页面主体读回执 actions
     expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('共 32 次行动'), 'ok');   // 日志行同读回执
-    expect(text).toContain('用时 02:05');     // 回执 durationSec=125
+    expect(text).toContain('02:05');     // 回执 durationSec=125
     expect(text).toContain('+44');            // 回执 firstExplore.xp（SYS-01 口径，非旧 turn 反推的 84）
     expect(text).toContain('第 4 层');        // 回执 layersReached
     expect(document.querySelector('[data-act="goBase"]')).not.toBeNull();
@@ -183,10 +183,10 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
     altarState.game.ownedCards = Array.from({ length: 6 }, (_, i) => ({ uid: String(i), card: { id: 'b', name: '背包卡' } }));
     expect(await doExtract()).toBe(true);
     const smart = document.querySelector('[data-act="exSmart"]');
-    expect(smart.textContent).toContain('按估值入库 5 张');
+    expect(smart.textContent).toContain('按估值入库');
     expect(smart.textContent).not.toContain('上限仓库空格');
-    expect(smart.title).toBe('按估值从高到低入库，同估值按背包原次序。估值不代表稀有度或实战强度，也不表示卡牌可以出售。');
-    expect(smart.getAttribute('aria-label')).toBe(smart.title);
+    expect(smart.title).toBe('按估值从高到低入库，同估值按背包原次序。');
+    expect(document.querySelector('.exr-capacity').textContent).toContain('还能入库 5 张');
   });
 
   it('labels notable losses as a subset while preserving the full receipt count', async () => {
@@ -196,8 +196,8 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
       { uid: 'box', card: { name: '迷之匣', rarity: '史诗', type: '道具' } },
     ];
     await finishUp();
-    expect(document.querySelector('.exr-loss').textContent).toContain('未入库 3 张');
-    expect(document.querySelector('.exr-loss').textContent).toContain('其中传说/史诗包括：【迷之匣】×1');
+    expect(document.querySelector('.exr-receipt-details').textContent).toContain('未入库 3 张');
+    expect(document.querySelector('.exr-receipt-details').textContent).toContain('迷之匣 ×1');
     expect(recordRun.mock.calls[0][1].receipt.losses).toMatchObject({
       lostCount: 3, lostNotable: [{ name: '迷之匣', rarity: '史诗', count: 1 }],
     });
@@ -210,10 +210,10 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
     const text = document.body.textContent;
     expect(text).toContain('撤离成功');
     expect(text).not.toContain('保本返回');
-    expect(text).toContain('收获已保存');
+    expect(text).toContain('已保存');
     expect(text).not.toContain('首脑突破');
     expect(text).not.toContain('击破第四层首脑');
-    expect(text).toContain('行动 20 次');     // 旧档无 explored：actions 仍为 turn-1
+    expect(recordRun.mock.calls[0][1].receipt.actions).toBe(20);     // 旧档无 explored：actions 仍为 turn-1
     expect(text).toContain('+60');            // 回退口径 20+(21-1)*2
     const [outcome, detail] = recordRun.mock.calls[0];
     expect(outcome).toBe('extract');

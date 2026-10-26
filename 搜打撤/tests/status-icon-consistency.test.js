@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { createCombatRuntime } from '../game/src/battle/core/combat.factory.js';
 import { STATUS_ICONS } from '../game/src/ui/status-icons.js';

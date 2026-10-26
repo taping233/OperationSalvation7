@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { createRainTableau } from '../game/src/hub/courtyard.rain-tableau.js';
 

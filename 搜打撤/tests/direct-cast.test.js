@@ -1,3 +1,4 @@
+import { drainBattle } from './helpers/battle-fixtures.js';
 import { battleRules } from './helpers/environment-fixtures.js';
 /* 直接释放 / 直接施放类卡牌 + 能力卡专项实打审计（2026-09-13 老板任务 #8）：
  * 在真实 BattleSession（battle.core，无视图层）里逐条验证「直接释放」链路的语义正确性：
@@ -10,7 +11,7 @@ import { battleRules } from './helpers/environment-fixtures.js';
  *   7 法师锦囊——容器选 1 张直接施放（pouch）
  *   8 连弩 × 天狼长弓——回合开始获得「箭」令牌，限定技能直接释放全部箭并逐张抽牌
  *     （此前卡库无「箭」，两卡从未生效；现由 effect-steps 的 ARROW_TOKEN 虚拟令牌支撑）
- *   9 阿波罗的礼物——穿戴后发现面板出现「直接施放」（discoverCastable），castDiscover 免费打出
+ *   9 阿波罗的礼物——现行卡面不含直接施放，保留防止旧能力重新混入的哨兵
  * 判定口径：不崩、不悬挂、关键日志存在、能量账目符合「免费用」语义。 */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { targetSideFor } from '../game/src/battle/effects/battle.target-rules.js';
@@ -66,23 +67,7 @@ process.on('unhandledRejection', (e) => { asyncError = e; });
 function takeAsyncError() { const e = asyncError; asyncError = null; return e; }
 
 // 抽干动作队列；stopPanel = 遇到发现/手选面板时停下（不自动选/跳过），由用例自己驱动
-async function drain(maxLoops = 300, stopPanel = false) {
-  for (let i = 0; i < maxLoops; i++) {
-    await tick();
-    const s = snap();
-    if (stopPanel && (s.discovering || s.handSelecting)) return s;
-    if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
-    if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
-    if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) {
-      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
-      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
-      continue;
-    }
-  }
-  return snap();
-}
+const drain = (maxLoops = 300, stopPanel = false) => drainBattle(BattleSession, maxLoops, { stopAt: stopPanel ? ['discovering', 'handSelecting'] : [] });
 
 const card = (id) => { const c = C.all().find(x => x.id === id); if (!c) throw new Error('卡库缺卡: ' + id); return c; };
 const cardByName = (name) => { const c = C.all().find(x => x.name === name); if (!c) throw new Error('卡库缺卡: ' + name); return c; };
@@ -138,8 +123,8 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
 
   it('能力卡·无量仙剑·云风：抽5张后自动直接释放其中的武术（免费）', async () => {
     const hero = card('tt8-hero-sword');
-    if (!/直接释放其中/.test(hero.desc || '')) { console.log('（运行时版本无直接释放词条，跳过）'); return; }
-    // 普通战无法使用能力卡（2026-09-16 规则）→ 走 BOSS 编组流程实打。
+    expect(hero.desc).toMatch(/直接释放其中/);
+    // 此用例沿 BOSS 编组流程验证直接施放能力卡。
     // 2026-09-18：填充足的武术牌——原 9 张时英雄卡能否进开局手牌、以及打牌时牌库余量
     // 都靠洗牌运气，卡池变化（v25）会让「直接释放了其中」时有时无；厚牌库让断言确定。
     const fillers = Array.from({ length: 29 }, () => card('tt2-jianghu'));
@@ -173,7 +158,7 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
 
   it('剑荡妖邪：手选的武术直接释放且不扣费', async () => {
     const frost = card('tt3-frostfall');
-    if (!/直接释放/.test(frost.desc || '')) { console.log('（运行时版本无直接释放词条，跳过）'); return; }
+    expect(frost.desc).toMatch(/直接释放/);
     // 使用只有伤害的武术，避免江湖救急随机施放回能卡改变能量账目。
     const strike = { id: 'direct-cast-strike', name: '直释测试斩', type: '武术', cost: 1, dmg: 1, dmgType: '物理', desc: '造成1点物理伤害' };
     const g = makeGame([frost, strike, strike, strike], '侠客');

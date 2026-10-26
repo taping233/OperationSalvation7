@@ -75,8 +75,10 @@ export function syncCommittedRunTopBar(owner) {
 // One physical header owns both map and battle controls. Moving the same nodes
 // preserves HUD references/listeners; room controls live inside the modal boundary.
 export function installRunTopBar(UI) {
-  if (mounted.get(UI)?.bar.isConnected) return mounted.get(UI);
+  const existing = mounted.get(UI);
+  if (existing && (existing.bar.isConnected || existing.bar.parentNode === existing.parking)) return existing;
   const doc = UI.el?.viewport?.ownerDocument || document;
+  const parking = doc.createDocumentFragment();
   const bar = doc.createElement('header');
   bar.id = 'runTopBar'; bar.className = 'run-topbar';
   bar.setAttribute('aria-label', '远征状态与系统');
@@ -123,8 +125,14 @@ export function installRunTopBar(UI) {
   };
   const getActions = () => configurations.get(UI);
   const controller = {
-    bar, game:null, battle:null, stage:null,
+    bar, parking, game:null, battle:null, stage:null,
     syncOptions() {
+      if (!UI.el?.overlay?.hidden && UI.el?.ovBody?.querySelector('#exMain')) {
+        closeDetail();
+        if (bar.parentNode !== parking) parking.append(bar);
+        return;
+      }
+      if (bar.parentNode === parking) controller.syncLocation();
       const stage = controller.stage;
       const retained = stage?.isConnected && stage.parentNode === UI.el?.ovBody && !UI.el?.overlay?.hidden;
       const secondary = retained && UI.el.ovBody.querySelector(':scope > .battle-secondary-layer');
@@ -151,7 +159,11 @@ export function installRunTopBar(UI) {
       mute.setAttribute('aria-label', sound.muted ? '开启音效与音乐' : '静音音效与音乐');
     },
     syncLocation() {
-      if (initialized && !bar.isConnected) return;
+      if (initialized && !bar.isConnected && bar.parentNode !== parking) return;
+      if (!UI.el?.overlay?.hidden && UI.el?.ovBody?.querySelector('#exMain')) {
+        controller.syncOptions();
+        return;
+      }
       initialized = true;
       const room = UI.el?.overlay && !UI.el.overlay.hidden && !doc.body.classList.contains('lobby');
       const host = room ? UI.el.overlay : UI.el?.viewport || doc.getElementById('viewport') || doc.body;

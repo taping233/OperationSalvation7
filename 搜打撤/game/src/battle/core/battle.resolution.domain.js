@@ -1,4 +1,5 @@
 import { claimPreparedDiscovery } from '../effects/battle.discover-preview.js';
+import { energyCapGrantsCurrent } from '../../cards/card-energy-policy.js';
 import { hasLegacyStealthBreakBonus, isLegacyBloodpoison, legacyTurnStartDescription, hasLegacyManaSurge } from '../../cards/card-legacy-battle-policy.js';
 import { createLegacyResolution } from './battle.legacy-resolution.domain.js';
 import { attackCue } from '../view/battle.attack-cues.js';
@@ -624,7 +625,7 @@ function createBattleResolution(ports) {
           did = true;
           continue;
         }
-        // B7：能量上限 +n——引擎 addEnergyCap 命令（文本路径 res.energyCap 同款：上限与当前能量同加）
+        // 能量上限命令与文本路径共用；满月形态只加上限，其余卡保留当前能量同加。
         if (operation.op === 'refillEnergy') {
           const current = refillEnergy();
           log(`[[icon:bolt]] 能量回满（${current} 费）`, 'sys');
@@ -632,7 +633,7 @@ function createBattleResolution(ports) {
           continue;
         }
         if (operation.op === 'energyCap') {
-          const currentMax = addEnergyCap(operation.n);
+          const currentMax = addEnergyCap(operation.n, energyCapGrantsCurrent(card));
           log(`[[icon:bolt]] 本场战斗能量上限 +${operation.n}（每回合 ${currentMax} 费）`, 'sys');
           did = true;
           continue;

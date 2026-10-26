@@ -27,14 +27,14 @@ async function playOwned() {
 it('real 铁甲阵 shuffles five real cards into the normal pile and later drawing consumes those exact entities', async () => {
   start('tt7-ironphalanx');
   const original = new Set(R.drawPile);
-  expect(original.size).toBe(10);
+  expect(original.size).toBe(5);
   await playOwned();
-  expect(R.drawPile).toHaveLength(15);
+  expect(R.drawPile).toHaveLength(10);
   const inserted = R.drawPile.filter(uid => !original.has(uid));
   expect(inserted).toHaveLength(5);
   expect(inserted.every(uid => E.findCard(uid)?.card)).toBe(true);
   const grantedBeforeDraw = R.granted.length;
-  expect(E.drawCards(15)).toBe(15);
+  expect(E.drawCards(15)).toBe(10);
   expect(R.drawPile).toHaveLength(0);
   expect(inserted.every(uid => R.hand.includes(uid))).toBe(true);
   expect(E.drawCards(2)).toBe(0);
@@ -47,7 +47,7 @@ it('real 武装 cannot invent equipment or starter replacements when the normal 
   await playOwned();
   expect(R.hand).toHaveLength(0);
   expect(R.drawPile).toEqual(original);
-  expect(R.granted).toHaveLength(10);
+  expect(R.granted).toHaveLength(5);
 });
 
 it('normal deck browsing opens and returns without moving any cards', () => {

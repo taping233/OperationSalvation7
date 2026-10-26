@@ -23,20 +23,21 @@ import { renderCombatPiles, consumedPileUids } from './battle.piles.view.js';
 import { turnForecastHTML } from '../../ui/battle-hud-info.js';
 import { careerSkillButtonHTML } from './battle.skill-view.js';
 import { renderInfusionSelection } from './battle.infusion-view.js';
-import { createHandMaterialSelection, isHandMaterialSelection } from './battle.hand-material-selection.js';
+import { renderHandSelection } from './battle.hand-selection-view.js';
+import { createHandMaterialSelection } from './battle.hand-material-selection.js';
 import { infusionHandCards } from './battle.infusion-material-state.js';
 import { createBattlePotionUse } from './battle.potion-use.js';
 import { discoverInfusionNote } from './battle.discover-infusion.js';
 import { battleDiscoverBodyHTML } from './battle.discover-view.js';
 import { bindBattleDecisionInspection, restoreCombatScene } from './battle.decision-shell.js';
-import { battleChoiceBodyHTML, battleHandSelectBodyHTML, battleDiscoverLifecycleNote } from './battle.decision-content.js';
+import { battleChoiceBodyHTML, battleDiscoverLifecycleNote } from './battle.decision-content.js';
 import { createDiscoverInputGate } from './battle.discover-input.js';
 import { forecastEnemyTurn } from './battle.turn-forecast.js';
 import { battleRestartHTML, bindBattleRestart } from '../../ui/settings-battle-restart.js';
 import { createBattleSceneryCapture } from './battle.scenery.js';
 import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
 import { BattleSession, commands, configureBattleRenderer, getSnapshot, getBattleLiveness, R, effCostOf, infuseOf, findEffectiveCard as findCard, markDreadShown, infusionFuelReason, targetSide, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
-import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView, showBattleDecision } from './battle.overlays.js';
+import { renderDeckSelection, renderGrave, renderDeckPileView, showBattleDecision } from './battle.overlays.js';
 import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
 import { captureBattleView, animateBattleTransition } from './battle.anim.view.js';
@@ -56,7 +57,7 @@ const battleStageView = createBattleStageView({
   UI, rich: html => SDT.Icons.rich(html), ownsHandPageFeedback,
   onReplace: () => { clearPotionTip(); clearBattleScenery(); },
   onMount: (stage, token) => { battleEntry.begin(stage, token, UI.el.overlay); stage.classList.add('bt-entrance'); },
-  onPotionsChange: clearPotionTip,
+  onPotionsChange: () => potionUse.onPotionsChange(),
   ownsPotionPanel: (parent, node) => potionUse.ownsPanel(parent, node),
 });
 let sceneryObserver = null, sceneryHideObserver = null, sceneryFrame = 0;
@@ -218,8 +219,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   const closeDeckView = commands.closeDeckView;
   const pickDiscover = commands.pickDiscover;
   const pickChoice = commands.pickChoice;
-  const pickHandSelect = commands.pickHandSelect;
-  const skipHandSelect = commands.skipHandSelect;
   const useEquipSkill = commands.useEquipSkill;
   // 双击放大已退役（2026-09-12 老板定向：紧凑手牌 + 单击展开完整卡面取代）
 
@@ -305,11 +304,11 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // This is view-only: phase/resources stay real, and existing selection DOM
     // remains mounted until the presenter captures its focus and scroll.
     const materialSelection = backgroundOnly ? null : handMaterials.project(snapshot);
-    const secondary = snapshot.choosing || snapshot.discovering || snapshot.handSelecting && !isHandMaterialSelection(snapshot)
-      || snapshot.viewingGrave || snapshot.viewingDeck || snapshot.viewingBag;
+    const secondary = snapshot.choosing || snapshot.discovering
+      || snapshot.viewingGrave || snapshot.viewingDeck;
     if (secondary && !snapshot.deckSelection && !backgroundOnly) {
       render({ ...snapshot, choosing:null, discovering:null, handSelecting:null, infusing:null,
-        viewingGrave:false, viewingDeck:false, viewingBag:false }, true, tx);
+        viewingGrave:false, viewingDeck:false }, true, tx);
       if (!isCurrent()) return;
     }
     // 出牌/抽牌动画事件提前取样：无事件时跳过 prevView 采样（整手牌 outerHTML 序列化+逐张布局读
@@ -321,41 +320,26 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (snapshot.phase !== 'player' || snapshot.busy || snapshot.pendingItem || snapshot.slamPending || snapshot.dartPending) setClickSelectedUid(null);
     const {
       mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pstat,
-      foes, hand, drawPile, infusing, discovering, handSelecting, choosing,
-      pendingTarget, viewingGrave, viewingBag, dreadShown, deckSelection,
+      foes, hand, drawPile, infusing, discovering, choosing,
+      pendingTarget, viewingGrave, dreadShown, deckSelection,
       potionBar, pendingItem, slamPending, dartPending, viewingDeck,
     } = snapshot;
     if (!discovering && !backgroundOnly) discoverInput.reset();
     if (aim && !preserveAim) cancelAim();
     UI.hideTooltip();
     if (!isCurrent()) return;   // U8：重渲染摘换手牌节点时 mouseleave 不触发，防 tooltip 残留
-    // 战斗中弹层接管（墓地/背包/抉择/选牌/发现）：序列帧层挂在 overlay 直下不随 ovBody
-    // 销毁，不藏会浮在弹层之上（09-12 实机：背包弹层上残留玩家序列帧立绘）——
+    // 战斗中弹层接管（墓地/牌库/抉择/选牌/发现）：序列帧层挂在 overlay 直下不随 ovBody
+    // 销毁；覆盖场景时隐藏，避免序列帧立绘浮在弹层之上。
     // 卸下 sprite 恢复静态立绘，关闭弹层走主渲染 attach 自动恢复
-    if (viewingGrave || viewingDeck || viewingBag || choosing || handSelecting || discovering) hideUnitFrames();
+    if (viewingGrave || viewingDeck || choosing || discovering) hideUnitFrames();
     if (deckSelection) { renderDeckSelection(snapshot); return; }   // 战前编组：允许下次挂载时重置手牌层
     if (viewingGrave) { renderGrave(snapshot); return; }
     if (viewingDeck) { renderDeckPileView(snapshot); return; }
-    if (viewingBag) { renderBattleBag(snapshot); return; }
     if (choosing) {
       // 2026-09-08 抉择面板：人工 N 选一（复用发现面板的弹层交互）
       showBattleDecision('[[icon:question]] 抉择', battleChoiceBodyHTML(choosing), 'discover', snapshot);
       if (!isCurrent()) return;
       bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btChoicePick', (d) => pickChoice(d.i));
-      UI.refresh(SDT.game);
-      return;
-    }
-    if (handSelecting && !materialSelection) {
-      // 2026-09-06 #24/#25：从手牌选择卡牌施放/消耗的通用弹层
-      const isPayment = handSelecting.act === 'payment';
-      const pool = handSelecting.candidateUids.map(findCard).filter(Boolean);
-      const paymentName = handSelecting.payment?.card?.name;
-      const paymentLabel = isPayment ? `支付代价${paymentName ? `：${esc(paymentName)}` : ''}` : '选择手牌';
-      showBattleDecision(`[[icon:cards]] ${paymentLabel}`, battleHandSelectBodyHTML({ pool, handSelecting, cardHTML:(card,size) => SDT.Cards.cardHTML(card,size) }), 'discover', snapshot);
-      if (!isCurrent()) return;
-      bindBattleDecisionInspection({ UI, getSnapshot, cards:pool.map(entry => entry.card), snapshot });
-      bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btPickHand', (d) => pickHandSelect(d.uid));
-      if (handSelecting.canCancel) bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btPickHandSkip', () => skipHandSelect());
       UI.refresh(SDT.game);
       return;
     }
@@ -392,6 +376,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       showBattleDecision('[[icon:question]] 发现', battleDiscoverBodyHTML({
         candidates, cardHTML:(card, size) => SDT.Cards.cardHTML(card, size), action:discoverAction,
         remaining:discovering.n, source:discoverSource, note:discoverNote, modifiers:discoverModifiers, pageToken:inputTicket.pageToken,
+        revealMs:inputTicket.remainingMs(),
       }), 'discover', snapshot);
       if (!isCurrent()) return;
       bindBattleDecisionInspection({ UI, getSnapshot, cards:candidates.map(entry => entry.card), snapshot });
@@ -429,11 +414,12 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       UI.refresh(SDT.game);
       return;
     }
-    const cards = materialSelection?.entries || hand.map(findCard).filter(Boolean);
+    const cards = hand.map(findCard).filter(Boolean);
     // Fresh for this synchronous render only; never retained by input callbacks.
     const handRuleContext = {};
-    const materialInfusing = materialSelection?.selection || infusing;
+    const materialInfusing = infusing;
     const infusingNow = !!materialInfusing;
+    const selectingHand = !!materialSelection;
     // —— 法伤加成同步（2026-09-09 需求）：有法伤加成时，造成法术伤害的招式卡面
     // 数值实时显示为「卡面值 + 法伤加成」，数字略微放大（口径同 combat.dealDamage）
     const spellBonus = (player.spellPower || 0) + (/** @type {number} */ ((pstat.status && pstat.status.spellUp) || 0));
@@ -442,7 +428,9 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // 初始攻击最左、招式在前、装备在后；类别内部保留槽位，不改变hand语义顺序
     const stable = infusingNow
       ? { groups:infusionHandCards(cards, materialInfusing).filter(group => !materialInfusing.picked.includes(group.uids[0])).map((group, displaySlot) => ({ ...group, displaySlot })), count:cards.length - 1 }
-      : stableHandSlots(orderHandGroups(groupHandCards(cards)), snapshot.battleToken, snapshot.turn);
+      : selectingHand
+        ? { groups:cards.map((entry, i) => ({ key:`hand-choice:${entry.uid}`, card:entry.card, uids:[entry.uid], displaySlot:i })), count:cards.length }
+        : stableHandSlots(orderHandGroups(groupHandCards(cards)), snapshot.battleToken, snapshot.turn);
     const groups = stable.groups;
     const N = stable.count;
     // 分栏切页：只渲染当前栏的9叠，扇形布局按本栏实际张数计算。
@@ -457,7 +445,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (handPage >= handPages) handPage = handPages - 1;
     if (handPage < 0) handPage = 0;
     const pagingLocked = busy || !['player', 'targeting'].includes(phase)
-      || !!(infusingNow || choosing || discovering || handSelecting || viewingGrave || snapshot.viewingDeck || viewingBag);
+      || !!(infusingNow || choosing || discovering || viewingGrave || snapshot.viewingDeck);
     const pageGroups = infusingNow ? groups : groups.filter(g => Math.floor(g.displaySlot / HAND_PAGE_SIZE) === handPage)
       .map(g => ({ ...g, displayIndex: g.displaySlot % HAND_PAGE_SIZE, displayCount: Math.min(HAND_PAGE_SIZE, N - handPage * HAND_PAGE_SIZE) }));
     // 手牌 DOM 由常驻层差分维护（见 mountHandLayer / updateHand）：这里只算分组与目标扇形位，
@@ -474,14 +462,13 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const pilesHTML = pileView.rest;
     const tip = mode === 'boss'
       ? `开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 消耗牌堆不自动洗回，仅由卡牌效果取回`
-      : '点击手牌查看大卡，确认使用后选择目标；也可直接拖拽到敌人、自己或战场空地。数字键与 Enter 同样先查看。';
+      : '按住手牌拖到合法目标或战场区域松开，或拿起后点击确认；数字键选牌，Enter 确认目标，Esc 取消。';
     // —— 道具栏（2026-09-12 老板定向）：战斗界面上方常驻，点击使用 / 拖到敌人身上 ——
-    // 2026-09-09 玩法定版：BOSS 战没有道具栏（背包里的道具无法使用）
     // 09-20 P1-7：空道具时整栏隐藏——顶部不再常驻「背包里没有道具」占位
     // 09-20 老板：药水说明不再挂系统 title（悬停延迟且触屏无效），改为自绘文字栏——
     // 悬停 / 按下药水时在药水栏正下方弹出（data-potion-idx 对应 potions 数组下标）
     const potions = (potionBar || []).map(potion => {
-      const card = findCard(potion.uid);
+      const card = findCard(potion.uid)?.card;
       return { ...potion, desc: displayCardDescription(potion.desc, card?.id, card) };
     });
     const showItemBar = potions.length > 0;
@@ -505,7 +492,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const combatState = combatStateCopy(snapshot, cards, handRuleContext);
     // 背包技能按钮（2026-10-02 老板：砸击换五职业分化技能）：文案/费用/提示按当前职业与翻面态切换
     const slamSkillInfo = slamSkillOf();
-    const skillState = busy || infusingNow ? 'locked' : slamSkillInfo.used ? 'used' : slamPending ? 'targeting' : energy < slamSkillInfo.cost ? 'unaffordable' : 'ready';
+    const skillState = busy || infusingNow || selectingHand ? 'locked' : slamSkillInfo.used ? 'used' : slamPending ? 'targeting' : energy < slamSkillInfo.cost ? 'unaffordable' : 'ready';
     const skillAvailability = { locked: busy ? '结算中' : '选择中', used: '已使用', targeting: '选目标', unaffordable: `差 ${Math.max(0, slamSkillInfo.cost - energy)} 费`, ready: '可用' }[skillState];
     const skillEffect = slamSkillInfo.aimDesc || (slamSkillInfo.heal ? '回复 ' + slamSkillInfo.heal + ' 生命' : '随机获得1张牌');
     const turnForecast = forecastEnemyTurn(snapshot);
@@ -530,10 +517,10 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     try {
     mounted = battleStageView.show({
       token:snapshot.battleToken, assetKey:battleAssetKey, isBoss:!!opts.isBoss, phase, combatState, turn,
-      energy, maxEnergy, energyArt:battleEnergyArt, mode, locked:busy || infusingNow, potions, potionsHTML,
+      energy, maxEnergy, energyArt:battleEnergyArt, mode, locked:busy || infusingNow || selectingHand, potions, potionsHTML,
       drawHTML:drawPileHTML, restHTML:pilesHTML,
       skillHTML:careerSkillButtonHTML({ skill:slamSkillInfo, state:skillState, availability:skillAvailability, effect:skillEffect,
-        disabled:busy || infusingNow || slamSkillInfo.used || (energy < slamSkillInfo.cost && !slamPending) }),
+        disabled:busy || infusingNow || selectingHand || slamSkillInfo.used || (energy < slamSkillInfo.cost && !slamPending) }),
       pageHTML:handPages > 1 ? `<div class="bt-hand-page has-more" role="group" aria-label="手牌栏位，当前第 ${handPage + 1} 栏，共 ${handPages} 栏">
             <div class="battle-hand-page-position" role="status" aria-live="polite"><span class="battle-control-icon" aria-hidden="true">[[icon:hand-pages]]</span><span class="battle-control-value"><b>${handPage + 1}</b><span>/${handPages}</span></span></div>
             <div class="battle-hand-page-nav"><button class="bt-hand-page-step" type="button" data-act="btHandPrev" data-hand-page-step="-1" aria-label="上一栏" ${pagingLocked || handPage === 0 ? 'disabled' : ''}><span aria-hidden="true">‹</span></button><button class="bt-hand-page-step" type="button" data-act="btHandNext" data-hand-page-step="1" aria-label="下一栏" ${pagingLocked || handPage === handPages - 1 ? 'disabled' : ''}><span aria-hidden="true">›</span></button></div>
@@ -564,7 +551,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         || pageStage.querySelector('.bt-hand-page') !== pageControl || current.battleToken !== snapshot.battleToken
         || renderedRevision !== handPageRevision || renderedPage !== handPage || current.busy || current.actionQueueLength
         || !['player', 'targeting'].includes(current.phase)
-        || current.infusing || current.choosing || current.discovering || current.handSelecting || current.viewingGrave || current.viewingDeck || current.viewingBag) return;
+        || current.infusing || current.choosing || current.discovering || current.viewingGrave || current.viewingDeck) return;
       const nextPage = renderedPage + step;
       if (nextPage < 0 || nextPage >= handPages) return;
       handPageAnimations.forEach(animation => animation.cancel());
@@ -603,6 +590,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // sts-note 底部说明行已删（留言 2026-09-06：把下面的文字都去掉）
     const playHandCard = (d) => {
       if (!/** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage')) || /** @type {BattleElement} */ (UI.el.ovBody.querySelector('.battle-secondary-layer')) || getSnapshot().battleToken !== snapshot.battleToken) return;
+      if (materialSelection) { materialSelection.toggle(d.uid); return; }
       if (Date.now() - aimPlayedAt < 300) return;   // 指向松手刚打出，忽略残留 click
       const snap = getSnapshot();
       if (snap.infusing) {
@@ -702,6 +690,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDeck', () => { if (!getSnapshot().infusing) openDeckView(); }, '.battle-stage');
     UI.act('btDeckBack', closeDeckView);
     UI.act('btSlam', () => {
+      if (materialSelection) return;
       if (Date.now() - aimPlayedAt < 300) return;   // 拖拽松手刚砸完，忽略残留 click（同药水栏口径）
       bagSlam();
     });   // 背包砸击按钮（2026-09-16 老板：改回按钮形态，置于手牌左侧）；09-20 老板：支持按住拖到敌人身上松手释放
@@ -709,6 +698,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     UI.act('btEquipSkill', (d) => useEquipSkill(d.uid));   // 已穿戴装备的限定技能（老板 #9）
     // —— 药水栏（2026-09-12 老板定向）：点击使用；敌方指向药水按住可拖到敌人身上 ——
     UI.act('btPotion', (d) => {
+      if (materialSelection) return;
       if (Date.now() - aimPlayedAt < 300) return;   // 拖拽刚松手，忽略残留 click
       potionUse.open(d.uid);
     });
@@ -726,9 +716,9 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       el.dataset.aimBound = '1';
       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'slam'); });
     });
-    // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
-    //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出，
-    //    松手没目标自动取消回手牌；轻点先放大查看，再明确确认使用。
+    // 按住手牌拿起，拖过出牌线后在合法目标或区域松开提交；未过线松开后继续跟手，点击确认。
+    // 数字键或卡面 Enter/空格选牌；无目标牌直接提交，需目标牌聚焦目标后再确认，注能牌沿既有流程。
+    // 拿起态可用 Enter 确认合法目标，Esc 取消。
     // 敌人点选（砸击/药水点选）已改在单位常驻层创建槽位时绑一次（见 mountUnitLayer），
     // 不再随渲染重复挂——点击时读 getSnapshot() 实时态，避免闭包过期
     // 固定选区输入由常驻手牌层统一绑定，普通 click 复用同一个 playHandCard。
@@ -759,11 +749,12 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     let handAnim;
     const finishHand = traceContext && beginRuntimeStage('battle-hand-sync', traceContext);
     try {
-    handAnim = updateHand(materialSelection ? { ...snapshot, infusing:materialInfusing } : snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect, handRuleContext, liveInteractionSnapshot });
+    handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect, handRuleContext, liveInteractionSnapshot, materialSelection });
     } finally { finishHand && finishHand(); }
     if (!isCurrent()) return;
-    renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, targetSide, commands, focusedHandUid, materialSelection, cardHTML:(card, size) => SDT.Cards.cardHTML(card, size) });
+    renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, targetSide, commands, focusedHandUid, cardHTML:(card, size) => SDT.Cards.cardHTML(card, size) });
     if (!isCurrent()) return;
+    renderHandSelection({ UI, snapshot, getSnapshot, selection:materialSelection });
     potionUse.sync(entryStage, snapshot, potions);
     if (!isCurrent()) return;
     if (simplifiedEntry) battleEntry.begin(entryStage, snapshot.battleToken, UI.el.overlay);

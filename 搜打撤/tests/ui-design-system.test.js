@@ -49,7 +49,7 @@ describe('opt-in winter decision language', () => {
     expect(document.querySelector('.ui-disclosure-body').textContent).toBe('解释');
   });
   it('reuses the disclosure in extraction without collapsing capacity or permanent-loss actions', () => {
-    document.body.innerHTML = extractionStashHTML({ remainingCards:[{card:{name:'示例牌'},count:3}], room:0, stashUsed:28, stashCap:28, cardHTML:()=>'<div class="hs-card"></div>' });
+    document.body.innerHTML = extractionStashHTML({ remainingCards:[{card:{name:'示例牌'},count:3}], pocketKept:1, room:0, stashUsed:28, stashCap:28, cardHTML:()=>'<div class="hs-card"></div>' });
     expect(document.querySelector('.exr-pocket-list.ui-disclosure')).not.toBeNull();
     expect(document.querySelector('.exr-capacity').closest('details')).toBeNull();
     expect(document.querySelector('.exr-finish-note').closest('details')).toBeNull();

@@ -1,8 +1,80 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1732,
+  "count": 1750,
   "assets": [
+    {
+      "path": "portraits/enemies/boss_witness_pope.webp",
+      "ext": "webp",
+      "bytes": 194118,
+      "sha256": "9892cac0086a4bed6de1ab43b106add3b92f95b1f249d1d0c4c2fb5189f82cc3",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/boss_witness_pope.webp",
+      "ext": "webp",
+      "bytes": 87882,
+      "sha256": "9e1fc15d9cb979f4bd9c8054c7d3aa041692af41d83ceffcaed6544be7f14bed",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/boss_mutation_mother.webp",
+      "ext": "webp",
+      "bytes": 329560,
+      "sha256": "fbf5b9f38ed244ab58603b7a5d75a9d6027c4465624fc8a5e9d1fe49f26e8721",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/boss_mutation_mother.webp",
+      "ext": "webp",
+      "bytes": 123840,
+      "sha256": "04cd3fefb62ffd112b606326daec28d3fd0292c2e56726c68928222007951c0d",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/boss_mysterious_blocker.webp",
+      "ext": "webp",
+      "bytes": 201402,
+      "sha256": "d9ae7360544de8799e8632e64ad0d002a11275c7e7f84ee39b72bf6a8033f366",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/boss_mysterious_blocker.webp",
+      "ext": "webp",
+      "bytes": 86304,
+      "sha256": "8112c6b9477541bd3305211dacbb2847699190203a0a6a044aafe0d1aa5a053c",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+    },
+    {
+      "path": "portraits/enemies/boss_necromancer.webp",
+      "ext": "webp",
+      "bytes": 261428,
+      "sha256": "d771656d548ca7727a6b0dfc1b69f0ab230e43457442a23dc54fc100732b1c03",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+    },
+    {
+      "path": "portraits/cut/enemies/boss_necromancer.webp",
+      "ext": "webp",
+      "bytes": 104018,
+      "sha256": "118cc1b154c8f29207ce65d505cc785d0280021d03f874ffefc91bd39a2fcb20",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-boss10-13/receipt.json"
+    },
+    {
+      "path": "portraits/full/xingyue-dark-priestess.webp",
+      "ext": "webp",
+      "bytes": 173064,
+      "sha256": "2ab923c8ed89b8f7b63ee901bbe15eb676a1e168da27c8efe064d6c53cab9008",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-26-xingyue-install/dark/skin-import.json"
+    },
     {
       "path": "ui/outcome/outcome-halo-v1.webp",
       "ext": "webp",
@@ -7492,10 +7564,10 @@
     {
       "path": "portraits/full/xingyue.webp",
       "ext": "webp",
-      "bytes": 153604,
-      "sha256": "99d6c6d040b5e9698caec8539c745d4ed170897edac824a37a00a3447bca0f1d",
+      "bytes": 184604,
+      "sha256": "7c7ccf51f73869859603cb826df8fd75f38e3ca6d56a24683c6cf85242e2d820",
       "license": "项目自有（自制/AI 生成）",
-      "source": "docs/evidence/2026-10-24-xingyue-card-roster/portrait-receipt.json"
+      "source": "docs/evidence/2026-10-26-xingyue-install/receipt.json"
     },
     {
       "path": "reconstruction/wallpaper-ensemble-1005.webp",
@@ -12802,10 +12874,10 @@
     {
       "path": "reconstruction/wallpaper-wu-bass-1020.webp",
       "ext": "webp",
-      "bytes": 484158,
-      "sha256": "477f6088a9106517d8a90ea1f1599e59b2442e2c3d56f7f489b5ec74e0d548a8",
+      "bytes": 476976,
+      "sha256": "95a572de56736ea2bc3b3bfabc9158e6d79f232b088fc817006983812e71875d",
       "license": "项目AI生成素材（NAI V5底稿＋Codex内置ImageGen重绘，无贝斯首页第四张）",
-      "source": "docs/evidence/2026-10-24-wu-bass-reset/receipt.json"
+      "source": "docs/evidence/2026-10-26-wu-bass-hand/receipt.json"
     },
     {
       "path": "reconstruction/wallpaper-baita-station-1020.webp",
@@ -14605,6 +14677,78 @@
       "sha256": "4893d306105caa3c0c3cd63f8d12a844edce787d082b6fa79a703ba959de79d1",
       "license": "项目自有（NAI4.5底稿 + 内置生图）",
       "source": "docs/evidence/2026-10-25-event-art-set/receipt.json"
+    },
+    {
+      "path": "battle/fx-slash.webp",
+      "ext": "webp",
+      "bytes": 133286,
+      "sha256": "2c76dad6a663da8c70361a32e65cdece583ac40cf97dc07d845e6ce6908ff1fb",
+      "license": "项目自有（NAI5起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-battle-fit-fx/receipt.json"
+    },
+    {
+      "path": "battle/fx-block.webp",
+      "ext": "webp",
+      "bytes": 137550,
+      "sha256": "905c8920d12a2dfa8e5f5c29b40a85a0df24650e7dbb31e5f48e0da13e0b95b6",
+      "license": "项目自有（NAI5起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-battle-fit-fx/receipt.json"
+    },
+    {
+      "path": "battle/fx-atlas.webp",
+      "ext": "webp",
+      "bytes": 477318,
+      "sha256": "ada270c4f0e550b009f4870f9a311a6988234d9774aeed5cf6b8d7c1187c903c",
+      "license": "项目自有（内置生图）",
+      "source": "docs/evidence/2026-10-26-battle-fit-fx/atlas-receipt.json"
+    },
+    {
+      "path": "scenes/cinematic/layer-watchline-v2.webp",
+      "ext": "webp",
+      "bytes": 57186,
+      "sha256": "35e81b051930b5406b01d86e1a32b6238f62cf3a1a3fa319b5948072b5601870",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-layer-cinematics/receipt.json"
+    },
+    {
+      "path": "scenes/cinematic/layer-ruins-v2.webp",
+      "ext": "webp",
+      "bytes": 76870,
+      "sha256": "79fb0af9b466625d5c7fc936d4938713479098b17d26ec16b8b250ae90472737",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-layer-cinematics/receipt.json"
+    },
+    {
+      "path": "scenes/cinematic/layer-core-v2.webp",
+      "ext": "webp",
+      "bytes": 68838,
+      "sha256": "dfda5449d5f2e4d3a834dcf9116c3e6f7f9bcecfe70d3908cc47148968427126",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-26-layer-cinematics/receipt.json"
+    },
+    {
+      "path": "ui/outcome/recovery-v2.webp",
+      "ext": "webp",
+      "bytes": 32664,
+      "sha256": "02ac16a04536e15a7cd8a39afe365d3557dbcc42b0f129e174d2e6828b27fd9d",
+      "license": "项目自有（NAI5 起稿＋内置透明重绘）",
+      "source": "docs/evidence/2026-10-26-layer-cinematics/local-receipt.json"
+    },
+    {
+      "path": "ui/outcome/restoration-v2.webp",
+      "ext": "webp",
+      "bytes": 22256,
+      "sha256": "062f35f710bf9371b498f7c9dd2542655f49bf152897401a0e8cc7b6953df8ae",
+      "license": "项目自有（NAI5 起稿＋内置透明重绘）",
+      "source": "docs/evidence/2026-10-26-layer-cinematics/local-receipt.json"
+    },
+    {
+      "path": "ui/outcome/offering-v2.webp",
+      "ext": "webp",
+      "bytes": 12626,
+      "sha256": "e91176cdf6859a4133baa2752445af4bf7b88ba6486a59301106fa69fc26f901",
+      "license": "项目自有（NAI5 起稿＋内置透明重绘）",
+      "source": "docs/evidence/2026-10-26-layer-cinematics/local-receipt.json"
     }
   ],
   "verified": "2026-10-05"

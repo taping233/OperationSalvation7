@@ -70,7 +70,7 @@ export function cardBackHTML(backId, cls) {
 }
 
 // 卡面渲染（em 布局，cls 控制尺寸 sm/lg/xl；game.js / battle.js 共用）
-// opts.hideCost：隐去左上角费用角标——仅对 NO_COST_TYPES 生效（背包/宝箱等界面传 true，卡牌库不传）
+// opts.hideCost：隐去左上角费用角标——仅对 NO_COST_TYPES 生效（背包/搜刮点等界面传 true，卡牌库不传）
 // opts.costOverride：{ v } 战斗内实际费用（2026-09-09 需求 #16）——降低 = 绿字，提高 = 红字
 // cardHTML 结果缓存：战斗手牌每次 requestBattleRender 都对每叠卡重算 HTML 再签名
 // diff 丢弃，其中 rarityOf 对衍生牌全量扫卡库（233+ 张）——渲染路径上反复白算。

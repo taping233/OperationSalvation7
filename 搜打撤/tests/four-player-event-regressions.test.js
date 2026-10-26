@@ -10,7 +10,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
 }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick() {}, ding() {} }, _set_cardPageOpen() {}, cardHTML: c => `<span>${c.name}</span>` }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub() {} }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ startBattle() {}, ensureBattleReady: async () => {}, captureBattleContext: () => () => true }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), startBattle() {}, ensureBattleReady: async () => {}, captureBattleContext: () => () => true }));
 vi.mock('../game/src/hub/extraction.commands.js', () => ({ createExtractionCommands: () => ({}), validatePendingExtraction: () => ({ ok: true }) }));
 vi.mock('../game/src/hub/recovery.commands.js', () => ({ commitBaseAndRun() {}, readSettlementReceipt() {}, recoverSlot() {} }));
 vi.mock('../game/src/home/story.commands.js', () => ({ storyCommands: {} }));
@@ -38,7 +38,7 @@ beforeEach(() => {
     canReceiveCard: () => true, heal: n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),
   });
 });
-// 镜像 game.bag.js closeBackpack 的非宝箱分支：真实 hideOverlay + 真实返回钩子
+// 镜像 game.bag.js closeBackpack 的非搜刮点分支：真实 hideOverlay + 真实返回钩子
 async function closeCoveredBag() {
   UI.hideOverlay(); const hook = takeBagReturnHook(); if (hook) await hook(); else H.game.state = 'idle'; await flushEventActions();
 }

@@ -52,20 +52,20 @@ describe('battle discovery cancellation boundaries', () => {
     expect(resolve).not.toHaveBeenCalled(); expect(onResolved).not.toHaveBeenCalled();
   });
 
-  it('cancels the actual quick-item path for employee pass C before consuming its owned source', async () => {
+  it('cancels the quick-item path with explicit discovery rules before consuming its owned source', async () => {
     const h = harness();
-    Object.assign(h.source, { id: 'tt4-shine-token', type: '道具',
+    Object.assign(h.source, { id: 'test-discovery-item', type: '道具',
       rules: { version: 1, bag: { use: [{ op: 'discover', count: 1, pool: { kind: 'legendary' } }] } } });
     let action;
     const bag = createBagDomain(h.context).createBattleBag({ findCard: h.findCard,
-      alive: () => h.runtime.foes, queueBattleAction: run => { action = run; },
+      alive: () => h.runtime.foes, queueBattleAction: run => { action = run; return new Promise(()=>{}); },
       clearTargetSession: vi.fn(), requestBattleRender: vi.fn(),
       throwIfActionCancelled: signal => { if (signal?.aborted) throw new Error('aborted'); },
       previewDiscovery: (...args) => h.selection.previewDiscovery(...args) });
     bag.useItem('source', null);
     const pending = action(new AbortController().signal);
     expect(h.runtime.discovering.sourceCommit).toBe('preview');
-    expect(h.runtime.discovering.sourceCardId).toBe('tt4-shine-token');
+    expect(h.runtime.discovering.sourceCardId).toBe('test-discovery-item');
     h.selection.cancelDiscover(h.runtime.discovering.roundId); await pending;
     expect(h.runtime.G.ownedCards.find(e => e.uid === 'source').card).toBe(h.source);
     expect(h.runtime.played).toEqual([]); expect(h.runtime.granted).toEqual([]);

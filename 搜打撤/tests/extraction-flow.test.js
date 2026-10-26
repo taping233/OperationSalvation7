@@ -11,7 +11,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
   scaledEnemy: vi.fn(), syncPlayTime: vi.fn(),
 }));
 vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
-vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String, escAttr: String }));
+vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String, escAttr: value => String(value).replaceAll('"', '&quot;') }));
 vi.mock('../game/src/audio/sound.js', () => ({ tone: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: (...args) => altarState.openBaseHub(...args) }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn(), ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
@@ -24,7 +24,7 @@ vi.mock('../game/src/core/random.js', () => ({
     snapshot() { return this.state; }
   },
 }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
 vi.mock('../game/src/run/game.run.scenes.js', () => ({
   ...extractionMocks(() => vi),
 }));
@@ -37,7 +37,7 @@ let stashLimit = 0;
 beforeEach(async () => {
   altarState.slot = null;
   vi.resetModules();
-  document.body.innerHTML = '<div id="body"></div>';
+  document.body.innerHTML = '<div id="overlay"><div id="body"></div></div>';
   const nextGame = {
     state: 'idle', layerIdx: 2, trackPos: 0,
     ownedCards: Array.from({ length: 4 }, (_, i) => ({ uid: String(i), card: { id: String(i), name: `卡${i}` } })),
@@ -49,7 +49,7 @@ beforeEach(async () => {
   openBaseHub = vi.fn(() => { game.state = 'modal'; });
   altarState.openBaseHub = openBaseHub;
   UI = {
-    el: { ovBody: document.getElementById('body') },
+    el: { overlay: document.getElementById('overlay'), ovBody: document.getElementById('body') },
     acts: {}, showOverlay: (_title, html) => { document.getElementById('body').innerHTML = html; },
     hideOverlay: () => { UI.acts = {}; }, act: (name, fn) => { UI.acts[name] = fn; },
     log: vi.fn(), refresh: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '',
@@ -64,7 +64,7 @@ beforeEach(async () => {
   stashLimit = 0;
   window.SDT = {
     UI, Base: base, Sound: { sfx: vi.fn(), music: vi.fn() },
-    Cards: { cardHTML: c => c.name, sellPrice: () => 1 }, Meta: { track: vi.fn(), addXpToProgress: x => ({ after: x }) },
+    Icons: { rich: html => html }, Cards: { cardHTML: c => c.name, sellPrice: () => 1 }, Meta: { track: vi.fn(), addXpToProgress: x => ({ after: x }) },
   };
   ({ openEmergencyModal } = await import('../game/src/run/game.run.altar.js'));
 });
@@ -99,7 +99,7 @@ it('取消献祭回到撤离点，继续深入恢复地图状态且不丢卡', a
   await UI.acts.payExit();
   UI.acts.sacPick({ uid: '0' });
   UI.acts.sacCancel();
-  UI.acts.stayHere();
+  await UI.acts.stayHere();
   expect(game.state).toBe('idle');
   expect(game.ownedCards).toHaveLength(4);
 });
@@ -115,14 +115,14 @@ it.each([[1,3],[2,5]])('部分仓容 %i / 同叠 %i 显示可入数量，余卡�
   const before=document.querySelector('.ext-card');
   expect(before.classList.contains('off')).toBe(false);
   expect(before.getAttribute('aria-disabled')).toBe('false');
-  expect(before.textContent).toContain(`可入库 ${room}/${count} 张`);
+  expect(before.textContent).toContain(`入库 ${room}/${count} 张`);
   expect(before.getAttribute('aria-label')).toContain(`可入库 ${room}/${count} 张`);
   await UI.acts.exStash({ i: 0 });
 
   expect(base.data.stash).toEqual([{ card: { id: 'dup', name: '重复卡' }, count: room }]);
   expect(game.pendingExtraction.remainingCards).toEqual([{ card: { id: 'dup', name: '重复卡' }, count: count-room }]);
   expect(document.querySelector('.ext-card')).not.toBeNull();
-  expect(document.querySelector('.ext-card').textContent).toContain(`×${count-room}`);
+  expect(document.querySelector('.ext-card').closest('.exr-item').textContent).toContain(`×${count-room}`);
   expect(document.querySelector('.ext-card').textContent).toContain('仓库已满');
   expect(document.querySelector('.ext-card').classList.contains('off')).toBe(true);
   expect(document.querySelector('.ext-card').getAttribute('aria-disabled')).toBe('true');
@@ -152,7 +152,7 @@ it('card details never deposit; rarity display order preserves source indices an
   expect(UI.showCardZoom).toHaveBeenCalledTimes(1); // No stale page action after refresh.
   UI.acts.exSavedInspect({i:0});
   expect(UI.showCardZoom).toHaveBeenCalledTimes(2);
-  UI.el.overlay = { hidden: true };
+  UI.el.overlay.hidden = true;
   UI.acts.exSavedInspect({i:0});
   expect(UI.showCardZoom).toHaveBeenCalledTimes(2);
   UI.el.overlay.hidden = false;

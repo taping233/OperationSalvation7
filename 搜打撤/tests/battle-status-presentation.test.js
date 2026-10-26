@@ -94,7 +94,8 @@ describe('战斗状态的稳定阅读与机制语义', () => {
       list = current;
       expect(root.querySelector('.status-chip-summary').textContent).toBe(`${count}项↕`);
       expect(root.getAttribute('aria-label')).toContain(`共${count}项`);
-      expect(root.dataset.uiTipNote).toContain('Tab');
+      expect(root.hasAttribute('data-ui-tip')).toBe(false);
+      expect(root.dataset.uiTipNote).toBeUndefined();
     }
     paint(root, {});
     expect(root.childNodes).toHaveLength(0);

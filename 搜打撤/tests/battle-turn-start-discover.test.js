@@ -90,12 +90,12 @@ it('回合开始发现阿猫的礼物时，额外获取来自卡牌效果而非�
  expect(acquired.filter(entry => entry.card.id === gift.id)).toHaveLength(1);
  expect(acquired.every(entry => after.hand.includes(entry.uid))).toBe(true);
 });
-it.each([false,true])('普通战能力卡不在初手，不制造发现，钟表=%s', async clock => {
+it.each([false,true])('普通战能力卡可打出并在下回合发现，钟表=%s', async clock => {
  await start(false);
  expect(R.hand).not.toContain('runtime-0');
- expect(BattleSession.getSnapshot().pstat.status.spellUp || 0).toBe(0);
+ expect(BattleSession.getSnapshot().pstat.status.spellUp || 0).toBe(1);
  const state = await nextTurn(clock);
- expect(state.turn).toBe(2); expect(state.discovering).toBeNull();
+ expect(state.turn).toBe(2); expect(state.discovering).toBeTruthy();
 });
 it('两个持续发现依次领取，下回合重新触发且没有重复打开', async () => {
  await start(true, true);

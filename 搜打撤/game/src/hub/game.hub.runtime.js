@@ -13,11 +13,12 @@ import { selectSkin, stackKeyOf } from './collection.commands.js';
 import { homeErrorMessage } from './command-errors.js';
 import { createHubPreparationAdapter } from './game.hub.preparation-ports.js';
 import '../../css/base-camp-rework.css';
-import { presentHub, bindHubBrowse, restoreHubFocus } from './hub.presentation.js';
+import { presentHub, bindHubBrowse, restoreHubFocus, runHubOperation, holdHubOperationControls } from './hub.presentation.js';
 import { afterOutcomeFeedback } from '../ui/outcome-feedback.js';
 import { bindWarehouse, clearWarehouseFilters, focusWarehouseForCharacter } from './hub.warehouse.js';
 import { resourceStripHTML } from './hub.materials.js';
-import { bindArchiveV3, refreshArchiveBacks } from './hub.archive-v3.js';
+import { bindArchiveV3, refreshArchiveBacks, selectArchiveBack } from './hub.archive-v3.js';
+import { runRewardClaim } from './hub.reward-feedback.js';
 import { courtyardV3HTML, mountCourtyardV3 } from './hub.courtyard-v3.js';
 import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
 import '../../css/base-courtyard-v3.css';
@@ -69,9 +70,18 @@ const notice = (text, type = 'ok') => {
 };
 preparationFeature = createHubPreparationAdapter({
   SDT, UI,
-  returnToBase: () => { hubTab = 'deploy'; renderHub(); },
+  returnToBase: ({ isCurrent = () => true, commit = render => render() } = {}) => {
+    if (!isCurrent()) return false;
+    const previousTab = hubTab;
+    hubTab = 'deploy';
+    try {
+      const result = commit(() => renderHub({ preservePreparation:true }));
+      if (result === false) hubTab = previousTab;
+      return result;
+    } catch (error) { hubTab = previousTab; throw error; }
+  },
   applyPicks: setDeployPick,
-  openDeparture: openDepartPrep,
+  openDeparture: ({ isCurrent = () => true } = {}) => isCurrent() ? openDepartPrep({ isCurrent }) : false,
 });
   function openBaseHub(tab) {
     hubNotice.clear();
@@ -90,10 +100,18 @@ preparationFeature = createHubPreparationAdapter({
     SDT.Sound.music('base');   // 基地氛围
     SDT.Art.hydrateSelectedSkins(SDT.Base.data.appearance?.selectedSkins);
     const openedBase = SDT.Base, openedSlot = openedBase.slot;
-    Promise.resolve(SDT.Meta.checkUnlocks()).catch(() => {
+    Promise.resolve().then(() => SDT.Meta.checkUnlocks()).catch(() => {
       if (SDT.Base === openedBase && openedBase.slot === openedSlot) UI.log('成就进度检查未完成，可重新进入基地重试。', 'warn');
     });
-    renderHub();
+    return renderHub();
+  }
+
+  function openDepartureFromBase() {
+    const root = document.getElementById('hubMain'), revision = hubRenderRevision;
+    const base = SDT.Base, slot = getActiveSlot();
+    return openDepartPrep({ isCurrent:() => hubRenderRevision === revision &&
+      SDT.Base === base && base.slot === slot && getActiveSlot() === slot && document.getElementById('hubMain') === root &&
+      !!root && root.dataset.page === 'deploy' && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing') });
   }
 
   // Retained import compatibility only; the furniture room is retired.
@@ -115,7 +133,7 @@ preparationFeature = createHubPreparationAdapter({
     return null;
   }
 
-  function renderHub() {
+  function renderHub({ preservePreparation = false } = {}) {
     const renderRevision = ++hubRenderRevision;
     const previousPage = /** @type {HTMLElement} */ (document.querySelector('#hubMain .hub-page'));
     if (previousPage) hubScroll.set(previousPage.dataset.view, previousPage.scrollTop);
@@ -123,7 +141,6 @@ preparationFeature = createHubPreparationAdapter({
     const currentFocus = focused ? { .../** @type {HTMLElement} */ (focused).dataset } : null;
     disposeCourtyard(); disposeCourtyard = () => {};
     disposeTrade(); disposeTrade = () => {}; disposePersonnel(); disposePersonnel = () => {};
-    disposePreparation();
     const B = SDT.Base;
     const M = SDT.Meta;
     _set_cardPageOpen(true);      // Hub 页面：Esc / 点击背景可关闭
@@ -155,10 +172,11 @@ preparationFeature = createHubPreparationAdapter({
           <main class="hub-page${tabChanged ? ' page-in' : ''}" data-view="${viewKey}" data-motion-view="${motionViewKey}">${body}</main>
           ${baseNavigationV7HTML({ tab:hubTab, pendingRewards:M.pendingColl().length + M.pendingAch().length })}
         </div>
-        ${hubNotice.html({ className:`camp-notice${hubNotice.tone === 'warn' ? ' warning' : ''}`, tag:'div' })}
+        ${hubNotice.html({ className:`camp-notice${hubNotice.tone === 'warn' ? ' warning' : ''}`, tag:'div', keepEmpty:true })}
       </div>`, SDT.Icons);
-    const root = document.getElementById('hubMain'), slotId = B.slot;
-    const currentHub = () => hubRenderRevision === renderRevision && SDT.Base === B && B.slot === slotId &&
+    if (!preservePreparation) disposePreparation();
+    const root = document.getElementById('hubMain'), slotId = B.slot, baseGeneration = B._selectionGeneration;
+    const currentHub = () => hubRenderRevision === renderRevision && SDT.Base === B && B.slot === slotId && B._selectionGeneration === baseGeneration &&
       !!root && document.getElementById('hubMain') === root && !UI.el?.overlay?.hidden && !UI.el?.overlay?.classList.contains('closing');
     const hubAct = (name, action) => UI.act(name, (...args) => {
       if (!currentHub()) return;
@@ -168,9 +186,13 @@ preparationFeature = createHubPreparationAdapter({
     const hubWrite = (name, action) => hubAct(name, async (...args) => {
       if (writing) return false;
       writing = true;
+      const release = holdHubOperationControls(document.querySelectorAll(`#hubMain [data-act="${name}"], #cardZoom .cz-foot [data-act="${name}"]`));
       try { return await action(...args); }
-      catch { if (currentHub()) UI.log('基地操作未保存，请重试。', 'warn'); return false; }
-      finally { writing = false; }
+      catch {
+        if (currentHub()) { notice('当前操作未完成，请重试。', 'warn'); UI.log('当前操作未完成，请重试。', 'warn'); }
+        return false;
+      }
+      finally { release(); writing = false; }
     });
     const hubUI = { act: hubAct, isCurrent: currentHub, showCardZoom: (...args) => UI.showCardZoom(...args), log: /** @param {Parameters<typeof UI.log>} args */ (...args) => UI.log(...args) };
     const page = document.querySelector('#hubMain .hub-page');
@@ -219,7 +241,8 @@ preparationFeature = createHubPreparationAdapter({
     hubAct('hubRetryView', () => renderHub());
     hubAct('hubCollectionView', (d) => {
       if (!['cards', 'rewards', 'backs', 'achievements', 'classes', 'stories'].includes(d.view)) return;
-      if (d.view === hubCollectionView) return;
+      if (d.view === hubCollectionView && !(d.view === 'backs' && d.id)) return;
+      if (d.view === 'backs' && d.id) selectArchiveBack(d.id, B, SDT.Cards);
       SDT.Sound.sfx('navigate');
       if (d.view === 'achievements') achievementReturn = hubCollectionView === 'backs' ? 'backs' : 'rewards';
       hubCollectionView = d.view;
@@ -239,32 +262,25 @@ preparationFeature = createHubPreparationAdapter({
       renderHub();
     });
     hubAct('openPreparation', () => openPreparationPanel());
-    let skinPending = false;
-    hubAct('selectCharacterSkin', async (d) => {
-      if (skinPending) return;
+    hubWrite('selectCharacterSkin', (d) => {
       const read = readBase(slotId);
-      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
-      skinPending = true;
-      let result;
-      try { result = await selectSkin({ slotId, requestId: homeRequestId('skin'), expectedRevision: read.revision }, { characterId: d.character, skinId: d.skin }); }
-      catch { result = { ok: false, message: '皮肤选择未保存，请重试' }; }
-      finally { skinPending = false; }
-      if (!currentHub()) return;
-      if (!result.ok) { UI.log(result.message || '皮肤选择失败', 'warn'); return; }
-      UI.log(result.value.assetFallback ? '皮肤选择已保存；当前素材缺失，暂用默认立绘。' : '人物皮肤已保存。', result.value.assetFallback ? 'warn' : 'ok');
-      renderHub();
+      if (!read.ok) { notice(homeErrorMessage(read), 'warn'); return false; }
+      return runHubOperation({
+        run: () => selectSkin({ slotId, requestId: homeRequestId('skin'), expectedRevision: read.revision }, { characterId: d.character, skinId: d.skin }),
+        isCurrent:currentHub, notice, pending:'正在保存人物外观…',
+        success:result => result.ok && result.value.assetFallback ? '外观已保存，当前使用默认立绘。' : '人物外观已保存。',
+        failure:result => result && !result.ok ? result.message || '人物外观未保存，请重试。' : '人物外观未保存，请重试。',
+        refresh:renderHub,
+      });
     });
-    hubWrite('selMode', async (d) => {
+    hubWrite('selMode', (d) => {
       const previousMode = B.data.selMode;
-      const result = await B.selectMode(d.mode);
-      if (!currentHub()) return false;
-      if (!result.ok) {
-        UI.log(/** @type {Extract<typeof result, {ok:false}>} */ (result).code === 'INVALID_MODE' ? '玩法选项无效，未保存。' : '玩法保存失败，请稍后重试。', 'warn');
-        renderHub();
-        return;
-      }
-      renderHub();
-      animateBaseModeChangeV12(document.getElementById('hubMain'), previousMode);
+      return runHubOperation({
+        run:() => B.selectMode(d.mode), isCurrent:currentHub, notice, pending:'正在保存出征玩法…', success:'出征玩法已保存。',
+        failure:result => result && result.ok === false && result.code === 'INVALID_MODE' ? '请选择现有出征玩法。' : '玩法未保存，请重试。',
+        refreshOnFailure:true,
+        refresh:() => { renderHub(); if (B.data.selMode !== previousMode) animateBaseModeChangeV12(document.getElementById('hubMain'), previousMode); },
+      });
     });
     hubAct('nestDeploy', () => { SDT.Nest.openNestPrep(); });
     hubAct('deploy', () => { openDepartPrep(); });
@@ -277,99 +293,142 @@ preparationFeature = createHubPreparationAdapter({
         UI.log(`[[icon:key]] 钥匙不足（${n}/${B.KEY_NEEDED || 10}）——在棋盘的钥匙格收集更多钥匙吧`, 'dim');
       }
     });
-    hubWrite('upBag', async () => {
-      const upgraded = await B.upgradeBag();
-      if (!currentHub()) return false;
-      if (!upgraded) { UI.log('背包扩建未保存或材料不足，请重试。', 'warn'); return false; }
-      notice(`背包 ${B.bagCap() - 1} → ${B.bagCap()} 格 · 木材 −${MAP.rules.bagUpgradeWood}`);
-      Sfx.ding();
-      UI.log(`[[icon:bag]] 背包扩建完成：容量 <b>${B.bagCap()}</b> 格（- [[icon:wood]]×${MAP.rules.bagUpgradeWood}）`, 'ok');
-      await SDT.Meta.checkUnlocks();
-      if (!currentHub()) return false;
-      renderHub();
+    hubWrite('upBag', () => {
+      const before = B.bagCap(), wood = MAP.rules.bagUpgradeWood;
+      return runHubOperation({
+        run:() => B.upgradeBag(), isCurrent:currentHub, notice, pending:'正在保存背包扩建…',
+        success:() => `背包 ${before} → ${B.bagCap()} 格 · 木材 −${wood}`,
+        failure:() => before >= MAP.rules.bagMax ? '出征背包已达容量上限。'
+          : B.data.wood < wood ? `还需 ${wood - B.data.wood} 木材，补充后可扩建。` : '背包扩建未保存，请重试。',
+        onSuccess:() => {
+          void Promise.resolve().then(() => M.checkUnlocks()).catch(() => {});
+          Sfx.ding();
+          UI.log(`[[icon:bag]] 背包扩建完成：容量 <b>${B.bagCap()}</b> 格（- [[icon:wood]]×${wood}）`, 'ok');
+        },
+        refresh:renderHub,
+      });
     });
     hubWrite('upPet', d => upgradePetFromPersonnel({ base:SDT.Base, id:d.id, notice, sound:Sfx, ui:UI, meta:SDT.Meta, refresh:renderHub, isCurrent:currentHub }));
-    hubWrite('selPet', async (d) => {
-      const selected = await B.setPet(d.id);
-      if (!currentHub()) return false;
-      if (!selected) { UI.log('伙伴选择未保存，请重试。', 'warn'); return false; }
-      const pet = SDT.Base.petById(d.id);
-      notice(`已携带${pet.name} · 安全格 ${SDT.Base.safeCap()} 格`);
-      Sfx.ding();
-      UI.log(`[[icon:paw]] 已携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc)} · 安全格 <b>${SDT.Base.safeCap()}</b> 格`, 'ok');
-      renderHub();
+    hubWrite('selPet', (d) => {
+      const pet = B.petById(d.id);
+      return runHubOperation({
+        run:() => B.setPet(d.id), isCurrent:currentHub, notice, pending:'正在保存携带伙伴…',
+        success:() => `已携带${pet.name} · 安全格 ${B.safeCap()} 格`,
+        failure:'伙伴选择未保存，请重试。',
+        onSuccess:() => {
+          Sfx.ding();
+          UI.log(`[[icon:paw]] 已携带伙伴<b>「${esc(pet.name)}」</b>：${esc(pet.desc)} · 安全格 <b>${B.safeCap()}</b> 格`, 'ok');
+        },
+        refresh:renderHub,
+      });
     });
-    hubWrite('upStash', async () => {
-      const upgraded = await B.upgradeStash();
-      if (!currentHub()) return false;
-      if (!upgraded) { UI.log('仓库扩建未保存或材料不足，请重试。', 'warn'); return false; }
-      notice(`仓库扩建完成 · ${B.stashCap()} 张 · 木材 −${MAP.rules.stashUpgradeWood}`);
-      Sfx.ding();
-      UI.log(`[[icon:archive]] 仓库扩建完成：容量 <b>${B.stashCap()}</b> 张（- [[icon:wood]]×${MAP.rules.stashUpgradeWood}）`, 'ok');
-      renderHub();
+    hubWrite('upStash', () => {
+      const before = B.stashCap(), wood = MAP.rules.stashUpgradeWood;
+      const runes = before >= (MAP.rules.stashRuneSlotFrom || 50) ? (MAP.rules.stashRuneSlotCost || 2) : 0;
+      const cost = `木材 −${wood}${runes ? ` · 符文 −${runes}` : ''}`;
+      return runHubOperation({
+        run:() => B.upgradeStash(), isCurrent:currentHub, notice, pending:'正在保存仓库扩建…',
+        success:() => `仓库 ${before} → ${B.stashCap()} 格 · ${cost}`,
+        failure:() => before >= MAP.rules.stashMax ? '基地仓库已达容量上限。'
+          : B.data.wood < wood ? `还需 ${wood - B.data.wood} 木材，补充后可扩建。`
+          : (B.data.runes?.length || 0) < runes ? `还需 ${runes - (B.data.runes?.length || 0)} 符文，补充后可扩建。`
+          : '仓库扩建未保存，请重试。',
+        onSuccess:() => {
+          Sfx.ding();
+          UI.log(`[[icon:archive]] 仓库扩建完成：容量 <b>${B.stashCap()}</b> 格（${cost}）`, 'ok');
+        },
+        refresh:renderHub,
+      });
     });
     hubAct('stashItem', (d) => openStashCardView(+d.i));   // 点卡 = 大卡特写操作台：看牌 + 卖出/收藏/使用/孵化都在页脚（2026-10-06 老板二次改版）
     hubAct('rawItem', (d) => openRawItem(d.kind, { from:document.querySelector(`[data-act="rawItem"][data-kind="${d.kind}"]`) }));
     hubWrite('restoreCard', async (d) => {
+      const zoom = /** @type {import('../ui/ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'));
+      const currentRestore = () => currentHub() && !!zoom && document.getElementById('cardZoom') === zoom && !zoom.classList.contains('cz-out');
+      if (!currentRestore()) return false;
+      const warn = message => { notice(message, 'warn'); UI.log(message, 'warn'); return false; };
       const candidates = d.stackKey ? B.data.pocket.filter(stack => stackKeyOf(stack) === d.stackKey)
         : d.name ? B.data.pocket.filter(stack => stack.card.name === d.name) : [B.data.pocket[+d.i]].filter(Boolean);
-      if (candidates.length !== 1) { UI.log('消耗区库存已变化，请重新打开详情', 'warn'); return; }
+      if (candidates.length !== 1) return warn('待复原库存已变化，请重新选择卡牌。');
       const index = B.data.pocket.indexOf(candidates[0]);
       const stack = B.data.pocket[index];
       if (!stack) return;
-      if (d.count && Number(d.count) !== (stack.count || 1)) { UI.log('消耗区数量已变化，请重新打开详情', 'warn'); return; }
-      /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
-      const restoreCost = B.pocketKeyCost(stack), restoredCards = Array.from({length:stack.count || 1},()=>({...stack.card}));
-      const r = await B.restore(index);
-      if (!currentHub()) return false;
-      if (r === true) { Sfx.ding(); UI.log(`[[icon:key]] 消耗 <b>${B.pocketKeyCost(stack)}</b> 把钥匙，卡牌已复原，回到卡牌仓库`, 'ok'); }
-      else if (r === 'sha') UI.log('[[icon:cards]] 初始牌「初始攻击」无需入库——每局自动携带，已直接消耗', 'dim');
-      else if (r === 'full') UI.log(`[[icon:archive]] 仓库容量不足（${B.stashUsed()}/${B.stashCap()} 张），先卖出或升级仓库`, 'warn');
-      else if (r && /** @type {typeof r & {why?:string,cost?:number}} */ (r).why === 'nokey') UI.log(`[[icon:key]] 钥匙不足：复原这堆卡牌需要 <b>${/** @type {typeof r & {cost?:number}} */ (r).cost}</b> 把钥匙（现有 ${B.keyCount ? B.keyCount() : 0}）——可在仓库把钥匙材料卡「使用」折入储备`, 'warn');
-      else if (!r) UI.log('卡牌复原未保存，请重试。', 'warn');
+      if (d.count && Number(d.count) !== (stack.count || 1)) return warn('待复原数量已变化，请重新选择卡牌。');
+      const restoreCount = stack.count || 1, restoreCost = B.pocketKeyCost(stack);
+      const restoredCards = Array.from({length:restoreCount},()=>({...stack.card}));
+      const button = /** @type {HTMLButtonElement} */ (zoom.querySelector('[data-act="restoreCard"]'));
+      const label = button?.textContent;
+      if (button) { button.disabled = true; button.setAttribute('aria-busy', 'true'); button.textContent = '复原中…'; }
+      zoom._refreshCardZoomBrowse?.();
+      let r;
+      try { r = await B.restore(index); }
+      catch { r = false; }
+      finally {
+        if (currentRestore() && button?.isConnected) {
+          button.disabled = false; button.removeAttribute('aria-busy'); button.textContent = label;
+          zoom._refreshCardZoomBrowse?.();
+        }
+      }
+      if (!currentHub()) return r === true || r === 'sha';
+      const detailCurrent = currentRestore();
+      if (r === 'full') return warn(`仓库容量不足（${B.stashUsed()}/${B.stashCap()} 张），先卖出或扩建仓库。`);
+      if (r && /** @type {typeof r & {why?:string,cost?:number}} */ (r).why === 'nokey') return warn(`钥匙不足：复原需要 ${/** @type {typeof r & {cost?:number}} */ (r).cost} 把，现有 ${B.keyCount ? B.keyCount() : 0} 把。`);
+      if (r !== true && r !== 'sha') return warn('卡牌复原未保存，请重试。');
+      if (detailCurrent) zoom._closeCardZoom?.(true);
+      if (r === true) {
+        notice(`复原${stack.card.name} ×${restoreCount} · 钥匙 −${restoreCost}`);
+        Sfx.ding(); UI.log(`[[icon:key]] 消耗 <b>${restoreCost}</b> 把钥匙，${restoreCount} 张卡牌已复原，回到卡牌仓库`, 'ok');
+      } else { notice('初始攻击已处理，每局自动携带'); UI.log('[[icon:cards]] 初始牌「初始攻击」无需入库——每局自动携带，已直接消耗', 'dim'); }
+      if (!detailCurrent) {
+        if (!refreshWarehouse?.(true)) renderHub();
+        return true;
+      }
       if (r === true) return afterOutcomeFeedback(UI.el?.ovBody,{kind:'restore',destination:'仓库',blocking:true,
         cards:restoredCards,cost:`钥匙 −${restoreCost}`,
         source:'基地复原',cardHTML:card=>SDT.Cards.cardHTML(card,'sm'),isCurrent:currentHub},()=>renderHub());
       if (r) renderHub();
     });
-    hubWrite('claimAch', async (d) => {
-      const r = await M.claim(d.id);
+    const claimReward = async (action, id, run, message) => {
+      const r = await runRewardClaim({ root, base:B, meta:M, cards:SDT.Cards, action, id, run, isCurrent:currentHub });
       if (!currentHub()) return false;
-      if (r.ok) { notice('成就奖励已入账'); Sfx.ding(); renderHub(); }
-      // meta.claim 失败时带 msg（仓库满/存档写失败）——静默丢弃会让「领取」看起来像坏按钮
-      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
-    });
-    hubWrite('selBack', async (d) => {
+      if (r.ok) {
+        try { notice(message); Sfx.ding(); renderHub(); }
+        catch { notice(`${message}，请重新进入收藏室查看。`); }
+      }
+      return r;
+    };
+    hubWrite('claimAch', d => claimReward('claimAch', d.id, () => M.claim(d.id), '成就奖励已入账'));
+    hubWrite('selBack', (d) => {
       const B2 = SDT.Base;
       if (!B2.isBackUnlocked(d.id)) {
         const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === d.id);
-        UI.log(`[[icon:lock]] 卡背未解锁：${bd ? bd.from : d.id}`, 'warn');
-        return;
+        notice(`卡背尚未解锁：${bd ? bd.from : d.id}`, 'warn');
+        return false;
       }
       if (B2.backSel() === d.id) return;
-      const selected = await B2.setBack(d.id);
-      if (!currentHub()) return false;
-      if (!selected) { UI.log('卡背选择未保存，请重试。', 'warn'); return false; }
       const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === d.id);
-      Sfx.ding();
-      UI.log(`[[icon:card-back]] 已装备卡背【<b>${bd ? bd.name : d.id}</b>】——背包翻面与牌库堆即刻生效`, 'ok');
-      if (!refreshArchiveBacks({ base:B2, meta:M, cards:SDT.Cards })) renderHub();
+      return runHubOperation({
+        run:() => B2.setBack(d.id), isCurrent:currentHub, notice, pending:'正在保存卡背…',
+        success:`已装备卡背「${bd ? bd.name : d.id}」。`, failure:'卡背未保存，请重试。',
+        onSuccess:() => {
+          Sfx.ding();
+          UI.log(`[[icon:card-back]] 已装备卡背【<b>${bd ? esc(bd.name) : esc(d.id)}</b>】——背包翻面与牌库堆即刻生效`, 'ok');
+        },
+        refresh:() => { if (!refreshArchiveBacks({ base:B2, meta:M, cards:SDT.Cards })) renderHub(); },
+      });
     });
-    hubWrite('claimColl', async (d) => {
-      const r = await M.claimColl(d.id);
-      if (!currentHub()) return false;
-      if (r.ok) { notice('收藏奖励已入账'); Sfx.ding(); renderHub(); }
-      else if (r && /** @type {typeof r & {why?:string,cost?:number}} */ (r).why === 'full') UI.log(`[[icon:archive]] ${r.msg}`, 'warn');
-      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
-    });
+    hubWrite('claimColl', d => claimReward('claimColl', d.id, () => M.claimColl(d.id), '收藏奖励已入账'));
     hubAct('collZoom', (d) => {
       const card = M.collectPool().find(c => c.id === d.id);
       const from = /** @type {HTMLElement} */ ([...document.querySelectorAll('[data-act="collZoom"]')].find(button => /** @type {HTMLElement} */ (button).dataset.id === d.id && !/** @type {HTMLElement} */ (button).hidden));
       if (card) { UI.showCardZoom(card, { presentation:'inventory', from }); decorateInventoryZoom(card); }
     });
     hubAct('campFacility', d => { selectFacility(d.id); renderHub(); });
-    /** @type {(options: Parameters<typeof bindWarehouse>[0] & {cards?:unknown,meta?:unknown,notify?:unknown}) => ReturnType<typeof bindWarehouse>} */ (bindWarehouse)({ ui: hubUI, base: B, cards: SDT.Cards, meta: M, sound: Sfx, refresh: renderHub, notify: notice, openCard:openStashCardView });
-    disposePersonnel = bindPersonnel({ ui: hubUI, sound: Sfx, refresh: renderHub });
+    const refreshWarehouse = /** @type {(options: Parameters<typeof bindWarehouse>[0] & {cards?:unknown,meta?:unknown}) => ReturnType<typeof bindWarehouse>} */ (bindWarehouse)({ ui: hubUI, base: B, cards: SDT.Cards, meta: M, sound: Sfx, refresh: renderHub, notify: notice, openCard:openStashCardView,
+      noticeHTML:() => hubNotice.html({ keepEmpty:true }),
+      refreshResources:() => { if (currentHub()) root.querySelector('.hub-res').innerHTML = resourceStripHTML(B); },
+    });
+    disposePersonnel = bindPersonnel({ ui: hubUI, sound: Sfx, refresh: renderHub, notice });
     bindArchive(hubUI, { openAchievements:() => { achievementReturn = hubCollectionView === 'backs' ? 'backs' : 'rewards'; hubCollectionView = 'achievements'; renderHub(); } });
     /** @type {(options: Parameters<typeof bindArchiveV3>[0] & {refresh?:unknown}) => ReturnType<typeof bindArchiveV3>} */ (bindArchiveV3)({ ui:hubUI, base:B, meta:M, cards:SDT.Cards, refresh:renderHub });
     bindBaseMotion(document.getElementById('hubMain'));
@@ -377,10 +436,11 @@ preparationFeature = createHubPreparationAdapter({
       preview:(card, { from }) => { UI.showCardZoom(card, { presentation:'inventory', from, returnFocus:from }); decorateInventoryZoom(card); } });
     if (hubTab === 'courtyard') disposeCourtyard = /** @type {(root: Parameters<typeof mountCourtyardV3>[0], view?: unknown) => ReturnType<typeof mountCourtyardV3>} */ (mountCourtyardV3)(document.querySelector('.courtyard-v3'), courtyardView);
     hubAct('closeBase', closeBase);
+    return true;
   }
 
   function openPreparationPanel() {
-    preparationFeature.open();
+    return preparationFeature.open();
   }
 
   function closeBase() {
@@ -398,7 +458,7 @@ preparationFeature = createHubPreparationAdapter({
   // ---------- 背包（物资+卡牌混占格 · 安全格 · 消耗区） ----------
   // 设计者 2026-09-02 定版：从背包丢弃的牌无法取回；消耗的牌可在火堆复原
 
-export { closeBase, openBaseHub, renderHub, renderHomeScene };
+export { closeBase, openBaseHub, openDepartureFromBase, renderHub, renderHomeScene };
 configureCardNavigation({
   closeBase: () => {
     const back = /** @type {HTMLElement} */ (document.querySelector('#hubMain .hub-back'));
