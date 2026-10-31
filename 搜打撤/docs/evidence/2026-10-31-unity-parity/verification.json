@@ -1,0 +1,462 @@
+{
+  "at": "2026-10-31T18:12:32.654335+00:00",
+  "passed": true,
+  "build": "build-6",
+  "player": "player-5",
+  "buildGUID": "4bdd212ad45c44d09a0052a7b8b1e2b3",
+  "buildInputCount": 3925,
+  "currentBuildInputsMatch": true,
+  "viteReadOnlyInputs": 858,
+  "viteInputsUnchanged": true,
+  "domainChecks": {
+    "battle": 47,
+    "run": 326,
+    "hubSave": 472
+  },
+  "native": [
+    {
+      "path": "native-shared-8",
+      "passed": true,
+      "sourceCount": 382,
+      "result": {
+        "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/native-shared-8/result.json",
+        "bytes": 2396,
+        "sha256": "c4e42648ad665bfa449bec9a1898cff83137e76926e5daf5aa62cd9ad5244961"
+      }
+    },
+    {
+      "path": "native-battle-6",
+      "passed": true,
+      "sourceCount": 382,
+      "result": {
+        "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/native-battle-6/result.json",
+        "bytes": 17018,
+        "sha256": "24fba04415da4cfe0950441cf6f0db0d147aa2acac8c8ce309261e217f51d8e4"
+      }
+    },
+    {
+      "path": "native-journey-1",
+      "passed": true,
+      "sourceCount": 374,
+      "result": {
+        "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/native-journey-1/result.json",
+        "bytes": 785404,
+        "sha256": "0511823e29eb71f248aa716a2f0b36bd42a360f15a2085296e2acb5387d99d4e"
+      }
+    },
+    {
+      "path": "native-shop-1",
+      "passed": true,
+      "sourceCount": 374,
+      "result": {
+        "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/native-shop-1/result.json",
+        "bytes": 112665,
+        "sha256": "e08ed551d5f4a01cb1b83695970c2a4e989f120bf778805f28753ece34dea62a"
+      }
+    },
+    {
+      "path": "native-slots-1",
+      "passed": true,
+      "sourceCount": 374,
+      "result": {
+        "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/native-slots-1/result.json",
+        "bytes": 1729,
+        "sha256": "0a7a58f207c49c3592fd7190c3b8a4ecc2d1060ed1c25a628b6b1f2bdd6f8ff9"
+      }
+    }
+  ],
+  "domainLogs": [
+    {
+      "path": "SoudacheUnity/_planning/parity-1031/battle-final.log",
+      "bytes": 137,
+      "sha256": "7bb7d32521714439d1eb0693c64c352eaa6b2e35d0734085704bfe7080c0d5d1"
+    },
+    {
+      "path": "SoudacheUnity/_planning/parity-1031/run-final.log",
+      "bytes": 186,
+      "sha256": "52d792f5af597e999e00dfce719cbd6a9cc392e920752570fc26ba65820981f7"
+    },
+    {
+      "path": "SoudacheUnity/_planning/parity-1031/hub-final.log",
+      "bytes": 207,
+      "sha256": "e458529bc95840bc6b5075096ed5200423c0753f2ae2f857fdd7532cf6bf29da"
+    }
+  ],
+  "sfxAuthoring": {
+    "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/native-audio-author-2/sfx-mixer-authoring.json",
+    "bytes": 22999,
+    "sha256": "ce560445a1189845daa4cfaf629b15bac9361ab4b543a0220d5d208b1e18280e"
+  },
+  "audioBackendBoundary": "source compression ratio 12; supported native ratio 10; no sample-identical acoustic claim",
+  "playerImageCount": 61,
+  "images": [
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-altar.png",
+      "bytes": 2754725,
+      "sha256": "394a9ff851a583797ec5518610c2ff37fc665243bf8913940703510d09a41202"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-battle-pile-reader.png",
+      "bytes": 2000616,
+      "sha256": "de77176ff16995488066130a6613eaac9d42a08316e692a543e41f0146457792"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-battle-pile-return.png",
+      "bytes": 1852935,
+      "sha256": "f32527dca5c9cd8ee1cbe4b997878bbdc2fa097f1bc67b1a7e9c2ebe4dca03d7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-battle-pile.png",
+      "bytes": 1852935,
+      "sha256": "f32527dca5c9cd8ee1cbe4b997878bbdc2fa097f1bc67b1a7e9c2ebe4dca03d7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-battle.png",
+      "bytes": 1844883,
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-door.png",
+      "bytes": 4098051,
+      "sha256": "63ea55e6f23cb9e3f8bcbd23bdc78f814402f212c28a31b647f36076053adb9e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-extraction.png",
+      "bytes": 1363927,
+      "sha256": "e6a33b2ad171b30f809e3130c3ac5fc748859961792775ee8ae83a993c67351f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-formation-rules.png",
+      "bytes": 1176760,
+      "sha256": "fa6e8e43339203c925bfa7c9512d89f5a2f2545fbd303e9e43b8ce532f16b373"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-formation.png",
+      "bytes": 1271757,
+      "sha256": "1c2fa6b2f64bda151fc95c788787f52eeb4c69822ae4765fa9d4d239f731ec1d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-fx-atlas-specimen.png",
+      "bytes": 2516105,
+      "sha256": "52d1088ddfe81073960c1a7792b625ed9d5abf3783b3dbd13b3ee516dc9af1ec"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-0.png",
+      "bytes": 1050567,
+      "sha256": "edf0008af7dced546be2019d7c53ff5fd878281d52f97e76340c1ff4c2098e53"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-1.png",
+      "bytes": 698432,
+      "sha256": "45ae2e0a7aa2448e8feab661c9741ae6203e758914d566218f8cb9542a2a108d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-2.png",
+      "bytes": 1066215,
+      "sha256": "39d9a46ed51c94c910f3693efea6345dbf338d2ada853d0002ae08594a655df9"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-5.png",
+      "bytes": 740852,
+      "sha256": "caf1b1c0dac631a5c600a973dfdf7786a75c82e6aebaa8aff2039d3ec6825270"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-in-run.png",
+      "bytes": 1050565,
+      "sha256": "eaa925fef807e7da2ec4ea970e24eafaac654cf4462b931c7aeb0f5086185aad"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-more-3.png",
+      "bytes": 621286,
+      "sha256": "9217d75ee5380658db849decc6201158e0d953a5737ebe62c1b49cba799abccf"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-more-4.png",
+      "bytes": 779184,
+      "sha256": "83f563ed0136e1fa46207c50dea175d36fce92556a1de92cb35c0118bb799da4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-hand-material-picked.png",
+      "bytes": 2340675,
+      "sha256": "d1c5f9fe6eadc390b2c62e50ecfaf5971bacad7ea595ed5130e2e55542134f34"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-hand-material.png",
+      "bytes": 2300779,
+      "sha256": "de9a9acbc2eca0fdf345e7eb82536f198ad4489abad75257ffb74b91898e5d46"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-hub-conversion-overflow.png",
+      "bytes": 1155844,
+      "sha256": "6b9c39d828491cbcd1d2aee7e61ddd6da315efc1fa125d5aae78c43ab12b3916"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-hub-parity-returned-base.png",
+      "bytes": 2379281,
+      "sha256": "d5fa8ef972fa6feb8c2d3748a8987bfdf4eb1cd51dd2da1148adc3e9a8ad62b7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-hub-restore-unbanked-keys.png",
+      "bytes": 1002840,
+      "sha256": "2e29c6074aa1cc7afbb45513da78d910de7188b48824253c3c890d526e1a6c75"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-hub-trade-base-variant.png",
+      "bytes": 2464843,
+      "sha256": "7a880a5d758b814d0af4021913f8a0dbd43b16355a955e0b1d31c3ed33c83c72"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-hub-trade-variant.png",
+      "bytes": 2463813,
+      "sha256": "647287378058211db3b1a61eecd97241c461f7c976fd700067a0ecae293229f8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-hub-variant-stock.png",
+      "bytes": 2526106,
+      "sha256": "0d3817639f02d0bddb73a1c2e08cda3f100db73afc58ed1536103877199957dd"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-hub-warehouse-actions.png",
+      "bytes": 991923,
+      "sha256": "c3c4c837190ef288346bc5654973280a6acbc0ba4242f077dd277975c779562d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-infusion-picked.png",
+      "bytes": 2093716,
+      "sha256": "07358d0c37570bb6424ac8fa440e99469bfb4c7e8f1f4b8d2f22860be5ce1b78"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-infusion-return.png",
+      "bytes": 2427450,
+      "sha256": "0ec132440fcee5a56569819ce994778cd4b5e7ebf9392cd3dc689b147e411282"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-infusion.png",
+      "bytes": 2067283,
+      "sha256": "9fefe7eab5ef95c9afa5d968965a238f2e91bad51beb645c028bb616970351f1"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-passage.png",
+      "bytes": 1176620,
+      "sha256": "fd60109ad846da93579d34f2e24345e8d69a77d376d1d218752bc54d951d7ed8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-photo.png",
+      "bytes": 2481569,
+      "sha256": "bfb9f28112de4b5242238b0e4bf7eaaa288da9d61afb2c69fedc24aeae960712"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-recode-reader.png",
+      "bytes": 2522707,
+      "sha256": "a70de5e0fc81b9fbb63df07f90f2ccdb198eb87694045ebe506e3232160d891b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-recode-result.png",
+      "bytes": 2567452,
+      "sha256": "386188252d3362a4b48e9832e144786ee62ea96191f0011f075d9a07771f2102"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-recode-save-failed.png",
+      "bytes": 2624409,
+      "sha256": "02095d4b6ccaffe6046554a5139a984f59248ce33b849be78d0af964222ad0b8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-returned-base.png",
+      "bytes": 2375426,
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-returned-slots.png",
+      "bytes": 1541619,
+      "sha256": "70810bd91df9e0e31785df4747270cd330157a74a766e769279c51a1972b2ce2"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-returned-title.png",
+      "bytes": 3414353,
+      "sha256": "65c98f615b8762d7be11f71e08ec3f13f7c6bcae741f87f9f075ba174350c91f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-reward-pending.png",
+      "bytes": 2142375,
+      "sha256": "7aea7e51bf8d915f24822e04ba9435e37a868bc71ff248993fb404e5b02d1ad4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-reward-reader-capacity.png",
+      "bytes": 1839342,
+      "sha256": "571eb8615b90780592bc0b2512089991e5f1262bb025fbfe3349b66d98afcbd3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-reward-reader-organizer.png",
+      "bytes": 2575430,
+      "sha256": "9fbf4c2908e48034ee35a18c41e3f3078e9706a53be9e604cb8ddff2cd8b4526"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-reward-reader-pending.png",
+      "bytes": 1834131,
+      "sha256": "245322900b93c4b7d187a057984502403e92becfd98648695a9045cf0d04c605"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-settlement.png",
+      "bytes": 879862,
+      "sha256": "5d7fc6635e1b2f74029d8e25a1cc059075224ac66388e53f32b3e53c49e20ece"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-shop-commission-dice.png",
+      "bytes": 1929682,
+      "sha256": "c09286029f42bb5b48e1a8499fc176d0a33cc149daa2548949370921f65a7d0c"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-shop-commission-receipt.png",
+      "bytes": 2457377,
+      "sha256": "ad660c110456cd378383cbb95771d37a4d90cc1ac63ee159070585f6d6d5ed18"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-shop-commission.png",
+      "bytes": 2620979,
+      "sha256": "bba5f64121056777add9a76cf258f836824d20bf5736328fb59eea68282f99fb"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-shop-exchange.png",
+      "bytes": 1688771,
+      "sha256": "0f5ce9b6c4ef166e6845f1ef1c3cf435028cc1861ba9384532c253ff35e60b69"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-shop-free-offers.png",
+      "bytes": 3662343,
+      "sha256": "712831a5f0f1de5e55232dde14397f11a11a4172de552956701defcd2c89ae49"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-shop-inspection.png",
+      "bytes": 2502844,
+      "sha256": "3c5ad96ac364a0d6a7f5fd33e3f3269996df0ee9f7b7ad03916fa092b8c25d59"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-shop.png",
+      "bytes": 3748272,
+      "sha256": "bfcfd29c4cbdd2a82f66361e64233f288b1329851481c4152337aeb9b3eca575"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-slot-archive-export.png",
+      "bytes": 663302,
+      "sha256": "00173e6bb7c7b1b1293e6fedaf87f7b582eaf015ae24e15a76c49de3071d708c"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-slot-archive-import-preview.png",
+      "bytes": 496786,
+      "sha256": "cb1041a2e1426f994d7139c0d0f0303c092f9abd9fefdbf061d3a8ed00ba0cf4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-slot-archive-import.png",
+      "bytes": 649594,
+      "sha256": "f530cc8cf0d45373722706a91ab8829392da0e1726adaf28fe57122a9f5047c0"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-slots-backup.png",
+      "bytes": 1542128,
+      "sha256": "ac5c79d7ed9384b04f60fdf9cdcd39afc50181fea2aba7b84a522f05da33bcdc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-startup.png",
+      "bytes": 829519,
+      "sha256": "63f3d2e78adf4df8f76d87d2c4f7a0f45642c27f7adc27de8decc25701dba3bf"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5/player-title.png",
+      "bytes": 3430457,
+      "sha256": "ecc5de84833062ac1ef91bb0ca626fe0284986a1c15ffad159da5a92886c11be"
+    }
+  ],
+  "display": {
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "dpi": 144.0,
+    "fullScreenMode": "Windowed",
+    "desktop": {
+      "width": 2560,
+      "height": 1440
+    },
+    "display": {
+      "renderingWidth": 2560,
+      "renderingHeight": 1440,
+      "systemWidth": 2560,
+      "systemHeight": 1440
+    },
+    "quality": "Ultra",
+    "targetFrameRate": 60,
+    "bufferWidthScale": 1.0,
+    "bufferHeightScale": 1.0,
+    "canvas": {
+      "mode": "ScreenSpaceOverlay",
+      "scaleFactor": 1.33333337,
+      "width": 1920.0,
+      "height": 1080.0,
+      "lossyScale": {
+        "x": 1.33333337,
+        "y": 1.33333337,
+        "z": 1.33333337
+      },
+      "scaler": "ScaleWithScreenSize",
+      "referenceWidth": 1920.0,
+      "referenceHeight": 1080.0,
+      "matchWidthOrHeight": 0.5
+    },
+    "windowsDpi": {
+      "available": true,
+      "processAwareness": 2,
+      "result": 0
+    },
+    "graphics": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "graphicsApi": "Direct3D12",
+    "unityVersion": "6000.6.7f1",
+    "buildGUID": "4bdd212ad45c44d09a0052a7b8b1e2b3"
+  },
+  "osHardwareInput": false,
+  "scope": "current native desktop window; constructed EventSystem/production command inputs and isolated profiles",
+  "limitations": [
+    "not every card combination or every random route",
+    "no acoustic sample comparison or measured FPS/memory improvement",
+    "no OS hardware input or multiple window sizes"
+  ],
+  "independentVisualReviews": [
+    {
+      "path": "SoudacheUnity/_planning/parity-1031/visual-battle-final.json",
+      "sha256": "61698c72fea60c93404b2ee425cc125b08ecd1258dd63bd3630a47366a54194b",
+      "status": "final-player-5-battle-visual-scope-passed"
+    },
+    {
+      "path": "SoudacheUnity/_planning/parity-1031/visual-hub-final.json",
+      "sha256": "f697cd83e1886eb2de1e33fe29fc40c8d329308ad8044184f5cf75bd34f3e0b6",
+      "status": "complete within assigned Hub flow and current-window evidence"
+    }
+  ]
+}
