@@ -18,14 +18,18 @@ afterEach(() => {
 });
 
 describe('production runtime asset publication', () => {
-  it('publishes JSON-referenced frames and guide art plus dynamically named battle stickers at stable paths', () => {
+  it('publishes every current JSON frame and live guide image plus the battle atlas at stable paths', () => {
     const frames = JSON.parse(readFileSync(new URL('../game/data/card-frame-layout.json', import.meta.url), 'utf8'));
-    const guide = readFileSync(new URL('../game/data/beginner-guide.json', import.meta.url), 'utf8');
-    const assets = [...Object.values(frames).map(frame => frame.path),
-      ...guide.matchAll(/ui\/beginner-guide\/[\w-]+\.svg/g)].map(value => typeof value === 'string' ? value : value[0]);
+    const guide = JSON.parse(readFileSync(new URL('../game/data/beginner-guide.json', import.meta.url), 'utf8'));
+    const frameAssets = Object.values(frames).map(frame => frame.path);
+    const guideAssets = guide.pages.map(page => page.image.replace(/^assets\//, ''));
+    expect(frameAssets.length).toBeGreaterThan(0);
+    expect(guideAssets).toHaveLength(6);
+    expect(new Set(guideAssets).size).toBe(6);
+    expect(guideAssets.every(asset => /^ui\/beginner-guide\/[\w-]+\.webp$/.test(asset))).toBe(true);
+    const assets = [...frameAssets, ...guideAssets];
     assets.push('ui/map-hud-1015/gold-is7-v2.webp', 'ui/sugin-mail-empty.webp',
-      'battle/fx-sticker-boom.svg', 'battle/fx-sticker-heal.svg', 'battle/fx-sticker-hurt.svg');
-    expect(assets.length).toBeGreaterThan(20);
+      'battle/fx-atlas.webp');
     for (const asset of assets) {
       expect(RUNTIME_ASSET_DIRS.some(directory => asset.startsWith(`${directory}/`)), asset).toBe(true);
       expect(readFileSync(path.join(assetsRoot, asset)).byteLength, asset).toBeGreaterThan(0);

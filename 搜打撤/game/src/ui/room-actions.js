@@ -11,13 +11,16 @@ export function createRoomActions(UI, current, { emptyData = false } = {}) {
 
 // The effect has already run. Retries save that result, then continue its page.
 // A saved result only retries presentation; each intentional retry page adopts ownership.
-export function createRoomCheckpoint({ UI, save, isCurrent, renderRetry, complete }) {
+export function createRoomCheckpoint({ UI, save, isCurrent, renderRetry, complete,
+  initialSaved = false, pageRequired = true }) {
+  const visible = () => !!UI.el?.overlay && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
   const capture = () => ({ body:UI.el?.ovBody, root:UI.el?.ovBody?.firstElementChild,
-    overlay:UI.el?.overlay, revision:UI._overlayRevision });
-  let owner = capture(), pending = null, saved = false, finished = false;
+    overlay:UI.el?.overlay, revision:UI._overlayRevision, page:pageRequired || visible() });
+  let owner = capture(), pending = null, saved = initialSaved, finished = false;
   const current = () => isCurrent() && UI.el?.ovBody === owner.body && UI.el?.overlay === owner.overlay &&
-    owner.body?.firstElementChild === owner.root && UI._overlayRevision === owner.revision &&
-    !owner.overlay?.hidden && !owner.overlay?.classList.contains('closing');
+    UI._overlayRevision === owner.revision && (owner.page
+      ? owner.body?.firstElementChild === owner.root && visible()
+      : !visible());
   const retryPage = () => {
     if (!current()) return false;
     try {
@@ -33,7 +36,7 @@ export function createRoomCheckpoint({ UI, save, isCurrent, renderRetry, complet
     let release = () => {};
     const work = Promise.resolve().then(async () => {
       if (!current()) return false;
-      release = beginRoomSave(owner.root);
+      release = beginRoomSave(owner.page ? owner.root : null, null, saved ? '正在继续…' : '正在保存…');
       if (!saved) saved = await saveRunCheckpoint(save);
       if (!current()) return false;
       if (!saved) return retryPage();

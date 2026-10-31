@@ -12,7 +12,6 @@ const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const R = await import('../game/src/battle/runtime/battle.runtime.js');
-const { cardResultRows } = await import('../game/src/battle/view/battle.card-results.js');
 
 beforeEach(() => { vi.useFakeTimers(); R.set$lastDeckSel([]); window.SDT.MAP.rules.battleStartDraw = 20; });
 afterEach(() => { vi.restoreAllMocks(); vi.clearAllTimers(); vi.useRealTimers(); });
@@ -32,8 +31,9 @@ it.each([[1,false],[2,false],[1,true]])('铸甲支付剑触发一次标准攻击
  expect(R.energy).toBe(98);expect(R.consumed.filter(u=>u==='runtime-1')).toHaveLength(1);
  expect(effectGrants().filter(o=>o.card.id==='starter-attack')).toHaveLength(1);
  const generated=effectGrants().find(o=>o.card.id==='starter-attack');expect(R.played).toContain(generated.uid);expect(R.hand).not.toContain(generated.uid);
- expect(R.cardAnims.find(e=>e.kind==='draw' && e.uid===generated.uid)?.source).toBe('effect-cast');
- expect(cardResultRows(R.cardAnims).some(row=>row.kind==='effectCast' && row.cards.has(C.SHA.name))).toBe(true);
+ expect(R.cardAnims.find(e=>e.kind==='draw' && e.uid===generated.uid)).toMatchObject({
+  source:'effect-cast',acquired:true,name:C.SHA.name,card:{id:C.SHA.id},
+ });
  if(sha)expect(R.hand).toContain('runtime-2');
  BattleSession.commands.pickHandSelect('runtime-1');await settle();expect(R.foes[0].hp).toBe(7);
  BattleSession.commands.flee();await settle();

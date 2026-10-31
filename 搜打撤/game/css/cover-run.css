@@ -87,7 +87,7 @@
   flex: none; flex-wrap: wrap; justify-content: flex-start;
   margin: 0; padding: 20px 0 0; gap: 14px; border-top: 1px solid #b8b9ba;
 }
-& :is(.blank-safe-gain, .event-choice-hand, .fire-restore-hand) {
+& :is(.blank-safe-gain, .fire-restore-hand) {
   background: #f3f3f3; border: 1px solid #b7b9bb; border-radius: 0;
   padding: 20px 14px; gap: 18px; box-shadow: none;
 }

@@ -1,16 +1,19 @@
 import { bindRewardFeedback } from './hub.reward-feedback.js';
 import { esc, escAttr } from '../core/shared.js';
 import { achievementMedalHTML } from '../ui/achievement-medals.js';
-import { achievementFiltersHTML, createAchievementProgressReader } from './hub.archive.js';
+import { achievementFiltersHTML, createAchievementProgressReader, createAchievementStatusSnapshot } from './hub.archive.js';
 import { validateLastLampState } from '../home/story.last-lamp.js';
 import { collectionCardsHTML, bindCollectionCards } from './hub.collection-v4.js';
 import { animateBaseSwitch } from './base-motion-v4.js';
 import { captureOverlayReturnState, restoreOverlayReturnState } from '../ui/overlay-return-state.js';
+import { syncViewChildren } from '../ui/view-children-sync.js';
+import { isAvailableControl } from '../ui/action-dispatch.js';
 
 // The legacy classes route now represents shared collection milestones, not a second character library.
 const SECTIONS = [['cards', '已收藏'], ['rewards', '奖励'], ['achievements', '成就目标'], ['classes', '收藏里程碑'], ['backs', '卡背'], ['stories', '故事']];
 let slot, medalId = '', backId = '';
 const recordSelection = new Map(), presentations = new Map();
+const archiveBindings = new WeakMap();
 const stateLabel = (unlocked, claimed) => claimed ? '已领取' : unlocked ? '可领取' : '未达成';
 const resetForSlot = base => {
   if (slot === base.slot) return;
@@ -26,9 +29,7 @@ function rewardHTML(achievement, cardById, backById) {
   return [reward.wood ? `[[icon:wood]] 木材 ×${reward.wood}` : '', reward.rations ? `[[icon:bread]] 口粮 ×${reward.rations}` : '', reward.keys ? `[[icon:key]] 钥匙 ×${reward.keys}` : '', reward.card ? `[[icon:cards]] ${esc(card?.name || '稀有卡牌')}` : '', back ? `[[icon:card-back]] 卡背 · ${esc(back.name)}` : ''].filter(Boolean).map(item => `<span>${item}</span>`).join('') || '<span>成就纪念</span>';
 }
 
-function medalDetailHTML(achievement, progressText, meta, cardById, backById) {
-  const unlocked = meta.isUnlocked(achievement), claimed = meta.isClaimed(achievement.id);
-  const progress = progressText(achievement.id);
+function medalDetailHTML({ achievement, unlocked, claimed, progress }, cardById, backById) {
   return `<div class="av3-medal-art">${achievementMedalHTML(achievement.id, 'detail', 'painted')}</div><div class="av3-detail-copy"><span class="av3-eyebrow">${stateLabel(unlocked, claimed)}</span><h3>${esc(achievement.name)}</h3><p class="av3-condition">${esc(achievement.desc)}</p>${progress ? `<p class="av3-detail-progress"><span>当前进度</span><strong>${progress}</strong></p>` : ''}<div class="av3-detail-rewards"><span>奖励预览</span>${rewardHTML(achievement, cardById, backById)}</div>${claimed ? '<span class="av3-seal">[[icon:check]] 已领取</span>' : unlocked ? `<button type="button" class="mini-btn ok base-command base-command-primary av3-primary" data-act="claimAch" data-id="${escAttr(achievement.id)}">领取奖励</button>` : '<span class="av3-seal pending">待完成</span>'}</div>`;
 }
 
@@ -43,7 +44,7 @@ function selectedRecord(view, entries) {
   return selected;
 }
 function recordHTML(index, label, name, status, detail, id, selected) {
-  return `<button type="button" id="archive-record-${escAttr(id)}" class="av12-record${selected ? ' on' : ''}" data-act="archiveV12Record" data-id="${escAttr(id)}" data-index="${index}" aria-pressed="${selected}"><small>${label}</small><b>${name}</b><span>${status} ›</span></button><template data-record-source="${escAttr(id)}">${detail}</template>`;
+  return `<button type="button" id="archive-record-${escAttr(id)}" class="av12-record${selected ? ' on' : ''}" data-view-key="archive-record/${escAttr(id)}" data-act="archiveV12Record" data-id="${escAttr(id)}" data-index="${index}" aria-pressed="${selected}"><small>${label}</small><b>${name}</b><span>${status} ›</span></button><template data-view-key="archive-source/${escAttr(id)}" data-record-source="${escAttr(id)}">${detail}</template>`;
 }
 
 function rewardInboxHTML(meta, cards) {
@@ -59,18 +60,24 @@ function rewardInboxHTML(meta, cards) {
 }
 
 function achievementsHTML(base, meta, cards) {
-  const rank = achievement => meta.isClaimed(achievement.id) ? 2 : meta.isUnlocked(achievement) ? 0 : 1;
+  const snapshot = createAchievementStatusSnapshot(meta);
+  const rank = { claimable:0, progress:1, done:2 };
   const cardById = new Map(cards.all().map(card => [card.id, card]));
   const backById = new Map((cards.CARD_BACKS || []).map(back => [back.id, back]));
-  const entries = [...meta.ACHIEVEMENTS].sort((a, b) => rank(a) - rank(b));
+  const entries = snapshot.entries.sort((a, b) => rank[a.status] - rank[b.status]);
   const progressText = entries.length ? createAchievementProgressReader(base) : () => '';
-  const selected = entries.find(item => item.id === medalId) || entries[0];
-  medalId = selected?.id || '';
-  const pendingN = entries.filter(item => meta.isUnlocked(item) && !meta.isClaimed(item.id)).length;
-  return `${pendingN ? `<div class="av3-honours-heading"><span class="av3-pending-count">${pendingN} 项待领取</span></div>` : ''}<div class="av3-honours-layout"><section class="av3-cabinet">${achievementFiltersHTML(meta)}<div class="av3-medals">${entries.map(achievement => {
-    const unlocked = meta.isUnlocked(achievement), claimed = meta.isClaimed(achievement.id);
-    return `<article class="ach-row av3-medal${unlocked ? ' done' : ''}${unlocked && !claimed ? ' claimable' : ''}${medalId === achievement.id ? ' selected' : ''}" data-status="${claimed ? 'done' : unlocked ? 'claimable' : 'progress'}" data-achievement="${escAttr(achievement.id)}" tabindex="-1"><button type="button" data-act="archiveV3Medal" data-id="${escAttr(achievement.id)}" aria-pressed="${medalId === achievement.id}" aria-label="${escAttr(achievement.name)}，${stateLabel(unlocked, claimed)}"><span class="av3-medal-thumb">${achievementMedalHTML(achievement.id, 'tile', 'painted')}</span><span class="av3-medal-label"><b>${esc(achievement.name)}</b><small>${progressText(achievement.id)}</small></span><span class="av3-medal-state">${stateLabel(unlocked, claimed)}</span></button><template class="av3-detail-source">${medalDetailHTML(achievement, progressText, meta, cardById, backById)}</template></article>`;
-  }).join('')}</div></section><aside class="av3-medal-detail" aria-live="polite">${selected ? medalDetailHTML(selected, progressText, meta, cardById, backById) : '<h3>暂无成就档案</h3>'}</aside></div>`;
+  const selected = entries.find(item => item.achievement.id === medalId) || entries[0];
+  medalId = selected?.achievement.id || '';
+  let selectedDetail = '<h3>暂无成就档案</h3>';
+  const rows = entries.map(entry => {
+    const { achievement, unlocked, claimed, status } = entry;
+    const progress = progressText(achievement.id), label = stateLabel(unlocked, claimed);
+    const detail = medalDetailHTML({ ...entry, progress }, cardById, backById);
+    if (entry === selected) selectedDetail = detail;
+    return `<article class="ach-row av3-medal${unlocked ? ' done' : ''}${unlocked && !claimed ? ' claimable' : ''}${medalId === achievement.id ? ' selected' : ''}" data-view-key="achievement/${escAttr(achievement.id)}" data-status="${status}" data-achievement="${escAttr(achievement.id)}" tabindex="-1"><button type="button" data-act="archiveV3Medal" data-id="${escAttr(achievement.id)}" aria-pressed="${medalId === achievement.id}" aria-label="${escAttr(achievement.name)}，${label}"><span class="av3-medal-thumb">${achievementMedalHTML(achievement.id, 'tile', 'painted')}</span><span class="av3-medal-label"><b>${esc(achievement.name)}</b><small>${progress}</small></span><span class="av3-medal-state">${label}</span></button><template class="av3-detail-source">${detail}</template></article>`;
+  }).join('');
+  const pendingN = snapshot.counts.claimable;
+  return `${pendingN ? `<div class="av3-honours-heading"><span class="av3-pending-count">${pendingN} 项待领取</span></div>` : ''}<div class="av3-honours-layout"><section class="av3-cabinet">${achievementFiltersHTML(meta, snapshot)}<div class="av3-medals">${rows}</div></section><aside class="av3-medal-detail" aria-live="polite">${selectedDetail}</aside></div>`;
 }
 
 function collectionHTML(meta) {
@@ -114,8 +121,8 @@ export function archiveV3HTML({ base, meta, cards, view = 'cards' }) {
   const currentView = SECTIONS.some(([key]) => key === view) ? view : 'cards';
   const content = currentView === 'cards' ? collectionCardsHTML(base, cards) : currentView === 'rewards' ? rewardInboxHTML(meta, cards) : currentView === 'classes' ? collectionHTML(meta) : currentView === 'backs' ? backsHTML(base, meta, cards) : currentView === 'stories' ? storiesHTML(base) : achievementsHTML(base, meta, cards);
   const heading = SECTIONS.find(([key]) => key === currentView)[1];
-  const navigation = `<nav class="av12-directory" aria-label="收藏室目录">${SECTIONS.map(([key, title], index) => `<button type="button" class="${currentView === key ? 'on' : ''}" data-act="hubCollectionView" data-view="${key}" aria-pressed="${currentView === key}"><small>${String(index + 1).padStart(2, '0')}</small><b>${title}</b><span aria-hidden="true">›</span></button>`).join('')}</nav>`;
-  return `<section class="hub-archive-v3 archive-v12" data-archive-view="${currentView}" data-archive-slot="${escAttr(base.slot)}"><header class="av3-header"><h2>收藏室</h2><span>${heading}</span></header><div class="av12-workspace">${navigation}<main class="av12-content">${content}</main></div></section>`;
+  const navigation = `<nav class="av12-directory" aria-label="收藏室目录">${SECTIONS.map(([key, title], index) => `<button type="button" class="${currentView === key ? 'on' : ''}" data-view-key="archive-view/${key}" data-act="hubCollectionView" data-view="${key}" aria-pressed="${currentView === key}"><small>${String(index + 1).padStart(2, '0')}</small><b>${title}</b><span aria-hidden="true">›</span></button>`).join('')}</nav>`;
+  return `<section class="hub-archive-v3 archive-v12" data-view-key="archive/${escAttr(base.slot)}/${currentView}" data-archive-view="${currentView}" data-archive-slot="${escAttr(base.slot)}"><header class="av3-header"><h2>收藏室</h2><span>${heading}</span></header><div class="av12-workspace">${navigation}<main class="av12-content">${content}</main></div></section>`;
 }
 
 /** Receipt destinations can reveal a newly unlocked back without applying it. */
@@ -130,13 +137,15 @@ export function selectArchiveBack(id, base, cards) {
 export function refreshArchiveBacks({ base, meta, cards, direction = 0 }) {
   const root = document.querySelector('#hubMain .hub-archive-v3[data-archive-view="backs"]');
   if (!root) return false;
+  const focused = /** @type {HTMLElement} */ (root.ownerDocument.activeElement);
+  const focusInDetail = !!root.querySelector('.av3-back-detail')?.contains(focused);
   const source = document.createElement('template');
   source.innerHTML = backsHTML(base, meta, cards);
-  // Retain the glass panels and directory; only their changing contents are replaced.
+  // Retain the glass panels, directory and matching controls while syncing their contents.
   for (const selector of ['.av3-back-display', '.av3-back-detail']) {
     const target = root.querySelector(selector), next = source.content.querySelector(selector);
     if (target && next && target.innerHTML !== next.innerHTML) {
-      target.innerHTML = next.innerHTML;
+      syncViewChildren(target, next);
       if (direction && selector === '.av3-back-display') animateBaseSwitch(target, direction);
     }
   }
@@ -147,6 +156,9 @@ export function refreshArchiveBacks({ base, meta, cards, direction = 0 }) {
     button.querySelector('small').textContent = base.isBackUnlocked(/** @type {HTMLElement} */ (button).dataset.id)
       ? base.backSel() === /** @type {HTMLElement} */ (button).dataset.id ? '使用中' : '已解锁' : '未解锁';
   });
+  if (focusInDetail && (!focused.isConnected || !isAvailableControl(focused))) {
+    /** @type {HTMLElement} */ (root.querySelector('[data-act="archiveV3Back"][aria-pressed="true"]'))?.focus({ preventScroll:true });
+  }
   return true;
 }
 
@@ -154,6 +166,9 @@ export function refreshArchiveBacks({ base, meta, cards, direction = 0 }) {
 export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Meta, cards }) {
   const root = /** @type {HTMLElement} */ (document.querySelector('#hubMain .hub-archive-v3'));
   if (!root) return;
+  archiveBindings.get(root)?.abort();
+  const controller = new AbortController();
+  archiveBindings.set(root, controller);
   let recordMarkup = root.querySelector('.av12-record-detail')?.innerHTML || '';
   let medalMarkup = root.querySelector('.av3-medal-detail')?.innerHTML || '';
   bindRewardFeedback({ root, base, meta, cards, ui });
@@ -198,6 +213,7 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
     }
   };
   const reconcileMedalSelection = () => {
+    if (ui.isCurrent && !ui.isCurrent()) return;
     const detail = root.querySelector('.av3-medal-detail');
     if (!detail) return;
     const rows = [...root.querySelectorAll('.av3-medal')];
@@ -216,13 +232,13 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
       if (detail.innerHTML !== medalMarkup) detail.innerHTML = medalMarkup;
     }
   };
-  root.addEventListener('archive-filter-change', reconcileMedalSelection);
+  root.addEventListener('archive-filter-change', reconcileMedalSelection, { signal:controller.signal });
   reconcileMedalSelection(); // bindArchive applied retained filters before this view bound.
   ui.act('archiveV3Medal', selectMedal);
   // archiveLocate focuses the real target after changing sections; reveal its details with it.
   root.addEventListener('focusin', event => {
     if (/** @type {Element} */ (event.target).matches('.av3-medal[data-achievement]')) selectMedal({ id: /** @type {HTMLElement} */ (event.target).dataset.achievement });
-  });
+  }, { signal:controller.signal });
   ui.act('archiveV3Back', data => {
     if (!(cards.CARD_BACKS || []).some(back => back.id === data.id) || backId === data.id) return;
     const ids = (cards.CARD_BACKS || []).map(back => back.id);

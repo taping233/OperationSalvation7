@@ -14,8 +14,9 @@ import { isTurbo } from '../core/turbo.js';
 import { renderScheduler } from '../core/render-scheduler.js';
 import { findMapTravelPath, setMapTravelPresentation } from './map-travel-path.js';
 import { createTravelMotion, createArrivalFeedback } from './map-travel-motion.js';
+import { recordMapNodeArrival } from './map-node-arrival.js';
 import { showLayerPassage, isLayerPassageActive } from '../ui/map-passage.js';
-import { cancelLegacyChainMove, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene, resumeChestsOnCell } from './game.run.scenes.js';
+import { cancelLegacyChainMove, consumeCurrentCell, enterNode, finishInstant, finishSavedInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene, resumeChestsOnCell } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply, resumeNodeRestore } from './game.run.altar.js';
 import { endAbandonedNodeContent, endNodeContent, entrySupplyAt, entrySupplyGate, nodeContentEndedAt } from './node-reward-state.js';
 import { createEventCardChoiceController } from './event-card-choice.js';
@@ -89,15 +90,15 @@ export function moveTo(toLi, toIdx) {
     game.trackPos = to.idx;
     endNodeContent(game, from.li, from.idx);
     markSeen(to.li, to.idx);
-    if (game.explored) game.explored[to.li + ',' + to.idx] = 1;
-    game.turn++;
+    recordMapNodeArrival(game, to.li, to.idx);
     game.activeLayerBounds = game.layerBounds?.[to.li] || null;
     SDT.Meta.track('action');
+    // saveGame builds its payload and RunStorage clones it before the first await.
+    // Include the final stable node while keeping the travel transaction locked.
+    game.state = 'idle';
+    try { saveGame(); }
+    finally { game.state = 'moving'; }
     if (committed < path.length) {
-      // Persist only a stable node, while keeping the travel transaction locked.
-      game.state = 'idle';
-      saveGame();
-      game.state = 'moving';
       preloadCellScene(game.layerData?.[route[committed + 1].li], route[committed + 1].idx);
     }
   };
@@ -204,6 +205,12 @@ function resolveCell() {
     openSafeNode();
     return;
   }
+  const finishImmediate = (consume = true, { saved = false, retry = null } = {}) => {
+    if (!saved && consume !== false) consumeCurrentCell();
+    if (door) return enterNode('door', () => openDoorModal(door, def), retry);
+    return saved ? finishSavedInstant() : finishInstant();
+  };
+  const pickupComplete = retry => door ? enterNode('door', () => openDoorModal(door, def), retry) : true;
   const pendingReward = nodeChestRewardAt(game);
   if (pendingReward) {
     UI.beginRoom();
@@ -221,7 +228,7 @@ function resolveCell() {
   const supply = entrySupplyAt(game);
   if (supply && supply.taken.length < supply.cardIds.length) { UI.beginRoom(); openEntrySupply(); return; }
   if (def?.type === 'fire' && game.nodeRewards?.[vKey]?.type === 'fire' && !game.nodeRewards[vKey].continued) {
-    UI.beginRoom(); openFireRest(() => finishInstant()); return;
+    UI.beginRoom(); runInstant(def, finishImmediate, pickupComplete); return;
   }
   if (consumed && !door && def && (def.type === 'battle' || def.type === 'shop' || INSTANT_TYPES.includes(def.type))) {
     UI.log('[[icon:exit]] 该节点已完成结算，现已变为普通节点', 'dim');
@@ -248,13 +255,8 @@ function resolveCell() {
   }
 
   // 2) 即时效果类：拾取或场景演出后再继续
-  if (def && INSTANT_TYPES.includes(def.type)) {
-    runInstant(def, (consume = true) => {
-      if (consume !== false) consumeCurrentCell();
-      // 即时效果完成 → 本格若兼为节点（如带商店的门、祭坛入口）继续节点演出
-      if (door) { enterNode('door', () => openDoorModal(door, def)); return; }
-      finishInstant();
-    });
+  if (def && INSTANT_TYPES.includes(def.type) && !(consumed && def.type === 'coin')) {
+    runInstant(def, finishImmediate, pickupComplete);
     return;
   }
 
@@ -285,20 +287,21 @@ function openResourcePick(done) {
 }
 
 function openSafeNode() {
-  setBagReturnHook(null);
-  UI.hideOverlay();
-  finishInstant();
+  return finishInstant();
 }
 
 // 即时效果节点按类型处理奖励或事件。
-function runInstant(def, after) {
+function runInstant(def, after, pickupComplete = null) {
   const done = after || finishInstant;
   switch (def.type) {
     case 'coin': {
       // 金币格收益 -1（2026-09-06 设计者定版）；展示与入账同口径（含玩法倍率）
       const base = Math.max(1, (def.n || 1) - 1);
       const n = Math.max(1, Math.round(base * (modeCfg().coinMul || 1)));
-      openPickupPage('coin', `+${n} 币`, () => { gainCoins(base); done(); });
+      openPickupPage('coin', `+${n} 币`, {
+        claim:() => { gainCoins(base); consumeCurrentCell(); },
+        complete:pickupComplete,
+      });
       break;
     }
     case 'wood': {
@@ -310,7 +313,10 @@ function runInstant(def, after) {
     // 搜刮点：70% 小型物资箱（随机 1 张）/ 30% 密封物资箱（3 选 1），使用通用卡牌池。
     case 'chest': openChestsOnCell([Random.random('loot', 'reward') < 0.7 ? { kind:'small' } : { kind:'medium' }], null, { consumeNode:true }); break;
     // 物资格（2026-09-16 Item 17 定版）：按爆率刷新 2 张随机资源卡，二选一带走
-    case 'resource': openResourcePick(done); break;
+    case 'resource': {
+      const resume = () => openResourcePick((consume, saved = false) => done(consume, { saved, retry:resume }));
+      resume();
+    } break;
     case 'rations': {
       // 2026-09-06 #11：口粮同样以卡牌形式入包
       const card = SDT.Cards.all().find(c => c.id === 'tt-rations');
@@ -322,9 +328,10 @@ function runInstant(def, after) {
       const card = SDT.Cards.all().find(c => c.id === 'tt-key');
       openFixedRewardsOnCell([card].filter(Boolean), '钥匙补给', { consumeNode:true });
     } break;
-    case 'fire':
-      openFireRest(done);   // 数值沿用原火堆规则，确认休整才执行。
-      break;
+    case 'fire': {
+      const resume = () => openFireRest(consume => done(consume, { saved:true, retry:resume }));
+      resume();
+    } break;
     case 'event': {
       // 事件页开着时不得回 idle：同步 done() 会把 modal 覆盖成 idle，玩家此时可移动、
       // 后到的事件页会顶掉前者（2026-09-13 实测奖励丢失）。收尾由事件页关闭点兜底。
@@ -348,7 +355,7 @@ function eventController() {
     pick:items => pick(items), weighted:items => weighted(items),
     scaledEnemy:enemy => scaledEnemy(enemy),
     nodeShell:spec => nodeShell(spec), nodeOpt:/** @param {Parameters<typeof nodeOpt>} args */ (...args) => nodeOpt(...args),
-    enterNode:(...args) => enterNode(...args), consumeCurrentCell:() => consumeCurrentCell(),
+    enterNode, consumeCurrentCell:() => consumeCurrentCell(),
     finishInstant:(...args) => finishInstant(...args), cancelLegacyChainMove:() => cancelLegacyChainMove(),
     grantEventCard:/** @param {Parameters<typeof grantEventCard>} args */ (...args) => grantEventCard(...args),
     openFixedRewardsOnCell:(...args) => openFixedRewardsOnCell(...args),

@@ -15,7 +15,7 @@ import * as Engine from '../game/src/battle/core/battle.engine.js';
 const BASELINE_EXPORTS = [
   'configureBattleEngine', 'requestBattleRender', 'interactionOf', 'cloneData', 'cardIdentity', 'R', 'alive', 'awaitTriggeredActions',
   'intentFor', 'drawCards', 'resolveFoeDefeat', 'sweepDead', 'nestPhase', 'grantSha',
-  'findCard', 'findEffectiveCard', 'infusionFuelReason', 'infuseOf', 'effCostOf', 'swapCardCosts', 'restore', 'finish',
+  'findCard', 'findEffectiveCard', 'infusionFuelReason', 'infuseOf', 'effCostOf', 'swapCardCosts', 'restore', 'finish', 'endRun',
   'cancelInteraction', 'flee', 'handCurseSpecs', 'getSnapshot', 'snapshotSignature',
   'getBattleLiveness', 'getCardPlayAvailability', 'submitCardPlay',
   'processDelayed', 'accrueGrowth', 'resolveCard', 'resolveCardWithFeedback',
@@ -37,7 +37,7 @@ describe('battle.engine 导出面守卫', () => {
     expect(Object.keys(Engine).sort()).toEqual([...BASELINE_EXPORTS].sort());
   });
 
-  it('基线数量 = 84', () => {
-    expect(BASELINE_EXPORTS.length).toBe(84);
+  it('基线数量 = 85', () => {
+    expect(BASELINE_EXPORTS.length).toBe(85);
   });
 });

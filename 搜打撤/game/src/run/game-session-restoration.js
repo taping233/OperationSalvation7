@@ -72,6 +72,7 @@ function restoreGame(slot) {
   readState().game.mode = MODES[s.mode] ? s.mode : 'standard';
   readState().game.myClass = s.myClass || null;
   readState().game.characterId = s.characterId || null;
+  readState().game.departureCharacterId = s.departureCharacterId || null;
   applyModeRules();
   readState().game.inventory = Array.isArray(s.inventory) ? s.inventory : [];
   readState().game.ownedCards = Array.isArray(s.ownedCards) ? s.ownedCards : [];
@@ -173,8 +174,9 @@ function restoreGame(slot) {
   const ended = nodeContentEndedAt(readState().game);
   if (ended) endNodeContent(readState().game, safeLayer, safeIdx);
   const pendingChest = ended ? null : s.chestReward;
-  // Reattach a pending reward before allowing enterLayer to write a run snapshot.
-  enterLayer(safeLayer, safeIdx, { preserveBossPlan:true, deferSave:!!pendingChest });
+  const pendingBattle = ended ? null : s.battle;
+  // Restore rewards or battle before allowing enterLayer to write a run snapshot.
+  enterLayer(safeLayer, safeIdx, { preserveBossPlan:true, deferSave:!!(pendingChest || pendingBattle) });
   readServices().Sound.music('board');
   readUI().log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
   if (!readState().game.myClass) return { ok:true, value:true, classChoiceEntry:readState().runtime.openClassChoice({ recoveringRun:true }) };   // 同步恢复结果附带选角就绪，不把 Promise 写入 game/存档
@@ -194,10 +196,22 @@ function restoreGame(slot) {
       return { ok:false, code:'EVENT_CHOICE_RESTORE_FAILED', preserveRun:true };
     }
   }
-  else if (!ended && s.battle && readServices().Battle && typeof readServices().Battle.restore === 'function') {
-    if (readServices().Battle.restore(readState().game, s.battle)) {
-      saveGame();   // 恢复后立刻回写，防二次退出丢进度
+  else if (pendingBattle) {
+    const battle = readServices().Battle;
+    const available = typeof battle?.restore === 'function';
+    let restored = false;
+    try {
+      if (available) restored = battle.restore(readState().game, pendingBattle) === true;
+    } catch (error) {
+      console.warn('[restore] 战斗恢复未完成', error);
     }
+    if (!restored) {
+      const message = available ? '本场战斗恢复未完成' : '战斗恢复功能尚未就绪';
+      readState().game.state = 'modal';
+      readUI().log(`[[icon:cross]] ${message}，原档已保留，请重新进入此档位`, 'warn');
+      return { ok:false, code:available ? 'BATTLE_RESTORE_FAILED' : 'BATTLE_RESTORE_UNAVAILABLE', message, preserveRun:true };
+    }
+    saveGame();   // 恢复成功后只回写完整战斗快照。
   }
   return {ok:true,value:true};
 }

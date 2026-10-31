@@ -18,7 +18,13 @@ export function endNodeContent(game, li, idx) {
   game.visited ||= {};
   game.visited[key] = 1;
   game.nodeRewards ||= {};
-  if (!nodeContentEndedAt(game, li, idx)) game.nodeRewards[key] = { version:1, type:'closed' };
+  if (!nodeContentEndedAt(game, li, idx)) {
+    const commission = record?.commission;
+    // 已获得的跨节点凭据沿用原对象，已兑付收据也保留；只结束本地内容。
+    const keepCommission = commission && typeof commission === 'object' && !Array.isArray(commission)
+      && ['pending','applied'].includes(commission.status);
+    game.nodeRewards[key] = { version:1, type:'closed', ...(keepCommission ? { commission } : {}) };
+  }
   if (game.nodeChestRewards) delete game.nodeChestRewards[key];
   if (game.entrySupply?.layerIdx === li && game.entrySupply.trackPos === idx) game.entrySupply = null;
   const sourceType = game.layerData?.[li]?.logical?.[idx]?.def?.type;

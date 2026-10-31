@@ -17,6 +17,20 @@ const inside = (point, polygon) => polygon.every((start, index) => {
 const midpoint = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
 
 describe('手绘透视雨台', () => {
+  it('庭院细雨疏朗且落点覆盖池塘水域，缩放后仍保留点击位置', () => {
+    const { scene } = makeScene(960, 540, { sceneBackdrop:true });
+    const snapshot = scene.getDiagnostics();
+    expect(snapshot.dropsCount).toBeLessThan(24);
+    expect(snapshot.ripplesCount).toBeLessThan(10);
+    const xs = snapshot.drops.map(drop => drop.landing.x), ys = snapshot.drops.map(drop => drop.landing.y);
+    expect(Math.max(...xs) - Math.min(...xs)).toBeGreaterThan(960 * .55);
+    expect(Math.max(...ys) - Math.min(...ys)).toBeGreaterThan(540 * .55);
+    expect(snapshot.ripples.every(ripple => ripple.opacity < .18)).toBe(true);
+    scene.resize(600, 400); scene.tap(90, 290);
+    expect(scene.getDiagnostics().ripples.at(-1)).toMatchObject({ x:90, y:290, source:'tap' });
+    scene.setIntensity(80);
+    expect(scene.getDiagnostics().dropsCount).toBeGreaterThan(snapshot.dropsCount);
+  });
   it('庭院景观模式在实际点击处泛圈，不受旧台面裁切，画布外输入不生效', () => {
     const { scene, context } = makeScene(960, 540, { sceneBackdrop:true });
     expect(scene.tap(60, 60)).toBe(true);

@@ -9,8 +9,8 @@ export function containerStoreHTML({ title, icon, prefix, count, cap, stored, av
   const cards = (stacks, take) => stacks.map(st => {
     const i = index++, action = take ? '整叠取出' : '整叠存入';
     const blocked = reason(st, take, count, cap);
-    return `<div class="container-store-slot collection-item">
-      <button type="button" class="bt-card pearl-store-card" data-act="${prefix}${take ? 'Take' : 'Put'}" data-name="${escAttr(st.card.name)}" ${blocked ? 'disabled' : ''}
+    return `<div class="container-store-slot collection-item" data-view-key="${escAttr(JSON.stringify([take ? 'stored' : 'bag', st.card.id || st.card.name, st.card.variantKey || '', st.uids?.[0] || st.card.name]))}">
+      <button type="button" class="bt-card pearl-store-card" data-act="${prefix}${take ? 'Take' : 'Put'}" data-name="${escAttr(st.card.name)}" ${take ? '' : `data-stack-index="${st.stackIndex}" data-stack-count="${st.count}"`} ${blocked ? 'disabled aria-disabled="true"' : ''}
         aria-label="${escAttr(`${st.card.name}，${st.count} 张，${action}${take ? '回背包' : title}${blocked ? `，${blocked}` : ''}`)}">
         <span class="pearl-store-art collection-art" aria-hidden="true">${cardHTML(st.card, 'sm')}</span>
         <span class="pearl-store-caption collection-label"><span>${action} · ${st.count} 张</span></span></button>
@@ -55,7 +55,9 @@ export function restoreContainerFocus(root, state, back) {
   if (focused.summary) { help?.querySelector('summary')?.focus({ preventScroll:true }); return; }
   const buttons = [...root.querySelectorAll('button[data-act]:not(:disabled)')];
   const sameAction = buttons.filter(button => button.dataset.act === focused.act);
-  (buttons.find(b => b.dataset.act === focused.act && b.dataset.name === focused.name)
+  (buttons.find(b => b.dataset.act === focused.act && b.dataset.name === focused.name
+      && (focused.stackIndex == null || b.dataset.stackIndex === focused.stackIndex)
+      && (focused.i == null || b.dataset.i === focused.i))
     || sameAction[Math.max(0, Math.min(focused.order ?? 0, sameAction.length - 1))]
     || buttons.find(b => b.dataset.act === back))?.focus({ preventScroll: true });
 }

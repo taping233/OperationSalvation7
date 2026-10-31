@@ -41,7 +41,8 @@ export function openClassChoice(options = {}) {
   });
   const onCancel = typeof options.onCancel === 'function' ? options.onCancel : null;
   const onSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
-  const confirmLabel = onSelect ? '下一步：选择卡牌' : '出发';
+  const recoveryCharacter = options.recoveringRun && !game.myClass && game.departureCharacterId ? characterFor(game.departureCharacterId) : null;
+  const confirmLabel = onSelect ? '下一步：选择卡牌' : recoveryCharacter ? '继续本次出征' : '出发';
   const beforeConfirm = typeof options.beforeConfirm === 'function' ? options.beforeConfirm : null;
   preloadAllNodeShellBgs();   // 只补首轮高频节点；其余场景在确认路线时按目标格预取
   // 玩家停留选角页时后台准备战斗域；不占标题首屏预算，又能让首场遭遇直接进入。
@@ -49,12 +50,12 @@ export function openClassChoice(options = {}) {
   if (globalThis.scheduler?.postTask) globalThis.scheduler.postTask(warmBattleRuntime, { priority: 'background' }).catch(() => {});
   else if (typeof requestIdleCallback === 'function') requestIdleCallback(warmBattleRuntime, { timeout: 3000 });
   else setTimeout(warmBattleRuntime, 500);
-  const picks = CHARACTERS.map(c => c.rulesetId).filter(cl => SDT.Cards.classPool(cl).length);
+  const picks = (recoveryCharacter ? [recoveryCharacter] : CHARACTERS).map(c => c.rulesetId).filter(cl => SDT.Cards.classPool(cl).length);
   if (!picks.length) return false;
   game.state = 'modal';
   // 只把合法的已有角色作为初始选择；没有旧选择时同步选中第一名角色，
   // 避免舞台已经显示角色但提交值仍为空（预览与实际状态分离的误导）。
-  const previous = characterFor(options.initialCharacter || game.characterId || game.myClass);
+  const previous = recoveryCharacter || characterFor(options.initialCharacter || game.characterId || game.myClass);
   let sel = previous && picks.includes(previous.rulesetId) ? previous.rulesetId : picks[0];
   let confirmationStarted = false;
   let confirmationPending = false;
@@ -500,6 +501,7 @@ export function openClassChoice(options = {}) {
         const bonus = lv > 1 ? (lv - 1) * 1 : 0;
         game.myClass = cl;
         game.characterId = characterFor(cl).id;
+        game.departureCharacterId = null;
         game.classCard = null;
         game.maxHp += bonus; game.hp += bonus;
         game.entrySupply = supply;

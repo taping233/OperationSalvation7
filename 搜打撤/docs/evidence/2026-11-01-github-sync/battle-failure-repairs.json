@@ -1,0 +1,318 @@
+{
+  "status": "frozen; targeted passed; parent final full gate remains required",
+  "createdAt": "2026-11-01T06:02:53.3729585+08:00",
+  "baseline": "docs/evidence/2026-11-01-github-sync/failure-summary.json; original staged failed snapshot sdt-staged-oJGUKC",
+  "verification": {
+    "scope": "own isolated failed-snapshot copy; no Unity/Player/shared Vite run; no staging/commit/push",
+    "files": 30,
+    "passed": 421,
+    "failed": 0,
+    "pending": 0,
+    "exitCode": 0,
+    "report": "SoudacheUnity/_planning/github-sync-1101/battle-domain-final.json",
+    "reportSha256": "d162721608bdbde6ca504a6f04f0b11f1ffc205447ecdfe17734d9ad564667a8",
+    "runtimeTypes": "jsconfig.runtime.json exit 0 in same private copy after both production changes",
+    "snapshotMatchesAllListedMainFiles": true
+  },
+  "productionRepairs": [
+    {
+      "path": "搜打撤/game/src/battle/core/battle.setup-mechanics.domain.js",
+      "condition": "hand-arrival combination check with incomplete sword ingredients",
+      "change": "Check complete distinct material UIDs before a call-local result template lookup; reuse that template only within this invocation.",
+      "preserved": "Existing random fill catalog budget <=6; no random reads added; two complete pairs settle all UID/consumed/grave/draw/animation entries once and create independent copies.",
+      "native": "Read-only: StructuredRules.CheckRuleCombinations already checks ingredients before FindById; no native change."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "condition": "Description already contains the rule cause while command CARD_UNPLAYABLE message adds the current card-name prefix",
+      "change": "Strip only the current fixed card-name prefix for reading-text duplicate comparison.",
+      "preserved": "Full command reason, dataset reason, aria label, rejection, stable face and controls; no asset path/construction changes."
+    }
+  ],
+  "fixtureRepairs": [
+    "Use current command facade availability and render-context slot; preserve cache/freshness budgets and real rejection messages.",
+    "Construct reviewed/custom card fixtures before session publication; do not mutate a cached immutable hand projection in place.",
+    "Pure hand-selection equipment marks used only from its completion callback; harness supplies real eligible input.",
+    "Permanent battle-item source stays in ownedCards until host settlement; temporary source stays granted. Active commit asserts one source, no hand UID, and one played ledger UID.",
+    "After finish, inspect the actual onBattleEnd callback ledger before/after runtime release. spentCards carries only temporary granted templates. Constructed hosts record callbacks without pretending to persist ownership.",
+    "Wait for automatic-cast rendezvous while pumping the real fixture RAF; keep damage, no energy charge and one source per UID assertions. Named release uses the current structured release operation and effective card name.",
+    "Image-only draw feedback asserts real connected atlas output and replay deduplication instead of retired reveal/text DOM.",
+    "Keep actual modal inert semantics, observer ownership lifecycle, canonical onDraw identities, and authoritative runtime energy."
+  ],
+  "changedFileCount": 32,
+  "changedTests": 29,
+  "changedFiles": [
+    {
+      "path": "搜打撤/tests/battle-discover-result-source.test.js",
+      "bytes": 5996,
+      "sha256": "eb326fe895a500bf731ffe8782bec679368812c825cee1678badb36f5015dabd",
+      "lfSha256": "eb326fe895a500bf731ffe8782bec679368812c825cee1678badb36f5015dabd",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-discover-retained-feedback.test.js",
+      "bytes": 2112,
+      "sha256": "167a4ca7e91ea7de9a4459ab5c07597418860c5a050094af557691d5581d17ad",
+      "lfSha256": "167a4ca7e91ea7de9a4459ab5c07597418860c5a050094af557691d5581d17ad",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-engine-facade.test.js",
+      "bytes": 2835,
+      "sha256": "5166557bc54938a7ba7e4b8029d2b8924631c5610536912006a6b133275567e5",
+      "lfSha256": "ca99051f9e3a2e93d6593fd2846d58146379418bc70f41ff9a9ae66b143300a3",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-equipment-skill-synthesis.test.js",
+      "bytes": 11743,
+      "sha256": "c340dc5dadd9286548db0e6ac40da28e35f8b8c6a35157bf75497c1e18502629",
+      "lfSha256": "c340dc5dadd9286548db0e6ac40da28e35f8b8c6a35157bf75497c1e18502629",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-content-diff.test.js",
+      "bytes": 9726,
+      "sha256": "b9755ac1eb5cdb50208fb01f07ac6eba7d85b7bd087e6fdf222431f8182df0b6",
+      "lfSha256": "b9755ac1eb5cdb50208fb01f07ac6eba7d85b7bd087e6fdf222431f8182df0b6",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-inspector.test.js",
+      "bytes": 78660,
+      "sha256": "1081b9ad88428d817e6dd8a03f8f469aeb5c2b01ee1377ab78781e90bd471b31",
+      "lfSha256": "1081b9ad88428d817e6dd8a03f8f469aeb5c2b01ee1377ab78781e90bd471b31",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-rule-context.test.js",
+      "bytes": 9871,
+      "sha256": "b80b9e370e023987f3a15f334d392c0270bd25f6be265e0b7cb582f7d86d861d",
+      "lfSha256": "b80b9e370e023987f3a15f334d392c0270bd25f6be265e0b7cb582f7d86d861d",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-hud-info.test.js",
+      "bytes": 6398,
+      "sha256": "b9ffc89241850dc0c473a5d78995577a91e4c144d8abb528f9cf7753933d2e35",
+      "lfSha256": "b9ffc89241850dc0c473a5d78995577a91e4c144d8abb528f9cf7753933d2e35",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-pile-timers.test.js",
+      "bytes": 2240,
+      "sha256": "9c06f4a302b98d20cc1159c44cfbffc8804ec669e57b068ab1672c42a49c281c",
+      "lfSha256": "9c06f4a302b98d20cc1159c44cfbffc8804ec669e57b068ab1672c42a49c281c",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-pouch-entry.test.js",
+      "bytes": 4926,
+      "sha256": "3d4e8f13aa3f02a20d536a438c081d76d7bc343aca8857712d49b0d90de50432",
+      "lfSha256": "3d4e8f13aa3f02a20d536a438c081d76d7bc343aca8857712d49b0d90de50432",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-render-derivation.test.js",
+      "bytes": 7080,
+      "sha256": "859c9904a787bef38cc74cd055cea24592985399bffaeeefa516ce1b6bbe6383",
+      "lfSha256": "859c9904a787bef38cc74cd055cea24592985399bffaeeefa516ce1b6bbe6383",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/battle-runtime-completion-1014.test.js",
+      "bytes": 12359,
+      "sha256": "f00cd68bbc36431b29a5fc82ca238ce3c1a8c9a303f07e0a8f9409f117dcdfbc",
+      "lfSha256": "f00cd68bbc36431b29a5fc82ca238ce3c1a8c9a303f07e0a8f9409f117dcdfbc",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/card-description-fix-auxiliary.test.js",
+      "bytes": 6374,
+      "sha256": "b5ab95e017596f8285e17842134d37faccbd2e304ff578b81362e6b0b797efe0",
+      "lfSha256": "87927dc4e681ee178e92ccd9e77399624cdd41168de1f5d1d7566b74bc95c8ab",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/e8-card-migration.test.js",
+      "bytes": 23229,
+      "sha256": "093b2c12fb1cb20b2c4f55cdcdb8e37b55f34b51da8593f11637b8d66ca6602f",
+      "lfSha256": "093b2c12fb1cb20b2c4f55cdcdb8e37b55f34b51da8593f11637b8d66ca6602f",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/energy-crystal-restoration.test.js",
+      "bytes": 7888,
+      "sha256": "9539b6893f1aaa3b5e2df209894fdf7c718015a606e92f428a36eaae1767fd7f",
+      "lfSha256": "9539b6893f1aaa3b5e2df209894fdf7c718015a606e92f428a36eaae1767fd7f",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/framework-battle-decomposition.test.js",
+      "bytes": 6001,
+      "sha256": "458e103157a96f87fc126c68413f9d4ba02d0f5101f06e6f1ce7b92520830101",
+      "lfSha256": "458e103157a96f87fc126c68413f9d4ba02d0f5101f06e6f1ce7b92520830101",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/full-review-regressions-battle.test.js",
+      "bytes": 10853,
+      "sha256": "01effae3d8c95b79e8c1273af44661afdd4579878d14fdc73223cd6ec2626500",
+      "lfSha256": "9c7ef6af7a15e777134515668e410816736b478be3279409c688e9c43b824e3a",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/m3-contract.test.js",
+      "bytes": 22728,
+      "sha256": "1ebdd3357f4b9748cb0a72e01d6ff5246565e3306a0d39b8fa71d10790c335b4",
+      "lfSha256": "1ebdd3357f4b9748cb0a72e01d6ff5246565e3306a0d39b8fa71d10790c335b4",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/mystery-potion-observation.test.js",
+      "bytes": 10900,
+      "sha256": "55e4bd752caaf2af5be803ce0cc11fd68b80a66d90e701ee491a3501c18bad01",
+      "lfSha256": "96c78fd33a3ede0fec8e9ffa76e889d4554d6e914f7f847bf409dcb3dc19f93c",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/page-perf-battle.test.js",
+      "bytes": 14450,
+      "sha256": "6655984e1753ce7c883034570d009512c090ccf4a2cf97136db525509d6e4bda",
+      "lfSha256": "6655984e1753ce7c883034570d009512c090ccf4a2cf97136db525509d6e4bda",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/potion-tip.test.js",
+      "bytes": 8111,
+      "sha256": "54cb9a9c7b51f0f2aa825ab0b0ce29a9c482c1d6f212efef296f376a9470376f",
+      "lfSha256": "54cb9a9c7b51f0f2aa825ab0b0ce29a9c482c1d6f212efef296f376a9470376f",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/project-bug-sweep-round2-battle-1024.test.js",
+      "bytes": 12114,
+      "sha256": "a43f4d275abc8eca69484ecd88c62e355065cd97784f4890b10494cbc012e4b7",
+      "lfSha256": "a43f4d275abc8eca69484ecd88c62e355065cd97784f4890b10494cbc012e4b7",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/project-bugfix-battle-1023.test.js",
+      "bytes": 10208,
+      "sha256": "b4e7234c3cd8f446f487fd9c3d122c36d315b1296448b57896c73f1e1160b9af",
+      "lfSha256": "b4e7234c3cd8f446f487fd9c3d122c36d315b1296448b57896c73f1e1160b9af",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/restoration-potion-observation.test.js",
+      "bytes": 8296,
+      "sha256": "7ecdcb4509946ea7819030a8d70d34dee7da9890626150499a6f04d7e83e988f",
+      "lfSha256": "7ecdcb4509946ea7819030a8d70d34dee7da9890626150499a6f04d7e83e988f",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/skull-sword-effective-session.test.js",
+      "bytes": 32017,
+      "sha256": "bcd4b85024fb69a0a9376efd6f47831c12fb9fa44ce41ba835d83673cd83e7bd",
+      "lfSha256": "bcd4b85024fb69a0a9376efd6f47831c12fb9fa44ce41ba835d83673cd83e7bd",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/sts2-consumed-items.test.js",
+      "bytes": 10279,
+      "sha256": "d99d5292655cf48a039c69a9a75b5d8830d46a38bd5373086156facffab5c793",
+      "lfSha256": "d99d5292655cf48a039c69a9a75b5d8830d46a38bd5373086156facffab5c793",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/sts2-consumed-pile.test.js",
+      "bytes": 7276,
+      "sha256": "5bf7d95271f722da33f79d6d5e7ca737cf0cef94f76c53135ac3f2c04aee5235",
+      "lfSha256": "5bf7d95271f722da33f79d6d5e7ca737cf0cef94f76c53135ac3f2c04aee5235",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/wf-feedback1021-b-potion-chain.test.js",
+      "bytes": 6236,
+      "sha256": "1e29fc119af11cc24a60a53bf3ec1265835057e2c358d3b4d1dced2181dcdd0f",
+      "lfSha256": "1e29fc119af11cc24a60a53bf3ec1265835057e2c358d3b4d1dced2181dcdd0f",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/wf-feedback1021-b-potion-targeting.test.js",
+      "bytes": 9067,
+      "sha256": "cd357e69a6ec9b5c3b727a58c5e3cf68ffdf9398028c864f8216654eebb8b0ff",
+      "lfSha256": "cd357e69a6ec9b5c3b727a58c5e3cf68ffdf9398028c864f8216654eebb8b0ff",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "targeted regression"
+    },
+    {
+      "path": "搜打撤/tests/helpers/battle-item-assertions.js",
+      "bytes": 678,
+      "sha256": "a8c533089ec72dcebbada7cd18d9b0d89ff0706679ea37a03d043b9810a91445",
+      "lfSha256": "a8c533089ec72dcebbada7cd18d9b0d89ff0706679ea37a03d043b9810a91445",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "shared active-battle UID assertions"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.setup-mechanics.domain.js",
+      "bytes": 10345,
+      "sha256": "aaa7cea6a4d3e445ad49076afb1e2ee9924b53569ad8a70861481ef9c42d4358",
+      "lfSha256": "7ba6fa0bb6541cb072448f1fb000b56b93ab4919d96bdf2a1e8801524f3a25ce",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "production"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "bytes": 66013,
+      "sha256": "fa65b3f0ef46e6d3488c92f573570ad18f637b852c7f36e26f628b8c07f5e509",
+      "lfSha256": "3239cb11754b4569364c2422014bcb5e378663614edaf51534aa2466b86fc7a3",
+      "modifiedFromFailedSnapshot": true,
+      "purpose": "production"
+    }
+  ],
+  "testedUnchangedFiles": [
+    {
+      "path": "搜打撤/tests/battle-temp-item-destination.test.js",
+      "bytes": 7212,
+      "sha256": "a802e669bc1f9a57acde7480c8af1bcb2e63ca238f1170721d93aa677eb872c5",
+      "lfSha256": "a802e669bc1f9a57acde7480c8af1bcb2e63ca238f1170721d93aa677eb872c5",
+      "modifiedFromFailedSnapshot": false,
+      "purpose": "targeted regression"
+    }
+  ],
+  "fixtureDependency": {
+    "path": "搜打撤/tests/helpers/environment-fixtures.js",
+    "owner": "run_parity",
+    "sha256": "fad87085d7f78702e76c348f3f7c9010ceaa12390193432c987ba2b58a26bd27"
+  },
+  "remaining": "Parent performs final staged full gate and final native/Standalone rebuild for other already-frozen source changes."
+}

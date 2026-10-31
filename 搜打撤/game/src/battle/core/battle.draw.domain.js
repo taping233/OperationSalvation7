@@ -1,7 +1,14 @@
 import { isStarterAttackPoolMember } from '../../cards/card-legacy-battle-policy.js';
+import { retainsDrawnSwordInHand } from '../../cards/card-hand-combinations.js';
 import { isQueuedCastSource } from './battle.card-presentation.js';
 import { directTriggerSource } from '../effects/battle.trigger-source.js';
 import { esc } from '../../core/shared.js';
+
+/** Shared eligibility for a hand card released by its name key. */
+export function matchesHandReleaseCard(card, key) {
+  const re = key === '杀' ? /^(杀|初始攻击)$/ : new RegExp(key);
+  return !!card && card.type !== '生物' && re.test(card.name || '');
+}
 
 /** Instance-owned state and host services are captured explicitly. */
 export function createDrawDomain(context) {
@@ -19,13 +26,83 @@ const cardCatalog = context.cards;
 /**
  * @param {import('./battle.core-ports.types.js').DrawPorts} ports engine 装配端口。resolveCard/applyTextEffects/triggersM2 在引擎中
  *   为晚定义常量，以惰性包装传入；其余为引擎既有一等件。
- * @returns {{ drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType }}
+ * @returns {{ drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType, resumeAutomaticCasts, hasPendingAutomaticCasts }}
  */
 function createBattleDraw({
   R, alive, findCard, findEffectiveCard, sweepDead,
   applyTextEffects, resolveCard, fireDrawn, fireAcquire,
-  checkSealTransformation, queueCardExecution, requestBattleRender,
+  checkSealTransformation, checkHandCombinations, queueCardExecution, requestBattleRender,
+  session = null, settlePendingSelections = null,
 }) {
+  // Keep physical arrivals, not fresh hand snapshots: a child cast may draw or consume cards.
+  // One submitted card owns its whole selection chain before the next UID is attempted.
+  const automaticCastBatches = [];
+  let advancingAutomaticCasts = false;
+  const batchCurrent = batch => instanceRuntime.G?.battleActive &&
+    instanceRuntime.battleState.token === batch.token && (session?.generation || 0) === batch.generation;
+  function hasPendingAutomaticCasts() {
+    for (let i = automaticCastBatches.length - 1; i >= 0; i--) {
+      if (!batchCurrent(automaticCastBatches[i])) automaticCastBatches.splice(i, 1);
+    }
+    return automaticCastBatches.length > 0;
+  }
+  function automaticCastsReady() {
+    return !session?.actionQueue?.running && !session?.actionQueue?.length && !session?.stagedResolutionDepth &&
+      !instanceRuntime.infusing && !instanceRuntime.handSelecting && !instanceRuntime.choosing &&
+      !instanceRuntime.discovering && !instanceRuntime.interaction && !instanceRuntime.discoverQueue.length &&
+      !session?.handSelectQueue?.length && !session?.choiceQueue?.length;
+  }
+  function resumeAutomaticCasts() {
+    if (advancingAutomaticCasts || !hasPendingAutomaticCasts() || !automaticCastsReady()) return;
+    advancingAutomaticCasts = true;
+    try {
+      while (automaticCastBatches.length && automaticCastsReady()) {
+        const batch = automaticCastBatches[0];
+        if (!batchCurrent(batch)) { automaticCastBatches.shift(); continue; }
+        if (batch.inFlight) return;
+        if (batch.drawPending) {
+          const draw = batch.drawPending;
+          batch.drawPending = 0;
+          drawCards(draw);
+          requestBattleRender();
+          if (!automaticCastsReady()) return;
+        }
+        if (!batch.uids.length || (batch.max && batch.played >= batch.max)) { automaticCastBatches.shift(); continue; }
+        const uid = batch.uids.shift();
+        const entry = findEffectiveCard?.(uid) || findCard(uid);
+        if (!instanceRuntime.hand.includes(uid) || !entry || !batch.matches(entry.card)) continue;
+        batch.inFlight = true;
+        const queued = queueCardExecution(uid, entry.card, [], alive()[0] || null, true, false, [], () => {
+          if (!batchCurrent(batch)) return;
+          batch.played++;
+          batch.drawPending += batch.drawEach || 0;
+        }, null, true);
+        if (queued === false) { batch.inFlight = false; continue; }
+        // onIdle runs before the returned action promise finishes. Keep ownership until
+        // that promise settles, including selections created asynchronously by the cast.
+        const complete = () => {
+          if (!batchCurrent(batch)) return;
+          batch.inFlight = false;
+          if (settlePendingSelections) settlePendingSelections();
+          else resumeAutomaticCasts();
+        };
+        void Promise.resolve(queued).then(complete, complete);
+        return;
+      }
+    } finally { advancingAutomaticCasts = false; }
+  }
+  function scheduleAutomaticCasts(uids, matches, drawEach = 0, max = 0) {
+    if (!instanceRuntime.G?.battleActive || !alive().length) return 0;
+    const candidates = [...new Set(uids)].filter(uid => {
+      const entry = findEffectiveCard?.(uid) || findCard(uid);
+      return instanceRuntime.hand.includes(uid) && entry && matches(entry.card);
+    });
+    if (!candidates.length) return 0;
+    automaticCastBatches.push({ token: instanceRuntime.battleState.token, generation: session?.generation || 0,
+      uids: candidates, matches, drawEach, max, played: 0, drawPending: 0, inFlight: false });
+    resumeAutomaticCasts();
+    return max ? Math.min(max, candidates.length) : candidates.length;
+  }
   function withinDrawBatch(action) {
     const prior = instanceRuntime.lastDrawnUids;
     const token = instanceRuntime.battleState.token;
@@ -46,14 +123,12 @@ function createBattleDraw({
     try { fireAcquire(card, alive()[0] || null); }
     finally { acquiring.delete(key); }
   }
-function castDrawnCopy(uid, card) {
+function castDrawnCopy(uid, card, arriveInHand) {
     const queued = queueCardExecution(uid, card, [], alive()[0] || null, true);
     if (queued === false) {
       // 免费不等于免注能；失败保留实体供补足条件，不制造一次性免注能。
       // 反馈#5b 边界：「抽到时施放」不是「直接释放/直接施放」词条，不适用直释视为已注能口径。
-      if (!instanceRuntime.hand.includes(uid)) instanceRuntime.hand.push(uid);
-      instanceRuntime.lastDrawnUids.push(uid);
-      instanceRuntime.cardAnims.push({ kind: 'draw', uid, name: card.name });
+      arriveInHand(uid, card);
       instanceRuntime.G.log(`[[icon:cards]] 【${esc(card.name)}】尚未满足施放条件，保留在手牌中`, 'warn');
     } else {
       instanceRuntime.G.log(`[[icon:flask]] <b>抽到时施放</b>：【${esc(card.name)}】免费排队施放`, 'sys');
@@ -64,6 +139,15 @@ function drawCards(n, type = null) {
     const token = instanceRuntime.battleState.token;
     let got = 0;
     let drawnToHand = 0;   // 真正入手张数（抽到即施放/灰烬符文直接释放的不占手牌，不计入）
+    const stillCurrent = () => instanceRuntime.G?.battleActive && instanceRuntime.battleState.token === token;
+    const checkArrivals = () => { if (stillCurrent()) checkHandCombinations?.(); };
+    const arriveInHand = (uid, card) => {
+      if (!instanceRuntime.hand.includes(uid)) instanceRuntime.hand.push(uid);
+      instanceRuntime.lastDrawnUids.push(uid);
+      instanceRuntime.cardAnims.push({ kind: 'draw', uid, name: card?.name || '' });
+      drawnToHand++;
+      checkArrivals();
+    };
     instanceRuntime.set$lastDrawnUids([]);
     while (n-- > 0) {
       if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token) break;
@@ -92,7 +176,7 @@ function drawCards(n, type = null) {
       // 星辰占卜副本走正式出牌队列；不占手牌，也不受手牌上限阻挡。
       // 队列负责移动到已出/弃牌区并处理嵌套发现，不能在此提前弃置导致连抽回收同一张。
       if (entry?.card?._castOnDraw) {
-        if (!castDrawnCopy(uid, entry.card)) drawnToHand++;
+        if (!castDrawnCopy(uid, entry.card, arriveInHand)) checkArrivals();
         got++;
         if (instanceRuntime.handSelecting) break; // 先完成本次支付选择，避免后续副本覆盖它。
         continue;
@@ -118,20 +202,26 @@ function drawCards(n, type = null) {
         instanceRuntime.drawPile.splice(sourceIndex, 0, uid);
         break;
       }
-      // M2：结构化「抽到时」触发（rules.triggers.onDraw）——与文本抽到即施放同门：直接结算，不占手牌
+      // 双剑先入手再触发原抽到效果；组合只检查已到手实体，不重放抽到效果。
+      const retainsInHand = retainsDrawnSwordInHand(entry?.card);
+      // 其余结构化「抽到时」触发沿用直接结算、不占手牌的口径。
       if (drawTrigger?.kind === 'structured' && drawTrigger.ops?.length) {
-        instanceRuntime.discard.push(uid);
+        if (retainsInHand) arriveInHand(uid, entry.card);
+        else instanceRuntime.discard.push(uid);
         instanceRuntime.G.log(`[[icon:flask]] <b>抽到时</b>：【${esc(entry.card.name)}】触发效果`, 'sys');
         withinDrawBatch(() => fireDrawn(entry.card, alive()[0] || null));
         got++;
         if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token) break;
+        checkArrivals();
+        if (!stillCurrent()) break;
         sweepDead();
         if (!alive().length) break;
         continue;
       }
-      // 「抽到时施放」衍生牌（禁咒/天启剑系）：抽到即结算，不占手牌
+      // 旧文本双剑同样先入手；其余「抽到时施放」衍生牌仍直接结算。
       if (drawTrigger?.texts.length) {
-        instanceRuntime.discard.push(uid);
+        if (retainsInHand) arriveInHand(uid, entry.card);
+        else instanceRuntime.discard.push(uid);
         for (const text of drawTrigger.texts) {
           if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token || instanceRuntime.G.hp <= 0 || !alive().length) break;
           instanceRuntime.G.log(`[[icon:flask]] <b>抽到时施放</b>：【${esc(entry.card.name)}】${esc(text)}`, 'sys');
@@ -139,24 +229,27 @@ function drawCards(n, type = null) {
         }
         got++;
         if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token) break;
+        checkArrivals();
+        if (!stillCurrent()) break;
         sweepDead();
         if (!alive().length) break;
         continue;
       }
       // 灰烬直释已并入上方手牌满判定（阈值与上限门同源）——此处仅剩正常入手
-      instanceRuntime.hand.push(uid);
-      instanceRuntime.lastDrawnUids.push(uid);
-      instanceRuntime.cardAnims.push({ kind: 'draw', uid, name: entry ? entry.card.name : '' });
+      arriveInHand(uid, entry?.card);
       got++;
-      drawnToHand++;
+      checkArrivals();
     }
     if (!instanceRuntime.G?.battleActive || instanceRuntime.battleState.token !== token) return got;
     // 抽牌反馈音（P1#5）：一批抽牌只播一声，连抽不叠音
     if (drawnToHand > 0 && hostAudio) hostAudio.sfx('draw');
+    checkArrivals();
+    if (!stillCurrent()) return got;
     checkSealTransformation();   // 受缚之残影：每批抽牌后检查手牌是否集齐 5 张封印之牌
     return got;
   }
 function addTempCard(tpl, presentation = null) {
+    const token = instanceRuntime.battleState.token;
     const uid = 'bts' + Date.now().toString(36) + instanceRuntime.nextTmpSeq();
     instanceRuntime.granted.push({ uid, card: { ...tpl } });
     // 临时道具由快捷栏读取；直接施放沿既有队列占位与表现来源，不另给一份可用道具。
@@ -169,6 +262,7 @@ function addTempCard(tpl, presentation = null) {
     if (entersHand) instanceRuntime.lastDrawnUids.push(uid);
     // 获取栈只约束本次事件，不能把临时保护写入实体卡，阻断之后的正常获取。
     fireCardAcquire(tpl);
+    if (instanceRuntime.G?.battleActive && instanceRuntime.battleState.token === token) checkHandCombinations?.();
     return uid;
   }
 function addDeckCard(tpl) {
@@ -195,33 +289,13 @@ function deckDraw({ n, type }) {
     return moved;
   }
 function releaseHandMatches(key, drawEach, max) {
-    const re = key === '杀' ? /^(杀|初始攻击)$/ : new RegExp(key);
-    let released = 0;
-    for (const uid of instanceRuntime.hand.slice()) {
-      if (!alive().length) break;
-      if (max && released >= max) break;
-      const o = findCard(uid);
-      if (!o || o.card.type === '生物' || !re.test(o.card.name || '')) continue;
-      // 反馈#5b：「直接释放」词条（连弩/逆弓）——注能卡视为已注能释放
-      const queued = queueCardExecution(uid, o.card, [], alive()[0] || null, true, false, [],
-        drawEach ? () => { drawCards(drawEach); requestBattleRender(); } : null, null, true);
-      if (queued !== false) released++;
-    }
-    return released;
+    return scheduleAutomaticCasts(instanceRuntime.hand.slice(), card => matchesHandReleaseCard(card, key), drawEach, max);
   }
 function autoPlayHandType(type) {
-    let played = 0;
-    for (const uid of instanceRuntime.lastDrawnUids.slice()) {
-      if (!alive().length) break;
-      if (!instanceRuntime.hand.includes(uid)) continue;
-      const o = findCard(uid);
-      if (!o || o.card.type !== type) continue;
-      // 反馈#5b：「直接释放」词条（万剑归宗）——注能卡视为已注能释放
-      if (queueCardExecution(uid, o.card, [], alive()[0] || null, true, false, [], null, null, true) !== false) played++;
-    }
-    return played;
+    return scheduleAutomaticCasts(instanceRuntime.lastDrawnUids.slice(), card => card.type === type);
   }
-  return { drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType };
+  return { drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType,
+    resumeAutomaticCasts, hasPendingAutomaticCasts };
 }
 return { createBattleDraw };
 }

@@ -11,7 +11,7 @@ import { MODES, game, newRun, requestClassChoice } from '../run/game.session.js'
 import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
 import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 slots（槽位数）遮蔽——实机 depBack 曾因此 TypeError
 import { bindDepartureFilters, updateDepartureView } from './departure.view-updates.js';
-import { departureSummary, previewRecommendedDeparture } from './departure.summary.js';
+import { departurePickAvailability, departurePickAvailabilities, departureSummary, previewRecommendedDeparture } from './departure.summary.js';
 import { baseHomeV3HTML } from './hub.home-v3.js';
 import { enterDepartureCut, enterDepartureStep, startDepartureHandoff } from '../ui/departure-transition.js';
 import { linkedBackHTML } from '../ui/home-linked-interactions.js';
@@ -52,6 +52,7 @@ function renderDepartureCard(card) {
   // 共享选择引用归纯状态模块；本页仍负责规范化和完整整备生命周期。
   let deployPickFresh = false;   // 整备入口刚注入过预设选择（随后打开整备页时保留）
   async function setDeployPick(v, { characterId = null, petId = null } = {}, isCurrent = () => true) {
+    if (deploymentCurrent(SDT.Base) && (deployRecovery || deploySubmitting)) return false;
     const character = characterId ? characterFor(characterId) : null;
     if (characterId && !character) return false;
     const base = SDT.Base, slot = base.slot, generation = departureGeneration, baseGeneration = base._selectionGeneration;
@@ -72,6 +73,7 @@ function renderDepartureCard(card) {
   let deploymentBase = null, deploymentBaseGeneration = null;
   const deploymentCurrent = base => deploymentBase === base && deploymentSlot === base.slot && deploymentBaseGeneration === base._selectionGeneration;
   let deploySubmitting = false;
+  let deployRecovery = null;
   let deployHint = '';      // 页内提示（容量不足等）
   let deployRecommendation = null, deployUndo = null;
   let deployFilters = { rarity: '', type: '', cost: '' }; // 筛选只属于本次整备，不写存档。
@@ -82,7 +84,7 @@ function renderDepartureCard(card) {
   function openDepartPrep({ chooseAgain = false, isCurrent:sourceCurrent = /** @type {() => boolean} */ (() => true) } = {}) {
     if (!sourceCurrent()) return false;
     if (departureEntry?.slot === SDT.Base.slot && departureEntry.current() && !departureEntry.picked) return departureEntry.promise;
-    if (!chooseAgain && deploymentCurrent(SDT.Base) && deployCharacter && deployStart && deployPick) {
+    if ((!chooseAgain || deployRecovery) && deploymentCurrent(SDT.Base) && deployCharacter && deployStart && deployPick) {
       deploySubmitting = false;
       deployJustOpened = true; renderDepartPrep();
       enterDepartureCut(document.getElementById('depMain'));
@@ -94,6 +96,7 @@ function renderDepartureCard(card) {
     if (!deploymentCurrent(base)) {
       deploymentSlot = slot; deploymentBase = base; deploymentBaseGeneration = baseGeneration;
       replaceDeployPick(null); deployCharacter = null; deployStart = null; deployPickFresh = false;
+      deployRecovery = null;
     }
     deploySubmitting = false;
     game.state = 'modal';
@@ -132,21 +135,29 @@ function renderDepartureCard(card) {
       beforeConfirm: async () => {
         const stage = document.getElementById('depMain');
         if (!current() || !deployStart || !stage || UI.el.overlay.hidden || UI.el.overlay.classList.contains('closing')) return false;
-        if (Object.entries(deployPick || {}).some(([key, count]) => count > 0 && (!findDepartureStack(SDT.Base.data.stash, key) || findDepartureStack(SDT.Base.data.stash, key).count < count))) {
+        if (!deployRecovery && Object.entries(deployPick || {}).some(([key, count]) => count > 0 && (!findDepartureStack(SDT.Base.data.stash, key) || findDepartureStack(SDT.Base.data.stash, key).count < count))) {
           deploySubmitting = false;
           deployHint = '[[icon:cross]] 仓库库存或卡堆身份已变化，请重新检查携带选择后出发。';
           deployJustOpened = true; renderDepartPrep();
           return false;
         }
-        if (!departurePreview().capacityOk) {
+        if (!deployRecovery && !departurePreview().capacityOk) {
           deploySubmitting = false;
           deployHint = '普通卡牌占用基础格，额外容量仅放资源。请移出超出容量的卡牌后出发。';
           renderDepartPrep();
           return false;
         }
-        const mode = SDT.Base.data.selMode;
+        const mode = deployRecovery?.mode || SDT.Base.data.selMode;
         const picks = { ...(deployPick || {}) };
+        const confirmedOptions = departureOptions();
         const started = await newRun(mode, picks, { skipClassChoice: true,
+          characterId: characterFor(deployCharacter)?.id || null,
+          onRecoveryRequired: snapshot => {
+            if (!current() || !stage.isConnected || document.getElementById('depMain') !== stage || UI.el.overlay.hidden || UI.el.overlay.classList.contains('closing')) return;
+            deployRecovery ||= { ...snapshot, stash: confirmedOptions.stash.map(stack => ({ ...stack, card:{ ...stack.card } })),
+              pet:confirmedOptions.pet, capacity:confirmedOptions.capacity };
+            replaceDeployPick({ ...deployRecovery.picks });
+          },
           isCurrent: () => current() && stage.isConnected && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'),
           isPublicationCurrent:current,
         });
@@ -156,13 +167,16 @@ function renderDepartureCard(card) {
           document.getElementById('depMain')?.classList.remove('dep-tearing');
           const button = document.querySelector('#depMain [data-act="confirmDeploy"]');
           if (button) /** @type {HTMLButtonElement} */ (button).disabled = false;
-          deployHint = '[[icon:cross]] 出征存档尚未完成，携带选择已保留；请重试或返回选档继续恢复。';
+          deployHint = deployRecovery
+            ? '[[icon:cross]] 本次出征已开始保存，原人物与携带已固定；请继续本次出征，或返回选档恢复。'
+            : '[[icon:cross]] 出征存档尚未完成，携带选择已保留；可调整后重试。';
           renderDepartPrep();
           return false;
         }
         const finishPublishedDeparture = async ownsPage => {
           if (!current() || !ownsPage()) return false;
           replaceDeployPick(null);
+          deployRecovery = null;
           deployStart = null;
           // 已发布远征的后续只处理教学和提示，人物确认沿原入口继续。
           const runCurrent = captureBattleContext(game);
@@ -213,65 +227,74 @@ function renderDepartureCard(card) {
     return entry.promise;
   }
 
-  function deployPickRowsHTML() {
-    const B = SDT.Base;
-    if (!B.data.stash.length) {
+  function deployPickRowsHTML(options, availabilityByKey) {
+    const stash = options.stash;
+    if (!stash.length) {
       return '<p class="ov-empty" style="margin:6px 0 0">仓库里还没有卡牌——撤离成功后在整理界面把战利品放回仓库，下次出征就能带上了。</p>';
     }
     // 2026-09-07 留言：不再自动塞进背包，全部由玩家从左往右拖；
     // 卡面上的「仓 ×N」实时显示剩余可带数量，拖一张少一张。
     // 需求 #6：职业卡带出后无法带入——不显示在可带列表里
-    return B.data.stash.filter(s => s.card.rarity !== '职业').map(s => {
+    return stash.filter(s => s.card.rarity !== '职业').map(s => {
       const key = departureStackKey(s);
       const n = deployPick[key] || 0;
       const left = Math.max(0, s.count - n);
-      return `<div class="dep-card${n > 0 ? ' picked' : ''}${left <= 0 ? ' drained' : ''}" draggable="true" role="button" tabindex="0" aria-pressed="${n > 0 ? 'true' : 'false'}"
+      const availability = availabilityByKey.get(key);
+      const description = availability.canAdd ? `还可带 ${left} 张` : `${availability.reason}；点击查看详情`;
+      return `<div class="dep-card${n > 0 ? ' picked' : ''}${left <= 0 ? ' drained' : ''}${availability.canAdd ? '' : ' unavailable'}"${availability.canAdd ? ' draggable="true"' : ''} data-can-add="${availability.canAdd}" role="button" tabindex="0" aria-pressed="${n > 0 ? 'true' : 'false'}"
           data-act="pickAdd" data-name="${escAttr(s.card.name)}" data-stack-key="${escAttr(key)}"
-          aria-label="带入${escAttr(s.card.name)}，还可带 ${left} 张"
-          title="${escAttr(s.card.name)} · 还可带 ${left}">
+          aria-label="${escAttr(s.card.name)}，${escAttr(description)}"
+          title="${escAttr(s.card.name)} · ${escAttr(description)}">
         <div class="dep-card-face">${renderDepartureCard(s.card)}</div>
         <div class="dep-quantity"><span>剩余 <b class="dep-own">${left}</b></span><span>已带 <b class="dep-picked-count">${n}</b></span></div>
       </div>`;
     }).join('') +
-      (B.data.stash.some(s => s.card.rarity === '职业')
+      (stash.some(s => s.card.rarity === '职业')
         ? '<p class="ov-empty" style="margin:4px 0 0">（职业卡不能带入对局——可在仓库归档培养或出售）</p>'
         : '');
   }
 
   function renderDepartPrep() {
     const B = SDT.Base;
-    const preview = departurePreview();
+    const options = departureOptions(), preview = departureSummary(options);
     const slots = preview.slots;
     const full = slots >= preview.capacity;
     game.state = 'modal';
     _set_cardPageOpen(true);
     const renderCell = cell => {
       if (!cell) return '<div class="bag-cell empty" aria-hidden="true"></div>';
-      const { card, count, fixed, stackKey } = cell;
-      return `<div class="bag-cell ${fixed ? 'fixed' : 'filled'}" ${fixed ? '' : 'draggable="true"'} role="button" tabindex="0" data-act="bagZoom" data-name="${escAttr(card.name)}"${stackKey ? ` data-stack-key="${escAttr(stackKey)}"` : ''}
-        aria-label="${escAttr(card.name)} ×${count}，${fixed ? '含固定初始牌' : '点击查看，拖回仓库移除'}" title="${escAttr(card.name)} ×${count}">
+      const { card, count, fixed, stackKey, fixedCount = 0, selectableCount = 0, sources = [] } = cell;
+      const removable = selectableCount > 0 && !deployRecovery, removeKey = sources[0]?.stackKey;
+      const description = `${fixedCount ? `含固定初始牌 ${fixedCount} 张；` : ''}${removable ? '点击查看，拖回仓库移除 1 张自选卡' : '点击查看详情'}`;
+      return `<div class="bag-cell ${fixed ? 'fixed' : 'filled'}"${removable ? ' draggable="true"' : ''} role="button" tabindex="0" data-act="bagZoom" data-name="${escAttr(card.name)}"${stackKey ? ` data-stack-key="${escAttr(stackKey)}"` : ''}${removeKey ? ` data-remove-key="${escAttr(removeKey)}"` : ''}
+        aria-label="${escAttr(card.name)} ×${count}，${escAttr(description)}" title="${escAttr(card.name)} ×${count} · ${escAttr(description)}">
         ${renderDepartureCard(card)}<b class="dep-n on">×${count}</b></div>`;
     };
-    // —— 宠物携带选择（需求 #4：出发界面增加选择宠物携带的功能）——
-    const petStrip = B.PETS.filter(p => B.ownedPets().includes(p.id)).map(p => {
-      const on = B.carriedPet() && B.carriedPet().id === p.id;
+    const capacityHtml = `[[icon:bag]] ${esc(preview.capacityText)}${!preview.capacityOk ? ' · 请调整超出容量的卡牌' : ''}`;
+    const selectedPet = options.pet;
+    const summaryHtml = `<b>${esc(MODES[deployRecovery?.mode || B.data.selMode]?.name || '标准模式')}</b> · ${esc(preview.starter.name)} ×${preview.starterCount} · 额外 ${preview.extraCount} 张<br>入城随机获得最多 2 张不同职业卡，实际占格届时计入<br>${selectedPet ? esc(selectedPet.desc) : '无宠物加成'}${B.safeCap ? ` · 安全格 ${B.safeCap()} 格` : ''}${preview.resourceBonus ? ` · 珍珠盒额外 ${preview.resourceBonus} 格仅放资源卡` : ''}`;
+    const availability = deployRecovery ? new Map(options.stash.map(stack => {
+      const key = departureStackKey(stack); return [key, pickAvailability(options, key)];
+    })) : departurePickAvailabilities(options);
+    const currentStage = document.getElementById('depMain');
+    if (!deployJustOpened && currentStage?.dataset.departureView === 'cover-v3'
+      && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing')) {
+      const updated = updateDepartureView(currentStage, {
+        stash: options.stash, picks: deployPick, cells:preview.cells, renderCell, renderCard:renderDepartureCard, availability, selectionLocked:!!deployRecovery,
+        slots, capacity: preview.capacity, capacityHtml, hint: deployHint,
+        summaryHtml, petId: selectedPet?.id || '', rich: html => SDT.Icons.rich(html),
+      });
+      if (updated !== false) { syncDepartureActions(currentStage, preview); return; }
+    }
+    // Pet markup is only needed when mounting a new page; retained views update selection in place.
+    const ownedPets = B.ownedPets(), carriedPet = B.carriedPet();
+    const petStrip = B.PETS.filter(p => ownedPets.includes(p.id)).map(p => {
+      const on = carriedPet?.id === p.id;
       return `<button class="pet-chip${on ? ' on' : ''}" data-act="depPet" data-id="${p.id}"
           title="${escAttr(p.desc)}">
         [[icon:${p.icon}]] <b>${esc(p.name)}</b><span class="pet-chip-lv">Lv.${B.petLevel(p.id)}</span>
       </button>`;
     }).join('');
-    const capacityHtml = `[[icon:bag]] 已装 <b>${slots}/${preview.capacity}</b> 格${preview.resourceBonus ? ` · 普通 ${preview.ordinarySlots}/${preview.baseCapacity} 格` : ''}${!preview.capacityOk ? ' · 请调整超出容量的卡牌' : full ? ' · 背包已满' : ` · 余 ${preview.capacity - slots} 格`}`;
-    const summaryHtml = `<b>${esc(MODES[B.data.selMode]?.name || '标准模式')}</b> · ${esc(preview.starter.name)} ×${preview.starterCount} · 额外 ${preview.extraCount} 张<br>入城随机获得最多 2 张不同职业卡，实际占格届时计入<br>${B.carriedPet() ? esc(B.carriedPet().desc) : '无宠物加成'}${B.safeCap ? ` · 安全格 ${B.safeCap()} 格` : ''}${preview.resourceBonus ? ` · 珍珠盒额外 ${preview.resourceBonus} 格仅放资源卡` : ''}`;
-    const currentStage = document.getElementById('depMain');
-    if (!deployJustOpened && currentStage?.dataset.departureView === 'cover-v3'
-      && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing')) {
-      const updated = updateDepartureView(currentStage, {
-        stash: B.data.stash, picks: deployPick, cells:preview.cells, renderCell, renderCard:renderDepartureCard,
-        slots, capacity: preview.capacity, capacityHtml, hint: deployHint,
-        summaryHtml, petId: B.carriedPet()?.id || '', rich: html => SDT.Icons.rich(html),
-      });
-      if (updated !== false) { syncDepartureActions(currentStage); return; }
-    }
     const bagCells = Array.from({ length:Math.max(preview.capacity, preview.cells.length) }, (_, i) => renderCell(preview.cells[i])).join('');
     UI.showOverlay('', `
       <div class="pg hub departure-cover departure-glass camp-detail camp-depart-detail ui-scale-system" id="depMain" data-departure-view="cover-v3">
@@ -291,7 +314,7 @@ function renderDepartureCard(card) {
               <span id="depFilterCount" aria-live="polite"></span>
               <button type="button" id="depFilterReset" aria-label="重置仓库筛选">重置</button>
             </div>
-            <div class="dep-cards" id="depPool">${deployPickRowsHTML()}<p class="dep-no-results" id="depNoResults" hidden>没有匹配的卡牌</p></div>
+            <div class="dep-cards" id="depPool">${deployPickRowsHTML(options, availability)}<p class="dep-no-results" id="depNoResults" hidden>没有匹配的卡牌</p></div>
           </section>
           <section class="hub-card dep-pack">
             <h3>本次携带</h3><p class="dep-summary" id="depSummary" aria-live="polite">${summaryHtml}</p>
@@ -308,10 +331,12 @@ function renderDepartureCard(card) {
         </footer>
       </div>`, 'page');
     const stage = document.getElementById('depMain'), slot = B.slot, generation = departureGeneration, baseGeneration = B._selectionGeneration;
-    syncDepartureActions(stage);
+    syncDepartureActions(stage, preview);
     const current = () => generation === departureGeneration && SDT.Base === B && B._selectionGeneration === baseGeneration && B.slot === slot && stage?.isConnected
       && document.getElementById('depMain') === stage && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
-    const act = (name, handler) => UI.act(name, data => { if (current()) return handler(data); });
+    const act = (name, handler) => UI.act(name, data => {
+      if (current() && (!deployRecovery || ['confirmDeploy', 'bagZoom', 'pickAdd'].includes(name))) return handler(data);
+    });
     const signature = recommendationSignature;
     act('depRecommendPreview', async () => {
       const before = signature();
@@ -349,7 +374,7 @@ function renderDepartureCard(card) {
       onFiltersChange: filters => { if (current()) deployFilters = filters; },
     });
     const addPick = (key) => {
-      if (!current()) return;
+      if (!current() || deployRecovery || deploySubmitting) return;
       const B2 = SDT.Base;
       const stack = findDepartureStack(B2.data.stash, key);
       if (!stack) return;
@@ -361,9 +386,9 @@ function renderDepartureCard(card) {
       }
       const cur = deployPick[key] || 0;
       if (cur >= stack.count) return;
-      const next = departureSummary({ ...departureOptions(), picks:{ ...deployPick, [key]:cur + 1 } });
-      if (!next.capacityOk) {
-        deployHint = `[[icon:bag]] ${stack.card.type === '资源' ? '资源可用格已满' : '普通背包格已满'}；先移出其他卡牌，或回基地扩建背包。`;
+      const availability = pickAvailability(departureOptions(), key);
+      if (!availability.canAdd) {
+        deployHint = esc(availability.reason);
         renderDepartPrep();
         return;
       }
@@ -372,7 +397,7 @@ function renderDepartureCard(card) {
       renderDepartPrep();
     };
     const subPick = (key) => {
-      if (!current()) return;
+      if (!current() || deployRecovery || deploySubmitting) return;
       const stack = findDepartureStack(SDT.Base.data.stash, key);
       key = stack ? departureStackKey(stack) : key;
       const cur = deployPick[key] || 0;
@@ -388,7 +413,15 @@ function renderDepartureCard(card) {
       deployHint = '';
       renderDepartPrep();
     };
-    act('pickAdd', (d) => addPick(d.stackKey || d.name));
+    act('pickAdd', d => {
+      const key = d.stackKey || d.name;
+      if (pickAvailability(departureOptions(), key).canAdd) return addPick(key);
+      const stack = findDepartureStack(departureOptions().stash, key);
+      const candidates = /** @type {NodeListOf<HTMLElement>} */ (stage.querySelectorAll('#depPool [data-act="pickAdd"]'));
+      const from = [...candidates].find(node => node.dataset === d) || [...candidates].find(node => node.dataset.stackKey === key);
+      if (stack && from) return UI.showCardZoom(stack.card, { footer:'', from, returnFocus:from });
+      return false;
+    });
     // 需求 #4：出发时携带的宠物（即时保存，出发后生效）
     let petSelecting = false;
     act('depPet', async (d) => {
@@ -426,7 +459,7 @@ function renderDepartureCard(card) {
         if (!zoomCurrent()) return [];
         const preview = departurePreview();
         const selected = Object.entries(deployPick || {}).flatMap(([key, count]) => {
-          const stack = findDepartureStack(B.data.stash, key);
+          const stack = findDepartureStack(departureOptions().stash, key);
           return Math.floor(Number(count) || 0) > 0 && stack?.count > 0 && stack.card.rarity !== '职业'
             ? [{ key:departureStackKey(stack), card:stack.card }] : [];
         });
@@ -504,8 +537,8 @@ function renderDepartureCard(card) {
       bag.addEventListener('keydown', activateOnKey);
       [pool, bag].forEach(el => el.addEventListener('dragstart', (e) => {
         const card = /** @type {Element} */ (e.target).closest && /** @type {Element} */ (e.target).closest('[data-name][draggable]');
-        if (!card) return;
-        e.dataTransfer.setData('text/plain', /** @type {HTMLElement} */ (card).dataset.stackKey || /** @type {HTMLElement} */ (card).dataset.name);
+        if (!card || !card.matches('[draggable="true"]') || deployRecovery || deploySubmitting) { e.preventDefault(); return; }
+        e.dataTransfer.setData('text/plain', /** @type {HTMLElement} */ (card).dataset.removeKey || /** @type {HTMLElement} */ (card).dataset.stackKey || /** @type {HTMLElement} */ (card).dataset.name);
         e.dataTransfer.effectAllowed = 'copyMove';
       }));
       // 09-25 二波美术：拖动卡池卡牌时，空背包格挂金框呼吸提示（.dep-target-hint），
@@ -532,7 +565,7 @@ function renderDepartureCard(card) {
       });
     }
     act('confirmDeploy', () => {
-      if (deploySubmitting || !deployStart || stage.dataset.petSaving === 'true' || !departurePreview().capacityOk) return false;
+      if (deploySubmitting || !deployStart || stage.dataset.petSaving === 'true' || (!deployRecovery && !departurePreview().capacityOk)) return false;
       deploySubmitting = true;
       const button = /** @type {HTMLButtonElement} */ (document.querySelector('#depMain [data-act="confirmDeploy"]'));
       if (button) button.disabled = true;
@@ -547,7 +580,8 @@ function renderDepartureCard(card) {
         if (!current() || deployStart !== startChoice) return;
         deploySubmitting = false;
         if (button?.isConnected) button.disabled = false;
-        deployHint = '[[icon:cross]] 出发未完成，携带选择已保留；请返回更换人物后重试。';
+        deployHint = deployRecovery ? '[[icon:cross]] 原人物与携带已固定，请继续本次出征。'
+          : '[[icon:cross]] 出发未完成，携带选择已保留；请重试。';
         renderDepartPrep();
       };
       startDepartureHandoff(async () => current() && await startChoice() === true, stage)
@@ -563,10 +597,18 @@ function renderDepartureCard(card) {
     return JSON.stringify([SDT.Base.slot, SDT.Base.data.selMode, SDT.Base.carriedPet()?.id, SDT.Base.bagCap(), departurePreview().starterCount,
       SDT.Base.data.stash.map(stack => [departureStackKey(stack), stack.count, stack.card.name, stack.card.rarity]), deployPick]);
   }
-  function syncDepartureActions(root) {
+  function syncDepartureActions(root, preview = null) {
     if (!root) return;
     const confirm = root.querySelector('[data-act="confirmDeploy"]');
-    if (confirm) confirm.disabled = deploySubmitting || root.dataset.petSaving === 'true' || !departurePreview().capacityOk;
+    if (confirm) {
+      confirm.disabled = deploySubmitting || root.dataset.petSaving === 'true' || (!deployRecovery && !(preview || departurePreview()).capacityOk);
+      const label = deployRecovery ? '继续本次出征' : '出发';
+      if (confirm.textContent.trim().replace(/\s*→$/, '') !== label) confirm.innerHTML = `${label} <span aria-hidden="true">→</span>`;
+    }
+    root.querySelectorAll('[data-act="depBack"], [data-act="depMode"], [data-act="depPet"]').forEach(button => {
+      /** @type {HTMLButtonElement} */ (button).disabled = !!deployRecovery;
+    });
+    if (deployRecovery) root.querySelectorAll('[draggable]').forEach(node => node.removeAttribute('draggable'));
     let buttons = recommendationViews.get(root);
     if (!buttons || [buttons.apply, buttons.undo].some(node => node && !root.contains(node))) {
       const panel = root.getElementsByClassName('dep-recommend')[0];
@@ -584,11 +626,15 @@ function renderDepartureCard(card) {
   function departurePreview() {
     return departureSummary(departureOptions());
   }
+  function pickAvailability(options, key) {
+    return deployRecovery ? { canAdd:false, reason:'本次出征已开始保存，原携带已固定' }
+      : departurePickAvailability(options, key);
+  }
   function departureOptions() {
     const B = SDT.Base;
     return { starterCount: MAP.rules.starterSha, starterCard: SDT.Cards.SHA,
-      fireball: SDT.Cards.all?.().find(card => card.id === 'tt3-fireball'), pet: B.carriedPet(),
-      stash: B.data.stash, picks: deployPick, capacity: B.bagCap(),
+      fireball: SDT.Cards.all?.().find(card => card.id === 'tt3-fireball'), pet: deployRecovery ? deployRecovery.pet : B.carriedPet(),
+      stash: deployRecovery?.stash || B.data.stash, picks: deployPick, capacity: deployRecovery?.capacity ?? B.bagCap(),
       stackCapOf: game.stackCapOf || stackCapOf };
   }
   // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗区 + 物资 ——

@@ -85,6 +85,7 @@ const { hasPendingEndTurn, deferEndTurn, awaitTriggeredActions } = createBattleT
   executionSession,
   readState: () => ({ G: instanceRuntime.G, battleState: instanceRuntime.battleState, infusing: instanceRuntime.infusing, handSelecting: instanceRuntime.handSelecting, choosing: instanceRuntime.choosing, discovering: instanceRuntime.discovering, interaction: instanceRuntime.interaction, discoverQueue: instanceRuntime.discoverQueue }),
   settlePendingSelections, set$battleState: instanceRuntime.set$battleState, set$busy: instanceRuntime.set$busy,
+  hasPendingAutomaticCasts: () => hasPendingAutomaticCasts(),
   requestBattleRender: () => requestBattleRender(),
 });
 
@@ -154,13 +155,16 @@ const { resolveFoeDefeat, sweepDead, nestPhase } = createBattleFoeLifecycle({
   hitFoe: (...args) => hitFoe(...args),
   onFoeDefeated: foe => awardSharedDefeatRewards([foe]),
 });
-const { drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType } = createBattleDraw({
+const { drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType,
+  resumeAutomaticCasts, hasPendingAutomaticCasts } = createBattleDraw({
   R, alive, findCard, findEffectiveCard, sweepDead,
   applyTextEffects: (...args) => applyTextEffects(...args),
   resolveCard: (...args) => resolveCard(...args),
   fireDrawn: (...args) => triggersM2.fireDrawn(...args),
   fireAcquire: (...args) => triggersM2.fireAcquire(...args),
   checkSealTransformation: (...args) => checkSealTransformation(...args), queueCardExecution, requestBattleRender,
+  checkHandCombinations: () => checkHandCombinations(),
+  session: executionSession, settlePendingSelections,
 });
 const equipmentSemantics = createEquipmentSemanticOperations({ runtime: instanceRuntime, combat: Combat,
   random: (purpose = 'generation') => Random.random('battle', purpose), alive, hitFoe, drawCards });
@@ -169,7 +173,7 @@ function intentFor(def, round) {
     return calculateEnemyIntent(def, round, instanceRuntime.pstat && instanceRuntime.pstat.status);
   }
 const shuffle = shuffleCards;
-const { injectSealCards, checkSealTransformation, applyNestRunes, applyVoidRune } = createSetupMechanics({
+const { injectSealCards, checkSealTransformation, checkHandCombinations, applyNestRunes, applyVoidRune } = createSetupMechanics({
   runtime: instanceRuntime, cards, combat: Combat, random: Random, evaluateRunes, esc, shuffle,
   findCard: (...args) => findCard(...args), addTempCard: (...args) => addTempCard(...args),
   sweepDead: (...args) => sweepDead(...args), choiceQueue, processChoice });
@@ -257,7 +261,7 @@ const { applyTextEffects, createResolution } = createBattleEffectAssembly({
 });
 const isAOE = isAreaEffect;
 const { getSnapshot, snapshotSignature } = createSnapshotProjection({ runtime: instanceRuntime, executionSession, interactionOf,
-  battleBagItems, itemUsability, getConsumedPile, R, isBattleStartEquip: card => equipment.isBattleStartEquip(card), equipCap, equipSkillText });
+  battleBagItems, itemUsability, getConsumedPile, R, isBattleStartEquip: card => equipment.isBattleStartEquip(card), equipCap, equipSkillText, getEquipSkillAvailability });
   // 瞄准会话的存活判定专用轻查询（09-30 性能审计 F1 最终形态）：完整快照的组装+签名
   // 每次要付全量遍历，而会话存活只依赖 token/phase 两个标量。同步链内变异必须即时
   // 重投影（battle-snapshot-integration 契约），快照缓存不能做链级复用——热路径改走这里。
@@ -274,7 +278,7 @@ const cardPlayFlow = createBattleCardPlay({
   queueCardExecution,
   executionAvailability: (...args) => execPlayFlow.getExecutionAvailability(...args),
   submitExecution: (...args) => execPlayFlow.submitCardExecution(...args),
-  resumeTurnEnd: () => executionSession.resumeTurnEnd(),
+  resumeTurnEnd: settlePendingSelections,
   set$interaction: instanceRuntime.set$interaction, set$pendingHint: instanceRuntime.set$pendingHint, set$battleState: instanceRuntime.set$battleState, set$infusing: instanceRuntime.set$infusing, clearTargetHint: instanceRuntime.clearTargetHint, cancelTargetingState: instanceRuntime.cancelTargetingState,
 });
 const { clearTargetSession, cancelInteraction, beginSpecialTargeting, targetSide, unplayableReason, handUnplayableReason, getCardPlayAvailability, play, submitCardPlay, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse } = cardPlayFlow;
@@ -288,15 +292,17 @@ function restore(nextGame, data) {
   return result;
 }
 function finish(win) { return battleLifecycle.finish(win); }
+function endRun(expectedGame) { return battleLifecycle.endRun(expectedGame); }
 function start(game, enemyDefs, options) { return battleLifecycle.start(game, enemyDefs, options); }
 function toggleDeckCard(uid) { return battleLifecycle.toggleDeckCard(uid); }
 function cancelDeckSelection() { return battleLifecycle.cancelDeckSelection(); }
 function beginBoss() { return battleLifecycle.beginBoss(); }
 function equipSkillText(card) { return equipment.equipSkillText(card); }
+function getEquipSkillAvailability(uid) { return equipment.getEquipSkillAvailability(uid); }
   function registerEquip(uid, card) { return equipment.registerEquip(uid, getHostedExecutionCard(card)); }
 function equipCap() { return equipment.equipCap(); }
 function syncCurseCondEquips() { return equipment.syncCurseCondEquips(); }
-function useEquipSkill(uid) { if (!hasPendingEndTurn()) return equipment.useEquipSkill(uid); }
+function useEquipSkill(uid) { return equipment.useEquipSkill(uid); }
 function battleBagItems() { return bag.battleBagItems(); }
 const resolvingCards = new Map();
 function consumedState() { return { hand: instanceRuntime.hand, drawPile: instanceRuntime.drawPile, played: instanceRuntime.played, consumed: instanceRuntime.consumed, discard: instanceRuntime.discard, grave: instanceRuntime.grave }; }
@@ -661,6 +667,7 @@ function closeBag() { return bag.closeBag(); }
     processHandSelect();
     processChoice();
     processDiscoverQueue();
+    resumeAutomaticCasts();
     executionSession.resumeTurnEnd();
   }
 
@@ -695,8 +702,8 @@ function closeBag() { return bag.closeBag(); }
     onFailure: recoverBattleFailure,
   });
   const equipment = createBattleEquipment({
-    cards,
-    resolveCardSteps: (card, target) => resolveCard.steps(card, target, false, 0, 'equip-skill'),
+    cards, findCard, hasPendingEndTurn,
+    resolveCardSteps: (card, target, executionContext) => resolveCard.steps(card, target, false, 0, 'equip-skill', executionContext),
     requestBattleRender, clearTargetSession, queueBattleAction, runStagedSteps,
     applyTextEffects, sweepDead, alive, finish, throwIfActionCancelled,
     processChoice, processDiscoverQueue, processHandSelect, randomDiscoverCard,
@@ -714,10 +721,11 @@ function closeBag() { return bag.closeBag(); }
     addEnergy: amount => { instanceRuntime.set$energy(instanceRuntime.energy + (amount)); return instanceRuntime.energy; },
     drawCards, queueDiscover: value => instanceRuntime.discoverQueue.push(value), getTurn: () => instanceRuntime.turn,
     // BC-09（09-30 深审）：通行证类道具战斗内使用——发现面板立即消费 + 传说/职业池直授
-    processDiscoverQueue, randomDiscoverCard, getConsumedPile, takeConsumedCard, markCardResolving,
+    processDiscoverQueue, randomDiscoverCard, getConsumedPile, takeConsumedCard, markCardResolving, checkHandCombinations,
     previewDiscovery: (...args) => selectionFlow.previewDiscovery(...args),
   });
   const battleLifecycle = createBattleLifecycle({
+    checkHandCombinations,
     session: executionSession, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune,
     drawCards, applyBattleStartPassives: equipment.applyBattleStartPassives,
     isBattleStartEquip: equipment.isBattleStartEquip, equipCap, isStarterAttack,
@@ -727,6 +735,8 @@ function closeBag() { return bag.closeBag(); }
     runBattleStartTriggers: () => triggersM2.fireBattleStart(),
   });
   const selectionFlow = createBattleSelectionFlow({
+    checkHandCombinations,
+    resumeAutomaticCasts,
     stepsForOperations: (card, operations, target) => resolveCard.steps(createCardRuleExecution(card, operations), target, false, 0, 'choice'),
     cards: {
       all: () => cards.all(),
@@ -745,6 +755,7 @@ function closeBag() { return bag.closeBag(); }
 
   // —— 出牌结算长流程（queueCardExecution + execPlay）已拆出 battle.exec-play.js：工厂注入 + 一行转发 shim（具名导出面不变）——
   const execPlayFlow = createBattleExecPlay({
+    checkHandCombinations,
     emitRecast,
     markCardResolving,
     warnCardRuleRejection,
@@ -861,7 +872,7 @@ function closeBag() { return bag.closeBag(); }
 
   return Object.freeze({
     getCardPlayAvailability, submitCardPlay, awaitTriggeredActions, emitBattlePresentation, emitRecast, settlePendingSelections, requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, handUnplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, cancelDiscover, playerTakeHit, notifyPlayerDamaged, frenzyCurse, elCurse, deferEndTurn, hasPendingEndTurn,
-    dealEffectDamage, consumeBattleCard, recoverBattleFailure, getTriggerSnapshot: () => triggersM2.snapshot(),
+    dealEffectDamage, consumeBattleCard, recoverBattleFailure, endRun, getTriggerSnapshot: () => triggersM2.snapshot(),
     canReconfigure: () => !instanceRuntime.G?.battleActive && !actionQueue.running && !actionQueue.length && !executionSession.stagedResolutionDepth,
   });
 }

@@ -41,6 +41,25 @@ describe('card terms show delegated help', () => {
     expect(richResolvedDescription('附加破甲，持续 1 回合。')).toContain('data-term="abreak"');
   });
 
+  it('hides existing help and blocks new tips only while a card is picked up', async () => {
+    const root = document.createElement('div'); root.dataset.passiveFixture = '';
+    root.className = 'battle-stage'; root.innerHTML = '<span data-term="poison">中毒</span>';
+    document.body.append(root);
+    vi.spyOn(Element.prototype, 'getClientRects').mockReturnValue([{ width:80, height:20 }]);
+    const word = root.firstElementChild;
+    word.dispatchEvent(new Event('pointerover', { bubbles:true }));
+    await vi.dynamicImportSettled();
+    expect(document.getElementById('sdt-term-tip').hidden).toBe(false);
+    root.dataset.cardDragging = 'true';
+    document.dispatchEvent(new CustomEvent('sdt-card-drag-start'));
+    expect(document.getElementById('sdt-term-tip').hidden).toBe(true);
+    expect(allowsTermTip(word)).toBe(false);
+    word.dispatchEvent(new Event('pointerover', { bubbles:true }));
+    expect(document.getElementById('sdt-term-tip').hidden).toBe(true);
+    delete root.dataset.cardDragging;
+    expect(allowsTermTip(word)).toBe(true);
+  });
+
   it('keeps standalone battle status and equipment controls eligible for their own help', () => {
     const root = document.createElement('div'); root.dataset.passiveFixture = '';
     root.innerHTML = '<span class="bt-buff" data-term="poison">中毒</span><button data-ui-tip data-ui-tip-text="发动装备">护符</button>';

@@ -1,4 +1,5 @@
 import { battleRules } from './helpers/environment-fixtures.js';
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';
 // 反馈12条·B组（6/9）：战斗道具/药水使用链路探针——药水栏结算必须真正落到引擎效果。
 import { expect, it, vi } from 'vitest';
 const s = vi.hoisted(() => ({ game: {} }));
@@ -10,6 +11,7 @@ await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
 const { BattleSession, getSnapshot } = await import('../game/src/battle/core/battle.core.js');
+const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
 const { bagSlots } = await import('../game/src/hub/game.bag.bridge.js');
 bagSlots.pocketAdd = card => { const p = s.game.usedPocket.find(p => p.card.name === card.name); if (p) p.count++; else s.game.usedPocket.push({ card: { ...card }, count: 1 }); };
 const { bindBagMixins } = await import('../game/src/hub/game.bag.settle.js');
@@ -54,7 +56,8 @@ it('TNT 结算：消灭 2 名攻≤5 非 BOSS 敌人', async () => {
     await settle();
     const foes = getSnapshot().foes;
     expect(foes.filter(f => f.dead).length).toBe(2);
-    expect(s.game.ownedCards.some(o => o.uid === uid)).toBe(false);
+    expectBattleItemCommitted(s.game, runtime, uid);
+    expect(s.game.ownedCards.some(o => o.uid === uid)).toBe(true);
   } finally { vi.clearAllTimers(); vi.useRealTimers(); }
 });
 
@@ -66,7 +69,8 @@ it('单体回复药水直接结算', async () => {
     BattleSession.commands.usePotion(uid);
     await settle();
     expect(s.game.hp).toBeGreaterThan(10);
-    expect(s.game.ownedCards.some(o => o.uid === uid)).toBe(false);
+    expectBattleItemCommitted(s.game, runtime, uid);
+    expect(s.game.ownedCards.some(o => o.uid === uid)).toBe(true);
   } finally { vi.clearAllTimers(); vi.useRealTimers(); }
 });
 
@@ -81,7 +85,8 @@ it('多敌时敌方指向药水进入点选，可由 useItem 带目标结算', a
     BattleSession.commands.useItem(uid, 0);
     await settle();
     expect(getSnapshot().foes[0].status.freeze || 0).toBeGreaterThan(0);
-    expect(s.game.ownedCards.some(o => o.uid === uid)).toBe(false);
+    expectBattleItemCommitted(s.game, runtime, uid);
+    expect(s.game.ownedCards.some(o => o.uid === uid)).toBe(true);
   } finally { vi.clearAllTimers(); vi.useRealTimers(); }
 });
 

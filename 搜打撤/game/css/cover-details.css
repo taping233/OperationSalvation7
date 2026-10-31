@@ -26,8 +26,7 @@
 & .bag-slot.empty { background: #e2e3e4; border: 1px dashed #afb1b2; box-shadow: none; }
 & .bag-slot.empty.safe-empty { background: #e7e8e8; border-color: #90969a; }
 & .ov-empty { padding: 18px 0; color: #737679; font: 400 15px/1.7 var(--font-ui); }
-& .help-btn { color: #26292c; border-color: #9fa2a5; background: #e3e4e5; border-radius: 0; }
-& :is(button,.help-btn):focus-visible { outline: 2px solid #81878c; outline-offset: 3px; }}
+& button:focus-visible { outline: 2px solid #81878c; outline-offset: 3px; }}
 /* Ordinary card zoom is distinct from the frozen photo card-zoom family. */
 :where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo){
 & { gap: 16px; padding: 24px 24px 52px; overflow-y: auto; justify-content: flex-start; justify-content: safe center; }

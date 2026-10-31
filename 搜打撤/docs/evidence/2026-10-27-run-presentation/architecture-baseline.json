@@ -1,0 +1,13 @@
+{
+  "actual": [
+    "run/game.run.events.js:15: 领域命令/端口工厂不得捕获页面或全局状态 ui/reward-scene-view.js",
+    "run/game.run.events.js:16: 领域命令/端口工厂不得捕获页面或全局状态 ui/overlay-return-state.js",
+    "run/game.run.events.js: 领域命令/端口工厂/纯执行计划不能读取全局浏览器对象 SDT:447, SDT:564"
+  ],
+  "withoutThisTaskEventEdits": [
+    "run/game.run.events.js:15: 领域命令/端口工厂不得捕获页面或全局状态 ui/reward-scene-view.js",
+    "run/game.run.events.js:16: 领域命令/端口工厂不得捕获页面或全局状态 ui/overlay-return-state.js",
+    "run/game.run.events.js: 领域命令/端口工厂/纯执行计划不能读取全局浏览器对象 SDT:447, SDT:564"
+  ],
+  "same": true
+}

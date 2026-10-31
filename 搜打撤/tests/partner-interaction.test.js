@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 // @vitest-environment jsdom
@@ -20,7 +21,7 @@ beforeEach(async () => {
   vi.useFakeTimers();
   media = { matches: false };
   vi.stubGlobal('matchMedia', () => media);
-  window.SDT = SDT;
+  await connectSdtFixture(SDT);
   SDT.MAP = { rules: RULES };
   localStorage.clear();
   Base.use(1);
@@ -217,9 +218,13 @@ describe('伙伴页接线与数值隔离', () => {
 
   it('hub owns disposal before render/close and global shortcuts preserve native Space/Enter', () => {
     const runtime = readFileSync('game/src/hub/game.hub.runtime.js', 'utf8');
-    expect(runtime).toContain('disposePersonnel = bindPersonnel(');
+    expect(runtime).toContain('const releasePersonnel = bindPersonnel(');
+    expect(runtime).toContain('partnerHost === personnelInteractionHost');
+    expect(runtime).toContain('bindPartnerInteraction:!keepPartnerInteraction');
+    expect(runtime).toContain('if (!keepPartnerInteraction) { disposePersonnel = releasePersonnel; personnelInteractionHost = partnerHost; }');
     expect(runtime.match(/disposePersonnel\(\); disposePersonnel = \(\) => \{\};/g)).toHaveLength(2);
-    expect(runtime.indexOf('disposePersonnel();', runtime.indexOf('function renderHub()'))).toBeLessThan(runtime.indexOf('const B = SDT.Base;', runtime.indexOf('function renderHub()')));
+    const rebind = runtime.indexOf('const releasePersonnel = bindPersonnel(');
+    expect(runtime.lastIndexOf('disposePersonnel();', rebind)).toBeLessThan(rebind);
     expect(runtime.indexOf('disposePersonnel();', runtime.indexOf('function closeBase()'))).toBeLessThan(runtime.indexOf('UI.hideOverlay();', runtime.indexOf('function closeBase()')));
     expect(readFileSync('game/src/core/game-boot-input.js', 'utf8')).toContain("if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest?.('button,summary,[role=\"button\"]')) return;");
   });

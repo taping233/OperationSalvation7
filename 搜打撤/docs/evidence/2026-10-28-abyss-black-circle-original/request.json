@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-abyss-sovereign",
+      "asset": "cards/hero-abysssovereign.webp",
+      "source": "C:/Users/太平/Documents/Codex/2026-10-28/new-chat-2/outputs/深渊主宰-黑阵四臂.png",
+      "revision": "abyss-black-circle-original-20261028",
+      "prompt": "NAI5 draft followed by built-in repaint: captive engulfed from behind and above by black material; four high raised arms, palms facing upward; black magic circle. User requested installation and then restored this initial accepted version, discarding face-covering variants.",
+      "references": [
+        "C:/Users/太平/Documents/Codex/2026-10-28/new-chat-2/work/abyss-nai5.png",
+        "game/assets/portraits/full/changwuyu.webp"
+      ]
+    }
+  ]
+}

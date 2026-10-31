@@ -45,6 +45,7 @@ export const effCostOf = forward('effCostOf');
 export const swapCardCosts = forward('swapCardCosts');
 export const restore = forward('restore');
 export const finish = forward('finish');
+export const endRun = forward('endRun');
 export const cancelInteraction = forward('cancelInteraction');
 export const flee = forward('flee');
 export const handCurseSpecs = forward('handCurseSpecs');

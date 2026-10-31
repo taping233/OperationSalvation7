@@ -38,7 +38,7 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
     function render(notice = '') {
       if (token !== sequence || continued || !context()) return;
       const result = selected();
-      show({ title, sub:'先看点数规则，再亲手投骰。结果会保留，离开重进不会重投。',
+      show({ title, sub:'当前节点可返回重进，投骰结果不变；前往下一节点后事件结束。',
         body:`<div class="event-dice-panel">${eventDieHTML(step.sides, result ? step.result : null)}
           <p class="event-dice-result" role="status">${result ? `${step.result} 点 · ${esc(result.label)}` : `D${step.sides} · 等待投骰`}</p>
           <details class="event-dice-rules" open><summary>点数与结果</summary>${step.outcomes.map((o,i) => {
@@ -48,11 +48,11 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
           }).join('')}</details><p role="status">${esc(notice)}</p>
           <button type="button" class="ov-btn ok" data-act="eventDiceRoll"${result ? ' hidden' : ''}>投掷骰子</button>
           <button type="button" class="ov-btn ok" data-act="eventDiceContinue"${result ? '' : ' hidden'}>确认结果，继续</button>
-          <button type="button" class="ov-btn" data-act="eventDiceLeave">暂离，保留进度</button></div>` });
+          <button type="button" class="ov-btn" data-act="eventDiceLeave">返回地图</button></div>` });
       const active = bind('eventDiceRoll');
       const current = () => token === sequence && !continued && context() && active();
       setReturn?.(() => { if (token === sequence && !continued) render(); });
-      const leave = () => { if (current() && !rolling) { sequence++; onLeave(); } };
+      const leave = () => { if (current() && !rolling) { sequence++; return onLeave(); } };
       UI.act('eventDiceLeave', leave);
       UI.act('eventExit', leave);
       UI.act('eventDiceContinue', async () => {
@@ -65,7 +65,8 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
         continued = true;
         if (await done(selected().value) === false) {
           continued = false;
-          render('奖励尚未承接，请重试确认；本次结果不会改变。');
+          // 下游可能已打开保存重试页；只重绘仍由本次骰子持有的页面。
+          if (current()) render('奖励尚未承接，请重试确认；本次结果不会改变。');
         }
       });
       UI.act('eventDiceRoll', async () => {
@@ -93,7 +94,7 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
     }
     const saved = await persist();
     if (token !== sequence || !context() || !openingCurrent()) return false;
-    if (!saved) { onLeave(); return false; }
+    if (!saved) { await onLeave(); return false; }
     render();
     return true;
   }

@@ -2,6 +2,14 @@ import { battleViewMocks, overlayElements } from './helpers/environment-fixtures
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 // 本文件验输入，资源就绪由 battle-entry-readiness 专门控制未兑现的加载 Promise 验证。
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
+const availabilityReads = vi.hoisted(() => vi.fn());
+vi.mock('../game/src/battle/core/battle.core.js', async importOriginal => {
+  const actual = await importOriginal();
+  const commands = Object.freeze({ ...actual.commands, getCardPlayAvailability: (...args) => {
+    availabilityReads(...args); return actual.commands.getCardPlayAvailability(...args);
+  } });
+  return { ...actual, commands, BattleSession: Object.freeze({ ...actual.BattleSession, commands }) };
+});
 
 const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
 const actions = new Map();
@@ -411,7 +419,11 @@ it.each(['enemy', 'self'])('retains the %s target label and Enter action across 
   const retainedStage = stage();
   BattleSession.commands.openGrave(); flush();
   expect(stage()).toBe(retainedStage); expect(stage().hasAttribute('inert')).toBe(true);
-  expect(stage().querySelector(selector)).toBe(target); expect(target.isConnected).toBe(true);
+  expect(stage().querySelector(side === 'self' ? '#btSelf' : '.bt-foe[data-eidx="0"]')).toBe(target);
+  expect(target.classList.contains('can-target')).toBe(false); expect(target.isConnected).toBe(true);
+  const covered = infusionResources();
+  target.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+  expect(infusionResources()).toEqual(covered);
   BattleSession.commands.closeGrave(); flush();
   expect(stage().querySelector(selector)).toBe(target); expect(target.getAttribute('aria-label')).toContain(label);
   expect(target.getAttribute('tabindex')).toBe('0');
@@ -557,8 +569,10 @@ it('低能量卡的可访问说明与禁用原因一致，恢复后重新提示�
   start(); set$energy(0); render();
   const el=card();
   expect(el.dataset.handState).toBe('blocked');
-  expect(el.getAttribute('aria-label')).toContain('能量不足：需要 1，当前 0');
-  expect(el.querySelector('.hsc-desc .bt-rulehint').textContent).toBe('无法打出：能量不足：需要 1，当前 0');
+  const availability=BattleSession.commands.getCardPlayAvailability(el.dataset.uid);
+  expect(availability.reason.code).toBe('INSUFFICIENT_ENERGY');expect(BattleSession.getSnapshot().energy).toBe(0);
+  expect(el.getAttribute('aria-label')).toContain(availability.reason.message);
+  expect(el.querySelector('.hsc-desc .bt-rulehint').textContent).toBe('无法打出：'+availability.reason.message);
   expect(el.querySelector('.hs-card').getAttribute('aria-label')).toContain('能量不足');
   expect(el.getAttribute('aria-label')).not.toContain('点击选择敌人');
   const before=BattleSession.getSnapshot();
@@ -917,7 +931,7 @@ it('allows a new primary pointer to continue a pickup only after its owner relea
   expect(Aim.aim).toBeNull();expect(infusionResources()).toEqual(before);
 });
 
-it('lets real window aim cancellation consume the down before the retained hand can pick up another card', () => {
+it('keeps a pickup owned while another actionable hand card is read, then cancels without consuming', () => {
   const mana = Cards.all().find(c => c.id === 'cc-mana-surge');
   start(1, mana, [{ uid:'other-hand-card', card:Cards.SHA }]);
   const before = infusionResources();
@@ -932,8 +946,11 @@ it('lets real window aim cancellation consume the down before the retained hand 
   expect(Aim.aim?.leftDown).toBe(false);
   window.dispatchEvent(pointer('pointermove', Aim.aim.playY - 50)); flush();
   expect(Aim.aim?.mode).toBe('multi');expect(Aim.aim.targetMode).toBe('click');
+  const owner=Aim.aim;
   const next = UI.el.ovBody.querySelector('.bt-card[data-uid="other-hand-card"]');
   next.querySelector('.hs-card').dispatchEvent(pointer('pointerdown'));
+  expect(Aim.aim).toBe(owner);expect(Aim.aim.uid).toBe('inspect-card');expect(infusionResources()).toEqual(before);
+  document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));
   expect(Aim.aim).toBeNull();expect(infusionResources()).toEqual(before);
 });
 
@@ -993,22 +1010,31 @@ it('禁用理由占用单个提示槽，能量变化更新数值，恢复后还�
   expect(hint().textContent).toBe('从本场牌库抽取符合类型的牌。');
   set$energy(0); render();
   expect(hint().textContent).toContain('能量不足');
-  expect(hint().textContent).toContain('当前 0');
+  expect(BattleSession.getSnapshot().energy).toBe(0);
+  expect(hint().textContent).toBe('无法打出：'+BattleSession.commands.getCardPlayAvailability(card().dataset.uid).reason.message);
   expect(card().querySelectorAll('.bt-rulehint')).toHaveLength(1);
   set$energy(1); render();
-  expect(hint().textContent).toBe('无法打出：能量不足：需要 3，当前 1');
+  expect(BattleSession.getSnapshot().energy).toBe(1);
+  expect(hint().textContent).toBe('无法打出：'+BattleSession.commands.getCardPlayAvailability(card().dataset.uid).reason.message);
   set$energy(9); render();
   expect(hint().textContent).toBe('从本场牌库抽取符合类型的牌。');
   expect(card().querySelector('.hsc-desc').textContent).not.toContain('能量不足');
 });
 
 it('卡文已包含禁用原因时不追加相同阅读提示', () => {
-  const reason = '先打出一张武术牌，使本牌变形';
-  start(1, { ...Cards.all().find(entry => entry.id === 'tt7-imitate'), desc: reason });
+  const reason = '封印之牌：抽到时无效果，集齐 5 张封印之牌后破除封印';
+  // Construct before session start; a published immutable hand projection is not mutated in place.
+  start(1, {id:'inspect-repeated-block-reason',name:'禁用提示夹具',type:'武术',cost:1,desc:reason,
+    rules:{version:1,battle:{requirements:[{kind:'unplayable'}]},triggers:{onPlay:[]}}});
   const desc = card().querySelector('.hsc-desc');
+  const availability = BattleSession.commands.getCardPlayAvailability('inspect-card');
+  expect(availability.reason.code).toBe('CARD_UNPLAYABLE');
+  expect(card().dataset.blockReason).toBe(availability.reason.message);
+  expect(card().getAttribute('aria-label')).toContain(availability.reason.message);
   expect(card().dataset.handState).toBe('blocked');
   expect(desc.textContent).toContain(reason);
-  expect(desc.querySelector('.bt-rulehint')).toBeNull();
+  expect(desc.textContent.split(reason)).toHaveLength(2);
+  expect(desc.querySelector('.bt-rulehint')?.textContent || '').toBe('');
 });
 
 it.each(['enemy', 'self'])('键盘选牌 Esc 取消后恢复 %s 原卡面焦点且不消费', side => {
@@ -1202,25 +1228,24 @@ it('shows only active player rules via readonly snapshot and clears retained chi
 
 it('shares one raw-hand eligibility context per synchronous render and creates a fresh one next render', async () => {
   start();
-  const core = await import('../game/src/battle/core/battle.core.js');
-  const eligibility = vi.spyOn(core, 'unplayableReason');
+  const eligibility = availabilityReads;eligibility.mockClear();
   try {
     render();
-    const first = eligibility.mock.calls.map(call => call[1]);
+    const first = eligibility.mock.calls.filter(call=>call[3]).map(call => call[3]);
     expect(first.length).toBeGreaterThan(1);
     expect(first.every(context => context === first[0])).toBe(true);
     expect(first[0].handCards.length).toBeGreaterThan(0);
     eligibility.mockClear();
     set$energy(0);
     render();
-    const second = eligibility.mock.calls.map(call => call[1]);
+    const second = eligibility.mock.calls.filter(call=>call[3]).map(call => call[3]);
     expect(second.length).toBeGreaterThan(1);
     expect(second.every(context => context === second[0])).toBe(true);
     expect(second[0]).not.toBe(first[0]);
     expect(second[0].handCards).not.toBe(first[0].handCards);
-    expect(core.unplayableReason(Cards.SHA)).toBeNull();
+    expect(BattleSession.commands.getCardPlayAvailability('inspect-card').reason.code).toBe('INSUFFICIENT_ENERGY');
     expect(eligibility.mock.calls.at(-1)).toHaveLength(1);
   } finally {
-    eligibility.mockRestore();
+    eligibility.mockClear();
   }
 });

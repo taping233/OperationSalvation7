@@ -1,0 +1,30 @@
+{
+  "rulesChanged": false,
+  "assertionsWeakened": false,
+  "files": [
+    {
+      "path": "搜打撤/game/src/battle/core/battle.resolution.domain.js",
+      "beforeSha256": "3cc0d0691c1784dcaaee321a68f22898476377053e7d0e5fd14f508bdc39fd51",
+      "afterSha256": "43738fed9dbcb4bd50e7d30d730831531c1cbd2ec4f98cf2b5a8d8c961d3857d",
+      "change": "Use the existing ResolveCard.steps sixth-argument contract before destructuring the hand-selection completion callback. The synchronous wrapper retains complete generator consumption and uses the same explicit rest-argument tuple."
+    },
+    {
+      "path": "搜打撤/game/src/hub/bag-inventory-commands.js",
+      "beforeSha256": "f193ac63628364f093870263dc36f4dd4e79cd63c7c27d59385004747fe2133d",
+      "afterSha256": "11c7456db0bafde20d3ca94b14486e5f3925dfe41285bc8040fde8771f18dd5d",
+      "change": "Capture Object.assign return intersection so the existing retrieval capacity metadata remains statically visible; runtime fields unchanged."
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.events.js",
+      "beforeSha256": "2bce72a8cf8cf0526f7d56f2b8f8efb1bc4573b793eacf3344cf7301a5433e1e",
+      "afterSha256": "75157738443681729c0a8e16d233d27ae9f6e944a347aab09abba191e6439d36",
+      "change": "Use the existing injected SDT port and remove an unused import."
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.flow.js",
+      "beforeSha256": "704b627fc971301d85d508860023004373c0c618122f418d2b8bc4f2b8259ebb",
+      "afterSha256": "febf2aadc9b95e1a717c518e84a5187d2948775dff15b498d13bc98c92099de3",
+      "change": "Pass the existing enterNode function directly instead of an untyped forwarding closure."
+    }
+  ]
+}

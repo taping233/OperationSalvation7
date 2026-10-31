@@ -2,6 +2,12 @@ export type BattleCardValue = string | number | boolean | null | undefined | Bat
 
 export type SnapshotCardValue = string | number | boolean | null | undefined | readonly SnapshotCardValue[] | { readonly [key: string]: SnapshotCardValue };
 
+export type EquipmentSkillAvailability = {
+  usable: boolean;
+  state: 'ready' | 'passive' | 'used' | 'busy' | 'unavailable';
+  why: string;
+};
+
 export type BattleDamageOperation = {
   op?: string;
   amount?: BattleCardValue;
@@ -135,7 +141,7 @@ export type BattleSnapshotInput = {
   pendingItem: ({ uid: string; card?: BattleCardInput | null; [key: string]: unknown }) | null;
   slamPending: boolean;
   dartPending: boolean;
-  equipped: { uid: string; card?: BattleCardInput | null; name: string; desc: string; skill: string; used: boolean; [key: string]: unknown }[];
+  equipped: { uid: string; card?: BattleCardInput | null; name: string; desc: string; skill: string; used: boolean; skillAvailability?: EquipmentSkillAvailability; [key: string]: unknown }[];
 };
 
 export type SnapshotDefense = Readonly<Record<string, unknown>> & { readonly shield?: number; readonly armor?: number; readonly guard?: boolean };
@@ -216,7 +222,7 @@ export type BattleSnapshot = {
   readonly pendingItem: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly [key: string]: unknown }) | null;
   readonly slamPending: boolean;
   readonly dartPending: boolean;
-  readonly equipped: readonly { readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly name: string; readonly desc: string; readonly skill: string; readonly used: boolean; readonly [key: string]: unknown }[];
+  readonly equipped: readonly { readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly name: string; readonly desc: string; readonly skill: string; readonly used: boolean; readonly skillAvailability?: Readonly<EquipmentSkillAvailability>; readonly [key: string]: unknown }[];
 };
 
 export type PreviewActionInput = {

@@ -5,6 +5,9 @@ import { splitEffectClauses } from '../effects/battle.effects.js';
 import { assertCardRulesExecutable, createCardRuleExecution, rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
 import { hasStructuredEquipField, hasStructuredTrigger } from '../../cards/card-trigger-contract.js';
 import { equipmentExecutionPlan } from '../../cards/card-execution-plan.js';
+import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
+import { matchesHandSelectKey } from '../core/battle.hand-selection.js';
+import { matchesHandReleaseCard } from '../core/battle.draw.domain.js';
 
 /** Instance-owned state and host services are captured explicitly. */
 export function createEquipmentDomain(context) {
@@ -16,6 +19,8 @@ const getHostedExecutionCard = context.normalizeCard;
  * 规则数据经 battle.runtime.js 活绑定直读；引擎侧结算件由 createBattleEquipment 注入。 */
 
 function createBattleEquipment({ cards = context.cards,
+  findCard = uid => instanceRuntime.G?.ownedCards?.find(entry => entry.uid === uid) || null,
+  hasPendingEndTurn = () => false,
   requestBattleRender, clearTargetSession, queueBattleAction, runStagedSteps,
   applyTextEffects, sweepDead, alive, finish, throwIfActionCancelled,
   processChoice, processDiscoverQueue, processHandSelect, randomDiscoverCard,
@@ -122,18 +127,64 @@ function createBattleEquipment({ cards = context.cards,
         : `[[icon:cross]] <b>${esc(e.card.name)}</b>：诅咒解除，条件加成收回`, want.atk || want.sp ? 'ok' : 'dim');
     });
   }
+  /** Read-only authority for both skill input and its displayed availability.
+   * @returns {{usable:boolean,state:'ready'|'passive'|'used'|'busy'|'unavailable',why:string}} */
+  function getEquipSkillAvailability(uid) {
+    const entry = instanceRuntime.equipped.find(item => item.uid === uid);
+    if (!entry) return { usable:false, state:'unavailable', why:'装备已不在穿戴栏中' };
+    const card = getHostedExecutionCard(entry.card);
+    const capability = inspectCardRuleCapability(card);
+    if (!capability.ok) return { usable:false, state:'unavailable', why:'装备规则暂不可执行' };
+    const structured = hasStructuredEquipField(card, 'skill');
+    const skill = structured ? card.rules.equip?.skill : null;
+    if (structured ? !skill?.ops?.length : !equipSkillText(card)) {
+      return { usable:false, state:'passive', why:'此装备没有主动技能' };
+    }
+    if (entry.used && skill?.oncePerBattle !== false) {
+      return { usable:false, state:'used', why:'主动技能本场已经用过了' };
+    }
+    if (instanceRuntime.busy || instanceRuntime.infusing || instanceRuntime.discovering ||
+        instanceRuntime.choosing || instanceRuntime.handSelecting || hasPendingEndTurn()) {
+      return { usable:false, state:'busy', why:'请先完成当前动作或选择' };
+    }
+    // Only the first operation requires existing input; later operations may use cards drawn earlier.
+    const first = skill?.ops[0];
+    if (first?.op === 'handSelect') {
+      const matched = instanceRuntime.hand.some(handUid => {
+        const candidate = findCard(handUid);
+        return candidate && matchesHandSelectKey(candidate.card, first.type);
+      });
+      if (!matched) return { usable:false, state:'unavailable', why:'先取得一张符合条件的手牌再发动' };
+    }
+    if (first?.op === 'release' && first.source === 'hand') {
+      const key = first.key === '初始攻击' ? '杀' : first.key;
+      if (!instanceRuntime.hand.some(handUid => matchesHandReleaseCard(findCard(handUid)?.card, key))) {
+        return { usable:false, state:'unavailable', why:'先取得可施放的匹配手牌再发动' };
+      }
+    }
+    if (!structured && (card.id === 'tt3-crimson-pouch' || card.id === 'tt7-naturestaff') && !instanceRuntime.hand.length) {
+      return { usable:false, state:'unavailable', why:'先取得一张手牌再发动' };
+    }
+    if (!structured && card.id === 'tt3eq-boiler' && instanceRuntime.hand.length < 2) {
+      return { usable:false, state:'unavailable', why:`注能(2) 需要消耗 2 张手牌，当前只有 ${instanceRuntime.hand.length} 张` };
+    }
+    return { usable:true, state:'ready', why:'主动技能已就绪' };
+  }
   function useEquipSkill(uid) {
-    if (instanceRuntime.busy || instanceRuntime.infusing || instanceRuntime.discovering || instanceRuntime.choosing || instanceRuntime.handSelecting) return;
     const e = instanceRuntime.equipped.find(x => x.uid === uid);
     if (!e) return;
     const executionCard = getHostedExecutionCard(e.card);
     if (rejectUnsupportedCard(executionCard, { warn: message => instanceRuntime.G.log(message, 'warn') })) return;
+    const availability = getEquipSkillAvailability(uid);
+    if (!availability.usable) {
+      if (availability.state === 'used' || availability.state === 'unavailable') {
+        instanceRuntime.G.log(`[[icon:cross]] 【${esc(e.card.name)}】${esc(availability.why)}`, 'warn');
+      }
+      return;
+    }
     const text = equipSkillText(executionCard);
     // 结构化技能优先于展示文字，避免同一主动技能双结算。
     const structuredSkill = hasStructuredEquipField(executionCard, 'skill') ? executionCard.rules.equip?.skill : null;
-    if (structuredSkill && !structuredSkill.ops.length) return;
-    if (!text && !structuredSkill) return;
-    if (e.used && structuredSkill?.oncePerBattle !== false) { instanceRuntime.G.log(`[[icon:cross]] 【${esc(e.card.name)}】的主动技能本场已经用过了`, 'warn'); return; }
     if (!structuredSkill && e.card.id === 'tt13-magazine') {
       clearTargetSession();
       const pool = cards.all().filter(card => GUN_POOL_IDS.includes(card.id));
@@ -148,7 +199,7 @@ function createBattleEquipment({ cards = context.cards,
     }
     if (structuredSkill) {
       const once = structuredSkill.oncePerBattle !== false;
-      if (once && e.used) { instanceRuntime.G.log(`[[icon:cross]] 【${esc(e.card.name)}】的主动技能本场已经用过了`, 'warn'); return; }
+      const battleToken = instanceRuntime.battleState.token, ownerGame = instanceRuntime.G;
       clearTargetSession();
       queueBattleAction(async signal => {
         throwIfActionCancelled(signal);
@@ -159,11 +210,16 @@ function createBattleEquipment({ cards = context.cards,
           assertCardRulesExecutable(currentCard);
           const currentSkill = currentCard.rules?.equip?.skill;
           if (!currentSkill || !currentSkill.ops.length) return;
+          const handSelectionOnly = currentSkill.ops.length === 1 && currentSkill.ops[0].op === 'handSelect';
+          const onHandSelectDone = handSelectionOnly && once ? () => {
+            if (instanceRuntime.G === ownerGame && ownerGame?.battleActive
+                && instanceRuntime.battleState.token === battleToken && instanceRuntime.equipped.includes(e)) e.used = true;
+          } : undefined;
           const synthetic = createCardRuleExecution(currentCard, currentSkill.ops);
-          instanceRuntime.G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能发动`, 'ok');
-          await runStagedSteps(resolveCardSteps(synthetic, alive()[0] || null), signal);
+          instanceRuntime.G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> ${handSelectionOnly ? '准备发动主动技能，选择手牌后生效' : '主动技能发动'}`, 'ok');
+          await runStagedSteps(resolveCardSteps(synthetic, alive()[0] || null, { onHandSelectDone }), signal);
           throwIfActionCancelled(signal);
-          if (once) e.used = true;
+          if (once && !handSelectionOnly) e.used = true;
         } catch (error) {
           if (error?.name !== 'BattleActionCancelledError') {
             instanceRuntime.G.log(`[[icon:cross]] 【${esc(e.card.name)}】主动技能未完成，本场次数未消耗`, 'warn');
@@ -177,18 +233,10 @@ function createBattleEquipment({ cards = context.cards,
       }, '装备技能');
       return;
     }
-    if ((e.card.id === 'tt3-crimson-pouch' || e.card.id === 'tt7-naturestaff') && !instanceRuntime.hand.length) {
-      instanceRuntime.G.log(`[[icon:cards]] 【${esc(e.card.name)}】需要先有一张手牌可选，技能次数未消耗`, 'warn');
-      return;
-    }
     // 魔法锅炉的「注能」是装备技能代价：先强制消耗 2 张手牌，完成后随机入手 3 张，
     // 不走「发现」面板。燃料不足时不消耗本场唯一一次技能。
     if (e.card.id === 'tt3eq-boiler') {
       const need = 2;
-      if (instanceRuntime.hand.length < need) {
-        instanceRuntime.G.log(`[[icon:flask]] 【${esc(e.card.name)}】注能(${need}) 需要消耗 ${need} 张手牌，当前只有 ${instanceRuntime.hand.length} 张`, 'warn');
-        return;
-      }
       clearTargetSession();
       e.used = true;
       instanceRuntime.G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能：注能(${need})，随机获取 3 张卡牌`, 'ok');
@@ -285,7 +333,7 @@ function createBattleEquipment({ cards = context.cards,
   }
 
   return {
-    equipSkillText, registerEquip, equipCap, syncCurseCondEquips, useEquipSkill,
+    equipSkillText, registerEquip, equipCap, syncCurseCondEquips, useEquipSkill, getEquipSkillAvailability,
     isBattleStartEquip, applyBattleStartPassives,
   };
 }

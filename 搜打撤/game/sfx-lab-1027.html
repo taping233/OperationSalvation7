@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>代号柒 · 新音效试听（原创候选 1027）</title>
+  <link rel="stylesheet" href="./css/sfx-lab-1027.css">
+</head>
+<body>
+  <header class="page-head">
+    <div class="eyebrow">CODENAME 7 / SFX LAB <span>原创候选 · 2026-10-27</span></div>
+    <div class="heading">
+      <div>
+        <h1>新老对比，挑出满意的。</h1>
+        <p>每个场景先听「现行」，再听「新候选」；满意就勾「采用新音效」。新音效全部从零合成，无第三方素材。勾选结果只存在这个浏览器里。</p>
+      </div>
+      <div id="totals" class="totals">正在读取…</div>
+    </div>
+    <p class="version-note">11 项已取消音效的场景保持静音，不提供候选；新旧播放使用相同的事件音量与变速参数，便于公平对比。</p>
+  </header>
+  <main>
+    <section class="toolbar" aria-label="播放控制">
+      <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索按钮、奖励、抽牌、撤离…" aria-label="搜索音效"></label>
+      <label class="volume">试听音量 <input id="volume" type="range" min="0" max="100" value="70"><output id="volume-value">70%</output></label>
+      <button id="stop" class="plain">停止播放</button>
+      <label class="marked-filter"><input id="only-marked" type="checkbox">只看已采用</label>
+    </section>
+    <section id="list" class="sound-list" aria-label="全部音效对比"><p>正在读取映射…</p></section>
+  </main>
+  <footer class="review-bar">
+    <div><strong id="selected-count">尚未采用</strong><p id="playing" role="status" aria-live="polite">点「现行 / 新候选」播放；声音不会叠在一起。</p></div>
+    <button id="export" class="primary">查看 / 复制采用清单</button>
+  </footer>
+  <dialog id="export-dialog">
+    <div class="dialog-head"><h2>采用新音效的场景</h2><button id="dialog-close" aria-label="关闭清单">×</button></div>
+    <p>复制后发给 Friday；未勾选的场景不会列入。</p>
+    <textarea id="export-text" rows="15" aria-label="采用清单" readonly></textarea>
+    <div class="dialog-actions"><span id="copy-status" role="status"></span><button id="copy" class="primary">复制清单</button></div>
+  </dialog>
+  <script type="module" src="./src/audio/sfx-lab-1027.js"></script>
+</body>
+</html>

@@ -101,7 +101,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
     // Display-only receipt lives in the WeakMap; it is never part of a run save or attempt.
     settlement.cardOutcome = { pocket: [], gone: [], retained: [] };
     if (win !== true) UI.hideOverlay();   // 胜利保留战场短反馈，随后直接进入领奖。
-    // 用过或被消耗的卡统一进入消耗区，不按职业、初始攻击或衍生稀有度排除。
+    // 用过、弃置或被消耗的卡统一进入消耗区，不按职业、初始攻击或衍生稀有度排除。
     const movedUids = new Set();
     const toPocket = (uids, why) => {
       const moved = [];
@@ -123,7 +123,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
     };
     // Item 16 定版：所有战斗（含 BOSS）的消耗牌都进消耗区，撤离点统一 1/3 结算
     if (playedUids && playedUids.length) {
-      toPocket(playedUids, '使用过的卡牌');
+      toPocket(playedUids, '使用或弃置的卡牌');
     }
     if (consumedUids && consumedUids.length) {
       toPocket(consumedUids, '注能消耗的卡牌');

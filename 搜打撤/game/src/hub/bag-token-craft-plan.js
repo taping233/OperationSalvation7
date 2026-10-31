@@ -1,3 +1,6 @@
+import { previewCardRewards } from '../core/card-capacity.js';
+import { deriveBagRenderState } from '../core/bag-render-derivation.js';
+
 // Pure recipe planning: resolve every input before the caller changes inventory.
 const recipes = {
   gold: {
@@ -12,7 +15,7 @@ const recipes = {
   },
 };
 
-export function planBagTokenCraft(game, kind, catalog, sourceUid) {
+export function planBagTokenCraft(game, kind, catalog, sourceUid, baseCap = null) {
   const recipe = recipes[kind];
   if (!recipe) return { ok:false, reason:'未知通行证配方，无法合成' };
   if ((game.fragments || 0) < recipe.fragments) return { ok:false, reason:'员工通行证A碎片不足 2 枚，无法合成' };
@@ -23,6 +26,15 @@ export function planBagTokenCraft(game, kind, catalog, sourceUid) {
   if (sources.length !== recipe.count) return { ok:false, reason:recipe.missing };
   const card = catalog.find(entry => entry.id === recipe.output);
   if (!card) return { ok:false, reason:'通行证合成目标卡缺失，材料未消耗' };
+  if (baseCap !== null) {
+    const sourceEntries = new Set(sources.map(source => source.entry));
+    const remaining = game.ownedCards.filter(entry => !sourceEntries.has(entry));
+    const projected = deriveBagRenderState({ ownedCards:remaining, inventory:game.inventory || [] }, baseCap);
+    if (previewCardRewards([card], { ownedCards:remaining, usedSlots:projected.used,
+      baseCap:projected.baseCap, totalCap:projected.cap }).cant) {
+      return { ok:false, code:'bag-full', reason:'背包空间不足，合成材料与碎片未消耗，请先腾出通用格' };
+    }
+  }
   return { ok:true, sourceUids:sources.map(({ entry }) => entry.uid), sourceIndices:sources.map(({ index }) => index),
     card:{ ...card }, fragments:recipe.fragments, message:recipe.success };
 }

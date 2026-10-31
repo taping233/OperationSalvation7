@@ -1,0 +1,11 @@
+{
+  "buildIndexSha256": "3ad54dda48e5d80d46272f0502f6925962135c2438e7f5773bdfcbf210dd7962",
+  "finalIndexSha256": "9dc3802229df3b3668cd1d03fb6a59c4d458dfd85d6fff7533ed5f29fcb30c81",
+  "changedPaths": [
+    "搜打撤/tests/shop-transaction-lifecycle.test.js"
+  ],
+  "buildInputChanges": [],
+  "change": "Removed one unused destructured UI variable from a test; no runtime, assets, package, config or build-tool input changed.",
+  "buildReceipt": "vite-build-result.json",
+  "passed": true
+}

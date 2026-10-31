@@ -17,14 +17,21 @@ export function createRainTableau(canvas, { sceneBackdrop = false } = {}) {
     seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5;
     return (seed >>> 0) / 4294967296;
   };
-  const project = (u, v) => ({ x: cx + (u - v) * sx, y: cy + (u + v) * sy });
+  const project = (u, v) => sceneBackdrop
+    ? { x:cx + u * width * .43, y:cy + v * height * .40 }
+    : { x: cx + (u - v) * sx, y: cy + (u + v) * sy };
   const unproject = (x, y) => {
+    if (sceneBackdrop) return { u:(x - cx) / (width * .43), v:(y - cy) / (height * .40) };
     const horizontal = (x - cx) / sx, vertical = (y - cy) / sy;
     return { u: (horizontal + vertical) / 2, v: (vertical - horizontal) / 2 };
   };
   const corners = edge => [[-edge, -edge], [edge, -edge], [edge, edge], [-edge, edge]].map(([u, v]) => project(u, v));
   const resetDrop = drop => {
-    drop.u = (random() * 2 - 1) * .87; drop.v = (random() * 2 - 1) * .87;
+    if (sceneBackdrop) {
+      const rows = Math.ceil(intensity * .45 / 6);
+      drop.u = ((drop.cell % 6 + random()) / 6 * 2 - 1) * .87;
+      drop.v = ((Math.floor(drop.cell / 6) % rows + random()) / rows * 2 - 1) * .87;
+    } else { drop.u = (random() * 2 - 1) * .87; drop.v = (random() * 2 - 1) * .87; }
     drop.phase = 0; drop.speed = .65 + random() * .65;
     drop.travel = .7 + random() * .65; drop.length = .045 + random() * .045;
   };
@@ -36,9 +43,10 @@ export function createRainTableau(canvas, { sceneBackdrop = false } = {}) {
     ripples.push({ u, v, source, age, life: source === 'tap' ? 2.2 : 1.1 + random() * .65 });
   };
   const replenish = () => {
-    drops.length = Math.min(drops.length, intensity);
-    while (drops.length < intensity) {
-      const drop = {}; resetDrop(drop); drop.phase = random(); drops.push(drop);
+    const count = sceneBackdrop ? Math.round(intensity * .45) : intensity;
+    drops.length = Math.min(drops.length, count);
+    while (drops.length < count) {
+      const drop = { cell:drops.length }; resetDrop(drop); drop.phase = random(); drops.push(drop);
     }
   };
   const path = points => {
@@ -54,7 +62,7 @@ export function createRainTableau(canvas, { sceneBackdrop = false } = {}) {
     const progress = clamp(ripple.age / ripple.life, 0, 1);
     return {
       radius: .018 + progress * (ripple.source === 'tap' ? .43 : .20),
-      opacity: (1 - progress) ** 1.3 * (ripple.source === 'tap' ? .8 : .48),
+      opacity: (1 - progress) ** 1.3 * (ripple.source === 'tap' ? (sceneBackdrop ? .38 : .8) : (sceneBackdrop ? .17 : .48)),
     };
   };
   const advance = dt => {
@@ -76,7 +84,7 @@ export function createRainTableau(canvas, { sceneBackdrop = false } = {}) {
     // Painted scenery is drawn once by the separate backdrop canvas.
     if (sceneBackdrop) {
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = 'rgba(17,40,47,.46)';
+      ctx.fillStyle = 'rgba(17,40,47,.12)';
       ctx.fillRect(0, 0, width, height);
       return;
     }
@@ -123,7 +131,7 @@ export function createRainTableau(canvas, { sceneBackdrop = false } = {}) {
     ctx.lineWidth = Math.max(.75, scale * .0042);
     for (const ripple of ripples) {
       const center = project(ripple.u, ripple.v), { radius, opacity } = rippleStyle(ripple);
-      const echoes = ripple.source === 'tap' ? 3 : 2;
+      const echoes = sceneBackdrop ? (ripple.source === 'tap' ? 2 : 1) : (ripple.source === 'tap' ? 3 : 2);
       for (let i = 0; i < echoes; i++) {
         const ring = Math.max(.008, radius - i * (ripple.source === 'tap' ? .05 : .022));
         ctx.globalAlpha = opacity * (1 - i * .25);
@@ -131,7 +139,7 @@ export function createRainTableau(canvas, { sceneBackdrop = false } = {}) {
         ctx.ellipse(center.x, center.y, ring * sx * Math.SQRT2, ring * sy * Math.SQRT2, 0, .10 + i * .27, Math.PI * 2 - .08 - i * .11);
         ctx.stroke();
       }
-      if (ripple.age < .14) {
+      if (ripple.age < .14 && (!sceneBackdrop || ripple.source === 'tap')) {
         ctx.globalAlpha = opacity * .75; ctx.strokeStyle = colors.light; ctx.beginPath();
         ctx.moveTo(center.x - scale * .008, center.y - scale * .014);
         ctx.lineTo(center.x, center.y - scale * .04); ctx.lineTo(center.x + scale * .008, center.y - scale * .018); ctx.stroke();
@@ -140,12 +148,14 @@ export function createRainTableau(canvas, { sceneBackdrop = false } = {}) {
     ctx.globalAlpha = 1;
   };
   const drawRain = colors => {
-    ctx.lineCap = 'round'; ctx.strokeStyle = colors.rain; ctx.lineWidth = Math.max(.65, scale * .004);
+    const heavy = intensity === 80;
+    ctx.lineCap = 'round'; ctx.strokeStyle = sceneBackdrop ? colors.light : colors.rain;
+    ctx.lineWidth = sceneBackdrop ? Math.max(heavy ? 1.25 : 1, scale * .005) : Math.max(.65, scale * .004);
     for (const drop of drops) {
       const landing = project(drop.u, drop.v), distance = (1 - drop.phase) * drop.travel * scale;
       const x = landing.x - distance * .055, y = landing.y - distance;
-      const length = Math.min(distance, drop.length * scale);
-      ctx.globalAlpha = .23 + drop.phase * .28; ctx.beginPath();
+      const length = Math.min(distance, drop.length * scale * (sceneBackdrop ? (heavy ? 2.4 : 1.9) : 1));
+      ctx.globalAlpha = (sceneBackdrop ? (heavy ? .4 : .32) : .23) + drop.phase * (sceneBackdrop ? .3 : .28); ctx.beginPath();
       ctx.moveTo(x - length * .055, y - length); ctx.lineTo(x, y); ctx.stroke();
     }
     ctx.globalAlpha = 1;
@@ -156,6 +166,7 @@ export function createRainTableau(canvas, { sceneBackdrop = false } = {}) {
     height = Number.isFinite(nextHeight) ? Math.max(1, Math.round(nextHeight)) : 1;
     scale = Math.max(.25, Math.min(width * .24, height * .36));
     sx = scale * .91; sy = scale * .405; cx = width * .5; cy = height * .60;
+    if (sceneBackdrop) { sx = width * .11; sy = height * .14; cy = height * .5; }
     if (canvas) { if (canvas.width !== width) canvas.width = width; if (canvas.height !== height) canvas.height = height; }
     return true;
   };
@@ -199,6 +210,6 @@ export function createRainTableau(canvas, { sceneBackdrop = false } = {}) {
   };
   resize(canvas?.width || 1, canvas?.height || 1); replenish();
   // 初帧与减少动效状态仍能看见雨圈，不依赖偷偷推进模拟。
-  for (let i = 0; i < 14; i++) addRipple((random() * 2 - 1) * .82, (random() * 2 - 1) * .82, 'rain', .2 + random() * .65);
+  for (let i = 0; i < (sceneBackdrop ? 6 : 14); i++) addRipple((random() * 2 - 1) * .82, (random() * 2 - 1) * .82, 'rain', .2 + random() * .65);
   return { resize, render, tap, setIntensity, setPalette, getDiagnostics, dispose };
 }

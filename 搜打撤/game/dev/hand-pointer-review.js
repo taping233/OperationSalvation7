@@ -32,7 +32,7 @@ function policyForEvent(e){
     raisedTop:ownerSlotRect.top,restDrop:parseFloat(ownerSlot.style.getPropertyValue('--hand-rest'))*scale,
     cardTop:ownerRect.top,controls:[...owner.querySelectorAll('.bt-infchip,.hsc-desc')].map(el=>el.getBoundingClientRect())}):[];
   const choice=resolveHandHit({regions,x:e.clientX,y:e.clientY,actualUid,ownerUid:owner?.dataset.uid,accessBands,
-    interactive:!!e.target.closest?.('button,[data-term],.hsc-desc,input,select,textarea,a')});
+    interactive:!!e.target.closest?.('button,input,select,textarea,a')});
   for(const slot of slots)slot.classList.toggle('review-active',slot.querySelector('.bt-card').dataset.uid===choice.uid);
   return {strategy:'fixed',...choice,accessBands};
 }

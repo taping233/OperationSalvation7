@@ -1,6 +1,7 @@
 import { battleRules, damageRuleFields } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { consumedPileUids } from '../game/src/battle/view/battle.piles.view.js';
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';
 import { battlePileBodyHTML } from '../game/src/battle/view/battle.decision-content.js';
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
@@ -114,10 +115,10 @@ describe('battle consumed-pile read model', () => {
     expect(game.ended.opts.spentCards.some(entry => entry.uid === uid)).toBe(false);
   });
 
-  it('item-dock uses remove permanent ownership and retain both permanent and temporary played sources', async () => {
+  it('item-dock commits each UID once while retaining permanent and temporary source ownership', async () => {
     const game = start([item()]);
     BattleSession.commands.usePotion('owned-0'); await settle();
-    expect(game.ownedCards).toEqual([]);
+    expect(expectBattleItemCommitted(game, runtime, 'owned-0')).toBe(game.ownedCards[0]);
     expect(consumedPileUids(BattleSession.getSnapshot())).toContain('owned-0');
     const temporaryUid = engine.addTempCard(item());
     BattleSession.commands.usePotion(temporaryUid); await settle();

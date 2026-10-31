@@ -1,0 +1,483 @@
+# 代号柒 原创音效合成（WF-sfx-original-1027）
+# 全部从零合成，无任何第三方音频输入。确定性随机种子，可复现。
+# 输出: game/assets/sfx/original-full-1027/<profile>.wav (44.1kHz mono int16)
+import hashlib
+import json
+import math
+import os
+import wave
+
+import numpy as np
+
+SR = 44100
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.normpath(os.path.join(HERE, "..", "..", "game", "assets", "sfx", "original-full-1027"))
+
+
+def n(dur):
+    return max(1, int(SR * dur))
+
+
+def t(dur):
+    return np.arange(n(dur)) / SR
+
+
+def exp_env(dur, decay):
+    x = t(dur)
+    return np.exp(-x * decay)
+
+
+def adsr(dur, a, d, s_level, r):
+    total = n(dur)
+    na, nd, nr = n(a), n(d), n(r)
+    ns = max(0, total - na - nd - nr)
+    env = np.concatenate([
+        np.linspace(0, 1, na, endpoint=False),
+        np.linspace(1, s_level, nd, endpoint=False),
+        np.full(ns, s_level),
+        np.linspace(s_level, 0, nr),
+    ])[:total]
+    return env
+
+
+def sine(freq, dur):
+    return np.sin(2 * np.pi * freq * t(dur))
+
+
+def glide(f0, f1, dur):
+    x = t(dur)
+    phase = 2 * np.pi * (f0 * x + (f1 - f0) / (2 * dur) * x * x)
+    return np.sin(phase)
+
+
+def bell(freq, dur, decay=6.0, partials=(1, 2.01, 2.74)):
+    x = np.zeros(n(dur))
+    for i, p in enumerate(partials):
+        x += (0.6 ** i) * sine(freq * p, dur) * exp_env(dur, decay + i * 3)
+    return x
+
+
+def noise(dur, seed):
+    rng = np.random.default_rng(seed)
+    return rng.standard_normal(n(dur))
+
+
+def shape(sig, gain_at):
+    """gain_at(freq)->gain 的频域塑形。"""
+    spec = np.fft.rfft(sig)
+    freqs = np.fft.rfftfreq(len(sig), 1 / SR)
+    spec *= gain_at(freqs)
+    return np.fft.irfft(spec, len(sig))
+
+
+def lowpass(sig, cutoff):
+    return shape(sig, lambda f: 1 / (1 + (f / cutoff) ** 4))
+
+
+def highpass(sig, cutoff):
+    return shape(sig, lambda f: (f / cutoff) ** 2 / (1 + (f / cutoff) ** 2))
+
+
+def bandpass(sig, lo, hi):
+    return shape(sig, lambda f: ((f / lo) ** 2 / (1 + (f / lo) ** 2)) * (1 / (1 + (f / hi) ** 4)))
+
+
+def sweep_noise(dur, f0, f1, seed, width=1.6):
+    """频带随时间从 f0 扫到 f1 的噪声（嗖/风声基底）。"""
+    x = noise(dur, seed)
+    win = n(0.03)
+    hop = win // 2
+    out = np.zeros_like(x)
+    norm = np.zeros_like(x)
+    w = np.hanning(win)
+    for start in range(0, len(x) - win, hop):
+        pos = start / len(x)
+        center = f0 * (f1 / f0) ** pos
+        frame = x[start:start + win] * w
+        spec = np.fft.rfft(frame)
+        freqs = np.fft.rfftfreq(win, 1 / SR)
+        g = np.exp(-0.5 * ((freqs - center) / (center * (width - 1) + 60)) ** 2)
+        out[start:start + win] += np.fft.irfft(spec * g, win) * w
+        norm[start:start + win] += w * w
+    return out / np.maximum(norm, 1e-6)
+
+
+def mix(*sigs):
+    total = max(len(s) for s in sigs)
+    out = np.zeros(total)
+    for s in sigs:
+        out[:len(s)] += s
+    return out
+
+
+def at(sig, delay):
+    return np.concatenate([np.zeros(n(delay)), sig])
+
+
+def finish(sig, peak=0.85, fade_in=0.004, fade_out=0.02):
+    sig = np.tanh(sig * 1.1)
+    m = np.max(np.abs(sig)) or 1.0
+    sig = sig / m * peak
+    fi, fo = n(fade_in), n(fade_out)
+    sig[:fi] *= np.linspace(0, 1, fi)
+    sig[-fo:] *= np.linspace(1, 0, fo)
+    return sig
+
+
+# ---------------- 界面 ----------------
+
+def click():
+    x = glide(1750, 1150, 0.07) * exp_env(0.07, 55)
+    tick = bandpass(noise(0.02, 11), 2500, 6000) * exp_env(0.02, 160)
+    return finish(mix(x, at(tick * 0.5, 0)), peak=0.6)
+
+
+def hover():
+    x = sine(2350, 0.045) * exp_env(0.045, 70)
+    return finish(x, peak=0.35)
+
+
+def confirm():
+    a = bell(659.3, 0.16, decay=10) * 0.8
+    b = bell(880.0, 0.22, decay=8)
+    return finish(mix(a, at(b, 0.07)), peak=0.7)
+
+
+def error():
+    x = glide(233, 196, 0.22) * adsr(0.22, 0.008, 0.03, 0.7, 0.12)
+    x += 0.3 * np.sign(glide(233, 196, 0.22)) * exp_env(0.22, 9)
+    return finish(lowpass(x, 1400), peak=0.6)
+
+
+def gain():
+    x = mix(bell(880, 0.12, 10), at(bell(1174.7, 0.18, 8), 0.06))
+    return finish(x, peak=0.7)
+
+
+def coin():
+    x = mix(bell(987.8, 0.1, 12), at(bell(1318.5, 0.24, 7), 0.08))
+    return finish(x, peak=0.7)
+
+
+def ding():
+    return finish(bell(1568, 0.45, decay=5.5), peak=0.65)
+
+
+def safe_store():
+    thud = sine(210, 0.12) * exp_env(0.12, 26)
+    clack = bandpass(noise(0.05, 21), 900, 3200) * exp_env(0.05, 60)
+    lock = bell(740, 0.1, 14)
+    return finish(mix(thud, at(clack, 0.05), at(lock * 0.6, 0.1)), peak=0.7)
+
+
+def safe_retrieve():
+    clack = bandpass(noise(0.05, 22), 900, 3200) * exp_env(0.05, 60)
+    lift = glide(420, 700, 0.14) * exp_env(0.14, 14)
+    return finish(mix(clack, at(lift, 0.06), at(bell(940, 0.14, 10) * 0.5, 0.14)), peak=0.7)
+
+
+def drop():
+    thud = sine(150, 0.14) * exp_env(0.14, 24)
+    puff = lowpass(noise(0.1, 23), 700) * exp_env(0.1, 30)
+    return finish(mix(thud, puff * 0.6), peak=0.65)
+
+
+def search_start():
+    sw = sweep_noise(0.32, 500, 2200, 24) * adsr(0.32, 0.05, 0.05, 0.8, 0.12)
+    ping = bell(1200, 0.1, 12) * 0.4
+    return finish(mix(sw * 0.5, at(ping, 0.2)), peak=0.6)
+
+
+def search_reveal():
+    x = mix(bell(1046.5, 0.1, 11), at(bell(1318.5, 0.1, 10), 0.05), at(bell(1568, 0.22, 8), 0.1))
+    shimmer = highpass(noise(0.2, 25), 5000) * exp_env(0.2, 18) * 0.15
+    return finish(mix(x, at(shimmer, 0.1)), peak=0.65)
+
+
+# ---------------- 场景过渡 ----------------
+
+def scene():
+    sw = sweep_noise(0.55, 300, 2600, 31) * adsr(0.55, 0.12, 0.1, 0.9, 0.25)
+    return finish(sw, peak=0.6)
+
+
+def fire_enter():
+    crack = bandpass(noise(0.6, 32), 300, 1800)
+    x = t(0.6)
+    crack *= 0.6 + 0.4 * np.sin(2 * np.pi * 9 * x)
+    warm = sine(196, 0.6) * adsr(0.6, 0.15, 0.1, 0.5, 0.3) * 0.4
+    return finish(mix(lowpass(crack, 2200) * adsr(0.6, 0.08, 0.1, 0.8, 0.3) * 0.5, warm), peak=0.6)
+
+
+def deploy_start():
+    sw = sweep_noise(0.5, 250, 1800, 33) * adsr(0.5, 0.1, 0.05, 0.9, 0.15)
+    tone = mix(bell(523.3, 0.12, 10), at(bell(784, 0.25, 8), 0.3))
+    return finish(mix(sw * 0.6, tone * 0.8), peak=0.65)
+
+
+def battle_enter():
+    hit = sine(82, 0.35) * exp_env(0.35, 11)
+    boom = lowpass(noise(0.3, 34), 500) * exp_env(0.3, 12)
+    rise = sweep_noise(0.45, 400, 3000, 35) * adsr(0.45, 0.15, 0.05, 0.8, 0.1)
+    clang = bell(1244, 0.3, 7) * 0.4
+    return finish(mix(hit, boom * 0.7, at(rise * 0.5, 0.15), at(clang, 0.45)), peak=0.75)
+
+
+# ---------------- 战斗 ----------------
+
+def danger():
+    p1 = sine(220, 0.14) * adsr(0.14, 0.01, 0.02, 0.8, 0.06)
+    p2 = sine(220, 0.14) * adsr(0.14, 0.01, 0.02, 0.8, 0.08)
+    return finish(lowpass(mix(p1, at(p2, 0.2)), 1600), peak=0.65)
+
+
+def boss_reveal():
+    drone = mix(sine(98, 1.0), sine(147, 1.0) * 0.5) * adsr(1.0, 0.3, 0.1, 0.9, 0.4)
+    rumble = lowpass(noise(1.0, 41), 240) * adsr(1.0, 0.25, 0.1, 0.8, 0.45) * 0.6
+    clang = at(bell(311, 0.5, 4.5, partials=(1, 2.4, 3.9)), 0.35) * 0.7
+    return finish(mix(drone, rumble, clang), peak=0.8)
+
+
+def energy_up():
+    x = glide(500, 1040, 0.16) * exp_env(0.16, 12)
+    sparkle = bell(1568, 0.12, 12) * 0.4
+    return finish(mix(x, at(sparkle, 0.1)), peak=0.6)
+
+
+def energy_down():
+    x = glide(820, 380, 0.2) * exp_env(0.2, 10)
+    return finish(lowpass(x, 2400), peak=0.6)
+
+
+def turn_self():
+    x = mix(bell(659.3, 0.1, 12), at(bell(987.8, 0.16, 9), 0.06))
+    return finish(x, peak=0.6)
+
+
+def turn_foe():
+    x = mix(bell(440, 0.12, 11), at(bell(329.6, 0.2, 8), 0.07))
+    return finish(lowpass(x, 3200), peak=0.6)
+
+
+def card():
+    snap = bandpass(noise(0.06, 51), 1800, 5200) * exp_env(0.06, 70)
+    body = sine(320, 0.05) * exp_env(0.05, 50) * 0.5
+    return finish(mix(snap, body), peak=0.6)
+
+
+def draw():
+    sw = sweep_noise(0.13, 1500, 4200, 52, width=1.9) * exp_env(0.13, 22)
+    return finish(sw, peak=0.5)
+
+
+def shuffle():
+    parts = [at(bandpass(noise(0.05, 60 + i), 1200, 4500) * exp_env(0.05, 55), i * 0.09) for i in range(4)]
+    return finish(mix(*parts), peak=0.55)
+
+
+def hit():
+    thump = sine(105, 0.12) * exp_env(0.12, 26)
+    crack = bandpass(noise(0.06, 61), 700, 3800) * exp_env(0.06, 55)
+    return finish(mix(thump, crack * 0.8), peak=0.75)
+
+
+def attack_pierce():
+    ping = glide(2600, 1900, 0.12) * exp_env(0.12, 22)
+    sw = sweep_noise(0.14, 3000, 900, 62) * exp_env(0.14, 20)
+    return finish(mix(ping * 0.7, sw * 0.6), peak=0.65)
+
+
+def attack_arrow():
+    sw = sweep_noise(0.18, 2600, 700, 63, width=1.8) * exp_env(0.18, 16)
+    thud = at(sine(160, 0.08) * exp_env(0.08, 30), 0.16) * 0.7
+    return finish(mix(sw, thud), peak=0.65)
+
+
+def strike():
+    thump = sine(170, 0.14) * exp_env(0.14, 22)
+    crack = bandpass(noise(0.08, 64), 500, 2800) * exp_env(0.08, 40)
+    return finish(mix(thump, crack * 0.7), peak=0.75)
+
+
+def parry():
+    clang = bell(1560, 0.28, decay=8, partials=(1, 1.51, 2.29))
+    ring = bell(2340, 0.2, decay=10, partials=(1, 1.42)) * 0.5
+    return finish(highpass(mix(clang, ring), 500), peak=0.7)
+
+
+def curse():
+    x = t(0.7)
+    drone = mix(sine(110, 0.7), sine(116.5, 0.7) * 0.8, sine(55, 0.7) * 0.6)
+    trem = 0.7 + 0.3 * np.sin(2 * np.pi * 6.5 * x)
+    fall = glide(660, 220, 0.55) * exp_env(0.55, 5) * 0.3
+    return finish(mix(drone * trem * adsr(0.7, 0.05, 0.1, 0.9, 0.35), at(fall, 0.05)), peak=0.6)
+
+
+def attack_fire():
+    sw = sweep_noise(0.5, 400, 2400, 71, width=2.0)
+    x = t(0.5)
+    env = np.sin(np.pi * np.minimum(x / 0.5, 1)) ** 1.5
+    crackle = bandpass(noise(0.5, 72), 1500, 5200) * (0.5 + 0.5 * np.sin(2 * np.pi * 17 * x)) * env * 0.3
+    return finish(mix(sw * env, crackle), peak=0.7)
+
+
+def attack_lightning():
+    zap = glide(3400, 300, 0.16) * exp_env(0.16, 16)
+    cracks = [at(highpass(noise(0.03, 80 + i), 3000) * exp_env(0.03, 60), d) for i, d in enumerate((0.0, 0.05, 0.11, 0.2))]
+    tail = bandpass(noise(0.2, 84), 800, 3400) * exp_env(0.2, 14) * 0.5
+    return finish(mix(zap, *cracks, at(tail, 0.16)), peak=0.7)
+
+
+def attack_psychic():
+    a = glide(520, 990, 0.5)
+    b = glide(527, 999, 0.5)
+    x = t(0.5)
+    shimmer = 0.6 + 0.4 * np.sin(2 * np.pi * 8 * x)
+    env = adsr(0.5, 0.08, 0.08, 0.85, 0.3)
+    high = bell(1980, 0.4, 6) * 0.25
+    return finish(mix((a + b) * 0.5 * shimmer * env, at(high, 0.08)), peak=0.55)
+
+
+def card_restore():
+    x = mix(bell(523.3, 0.14, 9), at(bell(659.3, 0.14, 9), 0.09), at(bell(880, 0.3, 6.5), 0.18))
+    air = highpass(noise(0.3, 91), 6000) * exp_env(0.3, 10) * 0.12
+    return finish(mix(x, at(air, 0.1)), peak=0.6)
+
+
+def chest_burst():
+    pop = mix(sine(240, 0.09) * exp_env(0.09, 30), bandpass(noise(0.05, 92), 800, 3000) * exp_env(0.05, 50) * 0.6)
+    sparkle = mix(at(bell(1318.5, 0.09, 12), 0.07), at(bell(1760, 0.09, 11), 0.13), at(bell(2093, 0.2, 9), 0.19))
+    return finish(mix(pop, sparkle * 0.8), peak=0.7)
+
+
+def trade_buy():
+    x = mix(bell(987.8, 0.08, 13), at(bell(1318.5, 0.16, 9), 0.06), at(glide(1700, 1250, 0.06) * exp_env(0.06, 60) * 0.5, 0.16))
+    return finish(x, peak=0.65)
+
+
+def shield_up():
+    hum = glide(300, 520, 0.25) * adsr(0.25, 0.05, 0.05, 0.8, 0.1)
+    lock = bell(1046.5, 0.18, 9) * 0.7
+    return finish(mix(hum * 0.6, at(lock, 0.2)), peak=0.6)
+
+
+def shield_break():
+    crash = bandpass(noise(0.18, 95), 2200, 8000) * exp_env(0.18, 20)
+    tones = mix(glide(1900, 900, 0.2) * exp_env(0.2, 12) * 0.5, glide(2600, 1300, 0.16) * exp_env(0.16, 14) * 0.4)
+    return finish(mix(crash, tones), peak=0.7)
+
+
+def burn():
+    x = t(0.45)
+    crackle = bandpass(noise(0.45, 96), 900, 4200) * (0.55 + 0.45 * np.sin(2 * np.pi * 13 * x))
+    env = adsr(0.45, 0.03, 0.08, 0.85, 0.25)
+    low = sine(140, 0.45) * exp_env(0.45, 8) * 0.35
+    return finish(mix(crackle * env * 0.6, low), peak=0.6)
+
+
+def foe_lunge():
+    sw = sweep_noise(0.16, 350, 1500, 97, width=1.8) * adsr(0.16, 0.02, 0.02, 0.9, 0.06)
+    low = glide(180, 320, 0.14) * exp_env(0.14, 16) * 0.5
+    return finish(mix(sw, low), peak=0.65)
+
+
+# ---------------- 结算与奖励 ----------------
+
+def fanfare(notes, step, hold, decay):
+    parts = [at(bell(f, hold, decay), i * step) for i, f in enumerate(notes)]
+    return finish(mix(*parts), peak=0.75)
+
+
+def victory():
+    return fanfare((523.3, 659.3, 784, 1046.5), 0.11, 0.3, 7)
+
+
+def boss_victory():
+    base = fanfare((392, 523.3, 659.3, 784, 1046.5), 0.12, 0.32, 6.5)
+    low = sine(130.8, 0.9) * adsr(0.9, 0.02, 0.1, 0.7, 0.5) * 0.4
+    return finish(mix(base, low), peak=0.78)
+
+
+def run_clear():
+    return fanfare((523.3, 659.3, 784, 1046.5, 1318.5), 0.13, 0.42, 6)
+
+
+def extraction_success():
+    a = fanfare((587.3, 880, 1174.7), 0.1, 0.26, 7.5)
+    air = highpass(noise(0.35, 98), 5500) * exp_env(0.35, 8) * 0.12
+    return finish(mix(a, at(air, 0.1)), peak=0.7)
+
+
+def defeat():
+    x = mix(
+        bell(392, 0.3, 6),
+        at(bell(311.1, 0.34, 5.5), 0.24),
+        at(bell(233.1, 0.6, 4.5), 0.5),
+    )
+    low = sine(65.4, 1.0) * adsr(1.0, 0.1, 0.2, 0.6, 0.6) * 0.35
+    return finish(lowpass(mix(x, low), 2600), peak=0.7)
+
+
+RECIPES = {
+    # 界面
+    "click": click, "hover": hover, "confirm": confirm, "error": error,
+    "gain": gain, "coin": coin, "ding": ding,
+    "safeStore": safe_store, "safeRetrieve": safe_retrieve, "drop": drop,
+    "searchStart": search_start, "searchReveal": search_reveal,
+    # 场景过渡
+    "scene": scene, "fireEnter": fire_enter, "deployStart": deploy_start,
+    "battleEnter": battle_enter,
+    # 战斗
+    "danger": danger, "bossReveal": boss_reveal,
+    "energyUp": energy_up, "energyDown": energy_down,
+    "turnSelf": turn_self, "turnFoe": turn_foe,
+    "card": card, "draw": draw, "shuffle": shuffle,
+    "hit": hit, "attackPierce": attack_pierce, "attackArrow": attack_arrow,
+    "strike": strike, "parry": parry, "curse": curse,
+    "attackFire": attack_fire, "attackLightning": attack_lightning,
+    "attackPsychic": attack_psychic, "cardRestore": card_restore,
+    "chestBurst": chest_burst, "tradeBuy": trade_buy,
+    "shieldUp": shield_up, "shieldBreak": shield_break,
+    "burn": burn, "foeLunge": foe_lunge,
+    # 结算
+    "victory": victory, "bossVictory": boss_victory, "runClear": run_clear,
+    "extractionSuccess": extraction_success, "defeat": defeat,
+}
+
+
+def write_wav(path, sig):
+    pcm = np.clip(sig, -1, 1)
+    pcm = (pcm * 32767).astype(np.int16)
+    with wave.open(path, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(SR)
+        w.writeframes(pcm.tobytes())
+
+
+def main():
+    os.makedirs(OUT, exist_ok=True)
+    manifest = {}
+    for name, fn in RECIPES.items():
+        sig = fn()
+        path = os.path.join(OUT, name + ".wav")
+        write_wav(path, sig)
+        with open(path, "rb") as f:
+            digest = hashlib.sha256(f.read()).hexdigest()
+        manifest[name] = {
+            "file": "assets/sfx/original-full-1027/" + name + ".wav",
+            "duration": round(len(sig) / SR, 3),
+            "peak": round(float(np.max(np.abs(sig))), 3),
+            "rms": round(float(np.sqrt(np.mean(sig ** 2))), 4),
+            "sha256": digest,
+        }
+        print(f"{name:20s} {len(sig)/SR:5.2f}s  rms={manifest[name]['rms']}")
+    mpath = os.path.join(HERE, "manifest.json")
+    with open(mpath, "w", encoding="utf-8") as f:
+        json.dump(manifest, f, ensure_ascii=False, indent=2, sort_keys=True)
+    print(f"\n{len(manifest)} files -> {OUT}")
+    print(f"manifest -> {mpath}")
+
+
+if __name__ == "__main__":
+    main()

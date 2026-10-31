@@ -59,8 +59,7 @@ body #overlay .card.bag-page .bag-v2{
   border-bottom: 1px solid rgba(255, 255, 255, .14);
 }
 & .bag-kick { display: block; font-size: 10px; letter-spacing: .42em; color: rgba(226, 232, 238, .34); }
-& .bag-head2 h2 { display: flex; align-items: center; gap: 14px; margin: 2px 0 0; font-size: 40px; font-weight: 800; letter-spacing: .06em; line-height: 1.2; color: #f2f4f6; }
-& .bag-title .help-btn { width: 60px; height: 60px; font-size: 22px; flex: none; }}
+& .bag-head2 h2 { display: flex; align-items: center; gap: 14px; margin: 2px 0 0; font-size: 40px; font-weight: 800; letter-spacing: .06em; line-height: 1.2; color: #f2f4f6; }}
 /* Match the shared archive-back ID specificity; geometry stays scoped to this rail. */
 body #overlay#overlay#overlay .card.bag-page .bag-v2 .bag-rail > .archive-back { position: static; inset: auto; flex: none; margin: 0 0 20px; width: 64px; height: 64px; }
 body #overlay .card.bag-page .bag-v2{

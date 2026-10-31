@@ -63,8 +63,8 @@ const profiles = [
     ['.slot-page-head', 'heading', 40], ['.slot-card', 'content', 90],
   ] },
   { key: 'base-content', root: '#hubMain.base-camp', shell: 'content', duration: navigationTiming.enter, staggerMax: navigationTiming.staggerMax, groups: [
-    ['.camp-section-head, .trade-v5-heading, .av3-header, .pv12-page-head, .courtyard-v3-heading', 'heading', 0],
-    ['.pv12-agent-strip, .companion-toolbar, .warehouse-controls-v12, .trade-v5-modes, .facility-map, .av12-workspace > nav, .courtyard-v3-modes', 'nav', 60],
+    ['.camp-section-head, .trade-v5-heading, .av3-header, .pv12-page-head', 'heading', 0],
+    ['.pv12-agent-strip, .companion-toolbar, .warehouse-controls-v12, .trade-v5-modes, .facility-map, .av12-workspace > nav', 'nav', 60],
     ['.pv12-agent-art, .pv12-pool-catalog, .partner-display, .companion-hatch-art', 'portrait', 100],
     ['.pv12-agent-data, .warehouse-inventory-v12, .trade-v5-rail, .av12-content, .facility-v12-stage, .courtyard-v3-scene', 'content', 160],
     ['.trade-v5-desk, .facility-details, .courtyard-v3-controls, .partner-details, .companion-hatch', 'content', 220],

@@ -4,22 +4,35 @@ import { pageMotionProfile, pageMotionBlocks } from '../ui/page-motion-profiles.
 import { animateBaseRefresh } from './base-motion-v4.js';
 import { refreshCardBrowser } from '../ui/card-browser.js';
 import { navigationState, baseNavigationChange as navigationChange, baseNavigationTiming as navigationTiming, baseNavigationEasing } from '../ui/navigation-motion.js';
+import { syncViewChildren } from '../ui/view-children-sync.js';
+import { lockRoomButtons } from '../ui/room-footer.js';
+
+const hubControlHolds = new WeakMap();
+const cardNavigationBindings = new WeakSet();
 
 /** @param {Iterable<Element>} controls */
 export function holdHubOperationControls(controls) {
-  const previous = [...controls].map(element => {
+  const held = [...new Set(controls)].map(element => {
     const control = /** @type {HTMLButtonElement} */ (element);
-    return { control, disabled:control.disabled, busy:control.getAttribute('aria-busy') };
-  });
-  for (const { control } of previous) {
-    control.disabled = true;
+    let hold = hubControlHolds.get(control);
+    if (!hold) {
+      hold = { count:0, release:lockRoomButtons([control]), busy:control.getAttribute('aria-busy') };
+      hubControlHolds.set(control, hold);
+    }
+    hold.count++;
     control.setAttribute('aria-busy', 'true');
-  }
+    return { control, hold };
+  });
+  let released = false;
   return () => {
-    for (const { control, disabled, busy } of previous) {
-      control.disabled = disabled;
-      if (busy === null) control.removeAttribute('aria-busy');
-      else control.setAttribute('aria-busy', busy);
+    if (released) return;
+    released = true;
+    for (const { control, hold } of held) {
+      if (--hold.count) continue;
+      hold.release();
+      hubControlHolds.delete(control);
+      if (hold.busy === null) control.removeAttribute('aria-busy');
+      else control.setAttribute('aria-busy', hold.busy);
     }
   };
 }
@@ -97,6 +110,7 @@ export function presentHub(ui, html, icons) {
   }
   const page = current.querySelector('.hub-page');
   const nextPage = /** @type {HTMLElement} */ (next.querySelector('.hub-page'));
+  const sameView = /** @type {HTMLElement} */ (page).dataset.view === nextPage.dataset.view;
   const changed = (/** @type {HTMLElement} */ (page).dataset.motionView || /** @type {HTMLElement} */ (page).dataset.view) !== (nextPage.dataset.motionView || nextPage.dataset.view);
   current.className = next.className;
   const back = current.querySelector('.hub-back'), nextBack = next.querySelector('.hub-back');
@@ -118,15 +132,35 @@ export function presentHub(ui, html, icons) {
   }
   const localDirection = browseDirection(page, nextPage);
   const before = { view: /** @type {HTMLElement} */ (page).dataset.view, direction: localDirection || 1 };
-  page.getAnimations?.({ subtree: true }).forEach(animation => animation.cancel());
+  const archive = page.querySelector('.hub-archive-v3'), nextArchive = nextPage.querySelector('.hub-archive-v3');
+  const sameArchive = !!archive && !!nextArchive && archive.getAttribute('data-view-key') === nextArchive.getAttribute('data-view-key');
+  const patchSamePage = sameView && !localDirection && (['shop', 'upgrade'].includes(current.dataset.page) || sameArchive
+    || !!page.querySelector('.personnel-v12[data-section="companions"]'));
+  if (!patchSamePage) page.getAnimations?.({ subtree: true }).forEach(animation => animation.cancel());
   page.className = nextPage.className.replace(' page-in', '');
   /** @type {HTMLElement} */ (page).dataset.view = nextPage.dataset.view;
   /** @type {HTMLElement} */ (page).dataset.motionView = nextPage.dataset.motionView || nextPage.dataset.view;
   const previousRegions = regionContents(page);
   const keptPortrait = updatePersonnelV12(page, nextPage, reducedMotion(), before);
   if (!keptPortrait) {
-    page.innerHTML = nextPage.innerHTML;
-    if (!changed && localDirection) {
+    if (patchSamePage) {
+      // The mounted partner owns its transient reply/reaction until its timer ends.
+      const partner = page.querySelector('[data-partner-play]');
+      const nextPartner = nextPage.querySelector('[data-partner-play]');
+      if (partner && nextPartner && partner.getAttribute('data-partner-play') === nextPartner.getAttribute('data-partner-play')) {
+        nextPartner.replaceWith(partner.cloneNode(true));
+      }
+      // Collection artwork is hydrated by its mounted browser, outside the HTML projection.
+      const collectionCards = new Map([...page.querySelectorAll('.collection-cards-v4 [data-browser-key]')]
+        .map(item => [/** @type {HTMLElement} */ (item).dataset.browserKey, item]));
+      for (const item of nextPage.querySelectorAll('.collection-cards-v4 [data-browser-key]')) {
+        const art = collectionCards.get(/** @type {HTMLElement} */ (item).dataset.browserKey)?.querySelector('[data-browser-art]');
+        const nextArt = item.querySelector('[data-browser-art]');
+        if (art && nextArt && !nextArt.hasChildNodes()) nextArt.replaceWith(art.cloneNode(true));
+      }
+      syncViewChildren(page, nextPage);
+    } else page.innerHTML = nextPage.innerHTML;
+    if (!patchSamePage && !changed && localDirection) {
       // 建设沿左侧纵向目录切换，横向货架/人物名册沿左右方向；只平移完整区域。
       const vertical = !!page.querySelector('.facilities-v12');
       animateChangedRegions(page, previousRegions, {
@@ -156,7 +190,8 @@ export function pulseNumber(target) {
   linkedAnimate(target, [{ opacity: .35 }, { opacity: 1 }], { duration: motionTiming.feedback, easing: motionEasing.enter });
 }
 export function bindCardNavigation(root, selector, { activate = true } = {}) {
-  if (!root || root.dataset.cardNavigationBound) return;
+  if (!root || cardNavigationBindings.has(root)) return;
+  cardNavigationBindings.add(root);
   root.dataset.cardNavigationBound = 'true';
   root.addEventListener('keydown', event => {
     if (event.ctrlKey || event.metaKey || event.altKey || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;

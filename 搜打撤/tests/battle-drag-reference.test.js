@@ -63,6 +63,26 @@ it('picks a hand card up immediately and keeps following after an in-hand releas
   Aim.cancelAim(); settleReturn(); settleReturn(); expect(card.style.transform).toBe('');
 });
 
+it('keeps enemy status labels targetable during a card drag and releases tooltip suppression after play', () => {
+  const status = document.createElement('span'); status.dataset.term = 'poison';
+  status.className = 'status-chip-summary'; foe.append(status);
+  document.elementFromPoint.mockReturnValue(status);
+  begin();
+  expect(card.closest('.battle-stage').dataset.cardDragging).toBe('true');
+  move(1200, 450); step();
+  expect(Aim.aim.hover?.idx).toBe(0);
+  release(1200, 450);
+  expect(commands.submitCardPlay).toHaveBeenCalledExactlyOnceWith('drag-card', 0, false);
+  expect(card.closest('.battle-stage').hasAttribute('data-card-dragging')).toBe(false);
+});
+
+it('restores tooltip eligibility on cancellation and pointer loss', () => {
+  begin(); Aim.cancelAim();
+  expect(card.closest('.battle-stage').hasAttribute('data-card-dragging')).toBe(false);
+  begin(); window.dispatchEvent(pointer('pointercancel', 800, 700));
+  expect(card.closest('.battle-stage').hasAttribute('data-card-dragging')).toBe(false);
+});
+
 it('anchors at the card centre and follows with the source position rate instead of teleporting', () => {
   begin(210, 950); move(610, 850); step(); step();
   expect(Aim.aim.motion.x).toBeGreaterThan(310); expect(Aim.aim.motion.x).toBeLessThan(610);

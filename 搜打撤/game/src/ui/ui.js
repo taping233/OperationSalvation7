@@ -62,8 +62,6 @@ const cardZoomController = createCardZoomController({
         if (e.target !== this.el.overlay) return;
         if (this._canCancelOverlay()) this.closeTopOverlayByEsc();
       });
-      // 帮助弹层（? 按钮）：所有页面共用的基础动作，页面可注册自己的帮助主题
-      this._baseActs.openHelp = (d) => this.showHelp(d.page);
       // 设计器等表单的实时输入回调
       this.el.ovBody.addEventListener('input', (e) => {
         if (this._inputHandler) this._inputHandler(e);

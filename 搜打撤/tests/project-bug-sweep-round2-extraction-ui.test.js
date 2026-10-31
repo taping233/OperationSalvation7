@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 const H = vi.hoisted(() => ({ game:{}, room:2, update:vi.fn(), finish:vi.fn() }));
 vi.mock('../game/src/run/game.session.js', () => ({ game:H.game, getActiveSlot:() => 1,
@@ -9,8 +10,10 @@ vi.mock('../game/src/run/game.run.scenes.js', () => ({ FIRE_RESTORABLE:() => tru
   finishInstant(){}, grantEventCard(){}, nodeOpt(){}, nodeShell(){}, openFixedRewardsOnCell(){}, openPocketRestore(){}, openShop(){} }));
 vi.mock('../game/src/hub/game.storage.js', () => ({ RunStorage:{ readIdentity:() => ({ ok:true, value:{ runId:'run-one' } }) } }));
 vi.mock('../game/src/hub/recovery.commands.js', () => ({ commitBaseAndRun(){}, readSettlementReceipt(){}, recoverSlot(){} }));
-vi.mock('../game/src/hub/extraction.commands.js', async importOriginal => ({ ...await importOriginal(),
-  createExtractionCommands:() => ({ updateCards:H.update, finish:H.finish }) }));
+vi.mock('../game/src/hub/extraction.commands.js', async importOriginal => {
+  const actual = await importOriginal();
+  return { ...actual, createExtractionCommands:ports => ({ ...actual.createExtractionCommands(ports), updateCards:H.update, finish:H.finish }) };
+});
 const a = { id:'same', name:'同名招式', type:'法术', rarity:'古朴', value:2 };
 const b = { ...a, rarity:'史诗', value:9 };
 const rows = () => [{ card:{ ...a }, count:1, variantKey:'v1' }, { card:{ ...b }, count:1, variantKey:'v2' }];
@@ -29,10 +32,10 @@ beforeEach(async () => {
   UI = { el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody') },
     log:vi.fn(), refresh(){}, registerHelp(){}, helpBtn:() => '', act:(name, fn) => { handlers[name] = fn; },
     showOverlay:(_title, html) => { UI.el.ovBody.innerHTML = html; } };
-  window.SDT = { UI, Icons:{rich:html=>html}, Base:{ isSha:() => false, stashRoom:() => H.room, stashCap:() => 25,
+  await connectSdtFixture({ UI, Icons:{rich:html=>html}, Base:{ isSha:() => false, stashRoom:() => H.room, stashCap:() => 25,
     stashUsed:() => 25 - H.room }, Meta:{ addXpToProgress(){} },
     Cards:{ cardHTML:card => card.name, rarityOf:card => card.rarity, sellPrice:card => card.value },
-    Sound:{ sfx(){}, music(){} } };
+    Sound:{ sfx(){}, music(){} } });
   ({ resumeExtraction } = await import('../game/src/run/game.run.altar.js'));
 });
 afterEach(() => { document.body.replaceChildren(); vi.restoreAllMocks(); });

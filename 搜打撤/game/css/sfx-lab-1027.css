@@ -1,0 +1,76 @@
+/* sfx-lab-1027 原创音效试听页 */
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  background: #12151c;
+  color: #e6e9f0;
+  padding-bottom: 96px;
+}
+.page-head { padding: 32px clamp(16px, 5vw, 56px) 8px; }
+.eyebrow { font-size: 12px; letter-spacing: .18em; color: #8b93a7; }
+.eyebrow span { margin-left: 10px; color: #c9a86a; }
+.heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+h1 { margin: 8px 0 6px; font-size: 26px; }
+.page-head p { margin: 0; color: #a7aebf; max-width: 640px; line-height: 1.7; }
+.version-note { margin-top: 10px !important; font-size: 13px; color: #7d8497 !important; }
+.totals { color: #a7aebf; text-align: right; line-height: 1.6; }
+.totals strong { font-size: 28px; color: #e6e9f0; }
+
+.toolbar {
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+  padding: 14px clamp(16px, 5vw, 56px);
+  position: sticky; top: 0; background: #12151cee; backdrop-filter: blur(6px);
+  border-bottom: 1px solid #262c3a; z-index: 5;
+}
+.search { display: flex; align-items: center; gap: 8px; background: #1a1f2b; border: 1px solid #2c3344; border-radius: 8px; padding: 7px 12px; flex: 1; min-width: 220px; }
+.search input { flex: 1; background: none; border: 0; color: inherit; outline: none; font-size: 14px; }
+.volume { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #a7aebf; }
+.marked-filter { font-size: 13px; color: #a7aebf; display: flex; gap: 6px; align-items: center; }
+
+button { cursor: pointer; font: inherit; border-radius: 8px; border: 1px solid #2c3344; background: #1a1f2b; color: #e6e9f0; padding: 7px 16px; }
+button:hover { border-color: #4a5470; }
+button:disabled { opacity: .35; cursor: not-allowed; }
+button.primary { background: #c9a86a; border-color: #c9a86a; color: #1a1408; font-weight: 600; }
+button.cand { background: #2b3a2e; border-color: #4a6b52; color: #b8e0c2; }
+button.cand:hover { border-color: #6d9a78; }
+
+.sound-list { padding: 8px clamp(16px, 5vw, 56px); }
+.group-title { font-size: 15px; color: #c9a86a; margin: 26px 0 10px; letter-spacing: .08em; }
+.sound-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  background: #181d28; border: 1px solid #242b3a; border-radius: 10px;
+  padding: 10px 16px; margin-bottom: 8px; flex-wrap: wrap;
+}
+.sound-head { display: flex; align-items: baseline; gap: 10px; min-width: 200px; }
+.sound-head strong { font-size: 15px; }
+.sound-head code { color: #6d7488; font-size: 12px; }
+.muted-tag { font-style: normal; font-size: 12px; color: #8a6d6d; border: 1px solid #4a3636; border-radius: 6px; padding: 1px 8px; }
+.sound-actions { display: flex; align-items: center; gap: 10px; }
+.adopt { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #b8e0c2; }
+.adopt input { accent-color: #6d9a78; }
+
+.review-bar {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  background: #171b25f2; border-top: 1px solid #2c3344;
+  padding: 12px clamp(16px, 5vw, 56px);
+}
+.review-bar strong { font-size: 15px; }
+.review-bar p { margin: 2px 0 0; font-size: 12px; color: #8b93a7; }
+
+dialog {
+  background: #181d28; color: inherit; border: 1px solid #2c3344;
+  border-radius: 12px; padding: 20px 24px; width: min(640px, 92vw);
+}
+dialog::backdrop { background: #000a; }
+.dialog-head { display: flex; justify-content: space-between; align-items: center; }
+.dialog-head h2 { margin: 0; font-size: 18px; }
+.dialog-head button { border: 0; background: none; font-size: 22px; }
+dialog textarea {
+  width: 100%; background: #12151c; color: #cfd5e2; border: 1px solid #2c3344;
+  border-radius: 8px; padding: 10px; font-family: ui-monospace, monospace; font-size: 13px;
+}
+.dialog-actions { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 12px; }
+#copy-status { font-size: 13px; color: #6d9a78; }

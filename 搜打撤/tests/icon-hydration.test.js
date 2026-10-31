@@ -77,11 +77,11 @@ it('安全格按钮保持纯文字，纯图标按钮保留名称', async () => {
   const markup = transfer.button(card.name, true, 'zoomMoveToSafe');
   document.body.innerHTML = markup + '<button id="iconOnly">[[icon:cross]]</button><button id="named" aria-label="关闭详情">[[icon:cross]]</button>';
   const button = document.querySelector('[data-act="zoomMoveToSafe"]');
-  expect(button.textContent.trim()).toBe('移入安全格');
+  expect(button.textContent.trim()).toBe('移入安全格 · 同名1张');
   expect(button.querySelector('[aria-hidden="true"]')).toBeNull();
   window.SDT.Icons.hydrate(document.body);
   expect(button.querySelector('img')).toBeNull();
-  expect(button.textContent.trim()).toBe('移入安全格');
+  expect(button.textContent.trim()).toBe('移入安全格 · 同名1张');
   expect(document.querySelector('#iconOnly img').alt).toBe('cross');
   expect(document.querySelector('#iconOnly img').closest('[aria-hidden="true"]')).toBeNull();
   expect(document.querySelector('#named').getAttribute('aria-label')).toBe('关闭详情');

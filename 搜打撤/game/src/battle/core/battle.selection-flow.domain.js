@@ -27,6 +27,8 @@ function createBattleSelectionFlow({
   session, requestBattleRender, findCard, addTempCard, addDeckCard, shuffleDeck, queueBattleAction,
   runStagedSteps, applyTextEffects, queueCardExecution, fireConsumeTriggers, stepsForOperations,
   fireCatGift, swapCardCosts, sweepDead, finish,
+  checkHandCombinations = () => {},
+  resumeAutomaticCasts = () => {},
 }) {
   const { handSelectQueue, choiceQueue } = session;
   const alive = () => instanceRuntime.foes.filter(foe => !foe.dead);
@@ -44,6 +46,7 @@ function createBattleSelectionFlow({
         instanceRuntime.hand.push(uid);
         instanceRuntime.lastDrawnUids.push(uid);
         instanceRuntime.cardAnims.push({ kind: 'draw', uid, name: entry.card.name, card: { ...entry.card } });
+        checkHandCombinations();
         return true;
       },
       queueCardExecution,
@@ -162,6 +165,7 @@ function createBattleSelectionFlow({
     processHandSelect();
     processChoice();
     processDiscoverQueue();
+    resumeAutomaticCasts();
     session.resumeTurnEnd?.();
   }
 
@@ -191,6 +195,9 @@ function createBattleSelectionFlow({
     instanceRuntime.G.log('[[icon:cards]] 跳过手牌选择，该效果未结算', 'warn');
     settleSelections();
     requestBattleRender();
+  }
+  function completeHandSelection(job) {
+    if (typeof job.onDone === 'function') job.onDone();
   }
   function finishHandSelectionEffect(card, text, target) {
     if (text) {
@@ -269,7 +276,7 @@ function createBattleSelectionFlow({
           settleSelections();
           return;
         }
-        job.onDone?.();
+        completeHandSelection(job);
         if (instanceRuntime.G?.battleActive) finishHandSelectionEffect(job.srcCard || entry.card, job.thenText, job.target || null);
       };
       if (queueCardExecution(uid, entry.card, [], alive()[0] || null, true, false, [], onResolved, null, true) === false) settleSelections();
@@ -283,6 +290,8 @@ function createBattleSelectionFlow({
       if (instanceRuntime.handSelecting.n > 0) { requestBattleRender(); return; }
       const doneJob = instanceRuntime.handSelecting;
       instanceRuntime.set$handSelecting(null);
+      completeHandSelection(doneJob);
+      if (!instanceRuntime.G?.battleActive) return;
       finishHandSelectionEffect(entry.card, doneJob.thenText, null);
       return;
     }
@@ -290,7 +299,10 @@ function createBattleSelectionFlow({
       // 自然法杖：选中的卡下回合变为 0 费（2026-09-09 C10）
       instanceRuntime.zeroFeeUntil.set(uid, createTargetTurnCostModifier(0, instanceRuntime.turn + 1));
       instanceRuntime.G.log(`[[icon:bolt]] 【${esc(entry.card.name)}】下回合打出时变为 <b>0</b> 费`, 'sys');
+      const doneJob = instanceRuntime.handSelecting;
       instanceRuntime.set$handSelecting(null);
+      completeHandSelection(doneJob);
+      if (!instanceRuntime.G?.battleActive) return;
       settleSelections();
       requestBattleRender();
       return;
@@ -307,7 +319,7 @@ function createBattleSelectionFlow({
     fireConsumeTriggers(entry.card, null);
     if (!instanceRuntime.G?.battleActive) return;
     if (job.n > 0) { requestBattleRender(); return; }
-    if (typeof job.onDone === 'function') job.onDone();
+    completeHandSelection(job);
     if (!instanceRuntime.G?.battleActive) return;
     finishHandSelectionEffect(job.srcCard || entry.card, job.thenText, job.target || null);
   }

@@ -1,4 +1,5 @@
 import { playerFields, canvasTraps, audioGainFields } from './helpers/environment-fixtures.js';
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';
 /* 反馈12条·B组（6/9）真实启动链：敌方指向道具的目标点选必须能收口，
  * 不能把 pendingItem 永久挂在快照里——那会让道具栏此后完全点不动。 */
 import { afterAll, describe, it, expect, vi } from 'vitest';
@@ -71,6 +72,7 @@ import { resolve } from 'node:path';
 }
 
 await import('../game/src/main.js');
+const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
 trackMainPagePreparation();
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 0));
@@ -85,7 +87,8 @@ describe('道具栏：选目标与结算收口', () => {
       ...playerFields(30, 40, 5, 0, '侠客', null),
       log(msg) { LOGS.push(String(msg).replace(/<[^>]+>/g, '')); },
       heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {},
-      onBattleEnd() {},
+      lastBattleEnd:null,
+      onBattleEnd:vi.fn(function(opts, played, win, consumed) { this.lastBattleEnd={opts,played,win,consumed}; }),
     });
     // 用卡库真身（带 rules.bag.use 结构化规则），不手搓卡——手搓卡会走文本分支。
     const catalogCard = id => {
@@ -138,7 +141,8 @@ describe('道具栏：选目标与结算收口', () => {
       await tick(600);
       expect(snapshot().pendingItem).toBeFalsy();
       expect(snapshot().foes.some(f => (f.status && f.status.freeze || 0) > 0)).toBe(true);
-      expect(game.ownedCards.some(o => o.uid === 'it-ice')).toBe(false);
+      expectBattleItemCommitted(game, runtime, 'it-ice');
+      expect(game.ownedCards.some(o => o.uid === 'it-ice')).toBe(true);
 
       // —— 收口后道具栏恢复可用：TNT 仍能开框并结算 ——
       const tnt = potions().find(el => el.textContent.includes('TNT'));
@@ -149,7 +153,11 @@ describe('道具栏：选目标与结算收口', () => {
       await tick(200);
       expect(snapshot().pendingItem).toBeFalsy();
       expect(snapshot().foes.filter(f => f.dead).length).toBe(2);
-      expect(game.ownedCards.some(o => o.uid === 'it-tnt')).toBe(false);
+      expect(game.battleActive).toBe(false);
+      expect(game.onBattleEnd).toHaveBeenCalledOnce();
+      expect(game.lastBattleEnd).toMatchObject({played:['it-ice','it-tnt'],win:true,consumed:[]});
+      expect(game.lastBattleEnd.opts.spentCards).toEqual([]);
+      expect(game.ownedCards.filter(o => ['it-ice','it-tnt'].includes(o.uid)).map(o => o.uid)).toEqual(['it-ice','it-tnt']);
     } finally {
       if (game.battleActive) window.SDT.Battle.commands.flee();
       Element.prototype.animate = oldAnimate;

@@ -242,14 +242,18 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   }
   // 单叠手牌的即时视图状态：side/类名/提示语/卡面内容一次算全（原 render 内联计算外提）
   function handGroupState(g, ctx) {
-    const { infusingNow, infusing, pendingTarget, energy, busy, spellBonus, mode } = ctx;
+    const { infusingNow, infusing, pendingTarget, spellBonus, mode } = ctx;
     const uid = g.uids[0];
     const isSelf = infusingNow && g.self;
     const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
     const targeted = !infusingNow && pendingTarget && pendingTarget.uid === uid;
     const effCost = g.costOverride?.v ?? effCostOf(g.card, uid);
-    const blocked = infusingNow ? (!isSelf && infusionFuelReason(uid)) : unplayableReason(g.card, ctx.handRuleContext);   // 无法使用的卡：虚化禁用
-    const blockedReason = blocked || (infusingNow ? '' : busy ? '当前动作正在结算' : effCost > energy ? `能量不足：需要 ${effCost}，当前 ${energy}` : '');
+    const availability = !infusingNow && !ctx.materialSelection
+      ? commands.getCardPlayAvailability(uid, undefined, false, ctx.handRuleContext) : null;
+    const blocked = infusingNow ? (!isSelf && infusionFuelReason(uid))
+      : ctx.materialSelection ? unplayableReason(g.card, ctx.handRuleContext)
+        : availability?.status === 'rejected' ? availability.reason.message : '';
+    const blockedReason = blocked || '';
     const rawSide = (!infusingNow && !blocked) ? targetSide(g.card) : null;
     // 2026-09-09 老板 #7：招式若无对敌方施加的效果，拖到敌我中间空地即可打出（side 'any'）
     const side = rawSide || (blocked || infusingNow ? null : 'any');
@@ -257,7 +261,6 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     if (infusingNow) cls = isSelf ? ' infuse-self' : blocked ? ' off' : (pickedN ? ' sel' : '');
     else if (blocked) cls = ' off';
     else if (targeted) cls = ' targeting';
-    else if ((effCost > energy || busy)) cls = ' off';
     const costTip = effCost !== g.card.cost
       ? (effCost === 0 ? `（[[icon:bolt]] 当前按 0 费打出）` : `（[[icon:sparkles]] 费用变化：按 ${effCost} 费打出）`)
       : '';
@@ -411,6 +414,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       spellBonus: (extra && extra.spellBonus) || 0,
       mode: extra && extra.mode,
       handRuleContext: extra && extra.handRuleContext,
+      materialSelection: extra?.materialSelection,
     };
     // 旧槽位现矩形一次量完：目标值更新引发的位移以此为准做补间
     handSlots.forEach(rec => { rec.rect = rec.slot.isConnected ? uiRect(rec.slot) : null; });   // 布局口径
@@ -492,7 +496,10 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       if (rec.hintSig !== hintSig) {
         const desc = /** @type {BattleElement} */ (rec.card.querySelector('.hsc-desc'));
         /** @type {BattleElement} */ (desc?.querySelector('.bt-rulehint'))?.remove();
-        if (desc && readingHint && !desc.textContent.includes(st.blockedReason || readingHint)) {
+        const blockedPrefix = `【${g.card.name}】无法打出：`;
+        const blockedReading = st.blockedReason?.startsWith(blockedPrefix)
+          ? st.blockedReason.slice(blockedPrefix.length) : st.blockedReason;
+        if (desc && readingHint && !desc.textContent.includes(blockedReading || readingHint)) {
           const hint = document.createElement('span');
           hint.className = 'bt-rulehint';
           hint.textContent = readingHint;
@@ -808,7 +815,9 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     selfUnit.classList.toggle('fx-frozen', (pstat.status.freeze || 0) > 0);
     const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
     const clickCard = clickSelectedUid != null && findCard(clickSelectedUid);
-    setTargetable(selfUnit, !!((pendingCard && targetSide(pendingCard.card) === 'self') || (clickCard && targetSide(clickCard.card) === 'self')), `${playerName}，自己，按 Enter 确认目标`);
+    const cardTargetUid = pendingCard && targetSide(pendingCard.card) === 'self' ? ctx.pendingTarget.uid
+      : clickCard && targetSide(clickCard.card) === 'self' ? clickSelectedUid : null;
+    setTargetable(selfUnit, cardTargetUid != null && commands.getCardPlayAvailability(cardTargetUid, 'self').status !== 'rejected', `${playerName}，自己，按 Enter 确认目标`);
     if (!selfUnit.classList.contains('can-target')) selfUnit.setAttribute('aria-label', `${playerName}，自己`);
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
     const equipsHTML = (equipped || []).map(e => equipmentInfoHTML(e, snapshot.busy, snapshot)).join('');
@@ -965,7 +974,10 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       slot.classList.toggle('aegis', !!immune);
       const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
       const clickCard = clickSelectedUid != null && findCard(clickSelectedUid);
-      const cardTargetsEnemy = !!((pendingCard && targetSide(pendingCard.card) === 'enemy') || (clickCard && targetSide(clickCard.card) === 'enemy'));
+      const cardTargetUid = pendingCard && targetSide(pendingCard.card) === 'enemy' ? ctx.pendingTarget.uid
+        : clickCard && targetSide(clickCard.card) === 'enemy' ? clickSelectedUid : null;
+      const cardTargetsEnemy = cardTargetUid != null
+        && commands.getCardPlayAvailability(cardTargetUid, idx).status !== 'rejected';
       // W5-06（2026-09-27 R2）：道具按目标侧过滤——自用道具不再高亮敌人（与 aim.js 同式）
       // 反馈1021·9：点选态判据取 itemTargetSideFor（usePotion 进点选的同一条规则），
       // targetSideFor 对只有 rules.bag.use 的药水恒 null → 一个敌人都不亮，点选永远收不了口。

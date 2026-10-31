@@ -1,26 +1,30 @@
 import { esc } from '../core/shared.js';
 import { completeRunCheckpoint } from '../core/run-checkpoint.js';
-import { containerRuleOf, containerAccepts } from '../core/card-capacity.js';
+import { containerRuleOf, containerAccepts, previewCardRewards, resourceContainerBonus, stackTransferSlotDelta } from '../core/card-capacity.js';
 import { containerStoreHTML, captureContainerView, restoreContainerFocus } from './game.container-store.view.js';
 import { transferContainerStack } from './bag-inventory-commands.js';
 import { createOperationNotice } from '../ui/operation-notice.js';
+import { setBagReturnHook } from './bag-return-hook.js';
+import { syncViewChildren } from '../ui/view-children-sync.js';
+import { lockRoomButtons } from '../ui/room-footer.js';
 
 // Container views own feedback and saving; all inventory writes use the command port.
 export function createBagContainerPages({ UI, game, readCards, sound, baseCap, cardStacks,
-  usedSlots, bagCap, saveGame, showBackpack, rememberBagPosition, captureBagView, captureContext, bagAct, decorateInventoryZoom }) {
+  usedSlots, bagCap, saveGame, showBackpack, rememberBagPosition, captureBagView, captureContext, bagAct, decorateInventoryZoom, rich = html => html }) {
   let pendingMove = null;
   function moving() {
     if (pendingMove && !pendingMove.current()) { pendingMove.release(); pendingMove = null; }
     return !!pendingMove;
   }
-  // Mirrors the existing execution guards; a presentation preview never moves cards.
+  // Use the same receipt projection as the command; this query never moves cards.
   function containerTransferReason(stack, take, count, capacity) {
     if (!take) return count + stack.count > capacity ? `剩余 ${Math.max(0, capacity - count)} 张空间，放不下整叠` : '';
-    const cap = game.stackCapOf(stack.card);
-    const sameBag = game.ownedCards.filter(x => !x.safe && !x.stored && x.card.name === stack.card.name).length;
-    const delta = Math.ceil((sameBag + stack.count) / cap) - Math.ceil(sameBag / cap);
-    const limit = stack.card.type === '资源' ? bagCap() : baseCap();
-    return (stack.card.type === '资源' || delta > 0) && usedSlots() + delta > limit ? `背包空间不足，整叠需 ${delta} 格` : '';
+    const entries = Array.from({ length:stack.count }, () => ({ card:stack.card }));
+    const projected = previewCardRewards(entries.map(entry => entry.card), { ownedCards:game.ownedCards,
+      usedSlots:usedSlots(), baseCap:baseCap(), totalCap:bagCap() - resourceContainerBonus(entries) });
+    if (!projected.cant) return '';
+    const delta = stackTransferSlotDelta(game.ownedCards, stack.card.name, false, stack.count, game.stackCapOf(stack.card));
+    return `背包空间不足，整叠需 ${delta} 格`;
   }
 
   function openContainer(kind) {
@@ -30,7 +34,9 @@ export function createBagContainerPages({ UI, game, readCards, sound, baseCap, c
     const notice = createOperationNotice();
     rememberBagPosition(title);
     game.state = 'modal';
-    let root; const current = captureBagView(() => root);
+    let root, renderRevision = 0; const current = captureBagView(() => root);
+    const sameRun = captureContext(), cards = game.ownedCards;
+    const canResume = () => sameRun() && game.ownedCards === cards && game.runActive && !game.battleActive && game.state === 'modal';
     const pouch = () => game.ownedCards.find(entry => entry.card?.id === 'tt7-stratagem')?.card;
     const boxes = isPouch ? [] : game.ownedCards.filter(x => x.card?.id === 'tt2-pearlbox');
     const pearlCapacity = boxes.reduce((sum, box) => sum + (containerRuleOf(box.card)?.slots || 0), 0);
@@ -41,38 +47,57 @@ export function createBagContainerPages({ UI, game, readCards, sound, baseCap, c
       const map = new Map();
       game.ownedCards.forEach(x => {
         if (!stored(x) || !x.card) return;
-        if (!map.has(x.card.name)) map.set(x.card.name, { card: x.card, count: 0 });
-        map.get(x.card.name).count++;
+        if (!map.has(x.card.name)) map.set(x.card.name, { card: x.card, count: 0, uids:[] });
+        const stack = map.get(x.card.name);
+        stack.count++;
+        stack.uids.push(x.uid);
       });
       return [...map.values()];
     };
     const render = (viewState = captureContainerView(root)) => {
-      const storedList = storedStacks(), available = cardStacks(false).filter(st => isPouch
+      const revision = ++renderRevision;
+      const storedList = storedStacks(), available = cardStacks(false).map((stack, stackIndex) => ({ ...stack, stackIndex })).filter(st => isPouch
         ? containerAccepts(pouch(), st.card) && st.card.id !== 'tt7-stratagem'
         : boxes.some(box => containerAccepts(box.card, st.card)));
       const stacks = [...storedList, ...available];
-      UI.showOverlay(title, containerStoreHTML({ title, icon, prefix: kind,
+      const html = containerStoreHTML({ title, icon, prefix: kind,
         count: game.ownedCards.filter(stored).length, cap: capacity(), stored: storedList, available,
         type: isPouch ? containerRuleOf(pouch())?.accepts || '法术' : '资源', cardHTML: readCards().cardHTML, reason: containerTransferReason,
         help: isPouch ? '战斗中打出锦囊，从囊内选择 1 张法术直接释放；锦囊为空时无效果。'
           : `当前 ${boxes.length} 个珍珠盒共可存 ${pearlCapacity} 张卡牌。把珍珠盒放进安全格，盒中卡牌在撤离失败时也会被抢运回基地。`,
         notice:notice.html({ keepEmpty:true }),
-      }), 'bag');
-      root = UI.el.ovBody?.firstElementChild;
+      });
+      if (root?.isConnected && UI.el.ovBody?.firstElementChild === root && !UI.el.overlay.hidden
+          && !UI.el.overlay.classList.contains('closing')) {
+        const template = root.ownerDocument.createElement('template');
+        template.innerHTML = rich(html);
+        syncViewChildren(root, template.content.firstElementChild);
+      } else {
+        UI.showOverlay(title, html, 'bag');
+        root = UI.el.ovBody?.firstElementChild;
+      }
       restoreContainerFocus(root, viewState, `${kind}Back`);
       const renderedRoot = root;
       bagAct(`${kind}Inspect`, d => {
-        if (root !== renderedRoot || moving()) return;
+        if (revision !== renderRevision || root !== renderedRoot || moving()) return;
         const card = stacks[+d.i]?.card;
         if (!card) return;
         UI.showCardZoom(card, { returnFocus: root.querySelector(`[data-act="${kind}Inspect"][data-i="${+d.i}"]`) });
         decorateInventoryZoom(card);
       }, current);
+      // The menu replaces the mounted page. Resume the same container closure;
+      // its page guard follows the new root after render, while this guard owns the run.
+      setBagReturnHook(() => {
+        if (!canResume() || moving()) return false;
+        render(null);
+        return true;
+      });
     };
     for (const take of [false, true]) {
       bagAct(`${kind}${take ? 'Take' : 'Put'}`, d => {
         if (moving()) return false;
-        const result = transferContainerStack(game, { kind, take, name: d.name, current }, {
+        const result = transferContainerStack(game, { kind, take, name: d.name,
+          ...(!take ? { stackIndex:Number(d.stackIndex), stackCount:Number(d.stackCount) } : {}), current }, {
           stackCapOf:card => game.stackCapOf(card), usedSlots, bagCap, baseCap:() => baseCap(),
         });
         if (result.ok === false) {
@@ -93,8 +118,7 @@ export function createBagContainerPages({ UI, game, readCards, sound, baseCap, c
         }
         const sameRun = captureContext(), cards = game.ownedCards, actionRoot = root;
         const actionCurrent = captureBagView(), initialView = captureContainerView(root);
-        const buttons = [...root.querySelectorAll(`button[data-act="${kind}Put"], button[data-act="${kind}Take"], button[data-act="${kind}Inspect"]`)]
-          .map(button => ({ button, disabled:button.disabled }));
+        const unlockButtons = lockRoomButtons(root.querySelectorAll(`button[data-act="${kind}Put"], button[data-act="${kind}Take"], button[data-act="${kind}Inspect"], button[data-act="${kind}Back"]`));
         const previousBusy = root.getAttribute('aria-busy');
         let released = false;
         const operation = {
@@ -104,12 +128,11 @@ export function createBagContainerPages({ UI, game, readCards, sound, baseCap, c
             released = true;
             if (previousBusy == null) actionRoot.removeAttribute('aria-busy');
             else actionRoot.setAttribute('aria-busy', previousBusy);
-            buttons.forEach(({button, disabled}) => { button.disabled = disabled; });
+            unlockButtons();
           },
         };
         pendingMove = operation;
         root.setAttribute('aria-busy', 'true');
-        buttons.forEach(({button}) => { button.disabled = true; });
         notice.set('正在保存存取结果，请稍候。');
         const complete = saved => {
           try {
@@ -152,7 +175,7 @@ export function createBagContainerPages({ UI, game, readCards, sound, baseCap, c
         return completeRunCheckpoint(saveGame, complete);
       }, current);
     }
-    bagAct(`${kind}Back`, () => { UI.hideOverlay(); showBackpack(true); }, current);
+    bagAct(`${kind}Back`, () => { if (moving()) return false; UI.hideOverlay(); showBackpack(true); }, current);
     render();
   }
 

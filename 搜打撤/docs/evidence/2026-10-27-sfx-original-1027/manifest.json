@@ -1,0 +1,324 @@
+{
+  "attackArrow": {
+    "duration": 0.24,
+    "file": "assets/sfx/original-full-1027/attackArrow.wav",
+    "peak": 0.65,
+    "rms": 0.1487,
+    "sha256": "c7bc95d45021c75be016fb2ea9100fed0d286b2f75afec095ed35011ce128054"
+  },
+  "attackFire": {
+    "duration": 0.5,
+    "file": "assets/sfx/original-full-1027/attackFire.wav",
+    "peak": 0.7,
+    "rms": 0.1599,
+    "sha256": "c79f99ed586acd320a108a8d97bafc1769283608854d22ab078a1ae4a098fed5"
+  },
+  "attackLightning": {
+    "duration": 0.36,
+    "file": "assets/sfx/original-full-1027/attackLightning.wav",
+    "peak": 0.7,
+    "rms": 0.1925,
+    "sha256": "2823cfdb050825948ecc4ff86e9fd995437536ce1a1839f5d58567ef61c20758"
+  },
+  "attackPierce": {
+    "duration": 0.14,
+    "file": "assets/sfx/original-full-1027/attackPierce.wav",
+    "peak": 0.608,
+    "rms": 0.155,
+    "sha256": "5a7ab23e7a60bd2fa4b0ecc1979d2849463a8ec53ec90a6f1e4bc11a1fdafa32"
+  },
+  "attackPsychic": {
+    "duration": 0.5,
+    "file": "assets/sfx/original-full-1027/attackPsychic.wav",
+    "peak": 0.55,
+    "rms": 0.1613,
+    "sha256": "59edf5eb538cae6391d8878e8649deaff530f0b5a63dfe0e9f3d0bb949a1d225"
+  },
+  "battleEnter": {
+    "duration": 0.75,
+    "file": "assets/sfx/original-full-1027/battleEnter.wav",
+    "peak": 0.736,
+    "rms": 0.1881,
+    "sha256": "921afe2ece4cc4f0f4cc0712c4b118f1c965028aad71eb65d301edfdd07c6ebb"
+  },
+  "bossReveal": {
+    "duration": 1.0,
+    "file": "assets/sfx/original-full-1027/bossReveal.wav",
+    "peak": 0.8,
+    "rms": 0.3811,
+    "sha256": "63df01d680205225d0c44068e936ae194bcd9a75cbe2f338dd0ef17f3e8ebe09"
+  },
+  "bossVictory": {
+    "duration": 0.9,
+    "file": "assets/sfx/original-full-1027/bossVictory.wav",
+    "peak": 0.78,
+    "rms": 0.3429,
+    "sha256": "a2e129bcb77ace5375db892bf8a4e976a24871339ab2123ba20b84af4e08f1f9"
+  },
+  "burn": {
+    "duration": 0.45,
+    "file": "assets/sfx/original-full-1027/burn.wav",
+    "peak": 0.6,
+    "rms": 0.1126,
+    "sha256": "0dbc98ef671afdcc7ebaba82897f577aa81c0b769b2906a8e8b6dbdfbc45eba6"
+  },
+  "card": {
+    "duration": 0.06,
+    "file": "assets/sfx/original-full-1027/card.wav",
+    "peak": 0.562,
+    "rms": 0.1212,
+    "sha256": "3c90b5f57921659df2aab45627c2db7a9e9279106d6a23eb440b2e27413f2621"
+  },
+  "cardRestore": {
+    "duration": 0.48,
+    "file": "assets/sfx/original-full-1027/cardRestore.wav",
+    "peak": 0.6,
+    "rms": 0.2565,
+    "sha256": "33b917dc9627bb46b4c514ba6cc333af8531a05ad7f2d1abc722bca8faee6063"
+  },
+  "chestBurst": {
+    "duration": 0.39,
+    "file": "assets/sfx/original-full-1027/chestBurst.wav",
+    "peak": 0.7,
+    "rms": 0.2652,
+    "sha256": "30042564ce5d97cf924b50bbb8da03cac005c26c13fa217f854f7504af4a8e64"
+  },
+  "click": {
+    "duration": 0.07,
+    "file": "assets/sfx/original-full-1027/click.wav",
+    "peak": 0.507,
+    "rms": 0.1575,
+    "sha256": "02bf671c9889265d13fdd120bb68512400b974d62f747a6eaf5edf9c0815ce80"
+  },
+  "coin": {
+    "duration": 0.32,
+    "file": "assets/sfx/original-full-1027/coin.wav",
+    "peak": 0.7,
+    "rms": 0.2959,
+    "sha256": "252cc2631e5109e0063756e5cbf2aba12c9a6a5a950d7dcf93d0fdc940c3f2fe"
+  },
+  "confirm": {
+    "duration": 0.29,
+    "file": "assets/sfx/original-full-1027/confirm.wav",
+    "peak": 0.7,
+    "rms": 0.2878,
+    "sha256": "7331f4ddd0e1794fd899f501e91d563b8c541b2a2bd264d3ce41e0e7e8fb4582"
+  },
+  "curse": {
+    "duration": 0.7,
+    "file": "assets/sfx/original-full-1027/curse.wav",
+    "peak": 0.6,
+    "rms": 0.2693,
+    "sha256": "7da62e85c12a86891e9b798a9969ef0ee7081ba6a7fb019db5d58e4b4db4138d"
+  },
+  "danger": {
+    "duration": 0.34,
+    "file": "assets/sfx/original-full-1027/danger.wav",
+    "peak": 0.65,
+    "rms": 0.3204,
+    "sha256": "9e5f8de4cffbdb24237a96be7ce5480e6373d40b7402372ab452645200221402"
+  },
+  "defeat": {
+    "duration": 1.1,
+    "file": "assets/sfx/original-full-1027/defeat.wav",
+    "peak": 0.7,
+    "rms": 0.2702,
+    "sha256": "53ffca0e40db732aba3d73ae6f038f8e6c170136a0258193564f26c8e52672f6"
+  },
+  "deployStart": {
+    "duration": 0.55,
+    "file": "assets/sfx/original-full-1027/deployStart.wav",
+    "peak": 0.65,
+    "rms": 0.196,
+    "sha256": "c3081ff15b69e2b100baaf87bcf10cf3293de5c921e0898f528e0127cf945d68"
+  },
+  "ding": {
+    "duration": 0.45,
+    "file": "assets/sfx/original-full-1027/ding.wav",
+    "peak": 0.65,
+    "rms": 0.2162,
+    "sha256": "2156ac8511fda5f1d7de2955864dfe6e250e4af9cf64f771fb613b1c0753afc8"
+  },
+  "draw": {
+    "duration": 0.13,
+    "file": "assets/sfx/original-full-1027/draw.wav",
+    "peak": 0.5,
+    "rms": 0.1011,
+    "sha256": "34c02d466094864b1594a6f1a63a8052ab48c91835e83687a6616f427cd32ff8"
+  },
+  "drop": {
+    "duration": 0.14,
+    "file": "assets/sfx/original-full-1027/drop.wav",
+    "peak": 0.65,
+    "rms": 0.2169,
+    "sha256": "5e67f01a51f1f12dc8e2b740b207d3b6434edf8c47dcb83c7526330536b0428d"
+  },
+  "energyDown": {
+    "duration": 0.2,
+    "file": "assets/sfx/original-full-1027/energyDown.wav",
+    "peak": 0.59,
+    "rms": 0.2492,
+    "sha256": "7a32ff1dabf96fd1f86311b92fd06433d58252df190529ebdc7d463c0ab40df1"
+  },
+  "energyUp": {
+    "duration": 0.22,
+    "file": "assets/sfx/original-full-1027/energyUp.wav",
+    "peak": 0.585,
+    "rms": 0.2397,
+    "sha256": "e1241f57e389a4fb41ffe695cd03be45cfcf012fb610c065698602e9473507b6"
+  },
+  "error": {
+    "duration": 0.22,
+    "file": "assets/sfx/original-full-1027/error.wav",
+    "peak": 0.6,
+    "rms": 0.331,
+    "sha256": "522a33ece0a7890f3fe856a6c35ec9653072a04f7e697ccf3c94849e5463cf9e"
+  },
+  "extractionSuccess": {
+    "duration": 0.46,
+    "file": "assets/sfx/original-full-1027/extractionSuccess.wav",
+    "peak": 0.7,
+    "rms": 0.3099,
+    "sha256": "dc0ab4d449e5dd86bb6489857b1aaa83f0fa80455815c281e126a354e380579f"
+  },
+  "fireEnter": {
+    "duration": 0.6,
+    "file": "assets/sfx/original-full-1027/fireEnter.wav",
+    "peak": 0.6,
+    "rms": 0.1709,
+    "sha256": "e24f6cd701b156f2333eec3d269948ea69c930db405d5231a3a4cc161eba5c5b"
+  },
+  "foeLunge": {
+    "duration": 0.16,
+    "file": "assets/sfx/original-full-1027/foeLunge.wav",
+    "peak": 0.65,
+    "rms": 0.224,
+    "sha256": "a84c1edcab6962c6b49dfc40f8ca3ee2cb20885fb840a055ab357f55fa91b8ed"
+  },
+  "gain": {
+    "duration": 0.24,
+    "file": "assets/sfx/original-full-1027/gain.wav",
+    "peak": 0.7,
+    "rms": 0.3205,
+    "sha256": "ee34027bd00b9a9df3355efac2938d8bbf4a35dfc31403fa8caeca0cc3ff8b4b"
+  },
+  "hit": {
+    "duration": 0.12,
+    "file": "assets/sfx/original-full-1027/hit.wav",
+    "peak": 0.72,
+    "rms": 0.2249,
+    "sha256": "be9eb033a37c53a4ab868b14da64209629a8b8319e02505f5369115cf090f455"
+  },
+  "hover": {
+    "duration": 0.045,
+    "file": "assets/sfx/original-full-1027/hover.wav",
+    "peak": 0.298,
+    "rms": 0.1025,
+    "sha256": "c8d763df4a0106d50fb926faeebe9fed18d29d1e2f31de53e8b2aa6155707b5e"
+  },
+  "parry": {
+    "duration": 0.28,
+    "file": "assets/sfx/original-full-1027/parry.wav",
+    "peak": 0.7,
+    "rms": 0.2356,
+    "sha256": "3f982b9e9878e314d392b88debdaf7838406aa9586a3a1c211969b43bb34b1d4"
+  },
+  "runClear": {
+    "duration": 0.94,
+    "file": "assets/sfx/original-full-1027/runClear.wav",
+    "peak": 0.75,
+    "rms": 0.3399,
+    "sha256": "d140e102204cd164244d4598c1a806ac50a0f53f7b9635137bd6d3dfcc181235"
+  },
+  "safeRetrieve": {
+    "duration": 0.28,
+    "file": "assets/sfx/original-full-1027/safeRetrieve.wav",
+    "peak": 0.7,
+    "rms": 0.2405,
+    "sha256": "087dea98e26d18846115dc1e098f2bd7d72058e0d29024e13ebfcb77a6d2d5a9"
+  },
+  "safeStore": {
+    "duration": 0.2,
+    "file": "assets/sfx/original-full-1027/safeStore.wav",
+    "peak": 0.7,
+    "rms": 0.2435,
+    "sha256": "02c6ccce84ebb140b066426a9ef657d4b4113ee42fae480a1b95a0e63c2aa595"
+  },
+  "scene": {
+    "duration": 0.55,
+    "file": "assets/sfx/original-full-1027/scene.wav",
+    "peak": 0.6,
+    "rms": 0.1391,
+    "sha256": "b856919ed86d0c951d9d65a2a6dbe4a2f86dc1d1b50a0aebe88403273997e67b"
+  },
+  "searchReveal": {
+    "duration": 0.32,
+    "file": "assets/sfx/original-full-1027/searchReveal.wav",
+    "peak": 0.65,
+    "rms": 0.2929,
+    "sha256": "cf1fd22c4dcef76a96c3bb8eeaac6d4108ae749ce3ab9958948219a4564b38da"
+  },
+  "searchStart": {
+    "duration": 0.32,
+    "file": "assets/sfx/original-full-1027/searchStart.wav",
+    "peak": 0.6,
+    "rms": 0.1173,
+    "sha256": "0dba9a02e9141cd813e4ca1767179c0000915e583c4d50e4764c0a00a38d075e"
+  },
+  "shieldBreak": {
+    "duration": 0.2,
+    "file": "assets/sfx/original-full-1027/shieldBreak.wav",
+    "peak": 0.699,
+    "rms": 0.1643,
+    "sha256": "4d04bbfcdaa157938c2c66a67523317215745189bfa6cb2682e26e61e0948d24"
+  },
+  "shieldUp": {
+    "duration": 0.38,
+    "file": "assets/sfx/original-full-1027/shieldUp.wav",
+    "peak": 0.6,
+    "rms": 0.2063,
+    "sha256": "b58d3cf1fddc0fdc1d1080d37dc560d16993de495619358747393e0bd9039580"
+  },
+  "shuffle": {
+    "duration": 0.32,
+    "file": "assets/sfx/original-full-1027/shuffle.wav",
+    "peak": 0.55,
+    "rms": 0.0761,
+    "sha256": "58ffac57a58251c16f099c85e30392200d80c9ac481a74465d7547d9802cb22b"
+  },
+  "strike": {
+    "duration": 0.14,
+    "file": "assets/sfx/original-full-1027/strike.wav",
+    "peak": 0.717,
+    "rms": 0.2303,
+    "sha256": "500a6463a7243d9c1d7a0ade5678d75b1aa4753c14bb65a8eda9433cdcf70016"
+  },
+  "tradeBuy": {
+    "duration": 0.22,
+    "file": "assets/sfx/original-full-1027/tradeBuy.wav",
+    "peak": 0.65,
+    "rms": 0.2916,
+    "sha256": "a7dabb2277e595f22d66f35c884306b15734e9d0317b46a65a14d0dc3a6fd7f3"
+  },
+  "turnFoe": {
+    "duration": 0.27,
+    "file": "assets/sfx/original-full-1027/turnFoe.wav",
+    "peak": 0.6,
+    "rms": 0.2631,
+    "sha256": "0ac310ec745c1891aae2e7f8a23453399d48264caf42f7cbee197db6279ec2f7"
+  },
+  "turnSelf": {
+    "duration": 0.22,
+    "file": "assets/sfx/original-full-1027/turnSelf.wav",
+    "peak": 0.6,
+    "rms": 0.2691,
+    "sha256": "5b90906b634e562bc698073a9ef7c7c6a1fa417d0106fcee1fddfdba298c1489"
+  },
+  "victory": {
+    "duration": 0.63,
+    "file": "assets/sfx/original-full-1027/victory.wav",
+    "peak": 0.75,
+    "rms": 0.3438,
+    "sha256": "27030b380dc29d0f78cae6e2c2866afd270e7cef5a2dab05229e22321451be0f"
+  }
+}

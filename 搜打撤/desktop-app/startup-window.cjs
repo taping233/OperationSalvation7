@@ -8,7 +8,7 @@ function attachStartupWindow({ BrowserWindow, ipcMain, app, screen }, game) {
   const area = screen?.getDisplayMatching(game.getBounds()).workArea;
   const width = Math.min(880, area?.width || 880), height = Math.min(540, area?.height || 540);
   const splash = new BrowserWindow({
-    width, height, resizable: false, fullscreen: false, fullscreenable: false,
+    width, height, resizable: false, fullscreen: true, fullscreenable: true,
     movable: true, maximizable: false,
     ...(area ? { x: Math.round(area.x + (area.width - width) / 2), y: Math.round(area.y + (area.height - height) / 2) } : { center: true }),
     backgroundColor: '#080b0e', show: false, frame: false,
@@ -18,6 +18,11 @@ function attachStartupWindow({ BrowserWindow, ipcMain, app, screen }, game) {
     },
   });
   const splashContents = splash.webContents;
+  const progress = (_event, percent, label) => {
+    if (_event.sender !== gameContents || finished || failed) return;
+    if (!Number.isFinite(percent) || percent < 55 || percent > 99 || typeof label !== 'string') return;
+    splashContents.send('startup-progress', { percent, label: label.slice(0, 80) });
+  };
   let finished = false;
   let failed = false;
   let preparing = false;
@@ -80,6 +85,7 @@ function attachStartupWindow({ BrowserWindow, ipcMain, app, screen }, game) {
     ipcMain.removeListener('startup-covered', covered);
     ipcMain.removeListener('startup-retry', retry);
     ipcMain.removeListener('startup-quit', quit);
+    ipcMain.removeListener('startup-progress', progress);
     gameContents.removeListener('did-fail-load', failLoad);
     gameContents.removeListener('render-process-gone', sendFailure);
   }
@@ -87,6 +93,7 @@ function attachStartupWindow({ BrowserWindow, ipcMain, app, screen }, game) {
   ipcMain.on('startup-covered', covered);
   ipcMain.on('startup-retry', retry);
   ipcMain.on('startup-quit', quit);
+  ipcMain.on('startup-progress', progress);
   gameContents.on('did-fail-load', failLoad);
   gameContents.on('render-process-gone', sendFailure);
   game.once('closed', () => {

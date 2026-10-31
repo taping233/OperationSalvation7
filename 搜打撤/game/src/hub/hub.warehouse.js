@@ -180,6 +180,8 @@ export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {}, r
       cursor = item.nextElementSibling;
     }
     for (const item of existing.values()) item.remove();
+    const pocketCount = root.querySelector('[data-warehouse-pocket-count]');
+    if (pocketCount) pocketCount.textContent = `${base.data.pocket.reduce((sum, stack) => sum + stack.count, 0)} 张`;
     if (!pocket) for (const [field, label] of [['type', '全部类型'], ['rarity', '全部品质']]) {
       const select = /** @type {HTMLSelectElement} */ (root.querySelector(`[data-warehouse-filter="${field}"]`));
       if (!select) continue;

@@ -36,7 +36,7 @@ import { forecastEnemyTurn } from './battle.turn-forecast.js';
 import { battleRestartHTML, bindBattleRestart } from '../../ui/settings-battle-restart.js';
 import { createBattleSceneryCapture } from './battle.scenery.js';
 import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
-import { BattleSession, commands, configureBattleRenderer, getSnapshot, getBattleLiveness, R, effCostOf, infuseOf, findEffectiveCard as findCard, markDreadShown, infusionFuelReason, targetSide, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
+import { BattleSession, commands, configureBattleRenderer, getSnapshot, getBattleLiveness, R, infuseOf, findEffectiveCard as findCard, markDreadShown, infusionFuelReason, targetSide, pileTip, refillDrawPile, takeCardAnims } from '../core/battle.core.js';
 import { renderDeckSelection, renderGrave, renderDeckPileView, showBattleDecision } from './battle.overlays.js';
 import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
@@ -246,12 +246,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (infusing) return { label: '注能选牌', detail: `已选 ${infusing.picked?.length || 0}/${infusing.need} 张`, tone: 'focus' };
     if (choosing || handSelecting) return { label: '选择中', detail: '完成当前选择后继续', tone: 'focus' };
     if (pendingTarget || pendingItem || slamPending || dartPending) return { label: '选择目标', detail: pendingTarget?.hint || '点击高亮目标 · Esc 取消', tone: 'focus' };
-    // Reuse this render's resolved effective hand. The next render resolves it anew.
-    // Eligibility and effective costs still read current rules below.
-    const playable = handCards.some(entry => {
-      if (unplayableReason(entry.card, handRuleContext)) return false;
-      return effCostOf(entry.card, entry.uid) <= energy;
-    });
+    const playable = handCards.some(entry =>
+      commands.getCardPlayAvailability(entry.uid, undefined, false, handRuleContext).status !== 'rejected');
     if (playable) return { label: '你的行动', detail: '', tone: 'self' };
     if (energy > 0) return { label: '你的行动', detail: '当前没有可用卡牌', tone: 'warn' };
     return { label: '你的行动', detail: '能量已耗尽', tone: 'warn' };

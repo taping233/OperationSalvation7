@@ -40,7 +40,9 @@ it.each([['usePotion', false], ['usePotion', true], ['useItem', false], ['useIte
   expect(snapshot.potionBar.find(p => p.uid === 'runtime-2').usable).toBe(nonempty);
   const handBefore = [...R.hand];
   BattleSession.commands[command]('runtime-2'); await settle();
-  expect(game.ownedCards.some(o => o.uid === 'runtime-2')).toBe(!nonempty);
+  expect(game.ownedCards.some(o => o.uid === 'runtime-2')).toBe(true);
+  if (nonempty) expectBattleItemCommitted(game, R, 'runtime-2');
+  else expect(R.played).not.toContain('runtime-2');
   expect(R.consumed).toEqual([]);
   expect(JSON.stringify(game.usedPocket)).toBe(mapPocket);
   if (nonempty) {
@@ -64,7 +66,8 @@ it('战斗复原最多两张，仅取本场消耗堆，剩余牌和地图消耗�
   expect(R.hand).toEqual(['runtime-2', 'runtime-1']);
   expect(R.consumed).toEqual(['runtime-0']);
   expect(game.usedPocket[0].count).toBe(5);
-  expect(game.ownedCards.some(entry => entry.uid === 'runtime-3')).toBe(false);
+  expectBattleItemCommitted(game, R, 'runtime-3');
+  expect(game.ownedCards.some(entry => entry.uid === 'runtime-3')).toBe(true);
 });
 
 it('复原药水入队后本场消耗堆被清空，执行前复检保留药水且不发卡', async () => {
@@ -135,3 +138,4 @@ it.each(['false', 'throw'])('药水旧文案保存%s时旧库保留并能重试'
     expect(canonical('cmtn6bge52qt').desc).toBe(C.TABLETOP11.find(card => card.id === 'cmtn6bge52qt').desc);
   } finally { save?.mockRestore(); error?.mockRestore(); C.saveAll(original); }
 });
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';

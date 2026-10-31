@@ -52,11 +52,13 @@ it('retains another card face and focus through real busy and ready renders',asy
   expect(result.status).toBe('queued');
   expect(face('tt3-skewer')).toBe(kept);expect(document.activeElement).toBe(kept);
   expect(kept.getAttribute('aria-disabled')).toBe('true');
-  expect(wrapper('tt3-skewer').querySelector('.bt-rulehint')?.textContent).toContain('当前动作正在结算');
+  const blocked = commands.getCardPlayAvailability(card('tt3-skewer').uid);
+  expect(blocked.status).toBe('rejected');
+  expect(wrapper('tt3-skewer').querySelector('.bt-rulehint')?.textContent).toBe('无法打出：' + blocked.reason.message);
   await settle();
   expect(face('tt3-skewer')).toBe(kept);expect(document.activeElement).toBe(kept);
   expect(kept.getAttribute('aria-disabled')).toBe('false');
-  expect(wrapper('tt3-skewer').textContent).not.toContain('当前动作正在结算');
+  expect(wrapper('tt3-skewer').textContent).not.toContain(blocked.reason.message);
   expect(BattleSession.getSnapshot().hand).not.toContain(card('tt3-blood-arrow').uid);
 });
 

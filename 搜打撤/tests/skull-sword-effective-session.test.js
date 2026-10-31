@@ -38,11 +38,11 @@ const originalRaf = window.requestAnimationFrame;
 const originalAnimate = Element.prototype.animate;
 let frames, game;
 function flush() { for (let i = 0; frames.length && i < 30; i++) frames.shift()(performance.now()); }
-async function settle() {
+async function settle(complete = () => true) {
   for (let i = 0; i < 100; i++) {
     flush(); await new Promise(resolve => setTimeout(resolve, 5));
     const s = BattleSession.getSnapshot();
-    if (!s.busy && !s.actionQueueLength) { flush(); return; }
+    if (complete() && !s.busy && !s.actionQueueLength) { flush(); return; }
   }
   throw new Error('战斗动作没有收口');
 }
@@ -347,13 +347,22 @@ it('内部免费释放缺少转换模板时不能回退初始攻击', async () =
   expect(after.hand).toContain(uid);
 });
 
-it('draw释放全部初始攻击使用统一有效卡，免费释放且每UID只保留一份', async () => {
+it('draw按有效卡名匹配，变形后的初始攻击免费释放且每UID只保留一份', async () => {
   await swordBattle();
   const uids = BattleSession.getSnapshot().hand.filter(uid => findCard(uid)?.card.name === '初始攻击');
   const before = BattleSession.getSnapshot();
   engine.resolveCard({ id: 'effective-release-all', name: '释放初始攻击探针', type: '法术', cost: 0,
     desc: '直接释放手牌中的所有「初始攻击」。' }, runtime.foes[0]);
   await settle();
+  expect(BattleSession.getSnapshot().foes[0].hp).toBe(before.foes[0].hp);
+  engine.resolveCard({ id: 'effective-release-transformed', name: '释放有效卡名探针', type: '法术', cost: 0,
+    desc: '', rules: { version: 1, triggers: { onPlay: [
+      { op: 'release', source: 'hand', key: '不朽斩', all: true },
+    ] } } }, runtime.foes[0]);
+  let drained = false;
+  const automaticCasts = engine.awaitTriggeredActions('player').then(() => { drained = true; });
+  await settle(() => drained);
+  await automaticCasts;
   const after = BattleSession.getSnapshot();
   expect(after.foes[0].hp).toBe(before.foes[0].hp - 5 * uids.length);
   expect(after.energy).toBe(before.energy);

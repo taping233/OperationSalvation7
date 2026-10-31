@@ -56,7 +56,8 @@ it.each([false, true])('普通/BOSS=%s：0能量使用排队，下回合仅一�
   BattleSession.commands.usePotion(potionUid);
   BattleSession.commands.usePotion(potionUid);
   await settle();
-  expect(game.ownedCards.some(o => o.uid === 'runtime-0')).toBe(boss);
+  expect(game.ownedCards.some(o => o.uid === 'runtime-0')).toBe(true);
+  expectBattleItemCommitted(game, R, potionUid);
   expect(BattleSession.getSnapshot().potionBar.some(o => o.uid === potionUid)).toBe(false);
   expect(game.coins).toBe(coins); expect(game.hp).toBe(hp);
   expect(R.granted.some(o => o.card.id === 'candidate-spell')).toBe(false);
@@ -175,3 +176,4 @@ it('同回合两瓶神秘药水各自只兑现一次，沉默不吞任务', asyn
   BattleSession.commands.endTurn(); await settle();
   expect(R.granted.filter(o => o.card.id === 'two-potions-result')).toHaveLength(2);
 });
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';

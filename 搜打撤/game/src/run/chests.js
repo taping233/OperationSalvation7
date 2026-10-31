@@ -606,7 +606,7 @@ import { createChestFrameSets, SAFE_CLOSED } from './chest-opening-art.js';
       claimMode:cur.claimMode,
       progress:{ total:cur.cards.length, pending:rest.length, received:progress.takenCount, choiceCount, choicePending:isPick, choiceName:chosenCard?.name || '', bonusPending },
       cards:cardsHTML || (coins ? '' : '<p class="reward-empty">这里没有奖励</p>'),
-      actions:`${ops}${bulk}`, coins, footer, warning:returnNotice ? `<p class="reward-notice" role="status">${esc(returnNotice)}</p>` : '', count:cur.cards.length + (coins ? 1 : 0),
+      actions:`${ops}${bulk}`, coins, footer, warning:returnNotice ? `<p class="reward-notice" role="status">${esc(returnNotice)}</p>` : !finished && !cur.leaveConfirm ? '<p class="reward-notice">当前节点可整理后继续领取；前往下一节点后未领奖励作废。</p>' : '', count:cur.cards.length + (coins ? 1 : 0),
       className:`reward-v14${overviewMode ? '' : ' reward-standalone-picker'}${taken.size || lost.size ? ' no-anim' : ''}`,
     });
     const body = picker;

@@ -1,9 +1,11 @@
-import { esc, escAttr } from '../core/shared.js';
+import { esc } from '../core/shared.js';
 import { eventChoiceRewardAt, nodeActionBinding } from './node-reward-state.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { bagSlots } from '../hub/game.bag.bridge.js';
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import { createEventCommands } from './event-commands.js';
+import { patchRewardScene, rewardCardUnitHTML, rewardClaimHTML, rewardExitHTML, rewardSceneHTML, restoreRewardActionFocus } from '../ui/reward-scene-view.js';
+import { captureOverlayReturnState, restoreOverlayReturnState } from '../ui/overlay-return-state.js';
 
 const PRESENTATIONS = {
   'ev19-potions': {
@@ -24,6 +26,7 @@ export function createEventCardChoiceController({
   let viewSequence = 0;
   let choiceZoomToken = null;
   const pendingSaves = new WeakSet();
+  const presentationStates = new WeakMap();
   const persist = async () => await saveRunCheckpoint(saveGame);
   const capturePage = () => {
     const body = UI.el?.ovBody, surface = body?.firstElementChild, overlay = UI.el?.overlay, revision = UI._overlayRevision;
@@ -78,34 +81,47 @@ export function createEventCardChoiceController({
     const spec = PRESENTATIONS[record.eventId];
     const cards = record.cardIds.map(id => SDT.Cards.all().find(card => card.id === id));
     const capacity = game.bagCapacityText?.() || `${game.usedSlots?.() ?? 0}/${game.bagCap?.() ?? SDT.Base.bagCap()} 格`;
-    const noFit = !cards.some(card => card && game.canReceiveCard(card));
+    const fits = card => card.id === 'tt2-apollo' || game.canReceiveCard(card);
+    const noFit = !cards.some(card => card && fits(card));
+    const claimActions = { pick:'eventCardPick', organize:'eventCardPick' };
+    const claimHTML = (index, zoom = false) => {
+      const html = rewardClaimHTML({ index, cardName:cards[index].name, choice:true, fits:fits(cards[index]), zoom, actions:claimActions });
+      return zoom ? html.replace('data-cancel="false"', `data-cancel="false" data-choice-view="${viewToken}"`) : html;
+    };
+    const previousBody = UI.el?.ovBody, previousPage = previousBody?.querySelector('.event-reward-scene');
+    const focused = /** @type {HTMLElement} */ (previousPage?.contains(document.activeElement) ? document.activeElement.closest('[data-act]') : null);
+    const presentation = previousPage ? captureOverlayReturnState(previousPage) : presentationStates.get(record);
+    const focus = Number.isInteger(selectedIndex) ? { action:'eventCardPick', index:String(selectedIndex) }
+      : focused ? { action:focused.dataset.act, index:focused.dataset.i } : null;
     game.state = 'modal';
-    nodeShell({
-      tone:'event', asset:spec.asset, icon:'[[icon:cards]]', title:spec.title, sub:spec.sub,
-      body:`<div class="bt-hand event-choice-hand">${cards.map((card, i) => card ? `
-        <div class="event-choice-option"><button type="button" class="bt-card event-choice-card" data-act="eventCardRead" data-i="${i}" aria-label="放大查看${escAttr(card.name)}" aria-haspopup="dialog">
-          ${SDT.Cards.cardHTML(card, 'sm')}
-        </button><button type="button" class="ov-btn ok" data-act="eventCardPick" data-i="${i}" aria-label="${card.id !== 'tt2-apollo' && !game.canReceiveCard(card) ? '腾出位置领取' : '领取'}${escAttr(card.name)}">${card.id !== 'tt2-apollo' && !game.canReceiveCard(card) ? '腾位置领取' : '领取此牌'}</button></div>` : '<p class="reward-notice">这张候选卡暂时不可用，奖励已保留。</p>').join('')}</div>
-        <p class="loot-footer-note">暂离可保留候选，领取后其余放弃。</p>`,
-      foot:`<span class="reward-capacity">[[icon:bag]] ${esc(capacity)}</span>
-        <button type="button" class="ov-btn" data-act="eventCardReturn">返回地图</button>
-        <button type="button" class="ov-btn" data-act="eventCardBag">整理背包</button>
-        <p class="reward-notice" data-event-capacity role="status" aria-live="polite">${esc(notice || (noFit ? '当前候选都放不下，请先整理背包；候选和已支付的货币会保留。' : ''))}</p>`,
+    const html = rewardSceneHTML({ className:'reward-v14 event-reward-scene reward-standalone-picker',
+      title:'选择 1 张', source:spec.title, rule:spec.sub, count:cards.length,
+      cards:cards.map((card, index) => card ? rewardCardUnitHTML({ card, face:SDT.Cards.cardHTML(card), index, readAction:'eventCardRead',
+        action:claimHTML(index) + (!fits(card) ? '<span class="reward-capacity-note">当前放不下</span>' : '') })
+        : '<p class="reward-notice">这张候选卡暂时不可用，奖励已保留。</p>').join(''),
+      actions:rewardExitHTML('eventCardReturn', '返回地图'),
+      footer:`<span class="reward-capacity">[[icon:bag]] ${esc(capacity)}</span>
+        <button type="button" class="reward-bag" data-act="eventCardBag">整理背包</button>
+        <span class="reward-notice">当前节点可整理后继续选择；前往下一节点后未领候选作废。领取后其余放弃。${record.paidCoins ? '已付转运费不退。' : ''}</span>`,
+      warning:`<p class="reward-notice" data-event-capacity role="status" aria-live="polite">${esc(notice || (noFit ? '当前候选都放不下，请先整理背包，返回后可继续选择。' : ''))}</p>`,
     });
+    if (!previousPage || UI.el?.overlay?.hidden || !patchRewardScene(previousBody, SDT.Icons.rich(html))) UI.showOverlay('', html, 'page');
     setBagReturnHook(() => render(record, current, '', selectedIndex));
     const page = UI.el?.ovBody?.firstElementChild;
     const binding = nodeActionBinding(game, UI, 'eventCardPick');
     const active = () => current() && binding() && game.nodeRewards?.[key] === record && record.taken === null
       && (!page || UI.el?.ovBody?.firstElementChild === page);
-    UI.act('eventExit', () => { if (active()) { closeChoiceZoom(); close(); } });
-    UI.act('eventCardBag', () => { if (active()) { closeChoiceZoom(); bagSlots.showBackpack(); } });
-    UI.act('eventCardReturn', () => { if (active()) { closeChoiceZoom(); close(); } });
+    const rememberPresentation = (target = null) => presentationStates.set(record, captureOverlayReturnState(page, target));
+    const returnToMap = () => { if (active()) { closeChoiceZoom(); rememberPresentation(); return close(); } };
+    UI.act('eventExit', returnToMap);
+    UI.act('eventCardBag', () => { if (active()) { closeChoiceZoom(); rememberPresentation(); bagSlots.showBackpack(); } });
+    UI.act('eventCardReturn', returnToMap);
     UI.act('eventCardRead', data => {
       if (!active()) return false;
       const index = Number(data.i), card = cards[index];
       if (!Number.isInteger(index) || !card) return false;
-      UI.showCardZoom(card, { hideNote:true, presentation:'expedition',
-        footer:`<button type="button" class="ov-btn ok" data-act="eventCardPick" data-i="${index}" data-choice-view="${viewToken}">${card.id !== 'tt2-apollo' && !game.canReceiveCard(card) ? '腾位置领取' : '领取此牌'}</button>` });
+      const source = page?.querySelector(`[data-act="eventCardRead"][data-i="${index}"]`);
+      UI.showCardZoom(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition', footer:claimHTML(index, true) });
       choiceZoomToken = viewToken;
       return true;
     });
@@ -170,14 +186,16 @@ export function createEventCardChoiceController({
       if (!active() || (data.choiceView !== undefined && data.choiceView !== viewToken)) return false;
       const index = Number(data.i), card = cards[index];
       if (!Number.isInteger(index) || !card) return false;
-      if (card.id !== 'tt2-apollo' && !game.canReceiveCard(card)) {
+      if (!fits(card)) {
         closeChoiceZoom();
+        rememberPresentation(page?.querySelector(`[data-act="eventCardPick"][data-i="${index}"]`));
         setBagReturnHook(null);
         bagSlots.organizeReward({ card, current:choiceCurrent,
           onReturn:() => choiceCurrent() ? render(record, current, '', index) : false,
           onClaim:() => choiceCurrent() ? pick(index) : false,
           onFullBag:() => {
             if (!choiceCurrent() || !render(record, current, '', index)) return false;
+            presentationStates.set(record, captureOverlayReturnState(UI.el?.ovBody?.firstElementChild));
             return bagSlots.showBackpack();
           },
         });
@@ -186,7 +204,9 @@ export function createEventCardChoiceController({
       return pick(index);
     });
     UI.refresh(game);
-    if (Number.isInteger(selectedIndex)) UI.el?.ovBody?.querySelector(`[data-act="eventCardPick"][data-i="${selectedIndex}"]`)?.focus();
+    if (focus && (!focused?.isConnected || Number.isInteger(selectedIndex))) restoreRewardActionFocus(page, focus,
+      { claimActions:['eventCardPick'], returnActions:['eventCardReturn', 'eventCardBag'] });
+    restoreOverlayReturnState(page, presentation, { isCurrent:active });
     return true;
   }
 
@@ -203,7 +223,7 @@ export function createEventCardChoiceController({
     const cards = candidates.filter(Boolean);
     if (!spec || !cards.length) {
       UI.log('本次可用卡池为空，尚未领取奖励', 'warn');
-      close();
+      await close();
       return false;
     }
     game.nodeRewards ||= {};

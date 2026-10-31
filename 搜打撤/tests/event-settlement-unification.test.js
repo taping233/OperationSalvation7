@@ -114,6 +114,32 @@ describe('事件卡牌授予与保存检查点', () => {
 });
 
 describe('事件节点结算与恢复', () => {
+  it.each(['restore', 'leave'])('战地整备 %s 后等待退出保存，地图恢复可操作且不重复发卡或碎片', async action => {
+    const move = { id:'restore-move', name:'待复原招式', type:'武术', rarity:'古朴' };
+    H.game.usedPocket = [{ card:move, count:2 }];
+    await openEvent('cmtn7qttxqo4', [move]);
+    await UI._acts.evtChoice({ i:'0' }); await flushEventActions();
+    expect(H.game.fragments).toBe(1);
+    expect(UI.el.ovBody.querySelector('.pocket-restore')).not.toBeNull();
+    const restore = UI._acts.restoreOne, leave = UI._acts.fireDone;
+    let release;
+    H.save = vi.fn().mockReturnValueOnce(true).mockImplementationOnce(() => new Promise(resolve => { release = resolve; }));
+    const pending = action === 'restore' ? restore({ name:move.name }) : leave();
+    await flushEventActions();
+    expect(H.save).toHaveBeenCalledTimes(2);
+    expect(H.game.state).toBe('modal');
+    expect(UI.el.overlay.hidden).toBe(false);
+    release(true); await pending; await flushEventActions();
+    await vi.advanceTimersByTimeAsync(250);
+    expect(H.game.state).toBe('idle');
+    expect(UI.el.overlay.hidden).toBe(true);
+    expect(H.game.nodeRewards['0,1'].settled).toBe(true);
+    await restore({ name:move.name }); await leave();
+    expect(H.game.fragments).toBe(1);
+    expect(H.game.ownedCards).toHaveLength(action === 'restore' ? 1 : 0);
+    expect(H.game.usedPocket[0].count).toBe(action === 'restore' ? 1 : 2);
+  });
+
   it.each(['false', 'throw'])('投骰选择保存 %s 时不留下可自动执行的 actionChoice', async mode => {
     await openEvent('tt6-mystery'); failSave(mode);
     await UI._acts.evtChoice({ i:'0' }); await flushEventActions();

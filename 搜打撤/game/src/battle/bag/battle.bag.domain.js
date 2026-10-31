@@ -27,6 +27,7 @@ function createBattleBag({
   queueBattleAction, runStagedSteps, singleTargetHitSteps, applyTextEffects, hitFoe, resolveCardSteps,
   sweepDead, finish, alive, addTempCard, addDeckCard, fireCatGift, applyKillRewards,
   throwIfActionCancelled, findCard,
+  checkHandCombinations = () => {},
   triggersM2,
   addEnergy, drawCards, queueDiscover, getTurn,
   processDiscoverQueue, randomDiscoverCard, previewDiscovery = (...args) => { void args; return null; },
@@ -56,7 +57,10 @@ function createBattleBag({
       instanceRuntime.cardAnims.push({ kind: 'draw', uid, name: o ? o.card.name : '' });
       cnt++;
     }
-    if (cnt) instanceRuntime.G.log(`[[icon:gem]] 复原 ${cnt} 张消耗牌，回到手牌`, 'ok');
+    if (cnt) {
+      instanceRuntime.G.log(`[[icon:gem]] 复原 ${cnt} 张消耗牌，回到手牌`, 'ok');
+      checkHandCombinations();
+    }
     return cnt;
   }
 
@@ -85,12 +89,7 @@ function createBattleBag({
   function consumeBattleItem(uid, marker = reserveBattleItem(uid)) {
     if (!marker || !sameBattle(marker) || pendingItem(uid) !== marker ||
         !battleBagItems(marker).some(o => o.uid === uid)) return null;
-    const items = instanceRuntime.G.ownedCards;
-    const index = items.findIndex(o => o.uid === uid);
-    if (index >= 0) {
-      const [entry] = items.splice(index, 1);
-      if (!instanceRuntime.granted.some(o => o.uid === uid)) instanceRuntime.granted.push(entry);
-    }
+    // 原随身道具保留持有归属，由战后账本统一移入消耗区；取回且未再使用时继续保留。
     // 先提交战后账本；结算标记使本次效果无法取回自己，复原回手后仍可再次使用。
     for (let i = instanceRuntime.hand.length - 1; i >= 0; i--) {
       if (instanceRuntime.hand[i] === uid) instanceRuntime.hand.splice(i, 1);
@@ -140,7 +139,7 @@ function createBattleBag({
       // 2026-09-12：战斗效果类道具（药水/TNT/烟雾弹/通行证C/员工通行证A）走药水栏结算
       return useBattleEffectItem({ ...entry, card }, side);
     }
-    // 先扣再用（与地图侧道具一致）：用掉即从背包移除
+    // 先记消费再执行效果；快捷栏依据战后账本排除已使用的道具。
     clearTargetSession();
     const marker = consumeBattleItem(entry.uid);
     if (!marker) return false;

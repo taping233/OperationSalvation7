@@ -1,6 +1,6 @@
 /* October feedback: scoped to the requested pages. */
 body #overlay#overlay#overlay #hubMain .base-navigation-v7 .hub-tab.on .base-home-icon { color:#43b9ff; fill:currentColor; }
-.courtyard-v3-rain-layer { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+
 .departure-drag-card { position:fixed; z-index:10000; pointer-events:none; opacity:1; filter:drop-shadow(0 10px 12px #122b4466); }
 .departure-drag-card .hs-card { width:100%; }
 .departure-drag-card .dep-quantity { display:flex; justify-content:space-between; color:#203945; background:#f6f8f9; }

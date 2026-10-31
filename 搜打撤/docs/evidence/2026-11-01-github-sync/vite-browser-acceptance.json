@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "origin": "http://review-01a19232.localhost:8139",
+  "viewport": {
+    "height": 720,
+    "width": 1280
+  },
+  "viewportOverride": false,
+  "input": "Built-in browser DOM buttons; no runtime-state injection or OS input",
+  "existingProfiles": "127.0.0.1 origin slots 01 and 02 were only listed; no existing slot was opened or modified",
+  "testProfile": "All five slots at the dedicated review origin were initially empty; created slot 05",
+  "checks": [
+    "Title guide prepare/map copy and readable layout",
+    "New slot to base, mode and character to deployment",
+    "Two optional cards selected; 4/16 stacks and 7 cards",
+    "Read-only initial-card zoom closed back to original card focus",
+    "New run opens normal map; backpack contains the selected cards",
+    "Sniper moved to safe: bag 3/16 and 6 cards; safe 1/2 and 1 card",
+    "System-menu guide returns to the same live system menu",
+    "Save and exit returns to title",
+    "Browser reload and re-enter slot 05 retains bag 3/16 and safe 1/2 with the same sniper card"
+  ],
+  "screenshots": [
+    "vite-guide-final.jpg",
+    "vite-departure-final.jpg",
+    "vite-save-restore-final.jpg"
+  ],
+  "logs": [
+    {
+      "level": "warn",
+      "message": "HTML5 Audio pool exhausted, returning potentially locked audio object.",
+      "timestamp": "2026-10-31T22:07:03.102Z",
+      "url": "http://127.0.0.1:8139/assets/js/vendor-runtime-Bplpvbef.js"
+    },
+    {
+      "level": "warn",
+      "message": "HTML5 Audio pool exhausted, returning potentially locked audio object.",
+      "timestamp": "2026-10-31T22:08:40.521Z",
+      "url": "http://review-01a19232.localhost:8139/assets/js/vendor-runtime-Bplpvbef.js"
+    },
+    {
+      "level": "warn",
+      "message": "HTML5 Audio pool exhausted, returning potentially locked audio object.",
+      "timestamp": "2026-10-31T22:12:55.052Z",
+      "url": "http://review-01a19232.localhost:8139/assets/js/vendor-runtime-Bplpvbef.js"
+    }
+  ],
+  "warningsReview": {
+    "conclusion": "The three warnings occur once per page startup before the first interaction. Installed Howler starts with an empty unlocked HTML5 Audio pool, probes a new Audio().play(), and emits this warning on autoplay rejection; the application retains playError/unlock handling. No [music] load failure or page error was observed. No warning suppression or new fallback added.",
+    "sources": [
+      "搜打撤/node_modules/howler/dist/howler.js:37,334,422-439",
+      "搜打撤/game/src/audio/sound.js:115-126",
+      "搜打撤/game/src/audio/sound.music.player.js:87-97"
+    ],
+    "acousticAcceptance": false
+  },
+  "previewStopped": true,
+  "temporaryTabClosed": true,
+  "port8139Free": true,
+  "completedAt": "2026-10-31T22:15:37.252511+00:00",
+  "images": [
+    {
+      "path": "vite-guide-final.jpg",
+      "bytes": 81848,
+      "sha256": "bd53690c0d991aa56e428c30658e9a51c83ffa3308d3477f7165c71ca0bb7ae3"
+    },
+    {
+      "path": "vite-departure-final.jpg",
+      "bytes": 90544,
+      "sha256": "5b309abf04b3072e5275a2777f7e3d54ae73bfc52fb25649ef6fcd3b9de38044"
+    },
+    {
+      "path": "vite-save-restore-final.jpg",
+      "bytes": 30354,
+      "sha256": "db772816f4077bf9fdada5c5ddc461eaceab225524d684f8a570b073bb1a33ec"
+    }
+  ]
+}

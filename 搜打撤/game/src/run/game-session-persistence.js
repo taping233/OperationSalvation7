@@ -107,6 +107,7 @@ function createRunSavePayload({ freshRun = false } = {}) {
     layerIdx: readState().game.layerIdx, trackPos: readState().game.trackPos,
     hp: readState().game.hp, maxHp: readState().game.maxHp, coins: readState().game.coins, turn: readState().game.turn,
     atk: readState().game.atk, mode: readState().game.mode, myClass: readState().game.myClass || null, characterId: readState().game.characterId || null,
+    departureCharacterId: readState().game.departureCharacterId || null,
     inventory: readState().game.inventory, ownedCards: readState().game.ownedCards,
     cardOrder: readState().game.cardOrder || [],
     usedPocket: readState().game.usedPocket,

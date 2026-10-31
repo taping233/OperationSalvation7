@@ -1,11 +1,15 @@
 // Opt-in for small, delegated panels: retain matching controls, images and reading hosts.
 // Root ownership, lifecycle and listeners remain with the caller.
-function identity(node) {
+/** @typedef {{preserveValue?:(element:Element)=>boolean, key?:(element:Element)=>string|null|undefined,
+ * preserveNode?:(current:Element,next:Element)=>boolean,
+ * preserveAttribute?:(current:Element,next:Element,name:string)=>boolean}} ViewSyncOptions */
+function identity(node, options) {
   if (node.nodeType !== 1) return String(node.nodeType);
   const element = /** @type {Element} */ (node);
-  const attributes = ['id', 'data-preset', 'data-target-id', 'data-card-id', 'data-action', 'data-act', 'data-field', 'data-role'];
+  const customKey = options.key?.(element);
+  const attributes = ['data-view-key', 'id', 'data-preset', 'data-target-id', 'data-card-id', 'data-action', 'data-act', 'data-field', 'data-role'];
   const attribute = attributes.find(name => element.hasAttribute(name));
-  const detail = attribute ? `${attribute}=${element.getAttribute(attribute)}`
+  const detail = customKey != null ? `key=${customKey}` : attribute ? `${attribute}=${element.getAttribute(attribute)}`
     : element.tagName === 'OPTION' ? `value=${element.getAttribute('value')}`
       : (element.getAttribute('class') || '').trim().split(/\s+/)[0];
   return `${element.namespaceURI}/${element.tagName}/${detail}`;
@@ -14,18 +18,18 @@ function identity(node) {
 /**
  * @param {Node} target
  * @param {Node} source
- * @param {{preserveValue?:(element:Element)=>boolean}} [options]
+ * @param {ViewSyncOptions} [options]
  */
 export function syncViewChildren(target, source, options = {}) {
   const buckets = new Map();
   for (const child of target.childNodes) {
-    const key = identity(child);
+    const key = identity(child, options);
     if (!buckets.has(key)) buckets.set(key, []);
     buckets.get(key).push(child);
   }
   let cursor = target.firstChild;
   for (const fresh of [...source.childNodes]) {
-    const existing = buckets.get(identity(fresh))?.shift();
+    const existing = buckets.get(identity(fresh, options))?.shift();
     const node = existing || fresh;
     if (existing) syncNode(existing, fresh, options);
     if (node !== cursor) target.insertBefore(node, cursor);
@@ -38,6 +42,15 @@ export function syncViewChildren(target, source, options = {}) {
   }
 }
 
+/** Sync a caller-owned matching element through the same child and control rules.
+ * @param {Element} target
+ * @param {Element} source
+ * @param {ViewSyncOptions} [options]
+ */
+export function syncViewElement(target, source, options = {}) {
+  syncNode(target, source, options);
+}
+
 function syncNode(target, source, options) {
   if (target.nodeType !== 1) {
     if (target.nodeValue !== source.nodeValue) target.nodeValue = source.nodeValue;
@@ -45,6 +58,7 @@ function syncNode(target, source, options) {
   }
   const current = /** @type {Element} */ (target);
   const next = /** @type {Element} */ (source);
+  if (options.preserveNode?.(current, next)) return;
   const form = /^(INPUT|TEXTAREA|SELECT)$/.test(current.tagName);
   const control = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (current);
   const freshControl = /** @type {typeof control} */ (next);
@@ -52,14 +66,21 @@ function syncNode(target, source, options) {
   const value = form ? (keepValue ? control.value : freshControl.value) : null;
   const multiple = current.tagName === 'SELECT' && /** @type {HTMLSelectElement} */ (current).multiple;
   const selected = multiple ? [.../** @type {HTMLSelectElement} */ (keepValue ? current : next).selectedOptions].map(option => option.value) : null;
-  const keepAttribute = name => current.tagName === 'DETAILS' && name === 'open';
+  const saveLocked = current.tagName === 'BUTTON' && current.hasAttribute('data-room-save-locked');
+  if (saveLocked) current.setAttribute('data-room-disabled-after-save', String(next.hasAttribute('disabled')));
+  const keepAttribute = name => current.tagName === 'DETAILS' && name === 'open'
+    || saveLocked && ['disabled', 'data-room-save-locked', 'data-room-disabled-after-save'].includes(name)
+    || options.preserveAttribute?.(current, next, name);
   for (const attribute of [...current.attributes]) {
     if (!keepAttribute(attribute.name) && !next.hasAttribute(attribute.name)) current.removeAttribute(attribute.name);
   }
   for (const attribute of next.attributes) {
     if (!keepAttribute(attribute.name) && current.getAttribute(attribute.name) !== attribute.value) current.setAttribute(attribute.name, attribute.value);
   }
-  syncViewChildren(current, next, options);
+  if (current.tagName === 'TEMPLATE') {
+    syncViewChildren(/** @type {HTMLTemplateElement} */ (current).content,
+      /** @type {HTMLTemplateElement} */ (next).content, options);
+  } else syncViewChildren(current, next, options);
   if (selected) {
     for (const option of /** @type {HTMLSelectElement} */ (current).options) option.selected = selected.includes(option.value);
   } else if (form && control.value !== value) {

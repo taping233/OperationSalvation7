@@ -1,0 +1,391 @@
+{
+  "acquisition": "Current production editor/player via run_native_check.ps1 and run_hidden_player.ps1 with isolated SDT_UNITY_CHECK_OUTPUT; no OS input",
+  "buildGUID": "f83ab90840ac4e558400ef9f736d3d59",
+  "files": [
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/native-focus-final/process.json",
+      "bytes": 395,
+      "sha256": "a88f860160e935c95931fdeee5a8c576b790f84017ba19e225ab00b83c935958"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/native-focus-final/result.json",
+      "bytes": 2480,
+      "sha256": "edb0754d795e1a41b164441529b649e24e5a415b61c406560846e94804dc5c52"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/native-focus-final/source-after.json",
+      "bytes": 47703,
+      "sha256": "505f8b60dd56130602e0344128a36e1c59f24510d2219c9e36c7dac49a59c22e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/native-focus-final/source-before.json",
+      "bytes": 47703,
+      "sha256": "505f8b60dd56130602e0344128a36e1c59f24510d2219c9e36c7dac49a59c22e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/native-focus-final/unity.log",
+      "bytes": 47823,
+      "sha256": "504b0686ad8a59dae4844bdd0f111c7f57e4d0b5f76adc57e308c582a38228ef"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-build-focus-final/build-info.json",
+      "bytes": 537584,
+      "sha256": "e545fcad40e8f8cdf3987d7ea7f489c887c0e0e3d19d4b420725a91c28e31991"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-build-focus-final/process.json",
+      "bytes": 393,
+      "sha256": "e5cc3eceb59d9c16d7464e5e54a2c3a14a58a107d7e9761758ac4d55d683c04d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-build-focus-final/source-after.json",
+      "bytes": 47703,
+      "sha256": "505f8b60dd56130602e0344128a36e1c59f24510d2219c9e36c7dac49a59c22e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-build-focus-final/source-before.json",
+      "bytes": 47703,
+      "sha256": "505f8b60dd56130602e0344128a36e1c59f24510d2219c9e36c7dac49a59c22e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-build-focus-final/unity.log",
+      "bytes": 49888,
+      "sha256": "5852d47e6396ce1810ac6a29d59a2d124bc9fc9d35a0fe7e548cf647762c43a0"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/isolated-profile/profile.json",
+      "bytes": 74063,
+      "sha256": "e3593b204e95a43c4c04657a56d2920337334cecbbc16d23ff51d4b4a11e564f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/isolated-profile/profile.json.previous",
+      "bytes": 74063,
+      "sha256": "e3593b204e95a43c4c04657a56d2920337334cecbbc16d23ff51d4b4a11e564f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-altar.png",
+      "bytes": 2754728,
+      "sha256": "1819c73b363a05b79d6a73d52a94ff7d40f13735c6b2043fc13546115aeee322"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-battle-pile-reader.png",
+      "bytes": 2000616,
+      "sha256": "de77176ff16995488066130a6613eaac9d42a08316e692a543e41f0146457792"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-battle-pile-return.png",
+      "bytes": 1852935,
+      "sha256": "f32527dca5c9cd8ee1cbe4b997878bbdc2fa097f1bc67b1a7e9c2ebe4dca03d7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-battle-pile.png",
+      "bytes": 1852935,
+      "sha256": "f32527dca5c9cd8ee1cbe4b997878bbdc2fa097f1bc67b1a7e9c2ebe4dca03d7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-battle.png",
+      "bytes": 1844883,
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-door.png",
+      "bytes": 4098051,
+      "sha256": "63ea55e6f23cb9e3f8bcbd23bdc78f814402f212c28a31b647f36076053adb9e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-extraction.png",
+      "bytes": 1366578,
+      "sha256": "4d34aa27868ec4519ff1d4153815ef351e5947289778d8cbf7774cadfedd758d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-formation-rules.png",
+      "bytes": 1170264,
+      "sha256": "4b1555bb0fec82d4a19573e0bd8966fe39b407d9d15cda16b776dad687619129"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-formation.png",
+      "bytes": 1265821,
+      "sha256": "f711ae66458cc2444955ecc46396d5e550ac42a55512b4f790b823bf8ac661c2"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-fx-atlas-specimen.png",
+      "bytes": 2524155,
+      "sha256": "1bfb7be8e7c863acba87385f3577074c57c5019d371ff4ba1cdc938e5cdf9511"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-0.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-1.png",
+      "bytes": 705059,
+      "sha256": "cd9ea4717cd5420adcf995ab83cd29bc0abd7fc2e5ffc225ec2bfbdc7e9f71c1"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-2.png",
+      "bytes": 1066215,
+      "sha256": "39d9a46ed51c94c910f3693efea6345dbf338d2ada853d0002ae08594a655df9"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-5.png",
+      "bytes": 740854,
+      "sha256": "c946e5f9dd81ddcb8efb65ac626737f1fb7c41ee4f3d4d87197e09338bba853e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-in-run.png",
+      "bytes": 1061590,
+      "sha256": "a1bc3754782a336080914fce48d5dd287e6f822abcb9f2f54482ccc79544e1fe"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-more-4.png",
+      "bytes": 778512,
+      "sha256": "376090feea1120aa15d9b5d3d671f1f41f82b62ac381e762e2feb47abb52c6ff"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-hand-material-picked.png",
+      "bytes": 2339602,
+      "sha256": "ac74383d33a7e4b681013675865384e508e89b81e16658a091c86fd11481db73"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-hand-material.png",
+      "bytes": 2300779,
+      "sha256": "de9a9acbc2eca0fdf345e7eb82536f198ad4489abad75257ffb74b91898e5d46"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-hub-conversion-overflow.png",
+      "bytes": 1155860,
+      "sha256": "f072355d9367ed37c7c5c47a61af3f2d416f465cd636a6e0063bad446d77dd7a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-hub-parity-returned-base.png",
+      "bytes": 2379281,
+      "sha256": "d5fa8ef972fa6feb8c2d3748a8987bfdf4eb1cd51dd2da1148adc3e9a8ad62b7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-hub-restore-unbanked-keys.png",
+      "bytes": 1002841,
+      "sha256": "844a939145b60eaa27ae68e30305a6f415bd9f43aa5bf194dd09e5dd5137bbd8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-hub-trade-base-variant.png",
+      "bytes": 2464843,
+      "sha256": "7a880a5d758b814d0af4021913f8a0dbd43b16355a955e0b1d31c3ed33c83c72"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-hub-trade-variant.png",
+      "bytes": 2463813,
+      "sha256": "647287378058211db3b1a61eecd97241c461f7c976fd700067a0ecae293229f8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-hub-variant-stock.png",
+      "bytes": 2526105,
+      "sha256": "1f33e6b5aa2a2f4f599c1260102d675a9ce5430a1016ec7d2ad5c0301c6a921f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-hub-warehouse-actions.png",
+      "bytes": 991926,
+      "sha256": "9ce73003051be3a9f242edba694c12f3f2a698e5932289a8a73a658f2f79e44a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-infusion-picked.png",
+      "bytes": 2093716,
+      "sha256": "07358d0c37570bb6424ac8fa440e99469bfb4c7e8f1f4b8d2f22860be5ce1b78"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-infusion-return.png",
+      "bytes": 2429430,
+      "sha256": "3c3a6df986b8c1be93a80b0634cef5b341a1cfd4948eae5f773f1e061b5f915f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-infusion.png",
+      "bytes": 2067283,
+      "sha256": "9fefe7eab5ef95c9afa5d968965a238f2e91bad51beb645c028bb616970351f1"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-passage.png",
+      "bytes": 1176068,
+      "sha256": "434b2322c1ca21a1f881e356dfbfb08e736d753da8376f72135797a480a0db79"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-photo.png",
+      "bytes": 2481686,
+      "sha256": "bd211aee8973cd9ea982d51a98860dae95da63efd7611cac246fb4cd717a60b9"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-recode-reader.png",
+      "bytes": 2609840,
+      "sha256": "8cf237fda57acb389d49f8d39b36d579d0d556e67808310a0ab75cf8c421e0af"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-recode-result.png",
+      "bytes": 2577983,
+      "sha256": "0093941a691ed52e3bdab9e3e0bebc5c4aaa121694d2ef73efe49497dedef3fe"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-recode-save-failed.png",
+      "bytes": 2634185,
+      "sha256": "adaf853db2b7e376bee54750ecc0419c47ce301ff044adaa4b2b41fa11abc5b7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-returned-base.png",
+      "bytes": 2375426,
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-returned-slots.png",
+      "bytes": 1535225,
+      "sha256": "f0b0c41913090b752241c6e45c4e93a9e46e6a3a30fcbd5df54a5f9bb834e518"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-returned-title.png",
+      "bytes": 3414816,
+      "sha256": "fbad4733f95cb469b8f2ae905b17cf521fd93efc416248740e012ac243c90bc6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-reward-pending.png",
+      "bytes": 2142375,
+      "sha256": "7aea7e51bf8d915f24822e04ba9435e37a868bc71ff248993fb404e5b02d1ad4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-reward-reader-capacity.png",
+      "bytes": 1839342,
+      "sha256": "571eb8615b90780592bc0b2512089991e5f1262bb025fbfe3349b66d98afcbd3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-reward-reader-organizer.png",
+      "bytes": 2546747,
+      "sha256": "6756776c220221627ec07eb5ea7c3410b6f4fcb09cd0bcfab125ece39babc950"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-reward-reader-pending.png",
+      "bytes": 1834131,
+      "sha256": "245322900b93c4b7d187a057984502403e92becfd98648695a9045cf0d04c605"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-settlement.png",
+      "bytes": 880084,
+      "sha256": "352140e5391a1f4633a3c331e40309757d8e0d547e3c26235f7e22ae14b79ff3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-shop-commission-dice.png",
+      "bytes": 1929324,
+      "sha256": "f6bb99ab278c1903743ac7e1ec43d0ce831a81fa94151e1b936f9061545f5daf"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-shop-commission-receipt.png",
+      "bytes": 2456879,
+      "sha256": "630d039909b5da4b75894639d89b8d9a27ac65d0caee4c46e894de4df69f14e5"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-shop-commission.png",
+      "bytes": 2620979,
+      "sha256": "bba5f64121056777add9a76cf258f836824d20bf5736328fb59eea68282f99fb"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-shop-exchange.png",
+      "bytes": 1688771,
+      "sha256": "0f5ce9b6c4ef166e6845f1ef1c3cf435028cc1861ba9384532c253ff35e60b69"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-shop-free-offers.png",
+      "bytes": 3604556,
+      "sha256": "cb708f32928d070e410fe26afdb876a0a7154147a6cfb2fe20b74af47c0db768"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-shop-inspection.png",
+      "bytes": 2353073,
+      "sha256": "edb9faef59c109f54fb4d9cd7db2d6e11e31200712e530b5c969453c494fa768"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-shop.png",
+      "bytes": 3671645,
+      "sha256": "852c79e308c39bad1d22750c180388fd1e803d84055ff0d40caeb7f24e0f4224"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-slot-archive-export.png",
+      "bytes": 662818,
+      "sha256": "25ef48185c015079385254675bb460d89186b6e1ff21745994beccd9f86e47d7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-slot-archive-import-preview.png",
+      "bytes": 497621,
+      "sha256": "ea03a8391da280687723f3321391ca202a37f47f09acdb2d7ca02ed975b4d537"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-slot-archive-import.png",
+      "bytes": 649866,
+      "sha256": "1c4123fbbb99cd15e931742849a95d3b210c3af130d6d286196064c2084b6655"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-slots-backup.png",
+      "bytes": 1542802,
+      "sha256": "a2338e814e05253fe2f88aaa7246ab443fefad91b4201ce07b301e01626477de"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-startup.png",
+      "bytes": 829220,
+      "sha256": "06dac53d0262bfc788708f37d0c36269f5826406ac8ddcde4c537266b7564413"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player-title.png",
+      "bytes": 3428986,
+      "sha256": "59bc9d9a9da3ed6e95ff09cccfdc50ab04aee114b51a0003ad739653d5c37c9f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/player.log",
+      "bytes": 477037,
+      "sha256": "eb8795dd7e5040ec7054603c774b0dc0930b03bd20035bfd7409079a971d0bfd"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/process.json",
+      "bytes": 1883,
+      "sha256": "fe0a09a4c612c9e862ba9a75e5a2b127a96a74d5c0676541a2d261a9374dae1d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/result.json",
+      "bytes": 5415518,
+      "sha256": "bf1d1082db788fc40b7b269ff5e85e20a79ca826797357c6e833f9e4ec79224e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-player-focus-final/trace.json",
+      "bytes": 5414571,
+      "sha256": "67f4d567c5432894d9612c459f8919f8a97b13148780bef06871638289b66cb3"
+    }
+  ]
+}

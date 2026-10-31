@@ -11,7 +11,7 @@ export function altarRitualHTML({ fragments, capacity, availableCards, hasItem, 
     ${uiDecisionFacts([['背包', capacity], ['可献祭', `${availableCards} 张`], ['通行证A碎片', `${fragments} 枚`]])}
     <p class="ui-risk">确认献祭后，所选卡牌永久失去；激活奖励只能选一次。</p>
     <div class="ui-decision-options">
-      ${uiDecisionChoice({ action:'altarOn3', label:'弃 3 张 · 激活祭坛', detail:`${availableCards < 3 ? '可献祭卡不足 3 张。' : ''}回赠二选一：复原至多 3 张 + 回复 10 血，或随机 1 张传说卡 + 1 张装备卡。` })}
+      ${uiDecisionChoice({ action:'altarOn3', label:'弃 3 张 · 激活祭坛', detail:`${availableCards < 3 ? '可献祭卡不足 3 张。' : ''}回赠二选一：复原至多 3 张 + 回复 10 血，或随机 1 张传说卡 + 1 张装备卡。`, disabled:availableCards < 3 })}
       ${uiDecisionChoice({ action:fragments >= 2 ? 'altarFragHero' : 'altarFragLocked', label:'献上 2 枚员工通行证A碎片（不弃牌）', detail:fragmentDetail, disabled:fragments < 2 || fragmentUnavailable })}
       ${uiDecisionChoice({ action:itemUsed ? 'altarItemUsed' : hasItem ? 'altarItemRestore' : 'altarItemNoItem', label:itemUsed ? '献祭道具 · 已用过' : '献祭 1 张道具 · 复原卡牌', detail:itemDetail, disabled:itemUsed || !hasItem })}
     </div>

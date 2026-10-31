@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 /* 2026-10-23 远征缺陷修复回归。复用 SYS03 夹具并控制保存与授予故障。 */
 import { beforeEach, expect, it, vi } from 'vitest';
 
@@ -59,7 +60,7 @@ function makeGame() {
 
 beforeEach(async () => {
   vi.resetModules();
-  document.body.innerHTML = '<div id="body"></div>';
+  document.body.innerHTML = '<div id="overlay" hidden><div id="body"></div></div>';
   // mock 工厂在首次执行时捕获 st.game 引用且 resetModules 不重跑工厂——
   // 必须原地 Object.assign 复用同一对象（extraction-flow.test.js 同款），不得换新实例
   // 先清掉上一用例动态添加的领奖/补给状态，避免失败中断后污染后续地图投影。
@@ -70,14 +71,14 @@ beforeEach(async () => {
   st.bagCapN = 10;
   acts = {};
   UI = {
-    el: { ovBody:document.getElementById('body') },
-    showOverlay: (_t, html) => { document.getElementById('body').innerHTML = html; },
-    hideOverlay: () => { document.getElementById('body').innerHTML = ''; },
+    el: { overlay:document.getElementById('overlay'), ovBody:document.getElementById('body') },
+    showOverlay: (_t, html) => { UI.el.overlay.hidden=false; document.getElementById('body').innerHTML = html; },
+    hideOverlay: () => { UI.el.overlay.hidden=true; document.getElementById('body').innerHTML = ''; },
     act: (name, fn) => { acts[name] = fn; },
-    refresh: vi.fn(), log: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '',
+    refresh: vi.fn(), log: vi.fn(),
     showCardReward: vi.fn(), showCardZoom:vi.fn(),
   };
-  window.SDT = {
+  await connectSdtFixture({
     UI,
     Sound: { sfx: vi.fn(), scene: vi.fn() },
     Icons: { rich: x => x },
@@ -96,7 +97,7 @@ beforeEach(async () => {
     MAP: { chestKinds:{ small:{ name:'小型物资箱' } } },
     Base: { isSha: () => false, bagCap:() => st.bagCapN },
     Motion: undefined,
-  };
+  });
 });
 
 async function importAltar() {

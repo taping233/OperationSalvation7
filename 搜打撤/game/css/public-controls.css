@@ -26,7 +26,7 @@
 .btn-row > .mini-btn { flex:1; }
 :where(.hs-btn.ok,.menu-btn.primary) { --public-control-ring:var(--ak-yellow,#ffd23c); }
 /* No transform belongs to these outer hit targets. Movement uses an explicit child. */
-body :is(.ov-btn,.hs-btn,.menu-btn,.mini-btn,.help-btn,.ui-control,.ui-control-compact,.ui-control-icon,.settings-tab,.bg-nav-item,.bg-page-button,.archive-back,#bagBtn):not(:where(.battle-stage *,.battle-decision *,#overlay[data-ui-motion="fast"] *)) {
+body :is(.ov-btn,.hs-btn,.menu-btn,.mini-btn,.ui-control,.ui-control-compact,.ui-control-icon,.settings-tab,.bg-nav-item,.bg-page-button,.archive-back,#bagBtn):not(:where(.battle-stage *,.battle-decision *,#overlay[data-ui-motion="fast"] *)) {
   --control-time:var(--motion-hover-out,320ms);
   --linked-touch-time:var(--control-time);
   &:is(:hover,:focus-visible):not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]):not(.dis) {
@@ -68,6 +68,6 @@ body .term-tip {
   &.is-action-tip { background:rgba(22,32,41,.96); }
 }
 @media (prefers-reduced-motion:reduce) {
-  :is(.ov-btn,.hs-btn,.menu-btn,.mini-btn,.help-btn,.ui-control,.ui-control-compact,.ui-control-icon,.settings-tab,.bg-nav-item,.bg-page-button,.archive-back,#bagBtn,.ui-control-label) { transition-duration:0s; }
+  :is(.ov-btn,.hs-btn,.menu-btn,.mini-btn,.ui-control,.ui-control-compact,.ui-control-icon,.settings-tab,.bg-nav-item,.bg-page-button,.archive-back,#bagBtn,.ui-control-label) { transition-duration:0s; }
 }
-body.reduce-motion :is(.ov-btn,.hs-btn,.menu-btn,.mini-btn,.help-btn,.ui-control,.ui-control-compact,.ui-control-icon,.settings-tab,.bg-nav-item,.bg-page-button,.archive-back,#bagBtn,.ui-control-label) { transition-duration:0s; }
+body.reduce-motion :is(.ov-btn,.hs-btn,.menu-btn,.mini-btn,.ui-control,.ui-control-compact,.ui-control-icon,.settings-tab,.bg-nav-item,.bg-page-button,.archive-back,#bagBtn,.ui-control-label) { transition-duration:0s; }

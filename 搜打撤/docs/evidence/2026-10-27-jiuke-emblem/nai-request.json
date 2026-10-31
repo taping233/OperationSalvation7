@@ -1,0 +1,65 @@
+{
+  "status": "generated",
+  "request": {
+    "input": "2::original faction insignia, monochrome graphic emblem, no humans::, a compact angular interlocking silhouette made from one modern tactical rifle and one straight double-edged sword. Rifle points toward upper left, sword points toward upper right. Clear rifle barrel and magazine, clear sword tip and short crossguard. The two weapons join into one deliberate heraldic mark; broad cutout negative space at the center suggests the hooked structure of Chinese numeral nine without written typography. A small separated angular foot anchors the base.\n\nOriginal identity emblem for Section Nine, a tactical organization in a dystopian game. Professional faction logo, recognizable silhouette, screenprinted military insignia, flat graphic design takes precedence over illustration.\n\nOne emblem centered on a plain charcoal background. Strong balanced compact silhouette, generous empty margin, readable thick shapes and deliberate negative-space gaps. Weapons are integrated into a designed abstract symbol, not realistic objects laid across one another. No lettering, no border, no shield, no wreath.\n\nSolid warm white silhouette, charcoal cutouts, absolutely flat two-tone graphic, crisp edges, no material rendering, no glow, no scenery.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 271009452,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, too many watermarks, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, people, character, portrait, realistic weapon render, 3d, metallic bevel, glow, gradients, ornate decoration, wings, skull, stars, typography, lettering, multiple emblems",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "2::original faction insignia, monochrome graphic emblem, no humans::, a compact angular interlocking silhouette made from one modern tactical rifle and one straight double-edged sword. Rifle points toward upper left, sword points toward upper right. Clear rifle barrel and magazine, clear sword tip and short crossguard. The two weapons join into one deliberate heraldic mark; broad cutout negative space at the center suggests the hooked structure of Chinese numeral nine without written typography. A small separated angular foot anchors the base.\n\nOriginal identity emblem for Section Nine, a tactical organization in a dystopian game. Professional faction logo, recognizable silhouette, screenprinted military insignia, flat graphic design takes precedence over illustration.\n\nOne emblem centered on a plain charcoal background. Strong balanced compact silhouette, generous empty margin, readable thick shapes and deliberate negative-space gaps. Weapons are integrated into a designed abstract symbol, not realistic objects laid across one another. No lettering, no border, no shield, no wreath.\n\nSolid warm white silhouette, charcoal cutouts, absolutely flat two-tone graphic, crisp edges, no material rendering, no glow, no scenery.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, too many watermarks, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, people, character, portrait, realistic weapon render, 3d, metallic bevel, glow, gradients, ornate decoration, wings, skull, stars, typography, lettering, multiple emblems",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\output\\jiuke-emblem-20261027\\nai45-draft.png",
+  "recipe_version": "3.4",
+  "task_override": "Remove logo/text logo/negative space UC terms because the requested asset is an emblem.",
+  "references": [
+    {
+      "url": "https://arknights-matome.blog.jp/archives/5305876.html",
+      "role": "Faction silhouette and monochrome visual-language research; not uploaded or copied"
+    }
+  ],
+  "seed": 271009452,
+  "sha256": "95ab5bb6353ce726266358eddc6c40bbfc103518828e81c84a660cb7a46f082b"
+}

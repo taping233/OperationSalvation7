@@ -4,7 +4,7 @@ import { installImmediateWebLocks } from './helpers/web-locks.js';
 
 const canvasCtx = new Proxy({}, { get: () => () => canvasCtx, set: () => true });
 window.HTMLCanvasElement.prototype.getContext = () => canvasCtx;
-document.body.innerHTML = '<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div>';
+document.body.innerHTML = '<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div><div id="overlay" hidden><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} },
   Sound: { music: vi.fn(), sfx: vi.fn(), setDucked: vi.fn() },
@@ -23,8 +23,12 @@ const actions = new Map();
 
 beforeAll(() => {
   Object.assign(window.SDT.UI, {
+    el: { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody') },
     log: vi.fn(), refresh: vi.fn(), clearLog: vi.fn(), hideOverlay: vi.fn(),
-    hideScreen: vi.fn(), showScreen: vi.fn(), showOverlay: vi.fn(), act: vi.fn(),
+    hideScreen: vi.fn(), showScreen: vi.fn(), showOverlay: vi.fn((_title, html) => {
+      document.getElementById('ovBody').innerHTML = html;
+      document.getElementById('overlay').hidden = false;
+    }), act: vi.fn(),
     registerHelp: vi.fn(), helpBtn: () => '',
   });
   window.SDT.UI.act = vi.fn((name, fn) => actions.set(name, fn));
@@ -51,6 +55,7 @@ describe('死亡终局幂等', () => {
     game.elapsedSynced = 0;
     game.terminalPending = null;
     actions.clear();
+    document.getElementById('ovBody').innerHTML = '';
     window.SDT.UI.log.mockClear();
     window.SDT.UI.showOverlay.mockClear();
     vi.spyOn(window.SDT.Meta, 'checkUnlocks').mockClear();
@@ -93,7 +98,9 @@ describe('死亡终局幂等', () => {
     expect(window.SDT.Base.data.characters.wu).toMatchObject({ lv: 2, xp: 2 });
     expect(window.SDT.Meta.checkUnlocks).toHaveBeenCalledOnce();
     expect(window.SDT.UI.log).toHaveBeenCalledWith(expect.stringContaining('熟练度提升'), 'ok');
-    expect(window.SDT.UI.showOverlay).toHaveBeenCalledTimes(2);
+    expect(window.SDT.UI.showOverlay.mock.calls.map(([title]) => title)).toEqual([
+      '正在结算', '[[icon:cross]] 终局结算未保存', '撤离失败',
+    ]);
   });
 
   it('同局迟到回调不重复结算，新开局可用新runId再次结算', async () => {

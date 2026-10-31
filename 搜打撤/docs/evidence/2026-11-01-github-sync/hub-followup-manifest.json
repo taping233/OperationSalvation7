@@ -1,0 +1,50 @@
+[
+  {
+    "path": "tests/blackmarket-card-preview.test.js",
+    "sha256": "20341afe41298691847acb369dd7de70eac19f321e4d7fe81a68e6e0187a174d",
+    "snapshotSha256": "20341afe41298691847acb369dd7de70eac19f321e4d7fe81a68e6e0187a174d",
+    "snapshotMatches": true,
+    "bytes": 11243,
+    "mtimeUtc": "2026-10-31T21:48:03.938377+00:00"
+  },
+  {
+    "path": "tests/chest-batch-receipt.test.js",
+    "sha256": "afd905e68c1323e8d219c322ab6007dd187d3ac05e0f86bac621ac85c2094c64",
+    "snapshotSha256": "afd905e68c1323e8d219c322ab6007dd187d3ac05e0f86bac621ac85c2094c64",
+    "snapshotMatches": true,
+    "bytes": 3721,
+    "mtimeUtc": "2026-10-31T21:45:50.095878+00:00"
+  },
+  {
+    "path": "tests/help-return-lifecycle.test.js",
+    "sha256": "635727ebc23b8462a5bbde2015160ac78114dda15c58e48f795e140f10a414be",
+    "snapshotSha256": "635727ebc23b8462a5bbde2015160ac78114dda15c58e48f795e140f10a414be",
+    "snapshotMatches": true,
+    "bytes": 10430,
+    "mtimeUtc": "2026-10-31T21:50:35.542489+00:00"
+  },
+  {
+    "path": "tests/full-review-regressions-world.test.js",
+    "sha256": "1a47837a177717df5ae7c612f4188972efeebd20f32908555f292540dbd6393d",
+    "snapshotSha256": "1a47837a177717df5ae7c612f4188972efeebd20f32908555f292540dbd6393d",
+    "snapshotMatches": true,
+    "bytes": 13859,
+    "mtimeUtc": "2026-10-31T21:45:50.110357+00:00"
+  },
+  {
+    "path": "tests/project-bugfix-expedition-1023.test.js",
+    "sha256": "273aadd86d5f39e325f69f0b60bdee9b1b695de5977e577c6a7441065ee690c5",
+    "snapshotSha256": "273aadd86d5f39e325f69f0b60bdee9b1b695de5977e577c6a7441065ee690c5",
+    "snapshotMatches": true,
+    "bytes": 15440,
+    "mtimeUtc": "2026-10-31T21:45:50.133416+00:00"
+  },
+  {
+    "path": "tests/project-bugfix-round2-expedition-nest.test.js",
+    "sha256": "f8643fd486b28eed711349a55cef03003b293cebcf3c3c0f95f109474b6dc251",
+    "snapshotSha256": "f8643fd486b28eed711349a55cef03003b293cebcf3c3c0f95f109474b6dc251",
+    "snapshotMatches": true,
+    "bytes": 8190,
+    "mtimeUtc": "2026-10-31T21:45:50.146974+00:00"
+  }
+]

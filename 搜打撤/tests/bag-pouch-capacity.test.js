@@ -1,4 +1,4 @@
-import { runPendingFields } from './helpers/environment-fixtures.js';
+import { connectSdtFixture, runPendingFields } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import { beforeAll, beforeEach, afterEach, expect, it, vi } from 'vitest';
 
@@ -9,8 +9,8 @@ const pearl = { id: 'tt2-pearlbox', name: '珍珠盒', type: '武术', rarity: '
 
 beforeAll(async () => {
   document.body.innerHTML = readFileSync('game/index.html', 'utf8');
-  window.SDT = { Icons: { img: () => '', rich: String, TYPE_ART: {} },
-    Sound: { music() {}, sfx: vi.fn(), setDucked() {} }, FX: { feedback() {} } };
+  await connectSdtFixture({ Icons: { img: () => '', rich: String, TYPE_ART: {} },
+    Sound: { music() {}, sfx: vi.fn(), setDucked() {} }, FX: { feedback() {} } });
   await import('../game/src/cards/cards.js');
   await import('../game/src/ui/ui.js');
   await import('../game/src/hub/base.js');
@@ -45,6 +45,10 @@ function arrange(occupied, bagCopies = 0, storedCopies = 3, withPearl = false) {
   UI._acts.pouchStoreZoom();
 }
 async function take() { await UI._acts.pouchTake({ name: spell.name }); }
+function putData(action, name) {
+  const button=[...document.querySelectorAll(`[data-act="${action}"]`)].find(item=>item.dataset.name===name);
+  expect(button).not.toBeUndefined(); return {...button.dataset};
+}
 
 it('锦囊存取读取声明容量和类型，整叠超限不消费卡牌', async () => {
   arrange(4, 3, 0);
@@ -52,7 +56,7 @@ it('锦囊存取读取声明容量和类型，整叠超限不消费卡牌', asyn
   showBackpack(true);
   UI._acts.inspectStack({ name:pouch.name, safe:'0' }); UI._acts.pouchStoreZoom();
   const before = JSON.stringify(game.ownedCards);
-  await UI._acts.pouchPut({ name:spell.name });
+  await UI._acts.pouchPut(putData('pouchPut', spell.name));
   expect(JSON.stringify(game.ownedCards)).toBe(before);
   expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('0/2'), 'warn');
 });
@@ -107,7 +111,7 @@ it('真实背包锦囊接受坚冰结界与冰封千里职业法术并可原样�
   const cardsBefore = game.ownedCards.map(o => JSON.stringify(o.card));
   for (const name of ['坚冰结界','冰封千里']) {
     expect(document.querySelector(`[data-act="pouchPut"][data-name="${name}"]`)).not.toBeNull();
-    await UI._acts.pouchPut({name});
+    await UI._acts.pouchPut(putData('pouchPut', name));
     expect(game.ownedCards.find(o => o.card.name === name)).toMatchObject({stored:1,pouchOf:pouch.id});
   }
   expect(document.body.textContent.replace(/\s/g, '')).toContain('2/3');
@@ -120,9 +124,9 @@ it('职业法术与普通法术共用3张上限，锦囊自身和非术不能直
   expect(document.querySelector('[data-act="pouchPut"][data-name="法师锦囊"]')).toBeNull();
   await UI._acts.pouchPut({name:'法师锦囊'}); await UI._acts.pouchPut({name:'另一只法师锦囊'}); await UI._acts.pouchPut({name:'武术卡'});
   expect(game.ownedCards.filter(o => o.stored)).toHaveLength(0);
-  for (const name of ['坚冰结界','冰封千里',spell.name]) await UI._acts.pouchPut({name});
+  for (const name of ['坚冰结界','冰封千里',spell.name]) await UI._acts.pouchPut(putData('pouchPut', name));
   expect(game.ownedCards.filter(o => o.stored)).toHaveLength(3);
-  await UI._acts.pouchPut({name:'第四张'});
+  await UI._acts.pouchPut(putData('pouchPut', '第四张'));
   expect(game.ownedCards.find(o => o.uid === 'overflow').stored).toBeUndefined();
   expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('锦囊装不下整叠'), 'warn');
 });
@@ -146,11 +150,11 @@ it('真实背包存取两种资源：盒内独立张数不占外部格',async ()
  showBackpack(true);expect(session.usedSlots()).toBe(15);
  expect(UI.el.ovBody.querySelector('.bag-capchip').textContent).toContain('盒内 0/9 张（不占格）');
  UI._acts.inspectStack({name:pearl.name,safe:'0'});UI._acts.pearlStoreZoom();
- await UI._acts.pearlPut({name:key.name});await UI._acts.pearlPut({name:wood.name});
+ await UI._acts.pearlPut(putData('pearlPut', key.name));await UI._acts.pearlPut(putData('pearlPut', wood.name));
  expect(game.ownedCards).toHaveLength(3);expect(game.ownedCards.filter(o=>o.stored&&!o.pouchOf)).toHaveLength(2);
  expect(UI.el.ovBody.textContent.replace(/\s/g, '')).toContain('2/9');expect(session.usedSlots()).toBe(13);
  UI._acts.pearlBack();expect(UI.el.ovBody.querySelector('.bag-capchip').textContent).toContain('盒内 2/9 张（不占格）');
- expect(UI.el.ovBody.textContent).toContain('资源扩展格 0/9');
+ expect(UI.el.ovBody.textContent).toContain('普通可用 3 格 · 资源可用 12 格');
  UI._acts.inspectStack({name:pearl.name,safe:'0'});UI._acts.pearlStoreZoom();
  await UI._acts.pearlTake({name:key.name});await UI._acts.pearlTake({name:wood.name});
  expect(game.ownedCards.filter(o=>o.stored)).toHaveLength(0);expect(game.ownedCards).toHaveLength(3);expect(session.usedSlots()).toBe(15);
@@ -169,7 +173,7 @@ it.each([[0,0],[1,0],[1,9],[2,10]])('背包摘要区分盒数%s/盒内%s张并�
   const text = UI.el.ovBody.querySelector('.bag-capchip').textContent;
   if (boxes) expect(text).toContain(`盒内 ${stored}/${boxes * 9} 张（不占格）`);
   else expect(text).not.toContain('盒内');
-  expect(game.bagCapacityText()).toContain(boxes ? `资源扩展格 0/${boxes * 9}` : '/16 格');
+  expect(game.bagCapacityText()).toContain(boxes ? `普通可用 ${16-session.usedSlots()} 格 · 资源可用 ${16+boxes*9-session.usedSlots()} 格` : '/16 格');
 });
 
 it('奖励腾位只操作可见普通背包UID：移安全格保容器，同名丢弃1张不假称腾格', async () => {
@@ -279,7 +283,7 @@ it.each([1, 3])('真实满包同名已有%i张：领取按钮、grant与安全�
   expect(session.usedSlots()).toBe(16);
 });
 
-it.each([[2,1,true],[2,2,false],[0,4,false]])('整叠移安全格：目的同名%i张/移动%i张，按真实增格判定%s', async (safeCopies, moving, fits) => {
+it.each([[2,1,true],[2,2,false],[0,4,true]])('整叠移安全格：目的同名%i张/背包同名%i张，当前可见叠可放%s', async (safeCopies, moving, fits) => {
   const { bagSlots } = await import('../game/src/hub/game.bag.bridge.js');
   game.ownedCards = [
     ...Array.from({length:moving}, (_,i)=>({uid:`move-${i}`,card:spell})),
@@ -303,6 +307,11 @@ it.each([[2,1,true],[2,2,false],[0,4,false]])('整叠移安全格：目的同名
     expect(document.querySelector('[data-organize="claim"]').disabled).toBe(false);
     expect(game.ownedCards.find(o=>o.uid==='stored')).toMatchObject({stored:1,pouchOf:pouch.id});
     expect(game.ownedCards.find(o=>o.uid==='stored').safe).toBeUndefined();
+    if (moving===4) {
+      expect(game.ownedCards.filter(o=>o.safe&&o.uid.startsWith('move-')).map(o=>o.uid)).toEqual(['move-0','move-1','move-2']);
+      expect(game.ownedCards.find(o=>o.uid==='move-3').safe).toBeFalsy();
+      expect(document.querySelector('[data-organize="safe"]').disabled).toBe(true);
+    }
   } else {
     expect(JSON.stringify(game.ownedCards)).toBe(before);
     expect(session.usedSlots()).toBe(16);

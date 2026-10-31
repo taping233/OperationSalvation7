@@ -1,4 +1,4 @@
-import { resourceContainerSlots, stackCapOf } from './card-capacity.js';
+import { bagCapacityState, resourceContainerSlots, stackCapOf } from './card-capacity.js';
 
 function addToGroup(groups, entry) {
   const name = entry.card.name;
@@ -42,8 +42,10 @@ export function bagCardOrderIndex(order) {
   return index;
 }
 
-export function formatBagCapacity({ baseCap, resourceBonus, used }) {
-  return resourceBonus ? `通用格 ${Math.min(used, baseCap)}/${baseCap} · 资源扩展格 ${Math.max(0, used - baseCap)}/${resourceBonus}` : `${used}/${baseCap} 格`;
+export function formatBagCapacity({ baseCap, resourceBonus = 0, used, ordinarySlots = used }) {
+  const totalCap = baseCap + resourceBonus;
+  const { ordinaryFree, resourceFree } = bagCapacityState({ usedSlots:used, ordinarySlots, baseCap, totalCap });
+  return resourceBonus ? `已用 ${used}/${totalCap} 格 · 普通可用 ${ordinaryFree} 格 · 资源可用 ${resourceFree} 格` : `${used}/${baseCap} 格`;
 }
 
 // A fresh, pure projection for one synchronous render. Never retain it for actions.
@@ -66,9 +68,13 @@ export function deriveBagRenderState({ ownedCards, inventory, cardOrder = [] }, 
     const count = item.count || 1;
     supplySlots += Math.ceil(count / 3); supplyN += count; total += item.value * count;
   });
+  let resourceSlots = 0;
+  for (const stack of bagStacks) if (stack.card.type === '资源') resourceSlots++;
+  const used = supplySlots + bagStacks.length;
   const state = { bagStacks, safeStacks, ownedIndexByUid, bagNameCounts, cardOrder:order,
     orderIndex:bagCardOrderIndex(order), resourceBonus, pearlStoredN, bagCardN, safeCardN,
-    baseCap, cap:baseCap + resourceBonus, used:supplySlots + bagStacks.length, supplyN, total };
+    baseCap, cap:baseCap + resourceBonus, used,
+    ordinarySlots:used - resourceSlots, resourceSlots, supplyN, total };
   state.capacityText = formatBagCapacity(state);
   return state;
 }

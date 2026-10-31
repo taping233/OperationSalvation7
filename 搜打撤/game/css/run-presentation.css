@@ -1,0 +1,38 @@
+.encounter-opening {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0 0 24px;
+  padding: 16px 0;
+  border-top: 1px solid #b6cbd740;
+  border-bottom: 1px solid #b6cbd740;
+  color: #eef1ed;
+}
+.encounter-opening b { font-size: 22px; font-weight: 600; letter-spacing: .06em; }
+.encounter-opening p { margin: 8px 0 0; color: #b9c9d2; font-size: 18px; line-height: 1.5; }
+.encounter-emblem { display: flex; flex: 0 0 60px; gap: 6px; align-items: center; justify-content: center; height: 56px; }
+.encounter-emblem i { display: block; width: 10px; height: 22px; background: #b6cbd7; }
+.encounter-emblem i:nth-child(2) { height: 36px; }
+.encounter-altar .encounter-emblem { transform: rotate(45deg); }
+.encounter-altar .encounter-emblem i { background: transparent; border: 1px solid #c6b487; }
+.encounter-boss .encounter-emblem i { background: #df9d96; transform: skew(-18deg); }
+.encounter-signal .encounter-emblem i { height: 10px; border-radius: 50%; }
+.encounter-opening.is-entering .encounter-emblem i { animation: encounter-lamp 650ms ease-out both; }
+.encounter-opening.is-entering .encounter-emblem i:nth-child(2) { animation-delay: 100ms; }
+.encounter-opening.is-entering .encounter-emblem i:nth-child(3) { animation-delay: 200ms; }
+@keyframes encounter-lamp { from { opacity: .2; } to { opacity: 1; } }
+.commission-goods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 24px 0 16px; }
+.commission-good { display: grid; gap: 12px; padding: 20px; border: 1px solid #c6b48780; background: #15212ce6; }
+.commission-good > span, .commission-good del { color: #b9c9d2; font-size: 18px; }
+.commission-good > b { color: #eef1ed; font-size: 24px; overflow-wrap: anywhere; }
+.commission-good > div { display: flex; align-items: baseline; gap: 16px; }
+.commission-good strong { color: #c6b487; font-size: 28px; animation: commission-paid 500ms ease-out both; }
+.commission-receipt-note { color: #b9c9d2; font-size: 18px; }
+@keyframes commission-paid { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+html[data-reduce-motion="true"] .encounter-opening *,
+html[data-reduce-motion="true"] .commission-good strong,
+.reduce-motion .encounter-opening *, .reduce-motion .commission-good strong,
+.reduce-motion .commission-story { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .encounter-opening *, .commission-good strong { animation: none !important; }
+}

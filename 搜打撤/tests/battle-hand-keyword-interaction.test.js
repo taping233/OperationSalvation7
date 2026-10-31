@@ -81,7 +81,7 @@ beforeEach(async context => {
     hand: ['keyword-card'], foes: [{ hp: 20, dead: false }] };
   mountHandLayer(UI.el.ovBody, '', state.snap.battleToken);
   renderHand();
-  if (context.task.name === 'loads the real first cold tooltip while a keyword hold stays outside aiming') return;
+  if (context.task.name === 'keeps a first cold keyword pickup from opening a late tooltip') return;
   // Exercise the unchanged immediate hot path; the cold boundary suite holds imports pending.
   pointer(term(), 'pointerover');
   await vi.dynamicImportSettled();
@@ -95,39 +95,39 @@ afterEach(() => {
   vi.restoreAllMocks(); vi.unstubAllGlobals();
 });
 
-it('loads the real first cold tooltip while a keyword hold stays outside aiming', async () => {
+it('keeps a first cold keyword pickup from opening a late tooltip', async () => {
   const keyword = term();
   expect(tip()).toBeNull();
   pointer(keyword, 'pointerdown');
   expect(tip()).toBeNull();
-  expect(Aim.aim).toBeNull();
-  expect(UI.el.overlay.setPointerCapture).not.toHaveBeenCalled();
+  expect(Aim.aim?.uid).toBe('keyword-card');
+  expect(UI.el.overlay.setPointerCapture).toHaveBeenCalledWith(1);
   const parentClick = vi.fn(); UI.el.ovBody.addEventListener('click', parentClick);
-  const click = new MouseEvent('click', { bubbles:true, cancelable:true });
+  const click = new MouseEvent('click', { bubbles:true, cancelable:true, detail:1, button:0 });
   keyword.dispatchEvent(click);
-  expect(click.defaultPrevented).toBe(true); expect(parentClick).not.toHaveBeenCalled();
+  expect(parentClick).not.toHaveBeenCalled();
   await vi.dynamicImportSettled();
-  expect(tip()?.hidden).toBe(false); expect(tip().textContent).toContain('中毒');
-  expect(keyword.getAttribute('aria-describedby')).toContain('sdt-term-tip');
-  expect(Aim.aim).toBeNull(); expect(commands.submitCardPlay).not.toHaveBeenCalled();
-  pointer(document, 'pointerup');
-  expect(tip().hidden).toBe(true); expect(keyword.hasAttribute('aria-describedby')).toBe(false);
+  expect(tip()?.hidden ?? true).toBe(true);
+  expect(keyword.hasAttribute('aria-describedby')).toBe(false);
+  expect(Aim.aim?.uid).toBe('keyword-card'); expect(commands.submitCardPlay).not.toHaveBeenCalled();
+  pointer(document, 'pointercancel');
+  expect(Aim.aim).toBeNull();
   await vi.dynamicImportSettled();
-  expect(tip().hidden).toBe(true); expect(commands.submitCardPlay).not.toHaveBeenCalled();
+  expect(tip()?.hidden ?? true).toBe(true); expect(commands.submitCardPlay).not.toHaveBeenCalled();
 });
 
-it.each(['term', 'nested child'])('holds the %s explanation without aiming or submitting, then hides on release', route => {
+it.each(['term', 'nested child'])('drags from the %s to an enemy without a tooltip stealing the gesture', route => {
   const keyword = term();
   expect(keyword).not.toBeNull();
   if (route === 'nested child') keyword.innerHTML = '<span>中毒</span>';
   const target = route === 'nested child' ? keyword.firstElementChild : keyword;
   pointer(target, 'pointerdown');
-  expect(Aim.aim).toBeNull(); expect(card.inert).toBe(false);
-  expect(tip()?.hidden).toBe(false); expect(tip().textContent).toContain('中毒');
-  expect(UI.el.overlay.setPointerCapture).not.toHaveBeenCalled();
+  expect(Aim.aim?.uid).toBe('keyword-card'); expect(card.inert).toBe(true);
+  expect(tip()?.hidden).toBe(true);
+  expect(UI.el.overlay.setPointerCapture).toHaveBeenCalledWith(1);
   for (let i = 0; i < 4; i++) step();
-  expect(tip().hidden).toBe(false); expect(Aim.aim).toBeNull();
-  // Leaving the hand over a valid enemy must still remain a reading gesture.
+  expect(tip().hidden).toBe(true); expect(Aim.aim?.uid).toBe('keyword-card');
+  // The keyword is part of the card face, so a valid release submits once.
   pointer(foe, 'pointermove', { x: 1200, y: 450 });
   pointer(foe, 'pointerup', { x: 1200, y: 450 });
   expect(tip().hidden).toBe(true); expect(Aim.aim).toBeNull();
@@ -135,14 +135,14 @@ it.each(['term', 'nested child'])('holds the %s explanation without aiming or su
   const click = new MouseEvent('click', { bubbles: true, cancelable: true, button: 0, detail: 1 });
   target.dispatchEvent(click);
   expect(click.defaultPrevented).toBe(true); expect(delegatedClick).not.toHaveBeenCalled();
-  expect(commands.submitCardPlay).not.toHaveBeenCalled();
+  expect(commands.submitCardPlay).toHaveBeenCalledExactlyOnceWith('keyword-card', 0, false);
 });
 
-it('ends a keyword press on pointercancel and permits the next real card drag', () => {
+it('cancels the owning keyword pickup and permits the next card drag', () => {
   pointer(term(), 'pointerdown', { id: 7 });
-  expect(tip()?.hidden).toBe(false);
+  expect(Aim.aim?.pointerId).toBe(7); expect(tip()?.hidden).toBe(true);
   pointer(document, 'pointercancel', { id: 8 });
-  expect(tip().hidden).toBe(false);
+  expect(Aim.aim?.pointerId).toBe(7);
   pointer(document, 'pointercancel', { id: 7 });
   expect(tip().hidden).toBe(true); expect(Aim.aim).toBeNull();
   pointer(card.querySelector('.hsc-name'), 'pointerdown', { id: 9 });

@@ -1,4 +1,5 @@
 import { battleRules, damageRuleFields } from './helpers/environment-fixtures.js';
+import { battleItemSources, expectBattleItemCommitted } from './helpers/battle-item-assertions.js';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
@@ -36,7 +37,7 @@ async function start(cards, mode = 'normal') {
   return game;
 }
 const pool = () => BattleSession.getSnapshot().consumedPile;
-const sourceCount = uid => runtime.granted.filter(entry => entry.uid === uid).length;
+const sourceCount = uid => battleItemSources(game, runtime, uid).length;
 beforeEach(() => { vi.useFakeTimers(); runtime.set$lastDeckSel([]); });
 afterEach(() => {
   if (runtime.G?.battleActive) engine.finish(null);
@@ -56,8 +57,8 @@ it('真实能源结晶取回已完成牌，自己仅在效果结束后可见且�
   expect(during.hand).not.toContain('item-1');
   expect(during.consumedPile).not.toContain('item-1');
   expect(pool()).toEqual(['item-1']);
-  expect(runtime.granted.find(entry => entry.uid === 'item-1')).toBe(original);
-  expect(game.ownedCards.some(entry => entry.uid === 'item-1')).toBe(false);
+  expect(expectBattleItemCommitted(game, runtime, 'item-1')).toBe(original);
+  expect(game.ownedCards.find(entry => entry.uid === 'item-1')).toBe(original);
   expect(game.usedPocket).toEqual([]);
   expect(BattleSession.getSnapshot().potionBar.some(entry => entry.uid === 'item-1')).toBe(false);
 });
@@ -71,7 +72,7 @@ it.each([
   BattleSession.commands.usePotion(uid); await settle();
   expect(pool()).toContain(uid);
   expect(sourceCount(uid)).toBe(1);
-  const retained = runtime.granted.find(entry => entry.uid === uid);
+  const retained = expectBattleItemCommitted(game, runtime, uid);
   expect(engine.findCard(uid)).toBe(retained);
   BattleSession.commands.playCard('item-0', 'self'); await settle();
   expect(runtime.hand).toContain(uid);
@@ -83,12 +84,13 @@ it.each([
   expect(pool()).toContain(uid);
   expect(runtime.played.filter(value => value === uid)).toHaveLength(1);
   expect(sourceCount(uid)).toBe(1);
-  expect(game.ownedCards.some(entry => entry.uid === uid)).toBe(false);
+  expect(game.ownedCards.some(entry => entry.uid === uid)).toBe(!temporary);
   expect(game.usedPocket).toEqual([]);
   engine.finish(true); await settle();
   expect(game.onBattleEnd).toHaveBeenCalledTimes(1);
   expect(game.ended.played.filter(value => value === uid)).toHaveLength(1);
-  expect(game.ended.opts.spentCards.filter(entry => entry.uid === uid)).toHaveLength(1);
+  expect(game.ended.opts.spentCards).toEqual(temporary ? [{uid, card:retained.card}] : []);
+  expect(game.ownedCards.filter(entry => entry.uid === uid)).toEqual(temporary ? [] : [retained]);
   engine.finish(true);
   expect(game.onBattleEnd).toHaveBeenCalledTimes(1);
 });
@@ -116,7 +118,7 @@ it('真实会话道具入队即隐藏且禁止重复；执行前目标失效则�
   runtime.foes[0].dead = true;
   await delayed.execute();
   expect(game.ownedCards.map(entry => entry.uid)).toEqual(['item-0']);
-  expect(sourceCount('item-0')).toBe(0);
+  expect(sourceCount('item-0')).toBe(1);
   expect(runtime.played).not.toContain('item-0');
   expect(delayed.bag.battleBagItems().map(entry => entry.uid)).toEqual(['item-0']);
 });
@@ -145,7 +147,7 @@ it('同步效果异常仍保留已提交消耗账本，finally解除取回屏蔽
   expect(pool()).toContain('item-0');
   expect(runtime.played.filter(uid => uid === 'item-0')).toHaveLength(1);
   expect(sourceCount('item-0')).toBe(1);
-  expect(game.ownedCards).toEqual([]);
+  expect(expectBattleItemCommitted(game, runtime, 'item-0')).toBe(game.ownedCards[0]);
 });
 
 it('异步效果异常仍保留已消费原UID，fallback取回池在finally后可见', async () => {
@@ -157,7 +159,7 @@ it('异步效果异常仍保留已消费原UID，fallback取回池在finally后�
   expect(pool()).toContain('item-0');
   expect(runtime.played.filter(uid => uid === 'item-0')).toHaveLength(1);
   expect(sourceCount('item-0')).toBe(1);
-  expect(game.ownedCards).toEqual([]);
+  expect(expectBattleItemCommitted(game, runtime, 'item-0')).toBe(game.ownedCards[0]);
   expect(delayed.bag.restoreConsumed(1)).toBe(1);
   expect(runtime.hand).toContain('item-0');
 });
@@ -166,13 +168,14 @@ it('致命结构化道具在效果内finish前已提交来源与账本，战后�
   const lethal = { id: 'item-lethal', name: '致命道具', type: '道具', desc: '',
     rules: { version: 1, bag: { use: [{ op: 'damage', amount: 99999, dmgType: 'fixed', target: 'chosenEnemy' }] } } };
   await start([lethal]);
+  const original = game.ownedCards[0];
   BattleSession.commands.usePotion('item-0'); await settle();
   expect(game.battleActive).toBe(false);
   expect(game.onBattleEnd).toHaveBeenCalledTimes(1);
   expect(game.ended.win).toBe(true);
   expect(game.ended.played).toEqual(['item-0']);
-  expect(game.ended.opts.spentCards.map(entry => entry.uid)).toEqual(['item-0']);
-  expect(game.ownedCards).toEqual([]);
+  expect(game.ended.opts.spentCards).toEqual([]);
+  expect(game.ownedCards.filter(entry => entry.uid === 'item-0')).toEqual([original]);
   expect(game.usedPocket).toEqual([]);
   engine.finish(true);
   expect(game.onBattleEnd).toHaveBeenCalledTimes(1);

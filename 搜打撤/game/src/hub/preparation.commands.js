@@ -65,7 +65,8 @@ export function preparationStacks(baseSnapshot) {
 /** @param {import('./preparation.types.js').PreviewOptions} [options] */
 export function previewDeployment({ baseSnapshot, preset, mode = baseSnapshot?.selMode || 'standard', cardCatalog = [], characters = [], pets = [], bagCapacity = Infinity, starterCount = 5, starterCard } = {}) {
   const picks = normalizePicks(preset?.picks);
-  if (!baseSnapshot || !preset || !picks) return freezeDeep({ mode, resolvedPicks: [], deploymentPicks: {}, missing: [], forbidden: [], costs: { stashCards: 0, slotsUsed: 0, extraStackSlots: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
+  if (!baseSnapshot || !preset || !picks) return freezeDeep({ mode, effectivePetId:null, resolvedPicks: [], deploymentPicks: {}, missing: [], forbidden: [], costs: { stashCards: 0, slotsUsed: 0, extraStackSlots: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
+  const effectivePetId = preset.petId || baseSnapshot.petSel || null;
   const cards = catalogMap(cardCatalog);
   const missing = [], forbidden = [], resolved = new Map(), deploymentPicks = {};
   const stash = preparationStacks(baseSnapshot).map(stack => ({ ...stack, card: { ...clone(stack.card), ...(variantOf(stack) ? { variantKey: variantOf(stack) } : {}) } }));
@@ -114,7 +115,7 @@ export function previewDeployment({ baseSnapshot, preset, mode = baseSnapshot?.s
     starterCount,
     starterCard: starterCard || cards.get('starter-attack') || cardCatalog.find(card => card?.name === '初始攻击') || { id: 'starter-attack', name: '初始攻击', type: '武术' },
     fireball: cards.get('tt3-fireball'),
-    pet: pets.find(pet => pet.id === (preset.petId || baseSnapshot.petSel)),
+    pet: pets.find(pet => pet.id === effectivePetId),
     stash,
     picks: deploymentPicks,
     capacity: bagCapacity,
@@ -123,7 +124,7 @@ export function previewDeployment({ baseSnapshot, preset, mode = baseSnapshot?.s
   const slotsUsed = summary.slots;
   const extraStackSlots = slotsUsed - new Set(summary.cells.map(cell => cell.card.name)).size;
   const capacityOk = summary.capacityOk;
-  return freezeDeep({ mode, resolvedPicks, deploymentPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, extraStackSlots, bagCapacity: summary.capacity, baseCapacity: summary.baseCapacity, ordinarySlots: summary.ordinarySlots, resourceSlots: summary.resourceSlots }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
+  return freezeDeep({ mode, effectivePetId, resolvedPicks, deploymentPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, extraStackSlots, bagCapacity: summary.capacity, baseCapacity: summary.baseCapacity, ordinarySlots: summary.ordinarySlots, resourceSlots: summary.resourceSlots }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
 }
 
 export function createPreparationCommands(deps = {}) {

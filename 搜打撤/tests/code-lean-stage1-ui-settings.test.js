@@ -36,7 +36,8 @@ function exercise(enabled, hooks = {}) {
   let rawHTML;
   const UI = { el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('body'), tglIndex:document.getElementById('tglIndex') },
     act: (name, action) => { actions[name] = action; },
-    showOverlay: (title, html) => { rawHTML = html; UI.el.ovBody.innerHTML = html; }, hideOverlay:record('hide'),
+    showOverlay: (title, html) => { rawHTML = html; UI.el.overlay.hidden = false; UI.el.ovBody.innerHTML = html; },
+    hideOverlay: () => { effects.push(['hide']); UI.el.overlay.hidden = true; },
     confirmAction:record('confirm'), log:record('log') };
   Object.assign(servicePorts, ports);
   const page = createMenuSettingsPage({ UI, game, document, getActiveSlot:() => 1,

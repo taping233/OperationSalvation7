@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-warlock",
+      "asset": "cards/dark-eclipse.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a18284-7559-7473-a891-f50ff09fd8d8/exec-f8fd8c22-380f-423f-ae08-bd8ed7ea8695.png",
+      "revision": "forbidden-empty-hands-20261028",
+      "prompt": "Use case: precise-object-edit. Locally edit this existing illustration ONLY to remove the entire silver spiked star-shaped weight and all its hanging chain, rings and chain links from the hand on viewer RIGHT. Both hands must be empty. Restore natural unobstructed palm/fingers where chain crossed them and fill the removed hanging object area with matching plain dark background. Preserve the original open-palmed outstretched arms pose, exact character identity, face, purple eyes, blonde hair, black crescent hair ornament, black-and-gold dress, torn purple cloak, framing, large eclipse behind her head, composition, palette and rough opaque anime painted brushwork. Change no other objects. No replacement props, no text.",
+      "references": [
+        "game/assets/cards/dark-eclipse.webp"
+      ]
+    }
+  ]
+}

@@ -2,9 +2,36 @@
 
 本文件记录后续目标，执行前仍要核对实时源码与[状态入口](STATUS.md)；已交付内容见 [changelog.md](changelog.md)。09-27 的详细目标与已过期批次状态保存在[旧长期计划](archive/engineering-2026-09-27/LONG-TERM-PLAN-2026-09-27.md)。
 
-## 下一轮范围与完成标准
+## 当前持续推进（2026-10-27）
 
-2026-10-20以“普通战斗结束 → 领取奖励 → 按需整理背包 → 返回原地图”为样本的一轮改进已完成未提交。保存失败留页和背包关闭两处修复、验证工具补修、两次真实刷新与原节点重进均有证据；六项适用完成条件及覆盖边界统一见[本轮验收结论](production/management/NEXT-CYCLE-TECH-PLAN.md#本轮验收结论2026-10-20)。其他执行状态沿[状态入口](STATUS.md)核对。
+老板确认的方向为公共机制收拢、完整玩家流程衔接、相关旧实现退出、游戏说明与实际行为一致。2026-10-27后续推进限定一图，研究所暂搁置。当前集中修改，近期增量保留未提交，统一验收由老板进行；实施范围与待验操作沿各批记录查询。
+
+| 当前范围 | 实施入口 |
+| --- | --- |
+| 节点结束、保存后返回、入口补给与跨节点权益 | [节点离开规则](evidence/2026-10-26-flow-goals-round24/README.md)、[迎战与金币拾取](evidence/2026-10-27-flow-goals-round25/README.md)、[公共返回与补给](evidence/2026-10-27-flow-goals-round26/README.md) |
+| 正式领奖、满包腾位、事件选择与旧网格退出 | [领奖与真实叠数](evidence/2026-10-27-flow-goals-round27/README.md)、[事件选择与重编确认](evidence/2026-10-27-flow-goals-round28/README.md) |
+| 整备、收卡、换卡、容器与安全格容量 | [统一容量模型](evidence/2026-10-27-flow-goals-round29/README.md)、[道具接收与复原提示](evidence/2026-10-27-flow-goals-round34/README.md) |
+| 容器按可见叠存入与安全格交换选择返回 | [容器与安全格衔接](evidence/2026-10-27-flow-goals-round41/README.md) |
+| 商店、节点与基地同页稳定更新，余额与材料灰态 | [商店与同类页面衔接](evidence/2026-10-27-flow-goals-round42/README.md)、[节点与基地衔接](evidence/2026-10-27-flow-goals-round43/README.md)、[附赠保存续接与重编返回](evidence/2026-10-27-flow-goals-round50/README.md)、[领奖与撤离更新收拢](evidence/2026-10-27-flow-goals-round53/README.md) |
+| 仓库复原、收藏培养与奖励连续操作 | [仓库与收藏衔接](evidence/2026-10-27-flow-goals-round44/README.md) |
+| 整备候选与实际出征、保存中断后原确认恢复 | [整备与出征衔接](evidence/2026-10-27-flow-goals-round45/README.md) |
+| 稳定落点、真实穿门、撤离支付与入库恢复 | [通行与撤离衔接](evidence/2026-10-27-flow-goals-round46/README.md)、[入库原请求恢复](evidence/2026-10-27-flow-goals-round51/README.md) |
+| 死亡/放弃终局重试、战斗收尾与实际抢运 | [失败结算与抢运衔接](evidence/2026-10-27-flow-goals-round47/README.md) |
+| 装备主动、卡牌目标提示与一图生存指南 | [装备可用性](evidence/2026-10-27-flow-goals-round31/README.md)、[目标提示与手选取消](evidence/2026-10-27-flow-goals-round48/README.md)、[实机图文指南与旧问号退出](evidence/2026-10-27-survival-guide/README.md) |
+| 自动出牌、强制选择与回合承伤预估 | [批次续接与承伤资格](evidence/2026-10-27-flow-goals-round49/README.md) |
+| 一图双剑手牌合并 | [双剑同时在手合并](evidence/2026-10-27-flow-goals-round35/README.md) |
+| 一图首脑编组上限与道具复原后的战后归属 | [编组与消耗结算衔接](evidence/2026-10-27-flow-goals-round39/README.md) |
+| 一图弃置结算、战斗读档与旧界面契约退出 | [弃置与读档衔接](evidence/2026-10-27-flow-goals-round40/README.md) |
+| 研究所保存、领奖、购买与所主续战 | [研究所保存衔接](evidence/2026-10-27-flow-goals-round32/README.md) |
+| 系统菜单、设置与原操作页返回 | [菜单来源与展示恢复](evidence/2026-10-27-flow-goals-round33/README.md) |
+
+继续按实际差距推进：先追当前源码的操作、保存与下一入口，复用以上公共入口；新发现归对应流程，按依赖边界合并修改。
+
+战斗动效重制于2026-10-27按老板要求跳过，阶段代码与素材保留，状态见[阶段记录](evidence/2026-10-27-battle-fx-reset/README.md)。卡牌动态记录面板的删除单独保留为完成未提交。
+
+## 既有验收参考
+
+2026-10-20“普通战斗结束 → 领取奖励 → 按需整理背包 → 返回原地图”样本的修复及当时覆盖，见[验收结论](production/management/NEXT-CYCLE-TECH-PLAN.md#本轮验收结论2026-10-20)。近期增量按上表保留自己的实施与待验范围。
 
 ## 2026-10-19 用户明确的七项近期目标
 
@@ -40,7 +67,7 @@ M1/M2/M3 是候选工作分类，具体执行状态查[任务入口](STATUS.md)�
 
 ## M2 体验与可访问性
 
-- 2026-10-15 [新号四层整局共玩审查](evidence/2026-10-15-WF-fresh-run-audit/README.md)：45 项实测异常与体验建议待排期；优先处理祭坛领奖卡住、满包事件吞奖励、招式筛选失效、结构化装备主动技能按钮缺失和当前窗口注能按钮越界。该局首脑败北并完成回仓、成就领奖，成功撤离未覆盖；审查记录不表示已修复。
+- 2026-10-15 [新号四层整局共玩审查](evidence/2026-10-15-WF-fresh-run-audit/README.md)保留45项历史观察，作为定位索引。领奖、事件、背包返回及容量的近期实施见本页当前范围；装备主动技能现有正式入口，本批接齐两件装备的空手前置检查。后续候选按具体观察核对现码后排期。
 - 补充键盘完整操作、焦点样式和减少动态效果选项。
 - 建立稳定的实机性能基线，持续治理长任务和资源峰值。
 - 对不同窗口尺寸和高 DPI 做视觉回归。

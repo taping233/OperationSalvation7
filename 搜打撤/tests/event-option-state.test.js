@@ -26,7 +26,8 @@ describe('事件选项实时预告', () => {
   it('金币随返回页面后的余额重算，预告不会预扣或阻断原回调', () => {
     const choice = { label:'支付', coinCost:3 };
     const game = { hp:10, coins:2 };
-    expect(eventOptionState(choice, game)).toEqual({ state:'limited', note:'金币不足：还差 1 币（当前 2）' });
+    expect(eventOptionState(choice, game)).toEqual({ state:'limited', note:'金币不足：还差 1 币（当前 2）',
+      disabled:false, reason:'', stateLabel:'金币不足' });
     game.coins = 5;
     expect(eventOptionState(choice, game).note).toBe('支付 3 币后剩余 2');
     expect(game.coins).toBe(5);

@@ -2,6 +2,7 @@ import { afterEach, expect, it, vi } from 'vitest';
 import { createRunEventController } from '../game/src/run/game.run.events.js';
 import { createEventCommands } from '../game/src/run/event-commands.js';
 import { eventOptionHTML } from '../game/src/ui/event-option-state.js';
+import { eventPresentationPorts } from './helpers/event-presentation-ports.js';
 import { createEventDiceController } from '../game/src/ui/event-dice.js';
 
 const deferred = () => { let resolve; const promise = new Promise(done => { resolve = done; }); return { promise, resolve }; };
@@ -19,7 +20,7 @@ async function fixture(id, { bound = true, open = true } = {}) {
     hideOverlay:vi.fn(() => { UI._overlayRevision++; host.replaceChildren(); }),
     refresh:vi.fn(), log:vi.fn() };
   const diceOpen = vi.fn(() => true);
-  const controller = createRunEventController({ game, UI, dom:document, getCards:() => ({ all:() => [card],
+  const controller = createRunEventController({ ...eventPresentationPorts, game, UI, dom:document, getCards:() => ({ all:() => [card],
     cardHTML:() => '', isRandomObtainable:() => true }), sound(){}, serializeReward:() => null,
     eventCommands:createEventCommands({ state:game }), createDice:() => ({ open:diceOpen }),
     getActiveSlot:() => null, saveGame:() => save(), pick:cards => cards[0],

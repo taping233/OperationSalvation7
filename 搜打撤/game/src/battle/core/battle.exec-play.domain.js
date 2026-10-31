@@ -39,6 +39,7 @@ function createBattleExecPlay({
   takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
   beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
   triggersM2, previewDiscovery = (...args) => { void args; return null; },
+  checkHandCombinations = () => {},
 }) {
   function effectiveExecutionCard(uid, card) {
     const effective = prepareExecutionCard ? prepareExecutionCard(uid, card) : findEffectiveCard?.(uid, card)?.card || card;
@@ -433,6 +434,7 @@ function createBattleExecPlay({
         instanceRuntime.hand.push(uid);
         instanceRuntime.cardAnims.push({ kind: 'draw', uid, name: card.name });
         instanceRuntime.G.log(`[[icon:cards]] 【${esc(card.name)}】保留在手牌中（无法用于注能）`, 'sys');
+        checkHandCombinations();
       } else {
         // 手牌满不能弃置回手：uid 已从 discard/played 移除，不兜底会从所有牌区消失
         instanceRuntime.discard.push(uid);

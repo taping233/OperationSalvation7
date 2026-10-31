@@ -7,6 +7,7 @@ import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
 import '../../css/base-collection-v4.css';
 
 const browse = {slot:null,query:'',type:'',selectedId:''};
+const mountedViews = new WeakMap();
 let rendered;
 function ownedReader(base,cards) {
   let catalog,stash;
@@ -40,7 +41,7 @@ export function collectionCardsHTML(base, cards) {
     detail:`<section class="collection-v12-stage collection-detail" aria-live="polite">${detailHTML(selected,cards)}</section>`,
     list:cardBrowserHTML('collection-owned','已收藏卡牌',owned.map(row => collectionItemHTML(row.id,row.name,{
       className:'collection-card',artClass:'collection-card-art',selected:row.id === browse.selectedId,ariaLabel:`选择${row.name}`,
-      attrs:{'data-search':row.name,'data-type':row.card?.type || ''},
+      attrs:{'data-search':row.name,'data-type':row.card?.type || '', 'data-view-key':`collection-card/${row.id}`},
     })).join(''),{rows:1}),
     empty:`<div class="collection-empty"${owned.length ? ' hidden' : ''}><h3>${owned.length ? '没有匹配的收藏卡牌' : '尚未收藏卡牌'}</h3>${owned.length ? '' : '<p>在仓库收藏卡牌。</p>'}<button class="mini-btn base-command" data-act="${owned.length ? 'collectionReset' : 'hubTab'}" data-tab="stash" data-view="cards">${owned.length ? '显示全部收藏' : '前往仓库 →'}</button></div>`,
   });
@@ -50,8 +51,10 @@ export function bindCollectionCards({ root, base, cards, ui }) {
   const content = root.querySelector('.collection-cards-v4');
   if (!content) return;
   const browser = content.querySelector('[data-card-browser]'), slotId = base.slot;
+  const mounted = mountedViews.get(content);
+  const reuse = mounted?.base === base && mounted.cards === cards && mounted.slotId === slotId;
   let initial = rendered?.base === base && rendered.cards === cards ? rendered.rows : null;
-  const view = mountCollectionView({root:content,browser,state:browse,selection:'selectedId',
+  const view = reuse ? mounted.view : mountCollectionView({root:content,browser,state:browse,selection:'selectedId',
     current:() => content.isConnected && root.contains(content) && base.slot === slotId,
     beforeRefresh:() => initial ? id => initial.get(id) : ownedReader(base,cards),
     resolve:(id,operation) => (operation || ownedReader(base,cards))(id),keyOf:row => row.id,
@@ -72,6 +75,8 @@ export function bindCollectionCards({ root, base, cards, ui }) {
     controls:[['[data-collection-query]','query'],['[data-collection-type]','type']],
   });
   initial = null;rendered = null;
+  if (reuse) view.refresh();
+  else mountedViews.set(content,{base,cards,slotId,view});
   ui.act('collectionV12Zoom',data => {
     if (!view.current()) return;
     const card = ownedReader(base,cards)(data.id)?.card;

@@ -32,6 +32,7 @@ const { renderInfusionSelection } = await import('../game/src/battle/view/battle
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
 const { render } = await import('../game/src/battle/view/battle.view.js');
+const { set$energy } = await import('../game/src/battle/runtime/battle.runtime.session.js');
 
 let frames, game;
 beforeEach(() => {
@@ -208,12 +209,14 @@ describe('battle page input and DOM work', () => {
     expect(face.getAttribute('aria-disabled')).toBe('false');
     expect(layer.querySelector('.bt-slot').style.getPropertyValue('--fx')).not.toBe('999px');
     liveState.energy = 0;
+    set$energy(0); // The hand consumes current command availability, not a synthetic snapshot's energy.
     groups[0].card = { ...groups[0].card, desc: '更新后的完整规则' };
     updateHand(liveState, null, groups, [], { mode: 'encounter', spellBonus: 0 });
     expect(card.dataset.handState).toBe('blocked'); expect(card.dataset.blockReason).toContain('能量不足');
     expect(card.textContent).toContain('更新后的完整规则');
     expect(card.querySelector('.hs-card').getAttribute('aria-disabled')).toBe('true');
     liveState.energy = 9;
+    set$energy(9);
     updateHand(liveState, null, groups.slice().reverse(), [], { mode: 'encounter', spellBonus: 0 });
     expect(layer.querySelector('.bt-slot').dataset.uid).toBe('hand-1');
     expect(card.hasAttribute('data-block-reason')).toBe(false);

@@ -25,6 +25,7 @@ async function turn(engine) {
 }
 async function play(engine,r,uid,card,target = 'self') {
   r.granted.push({uid,card});r.hand.push(uid);engine.submitCardPlay(uid,target);await engine.idle();
+  await engine.awaitTriggeredActions('player');
 }
 async function installKillListener(engine,r) {
   await play(engine,r,'listener',{...held,id:'sweep2-listener',rules:{version:1,

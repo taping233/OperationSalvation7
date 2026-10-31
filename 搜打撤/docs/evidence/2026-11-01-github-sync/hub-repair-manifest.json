@@ -1,0 +1,146 @@
+[
+  {
+    "path": "tests/backpack-layout.test.js",
+    "sha256": "bfad60a43d32051c0f554a4d6d7e6f05a8cb4617b8f57bee1aec4ef1c85ccaf6",
+    "size": 5944,
+    "mtimeUtc": "2026-10-31T21:27:48.770362+00:00"
+  },
+  {
+    "path": "tests/bag-container-pages.test.js",
+    "sha256": "a800284105342ad627b8da7583223c58c7b2ae15e612d464c2e76dcdea9339a9",
+    "size": 4296,
+    "mtimeUtc": "2026-10-31T21:09:39.192839+00:00"
+  },
+  {
+    "path": "tests/bag-help-return-continuity.test.js",
+    "sha256": "ee065819823301df690e130fba7d10e236ce8a4e4643db1a6a58519a12bf1e00",
+    "size": 10850,
+    "mtimeUtc": "2026-10-31T21:27:48.754247+00:00"
+  },
+  {
+    "path": "tests/bag-item-rule-baseline.test.js",
+    "sha256": "5e558746ea007135f4db02df4a8c863ec311c34537d9dafd15f1aecc3860fec0",
+    "size": 14120,
+    "mtimeUtc": "2026-10-31T21:16:18.261031+00:00"
+  },
+  {
+    "path": "tests/bag-page-lifecycle-review.test.js",
+    "sha256": "ee3530afa2c1850be028b296aaa4306c904fd2ac810acb0067abb034a2dc807f",
+    "size": 48872,
+    "mtimeUtc": "2026-10-31T21:29:01.690740+00:00"
+  },
+  {
+    "path": "tests/bag-pouch-capacity.test.js",
+    "sha256": "272e4e7602cb9c1877f3153ed570389193c5b3e9e14075855270a2d51756f213",
+    "size": 21230,
+    "mtimeUtc": "2026-10-31T21:17:27.148358+00:00"
+  },
+  {
+    "path": "tests/bag-render-derivation.test.js",
+    "sha256": "d2b4123858a0ba81058c4c998e8657477a57bb0268bacc8a7c2685404aa8574e",
+    "size": 8158,
+    "mtimeUtc": "2026-10-31T21:09:39.456443+00:00"
+  },
+  {
+    "path": "tests/bag-render-snapshot.test.js",
+    "sha256": "1518caf737e864cba8865a28fa5388b76a9bc8de5da07eadb14b44887f65d010",
+    "size": 9218,
+    "mtimeUtc": "2026-10-31T21:17:27.179812+00:00"
+  },
+  {
+    "path": "tests/base-inventory-lifecycle-audit.test.js",
+    "sha256": "fc7b3aa8dfe2107ad573256a225fb5b104da5790f25d965ff3abefc7b35b5ca7",
+    "size": 28308,
+    "mtimeUtc": "2026-10-31T21:22:46.105220+00:00"
+  },
+  {
+    "path": "tests/base-subpage-header-readability.test.js",
+    "sha256": "28b2c2a9081a559998941253d1cefd66743b5b77f218c31ea516cc06b7ddbff3",
+    "size": 1806,
+    "mtimeUtc": "2026-10-31T21:16:17.749787+00:00"
+  },
+  {
+    "path": "tests/departure-render-performance.test.js",
+    "sha256": "3b68aa1f611defdae078e9b510da16b58e6717296965070d06f19461742cb5bc",
+    "size": 10313,
+    "mtimeUtc": "2026-10-31T21:25:42.254006+00:00"
+  },
+  {
+    "path": "tests/exp003-extraction-pocket-copy.test.js",
+    "sha256": "63f4f5d900c6f1d8f38d1efba7e7859c0bfe2bdc9d3b45f543913e48923f1e7e",
+    "size": 5174,
+    "mtimeUtc": "2026-10-31T21:16:18.014274+00:00"
+  },
+  {
+    "path": "tests/extraction-flow.test.js",
+    "sha256": "665967744181cb453d4807cb6e6d83ca3c429fde898885c15866d23d5ace40e9",
+    "size": 14699,
+    "mtimeUtc": "2026-10-31T21:27:48.769942+00:00"
+  },
+  {
+    "path": "tests/four-player-capacity-text.test.js",
+    "sha256": "6001017e7b15897e5a01fc56fcafb8c2a26e7e08af2a1bbfd2d7976a8bd55e15",
+    "size": 2359,
+    "mtimeUtc": "2026-10-31T21:17:27.155812+00:00"
+  },
+  {
+    "path": "tests/hub-flow-regression.test.js",
+    "sha256": "a2bec8f24c82ece25c6dcdf0900c7b5b2b5366faaeeed687c9a50594208eb7bc",
+    "size": 19668,
+    "mtimeUtc": "2026-10-31T21:16:17.212512+00:00"
+  },
+  {
+    "path": "tests/icon-hydration.test.js",
+    "sha256": "a4b83b29e63eacb430df26664547c86edaffad35b78879843e195852c24cce18",
+    "size": 5506,
+    "mtimeUtc": "2026-10-31T21:22:46.118431+00:00"
+  },
+  {
+    "path": "tests/partner-interaction.test.js",
+    "sha256": "e8262e8b55580013456e0f6ed7b472da41a58eb7f09983551c6c6d5dfb8c03f0",
+    "size": 12581,
+    "mtimeUtc": "2026-10-31T21:22:46.132070+00:00"
+  },
+  {
+    "path": "tests/pearl-storage-interface.test.js",
+    "sha256": "4604426746aeab7137074638a5ff609a6acf1865e62df677add0042dda63eb4a",
+    "size": 11383,
+    "mtimeUtc": "2026-10-31T21:17:27.151508+00:00"
+  },
+  {
+    "path": "tests/pocket-restore-interface.test.js",
+    "sha256": "d328578905f88b945cd5b8945ef5fcf5f7c172d0aa4696e174edcc9b59594b0d",
+    "size": 16088,
+    "mtimeUtc": "2026-10-31T21:25:42.255006+00:00"
+  },
+  {
+    "path": "tests/project-bug-sweep-round2-extraction-ui.test.js",
+    "sha256": "3177d4d8355d4148148ee68a717518baab37eed2fe8f5e50425642ae607ae56f",
+    "size": 5001,
+    "mtimeUtc": "2026-10-31T21:22:46.106662+00:00"
+  },
+  {
+    "path": "tests/safe-pearl-access.test.js",
+    "sha256": "1fe9a4a40a8234af8eb50aa4b5fce3c0c0049ea8b3a00f5fb8861ea69a7d53fb",
+    "size": 12000,
+    "mtimeUtc": "2026-10-31T21:17:27.154812+00:00"
+  },
+  {
+    "path": "tests/xart-z1-batch2.test.js",
+    "sha256": "2e307d6ca611b8f73ad82368178b03be5eb856589fb131c15d8c4e34af9f117c",
+    "size": 5404,
+    "mtimeUtc": "2026-10-31T21:22:46.118431+00:00"
+  },
+  {
+    "path": "game/src/core/bag-render-derivation.js",
+    "sha256": "647f280a6ef2d5098599158bbfbc38110df83010663e513a491ba7fd6fd1d3cd",
+    "size": 3608,
+    "mtimeUtc": "2026-10-31T21:08:24.768548+00:00"
+  },
+  {
+    "path": "game/src/hub/bag-container-pages.js",
+    "sha256": "ec2ce3511809ce40ccd17de12405559766677ac15e9cd87a366aadf848cb3241",
+    "size": 10882,
+    "mtimeUtc": "2026-10-31T21:28:11.286978+00:00"
+  }
+]

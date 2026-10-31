@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-sword",
+      "asset": "cards/wu-myriadswords.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a18288-045e-7af2-bf6b-a16a7b86fd59/exec-9bc81f04-a3b4-4392-b291-5853604ab9ee.png",
+      "revision": "wu-myriadswords-draft-more-20261028",
+      "prompt": "Localized edit of this exact NAI game illustration. PRESERVE the original image composition rigorously: same overhead camera, same central girl at identical position and scale, exact crossed arms and horizontal two-finger gesture in front of her chest, same face/expression, hairstyle, accessories, black dress, legs and feet, same gray backdrop, lighting, shadows, cyan circular rings and original wide aspect ratio. Preserve existing large swords' positions, sizes, designs and orientations. ONLY INCREASE THE NUMBER OF FLYING SWORDS: add about 18-22 additional beautiful swords in the empty gaps around the perimeter, so there are roughly 30 swords total. Follow the ORIGINAL radial arrangement and perspective, with hilts nearer the cyan ring and blades extending outward toward frame edges. Added swords vary in size and depth, distributed all around top, bottom, left and right; mostly medium and smaller swords so existing main swords remain dominant. Each is clearly an elegant sword with continuous coherent blade, hilt and guard, varying slim jian, straight double-edged swords, broad leaf blades, subtle wavy blades, silver/black/crystal metal and restrained gold details matching the existing designs. Maintain clear breathing space around the girl and do not overlap her face or hands. Preserve original clean NAI painterly anime rendering and original all other details. Do not change to tangential swirling sword wreath, do not add an arm-held sword, do not change pose, do not move or resize the character, do not redesign the scene, no text or watermark.",
+      "references": [
+        ".tmp/nai/myriadswords-circle-1028/draft.png"
+      ],
+      "nai_request": "docs/evidence/2026-10-28-myriadswords-circle/nai-payload.json"
+    }
+  ]
+}

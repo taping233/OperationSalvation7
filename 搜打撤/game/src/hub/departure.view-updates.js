@@ -7,8 +7,8 @@ function stackPresentation(stack) {
   try { return JSON.stringify([departureStackKey(stack), stack.card]); }
   catch { return null; }
 }
-function captureView(root, pool, stash, cells, renderCard) {
-  const rows = [...pool.getElementsByClassName('dep-card')].map(node => ({ node,
+function captureView(root, pool, entries, stash, cells, renderCard) {
+  const rows = entries.map(({ node }) => ({ node,
     own:node.getElementsByClassName('dep-own')[0], picked:node.getElementsByClassName('dep-picked-count')[0] }));
   const byId = id => { const node = root.ownerDocument.getElementById(id); return node && root.contains(node) ? node : root.querySelector(`#${id}`); };
   const bag = byId('depBag');
@@ -71,10 +71,11 @@ export function bindDepartureFilters(root, stash, { filters = {}, rarities = [],
   const notices = [...pool.querySelectorAll('.ov-empty')];
   const apply = () => {
     const next = /** @type {{rarity:string,type:string,cost:string}} */ (Object.fromEntries(Object.entries(selects).map(([key, select]) => [key, select.value])));
-    const active = Object.values(next).some(Boolean);
+    const criteria = Object.entries(next).filter(([, value]) => value);
+    const active = criteria.length > 0;
     let visible = 0;
     for (const entry of entries) {
-      entry.node.hidden = !Object.entries(next).every(([key, value]) => !value || entry[key] === value);
+      entry.node.hidden = !criteria.every(([key, value]) => entry[key] === value);
       if (!entry.node.hidden) visible++;
     }
     if (count) count.textContent = `显示 ${visible}/${entries.length}`;
@@ -90,7 +91,7 @@ export function bindDepartureFilters(root, stash, { filters = {}, rarities = [],
     apply();
   });
   apply();
-  captureView(root, pool, stash, cells, renderCard);
+  captureView(root, pool, entries, stash, cells, renderCard);
 }
 
 function setAttribute(node, name, value) {
@@ -101,7 +102,7 @@ function setText(node, value, pulse = false) {
   if (node && node.textContent !== value) { node.textContent = value; if (pulse) pulseNumber(node); }
 }
 function setHTML(node, value) { if (node && node.innerHTML !== value) node.innerHTML = value; }
-function reconcileCells(bag, cells, capacity, renderCell, renderCard, rich) {
+function reconcileCells(bag, cells, capacity, renderCell, renderCard, rich, selectionLocked) {
   const named = new Map(), empty = [];
   for (const node of bag.children) {
     const key = node.dataset.stackKey || node.dataset.name;
@@ -122,10 +123,14 @@ function reconcileCells(bag, cells, capacity, renderCell, renderCard, rich) {
         bagFaces.set(node, { html, face:node.firstElementChild, count:node.getElementsByClassName('dep-n')[0] });
       } else {
         const name = cell.card.name;
+        const removable = !selectionLocked && cell.selectableCount > 0 && cell.sources?.[0]?.stackKey;
+        const fixedLabel = cell.fixedCount ? `含固定初始牌 ${cell.fixedCount} 张；` : '';
+        const actionLabel = removable ? '点击查看，拖回仓库移除 1 张自选卡' : '点击查看详情';
         setAttribute(node, 'class', `bag-cell ${cell.fixed ? 'fixed' : 'filled'}`);
-        setAttribute(node, 'draggable', cell.fixed ? null : 'true');
-        setAttribute(node, 'aria-label', `${name} ×${cell.count}，${cell.fixed ? '含固定初始牌' : '点击查看，拖回仓库移除'}`);
-        setAttribute(node, 'title', `${name} ×${cell.count}`);
+        setAttribute(node, 'draggable', removable ? 'true' : null);
+        setAttribute(node, 'data-remove-key', removable || null);
+        setAttribute(node, 'aria-label', `${name} ×${cell.count}，${fixedLabel}${actionLabel}`);
+        setAttribute(node, 'title', `${name} ×${cell.count} · ${fixedLabel}${actionLabel}`);
         setText(saved.count, `×${cell.count}`);
       }
     }
@@ -153,7 +158,7 @@ function reconcileBag(bag, html, rich) {
     const cell = wanted.dataset.name ? named.get(wanted.dataset.stackKey || wanted.dataset.name)?.shift() : empty.shift();
     const node = cell || wanted;
     if (cell) {
-      for (const key of ['class', 'aria-label', 'title', 'draggable']) {
+      for (const key of ['class', 'aria-label', 'title', 'draggable', 'data-remove-key']) {
         const value = wanted.getAttribute(key);
         if (value === null) cell.removeAttribute(key);
         else if (cell.getAttribute(key) !== value) cell.setAttribute(key, value);
@@ -170,7 +175,7 @@ function reconcileBag(bag, html, rich) {
   while (bag.children.length > next.length) bag.lastElementChild.remove();
 }
 
-export function updateDepartureView(root, { stash, picks, bagHtml = undefined, cells, renderCell, renderCard, slots, capacity, capacityHtml, hint, petId, rich, summaryHtml }) {
+export function updateDepartureView(root, { stash, picks, availability = undefined, selectionLocked = false, bagHtml = undefined, cells, renderCell, renderCard, slots, capacity, capacityHtml, hint, petId, rich, summaryHtml }) {
   const view = currentView(root, stash);
   if (cells && !view) return false;
   const byName = new Map(stash.map(stack => [departureStackKey(stack), stack]));
@@ -182,11 +187,17 @@ export function updateDepartureView(root, { stash, picks, bagHtml = undefined, c
     if (!stack) continue;
     const selected = picks[key] || 0;
     const remaining = Math.max(0, stack.count - selected);
+    const addState = availability?.get(key);
+    const canAdd = addState ? addState.canAdd : remaining > 0;
+    const reason = addState?.reason || '仓库中没有更多此卡';
     if (card.classList.contains('picked') !== (selected > 0)) card.classList.toggle('picked', selected > 0);
     if (card.classList.contains('drained') !== (remaining <= 0)) card.classList.toggle('drained', remaining <= 0);
+    card.classList.toggle('unavailable', !canAdd);
+    setAttribute(card, 'data-can-add', String(canAdd));
+    setAttribute(card, 'draggable', canAdd ? 'true' : null);
     setAttribute(card, 'aria-pressed', selected > 0 ? 'true' : 'false');
-    setAttribute(card, 'aria-label', `带入${name}，还可带 ${remaining} 张`);
-    setAttribute(card, 'title', `${name} · 还可带 ${remaining}`);
+    setAttribute(card, 'aria-label', canAdd ? `带入${name}，还可带 ${remaining} 张` : `${name}，${reason}，点击查看详情`);
+    setAttribute(card, 'title', canAdd ? `${name} · 还可带 ${remaining}` : `${name} · ${reason} · 点击查看详情`);
     setText(owned, String(remaining), true);
     if (pickedCount) {
       setText(pickedCount, String(selected), true);
@@ -195,7 +206,7 @@ export function updateDepartureView(root, { stash, picks, bagHtml = undefined, c
   }
   const bag = view?.bag || root.querySelector('#depBag');
   if (bag) {
-    if (cells) reconcileCells(bag, cells, capacity, renderCell, renderCard, rich);
+    if (cells) reconcileCells(bag, cells, capacity, renderCell, renderCard, rich, selectionLocked);
     else reconcileBag(bag, bagHtml, rich);
     bag.classList.toggle('full', slots >= capacity);
   }

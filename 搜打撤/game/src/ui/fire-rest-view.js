@@ -20,11 +20,17 @@ export function fireRestDecisionHTML({ heal, chance, restorable, fits, capacity,
   </section>`;
 }
 
+const previewBindings = new WeakMap();
 export function initFireRestPreview(root) {
+  if (!root) return;
   const output = root?.querySelector('#fire-effect-preview');
   if (!output) return;
   for (const button of root.querySelectorAll('[data-fire-preview]')) {
+    previewBindings.get(button)?.abort();
+    const controller = new AbortController();
+    previewBindings.set(button, controller);
     const show = () => { output.textContent = button.dataset.firePreview; };
-    button.addEventListener('pointerenter', show); button.addEventListener('focus', show);
+    button.addEventListener('pointerenter', show, { signal:controller.signal });
+    button.addEventListener('focus', show, { signal:controller.signal });
   }
 }

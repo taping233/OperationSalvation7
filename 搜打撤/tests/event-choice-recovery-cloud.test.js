@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { overlayElements, resetEventGame, eventCardMocks, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
 import { flushEventActions } from './helpers/event-dice-async.js';
 import { rollEventDice } from './helpers/event-dice-async.js';
@@ -23,7 +24,7 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: (...args) => H
 
 let flow, scenes, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { ...eventCardMocks(H) };
+  await connectSdtFixture({ ...eventCardMocks(H) });
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
   UI = window.SDT.UI = { ...overlayMethods, ...eventUiMocks(() => UI),
   };
@@ -91,7 +92,7 @@ describe('药摊与装备征用的可恢复选择', () => {
     UI.showCardZoom = realUI.showCardZoom;
     H.game.canReceiveCard = () => false;
     await openEvent('ev19-potions', potionCards); await UI._acts.evtChoice({ i:'0' }); await flushEventActions(); await rollEventDice(UI);
-    expect(UI.el.ovBody.textContent).toContain('暂离可保留候选，领取后其余放弃。');
+    expect(UI.el.ovBody.textContent).toContain('当前节点可整理后继续选择；前往下一节点后未领候选作废。领取后其余放弃。');
     UI.el.ovBody.querySelector('[data-act="eventCardRead"]').click(); await flushEventActions();
     const initial = document.getElementById('cardZoom');
     const reference = document.createElement('button'); reference.dataset.cardReference = 'p2';
@@ -344,7 +345,7 @@ it('黑市入口不重复规则，首次投币前风险/价格/保底和放弃�
   expect(text).toContain('3 币'); expect(text).toContain('50%'); expect(text).toContain('5 次任意点数都成功');
   expect(text).toContain('已尝试 0/5 次');
   expect(UI.el.ovBody.querySelector('[data-act="eventGambleTry"]').textContent).toContain('投入 3 币');
-  expect(UI.el.ovBody.querySelector('[data-act="eventGambleLeave"]').textContent).toBe('放弃并离开');
+  expect(UI.el.ovBody.querySelector('[data-act="eventGambleLeave"] span:last-child').textContent).toBe('放弃并离开');
   await UI._acts.eventGambleLeave(); await flushEventActions(); expect(H.game.coins).toBe(coins);
 });
 
@@ -407,7 +408,9 @@ it('故障重编入口正文保规则，接入选择页不转换不收费且仍�
   expect(card.desc).toBe('两张招式或装备随机转换为同稀有度同类型的卡；或支付 3 币，仅转换一张，候选最多三选一。');
   expect(snapshot()).toBe(before);
   await UI._acts.evtChoice({ i: '0' }); await flushEventActions(); await rollEventDice(UI);
-  expect(UI.el.ovBody.textContent).toContain('选择 2 张招式或装备卡，将其随机变为同稀有度、同类型的卡牌（0/2）');
+  expect(UI.el.ovBody.textContent).toContain('选择 2 张原卡');
+    expect(UI.el.ovBody.textContent).toContain('选择招式或装备卡，启动后亲手投骰，将其随机变为同稀有度、同类型的卡牌。');
+    expect(UI.el.ovBody.textContent).toContain('已选 0/2 张');
   expect(UI.el.ovBody.querySelectorAll('[data-act="eventRecodePick"]')).toHaveLength(2);
   expect(UI.el.ovBody.querySelector('[data-act="eventRecodeGo"]').disabled).toBe(true);
   expect(UI.el.ovBody.querySelector('[data-act="eventRecodeLeave"]')).not.toBeNull();
@@ -425,10 +428,13 @@ it.each(['ev19-potions','ev19-quartermaster'])('%s满包直接复用整理，返
     await openEvent(id,potionCards.map(c=>({...c,type:id==='ev19-potions'?'道具':'装备'})));
     await UI._acts.evtChoice({i:'0'}); await flushEventActions(); await rollEventDice(UI); await rollEventDice(UI);
     const coins=H.game.coins,record=H.game.nodeRewards['0,1'],ids=[...record.cardIds];
-    expect(UI.el.ovBody.querySelector('[data-act="eventCardPick"]').textContent).toBe('腾位置领取');
+    expect(UI.el.ovBody.querySelector('[data-act="eventCardPick"]').textContent).toBe('整理背包');
     await UI._acts.eventCardPick({i:'1'}); await flushEventActions();
     const old=document.querySelector('[data-organize="safe"]');
-    expect(takeBagReturnHook()).toBeNull();
+    const restoreOrganizer=takeBagReturnHook();
+    expect(restoreOrganizer).toBeTypeOf('function');
+    expect(restoreOrganizer()).toBe(true);
+    expect(record.taken).toBeNull();
     document.querySelector('[data-organize="return"]').click(); await flushEventActions();
     expect(document.activeElement.dataset.i).toBe('1');
     expect(record.taken).toBeNull();expect(record.cardIds).toEqual(ids);

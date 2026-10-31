@@ -4,6 +4,7 @@ import { Random } from '../game/src/core/random.js';
 import { groupHandCards } from '../game/src/battle/core/battle.hand.js';
 import { createBattleEquipment } from '../game/src/battle/bag/battle.equipment.js';
 import { assertCardRulesExecutable } from '../game/src/battle/effects/battle.rule-guard.js';
+import { matchesHandReleaseCard } from '../game/src/battle/core/battle.draw.domain.js';
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
@@ -152,21 +153,34 @@ describe('寻宝图真实 BattleSession 主动技能', () => {
 });
 
 function skillHarness(card, run = async steps => { for (const step of steps) void step; }) {
+  const first = card.rules?.equip?.skill?.ops[0];
+  if (first?.op === 'release' && first.source === 'hand') {
+    const key = first.key === '初始攻击' ? '杀' : first.key;
+    const input = Cards.all().find(candidate => matchesHandReleaseCard(candidate, key));
+    expect(input, 'release skill fixture requires an eligible real hand card').toBeTruthy();
+    const uid = 'skill-input-' + card.id;
+    game.ownedCards.push({ uid, card: structuredClone(input) });
+    piles.set$hand([...piles.hand, uid]);
+  }
   const worn = { uid: 'skill-fixture', card, used: false };
   piles.set$equipped([worn]);
   const synthetic = [];
-  let pending;
+  let pending, onHandSelectDone;
   const runStagedSteps = vi.fn(run);
   const queueBattleAction = vi.fn(execute => { pending = Promise.resolve().then(() => execute(new AbortController().signal)); });
   const equipment = createBattleEquipment({
     clearTargetSession() {}, requestBattleRender() {},
     queueBattleAction,
     runStagedSteps, throwIfActionCancelled() {},
-    *resolveCardSteps(value) { synthetic.push(value); assertCardRulesExecutable(value); yield value; },
+    *resolveCardSteps(value, _target, execution) {
+      synthetic.push(value); assertCardRulesExecutable(value); onHandSelectDone = execution?.onHandSelectDone; yield value;
+    },
     alive: () => [{ id: 'skill-target', hp: 100 }], sweepDead() {}, finish() {},
     processChoice() {}, processDiscoverQueue() {}, processHandSelect() {},
   });
-  return { worn, synthetic, runStagedSteps, queueBattleAction, use() { equipment.useEquipSkill(worn.uid); return pending; } };
+  return { worn, synthetic, runStagedSteps, queueBattleAction,
+    completeHandSelection() { expect(onHandSelectDone).toBeTypeOf('function'); onHandSelectDone(); },
+    use() { equipment.useEquipSkill(worn.uid); return pending; } };
 }
 
 describe('结构化装备主动技能共同合成边界', () => {
@@ -181,6 +195,11 @@ describe('结构化装备主动技能共同合成边界', () => {
       const harness = skillHarness(card);
       await harness.use();
       expect(harness.synthetic, source.id).toHaveLength(1);
+      if (card.rules.equip.skill.ops.every(op => op.op === 'handSelect')) {
+        expect(harness.worn.used, source.id).toBe(false);
+        // The generator port is constructed here; drive its completion callback explicitly.
+        harness.completeHandSelection();
+      }
       expect(harness.worn.used, source.id).toBe(true);
       expect(JSON.stringify(card), source.id).toBe(original);
       const ops = harness.synthetic[0].rules.triggers.onPlay;

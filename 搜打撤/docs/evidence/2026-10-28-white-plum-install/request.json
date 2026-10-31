@@ -1,0 +1,12 @@
+{
+  "items": [{
+    "card_id": "tt8-hero-assassin",
+    "asset": "cards/wu-void.webp",
+    "source": "D:/素材/代号柒/搜打撤/.tmp/nai/white-plum-fall-1028/white-plum-layered.png",
+    "revision": "white-plum-layered-20261028",
+    "prompt": "保持NAI原构图，去掉黑蔷薇，白梅遮住头顶与身体，只露出头部和少量肩背。白梅从上到下密度递减，以近大远小、虚实变化形成层次。",
+    "references": [".tmp/nai/white-plum-fall-1028/white-plum-no-rose.png"],
+    "generation_record": ".tmp/nai/white-plum-fall-1028/layered-edit.json",
+    "authorization": "老板2026-10-28明确要求实装当前上密下疏版本"
+  }]
+}

@@ -1,0 +1,107 @@
+{
+  "nai_request": {
+    "status": "generated",
+    "request": {
+      "input": "1girl, solo, adult female swordswoman, dual wielding, exactly two swords, each hand firmly grips a different sword hilt. Her right hand on image left holds a white gold luminous straight sword with an ornate gold crossguard and a thin circular golden halo around its hilt. Her left hand on image right holds a black straight longsword with glowing crimson edges, a black angular crossguard and black wrapped grip. Both blades point diagonally upward toward opposite upper corners, clearly separated, no blade covers her face.\n\nFantasy ability card, heroic confident dual sword stance, two contrasting sacred and demon-slaying weapons.\n\nHorizontal thigh-up close shot, heroine central and large, both hands and both sword hilts visible beside waist, blades framing her head in an open V, cropped blade tips allowed. Gentle low camera, ponytail and skirt flow to side, strong silhouette.\n\nSimple abstract deep blue large painted background, pale gold light on left, dark crimson accent on right. Weapons have solid readable blade shapes, restrained magical light, no scenery, no text.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1028287937,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, extra swords, third sword, sword on back, sheathed sword, fused swords, floating sword, holding blade, blade across face, bangs covering forehead, goggles, long dress, cape",
+        "characterPrompts": [
+          {
+            "prompt": "adult woman, slender, silver white long high ponytail, blue ribbon at ponytail base, swept aside parted front hair, exposed forehead, cyan blue eyes, confident smile with small fang, black round sunglasses resting on head, black rose on her left temple, black charcoal off shoulder long sleeve short dress, layered ruffles, tied waist, bare thighs",
+            "uc": "goggles, bangs over forehead",
+            "center": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "enabled": true
+          }
+        ],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "1girl, solo, adult female swordswoman, dual wielding, exactly two swords, each hand firmly grips a different sword hilt. Her right hand on image left holds a white gold luminous straight sword with an ornate gold crossguard and a thin circular golden halo around its hilt. Her left hand on image right holds a black straight longsword with glowing crimson edges, a black angular crossguard and black wrapped grip. Both blades point diagonally upward toward opposite upper corners, clearly separated, no blade covers her face.\n\nFantasy ability card, heroic confident dual sword stance, two contrasting sacred and demon-slaying weapons.\n\nHorizontal thigh-up close shot, heroine central and large, both hands and both sword hilts visible beside waist, blades framing her head in an open V, cropped blade tips allowed. Gentle low camera, ponytail and skirt flow to side, strong silhouette.\n\nSimple abstract deep blue large painted background, pale gold light on left, dark crimson accent on right. Weapons have solid readable blade shapes, restrained magical light, no scenery, no text.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": [
+              {
+                "char_caption": "adult woman, slender, silver white long high ponytail, blue ribbon at ponytail base, swept aside parted front hair, exposed forehead, cyan blue eyes, confident smile with small fang, black round sunglasses resting on head, black rose on her left temple, black charcoal off shoulder long sleeve short dress, layered ruffles, tied waist, bare thighs",
+                "centers": [
+                  {
+                    "x": 0.5,
+                    "y": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, extra swords, third sword, sword on back, sheathed sword, fused swords, floating sword, holding blade, blade across face, bangs covering forehead, goggles, long dress, cape",
+            "char_captions": [
+              {
+                "char_caption": "goggles, bangs over forehead",
+                "centers": [
+                  {
+                    "x": 0.5,
+                    "y": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "references": [
+      "game/assets/cards/studio-expanded/tt8-heavensword.webp (weapon design, not uploaded)",
+      "game/assets/cards/studio-expanded/tt8-demonslay.webp (weapon design, not uploaded)",
+      "game/assets/portraits/full/wu.webp (identity, not uploaded)"
+    ],
+    "output": "D:\\素材\\代号柒\\搜打撤\\.tmp\\nai\\heavensword-dual-1028\\heavensword-dual-nai5.png",
+    "sha256": "d8be6e3560fafb78af4d6c10866495c8d7e840d4e741de2d26cda24165fadd9f"
+  },
+  "items": [
+    {
+      "prompt": "1girl, solo, adult female swordswoman, dual wielding, exactly two swords, each hand firmly grips a different sword hilt. Her right hand on image left holds a white gold luminous straight sword with an ornate gold crossguard and a thin circular golden halo around its hilt. Her left hand on image right holds a black straight longsword with glowing crimson edges, a black angular crossguard and black wrapped grip. Both blades point diagonally upward toward opposite upper corners, clearly separated, no blade covers her face.\n\nFantasy ability card, heroic confident dual sword stance, two contrasting sacred and demon-slaying weapons.\n\nHorizontal thigh-up close shot, heroine central and large, both hands and both sword hilts visible beside waist, blades framing her head in an open V, cropped blade tips allowed. Gentle low camera, ponytail and skirt flow to side, strong silhouette.\n\nSimple abstract deep blue large painted background, pale gold light on left, dark crimson accent on right. Weapons have solid readable blade shapes, restrained magical light, no scenery, no text.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "revision": "heavensword-dual-nai5-20261028",
+      "card_id": "tt8-hero-ranger",
+      "references": [
+        "game/assets/cards/studio-expanded/tt8-heavensword.webp (weapon design, not uploaded)",
+        "game/assets/cards/studio-expanded/tt8-demonslay.webp (weapon design, not uploaded)",
+        "game/assets/portraits/full/wu.webp (identity, not uploaded)"
+      ],
+      "asset": "cards/wu-heavensword.webp",
+      "source": "D:/素材/代号柒/搜打撤/.tmp/nai/heavensword-dual-1028/heavensword-dual-nai5.png"
+    }
+  ]
+}

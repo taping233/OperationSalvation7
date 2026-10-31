@@ -35,6 +35,7 @@ function createBattleLifecycle({
   session, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune, drawCards,
   applyBattleStartPassives, isBattleStartEquip, equipCap, isStarterAttack, requestBattleRender, alive, R,
   resetTriggers, runBattleStartTriggers, emitBattlePresentation,
+  checkHandCombinations = () => {},
 }) {
   const { handSelectQueue, choiceQueue } = session;
   const RUN_RESTART_KEYS = [
@@ -118,6 +119,7 @@ function createBattleLifecycle({
       instanceRuntime.showDread();        // BOSS 登场演出不重播
       instanceRuntime.set$battleState(transitionBattle(createBattleState(), BATTLE_PHASES.PLAYER));
       instanceRuntime.G.log('[[icon:swords]] 战斗已恢复——接着上次的局面继续', 'sys');
+      checkHandCombinations();
       requestBattleRender();
     }
     if (!instanceRuntime.battleRestartCheckpoint) {
@@ -131,23 +133,13 @@ function createBattleLifecycle({
     return true;
   }
 
-  function finish(win) {
-    if (!instanceRuntime.G?.battleActive) return;
+  function abortBattleExecution() {
     session.abort();
     resetTriggers?.();
     instanceRuntime.clearActionSignals();
-    if (win === true && instanceRuntime.battleState.phase !== BATTLE_PHASES.VICTORY) instanceRuntime.transitionTo(BATTLE_PHASES.VICTORY);
-    if (context.track) context.track('battleEquips', { n: instanceRuntime.equipped.length });
-    if (win === false && instanceRuntime.battleState.phase !== BATTLE_PHASES.DEFEAT) instanceRuntime.transitionTo(BATTLE_PHASES.DEFEAT);
-    clearFeedback();
-    instanceRuntime.set$busy(false);
-    hostAudio.sfx(win === true ? (instanceRuntime.opts.isBoss ? 'bossVictory' : 'victory') : win === false ? 'defeat' : 'flee');
-    const playedCopy = instanceRuntime.played.slice();
-    const consumedCopy = instanceRuntime.consumed.slice();
-    const spentUids = new Set([...playedCopy, ...consumedCopy]);
-    // 普通临时牌库只属于本场；其已出/注能记录保留，但不提供可被战后消耗区入库的卡模板。
-    instanceRuntime.opts.spentCards = instanceRuntime.granted.filter(entry => spentUids.has(entry.uid) && !entry.uid.startsWith('normal-sha-'))
-      .map(entry => ({ uid: entry.uid, card: { ...entry.card } }));
+  }
+
+  function releaseBattleState() {
     instanceRuntime.clearBattlePiles(); instanceRuntime.set$hand([]);
     instanceRuntime.clearBattlePresentation();
     instanceRuntime.set$sel(new Set());
@@ -157,6 +149,39 @@ function createBattleLifecycle({
     instanceRuntime.resetPilesCarryover();
     instanceRuntime.closeBattleViews(); instanceRuntime.hideDread();
     resetBattleExtras();
+  }
+
+  // A committed run ending cancels combat without creating a second battle settlement.
+  function endRun(expectedGame) {
+    if (!expectedGame || instanceRuntime.G !== expectedGame) return false;
+    abortBattleExecution();
+    clearFeedback();
+    instanceRuntime.set$busy(false);
+    releaseBattleState();
+    instanceRuntime.set$battleRestartCheckpoint(null);
+    expectedGame.battleActive = false;
+    hostAudio?.setDucked(false);
+    hostAudio?.setBoss?.(false);
+    return true;
+  }
+
+  function finish(win) {
+    if (!instanceRuntime.G?.battleActive) return;
+    abortBattleExecution();
+    if (win === true && instanceRuntime.battleState.phase !== BATTLE_PHASES.VICTORY) instanceRuntime.transitionTo(BATTLE_PHASES.VICTORY);
+    if (context.track) context.track('battleEquips', { n: instanceRuntime.equipped.length });
+    if (win === false && instanceRuntime.battleState.phase !== BATTLE_PHASES.DEFEAT) instanceRuntime.transitionTo(BATTLE_PHASES.DEFEAT);
+    clearFeedback();
+    instanceRuntime.set$busy(false);
+    hostAudio.sfx(win === true ? (instanceRuntime.opts.isBoss ? 'bossVictory' : 'victory') : win === false ? 'defeat' : 'flee');
+    const playedCopy = instanceRuntime.played.slice();
+    const settledPlayedCopy = [...new Set([...playedCopy, ...instanceRuntime.discard])];
+    const consumedCopy = instanceRuntime.consumed.slice();
+    const spentUids = new Set([...settledPlayedCopy, ...consumedCopy]);
+    // 普通临时牌库只属于本场；其已出/弃置/注能记录保留，但不提供可被战后消耗区入库的卡模板。
+    instanceRuntime.opts.spentCards = instanceRuntime.granted.filter(entry => spentUids.has(entry.uid) && !entry.uid.startsWith('normal-sha-'))
+      .map(entry => ({ uid: entry.uid, card: { ...entry.card } }));
+    releaseBattleState();
     instanceRuntime.G.state = 'idle';
     instanceRuntime.G.battleActive = false;
     if (hostAudio) hostAudio.setDucked(false);   // 战斗结束恢复 BGM 音量
@@ -190,7 +215,7 @@ function createBattleLifecycle({
       };
       if (typeof settle !== 'function') return fail(new Error('Missing necessary battle settlement port'));
       try {
-        const result = settle.call(endedGame, endedOpts, playedCopy, win, consumedCopy);
+        const result = settle.call(endedGame, endedOpts, settledPlayedCopy, win, consumedCopy);
         return result && typeof result.then === 'function' ? Promise.resolve(result).then(complete, fail) : complete(result);
       } catch (error) { return fail(error); }
     };
@@ -325,6 +350,7 @@ function createBattleLifecycle({
     applyBossOpening(context);
     applyBattleStartPassives();
     if (runBattleStartTriggers) runBattleStartTriggers();   // M2：结构化 onBattleStart（能力卡/迎装规则）
+    checkHandCombinations();
     if (!instanceRuntime.restoringRestartCheckpoint) emitBattlePresentation?.({ kind: 'player-turn-start', turn: instanceRuntime.turn });
     if (alive().length > 1) instanceRuntime.G.log('[[icon:question]] 以一敌多：单体伤害牌选择敌人；全体牌可拖到<b>战场空地</b>或选择敌人。需要注能时先选材料，再确认释放', 'sys');
     instanceRuntime.G.log(`[[icon:cards]] 随身 <b>${instanceRuntime.hand.length}</b> 张战斗卡直接入手；另有 <b>${RULE_CONFIG.battle.normalStarterDeckSize}</b> 张本场临时初始攻击牌库，仅由抽牌效果取牌，开局与每回合不固定抽牌 · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费`, 'sys');
@@ -476,7 +502,7 @@ function createBattleLifecycle({
   }
 
   return {
-    flee, restore, finish, start, toggleDeckCard, cancelDeckSelection,
+    flee, restore, finish, endRun, start, toggleDeckCard, cancelDeckSelection,
     beginBoss: () => { if (instanceRuntime.selectingDeck) beginBoss(); },
     prepareDeckSelection, deckCapBonus,
   };

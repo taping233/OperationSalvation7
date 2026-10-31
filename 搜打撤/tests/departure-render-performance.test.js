@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { esc } from '../game/src/core/shared.js';
 const ports=vi.hoisted(()=>({choice:vi.fn(),start:vi.fn(),hub:vi.fn()}));
@@ -27,12 +28,12 @@ beforeEach(async()=>{
     act(name,handler){actions[name]=handler;},log:vi.fn(),showCardZoom:vi.fn(),
     showOverlay(_title,html){this.el.overlay.hidden=false;this.el.ovBody.innerHTML=html;}};
   ui.el.ovBody.addEventListener('click',event=>{const button=event.target.closest('[data-act]');if(button&&!button.disabled)actions[button.dataset.act]?.({...button.dataset});});
-  window.SDT={UI:ui,Base:base,Cards:{SHA:{id:'starter-attack',name:'初始攻击',type:'武术',rarity:'初始'},RARITIES:['古朴'],TYPES:['法术','装备'],
+  await connectSdtFixture({UI:ui,Base:base,Cards:{SHA:{id:'starter-attack',name:'初始攻击',type:'武术',rarity:'初始'},RARITIES:['古朴'],TYPES:['法术','装备'],
     all:()=>base.data.stash.map(s=>s.card),rarityOf:c=>c.rarity,
     // Match the real renderer's identity memo: changing an original instance must
     // still reach a fresh presentation object when its content changes.
     cardHTML(c){if(!cardMemo.has(c))cardMemo.set(c,`<div class="hs-card" data-card-id="${esc(c.id)}"><b>${esc(c.name)}</b><span>${esc(c.desc||'')}</span><i>${c.cost??''}</i></div>`);return cardMemo.get(c);}},
-    Icons:{rich:html=>html},Sound:{sfx:vi.fn()}};
+    Icons:{rich:html=>html},Sound:{sfx:vi.fn()}});
   vi.stubGlobal('matchMedia',()=>({matches:true}));vi.stubGlobal('requestAnimationFrame',()=>1);vi.stubGlobal('cancelAnimationFrame',vi.fn());
   departure=await import('../game/src/hub/game.hub.depart.js');
 });
@@ -112,7 +113,9 @@ describe('整备完整刷新与卡格复用',()=>{
 
   it('容量拒绝和筛选在复用路径保持当前值',async ()=>{
     base.bagCap=()=>2;open();add();add('b');
-    expect(departure.deployPick[key('b')]).toBeUndefined();expect(document.getElementById('depStatus').textContent).toContain('普通背包格已满');
+    expect(departure.deployPick[key('b')]).toBeUndefined();expect(pool('b').title).toContain('普通格空间不足，资源专用格仅能放资源卡。');
+    expect(pool('b').dataset.canAdd).toBe('false');
+    expect(ui.showCardZoom).toHaveBeenCalledWith(base.data.stash[1].card, expect.objectContaining({footer:'',from:pool('b')}));
     expect(document.getElementById('depCapacity').textContent).toContain('2/2');
     const filter=document.getElementById('depFilterType');filter.value='装备';filter.dispatchEvent(new Event('change'));
     expect([...document.querySelectorAll('#depPool .dep-card')].map(n=>n.hidden)).toEqual([true,true,false]);

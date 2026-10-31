@@ -1,0 +1,25 @@
+{
+  "artifact": "D:\\素材\\代号柒\\.tmp\\portable-all-1027\\delivery-final\\代号柒-v0.60.0-便携无存档-20261027.exe",
+  "artifactSHA256": "b2fbe74ffa36d5b46a67a54036af40db3633f6c892affb97515f65dea89c4292",
+  "work": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-wnoYiX",
+  "first": {
+    "pid": 27476,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-wnoYiX\\临时 resources\\c7-launch-9fa8299e4797409e9e6e9d8440690138\\app",
+    "files": 1932,
+    "missing": []
+  },
+  "second": {
+    "pid": 34476,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-wnoYiX\\临时 resources\\c7-launch-ed2046655dd545db9740aca5972376ff\\app",
+    "files": 1932,
+    "missing": []
+  },
+  "final": {
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-wnoYiX\\临时 resources\\c7-launch-9fa8299e4797409e9e6e9d8440690138\\app",
+    "files": 1932,
+    "missing": []
+  },
+  "firstExit": 0,
+  "secondExit": 0,
+  "passed": true
+}

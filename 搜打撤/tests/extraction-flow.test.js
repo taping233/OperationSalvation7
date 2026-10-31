@@ -1,4 +1,4 @@
-import { extractionMocks } from './helpers/environment-fixtures.js';
+import { connectSdtFixture, extractionMocks } from './helpers/environment-fixtures.js';
 import { beforeEach, expect, it, vi } from 'vitest';
 
 const altarState = vi.hoisted(() => ({ game: {}, random: vi.fn(() => 0) }));
@@ -52,7 +52,7 @@ beforeEach(async () => {
     el: { overlay: document.getElementById('overlay'), ovBody: document.getElementById('body') },
     acts: {}, showOverlay: (_title, html) => { document.getElementById('body').innerHTML = html; },
     hideOverlay: () => { UI.acts = {}; }, act: (name, fn) => { UI.acts[name] = fn; },
-    log: vi.fn(), refresh: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '',
+    log: vi.fn(), refresh: vi.fn(),
   };
   base = {
     data: { _m01: { revision: 0 }, wood: 0, rations: 0, pocket: [], stash: [], nestUnlocked: false,
@@ -62,10 +62,10 @@ beforeEach(async () => {
     stashUsed: () => base.data.stash.reduce((n, stack) => n + stack.count, 0), stashCap: () => stashLimit,
   };
   stashLimit = 0;
-  window.SDT = {
+  await connectSdtFixture({
     UI, Base: base, Sound: { sfx: vi.fn(), music: vi.fn() },
     Icons: { rich: html => html }, Cards: { cardHTML: c => c.name, sellPrice: () => 1 }, Meta: { track: vi.fn(), addXpToProgress: x => ({ after: x }) },
-  };
+  });
   ({ openEmergencyModal } = await import('../game/src/run/game.run.altar.js'));
 });
 
@@ -238,19 +238,28 @@ it('equal estimates keep original backpack order even when rarity display differ
   expect(base.data.stash[0].card.id).toBe('a');
 });
 
-it.each(['slot', 'pending'])('撤离帮助返回拒绝旧%s，并保留完成确认状态', async change => {
+it.each(['slot', 'pending'])('撤离内嵌说明保留完成确认，旧确认拒绝变化后的%s来源', async change => {
   game.layerIdx = 3; game.bossKilled = true;
   openEmergencyModal(); await UI.acts.payExit();
   await vi.waitFor(() => expect(document.querySelector('[data-act=exFinish]')).not.toBeNull());
   await UI.acts.exFinish();
+  const confirm = UI.acts.exConfirmFinish;
+  const surface = UI.el.ovBody.firstElementChild;
+  const details = document.querySelector('.exr-storage-details');
+  expect(details).not.toBeNull();
+  details.querySelector('summary').click(); expect(details.open).toBe(true);
+  details.querySelector('summary').click(); expect(details.open).toBe(false);
   expect(document.querySelector('[data-act=exConfirmFinish]')).not.toBeNull();
-  const help = UI.registerHelp.mock.calls.at(-1)[1];
-  help.back();
-  expect(document.querySelector('[data-act=exConfirmFinish]')).not.toBeNull();
-  const currentHelp = UI.registerHelp.mock.calls.at(-1)[1];
   if (change === 'slot') altarState.slot = 2;
-  else game.pendingExtraction = {...game.pendingExtraction};
-  const current = UI.el.ovBody.firstElementChild;
-  currentHelp.back();
-  expect(UI.el.ovBody.firstElementChild).toBe(current);
+  else game.pendingExtraction = {...game.pendingExtraction, requestSeq:game.pendingExtraction.requestSeq + 1};
+  const pending = JSON.stringify(game.pendingExtraction), stored = JSON.stringify(base.data);
+  await confirm();
+  expect(UI.el.ovBody.firstElementChild).toBe(surface);
+  expect(JSON.stringify(game.pendingExtraction)).toBe(pending);
+  expect(JSON.stringify(base.data)).toBe(stored);
+  expect(document.querySelector('[data-act=goBase]')).toBeNull();
+  if (change === 'pending') {
+    expect(document.querySelector('[data-act=exConfirmFinish]')).toBeNull();
+    expect(surface.textContent).toContain('待入库卡牌已变化，请重新确认。');
+  }
 });

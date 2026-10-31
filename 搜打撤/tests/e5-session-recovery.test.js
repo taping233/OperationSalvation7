@@ -240,6 +240,9 @@ describe('E5 real session recovery and persistence results', () => {
   it('a later battle recovery write cannot erase an earlier failed write', async () => {
     ordinary({ battle: { legacy: true } });
     const runWrite = trackRunWrites(true);
+    // Battle restoration may save internally; enterLayer defers its write until
+    // the battle snapshot is complete, so create both real attempts here.
+    window.SDT.Battle.restore.mockImplementation(() => { session.saveGame(); return true; });
     const result = await loadComplete(1);
     expect(result.ok).toBe(true);
     expect(result.persistence.status).toBe('failed');
@@ -385,9 +388,12 @@ describe('E5 real session recovery and persistence results', () => {
     });
     const result = await loadComplete(1);
     expect(result.persistence.status).toBe('succeeded');
-    expect(result.persistence.attempts).toHaveLength(3);
+    expect(result.persistence.attempts).toEqual([
+      { target: 'run', reason: 'save_game', ok: true },
+      { target: 'run', reason: 'save_game', ok: true },
+    ]);
     expect(await session.saveGame()).toBe(true);
-    expect(result.persistence.attempts).toHaveLength(3);
+    expect(result.persistence.attempts).toHaveLength(2);
     writeRun();
     expect(session.loadGame(1).persistence).toEqual({ status: 'not_attempted', attempts: [] });
   });

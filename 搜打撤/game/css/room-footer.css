@@ -1,4 +1,6 @@
 /* The shared header overlays rooms without reserving a separate strip. */
+/* A save locks interaction while the existing card artwork keeps its brightness. */
+body #overlay button[data-room-save-locked="enabled"]:disabled:has(.hs-card,.shop-card-mystery){opacity:1;filter:none;cursor:progress;}
 body:not(.lobby):has(#runTopBar:not([hidden])) #overlay{
 & :is(.shop-market,.sc-fire) .pg-head{padding-top:0;}}
 body #overlay{

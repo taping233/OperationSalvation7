@@ -203,7 +203,8 @@ export function createCardSemanticOperations(context) {
     }
     if (operation.op === 'handSelect') {
       ports.queueHandSelect({ n: operation.n, type: operation.type || null,
-        act: operation.act === 'zeroNext' ? 'zero' : operation.act });
+        act: operation.act === 'zeroNext' ? 'zero' : operation.act,
+        ...(execution.onHandSelectDone ? { onDone: execution.onHandSelectDone } : {}) });
       return true;
     }
     if (operation.op === 'swapDiscoverCosts') { ports.queueSwapCostDiscover(); return true; }

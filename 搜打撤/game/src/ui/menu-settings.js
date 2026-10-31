@@ -95,9 +95,16 @@ export function createMenuSettingsPage({
     try { UI.showOverlay('', settingsHTML, 'page'); } finally { finishOverlay(); }
     const finishNavigation = beginRuntimeStage('settings-navigation-sync');
     const settingsRoot = /** @type {import("./ui.dom.types.js").UIElement} */ (UI.el.ovBody.querySelector('.settings-page'));
+    const settingsRevision = UI._overlayRevision;
+    const battleContextCurrent = captureBattleContext(game, getActiveSlot);
+    const contextCurrent = () => battleContextCurrent() && (typeof options.isCurrent !== 'function' || options.isCurrent());
+    const overlayOpen = () => !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
+    const settingsCurrent = () => contextCurrent() && overlayOpen() && UI._overlayRevision === settingsRevision
+      && settingsRoot.isConnected && settingsRoot === UI.el.ovBody.querySelector('.settings-page');
+    if (settingsCurrent() && typeof options.onPage === 'function') options.onPage(settingsCurrent);
     try { initSettingsNavigation(settingsRoot, navigationState); } finally { finishNavigation(); }
     bindPerformanceSettings(UI.el.ovBody);
-    bindBattleRestart({ isCurrentContext: captureBattleContext(game, getActiveSlot),
+    bindBattleRestart({ isCurrentContext: contextCurrent,
       page: /** @type {import("./ui.dom.types.js").UIElement} */ (UI.el.ovBody.querySelector('.settings-page')) });
     const sync = () => {
       if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index;
@@ -123,8 +130,7 @@ export function createMenuSettingsPage({
     // 直接挂函数引用时 fromTitle=!!dataset 恒为真，返回键误回标题页（09-30 深审 WORLD-004）
     const childSettingsOptions = { ...options };
     const openChild = open => {
-      if (!settingsRoot.isConnected || settingsRoot !== UI.el.ovBody.querySelector('.settings-page')) return false;
-      const contextCurrent = captureBattleContext(game, getActiveSlot);
+      if (!settingsCurrent()) return false;
       const snapshot = captureOverlayReturnState(settingsRoot, document.activeElement, {
         readContext:() => captureSettingsNavigation(settingsRoot),
       });
@@ -132,30 +138,50 @@ export function createMenuSettingsPage({
       // Only the child renderer can hand over a fresh page; a similar page never
       // inherits this settings snapshot merely by sharing its classes.
       const onRender = ({ root, revision, isCurrent }) => {
-        if (!contextCurrent() || !isCurrent()) return false;
+        const childCurrent = () => contextCurrent() && overlayOpen() && UI._overlayRevision === revision
+          && !!root?.isConnected && UI.el.ovBody.contains(root) && isCurrent();
+        if (!childCurrent()) return false;
         let targetRoot = null;
         childBack = createOverlayReturn({
           revision, getRevision:() => UI._overlayRevision,
-          isOpen:() => !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'),
+          isOpen:overlayOpen,
           back:commit => {
-            if (!contextCurrent() || !root.isConnected || !isCurrent()) return false;
+            if (!childCurrent()) return false;
             return commit(() => {
               targetRoot = openSettings(childSettingsOptions, snapshot.context, prev);
               return targetRoot;
             });
           },
-          onFailure:() => UI.log('返回设置未完成，请重试。', 'warn'),
+          onFailure:() => {
+            if (childCurrent()) UI.log('返回设置未完成，请重试。', 'warn');
+          },
           restore:targetCurrent => restoreOverlayReturnState(targetRoot, snapshot, {
             isCurrent:() => targetCurrent() && contextCurrent() && !!targetRoot?.isConnected,
           }),
         });
+        if (typeof options.onPage === 'function') options.onPage(childCurrent);
         return true;
       };
       return open(() => childBack(), { onRender, isCurrent:contextCurrent });
     };
     UI.act('openInbox', () => openChild((back, navigation) => openSuggestionInbox(false, back, navigation)));
     UI.act('openDataPageUi', () => openChild((back, navigation) => openDataPageUi(true, back, navigation)));
-    UI.act('closeSettings', () => { if (typeof options.returnTo === 'function') return options.returnTo(); UI.hideOverlay(); game.state = prev === 'modal' ? 'idle' : prev; });
+    UI.act('closeSettings', createOverlayReturn({
+      revision:settingsRevision, getRevision:() => UI._overlayRevision, isOpen:overlayOpen,
+      back:commit => {
+        if (!settingsCurrent()) return false;
+        if (typeof options.returnTo === 'function') return options.returnTo(render => {
+          if (!settingsCurrent()) return false;
+          return commit(render);
+        });
+        UI.hideOverlay(); game.state = prev === 'modal' ? 'idle' : prev;
+        return true;
+      },
+      onFailure:() => { if (settingsCurrent()) UI.log('返回未完成，请重试。', 'warn'); },
+      restore:targetCurrent => {
+        if (typeof options.restoreReturn === 'function') options.restoreReturn(targetCurrent);
+      },
+    }));
     bindInputSettings(UI.el.ovBody.querySelector('.settings-page'), UI.confirmAction);
     const onInput = (id, eventName, apply) => {
       const input = document.getElementById(id);

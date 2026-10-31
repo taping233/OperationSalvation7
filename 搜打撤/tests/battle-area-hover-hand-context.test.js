@@ -204,6 +204,7 @@ function readingSurface(kind) {
     dynamic: '<span data-ui-tip data-ui-tip-text="状态说明"><i>说明</i></span>',
     skill: '<div class="battle-skill-help"><i>职业说明</i></div>',
     tooltip: '<aside class="term-tip"><i>词条正文</i></aside>',
+    control: '<button data-act="inspectStatus"><i>查看详情</i></button>',
   };
   host.innerHTML = surfaces[kind];
   (kind === 'tooltip' ? document.body : foeNodes()[0]).append(host);
@@ -226,22 +227,18 @@ function pickupForClick(area) {
   expect(Aim.aim?.targetMode).toBe('click');
 }
 
-it.each([true, false])('keeps an already picked %s-area card while reading status and tooltip surfaces', async area => {
+it.each([true, false])('targets through enemy status text with an already picked %s-area card', async area => {
   pickupForClick(area);
-  const before = BattleSession.serialize(), held = Aim.aim;
-  for (const kind of ['status', 'summary', 'term', 'dynamic', 'skill', 'tooltip']) {
+  const before = BattleSession.serialize();
+  for (const kind of ['status', 'summary', 'term', 'dynamic', 'skill']) {
     const surface = readingSurface(kind);
     hit = surface;
     surface.dispatchEvent(pointer('pointermove', 800, 450)); step();
-    expect(Aim.aim?.hover, kind).toBeNull();
-    surface.dispatchEvent(pointer('pointerdown', 800, 450));
-    surface.dispatchEvent(pointer('pointerup', 800, 450));
-    surface.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true, detail:1, clientX:800, clientY:450 }));
-    expect(Aim.aim === held, kind).toBe(true);
+    expect(Aim.aim?.hover?.kind, kind).toBe(area ? 'any' : 'enemy');
     expect(BattleSession.serialize(), kind).toEqual(before);
     surface.parentElement.parentElement.remove();
   }
-  // The next intentional target click is still accepted.
+  // Hover remains a preview; only the actual confirmation spends the card.
   hit = foeNodes()[0];
   hit.dispatchEvent(pointer('pointerdown', 800, 450));
   hit.dispatchEvent(pointer('pointerup', 800, 450));
@@ -249,35 +246,48 @@ it.each([true, false])('keeps an already picked %s-area card while reading statu
   await vi.waitFor(() => expect(BattleSession.getSnapshot().hand).not.toContain('u0'));
 });
 
-it.each([true, false])('does not turn a %s-area reading press into a play when released over an enemy', area => {
+it.each([true, false])('accepts a %s-area target press starting on the enemy status text', async area => {
   pickupForClick(area);
-  const before = BattleSession.serialize(), held = Aim.aim;
   const surface = readingSurface('status');
   hit = surface;
   surface.dispatchEvent(pointer('pointerdown', 800, 450));
   hit = foeNodes()[0];
   hit.dispatchEvent(pointer('pointermove', 800, 450)); step();
   hit.dispatchEvent(pointer('pointerup', 800, 450));
-  expect(Aim.aim === held).toBe(true);
-  expect(BattleSession.serialize()).toEqual(before);
+  expect(Aim.aim).toBeNull();
+  await vi.waitFor(() => expect(BattleSession.getSnapshot().hand).not.toContain('u0'));
+  expect(BattleSession.getSnapshot().energy).toBe(98);
 });
 
-it.each([true, false])('keeps a %s-area drag release over a status reading surface from submitting', area => {
+it.each([true, false])('plays a %s-area drag released over enemy status text even with pointer capture', async area => {
   const card = areaCard(0);
   if (!area) {
     card.rules.battle.target.area = false;
     card.rules.triggers.onPlay[0].target = 'chosenEnemy';
   }
   restore(1, card); begin();
-  const before = BattleSession.serialize(), held = Aim.aim;
   const surface = readingSurface('status');
   hit = surface;
   // Pointer capture retargets the event to overlay; geometric hit testing must
-  // still detect the reading surface underneath that captured pointer.
+  // still resolve the enemy underneath its status text.
   UI.el.overlay.dispatchEvent(pointer('pointermove', 800, 450)); step();
   UI.el.overlay.dispatchEvent(pointer('pointerup', 800, 450));
-  expect(Aim.aim === held).toBe(true);
-  expect(Aim.aim?.leftDown).toBe(false);
-  expect(Aim.aim?.targetMode).toBe('click');
-  expect(BattleSession.serialize()).toEqual(before);
+  expect(Aim.aim).toBeNull();
+  await vi.waitFor(() => expect(BattleSession.getSnapshot().hand).not.toContain('u0'));
+  expect(BattleSession.getSnapshot().energy).toBe(98);
+});
+
+it.each([true, false])('keeps a picked %s-area card when interacting with standalone tips or real buttons', area => {
+  pickupForClick(area);
+  const before = BattleSession.serialize(), held = Aim.aim;
+  for (const kind of ['tooltip', 'control']) {
+    const surface = readingSurface(kind); hit = surface;
+    surface.dispatchEvent(pointer('pointermove', 800, 450)); step();
+    expect(Aim.aim?.hover).toBeNull();
+    surface.dispatchEvent(pointer('pointerdown', 800, 450));
+    surface.dispatchEvent(pointer('pointerup', 800, 450));
+    expect(Aim.aim).toBe(held);
+    expect(BattleSession.serialize()).toEqual(before);
+    surface.parentElement.parentElement.remove();
+  }
 });

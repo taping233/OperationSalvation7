@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { courtyardV3HTML } from '../game/src/hub/hub.courtyard-v3.js';
+import { courtyardV3HTML, readCourtyardPreferences, saveCourtyardPreferences } from '../game/src/hub/hub.courtyard-v3.js';
 import { mountCourtyardV3 } from '../game/src/hub/hub.courtyard-runtime.js';
 // Real courtyard runtime + real rain and koi engines. Only browser canvas/audio/RAF APIs are fakes.
 let releases, frames, observers, media, audio, add, remove, hidden, mutations;
@@ -31,7 +31,7 @@ async function open() {
   const host = document.querySelector('[data-courtyard]');
   const observerCount = mutations.length;
   const previousFrames = new Set(frames.keys());
-  releases.push(mountCourtyardV3(host));
+  releases.push(mountCourtyardV3(host, { read:readCourtyardPreferences, write:saveCourtyardPreferences }));
   const ownedFrames = [...frames.keys()].filter(frame => !previousFrames.has(frame));
   return { ui, host, ownedFrames, ownedObservers: mutations.slice(observerCount), canvas: host.querySelector('.courtyard-v3-canvas') };
 }

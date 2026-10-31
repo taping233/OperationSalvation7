@@ -6,19 +6,49 @@ export function roomFooterHTML({ back = '', info = '', actions = '', className =
   return `<${element} class="room-footer ${className}"><div class="room-footer-back">${back}</div><div class="room-footer-info">${info}</div><div class="room-footer-actions">${actions}</div></${element}>`;
 }
 
-export function beginRoomSave(root, statusHost = null) {
+const buttonLocks = new WeakMap();
+/** @param {Iterable<HTMLButtonElement>} controls */
+export function lockRoomButtons(controls) {
+  const buttons = [...new Set(controls)];
+  for (const button of buttons) {
+    let lock = buttonLocks.get(button);
+    if (!lock) {
+      lock = { depth:0, disabled:button.disabled };
+      buttonLocks.set(button, lock);
+      button.dataset.roomSaveLocked = lock.disabled ? 'disabled' : 'enabled';
+    }
+    lock.depth++;
+    button.disabled = true;
+  }
+  let released = false;
+  return () => {
+    if (released) return;
+    released = true;
+    for (const button of buttons) {
+      const lock = buttonLocks.get(button);
+      if (!lock || --lock.depth > 0) continue;
+      buttonLocks.delete(button);
+      button.disabled = button.hasAttribute('data-room-disabled-after-save') ? button.dataset.roomDisabledAfterSave === 'true' : lock.disabled;
+      button.removeAttribute('data-room-disabled-after-save');
+      button.removeAttribute('data-room-save-locked');
+    }
+  };
+}
+
+export function beginRoomSave(root, statusHost = null, messageText = '正在保存…') {
   if (!root) return () => {};
-  const buttons = [...root.querySelectorAll('button')].map(button => [button, button.disabled]);
+  const releaseButtons = lockRoomButtons(root.querySelectorAll('button'));
   root.setAttribute('aria-busy','true');
-  for (const [button] of buttons) button.disabled = true;
-  const message = document.createElement('span'); message.className='room-saving';message.setAttribute('role','status');message.textContent='正在保存…';
+  const message = document.createElement('span'); message.className='room-saving';message.setAttribute('role','status');message.textContent=messageText;
   (statusHost || root.querySelector('.room-footer-info,.reward-footer-info') || root).append(message);
   return () => {
     root.removeAttribute('aria-busy');message.remove();
-    for (const [button, disabled] of buttons) if (button.isConnected) {
-      button.disabled=button.hasAttribute('data-room-disabled-after-save') ? button.dataset.roomDisabledAfterSave === 'true' : disabled;
+    releaseButtons();
+    root.querySelectorAll('button[data-room-disabled-after-save]').forEach(button => {
+      if (buttonLocks.has(button)) return;
+      button.disabled = button.dataset.roomDisabledAfterSave === 'true';
       button.removeAttribute('data-room-disabled-after-save');
-    }
-    root.querySelectorAll('[data-room-disabled-after-save]').forEach(button => button.removeAttribute('data-room-disabled-after-save'));
+      button.removeAttribute('data-room-save-locked');
+    });
   };
 }

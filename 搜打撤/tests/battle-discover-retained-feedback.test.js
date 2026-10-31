@@ -12,7 +12,8 @@ it.each(['play','potion','playKeep'])('%s 注能卡直释仍排队施放（视�
  const flow=createBattleDiscoverFlow({cards:{all:()=>[card],isRandomObtainable:()=>true,sellPrice:()=>1,findByUid:()=>({card}),addTempCard:(c,p)=>{events.push({kind:'draw',acquired:true,uid:'new',name:c.name,card:c,...p});return 'new';},queueCardExecution:()=>true,directPlayReason:()=>'需要先注能',fireCatGift:()=>{}},interaction:{getJobs:()=>[],get:()=>selection,set:s=>selection=s,requestRender:()=>{}},random:{next:()=>0},battle:{currentClass:()=>null,firstAliveTarget:()=>null,hasAliveFoes:()=>true,sweepDead:()=>{},finishVictory:()=>{}},effects:{},output:{log:()=>{}}});
  flow.pickDiscover(0); const s=stage(); showBattleCardResults(s,events);
  expect(events[0].source).toBe('discover-cast');
- expect(s.textContent).toContain('排队施放');
- expect(s.textContent).not.toContain('置入手牌');
+ expect(document.querySelectorAll('.fx-art-draw')).toHaveLength(1);
+ showBattleCardResults(s,events);expect(document.querySelectorAll('.fx-art-draw')).toHaveLength(1);
+ expect(s.textContent).toBe('');
  expect(document.querySelectorAll('.bt-card-reveal')).toHaveLength(0);
 });

@@ -6,7 +6,7 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { game } from './game.session.kernel.js';
 import { modeCfg } from './game.session.modes.js';
-import { canAcceptCardAtCapacity, resourceContainerBonus, stackCapOf } from '../core/card-capacity.js';
+import { bagCapacityState, bagSlotUsage, canAcceptCardAtCapacity, resourceContainerBonus, stackCapOf } from '../core/card-capacity.js';
 import { cardStacksForZone, formatBagCapacity } from '../core/bag-render-derivation.js';
 import { refreshedCardFace } from '../cards/card-instance.js';
 export { PEARL_BOX_ID, stackCapOf } from '../core/card-capacity.js';
@@ -17,13 +17,16 @@ export { PEARL_BOX_ID, stackCapOf } from '../core/card-capacity.js';
 // 珍珠盒（Q5 老板定向）：每持有 1 个额外扩容 9 格，扩出来的格子只能放资源卡。
 const pearlBonus = () => resourceContainerBonus(game.ownedCards || []);
 export const bagCap = () => SDT.Base.bagCap() + pearlBonus();
+function capacityQuery() {
+  const baseCap = SDT.Base.bagCap(), resourceBonus = pearlBonus();
+  return { ...bagSlotUsage(game.ownedCards, usedSlots()), baseCap, resourceBonus, totalCap:baseCap + resourceBonus };
+}
 export function bagCapacityText() {
-  return formatBagCapacity({ baseCap:SDT.Base.bagCap(), resourceBonus:pearlBonus(), used:usedSlots() });
+  const capacity = capacityQuery();
+  return formatBagCapacity({ ...capacity, used:capacity.usedSlots });
 }
 // 背包能否再收一张卡：基础格内任意类型；珍珠盒扩出来的格子仅资源卡（卡面「容纳所有类型的资源卡牌」）
-export const canAcceptCard = card => !!card && canAcceptCardAtCapacity(card, {
-  usedSlots:usedSlots(), baseCap:SDT.Base.bagCap(), totalCap:bagCap(),
-});
+export const canAcceptCard = card => !!card && canAcceptCardAtCapacity(card, capacityQuery());
 export const safeCap = () => SDT.Base.safeCap();
 // ---------- 背包叠放上限（2026-09-09 需求 #7）----------
 // 装备每张占 1 格，其余同名卡每 3 张占 1 格。
@@ -65,12 +68,14 @@ game.gainCoins = gainCoins;   // 搜刮点等模块发币（含飘字与日志�
 game.addItem = function (tpl, n, { deferFeedback } = {}) {
   const feedback = action => deferFeedback ? deferFeedback(action) : action();
   n = n || 1;
-  // 散装物资同名每 3 件占一格；批量领取也先检查完整所需空间。
+  // 散装物资同名每 3 件占一格，新增占格只能使用普通格；不新增格时仍可合并。
   let slot = game.inventory.find(it => it.name === tpl.name && it.tier === (tpl.tier || 'C'));
   const count = slot?.count || 0;
   const addedSlots = Math.ceil((count + n) / 3) - Math.ceil(count / 3);
-  if (usedSlots() + addedSlots > bagCap()) {
-    const message = `[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，可在基地用木材扩建），无法获得 <b>${tpl.name}</b>`;
+  const capacity = capacityQuery();
+  if (addedSlots > 0 && !bagCapacityState({ ...capacity,
+    usedSlots:capacity.usedSlots + addedSlots, ordinarySlots:capacity.ordinarySlots + addedSlots }).capacityOk) {
+    const message = `[[icon:bag]] 普通格空间不足（${bagCapacityText()}，可在基地用木材扩建），无法获得 <b>${tpl.name}</b>`;
     feedback(() => { SDT.Sound.sfx('deny'); UI.log(message, 'warn'); });
     return null;
   }
@@ -88,8 +93,10 @@ export function gainCoins(n) {
   // 精英突袭等模式的金币倍率（战斗掉落 / 格子币全部生效）
   n = Math.max(1, Math.round(n * (modeCfg().coinMul || 1)));
   game.coins += n;
-  SDT.Sound.sfx('coin');
-  UI.log(`获得 <b>${n}</b> 币（现有 ${game.coins}）`, 'coin');
+  for (const feedback of [() => SDT.Sound.sfx('coin'),
+    () => UI.log(`获得 <b>${n}</b> 币（现有 ${game.coins}）`, 'coin')]) {
+    try { feedback(); } catch (error) { console.warn('[coins] 收益反馈未完成', error); }
+  }
 }
 
 // 按现行卡库刷新背包/仓库里的卡牌快照克隆（2026-09-10 留言 #22/#37）。

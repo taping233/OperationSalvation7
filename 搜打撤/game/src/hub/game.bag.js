@@ -1,6 +1,7 @@
 import { createLegacyBagUse } from './bag-legacy-use.js';
 import { createBagContainerPages } from './bag-container-pages.js';
 import { createBagInventoryActions } from './bag-inventory-actions.js';
+import { planBagTokenCraft } from './bag-token-craft-plan.js';
 import { sameStoredCard } from './stored-card-identity.js';
 import { patchBackpackPane, captureBackpackPosition, restoreBackpackPosition } from './bag-pane-view.js';
 import { deriveBagRenderState, syncBagCardOrder } from '../core/bag-render-derivation.js';
@@ -87,7 +88,8 @@ const { useOwnedCard } = createLegacyBagUse({ UI, game, readCards:() => SDT.Card
 const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, readCards:() => SDT.Cards,
   sound:kind => SDT.Sound.sfx(kind), baseCap:() => SDT.Base.bagCap(), cardStacks,
   captureContext:() => captureBattleContext(game),
-  usedSlots, bagCap, saveGame, showBackpack, rememberBagPosition, captureBagView, bagAct, decorateInventoryZoom });
+  usedSlots, bagCap, saveGame, showBackpack, rememberBagPosition, captureBagView, bagAct, decorateInventoryZoom,
+  rich:html => SDT.Icons.rich(html) });
 
 
   function pocketAdd(card) {
@@ -271,8 +273,12 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
     if (usable) btns.push(bagUseButton(card, st.uids[0]));
     if (card.id === 'tt2-pearlbox') btns.push('<button class="ov-btn ok" data-act="pearlStoreZoom">[[icon:pearl-box]] 打开珍珠盒</button>');
     if (card.id === 'tt7-stratagem' && !safeFlag) btns.push('<button class="ov-btn ok" data-act="pouchStoreZoom">[[icon:spell-pouch]] 打开锦囊（存放法术 ×3）</button>');
-    if (card.id === 'tt-token-gold' && st.count >= 3) btns.push('<button class="ov-btn ok" data-act="craftColorToken">合成员工通行证A（3 张 B → 1 张 A）</button>');
-    if (card.id === 'tt-token-color' && (game.fragments || 0) >= 2) btns.push('<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成员工通行证A（2 碎片 + 1 通行证A）</button>');
+    const craftButton = (kind, action, label) => {
+      const plan = planBagTokenCraft(game, kind, SDT.Cards.all(), undefined, SDT.Base.bagCap());
+      return `<button class="ov-btn ok" data-act="${action}"${plan.ok ? '' : ` disabled aria-disabled="true" title="${escAttr(plan.reason)}"`}>${label}</button>${plan.ok ? '' : `<p class="ov-note">${esc(plan.reason)}</p>`}`;
+    };
+    if (card.id === 'tt-token-gold') btns.push(craftButton('gold', 'craftColorToken', '合成员工通行证A（3 张 B → 1 张 A）'));
+    if (card.id === 'tt-token-color') btns.push(craftButton('fragments', 'craftColorTokenByFragments', '合成员工通行证A（2 碎片 + 1 通行证A）'));
     if (safeFlag) btns.push(safeTransferButton(card.name, false, 'zoomMoveToBag'));
     else if (!isSha) btns.push(safeTransferButton(card.name, true, 'zoomMoveToSafe'));
     if (!isSha) btns.push('<button class="ov-btn danger" data-act="detailDiscard">丢弃 1 张</button>');
@@ -363,22 +369,6 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
       bagZone = requestedBagSection === 'main' ? 'bag' : requestedBagSection;
       requestedBagSection = null;
     }
-    const helpCurrent = captureBattleContext(game), helpCards = game.ownedCards;
-    UI.registerHelp('bag', {
-      title: '背包说明',
-      html: `
-        <p class="help-item"><b>随身背包</b>物资与卡牌混占格（装备每张占 1 格，其余同名卡每 3 张或同名物资每 3 件占 1 格）。点击格子看卡牌详情；按住拖动整理顺序，拖到左栏盾形按钮存入安全格。</p>
-        <p class="help-item"><b>安全格</b>由${esc(SDT.Base.carriedPet?.()?.name || '随行伙伴')}看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。在基地培养随行伙伴可提升容量。</p>
-        <p class="help-item"><b>消耗区</b>战斗中用过的牌统一暂存在这里，包括初始攻击、职业卡和衍生卡，不占背包格。局内复原后，就能再用。</p>
-        <p class="help-item"><b>去火堆复原</b>每次随机复原最多 2 张；道具和装备不能在火堆复原。</p>
-        <p class="help-item"><b>用道具复原</b>能源结晶按消耗区顺序复原最多 3 张，也能复原道具和装备。背包要放得下。</p>
-        <details><summary>撤离后怎么处理？</summary><p>成功撤离时，消耗区逐张以 1/3 概率结算；初始攻击和职业卡即使掷中也不带回基地消耗区，其余实际带回的牌可用钥匙复原。初始攻击和职业卡仍可在局内复原。下次出发时，基地消耗区中未复原的牌会消散。</p></details>
-        <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
-      back: () => {
-        if (!helpCurrent() || game.ownedCards !== helpCards || !UI.el.ovBody?.querySelector('.help-body')) return false;
-        return showBackpack(true);
-      },
-    });
     const markup = bagV2PageHTML({
       bagZone, bagFilter, bagSortKey,
       cap, baseCap, pearlStoredN, capacityText, total, safeUsedN, sCap, pkN,
@@ -408,6 +398,16 @@ const { openPouchStore, openPearlStore } = createBagContainerPages({ UI, game, r
     bagAct('inspectStack', d => openBagZoom(d.name, d.safe === '1', d.pocket === '1', null, d.uid,
       d.pocketIndex === undefined ? null : Number(d.pocketIndex)));
     bagSlots.bindBagDrag();   // v0.21：拖拽排序 / 左栏分区钮拖放跨区 / 点格子开看卡操作台
+    const sourceOwner = bagReturnOwner, sourceRun = bagRunCurrent, sourceCards = game.ownedCards, overChest = bagOverChest;
+    _setBagReturnHook(() => {
+      if (!backpackOpen || bagRunCurrent !== sourceRun || !sourceRun?.() || game.ownedCards !== sourceCards || game.battleActive) return false;
+      // The public hook belongs to this backpack page; its private owner still
+      // belongs to the reward/event page that closing the backpack must restore.
+      _setBagReturnHook(null);
+      bagReturnOwner = sourceOwner;
+      bagOverChest = overChest;
+      return showBackpack(true);
+    });
     return true;
   }
 

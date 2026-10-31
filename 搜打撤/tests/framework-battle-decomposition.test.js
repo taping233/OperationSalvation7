@@ -47,7 +47,7 @@ describe('extracted battle responsibilities', () => {
   it('collects sealed cards once and preserves boss consumed/grave settlement', () => {
     const sealed = { id: 'seal', rules: { battle: { setup: { collection: { ids: ['seal'], into: 'hero' } } } } };
     const runtime = { G: { ownedCards: [{ uid: 's', card: sealed }], log() {} }, hand: ['s'], granted: [],
-      consumed: [], grave: [], cardAnims: [], mode: 'boss', set$sealDone(value) { this.sealDone = value; } };
+      consumed: [], grave: [], lastDrawnUids: ['s'], cardAnims: [], mode: 'boss', set$sealDone(value) { this.sealDone = value; } };
     const granted = [];
     const sweepDead = vi.fn();
     const setup = createSetupMechanics({ runtime, cards: { all: () => [{ id: 'hero' }] },
@@ -57,7 +57,42 @@ describe('extracted battle responsibilities', () => {
     expect(runtime.hand).toEqual([]);
     expect(runtime.consumed).toEqual(['s']);
     expect(runtime.grave).toEqual(['s']);
+    expect(runtime.lastDrawnUids).toEqual([]);
     expect(granted).toEqual([{ id: 'hero' }]);
     expect(sweepDead).toHaveBeenCalledTimes(1);
+  });
+
+  it('skips the catalog for incomplete swords and combines every complete UID pair with one lookup', () => {
+    const entries = ['a1', 'a2', 'b1', 'b2'].map(uid => ({ uid, card: {
+      id: uid.startsWith('a') ? 'tt8-heavensword' : 'tt8-demonslay', name: uid,
+    } }));
+    const result = { id: 'tt8-archdemon', name: '天启诛魔剑' };
+    const all = vi.fn(() => [result]);
+    const random = { random: vi.fn() };
+    const runtime = { G: { battleActive: true, ownedCards: entries, log() {} },
+      battleState: { token: 1 }, hand: ['a1'], granted: [], consumed: [], grave: [],
+      lastDrawnUids: ['a1', 'a2', 'b1', 'b2'], cardAnims: [], mode: 'boss' };
+    const setup = createSetupMechanics({ runtime, cards: { all }, random,
+      findCard: uid => [...entries, ...runtime.granted].find(entry => entry.uid === uid),
+      addTempCard: card => {
+        const uid = `combined-${runtime.granted.length}`;
+        runtime.granted.push({ uid, card }); runtime.hand.push(uid);
+      } });
+    setup.checkHandCombinations();
+    expect(all).not.toHaveBeenCalled();
+    expect(runtime.hand).toEqual(['a1']);
+    runtime.hand.push('a2', 'b1', 'b2');
+    setup.checkHandCombinations();
+    setup.checkHandCombinations();
+    expect(all).toHaveBeenCalledTimes(1);
+    expect(runtime.hand).toEqual(['combined-0', 'combined-1']);
+    expect(runtime.consumed).toEqual(['a1', 'b1', 'a2', 'b2']);
+    expect(runtime.grave).toEqual(runtime.consumed);
+    expect(runtime.lastDrawnUids).toEqual([]);
+    expect(runtime.cardAnims.map(event => event.uid)).toEqual(runtime.consumed);
+    expect(runtime.granted.map(entry => entry.card)).toEqual([result, result]);
+    expect(runtime.granted[0].card).not.toBe(runtime.granted[1].card);
+    expect(entries.map(entry => entry.card.id)).toEqual(['tt8-heavensword', 'tt8-heavensword', 'tt8-demonslay', 'tt8-demonslay']);
+    expect(random.random).not.toHaveBeenCalled();
   });
 });

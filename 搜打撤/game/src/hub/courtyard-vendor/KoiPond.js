@@ -37,6 +37,7 @@ export function createKoiPond(canvas, { onProgress = () => {}, random = () => Ra
   class Koi {
     constructor(index) {
       this.id = index;
+      this.depth = .18 + index % 3 * .12;
       const b = waterBounds();
       this.x = b.left + random() * (b.right - b.left);
       this.y = b.top + random() * (b.bottom - b.top);
@@ -126,8 +127,9 @@ export function createKoiPond(canvas, { onProgress = () => {}, random = () => Ra
       // Shadow and body use the same pose; keep this projection local to this draw.
       const body = this.bodyPoints();
       ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle); ctx.scale(length, length);
+      ctx.globalAlpha = .94 - this.depth * .32;
       // A shallow blue-grey shadow separates the fish from the painted stone bed.
-      ctx.save(); ctx.translate(0.025, 0.038); this.bodyPath(body);
+      ctx.save(); ctx.translate(0.025 + this.depth * .06, 0.038 + this.depth * .12); this.bodyPath(body);
       ctx.fillStyle = 'rgba(40,66,65,0.16)'; ctx.fill(); ctx.restore();
       ctx.fillStyle = 'rgba(220,218,189,0.48)';
       for (const side of [-1, 1]) {
@@ -148,6 +150,8 @@ export function createKoiPond(canvas, { onProgress = () => {}, random = () => Ra
       this.patch(0.19, 0.12, this.palette[1], -0.015);
       this.patch(0.54, 0.11, this.palette[1], 0.025);
       this.patch(0.73, 0.055, this.palette[2], -0.012);
+      // 水色覆盖与深度透明度共用当帧轮廓，不新增模拟或随机流。
+      this.bodyPath(body); ctx.fillStyle = `rgba(57,98,100,${.10 + this.depth * .22})`; ctx.fill();
       ctx.beginPath(); ctx.moveTo(-0.03, -0.023);
       ctx.quadraticCurveTo(-0.22, -0.048, -0.44, this.spine(0.54).y - 0.027);
       ctx.lineWidth = 0.012; ctx.strokeStyle = 'rgba(250,241,206,0.32)'; ctx.stroke();

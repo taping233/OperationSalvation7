@@ -1,4 +1,4 @@
-import { chestBaseMocks } from './helpers/environment-fixtures.js';
+import { connectSdtFixture, chestBaseMocks } from './helpers/environment-fixtures.js';
 import { continueChestRewards } from './helpers/chest-actions.js';
 import { afterEach, expect, it, vi } from 'vitest';
 
@@ -32,13 +32,13 @@ it.each([[true, true, false], [true, false, false], [false, true, false], [false
     refresh: vi.fn(), log: vi.fn(),
   };
   const dropCard = distinct ? vi.fn().mockReturnValueOnce(card).mockReturnValue(otherCard) : () => card;
-  window.SDT = {
+  await connectSdtFixture({
     UI, MAP: { chestKinds: { small: { name:'小型物资箱', cards:1, coins:[2, 2] } } },
     Cards: { RARITIES:['古朴','稀有','史诗','传说'], all:() => [card, otherCard], randomDropCard:dropCard,
       pickOfRarity:() => card, classPool:() => [], rarityOf:item => item.rarity,
       sellPrice:() => 1, cardHTML:() => '<div>队列测试卡</div>' },
     ...chestBaseMocks(() => vi),
-  };
+  });
   const { SDT } = await import('../game/src/run/chests.js');
   SDT.Chests.open(game, [{kind:'small'}, {kind:'small'}], done);
   let claimed = 0;
@@ -52,7 +52,12 @@ it.each([[true, true, false], [true, false, false], [false, true, false], [false
       ovBody.querySelector('[data-act="chestLeave"]').click(); await pendingAction;
     }
 
-    expect(ovBody.querySelector('.reward-notice')).toBeNull();
+    const notice = ovBody.querySelector('.reward-notice');
+    if (notice) {
+      expect(notice.textContent).toBe('当前节点可整理后继续领取；前往下一节点后未领奖励作废。');
+      expect(notice.getAttribute('role')).not.toBe('status');
+      expect(notice.classList.contains('danger')).toBe(false);
+    }
     expect(ovBody.querySelector('.cqo-receipt')).toBeNull();
     expect(game.grantCard).toHaveBeenCalledTimes(claimed);
     expect(game.gainCoins).toHaveBeenCalledTimes(2);

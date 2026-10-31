@@ -96,6 +96,7 @@
   cursor: pointer;
 }
 &[data-equip-state="busy"],
+&[data-equip-state="unavailable"],
 &[data-equip-state="used"] {
   border-color: #82969e;
 }}

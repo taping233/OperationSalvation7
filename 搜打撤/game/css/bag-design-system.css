@@ -32,8 +32,6 @@ body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-title {
   background:none; box-shadow:none;
 }
 body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-head2 h2 { margin:0; color:var(--bag-paper); font-size:var(--bag-type-title); font-weight:700; letter-spacing:.02em; }
-body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-title .bag-guide-trigger { border-color:var(--ui-line); border-radius:6px; background:#264f5c4d; color:var(--bag-paper); }
-body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-title .bag-guide-trigger:hover { background:#527e8a59; border-color:var(--bag-edge); }
 body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-capchip { align-self:center; flex-wrap:wrap; justify-content:flex-end; gap:var(--ui-space-2) var(--ui-space-3); max-width:760px; padding:var(--ui-space-2) 0; }
 body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 :is(.bag-capk,.bag-capchip small) { color:var(--ui-muted); }
 body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-capchip b { color:var(--bag-paper); font-size:var(--bag-type-number); line-height:1.15; }

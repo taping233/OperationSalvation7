@@ -1,4 +1,4 @@
-export const DRAW_EXPLANATION = '抽牌在普通战斗中会转化为获取同等数量的初始攻击。';
+export const DRAW_EXPLANATION = '普通战斗中，抽牌效果从本场牌库取牌，牌库抽空时停止；开局和每回合开始不自动抽牌。';
 
 // Include conditional draws without treating “抽到时施放” as a draw effect.
 export function hasDrawExplanation(card, derivedDraw = 0) {

@@ -1,0 +1,31 @@
+{
+  "files": [
+    {
+      "path": "tests/e4-async-entry.test.js",
+      "sha256": "f3122f183478b12f84faffc3f32d6c69516aa9c760461e394961029395f787a5"
+    },
+    {
+      "path": "tests/e5-session-recovery.test.js",
+      "sha256": "d1218236125f62147197331e45302c965dae00117c84f8bc1d02c15439e6cd58"
+    },
+    {
+      "path": "tests/terminal-death.test.js",
+      "sha256": "bd42ce800e376d8b48b1ec8b78b2adeec0b859f9fcfb492cf048618bb5aa8713"
+    },
+    {
+      "path": "tests/map-travel-motion.test.js",
+      "sha256": "710ab7c814b28c1a14362524463bb5c85dfcd5c901b0432afc4fa30dfd452494"
+    }
+  ],
+  "productionChanged": false,
+  "checks": [
+    "root-session-targeted.json:91/92, only terminal fixture missing el mapping",
+    "root-terminal-final.json:3/3 after mapping"
+  ],
+  "invariants": [
+    "failure aggregation retains false then true",
+    "nested restore collection remains isolated from later saves",
+    "every travel node saved exactly once including destination",
+    "one pending/failure/result presentation and one terminal award"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-abyss-sovereign",
+      "generated_source": "C:\\Users\\太平\\Documents\\Codex\\2026-10-28\\new-chat-2\\outputs\\深渊主宰-黑阵四臂.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-28-abyss-black-circle-original/cards-hero-abysssovereign-source.png",
+        "bytes": 2323223,
+        "sha256": "9c0b04e998adf8fd8d2a6381ba778e8b3db8c0aafd8a6d40f58c767a70ac69f3"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-28-abyss-black-circle-original/cards-hero-abysssovereign-full-before.webp",
+          "bytes": 115042,
+          "sha256": "582a95febc1cacaeda0bc9eacc0b46722a82a2d73d1a1256318b3e3935f209b0"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-28-abyss-black-circle-original/cards-hero-abysssovereign-thumb-before.webp",
+          "bytes": 16654,
+          "sha256": "28c4063d1bd4cc434c54e63bb68a41a073d57b108c38658f4481dc87dca48a3a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-abysssovereign.webp",
+          "bytes": 220688,
+          "sha256": "5ea1dcfca6712ed08b896387b3d6920100fad55c557ea0d8df3bacfa1bb59f68",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-abysssovereign.webp",
+          "bytes": 31350,
+          "sha256": "0f69c907c90a2a5a07156f6a81b55cc979bfa4329e75c468ed4c1cc3e6c1b8ce",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "abyss-sovereign-rough-20261010",
+      "revision_after": "abyss-black-circle-original-20261028",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/hero-abysssovereign.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 115042,
+            "sha256": "582a95febc1cacaeda0bc9eacc0b46722a82a2d73d1a1256318b3e3935f209b0",
+            "source": "docs/evidence/2026-10-10-abyss-forbidden/receipt.json"
+          },
+          "after": {
+            "path": "cards/hero-abysssovereign.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 220688,
+            "sha256": "5ea1dcfca6712ed08b896387b3d6920100fad55c557ea0d8df3bacfa1bb59f68",
+            "source": "docs/evidence/2026-10-28-abyss-black-circle-original/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-abysssovereign.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16654,
+            "sha256": "28c4063d1bd4cc434c54e63bb68a41a073d57b108c38658f4481dc87dca48a3a",
+            "source": "docs/evidence/2026-10-10-abyss-forbidden/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-abysssovereign.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 31350,
+            "sha256": "0f69c907c90a2a5a07156f6a81b55cc979bfa4329e75c468ed4c1cc3e6c1b8ce",
+            "source": "docs/evidence/2026-10-28-abyss-black-circle-original/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1750,
+  "manifest_count_after": 1750
+}

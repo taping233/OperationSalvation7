@@ -1,0 +1,250 @@
+{
+  "status": "passed",
+  "scope": "Run/event/altar/node/shop/reward/property failed groups plus direct event-factory and shop/pocket identity regressions",
+  "timestamp": "2026-11-01T05:34:14.055390+08:00",
+  "validation": {
+    "mode": "targeted Vitest, jsdom, one fork, cache confined to node_modules/.cache/parity-run-fixes",
+    "files": 33,
+    "tests": 514,
+    "failed": 0,
+    "durationSeconds": 52.75,
+    "report": "run-domain-vitest.json",
+    "testFiles": [
+      "tests/altar-sacrifice-zones-cloud.test.js",
+      "tests/architecture-boundaries.test.js",
+      "tests/event-callback-lifecycle-audit.test.js",
+      "tests/event-choice-recovery-cloud.test.js",
+      "tests/event-dice.test.js",
+      "tests/event-option-state.test.js",
+      "tests/event-recode-selection-continuity.test.js",
+      "tests/events-lazy-entry.test.js",
+      "tests/four-player-event-regressions.test.js",
+      "tests/fresh-run-onboarding-copy.test.js",
+      "tests/fresh-run-settlement.test.js",
+      "tests/illustrated-node.test.js",
+      "tests/nest-node-lifecycle-audit.test.js",
+      "tests/node-restore-flow.test.js",
+      "tests/project-bug-sweep-round2-nest-shop.test.js",
+      "tests/reward-capacity-organizer.test.js",
+      "tests/reward-capacity-preview.test.js",
+      "tests/shop-currency-guidance.test.js",
+      "tests/shop-detail-focus.test.js",
+      "tests/shop-transaction-lifecycle.test.js",
+      "tests/sys03-altar-restore-txn.test.js",
+      "tests/sys03-loot-shop-txn.test.js",
+      "tests/tools/reward-sequences.property.test.js",
+      "tests/run-event-controller-ownership.test.js",
+      "tests/events-lazy-story-ownership.test.js",
+      "tests/environment-fixtures.test.js",
+      "tests/shop-settlement-unification.test.js",
+      "tests/shop-sell-stored-guard.test.js",
+      "tests/shop-carry-cleanup.test.js",
+      "tests/run-architecture.test.js",
+      "tests/project-bug-sweep-round2-pocket-identity.test.js",
+      "tests/hard-mode-event-integration.test.js",
+      "tests/project-bug-sweep-events-1024.test.js"
+    ],
+    "fullGateRun": false,
+    "unityRun": false,
+    "staged": false,
+    "followup": {
+      "reason": "After the 33-file pass, all four direct factory fixtures were normalized to the complete shared concrete presentation ports. Production files and the other 29 test inputs stayed unchanged.",
+      "files": 4,
+      "tests": 37,
+      "failed": 0,
+      "report": "run-event-ports-vitest.json",
+      "testFiles": [
+        "tests/events-lazy-story-ownership.test.js",
+        "tests/hard-mode-event-integration.test.js",
+        "tests/project-bug-sweep-events-1024.test.js",
+        "tests/run-event-controller-ownership.test.js"
+      ]
+    }
+  },
+  "productionFixes": [
+    {
+      "files": [
+        "game/src/run/event-runtime.js",
+        "game/src/run/game.run.events.js"
+      ],
+      "reason": "Existing architecture rule rejects newly imported UI helpers and direct SDT usage in injected event factory.",
+      "change": "UI imports stay in event-runtime composition; inject exact existing functions plus richHTML. No allowlist change or fallback."
+    },
+    {
+      "files": [
+        "game/src/run/game.run.shop.js"
+      ],
+      "reason": "Shop redraw tried to focus disabled controls while save lock was still held.",
+      "change": "Restore original detail intent after save controls unlock, only while the same shop page owns the transaction and the user has not moved focus. Both save success and failure retain committed stock/card/payment semantics."
+    },
+    {
+      "files": [
+        "game/src/run/game.run.scenes.js"
+      ],
+      "reason": "Pocket candidate exhaustion retained locked fireDone during in-place rendering, so focus fell to body.",
+      "change": "After checkpoint release, restore focus within the current run/page/revision and only when user focus is unchanged. Initial save and retries share the same continuation. No save/recovery or receipt changes."
+    }
+  ],
+  "fixtureRepairs": [
+    "connectSdtFixture preserves the actual imported facade instead of replacing its object and disconnecting Chests/Nest registries; no existing shared helper changed.",
+    "Visible overlay and revision lifecycle modeled explicitly so real checkpoint ownership accepts the live fixture and rejects expired callbacks.",
+    "Await actual async checkpoint continuations; failed research purchase explicitly retries the saved in-memory shelf before returning, with no duplicate payment or sold-stock revival.",
+    "Use current reward selection attributes, page classes, button labels and existing bag/sell-rule navigation. Retired shop help wrappers are not restored; stale return callbacks still cannot replace a new page.",
+    "Capacity projection compares real grant and real bag accounting. Ordinary-overflow denies opening any new slot; resource slots do not consume ordinary capacity and a subsequently admitted pearl box expands capacity. Property model uses the actual 3-copy cap and cardStacksForZone.",
+    "All four direct controller fixtures spread eventPresentationPorts from tests/helpers/event-presentation-ports.js: exact real eventOptionState/reward/overlay-return UI functions plus richHTML:String. Runtime composition provides the same explicit production ports; no default/fallback was added.",
+    "Onboarding assertions preserve current ordinary-vs-boss flow: ordinary no auto draw, boss 15+5 deck, draw5 then1, energy2, hand8, no automatic reshuffle."
+  ],
+  "unchangedInvariants": [
+    "same UID/candidate claims once",
+    "paid cost and failed-save receipt retained",
+    "remaining restore count survives JSON/load",
+    "RNG unchanged by reentry/projection",
+    "safe/stored cards excluded from ordinary offering",
+    "in-flight save locks all controls",
+    "user-moved focus is not stolen"
+  ],
+  "changedFiles": [
+    {
+      "path": "game/src/run/event-runtime.js",
+      "sha256": "8f8c1f95a381bdb9253317da9878df9c2e6ddf869ea73bbb3ac84ff3d300c8f5"
+    },
+    {
+      "path": "game/src/run/game.run.events.js",
+      "sha256": "966633bc1612843db835289862f7cea72654e7c93da52db5e86f8570198a1a77"
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "sha256": "f258112393e786a01926c2556f3ab1d09b54755d5b5d772d79bdf766ad64d418"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "6062e483dde93c1959fcaebe46b37aa22c278705354b87a30174b3e4de9fc964"
+    },
+    {
+      "path": "tests/helpers/environment-fixtures.js",
+      "sha256": "fad87085d7f78702e76c348f3f7c9010ceaa12390193432c987ba2b58a26bd27"
+    },
+    {
+      "path": "tests/helpers/event-presentation-ports.js",
+      "sha256": "8817d5480594ed8f5faad7d9d6383b371cd7e3378283d4e5c962cc3ae19b6eb4"
+    },
+    {
+      "path": "tests/altar-sacrifice-zones-cloud.test.js",
+      "sha256": "7d92eb6ebcebfb1fb21fd06af907610b55e61cbeff1112bdd3cdc99657bc3455"
+    },
+    {
+      "path": "tests/event-callback-lifecycle-audit.test.js",
+      "sha256": "b67575217647140430a75f0812b28defc97a42b8e74a3cecc5c45c43ba4961fc"
+    },
+    {
+      "path": "tests/event-choice-recovery-cloud.test.js",
+      "sha256": "33f1aa795eec3d552463c943a0072473233e65d064566cc3f77668688ebd5af7"
+    },
+    {
+      "path": "tests/event-dice.test.js",
+      "sha256": "c1d37b5361374cc73f2e959212323e5edd7c343f43a8c1238cbe3506d0194bc3"
+    },
+    {
+      "path": "tests/event-option-state.test.js",
+      "sha256": "c6d934b7116ca4d40e8386dfcf15bea9cecf654bf9bf4c2d172acbd75a7bfb52"
+    },
+    {
+      "path": "tests/event-recode-selection-continuity.test.js",
+      "sha256": "0728992403d14399d057057632ffd8e0147f9e552d30cacb044fc074a3667040"
+    },
+    {
+      "path": "tests/events-lazy-entry.test.js",
+      "sha256": "d7101361e5eca3c2b09f5e2cf90e302593c54bd45be7e994f6fda4c1486dd7aa"
+    },
+    {
+      "path": "tests/four-player-event-regressions.test.js",
+      "sha256": "53408c01e0a2b459b1c5da01c1e782447796db81c9e30e5f9664a11156854f06"
+    },
+    {
+      "path": "tests/fresh-run-onboarding-copy.test.js",
+      "sha256": "f1b941300731e91dc6ebbd210b9adc154c9bfe9646671b15b34ed05718ce6b06"
+    },
+    {
+      "path": "tests/fresh-run-settlement.test.js",
+      "sha256": "b09e108c3358ecade38a386bf71f1ff1ab4a0ea8749e448741f3dc5db2e62f73"
+    },
+    {
+      "path": "tests/illustrated-node.test.js",
+      "sha256": "8862a19353cbf2dbf5e98f3cc10b06f013f401edc1efde09d3ea4751c660f57a"
+    },
+    {
+      "path": "tests/nest-node-lifecycle-audit.test.js",
+      "sha256": "701b0d9dccf7935eb67b3f1a1563459ef798f8f89d1a8971414acf7f58443717"
+    },
+    {
+      "path": "tests/node-restore-flow.test.js",
+      "sha256": "da2a64b167c7c342cbfac2f48d410be3b6f169155d405cbbec51c22506ef7cc1"
+    },
+    {
+      "path": "tests/project-bug-sweep-round2-nest-shop.test.js",
+      "sha256": "a4e1eccc8805575af4ab358e93a31b69a556400c517ee176664812a55c698919"
+    },
+    {
+      "path": "tests/reward-capacity-organizer.test.js",
+      "sha256": "968e3e94adee1ba0190f462914c1cf6f6dd1891582a46987d544f5acdbb0cca6"
+    },
+    {
+      "path": "tests/reward-capacity-preview.test.js",
+      "sha256": "6868949f7464c42ff363f88b4ff62e1fe7a9d97607b30255dec78d93d46dfc5e"
+    },
+    {
+      "path": "tests/shop-currency-guidance.test.js",
+      "sha256": "ebb487c441846ee0ebaf04de7273ede1adb9ca3990a2287f02a906126ec7639b"
+    },
+    {
+      "path": "tests/shop-detail-focus.test.js",
+      "sha256": "ecfc993a7ebc9d1a0943d91610225e9d40ebae34ef2219f8bb718102ee41dc41"
+    },
+    {
+      "path": "tests/shop-transaction-lifecycle.test.js",
+      "sha256": "0cae6af412cf771a95c4070e4bbf01e47c25c38d8c0717ae7daa8803b5566a6a"
+    },
+    {
+      "path": "tests/sys03-altar-restore-txn.test.js",
+      "sha256": "4c5e1783113d8dc447ccd0f19be4ab66355c8f70f06b6ddcce01a11790a9f52b"
+    },
+    {
+      "path": "tests/sys03-loot-shop-txn.test.js",
+      "sha256": "f68ab8b9b151cc31cae98397d63375a48d703c47c18a6974d1a55a7c2932d4c3"
+    },
+    {
+      "path": "tests/tools/reward-sequences.property.test.js",
+      "sha256": "bc88a62b8fc8c014e5b2574d8a271e0a668323c2dee79a580532de4711f3c6cc"
+    },
+    {
+      "path": "tests/run-event-controller-ownership.test.js",
+      "sha256": "18c726753c03d531314e98a8d2610546b1c3486aeabe26e742395210c86d5e35"
+    },
+    {
+      "path": "tests/events-lazy-story-ownership.test.js",
+      "sha256": "cdda2fd6125218baeec0cb7e5716a1e84c26297140fb44cd8ffd3d740efe45b7"
+    },
+    {
+      "path": "tests/hard-mode-event-integration.test.js",
+      "sha256": "b622cd70323ef2eddf3cf27d44db9a574e18bdf8513a451f3ba6a4c4c3d61ba7"
+    },
+    {
+      "path": "tests/project-bug-sweep-events-1024.test.js",
+      "sha256": "f4bb5811749eee2bd926c6b66f03473ad78b9b53dd08f5c069469d3f9d49a7d3"
+    }
+  ],
+  "limits": [
+    "Focused automated contracts only; parent owns the combined isolated full gate, final staged snapshot, native/player evidence and Git synchronization.",
+    "Hub independently passed latest scenes with its real candidate-exhaustion focus assertions; its result is recorded by Hub."
+  ],
+  "factoriesAudit": {
+    "method": "rg createRunEventController|createRunEventRuntime over all tests/**/*.js; additionally checked createController alias",
+    "directConsumers": [
+      "tests/events-lazy-story-ownership.test.js",
+      "tests/hard-mode-event-integration.test.js",
+      "tests/project-bug-sweep-events-1024.test.js",
+      "tests/run-event-controller-ownership.test.js"
+    ],
+    "allUseSharedConcretePorts": true
+  }
+}

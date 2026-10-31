@@ -3,10 +3,21 @@ import { lastLampNarrative } from '../home/narrative.js';
 import { validateLastLampState } from '../home/story.last-lamp.js';
 
 let slot = null, status = 'all', query = '', storyRequest = 0;
-export function achievementFiltersHTML(meta) {
+const archiveBindings = new WeakMap();
+// Status is shared only within one render; the next render reads live services again.
+export function createAchievementStatusSnapshot(meta) {
+  const counts = { all:0, claimable:0, progress:0, done:0 };
+  const entries = meta.ACHIEVEMENTS.map(achievement => {
+    const unlocked = meta.isUnlocked(achievement), claimed = meta.isClaimed(achievement.id);
+    const status = claimed ? 'done' : unlocked ? 'claimable' : 'progress';
+    counts.all++; counts[status]++;
+    return { achievement, unlocked, claimed, status };
+  });
+  return { entries, counts };
+}
+export function achievementFiltersHTML(meta, snapshot = createAchievementStatusSnapshot(meta)) {
   if (slot !== window.SDT.Base.slot) { slot = window.SDT.Base.slot; status = 'all'; query = ''; }
-  const category = achievement => meta.isClaimed(achievement.id) ? 'done' : meta.isUnlocked(achievement) ? 'claimable' : 'progress';
-  return `<div class="archive-toolbar"><nav class="archive-status" aria-label="成就状态">${[['all', '全部'], ['claimable', '可领取'], ['progress', '未达成'], ['done', '已领取']].map(([id, name]) => `<button class="mini-btn${status === id ? ' ok' : ''}" data-act="archiveStatus" data-status="${id}" aria-pressed="${status === id}">${name} <small>${meta.ACHIEVEMENTS.filter(a => id === 'all' || category(a) === id).length}</small></button>`).join('')}</nav><input class="archive-search" aria-label="搜索成就名称与目标" placeholder="搜索成就或目标" value="${escAttr(query)}"></div><div class="archive-empty" role="status" hidden></div>`;
+  return `<div class="archive-toolbar"><nav class="archive-status" aria-label="成就状态">${[['all', '全部'], ['claimable', '可领取'], ['progress', '未达成'], ['done', '已领取']].map(([id, name]) => `<button class="mini-btn${status === id ? ' ok' : ''}" data-act="archiveStatus" data-status="${id}" aria-pressed="${status === id}">${name} <small>${snapshot.counts[id]}</small></button>`).join('')}</nav><input class="archive-search" aria-label="搜索成就名称与目标" placeholder="搜索成就或目标" value="${escAttr(query)}"></div><div class="archive-empty" role="status" hidden></div>`;
 }
 // A presentation snapshot for one synchronous render, never retained between opens.
 export function createAchievementProgressReader(base) {
@@ -30,6 +41,9 @@ export function achievementProgressText(id, base) {
 }
 export function bindArchive(ui, { openAchievements = () => /** @type {HTMLElement} */ (document.querySelector('#hubMain [data-act="hubCollectionView"][data-view="achievements"]'))?.click() } = {}) {
   storyRequest++;
+  const root = document.querySelector('#hubMain .hub-archive-v3');
+  const controller = new AbortController();
+  if (root) { archiveBindings.get(root)?.abort(); archiveBindings.set(root, controller); }
   const apply = () => {
     for (const row of document.querySelectorAll('#hubMain .ach-row[data-status]')) /** @type {HTMLElement} */ (row).hidden = (status !== 'all' && /** @type {HTMLElement} */ (row).dataset.status !== status) || (!!query.trim() && !row.textContent.includes(query.trim()));
     const empty = /** @type {HTMLElement} */ (document.querySelector('#hubMain .archive-empty'));
@@ -39,7 +53,7 @@ export function bindArchive(ui, { openAchievements = () => /** @type {HTMLElemen
     document.querySelector('#hubMain .archive-toolbar')?.dispatchEvent(new Event('archive-filter-change', { bubbles: true }));
   };
   apply();
-  document.querySelector('#hubMain .archive-search')?.addEventListener('input', event => { query = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (event.target).value; apply(); });
+  document.querySelector('#hubMain .archive-search')?.addEventListener('input', event => { query = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (event.target).value; apply(); }, { signal:controller.signal });
   ui.act('archiveReset', () => { status = 'all'; query = ''; const input = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (document.querySelector('#hubMain .archive-search')); if (input) input.value = ''; apply(); });
   ui.act('archiveStatus', data => { if (!['all', 'claimable', 'progress', 'done'].includes(data.status)) return; status = data.status; apply(); });
   ui.act('archiveLocate', data => {

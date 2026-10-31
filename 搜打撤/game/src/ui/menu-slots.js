@@ -101,6 +101,13 @@ export function createMenuSlotPicker({
         <p id="slotRestoreError" class="slot-restore-error" role="alert" aria-live="assertive" hidden></p>
         <div class="slot-deck">${cards.join('')}</div>
       </div>`, 'page');
+    // 每次进入都沿用首页当前壁纸层的图片来源，卡片继续使用原有切分与光效。
+    const title = document.getElementById('title');
+    const wallpaper = title?.querySelector(`[data-wallpaper-layer="${title.dataset.homeWallpaper}"]`);
+    const wallpaperImage = wallpaper && document.defaultView?.getComputedStyle(wallpaper).backgroundImage;
+    if (wallpaperImage && wallpaperImage !== 'none') {
+      /** @type {HTMLElement | null} */ (document.querySelector('.slot-page'))?.style.setProperty('--slot-wallpaper', wallpaperImage);
+    }
     let pickerActive = true;
     const pickerCurrent = page => pickerActive && !!page && page.isConnected && /** @type {import("./ui.dom.types.js").UIElement} */ (document.querySelector('.slot-page')) === page
       && !UI.el?.overlay?.hidden && !UI.el?.overlay?.classList.contains('closing');

@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 const { verifyPortable } = require('./verify-portable.cjs');
+const { buildNativePortable } = require('./build-native-portable.cjs');
 
 const projectDir = __dirname;
 const packageJson = require('./package.json');
@@ -26,7 +27,7 @@ function runBuilder() {
   return new Promise((resolve) => {
     const builder = path.join(projectDir, 'node_modules', '.bin', 'electron-builder.cmd');
     const child = spawn(process.env.ComSpec, [
-      '/d', '/c', builder, '--win', 'portable', `--config.directories.output=${stagingDir}`,
+      '/d', '/c', builder, '--win', '--dir', `--config.directories.output=${stagingDir}`,
     ], {
       cwd: projectDir,
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -59,6 +60,8 @@ async function main() {
   const startedAt = Date.now();
   const { status, error } = await runBuilder();
   mark(`builder done status=${status} error=${error ? error.message : 'none'}`);
+  if (status !== 0 || error) throw new Error(`electron-builder 失败：${error || status}`);
+  await buildNativePortable({ projectDir, stagingDir });
 
   const source = path.join(stagingDir, artifactName);
   const stat = fs.existsSync(source) ? fs.statSync(source) : null;

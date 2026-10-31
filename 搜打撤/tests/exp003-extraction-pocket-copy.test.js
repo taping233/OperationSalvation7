@@ -11,6 +11,7 @@ import SDT from '../game/src/core/sdt-facade.js';
 const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
 const bag = readFileSync('game/src/hub/game.bag.js', 'utf8') + readFileSync('game/src/hub/game.bag.view2.js', 'utf8');
 const departure = readFileSync('game/src/run/game-session-departure.js', 'utf8');
+const guide = readFileSync('game/data/beginner-guide.json', 'utf8');
 const render = html => { document.body.innerHTML = html; return document.body.textContent; };
 
 describe('EXP-003 撤离消耗区文案与规则一致', () => {
@@ -21,15 +22,14 @@ describe('EXP-003 撤离消耗区文案与规则一致', () => {
       expect(document.body.textContent).not.toContain('自动回收');
       expect(document.body.textContent).toContain('用钥匙复原后才能携带');
     }
-    expect(altar).toContain('消耗区逐张以 1/3 概率结算');
-    expect(bag).toContain('消耗区逐张以 1/3 概率结算');
-    expect(bag).toContain('初始攻击和职业卡即使掷中也不带回基地消耗区');
+    expect(guide).toContain('消耗区每张牌有三分之一概率带回');
+    expect(guide).toContain('初始攻击与职业卡不进入基地消耗区');
   });
 
   it('帮助区分概率保留、职业/初始攻击规则损失以及钥匙复原', () => {
     expect(altar).not.toContain('自动回收');
-    expect(altar).toContain('初始攻击与职业卡不能带回基地');
-    expect(altar).toContain('其余实际保留的卡进入基地消耗区，需用钥匙复原');
+    expect(guide).toContain('初始攻击与职业卡不进入基地消耗区');
+    expect(guide).toContain('仓库消耗区里的卡可花钥匙复原');
   });
 
   it('当前计数管线展示真实带回/散失，不把规则过滤卡算成待复原', () => {
@@ -57,10 +57,10 @@ describe('EXP-003 撤离消耗区文案与规则一致', () => {
   it('局内背包明确概率与钥匙，不承诺免费复原整袋', () => {
     expect(bag).not.toContain('免费复原');
     expect(bag).not.toContain('基地/火堆可复原');
-    expect(bag).toContain('消耗区逐张以 1/3 概率结算');
-    expect(bag).toContain('其余实际带回的牌可用钥匙复原');
-    expect(bag).toContain('每次随机复原最多 2 张；道具和装备不能在火堆复原');
-    expect(bag).toContain('能源结晶按消耗区顺序复原最多 3 张，也能复原道具和装备');
+    expect(guide).toContain('消耗区每张牌有三分之一概率带回');
+    expect(guide).toContain('仓库消耗区里的卡可花钥匙复原');
+    expect(guide).toContain('火堆随机复原最多 2 张普通消耗牌，道具和装备除外');
+    expect(guide).toContain('能源结晶能复原最多 3 张，结果受可用卡牌与容量限制');
     const previousCards=SDT.Cards;
     SDT.Cards={...previousCards,cardHTML:card=>card.name};
     try {

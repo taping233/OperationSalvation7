@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { resolve } from 'node:path';
 import postcss from 'postcss';
 import { beforeEach, describe, expect, it } from 'vitest';
@@ -14,8 +15,8 @@ function declarations(selector) {
   return values;
 }
 const model = { bagZone: 'bag', bagFilter: 'all', cap: 16, baseCap: 16, total: 0, safeUsedN: 0, sCap: 2, pkN: 0, used: 0, coins: 0, fragments: 0, tiles: [] };
-beforeEach(() => {
-  window.SDT = { UI: { helpBtn: id => `<button class="help-btn" data-help="${id}">?</button>` } };
+beforeEach(async () => {
+  await connectSdtFixture({ UI: {} });
   document.body.replaceChildren();
 });
 
@@ -52,11 +53,12 @@ describe('背包横屏布局与独立阅读区', () => {
     }
   });
 
-  it.each(['bag', 'safe', 'pocket'])('%s区保留计数、帮助入口和有名称的分区目标，主层不渲染解释段落', bagZone => {
+  it.each(['bag', 'safe', 'pocket'])('%s区保留计数和有名称的分区目标，主层不渲染解释段落', bagZone => {
     document.body.innerHTML = pageHTML({ ...model, bagZone, used:3, bagCardN:5, safeUsedN:1, safeCardN:2, sCap:6, pkN:7 });
     expect([...document.querySelectorAll('.bag-rlabel')].map(el => el.textContent)).toEqual(['背包', '安全格', '消耗区']);
     expect(document.querySelector('.bag-rz[data-zone="safe"]').dataset.act).toBe('bagZone');
-    expect(document.querySelector('.bag-title .help-btn').dataset.help).toBe('bag');
+    expect(document.querySelector('.bag-title .help-btn')).toBeNull();
+    expect(document.querySelector('.bag-title').textContent).toBeTruthy();
     expect(document.querySelector('.bag-rz[data-zone="bag"]').getAttribute('aria-label')).toBe('随身背包，3/16 格');
     expect(document.querySelector('.bag-rz[data-zone="safe"]').getAttribute('aria-label')).toBe('安全格，1/6 格');
     expect(document.querySelector('.bag-rz[data-zone="pocket"]').getAttribute('aria-label')).toBe('消耗区，7 张');

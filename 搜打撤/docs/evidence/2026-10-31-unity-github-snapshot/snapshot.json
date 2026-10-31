@@ -1,0 +1,16 @@
+{
+  "snapshotDirectory": "C:\\Users\\太平\\AppData\\Local\\Temp\\unity-github-snapshot-fzncta_t",
+  "branch": "codex/unity-unverified-20261031",
+  "includedFiles": 9072,
+  "excludedMedia": 396,
+  "sourceChangedDuringCopy": [
+    "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInventory.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs"
+  ],
+  "status": "pushed-unverified",
+  "commit": "73c145f41c1d1ea27a83c51821c41215f8e585e0",
+  "committedFileHashesChecked": 9072,
+  "committedFileHashMismatches": 0,
+  "remoteVerified": true,
+  "validation": "No build or tests run. Historical whitespace check failed; snapshot source preserved."
+}

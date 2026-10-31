@@ -75,10 +75,12 @@ export function createGameMenuPages(deps, shell) {
     terminalCommands,
     showTitle,
     openSettings: (...args) => settings.openSettings(...args),
+    openGuide: options => guide.openTitleGuide(options),
     document,
     readCards: () => SDT.Cards,
     readSound: () => SDT.Sound,
     readBattle: () => SDT.Battle,
+    readChests: () => SDT.Chests,
     readAgent: () => SDT.Agent
   });
   const dataPage = createMenuDataPage({

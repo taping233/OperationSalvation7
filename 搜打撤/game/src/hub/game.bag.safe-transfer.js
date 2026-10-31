@@ -1,10 +1,11 @@
-import { stackCapOf, stackTransferSlotDelta } from '../core/card-capacity.js';
+import { stackCapOf, stackTransferSlotDelta, bagCapacityState } from '../core/card-capacity.js';
 import { completeRunCheckpoint } from '../core/run-checkpoint.js';
 import { deriveBagRenderState } from '../core/bag-render-derivation.js';
 import { createOperationNotice } from '../ui/operation-notice.js';
 import { rewardSceneHTML } from '../ui/reward-scene-view.js';
 import { discoveryActionsHTML, bindDiscoverySelection } from '../ui/discovery-selection.js';
 import { esc, escAttr } from '../core/shared.js';
+import { setBagReturnHook } from './bag-return-hook.js';
 
 function safeEntryStacks(owned) {
   const groups = new Map();
@@ -22,20 +23,25 @@ function safeEntryStacks(owned) {
   return stacks;
 }
 
+function projectSafeTransfer(game, incoming, outgoing, baseCap) {
+  const intoSafe = new Set(incoming), intoBag = new Set(outgoing);
+  const ownedCards = game.ownedCards.map(entry => intoSafe.has(entry) ? { ...entry, safe:true }
+    : intoBag.has(entry) ? { ...entry, safe:false } : entry);
+  // A zone transfer keeps every container bonus; judge the complete final bag once.
+  const after = deriveBagRenderState({ ...game, ownedCards }, baseCap);
+  return { safeUsed:after.safeStacks.length, bag:bagCapacityState({ usedSlots:after.used,
+    ordinarySlots:after.ordinarySlots, baseCap, totalCap:after.cap }) };
+}
+
 // One visible safe slot goes out; the entire requested source stack goes in.
 export function planSafeCardSwap(game, incoming, outgoing, baseCap, safeCap) {
   const owned = game.ownedCards;
     if (!incoming.length || new Set(incoming).size !== incoming.length || !incoming.every(entry => owned.includes(entry) && !entry.safe && !entry.stored && !entry.pouchOf && entry.card.name === incoming[0].card.name)
       || !outgoing.length || new Set(outgoing).size !== outgoing.length || !outgoing.every(entry => owned.includes(entry) && entry.safe && !entry.stored && !entry.pouchOf)) return null;
   if (!safeEntryStacks(owned).some(stack => stack.length === outgoing.length && outgoing.every(entry => stack.includes(entry)))) return null;
-  const withoutIncoming = owned.map(entry => incoming.includes(entry) ? { ...entry, safe:true } : entry);
-  const projected = withoutIncoming.map(entry => outgoing.includes(entry) ? { ...entry, safe:false } : entry);
-  const beforeOut = deriveBagRenderState({ ...game, ownedCards:withoutIncoming }, baseCap);
-  const after = deriveBagRenderState({ ...game, ownedCards:projected }, baseCap);
-  if (after.safeStacks.length > safeCap || after.used > after.cap) return null;
-  // Resource-only extension slots cannot receive a new non-resource stack.
-  if (outgoing[0].card.type !== '资源' && after.used > beforeOut.used && after.used > baseCap) return null;
-  return { incoming, outgoing, bagUsed:after.used, safeUsed:after.safeStacks.length };
+  const after = projectSafeTransfer(game, incoming, outgoing, baseCap);
+  if (after.safeUsed > safeCap || !after.bag.capacityOk) return null;
+  return { incoming, outgoing, bagUsed:after.bag.usedSlots, safeUsed:after.safeUsed };
 }
 
 export function createSafeTransfer({ UI, game, shaName, bagCap, safeCap, usedSlots, safeUsed,
@@ -55,8 +61,13 @@ export function createSafeTransfer({ UI, game, shaName, bagCap, safeCap, usedSlo
     if (!list.length) return { list, reason:'这些卡牌已不在原位置，请返回背包重新选择。' };
     const delta = stackTransferSlotDelta(game.ownedCards, name, toSafe, list.length, stackCapOf(list[0].card));
     const used = toSafe ? safeUsed() : usedSlots(), limit = toSafe ? safeCap() : bagCap();
-    if (!toSafe && list[0].card.type !== '资源' && delta > 0 && used + delta > baseCap()) {
-      return { list, reason:'背包基础格不足：资源扩展格只能存放资源，请先腾出基础格。' };
+    if (!toSafe) {
+      const { bag } = projectSafeTransfer(game, [], list, baseCap());
+      if (bag.capacityOk) return { list, reason:'' };
+      if (bag.ordinarySlots > bag.baseCap) {
+        return { list, reason:'背包基础格不足：资源扩展格只能存放资源，请先腾出基础格。' };
+      }
+      return { list, reason:`背包放不下：移动整叠还需 ${delta} 格，当前 ${used}/${limit} 格。请先腾出空间。` };
     }
     return { list, reason:used + delta > limit ? `${toSafe ? '安全格' : '背包'}放不下：移动整叠还需 ${delta} 格，当前 ${used}/${limit} 格。请先腾出空间。` : '' };
   }
@@ -66,7 +77,7 @@ export function createSafeTransfer({ UI, game, shaName, bagCap, safeCap, usedSlo
     const plan = direct(name, toSafe), choices = toSafe && name !== shaName && plan.reason ? swaps(plan.list) : [];
     const blocked = plan.reason && !choices.length;
     notice.set(blocked ? plan.reason : '', 'warn');
-    return `<button class="ov-btn" data-act="${action}"${blocked ? ` disabled aria-disabled="true" title="${escAttr(plan.reason)}"` : ''}>${choices.length ? '换入安全格' : toSafe ? '移入安全格' : '移回背包'}</button>${notice.html({ keepEmpty:true })}`;
+    return `<button class="ov-btn" data-act="${action}"${blocked ? ` disabled aria-disabled="true" title="${escAttr(plan.reason)}"` : ''}>${choices.length ? '换入安全格' : toSafe ? '移入安全格' : '移回背包'} · 同名${plan.list.length}张</button>${notice.html({ keepEmpty:true })}`;
   }
   function moveCards(incoming, outgoing, toSafe) {
     if (outgoing) outgoing.forEach(entry => { entry.safe = false; });
@@ -148,27 +159,27 @@ export function createSafeTransfer({ UI, game, shaName, bagCap, safeCap, usedSlo
     notice.clear();
     beforeSelection(name); closeZoom();
     const token = {}; selection = token;
-    UI.showOverlay('换入安全格', rewardSceneHTML({
-      title:'选择换回背包的一叠', source:`换入：${name} ×${incoming.length}`,
-      cards:choices.map((plan, i) => `<article class="reward-unit"><button type="button" class="reward-card" data-act="safeSwapPick" data-i="${i}" aria-label="换出${escAttr(plan.outgoing[0].card.name)} ×${plan.outgoing.length}并换入${escAttr(name)}">${cardHTML(plan.outgoing[0].card)}</button><span>${esc(plan.outgoing[0].card.name)} ×${plan.outgoing.length}</span></article>`).join(''),
-      actions:discoveryActionsHTML({ cancelAct:'safeSwapCancel', confirmAct:'safeSwapConfirm', confirmLabel:'确认交换' }),
-      footer:notice.html({ keepEmpty:true }), count:choices.length, className:'reward-v14 reward-standalone-picker',
-    }), 'chest');
-    const root = UI.el.ovBody.firstElementChild;
+    /** @type {HTMLElement} */
+    let root;
+    let releaseSelection = () => {};
     const current = () => selection === token && sameRun() && game.ownedCards === cards && game.runActive
       && !game.battleActive && game.state === 'modal' && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing')
       && root?.isConnected && UI.el.ovBody.firstElementChild === root;
     const cancel = () => {
       if (!current()) return false;
       const finishCancel = result => {
-        if (result === false) return false;
+        if (result === false) { if (current()) registerReturn(); return false; }
         if (selection !== token || !sameRun() || game.ownedCards !== cards) return true;
         selection = null;
         const notified = options.onCancel?.();
         return notified && typeof notified.then === 'function' ? Promise.resolve(notified).then(() => true) : true;
       };
-      const result = refresh(true);
-      return result && typeof result.then === 'function' ? Promise.resolve(result).then(finishCancel) : finishCancel(result);
+      const failedReturn = error => { if (current()) registerReturn(); throw error; };
+      // The backpack retains its private reward/event source; it must not claim this picker.
+      setBagReturnHook(null);
+      let result;
+      try { result = refresh(true); } catch (error) { return failedReturn(error); }
+      return result && typeof result.then === 'function' ? Promise.resolve(result).then(finishCancel, failedReturn) : finishCancel(result);
     };
     const commit = data => {
       if (!current() || moving()) return false;
@@ -178,12 +189,41 @@ export function createSafeTransfer({ UI, game, shaName, bagCap, safeCap, usedSlo
       const plan = planSafeCardSwap(game, expected.map(item => item.entry), chosen.outgoing, baseCap(), safeCap());
       if (!plan) return warn('卡牌或容量已变化，无法交换；卡牌未移动。');
       return persistMove(plan.incoming, plan.outgoing, { ...options, beforeMove:null }, {
-        current, onSuccess:() => { if (selection === token) selection = null; },
+        current, onSuccess:() => {
+          if (selection !== token) return;
+          if (current()) setBagReturnHook(null);
+          selection = null;
+        },
       });
     };
-    bindDiscoverySelection({ UI, root, optionSelector:'[data-act="safeSwapPick"]', selectAct:'safeSwapPick',
-      confirmAct:'safeSwapConfirm', cancelAct:'safeSwapCancel', isCurrent:current,
-      onConfirm:commit, onCancel:cancel });
+    function registerReturn() {
+      setBagReturnHook(() => {
+        if (selection !== token || !sameRun() || game.ownedCards !== cards || !game.runActive
+            || game.battleActive || moving() || root.getAttribute('aria-busy') === 'true') return false;
+        mount();
+        return true;
+      });
+    }
+    function mount() {
+      const selectedIndex = root?.querySelector('[data-act="safeSwapPick"][data-discovery-selected="true"]')?.getAttribute('data-i');
+      releaseSelection();
+      UI.showOverlay('换入安全格', rewardSceneHTML({
+        title:'选择换回背包的一叠', source:`换入：${name} ×${incoming.length}`,
+        cards:choices.map((plan, i) => `<article class="reward-unit"><button type="button" class="reward-card" data-act="safeSwapPick" data-i="${i}" aria-label="换出${escAttr(plan.outgoing[0].card.name)} ×${plan.outgoing.length}并换入${escAttr(name)}">${cardHTML(plan.outgoing[0].card)}</button><span>${esc(plan.outgoing[0].card.name)} ×${plan.outgoing.length}</span></article>`).join(''),
+        actions:discoveryActionsHTML({ cancelAct:'safeSwapCancel', confirmAct:'safeSwapConfirm', confirmLabel:'确认交换' }),
+        footer:notice.html({ keepEmpty:true }), count:choices.length, className:'reward-v14 reward-standalone-picker',
+      }), 'chest');
+      root = UI.el.ovBody.firstElementChild;
+      const page = root;
+      const binding = bindDiscoverySelection({ UI, root, optionSelector:'[data-act="safeSwapPick"]', selectAct:'safeSwapPick',
+        confirmAct:'safeSwapConfirm', cancelAct:'safeSwapCancel', isCurrent:() => root === page && current(),
+        onConfirm:commit, onCancel:cancel });
+      releaseSelection = binding.release;
+      if (selectedIndex != null) binding.select(root.querySelector(`[data-act="safeSwapPick"][data-i="${selectedIndex}"]`));
+      // Resume the same offered cards and decision; confirmation still checks live identity and capacity.
+      registerReturn();
+    }
+    mount();
     return false; // A selection was opened; no cards moved and no reward may be claimed.
   }
   function move(name, toSafe, { refresh:repaint = true, uids = null, beforeMove = null, onCancel = null } = {}) {

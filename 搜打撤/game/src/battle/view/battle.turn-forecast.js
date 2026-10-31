@@ -1,5 +1,5 @@
 import * as Combat from '../core/combat.js';
-import { buildEnemyActionPlan } from '../core/battle.enemy-plan.js';
+import { buildEnemyActionPlan, findEnemyAttackGuard } from '../core/battle.enemy-plan.js';
 
 // 只读模拟当前防御；回合末触发与随机效果另有说明，不改变真实状态。
 export function forecastEnemyTurn(snapshot) {
@@ -22,7 +22,7 @@ export function forecastEnemyTurn(snapshot) {
     for (let i = 0; i < plan.hits; i++) {
       if (player.hp <= 0) break;
       if (Combat.isStealthed(player)) break;
-      const ally = allies.find(a => a.hp > 0);
+      const ally = findEnemyAttackGuard(allies);
       const hpBefore = player.hp;
       const result = Combat.dealDamage({ atk: foe.atk }, ally || player, 0, Combat.TYPES.ATTACK);
       if (!ally) {

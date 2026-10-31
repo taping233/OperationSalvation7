@@ -1,0 +1,18 @@
+{
+  "head": "9336c1df1e567f010cbdc6edbd4b2b40502b1482",
+  "project": "D:\\素材\\代号柒\\.tmp\\startup-portable-1027\\project",
+  "profile": "codename7-clean-20261027-0e86e8a6c6344138",
+  "profileAbsent": true,
+  "sourceKind": "HEAD runtime plus this task desktop startup overlays; other active uncommitted game work excluded",
+  "overlays": [
+    "main.js",
+    "preload.js",
+    "startup-window.cjs",
+    "startup-preload.cjs",
+    "startup.html",
+    "build-portable.cjs",
+    "build-native-portable.cjs",
+    "portable-launcher.cs"
+  ],
+  "artifact": "代号柒-v0.60.0-全屏加载-便携无存档-20261027.exe"
+}

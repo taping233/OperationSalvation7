@@ -126,7 +126,9 @@ function createBattleResolution(ports) {
     return min + Math.floor(randomBattle() * (Math.abs(max - min) + 1));
   }
 
-  function* resolveCardSteps(card, target, infused, fuelCost, uid) {
+  /** @param {Parameters<import('./battle.core-ports.types.js').ResolveCard['steps']>[5]} [execution] */
+  function* resolveCardSteps(card, target, infused, fuelCost, uid, execution = {}) {
+    const { onHandSelectDone } = execution;
     card = getHostedExecutionCard(card);
     // Direct resolution (e.g. ash overflow) bypasses execPlay but retains infusion waivers.
     infused = !!infused || hasInfusionWaiver(card, readState().allSpellsInfused);
@@ -525,7 +527,7 @@ function createBattleResolution(ports) {
         if (operation.op === 'damage') continue;
         const choice = choiceSemantics.resolveOperation(card, operation, ports);
         if (choice !== null) { did = choice || did; continue; }
-        const semantic = yield* resolveSemanticOperation(card, operation, target, ports, { uid, infused, fuelCost });
+        const semantic = yield* resolveSemanticOperation(card, operation, target, ports, { uid, infused, fuelCost, onHandSelectDone });
         if (semantic !== null) { did = semantic || did; continue; }
         if (operation.op === 'status' && operation.status === 'freeze' && operation.target === 'allEnemies' &&
             Number.isInteger(operation.duration) && operation.duration > 0) {
@@ -858,6 +860,7 @@ function createBattleResolution(ports) {
   }
 
   // 敌方回合与抽到即施放仍需要同步结算；玩家动作队列可逐段推进同一规则生成器。
+  /** @param {Parameters<import('./battle.core-ports.types.js').ResolveCard['steps']>} args */
   function resolveCard(...args) {
     // eslint-disable-next-line no-unused-vars -- _ 仅为把 resolveCardSteps 生成器驱动到底的占位，段值本就不消费
     for (const _ of resolveCardSteps(...args)) { /* 同步消费每段 */ }

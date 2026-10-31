@@ -24,7 +24,8 @@ export function bindDepartureDrag(pool, bag, { add, remove }) {
     const destination = a.from === pool ? bag : pool;
     const r = destination.getBoundingClientRect();
     if (event.clientX >= r.left && event.clientX <= r.right && event.clientY >= r.top && event.clientY <= r.bottom) {
-      (a.from === pool ? add : remove)(a.source.dataset.stackKey || a.source.dataset.name);
+      const key = a.from === pool ? a.source.dataset.stackKey : a.source.dataset.removeKey || a.source.dataset.stackKey;
+      (a.from === pool ? add : remove)(key || a.source.dataset.name);
     }
   };
   for (const host of [pool, bag]) {
@@ -35,7 +36,7 @@ export function bindDepartureDrag(pool, bag, { add, remove }) {
     host.addEventListener('pointerdown', event => {
       if (event.button !== 0 || active) return;
       const source = event.target.closest('[data-name][draggable="true"]');
-      if (!source || !host.contains(source) || source.classList.contains('drained')) return;
+      if (!source || !host.contains(source) || source.classList.contains('drained') || source.dataset.canAdd === 'false') return;
       const r = source.getBoundingClientRect();
       active = { source, from:host, id:event.pointerId, sx:event.clientX, sy:event.clientY, x:event.clientX, y:event.clientY, offsetX:event.clientX-r.left, offsetY:event.clientY-r.top, rect:r, clone:null };
       source.setPointerCapture(event.pointerId);

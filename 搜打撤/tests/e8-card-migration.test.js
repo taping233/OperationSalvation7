@@ -1,4 +1,5 @@
 import { battleRules, playerFields } from './helpers/environment-fixtures.js';
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import beforeCatalog from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
 
@@ -107,11 +108,13 @@ describe('E8 legacy BattleSession contract investigation (not migration benefit)
         BattleSession.commands.useItem('e8-card'); await idle();
         expect(resources(bagGame)).toEqual(untouched);
       }
-      BattleSession.commands.useItem(boss ? addTempCard(clone(card)) : 'e8-card'); await idle();
+      const itemUid = boss ? addTempCard(clone(card)) : 'e8-card';
+      BattleSession.commands.useItem(itemUid); await idle();
       expect(bagGame.hp).toBe(50 + card.heal);
       expect(bagGame.healCalls).toEqual([card.heal]);
-      expect(bagGame.ownedCards).toHaveLength(boss ? 1 : 0);
-      if (boss) expect(bagGame.ownedCards[0].card).toEqual(card);
+      expectBattleItemCommitted(bagGame, runtime, itemUid);
+      expect(bagGame.ownedCards).toHaveLength(1);
+      expect(bagGame.ownedCards[0].card).toEqual(card);
     }
   });
   it('keeps the actual STARTERS two-point bandage and an existing run copy legacy', async () => {
@@ -233,13 +236,15 @@ describe('E8 migrated rules against recorded legacy outcomes', () => {
           BattleSession.commands.useItem('e8-card'); await idle();
           expect(resources(bagGame)).toEqual(untouched);
         }
-        BattleSession.commands.useItem(boss ? addTempCard(clone(card)) : 'e8-card'); await idle();
+        const itemUid = boss ? addTempCard(clone(card)) : 'e8-card';
+        BattleSession.commands.useItem(itemUid); await idle();
         const heals = !status.healban;
         expect(bagGame.hp, JSON.stringify({ id, structured: !!card.rules, boss, hp, status,
           actualStatus: runtime.pstat.status, logs: bagGame.logs })).toBe(heals ? Math.min(100, hp + card.heal) : hp);
         expect(bagGame.healCalls).toEqual(heals ? [card.heal] : []);
-        expect(bagGame.ownedCards).toHaveLength(boss ? 1 : 0);
-        if (boss) expect(bagGame.ownedCards[0].card).toEqual(card);
+        expectBattleItemCommitted(bagGame, runtime, itemUid);
+        expect(bagGame.ownedCards).toHaveLength(1);
+        expect(bagGame.ownedCards[0].card).toEqual(card);
       }
       const textProbe = await start({ ...card, heal: 77, desc: '回复 3 点生命。' }, { hand: false });
       BattleSession.commands.useItem('e8-card'); await idle();

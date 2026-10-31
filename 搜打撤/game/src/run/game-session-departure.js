@@ -126,13 +126,13 @@ function newRun(mode, picks, options = {}) {
   const contextCurrent = () => readState().game === originGame && readState().activeSlot === slot && readServices().Base === base && base._selectionGeneration === baseGeneration && (slot == null || base.slot === slot);
   const originCurrent = () => readState().game.seed === seed && readState().game.state === originState && readState().game.discoveredPairs === originPairs;
   const current = () => contextCurrent() && originCurrent() && (!options.isCurrent || options.isCurrent());
-  const request = JSON.stringify([slot, mode, picks, !!options.skipClassChoice]);
+  const request = JSON.stringify([slot, mode, picks, !!options.skipClassChoice, options.characterId || null]);
   if (departureInFlight) return departureInFlight.request === request ? departureInFlight.promise : Promise.resolve(false);
   const generation = ++publicationGeneration;
   const persistence = slot ? createDeparturePersistence({
     storage: readStorage(), baseApi: readServices().Base, runStore: RunStorage, txKey: TX_KEY,
   }) : null;
-  const work = () => prepareNewRun(mode, picks, persistence, slot);
+  const work = () => prepareNewRun(mode, picks, persistence, slot, options);
   const promise = (persistence ? persistence.withLock(slot, current, work) : Promise.resolve(current() ? work() : false))
     .then(result => {
       if (result?.candidate) {
@@ -148,13 +148,22 @@ function newRun(mode, picks, options = {}) {
   return promise;
 }
 
-function prepareNewRun(mode, picks, persistence, slot) {
+function reportPendingRecovery(options, candidate) {
+  if (typeof options.onRecoveryRequired !== 'function' || !candidate?.recovery) return;
+  try { options.onRecoveryRequired({ ...candidate.recovery, picks: { ...candidate.recovery.picks } }); }
+  catch (error) { console.warn('[departure] 出征恢复提示未完成', error); }
+}
+
+function prepareNewRun(mode, picks, persistence, slot, options) {
   if (persistence) {
     const pending = persistence.pending(slot);
     if (!pending.ok) { readUI().log(`[[icon:cross]] ${pending.message}`, 'warn'); return false; }
     if (pending.value) {
       const result = persistence.recover(slot);
-      if (!result.ok) { readUI().log('[[icon:cross]] 出征存档尚未完成，请重试或重新进入档位继续恢复', 'warn'); return false; }
+      if (!result.ok) {
+        if (pendingDeparture?.slot === slot && pendingDeparture.runId === pending.value.runId) reportPendingRecovery(options, pendingDeparture);
+        readUI().log('[[icon:cross]] 出征存档尚未完成，请重试或重新进入档位继续恢复', 'warn'); return false;
+      }
       if (pendingDeparture?.slot === slot && pendingDeparture.runId === pending.value.runId) {
         const candidate = pendingDeparture;
         pendingDeparture = null;
@@ -174,15 +183,21 @@ function prepareNewRun(mode, picks, persistence, slot) {
   const before = { ...readState().game }, random = Random.snapshot(), logs = [];
   let candidate;
   try {
-    initializeNewRun(mode, departure, (...args) => logs.push(args));
+    initializeNewRun(mode, departure, (...args) => logs.push(args), options.characterId);
     const payload = createRunSavePayload({ freshRun: true });
     if (!payload) throw new Error('路线快照校验失败');
-    candidate = { slot, state: { ...readState().game }, random: Random.snapshot(), logs };
+    candidate = { slot, state: { ...readState().game }, random: Random.snapshot(), logs,
+      recovery: { mode, picks: { ...(picks || {}) }, characterId: options.characterId || null } };
     restoreDepartureState(before, random);
     if (persistence) {
       const committed = persistence.commit(slot, prepared.value, payload);
       if (!committed.result.ok) {
-        pendingDeparture = { ...candidate, runId: committed.runId };
+        const pending = persistence.pending(slot);
+        const journalWritten = committed.result.code === 'SAVE_FAILED_PENDING_RECOVERY'
+          || pending.ok && pending.value?.runId === committed.runId;
+        pendingDeparture = journalWritten
+          ? { ...candidate, runId: committed.runId } : null;
+        reportPendingRecovery(options, pendingDeparture);
         readUI().log('[[icon:cross]] 出征存档未完成，请重试；已开始的提交会从原出征继续恢复', 'warn');
         return false;
       }
@@ -197,7 +212,7 @@ function prepareNewRun(mode, picks, persistence, slot) {
 }
 
 // Only constructs candidate state. Persistence and all page/audio effects belong to newRun.
-function initializeNewRun(mode, departure, log) {
+function initializeNewRun(mode, departure, log, characterId = null) {
   readState().game.seed = Random.reseed();
   readState().game.mapSeed = readState().game.seed;
   readState().game.encounterRotationVersion = 1;   // 仅新局启用同层编组轮换；旧档缺省继续原遭遇。
@@ -222,6 +237,9 @@ function initializeNewRun(mode, departure, log) {
   readState().game.nodeChestRewards = {};
   readState().game.myClass = null;
   readState().game.characterId = null;
+  // Separate intent avoids the legacy characterId migration marking this
+  // character as granted before the existing confirmation stage runs.
+  readState().game.departureCharacterId = characterId || null;
   readState().game.classCard = null;
   readState().game.coins = modeCfg().startCoins || 0;
   readState().game.maxHp = MAP.rules.playerMaxHp;

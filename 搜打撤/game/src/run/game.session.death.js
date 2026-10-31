@@ -6,12 +6,15 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { runTerminalSettlement } from '../ui/terminal-settlement.js';
+import { collectRescueCards } from '../hub/run-rescue-cards.js';
 import { characterName } from '../core/characters.js';
 import { firstExploreMoves } from '../hub/extraction.commands.js';
 import { esc } from '../core/shared.js';
 import { uiDisclosure } from '../ui/ui-disclosure.js';
 import { uiDecisionFacts } from '../ui/ui-decision.js';
 import { bindSettlementActions, settlementReportHTML } from '../ui/settlement-report.js';
+import { buildRunMemento } from './run-memento.js';
+import { runMementoHTML } from '../ui/run-memento-view.js';
 
 // 终局失败车队横幅（LEG-6b，2026-09-26 W1 批件）：挂「撤离失败」终局页顶部作正脸
 // 结算演出（判负撤离与倒下共用本页，均为失败语义）。素材只读引用，不改结算语义。
@@ -60,6 +63,7 @@ export function buildDeathReceipt({ game, rescuedCards }) {
   const rescuedCount = rescuedList.reduce((n, c) => n + (c.count || 1), 0);
   const lostCards = cardsAfterRescue(game.ownedCards || [], rescuedList);
   const pocketLost = (game.usedPocket || []).reduce((n, s) => n + (s.count || 1), 0);
+  const memento = buildRunMemento(game, rescuedList);
   return {
     version: 1,
     outcome: 'death',
@@ -67,6 +71,7 @@ export function buildDeathReceipt({ game, rescuedCards }) {
     layersReached: Number.isInteger(game.layerIdx) ? game.layerIdx + 1 : null,
     actions: Math.max(0, (Number(game.turn) || 0) - 1),
     firstExplore: { moves: firstExploreMoves(game), xp: 0 },
+    ...(memento ? { memento } : {}),
     netTake: {
       cardsStashed: rescuedCount,   // 抢运入库张数（与 applyCards 提交清单一致）
       pocketKept: 0,
@@ -132,12 +137,8 @@ export function createDeathSettlement({
     // 注意 classSummary(cls) 返回全职业数组（meta.js 按 classList().map），须 .find 取本职业。
     const cls = game.myClass;
     const sumBefore = cls ? SDT.Meta.classSummary(cls).find(c => c.cls === cls) : null;
-    const boxSafe = game.ownedCards.some(o => o.safe && o.card && o.card.id === pearlBoxId);
     const saved = cardStacks(true);
-    // 珍珠盒抢运只覆盖盒中资源（stored 且非 pouchOf）：锦囊（pouchOf）不在盒中，其宿主锦囊
-    // 不安全时里面的法术随锦囊一起丢——此前只看 stored&&boxSafe，把不安全锦囊里的法术
-    // 也错误抢运回基地（09-30 深审 ROOT-05）
-    const cards = game.ownedCards.filter(o => o.safe || (o.stored && !o.pouchOf && boxSafe)).map(o => ({ card: o.card, count: 1 }));
+    const cards = collectRescueCards(game.ownedCards, { pearlBoxId });
     const token = { kind: 'death', generation, slotId, cards, deathClass: game.myClass, saved, lost, why,
       deathCause: battleSummary ? 'battle' : reason || game.surrenderedRun ? 'nonBattle' : 'unknown',
       partnerName: sourceBase?.carriedPet?.()?.name || '随行伙伴',
@@ -176,7 +177,7 @@ export function createDeathSettlement({
         game.runActive = false;
         game.surrenderedRun = false;
         // 跑局统计沿原快照，结果重显只重建页面。
-        SDT.Agent?.recorder?.recordRun('death', { why: token.why, deathCause: token.deathCause, savedCards: token.saved, receipt: token.receipt });
+        SDT.Agent?.recorder?.recordRun('death', { why: token.why, deathCause: token.deathCause, savedCards: token.cards, receipt: token.receipt });
         SDT.Sound.sfx('extractionFail');
         SDT.Sound.music('title');
         if (token.ephemeral) {
@@ -229,6 +230,7 @@ export function createDeathSettlement({
           </div>
           ${battleReviewHTML(token)}
           ${xpRow}
+          ${runMementoHTML(token.receipt?.memento, { failed:true })}
           ${uiDisclosure({label:'物资明细与保留规则',className:'settlement-details',content:`
             <div class="settlement-details-body">
               ${lossDetails}

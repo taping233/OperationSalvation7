@@ -17,6 +17,7 @@ describe('插画节点公共组件', () => {
   it('选中只改变阅读状态，确认在选中项内，原动作仅执行一次', () => {
     const page = host(eventSceneHTML({tone:'event',title:'矿井',layer:0,body:'<button class="evt-opt" data-act="search"><b>搜寻</b><span>获得 3 币</span></button><button class="evt-opt" data-act="breach"><b>冒险挖深</b><span>损失 3 生命</span></button>'}));
     const root = page.firstElementChild, action = vi.fn();
+    document.body.append(page);
     wireEventChoiceSelection(root, 'shared-component-test');
     page.addEventListener('click', event => { const button = event.target.closest('.evt-opt'); if (button) action(button.dataset.act); });
     const [search, breach] = root.querySelectorAll('.evt-opt'), confirm = root.querySelector('.event-choice-confirm');
@@ -26,6 +27,7 @@ describe('插画节点公共组件', () => {
     breach.click(); expect(confirm.closest('.illustrated-choice-unit').querySelector('.evt-opt')).toBe(breach);
     expect(root.querySelectorAll('.event-choice-confirm')).toHaveLength(1);
     confirm.click(); confirm.click(); expect(action).toHaveBeenCalledExactlyOnceWith('breach');
+    page.remove();
   });
   it('火堆沿用各自的使用与容量禁用条件，虚影语义不同', () => {
     const page = host(eventSceneHTML({tone:'fire',title:'营火',layer:0,body:fireRestDecisionHTML({heal:10,hp:40,maxHp:40,hpFull:true,chance:30,restorable:3,fits:false,capacity:'16/16'})}));

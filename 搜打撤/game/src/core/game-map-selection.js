@@ -116,7 +116,7 @@ export function createGameMapSelection({ readState, readServices, UI, MAP,
       UI.log('[[icon:door]] 领完入城补给后才能前往其他地点', 'warn');
       return;
     }
-    UI.showTooltip(e.clientX - r.left, e.clientY - r.top, `${hoverInfo(n)[0]} · 暂不可达`, ['路线中间须为已知的空白、已领完补给的入口或已完成节点']);
+    UI.showTooltip(e.clientX - r.left, e.clientY - r.top, `${hoverInfo(n)[0]} · 暂不可达`, ['路线可穿过已知空白、已领完补给的入口，以及内容已结束或已结算的节点']);
     UI.log('该节点没有可连续通行的已知路线', 'warn');
   }
 

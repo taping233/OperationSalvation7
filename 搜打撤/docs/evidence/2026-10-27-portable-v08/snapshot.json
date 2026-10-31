@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-27T12:27:41.348Z",
+  "head": "9336c1df1e567f010cbdc6edbd4b2b40502b1482",
+  "sourceKind": "Current working tree including completed uncommitted files; no HEAD substitutions",
+  "project": "D:\\素材\\代号柒\\.tmp\\portable-v08-1027\\project",
+  "artifact": "代号柒-v0.8.0-便携无存档-20261027.exe",
+  "profile": "codename7-clean-20261027-cb1889a300f0408e",
+  "profileAbsent": true,
+  "inputFileCount": 4551,
+  "inputBytes": 312409594,
+  "manifest": "../.tmp/portable-v08-1027/inputs.json",
+  "manifestSHA256": "38420c41d3530abbcf5a0964950d766ef89f0b7d0843d82fab72231d5cf0835c",
+  "acquisition": "node ../.tmp/portable-v08-1027/prepare.cjs"
+}

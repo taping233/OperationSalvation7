@@ -205,7 +205,7 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   if (cam?.frameMode !== 'travel') {
     cam?.setDetailInset?.(name ? cam.viewW * (570 / 1920) : 0, { deferFrame:true });
   }
-  const actionLabel = completedLocal ? content.id === 'shop-closed' ? '本店交易已结束' : '本地内容已完成'
+  const actionLabel = completedLocal ? content.id === 'shop-closed' ? '本店交易已结束' : `本地内容${content.label}`
     : pending ? isCurrent ? '继续领奖' : '前往领奖'
       : isCurrent && selectedDoor ? '查看闸门'
         : content.id === 'shop-open' ? isCurrent ? '进入商店' : '前往商店'

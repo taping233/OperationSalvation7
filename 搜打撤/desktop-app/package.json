@@ -1,7 +1,7 @@
 {
   "name": "codename7-soudache",
   "productName": "搜打撤·代号7",
-  "version": "0.60.0",
+  "version": "0.8.0",
   "description": "搜打撤 · 代号7 桌面版",
   "main": "main.js",
   "author": "taping",
@@ -13,7 +13,7 @@
     "start": "electron .",
     "predist": "npm run check:runtime && npm run check:version",
     "dist": "npm run build:game && node build-portable.cjs",
-    "build:game": "npm run build --prefix .."
+    "build:game": "npm run build --prefix .. && node build-native-portable.cjs --prepare"
   },
   "devDependencies": {
     "electron": "44.1.0",

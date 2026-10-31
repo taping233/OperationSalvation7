@@ -17,7 +17,7 @@ import {
   battleRestartCheckpoint, tmpSeq, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
   set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
 } from '../runtime/battle.runtime.js';
-import { getTriggerSnapshot, requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, handUnplayableReason as unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, cancelDiscover, slamSkill } from './battle.engine.js';
+import { getTriggerSnapshot, requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, endRun, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, handUnplayableReason as unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, cancelDiscover, slamSkill } from './battle.engine.js';
 import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
 import { configureBattleEngine, getCardPlayAvailability, submitCardPlay } from './battle.engine.js';
 import { endTurn, surrender } from './battle.enemy-phase.js';
@@ -45,11 +45,13 @@ configureBattleEngine({
 // 祝福挂上反馈钩（音频 P2#6）：addBlessing 生效即响，敌我通用——敌人强化同样是可听信息
 COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
 /* ============================================================
- * 搜打撤 v0.24 —— M1 两类战斗（多敌人 + 拖拽选目标 + BOSS 词缀 + 词条时点体系）
+ * 普通战与首脑战共用出牌、牌区与词条时点。
  *
- * 【普通战斗（小怪/遭遇战）】无需抽牌：
- *   随身全部可用卡（含道具卡）直接作为手牌，打出的卡本场不可再用；
- *   每回合固定 2 费（rules.battleEnergy）；
+ * 【普通战斗（小怪/遭遇战）】
+ *   随身可用牌直接入手，开战装备与道具由各自入口接管；
+ *   按规则建立临时初始攻击牌库，开局与每回合开始不自动抽牌；
+ *   抽牌效果从当前牌库取牌，消耗牌由明确卡牌效果取回；
+ *   每回合基础 2 费（rules.battleEnergy）。
  * ============================================================ */
   // Combat 已改为 ESM 直接导入；SDT.Cards / SDT.MAP 仍走兼容门面（待后续收敛）
 
@@ -454,6 +456,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     cancelInfusion: cancelInfuse,
     endTurn,
     flee,
+    endRun,
     surrender,
     openGrave,
     openDeckView,

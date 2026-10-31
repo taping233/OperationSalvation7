@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-summoner",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a18284-7559-7473-a891-f50ff09fd8d8\\exec-3ba27a85-9317-4680-8bd7-47a80d6ae000.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-28-blooms-swap/cards-hero-summoner-source.png",
+        "bytes": 1924086,
+        "sha256": "40d20e8ab7c0c45f702afd88434d5a43025fb787ed8b6f17382b90d4ef20d8aa"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-28-blooms-swap/cards-hero-summoner-full-before.webp",
+          "bytes": 159064,
+          "sha256": "e3725554a628f96c4e3b10460aa8e05e7254d307338c4bc2a9c9dc2cf0b876cc"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-28-blooms-swap/cards-hero-summoner-thumb-before.webp",
+          "bytes": 23148,
+          "sha256": "dcd6b61941c5943f5d1fcfba37df2e1857021592792211f2a8362548e474faf2"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-summoner.webp",
+          "bytes": 146820,
+          "sha256": "fd6c6f95ca9114190c280f4c072b7ac6d1003ca57c3cfa45b1e6103ce6bdfac9",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-summoner.webp",
+          "bytes": 22992,
+          "sha256": "1d163184deebdea57b32bb0edf8a2df242bf71e116463b6bba7d74bc3cdd6a42",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "baita-one-eye-twin-gold-bars-20261024",
+      "revision_after": "baita-flower-halves-swapped-20261028",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/hero-summoner.webp",
+            "ext": "webp",
+            "bytes": 159064,
+            "license": "项目自有（自制/AI 生成）",
+            "sha256": "e3725554a628f96c4e3b10460aa8e05e7254d307338c4bc2a9c9dc2cf0b876cc",
+            "source": "docs/evidence/2026-10-24-baita-one-eye-fix/receipt.json"
+          },
+          "after": {
+            "path": "cards/hero-summoner.webp",
+            "ext": "webp",
+            "bytes": 146820,
+            "license": "项目自有（自制/AI 生成）",
+            "sha256": "fd6c6f95ca9114190c280f4c072b7ac6d1003ca57c3cfa45b1e6103ce6bdfac9",
+            "source": "docs/evidence/2026-10-28-blooms-swap/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-summoner.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 23148,
+            "sha256": "dcd6b61941c5943f5d1fcfba37df2e1857021592792211f2a8362548e474faf2",
+            "source": "docs/evidence/2026-10-24-baita-one-eye-fix/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-summoner.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 22992,
+            "sha256": "1d163184deebdea57b32bb0edf8a2df242bf71e116463b6bba7d74bc3cdd6a42",
+            "source": "docs/evidence/2026-10-28-blooms-swap/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1750,
+  "manifest_count_after": 1750
+}

@@ -5,8 +5,9 @@ const regions = [
   { uid: '7', left: 100, right: 260, top: 200, bottom: 440 },
   { uid: '8', left: 180, right: 340, top: 200, bottom: 440 },
 ];
-it('uses original paint order in overlaps regardless of the incoming native hover identity', () => {
-  for (const actualUid of ['5', '7', '8']) expect(resolveHandHit({ regions, x: 220, y: 300, actualUid })).toEqual({ uid: '8', route: 'static-region' });
+it('uses the painted face in overlaps and falls back to static slots without a native face', () => {
+  for (const actualUid of ['7', '8']) expect(resolveHandHit({ regions, x: 220, y: 300, actualUid })).toEqual({ uid:actualUid, route:'visible-card' });
+  expect(resolveHandHit({ regions, x:220, y:300, actualUid:null })).toEqual({ uid:'8', route:'static-region' });
 });
 it('keeps exclusive visible strips on their own card', () => {
   expect(pickStaticHandRegion(regions, 179, 300)).toBe('7');
@@ -23,7 +24,7 @@ it('preserves real control ownership even within another static card region', ()
   expect(resolveHandHit({ regions, x: 220, y: 300, actualUid: '7', interactive: true })).toEqual({ uid: '7', route: 'control' });
 });
 it('retains real raised-card reading outside the static band', () => {
-  expect(resolveHandHit({ regions, x: 220, y: 170, actualUid: '7' })).toEqual({ uid: '7', route: 'outside-reading' });
+  expect(resolveHandHit({ regions, x: 220, y: 170, actualUid: '7' })).toEqual({ uid: '7', route: 'visible-card' });
   expect(resolveHandHit({ regions, x: 20, y: 170, actualUid: null })).toEqual({ uid: null, route: 'outside-reading' });
 });
 it('defaults to the original policy and shares the resolver across ordinary hover/down logging', () => {
@@ -32,7 +33,7 @@ it('defaults to the original policy and shares the resolver across ordinary hove
   expect(html).toContain('<option value="original">原命中</option><option value="fixed">固定选牌区域</option>');
   expect(js).toContain('createPointerLog(body,output,policyForEvent)');
   expect(js).toContain("if(policySelect.value==='fixed')policyForEvent(e)");
-  expect(js).toContain("'button,[data-term],.hsc-desc,input,select,textarea,a'");
+  expect(js).toContain("'button,input,select,textarea,a'");
 });
 
 it('keeps the continuous visible-strip to infusion route while preserving the central fixed selection point', () => {
@@ -43,7 +44,7 @@ it('keeps the continuous visible-strip to infusion route while preserving the ce
   for (const [x,y] of [[718,515],[745,500],[771,480],[784,471]]) {
     expect(resolveHandHit({ regions, x,y, actualUid:'7',ownerUid:'7',accessBands }).uid).toBe('7');
   }
-  for (const actualUid of ['7','8']) expect(resolveHandHit({regions,x:792,y:553,actualUid,ownerUid:'7',accessBands})).toEqual({uid:'8',route:'static-region'});
+  for (const actualUid of ['7','8']) expect(resolveHandHit({regions,x:792,y:553,actualUid,ownerUid:'7',accessBands})).toEqual({uid:actualUid,route:'visible-card'});
 });
 it('derives stable access bounds during lift, excludes zero-size controls and does not extend beyond card width', () => {
   const args={uid:'7',left:100,right:260,raisedTop:200,restDrop:64};

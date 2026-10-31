@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "github-sync",
+  "date": "2026-11-01",
+  "owner": "Friday",
+  "goal": "复核Unity与已完成未提交范围，通过一次验收后提交并同步GitHub，回读远端SHA",
+  "paths": [
+    "docs/evidence/2026-11-01-github-sync"
+  ],
+  "doneWhen": [
+    "确认完成归属、排除在途待决及本地中间物",
+    "源码和产物指纹与本次原生及领域验收一致",
+    "候选按子系统提交并推送GitHub，远端SHA回读一致"
+  ],
+  "stage": "doing",
+  "checks": [],
+  "unverified": [],
+  "updatedAt": "2026-10-31T20:21:48.831Z"
+}

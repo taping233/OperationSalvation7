@@ -69,7 +69,8 @@ export function useBagItemOperations(card, ownedIndex, operations, {
     addCoins(amount) { game.coins += amount; coins += amount; },
     addItem(template, amount) {
       const counts = new Map((inventory || []).map(entry => [entry, entry.count]));
-      try { game.addItem(template, amount, { deferFeedback:feedback => notices.push(feedback) }); }
+      let receipt;
+      try { receipt = game.addItem(template, amount, { deferFeedback:feedback => notices.push(feedback) }); }
       finally {
         for (const entry of inventory || []) {
           const delta = entry.count - (counts.get(entry) || 0);
@@ -77,6 +78,7 @@ export function useBagItemOperations(card, ownedIndex, operations, {
           if (!counts.has(entry)) newItems.add(entry);
         }
       }
+      return receipt !== null && receipt !== false;
     },
     choose(name, select) {
       if (!plan.choices.has(name)) {
@@ -111,10 +113,9 @@ export function useBagItemOperations(card, ownedIndex, operations, {
       }
     }
   };
-  const fail = () => {
+  const fail = (message = '使用未能保存；本次道具与效果已恢复，请重试。') => {
     rollback();
     if (ownsView()) {
-      const message = '使用未能保存；本次道具与效果已恢复，请重试。';
       try { setReceipt(message, 'warn'); } catch { /* The original source remains available. */ }
       try { UI.log(message, 'warn'); } catch { /* Feedback cannot change the failed result. */ }
     }
@@ -149,8 +150,10 @@ export function useBagItemOperations(card, ownedIndex, operations, {
     release(); return true;
   };
   try {
-    executeBagItemEffects(card, operations, { game, SDT, Random, usedSlots, bagCap, canReplace, canReceive, items }, transaction);
-  } catch { return fail(); }
+    if (executeBagItemEffects(card, operations, { game, SDT, Random, usedSlots, bagCap, canReplace, canReceive, items }, transaction) === false) {
+      return fail('物资放不下，本次道具与效果已恢复；整理背包后可再使用。');
+    }
+  } catch { return fail('本次使用未完成，道具与效果已恢复；可重试。'); }
   if (!ownsState()) { release(); return false; }
   if (!consumed) {
     if (!receipts.length) transaction.report(`道具卡【${card.name}】的结构化背包用法无效；卡牌未消耗。`, 'warn');

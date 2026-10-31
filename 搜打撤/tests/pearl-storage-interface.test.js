@@ -1,4 +1,4 @@
-import { runPendingFields } from './helpers/environment-fixtures.js';
+import { connectSdtFixture, runPendingFields } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -17,8 +17,8 @@ function open() {
 
 beforeAll(async () => {
   document.body.innerHTML = readFileSync('game/index.html', 'utf8');
-  window.SDT = { Icons: { img: () => '', rich: String, TYPE_ART: {} },
-    Sound: { music() {}, sfx: vi.fn(), setDucked() {} }, FX: { feedback() {} } };
+  await connectSdtFixture({ Icons: { img: () => '', rich: String, TYPE_ART: {} },
+    Sound: { music() {}, sfx: vi.fn(), setDucked() {} }, FX: { feedback() {} } });
   await import('../game/src/cards/cards.js');
   await import('../game/src/ui/ui.js');
   await import('../game/src/hub/base.js');
@@ -52,7 +52,7 @@ describe('珍珠盒可读存取界面', () => {
     open();
     expect(session.bagCap()).toBe(18);
     const before = JSON.stringify(game.ownedCards);
-    await UI._acts.pearlPut({ name:wood.name });
+    await UI._acts.pearlPut({ ...button('pearlPut', wood.name).dataset });
     expect(JSON.stringify(game.ownedCards)).toBe(before);
     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('1/2'), 'warn');
   });
@@ -81,6 +81,8 @@ describe('珍珠盒可读存取界面', () => {
   it('正常按钮存取整叠，盒中计数更新且安全格保护与UID原样保留', async () => {
     // 构造已在安全格的标记，确认存取展示和回调不会改变现有保护归属。
     game.ownedCards.find(o => o.card.id === pearl.id).safe = true;
+    showBackpack(true); UI._acts.bagZone({ zone:'safe' });
+    UI._acts.inspectStack({ name:pearl.name, safe:'1' }); UI._acts.pearlStoreZoom();
     const before = game.ownedCards.map(o => o.uid);
     button('pearlPut', wood.name).click(); await settleContainer();
     expect(game.ownedCards.filter(o => o.card.id === wood.id && o.stored)).toHaveLength(2);
@@ -115,7 +117,7 @@ describe('珍珠盒可读存取界面', () => {
     expect(JSON.stringify(game.ownedCards)).toBe(before);
     expect(document.activeElement).toBe(focus); expect(UI.log).not.toHaveBeenCalled();
     // 绕过禁用按钮调用当前动作时，执行层仍须拒绝整叠。
-    await UI._acts.pearlPut({ name:wood.name });
+    await UI._acts.pearlPut({ ...target.dataset });
     expect(JSON.stringify(game.ownedCards)).toBe(before); expect(document.activeElement).toBe(focus);
     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('珍珠盒放不下'), 'warn');
   });

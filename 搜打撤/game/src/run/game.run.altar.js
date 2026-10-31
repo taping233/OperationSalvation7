@@ -1,4 +1,5 @@
-import { roomFooterHTML } from '../ui/room-footer.js';
+import { beginRoomSave, roomFooterHTML } from '../ui/room-footer.js';
+import { claimEncounterOpening, encounterOpeningHTML } from '../ui/encounter-presentation.js';
 import { createRoomActions, createRoomCheckpoint } from '../ui/room-actions.js';
 import { discoveryActionsHTML } from '../ui/discovery-selection.js';
 /* ============================================================
@@ -18,7 +19,7 @@ import { altarRitualHTML, altarRewardHTML } from '../ui/node-decision-view.js';
 import { fireRestDecisionHTML, initFireRestPreview } from '../ui/fire-rest-view.js';
 import { playFireRestFeedback } from '../ui/fire-rest-feedback.js';
 import { afterOutcomeFeedback } from '../ui/outcome-feedback.js';
-import { rewardSceneHTML, rewardCardUnitHTML, rewardClaimHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
+import { patchRewardScene, restoreRewardActionFocus, rewardSceneHTML, rewardCardUnitHTML, rewardClaimHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
 import { altarFragmentChoiceAt, claimEntrySupply, claimResourceReward, entrySupplyAt, nodeActionBinding, nodeContentEndedAt, reserveAltarFragmentChoice } from './node-reward-state.js';
 import { beginNodeRestore, nodeRestoreAt } from './node-restore-state.js';
 import { bagSlots } from '../hub/game.bag.bridge.js';
@@ -27,6 +28,7 @@ import { esc, escAttr } from '../core/shared.js';
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import { MAP, MODES, bagCap, curLayer, enterLayer, game, getActiveSlot, newUid, saveGame, scaledEnemy, usedSlots } from './game.session.js';
 import { buildExtractionReceipt, createExtractionCommands, extractionPocketOutcome, extractionSourceKey, validatePendingExtraction } from '../hub/extraction.commands.js';
+import { canSacrificeCard } from '../hub/sacrifice-policy.js';
 import { openBaseHub } from '../hub/game.hub.js';
 import { extractionDoneHTML, extractionStashHTML, extractionRarityRank } from '../ui/extraction-rewards-view.js';
 import { updateExtractionStash } from '../ui/extraction-stash-update.js';
@@ -39,7 +41,7 @@ import { emergencyExitScene, emergencySacrificeHeader } from '../ui/emergency-ex
 import { Sfx, _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { Random, SeededRandomService } from '../core/random.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
-import { FIRE_RESTORABLE, cancelLegacyChainMove, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openFixedRewardsOnCell, openPocketRestore, openShop } from './game.run.scenes.js';
+import { FIRE_RESTORABLE, cancelLegacyChainMove, consumeCurrentCell, enterNode, finishInstant, finishSavedInstant, grantEventCard, nodeOpt, nodeShell, openFixedRewardsOnCell, openPocketRestore, openShop } from './game.run.scenes.js';
 import { RunStorage } from '../hub/game.storage.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/recovery.commands.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
@@ -91,17 +93,14 @@ function saveAltarProgress(complete) {
   return checkpoint.run();
 }
 function closeAltarPage() {
-  setBagReturnHook(null); game.state = 'idle';
-  altarFeedback(() => UI.hideOverlay());
-  altarFeedback(() => UI.refresh(game));
-  return true;
+  return finishSavedInstant();
 }
 function leaveAltar() {
   if (game.chainMove) altarFeedback(() => cancelLegacyChainMove());
   return saveAltarProgress(closeAltarPage);
 }
 
-export function openFireRest(after = finishInstant) {
+export function openFireRest(after = finishSavedInstant) {
   if (nodeContentEndedAt(game)) return false;
   const cellKey = `${game.layerIdx},${game.trackPos}`;
   const runOwner = game.discoveredPairs, slotOwner = getActiveSlot();
@@ -112,26 +111,37 @@ export function openFireRest(after = finishInstant) {
   // Older fire receipts already granted both effects; they never reopen either action.
   const used = key => !!record && (record.healUsed === undefined || record[key] === true);
   const complete = () => used('healUsed') && used('restoreUsed');
-  let resolving = false, saveFailed = false;
+  let resolving = false, saveFailed = false, leaveSaved = false, continueFailed = false;
   let currentPage = () => false;
   const currentFire = () => `${game.layerIdx},${game.trackPos}` === cellKey && game.state === 'modal'
     && game.discoveredPairs === runOwner && getActiveSlot() === slotOwner;
   const leave = async () => {
-    if (resolving) return;
+    if (resolving) return false;
     const ownsPage = currentPage;
-    if (complete()) { record.continued = true; consumeCurrentCell(); }
+    if (complete() && !record.continued) {
+      record.continued = true; consumeCurrentCell(); leaveSaved = false;
+    }
     resolving = true;
-    try { saveFailed = !await saveRunCheckpoint(saveGame); }
-    finally { resolving = false; }
-    if (!currentFire() || !ownsPage()) return;
-    if (saveFailed) { render(); return; }
-    setBagReturnHook(null); UI.hideOverlay(); after(complete());
+    try {
+      if (!leaveSaved) {
+        leaveSaved = await saveRunCheckpoint(saveGame);
+        saveFailed = !leaveSaved;
+      }
+      if (!currentFire() || !ownsPage()) return false;
+      if (saveFailed) { render(); return false; }
+      continueFailed = false;
+      try {
+        if (await after(complete()) !== false) return true;
+      } catch (error) { console.warn('[fire] 休整进度已保存，继续流程未完成', error); }
+      if (currentFire() && ownsPage()) { continueFailed = true; render(); }
+      return false;
+    } finally { resolving = false; }
   };
   const retrySave = async () => {
     if (resolving) return;
     const ownsPage = currentPage;
     resolving = true;
-    try { saveFailed = !await saveRunCheckpoint(saveGame); }
+    try { leaveSaved = await saveRunCheckpoint(saveGame); saveFailed = !leaveSaved; }
     finally { resolving = false; }
     if (currentFire() && ownsPage()) render();
   };
@@ -147,8 +157,8 @@ export function openFireRest(after = finishInstant) {
       body:fireRestDecisionHTML({ heal:MAP.rules.fireHeal, chance:Math.round(MAP.rules.fireClassCardChance * 100),
         hp:game.hp, maxHp:game.maxHp, restorable, fits, capacity:game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`,
         healUsed:used('healUsed'), restoreUsed:used('restoreUsed'), hpFull:game.hp >= game.maxHp,
-        hpGain:record?.hpGain || 0, restoredCount:restored.length }) + receipt + (saveFailed ? '<p class="reward-notice" role="status">休整效果已生效，进度未保存，请重试保存后离开。</p><button type="button" data-act="fireRetrySave">重试保存</button>' : ''),
-      foot:roomFooterHTML({ tag:'div', back:complete() ? '' : '<button type="button" data-act="fireBag">整理背包</button>', actions:`<button type="button" class="room-proceed" data-act="fireDone">${saveFailed ? '重试保存并返回地图' : complete() ? '继续探索' : '返回地图'}</button>` }),
+        hpGain:record?.hpGain || 0, restoredCount:restored.length }) + receipt + (saveFailed ? '<p class="reward-notice" role="status">休整效果已生效，进度未保存，请重试保存后离开。</p><button type="button" data-act="fireRetrySave">重试保存</button>' : continueFailed ? '<p class="reward-notice" role="status">休整进度已保存，继续流程尚未完成，请重试继续。</p>' : ''),
+      foot:roomFooterHTML({ tag:'div', back:complete() ? '' : '<button type="button" data-act="fireBag">整理背包</button>', actions:`<button type="button" class="room-proceed" data-act="fireDone">${saveFailed ? '重试保存并返回地图' : continueFailed ? '重试继续' : complete() ? '继续探索' : '返回地图'}</button>` }),
     });
     initFireRestPreview(UI.el.ovBody);
     const active = nodeActionBinding(game, UI, 'fireDone');
@@ -158,7 +168,11 @@ export function openFireRest(after = finishInstant) {
     UI.act('fireHeal', () => { if (active()) return perform('heal'); });
     UI.act('fireRestore', () => { if (active()) return perform('restore'); });
     UI.act('fireRetrySave', () => { if (active()) return retrySave(); });
-    UI.act('fireBag', () => { if (active() && !resolving) bagSlots.showBackpack(); });
+    UI.act('fireBag', () => {
+      if (!active() || resolving) return;
+      leaveSaved = false; continueFailed = false;
+      bagSlots.showBackpack();
+    });
     for (const act of ['fireDone','fireLeave','eventExit']) UI.act(act, () => { if (active() && !resolving) return leave(); });
     UI.act('fireResultCard', data => {
       if (!active() || resolving) return;
@@ -171,6 +185,7 @@ export function openFireRest(after = finishInstant) {
     if (resolving || used(usage) || (kind === 'heal' && game.hp >= game.maxHp)) return;
     if (kind === 'restore' && !game.usedPocket.some(item => FIRE_RESTORABLE(item.card)
       && (game.canReceiveCard ? game.canReceiveCard(item.card) : usedSlots() < bagCap()))) return;
+    leaveSaved = false; continueFailed = false;
     resolving = true;
     const ownsPage = currentPage;
     const restoredCards = [];
@@ -231,6 +246,7 @@ export function openFireRest(after = finishInstant) {
   };
   setBagReturnHook(() => {
     if (!currentFire()) return;
+    leaveSaved = false; continueFailed = false;
     render();
     const page = UI.el.ovBody.firstElementChild;
     requestAnimationFrame(() => { if (currentFire() && UI.el.ovBody.firstElementChild === page) /** @type {HTMLElement} */ (page?.querySelector('[data-act="fireBag"]'))?.focus({preventScroll:true}); });
@@ -245,47 +261,80 @@ export async function openEntrySupply() {
   supply.entered = true;   // 记录打开状态；移动闸门仅在补给全部领取后解锁。
   game.state = 'modal';
   const slot = getActiveSlot(), token = game.discoveredPairs, map = game.layerData, seed = game.seed;
-  let saveFailed = false, saving = true, currentPage = () => false;
-  let claimNotice = '';
+  let saveFailed = false, saving = false, currentPage = () => false;
+  let claimNotice = '', bagPresentation = null;
   const cards = () => supply.cardIds.map(id => SDT.Cards.all().find(card => card.id === id));
+  const claimActions = { take:'entrySupplyTake' };
   const isCurrent = () => entrySupplyAt(game) === supply && getActiveSlot() === slot
     && game.discoveredPairs === token && game.layerData === map && game.seed === seed;
-  const finish = async () => {
-    if (saveFailed) {
-      const ownsPage = currentPage;
-      saving = true;
+  const saveProgress = async () => {
+    if (saving || !currentPage()) return false;
+    const ownsPage = currentPage;
+    saving = true;
+    const release = beginRoomSave(UI.el?.ovBody?.firstElementChild);
+    try {
       saveFailed = !await saveRunCheckpoint(saveGame);
-      saving = false;
-      if (!ownsPage()) return false;
-      if (saveFailed) { showResult(); return false; }
-    }
-    setBagReturnHook(null); UI.hideOverlay(); finishInstant();
-    return true;
+      return ownsPage() && !saveFailed;
+    } finally { release(); saving = false; }
   };
-  const showResult = () => {
+  const finish = async () => {
+    if (saveFailed && !await saveProgress()) {
+      if (currentPage()) showResult();
+      return false;
+    }
+    return finishSavedInstant();
+  };
+  const showResult = (presentation = null) => {
     const complete = supply.taken.length === supply.cardIds.length;
-    setBagReturnHook(() => { if (isCurrent()) { game.state = 'modal'; showResult(); } });
-    UI.showOverlay('', rewardSceneHTML({ className:`pg entry-reward-scene entry-supply-strips${complete ? ' reward-complete' : ''}`, title:'随行补给', source:'', rule:'', count:supply.cardIds.length - supply.taken.length,
-      cards:cards().map((card, i) => card ? `${rewardCardUnitHTML({card,face:SDT.Cards.cardHTML(card),index:i,readAction:'clsEntryCard',className:supply.taken.includes(i)?'got':'',action:rewardClaimHTML({index:i,cardName:card.name,state:supply.taken.includes(i)?'received':'pending',actions:{take:'entrySupplyTake'}})})}` : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
+    const previousBody = UI.el?.ovBody, retained = currentPage();
+    const focused = retained && previousBody?.contains(document.activeElement) ? document.activeElement : null;
+    const focusedAction = /** @type {HTMLElement} */ (focused?.closest('[data-act]'));
+    const focus = focusedAction ? { action:focusedAction.dataset.act, index:focusedAction.dataset.i } : null;
+    const position = presentation || (retained ? captureOverlayReturnState(previousBody.firstElementChild) : null);
+    const html = rewardSceneHTML({ className:`pg reward-v14 entry-reward-scene entry-supply-strips${complete ? ' reward-complete' : ''}`, title:'随行补给', source:'', rule:'', count:supply.cardIds.length - supply.taken.length,
+      cards:cards().map((card, i) => card ? rewardCardUnitHTML({card,face:SDT.Cards.cardHTML(card),index:i,readAction:'clsEntryCard',className:supply.taken.includes(i)?'got':'',action:rewardClaimHTML({index:i,cardName:card.name,state:supply.taken.includes(i)?'received':'pending',actions:claimActions})}) : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
       actions:`${complete ? rewardExitHTML('clsEntryContinue') : supply.cardIds.length - supply.taken.length > 1 ? '<button type="button" class="reward-secondary" data-act="entrySupplyTakeAll">全部收下</button>' : ''}${complete ? '' : `<div class="entry-supply-status" role="status" aria-live="polite"><b>${supply.taken.length} / ${supply.cardIds.length}</b></div>`}`,
-      footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<p class="entry-save-warning" role="status">当前进度未保存，请查看存档错误提示。</p>' : ''}${complete || !claimNotice ? '' : `<span class="reward-notice" role="status">${claimNotice}</span>`}`,
-    }), 'page');
+      footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<button type="button" class="reward-bag" data-act="entrySupplyRetrySave">重试保存</button><p class="entry-save-warning" role="status">补给进度尚未保存成功，请重试保存；暂勿刷新页面。</p>' : ''}${complete || !claimNotice ? '' : `<span class="reward-notice" role="status">${claimNotice}</span>`}`,
+    });
+    if (!retained || !patchRewardScene(previousBody, SDT.Icons.rich(html))) UI.showOverlay('', html, 'page');
     const active = nodeActionBinding(game, UI, complete ? 'clsEntryContinue' : 'entrySupplyBag');
     const body = UI.el?.ovBody, surface = body?.firstElementChild, revision = UI._overlayRevision;
-    currentPage = () => isCurrent() && active() && UI.el?.ovBody === body && body?.firstElementChild === surface
+    const ownsPage = currentPage = () => isCurrent() && active() && UI.el?.ovBody === body && body?.firstElementChild === surface
       && UI._overlayRevision === revision;
-    UI.act('clsEntryContinue', () => { if (!saving && currentPage() && supply.taken.length === supply.cardIds.length) return finish(); });
-    UI.act('clsEntryCard', data => {
-      if (!isCurrent() || !active()) return;
-      const index = Number(data.i), card = cards()[index];
-      if (card) UI.showCardZoom(card, { hideNote:true, presentation:'expedition',
-        footer:supply.taken.includes(index) ? '' : `<button class="ov-btn ok" data-act="entrySupplyTake" data-i="${index}">收下</button>` });
+    restoreOverlayReturnState(surface, position, { isCurrent:ownsPage });
+    if (focused && !focused.isConnected) {
+      restoreRewardActionFocus(surface, focus, { claimActions:['entrySupplyTake'],
+        returnActions:['clsEntryContinue','entrySupplyBag'] });
+    }
+    setBagReturnHook(() => {
+      if (!isCurrent()) return false;
+      game.state = 'modal';
+      const presentation = bagPresentation;
+      bagPresentation = null;
+      showResult(presentation);
+      return true;
     });
-    UI.act('entrySupplyTake', data => { if (!saving && currentPage()) return take(Number(data.i)); });
-    UI.act('entrySupplyTakeAll', () => { if (!saving && currentPage()) return take(); });
+    UI.act('clsEntryContinue', () => { if (!saving && ownsPage() && supply.taken.length === supply.cardIds.length) return finish(); });
+    UI.act('clsEntryCard', data => {
+      if (saving || !ownsPage()) return;
+      const index = Number(data.i), card = cards()[index];
+      const source = /** @type {HTMLElement} */ (surface?.querySelector(`[data-act="clsEntryCard"][data-i="${index}"]`));
+      if (card) UI.showCardZoom(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
+        footer:rewardClaimHTML({index,cardName:card.name,state:supply.taken.includes(index)?'received':'pending',zoom:true,actions:claimActions}) });
+    });
+    UI.act('entrySupplyTake', data => { if (!saving && ownsPage()) return take(Number(data.i)); });
+    UI.act('entrySupplyTakeAll', () => { if (!saving && ownsPage()) return take(); });
+    UI.act('entrySupplyRetrySave', async () => {
+      if (saving || !ownsPage()) return false;
+      await saveProgress();
+      if (!ownsPage()) return false;
+      showResult();
+      return !saveFailed;
+    });
     UI.act('entrySupplyBag', () => {
-      if (saving || !currentPage()) return;
+      if (saving || !ownsPage()) return;
       /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
+      bagPresentation = captureOverlayReturnState(surface);
       bagSlots.showBackpack();
     });
   };
@@ -304,9 +353,7 @@ export async function openEntrySupply() {
     claimNotice = '';
     /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
     if (supply.taken.length === supply.cardIds.length) consumeCurrentCell();
-    saving = true;
-    saveFailed = !await saveRunCheckpoint(saveGame);
-    saving = false;
+    await saveProgress();
     if (!ownsPage()) return true;
     UI.refresh(game);
     showResult();
@@ -315,8 +362,7 @@ export async function openEntrySupply() {
   // 进入本节点即展示待领卡牌；查看卡面和逐张收下仍由玩家操作。
   showResult();
   const ownsPage = currentPage;
-  saveFailed = !await saveRunCheckpoint(saveGame);
-  saving = false;
+  await saveProgress();
   if (!ownsPage()) return false;
   showResult();
   return true;
@@ -345,7 +391,7 @@ export function openDoorModal(door, cellDef) {
   let entering = false;
   setBagReturnHook(() => openDoorModal(door, cellDef));
   UI.act('doorBag', () => { if (active() && !entering) bagSlots.showBackpack(); });
-  UI.act('doorBack', () => { if (!active() || entering) return; setBagReturnHook(null); UI.hideOverlay(); finishInstant(); });
+  UI.act('doorBack', () => { if (!active() || entering) return; return finishInstant(); });
   UI.act('goDoor', () => {
     if (!active() || entering) return;
     entering = true;
@@ -392,7 +438,7 @@ export function openAltarRitual(def) {
   nodeShell({
     tone: 'altar', icon: '[[icon:altar]]', title: '污染祭坛',
     sub: '沉睡的祭坛等待你的献礼。',
-    body:altarRitualHTML({ fragments:frags, capacity:game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`,
+    body:encounterOpeningHTML('altar', { animate:claimEncounterOpening(game, 'altar') }) + altarRitualHTML({ fragments:frags, capacity:game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`,
       availableCards:sacrificeCards().length, hasItem:sacrificeCards('道具').length > 0,
       itemUsed:game.altarItemSacrificed, restorable:game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).reduce((sum, p) => sum + p.count, 0),
       fragmentCardName:fragmentCard?.name || '', fragmentUnavailable:!!fragmentChoice && !fragmentCard }),
@@ -559,7 +605,7 @@ export function openBossGate() {
     const active = altarPageBinding('bossGateLockedBack');
     UI.act('bossGateLockedBack', () => {
       if (!active()) return;
-      UI.hideOverlay(); finishInstant();
+      return finishInstant();
     });
     UI.refresh(game);
     return;
@@ -567,7 +613,7 @@ export function openBossGate() {
   const rules = MAP.rules;
   nodeShell({ tone:'battle', asset:'scene-battle-bg', icon:'[[icon:skull]]', title:'首脑迎战',
     sub:`首脑战使用独立牌库：开战前整理并选择 ${rules.bossDeckSize} 张招式、装备或能力卡，不足时全部编入；另加入 ${rules.starterSha} 张初始攻击。背包其余卡牌不会消失。`,
-    body:nodeOpt('bossGateFight','继续迎战',`起手抽 ${rules.battleStartDraw} 张，每回合抽 ${rules.battleTurnDraw} 张，手牌上限 ${rules.battleHandMax} 张。请先检查随身卡牌。`, 'ok') +
+    body:encounterOpeningHTML('boss', { animate:claimEncounterOpening(game, 'boss') }) + nodeOpt('bossGateFight','继续迎战',`起手抽 ${rules.battleStartDraw} 张，每回合抽 ${rules.battleTurnDraw} 张，手牌上限 ${rules.battleHandMax} 张。请先检查随身卡牌。`, 'ok') +
       '<p class="reward-notice">先看敌方意图，高伤回合先用护盾、护甲或格挡减伤；对方有防护或元素庇幕时，如有破甲牌，可施加破甲再集中攻击。</p>',
     foot:'<button class="ov-btn" data-act="bossGateBag">整理背包</button><button class="ov-btn" data-act="bossGateBack">返回地图</button>',
   });
@@ -576,7 +622,7 @@ export function openBossGate() {
   const act = createRoomActions(UI, () => active() && !entering);
   setBagReturnHook(openBossGate);
   act('bossGateBag', () => { bagSlots.showBackpack(); });
-  act('bossGateBack', () => { setBagReturnHook(null); UI.hideOverlay(); finishInstant(); });
+  act('bossGateBack', () => finishInstant());
   act('bossGateFight', () => {
     entering = true;
     setBagReturnHook(null);
@@ -587,21 +633,16 @@ export function openBossGate() {
       const bossFoe = scaledEnemy(b);
       bossFoe.boss = true;
       return startBattle(game, bossFoe, { isBoss:true, name:b.name });
-    });
+    }, openBossGate);
   });
   UI.refresh(game);
 }
 
-// 献祭只支付普通随身背包；安全格或容器内卡牌需先由玩家移回背包。
-function canSacrificeCard(owned, filterType) {
-  return !!owned?.card && !owned.safe && !owned.stored && !owned.pouchOf
-    && (!filterType || owned.card.type === filterType);
-}
 function sacrificeCards(filterType) { return game.ownedCards.filter(owned => canSacrificeCard(owned, filterType)); }
 
-// 背包献祭选卡器（2026-09-06 #26）：从背包选 n 张卡，确认后消耗并回调
+// 背包献祭选卡器：确认 n 张后回调；紧急撤离由后续事务统一支付。
 // onCancel：取消时的回流（缺省回祭坛面板）
-function openBagSacrifice(n, done, onCancel, filterType, { emergency = false } = {}) {
+function openBagSacrifice(n, done, onCancel, filterType, { emergency = false, deferPayment = false } = {}) {
   game.state = 'modal';
   const sel = new Set();
   const back = onCancel || (() => openAltarRitual(curLayer()?.logical?.[game.trackPos]?.def));
@@ -661,7 +702,8 @@ function openBagSacrifice(n, done, onCancel, filterType, { emergency = false } =
       if (chosen.length !== n) { render(); return; }
       finished = true;
       setBagReturnHook(null);
-      game.ownedCards = game.ownedCards.filter(o => !sel.has(o.uid));
+      // 紧急撤离与整理快照同次支付；普通祭坛献祭仍在确认时生效。
+      if (!deferPayment) game.ownedCards = game.ownedCards.filter(o => !sel.has(o.uid));
       const body = UI.el?.ovBody;
       const present = (options, next, ownsPage = () => current() && active()) => afterOutcomeFeedback(body,{...options,kind:'sacrifice',compact:false,
         blocking:true,surface:body,cards:chosen.map(entry=>entry.card),
@@ -725,10 +767,10 @@ export function openEmergencyModal() {
       }
       setBagReturnHook(null);
       UI.hideOverlay();
-      openBagSacrifice(3, (_chosen, present) => {
-        UI.log('[[icon:crystal]] 献祭了 3 张卡牌——紧急信标充能完毕', 'sys');
-        return doExtract({beforeReveal:()=>present({destination:'撤离信标',keepPage:true},()=>true)});
-      }, () => openEmergencyModal(), undefined, { emergency:true });
+      openBagSacrifice(3, (chosen, present) => {
+        return doExtract({ sacrificeUids:chosen.map(entry => entry.uid),
+          beforeReveal:()=>present({destination:'撤离信标',keepPage:true},()=>true) });
+      }, () => openEmergencyModal(), undefined, { emergency:true, deferPayment:true });
     });
     UI.refresh(game);
     return;
@@ -780,9 +822,10 @@ export function resumeExtraction(pending) {
   return { ok: true };
 }
 
-/** @param {{beforeReveal?:()=>unknown|Promise<unknown>}} [options] */
-export async function doExtract({beforeReveal} = {}) {
+/** @param {{beforeReveal?:()=>unknown|Promise<unknown>, sacrificeUids?:string[]}} [options] */
+export async function doExtract({beforeReveal, sacrificeUids} = {}) {
   if (!game.runActive || game.pendingExtraction || extractionStarting) return false;
+  const payment = sacrificeUids?.slice();
   const startedFromSlot = getActiveSlot();
   const seed = game.seed, runToken = game.discoveredPairs, map = game.layerData;
   const layerIdx = game.layerIdx, trackPos = game.trackPos;
@@ -808,7 +851,7 @@ export async function doExtract({beforeReveal} = {}) {
     if (!ownsPage()) return false;
     if (startedFromSlot && !saved) {
       UI.log('[[icon:cross]] 撤离前进度未保存，整理尚未开始；请检查存档错误并重试', 'warn');
-      showExtractionRetry(false);
+      showExtractionRetry(false, payment);
       return false;
     }
   }
@@ -817,7 +860,7 @@ export async function doExtract({beforeReveal} = {}) {
     ? /** @type {{slotId:number,runId:string}} */ (game.extractionPending) : { slotId: startedFromSlot, runId: initialIdentity?.ok ? initialIdentity.value.runId : null };
   game.extractionPending = pendingToken;
   game.state = 'modal';
-    const started = await extractionCommands.begin();
+    const started = await extractionCommands.begin({ sacrificeUids:payment });
     if (game.extractionPending !== pendingToken || !sameRun()) return false;
     if (!started.ok) {
       if (pendingToken.slotId !== startedFromSlot ||
@@ -825,7 +868,7 @@ export async function doExtract({beforeReveal} = {}) {
       pendingToken.runId ||= started.runId || null;
       if (!ownsPage()) return false;
       UI.log(`[[icon:cross]] 撤离整理尚未保存：${started.message || started.code}，可重试`, 'warn');
-      showExtractionRetry();
+      showExtractionRetry(true, payment);
       return false;
     }
     if (getActiveSlot() !== startedFromSlot) return false;
@@ -839,6 +882,7 @@ export async function doExtract({beforeReveal} = {}) {
     game.runActive = true;
     if (!ownsPage()) return true;
     // Payment and extraction already have their persisted receipt before this visual pause.
+    if (payment?.length) UI.log('[[icon:crystal]] 献祭了 3 张卡牌——紧急信标充能完毕', 'sys');
     if (beforeReveal) { await beforeReveal(); if (!ownsPage()) return true; }
     SDT.Sound.sfx('extractionSuccess');
     SDT.Sound.music('title');
@@ -853,21 +897,22 @@ export async function doExtract({beforeReveal} = {}) {
   } catch (error) {
     if (!pendingToken || game.extractionPending !== pendingToken || !ownsPage()) return false;
     UI.log(`[[icon:cross]] 撤离整理保存遇到错误：${error?.message || error}，请重试`, 'warn');
-    showExtractionRetry();
+    showExtractionRetry(true, payment);
     return false;
   } finally {
     extractionStarting = false;
   }
 }
 
-function showExtractionRetry(checkpointSaved = true) {
+/** @param {boolean} [checkpointSaved] @param {string[]} [sacrificeUids] */
+function showExtractionRetry(checkpointSaved = true, sacrificeUids = undefined) {
   game.state = 'modal';
   const message = checkpointSaved
-    ? '<p>撤离已成功，整理快照尚未确认写入。请重试保存后继续。</p><p class="ov-note">[[icon:info]] 撤离前的局面已保存——若反复失败，可以退出游戏重新进入，会回到撤离前的位置，不会重复扣卡。</p>'
-    : '<p>撤离前的进度未保存，整理尚未开始。请检查存储空间或档位冲突后重试。</p><p class="ov-note">[[icon:info]] 此时退出会回到上一次成功保存的位置。</p>';
+    ? `<p>撤离结算尚未确认，请重试恢复同一笔撤离。</p><p class="ov-note">[[icon:info]] 撤离前的完整行装已保存。重新进入时，尚未成交会保留原卡牌；已成交会继续整理${sacrificeUids?.length ? '，不会再次献祭' : ''}。</p>`
+    : `<p>撤离前的进度未保存，整理尚未开始${sacrificeUids?.length ? '，所选卡牌尚未献祭' : ''}。请检查存储空间或档位冲突后重试。</p><p class="ov-note">[[icon:info]] 此时退出会回到上一次成功保存的位置。</p>`;
   UI.showOverlay('', `<div class="pg hub"><h2>撤离结算待恢复</h2>${message}<button class="ov-btn ok" data-act="extractRetry">重试撤离整理</button></div>`, 'page');
   const active = altarPageBinding('extractRetry');
-  UI.act('extractRetry', () => { if (!active()) return; UI.hideOverlay(); return doExtract(); });
+  UI.act('extractRetry', () => { if (!active()) return; UI.hideOverlay(); return doExtract({ sacrificeUids }); });
 }
 
 function extractionFinishSignature() {
@@ -886,6 +931,10 @@ function renderExtractStash(notice = '', finishSignature = null, presentation = 
     (!surface || UI.el?.ovBody?.querySelector('#exMain') === surface) &&
     (game.pendingExtraction?.runId === viewRunId || (finished && !game.runActive && !game.pendingExtraction));
   const pending = game.pendingExtraction;
+  const pendingCardSelections = extractionCommands.pendingCardSelection(viewRunId, viewSlot) || [];
+  const pendingDepositCount = pendingCardSelections.reduce((count, selection) => count + selection.count, 0);
+  const recoveryNotice = pendingDepositCount
+    ? `上次入库尚待确认：${pendingCardSelections.map(selection => `${selection.name} ×${selection.count}`).join('、')}。请重试这笔入库后继续整理。` : '';
   const pocket = extractionPocketOutcome(pending, B.isSha);
   const receipt = buildExtractionReceipt({ game, pending, isSha: B.isSha, xpMul: MODES[game.mode]?.xpMul || 1 });
   const broughtByName = new Map();
@@ -896,18 +945,6 @@ function renderExtractStash(notice = '', finishSignature = null, presentation = 
   const totalLeft = extractLeft.reduce((n, s) => n + s.count, 0);
   game.state = 'done';
   _set_cardPageOpen(false); // Esc cannot bypass the explicit finish-and-loss action.
-  UI.registerHelp('extract', {
-    title: '整理入库说明',
-    html: `<p class="help-item"><b>背包卡牌</b>同叠按仓库剩余空位部分入库。未入库的卡牌（含出发带入卡）在完成整理时永久丢失。</p>
-      <p class="help-item"><b>自动入库</b>木材/口粮已入库。消耗区逐张以 1/3 概率结算；初始攻击与职业卡不能带回基地，其余实际保留的卡进入基地消耗区，需用钥匙复原。</p>
-      <p class="help-item"><b>按估值入库</b>按卡牌估值从高到低，同估值按背包原次序。估值不代表稀有度或实战强度，也不表示卡牌可以出售。入库立即保存，本页不能撤回或换选。</p>
-      <p class="help-item"><b>按稀有度入库</b>优先棱彩、传说、史诗、稀有、古朴，同稀有度按背包原次序，按仓库空位入库。</p>
-      <p class="help-item"><b>仓库容量</b>可在基地「升级」页用 [[icon:wood]] 木材×${MAP.rules.stashUpgradeWood} 扩建 +${MAP.rules.stashUpgradeSlots} 张。入库选择会逐次保存，卡牌下次出发时可以携带。</p>`,
-    back: () => {
-      if (viewRevision !== extractViewRevision || getActiveSlot() !== viewSlot || game.pendingExtraction !== pending) return false;
-      return renderExtractStash(notice, finishSignature);
-    },
-  });
   const stashHTML = extractionStashHTML({
     remainingCards: extractLeft, savedCards: receipt.savedCards, keptPocket: pocket.keptCards,
     pocketKept: pocket.keptCount, pocketLost: pocket.lostCount, pocketRuleLost: pocket.ruleLost,
@@ -917,7 +954,7 @@ function renderExtractStash(notice = '', finishSignature = null, presentation = 
     otherN: game.inventory.filter(i => i.name !== '木材' && i.name !== '口粮').reduce((n, i) => n + i.count, 0),
     broughtByName, sourceIdentityVersion: pending.sourceIdentityVersion, cardHTML: (card, size) => SDT.Cards.cardHTML(card, size),
     rarityOf: card => SDT.Cards.rarityOf?.(card) || card.rarity,
-    help: UI.helpBtn('extract'), notice, confirmFinish: finishSignature !== null,
+    notice:notice || recoveryNotice, confirmFinish: finishSignature !== null, pendingDepositCount,
   });
   const liveStash = /** @type {HTMLElement} */ (UI.el?.ovBody?.querySelector('#exMain'));
   if (liveStash?.dataset.extractionRunId === viewRunId && !UI.el.overlay.hidden
@@ -930,7 +967,8 @@ function renderExtractStash(notice = '', finishSignature = null, presentation = 
   }
   if (surface) surface.dataset.extractionRunId = viewRunId;
   restoreOverlayReturnState(surface, presentation, { isCurrent:stillThisView });
-  if (finishSignature !== null) surface?.querySelector('button[data-act=exCancelFinish]')?.focus({ preventScroll:true });
+  if (pendingDepositCount) surface?.querySelector('button[data-act=exRetryStash]')?.focus({ preventScroll:true });
+  else if (finishSignature !== null) surface?.querySelector('button[data-act=exCancelFinish]')?.focus({ preventScroll:true });
   const inspect = stacks => d => {
     if (!stillThisView() || updating) return;
     const card = stacks[Number(d.i)]?.card;
@@ -942,10 +980,6 @@ function renderExtractStash(notice = '', finishSignature = null, presentation = 
   const setSaving = (message = '正在保存入库选择…') => {
     updating = true;
     surface?.setAttribute('aria-busy', 'true');
-    // Mutating actions and previews already reject while updating. Only prevent
-    // help navigation; disabling the entire gallery made every card flash dim.
-    surface?.querySelectorAll('.exr-header button[data-act]')
-      .forEach(b => { b.disabled = true; });
     const status = surface?.querySelector('.exr-notice');
     if (status) status.textContent = message;
   };
@@ -973,18 +1007,20 @@ function renderExtractStash(notice = '', finishSignature = null, presentation = 
   };
   const selectionFor = (stack, count) => ({ name:stack.card.name, count,
     ...(pending.sourceIdentityVersion === 1 ? { sourceKey:extractionSourceKey(stack) } : {}) });
+  const canChooseDeposit = () => stillThisView() && !updating && !pendingDepositCount;
+  UI.act('exRetryStash', () => pendingDepositCount ? saveCards(pendingCardSelections, '上次入库') : false);
   UI.act('exStash', d => {
-    if (!stillThisView() || updating) return;
+    if (!canChooseDeposit()) return;
     const s = extractLeft[Number(d.i)];
     const take = s ? Math.min(s.count, Math.max(0, B.stashRoom())) : 0;
     if (take) return saveCards([selectionFor(s, take)], `【${esc(s.card.name)}】入库`);
   });
   UI.act('exAll', () => {
-    if (!stillThisView() || updating || totalLeft > B.stashRoom()) return;
+    if (!canChooseDeposit() || totalLeft > B.stashRoom()) return;
     return saveCards(extractLeft.map(s => selectionFor(s, s.count)), '全部入库');
   });
   const storeOrderedCards = (ordered, label) => {
-    if (!stillThisView() || updating) return;
+    if (!canChooseDeposit()) return;
     let left = B.stashRoom();
     const selections = [];
     for (const s of ordered) {
@@ -1001,7 +1037,7 @@ function renderExtractStash(notice = '', finishSignature = null, presentation = 
     extractionRarityRank(b.card, card => SDT.Cards.rarityOf?.(card) || card.rarity)
       - extractionRarityRank(a.card, card => SDT.Cards.rarityOf?.(card) || card.rarity)), '按稀有度入库'));
   const finish = async () => {
-    if (!stillThisView() || updating) return;
+    if (!canChooseDeposit()) return;
     const pendingAtFinish = game.pendingExtraction;
     const beforeSave = captureOverlayReturnState(surface);
     setSaving('正在保存整理结果…');
@@ -1019,20 +1055,20 @@ function renderExtractStash(notice = '', finishSignature = null, presentation = 
     showExtractDone(finalReceipt);
   };
   UI.act('exFinish', () => {
-    if (!stillThisView() || updating || finishSignature !== null) return;
+    if (!canChooseDeposit() || finishSignature !== null) return;
     const remaining = game.pendingExtraction?.remainingCards || [];
     if (!remaining.length) return finish();
     extractLeft = remaining.map(s => ({ ...s, card: { ...s.card } }));
     renderExtractStash('', extractionFinishSignature(), captureOverlayReturnState(surface));
   });
   UI.act('exCancelFinish', () => {
-    if (!stillThisView() || updating || finishSignature === null) return;
+    if (!canChooseDeposit() || finishSignature === null) return;
     extractLeft = game.pendingExtraction.remainingCards.map(s => ({ ...s, card: { ...s.card } }));
     renderExtractStash('', null, captureOverlayReturnState(surface));
     /** @type {HTMLButtonElement} */ (UI.el?.ovBody?.querySelector('[data-act=exFinish]'))?.focus({ preventScroll:true });
   });
   UI.act('exConfirmFinish', () => {
-    if (!stillThisView() || updating || finishSignature === null) return;
+    if (!canChooseDeposit() || finishSignature === null) return;
     if (finishSignature !== extractionFinishSignature()) {
       extractLeft = game.pendingExtraction.remainingCards.map(s => ({ ...s, card: { ...s.card } }));
       renderExtractStash('待入库卡牌已变化，请重新确认。', null, captureOverlayReturnState(surface));

@@ -81,7 +81,7 @@ describe('庭院首次装载生命周期', () => {
     loading.resolve();
     await vi.dynamicImportSettled();
     expect(mount).toHaveBeenCalledOnce();
-    expect(mount).toHaveBeenCalledWith(host);
+    expect(mount).toHaveBeenCalledWith(host, { read:module.readCourtyardPreferences, write:module.saveCourtyardPreferences });
     expect(host.hasAttribute('aria-busy')).toBe(false);
     expect(host.querySelector('.courtyard-v3-status').textContent).toBe('');
     expect([...host.querySelectorAll('button')].every(button => !button.disabled)).toBe(true);
@@ -122,11 +122,11 @@ describe('庭院首次装载生命周期', () => {
     const retryHost = renderCourtyard(module);
     const disposeRetry = module.mountCourtyardV3(retryHost);
     await vi.dynamicImportSettled();
-    expect(mount).toHaveBeenCalledWith(retryHost);
+    expect(mount).toHaveBeenCalledWith(retryHost, { read:module.readCourtyardPreferences, write:module.saveCourtyardPreferences });
     disposeRetry();
     const warmHost = renderCourtyard(module);
     expect(module.mountCourtyardV3(warmHost)).toBe(release);
-    expect(mount).toHaveBeenCalledWith(warmHost);
+    expect(mount).toHaveBeenCalledWith(warmHost, { read:module.readCourtyardPreferences, write:module.saveCourtyardPreferences });
     release();
   });
 });

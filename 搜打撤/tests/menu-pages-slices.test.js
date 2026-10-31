@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createMenuFeedbackPages } from '../game/src/ui/menu-feedback.js';
 import { createMenuLeaveFlow } from '../game/src/ui/menu-leave.js';
 import { createMenuSlotPicker } from '../game/src/ui/menu-slots.js';
+import { createGameMenuPages } from '../game/src/ui/game.menu.pages.js';
 
 vi.mock('../game/src/ui/region-transition.js',()=>({transitionRegion:(_root,update)=>{update();return Promise.resolve(true);},cancelRegionTransition:()=>{}}));
 let previousFacade;
@@ -16,14 +17,37 @@ function fixture() {
   document.body.innerHTML = '<div id="overlay"><div id="ovBody"></div></div>';
   const game = { state:'idle', runActive:true, layerData:[], ownedCards:[] };
   window.SDT = { ...window.SDT, game };
-  const UI = { el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody') }, _acts:{},
+  const UI = { el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody') }, _acts:{}, _overlayRevision:0,
     act(name, callback) { this._acts[name] = callback; },
-    showOverlay(title, html) { this.el.overlay.hidden = false; this.el.ovBody.innerHTML = html; },
+    showOverlay(title, html) { this._overlayRevision++; this.el.overlay.hidden = false; this.el.ovBody.innerHTML = html; },
     hideOverlay:vi.fn(), refresh:vi.fn(), log:vi.fn(), clearLog:vi.fn(), confirmAction:vi.fn() };
   return { UI, game };
 }
 
 describe('menu leaf flow boundaries', () => {
+  it('assembled run menu opens the real guide and returns to the same run', async () => {
+    const { UI, game } = fixture();
+    const menu = createGameMenuPages({ SDT:window.SDT, UI, game, runtime:{}, esc:String,
+      getActiveSlot:() => 1 }, {});
+    menu.openLeaveMenu();
+    UI._acts.leaveGuide();
+    const guide = UI.el.ovBody.querySelector('.beginner-guide');
+    expect(guide).not.toBeNull();
+    const navigation = guide.querySelector('.bg-nav'), article = guide.querySelector('.bg-page');
+    expect(UI.el.ovBody.querySelector('.leave-run-panel')).toBeNull();
+    await UI._acts.guideNext();
+    expect(UI.el.ovBody.querySelector('.beginner-guide')).toBe(guide);
+    expect(guide.querySelector('.bg-nav')).toBe(navigation);
+    expect(guide.querySelector('.bg-page')).toBe(article);
+    expect(guide.dataset.guidePage).toBe('1');
+    expect(guide.querySelector('[data-act="guidePage"][aria-current="step"]').dataset.pageIndex).toBe('1');
+    const back = UI._acts.guideBack;
+    expect(await back()).toBe(true);
+    expect(UI.el.ovBody.querySelector('.leave-run-panel')).not.toBeNull();
+    expect(game.runActive).toBe(true);
+    expect(back()).toBe(false);
+  });
+
   it('feedback deletion uses shared confirmation and leaves a cancelled or replaced inbox intact', async () => {
     const { UI, game } = fixture();
     const remove = vi.fn(async () => true);

@@ -1,0 +1,11 @@
+.run-memento { margin: 24px 0; padding: 24px 0; border-top: 1px solid #b6cbd740; color: #eef1ed; text-align: left; }
+.run-memento header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.run-memento h3 { margin: 0; font-size: 26px; font-weight: 600; }
+.run-memento header > span { font-size: 18px; color: #b9c9d2; }
+.run-memento-trail { display: flex; flex-wrap: wrap; gap: 24px; padding: 0; margin: 20px 0; list-style: none; }
+.run-memento-trail li { display: grid; gap: 6px; border-left: 2px solid #b6cbd7; padding-left: 12px; }
+.run-memento-trail span, .run-memento-trail small { color: #b9c9d2; font-size: 18px; }
+.run-memento-trail b { font-size: 22px; font-weight: 500; }
+.run-memento-moments { display: grid; gap: 10px; padding-left: 22px; margin: 20px 0; font-size: 20px; line-height: 1.5; }
+.run-memento-keepsake { font-size: 20px; line-height: 1.5; margin-bottom: 0; }
+.run-memento-keepsake b { color: #c6b487; font-weight: 500; }

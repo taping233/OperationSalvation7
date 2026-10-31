@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { altarMocks, altarStateFields } from './helpers/environment-fixtures.js';
 /* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：祭坛献祭两分支、消耗区复原、
  * 钥匙复原链与火堆自动复原（只验证不改行为）的事务顺序钉现状。
@@ -67,7 +68,7 @@ function makeGame() {
 
 beforeEach(async () => {
   vi.resetModules();
-  document.body.innerHTML = '<div id="body"></div>';
+  document.body.innerHTML = '<div id="overlay"><div id="body"></div></div>';
   // mock 工厂在首次执行时捕获 st.game 引用且 resetModules 不重跑工厂——
   // 必须原地 Object.assign 复用同一对象（extraction-flow.test.js 同款），不得换新实例
   // 先清掉上一用例动态添加的领奖/补给状态，避免失败中断后污染后续地图投影。
@@ -78,17 +79,17 @@ beforeEach(async () => {
   st.bagCapN = 10;
   acts = {};
   UI = {
-    el: { ovBody:document.getElementById('body') },
-    showOverlay: (_t, html) => { document.getElementById('body').innerHTML = html; },
-    hideOverlay: () => { document.getElementById('body').innerHTML = ''; },
+    _overlayRevision:0, el: { overlay:document.getElementById('overlay'), ovBody:document.getElementById('body') },
+    showOverlay: (_t, html) => { UI._overlayRevision++; UI.el.overlay.hidden=false; UI.el.ovBody.innerHTML = html; },
+    hideOverlay: () => { UI._overlayRevision++; UI.el.overlay.hidden=true; UI.el.ovBody.innerHTML = ''; },
     act: (name, fn) => { acts[name] = fn; },
     refresh: vi.fn(), log: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '',
     showCardReward: vi.fn(), showCardZoom:vi.fn(),
   };
-  window.SDT = {
+  await connectSdtFixture({
     UI,
     ...altarMocks(st, () => vi),
-  };
+  });
 });
 
 async function importAltar() {
@@ -394,13 +395,13 @@ it('拾取页背包返回重注册仍只结算一次，旧回调不能领取或�
   const { openPickupPage } = await importScenes();
   const { takeBagReturnHook } = await import('../game/src/hub/bag-return-hook.js');
   const receive = vi.fn(() => UI.showOverlay('', '<p id="next-page">下一个节点</p>'));
-  openPickupPage('coin', '+1', receive, true);
+  openPickupPage('coin', '+1', {claim:vi.fn(),complete:receive}, true);
   const old = acts.pickupGo;
   takeBagReturnHook()();
   old();
   expect(receive).not.toHaveBeenCalled();
   const current = acts.pickupGo;
-  current(); current();
+  const pending=current(); current(); await pending;
   expect(receive).toHaveBeenCalledTimes(1);
   expect(document.getElementById('next-page')).not.toBeNull();
 });
@@ -537,7 +538,7 @@ it('首脑未解封：保留可见激活步骤和返回，重复进入/旧回调
   openBossGate(); oldBack();
   expect(st.game.state).toBe('modal');
   expect(document.querySelector('[data-act="bossGateLockedBack"]')).not.toBeNull();
-  acts.bossGateLockedBack();
+  await acts.bossGateLockedBack();
   expect(st.game.state).toBe('idle'); expect(document.body.textContent).toBe('');
   expect(st.game.altarActivated).toBeFalsy(); expect(st.game.visited).toEqual({});
   openBossGate(); expect(document.body.textContent).toContain('祭坛未激活');

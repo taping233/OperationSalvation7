@@ -1,0 +1,62 @@
+{
+  "task": "WF-code-efficiency-1028",
+  "ownerChat": "01a18115-af77-7fe2-ac44-805bb290a529",
+  "createdBy": "review_battle",
+  "status": "stopped",
+  "stopEvidence": "Exec session 45966 received Ctrl+C and returned exit_code 1 before the latest stop instruction. No elevated restart was performed; the port was not rechecked.",
+  "pid": 10492,
+  "port": 5330,
+  "host": "127.0.0.1",
+  "url": "http://127.0.0.1:5330/",
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "snapshotRoot": "D:\\素材\\代号柒\\搜打撤\\.tmp\\code-efficiency-1028\\preview\\game",
+  "config": "D:\\素材\\代号柒\\搜打撤\\.tmp\\code-efficiency-1028\\preview\\vite.config.mjs",
+  "runner": "D:\\素材\\代号柒\\搜打撤\\.tmp\\code-efficiency-1028\\preview\\start.mjs",
+  "assetsReadOnlySource": "D:\\素材\\代号柒\\搜打撤\\game\\assets",
+  "execSession": 45966,
+  "startedAt": "2026-10-28T06:17:08.947Z",
+  "shutdownOwner": "No further service operations; root retains the stopped-service record.",
+  "snapshotSync": {
+    "at": "2026-10-28T06:21:13.578Z",
+    "sources": [
+      {
+        "source": "game/src/hub/hub.courtyard-v3.js",
+        "target": ".tmp\\code-efficiency-1028\\preview\\game\\src\\hub\\hub.courtyard-v3.js",
+        "bytes": 5521,
+        "sha256": "ad2f0c2bcd96e17e9eb59d084cbe30d41acdf55c55ab5de2b99ef1c73d6de356",
+        "match": true
+      },
+      {
+        "source": "game/src/hub/hub.courtyard-runtime.js",
+        "target": ".tmp\\code-efficiency-1028\\preview\\game\\src\\hub\\hub.courtyard-runtime.js",
+        "bytes": 14743,
+        "sha256": "f1f4241af29039847c46a298f5fe97ac1a3335737a6d9fd0f2522ecdb8cfda25",
+        "match": true
+      },
+      {
+        "source": "game/src/hub/game.hub.depart.js",
+        "target": ".tmp\\code-efficiency-1028\\preview\\game\\src\\hub\\game.hub.depart.js",
+        "bytes": 39548,
+        "sha256": "f8fe49f2f94918b401d0d1670a09da26be57bb9d809e7c711f89dba60276ea84",
+        "match": true
+      }
+    ],
+    "css": [
+      {
+        "source": "game/css/base.css",
+        "target": ".tmp\\code-efficiency-1028\\preview\\game\\css\\base.css",
+        "updated": false,
+        "sha256": "eea85b815ad650da661ae9f4ae4d44b85cad5d80b0117a0f1e54dec2533d3a87",
+        "match": true
+      },
+      {
+        "source": "game/css/winter.css",
+        "target": ".tmp\\code-efficiency-1028\\preview\\game\\css\\winter.css",
+        "updated": false,
+        "sha256": "d741f2f9fe3d2f55630f7febb546b028a4e5c81968e8f58560fadddf778b9ece",
+        "match": true
+      }
+    ]
+  },
+  "httpProbeNote": "Restricted probe returned EACCES; elevated probe returned ETIMEDOUT. No further HTTP checks requested. Root is verifying in the built-in browser."
+}

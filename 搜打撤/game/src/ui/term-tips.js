@@ -185,6 +185,7 @@ function initTermTips() {
   window.addEventListener('resize', () => { renderer?.resize(); });
   document.addEventListener('sdt-overlay-mode', hide);
   document.addEventListener('sdt-overlay-close', hide);
+  document.addEventListener('sdt-card-drag-start', hide);
   document.addEventListener('visibilitychange', () => { if (document.hidden) hide(); });
   window.addEventListener('blur', hide);
 }

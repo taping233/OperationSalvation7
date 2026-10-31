@@ -135,33 +135,23 @@ body.lobby #topBtns { display: none; }
   #topBtns { position: absolute; top: 12px; left: 12px; z-index: 8; display: flex; gap: 8px; align-items: stretch; }
 
   /* 右上角浮动：金币 / 攻击力 HUD（参考明日方舟萨米风格：彩色图标 + 深色半透明长条，数字右对齐） */
-  #resHud { position: absolute; top: 12px; right: 12px; z-index: 8; display: flex; gap: 6px; }
+  #resHud { position: absolute; z-index: 8; display: flex; gap: 6px; }
 #resHud .chip-mini{
-  & { font-size: 12.5px; padding: 0 0 0 8px; border-radius: 0;
-    min-width: 118px; height: 36px; display: flex; align-items: center; gap: 8px;
-    background: linear-gradient(90deg, rgba(10,12,14,.92), rgba(24,27,30,.82)); border: none;
-    border-left: 3px solid var(--ak-white);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), 0 4px 14px rgba(0,0,0,.55); }
-  & .res-ic { width: 20px; height: 20px; flex: 0 0 auto;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
-  & b { font-family: var(--font-num); font-size: 19px; font-weight: 700; margin-left: auto; padding-right: 12px;
-    font-variant-numeric: tabular-nums; letter-spacing: .5px; }}
+  & { font-size: 12.5px; padding: 0 0 0 8px; display: flex; align-items: center;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%); }
+  & b { font-family: var(--font-num); font-weight: 700; margin-left: auto; padding-right: 12px; }}
 #resHud{
   & .res-gold { border-left-color: var(--ak-yellow); }
-  & .res-atk { border-left-color: var(--ak-red); }
-  & .res-gold b { color: var(--ak-yellow); }
-  & .res-atk b { color: #ff7a6b; }}
+  & .res-atk { border-left-color: var(--ak-red); }}
   body.lobby #resHud { display: none; }
 
   /* 顶部居中：当前环层名（中文白 + 英文黄，固定大小，不随镜头缩放） */
 #layerBanner{
-  & { position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  & { position: absolute; left: 50%; transform: translateX(-50%);
     z-index: 8; pointer-events: none; text-align: center; user-select: none; }
-  & { padding: 5px 32px 6px; background: linear-gradient(90deg, transparent, rgba(8,10,12,.84) 16%, rgba(8,10,12,.84) 84%, transparent); }
   &::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 1px; width: 60%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.42), transparent); pointer-events: none; }
-  & .lb-zh { font-family: var(--font-ui); font-size: 20px; font-weight: 700; color: #ffffff; letter-spacing: 8px; line-height: 1.25; text-shadow: 0 2px 6px rgba(0,0,0,.9); white-space: nowrap; }
-  & .lb-en { font-family: var(--font-label); font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ak-yellow); letter-spacing: 5px; margin-top: 1px; text-shadow: 0 1px 2px rgba(0,0,0,.8); white-space: nowrap; }}
+  & .lb-zh { font-family: var(--font-ui); font-size: 20px; font-weight: 700; color: #ffffff; line-height: 1.25; white-space: nowrap; }
+  & .lb-en { font-family: var(--font-label); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 5px; margin-top: 1px; text-shadow: 0 1px 2px rgba(0,0,0,.8); white-space: nowrap; }}
   body.lobby #layerBanner { display: none; }
   /* 设置里的界面开关（提示条 / 环层横幅） */
   body.no-banner #layerBanner { display: none; }
@@ -181,14 +171,14 @@ body.lobby #topBtns { display: none; }
 
   /* 顶部血量 HUD：完全照搬参考图——深色斜切条 + 蓝色图标块 + 上标签下大数值
      （比旁边按钮更小巧精致：align-self:center 脱离 stretch，整体收紧） */
-  #hpHud { display: flex; align-items: stretch; align-self: center; background: linear-gradient(90deg, rgba(10,12,14,.94), rgba(26,29,33,.88)); border: none; border-radius: 0; box-shadow: inset 0 0 0 1px var(--ak-line-hi), 0 4px 14px rgba(0,0,0,.55); clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+  #hpHud { display: flex; align-items: stretch; align-self: center; border-radius: 0; }
 .hp-hud-icon{
-  & { flex: none; width: 28px; display: flex; align-items: center; justify-content: center; color: #04121b; background: var(--ak-blue); box-shadow: inset -2px 0 0 rgba(0,0,0,.25); }
+  & { flex: none; width: 28px; display: flex; align-items: center; justify-content: center; color: #04121b; box-shadow: inset -2px 0 0 rgba(0,0,0,.25); }
   & svg { width: 14px; height: 14px; }}
   .hp-hud-body { position: relative; display: flex; flex-direction: column; justify-content: center;
     gap: 1px; padding: 3px 14px 3px 7px; }
   .hp-hud-label { position: static; font-family: var(--font-ui);
-    font-size: 9px; letter-spacing: 3px; color: var(--ak-sub); font-weight: 700; white-space: nowrap; line-height: 1; text-transform: uppercase; background: none; padding: 0 0 0 8px; }
+    font-size: 9px; white-space: nowrap; line-height: 1; text-transform: uppercase; padding: 0 0 0 8px; }
   /* 当前血量数值：大号蓝字，位于标签正下方（参考图 4/4 样式） */
 #hpHud #hpText{
   & { position: static; inset: auto; transform: none; text-align: left; margin-left: 8px;
@@ -327,23 +317,6 @@ body.lobby #topBtns { display: none; }
   .tier-bd-B { border-color: #5cc2ff; box-shadow: inset 0 -3px 0 #5cc2ff; }
   .tier-bd-C { border-color: #8f979c; }
   .tier-bd-EV { border-color: var(--ak-green); box-shadow: inset 0 -3px 0 var(--ak-green); }
-
-  /* ---------- ? 帮助按钮与弹层（页面说明文字统一收进二级界面） ---------- */
-  /* 2026-09-06 留言：问号在圆钮内严格居中 */
-.help-btn{
-  & { flex: 0 0 auto; width: 28px; height: 28px; margin-left: 2px; padding: 0;
-    display: inline-flex; align-items: center; justify-content: center;
-    border: 1px solid var(--ak-line-hi); border-radius: 0; background: rgba(10,12,14,.8); color: var(--ak-white);
-    clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%); font-family: var(--font-display);
-    font-size: 14px; font-weight: 800; line-height: 1; cursor: pointer;
-    transition: background-color .14s, color .14s, border-color .14s; }
-  &:hover { color: #04121b; background: var(--ak-blue); border-color: var(--ak-blue); }}
-  .help-body { text-align: left; display: flex; flex-direction: column; gap: 10px; }
-.help-body .help-item{
-  & { margin: 0; padding: 10px 14px; border: none; border-left: 3px solid var(--ak-blue); border-radius: 0;
-    background: linear-gradient(90deg, rgba(31,178,255,.08), rgba(255,255,255,.02) 40%); font-size: 12.5px; line-height: 1.75; color: #c9c9c9; }
-  & b { display: block; margin-bottom: 2px; color: #ececec; font-size: 13px;
-    letter-spacing: 1px; }}
 
   /* 开发者工具面板（强制遭遇战 / BOSS 战） */
   #devPanel { text-align: center; }

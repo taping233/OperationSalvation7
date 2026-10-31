@@ -36,7 +36,7 @@ body #overlay #depMain.pg.hub.departure-cover.departure-glass {
   & #depPool .dep-card-face .hs-card { position:relative; inset:auto; width:100%; max-width:100%; margin:0; font-size:16px; transform:none; }
   & #depPool .dep-card.picked::after { content:none; }
   & #depPool .dep-card.picked .dep-card-face::after { content:'✓'; position:absolute; top:6px; right:6px; z-index:6; display:grid; place-items:center; width:28px; height:28px; color:#173940; background:#a6dad4; border:1px solid #e1f5ec; border-radius:5px; font:700 20px/1 var(--font-ui); pointer-events:none; }
-  & #depPool .dep-card.drained .dep-card-face { opacity:.5; }
+  & #depPool .dep-card:is(.drained,.unavailable) .dep-card-face { opacity:.5; }
   & .dep-quantity { display:flex; align-items:baseline; justify-content:space-between; gap:10px; width:100%; margin:6px 0 0; padding:0; background:none; border:0; color:#b6ccce; font-size:16px; }
   & .dep-quantity :is(.dep-own,.dep-picked-count) { position:static; display:inline; min-width:0; padding:0; background:none; border:0; box-shadow:none; color:#e0eeea; font:600 20px/1.4 var(--font-num); }
   & .dep-quantity span:first-child, & .dep-quantity .dep-own { color:#d4dfe9; }

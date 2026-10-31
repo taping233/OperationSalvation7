@@ -1,5 +1,5 @@
 /** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
-// Shared hand policy: static rectangles in original paint order; no nearest-card snapping.
+// Native painted ownership wins; static rectangles only fill the slot's exposed strip.
 export function pickStaticHandRegion(regions, x, y) {
   for (let i = regions.length - 1; i >= 0; i--) {
     const r = regions[i];
@@ -9,6 +9,7 @@ export function pickStaticHandRegion(regions, x, y) {
 }
 export function resolveHandHit({ regions, x, y, actualUid, interactive = false, ownerUid = null, accessBands = [] }) {
   if (interactive) return { uid: actualUid, route: 'control' };
+  if (actualUid != null) return { uid: actualUid, route: 'visible-card' };
   if (ownerUid != null && pickStaticHandRegion(accessBands, x, y) != null) return { uid: ownerUid, route: 'reading-access' };
   const uid = pickStaticHandRegion(regions, x, y);
   return uid == null ? { uid: actualUid, route: 'outside-reading' } : { uid, route: 'static-region' };
@@ -25,7 +26,7 @@ export function readingAccessBands({ uid, left, right, raisedTop, restDrop, card
 
 // One controller owns visual reading and physical card gestures. Commands remain
 // with the existing view/aim callbacks; native controls never get rerouted.
-const CONTROL = 'button,[data-term],.hsc-desc,input,select,textarea,a';
+const CONTROL = 'button,input,select,textarea,a';
 export function createHandHitController(root, { getCards, scale, isAiming, onPointerDown, onPlay }) {
   let ownerUid = null, press = null, identity = '';
   const existingAimPresses = new WeakSet();
@@ -84,8 +85,7 @@ export function createHandHitController(root, { getCards, scale, isAiming, onPoi
     // Keyboard and assistive/programmatic activation retain the existing path.
     if (event.detail === 0 || event.button !== 0 || event.defaultPrevented) return;
     if (event.target?.closest?.(CONTROL)) {
-      // Reading text is not a play command; buttons keep their native action.
-      if (event.target.closest('.hsc-desc') && !event.target.closest('button,a,input,select,textarea')) event.stopPropagation();
+      // Actual action controls keep their native action; card prose is draggable.
       press = null;
       return;
     }

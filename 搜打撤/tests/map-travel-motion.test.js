@@ -131,11 +131,17 @@ describe('continuous travel commits stable nodes', () => {
     expect(g.state).toBe('moving');
     expect(harness.safePage).not.toHaveBeenCalled();
     vi.advanceTimersByTime(700);   // 看门狗兜底：提交稳定节点并结算目的格
-    expect(saved).toEqual([{ state:'idle', trackPos:1, turn:2, pos:{x:120,y:0}, visited:{'0,0':1,'0,1':1,'0,2':1,'1,1':1} }]);
+    const visited = { '0,0':1, '0,1':1, '0,2':1, '1,1':1 };
+    expect(saved).toEqual([
+      { state:'idle', trackPos:1, turn:2, pos:{x:120,y:0}, visited },
+      { state:'idle', trackPos:2, turn:3, pos:{x:240,y:0}, visited },
+    ]);
     expect(g).toMatchObject({ state:'idle', trackPos:2, turn:3 });
     expect(harness.safePage).not.toHaveBeenCalled();
     expect(getMapTravelPresentation(g)).toBeNull();
     expect(window.SDT.UI.refresh.mock.calls.length).toBeGreaterThan(0);
+    vi.advanceTimersByTime(5000);
+    expect(saved).toHaveLength(2);
     harness.save.mockReset();
   });
 });

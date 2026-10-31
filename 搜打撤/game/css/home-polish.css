@@ -299,9 +299,9 @@ body #title.home-composed{
 & .home-system .home-button-copy::after { color: #acbdca; }
 & .home-start .home-button-copy::after { content: 'ENTER THE CITY'; color: #14120a; opacity: .78; }
 & .home-library .home-button-copy::after { content: 'PHOTO STUDIO'; }
-/* Menu sheen is disabled. */
+/* The city plate catches a slow, warm sweep behind its label. */
 & .home-sheen {
-  display: none;
+  display: block; z-index: -1; opacity: .48;
   position: absolute; inset: 0; pointer-events: none; overflow: hidden; clip-path: var(--plate-shape);
   background: linear-gradient(105deg, transparent 40%, #ffffff8c 50%, transparent 60%) 170% 0 / 260% 100% no-repeat;
   animation: none;
@@ -526,4 +526,53 @@ body.interface-motion:not(.reduce-motion) #overlay{
   @keyframes hpRise { from { clip-path: inset(100% 0 0 0); transform: translateY(28px); } to { clip-path: inset(-40px); transform: none; } }
 
   /* 设置与名单各自展开信息区，整页不再叠加另一套方向动画。 */
+}
+
+/* Shared option lighting: clipped light layers preserve the button hit areas. */
+body #title.home-composed {
+  & .home-plate { --option-light: #bceaff; }
+  & .home-start { --option-light: #ffe5a0; filter: drop-shadow(0 0 12px #ffe3a032); }
+  & .home-plate > .home-hover-glow {
+    opacity: .28;
+    background: linear-gradient(90deg, #c9efff66, transparent 75%) top / 100% 1px no-repeat,
+      linear-gradient(90deg, transparent 25%, #c9efff55) bottom / 100% 1px no-repeat,
+      radial-gradient(ellipse at 12% 50%, #bceaff30, transparent 72%);
+  }
+  & .home-secondary .home-plate > .home-hover-glow {
+    background: linear-gradient(270deg, #c9efff77, transparent 80%) top / 100% 1px no-repeat,
+      linear-gradient(270deg, transparent 15%, #c9efff55) bottom / 100% 1px no-repeat,
+      radial-gradient(ellipse at 90% 50%, #bceaff38, transparent 72%);
+  }
+  & .home-start > .home-hover-glow {
+    background: linear-gradient(105deg, #f2f7ed, #fff0c9 70%);
+    opacity: .16;
+  }
+  & .home-plate:is(:hover,:focus-visible) > .home-hover-glow { opacity: 1; }
+  & .home-plate .home-line-icon { transition: filter .45s ease, color .45s ease; }
+  & .home-plate:not(.home-start):is(:hover,:focus-visible) .home-line-icon {
+    filter: drop-shadow(0 0 4px var(--option-light)) drop-shadow(0 0 14px #bceaff99);
+  }
+  & .home-plate:not(.home-start):is(:hover,:focus-visible) .home-button-cn {
+    text-shadow: 0 0 12px #bceaff99;
+  }
+  & .home-plate:active > .home-hover-glow { opacity: .65; }
+  & .home-tool:is(:hover,:focus-visible) { filter: drop-shadow(0 0 6px #bceaffb3); }
+  & .home-system { opacity: .86; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  body:not(.reduce-motion) #title.home-composed {
+    & .home-start .home-sheen { animation: homeOptionSweep 7s ease-in-out infinite; }
+    & .home-collection .home-hover-glow { animation: homeOptionBreath 6s ease-in-out infinite; }
+    & .home-library .home-hover-glow { animation-delay: -3s; }
+    & .home-plate:is(:hover,:focus-visible) > .home-hover-glow { animation: none; }
+    & .home-start:is(:hover,:focus-visible) .home-sheen { animation-duration: 2.4s; opacity: .8; }
+  }
+}
+@keyframes homeOptionSweep {
+  0%, 55% { background-position: 170% 0; }
+  88%, 100% { background-position: -70% 0; }
+}
+@keyframes homeOptionBreath {
+  0%, 100% { opacity: .25; }
+  50% { opacity: .65; }
 }

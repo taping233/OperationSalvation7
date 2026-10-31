@@ -39,10 +39,10 @@ button{&:disabled{cursor:default;opacity:.45;filter:saturate(.55)}&:active:not(:
 #miniMap{width:100%;max-width:560px;height:76px;display:block;opacity:.95}
 /* 行动/价值数字仍由 UI.refresh 维护（元素被引用），仅按要求不显示 */
 #statsPanel .stat-duo{display:none}#devPanel{width:260px;min-width:240px}
-#layerBanner{&{top:20px;padding:10px 28px}& .lb-zh{font:18px var(--font-ui);letter-spacing:5px}& .lb-en{font:9px 'Cascadia Code'}}#topBtns{left:22px;top:20px}#resHud{top:20px;right:22px}#hpHud{background:#1e2022;border:1px solid #71777b;box-shadow:none;clip-path:none}.hp-hud-icon,.hp-hud-label{background:#5d646b}.hp-hud-label{font-weight:400;letter-spacing:2px}#topBtns #btnMute{border:1px solid #71777b}
+#layerBanner{&{top:20px;padding:10px 28px}& .lb-zh{font:18px var(--font-ui)}& .lb-en{font:9px 'Cascadia Code'}}#topBtns{left:22px;top:20px}#resHud{top:20px;right:22px}#hpHud{border:1px solid #71777b}.hp-hud-label{font-weight:400}#topBtns #btnMute{border:1px solid #71777b}
 #topBtns #btnHelp{&{border:1px solid #71777b;padding:0;width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;color:#d7d8da}
 &:hover{background:#2b2e31;color:#ffffff}}
-#resHud{& .chip-mini{background:#1e2022e8;border:1px solid #71777b;box-shadow:none;min-width:92px;height:42px}& .res-gold b{color:#eed47f}}
+#resHud{& .chip-mini{min-width:92px}}
 #overlay{
 &{background:#101112a8;backdrop-filter:blur(6px)}&.opaque{background:linear-gradient(125deg,#202325,#181a1c);backdrop-filter:none}}
 #overlay .card:where(:not(.ui-dialog-panel)){&{border:1px solid #74797c;background:linear-gradient(125deg,#2b2e31,#1e2022);box-shadow:0 25px 100px #0d0e0f99;border-radius:0}&::before{display:none}&.page,&.bag-page{border:0;border-radius:0;background:linear-gradient(125deg,#272a2d,#1b1d1f)}}#overlay h2,.pg-head h2{color:#ebebeb;font-weight:400;letter-spacing:4px}.pg-head,.hub-head{border-bottom:1px solid #757a7e;padding-bottom:20px}.hub-tab{background:#2f3336;border:1px solid #6e7478;color:#e8e8e9;border-radius:0;box-shadow:none}.ov-note,.ov-stats,.ov-empty{color:#bfc2c5;line-height:1.8}.hub-card,.cls-card,.ach-row{background:#25282a;border:1px solid #4d5359;border-radius:0;box-shadow:none}.hub-card h3{font-weight:400;letter-spacing:3px;color:#dedfe0}.hub-tabs{gap:10px;padding-top:10px}
@@ -216,7 +216,7 @@ body.page-opaque #sidebar{visibility:hidden}
 &.slot-art-2 .slot-card-bg,
 &.slot-art-3 .slot-card-bg,
 &.slot-art-4 .slot-card-bg,
-&.slot-art-5 .slot-card-bg{background-image:url('../assets/slot-bg-knight-fantasy.webp');background-size:500% 100%}
+&.slot-art-5 .slot-card-bg{background-image:var(--slot-wallpaper,url('../assets/slot-bg-knight-fantasy.webp'));background-size:500% 100%}
 &.slot-art-1 .slot-card-bg{background-position:0% center}
 &.slot-art-2 .slot-card-bg{background-position:25% center}
 &.slot-art-3 .slot-card-bg{background-position:50% center}
@@ -486,9 +486,6 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 @keyframes czFadeOut{from{opacity:1}to{opacity:0}}
 
 /* —— 2026-09-07 留言批次 —— */
-/* 顶部环层横幅背景透明：只留文字（背景块+金边框一并去掉） */
-#layerBanner{background:transparent;border-bottom:0}
-
 /* 战斗弹层黑边收口：战斗时 card 同时挂 battle+room，
    #overlay.room-view .card.room 的 padding/深灰渐变/ovBody 限宽以更高优先级
    压过战斗全屏规则，四周漏出黑边——这里以更高优先级统一压回全屏 */
@@ -503,13 +500,12 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
   border:1px solid #6e7478;color:#e8e8e9;border-radius:0;font-size:12.5px;letter-spacing:2px;white-space:nowrap}
 &:hover{background:#41464b;border-color:#d2d3d4}}
 
-/* 地图定位按钮（镜头回到当前位置，同 F 键）：挪到画布右下角（2026-09-07 留言），
-   fixed 定位脱离左上按钮组；底部 105px 是下边栏，加回其上 */
+/* 地图定位按钮（镜头回到当前位置，同 F 键）：基础边框与图标对齐。
+   位置、尺寸及交互配色分别由 expedition-map.css、page-expedition-hud.css 维护。 */
 #topBtns #btnLocate{
-&{position:fixed;left:auto;top:auto;right:16px;z-index:8;
-  border:1px solid #71777b;background:#1f2124;box-shadow:none;color:#dedfe0;
-  font-size:15px;padding:0;width:44px;height:44px;border-radius: var(--radius-panel);display:flex;align-items:center;justify-content:center}
-&:hover{background:#2b2e31;color:#ffffff}}
+left:auto;top:auto;z-index:8;
+  border:1px solid #71777b;box-shadow:none;
+  font-size:15px;padding:0;border-radius: var(--radius-panel);display:flex;align-items:center;justify-content:center}
 
 /* ═══════════ 留言批次 2026-09-07 晚（20:56-22:05 共 16 条） ═══════════ */
 
@@ -880,9 +876,6 @@ body.reduce-motion #layerBanner { animation: none !important; }
 /* #7 横幅英文改金色衬线花体（原 Cascadia 9px 等宽） */
 #layerBanner .lb-en{font-family:'Segoe Script','Brush Script MT',cursive!important;font-size:13px!important;letter-spacing:2.5px!important;color:var(--gold-main)!important;text-shadow:0 1px 3px #000000a8!important}
 
-/* #8 已知区域键已从 HTML 移除；背包浮动键放大并落到底部栏正上方（原 bottom:20 会被 105px 底部栏盖住），
-   定位键同步上移让出重叠区 */ /* 09-25：底栏已加高到 142px，旧 105px 基数让浮键被拦腰遮住 */
-#topBtns #btnLocate{bottom:calc(142px + 12px + 82px)!important}
 body.cardlib-open #overlay.closing{animation:ovFadeOut .2s ease forwards!important}
 
 /* #11 留言库返回键：右下 BACK 取消，改左上角，与主页退出键同款（.ak-exit 64×58）同位（top16/left18） */

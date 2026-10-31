@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-descender",
+      "asset": "cards/hero-volcano.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a1827c-7478-7b03-8e0d-5b52446caeb7/exec-1d5efc50-5980-411e-b806-31ff62e874dd.png",
+      "revision": "volcano-burning-eye-left-20261028",
+      "prompt": "Edit this existing illustration with ONE small localized change: shift the entire huge burning eye in the upper background slightly LEFT, approximately 10% of the canvas width. Its vertical pupil should now sit just left of the canvas center. Preserve the eye's current enormous size (roughly one third of the canvas), shape, subdued ember colors, smoke and flame integration. Repaint the vacated background seamlessly with the same flames. Keep the foreground male elf mage, his exact position, identity, face, glasses, hat, gesture, clothing, boots and full-body framing unchanged. Preserve the existing hand-painted matte anime block-brush style and all other composition. No additional eyes, no text, no frame.",
+      "references": [
+        "game/assets/cards/hero-volcano.webp"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "at": "2026-10-31T22:20:53.735715+00:00",
+  "unityPassed": true,
+  "domainChecks": {
+    "battle": 47,
+    "run": 326,
+    "hubSave": 472
+  },
+  "native": [
+    {
+      "name": "native-battle",
+      "passed": true,
+      "sourceCount": 382,
+      "pid": 22232,
+      "resultSha256": "0c400b9d306ff4aecc9a135ddc356c05dad6e196f24a008095db4833293eced3"
+    },
+    {
+      "name": "native-shared",
+      "passed": true,
+      "sourceCount": 382,
+      "pid": 18240,
+      "resultSha256": "c4e42648ad665bfa449bec9a1898cff83137e76926e5daf5aa62cd9ad5244961"
+    },
+    {
+      "name": "native-focus-final",
+      "passed": true,
+      "sourceCount": 383,
+      "checks": 48,
+      "pid": 32400,
+      "resultSha256": "edb0754d795e1a41b164441529b649e24e5a415b61c406560846e94804dc5c52"
+    }
+  ],
+  "player": {
+    "passed": true,
+    "exitCode": 0,
+    "images": 61,
+    "buildGUID": "f83ab90840ac4e558400ef9f736d3d59",
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "dpi": 120.0,
+    "osHardwareInput": false,
+    "evidence": "unity-player-focus-final",
+    "resultSha256": "bf1d1082db788fc40b7b269ff5e85e20a79ca826797357c6e833f9e4ec79224e"
+  },
+  "sourcePreflight": {
+    "at": "2026-10-31T20:21:56.923294+00:00",
+    "buildInputs": 3925,
+    "changedBuildInputs": [],
+    "packageFiles": 166,
+    "changedPackageFiles": [],
+    "viteInputs": 858,
+    "changedViteInputs": [],
+    "passed": true
+  },
+  "viteStaticFixes": {
+    "rulesChanged": false,
+    "assertionsWeakened": false,
+    "files": [
+      {
+        "path": "搜打撤/game/src/battle/core/battle.resolution.domain.js",
+        "beforeSha256": "3cc0d0691c1784dcaaee321a68f22898476377053e7d0e5fd14f508bdc39fd51",
+        "afterSha256": "43738fed9dbcb4bd50e7d30d730831531c1cbd2ec4f98cf2b5a8d8c961d3857d",
+        "change": "Use the existing ResolveCard.steps sixth-argument contract before destructuring the hand-selection completion callback. The synchronous wrapper retains complete generator consumption and uses the same explicit rest-argument tuple."
+      },
+      {
+        "path": "搜打撤/game/src/hub/bag-inventory-commands.js",
+        "beforeSha256": "f193ac63628364f093870263dc36f4dd4e79cd63c7c27d59385004747fe2133d",
+        "afterSha256": "11c7456db0bafde20d3ca94b14486e5f3925dfe41285bc8040fde8771f18dd5d",
+        "change": "Capture Object.assign return intersection so the existing retrieval capacity metadata remains statically visible; runtime fields unchanged."
+      },
+      {
+        "path": "搜打撤/game/src/run/game.run.events.js",
+        "beforeSha256": "2bce72a8cf8cf0526f7d56f2b8f8efb1bc4573b793eacf3344cf7301a5433e1e",
+        "afterSha256": "75157738443681729c0a8e16d233d27ae9f6e944a347aab09abba191e6439d36",
+        "change": "Use the existing injected SDT port and remove an unused import."
+      },
+      {
+        "path": "搜打撤/game/src/run/game.run.flow.js",
+        "beforeSha256": "704b627fc971301d85d508860023004373c0c618122f418d2b8bc4f2b8259ebb",
+        "afterSha256": "febf2aadc9b95e1a717c518e84a5187d2948775dff15b498d13bc98c92099de3",
+        "change": "Pass the existing enterNode function directly instead of an untyped forwarding closure."
+      }
+    ],
+    "scope": "Initial static diagnosis; the complete frozen gate identifies final inputs."
+  },
+  "viteFullGate": {
+    "passed": true,
+    "files": 960,
+    "passedTests": 9596,
+    "skippedTests": 41,
+    "failedTests": 0,
+    "totalTests": 9637,
+    "testDurationSeconds": 642.33,
+    "indexSha256": "9dc3802229df3b3668cd1d03fb6a59c4d458dfd85d6fff7533ed5f29fcb30c81",
+    "receipt": "staged-final-summary.json"
+  },
+  "limits": [
+    "native constructed EventSystem/production command input; isolated profiles",
+    "current window only; no hardware input, all-card combination or FPS claim",
+    "native compression ratio 10 versus source 12"
+  ],
+  "latestBuild": {
+    "passed": true,
+    "result": "Succeeded",
+    "errors": 0,
+    "inputsUnchanged": true,
+    "inputCount": 3927,
+    "evidence": "unity-build-focus-final/build-info.json",
+    "buildGUID": "f83ab90840ac4e558400ef9f736d3d59"
+  },
+  "viteBuild": {
+    "passed": true,
+    "receipt": "vite-build-result.json",
+    "budgetPassed": true,
+    "packageMiB": 174.7,
+    "startupRequests": 6,
+    "startupLimit": 40
+  },
+  "viteBrowser": {
+    "passed": true,
+    "receipt": "vite-browser-acceptance.json",
+    "consoleErrors": 0,
+    "startupAudioWarnings": 3,
+    "currentWindowOnly": true
+  }
+}

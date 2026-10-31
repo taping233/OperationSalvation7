@@ -46,7 +46,7 @@ describe('desktop startup window lifecycle', () => {
   ])('centres a movable window in the game display work area %j', (area, bounds) => {
     const { splash, game, screen } = setup(area);
     expect(screen.getDisplayMatching).toHaveBeenCalledWith(game.getBounds());
-    expect(splash.options).toEqual(expect.objectContaining({ ...bounds, movable: true, fullscreen: false, fullscreenable: false, frame: false }));
+    expect(splash.options).toEqual(expect.objectContaining({ ...bounds, movable: true, fullscreen: true, fullscreenable: true, frame: false }));
   });
   it('uses native centring when no screen adapter is provided', () => {
     expect(setup().splash.options.center).toBe(true);
@@ -217,9 +217,9 @@ describe('desktop readiness bridge', () => {
     expect(frames).toHaveLength(0);
     dom.window.document.body.dataset.state = 'title';
     await Promise.resolve();
-    expect(ipcRenderer.send).not.toHaveBeenCalled();
+    expect(ipcRenderer.send).not.toHaveBeenCalledWith('startup-ready');
     frames.shift()(); frames.shift()();
-    expect(ipcRenderer.send).toHaveBeenCalledExactlyOnceWith('startup-ready');
+    expect(ipcRenderer.send.mock.calls.filter(call => call[0] === 'startup-ready')).toEqual([['startup-ready']]);
     ipcRenderer.emit('startup-reveal');
     expect(dom.window.document.documentElement.dataset.desktopStartup).toBe('preparing');
     dom.window.document.documentElement.dataset.desktopStartup = 'covered';
@@ -253,17 +253,17 @@ describe('hidden game readiness frames', () => {
   }
   it('does not indefinitely gate an initialized hidden page on paint callbacks', () => {
     const { dom, frames, ipcRenderer } = bridge();
-    vi.advanceTimersByTime(249); expect(ipcRenderer.send).not.toHaveBeenCalled();
-    vi.advanceTimersByTime(1); expect(ipcRenderer.send).toHaveBeenCalledExactlyOnceWith('startup-ready');
+    vi.advanceTimersByTime(249); expect(ipcRenderer.send).not.toHaveBeenCalledWith('startup-ready');
+    vi.advanceTimersByTime(1); expect(ipcRenderer.send.mock.calls.filter(call => call[0] === 'startup-ready')).toEqual([['startup-ready']]);
     while (frames.length) frames.shift()();
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send.mock.calls.filter(call => call[0] === 'startup-ready')).toHaveLength(1);
     dom.window.dispatchEvent(new dom.window.Event('pagehide')); dom.window.close();
   });
   it('cancels readiness on departure and ignores late frame callbacks', () => {
     const { dom, frames, ipcRenderer } = bridge();
     dom.window.dispatchEvent(new dom.window.Event('pagehide'));
     vi.advanceTimersByTime(1000); while (frames.length) frames.shift()();
-    expect(ipcRenderer.send).not.toHaveBeenCalled(); expect(vi.getTimerCount()).toBe(0); dom.window.close();
+    expect(ipcRenderer.send).not.toHaveBeenCalledWith('startup-ready'); expect(vi.getTimerCount()).toBe(0); dom.window.close();
   });
   it('declares a native drag surface while leaving action buttons clickable', () => {
     const source = readFileSync('desktop-app/startup.html', 'utf8');
@@ -277,7 +277,7 @@ describe('loading screen feedback', () => {
     vi.useFakeTimers();
     const source = readFileSync('desktop-app/startup.html', 'utf8');
     const dom = new JSDOM(source, { runScripts: 'outside-only' });
-    const bridge = { retry: vi.fn(), quit: vi.fn(), onStatus: vi.fn() };
+    const bridge = { retry: vi.fn(), quit: vi.fn(), onStatus: vi.fn(), onProgress: vi.fn() };
     dom.window.sdtStartup = bridge;
     dom.window.setTimeout = setTimeout;
     dom.window.clearTimeout = clearTimeout;
@@ -287,10 +287,16 @@ describe('loading screen feedback', () => {
       dom.window.eval(source.match(/<script>([\s\S]*?)<\/script>/)[1]);
       const doc = dom.window.document;
       expect(doc.getElementById('retry').hidden).toBe(true);
-      expect(doc.getElementById('status').textContent).toBe('正在准备进入城市');
+      expect(doc.getElementById('status').textContent).toBe('正在载入游戏');
       vi.advanceTimersByTime(12000);
       expect(doc.getElementById('hint').textContent).toContain('仍在等待');
-      expect(Number(doc.getElementById('progress').getAttribute('aria-valuenow'))).toBeGreaterThan(8);
+      expect(doc.getElementById('progressNumber').textContent).toBe('55%');
+      const progress = bridge.onProgress.mock.calls[0][0];
+      progress({ percent: 85, label: '操作界面已就绪' });
+      expect(doc.getElementById('progressNumber').textContent).toBe('85%');
+      expect(doc.getElementById('status').textContent).toBe('操作界面已就绪');
+      progress({ percent: 70, label: '晚到的阶段' });
+      expect(doc.getElementById('progressNumber').textContent).toBe('85%');
       const update = bridge.onStatus.mock.calls[0][0];
       update('failed');
       const stoppedProgress = doc.getElementById('progressNumber').textContent;
@@ -303,7 +309,7 @@ describe('loading screen feedback', () => {
       expect(doc.getElementById('retry').hidden).toBe(true);
       expect(doc.body.classList.contains('failed')).toBe(false);
       vi.advanceTimersByTime(240000);
-      expect(doc.getElementById('progressNumber').textContent).toBe('94%');
+      expect(doc.getElementById('progressNumber').textContent).toBe('55%');
       update('ready');
       expect(doc.getElementById('progressNumber').textContent).toBe('100%');
       expect(vi.getTimerCount()).toBe(0);

@@ -1,4 +1,4 @@
-import { esc, escAttr } from '../core/shared.js';
+import { esc } from '../core/shared.js';
 import { eventEncounterText } from '../core/event-encounter-text.js';
 import { Random } from '../core/random.js';
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
@@ -16,6 +16,7 @@ import { discardInventoryCard } from '../hub/bag-inventory-commands.js';
 // Owns one event lifecycle: deterministic draw, page ownership, pending choices,
 // reward handoff and save retry. The flow assembly supplies runtime services.
 export function createRunEventController(ports) {
+const { encounterOpeningHTML = () => '' } = ports;
 const {
   game, UI, dom, MAP, getCards, sound, serializeReward, eventCommands, createDice,
   saveGame, pick, weighted, scaledEnemy,
@@ -23,7 +24,9 @@ const {
   grantEventCard, openFixedRewardsOnCell, openChestsOnCell, openPocketRestore,
   setBagReturnHook, bagSlots, setCardPageOpen, startBattle,
   eventNarrative,
-  eventOptionHTML,
+  eventOptionHTML, eventOptionState, richHTML,
+  patchRewardScene, rewardCardUnitHTML, rewardClaimHTML, rewardExitHTML, rewardSceneHTML, restoreRewardActionFocus,
+  captureOverlayReturnState, restoreOverlayReturnState,
 } = ports;
 const lifecycle = ports.lifecycle || createEventLifecycle(ports);
 const { eventSettling, captureEventContext, eventPageBinding, eventNodeShell, closeEventFlow,
@@ -103,7 +106,7 @@ async function runEventDeck(current = lifecycle.beginRequest()) {
   // 保存失败仍保留本局已抽事件；结算前的检查点会再次保存。
   await saveRunCheckpoint(saveGame);
   if (!current() || !waitingPage()) return false;
-  return triggerEventCard(card, current);
+  return triggerEventCard(card, current, true);
 }
 
 function renderUnavailableNodeEvent(current) {
@@ -111,7 +114,7 @@ function renderUnavailableNodeEvent(current) {
   game.state = 'modal';
   eventNodeShell({ tone:'event', icon:'[[icon:notes]]', title:'此处事件暂不可用',
     sub:'这个节点的事件记录已保留，当前卡库暂时无法显示；不会重新抽取事件。',
-    body:nodeOpt('eventUnavailableLeave', '返回地图', '保留原事件，稍后可重新进入') });
+    body:nodeOpt('eventUnavailableLeave', '返回地图', '当前节点可重进，前往下一节点后事件结束') });
   const active = eventPageBinding('eventUnavailableLeave', current);
   setBagReturnHook(() => renderUnavailableNodeEvent(current));
   UI.act('eventUnavailableLeave', () => { if (active()) closeEventFlow(); });
@@ -120,7 +123,7 @@ function renderUnavailableNodeEvent(current) {
 
 // 把库里的卡发给玩家（同名堆未满并入现有格；堆满或新卡需要空格——叠放上限见 game.session #7；
 // 珍珠盒扩出来的格子只收资源卡——canAcceptCard 统一判定，Q5 老板定向）
-async function triggerEventCard(card, current) {
+async function triggerEventCard(card, current, fresh = false) {
   const encounter = eventEncounterText(card.id, game.characterId || game.myClass);
   if (encounter.name) card = { ...card, name: encounter.name };
   game.eventLog = game.eventLog || [];
@@ -142,7 +145,8 @@ async function triggerEventCard(card, current) {
   if (!current() || game.state !== 'modal' || !ownsLoadingPage()) return;
   const choices = eventChoiceSpec(card, narrative);
   const resumedChoice = nodeEventAt(game)?.actionChoice;
-  if (Number.isInteger(resumedChoice) && choices?.[resumedChoice]?.rolls) {
+  if (Number.isInteger(resumedChoice) && choices?.[resumedChoice]?.rolls
+    && !eventOptionState(choices[resumedChoice], game).disabled) {
     const record = nodeEventAt(game);
     eventSettling.add(record);
     try { choices[resumedChoice].run(); }
@@ -172,7 +176,7 @@ async function triggerEventCard(card, current) {
     eventNodeShell({
       tone: 'event', asset: sceneMeta[2], icon: '[[icon:dice]]', title: card.name,
       sub: esc(encounter.intro || (narrative && narrative.intro) || card.desc || '神秘事件发生了……'),
-      body: optionHTML(),
+      body: encounterOpeningHTML(card.id, { animate:fresh && pageRevision === 1 }) + optionHTML(),
       foot:'<button class="ov-btn" data-act="evtReturn">返回地图</button><button class="ov-btn" data-act="evtBag">整理背包</button><p class="reward-notice" data-event-capacity role="status"></p>',
     });
     setBagReturnHook(() => renderEventPage());
@@ -184,6 +188,12 @@ async function triggerEventCard(card, current) {
       const choice = choices?.[index];
       if (!choice) return false;
       selectedChoice = index;
+      const availability = eventOptionState(choice, game);
+      if (availability.disabled) {
+        renderEventPage(availability.reason);
+        sound('deny');
+        return false;
+      }
       if (choice.canRun && !choice.canRun()) {
         renderEventPage(choice.unavailable || '当前放不下，奖励与选择已保留。');
         sound('deny');
@@ -393,16 +403,20 @@ function openEventRecode() {
       UI.log('待重编的原卡已变化或不在随身背包中，本次结果保留。','warn'); closeEventFlow(); return;
     }
     owner.recodeSources ||= entries.map(recodeSourceSnapshot);
-    drawEventCards('异常改装台','recode',entries.map(entry => transformCandidates(entry.card)), cards => showEventRecodeResult({ UI, Cards:getCards(), cards, entries, nodeShell:eventNodeShell, setReturn:setBagReturnHook, current:captureEventContext(), done:() => {
+    drawEventCards('异常改装台','recode',entries.map(entry => transformCandidates(entry.card)), cards => showEventRecodeResult({ UI, Cards:getCards(), cards, entries, nodeShell:eventNodeShell, setReturn:setBagReturnHook, current:captureEventContext(), openBag:() => bagSlots.showBackpack(), done:() => {
       if (entries.some((entry, i) => !game.ownedCards.includes(entry) || !recodeSourceMatches(entry, owner.recodeSources[i])
         || !transformCandidates(entry.card).some(candidate => candidate.id === cards[i].id))) {
-        UI.log('原卡或候选条件已变化，结果保留，请重新进入事件。', 'warn'); closeEventFlow(); return;
+        UI.log('原卡或候选条件已变化，结果保留，请重新进入事件。', 'warn'); return closeEventFlow();
       }
-      finishEventRoll(() => {
+      return finishEventRoll(() => {
       const names = entries.map(entry => entry.card.name);
       if (!eventCommands.recode(entries, cards, owner.recodeSources, transformCandidates)) return false;
-      entries.forEach((entry,i) => UI.log(`[[icon:recycle]] 【${esc(names[i])}】重编为【${esc(cards[i].name)}】`, 'loot'));
-      sound('recodeComplete'); game.state = 'idle';
+      game.state = 'idle';
+      try {
+        entries.forEach((entry,i) => UI.log(`[[icon:recycle]] 【${esc(names[i])}】重编为【${esc(cards[i].name)}】`, 'loot'));
+        sound('recodeComplete');
+      } catch (error) { console.warn('[event-recode] 更换已完成，反馈未完成', error); }
+      return true;
       });
     } }), false);
   };
@@ -415,43 +429,51 @@ function openEventRecode() {
   const selected = new Set();
   const current = captureEventContext();
   let settled = false;
-  const render = () => {
+  let presentation = null;
+  const render = (selectedIndex = null) => {
     if (settled || !current()) return;
+    const previousBody = UI.el.ovBody, previousPage = previousBody.querySelector('.event-recode-scene');
+    const focused = /** @type {HTMLElement} */ (previousPage?.contains(dom.activeElement) ? dom.activeElement.closest('[data-act]') : null);
+    const position = previousPage ? captureOverlayReturnState(previousPage) : presentation;
+    const focus = Number.isInteger(selectedIndex) ? { action:'eventRecodePick', index:String(selectedIndex) }
+      : focused ? { action:focused.dataset.act, index:focused.dataset.i } : null;
     game.state = 'modal';
-    eventNodeShell({
-      tone: 'event', asset: 'scene-event-recode', icon: '[[icon:recycle]]', title: '异常改装台',
-      sub: `选择 <b>${need}</b> 张招式或装备卡，将其随机变为同稀有度、同类型的卡牌（<span data-recode-count>${selected.size}</span>/${need}）`,
-      body: `<div class="bt-hand event-choice-hand">${eligible.map((o, i) => `
-        <button type="button" class="bt-card event-choice-card${selected.has(o.uid) ? ' picked' : ''}" data-act="eventRecodePick" data-i="${i}" aria-pressed="${selected.has(o.uid)}">
-          ${getCards().cardHTML(o.card, 'sm')}
-          ${selected.has(o.uid) ? '<span class="chest-got-mark">已选</span>' : ''}
-        </button>`).join('')}</div>
-        <div class="scene-ops"><button class="ov-btn" data-act="eventRecodeLeave">放弃转换</button><button class="ov-btn ok" data-act="eventRecodeGo" ${selected.size !== need ? 'disabled' : ''}>启动重编</button></div>`,
+    const html = rewardSceneHTML({
+      className:'reward-v14 event-reward-scene event-recode-scene reward-standalone-picker',
+      title:`选择 ${need} 张原卡`, source:'异常改装台', count:eligible.length,
+      rule:'选择招式或装备卡，启动后亲手投骰，将其随机变为同稀有度、同类型的卡牌。',
+      cards:eligible.map((entry, index) => rewardCardUnitHTML({ card:entry.card, face:getCards().cardHTML(entry.card), index,
+        readAction:'eventRecodeRead', selected:selected.has(entry.uid),
+        action:rewardClaimHTML({ index, cardName:entry.card.name, selected:selected.has(entry.uid),
+          label:selected.has(entry.uid) ? '取消选择' : '选择', disabled:!selected.has(entry.uid) && selected.size >= need,
+          actions:{ take:'eventRecodePick' } }),
+      })).join(''),
+      actions:`${rewardExitHTML('eventRecodeLeave', '放弃转换')}<button type="button" class="ov-btn ok" data-act="eventRecodeGo" ${selected.size !== need ? 'disabled' : ''}>启动重编</button>`,
+      footer:`<span class="reward-notice" role="status" aria-live="polite">已选 ${selected.size}/${need} 张</span><button type="button" class="reward-bag" data-act="eventRecodeBag">查看背包</button>`,
     });
-    setBagReturnHook(render);
+    if (!previousPage || UI.el.overlay.hidden || !patchRewardScene(previousBody, richHTML(html))) UI.showOverlay('', html, 'page');
+    const page = UI.el.ovBody.firstElementChild;
     const active = eventPageBinding('eventRecodePick', current);
-    const page = UI.el.ovBody;
-    const syncSelection = () => {
-      page.querySelectorAll('[data-act="eventRecodePick"]').forEach(button => {
-        const picked = selected.has(eligible[Number(button.dataset.i)]?.uid);
-        button.classList.toggle('picked', picked);
-        button.setAttribute('aria-pressed', String(picked));
-        const mark = button.querySelector('.chest-got-mark');
-        if (picked && !mark) {
-          const label = dom.createElement('span');
-          label.className = 'chest-got-mark'; label.textContent = '已选'; button.append(label);
-        } else if (!picked) mark?.remove();
-      });
-      page.querySelector('[data-recode-count]').textContent = String(selected.size);
-      page.querySelector('[data-act="eventRecodeGo"]').disabled = selected.size !== need;
-    };
+    setBagReturnHook(() => render());
+    UI.act('eventExit', () => { if (!settled && active()) return closeEventFlow(); });
+    UI.act('eventRecodeBag', () => {
+      if (settled || !active()) return;
+      presentation = captureOverlayReturnState(page);
+      return bagSlots.showBackpack();
+    });
+    UI.act('eventRecodeRead', d => {
+      const index = Number(d.i), entry = eligible[index];
+      if (settled || !active() || !Number.isInteger(index) || !entry) return;
+      const source = page.querySelector(`[data-act="eventRecodeRead"][data-i="${index}"]`);
+      UI.showCardZoom(entry.card, { hideNote:true, presentation:'expedition', from:source, returnFocus:source });
+    });
     UI.act('eventRecodePick', (d) => {
       if (settled || !active()) return;
       const entry = eligible[+d.i];
       if (!entry) return;
       if (selected.has(entry.uid)) selected.delete(entry.uid);
       else if (selected.size < need) selected.add(entry.uid);
-      syncSelection();
+      render(+d.i);
     });
     UI.act('eventRecodeLeave', () => { if (!settled && active()) { settled = true; finishEventRoll(() => { game.state = 'idle'; }); } });
     UI.act('eventRecodeGo', () => {
@@ -467,6 +489,10 @@ function openEventRecode() {
       convert();
     });
     UI.refresh(game);
+    restoreOverlayReturnState(page, position, { isCurrent:active });
+    if (focus && (!focused?.isConnected || Number.isInteger(selectedIndex))) restoreRewardActionFocus(page, focus,
+      { claimActions:['eventRecodePick'], returnActions:['eventRecodeGo', 'eventRecodeLeave', 'eventRecodeBag'] });
+    presentation = captureOverlayReturnState(page);
   };
   render();
 }
@@ -505,6 +531,7 @@ function openEventGamble() {
   let attempts = state.attempts;
   let settled = false;
   const current = captureEventContext();
+  let presentation = null;
   const attempt = () => {
     const attemptNumber = state.pending ?? state.attempts + 1;
     const guaranteed = attemptNumber >= 5;
@@ -525,26 +552,51 @@ function openEventGamble() {
   };
   const render = (lastMiss = false) => {
     if (settled || !current()) return;
+    const previousBody = UI.el.ovBody, previousPage = previousBody.querySelector('.event-gamble-scene');
+    const focused = /** @type {HTMLElement} */ (previousPage?.contains(dom.activeElement) ? dom.activeElement.closest('[data-act]') : null);
+    const position = previousPage ? captureOverlayReturnState(previousPage) : presentation;
+    const focus = focused ? { action:focused.dataset.act, index:focused.dataset.i } : null;
     game.state = 'modal';
-    eventNodeShell({
-      tone: 'event', asset: 'scene-event-gamble', icon: '[[icon:dice]]', title: '暗巷赌约',
-      sub: `每次投入 <b>3 币</b>后亲手投骰：<b>1～3 点落空，4～6 点拿走三张卡（50%）</b>；第 <b>5</b> 次任意点数都成功。已尝试 ${attempts}/5 次。${lastMiss ? '<br><b class="danger">骰子停下，这次没中。</b>' : ''}`,
-      body: `<div class="bt-hand event-choice-hand">${prizes.map((c, i) => `<button type="button" class="bt-card event-choice-card" data-act="eventGambleRead" data-i="${i}" aria-label="放大查看${escAttr(c.name)}" aria-haspopup="dialog">${getCards().cardHTML(c, 'sm')}</button>`).join('')}</div>
-        <div class="scene-ops"><button class="ov-btn" data-act="eventGambleLeave">放弃并离开</button><button class="ov-btn ok" data-act="eventGambleTry" ${(game.coins || 0) < 3 || !prizes.length ? 'disabled' : ''}>[[icon:coin]] 投入 3 币${attempts === 4 ? '（本次保底）' : ''}</button></div>`,
+    const html = rewardSceneHTML({
+      className:'reward-v14 event-reward-scene event-gamble-scene reward-standalone-picker',
+      title:'查看本局奖品', source:'暗巷赌约', count:prizes.length,
+      rule:`每次投入 3 币后亲手投骰：1～3 点落空，4～6 点拿走三张卡（50%）；第 5 次任意点数都成功。已尝试 ${attempts}/5 次。`,
+      cards:prizes.map((card, index) => rewardCardUnitHTML({ card, face:getCards().cardHTML(card), index, readAction:'eventGambleRead',
+        action:rewardClaimHTML({ index, cardName:card.name, label:'查看奖品', actions:{ take:'eventGambleRead' } }),
+      })).join(''),
+      actions:`${rewardExitHTML('eventGambleLeave', '放弃并离开')}<button type="button" class="ov-btn ok" data-act="eventGambleTry" ${(game.coins || 0) < 3 || !prizes.length ? 'disabled' : ''}>[[icon:coin]] 投入 3 币${attempts === 4 ? '（本次保底）' : ''}</button>`,
+      footer:`<span class="reward-capacity">[[icon:coin]] 持有 ${game.coins || 0} 币</span><button type="button" class="reward-bag" data-act="eventGambleBag">查看背包</button>`,
+      warning:lastMiss ? '<p class="reward-notice danger" role="status" aria-live="polite">骰子停下，这次没中。</p>' : '',
     });
+    if (!previousPage || UI.el.overlay.hidden || !patchRewardScene(previousBody, richHTML(html))) UI.showOverlay('', html, 'page');
+    const page = UI.el.ovBody.firstElementChild;
     setBagReturnHook(() => render(lastMiss));
     const active = eventPageBinding('eventGambleTry', current);
+    UI.act('eventExit', () => { if (!settled && active()) return closeEventFlow(); });
+    UI.act('eventGambleBag', () => {
+      if (settled || !active()) return;
+      presentation = captureOverlayReturnState(page);
+      return bagSlots.showBackpack();
+    });
     UI.act('eventGambleRead', d => {
       const i = Number(d.i), card = prizes[i];
-      if (settled || !active() || !card) return;
-      const source = UI.el.ovBody.querySelector(`[data-act="eventGambleRead"][data-i="${i}"]`);
-      UI.showCardZoom(card, { hideNote:true, presentation:'expedition', from:source, returnFocus:source });
+      if (settled || !active() || !Number.isInteger(i) || !card) return;
+      const source = page.querySelector(`.reward-card[data-act="eventGambleRead"][data-i="${i}"]`);
+      const control = dom.activeElement?.closest(`[data-act="eventGambleRead"][data-i="${i}"]`);
+      UI.showCardZoom(card, { hideNote:true, presentation:'expedition', from:source, returnFocus:page.contains(control) ? control : source });
     });
     UI.act('eventGambleLeave', () => { if (!settled && active()) { settled = true; finishEventRoll(() => { game.state = 'idle'; }); } });
     UI.act('eventGambleTry', () => {
-      if (!settled && active()) attempt();
+      if (!settled && active()) {
+        presentation = captureOverlayReturnState(page);
+        attempt();
+      }
     });
     UI.refresh(game);
+    restoreOverlayReturnState(page, position, { isCurrent:active });
+    if (focus && !focused?.isConnected) restoreRewardActionFocus(page, focus,
+      { claimActions:['eventGambleRead'], returnActions:['eventGambleTry', 'eventGambleLeave', 'eventGambleBag'] });
+    presentation = captureOverlayReturnState(page);
   };
   if (prizes.length < 3) {
     UI.log('[[icon:cards]] 本次赌约暂无完整的三张奖品', 'warn');
@@ -701,7 +753,10 @@ function eventChoiceSpec(card, narrative = null) {
       { label: '看看季渊的赌注', detail:'先投骰抽出货物；每次 3 币，1～3 点落空、4～6 点全拿，第 5 次保底', rolls:true, run: openEventGamble },
     ],
     'ev19-quartermaster': () => [
-      { label: '支付 3 币', detail:'亲手投骰抽出 3 张装备，再选择 1 张', coinCost:3, tone:'ok', deferConsume:true, rolls:true, run: openEventQuartermaster },
+      { get label() { return nodeEventAt(game)?.quartermasterPaid ? '继续领取装备' : '支付 3 币'; },
+        detail:'亲手投骰抽出 3 张装备，再选择 1 张', costTiming:'entry',
+        get coinCost() { return nodeEventAt(game)?.quartermasterPaid ? 0 : 3; },
+        tone:'ok', deferConsume:true, rolls:true, run: openEventQuartermaster },
       { label: '不领取装备', detail: '保留货币继续行进', run: settle(() => { UI.log('你没有领取转运装备，留下货币继续前进。', 'dim'); }) },
     ],
   };
@@ -781,9 +836,7 @@ function applyEventEffect(card) {
       eventCommands.gainFragment();
       UI.log(`[[icon:crystal]] 整备队交给你一枚员工通行证A碎片（${game.fragments}/2）`, 'loot');
       // 2026-09-19 留言 #21：在事件本界面内复原，不再跳成「营火休整」页
-      openPocketRestore(1, () => {
-        closeEventFlow();
-      }, {
+      openPocketRestore(1, () => closeEventFlow(), {
         tone: 'event', icon: '[[icon:tools]]', title: '战地整备 · 修整行装',
         sub: '整备队在撤离前替你修整一件行装。',
         feedbackExtra:'员工通行证A碎片 +1',

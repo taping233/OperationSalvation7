@@ -1,4 +1,4 @@
-import { overlayElements, resetEventGame, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
+import { connectSdtFixture, overlayElements, resetEventGame, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
 import { rollEventDice, flushEventActions } from './helpers/event-dice-async.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -24,10 +24,10 @@ const prizes = [
 ];
 let flow, scenes, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { game:H.game, Icons:{ rich:x => x }, Sound:{ sfx() {} }, Meta:{ track() {}, addXpToProgress() {} }, Base:{ bagCap:() => 9 },
+  await connectSdtFixture({ game:H.game, Icons:{ rich:x => x }, Sound:{ sfx() {} }, Meta:{ track() {}, addXpToProgress() {} }, Base:{ bagCap:() => 9 },
     MAP:{ chestKinds:{ small:{ name:'小型物资箱' } } }, UiScale:{ rect:el => el.getBoundingClientRect() },
     Cards:{ DROP_WEIGHTS:{ 古朴:1 }, all:() => H.cards, classPool:() => [], sellPrice:() => 1, isRandomObtainable:() => true,
-      cardHTML:(c, size = '') => `<div class="hs-card" data-card-id="${c.id}" data-size="${size}"><b>${c.name}</b><p class="hsc-desc">${c.desc || ''}</p></div>` } };
+      cardHTML:(c, size = '') => `<div class="hs-card" data-card-id="${c.id}" data-size="${size}"><b>${c.name}</b><p class="hsc-desc">${c.desc || ''}</p></div>` } });
   const { UI: standardUI } = await import('../game/src/ui/ui.js');
   UI = window.SDT.UI = { ...standardUI, ...eventUiMocks(() => UI),
   };
@@ -58,7 +58,7 @@ async function openBlackMarket() {
   const opening = flow.runEventDeck(); await vi.dynamicImportSettled(); await vi.advanceTimersByTimeAsync(1000); await opening;
   await UI._acts.evtChoice({ i:'0' }); await rollEventDice(UI);
 }
-const readers = () => [...UI.el.ovBody.querySelectorAll('[data-act="eventGambleRead"]')];
+const readers = () => [...UI.el.ovBody.querySelectorAll('.reward-card[data-act="eventGambleRead"]')];
 function closeZoom(kind = 'escape') {
   const zoom = document.getElementById('cardZoom');
   if (kind === 'escape') zoom.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true }));
@@ -72,12 +72,13 @@ describe('黑市投入前卡牌详情', () => {
     await openBlackMarket();
     const buttons = readers(), page = UI.el.ovBody.firstElementChild;
     expect(buttons).toHaveLength(3);
+    expect(UI.el.ovBody.querySelectorAll('.reward-claim[data-act="eventGambleRead"]')).toHaveLength(3);
     expect(buttons.map(button => button.querySelector('.hs-card').dataset.cardId).sort()).toEqual(prizes.map(card => card.id).sort());
     for (const [i, button] of buttons.entries()) {
       const expected = prizes.find(card => card.id === button.querySelector('.hs-card').dataset.cardId);
       expect(button.tagName).toBe('BUTTON'); expect(button.type).toBe('button'); expect(button.tabIndex).toBe(0);
       expect(button.getAttribute('aria-label')).toBe(`放大查看${expected.name}`);
-      expect(button.getAttribute('aria-haspopup')).toBe('dialog');
+      expect(button.dataset.i).toBe(String(i));
       UI.el.ovBody.querySelector('[data-act="eventGambleTry"]').focus();
       button.click();
       const zoom = document.getElementById('cardZoom');
@@ -92,6 +93,14 @@ describe('黑市投入前卡牌详情', () => {
       expect(UI.el.overlay.inert).toBe(false); expect(document.activeElement).toBe(button);
       expect(UI.el.ovBody.firstElementChild).toBe(page); expect(readers()[i]).toBe(button);
     }
+    const before=JSON.stringify(H.game), saves=H.saves.length, rolls=H.random.mock.calls.length;
+    const auxiliaries=[...UI.el.ovBody.querySelectorAll('.reward-claim[data-act="eventGambleRead"]')];
+    for (const [i,button] of auxiliaries.entries()) {
+      button.focus(); button.click();
+      expect(document.querySelector('#cardZoom .hs-card').dataset.cardId).toBe(buttons[i].querySelector('.hs-card').dataset.cardId);
+      closeZoom(); expect(document.activeElement).toBe(button);
+    }
+    expect(JSON.stringify(H.game)).toBe(before); expect(H.saves).toHaveLength(saves); expect(H.random).toHaveBeenCalledTimes(rolls);
     expect(UI.el.ovBody.textContent).not.toContain('点击卡牌放大查看');
   });
 

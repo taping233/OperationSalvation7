@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const ports = vi.hoisted(() => ({ convert: vi.fn(), read: vi.fn(), refresh: vi.fn(), ding: vi.fn() }));
@@ -49,7 +50,8 @@ beforeEach(async () => {
   ports.read.mockImplementation(() => ({ ok: true, value: structuredClone(base.data), revision: 4 }));
   ports.convert.mockResolvedValue({ ok: false, message: '保持库存' });
   base = {
-    slot: 1, data: { stash: [], collection: {} }, PET_EGG_ID: 'egg', HATCH_COST:50,
+    slot: 1, data: { stash: [], collection: {}, pets: {}, coins:100 }, PET_EGG_ID: 'egg', HATCH_COST:50,
+    PETS: [{ id:'dog', name:'旺财' }],
     materialInfo: item => item.type === '资源' ? { kind: 'wood' } : null,
     isCollected: item => !!base.data.collection[item.id],
     collectToggle: vi.fn(item => {
@@ -78,8 +80,8 @@ beforeEach(async () => {
     },
   };
   document.body.innerHTML = '<main id="hubMain" data-page="stash"><section class="hub-page" data-view="stash/cards"></section></main>';
-  window.SDT = { Base: base, UI: ui, Cards: { all: () => [card, growth], isRandomObtainable: () => true },
-    Meta: { onCollect: vi.fn(), checkUnlocks: vi.fn() } };
+  await connectSdtFixture({ Base: base, UI: ui, Cards: { all: () => [card, growth], isRandomObtainable: () => true },
+    Meta: { onCollect: vi.fn(), checkUnlocks: vi.fn() } });
   pages = await import('../game/src/hub/game.hub.pages.js');
 });
 afterEach(() => { document.body.replaceChildren(); vi.useRealTimers(); vi.restoreAllMocks(); });
@@ -318,8 +320,12 @@ describe('仓库补给物品真实页脚入口', () => {
   it('拆包真实按钮以净容量判断，四格空位加消耗卡包后恰好入库', async () => {
     base.data.stash = [{ card: pack, count: 1 }]; base.stashRoom = () => 3; pages.openStashCardView(0);
     (await clickAction(button('stashOpenPack'))); (await clickAction(button('stashOpenPack')));
-    expect(base.openCardPack).not.toHaveBeenCalled(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('拆包需要 4 格空位'), 'warn');
-    base.stashRoom = () => 4; base.openCardPack.mockImplementation(()=>{base.data.stash=[];return {ok:true};}); (await clickAction(button('stashOpenPack')));
+    expect(base.openCardPack).not.toHaveBeenCalled(); expect(button('stashOpenPack').disabled).toBe(true);
+    expect(document.getElementById('stash-special-use-reason').textContent).toContain('拆包需要 4 格空位');
+    base.stashRoom = () => 4; base.openCardPack.mockImplementation(()=>{base.data.stash=[];return {ok:true};});
+    pages.openStashCardView(0);
+    (await clickAction(button('stashOpenPack'))); expect(base.openCardPack).not.toHaveBeenCalled();
+    (await clickAction(button('stashOpenPack')));
     expect(base.openCardPack).toHaveBeenCalledExactlyOnceWith('tt-econpack', expect.arrayContaining([expect.objectContaining({ count: 1 })]));
     expect(base.openCardPack.mock.calls[0][1]).toHaveLength(5); expect(document.getElementById('cardZoom')).toBeNull();
   });
@@ -327,7 +333,12 @@ describe('仓库补给物品真实页脚入口', () => {
     base.data.stash = [{ card: { ...item, variantKey: 'first' }, count: 2 }, { card: { ...item, variantKey: 'second' }, count: 2 }];
     pages.openStashCardView(1); (await clickAction(button(action))); if (action === 'stashHatch') (await clickAction(button(action)));
     expect(base.useStashMaterial).not.toHaveBeenCalled(); expect(base.hatchPet).not.toHaveBeenCalled(); expect(base.openCardPack).not.toHaveBeenCalled();
-    expect(ui.log).toHaveBeenCalledWith('库存引用不唯一，请刷新仓库', 'warn');
+    if (action === 'stashUseMat') expect(ui.log).toHaveBeenCalledWith('库存引用不唯一，请刷新仓库', 'warn');
+    else {
+      expect(button(action).disabled).toBe(true);
+      expect(document.getElementById('stash-special-use-reason').textContent).toContain('库存引用不唯一，请刷新仓库');
+    }
+    expect(base.data.stash.map(stack => stack.count)).toEqual([2, 2]);
   });
 });
 

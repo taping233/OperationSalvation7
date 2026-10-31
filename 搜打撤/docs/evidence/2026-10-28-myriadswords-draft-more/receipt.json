@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-sword",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a18288-045e-7af2-bf6b-a16a7b86fd59\\exec-9bc81f04-a3b4-4392-b291-5853604ab9ee.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-28-myriadswords-draft-more/cards-wu-myriadswords-source.png",
+        "bytes": 2483578,
+        "sha256": "82e7a64ec2fa114baa062c20144d1fe8f3b3de24dfab272830b5764bbef937d4"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-28-myriadswords-draft-more/cards-wu-myriadswords-full-before.webp",
+          "bytes": 304400,
+          "sha256": "296bd623f0f4e03e3564b591c5c085bc73b52dca8f0d134ea4984ff3d118277c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-28-myriadswords-draft-more/cards-wu-myriadswords-thumb-before.webp",
+          "bytes": 32858,
+          "sha256": "84520d8faf38edbe748d5b312c71d019a290dc30c9ce1044f5045910c7c32703"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/wu-myriadswords.webp",
+          "bytes": 291582,
+          "sha256": "dbc32776b8f0a84a418d628883765b584e76848ddaab3c32d828a7833fdb8496",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/wu-myriadswords.webp",
+          "bytes": 30788,
+          "sha256": "aef25feb584070afd2744f86179fa533eb7b200113a7daac7d4dc8a1cc2a588e",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": "wu-myriadswords-nai5-circle-20261028",
+      "revision_after": "wu-myriadswords-draft-more-20261028",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/wu-myriadswords.webp",
+            "ext": "webp",
+            "bytes": 304400,
+            "sha256": "296bd623f0f4e03e3564b591c5c085bc73b52dca8f0d134ea4984ff3d118277c",
+            "license": "项目自有（NAI5 起稿＋内置重绘）",
+            "source": "docs/evidence/2026-10-28-myriadswords-circle/receipt.json"
+          },
+          "after": {
+            "path": "cards/wu-myriadswords.webp",
+            "ext": "webp",
+            "bytes": 291582,
+            "sha256": "dbc32776b8f0a84a418d628883765b584e76848ddaab3c32d828a7833fdb8496",
+            "license": "项目自有（NAI5 起稿＋内置重绘）",
+            "source": "docs/evidence/2026-10-28-myriadswords-draft-more/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/wu-myriadswords.webp",
+            "ext": "webp",
+            "bytes": 32858,
+            "sha256": "84520d8faf38edbe748d5b312c71d019a290dc30c9ce1044f5045910c7c32703",
+            "license": "项目自有（NAI5 起稿＋内置重绘）",
+            "source": "docs/evidence/2026-10-28-myriadswords-circle/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/wu-myriadswords.webp",
+            "ext": "webp",
+            "bytes": 30788,
+            "sha256": "aef25feb584070afd2744f86179fa533eb7b200113a7daac7d4dc8a1cc2a588e",
+            "license": "项目自有（NAI5 起稿＋内置重绘）",
+            "source": "docs/evidence/2026-10-28-myriadswords-draft-more/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1750,
+  "manifest_count_after": 1750
+}

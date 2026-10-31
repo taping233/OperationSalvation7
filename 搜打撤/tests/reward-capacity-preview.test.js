@@ -133,7 +133,7 @@ describe('真实发卡与只读顺序容量预估一致',()=>{
   });
   it('已越基础格时，普通卡仍能并入既有未满堆但不能新开普通格',()=>{
     arrange([...copies(pearl,1),...copies(ordinary,1)],20);
-    compareRealGrant([ordinary,ordinary,other(0),resource(0)],[0,1,3],[2]);
+    compareRealGrant([ordinary,ordinary,other(0),resource(0)],[0,1],[2,3]);
   });
   it('safe/stored珍珠盒不占普通格，但每张仍贡献真实9格扩容',()=>{
     arrange([...copies(pearl,1,{safe:true}),...copies(pearl,1,{stored:true})]);
@@ -144,7 +144,10 @@ describe('真实发卡与只读顺序容量预估一致',()=>{
     arrange([],17);compareRealGrant([pearl,resource(0),resource(1),other(0)],[0,1,2],[3]);
   });
   it('前卡占掉最后基础格后珍珠盒被拒，不产生虚假扩容',()=>{
-    arrange([],17);compareRealGrant([resource(0),pearl,resource(1)],[0],[1,2]);
+    arrange([],17);compareRealGrant([other(0),pearl,resource(1)],[0],[1,2]);
+  });
+  it('资源占总格但不抢普通格，随后收到珍珠盒可准确扩容',()=>{
+    arrange([],17);compareRealGrant([resource(0),pearl,resource(1)],[0,1,2],[]);
   });
   it('同名装备珍珠盒不能并堆突破基础容量',()=>{
     arrange(copies(pearl,1));compareRealGrant([pearl,...Array.from({length:10},(_,i)=>resource(i))],Array.from({length:9},(_,i)=>i+1),[0,10]);

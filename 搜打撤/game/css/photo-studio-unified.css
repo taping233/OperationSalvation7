@@ -243,6 +243,8 @@ body.cardlib-open #overlay .studio-archive .studio-catalog { display:flex; flex-
 }
 /* A quiet felt receiver gives the clips a physical support without boxing each photo. */
 body.cardlib-open #overlay .studio-archive .studio-catalog::before { content:none; display:none; }
+/* Keep dropdowns above the photo grid even while toolbar motion creates a stacking context. */
+body.cardlib-open #overlay .studio-archive .studio-filterbar { position:relative; z-index:3; }
 body.cardlib-open #overlay .studio-archive .studio-clear {
   margin-left:auto;
   border-radius:0;

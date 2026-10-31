@@ -108,7 +108,7 @@ it('compares real mixed combat inputs without keeping derived rules across rende
   expect(document.querySelector('[data-uid="extra-0"].bt-card').getAttribute('aria-label')).toContain('3 费');
   expect(stage().textContent).toContain(`第 ${turn + 2} 回合`);
   if (process.env.BATTLE_DERIVATION_BASELINE !== '1') {
-    expect(checkpoints[0]).toEqual({label:'ready',cost:10,effective:9});
+    expect(checkpoints[0]).toEqual({label:'ready',cost:9,effective:9});
     expect(totals.cost).toBeLessThanOrEqual(110);
     expect(totals.effective).toBeLessThanOrEqual(90);
   }

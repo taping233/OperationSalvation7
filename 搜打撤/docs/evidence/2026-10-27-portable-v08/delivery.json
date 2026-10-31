@@ -1,0 +1,15 @@
+{
+  "cleanupStatus": "blocked-by-automatic-policy",
+  "sourceDrift": "none",
+  "profile": "codename7-clean-20261027-cb1889a300f0408e",
+  "buildPassed": true,
+  "artifact": "D:\\素材\\代号柒\\搜打撤\\desktop-app\\dist\\代号柒-v0.8.0-便携无存档-20261027.exe",
+  "fullSuiteRun": false,
+  "profileAbsent": true,
+  "version": "0.8.0",
+  "copiedHashMatches": true,
+  "sha256": "31F75C91DCE7BDF44796BBB1C49E573BE6AE009C5C67E6BF4D7156A7BA45D199",
+  "inputFiles": 4551,
+  "cleanupApproval": "User explicitly approved 8 exact dist targets; deletion rejected twice before execution",
+  "bytes": 361261568
+}

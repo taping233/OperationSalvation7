@@ -164,6 +164,7 @@ describe('single-render raw-hand eligibility context', () => {
     expect(layers).toContain('unplayableReason(g.card, ctx.handRuleContext)');
     expect(layers).toContain('handRuleContext: extra && extra.handRuleContext');
     expect(view.match(/handRuleContext/g)).toHaveLength(5);
-    expect(layers.match(/handRuleContext/g)).toHaveLength(3);
+    expect(layers).toContain('commands.getCardPlayAvailability(uid, undefined, false, ctx.handRuleContext)');
+    expect(layers.match(/handRuleContext/g)).toHaveLength(4);
   });
 });

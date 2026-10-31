@@ -12,7 +12,7 @@ function setup(recoverSlotIfPending) {
   const UI = {
     showOverlay(_title, html) { document.body.innerHTML = `<div id="ovBody">${html}</div>`; },
     hideOverlay() { document.body.innerHTML = ''; },
-    registerHelp() {}, helpBtn() { return ''; }, act(name, fn) { handlers[name] = fn; },
+    act(name, fn) { handlers[name] = fn; },
     log: vi.fn(), clearLog() {}, hideScreen: vi.fn(), showScreen() {}, refresh() {}, confirmAction:vi.fn(async()=>true),
   };
   const setActiveSlot = vi.fn(slot => { activeSlot = slot; });

@@ -502,7 +502,7 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
     shopMod = await import('../game/src/run/game.run.shop.js');
     const { game, acts, ownedCards } = makeShop({ canReceiveCard: () => false });
     acts.shopInspect({ i: 0 });
-    expect(document.querySelector('.shop-detail .tone-limited').textContent).toContain('背包装不下');
+    expect(document.querySelector('.shop-detail .tone-limited').textContent).toContain('当前卡牌放不下：0/10 格');
     expect(document.querySelector('.shop-detail-buy').disabled).toBe(true);
     expect(document.querySelector('.shop-detail-buy').getAttribute('aria-disabled')).toBe('true');
     await acts.buyCard({ i: 0 });

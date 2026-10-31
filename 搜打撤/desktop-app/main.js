@@ -51,7 +51,10 @@ function registerGameProtocol() {
 }
 
 function createWindow() {
+  const display = screen.getDisplayNearestPoint(screen.getCursorScreenPoint());
   const win = new BrowserWindow({
+    x: display.bounds.x,
+    y: display.bounds.y,
     width: 1500,
     height: 950,
     minWidth: 1150,
@@ -72,7 +75,14 @@ function createWindow() {
   });
 
   runtimeGuard.attach(win);
-  attachStartupWindow({ BrowserWindow, ipcMain, app, screen }, win);
+  const startup = attachStartupWindow({ BrowserWindow, ipcMain, app, screen }, win);
+  startup.once('ready-to-show', () => {
+    // The native portable launcher stays visible until this fullscreen is painted.
+    const marker = process.env.SDT_PORTABLE_READY;
+    if (marker && path.basename(marker) === 'window-ready' && path.basename(path.dirname(marker)).startsWith('c7-launch-')) {
+      try { fs.writeFileSync(marker, 'ready'); } catch (error) { console.warn('启动画面交接失败', error); }
+    }
+  });
   win.webContents.on('did-fail-load', (_event, code, description, url, isMainFrame) => {
     if (isMainFrame) console.error(`桌面页面加载失败：${code} ${description} (${url})`);
   });

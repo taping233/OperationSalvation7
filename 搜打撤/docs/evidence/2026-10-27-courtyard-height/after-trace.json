@@ -1,0 +1,30 @@
+{
+  "result": {
+    "type": "object",
+    "value": {
+      "canvasHeights": [
+        699
+      ],
+      "first": {
+        "c": 699,
+        "h": 827,
+        "i": 0,
+        "overflow": "hidden",
+        "pageHeight": 891,
+        "r": 698.8375244140625
+      },
+      "frames": 100,
+      "heights": [
+        827
+      ],
+      "last": {
+        "c": 699,
+        "h": 827,
+        "i": 99,
+        "overflow": "hidden",
+        "pageHeight": 891,
+        "r": 698.8375244140625
+      }
+    }
+  }
+}

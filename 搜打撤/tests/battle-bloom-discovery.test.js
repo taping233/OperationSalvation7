@@ -1,5 +1,4 @@
 import { battleRules, playerFields } from './helpers/environment-fixtures.js';
-import { showBattleCardResults } from '../game/src/battle/view/battle.card-results.js';
 import { battleDiscoverBodyHTML } from '../game/src/battle/view/battle.discover-view.js';
 // Canonical hosted card through the real battle session; no browser state is used.
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
@@ -58,13 +57,13 @@ it.each([false,true])('永恒绽放只选一次，施放1张另2入手，文本�
  const handIds = R.hand.map(uid=>R.granted.find(o=>o.uid===uid)?.card.id).sort();
  expect(handIds).toEqual(unchosen); expect(handIds).not.toContain(chosen);
  expect(R.energy).toBe(energy - bloom.cost);
- const stage=document.createElement('div'),overlay=document.createElement('div');overlay.append(stage);
- showBattleCardResults(stage,R.cardAnims);
- const rows=[...stage.querySelectorAll('.bt-card-result')];
- expect(rows.find(row=>row.querySelector('b').textContent==='发现卡牌 · 排队施放').textContent).toContain(state.options[0].name);
- const acquired=rows.find(row=>row.querySelector('b').textContent==='获得卡牌 · 置入手牌');
- for(const option of state.options.slice(1))expect(acquired.textContent).toContain(option.name);
- expect(acquired.textContent).not.toContain(state.options[0].name);
+ const acquired=R.cardAnims.filter(event=>event.kind==='draw' && event.acquired);
+ expect(acquired.filter(event=>event.source==='discover-cast')).toMatchObject([
+  {name:state.options[0].name,card:{id:chosen}},
+ ]);
+ const handAcquired=acquired.filter(event=>event.source===undefined);
+ expect(handAcquired.map(event=>event.card.id).sort()).toEqual(unchosen);
+ for(const event of handAcquired)expect(R.hand).toContain(event.uid);
  BattleSession.commands.pickDiscover(0); await settle();
  expect(R.foes[0].hp).toBe(998); expect(R.hand).toHaveLength(2);
 });

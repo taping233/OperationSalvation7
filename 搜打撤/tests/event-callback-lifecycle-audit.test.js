@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { overlayElements, resetEventGame, eventCardMocks, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventCapacityPorts } from './helpers/environment-fixtures.js';
 import { flushEventActions } from './helpers/event-dice-async.js';
 import { rollEventDice } from './helpers/event-dice-async.js';
@@ -28,7 +29,7 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: (...args) => H
 
 let flow, altar, scenes, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { ...eventCardMocks(H) };
+  await connectSdtFixture({ ...eventCardMocks(H) });
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
   UI = window.SDT.UI = { ...overlayMethods, ...eventUiMocks(() => UI),
   };
@@ -169,7 +170,7 @@ describe('事件等待与回调生命周期审计', () => {
     await UI._acts.eventRecodePick({ i: '0' }); await flushEventActions(); await UI._acts.eventRecodePick({ i: '1' }); await flushEventActions();
     const oldGo = UI._acts.eventRecodeGo;
     UI.showOverlay('背包', '<main>背包</main>', 'page'); await returnFromBag();
-    expect(UI.el.ovBody.querySelectorAll('.picked')).toHaveLength(2);
+    expect(UI.el.ovBody.querySelectorAll('[data-reward-selected="true"]')).toHaveLength(2);
     oldGo(); expect(H.game.ownedCards.map(o => o.card.id)).toEqual(['m1', 'm2']);
     const currentGo = UI._acts.eventRecodeGo; currentGo(); await rollEventDice(UI);
     const after = H.game.ownedCards.map(o => o.card.id); currentGo();

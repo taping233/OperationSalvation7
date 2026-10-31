@@ -1,4 +1,4 @@
-import type { BattleCardInput, BattleCardRules, BattleSnapshot, BattleSnapshotInput, SnapshotAllyInput } from '../battle.snapshot.types.js';
+import type { BattleCardInput, BattleCardRules, BattleSnapshot, BattleSnapshotInput, SnapshotAllyInput, EquipmentSkillAvailability } from '../battle.snapshot.types.js';
 import type { DiscoverQueueJob, DiscoveringState } from '../effects/battle.discover-state.js';
 import type { HandSelectionState, HandSelectionEffect } from './battle.hand-selection.js';
 
@@ -50,7 +50,7 @@ export type ApplyTextEffects = {
 };
 export type ResolveCard = {
   (card: CoreCard, target: CoreFoe | null, infused?: boolean, fuelCost?: number, uid?: string): void;
-  steps(card: CoreCard, target: CoreFoe | null, infused?: boolean, fuelCost?: number, uid?: string): Generator<EffectYield, void>;
+  steps(card: CoreCard, target: CoreFoe | null, infused?: boolean, fuelCost?: number, uid?: string, execution?: { onHandSelectDone?: () => void }): Generator<EffectYield, void>;
 };
 
 /** Live effect callbacks execute only after a game is bound to this runtime. */
@@ -211,7 +211,8 @@ export type SnapshotProjectionOptions = { runtime: SnapshotRuntime; executionSes
     fuelUids?: string[]; battleToken?: number; selectionId?: number; foeFightFirst?: CoreFoe | null } | null;
   battleBagItems(): CardEntry[]; itemUsability(card: CoreCard): { usable: boolean; why: string };
   getConsumedPile(): string[]; R(): { bossDeckSize: number };
-  isBattleStartEquip(card: CoreCard): boolean; equipCap(): number; equipSkillText(card: CoreCard): string };
+  isBattleStartEquip(card: CoreCard): boolean; equipCap(): number; equipSkillText(card: CoreCard): string;
+  getEquipSkillAvailability?(uid: string): EquipmentSkillAvailability };
 
 export interface AudioPort {
   sfx(name: string): void; music(name?: string): void; setDucked(value: boolean): void;
@@ -245,6 +246,8 @@ export type SelectionPorts = Partial<Pick<EffectCommands, 'findCard' | 'addTempC
  deny(): void; random01(purpose?: string): number; throwIfActionCancelled(signal?: AbortSignal): void;
  session: EffectSession & { resumeTurnEnd?(): boolean };
  requestBattleRender?(): void; shuffleDeck?(): void;
+ checkHandCombinations?(): void;
+ resumeAutomaticCasts?(): void;
  queueBattleAction?(work: (signal: AbortSignal) => Promise<void>, label?: string, onError?: (error: unknown) => void): void;
  runStagedSteps?(steps: Generator<EffectYield, unknown>, signal: AbortSignal): Promise<unknown>;
  applyTextEffects?: ApplyTextEffects;
@@ -258,6 +261,9 @@ export type DrawPorts = Pick<EffectCommands, 'alive' | 'findCard' | 'sweepDead' 
  fireDrawn(card: CoreCard, target?: CoreFoe | null): void;
  fireAcquire(card: CoreCard, target?: CoreFoe | null): void;
  checkSealTransformation(): void; requestBattleRender(): void;
+ checkHandCombinations?(): void;
+ session?: ReturnType<typeof import('../runtime/battle.execution-session.js').createBattleExecutionSession>;
+ settlePendingSelections?(): void;
 };
 export type FoeLifecyclePorts = Pick<EffectCommands, 'alive' | 'foeIdx' | 'hitFoe'> & {
  finish(victory: boolean): void; stagedDeathFx: Set<CoreFoe>;

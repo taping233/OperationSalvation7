@@ -10,15 +10,16 @@ import { createMenuDataPage } from '../game/src/ui/menu-data.js';
 function setup() {
   document.body.innerHTML='<section id="overlay"><div id="ovBody"></div></section>';
   const game={state:'modal',toggles:{},discoveredPairs:new Set()}, acts={};
-  const UI={el:{overlay:document.getElementById('overlay'),ovBody:document.getElementById('ovBody')},
-    act:(name,fn)=>{acts[name]=fn;},showOverlay(_title,html){UI.el.ovBody.innerHTML=html;},hideOverlay:vi.fn(),confirmAction:vi.fn()};
+  const UI={el:{overlay:document.getElementById('overlay'),ovBody:document.getElementById('ovBody')},_overlayRevision:0,
+    act:(name,fn)=>{acts[name]=fn;},showOverlay(_title,html){UI._overlayRevision++;UI.el.ovBody.innerHTML=html;},hideOverlay:vi.fn(),confirmAction:vi.fn(),log:vi.fn()};
   return {UI,game,acts};
 }
 afterEach(()=>document.body.replaceChildren());
 
 describe('settings child return ownership',()=>{
   it.each(['inbox','data'])('%s rejects a return from a child whose page was replaced',kind=>{
-    const {UI,game,acts}=setup(), inbox=vi.fn(),data=vi.fn(),original=vi.fn(),newer=vi.fn();
+    const {UI,game,acts}=setup(), inbox=vi.fn(),data=vi.fn(),original=vi.fn();
+    const newer=vi.fn(commit=>commit(()=>UI.showOverlay('', '<p>当前返回页</p>')));
     const flow=createMenuSettingsPage({UI,game,document,runtime:{syncDevVisibility:()=>{}},getActiveSlot:()=>1,
       openSuggestionInbox:inbox,openDataPageUi:data,battleRestartHTML:()=>'',bindBattleRestart:()=>{},
       readCards:()=>({}),readNotes:()=>({}),readMotion:()=>({}),readSound:()=>({musicVolume:0,sfxVolume:0})});
@@ -27,6 +28,8 @@ describe('settings child return ownership',()=>{
     expect(entryFlag).toBe(kind==='data');
     flow.openSettings({returnTo:newer}); back(); acts.closeSettings();
     expect(original).not.toHaveBeenCalled(); expect(newer).toHaveBeenCalledOnce();
+    expect(UI.el.ovBody.textContent).toBe('当前返回页');
+    expect(UI.log).not.toHaveBeenCalled();
   });
 
   it('inbox title entry keeps title return while a settings entry invokes its captured return',()=>{

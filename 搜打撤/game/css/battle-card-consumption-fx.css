@@ -1,0 +1,8 @@
+/* A real card dissolves at its captured hand position; atlas streaks carry the
+   remaining light into the actual consumed-pile button. Never intercept input. */
+#overlay .bt-consumption-card{position:absolute;z-index:76;pointer-events:none;transform-origin:50% 42%;contain:layout style;mask-image:linear-gradient(105deg,#000 30%,#000b 42%,transparent 54%,#0005 58%,transparent 65%);mask-size:260% 100%;mask-position:0 0;will-change:opacity,filter,mask-position}
+#overlay .bt-consumption-card .hs-card{font-size:16px}
+#overlay .bt-consumption-card>.bt-card{width:100%;height:100%;transform:none!important;animation:none!important;transition:none!important;pointer-events:none}
+#overlay .bt-fx-art.bt-consumption-stream{left:0;top:0;width:112px;height:48px;z-index:79;opacity:0;transform-origin:50% 50%;will-change:transform,opacity}
+body[data-render-quality="low"] #overlay .bt-consumption-card,#overlay .bt-consumption-card[data-reduced-motion="true"]{mask-image:none;will-change:opacity}
+@media(prefers-reduced-motion:reduce){#overlay .bt-consumption-card{mask-image:none;will-change:opacity}#overlay .bt-fx-art.bt-consumption-stream{display:none}}

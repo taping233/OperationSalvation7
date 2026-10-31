@@ -2283,10 +2283,10 @@
     {
       "path": "cards/bound-shadow.webp",
       "ext": "webp",
-      "bytes": 145662,
-      "sha256": "b2a6c9ab9f320c612bd36308823b3b458a9706db37445602ec910c7961588b88",
+      "bytes": 266738,
+      "sha256": "f54d4961815e715ace36d45ad139bc4d4ba670be0e047b93ed9daf1115a332e8",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-bound-wind-redesign/bound-final/receipt.json"
+      "source": "docs/evidence/2026-10-28-bound-shadow-install/receipt.json"
     },
     {
       "path": "cards/consumable.webp",
@@ -2362,9 +2362,9 @@
       "path": "cards/dark-eclipse.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 114828,
-      "sha256": "be45d434b10d40958cb1ab585953bad21849b325eb81d39cda0e469f12073caf",
-      "source": "docs/evidence/2026-10-10-forbidden-original/receipt.json"
+      "bytes": 111024,
+      "sha256": "23cf0e436f27721018be0f5bc869b8d55a87c5baa39c03a12822cfb4c4c7906f",
+      "source": "docs/evidence/2026-10-28-forbidden-face/receipt.json"
     },
     {
       "path": "cards/equip-tt2-apollo.webp",
@@ -2584,9 +2584,9 @@
       "path": "cards/hero-abysssovereign.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 115042,
-      "sha256": "582a95febc1cacaeda0bc9eacc0b46722a82a2d73d1a1256318b3e3935f209b0",
-      "source": "docs/evidence/2026-10-10-abyss-forbidden/receipt.json"
+      "bytes": 220688,
+      "sha256": "5ea1dcfca6712ed08b896387b3d6920100fad55c557ea0d8df3bacfa1bb59f68",
+      "source": "docs/evidence/2026-10-28-abyss-black-circle-original/receipt.json"
     },
     {
       "path": "cards/hero-descend.webp",
@@ -2625,10 +2625,10 @@
     {
       "path": "cards/hero-summoner.webp",
       "ext": "webp",
-      "bytes": 159064,
+      "bytes": 146820,
       "license": "项目自有（自制/AI 生成）",
-      "sha256": "e3725554a628f96c4e3b10460aa8e05e7254d307338c4bc2a9c9dc2cf0b876cc",
-      "source": "docs/evidence/2026-10-24-baita-one-eye-fix/receipt.json"
+      "sha256": "fd6c6f95ca9114190c280f4c072b7ac6d1003ca57c3cfa45b1e6103ce6bdfac9",
+      "source": "docs/evidence/2026-10-28-blooms-swap/receipt.json"
     },
     {
       "path": "cards/hero-sword.webp",
@@ -2639,10 +2639,10 @@
     {
       "path": "cards/hero-volcano.webp",
       "ext": "webp",
-      "bytes": 213708,
-      "sha256": "c1c23ddbf6b33f215aaadd641e75d2aff0996f7bb7fabb84d89ee8fff50443bd",
+      "bytes": 259670,
+      "sha256": "f15dcc3675992f5515fb9ccc93df898d15f2b4c22837fe40b5c186d14e50e079",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-volcano-builtin/receipt.json"
+      "source": "docs/evidence/2026-10-28-volcano-eye-oldgod-slit/receipt.json"
     },
     {
       "path": "cards/hero-warrior.webp",
@@ -4037,26 +4037,26 @@
     {
       "path": "cards/wu-heavensword.webp",
       "ext": "webp",
-      "bytes": 93586,
-      "sha256": "266246dc89f3e4aa91921412e21684f6ba6221686423488099f991aefb2c8b39",
+      "bytes": 134308,
+      "sha256": "d84808e429ad8c6de145af97445a58f45e6afc79475a3e52d53cd931c952f532",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-24-heavensword/receipt.json"
+      "source": "docs/evidence/2026-10-28-heavensword-dual-install/receipt.json"
     },
     {
       "path": "cards/wu-myriadswords.webp",
       "ext": "webp",
-      "bytes": 149748,
-      "sha256": "627fb98aca4e6b88e9d75e753ea939c70c9600a6c6ca3ca830368aef3fe56281",
-      "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-24-myriadswords-identity/receipt.json"
+      "bytes": 278346,
+      "sha256": "0faad1ca6c035acc031f4be066ac2bbfd42ba0b53d6bd38d0d1ae948a9c79eab",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-28-myriadswords-swords-only/receipt.json"
     },
     {
       "path": "cards/wu-void.webp",
       "ext": "webp",
-      "bytes": 175042,
-      "sha256": "52f799ebacfa9cf7dde2f8e3e8157f97a0f0907489b97e2d66a469a54f9348d0",
+      "bytes": 157196,
+      "sha256": "d898b6dc5561c8c121f08777307b344b6fece536c9043fd908c88c5938fcabcb",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-24-white-plum/receipt.json"
+      "source": "docs/evidence/2026-10-28-white-plum-install/receipt.json"
     },
     {
       "path": "chibi/wu-v1/arm-back.webp",
@@ -8423,10 +8423,10 @@
     {
       "path": "thumbs/cards/bound-shadow.webp",
       "ext": "webp",
-      "bytes": 20698,
-      "sha256": "eaa53135e0525aee37c1c7a57b6f23d3d28037436d6ba635668e2b7658fca201",
+      "bytes": 25540,
+      "sha256": "657c82bde374177fd525ccb071a0fcd68deb9467cbf5f2948d7ec08519468aba",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-bound-wind-redesign/bound-final/receipt.json"
+      "source": "docs/evidence/2026-10-28-bound-shadow-install/receipt.json"
     },
     {
       "path": "thumbs/cards/consumable.webp",
@@ -8528,9 +8528,9 @@
       "path": "thumbs/cards/dark-eclipse.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 18920,
-      "sha256": "13a29e0242f8fb3d3acad32649f9993163abb61ab133bc2da7180ad29e0cdbb9",
-      "source": "docs/evidence/2026-10-10-forbidden-original/receipt.json"
+      "bytes": 18406,
+      "sha256": "da445ecea660d852d62047757ea96a2464520b445842271c3b52ff9ba468d754",
+      "source": "docs/evidence/2026-10-28-forbidden-face/receipt.json"
     },
     {
       "path": "thumbs/cards/equip-tt2-apollo.webp",
@@ -8816,9 +8816,9 @@
       "path": "thumbs/cards/hero-abysssovereign.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 16654,
-      "sha256": "28c4063d1bd4cc434c54e63bb68a41a073d57b108c38658f4481dc87dca48a3a",
-      "source": "docs/evidence/2026-10-10-abyss-forbidden/receipt.json"
+      "bytes": 31350,
+      "sha256": "0f69c907c90a2a5a07156f6a81b55cc979bfa4329e75c468ed4c1cc3e6c1b8ce",
+      "source": "docs/evidence/2026-10-28-abyss-black-circle-original/receipt.json"
     },
     {
       "path": "thumbs/cards/hero-descend.webp",
@@ -8872,9 +8872,9 @@
       "path": "thumbs/cards/hero-summoner.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 23148,
-      "sha256": "dcd6b61941c5943f5d1fcfba37df2e1857021592792211f2a8362548e474faf2",
-      "source": "docs/evidence/2026-10-24-baita-one-eye-fix/receipt.json"
+      "bytes": 22992,
+      "sha256": "1d163184deebdea57b32bb0edf8a2df242bf71e116463b6bba7d74bc3cdd6a42",
+      "source": "docs/evidence/2026-10-28-blooms-swap/receipt.json"
     },
     {
       "path": "thumbs/cards/hero-sword.webp",
@@ -8887,10 +8887,10 @@
     {
       "path": "thumbs/cards/hero-volcano.webp",
       "ext": "webp",
-      "bytes": 27728,
-      "sha256": "055a34fb32cc9e9988034f285c2579c8dc32079f1c1745505bdc79e7f152e559",
+      "bytes": 39060,
+      "sha256": "bf81b97167ee3e9b01fb78ecf459eb389a7cb971bd51591f294cc399f3fffbdd",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-10-volcano-builtin/receipt.json"
+      "source": "docs/evidence/2026-10-28-volcano-eye-oldgod-slit/receipt.json"
     },
     {
       "path": "thumbs/cards/hero-warrior.webp",
@@ -10455,26 +10455,26 @@
     {
       "path": "thumbs/cards/wu-heavensword.webp",
       "ext": "webp",
-      "bytes": 13468,
-      "sha256": "9dabe6d1573e198e4d3ec4bba90d614f665337f928584b6cbe492290839cc103",
+      "bytes": 16164,
+      "sha256": "43d5c5125ea84a032b3df69bca6d8a26996b8871bef788d429f72cab98aa3b41",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-24-heavensword/receipt.json"
+      "source": "docs/evidence/2026-10-28-heavensword-dual-install/receipt.json"
     },
     {
       "path": "thumbs/cards/wu-myriadswords.webp",
       "ext": "webp",
-      "bytes": 22592,
-      "sha256": "0f7ea62dea3d58a93c77dbc69567f762b963079400fe850f2e0e776f4e9cbba8",
-      "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-24-myriadswords-identity/receipt.json"
+      "bytes": 29682,
+      "sha256": "2f54aa3004337fc801ce24905062a7a5fd59d7a73998897c3e016df377ea01f9",
+      "license": "项目自有（NAI5 起稿＋内置重绘）",
+      "source": "docs/evidence/2026-10-28-myriadswords-swords-only/receipt.json"
     },
     {
       "path": "thumbs/cards/wu-void.webp",
       "ext": "webp",
-      "bytes": 15952,
-      "sha256": "dfcad346def6490dbc9d6eb6b5269ca9576d0f9d87d3d4939ce22c374b253414",
+      "bytes": 21322,
+      "sha256": "107de7241c21856c4e128444d00a31b3323119035c9997e579292e7b57e38a8a",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-24-white-plum/receipt.json"
+      "source": "docs/evidence/2026-10-28-white-plum-install/receipt.json"
     },
     {
       "path": "thumbs/portraits/enemies/archer.webp",

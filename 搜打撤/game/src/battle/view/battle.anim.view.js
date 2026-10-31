@@ -10,7 +10,8 @@ import { showBattleCardResults } from './battle.card-results.js';
 import { showBattleEffectFeedback } from './battle.effect-feedback.js';
 import { showTurnFeedback } from './battle.turn-feedback.js';
 import { quietFeedback } from '../../ui/feedback-theme.js';
-import { emitBattleArt, emitBattleTrail } from './battle.fx-art.js';
+import { emitBattleArt } from './battle.fx-art.js';
+import { animateCardConsumption } from './battle.card-consumption-fx.js';
   // ---------- 牌局动画（2026-09-09）：离场克隆飞行 / 新牌飞入 / 幸存者归位 / 手牌区显隐 ----------
   // 渲染是整块重建，跨渲染的位移全部走 WAAPI：离场牌在 overlay 常驻层放克隆体飞行，
   // 入场/归位用 composite:'add' 加法合成——不破坏槽位自身的扇形 transform。
@@ -39,34 +40,11 @@ import { emitBattleArt, emitBattleTrail } from './battle.fx-art.js';
     const energyEl = stage ? /** @type {BattleElement} */ (stage.querySelector('.sts-energy b')) : null;
     return {
       cards,
+      battleToken: stage?._battleToken,
       phase: stage ? stage.dataset.phase : null,
       energy: energyEl ? parseInt(energyEl.textContent, 10) : null,
       drawPile: rectOf('.sts-hud-l .bt-pile'),
     };
-  }
-  // 离场去处：指向敌人/自己 → 单位立绘中心；常规打出/倾倒 → 弃牌堆徽标；注能牺牲品 → 原地碎化上飘
-  function exitSinkFor(ev, rect, body, ovR) {
-    const centerOf = (el) => {
-      const r = uiRect(el);
-      return { x: r.left - ovR.left + r.width / 2, y: r.top - ovR.top + r.height / 2 };
-    };
-    if (ev.kind === 'play') {
-      if (ev.side === 'enemy' && ev.target != null) {
-        const foe = body.querySelector(`.sts-foe[data-eidx="${ev.target}"] .sts-figure`);
-        if (foe) return { ...centerOf(foe), scale: 0.42, dur: 400, fade: 0.08 };
-      }
-      if (ev.side === 'self') {
-        const me = /** @type {BattleElement} */ (body.querySelector('#btSelf .sts-figure'));
-        if (me) return { ...centerOf(me), scale: 0.42, dur: 400, fade: 0.08 };
-      }
-      const disc = /** @type {BattleElement} */ (document.querySelector('.sts-hud-r .bt-pile'));
-      if (disc) return { ...centerOf(disc), scale: 0.3, dur: 380, fade: 0.25 };
-    }
-    if (ev.kind === 'dump') {
-      const disc = /** @type {BattleElement} */ (document.querySelector('.sts-hud-r .bt-pile'));
-      if (disc) return { ...centerOf(disc), scale: 0.3, dur: 380, fade: 0.25 };
-    }
-    return { x: rect.left + rect.width / 2, y: rect.top - 80, scale: 0.5, dur: 460, fade: 0, burn: true };
   }
   // WAAPI 防冻保护：遮挡/后台 webview 里文档时间线可能被冻结（currentTime 恒 0），
   // 动画会永远停在第一帧（例如把手牌钉在敌方阶段的 0.08 透明度）——起跑失败就取消，
@@ -148,77 +126,30 @@ import { emitBattleArt, emitBattleTrail } from './battle.fx-art.js';
         }
       }
     }
-    if (!handEl || !events.length) return { flightMs };
-    const ov = UI.el.overlay;
-    const ovR = uiRect(ov);   // 布局口径：飞卡定位/目标换算
+    // Calling on every render also releases an older battle token's presentation.
+    if (!handEl || !events.length) {
+      animateCardConsumption(stage);
+      return { flightMs };
+    }
     const played = new Set(), drawn = new Set();
-    events.forEach(ev => {
+    const currentEvents = events.filter(ev => ev.battleToken == null || ev.battleToken === stage?._battleToken);
+    currentEvents.forEach(ev => {
       if (ev.kind === 'draw') drawn.add(ev.uid);
       else if (['play', 'dump', 'burn'].includes(ev.kind)) played.add(ev.uid);
     });
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
-    if (events.some(ev => ev.kind === 'burn')) SDT.Sound.sfx('burn');   // 同帧多张消耗卡合并为一次燃烧提示
-    // Acquisition and random-cast faces use the independent feedback queue.
-    // —— 出牌队列演出（批次F，STS2 NCardPlayQueue）：同一渲染帧打出多张时，克隆体先飞到
-    //    手牌区上方的队列位横排站定（按结算次序错开入场），停顿一拍再依次飞向去处——
-    //    单张仍直飞（保留原上弓弧线手感）。原卡节点由手牌常驻层差分移除，飞行由克隆体接管 ——
-    const playedEvs = events.filter(ev => ['play', 'dump', 'burn'].includes(ev.kind) && played.has(ev.uid));
-    const queueIdx = new Map();
-    playedEvs.forEach(ev => { if (ev.kind === 'play') queueIdx.set(ev.uid, queueIdx.size); });
-    const queueN = queueIdx.size;
+    if (currentEvents.some(ev => ev.kind === 'burn')) SDT.Sound.sfx('burn');   // 同帧多张消耗卡合并为一次燃烧提示
+    // Acquisition/random casts keep their feedback queue. Only captured real UIDs
+    // dissolve into the consumed pile; virtual cards cannot borrow a namesake face.
+    const playedEvs = currentEvents.filter(ev => ['play', 'dump', 'burn'].includes(ev.kind) && played.has(ev.uid));
     playedEvs.forEach(ev => {
       // The real damage windup owns the actor action; card flights never restart it.
       // Non-damaging cards keep their original action after this render's cues are known.
       if (ev.kind === 'play') queueCardAction(body, ev.type === '法术' ? 'cast' : ev.type === '武术' ? 'atk' : null);
-      const old = prev && (prev.cards[ev.uid] || Object.values(prev.cards).find(c => c.name === ev.name));
-      if (!old) return;
-      const sink = exitSinkFor(ev, old.rect, body, ovR);
-      const from = { x: old.rect.left + old.rect.width / 2, y: old.rect.top + old.rect.height / 2 };
-      if (!quiet && sink.burn) emitBattleArt(stage, 'death', { at: from, size: 130, duration: sink.dur });
-      else if (!quiet) emitBattleTrail(stage, from, { x: sink.x, y: sink.y }, { duration: sink.dur, size: 100 });
-      const clone = document.createElement('div');
-      clone.className = 'sts-cardfly';
-      clone.style.cssText = `left:${old.rect.left}px;top:${old.rect.top}px;width:${old.rect.width}px;height:${old.rect.height}px`;
-      clone.innerHTML = old.html;
-      ov.appendChild(clone);
-      const cx0 = old.rect.left + old.rect.width / 2, cy0 = old.rect.top + old.rect.height / 2;
-      const q = queueIdx.get(ev.uid);
-      if (queueN > 1 && q != null) {
-        // 两段式：队列位 = 手牌上方中央横排（卡宽+18px 间距）；入场 300ms 错开 150ms/张，
-        // 站定 260ms 后继续飞去处——观感上卡牌按次序「过一遍」而非同时爆开
-        const qw = Math.min(120, old.rect.width);
-        const step = qw + 18;
-        const qx = ovR.width / 2 + (q - (queueN - 1) / 2) * step - cx0;
-        const qy = ovR.height * 0.58 - cy0;
-        const enter = 300, gap = 150, hold = 260;
-        clone.animate([
-          { transform: 'translate(0,0) scale(1)', opacity: 1 },
-          { transform: `translate(${qx}px,${qy}px) scale(0.88)`, opacity: 1 },
-        ], { duration: enter, delay: q * gap, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'both' });
-        const dx2 = sink.x - (ovR.width / 2 + (q - (queueN - 1) / 2) * step);
-        const dy2 = sink.y - ovR.height * 0.58;
-        const t2 = enter + q * gap + hold;
-        const fly2 = clone.animate([
-          { transform: `translate(${qx}px,${qy}px) scale(0.88)`, opacity: 1 },
-          { transform: `translate(${qx + dx2}px,${qy + dy2}px) scale(${sink.scale})`, opacity: sink.fade },
-        ], { duration: sink.dur, delay: t2, easing: 'cubic-bezier(.45,.05,.55,.95)', fill: 'forwards' });
-        fly2.onfinish = () => clone.remove();
-        schedulePresentationMs(() => clone.remove(), t2 + sink.dur + 300);   // 兜底清理
-        flightMs = Math.max(flightMs, t2 + sink.dur);
-        return;
-      }
-      const dx = sink.x - cx0;
-      const dy = sink.y - cy0;
-      const bow = -Math.min(130, Math.hypot(dx, dy) * 0.28);   // 弓背朝上
-      const fly = clone.animate([
-        { transform: 'translate(0px,0px) scale(1)', opacity: 1 },
-        { transform: `translate(${dx * 0.5}px,${dy * 0.5 + bow}px) scale(${((1 + sink.scale) / 2).toFixed(2)})`, opacity: 0.96, offset: 0.55 },
-        { transform: `translate(${dx}px,${dy}px) scale(${sink.scale})`, opacity: sink.fade },
-      ], { duration: sink.dur, easing: 'cubic-bezier(.45,.05,.55,.95)', fill: 'forwards' });
-      fly.onfinish = () => clone.remove();
-      schedulePresentationMs(() => clone.remove(), sink.dur + 300);   // 兜底清理
-      flightMs = Math.max(flightMs, sink.dur);
     });
+    flightMs = Math.max(flightMs, animateCardConsumption(stage, playedEvs.map(ev => ({
+      ev, old: prev?.cards?.[ev.uid],
+    })), { quiet, battleToken: prev?.battleToken }));
     // 新牌飞入 / 幸存者归位已改在手牌常驻层的差分更新里做（updateHand）——
     // 常驻节点不销毁，位移直接从旧目标值补间到新目标值，不再依赖重建前取样。
     return { flightMs };

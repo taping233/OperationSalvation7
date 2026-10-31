@@ -17,7 +17,7 @@
 & .hub-back { --archive-back-color:#f2f5f0; }
 & .camp-brand { display:block; }
 & .camp-brand h2 { margin:0; padding:0; border:0; color:#fff; font-size:var(--base-type-title); font-weight:900; line-height:1; letter-spacing:-.025em; transform:skewX(-6deg); }
-& :is(.camp-brand h2,.camp-section-head h2,.av3-header h2,.trade-v5-heading h2,.courtyard-v3-heading h2) { font-family:var(--base-font-title)!important; text-shadow:none; }
+& :is(.camp-brand h2,.camp-section-head h2,.av3-header h2,.trade-v5-heading h2) { font-family:var(--base-font-title)!important; text-shadow:none; }
 & .hub-slot-label { display:block; margin:0; padding:0; border:0; color:#d8e3e2; font:600 var(--base-type-label)/1.2 var(--font-ui); }
 & .hub-res { margin-left:auto; padding:0; color:var(--base-v7-ink); background:none; }
 & .base-resource-strip { display:flex; align-items:center; flex-wrap:nowrap; gap:18px; }
@@ -66,6 +66,6 @@ body.reduce-motion #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .hub-t
 body #overlay#overlay#overlay#overlay > .card.page:has(#hubMain.base-frame-v7),
 body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .hub-page.page-in { animation:none!important; }
 /* 全局顶栏已标明房间；内容区不重复整条标题。 */
-body #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7.base-subpage .hub-page :is(.trade-v5-heading,.archive-v12 > .av3-header,.facilities-v12 > .camp-section-head,.courtyard-zzz > .courtyard-v3-heading) { display:none; }
+body #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7.base-subpage .hub-page :is(.trade-v5-heading,.archive-v12 > .av3-header,.facilities-v12 > .camp-section-head) { display:none; }
 /* 设施名称与材料状态以目录、右侧详情及具体缺料提示为准。 */
 body #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .facilities-v12 .facility-v12-caption > :is(h3,span) { display:none; }

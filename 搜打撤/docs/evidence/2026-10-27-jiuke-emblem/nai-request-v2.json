@@ -1,0 +1,65 @@
+{
+  "status": "generated",
+  "request": {
+    "input": "Original Section Nine faction crest, a compact sophisticated military heraldic insignia. One long upright silver straight sword is the central axis. An abstract short tactical rifle sweeps diagonally behind its center, seamlessly integrated into a broken angular circular band forming a subtle numeral nine. Unified compact silhouette, one central hexagonal mechanical joint, disciplined large cutouts. Finely designed rather than realistic equipment. No humans.\n\nPremium colored faction insignia for a dystopian tactical game. Elegant game emblem, sophisticated symbolism, harmonious designed proportions, icon illustration.\n\nSingle centered crest, nearly upright compact silhouette occupying middle 65 percent of canvas, isolated on plain dark charcoal. Sword tip above, gun barrel briefly extends upper left, band returns at lower right with one tapered terminal. Original shape design, restrained detailing.\n\nDeep petrol teal enamel fields, pale champagne brushed metal rim, cool ivory silver sword. Restrained bevel planes, selective edge highlights, a few precise geometric engraved lines at the central joint, rich controlled shadows, no glowing effects. Refined designed artifact, not photorealistic.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 271009453,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, too many watermarks, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, people, character, portrait, realistic weapon render, 3d, metallic bevel, glow, gradients, ornate decoration, wings, skull, stars, typography, lettering, multiple emblems",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "Original Section Nine faction crest, a compact sophisticated military heraldic insignia. One long upright silver straight sword is the central axis. An abstract short tactical rifle sweeps diagonally behind its center, seamlessly integrated into a broken angular circular band forming a subtle numeral nine. Unified compact silhouette, one central hexagonal mechanical joint, disciplined large cutouts. Finely designed rather than realistic equipment. No humans.\n\nPremium colored faction insignia for a dystopian tactical game. Elegant game emblem, sophisticated symbolism, harmonious designed proportions, icon illustration.\n\nSingle centered crest, nearly upright compact silhouette occupying middle 65 percent of canvas, isolated on plain dark charcoal. Sword tip above, gun barrel briefly extends upper left, band returns at lower right with one tapered terminal. Original shape design, restrained detailing.\n\nDeep petrol teal enamel fields, pale champagne brushed metal rim, cool ivory silver sword. Restrained bevel planes, selective edge highlights, a few precise geometric engraved lines at the central joint, rich controlled shadows, no glowing effects. Refined designed artifact, not photorealistic.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, too many watermarks, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, people, character, portrait, realistic weapon render, 3d, metallic bevel, glow, gradients, ornate decoration, wings, skull, stars, typography, lettering, multiple emblems",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\output\\jiuke-emblem-20261027\\nai45-redesign-v2.png",
+  "recipe_version": "3.4",
+  "task_override": "Remove logo/text logo/negative space UC terms because the requested asset is an emblem.",
+  "references": [
+    {
+      "url": "https://arknights-matome.blog.jp/archives/5305876.html",
+      "role": "Faction silhouette and monochrome visual-language research; not uploaded or copied"
+    }
+  ],
+  "seed": 271009453,
+  "sha256": "4d978fdfb29d89a2a8b606ad2d26a4f57d1fceb7de8df7addb269e81b2323d0e"
+}

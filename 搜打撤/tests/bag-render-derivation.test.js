@@ -69,13 +69,14 @@ describe('背包单 render 派生', () => {
     ]);
     const first = deriveBagRenderState(game, 2);
     expect(first.resourceBonus).toBe(resourceContainerBonus(game.ownedCards));
-    expect(first.cap).toBe(16); expect(first.capacityText).toBe('通用格 2/2 · 资源扩展格 0/14');
+    expect(first.cap).toBe(16); expect(first.capacityText).toBe('已用 2/16 格 · 普通可用 0 格 · 资源可用 14 格');
     custom.rules.equip.container.slots = 7;
     game.ownedCards[0].safe = false; game.ownedCards[1].stored = false;
     game.inventory.push({ name:'木材', count:4, value:2 });
     const second = deriveBagRenderState(game, 2);
     expect(second.cap).toBe(18); expect(second.used).toBe(6);
-    expect(second.capacityText).toBe('通用格 2/2 · 资源扩展格 4/16');
+    expect(second.capacityText).toBe('已用 6/18 格 · 普通可用 0 格 · 资源可用 0 格');
+    expect(second.ordinarySlots).toBe(6); expect(second.resourceSlots).toBe(0);
     expect(second.bagCardN).toBe(4); expect(second.safeCardN).toBe(0); expect(second.pearlStoredN).toBe(0);
     expect(first.cap).toBe(16); expect(first.used).toBe(2);
   });

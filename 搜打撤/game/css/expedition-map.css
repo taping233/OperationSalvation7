@@ -96,8 +96,8 @@ body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .res-gold .res-
   width:96px; height:96px;
 }
 
-/* Existing top controls retain their actions; the location key stays in flow.
-   These three resets are required by winter.css's earlier fixed !important rules. */
+/* Existing top controls retain their actions; the location key's final position
+   and size stay here, in the normal control flow. */
 #topBtns{
 & #btnLocate { position:static!important; bottom:auto!important; right:auto!important; width:40px; height:40px; }
 & #btnHome.exit-btn { background:#292c2f; box-shadow:none; color:#ced0d1; border:1px solid #868b8e44; }}

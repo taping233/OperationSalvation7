@@ -2,9 +2,11 @@
  * 从事件页/物资格页/商店等覆盖页上打开背包再关闭后，恢复原页面——此前事件/物资格页
  * 没有登记恢复路径，closeBackpack 兜底回 idle 会吞掉整格结算。
  * 独立成中立小模块：game.run.scenes / game.run.flow 与 game.bag 都要读写钩子，
+ * 系统菜单也复用同一来源拥有者；离开前捕获纯展示状态，返回时由原渲染入口重建。
  * 三方直接互相导入会成环；boot 原有 setBagReturnHook 引用经 game.bag 再导出不受影响。 */
 
 import { captureBattleContext } from '../battle/battle-loader.js';
+import { captureOverlayReturnState, restoreOverlayReturnState } from '../ui/overlay-return-state.js';
 
 let hook = null;
 
@@ -21,7 +23,7 @@ function capturePage() {
 function createOwner(restore) {
   const game = typeof window === 'undefined' ? null : window.SDT?.game;
   return { restore, current:game ? captureBattleContext(game) : () => false,
-    source:capturePage(), claimed:false, pending:null };
+    source:capturePage(), claimed:false, pending:null, presentation:null };
 }
 
 export function setBagReturnHook(fn) {
@@ -47,6 +49,7 @@ export function claimBagReturnHook(restore = null) {
     return null;
   }
   owner.claimed = true;
+  owner.presentation = captureOverlayReturnState(owner.source.overlay);
   return owner;
 }
 
@@ -60,7 +63,13 @@ export function returnToBagSource(owner, { isCurrent, didReturn }) {
     // Legacy render callbacks return void. Their actual page replacement is the
     // success signal; false/rejection or an unchanged bag remains retryable.
     const returned = result !== false && owner.current() && didReturn();
-    if (returned && hook === owner) hook = null;
+    if (returned) {
+      if (hook === owner) hook = null;
+      const target = capturePage();
+      restoreOverlayReturnState(target.overlay, owner.presentation, {
+        isCurrent:() => owner.current() && target.current(),
+      });
+    }
     return returned;
   }).catch(() => false).finally(() => {
     if (owner.pending === pending) owner.pending = null;

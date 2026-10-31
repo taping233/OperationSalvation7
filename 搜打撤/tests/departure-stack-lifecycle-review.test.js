@@ -19,7 +19,7 @@ beforeEach(async () => {
   ports.handoff.mockReturnValue(new Promise(() => {}));
   actions = {};
   base = { slot: 1, data: { selMode: 'standard', pocket: [], stash: [{ card: first, count: 2 }, { card: second, count: 2 }] },
-    PETS: [], bagCap: () => 16, carriedPet: () => null, ownedPets: () => [], setPet: vi.fn(() => true), petById: () => ({ name: '宠物', desc: '效果' }) };
+    PETS: [], bagCap: () => 16, safeCap: () => 3, carriedPet: () => null, ownedPets: () => [], setPet: vi.fn(() => true), petById: () => ({ name: '宠物', desc: '效果' }) };
   const overlay = document.createElement('div'); overlay.id = 'overlay'; document.body.replaceChildren(overlay);
   ui = { el: { overlay }, _acts: actions, act: (id, handler) => { actions[id] = handler; },
     showOverlay: (_title, html) => { overlay.innerHTML = html; }, showCardZoom: vi.fn(), log: vi.fn() };
@@ -119,9 +119,11 @@ describe('出征真实页面选择与扣仓身份', () => {
     base.data.stash = [{ card: first, count: 6 }]; (await departure.setDeployPick({ 同名牌: 6 })); open();
     const before = [...document.querySelectorAll('#depBag [data-name="同名牌"]')];
     expect(before).toHaveLength(2);
-    (await actions.depPet({ id: 'dog' }));
+    expect(await actions.depPet({ id: 'dog' })).toBe(true);
     const after = [...document.querySelectorAll('#depBag [data-name="同名牌"]')];
     expect(after).toHaveLength(2); expect(new Set(after).size).toBe(2);
+    expect(after[0]).toBe(before[0]); expect(after[1]).toBe(before[1]);
+    expect(document.querySelector('#depStatus').textContent).toContain('已携带宠物 · 安全格 3 格');
   });
   it.each(['pickAdd', 'depPet', 'confirmDeploy', 'depBack', 'depMode'])('换slot后旧%s动作不执行', action => {
     open(); const old = actions[action]; base.slot = 2;

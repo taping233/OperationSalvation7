@@ -213,7 +213,9 @@ function createBattleSnapshot(input) {
     potionBar: potionBar ? Object.freeze(potionBar.map(entry => freezeObject(entry))) : null,
     pendingItem: pendingItem ? Object.freeze({ ...pendingItem, card: cloneCardData(pendingItem.card) }) : null,
     slamPending, dartPending,
-    equipped: Object.freeze(equipped.map(e => Object.freeze({ ...e, card: cloneCardData(e.card) }))),
+    equipped: Object.freeze(equipped.map(e => Object.freeze({ ...e, card: cloneCardData(e.card),
+      ...(e.skillAvailability ? { skillAvailability: Object.freeze({ ...e.skillAvailability }) } : {}),
+    }))),
   });
 }
 

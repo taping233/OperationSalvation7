@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-descender",
+      "asset": "cards/hero-volcano.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a1827c-7478-7b03-8e0d-5b52446caeb7/exec-9f78262e-8f2a-4ce2-8a27-4f71dc3ca856.png",
+      "revision": "volcano-burning-eye-sharp-20261028",
+      "prompt": "Edit the supplied game card artwork. Preserve the foreground male elf mage, his face, glasses, grey hair, black-purple hat and clothing, raised-hand pose, full-body position and framing. Repaint ONLY the enormous burning eye and surrounding upper-background flames. Make the eye significantly LARGER than the current one: its silhouette extends off the LEFT canvas edge and almost reaches the RIGHT edge, its height occupies roughly the upper 45% of the square. Keep the vertical pupil left of center, behind the raised arm. Make its gaze razor-sharp, stern and threatening: a heavy lowered upper eyelid cutting across the top of the iris, sharply tapering eye corners, a narrow long black vertical slit pupil, taut angular almond silhouette, a sense of an ancient fiery intelligence intensely looking down. No round surprised or relaxed eye. Maintain subtle integration into the fire despite the large scale: broken partially obscured eyelid edges, orange ember colors, broad flame strokes crossing the iris, no white sclera or glossy eyeball. CRITICAL STYLE UNIFICATION: render the eye with the EXACT same economical matte opaque anime block-brush painting as the mage and original fire, large connected color planes and a few broad directional strokes. Simplify the current tiny tessellated iris marks into broad coherent painted masses. No scales, detailed reptile skin, intricate iris fibers, photorealism, smooth airbrushing, decorative texture, extra particles or digital glow effects. No second eye, monster face, text, border or watermark.",
+      "references": [
+        "game/assets/cards/hero-volcano.webp"
+      ]
+    }
+  ]
+}

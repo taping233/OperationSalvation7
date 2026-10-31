@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-sealer",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\nai\\bound-shadow-reset-1028\\bound-shadow-nai5-reset.png",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-default-art-style\\reference-full.png",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-03.jpg"
+      ],
+      "asset": "cards/bound-shadow.webp",
+      "source": "D:/素材/代号柒/搜打撤/.tmp/nai/bound-shadow-reset-1028/bound-shadow-reset-internal.png",
+      "revision": "changwuyu-bound-shadow-calm-nai5-20261028",
+      "prompt": "以图1为内容底稿，重新绘制《受缚之残影》横版卡面。图2和图3仅为画法参考：取图2衣料层叠的硬边厚涂切笔、发束连续体积，取图3暗衣的彩色灰与有轻重的手绘线和安静面；绝不复制图2/3的人物、服装、配饰、白底、文字水印。整幅重新落笔，画法必须看出参考的日系二次元块面厚涂，避免精致光滑的游戏宣传渲染。保留图1成年男性常无欲身份、银灰低发髻和垂鬓、黄瞳、细圆眼镜、尖耳、黑弯尖宽檐魔女帽与紫内衬、黑高领金边袍、白羽蓝宝石胸饰。正面朝前，平静沉着看观众，眼睑自然放松，嘴自然闭合、无笑意、不皱眉。人物放大一些到腰部近景，脸眼仍清楚。双手分别在腰肋旁被铁腕铐扣住，锁链向左右画外绷紧，手不握住链，双臂活动明显被限制。两道沉重粗链紧紧交叉压住胸腹衣袍，链下主褶受压，表现受缚。身体被束缚而神态从容。阵印位于人物背后，一个大环配少数几何内环及原创抽象符印，黑紫的实体线芯，幽暗紫边光，局部如黑色火焰缓慢发光；周围深冷灰蓝，脸和手不被黑暗吞掉。阵印粗细和明暗有变化，避免等粗细霓虹描线和密集装饰。黑暗发光感集中背后，紫光仅少量落在帽沿发边和链上。\n画法严格使用：hand-painted Japanese anime illustration, opaque layered color blocks, firm light-shadow boundaries and visible directional strokes. Combine coherent large forms and quiet color fields with locally dense, structured smaller planes. Vary stroke length, width and density; selected overlaps describe form. Hair has clean flowing broad and narrow ribbon-like locks with continuous base colors and midtones, long grouped shadows, broad light bands and selective tapered separation lines. Cloth has readable weight and tension, long fold planes joined to short angular overpainting and continuous main shadows. Deep charcoal robe retains muted blue grey and violet grey layers, broad quiet sleeves alternate with denser compressed folds beneath chains. Face has warm complete skin planes, clear anime lids and layered yellow irises, economical nose and mouth. Selective hand-drawn contours vary in weight, color and continuity, some merge under paint. Alternate firm and occasional soft edges. Matte cloth, selected concise metal reflections, no uniform polish. Avoid evenly distributed tiny highlights, hair strand networks, featureless flattened hair, flat vector fills, airbrushed glossy plastic, photoreal face, filter grain, random equal-size triangle patches. 保留准确结构与清楚的手指链环，衣料通过色块边界而不是密集线稿塑形。无文字、标志、水印、边框、UI。"
+    }
+  ],
+  "nai_request": ".tmp/nai/bound-shadow-reset-1028/request.json"
+}

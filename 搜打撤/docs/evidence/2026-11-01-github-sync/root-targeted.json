@@ -1,0 +1,13 @@
+{
+  "exitCode": 0,
+  "snapshot": "C:\\Users\\太平\\AppData\\Local\\Temp\\sdt-staged-MpewWR\\snapshot\\搜打撤",
+  "tests": [
+    "tests/code-lean-stage1-ui-settings.test.js",
+    "tests/runtime-asset-publication.test.js",
+    "tests/beginner-guide-entry-copy.test.js",
+    "tests/beginner-guide-readability.test.js",
+    "tests/docs-consistency.test.js",
+    "tests/card-notes-coverage.test.js"
+  ],
+  "source": "Diagnostic reuse of an already-failed private snapshot with only root-owned updates and missing companion docs copied; not an acceptance receipt."
+}

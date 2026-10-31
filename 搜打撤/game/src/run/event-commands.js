@@ -3,7 +3,7 @@ import { recodeSourceMatches } from './event-recode-candidates.js';
 // The application supplies existing coin modifiers, damage/terminal handling and
 // card admission. These ports retain their rules without importing the facade.
 /** @param {import('./run-domain-commands.types').EventPorts} ports */
-export function createEventCommands({ state, gainCoins, heal, damage, grantCard }) {
+export function createEventCommands({ state, gainCoins, heal, damage, grantCard, canRecode }) {
   let executing = false;
   /** @param {() => boolean} run */
   const guarded = run => {
@@ -44,6 +44,7 @@ export function createEventCommands({ state, gainCoins, heal, damage, grantCard 
       if (!entries.length || entries.length !== cards.length || new Set(entries).size !== entries.length
         || entries.some((entry, i) => !state.ownedCards.includes(entry) || !recodeSourceMatches(entry, sources?.[i])
           || !cards[i] || !eligible(entry.card).some(candidate => candidate.id === cards[i].id))) return false;
+      if (canRecode && !canRecode(entries, cards)) return false;
       const replacements = cards.map(card => ({ ...card }));
       entries.forEach((entry, i) => { entry.card = replacements[i]; });
       return true;

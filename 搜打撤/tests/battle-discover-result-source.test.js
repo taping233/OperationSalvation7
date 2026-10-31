@@ -1,5 +1,6 @@
 import { battleRules, playerFields } from './helpers/environment-fixtures.js';
 import { showBattleCardResults } from '../game/src/battle/view/battle.card-results.js';
+import { clearCardFeedback } from '../game/src/battle/view/battle.card-feedback.js';
 // Canonical hosted card through the real battle session; no browser state is used.
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
@@ -14,7 +15,7 @@ const { BattleSession } = await import('../game/src/battle/core/battle.core.js')
 const R = await import('../game/src/battle/runtime/battle.runtime.js');
 
 beforeEach(() => { vi.useFakeTimers(); R.set$lastDeckSel([]); window.SDT.MAP.rules.battleStartDraw = 20; });
-afterEach(() => { vi.restoreAllMocks(); vi.clearAllTimers(); vi.useRealTimers(); });
+afterEach(() => { clearCardFeedback(); document.body.replaceChildren(); vi.restoreAllMocks(); vi.clearAllTimers(); vi.useRealTimers(); });
 const canonical = id => { const card = C.all().find(c => c.id === id); expect(card, id).toBeTruthy(); return card; };
 function makeGame(cards) {
   return { ownedCards: cards.map((card, i) => ({ uid: `runtime-${i}`, card: { ...card }, safe: false })),
@@ -50,9 +51,13 @@ it.each([['tt3sp-magicoil',true],['tt12-magicfind',false]])('canonical %s projec
  expect(R.foes[0].hp).toBe(cast?18:20);
  if(cast)expect(R.foes[0].status.bleed).toBe(1);
  expect(R.energy).toBe(energy-card.cost);
- const stage=document.createElement('div'),overlay=document.createElement('div');overlay.append(stage);showBattleCardResults(stage,R.cardAnims);
- expect(stage.textContent).toContain(cast?'发现卡牌 · 排队施放':'获得卡牌 · 置入手牌');
- expect(stage.textContent).not.toContain(cast?'获得卡牌 · 置入手牌':'发现卡牌 · 排队施放');
+ const acquired=R.cardAnims.find(event=>event.kind==='draw'&&event.acquired&&event.uid===generated.uid);
+ expect(acquired.card.id).toBe(option.id); expect(acquired.source).toBe(cast?'discover-cast':undefined);
+ const stage=document.createElement('div'),overlay=document.createElement('div');overlay.id='overlay';overlay.append(stage);document.body.append(overlay);
+ stage._battleToken=BattleSession.getSnapshot().battleToken;showBattleCardResults(stage,R.cardAnims);
+ const effects=overlay.querySelectorAll('.fx-art-draw').length;expect(effects).toBeGreaterThan(0);
+ showBattleCardResults(stage,R.cardAnims);expect(overlay.querySelectorAll('.fx-art-draw')).toHaveLength(effects);
+ expect(overlay.querySelector('.bt-card-reveal')).toBeNull();expect(stage.textContent).toBe('');
 });
 
 it.each(['structured','legacy'])('灵能召唤%s路径先候选后授予，只有所选实例免注能',async path=>{

@@ -3,7 +3,8 @@ import { isBattleOnlyBagCard, isLegacyDiscoveryToken, isLegacyRestorePreviewCard
 import { esc, escAttr } from '../core/shared.js';
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import { isBagItemUsePending, useBagItemOperations } from './bag-item-use.js';
-import { stackCapOf, canReceiveCardFromBag, canAcceptCardAtCapacity } from '../core/card-capacity.js';
+import { stackCapOf, bagSlotUsage, canReceiveCardFromBag, canAcceptCardAtCapacity, previewCardRewards, resourceContainerBonus, resourceContainerSlots } from '../core/card-capacity.js';
+import { cardStacksForZone } from '../core/bag-render-derivation.js';
 import { rewardSceneHTML } from '../ui/reward-scene-view.js';
 import { BAG_SUPPORTED_OPS } from '../cards/card-rules.schema.js';
 import { bagRecoveryStatus, isRestorableBagEntry } from './bag-item-effects.js';
@@ -73,28 +74,38 @@ export function bagUseStatus(card, uid, { game, usedSlots, bagCap, baseCap = bag
   return { label:'使用这张道具', badge:bagUseLocation(card) === 'map' ? '可用' : '查看用法', reason:'' };
 }
 
+// Remove every source in one private projection before admitting the replacement batch.
+export function canReplaceBagCards(game, ownedIndices, cards, { usedSlots, bagCap, baseCap = bagCap }) {
+  if (!ownedIndices.length || ownedIndices.length !== cards.length || new Set(ownedIndices).size !== ownedIndices.length
+    || ownedIndices.some(index => !Number.isInteger(index) || !game.ownedCards[index]) || cards.some(card => !card)) return false;
+  const removed = new Set(ownedIndices);
+  const remaining = game.ownedCards.filter((_, index) => !removed.has(index));
+  const freed = cardStacksForZone(game.ownedCards, false).length - cardStacksForZone(remaining, false).length;
+  const lostCapacity = resourceContainerBonus(ownedIndices.map(index => game.ownedCards[index]));
+  return previewCardRewards(cards, { ownedCards:remaining, usedSlots:usedSlots() - freed,
+    baseCap:baseCap(), totalCap:bagCap() - lostCapacity }).cant === 0;
+}
+
 // 使用同叠道具未必腾出一格；先预估移除源牌后的真实容量，再接收奖励。
 export function canReplaceBagCard(game, ownedIndex, card, { usedSlots, bagCap, baseCap = bagCap, renderState = null }) {
   const entry = game.ownedCards[ownedIndex];
-  if (!entry) return false;
+  if (!entry || !card) return false;
+  if (!renderState) return canReplaceBagCards(game, [ownedIndex], [card], { usedSlots, bagCap, baseCap });
   const normal = !entry.safe && !entry.stored;
-  const same = renderState ? renderState.bagNameCounts.get(entry.card.name) || 0
-    : game.ownedCards.filter(o => !o.safe && !o.stored && o.card.name === entry.card.name).length;
+  const same = renderState.bagNameCounts.get(entry.card.name) || 0;
   const cap = stackCapOf(entry.card);
   const frees = normal && Math.ceil(same / cap) > Math.ceil((same - 1) / cap);
   const projected = usedSlots() - Number(frees);
-  if (renderState) {
-    const remaining = (renderState.bagNameCounts.get(card.name) || 0) - Number(normal && entry.card.name === card.name);
-    return (remaining > 0 && remaining % stackCapOf(card) !== 0)
-      || canAcceptCardAtCapacity(card, { usedSlots: projected, baseCap: baseCap(), totalCap: bagCap() });
-  }
-  return canReceiveCardFromBag(card, { ownedCards:game.ownedCards.filter((_, i) => i !== ownedIndex),
-    canAcceptCard:target => canAcceptCardAtCapacity(target, {usedSlots:projected,baseCap:baseCap(),totalCap:bagCap()}) });
+  const ordinarySlots = renderState.ordinarySlots - Number(frees && entry.card.type !== '资源');
+  const remaining = (renderState.bagNameCounts.get(card.name) || 0) - Number(normal && entry.card.name === card.name);
+  return (remaining > 0 && remaining % stackCapOf(card) !== 0)
+    || canAcceptCardAtCapacity(card, { usedSlots:projected, ordinarySlots, baseCap:baseCap(), totalCap:bagCap() - resourceContainerSlots(entry.card) });
 }
 
 export function canReceiveBagCard(game, card, { usedSlots, bagCap, baseCap = bagCap }) {
+  const usage = bagSlotUsage(game.ownedCards, usedSlots());
   return canReceiveCardFromBag(card, { ownedCards: game.ownedCards,
-    canAcceptCard: target => canAcceptCardAtCapacity(target, { usedSlots: usedSlots(), baseCap: baseCap(), totalCap: bagCap() }) });
+    canAcceptCard: target => canAcceptCardAtCapacity(target, { ...usage, baseCap: baseCap(), totalCap: bagCap() }) });
 }
 
 // Reopening the same source shares its candidate save, including an in-flight attempt.

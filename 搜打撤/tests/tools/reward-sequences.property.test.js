@@ -5,6 +5,7 @@ import { rewardCardState, rewardProgress } from '../../game/src/ui/reward-state.
 import { claimResourceReward, resourceRewardAt } from '../../game/src/run/node-reward-state.js';
 import { createRewardOrganizer } from '../../game/src/hub/game.reward-organizer.js';
 import { openRewardCapacityOrganizer } from '../../game/src/ui/reward-capacity-organizer.js';
+import { cardStacksForZone } from '../../game/src/core/bag-render-derivation.js';
 
 const seed = 20261019;
 const steps = fc.array(fc.record({ action: fc.constantFrom('take', 'lose', 'reload'), index: fc.integer({ min: -2, max: 22 }) }), { minLength: 1, maxLength: 60 });
@@ -73,12 +74,13 @@ describe('real reward modules: generated sequences', () => {
           showOverlay: (_, html) => { UI.el.ovBody.innerHTML = html; } };
         const game = { battleActive: false, ownedCards: counts.flatMap((count, index) =>
           Array.from({ length: count }, (_, item) => ({ uid: `${index}:${item}`, card: { name: `stack-${index}` } }))),
-        stackCapOf: () => 99 };
-        const usedSlots = () => new Set(game.ownedCards.filter(item => !item.safe).map(item => item.card.name)).size;
-        game.canReceiveCard = () => usedSlots() < counts.length;
+        stackCapOf: () => 3 };
+        const usedSlots = () => cardStacksForZone(game.ownedCards, false).length;
+        const initialCapacity = usedSlots();
+        game.canReceiveCard = () => usedSlots() < initialCapacity;
         let discards = 0, moves = 0, grants = 0, claimCalls = 0;
-        const open = createRewardOrganizer({ UI, game, shaName: '杀', usedSlots, bagCap: () => counts.length,
-          safeUsed: () => new Set(game.ownedCards.filter(item => item.safe).map(item => item.card.name)).size,
+        const open = createRewardOrganizer({ UI, game, shaName: '杀', usedSlots, bagCap: () => initialCapacity,
+          safeUsed: () => cardStacksForZone(game.ownedCards, true).length,
           safeCap: () => 100,
           moveStackSafe: (name, safe, { uids }) => {
             moves++;
@@ -105,7 +107,7 @@ describe('real reward modules: generated sequences', () => {
         for (let repeat = 0; repeat < repeats; repeat++) confirm.click();
         expect(discards).toBe(1);
         expect(grants).toBe(0);
-        expect(root.querySelector('[data-organize="claim"]').disabled).toBe(true);
+        expect(root.querySelector('[data-organize="claim"]').disabled).toBe(!game.canReceiveCard());
         const safe = root.querySelector(`[data-organize="safe"][data-index="${index}"]`);
         for (let repeat = 0; repeat < repeats; repeat++) safe.click();
         expect(moves).toBe(1);

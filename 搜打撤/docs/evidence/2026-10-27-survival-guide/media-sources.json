@@ -1,0 +1,221 @@
+{
+  "task": "WF-survival-guide-1027",
+  "createdAt": "2026-10-27T14:18:58.848398+08:00",
+  "note": "Real runtime captures and authorized user recording only; screenshot UI reflects 2026-10-25/26 capture state. No generated UI, annotations, recolouring or retouching. Recording frames downscaled from 2560x1440 to 1600x900; existing evidence images preserve original dimensions. This media production is not current gameplay acceptance. Coordinates use percentage of full uncropped source image.",
+  "assets": [
+    {
+      "chapter": "prepare",
+      "source": "docs/evidence/2026-10-25-base-clarity-bestiary/screenshots/home-verified.png",
+      "screen": "基地首页与出征整备入口",
+      "points": [
+        {
+          "x": 85,
+          "y": 45,
+          "area": "出征整备入口"
+        },
+        {
+          "x": 23,
+          "y": 94,
+          "area": "人物入口"
+        },
+        {
+          "x": 36,
+          "y": 94,
+          "area": "后勤入口"
+        }
+      ],
+      "sourceType": "project-runtime-evidence",
+      "sourceDimensions": [
+        1280,
+        720
+      ],
+      "output": "game/assets/ui/beginner-guide/prepare-live.webp",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "bytes": 84684,
+      "sha256": "a54a551ac56617163cccf7a6dc367ac3df186a61aa301271385b7cfee0110f72",
+      "sourceSha256": "d7c03888dab3492f3010120b6f3f52fab35e4751acf4b9f920015fb44ed87903"
+    },
+    {
+      "chapter": "map",
+      "seconds": 670,
+      "screen": "第3层冻土遗迹节点地图，宝箱地点预览",
+      "points": [
+        {
+          "x": 37.6,
+          "y": 55.8,
+          "area": "发光当前地点与人物标记"
+        },
+        {
+          "x": 49,
+          "y": 55.8,
+          "area": "相邻地点与可走连接"
+        },
+        {
+          "x": 86.4,
+          "y": 35.5,
+          "area": "右上地点预览中的查看本地内容"
+        }
+      ],
+      "source": "D:\\直播录像\\2026-10-26_00-31-52.mp4",
+      "sourceType": "user-recording",
+      "sourceDimensions": [
+        2560,
+        1440
+      ],
+      "output": "game/assets/ui/beginner-guide/map-live.webp",
+      "dimensions": [
+        1600,
+        900
+      ],
+      "bytes": 51974,
+      "sha256": "6337e3edab0356618422b04da071d96c83e7e919f9b1d1d005538ecbb2575808",
+      "sourceSha256": "ae5020000f0ddba196d9699fc8025f9faa2bed47f580de992e158f7056536bed"
+    },
+    {
+      "chapter": "battle",
+      "seconds": 100,
+      "screen": "第2层风雪哨线战斗，角色无，完整手牌与能量栏",
+      "points": [
+        {
+          "x": 62.5,
+          "y": 43.5,
+          "area": "敌人攻击意图与血量区域"
+        },
+        {
+          "x": 47.5,
+          "y": 83,
+          "area": "底部卡牌手牌区"
+        },
+        {
+          "x": 8,
+          "y": 92.3,
+          "area": "左下能量2/2"
+        }
+      ],
+      "source": "D:\\直播录像\\2026-10-26_00-31-52.mp4",
+      "sourceType": "user-recording",
+      "sourceDimensions": [
+        2560,
+        1440
+      ],
+      "output": "game/assets/ui/beginner-guide/battle-live.webp",
+      "dimensions": [
+        1600,
+        900
+      ],
+      "bytes": 122092,
+      "sha256": "869bdd84cde555c1e667b00bc6da85883dc34d3668fef3762a8752ce7d5782e5",
+      "sourceSha256": "d6f807596f75bf62aa906a6adc3228dd0977a6985ad9d0a31c2c8904582a1ea4"
+    },
+    {
+      "chapter": "loot",
+      "seconds": 760,
+      "screen": "安全格页，珍珠盒已在安全格，显示剩余容量",
+      "points": [
+        {
+          "x": 4.7,
+          "y": 26.9,
+          "area": "左侧安全格分类"
+        },
+        {
+          "x": 18.3,
+          "y": 39.7,
+          "area": "安全格中的珍珠盒卡牌"
+        },
+        {
+          "x": 94.4,
+          "y": 5.4,
+          "area": "右上安全格占格1/2"
+        }
+      ],
+      "source": "D:\\直播录像\\2026-10-26_00-31-52.mp4",
+      "sourceType": "user-recording",
+      "sourceDimensions": [
+        2560,
+        1440
+      ],
+      "output": "game/assets/ui/beginner-guide/loot-live.webp",
+      "dimensions": [
+        1600,
+        900
+      ],
+      "bytes": 29800,
+      "sha256": "c8c88088991cb6448bb0e6c49d5464267f39d1d4e1e9508bf9af765f56178231",
+      "sourceSha256": "f3dd9a774dc29edd0a3b31aca33bf9b2c62e205fb66ae3dc19dcdcf6abb86fa6"
+    },
+    {
+      "chapter": "extract",
+      "seconds": 640,
+      "screen": "第3层冻土遗迹紧急撤离点，献祭3张卡牌或继续深入",
+      "points": [
+        {
+          "x": 75.2,
+          "y": 46.4,
+          "area": "紧急撤离（献祭3张卡牌）选项"
+        },
+        {
+          "x": 75.2,
+          "y": 59.2,
+          "area": "继续深入选项"
+        },
+        {
+          "x": 74.8,
+          "y": 40.5,
+          "area": "随身金币不会带回基地的提醒"
+        }
+      ],
+      "source": "D:\\直播录像\\2026-10-26_00-31-52.mp4",
+      "sourceType": "user-recording",
+      "sourceDimensions": [
+        2560,
+        1440
+      ],
+      "output": "game/assets/ui/beginner-guide/extract-live.webp",
+      "dimensions": [
+        1600,
+        900
+      ],
+      "bytes": 40956,
+      "sha256": "d38c695fcf7c7af0f854926082c1f87bb26ea5f2bf57a88491d57001e2f4d8d6",
+      "sourceSha256": "ed87cedc3d26debcdfd814f362d6fc5fb9bb1c7eaf48ec0e0f2813c87246cf28"
+    },
+    {
+      "chapter": "growth",
+      "source": "docs/evidence/2026-10-25-base-clarity-bestiary/screenshots/facilities-final.png",
+      "screen": "基地建设页，出征背包扩建16到17格与木材需求",
+      "points": [
+        {
+          "x": 8.5,
+          "y": 24.8,
+          "area": "左侧出征背包建设项"
+        },
+        {
+          "x": 68,
+          "y": 38.8,
+          "area": "当前16格与扩建后17格"
+        },
+        {
+          "x": 57,
+          "y": 56.6,
+          "area": "扩建木材持有/需要0/2"
+        }
+      ],
+      "sourceType": "project-runtime-evidence",
+      "sourceDimensions": [
+        1280,
+        720
+      ],
+      "output": "game/assets/ui/beginner-guide/growth-live.webp",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "bytes": 46192,
+      "sha256": "43e8ad018f530985cc6953347995d08757fa2d0de05eba7aecee2fb5ac8284ee",
+      "sourceSha256": "7ddc4adc713e1d9735b4808a18396ef17977b14da9c6f8f007158dea2ce69af4"
+    }
+  ]
+}

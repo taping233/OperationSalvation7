@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, beforeEach, expect, it, vi } from 'vitest';
 
 const H = vi.hoisted(() => ({ game: {}, UI: {}, cards: [], saves: [], slot: null, battleStarts: [] }));
@@ -16,13 +17,13 @@ beforeAll(async () => {
     for (const key of Object.keys(actions)) delete actions[key];
     this.el.ovBody.innerHTML = body; this.el.overlay.hidden = false;
   }, hideOverlay() { this.el.overlay.hidden = true; }, act: (name, fn) => actions[name] = fn, log() {}, refresh() {} });
-  window.SDT = { game: H.game, UI: H.UI, Icons: { rich: text => text }, Sound: { sfx() {} },
+  await connectSdtFixture({ game: H.game, UI: H.UI, Icons: { rich: text => text }, Sound: { sfx() {} },
     Cards: { all: () => H.cards, isRandomObtainable: card => card.rarity !== '初始', SHA: { id: 'sha' } },
     Meta: { classLv: () => 1, track() {}, checkUnlocks() {} },
     Base: { data: {}, isSha: card => card.id === 'sha', save: vi.fn(() => true), carriedPet: () => null,
       recordNestBoss: async name => { const kills = window.SDT.Base.data.stats.nestBossKills ||= [];
         const changed = !kills.includes(name); if (changed) kills.push(name); return { changed, persisted:false }; } },
-  };
+  });
   await import('../game/src/run/game.nest.js'); Nest = window.SDT.Nest;
 });
 function bindBattle() { Nest.bindBattleStart((game, foes, opts) => {
@@ -51,11 +52,13 @@ afterEach(() => vi.restoreAllMocks());
 it('altar chooses rerolls exclusively and preserves the remaining count on reentry', async () => {
   delete H.game.nestAltarChoice;
   H.game.nestPos=8;H.game.nestRunes=[{name:'火纹',attrs:['火'],rarity:'古朴'}];
-  Nest.renderNestMap();actions.nestCell9();actions.naReroll();actions.naHero();
+  Nest.renderNestMap(); await actions.nestCell9(); const staleHero=actions.naHero;
+  await actions.naReroll(); staleHero(); await actions.naHero();
+  expect(H.UI.el.ovBody.querySelector('[data-act="naHero"]').disabled).toBe(true);
   expect(H.game.cardBox).toHaveLength(0);expect(H.game.nestPos).toBe(8);
   expect(H.game.nestAltarChoice).toEqual({position:9,remaining:2});
   expect(H.saves.at(-1).nestAltarChoice).toEqual({position:9,remaining:2});
-  Nest.renderNestMap();actions.nestCell9();actions.naReroll();actions.naReroll();
+  Nest.renderNestMap(); await actions.nestCell9(); await actions.naReroll(); await actions.naReroll();
   expect(H.game.nestAltarChoice.remaining).toBe(0);
   const {Random}=await import('../game/src/core/random.js');const before=Random.snapshot();actions.naReroll();
   expect(Random.snapshot()).toEqual(before);actions.naHero();expect(H.game.cardBox).toHaveLength(0);

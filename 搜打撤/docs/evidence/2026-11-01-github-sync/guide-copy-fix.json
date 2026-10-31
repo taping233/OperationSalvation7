@@ -1,0 +1,8 @@
+{
+  "change": "Clarify the two existing departure modes and the existing map-preview confirmation action. No navigation or gameplay rule changed.",
+  "source": "搜打撤/game/data/beginner-guide.json",
+  "nativeCopy": "SoudacheUnity/Assets/Resources/Data/CurrentBeginnerGuide.json",
+  "sha256": "ac31d03f22c636e28f72d0cd5bd74918082ee7d0ec5e074060cb8df2314e0840",
+  "bytesMatch": true,
+  "requiresNativeRebuild": true
+}

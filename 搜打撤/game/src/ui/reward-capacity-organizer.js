@@ -1,13 +1,16 @@
-import { esc } from '../core/shared.js';
+import { esc, escAttr } from '../core/shared.js';
 import { rewardReturnHTML } from './reward-scene-view.js';
 import { registerScreenOwner } from './screen-owner.js';
+import { setBagReturnHook } from '../hub/bag-return-hook.js';
+import { syncViewChildren } from './view-children-sync.js';
 
 // Organization actions commit independently. The reward is granted only by its owner.
 export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, capacity,
   moveToSafe, discardOne, current, onReturn, onClaim, onFullBag, safeAvailability = (/** @type {{card: import("../hub/game.store.types.js").CardSnapshot, count: number, uids?: string[]}} */ _stack) => { void _stack; return {ok:true,reason:''}; } }) {
   let receipt = '', pending = null, revision = 0, busy = false, submitted = false;
-  UI.showOverlay('腾出位置', '<section class="reward-capacity-organizer"></section>', 'chest');
-  const root = /** @type {HTMLElement} */ (UI.el.ovBody.querySelector('.reward-capacity-organizer'));
+  /** @type {HTMLElement} */
+  let root;
+  let releaseOwner = () => {};
   const live = () => current() && root.isConnected && UI.el.ovBody.contains(root)
     && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
   function perform(command, { focus, success, failure, leave = false }) {
@@ -49,10 +52,11 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
     const version = ++revision, stacks = readStacks(), fits = canReceive();
     const safeStates = stacks.map(safeAvailability);
     const canStore = safeStates.some(state => state.ok);
-    root.innerHTML = `<header><h3>待领取：${esc(card.name)}</h3><p>${esc(capacity())}</p></header>
+    const template = root.ownerDocument.createElement('template');
+    template.innerHTML = `<header><h3>待领取：${esc(card.name)}</h3><p>${esc(capacity())}</p></header>
       <p>整理操作立即生效，返回奖励不会撤销。</p>
       <p class="reward-organizer-receipt" role="status">${esc(receipt || (fits ? '已有位置，可以领取' : canStore ? '先移入安全格，或丢弃不需要的卡牌' : '安全格暂放不下这些整叠；可打开完整背包整理，或丢弃不需要的卡牌'))}</p>
-      <div class="reward-organizer-list">${stacks.map((stack, i) => `<article>
+      <div class="reward-organizer-list">${stacks.map((stack, i) => `<article data-view-key="${escAttr(JSON.stringify([stack.card.id || stack.card.name, stack.card.variantKey || '', stack.uids[0]]))}">
         <strong>${esc(stack.card.name)} ×${stack.count}</strong>
         <div>${pending === stack.uids[0]
           ? `<span>丢弃 1 张，无法取回</span><button type="button" data-organize="keep">保留</button><button type="button" data-organize="confirm" data-index="${i}">确认丢弃</button>`
@@ -61,9 +65,12 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
       <footer>${rewardReturnHTML({ action:"return", organize:true })}
       <button type="button" data-organize="bag">完整背包</button>
       <button type="button" class="ok" data-organize="claim"${fits ? '' : ' disabled'}>${fits ? '收下此牌' : '还需腾出位置'}</button></footer>`;
+    syncViewChildren(root, template.content);
     const list = /** @type {HTMLElement} */ (root.querySelector('.reward-organizer-list'));
     list.scrollTop = scrollTop; list.scrollLeft = scrollLeft;
-    /** @type {NodeListOf<HTMLButtonElement>} */ (root.querySelectorAll('[data-organize]')).forEach(button => button.addEventListener('click', () => {
+    root.onclick = event => {
+      const button = /** @type {HTMLButtonElement} */ (/** @type {Element} */ (event.target)?.closest('[data-organize]'));
+      if (!button) return;
       if (!live() || busy || submitted || revision !== version || !root.contains(button) || button.disabled) return;
       const action = button.dataset.organize;
       if (action === 'return' || action === 'bag' || action === 'claim') {
@@ -89,7 +96,7 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
         success:() => `${action === 'safe' ? '已移入安全格' : '已丢弃'}：${fresh.card.name} ×${action === 'safe' ? fresh.count : 1}${canReceive() ? '' : '；还需腾出位置'}`,
         failure:action === 'safe' ? '未能移入安全格，请重试' : '未能丢弃，请重试',
       });
-    }));
+    };
     // Rebuilding a row removes its focused button. Continue the same decision,
     // preferring the same stack, then its neighbour; never auto-confirm or leave.
     if (focus) {
@@ -105,10 +112,23 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
       (target || /** @type {HTMLElement} */ (root.querySelector('[data-organize="return"]')))?.focus({ preventScroll:true });
     }
   }
-  const releaseOwner = registerScreenOwner({ root, priority:30, isCurrent:live,
-    onBack:() => { if (!busy && !submitted) /** @type {HTMLButtonElement} */ (root.querySelector('[data-organize="return"]'))?.click(); },
-  });
-  render();
+  function mount() {
+    releaseOwner();
+    UI.showOverlay('腾出位置', '<section class="reward-capacity-organizer"></section>', 'chest');
+    root = /** @type {HTMLElement} */ (UI.el.ovBody.querySelector('.reward-capacity-organizer'));
+    releaseOwner = registerScreenOwner({ root, priority:30, isCurrent:live,
+      onBack:() => { if (!busy && !submitted) /** @type {HTMLButtonElement} */ (root.querySelector('[data-organize="return"]'))?.click(); },
+    });
+    render();
+    // Keep the business closure across a menu pause; the public owner restores
+    // presentation position after this fresh root has been mounted.
+    setBagReturnHook(() => {
+      if (!current() || busy || submitted) return false;
+      mount();
+      return true;
+    });
+  }
+  mount();
   /** @type {HTMLElement} */ (root.querySelector('[data-organize="return"]'))?.focus({ preventScroll:true });
   return root;
 }

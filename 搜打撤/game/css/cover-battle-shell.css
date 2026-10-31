@@ -134,7 +134,7 @@
 /* Current empty discovering is an empty direct .bt-hand; mandatory payment
    emits only .ov-empty. Other discover producers have no such structure.
    Exclude every nonbattle hand variant even though its mode already differs. */
-:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(#ovBody > .bt-hand:not(.sac-hand):not(.event-choice-hand):not(.fire-restore-hand):not(.cls-grant-hand):is(:empty, :has(> .ov-empty:only-child))){
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(#ovBody > .bt-hand:not(.sac-hand):not(.fire-restore-hand):not(.cls-grant-hand):is(:empty, :has(> .ov-empty:only-child))){
 & {
   width: min(1180px, 95%); max-width: 95%; max-height: 92%; padding: 30px 34px;
   background: var(--cover-paper, #ebeced) !important;

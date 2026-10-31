@@ -54,9 +54,9 @@ let stashFromPersonnel = false;
 let shopParent = 'stash', facilityParent = 'stash';
 let tradeState = createTradeShopState();
 let disposeTrade = () => {}, disposePersonnel = () => {};
+let personnelInteractionHost = null;
 let hubStashView = 'cards';
 let hubPersonView = 'wu';
-let courtyardView = 'rain';
 let disposeCourtyard = () => {};
 // 浏览位置仅属于界面；页内操作和详情返回不打断当前浏览。
 const hubScroll = new Map();
@@ -140,12 +140,12 @@ preparationFeature = createHubPreparationAdapter({
     const focused = document.activeElement?.closest?.('#hubMain [data-act], #hubMain [data-browser-key]');
     const currentFocus = focused ? { .../** @type {HTMLElement} */ (focused).dataset } : null;
     disposeCourtyard(); disposeCourtyard = () => {};
-    disposeTrade(); disposeTrade = () => {}; disposePersonnel(); disposePersonnel = () => {};
+    disposeTrade(); disposeTrade = () => {};
     const B = SDT.Base;
     const M = SDT.Meta;
     _set_cardPageOpen(true);      // Hub 页面：Esc / 点击背景可关闭
     // 页签切换时才播放入场动画（页内操作重渲染不闪）
-    const viewKey = `${hubTab}/${hubTab === 'stash' ? hubStashView : hubTab === 'classes' ? `${hubPersonView}/${personnelViewKey()}` : hubTab === 'ach' ? hubCollectionView : hubTab === 'courtyard' ? courtyardView : hubTab === 'shop' ? tradeState.mode : ''}`;
+    const viewKey = `${hubTab}/${hubTab === 'stash' ? hubStashView : hubTab === 'classes' ? `${hubPersonView}/${personnelViewKey()}` : hubTab === 'ach' ? hubCollectionView : hubTab === 'shop' ? tradeState.mode : ''}`;
     const motionViewKey = hubTab === 'classes' ? `classes/${personnelPageKey()}` : viewKey;
     const tabChanged = /** @type {(() => void) & {_lastMotionView?: string, _lastView?: string, _lastTab?: string}} */ (renderHub)._lastMotionView !== motionViewKey;
     /** @type {(() => void) & {_lastMotionView?: string, _lastView?: string, _lastTab?: string}} */ (renderHub)._lastMotionView = motionViewKey;
@@ -157,7 +157,7 @@ preparationFeature = createHubPreparationAdapter({
       : hubTab === 'shop' ? tradeShopV5HTML({ base:B, cards:SDT.Cards, art:SDT.Art, goods:HUB_SHOP_GOODS, state:tradeState })
       : hubTab === 'upgrade' ? hubUpgradeHTML()
       : hubTab === 'classes' ? hubClassesHTML(hubPersonView)
-      : hubTab === 'courtyard' ? /** @type {(view?: unknown) => ReturnType<typeof courtyardV3HTML>} */ (courtyardV3HTML)(courtyardView)
+      : hubTab === 'courtyard' ? courtyardV3HTML()
       : hubAchHTML(hubCollectionView);
     const back = hubBackTarget();
     presentHub(UI, `
@@ -208,7 +208,6 @@ preparationFeature = createHubPreparationAdapter({
       const next = d.tab === 'home' ? 'deploy' : d.tab;
       if (!pages.includes(next)) return;
       /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
-      if (next === 'courtyard' && ['rain', 'koi'].includes(d.view)) { if (hubTab === 'courtyard' && d.view === courtyardView) return; courtyardView = d.view; }
       if (next === 'shop' && hubTab !== 'shop') shopParent = ['deploy', 'classes', 'ach', 'stash'].includes(hubTab) ? hubTab : 'stash';
       if (next === 'shop' && ['buy', 'sell'].includes(d.tradeMode)) tradeState.mode = d.tradeMode;
       if (next === 'shop' && d.tradeKey) tradeState.sellKey = d.tradeKey;
@@ -379,14 +378,18 @@ preparationFeature = createHubPreparationAdapter({
         notice(`复原${stack.card.name} ×${restoreCount} · 钥匙 −${restoreCost}`);
         Sfx.ding(); UI.log(`[[icon:key]] 消耗 <b>${restoreCost}</b> 把钥匙，${restoreCount} 张卡牌已复原，回到卡牌仓库`, 'ok');
       } else { notice('初始攻击已处理，每局自动携带'); UI.log('[[icon:cards]] 初始牌「初始攻击」无需入库——每局自动携带，已直接消耗', 'dim'); }
-      if (!detailCurrent) {
+      const finishRestore = () => {
+        if (!currentHub()) return;
         if (!refreshWarehouse?.(true)) renderHub();
+      };
+      if (!detailCurrent) {
+        finishRestore();
         return true;
       }
       if (r === true) return afterOutcomeFeedback(UI.el?.ovBody,{kind:'restore',destination:'仓库',blocking:true,
         cards:restoredCards,cost:`钥匙 −${restoreCost}`,
-        source:'基地复原',cardHTML:card=>SDT.Cards.cardHTML(card,'sm'),isCurrent:currentHub},()=>renderHub());
-      if (r) renderHub();
+        source:'基地复原',cardHTML:card=>SDT.Cards.cardHTML(card,'sm'),isCurrent:currentHub},finishRestore);
+      finishRestore();
     });
     const claimReward = async (action, id, run, message) => {
       const r = await runRewardClaim({ root, base:B, meta:M, cards:SDT.Cards, action, id, run, isCurrent:currentHub });
@@ -428,13 +431,17 @@ preparationFeature = createHubPreparationAdapter({
       noticeHTML:() => hubNotice.html({ keepEmpty:true }),
       refreshResources:() => { if (currentHub()) root.querySelector('.hub-res').innerHTML = resourceStripHTML(B); },
     });
-    disposePersonnel = bindPersonnel({ ui: hubUI, sound: Sfx, refresh: renderHub, notice });
+    const partnerHost = page.querySelector('.partner-display [data-partner-play]');
+    const keepPartnerInteraction = !!partnerHost && partnerHost === personnelInteractionHost;
+    if (!keepPartnerInteraction) { disposePersonnel(); disposePersonnel = () => {}; }
+    const releasePersonnel = bindPersonnel({ ui: hubUI, sound: Sfx, refresh: renderHub, notice, bindPartnerInteraction:!keepPartnerInteraction });
+    if (!keepPartnerInteraction) { disposePersonnel = releasePersonnel; personnelInteractionHost = partnerHost; }
     bindArchive(hubUI, { openAchievements:() => { achievementReturn = hubCollectionView === 'backs' ? 'backs' : 'rewards'; hubCollectionView = 'achievements'; renderHub(); } });
     /** @type {(options: Parameters<typeof bindArchiveV3>[0] & {refresh?:unknown}) => ReturnType<typeof bindArchiveV3>} */ (bindArchiveV3)({ ui:hubUI, base:B, meta:M, cards:SDT.Cards, refresh:renderHub });
     bindBaseMotion(document.getElementById('hubMain'));
     if (hubTab === 'shop') disposeTrade = /** @type {(options: Parameters<typeof bindTradeShopV5>[0] & {preview?:(card: import('./game.store.types.js').CardSnapshot, options:{from?:HTMLElement}) => void}) => ReturnType<typeof bindTradeShopV5>} */ (bindTradeShopV5)({ root:page.querySelector('.trade-v5'), ui:hubUI, base:B, cards:SDT.Cards, goods:HUB_SHOP_GOODS, state:tradeState, render:renderHub, notice, sound:Sfx,
       preview:(card, { from }) => { UI.showCardZoom(card, { presentation:'inventory', from, returnFocus:from }); decorateInventoryZoom(card); } });
-    if (hubTab === 'courtyard') disposeCourtyard = /** @type {(root: Parameters<typeof mountCourtyardV3>[0], view?: unknown) => ReturnType<typeof mountCourtyardV3>} */ (mountCourtyardV3)(document.querySelector('.courtyard-v3'), courtyardView);
+    if (hubTab === 'courtyard') disposeCourtyard = mountCourtyardV3(document.querySelector('.courtyard-v3'));
     hubAct('closeBase', closeBase);
     return true;
   }
@@ -448,6 +455,7 @@ preparationFeature = createHubPreparationAdapter({
     cancelPendingPageEntries();
     disposeCourtyard(); disposeCourtyard = () => {};
     disposeTrade(); disposeTrade = () => {}; disposePersonnel(); disposePersonnel = () => {};
+    personnelInteractionHost = null;
     zoomFocusObserver?.disconnect();
     zoomFocusObserver = null;
     _set_cardPageOpen(false);

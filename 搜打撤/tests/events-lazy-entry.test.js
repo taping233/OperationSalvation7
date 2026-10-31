@@ -13,6 +13,7 @@ function harness(options = {}) {
   const context = { slot:1, run:1 };
   const UI = { el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('body') }, _overlayRevision:0,
     acts:{}, act(name, fn) { UI.acts[name] = fn; }, refresh:vi.fn(), log:vi.fn(), showCardReward:vi.fn(),
+    showOverlay:(_title, html) => { UI._overlayRevision++; UI.el.overlay.hidden = false; UI.el.ovBody.innerHTML = html; },
     hideOverlay:vi.fn(() => { UI.el.overlay.hidden = true; }) };
   const nodeShell = vi.fn(spec => { UI._overlayRevision++; UI.el.overlay.hidden = false;
     UI.el.ovBody.innerHTML = `<section><h1>${spec.title}</h1>${spec.sub || ''}${spec.body || ''}${spec.foot || ''}</section>`; });

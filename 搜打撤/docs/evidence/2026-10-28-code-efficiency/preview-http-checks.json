@@ -1,0 +1,237 @@
+{
+  "at": "2026-10-28T06:19:51.704Z",
+  "requests": [
+    {
+      "path": "/",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "src/main.js",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "src/ui/equipment-info.js",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "src/ui/run-top-bar.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "assets/portraits/full/wu.webp",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "assets/ui/title-plaque-metal-v1.png",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/base.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/cards.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/overlays.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/hub.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/battle.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/scenes.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/lab-ending.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/winter.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/expedition.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/expedition-map.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/map-edge-light.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/expedition-hub.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/expedition-inventory.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/expedition-rewards.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/expedition-battle.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/expedition-library.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/card-v3.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/expedition-roster.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/expedition-shop.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/ui-scale.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-slot-select.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-settings.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-datapage.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-ach.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-cardforge.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-expedition-hud.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/feedback-oct12.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/roster-departure-v2.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/experience-loot.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-events.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-rewards-bag-help.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-battle-ui.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/character-idle.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/page-transitions.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/ak-skin.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/base-camp.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/base-camp-compact.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/card-layout-selected.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/battle-stage.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    },
+    {
+      "path": "css/transition-illustrations.css",
+      "error": "fetch failed",
+      "cause": "ETIMEDOUT"
+    }
+  ],
+  "passed": false,
+  "note": "Local HTTP checks; native browser verification belongs to root."
+}

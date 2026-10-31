@@ -7,7 +7,7 @@ import { buildHandSelectionContract } from './battle.hand-selection.js';
 /** Read current live state on every call; cache identity belongs to this runtime.
  * @param {import('./battle.core-ports.types.js').SnapshotProjectionOptions} options */
 export function createSnapshotProjection({ runtime: instanceRuntime, executionSession, interactionOf,
-  battleBagItems, itemUsability, getConsumedPile, R, isBattleStartEquip, equipCap, equipSkillText }) {
+  battleBagItems, itemUsability, getConsumedPile, R, isBattleStartEquip, equipCap, equipSkillText, getEquipSkillAvailability }) {
 const { actionQueue, stagedDeathFx, handSelectQueue, choiceQueue } = executionSession;
 /** @type {Pick<import('../battle.snapshot.types.js').BattleSnapshotInput, 'deckNeed' | 'selDeckMax' | 'selShaN' | 'sel' | 'selPool'>} */
 const inactiveDeckSelectionInput = { deckNeed: 0, selDeckMax: 0, selShaN: 0, sel: new Set(), selPool: [] };
@@ -66,6 +66,7 @@ function captureSnapshotInput() {
       equipped: instanceRuntime.equipped.map(e => ({
         uid: e.uid, card: e.card, name: e.card.name, desc: String(e.card.desc || ''),
         skill: equipSkillText(e.card), used: e.used,
+        ...(getEquipSkillAvailability ? { skillAvailability: getEquipSkillAvailability(e.uid) } : {}),
       })),
     };
   }

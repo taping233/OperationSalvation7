@@ -12,6 +12,7 @@ import { extractionStashHTML } from '../game/src/ui/extraction-rewards-view.js';
 const death = readFileSync('game/src/run/game.session.death.js', 'utf8');
 const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
 const depart = readFileSync('game/src/hub/game.hub.depart.js', 'utf8');
+const departureSummary = readFileSync('game/src/hub/departure.summary.js', 'utf8');
 const menu = readFileSync('game/src/ui/menu-leave.js', 'utf8');
 
 let commands;
@@ -91,7 +92,7 @@ describe('A3-PREP-02 预设预览按分段占格计容', () => {
   });
 
   it('整备文案不再把来源封顶说成局内规则（帮助分段已按 10-04 老板令整体移除，保留上限提示口径）', () => {
-    expect(depart).toContain('普通背包格已满');
+    expect(departureSummary).toContain('普通格空间不足，资源专用格仅能放资源卡。');
     expect(depart).not.toContain('超出部分另占一格');
   });
 });

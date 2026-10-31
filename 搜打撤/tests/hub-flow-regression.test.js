@@ -25,7 +25,9 @@ describe('基地出发与选角回流回归', () => {
   it('出征整备写盘失败会留在整备页并停止出发', () => {
     expect(hub).toMatch(/const started = await newRun\(mode, picks, \{ skipClassChoice: true,/);
     expect(hub).toContain('if (started === false) {');
-    expect(hub).toContain("deployHint = '[[icon:cross]] 出征存档尚未完成，携带选择已保留；请重试或返回选档继续恢复。'");
+    expect(hub).toContain('deployHint = deployRecovery');
+    expect(hub).toContain('本次出征已开始保存，原人物与携带已固定；请继续本次出征，或返回选档恢复。');
+    expect(hub).toContain('出征存档尚未完成，携带选择已保留；可调整后重试。');
     // 顺序守卫：失败分支 → 重置选牌 → 成功返回；中间允许有限的合法插入（音效/埋点），不锁死相邻字节（CRLF 教训同族）
     expect(hub).toContain('const finishPublishedDeparture = async ownsPage => {');
     expect(altar).toContain('const result = await beforeConfirm();');

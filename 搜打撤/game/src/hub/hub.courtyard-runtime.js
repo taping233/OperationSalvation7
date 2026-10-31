@@ -7,13 +7,14 @@ import { watchSurfaceActivity } from '../ui/surface-activity.js';
 import { createVisualResourceRecovery } from '../ui/visual-resource-recovery.js';
 
 // 生命周期由基地独立页负责；返回的清理函数可重复调用。
-export function mountCourtyardV3(root) {
+export function mountCourtyardV3(root, preferenceStore) {
   const host = root.matches?.('[data-courtyard]') ? root : root.querySelector('[data-courtyard]');
   if (!host) return () => {};
   const overlay = host.closest('#overlay');
   const departed = () => !host.isConnected || (overlay && (!overlay.contains(host) || overlay.hidden
     || overlay.classList.contains('closing') || overlay.hasAttribute('data-ui-closing')));
-  let rain = true;
+  const preferences = preferenceStore.read();
+  let rain = preferences.rain;
   const canvas = host.querySelector('.courtyard-v3-canvas');
   const backdrop = host.querySelector('.courtyard-v3-backdrop');
   const rainCanvas = host.querySelector('.courtyard-v3-rain-layer');
@@ -30,7 +31,7 @@ export function mountCourtyardV3(root) {
     controls.querySelectorAll('button').forEach(button => { button.disabled = true; });
     return () => {};
   }
-  const settings = { intensity:40 };
+  const settings = { intensity:preferences.intensity };
   let disposed = false, paused = false, frame = 0, previous = null, nextDraw = 0, image = null, feedbackTimer = 0;
   let soundEnabled = false, audio = null, noise = null, rainGain = null, rainFilter = null;
   let engine = null, koi = null;
@@ -49,6 +50,25 @@ export function mountCourtyardV3(root) {
       const scale = Math.max(backdrop.width / image.naturalWidth, backdrop.height / image.naturalHeight);
       const width = image.naturalWidth * scale, height = image.naturalHeight * scale;
       context.drawImage(image, (backdrop.width - width) / 2, (backdrop.height - height) / 2, width, height);
+      // 静态岸边只随底图/尺寸重绘；克制的苔色与落叶留出中央水域。
+      const shore = [[.025,.18,-.5], [.045,.84,.4], [.955,.13,.7], [.975,.77,-.3]];
+      const detail = Math.min(backdrop.width, backdrop.height);
+      for (const [x, y, angle] of shore) {
+        context.save(); context.translate(backdrop.width * x, backdrop.height * y); context.rotate(angle);
+        const size = detail * .025;
+        context.fillStyle = 'rgba(44,67,49,.24)'; context.beginPath();
+        context.moveTo(-size, 0);
+        context.bezierCurveTo(-size, -size * .7, size * .2, -size * .8, size, -size * .3);
+        context.bezierCurveTo(size * 1.3, size * .4, -size * .5, size * .8, -size, 0); context.fill();
+        context.translate(size * .7, size * 1.4);
+        context.fillStyle = 'rgba(21,43,43,.22)'; context.beginPath();
+        context.ellipse(1, 2, size * .55, size * .22, 0, 0, Math.PI * 2); context.fill();
+        context.fillStyle = 'rgba(163,151,96,.58)'; context.beginPath();
+        context.moveTo(-size * .6, 0);
+        context.quadraticCurveTo(0, -size * .5, size * .6, 0);
+        context.quadraticCurveTo(0, size * .35, -size * .6, 0); context.fill();
+        context.restore();
+      }
       host.classList.add('scene-ready');
     }
   };
@@ -69,6 +89,25 @@ export function mountCourtyardV3(root) {
   };
   resize();
   engine = createRainTableau(rainCanvas, { sceneBackdrop:true });
+  engine.setIntensity(settings.intensity);
+  engine.setPalette(preferences.palette);
+  const syncRainControls = () => {
+    rainCanvas.hidden = !rain;
+    rainButton.textContent = rain ? '关闭雨' : '开启雨'; rainButton.setAttribute('aria-pressed', String(rain));
+    soundButton.disabled = !rain;
+    const intensityButton = controls.querySelector('[data-courtyard-control="interact"]');
+    intensityButton.disabled = !rain;
+    intensityButton.textContent = settings.intensity === 80 ? '雨势：大雨' : '雨势：细雨';
+    controls.querySelectorAll('[data-palette]').forEach(button => {
+      button.disabled = !rain;
+      button.setAttribute('aria-pressed', String(button.dataset.palette === preferences.palette));
+    });
+  };
+  const savePreferences = () => {
+    preferences.rain = rain; preferences.intensity = settings.intensity;
+    if (!preferenceStore.write(preferences)) status.textContent = '环境设置本次生效，暂未保存到本机';
+  };
+  syncRainControls();
   koi = createKoiPond(canvas, { onProgress: ({ found, total, eaten }) => {
     controls.querySelector('[data-pond-found]').textContent = found === total ? `已找到全部 ${total} 条锦鲤` : `发现锦鲤 ${found} / ${total}`;
     controls.querySelector('[data-pond-eaten]').textContent = `吃食 ${eaten} 次`;
@@ -103,9 +142,9 @@ export function mountCourtyardV3(root) {
       else param.value = value;
     }
   };
-  const toggleSound = () => {
+  const toggleSound = (remember = true) => {
     if (!rain) return;
-    if (audio) { stopSound(); return; }
+    if (audio) { stopSound(); preferences.sound = false; if (remember) savePreferences(); return; }
     const Audio = window.AudioContext || window.webkitAudioContext;
     if (!Audio) { soundButton.textContent = '声音不可用'; soundButton.disabled = true; return; }
     try {
@@ -122,6 +161,7 @@ export function mountCourtyardV3(root) {
       soundEnabled = true; soundButton.textContent = '声音：开'; soundButton.setAttribute('aria-pressed', 'true');
       status.textContent = '';
       soundState();
+      if (remember) { preferences.sound = true; savePreferences(); }
     } catch { stopSound(); status.textContent = '声音暂不可用'; }
   };
   const loop = time => {
@@ -183,26 +223,23 @@ export function mountCourtyardV3(root) {
     if (!surfaceActive) return;
     const action = event.target.closest('[data-courtyard-control]')?.dataset.courtyardControl;
     if (action === 'rain') {
-      rain = !rain; rainCanvas.hidden = !rain;
-      rainButton.textContent = rain ? '关闭雨' : '开启雨'; rainButton.setAttribute('aria-pressed', String(rain));
-      host.dataset.courtyard = rain ? 'rain' : 'koi';
-      soundButton.disabled = !rain;
-      controls.querySelector('[data-courtyard-control="interact"]').disabled = !rain;
-      controls.querySelectorAll('[data-palette]').forEach(button => { button.disabled = !rain; });
-      if (!rain) stopSound();
+      rain = !rain;
+      syncRainControls();
+      if (!rain) { stopSound(); preferences.sound = false; }
       status.textContent = rain ? '雨落池塘' : '雨已停 · 仍可投喂和寻找锦鲤';
-      draw();
+      savePreferences(); draw();
     }
     if (action === 'sound') void toggleSound();
     if (action === 'feed') interact(canvas.width / 2, canvas.height / 2);
     if (action === 'pause') { paused = !paused; sync(); }
-    if (action === 'palette' && rain) { const palette = event.target.closest('button').dataset.palette; engine.setPalette(palette); controls.querySelectorAll('[data-palette]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.palette === palette))); draw(); }
-    if (action === 'interact') {
-      if (rain) {
-        settings.intensity = settings.intensity === 40 ? 80 : 40;
-        event.target.closest('button').textContent = settings.intensity === 40 ? '雨势：细雨' : '雨势：大雨';
-        engine.setIntensity(settings.intensity); syncRainSound(); draw();
-      } else interact(canvas.width / 2, canvas.height / 2);
+    if (action === 'palette' && rain) {
+      preferences.palette = event.target.closest('button').dataset.palette;
+      engine.setPalette(preferences.palette); syncRainControls(); savePreferences(); draw();
+    }
+    if (action === 'interact' && rain) {
+      settings.intensity = settings.intensity === 40 ? 80 : 40;
+      event.target.closest('button').textContent = settings.intensity === 40 ? '雨势：细雨' : '雨势：大雨';
+      engine.setIntensity(settings.intensity); syncRainSound(); savePreferences(); draw();
     }
   };
   const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(resize) : null;
@@ -240,5 +277,6 @@ export function mountCourtyardV3(root) {
     },
   });
   if (disposed) activity.dispose();
+  else if (rain && preferences.sound) toggleSound(false);
   return dispose;
 }

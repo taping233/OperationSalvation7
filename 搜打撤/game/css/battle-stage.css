@@ -223,12 +223,8 @@ body #overlay .card.battle .battle-stage.sts .sts-resource-dock{
 & :is(.bt-pile,.bt-hand-page,.sts-energy,.bt-hand-page-step):focus-visible{outline:2px solid #d2eef5;outline-offset:4px}}
 @supports not (backdrop-filter:blur(1px)){#overlay .battle-stage.sts{--battle-panel:#263640a8}}
 
-/* Keep persistent card results in the central HUD lane, clear of items.
-   Cap the whole scroll box above the active infusion prompt. */
 #overlay .battle-stage.sts{
-&>.bt-card-results{top:24px;right:auto;left:570px;width:420px;max-height:76px;box-sizing:border-box;z-index:11}
-/* The spanning transparent HUD must not intercept the result log beneath it.
-   Its actual controls (including the options descendants) remain interactive. */
+/* The spanning transparent HUD keeps pointer input on its actual controls. */
 & .sts-topbar{pointer-events:none}
 & .sts-topbar > :is(.sts-encounter,.bt-potions){pointer-events:auto}
 

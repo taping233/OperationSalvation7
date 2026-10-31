@@ -1,5 +1,5 @@
 /* ui.overlay.js —— #overlay 弹窗容器：开层/关层、Esc 与取消语义探测、房间视图、
- * 帮助弹层主题、焦点陷阱与背景 inert（09-25 自 ui.js 拆出，方法包由 ui.js 组装）。
+ * 焦点陷阱与背景 inert（09-25 自 ui.js 拆出，方法包由 ui.js 组装）。
  * 方法均以 UI.method() 形式调用，内部一律走 this 访问壳上的 el/_acts 等状态。
  */
 // T4 全界面开合成对动画（2026-10-04 D9-T4）：纯副作用 import——模块向 document.head
@@ -7,14 +7,12 @@
 import './motion-transitions.js';
 import { completeSurfaceMotion } from './motion-completion.js';
 import { motionReduced } from './motion-presets.js';
-import { captureOverlayReturnState, createOverlayReturn, restoreOverlayReturnState } from './overlay-return-state.js';
 import { clearExpeditionPanel, renderExpeditionPanel } from '../run/expedition.view.js';
 import { getOverlayRuntimeTracePanel, syncRuntimeTracePanel } from '../core/runtime-trace-panel.local.js';
 import { invokeUiAction, isAvailableControl as isAvailableOverlayFocusTarget } from './action-dispatch.js';
 import { registerScreenOwner } from './screen-owner.js';
 import { initRewardInteraction } from './reward-interaction.js';
 import { syncCommittedRunTopBar } from './run-top-bar.js';
-import { createOperationNotice } from './operation-notice.js';
 
 const closeSessions = new WeakMap();
 
@@ -30,38 +28,8 @@ const OVERLAY_FOCUS_SELECTOR =
   '[tabindex]:not([tabindex="-1"])';
 
 export const overlayMethods = {
-  helpTopics: {},  // pageId -> { title, html, before?, back }（? 帮助弹层主题，页面渲染时注册）
   _overlayReturnFocus: null,
   _overlayInerted: [],
-
-  // ---------- ? 帮助弹层：页面说明文字统一收进二级界面 ----------
-  // 页面渲染时 registerHelp(id, {title, html, before?, back})，并在页头放 helpBtn(id)；
-  // 默认保留滚动与帮助入口焦点；back 负责原页面重建和领域有效性检查。
-  // before() 捕获额外状态交给 back(state, commit)；异步准备后用 commit(render) 重建目标页。
-  registerHelp(id, def) { this.helpTopics[id] = def; },
-  helpBtn(id) {
-    if (id === 'bag') return '<button class="bag-guide-trigger bag-icbtn" data-act="openHelp" data-page="bag" aria-label="背包使用指南" title="背包使用指南"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h6l2 2 2-2h6v15h-6l-2 2-2-2H4Z"/><path d="M12 6v15M7 8h2M7 12h2M15 8h2M15 12h2"/></svg></button>';
-    // 2026-09-07 留言：全角"？ "字形墨迹不居中，换 SVG 问号保证几何居中
-    return `<button class="help-btn" data-act="openHelp" data-page="${id}" title="查看说明"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8.1 9a3.9 3.9 0 1 1 6.05 3.27c-1.25.83-2.15 1.55-2.15 3.03v.3" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><circle cx="12" cy="19.7" r="1.35" fill="currentColor"/></svg></button>`;
-  },
-  showHelp(page) {
-    const t = this.helpTopics[page];
-    if (!t) return;
-    const focusTarget = [.../** @type {NodeListOf<HTMLElement>} */ (this.el.ovBody.querySelectorAll('[data-act="openHelp"]'))].find(element => element.dataset.page === page);
-    const presentation = captureOverlayReturnState(this.el.overlay, focusTarget);
-    const returnState = typeof t.before === 'function' ? t.before() : undefined;
-    const returnNotice = createOperationNotice();
-    this.showOverlay(`[[icon:question]] ${t.title}`, `
-      <div class="help-body${page === 'bag' ? ' bag-guide' : ''}">${page === 'bag' ? '<header class="bag-guide-heading"><h2>收纳与押运</h2></header>' : ''}${t.html}</div>
-      <div class="ov-btns"><button class="ov-btn ok" data-act="helpBack" data-cancel="true">↩ 返回</button></div>${returnNotice.html({ keepEmpty:true })}`, true);
-    this.act('helpBack', createOverlayReturn({
-      revision: this._overlayRevision, getRevision: () => this._overlayRevision,
-      isOpen: () => !this.el.overlay.hidden && !this.el.overlay.classList.contains('closing'),
-      back: typeof t.back === 'function' ? commit => t.back(returnState, commit) : undefined,
-      onFailure: () => returnNotice.set('返回未完成，请重试。', 'warn'),
-      restore: isCurrent => restoreOverlayReturnState(this.el.overlay, presentation, { isCurrent }),
-    }));
-  },
 
   beginRoom() {
     this._roomActive = true;
@@ -519,7 +487,7 @@ export const overlayMethods = {
     });
     const bar = this.el.overlay.querySelector(':scope > #runTopBar');
     const innerDialog = this._overlayInteractionRoot() !== this.el.ovBody;
-    if (bar && (innerDialog || this.el.ovBody.querySelector('.leave-run-panel')) && !bar.hasAttribute('inert')) {
+    if (bar && (innerDialog || this.el.ovBody.querySelector('.leave-run-panel, [data-terminal-settlement]')) && !bar.hasAttribute('inert')) {
       bar.setAttribute('inert', ''); this._overlayInerted.push(bar);
     }
     let node = this.el.overlay;

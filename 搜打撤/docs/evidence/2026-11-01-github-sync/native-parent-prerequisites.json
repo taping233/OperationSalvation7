@@ -1,0 +1,41 @@
+{
+  "files": [
+    {
+      "path": "搜打撤/game/assets/cards/bound-shadow.webp",
+      "sha256": "f54d4961815e715ace36d45ad139bc4d4ba670be0e047b93ed9daf1115a332e8",
+      "matchesNativeRestorationSource": true
+    },
+    {
+      "path": "搜打撤/game/assets/cards/hero-abysssovereign.webp",
+      "sha256": "5ea1dcfca6712ed08b896387b3d6920100fad55c557ea0d8df3bacfa1bb59f68",
+      "matchesNativeRestorationSource": true
+    },
+    {
+      "path": "搜打撤/game/assets/cards/hero-summoner.webp",
+      "sha256": "fd6c6f95ca9114190c280f4c072b7ac6d1003ca57c3cfa45b1e6103ce6bdfac9",
+      "matchesNativeRestorationSource": true
+    },
+    {
+      "path": "搜打撤/game/assets/cards/hero-volcano.webp",
+      "sha256": "f15dcc3675992f5515fb9ccc93df898d15f2b4c22837fe40b5c186d14e50e079",
+      "matchesNativeRestorationSource": true
+    },
+    {
+      "path": "搜打撤/game/assets/cards/wu-heavensword.webp",
+      "sha256": "d84808e429ad8c6de145af97445a58f45e6afc79475a3e52d53cd931c952f532",
+      "matchesNativeRestorationSource": true
+    },
+    {
+      "path": "搜打撤/game/assets/cards/wu-myriadswords.webp",
+      "sha256": "0faad1ca6c035acc031f4be066ac2bbfd42ba0b53d6bd38d0d1ae948a9c79eab",
+      "matchesNativeRestorationSource": true
+    },
+    {
+      "path": "搜打撤/game/assets/cards/wu-void.webp",
+      "sha256": "d898b6dc5561c8c121f08777307b344b6fece536c9043fd908c88c5938fcabcb",
+      "matchesNativeRestorationSource": true
+    }
+  ],
+  "passed": true,
+  "scope": "Final Vite parent index contains all seven completed raw-source prerequisites; publication branch must inherit its committed revision."
+}

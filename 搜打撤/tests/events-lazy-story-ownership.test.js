@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createRunEventController } from '../game/src/run/game.run.events.js';
+import { eventPresentationPorts } from './helpers/event-presentation-ports.js';
 const deferred = () => { let resolve; const promise = new Promise(done => { resolve = done; }); return { promise, resolve }; };
 const narrative = text => ({ intro:text, choices:[{label:'继续',choose:()=> '已记录'}] });
 const flush = async () => { for (let i=0;i<12;i++) await Promise.resolve(); };
@@ -12,7 +13,7 @@ function harness() {
   const nodeShell=vi.fn(spec=>{UI._overlayRevision++;UI.el.overlay.hidden=false;UI.el.overlay.classList.remove('closing');delete UI.el.overlay.dataset.uiClosing;
     UI.el.ovBody.innerHTML=`<section><h1>${spec.title}</h1><p>${spec.sub||''}</p>${spec.body}${spec.foot||''}</section>`;});
   const story=deferred(),commit=deferred();let back;
-  const ports={game,UI,nodeShell,enterNode:async()=>true,getCards:()=>({all:()=>[card]}),pick:deck=>deck[0],
+  const ports={...eventPresentationPorts,game,UI,nodeShell,enterNode:async()=>true,getCards:()=>({all:()=>[card]}),pick:deck=>deck[0],
     eventOptionHTML:(_choice,index)=>`<button data-act="evtChoice" data-i="${index}">继续</button>`,eventNarrative:vi.fn(()=>story.promise),
     captureRunContext:()=>()=>true,createCardChoice:()=>({resume:()=>false}),setBagReturnHook:fn=>{back=fn;},
     setCardPageOpen:vi.fn(),bagSlots:{showBackpack:()=>nodeShell({title:'背包',body:''})},

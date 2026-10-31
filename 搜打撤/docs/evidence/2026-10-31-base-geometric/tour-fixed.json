@@ -1,0 +1,108 @@
+{
+  "selected": "command",
+  "arrived": "command",
+  "moving": false,
+  "tour": false,
+  "camera": {
+    "target": [
+      0,
+      1.6,
+      0
+    ],
+    "yaw": 0.66,
+    "pitch": 0.62,
+    "span": 24.8
+  },
+  "marker": [
+    0,
+    1.3,
+    0.1
+  ],
+  "route": [],
+  "tripLog": [
+    {
+      "from": "workshop",
+      "to": "storage",
+      "waypoints": [
+        "workshop",
+        "east",
+        "hub",
+        "west",
+        "storage"
+      ],
+      "total": 11.645,
+      "start": 45570.299999952316,
+      "arrived": 49766.59999996424
+    },
+    {
+      "from": "storage",
+      "to": "exchange",
+      "waypoints": [
+        "storage",
+        "west",
+        "hub",
+        "south",
+        "exchange"
+      ],
+      "total": 11.34,
+      "start": 50430.09999996424,
+      "arrived": 54516.299999952316
+    },
+    {
+      "from": "exchange",
+      "to": "departure",
+      "waypoints": [
+        "exchange",
+        "south",
+        "departure"
+      ],
+      "total": 8.681,
+      "start": 55180.69999998808,
+      "arrived": 58308.09999996424
+    },
+    {
+      "from": "departure",
+      "to": "workshop",
+      "waypoints": [
+        "departure",
+        "east",
+        "workshop"
+      ],
+      "total": 6.406,
+      "start": 58964.59999996424,
+      "arrived": 61370.59999996424
+    },
+    {
+      "from": "workshop",
+      "to": "archive",
+      "waypoints": [
+        "workshop",
+        "east",
+        "hub",
+        "west",
+        "north",
+        "archive"
+      ],
+      "total": 16.548,
+      "start": 62033.89999997616,
+      "arrived": 67995.79999995232
+    },
+    {
+      "from": "archive",
+      "to": "command",
+      "waypoints": [
+        "archive",
+        "north",
+        "west",
+        "hub",
+        "command"
+      ],
+      "total": 12.711,
+      "start": 68659.19999998808,
+      "arrived": 73239.29999995232
+    }
+  ],
+  "meshes": 243,
+  "triangles": 3146,
+  "errors": []
+}

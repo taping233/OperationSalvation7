@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -28,6 +29,7 @@ const content = () => document.querySelector('.pocket-restore-content');
 const remaining = () => document.querySelector('.pocket-restore [role="status"]').textContent;
 const doneButton = () => document.querySelector('[data-act="fireDone"]');
 async function activate(target, detail = 1) {
+  await vi.advanceTimersByTimeAsync(32); // Let the real overlay finish its initial focus frame before player input.
   target.focus({ preventScroll:true });
   // jsdom does not synthesize Enter/Space's browser-default click. detail=0 covers its resulting event.
   target.dispatchEvent(new MouseEvent('click', { bubbles:true, detail }));
@@ -35,9 +37,9 @@ async function activate(target, detail = 1) {
 }
 
 beforeAll(async () => {
-  window.SDT = { Icons:{ rich:text => text }, Sound:{ sfx:vi.fn(), scene:vi.fn() }, Cards:{
+  await connectSdtFixture({ Icons:{ rich:text => text }, Sound:{ sfx:vi.fn(), scene:vi.fn() }, Cards:{
     cardHTML:c => `<div class="hs-card sm"><span>${c.name}</span><div tabindex="0">长规则</div></div>`,
-  } };
+  } });
   ({ UI } = await import('../game/src/ui/ui.js'));
   ({ openPocketRestore } = await import('../game/src/run/game.run.scenes.js'));
   ({ takeBagReturnHook } = await import('../game/src/hub/bag-return-hook.js'));
@@ -134,7 +136,10 @@ describe('消耗卡复原公共选择界面', () => {
 
   it('满包拒收不重绘、不消耗口袋牌与次数，腾位后仍能恢复全部额度', async () => {
     const done = vi.fn(); st.game.canReceiveCard = () => false;
-    openPocketRestore(2, done); const target = button(), before = JSON.stringify(st.game);
+    openPocketRestore(2, done);
+    expect(button().disabled).toBe(true); expect(button().title).toContain('背包放不下');
+    st.game.canReceiveCard = () => true; openPocketRestore(2, done);
+    const target = button(); st.game.canReceiveCard = () => false; const before = JSON.stringify(st.game);
     content().scrollTop = 777.25; await activate(target, 0);
     expect(JSON.stringify(st.game)).toBe(before); expect(document.activeElement).toBe(target);
     expect(content().scrollTop).toBe(777.25); expect(remaining()).toContain('还可复原 2 张');

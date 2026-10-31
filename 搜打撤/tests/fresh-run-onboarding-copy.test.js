@@ -28,8 +28,11 @@ describe('新档最短目标与模式差异', () => {
     expect(battle).not.toContain('破甲');
     expect(battle).not.toContain('1/3');
     const html = beginnerGuideHTML(guide.pages.findIndex(page => page.id === 'extract'));
-    expect(html).toContain('首脑前准备'); expect(html).toContain('先看敌方下一步意图');
-    expect(html).toContain('破甲'); expect(html).toContain('流血等前提');
+    expect(html).toContain('首脑战，先手动编组');
+    expect(html).toContain('选择 15 张招式、装备或能力卡，再加入 5 张初始攻击');
+    expect(html).toContain('开局抽 5 张，之后每回合抽 1 张，每回合 2 点基础能量');
+    expect(html).toContain('手牌上限 8 张'); expect(html).toContain('首脑战不自动洗回');
+    expect(battle).toContain('开局和每回合不自动抽牌');
     expect(html).not.toContain('48');
   });
   it('人物技能摘要复用无依赖纯数据源，不经技能模块加载战斗引擎', () => {

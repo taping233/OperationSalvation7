@@ -1,0 +1,45 @@
+{
+  "status": "passed-and-frozen",
+  "scope": "Root remaining-targets 中的 6 份测试；未改生产源码、未恢复退役 wrapper、未暂存或提交。e4/e5/terminal/map 由 Root 处理。",
+  "validation": {
+    "testFiles": [
+      "tests/blackmarket-card-preview.test.js",
+      "tests/chest-batch-receipt.test.js",
+      "tests/help-return-lifecycle.test.js",
+      "tests/full-review-regressions-world.test.js",
+      "tests/project-bugfix-expedition-1023.test.js",
+      "tests/project-bugfix-round2-expedition-nest.test.js"
+    ],
+    "fileCount": 6,
+    "passed": 61,
+    "failed": 0,
+    "exitCode": 0,
+    "report": "hub-followup-final.json",
+    "log": "hub-followup-final.log",
+    "mode": "仅自有 .tmp/hub-gate-repair-1101/project 合并定向；production/helpers 来自 Root 最终 index 诊断快照",
+    "gitDiffCheck": "passed",
+    "inputs": "hub-followup-manifest.json"
+  },
+  "previousHubCoverage": {
+    "fileCount": 22,
+    "passed": 353,
+    "report": "hub-target-final.json",
+    "sourceFollowupPocketPassed": 19,
+    "sourceFollowupReport": "hub-pocket-final.json",
+    "unionFileCount": 28,
+    "boundary": "28 是两批文件并集，不冒称单次执行 28 文件；本批只改测试，完整质量门仍由 Root 执行。"
+  },
+  "changes": [
+    "blackmarket-card-preview：精确区分 3 卡面与 3 辅助查看按钮。保留奖品身份、原生按钮、真模态 role/aria-modal、Esc/关闭/背景和归焦；补辅助入口同卡详情及币/保存/RNG只读断言。现役共享卡面不再设置的可选 aria-haspopup 不作为合同，实际模态语义继续断言。",
+    "chest-batch-receipt：旧 notice 必须不存在改为当前节点未领奖励提示的准确文本与非警告语义；保留无重复收据、逐次 grantCard、币及 done 一次结算结果。",
+    "help-return-lifecycle：正式 facade 及动态 Shop/菜单/指南使用同一返回 hook。驱动真实系统菜单指南，保留双轴滚动、焦点、旧返回/换局/关闭/新页守卫与展开态。旧 before/back wrapper 单测改现役 createOverlayReturn/capture/restore 合同。同局库存更新按当前投影验证新 UID、旧卡不复活及币不变。",
+    "full-review-regressions-world：拾取使用现行 {claim} 端口并等待保存完成；即时/搜索/背包返回保留领取，旧按钮重放不得重复 grant；接正式 facade。",
+    "project-bugfix-expedition-1023：补真实可见 overlay 与关闭状态，接正式 facade；保留祭坛先保存支付、演出中重复确认不扣牌/保存、换页不展示迟到奖励。",
+    "project-bugfix-round2-expedition-nest：接正式 facade，等待真实 saveNestProgress 后使用当前动作；保留旧英雄回调无效、当前按钮禁用、剩余次数 2→0、保存记录及零额外随机。"
+  ],
+  "limits": [
+    "Vitest 合成交互不替代内置浏览器实页验收。",
+    "六个源测试与实际副本原字节 SHA 一致，见冻结 manifest。",
+    "未恢复 registerHelp/helpBtn/showHelp 或旧拾取 onDone wrapper。"
+  ]
+}

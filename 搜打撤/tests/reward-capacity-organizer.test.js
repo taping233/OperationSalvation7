@@ -27,7 +27,7 @@ describe('奖励上下文腾位',()=>{
   it('仅确认丢弃1张，3→2仍不腾格，回执明确已生效',()=>{click('discard');click('confirm');expect(options.discardOne).toHaveBeenCalledOnce();expect(stacks[0].count).toBe(2);expect(root.textContent).toContain('已丢弃：长剑 ×1；还需腾出位置');expect(root.querySelector('[data-organize="claim"]').disabled).toBe(true);click('return');expect(options.onReturn).toHaveBeenCalledOnce();});
   it('存安全格后再明确领取，不自动领',()=>{click('safe');expect(options.onClaim).not.toHaveBeenCalled();expect(root.textContent).toContain('已移入安全格：长剑 ×3');click('claim');expect(options.onClaim).toHaveBeenCalledOnce();click('claim');expect(options.onClaim).toHaveBeenCalledOnce();});
   it('安全格失败保目标/堆，完整背包可继续',()=>{options.moveToSafe.mockReturnValue(false);click('safe');expect(root.textContent).toContain('未能移入安全格，请重试');expect(stacks[0].count).toBe(3);click('bag');expect(options.onFullBag).toHaveBeenCalledOnce();});
-  it('旧渲染按钮和旧页面回调均不能提交',()=>{const old=root.querySelector('[data-organize="safe"]');click('discard');old.click();expect(options.moveToSafe).not.toHaveBeenCalled();UI.el.ovBody.innerHTML='<p>其他页</p>';click('confirm');expect(options.discardOne).not.toHaveBeenCalled();});
+  it('旧渲染按钮和旧页面回调均不能提交',()=>{const old=root.onclick;click('discard');const confirm=root.querySelector('[data-organize="confirm"]');old({target:confirm});expect(options.moveToSafe).not.toHaveBeenCalled();UI.el.ovBody.innerHTML='<p>其他页</p>';confirm.click();expect(options.discardOne).not.toHaveBeenCalled();});
   it('领取前容量发生变化时拒绝领取并提示继续整理',()=>{click('safe');fits=false;click('claim');expect(options.onClaim).not.toHaveBeenCalled();expect(root.textContent).toContain('空间已变化');});
   it.each([['claim', '领取'], ['confirm', '丢弃确认'], ['return', '返回']])('会话失效后旧%s按钮拒绝%s，容量足够且页面仍保留', (action) => {
     fits=true;

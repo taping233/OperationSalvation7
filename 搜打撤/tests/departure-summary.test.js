@@ -1,11 +1,35 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
-import { departureSummary } from '../game/src/hub/departure.summary.js';
+import { departureSummary, departurePickAvailabilities } from '../game/src/hub/departure.summary.js';
 const starter = { id: 'starter-attack', name: '初始攻击' };
 const fireball = { id: 'tt3-fireball', name: '火球' };
 const opts = { starterCount: 5, starterCard: starter, fireball, stash: [], picks: {}, capacity: 16,
   stackCapOf: card => ['初始攻击', '火球'].includes(card.name) ? 5 : 3 };
 describe('出征摘要与实际初始发放口径', () => {
+  it('批量可带状态分别限制普通格与资源格，下一次计算读取新选择', () => {
+    const options = { ...opts, capacity:2, stash:[
+      { card:{ id:'tt2-pearlbox', name:'珍珠盒', type:'道具' }, count:1 },
+      { card:{ id:'wood', name:'木材', type:'资源' }, count:1 },
+      { card:{ id:'blade', name:'刀法', type:'武术' }, count:1 },
+    ], picks:{ 'card:tt2-pearlbox':1 } };
+    const first = departurePickAvailabilities(options);
+    expect(first.get('card:wood').canAdd).toBe(true);
+    expect(first.get('card:blade')).toEqual({ canAdd:false, reason:'普通格空间不足，资源专用格仅能放资源卡。' });
+    options.picks = {};
+    const next = departurePickAvailabilities(options);
+    expect(next.get('card:blade').canAdd).toBe(true);
+    expect(first.get('card:blade').canAdd).toBe(false);
+    expect(departureSummary(options).cells.map(cell => cell.count)).toEqual([5]);
+  });
+  it('重复身份继续拒绝选择，消除歧义后重新读取库存', () => {
+    const card = { id:'blade', name:'刀法', type:'武术' };
+    const options = { ...opts, stash:[{ card, count:1 }, { card:{ ...card }, count:2 }] };
+    expect(departurePickAvailabilities(options).get('card:blade')).toEqual({ canAdd:false, reason:'仓库卡堆身份已变化，请重新选择。' });
+    options.stash.pop();
+    expect(departurePickAvailabilities(options).get('card:blade').canAdd).toBe(true);
+    options.stash[0].count = 0;
+    expect(departurePickAvailabilities(options).get('card:blade').canAdd).toBe(false);
+  });
   it('机器人额外初始牌按每格五张切分，不虚构随机卡', () => {
     const preview = departureSummary({ ...opts, pet: { effect: { extraSha: 2 } } });
     expect(preview.starterCount).toBe(7);

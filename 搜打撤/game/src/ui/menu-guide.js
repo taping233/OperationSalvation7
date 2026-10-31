@@ -1,20 +1,27 @@
 import { achievementGalleryHTML, bindAchievementGallery } from './achievement-gallery.js';
-import { beginnerGuideHTML, beginnerGuidePageCount, updateBeginnerGuide } from './beginner-guide.js';
+import { beginnerGuideHTML, beginnerGuidePageCount, updateBeginnerGuide, setBeginnerGuideImageReading } from './beginner-guide.js';
 import { enterAchievementCut } from './camp-entry.js';
 import { reduceMotion } from '../core/motion.js';
+import { createOverlayReturn } from './overlay-return-state.js';
 
 /** Guide and achievements preserve their entry/return presentation lifecycle. */
 export function createMenuGuidePages({ UI, game, pickLatestSlot, document, readMeta, readCards, readBattle }) {
-  // 远征手册：只描述当前 Vite 版真实输入与流程
-  // U9（2026-09-19 走查）：对局内也可打开（左上 ? 钮）——进入时记下原状态，返回恢复，
-  // 不再把对局态改写成 title（标题页调用 prev='title'，行为不变）。
-  function openTitleGuide() {
+  // One guide serves title and system-menu entries; the caller owns its return.
+  function openTitleGuide(options = {}) {
+    if (typeof options.isCurrent === 'function' && !options.isCurrent()) return false;
     const prevState = game.state;
     game.state = 'modal';
     const pageCount = beginnerGuidePageCount();
     let currentPage = 0;
     let renderVersion = 0;
+    let guideRoot = null;
+    let guideRevision = null;
+    const overlayOpen = () => !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
+    const contextCurrent = () => typeof options.isCurrent !== 'function' || options.isCurrent();
+    const guideCurrent = () => contextCurrent() && overlayOpen() && UI._overlayRevision === guideRevision
+      && !!guideRoot?.isConnected && guideRoot === UI.el.ovBody.querySelector('.beginner-guide');
     const renderPage = async () => {
+      if (!guideCurrent() || guideRoot.classList.contains('is-reading-image')) return false;
       const version = ++renderVersion;
       const active = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       const activeAction = active?.dataset?.act;
@@ -26,17 +33,14 @@ export function createMenuGuidePages({ UI, game, pickLatestSlot, document, readM
       };
       document.addEventListener('focusin', noteFocusMove, true);
       document.addEventListener('pointerdown', noteFocusMove, true);
-      const root = /** @type {import("./ui.dom.types.js").UIElement} */ (UI.el.ovBody.querySelector('.beginner-guide'));
+      const root = guideRoot;
       try {
-        if (root) {
-          if (!await updateBeginnerGuide(root, currentPage)) return;
-        } else UI.showOverlay('远征新手指南', beginnerGuideHTML(currentPage), 'page');
+        if (!await updateBeginnerGuide(root, currentPage)) return;
       } finally {
         document.removeEventListener('focusin', noteFocusMove, true);
         document.removeEventListener('pointerdown', noteFocusMove, true);
       }
-      if (version !== renderVersion || root && (!root.isConnected || root.closest('[hidden],[inert],[aria-hidden="true"]')
-        || UI.el.overlay.hidden || UI.el.overlay.classList.contains('closing'))) return;
+      if (!guideCurrent() || version !== renderVersion || root.closest('[hidden],[inert],[aria-hidden="true"]')) return;
       const disabledPager = (activeAction === 'guidePrev' || activeAction === 'guideNext') && active?.matches(':disabled')
         && (document.activeElement === document.body || document.activeElement === active);
       if (focusMoved || active?.isConnected && document.activeElement !== active && !disabledPager) return;
@@ -44,28 +48,44 @@ export function createMenuGuidePages({ UI, game, pickLatestSlot, document, readM
         const selector = activeAction === 'guidePage' && /^\d+$/.test(activePageIndex || '')
           ? `[data-act="guidePage"][data-page-index="${activePageIndex}"]`
           : `[data-act="${activeAction}"]`;
-        const nextFocus = UI.el.ovBody.querySelector(selector);
-        (nextFocus?.disabled ? /** @type {import("./ui.dom.types.js").UIElement} */ (UI.el.ovBody.querySelector('.bg-nav-item[aria-current="step"]')) : nextFocus)?.focus({ preventScroll: true });
+        const nextFocus = root.querySelector(selector);
+        (nextFocus?.disabled ? root.querySelector('.bg-nav-item[aria-current="step"]') : nextFocus)?.focus({ preventScroll: true });
       }
     };
-    UI.showOverlay('远征新手指南', beginnerGuideHTML(currentPage), 'page');
-    UI.act('guidePrev', () => { currentPage = Math.max(0, currentPage - 1); renderPage(); });
-    UI.act('guideNext', () => { currentPage = Math.min(pageCount - 1, currentPage + 1); renderPage(); });
+    UI.showOverlay('生存指南', beginnerGuideHTML(currentPage), 'page');
+    guideRoot = UI.el.ovBody.querySelector('.beginner-guide');
+    guideRevision = UI._overlayRevision;
+    if (guideCurrent() && typeof options.onPage === 'function') options.onPage(guideCurrent);
+    UI.act('guidePrev', () => { if (!guideCurrent()) return false; currentPage = Math.max(0, currentPage - 1); return renderPage(); });
+    UI.act('guideNext', () => { if (!guideCurrent()) return false; currentPage = Math.min(pageCount - 1, currentPage + 1); return renderPage(); });
     UI.act('guidePage', data => {
+      if (!guideCurrent()) return false;
       const requested = Number.parseInt(data.pageIndex, 10);
       if (!Number.isFinite(requested)) return;
       currentPage = Math.max(0, Math.min(pageCount - 1, requested));
-      renderPage();
+      return renderPage();
     });
-    UI.act('guideBack', () => {
-      UI.hideOverlay();
-      // 战斗 modal 态不可降级为 idle（战斗界面会丢）：口径同 showRunTransition 的恢复守卫
-      game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
-      // 战斗被手册整页覆盖后 ovBody 已被清：返回战斗态时补一次重绘（U9）
-      if (game.battleActive && readBattle() && readBattle().commands && readBattle().commands.refreshView) {
-        readBattle().commands.refreshView();
-      }
-    });
+    UI.act('guideImageOpen', () => guideCurrent() && setBeginnerGuideImageReading(guideRoot, true));
+    UI.act('guideImageClose', () => guideCurrent() && setBeginnerGuideImageReading(guideRoot, false));
+    UI.act('guideBack', createOverlayReturn({
+      revision:guideRevision, getRevision:() => UI._overlayRevision, isOpen:overlayOpen,
+      back:commit => {
+        if (!guideCurrent()) return false;
+        if (typeof options.returnTo === 'function') return options.returnTo(render => {
+          if (!guideCurrent()) return false;
+          return commit(render);
+        });
+        UI.hideOverlay();
+        game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
+        if (game.battleActive) readBattle()?.commands?.refreshView?.();
+        return true;
+      },
+      restore:targetCurrent => {
+        if (typeof options.restoreReturn === 'function') options.restoreReturn(targetCurrent);
+      },
+      onFailure:() => { if (guideCurrent()) UI.log('返回未完成，请重试。', 'warn'); },
+    }));
+    return guideRoot;
   }
 
   // 成就总览：以最近游玩档位的基地档案为准（只读；领奖需进入基地）

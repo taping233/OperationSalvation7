@@ -1,6 +1,6 @@
 import { planBagTokenCraft } from './bag-token-craft-plan.js';
-import { containerRuleOf, containerAccepts, canReceiveCardFromBag, canAcceptCardAtCapacity } from '../core/card-capacity.js';
-import { cardStacksForZone, deriveBagRenderState } from '../core/bag-render-derivation.js';
+import { containerRuleOf, containerAccepts, previewCardRewards, resourceContainerBonus } from '../core/card-capacity.js';
+import { cardStacksForZone } from '../core/bag-render-derivation.js';
 
 const POUCH_ID = 'tt7-stratagem';
 const PEARL_ID = 'tt2-pearlbox';
@@ -55,19 +55,12 @@ export function discardInventoryCard(state, request, sha) {
 export function craftInventoryToken(state, request, { cards, newUid, baseCap = null }) {
   const { kind, sourceUid, current } = request;
   if (unavailable(state, current)) return rejected('inactive');
-  const plan = planBagTokenCraft(state, kind, cards(), sourceUid);
-  if (!plan.ok) return { ok:false, code:'recipe', reason:plan.reason };
+  const plan = planBagTokenCraft(state, kind, cards(), sourceUid, baseCap ? baseCap() : null);
+  if (!plan.ok) return { ok:false, code:'code' in plan && plan.code === 'bag-full' ? 'bag-full' : 'recipe', reason:plan.reason };
   // Consume exactly the planned entries: historical UIDs may be missing or shared by other cards.
   const sources = plan.sourceIndices.map(index => ({ entry:state.ownedCards[index], index }));
   const sourceEntries = new Set(sources.map(source => source.entry));
   const remaining = state.ownedCards.filter(entry => !sourceEntries.has(entry));
-  if (baseCap) {
-    const projected = deriveBagRenderState({ ownedCards:remaining, inventory:state.inventory || [] }, baseCap());
-    if (!canReceiveCardFromBag(plan.card, { ownedCards:remaining,
-      canAcceptCard:card => canAcceptCardAtCapacity(card, { usedSlots:projected.used, baseCap:projected.baseCap, totalCap:projected.cap }) })) {
-      return { ok:false, code:'bag-full', reason:'背包空间不足，合成材料与碎片未消耗，请先腾出通用格' };
-    }
-  }
   // UID allocation can fail: allocate before consuming any material.
   const output = { uid:newUid(), card:plan.card };
   state.ownedCards = remaining;
@@ -77,11 +70,11 @@ export function craftInventoryToken(state, request, { cards, newUid, baseCap = n
 }
 
 /**
- * @param {{ kind:string, take:boolean, name:string, current?:()=>boolean }} request
+ * @param {{ kind:string, take:boolean, name:string, stackIndex?:number, stackCount?:number, current?:()=>boolean }} request
  * @returns {TransferResult}
  */
 export function transferContainerStack(state, request, ports) {
-  const { kind, take, name, current } = request;
+  const { kind, take, name, stackIndex, stackCount, current } = request;
   if (unavailable(state, current)) return rejected('inactive');
   if (kind !== 'pouch' && kind !== 'pearl') return rejected('container');
   const pouch = kind === 'pouch';
@@ -91,17 +84,21 @@ export function transferContainerStack(state, request, ports) {
   if (!capacity) return rejected('container');
   const inContainer = entry => pouch ? entry.pouchOf === POUCH_ID : entry.stored && !entry.pouchOf;
   const stored = state.ownedCards.filter(inContainer);
-  // Deposits select the first rendered stack (at most its stack limit),
-  // whereas retrieval releases the whole named group held by that container.
-  const stack = take ? null : cardStacksForZone(state.ownedCards, false).find(item => item.card.name === name
-    && activeContainers.some(container => containerAccepts(container.card, item.card))
-    && (!pouch || item.card.id !== POUCH_ID));
+  // Deposits select the observed rendered stack; legacy callers without an
+  // index retain the first-stack selection. Retrieval releases the named group.
+  const bagStacks = take ? [] : cardStacksForZone(state.ownedCards, false);
+  const sourceIndex = stackIndex === undefined ? bagStacks.findIndex(item => item.card.name === name) : stackIndex;
+  const stack = Number.isInteger(sourceIndex) && sourceIndex >= 0 ? bagStacks[sourceIndex] : null;
+  if (!take && (!stack || stack.card.name !== name || (stackCount !== undefined && stack.count !== stackCount)
+    || !activeContainers.some(container => containerAccepts(container.card, stack.card))
+    || (pouch && stack.card.id === POUCH_ID))) return rejected('missing');
+  const offset = bagStacks.slice(0, sourceIndex).reduce((sum, item) => sum + (item.card.name === name ? item.count : 0), 0);
   // Historical saves may have missing/duplicate UIDs. Select the visible zone
   // by entry and stack size so another zone can never join this transfer.
   const entries = take ? state.ownedCards.filter(entry => entry.card?.name === name && inContainer(entry))
     : state.ownedCards.filter(entry => !entry.safe && !entry.stored && !entry.pouchOf && entry.card?.name === stack?.card.name)
-      .slice(0, stack?.count || 0);
-  if (!entries.length) return rejected('missing');
+      .slice(offset, offset + (stack?.count || 0));
+  if (!entries.length || (!take && entries.length !== stack.count)) return rejected('missing');
   const card = entries[0].card, count = entries.length;
   const result = { card, count, capacity, storedCount:stored.length };
   if (!take && stored.length + count > capacity) return { ...result, ...rejected('container-full') };
@@ -111,8 +108,12 @@ export function transferContainerStack(state, request, ports) {
     const delta = Math.ceil((sameBag + count) / cap) - Math.ceil(sameBag / cap);
     const limit = !pouch || card.type === '资源' ? ports.bagCap() : ports.baseCap();
     const used = ports.usedSlots();
-    Object.assign(result, { delta, limit, used });
-    if ((!pouch || delta > 0) && used + delta > limit) return { ...result, delta, limit, used, ...rejected('bag-full') };
+    const retrieval = Object.assign(result, { delta, limit, used });
+    // The cards already contribute any container bonus while stored; the
+    // receipt projection adds it back once as each card returns to the bag.
+    const projected = previewCardRewards(entries.map(entry => entry.card), { ownedCards:state.ownedCards,
+      usedSlots:used, baseCap:ports.baseCap(), totalCap:ports.bagCap() - resourceContainerBonus(entries) });
+    if (projected.cant) return { ...retrieval, ...rejected('bag-full') };
   }
   const moves = entries.map(entry => ({entry,before:containerPosition(entry)}));
   for (const entry of entries) {

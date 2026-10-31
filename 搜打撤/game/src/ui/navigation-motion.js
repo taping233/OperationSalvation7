@@ -11,7 +11,6 @@ const roomSections = {
   shop: ['buy', 'sell'],
   ach: ['cards', 'rewards', 'achievements', 'classes', 'backs', 'stories'],
   upgrade: ['bag', 'stash'],
-  courtyard: ['rain', 'koi'],
 };
 function sectionRank(state) {
   const path = state?.view?.split('/') || [];

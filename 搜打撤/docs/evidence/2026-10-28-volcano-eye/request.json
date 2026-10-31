@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-descender",
+      "asset": "cards/hero-volcano.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a1827c-7478-7b03-8e0d-5b52446caeb7/exec-16898225-f52c-45f1-9abc-dbc7d8ff0c93.png",
+      "revision": "volcano-hidden-burning-eye-20261028",
+      "prompt": "Edit the supplied card illustration. Preserve the same square composition, full-body male elf mage identity, grey hair, round glasses, black pointed hat with purple lining, black and purple long coat, raised hand gesture, boots, framing, and towering molten flame shape. Only repaint the background behind him to subtly incorporate ONE burning eye, half-concealed inside the upper fire and smoke behind the character. A faint dark ember-red almond contour and a barely perceived vertical molten pupil, broken and veiled by broad flame strokes; integrate its colors into the existing orange-gold fire, low contrast, no bright white sclera, no crisp outlined eye, no face or creature body. The eye should be a hidden second-read detail, not the focal point; the mage remains the clear subject. Retain the reference's hand-painted anime block brush style, large connected opaque matte color masses, broad directional flame strokes, selective fine lines and quiet surfaces, no extra particles or all-over texture. No text, border, UI or watermark.",
+      "references": [
+        "game/assets/cards/hero-volcano.webp"
+      ]
+    }
+  ]
+}

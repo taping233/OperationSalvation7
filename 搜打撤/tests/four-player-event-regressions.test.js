@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { overlayElements, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
 import { rollEventDice, flushEventActions } from './helpers/event-dice-async.js';
 // 四线试玩修复：复用 WORLD 组会话桩，使用真实UI壳、动效包装器和返回钩子。
@@ -18,8 +19,8 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => nu
 
 let scenes, flow, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
-    Cards: { all: () => H.cards, isRandomObtainable: () => true, randomClassCard: () => H.cards[0], cardHTML: c => `<span>${c.name}</span>` } };
+  await connectSdtFixture({ Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
+    Cards: { all: () => H.cards, isRandomObtainable: () => true, randomClassCard: () => H.cards[0], cardHTML: c => `<span>${c.name}</span>` } });
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
   UI = window.SDT.UI = { ...overlayMethods, ...eventUiMocks(() => UI),
   };
@@ -111,7 +112,7 @@ describe('四线试玩 P1 事件生命周期', () => {
     expect(H.game.ownedCards).toHaveLength(1);
     expect(takeBagReturnHook()).toBeNull();
     await closeCoveredBag();
-    expect(UI._acts.eventCardPick).toBeUndefined(); // 领取后退出画面不可再次发奖
+    expect(await UI._acts.eventCardPick({i:'0'})).toBe(false); // 保留的旧动作也不能再次发奖
     await vi.advanceTimersByTimeAsync(240);
     expect(H.game.ownedCards).toHaveLength(1);
     expect(H.game.state).toBe('idle');

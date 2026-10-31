@@ -64,8 +64,12 @@ it('ignores an async completion after the active save changes', async () => {
   let resolve;
   commit.mockImplementation(() => new Promise(done => {resolve=done;}));
   const pending=doDeath();await Promise.resolve();await Promise.resolve();
+  expect(html()).toContain('正在保存结算');
+  const savingPage=UI.el.ovBody.firstElementChild, calls=UI.showOverlay.mock.calls.length;
   activeSlot=2;base.slot=2;resolve({ok:true});expect(await pending).toBe(false);
-  expect(UI.showOverlay).not.toHaveBeenCalled();
+  expect(UI.showOverlay).toHaveBeenCalledTimes(calls);
+  expect(UI.el.ovBody.firstElementChild).toBe(savingPage);
+  expect(openBaseHub).not.toHaveBeenCalled();
 });
 
 it.each([false,true])('uses an honest reason without inventing a battle review when surrender=%s', async surrender => {

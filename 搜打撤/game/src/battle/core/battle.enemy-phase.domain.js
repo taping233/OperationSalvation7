@@ -1,7 +1,7 @@
 import { createRequestedDomain } from '../effects/requested-card-runtime.domain.js';
 import { esc } from '../../core/shared.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
-import { buildEnemyActionPlan } from './battle.enemy-plan.js';
+import { buildEnemyActionPlan, findEnemyAttackGuard } from './battle.enemy-plan.js';
 import { createM2Domain } from '../effects/effect-steps.m2.domain.js';
 import { dealMeasuredDamage } from './battle.measured-damage.js';
 import { applyBossTurnStart, cleanseBlockerAfterAttack } from './battle.boss-mechanics.js';
@@ -283,7 +283,7 @@ const { restoreAtkDown, restoreStolenAttack } = createM2Domain(context);
           if (!stillEnemyPhase()) return;
           if (foe.dead || !Combat.canAct(foe) || instanceRuntime.G.hp <= 0) break;
           // 随从优先替主人承受伤害（Q4 老板定向：步兵「优先为主人承受伤害」；无攻血物件除外）
-          const guard = instanceRuntime.allies.find(a => !a.dead && !a.statless && !Combat.isStealthed(a));
+          const guard = findEnemyAttackGuard(instanceRuntime.allies);
           if (guard) {
             const shieldBefore = guard.defense?.shield || 0;
             const ar = dealMeasuredDamage(Combat, { atk: foe.atk }, guard, 0, Combat.TYPES.ATTACK);

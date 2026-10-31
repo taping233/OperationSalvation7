@@ -196,13 +196,18 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     // must not turn that action's release into a reading gesture; actual status
     // and tooltip surfaces under the pointer still keep their input isolation.
     const sourceAction = aim && !aim.follow ? aim.el : null;
-    return (!sourceAction?.contains(e.target) && aimReadingSurface(e.target))
-      || (!sourceAction?.contains(hit) && aimReadingSurface(hit));
+    const reading = el => aim?.follow && el?.closest?.('button,input,select,textarea,a,[data-act]')
+      || aimReadingSurface(el) && (!aim?.follow || !el?.closest?.('.bt-foe, #btSelf'));
+    return (!sourceAction?.contains(e.target) && reading(e.target))
+      || (!sourceAction?.contains(hit) && reading(hit));
   }
   function aimHoverAt(x, y, session) {
-    if (aimReadingSurface(document.elementFromPoint?.(x, y))) return null;
+    const surface = document.elementFromPoint?.(x, y);
+    if (aimReadingSurface(surface) && (!aim?.follow || !surface.closest('.bt-foe, #btSelf'))) return null;
+    if (aim?.follow && surface?.closest('button,input,select,textarea,a,[data-act]')) return null;
     const hit = session?.hitAt(x, y) || null;
-    if (hit?.kind === 'any' && document.elementFromPoint(x, y)?.closest('.sts-hand, .bt-slot, .bt-card, .sts-hand-tools, .battle-skill-help, [data-act], [data-ui-tip]')) return null;
+    if (hit?.kind === 'any' && (surface?.closest('.sts-hand, .bt-slot, .bt-card, .sts-hand-tools, [data-act]')
+      || !surface?.closest('.bt-foe, #btSelf') && surface?.closest('.battle-skill-help, [data-ui-tip]'))) return null;
     return hit;
   }
   function makeAimTargetSession(a) {
@@ -367,18 +372,24 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     const selectedSide = entry && targetSide(entry.card);
     const pendingEntry = snapshot.pendingTarget && findCard(snapshot.pendingTarget.uid);
     const pendingSide = pendingEntry && targetSide(pendingEntry.card);
+    const enemyCardUid = pendingSide === 'enemy' ? snapshot.pendingTarget.uid
+      : selectedSide === 'enemy' ? clickSelectedUid : null;
+    const selfCardUid = pendingSide === 'self' ? snapshot.pendingTarget.uid
+      : selectedSide === 'self' ? clickSelectedUid : null;
     // W5-06（2026-09-27 R2）：道具按目标侧过滤——自用道具（回复类，targetSide!=='enemy'）
     // 不再让全体敌人可点（高亮=攻击性误导，评审读码+W3 复核）；slam/dart 语义正确保留。
     // 反馈1021·9：道具进点选态的唯一判据是 itemTargetSideFor（usePotion/bag 同源）——
     // targetSideFor 只看招式卡的 triggers.onPlay / 卡面字段，对「冰冻药水/流血药水」这类
     // 只有 rules.bag.use 的道具恒返回 null，会让点选态一个敌人都不亮，玩家无从收口。
     const pendingItemSide = snapshot.pendingItem && snapshot.pendingItem.card ? itemTargetSideFor(snapshot.pendingItem.card) : null;
-    setTargetable(document.getElementById('btSelf'), selectedSide === 'self' || pendingSide === 'self' || pendingItemSide === 'self', '自己，按 Enter 确认目标');
+    const cardTargetsSelf = selfCardUid != null && commands.getCardPlayAvailability(selfCardUid, 'self').status !== 'rejected';
+    setTargetable(document.getElementById('btSelf'), cardTargetsSelf || pendingItemSide === 'self', '自己，按 Enter 确认目标');
     /** @type {NodeListOf<BattleElement>} */ (document.querySelectorAll('.bt-foe[data-eidx]')).forEach(el => {
       clearFoePreview(el);
       const idx = +el.dataset.eidx;
       const foe = snapshot.foes[idx];
-      const targetable = !!(isTargetableEnemy(foe, idx, snapshot.pendingTarget?.excludedTargetIndex) && (selectedSide === 'enemy' || pendingSide === 'enemy' || pendingItemSide === 'enemy' || snapshot.slamPending || snapshot.dartPending));
+      const cardTargetsEnemy = enemyCardUid != null && commands.getCardPlayAvailability(enemyCardUid, idx).status !== 'rejected';
+      const targetable = !!(isTargetableEnemy(foe, idx, snapshot.pendingTarget?.excludedTargetIndex) && (cardTargetsEnemy || pendingItemSide === 'enemy' || snapshot.slamPending || snapshot.dartPending));
       setTargetable(el, targetable, `${foe?.name || '敌人'}，按 Enter 确认目标`);
       if (targetable && selectedSide === 'enemy' && el.matches(':hover, :focus')) {
         showFoePreview(el, idx, clickSelectedUid, entry.card, 'click');
@@ -553,6 +564,8 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     };
     aim.targetSession = makeAimTargetSession(aim);
     if (isCard) {
+      aim.stage?.setAttribute('data-card-dragging', 'true');
+      document.dispatchEvent(new CustomEvent('sdt-card-drag-start'));
       aim.baseRect = aimBaseRect(el);
       aim.slotLayout = aimSlotLayout(el);
       el.style.transition = 'none';
@@ -752,6 +765,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   }
   // 拆监听+恢复卡牌+清箭头/指示（打出与取消共用）
   function finishAim(a, returnToHand = false, keepPose = false) {
+    if (a.follow) a.stage?.removeAttribute('data-card-dragging');
     window.removeEventListener('pointermove', moveAim, true);
     window.removeEventListener('pointerup', endAim, true);
     window.removeEventListener('pointercancel', onAimPointerCancel, true);

@@ -3,7 +3,7 @@ import { Random } from '../core/random.js';
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import { showRewardCardFeedback } from '../ui/reward-card-feedback.js';
 import { claimResourceReward, resourceRewardAt, nodeActionBinding, nodeContentEndedAt } from './node-reward-state.js';
-import { patchRewardScene, rewardClaimHTML, rewardExitHTML, rewardCardUnitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
+import { patchRewardScene, restoreRewardActionFocus, rewardClaimHTML, rewardExitHTML, rewardCardUnitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
 
 export function createRunResourceController({
   game, UI, dom, getCards, rich, saveGame, captureRunContext, grantEventCard,
@@ -78,9 +78,13 @@ async function openResourcePick(done) {
   });
   const currentBody = UI.el?.ovBody;
   const focused = currentBody?.contains(dom.activeElement) ? dom.activeElement : null;
+  const focusedAction = focused?.closest('[data-act]');
+  const focus = focusedAction ? { action:focusedAction.dataset.act, index:focusedAction.dataset.i } : null;
   if (!currentBody?.querySelector('.resource-reward-scene') || UI.el?.overlay?.hidden
     || !patchRewardScene(currentBody, rich(body))) UI.showOverlay('', body, 'page');
-  if (focused && !focused.isConnected) currentBody.querySelector('[data-act="resSkip"]')?.focus({ preventScroll:true });
+  if (focused && !focused.isConnected) restoreRewardActionFocus(currentBody, focus, {
+    claimActions:['resTake'], returnActions:['resSkip'],
+  });
   const binding = nodeActionBinding(game, UI, 'resSkip');
   active = () => current() && binding() && game.nodeRewards?.[key] === record;
   setBagReturnHook(() => openResourcePick(done));
@@ -104,8 +108,7 @@ async function openResourcePick(done) {
     saved = await saveRunCheckpoint(saveGame);
     if (!active()) return false;
     if (!saved) { render(); return false; }
-    setBagReturnHook(null); UI.hideOverlay(); done(record.taken !== null);
-    return true;
+    return await done(record.taken !== null, true) !== false;
   });
   };
   render();

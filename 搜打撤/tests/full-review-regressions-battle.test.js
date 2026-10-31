@@ -167,10 +167,11 @@ describe('09-30 深审 BC 组修复回归', () => {
     const uid = g.ownedCards[0].uid;
     BattleSession.commands.useItem(uid);
     await waitIdle();
-    expect(g.ownedCards.some(o => o.uid === uid)).toBe(false);   // 母本已消耗
+    expectBattleItemCommitted(g, R, uid);
+    expect(g.ownedCards.some(o => o.uid === uid)).toBe(true); // 母本归属保留至宿主统一结算。
     const rewards = R.granted.filter(entry => entry.card.rarity === '传说' && entry.uid !== uid);
     expect(rewards).toHaveLength(1);
-    expect(R.granted.filter(entry => entry.uid === uid)).toHaveLength(1);
+    expect(R.granted.filter(entry => entry.uid === uid)).toHaveLength(0);
     expect(R.played.filter(entry => entry === uid)).toHaveLength(1);
     BattleSession.commands.useItem(uid); await waitIdle();
     expect(R.granted.filter(entry => entry.card.rarity === '传说' && entry.uid !== uid)).toEqual(rewards);
@@ -195,3 +196,4 @@ describe('09-30 深审 BC 组修复回归', () => {
     expect(R.pstat.status.atkUp).toBe(3);
   });
 });
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';

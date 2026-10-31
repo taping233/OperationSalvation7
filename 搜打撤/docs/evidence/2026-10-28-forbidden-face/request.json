@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-warlock",
+      "asset": "cards/dark-eclipse.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a18284-7559-7473-a891-f50ff09fd8d8/exec-adb33a2b-9a37-4846-87c4-e9ec3b6891b5.png",
+      "revision": "forbidden-curse-face-20261028",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Image 1 is the EDIT TARGET (empty-handed woman with eclipse). Images 2 and 3 are FACE REFERENCES ONLY from the same curse card series. Refine ONLY target's face to closely match the reference character's face: precise clear violet irises and dark upper lashes, elegant slightly narrowed almond eyes with defined outer corners, correct balanced eye spacing, small economical nose and mouth, pale warm ivory skin with clean selective plane shadows, slender cheek and chin contour, calm cold restrained expression. Make facial features readable and carefully drawn like reference 2 and 3, not muddy or excessively simplified. Retain target head position and size, forward gaze, existing hairstyle and crescent hair ornament; do not copy references' poses or framing. All areas outside face stay as in image 1: same empty open hands outstretched, exact body pose, black gold dress and torn violet cloak, large eclipse ring and background, same full composition. Preserve rough hand-painted opaque anime brushwork, refine selectively in face only. No new props, no chains, no text.",
+      "references": [
+        "game/assets/cards/dark-eclipse.webp",
+        "game/assets/cards/curse-drain.webp",
+        "game/assets/cards/curse-silence.webp"
+      ]
+    }
+  ]
+}

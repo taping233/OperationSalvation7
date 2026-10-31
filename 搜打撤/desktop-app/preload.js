@@ -14,6 +14,7 @@ window.addEventListener('unhandledrejection', event => {
 
 // The isolated preload reads DOM readiness, never the page's JavaScript namespace.
 window.addEventListener('DOMContentLoaded', () => {
+  ipcRenderer.send('startup-progress', 70, '界面资源已载入，正在初始化游戏');
   let sentReady = false;
   let readyScheduled = false;
   let stopped = false;
@@ -44,11 +45,13 @@ window.addEventListener('DOMContentLoaded', () => {
     if (startup === 'complete' || startup === 'cancelled') { cleanup(); return; }
     const state = document.body?.dataset.state;
     const bound = document.getElementById('title')?.dataset.controlsBound === 'true';
+    if (bound && !readyScheduled) ipcRenderer.send('startup-progress', 85, '操作界面已就绪，正在读取本地资料');
     if (readyScheduled || !state || state === 'boot' || !bound) return;
     readyScheduled = true;
     const sendReady = () => {
       if (stopped || sentReady) return;
       sentReady = true;
+      ipcRenderer.send('startup-progress', 97, '加载完成，正在进入主页');
       clearTimeout(readyTimer);
       if (readyFrame != null) cancelAnimationFrame(readyFrame);
       ipcRenderer.send('startup-ready');

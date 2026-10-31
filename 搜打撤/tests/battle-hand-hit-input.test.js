@@ -26,11 +26,11 @@ beforeEach(() => {
   controller=createHandHitController(root,{getCards:()=>cards,scale:()=>1,isAiming:()=>aiming,onPointerDown:down,onPlay:play});controller.sync(1);
 });
 afterEach(()=>controller.dispose());
-it('uses one real UID for hover, down and click from either incoming card, and dispatches only once',()=>{
+it('keeps hover, pickup and click on the actual visible face, dispatching only once',()=>{
   for(const card of cards){
-    event(card,'pointermove');expect(cards[1].parentElement.classList.contains('hand-reading')).toBe(true);
+    event(card,'pointermove');expect(card.parentElement.classList.contains('hand-reading')).toBe(true);
     event(card,'pointerdown');event(card,'click');
-    expect(down.mock.lastCall[1]).toBe(cards[1]);expect(play.mock.lastCall).toEqual(['8']);
+    expect(down.mock.lastCall[1]).toBe(card);expect(play.mock.lastCall).toEqual([card.dataset.uid]);
   }
   expect(play).toHaveBeenCalledTimes(2);expect(delegated).not.toHaveBeenCalled();
 });
@@ -41,17 +41,21 @@ it('does not issue a click play after aim starts or finishes on this gesture',()
   down.mockImplementation(()=>{aiming=true;});event(cards[0],'pointerdown');aiming=false;
   event(cards[0],'click');expect(play).not.toHaveBeenCalled();expect(delegated).not.toHaveBeenCalled();
 });
-it('keeps the continuous raised reading-to-button route and native button action',()=>{
+it('moves ownership to the next visible face while preserving native button actions',()=>{
   event(cards[0],'pointermove',{x:150});
   event(cards[1],'pointermove',{x:220,y:280});
-  expect(cards[0].parentElement.classList.contains('hand-reading')).toBe(true);
+  expect(cards[1].parentElement.classList.contains('hand-reading')).toBe(true);
   const button=cards[0].querySelector('button');event(button,'pointerdown',{x:220,y:230});event(button,'click',{x:220,y:230});
   expect(down).not.toHaveBeenCalled();expect(play).not.toHaveBeenCalled();expect(delegated).toHaveBeenCalledTimes(1);
 });
-it('preserves text/keyword reading and does not start dragging or play through the text',()=>{
+it('starts a pickup from prose and keywords, without duplicating the click after aim starts',()=>{
+  down.mockImplementation(()=>{aiming=true;});
   const desc=cards[0].querySelector('.hsc-desc');event(desc,'pointerdown');event(desc,'click');
+  expect(down.mock.lastCall[1]).toBe(cards[0]);
+  aiming=false;
   const keyword=desc.firstElementChild;event(keyword,'pointerdown');
-  expect(down).not.toHaveBeenCalled();expect(play).not.toHaveBeenCalled();expect(delegated).not.toHaveBeenCalled();
+  expect(down).toHaveBeenCalledTimes(2);expect(down.mock.lastCall[1]).toBe(cards[0]);
+  expect(play).not.toHaveBeenCalled();expect(delegated).not.toHaveBeenCalled();
 });
 it('never snaps empty space and rejects nonprimary/right presses',()=>{
   event(root,'pointermove',{x:20});event(root,'pointerdown',{x:20});event(root,'click',{x:20});
@@ -87,7 +91,7 @@ it('shares the production command callback and keeps production CSS scoped away 
 });
 
 it('routes a physical click without down through the current fixed region once',()=>{
-  event(cards[0],'click');expect(play).toHaveBeenCalledExactlyOnceWith('8');expect(delegated).not.toHaveBeenCalled();
+  event(cards[0],'click');expect(play).toHaveBeenCalledExactlyOnceWith('7');expect(delegated).not.toHaveBeenCalled();
 });
 it('leaves existing window capture cancellation ahead of local click dispatch',()=>{
   const cancel=vi.fn(()=>{aiming=false;});
@@ -99,7 +103,7 @@ it('uses viewport geometry consistently at non-unit zoom',()=>{
   controller.dispose();
   controller=createHandHitController(root,{getCards:()=>cards,scale:()=>0.5,isAiming:()=>aiming,onPointerDown:down,onPlay:play});
   event(cards[0],'pointerdown',{x:220,y:240});event(cards[0],'click',{x:220,y:240});
-  expect(down.mock.lastCall[1]).toBe(cards[1]);expect(play).toHaveBeenCalledExactlyOnceWith('8');
+  expect(down.mock.lastCall[1]).toBe(cards[0]);expect(play).toHaveBeenCalledExactlyOnceWith('7');
 });
 
 it('does not start a new pickup when the existing aim consumes this pointerdown before hand capture',()=>{

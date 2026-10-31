@@ -105,13 +105,17 @@ describe('下一商店委托',()=>{
     expect(openShopCommission(args)).toBe(false);
     expect(openShopCommission({...args,stockKey:'other'})).toBe(false);
   });
-  it('中途离开后JSON恢复，已选的第一格不会重复，也不会换店刷新免单',async ()=>{
+  it('中途离开后JSON恢复，原店保留第一格；未兑付凭据换店清草稿不先发免费商品',async ()=>{
     vi.spyOn(Random,'random').mockReturnValue(0);const h=harness();
     const game={nodeRewards:{a:{commission:{status:'pending'}}},shopStock:[1,2,3].map(i=>({card:{id:`c${i}`,name:`货${i}`},price:2}))};
     const args={game,UI:h.UI,SDT:{Cards:{SHA:{id:'sha',name:'杀'}}},stockKey:'A',save:h.save,current:()=>true,renderShop:vi.fn(),leave:vi.fn()};
     openShopCommission(args); await flushEventActions();await h.UI._acts.commissionStart();await flushEventActions();await h.UI._acts.eventDiceRoll();await flushEventActions();await h.UI._acts.eventDiceContinue(); await flushEventActions();
     await h.UI._acts.eventDiceLeave(); await flushEventActions();const restored=JSON.parse(JSON.stringify(game));
-    expect(openShopCommission({...args,game:restored,stockKey:'B'})).toBe(false);
+    expect(restored.nodeRewards.a.commission.slots).toEqual([0]);
+    const moved=JSON.parse(JSON.stringify(restored));
+    expect(openShopCommission({...args,game:moved,stockKey:'B'})).toBe(true); await flushEventActions();
+    expect(moved.nodeRewards.a.commission).toMatchObject({status:'pending',shopKey:'B',slots:[]});
+    expect(moved.shopStock.filter(s=>s.commissionFree)).toHaveLength(0);
     openShopCommission({...args,game:restored}); await flushEventActions();await h.UI._acts.commissionStart();await flushEventActions();await rollEventDice(h.UI);
     expect(restored.nodeRewards.a.commission.slots).toEqual([0,1]);
     expect(restored.shopStock.filter(s=>s.commissionFree)).toHaveLength(2);

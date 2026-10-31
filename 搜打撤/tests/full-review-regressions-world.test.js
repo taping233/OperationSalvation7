@@ -1,4 +1,4 @@
-import { overlayElements, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
+import { connectSdtFixture, overlayElements, eventMapActions, eventUiMocks, eventSaveActions } from './helpers/environment-fixtures.js';
 import { rollEventDice } from './helpers/event-dice-async.js';
 // 09-30 全仓深审 WORLD 组（世界/UI 流程）修复回归。发现来源：
 // docs/evidence/2026-09-30-full-repository-review/world_ui/findings.json，
@@ -22,8 +22,8 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => nu
 
 let scenes, altar, flow, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
-    Cards: { all: () => H.cards, isRandomObtainable: () => true, randomClassCard: () => H.cards[0], cardHTML: c => `<span>${c.name}</span>` } };
+  await connectSdtFixture({ Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
+    Cards: { all: () => H.cards, isRandomObtainable: () => true, randomClassCard: () => H.cards[0], cardHTML: c => `<span>${c.name}</span>` } });
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
   UI = window.SDT.UI = { ...overlayMethods, ...eventUiMocks(() => UI),
   };
@@ -89,14 +89,14 @@ describe('09-30 深审 WORLD 组修复回归', () => {
   it('WORLD-001 拾取页：背包返回后领取按钮已注册且可领一次', async () => {
     let claimed = 0;
     const onDone = () => { claimed++; };
-    scenes.openPickupPage('coin', '+1', onDone, true);
+    scenes.openPickupPage('coin', '+1', {claim:onDone}, true);
     expect(UI.el.ovBody.querySelector('[data-act="pickupGo"]')).not.toBeNull();
     expect(UI._acts.pickupGo).toBeTypeOf('function');   // 此后重入分支未注册
-    UI._acts.pickupGo();
+    const firstClaim = UI._acts.pickupGo; await firstClaim(); await firstClaim();
     expect(claimed).toBe(1);
     // 正常首开（搜索动画后揭晓）：揭晓时同样注册
     vi.useFakeTimers();
-    scenes.openPickupPage('wood', '+2 木材', onDone);
+    scenes.openPickupPage('wood', '+2 木材', {claim:onDone});
     expect(UI._acts.pickupGo).toBeUndefined();
     vi.advanceTimersByTime(1200);
     expect(UI._acts.pickupGo).toBeTypeOf('function');
@@ -106,7 +106,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     closeCoveredBag();
     expect(UI.el.ovBody.querySelector('[data-act="pickupGo"]')).not.toBeNull();
     expect(UI._acts.pickupGo).toBeTypeOf('function');
-    UI._acts.pickupGo();
+    const finalClaim = UI._acts.pickupGo; await finalClaim(); await finalClaim();
     expect(claimed).toBe(2);
   });
 

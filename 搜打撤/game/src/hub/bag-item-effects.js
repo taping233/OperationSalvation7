@@ -52,8 +52,13 @@ export function executeBagItemEffects(card, operations, {
         tx.restore(entry); restored.push(entry.card.name);
       }
       const remaining = game.usedPocket.reduce((total, entry) => total + entry.count, 0);
+      const remainingTargets = game.usedPocket.filter(isRestorableBagEntry);
+      const needsSpace = restored.length < operation.amount && remainingTargets.length > 0
+        && remainingTargets.every(entry => !canReceive(entry.card));
+      const capacity = needsSpace ? (typeof game.bagCapacityText === 'function' ? game.bagCapacityText() : `${usedSlots()}/${bagCap()} 格`) : '';
       tx.report(`[[icon:gem]] 复原了消耗区中的 <b>${restored.length}</b> 张卡牌${restored.length ? `：${restored.map(esc).join('、')}` : ''}`
-        + (remaining && usedSlots() >= bagCap() ? `（背包已满，剩 ${remaining} 张留在消耗区）` : ''), 'ok');
+        + (needsSpace ? `（剩余卡牌放不下，请先腾位；当前容量 ${esc(capacity)}，剩 ${remaining} 张留在消耗区）`
+          : remaining ? `（剩 ${remaining} 张留在消耗区）` : ''), 'ok');
     }
     if (operation.op === 'acquire') {
       const legendary = operation.pool?.kind === 'legendary';
@@ -67,7 +72,8 @@ export function executeBagItemEffects(card, operations, {
       if (legendary && operation.legendNotice) tx.notifyLegend(got);
     }
     if (operation.op === 'resource') {
-      tx.consume(); tx.addItem(items[operation.kind], operation.amount);
+      tx.consume();
+      if (tx.addItem(items[operation.kind], operation.amount) === false) return false;
       tx.report(`使用资源卡【<b>${esc(card.name)}</b>】`, 'sys');
     }
     if (operation.op === 'legacyMystery') {
@@ -85,10 +91,10 @@ export function executeBagItemEffects(card, operations, {
             const bonus = tx.choose(`mystery-bonus:${step}`, () => pick(SDT.Cards.all().filter(candidate => SDT.Cards.isRandomObtainable(candidate) && !grantsApolloBonus(candidate))));
             if (bonus && canReceiveMystery(bonus)) {
               tx.addCard(bonus); tx.report(`[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠【<b>${esc(bonus.name)}</b>】`, 'loot');
-            } else if (bonus) tx.report(`[[icon:bolt]] <b>阿猫的礼物</b>：背包已满，附赠的【${esc(bonus.name)}】没能放进背包`, 'warn');
+            } else if (bonus) tx.report(`[[icon:bolt]] <b>阿猫的礼物</b>：背包放不下附赠的【${esc(bonus.name)}】`, 'warn');
           }
         }
-        tx.report(`[[icon:flask]] 神秘药水：${took ? `随机获得【<b>${esc(got.name)}</b>】` : got ? `背包已满，【${esc(got.name)}】没能放进背包` : '没有可获得卡牌'}`, took ? 'loot' : 'warn');
+        tx.report(`[[icon:flask]] 神秘药水：${took ? `随机获得【<b>${esc(got.name)}</b>】` : got ? `背包放不下【${esc(got.name)}】` : '没有可获得卡牌'}`, took ? 'loot' : 'warn');
       }
     }
   }

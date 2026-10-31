@@ -1,0 +1,71 @@
+{
+  "files": [
+    {
+      "path": "game/src/ui/game.menu.pages.js",
+      "sha256": "a4ac07d56c38571d962dca7e12ce1b747b6abb4e1ea9e36d7f3ad14e268ba1c7",
+      "registrations": 2
+    },
+    {
+      "path": "game/src/ui/menu-slots.js",
+      "sha256": "02e6cdbbb69489bf37c83c0d50df5301f9d987596f4fd75b2809be2ffb4462d7",
+      "registrations": 1
+    },
+    {
+      "path": "game/data/art-mapping.json",
+      "sha256": "8486dbf00b069ea144d8a000a56d289f55ba15506b1f770ba801991a3e7a982e",
+      "registrations": 2
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "sha256": "a80bb9c926691e550b1f31f23f55d86f5d2cd614665e6073f72e1511827261da",
+      "registrations": 2
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "af120c112109f9e19bceb76846bdb0613d6fa9659724cb11e5aa04a4d3c535ee",
+      "registrations": 1
+    },
+    {
+      "path": "game/src/run/game.session.death.js",
+      "sha256": "58250eacf239bb56cc17c8528ccc1522533a60ea44d61c000d796590f26d703c",
+      "registrations": 1
+    },
+    {
+      "path": "game/css/scenes.css",
+      "sha256": "9be527e48ad33325803b418a8f1c0fb09d04ef401cf21a7d0649e41805a39aca",
+      "registrations": 1
+    },
+    {
+      "path": "game/src/ui/menu-settings.js",
+      "sha256": "d8d1c0a70def84c61e7f46bfb18ec3a81adaa479238558febe84001a31212408",
+      "registrations": 1
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "sha256": "3946e04cb457cd6db6a197c37176c1afbf05d8488c8976bb81d4ed81fc93edc6",
+      "registrations": 1
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "sha256": "2fa98640901ff50f1d3d0c104cab6dd6f122a5e7bd03ada2b2ce8c1fa0fbb9e3",
+      "registrations": 1
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "32947ed2c987d36fc97a204c8587c5ba257e95323df826b3e73b4777b865b700",
+      "registrations": 1
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "sha256": "abf38aeb09093cb9e88f3aecdd1d2f582306725fd27e35ff96a737e7ae719191",
+      "registrations": 1
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "sha256": "ca355a43f7e9e0942ceae60ea5145138290d19c9ec578760aefa0cd380594e38",
+      "registrations": 2
+    }
+  ],
+  "omissionRulesChanged": false,
+  "review": "asset-consumer-review.json"
+}

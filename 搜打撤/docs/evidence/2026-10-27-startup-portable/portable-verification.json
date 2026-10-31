@@ -1,0 +1,25 @@
+{
+  "artifact": "D:\\素材\\代号柒\\.tmp\\startup-portable-1027\\delivery-final\\代号柒-v0.60.0-全屏加载-便携无存档-20261027.exe",
+  "artifactSHA256": "e6827363b5f0d2673bcbb2210eb554422f71a61fb079684af5d4f0194944c1e3",
+  "work": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-VTOoib",
+  "first": {
+    "pid": 31620,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-VTOoib\\临时 resources\\c7-launch-6b53bca5e6fe436ea1e27a58e24409f4\\app",
+    "files": 1757,
+    "missing": []
+  },
+  "second": {
+    "pid": 12928,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-VTOoib\\临时 resources\\c7-launch-3486129a326d4ed7aacccc1566dfc850\\app",
+    "files": 1757,
+    "missing": []
+  },
+  "final": {
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-VTOoib\\临时 resources\\c7-launch-6b53bca5e6fe436ea1e27a58e24409f4\\app",
+    "files": 1757,
+    "missing": []
+  },
+  "firstExit": 0,
+  "secondExit": 0,
+  "passed": true
+}

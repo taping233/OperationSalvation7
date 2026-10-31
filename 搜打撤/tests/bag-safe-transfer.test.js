@@ -89,14 +89,47 @@ describe('安全格按最终双方容量原子交换一格', () => {
     const plan = planSafeCardSwap(game, incoming, outgoing, 2, 1);
     expect(plan.bagUsed).toBe(1); expect(plan.safeUsed).toBe(1);
   });
-  it('珍珠盒资源扩展格不能接收新非资源叠，资源叠可接收', () => {
+  it('换出普通卡使用换入腾出的基础格，已有资源不占用该基础格', () => {
     const incoming = entries(attack, 1), resources = entries(card('木材', '资源'), 4);
     const pearl = entries({ ...card('珍珠盒', '道具'), id:'tt2-pearlbox' }, 1, true);
     const outgoing = entries(guard, 1, true);
     game.ownedCards = [...incoming, ...resources, ...pearl, ...outgoing];
+    expect(planSafeCardSwap(game, incoming, outgoing, 1, 2)).toMatchObject({ bagUsed:3, safeUsed:2 });
+    game.ownedCards.push(...entries(card('另一招式'), 1));
     expect(planSafeCardSwap(game, incoming, outgoing, 1, 2)).toBeNull();
     outgoing[0].card = card('口粮', '资源');
     expect(planSafeCardSwap(game, incoming, outgoing, 1, 2)).not.toBeNull();
+  });
+  it.each([2, 3])('同时取回%d张珍珠盒沿用全部扩容，并只保存一次', async count => {
+    const boxes = entries({ ...card('珍珠盒', '道具'), id:'tt2-pearlbox' }, count, true);
+    game.ownedCards = [...entries(card('木材', '资源'), 36), ...boxes];
+    expect(transfer.button('珍珠盒', false, 'take')).not.toContain(' disabled');
+    expect(await transfer.move('珍珠盒', false)).toBe(true);
+    expect(boxes.every(entry => !entry.safe)).toBe(true);
+    expect(deriveBagRenderState(game, limits.bag)).toMatchObject({ used:13, ordinarySlots:1, cap:2 + count * 9 });
+    expect(ports.save).toHaveBeenCalledOnce();
+  });
+  it('满安全格换出两张珍珠盒时按最终容量确认整叠交换', async () => {
+    const incoming = entries(attack, 1);
+    const boxes = entries({ ...card('珍珠盒', '道具'), id:'tt2-pearlbox' }, 2, true);
+    game.ownedCards = [...incoming, ...entries(card('木材', '资源'), 36), ...boxes];
+    expect(transfer.move(attack.name, true)).toBe(false);
+    expect(UI.el.ovBody.querySelectorAll('[data-act="safeSwapPick"]')).toHaveLength(1);
+    UI._acts.safeSwapPick({ i:'0' });
+    expect(await UI._acts.safeSwapConfirm()).toBe(true);
+    expect(incoming[0].safe).toBe(true); expect(boxes.every(entry => !entry.safe)).toBe(true);
+    expect(deriveBagRenderState(game, limits.bag)).toMatchObject({ used:13, ordinarySlots:1, cap:20 });
+    expect(ports.save).toHaveBeenCalledOnce();
+  });
+  it.each(['ordinary', 'total'])('取回珍珠盒确实超过%s容量时整批保留原位', async boundary => {
+    const boxes = entries({ ...card('珍珠盒', '道具'), id:'tt2-pearlbox' }, 2, true);
+    game.ownedCards = boundary === 'ordinary'
+      ? [...entries(attack, 1), ...entries(guard, 1), ...boxes]
+      : [...entries(card('木材', '资源'), 60), ...boxes];
+    const before = JSON.stringify(game.ownedCards);
+    expect(await transfer.move('珍珠盒', false)).toBe(false);
+    expect(JSON.stringify(game.ownedCards)).toBe(before); expect(ports.save).not.toHaveBeenCalled();
+    expect(UI.log).toHaveBeenCalledWith(expect.stringContaining(boundary === 'ordinary' ? '基础格不足' : '背包放不下'), 'warn');
   });
   it('不把容器内卡或已移走的候选当安全格可换出格', () => {
     const incoming = entries(attack, 1), outgoing = entries(guard, 1, true);

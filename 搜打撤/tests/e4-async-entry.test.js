@@ -31,7 +31,7 @@ beforeEach(async () => {
     showOverlay: vi.fn((_title, html) => { document.getElementById('ovBody').innerHTML = html; overlay.hidden = false; }),
     el: { overlay, ovBody: document.getElementById('ovBody') } };
   const card = { id: 'test', name: 'test' };
-  SDT = window.SDT = { game, UI, Sound: { music() {}, sfx() {} }, Icons: { img: () => '' },
+  SDT = window.SDT = { game, UI, Sound: { music() {}, sfx() {} }, Icons: { img: () => '', rich: String },
     Art: { classArt: () => '', classFullArt: () => '', listSkins: () => [] },
     Meta: { ACHIEVEMENTS: [], isUnlocked: () => false, classLv: () => 1, classXP: () => 0,
       xpForNext: () => 10, perkText: () => '', addXpToProgress() {} },

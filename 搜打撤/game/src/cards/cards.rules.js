@@ -5,7 +5,8 @@ const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载�
 import { CLASSES } from './cards.consts.js';
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
-import { isHeroLine, rarityOf, isClassCard } from './card-rarity.js';
+import { isHeroLine, rarityOf } from './card-rarity.js';
+import { isRandomObtainableCard } from './card-obtainability.js';
 import { nativeNumericField, nativeDamageType } from './builtin-card-numeric-fields.js';
 
 let fixedCardIdSet;
@@ -251,10 +252,7 @@ export const rulesSlice = {
     // 2026-10-21 增补（反馈#2）：带 cls 归属的卡按职业卡同口径排除（isClassCard，
     // 含稀有度未迁移的旧档/自制卡）——随机获得类发放不得产出职业卡，除非文本明确声明职业池。
     isRandomObtainable(card) {
-      if (['初始', '职业', '衍生', '棱彩'].includes(card.rarity)) return false;
-      if (card.type === '能力卡' || card.type === '生物') return false;
-      if (isClassCard(card)) return false;
-      return !card.unrandom;
+      return isRandomObtainableCard(card);
     },
 
     // 职业表（第七批职业卡，cls 字段标职业归属）：

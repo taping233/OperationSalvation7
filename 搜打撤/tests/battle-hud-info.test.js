@@ -75,12 +75,12 @@ describe('战斗信息减负与普通牌库', () => {
     expect(empty.querySelector('[data-act="btDeckBack"]')).not.toBeNull();
   });
 
-  it('指南说明普通5库和效果抽牌，背包操作放在战前地图', () => {
+  it('指南说明临时5库和效果抽牌，背包入口位于地图', () => {
     const battle = guide.pages.find(page => page.id === 'battle');
-    expect(battle.steps.map(step => step.text).join('')).toContain('5 张初始攻击');
+    expect(battle.steps.map(step => step.text).join('')).toContain('5 张临时初始攻击');
     expect(battle.steps.map(step => step.text).join('')).toContain('开局和每回合不自动抽牌');
     const loot = guide.pages.find(page => page.id === 'loot');
-    expect(loot.steps[1].text).toContain('战斗中不能整理背包');
-    expect(loot.controls[0].text).toBe('地图上查看背包');
+    expect(loot.steps[1].text).toContain('每个珍珠盒提供 9 格资源专用空间');
+    expect(loot.controls[0]).toEqual({ key: 'B', text: '地图上打开背包' });
   });
 });

@@ -1,6 +1,7 @@
 import { battleRules } from './helpers/environment-fixtures.js';
 import { makeRuntimeBattleGame as makeGame } from './helpers/battle-fixtures.js';
 import { showBattleCardResults } from '../game/src/battle/view/battle.card-results.js';
+import { clearCardFeedback } from '../game/src/battle/view/battle.card-feedback.js';
 // Canonical hosted card through the real battle session; no browser state is used.
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
@@ -15,7 +16,7 @@ const { BattleSession } = await import('../game/src/battle/core/battle.core.js')
 const R = await import('../game/src/battle/runtime/battle.runtime.js');
 
 beforeEach(() => { vi.useFakeTimers(); R.set$lastDeckSel([]); window.SDT.MAP.rules.battleStartDraw = 20; });
-afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
+afterEach(() => { clearCardFeedback(); document.body.replaceChildren(); vi.clearAllTimers(); vi.useRealTimers(); });
 const canonical = id => { const card = C.all().find(c => c.id === id); expect(card, id).toBeTruthy(); return card; };
 
 async function settle() {
@@ -38,10 +39,13 @@ it('存囊法术不进入普通初手，不能绕过锦囊直接释放，锦囊�
   // 已打出的法师锦囊也是消耗牌堆内法术，雷殛按同一牌堆额外 +1。
   expect(R.foes[0].hp).toBe(992);
   const stage = document.createElement('div');
-  const overlay = document.createElement('div'); overlay.id = 'overlay'; overlay.append(stage);
+  const overlay = document.createElement('div'); overlay.id = 'overlay'; overlay.append(stage); document.body.append(overlay);
+  stage._battleToken = BattleSession.getSnapshot().battleToken;
+  expect(R.cardAnims.find(event => event.kind === 'draw' && event.acquired && event.card?.id === 'tt3-thunderblast').source).toBe('pouch');
   showBattleCardResults(stage, R.cardAnims);
-  expect(stage.textContent).toContain('法师锦囊 · 取出施放');
-  expect(stage.textContent).not.toContain('获得卡牌 · 置入手牌');
+  const effects = overlay.querySelectorAll('.fx-art-draw').length; expect(effects).toBeGreaterThan(0);
+  showBattleCardResults(stage, R.cardAnims); expect(overlay.querySelectorAll('.fx-art-draw')).toHaveLength(effects);
+  expect(stage.textContent).toBe(''); expect(overlay.querySelector('.bt-card-reveal')).toBeNull();
   expect(game.ownedCards.some(o=>o.uid==='runtime-1')).toBe(false);
   BattleSession.commands.pickDiscover(0); await settle();
   expect(R.foes[0].hp).toBe(992);

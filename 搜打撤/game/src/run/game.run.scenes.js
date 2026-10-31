@@ -35,8 +35,9 @@ import { prepareTransition } from '../ui/transition-preparation.js';
 import { motionTiming } from '../ui/motion-presets.js';
 import { revealTransition, transitionPause } from '../ui/transition-handoff.js';
 import { TRANSITION_ART } from '../ui/transition-art.js';
-import { wireEventChoiceSelection } from '../ui/event-choice-selection.js';
+import { disposeEventChoiceSelection, wireEventChoiceSelection } from '../ui/event-choice-selection.js';
 import { invokeUiAction } from '../ui/action-dispatch.js';
+import { syncViewChildren } from '../ui/view-children-sync.js';
 import { eventSceneHTML } from '../ui/node-scene-view.js';
 import '../../css/entry-events.css';
 import '../../css/expedition-transitions.css';
@@ -117,16 +118,43 @@ document.addEventListener('keydown', event => {
 }, true);
 // 节点共享场景／叙事与决策两区；只有事件启用原有选择确认机制。
 // o = { tone: 场景分色(sc-*), icon, title, sub, body, foot, asset: 背景图 asset-key（缺省按 tone 映射） }
+const nodeShellPages = new WeakMap();
 export function nodeShell(o) {
   const bg = o.asset || NODE_BG[o.tone] || '';
-  UI.showOverlay('', eventSceneHTML({ ...o, asset: bg, region: game.layerData?.[game.layerIdx]?.name, layer: game.layerIdx }), 'page');
+  const html = eventSceneHTML({ ...o, asset: bg, region: game.layerData?.[game.layerIdx]?.name, layer: game.layerIdx });
+  const body = UI.el?.ovBody, overlay = UI.el?.overlay;
+  let root = body?.firstElementChild;
+  const previous = root && nodeShellPages.get(root);
+  const key = JSON.stringify([game.seed, game.mapSeed, game.turn, game.layerIdx, game.trackPos, o.tone, bg, o.title]);
+  const retained = previous && previous.key === key && previous.run === game.discoveredPairs
+    && previous.map === game.layerData && previous.body === body && previous.overlay === overlay
+    && previous.revision === UI._overlayRevision && UI._lastMode === 'page'
+    && root.isConnected && root.matches('.event-scene') && overlay && !overlay.hidden && !overlay.inert
+    && !overlay.classList.contains('closing') && !overlay.dataset.uiClosing;
+  // A result or retry updates this business page without replacing its scene,
+  // background readiness or source owner. Real navigation keeps the full entry path.
+  disposeEventChoiceSelection(root);
+  if (retained) {
+    const template = body.ownerDocument.createElement('template');
+    template.innerHTML = SDT.Icons?.rich?.(html) || html;
+    const next = template.content.firstElementChild;
+    for (const name of ['data-event-choice-count', 'data-music-scene']) {
+      if (next.hasAttribute(name)) root.setAttribute(name, next.getAttribute(name));
+      else root.removeAttribute(name);
+    }
+    syncViewChildren(root, next);
+  } else {
+    UI.showOverlay('', html, 'page');
+    root = UI.el?.ovBody?.firstElementChild;
+  }
+  if (root) nodeShellPages.set(root, { key, run:game.discoveredPairs, map:game.layerData,
+    body:UI.el?.ovBody, overlay:UI.el?.overlay, revision:UI._overlayRevision });
   // 事件体系页（事件/入城/火堆/物资点）：左上退出键（IS7 事件整页语言，样式复用地图
   // #topBtns 按钮族）——事件未消耗可原节点重进；入城退出保留剩余卡，领完才解锁移动。
   // 金币/攻击由 #resHud 经 CSS 提层常驻，不经页面重画。
   if (['event', 'entry', 'fire', 'pickup'].includes(o.tone)) {
     const key = `${game.mapSeed}|${game.turn}|${game.layerIdx},${game.trackPos}|${o.title}|${bg}|${o.sub || ''}`;
     if (o.tone === 'event') {
-      const root = UI.el?.ovBody?.querySelector('.event-scene');
       if (root) wireEventChoiceSelection(root, key, game.discoveredPairs || game.layerData || game,
         option => invokeUiAction(UI, option));
     }
@@ -136,9 +164,7 @@ export function nodeShell(o) {
       if (!page) return;
       if (page.dataset.eventChoiceBusy === 'true') return;
       /** @type {HTMLElement & {_clearEventChoice?: () => void}} */ (page)._clearEventChoice?.();
-      setBagReturnHook(null);
-      UI.hideOverlay();
-      finishInstant();
+      return finishInstant();
     });
   }
 }
@@ -258,7 +284,8 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
   return Object.assign(transition, { isCurrent, release, preparation });
 }
 
-export function enterNode(kind, done) {
+/** @param {(() => unknown) | null} [onFailure] 当前过场仍有效且尚未开战时恢复入口。 */
+export function enterNode(kind, done, onFailure = null) {
   const transitions = {
     battle: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut', scene: 'battle' },
     boss: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut', scene: 'boss' },
@@ -273,85 +300,184 @@ export function enterNode(kind, done) {
   const transition = showRunTransition(combat
     ? { ...spec, duration: SILENT_FILMS[kind].duration, holdVisual: true, prepare: ensureBattleReady }
     : { ...spec, scene:kind, art: TRANSITION_ART[kind], presentation: 'node-cut', duration: SILENT_FILMS[kind]?.duration || motionTiming.sceneEnter, holdVisual: true });
+  const recoverEntry = () => {
+    if (onFailure && transition.isCurrent() && !game.battleActive && !nodeContentEndedAt(game)) return onFailure();
+  };
   return transition.then(async current => {
     if (!current || !transition.isCurrent()) return false;
-    if (!combat) {
-      // Replace the held scene directly. Closing it first starts a map-return
-      // animation and a second page cover before the destination can mount.
-      try { return await done(); }
-      finally { await transition.release({ immediate: true }); }
+    if (combat) {
+      // Keep the mounted curtain/input state while module preparation completes.
+      game.state = 'modal';
+      const prepared = await transition.preparation;
+      if (prepared.cancelled || !transition.isCurrent()) return false;
+      // A failed speculative import is not readiness: startBattle retains its
+      // retry, diagnostic and failure state handling beneath the held curtain.
     }
-    // Keep the mounted curtain/input state while module preparation completes.
-    game.state = 'modal';
-    const prepared = await transition.preparation;
-    if (prepared.cancelled || !transition.isCurrent()) return false;
-    // A failed speculative import is not readiness: startBattle retains its retry,
-    // diagnostic and failure state handling, all beneath this same held curtain.
-    try {
-      const result = await done();
-      if (result === false) await transition.release({ immediate: true });
-      return result;
-    } catch (error) {
-      await transition.release({ immediate: true });
+    let result;
+    try { result = await done(); }
+    catch (error) {
+      try { await recoverEntry(); }
+      finally { await transition.release({ immediate: true }); }
       throw error;
     }
+    // Destination pages replace the held scene directly; only this curtain is
+    // released. Successful combat hands its presentation to the battle owner.
+    if (!combat || result === false) {
+      try { if (result === false) await recoverEntry(); }
+      finally { await transition.release({ immediate: true }); }
+    }
+    return result;
   });
 }
 
-// 场景/即时效果结束后的收尾：事件连锁移动优先，否则回待机并存档
-/** @type {(completed?: boolean) => void} */
-export function finishInstant() {
-  if (game.chainMove) {
-    cancelLegacyChainMove();
-  }
-  game.state = 'idle';
-  saveGame();
-  UI.refresh(game);
+// One checkpoint owns a node's return, including empty map nodes without a page.
+let mapReturn = null;
+function finishNodeReturn(saved) {
+  if (mapReturn?.isCurrent()) return mapReturn.run();
+  const context = captureBattleContext(game);
+  if (!context() || game.battleActive || ['title', 'done', 'boot'].includes(game.state)) return Promise.resolve(false);
+  if (game.chainMove) cancelLegacyChainMove();
+  game.state = 'modal';
+  const checkpoint = createRoomCheckpoint({
+    UI, save:saveGame, initialSaved:saved, pageRequired:false,
+    isCurrent:() => context() && !game.battleActive && !game.terminalPending && !game.extractionPending,
+    renderRetry:({ saved, run, isCurrent }) => {
+      game.state = 'modal';
+      nodeShell({ tone:'safe', icon:'[[icon:map]]', title:'返回地图',
+        sub:saved ? '进度已保存，继续返回地图。' : '本次操作已保留，保存后返回地图。',
+        body:nodeOpt('nodeReturnRetry', saved ? '继续返回地图' : '重试保存并返回地图', '', 'ok') });
+      setBagReturnHook(null);
+      for (const name of ['nodeReturnRetry', 'eventExit']) UI.act(name, () => isCurrent() ? run() : false);
+    },
+    complete:isCurrent => {
+      const body = UI.el?.ovBody, surface = body?.firstElementChild;
+      const overlay = UI.el?.overlay, revision = UI._overlayRevision;
+      game.state = 'idle';
+      try { UI.refresh(game); }
+      catch (error) { game.state = 'modal'; throw error; }
+      if (!isCurrent()) return false;
+      const visible = overlay && !overlay.hidden && !overlay.classList.contains('closing');
+      if (visible) UI.hideOverlay();
+      if (overlay && !overlay.hidden && !overlay.classList.contains('closing')) {
+        game.state = 'modal';
+        return false;
+      }
+      if (context() && UI.el?.ovBody === body && UI.el?.overlay === overlay &&
+        (body?.firstElementChild === surface || !body?.firstElementChild) &&
+        UI._overlayRevision === revision + (visible ? 1 : 0)) setBagReturnHook(null);
+      return true;
+    },
+  });
+  mapReturn = checkpoint;
+  return checkpoint.run().then(result => {
+    if (result && mapReturn === checkpoint) mapReturn = null;
+    return result;
+  });
 }
+
+/** @type {(completed?: boolean) => Promise<boolean>} */
+export function finishInstant() { return finishNodeReturn(false); }
+/** @type {(completed?: boolean) => Promise<boolean>} */
+export function finishSavedInstant() { return finishNodeReturn(true); }
 
 // 拾取页：杀戮尖塔式右栏——拾获叙事 + 大字收益 + 继续按钮
 // 搜索物资（2026-09-09 老板 #3）：收获不再直接蹦出来——先演一段搜索（提灯扫过 + 进度条填充），
 // 约 0.95s 后揭晓收获大字与「继续」按钮，给拾取一个过程感
 const PICKUP_SEARCH_MS = 950;
-export function openPickupPage(kind, gain, onDone, skipSearch = false, transaction = null) {
+// claim 只执行一次；complete 在检查点保存后继续目的页，并可用 retry 恢复本次领取。
+export function openPickupPage(kind, gain, actions, skipSearch = false, transaction = null) {
   const f = SCENES[kind];
-  const txn = transaction || { received:false, page:0, current:captureBattleContext(game) };
-  if (txn.received || !txn.current()) return;
+  const txn = transaction || { action:null, finished:false, continued:false, page:0,
+    saved:false, saving:null, current:captureBattleContext(game) };
+  if (txn.finished || !txn.current() || nodeContentEndedAt(game)) return false;
   const page = ++txn.page;
   game.state = 'modal';
-  // 来源页恢复（迭代评审 09-20 C-P1）：背包盖开再关后重放本页——搜索动画与揭晓重来，
-  // 但 onDone 只会经 pickupGo 触发一次，奖励不再因关背包被吞（此前发奖仅 pickupGo 一个入口）
-  // 体验线切片5（2026-09-28，评估#9）：重入场景跳过搜索重放——核对背包再回来不该重等 0.95s
-  setBagReturnHook(() => openPickupPage(kind, gain, onDone, true, txn));
+  const sourceCurrent = () => txn.current() && txn.page === page && !txn.finished && !nodeContentEndedAt(game);
+  const retry = () => sourceCurrent() ? openPickupPage(kind, gain, actions, true, txn) : false;
+  const retryBody = saved => `<div class="node-summary pickup-result"><p class="gain-big">${txn.action === 'claim' ? gain : '返回地图'}</p>
+    <p class="ov-note" role="status">${saved ? '进度已保存，继续页面尚未完成。' : '本次操作已保留，保存尚未完成。'}</p>
+    <button class="evt-opt ok" data-act="pickupRetry"><b>${saved ? '继续' : '重试保存'}</b></button></div>`;
   nodeShell({ tone: 'pickup', asset: PICKUP_BG[kind], icon: f.icon, title: f.title,
     sub: pick(f.lines),
-    body: `<div class="pick-search">
+    body: txn.action ? retryBody(txn.saved) : `<div class="pick-search">
         <span class="ps-lantern">[[icon:lantern]]</span>
         <span class="ps-ground"><i></i></span>
         <p class="ps-tip">正在搜索物资…</p>
       </div>` });
+  setBagReturnHook(retry);
+  const surface = UI.el.ovBody.firstElementChild, revision = UI._overlayRevision;
+  const active = () => sourceCurrent() && game.state === 'modal' && UI.el.ovBody.firstElementChild === surface &&
+    UI._overlayRevision === revision && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
+  const checkpoint = createRoomCheckpoint({
+    UI, isCurrent:sourceCurrent,
+    save:() => {
+      // Backpack/entry recovery adopts only the actual save result; it never
+      // restarts a former page's completion callback or grants the pickup again.
+      if (txn.saved) return true;
+      if (!txn.saving) {
+        const saving = saveRunCheckpoint(saveGame).then(saved => {
+          txn.saved = saved;
+          return saved;
+        }).finally(() => { if (txn.saving === saving) txn.saving = null; });
+        txn.saving = saving;
+      }
+      return txn.saving;
+    },
+    renderRetry:({ saved, run, isCurrent }) => {
+      game.state = 'modal';
+      nodeShell({ tone:'pickup', asset:PICKUP_BG[kind], icon:f.icon, title:f.title,
+        sub:pick(f.lines), body:retryBody(saved) });
+      setBagReturnHook(retry);
+      for (const name of ['pickupRetry', 'eventExit']) UI.act(name, () => isCurrent() ? run() : false);
+    },
+    complete:async isCurrent => {
+      if (txn.action === 'claim' && !txn.continued) {
+        const result = await actions.complete?.(retry);
+        if (result === false) return false;
+        txn.continued = true;
+      }
+      // A destination opened by complete owns its own overlay and bag hook.
+      if (isCurrent()) {
+        game.state = 'idle';
+        try { UI.refresh(game); }
+        catch (error) { game.state = 'modal'; throw error; }
+        if (!isCurrent()) return false;
+        UI.hideOverlay();
+        if (isCurrent()) { game.state = 'modal'; return false; }
+        setBagReturnHook(null);
+      }
+      txn.finished = true;
+      return true;
+    },
+  });
+  const settle = action => {
+    if (!active() || txn.action) return false;
+    txn.action = action;
+    if (game.chainMove) cancelLegacyChainMove();
+    if (action === 'claim') actions.claim();
+    return checkpoint.run();
+  };
+  // Before claiming, exiting keeps this node's reward available. Once settlement
+  // starts, every exit/return goes through the same save/continue checkpoint.
+  UI.act('eventExit', () => txn.action ? checkpoint.run() : settle('leave'));
+  if (txn.action) {
+    UI.act('pickupRetry', () => checkpoint.run());
+    return true;
+  }
   if (!skipSearch) SDT.Sound.sfx('searchStart');
   const main = UI.el.ovBody.querySelector('.node-main');
   const reveal = () => {
-    if (!main || !main.isConnected) return;   // 页面已被换掉/关掉就不再揭晓
+    if (!active() || txn.action || !main?.isConnected) return;
     main.innerHTML = `<div class="node-summary pickup-result"><p class="gain-big">${gain}</p>
       <button class="evt-opt ok" data-act="pickupGo"><b>获取并离开</b></button></div>`;
     if (!skipSearch) SDT.Sound.sfx('searchReveal');
     const go = /** @type {HTMLElement} */ (main.querySelector('[data-act="pickupGo"]'));
     if (go) go.focus({ preventScroll: true });
-    // 注册随揭晓走：closeBackpack 会清空动作表，背包返回的重入路径（skipSearch）此前
-    // 提前 return 不注册，恢复页有按钮无处理器、奖励永远领不出（09-30 深审 WORLD-001）
-    UI.act('pickupGo', () => {
-      if (txn.received || txn.page !== page || !txn.current() || game.state !== 'modal' ||
-          !main.isConnected || UI.el.ovBody.querySelector('.node-main') !== main) return;
-      txn.received = true;
-      setBagReturnHook(null);
-      onDone();
-      if (main.isConnected && UI.el.ovBody.querySelector('.node-main') === main) UI.hideOverlay();
-    });
+    UI.act('pickupGo', () => settle('claim'));
   };
-  if (skipSearch) { reveal(); return; }
+  if (skipSearch) { reveal(); return true; }
   setTimeout(reveal, turboMs(PICKUP_SEARCH_MS));
+  return true;
 }
 
 // ---------- 遭遇组建（设计者 2026-09-02 定版：按环层抽怪，1-3 只，越内层越强） ----------
@@ -407,7 +533,7 @@ export function openBlankSafePage() {
     </div>`,
     foot: `<button class="ov-btn ok fire-done-btn" data-act="blankSafeDone"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,
   });
-  UI.act('blankSafeDone', () => { UI.hideOverlay(); finishInstant(); });
+  UI.act('blankSafeDone', () => finishInstant());
 }
 
 // 战斗格 → 遭遇战（encounter 已在场景前组建好传入，保证场景与战斗一致）
@@ -503,12 +629,12 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
   const restorable = () => game.usedPocket.filter(p => FIRE_RESTORABLE(p.card));
   const cell = `${game.layerIdx},${game.trackPos}`;
   const sourceCurrent = () => txn.current() && (!record || game.nodeRewards?.[cell] === record);
-  let surface;
+  let surface, pendingFocus = null;
   const rememberView = () => {
     if (UI.el?.ovBody?.firstElementChild !== surface || !surface?.querySelector('.pocket-restore-content')) return;
     const buttons = [...surface.querySelectorAll('button[data-act="restoreOne"]')];
     const focused = surface.contains(document.activeElement) ? document.activeElement : null;
-    txn.view = { focused:!!focused, name:/** @type {HTMLElement} */ (focused)?.dataset.name,
+    txn.view = { focused:!!focused, focusNode:focused, name:/** @type {HTMLElement} */ (focused)?.dataset.name,
       index:buttons.indexOf(focused), scrollTop:surface.querySelector('.pocket-restore-content').scrollTop };
   };
   const refreshMap = () => {
@@ -524,14 +650,14 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     }
     const pending = createRoomCheckpoint({
       UI, save:saveGame, isCurrent:sourceCurrent,
-      renderRetry:({ saved, run, isCurrent }) => {
+      renderRetry:({ saved, isCurrent }) => {
         UI.showOverlay('', `<section class="battle-decision pocket-restore" data-decision-kind="pocket-restore">
           <header class="battle-decision-head"><h3>${opts.icon || '[[icon:fire]]'} ${opts.title || '营火休整'}</h3></header>
           <div class="battle-decision-content"><p class="ov-note" role="status">${saved
             ? '复原进度已保存，继续页面尚未完成。' : '本次复原结果已保留，保存尚未完成。'}</p></div>
           <footer class="battle-decision-actions"><button type="button" class="ov-btn ok" data-act="restoreRetry">${saved ? '继续' : '重试保存'}</button></footer>
         </section>`, 'discover');
-        UI.act('restoreRetry', () => isCurrent() ? run() : false);
+        UI.act('restoreRetry', () => isCurrent() ? runCheckpoint() : false);
       },
       complete:async isCurrent => {
         if (!isCurrent()) return false;
@@ -577,8 +703,16 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
         return true;
       },
     });
+    function runCheckpoint() {
+      return pending.run().then(result => {
+        const focus = pendingFocus;
+        pendingFocus = null;
+        if (result && focus) focus();
+        return result;
+      });
+    }
     txn.checkpoint = pending;
-    return pending.run();
+    return runCheckpoint();
   };
   const render = () => {
     if (txn.finished || !sourceCurrent()) return;
@@ -592,15 +726,18 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     const title = opts.title || '营火休整';
     const icon = opts.icon || '[[icon:fire]]';
     const cardsHTML = list.length
-      ? list.map((p, index) => `
-          <button type="button" class="bt-card fire-restore-card${left <= 0 ? ' off' : ''}" data-act="restoreOne" data-cancel="false" data-i="${index}" data-name="${escAttr(p.card.name)}" ${left <= 0 ? 'disabled' : ''}
-            aria-label="${escAttr(`${p.card.name}，消耗区剩余 ${p.count} 张，复原 1 张回背包`)}" aria-description="${escAttr(p.card.desc || '')}"
-            title="${escAttr(p.card.desc || p.card.name)}">
+      ? list.map((p, index) => {
+        const reason = left <= 0 ? '复原次数已用完' : game.canReceiveCard(p.card) ? '' : `背包放不下：${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}`;
+        return `
+          <button type="button" class="bt-card fire-restore-card${reason ? ' off' : ''}" data-view-key="${escAttr(JSON.stringify([p.card.id || p.card.name, p.variantKey || p.card.variantKey || '']))}" data-act="restoreOne" data-cancel="false" data-i="${index}" data-name="${escAttr(p.card.name)}" ${reason ? 'disabled aria-disabled="true"' : ''}
+            aria-label="${escAttr(`${p.card.name}，消耗区剩余 ${p.count} 张，复原 1 张回背包${reason ? `，${reason}` : ''}`)}" aria-description="${escAttr(p.card.desc || '')}"
+            title="${escAttr(reason || p.card.desc || p.card.name)}">
             <span class="pocket-restore-art" aria-hidden="true">${SDT.Cards.cardHTML(p.card, 'sm')}</span>
-            <span class="pocket-restore-caption"><b>${esc(p.card.name)}</b><span>复原 1 张 · 剩余 ${p.count} 张</span></span>
-          </button>`).join('')
+            <span class="pocket-restore-caption"><b>${esc(p.card.name)}</b><span>${reason ? esc(reason) : `复原 1 张 · 剩余 ${p.count} 张`}</span></span>
+          </button>`;
+      }).join('')
       : `<p class="ov-empty">（消耗区里没有可复原的卡牌${blockedN ? `——另有 ${blockedN} 张道具/装备不可在此复原` : ''}）</p>`;
-    UI.showOverlay('', `<section class="battle-decision pocket-restore" data-decision-kind="pocket-restore">
+    const html = `<section class="battle-decision pocket-restore" data-decision-kind="pocket-restore">
       <header class="battle-decision-head"><h3>${icon} ${title}</h3><span>消耗区 · ${list.length} 种可复原卡牌</span></header>
       <div class="battle-decision-summary">
         <p class="ov-note" role="status" aria-live="polite" aria-atomic="true">还可复原 <b>${left}</b> 张（最多 ${picks} 张）</p>
@@ -608,15 +745,31 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
       </div>
       <div class="battle-decision-content pocket-restore-content"><div class="bt-hand fire-restore-hand">${cardsHTML}</div></div>
       <footer class="battle-decision-actions"><div class="ov-btns">${record ? `<button type="button" class="ov-btn ok" data-act="restoreReturn">返回地图 · 保留 ${left} 次复原</button><button type="button" class="ov-btn" data-act="restoreBag">整理背包</button><button type="button" class="ov-btn fire-done-btn" data-act="fireDone">结束复原${left ? ' · 放弃剩余次数' : ''}</button>` : '<button type="button" class="ov-btn ok fire-done-btn" data-act="fireDone" aria-label="继续旅程，结束复原并返回地图"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>'}</div></footer>
-      </section>`, 'discover');
-    surface = UI.el?.ovBody?.firstElementChild;
+      </section>`;
+    if (surface?.isConnected && UI.el?.ovBody?.firstElementChild === surface && !UI.el?.overlay?.hidden
+        && !UI.el?.overlay?.classList.contains('closing')) {
+      const template = surface.ownerDocument.createElement('template');
+      template.innerHTML = SDT.Icons?.rich?.(html) || html;
+      syncViewChildren(surface, template.content.firstElementChild);
+    } else {
+      UI.showOverlay('', html, 'discover');
+      surface = UI.el?.ovBody?.firstElementChild;
+    }
     surface?.querySelectorAll('.pocket-restore-art [tabindex]').forEach(el => el.removeAttribute('tabindex'));
     const content = surface?.querySelector('.pocket-restore-content');
     if (content) content.scrollTop = view.scrollTop;
-    if (view.focused) {
-      const buttons = [...surface.querySelectorAll('button[data-act="restoreOne"]')];
-      (buttons.find(button => button.dataset.name === view.name)
-        || buttons[Math.min(view.index, buttons.length - 1)] || surface.querySelector('[data-act="fireDone"]'))?.focus({ preventScroll:true });
+    if (view.focused && (document.activeElement === view.focusNode || document.activeElement === document.body)) {
+      const focusedPage = surface, revision = UI._overlayRevision, previousFocus = document.activeElement;
+      const restoreFocus = () => {
+        if (!sourceCurrent() || txn.finished || UI.el?.ovBody?.firstElementChild !== focusedPage
+          || UI._overlayRevision !== revision || UI.el?.overlay?.hidden || UI.el?.overlay?.classList.contains('closing')
+          || (document.activeElement !== previousFocus && document.activeElement !== document.body)) return;
+        const buttons = [...surface.querySelectorAll('button[data-act="restoreOne"]:not(:disabled)')];
+        (buttons.find(button => button.dataset.name === view.name)
+          || buttons[Math.min(view.index, buttons.length - 1)] || surface.querySelector('[data-act="fireDone"]'))?.focus({ preventScroll:true });
+      };
+      if (txn.checkpoint) pendingFocus = restoreFocus;
+      else restoreFocus();
     }
     const active = nodeActionBinding(game, UI, 'fireDone');
     const renderedSurface = surface;

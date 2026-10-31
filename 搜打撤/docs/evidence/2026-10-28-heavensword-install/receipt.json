@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-ranger",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\heavensword-split-1028\\vertical-split.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-28-heavensword-install/cards-wu-heavensword-source.png",
+        "bytes": 1664153,
+        "sha256": "e2b44ca3db775bda49a1894fd88ea201a162ed7ab5494d2fc81246517c404673"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-28-heavensword-install/cards-wu-heavensword-full-before.webp",
+          "bytes": 93586,
+          "sha256": "266246dc89f3e4aa91921412e21684f6ba6221686423488099f991aefb2c8b39"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-28-heavensword-install/cards-wu-heavensword-thumb-before.webp",
+          "bytes": 13468,
+          "sha256": "9dabe6d1573e198e4d3ec4bba90d614f665337f928584b6cbe492290839cc103"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/wu-heavensword.webp",
+          "bytes": 97512,
+          "sha256": "b03435e6fbd6230f2368d99578fc13c8124350a0099f644c861d2a8d505f68cc",
+          "size": [
+            1441,
+            1091
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/wu-heavensword.webp",
+          "bytes": 14276,
+          "sha256": "03a256760120bdeb8a6edf2e956c723ae73720af0afc20910def8dd704a4b7ef",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": "heavensword-pose-face-r2-20261024",
+      "revision_after": "heavensword-vertical-split-20261028",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/wu-heavensword.webp",
+            "ext": "webp",
+            "bytes": 93586,
+            "sha256": "266246dc89f3e4aa91921412e21684f6ba6221686423488099f991aefb2c8b39",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-heavensword/receipt.json"
+          },
+          "after": {
+            "path": "cards/wu-heavensword.webp",
+            "ext": "webp",
+            "bytes": 97512,
+            "sha256": "b03435e6fbd6230f2368d99578fc13c8124350a0099f644c861d2a8d505f68cc",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-28-heavensword-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/wu-heavensword.webp",
+            "ext": "webp",
+            "bytes": 13468,
+            "sha256": "9dabe6d1573e198e4d3ec4bba90d614f665337f928584b6cbe492290839cc103",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-heavensword/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/wu-heavensword.webp",
+            "ext": "webp",
+            "bytes": 14276,
+            "sha256": "03a256760120bdeb8a6edf2e956c723ae73720af0afc20910def8dd704a4b7ef",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-28-heavensword-install/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1750,
+  "manifest_count_after": 1750
+}

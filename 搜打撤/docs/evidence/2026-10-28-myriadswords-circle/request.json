@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-sword",
+      "asset": "cards/wu-myriadswords.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a18288-045e-7af2-bf6b-a16a7b86fd59/exec-c47b7bb7-dec9-4e65-8353-35abe5011be1.png",
+      "revision": "wu-myriadswords-nai5-circle-20261028",
+      "prompt": "Image 1 is the NAI5 draft to repaint; image 2 is Wu's approved identity reference only. Create the finished game card using the overhead camera, central floating girl, palette and circular composition of image 1. CRITICAL COMPOSITION CORRECTION: replace the radial outward-facing arrangement with a clearly CLOSED CIRCULAR ORBIT of 30-40 airborne SWORDS around all four sides of the girl. Rotate every sword TANGENT to the orbit, sword tips following the next sword's pommel clockwise, like a swirling wreath or circular school of fish. At TOP swords point RIGHT, on RIGHT point DOWN, at BOTTOM point LEFT, on LEFT point UP. Sword shafts must follow the perimeter rather than spokes pointing away from the center. A complete round ring remains visible within the wide canvas, with clear spacing around the girl's central silhouette; slight perspective ellipse allowed. Use 10-12 legible varied main swords and many smaller swords in a second close circular current. All weapons are beautiful recognizable swords: elegant Chinese jian, broad leaf-bladed swords, slim estocs, gently waved blades, crystal swords, restrained gold/silver guards. Coherent blades, hilt and guards; not axes, spears or ornamental shards. Thin cyan curved trails reinforce clockwise movement. Keep face and hands unobstructed. Character identity image 2: exposed forehead with hair swept aside, both cyan eyes and eyebrows readable, silver-white high ponytail, blue ribbon, black rose at her left temple (viewer right), exactly two ordinary round dark sunglass lenses on head, confident small-fang smile. Charcoal off-shoulder long-sleeved short ruffled dress, bare knees/thighs, ankle boots, all hems above knees. Restore an expressive forward two-finger sword-command gesture with one hand, the other holds one simple black sword. No star pattern or long train. Rendering: hand-painted Japanese anime illustration, opaque layered color blocks, firm light-shadow boundaries and directional strokes, quiet large shapes with locally dense structural folds. Clean flowing ribbon-like hair locks with continuous midtones, grouped shadows, restrained luminous bands, selective fine lines; no scratchy white flakes or triangular hair confetti. Expressive clear anime face, soft restrained skin transitions, matte layered black cloth with chromatic gray shadows, selected crisp metal highlights. Abstract gray-blue background, no environment or text, watermark, frame or UI. Wide landscape aspect ratio matching NAI draft.",
+      "references": [
+        ".tmp/nai/myriadswords-circle-1028/draft.png",
+        "game/assets/portraits/full/wu.webp"
+      ],
+      "nai_request": "docs/evidence/2026-10-28-myriadswords-circle/nai-payload.json"
+    }
+  ]
+}

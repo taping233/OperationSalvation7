@@ -10,6 +10,7 @@ import { courtyardV3HTML, mountCourtyardV3 } from '../game/src/hub/hub.courtyard
 let media, frames, raf, cancel, resizeObserver, dispose, hidden;
 beforeEach(() => {
   vi.clearAllMocks();
+  localStorage.removeItem('sdt-courtyard');
   media = { matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() };
   frames = new Map(); let sequence = 0;
   raf = vi.fn(callback => { frames.set(++sequence, callback); return sequence; });
@@ -31,6 +32,52 @@ const mount = async view => {
   return document.querySelector('[data-courtyard]');
 };
 describe('庭院独立页生命周期', () => {
+  it('环境偏好跨重进恢复，暂停和临时发现计数不持久化', async () => {
+    let root = await mount();
+    root.querySelector('[data-courtyard-control="interact"]').click();
+    root.querySelector('[data-palette="clay"]').click();
+    root.querySelector('[data-courtyard-control="rain"]').click();
+    root.querySelector('[data-courtyard-control="pause"]').click();
+    expect(JSON.parse(localStorage.getItem('sdt-courtyard'))).toEqual({ rain:false, intensity:80, palette:'clay', sound:false });
+    dispose(); root = await mount();
+    expect(root.dataset.courtyard).toBe('pond');
+    expect(root.querySelector('.courtyard-v3-modes')).toBeNull();
+    expect(root.querySelector('.courtyard-v3-rain-layer').hidden).toBe(true);
+    expect(root.querySelector('[data-courtyard-control="interact"]').textContent).toBe('雨势：大雨');
+    expect(root.querySelector('[data-palette="clay"]').getAttribute('aria-pressed')).toBe('true');
+    expect(root.querySelector('[data-courtyard-control="pause"]').textContent).toBe('暂停');
+    expect(rain.setIntensity).toHaveBeenLastCalledWith(80);
+    expect(rain.setPalette).toHaveBeenLastCalledWith('clay');
+  });
+  it('损坏偏好回到默认值，存储失败仍可操作且显示未保存', async () => {
+    localStorage.setItem('sdt-courtyard', '{bad');
+    const root = await mount();
+    expect(root.querySelector('.courtyard-v3-rain-layer').hidden).toBe(false);
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('quota'); });
+    root.querySelector('[data-palette="moss"]').click();
+    expect(rain.setPalette).toHaveBeenLastCalledWith('moss');
+    expect(root.querySelector('.courtyard-v3-status').textContent).toContain('暂未保存');
+  });
+  it('离开释放声音但保留开声偏好，再次进入恢复并可明确关闭', async () => {
+    const source = { connect:vi.fn(), start:vi.fn(), stop:vi.fn(), disconnect:vi.fn() };
+    const audio = { sampleRate:100, destination:{},
+      createBuffer:() => ({ getChannelData:() => new Float32Array(200) }),
+      createBufferSource:() => source,
+      createBiquadFilter:() => ({ frequency:{ value:0 }, connect:vi.fn(), disconnect:vi.fn() }),
+      createGain:() => ({ gain:{ value:0 }, connect:vi.fn(), disconnect:vi.fn() }),
+      resume:vi.fn(() => Promise.resolve()), suspend:vi.fn(() => Promise.resolve()), close:vi.fn(() => Promise.resolve()) };
+    vi.stubGlobal('AudioContext', vi.fn(function() { return audio; }));
+    let root = await mount();
+    root.querySelector('[data-courtyard-control="sound"]').click();
+    dispose();
+    expect(JSON.parse(localStorage.getItem('sdt-courtyard')).sound).toBe(true);
+    expect(audio.close).toHaveBeenCalledOnce();
+    root = await mount();
+    expect(source.start).toHaveBeenCalledTimes(2);
+    expect(root.querySelector('[data-courtyard-control="sound"]').getAttribute('aria-pressed')).toBe('true');
+    root.querySelector('[data-courtyard-control="sound"]').click();
+    expect(JSON.parse(localStorage.getItem('sdt-courtyard')).sound).toBe(false);
+  });
   it('默认只启动一个本地动画，声音关闭；暂停和恢复对应取消与启动', async () => {
     const root = await mount('koi');
     expect(frames.size).toBe(1);

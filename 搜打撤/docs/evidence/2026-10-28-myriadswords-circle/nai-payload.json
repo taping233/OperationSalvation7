@@ -1,0 +1,81 @@
+{
+  "input": "1girl, solo, from above, dynamic foreshortening, looking up, confident smile, fang, flying, one hand making a two-finger sword command, other hand holding a black straight sword\n\nA complete circular vortex of thirty beautiful flying swords surrounds the girl on ALL FOUR SIDES. The girl floats in the clear center of a large circular sword orbit. Each sword points tangentially along the clockwise circular path: top swords point right, right swords point down, bottom swords point left, left swords point up. Full closed ring, near circle seen from overhead, not a parallel rain of swords. Varied elegant long swords, thin jian, broad leaf blades, wave blades, crystalline swords, unique guards. Foreground swords large, distant swords smaller. The orbit stays clear of her face and hands.\n\nAbstract slate gray-blue background, a thin cyan circular energy trail follows the swords, silver and black metal with restrained gold accents.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+  "model": "nai-diffusion-5-full",
+  "action": "generate",
+  "parameters": {
+    "params_version": 3,
+    "width": 1344,
+    "height": 768,
+    "scale": 5.5,
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "variety_plus": false,
+    "n_samples": 1,
+    "ucPresetId": "none",
+    "qualityPresetId": "none",
+    "autoSmea": false,
+    "straight_alpha": false,
+    "dynamic_thresholding": false,
+    "controlnet_strength": 1,
+    "legacy": false,
+    "legacy_v3_extend": false,
+    "legacy_uc": false,
+    "add_original_image": true,
+    "cfg_rescale": 0.0,
+    "noise_schedule": "karras",
+    "use_coords": false,
+    "normalize_reference_strength_multiple": true,
+    "inpaintImg2ImgStrength": 1.0,
+    "seed": 28102887,
+    "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, axe, spear, gun, dagger, parallel swords, straight rows of swords, goggles, forehead covered, long skirt, dress train, blue star pattern, stockings, pantyhose",
+    "characterPrompts": [
+      {
+        "prompt": "silver white hair, high ponytail, blue ribbon bow, swept aside bangs, exposed forehead, eyebrows visible, cyan blue eyes, black rose at her left temple, two round black sunglasses lenses on head, black off shoulder long sleeved short ruffled dress, tied waist, all skirt hems above knees, bare legs, black ankle boots",
+        "uc": "",
+        "center": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "enabled": true
+      }
+    ],
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "1girl, solo, from above, dynamic foreshortening, looking up, confident smile, fang, flying, one hand making a two-finger sword command, other hand holding a black straight sword\n\nA complete circular vortex of thirty beautiful flying swords surrounds the girl on ALL FOUR SIDES. The girl floats in the clear center of a large circular sword orbit. Each sword points tangentially along the clockwise circular path: top swords point right, right swords point down, bottom swords point left, left swords point up. Full closed ring, near circle seen from overhead, not a parallel rain of swords. Varied elegant long swords, thin jian, broad leaf blades, wave blades, crystalline swords, unique guards. Foreground swords large, distant swords smaller. The orbit stays clear of her face and hands.\n\nAbstract slate gray-blue background, a thin cyan circular energy trail follows the swords, silver and black metal with restrained gold accents.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "char_captions": [
+          {
+            "char_caption": "silver white hair, high ponytail, blue ribbon bow, swept aside bangs, exposed forehead, eyebrows visible, cyan blue eyes, black rose at her left temple, two round black sunglasses lenses on head, black off shoulder long sleeved short ruffled dress, tied waist, all skirt hems above knees, bare legs, black ankle boots",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, axe, spear, gun, dagger, parallel swords, straight rows of swords, goggles, forehead covered, long skirt, dress train, blue star pattern, stockings, pantyhose",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true
+  }
+}

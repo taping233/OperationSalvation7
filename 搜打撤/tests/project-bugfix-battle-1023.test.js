@@ -35,8 +35,10 @@ describe('project bugfix 1023 battle boundaries',()=>{
   });
   it('an onDraw extra draw sees the unchanged top card skipped by the equipment filter',()=>{
     const {engine,r}=setup();
-    r.granted.push({uid:'sword',card:{id:'tt8-heavensword',name:'天启剑',type:'装备',cost:0,draw:1,
-      desc:'抽到该牌时额外抽 1 张牌。'}},{uid:'top',card:held},{uid:'below',card:held});
+    // This case owns a synthetic onDraw trigger, not a built-in sword's retained combination identity.
+    r.granted.push({uid:'sword',card:{id:'audit-filter-draw-equipment',name:'抽牌装备夹具',type:'装备',cost:0,draw:1,
+      desc:'抽到该牌时额外抽 1 张牌。',rules:{version:1,triggers:{onDraw:[{op:'draw',amountField:'draw'}]}}}},
+      {uid:'top',card:held},{uid:'below',card:held});
     r.set$hand([]);r.set$drawPile(['below','sword','top']);engine.resolveCard(drawEquipment,r.foes[0],false,0);
     expect(r.hand).toEqual(['top']);expect(r.drawPile).toEqual(['below']);expect(r.discard).toEqual(['sword']);
   });

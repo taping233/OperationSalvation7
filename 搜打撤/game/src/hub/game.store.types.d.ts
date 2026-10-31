@@ -106,6 +106,8 @@ export interface EntrySupply {
 }
 
 export type NodeReward = { version: 1; settled?: boolean; actionChoice?: number;
+  commission?: { status: 'pending' | 'applied'; shopKey?: string; slots?: number[]; announced?: boolean;
+    dice?: Record<string, { sides: number; outcomes: { label: string; value: number }[]; result: number | null }> };
   altarFragmentChoice?: { characterId: string; cardIds: [string]; taken: null | 0 } } & (
   | { type: 'closed' }
   | { type: 'altar' }
@@ -261,6 +263,7 @@ export interface GameState {
   atk: number;
   mode: string;
   characterId: string | null;
+  departureCharacterId?: string | null;
   runActive: boolean;
   seed: string | number | null;
   battleActive: boolean;

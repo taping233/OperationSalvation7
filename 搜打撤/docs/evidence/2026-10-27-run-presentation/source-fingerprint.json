@@ -1,0 +1,54 @@
+[
+  {
+    "path": "game/src/ui/encounter-presentation.js",
+    "sha256": "b19fa534686e9c79d0b2fd91ad869af8ada01dfda8ee6c4184756463b6f95c26"
+  },
+  {
+    "path": "game/css/run-presentation.css",
+    "sha256": "b5d8c169bc23e1d9e363283e325215d621c63a00047aab337a5f4f0f661fb8c0"
+  },
+  {
+    "path": "game/src/run/run-memento.js",
+    "sha256": "1aa8d758583cccb8f3d2d13fe545fe54d97c986cb86765adbaf63ac778c78b82"
+  },
+  {
+    "path": "game/src/ui/run-memento-view.js",
+    "sha256": "08fa5be93d95f0443a04f7a23103f5ee7f4994207302d7c9b5004a8a9e680706"
+  },
+  {
+    "path": "game/css/run-memento.css",
+    "sha256": "10fc0784cfdd4b4ba11c9ffa3fd5a2c6842fe99e282302b08c98753373758dc2"
+  },
+  {
+    "path": "game/src/run/game.run.events.js",
+    "sha256": "33ca079064c2f11b7fd16deadec723f493c731c8260591c7f6e6f3e4b46f2127"
+  },
+  {
+    "path": "game/src/run/event-runtime.js",
+    "sha256": "9aee8a98ee8a8d4a6bfbc3b5182a10381d3862dc3b16442ddd6ad34a7d89fb6e"
+  },
+  {
+    "path": "game/src/run/game.run.altar.js",
+    "sha256": "c7b0451fb2799f2c7713451b0406bee3dd2144dccc3cac96199bd20279687f13"
+  },
+  {
+    "path": "game/src/run/shop-commission.js",
+    "sha256": "18b82f437e70811567153a61d611ab8ac35ba023c13893a18aee84ebb850e411"
+  },
+  {
+    "path": "game/src/run/game.session.death.js",
+    "sha256": "1d9a5732b0631a7030616a8cf3c2902e963538964324718a477c35bc28b7f046"
+  },
+  {
+    "path": "game/src/hub/extraction.commands.js",
+    "sha256": "4a817463db2b31fe6695312775d0399b379d175de1d45d898ff59b607356bb80"
+  },
+  {
+    "path": "game/src/ui/extraction-rewards-view.js",
+    "sha256": "f877d4d1fa603a39b39cf9455040082375d2c6cfcf2dc185d0875774abb69866"
+  },
+  {
+    "path": "tests/run-presentation.test.js",
+    "sha256": "45a384e60ea370be75671430e4eb4a0cbe64f692665ac5d3953dd644baab477e"
+  }
+]

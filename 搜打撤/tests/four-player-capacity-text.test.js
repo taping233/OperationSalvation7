@@ -1,4 +1,4 @@
-import { runPendingFields } from './helpers/environment-fixtures.js';
+import { connectSdtFixture, runPendingFields } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import { beforeAll, beforeEach, afterEach, expect, it, vi } from 'vitest';
 
@@ -8,8 +8,8 @@ const pearl = { id: 'tt2-pearlbox', name: '珍珠盒', type: '武术', rarity: '
 
 beforeAll(async () => {
   document.body.innerHTML = readFileSync('game/index.html', 'utf8');
-  window.SDT = { Icons: { img: () => '', rich: String, TYPE_ART: {} },
-    Sound: { music() {}, sfx: vi.fn(), setDucked() {} }, FX: { feedback() {} } };
+  await connectSdtFixture({ Icons: { img: () => '', rich: String, TYPE_ART: {} },
+    Sound: { music() {}, sfx: vi.fn(), setDucked() {} }, FX: { feedback() {} } });
   await import('../game/src/cards/cards.js');
   await import('../game/src/ui/ui.js');
   await import('../game/src/hub/base.js');
@@ -34,12 +34,12 @@ afterEach(() => UI.hideOverlay({ immediate: true }));
 it('G07 普通容量16和珍珠盒资源9分别显示，收卡叠放规则保持', () => {
   game.ownedCards=[{uid:'pearl',card:pearl},{uid:'spell',card:spell}];
   game.inventory=Array.from({length:14},(_,i)=>({name:'物资'+i,count:1}));
-  expect(game.bagCapacityText()).toBe('通用格 16/16 · 资源扩展格 0/9');
+  expect(game.bagCapacityText()).toBe('已用 16/25 格 · 普通可用 0 格 · 资源可用 9 格');
   expect(game.canReceiveCard({...spell,name:'新普通牌'})).toBe(false);
   expect(game.canReceiveCard(spell)).toBe(true);
   expect(game.canReceiveCard({id:'res',name:'新资源',type:'资源'})).toBe(true);
-  showBackpack(true);expect(UI.el.ovBody.textContent).toContain('通用格 16/16 · 资源扩展格 0/9');
+  showBackpack(true);expect(UI.el.ovBody.textContent).toContain('已用 16/25 格 · 普通可用 0 格 · 资源可用 9 格');
   game.inventory.push({name:'资源格占用',count:1});
-  expect(game.bagCapacityText()).toBe('通用格 16/16 · 资源扩展格 1/9');
+  expect(game.bagCapacityText()).toBe('已用 17/25 格 · 普通可用 0 格 · 资源可用 0 格');
 });
 

@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const H = vi.hoisted(() => ({ game:{}, stacks:vi.fn(), save:vi.fn(), uid:0, session:null }));
@@ -57,9 +58,9 @@ beforeEach(async () => {
     const target = event.target.closest('[data-act]');
     if (target && !target.disabled) ui.acts[target.dataset.act]?.({ ...target.dataset });
   });
-  window.SDT = { UI:ui, game:H.game, Base:{ slot:1, bagCap:() => 24, safeCap:() => 6 },
+  await connectSdtFixture({ UI:ui, game:H.game, Base:{ slot:1, bagCap:() => 24, safeCap:() => 6 },
     Icons:{ rich:markup => markup }, Sound:{ sfx:vi.fn() }, Cards:{ SHA:{ id:'sha', name:'初始攻击' }, all:() => [],
-      cardHTML:card => `<span>${card.name}</span>`, cardBackHTML:() => '' } };
+      cardHTML:card => `<span>${card.name}</span>`, cardBackHTML:() => '' } });
   vi.stubGlobal('requestAnimationFrame', () => 1); vi.stubGlobal('cancelAnimationFrame', vi.fn());
   bag = await import('../game/src/hub/game.bag.js'); drag = await import('../game/src/hub/game.bag.drag.js');
   H.stacks.mockImplementation(H.session.cardStacks);

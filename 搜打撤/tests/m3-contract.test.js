@@ -50,10 +50,13 @@ async function startGame(cards, foesArg, startOpts = {}) {
   const logs = [];
   const game = {
     ownedCards: cards.map(card => ({ uid: `m3-${uidSequence++}`, card, safe: false })),
-    ...playerFields(100, 100, 5, 0, '侠客', null), lastBattleEnd: null,
+    ...playerFields(100, 100, 5, 0, '侠客', null), lastBattleEnd: null, battleEnds: [],
     log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); },
     logs, heal(amount) { this.hp = Math.min(this.maxHp, this.hp + amount); },
-    addItem() {}, onBattleEnd() {},
+    addItem() {}, onBattleEnd(opts, played, win, consumed) {
+      this.lastBattleEnd = { opts, played, win, consumed };
+      this.battleEnds.push(this.lastBattleEnd);
+    },
   };
   activeGame = game;
   BattleSession.start(game, foesArg, { isBoss: false, name: 'M3 执行器收编验收', ...startOpts });
@@ -235,7 +238,12 @@ describe('M3 gap-2: bag.use potion expansion', () => {
     engine.useItem(entry.uid, null);
     await waitForIdle();
     expect(game.battleActive).toBe(false);   // 逃跑语义 finish(null)，战斗正常终局
-    expect(game.ownedCards.some(o => o.uid === entry.uid)).toBe(false);   // 道具已消耗
+    expect(game.battleEnds).toHaveLength(1);
+    expect(game.lastBattleEnd).toMatchObject({ played:[entry.uid], win:null, consumed:[] });
+    expect(game.lastBattleEnd.opts.spentCards).toEqual([]); // 永久来源由结束回调的UID账本结算，不作为临时模板传出。
+    expect(game.ownedCards.filter(o => o.uid === entry.uid)).toEqual([entry]); // 构造host记录回调，不执行持久化。
+    engine.finish(null);
+    expect(game.battleEnds).toHaveLength(1);
   });
 
   it('defers scheduled bag ops to turn start (medneedle style)', async () => {

@@ -65,6 +65,7 @@ import { resolve } from 'node:path';
 }
 
 await import('../game/src/main.js');
+const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
 trackMainPagePreparation();
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 0));
@@ -132,7 +133,9 @@ describe('药水文字说明与使用确认', () => {
     confirmedUse.dispatchEvent(new MouseEvent('pointerdown', { button: 0, bubbles: true }));
     expect(game.hp).toBe(15);
     confirmedUse.click(); confirmedUse.click();
-    expect(game.hp).toBe(27); expect(game.ownedCards.map(entry => entry.uid)).toEqual(['tip-ice']);
+    expect(game.hp).toBe(27); expect(game.ownedCards.map(entry => entry.uid)).toEqual(['tip-heal', 'tip-ice']);
+    expectBattleItemCommitted(game, runtime, 'tip-heal');
+    expect(window.SDT.Battle.getSnapshot().potionBar.map(entry => entry.uid)).toEqual(['tip-ice']);
     expect(currentTip()).toBeNull();
 
     if (game.battleActive) window.SDT.Battle.commands.flee();
@@ -141,3 +144,4 @@ describe('药水文字说明与使用确认', () => {
     game.state = 'title';
   });
 });
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';

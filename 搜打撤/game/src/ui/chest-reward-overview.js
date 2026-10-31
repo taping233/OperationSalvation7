@@ -14,7 +14,7 @@ export function chestRewardOverviewHTML({ boxes = [], coins = null, source = '',
     ? `<button type="button" class="cqo-button cqo-button-primary" data-act="chestNext" data-i="${escAttr(String(primaryAction.index))}" aria-label="${escAttr(`${primaryAction.label}：${primaryBox.name || '搜刮点'}`)}">${esc(primaryAction.label)} <span aria-hidden="true">→</span></button>` : '';
   const actions = complete
     ? '<button type="button" class="cqo-button cqo-button-primary" data-act="chestFinish">继续探索 <span aria-hidden="true">→</span></button>'
-    : `<button type="button" class="cqo-button cqo-button-quiet" data-act="chestReturn" aria-description="未领取的奖励将暂存">返回地图</button><button type="button" class="cqo-button" data-act="chestOverviewBag">整理背包</button>${boxes.length === 1 ? '' : nextButton}`;
+    : `<button type="button" class="cqo-button cqo-button-quiet" data-act="chestReturn" aria-description="当前节点可继续领取，前往下一节点后未领奖励作废">返回地图</button><button type="button" class="cqo-button" data-act="chestOverviewBag">整理背包</button>${boxes.length === 1 ? '' : nextButton}`;
   const pending = boxes.filter(box => !box.completed).length;
   const boxHTML = boxes.map(box => {
     const name = box.name || `搜刮点 ${box.index + 1}`;
@@ -27,7 +27,7 @@ export function chestRewardOverviewHTML({ boxes = [], coins = null, source = '',
   }).join('');
   const story = `<div class="cqo-intro"><header class="cqo-heading" aria-label="${escAttr(`${title}，${pending} 个搜刮点待领取`)}"><div class="cqo-heading-copy"><h3 class="cqo-title">${esc(title)}</h3>${source ? `<p class="cqo-source">${esc(source)}</p>` : ''}</div>
     </header>
-    <p class="cqo-notice" role="status" aria-live="polite">${esc(notice)}</p>
+    <p class="cqo-notice" role="status" aria-live="polite">${esc(notice || (complete ? '' : '返回地图可在当前节点继续领取；前往下一节点后未领奖励作废。'))}</p>
     </div>`;
   const content = `<div class="cqo-rewards">
       ${coins?.total ? `<section class="cqo-coins" aria-label="金币奖励"><span class="cqo-coin-art" aria-hidden="true">[[icon:coin]]</span><b>×${esc(String(coins.pending || coins.total))}</b>${coins.pending ? '<button type="button" class="cqo-button" data-act="chestOverviewCoins">收下</button>' : '<span>✓</span>'}</section>` : ''}

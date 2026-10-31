@@ -49,12 +49,7 @@
   background: var(--cover-pane); color: var(--cover-ink); font: 400 15px/1.65 var(--font-ui); box-shadow: none;
 }
 & :is(button,input,textarea,select):focus-visible { outline: 2px solid #81878c; outline-offset: 3px; }}
-/* Shared help is a secondary/tertiary sheet; retain every instruction and source return. */
 :where(body[data-ui-cover-context="ordinary"]) #overlay{
-& .card:has(.help-body) { background: var(--cover-paper); color: var(--cover-ink); }
-& .help-body { max-height: 60vh; overflow-y: auto; padding: 3px 4px 5px; color: var(--cover-ink); }
-& .help-body .help-item { margin: 0; padding: 18px 0; border-bottom: 1px solid #b3b5b773; color: var(--cover-muted); font: 400 16px/1.8 var(--font-ui); }
-& .help-body .help-item b { display: block; margin-bottom: 7px; color: var(--cover-ink); font-weight: 700; }
 /* Existing term descriptions have their own body-mounted tooltip, distinct from map hover. */
 /* Leaving / abandon can retain .room from an exploration battle. Use real action
    identity rather than recolouring every room card or the doom outer container. */

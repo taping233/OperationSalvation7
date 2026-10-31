@@ -1,0 +1,74 @@
+{
+  "status": "passed-native",
+  "recordedAt": "2026-11-01T05:54:40.128102+08:00",
+  "problem": "The current altar restore callback rebuilt its node body after a synchronous save. The focused old button was deactivated and destroyed, and the replacement body did not select a usable continuation.",
+  "scope": {
+    "production": [
+      "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/AltarRitualScreen.cs"
+    ],
+    "editor": [
+      "SoudacheUnity/Assets/Editor/CurrentAltarRestoreFocusChecks.cs",
+      "SoudacheUnity/Assets/Editor/CurrentAltarRestoreFocusChecks.cs.meta",
+      "SoudacheUnity/Assets/Editor/CurrentParityValidation.cs"
+    ],
+    "existingShop": "Read-only review found synchronous TryPersistMutation completes before CurrentShopView.Render/RestoreFocus; current shop already selects an interactable action and required no Unity production change. Existing native-shop-1/player-5 did not independently assert altar restore focus."
+  },
+  "fix": [
+    "Reuse existing altar view, UIKit buttons, UiStack ownership and EventSystem selection. After the existing synchronous transaction and body rebuild, continue on the same card ID/variant, otherwise the next visible candidate, otherwise return to map.",
+    "Only the focused restore trigger requests continuation. Preserve State/seed/slot/node ownership, rendered-page revision, original pocket entry/card/count, top-page and suggestion-overlay guards. A changed source or independently moved focus keeps ownership.",
+    "No storage, reward, card-consumption, routing or compatibility fallback was added. Existing failed-write rollback remains unchanged."
+  ],
+  "nativeValidation": {
+    "method": "Sdt.Editor.CurrentParityValidation.Run",
+    "evidence": [
+      "native-focus-final/result.json",
+      "native-focus-final/process.json",
+      "native-focus-final/source-before.json",
+      "native-focus-final/source-after.json"
+    ],
+    "passed": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "pid": 32400,
+    "startedAt": "2026-10-31T21:45:52.7024054Z",
+    "endedAt": "2026-10-31T21:46:22.6976786Z",
+    "sourceCount": 383,
+    "inputsUnchanged": true,
+    "changedInputs": [],
+    "covered": [
+      "Actual production altar callbacks through constructed native EventSystem ISubmitHandler: same card with copies remaining, next same-name distinct variant, then usable return when candidates/count finish.",
+      "Old rendered callback cannot grant twice; exact owned-card and remaining-pocket counts are checked.",
+      "Real profile-file lock forces save failure: original card/count/remaining allowance roll back, transaction closes, same usable focus remains, then successful retry restores exactly once.",
+      "A covering panel and a changed run seed reject old callbacks without card mutation or focus theft.",
+      "A SaveCompleted observer moves selection elsewhere; completion preserves it. A source change during SaveCompleted likewise prevents old-page focus restoration."
+    ],
+    "inputBoundary": "Constructed EventSystem ISubmitHandler events and controlled run/card/node fixtures; no physical keyboard, OS input, balance or natural route/RNG equivalence claim.",
+    "checkEntry": "actual altar restore submit/focus continuity, save rollback and ownership: "
+  },
+  "files": [
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/AltarRitualScreen.cs",
+      "sha256": "f77f514b2469f9338137e231f6e6e9615f95ad7128cd0cecb05b199dec7c2b23",
+      "nativeManifestIncludes": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Editor/CurrentAltarRestoreFocusChecks.cs",
+      "sha256": "d5ca770a40c6f60cdeaeafd09143ed793280a701756b6d6cbbeb01df4853e8a0",
+      "nativeManifestIncludes": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Editor/CurrentAltarRestoreFocusChecks.cs.meta",
+      "sha256": "1dbcfbc18e8985ef838c5be9076a059916b99243772ad1dda49ffde61501ceb5",
+      "nativeManifestIncludes": false
+    },
+    {
+      "path": "SoudacheUnity/Assets/Editor/CurrentParityValidation.cs",
+      "sha256": "2e9cba5c54ecb9f80039ae9aefe1287ab16322f77c89f00cf413dcda15271352",
+      "nativeManifestIncludes": true
+    }
+  ],
+  "limits": [
+    "This record reports the completed native check only. Root owns the subsequent build and normal Standalone acceptance.",
+    "The .meta hash is recorded separately; native source manifest covers the three .cs inputs, not metadata."
+  ]
+}

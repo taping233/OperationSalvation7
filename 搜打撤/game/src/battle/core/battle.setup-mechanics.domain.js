@@ -1,5 +1,6 @@
 import { isLegacySealedHero } from '../../cards/card-legacy-battle-policy.js';
 import { hasStructuredTrigger } from '../effects/battle.trigger-source.js';
+import { SWORD_HAND_COMBINATION } from '../../cards/card-hand-combinations.js';
 
 /** Battle setup and collection mechanics mutate only the injected live runtime. */
 export function createSetupMechanics({ runtime: instanceRuntime, cards, combat: Combat, random: Random,
@@ -9,6 +10,40 @@ export function createSetupMechanics({ runtime: instanceRuntime, cards, combat: 
   const SOVEREIGN_ID = 'tt8-abyss-sovereign';
 
   function sealCardById(id) { return cards.all().find(c => c.id === id) || null; }
+
+  function consumeHandMaterials(uids) {
+    const materials = new Set(uids);
+    uids.forEach(uid => {
+      const entry = findCard(uid), index = instanceRuntime.hand.indexOf(uid);
+      if (index >= 0) instanceRuntime.hand.splice(index, 1);
+      if (!instanceRuntime.consumed.includes(uid)) instanceRuntime.consumed.push(uid);
+      if (instanceRuntime.mode === 'boss' && !instanceRuntime.grave.includes(uid)) instanceRuntime.grave.push(uid);
+      instanceRuntime.cardAnims.push({ kind:'burn', uid, name:entry?.card.name || '' });
+    });
+    for (let index = instanceRuntime.lastDrawnUids.length - 1; index >= 0; index--) {
+      if (materials.has(instanceRuntime.lastDrawnUids[index])) instanceRuntime.lastDrawnUids.splice(index, 1);
+    }
+  }
+
+  let combiningHand = false;
+  function checkHandCombinations() {
+    if (combiningHand || !instanceRuntime.G?.battleActive) return;
+    const token = instanceRuntime.battleState.token;
+    let result = null;
+    combiningHand = true;
+    try {
+      while (instanceRuntime.G?.battleActive && instanceRuntime.battleState.token === token) {
+        const materials = SWORD_HAND_COMBINATION.ingredients.map(id =>
+          instanceRuntime.hand.find(uid => findCard(uid)?.card.id === id));
+        if (materials.some(uid => !uid) || new Set(materials).size !== materials.length) break;
+        result ||= sealCardById(SWORD_HAND_COMBINATION.result);
+        if (!result) break;
+        consumeHandMaterials(materials);
+        addTempCard({ ...result });
+        instanceRuntime.G.log('[[icon:cards]] <b>双剑合并</b>：「天启剑」与「诛魔剑」合为「天启诛魔剑」，加入手牌', 'loot');
+      }
+    } finally { combiningHand = false; }
+  }
 
   function sealSetup(card) {
     if (card?.rules?.battle?.setup) return card.rules.battle.setup;
@@ -43,15 +78,8 @@ export function createSetupMechanics({ runtime: instanceRuntime, cards, combat: 
     if (!collection) return;
     const sealedInHand = collection.ids.map(id => instanceRuntime.hand.find(uid => findCard(uid)?.card?.id === id));
     instanceRuntime.set$sealDone(true);
-    // ① 5 张封印单卡自动消耗（进消耗区/墓地，不再可用）
-    sealedInHand.forEach(u => {
-      const o = findCard(u);
-      const i = instanceRuntime.hand.indexOf(u);
-      if (i >= 0) instanceRuntime.hand.splice(i, 1);
-      instanceRuntime.consumed.push(u);
-      if (instanceRuntime.mode === 'boss') instanceRuntime.grave.push(u);
-      instanceRuntime.cardAnims.push({ kind: 'burn', uid: u, name: o ? o.card.name : '' });
-    });
+    // ① 5 张封印材料沿统一的手牌消耗记账。
+    consumeHandMaterials(sealedInHand);
     instanceRuntime.G.log('[[icon:flask]] 5 张封印之牌在深海的辉光中燃尽……', 'sys');
     // ② 化为深渊主宰·妲莉薇特（2 费能力卡，由玩家打出引爆「旧日再临」）
     const tpl = sealCardById(collection.into);
@@ -134,5 +162,5 @@ export function createSetupMechanics({ runtime: instanceRuntime, cards, combat: 
     if (n) instanceRuntime.G.log('[[icon:skull]] <b>虚空符文</b>：复制了 ' + n + ' 张 0 费招式', 'ok');
   }
 
-  return { injectSealCards, checkSealTransformation, applyNestRunes, applyVoidRune };
+  return { injectSealCards, checkSealTransformation, checkHandCombinations, applyNestRunes, applyVoidRune };
 }

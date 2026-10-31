@@ -1,0 +1,4245 @@
+{
+  "status": "passed",
+  "atUtc": "2026-10-31T22:18:13.561780+00:00",
+  "scope": "Current parent repository index bytes only. Read-only; no stage/index/source/gate changes. Secret values are neither printed nor stored. No credential validity or network checks.",
+  "pathCount": 516,
+  "allowedPathCount": 516,
+  "exactPathSetMatch": true,
+  "stagedOutsideList": [],
+  "listedButNotStaged": [],
+  "indexStableDuringScan": true,
+  "policy": {
+    "maximumBytes": 1000000,
+    "allStagedViolations": [],
+    "newFileViolations": [],
+    "mediaExtensions": [
+      ".7z",
+      ".aac",
+      ".avi",
+      ".bz2",
+      ".flac",
+      ".gz",
+      ".m4a",
+      ".mov",
+      ".mp3",
+      ".mp4",
+      ".ogg",
+      ".opus",
+      ".otf",
+      ".rar",
+      ".tar",
+      ".ttf",
+      ".wav",
+      ".webm",
+      ".woff",
+      ".woff2",
+      ".xz",
+      ".zip"
+    ],
+    "pngNotBlanketExcluded": true
+  },
+  "activePathChecks": [
+    {
+      "path": "搜打撤/game/css/character-idle.css",
+      "indexEqualsHead": true,
+      "isInStagedChanges": false,
+      "indexSha256": "64b0312dfb389810f777b0f8a225103399f7cd71cca47acb98aa6912cbb8fcf0",
+      "headSha256": "64b0312dfb389810f777b0f8a225103399f7cd71cca47acb98aa6912cbb8fcf0"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "indexEqualsHead": true,
+      "isInStagedChanges": false,
+      "indexSha256": "17fbfa29a5f8cd562e01c053473aa7a2a7c45facb87615141a4601940b417bf9",
+      "headSha256": "17fbfa29a5f8cd562e01c053473aa7a2a7c45facb87615141a4601940b417bf9"
+    },
+    {
+      "path": "搜打撤/game/src/ui/character-idle.js",
+      "indexEqualsHead": true,
+      "isInStagedChanges": false,
+      "indexSha256": "760cb5ffebf8f0a878fd2993a0fbcb9ade2fc944c0ed9d8ab8467c176c5048d2",
+      "headSha256": "760cb5ffebf8f0a878fd2993a0fbcb9ade2fc944c0ed9d8ab8467c176c5048d2"
+    },
+    {
+      "path": "搜打撤/tests/character-idle.test.js",
+      "indexEqualsHead": true,
+      "isInStagedChanges": false,
+      "indexSha256": "7f812f260b75a379f2d996297f503d6ce86a329ec4e54f27643da9ccd7612e7b",
+      "headSha256": "7f812f260b75a379f2d996297f503d6ce86a329ec4e54f27643da9ccd7612e7b"
+    }
+  ],
+  "credentialScan": {
+    "filesScanned": 474,
+    "bytesScanned": 6941478,
+    "binaryOrNonUtf8FilesSkipped": 42,
+    "categories": [
+      "openai-key",
+      "github-token",
+      "google-api-key",
+      "aws-access-id",
+      "aws-session-token",
+      "jwt",
+      "literal-bearer",
+      "private-key-block",
+      "credential-url",
+      "named-secret-literal"
+    ],
+    "shapeMatchesByCategory": {
+      "named-secret-literal": 2
+    },
+    "findings": [],
+    "placeholders": [],
+    "valueHandling": "Only path/category/line/placeholder judgment retained. Values not printed/stored. Entropy only classifies obvious dummy literals; no external validation.",
+    "nonCredentialMatches": [
+      {
+        "path": "搜打撤/docs/evidence/2026-10-28-heavensword-install/request.json",
+        "category": "named-secret-literal",
+        "line": 10,
+        "placeholder": false,
+        "judgment": "non-credential-human-authorization-note",
+        "evidence": "JSON items[].authorization is Chinese art-generation permission prose beside card_id/asset/prompt/references/generation_record, not an authentication header; no token prefix or credential term. Values not printed or retained."
+      },
+      {
+        "path": "搜打撤/docs/evidence/2026-10-28-white-plum-install/request.json",
+        "category": "named-secret-literal",
+        "line": 10,
+        "placeholder": false,
+        "judgment": "non-credential-human-authorization-note",
+        "evidence": "JSON items[].authorization is Chinese art-generation permission prose beside card_id/asset/prompt/references/generation_record, not an authentication header; no token prefix or credential term. Values not printed or retained."
+      }
+    ],
+    "manualAdjudication": "Two broad named-secret-literal matches are human art authorization notes, not placeholders or credential values. All other credential shapes absent."
+  },
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "blobOid": "2c3e579d44a65d3c3bb735b5f6bb2d9d93c9a2f0",
+      "bytes": 5215,
+      "sha256": "4f3962241572f1dd94f88a4971adde54d0001ace4d8f22cc3f8b2d6117d8708e",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "README.md",
+      "blobOid": "04383c5f56cdf414a029caf7f7826c43649a8e67",
+      "bytes": 1421,
+      "sha256": "12082cbf64b2670816d6ce738981cc051ccee2d0d3df1b9a822e2395f5c9fc63",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/README.md",
+      "blobOid": "a819a2f4590ed93518fa5163084bba3bbc927114",
+      "bytes": 3134,
+      "sha256": "c2f7888b908caef25700419fd9445c10299caecc4f441c333850207b8a967b30",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/desktop-app/README.md",
+      "blobOid": "cb17ad93672ef2be740d2ac1374e0fedaa8b7589",
+      "bytes": 1657,
+      "sha256": "6e65692cc9e55eb2772264c57b36c3c8a3b0949445beffb9438f223e694e766e",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/desktop-app/build-native-portable.cjs",
+      "blobOid": "7b2b5637b41adef0581861e6280bd1b9ae0790c4",
+      "bytes": 3296,
+      "sha256": "a9de095aeaa7b0ffd03604d7bac6e406552870699d38f4a2dbbbb34c57c140a8",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/desktop-app/build-portable.cjs",
+      "blobOid": "79cde2bcb86f8f4ba687ce4ad5d90743a5e254e5",
+      "bytes": 4090,
+      "sha256": "36b47a462835932e1824535105b9f4f7a1a9c67698ad736f6345dc796cabf3ae",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/desktop-app/main.js",
+      "blobOid": "a70cd51d742bc047bb12a4365c69bd826b7d1adb",
+      "bytes": 7796,
+      "sha256": "0dfe5e9a2acfdc23a2c753feb53d3f38359c24873eaa6600c61695e634d60349",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/desktop-app/package-lock.json",
+      "blobOid": "5bfae87377b6543380e9bb4787cb769ef49fd110",
+      "bytes": 127543,
+      "sha256": "4cb81b25357d7391320bd66b81802bffa10259e2f9327ec4e3cf58005d29a766",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/desktop-app/package.json",
+      "blobOid": "0a8868dd56efac4d1c2a825eec3e2c22eb5ba9dc",
+      "bytes": 1518,
+      "sha256": "1994bc97c08b7fc4b45eca002206505fa8e425d4ac42cf2ccac4624a7e2a241c",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/desktop-app/portable-launcher.cs",
+      "blobOid": "86ddce5aecb7a617ff80d063984a690f5888a592",
+      "bytes": 9228,
+      "sha256": "b0ec5bb5a3a9a75e8405a5c01efec9a66588f8ec577f88a8b8f5a5c9922634ef",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/desktop-app/preload.js",
+      "blobOid": "4e5eccd5a7d2caaeb36a65591eb5e17c3067fcd2",
+      "bytes": 3865,
+      "sha256": "f03d385b7400fb72f82c737cb1b788fa54befd9d0beef631db14e6bd0020dbdf",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/desktop-app/startup-preload.cjs",
+      "blobOid": "52ddf9dac84da46eb94218d2b894e69af67e02b1",
+      "bytes": 411,
+      "sha256": "a94489ccde17837ba341008c75ec6e6fbeb124fbe59a5e58c1801e4813d56baa",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/desktop-app/startup-window.cjs",
+      "blobOid": "76f941229eb7f5f460f07b15cc95d2e98fe45359",
+      "bytes": 4910,
+      "sha256": "5727ba7a26ff447b97b84e8fe06afd1db379c5970465264d4f1f0b94fc5d0937",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/desktop-app/startup.html",
+      "blobOid": "f17ae30e6e31de6f37493466209431c6d695102f",
+      "bytes": 5406,
+      "sha256": "7d32b5df71c85334fc68728bd320b973731222155827a6c6cc2f3d5aadb4a491",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/docs/PARALLEL-REGISTRY.md",
+      "blobOid": "cd1dfff7d26870e07eee5ef62cca3fd2b58df26a",
+      "bytes": 648108,
+      "sha256": "1c3023f826cc5ab6dca354ec5ea8c9757de8998677398450b81ee8afd16f24b5",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/docs/PENDING.md",
+      "blobOid": "aa5db63f6152e9b1ddeb6dabd2f71b4d94d6299d",
+      "bytes": 10176,
+      "sha256": "a13cab21f337ccb08c72e6d8c8dcb5494c1b514d3faa19296431de30c39d04ef",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/docs/audio-system.md",
+      "blobOid": "fef460be99ebd83f05c558ad0190b55fd6c4b352",
+      "bytes": 7679,
+      "sha256": "e406423898fbc3e9d79d1b54fb717e51b1110f8a6a5109fdb3e80e1e53016438",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-26-flow-goals-round24/README.md",
+      "blobOid": "b9dce0098c7a76b9256989499297b9bffffb231e",
+      "bytes": 5203,
+      "sha256": "64aace82209d7d45425a471e56214d380bb8d7eb0c56f7b6c34ae810d3a90a89",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-battle-fx-reset/README.md",
+      "blobOid": "19cedb9deb1185554948df97983ef0422c98c7b4",
+      "bytes": 1599,
+      "sha256": "dc8c52709be50e5e99f6e2a2a9c478d7219845de4619b4fbaef3d219184c83b3",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-card-drag/README.md",
+      "blobOid": "9750a1e9d56fb5739d3d897072537ffc77fcbb87",
+      "bytes": 1294,
+      "sha256": "aae33a0e8b3318c5d5d80fed7ae682069967c858a962f1c7a1feb2a8878928ad",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-card-notes-sync/README.md",
+      "blobOid": "cb5ad3376f4b1fa4688325f3a2cbc246e5d87d07",
+      "bytes": 907,
+      "sha256": "264368dbfaf31bccd7c688df98223ad01a1aada90a40ec976b48dad4b1da3628",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-card-notes-sync/before-sync.json",
+      "blobOid": "22b225bd57a384fd3717c0de206946341904ad66",
+      "bytes": 22556,
+      "sha256": "65f96145b9177a967ee9c6664f93a4f90dfcadbe4e4147cc2454f95db5607bee",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-card-notes-sync/changes.json",
+      "blobOid": "0065119f0e4234b338bd68b57de96f871656287d",
+      "bytes": 7499,
+      "sha256": "0a19f00a9416598512e0f31c09cf5b5d893121d636be1e3aaf770b58484b81b1",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-card-notes-sync/edge-notes.json",
+      "blobOid": "a800e2faac3ffeb4e72339eceddcf8a42ec4c3f7",
+      "bytes": 8855,
+      "sha256": "5e39f3d6e4420472ffb9145f6ab790e6a9735f6b469d824c7709c7d81080193d",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-card-notes-sync/verification.json",
+      "blobOid": "fe748a394c55138e67abafe31e1b59bb7b2d20c2",
+      "bytes": 324,
+      "sha256": "fd63e21bcf8b5855a777beae51c0d8e0947db47416a76fe25a63f22947bc032e",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-art/README.md",
+      "blobOid": "ac0e2af09060beeedf1a4e2b8a358d8f8c3d1168",
+      "bytes": 2123,
+      "sha256": "d658be727097ce650323a6a9ad7a30184a50b15a9c87fdc914b313978ed61586",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-art/after.png",
+      "blobOid": "78fb946e70f04f8be5362147ed6d1733ee2ed730",
+      "bytes": 102400,
+      "sha256": "20b6092b1831e47dbf866631a2abc9f275b33f25af2bc94419deacb77ca00d87",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-art/dry-pond.png",
+      "blobOid": "b2cd47bebf9c3353d04552ff0f33a711590c7be2",
+      "bytes": 108196,
+      "sha256": "ccad6a2813fa4cf44da461486df3ac071f5b223c36f7a407b79ad4460d289dbc",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-art/heavy-rain.png",
+      "blobOid": "7e7cd530d14ef220cc35e2a0201e73493dbaa3e4",
+      "bytes": 102317,
+      "sha256": "4806d3d4f396ebcb6a14a7eef76b0a4538bd4883201c50e2d73d7103fe4e67aa",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-height/README.md",
+      "blobOid": "c34640e5348417a4028248c7ab3e89b442ccc9d9",
+      "bytes": 1832,
+      "sha256": "f6bba1b81961439a3487d8f2360e6a0407a871054aa84e80b3fa92afd226310b",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-height/after-trace.json",
+      "blobOid": "2d44fa329d090525d99df90e32fad68cf6bf0601",
+      "bytes": 502,
+      "sha256": "ad12748dba8fa234503e24694893850b16e31a81261f317a68fe6288d0b404d6",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-height/after.png",
+      "blobOid": "9f37dd70c2eebc9e45295c4ca74acb8dfa3f48ac",
+      "bytes": 142281,
+      "sha256": "8fcc8b6f5bf416f4bf109361631c9aa4771694dadae8a4dc1471ea765c29d976",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-refine/README.md",
+      "blobOid": "70eb253b8de9435ebe6e737d5ee685f212f0f3a0",
+      "bytes": 3024,
+      "sha256": "25011ec2775334f5e3083e99ad14b1299285abbc205281fe9ee0e77f3f0dcd3a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-refine/entrance-trace.json",
+      "blobOid": "0bc3fa623c92f7d5977188f890307b3e5aa22281",
+      "bytes": 170,
+      "sha256": "94574e3af19645771b9b86fa5c5407ddbe7879ccde5ac678f143c35dfbb045f9",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-refine/settings.png",
+      "blobOid": "5a71a6de7c8b931ae229ac063db6e6c9a2166e4a",
+      "bytes": 87920,
+      "sha256": "5a59e180a68ba3cb0e5565bf387285f5617065bc4a6c2457d6ebd6654f8f9431",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-courtyard-refine/toolbar.png",
+      "blobOid": "d2ffc7cd40876a1192a77163061974df8b950852",
+      "bytes": 88135,
+      "sha256": "bbc739cc10b1996aeb6c2eb8c15b4f64123125aa5b44f1561124cc254eb3aef2",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-event-restore/README.md",
+      "blobOid": "c85ca55eb29d48f04c0518556ebec23456ffa578",
+      "bytes": 1301,
+      "sha256": "310bcda7746dd27deed4258d7912ffc8c495b9159ede618015d7945d73525227",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round25/README.md",
+      "blobOid": "72ceb1eeb1680862ac10e2594ab48f0a4be0b824",
+      "bytes": 2471,
+      "sha256": "8533f092478e816eaaadb99723bfca9887325cabe15d27c4c11712e097aad916",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round26/README.md",
+      "blobOid": "39bd622d0a199585c708d1821ee9678cbe686471",
+      "bytes": 2638,
+      "sha256": "ea0fe76d1ccb6d7e33caaa8ac9f8d6de8c3fd21156e3c6ddcedad0b3b99cdd3b",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round27/README.md",
+      "blobOid": "cecdb43dcf1f8f98a31469be97a0eb169721f083",
+      "bytes": 2259,
+      "sha256": "b9200e17957377bfa6fecfff392d4383e52be571526b2b45289c46010781d300",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round28/README.md",
+      "blobOid": "659d096dca9f315c62964306696e0552a30189ba",
+      "bytes": 2600,
+      "sha256": "7fc98a8560904f6243646036a7e20b1ca5624e13168391904671db8fb29455e0",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round29/README.md",
+      "blobOid": "e43ba51dd6bc15e86fd21dc164c243aa7f57e23a",
+      "bytes": 2527,
+      "sha256": "a72267d6c6e565bc1199293aeb9506fafec7046244a9a85d4b5d966c86800006",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round30/README.md",
+      "blobOid": "f7ecf33f2add8666c6917fc0062ce2e774baa7bc",
+      "bytes": 2142,
+      "sha256": "12fdf6a25679307ee0b6d24c4e1d0c3a4e48efa116ea116b321eed204589c803",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round31/README.md",
+      "blobOid": "87f446be1b23bdd76808cebebc9cb7b0261314f1",
+      "bytes": 2136,
+      "sha256": "4cd024c54bfbfeeeed04453c2a9d74d13fd3355a5e100aac81662ab75682285a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round32/README.md",
+      "blobOid": "056e7f8e4e5b1eb2a5a5e8f2b58c7ed53872c9bb",
+      "bytes": 1826,
+      "sha256": "4335c2f2f708cad595bc2cf1b01511f862be7d1bec2ba8deeb0f949ebcbec44d",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round33/README.md",
+      "blobOid": "c96852f54839e612a10a8f7a9a7e112a0f1cc5d9",
+      "bytes": 2169,
+      "sha256": "6ad7a130d4e9d957ae774f4c8a6ea16a57226a2602d269983e7bf2e8869ed47f",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round34/README.md",
+      "blobOid": "9ad03a654f188b1184aca1acca6be36afbc0d666",
+      "bytes": 1524,
+      "sha256": "41b498bcd5220cb2725767f5da77e086b8feb041ee0078ca1a8b801ffa1e3c32",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round35/README.md",
+      "blobOid": "08ab54d417571dc326677acced38b35ac2c54c74",
+      "bytes": 1638,
+      "sha256": "d1ff8d7485a2d585c85730ee37661c9df7ed604e5587d654674f4f15221d8a5f",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round39/README.md",
+      "blobOid": "edebe941524885a1bd66b77f7a71e9dd8559a3d1",
+      "bytes": 1411,
+      "sha256": "4c4c85188f487cd94144b55176e8e3f51d7a51ff96f783e95998cca84f20daa5",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round40/README.md",
+      "blobOid": "f27c897c374da287d0a245794f3de52380501394",
+      "bytes": 2138,
+      "sha256": "d779385cb62e2dae75a9281affc06f18aee3aefd4fc518bf2bcf3400d228bbf5",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round41/README.md",
+      "blobOid": "596b6618f3b21eca67003b95fb09e04a0f684b93",
+      "bytes": 1959,
+      "sha256": "e3167fc4b8333be55208150ffbbe40e96d31f9001e0e6abd9c90c644752db0c5",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round42/README.md",
+      "blobOid": "4e857e99c7767d9d0e3e561f8fb36e2a230e903c",
+      "bytes": 2772,
+      "sha256": "182ed4005a8e5035062ec6da86d88e9fe2fb6e05d40a9e6c037567f3bb72cad0",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round43/README.md",
+      "blobOid": "b0322e423d195e6b90410bba075d31a15cdd6f56",
+      "bytes": 2535,
+      "sha256": "7301c609600367b6567069da15b6ee89bb284bf633441431320a5a5cb417d46b",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round44/README.md",
+      "blobOid": "b875d89a3ac1bf7a950646367c813a363432d94f",
+      "bytes": 2162,
+      "sha256": "21b0ec585326f202ce9ff7d9349f1fbbf2061eb578f8518a55763e9f075d19e6",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round45/README.md",
+      "blobOid": "9fc5d0362cacec152dfd094165166d83f62aa736",
+      "bytes": 2690,
+      "sha256": "3649c773c3b7c3ebf60cef88c9b1135bf6d2c7498db15aeae8f59c9d88515cf2",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round46/README.md",
+      "blobOid": "ed1edb403fd487bcff124242289678b6da97326a",
+      "bytes": 2077,
+      "sha256": "e596443c038fb3990d1327307adba048b398032399bca33ae60e3527e081a090",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round47/README.md",
+      "blobOid": "9ccedb07b7343741cad8e349218f11e736f80b11",
+      "bytes": 2463,
+      "sha256": "bef6c14d4f6b3e972eff5216a4c10ad22921190c9e33f8e893e3a2681d5e7fca",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round48/README.md",
+      "blobOid": "6ead2ae12117c14adc373cd4aaeb4ba5f00baec7",
+      "bytes": 2201,
+      "sha256": "ce46fa188db619047dc7b8ec5704a5ec86dd47888b0b592fdccc802e183461c2",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round49/README.md",
+      "blobOid": "e21ed0640b569ffc5ed6f8c69dc678f77c9201c4",
+      "bytes": 2403,
+      "sha256": "3c43a9fd01db7dbef0e51aacf812b82289a73a2e6feea81afa8412862747e7cc",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round50/README.md",
+      "blobOid": "41b9ad8fa22a931ffa44f08b11051343942f7711",
+      "bytes": 1391,
+      "sha256": "f2606c33c839979bf3dbd42027e7ac051102f76b25031f5e5b7df2603fd93763",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round51/README.md",
+      "blobOid": "0e730e51541b614668964e8592f943801e3da2aa",
+      "bytes": 1814,
+      "sha256": "3566812f5b82aab80f27d2b16966950a29d7e740dd9e751c04951e433fd568fe",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-flow-goals-round53/README.md",
+      "blobOid": "d6c5b3a7cd9ad0af927acb8078065c0911499d57",
+      "bytes": 1519,
+      "sha256": "c52e0bdb9a045e60a58450ddbd3b2bb8f4034d95f7775687f084ac85706241ea",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-jiuke-emblem/README.md",
+      "blobOid": "5fb40fae64ba07ce324e93e666d5d82af87954dc",
+      "bytes": 2370,
+      "sha256": "803a759b7914c08e2c2aadff2b54da2807fa42a00bf1fba280cd5cea5642f9a8",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-jiuke-emblem/delivery-sha256.txt",
+      "blobOid": "56b37b2aa5d6f9b24bdebadcfbb3fb6113da45d5",
+      "bytes": 227,
+      "sha256": "93e7862d3152df1d8db649ed8504648fd935025979e995c857a0f83139365f95",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-jiuke-emblem/generate-v2.py",
+      "blobOid": "9824eba1d91f2483cd8e10333105f9f6446edbaa",
+      "bytes": 3018,
+      "sha256": "50531aa7be78c83bf8dfe88d0734adf9f470a3b8e2435d959ae73be55fa61736",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-jiuke-emblem/generate.py",
+      "blobOid": "0e3975b8c77e518cd09140c082f169d9457b92cf",
+      "bytes": 3039,
+      "sha256": "581bd836ea59e32675af1c7f7b4e15e6f46b8f5896a953f1ae2754e1a7293e32",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-jiuke-emblem/nai-request-v2.json",
+      "blobOid": "f66116baab13317bb5218571265c4c7f268ef2f9",
+      "bytes": 6961,
+      "sha256": "3de63850c49b7b6352f519aafebb61752eb03f637073c22a0690a11208a06d26",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-jiuke-emblem/nai-request.json",
+      "blobOid": "90eaae870621d9c371ed142227c26d0593238c17",
+      "bytes": 7015,
+      "sha256": "45e9a303b83655a39bc7c83465928232a49b828794eb0ae05594323c46f61f12",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-all/actual-payload.json",
+      "blobOid": "8d56ec5bee0170a5511db72a9193d92caeab826b",
+      "bytes": 274,
+      "sha256": "f4920daf59cfd3b36368e675cffd000fb1c15bbe032c5bffc7197104457d6de0",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-all/portable-verification.json",
+      "blobOid": "56c23a34be600eb03e6059fbb25a21df26ca24aa",
+      "bytes": 999,
+      "sha256": "abdbe7bc7948e0b6a389a353067e1e8acbcc260cca02abfd168080a92b5730aa",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-all/snapshot.json",
+      "blobOid": "2da78f126269be07a8fb737d8921f99680691ad4",
+      "bytes": 672,
+      "sha256": "2f39e2794d47d6456895fc5914baa2210b7fc8b79106c6c73caed08b21ae7785",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-v08/README.md",
+      "blobOid": "134db5f6316399e54d0e39bfe0b93fd62312285f",
+      "bytes": 2949,
+      "sha256": "c96f318688aca6741742659cc4fc6d532d16850ec589f6a404d759d1a0846bfc",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-v08/actual-payload.json",
+      "blobOid": "dd3037865b85f9aa06032dee0e3b1daed7144032",
+      "bytes": 274,
+      "sha256": "0b67328b0a53df0abf85172ad309213fb57f56bb32af08681c9971ec4e131ec9",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-v08/delivery.json",
+      "blobOid": "26f309d4334da4d7a3ca02adb5434dd93b651e16",
+      "bytes": 612,
+      "sha256": "cd624813930d3b4fbe39fbaf9a491786a72aed18ee05c0a29ed3292ebbff9823",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-v08/portable-verification.json",
+      "blobOid": "07de093ac8c4a523e6b5a0e6bd96d646e3ae0af5",
+      "bytes": 998,
+      "sha256": "682b273b2d8570e2b801224554e707a790dd0afd69eda4f38c3661b7dd9f3282",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-v08/production-summary.json",
+      "blobOid": "a4b557d96810b6a61ec26ba878b353d70bff4d56",
+      "bytes": 471,
+      "sha256": "62bce1ac249d39cdb2b8db8548949a843e8372f915e376b11b9749bc9df30179",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-v08/shell.json",
+      "blobOid": "ab701112c4cc22102af5109e5b83e0a1384107d1",
+      "bytes": 228,
+      "sha256": "e68de25f1f3b063236cf04816e9d0b6f7f27492c8ae9d61b75315d327c8572e4",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-v08/snapshot.json",
+      "blobOid": "ee02c57234bcee15edfa986379737e4034fed576",
+      "bytes": 671,
+      "sha256": "0ccca92889c2b5784da2a8e1df015e8a626b7e6c0be68d667b9c916d31d68f56",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-portable-v08/source-drift.json",
+      "blobOid": "40dc4f9fff469903a1b1d8f29da8676f2f9b431a",
+      "bytes": 105,
+      "sha256": "a7704f069cef5137bb1d544843683f7410338c7e0db7b799d14bc3a07c23e75e",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-rain-visible/README.md",
+      "blobOid": "6bbce173820ae787b0c184686e78c204b8fe35ba",
+      "bytes": 850,
+      "sha256": "442611bc7b42f4b5bc3318637d86fa74e757b11ae9c4aba29b1e9f0a5b9dbb4a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-rain-visible/fine-rain.png",
+      "blobOid": "d023a5424bb3e7943c2b4f179e1be733bba2c4f6",
+      "bytes": 101955,
+      "sha256": "de683c8bb5f29d10fa82e4bf8fc52d772b6646111226e1930adeb5be0eaf9ad8",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-rain-visible/heavy-rain.png",
+      "blobOid": "0542be032c61f5afefcd89d01c01466ba49da76e",
+      "bytes": 103000,
+      "sha256": "eabfdff34ecf6faa99d121b135bd27c00c0335abfe3620c1b9e6a3a0d04684f7",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/README.md",
+      "blobOid": "e6bb6c7f69bfab48037d3df5c73f914adb2f4f62",
+      "bytes": 5692,
+      "sha256": "f45e10ec37daa2a5addb99c058a60bf5774e232d58dd1d9fbea945c25d6f275f",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/altar-reduced.png",
+      "blobOid": "627e01e6c44a2afa6c69cbd51002441c87c9c38b",
+      "bytes": 27129,
+      "sha256": "a064480c412399d5bf6708a34651284b8d5769939ba2a9c791a72860ea98ec25",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/architecture-baseline.json",
+      "blobOid": "1a4336302ff1783d670c5082813f6375688384ce",
+      "bytes": 793,
+      "sha256": "74fc4015eef0ba42354d2fbe818d0b789293c9385ea0af47b4ba3207b8cdc554",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/boss.png",
+      "blobOid": "c9e797fa8b5dfd315af72800e58226f214817a0d",
+      "bytes": 28306,
+      "sha256": "2aa6d29c05246ffaa72c8654aa245bcd304db2a163e2459baace7d5a7669eb14",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/commission.png",
+      "blobOid": "bbd28a533c64abf958b46176f411a0be086efd37",
+      "bytes": 74295,
+      "sha256": "029719942c2c729a167176a5ec8cccf4cf3abf9a6f982f315c14ed2f1a535982",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/failure.png",
+      "blobOid": "966dc435c5f982d4ab1e156e98948cbfba560ab6",
+      "bytes": 36859,
+      "sha256": "29251e377577b2f9ea8f59f34409ae6d337441ad6fd001d6533ae1f3650ea12a",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/review.html",
+      "blobOid": "bf489b3a346a17fe8e9c0af51a35fc9ab5c59793",
+      "bytes": 3533,
+      "sha256": "5706df3667dfbba76ac81ddda39ad7b5cd9e4f296964fbf81a13391f969e697e",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/review.js",
+      "blobOid": "b3ebfb22d85411a0177c589b13d4f1e6a1db2787",
+      "bytes": 4982,
+      "sha256": "6a966f5c9ce4314f0810a19569e129e2f874c3e8081dda80c8a989d35c6c167e",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/shop-notice-removed.png",
+      "blobOid": "322fb07e1124190168b891b063d74c285cae8572",
+      "bytes": 65434,
+      "sha256": "684416cb8a9e91f18fa06b9d154e3975d15b051c90eb6f6c1f4d8a3eb75d6b4c",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/source-fingerprint.json",
+      "blobOid": "1b261663598e9bf5170e18aadea9a5107369aa86",
+      "bytes": 1787,
+      "sha256": "7cdbe769124d4b628a0bcfbc42926d93e68611e2eb169143735422183c4f0651",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/success.png",
+      "blobOid": "60d903a3282fef8f612cecfefc790972ee63648d",
+      "bytes": 61286,
+      "sha256": "79a33333493515ec5293d91d1ba9875f8f6a4cb18d300b6baaa566cfdee3ea80",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-run-presentation/supply.png",
+      "blobOid": "c6f1a6e965901a88881f04901e27ae5df3adcf57",
+      "bytes": 29889,
+      "sha256": "0e2f0ca004d91e687834b04f4ed5037f50c894a6153bd297149e115f127a4554",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-sfx-original-1027/README.md",
+      "blobOid": "e8e1ca43413ecbd94d80023670d77902fe04dcc7",
+      "bytes": 2080,
+      "sha256": "062aa4f6acab24f58c7d0552a3822ecbe6f24dd28ab60b5f54272ee6e3407ed0",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-sfx-original-1027/make.py.txt",
+      "blobOid": "66a46441a9308107a37ae0bf34792b267b5d48e7",
+      "bytes": 15260,
+      "sha256": "01c33c937b6d2b969eb29c626386ab33b4e36772f7146697711880a70a6ef9be",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-sfx-original-1027/manifest.json",
+      "blobOid": "6853e9dd140f45ff1e23954e1d38f6b33ed0aa15",
+      "bytes": 10054,
+      "sha256": "37fa7ca23d34654df9692358cd8e9457b4d6d108d6b256e7826df384edebe093",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-slot-wallpaper/README.md",
+      "blobOid": "5c83dd2f7224277e5ed1ac8d20aa5508c47882af",
+      "bytes": 1048,
+      "sha256": "e10dce5f6477ab11fa40e765414f164d78bb45024b126351a7f6dc615e0b31f8",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-startup-portable/README.md",
+      "blobOid": "afb015628c6ca70ddc999197593e7c73f1386fbb",
+      "bytes": 3715,
+      "sha256": "9bfa3856046608764199fa6148ed3c9d5be160992bbf656abde62a03740da229",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-startup-portable/actual-payload.json",
+      "blobOid": "f87c4af220121f4e69ae15f6271eaf48c57d7e36",
+      "bytes": 274,
+      "sha256": "150751562cc865552a21e24381d16b22ff888d6435329c850f2d5bd6fa9e2c8a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-startup-portable/cleanup.json",
+      "blobOid": "8d7fbd2a768680427c678e9137550b703830889a",
+      "bytes": 108,
+      "sha256": "1805219aec4278c7613922e7057d69eac8ebd002309536a1e8568a08ffdb3ef9",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-startup-portable/delivery.json",
+      "blobOid": "bd5d2f52cff4247bddc9facec19534d341f598aa",
+      "bytes": 492,
+      "sha256": "4039ff80fc51e7ee7fbaa39ec32bff307c81b766e42153482bcadf24ba678265",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-startup-portable/empty-slots.png",
+      "blobOid": "a886a97afde90d68ac192813d1c719cba3eb893c",
+      "bytes": 50445,
+      "sha256": "f7e6c1608eea13bbb5eb84bbaab15411e471e450cd7aebb9ff6d185fe69762b7",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-startup-portable/loading-preview.png",
+      "blobOid": "ce6feb34ddd0e1d71050e93fbd42bcdf3df3b1cc",
+      "bytes": 207924,
+      "sha256": "b69ec2072f55b51e97c5dd8e0ea17d9b499fb65d88dba26613eb80f72d5042a3",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-startup-portable/portable-verification.json",
+      "blobOid": "515de2de327c4f8da350004df1db9b227d042303",
+      "bytes": 1016,
+      "sha256": "ede95fae67a418f4b924e8767d340022d3cf1f53cdd667c5011e154a10a0920f",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-startup-portable/snapshot.json",
+      "blobOid": "9eb0714b3d0f8edc29a1deb8ef9ca9b2338074e8",
+      "bytes": 622,
+      "sha256": "048090b0364dc4b0c4da779619cc65b664c395f6439a3b3a068918c7f0c5f0ba",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-survival-guide/README.md",
+      "blobOid": "ce8fa7eb14d9b065d0dc6f3019c2a93033ffa6ed",
+      "bytes": 2064,
+      "sha256": "51f85443ae4e7f8cfbbaec3b146cc39df9e88bf71440b7e1b61660a63d69ccf9",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-27-survival-guide/media-sources.json",
+      "blobOid": "608906f9ad2b0a30d79e2ae785b32c593d88ba6d",
+      "bytes": 6383,
+      "sha256": "2c37feec3f06422f5d1ec79de4c65ee4e5ef338af9d3275ccd195d784a0c3d6d",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-abyss-black-circle-original/receipt.json",
+      "blobOid": "8b5ff3e8ad668b3838d29723ffc4afb22baeee50",
+      "bytes": 3472,
+      "sha256": "ca62f1e94a272c676336ad575e091fef349dbc786014a1d0ec801500be207ae0",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-abyss-black-circle-original/request.json",
+      "blobOid": "b7dfcf99bf96aa3a44b77a9f827c9ece5d818607",
+      "bytes": 751,
+      "sha256": "aaf8140c80bd9b2bcb2cd7e145f28e5830aba90bc629bed8dee5201d8e4fc33a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-blooms-swap/receipt.json",
+      "blobOid": "8243ffefce922fce765703750276588d354842db",
+      "bytes": 3390,
+      "sha256": "5a58ab7f744ae8023454dd828122a43952bade7c9b37da82194416972818179a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-blooms-swap/request.json",
+      "blobOid": "a439238dfbf02d46194ffca43cf50f47e0051a3b",
+      "bytes": 1174,
+      "sha256": "690d585df87a92c77734d0057cdcfcd0d3ff68638cd29127a9616e6befbabd59",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-bound-shadow-install/receipt.json",
+      "blobOid": "f7ddf24e2b7d3929cfb55723da89462ceb1b95c8",
+      "bytes": 3409,
+      "sha256": "4c3094f71e9eb5b20310b662912749450daded4467114573e4be507ae477a3e1",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-bound-shadow-install/request.json",
+      "blobOid": "aa36765b61549d087a981cdf23bc12303899df49",
+      "bytes": 3534,
+      "sha256": "17d6380ce1efe5bbaf10087b6707e0993b951d07ee4605d9662534d9f56a4d37",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/README.md",
+      "blobOid": "f31006681898cdac17726ac42932b5a85921fb7e",
+      "bytes": 5898,
+      "sha256": "a274b46cc053a0f2bc03a3f60fe20d8a7bdad3e5fd738ca87c87f9be247d038c",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/css-banner-cleanup.md",
+      "blobOid": "b02c277eb7451ddcbaeb1bf4a659f33366e6b0ee",
+      "bytes": 2374,
+      "sha256": "652baff687d1279bb22f75214431110d15fe7ee02d3128ee7c7075ae4f7fb38a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/css-before/banner-base.css",
+      "blobOid": "3f76b998de1c5d7282d0b7f7bb277a3b277fbb60",
+      "bytes": 24327,
+      "sha256": "eea85b815ad650da661ae9f4ae4d44b85cad5d80b0117a0f1e54dec2533d3a87",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/css-before/banner-winter.css",
+      "blobOid": "0100833f19f2c9198d1cf2e9d511e0912e3c49f3",
+      "bytes": 77680,
+      "sha256": "d741f2f9fe3d2f55630f7febb546b028a4e5c81968e8f58560fadddf778b9ece",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/css-before/base.css",
+      "blobOid": "3fa5aa0f8b0b5f7d7f556af383b87ce5a6d1905a",
+      "bytes": 25241,
+      "sha256": "62ebe9d102f29d9e692289461a0a2a853e6110a00bc01aea24124c1d5f62c2f7",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/css-before/round2-locate-expedition-map.css",
+      "blobOid": "31185ad64a9d2a667390ee00b52903381dfb04af",
+      "bytes": 8112,
+      "sha256": "86b26fd323e4e890c48cca02cbbfa801a3cc53b6b77a9a2b67d9984405e2c1d2",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/css-before/round2-locate-winter.css",
+      "blobOid": "2b4d06b6b3f3866a6ea634b30d103f21ecf4bed1",
+      "bytes": 77518,
+      "sha256": "9c1ffeb21cc95e3680846c631eb9d521b05e7eab81fe63769bf173b70dded551",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/css-before/winter.css",
+      "blobOid": "e5f64d257faa8c06a1d964a7c610286d5927207d",
+      "bytes": 77897,
+      "sha256": "173bd5082677b3fcff36c0f0fb9e39c275679b6052fa3568185a0acad414e1e1",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/css-cascade-audit.json",
+      "blobOid": "44cf46ef297403de21aaea1676d434551b68a233",
+      "bytes": 25014,
+      "sha256": "1edb252cd45ba9ffbebe8e13a72757564e3d9c40e497288b7273c998310ff10c",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/preview-http-checks.json",
+      "blobOid": "6e9e81982b0c5b4e3edceffb04f5d8ef17f84d63",
+      "bytes": 5207,
+      "sha256": "040c0fe09b32661c6bd5dfe064389ed7c0dbd6cc8d1903ac9b5060e35f78edfb",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/round2-collections.md",
+      "blobOid": "9d6d0ea66a3506df411f3c0480d4fce2f619b8da",
+      "bytes": 797,
+      "sha256": "5b0894aa9f825fdfaecaa65bedb1c17ae34a2a3bc11657ab9597bf41b2a9ff39",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/round2-css.md",
+      "blobOid": "7bf471f0f7f5689cee7bbcffad458ad29f06c79a",
+      "bytes": 2116,
+      "sha256": "c7c790c0376ab96ae6d6cf4ba4d2806106afd9787ece29337c87a11b0473cf23",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/round2-departure.md",
+      "blobOid": "a5e08de6f3aca7707084af22f0c723861f9d5ff5",
+      "bytes": 940,
+      "sha256": "bfe7213f5e4099cd6e5d843052aa69be5bd6c103fb156d989d8e501d17cd656f",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-code-efficiency/service.json",
+      "blobOid": "5ed1421b2185d9ce99a1c1edba6790d9953666fb",
+      "bytes": 2707,
+      "sha256": "427f73b12bde28f9e06cb5c3af24780ff0a5c2baefb0153f0f92bd2269146473",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-forbidden-empty/receipt.json",
+      "blobOid": "90a53230fa5bfa3721bef262ea8b375c65b042ca",
+      "bytes": 3378,
+      "sha256": "6e659312ffcad32d68d569f0369f1641434ab8abebac56a8a4bdca546c3cea2d",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-forbidden-empty/request.json",
+      "blobOid": "3c311193ea5e0004011e3ffd31afcc409cbabe1e",
+      "bytes": 1128,
+      "sha256": "5a31762069faf5f4fe1274c294260a0b2d284855f72272549b9213c463f4a90a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-forbidden-face/receipt.json",
+      "blobOid": "7f90d0ead19f935b3ee16ee736047848daf51f99",
+      "bytes": 3363,
+      "sha256": "1f8acd98ca90a806abbe9282468304e996f5766a8d820cc05c1f1cc0edd2a9c5",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-forbidden-face/request.json",
+      "blobOid": "428f59bc9f7fe575d5b15fc31afa690432315774",
+      "bytes": 1622,
+      "sha256": "32b697ee3308379929733e9ffb64200576c4c8cd72e32f26451cebe88f02f67b",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-heavensword-dual-install/receipt.json",
+      "blobOid": "2aff31fdfae926c5174f523f90f09932053aaa23",
+      "bytes": 3392,
+      "sha256": "2e9aa11b6f556be011a59e5fa5214427ecd80b06f9f69dfd52fa5f5d0f719abc",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-heavensword-dual-install/request.json",
+      "blobOid": "d507984baed550c8ad22e70a972fab936af5e0b4",
+      "bytes": 10543,
+      "sha256": "205a769913d9c69b60790a3bdf6675c7b2108d3c6cbeb4cff976ea3203f93a76",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-heavensword-install/receipt.json",
+      "blobOid": "5b5c3527f0d6f7d60ea0324cc26ee45525cf10ee",
+      "bytes": 3352,
+      "sha256": "e227732a7dac1459150a3e9470db3054830ea2ac93961040247a1cd43427fa20",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-heavensword-install/request.json",
+      "blobOid": "094f4beabd73eb8248bdf3f896ed6c252cb3c83a",
+      "bytes": 609,
+      "sha256": "cece654ef71568f759637a912b0831629ff9bb90e3ed0723a26b71372d132030",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-myriadswords-circle/nai-payload.json",
+      "blobOid": "b669e533530911557bbd328b69a4a0bfd3b1d2cb",
+      "bytes": 6937,
+      "sha256": "ce08822b2aecb77a65e579c46d9bdea8c7557edccfa5be251c65be76b46cc4dd",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-myriadswords-circle/receipt.json",
+      "blobOid": "fc28f8e5ee00fe0d053c4b2808bd9af9d310545c",
+      "bytes": 3429,
+      "sha256": "f68ef3eb2dcc822320ffa38d53479741e0739e823ea82c8a0942b62a05f51c56",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-myriadswords-circle/request.json",
+      "blobOid": "e4b34a126400fe73d5c3a7ebdcecc976a1e94273",
+      "bytes": 3041,
+      "sha256": "23952444a6166b1ffda872eaae7f80d08e7494b4c10c52175d73d1a12e0fc3ba",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-myriadswords-draft-more/receipt.json",
+      "blobOid": "69298f2c297ef9fbceb01b96967010517afdbe6e",
+      "bytes": 3506,
+      "sha256": "688333fb47e0bccf58f91690cc355e3cb822e56364c9c9c737a37b41be355923",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-myriadswords-draft-more/request.json",
+      "blobOid": "fb083b2985b32ec0aff91dc7fde5fd30d6bcb0f1",
+      "bytes": 2073,
+      "sha256": "016395e08f3fa89d4ae0e92465c5cc67b8c9b08d2cdbc566305706c9da07e00e",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-myriadswords-many-swords/receipt.json",
+      "blobOid": "738cb57a7a7a48e216406489422558073f4e75d7",
+      "bytes": 3454,
+      "sha256": "63bd8b9b1bef9a21bb3042830cca3c4934c2d5b53dd5aee6db78d92c94b6e304",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-myriadswords-many-swords/request.json",
+      "blobOid": "439ee65ae6eb1946fc3c35009e4596f611dc166c",
+      "bytes": 1902,
+      "sha256": "b174f187bf5e384ee6023cff6d23a0fbcd0a9d2502e5edfa0d50cbfb334f9a90",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-myriadswords-swords-only/receipt.json",
+      "blobOid": "2a5585b7dbb191969a214bc41df7b833481fafe7",
+      "bytes": 3512,
+      "sha256": "47a75c28a8eadb4bf81b5e89de42cb49845a052aef15dfc118d1599eb0e69f33",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-myriadswords-swords-only/request.json",
+      "blobOid": "3788d761427f39059f1380743b0b96234d7887c6",
+      "bytes": 2170,
+      "sha256": "d44c3433f48c24fb49519610f0e6d3da249fb32c35b7bb8d8240f2c41265de1a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-photo-filter-layer/README.md",
+      "blobOid": "29d9e4f28b6790c75f668375781fab1c6e0794b0",
+      "bytes": 835,
+      "sha256": "da90eb5c93b6fbd2e957ec563e99583f890f873c1e5392e23b53c458d951229d",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-photo-filter-layer/fixed.png",
+      "blobOid": "97f5f49f0e3e2791d42997fba60d88fc2f14fd00",
+      "bytes": 164280,
+      "sha256": "3753a26cf7330802399ebe69c4e0937912c762cf07a263b6993c821758d72456",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-large/receipt.json",
+      "blobOid": "ac36288f1171c632dd4c424ac6f78d67a6c29150",
+      "bytes": 3383,
+      "sha256": "0a7d014f690c0494cf4f848eef37a1ec9c32976a184fab0341d0906f393edbb7",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-large/request.json",
+      "blobOid": "9a57b9964a4a2766f9f054e7713323037be5a701",
+      "bytes": 1341,
+      "sha256": "567affbb484458ab1f99c2ea142dd37d6cd0eb58d9044320c286acc3b589957b",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-left/receipt.json",
+      "blobOid": "c2a852b742512b90d95802e41bc615694d3c75a1",
+      "bytes": 3373,
+      "sha256": "c9001e8b901a7f1caf30dd89741422be0491836b5149ba9ebdb6e75f8f36639a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-left/request.json",
+      "blobOid": "77121ecf9d8cbff8f0218ef6a24ea44157ad7d49",
+      "bytes": 1121,
+      "sha256": "c91e9d2b3980b6fb4aecc626dc01a05bca7dec08b9cfa599c1fec6547498d072",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-oldgod-slit/receipt.json",
+      "blobOid": "ee1276b0c591fa82a982d4b574431c04f1923869",
+      "bytes": 3403,
+      "sha256": "7b647790c3c1e732d42f7e97f4e5c05e0a7897b7522b40b0b1b7338df54d67fd",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-oldgod-slit/request.json",
+      "blobOid": "3d538f00e8360e985c9460aa278c5054b1f14df6",
+      "bytes": 1371,
+      "sha256": "dea1d9ca88061ffeb7b588e40bb7cf1589788fe9dcb6f72aa2adb4a632be65eb",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-oldgod/receipt.json",
+      "blobOid": "8e54c9dfada18b5edf8b91d85ce9fd699a174a06",
+      "bytes": 3377,
+      "sha256": "b8bb1954d9981de66e56d96b42a9f616b50ff1763180a468e5891721308904cc",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-oldgod/request.json",
+      "blobOid": "1dddc0b60dcc64e3c7994f42108f7226f5456044",
+      "bytes": 2559,
+      "sha256": "94f087c4e654d57fda98516e3ed6c15bba6238033c2f5fdd253ecdf408c80642",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-sharp/receipt.json",
+      "blobOid": "9d694a656b6e8e506acfdf3a8e5ac60ffab86756",
+      "bytes": 3376,
+      "sha256": "ffc96ee47c4e6d4b12cedbf23c87388643f2a53ed827070e97fffdb5d567dbc3",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye-sharp/request.json",
+      "blobOid": "677face4d091aeff8fe65b8dbdeda8f392fbdac6",
+      "bytes": 1956,
+      "sha256": "444829e99f58c8bad5c1a2881b1b4595feea79628c3045647458dadc5cf10151",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye/receipt.json",
+      "blobOid": "6636efe5e06414696b9adc07934ccbab2b5da6dc",
+      "bytes": 3354,
+      "sha256": "e83b968d3047032e235c33ae63c9e289ca69f684bfd3b1443109a0df3d8a6659",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-volcano-eye/request.json",
+      "blobOid": "0b38bb324644ced7c7fe113ad0d0316010d6dc4b",
+      "bytes": 1452,
+      "sha256": "2c07c844ebbecfce0aba3c22bfe65936f9b2c1682dd7bd3ccf85c4c02fba436a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-white-plum-install/receipt.json",
+      "blobOid": "bdae74caad8a194323ea4dea9fe0e7ddb39aa4fa",
+      "bytes": 3275,
+      "sha256": "84303b1a641de705625382452c090c3aab854ae626c3d6c56a368fe3af50f4af",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-28-white-plum-install/request.json",
+      "blobOid": "1da24acc113c0ca014e4eec634d6c6855fe711e8",
+      "bytes": 673,
+      "sha256": "ebb3488c9622c3046ce04919961c29634f1f463cfb854834d5c98a0e95d3ce83",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-home-option-light/README.md",
+      "blobOid": "2120f2f99cb8e8157d1bda58e4a3d2a9fd265fef",
+      "bytes": 603,
+      "sha256": "3b9eb9f1bb72b24057268acbd35d6c9a78296679e62e29a0ec4253367d8cbc95",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-home-option-light/home-focus.png",
+      "blobOid": "cafafb52eafa21afdf5a05ceb9364e73f445b521",
+      "bytes": 89486,
+      "sha256": "d5c3f7090797ffed86ddbe2739fb5a4bb48636721e92396df8c7f22c70939efa",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-base-geometric/README.md",
+      "blobOid": "d72a2a01a2da21721bfb1b8de8c1132e95c84386",
+      "bytes": 791,
+      "sha256": "450859578135d4d3ef9a2e3068f498a7db24f3cc4523e1550a7842aca96727c4",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-base-geometric/docs-check.json",
+      "blobOid": "229f30856816b0a2ab0e3a988a18b401f1cb1113",
+      "bytes": 2895,
+      "sha256": "6d2a98eb5334f0cf1a88e61b0c846e07e583b9683f8bf131c878944bd445cae2",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-base-geometric/overview-fixed.jpg",
+      "blobOid": "9ad1a513f19f0dfc771514ea6f9b87258d57aec2",
+      "bytes": 68266,
+      "sha256": "f07caba3d447b9b87b92264dee3d6604e291b8aa31a94cdd6f60289d6d6289cd",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-base-geometric/tour-fixed.json",
+      "blobOid": "d88e74fb9ae04e5544e0fb74df542d469ebd3b11",
+      "bytes": 1918,
+      "sha256": "3ac054618ea24bde5bbae07c8307fa8f7925000e521e0742861519100ae8a78c",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-31-unity-github-snapshot/snapshot.json",
+      "blobOid": "553d0671256ca07b3fbd13ea8759e228ce1c8577",
+      "bytes": 649,
+      "sha256": "c079b907d3522e477a7daa682e569f38c1c4c6dc4e9e68467eb78c7838f30b39",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/README.md",
+      "blobOid": "4a2a5cdbed4b23e3aa5451287aef360f882bbfc9",
+      "bytes": 2313,
+      "sha256": "138249d49f86065c7e94dc0dfb63e701860d47c198f705d407972b619447f96a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/acceptance.json",
+      "blobOid": "0aee844f25b40dbc1c8fd64867384654a608ea69",
+      "bytes": 3798,
+      "sha256": "67499adb1d4adb6a38aa5ee6152a8c8cf7cdba8f19dd8eda7b9904b02d8d7bb6",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/asset-consumer-review.json",
+      "blobOid": "7325efb10cbca22e24a6f0b276ed93884c09a0ef",
+      "bytes": 17614,
+      "sha256": "8a9fbba9be9c9b470f765687face315ae6c526bfbeb4867ef0e710aad02ac318",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/asset-fingerprint-update.json",
+      "blobOid": "a7e668dc1ebdecde1cf37c226f5b5f68250d8c77",
+      "bytes": 2275,
+      "sha256": "e95d38a0aa052c052c7b9c789cb46eef9f1dc09e46dea8bec32a8bc37eb5af9c",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/battle-failure-repairs.json",
+      "blobOid": "b4e7bbdffc6c973ec14bb5f1751413e084085be0",
+      "bytes": 15331,
+      "sha256": "43dea6551b2aa5ddb21379845860950387c035450e728e114455db8269c3c62b",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/guide-copy-fix.json",
+      "blobOid": "4f47572005d1f201c3b1cf06da1b7ee8c933de26",
+      "bytes": 420,
+      "sha256": "467d947837b1367fb6645695572266ee1a99db5cfe983269be72bd8b8889be6d",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/hub-fixture-repair.md",
+      "blobOid": "b70825b86c55302b907db7954729ea3e8c6fc5fd",
+      "bytes": 4642,
+      "sha256": "5e407fa5337dcf7169efc8a391909f33dfcf8122219293b65fe32783f4b153b5",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/hub-followup-manifest.json",
+      "blobOid": "09d62a4f3d3308363b0ab750e7345d62928f521a",
+      "bytes": 2027,
+      "sha256": "78a69e4e1252be8fe0cb1ad0db7ed18601824199a922f11a508e06d81eac3a42",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/hub-followup-repair.json",
+      "blobOid": "c05a76015207f1dcf2ff11b1e72929f296af46d7",
+      "bytes": 3079,
+      "sha256": "93ce9c870421afe48e6cfed08bcd96e04391ba5c01d785872b75856344045894",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/hub-repair-manifest.json",
+      "blobOid": "a858604ac8421dbe948a3d8d92bb1a437b6ca838",
+      "bytes": 5112,
+      "sha256": "a3df7af45a413f56488d90f1eb2305e35899f4e9f158b2fc3e84a0d6b2465830",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/native-parent-prerequisites.json",
+      "blobOid": "98769233ea5c2cfc28be1748258018c68ecb2fb5",
+      "bytes": 1630,
+      "sha256": "9e4605f3adf42b5d1bed39be507c06e44cf4e15d1ce9727c235add5cf6435ec7",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/preflight.json",
+      "blobOid": "d63c2654b056fb224716d9284a2894f3917fe5f6",
+      "bytes": 216,
+      "sha256": "f465ae47dad150b815af18e121e636988132fb128ae3a72981896faf8270e3f3",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/root-session-repair.json",
+      "blobOid": "a4dc545fa8a5b94825596d8b60a531e7f7d52617",
+      "bytes": 1052,
+      "sha256": "7190d7496726c0000d085bb4ba512f5426b71548c10804df88979a2ab703bf93",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/root-targeted.json",
+      "blobOid": "8d6cb36536e9c2eaa947827729c6733a92d5ea2b",
+      "bytes": 566,
+      "sha256": "6828cca2c75fd4d42938347446904c636590b2bb6165124deda7acff5a2cb88d",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/root-terminal-final.json",
+      "blobOid": "f0cb0e675a708fcad8f8f855177f7f3d64f1f14f",
+      "bytes": 1704,
+      "sha256": "530201ae0be3ac395b7c3981898efb269c933f877ecbee7e90a256c1998bcc67",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/run-domain-repair.json",
+      "blobOid": "17cf17e885d5a181ff20fb1ea9f82973bd15b9f7",
+      "bytes": 11438,
+      "sha256": "950fe16d119038c10dad3dc2f9c5510ea68d52ea11ec8a7173828ff34526bf1c",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/static-fixes.json",
+      "blobOid": "edb6cbc8ab32922887bfd77e2fec829d7f7a7c14",
+      "bytes": 1697,
+      "sha256": "d2375bc4c0e3398cd019fa8203fe6bbc596e29bea5eb06d84d40e55e85abbfc1",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/task.json",
+      "blobOid": "89249558479a8b9497bc1dbd1d881918151de359",
+      "bytes": 589,
+      "sha256": "c9adf55365162c16d6621e46d5c7b1d6ce117ca9738d3ec5d9bf6d615b615fcc",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-altar-focus-repair.json",
+      "blobOid": "e972f87909eeb034ccce87291ed6e348d7d00329",
+      "bytes": 4406,
+      "sha256": "fdbb2fb6f78465aca701c4feef054d96214e073d72195e5c14c2c190d2fc40f1",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-export-copy.json",
+      "blobOid": "5f86156b84d037e34b44a047dc674048835fc3fc",
+      "bytes": 394,
+      "sha256": "546d5c9c346e252682c9f7f40317870a792e5b29705bc0c0c9404d6a81be8b0c",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-final-product-manifest.json",
+      "blobOid": "ad0edd27682979d78e3a3cfebf2afccf6e47d236",
+      "bytes": 30800,
+      "sha256": "54cc6fa243cd4ee4486f3ed19ba12e7644e8c499ee1682c57710b6c2ae97b8f1",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-local-commit.json",
+      "blobOid": "fd5b1ff1cb6503cf8d007ce5f417348b9b84ed1a",
+      "bytes": 327,
+      "sha256": "c2ee9719d75dbeb31b75da04ec03b7b4c7b1aabb248b338ccd4b6a334eca8a9f",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-local-evidence.json",
+      "blobOid": "987e999b154487a142d0314c5c5216d10340ff7e",
+      "bytes": 18086,
+      "sha256": "9d5a43816d41bce05a7217ed9d8af93cc07f26a434ba0e4a32b024264294babb",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/unity-precommit-review.json",
+      "blobOid": "31a46e284dd374ede161a67ff4acbc75effb21cc",
+      "bytes": 266,
+      "sha256": "6d9959fceeedeca0b34cfc71030a334b3be22cf08e156168a461567d5c0fdd37",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/vite-review.md",
+      "blobOid": "147e3b68171eedff855ab6e3f11ec4927e810995",
+      "bytes": 4774,
+      "sha256": "580ff6c5e0ddf999e7e5ce28366ad405cd21a8e0cfb978d8497d2472e7bdf84a",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/vite-safe-candidates.json",
+      "blobOid": "298885591a9a3206a7defb6d706e0e12c55c06af",
+      "bytes": 158590,
+      "sha256": "b8cca49e05499864c99bdbca1bb20b0e376486618cc53403109ec54797ba6404",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/vite-safe-file-manifest.json",
+      "blobOid": "3390165bb1f0ea65f3e0b9bd007be84c807a9a5d",
+      "bytes": 119382,
+      "sha256": "7f0078f92a6f52a09040920297875306d6c93e9ec8f93fb3e5deef846df043ee",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-github-sync/vite-secret-scan.json",
+      "blobOid": "6885ee929884879680c54dc951c012fd11e49374",
+      "bytes": 296,
+      "sha256": "6284ba2826aaf24cbfb360bd93469d3d9abd6398ff788a78bf19d7d2673b4d83",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/docs/map-travel.md",
+      "blobOid": "6f8e84ecc293b19b3af6ababb08b72616392ba7b",
+      "bytes": 8510,
+      "sha256": "385977c888fb99fe05aa5a2751924d0cae0def1c17758c6925e1914e793ddb26",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/docs/modules/secondary-ui-style.md",
+      "blobOid": "49d31f94278b8b68792de9b9ed7b0082644d4d18",
+      "bytes": 22746,
+      "sha256": "cd02a4041f6831317ebea9881394912b2a3fc739e49a2d499db69991b38638a4",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/docs/roadmap.md",
+      "blobOid": "87f7646777e64f75f35fdc29a5265771d35f7244",
+      "bytes": 11335,
+      "sha256": "6e3646174742d000a0610ec58e075de7e43dd8d4363d7a05ef8440eb77753344",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/docs/rules.md",
+      "blobOid": "b4cd5c0f8ae8408fd57dbfe2129439edd42d0cbe",
+      "bytes": 41858,
+      "sha256": "016e9fb3159d4a8b94d3175bbeba7fd03364dd56daf3292d516d9921f1f8c2a9",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/docs/save-format.md",
+      "blobOid": "84e5723c6dc2d43d7344e7d37e2ba7c4c8e41ba9",
+      "bytes": 33937,
+      "sha256": "1b131cacb5d2da214230557d3b37e6a2c95012fa5a89a47b7c9aa2d227910033",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/asset-manifest.json",
+      "blobOid": "69f0cfe1f570d3f1d90f3dd04cbb86e6f4ea1fba",
+      "bytes": 644904,
+      "sha256": "6324df420a1b0b6ad0fa4d2c2b1b1f592f9c38947ede0e8f99f824f357b87de3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/cards/bound-shadow.webp",
+      "blobOid": "2e66e0128eac85d8336655dd4c58583d74663487",
+      "bytes": 266738,
+      "sha256": "f54d4961815e715ace36d45ad139bc4d4ba670be0e047b93ed9daf1115a332e8",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/cards/dark-eclipse.webp",
+      "blobOid": "2f165cedb08bff0c969e22dcedf23b4bc55e7299",
+      "bytes": 111024,
+      "sha256": "23cf0e436f27721018be0f5bc869b8d55a87c5baa39c03a12822cfb4c4c7906f",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/cards/hero-abysssovereign.webp",
+      "blobOid": "74ce67e0f136f221b97442080ab8b069f4ecbb1b",
+      "bytes": 220688,
+      "sha256": "5ea1dcfca6712ed08b896387b3d6920100fad55c557ea0d8df3bacfa1bb59f68",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/cards/hero-summoner.webp",
+      "blobOid": "12f5aff4c5091d7d142d85b1e89164ab0c0a0c24",
+      "bytes": 146820,
+      "sha256": "fd6c6f95ca9114190c280f4c072b7ac6d1003ca57c3cfa45b1e6103ce6bdfac9",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/cards/hero-volcano.webp",
+      "blobOid": "e1a170a0159824ebad6364d58f260f7d54eafd20",
+      "bytes": 259670,
+      "sha256": "f15dcc3675992f5515fb9ccc93df898d15f2b4c22837fe40b5c186d14e50e079",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/cards/wu-heavensword.webp",
+      "blobOid": "8c9a71a851b6a2b2c15b42363db99a01a4556d77",
+      "bytes": 134308,
+      "sha256": "d84808e429ad8c6de145af97445a58f45e6afc79475a3e52d53cd931c952f532",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/cards/wu-myriadswords.webp",
+      "blobOid": "956a47f7bcda1336ebf497a94336b5b7aa884150",
+      "bytes": 278346,
+      "sha256": "0faad1ca6c035acc031f4be066ac2bbfd42ba0b53d6bd38d0d1ae948a9c79eab",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/cards/wu-void.webp",
+      "blobOid": "aee05c864b3c32dcca5babeea16726e3cfbff09a",
+      "bytes": 157196,
+      "sha256": "d898b6dc5561c8c121f08777307b344b6fece536c9043fd908c88c5938fcabcb",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/thumbs/cards/bound-shadow.webp",
+      "blobOid": "c646d15e93fc5a3919c8f85bc420f42411f59d2f",
+      "bytes": 25540,
+      "sha256": "657c82bde374177fd525ccb071a0fcd68deb9467cbf5f2948d7ec08519468aba",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/thumbs/cards/dark-eclipse.webp",
+      "blobOid": "5f5e44117e0a9c7a8eeb35c6094b8dc3a42680b0",
+      "bytes": 18406,
+      "sha256": "da445ecea660d852d62047757ea96a2464520b445842271c3b52ff9ba468d754",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/thumbs/cards/hero-abysssovereign.webp",
+      "blobOid": "d86c8c5c0440c152272c0d67a01a371dc5d7892e",
+      "bytes": 31350,
+      "sha256": "0f69c907c90a2a5a07156f6a81b55cc979bfa4329e75c468ed4c1cc3e6c1b8ce",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/thumbs/cards/hero-summoner.webp",
+      "blobOid": "cbc02edc04a59f5d2f600cd45259d4b4ac78ed0d",
+      "bytes": 22992,
+      "sha256": "1d163184deebdea57b32bb0edf8a2df242bf71e116463b6bba7d74bc3cdd6a42",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/thumbs/cards/hero-volcano.webp",
+      "blobOid": "37d8586361bf8da632df3d21e0b8197cd8d64213",
+      "bytes": 39060,
+      "sha256": "bf81b97167ee3e9b01fb78ecf459eb389a7cb971bd51591f294cc399f3fffbdd",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/thumbs/cards/wu-heavensword.webp",
+      "blobOid": "bbc5589335fb31bfbe6ed6cbc1549824e04ac96a",
+      "bytes": 16164,
+      "sha256": "43d5c5125ea84a032b3df69bca6d8a26996b8871bef788d429f72cab98aa3b41",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/thumbs/cards/wu-myriadswords.webp",
+      "blobOid": "75d31a2ce9c20113689ceb13b5a8358fecbabfdd",
+      "bytes": 29682,
+      "sha256": "2f54aa3004337fc801ce24905062a7a5fd59d7a73998897c3e016df377ea01f9",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/thumbs/cards/wu-void.webp",
+      "blobOid": "865a32374ff21e36b9d80e8e1356ff1af802307e",
+      "bytes": 21322,
+      "sha256": "107de7241c21856c4e128444d00a31b3323119035c9997e579292e7b57e38a8a",
+      "utf8Scanned": false,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/assets/ui/beginner-guide/battle-live.webp",
+      "blobOid": "22c85f75c30f157126cbfe1c6dda2767a879b6c3",
+      "bytes": 122092,
+      "sha256": "869bdd84cde555c1e667b00bc6da85883dc34d3668fef3762a8752ce7d5782e5",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/assets/ui/beginner-guide/extract-live.webp",
+      "blobOid": "22c0615ab99f5db5ec6ffe4d197a49eac75a17eb",
+      "bytes": 40956,
+      "sha256": "d38c695fcf7c7af0f854926082c1f87bb26ea5f2bf57a88491d57001e2f4d8d6",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/assets/ui/beginner-guide/growth-live.webp",
+      "blobOid": "fe7f76ffb53363a1f2d1570d80c88182f448bed2",
+      "bytes": 46192,
+      "sha256": "43e8ad018f530985cc6953347995d08757fa2d0de05eba7aecee2fb5ac8284ee",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/assets/ui/beginner-guide/loot-live.webp",
+      "blobOid": "974bcded6886ae3183af54faf5791c059e0c9061",
+      "bytes": 29800,
+      "sha256": "c8c88088991cb6448bb0e6c49d5464267f39d1d4e1e9508bf9af765f56178231",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/assets/ui/beginner-guide/map-live.webp",
+      "blobOid": "aa321b2ca439ba7ce7f77e8940ea22f7a29fba41",
+      "bytes": 51974,
+      "sha256": "6337e3edab0356618422b04da071d96c83e7e919f9b1d1d005538ecbb2575808",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/assets/ui/beginner-guide/prepare-live.webp",
+      "blobOid": "931d61e6db097f562e1b4da04c2c6ff8ff4691d7",
+      "bytes": 84684,
+      "sha256": "a54a551ac56617163cccf7a6dc367ac3df186a61aa301271385b7cfee0110f72",
+      "utf8Scanned": false,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/css/bag-design-system.css",
+      "blobOid": "f982d3f035e456b491bb52b985914c720c61d38e",
+      "bytes": 8372,
+      "sha256": "f334253767c5ede35db6d9b7b240a4885cc40961a3488f02c8c6da0228e01161",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/base-courtyard-v3.css",
+      "blobOid": "49af4e7c0f1ba61cd3caed2f827f428f3f3819d0",
+      "bytes": 4365,
+      "sha256": "977142ab7ea86d39897fcd03b624d9506f246185c0c8da64020b9cd3a10be007",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/base-framework-v7.css",
+      "blobOid": "691bf4e67a1f6804f26722b7bf1d883bbc1124b2",
+      "bytes": 7301,
+      "sha256": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/base.css",
+      "blobOid": "e427965419a1552b237ef8242fe6ee0f72e75005",
+      "bytes": 24092,
+      "sha256": "2da446bbfe8e78c46f9a1ef489737362e5c37cffa14bcc1e425453e91acfb0a3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/battle-card-consumption-fx.css",
+      "blobOid": "26652dfc925dc51c421d4092f3ae2fe661c02367",
+      "bytes": 1152,
+      "sha256": "a616a779ff17c4a9f21418f68ad246bf2b7836f7025c21e6096b1607d399b81c",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/css/battle-equipment.css",
+      "blobOid": "fcba8543836dd364766f19f3cb3110d1d7abcad6",
+      "bytes": 3266,
+      "sha256": "6be571461bba029ab1abce4a7f369f08c1581ac2e211a3acad2c91a3630c8ff2",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/battle-stage.css",
+      "blobOid": "a8fc0164aa798298305cae33e00bda75b3cf604f",
+      "bytes": 27555,
+      "sha256": "273bfe40f3c24df00df28acba0a5ca1c48c0b9e0680668dfbd583b30924afdb4",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/battle.css",
+      "blobOid": "c59b2fd2194b75f1168ee85e64af5c71caa3162d",
+      "bytes": 27074,
+      "sha256": "3cf911a16f2b119efec19aafacaf2093aa2b145ca67c1100f6c884df33b5a0ec",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/beginner-guide.css",
+      "blobOid": "df949d9b399ef9784406f766b448b71dcfa04c4a",
+      "bytes": 10637,
+      "sha256": "769f8f4d90f1945c9a0bc6597d576389a0a65e974d76ad02433c64076841bc88",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/cover-battle-shell.css",
+      "blobOid": "ab485f1a7c8aa0962d084e4d9f3cd83d49cf68fa",
+      "bytes": 12112,
+      "sha256": "963439e0089ced81889a71e8557b3e8b552271686cfe7f4171c424749948cec8",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/cover-details.css",
+      "blobOid": "10c2da262272d84877bc7d804a69dd56afe4b9e1",
+      "bytes": 5607,
+      "sha256": "17e735fc0467ad773d007b41ef2dfad6a4f6e981c7c2fb0b93ac9b2dd0747906",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/cover-run.css",
+      "blobOid": "6fc3d2267bb5150fdcbe0694385981d1e3373116",
+      "bytes": 15532,
+      "sha256": "a462d830a7b9ed7c7f6a51ebcd7b67e1837fa7f8c7f9b478c19d11acd3feefbb",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/cover-system.css",
+      "blobOid": "d34c95b08892b06aa0e8f279341c36d0bff6f98b",
+      "bytes": 7566,
+      "sha256": "7ace5390c6f756fa4ffae0a8a0f1447e2389f2e418da87429b4cd9a34d5fc85d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/departure-selected.css",
+      "blobOid": "18405c77740f1f712ddd8342601f5858753b01f6",
+      "bytes": 9000,
+      "sha256": "0790bfec6a1c0536b66a8dfbe6c8f1c905c10951d76e1ec006ca54d1eb89117d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/expedition-inventory.css",
+      "blobOid": "22fa9ed39bd50b2dde972864527c1d1bd8d7c56f",
+      "bytes": 18807,
+      "sha256": "7136bc5273a8e8601285403ba226c576526d804dd1db6b53e01cc68171fec3f6",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/expedition-map.css",
+      "blobOid": "1e544ca4e24276dcb6e4beafa40fa723a6bef292",
+      "bytes": 8082,
+      "sha256": "993d85e1758616cbaae1b6d551e9740955760c4c4922216f85bd9ec22b242d8b",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/expedition-shop.css",
+      "blobOid": "1a9210c19ffe189838ee09e4f220ca7fd26867ac",
+      "bytes": 19034,
+      "sha256": "fea202aebf256b235d7d3a1b3d0cf5a1b878f2d11b1bca0b23880a7c580a835a",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/feedback-1018.css",
+      "blobOid": "a46bcf1e7ae280a4ab53173043e36bf0d75add5e",
+      "bytes": 1575,
+      "sha256": "f7044bbef00d20a200a5f29210db05d42e7349944d7f557aeb20b9730f249149",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/feedback-oct12.css",
+      "blobOid": "7aa3762876e4ca9e4d28eb6cd7394602d3faebf7",
+      "bytes": 4142,
+      "sha256": "1a44bd9fa40e4ba6d098f92a0ecf0166a318c69681144d80694608ca58ec8e58",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/home-polish.css",
+      "blobOid": "9304cfedd66e45c9dc93edd26c1e317803d871d7",
+      "bytes": 32660,
+      "sha256": "273b3edda4ab85150240ceb7e1ab6a8c9f03b05aa308012d03fe48775bbcc323",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/page-rewards-bag-help.css",
+      "blobOid": "f781e5dff06799f4d42c00e3e87e64bc02d2f7ff",
+      "bytes": 19706,
+      "sha256": "82d3871b5ffce7983b7324f2791d5c64d7645e2b9926eeb6baa412be845502e1",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/photo-studio-unified.css",
+      "blobOid": "c0ece22d09a5b70be93357fe600756a2addb7859",
+      "bytes": 58808,
+      "sha256": "07b7e9704e6eee1291871b222beb95a8a3c08c67014193033df31a3211514329",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/public-controls.css",
+      "blobOid": "fd1e1a4d7c8041e1c177e78cfe68838502d5c93b",
+      "bytes": 6024,
+      "sha256": "9851a527c1d0cb75de9f28a91394a5cc2b9094b719f580b80d2ada7d51ab11a1",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/room-footer.css",
+      "blobOid": "cd43dc09459db91a90c087f1679d259a6e7f8256",
+      "bytes": 1326,
+      "sha256": "74323c44d305021f3d243c838146975fb5ff272ba9bd1a33ef402ac3142042f0",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/room-rewards.css",
+      "blobOid": "97bd016317240f04f316af7dc9d88033f825096f",
+      "bytes": 6441,
+      "sha256": "7aeae825b4e87e10a2878d78951fbb57a357ac939ab9a59aa52364c3c8e31dd3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/run-memento.css",
+      "blobOid": "6a9d8cb95bbcd9bcef0a07dfd5925f497b34f93b",
+      "bytes": 977,
+      "sha256": "10fc0784cfdd4b4ba11c9ffa3fd5a2c6842fe99e282302b08c98753373758dc2",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/css/run-presentation.css",
+      "blobOid": "8d87cc2459dc8966ffc0819215e57d0692eac3d1",
+      "bytes": 2450,
+      "sha256": "b5d8c169bc23e1d9e363283e325215d621c63a00047aab337a5f4f0f661fb8c0",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/css/scenes.css",
+      "blobOid": "d2135158801e84d4e1bb62476a98835b2a0da95b",
+      "bytes": 36764,
+      "sha256": "9be527e48ad33325803b418a8f1c0fb09d04ef401cf21a7d0649e41805a39aca",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/css/sfx-lab-1027.css",
+      "blobOid": "3ff9544f18ef3fec5ac3c6799ac39a465a3cfb16",
+      "bytes": 4026,
+      "sha256": "e50261f3855729b665b4a36d61d65c4cfaf0a04a868a39ec4d2733dee25a67ca",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/css/winter.css",
+      "blobOid": "b448d697d9a17db5c90aefc642a534a97a29dffe",
+      "bytes": 77061,
+      "sha256": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/data/art-mapping.json",
+      "blobOid": "1a1c42bd891d43920b525f4b4c38b3018396b33c",
+      "bytes": 22268,
+      "sha256": "8486dbf00b069ea144d8a000a56d289f55ba15506b1f770ba801991a3e7a982e",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/data/beginner-guide.json",
+      "blobOid": "b05e4cc440b43118cf8a2e47886ec90f9751cd6c",
+      "bytes": 13370,
+      "sha256": "6d5775d8481e9feb379edd0e27793092aa35fde049ab7fad976c7def187d3bee",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/data/card-notes.json",
+      "blobOid": "84c0c179030cd139de00d7a354b6d26a2aa02cdd",
+      "bytes": 22418,
+      "sha256": "64db0ff972f98782a88ca483319abdf1b24f4b7b12a25ec1ec5be2019963fc24",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/dev/hand-pointer-review.js",
+      "blobOid": "0064b6a7ae4e621111bb9a85412ce49f600a6bc7",
+      "bytes": 5668,
+      "sha256": "15f482f4148a75c0970a5aefb76b3d0f3b576f2fd1f9e210cdaa0d58d9211846",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/sfx-lab-1027.html",
+      "blobOid": "9443689ace557cddbc416344e8625e2230bf4256",
+      "bytes": 2513,
+      "sha256": "367c4de2b304305f077c93fd9685e93de81333e689bb9497f20204079be9dbd1",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/audio/sfx-lab-1027.candidates.js",
+      "blobOid": "1a7fade264ee3665416850a45d7e4f45f2af3c78",
+      "bytes": 10409,
+      "sha256": "2af2e52179a857e8a87c6ed8a2b2d6dea884fe1204e0a24e64da6a00bb1d6de7",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/audio/sfx-lab-1027.js",
+      "blobOid": "29f949c0dac08e57efc5ff5db2b1745e9428d28c",
+      "bytes": 6378,
+      "sha256": "3fc20956c223a897c18c8ad13d96b4e77a2b102fa26e92543f6331b7df02718f",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/battle/bag/battle.bag.domain.js",
+      "blobOid": "de7b852197fcadb2a0ddff16d11966126aac38e8",
+      "bytes": 37566,
+      "sha256": "23b1919fd28ed8a943a2a6fe1fbe4a078142fbc84b024a531c8bdeaf98e37073",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/bag/battle.equipment.domain.js",
+      "blobOid": "d994f6a9528aab789d5afbf9d9bd9aca9a66efad",
+      "bytes": 19715,
+      "sha256": "6d311ba18435cc3d6c433e3b9f46506c2dde963798c52947b290d3f330fedc1b",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/battle.snapshot.types.d.ts",
+      "blobOid": "5b2f95f19ef4d0f8899a310645ec211e920a4efb",
+      "bytes": 12596,
+      "sha256": "4641e525dd8cf2807f34cae5fdc4d2fb68d1b73ee66e584eb43857e14049ea61",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.core-ports.types.d.ts",
+      "blobOid": "08137df97eebdc7fec230b474ddf336f8e3293cb",
+      "bytes": 20326,
+      "sha256": "4fcb94f48ea510ab66082595c3bfca0e074d95f52907486081f2d939f5e88b3f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.core.js",
+      "blobOid": "696ff6f138e3978d01ef41254fdfe729f1f36afa",
+      "bytes": 26957,
+      "sha256": "a5d022b113d187ab6cf9bb526c6a48b34001a924136cec539fda9f699a62de10",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.draw.domain.js",
+      "blobOid": "8f8d82eb15f6c1bed3ff2598ba5e68a20082b59f",
+      "bytes": 17318,
+      "sha256": "4f8da25656aa99d7948388d2e4cfc32b3fc27c648e14c961835851f0c1fe7b62",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.enemy-phase.domain.js",
+      "blobOid": "41b5cac2c0748f1a28c08f9600b80445607d453c",
+      "bytes": 33023,
+      "sha256": "cbe2b7a99a493f8911c838184108e3c4539383962c082dd557eee4a7ef18ece3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.enemy-plan.js",
+      "blobOid": "3b9df021a6025250095af9918b6548b109f90741",
+      "bytes": 888,
+      "sha256": "24a79bfd1ddbaf78eb53f12c427b1265312cc0ca06a6901e07fefc17c79dc932",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.engine.factory.domain.js",
+      "blobOid": "46fd5e8a3cee5587cf9a6e025685ae92e85182f8",
+      "bytes": 59522,
+      "sha256": "a570d940639bf533c5bf16c7b12fe0be518dd957d694e598137f34d9bc244504",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.engine.js",
+      "blobOid": "95333e6d169ced9dbbadc3a9572e6f9f9ff77906",
+      "bytes": 6239,
+      "sha256": "16b98540cc4611c963f39369cd91c4c4bb708fcab17af4c41c14626d740fab06",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.exec-play.domain.js",
+      "blobOid": "3d5e4d7fe99f9bd1fbc0dd3ed3cfbb1f60183ef1",
+      "bytes": 32334,
+      "sha256": "810fda471f2e2e4516f481d5467740d9bce72a48d8d3254408d8cdcefde5b8e1",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.lifecycle.domain.js",
+      "blobOid": "ef8e3ca0e4578534d2b2ad6b0f9a77a3eb0797be",
+      "bytes": 30180,
+      "sha256": "b8ccc9d223a148075221084fb8870af3995cd12a54231bdf295866475876ff74",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.resolution.domain.js",
+      "blobOid": "87c292c00ba9a50891ec7b3f234ca967b7ea2f68",
+      "bytes": 58781,
+      "sha256": "9a750bb7d6ae43abe564306cf3a08e9dfb17b7a8099e53b78a64e4714fe91695",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.selection-flow.domain.js",
+      "blobOid": "1dee6300032748dccaea1721b369818db027a4cf",
+      "bytes": 21303,
+      "sha256": "7961fc85a271a284a292f1d8fe697d422a2aa2df9b3cc7c51307c7a934ce1145",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.setup-mechanics.domain.js",
+      "blobOid": "36ecf632891a48b9cccb34a531603000aed143da",
+      "bytes": 10179,
+      "sha256": "7ba6fa0bb6541cb072448f1fb000b56b93ab4919d96bdf2a1e8801524f3a25ce",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.snapshot-projection.domain.js",
+      "blobOid": "4a9e71dd7afa19819edfda6d5ff5590961c5afd5",
+      "bytes": 8068,
+      "sha256": "5487d4cb01e3b611c1170b0c44329ac797c733a81a83fd566c29ad048f77b7b0",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.turn-continuation.js",
+      "blobOid": "a68175679da82122659140b1be8f7e7bba540c99",
+      "bytes": 3809,
+      "sha256": "df53b69f0d2be97e7f939aa1ab99c3e9708e3c9aa2547b9c386c81c7fa817533",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/effects/card-semantic-operations.js",
+      "blobOid": "8d42e413f68d216f3d4c4ce4533e96badb58ceb0",
+      "bytes": 11662,
+      "sha256": "f6ca70bd91283121110e52e6a958e68acb2a33c3b7dcac5c5769a926ed208fc5",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/runtime/battle.snapshot.js",
+      "blobOid": "04748a07b812c855835bc8e32d2a1e95e53d8730",
+      "bytes": 9912,
+      "sha256": "b9bdc3d924bcb1f2565144a020e426e112f37dbcb406846409c7aa6b47df3353",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.aim.js",
+      "blobOid": "da744c3b75459e874d4babfe705e3d8f6d9098c1",
+      "bytes": 54159,
+      "sha256": "96bcab11040bfd81f4cb6e4b52649b24199e94d43bc743ede5de0ce938ffb0a9",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.anim.view.js",
+      "blobOid": "aeae5fcb9dffed62888095d2b8ac0cbf172b8377",
+      "bytes": 9851,
+      "sha256": "79dd9ed2c06c0c213b24fbdfe2a425d93310522131b41bd140857c09e7cfde62",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.card-consumption-fx.js",
+      "blobOid": "5a5f49c2fac73013981810fcac8d4737f36f82ff",
+      "bytes": 7999,
+      "sha256": "35ae2d456ef59d8db5fa71b6227047785c954057e5903ff6329ab09241fd2230",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.card-results.js",
+      "blobOid": "30978b8f1d19a660c4e4ff93405d5c9691c1e1e3",
+      "bytes": 182,
+      "sha256": "53539b9d356867b4da7a31b97874255d6660678a0484f58f1756c93d7114b3b7",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.hand-hit.js",
+      "blobOid": "a84dc0ea79bf125f7620ec1e54daed2c2fbac394",
+      "bytes": 7824,
+      "sha256": "5799501cdd55db76ed2fc0fca0dca52440e3a822ee07bd885fb03ce1376031cd",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "blobOid": "37d3124f2fdafc4b779451cfc0fd9f9afeff8dcc",
+      "bytes": 64959,
+      "sha256": "3239cb11754b4569364c2422014bcb5e378663614edaf51534aa2466b86fc7a3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.overlays.js",
+      "blobOid": "1a19a923744ca9be8aae0ec2672e0dbaa400fd2c",
+      "bytes": 8817,
+      "sha256": "bfc7c11c77a695b851d1234de7e2a87b8869e8c73dfebabe1f16063a8eda9668",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.turn-forecast.js",
+      "blobOid": "afa6050ebb14a133eb7d70738ba0101e0bb4ce01",
+      "bytes": 2037,
+      "sha256": "46e3e91a09c7eca70cd9d69a15a7dfbbfd59c39434748dab676d14b9ca24955e",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.view.js",
+      "blobOid": "1e06ff8d6b0d4f331ccb8e907242d85fd16e0c79",
+      "bytes": 58287,
+      "sha256": "534ac316ffa9b442f0dc2c0dac22a1dd173d57f5d3c4a932f77ddacb7e41125e",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/cards/card-description-text.js",
+      "blobOid": "b812cd92b53d63e796d129f0dd8714933c1e6bf3",
+      "bytes": 39382,
+      "sha256": "cc10e433470705dc578b07e088c25d36f0d37fb2eefdd8dea05ef89bd134c92d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/cards/card-draw-explanation.js",
+      "blobOid": "385a3b3dc296c6373de8023db9311289f5d13feb",
+      "bytes": 492,
+      "sha256": "cdebd3c03d273b3d58ecdc696ec6391b07d6d7db4b745d1a3606676eaac45665",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/cards/card-hand-combinations.js",
+      "blobOid": "5e5272057496788a84347d603debc58ee15bc4d0",
+      "bytes": 337,
+      "sha256": "7843a654575e4567ba4aa0e0523a9e6e5fa651b25a8f51be3673105b780a831d",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/cards/card-obtainability.js",
+      "blobOid": "090e6e5043f653df1ec51d38717b46e8450861dc",
+      "bytes": 396,
+      "sha256": "001bc830612ea46b35ea326b126fb625ed84d92fd687f1fbf1b0a1a667565ca7",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/cards/cards.rules.js",
+      "blobOid": "ad18e97c9a46ecaf2562368c3ffde6160df96b66",
+      "bytes": 18609,
+      "sha256": "d4f7559bc11ebb5723ab6c8174d411c0d553e9f1235b96376a2059d1cc81d8e1",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/core/bag-render-derivation.js",
+      "blobOid": "55e0f4a98be7921bfc37bd85e28402b1d31c267d",
+      "bytes": 3608,
+      "sha256": "647f280a6ef2d5098599158bbfbc38110df83010663e513a491ba7fd6fd1d3cd",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/core/card-capacity.js",
+      "blobOid": "dcec33609e964d368d7e004786fc3bb4f8d93433",
+      "bytes": 4749,
+      "sha256": "859f81cc941d1db172747667fc455ee09a35e911d635d7966f9e999aa8838bb5",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/core/game-map-selection.js",
+      "blobOid": "d7bfb0004fc7951edf217914b5190a0c1173c8aa",
+      "bytes": 8432,
+      "sha256": "db76b902e9fecaa2a56c8dd3ce74b484cee552a7df393cb6d612b54b423379c4",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/bag-container-pages.js",
+      "blobOid": "b5b2865a4eda3c77e22797df5d5efb84e88708d9",
+      "bytes": 10699,
+      "sha256": "0735dd6225ddc71c50a4e6327070e33566ff21d7fa1dc7186495f7e2d61a871c",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/bag-inventory-commands.js",
+      "blobOid": "dd0db7356b811504a6f5fcbff1e3e233fa3889e0",
+      "bytes": 8553,
+      "sha256": "3f10e47fb992e105e925926a3235541093a2f0f6fa5ab889d9f9d4084d46b797",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/bag-item-effects.js",
+      "blobOid": "37fb97a2ba4d17bf8d452f8a953f5c784be3e981",
+      "bytes": 6870,
+      "sha256": "28d8087e85ed25f3ae68c9201c1d196ea742e1d658ab045f861a408c0fb4b473",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/bag-item-use.js",
+      "blobOid": "0fb1d83dcd1d93e0b61eb887adf6e82f5aaeda91",
+      "bytes": 8206,
+      "sha256": "182c2b5c112e30585ee0f4bb686ce9fa96867cf1d2bffbf2861d0f4649a2120f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/bag-return-hook.js",
+      "blobOid": "9bd2579897765b4f0162309b4e8ee5e28828e541",
+      "bytes": 3857,
+      "sha256": "800f2d427eebfe6df2fcb971a49cebcf3d9bfca31417b952a8fb11be468ce231",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/bag-token-craft-plan.js",
+      "blobOid": "54cdc72ed68a9ac0c827fe4c12240a39f4587d88",
+      "bytes": 2457,
+      "sha256": "236ae3b4c2614ce4e2d9a8f9d02f8ec6d547c18b7b4c0c55112f47a9ba5fe744",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/courtyard-vendor/KoiPond.js",
+      "blobOid": "c73827ae6e6378a035d97f9b32f3d5d5901c03fc",
+      "bytes": 12041,
+      "sha256": "c99d81abc8682ceb47e0a2ea0b6b4d24e3de90cc27f5c4d2f22a3535d09a07da",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/courtyard-vendor/SOURCE.md",
+      "blobOid": "da615109b9a45b083693bce84f9036c26bed8e62",
+      "bytes": 3019,
+      "sha256": "7ffe35668b602dc02d4528976912f2eb2814f16943124ee35a9646cf0718831e",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/courtyard.rain-tableau.js",
+      "blobOid": "9a90950fd3b631e049772f78f591a1d367e3d20c",
+      "bytes": 11772,
+      "sha256": "9cc5c83974f285aedee0cd766d8e98e3c90cdb5a19bb62095ff9a77b7485d251",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/departure.drag.js",
+      "blobOid": "71bf09294dc725d708695fa1f805b77945bbc3f2",
+      "bytes": 3564,
+      "sha256": "c2b00eddd459fd8628e9055bbdcd477255297732a50caebf9a2ac09715b21992",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/departure.summary.js",
+      "blobOid": "dc8ae0ae74783804c49cb79772bc6b320ac6f09a",
+      "bytes": 7249,
+      "sha256": "758ab4091f9b67041dafccf84cfd3c1a2a0f1c7d1be8fbd7e3d9cdeeca24c267",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/departure.view-updates.js",
+      "blobOid": "3ba83e075a12eb7156f729a4daa8e2cd89f5c355",
+      "bytes": 12854,
+      "sha256": "e7afaad728a1f0559efcddcfff831feaf720aea0b1c14be3f107d1aa926effd1",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/extraction.commands.js",
+      "blobOid": "da13b5e04901d76aaafc7960c95db1ee403366e3",
+      "bytes": 31100,
+      "sha256": "5583dd33936aeb5a196e53e79166c51d56e9046b5f976e5957a873c192bdaf9d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.bag.js",
+      "blobOid": "2381b375cb301bbbc264bbe92ae756352eafd8d0",
+      "bytes": 26301,
+      "sha256": "b0203137bf7ca624fdae510e5f0f7f2ce79c4f258ece9f86487e00f6b22e0851",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.bag.rules.js",
+      "blobOid": "59f366141647e3e7f0409f9f5c3c5f6e4e6b2606",
+      "bytes": 18831,
+      "sha256": "70c09b54f007e37b06f4320fa53d149623cbfe4cb344d8a77e799c161a9904df",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.bag.safe-transfer.js",
+      "blobOid": "0985e2e454e1ef56c0e8d0c105088866c421fe5e",
+      "bytes": 14885,
+      "sha256": "dfef40d55c5a5eb7437d9f1189b83edd02798b02634fe40249892cbd6b20e4fc",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.bag.settle.js",
+      "blobOid": "c4c40c075941bdbc19d774310ce2d8987f66bb5c",
+      "bytes": 28601,
+      "sha256": "4cd04ceda9c1db6c79b9bb2b5c2bc82bdf833ed9b4dca44c8f1e03d642eeb76c",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.bag.view2.js",
+      "blobOid": "a664891f1357c3e3c6dcfca70fb43a07ef7e2427",
+      "bytes": 11495,
+      "sha256": "2fa98640901ff50f1d3d0c104cab6dd6f122a5e7bd03ada2b2ce8c1fa0fbb9e3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.container-store.view.js",
+      "blobOid": "b269a3d14cc7db3b6ff7218eeede379d53de3078",
+      "bytes": 5234,
+      "sha256": "caea9ade67f7b8b20496296d02377f1422b5d0d57310c6aa0d73e4715587e9e9",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.depart.js",
+      "blobOid": "b39671a6b1b82606ac2e367bd81bef19e0d04cc2",
+      "bytes": 39719,
+      "sha256": "2c637b4d4acfbb6dfd0f31e737aee6d38dcb9203ed3c330cab2dac44b52dc09e",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.pages.js",
+      "blobOid": "2f54bfd54dbbda04d06cd6680d827686d7949f17",
+      "bytes": 27188,
+      "sha256": "450a4d9c4c174bf130c6809edc032468dde08eac34e9d850265cd215b75a3001",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.runtime.js",
+      "blobOid": "7d307a6d335dd7c1bb74244e9ae3950dd1781d45",
+      "bytes": 30445,
+      "sha256": "be07c623d8b562403bcf5ae992708e4ce928c2e73f8245b2a6363fe8c9eaf065",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.reward-organizer.js",
+      "blobOid": "4cf22c164d14e7c2b1b7fc4fb64e5108d242f628",
+      "bytes": 1660,
+      "sha256": "6370f136bd52059cb18299e83506d94f662b1740b6846f8dedd50c8a0ff10246",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.store.types.d.ts",
+      "blobOid": "85a7e0f4b2518456441d4d03955f877f42018de7",
+      "bytes": 12782,
+      "sha256": "750cf43ed92cc5eeaac7481133b3723d909ffb6f820c1a5944e1392cab5f9cc0",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.archive-v3.js",
+      "blobOid": "6c24e158a50169ce8bb4d4389311da7eab8e0589",
+      "bytes": 23407,
+      "sha256": "6167efee959b1a4058e2a894ad13f9d1a2e89feee6c621034fcbc81884fa7615",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.archive.js",
+      "blobOid": "d0b6b7d24ddd1dd0f291ac2d4dd8abff86d0b6eb",
+      "bytes": 7696,
+      "sha256": "804424faeb1496d178662d204b18dfdcc7fd9cce606ce29609d0114ec90e1497",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.collection-v4.js",
+      "blobOid": "e7a567f4fb16016a9c7594e71cc2ed66ac425f86",
+      "bytes": 6636,
+      "sha256": "7bf4f3bed10d6393271eecf08157374dd8d8a470346623056edfdd98044d60f0",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.courtyard-runtime.js",
+      "blobOid": "5385d75d249249896568b59c167b39164ae4a423",
+      "bytes": 14743,
+      "sha256": "f1f4241af29039847c46a298f5fe97ac1a3335737a6d9fd0f2522ecdb8cfda25",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.courtyard-v3.js",
+      "blobOid": "45de3ff6497b940e45e971abc2af720500c57dfd",
+      "bytes": 5521,
+      "sha256": "ad2f0c2bcd96e17e9eb59d084cbe30d41acdf55c55ab5de2b99ef1c73d6de356",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.facilities.js",
+      "blobOid": "ab2b1c9484d1fd9deea8c9e9ad58ea5c17973d6b",
+      "bytes": 4031,
+      "sha256": "a6ce60246e4705df10f5693987319de4822e72aabc1d90834a8f8265750229f7",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.navigation-v7.js",
+      "blobOid": "52d88a2ce8e9ee5bab1d90a33828a0111f6dc592",
+      "bytes": 971,
+      "sha256": "a5af60b6fe8a520c9856d9f242fdd52efaf21a2cf7a772168911e6485ee4fa6a",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.personnel.js",
+      "blobOid": "7a406de66edabc38f1dd59d11a97a68c4b59e23f",
+      "bytes": 20325,
+      "sha256": "3946e04cb457cd6db6a197c37176c1afbf05d8488c8976bb81d4ed81fc93edc6",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.presentation.js",
+      "blobOid": "8d8bec890d175adf80ca5f542bdc8bf2e8045374",
+      "bytes": 25340,
+      "sha256": "abf38aeb09093cb9e88f3aecdd1d2f582306725fd27e35ff96a737e7ae719191",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.trade-shop-v5.js",
+      "blobOid": "502670198619cb97e01b09b63c092de2791cd2f5",
+      "bytes": 18084,
+      "sha256": "9b629bf86fa16d3268ea744ae8b0d974d4d391bbd8c739717363fde0303c173f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.warehouse.js",
+      "blobOid": "1e1ef7deadbdb34b2e885ad0eea049181eca43bd",
+      "bytes": 21104,
+      "sha256": "d7d1b9927d9351f914bae724086950b6f828b1b9255384e03c4bd0dda0463a44",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/preparation.commands.js",
+      "blobOid": "a001de5f70294662f74a84d40e95bb4a903e1234",
+      "bytes": 11940,
+      "sha256": "e4c71fc8b871f9b9185d498cb226c46e20261c94420e680460e973f810a2e38f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/preparation.sources.js",
+      "blobOid": "92d5208fe94ab709f2d6b14763939b069ea79cda",
+      "bytes": 2204,
+      "sha256": "8d65a4d5deca909d820dfd790ee9f91092fe2ae198ce617945542a564e83680d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/preparation.view.js",
+      "blobOid": "e1ebfcbc597a4d60d96a302e1ce9fabd120f8d51",
+      "bytes": 12678,
+      "sha256": "5178fcfbdc8a62f67847287af073603b0408c2b432b69440e2fd5a603d154b4f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/hub/run-rescue-cards.js",
+      "blobOid": "cbc77c12c4dbac6efeead6c07365c3a860479dc9",
+      "bytes": 500,
+      "sha256": "9ad03cd5ef368d82bfcf40f3b4dd3e444cab451d2f26f99d83b00a67eac1cc0c",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/hub/sacrifice-policy.js",
+      "blobOid": "4a8e5a4ef82658ce26228b993f651029de5c3f66",
+      "bytes": 275,
+      "sha256": "73747968ca260e0d4c6a962f23817f5f0f9ff18f5489c4b982a8f7d4a3b87368",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/hub/terminal.commands.js",
+      "blobOid": "4e4d2acc961348fab0d8f7faaa99b3b62f9d83ac",
+      "bytes": 9599,
+      "sha256": "f693e2110638164a22e3beb20ea424df690ca1e1c39f4130e56fff1bd327b2b4",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/chests.js",
+      "blobOid": "2fdb22c52ada21ab5435dd0f9c0c8726a833d2ab",
+      "bytes": 47784,
+      "sha256": "a80bb9c926691e550b1f31f23f55d86f5d2cd614665e6073f72e1511827261da",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/event-branch-choice.js",
+      "blobOid": "89191aa34f456168b68c3a8198646359bf20ebc0",
+      "bytes": 17302,
+      "sha256": "b2d520297f93a75cac6536a5212b9f4dcc2d766151e088e3253b82432d5a95c1",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/event-card-choice.js",
+      "blobOid": "a563ba411643e60c8838c99eb64180ccabdc8a45",
+      "bytes": 14765,
+      "sha256": "3ec68c9b742152e505dfe2df28f8ec40c19ff9621597620d54d8beafc89fa9f3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/event-commands.js",
+      "blobOid": "0799d171c7a8a61a9f237f602b5efd4f78bdb6b9",
+      "bytes": 6868,
+      "sha256": "e2a97b9747a6cdac364ea9f84e3fafbc7bed1da392211e74cf18a606c6857977",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/event-runtime.js",
+      "blobOid": "c0611047a6f04b010f900809c4e46adee4722fab",
+      "bytes": 1931,
+      "sha256": "8f8c1f95a381bdb9253317da9878df9c2e6ddf869ea73bbb3ac84ff3d300c8f5",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/expedition.view.js",
+      "blobOid": "1b3883732bfda419422b266751474067b5b0e641",
+      "bytes": 17570,
+      "sha256": "5b3f04a046c8e78dd626ddf1bab6faa40038978f4babd39cac20b18927573b3b",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game-session-departure.js",
+      "blobOid": "1f4cee2fe924e203449d8cd989d8b29906fa6ae0",
+      "bytes": 17141,
+      "sha256": "128534a99e77e934317fdc8f48480ee20e31b1a33c405fc3eded3b43993c1cf0",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game-session-persistence.js",
+      "blobOid": "11c16b32436c9a2efeb0fb38ca9e00920f230e0d",
+      "bytes": 17021,
+      "sha256": "1b1866a2b67383acecad5db4e4d497b487240ed3609baa94b2da7f342909a295",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game-session-restoration.js",
+      "blobOid": "0ee85e25d38e473eca6c59558730d509928a0ced",
+      "bytes": 14433,
+      "sha256": "b660a096e2535876f2822bf57ccac7bd407743bc87bc7fbf1773f067c3f6ed04",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.nest.js",
+      "blobOid": "22b5e1b78814f5e682d9f6e667328f5fec61b26d",
+      "bytes": 47181,
+      "sha256": "6e0e85cf9ce8effa2f3e27b70d3b21ee66f7d556caaeacbb74605af60f59e887",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.altar.js",
+      "blobOid": "0a13a87948ec508edae172a3d448a167167084e1",
+      "bytes": 68271,
+      "sha256": "b5b9f5ef0829b08a45be7dd4d09408b44f525c93a4fac6f9e541e0fdb9885498",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.class-choice.page.js",
+      "blobOid": "1ee1067c9048efe95680e9b250448bf911b19886",
+      "bytes": 38899,
+      "sha256": "1afc1f86e94c3b1f7f959667148d4180655abeba5012877c126550fc06e91d4d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.events.js",
+      "blobOid": "f152a3ae8167bd12ee57a016477179ff7586edd6",
+      "bytes": 51910,
+      "sha256": "966633bc1612843db835289862f7cea72654e7c93da52db5e86f8570198a1a77",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.flow.js",
+      "blobOid": "81e4b676496c54fd1a61febff6c66aa367cc28da",
+      "bytes": 18693,
+      "sha256": "f0029d234879399663ccd4737b37ee5755efdc92a16f262ade0cd6a98059773a",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.resources.js",
+      "blobOid": "178cbb72edc0e0131c051030bb40e053d4250028",
+      "bytes": 7155,
+      "sha256": "2b5e3929921333efbb55f1d7e5cb5fe965633fc401a3c9ca5889bbeef43cf0f2",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.scenes.js",
+      "blobOid": "5078cd67a468dd719ce7b6a302276423c27bdc42",
+      "bytes": 48779,
+      "sha256": "af120c112109f9e19bceb76846bdb0613d6fa9659724cb11e5aa04a4d3c535ee",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.shop.js",
+      "blobOid": "0007884a5bc7f8c6d1254306060eae2892aba934",
+      "bytes": 51751,
+      "sha256": "f258112393e786a01926c2556f3ab1d09b54755d5b5d772d79bdf766ad64d418",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.session.bag.js",
+      "blobOid": "5ed4f55a41567d8e0c9c13b81169cadd22a586d5",
+      "bytes": 6712,
+      "sha256": "aa131eccfb2308e5c25a51489a872563df110e3b27c50d829cf992eb1a5a344f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.session.death.js",
+      "blobOid": "b167fac4c313b709b57197c0e36f9435628d226f",
+      "bytes": 17823,
+      "sha256": "58250eacf239bb56cc17c8528ccc1522533a60ea44d61c000d796590f26d703c",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.session.js",
+      "blobOid": "81c032fe85043aca2e767982b1af6914a346ee72",
+      "bytes": 12459,
+      "sha256": "20f45bb4c50f9ca56067731845c0fd94a9efd90863333bf0a25e6b229626e4ce",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/map-node-arrival.js",
+      "blobOid": "2228e9a5910181c1c9e16ba537692244e4f5d3de",
+      "bytes": 292,
+      "sha256": "e48d7ffc9c14bde61807d0853d022f507dfb0b491680eb0ca52ecffc296ef5b8",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/run/node-reward-state.js",
+      "blobOid": "3b36d650ff36fd7b9ee438eab95666d6c87394f2",
+      "bytes": 11234,
+      "sha256": "8340f97bdb07b9b7ff7bd557eb8e21d599993409c6bad200aa56a178213f04fb",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/run-domain-commands.types.d.ts",
+      "blobOid": "4084e6b9613b4fa77adb88cf175dc972dff22ddb",
+      "bytes": 2967,
+      "sha256": "ffa8290e65b3564b34172583a3537a82fcbfd5c41ea3ff11cb724dc227d83e74",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/run/run-memento.js",
+      "blobOid": "6a23cdb21399c368c11bb469dd115616dd5788c7",
+      "bytes": 2321,
+      "sha256": "1aa8d758583cccb8f3d2d13fe545fe54d97c986cb86765adbaf63ac778c78b82",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/run/shop-commission.js",
+      "blobOid": "ea80eb9bc371de44a8c667d1f54fe9add0d4041f",
+      "bytes": 9938,
+      "sha256": "53f3ba8bfd297dd8e49ffd57e9f25326e3099db8d3d0e32d8ec2362c1c26d860",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/beginner-guide-diagrams.js",
+      "blobOid": "269eb2ac198053e5aff024ecb4559e2e8d4393bb",
+      "bytes": 4454,
+      "sha256": "f2c68403f7bfc83fb17790783bc5d4c25a5707c774e109c2f7282af78fa98ac4",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/beginner-guide.js",
+      "blobOid": "86ad59889d4962f060671e3ddc4f508093416343",
+      "bytes": 9226,
+      "sha256": "07ef2be2a742b054032812f597854695f5c76375fc1af0c7e90d637902600a04",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/chest-reward-overview.js",
+      "blobOid": "f95a777d556f51d92489ae79851d7b4be2a452ab",
+      "bytes": 7946,
+      "sha256": "fc572a2528ef01409fad4246cf6c2723b6d0832f5cbbb4fcd35757eaa58d8dab",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/encounter-presentation.js",
+      "blobOid": "a1e029b65a4cdd7665a8e20c8e1142ad1d08a631",
+      "bytes": 2229,
+      "sha256": "b19fa534686e9c79d0b2fd91ad869af8ada01dfda8ee6c4184756463b6f95c26",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/ui/equipment-info.js",
+      "blobOid": "5f4cdf6391abad96f164975aa8a856d9939014c3",
+      "bytes": 2784,
+      "sha256": "67f1e612465ff32cb93c4b7913494bad0b5ed8e604b08dd7a3c043b320d4958e",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/event-choice-selection.js",
+      "blobOid": "462c34fe6895b0a6a8c2cb98efc8153642e9716b",
+      "bytes": 5450,
+      "sha256": "7c4daae84fe9b628a6d40a26b30000a3260eb0b16801201c277e22bb9ee0c760",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/event-dice.js",
+      "blobOid": "ae98723ebe364967e9bc322bde59432d943c771a",
+      "bytes": 5849,
+      "sha256": "9ffa04a867c51349ff8a3386eb586bfbb08457ea9cb652a540baa964f8e0c91f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/event-option-state.js",
+      "blobOid": "c77f0289fd9860355a8b77b4890bc70688966923",
+      "bytes": 2642,
+      "sha256": "4683ec9aad810b239c17c928de851a6af2381b7628f7ae41d603044dbed205b9",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/event-recode-result.js",
+      "blobOid": "944b2cdaeb839093b0872937d6ee1cd1b31c1d60",
+      "bytes": 3791,
+      "sha256": "38d4693a0e13d4910bf282450d851d44849a917e50e8e98905d7303eedbe6dd5",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/extraction-rewards-view.js",
+      "blobOid": "ff515e832170806718bed7cac6249732a6c52e99",
+      "bytes": 13753,
+      "sha256": "414f6139b6d89478c196f7e83309ce96945ce7a22038817a943ad7646b127eb8",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/extraction-stash-update.js",
+      "blobOid": "c79939e9537b3bd3282d9f50520de2138292432e",
+      "bytes": 1907,
+      "sha256": "4c201aabef132627847872eca105e350387679dad4f5e42105aa9f6b4ea5f345",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/fire-rest-view.js",
+      "blobOid": "14470b9ea8c83297319f9ded209f02a8b15c3f7e",
+      "bytes": 3312,
+      "sha256": "84aa2345ebc36cf9a149e025ab6ca62b2baf6f4e5c824c8ffab0cea8bf365843",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/game.menu.pages.js",
+      "blobOid": "7230339b83bc99d47d124566b2bf19dca72edc4a",
+      "bytes": 3404,
+      "sha256": "a4ac07d56c38571d962dca7e12ce1b747b6abb4e1ea9e36d7f3ad14e268ba1c7",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/menu-guide.js",
+      "blobOid": "d249feb5a8aa99fe5327aba9533197cd999fb22f",
+      "bytes": 6269,
+      "sha256": "23813e8f3f87a7f8e9d5253e59b5e822134052d5618d549b87f741921486b98f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/menu-leave.js",
+      "blobOid": "f2e9da44ce0a64f1c2b06e20d466be1cccd05f49",
+      "bytes": 15072,
+      "sha256": "ebe7cfbd2e260f941b706b03999fa72da5ec132cbb458cc7cb435b69ca98951a",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/menu-settings.js",
+      "blobOid": "9d21f6ba2b36fc8be07baa9f0e17ccc7b8b82c77",
+      "bytes": 15447,
+      "sha256": "d8d1c0a70def84c61e7f46bfb18ec3a81adaa479238558febe84001a31212408",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/menu-slots.js",
+      "blobOid": "9d8ffffab452062283e9248d742a1ac2d3b23dd0",
+      "bytes": 21781,
+      "sha256": "02e6cdbbb69489bf37c83c0d50df5301f9d987596f4fd75b2809be2ffb4462d7",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/navigation-motion.js",
+      "blobOid": "5a46f75c60bdc65b2847321095261a54468ee800",
+      "bytes": 2498,
+      "sha256": "c6301cc7532b26ece265b958bc0724631e6d21ccb900e907914121e1d54eea41",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/node-decision-view.js",
+      "blobOid": "22d4fcca0954ef9ce62d3f7c1e297d717ce8e0e9",
+      "bytes": 4462,
+      "sha256": "557aabbf372a57aab5443fcf5f6e86ca29ef9a6b9b6e1282ea01c1ca1d92c6ef",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/overlay.js",
+      "blobOid": "235725140a6e8cbe9c6260c984219514ac1e7e91",
+      "bytes": 31902,
+      "sha256": "0529331813c3ef233ea47efda5aa6788327ae94228ce1653bd74c6e815d34382",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/page-motion-profiles.js",
+      "blobOid": "ea44b842eaed3d0f4509b109d4b641b58731310d",
+      "bytes": 6706,
+      "sha256": "e452019bad3b2c6a0642f7ca25c8225abc5de46e8c73742c9e95b3eb9750b844",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/reward-capacity-organizer.js",
+      "blobOid": "9d0d11a7074d94fc8ee89d8b3d82375f6959373a",
+      "bytes": 8857,
+      "sha256": "70b2b5c85e25aac503229a2e3626f89a35f96be08f2407c65f3cb1be2a78e6e3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/reward-scene-view.js",
+      "blobOid": "f7aae9e6325c414b5075bc3f4cf6bee5de61aee2",
+      "bytes": 10233,
+      "sha256": "9b7dfeda04c84ee3f832cd17f23dc13aa21257e680409f2ffc395b1983f56a52",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/room-actions.js",
+      "blobOid": "e7409b682438d35d957d001cc1a4eed05bde74cf",
+      "bytes": 2754,
+      "sha256": "34ebe9b8b6178ec6c7c6e4e4d430c7166b48fed2c87cc7120ef18ae471facaff",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/room-footer.js",
+      "blobOid": "1c7385e7d0f09d9b8a54899d25fb444744a0caba",
+      "bytes": 2428,
+      "sha256": "6cda424e29d98d2a518d56fd83c2bcebeded27e407cafedc895e943ab621d8e2",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/run-memento-view.js",
+      "blobOid": "6e0ebd29599330c0fb6e5f9a1645fd52fc354c53",
+      "bytes": 1228,
+      "sha256": "08fa5be93d95f0443a04f7a23103f5ee7f4994207302d7c9b5004a8a9e680706",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/game/src/ui/term-tip-policy.js",
+      "blobOid": "bd7ae0efd4c10f51ed28d0141c5a9b9ead7ffbbc",
+      "bytes": 245,
+      "sha256": "2199329b0efaec8a2b74da961322256253637609bc197211d60116845ec105a4",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/term-tips.js",
+      "blobOid": "8bffa41d696d355f15c8a50f5c290c0b78c96b70",
+      "bytes": 8703,
+      "sha256": "48b3e5f9fe5955f081550494e0c1a9262cf3237aed9b2db7a2f3717353b7b63b",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/terminal-settlement.js",
+      "blobOid": "f18b30f5053fee08ac6faa728c11e4b3e493469d",
+      "bytes": 8265,
+      "sha256": "236eb118c60a27f82efd5c4061aeb9bebf5f84ce6cfc93587a9c2adff6c6a8ac",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/ui.js",
+      "blobOid": "79edb96e7d2516233a2df7cdef1f9ec04b2d4358",
+      "bytes": 6575,
+      "sha256": "ca355a43f7e9e0942ceae60ea5145138290d19c9ec578760aefa0cd380594e38",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/src/ui/view-children-sync.js",
+      "blobOid": "9d2459adfb7d5f36686ccd7ca7119288b6c53f95",
+      "bytes": 4823,
+      "sha256": "32117836faf5c1c95e598502c192e8a899088a592eb854cef7a1dbc123f23366",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/game/version.json",
+      "blobOid": "90c32025a24cff491b2269df0a4e222dcf9164cd",
+      "bytes": 25,
+      "sha256": "dda8bf6cef59f15312f6965322119772fdb88a4893766d97808b3ad9b750b4d3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/package-lock.json",
+      "blobOid": "6c50af643467d2b6422be4ddc1622f997d942513",
+      "bytes": 307482,
+      "sha256": "fe4e5e989c2e09b1c46676dac2d03f29c7d7e15203d4cad8d376d9e5a1d73c64",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/package.json",
+      "blobOid": "852e8bf960c3824e63c3701cc5682c421ee73ac6",
+      "bytes": 3598,
+      "sha256": "2c820a9aceb18cb37d3571f5828d8ceb1927a50315a17d6b895c02b4ba09072c",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+      "blobOid": "e58e835f9a3dcfac9594a6467a11b3aa248b9f42",
+      "bytes": 34074,
+      "sha256": "76539ec8dc430fe51b7c86ae733e5d5b731beab8103043ec067ee61ef2afec3a",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/altar-sacrifice-zones-cloud.test.js",
+      "blobOid": "7590bf09c7b845ff744fbc5a60452f6642525516",
+      "bytes": 12149,
+      "sha256": "97d783338358f64810f1eb54508d0ad38df461a3a9ada5204a312a20a0eaa1f9",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/archive-progress-rendering.test.js",
+      "blobOid": "f027d8486b1c76233cdb39922db5d2ebdbab3966",
+      "bytes": 5769,
+      "sha256": "e4cedfa0ee772682fc6f410442a50a15e9eddf97aab1a1ce37d1142bf3d5dc3d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/backpack-layout.test.js",
+      "blobOid": "e8700cc12c89cacdb3c1f96464818350f092757a",
+      "bytes": 5857,
+      "sha256": "41ca155ff11895c6a411722b39e217b957ea8195e945119cfedc085510bb7691",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/bag-container-pages.test.js",
+      "blobOid": "e610978288975b59a9aea680b6b4acf7f6401bcd",
+      "bytes": 4235,
+      "sha256": "076f39ad57d5b5614edafac7bace9df554656df1c1ea4dfa194442bc553cfc20",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/bag-help-return-continuity.test.js",
+      "blobOid": "3b023b4856d03617cebd752e9ef9bdd373f6f048",
+      "bytes": 10683,
+      "sha256": "e5f8d77207b51a8f51df04be01101436e1c4d25c107a98a45ecd49a276e1a72a",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/bag-item-rule-baseline.test.js",
+      "blobOid": "bd2507740b996cf7775736a8adfcc940faad1441",
+      "bytes": 13841,
+      "sha256": "8ba52c65738072c1786586ddf533fbf467e2d0c68eb46646db4c292e7d84f21c",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/bag-page-lifecycle-review.test.js",
+      "blobOid": "ea8d0bbf2830c17b09baec59df278d1a92f2acc1",
+      "bytes": 48264,
+      "sha256": "0276bc31be662c37d11436900801dee93df528707dcf7bb4f2b88607e5d509e5",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/bag-pouch-capacity.test.js",
+      "blobOid": "efd27d175c2ba81177c6704c0abc74c0b40fb8d9",
+      "bytes": 21230,
+      "sha256": "272e4e7602cb9c1877f3153ed570389193c5b3e9e14075855270a2d51756f213",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/bag-render-derivation.test.js",
+      "blobOid": "5ae2a37e4a00ac61ce8bb31da7a85af4d9ee7eb6",
+      "bytes": 8158,
+      "sha256": "d2b4123858a0ba81058c4c998e8657477a57bb0268bacc8a7c2685404aa8574e",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/bag-render-snapshot.test.js",
+      "blobOid": "82e0788f479f9e32af9a93611dc369e7f4b9a5ed",
+      "bytes": 9218,
+      "sha256": "1518caf737e864cba8865a28fa5388b76a9bc8de5da07eadb14b44887f65d010",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/bag-safe-transfer.test.js",
+      "blobOid": "24ccc465a6ef0753698a3c29941bbef456b20f77",
+      "bytes": 18161,
+      "sha256": "07ca26ada9358bfc72f95c867914e9752059aa4cde09e1c5e44be8417f272675",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/base-inventory-lifecycle-audit.test.js",
+      "blobOid": "0502957bb3029c21684b5cccb9f9f3e4ee587041",
+      "bytes": 27901,
+      "sha256": "5d5c7255225fe7daaed1c9d9e8395bf8663505ac2ebea0ead33b8818b1b8589b",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/base-subpage-header-readability.test.js",
+      "blobOid": "fc40e730d81328d3315c478890ed9c2515a3cb89",
+      "bytes": 1806,
+      "sha256": "28b2c2a9081a559998941253d1cefd66743b5b77f218c31ea516cc06b7ddbff3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-area-hover-hand-context.test.js",
+      "blobOid": "79d5a4202de3ad3efefb65c4065d23d5e794a6d9",
+      "bytes": 16128,
+      "sha256": "53dbe146d8b347defa41d4099d47ffd4850f3479c985c4daee5a2d789821a9bb",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-bloom-discovery.test.js",
+      "blobOid": "cb162fcb75a7737ac44826aff6725e5a26589f47",
+      "bytes": 4011,
+      "sha256": "96e0a0f06141bc3c387e9167484c3970579a883516312ebd4f0104ef8e955a61",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-card-results.test.js",
+      "blobOid": "a11d0e73f57f215fad7040c8c215a976d76ff20e",
+      "bytes": 5794,
+      "sha256": "a179caf22a5c66c6a16a96f9f4ce7e2b58ac5d8a51751f04d3a4a45da44b547b",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-discover-result-source.test.js",
+      "blobOid": "2bf45c3d3ce5880a1ee053ae2514e2f860b18bc8",
+      "bytes": 5996,
+      "sha256": "eb326fe895a500bf731ffe8782bec679368812c825cee1678badb36f5015dabd",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-discover-retained-feedback.test.js",
+      "blobOid": "c2d43ecb8ba7d7af1ff7c851891ec448c13b73f8",
+      "bytes": 2112,
+      "sha256": "167a4ca7e91ea7de9a4459ab5c07597418860c5a050094af557691d5581d17ad",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-drag-reference.test.js",
+      "blobOid": "05bfa60749fd82e094de8a82dded299ed99eb3f9",
+      "bytes": 16251,
+      "sha256": "9878c43d6d708b4b2ee618e11daa1951fbd02cd33d0c6f8cde1cd92cad42bc66",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-engine-facade.test.js",
+      "blobOid": "bf198d1519f6ea62d574acff1b31d1c91788008f",
+      "bytes": 2792,
+      "sha256": "ca99051f9e3a2e93d6593fd2846d58146379418bc70f41ff9a9ae66b143300a3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-equipment-skill-synthesis.test.js",
+      "blobOid": "35af0972a8c57515c8860ffacecc4c52af77fa3e",
+      "bytes": 11743,
+      "sha256": "c340dc5dadd9286548db0e6ac40da28e35f8b8c6a35157bf75497c1e18502629",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-content-diff.test.js",
+      "blobOid": "526fc560c0610172e4b5447bb2b0de0e086b7dc4",
+      "bytes": 9726,
+      "sha256": "b9755ac1eb5cdb50208fb01f07ac6eba7d85b7bd087e6fdf222431f8182df0b6",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-hit-input.test.js",
+      "blobOid": "fa3ede7f0ad99edf4a169bf87258ba1f0f27d68e",
+      "bytes": 9493,
+      "sha256": "64bec146f37c80c92591278d440dc9f817d41d733a42f17f6363af0945a348ab",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-inspector.test.js",
+      "blobOid": "50f87e470795e328240c864fbba131a5f4468e05",
+      "bytes": 78660,
+      "sha256": "1081b9ad88428d817e6dd8a03f8f469aeb5c2b01ee1377ab78781e90bd471b31",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-keyword-interaction.test.js",
+      "blobOid": "d20374bcd1ca8bae92496c7d8410b5fceda21750",
+      "bytes": 12313,
+      "sha256": "ecf3e9a3570bd91f94c4906a018c8d812fcd5fcd5f2fad0ed8ef9b7b8ea09f48",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-rule-context.test.js",
+      "blobOid": "8b50f36e030caf56ab3a7be376977f960ad9265f",
+      "bytes": 9871,
+      "sha256": "b80b9e370e023987f3a15f334d392c0270bd25f6be265e0b7cb582f7d86d861d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-hud-info.test.js",
+      "blobOid": "30c878423351b673ce5e0cd2792813f4144908cd",
+      "bytes": 6398,
+      "sha256": "b9ffc89241850dc0c473a5d78995577a91e4c144d8abb528f9cf7753933d2e35",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-pile-timers.test.js",
+      "blobOid": "e6a49d00405afd0e2aa83eed34790d7d479c9481",
+      "bytes": 2240,
+      "sha256": "9c06f4a302b98d20cc1159c44cfbffc8804ec669e57b068ab1672c42a49c281c",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-pouch-entry.test.js",
+      "blobOid": "7930c963cfecdaf68629b3ff21f8848c2b1ba8f4",
+      "bytes": 4926,
+      "sha256": "3d4e8f13aa3f02a20d536a438c081d76d7bc343aca8857712d49b0d90de50432",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-render-derivation.test.js",
+      "blobOid": "55c0dd1d4d73e5f55a808745138c2ef5183dff54",
+      "bytes": 7080,
+      "sha256": "859c9904a787bef38cc74cd055cea24592985399bffaeeefa516ce1b6bbe6383",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/battle-runtime-completion-1014.test.js",
+      "blobOid": "fb1a7e08cb0f074f5073e6da356422041c9a096b",
+      "bytes": 12359,
+      "sha256": "f00cd68bbc36431b29a5fc82ca238ce3c1a8c9a303f07e0a8f9409f117dcdfbc",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/beginner-guide-entry-copy.test.js",
+      "blobOid": "928459c62988caaeec4daa2a42cdbcc04471b2e2",
+      "bytes": 844,
+      "sha256": "2fd9b4c1aa8ba4c4ba8f1c20c7c1e6de33daad1a502cd54b9e9ab34477373476",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/beginner-guide-readability.test.js",
+      "blobOid": "6bbfef841566ceedd1af133df6e6ceaf15089105",
+      "bytes": 2482,
+      "sha256": "f255a2592de8afcccccea95af78035ff9225f9fd80e68dedb843a65b5a713922",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/blackmarket-card-preview.test.js",
+      "blobOid": "df3271492b597b6e6dba12f7ab9f3eaf5341cee5",
+      "bytes": 11084,
+      "sha256": "d8b04bc5a33af5c639c014027cb7563c288ce17dbe5d86bb2cfb8818529c6aa2",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/card-description-fix-auxiliary.test.js",
+      "blobOid": "345bf38c205b5bcc2c04eb799d22e28c646a1535",
+      "bytes": 6254,
+      "sha256": "87927dc4e681ee178e92ccd9e77399624cdd41168de1f5d1d7566b74bc95c8ab",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/card-notes-coverage.test.js",
+      "blobOid": "ad6a2e9efb27f7d1aee035a8bcc9e3e41223c731",
+      "bytes": 6218,
+      "sha256": "3cc41edc5b91137d9df79625f8f4126619ea9d89a2a66633bb1029b6e1aed91f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/card-term-passive.test.js",
+      "blobOid": "7bc45d3b85bb71e48d935874553ed5fd51982cb8",
+      "bytes": 4595,
+      "sha256": "994be63edddd2864483b89e4e45834765fb13b6ac277eea497d8871ce464f816",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/chest-batch-receipt.test.js",
+      "blobOid": "31e420502d628e163d302151710097befaef8d94",
+      "bytes": 3652,
+      "sha256": "67820b43ae7455354baf8b77efd75b7b3270f5a109da132490677bf366f8580d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/code-lean-stage1-ui-settings.test.js",
+      "blobOid": "99ca6ec5ffff0a7b55dae3c25c8593cd0304ac88",
+      "bytes": 8855,
+      "sha256": "5ff0e6aab9f852d66f108cadfb615d0cc7aaf6ecc66d557ecafcbcffd312865f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/courtyard-lifecycle-deep-audit.test.js",
+      "blobOid": "2fef8067526dd31af541eaf1d0cf37a2bd0d8b32",
+      "bytes": 8231,
+      "sha256": "1a96e342dacc56156098207e208cc87fb80679f12ab140b9aeaecf620d47a986",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/courtyard-rain-tableau.test.js",
+      "blobOid": "cfeb65909a2322d591972dd5a03475d0c51d8c5b",
+      "bytes": 9187,
+      "sha256": "cf9cc4c83c7fef22bd85662c5ae01ed4d1e9187b7c28d95d4b3e9acd693e1f88",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/departure-render-performance.test.js",
+      "blobOid": "e29b34251ab20d5fdf468e3d9e0fc305928770ac",
+      "bytes": 10181,
+      "sha256": "ffbe14b1e67cdc1b857f39f757e14786c74facd02d2c1c9d21811b32bce65f06",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/departure-stack-lifecycle-review.test.js",
+      "blobOid": "4f654127ca56bfadf29a1a098317da296708d561",
+      "bytes": 12458,
+      "sha256": "aadb9f31ac091ab0b012266b27293fe6ca853bd4cd92c11597b48536025a4107",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/departure-summary.test.js",
+      "blobOid": "9320582a69e1ada3edce96490d2a77d75fa46a67",
+      "bytes": 3655,
+      "sha256": "b273d85a31bc8e1f256cf8a0f9a9d1e11a09ac33cc99e09725b1d3a03bc28e01",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/desktop-startup.test.js",
+      "blobOid": "aac0a45e8bad7bfbf2495d1b021294128e3bd6db",
+      "bytes": 16725,
+      "sha256": "17f971f6218ce0ca8dcc756c21ceb45132eca44509053a2e81ec3ed7df027fe6",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/e4-async-entry.test.js",
+      "blobOid": "b038c86ea0051c244c550acbb6f5f0d38a780fc5",
+      "bytes": 26908,
+      "sha256": "f3122f183478b12f84faffc3f32d6c69516aa9c760461e394961029395f787a5",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/e5-session-recovery.test.js",
+      "blobOid": "36c8eefee3467f5741a57aff41361e3f65ebd2df",
+      "bytes": 24471,
+      "sha256": "d1218236125f62147197331e45302c965dae00117c84f8bc1d02c15439e6cd58",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/e8-card-migration.test.js",
+      "blobOid": "c80499b41d00a4ff35455afcaf40d62b9eaa8a40",
+      "bytes": 23229,
+      "sha256": "093b2c12fb1cb20b2c4f55cdcdb8e37b55f34b51da8593f11637b8d66ca6602f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/energy-crystal-restoration.test.js",
+      "blobOid": "68781e892db8e72f5d9b5eaacfc98c06ae57c076",
+      "bytes": 7888,
+      "sha256": "9539b6893f1aaa3b5e2df209894fdf7c718015a606e92f428a36eaae1767fd7f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/event-callback-lifecycle-audit.test.js",
+      "blobOid": "876b082f8eabc3021163dd29b450cda4206d8c09",
+      "bytes": 46482,
+      "sha256": "03ec6faa2a06d7b9e51f97c3c789d33d43c9c369cd63035e92a6129c290b27c6",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/event-choice-recovery-cloud.test.js",
+      "blobOid": "0dc9ea3f4e0175bc64e55c1b2641a0f8c497f3a7",
+      "bytes": 31282,
+      "sha256": "bfc2afcffff03144f3ffe6f917dd2c9deb17118889555a9d0d4db4cd103acf24",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/event-dice.test.js",
+      "blobOid": "4333bf3529dd8b6b4107b5706f8fa6c20de5f5f7",
+      "bytes": 10582,
+      "sha256": "01dde2384a1ae0a8b8da1c3f1e8216bb9f8b90ec43c8a5af7055313de1e7fe7a",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/event-option-state.test.js",
+      "blobOid": "a4ac01cd62ac606875ea105712f4b16b3e573104",
+      "bytes": 2444,
+      "sha256": "c6d934b7116ca4d40e8386dfcf15bea9cecf654bf9bf4c2d172acbd75a7bfb52",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/event-recode-selection-continuity.test.js",
+      "blobOid": "3d55b32a09fec68a2d534057f24febc8ebd384d7",
+      "bytes": 6663,
+      "sha256": "0728992403d14399d057057632ffd8e0147f9e552d30cacb044fc074a3667040",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/event-settlement-unification.test.js",
+      "blobOid": "04869931365c21bde6eecb29e279b82fb03a8031",
+      "bytes": 21324,
+      "sha256": "52855cbac8ff03360c32aed375e5dbc2e031032e0214cd36f99193842e92f1ac",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/events-lazy-entry.test.js",
+      "blobOid": "fd19b06dddd374a76957458ce4396eb3cdddc34b",
+      "bytes": 11644,
+      "sha256": "d7101361e5eca3c2b09f5e2cf90e302593c54bd45be7e994f6fda4c1486dd7aa",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/events-lazy-story-ownership.test.js",
+      "blobOid": "87a9b44ba0b1a72d7474650100b08ba7c962abea",
+      "bytes": 6071,
+      "sha256": "3ccf0377fb4f821e5dfa68aae905d5c671301c4621b5b01ee5eb24713b18959f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/exp003-extraction-pocket-copy.test.js",
+      "blobOid": "a3dfd5f858bd742220fb10edfff0f6c681231110",
+      "bytes": 5174,
+      "sha256": "63f4f5d900c6f1d8f38d1efba7e7859c0bfe2bdc9d3b45f543913e48923f1e7e",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/extraction-flow.test.js",
+      "blobOid": "daab4691dde14490242f54ab9c4f3a9faed0bb5b",
+      "bytes": 14434,
+      "sha256": "999e09e1ad38ce5acda4cd75931b9adb6f71eb3504813f8bd9116c8c057bb031",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/four-player-capacity-text.test.js",
+      "blobOid": "d826b0fa2021a7189201673736a3c374126acc61",
+      "bytes": 2359,
+      "sha256": "6001017e7b15897e5a01fc56fcafb8c2a26e7e08af2a1bbfd2d7976a8bd55e15",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/four-player-event-regressions.test.js",
+      "blobOid": "3b9ce1d338fe8cd37912caf56b62dec4c2d55bd0",
+      "bytes": 8512,
+      "sha256": "53408c01e0a2b459b1c5da01c1e782447796db81c9e30e5f9664a11156854f06",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/framework-battle-decomposition.test.js",
+      "blobOid": "7aa9afd53c170387fd196ffdcbdf4973c2c35cf8",
+      "bytes": 6001,
+      "sha256": "458e103157a96f87fc126c68413f9d4ba02d0f5101f06e6f1ce7b92520830101",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/fresh-run-onboarding-copy.test.js",
+      "blobOid": "6e1e51a946e4290d6e84156d15d152bc570e9397",
+      "bytes": 2880,
+      "sha256": "f1b941300731e91dc6ebbd210b9adc154c9bfe9646671b15b34ed05718ce6b06",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/fresh-run-settlement.test.js",
+      "blobOid": "ab6ec0895f7a364f6733361fd4b190e0b3ba7d1b",
+      "bytes": 8634,
+      "sha256": "b09e108c3358ecade38a386bf71f1ff1ab4a0ea8749e448741f3dc5db2e62f73",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/full-review-regressions-battle.test.js",
+      "blobOid": "b6b5bcc6a8c0a37f5862ba74eab04972e585a47c",
+      "bytes": 10659,
+      "sha256": "9c7ef6af7a15e777134515668e410816736b478be3279409c688e9c43b824e3a",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/full-review-regressions-world.test.js",
+      "blobOid": "85e37d8decefacb8cd35d5c970a5c2928de2830f",
+      "bytes": 13644,
+      "sha256": "2d09c44a20f40c2ca79d2be51e688e66127e447c20bf4edac72a435f6eb47ed6",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/hand-fixed-hit.test.js",
+      "blobOid": "662021763b1e71b762290ae19d50697f198c6067",
+      "bytes": 4275,
+      "sha256": "b048fca6f363913323d803f10da45a802fec453b01950f061803dc5bb1fd2767",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/hard-mode-event-integration.test.js",
+      "blobOid": "2068de4a1d1603c2819db5ef0804eca2dbd2b8db",
+      "bytes": 8321,
+      "sha256": "b622cd70323ef2eddf3cf27d44db9a574e18bdf8513a451f3ba6a4c4c3d61ba7",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/help-return-lifecycle.test.js",
+      "blobOid": "4315e966c047a4a6444fa4cc222ff1d9c3e92fed",
+      "bytes": 10294,
+      "sha256": "545de6d6cc19ffb804ce0ccb02e59d2c1bf6b5a75780fb0be61dfb917b82683f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/helpers/battle-item-assertions.js",
+      "blobOid": "a25a709acc51dbf7f8586fdc5062831580542159",
+      "bytes": 678,
+      "sha256": "a8c533089ec72dcebbada7cd18d9b0d89ff0706679ea37a03d043b9810a91445",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/tests/helpers/environment-fixtures.js",
+      "blobOid": "746a77bc1b8c2657cfe88068991a1f679ab2d67e",
+      "bytes": 11440,
+      "sha256": "fad87085d7f78702e76c348f3f7c9010ceaa12390193432c987ba2b58a26bd27",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/helpers/event-presentation-ports.js",
+      "blobOid": "2297fe5199b93eb8e507a67eb87feb4ba9502e6c",
+      "bytes": 786,
+      "sha256": "8817d5480594ed8f5faad7d9d6383b371cd7e3378283d4e5c962cc3ae19b6eb4",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/tests/hub-courtyard-v3.test.js",
+      "blobOid": "52638a6baae39755bbf87a9a4b970ec13cc7fb6b",
+      "bytes": 13694,
+      "sha256": "108ec05e4fb7b373a10c78b02499f8387e542f3434d8a9ac2784f4ed146d8ed1",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/hub-flow-regression.test.js",
+      "blobOid": "be502c9f22c75013f6ff1462880cde2328bf494d",
+      "bytes": 19668,
+      "sha256": "a2bec8f24c82ece25c6dcdf0900c7b5b2b5366faaeeed687c9a50594208eb7bc",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/icon-hydration.test.js",
+      "blobOid": "0d3177bb11bc6821b0732d1e1225f4113d2d08af",
+      "bytes": 5416,
+      "sha256": "2c45fce91039e14150dd2d08e1543c4aed526cb8c7a1279bf995bc443a0332f8",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/illustrated-node.test.js",
+      "blobOid": "c76c81e691b800cbfb70b23483c05b0e2c7aafd2",
+      "bytes": 5147,
+      "sha256": "a4c957aa3217fca5b97a0fa6481bcc7dd615b2e1637c0b3e8dc3b7f08e177c14",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/m3-contract.test.js",
+      "blobOid": "7cbcf60cc0d0e3b8dcf710c833f4621d6ebb4076",
+      "bytes": 22728,
+      "sha256": "1ebdd3357f4b9748cb0a72e01d6ff5246565e3306a0d39b8fa71d10790c335b4",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/map-travel-motion.test.js",
+      "blobOid": "ed8b8794ecc35b83abce11268e0a5bad9b7d8fb9",
+      "bytes": 9703,
+      "sha256": "710ab7c814b28c1a14362524463bb5c85dfcd5c901b0432afc4fa30dfd452494",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/menu-pages-slices.test.js",
+      "blobOid": "49e3e795bb95452c530eb5d91ff1ff4e5ca8641f",
+      "bytes": 7394,
+      "sha256": "106b0958cd0d8218c77868cac77f424b83f448b984795568e96bcbeb78eb30dd",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/menu-recovery-entry.test.js",
+      "blobOid": "19e1575d6cef0b142b0eaa721037d613e6905526",
+      "bytes": 11534,
+      "sha256": "c3e8090e6b5098e432b9d93994e0a8b2cbd9e30c4d751dd35fd9f5737074ee0d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/menu-return-chain.test.js",
+      "blobOid": "cc971df35e3220814e45e169477ef70dc5a8c7ee",
+      "bytes": 3754,
+      "sha256": "fa7ef72736fe74c513f753fcc678ee11e6df605b1438f54ef9b339bd39dff587",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/mystery-potion-observation.test.js",
+      "blobOid": "1b27b59648eb99922387b5c324b01858e4953025",
+      "bytes": 10725,
+      "sha256": "96c78fd33a3ede0fec8e9ffa76e889d4554d6e914f7f847bf409dcb3dc19f93c",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/nest-node-lifecycle-audit.test.js",
+      "blobOid": "861c628e550425c25e72af87821d296f153d81da",
+      "bytes": 17036,
+      "sha256": "06facdd1d3075231114acc2bae9194ce408a3ab085238e420d219a407f626cc7",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/node-restore-flow.test.js",
+      "blobOid": "b1e4256d797d3f068b438616cbd3fce8b362b126",
+      "bytes": 6778,
+      "sha256": "770908ba80263030327baa3ebd3bfba69c9e9c0be11a7a5fb9daf98c5ef06ea4",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/optional-scene-lazy-boundary.test.js",
+      "blobOid": "d61a4dfc78eb293f1ef1ad4529c8641a5b706ee5",
+      "bytes": 9384,
+      "sha256": "db3448e5bdc64284583912367c09066c7adbc34cefee7fdaa58e34d799e12e9d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/page-perf-battle.test.js",
+      "blobOid": "528afed8896574301db0a362781848d310d80de3",
+      "bytes": 14450,
+      "sha256": "6655984e1753ce7c883034570d009512c090ccf4a2cf97136db525509d6e4bda",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/partner-interaction.test.js",
+      "blobOid": "5c59592ccb4130c876fe2e72d0786e9aa9f74fc4",
+      "bytes": 12339,
+      "sha256": "e530ff65f8430de5acce60ec51af53564fbf9c55d761f6670be8dccc63616a1b",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/pearl-storage-interface.test.js",
+      "blobOid": "81682bf8da3abae9140c55564b017d534fb6c27d",
+      "bytes": 11383,
+      "sha256": "4604426746aeab7137074638a5ff609a6acf1865e62df677add0042dda63eb4a",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/pocket-restore-interface.test.js",
+      "blobOid": "8353f5ed099d4e71041cca8c4b84965e0a46b77c",
+      "bytes": 15859,
+      "sha256": "8d23cddc28ade302eed162720f3bfb077c0a4e381fdab573dc0b51b534e95dac",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/potion-tip.test.js",
+      "blobOid": "25ea02a12aba1984a69e4d95df38d50de2fa44d4",
+      "bytes": 8111,
+      "sha256": "54cb9a9c7b51f0f2aa825ab0b0ce29a9c482c1d6f212efef296f376a9470376f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/project-bug-sweep-events-1024.test.js",
+      "blobOid": "e24f7e5544f35c5f5b17d8871dbe3ada9ce55f61",
+      "bytes": 6248,
+      "sha256": "f4bb5811749eee2bd926c6b66f03473ad78b9b53dd08f5c069469d3f9d49a7d3",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/project-bug-sweep-round2-battle-1024.test.js",
+      "blobOid": "29d7dfa806e8c1bc43a958898d7b2452a058eb5f",
+      "bytes": 12114,
+      "sha256": "a43f4d275abc8eca69484ecd88c62e355065cd97784f4890b10494cbc012e4b7",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/project-bug-sweep-round2-extraction-ui.test.js",
+      "blobOid": "c8e56ff14dfa929fcbf694c1623cf2cb2033adf4",
+      "bytes": 4926,
+      "sha256": "9b5e13dec3e8ff58bbb61f71e028fc2e206f3ff3c5c402bd335f421e7b3b1a01",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/project-bug-sweep-round2-nest-shop.test.js",
+      "blobOid": "c6f3ee141e82c1ff5b79fe62cdc6db32c5a2d296",
+      "bytes": 6371,
+      "sha256": "e9c371af081900efadad19d81bbd84055d7ce5ca9a2b1e0b387b3507c4d6c426",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/project-bugfix-battle-1023.test.js",
+      "blobOid": "0565e1ba380e8f75fb403ed7ca1124524f5efe5a",
+      "bytes": 10208,
+      "sha256": "b4e7234c3cd8f446f487fd9c3d122c36d315b1296448b57896c73f1e1160b9af",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/project-bugfix-expedition-1023.test.js",
+      "blobOid": "4268947a4bd3ed925b01cf5972f3cbcf725393e0",
+      "bytes": 15149,
+      "sha256": "de9bc3bb33efdc7e046c642a2e828ac46494fa7502c5dca58f9b8e3353428958",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/project-bugfix-round2-expedition-nest.test.js",
+      "blobOid": "41318712c3e0ce783543877b75f1dd7665f1e00c",
+      "bytes": 8071,
+      "sha256": "c9556b91da39d9c539e6af9770419905c445fe6829384b40cdcb5fa31da46251",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/restoration-potion-observation.test.js",
+      "blobOid": "f67725ec3bf9a13e6444fe04c98283bcf6cd9eaa",
+      "bytes": 8296,
+      "sha256": "7ecdcb4509946ea7819030a8d70d34dee7da9890626150499a6f04d7e83e988f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/reward-capacity-organizer.test.js",
+      "blobOid": "4a82ad8a9b5e371bc183b35464a246b494198ab6",
+      "bytes": 8655,
+      "sha256": "952a0a8acc3893a3f09723715423586ad7b56df2fdef397324346eca9a2b86d2",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/reward-capacity-preview.test.js",
+      "blobOid": "83d7604b7cc2b920996428fabde025007323aead",
+      "bytes": 13056,
+      "sha256": "d1fa557b7f82b19c5219367621db688013bf8920fa0070e558b3dfa7b2878375",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/run-event-controller-ownership.test.js",
+      "blobOid": "371c1e13f534c8670247f0970dcdc7d15417b8c7",
+      "bytes": 2256,
+      "sha256": "3eb740893ddc161f40f2b9e212f931dedb36399f0a4ef8c403d2028d1ebb6b13",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/run-presentation.test.js",
+      "blobOid": "6422568c6dde81da8b62b889285208ae80534e38",
+      "bytes": 5831,
+      "sha256": "45a384e60ea370be75671430e4eb4a0cbe64f692665ac5d3953dd644baab477e",
+      "utf8Scanned": true,
+      "changeStatus": "A"
+    },
+    {
+      "path": "搜打撤/tests/runtime-asset-publication.test.js",
+      "blobOid": "3cf829af41e42d65e00249831461e3ee6a8bb03f",
+      "bytes": 10499,
+      "sha256": "819655571abae9ab775851a48550b0bdec5cf6f9c8d35c35cd1934307f895fa2",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/safe-pearl-access.test.js",
+      "blobOid": "6423b0b798c4e207dd180b624f075096e66caeed",
+      "bytes": 12000,
+      "sha256": "1fe9a4a40a8234af8eb50aa4b5fce3c0c0049ea8b3a00f5fb8861ea69a7d53fb",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/shop-currency-guidance.test.js",
+      "blobOid": "f47c9cf25e646280962ff605d13128a360956977",
+      "bytes": 11224,
+      "sha256": "6dafcb28da6d2217297a6c26b3c2139ee7e622c46744e66259c4ef555cf36a11",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/shop-detail-focus.test.js",
+      "blobOid": "211bfcdde75a03291a5303922d66e77093dac163",
+      "bytes": 12486,
+      "sha256": "58fd5662276f7bed95ad4bb810cde6ad4bf1ca8f980c02389cbf5216cfb60b85",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/shop-transaction-lifecycle.test.js",
+      "blobOid": "afe9c9caa7a38a8164c68ad24846ab7db3dffe05",
+      "bytes": 17243,
+      "sha256": "51ba2f53fffd3f17395edd3b7984cc5495c85ec0d5a96451708efe5f0bbd8542",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/skull-sword-effective-session.test.js",
+      "blobOid": "3cedc7040abed9a7a705c7ca4eefbc6bbd755422",
+      "bytes": 32017,
+      "sha256": "bcd4b85024fb69a0a9376efd6f47831c12fb9fa44ce41ba835d83673cd83e7bd",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/sts2-consumed-items.test.js",
+      "blobOid": "197d925bdec4c94f82f31fded0b3fc2c6d8c1301",
+      "bytes": 10279,
+      "sha256": "d99d5292655cf48a039c69a9a75b5d8830d46a38bd5373086156facffab5c793",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/sts2-consumed-pile.test.js",
+      "blobOid": "6eda04f46acc63c2e394a4938a8bbb33b88bd673",
+      "bytes": 7276,
+      "sha256": "5bf7d95271f722da33f79d6d5e7ca737cf0cef94f76c53135ac3f2c04aee5235",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/sword-consume-trigger.test.js",
+      "blobOid": "2bb9b937557de07aaf7351f8d258e067d694a707",
+      "bytes": 7464,
+      "sha256": "c2d4d824fcf9e05bb6e1835614c7c55fdf08961bc432e4d9b3be848f3c41b849",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/sys03-altar-restore-txn.test.js",
+      "blobOid": "97d1d188fe9a39b5b4821fbc0ea457105b9c285c",
+      "bytes": 29389,
+      "sha256": "d5d866bf74c76217502c98ec5cf07f6b500ad034173bb84b687c19d731c6e4d4",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/sys03-loot-shop-txn.test.js",
+      "blobOid": "23adbf3b4aaf00700bd1c2a76aaa32a4a69403a6",
+      "bytes": 32753,
+      "sha256": "a84c34e0cf864488d855a70428b2c707cb93e0df9d18b55fc55033ab02f4551d",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/terminal-death.test.js",
+      "blobOid": "6498eccc7f732b5693ab0c1bd9a60bd39f5f07ed",
+      "bytes": 7157,
+      "sha256": "bd42ce800e376d8b48b1ec8b78b2adeec0b859f9fcfb492cf048618bb5aa8713",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/tools/reward-sequences.property.test.js",
+      "blobOid": "052458afc19a5eba336c4e094269dcb1bf0efb4c",
+      "bytes": 12756,
+      "sha256": "bc88a62b8fc8c014e5b2574d8a271e0a668323c2dee79a580532de4711f3c6cc",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/wf-feedback1021-b-potion-chain.test.js",
+      "blobOid": "78d141db090a281e9733289570f20be5b11f45e1",
+      "bytes": 6236,
+      "sha256": "1e29fc119af11cc24a60a53bf3ec1265835057e2c358d3b4d1dced2181dcdd0f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/wf-feedback1021-b-potion-targeting.test.js",
+      "blobOid": "5badbcfde497b439da33b4902e013c0f3d18445b",
+      "bytes": 9067,
+      "sha256": "cd357e69a6ec9b5c3b727a58c5e3cf68ffdf9398028c864f8216654eebb8b0ff",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    },
+    {
+      "path": "搜打撤/tests/xart-z1-batch2.test.js",
+      "blobOid": "8eb8edea647376c54d1dce91e80085b1f8ca2cc1",
+      "bytes": 5306,
+      "sha256": "da000a13c39d2736d56b5f26fdb3343e0506c2b4622c735b7744941e96624e7f",
+      "utf8Scanned": true,
+      "changeStatus": "M"
+    }
+  ],
+  "indexStableDuringFinalAdjudication": true,
+  "finalAdjudicatedAtUtc": "2026-10-31T22:19:37.394782+00:00"
+}

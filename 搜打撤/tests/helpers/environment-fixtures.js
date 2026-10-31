@@ -13,6 +13,15 @@ export function overlayElements() {
   return { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
 }
 
+// Preserve the real module facade across fixture setup; imported registries
+// (Chests, Nest, UI) must keep the same object the runtime modules captured.
+export async function connectSdtFixture(ports) {
+  const { default: facade } = await import('../../game/src/core/sdt-facade.js');
+  Object.assign(facade, ports);
+  window.SDT = facade;
+  return facade;
+}
+
 export function playerFields(hp, maxHp, atk, spellPower, myClass, characterId) {
   return { hp: hp, maxHp: maxHp, atk: atk, spellPower: spellPower, coins: 0,
     myClass: myClass, characterId: characterId, state: 'idle', battleActive: false };

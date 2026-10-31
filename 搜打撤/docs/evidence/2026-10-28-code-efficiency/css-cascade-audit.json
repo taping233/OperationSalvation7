@@ -1,0 +1,895 @@
+{
+  "schemaVersion": 1,
+  "scope": "Remove earlier identical-selector properties that are unconditionally shadowed in the production HTML stylesheet order. No selector specificity or surviving declaration is changed.",
+  "index": {
+    "path": "game/index.html",
+    "sha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567"
+  },
+  "loadOrder": [
+    {
+      "index": 0,
+      "path": "game/css/base.css",
+      "sha256": "62ebe9d102f29d9e692289461a0a2a853e6110a00bc01aea24124c1d5f62c2f7"
+    },
+    {
+      "index": 1,
+      "path": "game/css/cards.css",
+      "sha256": "aa23fd9148c4c6fd77aae6fa448f085cec4a7b9f07d5bd4653b710582fb1dd11"
+    },
+    {
+      "index": 2,
+      "path": "game/css/overlays.css",
+      "sha256": "d862d1dfb82a8c376473b07762daf8bcb274ff5e7d599ee516acc65b1f97546d"
+    },
+    {
+      "index": 3,
+      "path": "game/css/hub.css",
+      "sha256": "8cd32750970f4ae213eb9c7ea95181e78fd1bcba3405b5e7e5580a8472749fa8"
+    },
+    {
+      "index": 4,
+      "path": "game/css/battle.css",
+      "sha256": "481f0eea2cdc5f0e6c47e172c890b2b4af6fb9a8071adbb60ad542b5d131b976"
+    },
+    {
+      "index": 5,
+      "path": "game/css/scenes.css",
+      "sha256": "a67769927d6e08f8f62fca38ac36defa03e551dd2ec4bfaaa50589be644212bb"
+    },
+    {
+      "index": 6,
+      "path": "game/css/lab-ending.css",
+      "sha256": "d04aa09ba6b19e8162b56b2881bdf3a95f8a57b2c3baf0706eda864c47749e57"
+    },
+    {
+      "index": 7,
+      "path": "game/css/winter.css",
+      "sha256": "173bd5082677b3fcff36c0f0fb9e39c275679b6052fa3568185a0acad414e1e1"
+    },
+    {
+      "index": 8,
+      "path": "game/css/expedition.css",
+      "sha256": "7763f807c1df8b84239ec89b634e26e1b36d1adf20477f17c3e1460b489f08e1"
+    },
+    {
+      "index": 9,
+      "path": "game/css/expedition-map.css",
+      "sha256": "539911f877804260954291110e7d619c35dfa733c43093d6c901ae8b1a66a3ac"
+    },
+    {
+      "index": 10,
+      "path": "game/css/map-edge-light.css",
+      "sha256": "facee275e50c4bc42880b4c828c9a27231c2a8837fdf0637e415789f273dc871"
+    },
+    {
+      "index": 11,
+      "path": "game/css/expedition-hub.css",
+      "sha256": "1976256b6c04f60ca573b021fee9eb142de6fbbd9946252db06b180b1e85a163"
+    },
+    {
+      "index": 12,
+      "path": "game/css/expedition-inventory.css",
+      "sha256": "7136bc5273a8e8601285403ba226c576526d804dd1db6b53e01cc68171fec3f6"
+    },
+    {
+      "index": 13,
+      "path": "game/css/expedition-rewards.css",
+      "sha256": "542dc39a0f873956a75a4aefcbf9b59f08367bc0dad733630e2e4b46cdab5cac"
+    },
+    {
+      "index": 14,
+      "path": "game/css/expedition-battle.css",
+      "sha256": "7d409153e1a7b37540355d31f8032b60b22a03f9950d4792e8f0ff7672aa1edc"
+    },
+    {
+      "index": 15,
+      "path": "game/css/expedition-library.css",
+      "sha256": "db8cac5f7f3a1656ac66a93bafbce6bb988b49dd91237c8db7ac61a89aba0ac8"
+    },
+    {
+      "index": 16,
+      "path": "game/css/card-v3.css",
+      "sha256": "c992a3f6e14e16e15c32ca97ac151bfa94ff7dfbe300c72b344c1e929c6269d8"
+    },
+    {
+      "index": 17,
+      "path": "game/css/expedition-roster.css",
+      "sha256": "0d684bf10cd2d1afb39b2d77fc6ed10022294a5620ad8c3710d55ecef1b3c801"
+    },
+    {
+      "index": 18,
+      "path": "game/css/expedition-shop.css",
+      "sha256": "fea202aebf256b235d7d3a1b3d0cf5a1b878f2d11b1bca0b23880a7c580a835a"
+    },
+    {
+      "index": 19,
+      "path": "game/css/ui-scale.css",
+      "sha256": "83705767f816c8aee8e7d463be424881ebf27c714ddc5f29648a97ac7895ebe1"
+    },
+    {
+      "index": 20,
+      "path": "game/css/page-slot-select.css",
+      "sha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6"
+    },
+    {
+      "index": 21,
+      "path": "game/css/page-settings.css",
+      "sha256": "0f8c66f50c22ecd832d8ff4071556e1a260adbc939f937d417245499962bc9fe"
+    },
+    {
+      "index": 22,
+      "path": "game/css/page-datapage.css",
+      "sha256": "9e052b11c9420916d9c215efc382cb7bcc256dc3e14c6accf280db4e065c8920"
+    },
+    {
+      "index": 23,
+      "path": "game/css/page-ach.css",
+      "sha256": "4595797b29155407f0fd73b276dde266b0a0ab05c6d6f3f9491197ef08cf757c"
+    },
+    {
+      "index": 24,
+      "path": "game/css/page-cardforge.css",
+      "sha256": "109f7b57d81854d7d23ab7ea44f616962a44c42f12717ce008b9708d0b0302c0"
+    },
+    {
+      "index": 25,
+      "path": "game/css/page-expedition-hud.css",
+      "sha256": "a24477c92627915a99212e378b7b05ff87ea5c3df3b1f21eb795cb4c4b93248a"
+    },
+    {
+      "index": 26,
+      "path": "game/css/feedback-oct12.css",
+      "sha256": "1a44bd9fa40e4ba6d098f92a0ecf0166a318c69681144d80694608ca58ec8e58"
+    },
+    {
+      "index": 27,
+      "path": "game/css/roster-departure-v2.css",
+      "sha256": "be88e89679b9d8f82238a5821fbe0caafc96efa9bd76f36a31a8ee271bd5f156"
+    },
+    {
+      "index": 28,
+      "path": "game/css/experience-loot.css",
+      "sha256": "16e188c27b87086bd8d07e40dee70621b63ea8c476decad27b49bd843900258b"
+    },
+    {
+      "index": 29,
+      "path": "game/css/page-events.css",
+      "sha256": "d2bc908ffc892afbca477c203f18801ed159cc12ec651702746da39bf34d1852"
+    },
+    {
+      "index": 30,
+      "path": "game/css/page-rewards-bag-help.css",
+      "sha256": "82d3871b5ffce7983b7324f2791d5c64d7645e2b9926eeb6baa412be845502e1"
+    },
+    {
+      "index": 31,
+      "path": "game/css/page-battle-ui.css",
+      "sha256": "940ec3a4bb1d971be2add888de60b7126e678c41ab479bac4241593d028104fe"
+    },
+    {
+      "index": 32,
+      "path": "game/css/character-idle.css",
+      "sha256": "f9adedfa29c22c2f0ccb690dbb955e1ccf8a35bc62c19e9579bba16cd5ae440c"
+    },
+    {
+      "index": 33,
+      "path": "game/css/page-transitions.css",
+      "sha256": "c2f4d6cedf447062e8ac80de784c22987f595d133a9712079f457d0244c0b024"
+    },
+    {
+      "index": 34,
+      "path": "game/css/ak-skin.css",
+      "sha256": "ff54a1a823e8a12ddd407d8db9097591df32c0abcc0d927328ff05b368d7dbd7"
+    },
+    {
+      "index": 35,
+      "path": "game/css/base-camp.css",
+      "sha256": "88a102b31cb212262df2716de097b6b70818fa86e06507640423abba09d69e88"
+    },
+    {
+      "index": 36,
+      "path": "game/css/base-camp-compact.css",
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+    },
+    {
+      "index": 37,
+      "path": "game/css/card-layout-selected.css",
+      "sha256": "16215e25286c401718703e5939e55dcad563de2aa2c631e08f4d680215fa871c"
+    },
+    {
+      "index": 38,
+      "path": "game/css/battle-stage.css",
+      "sha256": "ccebad0f54d689eee5cfe525b4057bde003541160c15c1657b9e264c0d4562ce"
+    },
+    {
+      "index": 39,
+      "path": "game/css/transition-illustrations.css",
+      "sha256": "7468547d4918d002a37f490df330778bb1acc1819c4e6df26a4bda65011988cb"
+    }
+  ],
+  "selectorPropertyInstancesRemoved": 39,
+  "physicalDeclarationsRemoved": 38,
+  "removals": [
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 138,
+      "selector": "#resHud",
+      "property": "top",
+      "value": "12px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/winter.css",
+        "lineBefore": 42,
+        "value": "20px",
+        "loadIndex": 7
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 138,
+      "selector": "#resHud",
+      "property": "right",
+      "value": "12px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/winter.css",
+        "lineBefore": 42,
+        "value": "22px",
+        "loadIndex": 7
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 140,
+      "selector": "#resHud .chip-mini",
+      "property": "border-radius",
+      "value": "0",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 153,
+        "value": "0",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 141,
+      "selector": "#resHud .chip-mini",
+      "property": "min-width",
+      "value": "118px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/winter.css",
+        "lineBefore": 45,
+        "value": "92px",
+        "loadIndex": 7
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 141,
+      "selector": "#resHud .chip-mini",
+      "property": "height",
+      "value": "36px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 158,
+        "value": "34px",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 141,
+      "selector": "#resHud .chip-mini",
+      "property": "gap",
+      "value": "8px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 158,
+        "value": "0",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 142,
+      "selector": "#resHud .chip-mini",
+      "property": "background",
+      "value": "linear-gradient(90deg, rgba(10,12,14,.92), rgba(24,27,30,.82))",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 158,
+        "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 142,
+      "selector": "#resHud .chip-mini",
+      "property": "border",
+      "value": "none",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 153,
+        "value": "1px solid rgba(170,174,177,.26)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 143,
+      "selector": "#resHud .chip-mini",
+      "property": "border-left",
+      "value": "3px solid var(--ak-white)",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 158,
+        "value": "0",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 145,
+      "selector": "#resHud .chip-mini",
+      "property": "box-shadow",
+      "value": "inset 0 0 0 1px rgba(255,255,255,.1), 0 4px 14px rgba(0,0,0,.55)",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 154,
+        "value": "inset 0 1px 0 rgba(223,224,226,.06), 0 2px 8px rgba(7,7,8,.35)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 146,
+      "selector": "#resHud .chip-mini .res-ic",
+      "property": "width",
+      "value": "20px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 159,
+        "value": "38px",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 146,
+      "selector": "#resHud .chip-mini .res-ic",
+      "property": "height",
+      "value": "20px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 159,
+        "value": "34px",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 146,
+      "selector": "#resHud .chip-mini .res-ic",
+      "property": "flex",
+      "value": "0 0 auto",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 159,
+        "value": "none",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 147,
+      "selector": "#resHud .chip-mini .res-ic",
+      "property": "filter",
+      "value": "drop-shadow(0 1px 2px rgba(0,0,0,.6))",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 159,
+        "value": "none",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 148,
+      "selector": "#resHud .chip-mini b",
+      "property": "font-size",
+      "value": "19px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 163,
+        "value": "20px",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 149,
+      "selector": "#resHud .chip-mini b",
+      "property": "font-variant-numeric",
+      "value": "tabular-nums",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 160,
+        "value": "tabular-nums",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 149,
+      "selector": "#resHud .chip-mini b",
+      "property": "letter-spacing",
+      "value": ".5px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 160,
+        "value": ".02em",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 153,
+      "selector": "#resHud .res-gold b",
+      "property": "color",
+      "value": "var(--ak-yellow)",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 158,
+        "value": "#f4e2a5",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 154,
+      "selector": "#resHud .res-atk b",
+      "property": "color",
+      "value": "#ff7a6b",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 159,
+        "value": "#ff8d7e",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 184,
+      "selector": "#hpHud",
+      "property": "background",
+      "value": "linear-gradient(90deg, rgba(10,12,14,.94), rgba(26,29,33,.88))",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 164,
+        "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 184,
+      "selector": "#hpHud",
+      "property": "border",
+      "value": "none",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/winter.css",
+        "lineBefore": 42,
+        "value": "1px solid #71777b",
+        "loadIndex": 7
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 184,
+      "selector": "#hpHud",
+      "property": "box-shadow",
+      "value": "inset 0 0 0 1px var(--ak-line-hi), 0 4px 14px rgba(0,0,0,.55)",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 143,
+        "value": "0 2px 8px rgba(7,7,8,.3)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 184,
+      "selector": "#hpHud",
+      "property": "clip-path",
+      "value": "polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 164,
+        "value": "polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 186,
+      "selector": ".hp-hud-icon",
+      "property": "background",
+      "value": "var(--ak-blue)",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 145,
+        "value": "linear-gradient(160deg, #6e777e 0%, #53595f 60%, #43484d 100%)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 191,
+      "selector": ".hp-hud-label",
+      "property": "letter-spacing",
+      "value": "3px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 146,
+        "value": "2.5px",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 191,
+      "selector": ".hp-hud-label",
+      "property": "color",
+      "value": "var(--ak-sub)",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 165,
+        "value": "#04121b",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 191,
+      "selector": ".hp-hud-label",
+      "property": "font-weight",
+      "value": "700",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/winter.css",
+        "lineBefore": 42,
+        "value": "400",
+        "loadIndex": 7
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "lineBefore": 191,
+      "selector": ".hp-hud-label",
+      "property": "background",
+      "value": "none",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 0,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 145,
+        "value": "linear-gradient(160deg, #6e777e 0%, #53595f 60%, #43484d 100%)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 42,
+      "selector": "#hpHud",
+      "property": "background",
+      "value": "#1e2022",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 164,
+        "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 42,
+      "selector": "#hpHud",
+      "property": "box-shadow",
+      "value": "none",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 143,
+        "value": "0 2px 8px rgba(7,7,8,.3)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 42,
+      "selector": "#hpHud",
+      "property": "clip-path",
+      "value": "none",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 164,
+        "value": "polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 42,
+      "selector": ".hp-hud-icon",
+      "property": "background",
+      "value": "#5d646b",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 145,
+        "value": "linear-gradient(160deg, #6e777e 0%, #53595f 60%, #43484d 100%)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 42,
+      "selector": ".hp-hud-label",
+      "property": "background",
+      "value": "#5d646b",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 145,
+        "value": "linear-gradient(160deg, #6e777e 0%, #53595f 60%, #43484d 100%)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 42,
+      "selector": ".hp-hud-label",
+      "property": "letter-spacing",
+      "value": "2px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 146,
+        "value": "2.5px",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 45,
+      "selector": "#resHud .chip-mini",
+      "property": "background",
+      "value": "#1e2022e8",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 158,
+        "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 45,
+      "selector": "#resHud .chip-mini",
+      "property": "border",
+      "value": "1px solid #71777b",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 153,
+        "value": "1px solid rgba(170,174,177,.26)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 45,
+      "selector": "#resHud .chip-mini",
+      "property": "box-shadow",
+      "value": "none",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 154,
+        "value": "inset 0 1px 0 rgba(223,224,226,.06), 0 2px 8px rgba(7,7,8,.35)",
+        "loadIndex": 25
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 45,
+      "selector": "#resHud .chip-mini",
+      "property": "height",
+      "value": "42px",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/ak-skin.css",
+        "lineBefore": 158,
+        "value": "34px",
+        "loadIndex": 34
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "lineBefore": 45,
+      "selector": "#resHud .res-gold b",
+      "property": "color",
+      "value": "#eed47f",
+      "important": false,
+      "conditions": [],
+      "loadIndex": 7,
+      "survivor": {
+        "file": "game/css/page-expedition-hud.css",
+        "lineBefore": 158,
+        "value": "#f4e2a5",
+        "loadIndex": 25
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "game/css/base.css",
+      "before": {
+        "path": "docs/evidence/2026-10-28-code-efficiency/css-before/base.css",
+        "bytes": 25241,
+        "sha256": "62ebe9d102f29d9e692289461a0a2a853e6110a00bc01aea24124c1d5f62c2f7"
+      },
+      "after": {
+        "bytes": 24327,
+        "sha256": "eea85b815ad650da661ae9f4ae4d44b85cad5d80b0117a0f1e54dec2533d3a87"
+      },
+      "bytesRemoved": 914,
+      "netDiffFromBefore": {
+        "addedLines": 8,
+        "removedLines": 17
+      }
+    },
+    {
+      "path": "game/css/winter.css",
+      "before": {
+        "path": "docs/evidence/2026-10-28-code-efficiency/css-before/winter.css",
+        "bytes": 77897,
+        "sha256": "173bd5082677b3fcff36c0f0fb9e39c275679b6052fa3568185a0acad414e1e1"
+      },
+      "after": {
+        "bytes": 77680,
+        "sha256": "d741f2f9fe3d2f55630f7febb546b028a4e5c81968e8f58560fadddf778b9ece"
+      },
+      "bytesRemoved": 217,
+      "netDiffFromBefore": {
+        "addedLines": 2,
+        "removedLines": 2
+      }
+    }
+  ],
+  "staticVerification": {
+    "passed": true,
+    "method": "For every removed declaration, all selector expansions have a later declaration with the same selector, property, importance and at-rule conditions. Compare the final declaration identity/value for every selector/property/importance/condition key across all 40 entry stylesheets before and after.",
+    "comparedKeys": 13549,
+    "changedKeys": 0,
+    "removedEmptyRules": 5,
+    "atRulesChanged": 0
+  },
+  "tests": {
+    "command": "node node_modules/vitest/vitest.mjs run tests/map-health-hud.test.js tests/run-top-bar-consistency.test.js tests/run-top-bar-actions.test.js --reporter=dot",
+    "exitCode": 0,
+    "passedFiles": 3,
+    "passedTests": 29,
+    "durationSeconds": 5.94,
+    "log": "docs/evidence/2026-10-28-code-efficiency/css-hud-tests.log"
+  },
+  "browserVerification": {
+    "status": "pending",
+    "owner": "root",
+    "scope": "Current built-in browser window"
+  }
+}

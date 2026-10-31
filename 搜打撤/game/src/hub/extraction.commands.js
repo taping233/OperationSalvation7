@@ -1,7 +1,9 @@
-import { clone, fail } from './commands.shared.js';
+import { clone, fail, stable } from './commands.shared.js';
 import { RULE_CONFIG } from '../core/rule-config.js';
 import { LEVEL_MAX, xpForNext } from './meta-progression.js';
 import { sameStoredCard, storedCardVariant } from './stored-card-identity.js';
+import { buildRunMemento } from '../run/run-memento.js';
+import { canSacrificeCard } from './sacrifice-policy.js';
 
 // New extraction drafts distinguish source identities before any warehouse merge.
 export const extractionSourceKey = stack => JSON.stringify([stack.card.id || null,
@@ -150,6 +152,8 @@ export function buildExtractionReceipt({ game, pending, isSha = /** @type {(card
   const ownedNonSha = (game.ownedCards || []).filter(o => o && o.card && !isSha(o.card)).length;
   const pocket = extractionPocketOutcome(pending, isSha);
   const resources = pending && pending.resources ? pending.resources : {};
+  const savedCards = savedExtractionCards(game, remaining, isSha, pending?.sourceIdentityVersion === 1);
+  const memento = buildRunMemento(game, savedCards);
   return {
     version: 1,
     outcome: game.bossKilled ? 'clear' : 'extract',   // clear=击破首脑后的终局撤离，extract=保本/紧急撤离
@@ -158,7 +162,8 @@ export function buildExtractionReceipt({ game, pending, isSha = /** @type {(card
     actions: Math.max(0, (Number(game.turn) || 0) - 1),
     firstExplore: { moves, xp: extractionXp(moves, xpMul) },
     ...(pending?.growth ? { growth: clone(pending.growth) } : {}),
-    savedCards: savedExtractionCards(game, remaining, isSha, pending?.sourceIdentityVersion === 1),
+    savedCards,
+    ...(memento ? { memento } : {}),
     netTake: {
       cardsStashed: Math.max(0, ownedNonSha - remainingCount),   // 本局真实入库张数（与携出候选、仓库原持有区分）
       pocketKept: pocket.keptCount,
@@ -218,6 +223,25 @@ function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, c
   const growth = addXp(base, game.myClass, extractionXp(firstExploreMoves(game), xpMul), characterFor, addXpToProgress);
   if (growth) pending.growth = growth;
   return { pending, base, elapsedSynced: elapsedNow };
+}
+
+function projectEmergencyPayment(source, sacrificeUids) {
+  if (sacrificeUids === undefined) return { ok: true, source };
+  if (!Array.isArray(sacrificeUids) || sacrificeUids.length !== 3 ||
+      sacrificeUids.some(uid => typeof uid !== 'string' || !uid.trim()) || new Set(sacrificeUids).size !== 3) {
+    return fail('INVALID_ARGUMENT', '紧急撤离须选择 3 张不同的普通随身卡牌');
+  }
+  const selected = new Set(sacrificeUids);
+  const ownedCards = Array.isArray(source.ownedCards) ? source.ownedCards : [];
+  const payment = ownedCards.filter(owned => selected.has(owned.uid));
+  if (payment.length !== 3 || new Set(payment.map(owned => owned.uid)).size !== 3 ||
+      !payment.every(owned => canSacrificeCard(owned))) {
+    return fail('INVALID_SACRIFICE', '所选卡牌已变化，请返回撤离点重新选择 3 张普通随身卡牌');
+  }
+  return { ok: true, source: { ...source,
+    ownedCards: ownedCards.filter(owned => !selected.has(owned.uid)),
+    cardOrder: (source.cardOrder || []).filter(uid => !selected.has(uid)),
+  } };
 }
 
 export function createExtractionCommands({
@@ -287,6 +311,10 @@ export function createExtractionCommands({
       if (!identity.ok || identity.value.runId !== attempt.runId) return false;
     }
     baseApi._refreshExternal(getActiveSlot());
+    if (attempt.sacrificeUids) {
+      game.ownedCards = clone(attempt.afterRun.ownedCards);
+      game.cardOrder = clone(attempt.afterRun.cardOrder);
+    }
     if (attempt.afterRun?.pendingExtraction) game.pendingExtraction = attempt.afterRun.pendingExtraction;
     if (attempt.afterRun === null) { game.pendingExtraction = null; game.runActive = false; }
     if (attempt.elapsedSynced != null) game.elapsedSynced = attempt.elapsedSynced;
@@ -302,12 +330,21 @@ export function createExtractionCommands({
     return { ...current, pending };
   };
 
-  async function begin() {
+  /** @param {{ sacrificeUids?: string[] }} [request] */
+  async function begin(request = {}) {
+    const sacrificeUids = Array.isArray(request.sacrificeUids) ? request.sacrificeUids.slice() : request.sacrificeUids;
     const slotId = getActiveSlot();
     if (!slotId) {
-      const result = calculateBaseAndPending({ game, runId: 'ephemeral', random, baseSnapshot: baseApi.data,
+      if (game.pendingExtraction) return { ok: true, value: game.pendingExtraction, existing: true, ephemeral: true };
+      const projected = projectEmergencyPayment(game, sacrificeUids);
+      if (!projected.ok) return projected;
+      const result = calculateBaseAndPending({ game: projected.source, runId: 'ephemeral', random, baseSnapshot: baseApi.data,
         baseApi, characterFor, addXpToProgress, xpMul: xpMultiplier() });
       Object.assign(baseApi.data, result.base);
+      if (sacrificeUids !== undefined) {
+        game.ownedCards = projected.source.ownedCards;
+        game.cardOrder = projected.source.cardOrder;
+      }
       return { ok: true, value: result.pending, ephemeral: true };
     }
     const current = await readCurrent(slotId);
@@ -316,22 +353,31 @@ export function createExtractionCommands({
       const pending = current.run.pendingExtraction;
       const checked = validatePendingExtraction(pending);
       if (!checked.ok || pending.runId !== current.identity.runId) return fail('INVALID_EXTRACTION', '已有撤离整理记录无法匹配当前对局');
+      // Recovery may already have committed payment while this page still holds the original cards.
+      baseApi._refreshExternal(slotId);
+      game.ownedCards = clone(current.run.ownedCards);
+      game.cardOrder = clone(current.run.cardOrder || []);
       if (beginAttempt?.runId === current.identity.runId) { restoreRandom(current.run.rngState); beginAttempt = null; }
       return { ok: true, value: pending, existing: true };
     }
     if (beginAttempt && (beginAttempt.slotId !== slotId || beginAttempt.runId !== current.identity.runId)) beginAttempt = null;
     if (!beginAttempt) {
+      const projected = projectEmergencyPayment(sacrificeUids === undefined ? game : current.run, sacrificeUids);
+      if (!projected.ok) return projected;
       const stream = makePocketStream ? makePocketStream(current.run.rngState || { seed: current.run.seed }) : null;
-      const result = calculateBaseAndPending({ game, runId: current.identity.runId,
+      const result = calculateBaseAndPending({ game: projected.source, runId: current.identity.runId,
         random: stream ? stream.random : random, baseSnapshot: current.base, baseApi, characterFor,
         addXpToProgress, xpMul: xpMultiplier() });
       const randomState = stream ? stream.snapshot() : null;
       const afterRun = { ...current.run, pendingExtraction: result.pending, battle: null, nestActive: false,
         elapsed: result.elapsedSynced, elapsedSynced: result.elapsedSynced,
+        ...(sacrificeUids !== undefined ? { ownedCards: projected.source.ownedCards, cardOrder: projected.source.cardOrder } : {}),
         ...(randomState ? { rngState: randomState } : {}) };
       beginAttempt = makeAttempt(slotId, current, `terminal:extract:${current.identity.runId}:0`, 'extractStart',
-        { pendingExtraction: result.pending, rngState: randomState }, result.base, afterRun,
-        { pending: result.pending, randomState, elapsedSynced: result.elapsedSynced });
+        { pendingExtraction: result.pending, rngState: randomState,
+          ...(sacrificeUids !== undefined ? { sacrificeUids } : {}) }, result.base, afterRun,
+        { pending: result.pending, randomState, elapsedSynced: result.elapsedSynced,
+          ...(sacrificeUids !== undefined ? { sacrificeUids } : {}) });
     }
     const attempt = beginAttempt;
     const receipt = await commitAttempt(attempt);
@@ -429,6 +475,12 @@ export function createExtractionCommands({
     }
     if (attempt.command !== command) return fail('REQUEST_PENDING', stashing
       ? '完成整理正在等待重试，请点击「完成整理」继续恢复' : '上一项整理正在重试，请稍后再操作', true);
+    // A failed deposit retains its token for recovery. A different card click must
+    // not replay that token and report the old deposit under the new selection.
+    if (stashing && stable(attempt.payload.selections) !== stable(selections)) {
+      const original = attempt.payload.selections.map(selection => `${selection.name} ×${selection.count}`).join('、');
+      return fail('REQUEST_PENDING', `上一项入库尚待确认，请重试原入库操作（${original}）后再选择其他卡牌`, true);
+    }
     const receipt = await commitAttempt(attempt);
     // 日志前的修订拒绝可丢弃；中断或结果未确认仍保留原令牌等待恢复/重放。
     if (!receipt.ok) {
@@ -446,5 +498,13 @@ export function createExtractionCommands({
   const updateCards = organize.bind(null, 'extractStash');
   const finish = organize.bind(null, 'extractFinish', undefined);
 
-  return Object.freeze({ begin, updateCards, finish });
+  function pendingCardSelection(expectedRunId = game.pendingExtraction?.runId, expectedSlotId = getActiveSlot()) {
+    const slotId = getActiveSlot();
+    if (expectedSlotId !== slotId || !expectedRunId || expectedRunId !== game.pendingExtraction?.runId) return null;
+    const attempt = inFlight.get(`${slotId}:${expectedRunId}`);
+    if (attempt?.command !== 'extractStash' || attempt.slotId !== slotId || attempt.runId !== expectedRunId) return null;
+    return clone(attempt.payload.selections);
+  }
+
+  return Object.freeze({ begin, updateCards, finish, pendingCardSelection });
 }

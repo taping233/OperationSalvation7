@@ -1,6 +1,7 @@
 // Regression coverage for elite-mode 1.35 scaling through public event and reward paths.
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import mapData from '../game/data/map.json';
+import { eventPresentationPorts } from './helpers/event-presentation-ports.js';
 
 // Public event controller + real scaler/commands/coin award; UI, storage and battle-start are ports.
 const H = vi.hoisted(() => ({ game:{}, map:{ rules:{ fireHeal:10 } }, cards:[], acts:{}, draws:[],
@@ -45,7 +46,7 @@ async function openEvent(id, resolveNarrative = narrative) {
   H.cards = [{ id, name:'模式事件夹具', type:'事件' }];
   const award = vi.fn(gainCoins);
   const unused = () => { throw new Error('Unexpected unrelated event path'); };
-  const controller = createController({ game:H.game, UI, dom:document, MAP:H.map,
+  const controller = createController({ ...eventPresentationPorts, game:H.game, UI, dom:document, MAP:H.map,
     getCards:() => window.SDT.Cards, sound:() => {}, serializeReward:() => null,
     eventCommands:createCommands({ state:H.game, gainCoins:award, grantCard:unused, heal:unused, damage:unused }),
     scaledEnemy:scaler, startBattle:H.start, getActiveSlot:() => null, saveGame:H.save,

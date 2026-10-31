@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-sword",
+      "asset": "cards/wu-myriadswords.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a18288-045e-7af2-bf6b-a16a7b86fd59/exec-e71ae064-3011-4c15-be49-f9c73ca2bcc9.png",
+      "revision": "wu-myriadswords-swords-only-20261028",
+      "prompt": "Surgical correction of the floating weapons in this exact illustration. Preserve the girl, her crossed-arm pose, face, hair, costume, central position and size, camera, background, blue rings, weapon quantity and overall radial layout. EVERY floating object must be a coherent recognizable SWORD. Correct ALL malformed floating objects, especially the little double-ended spear-like objects at middle-left and middle-right, short detached hilts around the head and body, elaborate forked black weapons on the right, and branch/star-like objects near bottom corners. Redesign these as beautiful SIMPLE LONG SWORDS with exactly ONE continuous tapered blade, ONE modest crossguard, ONE short wrapped grip and ONE small blunt pommel. Blade is 4-6 times the grip length. The grip never ends in a spear point or a second blade. No double-ended weapons, no polearms, no axes, no tridents, no branches, no detached handles, no star-shaped blades or giant spiky ornamental guards. Refine even the main fantasy swords into elegant jian, European arming swords, slim rapiers with simple guards, broad leaf-blade swords, restrained flamberges. Variety comes from blade width/length, subtle curvature, guard shape and silver/black/gold/cyan material, while all silhouettes remain unmistakably swords. Keep approximately the same dense quantity. Small objects must still have clear sword proportions; simplify detail instead of fragmenting them. All weapons remain in the same general locations and radial orientation. Preserve the existing NAI anime rendering, wide aspect ratio, original character details and shadows. Do not change the composition or add text.",
+      "references": [
+        "docs/evidence/2026-10-28-myriadswords-draft-more/request.json"
+      ],
+      "nai_request": "docs/evidence/2026-10-28-myriadswords-circle/nai-payload.json"
+    }
+  ]
+}

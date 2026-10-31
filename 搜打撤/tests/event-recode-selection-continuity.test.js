@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { overlayElements, resetEventGame, eventCardMocks, bindEventRoot, eventMapMocks, eventMapActions, eventUiMocks, eventCapacityPorts, eventSaveActions } from './helpers/environment-fixtures.js';
 import { rollEventDice, flushEventActions } from './helpers/event-dice-async.js';
 import { bagSlots } from '../game/src/hub/game.bag.bridge.js';
@@ -21,7 +22,7 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: (...args) => H
 
 let flow, scenes, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { ...eventCardMocks(H) };
+  await connectSdtFixture({ ...eventCardMocks(H) });
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
   UI = window.SDT.UI = { ...overlayMethods, ...eventUiMocks(() => UI),
   };
@@ -56,14 +57,14 @@ it('重编连续选取取消保留候选节点、焦点和滚动，只更新选�
   const moves = [1, 2, 3, 4].map(i => ({ id: `m${i}`, name: `招式${i}`, type: '武术', rarity: '古朴' }));
   H.game.ownedCards = moves.map((card, i) => ({ uid: `owned${i}`, card }));
   await openEvent('ev19-recode', moves); await UI._acts.evtChoice({ i: '0' }); await flushEventActions(); await rollEventDice(UI);
-  const root = UI.el.ovBody.querySelector('.event-scene');
-  const list = UI.el.ovBody.querySelector('.event-choice-hand');
+  const root = UI.el.ovBody.querySelector('.event-recode-scene');
+  const list = UI.el.ovBody.querySelector('.reward-stage');
   const buttons = [...list.querySelectorAll('[data-act="eventRecodePick"]')];
   const go = UI.el.ovBody.querySelector('[data-act="eventRecodeGo"]');
   const show = vi.spyOn(UI, 'showOverlay');
   list.scrollTop = 140; buttons[0].focus();
   await UI._acts.eventRecodePick({ i: '0' }); await flushEventActions();
-  expect(UI.el.ovBody.querySelector('.event-scene')).toBe(root);
+  expect(UI.el.ovBody.querySelector('.event-recode-scene')).toBe(root);
   expect(document.activeElement).toBe(buttons[0]); expect(list.scrollTop).toBe(140);
   expect(buttons[0].getAttribute('aria-pressed')).toBe('true'); expect(go.disabled).toBe(true);
   await UI._acts.eventRecodePick({ i: '1' }); await flushEventActions();
@@ -84,9 +85,9 @@ it('离开再返回才重建候选，并保留选择且拒绝旧页面动作', a
   await UI._acts.eventRecodePick({ i: '0' }); await flushEventActions(); const oldPick = UI._acts.eventRecodePick;
   UI.showOverlay('背包', '<main>背包</main>', 'page'); await returnFromBag();
   expect(UI.el.ovBody.querySelector('[data-act="eventRecodePick"]')).not.toBe(first);
-  expect(UI.el.ovBody.querySelectorAll('.picked')).toHaveLength(1);
-  await oldPick({ i: '1' }); await flushEventActions(); expect(UI.el.ovBody.querySelectorAll('.picked')).toHaveLength(1);
-  await UI._acts.eventRecodePick({ i: '1' }); await flushEventActions(); expect(UI.el.ovBody.querySelectorAll('.picked')).toHaveLength(2);
+  expect(UI.el.ovBody.querySelectorAll('[data-reward-selected="true"]')).toHaveLength(1);
+  await oldPick({ i: '1' }); await flushEventActions(); expect(UI.el.ovBody.querySelectorAll('[data-reward-selected="true"]')).toHaveLength(1);
+  await UI._acts.eventRecodePick({ i: '1' }); await flushEventActions(); expect(UI.el.ovBody.querySelectorAll('[data-reward-selected="true"]')).toHaveLength(2);
   await UI._acts.eventRecodeGo(); await flushEventActions(); await rollEventDice(UI);
   expect(UI.el.ovBody.querySelector('[data-event-recode-result]')).not.toBeNull();
   expect(first.isConnected).toBe(false);

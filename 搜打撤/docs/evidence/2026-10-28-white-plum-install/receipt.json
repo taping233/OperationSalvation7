@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-assassin",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\nai\\white-plum-fall-1028\\white-plum-layered.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-28-white-plum-install/cards-wu-void-source.png",
+        "bytes": 1955777,
+        "sha256": "ab6c56ce1e023f0463e29abb0a98fe4b403a19aceb03820728c7fb1ffe798653"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-28-white-plum-install/cards-wu-void-full-before.webp",
+          "bytes": 175042,
+          "sha256": "52f799ebacfa9cf7dde2f8e3e8157f97a0f0907489b97e2d66a469a54f9348d0"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-28-white-plum-install/cards-wu-void-thumb-before.webp",
+          "bytes": 15952,
+          "sha256": "dfcad346def6490dbc9d6eb6b5269ca9576d0f9d87d3d4939ce22c374b253414"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/wu-void.webp",
+          "bytes": 157196,
+          "sha256": "d898b6dc5561c8c121f08777307b344b6fece536c9043fd908c88c5938fcabcb",
+          "size": [
+            1660,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/wu-void.webp",
+          "bytes": 21322,
+          "sha256": "107de7241c21856c4e128444d00a31b3323119035c9997e579292e7b57e38a8a",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": "white-plum-nai-internal-20261024",
+      "revision_after": "white-plum-layered-20261028",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/wu-void.webp",
+            "ext": "webp",
+            "bytes": 175042,
+            "sha256": "52f799ebacfa9cf7dde2f8e3e8157f97a0f0907489b97e2d66a469a54f9348d0",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-white-plum/receipt.json"
+          },
+          "after": {
+            "path": "cards/wu-void.webp",
+            "ext": "webp",
+            "bytes": 157196,
+            "sha256": "d898b6dc5561c8c121f08777307b344b6fece536c9043fd908c88c5938fcabcb",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-28-white-plum-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/wu-void.webp",
+            "ext": "webp",
+            "bytes": 15952,
+            "sha256": "dfcad346def6490dbc9d6eb6b5269ca9576d0f9d87d3d4939ce22c374b253414",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-white-plum/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/wu-void.webp",
+            "ext": "webp",
+            "bytes": 21322,
+            "sha256": "107de7241c21856c4e128444d00a31b3323119035c9997e579292e7b57e38a8a",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-28-white-plum-install/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1750,
+  "manifest_count_after": 1750
+}

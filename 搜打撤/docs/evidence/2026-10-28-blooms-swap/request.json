@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-summoner",
+      "asset": "cards/hero-summoner.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a18284-7559-7473-a891-f50ff09fd8d8/exec-3ba27a85-9317-4680-8bd7-47a80d6ae000.png",
+      "revision": "baita-flower-halves-swapped-20261028",
+      "prompt": "Use case: precise-object-edit. Edit the provided card illustration locally: swap ONLY the left and right halves of the flower she holds. Final flower: viewer LEFT is the bright blooming ivory/golden yellow half that was on the right; viewer RIGHT is the pale withered and dark burgundy/red-black half that was on the left. Keep the flower centered, same scale and stem location, coherent single flower, retain both halves' distinctive petal shapes. Preserve woman identity, face, one visible green eye, hair, two golden hairpins, earrings, clothes, hands, pose, crop, exact background split (warm gold LEFT, dark green RIGHT), and existing hand-painted brush style. Do not mirror the whole image. Only flower halves exchange positions. No text or other additions.",
+      "references": [
+        "game/assets/cards/hero-summoner.webp"
+      ]
+    }
+  ]
+}

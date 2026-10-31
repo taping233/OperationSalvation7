@@ -35,6 +35,7 @@ export type EventPorts = {
   heal?:(amount:number) => unknown;
   damage?:(amount:number, reason:string) => unknown;
   grantCard?:(card:RunCard, options:{silent:boolean}) => unknown;
+  canRecode?:(entries:RunOwnedCard[], cards:RunCard[]) => boolean;
 };
 export type SpendInput = { current?:() => boolean; receipt?:Record<string, unknown>; field?:string; value?:unknown };
 export type ChoiceInput = { record:EventRecord & { taken:number | null; cardIds:string[] }; key:string; index:number; card:RunCard; current:() => boolean };

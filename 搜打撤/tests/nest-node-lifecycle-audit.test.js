@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const H = vi.hoisted(() => ({ game: {}, UI: {}, cards: [], saves: [], slot: null, battleStarts: [] }));
@@ -16,13 +17,13 @@ beforeAll(async () => {
     for (const key of Object.keys(actions)) delete actions[key];
     this.el.ovBody.innerHTML = body; this.el.overlay.hidden = false;
   }, hideOverlay() { this.el.overlay.hidden = true; }, act: (name, fn) => actions[name] = fn, log() {}, refresh() {} });
-  window.SDT = { game: H.game, UI: H.UI, Icons: { rich: text => text }, Sound: { sfx() {} },
+  await connectSdtFixture({ game: H.game, UI: H.UI, Icons: { rich: text => text }, Sound: { sfx() {} },
     Cards: { all: () => H.cards, isRandomObtainable: card => card.rarity !== '初始', SHA: { id: 'sha' } },
     Meta: { classLv: () => 1, track() {}, checkUnlocks() {} },
     Base: { data: {}, isSha: card => card.id === 'sha', save: vi.fn(() => true), carriedPet: () => null,
       recordNestBoss: async name => { const kills = window.SDT.Base.data.stats.nestBossKills ||= [];
         const changed = !kills.includes(name); if (changed) kills.push(name); return { changed, persisted:false }; } },
-  };
+  });
   await import('../game/src/run/game.nest.js'); Nest = window.SDT.Nest;
   ({ default: Bus } = await import('../game/src/core/event-bus.js'));
 });
@@ -48,27 +49,27 @@ beforeEach(async () => {
   bindBattle(); Nest.renderNestMap();
 });
 afterEach(() => vi.restoreAllMocks());
-function endBattle(win, opts = H.battleStarts.at(-1).opts) {
+async function endBattle(win, opts = H.battleStarts.at(-1).opts) {
   H.game.battleActive = false; H.game.state = 'idle';
   opts.foeNames = [opts.name];
-  H.game.onNestBattleEnd(opts, [], win, []);
-  Bus.emit('battle:end', opts, [], win, []); return opts;
+  const pending=H.game.onNestBattleEnd(opts, [], win, []);
+  Bus.emit('battle:end', opts, [], win, []); await pending; return opts;
 }
 
-describe('研究所自然节点与奖励生命周期审计', () => {
-  it('从入口点击下一格首战，按真正战场给奖励；重复结束只推进一次', () => {
+describe('研究所自然节点与奖励生命周期审计', async () => {
+  it('从入口点击下一格首战，按真正战场给奖励；重复结束只推进一次', async () => {
     actions.nestCell1(); expect(H.battleStarts[0].opts.name).toBe('黑暗元素');
-    const opts = endBattle(true);
+    const opts = await endBattle(true);
     expect(H.game.nestPos).toBe(1); expect(H.game.coins).toBeGreaterThanOrEqual(5);
     expect(H.game.cardBox).toHaveLength(1); expect(H.game.nestRunes).toHaveLength(1);
     const snapshot = JSON.parse(JSON.stringify(H.game));
     H.game.onNestBattleEnd(opts, [], true, []); Bus.emit('battle:end', opts, [], true, []);
     expect(JSON.parse(JSON.stringify(H.game))).toEqual(snapshot);
   });
-  it('首战失败保留原进度，重试成功仍按首战奖励', () => {
-    actions.nestCell1(); endBattle(false);
+  it('首战失败保留原进度，重试成功仍按首战奖励', async () => {
+    actions.nestCell1(); await endBattle(false);
     expect(H.game.nestPos).toBe(0); expect(H.game.coins).toBe(0); expect(H.game.hp).toBe(35);
-    actions.nestCell1(); endBattle(true);
+    actions.nestCell1(); await endBattle(true);
     expect(H.game.nestPos).toBe(1); expect(H.game.cardBox).toHaveLength(1);
   });
   it.each(['false', 'rejection'])('战斗入口%s失败后还原原随身牌/规则并可重试，不覆盖另一局', async failure => {
@@ -90,8 +91,8 @@ describe('研究所自然节点与奖励生命周期审计', () => {
     expect(H.game.ownedCards).toBe(currentOwned); expect(MAP.rules.battleEnergy).toBe(9);
     expect(document.getElementById('new-run')?.textContent).toBe('新研究所');
   });
-  it('自然从祭坛前往所主，完成后标记所主击破与专属奖励', () => {
-    H.game.nestPos = 9; Nest.renderNestMap(); actions.nestCell10(); endBattle(true);
+  it('自然从祭坛前往所主，完成后标记所主击破与专属奖励', async () => {
+    H.game.nestPos = 9; Nest.renderNestMap(); actions.nestCell10(); await endBattle(true);
     expect(H.game.nestPos).toBe(10); expect(H.game.nestBossDown).toBe(true);
     expect(H.game.nestTargetedBox).toBe(1); expect(H.game.nestRunes).toHaveLength(6);
     expect(window.SDT.Base.data.stats.nestBossKills).toEqual(['测试所主']);
@@ -101,29 +102,29 @@ describe('研究所自然节点与奖励生命周期审计', () => {
     Bus.reset(); vi.resetModules();
     await import('../game/src/run/game.nest.js'); Nest = window.SDT.Nest;
     ({ default: Bus } = await import('../game/src/core/event-bus.js')); bindBattle();
-    endBattle(true, opts);
+    await endBattle(true, opts);
     expect(H.game.nestPos).toBe(1); expect(H.game.coins).toBeGreaterThanOrEqual(5);
     expect(H.game.cardBox).toHaveLength(1);
   });
-  it('地图旧的下一格动作不能重开同战斗、跳关或跨新局使用', () => {
+  it('地图旧的下一格动作不能重开同战斗、跳关或跨新局使用', async () => {
     const old = actions.nestCell1;
     old(); old(); expect(H.battleStarts).toHaveLength(1);
-    endBattle(false); H.game.nestRunes = []; old(); expect(H.battleStarts).toHaveLength(1);
+    await endBattle(false); H.game.nestRunes = []; old(); expect(H.battleStarts).toHaveLength(1);
     Nest.renderNestMap(); actions.nestCell10(); expect(H.battleStarts).toHaveLength(1);
   });
-  it('中箱符文选择立即保存并防重；旧领取不能跨新局发奖', () => {
+  it('中箱符文选择立即保存并防重；旧领取不能跨新局发奖', async () => {
     const rune = { name: '候选', attrs: ['水'], rarity: '古朴' };
     H.game.pendingRunePick = [rune]; Nest.renderNestMap();
-    const claim = actions.nestPickRune0; claim(); claim();
+    const claim = actions.nestPickRune0; const pending=claim(); claim(); await pending;
     expect(H.game.nestRunes).toEqual([rune]); expect(H.saves).toHaveLength(1);
     expect(H.saves[0].pendingRunePick).toBeNull();
     H.game.nestRunes = []; claim(); expect(H.game.nestRunes).toHaveLength(0);
   });
-  it('定向箱按既有符文容量收下可容纳的块数并立即保存，不能二领成负数', () => {
+  it('定向箱按既有符文容量收下可容纳的块数并立即保存，不能二领成负数', async () => {
     H.game.nestRunes = Array.from({ length: 9 }, () => ({ name: '已有', attrs: ['火'], rarity: '古朴' }));
     H.game.nestTargetedBox = 1; Nest.renderNestMap(); const claim = actions.nestBox水;
     claim();
-    const confirm=actions.nestCostConfirm; confirm(); confirm(); claim();
+    const confirm=actions.nestCostConfirm; const pending=confirm(); confirm(); claim(); await pending;
     expect(H.game.nestRunes).toHaveLength(10); expect(H.game.nestTargetedBox).toBe(0);
     expect(H.saves).toHaveLength(1); expect(H.saves[0].nestTargetedBox).toBe(0);
   });
@@ -146,7 +147,7 @@ describe('研究所自然节点与奖励生命周期审计', () => {
     expect(H.game.cardBox).toEqual(cards); expect(H.game.nestRunes).toHaveLength(10 + upgrade);
     expect(H.game.nestPos).toBe(5); expect(H.saves).toHaveLength(0); expect(Random.snapshot()).toEqual(beforeRandom);
     H.game.nestRunes.pop(); claim();
-    const confirm=actions.nestCostConfirm; confirm(); confirm(); claim();
+    const confirm=actions.nestCostConfirm; const pending=confirm(); confirm(); claim(); await pending;
     expect(H.game.cardBox).toHaveLength(0); expect(H.game.nestRunes).toHaveLength(10 + upgrade);
     expect(H.game.nestPos).toBe(6); expect(H.saves).toHaveLength(1);
   });
@@ -191,7 +192,7 @@ describe('研究所自然节点与奖励生命周期审计', () => {
     expect(Random.snapshot()).toEqual(before); expect(H.game.nestTargetedBox).toBe(1);
     expect(H.game.nestRunes).toHaveLength(count); expect(H.saves).toHaveLength(0);
   });
-  it('定向箱确认时容量变化需重新展示损失，法阵名单变化也不扣牌', () => {
+  it('定向箱确认时容量变化需重新展示损失，法阵名单变化也不扣牌', async () => {
     H.game.nestRunes=Array.from({length:9},()=>({name:'已有',attrs:['火']}));
     H.game.nestTargetedBox=1; Nest.renderNestMap(); actions.nestBox水();
     H.game.nestRunes.push({name:'后来',attrs:['火']}); actions.nestCostConfirm();
@@ -220,7 +221,7 @@ describe('研究所自然节点与奖励生命周期审计', () => {
     window.SDT.Base.data.nestBagUp = upgrade;
     H.game.nestRunes = Array.from({ length: 10 + upgrade }, () => ({ name: '已有', attrs: ['火'], rarity: '古朴' }));
     H.game.coins = 20; H.game.nestPos = 2;
-    Nest.renderNestMap(); actions.nestCell3(); const buy = actions.nsR0;
+    Nest.renderNestMap(); await actions.nestCell3(); const buy = actions.nsR0;
     const price = Number(H.UI.el.ovBody.querySelector('[data-act="nsR0"]').textContent.match(/）(\d+) 币$/)[1]);
     const beforeRandom = Random.snapshot(); buy();
     expect(H.game.coins).toBe(20); expect(H.game.nestRunes).toHaveLength(10 + upgrade);
@@ -230,11 +231,11 @@ describe('研究所自然节点与奖励生命周期审计', () => {
     expect(H.game.coins).toBe(20 - price); expect(H.game.nestRunes).toHaveLength(10 + upgrade);
     expect(H.UI.el.ovBody.querySelector('[data-act="nsR0"]')).toBeNull();
   });
-  it.each([[2, 3, 'nsBack'], [5, 6, 'rcBack'], [8, 9, 'naBack']])('位置%s的节点离开只能推进到%s一次', (before, after, action) => {
-    H.game.nestPos = before; Nest.renderNestMap(); actions[`nestCell${after}`]();
-    const leave = actions[action]; leave(); leave(); expect(H.game.nestPos).toBe(after);
+  it.each([[2, 3, 'nsBack'], [5, 6, 'rcBack'], [8, 9, 'naBack']])('位置%s的节点离开只能推进到%s一次', async (before, after, action) => {
+    H.game.nestPos = before; Nest.renderNestMap(); await actions[`nestCell${after}`]();
+    const leave = actions[action]; const pending=leave(); leave(); await pending; expect(H.game.nestPos).toBe(after);
   });
-  it('祭坛英雄奖领取一次，离页旧属性重掷不能继续消耗随机流', () => {
+  it('祭坛英雄奖领取一次，离页旧属性重掷不能继续消耗随机流', async () => {
     H.game.nestPos = 8; H.game.nestRunes = [{ name: '初文', attrs: ['火'], rarity: '古朴' }];
     Nest.renderNestMap(); actions.nestCell9(); const claim = actions.naHero; const reroll = actions.naReroll;
     claim(); claim(); const attrs = [...H.game.nestRunes[0].attrs]; reroll();

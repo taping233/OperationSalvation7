@@ -23,5 +23,10 @@ it('forwards draw and shuffle events to current card feedback without dormant pi
   expect(animateBattleTransition(null, body, events)).toEqual({ flightMs: 0 });
   expect(cardResults).toHaveBeenCalledExactlyOnceWith(body.querySelector('.battle-stage'), events);
   expect(schedule).not.toHaveBeenCalled();
-  expect(observe).not.toHaveBeenCalled();
+  // The current effect presenter watches its overlay owner for close/replacement.
+  // No observer attaches to a pile or its subtree.
+  expect(observe).toHaveBeenCalledExactlyOnceWith(UI.el.overlay, {
+    childList: true, subtree: true, attributes: true, attributeFilter: ['hidden'],
+  });
+  expect(observe.mock.calls.every(([target]) => !target.closest('.bt-pile'))).toBe(true);
 });

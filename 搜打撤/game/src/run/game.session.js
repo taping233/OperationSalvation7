@@ -43,6 +43,7 @@ import { clampIndex, installDerived, buildNewRunDerived } from './game.session.m
 import { markSeen } from './game.session.board.js';
 import { createDeathSettlement } from './game.session.death.js';
 import { endNodeContent, eventChoiceRewardAt } from './node-reward-state.js';
+import { recordMapNodeArrival } from './map-node-arrival.js';
 
 // ---------- 档位与终局代数（会话内可变绑定；跨模块只经访问器读写） ----------
 let activeSlot = null;                // 当前游玩的档位（1..5），标题界面为 null
@@ -160,6 +161,7 @@ function enterLayer(li, atIdx, opts = null) {
   game.pos = position;
   if (opts?.endPreviousNode === true && (fromLi !== safeLayer || fromIdx !== safeIdx)) {
     endNodeContent(game, fromLi, fromIdx);
+    recordMapNodeArrival(game, safeLayer, safeIdx);
   }
   markSeen(safeLayer, safeIdx);
   game.activeLayerBounds = game.layerBounds?.[safeLayer] || null;

@@ -1,4 +1,5 @@
 import { uiDisclosure } from './ui-disclosure.js';
+import { runMementoHTML } from './run-memento-view.js';
 import { esc, escAttr } from '../core/shared.js';
 import '../../css/extraction-rewards.css';
 
@@ -9,18 +10,19 @@ const rarityOfCard = (card, rarityOf) => rarityOf?.(card) || card.rarity || '古
 export const extractionRarityRank = (card, rarityOf) => rarities.indexOf(rarityOfCard(card, rarityOf));
 
 // Presentation only. Original indices survive the rarity sort; commands still own capacity and value order.
-function cardGrid(stacks, { cardHTML, rarityOf, action, room = 0, pending = false }) {
+function cardGrid(stacks, { cardHTML, rarityOf, action, room = 0, pending = false, awaitingDeposit = false }) {
   return stacks.map((stack, index) => ({ ...stack, index, rarity: rarityOfCard(stack.card, rarityOf) }))
     .sort((a, b) => rarities.indexOf(b.rarity) - rarities.indexOf(a.rarity) || a.index - b.index)
     .map(({ card, count, index, rarity }) => {
       const take = Math.min(count, Math.max(0, room));
-      const availability = take ? `可入库 ${take}/${count} 张` : '仓库已满';
+      const canDeposit = take > 0 && !awaitingDeposit;
+      const availability = awaitingDeposit ? '请先重试上次入库' : take ? `可入库 ${take}/${count} 张` : '仓库已满';
       return `<article class="exr-item" data-exr-key="${escAttr(JSON.stringify(card))}" data-rarity="${escAttr(rarity)}">
         <div class="exr-item-meta"><span class="exr-rarity-mark" aria-label="${escAttr(rarity)}"></span><b>×${count}</b></div>
         <button type="button" class="exr-card-preview" data-act="${action}" data-i="${index}" aria-label="查看${escAttr(card.name)}详情，${escAttr(rarity)}，${count}张">
           <span class="exr-card-face" inert aria-hidden="true">${cardHTML(card, 'sm')}</span>
         </button>
-        ${pending ? `<button type="button" class="exr-deposit ext-card${take ? '' : ' off'}" data-act="exStash" data-i="${index}" ${take ? '' : 'disabled'} aria-disabled="${!take}" aria-label="${escAttr(card.name)} · ${availability}" title="${availability}"><span>${take ? (take < count ? `入库 ${take}/${count} 张` : `入库 ${take} 张`) : '仓库已满'}</span></button>` : ''}
+        ${pending ? `<button type="button" class="exr-deposit ext-card${canDeposit ? '' : ' off'}" data-act="exStash" data-i="${index}" ${canDeposit ? '' : 'disabled'} aria-disabled="${!canDeposit}" aria-label="${escAttr(card.name)} · ${availability}" title="${availability}"><span>${awaitingDeposit ? '等待上次入库' : take ? (take < count ? `入库 ${take}/${count} 张` : `入库 ${take} 张`) : '仓库已满'}</span></button>` : ''}
       </article>`;
     }).join('');
 }
@@ -37,7 +39,7 @@ function pocketHTML({ pocketKept, pocketLost, pocketRuleLost = 0, keptPocket = [
 
 function capacityHTML(used, cap, room) {
   const percent = cap > 0 ? Math.min(100, Math.max(0, used / cap * 100)) : 100;
-  return `<div class="exr-capacity"><div><span>[[icon:archive]] 仓库容量</span><strong>${used}<small> / ${cap} 张</small></strong></div><div class="exr-meter" role="meter" aria-label="仓库容量" aria-valuemin="0" aria-valuemax="${cap}" aria-valuenow="${used}"><i style="width:${percent}%"></i></div><p>${room ? `还能入库 <b>${room}</b> 张` : '仓库已满'}</p></div>`;
+  return `<div class="exr-capacity"><div><span>[[icon:archive]] 仓库容量</span><strong>${used}<small> / ${cap} 格</small></strong></div><div class="exr-meter" role="meter" aria-label="仓库容量" aria-valuemin="0" aria-valuemax="${cap}" aria-valuenow="${used}"><i style="width:${percent}%"></i></div><p>${room ? `还能入库 <b>${room}</b> 张` : '仓库已满'}</p><p>卡牌每张、符文每块各占1格</p></div>`;
 }
 
 function growthHTML(receipt) {
@@ -61,23 +63,27 @@ function growthHTML(receipt) {
  * @typedef {{cardHTML: (card: ExtractionCard, size: string) => string, rarityOf: (card: ExtractionCard) => string}} ExtractionRenderers
  * @typedef {Partial<ReturnType<typeof import('../hub/extraction.commands.js').buildExtractionReceipt>>} ExtractionReceipt
  */
-/** @param {Partial<ExtractionRenderers & {remainingCards: ExtractionStack[], savedCards: ExtractionStack[], keptPocket: ExtractionStack[], pocketKept: number, pocketLost: number, pocketRuleLost: number, wood: number, rations: number, stashUsed: number, stashCap: number, room: number, coins: number, shaN: number, starterSha: number, otherN: number, broughtByName: Map<string, number>, sourceIdentityVersion: 1, help: string, notice: string, confirmFinish: boolean}>} [options] */
+/** @param {Partial<ExtractionRenderers & {remainingCards: ExtractionStack[], savedCards: ExtractionStack[], keptPocket: ExtractionStack[], pocketKept: number, pocketLost: number, pocketRuleLost: number, wood: number, rations: number, stashUsed: number, stashCap: number, room: number, coins: number, shaN: number, starterSha: number, otherN: number, broughtByName: Map<string, number>, sourceIdentityVersion: 1, notice: string, confirmFinish: boolean, pendingDepositCount: number}>} [options] */
 export function extractionStashHTML({ remainingCards = [], savedCards = [], keptPocket = [], pocketKept = 0, pocketLost = 0, pocketRuleLost = 0,
   wood = 0, rations = 0, stashUsed = 0, stashCap = 0, room = 0, coins = 0, shaN = 0, starterSha = 0, otherN = 0,
-  cardHTML, rarityOf, help = '', notice = '', confirmFinish = false } = {}) {
+  cardHTML, rarityOf, notice = '', confirmFinish = false, pendingDepositCount = 0 } = {}) {
   const remaining = countOf(remainingCards), saved = countOf(savedCards);
+  const awaitingDeposit = pendingDepositCount > 0;
+  const confirming = confirmFinish && remaining > 0 && !awaitingDeposit;
   const canStore = Math.min(remaining, Math.max(0, room));
   const allFit = remaining > 0 && canStore === remaining;
-  const bulk = !remaining ? ''
+  const bulk = awaitingDeposit
+    ? `<p>请先重试上次入库，确认结果后可继续整理。</p><button type="button" class="exr-button exr-primary" data-act="exRetryStash">重试上次入库 ${pendingDepositCount} 张</button>`
+    : !remaining ? ''
     : `${allFit ? `<button type="button" class="exr-button exr-primary" data-act="exAll">全部入库 <b>${remaining} 张</b></button>` : ''}
       <button type="button" class="exr-button ${allFit ? 'exr-secondary' : 'exr-primary'}" data-act="exRarity" ${canStore ? '' : 'disabled'} title="优先入库高稀有度卡牌，同稀有度按背包原顺序">按稀有度入库${canStore ? ` ${canStore} 张` : ''}</button>
       ${!allFit ? `<button type="button" class="exr-button exr-secondary" data-act="exSmart" ${canStore ? '' : 'disabled'} title="${smartDescription}">按估值入库</button>` : ''}`;
   return `<div class="pg exr-page sdt-feedback-theme" id="exMain" data-unclaimed-cards="${remaining}" data-reveal="${!notice}">
-    <header class="exr-header"><div><h2 class="exr-success-title">整理战利品</h2></div>${help}</header>
+    <header class="exr-header"><div><h2 class="exr-success-title">整理战利品</h2></div></header>
     <div class="exr-layout"><section class="exr-loot" aria-label="本次战利品">
       <div class="exr-section-title"><div><h3>待入库 <b>${remaining}</b><small> 张</small></h3></div></div>
       <p class="exr-notice" role="status" aria-live="polite">${esc(notice)}</p>
-      <div class="exr-card-scroll"><div class="exr-card-grid">${remaining ? cardGrid(remainingCards, { cardHTML, rarityOf, action: 'exInspect', pending: true, room }) : `<div class="exr-empty"><span>[[icon:archive]]</span><h3>${saved ? '卡牌已妥善入库' : '本次没有待入库卡牌'}</h3></div>`}</div>
+      <div class="exr-card-scroll"><div class="exr-card-grid">${remaining ? cardGrid(remainingCards, { cardHTML, rarityOf, action: 'exInspect', pending: true, room, awaitingDeposit }) : `<div class="exr-empty"><span>[[icon:archive]]</span><h3>${saved ? '卡牌已妥善入库' : '本次没有待入库卡牌'}</h3></div>`}</div>
         ${saved ? `<details class="exr-saved-shelf"><summary>[[icon:check]] 本次已入库 ${saved} 张 </summary><div class="exr-card-grid">${cardGrid(savedCards, { cardHTML, rarityOf, action: 'exSavedInspect' })}</div></details>` : ''}
       </div>
     </section><aside class="exr-sidebar" aria-label="入库与去向">
@@ -87,8 +93,8 @@ export function extractionStashHTML({ remainingCards = [], savedCards = [], kept
         ${pocketKept || pocketLost ? pocketHTML({ pocketKept, pocketLost, pocketRuleLost, keptPocket }) : ''}
         ${coins ? `<p>随身币 ${coins} 币不带回基地。</p>` : ''}${shaN ? `<p>初始攻击 ×${shaN} 不可入库；每局自动携带 ${starterSha} 张。</p>` : ''}${otherN ? `<p>其余物资 ×${otherN} 未能带出。</p>` : ''}
       </details></div></aside></div>
-    <footer class="exr-footer${confirmFinish && remaining ? ' is-confirming' : ''}">${confirmFinish && remaining ? `<section class="exr-confirm" aria-label="确认放弃未入库卡牌"><div class="exr-finish-note is-risk"><b>这些卡牌将永久散失</b><span>出发带入卡同样适用，完成后无法取回。</span></div><ul class="exr-confirm-list" tabindex="0" aria-label="将永久散失的卡牌">${remainingCards.map(s => `<li><span>${esc(s.card.name)}</span><b>×${s.count}</b></li>`).join('')}</ul><div class="exr-confirm-actions"><button type="button" class="exr-button exr-primary" data-act="exCancelFinish">返回整理</button><button type="button" class="exr-button exr-danger" data-act="exConfirmFinish">确认放弃 ${remaining} 张并完成</button></div></section>` : `<div class="exr-finish-note${remaining ? ' is-risk' : ''}"><b>${remaining ? `完成时将丢失 ${remaining} 张未入库卡` : `本次已入库 ${saved} 张`}</b><span>${remaining ? '永久失去；带入卡同样适用' : '已保存至基地仓库'}</span></div>
-      <button type="button" class="exr-button ${remaining ? 'exr-danger' : 'exr-primary'}" data-act="exFinish">${remaining ? `放弃 ${remaining} 张并完成` : '完成整理'}<span aria-hidden="true">→</span></button>`}
+    <footer class="exr-footer${confirming ? ' is-confirming' : ''}">${confirming ? `<section class="exr-confirm" aria-label="确认放弃未入库卡牌"><div class="exr-finish-note is-risk"><b>这些卡牌将永久散失</b><span>出发带入卡同样适用，完成后无法取回。</span></div><ul class="exr-confirm-list" tabindex="0" aria-label="将永久散失的卡牌">${remainingCards.map(s => `<li><span>${esc(s.card.name)}</span><b>×${s.count}</b></li>`).join('')}</ul><div class="exr-confirm-actions"><button type="button" class="exr-button exr-primary" data-act="exCancelFinish">返回整理</button><button type="button" class="exr-button exr-danger" data-act="exConfirmFinish">确认放弃 ${remaining} 张并完成</button></div></section>` : `${awaitingDeposit ? '<div class="exr-finish-note"><b>上次入库结果待确认</b><span>请先重试上次入库，再完成整理。</span></div>' : `<div class="exr-finish-note${remaining ? ' is-risk' : ''}"><b>${remaining ? `完成时将丢失 ${remaining} 张未入库卡` : `本次已入库 ${saved} 张`}</b><span>${remaining ? '永久失去；带入卡同样适用' : '已保存至基地仓库'}</span></div>`}
+      <button type="button" class="exr-button ${remaining && !awaitingDeposit ? 'exr-danger' : 'exr-primary'}" data-act="exFinish" ${awaitingDeposit ? 'disabled aria-disabled="true"' : ''}>${awaitingDeposit ? '等待上次入库确认' : remaining ? `放弃 ${remaining} 张并完成` : '完成整理'}<span aria-hidden="true">→</span></button>`}
     </footer></div>`;
 }
 
@@ -109,7 +115,7 @@ export function extractionDoneHTML({ receipt = {}, cardHTML, rarityOf } = {}) {
       <div><span>木材</span><b>+${net.wood ?? 0}</b></div>
       <div><span>口粮</span><b>+${net.rations ?? 0}</b></div>
       <div><span>人物经验</span><b>+${r.growth?.actualXp ?? r.firstExplore?.xp ?? 0}</b></div>
-    </section>${growthHTML(r)}
+    </section>${growthHTML(r)}${runMementoHTML(r.memento)}
     ${savedCards.length ? `<details class="exr-done-cards"><summary>入库卡牌</summary><div class="exr-card-grid">${cardGrid(savedCards, { cardHTML, rarityOf, action:'exDoneInspect' })}</div></details>` : ''}
     ${(net.pocketKept || lost) ? `<details class="exr-receipt-details"><summary>待复原 ${net.pocketKept ?? 0} 张${lost ? ` · 散失 ${lost} 张` : ''}</summary>
       ${net.pocketKept ? '<p>保留的消耗牌已送至基地消耗区，可用钥匙复原。</p>' : ''}

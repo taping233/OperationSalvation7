@@ -70,7 +70,8 @@ describe('运行态补审真实入口回归', () => {
     useAvailablePotion('runtime-2');
     await settle();
     expect(BattleSession.getSnapshot()).toBe(afterFirstUse);
-    expect(game.ownedCards.filter(o => o.uid === 'runtime-2')).toEqual([]);
+    expectBattleItemCommitted(game, R, 'runtime-2');
+    expect(game.ownedCards.filter(o => o.uid === 'runtime-2')).toHaveLength(1);
   });
 
   it('同名牌不同 UID：只移出实际燃料，未被消耗的另一实例仍在手牌一次', async () => {
@@ -240,3 +241,4 @@ describe('运行态补审真实入口回归', () => {
   });
 
 });
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';

@@ -1,3 +1,5 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
+import guideData from '../game/data/beginner-guide.json';
 import { confirmAction } from '../game/src/ui/confirm-dialog.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 const H = vi.hoisted(() => ({ game: {}, save: vi.fn(), uid: 0, bagUsed:0, safeUsed:0, bagCap:16, safeCap:6 }));
@@ -25,13 +27,13 @@ beforeEach(async () => {
     usedPocket: [], cardOrder: [], hp: 10, maxHp: 30, coins: 0, fragments: 0, stackCapOf: () => 3, heal: vi.fn(n => { H.game.hp += n; }) });
   document.body.innerHTML = '<div id="overlay" hidden><div id="ovBody"></div></div>';
   const overlay = document.getElementById('overlay'), body = document.getElementById('ovBody');
-  ui = { confirmAction, el: { overlay, ovBody: body }, _acts: {}, helpTopics: {}, act(name, fn) { this._acts[name] = fn; }, log: vi.fn(), refresh: vi.fn(), helpBtn: id => `<button class="help-btn" data-help="${id}">?</button>`, registerHelp(id, def) { this.helpTopics[id] = def; },
+  ui = { confirmAction, el: { overlay, ovBody: body }, _acts: {}, act(name, fn) { this._acts[name] = fn; }, log: vi.fn(), refresh: vi.fn(),
     showOverlay(_title, html, mode) { document.getElementById('cardZoom')?.remove(); overlay.hidden = false; overlay.classList.remove('closing'); overlay.classList.toggle('bag-full', mode === 'bagpage'); body.innerHTML = html; },
     hideOverlay() { overlay.hidden = true; },
     showCardZoom(_card, options) { document.getElementById('cardZoom')?.remove(); const zoom = document.createElement('div'); zoom.id = 'cardZoom'; zoom.classList.toggle('inventory-zoom', options.presentation === 'inventory'); zoom.innerHTML = `<button class="cz-backdrop"></button><button class="cz-close"></button><div class="cz-card"></div><div class="cz-foot">${options.footer}</div>`; zoom.querySelector('.cz-backdrop').onclick = () => { zoom.remove(); options.returnFocus?.focus(); }; document.body.append(zoom); },
   };
   body.addEventListener('click', event => { const target = event.target.closest('[data-act]'); if (target && !target.disabled) ui._acts[target.dataset.act]?.({ ...target.dataset }); });
-  window.SDT = { UI: ui, game: H.game, Base: { slot: 1, bagCap: () => 16 }, Icons: { rich: markup => markup }, Sound: { sfx: vi.fn() }, Cards: { SHA: { id: 'starter-attack', name: '初始攻击' }, cardHTML: card => `<span>${card.name}</span>`, cardBackHTML: () => '' } };
+  await connectSdtFixture({ UI: ui, game: H.game, Base: { slot: 1, bagCap: () => 16 }, Icons: { rich: markup => markup }, Sound: { sfx: vi.fn() }, Cards: { SHA: { id: 'starter-attack', name: '初始攻击' }, cardHTML: card => `<span>${card.name}</span>`, cardBackHTML: () => '' } });
   frames = []; vi.stubGlobal('requestAnimationFrame', fn => { frames.push(fn); return frames.length; }); vi.stubGlobal('cancelAnimationFrame', vi.fn());
   document.elementFromPoint = vi.fn(() => null);
   bag = await import('../game/src/hub/game.bag.js'); drag = await import('../game/src/hub/game.bag.drag.js'); bag.showBackpack(true);
@@ -93,7 +95,7 @@ describe('背包旧详情/页面回调与正常返回', () => {
     expect(H.save).not.toHaveBeenCalled(); expect(window.SDT.Sound.sfx).not.toHaveBeenCalled();
   });
   it('移回已满背包同样禁用，失败保留安全格与当前详情', () => {
-    H.game.ownedCards = [{ uid:'safe-spell', card:spell, safe:true }]; H.bagUsed = 16;
+    H.game.ownedCards = [{ uid:'safe-spell', card:spell, safe:true }, ...Array.from({length:16}, (_, i) => ({uid:`full-${i}`, card:{id:`full-${i}`, name:`占位${i}`, type:'法术'}}))]; H.bagUsed = 16;
     bag.showBackpack(true); document.querySelector('[data-zone="safe"].bag-rz').click(); inspect(spell.name);
     const zoom = document.getElementById('cardZoom'), button = zoom.querySelector('[data-act="zoomMoveToBag"]');
     expect(button.disabled).toBe(true);
@@ -123,12 +125,13 @@ describe('背包旧详情/页面回调与正常返回', () => {
     expect(document.getElementById('cardZoom')).toBeNull();
     expect(window.SDT.Sound.sfx).toHaveBeenCalledWith('safeStore');
   });
-  it('帮助区分局内复原与撤离不带回的初始攻击、职业卡', () => {
-    const help = ui.helpTopics.bag.html;
-    expect(help).toContain('包括初始攻击、职业卡和衍生卡');
-    expect(help).toContain('初始攻击和职业卡即使掷中也不带回基地消耗区');
-    expect(help).toContain('初始攻击和职业卡仍可在局内复原');
-    expect(help).toContain('1/3');
+  it('指南明确初始攻击与职业卡不进入基地消耗区，局内消耗区仍标记可复原', () => {
+    const help = JSON.stringify(guideData);
+    expect(help).toContain('消耗区每张牌有三分之一概率带回');
+    expect(help).toContain('初始攻击与职业卡不进入基地消耗区');
+    H.game.usedPocket = [{card:{id:'starter',name:'初始攻击',type:'攻击'},count:1}, {card:{id:'class',name:'职业招式',type:'职业'},count:1}, {card:{id:'derived',name:'衍生招式',type:'法术'},count:1}];
+    bag.showBackpack(true); document.querySelector('.bag-rz[data-zone="pocket"]').click();
+    expect([...document.querySelectorAll('.bag-tstate')].map(node => node.textContent)).toEqual(['火堆可复原','火堆可复原','火堆可复原']);
   });
   it('卡牌操作重绘背包后，特写退场完成不会令关闭按钮失效', () => {
     inspect(spell.name);
@@ -213,9 +216,15 @@ describe('背包旧详情/页面回调与正常返回', () => {
     H.game.discoveredPairs = new Set(); H.game.ownedCards = structuredClone(H.game.ownedCards); const before = JSON.stringify(H.game.ownedCards); confirm();
     expect(JSON.stringify(H.game.ownedCards)).toBe(before); expect(H.save).not.toHaveBeenCalled();
   });
-  it('帮助正常返回有效，离开帮助后旧返回不抢新页面', () => {
-    const help = ui.helpTopics.bag; ui.showOverlay('', '<div class="help-body">帮助</div>'); help.back(); expect(document.querySelector('.bag-view')).not.toBeNull();
-    const latest = ui.helpTopics.bag; ui.showOverlay('', '<div id="newPage">新页</div>'); latest.back(); expect(document.getElementById('newPage')).not.toBeNull();
+  it('系统菜单正常返回背包，离开菜单后旧返回不抢新页面', async () => {
+    const { createMenuLeaveFlow } = await import('../game/src/ui/menu-leave.js');
+    const leave = createMenuLeaveFlow({UI:ui,game:H.game,document,runtime:{},esc:String,
+      getActiveSlot:()=>window.SDT.Base.slot,readCards:()=>window.SDT.Cards,readSound:()=>window.SDT.Sound,readAgent:()=>null});
+    leave.openLeaveMenu(); expect(document.querySelector('[data-leave-step]')).not.toBeNull();
+    await ui._acts.leaveCancel(); expect(document.querySelector('.bag-view')).not.toBeNull();
+    leave.openLeaveMenu(); const stale = ui._acts.leaveCancel;
+    ui.showOverlay('', '<div id="newPage">新页</div>'); await stale();
+    expect(document.getElementById('newPage')).not.toBeNull();
   });
   it('锦囊使用显式安全取消入口，与珍珠盒一样可由共享 Esc 返回背包', async () => {
     inspect('法师锦囊'); ui._acts.pouchStoreZoom();
@@ -267,8 +276,13 @@ describe('背包旧详情/页面回调与正常返回', () => {
   it.each([['珍珠盒', 'pearl', resource], ['法师锦囊', 'pouch', spell]])('%s重绘后旧详情回调不能打开旧牌', (name, prefix, card) => {
     inspect(name); ui._acts[`${prefix}StoreZoom`]();
     const staleInspect = ui._acts[`${prefix}Inspect`];
-    ui._acts[`${prefix}Put`]({ name:card.name });
+    ui._acts[`${prefix}Put`]({...document.querySelector(`[data-act="${prefix}Put"][data-name="${card.name}"]`).dataset});
+    const afterTransfer = JSON.stringify(H.game.ownedCards);
+    expect(H.game.ownedCards.find(entry => entry.card === card).stored).toBe(1);
+    expect(H.save).toHaveBeenCalledOnce();
     staleInspect({ i:'0' });
+    expect(JSON.stringify(H.game.ownedCards)).toBe(afterTransfer);
+    expect(H.save).toHaveBeenCalledOnce();
     expect(document.getElementById('cardZoom')).toBeNull();
     ui._acts[`${prefix}Inspect`]({ i:'0' });
     expect(document.getElementById('cardZoom')).not.toBeNull();
@@ -293,8 +307,8 @@ describe('背包旧详情/页面回调与正常返回', () => {
   });
   it('正常使用与当前容器连续存取/返回保持可用', () => {
     inspect(); ui._acts.useDetailCard(); expect(H.game.hp).toBe(13);
-    inspect('法师锦囊'); ui._acts.pouchStoreZoom(); ui._acts.pouchPut({ name: spell.name }); expect(H.game.ownedCards.find(item => item.card.id === 'spell').stored).toBe(1);
-    ui._acts.pouchTake({ name: spell.name }); expect(H.game.ownedCards.find(item => item.card.id === 'spell').stored).toBeUndefined(); ui._acts.pouchBack(); expect(document.querySelector('.bag-view')).not.toBeNull();
+    inspect('法师锦囊'); ui._acts.pouchStoreZoom(); ui._acts.pouchPut({...document.querySelector('[data-act="pouchPut"]').dataset}); expect(H.game.ownedCards.find(item => item.card.id === 'spell').stored).toBe(1);
+    ui._acts.pouchTake({...document.querySelector('[data-act="pouchTake"]').dataset}); expect(H.game.ownedCards.find(item => item.card.id === 'spell').stored).toBeUndefined(); ui._acts.pouchBack(); expect(document.querySelector('.bag-view')).not.toBeNull();
   });
 });
 describe('背包pointer拖动取消/会话身份', () => {
@@ -346,16 +360,14 @@ describe('新号背包真实入口反馈', () => {
     expect(document.querySelector('.bag-title h2').textContent).toContain('安全格');
     expect(document.querySelector('.bag-capchip').textContent).toMatch(/1\s*\/6 格/);
     expect(document.querySelector('.bag-count-summary').textContent).toMatch(/卡牌\s*1\s*张/);
-    expect(document.querySelector('.bag-title .help-btn').dataset.help).toBe('bag');
-    const help = document.createElement('section'); help.innerHTML = ui.helpTopics.bag.html;
-    expect(help.textContent).toContain('由旺财看守');
-    expect(help.textContent).toContain('只有安全格里的卡牌会被抢运回基地');
-    expect(help.textContent).toContain('道具和装备不能在火堆复原');
-    expect(help.textContent).toContain('能源结晶按消耗区顺序复原最多 3 张');
-    expect(help.textContent).toContain('成功撤离时，消耗区逐张以 1/3 概率结算');
-    expect(help.textContent).toContain('初始攻击和职业卡即使掷中也不带回基地消耗区');
-    expect(help.textContent).toContain('其余实际带回的牌可用钥匙复原');
-    expect(help.textContent).toContain('初始攻击和职业卡仍可在局内复原');
+    expect(document.querySelector('.bag-title .help-btn')).toBeNull();
+    const help = JSON.stringify(guideData);
+    expect(help).toContain('符合条件的本局所得');
+    expect(help).toContain('火堆随机复原最多 2 张普通消耗牌，道具和装备除外');
+    expect(help).toContain('能源结晶能复原最多 3 张，结果受可用卡牌与容量限制');
+    expect(help).toContain('消耗区每张牌有三分之一概率带回');
+    expect(help).toContain('初始攻击与职业卡不进入基地消耗区');
+    expect(help).toContain('仓库消耗区里的卡可花钥匙复原');
     document.querySelector('[data-zone="pocket"].bag-rz').click();
     expect(document.querySelector('.bag-capchip').textContent).toContain('不限容量');
     expect(document.querySelector('.bag-capchip b').textContent).toBe('5');

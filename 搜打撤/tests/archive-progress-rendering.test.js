@@ -15,12 +15,15 @@ function setup() {
 afterEach(() => { document.body.replaceChildren(); vi.restoreAllMocks(); });
 describe('one-render achievement progress snapshot', () => {
   it('calculates all progress once for the real achievement catalog, including row and detail copies', () => {
-    const {base,render} = setup(); const before = JSON.stringify(base.data);
+    const {base,meta,render} = setup(); const before = JSON.stringify(base.data);
     const html = render(); document.body.innerHTML = html;
     expect(document.querySelectorAll('.av3-medal')).toHaveLength(data.achievements.length);
     expect(base.bagCap).toHaveBeenCalledOnce(); expect(base.safeCap).toHaveBeenCalledOnce();
     expect(document.querySelectorAll('.av3-detail-source')).toHaveLength(data.achievements.length);
     expect(document.querySelector('.av3-medal-detail').textContent).toContain('1 / 1');
+    expect(meta.isUnlocked).toHaveBeenCalledTimes(data.achievements.length);
+    expect(meta.isClaimed).toHaveBeenCalledTimes(data.achievements.length);
+    expect(document.querySelector('.av3-medal-detail').innerHTML).toBe(document.querySelector('.av3-medal.selected .av3-detail-source').innerHTML);
     expect(JSON.stringify(base.data)).toBe(before);
   });
   it('takes a fresh snapshot on the next render after in-place progression and collection changes', () => {
@@ -49,12 +52,27 @@ describe('one-render achievement progress snapshot', () => {
     base.bagCap = () => { throw new Error('must not read empty progress'); };
     expect(render()).toContain('暂无成就档案');
   });
-  it('preserves live claimed/unlocked rendering and does not invoke reward commands', () => {
+  it('refreshes status, sorting and filter counts together without invoking reward commands', () => {
     const {base,meta,render} = setup(); base.grantReward=vi.fn();
+    meta.ACHIEVEMENTS = ['firstExtract','kill10','extract3'].map(id => data.achievements.find(item => item.id === id));
+    const sourceOrder = meta.ACHIEVEMENTS.map(item => item.id);
+    meta.isUnlocked.mockImplementation(item => item.id !== 'extract3');
     meta.isClaimed.mockImplementation(id => id === 'firstExtract');
     document.body.innerHTML=render();
+    const rows = () => [...document.querySelectorAll('.av3-medal')].map(row => [row.dataset.achievement,row.dataset.status]);
+    const count = status => document.querySelector(`[data-act="archiveStatus"][data-status="${status}"] small`).textContent;
+    expect(rows()).toEqual([['kill10','claimable'],['extract3','progress'],['firstExtract','done']]);
+    expect(['all','claimable','progress','done'].map(count)).toEqual(['3','1','1','1']);
     expect(document.querySelector('[data-achievement="firstExtract"]').dataset.status).toBe('done');
-    expect(document.querySelector('[data-achievement="firstExtract"] [data-act="claimAch"]')).toBeNull();
+    expect(document.querySelector('.av3-medal-detail [data-act="claimAch"]').dataset.id).toBe('kill10');
+    meta.isClaimed.mockImplementation(id => id === 'firstExtract' || id === 'kill10');
+    document.body.innerHTML=render();
+    expect(rows()).toEqual([['extract3','progress'],['firstExtract','done'],['kill10','done']]);
+    expect(['all','claimable','progress','done'].map(count)).toEqual(['3','0','1','2']);
+    expect(document.querySelector('.av3-pending-count')).toBeNull();
+    expect(document.querySelector('.av3-medal-detail [data-act="claimAch"]')).toBeNull();
+    expect(meta.ACHIEVEMENTS.map(item => item.id)).toEqual(sourceOrder);
+    expect(meta.isUnlocked).toHaveBeenCalledTimes(6); expect(meta.isClaimed).toHaveBeenCalledTimes(6);
     expect(base.grantReward).not.toHaveBeenCalled();
   });
 });

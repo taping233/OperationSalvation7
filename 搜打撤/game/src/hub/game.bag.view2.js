@@ -104,7 +104,7 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
   const cardCount = m.bagZone === 'pocket' ? m.pkN : m.bagZone === 'safe' ? (m.safeCardN ?? m.tiles.reduce((n, t) => n + t.count, 0)) : (m.bagCardN ?? m.tiles.filter(t => !t.supply).reduce((n, t) => n + t.count, 0));
   const head = `
       <header class="bag-head2">
-        <div class="bag-title"><h2>${zoneNames[m.bagZone]} ${window.SDT.UI.helpBtn('bag')}</h2></div>
+        <div class="bag-title"><h2>${zoneNames[m.bagZone]}</h2></div>
         <div class="bag-capchip" aria-label="${zoneCap == null ? '消耗区卡牌数量' : '占格与卡牌张数'}">
           <span class="bag-capk">${zoneCap == null ? '卡牌' : '占格'}</span>${zoneCap == null ? '' : `<span class="bag-capbar" aria-hidden="true"><i style="width:${pct}%"></i></span>`}
           <b>${zoneUsed}</b><small>${zoneCap == null ? ' 张 · 不限容量' : `/${zoneCap} 格`}${m.bagZone === 'bag' && ext ? ` · ${m.capacityText ? esc(m.capacityText) : `扩展+${ext}`}` : ''}${m.bagZone === 'bag' && ext ? ` · 盒内 ${m.pearlStoredN || 0}/${ext} 张（不占格）` : ''}</small>

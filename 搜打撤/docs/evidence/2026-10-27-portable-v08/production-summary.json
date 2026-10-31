@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-27T12:28:19.403Z",
+  "static": {
+    "files": 1928,
+    "bytes": 244123734,
+    "jsModules": 31,
+    "references": 504,
+    "aliases": 18,
+    "missing": 0,
+    "aliasFailures": 0,
+    "forbidden": 0,
+    "passed": true
+  },
+  "protocol": {
+    "checked": 1928,
+    "rangeChecks": 12,
+    "errors": 0,
+    "failures": 0,
+    "passed": true
+  },
+  "manifestSHA256": "32b5e19d29bd4204631058118b2f24c9513f2604a223921acfd703d933e6d03f",
+  "passed": true
+}

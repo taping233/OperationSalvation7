@@ -255,8 +255,8 @@ describe('复原道具满包零收益保护', () => {
   });
 
   it('背包帮助遵循地图营火随机复原，不混用通用手选页', () => {
-    const source = readFileSync('game/src/hub/game.bag.js', 'utf8');
-    expect(source).toContain('每次随机复原最多 2 张');
+    const source = readFileSync('game/data/beginner-guide.json', 'utf8');
+    expect(source).toContain('火堆随机复原最多 2 张普通消耗牌，道具和装备除外');
     expect(source).not.toContain('在营火选择要复原的卡牌');
   });
 });

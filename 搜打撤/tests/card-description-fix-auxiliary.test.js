@@ -55,7 +55,7 @@ function expectItemConsumed(game, boss = false) {
     expect(runtime.played.filter(uid => uid === activeItemUid)).toHaveLength(1);
     // 临时道具使用不动背包里的同名永久母本。
     expect(game.ownedCards.some(item => item.uid === 'aux-0')).toBe(true);
-  } else expect(game.ownedCards.some(item => item.uid === activeItemUid)).toBe(false);
+  } else expect(expectBattleItemCommitted(game, runtime, activeItemUid)).toBe(game.ownedCards.find(item => item.uid === activeItemUid));
 }
 
 describe('卡面描述修复：战斗道具消费者', () => {
@@ -120,3 +120,4 @@ describe('卡面描述修复：战斗道具消费者', () => {
     expectItemConsumed(game);
   });
 });
+import { expectBattleItemCommitted } from './helpers/battle-item-assertions.js';

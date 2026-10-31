@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { beforeEach, expect, it, vi } from 'vitest';
 
 const st = vi.hoisted(() => ({ game:{}, saves:[], capacity:0 }));
@@ -29,7 +30,7 @@ const readSnapshot = () => {
 
 beforeEach(async () => {
   vi.resetModules();
-  document.body.innerHTML = '<div id="restore-test"></div>';
+  document.body.innerHTML = '<div id="overlay"><div id="restore-test"></div></div>';
   acts = {}; st.capacity = 0; st.saves = [];
   Object.assign(st.game, {
     layerIdx:3, trackPos:0, seed:8, state:'idle', hp:12, maxHp:30, myClass:'武', visited:{ '3,0':1 },
@@ -40,15 +41,15 @@ beforeEach(async () => {
     usedSlots:() => st.game.ownedCards.length, bagCap:() => st.capacity,
   });
   UI = {
-    el:{ ovBody:document.getElementById('restore-test') },
-    showOverlay:(_title, html) => { UI.el.ovBody.innerHTML = html; },
-    hideOverlay:() => { UI.el.ovBody.innerHTML = ''; }, act:(act, fn) => { acts[act] = fn; },
+    _overlayRevision:0, el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('restore-test') },
+    showOverlay:(_title, html) => { UI._overlayRevision++; UI.el.overlay.hidden=false; UI.el.ovBody.innerHTML = html; },
+    hideOverlay:() => { UI._overlayRevision++; UI.el.overlay.hidden=true; UI.el.ovBody.innerHTML = ''; }, act:(act, fn) => { acts[act] = fn; },
     refresh:vi.fn(), log:vi.fn(), showCardReward:vi.fn(),
   };
-  window.SDT = { UI, Sound:{ sfx:vi.fn(), scene:vi.fn() }, Icons:{ rich:x => x },
+  await connectSdtFixture({ UI, Sound:{ sfx:vi.fn(), scene:vi.fn() }, Icons:{ rich:x => x },
     Cards:{ all:() => [move], cardHTML:c => c.name, isRandomObtainable:() => true },
     Meta:{ addXpToProgress:vi.fn() }, Base:{ isSha:() => false, bagCap:() => st.capacity },
-  };
+  });
 });
 
 it('祭坛复原：满包返回地图，读档与部分领取后再次读档均保留剩余次数且只回血一次', async () => {

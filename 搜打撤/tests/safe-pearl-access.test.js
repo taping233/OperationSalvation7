@@ -1,4 +1,4 @@
-import { runPendingFields } from './helpers/environment-fixtures.js';
+import { connectSdtFixture, runPendingFields } from './helpers/environment-fixtures.js';
 import { readFileSync } from 'node:fs';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -24,8 +24,8 @@ async function openSafe() {
 
 beforeAll(async () => {
   document.body.innerHTML = readFileSync('game/index.html', 'utf8');
-  window.SDT = { Icons: { img: () => '', rich: String, TYPE_ART: {} },
-    Sound: { music() {}, sfx: vi.fn(), setDucked() {} }, FX: { feedback() {} } };
+  await connectSdtFixture({ Icons: { img: () => '', rich: String, TYPE_ART: {} },
+    Sound: { music() {}, sfx: vi.fn(), setDucked() {} }, FX: { feedback() {} } });
   await import('../game/src/cards/cards.js');
   await import('../game/src/ui/ui.js');
   await import('../game/src/hub/base.js');
@@ -144,7 +144,7 @@ describe('安全格珍珠盒直接存取', () => {
     game.ownedCards = [...copies(pearl, 1, { safe: true }), ...copies(threeKeys, storedCount, { stored: 1 }), ...copies(key, bagCount)];
     bag.showBackpack(true); await openSafe(); const before = snapshot(), beforeUids = game.ownedCards.map(o => o.uid);
     expect(button(action, name).disabled).toBe(true);
-    UI.log.mockClear(); UI._acts[action]({ name });
+    UI.log.mockClear(); await UI._acts[action]({ ...button(action, name).dataset });
     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining(warning), 'warn');
     expect(snapshot()).toBe(before); expect(game.ownedCards.map(o => o.uid)).toEqual(beforeUids);
     expect(game.ownedCards).toHaveLength(1 + storedCount + bagCount); expect(session.safeUsed()).toBe(1);

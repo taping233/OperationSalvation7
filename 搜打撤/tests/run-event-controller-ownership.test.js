@@ -1,12 +1,13 @@
 import { flushEventActions } from './helpers/event-dice-async.js';
 import { describe, expect, it, vi } from 'vitest';
 import { createRunEventController } from '../game/src/run/game.run.events.js';
+import { eventPresentationPorts } from './helpers/event-presentation-ports.js';
 
 function harness(enterNode = async () => true) {
   const game = { state:'modal', seed:1, layerIdx:0, trackPos:1, nodeRewards:{}, visited:{} };
   const consumeCurrentCell = vi.fn(), saveGame = vi.fn(() => true);
   const UI = { hideOverlay:vi.fn(), refresh:vi.fn(), log:vi.fn() };
-  const controller = createRunEventController({ game, UI, MAP:{ randomEvents:[] }, enterNode,
+  const controller = createRunEventController({ ...eventPresentationPorts, game, UI, MAP:{ randomEvents:[] }, enterNode,
     getCards:() => ({ all:() => [] }), captureRunContext:() => () => true,
     getActiveSlot:() => null, createCardChoice:() => ({ resume:() => false }),
     weighted:() => ({ text:'空旷的街角' }), consumeCurrentCell, saveGame, setBagReturnHook:vi.fn() });

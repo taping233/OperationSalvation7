@@ -8,3 +8,8 @@ export function buildEnemyActionPlan(foe, round = 1) {
     : (foe.status?.freeze || 0) > 0 ? 'frozen' : null;
   return Object.freeze({ kind, skip, canAttack: skip === null, hits: foe.affix === 'frenzy' ? 2 : 1 });
 }
+
+/** Forecast copies use their simulated HP; stealthed allies cannot intercept attacks. */
+export function findEnemyAttackGuard(allies) {
+  return allies.find(ally => !ally.dead && !ally.statless && ally.hp > 0 && !(ally.status?.stealth > 0));
+}

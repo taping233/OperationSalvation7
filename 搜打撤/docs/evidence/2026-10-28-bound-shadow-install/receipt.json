@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-sealer",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\nai\\bound-shadow-reset-1028\\bound-shadow-reset-internal.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-28-bound-shadow-install/cards-bound-shadow-source.png",
+        "bytes": 2507082,
+        "sha256": "491f31c185c243e5cc966cdb1ffedd80bfba3f437abe75139419121b429ad3c2"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-28-bound-shadow-install/cards-bound-shadow-full-before.webp",
+          "bytes": 145662,
+          "sha256": "b2a6c9ab9f320c612bd36308823b3b458a9706db37445602ec910c7961588b88"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-28-bound-shadow-install/cards-bound-shadow-thumb-before.webp",
+          "bytes": 20698,
+          "sha256": "eaa53135e0525aee37c1c7a57b6f23d3d28037436d6ba635668e2b7658fca201"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/bound-shadow.webp",
+          "bytes": 266738,
+          "sha256": "f54d4961815e715ace36d45ad139bc4d4ba670be0e047b93ed9daf1115a332e8",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/bound-shadow.webp",
+          "bytes": 25540,
+          "sha256": "657c82bde374177fd525ccb071a0fcd68deb9467cbf5f2948d7ec08519468aba",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": "changwuyu-bound-shadow-reach-builtin-20261010",
+      "revision_after": "changwuyu-bound-shadow-calm-nai5-20261028",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/bound-shadow.webp",
+            "ext": "webp",
+            "bytes": 145662,
+            "sha256": "b2a6c9ab9f320c612bd36308823b3b458a9706db37445602ec910c7961588b88",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-bound-wind-redesign/bound-final/receipt.json"
+          },
+          "after": {
+            "path": "cards/bound-shadow.webp",
+            "ext": "webp",
+            "bytes": 266738,
+            "sha256": "f54d4961815e715ace36d45ad139bc4d4ba670be0e047b93ed9daf1115a332e8",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-28-bound-shadow-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/bound-shadow.webp",
+            "ext": "webp",
+            "bytes": 20698,
+            "sha256": "eaa53135e0525aee37c1c7a57b6f23d3d28037436d6ba635668e2b7658fca201",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-bound-wind-redesign/bound-final/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/bound-shadow.webp",
+            "ext": "webp",
+            "bytes": 25540,
+            "sha256": "657c82bde374177fd525ccb071a0fcd68deb9467cbf5f2948d7ec08519468aba",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-28-bound-shadow-install/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1750,
+  "manifest_count_after": 1750
+}

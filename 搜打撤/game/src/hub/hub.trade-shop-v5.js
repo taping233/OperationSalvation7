@@ -42,7 +42,7 @@ function purchaseBlock(base, cards, good) {
 }
 
 function itemHTML({ key, selected, act, card, name, count, price, protectedItem = false, cards, material = false }) {
-  return `<button type="button" class="trade-v5-item${selected ? ' is-selected' : ''}${protectedItem ? ' is-protected' : ''}${material ? ' trade-v5-item--material' : ''}" data-act="${act}" data-key="${escAttr(key)}"${selected ? ' data-focus-fallback' : ''} aria-pressed="${selected}" aria-label="${escAttr(name)}，持有 ${count}${protectedItem ? '，收藏保护' : ''}">
+  return `<button type="button" class="trade-v5-item${selected ? ' is-selected' : ''}${protectedItem ? ' is-protected' : ''}${material ? ' trade-v5-item--material' : ''}" data-act="${act}" data-view-key="${act}/${escAttr(key)}" data-key="${escAttr(key)}"${selected ? ' data-focus-fallback' : ''} aria-pressed="${selected}" aria-label="${escAttr(name)}，持有 ${count}${protectedItem ? '，收藏保护' : ''}">
     <span class="trade-v5-thumb">${illustration(cards, card)}</span><span class="trade-v5-item-label"><b>${esc(name)}</b><span>持有 ${count}${protectedItem ? ' · 收藏保护' : ''}</span></span><span class="trade-v5-item-price">${coinHTML(price)}</span>
   </button>`;
 }

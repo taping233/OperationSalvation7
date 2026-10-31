@@ -14,9 +14,7 @@
                                 的 .hub-page 域）
      域三 帮助手册/快速参考 … 根 #title .ak-quickref（标题页胶囊键）+
                                 #overlay .card:has(.expedition-manual)（远征手册，
-                                标题页 mGuide 与对局 btnHelp 共用）+
-                                #overlay .card:has(.help-body)（各页 ? 二级帮助，
-                                工具弹层——克制清晰优先）
+                                标题页 mGuide 与对局 btnHelp 共用）
    约束：只覆盖不删除；不改 DOM/文案；拖拽热区（.bag-slot 点击/拖动、
    drop-here !important 高亮、dragging 变暗）零接触——格子不挂 transform
    过渡与 ：active 位移，翻卡 3D（flip-inner 内联 transform）不碰；
@@ -27,8 +25,7 @@
    （09-29 合并：两段声明逐字相同，分组选择器级联恒等） */
 #overlay .card.chest,
 #overlay .card.bag-page,
-#title .ak-quickref,
-#overlay .card:has(.help-body) {
+#title .ak-quickref {
   --rbh-fast: .18s cubic-bezier(.33, 1, .68, 1);
   --rbh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
   --rbh-press: .09s ease-out;
@@ -147,11 +144,6 @@
   color: #f4f4f4; letter-spacing: .22em;
   text-shadow: 0 0 14px rgba(230,203,118,.12), 0 2px 6px rgba(6,6,7,.6);
 }
-& .bag-head .help-btn { transition: color var(--rbh-fast), border-color var(--rbh-fast), box-shadow var(--rbh-fast), transform var(--rbh-fast); }
-& .bag-head .help-btn:hover {
-  color: #e1dfd9; border-color: rgba(230,203,118,.6);
-  box-shadow: 0 0 10px rgba(230,203,118,.2);
-}
 
 /* W3 分节标题（背包格/消耗区/安全格）：前置金短线 + 暖米金（对标 stash 卡题） */
 & .set-h {
@@ -191,14 +183,7 @@
 
 /* W7 排序按钮：幽灵键三态（hover 金线 / 按压快缩 / 焦点金环） */
 
-/* 域二焦点环（关闭键/排序键/帮助键） */
-
-
-& .bag-head .help-btn:focus-visible {
-  outline: 1px solid #e6cb76cc;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 1px #101112, 0 0 12px rgba(230,203,118,.35);
-}}
+}
 
 /* ═══════════════════ 域三 · 帮助手册 / 快速参考 ═══════════════════ */
 
@@ -231,76 +216,14 @@
 /* 出入场：导语→四步错峰→键位→注记（每次打开重播一次） */
 /* 返回键：冷青幽灵 → hover 金线（手册工具键，不与 chest ok 金冲突） */
 
-/* ── W3 ? 二级帮助弹层（.help-body：背包 ?、仓库 ? 等共用）：克制清晰 ── */
-#overlay .card:has(.help-body) > h2 {
-  color: #f4f4f4; letter-spacing: 4px;
-  text-shadow: 0 0 16px rgba(230,203,118,.12), 0 2px 6px rgba(6,6,7,.6);
-}
-#overlay .card:has(.help-body) .help-body .help-item{
-& {
-  border: 1px solid rgba(170,174,177,.16);
-  border-left: 2px solid rgba(230,203,118,.45);
-  border-radius:0;
-  background: linear-gradient(180deg, rgba(20,22,24,.78), rgba(15,16,17,.82));
-  color: #c1c4c7; line-height: 1.8;
-  transition: border-color var(--rbh-fast), background var(--rbh-fast);
-}
-&:hover {
-  border-color: rgba(230,203,118,.4);
-  border-left-color: rgba(230,203,118,.7);
-  background: rgba(25,27,29,.85);
-}
-& b {
-  color: #f4e2a5; letter-spacing: 2px;
-}}
-#overlay .card:has(.help-body) .ov-btn.ok{
-& {
-  border-color: #f1dd9b;
-  background: linear-gradient(180deg, #dfdcd5, #e6cb76 58%, #d7ba5c); /* 09-25 P2：主确认金钮渐变统一定版配方 */
-  color: #241c09;
-  box-shadow: inset 0 1px 0 rgba(241,239,234,.5);
-  transition: filter var(--rbh-fast), box-shadow var(--rbh-fast), transform var(--rbh-fast);
-}
-&:hover {
-  filter: brightness(1.07);
-  box-shadow: inset 0 1px 0 rgba(244,243,239,.6), 0 0 16px rgba(230,203,118,.3);
-}
-&:active {
-  transform: translateY(1px) scale(.97);
-  transition-duration: var(--rbh-press);
-}}
-/* 帮助条目轻错峰（帮助页每次打开重绘，短延迟不拖节奏） */
-#overlay .card:has(.help-body) .help-body .help-item{
-& { animation: rbhRiseIn .4s cubic-bezier(.22, 1, .36, 1) backwards; }
-&:nth-child(2) { animation-delay: .05s; }
-&:nth-child(3) { animation-delay: .1s; }
-&:nth-child(4) { animation-delay: .15s; }
-&:nth-child(n+5) { animation-delay: .18s; }}
-
-/* 域三焦点环（手册/帮助返回钮） */
-#overlay .card{
-&:has(.help-body) .ov-btn:focus-visible {
-  outline: 1px solid #e6cb76cc;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 1px #101112, 0 0 12px rgba(230,203,118,.35);
-}
-
 /* ═════════ 交互收尾备注（核查记录，无需新规则）：
-   · 光标：域内可点元素（chest 卡钮/双钮、bag-close/排序/帮助键、quickref、
-     手册与帮助返回钮）均为 button，cursor-art 的 button 白名单已给互动光标；
+   · 光标：域内可点元素（chest 卡钮/双钮、bag-close/排序键、quickref、
+     手册返回钮）均为 button，cursor-art 的 button 白名单已给互动光标；
      bag 格子拖拽光标由既有 touch-action/crosshair 体系承担，不另设。
    · 拖拽热区：封条线/光池/金短线均 pointer-events:none；.drop-here
      （scenes.css !important 金边）与 .dragging（opacity .32）未被覆盖。
    · 矮视口：expedition-rewards.css 的 max-height:760px 压缩块带 !important，
      本文件壳层 padding 无 !important，压缩逻辑照常生效。 ═════════ */
-
-/* ═══ W8 帮助弹层「返回」居中（2026-09-25 A 组·审查计划项4）═══
-   .ov-btns 基底是 1fr 1fr 双列网格，单个「↩ 返回」占左半列视觉偏左；
-   帮助弹层的按钮组恒为单返回钮：收成定宽居中（帮助正文 .help-body 之后的兄弟组） */
-& .help-body ~ .ov-btns {
-  grid-template-columns: minmax(0, 240px);
-  justify-content: center;
-}}
 
 /* ═══ W2-05（2026-09-27 R2）：搜刮点三档档位色带 ═══
    类钩子 .tier-{kind} 由 chests.js markChestTier 挂（small/medium/large，弹层卡

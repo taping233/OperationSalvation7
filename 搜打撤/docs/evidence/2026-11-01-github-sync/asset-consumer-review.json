@@ -1,0 +1,415 @@
+{
+  "scope": "只读git HEAD与当前index比较；未读取4个他人active未暂存差异作为提交依据；未改省略集/预算/生产指纹表；未运行测试/构建",
+  "conclusion": "这13个已暂存消费者的当前版本允许保留原286候选省略清单；仅可更新本报告明确核验的13项消费者SHA。实际最终省略数和构建图引用须由Root在全源码冻结、重暂存后执行4项资产测试确认。",
+  "status": "reviewed-no-omission-list-change",
+  "candidateCount": 286,
+  "categories": {
+    "chests": 176,
+    "frames": 39,
+    "map": 12,
+    "transitions": 5,
+    "retired-scenes": 19,
+    "shadowed-card-art": 30,
+    "slot-weather": 5
+  },
+  "reviewed": [
+    {
+      "path": "game/src/ui/game.menu.pages.js",
+      "indexSha256": "a4ac07d56c38571d962dca7e12ce1b747b6abb4e1ea9e36d7f3ad14e268ba1c7",
+      "headSha256": "d90af2be5ac4478e1af7d73a04ecc26c35dc48c4492f3c68a36633ecc48ce36c",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 0,
+      "directOmissionPathReferences": [],
+      "review": "新增正式指南与Chests读取端口；未新增URL、天气图片或资源选择器。"
+    },
+    {
+      "path": "game/src/ui/menu-slots.js",
+      "indexSha256": "02e6cdbbb69489bf37c83c0d50df5301f9d987596f4fd75b2809be2ffb4462d7",
+      "headSha256": "5538540d1674b699dfb59b042a885504a1d9aa078051e1c56130e1bab31b9ecf",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 0,
+      "directOmissionPathReferences": [],
+      "review": "新增复制首页当前wallpaper layer的computed backgroundImage。首页选择受title-wallpaper.js固定7个键约束；来源为title-p0.css内6张reconstruction壁纸及slot-bg-knight-fantasy.webp，均不在286候选。选档徽记继续使用slot-emblems内联SVG。"
+    },
+    {
+      "path": "game/data/art-mapping.json",
+      "indexSha256": "8486dbf00b069ea144d8a000a56d289f55ba15506b1f770ba801991a3e7a982e",
+      "headSha256": "162ca421eac0f34989d01e6383162458f8b160f3d716291d4638dafb89b73c9e",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 0,
+      "directOmissionPathReferences": [],
+      "review": "仅8项cardArtRevisions变更；art.js:512-515只把版本值附为?art=参数，cardArtOverrides先于spell/equip family分派。15个shadowed原图的覆盖映射及thumb来源不变。"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "indexSha256": "a80bb9c926691e550b1f31f23f55d86f5d2cd614665e6073f72e1511827261da",
+      "headSha256": "3d372a59f80225edbf1c73c7f9c6fce7399a639d252b11474b67dc3c13976ea6",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 0,
+      "directOmissionPathReferences": [],
+      "review": "仅增加节点未领奖励提示；createChestFrameSets/SAFE_CLOSED及frame selection保持不变。当前chest-opening-art.js仅用safe-simple-v7和supply-opening-v6，不恢复rig-v1/rig-640-v1。"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "indexSha256": "af120c112109f9e19bceb76846bdb0613d6fa9659724cb11e5aa04a4d3c535ee",
+      "headSha256": "6e1241bbabe0f201f020cce9c2b537747f5e215d02d23a8645d827efc8f0dc08",
+      "inputActualMatches": false,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 0,
+      "directOmissionPathReferences": [],
+      "review": "新增保存/重试/来源与DOM保留逻辑；nodeShell仍按o.asset || NODE_BG[o.tone]分派，保留key包含bg，bg变化须完整进入。enterNode现有TRANSITION_ART/SILENT_FILMS选取不变；无新增资源构造。 最终追加焦点收尾差异也已逐行复核，资产构造表达式/路径字面量保持一致。",
+      "previousReviewedIndexSha256": "a47b677412d74608c7b240465dd834c7bdec8413c6e618de39a7378e62fde4c6",
+      "initialInputActualMatches": true,
+      "finalIndexReviewed": true,
+      "finalDelta": {
+        "fromGitBlob": "d38b2cef84f6a1729f8ec22c267889fdce449705",
+        "assetConstructorsUnchanged": true,
+        "assetLiteralsUnchanged": true,
+        "directOmissionPathReferences": [],
+        "behavior": "仅复原保存/重试完成后恢复焦点：增加focusNode和pendingFocus、runCheckpoint在pending.run().then且finally解锁后聚焦，并检查来源/root/revision/可见性及用户焦点。未改变NODE_BG/SCENES/PICKUP_BG、过场art选择或卡面渲染端口。"
+      }
+    },
+    {
+      "path": "game/src/run/game.session.death.js",
+      "indexSha256": "58250eacf239bb56cc17c8528ccc1522533a60ea44d61c000d796590f26d703c",
+      "headSha256": "9dc3761d2e7f0771b211580cbc4b46056147a5832134a03ec13f09d30b866350",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 1,
+      "directOmissionPathReferences": [],
+      "review": "新增共享抢运投影和纯文本跑局纪念视图；RUN_FAIL_BANNER仍为rewards-convoy-fail.webp，未改成省略的success/banner旧图。"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "indexSha256": "9be527e48ad33325803b418a8f1c0fb09d04ef401cf21a7d0649e41805a39aca",
+      "headSha256": "d5dfc82482db25bc3a70155433e07d512c200c78782eb1942ee898ce7d3b3a7f",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 0,
+      "directOmissionPathReferences": [],
+      "review": "只删除旧event-choice布局/选中效果规则；资源url与data-asset-key映射保持一致。"
+    },
+    {
+      "path": "game/src/ui/menu-settings.js",
+      "indexSha256": "d8d1c0a70def84c61e7f46bfb18ec3a81adaa479238558febe84001a31212408",
+      "headSha256": "49117a40583ef6a2f427e849001bd723ff96d139838c6cca53e15fb5e90b03fd",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 0,
+      "directOmissionPathReferences": [],
+      "review": "仅来源、revision与返回守卫；音效SOURCES.md链接不变，无恢复退役help/decomp取图。"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "indexSha256": "3946e04cb457cd6db6a197c37176c1afbf05d8488c8976bb81d4ed81fc93edc6",
+      "headSha256": "fdc1b3634ae314281a4fdfe0c09c8aa84794df56ff5dd9c4dd0af819e73d5323",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 0,
+      "directOmissionPathReferences": [],
+      "review": "增加partner保留键和选择是否重复挂交互；partnerPortrait、skinUrl及avatar分派不变。"
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "indexSha256": "2fa98640901ff50f1d3d0c104cab6dd6f122a5e7bd03ada2b2ce8c1fa0fbb9e3",
+      "headSha256": "6368687dc6370945e402d3374cbd9f10ef1d3e70f3d9a0a799b5d75735fb32cf",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 1,
+      "directOmissionPathReferences": [],
+      "review": "仅删除退役helpBtn；卡牌/图标渲染来源保持一致。"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "indexSha256": "3239cb11754b4569364c2422014bcb5e378663614edaf51534aa2466b86fc7a3",
+      "headSha256": "4c55eb3282a211d61a270c223e4f5d8fa8831466d2e86c5abccbab5f36a3588e",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 1,
+      "directOmissionPathReferences": [],
+      "review": "HEAD→index仅卡牌可用性和目标高亮；assetUrl(source)及固定ally/enemy portrait表不变。此文件当前无atlas或sprite路径构造；正式battle.frames及4个frame catalog指纹仍与审核表一致，未新增通往旧39帧的输入。",
+      "previousReviewedIndexSha256": "32947ed2c987d36fc97a204c8587c5ba257e95323df826b3e73b4777b865b700",
+      "finalFollowup": "battleLayersWorktreeReview, exact final canonical index SHA verified by Root"
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "indexSha256": "abf38aeb09093cb9e88f3aecdd1d2f582306725fd27e35ff96a737e7ae719191",
+      "headSha256": "1dd2d756ef5c168b20b912ca9fb22336f8d0a2569819642c44f0f23dbc3a71cb",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 1,
+      "directOmissionPathReferences": [],
+      "review": "变更保存控件锁/同页DOM保留；保留当前partner、已hydrated卡面节点，不生成新的资源路径，不改变卡牌身份到art分派。"
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "indexSha256": "ca355a43f7e9e0942ceae60ea5145138290d19c9ec578760aefa0cd380594e38",
+      "headSha256": "925d1ff1c88ba58503f7380b16dad45de9c117deb2cc8e92d57c4fd94d0578eb",
+      "inputActualMatches": true,
+      "addedAssetLiterals": [],
+      "removedAssetLiterals": [],
+      "assetConstructorExpressionsUnchanged": true,
+      "constructorExpressionCount": 0,
+      "directOmissionPathReferences": [],
+      "review": "仅删除_baseActs.openHelp注册；card-zoom controller接线与照片来源委托不变；无新help/decomp资源消费者。"
+    }
+  ],
+  "artMapping": {
+    "changedSections": [
+      "cardArtRevisions"
+    ],
+    "changedRevisionIds": [
+      "tt8-abyss-sovereign",
+      "tt8-hero-warlock",
+      "tt8-hero-summoner",
+      "tt8-hero-sealer",
+      "tt8-hero-descender",
+      "tt8-hero-assassin",
+      "tt8-hero-sword",
+      "tt8-hero-ranger"
+    ],
+    "shadowedOverrides": [
+      {
+        "id": "tt8-curse1",
+        "path": "cards/curse-drain.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt8-curse2",
+        "path": "cards/curse-freeze.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt8-curse3",
+        "path": "cards/curse-venom.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt8-curse4",
+        "path": "cards/curse-silence.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt3-staff",
+        "path": "cards/studio-expanded/tt3-staff.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt3-fate-wheel",
+        "path": "cards/studio-expanded/tt3-fate-wheel.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt3-wolf-bow",
+        "path": "cards/studio-expanded/tt3-wolf-bow.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt3-twinwater-mail",
+        "path": "cards/studio-expanded/tt3-twinwater-mail.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt3-grass-armor",
+        "path": "cards/studio-expanded/tt3-grass-armor.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt3-blooddrinker",
+        "path": "cards/studio-expanded/tt3-blooddrinker.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt8-demonslay",
+        "path": "cards/studio-expanded/tt8-demonslay.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt8-archdemon",
+        "path": "cards/studio-expanded/tt8-archdemon.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt8-heavensword",
+        "path": "cards/studio-expanded/tt8-heavensword.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt7-arcanescroll",
+        "path": "cards/studio-expanded/tt7-arcanescroll.webp",
+        "unchanged": true
+      },
+      {
+        "id": "tt12-raygun",
+        "path": "cards/studio-expanded/tt12-raygun.webp",
+        "unchanged": true
+      }
+    ],
+    "overrideCount": 15,
+    "shadowedPathCount": 30
+  },
+  "wallpaper": {
+    "selectorKeys": [
+      "snow-road",
+      "baita-heixiang",
+      "xingyue-piano",
+      "wu-bass",
+      "baita-station",
+      "xingyue-reeds",
+      "companions-dinner"
+    ],
+    "sourcePaths": [
+      "reconstruction/wallpaper-baita-heixiang-1016.webp",
+      "reconstruction/wallpaper-baita-station-1020.webp",
+      "reconstruction/wallpaper-snow-road-1016.webp",
+      "reconstruction/wallpaper-wu-bass-1020.webp",
+      "reconstruction/wallpaper-xingyue-piano-1020.webp",
+      "reconstruction/wallpaper-xingyue-reeds-1020.webp",
+      "slot-bg-knight-fantasy.webp"
+    ],
+    "intersectionWithOmissionCandidates": [],
+    "evidence": [
+      "game/src/ui/title-wallpaper.js:5",
+      "game/src/ui/menu-slots.js:104",
+      "game/css/title-p0.css:21",
+      "game/index.html:154"
+    ]
+  },
+  "categoryChecks": {
+    "slot-weather": {
+      "unchangedReviewedSelectors": [
+        "game/src/ui/slot-emblems.js",
+        "game/src/ui/menu-slot-view.js"
+      ],
+      "changedSelectors": [
+        "game/src/ui/game.menu.pages.js",
+        "game/src/ui/menu-slots.js"
+      ]
+    },
+    "shadowed-card-art": {
+      "unchangedReviewedSelectors": [
+        "game/src/core/art.js",
+        "game/src/core/data-loader.js"
+      ],
+      "changedSelectors": [
+        "game/data/art-mapping.json"
+      ]
+    },
+    "retired-scenes": {
+      "unchangedReviewedSelectors": [
+        "game/src/core/art.js",
+        "game/src/run/chest-opening-art.js",
+        "game/src/run/game.run.data.js",
+        "game/src/battle/view/battle.scenery.js",
+        "game/css/entry-events.css"
+      ],
+      "changedSelectors": [
+        "game/data/art-mapping.json",
+        "game/src/run/chests.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.session.death.js",
+        "game/css/scenes.css"
+      ]
+    },
+    "chests": {
+      "unchangedReviewedSelectors": [
+        "game/src/run/chest-opening-art.js"
+      ],
+      "changedSelectors": [
+        "game/src/run/chests.js"
+      ]
+    },
+    "frames": {
+      "unchangedReviewedSelectors": [
+        "game/src/battle/view/battle.frames.js",
+        "game/src/battle/view/battle.frame-catalog.js",
+        "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+        "game/src/battle/view/battle.frame-catalog-three-role.js"
+      ],
+      "changedSelectors": []
+    },
+    "map": {
+      "unchangedReviewedSelectors": [
+        "game/src/core/map-node-art.js",
+        "game/src/core/renderer.js",
+        "game/src/core/map-city-atmosphere.js",
+        "game/src/core/art.js",
+        "game/src/core/data-loader.js"
+      ],
+      "changedSelectors": []
+    },
+    "transitions": {
+      "unchangedReviewedSelectors": [
+        "game/src/ui/camp-entry.js",
+        "game/src/core/art.js",
+        "game/src/core/data-loader.js"
+      ],
+      "changedSelectors": []
+    }
+  },
+  "remainingBoundaries": [
+    "本报告不更新任何指纹；当前审核脚本在SHA仍旧时按原fail-closed机制保留资源属预期。",
+    "Run最新复原焦点/保存重试补丁重新暂存后已复核；scenes最终SHA以reviewed.indexSha256及finalIndexRecheck为准，原asset-review-inputs.actual为被替代的初始版本，其余12项复用。",
+    "最终player/网络请求/全Rollup构建图本轮未运行，不能以本报告代替4项资产测试。",
+    "历史game/src/hub/base-chibi-v2.skin.js在index已不存在；本轮13项没有恢复其import或资源入口。无需为该历史条目盲造新版本。"
+  ],
+  "doubts": [],
+  "finalIndexRecheck": {
+    "atUtc": "2026-10-31T21:38:16.904Z",
+    "reviewed": 13,
+    "reusedUnchanged": 12,
+    "reReviewed": "game/src/run/game.run.scenes.js",
+    "initialSha256": "a47b677412d74608c7b240465dd834c7bdec8413c6e618de39a7378e62fde4c6",
+    "finalSha256": "af120c112109f9e19bceb76846bdb0613d6fa9659724cb11e5aa04a4d3c535ee",
+    "allCurrentIndexSha256MatchReport": true
+  },
+  "battleLayersWorktreeReview": {
+    "atUtc": "2026-10-31T21:53:13.347Z",
+    "path": "game/src/battle/view/battle.layers.js",
+    "indexSha256": "32947ed2c987d36fc97a204c8587c5ba257e95323df826b3e73b4777b865b700",
+    "rawBytes": 66013,
+    "rawSha256": "fa65b3f0ef46e6d3488c92f573570ad18f637b852c7f36e26f628b8c07f5e509",
+    "lfNormalizedSha256": "3239cb11754b4569364c2422014bcb5e378663614edaf51534aa2466b86fc7a3",
+    "mtimeNs": "1793483547511064500",
+    "mtimeStableDuringReview": true,
+    "assetConstructorsUnchanged": true,
+    "assetLiteralsUnchanged": true,
+    "directOmissionPathReferences": [],
+    "candidateCount": 286,
+    "conclusion": "只对提示去重移除卡名前缀后比较正文，不改变资源路径、动态构造、固定portrait表或286候选。可在此工作树版本冻结并暂存后精确更新对应指纹。",
+    "boundary": "追加的是未暂存工作树版本，原reviewed.indexSha256仍指先前已审index；未更改生产指纹、未stage、未测试。"
+  },
+  "rootFinalIntegration": {
+    "path": "game/src/battle/view/battle.layers.js",
+    "canonicalIndexSha256": "3239cb11754b4569364c2422014bcb5e378663614edaf51534aa2466b86fc7a3",
+    "omissionRulesChanged": false
+  }
+}

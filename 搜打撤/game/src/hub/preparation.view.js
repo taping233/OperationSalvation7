@@ -40,12 +40,13 @@ function qualificationHints(q) {
 function renderPreset(preset, model) {
   const preview = preset.preview;
   const character = model.characterOptions?.find(item => item.id === preset.characterId)?.name || '未选择人物';
-  const pet = model.petOptions?.find(item => item.id === preset.petId)?.name || '无伙伴';
+  const effectivePet = model.petOptions?.find(item => item.id === preview?.effectivePetId)?.name || '无伙伴';
+  const pet = preset.petId ? effectivePet : `沿用当前伙伴（${effectivePet}）`;
   const facts = preview ? [`带入 ${preview.costs.stashCards} 张`, `占 ${preview.costs.slotsUsed}${Number.isFinite(preview.costs.bagCapacity) ? `/${preview.costs.bagCapacity}` : ''} 格${preview.costs.extraStackSlots ? `（同名超限多占 ${preview.costs.extraStackSlots} 格）` : ''}`, `${preview.missing.length} 缺失`, `${preview.forbidden.length} 禁带`] : ['请先预览方案'];
   return `<section class="prep-preset" data-preset="${esc(preset.id)}">
     <header class="prep-preset-head"><div><h3>${esc(preset.name || '出征方案')}</h3><p>${esc(character)} · ${esc(pet)} · ${preset.picks.length} 种卡牌</p></div></header>
     <details class="prep-preset-editor" data-preset-editor="${esc(preset.id)}"><summary>编辑人物与卡牌</summary><div class="prep-editor-body"><label class="prep-name">方案名<input maxlength="24" data-field="name" value="${esc(preset.name)}"></label>
-    <div class="prep-fields"><label>人物<select data-field="characterId">${optionList(model.characterOptions, preset.characterId, '未选择人物')}</select></label><label>宠物<select data-field="petId">${optionList(model.petOptions, preset.petId, '未选择宠物')}</select></label></div>
+    <div class="prep-fields"><label>人物<select data-field="characterId">${optionList(model.characterOptions, preset.characterId, '未选择人物')}</select></label><label>宠物<select data-field="petId">${optionList(model.petOptions, preset.petId, '沿用当前伙伴')}</select></label></div>
     <div class="prep-picks">${preset.picks.length ? preset.picks.map(pick => renderPick(pick, model, preview)).join('') : '<p class="prep-empty">还没有选择带入卡牌。</p>'}</div>
     <div class="prep-add"><select data-role="card-add">${optionList(model.cardOptions, null, '选择仓库卡牌')}</select><input data-role="count-add" type="number" min="1" max="99" value="1" aria-label="数量"><button class="ui-control" data-ui-action="secondary" data-action="preset-pick-add">加入愿望清单</button></div>
     </div></details>
@@ -76,9 +77,10 @@ export function buildPreparationViewModel({ baseSnapshot, preparation, cardCatal
   });
   const characterOptions = characters.map(item => ({ id: item.id, name: item.name || item.id, owned: !!baseSnapshot?.characters?.[item.id] }));
   const petOptions = pets.map(item => ({ id: item.id, name: item.name || item.id, owned: !!baseSnapshot?.pets?.[item.id] }));
-  const stacks = preparationStacks(baseSnapshot), options = new Map(), versions = new Map();
+  const stacks = preparationStacks(baseSnapshot), options = new Map(), versions = new Map(), totalsById = new Map();
   for (const stack of stacks) {
     const cardId = stack.card.id, variantKey = stack.variantKey || stack.card.variantKey || '';
+    if (stack.card.rarity !== '职业') totalsById.set(cardId, (totalsById.get(cardId) || 0) + stack.count);
     const key = JSON.stringify([cardId, variantKey]), prior = options.get(key);
     if (prior) { prior.count += stack.count; continue; }
     const version = (versions.get(cardId) || 0) + 1;
@@ -86,7 +88,7 @@ export function buildPreparationViewModel({ baseSnapshot, preparation, cardCatal
     const label = `${snapshotLabel(stack.card)}（${variantKey ? `版本 ${version}` : '基础优先'}）`;
     options.set(key, { id: departureStackKey(stack), card: { cardId, ...(variantKey ? { variantKey } : {}) }, label, name: '', count: stack.count });
   }
-  const cardOptions = [...options.values()].map(option => ({ ...option, name: `${option.label} · 库存 ${option.card.variantKey ? option.count : stacks.filter(stack => stack.card.id === option.card.cardId && stack.card.rarity !== '职业').reduce((sum, stack) => sum + stack.count, 0)}` }));
+  const cardOptions = [...options.values()].map(option => ({ ...option, name: `${option.label} · 库存 ${option.card.variantKey ? option.count : totalsById.get(option.card.cardId) || 0}` }));
   const presets = (prep.presets || []).map(preset => ({ ...preset, picks: preset.picks || [], preview: previewDeployment({ baseSnapshot, preset, mode, cardCatalog, characters, pets, bagCapacity, starterCount, starterCard }) }));
   return Object.freeze({ goals, targetOptions: cardCatalog.map(card => ({ id: card.id, name: card.name || card.id })), presets, characterOptions, petOptions, cardOptions, busy, error });
 }
@@ -94,10 +96,10 @@ export function buildPreparationViewModel({ baseSnapshot, preparation, cardCatal
 /** @param {HTMLElement} root @param {{model?: ReturnType<typeof buildPreparationViewModel>, onIntent?: (intent: import('./preparation.types.js').Intent) => void}} [options] */
 export function mountPreparationView(root, { model, onIntent = () => {} } = {}) {
   if (!root || typeof root.addEventListener !== 'function') throw new TypeError('mountPreparationView 需要 DOM root');
-  let current = model || { goals: [], presets: [], cardOptions: [] };
+  let current = model || { goals: [], presets: [], cardOptions: [], busy: false };
   const emit = (type, payload = {}) => onIntent({ type, payload });
   const click = event => {
-    const button = event.target.closest?.('[data-action]'); if (!button || !root.contains(button) || button.disabled) return;
+    const button = event.target.closest?.('[data-action]'); if (!button || !root.contains(button) || button.disabled || current.busy) return;
     const presetRoot = button.closest('[data-preset]'); const presetId = presetRoot?.dataset.preset;
     const action = button.dataset.action;
     if (action === 'goal-add') emit(action, { targetId: /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (root.querySelector('[data-role="goal-add"]'))?.value || '' });
@@ -110,15 +112,16 @@ export function mountPreparationView(root, { model, onIntent = () => {} } = {}) 
     else if (action === 'preset-pick-remove') emit(action, { presetId, cardId: button.dataset.cardId, variantKey: button.dataset.variantKey || '' });
     else emit(action, { presetId });
   };
-  const change = event => { const field = event.target.dataset?.field; const presetId = event.target.closest?.('[data-preset]')?.dataset.preset; if (field && presetId) emit('preset-field', { presetId, field, value: event.target.value }); };
+  const change = event => { const field = event.target.dataset?.field; const presetId = event.target.closest?.('[data-preset]')?.dataset.preset; if (field && presetId && !current.busy) emit('preset-field', { presetId, field, value: event.target.value }); };
   const paint = () => {
     const expanded = new Set([...root.querySelectorAll('details[data-preset-editor][open]')].map(item => item.getAttribute('data-preset-editor')));
     const template = root.ownerDocument.createElement('template');
     template.innerHTML = render(current);
-    syncViewChildren(root, template.content, { preserveValue: element => element.hasAttribute('data-role') || element === root.ownerDocument.activeElement });
+    if (current.busy) for (const control of template.content.querySelectorAll('[data-field], [data-action]')) control.setAttribute('disabled', '');
+    syncViewChildren(root, template.content, { preserveValue: element => element.hasAttribute('data-role') });
     for (const item of /** @type {NodeListOf<HTMLDetailsElement>} */ (root.querySelectorAll('details[data-preset-editor]'))) item.open = expanded.has(item.getAttribute('data-preset-editor'));
     root.setAttribute('aria-busy', /** @type {typeof current & {busy?:boolean}} */ (current).busy ? 'true' : 'false');
   };
   root.addEventListener('click', click); root.addEventListener('change', change); paint();
-  return { update(nextModel) { current = nextModel || { goals: [], presets: [], cardOptions: [] }; paint(); }, dispose() { root.removeEventListener('click', click); root.removeEventListener('change', change); root.replaceChildren(); } };
+  return { update(nextModel) { current = nextModel || { goals: [], presets: [], cardOptions: [], busy: false }; paint(); }, dispose() { root.removeEventListener('click', click); root.removeEventListener('change', change); root.replaceChildren(); } };
 }

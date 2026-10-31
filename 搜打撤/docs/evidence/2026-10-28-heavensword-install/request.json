@@ -1,0 +1,12 @@
+{
+  "items": [{
+    "card_id": "tt8-hero-ranger",
+    "asset": "cards/wu-heavensword.webp",
+    "source": "D:/素材/代号柒/搜打撤/.tmp/imagegen/heavensword-split-1028/vertical-split.png",
+    "revision": "heavensword-vertical-split-20261028",
+    "prompt": "保持原构图，将原竖剑沿纵向左右裂开，两半略分离。保留人物、神色、抬手召剑姿势、蓝金背景。",
+    "references": ["game/assets/cards/wu-heavensword.webp"],
+    "generation_record": ".tmp/imagegen/heavensword-split-1028/request.json",
+    "authorization": "老板明确要求实装左右裂开版"
+  }]
+}

@@ -1,3 +1,4 @@
+import { connectSdtFixture } from './helpers/environment-fixtures.js';
 import { altarMocks, altarStateFields } from './helpers/environment-fixtures.js';
 /* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：祭坛献祭两分支、消耗区复原、
  * 钥匙复原链与火堆自动复原（只验证不改行为）的事务顺序钉现状。
@@ -67,7 +68,7 @@ function makeGame() {
 
 beforeEach(async () => {
   vi.resetModules();
-  document.body.innerHTML = '<div id="body"></div>';
+  document.body.innerHTML = '<div id="overlay"><div id="body"></div></div>';
   // mock 工厂在首次执行时捕获 st.game 引用且 resetModules 不重跑工厂——
   // 必须原地 Object.assign 复用同一对象（extraction-flow.test.js 同款），不得换新实例
   Object.assign(st.game, makeGame());
@@ -76,17 +77,17 @@ beforeEach(async () => {
   st.bagCapN = 10;
   acts = {};
   UI = {
-    el: { ovBody:document.getElementById('body') },
-    showOverlay: (_t, html) => { document.getElementById('body').innerHTML = html; },
-    hideOverlay: () => { document.getElementById('body').innerHTML = ''; },
+    _overlayRevision:0, el: { overlay:document.getElementById('overlay'), ovBody:document.getElementById('body') },
+    showOverlay: (_t, html) => { UI._overlayRevision++; UI.el.overlay.hidden=false; UI.el.ovBody.innerHTML=html; },
+    hideOverlay: () => { UI._overlayRevision++; UI.el.overlay.hidden=true; UI.el.ovBody.innerHTML=''; },
     act: (name, fn) => { acts[name] = fn; },
     refresh: vi.fn(), log: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '',
     showCardReward: vi.fn(), showCardZoom:vi.fn(),
   };
-  window.SDT = {
+  await connectSdtFixture({
     UI,
     ...altarMocks(st, () => vi),
-  };
+  });
 });
 
 async function importAltar() {

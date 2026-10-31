@@ -48,20 +48,40 @@ export function createTerminalCommands({ getBase, getRunStorage, getRecovery, ge
     return Object.freeze({ levelsGained });
   }
 
-  async function createAttempt({ slotId, command, cards = [], deathClass = null }) {
+  async function createAttempt({ slotId, command, cards = [], deathClass = null, previousAttempt = null }) {
     if (!Number.isInteger(slotId) || slotId < 1 || slotId > 5 || !['run.death', 'run.abandon'].includes(command)) {
       return fail('INVALID_ARGUMENT', '终局结算参数无效');
     }
     if (!currentSlot(slotId)) return fail('STALE_SLOT', '档位已切换，请重新进入当前对局');
     const recovery = getRecovery();
     const runStore = getRunStorage();
-    // Capture identity before the first await. A same-slot new run must never inherit this call's old card payload.
+    if (previousAttempt) {
+      if (previousAttempt.context?.slotId !== slotId || previousAttempt.command !== command) {
+        return fail('INVALID_ARGUMENT', '终局重试请求无效');
+      }
+      // Another caller may have finished while the retry page was open.
+      // Read the old request's receipt before requiring its run to still exist.
+      const prior = await recovery.readSettlementReceipt(previousAttempt.context, {
+        command, payload: previousAttempt.payload, runId: previousAttempt.runId,
+      });
+      if (!currentSlot(slotId)) return fail('STALE_SLOT', '档位已切换，旧结算已取消');
+      if (!prior.ok) return prior;
+      if (prior.value) return { ok: true, replay: true, receipt: prior.value, attempt: null };
+      cards = previousAttempt.payload.cards;
+      deathClass = previousAttempt.payload.deathClass;
+    }
+    // Capture identity before recovery; a reprepare also pins its original run.
+    // A same-slot new run must never inherit this call's old card payload.
     const startingIdentity = runStore.readIdentity(slotId);
     if (!startingIdentity.ok) {
       if (startingIdentity.code === 'STORAGE_READ_FAILED') return startingIdentity;
       const recovered = await recovery.recoverSlot(slotId);
       if (!recovered.ok) return recovered;
       return fail('RETRY_REQUIRED', '存档已恢复，请重新确认终局操作');
+    }
+    if (previousAttempt && (startingIdentity.value.runId !== previousAttempt.runId ||
+        startingIdentity.value.revision !== previousAttempt.context.expectedRunRevision)) {
+      return fail('STALE_RUN', '对局已变化，旧结算已取消');
     }
     const recovered = await recovery.recoverSlot(slotId);
     if (!recovered.ok) return recovered;
@@ -139,7 +159,17 @@ export function createTerminalCommands({ getBase, getRunStorage, getRecovery, ge
       command: attempt.command, runId: attempt.runId, payload: attempt.payload,
       afterBase: attempt.afterBase, afterRun: null, output: attempt.output,
     });
-    if (!result.ok) return result;
+    if (!result.ok) {
+      // The pair rejects stale revisions before creating a journal. Only a
+      // Base-only change may discard this uncommitted snapshot for preparation.
+      const live = /** @type {{runId?:string, runRevision?:number, baseRevision?:number}|undefined} */ (result.details);
+      if (result.code === 'STALE_REVISION' && live?.runId === attempt.runId &&
+          live.runRevision === attempt.context.expectedRunRevision &&
+          Number.isInteger(live.baseRevision) && live.baseRevision !== attempt.context.expectedBaseRevision) {
+        return { ...result, reprepare: true };
+      }
+      return result;
+    }
     return { ok: true, replay: false, receipt: result.value };
   }
 
