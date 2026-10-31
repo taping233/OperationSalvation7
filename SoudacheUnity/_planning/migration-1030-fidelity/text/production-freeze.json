@@ -1,0 +1,65 @@
+{
+  "frozenUtc": "2026-10-30T06:55:34.683801+00:00",
+  "production": {
+    "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentBeginnerGuide.cs": "8f87a05797d662ff6d92c8e28b52ade4542448ba80d235aba383b50ff51ec0a7",
+    "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentBeginnerGuide.Content.cs": "d0e9e9211c705073d423093cd97c663d0602d0adcf5a0569a8ff2ace120c5130",
+    "Assets/Scripts/Sdt.UI/Screens/Menu/MenuDialogs.cs": "3812ca5537fa61d5bcd53611815ca56b7f78f5e3346301f64e54fedecd0f4b67",
+    "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentFeedbackComposer.cs": "027ef99df7f294237f52a38d40fe29821f1795c450fbd985daec52bd4aab0042",
+    "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSettingsPage.cs": "833ccd3569b1fbea24ad2b7b1d3a89630885d48342ab9c99e719ce587b591d32",
+    "Assets/Scripts/Sdt.Res/CurrentCardPresentation.cs": "d8cb3de46b458066413c19290ff92858f1754ebaccf74aef86fffd01b48a515e",
+    "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInventory.cs": "8f1d060b5b9219e40231badc9a1f2d380f97b89d3ed787081573f056050e4600",
+    "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioDossier.cs": "3a779b14e8ba6650af06f8d442fc3aa98ada9fda60961c649a8c7f7e279bc30d",
+    "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs": "8a98f51b3a295854255e80b27995be6ca904415dd36db5073aca88181ca8e7cc",
+    "Assets/Scripts/Sdt.UI/Screens/Bag/BagCardDetail.cs": "98081ccb5949fe671f74174b634fe9c9f3307904204501a2fc3930a6bd5cda90",
+    "Assets/Scripts/Sdt.UI/Screens/Run/CurrentSettlementView.cs": "1fb1f1d55d11cce6c830a90806870ce0ab0e4fe4a39209bda2b408e7decd9c6c",
+    "Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.Pool.cs": "2e282d2ef5bd41c97623c25a209ad72b3e7d0edcc1a3bd15857b0bd76e41b885",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleItemInputs.cs": "f552ebcf4bfec2a2a381ac30d0e98813f3b7a41eca29eae39aac6eb4b4319c65",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleRuleInputs.cs": "44478b829e7f72d97647c6392eec5c02b36b27cfe527e35ee1af929f90d907a1",
+    "Assets/Resources/Data/CurrentBeginnerGuide.json": "1a9b0d144bd407097f22aab62fd062cca4cf622c99a6acd1021c7b472db322ac",
+    "Assets/Scripts/Sdt.Core/Cards.cs": "d8963cc9e0640bb9c46fa485a281448e4372bc53c7679972dfc10bf3741164f3",
+    "Assets/Resources/Art/CurrentGuide/battle.png": "0e7b7d3fd18bd2c7faa4597cab54fd69a3d96091795c5dfd460c8aef9024dd52",
+    "Assets/Resources/Art/CurrentGuide/extract.png": "1881eeb7085d23bfa9b1372c0b4375a044cc9ad6ca5419056726bc7bd5c846c8",
+    "Assets/Resources/Art/CurrentGuide/growth.png": "ff58db85850db0d73b292c0143bd8856f3cdaae2fd3cc01f46f78516d948ac31",
+    "Assets/Resources/Art/CurrentGuide/loot.png": "6599018d4a197f5ae7e961c74eb63484b27a8240625e07c8fef5a61ac75c4988",
+    "Assets/Resources/Art/CurrentGuide/map.png": "9ca9b5f033f9ba91fcb6967cd419f54a740be6e34408e5f087d769a8017a70f1",
+    "Assets/Resources/Art/CurrentGuide/prepare.png": "be210b420a19cec5cd0bf89b2b3f28f344ffea83c23331da04b21776491cad9a"
+  },
+  "source": {
+    "data/beginner-guide.json": "1a9b0d144bd407097f22aab62fd062cca4cf622c99a6acd1021c7b472db322ac",
+    "src/ui/menu-guide.js": "a4ed310200c643713e1125bfbb339cf9d27299f7f238ae631243bc4b4a0dcd69",
+    "src/ui/beginner-guide.js": "b18edb0e4eac2bef94894760ce12e8dee424dbfc11db3f5254f384c735758b61",
+    "css/beginner-guide.css": "7e2b925dbafc1e8bad0172ddd971334388fa686b5c06fa625a5d9f1cd0e8ffcf",
+    "src/ui/region-transition.js": "ce16d462ff55169ec17b3d9380dd2cc4c651426e83fa28297a48dccf342d67eb",
+    "src/ui/motion-presets.js": "857fcf75668a97ca69a713532a63511ed855a9f6043188e3d09dcf274ca16221",
+    "src/cards/card-description-text.js": "cc10e433470705dc578b07e088c25d36f0d37fb2eefdd8dea05ef89bd134c92d",
+    "src/cards/structured-card-description.js": "1d20149b58efc462f72ed381c3400db7e466aab36c4cef2059acd0956010dba1",
+    "src/cards/card-state-presentation.js": "b7326da0309571d78729db62cd2a92229bdf9ec112bfe3f0a2caacc2e94fc915",
+    "src/cards/battle-value-context.js": "ead5ae039e02ec40012e381c3189b8abbc2404149e9d36af1cf47572f624c890",
+    "src/cards/cards.rules.js": "9ff2fd79f57b328f8b21187ea4c43e26af5ea4075ea3c4a7b2eb8f7d34abec07",
+    "src/ui/card-zoom-content.js": "12edab3f251422bc592d23d5246d39665a354593afe6e460bc66027dd5b20f31",
+    "src/hub/hub.warehouse.js": "d99bcf65c9ac96b7235b279242b175f05381b80560ba70ff0b770440ccbc102c",
+    "src/hub/game.cardslib.page.js": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+    "src/ui/performance-settings.js": "fc9afd76c425bc7de38c77b6db821f9d50ee3e9e5c6b8251bd3e8ddc91c21a69",
+    "src/cards/cards.js": "701483224360e67cb14a0f855c5077c056b41566069e0ea586802bf68f5c847c"
+  },
+  "checks": {
+    "privateTypecheck": "0 errors, 10 warnings in latest current dependency snapshot; none from new guide",
+    "freshFormatterVectors": {
+      "tested": 650,
+      "differences": 0
+    },
+    "freshCanonicalCatalog": {
+      "cards": 291,
+      "fields": 12,
+      "differences": 0
+    },
+    "presentationDataResourceMatchesFreshSource": true,
+    "customMergeSourceCoreChecks": 7
+  },
+  "nativePending": [
+    "all six guide chapters, full image reader pan/return, per-chapter scroll restoration and interrupted navigation",
+    "all source descriptions in bag/warehouse/settlement/starting-pool/equipment/item readers; battle uses live snapshot and UID",
+    "damage-type caption in photo dossier/detail; performance-help copy after native cadence integration"
+  ],
+  "scope": "Source-faithful UI presentation only. No source Vite edits, card rules, gameplay values, shared docs, Unity or CUA invocation."
+}

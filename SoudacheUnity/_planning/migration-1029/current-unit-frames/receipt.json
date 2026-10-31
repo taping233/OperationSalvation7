@@ -1,0 +1,142 @@
+{
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Res/UnitFrameCatalog.cs",
+      "sha256": "0f1f4a96e9fe4b022df67559b956162edcde1f48c121a8ad28fa1857c4282d97",
+      "bytes": 946
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Res/CurrentUnitFrames.cs",
+      "sha256": "c58df1429b084d6e322d4e74344a57f33f74e4f45d06b8774f2102626260002f",
+      "bytes": 3838
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleActorPresentation.cs",
+      "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a",
+      "bytes": 6879
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "sha256": "76561a6b12ca5c296aa707b241e5684c44f8455e6923d1d81baf8c5e1b682da9",
+      "bytes": 73473
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+      "sha256": "467bfde3afffeba1eac313323faee7f36b8404c4b52da92688e9058c038990e0",
+      "bytes": 70073
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/EffectExecutor.cs",
+      "sha256": "669c4ecc59f63a6aba529c9e0740d1335328fd638d7b8b3bfa5c550e335f0ddc",
+      "bytes": 26556
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/BattleBridge.cs",
+      "sha256": "5dc26ddacbf729554c9018b34d7f19c9584b6f3f5313fcd01403b99680c46828",
+      "bytes": 20942
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/BattleViewApi.cs",
+      "sha256": "641d3691560c907a0615ab1525f4388cd5902cfb04bd16be7650faceabcc2717",
+      "bytes": 12180
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleActorClock.cs",
+      "sha256": "3688f7d6954947cf7d02df9624602d099a044950e9c12932fdd873bbd63f8421",
+      "bytes": 2552
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleUnitFrames.cs",
+      "sha256": "c98c9db9210690bf2166ce6f3b81d789a1cb136bdf2b185242af39c0f36da640",
+      "bytes": 5099
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentationQueue.cs",
+      "sha256": "72757666f3a776866fa5fd67cea6d4f4bd9ed38803f768c4bc096d0d050da311",
+      "bytes": 5245
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentationBeats.cs",
+      "sha256": "a1ae06b8669198411b643b48c25a7a7328d64e0f5a220dfa36937fe490b73d58",
+      "bytes": 2307
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentationTiming.cs",
+      "sha256": "7214bf37f08a6634bbc0a547fc9bb83ef2f69ba8f2232c7fbed6a483b61bcade",
+      "bytes": 1006
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleEnemyFrameMotion.cs",
+      "sha256": "fb4d0ce37c717e29fbaa2de004338dac86305d102288f689fff09a506c5c118f",
+      "bytes": 3010
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+      "sha256": "19a670a80b2b00afe81e42dc975be266f1cf26e8d1156a2bcf7bd44f9e5580a3",
+      "bytes": 35650
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs",
+      "sha256": "7899cdd48257e8ce8ffd46e3b4c899ceb207c76a715b1047f7deda48bcdba90c",
+      "bytes": 15406
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleEvents.cs",
+      "sha256": "ea3add2d894d1ddfe6d6e90f7e0d2e990e9f15e8f70f899d502f751d39844aa1",
+      "bytes": 6298
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleRuleInputs.cs",
+      "sha256": "8a12af11eb9ccb8029387e1dcc79fa4380c5dc8d45134b798fdf36fb4afd5da9",
+      "bytes": 7920
+    },
+    {
+      "path": "Assets/Resources/Data/CurrentUnitFrames.json",
+      "sha256": "e31d19a69ebb858273883ad7b9257b47a08351074ac4686f5fe9b3fe327ea83c",
+      "bytes": 36753
+    }
+  ],
+  "assetsReceiptSha256": "525ffb45e3e8c3c1c5a98837fe2ce00b24eeccf0475b201a9141e8166a271f26",
+  "clockChecks": 1813,
+  "beatChecks": 25,
+  "forecastChecks": 289,
+  "cardChecks": 167,
+  "latestIntegrationCompile": {
+    "status": "blocked-by-other-slice-in-progress",
+    "errors": [
+      "Kit/CurrentMapTools.cs: CurrentRunHudAssets missing",
+      "Kit/CurrentMapTools.cs: BoardView.FrameExploration missing"
+    ],
+    "priorIsolatedBuild": "passed; current-forecast 289/289 and card-semantics-fix 167/167"
+  },
+  "rngFinding": {
+    "status": "unmodified; parent owns follow-up",
+    "seed": 123,
+    "source": {
+      "path": "../搜打撤/game/src/battle/core/battle.engine.factory.domain.js:845",
+      "method": "frenzyCurse",
+      "call": "Random.random('status', 'generation')",
+      "firstValue": 0.35579043603502214,
+      "curse": "bleed"
+    },
+    "unity": {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs:1031",
+      "method": "FrenzyCurse",
+      "call": "rng.Random(\"status\")",
+      "firstValue": 0.8453671627212316,
+      "curse": "poison"
+    },
+    "minimalRepro": [
+      "node _planning/migration-1029/current-unit-frames/rng-vector.mjs",
+      "dotnet run --project _planning/migration-1029/current-unit-frames/Audit.csproj -p:UseSharedCompilation=false"
+    ],
+    "evidence": [
+      "rng-source-vector.json",
+      "rng-unity-vector.json",
+      "frenzy-random-baseline.json"
+    ],
+    "domainVector": "one enemy hp50 atk3 affix=frenzy; player hp30 maxHp60, atk4 spellPower2, no defenses/status/owned cards; seed123; EndTurn -> source hit 30->27->23, current Unity 30->27->24"
+  },
+  "nativeValidation": "not-run; parent owns native render/input checks",
+  "uncommitted": true
+}

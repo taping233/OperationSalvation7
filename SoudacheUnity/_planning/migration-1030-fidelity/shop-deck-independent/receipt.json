@@ -1,0 +1,91 @@
+{
+  "checkedAt": "2026-10-30T20:34:43.6659888+08:00",
+  "scope": "Independent active source contract, Deck and Shop frozen-code review; Shop inert/focus repairs rechecked",
+  "reviewer": "shop_deck_independent_contract",
+  "sourceHashes": [
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.shop.js",
+      "Hash": "FD593EC790066E0D0390936D86C9413AE4D8F561A15989775E6B1499954F09F0"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\shop-commands.js",
+      "Hash": "3DA4C0BC334F1279E93A81674CFB4269AA448BD33665C18675FB6FB80D8F0E70"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\shop-browse-state.js",
+      "Hash": "A4F9C30A1AA03E9594500143220A767AC3B24ABF5A65C33D150D909303BCF6EB"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\shop-commission.js",
+      "Hash": "53F3BA8BFD297DD8E49FFD57E9F25326E3099DB8D3D0E32D8EC2362C1C26D860"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\css\\expedition-shop.css",
+      "Hash": "FEA202AEBF256B235D7D3A1B3D0CF5A1B878F2D11B1BCA0B23880A7C580A835A"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\view\\battle.overlays.js",
+      "Hash": "4FE4294ABFE76C446B57C6E755C235645444C02BA8693BCA0354A438496AD3BB"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\core\\battle.lifecycle.domain.js",
+      "Hash": "60ACA5A6EE67A4675C643B5751FFDBEBB438128ED7BCE1A58B32E95C7CC46C43"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\runtime\\battle.runtime.default.js",
+      "Hash": "B80C6BC51BDAA7348FA216B623A6148814C390FC0DCAA4E0E07067B007778672"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\core\\battle.default-context.js",
+      "Hash": "C3B51DEBACC3CCC29DEF6E61CB134CC7F4CF5A6E20500C2AD30611C6DEF55108"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\css\\battle-decision.css",
+      "Hash": "6A91D4666C61AF517AC651D77FA12902D65D88C3A8658BF0BD260BB04DC0EB44"
+    }
+  ],
+  "targetHashes": [
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Battle\\CurrentDeckFormation.cs",
+      "Hash": "2A20024E6740CA284D86F70E18AECCC137FB96070A30836EF71D3213FE1C73D7"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Battle\\BattleSubpages.cs",
+      "Hash": "69AF83AA1139D1E179013ACA06E757BFF1BF7105ADC7B1A855E2240B877E8235"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.cs",
+      "Hash": "428CBB2735A345750AD18D55ABF7EFACBF88F4C765779695783D62215357DFBF"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.Market.cs",
+      "Hash": "FDE9D7114973F97B3A4946E8B471977ECAE4915969BF522CF07E0A97527D6BFB"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.Detail.cs",
+      "Hash": "3BB3B5CE5149D82D925C9BD4AF4C2DFA7DD1888FA1CA67E84922C7E4B6EA4D51"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.Exchange.cs",
+      "Hash": "A2EAFDDAA50524659126E284139ED3C725CA3DDF6E974667194D55FCC20A3C9C"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopCarry.cs",
+      "Hash": "990A6EB3F65363FFC18756769EC7E656A35CD5B94AFA4378543ED3D0054F9647"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\ShopScreen.cs",
+      "Hash": "A89DCC1CD0AF8538D4824BE4DBE2A4454FCBA2E20CBD401F4F0950E745C68172"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.ShopAcquisition.cs",
+      "Hash": "2EAAD67835888FC771DEC02E3A4E565C1A4BF953F70BF2C7E2E7EF11787DE78A"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.Commission.cs",
+      "Hash": "1571F124CD0A0EDF771DC023D2A5DAF327BD8D834AF033F18A8226192497D413"
+    }
+  ],
+  "nativeVerification": "Not performed; latest Root instruction requests code analysis before centralized repair",
+  "productionWrites": false
+}

@@ -1,0 +1,11 @@
+from pathlib import Path
+p=Path('SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInventory.cs')
+s=p.read_text(encoding='utf-8-sig').replace('var progress=R.Meta.ClsData(_card.cls);int required=0;','int levelNow=R.Meta.ClassLv(_card.cls),xpNow=R.Meta.ClassXP(_card.cls);int required=0;').replace('progress.lv>=MetaProgress.LevelMax','levelNow>=MetaProgress.LevelMax').replace('int level=progress.lv','int level=levelNow').replace('required-progress.xp','required-xpNow')
+p.write_text(s,encoding='utf-8')
+p=Path('SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentLayout.cs');s=p.read_text(encoding='utf-8-sig');s=s.replace('Bounds(t.gameObject,0,Mathf.Ceil(size*1.5f),1,0);return t;','var bounds=Bounds(t.gameObject,0,Mathf.Ceil(size*1.5f),1,0);bounds.preferredHeight=-1;return t;')
+s=s.replace('if(card==null){Label(host.transform,"旧收藏档案",20,false,Muted);return;}','if(card==null){var legacy=Label(host.transform,"旧收藏档案",20,false,Muted);Fill(legacy.rectTransform);return;}')
+p.write_text(s,encoding='utf-8')
+p=Path('SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs');s=p.read_text(encoding='utf-8-sig')
+s=s.replace('bool hasAffairs = !B.ammoTaught || B.CanUpgradeBag || B.CanUpgradeStash || PendingRewards > 0 || B.stash.Any(s => s.card.id == PetCatalog.Current.eggId && s.count > 0);','int eggCount=B.stash.Where(s=>s.card.id==PetCatalog.Current.eggId).Sum(s=>s.count);\n            int affairCount=(!B.ammoTaught?1:0)+(B.CanUpgradeBag||B.CanUpgradeStash?1:0)+(PendingRewards>0?1:0)+(eggCount>0&&B.coins>=PetCatalog.Current.hatchCost&&B.pets.Count<BaseData.PetsCatalog.Count?1:0);\n            bool hasAffairs=affairCount>0;')
+s=s.replace('new Vector2(48,-580)','new Vector2(48,-40-(hasAffairs?68+affairCount*84:90))').replace('new Vector2(-468,-620)','new Vector2(-468,-740)')
+p.write_text(s,encoding='utf-8')

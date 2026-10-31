@@ -1,0 +1,7045 @@
+{
+  "sourceSHA": [
+    {
+      "file": "game/src/battle/view/battle.turn-forecast.js",
+      "sha256": "f574ea234fab0910927adff2fbd86ce18cbbd05b0c156235c478d787a28babe6"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-plan.js",
+      "sha256": "1d28a58ee095538e2524356898a8901608dea40c473ebbbe9aaef47b5e73e07b"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "d49fd89f58f9bec35478b93329b7ddd95496d29b886bec293511a762a72e86f3"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "sha256": "bc01cacda85a1aded7f33bb2a2262e9f3c53347a110f5ed5139790b4df17b380"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-intent.js",
+      "sha256": "7b9d76d6b89f806698c7c1cb9bb8cf06aef882dfd39816eb1b3cfc5aa66cf1ff"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.domain.js",
+      "sha256": "60aca5a6ee67a4675c643b5751ffdbebb438128ed7bce1a58b32e95c7cc46c43"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.snapshot.js",
+      "sha256": "63ccfc3319ede711648a13870f499e1d5977296ef84eebcad9d361d5a851f86a"
+    },
+    {
+      "file": "game/src/battle/bag/battle.consumed-pile.js",
+      "sha256": "9ee5a989806293af534bba10d60570ebfb8e975fed69c734cca480bc44d7b292"
+    },
+    {
+      "file": "game/src/battle/core/combat.factory.js",
+      "sha256": "980494c55f4381167a2142bf60ef99e74a8416f646e2348c14357d5fa2f4c0d3"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.state.js",
+      "sha256": "1b742d48b5ec01b1bf2a4b8b331b422d446a9a6853776c885323090c67fd23d0"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.action-runner.js",
+      "sha256": "03816eb0496933b4c0322de664c6a7980cd3168c46e1c08109bf26eac919d47d"
+    },
+    {
+      "file": "game/src/battle/effects/card-semantic-operations.js",
+      "sha256": "4457bdbc738cb19ec2649c062d38b50d5c094665dec96c03c354533c2b8f3eff"
+    }
+  ],
+  "forecast": [
+    {
+      "name": "plain",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "poison",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {
+            "poison": 3
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 11,
+        "hpAfter": 19,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "poison-lethal-insurance-does-not-save",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 3
+        },
+        "pstat": {
+          "status": {
+            "poison": 4
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 1
+        }
+      },
+      "expected": {
+        "damage": 4,
+        "hpAfter": 0,
+        "lethal": true,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "shield",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "shield": 9
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "armor",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 5
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 3,
+        "hpAfter": 27,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "guard": true
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 1,
+        "hpAfter": 29,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "shield-armor-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "shield": 4,
+          "armor": 2,
+          "guard": true
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "freeze",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {
+              "freeze": 1
+            },
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "dead",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "dead": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "even-odd",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "evenAttack": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "even-even",
+      "input": {
+        "turn": 2,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "evenAttack": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "stunned",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "stunned": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "first-round",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "noFirstAttack": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "after-first-round",
+      "input": {
+        "turn": 2,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "noFirstAttack": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "frenzy",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 16,
+        "hpAfter": 14,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "player-stealth-with-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {
+            "stealth": 1
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 3,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "player-immune",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {
+            "immune": 1,
+            "poison": 5
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "dodge-double-hit",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {
+            "dodge": 1
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "statless-does-not-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "statless": true
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "dead-does-not-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "dead": true
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "stealthed-does-not-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {
+              "stealth": 1
+            },
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "two-guards-two-foes",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 4,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          },
+          {
+            "name": "靶子",
+            "hp": 5,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "dead-first-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 0,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          },
+          {
+            "name": "靶子",
+            "hp": 4,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "guard-defense-double-hit",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 3,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "shield": 5,
+              "armor": 2,
+              "guard": true
+            }
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "insurance",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 1
+        }
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 5,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "poison-before-insurance",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {
+            "poison": 1
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 1
+        }
+      },
+      "expected": {
+        "damage": 1,
+        "hpAfter": 4,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "insurance-consumes-defense",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "shield": 1,
+          "armor": 1,
+          "guard": true
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 20,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 2
+        }
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 5,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "extra-turn-skips-poison",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 3
+        },
+        "pstat": {
+          "status": {
+            "poison": 4,
+            "burn": 2
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "extraTurn": true,
+          "deathSave": 1
+        }
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 3,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "time-rune-pure-only",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {
+            "poison": 3
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "timeRune": true
+        }
+      },
+      "expected": {
+        "damage": 14,
+        "hpAfter": 16,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "time-rune-lethal",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {
+            "poison": 3
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "timeRune": true,
+          "deathSave": 1
+        }
+      },
+      "expected": {
+        "damage": 6,
+        "hpAfter": 0,
+        "lethal": true,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "bleed-defense",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {
+            "bleed": 3
+          }
+        },
+        "pdef": {
+          "shield": 2,
+          "armor": 1,
+          "guard": true
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "ally-bleed",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 4,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {
+              "bleed": 3
+            },
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 8,
+        "hpAfter": 22,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "poison-necrotic-abreak",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {
+            "poison": 3,
+            "necroticExposure": 2,
+            "abreak": 1
+          }
+        },
+        "pdef": {
+          "shield": 5,
+          "armor": 5,
+          "guard": true
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 22,
+        "hpAfter": 8,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "empty",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "zero-hp",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 0
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 0,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "negative-hp",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": -3
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 0,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    },
+    {
+      "name": "zero-turn-default-one",
+      "input": {
+        "turn": 0,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "evenAttack": true,
+            "noFirstAttack": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "damage": 0,
+        "hpAfter": 30,
+        "lethal": false,
+        "note": "按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"
+      },
+      "immutable": true,
+      "frozen": true
+    }
+  ],
+  "plans": [
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "dead",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "stunned",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "oddRound",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "firstRound",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "frozen",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "stunned",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "expected": {
+        "kind": "orc_boss",
+        "skip": null,
+        "canAttack": true,
+        "hits": 2
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "expected": {
+        "kind": "general",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "expected": {
+        "kind": "element_boss",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "expected": {
+        "kind": "necromancer",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "dead",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "stunned",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "oddRound",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "firstRound",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "frozen",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "stunned",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "expected": {
+        "kind": "orc_boss",
+        "skip": null,
+        "canAttack": true,
+        "hits": 2
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "expected": {
+        "kind": "general",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "expected": {
+        "kind": "element_boss",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "expected": {
+        "kind": "necromancer",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "dead",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "stunned",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "frozen",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "stunned",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "expected": {
+        "kind": "orc_boss",
+        "skip": null,
+        "canAttack": true,
+        "hits": 2
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "expected": {
+        "kind": "general",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "expected": {
+        "kind": "element_boss",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "expected": {
+        "kind": "necromancer",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "dead",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "stunned",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "oddRound",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "frozen",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "expected": {
+        "kind": "strike",
+        "skip": "stunned",
+        "canAttack": false,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "expected": {
+        "kind": "orc_boss",
+        "skip": null,
+        "canAttack": true,
+        "hits": 2
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "expected": {
+        "kind": "general",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "expected": {
+        "kind": "element_boss",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "expected": {
+        "kind": "necromancer",
+        "skip": null,
+        "canAttack": true,
+        "hits": 1
+      }
+    }
+  ],
+  "intents": [
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "已退场",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "已退场",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·首回合不攻击",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·首回合不攻击",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "冰冻·无法行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "冰冻·无法行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "双击并施加诅咒",
+        "damage": 8,
+        "hits": 2,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "双击并施加诅咒",
+        "damage": 11,
+        "hits": 2,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 0,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "已退场",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "已退场",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·首回合不攻击",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·首回合不攻击",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "冰冻·无法行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "冰冻·无法行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "双击并施加诅咒",
+        "damage": 8,
+        "hits": 2,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "双击并施加诅咒",
+        "damage": 11,
+        "hits": 2,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 1,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "已退场",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "已退场",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "冰冻·无法行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "冰冻·无法行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "双击并施加诅咒",
+        "damage": 8,
+        "hits": 2,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "双击并施加诅咒",
+        "damage": 11,
+        "hits": 2,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "已退场",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "dead": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "已退场",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "evenAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "noFirstAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "冰冻·无法行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "冰冻·无法行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {
+          "freeze": 1
+        },
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "stunned": true,
+        "evenAttack": true,
+        "noFirstAttack": true
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "双击并施加诅咒",
+        "damage": 8,
+        "hits": 2,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "frenzy"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "双击并施加诅咒",
+        "damage": 11,
+        "hits": 2,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "grow"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "affix": "aegis"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 3,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "strike"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "strike"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "strike",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "volley"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "volley",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "volley"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "volley",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "charge"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "charge",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "charge"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "charge",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "guard"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "guard",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "guard"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "guard",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "curse"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "curse",
+        "icon": "[[icon:skull]]",
+        "label": "攻击并施加诅咒",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "curse"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "curse",
+        "icon": "[[icon:skull]]",
+        "label": "攻击并施加诅咒",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "dragon"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "dragon",
+        "icon": "[[icon:demon]]",
+        "label": "攻击·阶段效果",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "dragon"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "dragon",
+        "icon": "[[icon:demon]]",
+        "label": "攻击·阶段效果",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "general"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "general"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "general",
+        "icon": "[[icon:arrow]]",
+        "label": "攻击·回合末强化",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "orc_boss"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "orc_boss"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "orc_boss",
+        "icon": "[[icon:tools]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "element_boss"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "element_boss"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "element_boss",
+        "icon": "[[icon:crystal]]",
+        "label": "攻击·偶数回合庇幕",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "witness_pope"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "witness_pope",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·受击强化／法伤回血",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "witness_pope"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "witness_pope",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·受击强化／法伤回血",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "mutation_mother"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "mutation_mother",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第2/4/6回合召唤",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "mutation_mother"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "mutation_mother",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第2/4/6回合召唤",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "mysterious_blocker"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "mysterious_blocker",
+        "icon": "[[icon:skull]]",
+        "label": "攻击后清除自身一层诅咒",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "mysterious_blocker"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "mysterious_blocker",
+        "icon": "[[icon:skull]]",
+        "label": "攻击后清除自身一层诅咒",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "necromancer"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "necromancer",
+        "icon": "[[icon:skull]]",
+        "label": "攻击·第3/6/9回合撕牌并倍增承伤",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "unknown"
+      },
+      "bleed": 0,
+      "expected": {
+        "kind": "unknown",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 8,
+        "hits": 1,
+        "bleedBonus": 0
+      }
+    },
+    {
+      "turn": 2,
+      "input": {
+        "name": "靶子",
+        "hp": 30,
+        "maxHp": 30,
+        "atk": 8,
+        "status": {},
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "behavior": "unknown"
+      },
+      "bleed": 3,
+      "expected": {
+        "kind": "unknown",
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 11,
+        "hits": 1,
+        "bleedBonus": 3
+      }
+    }
+  ],
+  "actual": [
+    {
+      "name": "plain",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 22,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "poison",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {
+            "poison": 3
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 19,
+        "deathSave": 0,
+        "poison": 3,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "poison-lethal-insurance-does-not-save",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 3
+        },
+        "pstat": {
+          "status": {
+            "poison": 4
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 1
+        }
+      },
+      "expected": {
+        "hp": -1,
+        "deathSave": 0,
+        "poison": 4,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": true,
+        "turn": 1
+      }
+    },
+    {
+      "name": "shield-armor-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "shield": 4,
+          "armor": 2,
+          "guard": true
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 30,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "freeze",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {
+              "freeze": 1
+            },
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 30,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "even-odd",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "evenAttack": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 30,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "even-even",
+      "input": {
+        "turn": 2,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "evenAttack": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 22,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 3
+      }
+    },
+    {
+      "name": "stunned",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "stunned": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 30,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "first-round",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "noFirstAttack": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 30,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "after-first-round",
+      "input": {
+        "turn": 2,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "noFirstAttack": true
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 22,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 3
+      }
+    },
+    {
+      "name": "player-stealth-with-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {
+            "stealth": 1
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 3,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 30,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [
+          {
+            "hp": 3,
+            "dead": false
+          }
+        ],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "statless-does-not-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "statless": true
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 22,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [
+          {
+            "hp": 30,
+            "dead": false
+          }
+        ],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "stealthed-does-not-guard",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {
+              "stealth": 1
+            },
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 30,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [
+          {
+            "hp": 22,
+            "dead": false
+          }
+        ],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "two-guards-two-foes",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [
+          {
+            "name": "靶子",
+            "hp": 4,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          },
+          {
+            "name": "靶子",
+            "hp": 5,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "expected": {
+        "hp": 22,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [
+          {
+            "hp": 0,
+            "dead": true
+          },
+          {
+            "hp": 0,
+            "dead": true
+          }
+        ],
+        "stunned": [
+          false,
+          false,
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "insurance",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 1
+        }
+      },
+      "expected": {
+        "hp": 5,
+        "deathSave": 0,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false,
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "poison-before-insurance",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {
+            "poison": 1
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          },
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 1
+        }
+      },
+      "expected": {
+        "hp": 4,
+        "deathSave": 0,
+        "poison": 1,
+        "allies": [],
+        "stunned": [
+          false,
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "insurance-consumes-defense",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "shield": 1,
+          "armor": 1,
+          "guard": true
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 20,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            },
+            "affix": "frenzy"
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 2
+        }
+      },
+      "expected": {
+        "hp": 5,
+        "deathSave": 2,
+        "poison": 0,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    },
+    {
+      "name": "extra-turn-skips-poison",
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 3
+        },
+        "pstat": {
+          "status": {
+            "poison": 4,
+            "burn": 2
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "extraTurn": true,
+          "deathSave": 1
+        }
+      },
+      "expected": {
+        "hp": 3,
+        "deathSave": 1,
+        "poison": 4,
+        "allies": [],
+        "stunned": [
+          false
+        ],
+        "over": false,
+        "turn": 2
+      }
+    }
+  ],
+  "hits": [
+    {
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 30
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "atk": 20,
+      "expected": {
+        "dealt": 20,
+        "hp": 10,
+        "deathSave": 0,
+        "immune": 0,
+        "dodge": 0,
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      }
+    },
+    {
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 1
+        }
+      },
+      "atk": 20,
+      "expected": {
+        "dealt": 0,
+        "hp": 5,
+        "deathSave": 0,
+        "immune": 1,
+        "dodge": 0,
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      }
+    },
+    {
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "shield": 1,
+          "armor": 1,
+          "guard": true
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 1
+        }
+      },
+      "atk": 20,
+      "expected": {
+        "dealt": 0,
+        "hp": 5,
+        "deathSave": 1,
+        "immune": 0,
+        "dodge": 0,
+        "defense": {
+          "shield": 0,
+          "armor": 1,
+          "guard": true
+        }
+      }
+    },
+    {
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {
+            "dodge": 1
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {
+          "deathSave": 1
+        }
+      },
+      "atk": 20,
+      "expected": {
+        "dealt": 0,
+        "hp": 5,
+        "deathSave": 1,
+        "immune": 0,
+        "dodge": 0,
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      }
+    },
+    {
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 5
+        },
+        "pstat": {
+          "status": {
+            "immune": 1
+          }
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "atk": 20,
+      "expected": {
+        "dealt": 0,
+        "hp": 5,
+        "deathSave": 0,
+        "immune": 1,
+        "dodge": 0,
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      }
+    },
+    {
+      "input": {
+        "turn": 1,
+        "player": {
+          "hp": 3
+        },
+        "pstat": {
+          "status": {}
+        },
+        "pdef": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        "allies": [],
+        "foes": [
+          {
+            "name": "靶子",
+            "hp": 30,
+            "maxHp": 30,
+            "atk": 8,
+            "status": {},
+            "defense": {
+              "armor": 0,
+              "shield": 0,
+              "guard": false
+            }
+          }
+        ],
+        "endTurnContext": {}
+      },
+      "atk": 20,
+      "expected": {
+        "dealt": 20,
+        "hp": -17,
+        "deathSave": 0,
+        "immune": 0,
+        "dodge": 0,
+        "defense": {
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      }
+    }
+  ],
+  "selfDamage": [
+    {
+      "hp": 5,
+      "n": 8,
+      "saves": 1,
+      "expected": {
+        "hp": 5,
+        "deathSave": 0,
+        "immune": 1,
+        "over": false
+      }
+    },
+    {
+      "hp": 5,
+      "n": 8,
+      "saves": 0,
+      "expected": {
+        "hp": -3,
+        "deathSave": 0,
+        "immune": 0,
+        "over": true
+      }
+    },
+    {
+      "hp": 10,
+      "n": 2,
+      "saves": 1,
+      "expected": {
+        "hp": 8,
+        "deathSave": 1,
+        "immune": 0,
+        "over": false
+      }
+    }
+  ],
+  "phases": {
+    "player": "player",
+    "targeting": "targeting",
+    "cancelTarget": "player",
+    "resolving": "resolving",
+    "afterResolve": "player",
+    "retract": "player",
+    "victory": "victory",
+    "defeat": "defeat",
+    "deck": "start",
+    "cancelDeck": "start"
+  },
+  "repeatedInsurance": 2,
+  "pile": {
+    "input": {
+      "hand": [
+        "held"
+      ],
+      "drawPile": [
+        "draw"
+      ],
+      "played": [
+        "a",
+        "held",
+        "dup"
+      ],
+      "consumed": [
+        "b",
+        "dup",
+        "draw"
+      ],
+      "discard": [
+        "c",
+        "a"
+      ],
+      "grave": [
+        "d",
+        "excluded",
+        "b"
+      ]
+    },
+    "excluded": [
+      "excluded"
+    ],
+    "expected": [
+      "a",
+      "dup",
+      "b",
+      "c",
+      "d"
+    ]
+  }
+}

@@ -1,0 +1,196 @@
+[
+  {
+    "name": "cicada",
+    "ok": true,
+    "reason": null,
+    "firstHand": [
+      "battle-temp:btd:4",
+      "battle-temp:btd:3",
+      "battle-temp:btd:2"
+    ],
+    "picked": null,
+    "hand": [
+      "starter-attack",
+      "starter-attack",
+      "starter-attack"
+    ],
+    "consumed": [
+      "o1",
+      "o2"
+    ],
+    "armor": 0,
+    "foes": [
+      {
+        "id": "foe",
+        "hp": 96,
+        "bleed": 0,
+        "poison": 0
+      }
+    ],
+    "energy": 2,
+    "hp": 30
+  },
+  {
+    "name": "cicada-boss",
+    "ok": true,
+    "reason": null,
+    "firstHand": [
+      "battle-temp:btd:2"
+    ],
+    "picked": null,
+    "hand": [
+      "starter-attack"
+    ],
+    "consumed": [
+      "o1",
+      "o2"
+    ],
+    "armor": 0,
+    "foes": [
+      {
+        "id": "foe",
+        "hp": 96,
+        "bleed": 0,
+        "poison": 0
+      }
+    ],
+    "energy": 2,
+    "hp": 30
+  },
+  {
+    "name": "scale",
+    "ok": true,
+    "reason": null,
+    "firstHand": [],
+    "picked": null,
+    "hand": [
+      "starter-attack"
+    ],
+    "consumed": [],
+    "armor": 0,
+    "foes": [
+      {
+        "id": "foe",
+        "hp": 94,
+        "bleed": 0,
+        "poison": 0
+      },
+      {
+        "id": "other",
+        "hp": 100,
+        "bleed": 0,
+        "poison": 0
+      }
+    ],
+    "energy": 2,
+    "hp": 26
+  },
+  {
+    "name": "immortal",
+    "ok": false,
+    "reason": "\u5361\u724C\u5DF2\u4E0D\u5728\u624B\u724C\u4E2D",
+    "firstHand": [],
+    "picked": null,
+    "hand": [],
+    "consumed": [],
+    "armor": 0,
+    "foes": [
+      {
+        "id": "foe",
+        "hp": 95,
+        "bleed": 0,
+        "poison": 0
+      }
+    ],
+    "energy": 1,
+    "hp": 30
+  },
+  {
+    "name": "dart",
+    "ok": true,
+    "reason": null,
+    "firstHand": [],
+    "picked": null,
+    "hand": [],
+    "consumed": [],
+    "armor": 0,
+    "foes": [
+      {
+        "id": "foe",
+        "hp": 89,
+        "bleed": 1,
+        "poison": 1
+      },
+      {
+        "id": "other",
+        "hp": 100,
+        "bleed": 0,
+        "poison": 0
+      }
+    ],
+    "energy": 0,
+    "hp": 30
+  },
+  {
+    "name": "provoke",
+    "ok": true,
+    "reason": null,
+    "firstHand": [],
+    "picked": null,
+    "hand": [],
+    "consumed": [],
+    "armor": 0,
+    "foes": [
+      {
+        "id": "foe",
+        "hp": 98,
+        "bleed": 0,
+        "poison": 0
+      },
+      {
+        "id": "other",
+        "hp": 98,
+        "bleed": 0,
+        "poison": 0
+      },
+      {
+        "id": "third",
+        "hp": 100,
+        "bleed": 0,
+        "poison": 0
+      }
+    ],
+    "energy": 1,
+    "hp": 30
+  },
+  {
+    "name": "fuel",
+    "ok": false,
+    "reason": "select infusion",
+    "firstHand": [
+      "o0",
+      "o1",
+      "o2"
+    ],
+    "picked": [
+      "o1"
+    ],
+    "hand": [
+      "tt3sp-silverthorn",
+      "cmtn233trmeg",
+      "starter-attack"
+    ],
+    "consumed": [],
+    "armor": 0,
+    "foes": [
+      {
+        "id": "foe",
+        "hp": 100,
+        "bleed": 0,
+        "poison": 0
+      }
+    ],
+    "energy": 2,
+    "hp": 30
+  }
+]

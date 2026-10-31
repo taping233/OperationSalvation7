@@ -1,0 +1,40 @@
+{
+  "files": {
+    "搜打撤/desktop-app/preload.js": "f03d385b7400fb72f82c737cb1b788fa54befd9d0beef631db14e6bd0020dbdf",
+    "搜打撤/desktop-app/startup-window.cjs": "5727ba7a26ff447b97b84e8fe06afd1db379c5970465264d4f1f0b94fc5d0937",
+    "搜打撤/game/src/main.js": "f4bb40999b217c7c170cde55ee77fbbaac434365aff90dc9eeb1a0489403ebde",
+    "搜打撤/game/src/ui/startup-transition.js": "e9d1ed97c2cb0eaa16acf91bdaf583038aaef704c416d127df81b841d373395e",
+    "搜打撤/game/src/ui/camp-entry.js": "63e7a22d9b47878498a57e75a6ff2f555b374ce5e490bbd6d8727b3a587b7675",
+    "搜打撤/game/src/ui/silent-node-film.js": "91b9419c36e40ea3677d9a1285d9c6f31bef62e391a77086525dbdf9b298717d",
+    "搜打撤/game/src/ui/cinematic-profiles.js": "fb97f4bf9594e708edb9e315704d24a1f54aca452ce079582646077439a3da22",
+    "搜打撤/game/src/ui/transition-handoff.js": "3f38a0b051b35d8df6e8e934a3023a4f612ba05e7951be710e548c92d355f1f5",
+    "搜打撤/game/src/ui/motion-presets.js": "857fcf75668a97ca69a713532a63511ed855a9f6043188e3d09dcf274ca16221",
+    "搜打撤/game/css/startup-transition.css": "b105692bb95c01bfe686d25ffc92db165229bc3146b03fca436d11f95b9c42a4",
+    "搜打撤/game/css/camp-entry.css": "f8737f08d21860a5164808c278eaabc1ddb8e0253eb67f7d14e9e3cb43c66acd",
+    "搜打撤/game/css/silent-node-film.css": "4ed960115782b7d1455ff0a2d7ed13cecd651603c36ed75a5de2a2d00fbc976b",
+    "搜打撤/game/css/transition-handoff.css": "6ac1abdff9b2cc77f3da85bac1be318ced5302a96c656d5fb3ea10c72a756d3c",
+    "SoudacheUnity/Assets/Scripts/Sdt.Boot/GameBoot.cs": "c3aef538b798ffe1bcf593b044c4905cf8a226caa81e34816bac2df9cfa5ecec",
+    "SoudacheUnity/Assets/Scripts/Sdt.Boot/StartupTransition.cs": "9b2b78c2068066e756aba50e92c4470199924b6a6cbd81611cf6da193c88e747",
+    "SoudacheUnity/Assets/Scripts/Sdt.Boot/StartupTransition.cs.meta": "d04dd2c8afa5ed13a35edd97d3dc5c1b098045ada104358eb128bfcd889dab5d",
+    "SoudacheUnity/Assets/Scripts/Sdt.Boot/NativeDisplayReview.cs": "98b7096e1fe0c2a9c7db4c534b72861322eaee39cbb79f4a08b05bdfd08bb142",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CurrentRunFilm.cs": "24cc251ecc1666be3d138614721bcb3d4dc73ae768c2add3e978a8e3faa36ad6",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CurrentRunFilm.Motion.cs": "edf1a5c7c9231e5971869c9daa3397fd00aba8da3f245dbff5e09629553ce2b1",
+    "SoudacheUnity/Assets/Resources/Data/CurrentCinematicProfiles.json": "4dd6dfc1ee6072a93070b103e6c0c61d4afb94a7113e7100020c385eab98f496",
+    "搜打撤/game/assets/scenes/departure/city-reflection-v1.webp": "0d31cb35f13fa9fb5853c80f134ff761b5344524a89d881ab7fbaaf9ea5e9a3c",
+    "SoudacheUnity/Assets/Resources/Art/Current/scenes/departure/city-reflection-v1.png": "71324ef6c20ad8d610948e3986b41c614ad83125b00284e4bb75df49620d3dd6"
+  },
+  "art": {
+    "source": "搜打撤/game/assets/scenes/departure/city-reflection-v1.webp",
+    "target": "SoudacheUnity/Assets/Resources/Art/Current/scenes/departure/city-reflection-v1.png",
+    "sourceSize": [
+      1659,
+      948
+    ],
+    "targetSize": [
+      1659,
+      948
+    ],
+    "decodedPixelsEqual": true
+  },
+  "scope": "source audit + private Windows-defined C# compile; Unity/native player and real input not run by this agent"
+}

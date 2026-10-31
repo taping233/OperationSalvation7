@@ -1,0 +1,2502 @@
+[
+  {
+    "path": ".gitignore",
+    "bytes": 338,
+    "sha256": "fa9e55a92fdf6ff5e61f0ae9f673927beeded771fc420e8a2cf2d17c1f9f19c7"
+  },
+  {
+    "path": "Assets/Editor.meta",
+    "bytes": 172,
+    "sha256": "b899802aecab368eed23e04b8dde0adb6602711b884abac79328210449e1b941"
+  },
+  {
+    "path": "Assets/Editor/BackgroundInputProbe.cs",
+    "bytes": 26984,
+    "sha256": "cba92f0f7d16f9c342f2c392e0dcd06a1739e8590500a9d315d6f2e006514e9e"
+  },
+  {
+    "path": "Assets/Editor/BackgroundInputProbe.cs.meta",
+    "bytes": 62,
+    "sha256": "8cda9d562e4e98de53f71a5ca04b8142afe10b96e76c171406292d43ffa462a2"
+  },
+  {
+    "path": "Assets/Editor/BuildGame.cs",
+    "bytes": 3575,
+    "sha256": "31b8888c8d5d7bfe00f3413c5c666e1d7082499da790bb24be128dfac4ccc388"
+  },
+  {
+    "path": "Assets/Editor/BuildGame.cs.meta",
+    "bytes": 59,
+    "sha256": "156561780c89e340d9698a2557684eac8914c71762998e5ea91515d8677c83c2"
+  },
+  {
+    "path": "Assets/Editor/CurrentArtImportPolicy.cs",
+    "bytes": 1015,
+    "sha256": "7ac85bb5268e59cc3d37a8d94441aefb3e06acd7f4236b12e59bccfa7f8b27b5"
+  },
+  {
+    "path": "Assets/Editor/CurrentArtImportPolicy.cs.meta",
+    "bytes": 59,
+    "sha256": "b01987e27bd64c839eac4e4f5905d764c68e8f6afbec487dbbf703bfbad459fa"
+  },
+  {
+    "path": "Assets/Editor/CurrentBattlePileValidation.cs",
+    "bytes": 18922,
+    "sha256": "ec4e93ae9cc746f39902b16866a588fdeaffb142d8286c2b4dc5d4037c91af22"
+  },
+  {
+    "path": "Assets/Editor/CurrentBattlePileValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "178296809276206397b59fa44a536c262c5ca29e962d8e20b6d0e36a62fb0610"
+  },
+  {
+    "path": "Assets/Editor/CurrentCardScrollValidation.cs",
+    "bytes": 6668,
+    "sha256": "3f9e9da83aa010821575db495ef118cf9394d8be5857be56eed72722352ed51b"
+  },
+  {
+    "path": "Assets/Editor/CurrentCardScrollValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "7e9df314d79ea0e29877d71af3299dd382b47442c3ea3981a134ffdb6af57de5"
+  },
+  {
+    "path": "Assets/Editor/CurrentCjkLayoutValidation.cs",
+    "bytes": 5261,
+    "sha256": "c14391fd16d1ff6be3358ddb6b175baf6e347756d6c3a16b518b0803408261b6"
+  },
+  {
+    "path": "Assets/Editor/CurrentCjkLayoutValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "0a010f28f8c1d47207efd3fd258aca8d40ce5585a6087115aad91fa7cf4bddfe"
+  },
+  {
+    "path": "Assets/Editor/CurrentFilmFlowValidation.cs",
+    "bytes": 25234,
+    "sha256": "6c94ff6e62f74b2aeddcf85c5ce49f4a9e4f5f84db28095660915ef753e5bbac"
+  },
+  {
+    "path": "Assets/Editor/CurrentFilmFlowValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "ba85c398dd1ce77dd1845a827c1fb938352969b5f277bbc3711a38544e75b6f3"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.FilmWait.cs",
+    "bytes": 2312,
+    "sha256": "af0cb0fa37a929dbf615474c2e300bd5fc1675b47697c83a4267a12fe24c796a"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.FilmWait.cs.meta",
+    "bytes": 59,
+    "sha256": "e2f5d725d1818f6ec90db680392bbbb2f451fc77b39881e89f4825e78f93d748"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.Journey.cs",
+    "bytes": 18367,
+    "sha256": "7e9a8743b4f2b23677351337f6ea83b854cc29097ddd2401996482dd4fa58e38"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.Journey.cs.meta",
+    "bytes": 59,
+    "sha256": "7637dd3bd8121cb4b4c94d4a47ee11c16344ceaa5201bb160680d025d6e2df54"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.Receipts.cs",
+    "bytes": 20731,
+    "sha256": "b2c43cc28414d2823c0d0a2d6eef433d5b0be06ee4e95882329398c8612346d5"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.Receipts.cs.meta",
+    "bytes": 59,
+    "sha256": "86d3e6c823b022cfd1e92872fb9e1c0744a4a9c72ea0dfa9e12c5d9479570f40"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.RewardInput.cs",
+    "bytes": 11726,
+    "sha256": "a706212961b7906cc25a9576f0ec435e76666482a09435a089179312078b6765"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.RewardInput.cs.meta",
+    "bytes": 59,
+    "sha256": "83846fcd51e50c30ba2d42ab9cca2532b99c4998c5489d4d9c29ef8331c316bb"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.RewardTransition.cs",
+    "bytes": 11793,
+    "sha256": "f115c0eae1b17f63e8977d92b1c4b70962bac231d70f337132668934dfdf8c1e"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.RewardTransition.cs.meta",
+    "bytes": 59,
+    "sha256": "b7e02eb2cc67283211527e1b5748d5f48bbeece13a0ccbaf1a374b3b30b2ec06"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.cs",
+    "bytes": 17374,
+    "sha256": "08bfe55eb4720dd9645182bcc26f2f2b419fe96d9a11e412b19420b52b36dc08"
+  },
+  {
+    "path": "Assets/Editor/CurrentMigrationFlowValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "0181003cf96ec7601e78792fdaac003ea5b6ada3d0e28c7d54c345664b15fa48"
+  },
+  {
+    "path": "Assets/Editor/CurrentRewardOrganizerFocusValidation.cs",
+    "bytes": 10838,
+    "sha256": "2648b15221b9d9403b894a8e6052a73d6605da141005faad63a908fd2097d7a4"
+  },
+  {
+    "path": "Assets/Editor/CurrentRewardOrganizerFocusValidation.cs.meta",
+    "bytes": 254,
+    "sha256": "7669c70084c27ff6e0c20a52b38c466aefb47b4093b543996173e64eebf92d76"
+  },
+  {
+    "path": "Assets/Editor/CurrentShopSourceValidation.cs",
+    "bytes": 29698,
+    "sha256": "4e7bcf51cd49c0992729d1630a83467c8771c6061f91d1c9504c53f24776a412"
+  },
+  {
+    "path": "Assets/Editor/CurrentShopSourceValidation.cs.meta",
+    "bytes": 254,
+    "sha256": "18de927132d6b580e0d42f9e35c6b3e4c202ab706e345e46b2ab132d7de2f77c"
+  },
+  {
+    "path": "Assets/Editor/CurrentSlotArchiveValidation.cs",
+    "bytes": 7280,
+    "sha256": "6ca66591ae62b5302d975d470579f9db8a238b74b17d0f010df2b27fc7b99ebb"
+  },
+  {
+    "path": "Assets/Editor/CurrentSlotArchiveValidation.cs.meta",
+    "bytes": 62,
+    "sha256": "397a23252b502a62211ff906c8f037186a2f62acee342dbd65ed4ef013fa289b"
+  },
+  {
+    "path": "Assets/Editor/CurrentTextureQuality.cs",
+    "bytes": 10702,
+    "sha256": "8599021b832260b1980ced11c52f622e4e509f7ed946163c397deb68f25dcaf0"
+  },
+  {
+    "path": "Assets/Editor/CurrentTextureQuality.cs.meta",
+    "bytes": 60,
+    "sha256": "f7046ba66c459387db67d89af65e5492d92b533e3e5d68132554de44779aa973"
+  },
+  {
+    "path": "Assets/Editor/CurrentUnitFrameValidation.cs",
+    "bytes": 20812,
+    "sha256": "ddc8019fb410a3d857084cbd062a89ab4ba2cd9917cd19f0a5d052de45e27275"
+  },
+  {
+    "path": "Assets/Editor/CurrentUnitFrameValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "79358aaf40cc89358eac11018c6719e9dee1f331ffd6612fda091c475260011f"
+  },
+  {
+    "path": "Assets/Editor/DesktopFaultValidation.cs",
+    "bytes": 9356,
+    "sha256": "3cf50e9c15e555d8670792898436d3937cf4add73d3ec3adfca9531954ce0cd6"
+  },
+  {
+    "path": "Assets/Editor/DesktopFaultValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "cc252533bf08c13b0c9fd2730ace324ee77a2e2884a8567ea351b1c681245acd"
+  },
+  {
+    "path": "Assets/Editor/DesktopJourneyValidation.cs",
+    "bytes": 14762,
+    "sha256": "8d6aabb6fa5e4d96ce5bb40673d4aecba478741385ea12b58b16c79ccbf65df9"
+  },
+  {
+    "path": "Assets/Editor/DesktopJourneyValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "ce6656dc548c2140d75d46585b28f360d3f119d1ee79f2bbcf8c71c9be482e90"
+  },
+  {
+    "path": "Assets/Editor/DesktopSurrenderValidation.cs",
+    "bytes": 14699,
+    "sha256": "4f3aa540eed7054ecfd54919e9cce75ea53fca6ddd6b3e599de73e3a0ff6a2f2"
+  },
+  {
+    "path": "Assets/Editor/DesktopSurrenderValidation.cs.meta",
+    "bytes": 60,
+    "sha256": "32ea0b62e50450a23e5ec7377bf54ab4620e38aa3a3ac0edea4c152e8f2d5558"
+  },
+  {
+    "path": "Assets/Editor/DesktopValidation.cs",
+    "bytes": 13660,
+    "sha256": "2505e0b858112f9e3d622650b7ff979b0777017827e9ea7bfae8ede1ffce3fda"
+  },
+  {
+    "path": "Assets/Editor/DesktopValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "69bb9e0eaa7665ddbbae866a29771ec88093198327433224bfa5c7b1308673c6"
+  },
+  {
+    "path": "Assets/Editor/DesktopVisualValidation.cs",
+    "bytes": 17274,
+    "sha256": "f13b02be6b148b9a693f81ce1c04fc855804667747ac00f3e5440f4a37ccd737"
+  },
+  {
+    "path": "Assets/Editor/DesktopVisualValidation.cs.meta",
+    "bytes": 59,
+    "sha256": "964696316bf3b2ee6b665f40233e4b6409909064c7863542d302cab05f67d03c"
+  },
+  {
+    "path": "Assets/Editor/MapVisualProbe.cs",
+    "bytes": 10354,
+    "sha256": "e29ef7c2cd3d54cc040c7efbc37441773d5b185d52ec4a520193861468a935ad"
+  },
+  {
+    "path": "Assets/Editor/MapVisualProbe.cs.meta",
+    "bytes": 59,
+    "sha256": "af0d2871328954ca89b76faa59d0f2a62208c76a7e2083553dc9502fc7ac8350"
+  },
+  {
+    "path": "Assets/Editor/OffscreenCapture.cs",
+    "bytes": 8286,
+    "sha256": "73af16a2d14b5c4f921bb51947584edb1a41365d5b05feba371ca98ef99e5990"
+  },
+  {
+    "path": "Assets/Editor/OffscreenCapture.cs.meta",
+    "bytes": 59,
+    "sha256": "b913c36b004fd6b1ee4c2bb6db2e41ca2c3a2af8e4a214089067d401894200cd"
+  },
+  {
+    "path": "Assets/Resources.meta",
+    "bytes": 172,
+    "sha256": "18237de9721e1e1621fa676cb4662cc9532775befc7faee4b25091908734f39c"
+  },
+  {
+    "path": "Assets/Resources/Art.meta",
+    "bytes": 172,
+    "sha256": "8d3ceb7cda304ce120a7c837cf18cef0d32b53bd724666bbec2107e01aedd5d0"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards.meta",
+    "bytes": 172,
+    "sha256": "b7403085df4f1ef3c85d21917b948985005a0bfa852ea52c9d7964f5162bd11b"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/consumable.png.meta",
+    "bytes": 2652,
+    "sha256": "76c3dce60d72fed6802ee3dc5d82c89d278e719cc447584c232a0d6b875f3987"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/equipment-armor.png.meta",
+    "bytes": 2652,
+    "sha256": "bb89974e256aa10b34db0fed12433ecf1ea2210f21207a5e682b16e6b377cb53"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/equipment-utility.png.meta",
+    "bytes": 2652,
+    "sha256": "a75cd3671bdf5f4629bf4800993ebe866fdfea290078136643347aa3e2ecb257"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/equipment-weapon.png.meta",
+    "bytes": 2652,
+    "sha256": "019ee5de70dd4704e3128648a51020b65ffa752f0030e098ad52c5f670e772de"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/event.png.meta",
+    "bytes": 2652,
+    "sha256": "8bcf4fb373889f67626d0c4bc4a9d52c84ae4d2f5606b95d3f7f173b703ae4ec"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/healing.png.meta",
+    "bytes": 2652,
+    "sha256": "32221e5d88cff38d41c6d48656faa11876c32cd97174af86fff11a9aa7141137"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-assassin.png",
+    "bytes": 274478,
+    "sha256": "fa7aa377703a542553f8c7907545df2264d14f984b50f5f72585daf4b96dddbd"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-assassin.png.meta",
+    "bytes": 2652,
+    "sha256": "867b68cb35a4acf128ac93ba87c53390e38fcfabb14f4ce73ec6d85aae14a343"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-descend.png",
+    "bytes": 282159,
+    "sha256": "8e347d8dec03a0c9af4d44072442cdf524697187fe302906b7e468a9d3098297"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-descend.png.meta",
+    "bytes": 2652,
+    "sha256": "0d0cee9fcc7c58fc691345e83d2480d5f239a222fad3a882aa4ecb98add1bd45"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-guard.png",
+    "bytes": 256370,
+    "sha256": "ac1defabaa80f25a5b89a01474b09b6f846c130f324064a6c0855d1eb3148ff9"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-guard.png.meta",
+    "bytes": 2652,
+    "sha256": "12b9c45003bea7c9c30ff33af95cc6e91311a2bcf485ac311bb7182bdb11b980"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-mage.png",
+    "bytes": 337674,
+    "sha256": "2ac1544a5cf166024ab2d3d333f26101da2c91f9df5b1cb57ef3a2e26cd960f8"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-mage.png.meta",
+    "bytes": 2652,
+    "sha256": "507dfaf10d2a2005cb0d5add52e5b40237cff5acccbc92b71339ec644c9380fb"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-priest.png",
+    "bytes": 238277,
+    "sha256": "8a01262626d211cf57457a2f08efad2f5b942c8b8c10e36c596ce93faa7b1052"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-priest.png.meta",
+    "bytes": 2652,
+    "sha256": "2d4e73d9e966e47fa2f5e4d4181a645c53afc982a40b5a3b41c1124749ffd990"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-ranger.png",
+    "bytes": 240300,
+    "sha256": "840494538d4ca0cd248d652acca505cb16b8838fd942c3d9f1e6e5db3434c5c6"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-ranger.png.meta",
+    "bytes": 2652,
+    "sha256": "cd7208daaabe8c906ec4b0b51aa2825d0c97389aa4676657b5cacfa514f8d479"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-sealer.png",
+    "bytes": 280170,
+    "sha256": "f35843f080bae879b57b935178a4d51f1f10ac17ec8bcd810a3b98846c614027"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-sealer.png.meta",
+    "bytes": 2652,
+    "sha256": "614cdf3d5d48f5a620b6c6eb540af18954dbcea06939b57f4a181805427563fe"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-summoner.png",
+    "bytes": 283260,
+    "sha256": "5d65cd546cce6bce8eb15ee2e3a2bf6a5f47338544d7f678c09fa3e64784026b"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-summoner.png.meta",
+    "bytes": 2652,
+    "sha256": "c4dc3f9297214e3a0c43cb32c6473659ff4ca65d0483237af123a8d6d95d8237"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-sword.png",
+    "bytes": 281683,
+    "sha256": "47912aafd3679257e166bd35231c21571f54d844d05a23f9e3d9bc5c7bdbdd59"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-sword.png.meta",
+    "bytes": 2652,
+    "sha256": "dbf2afd1811fb946fd12f3a0e0f363401b99c2fe9a06bb48fba63b35306faa1e"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-warlock.png",
+    "bytes": 264994,
+    "sha256": "e9e6f9a85114c2c92d6646cd358559fed36938b5d49a89b093e15e1b923e0b72"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-warlock.png.meta",
+    "bytes": 2652,
+    "sha256": "215aea67b0ef1b690935f40630b4f983fc0f9676a8289a09ba45e936701913d8"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-warrior.png",
+    "bytes": 322933,
+    "sha256": "be0cf26ed50c923fc2388260e93aaee5aa97533934113080063f058a6438f296"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero-warrior.png.meta",
+    "bytes": 2652,
+    "sha256": "27a793b605960bd9789a145312c1896bc49957906f498f563b292162de0f1dca"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/hero.png.meta",
+    "bytes": 2652,
+    "sha256": "a74040083cdcf156d74be9afe756e84483704cb30fd27458833e0a501795021c"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/martial-melee.png.meta",
+    "bytes": 2652,
+    "sha256": "130303a6a7b33f4f56f146316b146786df957d71b36cc3fdbe2feaeb0892006e"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/martial-ranged.png.meta",
+    "bytes": 2652,
+    "sha256": "d2775ea671e1b2489166fe96fb2c68223b9c2575bccca3401700684cc848bbb1"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-diamond.png",
+    "bytes": 846084,
+    "sha256": "be67fdc96f2d6a901fc15c33aaae561e7f1c45864553a5d903ec889a95f3b705"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-diamond.png.meta",
+    "bytes": 2652,
+    "sha256": "7b7ca0ac29c54ca449602e4923e4d2e72ea5300f4fb02a59811b36ee1fc7879f"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-econpack.png",
+    "bytes": 788467,
+    "sha256": "426d6ce106e5832cbdb09cbe5e9114fa637b91792276dddf427256af0ff51518"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-econpack.png.meta",
+    "bytes": 2652,
+    "sha256": "f0d36e633b87c1bd30a777b70a04acdee2c2f97b807d7a7fca497f22e8ada19d"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-garnet-marble.png",
+    "bytes": 865902,
+    "sha256": "50bab6dac381dabd9a25c443952837fac3a6aa17bf544b12c11b9cb1f6f2a92b"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-garnet-marble.png.meta",
+    "bytes": 2652,
+    "sha256": "db938b1377b0e4dfb8873b698859bbcc841fe8f1fba2c479636af21489906fa0"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-key-one.png",
+    "bytes": 852183,
+    "sha256": "abf078018eb3f673555f7f5b4f6f0138c44c718e85c8284b8b62f9134560b56e"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-key-one.png.meta",
+    "bytes": 2652,
+    "sha256": "0c10cd442cd0e279d03744ac59baf79566a2913e1f44c1c1377c110f88d78959"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-key.png",
+    "bytes": 796616,
+    "sha256": "73e458c470d399e90549b9342fbd8d04b645db7e29b1846ecf3cd3281646daa5"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-key.png.meta",
+    "bytes": 2652,
+    "sha256": "cb40672ce28a9024a5891eb45a05ec787452ad9ee37020ce14cd31e759a53a75"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-keys-bunch.png",
+    "bytes": 664575,
+    "sha256": "45153c2a3badf55cbe3c436b92da4e260df969ff7200478c8a71c75fdbb9017d"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-keys-bunch.png.meta",
+    "bytes": 2652,
+    "sha256": "eef4a8f0e26aa5679b029d58b4509c0e34017ce1f8319c976f3403b47ac8e753"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-material.png.meta",
+    "bytes": 2652,
+    "sha256": "d7918a597f14d105ef7320e68bf3024c8ce80be038af268d89c6aabe4fe3a2cb"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-ration-double.png",
+    "bytes": 813440,
+    "sha256": "fd9e0c29022fc2bbb1f90e36a0c432e5473f903ba51f901722073a9da1cb567e"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-ration-double.png.meta",
+    "bytes": 2652,
+    "sha256": "33316ff93b54e4390d8c43f2b596f6a185adf92b022fb91b40b7cacde99532b5"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-ration-std.png",
+    "bytes": 833837,
+    "sha256": "776091cd7d6706fc8d5e8b5998e715802d327e02d85c039c25619c280d1a2576"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-ration-std.png.meta",
+    "bytes": 2652,
+    "sha256": "4c481b492a1c43932dad6fe81255e5480f3df0c4f956c92b111164e53a653534"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-ration.png",
+    "bytes": 794877,
+    "sha256": "39a0f1d2a5baa037ad2d722aa69731ad6ba95c78d05455fce565e828ea526292"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-ration.png.meta",
+    "bytes": 2652,
+    "sha256": "648119dba65d96725275ced1e6469c838e3792957e0e79d12bcbddcec60c075e"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-valuables.png.meta",
+    "bytes": 2652,
+    "sha256": "35ce6d7d51322e5e208fb8bde319252437332d453d51340a3ff12bd9658ee282"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-wood-bundle.png",
+    "bytes": 869389,
+    "sha256": "1e6478ef114459fd50ff4ed4d4418f852e04064614e0ee34c6d1e06bb6e53f9d"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-wood-bundle.png.meta",
+    "bytes": 2652,
+    "sha256": "cc9b9dc0ae6a561483ee6272588bb110e2e4c2e753a9d578ab27482374264d48"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-wood-lots.png",
+    "bytes": 849553,
+    "sha256": "ac837ba7ecf953316bd5f879a27031ffd6f689e68d0180e1dbf037082279e1f8"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-wood-lots.png.meta",
+    "bytes": 2652,
+    "sha256": "28276786352ac8f9884aff4db4fe310103109d68935bf166d554968fd35b8e87"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-wood.png",
+    "bytes": 882024,
+    "sha256": "42a73febc0c253c55a6e8b3e39ced7f3a35e983c8cd1f2455e0c8f33a62fb30e"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/resource-wood.png.meta",
+    "bytes": 2652,
+    "sha256": "ea96bb39912121df252d8ddc38c14310c30e53a092e05be1b1430603e1d94ea2"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/spell.png.meta",
+    "bytes": 2652,
+    "sha256": "72d76d77199f1ba7b93c1588e4e79c0f622e7f1bec4187c9fb132e3ec0ea2fac"
+  },
+  {
+    "path": "Assets/Resources/Art/Cards/unknown.png.meta",
+    "bytes": 2652,
+    "sha256": "2465ab2ceeb41221c40f38fc3db9f185d98134b7dd6a19ef39823bbe3fe91ef7"
+  },
+  {
+    "path": "Assets/Resources/Art/Current.meta",
+    "bytes": 172,
+    "sha256": "f81f743391730877ea85e89e532e584965bbc2c8f915ca530cca6965766787eb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons.meta",
+    "bytes": 172,
+    "sha256": "86b95661378a5f59da7992e8dc030dd166b4e0498f84192196fdc62a4910a53c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/ach.png",
+    "bytes": 1065,
+    "sha256": "8a333395025c7124b5ed9e0aa9804d4d9e001cbd5c8aaf8fc1dcac30a54b36b2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/ach.png.meta",
+    "bytes": 2714,
+    "sha256": "4a02d08705a86c6f134c79a3b8c1bf22582f5e554b215230587e911fc28640db"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/classes.png",
+    "bytes": 2416,
+    "sha256": "e4787ee7b3404e94252712754e7dd65fc7db05e60df7cef68a3208eba215ee17"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/classes.png.meta",
+    "bytes": 2714,
+    "sha256": "9aa5aedcd86c3ec80f08e4a0ad42828001d2574f20f665e3ded6b9281f515d8a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/courtyard.png",
+    "bytes": 2377,
+    "sha256": "1a85bdf16392b9836d826355a462ca795cb2c25e69c63ab7d3bb9246d1a82b5a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/courtyard.png.meta",
+    "bytes": 2714,
+    "sha256": "466559bc272de7c20934fa58cf2681970444c6735dd81b65c98279b9e938e2d0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/deploy.png",
+    "bytes": 1941,
+    "sha256": "3f48205417cfa5099130132921224594be8da7999b542bc9992a3247bb0396f8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/deploy.png.meta",
+    "bytes": 2714,
+    "sha256": "9aaa5ed14d2a1eea4a312119f79ce10f69ee16eb64608f1b8bd1fa06a8aaba77"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/facility-bag.png",
+    "bytes": 4170,
+    "sha256": "eaac05de5e4bafe561c2abcb35ec59cc15d7d85c932f46cbcb5969d2814cf655"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/facility-bag.png.meta",
+    "bytes": 2714,
+    "sha256": "2780758c523b60838a04d8d673fedd68c07f0a0577e3fdbbbd3c1782aefe5fa8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/facility-stash.png",
+    "bytes": 2558,
+    "sha256": "31214b9d9957351896a4e6bb887169d6a95f4b0736a94683188ca348576018d0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/facility-stash.png.meta",
+    "bytes": 2714,
+    "sha256": "2ab8a9e66bea5c489e4a497c37f0f96a8ad18712bae8fb2c7d76747acaa28774"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/home.png",
+    "bytes": 1190,
+    "sha256": "bd2b74bd56c1c7af38da9571444817ea636f3b67e1ab7f4400137e51f8a49632"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/home.png.meta",
+    "bytes": 2714,
+    "sha256": "2827cc8f83d9bf4358387aabf1249ccf530224bd1b108ab5c875fa332e873cc3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/shop.png",
+    "bytes": 1432,
+    "sha256": "1f5dadd09bd1540d543c52310fd286dc257c252b5deb9202bdfa3ba2cdc0a502"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/shop.png.meta",
+    "bytes": 2714,
+    "sha256": "7d707a15854612f7793a4b3d775ad446697630f0bb53a5ba540200093ab5fa97"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/stash.png",
+    "bytes": 496,
+    "sha256": "68358650d660b9c7061d4073b31dff76e5c5a7de53627140c0281421887aca44"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/stash.png.meta",
+    "bytes": 2714,
+    "sha256": "00432183ea99f93e62fc77ed989ef7f6798cc23fc5429fd9f99600632e8346bf"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/upgrade.png",
+    "bytes": 1743,
+    "sha256": "382e7da1a35214e2b2f3912fb0f2c053d6d54f4c06e6e03319f662fd74fa7eea"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/HubIcons/upgrade.png.meta",
+    "bytes": 2714,
+    "sha256": "5328acaa18b831a74107d50f76f21164f79b8496d997cce12e3be54456983ca9"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud.meta",
+    "bytes": 121,
+    "sha256": "691e864253e2d3be0f42a583f9c5ac9fefc3e1963178107441debe9159e2c6e4"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/attack-v2.png",
+    "bytes": 13481,
+    "sha256": "66ef021cf937da37a269996fc9152c48f13f7019e0e68492175c826db955d8cc"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/attack-v2.png.meta",
+    "bytes": 2714,
+    "sha256": "21caa406120b7c065af27c00c5ee8bfbfc2a34c176998cf1bcb18089f93a95fa"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/bag-v2.png",
+    "bytes": 15725,
+    "sha256": "e0435885880951f4afa34728fbe8354b43f222744b0b1fdbf5e724df03846e8b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/bag-v2.png.meta",
+    "bytes": 2714,
+    "sha256": "2519b024b3212462125fdb4897c0d5ee3e029e662b28e839c70e6da57ba1f27f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/focus-v2.png",
+    "bytes": 15458,
+    "sha256": "fa111b6ee17241f779b60644639306d8375e7a0a5fdce8adee4dce97d4c1a044"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/focus-v2.png.meta",
+    "bytes": 2714,
+    "sha256": "e883277769e40d0579a3e46176353c9b0cf5e39f1f40af19f3d9c06b39d28329"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/gold-v2.png",
+    "bytes": 9213,
+    "sha256": "ca27a033968afaa25153d03da83da9e1474c34da9646189e3d75bf7b2b946173"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/gold-v2.png.meta",
+    "bytes": 2714,
+    "sha256": "018b737961b9fa2160285859f84c8e3f9568574c61ca6ebb7c2ad7d83dd217d8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/overview-v2.png",
+    "bytes": 16596,
+    "sha256": "e71269035febe6076deead0a9c2c1211c29ba20f06e8c5c8a2183916e17ac085"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/overview-v2.png.meta",
+    "bytes": 2714,
+    "sha256": "ea5cdb91eee69270ee52007eafa699f82543c7d2a7f08f77fee5199dee398a55"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/pocket-v2.png",
+    "bytes": 16500,
+    "sha256": "fa0d6a343ab97ea9f5409e8a475f8cc7736a9aab0b6ef37bf4f6ab3389b79ded"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/pocket-v2.png.meta",
+    "bytes": 2714,
+    "sha256": "e6d167961e56448d6c8393e1d14f146672e4a1d9d31195a1b125c238f5d1d1de"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/safe-v2.png",
+    "bytes": 17201,
+    "sha256": "5c34918f322bad1061f78ff12c85a96a6a9d27ce9dc4dee2dc22b056b1b63841"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/RunHud/safe-v2.png.meta",
+    "bytes": 2714,
+    "sha256": "1b88aa3354c102f6831431d328cc4a272d8b074d2b78376ddf59846d564e11b7"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/Settlement.meta",
+    "bytes": 121,
+    "sha256": "541d27b8f876825133bd65c4d3520bae523df6adfe72a49be2616921377cd753"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/Settlement/rewards-convoy-fail.png.meta",
+    "bytes": 2714,
+    "sha256": "d7733593a5d2f6e6843dc265fe0d527e5abb2f39dc6b2d0d53129c3f4ac092bd"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons.meta",
+    "bytes": 172,
+    "sha256": "d7bf00807d68c7982a4b78f5bbcf093ca3448bfec2f1a61dd04ac5f2df26eb04"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/altar.png",
+    "bytes": 103450,
+    "sha256": "b544d14650254f6935c13e758e013a4ef5681fb5fb8acd6786ebfcc930f5e56d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/altar.png.meta",
+    "bytes": 2714,
+    "sha256": "72a91f83749635519a07108e2450179818c5d6b7fdf9c17089bce0843185b849"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/archive.png",
+    "bytes": 1304,
+    "sha256": "b65cc0aca006aaedc74aa49a4216ed818b0ddffecb518f05b1b203e204bb4c28"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/archive.png.meta",
+    "bytes": 2714,
+    "sha256": "27a3111419d89df1886db3734de9df0fe5d158b9087822993f557498248d2242"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/arrow.png",
+    "bytes": 2274,
+    "sha256": "1992ec1b2f78fa7d18f79670fe9d57d5fcca7d8e2838d9e5afc4a1322de332de"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/arrow.png.meta",
+    "bytes": 2714,
+    "sha256": "b266f69c92b7463b902982a9984aa8bf71a4360122352deaa30adb153b195ff5"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/bag.png",
+    "bytes": 2061,
+    "sha256": "0569d4e99ab933dd95fbe0a9348fa434ecfa75b96c6f3bfabd9b207f9f29413c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/bag.png.meta",
+    "bytes": 2714,
+    "sha256": "fc0583996a3548d2a46b31439e16be4254c417f999ebd9fe46c9bd7e2cf9c421"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/blood.png",
+    "bytes": 808,
+    "sha256": "6ddba11e7853e51c3da6f886618da4372c5c74cc00369644f3e649093ed97b9d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/blood.png.meta",
+    "bytes": 2714,
+    "sha256": "a7a29eac6d43989712d286786950bfd83c21ef9f5e5d5c73ba6114da038550ae"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/bolt.png",
+    "bytes": 688,
+    "sha256": "0ca5191ee356ee03cc8dd07abd1bc494e51ea946cd3fa2ba8471a69600412da0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/bolt.png.meta",
+    "bytes": 2714,
+    "sha256": "59346a9230ed35d60ed9a6ab9a3957545d69e35c33e7221b91ad2ed0500372ab"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/book.png",
+    "bytes": 3425,
+    "sha256": "d6ab1c04674e0b93c4564e7a01af95a825964070ed7ffa70f642746a1071dab2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/book.png.meta",
+    "bytes": 2714,
+    "sha256": "e63fe280bf31a3700a766c0b3790512bf560c303707611b1f843c6730f0e89fb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/bread.png",
+    "bytes": 696,
+    "sha256": "7cdddae2a97fdaed625152758fd52223729e7f5f588347b1a7dde4fcd5a6a177"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/bread.png.meta",
+    "bytes": 2714,
+    "sha256": "771fd54eba3015492c571479f1d8ad472becfa75629abd1e0c7c99f7d121b866"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/broken.png",
+    "bytes": 811,
+    "sha256": "b393bf324f5754ef776b1079437212d48193e7d1d11eb7590f3bc4a1fa7dc2ce"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/broken.png.meta",
+    "bytes": 2714,
+    "sha256": "80d6d5d9b441467a0611fefadc0eca21cbdd07dcbfffa86662e50e59cdcf85c9"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/broom.png",
+    "bytes": 3813,
+    "sha256": "eee672ce00ced42bc5b2d86f397d34bd797bc1f2c268aeba727ac43ee86f4a64"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/broom.png.meta",
+    "bytes": 2714,
+    "sha256": "8aceda4d516bb9806010fa1946071265a99390e49bca90be0f06da61f5a610b8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/card-back.png",
+    "bytes": 2072,
+    "sha256": "452e6dd7a99ffd9a7ea34fa4f03fb60d59496463e4654a6db61df3993d028e08"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/card-back.png.meta",
+    "bytes": 2714,
+    "sha256": "0d3009560219756349859f7fcfed962bdb7ee456da05fc00a00c811ae2d688de"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/card-craft.png",
+    "bytes": 3209,
+    "sha256": "4b964e523630d307fa45a5d8bdfb81770f4a067ff09b5c1c8b94b772d0612942"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/card-craft.png.meta",
+    "bytes": 2714,
+    "sha256": "8ee555b27ff1f7667c59bfd36dbc2eb99cffd52e57e9025c03010d600e2eacb8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/card-library.png",
+    "bytes": 1865,
+    "sha256": "33840059218ade07034dccdba126120d9357390df38e60e3cd93cee5e2de38a1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/card-library.png.meta",
+    "bytes": 2714,
+    "sha256": "d689c6ac9a8fe37f52ee4a46f83d48d6a709f0a269cb3289c435e5e87a4eb6ac"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/cards.png",
+    "bytes": 4344,
+    "sha256": "c58eea4aa125f3a0698f7c67f27afa6fe30586b8fccabd97f46c3839cef081e4"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/cards.png.meta",
+    "bytes": 2714,
+    "sha256": "cf9a86cea2d55a318ad86268e94251942f8dd6c6ee128ce17ba4dfce9ec45f3c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/chart.png",
+    "bytes": 2001,
+    "sha256": "dd35ddb733747223126733879fcb2861eefebabdf5859ea3f14aa6c3010edac5"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/chart.png.meta",
+    "bytes": 2714,
+    "sha256": "b9acbe91b1f1c514f06f3e0b97c32f34c9fc7981c998a102a7cbd18b2fc33d8e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/check.png",
+    "bytes": 563,
+    "sha256": "199b401c7cb96fc8b1e701facc8bcbc79ad9cd1965dea0b359eb838c35886bb7"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/check.png.meta",
+    "bytes": 2714,
+    "sha256": "a36367f0c8dbd95265be99f4bfb4ad3da63be2bd868423a284d80da7bed8732d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/coin.png",
+    "bytes": 9213,
+    "sha256": "ca27a033968afaa25153d03da83da9e1474c34da9646189e3d75bf7b2b946173"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/coin.png.meta",
+    "bytes": 2714,
+    "sha256": "8476b51d93dc89af3379d257451bd041f251c1cda7b593dbd38e4ee033224508"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/consumed-pile.png",
+    "bytes": 2347,
+    "sha256": "44ba997386ec1a56e3c8a6160b315f7d530943238a6cec82c1a88ff48fce2250"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/consumed-pile.png.meta",
+    "bytes": 2714,
+    "sha256": "e9be869eea3be64098a44a90bbc9d928be762dac6df09117aacd9255db6aabbd"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/cross.png",
+    "bytes": 645,
+    "sha256": "e1c88cd7a202f77ddc6c44a84ec5a281e83fc7afc44c246895fa817d3a568451"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/cross.png.meta",
+    "bytes": 2714,
+    "sha256": "c1ce7623d883feb62f19c039a2a03466655a3e299c6f567d6c758a59f4605842"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/crystal.png",
+    "bytes": 3918,
+    "sha256": "2400285ef90b2e24f6a5f57d19d61c89d4d0da41a63c39dcaccb1862b7cccde0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/crystal.png.meta",
+    "bytes": 2714,
+    "sha256": "53de76a4310f53d18b947c7637382bcefc2e75e75318ca8857036446328fac71"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/demon.png",
+    "bytes": 1173,
+    "sha256": "a9f278ec0a763ee77157b17227b8b28cccd8beb6c6dd220f0b874c7c2d031cc4"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/demon.png.meta",
+    "bytes": 2714,
+    "sha256": "635a557d71767969670b5cd84f536b057b0f7ff71bce42c5865a55e830e24591"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/dice.png",
+    "bytes": 554,
+    "sha256": "adb3ccdfa1ea9379646f6831607464b6e61937519055bb4fafdc63323a6ca5dd"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/dice.png.meta",
+    "bytes": 2714,
+    "sha256": "ace32757304609fdd2eaea14d5572d846b7930b21a30a43ac3bc9d6cf86cf41d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/door.png",
+    "bytes": 1247,
+    "sha256": "1c7904e0daf375693fd2557b9fbe2aaacd78d22301e9cf895a228b423137d3bb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/door.png.meta",
+    "bytes": 2714,
+    "sha256": "981c2bac2f383bae7c6f67d532c4e0679b56667942061609a89af1a343801e4c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/download.png",
+    "bytes": 521,
+    "sha256": "a14c5e985f06e9ac82adb533aa952112d1ca7ce8bfc07f2e61d1cc837886ec6d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/download.png.meta",
+    "bytes": 2714,
+    "sha256": "9f732b70d741fec18d1b60b2faf0b0f2f3da651e491fa3e39e28def95cf42e06"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/draw-card.png",
+    "bytes": 1711,
+    "sha256": "582b2b0d38409506d2d1a147eb8b77d8dd6447baf56a6cc5786daf18e3c3106e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/draw-card.png.meta",
+    "bytes": 2714,
+    "sha256": "968746bf3efab94bb46333b20b4d9a23fe26578ff159d69b2f2f76687b095d03"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/draw-pile.png",
+    "bytes": 1721,
+    "sha256": "bc36060c92403a891eb4d1993ebc53871f5d65f732dbd7dd603aa361790116e4"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/draw-pile.png.meta",
+    "bytes": 2714,
+    "sha256": "b0dd304b89b46afe30074a9fdbb8c15d676677c7a851f6cd44190f0d93e98148"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/exit.png",
+    "bytes": 2125,
+    "sha256": "06f5df938ec340d6816705fbb93c4f9afb3532863687977b1384ab83ff67ba2d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/exit.png.meta",
+    "bytes": 2714,
+    "sha256": "843758be73897e924f859c1cec7de4f534992d77d2ac733b62eaa69a90e76850"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/fire.png",
+    "bytes": 922,
+    "sha256": "dfb7af696cfd2a889279feb682f13cc865b06a3c8a000828c7945207ee7246a1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/fire.png.meta",
+    "bytes": 2714,
+    "sha256": "f244a94aa3529123ee95bc520dfcb329a85a3cf381dbac3d88204c5e531b8242"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/flag.png",
+    "bytes": 576,
+    "sha256": "920a0ba3bace2c9bb540710819bfa977dec33f36e9e91be526e4a4a71aeb5e96"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/flag.png.meta",
+    "bytes": 2714,
+    "sha256": "15d8ba6ee81f2b0bbc19d0a2f0d7bdb43cb44641be0cb82b04d68259e71672b1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/flask.png",
+    "bytes": 756,
+    "sha256": "f31ac7bac8befa5e3c6a2d677388a487a77b43116e1885d6098ae03a5e315372"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/flask.png.meta",
+    "bytes": 2714,
+    "sha256": "f42da722910ad2ba0a01f447212c14f630c9d5b2441c542ab2ced5e21b0fedc1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/folder.png",
+    "bytes": 2450,
+    "sha256": "e4eeafea81feefeb6fb597f5c2d009d664109b70f70d1c198224d8646fd44503"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/folder.png.meta",
+    "bytes": 2714,
+    "sha256": "83f1d8f2aba7f8754699725fdbbedaddb4d52f5cd0cbcda8940fbd93780edba5"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/gear.png",
+    "bytes": 17639,
+    "sha256": "7fbef9f84edbc9e948e6a7a4779c835954002da3603a5bc00e80c74a0b951473"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/gear.png.meta",
+    "bytes": 2714,
+    "sha256": "eb516ae781265c128feda2ddbd1a7b3855174b24c12a654d655769342863454c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/gem.png",
+    "bytes": 2547,
+    "sha256": "ce25032e8b439bfc15f70f3bc9e3c58b1dcd27505d642600e4837c47cf2904ec"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/gem.png.meta",
+    "bytes": 2714,
+    "sha256": "d19f703ca9a9f1f9ae31d9df7cfab759d85f5da34a28652ecf021a921f53d008"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/hand-pages.png",
+    "bytes": 3337,
+    "sha256": "6c240b4261972fc6242887c7fe26d9efd21ea23b7ad0e4f16912777e2282d5bc"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/hand-pages.png.meta",
+    "bytes": 2714,
+    "sha256": "04046664aa85009cb2c020cb1d1f3a58536c34be9a4e1286c574b3e58b9efa31"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/heart.png",
+    "bytes": 602,
+    "sha256": "3698053f2689d511a0f63db8e1a4aad7582d0cdebfe8c2597d4396f59adef6eb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/heart.png.meta",
+    "bytes": 2714,
+    "sha256": "2b52fb9a885734ae81695b619185b64ed086170d8e3e7b053fba47d7abd1a3f3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/helmet.png",
+    "bytes": 4361,
+    "sha256": "5af7eaca30bf0454c5dbeda339e957efeb7044da33730bb640d0a2921ceeb8f0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/helmet.png.meta",
+    "bytes": 2714,
+    "sha256": "c46bac35117e9d33b0587f53d97c6077fb5082b490f54e95c78649a213528c11"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/home.png",
+    "bytes": 2633,
+    "sha256": "b335de819a3d8fd1149ee1620f4006101eed28cd31ec437db6a890f1a81884ba"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/home.png.meta",
+    "bytes": 2714,
+    "sha256": "290938910d79e03892a161544bd2ec30e1d17fac204e20b3444aaff2a7417e0d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/hourglass.png",
+    "bytes": 3127,
+    "sha256": "4a35c2b2ab81dc348132f16da02c74fcf12d8d4b80ff588a308db3a10413606f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/hourglass.png.meta",
+    "bytes": 2714,
+    "sha256": "2b8c95a54f82124a81c1b618c5bad15b40e32ad9e3207abbcbeba4418a7e901b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/infinity.png",
+    "bytes": 4277,
+    "sha256": "d63b158b00afc1e123cf8fde3cd53d2761eb89f5ee68375989e00196626c135d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/infinity.png.meta",
+    "bytes": 2714,
+    "sha256": "9063335f4e686f80c0ee856424d9b1ce86a5d18b48406148f1b83c2d36ba53e0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/info.png",
+    "bytes": 4709,
+    "sha256": "25d2144f4b263145bf7c136c30caeec2ba3c54fcabf0886ec5952624d278f2d3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/info.png.meta",
+    "bytes": 2714,
+    "sha256": "db96283724357d0b1b733dbfc37549914882042af0ab543d31986837601aee2f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/infuse.png",
+    "bytes": 3058,
+    "sha256": "385079aab5e5705d945f61485ffcb43ea8abf757d0b705d52d5d2142077a5df3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/infuse.png.meta",
+    "bytes": 2714,
+    "sha256": "0bfdb8cbca54edc08a451c31099b316294a730d873c40697e18b01bc42036423"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/key.png",
+    "bytes": 733,
+    "sha256": "9ed823ab9b14bfd1b0a1c12f6fe8bae1cf6683e345e3df024e138a86dce13e31"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/key.png.meta",
+    "bytes": 2714,
+    "sha256": "252c041921360b452b329baff22d317b980f69a5d45354aa909477fa16fe0b6d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/lantern.png",
+    "bytes": 2647,
+    "sha256": "7d3619caf558fcca178b5592295a61cd43f1886020f23170dcf1c081cba8b469"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/lantern.png.meta",
+    "bytes": 2714,
+    "sha256": "93a227f7545381f9f4b77f6e35ea5c93fce76ab167c3ec2398bb8e205af6fd7f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/lock.png",
+    "bytes": 586,
+    "sha256": "691b10a542e041ff97d5ddf9e39742a5d33feef8485a3ac5d8a273458f9e3ab6"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/lock.png.meta",
+    "bytes": 2714,
+    "sha256": "807ecdb5a4685a5294da30d376813ae5064e5264e209bc8c8ee7601dafe8e12d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/map.png",
+    "bytes": 794,
+    "sha256": "8c24b879b817db55351ee7b89b11f7b5df81deaf579c2ead8c0d5dcc5afeac4e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/map.png.meta",
+    "bytes": 2714,
+    "sha256": "3f2110bcbc1b6fd2938cd5d934d8fb7876e5eb45cda0c66596a64cc69b91fbe2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/medal.png",
+    "bytes": 869,
+    "sha256": "007d3e0fa06dbff5b9ea0ea92893aa72d01ee70881b01b8f3c23c17f78b57d38"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/medal.png.meta",
+    "bytes": 2714,
+    "sha256": "56c9fbcf3909aa6b9315aaf9e92892ce20cbaab4bcef65f3ea48c7c1b3d8d202"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/mouse.png",
+    "bytes": 3730,
+    "sha256": "3795469fe58ba7ff5447bdd1cd8337305c96e82b958f045440d25defc5acd9cc"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/mouse.png.meta",
+    "bytes": 2714,
+    "sha256": "3eec7f2d1ece78f1e997bc5cb14996fa017235bf7f3c7a71cc557baa798434ff"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/notes.png",
+    "bytes": 1588,
+    "sha256": "c99b8b8764971b269f05538d5b5dd1e0b829721f24d670391bddc7ce3b9fa9cf"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/notes.png.meta",
+    "bytes": 2714,
+    "sha256": "6b223f295191956d135811ac050be30b2f81289f68e683d5333807c21da33bdb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pass-fragment.png",
+    "bytes": 3639,
+    "sha256": "e92ecf94b323f4839d0b2cc60cf2d8d77c0955f3b210d918a549e2e5495f38c9"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pass-fragment.png.meta",
+    "bytes": 2714,
+    "sha256": "bb40833c11456fcdb31bb2a6d8eddf1ee6d8b27007e14dd16e31bca706027bda"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/paw.png",
+    "bytes": 900,
+    "sha256": "29264104d179f63a43a42a8f00f81f490c015f4d7c0cf755a6e439499d98483e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/paw.png.meta",
+    "bytes": 2714,
+    "sha256": "5622d9a12889e8ab7601b61867d4f4f45e1e41a8a0beb0546c00fde3fbdfbe9d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pearl-box.png",
+    "bytes": 3195,
+    "sha256": "7f6e84217794562cbbdca73e6fda93a24c9798d750a1027e06b6f60cb9cb7e74"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pearl-box.png.meta",
+    "bytes": 2714,
+    "sha256": "d0453fa95a436bc60ea7cb10a8f5a250ef22681621d32c17d72f9a2d74afe57f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pen.png",
+    "bytes": 3149,
+    "sha256": "d6fb653a4c07c6eb2408db3bcd68db4438851c991e424894222c1a2a03c5d077"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pen.png.meta",
+    "bytes": 2714,
+    "sha256": "e8f8d672963d02dd95e072acefbb0c89172914be376b9d253eae9783660b8a8e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pet-egg.png",
+    "bytes": 5531,
+    "sha256": "16eee6745bbf9b13ec39c1e1d5af9c1d2230eabb964b2b59cebf44d5dff88e86"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pet-egg.png.meta",
+    "bytes": 2714,
+    "sha256": "d2493967c15344f4da672dd6b7e3734a8435cb1419c8cbb29af1322db0bbd7db"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pin.png",
+    "bytes": 3591,
+    "sha256": "6b8638e2a2480cbeacbe2a6b0c13c95b8b307f9fb779ad8cacbadc007e21e31b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pin.png.meta",
+    "bytes": 2714,
+    "sha256": "72aea4556ca878abb9b05b47327f73449db3a0c8e2b4c4320397370fee5550f3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/plate.png",
+    "bytes": 3490,
+    "sha256": "96b96bea44c8c9a5ef7e6bc82f9ff5a81621421800d27a977fa0c07211d45ffa"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/plate.png.meta",
+    "bytes": 2714,
+    "sha256": "76b38e88020c4b514eff17b7db838d54b4d57f81ccb876a7f7c6a1dc0a6055e4"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/play.png",
+    "bytes": 1946,
+    "sha256": "c1dd293821cacb37160e7e0def88569d9e4e37e3faeaa9ee843a77f0ba575c7e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/play.png.meta",
+    "bytes": 2714,
+    "sha256": "09b2551cbe60ef5eeacc30f043f79654474149c10b4dab295afa3fde54cc0a85"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pocket.png",
+    "bytes": 2542,
+    "sha256": "bcb446cd9f0ee1dc6b31c4f59bb7c31fde2eac87837779a2c36c90cc1c213c08"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pocket.png.meta",
+    "bytes": 2714,
+    "sha256": "d1e781d7b84a72313cc682f67662b404e03c4ba3a4bb4e49594bed41bef755b3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pouch.png",
+    "bytes": 4874,
+    "sha256": "8984dd752284ab93a9af17241d2d4dee6a18870103075bb0cf9bd177b2671457"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/pouch.png.meta",
+    "bytes": 2714,
+    "sha256": "4e7dfdd1093b5ec3cd3583c4ff9d0b62100fdd410dfe506d05d1ed7e7bfaa58c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/question.png",
+    "bytes": 2662,
+    "sha256": "c87b4d9259acbc86ca9f26130d29f73d3bf07325b1f26a87ebf8cac79b837a17"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/question.png.meta",
+    "bytes": 2714,
+    "sha256": "2e87264649b3108cba6e39e8f0de8397272a3e0898b126e2d8854c19f4db02d5"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/recycle.png",
+    "bytes": 1006,
+    "sha256": "bb1bd84ed2927f5567c70b415838308c8e6ef0423ac67a77fcb2092952015084"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/recycle.png.meta",
+    "bytes": 2714,
+    "sha256": "fc1cc95e4ca4c0851d2ea64ada38fd47b888cffe99cff48a2a20d61da332a341"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/runner.png",
+    "bytes": 724,
+    "sha256": "a9ca3f1a55cc1618f003075647a9198fe0e94f4c973716b490eedf6b2bded7db"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/runner.png.meta",
+    "bytes": 2714,
+    "sha256": "49c073ccd42e9092e4f77c9ea0e9aa7c2365de7d7296786cef065571037d01f0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/safe-slot.png",
+    "bytes": 1239,
+    "sha256": "a1f756f3cc36ec4d3499ab19680c5176296b90a9914043b5a462b06e21101b4f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/safe-slot.png.meta",
+    "bytes": 2714,
+    "sha256": "d85feba363029cf660e73933a1ec5fbdaac5c0ff347de168883e07c28f22d0d0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/save.png",
+    "bytes": 1598,
+    "sha256": "1543c1c1ec96a091c9b4e3fb308d15209b1a2e6a949b3ba0b4385ca8d8b92bd8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/save.png.meta",
+    "bytes": 2714,
+    "sha256": "9711ef471a2ae3fa82857e2bfa893486bc2c7587e116e4bd4bf617223104df7d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/scroll.png",
+    "bytes": 2268,
+    "sha256": "cc14a8d0508c81c3c1539f1a7cdbf30c34bbfd11ddc3f762f1ef4e8aaf96d79a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/scroll.png.meta",
+    "bytes": 2714,
+    "sha256": "e1ec148ef9aefa50a78c896376e51b947de374fbd66e18025825c054f62c7440"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/search.png",
+    "bytes": 3884,
+    "sha256": "ea977598b98aa4c28fe74e7b90db56d66fcfdd35d07b04e7e90b86fa67b332aa"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/search.png.meta",
+    "bytes": 2714,
+    "sha256": "8a9160e4cd9007ab695f8fd0ce2b7092d83307f8b06dfdd67ae1c98d1c77c783"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/sell-cards.png",
+    "bytes": 2621,
+    "sha256": "fb2ae8276423f8b95389abb02884daa432d9128fe330d5d99b0e985bea3f15a0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/sell-cards.png.meta",
+    "bytes": 2714,
+    "sha256": "fcc19d7e4bdb217be85eac62c0c0b4083a103fce8a5eb720b9b7bef7741ad4d0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/shield.png",
+    "bytes": 4209,
+    "sha256": "76bf23806f4d3cd1a996d05f1521776d74c87bff624a9b69795e8dd53631339b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/shield.png.meta",
+    "bytes": 2714,
+    "sha256": "a5265aa365ae10614794b83eff1a3af74dbec0460731d9484a143ee2afc6369a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/skip.png",
+    "bytes": 2041,
+    "sha256": "b07beaaa60540f0b49cb386f778d12952b2717a79e64085a08de37a7448a14ab"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/skip.png.meta",
+    "bytes": 2714,
+    "sha256": "b2b4991856bd78b7264cc1e947495955d1f224aa0d10664e8cb7b03203b14a99"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/skull.png",
+    "bytes": 878,
+    "sha256": "cdf7e473530e9b693431dee7b86f440e4d7396c670b7be1b909550b73aad3fd2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/skull.png.meta",
+    "bytes": 2714,
+    "sha256": "d9e902a75af9331074abfebc93603b95ca7d3312f6b1ff1b8aed2ed6839de6d1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/slime.png",
+    "bytes": 745,
+    "sha256": "8d0c614cea2b06ec28ee55124c37dcad8c72f40e4b26eda3bd18dd9d18e356fb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/slime.png.meta",
+    "bytes": 2714,
+    "sha256": "c0e1046690c82f9b8ed3d0d6e3db37f839a681a5aa3251925a532c72e1b4b8f5"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/sparkles.png",
+    "bytes": 3169,
+    "sha256": "d7c6f8b03c6950acff778a8f894bc1208a05c36924d9446f9adb822f1ac44ce6"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/sparkles.png.meta",
+    "bytes": 2714,
+    "sha256": "3e3134aec10e888cb149531f215567c4337709bf074b1df1f9d10da516da410b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/spell-pouch.png",
+    "bytes": 4834,
+    "sha256": "3cf1719446564fc9ec4a1488685267d9d9cdb6a62f997f3bcd429b3e63fad295"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/spell-pouch.png.meta",
+    "bytes": 2714,
+    "sha256": "ba0e4ccfc3324717c8a8e9548bf0140f02d778c7dd95ed294c1ee50965423af0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/spell-power.png",
+    "bytes": 3906,
+    "sha256": "a343288902a95478fcd1313108c16d609df4301e1241826cf5fbb42cb7dddc3c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/spell-power.png.meta",
+    "bytes": 2714,
+    "sha256": "78235ace794eea89f2468ab40f139c18ff700ee3ca828ed6d5b0423932448196"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-armor-break.png",
+    "bytes": 4667,
+    "sha256": "169b9a7637a24e316ef28d5066c817e0cc32bbfc391ec5c8e81698647bce8854"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-armor-break.png.meta",
+    "bytes": 2714,
+    "sha256": "9ccf029d86f7200512e9b59da036b71e266264a4268586d2e5cbb8652428ba35"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-atk-down.png",
+    "bytes": 3248,
+    "sha256": "bcc2bcd10d898d0666bbbd565031d400189ad48b50efebbde5f5cd8c200c340a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-atk-down.png.meta",
+    "bytes": 2714,
+    "sha256": "e9af3414e0969170b8b1cba390c9b93d749a702364b69c3536b1b67d067dcb6d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-atk-up.png",
+    "bytes": 3216,
+    "sha256": "a21f29ca6690aee063975f2dc5f083eeddad22f88bd6fa6e68063dcb941e88c3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-atk-up.png.meta",
+    "bytes": 2714,
+    "sha256": "9ebf280488fad7ff0f101e3908360cd0274bb63bfe64ea1e0414edcd4fd1268e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-bleed.png",
+    "bytes": 4963,
+    "sha256": "e65a8bda744c424fcd13d2e800a0e1e56dc0af424e31d03e3dba796bc917d5ca"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-bleed.png.meta",
+    "bytes": 2714,
+    "sha256": "d42d3df7259ac9b3232636c96ce4ed756c8e35e72bb846ca1b88f7e05b0f0ab6"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-cosmos-form.png",
+    "bytes": 5276,
+    "sha256": "14dfb7d7a039e5c35e5820aaa9ebfe983273c85c46d2185b3a4829445281cb0b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-cosmos-form.png.meta",
+    "bytes": 2714,
+    "sha256": "bd1dba5ecb3123ec880a5ccc4f9ba8ce1addef8a906d50c9dcfb274178d58838"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-dodge.png",
+    "bytes": 3078,
+    "sha256": "d4f82664a474af2304306732fb9939b73abc24a971967db8a3fb902ddecf9107"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-dodge.png.meta",
+    "bytes": 2714,
+    "sha256": "a49708533ee1abf78b1d38d94e76538875156ba9902d4e1ffcb4180d8be5334a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-freeze.png",
+    "bytes": 3843,
+    "sha256": "cc87277df8853803fe03d528804c3778a250f0895cf480b5a06d401559cdccc2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-freeze.png.meta",
+    "bytes": 2714,
+    "sha256": "3155a05abe783a62099479a27f52ae611b670ed0192f1d8814907ce26a9bd197"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-heal-ban.png",
+    "bytes": 5188,
+    "sha256": "7f4b45c566f7149ccf0ce4435af74d13da7124d533d138a3e7b52c3c94b93382"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-heal-ban.png.meta",
+    "bytes": 2714,
+    "sha256": "b881e6de4a111289208c77672d61ac12bff6f97c43b15e86d9e24c2df1e8511f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-immune.png",
+    "bytes": 3843,
+    "sha256": "15c9e6f45f852020f4699595f2ba5ec5184f3e44bbc4877f2677d11cf973fe99"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-immune.png.meta",
+    "bytes": 2714,
+    "sha256": "2d30ddec6ba2ee4bf3635a062fa07ae2be3cf932665199a3cc450ce7f9cda68e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-moon-form.png",
+    "bytes": 4315,
+    "sha256": "0ac4bf54fdf7a1192ff1c5740118ca9ce4e9779993f18bff0daebe30244befa1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-moon-form.png.meta",
+    "bytes": 2714,
+    "sha256": "3352ceb01ce711ce3152f62d7f7bf82badba275fe9e9d426e61bdebc1b656c62"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-poison.png",
+    "bytes": 4186,
+    "sha256": "397c8e6d9748854280e3eddf3d14185c767246208b8700e9991b1445ba1b5b6d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-poison.png.meta",
+    "bytes": 2714,
+    "sha256": "f502e7d6b8e40a4a4a5f1e4ed32ee1186c314099b0c1ee6986b538bc173bef26"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-reduce.png",
+    "bytes": 3805,
+    "sha256": "2388dc5c5ef711c873de9cf177a1abebb659d3ede43996ac4db20dbcce176283"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-reduce.png.meta",
+    "bytes": 2714,
+    "sha256": "25ff540093c71d49569d9aea1334cb2f0e38bd439673efcdb271323a945f4e15"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-silence.png",
+    "bytes": 2275,
+    "sha256": "ffb2f60692a1a8edec10e7042ed7fa404522d9fdd239396fb17c845821e88760"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-silence.png.meta",
+    "bytes": 2714,
+    "sha256": "cb4bf59152aa9f36bde124ac93e29bb3430bf8b92ab23129ac9284adc0171398"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-spell-up.png",
+    "bytes": 3225,
+    "sha256": "e6b20e1d4519e24071e68c49510f6f36644561a76107d8ab611ff08244483ae5"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-spell-up.png.meta",
+    "bytes": 2714,
+    "sha256": "499d3fabefaccfa17c3161438791e731ec3d5a10e5ca967cf94ed308a9387fe2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-stealth.png",
+    "bytes": 4684,
+    "sha256": "2e572e676b9991b595b2da31b1a6f9da72a31277c102e9a12fd738da71800c6e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-stealth.png.meta",
+    "bytes": 2714,
+    "sha256": "43d9ea0eaabfdd1effab051c8b2d416f63503a54c3dea21474cd6c3d898369d3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-sword-form.png",
+    "bytes": 3152,
+    "sha256": "eaa0d78c442135fce6638d5e48d8ee5bcaac34c819fe0fefd7278dcd655cd5c4"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/status-sword-form.png.meta",
+    "bytes": 2714,
+    "sha256": "418f278624cf685ed07933b3d8b7266c2cd180efeedcfe60859ae53cb59506fc"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/sword.png",
+    "bytes": 563,
+    "sha256": "a1639b937b924d9e8bddf1e0a759b5965617570b756eee40c72b7bda81957eee"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/sword.png.meta",
+    "bytes": 2714,
+    "sha256": "24a015e5e671c59e359ea437c42b6d6dfca797ce28cedf73e0ea0eb6b0c715d4"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/swords.png",
+    "bytes": 882,
+    "sha256": "a187cc96e25f34c4e5508681a798fbb59e239f7638e23b56d201dbc2bf6b8e06"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/swords.png.meta",
+    "bytes": 2714,
+    "sha256": "f3671785a8b1715cbdcd7ba96500378b27de13248680ae477a25e90a2160a48f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/tools.png",
+    "bytes": 2989,
+    "sha256": "1dc60fab959088f513d1266ba2e5274c3df28b2f94d4945962e1451abb990291"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/tools.png.meta",
+    "bytes": 2714,
+    "sha256": "062faed476a6b7f0e9e563bdf6c3a796927483419f145514252e89fe5718ad79"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/trash.png",
+    "bytes": 2120,
+    "sha256": "3ef0006b1635ae320168f11be75a09c4f77c5b3145dabf0e32982c0d497073ef"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/trash.png.meta",
+    "bytes": 2714,
+    "sha256": "fd76ca8fb04e65507fbd35b0beec1cfc92555be11826c0936aececa12707a147"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/trophy.png",
+    "bytes": 976,
+    "sha256": "97fe3b2c1ad22125565320b198a87c0feb9ed64ff069df7f64380bbb829b066c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/trophy.png.meta",
+    "bytes": 2714,
+    "sha256": "0291ab3b1411e26eb9083b84e4b3e865b420eda03683e0e3f86565c11ebd08fd"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/unlock.png",
+    "bytes": 542,
+    "sha256": "12aede0159feb6de705befbe8e6497df3e7389025e76151b6aa5639ebcf3bffa"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/unlock.png.meta",
+    "bytes": 2714,
+    "sha256": "45fbec091e504c4e953f5978baed0b183406a57d4c3df2ee13b97ded448a9c01"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/upload.png",
+    "bytes": 1446,
+    "sha256": "9e6cc3d1bea845c8503a4ee67a14db780a5c979317d1f11c782f0538991a4e0d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/upload.png.meta",
+    "bytes": 2714,
+    "sha256": "71f0245e17150e965aabb1d8b9967c47d986768fe49d216b9dbcaed7d8bcd563"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/warning.png",
+    "bytes": 3012,
+    "sha256": "50a5bb9cdc65e3d56305629c52ad71323e68f4c2513b6c60e13a513ed349ad3f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/warning.png.meta",
+    "bytes": 2714,
+    "sha256": "1cf47513fc506c4b1a507606832f480b6c1fa4522c667c9143e42cf0f89479c9"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/wood.png",
+    "bytes": 416,
+    "sha256": "ca93425aa9cf18f6b53272d1cccf288ac558ee31352783a479738d6213c94791"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/UiIcons/wood.png.meta",
+    "bytes": 2714,
+    "sha256": "453ac1b8e23535f91966a88b91795b99c06d53591db2ac98ab81564d7d084366"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs.meta",
+    "bytes": 172,
+    "sha256": "2f6c92464bbe7d1e7fbc57fb0e2485fa59aad28440675a1f2a38c27b376c3dbb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/altar.png",
+    "bytes": 262444,
+    "sha256": "a372f5abb1137669d8f30f5e3b5f14875e6943265c24450dc4268594b6a4faa8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/altar.png.meta",
+    "bytes": 2714,
+    "sha256": "40e882faacd55183a23b9322042e6bcce329e620244839ef305828bff878d366"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/boss.png",
+    "bytes": 268947,
+    "sha256": "d9ea7a4719c183b285ebcc87c2b9b8a0b2053a373f17072ae5bea9bce1cd5e18"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/boss.png.meta",
+    "bytes": 2714,
+    "sha256": "6c57a632f32fe7161edc4bd89a71fdab833832a2b73f93285fc5287e25385021"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/classic.png",
+    "bytes": 358488,
+    "sha256": "caf38b4002873e1d55aece968682c7b454a5d70afc27c1ba62cbbf6c184c7308"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/classic.png.meta",
+    "bytes": 2714,
+    "sha256": "7995df1532502b40c7178aae2c225aeede3dac9e1c11446bd84355e2db631cfc"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/coin.png",
+    "bytes": 358821,
+    "sha256": "9c73dbc298bb795448863e67f2cc271a2f6b6744f602d11df911cd0e1ef145ed"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/coin.png.meta",
+    "bytes": 2714,
+    "sha256": "07f208a3e88e22a0b04aa13138365896be5ebf3cb327143c755bf42985fce80a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/pet.png",
+    "bytes": 275562,
+    "sha256": "ed59ee5e6e2febdd861e525185043396bd479ee3b2af8813cd8996a75aa77132"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/pet.png.meta",
+    "bytes": 2714,
+    "sha256": "7a29d835e49a4b76d7c2d42c7286d1804485e677aabe96dceb5ed6efb1765477"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/vault.png",
+    "bytes": 308474,
+    "sha256": "ccab6ca1c13f56c1dc350057b18c65af5cfd77d9ffaa32fcce37af50d231d28f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/vault.png.meta",
+    "bytes": 2714,
+    "sha256": "b664360f50f1dd60cf417dee942d96f0ee62232e087f623f6b27cb75518f4eba"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/wolf.png",
+    "bytes": 271609,
+    "sha256": "7127fc8c4e951d70ff0acb20d414a329cfbafb8156a2b750efd54d38474aabf7"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/card-backs/wolf.png.meta",
+    "bytes": 2714,
+    "sha256": "c24db26ae1bb165d5050ae639e07c2b8224e031a7671d76e4853e5130eaab5d1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards.meta",
+    "bytes": 172,
+    "sha256": "aac636e813884428a0b58510ae9928a649cda479fcbffa04e2d0641111a4201a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/bound-shadow.png.meta",
+    "bytes": 2714,
+    "sha256": "df93707c137ba515b65a81d5a4df4d9e43e76ece308ac7c61eaf1b0cb6cb6874"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/consumable.png",
+    "bytes": 790649,
+    "sha256": "58d9d244ed44e10d189a7fc6936f693fe0c4235ba0a98bcf95ba382eac867ded"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/consumable.png.meta",
+    "bytes": 2714,
+    "sha256": "7be12c6d8c9cc6f7710780f8b613d9344ec77578e995a394df6d2f3ae76e7f64"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-cmtn6ulm4boj.png.meta",
+    "bytes": 2714,
+    "sha256": "4dda3cf443e4db8071aabff5a5905b66917b781801ca483191535b77d9a3488e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-cmtn79743r2n.png",
+    "bytes": 575080,
+    "sha256": "92c84ce626a82f47e3ddd443ac643e0d900ca6a9a1736b063c42c3deb580b0bb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-cmtn79743r2n.png.meta",
+    "bytes": 2714,
+    "sha256": "f4a5d7324b2784e14291491df2493ecaf956c16a96e1ad2853bed6c75231f465"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-cmtn7err0a7.png",
+    "bytes": 487673,
+    "sha256": "a70d264a719a6bdd3c5c9d9029fc2a4530bb6c5a0e664f21bbf47df94584bb44"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-cmtn7err0a7.png.meta",
+    "bytes": 2714,
+    "sha256": "8fa6a6dd5045554c269b829b0457965060c7ef8c613a36fed098560fc7998b9e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-tt8-curseimmune.png",
+    "bytes": 920571,
+    "sha256": "9bc8847ca767d5411b35de9b57de6319e4ea950e4c9c953b408d70d8f40de73d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-tt8-curseimmune.png.meta",
+    "bytes": 2714,
+    "sha256": "4279be0b19fbf06dd37918fced2d8adf25b90200775785ee9d8d35fe2e4cf9ec"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-tt8-energycap.png",
+    "bytes": 637123,
+    "sha256": "e5acb78219081a25b3450da2e50e988362f250163505c5dd7bc48a51fcca3096"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-tt8-energycap.png.meta",
+    "bytes": 2714,
+    "sha256": "5799271076551503ddceb353d73d98f03cf1b93a2a25f12d6b196ba387dbc91e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-tt8-healplus.png",
+    "bytes": 813467,
+    "sha256": "4a6db496079135837af5c663e6a071db515e612b98b70e4a8746542f40c66836"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-tt8-healplus.png.meta",
+    "bytes": 2714,
+    "sha256": "df69caed9534fbb29f30bfc89ee26fbadf31a2ddd56e0c17c643af745eaed8de"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-tt8-nofocus.png",
+    "bytes": 853173,
+    "sha256": "82d5bc2ce416ba6ceaa20a5d5e3b83db804f9761cbcb101a8df8cbf63d1f0c7e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/creature-tt8-nofocus.png.meta",
+    "bytes": 2714,
+    "sha256": "b9fb93e7d3d77fb971649906ff932d2466b88d2c3b05eafc77b30d1c2e7badcd"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/curse-drain.png.meta",
+    "bytes": 2714,
+    "sha256": "111802b28fd3906acec7ab98a028ff3d1382ca9461745020deb0ea250537ba5b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/curse-freeze.png",
+    "bytes": 987715,
+    "sha256": "b37f0d6c8a7e647561c7c89bc5e7acee859db9f041f0d63d10e48c1aaacdfdd3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/curse-freeze.png.meta",
+    "bytes": 2714,
+    "sha256": "6ed48f375500d356cc4374385e99597095f200571d9db9ea8c08093c4ca118c1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/curse-silence.png",
+    "bytes": 855832,
+    "sha256": "8ff23b7048b3cbe2a39f79320e7c469ff34f7e9e2bfafe30f25e6a18859b58f3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/curse-silence.png.meta",
+    "bytes": 2714,
+    "sha256": "8d45b0d2538858dfb74964e79b545497d9deef80110768b45f6cc2438214345b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/curse-venom.png",
+    "bytes": 852557,
+    "sha256": "3259017ea61ea6e95098837488d8bc9d3144be6add7659dff049f0f64fd7de6c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/curse-venom.png.meta",
+    "bytes": 2714,
+    "sha256": "ec6b717676a16a482ec256d68f7b5eb23d7506f6109f9fb8e33b295baea61b0b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/dark-eclipse.png",
+    "bytes": 827581,
+    "sha256": "c669cc5f325e949069f9021bf6cf7ee82439801dfd5aee16d2285530b4dfbb29"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/dark-eclipse.png.meta",
+    "bytes": 2714,
+    "sha256": "534bbf1d0160c709690ee742448d65b8db21b9146186a67ae30739d6feb4d416"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt13-astrolabe.png.meta",
+    "bytes": 2714,
+    "sha256": "558cddc49c0c38d397eb8b70e630a73a8aacfd787bbe7e9d582ccbec601e13ba"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt13-flame-staff.png",
+    "bytes": 918008,
+    "sha256": "2ba385f7adb1b8d25478a49e7acacf4d9630037c87c0c1524258b600d2dc5a86"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt13-flame-staff.png.meta",
+    "bytes": 2714,
+    "sha256": "aa3ad32024a3be2da5d9313b74750d3313bae75b16dc8e582042081bbd7e424c"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt13-magazine.png.meta",
+    "bytes": 2714,
+    "sha256": "5a045bef6daebd916a2606ca821b34ed9376fc8d6112c79cb0cc9415aa39f121"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt13-poor-meal.png.meta",
+    "bytes": 2714,
+    "sha256": "015c3c611b7fce70b601c0a3db04c3402dac4b36fb63cbc5e0dcd62c395ece48"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt13-scale-armor.png.meta",
+    "bytes": 2714,
+    "sha256": "d1bafdd2bdcbfc4fb545ecce3bd09a065fd617bb8306228e7bde4fcb7b53e5ac"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-apollo.png",
+    "bytes": 666505,
+    "sha256": "b9103a9fc1d8ef39de5d55b0262c24e77837b88c3414fb728ad44e59e06165e2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-apollo.png.meta",
+    "bytes": 2714,
+    "sha256": "d9bd78b3640897a8577c4f11fde0e803eefce0f0ac7a53775c566d50504b9790"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-pearlbox.png",
+    "bytes": 671657,
+    "sha256": "7114b3279dea719ae2048de53596e9e4a26b70c9182538eb5db0c6d5f1e5de16"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-pearlbox.png.meta",
+    "bytes": 2714,
+    "sha256": "b3db4ba69952dd92024fbd7441f06d64e5b418af0b1a4506937d7c6c02340132"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-treasuremap.png",
+    "bytes": 589949,
+    "sha256": "d872231e2ca15798f2c8b0a0c573fa9959d4b0df3ac3e413ecf18d1f5ca94587"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-treasuremap.png.meta",
+    "bytes": 2714,
+    "sha256": "405372b0d8ecc4903de702473d3fe15207c47e2877f319764e3b72b8a1bd31cb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-venomstaff.png",
+    "bytes": 168468,
+    "sha256": "c29b893c55f12d07d2d90680d6c08f1cc6ed6623f4775dd4169dd76b85bc2315"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-venomstaff.png.meta",
+    "bytes": 2714,
+    "sha256": "49f04898cf6a368cc9446189b4707e0245fe8f05d3242a718832c57dfc043170"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-wreck.png",
+    "bytes": 646444,
+    "sha256": "83531587fb1250c6a88d40da7141faa36390d51ee49e838d09d52a8c26740b1f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt2-wreck.png.meta",
+    "bytes": 2714,
+    "sha256": "306e1edf51493d649b2e6228ac0a23945c9bad9d8e3e7befd89e3c057497c2dc"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-azure-sword.png",
+    "bytes": 234790,
+    "sha256": "2afb60168f8106e507c0b3704658207a55d7219b3f2619abda71b5cb87b8a611"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-azure-sword.png.meta",
+    "bytes": 2714,
+    "sha256": "a04dd95e70395f54547c4e81f1305adc5378e85797225837ce86e423b29464d2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-chaos-eye.png.meta",
+    "bytes": 2714,
+    "sha256": "322988e3d85806cdde1d03871958d93f940f85aadf2e18e6d9eb8844440d4793"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-crimson-pouch.png",
+    "bytes": 276039,
+    "sha256": "fc12b12bade3aa9983eb8fc083a728251364068654647f1bbd7be2c5da1d9212"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-crimson-pouch.png.meta",
+    "bytes": 2714,
+    "sha256": "0f960eab444a61affd75deabb17ec4525de6e15b75138d133804276276ab69e7"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-deep-diary.png",
+    "bytes": 433855,
+    "sha256": "838e90c610260c459625a29c390926a0738b14250bda3fc64d54f7b645710a8d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-deep-diary.png.meta",
+    "bytes": 2714,
+    "sha256": "73f3e3fe43701887493ad6670ade57ec540aa2450b6b5751ae94d34e0d4e00d2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-deep-seal.png",
+    "bytes": 314513,
+    "sha256": "c27da052c55b6311990577aff5aee1c22eaebf0f9efa9a3435b528b0d8404263"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-deep-seal.png.meta",
+    "bytes": 2714,
+    "sha256": "58dc4cd19e54cfdd3dd96078878a93901cc1b9a3d3c3f1068cc3d9df6cb9fd8e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-element-seal.png",
+    "bytes": 274921,
+    "sha256": "1c11ca6d5808362cd92f3ba475ab67affd055d5627a473a6192168129afd6592"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-element-seal.png.meta",
+    "bytes": 2714,
+    "sha256": "77a7d21f72bfb69ac7cf3b6ff4a7b667e95793b21f1b0d8e6c96af795b567d75"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-holy-staff.png",
+    "bytes": 249760,
+    "sha256": "30ebece1e6956f242753d37d5ee932f05ad30e158f535a24b7030c3e86fe718d"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-holy-staff.png.meta",
+    "bytes": 2714,
+    "sha256": "3a9449ef48f55574a3e04afef49a1ddf9318aeaab1d2d82e55f2bc7cea6910f8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-immortal-blade.png",
+    "bytes": 338884,
+    "sha256": "e8f1655cd8e3a4693a23a1090d31caa14005982d3a24ceff5ede476c677ddeed"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-immortal-blade.png.meta",
+    "bytes": 2714,
+    "sha256": "86b95ad2943dfc23036b20ee7b122a166460eab51a69f3e886222a7ba2cfe9ab"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-light-mail.png",
+    "bytes": 769738,
+    "sha256": "4d844809c13e93b467540d8c5c02139c3837629b2d506fd330d1ea5b5d60a787"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-light-mail.png.meta",
+    "bytes": 2714,
+    "sha256": "3628e4a73c1e461b69938458e7f16b55befa28f1116b26272a85fa324e0b97dd"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-longsword.png",
+    "bytes": 138324,
+    "sha256": "fed0e0c38901d9f44b05aa1dbbc17d91bfc9c4b6955e68e97464943e2224e8be"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-longsword.png.meta",
+    "bytes": 2714,
+    "sha256": "87e82410ebb2ec8f09538a42f97887c78ab4029dd361a1bc959968ed79197ce8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-master-staff.png",
+    "bytes": 214262,
+    "sha256": "ddde8b96fc75d68391e4829ae06df7309cc01d8b0f87d305560d3324fcafd024"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-master-staff.png.meta",
+    "bytes": 2714,
+    "sha256": "b389f0397293d882a5d164fb930667b7553c816cce9588e420200d612137bc44"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-reverse-bow.png",
+    "bytes": 646071,
+    "sha256": "eb4aa21f34861bf361ddbf2130d84ea1d8fef418150ddbf28d38c32b50e40b8f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-reverse-bow.png.meta",
+    "bytes": 2714,
+    "sha256": "ad3aaab20912789672cf2244f9310fbea3be66ff84e9c7501437bcaaa82a7848"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-sapper-bomb.png",
+    "bytes": 468013,
+    "sha256": "bff833bd7e8bffddbaa72cd6c2b4b81f159d00b4a7d6acd00d84c02fb0e15672"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-sapper-bomb.png.meta",
+    "bytes": 2714,
+    "sha256": "86b615b8056ee07a1f8b00b464b126ce091bce89ae03a77b3a3487b019bee7d0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-silver-runesword.png",
+    "bytes": 237785,
+    "sha256": "aea36afe31edf81baa0095c8ebbfca1629e78b776a9a9888f5e832a657da0b52"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3-silver-runesword.png.meta",
+    "bytes": 2714,
+    "sha256": "af60fbe67d5a6e79dc318741662a91e4f743c301e5de64c762e701d501340a02"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3eq-boiler.png",
+    "bytes": 717819,
+    "sha256": "77ca46196ce63e66e883b1bff4a0b3938d987af6857b292a36b23adb0cb548cb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3eq-boiler.png.meta",
+    "bytes": 2714,
+    "sha256": "87609bd411fb2a498970d78ee0c7f919089a1bf638de2adba9d0168e33bfe059"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3eq-mistbox.png",
+    "bytes": 785047,
+    "sha256": "716300268ecd08175f502734b272805d1bf21be889fcac8b5dc7ae1ee985dfde"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt3eq-mistbox.png.meta",
+    "bytes": 2714,
+    "sha256": "b67dcb4b090f851a97779677d5a177315c686eae011551482c8135eb14d40dfd"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt7-darkfort.png",
+    "bytes": 235464,
+    "sha256": "96c123aa83b0a3c324d55fc612638d90216613f067ff2fc1745e76293bea6343"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt7-darkfort.png.meta",
+    "bytes": 2714,
+    "sha256": "6c8ab135f1237f0c53d1e28b0dcb828c6414e8fb81eaade99daa0759f6d32e36"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt7-naturestaff.png",
+    "bytes": 516077,
+    "sha256": "369b4720dd94f8dc1e1deb7d74205514dd7d811bfee32098526b14291fd1bdda"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt7-naturestaff.png.meta",
+    "bytes": 2714,
+    "sha256": "d1915f0ea751582af85c06b32883898ec1306fe97ca125ee5a3f616d67a0d214"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt7-talisman.png",
+    "bytes": 294131,
+    "sha256": "a99e5f44eef8012a96614b54c104126b085ce7f9c0e2d1576a270f0df769394e"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equip-tt7-talisman.png.meta",
+    "bytes": 2714,
+    "sha256": "caec129693e2783d7311d45a040141ea2b5827cc75b2d5af1e071c1c50429d75"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equipment-armor.png.meta",
+    "bytes": 2714,
+    "sha256": "9ea0fc86e8d250f872f73e7ad42021bfc13794c76e4a0317caf9c83af8b89632"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equipment-utility.png.meta",
+    "bytes": 2714,
+    "sha256": "acf05578b96189e1e60ccb88e563b107a0fa638b018f91e8d33909a27c254191"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equipment-weapon.png",
+    "bytes": 799655,
+    "sha256": "748deb96938a819accd1c4048ac506c14eeccfd154a90cfd331313ad18c3c2f3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/equipment-weapon.png.meta",
+    "bytes": 2714,
+    "sha256": "3d57caf35f3e526956e539d46e786f19674358171bc0248bf2070e6913996d0a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/event.png.meta",
+    "bytes": 2714,
+    "sha256": "2946c65756d4b2b34de3610ff4f1f6920b13ffa73230dfc4656b9bb301f799da"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/expedition-starters.meta",
+    "bytes": 172,
+    "sha256": "f465fa041939af7e4bd765656a368ddb256240a78125282f22465b2e571625cd"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/expedition-starters/basic-attack.png",
+    "bytes": 590604,
+    "sha256": "296aacf81060e89b9e0586054bc80ae96ab711ed415d607045c55e251b43b83b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/expedition-starters/basic-attack.png.meta",
+    "bytes": 2714,
+    "sha256": "b188aa561e18ba12269daa306de7511d3526049fd3af8ddfd4fbb1d53b6a3b4b"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/expedition-starters/fireball.png",
+    "bytes": 741111,
+    "sha256": "b03849120a0ef58e69fc33b85020cf113c752cf5032498d082ece6deefabed25"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/expedition-starters/fireball.png.meta",
+    "bytes": 2714,
+    "sha256": "1e4eb11415f3b9d0eb5ad31ddc99b7c8ccefdd981d120a4c127657594025ba94"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/expedition-starters/pierce.png.meta",
+    "bytes": 2714,
+    "sha256": "bbb80b88894904cb74b7becb91f49814b86b599a0cb7a542c390955f167cba1a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/expedition-starters/rations.png",
+    "bytes": 533976,
+    "sha256": "73e62cb5b2759e4d18402b0754218b8da8c8295779997b6359355181c32f23bf"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/expedition-starters/rations.png.meta",
+    "bytes": 2714,
+    "sha256": "25fd260c7479e79eac7abc7051a04c143d626d09336abef4e46769b9c8ec8b00"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/healing.png.meta",
+    "bytes": 2714,
+    "sha256": "8c2f5e47910949fd5d97ac3e4107253e62ffd5ef58c319e6ea3505d927df5c64"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/hero-abysssovereign.png.meta",
+    "bytes": 2714,
+    "sha256": "72e001539a77cf5349cbbcaf7a5d464f2c661ee52252178693dc10eeefd213ed"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/hero-sacredrain.png.meta",
+    "bytes": 2714,
+    "sha256": "671459432404d0ea1c23f29a95773a0e1dc69e268509802a66a27e38728bcab7"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/hero-sacredsword.png",
+    "bytes": 621432,
+    "sha256": "94798c19c73d19be08575c4aaa9afb7b34c01c7229c6861d629406e5477aa248"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/hero-sacredsword.png.meta",
+    "bytes": 2714,
+    "sha256": "fc8a562bab3703918543144b4036aa5061b9163803700235558f514b0cca9564"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/hero-summoner.png.meta",
+    "bytes": 2714,
+    "sha256": "f94ecd4edd5bb581d654506977074b09dcd59a197d04439345f7dd00b1be81ec"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/hero-volcano.png.meta",
+    "bytes": 2714,
+    "sha256": "168b432b0a4adf08459fb8d1792b6af7d482ef8197d63e4d525a556c7abaaaf8"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/hero.png.meta",
+    "bytes": 2714,
+    "sha256": "2206cb765ec95455c8cbf3047722941f539bf6a03e714aeea3bc6b5119b091d1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items.meta",
+    "bytes": 172,
+    "sha256": "1420832d9edcf8ceda3798ff0a964b6d086bce5169010ff98a3b9ef9674192bd"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/builtin-fuyuanyao.png",
+    "bytes": 226259,
+    "sha256": "f1436c91d0ce922fa05506e70ee75b47a95138f6db4e1be2eb4a69f0c35c6d5f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/builtin-fuyuanyao.png.meta",
+    "bytes": 2714,
+    "sha256": "8f5c8e50e2b243ad7a52cc5ef49dd69a865cfd1d881aee6ce0c01766aed29850"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/cmtmvq6ss84l.png",
+    "bytes": 825442,
+    "sha256": "80ca0861395b00ca2de3c9851991c03d87b35bc5ad280071b6cf355a1c100191"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/cmtmvq6ss84l.png.meta",
+    "bytes": 2714,
+    "sha256": "58a15de5e1600d4538d81ddbe49eecfca5d7af3126253224a70cd62c0e97bfa0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/starter-emergency-bandage.png",
+    "bytes": 225822,
+    "sha256": "173ee1f53f4ee0ee5d3d77f040a45e2f2b43393a854288be0e02d6842853332f"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/starter-emergency-bandage.png.meta",
+    "bytes": 2714,
+    "sha256": "9acd1355ef2c853d729cb7f791c11f1d290bd2185081f91987c8a495f8418449"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt-crystal.png",
+    "bytes": 195721,
+    "sha256": "952bfc31d59984e2d2c2124bfbc91f52678ae1e7326f51c4c37965428342e8bb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt-crystal.png.meta",
+    "bytes": 2714,
+    "sha256": "832cf158c3f98f82f109e91fd6d1332f4a9616859a70458b93f62ae13a021f63"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt-jinchuangyao.png",
+    "bytes": 139951,
+    "sha256": "4cc455664b3283ae50fcb2762b8802ba4a37b2280bfe5a45e33c0a4aca829c68"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt-jinchuangyao.png.meta",
+    "bytes": 2714,
+    "sha256": "bff399b72891d25df885206edaf0257a118a60d6d8bbecd4e59d40d96c7fe4b3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt-medneedle.png",
+    "bytes": 154815,
+    "sha256": "4b6e8dd02c73538388308d33ab2b20d18ade91099b2fa26ed3e1bddedca22aef"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt-medneedle.png.meta",
+    "bytes": 2714,
+    "sha256": "0213b53c5c67aa2668b28b4b21fdeaf0c91339888b26c4c9bde61cfb249c1adc"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt-token-gold.png",
+    "bytes": 253635,
+    "sha256": "fa80198b663eaa8836c1bd1932f958ff67165b3c8c81606d46888e5cd2a84d27"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt-token-gold.png.meta",
+    "bytes": 2714,
+    "sha256": "6ccb49f2caba7a3787295c8b80cd4e8b69ff6eae4002008098c1fd61dd692728"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-blue-potion.png",
+    "bytes": 215089,
+    "sha256": "1bbccc94afcf2a00760fb9f839c0bbec1585a1c625ad0ac3d289aac97fefd695"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-blue-potion.png.meta",
+    "bytes": 2714,
+    "sha256": "41d3cc5954298d12c3df8de55b23d638931c186182daafdc55aedea553d49ccb"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-demon-potion.png",
+    "bytes": 87813,
+    "sha256": "1b0db9b2f184781414e4398bbad167a237a7019a7835e296bed256b946202ac3"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-demon-potion.png.meta",
+    "bytes": 2714,
+    "sha256": "1b9a1a1135e79e6a607f1c9e2aae3ac4e505a1edb13db9a422a43b9ec48b1cbf"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-houyi-potion.png",
+    "bytes": 259984,
+    "sha256": "c14ddc492f3dc529169f640be5ea02cfdf1329889593252c5ce91d4e94009c41"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-houyi-potion.png.meta",
+    "bytes": 2714,
+    "sha256": "2ec58408fe81aa3f2b56709c0e01bc0e25dd67d349c232d3bc16f601e679d6e9"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-iceheart-potion.png",
+    "bytes": 246410,
+    "sha256": "fa1bfe6893b989d425910c1e6fc4113707328bc5b9214e82d5bc867a807b8656"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-iceheart-potion.png.meta",
+    "bytes": 2714,
+    "sha256": "41638fee29b55416aafcde1c0014ba9350fb3294c9d48ba7707e05df034231b1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-mind-potion.png",
+    "bytes": 268070,
+    "sha256": "5336f0edf331c4c013db0821996ce974896fd2d555e7f64a86abe59e9eaadbec"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-mind-potion.png.meta",
+    "bytes": 2714,
+    "sha256": "a9665b8d9d6bb4cf25455676bdb56bc65bd5208be1d493211a20927d1dc35dfc"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-mixed-potion.png",
+    "bytes": 136541,
+    "sha256": "05274f714ea198425ea470be8e0ebf2accea83186b25573ce223f0cadfe33cf1"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-mixed-potion.png.meta",
+    "bytes": 2714,
+    "sha256": "f430a9f74cb15c7c51ac30d2581fb9ca56ef325500f96439706751359c372a5a"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-mystery-potion.png",
+    "bytes": 239792,
+    "sha256": "ed4b4d961d4bcdadecd2ed1faac4791f4d111996e197728a3e9d77df6dd31969"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-mystery-potion.png.meta",
+    "bytes": 2714,
+    "sha256": "18bb00aa3320181589843faf0af780d4dacd3cb2b0fe1cdaa26d5772f6b514a2"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-python-potion.png",
+    "bytes": 175185,
+    "sha256": "66451bccc5133b994467b561bcc1f115447e7541b5ab0f41fdb85c51c70074f0"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-python-potion.png.meta",
+    "bytes": 2714,
+    "sha256": "31f1c71f38d0b99cbb49a64a8576ce7e7d1044650e23f5ac4ed4ffd9f14dc5b9"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-savior-elixir.png",
+    "bytes": 302356,
+    "sha256": "dcbe8f036eee45e5c60fd6bf8dfbd26fae31d8df0378455b93ceccf49e91ab31"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-savior-elixir.png.meta",
+    "bytes": 2714,
+    "sha256": "67f2c0b83a8aee7ede05081fb89fc7950c900de9b429905ad7a9ec9684abe046"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-turnabout-potion.png",
+    "bytes": 143504,
+    "sha256": "b8adac37ab7e00ad320a4505835683ed496f1a8f07a10d710045d9d51a33aead"
+  },
+  {
+    "path": "Assets/Resources/Art/Current/cards/items/tt3-turnabout-potion.png.meta",
+    "bytes": 2714,
+    "sha256": "adea6581f43395d092c2a9db310ec2508da525a23d0b75ff0dc706fad63872ed"
+  }
+]

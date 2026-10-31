@@ -1,0 +1,45 @@
+{
+  "createdAt": "2026-10-29T19:37:52.708240+00:00",
+  "state": "installed-complete-uncommitted",
+  "sourceFingerprint": "source-sha256.json",
+  "privateCompilation": {
+    "log": "private-check/latest.log",
+    "warnings": 0,
+    "errors": 0,
+    "scope": "owned components against imported DLLs; final Sdt.UI/Unity compile remains coordinator-owned"
+  },
+  "behavior": {
+    "log": "behavior-check/latest.log",
+    "assertions": 22,
+    "scope": "in-memory storage and native-cap property substitutes; no Unity execution"
+  },
+  "ownedMenuClasses": [
+    "SettingsScreen",
+    "VolSlider",
+    "SuggestionBox"
+  ],
+  "coordinatorIntegration": [
+    "App real action dispatch/capture",
+    "ReadingLarge and EndTurnHold actual battle/card consumers",
+    "HintBar and LayerBanner HUD consumers",
+    "ReduceShake and BattlePace shared-key consumers",
+    "Quality actual render consumers and QualityProjectionAvailable=true",
+    "CurrentSettingsActions.OpenRunData page and actual record collection",
+    "Unity native compile/offscreen images/real input"
+  ],
+  "sourceFiles": {
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\MenuDialogs.cs": "0e3cc9649476bd017c02f8c14510157c9c794f298f55eaba9f5cc9d60bc80338",
+    "Assets\\Scripts\\Sdt.UI\\Kit\\CurrentUiPreferences.cs": "b7963e2ba9f132ded67e340e6fa588cf3871eb1d96b54a9048dfe22acd4622a8",
+    "Assets\\Scripts\\Sdt.UI\\Kit\\CurrentUiPreferences.cs.meta": "b560da3fef5be4676a341ad65b31573bf45ac46cec10eff5648e243207719f32",
+    "Assets\\Scripts\\Sdt.UI\\Kit\\CurrentInputBindings.cs": "4c9c08bef907b70ee7ea4cf8f46a50c288341d2df814ae98c74c103bb5ffef50",
+    "Assets\\Scripts\\Sdt.UI\\Kit\\CurrentInputBindings.cs.meta": "96541651b270978776c48b5090eb41ec33bc082ca5eb872964bf65c527550730",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentSettingsPage.cs": "7f7db5d7c1eb59777553585214fba0ea8fe45953b2aec9bb0b394419b26ecfa1",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentSettingsPage.cs.meta": "9300b0449532a5849484ade1c024de35d2d973e0458507713451bfd0e9e553dc",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentSettingsDialogs.cs": "4d20e27602d024ceb38f7ded94753e1d62427d671f632d63c17368e709740d6e",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentSettingsDialogs.cs.meta": "559eaf762a13e6214a98713da1562b689eb72a41109248afc6d4e54975db5735",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentFeedbackComposer.cs": "0caea4346466cb6a4830668f890caa9d1f8d0fc66b950a9fb5eba1e6e9a9d988",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentFeedbackComposer.cs.meta": "ffc460ce4f13b61d45c47ea4bcd34a6ad38912f6d8b8c9b925c88aa10417eed8",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentAudioSourcesText.cs": "25f251727fb3e2370c25e6b8c250ddb0b0cbb30d581dd359ba8137b2a2e580b2",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentAudioSourcesText.cs.meta": "6a66134290f3cae87242742b2f99595ae5bb57154530b368d6d8a7fd8cc3705c"
+  }
+}

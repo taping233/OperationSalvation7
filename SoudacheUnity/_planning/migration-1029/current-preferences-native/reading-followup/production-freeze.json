@@ -1,0 +1,9 @@
+{
+  "state": "installed and frozen; real native scroll verification remains pending",
+  "production": {
+    "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs": "d1733f7dd87574e4e81dcaeaf523189716faf1b07392067a990532a7bd0884d5"
+  },
+  "sourceShaUnchanged": true,
+  "privateCandidateTypecheck": "exit 0; 0 errors; 10 existing warnings",
+  "native": "Root owns actual wheel, RaycastAll and scrollHandler proof"
+}

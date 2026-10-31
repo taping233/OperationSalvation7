@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "checks": 17519,
+  "presentationVectors": 2328,
+  "frames": 13,
+  "source": "actual source HTML and frame JSON",
+  "boundary": "pure presentation semantics; native render is independently checked by parent"
+}

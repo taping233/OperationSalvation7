@@ -1,0 +1,18 @@
+{
+    "name": "Sdt.Run",
+    "rootNamespace": "Sdt.Run",
+    "references": [
+        "Sdt.Core",
+        "Sdt.Narrative",
+        "Sdt.Res",
+        "Newtonsoft.Json"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

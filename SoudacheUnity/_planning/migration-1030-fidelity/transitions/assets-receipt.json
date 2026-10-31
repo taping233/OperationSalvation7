@@ -1,0 +1,96 @@
+{
+  "sourceFiles": {
+    "搜打撤\\game\\src\\ui\\cinematic-profiles.js": "fb97f4bf9594e708edb9e315704d24a1f54aca452ce079582646077439a3da22",
+    "搜打撤\\game\\src\\ui\\layer-passage-profiles.js": "4badcef490a3877cc7a50bd437fdac810c905c9cbb345031af680058c3e70315",
+    "搜打撤\\game\\src\\ui\\encounter-presentation.js": "b19fa534686e9c79d0b2fd91ad869af8ada01dfda8ee6c4184756463b6f95c26",
+    "搜打撤\\game\\src\\ui\\silent-node-film.js": "91b9419c36e40ea3677d9a1285d9c6f31bef62e391a77086525dbdf9b298717d",
+    "搜打撤\\game\\css\\silent-node-film.css": "4ed960115782b7d1455ff0a2d7ed13cecd651603c36ed75a5de2a2d00fbc976b",
+    "搜打撤\\game\\css\\map-passage.css": "a2a6f0620d6fc4ffd7e267b810f2c46d524aec7b9c44fd6526f56e608cd1367f"
+  },
+  "profiles": 17,
+  "layers": 4,
+  "generated": "Assets\\Resources\\Data\\CurrentCinematicProfiles.json",
+  "generatedSha256": "4dd6dfc1ee6072a93070b103e6c0c61d4afb94a7113e7100020c385eab98f496",
+  "files": [
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\cinematic\\altar-fracture-v1.webp",
+      "sourceSha256": "929a162a2ff4cc2739e0c0e9ae1323ffb640a02e9f5a57b9ec3487434703736d",
+      "output": "Assets\\Resources\\Art\\Current\\scenes\\cinematic\\altar-fracture-v1.png",
+      "outputSha256": "bf26d86a57d47639fbccb17aa65a8ced614fd8eaf268b8cd0e22873ab818c930",
+      "width": 1659,
+      "height": 948
+    },
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\cinematic\\archive-leaves-v1.webp",
+      "sourceSha256": "07c914ebf7c1e4c8e298dd37886ae53231fd49e88d9ebb1fd2acc6b82dfe65c1",
+      "output": "Assets\\Resources\\Art\\CurrentArchive\\archive-leaves-v1.png",
+      "outputSha256": "51d2209ed4f10788591988d0f457f1c6ac4499029f00d63e8e601b000fcd80e4",
+      "width": 1659,
+      "height": 948
+    },
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\cinematic\\camp-shelter-v1.webp",
+      "sourceSha256": "9850c592b72adbdce11e09e4c043b76463b86b4163bd06bcfb73cb68942b3722",
+      "output": "Assets\\Resources\\Art\\Current\\scenes\\cinematic\\camp-shelter-v1.png",
+      "outputSha256": "091ab0957bb40bf03778d94573c0c2afa85ed40b111f874091889706584616da",
+      "width": 1659,
+      "height": 948
+    },
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\cinematic\\layer-core-v2.webp",
+      "sourceSha256": "dfda5449d5f2e4d3a834dcf9116c3e6f7f9bcecfe70d3908cc47148968427126",
+      "output": "Assets\\Resources\\Art\\Current\\scenes\\cinematic\\layer-core-v2.png",
+      "outputSha256": "0a58cde6c8dfdde1126f99b61484be043ba77e92ab69f341b875341d54b280ce",
+      "width": 1344,
+      "height": 768
+    },
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\cinematic\\layer-descent-v1.webp",
+      "sourceSha256": "4f11d26a1377b909829a77c30b6841151c683ba138255e426a567ee238ceafc1",
+      "output": "Assets\\Resources\\Art\\Current\\scenes\\cinematic\\layer-descent-v1.png",
+      "outputSha256": "c1a25fe21f7ca91372ef29b1885bd0dccf8b4cb7128a0cfbcb1e299f49633eb8",
+      "width": 1344,
+      "height": 768
+    },
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\cinematic\\layer-ruins-v2.webp",
+      "sourceSha256": "79fb0af9b466625d5c7fc936d4938713479098b17d26ec16b8b250ae90472737",
+      "output": "Assets\\Resources\\Art\\Current\\scenes\\cinematic\\layer-ruins-v2.png",
+      "outputSha256": "0bd957db1c78c68f4c877fed88cb3710c956802762dd05dd3a57363f054b95bd",
+      "width": 1344,
+      "height": 768
+    },
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\cinematic\\layer-watchline-v2.webp",
+      "sourceSha256": "35e81b051930b5406b01d86e1a32b6238f62cf3a1a3fa319b5948072b5601870",
+      "output": "Assets\\Resources\\Art\\Current\\scenes\\cinematic\\layer-watchline-v2.png",
+      "outputSha256": "caf2717e8f23f0bcef7ba2d40b9ed4015573c7b05fc23d80fe8a491e43a0cefb",
+      "width": 1344,
+      "height": 768
+    },
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\cinematic\\photo-plates-v1.webp",
+      "sourceSha256": "c7332e0ffd298e523c2469b0b4c734d6a709a15dd252d5fca39bdc8d66328472",
+      "output": "Assets\\Resources\\Art\\Current\\scenes\\cinematic\\photo-plates-v1.png",
+      "outputSha256": "6acfbe8becff08f10b319e13df0167a2c4115c1a42ee61902919544efb30d47d",
+      "width": 1672,
+      "height": 940
+    },
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\departure\\boss-monolith-v1.webp",
+      "sourceSha256": "4c8eb9440bc523add0bbff89b5036e4939884f367b9dc04adb062c73e82d6a48",
+      "output": "Assets\\Resources\\Art\\Current\\scenes\\departure\\boss-monolith-v1.png",
+      "outputSha256": "15211362c8148a15e2f6d39e409dece0115fb9d922a046de1a2d699988cef4b4",
+      "width": 1672,
+      "height": 940
+    },
+    {
+      "source": "搜打撤\\game\\assets\\scenes\\departure\\city-reflection-v1.webp",
+      "sourceSha256": "0d31cb35f13fa9fb5853c80f134ff761b5344524a89d881ab7fbaaf9ea5e9a3c",
+      "output": "Assets\\Resources\\Art\\Current\\scenes\\departure\\city-reflection-v1.png",
+      "outputSha256": "71324ef6c20ad8d610948e3986b41c614ad83125b00284e4bb75df49620d3dd6",
+      "width": 1659,
+      "height": 948
+    }
+  ]
+}

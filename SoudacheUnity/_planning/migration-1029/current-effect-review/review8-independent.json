@@ -1,0 +1,300 @@
+{
+  "review": "8 independent current native visual review",
+  "decision": "evidence-limited",
+  "capturedArtifactDecision": "not-equivalent",
+  "scope": "Current-visual-8 supplied constructed native static frames; current source inspection. No browser, Unity execution, production edits, hardware input, animation or persistence verification by reviewer.",
+  "process": {
+    "method": "Sdt.Editor.DesktopVisualValidation.Run",
+    "pid": 20044,
+    "startedAt": "2026-10-29T22:02:47.552831Z",
+    "endedAt": "2026-10-29T22:03:44.290479Z",
+    "exitCode": 2,
+    "timedOut": false,
+    "inputsUnchanged": false,
+    "changedInputs": [
+      "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs"
+    ],
+    "sourceCount": 327,
+    "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-visual-8"
+  },
+  "failureVerbatim": "step=22\nSystem.NullReferenceException: Object reference not set to an instance of an object\r\n  at Sdt.UI.Screens.Menu.CurrentAchievementPage.Body () [0x00102] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentAchievementPage.cs:69 \r\n  at Sdt.UI.Screens.Menu.CurrentAchievementPage.Build (Sdt.UI.Screens.Menu.AchievementsScreen owner, System.Action close) [0x00177] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentAchievementPage.cs:40 \r\n  at Sdt.UI.Screens.Menu.AchievementsScreen.Build () [0x0000c] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\MenuDialogs.cs:76 \r\n  at Sdt.UI.Kit.UiStack.Show[T] (System.String name) [0x00034] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Kit\\UiStack.cs:65 \r\n  at Sdt.Editor.DesktopVisualValidation.Tick () [0x0067a] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\DesktopVisualValidation.cs:133 ",
+  "resultPresent": false,
+  "viewedSceneCount": 20,
+  "auxiliaryViewed": "map-atlas.png (font atlas auxiliary, not scene)",
+  "missingScenes": [
+    "achievements",
+    "entry",
+    "fire",
+    "rewards",
+    "event",
+    "extraction",
+    "extract-done",
+    "death",
+    "leave-menu",
+    "abandon"
+  ],
+  "findings": [
+    {
+      "id": "R8-01",
+      "severity": "P1",
+      "frame": "character.png",
+      "coordinates": "x55..932, y124 top boundary; eyes and upper head outside art viewport",
+      "observation": "Default Wu large portrait is visibly cropped across lower face at art top edge; five avatar portraits remain intact.",
+      "source": [
+        "game/index.html:43",
+        "game/src/main.js:48",
+        "game/src/hub/game.hub.js:26",
+        "game/css/roster-departure-v2.css:25-33",
+        "game/css/roster-reference.css:7"
+      ],
+      "unity": [
+        "Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.cs:88-103",
+        "Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.cs:200-206"
+      ],
+      "impact": "Constructed character selection frame cannot represent source full-art height and identity presentation.",
+      "attribution": "Unresolved capture-reference size timing, not established production style defect. Root subsequently confirmed Canvas measured 1680 before 1920 capture and is fixing capture reference for round 9."
+    },
+    {
+      "id": "R8-02",
+      "severity": "P1",
+      "frame": "slots.png",
+      "coordinates": "Five cards x92..1571 start y140, continue below y1080; labels around y988 and y937",
+      "observation": "Most card information and main CTA fall below image bottom. Existing slot status pill displays only a dot in narrow pill.",
+      "source": [
+        "game/index.html:36",
+        "game/css/overlays.css:169-187",
+        "game/css/page-slot-select.css:39-55"
+      ],
+      "unity": [
+        "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotPage.cs:24-33",
+        "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotPage.cs:46-80",
+        "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentArchiveUi.cs:18-19"
+      ],
+      "impact": "Static frame does not show the source archive facts and enter/new-game action within current window.",
+      "attribution": "Capture sizing suspected and confirmed by Root as inconsistent reference; source art flex:1 is genuine and must not be changed merely to fit invalid capture."
+    },
+    {
+      "id": "R8-03",
+      "severity": "P2",
+      "frame": "photo-detail.png",
+      "coordinates": "x1150..1200,y792..800 inside right info paper bottom reading clip",
+      "observation": "Status 已存档 has only upper part visible at bottom of reading viewport.",
+      "source": [
+        "game/src/hub/game.cardslib.page.js:57-60",
+        "game/src/ui/card-zoom-content.js:16",
+        "game/css/photo-studio-unified.css:91-104",
+        "game/css/photo-studio-unified.css:142-147"
+      ],
+      "unity": [
+        "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs:55-69",
+        "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs:80-82"
+      ],
+      "impact": "Save acknowledgement is partly illegible in supplied static detail frame.",
+      "attribution": "Capture sizing and scroll layout remain possible; no claim that native scrolling or save itself fails."
+    }
+  ],
+  "limitedNoNewFinding": [
+    "title",
+    "hub",
+    "preparation",
+    "library",
+    "cards-and-icons",
+    "icons-updated",
+    "map",
+    "battle",
+    "bag",
+    "settings",
+    "personnel",
+    "logistics",
+    "trade",
+    "archive",
+    "facilities",
+    "courtyard",
+    "departure"
+  ],
+  "limitations": [
+    "No same-state Vite pixel baseline; current source CSS/DOM contracts consulted directly, historical matrix assertions not adopted.",
+    "Current source import chain: index.html module main; main imports hub and cards library; hub imports roster-reference; roster-departure-v2 high-specificity eager rule supplies final portrait geometry. Slot base overlays/winter precedes page-slot-select. Photo module imports unified and room/motion CSS.",
+    "All visual findings refer only to supplied constructed frames. Root confirmed reference dimension transition can account for geometry failures; round 9 must re-evaluate before assigning production fixes.",
+    "Run failed before achievements scene; no later scene is visually reviewed.",
+    "process inputsUnchanged=false, BattleSession.cs changed during run; no coherent immutable whole-run acceptance can be claimed.",
+    "No black alpha block, missing glyph box, magenta material, or newly obvious overlap established in remaining viewed scenes at this screenshot scale; this is not full page-family equivalence."
+  ],
+  "images": [
+    {
+      "name": "archive.png",
+      "sha256": "36f809615e03a9f4b1adf8b10bfa1c5b209a5c7baad1639f26f52e16a5830c83",
+      "viewed": true
+    },
+    {
+      "name": "bag.png",
+      "sha256": "4ab4822c6a9bd43ac1481434c74b7ae72472a784edda3ad6821d1bcbb4d9b7c9",
+      "viewed": true
+    },
+    {
+      "name": "battle.png",
+      "sha256": "5319d162853d43a71ac0a8475203bb8edf7e156c69af25ec982abae73cfaa370",
+      "viewed": true
+    },
+    {
+      "name": "cards-and-icons.png",
+      "sha256": "51d6307080a52897c4a535887dfbc242891d350dae0b1af4fc383462fe6c2641",
+      "viewed": true
+    },
+    {
+      "name": "character.png",
+      "sha256": "724583edcd40d64bfc2f3a4b9cec199b03ff161293199eda57c4a48c2a8e133c",
+      "viewed": true
+    },
+    {
+      "name": "courtyard.png",
+      "sha256": "9dd1dba3aa7abcb3d3c6ddea4c159463c14b6bae69f6747d1d5aa7b2aef3af47",
+      "viewed": true
+    },
+    {
+      "name": "departure.png",
+      "sha256": "2b9f1a007f7c0ef9aa942b0caabf7783fd309e81dd6779961f5afb3ad2d0939a",
+      "viewed": true
+    },
+    {
+      "name": "facilities.png",
+      "sha256": "cea2ef5f6f46cffe50e8194e7f1bfa08965884b2807f8dde7b6175fc4096d82b",
+      "viewed": true
+    },
+    {
+      "name": "hub.png",
+      "sha256": "af77588c8ce4a38fd60fb4769e5084bc9ceb93ec931e92140809504614b69253",
+      "viewed": true
+    },
+    {
+      "name": "icons-updated.png",
+      "sha256": "2cd0b4fae8a7a030d620ed5954b0d12b86566148010c2573129075134c2bcf95",
+      "viewed": true
+    },
+    {
+      "name": "library.png",
+      "sha256": "a659e52fe176ac85cd0d1296dd873af635e11a244f1022fd128daa6ac691bed1",
+      "viewed": true
+    },
+    {
+      "name": "logistics.png",
+      "sha256": "2f89e5f1691c8f5200b593be3f7bbfb6fc910d4dc9df64f011f26931132d101a",
+      "viewed": true
+    },
+    {
+      "name": "map-atlas.png",
+      "sha256": "a53b88e363756dcd6d9c53df4400e040bdaa42971e66a2b0b7773f48626e89f8",
+      "viewed": true
+    },
+    {
+      "name": "map.png",
+      "sha256": "0e866f4c1e9769160343277ae227aa21f645a9a97133d110343faed290384644",
+      "viewed": true
+    },
+    {
+      "name": "personnel.png",
+      "sha256": "eb657f9173e2d19639c493d558bd2005c2f2a9170c7a9fd973dd819cc6d6da3d",
+      "viewed": true
+    },
+    {
+      "name": "photo-detail.png",
+      "sha256": "5ebbe7bdeb759aeff6f1c08cfe689db318952597597172d31b8adbed67468fc3",
+      "viewed": true
+    },
+    {
+      "name": "preparation.png",
+      "sha256": "39be87132203b33a98d2fb21579a64422039abe00e4db434851e4683befa8fc0",
+      "viewed": true
+    },
+    {
+      "name": "settings.png",
+      "sha256": "3afb1dcd2c168d511c81b22cce81256946536197e3ae124b2f379a8c20f069fa",
+      "viewed": true
+    },
+    {
+      "name": "slots.png",
+      "sha256": "5a33eb54eaad065e6ea195250154caef67f63b9d688e3eb3eea4fc6dfc59c526",
+      "viewed": true
+    },
+    {
+      "name": "title.png",
+      "sha256": "1b8b0905c146947abddd74f802ce0c0751f7484f40ec1b05b5e7c61ff2cc5bbf",
+      "viewed": true
+    },
+    {
+      "name": "trade.png",
+      "sha256": "d98adbdc77389811a4c32c7900b0246774e230c6c096a7fcc2c2e390044ef452",
+      "viewed": true
+    }
+  ],
+  "relatedSourceSha256": [
+    {
+      "path": "搜打撤/game/index.html",
+      "sha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567"
+    },
+    {
+      "path": "搜打撤/game/src/main.js",
+      "sha256": "f4bb40999b217c7c170cde55ee77fbbaac434365aff90dc9eeb1a0489403ebde"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.js",
+      "sha256": "a8a10366a8caf2fa9f4c99c320597bc5de91f4c58169400c4c8ef9cf9bb1d08e"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.depart.js",
+      "sha256": "2c637b4d4acfbb6dfd0f31e737aee6d38dcb9203ed3c330cab2dac44b52dc09e"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.cardslib.page.js",
+      "sha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4"
+    },
+    {
+      "path": "搜打撤/game/src/ui/card-zoom-content.js",
+      "sha256": "12edab3f251422bc592d23d5246d39665a354593afe6e460bc66027dd5b20f31"
+    },
+    {
+      "path": "搜打撤/game/css/roster-reference.css",
+      "sha256": "01bc6f688eab809fcc6e0e21194141fb612eca011364e6fcd1098b4f300000fe"
+    },
+    {
+      "path": "搜打撤/game/css/roster-departure-v2.css",
+      "sha256": "be88e89679b9d8f82238a5821fbe0caafc96efa9bd76f36a31a8ee271bd5f156"
+    },
+    {
+      "path": "搜打撤/game/css/overlays.css",
+      "sha256": "d862d1dfb82a8c376473b07762daf8bcb274ff5e7d599ee516acc65b1f97546d"
+    },
+    {
+      "path": "搜打撤/game/css/winter.css",
+      "sha256": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9"
+    },
+    {
+      "path": "搜打撤/game/css/page-slot-select.css",
+      "sha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6"
+    },
+    {
+      "path": "搜打撤/game/css/photo-studio-unified.css",
+      "sha256": "9920efa17a5360610ee393b22c7f1cd59cf0639029fe5ca99e5aeee03cdcee23"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.cs",
+      "sha256": "382a835892cf24fcc8628f6d5b60d1af5c8966e1dc540fa488d4a79c8bc2ce89"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotPage.cs",
+      "sha256": "a1ac38ae8719742ea6d0d452431b37fa0803a21554904980cff407c893b3dfa1"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentArchiveUi.cs",
+      "sha256": "3626949c1f0ce41e32fd331ade3a8061c9e2466f301b4aa10a6a3824f39c9923"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs",
+      "sha256": "1deadfc023e989098a74fb334fab757907cf9709d8a2cd9b34ac36dc321fb38a"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentAchievementPage.cs",
+      "sha256": "cf7a9db6420eedb062bacd17f1e9021c9bf2d304f59f5566a4fb06f1a87684a2"
+    }
+  ]
+}

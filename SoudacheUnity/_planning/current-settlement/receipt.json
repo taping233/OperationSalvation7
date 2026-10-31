@@ -1,0 +1,39 @@
+{
+  "status": "frozen-complete-uncommitted-native-review-pending",
+  "frozenAt": "2026-10-30T05:00:07.255805",
+  "productionSha256": {
+    "Assets\\Scripts\\Sdt.Run\\GameRuntime.Settlement.cs": "b89560f72ebd67b4bdccdb2043eb1741d1363040cd8ce835f9542f9e22831e05",
+    "Assets\\Scripts\\Sdt.Run\\CurrentSettlementReceipt.cs": "782acad82d4cbf855fb8b0d14acaa9e5aa8467af577d9824e05f54898129b141",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Run\\ExtractScreens.cs": "a33f4b5617c87b8167e9a24fe3f0945531f4a1c9ea3e7c147cadb9f51a721236",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentSettlementView.cs": "c414b2450ddb06fec8ce26df1a8b3e8ee43bc8bfa1c1a6ac64d5221b2a49acdd",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentExtractionPage.cs": "0ef181b42250ce027e5749aaec9919f27706207dd38298a8bc0e258304520458",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentSettlementReport.cs": "6cccfe90ad8fd7c0f4b0b990f9d1b830b6b6e355af3ae3a99c12a95bca9fbd7f",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentLeavePage.cs": "af1667c621bc59af7de61e340e65a6b5acb6dc17394fc01259ac25184acb4538",
+    "Assets\\Scripts\\Sdt.Run\\GameRuntime.cs": "c25ad20ba559ea5d48672721512c8e720205080e26467b3d682300c7eace0559",
+    "Assets\\Scripts\\Sdt.Run\\SaveSystem.cs": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5",
+    "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\MenuDialogs.cs": "5c6600b2197aa4ada8c76efc066beca607e149d70b41ee1d93a2c9fd660f42b3"
+  },
+  "draftsEqualProduction": true,
+  "compile": {
+    "exit": 0,
+    "errors": 0,
+    "warnings": 7,
+    "log": "private-check/latest.log"
+  },
+  "behavior": {
+    "exit": 0,
+    "assertions": 36,
+    "log": "behavior-check/latest.log",
+    "storageBoundary": "managed harness; native SaveSystem disk failures not independently retested"
+  },
+  "sourceVectors": "source-vectors.json",
+  "asset": "asset.json",
+  "nativeWindowVerified": false,
+  "unityLaunched": false,
+  "frontWindowTouched": false,
+  "sharedCompileTouched": false,
+  "rootInterfaces": [
+    "DoDeath(SettlementBattleReview review=null,string reason=null)",
+    "RunEnded(abandon) must release active battle without triggering death reward"
+  ]
+}

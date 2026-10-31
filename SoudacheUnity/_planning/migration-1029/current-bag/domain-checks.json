@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "assertions": 26,
+  "cases": [
+    "starter protection uses current identity and excludes unrelated same-name card",
+    "current starter cannot enter safety or be discarded",
+    "starter rejection retains original owned card",
+    "same-name variants retain two bag stacks",
+    "same variant merges into its partial stack",
+    "different variant cannot borrow same-name stack capacity",
+    "specific stored UID can be taken: ",
+    "taking first variant leaves same-name other variant stored",
+    "mixed variant UID request is rejected",
+    "rejected mixed request preserves both originals",
+    "precise second split stack can be stored",
+    "second split stack uses its exact three UIDs",
+    "stale UID outside container is rejected",
+    "failed take reports failed persistence",
+    "failed take restores exact source inventory and prior saved bytes",
+    "same observed UID selection succeeds after failure",
+    "retry loses and duplicates no cards",
+    "rescue projection retains variant snapshots",
+    "last stored variant card can be taken",
+    "last card reread retains exact UID, variant and destination",
+    "deposit merges matching ID and variant while retaining other variant",
+    "deposit retains stable key and owns a card snapshot",
+    "same display name with different ID remains separate on deposit",
+    "deposited variant and explicit stable key survive reread",
+    "source starter and professional exclusions hold for base pocket",
+    "failed standalone deposit restores exact stash and previous saved bytes"
+  ]
+}

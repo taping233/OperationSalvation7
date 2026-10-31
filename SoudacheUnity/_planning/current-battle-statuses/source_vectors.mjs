@@ -1,0 +1,15 @@
+import fs from 'node:fs';import path from 'node:path';import {pathToFileURL} from 'node:url';
+const source=path.resolve('..','搜打撤','game','src');
+let text=fs.readFileSync(path.join(source,'battle/view/battle.status-chips.js'),'utf8');
+text=text.replace(/^import[^\n]*\.css';\r?$/gm,'').replace('../../core/shared.js',pathToFileURL(path.join(source,'core/shared.js')).href).replace('../../ui/status-icons.js',pathToFileURL(path.join(source,'ui/status-icons.js')).href);
+const {statusChipsHTML}=await import('data:text/javascript;base64,'+Buffer.from(text).toString('base64'));
+const combat=await import(pathToFileURL(path.join(source,'battle/core/combat.js')));const {intentViewModel,intentSummary}=await import(pathToFileURL(path.join(source,'battle/view/battle.intent.view.js')));
+const input=Object.fromEntries([...combat.BUFFS,...combat.CURSES].map((key,i)=>[key,i+1]));
+const html=statusChipsHTML(input,combat);const offsets=[...html.matchAll(/data-status-key="([^"]+)"/g)];
+const statuses=offsets.map((match,i)=>{const part=html.slice(match.index,offsets[i+1]?.index??html.length);const read=pattern=>part.match(pattern)?.[1]??'';return {key:match[1],name:read(/class="status-name">([^<]*)/),icon:read(/class="status-icon"[^>]*>\[\[icon:([^\]]+)\]\]/),amount:read(/class="status-value">([^<]*)/),unit:read(/class="status-unit">([^<]*)/),label:read(/aria-label="([^"]+)"/)};});
+const intentCases=[{icon:'[[icon:swords]]',label:'攻击',damage:0,hits:1},{icon:'[[icon:tools]]',label:'双击并施加诅咒',damage:7,hits:2,bleedBonus:3},{icon:'[[icon:crystal]]',label:'蓄力·下回合行动',damage:null,hits:1}];
+const intents=intentCases.map(input=>{const value=intentViewModel(input)[0];return {input,hasDamage:value.damage!=null,text:value.icon+(value.damage==null?'':` ${value.damage}${value.hits>1?`×${value.hits}`:''}`),summary:intentSummary(input)};});
+const {projectPlayerEffects}=await import(pathToFileURL(path.join(source,'battle/runtime/battle.player-effects.js')));
+const effectInputs=[{}, {playerCurseImmune:true},{playerCurseImmune:true,curseImmunityTemporary:true}, {holyRune:true,turn:1},{holyRune:true,turn:3},{holyRune:true,turn:4},{holyRune:true,turn:0},{holyRune:true,turn:-1}, {holyRune:true,turn:2,playerCurseImmune:true},{holyRune:true,turn:2,playerCurseImmune:true,curseImmunityTemporary:true},{spellCost1:true},{meleeCost1:true},{spellCost1:true,meleeCost1:true}, {playerCurseImmune:true,spellCost1:true,meleeCost1:true,nextSpellTwice:2,allSpellsInfused:true,discoverPlus:3,bleedAmp:1,deathSave:2,extraTurn:true},{nextSpellTwice:0,discoverPlus:0,bleedAmp:-1,deathSave:0}];
+const effects=effectInputs.map(input=>({input,expected:projectPlayerEffects(input)}));
+fs.writeFileSync('_planning/current-battle-statuses/source-vectors.json',JSON.stringify({input,statuses,intents,effects,buffs:combat.BUFFS,curses:combat.CURSES,buffMetadata:combat.BUFF_META,curseMetadata:combat.CURSE_META},null,2));console.log(`Source vectors: ${statuses.length} statuses; ${intents.length} intent types; ${effects.length} player-effect states.`);

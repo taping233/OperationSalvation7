@@ -1,0 +1,39 @@
+{
+  "scope": "deck-extract presentation",
+  "frozenAt": "2026-10-30T20:14:08.7856295+08:00",
+  "productionFiles": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs",
+      "sha256": "69AF83AA1139D1E179013ACA06E757BFF1BF7105ADC7B1A855E2240B877E8235"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentDeckFormation.cs",
+      "sha256": "2A20024E6740CA284D86F70E18AECCC137FB96070A30836EF71D3213FE1C73D7"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "../搜打撤/game/src/battle/view/battle.overlays.js",
+      "sha256": "4FE4294ABFE76C446B57C6E755C235645444C02BA8693BCA0354A438496AD3BB"
+    },
+    {
+      "path": "../搜打撤/game/src/battle/view/battle.decision-shell.js",
+      "sha256": "74A3157528EE7B5362CDC4DE86C878ADC2ED56CEF5CF3A3FF1B3A22B3C0F4359"
+    },
+    {
+      "path": "../搜打撤/game/css/battle-decision.css",
+      "sha256": "6A91D4666C61AF517AC651D77FA12902D65D88C3A8658BF0BD260BB04DC0EB44"
+    },
+    {
+      "path": "../搜打撤/game/css/battle-hand-overhaul.css",
+      "sha256": "66985D7A29553C8CEA96A2FD36218CD2B5B04749F9B54BB7C6C1156F89030954"
+    }
+  ],
+  "compile": {
+    "log": "_planning/migration-1030-fidelity/deck-extract/compile/latest.log",
+    "errors": 0,
+    "warnings": 10
+  },
+  "nativeValidation": "Root pending",
+  "extraction": "unchanged; existing ExtractStashScreen Covered correct"
+}

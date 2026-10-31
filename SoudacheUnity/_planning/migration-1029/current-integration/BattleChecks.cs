@@ -1,0 +1,30 @@
+using System;using System.IO;using System.Linq;using System.Text.Json;using System.Text.Json.Nodes;using System.Collections.Generic;using System.Reflection;using Sdt.Core;using Sdt.Core.Battle;
+class BattleChecks {
+ sealed class Host:BattleHost {
+  public int Hp{get;set;}=30;public int MaxHp=>60;public int Atk=>4;public int SpellPower=>2;public string MyClass=>null;public string CharacterId=>"wu";public IReadOnlyList<OwnedCard> OwnedCards{get;set;}=Array.Empty<OwnedCard>();public BattleResult Result;
+  public void Log(string text,string kind=null){}public void Heal(int n){Hp=Math.Min(MaxHp,Hp+n);}public void OnBattleEnd(BattleResult result){Result=result;}
+ }
+ static readonly List<string> Passed=new List<string>();
+ static void Check(bool okay,string label){if(!okay)throw new Exception(label);Passed.Add(label);}
+ static RuleValue Rule(JsonObject data){var rule=new RuleValue();foreach(var pair in data)rule.Values[pair.Key]=Value(pair.Value);return rule;}
+ static object Value(JsonNode value){if(value==null)return null;if(value is JsonObject obj)return Rule(obj);if(value is JsonArray array)return array.Select(Value).ToArray();var raw=(JsonValue)value;if(raw.TryGetValue<int>(out var n))return n;if(raw.TryGetValue<bool>(out var b))return b;if(raw.TryGetValue<string>(out var s))return s;return raw.GetValue<double>();}
+ static object Field(BattleSession battle,string name)=>typeof(BattleSession).GetField(name,BindingFlags.Instance|BindingFlags.NonPublic).GetValue(battle);
+ static (BattleSession,Host) Start(IReadOnlyList<OwnedCard> owned=null,int attack=0,string affix=null){var host=new Host{OwnedCards=owned??Array.Empty<OwnedCard>()};var battle=new BattleSession();battle.Start(new BattleStartContext{host=host,rng=new Rng(123),enemies=new[]{new EnemyInput{id="foe",name="目标",hp=50,atk=attack,affix=affix}}});return(battle,host);}
+ static void Main(){
+  CardLibrary.Init(()=>CardDatabase.All);var source=JsonNode.Parse(File.ReadAllText("_planning/migration-1029/current-integration/source-battle.json"));
+  var targets=JsonNode.Parse(File.ReadAllText("_planning/migration-1029/current-integration/source-targets.json")).AsArray();
+  foreach(var row in targets){var def=row["card"].Deserialize<CardDef>(new JsonSerializerOptions{IncludeFields=true});def.rules=row["card"]["rules"] is JsonObject rules?Rule(rules):null;string id=def.id;
+   Check(BuiltinCardIdentities.OwnsExecution(def)==(bool)row["owner"],id+" builtin execution identity");Check(BattleRules.IsAreaEffect(def)==(bool)row["area"],id+" area targeting");Check(BattleRules.IsRandomEnemyEffect(def)==(bool)row["random"],id+" random targeting");
+   Check(BattleRules.TargetSideFor(def)==(string)row["side"],id+" side actual="+BattleRules.TargetSideFor(def)+" expected="+(string)row["side"]);Check(BattleRules.UnplayableReasonFor(def,"normal")== (string)row["normal"],id+" normal reason");Check(BattleRules.UnplayableReasonFor(def,"boss")== (string)row["boss"],id+" boss reason");}
+  var card=new CardDef{id="legacy-draw",name="旧文本抽牌夹具",type="法术",cost=0,desc="抽 2 张牌。"};
+  var(b,h)=Start(Enumerable.Range(0,3).Select(i=>new OwnedCard{uid="draw"+i,card=card.Clone()}).ToArray());
+  for(int i=0;i<3;i++){var result=b.PlayCard("draw"+i,-2,false);Check(result.Ok,"legacy draw accepted "+i+": "+result.Reason);var snap=b.Snapshot;var expect=source["draws"][i];Check(snap.Hand.Count==(int)expect["hand"]&&snap.DrawPile.Count==(int)expect["deck"],"legacy draw consumes actual normal deck "+i);Check(snap.Hand.Count(uid=>b.FindCard(uid).card.id==CardLibrary.SHA.id)==(int)expect["starters"],"normal temporary starter identity "+i);}
+  Check(b.Snapshot.DrawPile.Count==0&&b.Snapshot.Hand.Count==5,"empty normal deck does not manufacture more starters");b.Retract();
+  var original=CardLibrary.FindById("tt7-imitate").Clone();var(m,mh)=Start(new[]{new OwnedCard{uid="martial",card=CardLibrary.SHA.Clone()},new OwnedCard{uid="mimic",card=original}});Check(m.PlayCard("martial",0,false).Ok,"mimic trigger martial accepted");var mimic=m.FindCard("mimic").card;Check(mimic.id==(string)source["mimic"]["id"]&&mimic.cost==(int)source["mimic"]["cost"]&&original.id==(string)source["mimic"]["originalId"],"hand transform matches source and retains original inventory");Check(BattleRules.UnplayableReasonFor(mimic,"normal")==null,"transformed mimic becomes playable");m.Retract();
+  var(s,sh)=Start();((Combatant)Field(s,"pstat")).status.Set("swordForm",1);s.EndTurn();Check(s.Snapshot.Hand.Count==(int)source["sword"]["hand"]&&s.Snapshot.DrawPile.Count==(int)source["sword"]["deck"],"sword form draws from normal deck");s.Retract();
+  var(f,fh)=Start(attack:3,affix:"frenzy");f.EndTurn();Check(fh.Hp==(int)source["frenzy"]["hp"],"frenzy uses source generation random stream");var status=f.Snapshot.Pstat.Status;Check(status["bleed"]==(int)source["frenzy"]["status"]["bleed"]&&status["poison"]==(int)source["frenzy"]["status"]["poison"],"frenzy curse types and stacks match current source");f.Surrender();var summary=fh.Result.Summary;var expected=source["summary"];
+  Check(summary.round==(int)expected["round"]&&summary.remainingFoes.Count==expected["remainingFoes"].AsArray().Count,"terminal summary round and living foes match source");Check(summary.damageTaken.Select(hit=>hit.damage).SequenceEqual(expected["damageTaken"].AsArray().Select(hit=>(int)hit["damage"])),"terminal summary actual hit amounts match source");Check(summary.damageCoverage==(string)expected["damageCoverage"],"terminal summary source coverage is explicit");
+  var cached=summary.damageTaken.Sum(hit=>hit.damage);f.Start(new BattleStartContext{host=fh,rng=new Rng(123),enemies=new[]{new EnemyInput{id="new",name="新敌人",hp=50,atk=0}}});f.Surrender();Check(fh.Result.Summary.damageTaken.Count==0&&summary.damageTaken.Sum(hit=>hit.damage)==cached,"new battle resets summary without mutating earlier result");
+  File.WriteAllText("_planning/migration-1029/current-integration/battle-results.json",JsonSerializer.Serialize(new{passed=true,count=Passed.Count,checks=Passed},new JsonSerializerOptions{WriteIndented=true}));Console.WriteLine("Actual source battle integration checks: "+Passed.Count+" passed");
+ }
+}

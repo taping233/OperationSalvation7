@@ -1,0 +1,2443 @@
+{
+  "capturedUtc": "2026-10-29T18:25:08.096Z",
+  "policy": "按原始运行代码的架构和效果迁移；禁止自行设计替代。P0表示公共架构/玩家主流程先迁，P1表示依赖公共组件后迁。",
+  "authority": "搜打撤/game/index.html → src/main.js → AST可达静态/延迟模块；当前工作树原字节SHA。",
+  "scope": "仅后台源码审查，写入current-ui-version。未打开任何前台、浏览器或Unity；未compile/build，未改生产文件。",
+  "limitations": [
+    "CSS指纹与选择器足以定位当前样式维护来源；未在浏览器读computed style，依赖图postorder不等于所有动态访问顺序。",
+    "所有UI差异是所列Unity快照中的源码事实；父会话并行迁入后需按SHA漂移刷新对应行。",
+    "未将不在运行图的preview/旧planning/旧passed/文件mtime当当前版本依据。",
+    "重复事件与永久收藏画廊fresh scope缺陷交主会，不重复深挖。"
+  ],
+  "rows": [
+    {
+      "id": "01-home",
+      "name": "首页（独立重建，仅冻结版本）",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/game.boot.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/game.boot.js",
+          "to": "搜打撤/game/src/ui/game-title-controller.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/ui/game-title-controller.js",
+          "sha256": "45696c507f592bd08367e2be74409a04f7e73f5c85d41a529336a4aa2dd291cb",
+          "bytes": 5453,
+          "lines": 95
+        },
+        {
+          "path": "搜打撤/game/src/ui/title-wallpaper.js",
+          "sha256": "825c8fc8d9b3743a8d52f9ff5fcf53d8116ad0530decb9daa469698d93da1195",
+          "bytes": 1949,
+          "lines": 40
+        },
+        {
+          "path": "搜打撤/game/src/ui/home-menu-motion.js",
+          "sha256": "4d0f2b613c9de156be3dfef115cfba10cdc64a40a568f82ce9e1e8e6c176b7d5",
+          "bytes": 12249,
+          "lines": 287
+        },
+        {
+          "path": "搜打撤/game/src/ui/home-fx.js",
+          "sha256": "57281b9a9c25d8e7c7e7fa233594227f0b2e83c3e4ea4b55a7cebf29a0caba3b",
+          "bytes": 9467,
+          "lines": 208
+        },
+        {
+          "path": "搜打撤/game/src/ui/title-credits.js",
+          "sha256": "93b238bf0d726eb6c37e3803125c7f735df8a2d0ad6bee316a2aa84c7d48ece5",
+          "bytes": 1625,
+          "lines": 40
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/title-p0.css",
+          "sha256": "b8ffa57c729cb19308d74296f8640f6ba664cc7ddabb0989d4b046ebe6e8a2f7",
+          "bytes": 15233,
+          "lines": 284
+        },
+        {
+          "path": "搜打撤/game/css/home-ui-tokens.css",
+          "sha256": "cf985b45cf4f28d4f1fef916125797c322ffefd63330743481d7547a5b83d0d0",
+          "bytes": 590,
+          "lines": 17
+        },
+        {
+          "path": "搜打撤/game/css/home-menu-motion.css",
+          "sha256": "d8d06606f2e144b9728ddaaad792969b44d3f8cca58c1552b7cfa2ad78587025",
+          "bytes": 6183,
+          "lines": 106
+        },
+        {
+          "path": "搜打撤/game/css/home-polish.css",
+          "sha256": "c3c4a76fa783497cca60b85fd84ac00266f721fd4dd2b6b06749de6a4b785ec4",
+          "bytes": 32661,
+          "lines": 579
+        },
+        {
+          "path": "搜打撤/game/css/title-credits.css",
+          "sha256": "3c76c2fd6b88bf3689319884754eee4b6a25c03527bc71b6edc6e8d217b80dc4",
+          "bytes": 5932,
+          "lines": 115
+        },
+        {
+          "path": "搜打撤/game/css/home-linked-interactions.css",
+          "sha256": "ca5e34915fc8b9acfc0bcd64812228d1a6eb35df3a69c89054ae670458033d51",
+          "bytes": 6532,
+          "lines": 95
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/TitleScreen.cs",
+          "sha256": "081b389611651e9cbfd00dcd768df6b1fc66af240787b8c92072df3b53eefd10",
+          "bytes": 25787,
+          "lines": 490
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CreditsScreen.cs",
+          "sha256": "a3d348e0027483511e8ffd3a6c2c22509fa222481c5212d0b04d3ddd40841edc",
+          "bytes": 911,
+          "lines": 22
+        }
+      ],
+      "marker": "#title.home-composed",
+      "sourceContract": "index.html内home-scene七壁纸层；左home-command品牌+进入城市/生存指南，右home-support收藏/系统；footer静音/留言/壁纸；制作名单dialog，壁纸纯欣赏按钮。",
+      "difference": "此页独立代理负责重建；本表不使用旧planning和旧passed判断当前实现。",
+      "oldUnityNotReusable": "沿旧版标题入口的按钮位置与分组不能作为版本基线。",
+      "observableCompletion": "以index.html当前DOM、上述控制器和CSS原值映射；七壁纸、只看壁纸、footer、制作名单入口可逐项观察。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "02-slots",
+      "name": "选档",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/run/game.session.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.session.js",
+          "to": "搜打撤/game/src/ui/game.menu.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/ui/game.menu.js",
+          "to": "搜打撤/game/src/ui/game.menu.pages.js",
+          "kind": "dynamic"
+        },
+        {
+          "from": "搜打撤/game/src/ui/game.menu.pages.js",
+          "to": "搜打撤/game/src/ui/menu-slots.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/ui/menu-slots.js",
+          "sha256": "205c9869427bc45a3c7bd34565e2ed8cb9f281694382566d71d1ce7c745e2f7c",
+          "bytes": 22145,
+          "lines": 365
+        },
+        {
+          "path": "搜打撤/game/src/ui/menu-slot-view.js",
+          "sha256": "25c1e9e00f245ac38c3b6e37446f5b8fbe7cb3a241e4a191c08dc2dee88346c6",
+          "bytes": 3580,
+          "lines": 59
+        },
+        {
+          "path": "搜打撤/game/src/ui/slot-emblems.js",
+          "sha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+          "bytes": 3323,
+          "lines": 11
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/page-slot-select.css",
+          "sha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6",
+          "bytes": 19624,
+          "lines": 455
+        },
+        {
+          "path": "搜打撤/game/css/archive-back.css",
+          "sha256": "d893b6a0396f28ba4bd7905016d574c26a67f51268d1b7800d319b627fd71b38",
+          "bytes": 2050,
+          "lines": 61
+        },
+        {
+          "path": "搜打撤/game/css/review-ui.css",
+          "sha256": "911bd4c7a4d50faeefe08ab3babdea46f5c91dbf18accb6e68ccb465590d9fc9",
+          "bytes": 2147,
+          "lines": 28
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/SlotPickerScreen.cs",
+          "sha256": "95d8b209cd5a446bf5fde1ae57a47e782237c78fe7a93bf9f0167c8238aaba88",
+          "bytes": 14548,
+          "lines": 265
+        }
+      ],
+      "marker": ".pg.slot-page / .slot-deck / .slot-card",
+      "sourceContract": "五档；真实SLOT_EMBLEMS；当前局层数/人物/生命/金币/上次保存，游玩与成就置于details“更多档案信息”；最近档案状态；page-slot-select卡宽264～280、间隔clamp24～44、卡角框。",
+      "difference": "Unity固定1560×560、5×280×540，徽记SlotGlyph字形；SlotInfo仅游玩时间与成就；背景只有随机光斑，缺当前源SVG剪影。",
+      "oldUnityNotReusable": "SlotInfo信息树、SlotGlyph、固定deck尺寸、纯光斑背景不等价。可复用读档/确认命令须另审守卫。",
+      "observableCompletion": "新档/有基地无run/进行中run/读取错误四态字段、CTA与可用性逐项对应；更多信息可展开；徽记与源原图形一致。",
+      "confirmedScope": "已证实选档呈现缺run进度/资源/保存时间；读档业务结果待验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "03-base-shell",
+      "name": "基地共用外壳与导航",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.hub.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/game.hub.js",
+          "sha256": "a8a10366a8caf2fa9f4c99c320597bc5de91f4c58169400c4c8ef9cf9bb1d08e",
+          "bytes": 6028,
+          "lines": 140
+        },
+        {
+          "path": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "sha256": "7b86625bfb0c1c04734e139263222600535ae5af1417850761958d59a15f7dab",
+          "bytes": 30923,
+          "lines": 479
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.presentation.js",
+          "sha256": "abf38aeb09093cb9e88f3aecdd1d2f582306725fd27e35ff96a737e7ae719191",
+          "bytes": 25340,
+          "lines": 425
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.navigation-v7.js",
+          "sha256": "a5af60b6fe8a520c9856d9f242fdd52efaf21a2cf7a772168911e6485ee4fa6a",
+          "bytes": 971,
+          "lines": 13
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.materials.js",
+          "sha256": "25d9e187ef7f3e261ad068ccb1e20a6c6980992cc09c14757b102da598a7c5d8",
+          "bytes": 941,
+          "lines": 12
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/base-camp-rework.css",
+          "sha256": "2d3d0a2c9926fc6a124aeab1b66e78cbe770fdb497b0921a552e9f65af2f8c47",
+          "bytes": 19011,
+          "lines": 224
+        },
+        {
+          "path": "搜打撤/game/css/base-glass-tokens.css",
+          "sha256": "789fcd0ddfcd48f6724b8f54e25841a1ca6e4f4c3e214a6aa265e4b88dac7eff",
+          "bytes": 678,
+          "lines": 11
+        },
+        {
+          "path": "搜打撤/game/css/base-controls-v4.css",
+          "sha256": "1fece298187de8a0f7b6325e95ae33936318c6d0d258c5e4212a80225d7c3ee6",
+          "bytes": 2505,
+          "lines": 45
+        },
+        {
+          "path": "搜打撤/game/css/base-panel-layout.css",
+          "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9",
+          "bytes": 73,
+          "lines": 2
+        },
+        {
+          "path": "搜打撤/game/css/base-cohesion-v5.css",
+          "sha256": "54f4c89bdbdddf2997b70891890b138d34e34f098ea3db057147e30ec5320f2b",
+          "bytes": 8258,
+          "lines": 114
+        },
+        {
+          "path": "搜打撤/game/css/base-framework-v7.css",
+          "sha256": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953",
+          "bytes": 7301,
+          "lines": 72
+        },
+        {
+          "path": "搜打撤/game/css/base-rooms-v7.css",
+          "sha256": "39a0e8821703ff054cbace2bef3b63f5fbd71baf702cec7e32fab9417affb462",
+          "bytes": 24859,
+          "lines": 211
+        },
+        {
+          "path": "搜打撤/game/css/base-page-motion-v7.css",
+          "sha256": "3fe8d76dcc5299ae124c9869ad7d5bb4dde3dd31494df618169d257d1d2193fe",
+          "bytes": 3254,
+          "lines": 82
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+          "sha256": "5ebfcf53cdb3e4351535ebda8d2bff63d4851c5a0e63a216cb7dcd57da7564e0",
+          "bytes": 49677,
+          "lines": 834
+        }
+      ],
+      "marker": "#hubMain.base-frame-v7[data-base-layout=\"open-menu\"]",
+      "sourceContract": "game.hub.js静态样式+动态runtime；头84px、返回路径/房间标题/档案/四资源胶囊；内容grid下方104px七房间底部导航。顺序基地/人物/后勤/交易所/收藏室/建设/庭院。共享base-v12玻璃与base-operations-v5背景。",
+      "difference": "Unity HubScreen.Build为纯深蓝纵布局、顶部帮助/资源文字chips、顶部8旧页签，另设ach与collection；返回直接主菜单。",
+      "oldUnityNotReusable": "Build壳的旧页签结构、顶部导航、无房间标题/档案、旧closeBase目标不可直接沿用。",
+      "observableCompletion": "所有七房间共用同一84px头和104px底导航，位置/选中/待领数一致；基地返回选档，子页按hubBackTarget返回；tab切换保留源规定滚动/焦点与入场生命周期。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "04-base-home",
+      "name": "基地首页",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.hub.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.js",
+          "to": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "kind": "dynamic"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "to": "搜打撤/game/src/hub/game.hub.depart.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/game.hub.depart.js",
+          "sha256": "2c637b4d4acfbb6dfd0f31e737aee6d38dcb9203ed3c330cab2dac44b52dc09e",
+          "bytes": 39719,
+          "lines": 643
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.home-v3.js",
+          "sha256": "c941b3575798f85e63788607e17098aa56105b4e847614827752aa229ae43b79",
+          "bytes": 4973,
+          "lines": 38
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.home-icons-v10.js",
+          "sha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+          "bytes": 1082,
+          "lines": 14
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/base-home-v7.css",
+          "sha256": "09be7ac2ad87603bfb2eeefd9fed3a207cce778cbd9b7c090c20f762de965f26",
+          "bytes": 7116,
+          "lines": 57
+        },
+        {
+          "path": "搜打撤/game/css/base-glass-tokens.css",
+          "sha256": "789fcd0ddfcd48f6724b8f54e25841a1ca6e4f4c3e214a6aa265e4b88dac7eff",
+          "bytes": 678,
+          "lines": 11
+        },
+        {
+          "path": "搜打撤/game/css/base-framework-v7.css",
+          "sha256": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953",
+          "bytes": 7301,
+          "lines": 72
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+          "sha256": "5ebfcf53cdb3e4351535ebda8d2bff63d4851c5a0e63a216cb7dcd57da7564e0",
+          "bytes": 49677,
+          "lines": 834
+        }
+      ],
+      "marker": ".base-home-v7",
+      "sourceContract": "左上事务卡：首次目标/可扩建/可孵化/待领，或空态；右420px整备卡top clamp40px,14%,120px、right48px：人物/带牌事实、出征整备或继续整备、正常入城/直入敌腹、携带预设、条件研究所/待复原。base-room-art自身display:none，背景由壳token供给。",
+      "difference": "Unity BuildDeploy旧选择玩法card列表+出征预报+宝藏大门，与源的事务/整备两面板结构和信息层级不同。",
+      "oldUnityNotReusable": "BuildDeploy全部旧呈现几何/分组；不能只加背景或改颜色宣称迁移完成。",
+      "observableCompletion": "空档、首次目标、可扩建/孵化/奖励、已有整备草稿、两难度、研究所已解锁、待复原等条件下，出现/隐藏、文字、路由和布局与源一一对应。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "05-base-logistics",
+      "name": "后勤/建设/人物房间",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.hub.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.js",
+          "to": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "kind": "dynamic"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "to": "搜打撤/game/src/hub/game.hub.pages.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/game.hub.pages.js",
+          "sha256": "5bab544672307d067bbbad598c25fc6e53457f9a89bd80b53b6d3dcc84a7666f",
+          "bytes": 27607,
+          "lines": 420
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.warehouse.js",
+          "sha256": "d99bcf65c9ac96b7235b279242b175f05381b80560ba70ff0b770440ccbc102c",
+          "bytes": 21224,
+          "lines": 292
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.personnel.js",
+          "sha256": "37796e2e56647a4d86c456e62be91f9ca843dbe0ee7f59fa75e41249b008a307",
+          "bytes": 20496,
+          "lines": 197
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.facilities.js",
+          "sha256": "a6ce60246e4705df10f5693987319de4822e72aabc1d90834a8f8265750229f7",
+          "bytes": 4031,
+          "lines": 24
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/base-rooms-v7.css",
+          "sha256": "39a0e8821703ff054cbace2bef3b63f5fbd71baf702cec7e32fab9417affb462",
+          "bytes": 24859,
+          "lines": 211
+        },
+        {
+          "path": "搜打撤/game/css/base-personnel-v12.css",
+          "sha256": "55b4ee0a9d2472295ae0ecc9c20cf2eed920e8f6360b2c6d06ef3c8a29329cff",
+          "bytes": 22393,
+          "lines": 173
+        },
+        {
+          "path": "搜打撤/game/css/base-logistics-trade-v12.css",
+          "sha256": "962d79109e0d67519cbbe4bb5e0d9c6299e36fe85b8ae01090827d804947ffda",
+          "bytes": 10992,
+          "lines": 100
+        },
+        {
+          "path": "搜打撤/game/css/base-archive-facilities-v12.css",
+          "sha256": "16dd8568baef9c60d14f6a6d4cc96f3fb2351cdbf4f9334068fa04d22cadad9d",
+          "bytes": 16547,
+          "lines": 251
+        },
+        {
+          "path": "搜打撤/game/css/card-browser.css",
+          "sha256": "b4ff6b96ff25c890cdde6636be9516b59f253f132b134965346442e5adf34698",
+          "bytes": 1421,
+          "lines": 14
+        },
+        {
+          "path": "搜打撤/game/css/inventory-zoom.css",
+          "sha256": "573455d016b5466d9c03bd8908b0367576691ccd30ea8c52925e6f1af44f9d72",
+          "bytes": 4427,
+          "lines": 45
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+          "sha256": "5ebfcf53cdb3e4351535ebda8d2bff63d4851c5a0e63a216cb7dcd57da7564e0",
+          "bytes": 49677,
+          "lines": 834
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubPets.cs",
+          "sha256": "f8d9c07ee447fe7a3f6a7813b83f8b03fd2a76c4ba8a6cde45b2857ce5cbbebb",
+          "bytes": 2545,
+          "lines": 48
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/CharacterAppearanceScreen.cs",
+          "sha256": "def56f9f869d25aa102ae354e3bbfced6fd87ef7da6ceec3512b2575fa54204e",
+          "bytes": 2518,
+          "lines": 52
+        }
+      ],
+      "marker": ".warehouse-v3 / .personnel-v12 / .facilities-v12",
+      "sourceContract": "pages仅组织陈列，warehouse/personnel/facilities分别持有视图与绑定；后勤cards/pocket及过滤浏览，卡牌直接inventory-zoom操作台；人物由personnel分组/详情/伙伴管理；建设由设施目录+详情与缺料状态组织。",
+      "difference": "Unity BuildStash/BuildUpgrade/BuildClasses仍Section和逐行文字/进度条，人物另列宠物与外观屏；未复现当前各独立房间工作台结构。",
+      "oldUnityNotReusable": "BuildStash/Upgrade/Classes呈现层、旧StashItemModal信息组织与独立列表式宠物入口不能当当前源房间模板。",
+      "observableCompletion": "沿源的三个模块分工迁入；后勤详情返回定位/筛选、人物主类与伙伴切换、设施选中/缺料/操作反馈保持；不新增替代流程。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "06-character",
+      "name": "出征选人",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/run/game.run.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.run.js",
+          "to": "搜打撤/game/src/run/game.run.altar.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.run.altar.js",
+          "to": "搜打撤/game/src/run/game.run.class-choice.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.run.class-choice.js",
+          "to": "搜打撤/game/src/run/game.run.class-choice.page.js",
+          "kind": "dynamic"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/run/game.run.class-choice.page.js",
+          "sha256": "1afc1f86e94c3b1f7f959667148d4180655abeba5012877c126550fc06e91d4d",
+          "bytes": 38899,
+          "lines": 634
+        },
+        {
+          "path": "搜打撤/game/src/run/game.run.class-choice.js",
+          "sha256": "a81dfce40a84a2713174bcf918e5901b4401f8b71604691256fa3bc94fb3128b",
+          "bytes": 5252,
+          "lines": 105
+        },
+        {
+          "path": "搜打撤/game/src/ui/character-idle.js",
+          "sha256": "0c9b1bda408faf017692009cc5811d9f3069c3d1414f55f122d7305e803ba74e",
+          "bytes": 869,
+          "lines": 18
+        },
+        {
+          "path": "搜打撤/game/src/ui/character-view-motion.js",
+          "sha256": "7d72aa15f10a2cea7fa8bb396058a3edfccfe5437be4a2c20ba25779a51503de",
+          "bytes": 10244,
+          "lines": 175
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/expedition-roster.css",
+          "sha256": "0d684bf10cd2d1afb39b2d77fc6ed10022294a5620ad8c3710d55ecef1b3c801",
+          "bytes": 21977,
+          "lines": 236
+        },
+        {
+          "path": "搜打撤/game/css/roster-departure-v2.css",
+          "sha256": "be88e89679b9d8f82238a5821fbe0caafc96efa9bd76f36a31a8ee271bd5f156",
+          "bytes": 8652,
+          "lines": 71
+        },
+        {
+          "path": "搜打撤/game/css/base-camp-rework.css",
+          "sha256": "2d3d0a2c9926fc6a124aeab1b66e78cbe770fdb497b0921a552e9f65af2f8c47",
+          "bytes": 19011,
+          "lines": 224
+        },
+        {
+          "path": "搜打撤/game/css/roster-reference.css",
+          "sha256": "01bc6f688eab809fcc6e0e21194141fb612eca011364e6fcd1098b4f300000fe",
+          "bytes": 1852,
+          "lines": 45
+        },
+        {
+          "path": "搜打撤/game/css/character-idle.css",
+          "sha256": "f9adedfa29c22c2f0ccb690dbb955e1ccf8a35bc62c19e9579bba16cd5ae440c",
+          "bytes": 159,
+          "lines": 3
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.cs",
+          "sha256": "a06ab28e3c999fc8ec75f742ab8acb51f4d795d012f4ac6d0147acac56ce3138",
+          "bytes": 11980,
+          "lines": 210
+        }
+      ],
+      "marker": ".cls2-page.roster-reference[data-base-departure]",
+      "sourceContract": "cls2-stage全身人物舞台+右信息，底部头像strip；机制/生命攻击/每回合技能/折叠成长/皮肤/完整卡池；01模式→02人物→03整备；标准立绘按roster-reference中人物透明边界参数定位。",
+      "difference": "Unity cls-page左3列150×190小立绘网格+右故事/任务详情，未用当前cls2舞台、机制层级和皮肤条；正常流程在整备NewRun后才ClassChoiceOpened。",
+      "oldUnityNotReusable": "ClassChoiceScreen.Build主体、旧故事/任务优先布局及禁止Esc的单一规则不可原封复用到基地选择态。",
+      "observableCompletion": "人物页在整备之前；同选五人物、标准/皮肤、机制技能、成长、卡池详情及返回确认的步骤/坐标/当前人物标记可与源逐项对拍。",
+      "confirmedScope": "已证实页面结构错版；GameRuntime.NewRunCore在characterId=null发ClassChoiceOpened，默认整备先于选人，与Vite顺序不同。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "07-departure",
+      "name": "出征整备",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.hub.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.js",
+          "to": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "kind": "dynamic"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "to": "搜打撤/game/src/hub/game.hub.depart.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/game.hub.depart.js",
+          "sha256": "2c637b4d4acfbb6dfd0f31e737aee6d38dcb9203ed3c330cab2dac44b52dc09e",
+          "bytes": 39719,
+          "lines": 643
+        },
+        {
+          "path": "搜打撤/game/src/hub/departure.view-updates.js",
+          "sha256": "08d3e8e64236db48e3617f7021fc7202b8efa65f812b5a4097cd8c66f7cfc27e",
+          "bytes": 13085,
+          "lines": 232
+        },
+        {
+          "path": "搜打撤/game/src/hub/departure.drag.js",
+          "sha256": "c2b00eddd459fd8628e9055bbdcd477255297732a50caebf9a2ac09715b21992",
+          "bytes": 3564,
+          "lines": 66
+        },
+        {
+          "path": "搜打撤/game/src/hub/departure.summary.js",
+          "sha256": "552e175a199e0353bb9f460b4d9b30279cf560762cabb6c4091eef706d816177",
+          "bytes": 7364,
+          "lines": 116
+        },
+        {
+          "path": "搜打撤/game/src/hub/departure.selection-state.js",
+          "sha256": "c4d0ae39cc850b463bfe3ccc941c4ba0009663a3268e1124fb00e7685aa01db4",
+          "bytes": 284,
+          "lines": 8
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/departure-selected.css",
+          "sha256": "e5eee8332021d24ddfe5b5826bc448b77e7220dc9abce30cd1beacf392596ade",
+          "bytes": 9001,
+          "lines": 73
+        },
+        {
+          "path": "搜打撤/game/css/base-camp-rework.css",
+          "sha256": "2d3d0a2c9926fc6a124aeab1b66e78cbe770fdb497b0921a552e9f65af2f8c47",
+          "bytes": 19011,
+          "lines": 224
+        },
+        {
+          "path": "搜打撤/game/css/preparation.css",
+          "sha256": "62f6d8156938123171e4675600299a2ba68f0afc65d11714d61ab27f89686e66",
+          "bytes": 4412,
+          "lines": 48
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/DepartPrepScreen.cs",
+          "sha256": "36f02b2ef6565d88c4814e09e5543b5c94ecdf6224545504c72f2b8522ece2f3",
+          "bytes": 13888,
+          "lines": 269
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/PreparationScreen.cs",
+          "sha256": "48474346bc9a16ac84e913405e64b6dbb835d6aa6a8724c89beb10fd15a2e3fe",
+          "bytes": 9082,
+          "lines": 151
+        }
+      ],
+      "marker": "#depMain[data-departure-view=\"cover-v3\"]",
+      "sourceContract": "已选人物后进入；左真实仓库卡面含剩余/已带、rarity/type/cost筛选，右背包格子含固定初始牌，拖放/点击看卡；人物/伙伴/推荐与撤销按源状态模块；稳定stackKey与草稿跨返回保留；view-updates局部更新。",
+      "difference": "Unity左右都是卡名stepper纵列，Open重置_pick和预选人物；普通ConfirmDeploy用null人物启动局后再选人；未接当前卡面网格与拖放结构。",
+      "oldUnityNotReusable": "旧文本stepper视图、Open无条件清空草稿、整备先于选人的生命周期不能复用。",
+      "observableCompletion": "人物→整备→返回再进保留草稿；推荐/撤销、筛选、剩余张数、背包容量、伙伴与固定牌、拖回移除、确认锁和失败保留均沿原模块职责迁入。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "08-bag",
+      "name": "背包主界面",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.bag.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/game.bag.js",
+          "sha256": "b0203137bf7ca624fdae510e5f0f7f2ce79c4f258ece9f86487e00f6b22e0851",
+          "bytes": 26301,
+          "lines": 424
+        },
+        {
+          "path": "搜打撤/game/src/hub/game.bag.view2.js",
+          "sha256": "2fa98640901ff50f1d3d0c104cab6dd6f122a5e7bd03ada2b2ce8c1fa0fbb9e3",
+          "bytes": 11495,
+          "lines": 144
+        },
+        {
+          "path": "搜打撤/game/src/hub/game.bag.rules.js",
+          "sha256": "631f5316a1d25f04a844d44525e6d65e13f123ed73bd6e421580005ec9414f80",
+          "bytes": 19139,
+          "lines": 309
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/expedition-inventory.css",
+          "sha256": "7136bc5273a8e8601285403ba226c576526d804dd1db6b53e01cc68171fec3f6",
+          "bytes": 18807,
+          "lines": 255
+        },
+        {
+          "path": "搜打撤/game/css/page-rewards-bag-help.css",
+          "sha256": "82d3871b5ffce7983b7324f2791d5c64d7645e2b9926eeb6baa412be845502e1",
+          "bytes": 19706,
+          "lines": 352
+        },
+        {
+          "path": "搜打撤/game/css/bag-design-system.css",
+          "sha256": "f334253767c5ede35db6d9b7b240a4885cc40961a3488f02c8c6da0228e01161",
+          "bytes": 8372,
+          "lines": 73
+        },
+        {
+          "path": "搜打撤/game/css/feedback-1018.css",
+          "sha256": "f7044bbef00d20a200a5f29210db05d42e7349944d7f557aeb20b9730f249149",
+          "bytes": 1575,
+          "lines": 26
+        },
+        {
+          "path": "搜打撤/game/css/ui-design-system.css",
+          "sha256": "604ae07fae7b760abec43a63a6efb3054add47b9e2821ec711d391ea13a9eb0d",
+          "bytes": 5709,
+          "lines": 60
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Bag/BagScreen.cs",
+          "sha256": "291217c144b9d7ce26b6226496f4cb91ad6621506d0105fb9a0b341571d76664",
+          "bytes": 26841,
+          "lines": 535
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Bag/BagCardDetail.cs",
+          "sha256": "27a2517eb5c7cabcfd7f8679557d0df132bfe94ceecc87495cd2d7a4d9357e03",
+          "bytes": 7625,
+          "lines": 131
+        }
+      ],
+      "marker": ".bag-v2.ui-design-system.bag-art-v3",
+      "sourceContract": "view2为纯渲染，壳持动作；地图氛围背景+bag-shell；左竖轨关闭/背包/安全格/消耗区，右单区容量/张数/筛选/排序/整理与真实卡面；点击inventory-zoom操作台，卡堆有稳定UID。",
+      "difference": "Unity旧bag-view顶4chips，同屏背包格+安全格+右消耗口袋，且flip3d双击翻背，不是当前单区切换结构。",
+      "oldUnityNotReusable": "Build的bag-head/bag-layout树和flip3d主交互不能作为当前view2；容量与UID命令是否复用另核。",
+      "observableCompletion": "背包单区切换、卡牌张数与占格分别显示、资源卡面、筛选空态/显示全部、排序禁用/整理、点击特写、关闭B/Esc均与源对应。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "09-safe-pocket",
+      "name": "安全格/消耗区",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.bag.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.bag.js",
+          "to": "搜打撤/game/src/hub/game.bag.view2.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/game.bag.view2.js",
+          "sha256": "2fa98640901ff50f1d3d0c104cab6dd6f122a5e7bd03ada2b2ce8c1fa0fbb9e3",
+          "bytes": 11495,
+          "lines": 144
+        },
+        {
+          "path": "搜打撤/game/src/hub/game.bag.js",
+          "sha256": "b0203137bf7ca624fdae510e5f0f7f2ce79c4f258ece9f86487e00f6b22e0851",
+          "bytes": 26301,
+          "lines": 424
+        },
+        {
+          "path": "搜打撤/game/src/hub/game.bag.rules.js",
+          "sha256": "631f5316a1d25f04a844d44525e6d65e13f123ed73bd6e421580005ec9414f80",
+          "bytes": 19139,
+          "lines": 309
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/bag-design-system.css",
+          "sha256": "f334253767c5ede35db6d9b7b240a4885cc40961a3488f02c8c6da0228e01161",
+          "bytes": 8372,
+          "lines": 73
+        },
+        {
+          "path": "搜打撤/game/css/feedback-1018.css",
+          "sha256": "f7044bbef00d20a200a5f29210db05d42e7349944d7f557aeb20b9730f249149",
+          "bytes": 1575,
+          "lines": 26
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Bag/BagScreen.cs",
+          "sha256": "291217c144b9d7ce26b6226496f4cb91ad6621506d0105fb9a0b341571d76664",
+          "bytes": 26841,
+          "lines": 535
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Bag/BagCardDetail.cs",
+          "sha256": "27a2517eb5c7cabcfd7f8679557d0df132bfe94ceecc87495cd2d7a4d9357e03",
+          "bytes": 7625,
+          "lines": 131
+        }
+      ],
+      "marker": ".bag-grid[data-zone=\"safe|pocket\"]",
+      "sourceContract": "与背包同壳单区；safe占格/卡牌数与押运状态，pocket张数/不限容量与已消耗卡面；按道具/装备或招式给火堆不可复原/可复原状态。",
+      "difference": "Unity安全格为主列第二个网格；消耗口袋是右列文字清单；不具源竖轨、标题容量和消耗卡面层级。",
+      "oldUnityNotReusable": "右口袋文字列表和始终显示双网格的几何不可复用。",
+      "observableCompletion": "相同UID堆进入safe/pocket后，单区标题、数量、押运/复原状态、允许动作和返回背包状态与源一致；模型存取另以真实输入核验。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "10-containers",
+      "name": "锦囊/珍珠盒",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.bag.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.bag.js",
+          "to": "搜打撤/game/src/hub/bag-container-pages.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/hub/bag-container-pages.js",
+          "to": "搜打撤/game/src/hub/game.container-store.view.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/game.container-store.view.js",
+          "sha256": "caea9ade67f7b8b20496296d02377f1422b5d0d57310c6aa0d73e4715587e9e9",
+          "bytes": 5234,
+          "lines": 64
+        },
+        {
+          "path": "搜打撤/game/src/hub/game.bag.js",
+          "sha256": "b0203137bf7ca624fdae510e5f0f7f2ce79c4f258ece9f86487e00f6b22e0851",
+          "bytes": 26301,
+          "lines": 424
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/container-store.css",
+          "sha256": "3318d1e8f4de888925de17c47f5f8882d54c42299c5a4c486f3022050dbbf0a4",
+          "bytes": 5102,
+          "lines": 46
+        },
+        {
+          "path": "搜打撤/game/css/collection-workspace.css",
+          "sha256": "fb0d6e01f7e6d6e63a685a4cfe71326d3b26e7a41a76099bafd1ec5bb1452592",
+          "bytes": 11406,
+          "lines": 111
+        },
+        {
+          "path": "搜打撤/game/css/battle-decision.css",
+          "sha256": "6a91d4666c61af517ac651d77fa12902d65d88c3a8658bf0bd260bb04dc0eb44",
+          "bytes": 9238,
+          "lines": 118
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Bag/ContainerScreen.cs",
+          "sha256": "701ab7a590b763d95279496158f26eedb81feb62a6f9ff1c1afbd342b6ed5229",
+          "bytes": 2277,
+          "lines": 48
+        }
+      ],
+      "marker": ".container-store.collection-workspace",
+      "sourceContract": "共用纯containerStoreHTML；双栏已存入/随身背包真卡面，整叠存取按钮与查看详情分离；容量条、逐堆阻塞原因、折叠收纳说明；重绘保留focus/scroll/helpOpen。",
+      "difference": "Unity单纵向滚动中的文字存/取按钮，缺卡面双栏、独立查看详情、阻塞原因展示和视图状态保留结构。",
+      "oldUnityNotReusable": "ContainerScreen.Build单列文字按钮树不可复用；TryTransferStack命令仍需对原规则复核。",
+      "observableCompletion": "空/满/容量不足/禁止类型/同名多堆下卡面与禁用原因一致，查看详情不触发转移，整叠操作后滚动/焦点/帮助展开按源保留。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "11-settings",
+      "name": "设置",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/run/game.session.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.session.js",
+          "to": "搜打撤/game/src/ui/game.menu.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/ui/game.menu.js",
+          "to": "搜打撤/game/src/ui/game.menu.pages.js",
+          "kind": "dynamic"
+        },
+        {
+          "from": "搜打撤/game/src/ui/game.menu.pages.js",
+          "to": "搜打撤/game/src/ui/menu-settings.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/ui/menu-settings.js",
+          "sha256": "d8d1c0a70def84c61e7f46bfb18ec3a81adaa479238558febe84001a31212408",
+          "bytes": 15447,
+          "lines": 237
+        },
+        {
+          "path": "搜打撤/game/src/ui/settings-navigation.js",
+          "sha256": "53382bc468f9f40e41994a77fa9f331578cafaf75b9ffaf92523ca1195e454ea",
+          "bytes": 4737,
+          "lines": 88
+        },
+        {
+          "path": "搜打撤/game/src/ui/settings-input.js",
+          "sha256": "d00ee46ed1ce0c757f221ca9d99948f33588dbe7cb57f9f0858a748ca226839c",
+          "bytes": 4372,
+          "lines": 58
+        },
+        {
+          "path": "搜打撤/game/src/ui/settings-audio.js",
+          "sha256": "3541c1f986d78ca8ee4f5ade1e5a0825083bed64915b6c572245a05221667322",
+          "bytes": 3216,
+          "lines": 56
+        },
+        {
+          "path": "搜打撤/game/src/ui/settings-battle-restart.js",
+          "sha256": "7881e729164224548b332429c70472b09ab9a896afe8277513b3d4b01731f514",
+          "bytes": 3301,
+          "lines": 62
+        },
+        {
+          "path": "搜打撤/game/src/ui/performance-settings.js",
+          "sha256": "fc9afd76c425bc7de38c77b6db821f9d50ee3e9e5c6b8251bd3e8ddc91c21a69",
+          "bytes": 3038,
+          "lines": 40
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/page-settings.css",
+          "sha256": "0f8c66f50c22ecd832d8ff4071556e1a260adbc939f937d417245499962bc9fe",
+          "bytes": 4772,
+          "lines": 63
+        },
+        {
+          "path": "搜打撤/game/css/settings-navigation.css",
+          "sha256": "0b2545d10d3792fb18db38d296e8d127c3756b1c8a033845e06ed6c695db6601",
+          "bytes": 11590,
+          "lines": 228
+        },
+        {
+          "path": "搜打撤/game/css/settings-audio.css",
+          "sha256": "57c2c3a75bb4c1ae1aeac8714985359d533672501acca874fe3685a2b2066129",
+          "bytes": 212,
+          "lines": 5
+        },
+        {
+          "path": "搜打撤/game/css/performance-settings.css",
+          "sha256": "ca1d7281689dab575ddeb825e4dca716577a37233964eed0e957b6d22ceb9c96",
+          "bytes": 2960,
+          "lines": 33
+        },
+        {
+          "path": "搜打撤/game/css/interface-components.css",
+          "sha256": "9744ef4d51feea14168b95291f377a06087d2f034619fd78a5ec7698c2dd8665",
+          "bytes": 4940,
+          "lines": 76
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/MenuDialogs.cs",
+          "sha256": "fc4248705a410459be48962a7300ba133ca71127ed9690abd5719625a1482953",
+          "bytes": 32483,
+          "lines": 614
+        }
+      ],
+      "marker": ".settings-page.settings-tabbed / .settings-layout",
+      "sourceContract": "四类通用/画面与反馈/音频/输入；左260px导航，右单panel；通用折叠数据与档案/危险操作/来源；音频实时值与失败恢复；性能、震动、减少动态、大字、结束长按、输入绑定与战斗重启条件入口。",
+      "difference": "Unity SettingsScreen通用+音频+危险区平铺单列，只有4通用开关/两音频开关滑杆和清空；缺当前分类与其余控件。",
+      "oldUnityNotReusable": "Build的单列分组、旧中英混排文案与危险区常显层级不可复用。",
+      "observableCompletion": "四分类显示、键盘切类、折叠恢复、所有当前源可用控件及条件显示、即时保存/失败恢复按原值迁入；桌面特定适配明确登记，不静默省略。",
+      "confirmedScope": "已证实当前Unity设置屏未挂载画面/输入/大字/结束长按等源控件；对应引擎功能是否已在其他处实现未验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "12-photo",
+      "name": "照相馆",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.cardslib.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/game.cardslib.js",
+          "sha256": "ad502d05463b9871ca0c4e4b772953f87afe3ad8fa2d4b9b2cf73cd5831575dd",
+          "bytes": 7195,
+          "lines": 187
+        },
+        {
+          "path": "搜打撤/game/src/hub/game.cardslib.page.js",
+          "sha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+          "bytes": 66566,
+          "lines": 1115
+        },
+        {
+          "path": "搜打撤/game/src/hub/photo-studio-presentation.js",
+          "sha256": "b93af0e7507faa7e70bc0b4b0c13f7b2acee17b9a37620a3135192a228e750a5",
+          "bytes": 770,
+          "lines": 19
+        },
+        {
+          "path": "搜打撤/game/src/hub/photo-studio-controls.js",
+          "sha256": "b2a582cad98fd758f0ad2601b30c8ac656eb29dd83618e6bfa84bcedf112619f",
+          "bytes": 7978,
+          "lines": 185
+        },
+        {
+          "path": "搜打撤/game/src/hub/photo-studio-navigation.js",
+          "sha256": "b1c23f153cb8f2097647e4e8c3c834c412806af735c479ec53a780a3ab94254e",
+          "bytes": 6135,
+          "lines": 122
+        },
+        {
+          "path": "搜打撤/game/src/ui/collection-chrome.js",
+          "sha256": "6060bae086fb9302005142819a48c2276783e50847400efac0734d049737421d",
+          "bytes": 1041,
+          "lines": 12
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/expedition-library.css",
+          "sha256": "db8cac5f7f3a1656ac66a93bafbce6bb988b49dd91237c8db7ac61a89aba0ac8",
+          "bytes": 11113,
+          "lines": 225
+        },
+        {
+          "path": "搜打撤/game/css/collection-chrome.css",
+          "sha256": "c3a859b244ce82a774f1f5aa0ebf3ec9f475c223ba22d67c37d375a3cd0ba766",
+          "bytes": 3524,
+          "lines": 32
+        },
+        {
+          "path": "搜打撤/game/css/photo-studio-mounts.css",
+          "sha256": "9c036b4cca8cedc4b2f02724c5f6b396b146855afa580422c30af6ba8c7ff7fe",
+          "bytes": 6850,
+          "lines": 91
+        },
+        {
+          "path": "搜打撤/game/css/photo-studio-unified.css",
+          "sha256": "9920efa17a5360610ee393b22c7f1cd59cf0639029fe5ca99e5aeee03cdcee23",
+          "bytes": 59509,
+          "lines": 741
+        },
+        {
+          "path": "搜打撤/game/css/photo-studio-room-effects.css",
+          "sha256": "fa2b6b95bec7472ac5ad4eeb99737f305b82ca79c81427bb49949ccf7bf05630",
+          "bytes": 4681,
+          "lines": 81
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Misc/CardLibraryScreen.cs",
+          "sha256": "2db8ec3bd1cb0daa61fb9e25c0bc1b4193e4cb48ec0c1c699b551b243da38582",
+          "bytes": 16738,
+          "lines": 315
+        }
+      ],
+      "marker": ".photo-studio-v3.studio-unified.studio-archive",
+      "sourceContract": "正式page延迟入口；照片纸边/稀有度挂载道具/编号，分类/搜索/稀有度/人物/排序，选片台资料与前后/定位，window-mount网格；开发编辑模式单独开启。",
+      "difference": "Unity普通卡面6列网格+左卡预览和上下页，不具照片挂载/房间/选片台形态；筛选用循环按钮取代源控件；当前不能按旧CardLibrary DOM声明为照相馆等价。",
+      "oldUnityNotReusable": "CardLibraryScreen.Build、RebuildGrid的普通卡片呈现与固定分页不能复用为当前照片陈列。",
+      "observableCompletion": "沿源photo props/mounts/controls/navigation拆分复现照片纸型、原始插画比例、分类筛选、选片台定位和滚动/筛选返回；不以换插画代替照片系统。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "13-photo-detail",
+      "name": "照片详情/背签",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/ui/ui.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/ui/ui.js",
+          "to": "搜打撤/game/src/ui/card-zoom-controller.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/ui/card-zoom-controller.js",
+          "sha256": "f8a40e51978702a8f2b1cf395bafd1081208480460daab2252e28c45be72ee0b",
+          "bytes": 24263,
+          "lines": 422
+        },
+        {
+          "path": "搜打撤/game/src/ui/card-zoom-content.js",
+          "sha256": "12edab3f251422bc592d23d5246d39665a354593afe6e460bc66027dd5b20f31",
+          "bytes": 5703,
+          "lines": 83
+        },
+        {
+          "path": "搜打撤/game/src/ui/card-zoom-photo-source.js",
+          "sha256": "9ec9f518b740694a1a26a3a8db758ef4dc772b80cd8280ff8046efb9cfdfa0e4",
+          "bytes": 818,
+          "lines": 19
+        },
+        {
+          "path": "搜打撤/game/src/cards/card-photo-notes.js",
+          "sha256": "e5b584cc493c1beebc5918f6920c0434a8cd8711886c4cd4c1c8b22a71a2435d",
+          "bytes": 3288,
+          "lines": 82
+        },
+        {
+          "path": "搜打撤/game/src/hub/game.cardslib.page.js",
+          "sha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+          "bytes": 66566,
+          "lines": 1115
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/photo-studio-unified.css",
+          "sha256": "9920efa17a5360610ee393b22c7f1cd59cf0639029fe5ca99e5aeee03cdcee23",
+          "bytes": 59509,
+          "lines": 741
+        },
+        {
+          "path": "搜打撤/game/css/photo-studio-zoom-motion.css",
+          "sha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40",
+          "bytes": 1565,
+          "lines": 28
+        },
+        {
+          "path": "搜打撤/game/css/photo-studio-mounts.css",
+          "sha256": "9c036b4cca8cedc4b2f02724c5f6b396b146855afa580422c30af6ba8c7ff7fe",
+          "bytes": 6850,
+          "lines": 91
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs",
+          "sha256": "2d225f033431841e3731bb1cbca6fa0cc1b2fcd80630b7f9516d3e039a34e8b7",
+          "bytes": 4334,
+          "lines": 79
+        }
+      ],
+      "marker": "#cardZoom.cz-photo / .cz-photo-layout",
+      "sourceContract": "同一zoom控制器的photo分支：纸照片+右背签两栏1.7:.8、原画尺寸约束、来源照片到zoom动效、前后浏览/返回焦点、手写备注/底稿。",
+      "difference": "Unity纯深底Image+文字输入栏flex2:1、显式保存按钮和循环翻张；缺纸/背签/来源连续动效与源边界规则。",
+      "oldUnityNotReusable": "PhotoDetailScreen.Build纯图与输入框不能复用为当前photo zoom呈现；备注保存命令需保留源失败语义。",
+      "observableCompletion": "从当前照片打开/关闭回到同一片，原画无裁切；前后可用边界、备注自动/显式保存时机、失败保留和纸背签几何与源对应。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "14-achievements",
+      "name": "成就总览",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/run/game.session.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.session.js",
+          "to": "搜打撤/game/src/ui/game.menu.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/ui/game.menu.js",
+          "to": "搜打撤/game/src/ui/game.menu.pages.js",
+          "kind": "dynamic"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/ui/game.menu.pages.js",
+          "sha256": "ea2a392077690e3a094ce205717c6571cc2958ffc948487bdcb93d3f9fb5f596",
+          "bytes": 3514,
+          "lines": 111
+        },
+        {
+          "path": "搜打撤/game/src/ui/menu-guide.js",
+          "sha256": "a4ed310200c643713e1125bfbb339cf9d27299f7f238ae631243bc4b4a0dcd69",
+          "bytes": 6380,
+          "lines": 112
+        },
+        {
+          "path": "搜打撤/game/src/ui/achievement-gallery.js",
+          "sha256": "0f8ec59b656702abfcf903fd02eb3cfa6fa3fb5768073bdbb11cc64a9f08ea3d",
+          "bytes": 18002,
+          "lines": 224
+        },
+        {
+          "path": "搜打撤/game/src/ui/achievement-medals.js",
+          "sha256": "d47fee5b4c8400219108370bd26f915615bc4d216e51121f083874884bb5eb41",
+          "bytes": 2483,
+          "lines": 37
+        },
+        {
+          "path": "搜打撤/game/src/ui/achievement-motion.js",
+          "sha256": "2c5e23e8d9f3e76d6fb79532b1f1d4214212a4f18fcff92fab343e9689fff3e7",
+          "bytes": 7311,
+          "lines": 139
+        },
+        {
+          "path": "搜打撤/game/src/ui/collection-chrome.js",
+          "sha256": "6060bae086fb9302005142819a48c2276783e50847400efac0734d049737421d",
+          "bytes": 1041,
+          "lines": 12
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/page-ach.css",
+          "sha256": "4595797b29155407f0fd73b276dde266b0a0ab05c6d6f3f9491197ef08cf757c",
+          "bytes": 12993,
+          "lines": 233
+        },
+        {
+          "path": "搜打撤/game/css/title-achievements.css",
+          "sha256": "4cccbe4c131cfef23682ef4a4a85e698bc9b09a1957444506399e6435be8a3b8",
+          "bytes": 8498,
+          "lines": 83
+        },
+        {
+          "path": "搜打撤/game/css/collection-chrome.css",
+          "sha256": "c3a859b244ce82a774f1f5aa0ebf3ec9f475c223ba22d67c37d375a3cd0ba766",
+          "bytes": 3524,
+          "lines": 32
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/MenuDialogs.cs",
+          "sha256": "fc4248705a410459be48962a7300ba133ca71127ed9690abd5719625a1482953",
+          "bytes": 32483,
+          "lines": 614
+        }
+      ],
+      "marker": ".achievement-gallery",
+      "sourceContract": "浅灰绿#e5e7e2陈列室；分类奖章+统计/进度，搜索和获得状态筛选，列表/网格切换，右320～420详情，奖章图形、获得方式与奖励、前后/收起、展柜灯光。",
+      "difference": "Unity AchievementsScreen深色普通overlay列表，一行图标/名称描述/领取状态，缺分类搜索、图形奖章、右详情与视图切换。",
+      "oldUnityNotReusable": "AchievementsScreen.Build普通列表结构不能作为当前gallery。",
+      "observableCompletion": "无档/锁定/解锁/待领/已领均可过滤；分类与列表网格、右详情前后/收起及奖章样式按源可观察；总览保持只读，奖励回基地领取。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "15-trade",
+      "name": "交易所",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.hub.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.js",
+          "to": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "kind": "dynamic"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "sha256": "7b86625bfb0c1c04734e139263222600535ae5af1417850761958d59a15f7dab",
+          "bytes": 30923,
+          "lines": 479
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.trade-shop-v5.js",
+          "sha256": "1819d85e12cf1bf30b3e70a20205a3eaf13aa8cf4aa41a86f8ce2453e2352e93",
+          "bytes": 18317,
+          "lines": 234
+        },
+        {
+          "path": "搜打撤/game/src/hub/stash-sale-price.js",
+          "sha256": "2ba63a9a490bdef064804821fc307c120eb294c8208edb6b651b018b3ce0f1fa",
+          "bytes": 386,
+          "lines": 8
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/base-logistics-trade-v12.css",
+          "sha256": "962d79109e0d67519cbbe4bb5e0d9c6299e36fe85b8ae01090827d804947ffda",
+          "bytes": 10992,
+          "lines": 100
+        },
+        {
+          "path": "搜打撤/game/css/base-framework-v7.css",
+          "sha256": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953",
+          "bytes": 7301,
+          "lines": 72
+        },
+        {
+          "path": "搜打撤/game/css/base-glass-tokens.css",
+          "sha256": "789fcd0ddfcd48f6724b8f54e25841a1ca6e4f4c3e214a6aa265e4b88dac7eff",
+          "bytes": 678,
+          "lines": 11
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+          "sha256": "a7216120de3a7dd73261e261cff147382eb3b74da167ba62fd8258d8639ef62c",
+          "bytes": 5509,
+          "lines": 95
+        }
+      ],
+      "marker": ".trade-v5.trade-v12",
+      "sourceContract": "左购入/出售/后勤入口，中商品分类（全部/基地补给/战斗卡牌）与货架，右交易台卡面/描述/持有/账面/单张与整堆动作；稳定goodKey/sellKey，保护/缺币/仓满原因。",
+      "difference": "Unity BuildTrade购入逐行后接出售逐行，无模式、分类、选中交易台、整堆出售与账面信息层级。",
+      "oldUnityNotReusable": "BuildTrade纵向清单不可复用；TryPurchase/Sell命令仅为候选能力。",
+      "observableCompletion": "买卖模式/分类切换保留选中，交易台账面与按钮条件/禁用理由、单张/整堆和保护状态按源展示，交易后视图状态保持。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "16-archive",
+      "name": "收藏室/卡背/故事",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.hub.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.js",
+          "to": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "kind": "dynamic"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "to": "搜打撤/game/src/hub/hub.archive-v3.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/hub.archive-v3.js",
+          "sha256": "6167efee959b1a4058e2a894ad13f9d1a2e89feee6c621034fcbc81884fa7615",
+          "bytes": 23407,
+          "lines": 255
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.collection-v4.js",
+          "sha256": "7bf4f3bed10d6393271eecf08157374dd8d8a470346623056edfdd98044d60f0",
+          "bytes": 6636,
+          "lines": 90
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.archive.js",
+          "sha256": "804424faeb1496d178662d204b18dfdcc7fd9cce606ce29609d0114ec90e1497",
+          "bytes": 7696,
+          "lines": 79
+        },
+        {
+          "path": "搜打撤/game/src/hub/game.hub.pages.js",
+          "sha256": "5bab544672307d067bbbad598c25fc6e53457f9a89bd80b53b6d3dcc84a7666f",
+          "bytes": 27607,
+          "lines": 420
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/base-archive-v3.css",
+          "sha256": "0ccce69b4ca46d31397abcb4f6455632f773c52381f47bb959adf48bb6a4e3db",
+          "bytes": 9642,
+          "lines": 99
+        },
+        {
+          "path": "搜打撤/game/css/base-collection-v4.css",
+          "sha256": "b4fbc5c58baad1b5c1b5922da4b468b121fdf039fd28fd31b147826b1ecc7855",
+          "bytes": 4547,
+          "lines": 37
+        },
+        {
+          "path": "搜打撤/game/css/base-archive-facilities-v12.css",
+          "sha256": "16dd8568baef9c60d14f6a6d4cc96f3fb2351cdbf4f9334068fa04d22cadad9d",
+          "bytes": 16547,
+          "lines": 251
+        },
+        {
+          "path": "搜打撤/game/css/base-framework-v7.css",
+          "sha256": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953",
+          "bytes": 7301,
+          "lines": 72
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+          "sha256": "a7216120de3a7dd73261e261cff147382eb3b74da167ba62fd8258d8639ef62c",
+          "bytes": 5509,
+          "lines": 95
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+          "sha256": "5ebfcf53cdb3e4351535ebda8d2bff63d4851c5a0e63a216cb7dcd57da7564e0",
+          "bytes": 49677,
+          "lines": 834
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/CardBackPickerScreen.cs",
+          "sha256": "55330545334948120ffa548891138df6f50410b85f79a62cbc8f57f866941b29",
+          "bytes": 2408,
+          "lines": 46
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/StoryArchiveScreen.cs",
+          "sha256": "d514e60a88b7796642f31a6105a34d0b92fc5385bf6f6d7c681ff8e6b8719b32",
+          "bytes": 2435,
+          "lines": 51
+        }
+      ],
+      "marker": ".archive-v12 / .av3-*",
+      "sourceContract": "同一收藏室ach路由六section：已收藏/奖励/成就目标/收藏里程碑/卡背/故事；各section保留选中和详情；与人物培养/后勤动作分工明确。",
+      "difference": "Unity ach与collection是两个顶层旧页签；BuildCollectionRoom混合里程碑奖励、保护与经验转化；卡背/故事为独立旧屏入口。",
+      "oldUnityNotReusable": "两个顶层页签和混排BuildCollectionRoom不能复用为archive-v3；原样迁移须按SECTIONS路由及当前持久化分工。",
+      "observableCompletion": "六section和返回路径/选中/奖励提醒等与源对应；永久收藏画廊的fresh scope缺陷由主会处理，本审查不重复定性或扩挖。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "17-courtyard",
+      "name": "庭院",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/hub/game.hub.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.js",
+          "to": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "kind": "dynamic"
+        },
+        {
+          "from": "搜打撤/game/src/hub/game.hub.runtime.js",
+          "to": "搜打撤/game/src/hub/hub.courtyard-v3.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/hub/hub.courtyard-v3.js",
+          "sha256": "ad2f0c2bcd96e17e9eb59d084cbe30d41acdf55c55ab5de2b99ef1c73d6de356",
+          "bytes": 5521,
+          "lines": 99
+        },
+        {
+          "path": "搜打撤/game/src/hub/hub.courtyard-runtime.js",
+          "sha256": "f1f4241af29039847c46a298f5fe97ac1a3335737a6d9fd0f2522ecdb8cfda25",
+          "bytes": 14743,
+          "lines": 283
+        },
+        {
+          "path": "搜打撤/game/src/hub/courtyard.rain-tableau.js",
+          "sha256": "9cc5c83974f285aedee0cd766d8e98e3c90cdb5a19bb62095ff9a77b7485d251",
+          "bytes": 11772,
+          "lines": 216
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/base-courtyard-v3.css",
+          "sha256": "977142ab7ea86d39897fcd03b624d9506f246185c0c8da64020b9cd3a10be007",
+          "bytes": 4365,
+          "lines": 36
+        },
+        {
+          "path": "搜打撤/game/css/base-framework-v7.css",
+          "sha256": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953",
+          "bytes": 7301,
+          "lines": 72
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/CourtyardScreen.cs",
+          "sha256": "f2b65629aad77e5415936981520dba0879a900bb015b6442c84846c53b79307a",
+          "bytes": 6211,
+          "lines": 82
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/KoiPondGraphic.cs",
+          "sha256": "a4af26325321d948e27f600ba3745692de9653b2c56865f8bb923bfb3dc13b46",
+          "bytes": 8937,
+          "lines": 121
+        }
+      ],
+      "marker": ".courtyard-v3.courtyard-zzz",
+      "sourceContract": "保持基地同一壳；场景由backdrop/锦鲤/雨三个canvas层；底部玻璃控制条仅提示/进度/雨/投喂，环境设置details上浮：雨势/声/暂停/配色；偏好/延迟加载/失败恢复与dispose。",
+      "difference": "Unity独立全屏CourtyardScreen自带标题返回，底部所有控制平铺一行；图层只有背景Image与KoiPondGraphic，未对应源三层职责。",
+      "oldUnityNotReusable": "独立壳与全部按钮常显不可复用。锦鲤模型可候选复用但需按当前canvas runtime重审渲染/输入/雨。",
+      "observableCompletion": "庭院在基地七页壳内，三图层和环境设置收展一致；投喂/发现/偏好与雨关闭禁用、暂停恢复/离开销毁可观察。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "18-events",
+      "name": "事件/入城/火堆/拾取共用插画房间",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/run/game.run.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.run.js",
+          "to": "搜打撤/game/src/run/game.run.scenes.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.run.scenes.js",
+          "to": "搜打撤/game/src/ui/node-scene-view.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/ui/node-scene-view.js",
+          "sha256": "e22d43081d8eaa5eb77b6ccf0f644ce6319e8fdbb0cf512435e377417928760b",
+          "bytes": 4892,
+          "lines": 56
+        },
+        {
+          "path": "搜打撤/game/src/ui/illustrated-node.js",
+          "sha256": "ad43826915539ab343fc388d731ce5b044294991b8ceb3f7519470d5d8b12aa8",
+          "bytes": 4524,
+          "lines": 66
+        },
+        {
+          "path": "搜打撤/game/src/ui/event-choice-selection.js",
+          "sha256": "04540bcae00a6e50f72e64786f1c74ca5c2fc1900ccc6e45de91887182de7a88",
+          "bytes": 5571,
+          "lines": 122
+        },
+        {
+          "path": "搜打撤/game/src/ui/event-option-state.js",
+          "sha256": "1c9ec4488a0f55c631a5adf726ef4b0fe2a6dea88b6613a4cdaa00c5e1a9a506",
+          "bytes": 2683,
+          "lines": 42
+        },
+        {
+          "path": "搜打撤/game/src/run/game.run.scenes.js",
+          "sha256": "759b53a8fafbf889ce19a4a8b7a8626492d08c92d1f340a7377495ddb26ea3f0",
+          "bytes": 48668,
+          "lines": 811
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/page-events.css",
+          "sha256": "d2bc908ffc892afbca477c203f18801ed159cc12ec651702746da39bf34d1852",
+          "bytes": 11498,
+          "lines": 222
+        },
+        {
+          "path": "搜打撤/game/css/entry-events.css",
+          "sha256": "c43428a01099475ee93933a72e4ab45d95e2fda2535598d8a8bc774516f4e965",
+          "bytes": 17548,
+          "lines": 168
+        },
+        {
+          "path": "搜打撤/game/css/illustrated-node.css",
+          "sha256": "7b2dbdf3839960ac91f206297b6908faf413437f47894a7322f50b0e11e51530",
+          "bytes": 10166,
+          "lines": 151
+        },
+        {
+          "path": "搜打撤/game/css/event-option-state.css",
+          "sha256": "bf062379e7b71bd3d816570a0aaae14949b6c8b31d2502ce00e1da98def19d0d",
+          "bytes": 338,
+          "lines": 9
+        },
+        {
+          "path": "搜打撤/game/src/ui/run-top-bar.css",
+          "sha256": "11449375450eb0d2a61acf1cdfa16b20357ecf226cbd7a861f99b8ba3f127373",
+          "bytes": 9699,
+          "lines": 130
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/RunUi.cs",
+          "sha256": "ae948c9074dbb7c2ae863a6af2eda31b5cd2af230562f7a7e58cd04861b44a78",
+          "bytes": 13593,
+          "lines": 260
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/EventDialogScreen.cs",
+          "sha256": "27e9385224ee00676c2526328a52c436e49b1667bd7f18e39318b73f7bd4c084",
+          "bytes": 5305,
+          "lines": 113
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/EventDialogChoices.cs",
+          "sha256": "6f35725191bd4e52cc7197c0e72a272ea72fd7919325b22baf75de8d837068ec",
+          "bytes": 7752,
+          "lines": 148
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/EntrySupplyScreen.cs",
+          "sha256": "97dad6d8af5f4d3447b440e5e659fb03e1185e9d16c35961af57ffd80442d647",
+          "bytes": 2519,
+          "lines": 55
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/FireRestScreen.cs",
+          "sha256": "e1d300c8a19dbae6f9d547bd19bc2c7b97eaa69339286badea75022eaa2baddd",
+          "bytes": 2979,
+          "lines": 73
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/PickupScreen.cs",
+          "sha256": "b366cd5dab4830fc70a805d4ea802ade629730edd7a07fb3ddb0e5815a4a64b0",
+          "bytes": 3006,
+          "lines": 78
+        }
+      ],
+      "marker": ".event-themed.illustrated-node",
+      "sourceContract": "eventSceneHTML统一故事/决策双区；illustratedNodeLayout和选项ghost；真实共用topbar。多选事件先选中→底部显示选项/详情→取消或确认；单项叙述去重；各原业务caller持guards/reward/storage。",
+      "difference": "Unity NodeShellPanel仍右55%～97%单玻璃框，所有故事/按钮纵列；EventOptButton直接执行；未对应当前共用故事/决策布局与选择确认态。",
+      "oldUnityNotReusable": "NodeShellPanel.Build旧右玻璃框和直接点击执行式选项呈现不可复用；事件效果命令保留候选。",
+      "observableCompletion": "四类房间按原tone走同一插画壳；同一窗口可观察故事/选项/ghost、选择后确认/取消、禁用理由和共享资源HUD；重复事件fresh scope由主会单独处理。",
+      "confirmedScope": "仅证实当前共用呈现与选择流程差异；具体事件效果和重复领取不在本项复验。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "19-rewards",
+      "name": "奖励/宝箱/战后领取",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/run/chests.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/run/chests.js",
+          "sha256": "fd42e9bde3b8cb28e913687c77e6aa462cae57dcee24309a637523e76cdf732e",
+          "bytes": 48636,
+          "lines": 853
+        },
+        {
+          "path": "搜打撤/game/src/ui/reward-scene-view.js",
+          "sha256": "51ecb9a8bbedc8751ae64adc8e555326232a22e596085a359b2d8ca109eefca3",
+          "bytes": 10344,
+          "lines": 112
+        },
+        {
+          "path": "搜打撤/game/src/ui/reward-interaction.js",
+          "sha256": "143a5072221e80cfaf3cbd30f6259e714b34f48994c3ae88ff16e1d57e1e556a",
+          "bytes": 2086,
+          "lines": 38
+        },
+        {
+          "path": "搜打撤/game/src/ui/chest-reward-overview.js",
+          "sha256": "ef62cef740d1a51023ffa1f1ed56edf1191576d3dc11d8567d9b8c423e32aba2",
+          "bytes": 8053,
+          "lines": 108
+        },
+        {
+          "path": "搜打撤/game/src/ui/reward-card-feedback.js",
+          "sha256": "4809cc164e23209647ac6a55254250884a2aafb417b694c48af135cbd15df0b5",
+          "bytes": 2104,
+          "lines": 43
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/room-rewards.css",
+          "sha256": "9cb3c421c390044cc706cee5252aad2eb8b78842a0872621c9e1c6fb9eb7fe1b",
+          "bytes": 6465,
+          "lines": 54
+        },
+        {
+          "path": "搜打撤/game/css/room-footer.css",
+          "sha256": "74323c44d305021f3d243c838146975fb5ff272ba9bd1a33ef402ac3142042f0",
+          "bytes": 1326,
+          "lines": 16
+        },
+        {
+          "path": "搜打撤/game/css/chest-reward-overview.css",
+          "sha256": "f1e37047dfa0a89d638c0cbb24efa1a2dc9ce4270b1eafe6202f1eb0eee81f32",
+          "bytes": 4151,
+          "lines": 40
+        },
+        {
+          "path": "搜打撤/game/css/reward-completion-receipt.css",
+          "sha256": "0bfa74955b4e0c9d4d287a1458f77756b537a019a2694070b12725ef75296ca7",
+          "bytes": 663,
+          "lines": 9
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ChestOpenScreen.cs",
+          "sha256": "ff222540ec88eb329c9ef0e99c89a61940edd0156b357f26a96b27a66e79c357",
+          "bytes": 10647,
+          "lines": 212
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/PickupScreen.cs",
+          "sha256": "b366cd5dab4830fc70a805d4ea802ade629730edd7a07fb3ddb0e5815a4a64b0",
+          "bytes": 3006,
+          "lines": 78
+        }
+      ],
+      "marker": ".reward-v14.room-reward / .cqo-frame",
+      "sourceContract": "rewardSceneHTML纯展示+调用者结算；真实卡面独立查看与claim，one/all模式和附赠分组；待领/已收/放弃状态、容量不足转整理、固定footer；patch保持卡面与滚动连接；宝箱总览/逐箱切换。",
+      "difference": "Unity ChestOpenScreen以CardFace+普通领取按钮和尾部全部/整理/返回为主，缺当前reward-unit模式层级与原完成回执呈现；共享rewardScene层未建立。",
+      "oldUnityNotReusable": "旧宝箱独立按钮布局和pickup旧NodeShell不能代表reward-v14；纯展示和结算命令需按源分离。",
+      "observableCompletion": "互斥选择/全取/独立附赠、查看返回、满包整理回归、已收与放弃卡面状态、总览和完成回执逐态对应，操作后不重置阅读位置。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "20-extraction",
+      "name": "撤离整理",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/run/game.run.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.run.js",
+          "to": "搜打撤/game/src/run/game.run.altar.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.run.altar.js",
+          "to": "搜打撤/game/src/ui/extraction-rewards-view.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/ui/extraction-rewards-view.js",
+          "sha256": "10b9fcf20e77653e506895bbb49031fed31dd4c42e823db096adc6a9bf1ab0cf",
+          "bytes": 13880,
+          "lines": 128
+        },
+        {
+          "path": "搜打撤/game/src/hub/extraction.commands.js",
+          "sha256": "225e3a8c47883b58d729edc04a4e1bf2ff44edc45dedde1f064d29f02c3d5a96",
+          "bytes": 31610,
+          "lines": 511
+        },
+        {
+          "path": "搜打撤/game/src/ui/extraction-stash-update.js",
+          "sha256": "217f91b8a7ae724fd8008e825c472e88d8c5962c629f0f5eb52fcbfb0894edd1",
+          "bytes": 1908,
+          "lines": 38
+        },
+        {
+          "path": "搜打撤/game/src/ui/run-memento-view.js",
+          "sha256": "08fa5be93d95f0443a04f7a23103f5ee7f4994207302d7c9b5004a8a9e680706",
+          "bytes": 1228,
+          "lines": 16
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/extraction-rewards.css",
+          "sha256": "c9894114a4f55a1594905445e65543d39c352902ec45bdfd67b76ebc88449299",
+          "bytes": 15698,
+          "lines": 212
+        },
+        {
+          "path": "搜打撤/game/css/run-memento.css",
+          "sha256": "10fc0784cfdd4b4ba11c9ffa3fd5a2c6842fe99e282302b08c98753373758dc2",
+          "bytes": 977,
+          "lines": 12
+        },
+        {
+          "path": "搜打撤/game/css/interface-components.css",
+          "sha256": "9744ef4d51feea14168b95291f377a06087d2f034619fd78a5ec7698c2dd8665",
+          "bytes": 4940,
+          "lines": 76
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ExtractScreens.cs",
+          "sha256": "d0de5144724a9bb25f4e8c60651f448a460eb2197a5186a06e9d80d870da9421",
+          "bytes": 16283,
+          "lines": 291
+        }
+      ],
+      "marker": "#exMain / .exr-*",
+      "sourceContract": "真实卡面按稀有度显示，原index保留；待入库/已入库、容量/材料、待复原/散失分项、智能入库、剩余与完成确认、失败待重试的pendingDeposit，人物成长与本局纪念。",
+      "difference": "Unity ExtractStashScreen旧两栏文本行+入库按钮/自动入库四行，无当前卡面/待存已存分区和原源详细回执结构。",
+      "oldUnityNotReusable": "ExtractStashScreen.Build与旧纯文本两栏不可复用。实际结算/保存逻辑由主会功能审查单列。",
+      "observableCompletion": "逐张/整堆容量、智能入库顺序、部分可放数量、待存重试、完成确认、材料与口袋说明按源原输出对应；清理不改变待入库命令索引。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "21-settlement",
+      "name": "撤离完成/失败/放弃结算",
+      "priority": "P1",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/run/game.session.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.session.js",
+          "to": "搜打撤/game/src/run/game.session.death.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/run/game.session.death.js",
+          "to": "搜打撤/game/src/ui/settlement-report.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/ui/settlement-report.js",
+          "sha256": "4eba53111674e4b46ff72f1d8347ea1a3b443c7ed027dc182bc96d5846dbcd26",
+          "bytes": 3329,
+          "lines": 61
+        },
+        {
+          "path": "搜打撤/game/src/ui/extraction-rewards-view.js",
+          "sha256": "10b9fcf20e77653e506895bbb49031fed31dd4c42e823db096adc6a9bf1ab0cf",
+          "bytes": 13880,
+          "lines": 128
+        },
+        {
+          "path": "搜打撤/game/src/run/game.session.death.js",
+          "sha256": "58250eacf239bb56cc17c8528ccc1522533a60ea44d61c000d796590f26d703c",
+          "bytes": 17823,
+          "lines": 262
+        },
+        {
+          "path": "搜打撤/game/src/ui/menu-leave.js",
+          "sha256": "990177a9afaa2f4c2571a13f41e4084a494fac109e64dd6c134e6cc2e6842de6",
+          "bytes": 15330,
+          "lines": 259
+        },
+        {
+          "path": "搜打撤/game/src/ui/run-memento-view.js",
+          "sha256": "08fa5be93d95f0443a04f7a23103f5ee7f4994207302d7c9b5004a8a9e680706",
+          "bytes": 1228,
+          "lines": 16
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/settlement-report.css",
+          "sha256": "0c47e22e8717db5d94fb452d720101569f2ba9dd64ace663d97552d11727d27b",
+          "bytes": 2667,
+          "lines": 34
+        },
+        {
+          "path": "搜打撤/game/css/extraction-rewards.css",
+          "sha256": "c9894114a4f55a1594905445e65543d39c352902ec45bdfd67b76ebc88449299",
+          "bytes": 15698,
+          "lines": 212
+        },
+        {
+          "path": "搜打撤/game/css/run-memento.css",
+          "sha256": "10fc0784cfdd4b4ba11c9ffa3fd5a2c6842fe99e282302b08c98753373758dc2",
+          "bytes": 977,
+          "lines": 12
+        },
+        {
+          "path": "搜打撤/game/css/ui-design-system.css",
+          "sha256": "604ae07fae7b760abec43a63a6efb3054add47b9e2821ec711d391ea13a9eb0d",
+          "bytes": 5709,
+          "lines": 60
+        },
+        {
+          "path": "搜打撤/game/css/interface-components.css",
+          "sha256": "9744ef4d51feea14168b95291f377a06087d2f034619fd78a5ec7698c2dd8665",
+          "bytes": 4940,
+          "lines": 76
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ExtractScreens.cs",
+          "sha256": "d0de5144724a9bb25f4e8c60651f448a460eb2197a5186a06e9d80d870da9421",
+          "bytes": 16283,
+          "lines": 291
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/MenuDialogs.cs",
+          "sha256": "fc4248705a410459be48962a7300ba133ca71127ed9690abd5719625a1482953",
+          "bytes": 32483,
+          "lines": 614
+        }
+      ],
+      "marker": ".settlement-report / #exDone / [data-leave-step=\"complete\"]",
+      "sourceContract": "统一报告壳heading/content/actions，max1000px、固定动作与中部滚动；facts/说明折叠/成长/纪念；bindSettlementActions统一busy/失败提示/重试且调用者持持久化。",
+      "difference": "Unity ExtractDone仍NodeShell、Death旧overlay文本，与当前统一报告组件职责和信息分区不同。",
+      "oldUnityNotReusable": "旧ExtractDone/Death呈现树与普通返回按钮分散守卫不能直接复用。",
+      "observableCompletion": "成功/死亡/放弃各自用当前caller输出的字段、保留/损失/成长/纪念、CTA顺序，跳转失败留报告并可重试，重复按键只执行一次。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "22-map-hud",
+      "name": "地图HUD",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/core/renderer.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/core/renderer.js",
+          "to": "搜打撤/game/src/run/expedition.view.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/run/expedition.view.js",
+          "sha256": "5b3f04a046c8e78dd626ddf1bab6faa40038978f4babd39cac20b18927573b3b",
+          "bytes": 17570,
+          "lines": 238
+        },
+        {
+          "path": "搜打撤/game/src/ui/run-top-bar.js",
+          "sha256": "03ecd9f1672f166b5d0914c82aa9383607a0177de30427f3447c32becc11092e",
+          "bytes": 12719,
+          "lines": 236
+        },
+        {
+          "path": "搜打撤/game/src/ui/hud.js",
+          "sha256": "9ddfca03add6723496c0057f3b2cfd9ff075587ffcf4475b58fe09742cb1008b",
+          "bytes": 9164,
+          "lines": 170
+        },
+        {
+          "path": "搜打撤/game/src/ui/map-health-hud.js",
+          "sha256": "e7516d707e2ae7a3d7bf6ee731002c4ae98c9151f3655ee1a0d744d4916c8955",
+          "bytes": 4288,
+          "lines": 92
+        },
+        {
+          "path": "搜打撤/game/src/core/renderer.js",
+          "sha256": "b5ae9222fb5afe5f27ce6a521795bdfcc651c60d0e389ea489a8cba2cf786fe6",
+          "bytes": 31652,
+          "lines": 586
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/page-expedition-hud.css",
+          "sha256": "a24477c92627915a99212e378b7b05ff87ea5c3df3b1f21eb795cb4c4b93248a",
+          "bytes": 19648,
+          "lines": 355
+        },
+        {
+          "path": "搜打撤/game/css/expedition-map.css",
+          "sha256": "77162927f0516938fd59278c4a51e3b4bd0d36f2f4033c75124345650600495e",
+          "bytes": 8220,
+          "lines": 140
+        },
+        {
+          "path": "搜打撤/game/css/map-floating-tools.css",
+          "sha256": "69049b91d7068a4dad7ce857a9c50eaa00c47f36dd8684b06785a761948c9816",
+          "bytes": 3345,
+          "lines": 64
+        },
+        {
+          "path": "搜打撤/game/css/map-node-status.css",
+          "sha256": "702b4b308c3f69b1c9cef190efa038c904cf44edbb02f1c36d07f050e9c2035e",
+          "bytes": 1092,
+          "lines": 39
+        },
+        {
+          "path": "搜打撤/game/src/ui/run-top-bar.css",
+          "sha256": "11449375450eb0d2a61acf1cdfa16b20357ecf226cbd7a861f99b8ba3f127373",
+          "bytes": 9699,
+          "lines": 130
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Kit/DesktopRunHud.cs",
+          "sha256": "12b3169c1237cc6dc9ffac6d98ebd0b8643b3dae43ca32b671ef32ea23483e07",
+          "bytes": 9833,
+          "lines": 182
+        }
+      ],
+      "marker": "#runTopBar / #sidebar[data-expedition-layout=\"map\"]",
+      "sourceContract": "实体共用104px透明顶栏：系统/头像生命/章节/金币攻击资源；底部88px悬浮无外框工具组，64px绘制图标、20/23px文案与容量细条；地图节点与目标由expedition.view输出。",
+      "difference": "Unity独立MapStatus深色整条文字+背包/保存/离开，底部MapRoutes深色整条路线按钮；没有原topbar共用节点/底部浮动工具群。",
+      "oldUnityNotReusable": "DesktopRunHud.Initialize/MakeBar的整条面板与汇总字符串不能复用；路由选择模型可候选保留。",
+      "observableCompletion": "地图/事件/战斗切换同一资源顶栏不重复，头像详情/生命/金币/攻击/离开/静音可用；底部工具图标与容量态、当前目标与节点交互按原职责/数值迁入。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "23-battle-hud",
+      "name": "战斗场景/HUD",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/battle/battle-loader.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/battle/battle-loader.js",
+          "sha256": "165eeddf61fe65b8fda4cb742f16fd44023051763c44b1166111a494ca920925",
+          "bytes": 4475,
+          "lines": 88
+        },
+        {
+          "path": "搜打撤/game/src/battle/view/battle.view.js",
+          "sha256": "eb0f9bc9035345eedc8daa4a96dc5cd4468709545eca33809461363ea13584dd",
+          "bytes": 59106,
+          "lines": 820
+        },
+        {
+          "path": "搜打撤/game/src/battle/view/battle.stage-view.js",
+          "sha256": "def5ad3701fd58b08d93b0273a3061188689e66a0b31b0ebcb976a8cdf3f0a07",
+          "bytes": 17391,
+          "lines": 268
+        },
+        {
+          "path": "搜打撤/game/src/battle/view/battle.layers.js",
+          "sha256": "747d2f12bf5841c7396a44846833060be0f451d8e3d04e7f6f2fc673719448da",
+          "bytes": 65791,
+          "lines": 1052
+        },
+        {
+          "path": "搜打撤/game/src/ui/run-top-bar.js",
+          "sha256": "03ecd9f1672f166b5d0914c82aa9383607a0177de30427f3447c32becc11092e",
+          "bytes": 12719,
+          "lines": 236
+        },
+        {
+          "path": "搜打撤/game/src/ui/battle-hud-info.js",
+          "sha256": "88a61273bed1d40d0842d6e620fca72d9aebd7f0fcfa3cf69baf954e002da8d8",
+          "bytes": 1559,
+          "lines": 23
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/battle-stage.css",
+          "sha256": "ccebad0f54d689eee5cfe525b4057bde003541160c15c1657b9e264c0d4562ce",
+          "bytes": 27801,
+          "lines": 247
+        },
+        {
+          "path": "搜打撤/game/css/battle-scene-polish.css",
+          "sha256": "26eb7f5d38a3924572d32db835555f55fb61d37eb01114976591b9b1f2a7bc4b",
+          "bytes": 1102,
+          "lines": 29
+        },
+        {
+          "path": "搜打撤/game/css/battle-hud-clarity.css",
+          "sha256": "e401617971dee18a44b29b21b12340d7c4b820de369f315cd95f769333fc48d6",
+          "bytes": 234,
+          "lines": 8
+        },
+        {
+          "path": "搜打撤/game/css/battle-equipment.css",
+          "sha256": "6be571461bba029ab1abce4a7f369f08c1581ac2e211a3acad2c91a3630c8ff2",
+          "bytes": 3266,
+          "lines": 142
+        },
+        {
+          "path": "搜打撤/game/css/battle-status-chips.css",
+          "sha256": "e65afb9a61b45a93ee7c7f7ab0186751c6587c867f20b291de119fae2cb8b904",
+          "bytes": 2932,
+          "lines": 47
+        },
+        {
+          "path": "搜打撤/game/src/ui/run-top-bar.css",
+          "sha256": "11449375450eb0d2a61acf1cdfa16b20357ecf226cbd7a861f99b8ba3f127373",
+          "bytes": 9699,
+          "lines": 130
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs",
+          "sha256": "6c2b9795d517c280c440665f65e2f68eb374bd16eb5e8fbb8bf567d1ba9e6ffa",
+          "bytes": 39476,
+          "lines": 709
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleWidgets.cs",
+          "sha256": "e1f3bd8f1d249640ffafa660fcaaaf741e47a1bf7ce92404f898a8889821c956",
+          "bytes": 17264,
+          "lines": 311
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs",
+          "sha256": "1caf4994c5847f7edb5f249c9f64ce1952fdbd4dafedb84a324911c6241a5097",
+          "bytes": 13883,
+          "lines": 260
+        }
+      ],
+      "marker": ".battle-stage.sts / .sts-resource-dock / .sts-hud",
+      "sourceContract": "loader动态view；stage-view留存区域/独立单位手牌层，当前winter-platform-minimal场景参数；共享104pxtopbar，场景左人物27%与右54%～90%敌群地面线；HUD满场绝对布局：edge56/bottom40，左资源dock176×76，手牌页104高，右战术宽248。",
+      "difference": "Unity Render清空_stageRoot重建；arena26%～100%、HUD5.5%～20%三栏，左62px圆能量球；没有当前共享顶部栏与资源dock结构。",
+      "oldUnityNotReusable": "Render全树重建、BuildHud的百分比三栏/能量球、旧场景分区参数不能复用当前stage。",
+      "observableCompletion": "沿原stage-view区域与layers更新边界迁入；同源背景/人物敌群比例地面线、资源/能量/回合/状态/装备/战术与共享HUD匹配；busy/敌回合/菜单/子页往返状态保持。",
+      "confirmedScope": "仅证实结构/呈现/控件差异；业务结算和持久化未运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    },
+    {
+      "id": "24-hand",
+      "name": "手牌/指向/翻栏",
+      "priority": "P0",
+      "evidence": "当前工作树源码核对；无前台/Unity/浏览器/compile运行",
+      "entryChain": [
+        {
+          "from": "搜打撤/game/index.html",
+          "to": "搜打撤/game/src/main.js",
+          "kind": "html-module"
+        },
+        {
+          "from": "搜打撤/game/src/main.js",
+          "to": "搜打撤/game/src/battle/battle-loader.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/battle/battle-loader.js",
+          "to": "搜打撤/game/src/battle/view/battle.view.js",
+          "kind": "dynamic"
+        },
+        {
+          "from": "搜打撤/game/src/battle/view/battle.view.js",
+          "to": "搜打撤/game/src/battle/view/battle.layers.js",
+          "kind": "static"
+        },
+        {
+          "from": "搜打撤/game/src/battle/view/battle.layers.js",
+          "to": "搜打撤/game/src/battle/view/battle.hand-layout.js",
+          "kind": "static"
+        }
+      ],
+      "js": [
+        {
+          "path": "搜打撤/game/src/battle/view/battle.hand-layout.js",
+          "sha256": "341c75ac4471c910a920ac58789efc3fde2c73256f543e4a9dffacb92686e0ff",
+          "bytes": 818,
+          "lines": 15
+        },
+        {
+          "path": "搜打撤/game/src/battle/view/battle.layers.js",
+          "sha256": "747d2f12bf5841c7396a44846833060be0f451d8e3d04e7f6f2fc673719448da",
+          "bytes": 65791,
+          "lines": 1052
+        },
+        {
+          "path": "搜打撤/game/src/battle/view/battle.aim.js",
+          "sha256": "96bcab11040bfd81f4cb6e4b52649b24199e94d43bc743ede5de0ce938ffb0a9",
+          "bytes": 54159,
+          "lines": 992
+        },
+        {
+          "path": "搜打撤/game/src/battle/view/battle.view.js",
+          "sha256": "eb0f9bc9035345eedc8daa4a96dc5cd4468709545eca33809461363ea13584dd",
+          "bytes": 59106,
+          "lines": 820
+        }
+      ],
+      "css": [
+        {
+          "path": "搜打撤/game/css/battle-stage.css",
+          "sha256": "ccebad0f54d689eee5cfe525b4057bde003541160c15c1657b9e264c0d4562ce",
+          "bytes": 27801,
+          "lines": 247
+        },
+        {
+          "path": "搜打撤/game/css/battle-hand-overhaul.css",
+          "sha256": "66985d7a29553c8cea96a2fd36218cd2b5b04749f9b54bb7c6c1156f89030954",
+          "bytes": 5535,
+          "lines": 93
+        },
+        {
+          "path": "搜打撤/game/css/battle-card-consumption-fx.css",
+          "sha256": "a616a779ff17c4a9f21418f68ad246bf2b7836f7025c21e6096b1607d399b81c",
+          "bytes": 1152,
+          "lines": 9
+        },
+        {
+          "path": "搜打撤/game/css/card-state-motion.css",
+          "sha256": "c98e045a7472da426de1727cb55694167a247f227a67a4ef08d7bcee332659c0",
+          "bytes": 2237,
+          "lines": 50
+        }
+      ],
+      "unity": [
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/HandPanel.cs",
+          "sha256": "a73bd2f60316f430aa747b68a13a64bb325872d28b4a08ee968f1b41386871e1",
+          "bytes": 13184,
+          "lines": 265
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs",
+          "sha256": "6c2b9795d517c280c440665f65e2f68eb374bd16eb5e8fbb8bf567d1ba9e6ffa",
+          "bytes": 39476,
+          "lines": 709
+        },
+        {
+          "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/AimArrow.cs",
+          "sha256": "cd47367dbdc6f937f3cd1ba9387925ee5adb4c4a0853685c0c69c7a1c5824aee",
+          "bytes": 5218,
+          "lines": 122
+        }
+      ],
+      "marker": ".sts-hand / .bt-slot / .bt-card[data-hand-state]",
+      "sourceContract": "每栏最多9组；handDisplayLayout CARD_WIDTH260、PREFERRED_STEP190、REST_DROP64，rot0/scale1，根据可用宽压叠距；stage手牌高300、卡260×390，常态下沉64，hover/focus抬到-30，选中/blocked/敌回合独立态；页前后边界与数字键/指向/回落。",
+      "difference": "Unity HandPanel旧fan：rot=off*min(5,44/N)，pivot卡顶上方260，CardSize.Sm，hover上36×1.14/拖42×1.2；旧HUD中排，未对应源9组翻栏与水平布局。",
+      "oldUnityNotReusable": "ApplyPose和Layout扇形公式、旧小卡尺寸/hover与逐帧全树重建不可复用；卡UID和业务调用保持独立。",
+      "observableCompletion": "1/5/9/10+组按原同窗宽公式对拍；第2栏/新获得页提示、hover/键盘阅读、选中目标/取消/提交回落/blocked/敌回合、数字1～9选当前栏与源一致。",
+      "confirmedScope": "已证实布局公式与显示尺寸错版，现Unity手牌无原9组翻栏呈现；全部指向命令规则未在本审查运行验证。",
+      "unverified": "原生输入、当前窗口像素/材质/动画与Vite实页对拍待主会统一验收。"
+    }
+  ]
+}

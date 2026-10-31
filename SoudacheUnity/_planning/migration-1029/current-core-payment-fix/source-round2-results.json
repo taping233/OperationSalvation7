@@ -1,0 +1,592 @@
+[
+  {
+    "name": "cicada",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-goldencicada",
+          "cls": "侠客",
+          "name": "金蝉脱壳",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "消耗所有手牌，抽 3 张。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "draw",
+                  "amount": 3,
+                  "handOps": [
+                    {
+                      "op": "consumeHand"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "draw": 3
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "tt3-sapper-bomb",
+          "name": "矿工炸药",
+          "cost": 0,
+          "rarity": "古朴",
+          "type": "装备",
+          "desc": "消耗该牌时，造成 4 点固定伤害。",
+          "dmg": 0,
+          "value": 2,
+          "rules": {
+            "version": 1,
+            "equip": {
+              "onEquip": []
+            },
+            "triggers": {
+              "onConsume": [
+                {
+                  "op": "damage",
+                  "amount": 4,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          },
+          "dmgType": "fixed"
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "out": {
+      "selection": null,
+      "hand": [
+        "normal-sha-2-4",
+        "normal-sha-2-3",
+        "normal-sha-2-2"
+      ],
+      "consumed": [
+        "o1",
+        "o2"
+      ],
+      "armor": 0,
+      "foeHp": 96,
+      "energy": 2
+    }
+  },
+  {
+    "name": "cicada-boss",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-goldencicada",
+          "cls": "侠客",
+          "name": "金蝉脱壳",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "消耗所有手牌，抽 3 张。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "draw",
+                  "amount": 3,
+                  "handOps": [
+                    {
+                      "op": "consumeHand"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "draw": 3
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "tt3-sapper-bomb",
+          "name": "矿工炸药",
+          "cost": 0,
+          "rarity": "古朴",
+          "type": "装备",
+          "desc": "消耗该牌时，造成 4 点固定伤害。",
+          "dmg": 0,
+          "value": 2,
+          "rules": {
+            "version": 1,
+            "equip": {
+              "onEquip": []
+            },
+            "triggers": {
+              "onConsume": [
+                {
+                  "op": "damage",
+                  "amount": 4,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          },
+          "dmgType": "fixed"
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "out": {
+      "selection": null,
+      "hand": [
+        "boss-sha-4-3"
+      ],
+      "consumed": [
+        "o1",
+        "o2"
+      ],
+      "armor": 0,
+      "foeHp": 96,
+      "energy": 2
+    }
+  },
+  {
+    "name": "scale",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt13-scale-armor",
+          "name": "逆鳞护甲",
+          "cost": 0,
+          "rarity": "史诗",
+          "type": "装备",
+          "desc": "每次受到伤害后，对随机敌人造成3点固定伤害，并有50%概率抽1张牌。",
+          "rules": {
+            "version": 1,
+            "equip": {
+              "onEquip": [],
+              "passive": {
+                "damageResponse": {
+                  "damage": 3,
+                  "drawChance": 0.5,
+                  "draw": 1
+                }
+              }
+            },
+            "triggers": {}
+          },
+          "draw": 1
+        }
+      }
+    ],
+    "out": {
+      "foes": [
+        {
+          "id": "foe",
+          "hp": 94
+        },
+        {
+          "id": "other",
+          "hp": 100
+        }
+      ],
+      "hp": 26,
+      "hand": [
+        "starter-attack"
+      ],
+      "turn": 2
+    }
+  },
+  {
+    "name": "immortal",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "cmtn233trmeg",
+          "name": "不朽斩",
+          "cost": 1,
+          "rarity": "衍生",
+          "type": "武术",
+          "desc": "攻（+1），永远被保留在手牌中，无法用于注能",
+          "dmg": 1,
+          "dmgType": "attack",
+          "value": 5,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              },
+              "keepInHand": true,
+              "fuelAllowed": false
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "out": {
+      "first": {
+        "selection": null,
+        "hand": [
+          "o0"
+        ],
+        "consumed": [],
+        "armor": 0,
+        "foeHp": 95,
+        "energy": 1
+      },
+      "second": {
+        "selection": null,
+        "hand": [
+          "o0"
+        ],
+        "consumed": [],
+        "armor": 0,
+        "foeHp": 90,
+        "energy": 0
+      }
+    }
+  },
+  {
+    "name": "dart",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-bloodpoison",
+          "cls": "战士",
+          "name": "血毒双镖",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "选择两个目标（可以重复）：攻（+1），附加流血；攻（+1），附加中毒。",
+          "dmg": 1,
+          "dmgType": "attack",
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "curse": "bleed",
+                  "stacks": 1,
+                  "target": "chosenEnemy",
+                  "bindTarget": "prevDamage"
+                },
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy",
+                  "pick": "new"
+                },
+                {
+                  "op": "curse",
+                  "curse": "poison",
+                  "stacks": 1,
+                  "target": "chosenEnemy",
+                  "pick": "new"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "out": {
+      "first": {
+        "selection": null,
+        "hand": [],
+        "consumed": [],
+        "armor": 0,
+        "foeHp": 95,
+        "energy": 0
+      },
+      "pending": true,
+      "foes": [
+        {
+          "hp": 95,
+          "bleed": 1,
+          "poison": 0
+        },
+        {
+          "hp": 95,
+          "bleed": 0,
+          "poison": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "provoke",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-provoke",
+          "cls": "牧师",
+          "name": "扰敌",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "选择2 名敌人，迫使其相互攻击一次。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "foeFight",
+                  "pick": "two"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "out": {
+      "firstStatus": "needs-input",
+      "foes": [
+        {
+          "hp": 100
+        },
+        {
+          "hp": 94
+        },
+        {
+          "hp": 98
+        }
+      ]
+    }
+  },
+  {
+    "name": "fuel",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3sp-silverthorn",
+          "name": "镭射",
+          "cost": 1,
+          "rarity": "古朴",
+          "type": "法术",
+          "desc": "造成5点法术伤害；注能(1)：伤害+3。",
+          "dmg": 5,
+          "dmgType": "spell",
+          "infuse": 1,
+          "value": 2,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy",
+                  "infuseBonus": 3
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "cmtn233trmeg",
+          "name": "不朽斩",
+          "cost": 1,
+          "rarity": "衍生",
+          "type": "武术",
+          "desc": "攻（+1），永远被保留在手牌中，无法用于注能",
+          "dmg": 1,
+          "dmgType": "attack",
+          "value": 5,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              },
+              "keepInHand": true,
+              "fuelAllowed": false
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "out": {
+      "status": "needs-input",
+      "picked": [],
+      "reason": "本牌无法用于注能"
+    }
+  }
+]

@@ -1,0 +1,241 @@
+{
+  "profiles": [
+    {
+      "kind": "departure",
+      "art": "Art/Current/scenes/departure/city-reflection-v1",
+      "renderer": "image",
+      "duration": 2400,
+      "label": "入城",
+      "background": "#090b0d",
+      "motion": "reflection",
+      "exit": "iris",
+      "exitDuration": 420
+    },
+    {
+      "kind": "field",
+      "art": "Art/Current/scenes/departure/city-reflection-v1",
+      "renderer": "procedural",
+      "duration": 260,
+      "label": "进入地图",
+      "background": "#090b0d",
+      "motion": "aperture",
+      "exit": "iris",
+      "exitDuration": 260
+    },
+    {
+      "kind": "resume",
+      "art": "Art/Current/scenes/departure/city-reflection-v1",
+      "renderer": "procedural",
+      "duration": 300,
+      "label": "继续对局",
+      "background": "#090b0d",
+      "motion": "scan",
+      "exit": "fade",
+      "exitDuration": 180
+    },
+    {
+      "kind": "loading",
+      "art": "Art/Current/scenes/cinematic/event-fold-v1",
+      "renderer": "procedural",
+      "duration": 360,
+      "label": "准备画面",
+      "background": "#090b0d",
+      "motion": "breath",
+      "exit": "fade",
+      "exitDuration": 420
+    },
+    {
+      "kind": "camp",
+      "art": "Art/Current/scenes/cinematic/camp-shelter-v1",
+      "renderer": "image",
+      "duration": 800,
+      "label": "返回基地",
+      "background": "#090b0d",
+      "motion": "shelter",
+      "exit": "gate",
+      "exitDuration": 300
+    },
+    {
+      "kind": "photo",
+      "art": "Art/Current/scenes/cinematic/photo-plates-v1",
+      "renderer": "image",
+      "duration": 1100,
+      "label": "影像收藏",
+      "background": "#e8e5dd",
+      "motion": "develop",
+      "exit": "fade",
+      "exitDuration": 280
+    },
+    {
+      "kind": "achievement",
+      "art": "Art/CurrentArchive/archive-leaves-v1",
+      "renderer": "image",
+      "duration": 850,
+      "label": "收藏档案",
+      "background": "#090b0d",
+      "motion": "raking-light",
+      "exit": "slide",
+      "exitDuration": 240
+    },
+    {
+      "kind": "door",
+      "art": "Art/Current/scenes/cinematic/gate-cleft-v1",
+      "renderer": "procedural",
+      "duration": 420,
+      "label": "抵达闸门",
+      "background": "#090b0d",
+      "motion": "threshold",
+      "exit": "gate",
+      "exitDuration": 320
+    },
+    {
+      "kind": "passage",
+      "art": "Art/Current/scenes/cinematic/gate-cleft-v1",
+      "renderer": "procedural",
+      "duration": 400,
+      "label": "跨层通行",
+      "background": "#090b0d",
+      "motion": "threshold",
+      "exit": "gate",
+      "exitDuration": 300
+    },
+    {
+      "kind": "shop",
+      "art": "Art/Current/scenes/cinematic/trade-pair-v1",
+      "renderer": "procedural",
+      "duration": 460,
+      "label": "进入交易",
+      "background": "#090b0d",
+      "motion": "glide",
+      "exit": "fade",
+      "exitDuration": 420
+    },
+    {
+      "kind": "event",
+      "art": "Art/Current/scenes/cinematic/event-fold-v1",
+      "renderer": "procedural",
+      "duration": 520,
+      "label": "发现见闻",
+      "background": "#090b0d",
+      "motion": "unveil",
+      "exit": "fade",
+      "exitDuration": 420
+    },
+    {
+      "kind": "altar",
+      "art": "Art/Current/scenes/cinematic/altar-fracture-v1",
+      "renderer": "image",
+      "duration": 820,
+      "label": "进入污染区域",
+      "background": "#090b0d",
+      "motion": "disturb",
+      "exit": "slash",
+      "exitDuration": 260
+    },
+    {
+      "kind": "emergencyExit",
+      "art": "Art/Current/scenes/departure/extraction-seam-v1",
+      "renderer": "procedural",
+      "duration": 360,
+      "label": "抵达撤离点",
+      "background": "#090b0d",
+      "motion": "beacon",
+      "exit": "fade",
+      "exitDuration": 180
+    },
+    {
+      "kind": "retreat",
+      "art": "Art/Current/scenes/departure/battle-incision-v1",
+      "renderer": "procedural",
+      "duration": 320,
+      "label": "撤退",
+      "background": "#090b0d",
+      "motion": "recede",
+      "exit": "slide",
+      "exitDuration": 220
+    },
+    {
+      "kind": "extraction",
+      "art": "Art/Current/scenes/departure/extraction-seam-v1",
+      "renderer": "procedural",
+      "duration": 1400,
+      "label": "撤离成功",
+      "background": "#e8e5dd",
+      "motion": "release",
+      "exit": "lift",
+      "exitDuration": 360
+    },
+    {
+      "kind": "battle",
+      "art": "Art/Current/scenes/departure/battle-incision-v1",
+      "renderer": "procedural",
+      "duration": 300,
+      "label": "进入战斗",
+      "background": "#090b0d",
+      "motion": "stroke",
+      "exit": "slash",
+      "exitDuration": 220
+    },
+    {
+      "kind": "boss",
+      "art": "Art/Current/scenes/departure/boss-monolith-v1",
+      "renderer": "image",
+      "duration": 1500,
+      "label": "首脑登场",
+      "background": "#090b0d",
+      "motion": "pressure",
+      "exit": "fade",
+      "exitDuration": 320
+    }
+  ],
+  "layers": [
+    {
+      "art": "Art/Current/scenes/cinematic/layer-descent-v1",
+      "motion": "layer-descent"
+    },
+    {
+      "art": "Art/Current/scenes/cinematic/layer-watchline-v2",
+      "motion": "layer-watchline"
+    },
+    {
+      "art": "Art/Current/scenes/cinematic/layer-ruins-v2",
+      "motion": "layer-ruins"
+    },
+    {
+      "art": "Art/Current/scenes/cinematic/layer-core-v2",
+      "motion": "layer-core"
+    }
+  ],
+  "encounters": [
+    {
+      "id": "tt6-mystery",
+      "kind": "supply",
+      "title": "备用电源接通",
+      "line": "柜内的指示灯逐一亮起，封存的配给仍在等待领取。"
+    },
+    {
+      "id": "tt6-chestdraw",
+      "kind": "supply",
+      "title": "封存储备库",
+      "line": "灰尘下的电源灯还亮着，库门后的封条保持完整。"
+    },
+    {
+      "id": "ev19-recode",
+      "kind": "signal",
+      "title": "改装台待机",
+      "line": "备用屏幕亮起，机械臂停在等待指令的位置。"
+    },
+    {
+      "id": "altar",
+      "kind": "altar",
+      "title": "沉睡的祭坛",
+      "line": "残存的纹路在暗处显现，中央仍是一片寂静。"
+    },
+    {
+      "id": "boss",
+      "kind": "boss",
+      "title": "污染核心 · 封锁目标",
+      "line": "门后的守卫已经察觉到你。检查行装，再决定是否迎战。"
+    }
+  ]
+}

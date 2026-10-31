@@ -1,0 +1,82 @@
+[
+  {
+    "path": "bin\\after\\net8.0\\after.dll",
+    "bytes": 161792,
+    "sha256": "820e24ba1a0774601d2f2cd2de66f99a528366e5cf4f9c31f5f56fdf96c59a72"
+  },
+  {
+    "path": "bin\\after\\net8.0\\after.exe",
+    "bytes": 151552,
+    "sha256": "3f38ebca63991fe896ece6e9c03e821bdae95163cc8acb349593544126e1eb18"
+  },
+  {
+    "path": "bin\\after\\net8.0\\after.pdb",
+    "bytes": 21780,
+    "sha256": "aa5dbc0c33c60f7fee219ff474e5fe5c21bad9b0659ef92f758b3447eea2e315"
+  },
+  {
+    "path": "bin\\before\\net8.0\\before.dll",
+    "bytes": 161792,
+    "sha256": "4f5b96a6341783d4079c4355f70bdc729a0398cc5217755f5abf4cc797cd682c"
+  },
+  {
+    "path": "bin\\before\\net8.0\\before.exe",
+    "bytes": 151552,
+    "sha256": "753f73686da6c2f36be53eb197487ec383b827cc5d4dc5ae1c8c13877243b5be"
+  },
+  {
+    "path": "bin\\before\\net8.0\\before.pdb",
+    "bytes": 21832,
+    "sha256": "f6de76f1539c5cce76ff88c88703400ad21d71160d5279a4a237debe33b2518c"
+  },
+  {
+    "path": "obj\\after\\Debug\\net8.0\\after.dll",
+    "bytes": 161792,
+    "sha256": "820e24ba1a0774601d2f2cd2de66f99a528366e5cf4f9c31f5f56fdf96c59a72"
+  },
+  {
+    "path": "obj\\after\\Debug\\net8.0\\after.pdb",
+    "bytes": 21780,
+    "sha256": "aa5dbc0c33c60f7fee219ff474e5fe5c21bad9b0659ef92f758b3447eea2e315"
+  },
+  {
+    "path": "obj\\after\\Debug\\net8.0\\apphost.exe",
+    "bytes": 151552,
+    "sha256": "3f38ebca63991fe896ece6e9c03e821bdae95163cc8acb349593544126e1eb18"
+  },
+  {
+    "path": "obj\\after\\Debug\\net8.0\\ref\\after.dll",
+    "bytes": 11264,
+    "sha256": "07d0446d6699feb470f0ee49cc010789a932fdfd27b4e4f545a182754ebe61d8"
+  },
+  {
+    "path": "obj\\after\\Debug\\net8.0\\refint\\after.dll",
+    "bytes": 11264,
+    "sha256": "07d0446d6699feb470f0ee49cc010789a932fdfd27b4e4f545a182754ebe61d8"
+  },
+  {
+    "path": "obj\\before\\Debug\\net8.0\\apphost.exe",
+    "bytes": 151552,
+    "sha256": "753f73686da6c2f36be53eb197487ec383b827cc5d4dc5ae1c8c13877243b5be"
+  },
+  {
+    "path": "obj\\before\\Debug\\net8.0\\before.dll",
+    "bytes": 161792,
+    "sha256": "4f5b96a6341783d4079c4355f70bdc729a0398cc5217755f5abf4cc797cd682c"
+  },
+  {
+    "path": "obj\\before\\Debug\\net8.0\\before.pdb",
+    "bytes": 21832,
+    "sha256": "f6de76f1539c5cce76ff88c88703400ad21d71160d5279a4a237debe33b2518c"
+  },
+  {
+    "path": "obj\\before\\Debug\\net8.0\\ref\\before.dll",
+    "bytes": 11264,
+    "sha256": "c2b60c6c3be8870d77cc0ed71289701a34bcadc244708c79df0a6eb51df70641"
+  },
+  {
+    "path": "obj\\before\\Debug\\net8.0\\refint\\before.dll",
+    "bytes": 11264,
+    "sha256": "c2b60c6c3be8870d77cc0ed71289701a34bcadc244708c79df0a6eb51df70641"
+  }
+]

@@ -1,0 +1,31 @@
+[
+  {
+    "file": "Assets\\Scripts\\Sdt.Core\\Cards.cs",
+    "sha256": "02dad40ff56fe46c2901125fc6f167a237735711c093776e5bf24e8c4e771120"
+  },
+  {
+    "file": "Assets\\Scripts\\Sdt.Core\\CardsExtras.cs",
+    "sha256": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470"
+  },
+  {
+    "file": "Assets\\Scripts\\Sdt.Core\\Rng.cs",
+    "sha256": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a"
+  },
+  {
+    "file": "Assets\\Scripts\\Sdt.Core\\Battle\\RuleValue.cs",
+    "sha256": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb"
+  },
+  {
+    "file": "Assets\\Scripts\\Sdt.Core\\Data\\CardDatabase.cs",
+    "sha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e"
+  },
+  {
+    "file": "Assets\\Scripts\\Sdt.Core\\Data\\CurrentBalanceData.cs",
+    "sha256": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740"
+  },
+  {
+    "file": "Assets\\Scripts\\Sdt.UI\\Screens\\Run\\ShopScreen.cs",
+    "sha256": "dcb51f6046a90712537c40ce656f3847b9bee3a0cbee23f3dbb658c65f647826",
+    "methodSha256": "5fc3e5f8fc7232d2d07c4fb1d592740e94af305c4909e4dc1fe9c392c0a01b72"
+  }
+]

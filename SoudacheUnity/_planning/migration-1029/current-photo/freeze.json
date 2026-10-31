@@ -1,0 +1,120 @@
+{
+  "status": "source-and-private-compile-frozen; native-review-required",
+  "sourceFiles": 36,
+  "imageAssets": 43,
+  "originalPixelComparisons": 3,
+  "presentationOracleCases": 650,
+  "presentationOracleFailures": 0,
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/CardLibraryScreen.cs",
+      "sha256": "02a40e053cbd505498cde32e0fe0203ef18f96e0301a7c4dde45d3521456de8c"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs",
+      "sha256": "1deadfc023e989098a74fb334fab757907cf9709d8a2cd9b34ac36dc321fb38a"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioElements.cs",
+      "sha256": "b1e1bb0247be97d6c3c9a41b5f2d451dc5c21b209abdfff3332162eefa8afc17"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioChoice.cs",
+      "sha256": "e281c3f849cf6eaf793baf9001dceaef33f67c16e6bcb44ac817588ccf525e00"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioWall.cs",
+      "sha256": "e5e9a9037010383c4169f7007b6dcd55bcfad30e2667ec1aa4527a4f80c55fcf"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioDossier.cs",
+      "sha256": "e178d66c9304d1069863d7fd9e58686d52fb5ae98ab4c7a211a590e91b46b59b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioRoom.cs",
+      "sha256": "639466435fd48d7cb02b6fa8d7aa418088a736ad56058d711d9b1ad684915c46"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioMotion.cs",
+      "sha256": "bd92bfc2b38888bda14e2ef411650518e9a01e717c408e706e66ea6d54d157bf"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoInlineLinks.cs",
+      "sha256": "f7e83b6442fb4b2c8761deff3bfb3145bf92ca7fc4ddd65c650bdd805b1d1b2b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoPrismaticText.cs",
+      "sha256": "73f327481770721913ce33406ab05a7e80b4e077430e17c83d4a841a46fb6854"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoNegativeGesture.cs",
+      "sha256": "e4879a5be3821e2ce76dc8fa3612ea2f1cef69f493473ea64447e9301a889a1f"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Res/CurrentPhotoAssets.cs",
+      "sha256": "978ece849b9a96da82c3fd6d43f4de1df5706b38667a1f95ba8b11198f50cb10"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Res/CurrentCardPresentation.cs",
+      "sha256": "945c364fb2959c8cd1ab6278161ba2743d405243d8265b60e7c16dc9c5bcfda0"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Res/CurrentCardPresentation.Rich.cs",
+      "sha256": "f61172c1e58e27e7bdfab172fbd9a4c094d8852f89721de729ac4d4f40dea501"
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentPhoto/descriptions.json",
+      "sha256": "4078f1cc6656299f3698141487e806e43f7d4423d03c25babfbe7f6fdd1cfd6e"
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentPhoto/PhotoNegative.shader",
+      "sha256": "cbac1dc70ebf3d92d613c4785e13ea1f9f58b3596628ea711f82265d198bc894"
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentPhoto/PhotoPrismatic.shader",
+      "sha256": "69912591f5b2b428b3fadcf287fc1f5f46a0bfb0d2eb2ef7752b7898fe4cbdd0"
+    }
+  ],
+  "controls": [
+    "closeCardPage",
+    "libType0..8",
+    "cardSearch",
+    "libRar",
+    "libSort",
+    "libCls",
+    "libClearFilter",
+    "libRemoveFilter-rar/cls/q",
+    "libGrid",
+    "Photo-<card.id>",
+    "libPrev",
+    "libNext",
+    "libLocate",
+    "libInspect",
+    "PhotoClose",
+    "PhotoNote",
+    "PhotoNoteStatus",
+    "card-reference-<id>",
+    "term-<key>"
+  ],
+  "verified": [
+    "source and output SHA256",
+    "three original bitmap RGBA pixel comparisons",
+    "private owned-source compilation: 0 warnings/0 errors",
+    "650 independent live JS formatter oracle cases",
+    "owned git diff whitespace check"
+  ],
+  "notVerified": [
+    "native current-window appearance/materials/animation and shader import",
+    "real mouse/keyboard/IME/link hit geometry",
+    "global note write failure/retry under native host"
+  ],
+  "implementedPhotoEffects": [
+    "600ms press: invert(1) hue-rotate(180deg) sepia(.12), up/leave/cancel/blur restore",
+    "105deg rarity-only per-fragment text gradient: six exact source colors/stops"
+  ],
+  "centralizedByRoot": [
+    "Sdt.Res.asmdef Core dependency",
+    "BaseData.TrySavePhotoNote title-global guard",
+    "CardFace consumers of shared presentation API"
+  ]
+}

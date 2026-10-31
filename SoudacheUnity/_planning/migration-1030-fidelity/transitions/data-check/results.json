@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "count": 19,
+  "checks": [
+    "arriving presents boss gate without entering combat",
+    "merely arriving does not consume boss RNG or reserve a boss",
+    "return keeps boss node available",
+    "re-entering shows confirmation without rerolling",
+    "failed atomic boss-plan save reports failure",
+    "failed boss entry rolls back RNG/plan and emits no battle request",
+    "failed boss-plan save preserves original file",
+    "boss confirmation retry saves and dispatches",
+    "one accepted request selects a real source boss",
+    "boss identity survives actual fresh-file read",
+    "retrying an accepted plan keeps the same boss and RNG",
+    "active combat refuses gate return and a second gate request",
+    "unactivated altar refuses gate entry",
+    "current generated-map event receipt reaches actual presentation: tt6-mystery",
+    "initial encounter starts on source event banner page: tt6-mystery",
+    "current generated-map event receipt reaches actual presentation: tt6-chestdraw",
+    "initial encounter starts on source event banner page: tt6-chestdraw",
+    "current generated-map event receipt reaches actual presentation: ev19-recode",
+    "initial encounter starts on source event banner page: ev19-recode"
+  ],
+  "chosen": "boss_elem",
+  "profileDirectory": "D:\\素材\\代号柒\\SoudacheUnity\\_planning\\migration-1030-fidelity\\transitions\\data-check\\profile-20261030070657928"
+}

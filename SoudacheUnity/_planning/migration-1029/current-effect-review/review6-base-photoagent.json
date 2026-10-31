@@ -1,0 +1,290 @@
+{
+  "reviewer": "unity_current_photo_port (independent of the reviewed nine page implementations)",
+  "batch": "current-visual-6",
+  "authority": "Direct current Vite module/CSS reads; current-ui-version used only to locate source; no old passed flag used",
+  "evidenceDirectory": "../搜打撤/docs/evidence/2026-10-29-unity-desktop/current-visual-6",
+  "method": "All nine PNGs individually opened with view_image at native 1920x1080; source-only review; no Unity/browser/frontmost app launched",
+  "generationEvidence": {
+    "processFile": "process.json",
+    "pid": 14400,
+    "exitCode": 0,
+    "inputsUnchanged": true,
+    "sourceCount": 282,
+    "meaning": "renderGenerationPassed only"
+  },
+  "overall": "Not accepted as equivalent. One P1 overlap and four P2 material/layout/control differences are visible and supported by current source.",
+  "findings": [
+    {
+      "id": "R6-PHOTOAGENT-01",
+      "priority": "P1",
+      "pages": [
+        "trade.png"
+      ],
+      "title": "交易所目录、商品架、操作台宽度失配，商品卡相互覆盖",
+      "imageEvidence": "1920x1080新图：左模式轨约x48..593（545px），中商品架约x613..993（380px），右操作台约x1012..1872（860px）。中间两列卡面在约x790处相互叠压；左列卡文字和画框被后一列覆盖。",
+      "currentSource": [
+        {
+          "path": "game/css/base-logistics-trade-v12.css",
+          "line": 30,
+          "contract": "trade-v12-layout列为166px minmax(0,1fr)，gap20"
+        },
+        {
+          "path": "game/css/base-logistics-trade-v12.css",
+          "line": 36,
+          "contract": "workspace列为minmax(0,1fr) 480px，gap20"
+        },
+        {
+          "path": "game/css/base-logistics-trade-v12.css",
+          "line": 43,
+          "contract": "商品架auto-fill最小220px，gap16，商品卡不得重叠"
+        }
+      ],
+      "nativeLocations": [
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+          "line": 16,
+          "observation": "三个相邻直接子列取代源的166px轨+嵌套workspace；商品架硬编码每行两张，CardArt宽250"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentLayout.cs",
+          "line": 36,
+          "observation": "Row childForceExpandWidth=true会给flex=0的固定宽列继续分配额外空间"
+        }
+      ],
+      "requiredResult": "模式轨166px、右操作台480px，中间取剩余宽；按220px最小宽自适应商品列数，实际画框/文字完全落在各自商品格内。"
+    },
+    {
+      "id": "R6-PHOTOAGENT-02",
+      "priority": "P2",
+      "pages": [
+        "archive.png",
+        "facilities.png"
+      ],
+      "title": "收藏室与建设目录轨被扩成大块面板，挤占内容区",
+      "imageEvidence": "收藏室左目录约x48..1041（993px），约占可用宽度54%；建设左目录约x48..608（560px），中展示台仅约332px。不是源的窄目录工作台分布。",
+      "currentSource": [
+        {
+          "path": "game/css/base-archive-facilities-v12.css",
+          "line": 10,
+          "contract": "av12-workspace为184px minmax(0,1fr)，gap22"
+        },
+        {
+          "path": "game/css/base-archive-facilities-v12.css",
+          "line": 12,
+          "contract": "目录内部24px/1fr/12px，编号、标题和箭头左右排列"
+        },
+        {
+          "path": "game/css/base-archive-facilities-v12.css",
+          "line": 54,
+          "contract": "设施三列230px minmax(0,.8fr) minmax(490px,1.2fr)，gap22"
+        }
+      ],
+      "nativeLocations": [
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+          "line": 85,
+          "observation": "av12-workspace沿公共Row布局"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentRooms.cs",
+          "line": 79,
+          "observation": "目录Bounds230但公共Row仍forceExpand；设施按钮被设110px高，且用居中文字拼编号/标题"
+        }
+      ],
+      "requiredResult": "恢复184/230px固定目录与剩余区域比例，目录项按源的编号/文字/箭头网格布置；同时保持真实选中和滚动行为。"
+    },
+    {
+      "id": "R6-PHOTOAGENT-03",
+      "priority": "P2",
+      "pages": [
+        "personnel.png"
+      ],
+      "title": "默认人物立绘白底未按当前源的灰舞台正片叠底呈现",
+      "imageEvidence": "无的默认原画外侧出现约x217..695、y124..840的纯白矩形，和深色人物面板形成强白色块。",
+      "currentSource": [
+        {
+          "path": "game/src/hub/hub.personnel.js",
+          "line": 127,
+          "contract": "alphaPortrait=false；默认外观走非透明画布分支"
+        },
+        {
+          "path": "game/css/base-personnel-v12.css",
+          "line": 169,
+          "contract": "data-skin=default的image-stage背景#c4ccc9，isolation:isolate"
+        },
+        {
+          "path": "game/css/base-personnel-v12.css",
+          "line": 170,
+          "contract": "默认img使用mix-blend-mode:multiply，使原画白底落到灰舞台色"
+        }
+      ],
+      "nativeLocations": [
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentRooms.cs",
+          "line": 110,
+          "observation": "原图直接Image/preserveAspect，没有默认灰舞台及multiply组合"
+        }
+      ],
+      "requiredResult": "仅默认原画按当前源灰舞台与multiply呈现，保留完整原画；场景皮肤仍沿本身原画，不能全局抠除白色或替换人物资源。"
+    },
+    {
+      "id": "R6-PHOTOAGENT-04",
+      "priority": "P2",
+      "pages": [
+        "courtyard.png"
+      ],
+      "title": "庭院操作按钮平均扩宽，统计信息被挤断行",
+      "imageEvidence": "底操作条中“关闭雨”“投喂”“环境设置”各占约380～456px，合计超过整条2/3；左侧“发现锦鲤0/9”的9独立落到下一行。",
+      "currentSource": [
+        {
+          "path": "game/css/base-courtyard-v3.css",
+          "line": 13,
+          "contract": "controls为flex-wrap/12px gap，padding12px 18px"
+        },
+        {
+          "path": "game/css/base-courtyard-v3.css",
+          "line": 14,
+          "contract": "info flex:1，min-width240px；应获得剩余横向空间"
+        },
+        {
+          "path": "game/css/base-courtyard-v3.css",
+          "line": 17,
+          "contract": "按钮按内容+10px16px padding，min-height44；没有flex:1平均扩展"
+        }
+      ],
+      "requiredResult": "按钮取内容宽度，信息组占余宽；当前1920窗口下统计数字保持完整，允许源规定的组级换行，不用固定宽平均按钮。"
+    },
+    {
+      "id": "R6-PHOTOAGENT-05",
+      "priority": "P2",
+      "pages": [
+        "hub.png",
+        "personnel.png",
+        "logistics.png",
+        "trade.png",
+        "archive.png",
+        "facilities.png",
+        "courtyard.png"
+      ],
+      "title": "基地共用返回控件仍是带边框圆角方块",
+      "imageEvidence": "七页左上返回均可见约x23..78/y15..69的灰色圆角底与描边，箭头为字形‹。",
+      "currentSource": [
+        {
+          "path": "game/css/archive-back.css",
+          "line": 4,
+          "contract": "共用archive-back为64x58、transparent背景、border0、radius0，24x24真实SVG"
+        },
+        {
+          "path": "game/css/base-framework-v7.css",
+          "line": 17,
+          "contract": "hub-back只覆盖archive-back-color，继续沿透明返回形态"
+        },
+        {
+          "path": "game/src/ui/home-linked-interactions.js",
+          "line": 8,
+          "contract": "linkedBackHTML提供共用返回SVG"
+        }
+      ],
+      "requiredResult": "移植真实SVG并去除新增圆角底/边框；保留源hover/focus反馈和返回目的地。"
+    }
+  ],
+  "pagesWithoutAdditionalBlockingFinding": [
+    {
+      "page": "title.png",
+      "source": [
+        "game/index.html #title.home-composed",
+        "game/css/title-p0.css",
+        "game/css/home-polish.css",
+        "game/css/home-layers.css"
+      ],
+      "observation": "品牌、左进入/指南、右收藏/系统和footer均可读；未见上一批那种显著实心CODE大片遮盖。低透明轮廓与软mask、动画和时钟实时刷新不能由这一静帧确认，保持未验。"
+    },
+    {
+      "page": "hub.png",
+      "source": [
+        "game/src/hub/hub.home-v3.js",
+        "game/css/base-home-v7.css:6/21"
+      ],
+      "observation": "事务卡约380px、整备卡420px且均横向可读；没有继续沿用早期宽度塌缩结论。共用返回差异另列。"
+    },
+    {
+      "page": "preparation.png",
+      "source": [
+        "game/css/preparation.css:10/24/25/26",
+        "game/src/hub/preparation.view.js"
+      ],
+      "observation": "当前0目标画面已有标题/右计数、全宽居中虚线空态、select伸展/加入按钮按内容宽、两列预设；这张闭合编辑器图未覆盖有目标/编辑展开/有卡预设，不能判全页效果已接受。"
+    },
+    {
+      "page": "logistics.png",
+      "source": [
+        "game/src/hub/hub.warehouse.js:88/276",
+        "game/css/base-logistics-trade-v12.css:5/11"
+      ],
+      "observation": "四分类/搜索/类型/品质及纵向浏览真实卡面可见；第二行只露一部分本身符合滚动视口，不能据此报裁切缺陷。共用返回差异另列；筛选、详情返回定位需其他输入证据。"
+    }
+  ],
+  "notReviewed": [
+    "library.png",
+    "photo-detail.png",
+    "character.png",
+    "battle.png",
+    "map.png",
+    "bag.png",
+    "settings.png"
+  ],
+  "limitations": [
+    "未操作原生应用或浏览器；这是九张现有图的独立只读审查",
+    "单图不能验动画、交互命中、持久化或全部条件态",
+    "未使用旧passed/旧验收结论替代本批图",
+    "本批只读，未修改这些页面生产代码"
+  ],
+  "images": [
+    {
+      "path": "title.png",
+      "sha256": "c2054255112792e85a8625c2bf29f1587d00c08e1c66bc6d8252750d636eb6d0"
+    },
+    {
+      "path": "hub.png",
+      "sha256": "a959dc742d0de6e88c9fe343dce5108dec9da0c5184652b45570293d63a95c9e"
+    },
+    {
+      "path": "preparation.png",
+      "sha256": "39be87132203b33a98d2fb21579a64422039abe00e4db434851e4683befa8fc0"
+    },
+    {
+      "path": "personnel.png",
+      "sha256": "7dad48bdf627992ca9cb279d91153ca6177d63d60843d4fe63dcd0a7816213a4"
+    },
+    {
+      "path": "logistics.png",
+      "sha256": "d7a26bdcefda1cf2e9e448b624023e7cb19c83d4847b805f940ab3ba45958761"
+    },
+    {
+      "path": "trade.png",
+      "sha256": "0fd25a1abed5dfb80368d041c864835df1a79f55b5b6c5a40895ad99695e74ee"
+    },
+    {
+      "path": "archive.png",
+      "sha256": "8b1577a209d4e8e308b4162cec920d28c6a13909222471e3e4470e2226f7e9ea"
+    },
+    {
+      "path": "facilities.png",
+      "sha256": "0e126fd9fb61a2c16fab943c199fa93b2cefe24e6dee1a55e222d3794b711dad"
+    },
+    {
+      "path": "courtyard.png",
+      "sha256": "e253e5d09c021df6868a096268488610cf2e2813c9f96a6c3175985448122f54"
+    }
+  ],
+  "sourceSha256": {
+    "game/css/archive-back.css": "d893b6a0396f28ba4bd7905016d574c26a67f51268d1b7800d319b627fd71b38",
+    "game/css/base-archive-facilities-v12.css": "16dd8568baef9c60d14f6a6d4cc96f3fb2351cdbf4f9334068fa04d22cadad9d",
+    "game/css/base-courtyard-v3.css": "977142ab7ea86d39897fcd03b624d9506f246185c0c8da64020b9cd3a10be007",
+    "game/css/base-framework-v7.css": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953",
+    "game/css/base-logistics-trade-v12.css": "962d79109e0d67519cbbe4bb5e0d9c6299e36fe85b8ae01090827d804947ffda",
+    "game/css/base-personnel-v12.css": "55b4ee0a9d2472295ae0ecc9c20cf2eed920e8f6360b2c6d06ef3c8a29329cff",
+    "game/src/hub/hub.personnel.js": "37796e2e56647a4d86c456e62be91f9ca843dbe0ee7f59fa75e41249b008a307",
+    "game/src/ui/home-linked-interactions.js": "1e17a3a0f4e4a4f6c6baba1c0bc6709755b34c147ba7c2fe7970d3c574f2289b"
+  }
+}

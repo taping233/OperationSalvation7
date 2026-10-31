@@ -1,0 +1,559 @@
+{
+  "rows": [
+    {
+      "id": "tt3-nature-form",
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt3-nature-form",
+            "cls": "牧师",
+            "name": "满月形态",
+            "cost": 2,
+            "rarity": "职业",
+            "type": "法术",
+            "desc": "本局战斗中，能量上限 +1。",
+            "dmg": 0,
+            "value": 3,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "self",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "energyCap",
+                    "n": 1
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 8,
+        "maxEnergy": 11,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 1000,
+            "atk": 2,
+            "dead": false,
+            "status": {},
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt3-nuke-ray",
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt3-nuke-ray",
+            "cls": "降临者",
+            "name": "致命射线",
+            "cost": 2,
+            "rarity": "职业",
+            "type": "法术",
+            "dmg": 8,
+            "dmgType": "spell",
+            "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+            "value": 3,
+            "sellable": false,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 3,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 8,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 990,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "freeze": 1,
+              "healban": 1,
+              "poison": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt3-firm-barrier",
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt3-firm-barrier",
+            "cls": "法师",
+            "name": "坚冰结界",
+            "cost": 0,
+            "rarity": "职业",
+            "type": "法术",
+            "desc": "延长 1 名角色的冰冻 1 回合，抽1张牌。",
+            "dmg": 0,
+            "draw": 1,
+            "value": 3,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "curse",
+                    "curse": "freeze",
+                    "duration": 1,
+                    "extend": 1,
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "draw",
+                    "amount": 1
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 10,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 1000,
+            "atk": 2,
+            "dead": false,
+            "status": {},
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt7-marchrush",
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt7-marchrush",
+            "cls": "战士",
+            "name": "急行军",
+            "cost": 1,
+            "rarity": "职业",
+            "type": "武术",
+            "desc": "抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。",
+            "dmg": 0,
+            "draw": 2,
+            "armor": 2,
+            "value": 3,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "self",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "draw",
+                    "amountField": "draw"
+                  },
+                  {
+                    "op": "armor",
+                    "amountField": "armor"
+                  }
+                ],
+                "replay": {
+                  "on": "lastHand",
+                  "times": 1
+                }
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 9,
+        "maxEnergy": 10,
+        "armor": 2,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 1000,
+            "atk": 2,
+            "dead": false,
+            "status": {},
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt7-holyglow",
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt7-holyglow",
+            "cls": "牧师",
+            "name": "沐愈光辉",
+            "cost": 1,
+            "rarity": "职业",
+            "type": "法术",
+            "desc": "将自身血量回复至 12 血。",
+            "dmg": 0,
+            "value": 3,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "self",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "heal",
+                    "upTo": 12
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 9,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 1000,
+            "atk": 2,
+            "dead": false,
+            "status": {},
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt12-infectray",
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt12-infectray",
+            "name": "感染射线",
+            "cost": 1,
+            "rarity": "古朴",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "desc": "造成4点法伤，附加一层随机诅咒",
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 1,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 9,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 994,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "freeze": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    }
+  ],
+  "skipped": []
+}

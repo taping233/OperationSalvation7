@@ -1,0 +1,20 @@
+{
+  "status": "frozen-journey-bot-current-card-repair",
+  "privateCompileExit": 0,
+  "nativeNotRun": true,
+  "dataAndProductionReadonly": true,
+  "files": [
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.cs",
+      "sha256": "581a2f0a3262f9fb9e3e93cefd15c8c1c8216c674f9a0bd1f5d9a5a449c75371"
+    },
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.FilmWait.cs",
+      "sha256": "af0cb0fa37a929dbf615474c2e300bd5fc1675b47697c83a4267a12fe24c796a"
+    },
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.Journey.cs",
+      "sha256": "5fbc45378cda3d4dacd01831f13ed89db2d624d5c25cb972f67f1fabf3b48111"
+    }
+  ]
+}

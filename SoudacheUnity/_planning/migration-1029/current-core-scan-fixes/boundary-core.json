@@ -1,0 +1,590 @@
+[
+  {
+    "name": "heal-0",
+    "equal": true,
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "heal-1",
+    "equal": true,
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "heal-11",
+    "equal": true,
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "heal-12",
+    "equal": true,
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "heal-13",
+    "equal": true,
+    "after": {
+      "hp": 13,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "heal-30",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "heal-59",
+    "equal": true,
+    "after": {
+      "hp": 59,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "heal-60",
+    "equal": true,
+    "after": {
+      "hp": 60,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "healban-0",
+    "equal": true,
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "healban-1",
+    "equal": true,
+    "after": {
+      "hp": 5,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "healban-3",
+    "equal": true,
+    "after": {
+      "hp": 5,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "heal-max-cap",
+    "equal": true,
+    "after": {
+      "hp": 8,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "tt3-nature-form-2",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 0,
+      "maxEnergy": 11,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "tt3-nature-form-10",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 11,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "tt8-hero-guardian-2",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 1,
+      "maxEnergy": 11,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "tt8-hero-guardian-10",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 11,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "extend--2",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": -2
+      }
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "extend-0",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "extend-1",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 2
+      }
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "extend-4",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 5
+      }
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "tt3-nuke-ray-0",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "healban": 1,
+        "poison": 1,
+        "silence": 1
+      }
+    },
+    "rng": "seed=0;v=2;s=generation:1553158855"
+  },
+  {
+    "name": "tt12-infectray-0",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "poison": 1
+      }
+    },
+    "rng": "seed=0;v=2;s=generation:1553158855"
+  },
+  {
+    "name": "tt3-nuke-ray-1",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "bleed": 1,
+        "freeze": 1,
+        "healban": 1
+      }
+    },
+    "rng": "seed=1;v=2;s=generation:611766131"
+  },
+  {
+    "name": "tt12-infectray-1",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "healban": 1
+      }
+    },
+    "rng": "seed=1;v=2;s=generation:611766131"
+  },
+  {
+    "name": "tt3-nuke-ray-2",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "abreak": 1,
+        "freeze": 1,
+        "poison": 1
+      }
+    },
+    "rng": "seed=2;v=2;s=generation:2128019435"
+  },
+  {
+    "name": "tt12-infectray-2",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 1
+      }
+    },
+    "rng": "seed=2;v=2;s=generation:2128019435"
+  },
+  {
+    "name": "tt3-nuke-ray-123",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 1,
+        "healban": 1,
+        "poison": 1
+      }
+    },
+    "rng": "seed=123;v=2;s=generation:969294680"
+  },
+  {
+    "name": "tt12-infectray-123",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 1
+      }
+    },
+    "rng": "seed=123;v=2;s=generation:969294680"
+  },
+  {
+    "name": "tt3-nuke-ray-999",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "abreak": 1,
+        "bleed": 1,
+        "poison": 1
+      }
+    },
+    "rng": "seed=999;v=2;s=generation:2052787037"
+  },
+  {
+    "name": "tt12-infectray-999",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "abreak": 1
+      }
+    },
+    "rng": "seed=999;v=2;s=generation:2052787037"
+  },
+  {
+    "name": "tt3-nuke-ray-2147483647",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "bleed": 1,
+        "healban": 1,
+        "silence": 1
+      }
+    },
+    "rng": "seed=2147483647;v=2;s=generation:2885799120"
+  },
+  {
+    "name": "tt12-infectray-2147483647",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "bleed": 1
+      }
+    },
+    "rng": "seed=2147483647;v=2;s=generation:2885799120"
+  },
+  {
+    "name": "replay-draw",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 2,
+      "hand": 2,
+      "draw": 2,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "replay-empty",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 4,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "replay-other",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 2,
+      "hand": 1,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "replay-retained",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 4,
+      "hand": 1,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "replay-after-empty",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 4,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "replay-async-draw",
+    "equal": true,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 2,
+      "hand": 2,
+      "draw": 2,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  },
+  {
+    "name": "replay-async-empty",
+    "equal": false,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 4,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": "seed=123;v=2"
+  }
+]

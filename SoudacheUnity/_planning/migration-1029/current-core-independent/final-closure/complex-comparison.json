@@ -1,0 +1,391 @@
+{
+  "pass": true,
+  "vectors": 36,
+  "rows": [
+    {
+      "name": "gate-empty",
+      "seed": 1,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-prefer",
+      "seed": 1,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-purify",
+      "seed": 1,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-other-door",
+      "seed": 1,
+      "checks": {
+        "after": true,
+        "second": true,
+        "third": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-empty",
+      "seed": 2,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-prefer",
+      "seed": 2,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-purify",
+      "seed": 2,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-other-door",
+      "seed": 2,
+      "checks": {
+        "after": true,
+        "second": true,
+        "third": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-empty",
+      "seed": 3,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-prefer",
+      "seed": 3,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-purify",
+      "seed": 3,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-other-door",
+      "seed": 3,
+      "checks": {
+        "after": true,
+        "second": true,
+        "third": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-empty",
+      "seed": 4,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-prefer",
+      "seed": 4,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-purify",
+      "seed": 4,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-other-door",
+      "seed": 4,
+      "checks": {
+        "after": true,
+        "second": true,
+        "third": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-empty",
+      "seed": 5,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-prefer",
+      "seed": 5,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-purify",
+      "seed": 5,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-other-door",
+      "seed": 5,
+      "checks": {
+        "after": true,
+        "second": true,
+        "third": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-empty",
+      "seed": 6,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-prefer",
+      "seed": 6,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-purify",
+      "seed": 6,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-other-door",
+      "seed": 6,
+      "checks": {
+        "after": true,
+        "second": true,
+        "third": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-empty",
+      "seed": 7,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-prefer",
+      "seed": 7,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-purify",
+      "seed": 7,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-other-door",
+      "seed": 7,
+      "checks": {
+        "after": true,
+        "second": true,
+        "third": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-empty",
+      "seed": 8,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-prefer",
+      "seed": 8,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-purify",
+      "seed": 8,
+      "checks": {
+        "after": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "gate-other-door",
+      "seed": 8,
+      "checks": {
+        "after": true,
+        "second": true,
+        "third": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "recruit-status",
+      "seed": 123,
+      "checks": {
+        "immediate": true,
+        "after": true,
+        "second": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "recruit-poison-death",
+      "seed": 123,
+      "checks": {
+        "immediate": true,
+        "after": true,
+        "second": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "recruit-stealth-expiry",
+      "seed": 123,
+      "checks": {
+        "immediate": true,
+        "after": true,
+        "second": true
+      },
+      "pass": true,
+      "differences": []
+    },
+    {
+      "name": "noInfuse-discover",
+      "seed": 1,
+      "checks": {
+        "after": true,
+        "damage": true,
+        "waiver": true,
+        "infusing": true,
+        "chosen": true,
+        "index": true,
+        "candidates": true,
+        "rng": true
+      },
+      "pass": true,
+      "differences": []
+    }
+  ]
+}

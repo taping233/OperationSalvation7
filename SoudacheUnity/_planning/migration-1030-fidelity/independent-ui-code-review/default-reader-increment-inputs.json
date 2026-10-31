@@ -1,0 +1,11 @@
+{
+  "reviewedAt": "2026-10-30T13:42:23.026640+00:00",
+  "scope": "Read-only static increment review; no compile/native/image run",
+  "files": {
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/DepartureElements.cs": "6902bc408229d6a97db7f9d9003bb83004dd32f62e005fc85bad08c05f0a27a2",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.Pool.cs": "508b332aa3a20ef62a3c2f377b22800c17080ab3d879fdc45efe1dbd24c73272",
+    "SoudacheUnity/Assets/Scripts/Sdt.Core/Cards.cs": "33d8338aea361d8efe8c7a561bb8e0eddcb65dbcbda923dd5d4fd6bb9d927453",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeMaterials.cs": "54e1bd9dadc5cf71a69fcb67c6a0a27d7ddfb315ba5913b4318a85262c7811be",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeComposite.shader": "46f9065179e892909897d95019f7660c8f4ebf96a0d700d095eed2e4f3bc1962"
+  }
+}

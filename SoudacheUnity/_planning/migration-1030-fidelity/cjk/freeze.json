@@ -1,0 +1,17 @@
+{
+  "state": "frozen",
+  "owner": "cjk_native_source_wrap",
+  "files": {
+    "Assets/Scripts/Sdt.UI/Kit/SourceTextLayout.cs": "04caa2c1e15ab0214ec4bb2a4ceb85d72bb80f42c6b42c4096d0912b31257072",
+    "Assets/Scripts/Sdt.UI/Kit/InlineIconText.cs": "cb2959ad75527961ce093452b23c59a1e15402fe0905b281ef6c2b3bffdc59dc",
+    "Assets/Scripts/Sdt.UI/Kit/CjkNativeLayout.cs": "dfc57a25b46e54c858529b5c1e5ce277f9141ea8e2904cd4613c5def77aa35e9",
+    "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs": "e839c51bef1441415dc61227774a44f2a0fc62d0af35da0bf70a906e68d27f86",
+    "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentBeginnerGuide.cs": "0e43552374b9aff4ed03653e8cf17214043f5123b24c9807e74a5825a74d61ee",
+    "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeScene.cs": "d3c2cd1a4711bfee998e849f66b6a32149b5a1a5e54916ccc60508d150739db0",
+    "Assets/Editor/CurrentCjkLayoutValidation.cs": "c14391fd16d1ff6be3358ddb6b175baf6e347756d6c3a16b518b0803408261b6"
+  },
+  "privateProductionCompile": "0 errors / 10 pre-existing warnings",
+  "privateEditorCompile": "0 errors / 0 warnings",
+  "syntheticAdvanceInvariants": 21,
+  "native": "Not run by subagent. Root must run Sdt.Editor.CurrentCjkLayoutValidation.Run, actual player and independent review."
+}

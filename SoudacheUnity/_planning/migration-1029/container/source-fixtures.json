@@ -1,0 +1,890 @@
+{
+  "cases": [
+    {
+      "name": "equipment-one-other-three",
+      "baseCap": 20,
+      "before": {
+        "ownedCards": [
+          {
+            "uid": "e0",
+            "card": {
+              "id": "e",
+              "name": "装备",
+              "type": "装备"
+            }
+          },
+          {
+            "uid": "e1",
+            "card": {
+              "id": "e",
+              "name": "装备",
+              "type": "装备"
+            }
+          },
+          {
+            "uid": "e2",
+            "card": {
+              "id": "e",
+              "name": "装备",
+              "type": "装备"
+            }
+          },
+          {
+            "uid": "e3",
+            "card": {
+              "id": "e",
+              "name": "装备",
+              "type": "装备"
+            }
+          },
+          {
+            "uid": "e4",
+            "card": {
+              "id": "e",
+              "name": "装备",
+              "type": "装备"
+            }
+          },
+          {
+            "uid": "e5",
+            "card": {
+              "id": "e",
+              "name": "装备",
+              "type": "装备"
+            }
+          },
+          {
+            "uid": "s0",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s1",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s2",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s3",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s4",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s5",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s6",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          }
+        ],
+        "inventory": [],
+        "battleActive": false
+      },
+      "request": null,
+      "result": null,
+      "after": [
+        {
+          "uid": "e0",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "e1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "e2",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "e3",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "e4",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "e5",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s0",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s2",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s3",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s4",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s5",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s6",
+          "stored": false,
+          "pouchOf": null
+        }
+      ],
+      "usage": {
+        "used": 9,
+        "ordinarySlots": 9,
+        "resourceBonus": 0,
+        "cap": 20,
+        "safeUsed": 0
+      }
+    },
+    {
+      "name": "pouch-first-capacity-only",
+      "baseCap": 10,
+      "before": {
+        "ownedCards": [
+          {
+            "uid": "p1",
+            "card": {
+              "id": "tt7-stratagem",
+              "name": "法师锦囊",
+              "type": "法术",
+              "rules": {
+                "equip": {
+                  "container": {
+                    "slots": 3,
+                    "accepts": "法术"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "p2",
+            "card": {
+              "id": "tt7-stratagem",
+              "name": "法师锦囊",
+              "type": "法术",
+              "rules": {
+                "equip": {
+                  "container": {
+                    "slots": 3,
+                    "accepts": "法术"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "s0",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s1",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s2",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s3",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          }
+        ],
+        "inventory": [],
+        "battleActive": false
+      },
+      "request": {
+        "kind": "pouch",
+        "take": false,
+        "name": "法术"
+      },
+      "result": {
+        "ok": true,
+        "code": null
+      },
+      "after": [
+        {
+          "uid": "p1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "p2",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s0",
+          "stored": true,
+          "pouchOf": "tt7-stratagem"
+        },
+        {
+          "uid": "s1",
+          "stored": true,
+          "pouchOf": "tt7-stratagem"
+        },
+        {
+          "uid": "s2",
+          "stored": true,
+          "pouchOf": "tt7-stratagem"
+        },
+        {
+          "uid": "s3",
+          "stored": false,
+          "pouchOf": null
+        }
+      ],
+      "usage": {
+        "used": 2,
+        "ordinarySlots": 2,
+        "resourceBonus": 0,
+        "cap": 10,
+        "safeUsed": 0
+      }
+    },
+    {
+      "name": "pouch-full-stack-rejected",
+      "baseCap": 10,
+      "before": {
+        "ownedCards": [
+          {
+            "uid": "p1",
+            "card": {
+              "id": "tt7-stratagem",
+              "name": "法师锦囊",
+              "type": "法术",
+              "rules": {
+                "equip": {
+                  "container": {
+                    "slots": 3,
+                    "accepts": "法术"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "stored0",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            },
+            "stored": 1,
+            "pouchOf": "tt7-stratagem"
+          },
+          {
+            "uid": "stored1",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            },
+            "stored": 1,
+            "pouchOf": "tt7-stratagem"
+          },
+          {
+            "uid": "s0",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s1",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          },
+          {
+            "uid": "s2",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            }
+          }
+        ],
+        "inventory": [],
+        "battleActive": false
+      },
+      "request": {
+        "kind": "pouch",
+        "take": false,
+        "name": "法术"
+      },
+      "result": {
+        "ok": false,
+        "code": "container-full"
+      },
+      "after": [
+        {
+          "uid": "p1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "stored0",
+          "stored": true,
+          "pouchOf": "tt7-stratagem"
+        },
+        {
+          "uid": "stored1",
+          "stored": true,
+          "pouchOf": "tt7-stratagem"
+        },
+        {
+          "uid": "s0",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s2",
+          "stored": false,
+          "pouchOf": null
+        }
+      ],
+      "usage": {
+        "used": 2,
+        "ordinarySlots": 2,
+        "resourceBonus": 0,
+        "cap": 10,
+        "safeUsed": 0
+      }
+    },
+    {
+      "name": "pearl-two-boxes",
+      "baseCap": 10,
+      "before": {
+        "ownedCards": [
+          {
+            "uid": "b1",
+            "card": {
+              "id": "tt2-pearlbox",
+              "name": "珍珠盒",
+              "type": "装备",
+              "rules": {
+                "equip": {
+                  "container": {
+                    "slots": 9,
+                    "accepts": "资源"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "b2",
+            "card": {
+              "id": "tt2-pearlbox",
+              "name": "珍珠盒",
+              "type": "装备",
+              "rules": {
+                "equip": {
+                  "container": {
+                    "slots": 9,
+                    "accepts": "资源"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "r0",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            }
+          },
+          {
+            "uid": "r1",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            }
+          },
+          {
+            "uid": "r2",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            }
+          },
+          {
+            "uid": "r3",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            }
+          },
+          {
+            "uid": "r4",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            }
+          },
+          {
+            "uid": "r5",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            }
+          }
+        ],
+        "inventory": [],
+        "battleActive": false
+      },
+      "request": {
+        "kind": "pearl",
+        "take": false,
+        "name": "资源"
+      },
+      "result": {
+        "ok": true,
+        "code": null
+      },
+      "after": [
+        {
+          "uid": "b1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "b2",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r0",
+          "stored": true,
+          "pouchOf": null
+        },
+        {
+          "uid": "r1",
+          "stored": true,
+          "pouchOf": null
+        },
+        {
+          "uid": "r2",
+          "stored": true,
+          "pouchOf": null
+        },
+        {
+          "uid": "r3",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r4",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r5",
+          "stored": false,
+          "pouchOf": null
+        }
+      ],
+      "usage": {
+        "used": 3,
+        "ordinarySlots": 2,
+        "resourceBonus": 18,
+        "cap": 28,
+        "safeUsed": 0
+      }
+    },
+    {
+      "name": "pouch-retrieve-ordinary-full",
+      "baseCap": 3,
+      "before": {
+        "ownedCards": [
+          {
+            "uid": "b1",
+            "card": {
+              "id": "tt2-pearlbox",
+              "name": "珍珠盒",
+              "type": "装备",
+              "rules": {
+                "equip": {
+                  "container": {
+                    "slots": 9,
+                    "accepts": "资源"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "p1",
+            "card": {
+              "id": "tt7-stratagem",
+              "name": "法师锦囊",
+              "type": "法术",
+              "rules": {
+                "equip": {
+                  "container": {
+                    "slots": 3,
+                    "accepts": "法术"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "e",
+            "card": {
+              "id": "e",
+              "name": "装备",
+              "type": "装备"
+            }
+          },
+          {
+            "uid": "s0",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            },
+            "stored": 1,
+            "pouchOf": "tt7-stratagem"
+          },
+          {
+            "uid": "s1",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            },
+            "stored": 1,
+            "pouchOf": "tt7-stratagem"
+          },
+          {
+            "uid": "s2",
+            "card": {
+              "id": "s",
+              "name": "法术",
+              "type": "法术"
+            },
+            "stored": 1,
+            "pouchOf": "tt7-stratagem"
+          }
+        ],
+        "inventory": [],
+        "battleActive": false
+      },
+      "request": {
+        "kind": "pouch",
+        "take": true,
+        "name": "法术"
+      },
+      "result": {
+        "ok": false,
+        "code": "bag-full"
+      },
+      "after": [
+        {
+          "uid": "b1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "p1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "e",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "s0",
+          "stored": true,
+          "pouchOf": "tt7-stratagem"
+        },
+        {
+          "uid": "s1",
+          "stored": true,
+          "pouchOf": "tt7-stratagem"
+        },
+        {
+          "uid": "s2",
+          "stored": true,
+          "pouchOf": "tt7-stratagem"
+        }
+      ],
+      "usage": {
+        "used": 3,
+        "ordinarySlots": 3,
+        "resourceBonus": 9,
+        "cap": 12,
+        "safeUsed": 0
+      }
+    },
+    {
+      "name": "pearl-retrieve-resources-in-extension",
+      "baseCap": 1,
+      "before": {
+        "ownedCards": [
+          {
+            "uid": "b1",
+            "card": {
+              "id": "tt2-pearlbox",
+              "name": "珍珠盒",
+              "type": "装备",
+              "rules": {
+                "equip": {
+                  "container": {
+                    "slots": 9,
+                    "accepts": "资源"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "r0",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            },
+            "stored": 1
+          },
+          {
+            "uid": "r1",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            },
+            "stored": 1
+          },
+          {
+            "uid": "r2",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            },
+            "stored": 1
+          },
+          {
+            "uid": "r3",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            },
+            "stored": 1
+          },
+          {
+            "uid": "r4",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            },
+            "stored": 1
+          },
+          {
+            "uid": "r5",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            },
+            "stored": 1
+          },
+          {
+            "uid": "r6",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            },
+            "stored": 1
+          },
+          {
+            "uid": "r7",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            },
+            "stored": 1
+          },
+          {
+            "uid": "r8",
+            "card": {
+              "id": "r",
+              "name": "资源",
+              "type": "资源"
+            },
+            "stored": 1
+          }
+        ],
+        "inventory": [],
+        "battleActive": false
+      },
+      "request": {
+        "kind": "pearl",
+        "take": true,
+        "name": "资源"
+      },
+      "result": {
+        "ok": true,
+        "code": null
+      },
+      "after": [
+        {
+          "uid": "b1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r0",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r1",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r2",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r3",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r4",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r5",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r6",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r7",
+          "stored": false,
+          "pouchOf": null
+        },
+        {
+          "uid": "r8",
+          "stored": false,
+          "pouchOf": null
+        }
+      ],
+      "usage": {
+        "used": 4,
+        "ordinarySlots": 1,
+        "resourceBonus": 9,
+        "cap": 10,
+        "safeUsed": 0
+      }
+    }
+  ],
+  "rescue": [
+    "tt2-pearlbox",
+    "s",
+    "r"
+  ]
+}

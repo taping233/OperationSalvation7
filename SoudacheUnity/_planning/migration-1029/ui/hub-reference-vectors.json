@@ -1,0 +1,834 @@
+{
+  "purchases": [
+    {
+      "name": "poor-material",
+      "before": {
+        "coins": 3,
+        "room": 9
+      },
+      "input": {
+        "material": "wood",
+        "price": 4
+      },
+      "result": {
+        "ok": false,
+        "why": "poor"
+      },
+      "after": {
+        "coins": 3,
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "stash": []
+      }
+    },
+    {
+      "name": "material-success",
+      "before": {
+        "coins": 4,
+        "room": 0
+      },
+      "input": {
+        "material": "wood",
+        "price": 4
+      },
+      "result": {
+        "ok": true
+      },
+      "after": {
+        "coins": 0,
+        "wood": 1,
+        "rations": 0,
+        "keys": 0,
+        "stash": []
+      }
+    },
+    {
+      "name": "full-card",
+      "before": {
+        "coins": 6,
+        "room": 0
+      },
+      "input": {
+        "card": {
+          "id": "tt7-throwblade",
+          "cls": "侠客",
+          "name": "飞刃偷袭",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "攻（-3），附加流血，抽 1 张牌。",
+          "dmg": -3,
+          "dmgType": "attack",
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "curse": "bleed",
+                  "stacks": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        },
+        "price": 6
+      },
+      "result": {
+        "ok": false,
+        "why": "full"
+      },
+      "after": {
+        "coins": 6,
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "stash": []
+      }
+    },
+    {
+      "name": "card-success",
+      "before": {
+        "coins": 6,
+        "room": 1
+      },
+      "input": {
+        "card": {
+          "id": "tt7-throwblade",
+          "cls": "侠客",
+          "name": "飞刃偷袭",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "攻（-3），附加流血，抽 1 张牌。",
+          "dmg": -3,
+          "dmgType": "attack",
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "curse": "bleed",
+                  "stacks": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        },
+        "price": 6
+      },
+      "result": {
+        "ok": true
+      },
+      "after": {
+        "coins": 0,
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "stash": [
+          {
+            "card": {
+              "id": "tt7-throwblade",
+              "cls": "侠客",
+              "name": "飞刃偷袭",
+              "cost": 0,
+              "rarity": "职业",
+              "type": "武术",
+              "desc": "攻（-3），附加流血，抽 1 张牌。",
+              "dmg": -3,
+              "dmgType": "attack",
+              "draw": 1,
+              "value": 3,
+              "unrandom": true,
+              "rules": {
+                "version": 1,
+                "battle": {
+                  "target": {
+                    "side": "enemy",
+                    "area": false
+                  }
+                },
+                "triggers": {
+                  "onPlay": [
+                    {
+                      "op": "damage",
+                      "amountField": "dmg",
+                      "target": "chosenEnemy"
+                    },
+                    {
+                      "op": "curse",
+                      "curse": "bleed",
+                      "stacks": 1,
+                      "target": "chosenEnemy"
+                    },
+                    {
+                      "op": "draw",
+                      "amount": 1
+                    }
+                  ]
+                }
+              }
+            },
+            "count": 1
+          }
+        ]
+      }
+    }
+  ],
+  "conversions": [
+    {
+      "name": "first-profession",
+      "input": {
+        "baseSnapshot": {
+          "characters": {
+            "wu": {
+              "lv": 1,
+              "xp": 0
+            }
+          },
+          "collection": {}
+        },
+        "card": {
+          "id": "tt7-throwblade",
+          "cls": "侠客",
+          "name": "飞刃偷袭",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "攻（-3），附加流血，抽 1 张牌。",
+          "dmg": -3,
+          "dmgType": "attack",
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "curse": "bleed",
+                  "stacks": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        },
+        "count": 1,
+        "availableCount": 3
+      },
+      "expected": {
+        "canConvert": true,
+        "code": "",
+        "message": "",
+        "cardId": "tt7-throwblade",
+        "cardName": "飞刃偷袭",
+        "characterId": "wu",
+        "characterName": "无",
+        "registered": false,
+        "protected": false,
+        "registrationOnly": false,
+        "count": 1,
+        "availableCount": 3,
+        "maxCount": 3,
+        "neededCount": 189,
+        "perCardXp": 10,
+        "remainingXp": 1890,
+        "baseXp": 10,
+        "actualXp": 10,
+        "overflowXp": 0,
+        "before": {
+          "lv": 1,
+          "xp": 0
+        },
+        "after": {
+          "lv": 1,
+          "xp": 10
+        }
+      }
+    },
+    {
+      "name": "last-card-overflow",
+      "input": {
+        "baseSnapshot": {
+          "characters": {
+            "wu": {
+              "lv": 9,
+              "xp": 369
+            }
+          },
+          "collection": {}
+        },
+        "card": {
+          "id": "tt7-throwblade",
+          "cls": "侠客",
+          "name": "飞刃偷袭",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "攻（-3），附加流血，抽 1 张牌。",
+          "dmg": -3,
+          "dmgType": "attack",
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "curse": "bleed",
+                  "stacks": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        },
+        "count": 1,
+        "availableCount": 3
+      },
+      "expected": {
+        "canConvert": true,
+        "code": "",
+        "message": "",
+        "cardId": "tt7-throwblade",
+        "cardName": "飞刃偷袭",
+        "characterId": "wu",
+        "characterName": "无",
+        "registered": false,
+        "protected": false,
+        "registrationOnly": false,
+        "count": 1,
+        "availableCount": 3,
+        "maxCount": 1,
+        "neededCount": 1,
+        "perCardXp": 10,
+        "remainingXp": 1,
+        "baseXp": 10,
+        "actualXp": 1,
+        "overflowXp": 9,
+        "before": {
+          "lv": 9,
+          "xp": 369
+        },
+        "after": {
+          "lv": 10,
+          "xp": 0
+        }
+      }
+    },
+    {
+      "name": "bulk-exceeds-remaining",
+      "input": {
+        "baseSnapshot": {
+          "characters": {
+            "wu": {
+              "lv": 9,
+              "xp": 369
+            }
+          },
+          "collection": {}
+        },
+        "card": {
+          "id": "tt7-throwblade",
+          "cls": "侠客",
+          "name": "飞刃偷袭",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "攻（-3），附加流血，抽 1 张牌。",
+          "dmg": -3,
+          "dmgType": "attack",
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "curse": "bleed",
+                  "stacks": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        },
+        "count": 2,
+        "availableCount": 3
+      },
+      "expected": {
+        "canConvert": false,
+        "code": "CONVERSION_LIMIT",
+        "message": "达到满级最多需要 1 张，超出部分不会消耗",
+        "cardId": "tt7-throwblade",
+        "cardName": "飞刃偷袭",
+        "characterId": "wu",
+        "characterName": "无",
+        "registered": false,
+        "protected": false,
+        "registrationOnly": false,
+        "count": 2,
+        "availableCount": 3,
+        "maxCount": 1,
+        "neededCount": 1,
+        "perCardXp": 10,
+        "remainingXp": 1,
+        "baseXp": 20,
+        "actualXp": 1,
+        "overflowXp": 19,
+        "before": {
+          "lv": 9,
+          "xp": 369
+        },
+        "after": {
+          "lv": 10,
+          "xp": 0
+        }
+      }
+    },
+    {
+      "name": "ability-gain",
+      "input": {
+        "baseSnapshot": {
+          "characters": {
+            "wu": {
+              "lv": 1,
+              "xp": 0
+            }
+          },
+          "collection": {}
+        },
+        "card": {
+          "id": "tt8-hero-assassin",
+          "cls": "侠客",
+          "hero": true,
+          "name": "白梅落影·妄",
+          "cost": 2,
+          "rarity": "稀有",
+          "type": "能力卡",
+          "dmg": 0,
+          "desc": "遁入虚空：净化自身，潜行 2 回合；破隐一击伤害翻倍。",
+          "value": 8,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "cleanse",
+                  "target": "self"
+                },
+                {
+                  "op": "blessing",
+                  "key": "stealth",
+                  "duration": 2
+                },
+                {
+                  "op": "registerRule",
+                  "rule": "stealthStrike"
+                }
+              ]
+            }
+          }
+        },
+        "count": 1,
+        "availableCount": 1
+      },
+      "expected": {
+        "canConvert": true,
+        "code": "",
+        "message": "",
+        "cardId": "tt8-hero-assassin",
+        "cardName": "白梅落影·妄",
+        "characterId": "wu",
+        "characterName": "无",
+        "registered": false,
+        "protected": false,
+        "registrationOnly": false,
+        "count": 1,
+        "availableCount": 1,
+        "maxCount": 1,
+        "neededCount": 38,
+        "perCardXp": 50,
+        "remainingXp": 1890,
+        "baseXp": 50,
+        "actualXp": 50,
+        "overflowXp": 0,
+        "before": {
+          "lv": 1,
+          "xp": 0
+        },
+        "after": {
+          "lv": 2,
+          "xp": 0
+        }
+      }
+    },
+    {
+      "name": "maxed-register-only",
+      "input": {
+        "baseSnapshot": {
+          "characters": {
+            "wu": {
+              "lv": 10,
+              "xp": 0
+            }
+          },
+          "collection": {}
+        },
+        "card": {
+          "id": "tt7-throwblade",
+          "cls": "侠客",
+          "name": "飞刃偷袭",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "攻（-3），附加流血，抽 1 张牌。",
+          "dmg": -3,
+          "dmgType": "attack",
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "curse": "bleed",
+                  "stacks": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        },
+        "count": 1,
+        "availableCount": 2
+      },
+      "expected": {
+        "canConvert": true,
+        "code": "",
+        "message": "",
+        "cardId": "tt7-throwblade",
+        "cardName": "飞刃偷袭",
+        "characterId": "wu",
+        "characterName": "无",
+        "registered": false,
+        "protected": false,
+        "registrationOnly": true,
+        "count": 1,
+        "availableCount": 2,
+        "maxCount": 1,
+        "neededCount": 1,
+        "perCardXp": 10,
+        "remainingXp": 0,
+        "baseXp": 10,
+        "actualXp": 0,
+        "overflowXp": 0,
+        "before": {
+          "lv": 10,
+          "xp": 0
+        },
+        "after": {
+          "lv": 10,
+          "xp": 0
+        }
+      }
+    },
+    {
+      "name": "maxed-already-registered",
+      "input": {
+        "baseSnapshot": {
+          "characters": {
+            "wu": {
+              "lv": 10,
+              "xp": 0
+            }
+          },
+          "collection": {
+            "tt7-throwblade": {
+              "protected": false
+            }
+          }
+        },
+        "card": {
+          "id": "tt7-throwblade",
+          "cls": "侠客",
+          "name": "飞刃偷袭",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "攻（-3），附加流血，抽 1 张牌。",
+          "dmg": -3,
+          "dmgType": "attack",
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "curse": "bleed",
+                  "stacks": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        },
+        "count": 1,
+        "availableCount": 2
+      },
+      "expected": {
+        "canConvert": false,
+        "code": "CHARACTER_MAXED",
+        "message": "人物熟练度已满且卡牌已收录，无需再消耗卡牌",
+        "cardId": "tt7-throwblade",
+        "cardName": "飞刃偷袭",
+        "characterId": "wu",
+        "characterName": "无",
+        "registered": true,
+        "protected": false,
+        "registrationOnly": false,
+        "count": 1,
+        "availableCount": 2,
+        "maxCount": 0,
+        "neededCount": 0,
+        "perCardXp": 10,
+        "remainingXp": 0,
+        "baseXp": 10,
+        "actualXp": 0,
+        "overflowXp": 10,
+        "before": {
+          "lv": 10,
+          "xp": 0
+        },
+        "after": {
+          "lv": 10,
+          "xp": 0
+        }
+      }
+    },
+    {
+      "name": "protected",
+      "input": {
+        "baseSnapshot": {
+          "characters": {
+            "wu": {
+              "lv": 1,
+              "xp": 0
+            }
+          },
+          "collection": {
+            "tt7-throwblade": {
+              "protected": true
+            }
+          }
+        },
+        "card": {
+          "id": "tt7-throwblade",
+          "cls": "侠客",
+          "name": "飞刃偷袭",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "攻（-3），附加流血，抽 1 张牌。",
+          "dmg": -3,
+          "dmgType": "attack",
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "curse": "bleed",
+                  "stacks": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        },
+        "count": 1,
+        "availableCount": 2
+      },
+      "expected": {
+        "canConvert": false,
+        "code": "COLLECTION_PROTECTED",
+        "message": "卡牌已受保护，请先取消保护；图鉴收录会保留",
+        "cardId": "tt7-throwblade",
+        "cardName": "飞刃偷袭",
+        "characterId": "wu",
+        "characterName": "无",
+        "registered": true,
+        "protected": true,
+        "registrationOnly": false,
+        "count": 1,
+        "availableCount": 2,
+        "maxCount": 2,
+        "neededCount": 189,
+        "perCardXp": 10,
+        "remainingXp": 1890,
+        "baseXp": 10,
+        "actualXp": 10,
+        "overflowXp": 0,
+        "before": {
+          "lv": 1,
+          "xp": 0
+        },
+        "after": {
+          "lv": 1,
+          "xp": 10
+        }
+      }
+    }
+  ]
+}

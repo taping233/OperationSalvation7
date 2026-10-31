@@ -1,0 +1,142 @@
+{
+  "format": "sdt-unity-profile",
+  "version": 1,
+  "runs": {},
+  "global": {
+    "sdt-base-v2-slot1": {
+      "wood": 0,
+      "rations": 0,
+      "bagUp": 0,
+      "safeUp": 0,
+      "stashUp": 0,
+      "coins": 0,
+      "stash": [
+        {
+          "card": {
+            "id": "tt-econpack",
+            "name": "经济卡包",
+            "cost": 0,
+            "rarity": "史诗",
+            "type": "资源",
+            "dmg": 0,
+            "dmgType": null,
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "只能在仓库界面点击使用，获得5张随机卡牌",
+            "value": 10,
+            "sellable": false,
+            "unrandom": true,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": null,
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 1
+        }
+      ],
+      "pocket": [],
+      "collection": {},
+      "selMode": "standard",
+      "classes": {},
+      "characters": {},
+      "stats": {
+        "extracts": 0,
+        "deaths": 0,
+        "kills": 0,
+        "actions": 0,
+        "playSeconds": 0.0,
+        "bossKills": [],
+        "bestRunCoins": 0,
+        "stashTotal": 0,
+        "turnMovesMax": 0,
+        "battleEquipsMax": 0,
+        "reviveKills": 0,
+        "nestBossKills": [],
+        "labTotalScore": 0
+      },
+      "achClaimed": {},
+      "backs": {
+        "classic": true
+      },
+      "backSel": "classic",
+      "selectedSkins": {},
+      "collClaimed": {},
+      "collectionProtection": {},
+      "keys": 0,
+      "pets": {
+        "dog": {
+          "lv": 1,
+          "ts": 0
+        }
+      },
+      "petSel": "dog",
+      "eggPity": 0,
+      "eggBattles": 0,
+      "ammoTaught": false,
+      "runes": [],
+      "goals": {
+        "tracked": [
+          "a",
+          "b"
+        ],
+        "presets": {
+          "preset-1": {
+            "id": "preset-1",
+            "name": "实装预设",
+            "characterId": "wu",
+            "petId": "dog",
+            "picks": []
+          }
+        }
+      },
+      "story": {
+        "flags": {},
+        "outcomes": {}
+      },
+      "supplyPackOpening": {
+        "cardId": "tt-econpack",
+        "cardIds": [
+          "starter-emergency-bandage",
+          "starter-emergency-bandage",
+          "starter-emergency-bandage",
+          "starter-emergency-bandage",
+          "starter-emergency-bandage"
+        ]
+      },
+      "BackSel": "classic",
+      "BagCap": 16,
+      "SafeCap": 2,
+      "StashCap": 25,
+      "StashUsed": 1,
+      "StashRoom": 24,
+      "CanUpgradeBag": false,
+      "CanUpgradeSafe": false,
+      "CanUpgradeStash": false,
+      "KeyCount": 0,
+      "CarriedPet": {
+        "id": "dog",
+        "name": "旺财",
+        "icon": "paw",
+        "desc": "携带效果：生命上限 +5",
+        "effect": {
+          "maxHp": 5,
+          "safeBonus": 0,
+          "extraSha": 0,
+          "classChest": 0.0,
+          "shopFree": false,
+          "shaToFireball": false
+        }
+      },
+      "PetEggDropChance": 0.007
+    }
+  },
+  "settlements": {}
+}

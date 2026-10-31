@@ -1,0 +1,432 @@
+{
+  "allRecordedChecksPass": true,
+  "checks": {
+    "nativeExitZeroAndInputsUnchanged": true,
+    "originalSeedAndNode": true,
+    "threeOriginalIdentitiesAndOrder": true,
+    "allThreeExactObjectReceiversAndInsideMasks": true,
+    "allThreeGraphicNativeDepthNotCulled": true,
+    "firstOriginalCardActuallyClicked": true,
+    "noExplicitNormalRenderRecovery": true,
+    "noScrollEvents": true,
+    "onlyExpectedThreeRealClicks": true,
+    "largeAndMediumSavedReceipts": true,
+    "priorGrantUidsRemovedAndRetainedUnchanged": true,
+    "exactlyFourNewGrants": true,
+    "coinResetAndFreshSavedValue": true,
+    "originalEvidenceShaUnchanged": true,
+    "inputsBeforeAfterIdentical": true
+  },
+  "process": {
+    "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunRewardTransition",
+    "pid": 9188,
+    "startedAt": "2026-10-30T00:25:43.3650158Z",
+    "endedAt": "2026-10-30T00:26:00.6648439Z",
+    "exitCode": 0,
+    "timedOut": false,
+    "inputsUnchanged": true,
+    "changedInputs": [],
+    "sourceCount": 336,
+    "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-reward-transition-1"
+  },
+  "sourceProfileSha256": "7a788b8cbe4ea42117134c9c6b67ae5da7d97f60d6cbf8ca4c07b3e828c66110",
+  "probe": {
+    "step": 3,
+    "tick": 5,
+    "kind": "current-reward-input-probe",
+    "detail": {
+      "reason": "exact-old-medium-before-native-render",
+      "node": "3,9",
+      "chestIndex": 1,
+      "targets": [
+        {
+          "name": "收下",
+          "label": "选择",
+          "card": "tt2-frostsword",
+          "index": 0,
+          "bounds": {
+            "minX": 516.0,
+            "minY": 266.0,
+            "maxX": 715.999939,
+            "maxY": 318.0
+          },
+          "center": {
+            "x": 616.0001,
+            "y": 292.0
+          },
+          "centerInMasks": true,
+          "receiver": "收下",
+          "hits": [
+            {
+              "name": "收下",
+              "receiver": "收下"
+            },
+            {
+              "name": "scroll",
+              "receiver": null
+            },
+            {
+              "name": "mask",
+              "receiver": "mask"
+            }
+          ],
+          "graphics": [
+            {
+              "name": "收下",
+              "depth": 20,
+              "raycastTarget": true,
+              "culled": false,
+              "enabled": true
+            },
+            {
+              "name": "label",
+              "depth": 21,
+              "raycastTarget": false,
+              "culled": false,
+              "enabled": true
+            }
+          ],
+          "masks": [
+            {
+              "name": "scroll",
+              "bounds": {
+                "minX": 56.0000038,
+                "minY": 112.000008,
+                "maxX": 1864.0,
+                "maxY": 944.0
+              }
+            }
+          ]
+        },
+        {
+          "name": "收下",
+          "label": "选择",
+          "card": "tt12-raygun",
+          "index": 1,
+          "bounds": {
+            "minX": 859.999939,
+            "minY": 266.0,
+            "maxX": 1060.0,
+            "maxY": 318.0
+          },
+          "center": {
+            "x": 960.0,
+            "y": 292.0
+          },
+          "centerInMasks": true,
+          "receiver": "收下",
+          "hits": [
+            {
+              "name": "收下",
+              "receiver": "收下"
+            },
+            {
+              "name": "scroll",
+              "receiver": null
+            },
+            {
+              "name": "mask",
+              "receiver": "mask"
+            }
+          ],
+          "graphics": [
+            {
+              "name": "收下",
+              "depth": 37,
+              "raycastTarget": true,
+              "culled": false,
+              "enabled": true
+            },
+            {
+              "name": "label",
+              "depth": 38,
+              "raycastTarget": false,
+              "culled": false,
+              "enabled": true
+            }
+          ],
+          "masks": [
+            {
+              "name": "scroll",
+              "bounds": {
+                "minX": 56.0000038,
+                "minY": 112.000008,
+                "maxX": 1864.0,
+                "maxY": 944.0
+              }
+            }
+          ]
+        },
+        {
+          "name": "收下",
+          "label": "选择",
+          "card": "tt12-chargeray",
+          "index": 2,
+          "bounds": {
+            "minX": 1204.0,
+            "minY": 266.0,
+            "maxX": 1404.00012,
+            "maxY": 318.0
+          },
+          "center": {
+            "x": 1304.0,
+            "y": 292.0
+          },
+          "centerInMasks": true,
+          "receiver": "收下",
+          "hits": [
+            {
+              "name": "收下",
+              "receiver": "收下"
+            },
+            {
+              "name": "scroll",
+              "receiver": null
+            },
+            {
+              "name": "mask",
+              "receiver": "mask"
+            }
+          ],
+          "graphics": [
+            {
+              "name": "收下",
+              "depth": 57,
+              "raycastTarget": true,
+              "culled": false,
+              "enabled": true
+            },
+            {
+              "name": "label",
+              "depth": 58,
+              "raycastTarget": false,
+              "culled": false,
+              "enabled": true
+            }
+          ],
+          "masks": [
+            {
+              "name": "scroll",
+              "bounds": {
+                "minX": 56.0000038,
+                "minY": 112.000008,
+                "maxX": 1864.0,
+                "maxY": 944.0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "exactObjectRows": {
+    "step": 3,
+    "tick": 5,
+    "kind": "exact-old-choice-object-raycasts",
+    "detail": {
+      "phase": "exact-old-medium-before-native-render",
+      "rows": [
+        {
+          "card": "tt2-frostsword",
+          "index": 0,
+          "center": {
+            "x": 616.0001,
+            "y": 292.0
+          },
+          "inMasks": true,
+          "receiverIsExactTarget": true
+        },
+        {
+          "card": "tt12-raygun",
+          "index": 1,
+          "center": {
+            "x": 960.0,
+            "y": 292.0
+          },
+          "inMasks": true,
+          "receiverIsExactTarget": true
+        },
+        {
+          "card": "tt12-chargeray",
+          "index": 2,
+          "center": {
+            "x": 1304.0,
+            "y": 292.0
+          },
+          "inMasks": true,
+          "receiverIsExactTarget": true
+        }
+      ]
+    }
+  },
+  "firstChoiceCommand": {
+    "step": 3,
+    "tick": 5,
+    "kind": "exact-old-first-choice-command",
+    "detail": {
+      "card": "tt2-frostsword",
+      "x": 616.0001,
+      "y": 292.0,
+      "normalRenderRecoveryNeeded": false
+    }
+  },
+  "actualClicks": [
+    {
+      "step": 2,
+      "tick": 4,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "全部收下",
+        "x": 1612.00012,
+        "y": 50.0000038,
+        "first": "全部收下",
+        "receiver": "全部收下",
+        "hits": [
+          "全部收下",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "tick": 5,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "收下",
+        "x": 616.0001,
+        "y": 292.0,
+        "first": "收下",
+        "receiver": "收下",
+        "hits": [
+          "收下",
+          "scroll",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "tick": 6,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "继续探索",
+        "x": 1784.0,
+        "y": 50.0000038,
+        "first": "继续探索",
+        "receiver": "继续探索",
+        "hits": [
+          "继续探索",
+          "mask"
+        ]
+      }
+    }
+  ],
+  "controlledReset": {
+    "step": 1,
+    "tick": 3,
+    "kind": "controlled-exact-reward-receipt-reset",
+    "detail": {
+      "seed": 169015024,
+      "node": "3,9",
+      "removedOwnedUids": [
+        "omvu76bfdf3v1c",
+        "omvu76bfde8q5x",
+        "omvu76bfd6p2y7"
+      ],
+      "reversedCoins": 4,
+      "ownedAfterReset": 7,
+      "usedSlots": 3,
+      "capacity": 16,
+      "boxCardIds": [
+        {
+          "kind": "large",
+          "claimMode": "all",
+          "choiceCount": 0,
+          "cardIds": [
+            "tt2-turtlearmor",
+            "tt12-raydragon",
+            "cmtna0nb1yxt"
+          ],
+          "coins": 3
+        },
+        {
+          "kind": "medium",
+          "claimMode": "one",
+          "choiceCount": 3,
+          "cardIds": [
+            "tt2-frostsword",
+            "tt12-raygun",
+            "tt12-chargeray"
+          ],
+          "coins": 1
+        }
+      ],
+      "baseAcquisitionHistoryPreserved": true,
+      "balanceAssessed": false,
+      "note": "Only the isolated copy is reset; the old large-box grants are removed by exact UID so replay does not duplicate inventory or coins."
+    }
+  },
+  "freshSavedState": {
+    "seed": 169015024,
+    "node": "3,9",
+    "coins": 32,
+    "owned": 11,
+    "chestIndex": 2,
+    "nodeCompleted": true,
+    "boxes": [
+      {
+        "kind": "large",
+        "title": null,
+        "source": null,
+        "cardIds": [
+          "tt2-turtlearmor",
+          "tt12-raydragon",
+          "cmtna0nb1yxt"
+        ],
+        "coins": 3,
+        "claimMode": "all",
+        "choiceCount": 0,
+        "eggHit": false,
+        "taken": [
+          0,
+          1,
+          2
+        ],
+        "lost": [],
+        "coinsTaken": true,
+        "completed": true
+      },
+      {
+        "kind": "medium",
+        "title": null,
+        "source": null,
+        "cardIds": [
+          "tt2-frostsword",
+          "tt12-raygun",
+          "tt12-chargeray"
+        ],
+        "coins": 1,
+        "claimMode": "one",
+        "choiceCount": 3,
+        "eggHit": false,
+        "taken": [
+          0
+        ],
+        "lost": [
+          1,
+          2
+        ],
+        "coinsTaken": true,
+        "completed": true
+      }
+    ]
+  },
+  "originalFailureCauseDetermined": false,
+  "capacityComparison": "Pending independent capacity_reload_check; this replay does not prove full capacity/reload parity.",
+  "limitations": [
+    "The old failure frame did not record mask/depth/cull, so no causal attribution is possible.",
+    "This controlled replay preserves seed/card order/transition but resets prior grants/coins; acquisition history and balance are not assessed.",
+    "The explicit normal-render recovery and scroll branches did not run; the replay is not proof they fixed the old failure.",
+    "Constructed native uGUI events are not OS hardware input."
+  ]
+}

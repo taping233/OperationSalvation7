@@ -1,0 +1,4128 @@
+{
+  "runtimeEntries": [
+    {
+      "feature": "entry",
+      "chain": "run/game.run.altar.js openEntrySupply -> rewardSceneHTML entry-supply-strips -> ui/reward-scene-view.js -> room-rewards.css/entry-events.css; no illustrated entry shell"
+    },
+    {
+      "feature": "event-card-choice",
+      "chain": "game.run.events.js openEventPotions/openEventQuartermaster -> drawEventCards:352 -> eventDice -> ui/event-dice.js frozen outcomes + saved result -> event-card-choice.js open -> rewardSceneHTML. Dice is active, not dead code."
+    },
+    {
+      "feature": "chest",
+      "chain": "run/chests.js presentRewardBox:398 -> collectCoinsOnce -> rewardScreen=cards -> render:541 -> rewardSceneHTML; renderCurrentStage opening/chest also directly cards; safeOpeningHTML not imported."
+    },
+    {
+      "feature": "pickup",
+      "chain": "game.run.flow.js runInstant coin -> game.run.scenes.js openPickupPage ->950ms search -> settle claim -> room checkpoint. wood/rations/key -> openFixedRewardsOnCell card rewards."
+    },
+    {
+      "feature": "fire",
+      "chain": "game.run.altar.js openFireRest -> fireRestDecisionHTML -> illustrated node final specificity -> playFireRestFeedback -> outcome-feedback.js active compact720ms"
+    }
+  ],
+  "scenes": [
+    {
+      "key": "scene-shop-bg",
+      "source": "scenes/scene-shop-anime-v2.webp"
+    },
+    {
+      "key": "scene-event-bg",
+      "source": "scenes/event-tt6-mystery.webp"
+    },
+    {
+      "key": "scene-fire-bg",
+      "source": "scenes/fire-rest-1021/city-campfire.webp"
+    },
+    {
+      "key": "scene-chest-bg",
+      "source": "scenes/scene-chest-anime-v2.webp"
+    },
+    {
+      "key": "scene-door-bg",
+      "source": "scenes/scene-door-anime-v2.webp"
+    },
+    {
+      "key": "scene-altar-bg",
+      "source": "scenes/scene-altar-anime-v2.webp"
+    },
+    {
+      "key": "scene-extract-bg",
+      "source": "scenes/scene-extract-anime-v2.webp"
+    },
+    {
+      "key": "scene-pickup-coin",
+      "source": "scenes/scene-pickup-coin-anime-v2.webp"
+    },
+    {
+      "key": "scene-pickup-wood",
+      "source": "scenes/scene-pickup-wood-anime-v2.webp"
+    },
+    {
+      "key": "scene-pickup-rations",
+      "source": "scenes/scene-pickup-rations-anime-v2.webp"
+    },
+    {
+      "key": "scene-pickup-key",
+      "source": "scenes/scene-pickup-key-anime-v2.webp"
+    },
+    {
+      "key": "scene-event-timeskip",
+      "source": "scenes/event-tt6-mystery.webp"
+    },
+    {
+      "key": "scene-event-demondeal",
+      "source": "scenes/event-tt6-demondeal.webp"
+    },
+    {
+      "key": "scene-event-bandits",
+      "source": "scenes/event-bandits-anime-v2.webp"
+    },
+    {
+      "key": "scene-event-mystery",
+      "source": "scenes/event-tt6-mystery.webp"
+    },
+    {
+      "key": "scene-event-goldmine",
+      "source": "scenes/event-tt6-goldmine-1013-v2.webp"
+    },
+    {
+      "key": "scene-event-goldhammer",
+      "source": "scenes/event-tt6-goldhammer.webp"
+    },
+    {
+      "key": "scene-event-relief",
+      "source": "scenes/event-tt6-relief.webp"
+    },
+    {
+      "key": "scene-event-airdrop",
+      "source": "scenes/event-tt6-airdrop.webp"
+    },
+    {
+      "key": "scene-event-chestdraw",
+      "source": "scenes/event-tt6-chestdraw.webp"
+    },
+    {
+      "key": "scene-event-systemsupply",
+      "source": "scenes/event-tt6-systemsupply.webp"
+    },
+    {
+      "key": "scene-safe-bg",
+      "source": "scenes/winter-expedition/outskirts.webp"
+    },
+    {
+      "key": "scene-event-custom-a",
+      "source": "scenes/event-tt6-mystery.webp"
+    },
+    {
+      "key": "scene-event-custom-b",
+      "source": "scenes/event-tt6-airdrop.webp"
+    },
+    {
+      "key": "scene-event-custom-c",
+      "source": "scenes/event-tt6-relief.webp"
+    },
+    {
+      "key": "story-last-lamp",
+      "source": "scenes/event-last-lamp-1013-v1.webp"
+    },
+    {
+      "key": "scene-event-vital",
+      "source": "scenes/event-ev19-vital.webp"
+    },
+    {
+      "key": "scene-event-pearlbox",
+      "source": "scenes/event-ev19-pearlbox.webp"
+    },
+    {
+      "key": "scene-event-fireballs",
+      "source": "scenes/event-ev19-fireballs.webp"
+    },
+    {
+      "key": "scene-event-classchest",
+      "source": "scenes/event-ev19-classchest.webp"
+    },
+    {
+      "key": "scene-event-recode",
+      "source": "scenes/event-ev19-recode.webp"
+    },
+    {
+      "key": "scene-event-potions",
+      "source": "scenes/event-ev19-potions.webp"
+    },
+    {
+      "key": "scene-event-arrows",
+      "source": "scenes/event-ev19-arrows.webp"
+    },
+    {
+      "key": "scene-event-gamble",
+      "source": "scenes/event-ev19-gamble.webp"
+    },
+    {
+      "key": "scene-event-quartermaster",
+      "source": "scenes/event-ev19-quartermaster.webp"
+    },
+    {
+      "key": "scene-event-cobbler",
+      "source": "scenes/event-cmtn7qttxqo4.webp"
+    },
+    {
+      "key": "scene-entry-current",
+      "source": "scenes/entry/modern-winter-entry-1011-v2.webp"
+    },
+    {
+      "key": "scene-reward-current",
+      "source": "scenes/reward-salvage-v1.webp"
+    }
+  ],
+  "events": [
+    {
+      "id": "tt6-timeskip",
+      "asset": "scene-event-timeskip"
+    },
+    {
+      "id": "tt6-demondeal",
+      "asset": "scene-event-demondeal"
+    },
+    {
+      "id": "tt6-bandits",
+      "asset": "scene-event-bandits"
+    },
+    {
+      "id": "tt6-mystery",
+      "asset": "scene-event-mystery"
+    },
+    {
+      "id": "tt6-goldmine",
+      "asset": "scene-event-goldmine"
+    },
+    {
+      "id": "tt6-goldhammer",
+      "asset": "scene-event-goldhammer"
+    },
+    {
+      "id": "tt6-relief",
+      "asset": "scene-event-relief"
+    },
+    {
+      "id": "tt6-airdrop",
+      "asset": "scene-event-airdrop"
+    },
+    {
+      "id": "tt6-chestdraw",
+      "asset": "scene-event-chestdraw"
+    },
+    {
+      "id": "tt6-systemsupply",
+      "asset": "scene-event-systemsupply"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "asset": "scene-event-cobbler"
+    },
+    {
+      "id": "ev19-vital",
+      "asset": "scene-event-vital"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "asset": "scene-event-pearlbox"
+    },
+    {
+      "id": "ev19-fireballs",
+      "asset": "scene-event-fireballs"
+    },
+    {
+      "id": "ev19-classchest",
+      "asset": "scene-event-classchest"
+    },
+    {
+      "id": "ev19-recode",
+      "asset": "scene-event-recode"
+    },
+    {
+      "id": "ev19-potions",
+      "asset": "scene-event-potions"
+    },
+    {
+      "id": "ev19-arrows",
+      "asset": "scene-event-arrows"
+    },
+    {
+      "id": "ev19-gamble",
+      "asset": "scene-event-gamble"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "asset": "scene-event-quartermaster"
+    }
+  ],
+  "encounters": [
+    {
+      "id": "tt6-timeskip",
+      "role": "wu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-timeskip",
+      "role": "changwuyu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-timeskip",
+      "role": "baita",
+      "intro": ""
+    },
+    {
+      "id": "tt6-timeskip",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-timeskip",
+      "role": "xingyue",
+      "intro": ""
+    },
+    {
+      "id": "tt6-demondeal",
+      "role": "wu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-demondeal",
+      "role": "changwuyu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-demondeal",
+      "role": "baita",
+      "intro": ""
+    },
+    {
+      "id": "tt6-demondeal",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-demondeal",
+      "role": "xingyue",
+      "intro": ""
+    },
+    {
+      "id": "tt6-bandits",
+      "role": "wu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-bandits",
+      "role": "changwuyu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-bandits",
+      "role": "baita",
+      "intro": ""
+    },
+    {
+      "id": "tt6-bandits",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-bandits",
+      "role": "xingyue",
+      "intro": ""
+    },
+    {
+      "id": "tt6-mystery",
+      "role": "wu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-mystery",
+      "role": "changwuyu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-mystery",
+      "role": "baita",
+      "intro": ""
+    },
+    {
+      "id": "tt6-mystery",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-mystery",
+      "role": "xingyue",
+      "intro": ""
+    },
+    {
+      "id": "tt6-goldmine",
+      "role": "wu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-goldmine",
+      "role": "changwuyu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-goldmine",
+      "role": "baita",
+      "intro": ""
+    },
+    {
+      "id": "tt6-goldmine",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-goldmine",
+      "role": "xingyue",
+      "intro": "你认得这间地下库，居民曾在这里临时避难。如今人已撤走，楼梯下埋着散落的硬币。外侧还算稳固，更深处的支撑柱却已经裂开。"
+    },
+    {
+      "id": "tt6-goldhammer",
+      "role": "wu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-goldhammer",
+      "role": "changwuyu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-goldhammer",
+      "role": "baita",
+      "intro": ""
+    },
+    {
+      "id": "tt6-goldhammer",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-goldhammer",
+      "role": "xingyue",
+      "intro": ""
+    },
+    {
+      "id": "tt6-relief",
+      "role": "wu",
+      "intro": "军队警戒线内的急救点还在接收伤员。值守者指了指一旁的招式匣：“有个人来帮过忙，走前还留了这些。他说，如果遇到你，就让你先把伤处理好。”他没有说出那人的名字。"
+    },
+    {
+      "id": "tt6-relief",
+      "role": "changwuyu",
+      "intro": "你先前送来的物资已经拆封。值守者一面更换绷带，一面说：“大半都用上了，送来的几个人也安置下了。你也歇一下吧，处理伤口，或者带一份防身的东西。”"
+    },
+    {
+      "id": "tt6-relief",
+      "role": "baita",
+      "intro": "警戒线内的急救点挤着伤员。你扫过桌上所剩的物资，问还有什么能用。值守者抬起头：“处理伤口，或者带一张防身招式。只能选一样。”"
+    },
+    {
+      "id": "tt6-relief",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-relief",
+      "role": "xingyue",
+      "intro": ""
+    },
+    {
+      "id": "tt6-airdrop",
+      "role": "wu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-airdrop",
+      "role": "changwuyu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-airdrop",
+      "role": "baita",
+      "intro": ""
+    },
+    {
+      "id": "tt6-airdrop",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-airdrop",
+      "role": "xingyue",
+      "intro": ""
+    },
+    {
+      "id": "tt6-chestdraw",
+      "role": "wu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-chestdraw",
+      "role": "changwuyu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-chestdraw",
+      "role": "baita",
+      "intro": ""
+    },
+    {
+      "id": "tt6-chestdraw",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-chestdraw",
+      "role": "xingyue",
+      "intro": ""
+    },
+    {
+      "id": "tt6-systemsupply",
+      "role": "wu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-systemsupply",
+      "role": "changwuyu",
+      "intro": ""
+    },
+    {
+      "id": "tt6-systemsupply",
+      "role": "baita",
+      "intro": ""
+    },
+    {
+      "id": "tt6-systemsupply",
+      "role": "heixiang",
+      "intro": ""
+    },
+    {
+      "id": "tt6-systemsupply",
+      "role": "xingyue",
+      "intro": "撤离登记台前已经空了。名册上有几个你熟悉的街坊名字，后面划着转移标记。台下留着未领走的两种补给包，终端还亮着微弱的光。"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "role": "wu",
+      "intro": "临时掩体里，一支整备小队正在打包撤离。有人把备用零件推到你面前：“还能替你修整一件东西。做完我们就走，外面的动静越来越近了。”工具箱底还压着一枚通行证碎片。\n小队带着一份包扎材料；如果不需要整修，也可以让他们先处理伤口。"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "role": "changwuyu",
+      "intro": "临时掩体里，一支整备小队正在打包撤离。有人把备用零件推到你面前：“还能替你修整一件东西。做完我们就走，外面的动静越来越近了。”工具箱底还压着一枚通行证碎片。\n小队带着一份包扎材料；如果不需要整修，也可以让他们先处理伤口。"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "role": "baita",
+      "intro": "临时掩体里，一支整备小队正在打包撤离。有人把备用零件推到你面前：“还能替你修整一件东西。做完我们就走，外面的动静越来越近了。”工具箱底还压着一枚通行证碎片。\n小队带着一份包扎材料；如果不需要整修，也可以让他们先处理伤口。"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "role": "heixiang",
+      "intro": "临时掩体里，一支整备小队正在打包撤离。有人把备用零件推到你面前：“还能替你修整一件东西。做完我们就走，外面的动静越来越近了。”工具箱底还压着一枚通行证碎片。\n小队带着一份包扎材料；如果不需要整修，也可以让他们先处理伤口。"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "role": "xingyue",
+      "intro": "临时掩体里，一支整备小队正在打包撤离。有人把备用零件推到你面前：“还能替你修整一件东西。做完我们就走，外面的动静越来越近了。”工具箱底还压着一枚通行证碎片。\n小队带着一份包扎材料；如果不需要整修，也可以让他们先处理伤口。"
+    },
+    {
+      "id": "ev19-vital",
+      "role": "wu",
+      "intro": "九科撤走后，一只便携医疗箱留在了封闭的值守室里。箱内针剂封装完好，标签注明了强化体能的用途与剂量。这是供未感染人员使用的药物，无法逆转污染。\n针剂旁还放着一份创伤处理包，只够完成其中一种处理。"
+    },
+    {
+      "id": "ev19-vital",
+      "role": "changwuyu",
+      "intro": "九科撤走后，一只便携医疗箱留在了封闭的值守室里。箱内针剂封装完好，标签注明了强化体能的用途与剂量。这是供未感染人员使用的药物，无法逆转污染。\n针剂旁还放着一份创伤处理包，只够完成其中一种处理。"
+    },
+    {
+      "id": "ev19-vital",
+      "role": "baita",
+      "intro": "九科撤走后，一只便携医疗箱留在了封闭的值守室里。箱内针剂封装完好，标签注明了强化体能的用途与剂量。这是供未感染人员使用的药物，无法逆转污染。\n针剂旁还放着一份创伤处理包，只够完成其中一种处理。"
+    },
+    {
+      "id": "ev19-vital",
+      "role": "heixiang",
+      "intro": "九科撤走后，一只便携医疗箱留在了封闭的值守室里。箱内针剂封装完好，标签注明了强化体能的用途与剂量。这是供未感染人员使用的药物，无法逆转污染。\n针剂旁还放着一份创伤处理包，只够完成其中一种处理。"
+    },
+    {
+      "id": "ev19-vital",
+      "role": "xingyue",
+      "intro": "九科撤走后，一只便携医疗箱留在了封闭的值守室里。箱内针剂封装完好，标签注明了强化体能的用途与剂量。这是供未感染人员使用的药物，无法逆转污染。\n针剂旁还放着一份创伤处理包，只够完成其中一种处理。"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "role": "wu",
+      "intro": "临时庇护所的铁门即将关闭。一名幸存者把珍珠匣递过门缝：“带着它跑了一路，到了这儿也用不上。你还要往里面走，就拿去吧。”门后有人催促他远离入口。\n门内的志愿者也在分发急救材料。如果不拿匣子，可以请他帮忙处理伤口。"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "role": "changwuyu",
+      "intro": "临时庇护所的铁门即将关闭。一名幸存者把珍珠匣递过门缝：“带着它跑了一路，到了这儿也用不上。你还要往里面走，就拿去吧。”门后有人催促他远离入口。\n门内的志愿者也在分发急救材料。如果不拿匣子，可以请他帮忙处理伤口。"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "role": "baita",
+      "intro": "临时庇护所的铁门即将关闭。一名幸存者把珍珠匣递过门缝：“带着它跑了一路，到了这儿也用不上。你还要往里面走，就拿去吧。”门后有人催促他远离入口。\n门内的志愿者也在分发急救材料。如果不拿匣子，可以请他帮忙处理伤口。"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "role": "heixiang",
+      "intro": "临时庇护所的铁门即将关闭。一名幸存者把珍珠匣递过门缝：“带着它跑了一路，到了这儿也用不上。你还要往里面走，就拿去吧。”门后有人催促他远离入口。\n门内的志愿者也在分发急救材料。如果不拿匣子，可以请他帮忙处理伤口。"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "role": "xingyue",
+      "intro": "临时庇护所的铁门即将关闭。一名幸存者把珍珠匣递过门缝：“带着它跑了一路，到了这儿也用不上。你还要往里面走，就拿去吧。”门后有人催促他远离入口。\n门内的志愿者也在分发急救材料。如果不拿匣子，可以请他帮忙处理伤口。"
+    },
+    {
+      "id": "ev19-fireballs",
+      "role": "wu",
+      "intro": "常无欲从侧巷走出来，把两份封装火种递给你：“专门给你带的。用得上就用，别省。”他朝庇护所的方向看了一眼，压低声音：“我还得去接几个人，后面再碰头。”\n封装袋里还留有应急材料。少带一份火种，就有余地先处理伤口。",
+      "name": "师叔的赠礼"
+    },
+    {
+      "id": "ev19-fireballs",
+      "role": "changwuyu",
+      "intro": "你回到事先布置的接应点，从箱底取出给自己留下的两份火种。其余物资已送往附近的庇护所，封装袋上还留着你写的领取说明。\n封装袋里还留有应急材料。少带一份火种，就有余地先处理伤口。"
+    },
+    {
+      "id": "ev19-fireballs",
+      "role": "baita",
+      "intro": "一处已经撤空的接应点内，留着两份单独封装的火种。外壳隔开了雨水和污迹，附签只写着：“留给还要往里走的人。”\n封装袋里还留有应急材料。少带一份火种，就有余地先处理伤口。"
+    },
+    {
+      "id": "ev19-fireballs",
+      "role": "heixiang",
+      "intro": "一处已经撤空的接应点内，留着两份单独封装的火种。外壳隔开了雨水和污迹，附签只写着：“留给还要往里走的人。”\n封装袋里还留有应急材料。少带一份火种，就有余地先处理伤口。"
+    },
+    {
+      "id": "ev19-fireballs",
+      "role": "xingyue",
+      "intro": "无在约好的接应点等了片刻，见你过来，便把两份封装火种交到你手里：“常无欲带来的，给你留了两份。”她替你检查过封口，才转身望向更深处的街道。\n封装袋里还留有应急材料。少带一份火种，就有余地先处理伤口。"
+    },
+    {
+      "id": "ev19-classchest",
+      "role": "wu",
+      "intro": "空置的回收点里，一只物资箱藏在倒扣的桌板下。封条没有署名，只有一组编号；里面的东西显然经过专门挑选，尚未交到原定接收者手上。\n箱边的小袋装着备用零钱；不动封条，也能先带走它。"
+    },
+    {
+      "id": "ev19-classchest",
+      "role": "changwuyu",
+      "intro": "回收点已经撤空。你认出箱上的封条，先检查周围有没有泄漏或污染，再确认里面是否还留着能用的物资。\n箱边的小袋装着备用零钱；不动封条，也能先带走它。"
+    },
+    {
+      "id": "ev19-classchest",
+      "role": "baita",
+      "intro": "你掀开回收点的桌板，核对箱上编号。封条完好，交接人却不在。你没有向旁人解释这批物资的来历，只伸手检查锁扣。\n箱边的小袋装着备用零钱；不动封条，也能先带走它。"
+    },
+    {
+      "id": "ev19-classchest",
+      "role": "heixiang",
+      "intro": "桌板下的封条让你停了一瞬。那套编号你很熟悉，但眼下没必要解释。街外又响起一声撞击，你把箱子拖到亮处。\n箱边的小袋装着备用零钱；不动封条，也能先带走它。"
+    },
+    {
+      "id": "ev19-classchest",
+      "role": "xingyue",
+      "intro": "空置的回收点里，一只物资箱藏在倒扣的桌板下。封条没有署名，只有一组编号；里面的东西显然经过专门挑选，尚未交到原定接收者手上。\n箱边的小袋装着备用零钱；不动封条，也能先带走它。"
+    },
+    {
+      "id": "ev19-recode",
+      "role": "wu",
+      "intro": "九科遗留的便携改装台仍接着备用电源。屏幕警告：部件匹配存在偏差，改装结果无法指定。街外传来撞击声，这里的门闩撑不了太久。\n切换到精调档，可以只处理一件行装并从有限的替代方案里选择，但需要补充三枚硬币启动备用电源。"
+    },
+    {
+      "id": "ev19-recode",
+      "role": "changwuyu",
+      "intro": "九科遗留的便携改装台仍接着备用电源。屏幕警告：部件匹配存在偏差，改装结果无法指定。街外传来撞击声，这里的门闩撑不了太久。\n切换到精调档，可以只处理一件行装并从有限的替代方案里选择，但需要补充三枚硬币启动备用电源。"
+    },
+    {
+      "id": "ev19-recode",
+      "role": "baita",
+      "intro": "九科遗留的便携改装台仍接着备用电源。屏幕警告：部件匹配存在偏差，改装结果无法指定。街外传来撞击声，这里的门闩撑不了太久。\n切换到精调档，可以只处理一件行装并从有限的替代方案里选择，但需要补充三枚硬币启动备用电源。"
+    },
+    {
+      "id": "ev19-recode",
+      "role": "heixiang",
+      "intro": "九科遗留的便携改装台仍接着备用电源。屏幕警告：部件匹配存在偏差，改装结果无法指定。街外传来撞击声，这里的门闩撑不了太久。\n切换到精调档，可以只处理一件行装并从有限的替代方案里选择，但需要补充三枚硬币启动备用电源。"
+    },
+    {
+      "id": "ev19-recode",
+      "role": "xingyue",
+      "intro": "九科遗留的便携改装台仍接着备用电源。屏幕警告：部件匹配存在偏差，改装结果无法指定。街外传来撞击声，这里的门闩撑不了太久。\n切换到精调档，可以只处理一件行装并从有限的替代方案里选择，但需要补充三枚硬币启动备用电源。"
+    },
+    {
+      "id": "ev19-potions",
+      "role": "wu",
+      "intro": "沙袋后的临时庇护所设着一张药品登记桌。值守者打开密封箱：“外面的人还在往这里来，存量得留着。你可以从这三瓶里选一瓶。”\n值守者示意你看看旁边的处理台：“不拿药水的话，也可以在这里处理一次伤口。”"
+    },
+    {
+      "id": "ev19-potions",
+      "role": "changwuyu",
+      "intro": "沙袋后的临时庇护所设着一张药品登记桌。值守者打开密封箱：“外面的人还在往这里来，存量得留着。你可以从这三瓶里选一瓶。”\n值守者示意你看看旁边的处理台：“不拿药水的话，也可以在这里处理一次伤口。”"
+    },
+    {
+      "id": "ev19-potions",
+      "role": "baita",
+      "intro": "沙袋后的临时庇护所设着一张药品登记桌。值守者打开密封箱：“外面的人还在往这里来，存量得留着。你可以从这三瓶里选一瓶。”\n值守者示意你看看旁边的处理台：“不拿药水的话，也可以在这里处理一次伤口。”"
+    },
+    {
+      "id": "ev19-potions",
+      "role": "heixiang",
+      "intro": "沙袋后的临时庇护所设着一张药品登记桌。值守者打开密封箱：“外面的人还在往这里来，存量得留着。你可以从这三瓶里选一瓶。”\n值守者示意你看看旁边的处理台：“不拿药水的话，也可以在这里处理一次伤口。”"
+    },
+    {
+      "id": "ev19-potions",
+      "role": "xingyue",
+      "intro": "沙袋后的临时庇护所设着一张药品登记桌。值守者打开密封箱：“外面的人还在往这里来，存量得留着。你可以从这三瓶里选一瓶。”\n值守者示意你看看旁边的处理台：“不拿药水的话，也可以在这里处理一次伤口。”"
+    },
+    {
+      "id": "ev19-arrows",
+      "role": "wu",
+      "intro": "射击位已经撤防，散落的空壳间留着一只封闭的箭具箱。搭在护栏上的便条写着：“后撤人员已领用。余下的留给后来者。”远处的枪声还没有停。\n你可以带走两份现成箭具，也可以打开封装细挑，只取最合用的一份。"
+    },
+    {
+      "id": "ev19-arrows",
+      "role": "changwuyu",
+      "intro": "射击位已经撤防，散落的空壳间留着一只封闭的箭具箱。搭在护栏上的便条写着：“后撤人员已领用。余下的留给后来者。”远处的枪声还没有停。\n你可以带走两份现成箭具，也可以打开封装细挑，只取最合用的一份。"
+    },
+    {
+      "id": "ev19-arrows",
+      "role": "baita",
+      "intro": "射击位已经撤防，散落的空壳间留着一只封闭的箭具箱。搭在护栏上的便条写着：“后撤人员已领用。余下的留给后来者。”远处的枪声还没有停。\n你可以带走两份现成箭具，也可以打开封装细挑，只取最合用的一份。"
+    },
+    {
+      "id": "ev19-arrows",
+      "role": "heixiang",
+      "intro": "射击位已经撤防，散落的空壳间留着一只封闭的箭具箱。搭在护栏上的便条写着：“后撤人员已领用。余下的留给后来者。”远处的枪声还没有停。\n你可以带走两份现成箭具，也可以打开封装细挑，只取最合用的一份。"
+    },
+    {
+      "id": "ev19-arrows",
+      "role": "xingyue",
+      "intro": "射击位已经撤防，散落的空壳间留着一只封闭的箭具箱。搭在护栏上的便条写着：“后撤人员已领用。余下的留给后来者。”远处的枪声还没有停。\n你可以带走两份现成箭具，也可以打开封装细挑，只取最合用的一份。"
+    },
+    {
+      "id": "ev19-gamble",
+      "role": "wu",
+      "intro": "季渊坐在暗巷深处，脚边的箱子已经收拢。他把三件东西摆在你看得见的地方，又放下一枚骰子：“三枚硬币一次。中就全拿，五次之内一定给你。想试就快些，这里待不久。”\n他又翻出一份招式：“不想碰运气，这份两枚硬币。先看，看中了再买。”"
+    },
+    {
+      "id": "ev19-gamble",
+      "role": "changwuyu",
+      "intro": "季渊坐在暗巷深处，脚边的箱子已经收拢。他把三件东西摆在你看得见的地方，又放下一枚骰子：“三枚硬币一次。中就全拿，五次之内一定给你。想试就快些，这里待不久。”\n他又翻出一份招式：“不想碰运气，这份两枚硬币。先看，看中了再买。”"
+    },
+    {
+      "id": "ev19-gamble",
+      "role": "baita",
+      "intro": "季渊坐在暗巷深处，脚边的箱子已经收拢。他把三件东西摆在你看得见的地方，又放下一枚骰子：“三枚硬币一次。中就全拿，五次之内一定给你。想试就快些，这里待不久。”\n他又翻出一份招式：“不想碰运气，这份两枚硬币。先看，看中了再买。”"
+    },
+    {
+      "id": "ev19-gamble",
+      "role": "heixiang",
+      "intro": "季渊收拢箱盖，听见脚步又抬起头：“你也走这条路？”他把三件东西推到灯下：“还是老规矩，三枚硬币一次，五次之内全给你。”巷口有动静，他抬手示意你压低声音。\n他又翻出一份招式：“不想碰运气，这份两枚硬币。先看，看中了再买。”"
+    },
+    {
+      "id": "ev19-gamble",
+      "role": "xingyue",
+      "intro": "季渊坐在暗巷深处，脚边的箱子已经收拢。他把三件东西摆在你看得见的地方，又放下一枚骰子：“三枚硬币一次。中就全拿，五次之内一定给你。想试就快些，这里待不久。”\n他又翻出一份招式：“不想碰运气，这份两枚硬币。先看，看中了再买。”"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "role": "wu",
+      "intro": "军队庇护点正在转运物资。一名看守临时货位的军需人员拦住你的手：“这批里可以匀一件给你，三枚硬币补运输费。先看看再选。”他只核对领取手续，没有追问你的来历。\n他又看了看你的行装：“有用得上的旧装备，也能按同档次换一件。东西先看，选定再交。”"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "role": "changwuyu",
+      "intro": "军队庇护点正在转运物资。一名看守临时货位的军需人员拦住你的手：“这批里可以匀一件给你，三枚硬币补运输费。先看看再选。”他只核对领取手续，没有追问你的来历。\n他又看了看你的行装：“有用得上的旧装备，也能按同档次换一件。东西先看，选定再交。”"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "role": "baita",
+      "intro": "军队庇护点正在转运物资。一名看守临时货位的军需人员拦住你的手：“这批里可以匀一件给你，三枚硬币补运输费。先看看再选。”他只核对领取手续，没有追问你的来历。\n他又看了看你的行装：“有用得上的旧装备，也能按同档次换一件。东西先看，选定再交。”"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "role": "heixiang",
+      "intro": "军队庇护点正在转运物资。一名看守临时货位的军需人员拦住你的手：“这批里可以匀一件给你，三枚硬币补运输费。先看看再选。”他只核对领取手续，没有追问你的来历。\n他又看了看你的行装：“有用得上的旧装备，也能按同档次换一件。东西先看，选定再交。”"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "role": "xingyue",
+      "intro": "军队庇护点正在转运物资。一名看守临时货位的军需人员拦住你的手：“这批里可以匀一件给你，三枚硬币补运输费。先看看再选。”他只核对领取手续，没有追问你的来历。\n他又看了看你的行装：“有用得上的旧装备，也能按同档次换一件。东西先看，选定再交。”"
+    }
+  ],
+  "nodeBg": {
+    "safe": "scene-safe-bg",
+    "battle": "scene-battle-bg",
+    "pickup": "scene-chest-bg",
+    "door": "scene-door-bg",
+    "altar": "scene-altar-bg",
+    "fire": "scene-fire-bg",
+    "exit": "scene-extract-bg",
+    "shop": "scene-shop-bg",
+    "event": "scene-event-bg"
+  },
+  "pickupBg": {
+    "coin": "scene-pickup-coin",
+    "wood": "scene-pickup-wood",
+    "rations": "scene-pickup-rations",
+    "key": "scene-pickup-key"
+  },
+  "sceneCopy": [
+    {
+      "kind": "battle",
+      "icon": "[[icon:swords]]",
+      "title": "遭遇战",
+      "tone": "battle",
+      "btn": "应 战",
+      "lines": [
+        "{name}从废墟的阴影中逼近，战斗一触即发！",
+        "脚步声戛然而止——{name}发现了你！",
+        "「这片废土是我的猎场。」{name}拦住了去路。",
+        "沙尘翻涌，{name}的轮廓自辐射尘雾中缓缓显形……"
+      ]
+    },
+    {
+      "kind": "shop",
+      "icon": "[[icon:bag]]",
+      "title": "拾荒商队",
+      "tone": "shop",
+      "btn": "看看货品",
+      "lines": [
+        "帆布帐篷下传来砂轮磨刀的声响：「哟，医疗队的稀客！以物易物，童叟无欺。」",
+        "商队头目掀开防水布：「旧世界的玩意儿，能换你兜里的币就归你。」"
+      ]
+    },
+    {
+      "kind": "event",
+      "icon": "[[icon:question]]",
+      "title": "奇遇",
+      "tone": "event",
+      "btn": "一探究竟",
+      "lines": [
+        "盖革计数器忽然轻颤，空气里有种说不出的味道……",
+        "脚下的碎砖微微震颤，荒土深处似有目光落在你身上。"
+      ]
+    },
+    {
+      "kind": "fire",
+      "icon": "[[icon:fire]]",
+      "title": "营火休整",
+      "tone": "fire",
+      "btn": "坐下歇脚",
+      "lines": [
+        "废料燃起的篝火噼啪作响，暖意顺着指尖爬了上来。",
+        "有人刚离开不久——灭火的沙土还是新的。"
+      ]
+    },
+    {
+      "kind": "chest",
+      "icon": "[[icon:archive]]",
+      "title": "遗留物资",
+      "tone": "chest",
+      "btn": "撬开柜子",
+      "lines": [
+        "瓦砾半掩着一只落满灰尘的保险柜，锁扣早已锈蚀……",
+        "物资箱的缝隙里透出微光——运气不错。"
+      ]
+    },
+    {
+      "kind": "coin",
+      "icon": "[[icon:coin]]",
+      "title": "拾获",
+      "tone": "pick",
+      "auto": true,
+      "lines": [
+        "路边的瓦砾堆里，有什么东西闪了一下。",
+        "「叮」——一枚旧世界硬币从锈铁皮里滚了出来。"
+      ]
+    },
+    {
+      "kind": "wood",
+      "icon": "[[icon:wood]]",
+      "title": "拾获",
+      "tone": "pick",
+      "auto": true,
+      "lines": [
+        "一根还没被白蚁蛀空的建材斜靠在断墙边，正好能用上。"
+      ]
+    },
+    {
+      "kind": "rations",
+      "icon": "[[icon:bread]]",
+      "title": "拾获",
+      "tone": "pick",
+      "auto": true,
+      "lines": [
+        "压扁的背囊里，居然还有未开封的应急口粮！"
+      ]
+    },
+    {
+      "kind": "key",
+      "icon": "[[icon:key]]",
+      "title": "拾获",
+      "tone": "pick",
+      "auto": true,
+      "lines": [
+        "一把泛着幽光的钥匙躺在碎石缝里——它能打开哪扇门？"
+      ]
+    },
+    {
+      "kind": "door",
+      "icon": "[[icon:door]]",
+      "title": "隔离闸门",
+      "tone": "door",
+      "btn": "靠 近",
+      "lines": [
+        "厚重的隔离闸门无声地滑开，另一侧的光影陌生而深邃。"
+      ]
+    },
+    {
+      "kind": "altar",
+      "icon": "[[icon:crystal]]",
+      "title": "污染核心",
+      "tone": "altar",
+      "btn": "深入污染区",
+      "lines": [
+        "裂谷尽头，紫色的辐射结晶在黑暗中明灭，空气凝重得令人窒息……"
+      ]
+    },
+    {
+      "kind": "exit",
+      "icon": "[[icon:exit]]",
+      "title": "撤离点",
+      "tone": "exit",
+      "btn": "前往撤离点",
+      "lines": [
+        "一枚信号弹拖着尾烟升上天空——营地的回收队就在眼前！"
+      ]
+    }
+  ],
+  "ghosts": [
+    {
+      "kind": "search"
+    },
+    {
+      "kind": "breach"
+    },
+    {
+      "kind": "heal"
+    },
+    {
+      "kind": "cards"
+    },
+    {
+      "kind": "chest"
+    },
+    {
+      "kind": "leave"
+    },
+    {
+      "kind": "fight"
+    },
+    {
+      "kind": "explore"
+    }
+  ],
+  "rewardVectors": [
+    {
+      "n": 0,
+      "taken": [],
+      "lost": [],
+      "states": [],
+      "status": [],
+      "summary": "已结束"
+    },
+    {
+      "n": 1,
+      "taken": [],
+      "lost": [],
+      "states": [
+        "pending"
+      ],
+      "status": [
+        ""
+      ],
+      "summary": "任选1张"
+    },
+    {
+      "n": 1,
+      "taken": [
+        0
+      ],
+      "lost": [],
+      "states": [
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张"
+    },
+    {
+      "n": 1,
+      "taken": [],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃"
+      ],
+      "summary": "已放弃 1 张"
+    },
+    {
+      "n": 2,
+      "taken": [],
+      "lost": [],
+      "states": [
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "",
+        ""
+      ],
+      "summary": "任选1张"
+    },
+    {
+      "n": 2,
+      "taken": [
+        0
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 1 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 2,
+      "taken": [],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已放弃 1 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 2,
+      "taken": [
+        1
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "received"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 2,
+      "taken": [
+        0,
+        1
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张"
+    },
+    {
+      "n": 2,
+      "taken": [
+        1
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃"
+    },
+    {
+      "n": 2,
+      "taken": [],
+      "lost": [
+        1
+      ],
+      "states": [
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 1 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 2,
+      "taken": [
+        0
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃"
+    },
+    {
+      "n": 2,
+      "taken": [],
+      "lost": [
+        0,
+        1
+      ],
+      "states": [
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 2 张"
+    },
+    {
+      "n": 3,
+      "taken": [],
+      "lost": [],
+      "states": [
+        "pending",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "",
+        "",
+        ""
+      ],
+      "summary": "任选1张"
+    },
+    {
+      "n": 3,
+      "taken": [
+        0
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        ""
+      ],
+      "summary": "已领取 1 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        ""
+      ],
+      "summary": "已放弃 1 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        1
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 1 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        0,
+        1
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 2 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        1
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [],
+      "lost": [
+        1
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已放弃 1 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        0
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [],
+      "lost": [
+        0,
+        1
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已放弃 2 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        2
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        0,
+        2
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        2
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        1,
+        2
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "received",
+        "received"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        0,
+        1,
+        2
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "received",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 3 张"
+    },
+    {
+      "n": 3,
+      "taken": [
+        1,
+        2
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃"
+    },
+    {
+      "n": 3,
+      "taken": [
+        2
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        0,
+        2
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃"
+    },
+    {
+      "n": 3,
+      "taken": [
+        2
+      ],
+      "lost": [
+        0,
+        1
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃"
+    },
+    {
+      "n": 3,
+      "taken": [],
+      "lost": [
+        2
+      ],
+      "states": [
+        "pending",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 1 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        0
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "received",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [],
+      "lost": [
+        0,
+        2
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 2 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        1
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "pending",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        0,
+        1
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "received",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃"
+    },
+    {
+      "n": 3,
+      "taken": [
+        1
+      ],
+      "lost": [
+        0,
+        2
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃"
+    },
+    {
+      "n": 3,
+      "taken": [],
+      "lost": [
+        1,
+        2
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 2 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 3,
+      "taken": [
+        0
+      ],
+      "lost": [
+        1,
+        2
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃"
+    },
+    {
+      "n": 3,
+      "taken": [],
+      "lost": [
+        0,
+        1,
+        2
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 3 张"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [],
+      "states": [
+        "pending",
+        "pending",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "summary": "任选1张"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "pending",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "",
+        ""
+      ],
+      "summary": "已领取 1 张 · 剩余 3 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "",
+        ""
+      ],
+      "summary": "已放弃 1 张 · 剩余 3 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "received",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "",
+        ""
+      ],
+      "summary": "已领取 1 张 · 剩余 3 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        1
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "received",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "",
+        ""
+      ],
+      "summary": "已领取 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        1
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "",
+        ""
+      ],
+      "summary": "已放弃 1 张 · 剩余 3 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        0,
+        1
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "pending",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "",
+        ""
+      ],
+      "summary": "已放弃 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "pending",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "",
+        "",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 1 张 · 剩余 3 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        2
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "pending",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        2
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "received",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        1,
+        2
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "received",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 3 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        2
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        2
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2
+      ],
+      "lost": [
+        0,
+        1
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "received",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        2
+      ],
+      "states": [
+        "pending",
+        "pending",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "",
+        "",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已放弃 1 张 · 剩余 3 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "received",
+        "pending",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        0,
+        2
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已放弃 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "pending",
+        "received",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        1
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "received",
+        "received",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1
+      ],
+      "lost": [
+        0,
+        2
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        1,
+        2
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已放弃 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0
+      ],
+      "lost": [
+        1,
+        2
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        0,
+        1,
+        2
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "forfeited",
+        "pending"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "已永久放弃",
+        ""
+      ],
+      "summary": "已放弃 3 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        3
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "pending",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "",
+        "",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 剩余 3 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        3
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "pending",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        3
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        3
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "received",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        1,
+        3
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "received",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 3 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        3
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        3
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        3
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        3
+      ],
+      "lost": [
+        0,
+        1
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "pending",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2,
+        3
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "pending",
+        "received",
+        "received"
+      ],
+      "status": [
+        "",
+        "",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        2,
+        3
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "pending",
+        "received",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 3 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2,
+        3
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "received",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        2,
+        3
+      ],
+      "lost": [],
+      "states": [
+        "pending",
+        "received",
+        "received",
+        "received"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 3 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "lost": [],
+      "states": [
+        "received",
+        "received",
+        "received",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 4 张"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        2,
+        3
+      ],
+      "lost": [
+        0
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "received",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 3 张 · 其余 1 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2,
+        3
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "received",
+        "received"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        2,
+        3
+      ],
+      "lost": [
+        1
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "received",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 3 张 · 其余 1 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2,
+        3
+      ],
+      "lost": [
+        0,
+        1
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "received",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 2 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        3
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "pending",
+        "pending",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "",
+        "",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        3
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "received",
+        "pending",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        3
+      ],
+      "lost": [
+        0,
+        2
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        3
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "pending",
+        "received",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        1,
+        3
+      ],
+      "lost": [
+        2
+      ],
+      "states": [
+        "received",
+        "received",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 3 张 · 其余 1 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        3
+      ],
+      "lost": [
+        0,
+        2
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 2 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        3
+      ],
+      "lost": [
+        1,
+        2
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        3
+      ],
+      "lost": [
+        1,
+        2
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 2 张 · 其余 2 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        3
+      ],
+      "lost": [
+        0,
+        1,
+        2
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "forfeited",
+        "received"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包"
+      ],
+      "summary": "已领取 1 张 · 其余 3 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        3
+      ],
+      "states": [
+        "pending",
+        "pending",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 1 张 · 剩余 3 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0
+      ],
+      "lost": [
+        3
+      ],
+      "states": [
+        "received",
+        "pending",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        0,
+        3
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1
+      ],
+      "lost": [
+        3
+      ],
+      "states": [
+        "pending",
+        "received",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        1
+      ],
+      "lost": [
+        3
+      ],
+      "states": [
+        "received",
+        "received",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1
+      ],
+      "lost": [
+        0,
+        3
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        1,
+        3
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0
+      ],
+      "lost": [
+        1,
+        3
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        0,
+        1,
+        3
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "pending",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 3 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2
+      ],
+      "lost": [
+        3
+      ],
+      "states": [
+        "pending",
+        "pending",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 1 张已放弃 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        2
+      ],
+      "lost": [
+        3
+      ],
+      "states": [
+        "received",
+        "pending",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2
+      ],
+      "lost": [
+        0,
+        3
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        2
+      ],
+      "lost": [
+        3
+      ],
+      "states": [
+        "pending",
+        "received",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 2 张 · 其余 1 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        1,
+        2
+      ],
+      "lost": [
+        3
+      ],
+      "states": [
+        "received",
+        "received",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 3 张 · 其余 1 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1,
+        2
+      ],
+      "lost": [
+        0,
+        3
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 2 张 · 其余 2 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2
+      ],
+      "lost": [
+        1,
+        3
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        2
+      ],
+      "lost": [
+        1,
+        3
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 2 张 · 其余 2 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        2
+      ],
+      "lost": [
+        0,
+        1,
+        3
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "received",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 3 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        2,
+        3
+      ],
+      "states": [
+        "pending",
+        "pending",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 2 张 · 剩余 2 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0
+      ],
+      "lost": [
+        2,
+        3
+      ],
+      "states": [
+        "received",
+        "pending",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        0,
+        2,
+        3
+      ],
+      "states": [
+        "forfeited",
+        "pending",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 3 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1
+      ],
+      "lost": [
+        2,
+        3
+      ],
+      "states": [
+        "pending",
+        "received",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 2 张已放弃 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0,
+        1
+      ],
+      "lost": [
+        2,
+        3
+      ],
+      "states": [
+        "received",
+        "received",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已领取 2 张 · 其余 2 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [
+        1
+      ],
+      "lost": [
+        0,
+        2,
+        3
+      ],
+      "states": [
+        "forfeited",
+        "received",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 3 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        1,
+        2,
+        3
+      ],
+      "states": [
+        "pending",
+        "forfeited",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "",
+        "已永久放弃",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 3 张 · 剩余 1 张待处理"
+    },
+    {
+      "n": 4,
+      "taken": [
+        0
+      ],
+      "lost": [
+        1,
+        2,
+        3
+      ],
+      "states": [
+        "received",
+        "forfeited",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "✓ 已选择 · 已入背包",
+        "已永久放弃",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已领取 1 张 · 其余 3 张已放弃"
+    },
+    {
+      "n": 4,
+      "taken": [],
+      "lost": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "states": [
+        "forfeited",
+        "forfeited",
+        "forfeited",
+        "forfeited"
+      ],
+      "status": [
+        "已永久放弃",
+        "已永久放弃",
+        "已永久放弃",
+        "已永久放弃"
+      ],
+      "summary": "已放弃 4 张"
+    }
+  ],
+  "choiceVectors": [
+    {
+      "text": "冒险深入",
+      "expected": "breach"
+    },
+    {
+      "text": "战斗应战",
+      "expected": "fight"
+    },
+    {
+      "text": "离开",
+      "expected": "leave"
+    },
+    {
+      "text": "回复生命",
+      "expected": "heal"
+    },
+    {
+      "text": "复原卡牌",
+      "expected": "cards"
+    },
+    {
+      "text": "开启物资箱",
+      "expected": "chest"
+    },
+    {
+      "text": "支付金币",
+      "expected": "search"
+    },
+    {
+      "text": "未知",
+      "expected": "explore"
+    },
+    {
+      "text": "失去生命换取金币",
+      "expected": "heal"
+    },
+    {
+      "text": "卡牌治疗",
+      "expected": "heal"
+    }
+  ],
+  "optionVectors": [
+    {
+      "hp": 2,
+      "coins": 0,
+      "choice": {
+        "healthCost": 3,
+        "coinCost": 3,
+        "costTiming": "confirmation",
+        "capacityCard": false
+      },
+      "expected": {
+        "state": "lethal",
+        "note": "会致死：当前 2 生命，失去 3 点生命；金币不足：还差 3 币（当前 0）",
+        "disabled": false,
+        "reason": "",
+        "stateLabel": "致命风险"
+      }
+    },
+    {
+      "hp": 2,
+      "coins": 0,
+      "choice": {
+        "healthCost": 3,
+        "coinCost": 3,
+        "costTiming": "entry",
+        "capacityCard": false
+      },
+      "expected": {
+        "state": "lethal",
+        "note": "会致死：当前 2 生命，失去 3 点生命；金币不足：还差 3 币（当前 0）",
+        "disabled": true,
+        "reason": "金币不足：还差 3 币（当前 0）",
+        "stateLabel": "金币不足"
+      }
+    },
+    {
+      "hp": 2,
+      "coins": 5,
+      "choice": {
+        "healthCost": 3,
+        "coinCost": 3,
+        "costTiming": "confirmation",
+        "capacityCard": false
+      },
+      "expected": {
+        "state": "lethal",
+        "note": "会致死：当前 2 生命，失去 3 点生命；支付 3 币后剩余 2",
+        "disabled": false,
+        "reason": "",
+        "stateLabel": "致命风险"
+      }
+    },
+    {
+      "hp": 2,
+      "coins": 5,
+      "choice": {
+        "healthCost": 3,
+        "coinCost": 3,
+        "costTiming": "entry",
+        "capacityCard": false
+      },
+      "expected": {
+        "state": "lethal",
+        "note": "会致死：当前 2 生命，失去 3 点生命；支付 3 币后剩余 2",
+        "disabled": false,
+        "reason": "",
+        "stateLabel": "致命风险"
+      }
+    },
+    {
+      "hp": 10,
+      "coins": 0,
+      "choice": {
+        "healthCost": 3,
+        "coinCost": 3,
+        "costTiming": "confirmation",
+        "capacityCard": false
+      },
+      "expected": {
+        "state": "limited",
+        "note": "失去 3 点生命后剩余 7；金币不足：还差 3 币（当前 0）",
+        "disabled": false,
+        "reason": "",
+        "stateLabel": "金币不足"
+      }
+    },
+    {
+      "hp": 10,
+      "coins": 0,
+      "choice": {
+        "healthCost": 3,
+        "coinCost": 3,
+        "costTiming": "entry",
+        "capacityCard": false
+      },
+      "expected": {
+        "state": "limited",
+        "note": "失去 3 点生命后剩余 7；金币不足：还差 3 币（当前 0）",
+        "disabled": true,
+        "reason": "金币不足：还差 3 币（当前 0）",
+        "stateLabel": "金币不足"
+      }
+    },
+    {
+      "hp": 10,
+      "coins": 5,
+      "choice": {
+        "healthCost": 3,
+        "coinCost": 3,
+        "costTiming": "confirmation",
+        "capacityCard": false
+      },
+      "expected": {
+        "state": "cost",
+        "note": "失去 3 点生命后剩余 7；支付 3 币后剩余 2",
+        "disabled": false,
+        "reason": "",
+        "stateLabel": "有代价"
+      }
+    },
+    {
+      "hp": 10,
+      "coins": 5,
+      "choice": {
+        "healthCost": 3,
+        "coinCost": 3,
+        "costTiming": "entry",
+        "capacityCard": false
+      },
+      "expected": {
+        "state": "cost",
+        "note": "失去 3 点生命后剩余 7；支付 3 币后剩余 2",
+        "disabled": false,
+        "reason": "",
+        "stateLabel": "有代价"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "file": "src/ui/reward-capacity-organizer.js",
+      "sha256": "b54288bdd2b83b6c00a96f17f7c421e6e22755a54cdc431d841e045486274ad2",
+      "imports": [
+        "../core/shared.js",
+        "./reward-scene-view.js",
+        "./screen-owner.js",
+        "../hub/bag-return-hook.js",
+        "./view-children-sync.js"
+      ]
+    },
+    {
+      "file": "src/hub/game.reward-organizer.js",
+      "sha256": "d510ba40c7598f0fbadcacd73254c33dc809fc2b19b2f47540aa85f8d5713244",
+      "imports": [
+        "../core/card-capacity.js",
+        "../core/bag-render-derivation.js",
+        "../ui/reward-capacity-organizer.js"
+      ]
+    },
+    {
+      "file": "src/run/game.run.resources.js",
+      "sha256": "10ea543066d689f08a303b5426afc4c9c3d881d65cb5dc285523872423dec8af",
+      "imports": [
+        "../core/shared.js",
+        "../core/random.js",
+        "../core/run-checkpoint.js",
+        "../ui/reward-card-feedback.js",
+        "./node-reward-state.js",
+        "../ui/reward-scene-view.js"
+      ]
+    },
+    {
+      "file": "src/ui/run-top-bar.css",
+      "sha256": "11449375450eb0d2a61acf1cdfa16b20357ecf226cbd7a861f99b8ba3f127373",
+      "imports": []
+    },
+    {
+      "file": "src/ui/reward-picker-heading.js",
+      "sha256": "e0153a5eee1a255e5e4900b473f4da38dc95eea4c7ecf71c39f7993c64ed32bd",
+      "imports": []
+    },
+    {
+      "file": "src/ui/outcome-feedback.js",
+      "sha256": "1bab0a47861e04c0340568b7858e557e6e75f09abfa159dbbfc1bf9e28a74517",
+      "imports": [
+        "../core/shared.js",
+        "./motion-completion.js",
+        "./motion-presets.js",
+        "../../css/fire-rest-feedback.css"
+      ]
+    },
+    {
+      "file": "src/ui/event-dice.js",
+      "sha256": "d50a669cb7c2ed6e33493c6ce478615839fc29e5b42cc6250c58e06bfc4e4d98",
+      "imports": [
+        "../core/shared.js",
+        "../core/random.js",
+        "./event-dice-visual.js",
+        "../core/run-checkpoint.js",
+        "../../css/event-dice.css"
+      ]
+    },
+    {
+      "file": "src/ui/event-dice-visual.js",
+      "sha256": "fbb726973a2a711f73221ab2eb2d5dca044b1c00ecd79a10261c7a76e1e487f0",
+      "imports": []
+    },
+    {
+      "file": "src/ui/reward-acquisition-motion.js",
+      "sha256": "df06881c5f68c0a2ab02632e51912fb63f143b175def55a837701a0e1f634a0b",
+      "imports": [
+        "./target-motion.js",
+        "./motion-presets.js",
+        "./feedback-theme.js",
+        "../../css/card-state-motion.css"
+      ]
+    },
+    {
+      "file": "src/ui/card-result-feedback.js",
+      "sha256": "312e425d51ccb40dcbd7aeca8e2ef56102f5afdb7d1143dae0a110aafe349554",
+      "imports": [
+        "./feedback-theme.js",
+        "./rarity-reveal.js",
+        "./reward-acquisition-motion.js"
+      ]
+    },
+    {
+      "file": "src/ui/motion-presets.js",
+      "sha256": "857fcf75668a97ca69a713532a63511ed855a9f6043188e3d09dcf274ca16221",
+      "imports": []
+    },
+    {
+      "file": "src/ui/feedback-theme.js",
+      "sha256": "a03b36afc583c8b8e6c977612ca6d30f65bf36756d6d658c2342e43902c9ad79",
+      "imports": [
+        "../../css/feedback-theme.css"
+      ]
+    },
+    {
+      "file": "src/run/event-card-choice.js",
+      "sha256": "3ec68c9b742152e505dfe2df28f8ec40c19ff9621597620d54d8beafc89fa9f3",
+      "imports": [
+        "../core/shared.js",
+        "./node-reward-state.js",
+        "../hub/bag-return-hook.js",
+        "../hub/game.bag.bridge.js",
+        "../core/run-checkpoint.js",
+        "./event-commands.js",
+        "../ui/reward-scene-view.js",
+        "../ui/overlay-return-state.js"
+      ]
+    },
+    {
+      "file": "src/run/node-reward-state.js",
+      "sha256": "b8b4a5e851adbd06bd75fe1434c260e62651c441b3b130fa68c1504accb98a8b",
+      "imports": [
+        "./node-restore-state.js"
+      ]
+    },
+    {
+      "file": "src/ui/room-actions.js",
+      "sha256": "34ebe9b8b6178ec6c7c6e4e4d430c7166b48fed2c87cc7120ef18ae471facaff",
+      "imports": [
+        "../core/run-checkpoint.js",
+        "./room-footer.js"
+      ]
+    },
+    {
+      "file": "src/ui/fire-rest-view.js",
+      "sha256": "d48c9597925299bb585b1d83e23de02c54c661da8f63a41a1da9eb63136ac9f7",
+      "imports": [
+        "../core/shared.js",
+        "./ui-disclosure.js",
+        "../../css/fire-rest.css",
+        "./illustrated-node.js"
+      ]
+    },
+    {
+      "file": "css/fire-rest-feedback.css",
+      "sha256": "4dde2066cceb68e2bf89b03afd4226b71102f3349c183eade28b4d3904a8f584",
+      "imports": []
+    },
+    {
+      "file": "css/card-state-motion.css",
+      "sha256": "c98e045a7472da426de1727cb55694167a247f227a67a4ef08d7bcee332659c0",
+      "imports": []
+    },
+    {
+      "file": "css/event-dice.css",
+      "sha256": "440b11a3b20b432d690dd0effc61dbd961d44431e32428de8b367d8b7264dc30",
+      "imports": []
+    },
+    {
+      "file": "src/core/event-encounter-text.js",
+      "sha256": "fb308df52627e9b4e3b36a474506826ce1315e4cd2a9a2fe77320f2a57c0a1f4",
+      "imports": [
+        "./characters.js"
+      ]
+    },
+    {
+      "file": "src/ui/node-scene-view.js",
+      "sha256": "e22d43081d8eaa5eb77b6ccf0f644ce6319e8fdbb0cf512435e377417928760b",
+      "imports": [
+        "../core/shared.js",
+        "../../css/archive-back.css",
+        "./illustrated-node.js"
+      ]
+    },
+    {
+      "file": "src/ui/illustrated-node.js",
+      "sha256": "ad43826915539ab343fc388d731ce5b044294991b8ceb3f7519470d5d8b12aa8",
+      "imports": [
+        "../core/shared.js",
+        "../../css/illustrated-node.css"
+      ]
+    },
+    {
+      "file": "src/ui/event-choice-selection.js",
+      "sha256": "04540bcae00a6e50f72e64786f1c74ca5c2fc1900ccc6e45de91887182de7a88",
+      "imports": []
+    },
+    {
+      "file": "src/ui/event-option-state.js",
+      "sha256": "1c9ec4488a0f55c631a5adf726ef4b0fe2a6dea88b6613a4cdaa00c5e1a9a506",
+      "imports": [
+        "../core/shared.js",
+        "../../css/event-option-state.css"
+      ]
+    },
+    {
+      "file": "src/run/game.run.scenes.js",
+      "sha256": "759b53a8fafbf889ce19a4a8b7a8626492d08c92d1f340a7377495ddb26ea3f0",
+      "imports": [
+        "../core/shared.js",
+        "../ui/outcome-feedback.js",
+        "../ui/room-actions.js",
+        "../cards/card-instance.js",
+        "./game.session.js",
+        "../hub/game.cardslib.js",
+        "./game.run.data.js",
+        "../core/random.js",
+        "../core/run-checkpoint.js",
+        "../core/random-core.js",
+        "./game.run.shop.js",
+        "../battle/battle-loader.js",
+        "../hub/bag-return-hook.js",
+        "../hub/game.bag.bridge.js",
+        "./node-reward-state.js",
+        "./node-restore-state.js",
+        "./encounter-selector.js",
+        "../core/turbo.js",
+        "../ui/transition-diagnostic-policy.js",
+        "../core/motion.js",
+        "../ui/camp-entry.js",
+        "../ui/silent-node-film.js",
+        "../ui/cinematic-profiles.js",
+        "../ui/page-surface-lifetime.js",
+        "../ui/transition-preparation.js",
+        "../ui/motion-presets.js",
+        "../ui/transition-handoff.js",
+        "../ui/transition-art.js",
+        "../ui/event-choice-selection.js",
+        "../ui/action-dispatch.js",
+        "../ui/view-children-sync.js",
+        "../ui/node-scene-view.js",
+        "../../css/entry-events.css",
+        "../../css/expedition-transitions.css"
+      ]
+    },
+    {
+      "file": "src/run/game.run.flow.js",
+      "sha256": "704b627fc971301d85d508860023004373c0c618122f418d2b8bc4f2b8259ebb",
+      "imports": [
+        "./game.session.js",
+        "../core/random.js",
+        "../hub/game.cardslib.js",
+        "../hub/game.storage.js",
+        "../hub/game.bag.bridge.js",
+        "../hub/bag-return-hook.js",
+        "../battle/battle-loader.js",
+        "../core/turbo.js",
+        "../core/render-scheduler.js",
+        "./map-travel-path.js",
+        "./map-travel-motion.js",
+        "./map-node-arrival.js",
+        "../ui/map-passage.js",
+        "./game.run.scenes.js",
+        "./game.run.altar.js",
+        "./node-reward-state.js",
+        "./event-card-choice.js",
+        "./event-lifecycle.js",
+        "./chest-reward-save.js",
+        "./game.run.resources.js"
+      ]
+    },
+    {
+      "file": "src/run/game.run.events.js",
+      "sha256": "2bce72a8cf8cf0526f7d56f2b8f8efb1bc4573b793eacf3344cf7301a5433e1e",
+      "imports": [
+        "../core/shared.js",
+        "../core/event-encounter-text.js",
+        "../core/random.js",
+        "../core/run-checkpoint.js",
+        "./game.run.data.js",
+        "./node-reward-state.js",
+        "../ui/event-signal-puzzle.js",
+        "./event-recode-candidates.js",
+        "../ui/event-recode-result.js",
+        "./event-commands.js",
+        "./event-lifecycle.js",
+        "./event-branch-choice.js",
+        "../hub/bag-inventory-commands.js",
+        "../ui/event-option-state.js",
+        "../ui/reward-scene-view.js",
+        "../ui/overlay-return-state.js"
+      ]
+    },
+    {
+      "file": "src/run/game.run.altar.js",
+      "sha256": "66ac64aedd9152dd92b3f52b258a6fd0c3a8f6925e7d3443667daf754d80fdc3",
+      "imports": [
+        "../ui/room-footer.js",
+        "../ui/encounter-presentation.js",
+        "../ui/room-actions.js",
+        "../ui/discovery-selection.js",
+        "../core/map-node-state.js",
+        "../core/characters.js",
+        "../ui/expedition-feedback.js",
+        "../ui/map-passage.js",
+        "./game.run.class-choice.js",
+        "../ui/reward-card-feedback.js",
+        "../ui/node-decision-view.js",
+        "../ui/fire-rest-view.js",
+        "../ui/fire-rest-feedback.js",
+        "../ui/outcome-feedback.js",
+        "../ui/reward-scene-view.js",
+        "./node-reward-state.js",
+        "./node-restore-state.js",
+        "../hub/game.bag.bridge.js",
+        "../hub/bag-return-hook.js",
+        "../core/shared.js",
+        "../core/run-checkpoint.js",
+        "./game.session.js",
+        "../hub/extraction.commands.js",
+        "../hub/sacrifice-policy.js",
+        "../hub/game.hub.js",
+        "../ui/extraction-rewards-view.js",
+        "../ui/extraction-stash-update.js",
+        "../ui/overlay-return-state.js",
+        "../ui/settlement-report.js",
+        "../ui/departure-transition.js",
+        "./event-lifecycle.js",
+        "../ui/emergency-exit-view.js",
+        "../hub/game.cardslib.js",
+        "../core/random.js",
+        "../battle/battle-loader.js",
+        "./game.run.scenes.js",
+        "../hub/game.storage.js",
+        "../hub/recovery.commands.js"
+      ]
+    },
+    {
+      "file": "src/run/chests.js",
+      "sha256": "fd42e9bde3b8cb28e913687c77e6aa462cae57dcee24309a637523e76cdf732e",
+      "imports": [
+        "../ui/reward-interaction.js",
+        "../ui/room-footer.js",
+        "../ui/room-actions.js",
+        "../core/sdt-facade.js",
+        "../core/random.js",
+        "../core/run-checkpoint.js",
+        "../core/card-capacity.js",
+        "../core/shared.js",
+        "../ui/reward-card-feedback.js",
+        "../ui/reward-picker-heading.js",
+        "../ui/reward-state.js",
+        "../ui/reward-scene-view.js",
+        "../ui/chest-reward-overview.js",
+        "./chest-reward-save.js",
+        "../hub/game.bag.bridge.js",
+        "./chest-opening-art.js"
+      ]
+    },
+    {
+      "file": "src/run/chest-opening-art.js",
+      "sha256": "e96bb5e851656d954294d434f475d304cc33a9accd83e9f249fd377b1254ad4f",
+      "imports": [
+        "../core/shared.js",
+        "../../css/chest-opening.css"
+      ]
+    },
+    {
+      "file": "src/ui/reward-scene-view.js",
+      "sha256": "51ecb9a8bbedc8751ae64adc8e555326232a22e596085a359b2d8ca109eefca3",
+      "imports": [
+        "../../css/room-rewards.css",
+        "../../css/room-footer.css",
+        "../core/shared.js",
+        "./view-children-sync.js"
+      ]
+    },
+    {
+      "file": "src/ui/reward-state.js",
+      "sha256": "cc0ab11d338b6421d2e139416e5979fa1280d59c53b94622802535dc2b0ef088",
+      "imports": []
+    },
+    {
+      "file": "src/ui/reward-interaction.js",
+      "sha256": "143a5072221e80cfaf3cbd30f6259e714b34f48994c3ae88ff16e1d57e1e556a",
+      "imports": [
+        "./motion-presets.js"
+      ]
+    },
+    {
+      "file": "src/ui/chest-reward-overview.js",
+      "sha256": "ef62cef740d1a51023ffa1f1ed56edf1191576d3dc11d8567d9b8c423e32aba2",
+      "imports": [
+        "../core/shared.js",
+        "../../css/chest-reward-overview.css",
+        "./illustrated-node.js",
+        "./reward-state.js",
+        "./reward-scene-view.js",
+        "./room-footer.js"
+      ]
+    },
+    {
+      "file": "src/ui/reward-card-feedback.js",
+      "sha256": "4809cc164e23209647ac6a55254250884a2aafb417b694c48af135cbd15df0b5",
+      "imports": [
+        "../../css/reward-completion-receipt.css",
+        "./card-result-feedback.js",
+        "./reward-state.js"
+      ]
+    },
+    {
+      "file": "src/ui/fire-rest-view.js",
+      "sha256": "d48c9597925299bb585b1d83e23de02c54c661da8f63a41a1da9eb63136ac9f7",
+      "imports": [
+        "../core/shared.js",
+        "./ui-disclosure.js",
+        "../../css/fire-rest.css",
+        "./illustrated-node.js"
+      ]
+    },
+    {
+      "file": "src/ui/fire-rest-feedback.js",
+      "sha256": "99026739c707141ae599e91e95fef90fe2fd8fb239c60ade43e0b1ef4a734db0",
+      "imports": [
+        "./outcome-feedback.js"
+      ]
+    },
+    {
+      "file": "data/scenes.json",
+      "sha256": "bd50f72f5e4fbed923ebea709fc496cd0449a28f4ae1fb92fb779e955ecf083b",
+      "imports": []
+    },
+    {
+      "file": "css/scenes.css",
+      "sha256": "a67769927d6e08f8f62fca38ac36defa03e551dd2ec4bfaaa50589be644212bb",
+      "imports": []
+    },
+    {
+      "file": "css/illustrated-node.css",
+      "sha256": "7b2dbdf3839960ac91f206297b6908faf413437f47894a7322f50b0e11e51530",
+      "imports": []
+    },
+    {
+      "file": "css/page-events.css",
+      "sha256": "d2bc908ffc892afbca477c203f18801ed159cc12ec651702746da39bf34d1852",
+      "imports": []
+    },
+    {
+      "file": "css/entry-events.css",
+      "sha256": "c43428a01099475ee93933a72e4ab45d95e2fda2535598d8a8bc774516f4e965",
+      "imports": []
+    },
+    {
+      "file": "css/event-option-state.css",
+      "sha256": "bf062379e7b71bd3d816570a0aaae14949b6c8b31d2502ce00e1da98def19d0d",
+      "imports": []
+    },
+    {
+      "file": "css/room-rewards.css",
+      "sha256": "9cb3c421c390044cc706cee5252aad2eb8b78842a0872621c9e1c6fb9eb7fe1b",
+      "imports": []
+    },
+    {
+      "file": "css/room-footer.css",
+      "sha256": "74323c44d305021f3d243c838146975fb5ff272ba9bd1a33ef402ac3142042f0",
+      "imports": []
+    },
+    {
+      "file": "css/chest-reward-overview.css",
+      "sha256": "f1e37047dfa0a89d638c0cbb24efa1a2dc9ce4270b1eafe6202f1eb0eee81f32",
+      "imports": []
+    },
+    {
+      "file": "css/reward-completion-receipt.css",
+      "sha256": "0bfa74955b4e0c9d4d287a1458f77756b537a019a2694070b12725ef75296ca7",
+      "imports": []
+    },
+    {
+      "file": "css/expedition-rewards.css",
+      "sha256": "542dc39a0f873956a75a4aefcbf9b59f08367bc0dad733630e2e4b46cdab5cac",
+      "imports": []
+    },
+    {
+      "file": "css/fire-rest.css",
+      "sha256": "0ba52bdafc030dd20d84a37f1b43623211834fb5b867ac399d0697135fabac14",
+      "imports": []
+    }
+  ],
+  "deadCode": [
+    {
+      "file": "src/run/chest-opening-art.js",
+      "export": "safeOpeningHTML",
+      "reason": "chests.js imports only createChestFrameSets/SAFE_CLOSED; no safeOpeningHTML or chestReveal caller; presentRewardBox directly sets rewardStage=cards"
+    },
+    {
+      "file": "src/run/game.run.altar.js",
+      "export": "openEntrySupply",
+      "reason": "current entry directly renders rewardSceneHTML entry-supply-strips, not eventSceneHTML"
+    }
+  ]
+}

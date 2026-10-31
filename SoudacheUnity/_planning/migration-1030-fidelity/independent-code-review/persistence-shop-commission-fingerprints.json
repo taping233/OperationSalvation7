@@ -1,0 +1,231 @@
+{
+  "capturedUtc": "2026-10-30T13:39:56.810862+00:00",
+  "readOnlyProduction": true,
+  "noUnityNoCompileNoForeground": true,
+  "native": [
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.Persistence.cs",
+      "sha256": "d87e92602ea1e71695680fc7c01015b6e1a02a3861393742b5b189067acd2549",
+      "bytes": 5897
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.Commission.cs",
+      "sha256": "5e8c9cd9e54b5dee1d7d0477f8539a1077edfad74da1f3c4580c5f040337a3a3",
+      "bytes": 9271
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.ShopAcquisition.cs",
+      "sha256": "9564eff843c173dbfeee195ecdbcec7834d51054e48bd262e0cecb57d0596e7c",
+      "bytes": 1863
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.cs",
+      "sha256": "6e948f7725d2aa417b837f6485f53f2590d77fe8f3bdcd0fda3e786688f1238e",
+      "bytes": 74881
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\SaveSystem.cs",
+      "sha256": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5",
+      "bytes": 19009
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\RunEvents.cs",
+      "sha256": "3251e3de028c40307c199b67ac6437709df0c4bc7598840c4af01614a835ff4f",
+      "bytes": 5351
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\ShopScreen.cs",
+      "sha256": "7a13f85d1c74db2f37f8d00d3aad7cf50da4db49c3e4cafc9a82466a56a932fc",
+      "bytes": 13623
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopCommission.cs",
+      "sha256": "a037e69d8f2407783c9fdbde2cfe11f65d9dac95483c15b1deca77cfaa014b34",
+      "bytes": 14149
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentIllustratedDice.cs",
+      "sha256": "8a2e76688a6b1f8e2088cb8ca7420e969185c000a62cf80910c7c2f2b375c439",
+      "bytes": 4608
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.cs",
+      "sha256": "428cbb2735a345750ad18d55abf7efacbf88f4c765779695783d62215357dfbf",
+      "bytes": 9665
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.Detail.cs",
+      "sha256": "3bb3b5ce5149d82d925c9bd4af4c2dfa7dd1888fa1ca67e84922c7e4b6ea4d51",
+      "bytes": 7513
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.Exchange.cs",
+      "sha256": "a2eafddaa50524659126e284139ed3c725ca3ddf6e974667194d55fcc20a3c9c",
+      "bytes": 5118
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentNodeScene.cs",
+      "sha256": "563c459d886b1e87054a482efc1be2d5e925ee6e7b0dbcdb33e5b2472770cbd2",
+      "bytes": 11377
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentNodeElements.cs",
+      "sha256": "6c99107cb7514b3bbdf376ca54fbbc033d53df227f86b5fb452389c5aae077f0",
+      "bytes": 2926
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\MenuDialogs.cs",
+      "sha256": "3812ca5537fa61d5bcd53611815ca56b7f78f5e3346301f64e54fedecd0f4b67",
+      "bytes": 10604
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentFeedbackComposer.cs",
+      "sha256": "027ef99df7f294237f52a38d40fe29821f1795c450fbd985daec52bd4aab0042",
+      "bytes": 7979
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentLeavePage.cs",
+      "sha256": "af1667c621bc59af7de61e340e65a6b5acb6dc17394fc01259ac25184acb4538",
+      "bytes": 9107
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Kit\\App.cs",
+      "sha256": "71676543e3612974082268532a022463af6ccf5aa2fc5849f39524493d2c1c1c",
+      "bytes": 11632
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Kit\\UIKit.cs",
+      "sha256": "d2f14afe00e76459b94d94c424bea70b64924917ebaecfa5360383a0b59711c2",
+      "bytes": 12037
+    }
+  ],
+  "source": [
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.shop.js",
+      "sha256": "fd593ec790066e0d0390936d86c9413ae4d8f561a15989775e6b1499954f09f0",
+      "bytes": 51244
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\shop-commands.js",
+      "sha256": "3da4c0bc334f1279e93a81674cfb4269aa448bd33665c18675fb6fb80d8f0e70",
+      "bytes": 6410
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\shop-commission.js",
+      "sha256": "53f3ba8bfd297dd8e49ffd57e9f25326e3099db8d3d0e32d8ec2362c1c26d860",
+      "bytes": 9938
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\event-dice.js",
+      "sha256": "d50a669cb7c2ed6e33493c6ce478615839fc29e5b42cc6250c58e06bfc4e4d98",
+      "bytes": 5951
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\overlay.js",
+      "sha256": "0529331813c3ef233ea47efda5aa6788327ae94228ce1653bd74c6e815d34382",
+      "bytes": 31902
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\core\\run-checkpoint.js",
+      "sha256": "ac88f7fd08ec4a970316c3c6df5e3c960638742ecb1de55d3e64d282d2cc37ff",
+      "bytes": 987
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\encounter-presentation.js",
+      "sha256": "b19fa534686e9c79d0b2fd91ad869af8ada01dfda8ee6c4184756463b6f95c26",
+      "bytes": 2229
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\menu-feedback.js",
+      "sha256": "e28f27ba6375d0e642408ecd9067342426f077f20606bcff31f41e1f12de529b",
+      "bytes": 19736
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\dialog-surface.js",
+      "sha256": "4689dd5c3fbda39030ad0b24f05b84f2db7b3dfff493c68a7ca9c58b5fbbfa4d",
+      "bytes": 2898
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\input-isolation.js",
+      "sha256": "d6536876d27e967caf317279e8d9be584d0827166f4cfd342f97ac93b885354b",
+      "bytes": 719
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\css\\event-dice.css",
+      "sha256": "440b11a3b20b432d690dd0effc61dbd961d44431e32428de8b367d8b7264dc30",
+      "bytes": 3102
+    }
+  ],
+  "shopFreeze": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/ShopScreen.cs",
+      "equalsFreeze": true,
+      "sha256": "7a13f85d1c74db2f37f8d00d3aad7cf50da4db49c3e4cafc9a82466a56a932fc"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.ShopAcquisition.cs",
+      "equalsFreeze": true,
+      "sha256": "9564eff843c173dbfeee195ecdbcec7834d51054e48bd262e0cecb57d0596e7c"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Commission.cs",
+      "equalsFreeze": true,
+      "sha256": "5e8c9cd9e54b5dee1d7d0477f8539a1077edfad74da1f3c4580c5f040337a3a3"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/EventProgress.cs",
+      "equalsFreeze": true,
+      "sha256": "1b7192db6245669f388391a91aaedfa57a8218babc804990ef73d09187fa7da2"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeScene.cs",
+      "equalsFreeze": true,
+      "sha256": "563c459d886b1e87054a482efc1be2d5e925ee6e7b0dbcdb33e5b2472770cbd2"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeShade.cs",
+      "equalsFreeze": true,
+      "sha256": "f7388705708d884f77a48728277f30581e1fe02f751edfb5c2718e4e50e8fd4d"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCarry.cs",
+      "equalsFreeze": false,
+      "sha256": "a725f15c9f39de4803cb3928ce8213bbf397b6f7c79b93b85ce388e1dfed228e"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCommission.cs",
+      "equalsFreeze": false,
+      "sha256": "a037e69d8f2407783c9fdbde2cfe11f65d9dac95483c15b1deca77cfaa014b34"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.cs",
+      "equalsFreeze": true,
+      "sha256": "428cbb2735a345750ad18d55abf7efacbf88f4c765779695783d62215357dfbf"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Detail.cs",
+      "equalsFreeze": true,
+      "sha256": "3bb3b5ce5149d82d925c9bd4af4c2dfa7dd1888fa1ca67e84922c7e4b6ea4d51"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Exchange.cs",
+      "equalsFreeze": true,
+      "sha256": "a2eafddaa50524659126e284139ed3c725ca3ddf6e974667194d55fcc20a3c9c"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Market.cs",
+      "equalsFreeze": true,
+      "sha256": "a8ad87aaa259d268f71be9fdf8f611fea2361d995a00da2294311a3c74f018c4"
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop/merchant-approved.png",
+      "equalsFreeze": true,
+      "sha256": "bbf68e81708ea6b169580831306188e58643d215045bb01800a196f4d55f4922"
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop/mystery-back.png",
+      "equalsFreeze": true,
+      "sha256": "75688925cad6135b41bd3c31e551467bc13922512047bef4c37f7c3dd6931365"
+    }
+  ]
+}

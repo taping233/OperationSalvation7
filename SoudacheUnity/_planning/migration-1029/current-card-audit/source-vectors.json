@@ -1,0 +1,6356 @@
+{
+  "chestVectors": [
+    {
+      "seed": 1,
+      "layer": 0,
+      "boxes": [
+        "small"
+      ]
+    },
+    {
+      "seed": 1,
+      "layer": 1,
+      "boxes": [
+        "small"
+      ]
+    },
+    {
+      "seed": 1,
+      "layer": 2,
+      "boxes": [
+        "medium"
+      ]
+    },
+    {
+      "seed": 1,
+      "layer": 3,
+      "boxes": [
+        "large",
+        "medium"
+      ]
+    },
+    {
+      "seed": 123,
+      "layer": 0,
+      "boxes": [
+        "medium"
+      ]
+    },
+    {
+      "seed": 123,
+      "layer": 1,
+      "boxes": [
+        "large"
+      ]
+    },
+    {
+      "seed": 123,
+      "layer": 2,
+      "boxes": [
+        "large"
+      ]
+    },
+    {
+      "seed": 123,
+      "layer": 3,
+      "boxes": [
+        "large",
+        "medium"
+      ]
+    },
+    {
+      "seed": 20261029,
+      "layer": 0,
+      "boxes": [
+        "class:small"
+      ]
+    },
+    {
+      "seed": 20261029,
+      "layer": 1,
+      "boxes": [
+        "class:small"
+      ]
+    },
+    {
+      "seed": 20261029,
+      "layer": 2,
+      "boxes": [
+        "class:medium",
+        "medium"
+      ]
+    },
+    {
+      "seed": 20261029,
+      "layer": 3,
+      "boxes": [
+        "large",
+        "medium"
+      ]
+    }
+  ],
+  "contentVectors": [
+    {
+      "seed": 1,
+      "kind": "small",
+      "isClass": false,
+      "cards": [
+        "tt2-comboarrow"
+      ],
+      "coins": 1,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 1,
+      "kind": "small",
+      "isClass": true,
+      "cards": [
+        "tt3-firm-barrier"
+      ],
+      "coins": 1,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 1,
+      "kind": "medium",
+      "isClass": false,
+      "cards": [
+        "tt2-comboarrow",
+        "cc-dual-wield",
+        "tt3-demon-potion"
+      ],
+      "coins": 1,
+      "claimMode": "one",
+      "choiceCount": 3
+    },
+    {
+      "seed": 1,
+      "kind": "medium",
+      "isClass": true,
+      "cards": [
+        "tt3-firm-barrier",
+        "tt7-arcanebolt",
+        "tt7-maxsupply"
+      ],
+      "coins": 2,
+      "claimMode": "one",
+      "choiceCount": 3
+    },
+    {
+      "seed": 1,
+      "kind": "large",
+      "isClass": false,
+      "cards": [
+        "tt2-comboarrow",
+        "cc-dual-wield",
+        "tt3-demon-potion"
+      ],
+      "coins": 2,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 1,
+      "kind": "large",
+      "isClass": true,
+      "cards": [
+        "tt3-firm-barrier",
+        "tt7-arcanebolt",
+        "tt7-maxsupply"
+      ],
+      "coins": 3,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 1,
+      "kind": "boss",
+      "isClass": false,
+      "cards": [
+        "tt2-comboarrow",
+        "cc-dual-wield",
+        "tt3-demon-potion",
+        "tt3wu-shike",
+        "tt3-wolf-bow",
+        "tt-copper"
+      ],
+      "coins": 0,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 1,
+      "kind": "boss",
+      "isClass": true,
+      "cards": [
+        "tt2-comboarrow",
+        "cc-dual-wield",
+        "tt3-demon-potion",
+        "tt3wu-shike",
+        "tt3-wolf-bow",
+        "tt-copper"
+      ],
+      "coins": 0,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 123,
+      "kind": "small",
+      "isClass": false,
+      "cards": [
+        "tt13-guard"
+      ],
+      "coins": 1,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 123,
+      "kind": "small",
+      "isClass": true,
+      "cards": [
+        "tt7-elementstorm"
+      ],
+      "coins": 1,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 123,
+      "kind": "medium",
+      "isClass": false,
+      "cards": [
+        "tt13-guard",
+        "tt3-life-arrow",
+        "tt3-bandage"
+      ],
+      "coins": 1,
+      "claimMode": "one",
+      "choiceCount": 3
+    },
+    {
+      "seed": 123,
+      "kind": "medium",
+      "isClass": true,
+      "cards": [
+        "tt7-elementstorm",
+        "cmtn1p9vb5au",
+        "tt7-recruit"
+      ],
+      "coins": 1,
+      "claimMode": "one",
+      "choiceCount": 3
+    },
+    {
+      "seed": 123,
+      "kind": "large",
+      "isClass": false,
+      "cards": [
+        "tt13-guard",
+        "tt3-life-arrow",
+        "tt3-bandage"
+      ],
+      "coins": 2,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 123,
+      "kind": "large",
+      "isClass": true,
+      "cards": [
+        "tt7-elementstorm",
+        "cmtn1p9vb5au",
+        "tt7-recruit"
+      ],
+      "coins": 2,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 123,
+      "kind": "boss",
+      "isClass": false,
+      "cards": [
+        "tt13-guard",
+        "tt3-life-arrow",
+        "tt3-bandage",
+        "tt2-swiftarrow",
+        "tt3sp-silverthorn",
+        "tt-copper"
+      ],
+      "coins": 0,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 123,
+      "kind": "boss",
+      "isClass": true,
+      "cards": [
+        "tt13-guard",
+        "tt3-life-arrow",
+        "tt3-bandage",
+        "tt2-swiftarrow",
+        "tt3sp-silverthorn",
+        "tt-copper"
+      ],
+      "coins": 0,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 20261029,
+      "kind": "small",
+      "isClass": false,
+      "cards": [
+        "tt2-pearlbox"
+      ],
+      "coins": 1,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 20261029,
+      "kind": "small",
+      "isClass": true,
+      "cards": [
+        "tt7-maxsupply"
+      ],
+      "coins": 1,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 20261029,
+      "kind": "medium",
+      "isClass": false,
+      "cards": [
+        "tt2-pearlbox",
+        "tt3sp-dodge",
+        "tt-keys-bunch"
+      ],
+      "coins": 1,
+      "claimMode": "one",
+      "choiceCount": 3
+    },
+    {
+      "seed": 20261029,
+      "kind": "medium",
+      "isClass": true,
+      "cards": [
+        "tt7-maxsupply",
+        "tt7-arcanebolt",
+        "tt7-energize"
+      ],
+      "coins": 2,
+      "claimMode": "one",
+      "choiceCount": 3
+    },
+    {
+      "seed": 20261029,
+      "kind": "large",
+      "isClass": false,
+      "cards": [
+        "tt2-pearlbox",
+        "tt3sp-dodge",
+        "tt-keys-bunch"
+      ],
+      "coins": 2,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 20261029,
+      "kind": "large",
+      "isClass": true,
+      "cards": [
+        "tt7-maxsupply",
+        "tt7-arcanebolt",
+        "tt7-energize"
+      ],
+      "coins": 3,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 20261029,
+      "kind": "boss",
+      "isClass": false,
+      "cards": [
+        "tt2-pearlbox",
+        "tt3sp-dodge",
+        "tt-keys-bunch",
+        "tt3-frost-slash",
+        "tt3sp-magicoil",
+        "tt-gold"
+      ],
+      "coins": 0,
+      "claimMode": "all",
+      "choiceCount": 0
+    },
+    {
+      "seed": 20261029,
+      "kind": "boss",
+      "isClass": true,
+      "cards": [
+        "tt2-pearlbox",
+        "tt3sp-dodge",
+        "tt-keys-bunch",
+        "tt3-frost-slash",
+        "tt3sp-magicoil",
+        "tt-gold"
+      ],
+      "coins": 0,
+      "claimMode": "all",
+      "choiceCount": 0
+    }
+  ],
+  "damageVectors": [
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "attack",
+      "dealt": 5,
+      "after": {
+        "hp": 15,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "attack",
+      "dealt": 8,
+      "after": {
+        "hp": 12,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "attack",
+      "dealt": 14,
+      "after": {
+        "hp": 6,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "attack",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "spell",
+      "dealt": 3,
+      "after": {
+        "hp": 17,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "spell",
+      "dealt": 6,
+      "after": {
+        "hp": 14,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "spell",
+      "dealt": 12,
+      "after": {
+        "hp": 8,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "spell",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 1,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "fixed",
+      "dealt": 3,
+      "after": {
+        "hp": 17,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "fixed",
+      "dealt": 9,
+      "after": {
+        "hp": 11,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "fixed",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "true",
+      "dealt": 3,
+      "after": {
+        "hp": 17,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {},
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "true",
+      "dealt": 9,
+      "after": {
+        "hp": 11,
+        "maxHp": 20,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "true",
+      "dealt": 3,
+      "after": {
+        "hp": 17,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "true",
+      "dealt": 9,
+      "after": {
+        "hp": 11,
+        "maxHp": 20,
+        "status": {
+          "bleed": 2,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "true",
+      "dealt": 3,
+      "after": {
+        "hp": 17,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "true",
+      "dealt": 9,
+      "after": {
+        "hp": 11,
+        "maxHp": 20,
+        "status": {
+          "abreak": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "true",
+      "dealt": 3,
+      "after": {
+        "hp": 17,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "true",
+      "dealt": 9,
+      "after": {
+        "hp": 11,
+        "maxHp": 20,
+        "status": {
+          "reduce": 3,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "immune": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "stealth": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": -5,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 0,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 3,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    },
+    {
+      "attacker": {
+        "atk": 4,
+        "spellPower": 2,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        }
+      },
+      "target": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 1
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      },
+      "amount": 9,
+      "type": "true",
+      "dealt": 0,
+      "after": {
+        "hp": 20,
+        "maxHp": 20,
+        "status": {
+          "dodge": 0,
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 2,
+          "armor": 3,
+          "guard": true
+        }
+      }
+    }
+  ],
+  "randomVectors": [
+    {
+      "seed": 1,
+      "calls": [
+        [
+          "battle",
+          "target"
+        ],
+        [
+          "loot",
+          "reward"
+        ],
+        [
+          "card",
+          "shuffle"
+        ],
+        [
+          "legacy",
+          null
+        ],
+        [
+          "other",
+          "target"
+        ],
+        [
+          "status",
+          "enemy"
+        ]
+      ],
+      "values": [
+        0.12268028664402664,
+        0.026142757385969162,
+        0.8659614978823811,
+        0.5164968289900571,
+        0.18136401288211346,
+        0.2820160847622901
+      ]
+    },
+    {
+      "seed": 123,
+      "calls": [
+        [
+          "battle",
+          "target"
+        ],
+        [
+          "loot",
+          "reward"
+        ],
+        [
+          "card",
+          "shuffle"
+        ],
+        [
+          "legacy",
+          null
+        ],
+        [
+          "other",
+          "target"
+        ],
+        [
+          "status",
+          "enemy"
+        ]
+      ],
+      "values": [
+        0.7268790581729263,
+        0.6952449132222682,
+        0.3004955709911883,
+        0.9077259988989681,
+        0.23936020396649837,
+        0.8115769773721695
+      ]
+    },
+    {
+      "seed": 4294967295,
+      "calls": [
+        [
+          "battle",
+          "target"
+        ],
+        [
+          "loot",
+          "reward"
+        ],
+        [
+          "card",
+          "shuffle"
+        ],
+        [
+          "legacy",
+          null
+        ],
+        [
+          "other",
+          "target"
+        ],
+        [
+          "status",
+          "enemy"
+        ]
+      ],
+      "values": [
+        0.23707462707534432,
+        0.5563657183665782,
+        0.2905279300175607,
+        0.2730791827198118,
+        0.7027031544130296,
+        0.9929526438936591
+      ]
+    },
+    {
+      "seed": "雪域",
+      "calls": [
+        [
+          "battle",
+          "target"
+        ],
+        [
+          "loot",
+          "reward"
+        ],
+        [
+          "card",
+          "shuffle"
+        ],
+        [
+          "legacy",
+          null
+        ],
+        [
+          "other",
+          "target"
+        ],
+        [
+          "status",
+          "enemy"
+        ]
+      ],
+      "values": [
+        0.06352293048985302,
+        0.972437042510137,
+        0.08867616136558354,
+        0.5336280507035553,
+        0.7335507604293525,
+        0.8424160571303219
+      ]
+    }
+  ]
+}

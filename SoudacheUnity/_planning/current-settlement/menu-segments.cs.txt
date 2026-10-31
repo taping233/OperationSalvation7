@@ -1,0 +1,20 @@
+    public sealed class LeaveMenuScreen : Panel
+    {
+        CurrentLeavePage _page;
+        public static void Open()
+        {
+            if(!GameRuntime.I.State.runActive||UiStack.Top is LeaveMenuScreen||UiStack.Top is CurrentLeaveConfirmation)return;
+            UiStack.Show<LeaveMenuScreen>("LeaveMenu");
+        }
+        public override void Build(){_page=UIKit.GetOrAdd<CurrentLeavePage>(this);_page.Build(this);}
+        public override void CloseFromEscape()=>_page?.Continue();
+    }
+
+    public sealed class AbandonResultScreen : Panel
+    {
+        AbandonResult _result;
+        public override bool CanCloseWithEscape=>false;
+        public void Setup(AbandonResult result){_result=result;Build();}
+        public override void Build(){if(_result!=null)UIKit.GetOrAdd<CurrentLeaveResult>(this).Build(this,_result);}
+    }
+

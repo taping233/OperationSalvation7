@@ -1,0 +1,1252 @@
+{
+  "total": 291,
+  "withRules": 231,
+  "ops": {
+    "heal": {
+      "ids": [
+        "starter-emergency-bandage",
+        "tt-jinchuangyao",
+        "tt3-bandage",
+        "tt3-blue-potion",
+        "tt3-holy-water",
+        "tt3-petal",
+        "tt3-savior-elixir",
+        "tt3-silver-runesword",
+        "tt3-holy-staff",
+        "tt4-woodify",
+        "cc-demon",
+        "tt7-holyglow",
+        "tt7-holyheal"
+      ],
+      "fields": [
+        "op",
+        "amountField",
+        "selfDamage",
+        "upTo",
+        "perFuelCost",
+        "when"
+      ]
+    },
+    "damage": {
+      "ids": [
+        "starter-attack",
+        "tt2-swiftarrow",
+        "tt2-comboarrow",
+        "tt2-piercearrow",
+        "tt2-shoot",
+        "tt2-bloodblade",
+        "tt2-forestarrow",
+        "tt3-blood-arrow",
+        "tt3-fatal-pierce",
+        "tt3-fly-arrowhawk",
+        "tt3-frost-slash",
+        "tt3-noon-duel",
+        "tt3-armor-rush",
+        "tt3-double-shot",
+        "tt3-purify-arrow",
+        "tt3-arrow-rain",
+        "tt3-wave-slash",
+        "tt3-qi-wave",
+        "tt3-life-arrow",
+        "tt3-reshot",
+        "tt3-venom-arrow",
+        "tt3-frostfall",
+        "tt3-treasure-hunt",
+        "tt3-flame-storm",
+        "tt3-python-potion",
+        "tt3-chain-lightning",
+        "tt3-fireball",
+        "tt3-skewer",
+        "tt3-nuke-ray",
+        "tt3-ice-spike",
+        "tt3-mixed-potion",
+        "tt3sp-silverthorn",
+        "tt3sp-bloodstorm",
+        "tt3sp-shadowshot",
+        "tt3-thunderblast",
+        "tt3-flux-slash",
+        "tt3-execute",
+        "tt3-sapper-bomb",
+        "tt7-throwblade",
+        "tt7-sneak",
+        "tt7-ghostblade",
+        "tt7-thundergrudge",
+        "tt7-meteorrain",
+        "tt7-whirlwind",
+        "tt7-demonbreaker",
+        "tt7-fullstrike",
+        "tt7-bloodpoison",
+        "cc-demon",
+        "tt7-bloodpotion",
+        "tt7-smite",
+        "tt7-arcanebolt",
+        "tt7-burnharvest",
+        "tt7-twinfireball",
+        "tt7-abysscurse",
+        "tt8-demonslay",
+        "tt8-dragonblade",
+        "cmtn233trmeg",
+        "cmtna0nb1yxt",
+        "cmtn0xt0zr7",
+        "cmtn1lbhbqi4",
+        "cc-chase-slash",
+        "cc-cursed-blade",
+        "cc-double-boom",
+        "cc-ember-burst",
+        "cc-last-stand",
+        "cc-lava-blast",
+        "cc-rapid-fire",
+        "tt12-raydragon",
+        "tt12-elemburst",
+        "tt12-saturate",
+        "tt12-unstableray",
+        "tt12-infectray",
+        "tt12-firecracker",
+        "tt12-chargeray",
+        "tt12-freezeray",
+        "tt13-snipe",
+        "tt13-flame-staff",
+        "tt13-mercy"
+      ],
+      "fields": [
+        "op",
+        "amountField",
+        "target",
+        "lifesteal",
+        "bonus",
+        "schedule",
+        "hits",
+        "hitCount",
+        "perTargetPrice",
+        "amount",
+        "dmgType",
+        "infuseBonus",
+        "when",
+        "cond",
+        "graveyard",
+        "retarget",
+        "onKill",
+        "pick",
+        "spellPowerMul",
+        "recast",
+        "range",
+        "perInfusedInHand",
+        "nonLethal"
+      ]
+    },
+    "restoreConsumed": {
+      "ids": [
+        "tt-crystal",
+        "cmtn6bge52qt"
+      ],
+      "fields": [
+        "op",
+        "amount"
+      ]
+    },
+    "acquire": {
+      "ids": [
+        "tt-token-gold",
+        "tt2-apollo",
+        "tt2-wreck",
+        "tt2-treasuremap",
+        "tt2-jianghu",
+        "tt3-life-arrow",
+        "tt3-dig-treasure",
+        "tt3-mystery-potion",
+        "tt3-treasure-hunt",
+        "tt3-magic-lamp",
+        "tt3sp-magicoil",
+        "tt3-flux-slash",
+        "tt3-wolf-bow",
+        "tt7-ironphalanx",
+        "tt7-bladebloom",
+        "tt7-twinfireball",
+        "tt8-hero-mage",
+        "tt8-archdemon",
+        "cmtn1epgt20j",
+        "cmtmvq6ss84l",
+        "cmtn125e1nk0",
+        "cmtn1gfhczzj",
+        "cmtn1i64j7y7",
+        "cmtn1p9vb5au",
+        "cmtn1wnhhym",
+        "cmtn28jv33wx",
+        "cc-dual-wield",
+        "cc-lava-blast",
+        "tt12-basicdev",
+        "tt12-magicfind",
+        "tt12-breakthrough",
+        "tt12-raygun",
+        "tt13-magazine"
+      ],
+      "fields": [
+        "op",
+        "pool",
+        "n",
+        "filter",
+        "dest",
+        "act",
+        "expire"
+      ]
+    },
+    "energy": {
+      "ids": [
+        "tt2-apollo",
+        "tt3-blue-potion",
+        "tt7-energize"
+      ],
+      "fields": [
+        "op",
+        "n"
+      ]
+    },
+    "draw": {
+      "ids": [
+        "tt2-treasuremap",
+        "tt2-swiftarrow",
+        "tt3-qi-wave",
+        "tt3-hold-fast",
+        "tt3-toxin",
+        "tt3-petal",
+        "tt3-mind-potion",
+        "tt3-firm-barrier",
+        "tt3-grope",
+        "tt3-light-mail",
+        "tt7-throwblade",
+        "tt7-goldencicada",
+        "tt7-ghostblade",
+        "tt7-stealth",
+        "tt7-swordimmortal",
+        "tt7-marchrush",
+        "tt7-armup",
+        "tt7-fullstrike",
+        "tt7-silence",
+        "tt7-arcanebolt",
+        "tt7-abysscurse",
+        "tt8-hero-sword",
+        "tt8-hero-warlock",
+        "tt8-heavensword",
+        "tt7-livingwater",
+        "tt7-arcanescroll",
+        "tt7-talisman",
+        "tt7-ironcharge",
+        "tt7-maxsupply",
+        "tt8-abyss-sovereign",
+        "tt12-felguard",
+        "tt12-backupcell",
+        "tt13-spring"
+      ],
+      "fields": [
+        "op",
+        "amountField",
+        "amount",
+        "range",
+        "handOps",
+        "when",
+        "filter",
+        "perCurseKinds",
+        "untilHandN"
+      ]
+    },
+    "registerRule": {
+      "ids": [
+        "tt2-venomstaff",
+        "tt5-galaxy-voyage",
+        "tt7-elementstorm",
+        "tt8-hero-assassin",
+        "tt8-hero-descender",
+        "tt7-darkfort",
+        "cmtn1lbhbqi4",
+        "cmtn1r10xnl1",
+        "tt8-abyss-sovereign",
+        "tt12-felguard"
+      ],
+      "fields": [
+        "op",
+        "rule",
+        "n",
+        "duration",
+        "when"
+      ]
+    },
+    "armor": {
+      "ids": [
+        "tt2-block",
+        "tt2-turtlearmor",
+        "tt2-forestarrow",
+        "tt3-bandage",
+        "tt3-hold-fast",
+        "tt3-dig-treasure",
+        "tt3-holy-shield",
+        "tt3-magic-lamp",
+        "tt3-twinwater-mail",
+        "tt3-grass-armor",
+        "cc-unmoved",
+        "tt7-marchrush",
+        "tt7-bulwark",
+        "tt7-ironphalanx",
+        "tt7-ironcharge",
+        "tt12-sporewall",
+        "tt12-barriermend",
+        "tt13-guard"
+      ],
+      "fields": [
+        "op",
+        "guard",
+        "amount",
+        "amountField",
+        "priceOf",
+        "decayAtTurnEnd",
+        "bonus"
+      ]
+    },
+    "curse": {
+      "ids": [
+        "tt2-piercearrow",
+        "tt3-blood-arrow",
+        "tt3-fatal-pierce",
+        "tt3-frost-slash",
+        "tt3-armor-rush",
+        "tt3-venom-arrow",
+        "tt3-toxin",
+        "tt3wu-shike",
+        "tt3-skewer",
+        "tt3-iceheart-potion",
+        "tt3-nuke-ray",
+        "tt3-thornfield",
+        "tt3-turnabout-potion",
+        "tt3-firm-barrier",
+        "tt3-ice-spike",
+        "tt3-mixed-potion",
+        "tt3-flux-slash",
+        "tt7-throwblade",
+        "tt7-demonbreaker",
+        "tt7-bloodpoison",
+        "tt7-silence",
+        "tt7-abysscurse",
+        "tt8-curse2",
+        "tt8-curse3",
+        "tt8-curse4",
+        "tt8-dragonblade",
+        "cc-cursed-blade",
+        "cc-rot-seed",
+        "tt12-sporewall",
+        "tt12-infectray",
+        "tt12-freezeray",
+        "tt13-bitter-rain"
+      ],
+      "fields": [
+        "op",
+        "curse",
+        "duration",
+        "target",
+        "stacks",
+        "when",
+        "amount",
+        "randomKinds",
+        "burst",
+        "extend",
+        "bindTarget",
+        "pick",
+        "source",
+        "missingBonusIfCursed"
+      ]
+    },
+    "cleanse": {
+      "ids": [
+        "tt3-purify-arrow",
+        "tt3-holy-water",
+        "tt3-holy-staff",
+        "tt8-hero-assassin"
+      ],
+      "fields": [
+        "op",
+        "target"
+      ]
+    },
+    "noDrawNext": {
+      "ids": [
+        "tt3-wave-slash"
+      ],
+      "fields": [
+        "op"
+      ]
+    },
+    "handSelect": {
+      "ids": [
+        "tt3-frostfall",
+        "tt3-crimson-pouch",
+        "tt7-naturestaff"
+      ],
+      "fields": [
+        "op",
+        "n",
+        "type",
+        "act"
+      ]
+    },
+    "schedule": {
+      "ids": [
+        "tt3-mystery-potion"
+      ],
+      "fields": [
+        "op",
+        "delay",
+        "ops"
+      ]
+    },
+    "energyCap": {
+      "ids": [
+        "tt3-nature-form",
+        "tt8-hero-guardian",
+        "tt8-abyss-sovereign"
+      ],
+      "fields": [
+        "op",
+        "n"
+      ]
+    },
+    "blessing": {
+      "ids": [
+        "tt3-houyi-potion",
+        "tt3-demon-potion",
+        "tt3sp-dodge",
+        "tt3-master-staff",
+        "tt3-blooddrinker",
+        "tt7-stealth",
+        "tt8-hero-assassin",
+        "tt8-hero-mage",
+        "tt8-hero-descender",
+        "cmtn1ntxzoc4",
+        "tt8-abyss-sovereign",
+        "tt12-felguard"
+      ],
+      "fields": [
+        "op",
+        "key",
+        "stacks",
+        "duration",
+        "when"
+      ]
+    },
+    "choice": {
+      "ids": [
+        "tt3-magic-lamp",
+        "tt8-hero-summoner"
+      ],
+      "fields": [
+        "op",
+        "options",
+        "otherAfterTurns"
+      ]
+    },
+    "execute": {
+      "ids": [
+        "tt3-magic-lamp",
+        "tt3sp-devour",
+        "tt3sp-doom",
+        "tt7-meteorstrong",
+        "cmtn0pbkmnvc"
+      ],
+      "fields": [
+        "op",
+        "cap",
+        "count",
+        "what",
+        "when",
+        "perCurseStacks"
+      ]
+    },
+    "freezeFirstEnemies": {
+      "ids": [
+        "tt3-magic-lamp"
+      ],
+      "fields": [
+        "op",
+        "count",
+        "duration"
+      ]
+    },
+    "stealAtk": {
+      "ids": [
+        "tt3sp-shadowbug",
+        "tt8-curse1"
+      ],
+      "fields": [
+        "op",
+        "capTo",
+        "target",
+        "amount"
+      ]
+    },
+    "adjustCurse": {
+      "ids": [
+        "tt3sp-flowerzhen",
+        "cc-poison-burst"
+      ],
+      "fields": [
+        "op",
+        "curse",
+        "multiply",
+        "burst",
+        "target"
+      ]
+    },
+    "transform": {
+      "ids": [
+        "tt3-immortal-blade",
+        "tt8-hero-warrior"
+      ],
+      "fields": [
+        "op",
+        "what",
+        "into"
+      ]
+    },
+    "maxHp": {
+      "ids": [
+        "tt3-chaos-eye"
+      ],
+      "fields": [
+        "op",
+        "n"
+      ]
+    },
+    "deckCap": {
+      "ids": [
+        "tt3-chaos-eye"
+      ],
+      "fields": [
+        "op",
+        "n"
+      ]
+    },
+    "release": {
+      "ids": [
+        "tt3-azure-sword",
+        "tt3-reverse-bow"
+      ],
+      "fields": [
+        "op",
+        "source",
+        "key",
+        "max",
+        "all",
+        "eachDraw"
+      ]
+    },
+    "consumeHand": {
+      "ids": [
+        "tt3-fate-wheel",
+        "tt7-goldencicada",
+        "tt13-chaos-deck"
+      ],
+      "fields": [
+        "op",
+        "all",
+        "trigger"
+      ]
+    },
+    "extraTurn": {
+      "ids": [
+        "tt3-fate-wheel"
+      ],
+      "fields": [
+        "op"
+      ]
+    },
+    "swapDiscoverCosts": {
+      "ids": [
+        "tt3eq-mistbox"
+      ],
+      "fields": [
+        "op",
+        "count"
+      ]
+    },
+    "discover": {
+      "ids": [
+        "tt4-shine-token",
+        "tt12-hitechrd"
+      ],
+      "fields": [
+        "op",
+        "count",
+        "pool",
+        "costDecayPerTurn"
+      ]
+    },
+    "flee": {
+      "ids": [
+        "tt4-smoke-bomb"
+      ],
+      "fields": [
+        "op"
+      ]
+    },
+    "foeFight": {
+      "ids": [
+        "tt7-provoke"
+      ],
+      "fields": [
+        "op",
+        "pick"
+      ]
+    },
+    "status": {
+      "ids": [
+        "tt7-frozenight"
+      ],
+      "fields": [
+        "op",
+        "status",
+        "target",
+        "duration"
+      ]
+    },
+    "castStored": {
+      "ids": [
+        "tt7-stratagem"
+      ],
+      "fields": [
+        "op",
+        "count"
+      ]
+    },
+    "summon": {
+      "ids": [
+        "tt7-recruit",
+        "tt8-abyss-sovereign"
+      ],
+      "fields": [
+        "op",
+        "name",
+        "atk",
+        "hp",
+        "count",
+        "taunt",
+        "statless"
+      ]
+    },
+    "castDrawn": {
+      "ids": [
+        "tt8-hero-sword"
+      ],
+      "fields": [
+        "op",
+        "type"
+      ]
+    },
+    "insertCards": {
+      "ids": [
+        "tt8-hero-ranger",
+        "tt8-hero-warlock"
+      ],
+      "fields": [
+        "op",
+        "ids",
+        "shuffle"
+      ]
+    },
+    "fillHand": {
+      "ids": [
+        "tt8-hero-priest"
+      ],
+      "fields": [
+        "op",
+        "untilHandN",
+        "perSpellHeal"
+      ]
+    },
+    "randomCurse": {
+      "ids": [
+        "tt8-hero-summoner"
+      ],
+      "fields": [
+        "op",
+        "target",
+        "curses",
+        "stacks",
+        "preferMissing"
+      ]
+    },
+    "randomBlessing": {
+      "ids": [
+        "tt8-hero-summoner"
+      ],
+      "fields": [
+        "op",
+        "target",
+        "choices",
+        "preferMissing"
+      ]
+    },
+    "copyRandom": {
+      "ids": [
+        "cmtn2jc142dj"
+      ],
+      "fields": [
+        "op"
+      ]
+    },
+    "registerInfusionBonus": {
+      "ids": [
+        "cmtn1ntxzoc4"
+      ],
+      "fields": [
+        "op",
+        "every",
+        "key",
+        "stacks"
+      ]
+    },
+    "castRandomSpells": {
+      "ids": [
+        "cc-mana-surge"
+      ],
+      "fields": [
+        "op",
+        "count",
+        "infused"
+      ]
+    },
+    "markEnemy": {
+      "ids": [
+        "cc-rot-seed",
+        "tt13-soul-contract"
+      ],
+      "fields": [
+        "op",
+        "event",
+        "target",
+        "status",
+        "multiplier",
+        "dmgType",
+        "dest",
+        "amount",
+        "recursive"
+      ]
+    },
+    "refillEnergy": {
+      "ids": [
+        "tt12-backupcell"
+      ],
+      "fields": [
+        "op"
+      ]
+    },
+    "restoreHeroSkill": {
+      "ids": [
+        "tt13-spring"
+      ],
+      "fields": [
+        "op"
+      ]
+    },
+    "recruitEnemy": {
+      "ids": [
+        "tt13-mind-control"
+      ],
+      "fields": [
+        "op",
+        "target",
+        "wounded",
+        "excludeBoss"
+      ]
+    },
+    "discoverCopies": {
+      "ids": [
+        "tt13-stellar-divination"
+      ],
+      "fields": [
+        "op",
+        "type",
+        "count",
+        "copies",
+        "castOnDraw"
+      ]
+    },
+    "transformCards": {
+      "ids": [
+        "tt13-chaos-deck"
+      ],
+      "fields": [
+        "op",
+        "source",
+        "raritySteps",
+        "ceiling",
+        "swapCosts"
+      ]
+    }
+  },
+  "triggers": {
+    "onPlay": [
+      "starter-attack",
+      "tt2-jianghu",
+      "tt2-swiftarrow",
+      "tt2-block",
+      "tt2-comboarrow",
+      "tt2-piercearrow",
+      "tt2-shoot",
+      "tt2-turtlearmor",
+      "tt2-bloodblade",
+      "tt2-forestarrow",
+      "tt3-blood-arrow",
+      "tt3-fatal-pierce",
+      "tt3-fly-arrowhawk",
+      "tt3-frost-slash",
+      "tt3-noon-duel",
+      "tt3-armor-rush",
+      "tt3-double-shot",
+      "tt3-bandage",
+      "tt3-purify-arrow",
+      "tt3-arrow-rain",
+      "tt3-wave-slash",
+      "tt3-qi-wave",
+      "tt3-hold-fast",
+      "tt3-life-arrow",
+      "tt3-dig-treasure",
+      "tt3-reshot",
+      "tt3-venom-arrow",
+      "tt3-toxin",
+      "tt3-frostfall",
+      "tt3wu-shike",
+      "tt3-mystery-potion",
+      "tt3-treasure-hunt",
+      "tt3-flame-storm",
+      "tt3-nature-form",
+      "tt3-chain-lightning",
+      "tt3-fireball",
+      "tt3-holy-water",
+      "tt3-skewer",
+      "tt3-holy-shield",
+      "tt3-nuke-ray",
+      "tt3-petal",
+      "tt3-magic-lamp",
+      "tt3-thornfield",
+      "tt3-firm-barrier",
+      "tt3-ice-spike",
+      "tt3-grope",
+      "tt3sp-dodge",
+      "tt3sp-devour",
+      "tt3sp-silverthorn",
+      "tt3sp-magicoil",
+      "tt3sp-shadowbug",
+      "tt3sp-flowerzhen",
+      "tt3sp-bloodstorm",
+      "tt3sp-shadowshot",
+      "tt3-thunderblast",
+      "tt3-flux-slash",
+      "tt3-execute",
+      "tt5-galaxy-voyage",
+      "tt7-throwblade",
+      "tt7-goldencicada",
+      "tt7-sneak",
+      "tt7-ghostblade",
+      "tt7-thundergrudge",
+      "tt7-meteorrain",
+      "tt7-stealth",
+      "tt7-swordimmortal",
+      "cc-unmoved",
+      "tt7-marchrush",
+      "tt7-bulwark",
+      "tt7-armup",
+      "tt7-whirlwind",
+      "tt7-demonbreaker",
+      "tt7-fullstrike",
+      "tt7-ironphalanx",
+      "tt7-bloodpoison",
+      "tt7-silence",
+      "cc-demon",
+      "tt7-holyglow",
+      "tt7-holyheal",
+      "tt7-provoke",
+      "tt7-bloodpotion",
+      "tt7-smite",
+      "tt7-arcanebolt",
+      "tt7-energize",
+      "tt7-frozenight",
+      "tt7-stratagem",
+      "tt7-bladebloom",
+      "tt7-recruit",
+      "tt7-elementstorm",
+      "tt7-burnharvest",
+      "tt7-twinfireball",
+      "tt7-abysscurse",
+      "tt7-meteorstrong",
+      "tt8-hero-assassin",
+      "tt8-hero-sword",
+      "tt8-hero-ranger",
+      "tt8-hero-warrior",
+      "tt8-hero-guardian",
+      "tt8-hero-priest",
+      "tt8-hero-warlock",
+      "tt8-hero-mage",
+      "tt8-hero-summoner",
+      "tt8-hero-sealer",
+      "tt8-hero-descender",
+      "tt8-curse1",
+      "tt8-curse2",
+      "tt8-curse3",
+      "tt8-curse4",
+      "tt8-dragonblade",
+      "cmtn0pbkmnvc",
+      "cmtn1epgt20j",
+      "cmtn233trmeg",
+      "cmtn2jc142dj",
+      "cmtna0nb1yxt",
+      "tt7-livingwater",
+      "tt7-ironcharge",
+      "tt7-maxsupply",
+      "tt7-imitate",
+      "cmtn0xt0zr7",
+      "cmtn125e1nk0",
+      "cmtn1gfhczzj",
+      "cmtn1i64j7y7",
+      "cmtn1lbhbqi4",
+      "cmtn1ntxzoc4",
+      "cmtn1p9vb5au",
+      "cmtn1r10xnl1",
+      "cmtn1wnhhym",
+      "cmtn28jv33wx",
+      "cc-chase-slash",
+      "cc-cursed-blade",
+      "cc-double-boom",
+      "cc-dual-wield",
+      "cc-ember-burst",
+      "cc-last-stand",
+      "cc-lava-blast",
+      "cc-mana-surge",
+      "cc-poison-burst",
+      "cc-rapid-fire",
+      "cc-rot-seed",
+      "tt8-abyss-sovereign",
+      "tt12-raydragon",
+      "tt12-sporewall",
+      "tt12-elemburst",
+      "tt12-hitechrd",
+      "tt12-barriermend",
+      "tt12-saturate",
+      "tt12-felguard",
+      "tt12-unstableray",
+      "tt12-infectray",
+      "tt12-basicdev",
+      "tt12-firecracker",
+      "tt12-magicfind",
+      "tt12-chargeray",
+      "tt12-breakthrough",
+      "tt12-backupcell",
+      "tt12-freezeray",
+      "tt13-spring",
+      "tt13-snipe",
+      "tt13-guard",
+      "tt13-bitter-rain",
+      "tt13-mind-control",
+      "tt13-flame-staff",
+      "tt13-soul-contract",
+      "tt13-stellar-divination",
+      "tt13-chaos-deck",
+      "tt13-mercy"
+    ],
+    "onAcquire": [
+      "tt2-apollo"
+    ],
+    "onConsume": [
+      "tt2-wreck",
+      "tt3-azure-sword",
+      "tt3-sapper-bomb",
+      "tt7-arcanescroll"
+    ],
+    "onTurnStart": [
+      "tt3-petal",
+      "tt3-master-staff",
+      "tt3-silver-runesword",
+      "tt3-wolf-bow",
+      "tt7-swordimmortal",
+      "tt8-hero-mage",
+      "cmtn2jc142dj",
+      "tt13-flame-staff"
+    ],
+    "duration": [
+      "tt3-petal"
+    ],
+    "onFreezeDealt": [
+      "tt3-twinwater-mail"
+    ],
+    "onKill": [
+      "tt3-blooddrinker"
+    ],
+    "replay": [
+      "tt7-marchrush"
+    ],
+    "onDraw": [
+      "tt8-curse1",
+      "tt8-curse2",
+      "tt8-curse3",
+      "tt8-curse4",
+      "tt8-demonslay",
+      "tt8-heavensword"
+    ]
+  },
+  "battle": {
+    "target": [
+      "starter-attack",
+      "tt2-jianghu",
+      "tt2-swiftarrow",
+      "tt2-block",
+      "tt2-comboarrow",
+      "tt2-piercearrow",
+      "tt2-shoot",
+      "tt2-turtlearmor",
+      "tt2-bloodblade",
+      "tt2-forestarrow",
+      "tt3-blood-arrow",
+      "tt3-fatal-pierce",
+      "tt3-fly-arrowhawk",
+      "tt3-frost-slash",
+      "tt3-noon-duel",
+      "tt3-armor-rush",
+      "tt3-double-shot",
+      "tt3-bandage",
+      "tt3-purify-arrow",
+      "tt3-arrow-rain",
+      "tt3-wave-slash",
+      "tt3-qi-wave",
+      "tt3-hold-fast",
+      "tt3-life-arrow",
+      "tt3-dig-treasure",
+      "tt3-reshot",
+      "tt3-venom-arrow",
+      "tt3-toxin",
+      "tt3-frostfall",
+      "tt3wu-shike",
+      "tt3-mystery-potion",
+      "tt3-treasure-hunt",
+      "tt3-flame-storm",
+      "tt3-nature-form",
+      "tt3-chain-lightning",
+      "tt3-fireball",
+      "tt3-holy-water",
+      "tt3-skewer",
+      "tt3-holy-shield",
+      "tt3-nuke-ray",
+      "tt3-magic-lamp",
+      "tt3-thornfield",
+      "tt3-firm-barrier",
+      "tt3-ice-spike",
+      "tt3-grope",
+      "tt3sp-dodge",
+      "tt3sp-devour",
+      "tt3sp-silverthorn",
+      "tt3sp-magicoil",
+      "tt3sp-shadowbug",
+      "tt3sp-flowerzhen",
+      "tt3sp-bloodstorm",
+      "tt3sp-shadowshot",
+      "tt3-thunderblast",
+      "tt3-flux-slash",
+      "tt3-execute",
+      "tt5-galaxy-voyage",
+      "tt7-throwblade",
+      "tt7-goldencicada",
+      "tt7-sneak",
+      "tt7-ghostblade",
+      "tt7-thundergrudge",
+      "tt7-meteorrain",
+      "tt7-stealth",
+      "cc-unmoved",
+      "tt7-marchrush",
+      "tt7-bulwark",
+      "tt7-armup",
+      "tt7-whirlwind",
+      "tt7-demonbreaker",
+      "tt7-fullstrike",
+      "tt7-ironphalanx",
+      "tt7-bloodpoison",
+      "tt7-silence",
+      "cc-demon",
+      "tt7-holyglow",
+      "tt7-holyheal",
+      "tt7-provoke",
+      "tt7-bloodpotion",
+      "tt7-smite",
+      "tt7-arcanebolt",
+      "tt7-energize",
+      "tt7-frozenight",
+      "tt7-stratagem",
+      "tt7-bladebloom",
+      "tt7-recruit",
+      "tt7-burnharvest",
+      "tt7-twinfireball",
+      "tt7-abysscurse",
+      "tt7-meteorstrong",
+      "tt8-hero-assassin",
+      "tt8-hero-sword",
+      "tt8-hero-ranger",
+      "tt8-hero-warrior",
+      "tt8-hero-guardian",
+      "tt8-hero-priest",
+      "tt8-hero-warlock",
+      "tt8-hero-mage",
+      "tt8-hero-summoner",
+      "tt8-hero-descender",
+      "tt8-dragonblade",
+      "cmtn0pbkmnvc",
+      "cmtn1epgt20j",
+      "cmtn233trmeg",
+      "cmtna0nb1yxt",
+      "tt7-livingwater",
+      "tt7-ironcharge",
+      "tt7-maxsupply",
+      "cmtn0xt0zr7",
+      "cmtn125e1nk0",
+      "cmtn1gfhczzj",
+      "cmtn1i64j7y7",
+      "cmtn1lbhbqi4",
+      "cmtn1ntxzoc4",
+      "cmtn1p9vb5au",
+      "cmtn1wnhhym",
+      "cmtn28jv33wx",
+      "cc-chase-slash",
+      "cc-cursed-blade",
+      "cc-double-boom",
+      "cc-dual-wield",
+      "cc-ember-burst",
+      "cc-last-stand",
+      "cc-lava-blast",
+      "cc-mana-surge",
+      "cc-poison-burst",
+      "cc-rapid-fire",
+      "cc-rot-seed",
+      "tt8-abyss-sovereign",
+      "tt12-raydragon",
+      "tt12-sporewall",
+      "tt12-elemburst",
+      "tt12-hitechrd",
+      "tt12-barriermend",
+      "tt12-saturate",
+      "tt12-felguard",
+      "tt12-unstableray",
+      "tt12-infectray",
+      "tt12-basicdev",
+      "tt12-firecracker",
+      "tt12-magicfind",
+      "tt12-chargeray",
+      "tt12-breakthrough",
+      "tt12-backupcell",
+      "tt12-freezeray",
+      "tt13-spring",
+      "tt13-snipe",
+      "tt13-guard",
+      "tt13-bitter-rain",
+      "tt13-mind-control",
+      "tt13-flame-staff",
+      "tt13-soul-contract",
+      "tt13-stellar-divination",
+      "tt13-chaos-deck",
+      "tt13-mercy"
+    ],
+    "costModifiers": [
+      "tt2-comboarrow",
+      "tt3-holy-shield",
+      "cc-chase-slash",
+      "tt12-barriermend",
+      "tt12-backupcell"
+    ],
+    "requirements": [
+      "tt2-turtlearmor",
+      "tt7-thundergrudge",
+      "tt7-holyheal",
+      "tt7-meteorstrong",
+      "tt8-hero-sealer",
+      "tt12-raydragon",
+      "tt12-felguard"
+    ],
+    "ignoresSilence": [
+      "tt3-mystery-potion"
+    ],
+    "ownedEquipCapacity": [
+      "tt8-hero-guardian"
+    ],
+    "setup": [
+      "tt8-hero-sealer"
+    ],
+    "keepInHand": [
+      "cmtn233trmeg"
+    ],
+    "fuelAllowed": [
+      "cmtn233trmeg"
+    ],
+    "handTransform": [
+      "tt7-imitate"
+    ]
+  },
+  "equip": {
+    "onEquip": [
+      "tt2-apollo",
+      "tt2-pearlbox",
+      "tt2-wreck",
+      "tt2-venomstaff",
+      "tt2-frostsword",
+      "tt3-immortal-blade",
+      "tt3-master-staff",
+      "tt3-chaos-eye",
+      "tt3-silver-runesword",
+      "tt3-azure-sword",
+      "tt3-fate-wheel",
+      "tt3-crimson-pouch",
+      "tt3-wolf-bow",
+      "tt3-sapper-bomb",
+      "tt3-twinwater-mail",
+      "tt3-grass-armor",
+      "tt3-blooddrinker",
+      "tt3-element-seal",
+      "tt3-reverse-bow",
+      "tt3eq-mistbox",
+      "tt8-demonslay",
+      "tt8-archdemon",
+      "tt8-heavensword",
+      "tt7-naturestaff",
+      "tt7-darkfort",
+      "tt7-arcanescroll",
+      "tt13-poor-meal",
+      "tt13-magazine",
+      "tt13-scale-armor",
+      "tt13-astrolabe"
+    ],
+    "container": [
+      "tt2-pearlbox",
+      "tt7-stratagem"
+    ],
+    "skill": [
+      "tt2-treasuremap",
+      "tt3-fate-wheel",
+      "tt3-crimson-pouch",
+      "tt3-holy-staff",
+      "tt3-light-mail",
+      "tt3-reverse-bow",
+      "tt3eq-mistbox",
+      "tt7-naturestaff",
+      "tt12-raygun",
+      "tt13-magazine"
+    ],
+    "passive": [
+      "tt2-frostsword",
+      "tt3-silver-runesword",
+      "tt3-staff",
+      "tt3-longsword",
+      "tt3-element-seal",
+      "tt3-deep-diary",
+      "tt8-archdemon",
+      "tt13-poor-meal",
+      "tt13-scale-armor",
+      "tt13-astrolabe"
+    ],
+    "battleStart": [
+      "tt3-immortal-blade",
+      "tt3-chaos-eye",
+      "tt7-talisman"
+    ]
+  }
+}

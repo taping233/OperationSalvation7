@@ -1,0 +1,64 @@
+[
+  {
+    "name": "heroPriestRandomFill",
+    "value": {
+      "hand": 6,
+      "ids": [
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball"
+      ],
+      "healed": 18,
+      "draws": 0
+    }
+  },
+  {
+    "name": "chaosDiscard",
+    "value": {
+      "hand": [],
+      "discard": [
+        "fireball",
+        "bandage"
+      ]
+    }
+  },
+  {
+    "name": "chaosPreservesType",
+    "value": [
+      "武术",
+      "武术",
+      "武术",
+      "武术",
+      "武术"
+    ]
+  },
+  {
+    "name": "guardAfterPlayerDealtDamage",
+    "value": 6
+  },
+  {
+    "name": "astrolabeTurnOneMartialSpellMartial",
+    "value": [
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "shadowbugEnemyAttackRestored",
+    "value": {
+      "during": 1,
+      "after": 8
+    }
+  },
+  {
+    "name": "poisonBurstImmuneTarget",
+    "value": {
+      "hp": 100,
+      "poison": 3
+    }
+  }
+]

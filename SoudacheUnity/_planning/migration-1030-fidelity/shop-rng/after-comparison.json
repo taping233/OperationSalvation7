@@ -1,0 +1,23 @@
+{
+  "summary": {
+    "mode": "after",
+    "catalogEqual": true,
+    "catalogChecks": {
+      "baseline": true,
+      "upsert": true,
+      "eligibility": true,
+      "scarce": true,
+      "empty": true,
+      "duplicate": true,
+      "boundary": true
+    },
+    "cases": 104,
+    "differences": 0,
+    "caseDifferences": 0,
+    "fullStockMatches": 104,
+    "rngAfterMatches": 104,
+    "dropsAfterShopMatches": 104,
+    "afterDropsRngMatches": 104
+  },
+  "diff": []
+}

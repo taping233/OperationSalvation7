@@ -1,0 +1,17 @@
+{
+  "state": "private candidate only; no production mutation; native scroll proof pending",
+  "productionBefore": {
+    "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs": "71d2aa711565729cc4c9be71d744b8d7959fd576bede7d136f09d39fc2c203fa"
+  },
+  "source": {
+    "index.html": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+    "css/card-layout-selected.css": "16215e25286c401718703e5939e55dcad563de2aa2c631e08f4d680215fa871c",
+    "css/review-ui.css": "911bd4c7a4d50faeefe08ab3babdea46f5c91dbf18accb6e68ccb465590d9fc9",
+    "css/inventory-zoom.css": "573455d016b5466d9c03bd8908b0367576691ccd30ea8c52925e6f1af44f9d72",
+    "css/cover-details.css": "727f66a5b0ef69266b88449d5eaa971af7148ce5b3e33d94359e49d4361975e8",
+    "src/ui/card-zoom-controller.js": "f8a40e51978702a8f2b1cf395bafd1081208480460daab2252e28c45be72ee0b",
+    "src/ui/card-zoom-content.js": "12edab3f251422bc592d23d5246d39665a354593afe6e460bc66027dd5b20f31",
+    "src/ui/inventory-zoom.js": "29e2cab71d09eeb478f77426a062d903735eda16e51a49ed1196f85d708c8374"
+  },
+  "candidate": "d1733f7dd87574e4e81dcaeaf523189716faf1b07392067a990532a7bd0884d5"
+}

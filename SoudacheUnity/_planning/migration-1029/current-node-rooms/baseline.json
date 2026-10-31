@@ -1,0 +1,59 @@
+[
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/RunUi.cs",
+    "sha256": "ae948c9074dbb7c2ae863a6af2eda31b5cd2af230562f7a7e58cd04861b44a78"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogScreen.cs",
+    "sha256": "a49f560f53521b8162421d55da1ae5e6b1ed1af166618521bce295c41e903009"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogChoices.cs",
+    "sha256": "3c365260a78713ce02bb9e10266b14d0cfcf5f4af589be20f1087c3ecd69cc65"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EntrySupplyScreen.cs",
+    "sha256": "97dad6d8af5f4d3447b440e5e659fb03e1185e9d16c35961af57ffd80442d647"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/FireRestScreen.cs",
+    "sha256": "e1d300c8a19dbae6f9d547bd19bc2c7b97eaa69339286badea75022eaa2baddd"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/PickupScreen.cs",
+    "sha256": "b366cd5dab4830fc70a805d4ea802ade629730edd7a07fb3ddb0e5815a4a64b0"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/ChestOpenScreen.cs",
+    "sha256": "ff222540ec88eb329c9ef0e99c89a61940edd0156b357f26a96b27a66e79c357"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.Run/GameRuntime.cs",
+    "sha256": "c25ad20ba559ea5d48672721512c8e720205080e26467b3d682300c7eace0559",
+    "merged": "preserved concurrent settlement result DTO additions; only RunInstant own delta"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.Core/RunState.cs",
+    "sha256": "ad7c6911b1413d47c867050b43a8df7c6bdb751b80ac7de6f76ea2ce5cd235f8"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.Boot/RunLoopBridge.cs",
+    "sha256": "f2b9680d97640ec800740cb189b2dc2df58cacfa7eb62cc848e85437e3aa23da"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.Run/GameRuntime.EventRoutes.cs",
+    "sha256": "215ca11fbb4e7524e8d6ec0828d49cf6f28c3d43a7401b87c00e43c41780a690"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+    "sha256": "e775f957602f5980709e772af3ed309c9c886091e2ada82331f0cf93e0f4ef9c"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.Core/RewardReceipt.cs",
+    "sha256": "e8f1af7b9ccbf5cc5aba2ecb299b06225ccbf71b6127dde48fd6b05bd9a0b5dd"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+    "sha256": "5b419b30dd1a43edac513ee538c5ba09d4c305e5d24c18bba8a2b8c5c99b0dfc"
+  }
+]

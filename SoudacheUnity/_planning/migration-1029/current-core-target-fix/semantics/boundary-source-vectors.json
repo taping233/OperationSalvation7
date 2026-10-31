@@ -1,0 +1,261 @@
+{
+  "costVectors": [
+    {
+      "seed": 1,
+      "input": [
+        "starter-attack",
+        "tt3-bandage",
+        "tt3sp-flowerzhen",
+        "tt13-astrolabe",
+        "tt8-hero-priest",
+        "tt3-fireball",
+        "tt3-chaos-eye"
+      ],
+      "expected": [
+        "tt13-snipe|武术|古朴|1",
+        "cmtn2jc142dj|武术|稀有|0",
+        "tt5-galaxy-voyage|法术|传说|2",
+        "tt13-astrolabe|装备|传说|0",
+        "tt8-hero-priest|能力卡|棱彩|2",
+        "tt3-fireball|法术|衍生|1",
+        "tt3-chaos-eye|装备|传说|2"
+      ]
+    },
+    {
+      "seed": 123,
+      "input": [
+        "starter-attack",
+        "tt3-bandage",
+        "tt3sp-flowerzhen",
+        "tt13-astrolabe",
+        "tt8-hero-priest",
+        "tt3-fireball",
+        "tt3-chaos-eye"
+      ],
+      "expected": [
+        "tt3-fatal-pierce|武术|古朴|2",
+        "cc-cursed-blade|武术|稀有|2",
+        "tt3-thunderblast|法术|传说|1",
+        "tt3-immortal-blade|装备|传说|0",
+        "tt8-hero-priest|能力卡|棱彩|2",
+        "tt3-fireball|法术|衍生|1",
+        "tt13-astrolabe|装备|传说|0"
+      ]
+    },
+    {
+      "seed": 987,
+      "input": [
+        "starter-attack",
+        "tt3-bandage",
+        "tt3sp-flowerzhen",
+        "tt13-astrolabe",
+        "tt8-hero-priest",
+        "tt3-fireball",
+        "tt3-chaos-eye"
+      ],
+      "expected": [
+        "tt2-comboarrow|武术|古朴|2",
+        "cc-cursed-blade|武术|稀有|1",
+        "tt3-thunderblast|法术|传说|0",
+        "tt3-master-staff|装备|传说|0",
+        "tt8-hero-priest|能力卡|棱彩|2",
+        "tt3-fireball|法术|衍生|1",
+        "tt13-astrolabe|装备|传说|2"
+      ]
+    }
+  ],
+  "poisonVectors": [
+    {
+      "cap": 0,
+      "exposure": 1,
+      "abreak": 0,
+      "immune": 0,
+      "expected": [
+        5,
+        95,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 0,
+      "exposure": 1,
+      "abreak": 0,
+      "immune": 1,
+      "expected": [
+        0,
+        100,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 0,
+      "exposure": 1,
+      "abreak": 1,
+      "immune": 0,
+      "expected": [
+        5,
+        95,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 0,
+      "exposure": 1,
+      "abreak": 1,
+      "immune": 1,
+      "expected": [
+        0,
+        100,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 0,
+      "exposure": 4,
+      "abreak": 0,
+      "immune": 0,
+      "expected": [
+        20,
+        80,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 0,
+      "exposure": 4,
+      "abreak": 0,
+      "immune": 1,
+      "expected": [
+        0,
+        100,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 0,
+      "exposure": 4,
+      "abreak": 1,
+      "immune": 0,
+      "expected": [
+        20,
+        80,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 0,
+      "exposure": 4,
+      "abreak": 1,
+      "immune": 1,
+      "expected": [
+        0,
+        100,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 2,
+      "exposure": 1,
+      "abreak": 0,
+      "immune": 0,
+      "expected": [
+        2,
+        98,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 2,
+      "exposure": 1,
+      "abreak": 0,
+      "immune": 1,
+      "expected": [
+        0,
+        100,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 2,
+      "exposure": 1,
+      "abreak": 1,
+      "immune": 0,
+      "expected": [
+        5,
+        95,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 2,
+      "exposure": 1,
+      "abreak": 1,
+      "immune": 1,
+      "expected": [
+        0,
+        100,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 2,
+      "exposure": 4,
+      "abreak": 0,
+      "immune": 0,
+      "expected": [
+        8,
+        92,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 2,
+      "exposure": 4,
+      "abreak": 0,
+      "immune": 1,
+      "expected": [
+        0,
+        100,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 2,
+      "exposure": 4,
+      "abreak": 1,
+      "immune": 0,
+      "expected": [
+        20,
+        80,
+        9,
+        5
+      ]
+    },
+    {
+      "cap": 2,
+      "exposure": 4,
+      "abreak": 1,
+      "immune": 1,
+      "expected": [
+        0,
+        100,
+        9,
+        5
+      ]
+    }
+  ]
+}

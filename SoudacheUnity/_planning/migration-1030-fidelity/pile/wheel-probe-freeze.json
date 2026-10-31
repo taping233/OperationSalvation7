@@ -1,0 +1,13 @@
+{
+  "scope": "Pile wheel and local thin scrollbar; no CardFace/UIKit/global changes",
+  "inputs": {
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSecondaryViews.cs": "14e5c10437f0eb568fbc2de067200213cf4215d6e4973e2da5c5eb332502c567",
+    "Assets/Editor/CurrentBattlePileValidation.cs": "ec4e93ae9cc746f39902b16866a588fdeaffb142d8286c2b4dc5d4037c91af22"
+  },
+  "scrollSensitivity": 36,
+  "nativeWheel": "repeated actual wheel(-3), one frame each, stop at bottom or at most 32; progress/distance/normalized/content and viewport heights recorded",
+  "scrollbar": "native uGUI Scrollbar reused with AutoHide; local 6px transparent rail and #afc5cf6b handle",
+  "nativeChecks": "non-overflow deck auto-hide; overflowing pile thumb; bottom/reader browse/return scroll and focus preserved",
+  "nativeRun": false,
+  "compile": "private production 0 errors/10 existing warnings; Editor 0 errors/4 existing OffscreenCapture warnings"
+}

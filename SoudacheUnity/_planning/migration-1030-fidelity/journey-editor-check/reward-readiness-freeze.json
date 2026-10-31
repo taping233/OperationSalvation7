@@ -1,0 +1,21 @@
+{
+  "status": "frozen-reward-native-frame-readiness",
+  "privateCompileExit": 0,
+  "nativeNotRun": true,
+  "productionReadonly": true,
+  "changes": [
+    "Wait at least two real Time.frameCount advances and production CanSubmit before reward input/new-page captures.",
+    "Retain strict real EventSystem raycast receivers and mask checks.",
+    "Blocked input records complete bounds and captures a failure screenshot before throwing."
+  ],
+  "files": [
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.cs",
+      "sha256": "08bfe55eb4720dd9645182bcc26f2f2b419fe96d9a11e412b19420b52b36dc08"
+    },
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.RewardInput.cs",
+      "sha256": "a706212961b7906cc25a9576f0ec435e76666482a09435a089179312078b6765"
+    }
+  ]
+}

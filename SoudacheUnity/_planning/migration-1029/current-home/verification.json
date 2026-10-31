@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "current source fingerprints: 22",
+    "source/output asset fingerprints and original image pixels: 26",
+    "derived CSS primitive assets: 17",
+    "all 11 current home controls present; retired composition absent",
+    "current seven-wallpaper ordering/default and hidden sublabels preserved",
+    "all native resource metadata: lossless 4096px limit, alpha, unique GUID"
+  ],
+  "sourceReceiptSha256": "d568dde0b3d837e998f544853bcd57bdafd50ae4592dc6080bafea530b2bf4be",
+  "nativeRendering": "pending parent-owned capture",
+  "interactionExecution": "pending parent-owned native probes"
+}

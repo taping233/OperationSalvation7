@@ -1,0 +1,472 @@
+{
+  "checks": 25,
+  "failures": 0,
+  "rows": [
+    {
+      "name": "combo:source-beats",
+      "pass": true,
+      "actual": [
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 45,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": true,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 45,
+          "after": 40,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": true,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 40,
+          "after": 35,
+          "max": 50
+        }
+      ],
+      "expected": [
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 45,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": true,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 45,
+          "after": 40,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": true,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 40,
+          "after": 35,
+          "max": 50
+        }
+      ]
+    },
+    {
+      "name": "combo:listener-does-not-change-rules",
+      "pass": true
+    },
+    {
+      "name": "combo:immutable-hit",
+      "pass": true
+    },
+    {
+      "name": "area-combo:source-beats",
+      "pass": true,
+      "actual": [
+        {
+          "kind": "windup",
+          "action": "cast",
+          "replay": false,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 43,
+          "max": 50
+        },
+        {
+          "kind": "hit",
+          "unit": 1,
+          "before": 50,
+          "after": 43,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "cast",
+          "replay": true,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 43,
+          "after": 36,
+          "max": 50
+        },
+        {
+          "kind": "hit",
+          "unit": 1,
+          "before": 43,
+          "after": 36,
+          "max": 50
+        }
+      ],
+      "expected": [
+        {
+          "kind": "windup",
+          "action": "cast",
+          "replay": false,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 43,
+          "max": 50
+        },
+        {
+          "kind": "hit",
+          "unit": 1,
+          "before": 50,
+          "after": 43,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "cast",
+          "replay": true,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 43,
+          "after": 36,
+          "max": 50
+        },
+        {
+          "kind": "hit",
+          "unit": 1,
+          "before": 43,
+          "after": 36,
+          "max": 50
+        }
+      ]
+    },
+    {
+      "name": "area-combo:listener-does-not-change-rules",
+      "pass": true
+    },
+    {
+      "name": "area-combo:immutable-hit",
+      "pass": true
+    },
+    {
+      "name": "victory:source-beats",
+      "pass": true,
+      "actual": [
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 240
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 0,
+          "max": 50
+        }
+      ],
+      "expected": [
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 240
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 0,
+          "max": 50
+        }
+      ]
+    },
+    {
+      "name": "victory:listener-does-not-change-rules",
+      "pass": true
+    },
+    {
+      "name": "victory:immutable-hit",
+      "pass": true
+    },
+    {
+      "name": "neutral-cast:source-beats",
+      "pass": true,
+      "actual": [
+        {
+          "kind": "windup",
+          "action": "cast",
+          "replay": false,
+          "windup": 200
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 46,
+          "max": 50
+        }
+      ],
+      "expected": [
+        {
+          "kind": "windup",
+          "action": "cast",
+          "replay": false,
+          "windup": 200
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 46,
+          "max": 50
+        }
+      ]
+    },
+    {
+      "name": "neutral-cast:listener-does-not-change-rules",
+      "pass": true
+    },
+    {
+      "name": "neutral-cast:immutable-hit",
+      "pass": true
+    },
+    {
+      "name": "children:source-beats",
+      "pass": true,
+      "actual": [
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 130
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 46,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 130
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 46,
+          "after": 42,
+          "max": 50
+        }
+      ],
+      "expected": [
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 130
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 46,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 130
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 46,
+          "after": 42,
+          "max": 50
+        }
+      ]
+    },
+    {
+      "name": "children:listener-does-not-change-rules",
+      "pass": true
+    },
+    {
+      "name": "children:immutable-hit",
+      "pass": true
+    },
+    {
+      "name": "enemy-double:source-beats",
+      "pass": true,
+      "actual": [
+        {
+          "kind": "enemy-windup",
+          "actor": 0
+        },
+        {
+          "kind": "hit",
+          "unit": "self",
+          "before": 30,
+          "after": 27,
+          "max": 60
+        },
+        {
+          "kind": "enemy-windup",
+          "actor": 0
+        },
+        {
+          "kind": "hit",
+          "unit": "self",
+          "before": 27,
+          "after": 24,
+          "max": 60
+        }
+      ],
+      "expected": [
+        {
+          "kind": "enemy-windup",
+          "actor": 0
+        },
+        {
+          "kind": "hit",
+          "unit": "self",
+          "before": 30,
+          "after": 27,
+          "max": 60
+        },
+        {
+          "kind": "enemy-windup",
+          "actor": 0
+        },
+        {
+          "kind": "hit",
+          "unit": "self",
+          "before": 27,
+          "after": 24,
+          "max": 60
+        }
+      ]
+    },
+    {
+      "name": "enemy-double:listener-does-not-change-rules",
+      "pass": true
+    },
+    {
+      "name": "enemy-double:immutable-hit",
+      "pass": true
+    },
+    {
+      "name": "death:source-beats",
+      "pass": true,
+      "actual": [
+        {
+          "kind": "enemy-windup",
+          "actor": 0
+        },
+        {
+          "kind": "hit",
+          "unit": "self",
+          "before": 2,
+          "after": -1,
+          "max": 60
+        },
+        {
+          "kind": "death"
+        }
+      ],
+      "expected": [
+        {
+          "kind": "enemy-windup",
+          "actor": 0
+        },
+        {
+          "kind": "hit",
+          "unit": "self",
+          "before": 2,
+          "after": -1,
+          "max": 60
+        },
+        {
+          "kind": "death"
+        }
+      ]
+    },
+    {
+      "name": "death:listener-does-not-change-rules",
+      "pass": true
+    },
+    {
+      "name": "death:immutable-hit",
+      "pass": true
+    },
+    {
+      "name": "surrender:source-beats",
+      "pass": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "surrender:listener-does-not-change-rules",
+      "pass": true
+    },
+    {
+      "name": "smoke:source-beats",
+      "pass": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "smoke:listener-does-not-change-rules",
+      "pass": true
+    }
+  ]
+}

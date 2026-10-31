@@ -1,0 +1,94 @@
+[
+  {
+    "source": "game/src/hub/game.bag.js",
+    "sha256": "b0203137bf7ca624fdae510e5f0f7f2ce79c4f258ece9f86487e00f6b22e0851"
+  },
+  {
+    "source": "game/src/hub/game.bag.view2.js",
+    "sha256": "2fa98640901ff50f1d3d0c104cab6dd6f122a5e7bd03ada2b2ce8c1fa0fbb9e3"
+  },
+  {
+    "source": "game/src/hub/game.bag.rules.js",
+    "sha256": "631f5316a1d25f04a844d44525e6d65e13f123ed73bd6e421580005ec9414f80"
+  },
+  {
+    "source": "game/src/hub/bag-pane-view.js",
+    "sha256": "e472fb48e3f0844f7f3eb7dd65f22709bf86d8dd1c319809fb3bbbb481784ecc"
+  },
+  {
+    "source": "game/src/core/bag-render-derivation.js",
+    "sha256": "0b9d52e259a9af10cdde0ee6a51f3c5030843df45c99a838e3a448a6f0187e6e"
+  },
+  {
+    "source": "game/src/hub/game.bag.drag.js",
+    "sha256": "7d03e4e8975e703301d92d2a8cfe98b6e2b63ea418c7ca7a119e7b146615830b"
+  },
+  {
+    "source": "game/src/hub/game.container-store.view.js",
+    "sha256": "caea9ade67f7b8b20496296d02377f1422b5d0d57310c6aa0d73e4715587e9e9"
+  },
+  {
+    "source": "game/src/hub/bag-container-pages.js",
+    "sha256": "39c7e3af3d8632f9b93eee7a59d617b9b42b43d67366d4cf04b4d7e183b0870c"
+  },
+  {
+    "source": "game/src/ui/inventory-zoom.js",
+    "sha256": "29e2cab71d09eeb478f77426a062d903735eda16e51a49ed1196f85d708c8374"
+  },
+  {
+    "source": "game/css/expedition-inventory.css",
+    "sha256": "7136bc5273a8e8601285403ba226c576526d804dd1db6b53e01cc68171fec3f6"
+  },
+  {
+    "source": "game/css/bag-design-system.css",
+    "sha256": "f334253767c5ede35db6d9b7b240a4885cc40961a3488f02c8c6da0228e01161"
+  },
+  {
+    "source": "game/css/feedback-1018.css",
+    "sha256": "f7044bbef00d20a200a5f29210db05d42e7349944d7f557aeb20b9730f249149"
+  },
+  {
+    "source": "game/css/inventory-zoom.css",
+    "sha256": "573455d016b5466d9c03bd8908b0367576691ccd30ea8c52925e6f1af44f9d72"
+  },
+  {
+    "source": "game/css/container-store.css",
+    "sha256": "3318d1e8f4de888925de17c47f5f8882d54c42299c5a4c486f3022050dbbf0a4"
+  },
+  {
+    "source": "game/css/secondary-ui-tokens.css",
+    "sha256": "1cac3b724a9e1a42a44eaab106f87d110dc74951336ac42247ded94297421064"
+  },
+  {
+    "source": "game/src/hub/base.js",
+    "sha256": "91fb4d16f352c43ebfa737caed9e932489d86e5405b55dedeb133633cec97e05"
+  },
+  {
+    "source": "game/src/hub/stored-card-identity.js",
+    "sha256": "f682a2ea080c03533b8f2f710cae1b16fa5cfc9970a3c17dd7b7016e956a36c6"
+  },
+  {
+    "source": "game/src/hub/base-departure.commands.js",
+    "sha256": "58ba0cbb8a807a6e65cc0e430ffacde8348728f135852cc0f9a01af4820d9b06"
+  },
+  {
+    "source": "game/src/core/card-capacity.js",
+    "sha256": "859f81cc941d1db172747667fc455ee09a35e911d635d7966f9e999aa8838bb5"
+  },
+  {
+    "source": "game/src/cards/cards.rules.js",
+    "sha256": "9ff2fd79f57b328f8b21187ea4c43e26af5ea4075ea3c4a7b2eb8f7d34abec07"
+  },
+  {
+    "source": "game/src/hub/bag-item-effects.js",
+    "sha256": "28d8087e85ed25f3ae68c9201c1d196ea742e1d658ab045f861a408c0fb4b473"
+  },
+  {
+    "source": "game/src/hub/bag-use-compatibility.js",
+    "sha256": "3fb692c45d86084f60d7f3fae79e4b78c73b785088b6b476f53a8f606ba5bad2"
+  },
+  {
+    "source": "game/css/battle-decision.css",
+    "sha256": "6a91d4666c61af517ac651d77fa12902d65d88c3a8658bf0bd260bb04dc0eb44"
+  }
+]

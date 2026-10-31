@@ -1,0 +1,28 @@
+        sealed class UnitMount
+        {
+            public readonly RectTransform Root,Figure;public readonly Image Art;
+            public BattleUnitFrames Frames {get;private set;}
+            public Action Click;public CurrentBattleNameplate Nameplate=>_nameplate;
+            readonly GameObject _hp;readonly Text _armor;readonly CurrentBattleNameplate _nameplate;
+            public UnitMount(Transform parent,string name,Action onClick)
+            {
+                Root=BattleRect(name,parent);Figure=BattleRect("sts-figure",Root);var portrait=BattleRect("sts-portrait",Figure);UiExt.Stretch(portrait);
+                Art=UIKit.GetOrAdd<Image>(portrait);Art.preserveAspect=true;Click=onClick;var button=UIKit.GetOrAdd<Button>(Root);button.targetGraphic=Art;button.transition=Selectable.Transition.None;button.onClick.AddListener(()=>Click?.Invoke());
+                bool self=name=="sts-me",enemy=name.StartsWith("sts-foe");
+                _hp=BtHpBar.Create(Root,self?264:230);Fixed((RectTransform)_hp.transform,new Vector2(.5f,0),new Vector2(.5f,1),new Vector2(0,-10),new Vector2(self?264:230,36));
+                _armor=UIKit.Label(_hp.transform,"",18,BtColors.Hex("#E8EEF2"));TextAt(_armor,new Vector2(0,1),new Vector2(0,1),Vector2.zero,new Vector2(44,30),TextAnchor.MiddleCenter);
+                var head=BattleRect("sts-nameplate",Root);_nameplate=UIKit.GetOrAdd<CurrentBattleNameplate>(head);_nameplate.Initialize(Root,self,enemy);
+            }
+            public void Update(string name,int hp,int max,string stats,IReadOnlyList<StatusChip> chips,FoeIntent intent,bool dead,bool immune,int armor=0,IReadOnlyDictionary<string,int> sourceStatus=null)
+            {
+                _nameplate.Sync(name,stats,chips,intent,dead,sourceStatus);BtHpBar.Set(_hp,hp,max);_armor.text=armor>0?"甲 "+armor:"";_armor.gameObject.SetActive(armor>0);UIKit.GetOrAdd<CanvasGroup>(Root).alpha=dead?.22f:1;
+                var outline=UIKit.GetOrAdd<Outline>(Art);outline.effectColor=immune?BtColors.HexA("#A0A0A0",.85f):Color.clear;outline.effectDistance=new Vector2(4,-4);
+            }
+            public void SetStatless(bool statless){_hp.SetActive(!statless);_nameplate.gameObject.SetActive(!statless);}
+            public void SetDetails(string title,string detail)=>_nameplate.SetDetails(title,detail);
+            public void PresentHealth(int hp,int max,DefenseState defense,bool dead)
+            {BtHpBar.Set(_hp,hp,max);int armor=defense?.Armor??0;_armor.text=armor>0?"甲 "+armor:"";_armor.gameObject.SetActive(armor>0);UIKit.GetOrAdd<CanvasGroup>(Root).alpha=dead?.22f:1;_nameplate.PresentDead(dead);}
+            public bool BindActor(BattleScreen owner,string role,string token)
+            {if(Frames==null)Frames=UIKit.GetOrAdd<BattleUnitFrames>(Figure);return Frames.Bind(owner,Art,role,token);}
+            public void SetActorHead(float height)=>_nameplate.SetActorHeight(height);
+        }

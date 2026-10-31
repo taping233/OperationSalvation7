@@ -1,0 +1,15 @@
+{
+  "status": "frozen-for-native-verification",
+  "domainAssertions": 89,
+  "domain": "passed",
+  "assemblyCompile": "passed",
+  "compileErrors": 0,
+  "compileWarnings": 6,
+  "nativeUi": "not-run",
+  "actualInput": "not-run",
+  "effectsParity": "not-confirmed",
+  "compileEvidence": "ui-compile.log",
+  "domainEvidence": "domain-checks.json",
+  "sources": "source-map.json",
+  "generatedUtc": "2026-10-29T19:12:38.3696244Z"
+}

@@ -1,0 +1,129 @@
+[
+  {
+    "name": "grudge",
+    "ok": false,
+    "reason": "\u624B\u724C\u4E0D\u6EE1\u8DB3\u4F7F\u7528\u6761\u4EF6",
+    "costs": [
+      1,
+      1
+    ],
+    "hand": [
+      "o0",
+      "o1",
+      "o2"
+    ],
+    "consumed": [],
+    "armor": 0,
+    "foeHp": 100,
+    "energy": 2
+  },
+  {
+    "name": "armor",
+    "ok": true,
+    "reason": null,
+    "costs": [
+      0
+    ],
+    "hand": [
+      "o1"
+    ],
+    "consumed": [],
+    "armor": 10,
+    "foeHp": 100,
+    "energy": 1
+  },
+  {
+    "name": "fly",
+    "ok": true,
+    "reason": null,
+    "costs": [],
+    "hand": [],
+    "consumed": [],
+    "armor": 0,
+    "foeHp": 90,
+    "energy": 0
+  },
+  {
+    "name": "bleedAmp",
+    "ok": true,
+    "reason": null,
+    "costs": [
+      1,
+      2
+    ],
+    "hand": [
+      "o2"
+    ],
+    "consumed": [],
+    "armor": 0,
+    "foeHp": 93,
+    "energy": 1
+  },
+  {
+    "name": "spellCost1",
+    "ok": true,
+    "reason": null,
+    "costs": [
+      2,
+      2
+    ],
+    "hand": [
+      "o1",
+      "o2"
+    ],
+    "consumed": [],
+    "armor": 0,
+    "foeHp": 100,
+    "energy": 2
+  },
+  {
+    "name": "meleeCost1",
+    "ok": true,
+    "reason": null,
+    "costs": [
+      2,
+      2
+    ],
+    "hand": [
+      "o1",
+      "o2"
+    ],
+    "consumed": [],
+    "armor": 0,
+    "foeHp": 100,
+    "energy": 2
+  },
+  {
+    "name": "grudge-boss",
+    "ok": false,
+    "reason": "\u624B\u724C\u4E0D\u6EE1\u8DB3\u4F7F\u7528\u6761\u4EF6",
+    "costs": [
+      1,
+      1
+    ],
+    "hand": [
+      "o0",
+      "o1",
+      "o2"
+    ],
+    "consumed": [],
+    "armor": 0,
+    "foeHp": 100,
+    "energy": 2
+  },
+  {
+    "name": "armor-boss",
+    "ok": true,
+    "reason": null,
+    "costs": [
+      0
+    ],
+    "hand": [
+      "o1"
+    ],
+    "consumed": [],
+    "armor": 10,
+    "foeHp": 100,
+    "energy": 1
+  }
+]

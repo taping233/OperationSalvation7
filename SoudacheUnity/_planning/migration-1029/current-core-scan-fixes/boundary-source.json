@@ -1,0 +1,2967 @@
+[
+  {
+    "q": {
+      "name": "heal-0",
+      "id": "tt7-holyglow",
+      "hp": 0
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "heal-1",
+      "id": "tt7-holyglow",
+      "hp": 1
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "heal-11",
+      "id": "tt7-holyglow",
+      "hp": 11
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "heal-12",
+      "id": "tt7-holyglow",
+      "hp": 12
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "heal-13",
+      "id": "tt7-holyglow",
+      "hp": 13
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 13,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "heal-30",
+      "id": "tt7-holyglow",
+      "hp": 30
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "heal-59",
+      "id": "tt7-holyglow",
+      "hp": 59
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 59,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "heal-60",
+      "id": "tt7-holyglow",
+      "hp": 60
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 60,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "healban-0",
+      "id": "tt7-holyglow",
+      "hp": 5,
+      "healban": 0
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 12,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "healban-1",
+      "id": "tt7-holyglow",
+      "hp": 5,
+      "healban": 1
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 5,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "healban-3",
+      "id": "tt7-holyglow",
+      "hp": 5,
+      "healban": 3
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 5,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "heal-max-cap",
+      "id": "tt7-holyglow",
+      "hp": 3,
+      "maxHp": 8
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-holyglow",
+          "cls": "牧师",
+          "name": "沐愈光辉",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "将自身血量回复至 12 血。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "heal",
+                  "upTo": 12
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 8,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "tt3-nature-form-2",
+      "id": "tt3-nature-form",
+      "energy": 2
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-nature-form",
+          "cls": "牧师",
+          "name": "满月形态",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "本局战斗中，能量上限 +1。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "energyCap",
+                  "n": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 0,
+      "maxEnergy": 11,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "tt3-nature-form-10",
+      "id": "tt3-nature-form",
+      "energy": 10
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-nature-form",
+          "cls": "牧师",
+          "name": "满月形态",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "本局战斗中，能量上限 +1。",
+          "dmg": 0,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "energyCap",
+                  "n": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 11,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "tt8-hero-guardian-2",
+      "id": "tt8-hero-guardian",
+      "energy": 2
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt8-hero-guardian",
+          "cls": "战士",
+          "hero": true,
+          "name": "圣剑化身",
+          "cost": 2,
+          "rarity": "古朴",
+          "type": "能力卡",
+          "dmg": 0,
+          "desc": "诛邪圣剑：本局对战中，能量上限 +1，装备上限 +1。",
+          "value": 8,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": null,
+                "area": false
+              },
+              "ownedEquipCapacity": 1
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "energyCap",
+                  "n": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 1,
+      "maxEnergy": 11,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "tt8-hero-guardian-10",
+      "id": "tt8-hero-guardian",
+      "energy": 10
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt8-hero-guardian",
+          "cls": "战士",
+          "hero": true,
+          "name": "圣剑化身",
+          "cost": 2,
+          "rarity": "古朴",
+          "type": "能力卡",
+          "dmg": 0,
+          "desc": "诛邪圣剑：本局对战中，能量上限 +1，装备上限 +1。",
+          "value": 8,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": null,
+                "area": false
+              },
+              "ownedEquipCapacity": 1
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "energyCap",
+                  "n": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 11,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "extend--2",
+      "id": "tt3-firm-barrier",
+      "freeze": -2
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-firm-barrier",
+          "cls": "法师",
+          "name": "坚冰结界",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "延长 1 名角色的冰冻 1 回合，抽1张牌。",
+          "dmg": 0,
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "curse",
+                  "curse": "freeze",
+                  "duration": 1,
+                  "extend": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": -2
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "extend-0",
+      "id": "tt3-firm-barrier",
+      "freeze": 0
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-firm-barrier",
+          "cls": "法师",
+          "name": "坚冰结界",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "延长 1 名角色的冰冻 1 回合，抽1张牌。",
+          "dmg": 0,
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "curse",
+                  "curse": "freeze",
+                  "duration": 1,
+                  "extend": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "extend-1",
+      "id": "tt3-firm-barrier",
+      "freeze": 1
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-firm-barrier",
+          "cls": "法师",
+          "name": "坚冰结界",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "延长 1 名角色的冰冻 1 回合，抽1张牌。",
+          "dmg": 0,
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "curse",
+                  "curse": "freeze",
+                  "duration": 1,
+                  "extend": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 2
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "extend-4",
+      "id": "tt3-firm-barrier",
+      "freeze": 4
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-firm-barrier",
+          "cls": "法师",
+          "name": "坚冰结界",
+          "cost": 0,
+          "rarity": "职业",
+          "type": "法术",
+          "desc": "延长 1 名角色的冰冻 1 回合，抽1张牌。",
+          "dmg": 0,
+          "draw": 1,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "curse",
+                  "curse": "freeze",
+                  "duration": 1,
+                  "extend": 1,
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "draw",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 5
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "tt3-nuke-ray-0",
+      "id": "tt3-nuke-ray",
+      "seed": 0
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-nuke-ray",
+          "cls": "降临者",
+          "name": "致命射线",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "dmg": 8,
+          "dmgType": "spell",
+          "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+          "value": 3,
+          "sellable": false,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 3,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "healban": 1,
+        "poison": 1,
+        "silence": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 0,
+      "streams": {
+        "generation": 1553158855
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt12-infectray-0",
+      "id": "tt12-infectray",
+      "seed": 0
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt12-infectray",
+          "name": "感染射线",
+          "cost": 1,
+          "rarity": "古朴",
+          "type": "法术",
+          "dmg": 4,
+          "dmgType": "spell",
+          "desc": "造成4点法伤，附加一层随机诅咒",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 1,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "poison": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 0,
+      "streams": {
+        "generation": 1553158855
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt3-nuke-ray-1",
+      "id": "tt3-nuke-ray",
+      "seed": 1
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-nuke-ray",
+          "cls": "降临者",
+          "name": "致命射线",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "dmg": 8,
+          "dmgType": "spell",
+          "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+          "value": 3,
+          "sellable": false,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 3,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "bleed": 1,
+        "freeze": 1,
+        "healban": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 1,
+      "streams": {
+        "generation": 611766131
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt12-infectray-1",
+      "id": "tt12-infectray",
+      "seed": 1
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt12-infectray",
+          "name": "感染射线",
+          "cost": 1,
+          "rarity": "古朴",
+          "type": "法术",
+          "dmg": 4,
+          "dmgType": "spell",
+          "desc": "造成4点法伤，附加一层随机诅咒",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 1,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "healban": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 1,
+      "streams": {
+        "generation": 611766131
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt3-nuke-ray-2",
+      "id": "tt3-nuke-ray",
+      "seed": 2
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-nuke-ray",
+          "cls": "降临者",
+          "name": "致命射线",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "dmg": 8,
+          "dmgType": "spell",
+          "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+          "value": 3,
+          "sellable": false,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 3,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "abreak": 1,
+        "freeze": 1,
+        "poison": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 2,
+      "streams": {
+        "generation": 2128019435
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt12-infectray-2",
+      "id": "tt12-infectray",
+      "seed": 2
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt12-infectray",
+          "name": "感染射线",
+          "cost": 1,
+          "rarity": "古朴",
+          "type": "法术",
+          "dmg": 4,
+          "dmgType": "spell",
+          "desc": "造成4点法伤，附加一层随机诅咒",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 1,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 2,
+      "streams": {
+        "generation": 2128019435
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt3-nuke-ray-123",
+      "id": "tt3-nuke-ray",
+      "seed": 123
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-nuke-ray",
+          "cls": "降临者",
+          "name": "致命射线",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "dmg": 8,
+          "dmgType": "spell",
+          "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+          "value": 3,
+          "sellable": false,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 3,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 1,
+        "healban": 1,
+        "poison": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {
+        "generation": 969294680
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt12-infectray-123",
+      "id": "tt12-infectray",
+      "seed": 123
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt12-infectray",
+          "name": "感染射线",
+          "cost": 1,
+          "rarity": "古朴",
+          "type": "法术",
+          "dmg": 4,
+          "dmgType": "spell",
+          "desc": "造成4点法伤，附加一层随机诅咒",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 1,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "freeze": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {
+        "generation": 969294680
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt3-nuke-ray-999",
+      "id": "tt3-nuke-ray",
+      "seed": 999
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-nuke-ray",
+          "cls": "降临者",
+          "name": "致命射线",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "dmg": 8,
+          "dmgType": "spell",
+          "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+          "value": 3,
+          "sellable": false,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 3,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "abreak": 1,
+        "bleed": 1,
+        "poison": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 999,
+      "streams": {
+        "generation": 2052787037
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt12-infectray-999",
+      "id": "tt12-infectray",
+      "seed": 999
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt12-infectray",
+          "name": "感染射线",
+          "cost": 1,
+          "rarity": "古朴",
+          "type": "法术",
+          "dmg": 4,
+          "dmgType": "spell",
+          "desc": "造成4点法伤，附加一层随机诅咒",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 1,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "abreak": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 999,
+      "streams": {
+        "generation": 2052787037
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt3-nuke-ray-2147483647",
+      "id": "tt3-nuke-ray",
+      "seed": 2147483647
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-nuke-ray",
+          "cls": "降临者",
+          "name": "致命射线",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "dmg": 8,
+          "dmgType": "spell",
+          "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+          "value": 3,
+          "sellable": false,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 3,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "bleed": 1,
+        "healban": 1,
+        "silence": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 2147483647,
+      "streams": {
+        "generation": 2885799120
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "tt12-infectray-2147483647",
+      "id": "tt12-infectray",
+      "seed": 2147483647
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt12-infectray",
+          "name": "感染射线",
+          "cost": 1,
+          "rarity": "古朴",
+          "type": "法术",
+          "dmg": 4,
+          "dmgType": "spell",
+          "desc": "造成4点法伤，附加一层随机诅咒",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 1,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "hand": 0,
+      "draw": 0,
+      "status": {
+        "bleed": 1
+      }
+    },
+    "rng": {
+      "version": 2,
+      "seed": 2147483647,
+      "streams": {
+        "generation": 2885799120
+      }
+    }
+  },
+  {
+    "q": {
+      "name": "replay-draw",
+      "id": "tt7-marchrush",
+      "draw": 4
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-marchrush",
+          "cls": "战士",
+          "name": "急行军",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。",
+          "dmg": 0,
+          "draw": 2,
+          "armor": 2,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "draw",
+                  "amountField": "draw"
+                },
+                {
+                  "op": "armor",
+                  "amountField": "armor"
+                }
+              ],
+              "replay": {
+                "on": "lastHand",
+                "times": 1
+              }
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o3",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o4",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 2,
+      "hand": 2,
+      "draw": 2,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "replay-empty",
+      "id": "tt7-marchrush",
+      "draw": 0
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-marchrush",
+          "cls": "战士",
+          "name": "急行军",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。",
+          "dmg": 0,
+          "draw": 2,
+          "armor": 2,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "draw",
+                  "amountField": "draw"
+                },
+                {
+                  "op": "armor",
+                  "amountField": "armor"
+                }
+              ],
+              "replay": {
+                "on": "lastHand",
+                "times": 1
+              }
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 4,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "replay-other",
+      "id": "tt7-marchrush",
+      "other": "starter-attack",
+      "draw": 0
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-marchrush",
+          "cls": "战士",
+          "name": "急行军",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。",
+          "dmg": 0,
+          "draw": 2,
+          "armor": 2,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "draw",
+                  "amountField": "draw"
+                },
+                {
+                  "op": "armor",
+                  "amountField": "armor"
+                }
+              ],
+              "replay": {
+                "on": "lastHand",
+                "times": 1
+              }
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 2,
+      "hand": 1,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "replay-retained",
+      "id": "tt7-marchrush",
+      "other": "cmtn233trmeg",
+      "draw": 0
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-marchrush",
+          "cls": "战士",
+          "name": "急行军",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。",
+          "dmg": 0,
+          "draw": 2,
+          "armor": 2,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "draw",
+                  "amountField": "draw"
+                },
+                {
+                  "op": "armor",
+                  "amountField": "armor"
+                }
+              ],
+              "replay": {
+                "on": "lastHand",
+                "times": 1
+              }
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "cmtn233trmeg",
+          "name": "不朽斩",
+          "cost": 1,
+          "rarity": "衍生",
+          "type": "武术",
+          "desc": "攻（+1），永远被保留在手牌中，无法用于注能",
+          "dmg": 1,
+          "dmgType": "attack",
+          "value": 5,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              },
+              "keepInHand": true,
+              "fuelAllowed": false
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 4,
+      "hand": 1,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "replay-after-empty",
+      "id": "tt7-marchrush",
+      "draw": 4,
+      "other": "starter-attack",
+      "consume": true
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-marchrush",
+          "cls": "战士",
+          "name": "急行军",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。",
+          "dmg": 0,
+          "draw": 2,
+          "armor": 2,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "draw",
+                  "amountField": "draw"
+                },
+                {
+                  "op": "armor",
+                  "amountField": "armor"
+                },
+                {
+                  "op": "consumeHand",
+                  "all": true,
+                  "trigger": false
+                }
+              ],
+              "replay": {
+                "on": "lastHand",
+                "times": 1
+              }
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o3",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o4",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o5",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 4,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "replay-async-draw",
+      "id": "tt7-marchrush",
+      "draw": 4,
+      "asyncChoice": true,
+      "other": "starter-attack"
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-marchrush",
+          "cls": "战士",
+          "name": "急行军",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。",
+          "dmg": 0,
+          "draw": 2,
+          "armor": 2,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "handSelect",
+                  "n": 1,
+                  "type": "武术",
+                  "act": "play"
+                },
+                {
+                  "op": "draw",
+                  "amountField": "draw"
+                },
+                {
+                  "op": "armor",
+                  "amountField": "armor"
+                }
+              ],
+              "replay": {
+                "on": "lastHand",
+                "times": 1
+              }
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o3",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o4",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o5",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 2,
+      "hand": 2,
+      "draw": 2,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  },
+  {
+    "q": {
+      "name": "replay-async-empty",
+      "id": "tt7-marchrush",
+      "draw": 0,
+      "asyncChoice": true,
+      "other": "starter-attack"
+    },
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-marchrush",
+          "cls": "战士",
+          "name": "急行军",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。",
+          "dmg": 0,
+          "draw": 2,
+          "armor": 2,
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "handSelect",
+                  "n": 1,
+                  "type": "武术",
+                  "act": "play"
+                },
+                {
+                  "op": "draw",
+                  "amountField": "draw"
+                },
+                {
+                  "op": "armor",
+                  "amountField": "armor"
+                }
+              ],
+              "replay": {
+                "on": "lastHand",
+                "times": 1
+              }
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 2,
+      "hand": 0,
+      "draw": 0,
+      "status": {}
+    },
+    "rng": {
+      "version": 2,
+      "seed": 123,
+      "streams": {}
+    }
+  }
+]

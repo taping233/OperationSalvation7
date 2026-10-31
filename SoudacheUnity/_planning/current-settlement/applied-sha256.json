@@ -1,0 +1,30 @@
+{
+  "Assets\\Scripts\\Sdt.Run\\GameRuntime.Settlement.cs": {
+    "before": "b89560f72ebd67b4bdccdb2043eb1741d1363040cd8ce835f9542f9e22831e05",
+    "after": "b89560f72ebd67b4bdccdb2043eb1741d1363040cd8ce835f9542f9e22831e05"
+  },
+  "Assets\\Scripts\\Sdt.Run\\CurrentSettlementReceipt.cs": {
+    "before": "782acad82d4cbf855fb8b0d14acaa9e5aa8467af577d9824e05f54898129b141",
+    "after": "782acad82d4cbf855fb8b0d14acaa9e5aa8467af577d9824e05f54898129b141"
+  },
+  "Assets\\Scripts\\Sdt.UI\\Screens\\Run\\ExtractScreens.cs": {
+    "before": "a33f4b5617c87b8167e9a24fe3f0945531f4a1c9ea3e7c147cadb9f51a721236",
+    "after": "a33f4b5617c87b8167e9a24fe3f0945531f4a1c9ea3e7c147cadb9f51a721236"
+  },
+  "Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentSettlementView.cs": {
+    "before": "c414b2450ddb06fec8ce26df1a8b3e8ee43bc8bfa1c1a6ac64d5221b2a49acdd",
+    "after": "c414b2450ddb06fec8ce26df1a8b3e8ee43bc8bfa1c1a6ac64d5221b2a49acdd"
+  },
+  "Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentExtractionPage.cs": {
+    "before": "0ef181b42250ce027e5749aaec9919f27706207dd38298a8bc0e258304520458",
+    "after": "0ef181b42250ce027e5749aaec9919f27706207dd38298a8bc0e258304520458"
+  },
+  "Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentSettlementReport.cs": {
+    "before": "6cccfe90ad8fd7c0f4b0b990f9d1b830b6b6e355af3ae3a99c12a95bca9fbd7f",
+    "after": "6cccfe90ad8fd7c0f4b0b990f9d1b830b6b6e355af3ae3a99c12a95bca9fbd7f"
+  },
+  "Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentLeavePage.cs": {
+    "before": "2de0b5fea7f486673f6a20a20860c9ef42f26e5838e0fd141f2df27f17dc8470",
+    "after": "af1667c621bc59af7de61e340e65a6b5acb6dc17394fc01259ac25184acb4538"
+  }
+}

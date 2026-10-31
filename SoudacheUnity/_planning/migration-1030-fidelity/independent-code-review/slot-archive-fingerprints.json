@@ -1,0 +1,116 @@
+{
+  "capturedUtc": "2026-10-30T14:16:22.373425+00:00",
+  "readOnlyProduction": true,
+  "reviewerNoCompileNoUnityNoForeground": true,
+  "native": [
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\SaveSystem.SlotArchive.cs",
+      "sha256": "c5118c3bfbac5f2ec7d75084a69846f4214395cb2a9db0c0ef91e18a2ed2e3af",
+      "bytes": 12154
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\SaveSystem.RunValidation.cs",
+      "sha256": "711acfd7f7e68f5137dc2180c25f4c9d64d82cce4e854c111f30138c97d942c2",
+      "bytes": 3932
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\SaveSystem.cs",
+      "sha256": "b5f45f31198d2614806a9334b5a71cb456bca27f2e1ab6c0b2ab3813d028c8d7",
+      "bytes": 15447
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\AtomicJsonFile.cs",
+      "sha256": "827b9ff1c75cf8c1a82148ecdfe0032215b00e85442e3f9f19042f92c9b5db68",
+      "bytes": 1209
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.Settlement.cs",
+      "sha256": "b89560f72ebd67b4bdccdb2043eb1741d1363040cd8ce835f9542f9e22831e05",
+      "bytes": 15776
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.BattleCheckpoint.cs",
+      "sha256": "9ec3999fd60ed8b91d89d5e04c51c93d1214cec8fddbba7d0cbb0b947d7ecd52",
+      "bytes": 2040
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentSlotArchiveScreen.cs",
+      "sha256": "d2cb58071cd5176016307bca71e897a15541a90cf83273155833f3a8885d7b38",
+      "bytes": 6929
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentSlotPage.cs",
+      "sha256": "178448edf159e0e63112d2225104afd0b3f275e49695c44a9528690a7a10958a",
+      "bytes": 14219
+    },
+    {
+      "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentSettingsDialogs.cs",
+      "sha256": "93ff2489417bbb70c7d5c7a20a22817bd9ab786a87b883fe51c996cd82b460ac",
+      "bytes": 7500
+    }
+  ],
+  "source": [
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\hub\\save-archive.js",
+      "sha256": "51ef18f8d7ee212769fc099c9bffea75361471399d4f83b4191b029fff288d34",
+      "bytes": 12536
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\hub\\extraction.commands.js",
+      "sha256": "225e3a8c47883b58d729edc04a4e1bf2ff44edc45dedde1f064d29f02c3d5a96",
+      "bytes": 31610
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\save-management.js",
+      "sha256": "8bd37a97035429e3c46e3ef5c8fd4012cc2889211dc312c334c8767852f1caa9",
+      "bytes": 3929
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\menu-slots.js",
+      "sha256": "205c9869427bc45a3c7bd34565e2ed8cb9f281694382566d71d1ce7c745e2f7c",
+      "bytes": 22145
+    }
+  ],
+  "observedAuthorDataResults": {
+    "path": "D:\\素材\\代号柒\\SoudacheUnity\\_planning\\migration-1030-fidelity\\slot-archive\\data-run-221255\\result.json",
+    "sha256": "2efa3805c2d33f3a025e5a1c107b7e67409b71c9d54857021b407fc844d1a2a1",
+    "bytes": 1484,
+    "passed": true,
+    "testCount": 31,
+    "tests": [
+      "preview source/target without writes",
+      "preview preserves bytes",
+      "explicit confirmation required",
+      "cross-slot import: ",
+      "run identity rebound",
+      "slot 1 untouched",
+      "slot 2 untouched",
+      "slot 3 untouched",
+      "slot 5 untouched",
+      "global settings preserved",
+      "preview consumed once",
+      "checksum failure unchanged",
+      "invalid run uses shared validation",
+      "invalid base rejected",
+      "web archive rejected",
+      "stale preview cannot replace newer save",
+      "locked file failure preserves disk and live transaction state",
+      "retry applies once",
+      "archive rejection does not cancel caller transaction",
+      "null kept pocket stack rejected",
+      "null receipt losses rejected",
+      "inconsistent pocket probability counts rejected",
+      "null extraction left stack rejected",
+      "pending extraction preview",
+      "pending extraction cross-slot import: ",
+      "pending extraction identity and read path restored",
+      "previous profile restores target partition only",
+      "invalid target read diagnosed",
+      "valid import repairs only invalid target",
+      "stale instance refuses preview without overwriting other slots or global settings",
+      "whole-profile error refuses partial replacement"
+    ],
+    "scope": "Real production SaveSystem/validation/archive DLL under .NET; isolated native run snapshot, real file writes/locks; not Unity UI or LoadRun.",
+    "reviewerDidNotExecute": true
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "frozenUtc": "2026-10-30T14:51:06.992189+00:00",
+  "editorProbeSeparate": true,
+  "noUnityOrPlayerBuildByAgent": true,
+  "sourceCodeReadOnly": true,
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/ShopScreen.cs",
+      "sha256": "7a13f85d1c74db2f37f8d00d3aad7cf50da4db49c3e4cafc9a82466a56a932fc",
+      "bytes": 13623,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.ShopAcquisition.cs",
+      "sha256": "9564eff843c173dbfeee195ecdbcec7834d51054e48bd262e0cecb57d0596e7c",
+      "bytes": 1863,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Commission.cs",
+      "sha256": "5e8c9cd9e54b5dee1d7d0477f8539a1077edfad74da1f3c4580c5f040337a3a3",
+      "bytes": 9271,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs",
+      "sha256": "d87e92602ea1e71695680fc7c01015b6e1a02a3861393742b5b189067acd2549",
+      "bytes": 5897,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Cards.cs",
+      "sha256": "33d8338aea361d8efe8c7a561bb8e0eddcb65dbcbda923dd5d4fd6bb9d927453",
+      "bytes": 15677,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/EventProgress.cs",
+      "sha256": "1b7192db6245669f388391a91aaedfa57a8218babc804990ef73d09187fa7da2",
+      "bytes": 2040,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeScene.cs",
+      "sha256": "563c459d886b1e87054a482efc1be2d5e925ee6e7b0dbcdb33e5b2472770cbd2",
+      "bytes": 11377,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeShade.cs",
+      "sha256": "f7388705708d884f77a48728277f30581e1fe02f751edfb5c2718e4e50e8fd4d",
+      "bytes": 2831,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCarry.cs",
+      "sha256": "a725f15c9f39de4803cb3928ce8213bbf397b6f7c79b93b85ce388e1dfed228e",
+      "bytes": 4272,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCommission.cs",
+      "sha256": "a037e69d8f2407783c9fdbde2cfe11f65d9dac95483c15b1deca77cfaa014b34",
+      "bytes": 14149,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.cs",
+      "sha256": "31a852b303f306e4db29fa41ac0a305805a52d2b9443ddfe3fdaa89881339bbe",
+      "bytes": 9998,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Detail.cs",
+      "sha256": "9cb68e1879e3142d5454eb8260cd5cc4a82df3f12d518e33515cf14ec06a0151",
+      "bytes": 8044,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Exchange.cs",
+      "sha256": "9290cad70ea6b86e9f2e8440d9bc451fcf10916ece6be441daecceca3505e3b0",
+      "bytes": 5850,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Market.cs",
+      "sha256": "4053aea92a4d4eb129bfb71af14355f18fadade1e48b94d2ae7d0b801d01b5cd",
+      "bytes": 11261,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop/merchant-approved.png",
+      "sha256": "bbf68e81708ea6b169580831306188e58643d215045bb01800a196f4d55f4922",
+      "bytes": 1784954,
+      "binaryOver1MB": true
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop/mystery-back.png",
+      "sha256": "75688925cad6135b41bd3c31e551467bc13922512047bef4c37f7c3dd6931365",
+      "bytes": 959424,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCoin.cs",
+      "sha256": "358145d7797b3090842287cadf65e1d7ea7b181939bfe79902ff691802d99142",
+      "bytes": 2765,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCoin.cs.meta",
+      "sha256": "b6eca867d3ff8085e86c98cb0134fbb1e97ba63d8f188f137ba766f3ed61ee1c",
+      "bytes": 254,
+      "binaryOver1MB": false
+    }
+  ],
+  "coinPresentationPatch": {
+    "frozen": true,
+    "privateProductionTypecheck": {
+      "exit": 0,
+      "errors": 0,
+      "warnings": 10,
+      "log": "compile/latest.log"
+    },
+    "independentStaticReview": "new_ui_independent_review confirmed six active CSS consumers and one/two-line offer centering",
+    "nativeRebuildDone": false,
+    "receipt": "coin-source-contract.json"
+  }
+}

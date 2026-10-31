@@ -1,0 +1,238 @@
+{
+  "frames": [
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\baita.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\changwuyu.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\common.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\epic.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\heixiang.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\initial.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\interior.png",
+      "diskPng": [
+        256,
+        384
+      ],
+      "sourceWebp": [
+        256,
+        384
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\legendary.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\neutral.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\prism.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\rare.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\token.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\wu.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    },
+    {
+      "path": "Assets\\Resources\\Art\\Current\\ui\\card-frames\\paper-1015\\xingyue.png",
+      "diskPng": [
+        512,
+        768
+      ],
+      "sourceWebp": [
+        512,
+        768
+      ],
+      "sameDimensions": true,
+      "npotScale": 1,
+      "maxTextureSize": 2048
+    }
+  ],
+  "fontParser": "sfnt OS/2 + fvar direct big-endian parser (FontTools unavailable; no installation)",
+  "fonts": [
+    {
+      "path": "Assets\\Resources\\Fonts\\NotoSansSC-Regular.ttf",
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+      "bytes": 17772300,
+      "os2Weight": 100,
+      "variable": true,
+      "axes": [
+        {
+          "tag": "wght",
+          "minimum": 100.0,
+          "default": 100.0,
+          "maximum": 900.0,
+          "flags": 0,
+          "nameId": 265
+        }
+      ]
+    },
+    {
+      "path": "Assets\\Resources\\Fonts\\NotoSansSC-Bold.ttf",
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+      "bytes": 17772300,
+      "os2Weight": 100,
+      "variable": true,
+      "axes": [
+        {
+          "tag": "wght",
+          "minimum": 100.0,
+          "default": 100.0,
+          "maximum": 900.0,
+          "flags": 0,
+          "nameId": 265
+        }
+      ]
+    }
+  ],
+  "nativeImportStatus": "Pending main-run CurrentTextureQuality.NormalizeAndProbe; disk metadata alone cannot prove actual import dimensions"
+}

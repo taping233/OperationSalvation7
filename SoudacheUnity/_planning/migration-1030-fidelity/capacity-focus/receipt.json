@@ -1,0 +1,57 @@
+{
+  "sourceFiles": {
+    "game\\src\\ui\\reward-capacity-organizer.js": "b54288bdd2b83b6c00a96f17f7c421e6e22755a54cdc431d841e045486274ad2",
+    "game\\src\\hub\\game.reward-organizer.js": "d510ba40c7598f0fbadcacd73254c33dc809fc2b19b2f47540aa85f8d5713244",
+    "game\\css\\expedition-rewards.css": "542dc39a0f873956a75a4aefcbf9b59f08367bc0dad733630e2e4b46cdab5cac",
+    "tests\\reward-capacity-organizer.test.js": "1b3fcc1de003396111751c38677669f371956e1d3d2aae6fab8c9e09d470e72e"
+  },
+  "nativeFile": {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardCapacityOrganizer.cs",
+    "sha256": "f9b45b16ecae83065b100314747d2ec41820ed4f00880b2f4de095e4be7d6e27"
+  },
+  "typecheck": "Sdt.UI with current production snapshot; existing imported Unity DLL references",
+  "sourceDomCommand": [
+    "node",
+    "node_modules/vitest/vitest.mjs",
+    "run",
+    "tests/reward-capacity-organizer.test.js",
+    "--project",
+    "dom",
+    "--maxWorkers",
+    "1",
+    "--reporter",
+    "json",
+    "--outputFile",
+    "D:\\素材\\代号柒\\SoudacheUnity\\_planning\\migration-1030-fidelity\\capacity-focus\\source-tests.json"
+  ],
+  "sourceDomFull": {
+    "success": false,
+    "numTotalTests": 19,
+    "numPassedTests": 18,
+    "numFailedTests": 1
+  },
+  "sourceDomFocusCommand": [
+    "node",
+    "node_modules/vitest/vitest.mjs",
+    "run",
+    "tests/reward-capacity-organizer.test.js",
+    "--project",
+    "dom",
+    "--maxWorkers",
+    "1",
+    "--reporter",
+    "json",
+    "--outputFile",
+    "D:\\素材\\代号柒\\SoudacheUnity\\_planning\\migration-1030-fidelity\\capacity-focus\\source-focus-tests.json",
+    "--testNamePattern",
+    "奖励整理连续键盘焦点"
+  ],
+  "sourceDomFocus": {
+    "success": true,
+    "numTotalTests": 19,
+    "numPassedTests": 9,
+    "numFailedTests": 0,
+    "numPendingTests": 10
+  },
+  "nativeRuntime": "pending root consolidated native verification; no Unity launched by this task"
+}

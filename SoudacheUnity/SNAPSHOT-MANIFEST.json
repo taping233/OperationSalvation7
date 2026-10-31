@@ -1,0 +1,2406 @@
+{
+  "status": "UNVERIFIED DEVELOPMENT SNAPSHOT",
+  "createdAt": "2026-10-31T13:52:28.743009+00:00",
+  "sourceHead": "0bdcb665bd49e47fadbf91707e6a654430cc6d95",
+  "excludedMedia": [
+    {
+      "path": "Assets/Resources/Art/Cards/consumable.png",
+      "bytes": 2106505,
+      "sha256": "ea1860933f17f61820f2c8236878a8ca26597c50737ce6c224c290244ea1885e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/equipment-armor.png",
+      "bytes": 2225712,
+      "sha256": "00c3dfbf38b4f2950d9495947ecd836d768534ecade3976c8e6e38ee4e2412c1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/equipment-utility.png",
+      "bytes": 2437025,
+      "sha256": "105bd3ad9267efe909f3211ef0ea8db0b10adcea1f99328cf4a0522c46a90e25",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/equipment-weapon.png",
+      "bytes": 2311054,
+      "sha256": "1968085c93093421287bbf8b682068db9813e860d57991a514f6a988eb9e90bd",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/event.png",
+      "bytes": 3272704,
+      "sha256": "fa8dd38f75bd92aefc0a2f0487f0b7cecb580227f592fcdf6cea8748ce01d5e3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/healing.png",
+      "bytes": 2797562,
+      "sha256": "55021823baf1db15628c37305ec4a3c7b2845f3b9d5ecdaa9d9d6ca4dc7faaa7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/hero.png",
+      "bytes": 1896971,
+      "sha256": "3e65c1a82db0e26509c16bace3a0adec5f56fb70e4fca81e69507930559a92a1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/martial-melee.png",
+      "bytes": 2221659,
+      "sha256": "4ea9fcf3b74f2ca996a1a98b1ad828b746c7f74910e39e2cbf8242f4d07ff924",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/martial-ranged.png",
+      "bytes": 2501364,
+      "sha256": "43892f21f6c882e43ed75581f17d98d121e045ff6315503c099c4c99ab34124b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/resource-material.png",
+      "bytes": 2319597,
+      "sha256": "7efde61ef12accc04e776f6f963747f031e34b422ff068be39e49992fc2d6188",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/resource-valuables.png",
+      "bytes": 2417295,
+      "sha256": "f2a3ce43ade6bc16ca02657ee85c1f8ae1d12ed79d9f32bcbea7e71c31ca31c4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/spell.png",
+      "bytes": 2452592,
+      "sha256": "3b1259cbff6498f75fd7b7d51ac6272875c74f46d17c80145fdae9a80c361cc7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Cards/unknown.png",
+      "bytes": 2745648,
+      "sha256": "a724bfd9f69398d8918a8e324a6dbaad957116a7c632307febdf7801c1ae12c2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/Settlement/rewards-convoy-fail.png",
+      "bytes": 1015845,
+      "sha256": "c8a48374e1b5b7fc7f619477249a6f12c4dae45e69d6bdea891ef1afd27eeee7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/bound-shadow.png",
+      "bytes": 1943435,
+      "sha256": "3e7b909c62f7b6fc485c8cedbfdd574b02fce9bc29c4b001ea030220c6644d5d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/creature-cmtn6ulm4boj.png",
+      "bytes": 1917444,
+      "sha256": "d03f6de0b5b4b8d5e28a7f09fb1226e22b878bb05c6c2ba773a19e1325ae462a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/curse-drain.png",
+      "bytes": 1008889,
+      "sha256": "6e6b18a4376e25d4e08e3656d587d3fec9c02bc80716deb25a1d2ae14cf67b60",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/equip-tt13-astrolabe.png",
+      "bytes": 1024017,
+      "sha256": "f11afd4407c07ba9499efda5fb5ce3507efea0597d62e8880d3d55486668f19c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/equip-tt13-magazine.png",
+      "bytes": 1143327,
+      "sha256": "e54ba7b9fc28e9dbacbd57b66691540e52a5907eb448c09132983dd7f7045650",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/equip-tt13-poor-meal.png",
+      "bytes": 1363932,
+      "sha256": "05744e42c8330f3bfea50f70702776dc40106ec14dc95ae58fd21ba25bee0a2d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/equip-tt13-scale-armor.png",
+      "bytes": 1092552,
+      "sha256": "c0e9e3f112e1b1ff11236fd6ad3c70466965fa3a5ed66322ed865f24a2372e8f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/equip-tt3-chaos-eye.png",
+      "bytes": 1043375,
+      "sha256": "d327d2c01aec22e6b8037ec136d4801543660ef23103df64f8b1ee10a077e130",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/equipment-armor.png",
+      "bytes": 1145289,
+      "sha256": "9b166b9290fea4b7e878f262197d67d46c2ba868fb2f2076b2ee6a481f43427a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/equipment-utility.png",
+      "bytes": 1356309,
+      "sha256": "0e121ef2853fef83914ffdc4898e57258cc74d494a38913295a14e6d88995886",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/event.png",
+      "bytes": 2669060,
+      "sha256": "0918e6d7b2cf56d650af808cd1ba1bc7730673d86646a3a2faff5e9d2b891cef",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/expedition-starters/pierce.png",
+      "bytes": 1120731,
+      "sha256": "29b8f39f0e47702d6308a2a69958324a03ef59bdc4da6e3985bfed6338e0c2b2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/healing.png",
+      "bytes": 1596655,
+      "sha256": "78ec5e8b64b367c75540c108e57456b40a81d40e54564ce4f4967c98b02f8a23",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/hero-abysssovereign.png",
+      "bytes": 1562376,
+      "sha256": "0f656905a40f0bb8c9759ad8d3a75093510a9a2bfc6946780d9d2ded21bb1e0d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/hero-sacredrain.png",
+      "bytes": 2163386,
+      "sha256": "fab3dc6912402ac61ad3a93d4d27c26f6e2e9d1bb8ff4af235d3fbb744d199b3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/hero-summoner.png",
+      "bytes": 1181273,
+      "sha256": "0284b56d3196ca00e9a8cb0cbd16d42e43eae1e2682c10cf1b26d128f4b25cd0",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/hero-volcano.png",
+      "bytes": 2000365,
+      "sha256": "d35e07a78707967bf4182659dbb0a97c959d02f7ad818d0e3a1a964a0ccee07d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/hero.png",
+      "bytes": 1048284,
+      "sha256": "05dbaa31eee8c2b8a6bb82bd7cebdad0bfaced84a18d0550fe2a2ddcb03e85ca",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/lore-raving.png",
+      "bytes": 1245886,
+      "sha256": "5fa995f62f9031d202ae7ce4870c167eba2885bb6c5309ca182e3d91a3b252e3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-cc-cursed-blade.png",
+      "bytes": 1066109,
+      "sha256": "909feb57ed75331d29fd0312f0235b6f91c91cd2b01cb2cc3e2463ccfc11eb3e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-cc-dual-wield.png",
+      "bytes": 1771258,
+      "sha256": "4f157b969193dc99f4fe85f80b7cbcd75bb454c9dbcfe963b51f66ac40e1433f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-cc-last-stand.png",
+      "bytes": 1174207,
+      "sha256": "e5da65641a2ed4c7646a006b9d820533b9b68aeb6fd48449cab65cc7dbcad739",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-cc-unmoved.png",
+      "bytes": 1031774,
+      "sha256": "ccd20c12f9dc838f6f4bc97f42684682a9a7125b16b8961d4e4361ddbe7a00bb",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-cmtn1wnhhym.png",
+      "bytes": 1509826,
+      "sha256": "041deedbce47f4ba94066540fc444afccaaa8356f83bada78e323891193ad0f8",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt13-mercy.png",
+      "bytes": 1221040,
+      "sha256": "10c53a5dad1f89c0f17626df932197a36061d8c9e02997f1b04e090a3f18234c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt2-turtlearmor.png",
+      "bytes": 1280956,
+      "sha256": "4fcfb623211684659a68fdaf3d2d96c46e0d21d2e36ff165c1bd6e70e5388b8b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt3-frostfall.png",
+      "bytes": 1441379,
+      "sha256": "296dfd7a5e37d4968268fbc8381c886fb8cceb57c79dfbd4744c31c42656a923",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt3-noon-duel.png",
+      "bytes": 1562571,
+      "sha256": "e7add6e3305c315df95ef903a8105e63ee6268e9c81518dc28556aa677dd8ed7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt3-wave-slash.png",
+      "bytes": 1154294,
+      "sha256": "a9df436bd1b40195129cfa49e133770ddd8334dbbbacf4d7f232d0fa76d78d80",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt3sp-shadowbug.png",
+      "bytes": 1382174,
+      "sha256": "29fd539f8fba22dbefc383a75681c95a7ea2b6ccd1a4b6954b3b80a077680478",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-armup.png",
+      "bytes": 1776903,
+      "sha256": "3f395b2979168f9d8d60915e02e4174b0af5eab488438a6a77a78ddcce381987",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-bloodpoison.png",
+      "bytes": 1439567,
+      "sha256": "c478603df6483ad6ce4dbcfd6a77602f42742b8709d429dacd8b20b95f283df8",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-bulwark.png",
+      "bytes": 1693705,
+      "sha256": "9aca09acf53e2476842fb0c90beea12687ef95c02e9dbd374f4a61e45c365b09",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-demonbreaker.png",
+      "bytes": 1343951,
+      "sha256": "9cb3fdbd9a16f123dce85cc9dbd7f0fdae711faa4cfb22b170d179480562160b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-fullstrike.png",
+      "bytes": 1082198,
+      "sha256": "81277fb79af794455a3dae2d691131c64680dee6728c82fd5e493aa866b662c9",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-ghostblade.png",
+      "bytes": 1249397,
+      "sha256": "f53d28556b4b6a5a088686121d8c00547dc1a6b8123a2ee9f33b48e5e8e984e3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-goldencicada.png",
+      "bytes": 1367357,
+      "sha256": "b5f30bca287f84748c2f3f954f63baf9a618bb184de722f565e19775f384d4d4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-imitate.png",
+      "bytes": 1796263,
+      "sha256": "73ee457367b1ecf38683915fe8253964048c1001f8efd71939b131dfb830d7a7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-ironcharge.png",
+      "bytes": 1004948,
+      "sha256": "f9d06f0632a9bf72ef4ae907eca76bf8eb602e2aab8b7eb0c18cddb260fa418e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-ironphalanx.png",
+      "bytes": 1259488,
+      "sha256": "af528467e2978d5b3396ee139888bdfa51e36a72fad2ad5403c7106d274e39e7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-marchrush.png",
+      "bytes": 1161788,
+      "sha256": "ef4fbdf933f39ce1d500238c34d383872e8d239381cb339c0768bf490bf9b8e6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-meteorrain.png",
+      "bytes": 1283847,
+      "sha256": "a2d64f502c5a0ce44e79eef57a623e27edc6d1a9270def70d61972d589a8f62b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-sneak.png",
+      "bytes": 1419207,
+      "sha256": "fb9bd37225da574decd657bff3d085dcd5f4b5b93065175018f593690a269b0e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-stealth.png",
+      "bytes": 1310881,
+      "sha256": "c572e5daa58f55699d8a30070b11b40a19702ac9f6f1ff7ed4ad2479dc16ccdb",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-swordimmortal.png",
+      "bytes": 1209938,
+      "sha256": "64fa0e076fda79e9d41ac40ff9f1d9cf4f14a51f04fea039fff9b1db66899f4b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-thundergrudge.png",
+      "bytes": 1156157,
+      "sha256": "ce0d41b3d912e212fda898fdbbbdfa96c1167d7491b6f2bde8ee338cc3f092cf",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt7-whirlwind.png",
+      "bytes": 1679409,
+      "sha256": "f236b1d5fe1c2713a701538d8c25dac3d6ea39ce69adbe979c6e5cc712b67e0d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/martial-tt8-dragonblade.png",
+      "bytes": 1213658,
+      "sha256": "035cd1af6388ca0093329ad40a42c2a88035f1eb75a57566dbbb0043f7d89eb1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/resource-key.png",
+      "bytes": 1396102,
+      "sha256": "121567af939bd1d32326d392decb60aa396a3ed218af9454580433ed62fbd28d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/resource-material.png",
+      "bytes": 1539597,
+      "sha256": "b631100732558c64d30d9a0f5e878c20f870d89639f51b5a2d59e4a9358de246",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/resource-valuables.png",
+      "bytes": 1971531,
+      "sha256": "54f33337fd7f33930496f6113aa21646a3ca343b77e539e41d0ff2703cdacef4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-cc-ember-burst.png",
+      "bytes": 1172172,
+      "sha256": "e4eb5882aa366d1799bde84f983a319974a2fd54e3f5ef4c7703fc1b664f33f4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-cc-mana-surge.png",
+      "bytes": 1191004,
+      "sha256": "7909531cca5968c3df5f6a01536a38c83dae61540543c331eae62165087b1cbf",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-cc-poison-burst.png",
+      "bytes": 1043339,
+      "sha256": "8f32432c474c68c6274c69c8f79582662348f110775410220e94df139776093b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-cmtn1lbhbqi4.png",
+      "bytes": 1361413,
+      "sha256": "64a1dcc539b940351c1bc1d2e9ce62a28081a724b01566d6937680511d35dbd1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-cmtn1ntxzoc4.png",
+      "bytes": 1622099,
+      "sha256": "366093e8bdc3019fc85e5d9bcb379559551f5ceaf5daf3eda7703fc6ecd26215",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-cmtn1p9vb5au.png",
+      "bytes": 1423314,
+      "sha256": "84bbd87df5527a4ce90ce9e8dbb682ae19af284947496cc01210c48a4eb8152d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-cmtn1r10xnl1.png",
+      "bytes": 1088494,
+      "sha256": "d6fe0b9c0df0f7a0c43478b01b18878502272fb36dbb5f50e3dfc86332727507",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-cmtn28jv33wx.png",
+      "bytes": 1285990,
+      "sha256": "94d0647a5ce7da21877a6a92df00a68fc9b4b91ae6f2196bd61b198fd907e889",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt12-sporewall.png",
+      "bytes": 1002178,
+      "sha256": "6a04d98bfe287818f32c3ed2ec9ea664c4c7512833b1b32e9f5fbbb80849d525",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt13-bitter-rain.png",
+      "bytes": 1198573,
+      "sha256": "35f76093a7e011f50cefd07c81526d5cd10d1c232c3485aaecb0952dd3ca1f1e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt13-chaos-deck.png",
+      "bytes": 1576118,
+      "sha256": "f04776ed4959fc083929713fea385fef26f77a8691a04dcab8e6e385892593d2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt13-mind-control.png",
+      "bytes": 1342451,
+      "sha256": "f95dbb429c763935d731f4cd6716dcdd18fa9dda21a26b4f292b3ab9b563e994",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt13-soul-contract.png",
+      "bytes": 1585668,
+      "sha256": "bc122be023fbe2fd2f46ace1c2364d9fa5c385ae141fd137bd5fc0d27f9cffd3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt13-spring.png",
+      "bytes": 1351102,
+      "sha256": "03fca297a2086afd200df26e7309ad29f2227a41d36f0a8935a18ec4d778ef6b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt13-stellar-divination.png",
+      "bytes": 1384663,
+      "sha256": "32da640f4426b25d55b9d89fa6fb8f3260d0fcdbb4ffe20ea4ebcb6653be9511",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt3-flame-storm.png",
+      "bytes": 1706252,
+      "sha256": "17cf37d6ee1bb9e273ef8e18f30ea15e096ae6535b5a7ec8cd800b2634fe1e28",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt3-holy-shield.png",
+      "bytes": 1523992,
+      "sha256": "76348934d0dc984d417859b86dafeeb1388b7ef2bd4632b3aa2ea1ae27801411",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt3-holy-water.png",
+      "bytes": 1160114,
+      "sha256": "68d6d2f09ec9dfe0f2e334e5ed526a74161561a8bbb90c94c627de5c049f5b3c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt3-nature-form.png",
+      "bytes": 1218644,
+      "sha256": "4158515b54b372aabf57783f2e8bc8f870ee7f6ebab59a3e8837d3afc9952aab",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt3-nuke-ray.png",
+      "bytes": 1077900,
+      "sha256": "37eaef5e50c540b56e06daa04cfda55c7d4227b59c604fbec33feb62c5ef2fa1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt3-petal.png",
+      "bytes": 1591801,
+      "sha256": "5fa6f6b7c3d2aa17661b42d48772dce754455c0dcfbf3118f96b20006dd90431",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt3-thunderblast.png",
+      "bytes": 1334437,
+      "sha256": "c4c8bbba96ca3472224390da81029ab8ac930fb56d32c4357ca586035fe2a2a2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt3sp-devour.png",
+      "bytes": 1107682,
+      "sha256": "5e23664bb9d040d02c05728e73bdee6ee803806030356b036f78781b2a63061d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-abysscurse.png",
+      "bytes": 1016644,
+      "sha256": "dbbced79c174f11e7ad85c85df5e142fa78d2283ac535765517c4231d285e26c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-arcanebolt.png",
+      "bytes": 1360316,
+      "sha256": "51f72e43d7206d7701e67da5f0aff044d9f8e12c16be2be1b1286f29fa523dc3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-bladebloom.png",
+      "bytes": 1778158,
+      "sha256": "06131948d8971182134793716bec9422ba5f3b2f6a302056612194368ef71ed5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-bloodpotion.png",
+      "bytes": 1025647,
+      "sha256": "9b6888b5577851752e6c071e0c4c05b03d18c05926cc3b28dfd62664156b256f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-burnharvest.png",
+      "bytes": 1651919,
+      "sha256": "34bd3f3516f0043237f87e6eefd63d9b373bff80840780418c6fa1c34aa2654c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-elementstorm.png",
+      "bytes": 1124308,
+      "sha256": "d4a67e02c42256290258a44c2a009219ff8149d30751b882fdfe97c9717aaea2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-energize.png",
+      "bytes": 1197383,
+      "sha256": "ef8b5dbe9f537ef6c891c758af536bf87da8f8210126949f80404a922248b8ee",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-frozenight.png",
+      "bytes": 1531935,
+      "sha256": "e67423c81e83acaadeae2dd25a264a98af65a2d0889d8572c664b200c5236b8d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-holyglow.png",
+      "bytes": 1219161,
+      "sha256": "feee14015a5ab8db3f8bf780e1ae1d9d139549e843bb648faab4184d0bbfa8a4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-holyheal.png",
+      "bytes": 1272666,
+      "sha256": "a85c1ea9ec913a51303b265bc2246da96bdb24f08aab4d70325264aba24d5d23",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-livingwater.png",
+      "bytes": 1497763,
+      "sha256": "cd3e69778db13b0225013b9367f158be97fe2070fa0237476b5ba9931e14a543",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-maxsupply.png",
+      "bytes": 1560709,
+      "sha256": "60fa5104ca7c3913c936d54e82dab8ea7d526f7e08ae250d015301b7ba01a857",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-meteorstrong.png",
+      "bytes": 1552701,
+      "sha256": "3e8bb4830b2c8fd79c38d2175dd070d7a905b17f310b36523c942a4f273e8633",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-smite.png",
+      "bytes": 1012345,
+      "sha256": "f3c960193aa23f3d20af950ddad564727e29830426d27e2c0bbca1c203b5a2ed",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-stratagem.png",
+      "bytes": 1446097,
+      "sha256": "75b839213ca462360c18f82b493003e889b4bbf320052ebce90612902ef097ee",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell-tt7-twinfireball.png",
+      "bytes": 1501886,
+      "sha256": "89eb8eacb4762abe11cb2bad6c7928910ea398cf29c4248457c31412ad4ac8dc",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/spell.png",
+      "bytes": 1882736,
+      "sha256": "247ff05602c0a0369654d124e75a48febc2b52fc485a180ca3e54aaa39e864f6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/studio-expanded/tt7-arcanescroll.png",
+      "bytes": 1006105,
+      "sha256": "9d1e536863f44da856618e35c2457ec1fa033f6aa453cd4a80ad25014e3a78b4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/unknown.png",
+      "bytes": 1704038,
+      "sha256": "2133e6371a11c0661314ed47c4e5bfc73b600038ff855740066463c0282010ad",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/wu-heavensword.png",
+      "bytes": 1012706,
+      "sha256": "0dbc4368c8f31ddebadcce955973c61bb5f3ed30b0e9604d1d2bf1f9acc6d12a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/wu-myriadswords.png",
+      "bytes": 1900004,
+      "sha256": "95fbe6cfb49475b741a3125c9ff21edfb1328a2e358afbd7f5ffd151a53773b5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/cards/wu-void.png",
+      "bytes": 1111374,
+      "sha256": "1fc8edd2016d47a935001129ff3d4ef2e279f77d6748732b073fbe8fa71cefc8",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/icons/base-v3/base-home-v1.png",
+      "bytes": 1127358,
+      "sha256": "4ef5c1990b3dfe0930392ef97b5aa6a68e0f7e17d880c5905585a4b95357df64",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/entry/modern-winter-entry-1011-v2.png",
+      "bytes": 1441239,
+      "sha256": "ea53405bf6e4d1a705b671970a36b60696e76dc37d0f2f12e6f5a60acd81640c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-bandits-anime-v2.png",
+      "bytes": 1470523,
+      "sha256": "7be4288e5ba9725217c994c079c642eddfe81f10dab2fd19d6cc5dc6f6669471",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-cmtn7qttxqo4.png",
+      "bytes": 1504462,
+      "sha256": "fe7e91066c52f95613abe94e489dfff991502c186d3419eb9591697e69dbf0c6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-arrows.png",
+      "bytes": 1427100,
+      "sha256": "92e6e0acf640af7ad43e743f539c690db13f1bb6807111262b7ebd09cc7d7205",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-classchest.png",
+      "bytes": 1218849,
+      "sha256": "ae138b4fab2e6e6dac2e49fd0cd54d4b75c706d90fbc77a333186f421aa92d2d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-fireballs.png",
+      "bytes": 1183988,
+      "sha256": "a2ee72c272a44c0c55d57a0d846175025b6bece85c4e92f7b6920769711365da",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-gamble.png",
+      "bytes": 1278534,
+      "sha256": "9ef67ace361fa630d76fd58e6cc01b4c7bb9edde73376f03dd3f035f62a35433",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-pearlbox.png",
+      "bytes": 1171890,
+      "sha256": "20fbdb6a7bd34ce2879f267770e99f763a1b6c4fff411b0419511ea33b442ac7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-potions.png",
+      "bytes": 1293414,
+      "sha256": "45b4b101c145a3336407c64da549213ba9b85ad4355f88dae99bb038924423d5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-quartermaster.png",
+      "bytes": 1249544,
+      "sha256": "d980cfe56d51c345788df633b0c1e2a4978c8fda42a87f6e802e993e7ee45aea",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-recode.png",
+      "bytes": 1193773,
+      "sha256": "5045ef01bdad5f6cc05ff0f43458dab1e5362b6c257dbf6298b0d6f259de85a2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-last-lamp-1013-v1.png",
+      "bytes": 1236345,
+      "sha256": "f342c96851955621ae2fe600241b5ca4181de2fdecc6ddd901dd6cb86b9637aa",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-airdrop.png",
+      "bytes": 1342532,
+      "sha256": "ad3478b9f3b090bf7efefddc0d2a464f7d1e9af4a4ac364efbc30a030d672ec1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-demondeal.png",
+      "bytes": 1043224,
+      "sha256": "7ab240d637371da1cddfef70d8f16f22a5a69f9712e80003e29513fc69ae7383",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-goldhammer.png",
+      "bytes": 1261309,
+      "sha256": "304309d55e3b043d94365cd84cd43166567920a7a0de0c8f4a36306ff14535fa",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-goldmine-1013-v2.png",
+      "bytes": 1894677,
+      "sha256": "3710c97d84ab2159b8be426c32438ef35f99b9d86f403ed10822bac339a9c728",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-mystery.png",
+      "bytes": 1297995,
+      "sha256": "5360932dbc3c43cb4918f6fe23fceb695f596c7bb03bd36bca8ef721d31a8f23",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-relief.png",
+      "bytes": 1345738,
+      "sha256": "1c8ad34cd928fc6a7b6f9f7f0b65c37fb598e7e9e572ba1ec2b9705fc2599f20",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-systemsupply.png",
+      "bytes": 1476376,
+      "sha256": "695061df0f7fb918cc5883e591fbc5bec656c91477b3af5a9cb08857c06a591a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-altar-anime-v2.png",
+      "bytes": 1880465,
+      "sha256": "a689e888e5fed6d8dbf0c15657bb5bf1f1b312e5dd94dd1fa57c98f3e73f8831",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-chest-anime-v2.png",
+      "bytes": 1143454,
+      "sha256": "d85dcdae8c06f5fd99a2f4accfec7860aa6ba771d949662a5d3d836dda3f0c9c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-door-anime-v2.png",
+      "bytes": 2882441,
+      "sha256": "b285a395a3bbc6534f3b505344cf8f4fe85eeea8e035a1f62cb57f37f36a4e1d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-extract-anime-v2.png",
+      "bytes": 1075171,
+      "sha256": "8a45c2b7be6e84192d7140459dfb1e4551323252d741122d8253c3c63972b9e3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-pickup-coin-anime-v2.png",
+      "bytes": 1672163,
+      "sha256": "37226a921bad60b83dc3d5aa51d3ed037d17c8f345658a1bf16a5f67a2898495",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-pickup-key-anime-v2.png",
+      "bytes": 2302962,
+      "sha256": "4eeb1dd37d963ebdeb18ef9f50c3bb18bcd70b1ee601f6aa91c871a67d58cc41",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-pickup-rations-anime-v2.png",
+      "bytes": 1807589,
+      "sha256": "ede2185569a91a93eb8ffb15460c2b66fd6ce33d83b3300ba4ed992038012055",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-pickup-wood-anime-v2.png",
+      "bytes": 1882244,
+      "sha256": "d5a903573337820f0bc16c42b64c0b2f8a94d2468298e2fa1d84467aaadcf99c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-shop-anime-v2.png",
+      "bytes": 1482101,
+      "sha256": "560f4133ff57966833eef4defb988183cd568d75e79d51a963df310870a52de1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/avatars/changwuyu.png",
+      "bytes": 1004228,
+      "sha256": "20f01af96d7b755025c3f83b82ff35cccdbe9f80dde2efdc2a5391502e75d30c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/avatars/wu.png",
+      "bytes": 1082015,
+      "sha256": "5e3268deec4b9d1c0f5ed5fbaf6fb5bf45199ad83849653d58834f197c6913b7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/avatars/xingyue.png",
+      "bytes": 1035278,
+      "sha256": "2458e7be2e7383ed54691836884ea2d726939f273f4b6fa3d5e6a74f5cbc1649",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/baita.png",
+      "bytes": 1655193,
+      "sha256": "4df19b2180de36f93f40b6271af0a99fbbef00c30488dbaa9d58c73662b947af",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/changwuyu-drum-room.png",
+      "bytes": 1740236,
+      "sha256": "07f6d913d369d32744c3c5c191ed28102c88cabd9372b962d4097bd52cc5c3b3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/changwuyu.png",
+      "bytes": 1010021,
+      "sha256": "e6bd1129594ef5ba0729b8c1c179e47512d62fe02f50369befa54f4a938b6145",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/heixiang-coast-half-day.png",
+      "bytes": 2178483,
+      "sha256": "87af468a8acf352e821f1d0ce32234176dfa3c58d43acc98a4f4560616c5e535",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/heixiang-last-seat.png",
+      "bytes": 2018503,
+      "sha256": "bbad6b38dac79222927509b8c6d1fae56a7c8a2ac67aed0822cc3beceff63cc4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/heixiang-snowline-vigil.png",
+      "bytes": 2392994,
+      "sha256": "00e695cf308ab6b5f7903b92a59febb78449875205b2baaf7a312858d01e05c6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/wu-beach.png",
+      "bytes": 2059495,
+      "sha256": "3a3278e607400a22948637a4e3bb15aaee01402349be6714d8eac6250197f909",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/wu-casual-v14.png",
+      "bytes": 2686448,
+      "sha256": "287fa80d2664ab49f658d3821f8b1aa2df8006a787f505272976079cd9a2a0ce",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/wu-spring-v15.png",
+      "bytes": 1947827,
+      "sha256": "10307b34cd3fcb7ea91502f91f0b9771097489a63e9dd005f6d8d8ce623b72be",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/portraits/full/xingyue.png",
+      "bytes": 1006720,
+      "sha256": "71305ea41db087cd5d5747f74aaa8cb8286e8e78ccb611a051230cdc5eddc56d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/reconstruction/wallpaper-snow-road-1016.png",
+      "bytes": 2545425,
+      "sha256": "251c781a3585d3c83f2e13081017baf5fe6c01af96b0c231eb3b8b21d7f5e14d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/base-operations-v5.png",
+      "bytes": 1191371,
+      "sha256": "9508217fd45c1276352d26e09d2e52789ca88bdd71e8cd0f88fa79ffe6beaea1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/courtyard-pond-v4.png",
+      "bytes": 1601823,
+      "sha256": "c180834c043ff0a1de0995850ae853d6c5bdd0d9085f032d7eccb77106f71e0f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-bandits-anime-v2.png",
+      "bytes": 1347607,
+      "sha256": "619249b845c42a88b36cc3156a7019482c24c6f249d4197452f358321852ae81",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-cmtn7qttxqo4.png",
+      "bytes": 1372231,
+      "sha256": "3c7b6bc48733739b42f4895b27b705bf9e0b5703bf40f8a4c6a972c355872d0e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-ev19-arrows.png",
+      "bytes": 1327514,
+      "sha256": "ab0156c2aa35420654e89415240f859ad9baddbd0bfa57ba1ef73a0776945d6b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-ev19-classchest.png",
+      "bytes": 1102890,
+      "sha256": "5c5c11369ef470a1838f5bcce250c39cbbbe7a121a2ef604fa33d07e728da2b1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-ev19-fireballs.png",
+      "bytes": 1069142,
+      "sha256": "a772d15fb23ff7ed749aa1ac19cd5dcc7a8ed39ae0a32a4cad6ecd9b48970e73",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-ev19-gamble.png",
+      "bytes": 1180920,
+      "sha256": "a3d096da4fdeaa8a81b17e8aed49307a7a7a1c26769784c5d7ed408ca93aa337",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-ev19-pearlbox.png",
+      "bytes": 1068844,
+      "sha256": "508358d704ba66f812c981502c10bde3e589370843ba6026af8159eb352ed5c8",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-ev19-potions.png",
+      "bytes": 1165988,
+      "sha256": "7998c171c64273e1b7be34e815e5518496cbfd56d0423de606b1a59da838f4b8",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-ev19-quartermaster.png",
+      "bytes": 1153739,
+      "sha256": "117233033bc82235a82fbee0b71331f008b1a45e62b081a5338955ad89c62926",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-ev19-recode.png",
+      "bytes": 1046614,
+      "sha256": "87e874ed2cdbd865b7f69f44d1a8cce39752fda4c8b6f001789f2ff7772e99a6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-last-lamp-1013-v1.png",
+      "bytes": 1121048,
+      "sha256": "c1e705fe3baedd12504dd5c053f77f3c9833d1d29a4e2136a3dc9ec0eb445fc5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-tt6-airdrop.png",
+      "bytes": 1240293,
+      "sha256": "3632361119533baeea7b93cba8aa293d275f7832343e63ecc42d706c1598e211",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-tt6-goldhammer.png",
+      "bytes": 1145342,
+      "sha256": "eb2d4af5f14a1b35847fb096e396acc262c192a8f1cd9fdfed7ea067649e8c16",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-tt6-goldmine-1013-v2.png",
+      "bytes": 1768665,
+      "sha256": "9f396454a2ea8ee9b51bc4123a804f82ce1dceef0865c3e3b4af3e5bd92ec627",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-tt6-mystery.png",
+      "bytes": 1196442,
+      "sha256": "163ca65f531ba1dc464883d4b85f80cc882da76f0c628043abd16452c28645f3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-tt6-relief.png",
+      "bytes": 1226294,
+      "sha256": "44e1286ab43affcc75a467ca96f9721949f4b9886b56b27305565710e7f53f6e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/event-tt6-systemsupply.png",
+      "bytes": 1346560,
+      "sha256": "cfe88cf7ba0f95f1e2b906fdd9df729700736cdc47caf6b4ca19c3abf5a33b8f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/hub-wallpaper.png",
+      "bytes": 3030452,
+      "sha256": "05f7d06ed3ea0ce3f95b8464ec6a4e246a1071bacce80d076383fe28d36f949c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/map-nodes/city-ghost-props-a-1012.png",
+      "bytes": 1546230,
+      "sha256": "f4da2bfd8867c48ce3f7f0d5c4939b3fb8777bc161871d1fbbccd911afddab8b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/map-nodes/map-atmosphere-is7-1012.png",
+      "bytes": 1315684,
+      "sha256": "0245973781c777f77a2bf0a47dfd569b20c5b6c77e6d53c91a142af70bd1af1f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/scene-altar-anime-v2.png",
+      "bytes": 1729316,
+      "sha256": "84ff7137dff44b8bf136cc573ef4aac5836606462a7ad680ab599b3227a86b17",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/scene-chest-anime-v2.png",
+      "bytes": 1054739,
+      "sha256": "743b9498cb6fe25b4fa6cb7b4f76a3544061cd07bfb020a5109c086e8d1a7fa3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/scene-door-anime-v2.png",
+      "bytes": 2570219,
+      "sha256": "5e685741a845341a41e64e39b2fb68345c01dd90085cd2c78d11ae2a18efa9a3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/scene-pickup-coin-anime-v2.png",
+      "bytes": 1537693,
+      "sha256": "65a71914b5d9569dec365f999848543bc1fd3023f5d46108c1f7f489c859d87d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/scene-pickup-key-anime-v2.png",
+      "bytes": 2092363,
+      "sha256": "879547fc327540a1b7615555a10a32374f1ef5af41f38f7edcce27eebdd24f6b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/scene-pickup-rations-anime-v2.png",
+      "bytes": 1669817,
+      "sha256": "f64024aa0638ed19eea3b007f629d609ab8412d9107634384b0adcfde0bdde4c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/scene-pickup-wood-anime-v2.png",
+      "bytes": 1717975,
+      "sha256": "e4e7469f0075dcc2ac5de40fa5db8ffa7ddef41dd7c4e1980a01b9d44291018b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/scene-shop-anime-v2.png",
+      "bytes": 1349196,
+      "sha256": "f966d34136d291421e8910299640e160cdfbf2b3974004e7ca0bf4f3f23b059e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/scenes/ui-loop-0925/prep-desk.png",
+      "bytes": 1061596,
+      "sha256": "9eec28c4c67f0e294e6e529cbad7d7dc8b61277c955dc334bde1d0326edbf558",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/title-wordmark.png",
+      "bytes": 1559243,
+      "sha256": "23a42d32bebd5d81cf082b2fd84d85e961394184e7f1913a7f7564905c76f709",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Current/ui/achievement-styles/painted.png",
+      "bytes": 1987888,
+      "sha256": "7ebb8ff73f761704db5c5f10ca28d71bac2887bda4f8d2353e4daa1d8d06d8f6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentArchive/collage.png",
+      "bytes": 2263764,
+      "sha256": "8b2afc010684e00b085a4899e85e7c1d080022161577059fd81c3fde6c0352a0",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentArchive/gesture.png",
+      "bytes": 2232496,
+      "sha256": "91f9850557eaca71046d969df12a1ff9fd7e9ae39bd1c2b5d18279cc5659e903",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentArchive/ink.png",
+      "bytes": 2103737,
+      "sha256": "8cbc8d2ad2a449b8a78ea1cc4cf9f1fe471e8d337dd1a65060546c26473831f8",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentArchive/symbol.png",
+      "bytes": 1254661,
+      "sha256": "af3644cabce04fd310c74b23fe506b19bb5ee212945f3347249b63eab4a9424d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/Rajdhani-600.ttf",
+      "bytes": 38696,
+      "sha256": "806bd15e538d30225b07cc9aed3fcf35819528aa0e6b3821ceb71f3b1e39913f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/Rajdhani-700.ttf",
+      "bytes": 39960,
+      "sha256": "3ddba859fa438d6a791e4ce40e6a7114d9bbfa83a483611fd3a97af97b5c78b6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/baita-heixiang-filtered.png",
+      "bytes": 1376091,
+      "sha256": "18363604a07484a8afdf3a9e78a397fee467fb17ca3181ea43d6ac6fc0d4352a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/baita-heixiang.png",
+      "bytes": 1384565,
+      "sha256": "03ac60808c846fdfaf23e92097a3ec53d751041c4045267f03c4e38fc81f2ade",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/baita-station.png",
+      "bytes": 2079297,
+      "sha256": "d8403f02a30be61cb64731cedf0adb08b7af8ce627d65bf7be571a7c50658466",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/companions-dinner.png",
+      "bytes": 2395362,
+      "sha256": "4299bedb46e251880932468900941f22cb13d7aee2706d91c01a86b53e597157",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/snow-road.png",
+      "bytes": 2545425,
+      "sha256": "251c781a3585d3c83f2e13081017baf5fe6c01af96b0c231eb3b8b21d7f5e14d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/wordmark.png",
+      "bytes": 1559243,
+      "sha256": "23a42d32bebd5d81cf082b2fd84d85e961394184e7f1913a7f7564905c76f709",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/wu-bass.png",
+      "bytes": 2414222,
+      "sha256": "a6fd111576198c3c9ce0ad5b4b2c65c74adc970742596c57d958db4b10725953",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/xingyue-piano.png",
+      "bytes": 2073006,
+      "sha256": "a99fc49ef464e16de5f75b744d587cc9778ca35f6ecbb7f5fb9f27a607211087",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentHome/xingyue-reeds.png",
+      "bytes": 2150695,
+      "sha256": "a8e1a2cc5e127fd9a3605d8b15c309b83b5bff6eeebd87cf20c419b3866487a5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentPhoto/frame-atelier-v1.png",
+      "bytes": 1343524,
+      "sha256": "14a4d76cb118a4f288e5a9342e661cf06ba5bbed1f2aec3db36dd619eb948299",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop/merchant-approved.png",
+      "bytes": 1784954,
+      "sha256": "bbf68e81708ea6b169580831306188e58643d215045bb01800a196f4d55f4922",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Hub/expedition-roster.png",
+      "bytes": 2985253,
+      "sha256": "01d4f2a19ccc6a3fd78ea927e39253b3b5735f19c878b66a43487bb753f97a45",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Hub/icon-council.png",
+      "bytes": 1427010,
+      "sha256": "e7be71996b13bd1897625f07cb693766d5e9cc18dd865756647347b2bc21e81b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Title/title-hero-ascension.jpg",
+      "bytes": 4082686,
+      "sha256": "4b5ce4f760716ef4e63fd6521585a1e63e744d6714fce2f61e557bc53f63a37b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Art/Title/wallpaper-original.jpg",
+      "bytes": 6356535,
+      "sha256": "b841b7a5d48e069efeb24d4e7a9a0342d91b22fc949ce2997d6acae4f45a5e45",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Bgm/bgm-black-stream-sea.mp3",
+      "bytes": 4600946,
+      "sha256": "0447edae9cbe6a700b6240e3a0669c5d0015a195c191242b221372d0c9a00486",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Bgm/bgm-sour-orange-earth.mp3",
+      "bytes": 7636162,
+      "sha256": "5f06abac114e190bb41fd21ac8ae86a545c702d1b9101b6b1e2de64f6250cfbb",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/music-demo/01-title-frostglass-v12.ogg",
+      "bytes": 1458620,
+      "sha256": "1745b191a824a3912aa9ae6e13891764faa0f84e47944f40c394c5fced0b1977",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/music-demo/02-explore-ashline.ogg",
+      "bytes": 1608932,
+      "sha256": "df7eeb315bf004a926b61c825d2a399e3ff06ac52ac525e1c852749d532d4626",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/music-demo/03-battle-shadowtide-full-v2.ogg",
+      "bytes": 2286067,
+      "sha256": "058366527528c2af5e89abfc8bce2b83f567afbbc4d5db0731d038c5af009532",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/music-demo/05-shop-lamplight-deal-v3.ogg",
+      "bytes": 813389,
+      "sha256": "80a5ab5540c05c9201c0525820db78eebcd3a810550122075ca580791fc974d3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/1101.wav",
+      "bytes": 460158,
+      "sha256": "aee109c3ba12c3c62cefd93de0b24b9e507f309a4be6320d927fd39d8b147573",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/1104.wav",
+      "bytes": 80386,
+      "sha256": "d1ccce088b96216c6ed725c1b56333722ba77c658d2327fc7aef3e7f3b98640f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/1109.wav",
+      "bytes": 195014,
+      "sha256": "9136caeb750756176bd696d639ec74261523fa1f9d8312be6ccd673a506e0a2b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/1530.wav",
+      "bytes": 193072,
+      "sha256": "2e945267f56208884153867d062838888e6bddc92b512e130aa9566255ad36bb",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2141.wav",
+      "bytes": 86643,
+      "sha256": "f2b9e17cd1b1db434b822a9779495e0327443feff1ee61c09201b1c5393b636a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2153.wav",
+      "bytes": 222836,
+      "sha256": "199bb8f54124f008f77a0f216bf95703233aab73eeeb9f74dfceceb8dae59b22",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2158.wav",
+      "bytes": 86643,
+      "sha256": "7a17d276190701ff00b5841eb995f499632d1ff1a9363b0883d092c60cc56a1a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2166.wav",
+      "bytes": 220056,
+      "sha256": "916312df2b375604edd13277fd2a1f002157088af54f1ec8edc53c35cf534110",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2380.wav",
+      "bytes": 159812,
+      "sha256": "a6cf4c34aaeb090641b3464b9a76af2f1b7d0140a306797d46ccd9daf6cdb74d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2568.wav",
+      "bytes": 35918,
+      "sha256": "248312c2ef619427ef7024126a846e4210fe37e39038cfd32c73b1fb854a8086",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2569.wav",
+      "bytes": 222054,
+      "sha256": "66be19b433b653739b10c257365d71d110958c8a150dc19c0948c27fec3ab5b8",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/268.wav",
+      "bytes": 794530,
+      "sha256": "20c3f737140257313b4e3ce4c02311802087b523d3ee23444f6aee923593874e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2761.wav",
+      "bytes": 200960,
+      "sha256": "fe9d6e83d49be3d583f5f9c9315a047b75265a56e3caa04b0b7580406bf41e50",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2771.wav",
+      "bytes": 184052,
+      "sha256": "7e488e8542a95a459984a1f05ddbdb782cde601d37c3571d0af1a06844abec2b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2794.wav",
+      "bytes": 204616,
+      "sha256": "d47d1e5daaa2e6460f68aa3fb2d4ea33f0b4f5ea66dc5b9338e140833104292e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/mixkit-1018/2795.wav",
+      "bytes": 268300,
+      "sha256": "f59abe6b03b22b37fa63553fdf72e3fcf190df0467efd762c4d2665f3c08de81",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/original-ui-1018/click.wav",
+      "bytes": 35564,
+      "sha256": "0f28a52d7691503b2b21ea0fcb6717207d73c658d6c0409265ef1d1d5a6521b5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/original-ui-1018/confirm.wav",
+      "bytes": 43244,
+      "sha256": "140353102d906b839a7df8620b2bf63e979a4cffe5a8a6e4eb19a4fb7690c963",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/original-ui-1018/reward.wav",
+      "bytes": 55724,
+      "sha256": "08973e823e08ffaf0f894600cad891e451635643f3a325363ffeb406035217ac",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected15-r2-1018/curse.wav",
+      "bytes": 99884,
+      "sha256": "b0912d323310cb89a6585eedde83b7c4841f3a423ac8fb09f4d8370622f6b3d9",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected15-r2-1018/heal.wav",
+      "bytes": 111912,
+      "sha256": "0c45bf9af380d2109ca149f88d2bd81c99957cb205db044d4fb2db59572f9bd6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected15-r2-1018/parry-muted.wav",
+      "bytes": 38444,
+      "sha256": "f935159112c1b88ecb5e8d3b13bd82de784bd1db584a5a56fe9378179fe48e8a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected15-r2-1018/parry.wav",
+      "bytes": 38444,
+      "sha256": "9099111c33cd8a5406e2c249bb9a080bf80a72780648fab84fe681b74c77005f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected15-r2-1018/status-down.wav",
+      "bytes": 40148,
+      "sha256": "22b5fabd9c240ee6dcd95e45c1a4a2c93ac47ca53c228e8dd37de047e218dbcd",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/battle-enter.wav",
+      "bytes": 65324,
+      "sha256": "db7b54cdc3115f80a98aecec8f22f651b1b5503939b9d1e08cdd41506a7e9fdf",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/burn.wav",
+      "bytes": 76844,
+      "sha256": "c97b9c95d2d351d64cd4a1f7dfc6a090441d2bf00582f38a5b1dbaaa9d06bd93",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/deploy-start.wav",
+      "bytes": 80684,
+      "sha256": "0e1f3e93d8f84e7a7639ecd06bbffbb4f52b273e9020193b1bcf0dfa25ce2b53",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/discard.wav",
+      "bytes": 38444,
+      "sha256": "795a790b49f26fc687ea26ef939f78b989d6474c113977d2677bac63ed727465",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/fire.wav",
+      "bytes": 130604,
+      "sha256": "402383030a6e3695ccd526baa76fe13e40582ea629c45af87b45075fa378c24a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/lightning.wav",
+      "bytes": 115244,
+      "sha256": "6ea942710b66e5dbe49a46e0918035908c467c967954d449542d780582d9b634",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/psychic.wav",
+      "bytes": 138284,
+      "sha256": "145b3e2f01ea0add131a0a9ce51ace5777eca0e7f0fcfdf0627df9e1a1e1e6b3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/safe-retrieve.wav",
+      "bytes": 46124,
+      "sha256": "ff3732690bb9b4b03950557d3fe8c9ad571937517cac18e95cc00a24ca58ae6b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/safe-store.wav",
+      "bytes": 42284,
+      "sha256": "b73880ddfc34560b36f7ed6c50a3ed14e1205dc866f825d339436ad38d09b82c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/shield.wav",
+      "bytes": 80684,
+      "sha256": "8ff7cf2542d4a01a141ffa94dae7b31ff79489244fe90689f21505883ba5361c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/status-up.wav",
+      "bytes": 92204,
+      "sha256": "81e3b6300d585308c0dfd54a5d62e826d1ffdda2b8d6a15e6fab90c6d71903b2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Current/sfx/selected32-1018/transition.wav",
+      "bytes": 65324,
+      "sha256": "697bc19afbbbbd625bef2fe9ecc64c6090be33140f9745746f77a62dea8d9f6a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/chestburst-1.ogg",
+      "bytes": 10208,
+      "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/chestburst-2.ogg",
+      "bytes": 13615,
+      "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/chestburst-3.ogg",
+      "bytes": 10032,
+      "sha256": "112d4f93ddcc370b410630f971c0f5d991856102da9c76bc5c5540d388e75aaa",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/chestshake-1.ogg",
+      "bytes": 10492,
+      "sha256": "ae3cbf695aa0a8b98b5a80a835be5a3ccbd5446a24db2235cd4c3cd6fc92ed96",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/chestshake-2.ogg",
+      "bytes": 10028,
+      "sha256": "a66f6db5918ad016c28a9f2768f127a7f39b5fa04481e5a3b4e78ebe2a1c282d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/curse-1.ogg",
+      "bytes": 6526,
+      "sha256": "d750cf88097d0c3e69920e6e14496e1444e1a9da01aa4cca8f5ec8cb44c57b4f",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/curse-2.ogg",
+      "bytes": 6544,
+      "sha256": "05e513fbd42829060eb37855f8c3866722ec5c39a8937c9bfde518cc609effa2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/defeat-1.ogg",
+      "bytes": 16579,
+      "sha256": "3f8f2534a297d19386c233a7ee4fa8737cc40870dd206010263760e1983dde46",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/heal-1.ogg",
+      "bytes": 16508,
+      "sha256": "ddb93a3671233f95da0e0b10367f082f7eb42fa6caaddcf776410aa8833c747d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/heal-2.ogg",
+      "bytes": 11787,
+      "sha256": "8a7451193c38bc05483aec25dd193e163a15d44cf7fff04ac7912573231b0201",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/heal-3.ogg",
+      "bytes": 12432,
+      "sha256": "a48632d17a4f1416541d261a32a31612e01267144c407fa3ecab3ff410f0085b",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/hit-1.ogg",
+      "bytes": 8800,
+      "sha256": "486988aa2d6440ffc4c62a0e8ccf3c23673ba84424bd4723378d451b7255eb5c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/hit-2.ogg",
+      "bytes": 10399,
+      "sha256": "6492f9ccbc8d24dcef607bb1b48790b7870961474561f7fe5601e1c73a3018ef",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/hit-3.ogg",
+      "bytes": 11617,
+      "sha256": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/hit-4.ogg",
+      "bytes": 10861,
+      "sha256": "f92f5cb6ba4ff2766497292ffd90865654317eeca976f5652e0708dbdcdc0dd9",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/hurt-1.ogg",
+      "bytes": 6570,
+      "sha256": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/hurt-2.ogg",
+      "bytes": 6689,
+      "sha256": "4d0096364ba9e46119d2ff6df493fdc101bd2e1efae061da5e5f77a53b3fdcb6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/legend-1.ogg",
+      "bytes": 15477,
+      "sha256": "3114537d0d82f83c98037b4867c67dae4faa09e904405e511a9336088d022554",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/legend-2.ogg",
+      "bytes": 8666,
+      "sha256": "4ef863027af0574b7f2e83a48d9cb67922a72f3ea1b361a0f767630e135fb3af",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/legend-3.ogg",
+      "bytes": 19626,
+      "sha256": "e2929ad1acb0ff929f2367eb06d4a57d3c543be9f5a8b6a7fad7e44e440474e1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/parry-1.ogg",
+      "bytes": 6110,
+      "sha256": "e07045693e4a2b3d165c424e3dab4c781d9ff8880a386880ac89a51315d7f831",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/parry-2.ogg",
+      "bytes": 5634,
+      "sha256": "b914c8f1eb7c0f34bb165d7c77f4be0351f6be0660c13c53e65424e262e2c093",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/reveal-1.ogg",
+      "bytes": 18248,
+      "sha256": "fa81ac2fedc8c641661b87e349630a36c9800e795e0c800e029214efdbe26a7d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/reveal-2.ogg",
+      "bytes": 12393,
+      "sha256": "3409042acbfaebc24c1a6327dc073e36f9250841712e96c5040da566a97df73c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/reveal-3.ogg",
+      "bytes": 9077,
+      "sha256": "c85db5dceb3f1df073e960630277eaa88a5afda0477c1ddd68dad707621767be",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/victory-1.ogg",
+      "bytes": 10201,
+      "sha256": "1b1211b6360aae37ea685fee057bcabd034a749c1dfac6a9d643086d96e9b9aa",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/Battle/victory-2.ogg",
+      "bytes": 10291,
+      "sha256": "017e600a154f504039b302b4848a5ad5870248280b4320b037f1d82324988bf5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/click1.wav",
+      "bytes": 18254,
+      "sha256": "dd90b97f38b0ec7d52161d7c3bf8d61a66655766fd0af06439963351b4853a83",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/click2.wav",
+      "bytes": 10062,
+      "sha256": "a8b35cb35ff45738a9d7fe008490ad21a3ad30417dadd544a435d8b0ea84d841",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/click3.wav",
+      "bytes": 15694,
+      "sha256": "8d0676a5bcbfedad3e65b7b73e93a044216d7f192c99a3a05caf21e2aa4a8dda",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/click4.wav",
+      "bytes": 6734,
+      "sha256": "0d80e2c82426316b140b0686e10f83924ef794e9a9dfe13aaaa794b18200b048",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/click5.wav",
+      "bytes": 6222,
+      "sha256": "8a6f69fef5d241794a98d0b71baf0c7f51743c9e54ee4dd010a0323a8edeca83",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/rollover1.wav",
+      "bytes": 41806,
+      "sha256": "97de1348d22990014d9b5da4a2dedb6a070b324bb5966f7b4819eafa616b4a0c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/rollover2.wav",
+      "bytes": 11086,
+      "sha256": "c0c10c006967920edbb29ca364099a42ad3459a823d75f18a90181ac36774bf2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/rollover3.wav",
+      "bytes": 15182,
+      "sha256": "f3a9e0cf97fd20c963d3793a42fc26a8f137b11d916cce1aca10b6419521eaa3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/rollover4.wav",
+      "bytes": 21838,
+      "sha256": "7f00105fea3df85ae1b348152169e02485c8565ace881be5fc6f88d6282764c7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/rollover5.wav",
+      "bytes": 22862,
+      "sha256": "12da6d7c42d0e6bfcc04e68e5d61c6a8605fbb8c27f662abbf1d376a564ff114",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/rollover6.wav",
+      "bytes": 31054,
+      "sha256": "83456798fb2dc81c3fa3eff7a02b4000210926d883b1710901bb89b639df3993",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/switch1.wav",
+      "bytes": 57166,
+      "sha256": "e48f397e7dffafab68a2252287b8ff0e3805f141f76e51a3c6285e72e0d443d0",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/switch2.wav",
+      "bytes": 56142,
+      "sha256": "b0f7b256b9baa6ff7558c2d7404d29754671939627b9ae27cc49b5d558721170",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/switch3.wav",
+      "bytes": 64846,
+      "sha256": "2c04718535a175affda107adc8cad34abdccc94b9a9100297e39a0077c207515",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/switch4.wav",
+      "bytes": 76110,
+      "sha256": "83956adf4ac68a44a7ab6d7f69d03560a3e575fa1cc11431fe291f859f2178a9",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/switch5.wav",
+      "bytes": 55630,
+      "sha256": "824feeb7f534127a82dd41bffc63613b59a412940b173aad9e6165a904cb05b3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Audio/Sfx/switch6.wav",
+      "bytes": 64334,
+      "sha256": "2b3db033e6f5512bd2f1cfa240cba71b5cd9f9fc4c635bedfc064e795a71bb52",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/CascadiaMono-Bold.ttf",
+      "bytes": 581736,
+      "sha256": "3b589bf5f183733b893bdbf97cede18352668765f182459f467ddb377150c19e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/CascadiaMono.ttf",
+      "bytes": 575960,
+      "sha256": "9e3e6894f0dc02a2a8442adc0b4aca97414bb7ca71b87d9939ca4e7af79db748",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/HarmonyOS_Sans_SC_Bold.ttf",
+      "bytes": 8158996,
+      "sha256": "43a424b85e47fb53a17b3b32026a71801f86f8e022ca6798d186b47d39fa5f01",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/HarmonyOS_Sans_SC_Regular.ttf",
+      "bytes": 8261128,
+      "sha256": "297b088424be212207df2ce8b98e335468b782aa6b96832af0b8b773d711e2b1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/NotoSansSC-Bold.ttf",
+      "bytes": 17772300,
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/NotoSansSC-Regular.ttf",
+      "bytes": 17772300,
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/cascadia-code-400.ttf",
+      "bytes": 44148,
+      "sha256": "766cb86024a1403f93227474d722e303f874c157664bd4f15893363ba23d2041",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/cascadia-code-700.ttf",
+      "bytes": 45116,
+      "sha256": "babb108cdf8d90911ac6c226680ad843be282fbdc94643d37978550ec30f80c4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/notosans-sc-400.ttf",
+      "bytes": 530048,
+      "sha256": "d34e80efeba809c8abf23bea0d1d7c675a03cf1c55a8c832786e17fd80dae7e9",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/notosans-sc-700.ttf",
+      "bytes": 530524,
+      "sha256": "59c6f867346b73f8931766d2c43aa4a3eb6cf30e8b7d01f694224a6d7d12273c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/oxanium-latin-500-normal.ttf",
+      "bytes": 20432,
+      "sha256": "44f9e89b6ef25dc66da81cf2a04e4c891e638e685f7f9826c7f58570242a9206",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/oxanium-latin-700-normal.ttf",
+      "bytes": 20352,
+      "sha256": "83670d6bd36590523aa0e33de40467365f8d7ab1df0546d0da49b80e25560903",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/rajdhani-latin-600-normal.ttf",
+      "bytes": 38696,
+      "sha256": "fee3c177e992617f9407f04e31b213494cbdf4a07c8a5dfa432a590f4fdae5ef",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "Assets/Resources/Fonts/rajdhani-latin-700-normal.ttf",
+      "bytes": 39960,
+      "sha256": "4321bf26e5b82432833a1e0cb3cb4df1d563d7a081868ec2cf514e2bbcfb43cf",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/bgm/01-title-frostglass-v12.ogg",
+      "bytes": 1458620,
+      "sha256": "1745b191a824a3912aa9ae6e13891764faa0f84e47944f40c394c5fced0b1977",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/bgm/02-explore-ashline.ogg",
+      "bytes": 1608932,
+      "sha256": "df7eeb315bf004a926b61c825d2a399e3ff06ac52ac525e1c852749d532d4626",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/bgm/03-battle-shadowtide-full-v2.ogg",
+      "bytes": 2286067,
+      "sha256": "058366527528c2af5e89abfc8bce2b83f567afbbc4d5db0731d038c5af009532",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/bgm/05-shop-lamplight-deal-v3.ogg",
+      "bytes": 813389,
+      "sha256": "80a5ab5540c05c9201c0525820db78eebcd3a810550122075ca580791fc974d3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-payment-fix/bin-boundary/net8.0/PaymentBoundary.dll",
+      "bytes": 463360,
+      "sha256": "ae225143ab3e60a4bf854fa6222c96f2f58e5f33a41584f82d58862156f7b977",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-payment-fix/bin-boundary/net8.0/PaymentBoundary.exe",
+      "bytes": 151552,
+      "sha256": "c0e5ab4dcbc5f6dcea9b7aeb9d7a9ca0dfe3eaee4a54ad2ab3b1e8c0d6710d9a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-payment-fix/bin-boundary/net8.0/PaymentBoundary.pdb",
+      "bytes": 111428,
+      "sha256": "b50062fb3d932eb0e341bfc0c44fa5b00fee27d27b2cde3856b9c69acb50da7a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-payment-fix/obj-boundary/Debug/net8.0/PaymentBoundary.dll",
+      "bytes": 463360,
+      "sha256": "ae225143ab3e60a4bf854fa6222c96f2f58e5f33a41584f82d58862156f7b977",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-payment-fix/obj-boundary/Debug/net8.0/PaymentBoundary.pdb",
+      "bytes": 111428,
+      "sha256": "b50062fb3d932eb0e341bfc0c44fa5b00fee27d27b2cde3856b9c69acb50da7a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-payment-fix/obj-boundary/Debug/net8.0/apphost.exe",
+      "bytes": 151552,
+      "sha256": "c0e5ab4dcbc5f6dcea9b7aeb9d7a9ca0dfe3eaee4a54ad2ab3b1e8c0d6710d9a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-payment-fix/obj-boundary/Debug/net8.0/ref/PaymentBoundary.dll",
+      "bytes": 49664,
+      "sha256": "9ddc1370e63b7dad513f809dfdaf3efd9f82cbc44e98a86906d95fed65c1f88c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-payment-fix/obj-boundary/Debug/net8.0/refint/PaymentBoundary.dll",
+      "bytes": 49664,
+      "sha256": "9ddc1370e63b7dad513f809dfdaf3efd9f82cbc44e98a86906d95fed65c1f88c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/bin-boundary/Boundary.dll",
+      "bytes": 473088,
+      "sha256": "600a9f33435645f765488319a20595545bc1d99eb52f5eacd987a4155dc995e6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/bin-boundary/Boundary.exe",
+      "bytes": 151552,
+      "sha256": "149605bf4f966b3ef167e5d9d03208b73ca4c96e5e5bcbc12c541cc1e92fc653",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/bin-boundary/Boundary.pdb",
+      "bytes": 114616,
+      "sha256": "ccb3368538e34bd89f6ab320ee2b0e9d31db6ec9f2ff5849f7ca78b3f84fcb83",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/bin-rng/RngCheck.dll",
+      "bytes": 465408,
+      "sha256": "88e64100720d6287e636bd8b5414c6311df51dc4b79eed3646ce500d3368afd4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/bin-rng/RngCheck.exe",
+      "bytes": 151552,
+      "sha256": "84984028fa8f24f84107851bbd85d4f70a523d4b22b1ab73e2741e8164aca8b2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/bin-rng/RngCheck.pdb",
+      "bytes": 113088,
+      "sha256": "fcb7e1f9316c308f5f2f17d007de35d7043c0e7e8fe52262b1cee5ba912de081",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-boundary/Debug/net8.0/Boundary.dll",
+      "bytes": 473088,
+      "sha256": "600a9f33435645f765488319a20595545bc1d99eb52f5eacd987a4155dc995e6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-boundary/Debug/net8.0/Boundary.pdb",
+      "bytes": 114616,
+      "sha256": "ccb3368538e34bd89f6ab320ee2b0e9d31db6ec9f2ff5849f7ca78b3f84fcb83",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-boundary/Debug/net8.0/apphost.exe",
+      "bytes": 151552,
+      "sha256": "149605bf4f966b3ef167e5d9d03208b73ca4c96e5e5bcbc12c541cc1e92fc653",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-boundary/Debug/net8.0/ref/Boundary.dll",
+      "bytes": 50176,
+      "sha256": "918ef1abc7789d0836e04591baab05a028995defe88bc4d145d650b4e45cede4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-boundary/Debug/net8.0/refint/Boundary.dll",
+      "bytes": 50176,
+      "sha256": "918ef1abc7789d0836e04591baab05a028995defe88bc4d145d650b4e45cede4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-rng/Debug/net8.0/RngCheck.dll",
+      "bytes": 465408,
+      "sha256": "88e64100720d6287e636bd8b5414c6311df51dc4b79eed3646ce500d3368afd4",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-rng/Debug/net8.0/RngCheck.pdb",
+      "bytes": 113088,
+      "sha256": "fcb7e1f9316c308f5f2f17d007de35d7043c0e7e8fe52262b1cee5ba912de081",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-rng/Debug/net8.0/apphost.exe",
+      "bytes": 151552,
+      "sha256": "84984028fa8f24f84107851bbd85d4f70a523d4b22b1ab73e2741e8164aca8b2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-rng/Debug/net8.0/ref/RngCheck.dll",
+      "bytes": 49664,
+      "sha256": "d8ad87c559746cd27de95b7505683b2d394e9852d79547a6d4a777c21ca499ca",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-scan-fixes/obj-rng/Debug/net8.0/refint/RngCheck.dll",
+      "bytes": 49664,
+      "sha256": "d8ad87c559746cd27de95b7505683b2d394e9852d79547a6d4a777c21ca499ca",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/bin-round2/Test.dll",
+      "bytes": 472064,
+      "sha256": "c35329fa0bbbd6be9536554a570b140f302cc1de9679869b1c16780dafebf86a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/bin-round2/Test.exe",
+      "bytes": 151552,
+      "sha256": "840c87b4560eb2aacd9fc75cb199b48a58ff2985046e7bc125959cbda51e97d5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/bin-round2/Test.pdb",
+      "bytes": 113548,
+      "sha256": "b13b1fd399e32ed07f0c85ca618048a8c9b84d58e8bf5a83e30553461d5a2afd",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/bin-target/TargetTests.dll",
+      "bytes": 472064,
+      "sha256": "1a6907ab5db30bdf5982f92b402d4a0e719d22858b0349b182095ef12d1d4940",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/bin-target/TargetTests.exe",
+      "bytes": 151552,
+      "sha256": "6a87f73f2200895f4a0bc4aa6446cbcffbedff3d22c07577459253ddf02fec78",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/bin-target/TargetTests.pdb",
+      "bytes": 113512,
+      "sha256": "aa90aedb179af335d09dc1cbfa332bd3832ea143f83b9b495d12142757b72772",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-round2/Debug/net8.0/Test.dll",
+      "bytes": 472064,
+      "sha256": "c35329fa0bbbd6be9536554a570b140f302cc1de9679869b1c16780dafebf86a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-round2/Debug/net8.0/Test.pdb",
+      "bytes": 113548,
+      "sha256": "b13b1fd399e32ed07f0c85ca618048a8c9b84d58e8bf5a83e30553461d5a2afd",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-round2/Debug/net8.0/apphost.exe",
+      "bytes": 151552,
+      "sha256": "840c87b4560eb2aacd9fc75cb199b48a58ff2985046e7bc125959cbda51e97d5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-round2/Debug/net8.0/ref/Test.dll",
+      "bytes": 50176,
+      "sha256": "48bf25f365045f6c770df5c53e48f68822f26ebe1d400069de8825cf0ba7aa9d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-round2/Debug/net8.0/refint/Test.dll",
+      "bytes": 50176,
+      "sha256": "48bf25f365045f6c770df5c53e48f68822f26ebe1d400069de8825cf0ba7aa9d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-target/Debug/net8.0/TargetTests.dll",
+      "bytes": 472064,
+      "sha256": "1a6907ab5db30bdf5982f92b402d4a0e719d22858b0349b182095ef12d1d4940",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-target/Debug/net8.0/TargetTests.pdb",
+      "bytes": 113512,
+      "sha256": "aa90aedb179af335d09dc1cbfa332bd3832ea143f83b9b495d12142757b72772",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-target/Debug/net8.0/apphost.exe",
+      "bytes": 151552,
+      "sha256": "6a87f73f2200895f4a0bc4aa6446cbcffbedff3d22c07577459253ddf02fec78",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-target/Debug/net8.0/ref/TargetTests.dll",
+      "bytes": 50176,
+      "sha256": "ab5226dedba160597bf2ccaa3411f6789b12c56ba6af048a9035236ecc28c947",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-core-target-fix/obj-target/Debug/net8.0/refint/TargetTests.dll",
+      "bytes": 50176,
+      "sha256": "ab5226dedba160597bf2ccaa3411f6789b12c56ba6af048a9035236ecc28c947",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/entry/modern-winter-entry-1011-v2.png",
+      "bytes": 1441239,
+      "sha256": "ea53405bf6e4d1a705b671970a36b60696e76dc37d0f2f12e6f5a60acd81640c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-bandits-anime-v2.png",
+      "bytes": 1470523,
+      "sha256": "7be4288e5ba9725217c994c079c642eddfe81f10dab2fd19d6cc5dc6f6669471",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-cmtn7qttxqo4.png",
+      "bytes": 1504462,
+      "sha256": "fe7e91066c52f95613abe94e489dfff991502c186d3419eb9591697e69dbf0c6",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-ev19-arrows.png",
+      "bytes": 1427100,
+      "sha256": "92e6e0acf640af7ad43e743f539c690db13f1bb6807111262b7ebd09cc7d7205",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-ev19-classchest.png",
+      "bytes": 1218849,
+      "sha256": "ae138b4fab2e6e6dac2e49fd0cd54d4b75c706d90fbc77a333186f421aa92d2d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-ev19-fireballs.png",
+      "bytes": 1183988,
+      "sha256": "a2ee72c272a44c0c55d57a0d846175025b6bece85c4e92f7b6920769711365da",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-ev19-gamble.png",
+      "bytes": 1278534,
+      "sha256": "9ef67ace361fa630d76fd58e6cc01b4c7bb9edde73376f03dd3f035f62a35433",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-ev19-pearlbox.png",
+      "bytes": 1171890,
+      "sha256": "20fbdb6a7bd34ce2879f267770e99f763a1b6c4fff411b0419511ea33b442ac7",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-ev19-potions.png",
+      "bytes": 1293414,
+      "sha256": "45b4b101c145a3336407c64da549213ba9b85ad4355f88dae99bb038924423d5",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-ev19-quartermaster.png",
+      "bytes": 1249544,
+      "sha256": "d980cfe56d51c345788df633b0c1e2a4978c8fda42a87f6e802e993e7ee45aea",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-ev19-recode.png",
+      "bytes": 1193773,
+      "sha256": "5045ef01bdad5f6cc05ff0f43458dab1e5362b6c257dbf6298b0d6f259de85a2",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-last-lamp-1013-v1.png",
+      "bytes": 1236345,
+      "sha256": "f342c96851955621ae2fe600241b5ca4181de2fdecc6ddd901dd6cb86b9637aa",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-tt6-airdrop.png",
+      "bytes": 1342532,
+      "sha256": "ad3478b9f3b090bf7efefddc0d2a464f7d1e9af4a4ac364efbc30a030d672ec1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-tt6-demondeal.png",
+      "bytes": 1043224,
+      "sha256": "7ab240d637371da1cddfef70d8f16f22a5a69f9712e80003e29513fc69ae7383",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-tt6-goldhammer.png",
+      "bytes": 1261309,
+      "sha256": "304309d55e3b043d94365cd84cd43166567920a7a0de0c8f4a36306ff14535fa",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-tt6-goldmine-1013-v2.png",
+      "bytes": 1894677,
+      "sha256": "3710c97d84ab2159b8be426c32438ef35f99b9d86f403ed10822bac339a9c728",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-tt6-mystery.png",
+      "bytes": 1297995,
+      "sha256": "5360932dbc3c43cb4918f6fe23fceb695f596c7bb03bd36bca8ef721d31a8f23",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-tt6-relief.png",
+      "bytes": 1345738,
+      "sha256": "1c8ad34cd928fc6a7b6f9f7f0b65c37fb598e7e9e572ba1ec2b9705fc2599f20",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/event-tt6-systemsupply.png",
+      "bytes": 1476376,
+      "sha256": "695061df0f7fb918cc5883e591fbc5bec656c91477b3af5a9cb08857c06a591a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/scene-altar-anime-v2.png",
+      "bytes": 1880465,
+      "sha256": "a689e888e5fed6d8dbf0c15657bb5bf1f1b312e5dd94dd1fa57c98f3e73f8831",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/scene-chest-anime-v2.png",
+      "bytes": 1143454,
+      "sha256": "d85dcdae8c06f5fd99a2f4accfec7860aa6ba771d949662a5d3d836dda3f0c9c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/scene-door-anime-v2.png",
+      "bytes": 2882441,
+      "sha256": "b285a395a3bbc6534f3b505344cf8f4fe85eeea8e035a1f62cb57f37f36a4e1d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/scene-extract-anime-v2.png",
+      "bytes": 1075171,
+      "sha256": "8a45c2b7be6e84192d7140459dfb1e4551323252d741122d8253c3c63972b9e3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/scene-pickup-coin-anime-v2.png",
+      "bytes": 1672163,
+      "sha256": "37226a921bad60b83dc3d5aa51d3ed037d17c8f345658a1bf16a5f67a2898495",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/scene-pickup-key-anime-v2.png",
+      "bytes": 2302962,
+      "sha256": "4eeb1dd37d963ebdeb18ef9f50c3bb18bcd70b1ee601f6aa91c871a67d58cc41",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/scene-pickup-rations-anime-v2.png",
+      "bytes": 1807589,
+      "sha256": "ede2185569a91a93eb8ffb15460c2b66fd6ce33d83b3300ba4ed992038012055",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/scene-pickup-wood-anime-v2.png",
+      "bytes": 1882244,
+      "sha256": "d5a903573337820f0bc16c42b64c0b2f8a94d2468298e2fa1d84467aaadcf99c",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/draft/Resources/Art/Current/node-rooms/scenes/scene-shop-anime-v2.png",
+      "bytes": 1482101,
+      "sha256": "560f4133ff57966833eef4defb988183cd568d75e79d51a963df310870a52de1",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/import-quality/static-fonts/NotoSansSC-Bold.ttf",
+      "bytes": 10585456,
+      "sha256": "72ce56f3dae8d882987b15c039d199d9cbe526a27e4fa2c2b32481205d5affc8",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/import-quality/static-fonts/NotoSansSC-Regular.ttf",
+      "bytes": 10595932,
+      "sha256": "ecdbb846e2edf2d4a361b6557dc2b8a09b1a8bedbd3156171c34caef64542c9d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1029/import-quality/static-fonts/original-variable.ttf",
+      "bytes": 17772300,
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1030-fidelity/independent-final-review/overview-1.png",
+      "bytes": 1482293,
+      "sha256": "ccaa8f938177a607e8dbb4ddbe547a08c73a688b5cdebb5af9d9efcae91c14e3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1030-fidelity/independent-final-review/overview-2.png",
+      "bytes": 1076349,
+      "sha256": "fcc59ad2a6f3ca7388d9fb70d6370ad2b08e9e94f5c026f9be2beda505d8b5ab",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1030-fidelity/independent-final-review/overview-3.png",
+      "bytes": 2094291,
+      "sha256": "405189bfe272f644b0f1ef9d586f7daa705b06def400f04cefecf16fd24a960d",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1030-fidelity/independent-final-review/overview-4.png",
+      "bytes": 2563591,
+      "sha256": "7da454afec5a1312fe7a3d26e5282a66419e9ab67d88b2caee4c2176ed6b6269",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/migration-1030-fidelity/independent-final-review/overview-5.png",
+      "bytes": 2197517,
+      "sha256": "7817a3f11b8db820ac0bfb60af03ed5363009cc315086ba667cc0cf7e596fc3a",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/tools/screen.png",
+      "bytes": 8360550,
+      "sha256": "962f64bc0fa542479ed079a77eda966275360710e14334b821de4358d07226ce",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/tools/screen2.png",
+      "bytes": 8360550,
+      "sha256": "962f64bc0fa542479ed079a77eda966275360710e14334b821de4358d07226ce",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/tools/screen3.png",
+      "bytes": 5322321,
+      "sha256": "223335e9de088b057ed29a87bc1012aa4522c4052338c7572351c79c7a56e803",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/tools/screen4.png",
+      "bytes": 6003742,
+      "sha256": "035759f1f3cf8505caf53d9da84795389e22bf701d56fde24d8d8629d9450c8e",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_planning/tools/screen5.png",
+      "bytes": 6001619,
+      "sha256": "bc93feeaa739e63e125559672d96f7c01fec7ace4886a6620d59bee0d1794375",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_thirdparty/Newtonsoft.Json.dll",
+      "bytes": 705296,
+      "sha256": "8c1dd5c184b4e2e7ead06971ff3ebcb46783be972292d1deb1061744369b4d80",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_thirdparty/ink-1.2.2.zip",
+      "bytes": 14,
+      "sha256": "d5558cd419c8d46bdc958064cb97f963d1ea793866414c025906ec15033512ed",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_thirdparty/ink-master.zip",
+      "bytes": 522441,
+      "sha256": "d51d9683de406cf103d12559d5c58779103c8a50db8c6dc12a3cb01e12d1daa3",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    },
+    {
+      "path": "_thirdparty/newtonsoft.nupkg",
+      "bytes": 2441966,
+      "sha256": "872fc189e638ab1056555b03aaa38f68bcb54286e221aa646eb1129babf63c77",
+      "acquisition": "Restore from original local SoudacheUnity project or its recorded asset import pipeline."
+    }
+  ],
+  "verification": "Copied bytes hashed. No build, tests or player acceptance for this snapshot.",
+  "fileLists": [
+    "SNAPSHOT-FILES-01.json",
+    "SNAPSHOT-FILES-02.json",
+    "SNAPSHOT-FILES-03.json",
+    "SNAPSHOT-FILES-04.json",
+    "SNAPSHOT-FILES-05.json",
+    "SNAPSHOT-FILES-06.json",
+    "SNAPSHOT-FILES-07.json",
+    "SNAPSHOT-FILES-08.json",
+    "SNAPSHOT-FILES-09.json",
+    "SNAPSHOT-FILES-10.json",
+    "SNAPSHOT-FILES-11.json",
+    "SNAPSHOT-FILES-12.json",
+    "SNAPSHOT-FILES-13.json",
+    "SNAPSHOT-FILES-14.json",
+    "SNAPSHOT-FILES-15.json",
+    "SNAPSHOT-FILES-16.json",
+    "SNAPSHOT-FILES-17.json",
+    "SNAPSHOT-FILES-18.json",
+    "SNAPSHOT-FILES-19.json"
+  ],
+  "includedFileCount": 9072
+}

@@ -1,0 +1,33 @@
+{
+  "status": "frozen-awaiting-root-native-run",
+  "scope": "Editor flow/actor validation only; production readonly",
+  "nativeNotRun": true,
+  "privateCompileExit": 0,
+  "methods": [
+    "Sdt.Editor.CurrentMigrationFlowValidation.RunJourney",
+    "Sdt.Editor.CurrentUnitFrameValidation.Run"
+  ],
+  "files": [
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.cs",
+      "sha256": "e6529ad69517e46fab89f114de4d36750d7169e5b0cfe494e3188688f2ed48eb"
+    },
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.FilmWait.cs",
+      "sha256": "af0cb0fa37a929dbf615474c2e300bd5fc1675b47697c83a4267a12fe24c796a"
+    },
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.Journey.cs",
+      "sha256": "f45735eea8003bfaafe73e73507db10dc790d12bea1a3e548814ee955b9b862a"
+    },
+    {
+      "path": "Assets/Editor/CurrentUnitFrameValidation.cs",
+      "sha256": "64e62483dcea74aa39bf2733f1ffd9268908f3d1011ca053a6e298ad74bdfa85"
+    }
+  ],
+  "limitations": [
+    "Reference offscreen actor captures do not establish standalone clarity.",
+    "Real EventSystem input is constructed; no OS keyboard or held-input claim.",
+    "Cap stress loop is a labelled fixture; fasterLoopFrames shows whether rate stress was actually possible."
+  ]
+}

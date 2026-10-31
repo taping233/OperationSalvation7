@@ -1,0 +1,135 @@
+{
+  "state": "frozen-await-root-native-import-and-captures",
+  "productionFiles": 12,
+  "staticChecks": 9,
+  "compile": {
+    "exitCode": 0,
+    "inputsStable": true,
+    "warnings": 0,
+    "errors": 0,
+    "sourceCount": 25
+  },
+  "nativeVerification": "not run; no Unity, browser, foreground or shared compile used",
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+      "sha256": "6438a4fc9f970bc0f76d2efc7314b8ac13740d687bc5e241b3602ac1f36ed996"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentLayout.cs",
+      "sha256": "9cb8731f6b80a328b62dfb905a8b0282e7984ca6c2b951380b1f9719a22206fd"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentHomeCard.cs",
+      "sha256": "cdc6ee15824bbf3a2d35c596fa900318ced38ad2a4e219b69df530d125c87878"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/PreparationScreen.cs",
+      "sha256": "e0199977ef6ac407bacfbd27199e991f8d0dc215d5c62bd3bb545974316698c0"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeAmbient.cs",
+      "sha256": "00fd96366059a311b20acaf7637d8e8bf9670d330561513e31ad82a13b15a933"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeMotion.cs",
+      "sha256": "13a85c28b35fe2fc64870744afebaf6647c6de34266989f2094907b62261882d"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeMaterials.cs",
+      "sha256": "54e1bd9dadc5cf71a69fcb67c6a0a27d7ddfb315ba5913b4318a85262c7811be"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CreditsScreen.cs",
+      "sha256": "149b6a615d754565579f8c478297da7843f6f049c0634c26cc162ca0a87d1031"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeGhost.shader",
+      "sha256": "9bfe80a18a9da155c011dbcb842900adffed5eb21b48cc85b606ca3f7c31898b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeComposite.shader",
+      "sha256": "46f9065179e892909897d95019f7660c8f4ebf96a0d700d095eed2e4f3bc1962"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeScene.shader",
+      "sha256": "a04c9ee810487a8f11ebe8188b030cc12a1c7986d0b7ce7c4ac87179392f25ed"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeSnow.shader",
+      "sha256": "e97b7f5c2a64164b33b6022c643c74f9496496b27f2fde2a3f068459f2d3b83e"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs.meta",
+      "sha256": "ba1ae62a94177b8823da3b855adc11f2a0190399b2a0ce1aa7c01644f91f2d5b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentLayout.cs.meta",
+      "sha256": "7bcc7c0d3e789253c523b42a19cd183ddf4f77a082429632a2b257b43c26946a"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentHomeCard.cs.meta",
+      "sha256": "ffa7b891ede7a1df76af46ee7c77328c2269058b7f306e8842892a2dec560cdc"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/PreparationScreen.cs.meta",
+      "sha256": "1bcada913e2de527622635598ec695d9bf6ca77dcba1ecebb50fe895816406e1"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeAmbient.cs.meta",
+      "sha256": "17f93422712c41182865936d38e717dc71a3a25e6cf8becf7f04447047a453ca"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeMotion.cs.meta",
+      "sha256": "ee53ad9e82a4be95df4c63bd6d4892208bfa9ff542c48c1597a03fb2689c5479"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeMaterials.cs.meta",
+      "sha256": "199d32b3a535fdfb3257cb694bbbe37b9b283b5efd2d1ae8f66e50a6c39e97d6"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CreditsScreen.cs.meta",
+      "sha256": "433b9a2b52a19e96106ed939ac47d9077479f0f520f9e92b937f51e2f017670f"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeGhost.shader.meta",
+      "sha256": "9e8b5e40f3980ab5b76d7ba42be7422a46d76424296f55594e9a7686820aa0cf"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeComposite.shader.meta",
+      "sha256": "f45f8db809b47c1b06dc9a4e4e489535c19830e6b6458216c47458fd67a5d9fd"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeScene.shader.meta",
+      "sha256": "30927968e0c778163b568470486c21365e7fada6248525c7ca255c844ba04409"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeSnow.shader.meta",
+      "sha256": "302690976c4a4cdd6955dc78cf5d187663972d12f215b293d3d187c07ce1e865"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources.meta",
+      "sha256": "b6b2b979f1050354a612dfeffe75abd8bdd48589b907aaff7dff51b1860a7f4b"
+    },
+    {
+      "path": "_planning/migration-1029/current-home/README.md",
+      "sha256": "0516da531200c979f9c88221650b8844f0e8bedaa2a6922f207ed7c5583765cd"
+    },
+    {
+      "path": "_planning/migration-1029/current-surface-effects/README.md",
+      "sha256": "824fa0f718fcd6c3c2ff9a3560bd2eb48d2e7e83a038f12782333b0ee5a797ab"
+    },
+    {
+      "path": "_planning/migration-1029/current-surface-effects/source-receipt.json",
+      "sha256": "14f339aa2f37795c3df07a13f197bc2a42dbdf362921457a5b1b17573925aabf"
+    },
+    {
+      "path": "_planning/migration-1029/current-surface-effects/verify_surface.py",
+      "sha256": "d8fb36f7b506943c5eeb447461ae74ec460fc6aaa7b864339852b7792ee2fce4"
+    },
+    {
+      "path": "_planning/migration-1029/current-surface-effects/.gitignore",
+      "sha256": "5527019eeee742192a7510900c19143cb34c4b650728e75d500d1fa47ecc90a4"
+    }
+  ]
+}

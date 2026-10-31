@@ -1,0 +1,83 @@
+{
+  "status": "production-frozen-awaiting-native-and-independent-review",
+  "frozenAt": "2026-10-30T05:31:25.363926+08:00",
+  "productionSha256": {
+    "Assets/Scripts/Sdt.Core/CombatResolver.cs": "32dd0e1558d1fb62fda29b88c94e85c74e1fe02d63338268d726ceca0b1fd242",
+    "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs": "f58ad813a9308d321d8c6c4a8b83d7b0a2b148ef622d9eed8d550e89d01db8db",
+    "Assets/Scripts/Sdt.Core/Battle/BattlePlayerEffects.cs": "621f9aeb841ad67fc735b97610d1d4ac2918204314493c4679d9b46291b83518",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleWidgets.cs": "431a052689922ee1bdcd5babd74b6169cf8f023b4013fe79ce8428044267435a",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs": "c83e73056d62e080c0828c3c505166c651e63d969a39cbdc91e133c833088a3a",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs": "fe592d46a27a28df8268afd33287ab4ad68782ff819e6388df7a6430ecb10f09",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleStatusModel.cs": "0030203ae60c34cf172d67b5ab4212a7f99610c566506b9be3170c9d6465c254",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleStatusLayout.cs": "f0266c037fff4830109ba7346df473dfd887f3c76b19b61e1d02a252f9594e6d",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleStatuses.cs": "c1945b61c65508c09ec57788258f325f63aab669a92a1842329504422941acad",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleNameplate.cs": "e6b6913f1f452b3de9092b45bbce6b16014762cb056c1954c91e686eccee533a",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleDropProjection.cs": "c4ec70d987b906d619c1a0e585c1f8742d9956e609a114a19af20d9d51dc2cc9"
+  },
+  "privateSnapshotMatchesProduction": {
+    "Assets/Scripts/Sdt.Core/CombatResolver.cs": true,
+    "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs": true,
+    "Assets/Scripts/Sdt.Core/Battle/BattlePlayerEffects.cs": true,
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleWidgets.cs": true,
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs": true,
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs": true,
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleStatusModel.cs": true,
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleStatusLayout.cs": true,
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleStatuses.cs": true,
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleNameplate.cs": true,
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattleDropProjection.cs": true
+  },
+  "sourceSha256": {
+    "src/battle/view/battle.status-chips.js": "ccdfeb89ce52eb7e7a97487d0a5a329ee3af07d6f76e13f5ca244ad1ac4a6c95",
+    "css/battle-status-chips.css": "e65afb9a61b45a93ee7c7f7ab0186751c6587c867f20b291de119fae2cb8b904",
+    "src/ui/status-icons.js": "a7c19a427a3b77eadea351833e875af503388a49c1c821dd69c67cc4f3a74f92",
+    "src/battle/core/combat.factory.js": "980494c55f4381167a2142bf60ef99e74a8416f646e2348c14357d5fa2f4c0d3",
+    "src/battle/view/battle.layers.js": "747d2f12bf5841c7396a44846833060be0f451d8e3d04e7f6f2fc673719448da",
+    "src/battle/view/battle.intent.view.js": "3f398eacc534379deab608e6e284734079076d99c41ee05917d3c2614f3664cb",
+    "src/battle/core/battle.enemy-intent.js": "7b9d76d6b89f806698c7c1cb9bb8cf06aef882dfd39816eb1b3cfc5aa66cf1ff",
+    "css/battle-stage.css": "ccebad0f54d689eee5cfe525b4057bde003541160c15c1657b9e264c0d4562ce",
+    "src/battle/view/battle.aim.js": "96bcab11040bfd81f4cb6e4b52649b24199e94d43bc743ede5de0ce938ffb0a9",
+    "src/battle/view/battle.piles.view.js": "aa37a0d7b21a03a2009a8a42ec3eb9e64dadc0196a8d1f367bea32c7ab6e6e84",
+    "src/battle/effects/battle.target-rules.js": "30a871b313ed1e71f64720299e596d269b68b0bca93ac27cd12b98564b4400a5",
+    "src/battle/runtime/battle.player-effects.js": "1d4dc6d37735cff1fafdc2256dbf59be56dbafd2cedf7f589044e26af7bd82b8",
+    "src/battle/core/battle.snapshot-projection.domain.js": "017582df1dd6988fc3d014250a27480de0e271802bcbb25fd85b553b9c4d4178",
+    "src/battle/runtime/battle.snapshot.js": "63ccfc3319ede711648a13870f499e1d5977296ef84eebcad9d361d5a851f86a",
+    "src/battle/effects/effect-steps.m2.domain.js": "5a242a0fce3a2656f2c24ad2b671ea00dde3da1805e9c93c2b5c8fe767d493ce",
+    "src/battle/effects/card-semantic-operations.js": "4457bdbc738cb19ec2649c062d38b50d5c094665dec96c03c354533c2b8f3eff",
+    "src/battle/core/battle.setup-mechanics.domain.js": "4a14560d484f19b56f932fe974baa6d6e08d9615e4b8f24748137732f008489b"
+  },
+  "verification": {
+    "privateCompilation": {
+      "errors": 0,
+      "warnings": 7,
+      "log": "private-check/latest.log",
+      "sha256": "1a16b3e4eedda3fc85fb17f3867704835b8f96ae185f3fc41fd3b9184f975c98"
+    },
+    "actualSourceViewAssertions": {
+      "passed": 54,
+      "log": "behavior-check/latest.log",
+      "sha256": "681f53c50b62ad35358a37a1d04676cb30cc4699e84b83708d91919e32b0f8bc"
+    },
+    "actualSessionProjectionAssertions": {
+      "passed": 9,
+      "log": "runtime-check/latest.log",
+      "sha256": "3d7612ab814dbc90bd735f2741fd6c18f29c80c8e5f8e468ecde7ea3dad7c23d"
+    },
+    "targetedDiffCheck": "passed"
+  },
+  "retainedInterfaces": [
+    "UnitMount.BindActor",
+    "UnitMount.SetActorHead",
+    "UnitMount.PresentHealth",
+    "CurrentEndTurnHold.Install"
+  ],
+  "playerEffectReadOnlyApi": [
+    "BattleSnapshot.PlayerEffects",
+    "BattleSnapshot.playerEffects",
+    "BattlePlayerEffects.Project(BattlePlayerEffectState)"
+  ],
+  "sourceVectorsSha256": "16e351566c6d323ac2edee0c0d66bae324142cb39e035e4c6aacda9b8e6ee6a7",
+  "priorIndependentEvidence": "../migration-1029/current-effect-review/review6-battle-settlementagent.json",
+  "nativeVerification": "not performed by this agent; Root native and independent review pending",
+  "runtimeMappingBoundary": "optional nest holyRune absent; pure source branch retained/tested, runtime false. Source standalone meleeCost1/spellCost1 and registered bleedAmp rule-consumer differences reported to Root; no gameplay changes made."
+}

@@ -1,0 +1,4849 @@
+[
+  {
+    "step": 1,
+    "tick": 10,
+    "reason": "candidate-reachability",
+    "node": "0,3",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-element-seal",
+    "index": 0,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 20,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 21,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 11,
+    "reason": "candidate-reachability",
+    "node": "0,3",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-element-seal",
+    "index": 0,
+    "bounds": {
+      "minX": 855.6096,
+      "minY": 254.4973,
+      "maxX": 1064.39038,
+      "maxY": 308.7803
+    },
+    "center": {
+      "x": 960.0,
+      "y": 281.638824
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 20,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 21,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 18,
+    "reason": "candidate-reachability",
+    "node": "1,3",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-bandage",
+    "index": 0,
+    "bounds": {
+      "minX": 845.333557,
+      "minY": 227.573929,
+      "maxX": 1074.66638,
+      "maxY": 287.20047
+    },
+    "center": {
+      "x": 960.0,
+      "y": 257.3872
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 26,
+    "reason": "candidate-reachability",
+    "node": "1,4",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt5-galaxy-voyage",
+    "index": 0,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 25,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 26,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 27,
+    "reason": "candidate-reachability",
+    "node": "1,4",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt5-galaxy-voyage",
+    "index": 0,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 38,
+    "reason": "candidate-reachability",
+    "node": "1,9",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "全部收下",
+    "label": "全部收下",
+    "card": null,
+    "index": null,
+    "bounds": {
+      "minX": 1532.0,
+      "minY": 23.9999981,
+      "maxX": 1692.0,
+      "maxY": 76.00001
+    },
+    "center": {
+      "x": 1612.0,
+      "y": 50.0000038
+    },
+    "centerInMasks": true,
+    "receiver": "全部收下",
+    "hits": [
+      {
+        "name": "全部收下",
+        "receiver": "全部收下"
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "全部收下",
+        "depth": 74,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 75,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 38,
+    "reason": "candidate-reachability",
+    "node": "1,9",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "收下",
+    "card": "cc-rapid-fire",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 38,
+    "reason": "candidate-reachability",
+    "node": "1,9",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt12-basicdev",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 38,
+    "reason": "candidate-reachability",
+    "node": "1,9",
+    "chestIndex": 0,
+    "ordinal": 3,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-chain-lightning",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 63,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 64,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 71,
+    "reason": "candidate-reachability",
+    "node": "2,2",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "全部收下",
+    "label": "全部收下",
+    "card": null,
+    "index": null,
+    "bounds": {
+      "minX": 1532.0,
+      "minY": 23.9999981,
+      "maxX": 1692.0,
+      "maxY": 76.00001
+    },
+    "center": {
+      "x": 1612.0,
+      "y": 50.0000038
+    },
+    "centerInMasks": true,
+    "receiver": "全部收下",
+    "hits": [
+      {
+        "name": "全部收下",
+        "receiver": "全部收下"
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "全部收下",
+        "depth": 71,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 72,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 71,
+    "reason": "candidate-reachability",
+    "node": "2,2",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt12-firecracker",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 71,
+    "reason": "candidate-reachability",
+    "node": "2,2",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-sapper-bomb",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 40,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 41,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 71,
+    "reason": "candidate-reachability",
+    "node": "2,2",
+    "chestIndex": 0,
+    "ordinal": 3,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt12-unstableray",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 60,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 61,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 88,
+    "reason": "candidate-reachability",
+    "node": "2,6",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "选择",
+    "card": "cmtn1i64j7y7",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 88,
+    "reason": "candidate-reachability",
+    "node": "2,6",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt7-swordimmortal",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 88,
+    "reason": "candidate-reachability",
+    "node": "2,6",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt7-thundergrudge",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 63,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 64,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 89,
+    "reason": "candidate-reachability",
+    "node": "2,6",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "选择",
+    "card": "cmtn1i64j7y7",
+    "index": 0,
+    "bounds": {
+      "minX": 504.919281,
+      "minY": 236.968536,
+      "maxX": 727.0807,
+      "maxY": 294.7305
+    },
+    "center": {
+      "x": 616.0,
+      "y": 265.849548
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 89,
+    "reason": "candidate-reachability",
+    "node": "2,6",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt7-swordimmortal",
+    "index": 1,
+    "bounds": {
+      "minX": 854.9092,
+      "minY": 252.6621,
+      "maxX": 1065.09082,
+      "maxY": 307.309235
+    },
+    "center": {
+      "x": 960.0,
+      "y": 279.985657
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 89,
+    "reason": "candidate-reachability",
+    "node": "2,6",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt7-thundergrudge",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 63,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 64,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 122,
+    "reason": "candidate-reachability",
+    "node": "2,10",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "全部收下",
+    "label": "全部收下",
+    "card": null,
+    "index": null,
+    "bounds": {
+      "minX": 1532.0,
+      "minY": 23.9999981,
+      "maxX": 1692.0,
+      "maxY": 76.00001
+    },
+    "center": {
+      "x": 1612.0,
+      "y": 50.0000038
+    },
+    "centerInMasks": true,
+    "receiver": "全部收下",
+    "hits": [
+      {
+        "name": "全部收下",
+        "receiver": "全部收下"
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "全部收下",
+        "depth": 71,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 72,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 122,
+    "reason": "candidate-reachability",
+    "node": "2,10",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-fly-arrowhawk",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 122,
+    "reason": "candidate-reachability",
+    "node": "2,10",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt2-block",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 122,
+    "reason": "candidate-reachability",
+    "node": "2,10",
+    "chestIndex": 0,
+    "ordinal": 3,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt-wood-lots",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 60,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 61,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 123,
+    "reason": "candidate-reachability",
+    "node": "2,10",
+    "chestIndex": 1,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt12-barriermend",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 123,
+    "reason": "candidate-reachability",
+    "node": "2,10",
+    "chestIndex": 1,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-longsword",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 40,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 41,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 123,
+    "reason": "candidate-reachability",
+    "node": "2,10",
+    "chestIndex": 1,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-magic-lamp",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 60,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 61,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 139,
+    "reason": "candidate-reachability",
+    "node": "2,11",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-treasure-hunt",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 139,
+    "reason": "candidate-reachability",
+    "node": "2,11",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-double-shot",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 139,
+    "reason": "candidate-reachability",
+    "node": "2,11",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-armor-rush",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 63,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 64,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 140,
+    "reason": "candidate-reachability",
+    "node": "2,11",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-treasure-hunt",
+    "index": 0,
+    "bounds": {
+      "minX": 511.9911,
+      "minY": 255.496689,
+      "maxX": 720.0089,
+      "maxY": 309.5813
+    },
+    "center": {
+      "x": 616.0,
+      "y": 282.539032
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 140,
+    "reason": "candidate-reachability",
+    "node": "2,11",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-double-shot",
+    "index": 1,
+    "bounds": {
+      "minX": 851.029541,
+      "minY": 242.4974,
+      "maxX": 1068.97046,
+      "maxY": 299.162079
+    },
+    "center": {
+      "x": 960.0,
+      "y": 270.8297
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 140,
+    "reason": "candidate-reachability",
+    "node": "2,11",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-armor-rush",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 63,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 64,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 141,
+    "reason": "candidate-reachability",
+    "node": "2,11",
+    "chestIndex": 1,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "选择",
+    "card": "cc-ember-burst",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 141,
+    "reason": "candidate-reachability",
+    "node": "2,11",
+    "chestIndex": 1,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt13-astrolabe",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 40,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 41,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 141,
+    "reason": "candidate-reachability",
+    "node": "2,11",
+    "chestIndex": 1,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-bandage",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 60,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 61,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 143,
+    "reason": "candidate-reachability",
+    "node": "2,14",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-toxin",
+    "index": 0,
+    "bounds": {
+      "minX": 847.424438,
+      "minY": 233.052017,
+      "maxX": 1072.57556,
+      "maxY": 291.591339
+    },
+    "center": {
+      "x": 960.0,
+      "y": 262.321655
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 147,
+    "reason": "candidate-reachability",
+    "node": "3,1",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt12-sporewall",
+    "index": 0,
+    "bounds": {
+      "minX": 848.902832,
+      "minY": 236.9254,
+      "maxX": 1071.09717,
+      "maxY": 294.695923
+    },
+    "center": {
+      "x": 960.0,
+      "y": 265.810669
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 25,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 26,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 149,
+    "reason": "candidate-reachability",
+    "node": "3,2",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3sp-magicoil",
+    "index": 0,
+    "bounds": {
+      "minX": 847.919,
+      "minY": 234.3479,
+      "maxX": 1072.08093,
+      "maxY": 292.63
+    },
+    "center": {
+      "x": 960.0,
+      "y": 263.488861
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 27,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 28,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 169,
+    "reason": "candidate-reachability",
+    "node": "3,5",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "全部收下",
+    "label": "全部收下",
+    "card": null,
+    "index": null,
+    "bounds": {
+      "minX": 1532.0,
+      "minY": 23.9999981,
+      "maxX": 1692.0,
+      "maxY": 76.00001
+    },
+    "center": {
+      "x": 1612.0,
+      "y": 50.0000038
+    },
+    "centerInMasks": true,
+    "receiver": "全部收下",
+    "hits": [
+      {
+        "name": "全部收下",
+        "receiver": "全部收下"
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "全部收下",
+        "depth": 71,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 72,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 169,
+    "reason": "candidate-reachability",
+    "node": "3,5",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt13-guard",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 169,
+    "reason": "candidate-reachability",
+    "node": "3,5",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-turnabout-potion",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 40,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 41,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 169,
+    "reason": "candidate-reachability",
+    "node": "3,5",
+    "chestIndex": 0,
+    "ordinal": 3,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-purify-arrow",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 60,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 61,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 170,
+    "reason": "candidate-reachability",
+    "node": "3,5",
+    "chestIndex": 1,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt12-raydragon",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 170,
+    "reason": "candidate-reachability",
+    "node": "3,5",
+    "chestIndex": 1,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt2-block",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 170,
+    "reason": "candidate-reachability",
+    "node": "3,5",
+    "chestIndex": 1,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt3-crimson-pouch",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 60,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 61,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 177,
+    "reason": "candidate-reachability",
+    "node": "3,9",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "全部收下",
+    "label": "全部收下",
+    "card": null,
+    "index": null,
+    "bounds": {
+      "minX": 1532.0,
+      "minY": 23.9999981,
+      "maxX": 1692.0,
+      "maxY": 76.00001
+    },
+    "center": {
+      "x": 1612.0,
+      "y": 50.0000038
+    },
+    "centerInMasks": true,
+    "receiver": "全部收下",
+    "hits": [
+      {
+        "name": "全部收下",
+        "receiver": "全部收下"
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "全部收下",
+        "depth": 65,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 66,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 177,
+    "reason": "candidate-reachability",
+    "node": "3,9",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt2-treasuremap",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 20,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 21,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 177,
+    "reason": "candidate-reachability",
+    "node": "3,9",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-master-staff",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 37,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 38,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 177,
+    "reason": "candidate-reachability",
+    "node": "3,9",
+    "chestIndex": 0,
+    "ordinal": 3,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-staff",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 54,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 55,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 178,
+    "reason": "candidate-reachability",
+    "node": "3,9",
+    "chestIndex": 1,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt2-comboarrow",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 178,
+    "reason": "candidate-reachability",
+    "node": "3,9",
+    "chestIndex": 1,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt2-forestarrow",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 178,
+    "reason": "candidate-reachability",
+    "node": "3,9",
+    "chestIndex": 1,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt2-frostsword",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 60,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 61,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 180,
+    "reason": "candidate-reachability",
+    "node": "3,8",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt-keys-bunch",
+    "index": 0,
+    "bounds": {
+      "minX": 850.1643,
+      "minY": 240.230438,
+      "maxX": 1069.83569,
+      "maxY": 297.345
+    },
+    "center": {
+      "x": 960.0,
+      "y": 268.78772
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 20,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 21,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 188,
+    "reason": "candidate-reachability",
+    "node": "3,11",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "全部收下",
+    "label": "全部收下",
+    "card": null,
+    "index": null,
+    "bounds": {
+      "minX": 1532.0,
+      "minY": 23.9999981,
+      "maxX": 1692.0,
+      "maxY": 76.00001
+    },
+    "center": {
+      "x": 1612.0,
+      "y": 50.0000038
+    },
+    "centerInMasks": true,
+    "receiver": "全部收下",
+    "hits": [
+      {
+        "name": "全部收下",
+        "receiver": "全部收下"
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "全部收下",
+        "depth": 76,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 77,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 188,
+    "reason": "candidate-reachability",
+    "node": "3,11",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-flux-slash",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 25,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 26,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 188,
+    "reason": "candidate-reachability",
+    "node": "3,11",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt13-chaos-deck",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 45,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 46,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 188,
+    "reason": "candidate-reachability",
+    "node": "3,11",
+    "chestIndex": 0,
+    "ordinal": 3,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-grope",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 65,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 66,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 189,
+    "reason": "candidate-reachability",
+    "node": "3,11",
+    "chestIndex": 1,
+    "ordinal": 0,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt2-piercearrow",
+    "index": 0,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 266.0,
+      "maxX": 716.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 616.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 189,
+    "reason": "candidate-reachability",
+    "node": "3,11",
+    "chestIndex": 1,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "选择",
+    "card": "cc-cursed-blade",
+    "index": 1,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 266.0,
+      "maxX": 1060.0,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 960.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 189,
+    "reason": "candidate-reachability",
+    "node": "3,11",
+    "chestIndex": 1,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "选择",
+    "card": "tt12-elemburst",
+    "index": 2,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 266.0,
+      "maxX": 1404.00012,
+      "maxY": 318.0
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 292.0
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 63,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 64,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 200,
+    "reason": "candidate-reachability",
+    "node": "3,13",
+    "chestIndex": 0,
+    "ordinal": 0,
+    "name": "全部收下",
+    "label": "全部收下",
+    "card": null,
+    "index": null,
+    "bounds": {
+      "minX": 1532.0,
+      "minY": 23.9999981,
+      "maxX": 1692.0,
+      "maxY": 76.00001
+    },
+    "center": {
+      "x": 1612.0,
+      "y": 50.0000038
+    },
+    "centerInMasks": true,
+    "receiver": "全部收下",
+    "hits": [
+      {
+        "name": "全部收下",
+        "receiver": "全部收下"
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "全部收下",
+        "depth": 128,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 129,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 200,
+    "reason": "candidate-reachability",
+    "node": "3,13",
+    "chestIndex": 0,
+    "ordinal": 1,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3-bandage",
+    "index": 0,
+    "bounds": {
+      "minX": 172.0,
+      "minY": 407.999969,
+      "maxX": 372.0,
+      "maxY": 459.999969
+    },
+    "center": {
+      "x": 271.999969,
+      "y": 434.000031
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 23,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 24,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 200,
+    "reason": "candidate-reachability",
+    "node": "3,13",
+    "chestIndex": 0,
+    "ordinal": 2,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt13-snipe",
+    "index": 1,
+    "bounds": {
+      "minX": 516.0,
+      "minY": 407.999969,
+      "maxX": 716.0,
+      "maxY": 459.999969
+    },
+    "center": {
+      "x": 616.0,
+      "y": 434.000031
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 43,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 44,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 200,
+    "reason": "candidate-reachability",
+    "node": "3,13",
+    "chestIndex": 0,
+    "ordinal": 3,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt13-magazine",
+    "index": 2,
+    "bounds": {
+      "minX": 860.0,
+      "minY": 407.999969,
+      "maxX": 1060.0,
+      "maxY": 459.999969
+    },
+    "center": {
+      "x": 960.0,
+      "y": 434.000031
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 60,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 61,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 200,
+    "reason": "candidate-reachability",
+    "node": "3,13",
+    "chestIndex": 0,
+    "ordinal": 4,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt12-breakthrough",
+    "index": 3,
+    "bounds": {
+      "minX": 1204.0,
+      "minY": 407.999969,
+      "maxX": 1404.00012,
+      "maxY": 459.999969
+    },
+    "center": {
+      "x": 1304.0,
+      "y": 434.000031
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 80,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 81,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 200,
+    "reason": "candidate-reachability",
+    "node": "3,13",
+    "chestIndex": 0,
+    "ordinal": 5,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt3wu-shike",
+    "index": 4,
+    "bounds": {
+      "minX": 1548.0,
+      "minY": 407.999969,
+      "maxX": 1747.99988,
+      "maxY": 459.999969
+    },
+    "center": {
+      "x": 1648.0,
+      "y": 434.000031
+    },
+    "centerInMasks": true,
+    "receiver": "收下",
+    "hits": [
+      {
+        "name": "收下",
+        "receiver": "收下"
+      },
+      {
+        "name": "scroll",
+        "receiver": null
+      },
+      {
+        "name": "mask",
+        "receiver": "mask"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 100,
+        "raycastTarget": true,
+        "culled": false,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 101,
+        "raycastTarget": false,
+        "culled": false,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": true,
+      "independentMaskContains": true,
+      "firstHitNameMatches": true,
+      "firstReceiverNameMatches": true,
+      "receiverNameMatches": true,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+      "otherCandidateBoundsContainCenter": []
+    }
+  },
+  {
+    "step": 1,
+    "tick": 200,
+    "reason": "candidate-reachability",
+    "node": "3,13",
+    "chestIndex": 0,
+    "ordinal": 6,
+    "name": "收下",
+    "label": "收下",
+    "card": "tt-copper",
+    "index": 5,
+    "bounds": {
+      "minX": 860.0,
+      "minY": -143.999985,
+      "maxX": 1060.0,
+      "maxY": -91.9999847
+    },
+    "center": {
+      "x": 960.0,
+      "y": -117.999985
+    },
+    "centerInMasks": false,
+    "receiver": null,
+    "hits": [],
+    "graphics": [
+      {
+        "name": "收下",
+        "depth": 117,
+        "raycastTarget": true,
+        "culled": true,
+        "enabled": true
+      },
+      {
+        "name": "label",
+        "depth": 118,
+        "raycastTarget": false,
+        "culled": true,
+        "enabled": true
+      }
+    ],
+    "masks": [
+      {
+        "name": "scroll",
+        "bounds": {
+          "minX": 55.9999466,
+          "minY": 111.999939,
+          "maxX": 1864.0,
+          "maxY": 943.999939
+        }
+      }
+    ],
+    "audit": {
+      "inScreen": false,
+      "independentMaskContains": false,
+      "firstHitNameMatches": false,
+      "firstReceiverNameMatches": false,
+      "receiverNameMatches": false,
+      "enabledRaycastGraphicHasNativeDepthAndNotCulled": false,
+      "otherCandidateBoundsContainCenter": []
+    }
+  }
+]

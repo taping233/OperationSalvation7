@@ -1,0 +1,2216 @@
+{
+  "catalogTotal": 291,
+  "withRules": 231,
+  "opcodeCount": 47,
+  "entries": [
+    {
+      "op": "heal",
+      "ids": [
+        "starter-emergency-bandage",
+        "tt-jinchuangyao",
+        "tt3-bandage",
+        "tt3-blue-potion",
+        "tt3-holy-water",
+        "tt3-petal",
+        "tt3-savior-elixir",
+        "tt3-silver-runesword",
+        "tt3-holy-staff",
+        "tt4-woodify",
+        "cc-demon",
+        "tt7-holyglow",
+        "tt7-holyheal"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amountField",
+          "reader": "Amount",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "selfDamage",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "upTo",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "perFuelCost",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "when",
+          "reader": "RunRuleOps -> Condition",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "damage",
+      "ids": [
+        "starter-attack",
+        "tt2-swiftarrow",
+        "tt2-comboarrow",
+        "tt2-piercearrow",
+        "tt2-shoot",
+        "tt2-bloodblade",
+        "tt2-forestarrow",
+        "tt3-blood-arrow",
+        "tt3-fatal-pierce",
+        "tt3-fly-arrowhawk",
+        "tt3-frost-slash",
+        "tt3-noon-duel",
+        "tt3-armor-rush",
+        "tt3-double-shot",
+        "tt3-purify-arrow",
+        "tt3-arrow-rain",
+        "tt3-wave-slash",
+        "tt3-qi-wave",
+        "tt3-life-arrow",
+        "tt3-reshot",
+        "tt3-venom-arrow",
+        "tt3-frostfall",
+        "tt3-treasure-hunt",
+        "tt3-flame-storm",
+        "tt3-python-potion",
+        "tt3-chain-lightning",
+        "tt3-fireball",
+        "tt3-skewer",
+        "tt3-nuke-ray",
+        "tt3-ice-spike",
+        "tt3-mixed-potion",
+        "tt3sp-silverthorn",
+        "tt3sp-bloodstorm",
+        "tt3sp-shadowshot",
+        "tt3-thunderblast",
+        "tt3-flux-slash",
+        "tt3-execute",
+        "tt3-sapper-bomb",
+        "tt7-throwblade",
+        "tt7-sneak",
+        "tt7-ghostblade",
+        "tt7-thundergrudge",
+        "tt7-meteorrain",
+        "tt7-whirlwind",
+        "tt7-demonbreaker",
+        "tt7-fullstrike",
+        "tt7-bloodpoison",
+        "cc-demon",
+        "tt7-bloodpotion",
+        "tt7-smite",
+        "tt7-arcanebolt",
+        "tt7-burnharvest",
+        "tt7-twinfireball",
+        "tt7-abysscurse",
+        "tt8-demonslay",
+        "tt8-dragonblade",
+        "cmtn233trmeg",
+        "cmtna0nb1yxt",
+        "cmtn0xt0zr7",
+        "cmtn1lbhbqi4",
+        "cc-chase-slash",
+        "cc-cursed-blade",
+        "cc-double-boom",
+        "cc-ember-burst",
+        "cc-last-stand",
+        "cc-lava-blast",
+        "cc-rapid-fire",
+        "tt12-raydragon",
+        "tt12-elemburst",
+        "tt12-saturate",
+        "tt12-unstableray",
+        "tt12-infectray",
+        "tt12-firecracker",
+        "tt12-chargeray",
+        "tt12-freezeray",
+        "tt13-snipe",
+        "tt13-flame-staff",
+        "tt13-mercy"
+      ],
+      "method": "ApplyRuleDamage",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amountField",
+          "reader": "Amount",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "target",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "lifesteal",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "bonus",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "schedule",
+          "reader": "RunRuleOps schedule deferral",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "hits",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "hitCount",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "perTargetPrice",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amount",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "dmgType",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "infuseBonus",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "when",
+          "reader": "RunRuleOps -> Condition",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "cond",
+          "reader": "RunRuleOps -> Condition",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "graveyard",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "retarget",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "onKill",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "pick",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "spellPowerMul",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "recast",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "range",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "perInfusedInHand",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "nonLethal",
+          "reader": "ApplyRuleDamage",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "restoreConsumed",
+      "ids": [
+        "tt-crystal",
+        "cmtn6bge52qt"
+      ],
+      "method": "RestoreRuleConsumed",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amount",
+          "reader": "RestoreRuleConsumed",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "acquire",
+      "ids": [
+        "tt-token-gold",
+        "tt2-apollo",
+        "tt2-wreck",
+        "tt2-treasuremap",
+        "tt2-jianghu",
+        "tt3-life-arrow",
+        "tt3-dig-treasure",
+        "tt3-mystery-potion",
+        "tt3-treasure-hunt",
+        "tt3-magic-lamp",
+        "tt3sp-magicoil",
+        "tt3-flux-slash",
+        "tt3-wolf-bow",
+        "tt7-ironphalanx",
+        "tt7-bladebloom",
+        "tt7-twinfireball",
+        "tt8-hero-mage",
+        "tt8-archdemon",
+        "cmtn1epgt20j",
+        "cmtmvq6ss84l",
+        "cmtn125e1nk0",
+        "cmtn1gfhczzj",
+        "cmtn1i64j7y7",
+        "cmtn1p9vb5au",
+        "cmtn1wnhhym",
+        "cmtn28jv33wx",
+        "cc-dual-wield",
+        "cc-lava-blast",
+        "tt12-basicdev",
+        "tt12-magicfind",
+        "tt12-breakthrough",
+        "tt12-raygun",
+        "tt13-magazine"
+      ],
+      "method": "AcquireRuleCards",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "pool",
+          "reader": "AcquireRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "n",
+          "reader": "AcquireRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "filter",
+          "reader": "AcquireRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "dest",
+          "reader": "AcquireRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "act",
+          "reader": "AcquireRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "expire",
+          "reader": "AcquireRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "energy",
+      "ids": [
+        "tt2-apollo",
+        "tt3-blue-potion",
+        "tt7-energize"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "n",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "draw",
+      "ids": [
+        "tt2-treasuremap",
+        "tt2-swiftarrow",
+        "tt3-qi-wave",
+        "tt3-hold-fast",
+        "tt3-toxin",
+        "tt3-petal",
+        "tt3-mind-potion",
+        "tt3-firm-barrier",
+        "tt3-grope",
+        "tt3-light-mail",
+        "tt7-throwblade",
+        "tt7-goldencicada",
+        "tt7-ghostblade",
+        "tt7-stealth",
+        "tt7-swordimmortal",
+        "tt7-marchrush",
+        "tt7-armup",
+        "tt7-fullstrike",
+        "tt7-silence",
+        "tt7-arcanebolt",
+        "tt7-abysscurse",
+        "tt8-hero-sword",
+        "tt8-hero-warlock",
+        "tt8-heavensword",
+        "tt7-livingwater",
+        "tt7-arcanescroll",
+        "tt7-talisman",
+        "tt7-ironcharge",
+        "tt7-maxsupply",
+        "tt8-abyss-sovereign",
+        "tt12-felguard",
+        "tt12-backupcell",
+        "tt13-spring"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amountField",
+          "reader": "Amount",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amount",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "range",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "handOps",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "when",
+          "reader": "RunRuleOps -> Condition",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "filter",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "perCurseKinds",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "untilHandN",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "registerRule",
+      "ids": [
+        "tt2-venomstaff",
+        "tt5-galaxy-voyage",
+        "tt7-elementstorm",
+        "tt8-hero-assassin",
+        "tt8-hero-descender",
+        "tt7-darkfort",
+        "cmtn1lbhbqi4",
+        "cmtn1r10xnl1",
+        "tt8-abyss-sovereign",
+        "tt12-felguard"
+      ],
+      "method": "RegisterRuleName",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "rule",
+          "reader": "RegisterRuleName",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "n",
+          "reader": "RegisterRuleName",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "duration",
+          "reader": "RegisterRuleName",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "when",
+          "reader": "RunRuleOps -> Condition",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "armor",
+      "ids": [
+        "tt2-block",
+        "tt2-turtlearmor",
+        "tt2-forestarrow",
+        "tt3-bandage",
+        "tt3-hold-fast",
+        "tt3-dig-treasure",
+        "tt3-holy-shield",
+        "tt3-magic-lamp",
+        "tt3-twinwater-mail",
+        "tt3-grass-armor",
+        "cc-unmoved",
+        "tt7-marchrush",
+        "tt7-bulwark",
+        "tt7-ironphalanx",
+        "tt7-ironcharge",
+        "tt12-sporewall",
+        "tt12-barriermend",
+        "tt13-guard"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "guard",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amount",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amountField",
+          "reader": "Amount",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "priceOf",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "decayAtTurnEnd",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "bonus",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "curse",
+      "ids": [
+        "tt2-piercearrow",
+        "tt3-blood-arrow",
+        "tt3-fatal-pierce",
+        "tt3-frost-slash",
+        "tt3-armor-rush",
+        "tt3-venom-arrow",
+        "tt3-toxin",
+        "tt3wu-shike",
+        "tt3-skewer",
+        "tt3-iceheart-potion",
+        "tt3-nuke-ray",
+        "tt3-thornfield",
+        "tt3-turnabout-potion",
+        "tt3-firm-barrier",
+        "tt3-ice-spike",
+        "tt3-mixed-potion",
+        "tt3-flux-slash",
+        "tt7-throwblade",
+        "tt7-demonbreaker",
+        "tt7-bloodpoison",
+        "tt7-silence",
+        "tt7-abysscurse",
+        "tt8-curse2",
+        "tt8-curse3",
+        "tt8-curse4",
+        "tt8-dragonblade",
+        "cc-cursed-blade",
+        "cc-rot-seed",
+        "tt12-sporewall",
+        "tt12-infectray",
+        "tt12-freezeray",
+        "tt13-bitter-rain"
+      ],
+      "method": "ApplyRuleCurse",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "curse",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "duration",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "target",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "stacks",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "when",
+          "reader": "RunRuleOps -> Condition",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amount",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "randomKinds",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "burst",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "extend",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "bindTarget",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "pick",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "source",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "missingBonusIfCursed",
+          "reader": "ApplyRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "cleanse",
+      "ids": [
+        "tt3-purify-arrow",
+        "tt3-holy-water",
+        "tt3-holy-staff",
+        "tt8-hero-assassin"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "target",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "noDrawNext",
+      "ids": [
+        "tt3-wave-slash"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "handSelect",
+      "ids": [
+        "tt3-frostfall",
+        "tt3-crimson-pouch",
+        "tt7-naturestaff"
+      ],
+      "method": "StartRuleHandSelect",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "n",
+          "reader": "StartRuleHandSelect",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "type",
+          "reader": "StartRuleHandSelect",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "act",
+          "reader": "StartRuleHandSelect",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "schedule",
+      "ids": [
+        "tt3-mystery-potion"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "delay",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "ops",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "energyCap",
+      "ids": [
+        "tt3-nature-form",
+        "tt8-hero-guardian",
+        "tt8-abyss-sovereign"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "n",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "blessing",
+      "ids": [
+        "tt3-houyi-potion",
+        "tt3-demon-potion",
+        "tt3sp-dodge",
+        "tt3-master-staff",
+        "tt3-blooddrinker",
+        "tt7-stealth",
+        "tt8-hero-assassin",
+        "tt8-hero-mage",
+        "tt8-hero-descender",
+        "cmtn1ntxzoc4",
+        "tt8-abyss-sovereign",
+        "tt12-felguard"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "key",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "stacks",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "duration",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "when",
+          "reader": "RunRuleOps -> Condition",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "choice",
+      "ids": [
+        "tt3-magic-lamp",
+        "tt8-hero-summoner"
+      ],
+      "method": "StartRuleChoice",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "options",
+          "reader": "StartRuleChoice",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "otherAfterTurns",
+          "reader": "StartRuleChoice",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "execute",
+      "ids": [
+        "tt3-magic-lamp",
+        "tt3sp-devour",
+        "tt3sp-doom",
+        "tt7-meteorstrong",
+        "cmtn0pbkmnvc"
+      ],
+      "method": "ExecuteRule",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "cap",
+          "reader": "ExecuteRule",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "count",
+          "reader": "ExecuteRule",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "what",
+          "reader": "ExecuteRule",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "when",
+          "reader": "RunRuleOps -> Condition",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "perCurseStacks",
+          "reader": "ExecuteRule",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "freezeFirstEnemies",
+      "ids": [
+        "tt3-magic-lamp"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "count",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "duration",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "stealAtk",
+      "ids": [
+        "tt3sp-shadowbug",
+        "tt8-curse1"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "capTo",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "target",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amount",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "adjustCurse",
+      "ids": [
+        "tt3sp-flowerzhen",
+        "cc-poison-burst"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "curse",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "multiply",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "burst",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "target",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "transform",
+      "ids": [
+        "tt3-immortal-blade",
+        "tt8-hero-warrior"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "what",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "into",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "maxHp",
+      "ids": [
+        "tt3-chaos-eye"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "n",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "deckCap",
+      "ids": [
+        "tt3-chaos-eye"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "n",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "release",
+      "ids": [
+        "tt3-azure-sword",
+        "tt3-reverse-bow"
+      ],
+      "method": "CastRuleHandBatch",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "source",
+          "reader": "CastRuleHandBatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "key",
+          "reader": "CastRuleHandBatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "max",
+          "reader": "CastRuleHandBatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "all",
+          "reader": "CastRuleHandBatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "eachDraw",
+          "reader": "CastRuleHandBatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "consumeHand",
+      "ids": [
+        "tt3-fate-wheel",
+        "tt7-goldencicada",
+        "tt13-chaos-deck"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "all",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "trigger",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "extraTurn",
+      "ids": [
+        "tt3-fate-wheel"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "swapDiscoverCosts",
+      "ids": [
+        "tt3eq-mistbox"
+      ],
+      "method": "StartSwapDiscoverCosts",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "count",
+          "reader": "StartSwapDiscoverCosts",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "discover",
+      "ids": [
+        "tt4-shine-token",
+        "tt12-hitechrd"
+      ],
+      "method": "StartStructuredDiscover",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "count",
+          "reader": "StartStructuredDiscover",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "pool",
+          "reader": "StartStructuredDiscover",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "costDecayPerTurn",
+          "reader": "StartStructuredDiscover",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "flee",
+      "ids": [
+        "tt4-smoke-bomb"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "foeFight",
+      "ids": [
+        "tt7-provoke"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "pick",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "status",
+      "ids": [
+        "tt7-frozenight"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "status",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "target",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "duration",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "castStored",
+      "ids": [
+        "tt7-stratagem"
+      ],
+      "method": "CastStoredRuleCard",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "count",
+          "reader": "CastStoredRuleCard",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "summon",
+      "ids": [
+        "tt7-recruit",
+        "tt8-abyss-sovereign"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "name",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "atk",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "hp",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "count",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "taunt",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "statless",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "castDrawn",
+      "ids": [
+        "tt8-hero-sword"
+      ],
+      "method": "CastRuleHandBatch",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "type",
+          "reader": "CastRuleHandBatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "insertCards",
+      "ids": [
+        "tt8-hero-ranger",
+        "tt8-hero-warlock"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "ids",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "shuffle",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "fillHand",
+      "ids": [
+        "tt8-hero-priest"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "untilHandN",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "perSpellHeal",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "randomCurse",
+      "ids": [
+        "tt8-hero-summoner"
+      ],
+      "method": "RandomRuleCurse",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "target",
+          "reader": "RandomRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "curses",
+          "reader": "RandomRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "stacks",
+          "reader": "RandomRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "preferMissing",
+          "reader": "RandomRuleCurse",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "randomBlessing",
+      "ids": [
+        "tt8-hero-summoner"
+      ],
+      "method": "RandomRuleBlessing",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "target",
+          "reader": "RandomRuleBlessing",
+          "boundary": "semantic-gap:C1"
+        },
+        {
+          "field": "choices",
+          "reader": "RandomRuleBlessing",
+          "boundary": "semantic-gap:C1"
+        },
+        {
+          "field": "preferMissing",
+          "reader": "RandomRuleBlessing",
+          "boundary": "semantic-gap:C1"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "copyRandom",
+      "ids": [
+        "cmtn2jc142dj"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "registerInfusionBonus",
+      "ids": [
+        "cmtn1ntxzoc4"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "every",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "key",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "stacks",
+          "reader": "ApplyRuleOperation",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "castRandomSpells",
+      "ids": [
+        "cc-mana-surge"
+      ],
+      "method": "CastRuleGeneratedBatch",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "count",
+          "reader": "CastRuleGeneratedBatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "infused",
+          "reader": "CastRuleGeneratedBatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "markEnemy",
+      "ids": [
+        "cc-rot-seed",
+        "tt13-soul-contract"
+      ],
+      "method": "FireEnemyMarks",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "event",
+          "reader": "FireEnemyMarks",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "target",
+          "reader": "FireEnemyMarks",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "status",
+          "reader": "FireEnemyMarks",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "multiplier",
+          "reader": "FireEnemyMarks",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "dmgType",
+          "reader": "FireEnemyMarks",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "dest",
+          "reader": "FireEnemyMarks",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "amount",
+          "reader": "FireEnemyMarks",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "recursive",
+          "reader": "FireEnemyMarks",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "refillEnergy",
+      "ids": [
+        "tt12-backupcell"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "restoreHeroSkill",
+      "ids": [
+        "tt13-spring"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "recruitEnemy",
+      "ids": [
+        "tt13-mind-control"
+      ],
+      "method": "ApplyRuleOperation",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "state-preservation-gap:C3"
+        },
+        {
+          "field": "target",
+          "reader": "ApplyRuleOperation",
+          "boundary": "state-preservation-gap:C3"
+        },
+        {
+          "field": "wounded",
+          "reader": "ApplyRuleOperation",
+          "boundary": "state-preservation-gap:C3"
+        },
+        {
+          "field": "excludeBoss",
+          "reader": "ApplyRuleOperation",
+          "boundary": "state-preservation-gap:C3"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "discoverCopies",
+      "ids": [
+        "tt13-stellar-divination"
+      ],
+      "method": "StartStructuredDiscover",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "type",
+          "reader": "StartStructuredDiscover",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "count",
+          "reader": "StartStructuredDiscover",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "copies",
+          "reader": "StartStructuredDiscover",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "castOnDraw",
+          "reader": "StartStructuredDiscover",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    },
+    {
+      "op": "transformCards",
+      "ids": [
+        "tt13-chaos-deck"
+      ],
+      "method": "TransformRuleCards",
+      "fields": [
+        {
+          "field": "op",
+          "reader": "ApplyRuleOperation dispatch",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "source",
+          "reader": "TransformRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "raritySteps",
+          "reader": "TransformRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "ceiling",
+          "reader": "TransformRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        },
+        {
+          "field": "swapCosts",
+          "reader": "TransformRuleCards",
+          "boundary": "consumer-present; no blanket equivalence claim"
+        }
+      ],
+      "extraEntry": "bag.use also traverses BattleItems.ResolveBattleBagOperations when used as item"
+    }
+  ],
+  "battle": {
+    "target": [
+      "starter-attack",
+      "tt2-jianghu",
+      "tt2-swiftarrow",
+      "tt2-block",
+      "tt2-comboarrow",
+      "tt2-piercearrow",
+      "tt2-shoot",
+      "tt2-turtlearmor",
+      "tt2-bloodblade",
+      "tt2-forestarrow",
+      "tt3-blood-arrow",
+      "tt3-fatal-pierce",
+      "tt3-fly-arrowhawk",
+      "tt3-frost-slash",
+      "tt3-noon-duel",
+      "tt3-armor-rush",
+      "tt3-double-shot",
+      "tt3-bandage",
+      "tt3-purify-arrow",
+      "tt3-arrow-rain",
+      "tt3-wave-slash",
+      "tt3-qi-wave",
+      "tt3-hold-fast",
+      "tt3-life-arrow",
+      "tt3-dig-treasure",
+      "tt3-reshot",
+      "tt3-venom-arrow",
+      "tt3-toxin",
+      "tt3-frostfall",
+      "tt3wu-shike",
+      "tt3-mystery-potion",
+      "tt3-treasure-hunt",
+      "tt3-flame-storm",
+      "tt3-nature-form",
+      "tt3-chain-lightning",
+      "tt3-fireball",
+      "tt3-holy-water",
+      "tt3-skewer",
+      "tt3-holy-shield",
+      "tt3-nuke-ray",
+      "tt3-magic-lamp",
+      "tt3-thornfield",
+      "tt3-firm-barrier",
+      "tt3-ice-spike",
+      "tt3-grope",
+      "tt3sp-dodge",
+      "tt3sp-devour",
+      "tt3sp-silverthorn",
+      "tt3sp-magicoil",
+      "tt3sp-shadowbug",
+      "tt3sp-flowerzhen",
+      "tt3sp-bloodstorm",
+      "tt3sp-shadowshot",
+      "tt3-thunderblast",
+      "tt3-flux-slash",
+      "tt3-execute",
+      "tt5-galaxy-voyage",
+      "tt7-throwblade",
+      "tt7-goldencicada",
+      "tt7-sneak",
+      "tt7-ghostblade",
+      "tt7-thundergrudge",
+      "tt7-meteorrain",
+      "tt7-stealth",
+      "cc-unmoved",
+      "tt7-marchrush",
+      "tt7-bulwark",
+      "tt7-armup",
+      "tt7-whirlwind",
+      "tt7-demonbreaker",
+      "tt7-fullstrike",
+      "tt7-ironphalanx",
+      "tt7-bloodpoison",
+      "tt7-silence",
+      "cc-demon",
+      "tt7-holyglow",
+      "tt7-holyheal",
+      "tt7-provoke",
+      "tt7-bloodpotion",
+      "tt7-smite",
+      "tt7-arcanebolt",
+      "tt7-energize",
+      "tt7-frozenight",
+      "tt7-stratagem",
+      "tt7-bladebloom",
+      "tt7-recruit",
+      "tt7-burnharvest",
+      "tt7-twinfireball",
+      "tt7-abysscurse",
+      "tt7-meteorstrong",
+      "tt8-hero-assassin",
+      "tt8-hero-sword",
+      "tt8-hero-ranger",
+      "tt8-hero-warrior",
+      "tt8-hero-guardian",
+      "tt8-hero-priest",
+      "tt8-hero-warlock",
+      "tt8-hero-mage",
+      "tt8-hero-summoner",
+      "tt8-hero-descender",
+      "tt8-dragonblade",
+      "cmtn0pbkmnvc",
+      "cmtn1epgt20j",
+      "cmtn233trmeg",
+      "cmtna0nb1yxt",
+      "tt7-livingwater",
+      "tt7-ironcharge",
+      "tt7-maxsupply",
+      "cmtn0xt0zr7",
+      "cmtn125e1nk0",
+      "cmtn1gfhczzj",
+      "cmtn1i64j7y7",
+      "cmtn1lbhbqi4",
+      "cmtn1ntxzoc4",
+      "cmtn1p9vb5au",
+      "cmtn1wnhhym",
+      "cmtn28jv33wx",
+      "cc-chase-slash",
+      "cc-cursed-blade",
+      "cc-double-boom",
+      "cc-dual-wield",
+      "cc-ember-burst",
+      "cc-last-stand",
+      "cc-lava-blast",
+      "cc-mana-surge",
+      "cc-poison-burst",
+      "cc-rapid-fire",
+      "cc-rot-seed",
+      "tt8-abyss-sovereign",
+      "tt12-raydragon",
+      "tt12-sporewall",
+      "tt12-elemburst",
+      "tt12-hitechrd",
+      "tt12-barriermend",
+      "tt12-saturate",
+      "tt12-felguard",
+      "tt12-unstableray",
+      "tt12-infectray",
+      "tt12-basicdev",
+      "tt12-firecracker",
+      "tt12-magicfind",
+      "tt12-chargeray",
+      "tt12-breakthrough",
+      "tt12-backupcell",
+      "tt12-freezeray",
+      "tt13-spring",
+      "tt13-snipe",
+      "tt13-guard",
+      "tt13-bitter-rain",
+      "tt13-mind-control",
+      "tt13-flame-staff",
+      "tt13-soul-contract",
+      "tt13-stellar-divination",
+      "tt13-chaos-deck",
+      "tt13-mercy"
+    ],
+    "costModifiers": [
+      "tt2-comboarrow",
+      "tt3-holy-shield",
+      "cc-chase-slash",
+      "tt12-barriermend",
+      "tt12-backupcell"
+    ],
+    "requirements": [
+      "tt2-turtlearmor",
+      "tt7-thundergrudge",
+      "tt7-holyheal",
+      "tt7-meteorstrong",
+      "tt8-hero-sealer",
+      "tt12-raydragon",
+      "tt12-felguard"
+    ],
+    "ignoresSilence": [
+      "tt3-mystery-potion"
+    ],
+    "ownedEquipCapacity": [
+      "tt8-hero-guardian"
+    ],
+    "setup": [
+      "tt8-hero-sealer"
+    ],
+    "keepInHand": [
+      "cmtn233trmeg"
+    ],
+    "fuelAllowed": [
+      "cmtn233trmeg"
+    ],
+    "handTransform": [
+      "tt7-imitate"
+    ]
+  },
+  "triggers": {
+    "onPlay": [
+      "starter-attack",
+      "tt2-jianghu",
+      "tt2-swiftarrow",
+      "tt2-block",
+      "tt2-comboarrow",
+      "tt2-piercearrow",
+      "tt2-shoot",
+      "tt2-turtlearmor",
+      "tt2-bloodblade",
+      "tt2-forestarrow",
+      "tt3-blood-arrow",
+      "tt3-fatal-pierce",
+      "tt3-fly-arrowhawk",
+      "tt3-frost-slash",
+      "tt3-noon-duel",
+      "tt3-armor-rush",
+      "tt3-double-shot",
+      "tt3-bandage",
+      "tt3-purify-arrow",
+      "tt3-arrow-rain",
+      "tt3-wave-slash",
+      "tt3-qi-wave",
+      "tt3-hold-fast",
+      "tt3-life-arrow",
+      "tt3-dig-treasure",
+      "tt3-reshot",
+      "tt3-venom-arrow",
+      "tt3-toxin",
+      "tt3-frostfall",
+      "tt3wu-shike",
+      "tt3-mystery-potion",
+      "tt3-treasure-hunt",
+      "tt3-flame-storm",
+      "tt3-nature-form",
+      "tt3-chain-lightning",
+      "tt3-fireball",
+      "tt3-holy-water",
+      "tt3-skewer",
+      "tt3-holy-shield",
+      "tt3-nuke-ray",
+      "tt3-petal",
+      "tt3-magic-lamp",
+      "tt3-thornfield",
+      "tt3-firm-barrier",
+      "tt3-ice-spike",
+      "tt3-grope",
+      "tt3sp-dodge",
+      "tt3sp-devour",
+      "tt3sp-silverthorn",
+      "tt3sp-magicoil",
+      "tt3sp-shadowbug",
+      "tt3sp-flowerzhen",
+      "tt3sp-bloodstorm",
+      "tt3sp-shadowshot",
+      "tt3-thunderblast",
+      "tt3-flux-slash",
+      "tt3-execute",
+      "tt5-galaxy-voyage",
+      "tt7-throwblade",
+      "tt7-goldencicada",
+      "tt7-sneak",
+      "tt7-ghostblade",
+      "tt7-thundergrudge",
+      "tt7-meteorrain",
+      "tt7-stealth",
+      "tt7-swordimmortal",
+      "cc-unmoved",
+      "tt7-marchrush",
+      "tt7-bulwark",
+      "tt7-armup",
+      "tt7-whirlwind",
+      "tt7-demonbreaker",
+      "tt7-fullstrike",
+      "tt7-ironphalanx",
+      "tt7-bloodpoison",
+      "tt7-silence",
+      "cc-demon",
+      "tt7-holyglow",
+      "tt7-holyheal",
+      "tt7-provoke",
+      "tt7-bloodpotion",
+      "tt7-smite",
+      "tt7-arcanebolt",
+      "tt7-energize",
+      "tt7-frozenight",
+      "tt7-stratagem",
+      "tt7-bladebloom",
+      "tt7-recruit",
+      "tt7-elementstorm",
+      "tt7-burnharvest",
+      "tt7-twinfireball",
+      "tt7-abysscurse",
+      "tt7-meteorstrong",
+      "tt8-hero-assassin",
+      "tt8-hero-sword",
+      "tt8-hero-ranger",
+      "tt8-hero-warrior",
+      "tt8-hero-guardian",
+      "tt8-hero-priest",
+      "tt8-hero-warlock",
+      "tt8-hero-mage",
+      "tt8-hero-summoner",
+      "tt8-hero-sealer",
+      "tt8-hero-descender",
+      "tt8-curse1",
+      "tt8-curse2",
+      "tt8-curse3",
+      "tt8-curse4",
+      "tt8-dragonblade",
+      "cmtn0pbkmnvc",
+      "cmtn1epgt20j",
+      "cmtn233trmeg",
+      "cmtn2jc142dj",
+      "cmtna0nb1yxt",
+      "tt7-livingwater",
+      "tt7-ironcharge",
+      "tt7-maxsupply",
+      "tt7-imitate",
+      "cmtn0xt0zr7",
+      "cmtn125e1nk0",
+      "cmtn1gfhczzj",
+      "cmtn1i64j7y7",
+      "cmtn1lbhbqi4",
+      "cmtn1ntxzoc4",
+      "cmtn1p9vb5au",
+      "cmtn1r10xnl1",
+      "cmtn1wnhhym",
+      "cmtn28jv33wx",
+      "cc-chase-slash",
+      "cc-cursed-blade",
+      "cc-double-boom",
+      "cc-dual-wield",
+      "cc-ember-burst",
+      "cc-last-stand",
+      "cc-lava-blast",
+      "cc-mana-surge",
+      "cc-poison-burst",
+      "cc-rapid-fire",
+      "cc-rot-seed",
+      "tt8-abyss-sovereign",
+      "tt12-raydragon",
+      "tt12-sporewall",
+      "tt12-elemburst",
+      "tt12-hitechrd",
+      "tt12-barriermend",
+      "tt12-saturate",
+      "tt12-felguard",
+      "tt12-unstableray",
+      "tt12-infectray",
+      "tt12-basicdev",
+      "tt12-firecracker",
+      "tt12-magicfind",
+      "tt12-chargeray",
+      "tt12-breakthrough",
+      "tt12-backupcell",
+      "tt12-freezeray",
+      "tt13-spring",
+      "tt13-snipe",
+      "tt13-guard",
+      "tt13-bitter-rain",
+      "tt13-mind-control",
+      "tt13-flame-staff",
+      "tt13-soul-contract",
+      "tt13-stellar-divination",
+      "tt13-chaos-deck",
+      "tt13-mercy"
+    ],
+    "onAcquire": [
+      "tt2-apollo"
+    ],
+    "onConsume": [
+      "tt2-wreck",
+      "tt3-azure-sword",
+      "tt3-sapper-bomb",
+      "tt7-arcanescroll"
+    ],
+    "onTurnStart": [
+      "tt3-petal",
+      "tt3-master-staff",
+      "tt3-silver-runesword",
+      "tt3-wolf-bow",
+      "tt7-swordimmortal",
+      "tt8-hero-mage",
+      "cmtn2jc142dj",
+      "tt13-flame-staff"
+    ],
+    "duration": [
+      "tt3-petal"
+    ],
+    "onFreezeDealt": [
+      "tt3-twinwater-mail"
+    ],
+    "onKill": [
+      "tt3-blooddrinker"
+    ],
+    "replay": [
+      "tt7-marchrush"
+    ],
+    "onDraw": [
+      "tt8-curse1",
+      "tt8-curse2",
+      "tt8-curse3",
+      "tt8-curse4",
+      "tt8-demonslay",
+      "tt8-heavensword"
+    ]
+  },
+  "equip": {
+    "onEquip": [
+      "tt2-apollo",
+      "tt2-pearlbox",
+      "tt2-wreck",
+      "tt2-venomstaff",
+      "tt2-frostsword",
+      "tt3-immortal-blade",
+      "tt3-master-staff",
+      "tt3-chaos-eye",
+      "tt3-silver-runesword",
+      "tt3-azure-sword",
+      "tt3-fate-wheel",
+      "tt3-crimson-pouch",
+      "tt3-wolf-bow",
+      "tt3-sapper-bomb",
+      "tt3-twinwater-mail",
+      "tt3-grass-armor",
+      "tt3-blooddrinker",
+      "tt3-element-seal",
+      "tt3-reverse-bow",
+      "tt3eq-mistbox",
+      "tt8-demonslay",
+      "tt8-archdemon",
+      "tt8-heavensword",
+      "tt7-naturestaff",
+      "tt7-darkfort",
+      "tt7-arcanescroll",
+      "tt13-poor-meal",
+      "tt13-magazine",
+      "tt13-scale-armor",
+      "tt13-astrolabe"
+    ],
+    "container": [
+      "tt2-pearlbox",
+      "tt7-stratagem"
+    ],
+    "skill": [
+      "tt2-treasuremap",
+      "tt3-fate-wheel",
+      "tt3-crimson-pouch",
+      "tt3-holy-staff",
+      "tt3-light-mail",
+      "tt3-reverse-bow",
+      "tt3eq-mistbox",
+      "tt7-naturestaff",
+      "tt12-raygun",
+      "tt13-magazine"
+    ],
+    "passive": [
+      "tt2-frostsword",
+      "tt3-silver-runesword",
+      "tt3-staff",
+      "tt3-longsword",
+      "tt3-element-seal",
+      "tt3-deep-diary",
+      "tt8-archdemon",
+      "tt13-poor-meal",
+      "tt13-scale-armor",
+      "tt13-astrolabe"
+    ],
+    "battleStart": [
+      "tt3-immortal-blade",
+      "tt3-chaos-eye",
+      "tt7-talisman"
+    ]
+  },
+  "selfCurse": [],
+  "extend": [
+    {
+      "id": "tt3-firm-barrier",
+      "path": "rules.triggers.onPlay.0",
+      "v": {
+        "op": "curse",
+        "curse": "freeze",
+        "duration": 1,
+        "extend": 1,
+        "target": "chosenEnemy"
+      }
+    }
+  ]
+}

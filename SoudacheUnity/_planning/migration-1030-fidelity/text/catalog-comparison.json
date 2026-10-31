@@ -1,0 +1,22 @@
+{
+  "sourceCards": 291,
+  "generatedCards": 291,
+  "comparedFields": [
+    "name",
+    "desc",
+    "type",
+    "rarity",
+    "cost",
+    "dmg",
+    "heal",
+    "armor",
+    "draw",
+    "infuse",
+    "cls",
+    "dmgType"
+  ],
+  "differences": [],
+  "presentationDataMatches": true,
+  "generatedSha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e",
+  "presentationDataSha256": "4078f1cc6656299f3698141487e806e43f7d4423d03c25babfbe7f6fdd1cfd6e"
+}

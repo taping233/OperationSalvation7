@@ -1,0 +1,63 @@
+{
+  "status": "payment/damage/handOps/response production frozen; target agent integrates shared guards and final combined compile",
+  "timestamp": "2026-10-30T05:52:44.576416",
+  "sourceSha256": {
+    "battle/core/battle.hand-selection.js": "dea462544d333a1c91e302f4240441672b1054a15526535c6980cbe44c7781a2",
+    "battle/core/battle.exec-play.domain.js": "2b6b7eda1142fcb04aba856633d601fef8a9baa852ecdd6ab3e290203e30ec1e",
+    "battle/core/battle.selection-flow.domain.js": "e4d40a28f9bcb9befb69ccda34f6b3472b0019dcf182bb5709e020a1f29fbf95",
+    "battle/view/battle.hand-material-selection.js": "b3ce173ba00060d4879ef2b30c39e729e8e429edec04756cf1e5957899784427",
+    "battle/effects/battle.card-cost.js": "0786371f55adb19cd8a939d8168b4205f375c3ce7fafb28e82ba7649bd9a6954",
+    "battle/core/battle.damage.domain.js": "d8f9f6649041b7568c8ecfe0b7b4c91166d4d5fce1e46235e199bd1610f34eda",
+    "cards/card-legacy-battle-policy.js": "26238480e42874c6d8d08346ee405abc5b9aeac1de655886b208be03570dfa29",
+    "battle/effects/effect-steps.m1.domain.js": "05bdcbbc847fb29ab3787fefec81ad0d6a74f15f19f848beb4dd588b4a247e99",
+    "battle/effects/equipment-semantic-operations.js": "9b62b72b6536942f8b08b69b23d7c9687d7872f9a8a3085f32bf9411b6a13507",
+    "battle/core/battle.engine.factory.domain.js": "d49fd89f58f9bec35478b93329b7ddd95496d29b886bec293511a762a72e86f3"
+  },
+  "privateSourceSha256": {
+    "snapshot\\Battle\\BattleHandPayment.cs": "e383458a42b25bd23c9478cf76b9312f246c9597fe9000c0ac79c02779a5376a",
+    "snapshot\\Battle\\BattleRuleConsumers.cs": "e862713c60b6659ba2b3afaf37624ef1a03aac59c508eebb3281bd4812030d04"
+  },
+  "validation": {
+    "fullSevenAssemblies": "final private build 0 errors, 0 warnings including CanUseAsInfusionFuel; ValidatePreparedFighters integration line deferred to target-agent combined compile",
+    "paymentBoundary": 46,
+    "sourceRound1": "8 vectors identical on hands, consumed, armor, foeHp, energy; cost-rule custom fixtures separate",
+    "sourceRound2": "cicada normal+boss onConsume 4 damage before draw; scale seed1 two enemies [94,100], hp26, hand1",
+    "regression": {
+      "battle": 1814,
+      "forecast": 289,
+      "cardSemantics": 167
+    }
+  },
+  "productionTargets": [
+    "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+    "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+    "Assets/Scripts/Sdt.Core/Battle/BattleRules.cs",
+    "Assets/Scripts/Sdt.Core/Battle/BattlePlayerEffects.cs",
+    "Assets/Scripts/Sdt.Core/Battle/BattleHandPayment.cs",
+    "Assets/Scripts/Sdt.Core/Battle/BattleRuleConsumers.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleRuleInputs.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleEvents.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleFx.cs",
+    "Assets/Scripts/Sdt.Boot/BattleBridge.cs",
+    "Assets/Scripts/Sdt.Boot/BattleViewApi.cs"
+  ],
+  "native": "not run; Root owns editor and real-input acceptance",
+  "pendingIntegration": "target agent owns combined Core/target validation; Root owns native input/render acceptance",
+  "productionSha256": {
+    "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs": "6d7f69a0f5ddf3ccee3832d4ecf61e8681bf5a919cb86eb988f5ae230ce35283",
+    "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs": "6d1f00ab7da20a65ca34489fc6cbadab6b4486b1411c915e09afb69d27c0d14f",
+    "Assets/Scripts/Sdt.Core/Battle/BattleRules.cs": "fddb1f24a80d9387d999214415f7b078b0eb4ade955e36f9072427d09b1798fb",
+    "Assets/Scripts/Sdt.Core/Battle/BattlePlayerEffects.cs": "86ca5202e205dc4803eecb3d9ca68223c69709d73c20bc0d3727db716aca4fc3",
+    "Assets/Scripts/Sdt.Core/Battle/BattleHandPayment.cs": "addb0f680933c19b718f98002678b02c1eab3606563a1ef2612ccbb5c469c2a1",
+    "Assets/Scripts/Sdt.Core/Battle/BattleRuleConsumers.cs": "e862713c60b6659ba2b3afaf37624ef1a03aac59c508eebb3281bd4812030d04",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs": "ac90af36245bfe801c08606da5ad4702d69e0b218cb6264e9284aea52aad8997",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs": "2d148fe7282f0ac645d0ac75ee8aa07406ab1af32b76c6374de33fe28bc55bf4",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleRuleInputs.cs": "d1cbe46f4449471bf34737d8a792a6399c2ed32545a8e9f95647d96e3a482eff",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleEvents.cs": "46f34cb0564eeb93563265ceb23061d5dd9686d7fb295292e4b4d3afd2656f65",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleFx.cs": "719cdb5f7f6fad59989c88fd9d8c943c53e6f3c7cfd31816f1bc9cb658f4aa74",
+    "Assets/Scripts/Sdt.Boot/BattleBridge.cs": "ca224d33483223c7cca32b96aa4782caa1f2258af5ce988473a585f6f8854b4d",
+    "Assets/Scripts/Sdt.Boot/BattleViewApi.cs": "0601875510314479e4e045431d6b5187ae9c4cceb93ba76b43558dd42b913cbf"
+  }
+}

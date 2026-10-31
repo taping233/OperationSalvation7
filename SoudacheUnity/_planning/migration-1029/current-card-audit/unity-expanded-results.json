@@ -1,0 +1,226 @@
+[
+  {
+    "name": "catalogCount",
+    "actual": 291,
+    "expected": 291,
+    "equal": true
+  },
+  {
+    "name": "cardsWithoutRules",
+    "groups": {
+      "\u8D44\u6E90": [
+        "tt-copper",
+        "tt-gold",
+        "tt-econpack",
+        "tt-silver",
+        "tt3-diamond",
+        "tt3-garnet-marble",
+        "pet-egg"
+      ],
+      "\u4E8B\u4EF6": [
+        "tt6-demondeal",
+        "tt6-bandits",
+        "tt6-mystery",
+        "tt6-goldmine",
+        "tt6-goldhammer",
+        "tt6-relief",
+        "tt6-airdrop",
+        "tt6-chestdraw",
+        "tt6-systemsupply",
+        "cmtn7qttxqo4",
+        "ev19-vital",
+        "ev19-pearlbox",
+        "ev19-fireballs",
+        "ev19-classchest",
+        "ev19-recode",
+        "ev19-potions",
+        "ev19-arrows",
+        "ev19-gamble",
+        "ev19-quartermaster"
+      ],
+      "\u751F\u7269": [
+        "foe-rager",
+        "foe-deserter",
+        "foe-greedy_imp",
+        "foe-swaggerer",
+        "foe-tin_mute",
+        "foe-heavy_hammer",
+        "foe-cultist",
+        "foe-fake_apothecary",
+        "foe-camo_sniper",
+        "foe-infantry",
+        "foe-archer",
+        "foe-bandit",
+        "foe-cavalry",
+        "foe-orc_jav",
+        "foe-wolf_rider",
+        "foe-orc_axe",
+        "foe-fire_el",
+        "foe-water_el",
+        "foe-esper_crow",
+        "foe-esper_candle",
+        "foe-grass_el",
+        "foe-esper_silence",
+        "foe-esper_echo",
+        "foe-dragon",
+        "foe-boss_general",
+        "foe-boss_orc",
+        "foe-boss_elem",
+        "cmtn6ulm4boj",
+        "cmtn79743r2n",
+        "cmtn7err0a7",
+        "tt8-healplus",
+        "tt8-energycap",
+        "tt8-nofocus",
+        "tt8-curseimmune"
+      ]
+    }
+  },
+  {
+    "name": "guardAfterPlayerDealtDamage",
+    "actual": 10,
+    "expected": 6,
+    "equal": false
+  },
+  {
+    "name": "astrolabeFirstMartialRefund",
+    "actual": 1,
+    "expected": 1,
+    "equal": true
+  },
+  {
+    "name": "astrolabeSameTurnOppositeTypeNoRefund",
+    "actual": 1,
+    "expected": 0,
+    "equal": false
+  },
+  {
+    "name": "astrolabeSameTurnRepeatedMartialNoRefund",
+    "actual": 1,
+    "expected": 0,
+    "equal": false
+  },
+  {
+    "name": "heroPriestDoesNotDrawFromDeck",
+    "actual": 0,
+    "expected": 5,
+    "equal": false
+  },
+  {
+    "name": "heroPriestGrantedCards",
+    "cards": [
+      "starter-attack",
+      "starter-attack",
+      "starter-attack",
+      "starter-attack",
+      "starter-attack"
+    ]
+  },
+  {
+    "name": "chaosOtherHandGoesToDiscard",
+    "actual": false,
+    "expected": true,
+    "equal": false
+  },
+  {
+    "name": "chaosOtherHandNotConsumed",
+    "actual": true,
+    "expected": false,
+    "equal": false
+  },
+  {
+    "name": "chaosMaintainsCardType",
+    "actual": false,
+    "expected": true,
+    "equal": false
+  },
+  {
+    "name": "chaosTransformedDeck",
+    "cards": [
+      {
+        "uid": "battle-temp:btd:0",
+        "from": "\u6B66\u672F",
+        "to": "\u6B66\u672F",
+        "id": "tt3-dig-treasure"
+      },
+      {
+        "uid": "battle-temp:btd:1",
+        "from": "\u6B66\u672F",
+        "to": "\u6CD5\u672F",
+        "id": "tt3sp-silverthorn"
+      },
+      {
+        "uid": "battle-temp:btd:2",
+        "from": "\u6B66\u672F",
+        "to": "\u6B66\u672F",
+        "id": "tt2-block"
+      },
+      {
+        "uid": "battle-temp:btd:3",
+        "from": "\u6B66\u672F",
+        "to": "\u6B66\u672F",
+        "id": "tt2-comboarrow"
+      },
+      {
+        "uid": "battle-temp:btd:4",
+        "from": "\u6B66\u672F",
+        "to": "\u6CD5\u672F",
+        "id": "tt12-barriermend"
+      }
+    ]
+  },
+  {
+    "name": "shadowbugDuringSteal",
+    "actual": 1,
+    "expected": 1,
+    "equal": true
+  },
+  {
+    "name": "shadowbugEnemyAttackRestoredNextTurn",
+    "actual": 1,
+    "expected": 8,
+    "equal": false
+  },
+  {
+    "name": "shadowbugPlayerAttackRemovedNextTurn",
+    "actual": 7,
+    "expected": 0,
+    "equal": false
+  },
+  {
+    "name": "poisonBurstBypassesArmorHp",
+    "actual": 99,
+    "expected": 94,
+    "equal": false
+  },
+  {
+    "name": "poisonBurstPreservesArmor",
+    "actual": 0,
+    "expected": 5,
+    "equal": false
+  },
+  {
+    "name": "twoFlameFormsEachTrackTwoFuel",
+    "actual": 3,
+    "expected": 4,
+    "equal": false
+  },
+  {
+    "name": "handSelectedPlayRecorded",
+    "actual": false,
+    "expected": true,
+    "equal": false
+  },
+  {
+    "name": "onDrawTokenNotLeftInHand",
+    "actual": true,
+    "expected": false,
+    "equal": false
+  },
+  {
+    "name": "onDrawTokenGoesToDiscard",
+    "actual": false,
+    "expected": true,
+    "equal": false
+  }
+]

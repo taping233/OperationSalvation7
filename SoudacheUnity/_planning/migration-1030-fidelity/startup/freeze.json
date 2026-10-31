@@ -1,0 +1,10 @@
+{
+  "status": "frozen-complete-uncommitted",
+  "privateCompileExit": 0,
+  "nativeVerified": false,
+  "snapshotMatches": {
+    "Assets/Scripts/Sdt.Boot/GameBoot.cs": true,
+    "Assets/Scripts/Sdt.Boot/StartupTransition.cs": true,
+    "Assets/Scripts/Sdt.Boot/NativeDisplayReview.cs": true
+  }
+}

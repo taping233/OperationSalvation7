@@ -1,0 +1,1411 @@
+{
+  "sources": {
+    "altar": "scenes/map-nodes/altar-symbol-1017-v2.webp",
+    "heart": "ui/icons/heart.png",
+    "broken": "ui/icons/broken.png",
+    "coin": "ui/map-hud-1015/gold-is7-v2.webp",
+    "pouch": "ui/semantic-icons/pouch.svg",
+    "sword": "ui/icons/sword.png",
+    "swords": "ui/icons/swords.png",
+    "bag": "ui/semantic-icons/bag.svg",
+    "dice": "ui/icons/dice.png",
+    "upload": "ui/semantic-icons/upload.svg",
+    "download": "ui/icons/download.png",
+    "book": "ui/semantic-icons/book.svg",
+    "cards": "ui/semantic-icons/cards.svg",
+    "home": "ui/semantic-icons/home.svg",
+    "fire": "ui/icons/fire.png",
+    "skull": "ui/icons/skull.png",
+    "gem": "ui/semantic-icons/gem.svg",
+    "lantern": "ui/semantic-icons/lantern.svg",
+    "key": "ui/icons/key.png",
+    "lock": "ui/icons/lock.png",
+    "unlock": "ui/icons/unlock.png",
+    "crystal": "ui/semantic-icons/crystal.svg",
+    "trash": "ui/semantic-icons/trash.svg",
+    "door": "ui/semantic-icons/door.svg",
+    "exit": "ui/semantic-icons/exit.svg",
+    "tools": "ui/semantic-icons/tools.svg",
+    "pocket": "ui/semantic-icons/pocket.svg",
+    "broom": "ui/semantic-icons/broom.svg",
+    "wood": "ui/icons/wood.png",
+    "bread": "ui/icons/bread.png",
+    "trophy": "ui/icons/trophy.png",
+    "paw": "ui/icons/paw.png",
+    "map": "ui/icons/map.png",
+    "notes": "ui/semantic-icons/notes.svg",
+    "medal": "ui/icons/medal.png",
+    "shield": "ui/semantic-icons/shield.svg",
+    "plate": "ui/semantic-icons/plate.svg",
+    "blood": "ui/icons/blood.png",
+    "flask": "ui/icons/flask.png",
+    "scroll": "ui/semantic-icons/scroll.svg",
+    "save": "ui/semantic-icons/save.svg",
+    "helmet": "ui/semantic-icons/helmet.svg",
+    "question": "ui/semantic-icons/question.svg",
+    "sparkles": "ui/semantic-icons/sparkles.svg",
+    "bolt": "ui/icons/bolt.png",
+    "recycle": "ui/icons/recycle.png",
+    "check": "ui/icons/check.png",
+    "cross": "ui/icons/cross.png",
+    "arrow": "ui/semantic-icons/arrow.svg",
+    "play": "ui/semantic-icons/play.svg",
+    "skip": "ui/semantic-icons/skip.svg",
+    "hourglass": "ui/semantic-icons/hourglass.svg",
+    "gear": "ui/icons/gear.png",
+    "pen": "ui/semantic-icons/pen.svg",
+    "folder": "ui/semantic-icons/folder.svg",
+    "archive": "ui/semantic-icons/archive.svg",
+    "mouse": "ui/semantic-icons/mouse.svg",
+    "flag": "ui/icons/flag.png",
+    "slime": "ui/icons/slime.png",
+    "demon": "ui/icons/demon.png",
+    "runner": "ui/icons/runner.png",
+    "card-back": "ui/semantic-icons/card-back.svg",
+    "card-craft": "ui/semantic-icons/card-craft.svg",
+    "card-library": "ui/semantic-icons/card-library.svg",
+    "chart": "ui/semantic-icons/chart.svg",
+    "consumed-pile": "ui/semantic-icons/consumed-pile.svg",
+    "draw-card": "ui/semantic-icons/draw-card.svg",
+    "draw-pile": "ui/semantic-icons/draw-pile.svg",
+    "hand-pages": "ui/semantic-icons/hand-pages.svg",
+    "infinity": "ui/semantic-icons/infinity.svg",
+    "info": "ui/semantic-icons/info.svg",
+    "infuse": "ui/semantic-icons/infuse.svg",
+    "pass-fragment": "ui/semantic-icons/pass-fragment.svg",
+    "pearl-box": "ui/semantic-icons/pearl-box.svg",
+    "pet-egg": "ui/semantic-icons/pet-egg.svg",
+    "pin": "ui/semantic-icons/pin.svg",
+    "safe-slot": "ui/semantic-icons/safe-slot.svg",
+    "search": "ui/semantic-icons/search.svg",
+    "sell-cards": "ui/semantic-icons/sell-cards.svg",
+    "spell-pouch": "ui/semantic-icons/spell-pouch.svg",
+    "spell-power": "ui/semantic-icons/spell-power.svg",
+    "status-armor-break": "ui/semantic-icons/status-armor-break.svg",
+    "status-atk-down": "ui/semantic-icons/status-atk-down.svg",
+    "status-atk-up": "ui/semantic-icons/status-atk-up.svg",
+    "status-bleed": "ui/semantic-icons/status-bleed.svg",
+    "status-cosmos-form": "ui/semantic-icons/status-cosmos-form.svg",
+    "status-dodge": "ui/semantic-icons/status-dodge.svg",
+    "status-freeze": "ui/semantic-icons/status-freeze.svg",
+    "status-heal-ban": "ui/semantic-icons/status-heal-ban.svg",
+    "status-immune": "ui/semantic-icons/status-immune.svg",
+    "status-moon-form": "ui/semantic-icons/status-moon-form.svg",
+    "status-poison": "ui/semantic-icons/status-poison.svg",
+    "status-reduce": "ui/semantic-icons/status-reduce.svg",
+    "status-silence": "ui/semantic-icons/status-silence.svg",
+    "status-spell-up": "ui/semantic-icons/status-spell-up.svg",
+    "status-stealth": "ui/semantic-icons/status-stealth.svg",
+    "status-sword-form": "ui/semantic-icons/status-sword-form.svg",
+    "warning": "ui/semantic-icons/warning.svg"
+  },
+  "vectors": [
+    {
+      "input": "[[icon:altar]]",
+      "keys": [
+        "altar"
+      ]
+    },
+    {
+      "input": "[[icon:heart]]",
+      "keys": [
+        "heart"
+      ]
+    },
+    {
+      "input": "[[icon:broken]]",
+      "keys": [
+        "broken"
+      ]
+    },
+    {
+      "input": "[[icon:coin]]",
+      "keys": [
+        "coin"
+      ]
+    },
+    {
+      "input": "[[icon:pouch]]",
+      "keys": [
+        "pouch"
+      ]
+    },
+    {
+      "input": "[[icon:sword]]",
+      "keys": [
+        "sword"
+      ]
+    },
+    {
+      "input": "[[icon:swords]]",
+      "keys": [
+        "swords"
+      ]
+    },
+    {
+      "input": "[[icon:bag]]",
+      "keys": [
+        "bag"
+      ]
+    },
+    {
+      "input": "[[icon:dice]]",
+      "keys": [
+        "dice"
+      ]
+    },
+    {
+      "input": "[[icon:upload]]",
+      "keys": [
+        "upload"
+      ]
+    },
+    {
+      "input": "[[icon:download]]",
+      "keys": [
+        "download"
+      ]
+    },
+    {
+      "input": "[[icon:book]]",
+      "keys": [
+        "book"
+      ]
+    },
+    {
+      "input": "[[icon:cards]]",
+      "keys": [
+        "cards"
+      ]
+    },
+    {
+      "input": "[[icon:home]]",
+      "keys": [
+        "home"
+      ]
+    },
+    {
+      "input": "[[icon:fire]]",
+      "keys": [
+        "fire"
+      ]
+    },
+    {
+      "input": "[[icon:skull]]",
+      "keys": [
+        "skull"
+      ]
+    },
+    {
+      "input": "[[icon:gem]]",
+      "keys": [
+        "gem"
+      ]
+    },
+    {
+      "input": "[[icon:lantern]]",
+      "keys": [
+        "lantern"
+      ]
+    },
+    {
+      "input": "[[icon:key]]",
+      "keys": [
+        "key"
+      ]
+    },
+    {
+      "input": "[[icon:lock]]",
+      "keys": [
+        "lock"
+      ]
+    },
+    {
+      "input": "[[icon:unlock]]",
+      "keys": [
+        "unlock"
+      ]
+    },
+    {
+      "input": "[[icon:crystal]]",
+      "keys": [
+        "crystal"
+      ]
+    },
+    {
+      "input": "[[icon:trash]]",
+      "keys": [
+        "trash"
+      ]
+    },
+    {
+      "input": "[[icon:door]]",
+      "keys": [
+        "door"
+      ]
+    },
+    {
+      "input": "[[icon:exit]]",
+      "keys": [
+        "exit"
+      ]
+    },
+    {
+      "input": "[[icon:tools]]",
+      "keys": [
+        "tools"
+      ]
+    },
+    {
+      "input": "[[icon:pocket]]",
+      "keys": [
+        "pocket"
+      ]
+    },
+    {
+      "input": "[[icon:broom]]",
+      "keys": [
+        "broom"
+      ]
+    },
+    {
+      "input": "[[icon:wood]]",
+      "keys": [
+        "wood"
+      ]
+    },
+    {
+      "input": "[[icon:bread]]",
+      "keys": [
+        "bread"
+      ]
+    },
+    {
+      "input": "[[icon:trophy]]",
+      "keys": [
+        "trophy"
+      ]
+    },
+    {
+      "input": "[[icon:paw]]",
+      "keys": [
+        "paw"
+      ]
+    },
+    {
+      "input": "[[icon:map]]",
+      "keys": [
+        "map"
+      ]
+    },
+    {
+      "input": "[[icon:notes]]",
+      "keys": [
+        "notes"
+      ]
+    },
+    {
+      "input": "[[icon:medal]]",
+      "keys": [
+        "medal"
+      ]
+    },
+    {
+      "input": "[[icon:shield]]",
+      "keys": [
+        "shield"
+      ]
+    },
+    {
+      "input": "[[icon:plate]]",
+      "keys": [
+        "plate"
+      ]
+    },
+    {
+      "input": "[[icon:blood]]",
+      "keys": [
+        "blood"
+      ]
+    },
+    {
+      "input": "[[icon:flask]]",
+      "keys": [
+        "flask"
+      ]
+    },
+    {
+      "input": "[[icon:scroll]]",
+      "keys": [
+        "scroll"
+      ]
+    },
+    {
+      "input": "[[icon:save]]",
+      "keys": [
+        "save"
+      ]
+    },
+    {
+      "input": "[[icon:helmet]]",
+      "keys": [
+        "helmet"
+      ]
+    },
+    {
+      "input": "[[icon:question]]",
+      "keys": [
+        "question"
+      ]
+    },
+    {
+      "input": "[[icon:sparkles]]",
+      "keys": [
+        "sparkles"
+      ]
+    },
+    {
+      "input": "[[icon:bolt]]",
+      "keys": [
+        "bolt"
+      ]
+    },
+    {
+      "input": "[[icon:recycle]]",
+      "keys": [
+        "recycle"
+      ]
+    },
+    {
+      "input": "[[icon:check]]",
+      "keys": [
+        "check"
+      ]
+    },
+    {
+      "input": "[[icon:cross]]",
+      "keys": [
+        "cross"
+      ]
+    },
+    {
+      "input": "[[icon:arrow]]",
+      "keys": [
+        "arrow"
+      ]
+    },
+    {
+      "input": "[[icon:play]]",
+      "keys": [
+        "play"
+      ]
+    },
+    {
+      "input": "[[icon:skip]]",
+      "keys": [
+        "skip"
+      ]
+    },
+    {
+      "input": "[[icon:hourglass]]",
+      "keys": [
+        "hourglass"
+      ]
+    },
+    {
+      "input": "[[icon:gear]]",
+      "keys": [
+        "gear"
+      ]
+    },
+    {
+      "input": "[[icon:pen]]",
+      "keys": [
+        "pen"
+      ]
+    },
+    {
+      "input": "[[icon:folder]]",
+      "keys": [
+        "folder"
+      ]
+    },
+    {
+      "input": "[[icon:archive]]",
+      "keys": [
+        "archive"
+      ]
+    },
+    {
+      "input": "[[icon:mouse]]",
+      "keys": [
+        "mouse"
+      ]
+    },
+    {
+      "input": "[[icon:flag]]",
+      "keys": [
+        "flag"
+      ]
+    },
+    {
+      "input": "[[icon:slime]]",
+      "keys": [
+        "slime"
+      ]
+    },
+    {
+      "input": "[[icon:demon]]",
+      "keys": [
+        "demon"
+      ]
+    },
+    {
+      "input": "[[icon:runner]]",
+      "keys": [
+        "runner"
+      ]
+    },
+    {
+      "input": "[[icon:card-back]]",
+      "keys": [
+        "card-back"
+      ]
+    },
+    {
+      "input": "[[icon:card-craft]]",
+      "keys": [
+        "card-craft"
+      ]
+    },
+    {
+      "input": "[[icon:card-library]]",
+      "keys": [
+        "card-library"
+      ]
+    },
+    {
+      "input": "[[icon:chart]]",
+      "keys": [
+        "chart"
+      ]
+    },
+    {
+      "input": "[[icon:consumed-pile]]",
+      "keys": [
+        "consumed-pile"
+      ]
+    },
+    {
+      "input": "[[icon:draw-card]]",
+      "keys": [
+        "draw-card"
+      ]
+    },
+    {
+      "input": "[[icon:draw-pile]]",
+      "keys": [
+        "draw-pile"
+      ]
+    },
+    {
+      "input": "[[icon:hand-pages]]",
+      "keys": [
+        "hand-pages"
+      ]
+    },
+    {
+      "input": "[[icon:infinity]]",
+      "keys": [
+        "infinity"
+      ]
+    },
+    {
+      "input": "[[icon:info]]",
+      "keys": [
+        "info"
+      ]
+    },
+    {
+      "input": "[[icon:infuse]]",
+      "keys": [
+        "infuse"
+      ]
+    },
+    {
+      "input": "[[icon:pass-fragment]]",
+      "keys": [
+        "pass-fragment"
+      ]
+    },
+    {
+      "input": "[[icon:pearl-box]]",
+      "keys": [
+        "pearl-box"
+      ]
+    },
+    {
+      "input": "[[icon:pet-egg]]",
+      "keys": [
+        "pet-egg"
+      ]
+    },
+    {
+      "input": "[[icon:pin]]",
+      "keys": [
+        "pin"
+      ]
+    },
+    {
+      "input": "[[icon:safe-slot]]",
+      "keys": [
+        "safe-slot"
+      ]
+    },
+    {
+      "input": "[[icon:search]]",
+      "keys": [
+        "search"
+      ]
+    },
+    {
+      "input": "[[icon:sell-cards]]",
+      "keys": [
+        "sell-cards"
+      ]
+    },
+    {
+      "input": "[[icon:spell-pouch]]",
+      "keys": [
+        "spell-pouch"
+      ]
+    },
+    {
+      "input": "[[icon:spell-power]]",
+      "keys": [
+        "spell-power"
+      ]
+    },
+    {
+      "input": "[[icon:status-armor-break]]",
+      "keys": [
+        "status-armor-break"
+      ]
+    },
+    {
+      "input": "[[icon:status-atk-down]]",
+      "keys": [
+        "status-atk-down"
+      ]
+    },
+    {
+      "input": "[[icon:status-atk-up]]",
+      "keys": [
+        "status-atk-up"
+      ]
+    },
+    {
+      "input": "[[icon:status-bleed]]",
+      "keys": [
+        "status-bleed"
+      ]
+    },
+    {
+      "input": "[[icon:status-cosmos-form]]",
+      "keys": [
+        "status-cosmos-form"
+      ]
+    },
+    {
+      "input": "[[icon:status-dodge]]",
+      "keys": [
+        "status-dodge"
+      ]
+    },
+    {
+      "input": "[[icon:status-freeze]]",
+      "keys": [
+        "status-freeze"
+      ]
+    },
+    {
+      "input": "[[icon:status-heal-ban]]",
+      "keys": [
+        "status-heal-ban"
+      ]
+    },
+    {
+      "input": "[[icon:status-immune]]",
+      "keys": [
+        "status-immune"
+      ]
+    },
+    {
+      "input": "[[icon:status-moon-form]]",
+      "keys": [
+        "status-moon-form"
+      ]
+    },
+    {
+      "input": "[[icon:status-poison]]",
+      "keys": [
+        "status-poison"
+      ]
+    },
+    {
+      "input": "[[icon:status-reduce]]",
+      "keys": [
+        "status-reduce"
+      ]
+    },
+    {
+      "input": "[[icon:status-silence]]",
+      "keys": [
+        "status-silence"
+      ]
+    },
+    {
+      "input": "[[icon:status-spell-up]]",
+      "keys": [
+        "status-spell-up"
+      ]
+    },
+    {
+      "input": "[[icon:status-stealth]]",
+      "keys": [
+        "status-stealth"
+      ]
+    },
+    {
+      "input": "[[icon:status-sword-form]]",
+      "keys": [
+        "status-sword-form"
+      ]
+    },
+    {
+      "input": "[[icon:warning]]",
+      "keys": [
+        "warning"
+      ]
+    },
+    {
+      "input": "❤",
+      "keys": [
+        "heart"
+      ]
+    },
+    {
+      "input": "💚",
+      "keys": [
+        "heart"
+      ]
+    },
+    {
+      "input": "💗",
+      "keys": [
+        "heart"
+      ]
+    },
+    {
+      "input": "💔",
+      "keys": [
+        "heart"
+      ]
+    },
+    {
+      "input": "💖",
+      "keys": [
+        "heart"
+      ]
+    },
+    {
+      "input": "🚑",
+      "keys": [
+        "heart"
+      ]
+    },
+    {
+      "input": "🪙",
+      "keys": [
+        "coin"
+      ]
+    },
+    {
+      "input": "💰",
+      "keys": [
+        "coin"
+      ]
+    },
+    {
+      "input": "💸",
+      "keys": [
+        "coin"
+      ]
+    },
+    {
+      "input": "🗡",
+      "keys": [
+        "sword"
+      ]
+    },
+    {
+      "input": "⚔",
+      "keys": [
+        "swords"
+      ]
+    },
+    {
+      "input": "🏹",
+      "keys": [
+        "swords"
+      ]
+    },
+    {
+      "input": "🎯",
+      "keys": [
+        "swords"
+      ]
+    },
+    {
+      "input": "🎒",
+      "keys": [
+        "bag"
+      ]
+    },
+    {
+      "input": "🛒",
+      "keys": [
+        "bag"
+      ]
+    },
+    {
+      "input": "🎲",
+      "keys": [
+        "dice"
+      ]
+    },
+    {
+      "input": "📤",
+      "keys": [
+        "upload"
+      ]
+    },
+    {
+      "input": "📥",
+      "keys": [
+        "download"
+      ]
+    },
+    {
+      "input": "📚",
+      "keys": [
+        "book"
+      ]
+    },
+    {
+      "input": "🎴",
+      "keys": [
+        "cards"
+      ]
+    },
+    {
+      "input": "🃏",
+      "keys": [
+        "cards"
+      ]
+    },
+    {
+      "input": "🏠",
+      "keys": [
+        "home"
+      ]
+    },
+    {
+      "input": "🏕",
+      "keys": [
+        "home"
+      ]
+    },
+    {
+      "input": "🔥",
+      "keys": [
+        "fire"
+      ]
+    },
+    {
+      "input": "💥",
+      "keys": [
+        "fire"
+      ]
+    },
+    {
+      "input": "💀",
+      "keys": [
+        "skull"
+      ]
+    },
+    {
+      "input": "☠",
+      "keys": [
+        "skull"
+      ]
+    },
+    {
+      "input": "🪦",
+      "keys": [
+        "skull"
+      ]
+    },
+    {
+      "input": "💎",
+      "keys": [
+        "gem"
+      ]
+    },
+    {
+      "input": "💡",
+      "keys": [
+        "lantern"
+      ]
+    },
+    {
+      "input": "🔑",
+      "keys": [
+        "key"
+      ]
+    },
+    {
+      "input": "🗝",
+      "keys": [
+        "key"
+      ]
+    },
+    {
+      "input": "🔒",
+      "keys": [
+        "lock"
+      ]
+    },
+    {
+      "input": "🔓",
+      "keys": [
+        "unlock"
+      ]
+    },
+    {
+      "input": "🔮",
+      "keys": [
+        "crystal"
+      ]
+    },
+    {
+      "input": "🔷",
+      "keys": [
+        "crystal"
+      ]
+    },
+    {
+      "input": "🗑",
+      "keys": [
+        "trash"
+      ]
+    },
+    {
+      "input": "🚪",
+      "keys": [
+        "door"
+      ]
+    },
+    {
+      "input": "🚁",
+      "keys": [
+        "exit"
+      ]
+    },
+    {
+      "input": "🛠",
+      "keys": [
+        "tools"
+      ]
+    },
+    {
+      "input": "🔨",
+      "keys": [
+        "tools"
+      ]
+    },
+    {
+      "input": "⛓",
+      "keys": [
+        "tools"
+      ]
+    },
+    {
+      "input": "🧰",
+      "keys": [
+        "tools"
+      ]
+    },
+    {
+      "input": "🧳",
+      "keys": [
+        "pocket"
+      ]
+    },
+    {
+      "input": "👝",
+      "keys": [
+        "pocket"
+      ]
+    },
+    {
+      "input": "🧹",
+      "keys": [
+        "broom"
+      ]
+    },
+    {
+      "input": "🪵",
+      "keys": [
+        "wood"
+      ]
+    },
+    {
+      "input": "🌿",
+      "keys": [
+        "wood"
+      ]
+    },
+    {
+      "input": "🍞",
+      "keys": [
+        "bread"
+      ]
+    },
+    {
+      "input": "🏆",
+      "keys": [
+        "trophy"
+      ]
+    },
+    {
+      "input": "🐾",
+      "keys": [
+        "paw"
+      ]
+    },
+    {
+      "input": "🐕",
+      "keys": [
+        "paw"
+      ]
+    },
+    {
+      "input": "🗺",
+      "keys": [
+        "map"
+      ]
+    },
+    {
+      "input": "📝",
+      "keys": [
+        "notes"
+      ]
+    },
+    {
+      "input": "🎖",
+      "keys": [
+        "medal"
+      ]
+    },
+    {
+      "input": "🏅",
+      "keys": [
+        "medal"
+      ]
+    },
+    {
+      "input": "🛡",
+      "keys": [
+        "shield"
+      ]
+    },
+    {
+      "input": "🪨",
+      "keys": [
+        "plate"
+      ]
+    },
+    {
+      "input": "🩸",
+      "keys": [
+        "blood"
+      ]
+    },
+    {
+      "input": "🧪",
+      "keys": [
+        "flask"
+      ]
+    },
+    {
+      "input": "⚗",
+      "keys": [
+        "flask"
+      ]
+    },
+    {
+      "input": "📜",
+      "keys": [
+        "scroll"
+      ]
+    },
+    {
+      "input": "💾",
+      "keys": [
+        "save"
+      ]
+    },
+    {
+      "input": "🦸",
+      "keys": [
+        "helmet"
+      ]
+    },
+    {
+      "input": "❔",
+      "keys": [
+        "question"
+      ]
+    },
+    {
+      "input": "❓",
+      "keys": [
+        "question"
+      ]
+    },
+    {
+      "input": "✨",
+      "keys": [
+        "sparkles"
+      ]
+    },
+    {
+      "input": "🌟",
+      "keys": [
+        "sparkles"
+      ]
+    },
+    {
+      "input": "🌌",
+      "keys": [
+        "sparkles"
+      ]
+    },
+    {
+      "input": "💫",
+      "keys": [
+        "sparkles"
+      ]
+    },
+    {
+      "input": "⭐",
+      "keys": [
+        "sparkles"
+      ]
+    },
+    {
+      "input": "⚡",
+      "keys": [
+        "bolt"
+      ]
+    },
+    {
+      "input": "♻",
+      "keys": [
+        "recycle"
+      ]
+    },
+    {
+      "input": "🔄",
+      "keys": [
+        "recycle"
+      ]
+    },
+    {
+      "input": "🔀",
+      "keys": [
+        "recycle"
+      ]
+    },
+    {
+      "input": "✔",
+      "keys": [
+        "check"
+      ]
+    },
+    {
+      "input": "✅",
+      "keys": [
+        "check"
+      ]
+    },
+    {
+      "input": "✕",
+      "keys": [
+        "cross"
+      ]
+    },
+    {
+      "input": "❌",
+      "keys": [
+        "cross"
+      ]
+    },
+    {
+      "input": "🚫",
+      "keys": [
+        "cross"
+      ]
+    },
+    {
+      "input": "🤐",
+      "keys": [
+        "cross"
+      ]
+    },
+    {
+      "input": "➡",
+      "keys": [
+        "arrow"
+      ]
+    },
+    {
+      "input": "📈",
+      "keys": [
+        "arrow"
+      ]
+    },
+    {
+      "input": "📉",
+      "keys": [
+        "arrow"
+      ]
+    },
+    {
+      "input": "▶",
+      "keys": [
+        "play"
+      ]
+    },
+    {
+      "input": "⏭",
+      "keys": [
+        "skip"
+      ]
+    },
+    {
+      "input": "⏳",
+      "keys": [
+        "hourglass"
+      ]
+    },
+    {
+      "input": "⌛",
+      "keys": [
+        "hourglass"
+      ]
+    },
+    {
+      "input": "⚙",
+      "keys": [
+        "gear"
+      ]
+    },
+    {
+      "input": "🔊",
+      "keys": [
+        "gear"
+      ]
+    },
+    {
+      "input": "📡",
+      "keys": [
+        "gear"
+      ]
+    },
+    {
+      "input": "✒",
+      "keys": [
+        "pen"
+      ]
+    },
+    {
+      "input": "✎",
+      "keys": [
+        "pen"
+      ]
+    },
+    {
+      "input": "📁",
+      "keys": [
+        "folder"
+      ]
+    },
+    {
+      "input": "🗂",
+      "keys": [
+        "archive"
+      ]
+    },
+    {
+      "input": "🗃",
+      "keys": [
+        "archive"
+      ]
+    },
+    {
+      "input": "📦",
+      "keys": [
+        "archive"
+      ]
+    },
+    {
+      "input": "🖱",
+      "keys": [
+        "mouse"
+      ]
+    },
+    {
+      "input": "🏳",
+      "keys": [
+        "flag"
+      ]
+    },
+    {
+      "input": "👾",
+      "keys": [
+        "slime"
+      ]
+    },
+    {
+      "input": "👹",
+      "keys": [
+        "demon"
+      ]
+    },
+    {
+      "input": "😈",
+      "keys": [
+        "demon"
+      ]
+    },
+    {
+      "input": "🐉",
+      "keys": [
+        "demon"
+      ]
+    },
+    {
+      "input": "🏃",
+      "keys": [
+        "runner"
+      ]
+    },
+    {
+      "input": "👻",
+      "keys": [
+        "runner"
+      ]
+    },
+    {
+      "input": "💨",
+      "keys": [
+        "runner"
+      ]
+    },
+    {
+      "input": "⚠",
+      "keys": [
+        "warning"
+      ]
+    },
+    {
+      "input": "🔍",
+      "keys": [
+        "search"
+      ]
+    },
+    {
+      "input": "♾",
+      "keys": [
+        "infinity"
+      ]
+    },
+    {
+      "input": "∞",
+      "keys": [
+        "infinity"
+      ]
+    },
+    {
+      "input": "📌",
+      "keys": [
+        "pin"
+      ]
+    },
+    {
+      "input": "❄",
+      "keys": [
+        "status-freeze"
+      ]
+    },
+    {
+      "input": "生命 [[icon:heart]] 20 · [[icon:coin]] 30",
+      "keys": [
+        "heart",
+        "coin"
+      ]
+    },
+    {
+      "input": "<b>卡牌 [[icon:cards]]</b>\n<color=red>危险 [[icon:skull]]</color>",
+      "keys": [
+        "cards",
+        "skull"
+      ]
+    },
+    {
+      "input": "<size=32>[[icon:shield]]护甲</size> [[icon:bolt]]",
+      "keys": [
+        "shield",
+        "bolt"
+      ]
+    },
+    {
+      "input": "A<color=red>[[icon:archive]]</color>B",
+      "keys": [
+        "archive"
+      ]
+    },
+    {
+      "input": "🦄",
+      "keys": [
+        "question"
+      ]
+    },
+    {
+      "input": "[[icon:unregistered]]",
+      "keys": [
+        "question"
+      ]
+    },
+    {
+      "input": "没有图标",
+      "keys": []
+    },
+    {
+      "input": "",
+      "keys": []
+    }
+  ]
+}

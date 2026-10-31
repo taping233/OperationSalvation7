@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "sourceAndOutputHashes": 468,
+  "resourceMappings": 481,
+  "pixelIdenticalImages": 42,
+  "currentCards": 291,
+  "missingSourceImages": [
+    "cards/equip-tt3-dark-blade.webp",
+    "cards/spell-cc-manasupply.webp"
+  ],
+  "missingSourceImagesUsedByCurrentCards": [],
+  "failures": []
+}

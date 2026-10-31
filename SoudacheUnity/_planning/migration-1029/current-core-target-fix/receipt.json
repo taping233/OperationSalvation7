@@ -1,0 +1,54 @@
+{
+  "status": "production frozen; Root native acceptance pending",
+  "timestamp": "2026-10-30T06:05:30.849452",
+  "checks": {
+    "sourceVsCoreVectors": [
+      {
+        "name": "immortal",
+        "equal": true
+      },
+      {
+        "name": "dart",
+        "equal": true
+      },
+      {
+        "name": "provoke",
+        "equal": true
+      },
+      {
+        "name": "fuel",
+        "equal": true
+      }
+    ],
+    "targetBoundary": 47,
+    "integration": 1814,
+    "forecast": 289,
+    "cardSemantics": 167,
+    "allSevenAssemblies": "0 errors; 10 pre-existing warnings in Res/UI; isolated output",
+    "sourceEvidence": "Reuse independent true-source process source-round2-results with unchanged source SHA; Core rerun in this private snapshot"
+  },
+  "productionSha256": {
+    "Sdt.Core/Battle/BattleSession.cs": "5cba112d6c6e75cfb0214863bfbbdd06db36cca376f4bfc2a0b771afef73a084",
+    "Sdt.Core/Battle/StructuredRules.cs": "1332ded1d935a2f17116dfe3c228ed87087bc6baf2062013f4dc3c9d31490afa",
+    "Sdt.Core/Battle/BattleTargetSelections.cs": "94e47885b7e54f7827e0f367a59355bcffc2525b4de87bba0eba9a71fc6e0268",
+    "Sdt.Core/Battle/BattleHandRetention.cs": "7322fb225faaba9ba148da64a8c280f122673c8e4bfe5ed2878a38d395883a1e",
+    "Sdt.Core/Battle/BattleHandPayment.cs": "addb0f680933c19b718f98002678b02c1eab3606563a1ef2612ccbb5c469c2a1",
+    "Sdt.UI/Screens/Battle/BattleScreen.cs": "ac90af36245bfe801c08606da5ad4702d69e0b218cb6264e9284aea52aad8997",
+    "Sdt.UI/Screens/Battle/BattlePresentation.cs": "2d148fe7282f0ac645d0ac75ee8aa07406ab1af32b76c6374de33fe28bc55bf4",
+    "Sdt.UI/Screens/Battle/BattleEvents.cs": "46f34cb0564eeb93563265ceb23061d5dd9686d7fb295292e4b4d3afd2656f65",
+    "Sdt.UI/Screens/Battle/HandPanel.cs": "dfa011195f80233836367f5961fc631c4bbf87001a759e2b24ab960f20bae2f8",
+    "Sdt.Boot/BattleBridge.cs": "ca224d33483223c7cca32b96aa4782caa1f2258af5ce988473a585f6f8854b4d"
+  },
+  "sourceSha256": {
+    "core/battle.exec-play.domain.js": "2b6b7eda1142fcb04aba856633d601fef8a9baa852ecdd6ab3e290203e30ec1e",
+    "core/battle.card-play.domain.js": "be6c9bdf95ac08c15f43bf9d1f55940c10c73474c00c5fe11ef58979b0b54a45",
+    "core/battle.resolution.domain.js": "3cc0d0691c1784dcaaee321a68f22898476377053e7d0e5fd14f508bdc39fd51",
+    "bag/battle.bag.domain.js": "fa9a8beb099c8b92e5f1976c291fcf1577e83b28b70b5805cd088ec5aa90e8c3",
+    "effects/battle.foe-fight.js": "94daf33b1b9ba6f1e7a96d2dcfe4d6d9c90648daf19781091dc0383a232ed17e",
+    "effects/effect-steps.m2.domain.js": "5a242a0fce3a2656f2c24ad2b671ea00dde3da1805e9c93c2b5c8fe767d493ce",
+    "effects/battle.status-operations.domain.js": "425f6e1ddd0cc05431d523ad0742844942892077f263c18f61d4fd98d6db3a75",
+    "effects/battle.card-inspection.domain.js": "f463765d295f5582eb5f99b0cef1f86a6887319155800d3dd7d8aa6e4ac42fd0",
+    "core/battle.damage.domain.js": "d8f9f6649041b7568c8ecfe0b7b4c91166d4d5fce1e46235e199bd1610f34eda"
+  },
+  "native": "not run; no Unity, services, browser, CUA, commits or deletions by this agent"
+}

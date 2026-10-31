@@ -1,0 +1,425 @@
+--- Assets/Scripts/Sdt.Core/Battle/BattleSession.cs
++++ Assets/Scripts/Sdt.Core/Battle/BattleSession.cs
+@@ -382,7 +382,7 @@
+             if (card.zeroCostUntilTurn.HasValue && card.zeroCostUntilTurn.Value == turn) return 0;
+             if (card.type == "装备" || card.type == "道具" || card.type == "资源" || card.type == "生物" || card.type == "事件") return 0;
+             if (pstat != null && pstat.status.Get("cosmosForm") > 0) return 1;
+-            if (spellCost1 && (card.type == "法术" || card.type == "武术")) return 1;
++            if ((spellCost1 || persistentRules.Contains("spellCost1")) && card.type == "法术" || (spellCost1 || persistentRules.Contains("meleeCost1")) && card.type == "武术") return 1;
+             return StructuredCost(card);
+         }
+ 
+@@ -589,6 +589,8 @@
+             }
+             var requirement = StructuredRequirement(card);
+             if (requirement != null) return CommandResult.No(requirement);
++            var paymentIssue = PaymentPreflight(cardId, card, new List<string>());
++            if (paymentIssue != null) return CommandResult.No(paymentIssue);
+             int effCost = EffCostOf(card);
+             if (effCost > energy)
+             {
+@@ -729,14 +731,29 @@
+             return CommandResult.Yes();
+         }
+ 
+-        private void ExecPlay(string uid, CardDef card, List<string> fuelUids, BattleFoe target, bool freeCost = false, bool directRelease = false)
+-        {
++        private void ExecPlay(string uid, CardDef card, List<string> fuelUids, BattleFoe target, bool freeCost = false, bool directRelease = false, List<string> paymentUids = null)
++        {
++            card=FindCard(uid)?.card ?? card;
++            if (HandRequirement(card)!=null && paymentUids==null)
++            {
++                var issue=PaymentPreflight(uid,card,fuelUids);
++                if(issue!=null) { G.Log(issue,"warn"); return; }
++                BeginHandPayment(uid,card,fuelUids,target,freeCost,directRelease); return;
++            }
++            int committedCost = freeCost ? 0 : EffCostOf(card);
++            if (paymentUids!=null)
++            {
++                var entries=paymentUids.Select(p=>FindCard(p)).ToArray();
++                hand.RemoveAll(p=>paymentUids.Contains(p));
++                foreach(var p in paymentUids) { consumed.Add(p); G.Log("消耗了手牌作为出牌代价","sys"); }
++                foreach(var entry in entries) { if(entry.card.type=="法术") ruleConsumedSpells++; ResolveInfusedFuel(entry.card,Alive().FirstOrDefault()); }
++            }
+             if(_phase!="enemy") _phase="resolving";
+             RequestRender();
+             BeginRuleCast(card, target, fuelUids);
+             if (directRelease) castContext.infused = true;
+             castContext.uid = uid; skipInfusionCards.Remove(uid);
+-            int effCost = freeCost ? 0 : EffCostOf(card);
++            int effCost = committedCost;
+             if (!freeCost && effCost != card.cost)
+                 G.Log("[[icon:sparkles]] 宇宙形态：【" + Esc(card.name) + "】按 <b>1</b> 费打出（原 " + card.cost + " 费）", "sys");
+             energy -= effCost;
+@@ -934,6 +951,7 @@
+                 G.Log("[[icon:crystal]] " + (seg ?? string.Empty) + "<b>" + Esc(foe.name) + "</b> 的元素庇幕展开：伤害被完全减免！（破甲可击碎）", "warn");
+                 return 0;
+             }
++            amount=RuleDamageAmount(foe,card,amount,type);
+             var attacker = new Combatant { atk = G.Atk, spellPower = G.SpellPower, status = pstat.status };
+             var r = CombatResolver.DealDamage(attacker, foe, amount, type);
+             if (r.stealthed)
+--- Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs
++++ Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs
+@@ -12,7 +12,7 @@
+     }
+     public interface BattleContainerHost { bool ConsumeStoredCard(string uid); }
+     public sealed class RuleChoiceSnapshot { public IReadOnlyList<string> labels; }
+-    public sealed class RuleHandSelectionSnapshot { public IReadOnlyList<string> candidateUids; public bool canCancel; }
++    public sealed class RuleHandSelectionSnapshot { public IReadOnlyList<string> candidateUids; public bool canCancel; public string act, sourceUid, type; public int n; public long selectionId; public IReadOnlyList<string> selectedUids; }
+     public sealed class EquipmentSnapshot { public string uid; public CardDef card; public bool canUse; public int? alternatingPhase; public bool alternatingTriggered; }
+     public sealed class HeroSkillSnapshot { public string name, kind; public int cost, dmg, heal; public bool needsTarget, used; }
+ 
+@@ -67,7 +67,7 @@
+ 
+         private void InitializeStructuredBattle()
+         {
+-            itemJobs.Clear();resolvingItemUid=null;
++            itemJobs.Clear();resolvingItemUid=null; handPayment=null;
+             registeredCards.Clear(); equippedCards.Clear(); equipmentUsed.Clear(); persistentRules.Clear(); ruleJobs.Clear();
+             enemyMarks.Clear(); ruleAllies.Clear(); ruleContinuations.Clear(); growingCards.Clear(); castOnDraw.Clear(); timedRuleStatuses.Clear();
+             stolenAttackReturns.Clear(); infusionBonuses.Clear(); alternatingRefunds.Clear();
+@@ -171,6 +171,7 @@
+         }
+         public CommandResult SelectRuleHand(string uid)
+         {
++            if (ruleHandSelection?.act == "payment") return CommandResult.No("请确认支付材料");
+             if (ruleHandSelection == null || !ruleHandSelection.candidateUids.Contains(uid) || !hand.Contains(uid)) return CommandResult.No("手牌选择已失效");
+             var action = ruleHandAction; ruleHandSelection = null; ruleHandAction = null;
+             action(uid); ResumeRules(); ResolveRuleOutcome(); RequestRender(); return CommandResult.Yes();
+@@ -241,7 +242,7 @@
+             foreach (var requirement in card.rules?.Get("battle")?.Operations("requirements") ?? Array.Empty<RuleValue>())
+             {
+                 if (requirement.Text("kind") == "unplayable") return "这张卡不能直接使用";
+-                if (requirement.Text("kind") == "handCards" && hand.Count(uid => FindCard(uid)?.card.type == requirement.Text("type")) < requirement.Number("count", 1)) return "手牌不满足使用条件";
++                // Hand-card payment is checked by the queued-play owner, excluding source and infusion fuel.
+             }
+             return null;
+         }
+@@ -369,6 +370,7 @@
+                     pdef.Armor += n; if (op.Flag("guard")) pdef.Guard = true;
+                     if (op.Has("decayAtTurnEnd")) armorDecay += op.Number("decayAtTurnEnd"); break;
+                 case "draw":
++                    ResolveDrawHandOps(op);
+                     n = Amount(card, op);
+                     if (op.Has("untilHandN")) n = Math.Max(0, op.Number("untilHandN") - hand.Count);
+                     if (op.Flag("perCurseKinds")) n = target == null ? 0 : CombatResolver.Curses.Count(key => target.status.Get(key) > 0);
+@@ -521,11 +523,11 @@
+                 }
+             }
+         }
+-        private int ApplyRuleRawHit(CardDef card, BattleFoe foe, int amount, string type, bool nonLethal)
++        private int ApplyRuleRawHit(CardDef card, BattleFoe foe, int amount, string type, bool nonLethal, bool preserveBaseDamage = false)
+         {
+             if (foe == null || foe.dead) return 0;
+             SyncConditionalEquipment();
+-            if(persistentRules.Contains("stealthStrike")&&pstat.status.stealth>0)
++            if(!preserveBaseDamage && persistentRules.Contains("stealthStrike")&&pstat.status.stealth>0)
+             {
+                 int added=type=="attack"?G.Atk+pstat.status.atkUp+foe.status.bleed:type=="spell"?G.SpellPower+pstat.status.spellUp:0;
+                 amount=Math.Max(0,amount+added)*2-added;
+@@ -783,14 +785,16 @@
+         }
+         private void OnStructuredPlayerDamaged(BattleFoe attacker, int damage)
+         {
+-            if (damage <= 0) return;
+-            foreach (var entry in equippedCards)
++            if (damage <= 0 || G.Hp<=0) return;
++            foreach (var entry in equippedCards.ToArray())
+             {
+                 var response = entry.card.rules?.Get("equip")?.Get("passive")?.Get("damageResponse");
+                 if (response == null) continue;
+-                ApplyRuleRawHit(entry.card, attacker, response.Number("damage"), CombatResolver.FIXED, false);
++                var targets=Alive();
++                if(targets.Count>0) ApplyRuleRawHit(entry.card, targets[(int)(rng.Random("battle","target")*targets.Count)], response.Number("damage"), CombatResolver.FIXED, false, true);
++                if(over) return;
+                 double chance = response.Value("drawChance") is double fraction ? fraction : 0;
+-                if (rng.Random("reward") < chance) DrawCards(response.Number("draw", 1));
++                if (rng.Random("battle","generation") < chance) DrawCards(response.Number("draw", 1));
+             }
+         }
+         private bool TryBlockPlayerFatalDamage(int damage)
+--- Assets/Scripts/Sdt.Core/Battle/BattleRules.cs
++++ Assets/Scripts/Sdt.Core/Battle/BattleRules.cs
+@@ -7,6 +7,12 @@
+ {
+     public static class BattleRules
+     {
++        public static bool MatchesHandSelectKey(CardDef card,string key)
++        {
++            if (card==null) return false;
++            if (string.IsNullOrEmpty(key)||key=="牌") return true;
++            return key=="杀"||key=="初始攻击" ? Regex.IsMatch(card.name??"",@"^(杀|初始攻击)$") : card.type==key;
++        }
+         private static readonly Regex AoePattern = new Regex(@"所有敌人|群体|全体", RegexOptions.Compiled);
+         private static readonly Regex SelfTargetPattern = new Regex(@"回复\s*\d+\s*(?:点\s*生命|点?血)|净化|获得\s*\d+\s*点?\s*护甲|\+\s*\d+\s*甲|获得\s*\d+\s*点?\s*护盾|所受伤害降为", RegexOptions.Compiled);
+         private static readonly Regex DeckOnlyPattern = new Regex(@"洗入|置入牌库|放入牌库|牌库底|牌库上限", RegexOptions.Compiled);
+--- Assets/Scripts/Sdt.Core/Battle/BattlePlayerEffects.cs
++++ Assets/Scripts/Sdt.Core/Battle/BattlePlayerEffects.cs
+@@ -55,7 +55,7 @@
+             return BattlePlayerEffects.Project(new BattlePlayerEffectState{
+                 PlayerCurseImmune=persistentRules.Contains("playerCurseImmune"),CurseImmunityTemporary=temporaryImmunity,
+                 // Native spellCost1 is the existing moveCost1 flag: CostOf applies it to both move types.
+-                SpellCost1=spellCost1,MeleeCost1=spellCost1,Turn=turn,
++                SpellCost1=spellCost1||persistentRules.Contains("spellCost1"),MeleeCost1=spellCost1||persistentRules.Contains("meleeCost1"),Turn=turn,
+                 NextSpellTwice=doubleNextSpell?1:0,AllSpellsInfused=persistentRules.Contains("allSpellsInfused"),
+                 DiscoverPlus=discoverExtra,BleedAmp=persistentRules.Contains("bleedAmp")?1:0,DeathSave=deathSaves,ExtraTurn=extraTurn,
+                 // Optional nest rune state is absent from the native runtime; never fabricate an active rune.
+--- Assets/Scripts/Sdt.Core/Battle/BattleHandPayment.cs
++++ Assets/Scripts/Sdt.Core/Battle/BattleHandPayment.cs
+@@ -0,0 +1,59 @@
++using System;
++using System.Collections.Generic;
++using System.Linq;
++
++namespace Sdt.Core.Battle
++{
++    // A queued play owns the source, infusion fuel and target until payment commits.
++    public sealed partial class BattleSession
++    {
++        private sealed class HandPayment
++        {
++            public string uid; public CardDef card; public BattleFoe target;
++            public List<string> fuel; public bool freeCost, directRelease;
++            public long selectionId;
++        }
++        private HandPayment handPayment;
++        private long handPaymentSerial;
++        private static RuleValue HandRequirement(CardDef card) => card?.rules?.Get("battle")?.Operations("requirements").FirstOrDefault(r => r.Text("kind") == "handCards");
++        private bool PaymentCandidate(string uid, HandPayment payment, HashSet<string> selected = null)
++        {
++            return hand.Contains(uid) && uid != payment.uid && !payment.fuel.Contains(uid)
++                && selected?.Contains(uid) != true && BattleRules.MatchesHandSelectKey(FindCard(uid)?.card, HandRequirement(payment.card)?.Text("type"));
++        }
++        private string PaymentPreflight(string uid, CardDef card, List<string> fuel)
++        {
++            var requirement = HandRequirement(card); if (requirement == null) return null;
++            var payment = new HandPayment { uid=uid, card=card, fuel=fuel };
++            return hand.Distinct().Count(h => PaymentCandidate(h,payment)) < requirement.Number("count",1) ? "手牌支付不足" : null;
++        }
++        private void BeginHandPayment(string uid, CardDef card, List<string> fuel, BattleFoe target, bool freeCost, bool directRelease)
++        {
++            handPayment = new HandPayment { uid=uid,card=card,fuel=new List<string>(fuel),target=target,freeCost=freeCost,directRelease=directRelease,selectionId=++handPaymentSerial };
++            ruleHandSelection = new RuleHandSelectionSnapshot {
++                act="payment", type=HandRequirement(card).Text("type"), n=HandRequirement(card).Number("count",1), selectionId=handPayment.selectionId, sourceUid=uid,
++                candidateUids=hand.Distinct().Where(h=>PaymentCandidate(h,handPayment)).ToArray(), selectedUids=Array.Empty<string>(), canCancel=false };
++            RequestRender();
++        }
++        public CommandResult ConfirmRuleHandPayment(long selectionId, string[] materialUids)
++        {
++            var payment=handPayment; var selection=ruleHandSelection;
++            if(payment==null || selection?.act!="payment" || selectionId!=payment.selectionId) return CommandResult.No("支付已失效");
++            var paid=(materialUids??Array.Empty<string>()).ToList();
++            if(paid.Count!=selection.n) return CommandResult.No("支付材料未选满");
++            var card=FindCard(payment.uid)?.card; var seen=new HashSet<string>();
++            bool valid=!over && hand.Contains(payment.uid) && card!=null && HandRequirement(card)!=null
++                && HandRequirement(card).Number("count",1)==paid.Count
++                && paid.All(uid=>PaymentCandidate(uid,new HandPayment{uid=payment.uid,card=card,fuel=payment.fuel},seen)&&seen.Add(uid))
++                && payment.fuel.Distinct().Count()==payment.fuel.Count && payment.fuel.All(uid=>uid!=payment.uid&&CanUseAsInfusionFuel(uid))
++                && StructuredRequirement(card)==null && BattleRules.UnplayableReasonFor(card,mode)==null
++                && (payment.directRelease || !RequiresInfusion(card) || InfuseOf(card)==0 || payment.fuel.Count==InfuseOf(card))
++                && (payment.freeCost || EffCostOf(card)<=energy)
++                && (BattleRules.TargetSideFor(card)!="enemy" || payment.target!=null&&!payment.target.dead&&foes.Contains(payment.target));
++            handPayment=null; ruleHandSelection=null;
++            if(!valid) { ResumeRules(); RequestRender(); return CommandResult.No("支付或目标已变化，本次未消耗"); }
++            ExecPlay(payment.uid,card,payment.fuel,payment.target,payment.freeCost,payment.directRelease,paid);
++            ResumeRules(); RequestRender(); return CommandResult.Yes();
++        }
++    }
++}
+--- Assets/Scripts/Sdt.Core/Battle/BattleRuleConsumers.cs
++++ Assets/Scripts/Sdt.Core/Battle/BattleRuleConsumers.cs
+@@ -0,0 +1,34 @@
++using System.Text.RegularExpressions;
++using System.Linq;
++
++namespace Sdt.Core.Battle
++{
++    public sealed partial class BattleSession
++    {
++        // Same boundary as source battle.damage.domain hitFoe; applied once for both HP and hearts.
++        public int AdjustCardDamage(CardDef card, int bleed, int amount, string type)
++        {
++            if(type=="attack" && bleed>0 && (card?.id=="tt3-fly-arrowhawk"
++                || Regex.IsMatch(card?.desc??"", "流血伤害翻倍") || persistentRules.Contains("bleedAmp"))) amount+=bleed;
++            return amount;
++        }
++        private int RuleDamageAmount(BattleFoe foe, CardDef card, int amount, string type) => AdjustCardDamage(card,foe.status.Get("bleed"),amount,type);
++        private void ResolveDrawHandOps(RuleValue operation)
++        {
++            foreach(var entry in operation.Operations("handOps"))
++            {
++                string act=entry.Text("op"); if(act!="consumeHand" && act!="dumpHand") continue;
++                var uids=hand.ToArray(); hand.Clear(); bool dumping=act=="dumpHand"&&mode=="boss";
++                foreach(var uid in uids)
++                {
++                    if(dumping) { discard.Add(uid); continue; }
++                    consumed.Add(uid); if(mode=="boss") grave.Add(uid);
++                    var card=FindCard(uid)?.card; if(card==null) continue;
++                    if(card.type=="法术") ruleConsumedSpells++;
++                    ResolveInfusedFuel(card,Alive().FirstOrDefault());
++                    if(persistentRules.Contains("consumeFireball")) CastRuleCard(CardLibrary.FindById("tt3-fireball"),Alive().FirstOrDefault());
++                }
++            }
++        }
++    }
++}
+--- Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs
++++ Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs
+@@ -105,7 +105,7 @@
+             _itemTargetUid = null;
+             var snap = GameSnapshotRef.Current ?? s;
+             if (PresentationBusy || snap.Busy || snap.over || snap.RuleChoice != null || snap.Discovering != null || UiStack.Top != this) return;
+-            if (snap.RuleHandSelection != null) { if (snap.RuleHandSelection.candidateUids.Contains(bc.Uid)) cmd.SelectRuleHand(bc.Uid); return; }
++            if (snap.RuleHandSelection != null) { if (snap.RuleHandSelection.act=="payment") ToggleRulePayment(bc.Uid, snap, api); else if (snap.RuleHandSelection.candidateUids.Contains(bc.Uid)) cmd.SelectRuleHand(bc.Uid); return; }
+             if (snap.Infusing != null) { cmd.SelectInfusion(bc.Uid); return; }   // toggleInfusePick
+             if (bc.Off) { cmd.SetPendingHint(api.UnplayableReason(api.FindCard(bc.Uid)?.Card) ?? "能量不足，暂时无法打出"); return; }
+             if (bc.Side != null) { cmd.LockPendingTarget(bc.Uid); return; }     // play(uid) 对指向卡内定锁定
+--- Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs
++++ Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs
+@@ -298,10 +298,11 @@
+         void ReleaseActorFrames() { _self?.Frames?.Release(); }
+         void SyncPrompt(BattleSnapshot s, IBattleViewApi api, IBattleCommands cmd)
+         {
++            SyncPaymentDraft(s);
+             SyncInfusionWorkspace(s, api, cmd);
+             if (s.Infusing != null) { _promptSignature = null; _prompt.gameObject.SetActive(false); return; }
+             string signature = s.Infusing != null ? "inf:" + s.Infusing.Uid + ":" + string.Join(",", s.Infusing.Picked)
+-                : s.RuleHandSelection != null ? "hand-choice:" + string.Join("|", s.RuleHandSelection.candidateUids)
++                : s.RuleHandSelection != null ? "hand-choice:" + s.BattleToken + ":" + s.RuleHandSelection.selectionId + ":" + string.Join("|", s.RuleHandSelection.candidateUids) + ":" + string.Join("|", _paymentPicked.Keys) + ":" + PaymentDraftValid(s,api)
+                 : s.PendingTarget != null ? "target:" + s.PendingTarget.Uid + s.PendingHint : _skillTargeting ? "skill" : _itemTargetUid ?? "";
+             if (_promptSignature == signature) return; _promptSignature = signature; ClearRegion(_prompt);
+             _prompt.gameObject.SetActive(signature.Length > 0); if (signature.Length == 0) return;
+@@ -311,6 +312,7 @@
+             layout.childControlWidth = layout.childControlHeight = true; layout.childForceExpandWidth = layout.childForceExpandHeight = false;
+             var inf = s.Infusing;
+             string text = inf != null ? "注能【" + inf.Card.name + "】  已选 " + inf.Picked.Count + "/" + inf.Need + " 张材料"
++                : s.RuleHandSelection?.act=="payment" ? "选择消耗代价  已选 " + _paymentPicked.Count + "/" + s.RuleHandSelection.n + " 张材料"
+                 : s.RuleHandSelection != null ? "选择一张高亮手牌"
+                 : s.PendingTarget != null ? "已拿起【" + s.PendingTarget.Card.name + "】 · 点击合法目标或拖向目标\n" + s.PendingHint
+                 : _skillTargeting ? "职业技能 · 请选择敌人" : "道具 · 请选择敌人";
+@@ -321,6 +323,7 @@
+                 if (inf.CanPlayDirect) BtBtn.Mini(_prompt, "直接打出", () => cmd.SkipInfusion());
+                 foreach (string uid in inf.Picked) { string selected = uid; BtBtn.Mini(_prompt, api.FindCard(uid)?.Card.name ?? uid, () => cmd.SelectInfusion(selected)); }
+             }
++            if(s.RuleHandSelection?.act=="payment") { var token=s.BattleToken; long id=s.RuleHandSelection.selectionId; BtBtn.Mini(_prompt,"确定",()=>ConfirmPaymentDraft(token,id,api,cmd),true,PaymentDraftValid(s,api)); }
+             if (s.RuleHandSelection == null) BtBtn.Mini(_prompt, "取消 Esc", () => { _skillTargeting = false; _itemTargetUid = null; if (inf != null) cmd.CancelInfusion(); else cmd.CancelPendingTarget(); BuildStage(GameSnapshotRef.Current); });
+         }
+         void SyncInfusionWorkspace(BattleSnapshot s, IBattleViewApi api, IBattleCommands cmd)
+--- Assets/Scripts/Sdt.UI/Screens/Battle/BattleRuleInputs.cs
++++ Assets/Scripts/Sdt.UI/Screens/Battle/BattleRuleInputs.cs
+@@ -12,6 +12,42 @@
+     public partial class BattleScreen
+     {
+         bool _skillTargeting;
++        readonly System.Collections.Generic.Dictionary<string,string> _paymentPicked = new System.Collections.Generic.Dictionary<string,string>();
++        long _paymentSelectionId;
++        string _paymentBattleToken;
++        bool _paymentSubmitting;
++        void SyncPaymentDraft(BattleSnapshot s)
++        {
++            long id=s.RuleHandSelection?.act=="payment" ? s.RuleHandSelection.selectionId : 0;
++            if(_paymentSelectionId!=id || _paymentBattleToken!=s.BattleToken)
++            { _paymentPicked.Clear(); _paymentSelectionId=id; _paymentBattleToken=s.BattleToken; }
++        }
++        bool PaymentEligible(string uid,BattleSnapshot s,IBattleViewApi api) => s.RuleHandSelection.candidateUids.Contains(uid) && s.Hand.Contains(uid) && BattleRules.MatchesHandSelectKey(api.FindCard(uid)?.Card,s.RuleHandSelection.type);
++        void ToggleRulePayment(string uid,BattleSnapshot s,IBattleViewApi api)
++        {
++            SyncPaymentDraft(s); var selection=s.RuleHandSelection;
++            if(_paymentSubmitting || selection?.act!="payment") return;
++            if(_paymentPicked.ContainsKey(uid)) _paymentPicked.Remove(uid);
++            else if(PaymentEligible(uid,s,api) && _paymentPicked.Count<selection.n && api.FindCard(uid)?.Card!=null)
++                _paymentPicked.Add(uid,Newtonsoft.Json.JsonConvert.SerializeObject(api.FindCard(uid).Card));
++            BuildStage(s);
++        }
++        bool PaymentDraftValid(BattleSnapshot s,IBattleViewApi api)
++        {
++            var selection=s?.RuleHandSelection;
++            return !_paymentSubmitting && s!=null && !s.over && !s.Busy && (s.Phase=="player" || s.Phase=="targeting")
++                && selection?.act=="payment" && _paymentBattleToken==s.BattleToken && _paymentSelectionId==selection.selectionId
++                && _paymentPicked.Count==selection.n && _paymentPicked.All(p=>PaymentEligible(p.Key,s,api)
++                    && api.FindCard(p.Key)?.Card!=null && Newtonsoft.Json.JsonConvert.SerializeObject(api.FindCard(p.Key).Card)==p.Value);
++        }
++        void ConfirmPaymentDraft(string token,long selectionId,IBattleViewApi api,IBattleCommands commands)
++        {
++            var current=GameSnapshotRef.Current;
++            if(UiStack.Top!=this || PresentationBusy || current?.BattleToken!=token || current.RuleHandSelection?.selectionId!=selectionId || !PaymentDraftValid(current,api)) return;
++            _paymentSubmitting=true;
++            try { var result=commands.ConfirmRuleHandPayment(selectionId,_paymentPicked.Keys.ToArray()); if(!result.Ok) RunLog.Log(result.Reason,"warn"); }
++            finally { _paymentSubmitting=false; _paymentPicked.Clear(); BuildStage(GameSnapshotRef.Current); }
++        }
+         RectTransform _allies;
+         string _allySignature;
+         void BuildAllies(Transform arena, BattleSnapshot snapshot, IBattleViewApi api)
+@@ -89,10 +125,11 @@
+         }
+         void BuildRuleInputs(BattleSnapshot s, IBattleViewApi api, IBattleCommands commands)
+         {
++            SyncPaymentDraft(s);
+             bool selecting = s.RuleHandSelection != null;
+             foreach (var card in _cards)
+             {
+-                if (selecting) card.SetOff(!s.RuleHandSelection.candidateUids.Contains(card.Uid));
++                if (selecting) { card.SetOff(!s.RuleHandSelection.candidateUids.Contains(card.Uid)); if(s.RuleHandSelection.act=="payment") { card.SetOff(!PaymentEligible(card.Uid,s,api)); card.Lift=_paymentPicked.ContainsKey(card.Uid); } }
+             }
+             string signature = s.RuleChoice == null ? "" : string.Join("|", s.RuleChoice.labels);
+             if (_ruleSignature == signature) return; _ruleSignature = signature; ClearRegion(_ruleInput);
+--- Assets/Scripts/Sdt.UI/Screens/Battle/BattleEvents.cs
++++ Assets/Scripts/Sdt.UI/Screens/Battle/BattleEvents.cs
+@@ -48,6 +48,7 @@
+         CommandResult UseItem(string uid, int targetIndex = -1);
+         CommandResult ChooseRuleOption(int index);
+         CommandResult SelectRuleHand(string uid);
++        CommandResult ConfirmRuleHandPayment(long selectionId, string[] materialUids);
+         CommandResult UseHeroSkill(int targetIndex = -1);
+         CommandResult SkipInfusion();
+     }
+@@ -65,7 +66,7 @@
+         IReadOnlyList<FloatSpec> TakeFloats();                   // takeFloats
+         string TargetSide(CardDef card);                         // targetSide："enemy"/"self"/null
+         string UnplayableReason(CardDef card);                   // unplayableReason
+-        PreviewResult PreviewDamage(int playerAtk, int spellPower, FoeSnapshot foe, int amount, string dmgType); // Combat.previewDamage 预结算（克隆快照，不改真实状态）
++        PreviewResult PreviewDamage(int playerAtk, int spellPower, FoeSnapshot foe, int amount, string dmgType, CardDef card = null); // Combat.previewDamage 预结算（克隆快照，不改真实状态）
+         AffixDef AffixMeta(string affix);                       // AFFIX_META（词缀角标）
+         string DmgTypeName(string dmgType);                     // Combat.TYPE_NAME（法术伤害/攻击伤害…，无效 key 回落 fixed）
+         // R()（rules.js 数值）——战斗 UI 需要的字段
+--- Assets/Scripts/Sdt.UI/Screens/Battle/BattleFx.cs
++++ Assets/Scripts/Sdt.UI/Screens/Battle/BattleFx.cs
+@@ -199,7 +199,7 @@
+                 var type = string.IsNullOrEmpty(card.dmgType) ? "fixed" : card.dmgType;   // DMG_TYPE_META 无效回落 FIXED
+                 var snap = GameSnapshotRef.Current;                    // BattleScreen 维护的当前快照（player 攻/法强）
+                 int amount = card.dmg ?? 0;
+-                var r = api.PreviewDamage(snap.Player.Atk, snap.Player.SpellPower, foe, amount, type);
++                var r = api.PreviewDamage(snap.Player.Atk, snap.Player.SpellPower, foe, amount, type, card);
+                 if (r.Stealthed)
+                 {
+                     main = "[[icon:runner]] " + foe.Name + " 潜行中——伤害无法命中";
+--- Assets/Scripts/Sdt.Boot/BattleBridge.cs
++++ Assets/Scripts/Sdt.Boot/BattleBridge.cs
+@@ -200,6 +200,7 @@
+         public CommandResult UseItem(string uid, int targetIndex = -1) => _s.UseItem(uid, targetIndex);
+         public CommandResult ChooseRuleOption(int index) => _s.ChooseRuleOption(index);
+         public CommandResult SelectRuleHand(string uid) => _s.SelectRuleHand(uid);
++        public CommandResult ConfirmRuleHandPayment(long selectionId, string[] materialUids) => _s.ConfirmRuleHandPayment(selectionId, materialUids);
+         public CommandResult UseHeroSkill(int targetIndex = -1) => _s.UseHeroSkill(targetIndex);
+         public void SelectInfusion(string uid) => _s.SelectInfusion(uid);
+         public void ConfirmInfusion() => _s.ConfirmInfusion(-1);   // -1 = 首个存活敌人（对齐原版无参 confirmInfusion）
+--- Assets/Scripts/Sdt.Boot/BattleViewApi.cs
++++ Assets/Scripts/Sdt.Boot/BattleViewApi.cs
+@@ -175,7 +175,7 @@
+         /// <summary>Combat.previewDamage 预结算（克隆快照，不改真实状态）。attacker 由 playerAtk/spellPower
+         /// 构造（对齐 UI 调用形态）；target 经 FoeSnapshot 投影为 Combatant（id 反查 BattleFoe 不可行，
+         /// 见文件头说明），状态/防御/生命全量来自快照。</summary>
+-        public PreviewResult PreviewDamage(int playerAtk, int spellPower, FoeSnapshot foe, int amount, string dmgType)
++        public PreviewResult PreviewDamage(int playerAtk, int spellPower, FoeSnapshot foe, int amount, string dmgType, CardDef card = null)
+         {
+             var attacker = new Combatant { atk = playerAtk, spellPower = spellPower };
+             var target = new Combatant
+@@ -191,6 +191,7 @@
+                 foreach (var k in CombatResolver.Curses) target.status.Set(k, StatusOf(foe.status, k));
+                 foreach (var k in CombatResolver.Buffs) target.status.Set(k, StatusOf(foe.status, k));
+             }
++            amount = Session?.AdjustCardDamage(card, StatusOf(foe?.status,"bleed"), amount, dmgType) ?? amount;
+             var r = CombatResolver.PreviewDamage(attacker, target, amount, dmgType);
+             return new PreviewResult { Dealt = r.dealt, Stealthed = r.stealthed, Log = r.log };
+         }

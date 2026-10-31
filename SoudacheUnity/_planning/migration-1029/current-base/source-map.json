@@ -1,0 +1,462 @@
+{
+  "capturedUtc": "2026-10-29T19:13:09.005169+00:00",
+  "scope": "HubScreen/HubModernPages/HubPets/current Hub partials; coordinator-authorized CourtyardScreen view mount and source rain layer; Koi model/graphic and Run data unchanged",
+  "authority": "current game.hub.runtime.js production import chain; Vite read-only",
+  "inputs": [
+    {
+      "path": "搜打撤/game/css/base-archive-facilities-v12.css",
+      "sha256": "16dd8568baef9c60d14f6a6d4cc96f3fb2351cdbf4f9334068fa04d22cadad9d",
+      "bytes": 16547
+    },
+    {
+      "path": "搜打撤/game/css/base-archive-v3.css",
+      "sha256": "0ccce69b4ca46d31397abcb4f6455632f773c52381f47bb959adf48bb6a4e3db",
+      "bytes": 9642
+    },
+    {
+      "path": "搜打撤/game/css/base-camp-rework.css",
+      "sha256": "2d3d0a2c9926fc6a124aeab1b66e78cbe770fdb497b0921a552e9f65af2f8c47",
+      "bytes": 19011
+    },
+    {
+      "path": "搜打撤/game/css/base-cohesion-v5.css",
+      "sha256": "54f4c89bdbdddf2997b70891890b138d34e34f098ea3db057147e30ec5320f2b",
+      "bytes": 8258
+    },
+    {
+      "path": "搜打撤/game/css/base-collection-v4.css",
+      "sha256": "b4fbc5c58baad1b5c1b5922da4b468b121fdf039fd28fd31b147826b1ecc7855",
+      "bytes": 4547
+    },
+    {
+      "path": "搜打撤/game/css/base-controls-v4.css",
+      "sha256": "1fece298187de8a0f7b6325e95ae33936318c6d0d258c5e4212a80225d7c3ee6",
+      "bytes": 2505
+    },
+    {
+      "path": "搜打撤/game/css/base-courtyard-v3.css",
+      "sha256": "977142ab7ea86d39897fcd03b624d9506f246185c0c8da64020b9cd3a10be007",
+      "bytes": 4365
+    },
+    {
+      "path": "搜打撤/game/css/base-framework-v7.css",
+      "sha256": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953",
+      "bytes": 7301
+    },
+    {
+      "path": "搜打撤/game/css/base-glass-tokens.css",
+      "sha256": "789fcd0ddfcd48f6724b8f54e25841a1ca6e4f4c3e214a6aa265e4b88dac7eff",
+      "bytes": 678
+    },
+    {
+      "path": "搜打撤/game/css/base-home-v7.css",
+      "sha256": "09be7ac2ad87603bfb2eeefd9fed3a207cce778cbd9b7c090c20f762de965f26",
+      "bytes": 7116
+    },
+    {
+      "path": "搜打撤/game/css/base-logistics-trade-v12.css",
+      "sha256": "962d79109e0d67519cbbe4bb5e0d9c6299e36fe85b8ae01090827d804947ffda",
+      "bytes": 10992
+    },
+    {
+      "path": "搜打撤/game/css/base-page-motion-v7.css",
+      "sha256": "3fe8d76dcc5299ae124c9869ad7d5bb4dde3dd31494df618169d257d1d2193fe",
+      "bytes": 3254
+    },
+    {
+      "path": "搜打撤/game/css/base-panel-layout.css",
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9",
+      "bytes": 73
+    },
+    {
+      "path": "搜打撤/game/css/base-personnel-v12.css",
+      "sha256": "55b4ee0a9d2472295ae0ecc9c20cf2eed920e8f6360b2c6d06ef3c8a29329cff",
+      "bytes": 22393
+    },
+    {
+      "path": "搜打撤/game/css/base-rooms-v7.css",
+      "sha256": "39a0e8821703ff054cbace2bef3b63f5fbd71baf702cec7e32fab9417affb462",
+      "bytes": 24859
+    },
+    {
+      "path": "搜打撤/game/css/card-browser.css",
+      "sha256": "b4ff6b96ff25c890cdde6636be9516b59f253f132b134965346442e5adf34698",
+      "bytes": 1421
+    },
+    {
+      "path": "搜打撤/game/css/collection-workspace.css",
+      "sha256": "fb0d6e01f7e6d6e63a685a4cfe71326d3b26e7a41a76099bafd1ec5bb1452592",
+      "bytes": 11406
+    },
+    {
+      "path": "搜打撤/game/css/inventory-zoom.css",
+      "sha256": "573455d016b5466d9c03bd8908b0367576691ccd30ea8c52925e6f1af44f9d72",
+      "bytes": 4427
+    },
+    {
+      "path": "搜打撤/game/src/hub/base-motion-v4.js",
+      "sha256": "9d517cb035ec4823e0ada9778964c0068fc536921a668cacd03e40ea452d9d47",
+      "bytes": 2616
+    },
+    {
+      "path": "搜打撤/game/src/hub/base-page-motion-v7.js",
+      "sha256": "5bb772775b6663df17d0a46f577f93b056a7cc688f9897ab1d5aaa90aef58d8b",
+      "bytes": 8110
+    },
+    {
+      "path": "搜打撤/game/src/hub/courtyard.rain-tableau.js",
+      "sha256": "9cc5c83974f285aedee0cd766d8e98e3c90cdb5a19bb62095ff9a77b7485d251",
+      "bytes": 11772
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.depart.js",
+      "sha256": "2c637b4d4acfbb6dfd0f31e737aee6d38dcb9203ed3c330cab2dac44b52dc09e",
+      "bytes": 39719
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.js",
+      "sha256": "a8a10366a8caf2fa9f4c99c320597bc5de91f4c58169400c4c8ef9cf9bb1d08e",
+      "bytes": 6028
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.pages.js",
+      "sha256": "5bab544672307d067bbbad598c25fc6e53457f9a89bd80b53b6d3dcc84a7666f",
+      "bytes": 27607
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.runtime.js",
+      "sha256": "7b86625bfb0c1c04734e139263222600535ae5af1417850761958d59a15f7dab",
+      "bytes": 30923
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.archive-v3.js",
+      "sha256": "6167efee959b1a4058e2a894ad13f9d1a2e89feee6c621034fcbc81884fa7615",
+      "bytes": 23407
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.archive.js",
+      "sha256": "804424faeb1496d178662d204b18dfdcc7fd9cce606ce29609d0114ec90e1497",
+      "bytes": 7696
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.collection-v4.js",
+      "sha256": "7bf4f3bed10d6393271eecf08157374dd8d8a470346623056edfdd98044d60f0",
+      "bytes": 6636
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.courtyard-runtime.js",
+      "sha256": "f1f4241af29039847c46a298f5fe97ac1a3335737a6d9fd0f2522ecdb8cfda25",
+      "bytes": 14743
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.courtyard-v3.js",
+      "sha256": "ad2f0c2bcd96e17e9eb59d084cbe30d41acdf55c55ab5de2b99ef1c73d6de356",
+      "bytes": 5521
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.facilities.js",
+      "sha256": "a6ce60246e4705df10f5693987319de4822e72aabc1d90834a8f8265750229f7",
+      "bytes": 4031
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.home-icons-v10.js",
+      "sha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "bytes": 1082
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.home-v3.js",
+      "sha256": "c941b3575798f85e63788607e17098aa56105b4e847614827752aa229ae43b79",
+      "bytes": 4973
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.materials.js",
+      "sha256": "25d9e187ef7f3e261ad068ccb1e20a6c6980992cc09c14757b102da598a7c5d8",
+      "bytes": 941
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.navigation-v7.js",
+      "sha256": "a5af60b6fe8a520c9856d9f242fdd52efaf21a2cf7a772168911e6485ee4fa6a",
+      "bytes": 971
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.personnel.js",
+      "sha256": "37796e2e56647a4d86c456e62be91f9ca843dbe0ee7f59fa75e41249b008a307",
+      "bytes": 20496
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.presentation.js",
+      "sha256": "abf38aeb09093cb9e88f3aecdd1d2f582306725fd27e35ff96a737e7ae719191",
+      "bytes": 25340
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.trade-shop-v5.js",
+      "sha256": "1819d85e12cf1bf30b3e70a20205a3eaf13aa8cf4aa41a86f8ce2453e2352e93",
+      "bytes": 18317
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.visuals.js",
+      "sha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
+      "bytes": 4634
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.warehouse.js",
+      "sha256": "d99bcf65c9ac96b7235b279242b175f05381b80560ba70ff0b770440ccbc102c",
+      "bytes": 21224
+    },
+    {
+      "path": "搜打撤/game/src/hub/stash-sale-price.js",
+      "sha256": "2ba63a9a490bdef064804821fc307c120eb294c8208edb6b651b018b3ce0f1fa",
+      "bytes": 386
+    },
+    {
+      "path": "搜打撤/game/src/ui/achievement-medals.js",
+      "sha256": "d47fee5b4c8400219108370bd26f915615bc4d216e51121f083874884bb5eb41",
+      "bytes": 2483
+    },
+    {
+      "path": "搜打撤/game/src/ui/card-browser.js",
+      "sha256": "fe1a140b5ea132f7ac0f9ddbf3f8f1714f1f9719ef9b0b7c6699ebaabb458a9d",
+      "bytes": 8966
+    },
+    {
+      "path": "搜打撤/game/src/ui/collection-view-art.js",
+      "sha256": "7bdf6fac5fc34ca48408bd11932edfb5c09b8575c6d0370bb9fdd3a049409b9b",
+      "bytes": 3948
+    },
+    {
+      "path": "搜打撤/game/src/ui/collection-view.js",
+      "sha256": "b81084ed34ef3a3c000ccb62f219f6b8398a86f24b60e3d7463f93199702d5dc",
+      "bytes": 8298
+    },
+    {
+      "path": "搜打撤/game/src/ui/navigation-motion.js",
+      "sha256": "1fca7c4c9ac259be7bbf81bd9c9be5e7ab62d256db1995e7ae5eeaf87d51afc4",
+      "bytes": 2537
+    },
+    {
+      "path": "搜打撤/game/src/ui/page-motion-profiles.js",
+      "sha256": "d8495bf4625bc560db06a0e8a7144c9413dbe216d7598101e8dbe8803f4c3b20",
+      "bytes": 6823
+    },
+    {
+      "path": "搜打撤/game/src/ui/partner-interaction.js",
+      "sha256": "0d305e3fc6663cf5b3d899064d948d3b37b813a541e78f9bff6d7ff8fca76cea",
+      "bytes": 3039
+    }
+  ],
+  "outputs": [
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentArchiveViews.cs",
+      "sha256": "20663775468551514fe08f1f507807f49cc0c8683a9058e152c94e55637b8c5c",
+      "bytes": 13671
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentBrowse.cs",
+      "sha256": "9d28f20de54bafdbb73e784389032c48a8afe6c03298269812d66ab482950c1d",
+      "bytes": 2619
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentGlass.cs",
+      "sha256": "2480294d56b4503475121c673dab5a65e5516a03c712772c2ceaf7ef5ff707b1",
+      "bytes": 810
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInteractions.cs",
+      "sha256": "aa300c68ff04295dbde226b75e71e72933ae0862304b7ba07e0c2a53a1fd40f5",
+      "bytes": 4331
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInventory.cs",
+      "sha256": "28dbbcbc3c0b1e92718d9a2a35fe5ad4c1b002f508317379cadb182978b054a6",
+      "bytes": 8726
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentLayout.cs",
+      "sha256": "5ac8beee3bb374052464efc50403248a131ef02b25a4b832c7d12dfa74b6bb86",
+      "bytes": 12227
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentMotion.cs",
+      "sha256": "282199e4888338f64f9672eead54a66ed85e77bb6eea632bddb80936cc0b7aaa",
+      "bytes": 4381
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentRooms.cs",
+      "sha256": "800a6a3b3a9399c452f3966269868e02c16fef9d8ade091c4fae9e881cfad88e",
+      "bytes": 15253
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+      "sha256": "afd9349548547cd2d8d02827c8e21919eb36bda5e9ba81473415ea1210ba8a9e",
+      "bytes": 15342
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubPets.cs",
+      "sha256": "7edfa53f326eb8de4e979feccceab5b75dd3385f664f9863cd63f0a268b7ee00",
+      "bytes": 6341
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+      "sha256": "e950834fe24167e82d0aca63d9cd9f94e2d7676f57fdacd1344ffed99b884889",
+      "bytes": 19582
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/Resources/HubCurrentGlass.shader",
+      "sha256": "a631d99863f4d65b9e32c6339318e64d3269ca7012f465aac66482ff9b10c49d",
+      "bytes": 3792
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/CourtyardScreen.cs",
+      "sha256": "40a3e894ee8aa3cabd9457561a0a36dc921ced783b615e1b9c0491e9ef2ac573",
+      "bytes": 18774
+    }
+  ],
+  "mapping": [
+    {
+      "view": "庭院",
+      "source": [
+        "hub.courtyard-v3.js",
+        "hub.courtyard-runtime.js",
+        "courtyard.rain-tableau.js",
+        "base-courtyard-v3.css"
+      ],
+      "target": [
+        "CourtyardScreen.BuildCurrentRoom",
+        "CourtyardPointer",
+        "CourtyardRainTableau",
+        "CourtyardShoreGraphic"
+      ],
+      "implemented": "同壳挂载；水面场景/发现与吃食进度/雨开关/投喂/环境设置弹出栏；雨势/声音/暂停/配色；独立原始sceneBackdrop雨层和静态岸叶；原Koi模型与Graphic未改，Pointer/Enter/Space输入及暂停投喂接齐；失焦和销毁停音/停止推进。"
+    },
+    {
+      "view": "公共壳",
+      "source": [
+        "game.hub.runtime.js",
+        "hub.navigation-v7.js",
+        "hub.materials.js",
+        "base-framework-v7.css",
+        "base-glass-tokens.css"
+      ],
+      "target": [
+        "HubScreen.Build",
+        "BuildNavigation",
+        "HubCurrentLayout",
+        "HubCurrentGlass"
+      ],
+      "implemented": "84px顶栏/房间标题/返回/档位/资源胶囊与提示；104px七目的地底导航；背景cover、同底图模糊玻璃、静止公共壳、分区导航动效；视图滚动/焦点/跨档清理/旧控件版本守卫。"
+    },
+    {
+      "view": "基地首页",
+      "source": [
+        "hub.home-v3.js",
+        "base-home-v7.css"
+      ],
+      "target": [
+        "BuildDeploy"
+      ],
+      "implemented": "事务左上，整备右侧420宽；人物/带牌/草稿继续；两难度、预设、条件待复原；旧mode-card/forecast/gate及旧PageIn接线已退役。"
+    },
+    {
+      "view": "后勤",
+      "source": [
+        "hub.warehouse.js",
+        "hub.warehouse-categories-v7.js",
+        "collection-workspace.css",
+        "base-logistics-trade-v12.css"
+      ],
+      "target": [
+        "BuildStash",
+        "HubCurrentInventory"
+      ],
+      "implemented": "全部/战斗/消耗/培养分类、搜索/类型/品质、来源人物；大卡网格自滚动、待复原独立子页；材料单击使用、卡牌特写、保护、培养、出售确认、孵化/补给包。"
+    },
+    {
+      "view": "人物与伙伴",
+      "source": [
+        "hub.personnel.js",
+        "partner-interaction.js",
+        "base-personnel-v12.css"
+      ],
+      "target": [
+        "BuildClasses",
+        "BuildPets",
+        "HubPartnerPlay"
+      ],
+      "implemented": "全身立绘左侧、5人头像条右上、培养详情/右下培养招式外观伙伴；招式4张单行分页；外观预览应用；伙伴展示/能力/携带/培养/底部伙伴切换，独立孵化、3次循环互动与短回复。"
+    },
+    {
+      "view": "建设",
+      "source": [
+        "hub.facilities.js",
+        "base-archive-facilities-v12.css"
+      ],
+      "target": [
+        "BuildUpgrade"
+      ],
+      "implemented": "230宽设施目录、中央源SVG、右侧当前与扩建后容量/材料/确认；缺料反馈与交易所木材入口。"
+    },
+    {
+      "view": "交易所",
+      "source": [
+        "hub.trade-shop-v5.js",
+        "base-logistics-trade-v12.css"
+      ],
+      "target": [
+        "BuildTrade"
+      ],
+      "implemented": "166宽买卖导航、分类与完整卡货架、480宽交易台；持有量/价格/余额/整堆金额、购入、出售与2.6秒确认；保护/容量/保存失败沿既有命令。"
+    },
+    {
+      "view": "收藏室",
+      "source": [
+        "hub.archive-v3.js",
+        "hub.archive.js",
+        "hub.collection-v4.js",
+        "base-collection-v4.css",
+        "base-archive-facilities-v12.css"
+      ],
+      "target": [
+        "BuildCollectionRoom",
+        "BuildOwnedGallery",
+        "HubCurrentArchiveViews"
+      ],
+      "implemented": "六目录；永久Base.collection画廊及旧档记录、搜索类型、230宽详情/90x126缩略单行分页；奖励和里程碑双面板；成就状态计数/搜索/进度/排序与painted图集；卡背左上大图+左下货架+右详情；故事阅读。"
+    }
+  ],
+  "validation": {
+    "auditedPaths": [
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\CourtyardScreen.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubCurrentArchiveViews.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubCurrentBrowse.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubCurrentGlass.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubCurrentInteractions.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubCurrentInventory.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubCurrentLayout.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubCurrentMotion.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubCurrentRooms.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubModernPages.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubPets.cs",
+      "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubScreen.cs"
+    ],
+    "time": "2026-10-30T03:13:08.8892959+08:00",
+    "mode": "read-only Roslyn parse and GetDiagnostics; no Emit/build/Unity",
+    "sourceFiles": 195,
+    "baseErrors": [],
+    "nativeVerified": false
+  },
+  "nativeVerified": false,
+  "excluded": [
+    "研究所第二地图及nestUnlocked入口：主会明确排除，不新增模拟字段/空入口。"
+  ],
+  "coordination": [
+    "主会已扩展CourtyardScreen.cs属地；BuildCurrentRoom(page)同壳挂载完成，Open统一进入Hub courtyard目的地；出征草稿三个只读属性已由出征属地实现，当前只读类型诊断通过。"
+  ],
+  "untested": [
+    "Unity导入/Shader编译/播放器编译",
+    "当前窗口原生截图和真实输入",
+    "注入存档失败时回滚与提示",
+    "永久收藏最后一张转化后的原生画廊回归",
+    "完整七房导航及庭院共享壳接缝",
+    "庭院当前雨层/控制弹出栏/声音与失焦销毁清理"
+  ]
+}

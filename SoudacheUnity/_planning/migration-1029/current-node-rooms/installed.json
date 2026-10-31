@@ -1,0 +1,375 @@
+{
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Boot/RunLoopBridge.cs",
+      "sha256": "6c4af97f9a8697dde71c00839c3acbce3653e1fe1f2f0fae7fb7f960ae9e699e",
+      "bytes": 6129
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/RewardReceipt.cs",
+      "sha256": "716e80ecdee107982f725e4768964575911d07b8ff7ac37da2998fc866f07cd1",
+      "bytes": 560
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/RunState.cs",
+      "sha256": "baa66ca2f0119f7bfd6c5df617ba3f77d23c64c3a94340d1f86751ef65fdcfce",
+      "bytes": 7114
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Res/CurrentNodeAssets.cs",
+      "sha256": "d3d7350ffe5bc3ead300fb87a81175a80ff0b10b97891652c7a26e7324324d6f",
+      "bytes": 2423
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.cs",
+      "sha256": "9c5c58af2ecfb7c0fbb14b163dd50428d5b302f779e6122ed4b7286f74fe7264",
+      "bytes": 75141
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.CurrentNodeRewards.cs",
+      "sha256": "bca18da9d3160b884adc9ca09d4895650f5c20ca2d3ebedb52c3042034d48abe",
+      "bytes": 6056
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.CurrentPickup.cs",
+      "sha256": "a84f94e8ee82ff2051211410f75be66a75a292ae3f31d1a5df2ae93a994b854c",
+      "bytes": 2883
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.EventRoutes.cs",
+      "sha256": "3e4636fc26da9e8a8328a82e19f32aaef0bcf81309da517ad04097dffa06aad8",
+      "bytes": 12086
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+      "sha256": "6ebd9aa032c101be532be776a52a43c8acfa281a1474ddb6db19ba064428f28a",
+      "bytes": 11999
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+      "sha256": "3ce8378ad2b2ceed0089ab359d337ce701d80fbb71c46f97a61fea1fcaccb6cd",
+      "bytes": 10124
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/ChestOpenScreen.cs",
+      "sha256": "dc1f3f3a0099ef75176b15424a67390e056172e51d7263119fb8e325f190c8ec",
+      "bytes": 10503
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentEventOptionState.cs",
+      "sha256": "27a98782b6ac2641e02e27f2cfd1183eab0a0d3c936bab533db94cb1a49919f2",
+      "bytes": 1597
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentIllustratedDice.cs",
+      "sha256": "8a2e76688a6b1f8e2088cb8ca7420e969185c000a62cf80910c7c2f2b375c439",
+      "bytes": 4608
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentIllustratedNode.cs",
+      "sha256": "35b5255a2d6c598323b604cba6c41e1c800369b3917b765673164334b473df40",
+      "bytes": 10627
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeElements.cs",
+      "sha256": "6c99107cb7514b3bbdf376ca54fbbc033d53df227f86b5fb452389c5aae077f0",
+      "bytes": 2926
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeShade.cs",
+      "sha256": "b6a733fa592d73d2a6b00c879d5ac6f39788ec8460090068ec6256fa9899667c",
+      "bytes": 2084
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentOutcomeFeedback.cs",
+      "sha256": "b50371c035aa5ef734566d083993bd9ebd189f7c505bf5c22b123f2cc4ff2d96",
+      "bytes": 4553
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentPickupSearch.cs",
+      "sha256": "2b5a8d1fabef53eb22f5d5636a2ebde0e60cb7ab7042cfd52cf8722f26048154",
+      "bytes": 1050
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardAcquisition.cs",
+      "sha256": "c7f6df2c8eeecb204cc46225b58f62cb2697805ab5d6ef006d229cd9d7b31e97",
+      "bytes": 3132
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardCapacityOrganizer.cs",
+      "sha256": "b07a8875710adb4e26fdcd867d00611749a09521841190f114efa622fca7bed0",
+      "bytes": 6536
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardFlow.cs",
+      "sha256": "364d4da328cb23cbc5fe1d09abcb0cbfc3182800ae0fc52a13712984eccc7987",
+      "bytes": 2388
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardScene.cs",
+      "sha256": "5fb8576fd808e8fb0c2aead3eca2d629c15b72277ebd2f0a3aaca14220e36819",
+      "bytes": 15550
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardState.cs",
+      "sha256": "b575b4805b15b6399cda7639d550afdd5496817afd51e7ce549f5abb3dde19fc",
+      "bytes": 1143
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/EntrySupplyScreen.cs",
+      "sha256": "3d6371cda02702df73e5ea7c6b7c215ebd9867b5aeea94d84d73e0cd40b66a2a",
+      "bytes": 5351
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogChoices.cs",
+      "sha256": "a773d5d77e509b01da8bf4af6920e1451bfbf35837ee9adfa01b28b42e309685",
+      "bytes": 11370
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogScreen.cs",
+      "sha256": "2f6beb553996013f6bf38009463c54e93eb55c71bccb49a34ffe3420356c6764",
+      "bytes": 12213
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/FireRestScreen.cs",
+      "sha256": "bae7f4f88f7a67cedaa3908388388f52fd655a0b55c37b0a4ed1cf1194c75d09",
+      "bytes": 5594
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/PickupScreen.cs",
+      "sha256": "4a9c39545368aa1adbfe0dfc8bb5a9e60793e4f2c4cde0347ec3e2739b6068ee",
+      "bytes": 4329
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/RunUi.cs",
+      "sha256": "aa0a9d4be9aa287a17aaf57034956e795bb101761a37e8c8d1e6fe68807c7309",
+      "bytes": 14825
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/choice-winter-v1.png",
+      "sha256": "8b8b389235805420d5c353d20f22977469f444f5ef1150b2dbf7e82b4dbf6b6c",
+      "bytes": 214128
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/ghosts/breach.png",
+      "sha256": "0167c90ce5e5b1d1e534c4db7f477070464f7ecfce9335ab5854551b27405e9e",
+      "bytes": 3919
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/ghosts/cards.png",
+      "sha256": "cf4a0c1a6c6320151aad76f141b288d98c03b4aa9cf4b1a546221c2692bc7a37",
+      "bytes": 3699
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/ghosts/chest.png",
+      "sha256": "97e888b410afc24446903f81a38709a4cc02239f5224241033b7a2637dab1c91",
+      "bytes": 1325
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/ghosts/explore.png",
+      "sha256": "263f6315a6d2876634ecfc015d575c426af2d52388e694456c073a44f741acbc",
+      "bytes": 2469
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/ghosts/fight.png",
+      "sha256": "a3c9068f7905ffd390d5fd4623251dbe4fdd65f4d48241b3fb45bb52ab5b3ce3",
+      "bytes": 4278
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/ghosts/heal.png",
+      "sha256": "b1dfd9d94d516a2ff3b9cd88d329f7e0322e1ece270cd284e65aca91bc08d5b0",
+      "bytes": 602
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/ghosts/leave.png",
+      "sha256": "60211f828d5e54555970c19da5c4d62ba31864391b40ea9588665149ea5d8505",
+      "bytes": 1369
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/ghosts/search.png",
+      "sha256": "174ba84b3706224ef437f50517ad786b8ff2d72217973f4082640a19192f0835",
+      "bytes": 5813
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/outcome/recovery-v2.png",
+      "sha256": "9931f0b092e25aeced19c8ea15e56d99ac9b0aa31c1001dd82e7cdd62fa5b75f",
+      "bytes": 90583
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/outcome/restoration-v2.png",
+      "sha256": "576f98fa173d5096e6a1c8d90d2ef18f7d69dbc77e7910bed4a0686fff35b39f",
+      "bytes": 65803
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-bandits-anime-v2.png",
+      "sha256": "7be4288e5ba9725217c994c079c642eddfe81f10dab2fd19d6cc5dc6f6669471",
+      "bytes": 1470523
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-cmtn7qttxqo4.png",
+      "sha256": "fe7e91066c52f95613abe94e489dfff991502c186d3419eb9591697e69dbf0c6",
+      "bytes": 1504462
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-arrows.png",
+      "sha256": "92e6e0acf640af7ad43e743f539c690db13f1bb6807111262b7ebd09cc7d7205",
+      "bytes": 1427100
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-classchest.png",
+      "sha256": "ae138b4fab2e6e6dac2e49fd0cd54d4b75c706d90fbc77a333186f421aa92d2d",
+      "bytes": 1218849
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-fireballs.png",
+      "sha256": "a2ee72c272a44c0c55d57a0d846175025b6bece85c4e92f7b6920769711365da",
+      "bytes": 1183988
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-gamble.png",
+      "sha256": "9ef67ace361fa630d76fd58e6cc01b4c7bb9edde73376f03dd3f035f62a35433",
+      "bytes": 1278534
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-pearlbox.png",
+      "sha256": "20fbdb6a7bd34ce2879f267770e99f763a1b6c4fff411b0419511ea33b442ac7",
+      "bytes": 1171890
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-potions.png",
+      "sha256": "45b4b101c145a3336407c64da549213ba9b85ad4355f88dae99bb038924423d5",
+      "bytes": 1293414
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-quartermaster.png",
+      "sha256": "d980cfe56d51c345788df633b0c1e2a4978c8fda42a87f6e802e993e7ee45aea",
+      "bytes": 1249544
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-recode.png",
+      "sha256": "5045ef01bdad5f6cc05ff0f43458dab1e5362b6c257dbf6298b0d6f259de85a2",
+      "bytes": 1193773
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-ev19-vital.png",
+      "sha256": "725dbf82c7bcce5d92b37514ee070576fc145926531d4af7c7a0f36932241bb9",
+      "bytes": 962951
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-last-lamp-1013-v1.png",
+      "sha256": "f342c96851955621ae2fe600241b5ca4181de2fdecc6ddd901dd6cb86b9637aa",
+      "bytes": 1236345
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-airdrop.png",
+      "sha256": "ad3478b9f3b090bf7efefddc0d2a464f7d1e9af4a4ac364efbc30a030d672ec1",
+      "bytes": 1342532
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-chestdraw.png",
+      "sha256": "d45e90537abd5df9a611fab6058c49d4c08a6e29ef33679d6a73cbecf11bae8a",
+      "bytes": 937282
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-demondeal.png",
+      "sha256": "7ab240d637371da1cddfef70d8f16f22a5a69f9712e80003e29513fc69ae7383",
+      "bytes": 1043224
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-goldhammer.png",
+      "sha256": "304309d55e3b043d94365cd84cd43166567920a7a0de0c8f4a36306ff14535fa",
+      "bytes": 1261309
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-goldmine-1013-v2.png",
+      "sha256": "3710c97d84ab2159b8be426c32438ef35f99b9d86f403ed10822bac339a9c728",
+      "bytes": 1894677
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-mystery.png",
+      "sha256": "5360932dbc3c43cb4918f6fe23fceb695f596c7bb03bd36bca8ef721d31a8f23",
+      "bytes": 1297995
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-relief.png",
+      "sha256": "1c8ad34cd928fc6a7b6f9f7f0b65c37fb598e7e9e572ba1ec2b9705fc2599f20",
+      "bytes": 1345738
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/event-tt6-systemsupply.png",
+      "sha256": "695061df0f7fb918cc5883e591fbc5bec656c91477b3af5a9cb08857c06a591a",
+      "bytes": 1476376
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/reward-salvage-v1.png",
+      "sha256": "9260e4e09ab230e37cb1a4f7134fee8e13484d8265efdafbaf7b879a6b508b54",
+      "bytes": 949992
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-altar-anime-v2.png",
+      "sha256": "a689e888e5fed6d8dbf0c15657bb5bf1f1b312e5dd94dd1fa57c98f3e73f8831",
+      "bytes": 1880465
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-chest-anime-v2.png",
+      "sha256": "d85dcdae8c06f5fd99a2f4accfec7860aa6ba771d949662a5d3d836dda3f0c9c",
+      "bytes": 1143454
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-door-anime-v2.png",
+      "sha256": "b285a395a3bbc6534f3b505344cf8f4fe85eeea8e035a1f62cb57f37f36a4e1d",
+      "bytes": 2882441
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-extract-anime-v2.png",
+      "sha256": "8a45c2b7be6e84192d7140459dfb1e4551323252d741122d8253c3c63972b9e3",
+      "bytes": 1075171
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-pickup-coin-anime-v2.png",
+      "sha256": "37226a921bad60b83dc3d5aa51d3ed037d17c8f345658a1bf16a5f67a2898495",
+      "bytes": 1672163
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-pickup-key-anime-v2.png",
+      "sha256": "4eeb1dd37d963ebdeb18ef9f50c3bb18bcd70b1ee601f6aa91c871a67d58cc41",
+      "bytes": 2302962
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-pickup-rations-anime-v2.png",
+      "sha256": "ede2185569a91a93eb8ffb15460c2b66fd6ce33d83b3300ba4ed992038012055",
+      "bytes": 1807589
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-pickup-wood-anime-v2.png",
+      "sha256": "d5a903573337820f0bc16c42b64c0b2f8a94d2468298e2fa1d84467aaadcf99c",
+      "bytes": 1882244
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/scene-shop-anime-v2.png",
+      "sha256": "560f4133ff57966833eef4defb988183cd568d75e79d51a963df310870a52de1",
+      "bytes": 1482101
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/entry/modern-winter-entry-1011-v2.png",
+      "sha256": "ea53405bf6e4d1a705b671970a36b60696e76dc37d0f2f12e6f5a60acd81640c",
+      "bytes": 1441239
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/fire-rest-1021/city-campfire.png",
+      "sha256": "49acfbb89030274b1ebb13a5656a487adc2635083bb9b54423978fa28fdb14f2",
+      "bytes": 480225
+    },
+    {
+      "path": "Assets/Resources/Art/Current/node-rooms/scenes/winter-expedition/outskirts.png",
+      "sha256": "3a15ebbf652ac3206bcabaefb1c823c83c050e0b5187b829e49f8803146fd72f",
+      "bytes": 545430
+    },
+    {
+      "path": "Assets/Resources/Data/CurrentNodeRooms.json",
+      "sha256": "61f6927a4e17d4d6520437d7d46ab0931c49a2c9686baf52b8cfdcce11b45436",
+      "bytes": 108371
+    }
+  ],
+  "binaryPolicy": "No commit performed; binaries and any file above 1MB are evidence-only references for parent packaging."
+}

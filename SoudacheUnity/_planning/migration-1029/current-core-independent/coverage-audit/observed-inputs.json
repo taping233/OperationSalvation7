@@ -1,0 +1,43 @@
+{
+  "status": "observed mutable production read only; not a final production freeze",
+  "timestamp": "2026-10-30T06:58:12.6229167+08:00",
+  "priorSourceManifest": "../final-review/inputs-sha256.json",
+  "files": [
+    {
+      "sha256": "8962D8162DCB1BAE8F247EF3AE79BDCE4B3277418D06988AFEBED7C1E5DBA516",
+      "path": "../../../Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs"
+    },
+    {
+      "sha256": "5CBA112D6C6E75CFB0214863BFBBDD06DB36CCA376F4BFC2A0B771AFEF73A084",
+      "path": "../../../Assets/Scripts/Sdt.Core/Battle/BattleSession.cs"
+    },
+    {
+      "sha256": "8ECAB8FC3770A22210F5CB35E28A54262006440B4D34841227EEBA3C1E5924BA",
+      "path": "../../../Assets/Scripts/Sdt.Core/Battle/BattleItems.cs"
+    },
+    {
+      "sha256": "A3073FBF236A1A3BB2297CCD12B7C0FDE24AD6FAF67316438D6EC9B81F154AF5",
+      "path": "../../../Assets/Scripts/Sdt.Core/Battle/CurrentBattlePools.cs"
+    },
+    {
+      "sha256": "B665975E94A231537017509F16798E585AA6C6733738B623E65DB7CAA69F3179",
+      "path": "../../../Assets/Scripts/Sdt.Core/Battle/DeckBottomDiscovery.cs"
+    },
+    {
+      "sha256": "13B669BAA9B34209C912C94E3EDD7404FFEE4E228BAF170166B0B9252B9638CD",
+      "path": "../../../../搜打撤/game/src/battle/effects/choice-semantic-operations.js"
+    },
+    {
+      "sha256": "4457BDBC738CB19EC2649C062D38B50D5C094665DEC96C03C354533C2B8F3EFF",
+      "path": "../../../../搜打撤/game/src/battle/effects/card-semantic-operations.js"
+    },
+    {
+      "sha256": "CA82006BF49735EE9319EF8B08B00E579D245371F6D3D44D43975D67F36B49CD",
+      "path": "../../../../搜打撤/game/src/battle/effects/battle.infusion.js"
+    },
+    {
+      "sha256": "19C2D673CA3B9A8D7A3EF7BEB336465DD66AE451CE5529D87CC2686F4D368CE9",
+      "path": "../../../../搜打撤/game/src/battle/effects/battle.discover-flow.js"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "status": "frozen-uncommitted",
+  "owner": "unity_current_battle_ui_port",
+  "timeUtc": "2026-10-29T19:00:53.1756258Z",
+  "scope": "Assets/Scripts/Sdt.UI/Screens/Battle",
+  "sourceContracts": 87,
+  "sourceFiles": 26,
+  "syntaxFiles": 14,
+  "syntaxErrors": 0,
+  "projectCompilation": "not-run",
+  "unityNative": "not-run",
+  "visualEffects": "awaiting-main-new-capture-and-review",
+  "sourceReceiptSha256": "79732dff18c9c2cf71b8e17d6ca2c324ff55eacd76f5629322f6c88ab09b6bff",
+  "entry": "BattleScreen.OpenBattleSettings()",
+  "pending": [
+    "parent unified project compilation",
+    "parent original-source forecast tests",
+    "native current-window render and input",
+    "2x enemy pipeline timing remains synchronous"
+  ]
+}

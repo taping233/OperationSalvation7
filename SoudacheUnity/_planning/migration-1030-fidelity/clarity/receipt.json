@@ -1,0 +1,37 @@
+{
+  "recordedUtc": "2026-10-30T06:40:02.832590+00:00",
+  "productionFreeze": {
+    "Assets/Scripts/Sdt.Boot/GameBoot.cs": "600f74a1d848ed525d2842a61251f2f39776ad5f724f5ac5bafa4ea9e637d6d9",
+    "Assets/Scripts/Sdt.Boot/NativeDisplayReview.cs": "8e7640913190372350b3559adffa21c28ba4e5001380a13d15dee43625cde797",
+    "Assets/Scripts/Sdt.UI/Kit/App.cs": "71676543e3612974082268532a022463af6ccf5aa2fc5849f39524493d2c1c1c",
+    "Assets/Scripts/Sdt.UI/Kit/InlineIconText.cs": "a65bff1b453b4fbba5b7e9c33db2ebcd70e817f2bfa5401857bdf04b5d4d2f7e",
+    "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoInlineLinks.cs": "9eb0b4c5a6d5d3639a46ecf30c910f24f4b3f50b5577382652d53c36d32b7d16"
+  },
+  "sourceInputs": {
+    "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\src\\ui\\ui-scale.js": "bc07cbf42305e549dede660cc8abc0646ee579c3ecbf4e6f8afa571cfa92c2bc",
+    "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\src\\core\\renderer.js": "b5ae9222fb5afe5f27ce6a521795bdfcc651c60d0e389ea489a8cba2cf786fe6",
+    "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\src\\core\\performance-settings.js": "736b80fce4cac19c7e2e722775da048f175bef7d8dcffd0ce61cc9fafe501432",
+    "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\src\\core\\performance-budgets.js": "19882d112172c606cabcc23a6b522f2103717cb283233d7a7344bf1b1ebdd283",
+    "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\Library\\PackageCache\\com.unity.ugui@eb824e41fbc7\\Runtime\\UGUI\\UI\\Core\\Text.cs": "cac63e422859997e71d6737236bdde3b370eac462cf87976df81093eaa17e77a",
+    "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\Library\\PackageCache\\com.unity.ugui@eb824e41fbc7\\Runtime\\UGUI\\UI\\Core\\Layout\\CanvasScaler.cs": "24939106f6de5980396914066b47a887580b65bacea6014f767033c71a700f94",
+    "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\ProjectSettings\\ProjectSettings.asset": "415773ad2f8c9cec7d527533e515e344f4232d96f7046c90cdb10abdc3a0b3d4",
+    "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\ProjectSettings\\QualitySettings.asset": "f1f893b1be47ad2442f58338dd7c860dc1986bb317e2f5bb31084454ffabbf4c"
+  },
+  "originalPlayerObservedRunning": false,
+  "currentPhysicalDisplay": {
+    "width": 2560,
+    "height": 1440,
+    "evidence": "read-only Win32_VideoController"
+  },
+  "originalExeDeclaredDpi": {
+    "method": "read-only PE RT_MANIFEST resource 1",
+    "dpiAware": "True/PM",
+    "dpiAwareness": "PerMonitorV2"
+  },
+  "originalPlayerLogSha256": "1f7313dc9d1ab2549d6dc9ed1e9634751109590d76538a5c5e05072c7aca859f",
+  "helpers": {
+    "run_hidden_player.ps1": "12b4580f330d6a24238466409f147ae70c78f4e06f43f5a087653a43e20ad2f9",
+    "analyse_player_review.py": "8d2f249894e5e3a1a0ca63a6d3523f313320da2b2399aaf192edfc376c906d55"
+  },
+  "nativeValidation": "pending Root actual standalone build/run; no Unity or user window operated by this agent"
+}

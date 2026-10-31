@@ -1,0 +1,569 @@
+{
+  "generatedAtUtc": "2026-10-30T00:07:17.8532861Z",
+  "scope": "E1 provenance-label closure only; two new real wu command stills viewed; static component/catalog review reused",
+  "finding": "E1",
+  "status": "closed-in-current-unit-frames-2",
+  "originalEvidenceNotRewritten": true,
+  "process": {
+    "method": "Sdt.Editor.CurrentUnitFrameValidation.Run",
+    "pid": 16372,
+    "startedAt": "2026-10-29T23:55:01.7473845Z",
+    "endedAt": "2026-10-29T23:55:31.8936445Z",
+    "exitCode": 0,
+    "timedOut": false,
+    "inputsUnchanged": true,
+    "changedInputs": [],
+    "sourceCount": 334,
+    "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-unit-frames-2"
+  },
+  "evidenceIntegrity": {
+    "afterKeys": 334,
+    "cueValuesEqual": true,
+    "changedOrRemoved": 0,
+    "added": 0,
+    "recordValuesEqual": true,
+    "beforeKeys": 334,
+    "artifacts": [
+      {
+        "file": "process.json",
+        "sha256": "7505aed341e70b010fb1fe67aeb5344cf73250638a7ef71ab36d1a317f958d84"
+      },
+      {
+        "file": "result.json",
+        "sha256": "7622f654277571eed175219417d4dd739a5c5ec4d393267eadb453e7f5c65442"
+      },
+      {
+        "file": "frames-trace.json",
+        "sha256": "5f2ab3f4f77c79904e3fd99e5649bf0f4c08faf6de762c4f733c91ae1f45e73e"
+      },
+      {
+        "file": "source-before.json",
+        "sha256": "cc303c8a201fbaba41a789ff25a7fb7add687faef9450772e29692b3fbc49262"
+      },
+      {
+        "file": "source-after.json",
+        "sha256": "cc303c8a201fbaba41a789ff25a7fb7add687faef9450772e29692b3fbc49262"
+      }
+    ],
+    "traceRecords": 297,
+    "resultRecords": 297
+  },
+  "transitionClassification": {
+    "commandOriginFalse": 10,
+    "groups": [
+      {
+        "fixture": false,
+        "stage": 2,
+        "role": "wu",
+        "count": 3
+      },
+      {
+        "fixture": false,
+        "stage": 3,
+        "role": "wu",
+        "count": 7
+      },
+      {
+        "fixture": true,
+        "stage": 4,
+        "role": "baita",
+        "count": 1
+      },
+      {
+        "fixture": true,
+        "stage": 4,
+        "role": "changwuyu",
+        "count": 1
+      },
+      {
+        "fixture": true,
+        "stage": 4,
+        "role": "heixiang",
+        "count": 1
+      },
+      {
+        "fixture": true,
+        "stage": 4,
+        "role": "xingyue",
+        "count": 1
+      },
+      {
+        "fixture": true,
+        "stage": 5,
+        "role": "baita",
+        "count": 42
+      },
+      {
+        "fixture": true,
+        "stage": 5,
+        "role": "changwuyu",
+        "count": 50
+      },
+      {
+        "fixture": true,
+        "stage": 5,
+        "role": "heixiang",
+        "count": 37
+      },
+      {
+        "fixture": true,
+        "stage": 5,
+        "role": "wu",
+        "count": 39
+      },
+      {
+        "fixture": true,
+        "stage": 5,
+        "role": "xingyue",
+        "count": 43
+      },
+      {
+        "fixture": true,
+        "stage": 7,
+        "role": "wu",
+        "count": 1
+      }
+    ],
+    "total": 226,
+    "commandTransitions": [
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 2,
+        "action": "idle",
+        "frame": "sprite-v1/neutral",
+        "index": 0,
+        "fixture": false
+      },
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 2,
+        "action": "atk",
+        "frame": "sprite-v1/frame-041",
+        "index": 7,
+        "fixture": false
+      },
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 2,
+        "action": "idle",
+        "frame": "sprite-v1/neutral",
+        "index": 0,
+        "fixture": false
+      },
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 3,
+        "action": "hurt",
+        "frame": "sprite-v1/neutral",
+        "index": 0,
+        "fixture": false
+      },
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 3,
+        "action": "hurt",
+        "frame": "sprite-v1/frame-043",
+        "index": 1,
+        "fixture": false
+      },
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 3,
+        "action": "hurt",
+        "frame": "sprite-v1/frame-044",
+        "index": 4,
+        "fixture": false
+      },
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 3,
+        "action": "hurt",
+        "frame": "sprite-v1/frame-044",
+        "index": 5,
+        "fixture": false
+      },
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 3,
+        "action": "hurt",
+        "frame": "sprite-v1/frame-044",
+        "index": 6,
+        "fixture": false
+      },
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 3,
+        "action": "hurt",
+        "frame": "sprite-v1/neutral",
+        "index": 7,
+        "fixture": false
+      },
+      {
+        "kind": "actual-frame-transition",
+        "role": "wu",
+        "stage": 3,
+        "action": "idle",
+        "frame": "sprite-v1/neutral",
+        "index": 0,
+        "fixture": false
+      }
+    ],
+    "badFixtureCount": 0,
+    "fixtureOriginTrue": 216,
+    "badCommandCount": 0
+  },
+  "allFalseRecordKinds": [
+    {
+      "Name": "actual-frame-transition",
+      "Count": 10
+    },
+    {
+      "Name": "native-frame-sample",
+      "Count": 2
+    },
+    {
+      "Name": "real-card-command-atk",
+      "Count": 1
+    },
+    {
+      "Name": "real-EndTurn-hurt",
+      "Count": 1
+    }
+  ],
+  "sourceFingerprints": [
+    {
+      "path": "SoudacheUnity/Assets/Editor/CurrentUnitFrameValidation.cs",
+      "sha256": "cba022589ce39555f9348f6f42ba02ff0adddab36bcf744fb60b5138b7202868",
+      "previousReviewSha256": "cba022589ce39555f9348f6f42ba02ff0adddab36bcf744fb60b5138b7202868",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "cba022589ce39555f9348f6f42ba02ff0adddab36bcf744fb60b5138b7202868",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "59-65 classification and95-120 real command/stage boundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Editor/OffscreenCapture.cs",
+      "sha256": "73af16a2d14b5c4f921bb51947584edb1a41365d5b05feba371ca98ef99e5990",
+      "previousReviewSha256": "73af16a2d14b5c4f921bb51947584edb1a41365d5b05feba371ca98ef99e5990",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "73af16a2d14b5c4f921bb51947584edb1a41365d5b05feba371ca98ef99e5990",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleUnitFrames.cs",
+      "sha256": "c98c9db9210690bf2166ce6f3b81d789a1cb136bdf2b185242af39c0f36da640",
+      "previousReviewSha256": "c98c9db9210690bf2166ce6f3b81d789a1cb136bdf2b185242af39c0f36da640",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "c98c9db9210690bf2166ce6f3b81d789a1cb136bdf2b185242af39c0f36da640",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleActorClock.cs",
+      "sha256": "3688f7d6954947cf7d02df9624602d099a044950e9c12932fdd873bbd63f8421",
+      "previousReviewSha256": "3688f7d6954947cf7d02df9624602d099a044950e9c12932fdd873bbd63f8421",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "3688f7d6954947cf7d02df9624602d099a044950e9c12932fdd873bbd63f8421",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Res/CurrentUnitFrames.cs",
+      "sha256": "c58df1429b084d6e322d4e74344a57f33f74e4f45d06b8774f2102626260002f",
+      "previousReviewSha256": "c58df1429b084d6e322d4e74344a57f33f74e4f45d06b8774f2102626260002f",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "c58df1429b084d6e322d4e74344a57f33f74e4f45d06b8774f2102626260002f",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Res/UnitFrameCatalog.cs",
+      "sha256": "0f1f4a96e9fe4b022df67559b956162edcde1f48c121a8ad28fa1857c4282d97",
+      "previousReviewSha256": "0f1f4a96e9fe4b022df67559b956162edcde1f48c121a8ad28fa1857c4282d97",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "0f1f4a96e9fe4b022df67559b956162edcde1f48c121a8ad28fa1857c4282d97",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Resources/Data/CurrentUnitFrames.json",
+      "sha256": "e31d19a69ebb858273883ad7b9257b47a08351074ac4686f5fe9b3fe327ea83c",
+      "previousReviewSha256": "e31d19a69ebb858273883ad7b9257b47a08351074ac4686f5fe9b3fe327ea83c",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+      "sha256": "2d148fe7282f0ac645d0ac75ee8aa07406ab1af32b76c6374de33fe28bc55bf4",
+      "previousReviewSha256": "2d148fe7282f0ac645d0ac75ee8aa07406ab1af32b76c6374de33fe28bc55bf4",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "2d148fe7282f0ac645d0ac75ee8aa07406ab1af32b76c6374de33fe28bc55bf4",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentationQueue.cs",
+      "sha256": "72757666f3a776866fa5fd67cea6d4f4bd9ed38803f768c4bc096d0d050da311",
+      "previousReviewSha256": "72757666f3a776866fa5fd67cea6d4f4bd9ed38803f768c4bc096d0d050da311",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "72757666f3a776866fa5fd67cea6d4f4bd9ed38803f768c4bc096d0d050da311",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentationBeats.cs",
+      "sha256": "a1ae06b8669198411b643b48c25a7a7328d64e0f5a220dfa36937fe490b73d58",
+      "previousReviewSha256": "a1ae06b8669198411b643b48c25a7a7328d64e0f5a220dfa36937fe490b73d58",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "a1ae06b8669198411b643b48c25a7a7328d64e0f5a220dfa36937fe490b73d58",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Core/Battle/BattleActorPresentation.cs",
+      "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a",
+      "previousReviewSha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "sha256": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99",
+      "previousReviewSha256": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs",
+      "sha256": "ac90af36245bfe801c08606da5ad4702d69e0b218cb6264e9284aea52aad8997",
+      "previousReviewSha256": "ac90af36245bfe801c08606da5ad4702d69e0b218cb6264e9284aea52aad8997",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": "ac90af36245bfe801c08606da5ad4702d69e0b218cb6264e9284aea52aad8997",
+      "matchesNewRun": true,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "sha256": "5cf48efee89816eae30390665705558433a21aaa6918a0afdc0271e7afc94505",
+      "previousReviewSha256": "5cf48efee89816eae30390665705558433a21aaa6918a0afdc0271e7afc94505",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frame-catalog.js",
+      "sha256": "3699b292b5e1620f1ca5cc51775a4a213a02a95c3fab7f7f14d16f883c879727",
+      "previousReviewSha256": "3699b292b5e1620f1ca5cc51775a4a213a02a95c3fab7f7f14d16f883c879727",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "sha256": "ba7f531eae515cb888e9f34f89c76eb55a1d82bcb76b5920fcbd4bba600dd224",
+      "previousReviewSha256": "ba7f531eae515cb888e9f34f89c76eb55a1d82bcb76b5920fcbd4bba600dd224",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frame-catalog-three-role.js",
+      "sha256": "efbdf272a28617f60c61cc114dc4481d81a9d90576adb4832a395c89884d0a6d",
+      "previousReviewSha256": "efbdf272a28617f60c61cc114dc4481d81a9d90576adb4832a395c89884d0a6d",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/animations.json",
+      "sha256": "322055d9c310af548716f4be77005540c29658032ecb38f3fd697b389a1423a8",
+      "previousReviewSha256": "322055d9c310af548716f4be77005540c29658032ecb38f3fd697b389a1423a8",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/animations.json",
+      "sha256": "4506cb85b506e943436513a14e2d3c4d298df4637591740b839c41e7a266bfe0",
+      "previousReviewSha256": "4506cb85b506e943436513a14e2d3c4d298df4637591740b839c41e7a266bfe0",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/animations.json",
+      "sha256": "e834fc26969fdc44d15be767a8d2739c2c1c6dd92fd087621edde6acd071f303",
+      "previousReviewSha256": "e834fc26969fdc44d15be767a8d2739c2c1c6dd92fd087621edde6acd071f303",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/animations.json",
+      "sha256": "f3354a16a949a5c3d4b93a19e1c5b0da17dc7f8f86573819c09c0743eaab6567",
+      "previousReviewSha256": "f3354a16a949a5c3d4b93a19e1c5b0da17dc7f8f86573819c09c0743eaab6567",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/animations.json",
+      "sha256": "e834fc26969fdc44d15be767a8d2739c2c1c6dd92fd087621edde6acd071f303",
+      "previousReviewSha256": "e834fc26969fdc44d15be767a8d2739c2c1c6dd92fd087621edde6acd071f303",
+      "unchangedSincePreviousReview": true,
+      "newRunSourceSha256": null,
+      "matchesNewRun": null,
+      "readBoundaryThisFollowup": "SHA comparison only; reuse original readBoundary"
+    }
+  ],
+  "newViewedImages": [
+    {
+      "file": "frames-wu-real-card-command-atk.png",
+      "sha256": "58dd4a08c3014a62af15c45f87ddd35d67711a41d9606855dca8d314512d7449",
+      "viewedWith": "tools.view_image",
+      "observation": "无的攻击动作索引7/帧041呈收势持剑站姿；初始攻击日志4伤害，HUD仍为命中前队列值，角色透明轮廓与脚底稳定。",
+      "sample": {
+        "role": "wu",
+        "action": "atk",
+        "index": 7,
+        "frame": "sprite-v1/frame-041",
+        "fixture": false,
+        "alpha": {
+          "opaque": 33365,
+          "transparent": 139282,
+          "minimum": 0,
+          "maximum": 255
+        },
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249
+      }
+    },
+    {
+      "file": "frames-wu-real-EndTurn-hurt.png",
+      "sha256": "1dc5bd82ad90bd58e18fc4df6f24dbc12c5579dc9e93a469394e6d56068058c8",
+      "viewedWith": "tools.view_image",
+      "observation": "无后仰受伤，敌方行动标记，HP998/1000，敌HP9996/10000；受伤闪光及浮字可见，透明轮廓和脚底稳定。",
+      "sample": {
+        "role": "wu",
+        "action": "hurt",
+        "index": 1,
+        "frame": "sprite-v1/frame-043",
+        "fixture": false,
+        "alpha": {
+          "opaque": 31965,
+          "transparent": 141267,
+          "minimum": 0,
+          "maximum": 255
+        },
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249
+      }
+    }
+  ],
+  "reuse": {
+    "totalSourceItems": 22,
+    "unchangedSourceItems": 22,
+    "previousReportSha256": "c506531b35c516c169fb00e4efab985ee5372c71c73b745a4f92d319ceb0eaf2",
+    "note": "Changed wu fixture PNG bytes not re-viewed under explicit followup scope; reuse is static component/catalog, not fresh per-image approval.",
+    "pngBytesIdenticalToPrevious": 24,
+    "newPngCount": 32,
+    "notReViewedThisFollowup": 30,
+    "previousReport": "review.json",
+    "pngBytesChanged": [
+      "frames-wu-atk-mid.png",
+      "frames-wu-cast-mid.png",
+      "frames-wu-death-last-hold.png",
+      "frames-wu-death-mid.png",
+      "frames-wu-hurt-mid.png",
+      "frames-wu-idle-mid.png",
+      "frames-wu-real-card-command-atk.png",
+      "frames-wu-real-EndTurn-hurt.png"
+    ]
+  },
+  "cues": [
+    {
+      "BattleToken": "4ad86dc030de4816a6e01cd667fa281d",
+      "Sequence": 1,
+      "Kind": "windup",
+      "Action": "atk",
+      "HpBefore": 0,
+      "HpAfter": 0,
+      "IsSelf": false
+    },
+    {
+      "BattleToken": "4ad86dc030de4816a6e01cd667fa281d",
+      "Sequence": 2,
+      "Kind": "hit",
+      "Action": null,
+      "HpBefore": 10000,
+      "HpAfter": 9996,
+      "IsSelf": false
+    },
+    {
+      "BattleToken": "4ad86dc030de4816a6e01cd667fa281d",
+      "Sequence": 3,
+      "Kind": "wait",
+      "Action": null,
+      "HpBefore": 0,
+      "HpAfter": 0,
+      "IsSelf": false
+    },
+    {
+      "BattleToken": "4ad86dc030de4816a6e01cd667fa281d",
+      "Sequence": 4,
+      "Kind": "enemy-windup",
+      "Action": null,
+      "HpBefore": 0,
+      "HpAfter": 0,
+      "IsSelf": false
+    },
+    {
+      "BattleToken": "4ad86dc030de4816a6e01cd667fa281d",
+      "Sequence": 5,
+      "Kind": "hit",
+      "Action": null,
+      "HpBefore": 1000,
+      "HpAfter": 998,
+      "IsSelf": true
+    },
+    {
+      "BattleToken": "4ad86dc030de4816a6e01cd667fa281d",
+      "Sequence": 6,
+      "Kind": "wait",
+      "Action": null,
+      "HpBefore": 0,
+      "HpAfter": 0,
+      "IsSelf": false
+    }
+  ],
+  "limits": [
+    "No Unity/compiler/CUA launched; production and shared docs read-only.",
+    "osHardwareInput remains false; formal commands mean Session API, not hardware input.",
+    "Only wu has formal commands; other30 samples and pause/death hold are fixtures. No new real lethal/spell/hardware/final-build validation.",
+    "Only1920x1080 offscreen stills; original visual boundary retained.",
+    "Current source hash correspondence does not independently re-audit final Core semantics; this followup closes evidence labeling only."
+  ]
+}

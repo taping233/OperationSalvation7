@@ -1,0 +1,314 @@
+{
+  "scenarios": [
+    {
+      "fixture": {
+        "name": "combo",
+        "type": "武术",
+        "amount": 5,
+        "count": 3,
+        "targets": 1,
+        "hp": 50
+      },
+      "records": [
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 45,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": true,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 45,
+          "after": 40,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": true,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 40,
+          "after": 35,
+          "max": 50
+        }
+      ],
+      "hp": [
+        35
+      ],
+      "over": false
+    },
+    {
+      "fixture": {
+        "name": "area-combo",
+        "type": "法术",
+        "amount": 5,
+        "count": 2,
+        "targets": 2,
+        "hp": 50
+      },
+      "records": [
+        {
+          "kind": "windup",
+          "action": "cast",
+          "replay": false,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 43,
+          "max": 50
+        },
+        {
+          "kind": "hit",
+          "unit": 1,
+          "before": 50,
+          "after": 43,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "cast",
+          "replay": true,
+          "windup": 90
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 43,
+          "after": 36,
+          "max": 50
+        },
+        {
+          "kind": "hit",
+          "unit": 1,
+          "before": 43,
+          "after": 36,
+          "max": 50
+        }
+      ],
+      "hp": [
+        36,
+        36
+      ],
+      "over": false
+    },
+    {
+      "fixture": {
+        "name": "victory",
+        "type": "武术",
+        "amount": 60,
+        "count": 1,
+        "targets": 1,
+        "hp": 50
+      },
+      "records": [
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 240
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 0,
+          "max": 50
+        }
+      ],
+      "hp": [
+        0
+      ],
+      "over": true
+    },
+    {
+      "fixture": {
+        "name": "neutral-cast",
+        "type": "法术",
+        "amount": 2,
+        "count": 1,
+        "targets": 1,
+        "hp": 50
+      },
+      "records": [
+        {
+          "kind": "windup",
+          "action": "cast",
+          "replay": false,
+          "windup": 200
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 46,
+          "max": 50
+        }
+      ],
+      "hp": [
+        46
+      ],
+      "over": false
+    },
+    {
+      "fixture": {
+        "name": "children",
+        "type": "法术",
+        "amount": 0,
+        "count": 0,
+        "targets": 1,
+        "hp": 50
+      },
+      "records": [
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 130
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 50,
+          "after": 46,
+          "max": 50
+        },
+        {
+          "kind": "windup",
+          "action": "atk",
+          "replay": false,
+          "windup": 130
+        },
+        {
+          "kind": "hit",
+          "unit": 0,
+          "before": 46,
+          "after": 42,
+          "max": 50
+        }
+      ],
+      "hp": [
+        42
+      ],
+      "over": false
+    },
+    {
+      "fixture": {
+        "name": "enemy-double",
+        "enemy": true,
+        "affix": "frenzy",
+        "playerCurseImmune": true,
+        "playerHp": 30,
+        "enemyAtk": 3,
+        "targets": 1,
+        "hp": 50
+      },
+      "records": [
+        {
+          "kind": "enemy-windup",
+          "actor": 0
+        },
+        {
+          "kind": "hit",
+          "unit": "self",
+          "before": 30,
+          "after": 27,
+          "max": 60
+        },
+        {
+          "kind": "enemy-windup",
+          "actor": 0
+        },
+        {
+          "kind": "hit",
+          "unit": "self",
+          "before": 27,
+          "after": 24,
+          "max": 60
+        }
+      ],
+      "hp": [
+        50
+      ],
+      "over": false
+    },
+    {
+      "fixture": {
+        "name": "death",
+        "enemy": true,
+        "playerHp": 2,
+        "enemyAtk": 3,
+        "targets": 1,
+        "hp": 50
+      },
+      "records": [
+        {
+          "kind": "enemy-windup",
+          "actor": 0
+        },
+        {
+          "kind": "hit",
+          "unit": "self",
+          "before": 2,
+          "after": -1,
+          "max": 60
+        },
+        {
+          "kind": "death"
+        }
+      ],
+      "hp": [
+        50
+      ],
+      "over": true
+    },
+    {
+      "fixture": {
+        "name": "surrender",
+        "surrender": true,
+        "playerHp": 30,
+        "targets": 1,
+        "hp": 50
+      },
+      "records": [],
+      "hp": [
+        50
+      ],
+      "over": true
+    },
+    {
+      "fixture": {
+        "name": "smoke",
+        "smoke": true,
+        "playerHp": 30,
+        "targets": 1,
+        "hp": 50
+      },
+      "records": [],
+      "hp": [
+        50
+      ],
+      "over": true
+    }
+  ]
+}

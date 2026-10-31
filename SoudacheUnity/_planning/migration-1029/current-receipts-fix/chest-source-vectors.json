@@ -1,0 +1,561 @@
+{
+  "source": "game/src/run/chests.js",
+  "sha256": "fd42e9bde3b8cb28e913687c77e6aa462cae57dcee24309a637523e76cdf732e",
+  "cases": [
+    {
+      "name": "two-cards-last-bulk",
+      "boxes": [
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0,
+            1
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": -1,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "two-cards-last-individual",
+      "boxes": [
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0,
+            1
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 1,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "single-small-direct",
+      "boxes": [
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 0,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": true,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "single-small-battle",
+      "boxes": [
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 0,
+      "battle": true,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "single-small-bulk-not-source-claimRewardAt",
+      "boxes": [
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": -1,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "single-choice",
+      "boxes": [
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "one",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 0,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "single-medium",
+      "boxes": [
+        {
+          "n": 1,
+          "kind": "medium",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 0,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "first-of-two-advance",
+      "boxes": [
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0,
+            1
+          ],
+          "lost": [],
+          "completed": false
+        },
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 1,
+      "expected": {
+        "resolved": true,
+        "pending": 1,
+        "automatic": false,
+        "closeIndex": 1,
+        "closedToNext": true,
+        "finished": false
+      }
+    },
+    {
+      "name": "last-of-two-stays",
+      "boxes": [
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0
+          ],
+          "lost": [],
+          "completed": true
+        },
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0,
+            1
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "index": 1,
+      "receivedIndex": 1,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 1,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "forfeit-last-stays",
+      "boxes": [
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [],
+          "lost": [
+            0,
+            1
+          ],
+          "completed": false
+        }
+      ],
+      "receivedIndex": -1,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "forfeit-first-advance",
+      "boxes": [
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [],
+          "lost": [
+            0,
+            1
+          ],
+          "completed": false
+        },
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": -1,
+      "expected": {
+        "resolved": true,
+        "pending": 1,
+        "automatic": false,
+        "closeIndex": 1,
+        "closedToNext": true,
+        "finished": false
+      }
+    },
+    {
+      "name": "choice-plus-independent-bonus",
+      "boxes": [
+        {
+          "n": 4,
+          "kind": "small",
+          "claimMode": "one",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            1,
+            3
+          ],
+          "lost": [
+            0,
+            2
+          ],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 3,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "choice-bonus-remains",
+      "boxes": [
+        {
+          "n": 4,
+          "kind": "small",
+          "claimMode": "one",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            1
+          ],
+          "lost": [
+            0,
+            2
+          ],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 1,
+      "skipClose": true,
+      "expected": {
+        "resolved": false,
+        "pending": 0,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": false
+      }
+    },
+    {
+      "name": "coins-not-yet-collected",
+      "boxes": [
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": false,
+          "taken": [
+            0,
+            1
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 1,
+      "skipClose": true,
+      "expected": {
+        "resolved": false,
+        "pending": 0,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": false
+      }
+    },
+    {
+      "name": "empty-reward-continue",
+      "boxes": [
+        {
+          "n": 0,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 0,
+          "coinsTaken": false,
+          "taken": [],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": -1,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "zero-coins-single-small",
+      "boxes": [
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 0,
+          "coinsTaken": false,
+          "taken": [
+            0
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "receivedIndex": 0,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": true,
+        "closeIndex": 0,
+        "closedToNext": false,
+        "finished": true
+      }
+    },
+    {
+      "name": "prior-unresolved-box",
+      "boxes": [
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [],
+          "lost": [],
+          "completed": false
+        },
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0,
+            1
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "index": 1,
+      "receivedIndex": 1,
+      "expected": {
+        "resolved": true,
+        "pending": 0,
+        "automatic": false,
+        "closeIndex": 0,
+        "closedToNext": true,
+        "finished": false
+      }
+    },
+    {
+      "name": "all-prior-resolved",
+      "boxes": [
+        {
+          "n": 1,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0
+          ],
+          "lost": [],
+          "completed": true
+        },
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0,
+            1
+          ],
+          "lost": [],
+          "completed": true
+        },
+        {
+          "n": 2,
+          "kind": "small",
+          "claimMode": "all",
+          "coins": 3,
+          "coinsTaken": true,
+          "taken": [
+            0,
+            1
+          ],
+          "lost": [],
+          "completed": false
+        }
+      ],
+      "index": 2,
+      "receivedIndex": 1,
+      "expected": {
+        "resolved": true,
+        "pending": -1,
+        "automatic": false,
+        "closeIndex": 2,
+        "closedToNext": false,
+        "finished": true
+      }
+    }
+  ]
+}

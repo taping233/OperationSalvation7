@@ -1,0 +1,20 @@
+{
+    "name": "Sdt.UI",
+    "rootNamespace": "Sdt.UI",
+    "references": [
+        "Sdt.Core",
+        "Sdt.Run",
+        "Sdt.Narrative",
+        "Sdt.View",
+        "Sdt.Res",
+        "Newtonsoft.Json"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

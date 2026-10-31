@@ -1,0 +1,2502 @@
+[
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentSettlementReport.cs.meta",
+    "bytes": 62,
+    "sha256": "5574c9ae799ba6821ef3033df10fa8a207d56021f24f2b61c4aa309e3760baf8"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentSettlementView.cs",
+    "bytes": 4225,
+    "sha256": "5cac04a51b69b04a46bb6b6997f3e119025dcac21fcf0d7d66b44da18cb23366"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentSettlementView.cs.meta",
+    "bytes": 62,
+    "sha256": "faa02d86413aa15f7160b2998216d3e386b0ff4d1556a5d3017f010ccb34c9f3"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCarry.cs",
+    "bytes": 4272,
+    "sha256": "a725f15c9f39de4803cb3928ce8213bbf397b6f7c79b93b85ce388e1dfed228e"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCarry.cs.meta",
+    "bytes": 254,
+    "sha256": "a90096031256ba3423e826574868e89180a1a0b6a59e2a6717ded91eedc3dd27"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCoin.cs",
+    "bytes": 2765,
+    "sha256": "358145d7797b3090842287cadf65e1d7ea7b181939bfe79902ff691802d99142"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCoin.cs.meta",
+    "bytes": 254,
+    "sha256": "b6eca867d3ff8085e86c98cb0134fbb1e97ba63d8f188f137ba766f3ed61ee1c"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCommission.cs",
+    "bytes": 14149,
+    "sha256": "a037e69d8f2407783c9fdbde2cfe11f65d9dac95483c15b1deca77cfaa014b34"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCommission.cs.meta",
+    "bytes": 254,
+    "sha256": "2bbd9ff553c83e6b0a7f41bc6d08e79a4a4df5ddca0dd645a323f57525913922"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Detail.cs",
+    "bytes": 8044,
+    "sha256": "9cb68e1879e3142d5454eb8260cd5cc4a82df3f12d518e33515cf14ec06a0151"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Detail.cs.meta",
+    "bytes": 254,
+    "sha256": "196238ba0afd7aa938c6a1897d0016db1ea6ae05d210338fd2687c2006bd711f"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Exchange.cs",
+    "bytes": 5850,
+    "sha256": "9290cad70ea6b86e9f2e8440d9bc451fcf10916ece6be441daecceca3505e3b0"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Exchange.cs.meta",
+    "bytes": 254,
+    "sha256": "28922cbd193e18496029bcc99ecd94e8139c7e0666244e963771976516b9845f"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Market.cs",
+    "bytes": 11261,
+    "sha256": "4053aea92a4d4eb129bfb71af14355f18fadade1e48b94d2ae7d0b801d01b5cd"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Market.cs.meta",
+    "bytes": 254,
+    "sha256": "e43d0562efcc85b4aac753fcf1652f3a316a6e9436a1204ba286fdb593316321"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.cs",
+    "bytes": 9998,
+    "sha256": "31a852b303f306e4db29fa41ac0a305805a52d2b9443ddfe3fdaa89881339bbe"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.cs.meta",
+    "bytes": 254,
+    "sha256": "10e265ae1fd8ea1305bab9262a96f91ed15fa0f2b7b888aa6bf2aab486fb388b"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/DepartureElements.cs",
+    "bytes": 21499,
+    "sha256": "afb814af3b364b7308ca0d4d250284fc09136e8dbb9d5fa1d05295c6ffa570d0"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/DepartureElements.cs.meta",
+    "bytes": 243,
+    "sha256": "0987cf4f85880be6d2acc59ca9aba8c3c40c332224a4047c86f8bf7af226f7c6"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/DepartureSourceMotion.cs",
+    "bytes": 1162,
+    "sha256": "62743e782231538405325ffff2fc46d8e8ffbc3d0c48cdd50c3f2614d31d0ee7"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/DepartureSourceMotion.cs.meta",
+    "bytes": 243,
+    "sha256": "068a6c995090fe52b36779a98d2cf7a9db94b42ef4b19d4a5c6b1cd862a5e7de"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EntrySupplyScreen.cs",
+    "bytes": 5351,
+    "sha256": "3d6371cda02702df73e5ea7c6b7c215ebd9867b5aeea94d84d73e0cd40b66a2a"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EntrySupplyScreen.cs.meta",
+    "bytes": 59,
+    "sha256": "f44419fd22e8f71baa0f529a1443854614bab4396a543d1c1037a3d2f5f5d1fe"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogChoices.cs",
+    "bytes": 11370,
+    "sha256": "a773d5d77e509b01da8bf4af6920e1451bfbf35837ee9adfa01b28b42e309685"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogChoices.cs.meta",
+    "bytes": 59,
+    "sha256": "ad49645259eae613b75056f5166e8cfceb40b6e642bca457fbb037431a95ddda"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogRecode.cs",
+    "bytes": 7036,
+    "sha256": "1da447460bfb84e74f71ac04443838ed2b9c89a85a7e740b63204768f24d0f81"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogRecode.cs.meta",
+    "bytes": 60,
+    "sha256": "7d09fb5d200826acddbf3bfe4f9d9d3f546939a5dd4d495a1d798670a4ffa37f"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogScreen.cs",
+    "bytes": 12327,
+    "sha256": "2b48ed3a0e503ea89828efc99c87939331f2d577f229d738d60f6fc1b4128625"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogScreen.cs.meta",
+    "bytes": 59,
+    "sha256": "7649bce28b6e3d5abf04e72995248f1d53c0f14fa0b45a60cb0c65e117184d15"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/ExtractScreens.cs",
+    "bytes": 2585,
+    "sha256": "dc43d41d70fb80a04f808a5c9a6c2b28cc1a2c9fb9bc1ce6bdff17dcca7d3248"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/ExtractScreens.cs.meta",
+    "bytes": 59,
+    "sha256": "3238f06d50d324dddad87e3a1c235fd8acd47c1a50059336306609f115088af9"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/FireRestScreen.cs",
+    "bytes": 5594,
+    "sha256": "bae7f4f88f7a67cedaa3908388388f52fd655a0b55c37b0a4ed1cf1194c75d09"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/FireRestScreen.cs.meta",
+    "bytes": 59,
+    "sha256": "7d38403e1a5b05a33ec6f6f562436cd776c462b815688bb627bd8b4fda8a6e8f"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/NodeModals.cs",
+    "bytes": 7725,
+    "sha256": "d53cd1da261449594783d66a2b3aa8acbba8a34bc34b5bd5fd2b10bc09c89f7b"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/NodeModals.cs.meta",
+    "bytes": 59,
+    "sha256": "e84b816e28fcd28bc953fcce691596265b0a7c73eb0e13a9a006e5252a1dc423"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/PickupScreen.cs",
+    "bytes": 4329,
+    "sha256": "4a9c39545368aa1adbfe0dfc8bb5a9e60793e4f2c4cde0347ec3e2739b6068ee"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/PickupScreen.cs.meta",
+    "bytes": 59,
+    "sha256": "36ce67e8e6bf86bfaabf0fa8c7bef051aa93d3692eede0bda0b71360089797f3"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/RunUi.cs",
+    "bytes": 12400,
+    "sha256": "fdca0355196b1c94c1194d672053b68aca71946e32db56494da754fd62427ec3"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/RunUi.cs.meta",
+    "bytes": 59,
+    "sha256": "45b4c1759f2f34e9081e2272e85dd5e84073fa5886dab12bf2367d8ac9a28b16"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/SceneTransitionScreen.cs",
+    "bytes": 12845,
+    "sha256": "f23c25d4b8af195378a538b5a819384b4163c01c5e8770638dd8ba943952a5f0"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/SceneTransitionScreen.cs.meta",
+    "bytes": 59,
+    "sha256": "e6993bcee48d40284627c62da516a68ddfd8f715b8a7aaf4dcd81071b37b4983"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/ShopScreen.cs",
+    "bytes": 13623,
+    "sha256": "7a13f85d1c74db2f37f8d00d3aad7cf50da4db49c3e4cafc9a82466a56a932fc"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Screens/Run/ShopScreen.cs.meta",
+    "bytes": 59,
+    "sha256": "99852a050302512613fcab2d236f3190af7d3a12edb4a99061e8b86300b0aa2e"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Sdt.UI.asmdef",
+    "bytes": 447,
+    "sha256": "ac7cf2da0f60a96d3517ca092bea9c4e0446dd6e4ce8c6b7f51c4841c8bb3b3f"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.UI/Sdt.UI.asmdef.meta",
+    "bytes": 166,
+    "sha256": "971bc67cd481a216fe635338b4cdee48d8e816859b05a886f783fd8a1b5ec9b4"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View.meta",
+    "bytes": 172,
+    "sha256": "1ccf508754d7c5757e831da99a739e75b3a50956d051331b36022488824b59e4"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/BoardCamera.cs",
+    "bytes": 3944,
+    "sha256": "5c3dddf9448a084d5cf1bdd187fc9adf62d559c2e9e68fb33c48538dfe5a3a6b"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/BoardCamera.cs.meta",
+    "bytes": 59,
+    "sha256": "ab958dc1ecfc1afb37bc1d1a54186d8cb850692966c51a5fa6bc97272de07307"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/BoardGfx.cs",
+    "bytes": 4971,
+    "sha256": "1951cf3ceb1ccf4e73d12ff98aae77ee99b64e7a208d2ed9c191010a5d2fd61d"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/BoardGfx.cs.meta",
+    "bytes": 59,
+    "sha256": "cf057fcdbc98fc0309127bece5edd5ce48c42cafbdf993b2956f4074a88fce4c"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/BoardView.cs",
+    "bytes": 36130,
+    "sha256": "6b772a54af33480a201ff1c2260eca371951d4b5e4b96309594c37bd76010afd"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/BoardView.cs.meta",
+    "bytes": 59,
+    "sha256": "184391a11958d185cb70896956f909348d8166ac1d48bf18f64810f3bb399d8b"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/BoardViewHost.cs",
+    "bytes": 3712,
+    "sha256": "a808e950f9294673f6e665a2f3d0fc1c4a2233f08b0668481bb70205296799e3"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/BoardViewHost.cs.meta",
+    "bytes": 59,
+    "sha256": "d56f69f6163370d16c42cb0853faae7793f283728381c0376a0f00695b4e3b95"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/Fx.cs",
+    "bytes": 11180,
+    "sha256": "c10d71cdd02f9f148bc38dd8e52f18d0f599ce1e095d4896a9138faa2c81e141"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/Fx.cs.meta",
+    "bytes": 59,
+    "sha256": "9c12394aef10052fd7e4ea375ef0950ea91834150537603a0a4ecbbe4f5837eb"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/MapBackdrop.cs",
+    "bytes": 5385,
+    "sha256": "ad2d3cd310abd725ad83dda76613c0caf96e1ee3fb05fa02735aed82512a08a7"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/MapBackdrop.cs.meta",
+    "bytes": 59,
+    "sha256": "ae99a30f0fa2b6957d284e3f14547b8581d6ca55ff1b8fcc02dbd7f1a71dae3b"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/Sdt.View.asmdef",
+    "bytes": 360,
+    "sha256": "592a372f24dccd82eb96dd932ebc9075dc301c44d5bbd5019dd130a95aca1835"
+  },
+  {
+    "path": "Assets/Scripts/Sdt.View/Sdt.View.asmdef.meta",
+    "bytes": 166,
+    "sha256": "cdcbd437385a6bec543d92c620ef38275804100c5a4b6c6b0e30990d5aad2984"
+  },
+  {
+    "path": "MIGRATION.md",
+    "bytes": 4457,
+    "sha256": "40b7ad4a995eed6cdfc6b36c1cec7d8311a94b0416cb87799e24c02edd74fe61"
+  },
+  {
+    "path": "Packages/manifest.json",
+    "bytes": 1044,
+    "sha256": "1104eb6db5a7f87c8542802373e99b840efbe230ecce50121a9d35140c84f24e"
+  },
+  {
+    "path": "Packages/packages-lock.json",
+    "bytes": 5269,
+    "sha256": "7621b8e2cc296d5b6a0b73c378a0ac74df7c38f9a8477731bb0563ea1c090c8d"
+  },
+  {
+    "path": "ProjectSettings/AudioManager.asset",
+    "bytes": 523,
+    "sha256": "9543c41dbfc7d3951217c4dd9481ed026eb8e529b85ecf4463969a0fea747729"
+  },
+  {
+    "path": "ProjectSettings/ClusterInputManager.asset",
+    "bytes": 114,
+    "sha256": "40e65dd214bf254955d2c8829ca8ce2130fd3510485560ce012e9a1ddd93e623"
+  },
+  {
+    "path": "ProjectSettings/DynamicsManager.asset",
+    "bytes": 1574,
+    "sha256": "d102dd312ef330f5e5ca255c070fb34f68f59ec633d1e9fd67e2f2f6f88f66c8"
+  },
+  {
+    "path": "ProjectSettings/EditorBuildSettings.asset",
+    "bytes": 255,
+    "sha256": "7561805ac66d8670f51bc765a8d4146e823ae9e0e95d983f0e2c9432fd176326"
+  },
+  {
+    "path": "ProjectSettings/EditorSettings.asset",
+    "bytes": 1603,
+    "sha256": "4a87c54b3541c7bd242aad68c3fc28661083db1117ec56149694ee592156415e"
+  },
+  {
+    "path": "ProjectSettings/GraphicsSettings.asset",
+    "bytes": 2433,
+    "sha256": "40de98f4d46d02fb08e268ad3a722a00eed7289f4ef6d2e759984b1b4a85d2af"
+  },
+  {
+    "path": "ProjectSettings/InputManager.asset",
+    "bytes": 5816,
+    "sha256": "d0f454ddb880912abcae92e3e12957a7446786ba89e24937e019ff3bbc0d4300"
+  },
+  {
+    "path": "ProjectSettings/MemorySettings.asset",
+    "bytes": 1226,
+    "sha256": "2c9e2339b4fa50f4782840d37dde021508d411b99278614cba335d206edb1738"
+  },
+  {
+    "path": "ProjectSettings/MultiplayerManager.asset",
+    "bytes": 232,
+    "sha256": "ce4075d7a7dd8ac7ffe55de2427692c63f90dae398208bd80cec0f27cbe09f4b"
+  },
+  {
+    "path": "ProjectSettings/NavMeshAreas.asset",
+    "bytes": 1361,
+    "sha256": "7ebbf8f53b8033104e1878b95ca07a28d0954092d81c220f14196a42f651e658"
+  },
+  {
+    "path": "ProjectSettings/PackageManagerSettings.asset",
+    "bytes": 1132,
+    "sha256": "8f19147a8cca86d1b47fa1af6cd2e2d45b16747f409f55b61cde7dc2bc4c599d"
+  },
+  {
+    "path": "ProjectSettings/Physics2DSettings.asset",
+    "bytes": 1862,
+    "sha256": "1cfc0c8fbceec604fd7cd2a06c04ff05dddee6335b75c92b0f5715ad80ba9490"
+  },
+  {
+    "path": "ProjectSettings/PhysicsCoreProjectSettings2D.asset",
+    "bytes": 151,
+    "sha256": "bedc5339a832c60dc3f11b84abc4f4384dbfa20b0cd9ad6c444b907e751fc35e"
+  },
+  {
+    "path": "ProjectSettings/PresetManager.asset",
+    "bytes": 146,
+    "sha256": "29c125923fe6e29f90190d4fce1c82d660e7051546e2c9d02908d18c9cf2436c"
+  },
+  {
+    "path": "ProjectSettings/ProjectAuditorSettings.asset",
+    "bytes": 1036,
+    "sha256": "9e68444b9bda981e2927a98df9edf69ea88362f0c6b7f3c81b39b9d515d2a416"
+  },
+  {
+    "path": "ProjectSettings/ProjectSettings.asset",
+    "bytes": 6567,
+    "sha256": "415773ad2f8c9cec7d527533e515e344f4232d96f7046c90cdb10abdc3a0b3d4"
+  },
+  {
+    "path": "ProjectSettings/ProjectVersion.txt",
+    "bytes": 83,
+    "sha256": "2a88e6864b6f54588287bed3bc6e9260e65bd49498910cca4478770ca8a5d674"
+  },
+  {
+    "path": "ProjectSettings/QualitySettings.asset",
+    "bytes": 9802,
+    "sha256": "f1f893b1be47ad2442f58338dd7c860dc1986bb317e2f5bb31084454ffabbf4c"
+  },
+  {
+    "path": "ProjectSettings/TagManager.asset",
+    "bytes": 642,
+    "sha256": "b6d2e067258dee85d870453024d53648085fb745625f1118cdb4430e9e1eeb5e"
+  },
+  {
+    "path": "ProjectSettings/TimeManager.asset",
+    "bytes": 305,
+    "sha256": "3396f52fdc16d445024e01d7a2d99db6f0a37569d1d73c0302e9ffb857d90287"
+  },
+  {
+    "path": "ProjectSettings/UnityConnectSettings.asset",
+    "bytes": 1063,
+    "sha256": "11251dae0356b6f43dd2c67bb511f6b7ecda4e5de425186bba3297e6f3dc1c6f"
+  },
+  {
+    "path": "ProjectSettings/VFXManager.asset",
+    "bytes": 525,
+    "sha256": "2973a6af930e142f62cde00076beda8a3cc3a66d9bfcde7a58ba7d4be2251c26"
+  },
+  {
+    "path": "ProjectSettings/VersionControlSettings.asset",
+    "bytes": 172,
+    "sha256": "e199cdfa6a8f2bf33cfd47e549198f13e3eb2a5099e908fdb4e0f14d939ccc6b"
+  },
+  {
+    "path": "_planning/00-contracts.md",
+    "bytes": 13433,
+    "sha256": "c433b8987769b62bbcbe301cf2404e01c828cc7ba400abbe6c00986aeacd7fe3"
+  },
+  {
+    "path": "_planning/01-architecture.md",
+    "bytes": 12433,
+    "sha256": "6f092f142ece77986b382f33d1e6cb7bf4060661f958b90399b4dac1e2e4be8e"
+  },
+  {
+    "path": "_planning/02-data-assets.md",
+    "bytes": 8690,
+    "sha256": "3375763d83e14d645960ca36c8ba9dc88aa477c9218076a47e288459b61b6758"
+  },
+  {
+    "path": "_planning/03-ui-surface.md",
+    "bytes": 11808,
+    "sha256": "064c1c72e6914e8d72fb36e81a26fad8e2c802e89822d624ec2246e4e167c805"
+  },
+  {
+    "path": "_planning/HANDOFF.md",
+    "bytes": 10737,
+    "sha256": "19d912ea22ef48b1ae7806876cd96ec1331ef5b288e2c5e5e99f97c11a1cb494"
+  },
+  {
+    "path": "_planning/TODO-contracts.md",
+    "bytes": 10982,
+    "sha256": "30a40c755d27fcc3b0b6fa4c381584f4bda3242a2924598a1dc1df1f178f5402"
+  },
+  {
+    "path": "_planning/asset-map.md",
+    "bytes": 11435,
+    "sha256": "2bbd4b6ef03fe5abbc62ba178c6e43371ddfbb7ca33b1ca967750fc72040b7a3"
+  },
+  {
+    "path": "_planning/current-battle-statuses/README.md",
+    "bytes": 5449,
+    "sha256": "ec9f2b6ecf353185fc0284f3b74727fd10cf2ecf8019757d45d160d4357901f0"
+  },
+  {
+    "path": "_planning/current-battle-statuses/UnitMount.cs.txt",
+    "bytes": 2917,
+    "sha256": "0798ae98623005933397dc0f1e34be928edb468a9068d6209d95bdaa61bb923e"
+  },
+  {
+    "path": "_planning/current-battle-statuses/apply_owned.py",
+    "bytes": 1952,
+    "sha256": "cdfdcc5121b0c269556e943f8abb5d4b957e3441374671163b28d24d1406d8a8"
+  },
+  {
+    "path": "_planning/current-battle-statuses/behavior-check/Harness.cs",
+    "bytes": 5328,
+    "sha256": "168f1dd1a84b3654ccd38caae1b79ceec4cace497299088677e53a2356d8a360"
+  },
+  {
+    "path": "_planning/current-battle-statuses/behavior-check/Intents.cs",
+    "bytes": 900,
+    "sha256": "175252380ea32f787ae44479829c1238f0e4ddc0b1415d9eefa6967f707c50c0"
+  },
+  {
+    "path": "_planning/current-battle-statuses/behavior-check/Metadata.cs",
+    "bytes": 3830,
+    "sha256": "399b9c9dfcf3653ead117521e4188e526ca4907c9d69fb6f5f909b1c3cf09009"
+  },
+  {
+    "path": "_planning/current-battle-statuses/behavior-check/NuGet.Config",
+    "bytes": 73,
+    "sha256": "e497501960554d323eef45860c14474958accd1ae7f3ae6f95b10e4c1d340401"
+  },
+  {
+    "path": "_planning/current-battle-statuses/behavior-check/PlayerEffects.cs",
+    "bytes": 3592,
+    "sha256": "b6e21865c1a1e09df4563944422f841f46b1dfe9b6f7039b09d8c1ba4e588eb4"
+  },
+  {
+    "path": "_planning/current-battle-statuses/freeze_receipt.py",
+    "bytes": 2485,
+    "sha256": "b6e7949d3d54d711b0aa3088d6abfbbcf40794b093a19ca945ab17fdc5198f6d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/NuGet.Config",
+    "bytes": 73,
+    "sha256": "e497501960554d323eef45860c14474958accd1ae7f3ae6f95b10e4c1d340401"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Boot/BattleBridge.cs",
+    "bytes": 21703,
+    "sha256": "348e39bfd9b62292cb7f2b599e786caabf8719b54f9d9fa8ed41db88e674ec12"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Boot/BattleViewApi.cs",
+    "bytes": 12180,
+    "sha256": "641d3691560c907a0615ab1525f4388cd5902cfb04bd16be7650faceabcc2717"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Boot/GameBoot.cs",
+    "bytes": 1740,
+    "sha256": "68adc9246e3b8ad7469a8d5a73ccf4dc7f2e7a85081d49d6c87ce82ca3b83488"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Boot/RunLoopBridge.cs",
+    "bytes": 5785,
+    "sha256": "f2b9680d97640ec800740cb189b2dc2df58cacfa7eb62cc848e85437e3aa23da"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BattleActorPresentation.cs",
+    "bytes": 6879,
+    "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BattleHandTransforms.cs",
+    "bytes": 1302,
+    "sha256": "2bb817c0acd3af5024034e4c12c3ecddbefe478f075a103e384650fc08723c47"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BattleItems.cs",
+    "bytes": 8616,
+    "sha256": "8ecab8fc3770a22210f5cb35e28a54262006440b4d34841227eeba3c1e5924ba"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BattlePlayerEffects.cs",
+    "bytes": 4976,
+    "sha256": "621f9aeb841ad67fc735b97610d1d4ac2918204314493c4679d9b46291b83518"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BattleRestartCheckpoint.cs",
+    "bytes": 5854,
+    "sha256": "3cb6cbd98dabc5631140902a86c961c9ac4e471b55f6f9c10d108b28d5438cfe"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BattleRules.cs",
+    "bytes": 5713,
+    "sha256": "00f8c9eb46a020300aeec1f1c888873219cabd2d901d7a837304e5c7a476cf16"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BattleSession.cs",
+    "bytes": 73168,
+    "sha256": "f58ad813a9308d321d8c6c4a8b83d7b0a2b148ef622d9eed8d550e89d01db8db"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BattleSummary.cs",
+    "bytes": 1389,
+    "sha256": "e92ca71430ff55a791c4e789e4ce2ed2425c3d237804642eb879b7caf1ab010d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BattleTurnForecast.cs",
+    "bytes": 4612,
+    "sha256": "078203f3ce41621d5a8b6587b8d2cfc3b5a7db9815368cd41c75058646a6ea90"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/BuiltinCardIdentities.cs",
+    "bytes": 4629,
+    "sha256": "a3ada0917af87de1711dab489f9b53a4533324ed42e57d602db9bcddcf89a5d5"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/CurrentBattlePools.cs",
+    "bytes": 3447,
+    "sha256": "a3073fbf236a1a3bb2297ccd12b7c0fde24ad6faf67316438d6ec9b81f154af5"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/CurrentBossMechanics.cs",
+    "bytes": 3558,
+    "sha256": "644a8f0928c831a50a2b935042ade0553e5d0958a8d113aefa7545445c864a0a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/DeckBottomDiscovery.cs",
+    "bytes": 963,
+    "sha256": "b665975e94a231537017509f16798e585aa6c6733738b623e65db7caa69f3179"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/DeckOps.cs",
+    "bytes": 1281,
+    "sha256": "0aa9473b6a1c6fe7aeae6256824f352006132e91a8afcf95b9f505798a516c51"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/EffectExecutor.cs",
+    "bytes": 26181,
+    "sha256": "69ef97a86d2870c8267069ee5e1ed2bbf6ff19d5e24000bef1f88819e519d632"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/RuleValue.cs",
+    "bytes": 1606,
+    "sha256": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Battle/StructuredRules.cs",
+    "bytes": 70731,
+    "sha256": "50847fc3e255097387f0ce0b2abb4029e29cfbae9e08a2317c95bb415cbd9e73"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Cards.cs",
+    "bytes": 15336,
+    "sha256": "efc8b15298352114b134372d6e4d40de3244da93adb7bd2e01f0e3c106701a21"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/CardsExtras.cs",
+    "bytes": 3996,
+    "sha256": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/CharacterTable.cs",
+    "bytes": 6267,
+    "sha256": "f7f33fda167b7275bcca4d26e25f0a6345087e0cc3c7f84e1dd3edebfae195a6"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/ChestLoot.cs",
+    "bytes": 6924,
+    "sha256": "0b09603d4ec67651801b5b85ed925144f14bb7a7a58a0e89d0a8e2f68a97e87b"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/CombatResolver.cs",
+    "bytes": 26655,
+    "sha256": "32dd0e1558d1fb62fda29b88c94e85c74e1fe02d63338268d726ceca0b1fd242"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/CurrentMapData.cs",
+    "bytes": 7909,
+    "sha256": "287c8d99bc7d852ef8273e921867204bc2e0b319f17c1b43c329ea08a938b800"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Data/CardDatabase.cs",
+    "bytes": 127842,
+    "sha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Data/CurrentBalanceData.cs",
+    "bytes": 662,
+    "sha256": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Data/CurrentChestData.cs",
+    "bytes": 1727,
+    "sha256": "7dfd4b8993fa3b7bc85acec47195d69d819173c1a96eb89d9fd841e0f58dec2f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Data/EventDatabase.cs",
+    "bytes": 72573,
+    "sha256": "935646f0a1f0d2502f58747420abd62d4908c78e51d5e70610f99c757f785579"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Data/EventProgress.cs",
+    "bytes": 1999,
+    "sha256": "0722be487263cc278ee3a68306c301ecf374358e3e64d92ff5ae20500af64136"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Data/SceneCopy.cs",
+    "bytes": 13290,
+    "sha256": "9ca1eedae3dd26063c9c1d5e1f6da3f966532a476af8c71b1fb30fe9a43b680f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/GameRules.cs",
+    "bytes": 2969,
+    "sha256": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/KoiPondModel.cs",
+    "bytes": 7273,
+    "sha256": "70799c15f470491a86adc5e3944f8a288aea6362274f328dac4fc3459987fde5"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/LayeredMapGenerator.cs",
+    "bytes": 25766,
+    "sha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/MapModel.cs",
+    "bytes": 32585,
+    "sha256": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/RewardReceipt.cs",
+    "bytes": 478,
+    "sha256": "e8f1af7b9ccbf5cc5aba2ecb299b06225ccbf71b6127dde48fd6b05bd9a0b5dd"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/Rng.cs",
+    "bytes": 5470,
+    "sha256": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/RunState.cs",
+    "bytes": 7052,
+    "sha256": "ad7c6911b1413d47c867050b43a8df7c6bdb751b80ac7de6f76ea2ce5cd235f8"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Core/ShopOfferReceipt.cs",
+    "bytes": 255,
+    "sha256": "5088ca7446567ff33bbcf18362bd356af9a3f7e19ecc26bc9ee53efd6087ad4d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/CallStack.cs",
+    "bytes": 15420,
+    "sha256": "feee9c7fce39092e50b11b10541066b69c4c45020972e34a94421382f4e556f3"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Choice.cs",
+    "bytes": 2052,
+    "sha256": "e04520d4bc490c0dea6e47aa1e5e90ece835cfbc14ec61e0f499def33e1d1863"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/ChoicePoint.cs",
+    "bytes": 2750,
+    "sha256": "8b9d5db6be07bcf5a36124762c047003abea13223be7b2cd4284495cd8dc19ce"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Container.cs",
+    "bytes": 11546,
+    "sha256": "b15e9e4da486244ae1774daa154dc1aa4a29d80c868240efdcb8ec9c20edb9e8"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/ControlCommand.cs",
+    "bytes": 5098,
+    "sha256": "fb3656fb953c557733f2eb15b255329fa326d8813e7daed80caff21b0a729427"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/DebugMetadata.cs",
+    "bytes": 2522,
+    "sha256": "16bc8206a12586225b0564e988b09fe2b016ca732f05a25173c8dd67dd50e91f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Divert.cs",
+    "bytes": 4511,
+    "sha256": "9b9e6e291c9ca0449ddf21f07b2f50d0bb56149cf770a55f8b57acf32978993a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Error.cs",
+    "bytes": 792,
+    "sha256": "e49ad61beaa8764417990867aa9c39cca81fb425bab188e17aac56aeecb50780"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Flow.cs",
+    "bytes": 3506,
+    "sha256": "84424f634b4d07bf9aac5949da80a02544f16c57828c6ab1b2fbcee899c15e56"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Glue.cs",
+    "bytes": 198,
+    "sha256": "1bde0c02fe8c4a87e12a533cad83f3eb00dd241eaa3f2020aee8d7b78c57a8e4"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/INamedContent.cs",
+    "bytes": 121,
+    "sha256": "9d791f7a12d82e2c4976016c6170d4961422f02d1ebe22804ce475e8a6a12aca"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/InkList.cs",
+    "bytes": 24048,
+    "sha256": "a4bf43663462a0c42d7ca0c59c7d44768f882db715c5f54c637b5d09e6724543"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/JsonSerialisation.cs",
+    "bytes": 28307,
+    "sha256": "4b8b214505ede872e724675bd05c7ecc87ec6d86b09105394c63bde1178da747"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/ListDefinition.cs",
+    "bytes": 2317,
+    "sha256": "493f3379995da4fa49302ddc276659150a65600e48c0d1be54b10c7324da0211"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/ListDefinitionsOrigin.cs",
+    "bytes": 1720,
+    "sha256": "059b6ade51bd7825800fdb06ec92671b9169fd725984ef84f9a63aed72755c4a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/NativeFunctionCall.cs",
+    "bytes": 20154,
+    "sha256": "e050cb423d5c0fd3c854fe9720d79c3c27c132cd5b5d76bc7f901c707204976a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Object.cs",
+    "bytes": 7968,
+    "sha256": "d0054093a306270e7ae5f710a0cd816d619663e5f6afa134bebe0d0e0773d5bb"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Path.cs",
+    "bytes": 6922,
+    "sha256": "1c940aa8f7a1fc1c114fb271aee38b8507a3a167c1ab09e0b8120aa64c8de6c4"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Pointer.cs",
+    "bytes": 2039,
+    "sha256": "89f2e1378db5124aed55d58060c806a791a70eb333e98a73223381e974fe55ea"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Profiler.cs",
+    "bytes": 10866,
+    "sha256": "e56d1754b7d538db056ae0e81a9a1fefb4bed862dcbbe5c384cf898bd65f2c9d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/PushPop.cs",
+    "bytes": 186,
+    "sha256": "37616544617f8846a19b4e1290080607f823af2d03c33ef354dba596ec3e1d82"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/SearchResult.cs",
+    "bytes": 822,
+    "sha256": "9aa562665d815cc0bd339e496dfbc0228f7ed941fea8a12cd0876c2b40f8482e"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/SimpleJson.cs",
+    "bytes": 20212,
+    "sha256": "bf7c32271a54f568edf3e3c726108d1f18c53193bc8131699e4c752d8cc8bbf3"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/StatePatch.cs",
+    "bytes": 2419,
+    "sha256": "5e5906efc2f7154170c7603e6f990911dcbaea8aa600a70d6a83ac9960dff699"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Story.cs",
+    "bytes": 129567,
+    "sha256": "10a150e6438360f346bfad4ffd17749bcdc5ae851fd11e4bb957ed27e0604340"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/StoryException.cs",
+    "bytes": 789,
+    "sha256": "6993aa38c828a1d76027e776c1bd2f3fdbd95f54df5b86b930f641b9db7c4c8c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/StoryState.cs",
+    "bytes": 50479,
+    "sha256": "a44bf0bbc26b6a6a9b3a34b658330f97b742ebde63578c11125873d69c4a5d7a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/StringJoinExtension.cs",
+    "bytes": 555,
+    "sha256": "0aa43366b08ee029ac5a56377717805888e46149b264db1c10c77edf3773c225"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Tag.cs",
+    "bytes": 818,
+    "sha256": "f9ec45926ebeb3c8753351cbd997d6347fa8aad525c31ee8f9a91d9ef33d6654"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Value.cs",
+    "bytes": 12147,
+    "sha256": "59b8cc9fa877403310032198c4a0cb57c2917e0649ea85ad956800f36ed8f093"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/VariableAssignment.cs",
+    "bytes": 815,
+    "sha256": "8b40e2e6c48f42f310168c8e34f947af27e9fe7ccd205afe4f16c709ff71f17c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/VariableReference.cs",
+    "bytes": 1356,
+    "sha256": "41226b1348a57acbfd127fd68b2b37632446111a87bf56c06c5fdcd6a2038ba9"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/VariablesState.cs",
+    "bytes": 16394,
+    "sha256": "a1a2fe694b8e2b41b85991fc76c4dfb0012215334833747fdbfb28cc8a13d265"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/InkRuntime/Void.cs",
+    "bytes": 124,
+    "sha256": "f7e5d018a1591b1b7a728196c29e7acc5bfbcd5bdfabada52dab704cb5d88c8e"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Narrative/NarrativeService.cs",
+    "bytes": 5571,
+    "sha256": "4c7a2689ed16e1e370c5f83b0fd09081311a2e48ee41c4eeb6f042a94a581724"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/CurrentArchiveAssets.cs",
+    "bytes": 1938,
+    "sha256": "52b661f1b49a5a1e3df365f0103eabc79470526f0a596ecd4d149c04108b39c1"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/CurrentAssets.cs",
+    "bytes": 40513,
+    "sha256": "50d2e9bf618a6654ebe435589817eeb46a0c552fc3300cd43b8f2bce252a5329"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/CurrentCardPresentation.Rich.cs",
+    "bytes": 4231,
+    "sha256": "f61172c1e58e27e7bdfab172fbd9a4c094d8852f89721de729ac4d4f40dea501"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/CurrentCardPresentation.cs",
+    "bytes": 10828,
+    "sha256": "945c364fb2959c8cd1ab6278161ba2743d405243d8265b60e7c16dc9c5bcfda0"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/CurrentHomeAssets.cs",
+    "bytes": 1455,
+    "sha256": "1b07fa4e20dcf4586582940d57f6508ca81948be99c3b29b42d41a9bbd3c5ebd"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/CurrentPhotoAssets.cs",
+    "bytes": 1059,
+    "sha256": "978ece849b9a96da82c3fd6d43f4de1df5706b38667a1f95ba8b11198f50cb10"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/CurrentThumbnails.cs",
+    "bytes": 22719,
+    "sha256": "9424e6d5c92818ce054a9df6cf029daacb630cb9a843330639556195ab88110f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/CurrentUiIcons.cs",
+    "bytes": 10723,
+    "sha256": "be8f01c1f337fd0206c47fb427db7f18741e22c9930af4c8d34c3bc085a8b0c4"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/CurrentUnitFrames.cs",
+    "bytes": 3838,
+    "sha256": "c58df1429b084d6e322d4e74344a57f33f74e4f45d06b8774f2102626260002f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/Res.CurrentRunHudAssets.cs",
+    "bytes": 758,
+    "sha256": "87e4ca204bbe5b7f29f4fdf4c95d250c8febe545f474a907c810b575c1b1a356"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/Res.cs",
+    "bytes": 10526,
+    "sha256": "71978ac545a8b9a6142ded76ae8a2a5e4ab9c42331f4e733b6f910ebc5644b14"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Res/UnitFrameCatalog.cs",
+    "bytes": 946,
+    "sha256": "0f1f4a96e9fe4b022df67559b956162edcde1f48c121a8ad28fa1857c4282d97"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/AtomicJsonFile.cs",
+    "bytes": 1209,
+    "sha256": "827b9ff1c75cf8c1a82148ecdfe0032215b00e85442e3f9f19042f92c9b5db68"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/AudioService.cs",
+    "bytes": 28233,
+    "sha256": "a1c405f2ecedd0654369eb296894d2b2b2cf6d916dcbe7d146066d33d5916576"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/BagItemCommands.cs",
+    "bytes": 7643,
+    "sha256": "960661f4571d9056348e3a7423c9dbff8ff24fe9ff4e63c3c97e0593bd213e4a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/BaseData.Customization.cs",
+    "bytes": 6463,
+    "sha256": "112923cb7652b92e980d904ecdc57a5505024e1aab5c1413e90940cb554708e4"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/BaseData.PetsMaterials.cs",
+    "bytes": 5283,
+    "sha256": "706dc1bd80d7aca04d47a62d62c21a8a0a84ff92e2a8d4d8f808332cdcd6e935"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/BaseData.Preparation.cs",
+    "bytes": 10792,
+    "sha256": "f63cd7ae1da24436816eb47ab13b7af12f7f085bbdbfc6e0cdec83fdfda4543c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/BaseData.Story.cs",
+    "bytes": 6474,
+    "sha256": "b044b5673229b99cf28ce8793c38cda2452ce95bcd096c28e4d592e6892b3173"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/BaseData.SupplyPack.cs",
+    "bytes": 3260,
+    "sha256": "fb3aeec0bbdacdd7c16df2c06d7f768722c7475e35bbd373927a82d659374c16"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/BaseData.cs",
+    "bytes": 23151,
+    "sha256": "45d297fff5224306db0a66fd22eeea8aefacc3bd066189f65b8a74ab71fbeb9f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/CardContainerCommands.cs",
+    "bytes": 9637,
+    "sha256": "a77ee6c656911bebeb734e7017d8487803d2321d93f23a58f1079319207c2687"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/CourtyardPreferences.cs",
+    "bytes": 1039,
+    "sha256": "47572bcf9fea5d8188dd4e5ee351b7fc90c908e483c221b09681f37d317d70db"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/CurrentSettlementReceipt.cs",
+    "bytes": 7055,
+    "sha256": "782acad82d4cbf855fb8b0d14acaa9e5aa8467af577d9824e05f54898129b141"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.Altar.cs",
+    "bytes": 5739,
+    "sha256": "21b4435688fdcc861fb67bb2863070e2d03c45c5847ac3f758e5644d3741c371"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.BattleCheckpoint.cs",
+    "bytes": 2040,
+    "sha256": "9ec3999fd60ed8b91d89d5e04c51c93d1214cec8fddbba7d0cbb0b947d7ecd52"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.Commission.cs",
+    "bytes": 4755,
+    "sha256": "1571f124cd0a0edf771dc023d2a5daf327bd8d834af033f18a8226192497d413"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.Departure.cs",
+    "bytes": 6909,
+    "sha256": "3c45dd0486ee872221fa088c3549065093a786865cf8be0ae049b0a8329dfea8"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.EventRoutes.cs",
+    "bytes": 11186,
+    "sha256": "215ca11fbb4e7524e8d6ec0828d49cf6f28c3d43a7401b87c00e43c41780a690"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.Events.cs",
+    "bytes": 11076,
+    "sha256": "5b419b30dd1a43edac513ee538c5ba09d4c305e5d24c18bba8a2b8c5c99b0dfc"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.Map.cs",
+    "bytes": 11093,
+    "sha256": "b42c73755e89cf56c5bc90efc40d25014c6c3c71d7eb5ed4a12ba1031c653187"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.Persistence.cs",
+    "bytes": 4394,
+    "sha256": "28226746ad67a670a90a5b2e2055f7479c9d3b74b3bb685b3bc84defca2f517a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.Settlement.cs",
+    "bytes": 15776,
+    "sha256": "b89560f72ebd67b4bdccdb2043eb1741d1363040cd8ce835f9542f9e22831e05"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/GameRuntime.cs",
+    "bytes": 76016,
+    "sha256": "c25ad20ba559ea5d48672721512c8e720205080e26467b3d682300c7eace0559"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/MetaProgress.Achievements.cs",
+    "bytes": 2725,
+    "sha256": "a08345817b965554cbbc6592ed2127cb353023ccef0a0014c84fc0f9223a0e6e"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/MetaProgress.Collections.cs",
+    "bytes": 4849,
+    "sha256": "963b9a6cb3fb490ab868e74a5b8121498cec55614c6ed0a57185d2060df07f17"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/MetaProgress.cs",
+    "bytes": 13752,
+    "sha256": "acde820eac60d2e1d6ca87364b858905b1251a9b76b37dddc8968f2e3104f4ee"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/RunEvents.cs",
+    "bytes": 5323,
+    "sha256": "a45bef022c24b2d416b49ddf1045b715774ac4dae0000249f17ffe6a3e5e2483"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/SaveJson.cs",
+    "bytes": 2789,
+    "sha256": "2234c532d5a0ad8beb8bace9e0d5234d120f0988b279740ff69b22b2d93492dc"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.Run/SaveSystem.cs",
+    "bytes": 19009,
+    "sha256": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/App.cs",
+    "bytes": 11548,
+    "sha256": "c0afff7af24b361bef127f40a9bba2c2da4d41d3d2c56126a4abbdd56de58a26"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/CurrentEndTurnHold.cs",
+    "bytes": 4017,
+    "sha256": "63cf3a627b1ef4c4bb1f77c0c303bc39902d7f42d2914e4fd817804bb647410c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/CurrentInputBindings.cs",
+    "bytes": 8064,
+    "sha256": "4c9c08bef907b70ee7ea4cf8f46a50c288341d2df814ae98c74c103bb5ffef50"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/CurrentMapTools.cs",
+    "bytes": 10476,
+    "sha256": "9157b15626700387fb56b3b5b6a54c18e96590796615c181e3a30ef0995fbd44"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/CurrentRunHudView.cs",
+    "bytes": 4603,
+    "sha256": "84f97d2e02a07cdbc96913a72067007698dcbd97e037255525115d8eac40e52b"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/CurrentRunTopBar.cs",
+    "bytes": 9716,
+    "sha256": "e775f957602f5980709e772af3ed309c9c886091e2ada82331f0cf93e0f4ef9c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/CurrentUiPreferences.cs",
+    "bytes": 3215,
+    "sha256": "b7963e2ba9f132ded67e340e6fa588cf3871eb1d96b54a9048dfe22acd4622a8"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/DesktopRunHud.cs",
+    "bytes": 5899,
+    "sha256": "c13f1d8b831986b897d39445a00f197840d6f8627da8f1820c5fbee4543b818d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/HelpSystem.cs",
+    "bytes": 4519,
+    "sha256": "96d8f5f93de1ef8c32df40bf97d2d163db0280e8fa7c904acb31c788a3cb8daa"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/InlineIconParser.cs",
+    "bytes": 5320,
+    "sha256": "7df811ec8b159e914d0ace3968853697190c99ec741e666458aa962c532ac82d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/InlineIconText.cs",
+    "bytes": 7785,
+    "sha256": "d0ba70e5a63e1be7c5f9d42d9f2c720eb5e01e89a3c3898e178e0bbdd2596e5c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/Theme.cs",
+    "bytes": 5509,
+    "sha256": "2fa4c473a2a2cda59f39e85fdf10fc127178689552b74780500dfc5aabaa62a5"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/Tooltip.cs",
+    "bytes": 3095,
+    "sha256": "2ad5c08914dba872436574943f01118073b9ed5c8dd9c2e8023d8cb9ff7d32a1"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/UIKit.cs",
+    "bytes": 12037,
+    "sha256": "d2f14afe00e76459b94d94c424bea70b64924917ebaecfa5360383a0b59711c2"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Kit/UiStack.cs",
+    "bytes": 5489,
+    "sha256": "a8c844130f17dfd83b9dbb5da114b98461df04ee6f5ed37bebe8877d6e554556"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Bag/BagCardDetail.cs",
+    "bytes": 13502,
+    "sha256": "ef1ba987c47a1235550aab63f1691043754ef2eb06a72178023daec688b3a58c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Bag/BagCurrentCell.cs",
+    "bytes": 8239,
+    "sha256": "1d5b635249243d3ff5c1e89411695d6531a6a050e42045fa3be0af7a847f2e8b"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Bag/BagCurrentGlyph.cs",
+    "bytes": 2375,
+    "sha256": "6dccb30863e9614d024530767816287d0e470ceec552ca53e0e6ea8893c10c66"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Bag/BagCurrentView.cs",
+    "bytes": 14643,
+    "sha256": "ddc44c2b1a16155249fd59e54919692dfb9e2a36f588e4db70b70d8a76e4e3a9"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Bag/BagItemDiscoveryScreen.cs",
+    "bytes": 3284,
+    "sha256": "8a7d245f4cb915422acd05ce4ff9e1e52702f57e72bf307222f5fda653114fc9"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Bag/BagScreen.cs",
+    "bytes": 10915,
+    "sha256": "fe08b01f0529be8e497086d842d265aa2f2782e1febe464aebd9410c7e95c855"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Bag/BossPackCleanup.cs",
+    "bytes": 7926,
+    "sha256": "0f9f2c538fc92d6dc6e6bfc70fb9712bbf0fec0a1f3431738f9818b72be0b896"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Bag/ContainerScreen.cs",
+    "bytes": 8215,
+    "sha256": "7bd78d8a476edd9e3349974b0176c57b667e1871c19e786d6b908c46035571ee"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/AimArrow.cs",
+    "bytes": 5280,
+    "sha256": "43f3f3a6b464ad502aaa2e424bd6e962f63c3ef26f5477ae68dc8ed94a881e1a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleActorClock.cs",
+    "bytes": 2552,
+    "sha256": "3688f7d6954947cf7d02df9624602d099a044950e9c12932fdd873bbd63f8421"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleEnemyFrameMotion.cs",
+    "bytes": 3010,
+    "sha256": "fb4d0ce37c717e29fbaa2de004338dac86305d102288f689fff09a506c5c118f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleEvents.cs",
+    "bytes": 6298,
+    "sha256": "ea3add2d894d1ddfe6d6e90f7e0d2e990e9f15e8f70f899d502f751d39844aa1"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleFx.cs",
+    "bytes": 13396,
+    "sha256": "c5432c5ab226fb673265ce085a0759ffe27567ed0fa27fc5aebd5dbc74473d95"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleItemInputs.cs",
+    "bytes": 3753,
+    "sha256": "a7e597577da67e900d00f849cb98e5d1b0f32b9cb15b7997cf76c0c9f6a4c11b"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattlePortraitProfile.cs",
+    "bytes": 4508,
+    "sha256": "0de6b92747ebfbb133b7948b62ab8b37c75c20f42911f5cf1c2be4f248a3f7be"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+    "bytes": 34753,
+    "sha256": "c83e73056d62e080c0828c3c505166c651e63d969a39cbdc91e133c833088a3a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattlePresentationBeats.cs",
+    "bytes": 2307,
+    "sha256": "a1ae06b8669198411b643b48c25a7a7328d64e0f5a220dfa36937fe490b73d58"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattlePresentationQueue.cs",
+    "bytes": 5245,
+    "sha256": "72757666f3a776866fa5fd67cea6d4f4bd9ed38803f768c4bc096d0d050da311"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattlePresentationTiming.cs",
+    "bytes": 1006,
+    "sha256": "7214bf37f08a6634bbc0a547fc9bb83ef2f69ba8f2232c7fbed6a483b61bcade"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleRuleInputs.cs",
+    "bytes": 7920,
+    "sha256": "8a12af11eb9ccb8029387e1dcc79fa4380c5dc8d45134b798fdf36fb4afd5da9"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleScreen.cs",
+    "bytes": 18211,
+    "sha256": "fe592d46a27a28df8268afd33287ab4ad68782ff819e6388df7a6430ecb10f09"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleSecondaryViews.cs",
+    "bytes": 5282,
+    "sha256": "ecdbc7e31ad6d2c901f5e5c6e8504c3cfbd87b627e531387fcdd6f0428fe6a15"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleSettingsScreen.cs",
+    "bytes": 4381,
+    "sha256": "b07c39fd1cadf2ea6058d0da5539baedd694fdb259310591e3fb8e2d5dc7a12f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleSubpages.cs",
+    "bytes": 15135,
+    "sha256": "0d27508bf6aa44c0104402016739e11d5105281d61b2e3e5eed7d2dfbbccb1e2"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleSurrenderButton.cs",
+    "bytes": 1923,
+    "sha256": "e711094c29ee7dc777691c1b1563b1e788cf8b6bdbfad20937594db345979485"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleUnitFrames.cs",
+    "bytes": 5099,
+    "sha256": "c98c9db9210690bf2166ce6f3b81d789a1cb136bdf2b185242af39c0f36da640"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/BattleWidgets.cs",
+    "bytes": 16881,
+    "sha256": "431a052689922ee1bdcd5babd74b6169cf8f023b4013fe79ce8428044267435a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/CurrentBattleDropProjection.cs",
+    "bytes": 782,
+    "sha256": "c4ec70d987b906d619c1a0e585c1f8742d9956e609a114a19af20d9d51dc2cc9"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/CurrentBattleNameplate.cs",
+    "bytes": 5939,
+    "sha256": "e6b6913f1f452b3de9092b45bbce6b16014762cb056c1954c91e686eccee533a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/CurrentBattleStatusLayout.cs",
+    "bytes": 918,
+    "sha256": "f0266c037fff4830109ba7346df473dfd887f3c76b19b61e1d02a252f9594e6d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/CurrentBattleStatusModel.cs",
+    "bytes": 2923,
+    "sha256": "0030203ae60c34cf172d67b5ab4212a7f99610c566506b9be3170c9d6465c254"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/CurrentBattleStatuses.cs",
+    "bytes": 8200,
+    "sha256": "c1945b61c65508c09ec57788258f325f63aab669a92a1842329504422941acad"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Battle/HandPanel.cs",
+    "bytes": 14527,
+    "sha256": "84b1dcc53caf247c9ca6374a1c4919beb0177639200392af7a66404575d81300"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/CardBackPickerScreen.cs",
+    "bytes": 2408,
+    "sha256": "55330545334948120ffa548891138df6f50410b85f79a62cbc8f57f866941b29"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/CharacterAppearanceScreen.cs",
+    "bytes": 2518,
+    "sha256": "def56f9f869d25aa102ae354e3bbfced6fd87ef7da6ceec3512b2575fa54204e"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/CollectionConversionScreen.cs",
+    "bytes": 3340,
+    "sha256": "4d40f4ee0bf70b5a86251c23bd060fc6cd9a9c6188f349bf6d02a5fe6ce4984c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/CourtyardScreen.cs",
+    "bytes": 19323,
+    "sha256": "afc69993358415c91a974927bf97e208d48c4e7f2a92c356a44d8e45f3f85541"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/DepartPrepScreen.View.cs",
+    "bytes": 13659,
+    "sha256": "2b48c8835a82239a84cf5f3e4c5d79e4a0dee7ca54571960aa269b7fff7955d0"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/DepartPrepScreen.cs",
+    "bytes": 12195,
+    "sha256": "3681374195098d1bf8fcd3d82fc77f73b67f2e6f5a9de904e1366d152e0cd481"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/DepartureCinematic.cs",
+    "bytes": 3606,
+    "sha256": "44b1c4452d1606201b85a879dad0310c15a55b8314866b8640895545040d579b"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/DepartureDragHandle.cs",
+    "bytes": 3462,
+    "sha256": "050e2b342002572516dbaec3c17041bc33ac858d9b8d00998f96383ddd97610d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentArchiveViews.cs",
+    "bytes": 13671,
+    "sha256": "20663775468551514fe08f1f507807f49cc0c8683a9058e152c94e55637b8c5c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentBrowse.cs",
+    "bytes": 2619,
+    "sha256": "9d28f20de54bafdbb73e784389032c48a8afe6c03298269812d66ab482950c1d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentGlass.cs",
+    "bytes": 810,
+    "sha256": "2480294d56b4503475121c673dab5a65e5516a03c712772c2ceaf7ef5ff707b1"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentHomeCard.cs",
+    "bytes": 797,
+    "sha256": "cdc6ee15824bbf3a2d35c596fa900318ced38ad2a4e219b69df530d125c87878"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentInteractions.cs",
+    "bytes": 4331,
+    "sha256": "aa300c68ff04295dbde226b75e71e72933ae0862304b7ba07e0c2a53a1fd40f5"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentInventory.cs",
+    "bytes": 8726,
+    "sha256": "28dbbcbc3c0b1e92718d9a2a35fe5ad4c1b002f508317379cadb182978b054a6"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentLayout.cs",
+    "bytes": 12758,
+    "sha256": "5ad53c6f6938aa35084ae7a39201052e7a1bd9697c3ebad346fd29e9c043d630"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentMotion.cs",
+    "bytes": 4335,
+    "sha256": "1538ee4b2cd6a0900ef743e4c7899c2bb9cfeb17fcb0b758ed6b6599ca3c96ea"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentRooms.cs",
+    "bytes": 16281,
+    "sha256": "d195abe79e4b324a6d5efc52925174ec6767c044229ce27b78cc89de66db7109"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubCurrentSourceLayout.cs",
+    "bytes": 10401,
+    "sha256": "073a8d33752ec5fde53f9938b712d785fc2559a624702b4871b199d19835a1e7"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubModernPages.cs",
+    "bytes": 15498,
+    "sha256": "c56ecc827d399a8e70b5f19fe0e87222e78b2259c14262916cbc292bd39ad48c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubPets.cs",
+    "bytes": 6341,
+    "sha256": "7edfa53f326eb8de4e979feccceab5b75dd3385f664f9863cd63f0a268b7ee00"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/HubScreen.cs",
+    "bytes": 23053,
+    "sha256": "c20e2a0d18fa2214deaa1c4fb6df76a3c747d725a9af37be9e57b33cca3a2dbb"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/KoiPondGraphic.cs",
+    "bytes": 8984,
+    "sha256": "a7ac787377e0ad454922e451ee43c9a453f0532fec75b323a32e8089410aba97"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/PreparationScreen.cs",
+    "bytes": 16911,
+    "sha256": "bca6c807e1d96e274d94dcd9f475d32fdcd6772b7c3e20a25d29fef9aabd3b01"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Hub/StoryArchiveScreen.cs",
+    "bytes": 2435,
+    "sha256": "d514e60a88b7796642f31a6105a34d0b92fc5385bf6f6d7c681ff8e6b8719b32"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CreditsScreen.cs",
+    "bytes": 4885,
+    "sha256": "149b6a615d754565579f8c478297da7843f6f049c0634c26cc162ca0a87d1031"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentAchievementGrid.cs",
+    "bytes": 6005,
+    "sha256": "bc9ec93c0b369c9c7d5d03feee3ec682ee2b57225d2e8cb94e99e60323c76c8a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentAchievementMotion.cs",
+    "bytes": 4316,
+    "sha256": "c5552276a023f3592309c2d2afc1063bfef78c2e03fe147bf6f4f15e85ecc1c1"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentAchievementPage.cs",
+    "bytes": 20290,
+    "sha256": "67481e04c73367477dc229114500e88bb2fe7f6b619b051565ff4c0ceb6fe0cb"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentArchiveUi.cs",
+    "bytes": 6261,
+    "sha256": "3626949c1f0ce41e32fd331ade3a8061c9e2466f301b4aa10a6a3824f39c9923"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentAudioSourcesText.cs",
+    "bytes": 5266,
+    "sha256": "25f251727fb3e2370c25e6b8c250ddb0b0cbb30d581dd359ba8137b2a2e580b2"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentFeedbackComposer.cs",
+    "bytes": 7977,
+    "sha256": "0caea4346466cb6a4830668f890caa9d1f8d0fc66b950a9fb5eba1e6e9a9d988"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentHomeAmbient.cs",
+    "bytes": 10015,
+    "sha256": "00fd96366059a311b20acaf7637d8e8bf9670d330561513e31ad82a13b15a933"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentHomeElements.cs",
+    "bytes": 3134,
+    "sha256": "92b4a800cf0c63ec26a02fc3bf47b95493aa61cf93329fad3468147a0daa2037"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentHomeMaterials.cs",
+    "bytes": 1285,
+    "sha256": "54e1bd9dadc5cf71a69fcb67c6a0a27d7ddfb315ba5913b4318a85262c7811be"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentHomeMotion.cs",
+    "bytes": 11320,
+    "sha256": "13a85c28b35fe2fc64870744afebaf6647c6de34266989f2094907b62261882d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentHomePlate.cs",
+    "bytes": 4700,
+    "sha256": "66b45aefd524a617eae90814d598e022cd91aa1cf7e45b787bf9151130fd5a30"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentHomeText.cs",
+    "bytes": 1407,
+    "sha256": "75100c93a1d8c10057fc6aed1ade5964b902aa6c00558b690ecde073cef507d2"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentLeavePage.cs",
+    "bytes": 9107,
+    "sha256": "af1667c621bc59af7de61e340e65a6b5acb6dc17394fc01259ac25184acb4538"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentSettingsDialogs.cs",
+    "bytes": 7310,
+    "sha256": "4d20e27602d024ceb38f7ded94753e1d62427d671f632d63c17368e709740d6e"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentSettingsPage.cs",
+    "bytes": 24203,
+    "sha256": "7f7db5d7c1eb59777553585214fba0ea8fe45953b2aec9bb0b394419b26ecfa1"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentSlotPage.cs",
+    "bytes": 12092,
+    "sha256": "a1ac38ae8719742ea6d0d452431b37fa0803a21554904980cff407c893b3dfa1"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentSlotPaint.cs",
+    "bytes": 9820,
+    "sha256": "a2a1dbc29b0d71f16a3388729581c6de1028c0977c644953f9c1b8086224eb07"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/CurrentSlotSnapshot.cs",
+    "bytes": 1931,
+    "sha256": "360890aa8e4e1c6e965f786a86ee974039ef6bb834b3bb13b40b33b90a02d447"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/HomeInboxDeleteDialog.cs",
+    "bytes": 1136,
+    "sha256": "490e865f9129edf40a8e8665ad54cfa8e772e1d97f056f44358a6c8b3aaeada9"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/HomeInboxScreen.cs",
+    "bytes": 12490,
+    "sha256": "545f34e370b50cd8201b5e6ae72c3eabce11fa38876d5aa2a3f465c907d1e70f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/MenuDialogs.cs",
+    "bytes": 12418,
+    "sha256": "8a580dae0ac5166c2bd60d026488ce95178ca18dbcd98b0071c34d0546a43d21"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/SlotPickerScreen.cs",
+    "bytes": 425,
+    "sha256": "746875e5b173e89efaa15ebe887a1340fa90d130df4d77ffc6929cb85ef25458"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Menu/TitleScreen.cs",
+    "bytes": 11092,
+    "sha256": "37521844999c3a7697d47be5a3778c6ac91520ef810d8af5b928c7c56b2ab007"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/CardDesignerScreen.cs",
+    "bytes": 25193,
+    "sha256": "3f83063d9c31bfe512fff2add9c95ee6939ae464dbe2a2d747e6d3e3848f9334"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/CardLibraryScreen.cs",
+    "bytes": 16831,
+    "sha256": "02a40e053cbd505498cde32e0fe0203ef18f96e0301a7c4dde45d3521456de8c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/ImportExportOverlay.cs",
+    "bytes": 8239,
+    "sha256": "29d5ce7d406e751d4878109ea66bc73873bb4e5f2d7bfb2082e9737682ae1107"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/NotesEditorScreen.cs",
+    "bytes": 6133,
+    "sha256": "7b5f7ea5dea733d0651b08c88ebd00e5fc7c01cfc67b3e453ae23a928c1975f4"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs",
+    "bytes": 13496,
+    "sha256": "1deadfc023e989098a74fb334fab757907cf9709d8a2cd9b34ac36dc321fb38a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoInlineLinks.cs",
+    "bytes": 5361,
+    "sha256": "f7e83b6442fb4b2c8761deff3bfb3145bf92ca7fc4ddd65c650bdd805b1d1b2b"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoNegativeGesture.cs",
+    "bytes": 1691,
+    "sha256": "e4879a5be3821e2ce76dc8fa3612ea2f1cef69f493473ea64447e9301a889a1f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoPrismaticText.cs",
+    "bytes": 2550,
+    "sha256": "73f327481770721913ce33406ab05a7e80b4e077430e17c83d4a841a46fb6854"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoStudioChoice.cs",
+    "bytes": 5198,
+    "sha256": "e281c3f849cf6eaf793baf9001dceaef33f67c16e6bcb44ac817588ccf525e00"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoStudioDossier.cs",
+    "bytes": 4431,
+    "sha256": "e178d66c9304d1069863d7fd9e58686d52fb5ae98ab4c7a211a590e91b46b59b"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoStudioElements.cs",
+    "bytes": 14841,
+    "sha256": "b1e1bb0247be97d6c3c9a41b5f2d451dc5c21b209abdfff3332162eefa8afc17"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoStudioMotion.cs",
+    "bytes": 1555,
+    "sha256": "bd92bfc2b38888bda14e2ef411650518e9a01e717c408e706e66ea6d54d157bf"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoStudioRoom.cs",
+    "bytes": 4981,
+    "sha256": "639466435fd48d7cb02b6fa8d7aa418088a736ad56058d711d9b1ad684915c46"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Misc/PhotoStudioWall.cs",
+    "bytes": 8672,
+    "sha256": "e5e9a9037010383c4169f7007b6dcd55bcfad30e2667ec1aa4527a4f80c55fcf"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/AltarRitualScreen.cs",
+    "bytes": 4929,
+    "sha256": "205bb16cf178da81130b22fb3613a7d4c2d1a0f5d74893f660b7d43fbe327d7a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/AmmoTeachScreen.cs",
+    "bytes": 2444,
+    "sha256": "dc5a89a650948ba12c8acec98577972ff00461cdf00c33cc6accf8ed8f335c3a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/CardFace.cs",
+    "bytes": 14622,
+    "sha256": "0ea30bda44b5db3939fa7e9c74876981f8e00084f838c66508f851e7e391db56"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/CardSacrificeScreen.cs",
+    "bytes": 2515,
+    "sha256": "61a80442ab72f3cef240ce20648ee463f4ddc6132bd81f7f50e56f78a68232c5"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/CardVisual.cs",
+    "bytes": 4769,
+    "sha256": "6b110106d7c56dcad3c1ba589309af4b5e97d22afc4be46bda705d8344a04c9a"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/ChestOpenScreen.cs",
+    "bytes": 10647,
+    "sha256": "ff222540ec88eb329c9ef0e99c89a61940edd0156b357f26a96b27a66e79c357"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/ClassChoiceScreen.Pool.cs",
+    "bytes": 8065,
+    "sha256": "ef8e169d3c7cdc896b2d5ed89a5c96dbd7f5896bf4db3aed26c8c09d868f7449"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/ClassChoiceScreen.cs",
+    "bytes": 18240,
+    "sha256": "858b7b83f303bc189e0a45c453c29a2af06a082923d12df30c0d4bd25fb20dd5"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/CurrentExtractionPage.cs",
+    "bytes": 14290,
+    "sha256": "0ef181b42250ce027e5749aaec9919f27706207dd38298a8bc0e258304520458"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/CurrentSettlementReport.cs",
+    "bytes": 10824,
+    "sha256": "6cccfe90ad8fd7c0f4b0b990f9d1b830b6b6e355af3ae3a99c12a95bca9fbd7f"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/CurrentSettlementView.cs",
+    "bytes": 4157,
+    "sha256": "c414b2450ddb06fec8ce26df1a8b3e8ee43bc8bfa1c1a6ac64d5221b2a49acdd"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/DepartureElements.cs",
+    "bytes": 9678,
+    "sha256": "06bfaf2a85de32a131fcd4776ca72564aae8621376d76c28752e69e02986b549"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/DepartureSourceMotion.cs",
+    "bytes": 1162,
+    "sha256": "62743e782231538405325ffff2fc46d8e8ffbc3d0c48cdd50c3f2614d31d0ee7"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/EntrySupplyScreen.cs",
+    "bytes": 2519,
+    "sha256": "97dad6d8af5f4d3447b440e5e659fb03e1185e9d16c35961af57ffd80442d647"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/EventDialogChoices.cs",
+    "bytes": 8017,
+    "sha256": "3c365260a78713ce02bb9e10266b14d0cfcf5f4af589be20f1087c3ecd69cc65"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/EventDialogScreen.cs",
+    "bytes": 5933,
+    "sha256": "a49f560f53521b8162421d55da1ae5e6b1ed1af166618521bce295c41e903009"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/ExtractScreens.cs",
+    "bytes": 2489,
+    "sha256": "a33f4b5617c87b8167e9a24fe3f0945531f4a1c9ea3e7c147cadb9f51a721236"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/FireRestScreen.cs",
+    "bytes": 2979,
+    "sha256": "e1d300c8a19dbae6f9d547bd19bc2c7b97eaa69339286badea75022eaa2baddd"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/NodeModals.cs",
+    "bytes": 6768,
+    "sha256": "561957710e17676c7a205870dc48062718820bfeb9ae05b060fec7021d9753f1"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/PickupScreen.cs",
+    "bytes": 3006,
+    "sha256": "b366cd5dab4830fc70a805d4ea802ade629730edd7a07fb3ddb0e5815a4a64b0"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/RunUi.cs",
+    "bytes": 13593,
+    "sha256": "ae948c9074dbb7c2ae863a6af2eda31b5cd2af230562f7a7e58cd04861b44a78"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/SceneTransitionScreen.cs",
+    "bytes": 12845,
+    "sha256": "f23c25d4b8af195378a538b5a819384b4163c01c5e8770638dd8ba943952a5f0"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.UI/Screens/Run/ShopScreen.cs",
+    "bytes": 19875,
+    "sha256": "c02a33156e9778c21b43f959c43d408344037d05b0257ea470bab016df3b4b30"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.View/BoardCamera.cs",
+    "bytes": 3944,
+    "sha256": "5c3dddf9448a084d5cf1bdd187fc9adf62d559c2e9e68fb33c48538dfe5a3a6b"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.View/BoardGfx.cs",
+    "bytes": 4971,
+    "sha256": "1951cf3ceb1ccf4e73d12ff98aae77ee99b64e7a208d2ed9c191010a5d2fd61d"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.View/BoardView.cs",
+    "bytes": 36130,
+    "sha256": "6b772a54af33480a201ff1c2260eca371951d4b5e4b96309594c37bd76010afd"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.View/BoardViewHost.cs",
+    "bytes": 3712,
+    "sha256": "a808e950f9294673f6e665a2f3d0fc1c4a2233f08b0668481bb70205296799e3"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.View/Fx.cs",
+    "bytes": 11180,
+    "sha256": "c10d71cdd02f9f148bc38dd8e52f18d0f599ce1e095d4896a9138faa2c81e141"
+  },
+  {
+    "path": "_planning/current-battle-statuses/private-check/snapshot/Sdt.View/MapBackdrop.cs",
+    "bytes": 5385,
+    "sha256": "ad2d3cd310abd725ad83dda76613c0caf96e1ee3fb05fa02735aed82512a08a7"
+  },
+  {
+    "path": "_planning/current-battle-statuses/receipt.json",
+    "bytes": 5959,
+    "sha256": "e4cf92915e3ba3fb30f4579069a30d76df79da72b8a9eb36b9126025fcb45eee"
+  },
+  {
+    "path": "_planning/current-battle-statuses/runtime-check/Harness.cs",
+    "bytes": 3356,
+    "sha256": "dcabf3a28044e2591022f953d1b1bd666aeb53868f1a59e542b1ba50ce3ae665"
+  },
+  {
+    "path": "_planning/current-battle-statuses/runtime-check/NuGet.Config",
+    "bytes": 73,
+    "sha256": "e497501960554d323eef45860c14474958accd1ae7f3ae6f95b10e4c1d340401"
+  },
+  {
+    "path": "_planning/current-battle-statuses/source-sha256.json",
+    "bytes": 1901,
+    "sha256": "b27dd3caa8404dc170bfd42a6b74e4f840aec8233961792c177b6fddaa6b5e62"
+  },
+  {
+    "path": "_planning/current-battle-statuses/source-vectors.json",
+    "bytes": 14427,
+    "sha256": "16e351566c6d323ac2edee0c0d66bae324142cb39e035e4c6aacda9b8e6ee6a7"
+  },
+  {
+    "path": "_planning/current-battle-statuses/source_vectors.mjs",
+    "bytes": 3064,
+    "sha256": "23aeb86e166a6ae69a97990304e8f32eb06f7f485ef92f18bcca03dbb9c418b3"
+  },
+  {
+    "path": "_planning/current-battle-statuses/sync_metadata.py",
+    "bytes": 1268,
+    "sha256": "e02a5732539324ba0205024d30fca6a13c85640ede498f53a42824d8fd9d7754"
+  },
+  {
+    "path": "_planning/current-battle-statuses/verify_behavior.py",
+    "bytes": 8124,
+    "sha256": "cfaef6b5e2fd9346df2d93dc9f87019dade9c59fd9be558d660d9ffcd19a4268"
+  },
+  {
+    "path": "_planning/current-battle-statuses/verify_private.py",
+    "bytes": 2899,
+    "sha256": "86a9df0fd6d0fd321244a9b46ef1d3079946a49eac5c57011d6d3822c3ef988c"
+  },
+  {
+    "path": "_planning/current-battle-statuses/verify_runtime.py",
+    "bytes": 4763,
+    "sha256": "302bbb2b58f9a0ca641eea1d63b94c71cfae86f208d89386856c4d317e7b816b"
+  },
+  {
+    "path": "_planning/current-settlement/CurrentExtractionPage.cs",
+    "bytes": 14290,
+    "sha256": "0ef181b42250ce027e5749aaec9919f27706207dd38298a8bc0e258304520458"
+  },
+  {
+    "path": "_planning/current-settlement/CurrentLeavePage.cs",
+    "bytes": 9107,
+    "sha256": "af1667c621bc59af7de61e340e65a6b5acb6dc17394fc01259ac25184acb4538"
+  },
+  {
+    "path": "_planning/current-settlement/CurrentSettlementReceipt.cs",
+    "bytes": 7055,
+    "sha256": "782acad82d4cbf855fb8b0d14acaa9e5aa8467af577d9824e05f54898129b141"
+  },
+  {
+    "path": "_planning/current-settlement/CurrentSettlementReport.cs",
+    "bytes": 10824,
+    "sha256": "6cccfe90ad8fd7c0f4b0b990f9d1b830b6b6e355af3ae3a99c12a95bca9fbd7f"
+  },
+  {
+    "path": "_planning/current-settlement/CurrentSettlementView.cs",
+    "bytes": 4157,
+    "sha256": "c414b2450ddb06fec8ce26df1a8b3e8ee43bc8bfa1c1a6ac64d5221b2a49acdd"
+  },
+  {
+    "path": "_planning/current-settlement/ExtractScreens.cs",
+    "bytes": 2489,
+    "sha256": "a33f4b5617c87b8167e9a24fe3f0945531f4a1c9ea3e7c147cadb9f51a721236"
+  },
+  {
+    "path": "_planning/current-settlement/GameRuntime.Settlement.cs",
+    "bytes": 15776,
+    "sha256": "b89560f72ebd67b4bdccdb2043eb1741d1363040cd8ce835f9542f9e22831e05"
+  },
+  {
+    "path": "_planning/current-settlement/README.md",
+    "bytes": 5076,
+    "sha256": "870bc75d20c49dd1329ab3a5d4726f68e6f3fa4d2a248edba19f7d1cff8b3af0"
+  },
+  {
+    "path": "_planning/current-settlement/SettlementHarness.cs",
+    "bytes": 13923,
+    "sha256": "f25a678a86a22fd04ec0c688a0934256eed8298ebc4ca8ea467c3b58c7016908"
+  },
+  {
+    "path": "_planning/current-settlement/applied-sha256.json",
+    "bytes": 1666,
+    "sha256": "01efbcd06ebb7eab5ed65b6bc22af2c99a08e0871f835d9d2f064913070e5dd1"
+  },
+  {
+    "path": "_planning/current-settlement/asset.json",
+    "bytes": 396,
+    "sha256": "5678816dc5a2016f0356ca436b83d0ba626a6d11f3e6c6e65c38780b356e0cec"
+  },
+  {
+    "path": "_planning/current-settlement/behavior-check/NuGet.Config",
+    "bytes": 73,
+    "sha256": "e497501960554d323eef45860c14474958accd1ae7f3ae6f95b10e4c1d340401"
+  },
+  {
+    "path": "_planning/current-settlement/deploy_owned.py",
+    "bytes": 4423,
+    "sha256": "4f50c3986b6552d48641455ecfe3b3096f36c3e0bb15cb0242c746c8a019d929"
+  },
+  {
+    "path": "_planning/current-settlement/menu-segments.cs.txt",
+    "bytes": 841,
+    "sha256": "956d7f7c916e048e8c744366a420a14a3664a0c66547dd2179c336bc606aaed3"
+  },
+  {
+    "path": "_planning/current-settlement/prepare_private.py",
+    "bytes": 4935,
+    "sha256": "67cf3e6c6c9e857ef67d7cf49a664956bd5f4dccf7634b9b22f704b6bbf4dc57"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/NuGet.Config",
+    "bytes": 73,
+    "sha256": "e497501960554d323eef45860c14474958accd1ae7f3ae6f95b10e4c1d340401"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Boot/BattleBridge.cs",
+    "bytes": 22007,
+    "sha256": "96a37d859f4e9856842f8291ab2ec1fd9f4ef58ee4138a335e86d1ec3ceb2d2f"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Boot/BattleViewApi.cs",
+    "bytes": 12408,
+    "sha256": "d83a0e3ed6d06cf10f53f8b7f8287ae0be0cc80d157b19993b1578010975a64b"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Boot/GameBoot.cs",
+    "bytes": 1794,
+    "sha256": "b7cd771c918977a759f4b11056c290ac0a4d24e3ebc83722b5d70524d4fe7dee"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Boot/RunLoopBridge.cs",
+    "bytes": 5903,
+    "sha256": "5f34526848fdcfe3530efab9b8631b471454f43d1bb8fb6d801ec177afe78522"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/BattleActorPresentation.cs",
+    "bytes": 7002,
+    "sha256": "a9aa053f6e70b3d7d75b36e981515bc52a1204decc9fc4310a0aee7b7398662e"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/BattleItems.cs",
+    "bytes": 8734,
+    "sha256": "9ed3fe6793d3e628181df83af7b8e29f2bb8c6df0c9932cc68c538547fe60bb1"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/BattleRestartCheckpoint.cs",
+    "bytes": 5936,
+    "sha256": "3a18ed3e9b96fd6ce0ae6655f4dfecca572ab13897f71cee3d182cb6f064b0ed"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/BattleRules.cs",
+    "bytes": 3195,
+    "sha256": "606af96e619cf69b7d229fc24fd8e61ee6a883a5f8d71215e8ef9587258cb93f"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/BattleSession.cs",
+    "bytes": 74491,
+    "sha256": "cdb9f570724d753c6442afeba8469fa7086e77502ca52910e064c63c9b060184"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/BattleSummary.cs",
+    "bytes": 1416,
+    "sha256": "f48773c5ad178bcc3b9b87446ac0f7e0c3b33ffcd1c27d37bc3e169c359905dd"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/BattleTurnForecast.cs",
+    "bytes": 4702,
+    "sha256": "c97291a029e83689181caebc296b3280a7d140b7a49b28f8c7e156dc2c3ccb9a"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/CurrentBattlePools.cs",
+    "bytes": 3490,
+    "sha256": "d6d5f051924b0e42f9d0264d19db52aa3186db653799382b61fcf96a3c8de79c"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/CurrentBossMechanics.cs",
+    "bytes": 3609,
+    "sha256": "af6b464fde25ae1a21c77be6c4ae54c3e0c1e44b6296b77ff35a8dc49643569c"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/DeckBottomDiscovery.cs",
+    "bytes": 987,
+    "sha256": "1a3ac4fa3a06b677480f5273de1c6191a62378ae3d165b9d3e6e696c6c820285"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/DeckOps.cs",
+    "bytes": 1313,
+    "sha256": "7d3cec76433568186bcd55e1b04378eaff4c08b26f6e2c405cc4163ed73bd96a"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/EffectExecutor.cs",
+    "bytes": 26659,
+    "sha256": "9f2e5df10d9ae11d3d92c10a35af9d0da440c7464d431f09e51a2f9ed70c3b63"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/RuleValue.cs",
+    "bytes": 1639,
+    "sha256": "21b8e631e4be1c717a93d64772fca2796dc18ceef2fe81e223f0bc9d2a14c508"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Battle/StructuredRules.cs",
+    "bytes": 71676,
+    "sha256": "73b55bea0300bd8e08ad1ddb86d52751bae2de96a8909e6770eba597d0122008"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Cards.cs",
+    "bytes": 15645,
+    "sha256": "1d378c546532ca1e0fa3f225430c38a9620322e174895f9d9f3366eec21868a2"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/CardsExtras.cs",
+    "bytes": 4070,
+    "sha256": "57f9c35b3da579ef7722657a25d3a6c00abda9b7bae919c73b9b0bfd4e3d34ec"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/CharacterTable.cs",
+    "bytes": 6363,
+    "sha256": "b213427876100935c1b81f47a3380c9665edce63bd0807dd19d5d2db520ed68b"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/ChestLoot.cs",
+    "bytes": 7051,
+    "sha256": "a7417eff72f8e2d8c70d7297e56ea1aecc4382be5d517d0d5365529af3fe13a5"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/CombatResolver.cs",
+    "bytes": 27086,
+    "sha256": "d0fc28de6f74f1794965c0b58fd39f37510acf8c1a697348a075d9cf0090d70d"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/CurrentMapData.cs",
+    "bytes": 7916,
+    "sha256": "08f202d7e3c96d24e76f2d932be6e57fddb85e0b4d55b47a5c0d9dc2d6055832"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Data/CardDatabase.cs",
+    "bytes": 128199,
+    "sha256": "f858f864a3b0be377855020d8dd19da8ab6384647aef97ac1372a7fc7b8e4c0f"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Data/CurrentBalanceData.cs",
+    "bytes": 669,
+    "sha256": "c68abad37e68be4fbf0d58c2e3c7cc72ae78ab0f3f786339a7cb1fa9899a549b"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Data/CurrentChestData.cs",
+    "bytes": 1741,
+    "sha256": "c601f4314ca37d8b7775cdba392c16c6bff239d69f2c9afc2e63d957753cf29c"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Data/EventDatabase.cs",
+    "bytes": 72598,
+    "sha256": "97661d855db10648466af3a78c17ee7d42dd146a11e58e42f6ab4bd1dc7435d3"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Data/EventProgress.cs",
+    "bytes": 2042,
+    "sha256": "1748e38bd638c3afca74ca95dbe1fd469fd2b4c55e9d03a073745f5dc2490ca2"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Data/SceneCopy.cs",
+    "bytes": 13360,
+    "sha256": "553157489f0e4f54f116270b6b3a312f861a93ccaf40406c59cf94057e93b32f"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/GameRules.cs",
+    "bytes": 3040,
+    "sha256": "e0af47b107d87f1a488d57f21ad14b14edcc648ee43e3ba87a0167672cddf057"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/KoiPondModel.cs",
+    "bytes": 7388,
+    "sha256": "10cc2a292301991c65c4b241053a2d16d543ed3a998a8e72ffb32fa87ab1013a"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/LayeredMapGenerator.cs",
+    "bytes": 25974,
+    "sha256": "2040ed06d869dddc7518b11b7a83d7c55e5baef635c2042d29bb4aa31b61ee03"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/MapModel.cs",
+    "bytes": 32585,
+    "sha256": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/RewardReceipt.cs",
+    "bytes": 497,
+    "sha256": "bdba16fbbdf3ac2f7a9441357dce359a6e647765d36157b7d4add09596749eb2"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/Rng.cs",
+    "bytes": 5594,
+    "sha256": "1a0bb218e41b7831f2b7cc865c97e70ee9c91912fee2ce1a144ab04e95106dc0"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/RunState.cs",
+    "bytes": 7194,
+    "sha256": "919186ea77c2033f510507dd5fd0531127ad81ca992d9f319c4bc0022a71e549"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Core/ShopOfferReceipt.cs",
+    "bytes": 268,
+    "sha256": "3f58c4b24a593274302f8be06dd450a3d58d9d86b4c19ce92532f95004137ccf"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/CallStack.cs",
+    "bytes": 15866,
+    "sha256": "8e554a1123d442c0150562b58d2f415dad5d54259efa8e75443bf332aa170f62"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Choice.cs",
+    "bytes": 2117,
+    "sha256": "70c85d21ccd340be9b7ef2c312979f3259e016fb58d3efc6d5837e3ea56ba4fc"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/ChoicePoint.cs",
+    "bytes": 2836,
+    "sha256": "dd803aa64baa9b1f8a8741d76deefc4e1133a8ec06e32febaa18e0e98fa8a49a"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Container.cs",
+    "bytes": 11922,
+    "sha256": "3ff95423cf11ee252617c5372da7da93bbcec55d989891a66d7c84196b257853"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/ControlCommand.cs",
+    "bytes": 5277,
+    "sha256": "2e2c58468182d04fd93febd5264e93b348f87c15da3e1946fa5b534e155009a1"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/DebugMetadata.cs",
+    "bytes": 2595,
+    "sha256": "0f5bd05a237b0219636e283fc8a8bb056233a923f5680e7c0160b919705932d0"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Divert.cs",
+    "bytes": 4657,
+    "sha256": "46d4946e77266e0c26f249f36f5f51b8382e0bcdaab8834a3596d7cf40835298"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Error.cs",
+    "bytes": 813,
+    "sha256": "82fb0d05d97482f3e7d88ab88d572be220e7ef009aedb4db8eb7048242542610"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Flow.cs",
+    "bytes": 3598,
+    "sha256": "6f1116a9da65109f525c7918642190e038d40e8a9844b4aca434aa43644ce548"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Glue.cs",
+    "bytes": 208,
+    "sha256": "d91560d7e19e385f8974913033880167dfdf9775aff535395e9ac8b055451e42"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/INamedContent.cs",
+    "bytes": 128,
+    "sha256": "4c879cf03c8a18030257af104bc33f0953492bd57dfba135ed5a51b9b049f42b"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/InkList.cs",
+    "bytes": 24692,
+    "sha256": "26de09a0e436dcaaa98f4a16121d88f935f4bee6a7bb42bbfe8859b558fbd9af"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/JsonSerialisation.cs",
+    "bytes": 29055,
+    "sha256": "53c8fc225b67c73aa4124cebd3f0795f18aa11528970d0c0432818a52b9c703b"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/ListDefinition.cs",
+    "bytes": 2389,
+    "sha256": "bac306216d09867e761b7a488e740b640891e29a860d1fbda4178a28a3513f28"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/ListDefinitionsOrigin.cs",
+    "bytes": 1771,
+    "sha256": "c0c2ea1312d17b495dfb94afa889017623118f56885a8c857cce10386fbb1f71"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/NativeFunctionCall.cs",
+    "bytes": 20659,
+    "sha256": "63164d70c7957886f9a5df30b625f5e6ebd3f2d6d1333c246f8cce3d3df6c4e9"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Object.cs",
+    "bytes": 8218,
+    "sha256": "9315a7682a006383c5c8c9611dde4143cfc75a8e72ad8845f86f5e306a6faf36"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Path.cs",
+    "bytes": 7196,
+    "sha256": "f49ed9324dc1886296efa0f740f15543d9ec8c795e34e129f533c471c9a3b5bb"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Pointer.cs",
+    "bytes": 2105,
+    "sha256": "9905dd391d0045e8bd6892a62d8dcd5b56e9f8cf18c927fb88e2f5ef91133df3"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Profiler.cs",
+    "bytes": 11257,
+    "sha256": "625a1e3b092a1c35e0e30c26551bf5dadbe946b37a38fc0eab79d1ef595f7a7a"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/PushPop.cs",
+    "bytes": 199,
+    "sha256": "4869de206b6bcdfba3be523cf5e737fbfe99d06117464a57f717a51432a2d685"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/SearchResult.cs",
+    "bytes": 837,
+    "sha256": "b505ddc46e06b7d7af0620a030f045bf51c986a5b2d06293a5cf686a7d6fd7ec"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/SimpleJson.cs",
+    "bytes": 20868,
+    "sha256": "860e42aa316afe61a6c40d3ba31ea1733e0e977b5e0babd602dfe452eec12cd1"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/StatePatch.cs",
+    "bytes": 2482,
+    "sha256": "80df3ab1a9342d3e7820e290230668d83e6333d73465c8b86bc5fc84f2bdc7d7"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Story.cs",
+    "bytes": 132528,
+    "sha256": "2837ec2711104d580743a2842cb7cca3c004fd82348f92683b9349e9026e8964"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/StoryException.cs",
+    "bytes": 810,
+    "sha256": "24fa71deda6f55afaf8b18fb129481808304d6ed8a70c7cbcdc87fdcddca120f"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/StoryState.cs",
+    "bytes": 51843,
+    "sha256": "76651485f97f107aff2edd08d83ca7bb30f51a8ec34d721345d015666ea88417"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/StringJoinExtension.cs",
+    "bytes": 580,
+    "sha256": "beed67cf752396d5a0268d1d6970b9c6fb75f420b4f27f3bfb5f2611413f0353"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Tag.cs",
+    "bytes": 842,
+    "sha256": "d398e81d59d3335473911b7f3b49f340948acaaced07d38a2ff1665d6a3430bd"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Value.cs",
+    "bytes": 12549,
+    "sha256": "fd8202189eb94d0b4f60cd91fd67068bbf73bfb9aeb8587859d95a99fc00bd74"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/VariableAssignment.cs",
+    "bytes": 839,
+    "sha256": "4e2a830971dc7dc84c547d5d57fbd52c072e1f5cf597b1024fe8379ed2083c57"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/VariableReference.cs",
+    "bytes": 1404,
+    "sha256": "d28eae8bd7f585e3f29dd5b4e97f5450265fe65ec7add3df893acad02717b78f"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/VariablesState.cs",
+    "bytes": 16821,
+    "sha256": "1a54b658dfd7e4aaacbe3d63f4be733fa09a93c1330e7d487db9c08d742b685a"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/InkRuntime/Void.cs",
+    "bytes": 131,
+    "sha256": "b615f91a21f620d9ff9fe1a8ed55e560fd04d1be0ed0cce9e9268543ed637f76"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Narrative/NarrativeService.cs",
+    "bytes": 5707,
+    "sha256": "83599e2af8dc914fc1d5077a2e8a809c970f86fedd979bd089bdbe5826dd8e0f"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/CurrentAssets.cs",
+    "bytes": 41107,
+    "sha256": "69e86355fdc212335e976b2721b872366e6a4adbbf7c2839285f6f02f3ea88af"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/CurrentCardPresentation.Rich.cs",
+    "bytes": 4291,
+    "sha256": "a7fdf6fd499838ede6bb83f855534b78d0d97ffb563883112506d1cb79367c44"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/CurrentCardPresentation.cs",
+    "bytes": 10947,
+    "sha256": "3e8944f265a655db866d6881947cc3450217bc6887e0a7258c981dab669d1bfa"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/CurrentHomeAssets.cs",
+    "bytes": 1489,
+    "sha256": "e049ddd78a5763814c7739cd11a8569704569797de46663251a8eb599c84b44c"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/CurrentPhotoAssets.cs",
+    "bytes": 1082,
+    "sha256": "f47f1c0d04f15d759b13a99f5c0a1b7113d8b8dc335766e3b0c3f6d4f6c0f438"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/CurrentThumbnails.cs",
+    "bytes": 23000,
+    "sha256": "8813d3c1345d9c4a1c2bd6aa7ca10c79ee0264f18649cd81d74d5ac3f6f3b17e"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/CurrentUiIcons.cs",
+    "bytes": 10961,
+    "sha256": "f37d34cae4c4490cab697da76cdb7ec3513672d7e8b539123ef82f297e3c14a9"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/CurrentUnitFrames.cs",
+    "bytes": 3919,
+    "sha256": "38e694d1baac3f373239b60714accf2ba4ee149e55999fb0dd8c273001f3b98e"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/Res.CurrentRunHudAssets.cs",
+    "bytes": 774,
+    "sha256": "7c557a19e4e93b3b00b19b6bf6e482b785bf953202e1bd0c12ba1e579f918ae0"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/Res.cs",
+    "bytes": 10704,
+    "sha256": "474710277a4930a7fe0c99cf314946c930f8d3e39d01f424b189a32e61cdf017"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Res/UnitFrameCatalog.cs",
+    "bytes": 974,
+    "sha256": "5bf9fce4d9abafef129f9ac86450423775f862dbc9ce452d00e17fd507073f2c"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/AtomicJsonFile.cs",
+    "bytes": 1244,
+    "sha256": "fa411ea29c6bfd305ea0e67824ba5e6ecb22a82cbcd0b6d59d7c813cefe76662"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/AudioService.cs",
+    "bytes": 28801,
+    "sha256": "9044386bac673328a559f794aa68f7f3b96d654c340e797d3d910e7bb9c4992f"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/BagItemCommands.cs",
+    "bytes": 7742,
+    "sha256": "485a6ab5eb14c9c80754cf523e0c9019d5a47324bbf04fa8821ba98704054a17"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/BaseData.Customization.cs",
+    "bytes": 6582,
+    "sha256": "f1e39b25848757454ed7eca18187c5c42ec564d287e4db7af0648bf3360772d9"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/BaseData.PetsMaterials.cs",
+    "bytes": 5354,
+    "sha256": "66605772786146e1ed3ed5778e85b37cbfe73878ef1c070428795aa823d8f66b"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/BaseData.Preparation.cs",
+    "bytes": 10942,
+    "sha256": "ddc3b725124a44b9e818d6038d381b3e1fd27caa1f0998aa0548a1f793c3f74a"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/BaseData.Story.cs",
+    "bytes": 6559,
+    "sha256": "e284f2e16669b855c553e41ef9bf1921e0afce79912cf983aaf88878b0b02fd8"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/BaseData.SupplyPack.cs",
+    "bytes": 3320,
+    "sha256": "fcc4c0bc6269c6add41ca14d5038873f66727c9dddb622961d9372ab00ce16c8"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/BaseData.cs",
+    "bytes": 23151,
+    "sha256": "45d297fff5224306db0a66fd22eeea8aefacc3bd066189f65b8a74ab71fbeb9f"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/CardContainerCommands.cs",
+    "bytes": 9637,
+    "sha256": "a77ee6c656911bebeb734e7017d8487803d2321d93f23a58f1079319207c2687"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/CourtyardPreferences.cs",
+    "bytes": 1064,
+    "sha256": "858e3f1a7f2e62fc0bf321295d473e0e6bf87d0033ba0437d04c753cb9020992"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/CurrentSettlementReceipt.cs",
+    "bytes": 7124,
+    "sha256": "2787efc8b5711f3750180339610dce25640fb3ee4d3e9899d2061be8e679a2b1"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.Altar.cs",
+    "bytes": 5806,
+    "sha256": "d8a1cc55f5713f01f3b6f85c44b6f0fabe5e3cee3780e6689851474a6db10fb9"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.BattleCheckpoint.cs",
+    "bytes": 2073,
+    "sha256": "1894e1bcb222ad8ecd770e69c1dcf7f8a3bb199759557a6e7556a888240263f3"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.Commission.cs",
+    "bytes": 4817,
+    "sha256": "7e9844a2887ecbf9eee2c4f696cd4da04121c92ceaa51b2ed34a066ce354a6ed"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.Departure.cs",
+    "bytes": 7026,
+    "sha256": "df55db1791c38f96e1bdd04e7d8c851299db4ba6ad3ad0d116af15f1a02ebd4c"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.EventRoutes.cs",
+    "bytes": 11334,
+    "sha256": "d8dcf6b098f4c23b493d89be0fe33d3822f420e4fb6d07c67fc1c8580ba551fb"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.Events.cs",
+    "bytes": 11239,
+    "sha256": "2f53243042a90bcf14b486b141dc2f6f1a65742f9ced1bd31ab04e25c469bcf1"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.Map.cs",
+    "bytes": 11093,
+    "sha256": "b42c73755e89cf56c5bc90efc40d25014c6c3c71d7eb5ed4a12ba1031c653187"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.Persistence.cs",
+    "bytes": 4394,
+    "sha256": "28226746ad67a670a90a5b2e2055f7479c9d3b74b3bb685b3bc84defca2f517a"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.Settlement.cs",
+    "bytes": 15911,
+    "sha256": "ae339ef5523ad99c68e2d021f14ad7e8a64420f5b102ef649ca887fe1d031db1"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/GameRuntime.cs",
+    "bytes": 76016,
+    "sha256": "c25ad20ba559ea5d48672721512c8e720205080e26467b3d682300c7eace0559"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/MetaProgress.Achievements.cs",
+    "bytes": 2777,
+    "sha256": "534348268e834dc55eae7ac289bf54308051fbeb6bd5ec4a2737d45355a54e2b"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/MetaProgress.Collections.cs",
+    "bytes": 4920,
+    "sha256": "a895cc7ab6a0750e257d0445e7e92282dce57d321b18a19fab035d8d484cddd0"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/MetaProgress.cs",
+    "bytes": 14023,
+    "sha256": "7c1c79e978d4d8bf32a4aa10ddd86697de003c820547f7a1b35d34333e70d016"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/RunEvents.cs",
+    "bytes": 5425,
+    "sha256": "0d6fd77aacc393cd63be41f2f371b0d0ead83619f64f1a33d80d807a690ea5fa"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/SaveJson.cs",
+    "bytes": 2834,
+    "sha256": "4e7b30dfc3a0a463d64db4fbda0a79edccf7fcc9ada7ec4c848a71fddff937e0"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.Run/SaveSystem.cs",
+    "bytes": 19009,
+    "sha256": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.UI/Kit/App.cs",
+    "bytes": 11746,
+    "sha256": "8e164d63f548fade130c3524a5466228841c8d00bbb631e8a13f314cdacd2008"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.UI/Kit/CurrentEndTurnHold.cs",
+    "bytes": 4076,
+    "sha256": "60e6940b94bc6c9d8e23f8fcc9eff98239632fddd898b88c9923b396b9346679"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.UI/Kit/CurrentInputBindings.cs",
+    "bytes": 8178,
+    "sha256": "80522964ab53e7e3e3c81e9b386b7818a85859de3e349d28d5454e1010d6e06d"
+  },
+  {
+    "path": "_planning/current-settlement/private-check/snapshot/Sdt.UI/Kit/CurrentMapTools.cs",
+    "bytes": 10578,
+    "sha256": "aacb08ddc1c055785c4da3a81f1e3521364d561dbf7a05aec2810d35b0492d14"
+  }
+]

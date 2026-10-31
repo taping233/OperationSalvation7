@@ -1,0 +1,25 @@
+{
+  "typecheck": "Sdt.Boot current production snapshot with imported Unity DLL references",
+  "nativeFiles": {
+    "Assets/Scripts/Sdt.UI/Screens/Run/DepartureElements.cs": "afb814af3b364b7308ca0d4d250284fc09136e8dbb9d5fa1d05295c6ffa570d0",
+    "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardScene.cs": "6a2f746b3fd1db3fff968d5c9034e222b4158b83b2a29199280fd049102ed5db"
+  },
+  "sourceFiles": {
+    "game/src/ui/card-zoom-controller.js": "f8a40e51978702a8f2b1cf395bafd1081208480460daab2252e28c45be72ee0b",
+    "game/src/ui/card-zoom-content.js": "12edab3f251422bc592d23d5246d39665a354593afe6e460bc66027dd5b20f31",
+    "game/src/ui/reward-scene-view.js": "51ecb9a8bbedc8751ae64adc8e555326232a22e596085a359b2d8ca109eefca3",
+    "game/src/run/chests.js": "fd42e9bde3b8cb28e913687c77e6aa462cae57dcee24309a637523e76cdf732e",
+    "game/src/run/event-card-choice.js": "3ec68c9b742152e505dfe2df28f8ec40c19ff9621597620d54d8beafc89fa9f3",
+    "game/src/run/event-branch-choice.js": "b2d520297f93a75cac6536a5212b9f4dcc2d766151e088e3253b82432d5a95c1",
+    "game/css/winter.css": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9",
+    "game/css/cover-details.css": "727f66a5b0ef69266b88449d5eaa971af7148ce5b3e33d94359e49d4361975e8",
+    "game/css/expedition-rewards.css": "542dc39a0f873956a75a4aefcbf9b59f08367bc0dad733630e2e4b46cdab5cac"
+  },
+  "sourceTests": {
+    "numPassedTests": 6,
+    "numFailedTests": 0,
+    "success": true
+  },
+  "sourceTestExit": 0,
+  "nativeRuntime": "pending root consolidated native verification; no Unity launched"
+}

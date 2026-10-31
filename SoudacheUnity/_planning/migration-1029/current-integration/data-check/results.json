@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "count": 18,
+  "checks": [
+    "title has no active slot",
+    "global photo note can save at title: ",
+    "title note rereads from actual file",
+    "photo note reports blocked atomic write",
+    "failed note restores memory and leaves actual file unchanged",
+    "photo note retry succeeds",
+    "invalid card cannot create a global note",
+    "valid run fixture is readable",
+    "malformed slot reports an isolated read error",
+    "a malformed slot does not block reading a good slot",
+    "saving another slot preserves malformed slot bytes as JSON tokens",
+    "malformed observed slot cannot be overwritten by a normal write",
+    "cancelled removal restores isolated read protection",
+    "cancelled removal retains malformed source record",
+    "malformed base data reports its own slot",
+    "base corruption leaves another slot usable",
+    "malformed profile blocks all affected slots",
+    "fatal profile remains intact and refuses writes"
+  ]
+}

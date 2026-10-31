@@ -1,0 +1,2863 @@
+{
+  "created": "2026-10-30T05:37:34.9598005+08:00",
+  "source": [
+    {
+      "sha256": "968914D24051C3DE51357CE0D845F59599410C4BC9CBEBDE27C69404C31CF204",
+      "path": "搜打撤\\game\\src\\boot-order.js"
+    },
+    {
+      "sha256": "F8F0825F37AC8D23BE92A88C9DA4608EA15B6E51CB5DF28BFA356925104E546A",
+      "path": "搜打撤\\game\\src\\e2.snapshot.qa.js"
+    },
+    {
+      "sha256": "D651F48E308A7387EAAAF60BD16E60B45B139C85148C8430E49FB6E3B2F703BB",
+      "path": "搜打撤\\game\\src\\game.boot.js"
+    },
+    {
+      "sha256": "F4BB40999B217C7C170CDE55EE77FBBAAC434365AFF90DC9EEB1A0489403EBDE",
+      "path": "搜打撤\\game\\src\\main.js"
+    },
+    {
+      "sha256": "6880CE65FF95488396A66BF3BBE13DA471D5D5578FFE041D3FEAC22DB5ACC0CC",
+      "path": "搜打撤\\game\\src\\r7a.qa.js"
+    },
+    {
+      "sha256": "C08B5825430C4FFF3C69DEC6BB556D918AA05AFE05134C3875DAD4D6013D2C09",
+      "path": "搜打撤\\game\\src\\rarity-design-lab.js"
+    },
+    {
+      "sha256": "44545A9F6BC8763E097CC6BEA8F191007702AD89192307D8842F8ABFFFA94892",
+      "path": "搜打撤\\game\\src\\wu-career-frame-preview.js"
+    },
+    {
+      "sha256": "8702E59D6A2E6D506104C4DD7C254645453D7B3B18EF95A8977DDFE82C7990DE",
+      "path": "搜打撤\\game\\src\\agent\\agent.action-router.js"
+    },
+    {
+      "sha256": "AD18C1B9DEB1ADF637A873E3670A02633997A659414FC891C24EED7B2D4F8E41",
+      "path": "搜打撤\\game\\src\\agent\\agent.battle-stats.js"
+    },
+    {
+      "sha256": "66EAF40168B7BAA5ACFD63109B59B5E1AB617745CA9253C54398F804E71B62AC",
+      "path": "搜打撤\\game\\src\\agent\\agent.console.js"
+    },
+    {
+      "sha256": "F8A1019DD21110FA4A557A0DDA95F1D2385F50ADD034D9C9AEE724C986104B11",
+      "path": "搜打撤\\game\\src\\agent\\agent.data.js"
+    },
+    {
+      "sha256": "B0CA752AFE3736F836D110A2F6A88258434CD70476F85700A86E05BBEE55209A",
+      "path": "搜打撤\\game\\src\\agent\\agent.js"
+    },
+    {
+      "sha256": "CC3806050C6D05688E3907944FA5F6EBEBBDE3035D54287F72F195320F082BC9",
+      "path": "搜打撤\\game\\src\\agent\\agent.llm-parser.js"
+    },
+    {
+      "sha256": "FAEDA3851BC623593DD7E8A365604711B56A48C78140E7955A62C50ACF876051",
+      "path": "搜打撤\\game\\src\\agent\\agent.llm.js"
+    },
+    {
+      "sha256": "6240C168DAAC8119798E3C775BF06E74E88D44FEA064F0447ABA5C221CD96A10",
+      "path": "搜打撤\\game\\src\\agent\\agent.llm.runtime.js"
+    },
+    {
+      "sha256": "15F488E71512CFBE2FC010FC2BFBEC4CA666328B9309AAD52BD8BCED9ABAB574",
+      "path": "搜打撤\\game\\src\\agent\\agent.policy.js"
+    },
+    {
+      "sha256": "4E1F0DB237B7A31D10328DF66D4D47DEC399EA5641BA331080F17242FBAD5B42",
+      "path": "搜打撤\\game\\src\\agent\\agent.protocol.js"
+    },
+    {
+      "sha256": "B02BFD82B906E01919DC5D7A711C8D90AEB7233ADDE31C2C3E008F8654012B34",
+      "path": "搜打撤\\game\\src\\agent\\agent.recorder.js"
+    },
+    {
+      "sha256": "BAA849CA5A850201C5704620911439811D27C4BC84ABDE493853B739CF9A9726",
+      "path": "搜打撤\\game\\src\\agent\\agent.replay-state.js"
+    },
+    {
+      "sha256": "914C3A32B29BA9C961B026AF3EEB18FB6D8752865192055FD8467850E8D99B1A",
+      "path": "搜打撤\\game\\src\\agent\\agent.replay.js"
+    },
+    {
+      "sha256": "2301C06C4F455C0E421EA06AD238E4BE009A7A8AC82E68B45BA28E5106CAF7A5",
+      "path": "搜打撤\\game\\src\\agent\\agent.replay.runtime.js"
+    },
+    {
+      "sha256": "058844378A342ACA1E4591870F8082643BDCFF4A2895898EB82E80C7C0A9837D",
+      "path": "搜打撤\\game\\src\\agent\\agent.run-control.js"
+    },
+    {
+      "sha256": "7F958967C2F07B3B8A197803A9B18724FC9C2A68C3B4C839A14271A8C73B255C",
+      "path": "搜打撤\\game\\src\\agent\\agent.runner.js"
+    },
+    {
+      "sha256": "98BB2122CE140E44A1707BC8494AD4844CCCD84454407C780B8F5863BCF2CADE",
+      "path": "搜打撤\\game\\src\\agent\\agent.runner.runtime.js"
+    },
+    {
+      "sha256": "174F6715911569664CED93E26E95A0B4A812E06720B555AE2F72D899C97E9FEB",
+      "path": "搜打撤\\game\\src\\agent\\agent.scenes.catalog.js"
+    },
+    {
+      "sha256": "DA1BFC52C100229CA74EC969E6B4282FC58B62B4309B80D908604B5805790E6D",
+      "path": "搜打撤\\game\\src\\agent\\agent.scenes.js"
+    },
+    {
+      "sha256": "A7DAB112E3745B00A1D23B99CAA585D7F7109AEC6C8E4CA1365960E6CAA94DB5",
+      "path": "搜打撤\\game\\src\\agent\\agent.scenes.runtime.js"
+    },
+    {
+      "sha256": "51C4877FC1A9E14DE0FC076EABC8E73C716312E4A724724CD8521B97B5E5A09E",
+      "path": "搜打撤\\game\\src\\agent\\agent.state.js"
+    },
+    {
+      "sha256": "548F9FBA11AA8DA4850D333241672A85E374BBF4A3CC11F85ED1092854C964A1",
+      "path": "搜打撤\\game\\src\\agent\\agent.stats.js"
+    },
+    {
+      "sha256": "9C0D4078C1915652615F11E46946788D7BA513BBDF9CF6C900986EFD7AAFAC98",
+      "path": "搜打撤\\game\\src\\agent\\agent.surface.js"
+    },
+    {
+      "sha256": "3D9B00BA2CB8412BD6CF52D9B7374F87128BEFDCEBD2D5BFDCACC002FED6E1A3",
+      "path": "搜打撤\\game\\src\\agent\\agent.weights.js"
+    },
+    {
+      "sha256": "0EAC6D80FCC830F5EAD70E5A4EB045B26E7536F41DD1E2B4F960B3B40757A776",
+      "path": "搜打撤\\game\\src\\audio\\sfx-audition.js"
+    },
+    {
+      "sha256": "EA053AE2CCDAB8D43ABD68E5357DF12FC3C22952119D96D49DA0A5D61F7C29BA",
+      "path": "搜打撤\\game\\src\\audio\\sfx-lab-1027.candidates.js"
+    },
+    {
+      "sha256": "3FC20956C223A897C18C8AD13D96B4E77A2B102FA26E92543F6331B7DF02718F",
+      "path": "搜打撤\\game\\src\\audio\\sfx-lab-1027.js"
+    },
+    {
+      "sha256": "91922E0A75469D116682C1815A91E7BD50594194EB41B8C25EDD138CB9C7FBF4",
+      "path": "搜打撤\\game\\src\\audio\\sfx-review.js"
+    },
+    {
+      "sha256": "678FE05591FB26473F63D88F1C7731A775521DABF470D150CA76F4034A379EA3",
+      "path": "搜打撤\\game\\src\\audio\\sfx-review.labels.js"
+    },
+    {
+      "sha256": "B1CCA4F0FAC5AB496EA314D8A6E08C2ECB7EB8B290A3EE1A4B540D2F5203A30B",
+      "path": "搜打撤\\game\\src\\audio\\sfx-review.sources.js"
+    },
+    {
+      "sha256": "0347CA4D05C72FDFB07CE37961EBA758A7AFE608E1B12D527F912B37EBB317B2",
+      "path": "搜打撤\\game\\src\\audio\\sound.decode.js"
+    },
+    {
+      "sha256": "F77AE4CEFA87828B0C3A2CAC5895AECFB97972D328DA2FBC2EBE017D44921CB5",
+      "path": "搜打撤\\game\\src\\audio\\sound.diagnostic-policy.js"
+    },
+    {
+      "sha256": "5664DAB00FD2BA027FC5C0C5C03DC368201073F312803CBC1D40F45E206EF053",
+      "path": "搜打撤\\game\\src\\audio\\sound.js"
+    },
+    {
+      "sha256": "0689BC715D3BC51E88684B500A1B04CF988E16A747CC3B47B02B9ED21E9A7F86",
+      "path": "搜打撤\\game\\src\\audio\\sound.music.catalog.js"
+    },
+    {
+      "sha256": "1D9EE6EFC1BBD63657507D166A1F590D34BA95C204634C62BF05A0F1EF47CCAD",
+      "path": "搜打撤\\game\\src\\audio\\sound.music.player.js"
+    },
+    {
+      "sha256": "28039B53FA1E3B11E7CF7B6399DA588339C3546F8DE04C6D78CD4DEECED5FB47",
+      "path": "搜打撤\\game\\src\\audio\\sound.policy.js"
+    },
+    {
+      "sha256": "64753BBE0EEAE4C2582B64E86D8E054622D4BD78D3B4522AE2167046AC99E861",
+      "path": "搜打撤\\game\\src\\audio\\sound.samples.catalog.js"
+    },
+    {
+      "sha256": "1C09416D9B0F9E5A0ED6B450A5F64021B29AC93BD3037E4E8C79BAEBC7DF76B7",
+      "path": "搜打撤\\game\\src\\audio\\sound.samples.player.js"
+    },
+    {
+      "sha256": "165EEDDF61FE65B8FDA4CB742F16FD44023051763C44B1166111A494CA920925",
+      "path": "搜打撤\\game\\src\\battle\\battle-loader.js"
+    },
+    {
+      "sha256": "20BC5BFB9B0EE96F84C4C9655195342530B644F9EE6DAF4214AAC2B06EE55BD8",
+      "path": "搜打撤\\game\\src\\battle\\runes.js"
+    },
+    {
+      "sha256": "FA9A8BEB099C8B92E5F1976C291FCF1577E83B28B70B5805CD088EC5AA90E8C3",
+      "path": "搜打撤\\game\\src\\battle\\bag\\battle.bag.domain.js"
+    },
+    {
+      "sha256": "A07855A9EAA6562F307E2787EB7622946E4FBDA3B407FA66CCB547B4C975C75A",
+      "path": "搜打撤\\game\\src\\battle\\bag\\battle.bag.js"
+    },
+    {
+      "sha256": "9EE5A989806293AF534BBA10D60570EBFB8E975FED69C734CCA480BC44D7B292",
+      "path": "搜打撤\\game\\src\\battle\\bag\\battle.consumed-pile.js"
+    },
+    {
+      "sha256": "7989B31955083223EF9EB4FE713D1777CBB5074809D089CEC9175B406A1EB9C2",
+      "path": "搜打撤\\game\\src\\battle\\bag\\battle.deck.factory.js"
+    },
+    {
+      "sha256": "03C194A6130F001421291B16E317977F6F31050A860A6969D62D1793B78CD329",
+      "path": "搜打撤\\game\\src\\battle\\bag\\battle.deck.js"
+    },
+    {
+      "sha256": "298B2C933F4EF514BEB64C3EB3DAEB9DC19D889400926B0D7BA490F93AA3DD65",
+      "path": "搜打撤\\game\\src\\battle\\bag\\battle.equipment.domain.js"
+    },
+    {
+      "sha256": "D7E2B9F7A48CF8A7D3632DD68B9DB2548375909437D02A5899655ACB5B1057A5",
+      "path": "搜打撤\\game\\src\\battle\\bag\\battle.equipment.js"
+    },
+    {
+      "sha256": "C73F6CDBCE9F33AC4E0B975EF12E69EDF0B0EBC9749A6097DFF48EC6DB515067",
+      "path": "搜打撤\\game\\src\\battle\\bag\\battle.piles.js"
+    },
+    {
+      "sha256": "7FD77AC5C16FEFA8F436A942E1998AD421A31B5103047EBFB28D7D73439A8DF1",
+      "path": "搜打撤\\game\\src\\battle\\bag\\battle.slam-skill.js"
+    },
+    {
+      "sha256": "33F65DA721449A95FE9EB9969865B730FDBB2CBC785A154F64E43D37F1C8F938",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.actions.js"
+    },
+    {
+      "sha256": "F4C9826939A1C17A9DB7B16B024C5A86A32542CF9A1B3FC91A328771195B962A",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.boss-mechanics.js"
+    },
+    {
+      "sha256": "BE6C9BDF95AC08C15F43BF9D1F55940C10C73474C00C5FE11EF58979B0B54A45",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.card-play.domain.js"
+    },
+    {
+      "sha256": "487A16D5CE1FAE72DCA9F1D9C0B6B14DD6EAB4FC185CDA36E169D1A600305685",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.card-play.js"
+    },
+    {
+      "sha256": "C48C02E066D695A8E4A7F138B9880E0F167C341E6656C204F1543775F6A1E6AC",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.card-presentation.js"
+    },
+    {
+      "sha256": "9EEEED44E25E0D07B3C414D926ED3BFD2E061F58FA30D3BE7681CCFAC856D4EB",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.core.js"
+    },
+    {
+      "sha256": "D8F9F6649041B7568C8ECFE0B7B4C91166D4D5FCE1E46235E199BD1610F34EDA",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.damage.domain.js"
+    },
+    {
+      "sha256": "94D22A8EAE1830074F5B9CABB67521AA90F29CABF2CEFBFDA1C09E17FEC8EC26",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.damage.js"
+    },
+    {
+      "sha256": "C3B51DEBACC3CCC29DEF6E61CB134CC7F4CF5A6E20500C2AD30611C6DEF55108",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.default-context.js"
+    },
+    {
+      "sha256": "8721E7603705C92B605C5507B89D28F14FC114B0B4E1D2CBE1CA2C75A5D1E2E4",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.draw.domain.js"
+    },
+    {
+      "sha256": "46696C97AACCC01F909600931B9AEDBE497C4E78ECBDDFFFA0112C0FD4F1ED5B",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.draw.js"
+    },
+    {
+      "sha256": "6704AE9AF91BEEA4B87C66AB55F9B3C9496122E06EFC5F541F2AA12079D55B93",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.effect-assembly.domain.js"
+    },
+    {
+      "sha256": "B4A44DB5FB8A444ADCE91DC08AF3A4F34365692ADA4BD34C4098DA4104272233",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.elite-mechanics.js"
+    },
+    {
+      "sha256": "7B9D76D6B89F806698C7C1CB9BB8CF06AEF882DFD39816EB1B3CFC5AA66CF1FF",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.enemy-intent.js"
+    },
+    {
+      "sha256": "BC01CACDA85A1ADED7F33BB2A2262E9F3C53347A110F5ED5139790B4DF17B380",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.enemy-phase.domain.js"
+    },
+    {
+      "sha256": "64238C77C15ECD27C336537113CCBD3F899E9DFB223E13DA31633FFB0E4A71B6",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.enemy-phase.js"
+    },
+    {
+      "sha256": "1D28A58EE095538E2524356898A8901608DEA40C473EBBBE9AAEF47B5E73E07B",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.enemy-plan.js"
+    },
+    {
+      "sha256": "D49FD89F58F9BEC35478B93329B7DDD95496D29B886BEC293511A762A72E86F3",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.engine.factory.domain.js"
+    },
+    {
+      "sha256": "99E5B71D26AF68D1B5D4C23453DD4FCE18195718A7021FD4D1F2B6A2C75B63AA",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.engine.factory.js"
+    },
+    {
+      "sha256": "C68C65A33F214BC9E950A5ECA0BB96045DE932667CD879D9AB364B59CB383373",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.engine.instance.js"
+    },
+    {
+      "sha256": "E4F1C5597FAB1AD23631AD873BE67C2A40E212F8AE4386F8EB645B7ADDDF8C0A",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.engine.js"
+    },
+    {
+      "sha256": "2B6B7EDA1142FCB04ABA856633D601FEF8A9BAA852ECDD6AB3E290203E30EC1E",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.exec-play.domain.js"
+    },
+    {
+      "sha256": "B4258941A36216BB7131D0A23253D50C655552A7A3DF8E7C446899951050A22A",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.exec-play.js"
+    },
+    {
+      "sha256": "8BD6835579E604039E2340A26C65B0D1B4325BEA55CDA7404BBB2CAB8FB726C0",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.facts.js"
+    },
+    {
+      "sha256": "C844AAE29531029CB100B6DE11CCCECAC213271F9AFF7645E2B6D6CA1E5D75B1",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.foe-lifecycle.domain.js"
+    },
+    {
+      "sha256": "EFD88F5879AEEE977DE9B6E3D28AB7E16505596C1B58A609B503490869B5ABFD",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.foe-lifecycle.js"
+    },
+    {
+      "sha256": "DEA462544D333A1C91E302F4240441672B1054A15526535C6980CBE44C7781A2",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.hand-selection.js"
+    },
+    {
+      "sha256": "7418CB177DFE5D397092BFFF4574F723CCFB25C1BD76DCA8B307C3550B68CAA8",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.hand.js"
+    },
+    {
+      "sha256": "5B6AA3D27CB471A586939D070FF23E4A3F646DB4C444275B21B3BDEC6A5D76A1",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.legacy-resolution.domain.js"
+    },
+    {
+      "sha256": "60ACA5A6EE67A4675C643B5751FFDBEBB438128ED7BCE1A58B32E95C7CC46C43",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.lifecycle.domain.js"
+    },
+    {
+      "sha256": "78B7EF93711F16047D87586C414091CBB721168275FEE70FFD803F69A0CE2D01",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.lifecycle.js"
+    },
+    {
+      "sha256": "D6A300F901295B7BC6EEC31B3EB14B464EA764C3C7E3111132CB94E4788286AB",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.measured-damage.js"
+    },
+    {
+      "sha256": "406E24B9860F723C2F22D064C47CE9FC5F7AB9ACEC383D905A82EFDDF16AAD39",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.presentation-events.js"
+    },
+    {
+      "sha256": "FE56FAE89DB0B55B2FC96920FC1DA69C3F289DDF1CEF3090489483E3370911AC",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.presentation.js"
+    },
+    {
+      "sha256": "3CC0D0691C1784DCAAEE321A68F22898476377053E7D0E5FD14F508BDC39FD51",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.resolution.domain.js"
+    },
+    {
+      "sha256": "21349D5405AA56D6E82950DB3CFE4E2EAB28D06D694551D6A70CEE8599AE22AE",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.resolution.js"
+    },
+    {
+      "sha256": "E4D40A28F9BCB9BEFB69CCDA34F6B3472B0019DCF182BB5709E020A1F29FBF95",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.selection-flow.domain.js"
+    },
+    {
+      "sha256": "64F6DCA183FD6CAFE8893DF8E12D5A21DF381E1C3560CF00F1BAE9B574DF2377",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.selection-flow.js"
+    },
+    {
+      "sha256": "4A14560D484F19B56F932FE974BAA6D6E08D9615E4B8F24748137732F008489B",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.setup-mechanics.domain.js"
+    },
+    {
+      "sha256": "017582DF1DD6988FC3D014250A27480DE0E271802BCBB25FD85B553B9C4D4178",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.snapshot-projection.domain.js"
+    },
+    {
+      "sha256": "8732F55F0B19AEF602B9AB6B25EC176A0FE1669DA8053D5DFE1EFB7D94885265",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.summary.factory.js"
+    },
+    {
+      "sha256": "FDDC33529CE3FEF670D2316245BDF12342351220C5A82B60B63270D4E91EBA56",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.summary.js"
+    },
+    {
+      "sha256": "E48AEC5982171D093FB644DD95F0B63707BD95094AB434C2512685D460A0350A",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.target-session.js"
+    },
+    {
+      "sha256": "95BDD1F216BE1E2A90C51C8B25B6633D1C0108B02632E89BA2DB40B998FB5A51",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.turn-continuation.js"
+    },
+    {
+      "sha256": "079A7BF2CB4AAEEB198D2D30718BE817EFC0C62BF2DB579AADDC2ED18C95575E",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.turn-effects.domain.js"
+    },
+    {
+      "sha256": "4897DDFD250ADC72FC60F92BAEDDE232BDC1A1E5F604C01F1CC70CF741AD1C52",
+      "path": "搜打撤\\game\\src\\battle\\core\\battle.turn-start.js"
+    },
+    {
+      "sha256": "980494C55F4381167A2142BF60EF99E74A8416F646E2348C14357D5FA2F4C0D3",
+      "path": "搜打撤\\game\\src\\battle\\core\\combat.factory.js"
+    },
+    {
+      "sha256": "ED3A6607E0D4AC44EA1A4873AC011D85ED4F17E28A8E829A42B3E139FAB2ABCC",
+      "path": "搜打撤\\game\\src\\battle\\core\\combat.js"
+    },
+    {
+      "sha256": "03FA382232501E5387E55AF3718EB4A5A6BCE3A4EE667092659086C7F94A49B0",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.acquire-operation.domain.js"
+    },
+    {
+      "sha256": "0786371F55ADB19CD8A939D8168B4205F375C3CE7FAFB28E82BA7649BD9A6954",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.card-cost.js"
+    },
+    {
+      "sha256": "F463765D295F5582EB5F99B0CEF1F86A6887319155800D3DD7D8AA6E4AC42FD0",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.card-inspection.domain.js"
+    },
+    {
+      "sha256": "8C33C1C42F8734FE96728F2CEF426933498595EFE4E0244BAE6C457D7884F0D3",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.card-inspection.js"
+    },
+    {
+      "sha256": "FAA42426D507011F063664CA628A2C4E52C99C4A6BD6AE37BCF51BAB556FE3C4",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.cost-modifiers.js"
+    },
+    {
+      "sha256": "5D2C1D48B25B60A5BB097A0F133F9C23011E1C8201431E3C2C4B9F480E735817",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.discover-candidates.js"
+    },
+    {
+      "sha256": "19C2D673CA3B9A8D7A3EF7BEB336465DD66AE451CE5529D87CC2686F4D368CE9",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.discover-flow.js"
+    },
+    {
+      "sha256": "7B89B75C83E2DFF95A5A6E734B68875E2469CC6EED53CE06A0D7B4D7A236B0B3",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.discover-preview.js"
+    },
+    {
+      "sha256": "E839C04E47AAC8D2786A2B0DC3F72577A937D1480DB0E1FFA04E054B2B6BC27B",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.discover-state.js"
+    },
+    {
+      "sha256": "30BCEEF190D20768E50D0E982358D267D37C8790ACCE5268427F1CDB0EB5AD53",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.effect-clauses.js"
+    },
+    {
+      "sha256": "3B114EA04C52EDB13245AE16909840F8EADD4907A9A48B3F242ABAAB7D09CBC4",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.effects.js"
+    },
+    {
+      "sha256": "94DAF33B1B9BA6F1E7A96D2DCFE4D6D9C90648DAF19781091DC0383A232ED17E",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.foe-fight.js"
+    },
+    {
+      "sha256": "CB22DA88233C45B09D0857C44AB8D9BE617A9E904C636A270ED137C0264CC180",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.hosted.js"
+    },
+    {
+      "sha256": "B2D505D99EC714F9C39C89A7F2B007A24556816BAE5255AD94F0D56C12BBE713",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.infusion.domain.js"
+    },
+    {
+      "sha256": "CA82006BF49735EE9319EF8B08B00E579D245371F6D3D44D43975D67F36B49CD",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.infusion.js"
+    },
+    {
+      "sha256": "F0D191B6C4F1DB48E00F3B45C583CF86DE818A8A866F3EF5AEE98370EFF220E1",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.rule-guard.js"
+    },
+    {
+      "sha256": "425F6E1DDD0CC05431D523AD0742844942892077F263C18F61D4FD98D6DB3A75",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.status-operations.domain.js"
+    },
+    {
+      "sha256": "30A871B313ED1E71F64720299E596D269B68B0BCA93AC27CD12B98564B4400A5",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.target-rules.js"
+    },
+    {
+      "sha256": "14BB1888F306B0E6192FF19600484423496EDFE817363EC28525541B14311D5B",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.trigger-source.js"
+    },
+    {
+      "sha256": "F31B978937D7DB8919631A50C8A74220CD1B62BA555DF56E9FD90F72C354CB98",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.triggers.m2.domain.js"
+    },
+    {
+      "sha256": "21A657C1D8108C3C82657B8830377CAFBD9F73AE8F12D2DFDFA8B26D9284F2FF",
+      "path": "搜打撤\\game\\src\\battle\\effects\\battle.triggers.m2.js"
+    },
+    {
+      "sha256": "4457BDBC738CB19EC2649C062D38B50D5C094665DEC96C03C354533C2B8F3EFF",
+      "path": "搜打撤\\game\\src\\battle\\effects\\card-semantic-operations.js"
+    },
+    {
+      "sha256": "13B669BAA9B34209C912C94E3EDD7404FFEE4E228BAF170166B0B9252B9638CD",
+      "path": "搜打撤\\game\\src\\battle\\effects\\choice-semantic-operations.js"
+    },
+    {
+      "sha256": "706D4D24910C6EAA0D9C5BC821A8ABDAB64E45193522A5C0820F91F7BC4FDEAC",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.audit.js"
+    },
+    {
+      "sha256": "36E1A18CFAA4856102E419AA0DDF7F63E77E48F68B279928A34837628F34FA31",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.ctx.js"
+    },
+    {
+      "sha256": "62785AD5437DCF90041BF3A2D38079B5C34BDC3A5AC9C0F3D9CE1687A7EC4494",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.curse.js"
+    },
+    {
+      "sha256": "EAA729A90900F1C8F8A89B8C40E39857FC607831A20518C1262F8447E25A8AA5",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.damage.js"
+    },
+    {
+      "sha256": "3A5CC87894786AFD5ECDC294BE5363DA1D414551019920F1F2987D6E98CD7CC3",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.deck.js"
+    },
+    {
+      "sha256": "F6F801F0ED33BAF49B80AC106E977C098BD5235E0A2AE41701D1D82B5E40756B",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.gates.js"
+    },
+    {
+      "sha256": "C122FA3A63301EFF92EEFB50F1272EDAEEA296F2C24CF2F058015F123A59834A",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.js"
+    },
+    {
+      "sha256": "18BE6C468D97D36F2EB050C4D12E94FFC8FC2C93A7B97CD750747179F352B127",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.kills.js"
+    },
+    {
+      "sha256": "05BDCBBC847FB29AB3787FEFEC81AD0D6A74F15F19F848BEB4DD588B4A247E99",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.m1.domain.js"
+    },
+    {
+      "sha256": "448334987F85B9262515A24B8D98C2E7D9352D0CEEFECF2E126DE650B1289567",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.m1.js"
+    },
+    {
+      "sha256": "5A242A0FCE3A2656F2C24AD2B671EA00DDE3DA1805E9C93C2B5C8FE767D493CE",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.m2.domain.js"
+    },
+    {
+      "sha256": "B08AA7747CBE686C5A84599F105A9DFB25ADB329DBDA3CF3BEE1B89E4222AA3F",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.m2.js"
+    },
+    {
+      "sha256": "D393C86629AFC2DDBCDFC7895F5E853347B13CC7B499EACA5E20C10745042416",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.recovery.js"
+    },
+    {
+      "sha256": "9934DA18F144B2E1479742AE52C08EC2CD209F700A4A436AB5D71D3D553939A4",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.rules.js"
+    },
+    {
+      "sha256": "111EE911BBD1964CE3CF8879601BB88DFF9732EA3CCE0DB3063A7A3A8B8FF4CB",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-steps.tail.js"
+    },
+    {
+      "sha256": "532F0D7AEE24026FED07D5E157D82472967BC2FC2DF80B7E5DE742457D154D12",
+      "path": "搜打撤\\game\\src\\battle\\effects\\effect-verbs.js"
+    },
+    {
+      "sha256": "9B62B72B6536942F8B08B69B23D7C9687D7872F9A8A3085F32BF9411B6A13507",
+      "path": "搜打撤\\game\\src\\battle\\effects\\equipment-semantic-operations.js"
+    },
+    {
+      "sha256": "A7A0A6BEE19C9118A3B2F17ECB4B8F2062EE220CBE28DEEE67B57A512619B4C6",
+      "path": "搜打撤\\game\\src\\battle\\effects\\hand-cost-patterns.js"
+    },
+    {
+      "sha256": "F09545CF3DA650239553F5D30E9855924CE44D393A536D65088FEBD723C382BB",
+      "path": "搜打撤\\game\\src\\battle\\effects\\hosted-catalog-index.js"
+    },
+    {
+      "sha256": "1DAECBAD48C2D445CB0756FE83B2D21AD6DACAA44DDCA1323125DDACC5DCAF59",
+      "path": "搜打撤\\game\\src\\battle\\effects\\random-blessings.js"
+    },
+    {
+      "sha256": "266EC856B963931EADC37406EF036984A07ADD9D00BF775AC69AE827A4D322B5",
+      "path": "搜打撤\\game\\src\\battle\\effects\\requested-card-batch.js"
+    },
+    {
+      "sha256": "06C7D8F567CB10ED859F16ADEFA6EA2205E4D70A5D532624EC011D912D55E691",
+      "path": "搜打撤\\game\\src\\battle\\effects\\requested-card-runtime.domain.js"
+    },
+    {
+      "sha256": "5E44B3E10D965F2D5A34F5080BCAA14A12AF886667D944B68D2702CDC2A1EAAA",
+      "path": "搜打撤\\game\\src\\battle\\effects\\requested-card-runtime.js"
+    },
+    {
+      "sha256": "03816EB0496933B4C0322DE664C6A7980CD3168C46E1C08109BF26EAC919D47D",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.action-runner.js"
+    },
+    {
+      "sha256": "BEDE0F462AA14C44FABAE762A0DDBB5E4CF0F131ABB6A01059C0CB358CF109CB",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.browser-presentation.js"
+    },
+    {
+      "sha256": "9585369C4C7ED858A11582F25283D8043B11DC937373822C25710CC4B39B4303",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.clock.js"
+    },
+    {
+      "sha256": "4A23677464ECD1B83B9D136013D6329D652482326D538FF1C393221362EDA674",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.execution-session.js"
+    },
+    {
+      "sha256": "739D02CE0504C1968E50F0AA9A24B0C6081883A2A2200CB26A21F78E9303ED99",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.host-scheduling.js"
+    },
+    {
+      "sha256": "ED4A0471A09561A605DBAC9D16F60451EF8B1A3B88AB9594E3CB39D8AB3B3FEB",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.pace.js"
+    },
+    {
+      "sha256": "1A5E61B9F9BD91870B47F5E5A5BCBF062FF70829DB71793501A90EA81B5A7AF4",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.playback.js"
+    },
+    {
+      "sha256": "1D4DC6D37735CFF1FAFDC2256DBF59BE56DBAFD2CEDF7F589044E26AF7BD82B8",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.player-effects.js"
+    },
+    {
+      "sha256": "2E43D880B19C911C0A961BFB4CE0F37BE8A039C0F703D3276E31845D72819124",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.presentation-ports.js"
+    },
+    {
+      "sha256": "B80C6BC51BDAA7348FA216B623A6148814C390FC0DCAA4E0E07067B007778672",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.runtime.default.js"
+    },
+    {
+      "sha256": "4E3D4A4B3F503CB7BE216DA7032B90E4C00496D0B50C3462C3987BAC829FF5E3",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.runtime.effects.js"
+    },
+    {
+      "sha256": "C05020F918133F3699BABB360C37DEDA43DAAFE9A2926358FFC3FF647E47407D",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.runtime.factory.js"
+    },
+    {
+      "sha256": "D5958D23F3174920EBF87A102F36F319A3A019FEDE343527905D8E96170572A0",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.runtime.interaction.js"
+    },
+    {
+      "sha256": "BED419162B81A2B54A32484E8963E32F7DC7A37FA5283B61EB8D61DD6A539632",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.runtime.js"
+    },
+    {
+      "sha256": "B106EAE62F194D890C0CA3F9D0B26D9FAE429C5D58FB8425D40F1ADC6FDB8EF6",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.runtime.piles.js"
+    },
+    {
+      "sha256": "FB6780DBFE26E5C202A6F7543DB2C0F9B456D5B6AC95103A05156972BD8D26D8",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.runtime.presentation.js"
+    },
+    {
+      "sha256": "CF925408175F1DFFA1F1B1439378B1985788ABC1F8085F2494D857A2ACEE7C5E",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.runtime.session.js"
+    },
+    {
+      "sha256": "63CCFC3319EDE711648A13870F499E1D5977296EF84EEBCAD9D361D5A851F86A",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.snapshot.js"
+    },
+    {
+      "sha256": "713BC4366EC1CCA08785BCA4915843AD5F35DD0A0428F339DC1617DD169A64EF",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.staged-playback.js"
+    },
+    {
+      "sha256": "1B742D48B5EC01B1BF2A4B8B331B422D446A9A6853776C885323090C67FD23D0",
+      "path": "搜打撤\\game\\src\\battle\\runtime\\battle.state.js"
+    },
+    {
+      "sha256": "C5064DE1C284A1541CAB9952999FDBC4C931829CE2F913371719C8FE33D0886D",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.action-timing.js"
+    },
+    {
+      "sha256": "96BCAB11040BFD81F4CB6E4B52649B24199E94D43BC743EDE5DE0CE938FFB0A9",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.aim.js"
+    },
+    {
+      "sha256": "B1D339414D07FE012EA6877FA3EC641408D309335CF27F89D6DD88AE4BE159FD",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.anim.view.js"
+    },
+    {
+      "sha256": "4C4EA40164130A310B5F4E1A31E91AB695ABB989F8418243E2BC4AF32C7912D5",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.attack-cues.js"
+    },
+    {
+      "sha256": "42684B5B01BC2F46B51839EBA75C2919098F886C723C31AAE799AFECA24110B5",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.attack-profiles.js"
+    },
+    {
+      "sha256": "35AE2D456EF59D8DB5FA71B6227047785C954057E5903FF6329AB09241FD2230",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.card-consumption-fx.js"
+    },
+    {
+      "sha256": "4DDF01B6C713346D57345B6BD6A4A72B668DB64FCB973CDA5F64C67CC4EA0BA4",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.card-feedback.js"
+    },
+    {
+      "sha256": "D032B3B5130C9249C85DE73DB43ACAB05633FFA6813F75E8409E1ED8A00EC8DF",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.card-results.js"
+    },
+    {
+      "sha256": "BEC0441BC1C17704F0A5239017923875864FB3786AC664859F6754082445FAEF",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.decision-content.js"
+    },
+    {
+      "sha256": "74A3157528EE7B5362CDC4DE86C878ADC2ED56CEF5CF3A3FF1B3A22B3C0F4359",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.decision-shell.js"
+    },
+    {
+      "sha256": "5BCC0DD0FBBEB646B68B7C88496EBB8108A10A65E477E8F3C55BC3FA2C17523F",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.discover-infusion.js"
+    },
+    {
+      "sha256": "80B469FDCF4DCB33D522E1B29ABAE0CA08B3BD521ED4B707A02082BB12F3F5DB",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.discover-input.js"
+    },
+    {
+      "sha256": "9251AD2B4C927CD491D179344DF8A6C8BE5108C671066006FD61CD8315980CFA",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.discover-view.js"
+    },
+    {
+      "sha256": "258CA9C3E3F8AD4DF8B8708EBA6097B316211EEBA2AE0FCE9FEE5BFC085B658D",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.effect-feedback.js"
+    },
+    {
+      "sha256": "2B928919A1377880ED402BDD00257318E0262B01A491E137B89618699C2966F4",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.enemy-details.js"
+    },
+    {
+      "sha256": "17B9C393595F60A090FF1DAB10EC3342B4A2573714EAFB6019611DDE54A4B5AB",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.enemy-motion.js"
+    },
+    {
+      "sha256": "EA791D0770669DB304C912D5DDF0E19640FD90BE4639D9A2BB2A4FFBA76F4E9A",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.feedback.js"
+    },
+    {
+      "sha256": "51F478960B6CC289B03384026A19D9C0910C0506466057C0887246DBEAAC3D60",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.frame-assets.js"
+    },
+    {
+      "sha256": "BA7F531EAE515CB888E9F34F89C76EB55A1D82BCB76B5920FCBD4BBA600DD224",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.frame-catalog-changwuyu.js"
+    },
+    {
+      "sha256": "EFBDF272A28617F60C61CC114DC4481D81A9D90576ADB4832A395C89884D0A6D",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.frame-catalog-three-role.js"
+    },
+    {
+      "sha256": "3699B292B5E1620F1CA5CC51775A4A213A02A95C3FAB7F7F14D16F883C879727",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.frame-catalog.js"
+    },
+    {
+      "sha256": "0BEACFBF0505A5C33EF52B5B4405004D8022D4A7B1BB6167710D9927BF7629BA",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.frame-renderer.js"
+    },
+    {
+      "sha256": "B5EC03EE48254C2E3BF32C80C4F83DBC5FCDE1F63465E598A8C97388360350A0",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.frame-resolution.js"
+    },
+    {
+      "sha256": "74DF2F6466B8E1524A6B29770202267D7339E767CF885A06B66288FE8E907FFE",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.frames-diagnostic-policy.js"
+    },
+    {
+      "sha256": "5CF48EFEE89816EAE30390665705558433A21AAA6918A0AFDC0271E7AFC94505",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.frames.js"
+    },
+    {
+      "sha256": "DDBFEF798CC1BF5FBE9C58D6CBFB2B2D95EECD25F36F72B2239D8D821AFDFF3E",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.fx-art.js"
+    },
+    {
+      "sha256": "2DF8BAF4B5F55599F4BB999354B39BF4C2524CDBF91AE7D6485D4FFE6D22C85C",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.hand-hit.js"
+    },
+    {
+      "sha256": "341C75AC4471C910A920AC58789EFC3FDE2C73256F543E4A9DFFACB92686E0FF",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.hand-layout.js"
+    },
+    {
+      "sha256": "B3CE173BA00060D4879EF2B30C39E729E8E429EDEC04756CF1E5957899784427",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.hand-material-selection.js"
+    },
+    {
+      "sha256": "0AC5EC3DEA2D5723CEBFF457F42245A94BE66EF40C919102395E22DC265A1AD3",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.hand-selection-view.js"
+    },
+    {
+      "sha256": "FF4E92291DF6AD08F0A59EB2E28F05DBC603293C04625F29E15EDA3A9DCB390E",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.hover.js"
+    },
+    {
+      "sha256": "48AA3386323DF7DA2D4D12E2AF0A19FD1EC28A30C0BFD3DE8B39935C222548AB",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.infusion-material-state.js"
+    },
+    {
+      "sha256": "07A69D05755E95DF4A99A311D6FA15381D98831139A63EB7D4E587191D2CE89E",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.infusion-view.js"
+    },
+    {
+      "sha256": "3F398EACC534379DEAB608E6E284734079076D99C41EE05917D3C2614F3664CB",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.intent.view.js"
+    },
+    {
+      "sha256": "747D2F12BF5841C7396A44846833060BE0F451D8E3D04E7F6F2FC673719448DA",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.layers.js"
+    },
+    {
+      "sha256": "4FE4294ABFE76C446B57C6E755C235645444C02BA8693BCA0354A438496AD3BB",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.overlays.js"
+    },
+    {
+      "sha256": "32547DE2B844FD2FF3CE914850BD4D60C45228E1B3E04B944431A2B4AB272931",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.page-activity.js"
+    },
+    {
+      "sha256": "FC3DA1C0F1209F1931B3299DEE7B4942EAD6E325251F8BFAFB7CC554E001D9C3",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.pile-view.js"
+    },
+    {
+      "sha256": "AA37A0D7B21A03A2009A8A42EC3EB9E64DADC0196A8D1F367BEA32C7AB6E6E84",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.piles.view.js"
+    },
+    {
+      "sha256": "A15ACBFF85CCAF5ACA6E116FF82555B6C0F6555DD1865EAD9B5D45EA6742B6F4",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.potion-use.js"
+    },
+    {
+      "sha256": "447426C0E2990E0F1BC0E56004199AD6D10F3E8DF099FC408A240A1F21BE73C7",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.presentation-ready.js"
+    },
+    {
+      "sha256": "E4CDD5BA822DB34B798CDF370812C36276F613490F88D6FB6DDB56FD270436B9",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.preview.js"
+    },
+    {
+      "sha256": "F843F1727AF20AC1060CC6346D992BA5FA770F271AEFF5514D02C7FAAEA54D98",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.scenery.js"
+    },
+    {
+      "sha256": "838A9D7D8C206247D3E5117B4F24D89F7ABA7DB97D3496403D6093F5B31D27FA",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.secondary-overlay.js"
+    },
+    {
+      "sha256": "E1BFFDACE0E0DDE19328F5A1BC6DA3FD4082AB82C5579B60D7105E8620F4952E",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.selection-ui.js"
+    },
+    {
+      "sha256": "14BCD6D02DDBAFE783FE4AFD6B918376DAB6D514E9BF098E12755737EE788DC2",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.skill-view.js"
+    },
+    {
+      "sha256": "DEF5AD3701FD58B08D93B0273A3061188689E66A0B31B0EBCB976A8CDF3F0A07",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.stage-view.js"
+    },
+    {
+      "sha256": "CCDFEB89CE52EB7E7A97487D0A5A329EE3AF07D6F76E13F5CA244AD1AC4A6C95",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.status-chips.js"
+    },
+    {
+      "sha256": "DDC1AC90461FCD91F17E91A50B830A76D1933A157617B2D0802196B0E8D76EF3",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.turn-feedback.js"
+    },
+    {
+      "sha256": "F574EA234FAB0910927ADFF2FBD86CE18CBBD05B0C156235C478D787A28BABE6",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.turn-forecast.js"
+    },
+    {
+      "sha256": "9AB68428A5BA19FF7E407267334782D36B597EDC24C7CA0D40C2AEB4394E23D3",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.vfx.js"
+    },
+    {
+      "sha256": "0EAB3AF7F03217AE2BFF8CA276687DFA49B31FCAED0C2F42205EF7E499505EF6",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.victory.js"
+    },
+    {
+      "sha256": "EB0F9BC9035345EEDC8DAA4A96DC5CD4468709545ECA33809461363EA13584DD",
+      "path": "搜打撤\\game\\src\\battle\\view\\battle.view.js"
+    },
+    {
+      "sha256": "EAD5AE039E02EC40012E381C3189B8ABBC2404149E9D36AF1CF47572F624C890",
+      "path": "搜打撤\\game\\src\\cards\\battle-value-context.js"
+    },
+    {
+      "sha256": "59D14C68C8B9B0895834AC762F0A0F49C3C69FDF1865FF62748859E4BF5BFF15",
+      "path": "搜打撤\\game\\src\\cards\\builtin-card-execution.js"
+    },
+    {
+      "sha256": "46688FBF9965876423A9DAB043B21A4ABFC3937D2FFE8EEC75B13670EE2A444F",
+      "path": "搜打撤\\game\\src\\cards\\builtin-card-field-defaults.js"
+    },
+    {
+      "sha256": "72A87C8BFC9C06109AC72122D94EB1A4FC0CB3397B99183781FC1ED7BA87A9E7",
+      "path": "搜打撤\\game\\src\\cards\\builtin-card-identities.js"
+    },
+    {
+      "sha256": "DD1AB6C51EC3F51F854081111F09A6096EE1F5E441A08BCC2E1AE4E96F239CE9",
+      "path": "搜打撤\\game\\src\\cards\\builtin-card-numeric-fields.js"
+    },
+    {
+      "sha256": "0DBB3147F178DB0147A7965F2EEA0E091ED2A874B5954490B3B8450030A2BCB6",
+      "path": "搜打撤\\game\\src\\cards\\builtin-card-previous-rules.js"
+    },
+    {
+      "sha256": "6066FE36EE67899781C9FE93F4DEEC4ADC496E109601D017CF1556AE9ECC28C3",
+      "path": "搜打撤\\game\\src\\cards\\builtin-card-previous-variants.js"
+    },
+    {
+      "sha256": "EB8F2DD391776F25CD429B3571068AE2866712C90AB061E680D4A0F329B30233",
+      "path": "搜打撤\\game\\src\\cards\\builtin-choice-execution.js"
+    },
+    {
+      "sha256": "F81507183473F84573D91C8EED0293FE85F6A9929B7023D4C715A457CDD7CD9E",
+      "path": "搜打撤\\game\\src\\cards\\builtin-equipment-execution.js"
+    },
+    {
+      "sha256": "3B5ED9499F7A6E2DFFB37ED051EEFFCEA628ADFAF141D5289C331018B54519FD",
+      "path": "搜打撤\\game\\src\\cards\\builtin-equipment-previous-rules.js"
+    },
+    {
+      "sha256": "5DF8903A56A6303AFA97C7875E2BCD94CED0297D21A98C94D1F8236AD3D157B8",
+      "path": "搜打撤\\game\\src\\cards\\card-battle-start-explanation.js"
+    },
+    {
+      "sha256": "57B7D4EBC93CA79DDC27A669901CE9FBEB89C7EDFCD66321DC5F52B4C5FA4501",
+      "path": "搜打撤\\game\\src\\cards\\card-compatibility.js"
+    },
+    {
+      "sha256": "42C52131393DDD1298FBED298ED246C66FC00102913F7A38ECEAF17218E3B69D",
+      "path": "搜打撤\\game\\src\\cards\\card-description-links.js"
+    },
+    {
+      "sha256": "CC10E433470705DC578B07E088C25D36F0D37FB2EEFDD8DEA05EF89BD134C92D",
+      "path": "搜打撤\\game\\src\\cards\\card-description-text.js"
+    },
+    {
+      "sha256": "CDEBD3C03D273B3D58ECDC696EC6391B07D6D7DB4B745D1A3606676EAAC45665",
+      "path": "搜打撤\\game\\src\\cards\\card-draw-explanation.js"
+    },
+    {
+      "sha256": "348C48BC0B53755FB0D7FFD887EF3E18FD7442AFBF9498716BC0F03BB1B579E9",
+      "path": "搜打撤\\game\\src\\cards\\card-energy-policy.js"
+    },
+    {
+      "sha256": "1CAB5A326F9779B294AB1ECA49358566ADF8B0470AF644CCF8A301BDD4806B85",
+      "path": "搜打撤\\game\\src\\cards\\card-execution-plan.js"
+    },
+    {
+      "sha256": "4A05CB2499DB1FFA0B3EE20D18B30493F1D4DF58EDB58DF4F6C632CCBC7DC196",
+      "path": "搜打撤\\game\\src\\cards\\card-frame-presentation.js"
+    },
+    {
+      "sha256": "7843A654575E4567BA4AA0E0523A9E6E5FA651B25A8F51BE3673105B780A831D",
+      "path": "搜打撤\\game\\src\\cards\\card-hand-combinations.js"
+    },
+    {
+      "sha256": "1076480CC915FD6901EA1CC6D85DCDD2DAF0D32D2199D28BD08F18B5140F1105",
+      "path": "搜打撤\\game\\src\\cards\\card-healing-program.js"
+    },
+    {
+      "sha256": "FD765DAD63DEBB472819AAD9363147243B66D76FF8D2F7A9642F8D050B90DEB1",
+      "path": "搜打撤\\game\\src\\cards\\card-instance-fields.js"
+    },
+    {
+      "sha256": "CCB896A459443513DAF3057C8ADF647F81B6DCE6AF23DC132030AD9014F9335E",
+      "path": "搜打撤\\game\\src\\cards\\card-instance.js"
+    },
+    {
+      "sha256": "26238480E42874C6D8D08346EE405ABC5B9AEAC1DE655886B208BE03570DFA29",
+      "path": "搜打撤\\game\\src\\cards\\card-legacy-battle-policy.js"
+    },
+    {
+      "sha256": "616C25E074D690E994E68613BE57A97438C7A53F164D6B1BBA7DCC19FE156A70",
+      "path": "搜打撤\\game\\src\\cards\\card-migrations.js"
+    },
+    {
+      "sha256": "001BC830612EA46B35EA326B126FB625ED84D92FD687F1FBF1B0A1A667565CA7",
+      "path": "搜打撤\\game\\src\\cards\\card-obtainability.js"
+    },
+    {
+      "sha256": "E5B584CC493C1BEEBC5918F6920C0434A8CD8711886C4CD4C1C8B22A71A2435D",
+      "path": "搜打撤\\game\\src\\cards\\card-photo-notes.js"
+    },
+    {
+      "sha256": "31F9C0583D12066A678C6FE0A08ED99399C2EDA0775AA3F0FCDF0B9986C3188E",
+      "path": "搜打撤\\game\\src\\cards\\card-rarity.js"
+    },
+    {
+      "sha256": "5520443DEBDF12B82BEFC015E04765052642A6B9AF99A0A502992C4E3DE9AD4B",
+      "path": "搜打撤\\game\\src\\cards\\card-render-context.js"
+    },
+    {
+      "sha256": "883F81032A360FEFE5C785C44C6CBB4E51245E7730045A65CAF1176A5514580A",
+      "path": "搜打撤\\game\\src\\cards\\card-rule-definitions.js"
+    },
+    {
+      "sha256": "E136101CACE7AF864CFEB8F4E78A2CF2768C1D70F98B931E6F64B47FB4087D14",
+      "path": "搜打撤\\game\\src\\cards\\card-rules.capability.js"
+    },
+    {
+      "sha256": "8DC4CB8183375BB75452729488BBE35762DA07936D61FBB6683385E66CD9CFE1",
+      "path": "搜打撤\\game\\src\\cards\\card-rules.schema.js"
+    },
+    {
+      "sha256": "DF0E971299F5F5AA4EEA2175090787135D207B8BDF2A49D4B80DD966152451CE",
+      "path": "搜打撤\\game\\src\\cards\\card-semantic-contract.js"
+    },
+    {
+      "sha256": "42A4606311DD655F35C9567D3C6B2C7BF3A173361C296EEBEBDDF9741B0C5F9C",
+      "path": "搜打撤\\game\\src\\cards\\card-snapshot.js"
+    },
+    {
+      "sha256": "B7326DA0309571D78729DB62CD2A92229BDF9EC112BFE3F0A2CAACC2E94FC915",
+      "path": "搜打撤\\game\\src\\cards\\card-state-presentation.js"
+    },
+    {
+      "sha256": "239CE5C1B1E66ECA67DCF3303C3B341CBE7819A52D13A27604010625691871EE",
+      "path": "搜打撤\\game\\src\\cards\\card-trigger-contract.js"
+    },
+    {
+      "sha256": "8BE4BEC49C82B5E3BB023BE7FBE623FCDBB82ACE680100AE477CB917B981A823",
+      "path": "搜打撤\\game\\src\\cards\\cards.catalog.js"
+    },
+    {
+      "sha256": "600C424D8504E660EA5BCB0F76507E9389C870A5EDB9F6A51CA1C3595CE70C7A",
+      "path": "搜打撤\\game\\src\\cards\\cards.consts.js"
+    },
+    {
+      "sha256": "E47A43E3C52D8BB91CBB2A506EEF6316624745D437DEF60D25FC01BB9B35E104",
+      "path": "搜打撤\\game\\src\\cards\\cards.data.js"
+    },
+    {
+      "sha256": "701483224360E67CB14A0F855C5077C056B41566069E0EA586802BF68F5C847C",
+      "path": "搜打撤\\game\\src\\cards\\cards.js"
+    },
+    {
+      "sha256": "9FF2FD79F57B328F8B21187EA4C43E26AF5EA4075EA3C4A7B2EB8F7D34ABEC07",
+      "path": "搜打撤\\game\\src\\cards\\cards.rules.js"
+    },
+    {
+      "sha256": "DB3C4C8E9AB84723F98D8B9EF2B9B37EA6B6F2AEB3201EC1A344DB144D8032C7",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.backfiller.js"
+    },
+    {
+      "sha256": "45FC8507901F4F73BF8C843B97D1215FDF66B05F49BCD01D69BBFCDF70D5B27A",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.builtin.js"
+    },
+    {
+      "sha256": "08FA92E6DB9ED34DF447D769C8E7D379CD5B1709B900B45388F890C956DE287F",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.catalog.js"
+    },
+    {
+      "sha256": "E43BA936BE892784C20C9B59C16330DB405F2A5EB25174A9CC79EA23C8006750",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.face-refresh.js"
+    },
+    {
+      "sha256": "BBFE19768151D4DD9BCAD924DFA440B95796A7D300AE288AD3881F63747BF6CE",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.js"
+    },
+    {
+      "sha256": "202723511B62A523019414D39B1AE231512D43621BE741F87312AEE55F35D88A",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m1.js"
+    },
+    {
+      "sha256": "08D4BAE0C89973BEED5A544C54C7D95092F7447F2EB4750E5986A9F207C6E756",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m10.js"
+    },
+    {
+      "sha256": "7BD8A10FDE163F5BD54673BF604449659CF3AB50457EFB5144056D3938F1CAD1",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m11.js"
+    },
+    {
+      "sha256": "B491417AA4941A904E68AE78FCFDE60C9510F218A3935975907B1701D2009888",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m2.js"
+    },
+    {
+      "sha256": "6772824A0A25A7DEE62002AE4A4460DCCBF326574D6864B8AECF67C7BA454F64",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m3.js"
+    },
+    {
+      "sha256": "508C5E1CDB1AA050B651400E2D11C5F4EC25C4711A12C986B7AA9366AC6CFBB7",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m4.js"
+    },
+    {
+      "sha256": "73629BB4CA1ABC967DAE49F1C7B6F7721774EF6B6DD0F70C3E99F94C22861851",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m5.js"
+    },
+    {
+      "sha256": "4A8AB68304AD6D5B2624DC1812DC76E9F960BC6CBAFC8A8A1678CDFE82B358C9",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m6.js"
+    },
+    {
+      "sha256": "8DE69A21F5F46AF4947F3613757863D4446FA7655CE2DBB0851ED070AAE21AFA",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m7.js"
+    },
+    {
+      "sha256": "D9C5AAEFF7960A2FFEB0741F8A33C0872C20ED952FC83A31BF3DB31806472BED",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m8.js"
+    },
+    {
+      "sha256": "E09CB23DAED059252A79ED53B29598000CDEB7B63453BE2F276EDBAE58D06792",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.m9.js"
+    },
+    {
+      "sha256": "DEA07BA6CF5017FCE91966E401F70FE93B784F9F30AB423BDB0A2A8DC928DE8D",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.numeric.js"
+    },
+    {
+      "sha256": "671EEDF6B1059A1DE2A46EC3A162CCA86AF2E59F8BBFCFD8DBA357DFFA1027BA",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.persistence.js"
+    },
+    {
+      "sha256": "E98194C43D52AD20F60DAB4512D4B7812F44E2694127579841DA673B132595C0",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.renames.js"
+    },
+    {
+      "sha256": "ACFC032614270BB8493FEC57234A8B241886333D9DA7091C1FC306E47347E44B",
+      "path": "搜打撤\\game\\src\\cards\\cards.sync.rule-backfill.js"
+    },
+    {
+      "sha256": "896CCD180D56BEEBA01426CE31A33AAFF0C74464F1B9E32B7519DED76491293A",
+      "path": "搜打撤\\game\\src\\cards\\cards.view.js"
+    },
+    {
+      "sha256": "34F43B343788825B2CF2E87F087E1D598F4C3B0B9483B1D1A260FBB66A9B699A",
+      "path": "搜打撤\\game\\src\\cards\\elite-bestiary.js"
+    },
+    {
+      "sha256": "ADFDD49264ABAEE85C4BFE780201983416B790B9B03BDACD0E41ECDEA0A70A7A",
+      "path": "搜打撤\\game\\src\\cards\\hosted-rule-snapshot.js"
+    },
+    {
+      "sha256": "4836F5D90427BA84645153A77F0801316F556C14E7B10667C6BEF2F41597E77B",
+      "path": "搜打撤\\game\\src\\cards\\mech-sentences.js"
+    },
+    {
+      "sha256": "09FE12B26290F3C57605D876F4F9F30184C45C768F560A8BDB571BD2A8D67200",
+      "path": "搜打撤\\game\\src\\cards\\pierce-arrow-revision.js"
+    },
+    {
+      "sha256": "B4EDBAA03D12F4A7C71240C3FA40CC0D7E09C576C8842BC66C2289632E02AE07",
+      "path": "搜打撤\\game\\src\\cards\\rot-seed-revision.js"
+    },
+    {
+      "sha256": "1D20149B58EFC462F72ED381C3400DB7E466AAB36C4CEF2059ACD0956010DBA1",
+      "path": "搜打撤\\game\\src\\cards\\structured-card-description.js"
+    },
+    {
+      "sha256": "1B7CC057CDB5C307A3EEA5601A45A1BB8837DCEDCEC8486EB6D1FC56701F75FE",
+      "path": "搜打撤\\game\\src\\core\\art-preload-plan.js"
+    },
+    {
+      "sha256": "B6B2FCDF2601A6DB09F6A0AAD2565F17F16F4046DD7B58681EC4773009A73735",
+      "path": "搜打撤\\game\\src\\core\\art.js"
+    },
+    {
+      "sha256": "9B9E28DFA50112E780A39DC66EE2765EFAB513190139B6B8F16CA185C36B1308",
+      "path": "搜打撤\\game\\src\\core\\asset-url.js"
+    },
+    {
+      "sha256": "0B9D52E259A9AF10CDDE0EE6A51F3C5030843DF45C99A838E3A448A6F0187E6E",
+      "path": "搜打撤\\game\\src\\core\\bag-render-derivation.js"
+    },
+    {
+      "sha256": "9A6BCA6EC2C0BE39F5A769590BAD7962AE8559B48B52A3F36B1200757DA469BA",
+      "path": "搜打撤\\game\\src\\core\\camera.js"
+    },
+    {
+      "sha256": "859F81CC941D1DB172747667FC455EE09A35E911D635D7966F9E999AA8838BB5",
+      "path": "搜打撤\\game\\src\\core\\card-capacity.js"
+    },
+    {
+      "sha256": "3A7A6B89737CE5068F26FB09C95B9CEE3D137F1A187C864C2025F4F63C436D7D",
+      "path": "搜打撤\\game\\src\\core\\characters.js"
+    },
+    {
+      "sha256": "87F8789095876FF4081ED22F8C0CCAE9D6D5F52604ECC63AACE8483B142B1362",
+      "path": "搜打撤\\game\\src\\core\\creature-identity.js"
+    },
+    {
+      "sha256": "E2BBC5DF08B1FA8796192490C6CE11E59C4AE050B5DC6A8AD26254DC7ECFB713",
+      "path": "搜打撤\\game\\src\\core\\data-loader.js"
+    },
+    {
+      "sha256": "AAAF2AF15496B426C6BFD974CBFF3AB91A6D1BBAA1736202F143D7BCBA0F03DA",
+      "path": "搜打撤\\game\\src\\core\\diagnostics.local.js"
+    },
+    {
+      "sha256": "59FE157F76D2F9CB2BA312333D15F5DEB86A1B18E44C586AEFAA526D22C8D033",
+      "path": "搜打撤\\game\\src\\core\\enemy-mode-scaling.js"
+    },
+    {
+      "sha256": "86135D055EC7A1479595236402021124B94438C0989BED7068B3F6C379E5C4A8",
+      "path": "搜打撤\\game\\src\\core\\enemy-portrait-presentation.js"
+    },
+    {
+      "sha256": "A87ED4F169C00F82E6339945EFC7A98E13499827E82EE502E9D06358A32FE4D0",
+      "path": "搜打撤\\game\\src\\core\\event-bus.js"
+    },
+    {
+      "sha256": "FB308DF52627E9B4E3B36A474506826CE1315E4CD2A9A2FE77320F2A57C0A1F4",
+      "path": "搜打撤\\game\\src\\core\\event-encounter-text.js"
+    },
+    {
+      "sha256": "B5F4E585CEDEC3831227E8ACE93DF73F4EF1F31410CD3FE9DD93FBC9A5FB1D54",
+      "path": "搜打撤\\game\\src\\core\\flight-recorder.local.js"
+    },
+    {
+      "sha256": "15E867FAD80CCA1AE0350F554C608A8098CB374E57D176215806E75DB201CA26",
+      "path": "搜打撤\\game\\src\\core\\game-boot-input.js"
+    },
+    {
+      "sha256": "37D9F52BF0FBDFFEEE706C2FA4E6C7E5A57928E1B9498610C01E0D993E6B426D",
+      "path": "搜打撤\\game\\src\\core\\game-boot-loop.js"
+    },
+    {
+      "sha256": "E6D69365F1E4A00AF804A99D36F48030B10B4A7244BCB4C92E630961328CE143",
+      "path": "搜打撤\\game\\src\\core\\game-map-selection.js"
+    },
+    {
+      "sha256": "FBFF9BE537FE946251556B750FB715BC386117D18E54C98DA00ED921FF8A90DE",
+      "path": "搜打撤\\game\\src\\core\\icon-hydration.js"
+    },
+    {
+      "sha256": "C0EFEDA56E5FC74CAA2DCBCD2405EA681AF33129CDFC9B0658B7DDA050EDCC1E",
+      "path": "搜打撤\\game\\src\\core\\icons-bitmap.js"
+    },
+    {
+      "sha256": "5D2CAB3CF14E1A20D04D418F18266D52E8D8AA5C0F5341F1A8C300556258D97D",
+      "path": "搜打撤\\game\\src\\core\\image-decode.js"
+    },
+    {
+      "sha256": "6125FF8EA448954A39C7E53572B07829E55C90289249F1298EEEF5254AFBC7FD",
+      "path": "搜打撤\\game\\src\\core\\input.js"
+    },
+    {
+      "sha256": "4B3AEAF0EA96AE783BBAEA6B4D897252A1147FC5B0E12A83180802BECCDCBA22",
+      "path": "搜打撤\\game\\src\\core\\live-bindings.js"
+    },
+    {
+      "sha256": "DFA393942E759D805D3DAFF1CEFC79DDA0C22E9A77E23D9D21536050B1866DC7",
+      "path": "搜打撤\\game\\src\\core\\map-brush-art.js"
+    },
+    {
+      "sha256": "4C024FE3BE5539E4A942C5C1A71C73F141698CCAD9BD79C6F84424054F2AAA02",
+      "path": "搜打撤\\game\\src\\core\\map-city-atmosphere.js"
+    },
+    {
+      "sha256": "DF9581556CC7DCE38DEFCC307FABE4B4737C34694E2651979D314E27ED0FB7FD",
+      "path": "搜打撤\\game\\src\\core\\map-drag-motion.js"
+    },
+    {
+      "sha256": "FC10F686F75357A3345D4F0C18141EC6D69E30ABAFAC890B118737F3D17FB2DC",
+      "path": "搜打撤\\game\\src\\core\\map-frontier-depth.js"
+    },
+    {
+      "sha256": "CAB9A768D6D0A9AA19E3F0C3FA9C959C3E5803B79E6733A6560273D159DE62AC",
+      "path": "搜打撤\\game\\src\\core\\map-image-ready.js"
+    },
+    {
+      "sha256": "9C598E8D971A224415E1E41CE5DC1F8055BB70C9A96D715762F493650EED9CD5",
+      "path": "搜打撤\\game\\src\\core\\map-layer-atmosphere.js"
+    },
+    {
+      "sha256": "F6E3A76A14DEBCD5C811AAA4E02BBCDDAFE7284EFAE904EBEB354C84F2F0AB09",
+      "path": "搜打撤\\game\\src\\core\\map-node-art.js"
+    },
+    {
+      "sha256": "41AA314B19F475D695E658D06EBCB858CE6A13D6AA5F8A4BA2A137A933998BA6",
+      "path": "搜打撤\\game\\src\\core\\map-node-glow.js"
+    },
+    {
+      "sha256": "72291582CCFCD07E97E1DD3B062B037FED4372350732DC3D83BDFB06906A987C",
+      "path": "搜打撤\\game\\src\\core\\map-node-state.js"
+    },
+    {
+      "sha256": "6C124920061DEFC3146402404201BBBE191CACB3D86DD30DDDC75E09AA6C3D45",
+      "path": "搜打撤\\game\\src\\core\\map-reveals.js"
+    },
+    {
+      "sha256": "149A1D63EEBEE3B21DEAE833D1CC2890B8949D5D13E4984202EBE7ADEEAFD3A1",
+      "path": "搜打撤\\game\\src\\core\\map-route-terrain.js"
+    },
+    {
+      "sha256": "92E1A47AA5AAA2C4528DA4C1FCBECFC7021568B0175851DB81093C48EC89AC9E",
+      "path": "搜打撤\\game\\src\\core\\mapData.js"
+    },
+    {
+      "sha256": "FF13E1089B25DE9AF60B70DA0E30D1BADAE577AC2B85DF4C308C8A18FF2240D7",
+      "path": "搜打撤\\game\\src\\core\\motion-primitives.js"
+    },
+    {
+      "sha256": "2752612C611C4259CB26D1049098C414B3F35AB5F8F37F3BB098C159F54AD1AB",
+      "path": "搜打撤\\game\\src\\core\\motion.js"
+    },
+    {
+      "sha256": "336ED604223ACFC98E307414F21A5BDBA6350CCB2ED6351973F667778105053F",
+      "path": "搜打撤\\game\\src\\core\\node-info.js"
+    },
+    {
+      "sha256": "1B0DACFAA1CD7EBE8C83C93DFD4101A2034D96325E791D31DEB0986471C2A3E6",
+      "path": "搜打撤\\game\\src\\core\\notes.js"
+    },
+    {
+      "sha256": "381909DB0E242F9B552AB4D4D6F0D46FF8A8DE73849198BE88F538CC3C02D6D7",
+      "path": "搜打撤\\game\\src\\core\\perf-probe.local.js"
+    },
+    {
+      "sha256": "19882D112172C606CABCC23A6B522F2103717CB283233D7A7344BF1B1EBDD283",
+      "path": "搜打撤\\game\\src\\core\\performance-budgets.js"
+    },
+    {
+      "sha256": "736B80FCE4CAC19C7E2E722775DA048F175BEF7D8DCFFD0CE61CC9FAFE501432",
+      "path": "搜打撤\\game\\src\\core\\performance-settings.js"
+    },
+    {
+      "sha256": "177382F86D8E810A76428BC7AAAE450A0B0E3811490220E9D8DC1A39DB58B174",
+      "path": "搜打撤\\game\\src\\core\\random-core.js"
+    },
+    {
+      "sha256": "D7C4481C5673646AC055C83483AD5304D1CE61CB102892B17A0BBB32A66BDECA",
+      "path": "搜打撤\\game\\src\\core\\random-service.js"
+    },
+    {
+      "sha256": "AF4E4CAC02117D5E37CD239889BCC97356C2BA6A9DCEE36CD05E847846DD9897",
+      "path": "搜打撤\\game\\src\\core\\random-streams.js"
+    },
+    {
+      "sha256": "48EB8BBD1917C977BFA59960E5379AB71078E62DC312C73F4386BD61E6DFA233",
+      "path": "搜打撤\\game\\src\\core\\random.js"
+    },
+    {
+      "sha256": "0CC97EC24921C7E58F877FF6D972578A0863B659C03DA2D97FEE59BAE847AC73",
+      "path": "搜打撤\\game\\src\\core\\render-scheduler.js"
+    },
+    {
+      "sha256": "279E855B8CD2C0E363B78542F717F84E92F3EF636D19441C4955F6227F4E55B6",
+      "path": "搜打撤\\game\\src\\core\\renderer.fx.js"
+    },
+    {
+      "sha256": "D07938A2701004C80616BAFDA2DB13C2D3F075CA85380D2EA5061666682AFA07",
+      "path": "搜打撤\\game\\src\\core\\renderer.icons.js"
+    },
+    {
+      "sha256": "B5AE9222FB5AFE5F27CE6A521795BDFCC651C60D0E389EA489A8CBA2CF786FE6",
+      "path": "搜打撤\\game\\src\\core\\renderer.js"
+    },
+    {
+      "sha256": "7860C4E2AD5469AB17A1E4D1800DC69A5914633710B808157D14EF105966FCE7",
+      "path": "搜打撤\\game\\src\\core\\renderer.primitives.js"
+    },
+    {
+      "sha256": "A5922654DA9940DEAA1F5DED52C203ECA6341E2F8AD3050F6A54ACCB4A072D0D",
+      "path": "搜打撤\\game\\src\\core\\rule-config.js"
+    },
+    {
+      "sha256": "AB76D311C8428E045A2219EF2C294492EA31C514046744E6C571E37384E611D5",
+      "path": "搜打撤\\game\\src\\core\\rules.js"
+    },
+    {
+      "sha256": "AC88F7FD08EC4A970316C3C6DF5E3C960638742ECB1DE55D3E64D282D2CC37FF",
+      "path": "搜打撤\\game\\src\\core\\run-checkpoint.js"
+    },
+    {
+      "sha256": "49E06EEAE73B04EBB64DEB8E08E93ED8F46C787D58C7ECB16BF2AC0DFE444EC3",
+      "path": "搜打撤\\game\\src\\core\\runtime-trace-panel.local.js"
+    },
+    {
+      "sha256": "987F709E1F51DD9D0023E4AFACE0E5E390850E08A1AC9B5AF2DAC6BC6A481D4E",
+      "path": "搜打撤\\game\\src\\core\\runtime-trace-stages.local.js"
+    },
+    {
+      "sha256": "CF7D855112CE65278C54E9AA9D79BF28D30B286C32DABADBC4084E9AFEA86378",
+      "path": "搜打撤\\game\\src\\core\\runtime-trace.local.js"
+    },
+    {
+      "sha256": "0937A24296E74B05286828A4392B1EC1D16CB374A86E454A2F852F10B90D959B",
+      "path": "搜打撤\\game\\src\\core\\scavenge-terminology.js"
+    },
+    {
+      "sha256": "EB8E15901830011D94EAA98FF647DAA6F2435336B80AB01D976140CF936131B8",
+      "path": "搜打撤\\game\\src\\core\\sdt-facade.js"
+    },
+    {
+      "sha256": "18F153EEBE05797F8E23295F04E65B8BB2F6D70FBB67C360EAFC7617BA082D54",
+      "path": "搜打撤\\game\\src\\core\\semantic-icons.js"
+    },
+    {
+      "sha256": "2687BCC33D114EAB4700663FFDDA962E783A8C9125DA5C3DE29323E8F6F9E9AD",
+      "path": "搜打撤\\game\\src\\core\\shared.js"
+    },
+    {
+      "sha256": "011A7E5D2FC8446F626981322B986D6BAE954A4CAC709D9D381D3BC6D27A49FC",
+      "path": "搜打撤\\game\\src\\core\\storage.js"
+    },
+    {
+      "sha256": "576DBE1BD94981696971A4FE65A8B81C3755B128F15BE8DC36842B44F9AD25FF",
+      "path": "搜打撤\\game\\src\\core\\turbo.js"
+    },
+    {
+      "sha256": "34AA64E9A66A8565772ED0D8A433D77123266CAF2D7E08AFAC09F1F70F4B4AEB",
+      "path": "搜打撤\\game\\src\\generated\\art-manifest.js"
+    },
+    {
+      "sha256": "3D355EE28019E53953FCDE570E0208A91837862C0685B742689C6B65B3FF9705",
+      "path": "搜打撤\\game\\src\\generated\\narrative-events.js"
+    },
+    {
+      "sha256": "D9E20671AC705C03B720E90751D697535DF880D04DABBE525A8C298451FE4FAF",
+      "path": "搜打撤\\game\\src\\generated\\thumb-manifest.js"
+    },
+    {
+      "sha256": "A0722309D6CDCEC0E95F3A2C79B8CCA3480A4482A468A000F491C75F7171B869",
+      "path": "搜打撤\\game\\src\\home\\home.catalog.js"
+    },
+    {
+      "sha256": "CAFD000AF5EAED9B34B8BD28F8B63B26B2A2442CA59FC44CED5CB5C90100EEF1",
+      "path": "搜打撤\\game\\src\\home\\home.commands.js"
+    },
+    {
+      "sha256": "9216CF84B2F0E0091FA015B22EC3B875EB04CC35A5948E0E4FF6201BEC7766D9",
+      "path": "搜打撤\\game\\src\\home\\home.presenter.js"
+    },
+    {
+      "sha256": "D87D3FF2394D7022B0EAD06485AF881CCB4BBD07F4B6F76F36A964AA8D957CDD",
+      "path": "搜打撤\\game\\src\\home\\home.scene.js"
+    },
+    {
+      "sha256": "77894EF542F7CAA05AB164959F45D45299A1E99B0FA0E8783E47D9ABD5576B68",
+      "path": "搜打撤\\game\\src\\home\\home.visuals.js"
+    },
+    {
+      "sha256": "DE497A1DD57CCCAEEB7DA97AF2D27A6C84EA3A6EB11CC435110003E52E9647F2",
+      "path": "搜打撤\\game\\src\\home\\narrative.js"
+    },
+    {
+      "sha256": "9E191850B9DF6507B08641F7FDC7E1F3726413B8C1FFFFFF7B8DCB3049CC8474",
+      "path": "搜打撤\\game\\src\\home\\story.commands.js"
+    },
+    {
+      "sha256": "35F30348EF6A2F4758405D6F8616DF3F386F08572F0C51E37E3D7BB1EB69EC1F",
+      "path": "搜打撤\\game\\src\\home\\story.last-lamp.js"
+    },
+    {
+      "sha256": "39C7E3AF3D8632F9B93EEE7A59D617B9B42B43D67366D4CF04B4D7E183B0870C",
+      "path": "搜打撤\\game\\src\\hub\\bag-container-pages.js"
+    },
+    {
+      "sha256": "67E28C400CD7A3F641CEA4FCBB75CD11C1EB313BD31DF95B504C8E2C6B2C60B7",
+      "path": "搜打撤\\game\\src\\hub\\bag-inventory-actions.js"
+    },
+    {
+      "sha256": "F193AC63628364F093870263DC36F4DD4E79CD63C7C27D59385004747FE2133D",
+      "path": "搜打撤\\game\\src\\hub\\bag-inventory-commands.js"
+    },
+    {
+      "sha256": "28D8087E85ED25F3AE68C9201C1D196EA742E1D658AB045F861A408C0FB4B473",
+      "path": "搜打撤\\game\\src\\hub\\bag-item-effects.js"
+    },
+    {
+      "sha256": "182C2B5C112E30585EE0F4BB686CE9FA96867CF1D2BFFBF2861D0F4649A2120F",
+      "path": "搜打撤\\game\\src\\hub\\bag-item-use.js"
+    },
+    {
+      "sha256": "2C47B083ECE0152D7ACF590B3146CC100AAD08F878A88A02BDDBD933134A6FDE",
+      "path": "搜打撤\\game\\src\\hub\\bag-legacy-use.js"
+    },
+    {
+      "sha256": "E472FB48E3F0844F7F3EB7DD65F22709BF86D8DD1C319809FB3BBBB481784ECC",
+      "path": "搜打撤\\game\\src\\hub\\bag-pane-view.js"
+    },
+    {
+      "sha256": "800F2D427EEBFE6DF2FCB971A49CEBCF3D9BFCA31417B952A8FB11BE468CE231",
+      "path": "搜打撤\\game\\src\\hub\\bag-return-hook.js"
+    },
+    {
+      "sha256": "236AE3B4C2614CE4E2D9A8F9D02F8EC6D547C18B7B4C0C55112F47A9BA5FE744",
+      "path": "搜打撤\\game\\src\\hub\\bag-token-craft-plan.js"
+    },
+    {
+      "sha256": "3FB692C45D86084F60D7F3FAE79E4B78C73B785088B6B476F53A8F606BA5BAD2",
+      "path": "搜打撤\\game\\src\\hub\\bag-use-compatibility.js"
+    },
+    {
+      "sha256": "58BA0CBB8A807A6E65CC0E430FFACDE8348728F135852CC0F9A01AF4820D9B06",
+      "path": "搜打撤\\game\\src\\hub\\base-departure.commands.js"
+    },
+    {
+      "sha256": "3ACCDC9C14CD96D99B3F7D0FA38809357CA6880FC1DEEA9E6FF23E069FBDA2E8",
+      "path": "搜打撤\\game\\src\\hub\\base-economy.js"
+    },
+    {
+      "sha256": "C3B041E1DA9C8F4AE39E2B1FE5AB0B2E200F07A5F31039BA3A2D4D62322D28C3",
+      "path": "搜打撤\\game\\src\\hub\\base-elapsed.commands.js"
+    },
+    {
+      "sha256": "755C136DFE53338DDA2375E741B9E7A483488B624DAC7B1647C47107C74CFDDC",
+      "path": "搜打撤\\game\\src\\hub\\base-meta.commands.js"
+    },
+    {
+      "sha256": "9D517CB035EC4823E0ADA9778964C0068FC536921A668CACD03E40EA452D9D47",
+      "path": "搜打撤\\game\\src\\hub\\base-motion-v4.js"
+    },
+    {
+      "sha256": "88601F7A606E91275A692E929D96697B80AD88512B4CCF53B0A4CED14E6050F6",
+      "path": "搜打撤\\game\\src\\hub\\base-mutation.js"
+    },
+    {
+      "sha256": "5BB772775B6663DF17D0A46F577F93B056A7CC688F9897AB1D5AAA90AEF58D8B",
+      "path": "搜打撤\\game\\src\\hub\\base-page-motion-v7.js"
+    },
+    {
+      "sha256": "44066EE38C5D7BD85497486C30FA05633BFDE139D406C04B374808FA04B82B79",
+      "path": "搜打撤\\game\\src\\hub\\base-pet-egg.commands.js"
+    },
+    {
+      "sha256": "80C520A6179C650BAB60315FACE2C0F52894A4622E5C92A83100B185EF9E4CBF",
+      "path": "搜打撤\\game\\src\\hub\\base-progression.commands.js"
+    },
+    {
+      "sha256": "1B596FCDC017110130202BEC71081F9E7E5E7499157E40ECCB82DB46FDF6C705",
+      "path": "搜打撤\\game\\src\\hub\\base-state.js"
+    },
+    {
+      "sha256": "1E77978B69918E38FC9F0BDD98F60BD0E027453F999114A6AE6A8C9C889FBB75",
+      "path": "搜打撤\\game\\src\\hub\\base.commands.js"
+    },
+    {
+      "sha256": "91FB4D16F352C43EBFA737CAED9E932489D86E5405B55DEDEB133633CEC97E05",
+      "path": "搜打撤\\game\\src\\hub\\base.js"
+    },
+    {
+      "sha256": "8C529DD5B819D2A5AEA12EAB7DBC78B63369E6F2BB456CAF16277BFE520FE15F",
+      "path": "搜打撤\\game\\src\\hub\\battle-settlement.commands.js"
+    },
+    {
+      "sha256": "042797A9CF64528B6D29B2AFBF6E302BF345DF6093474899993A066C6B4B1AC9",
+      "path": "搜打撤\\game\\src\\hub\\battle-victory-progress.js"
+    },
+    {
+      "sha256": "FAB4442D5CE15457C8ED7E113734333C054DFEF33D5314A4F1EFB600374282E3",
+      "path": "搜打撤\\game\\src\\hub\\collection-conversion-view.js"
+    },
+    {
+      "sha256": "C012DD7653D63EC0D7898242195A88AA7FB4CA2997A6DEB1FDEAA34CD061FBD7",
+      "path": "搜打撤\\game\\src\\hub\\collection-conversion.js"
+    },
+    {
+      "sha256": "3C1FC2D49C87A920328CE67ACD5789AAA0078A04A854A1FFD384342DA15213A4",
+      "path": "搜打撤\\game\\src\\hub\\collection-protection.js"
+    },
+    {
+      "sha256": "E6629D6DD732DF57DF2F815D74C21F535886581825D5760EEDBBAAB6FA9E3A03",
+      "path": "搜打撤\\game\\src\\hub\\collection.commands.js"
+    },
+    {
+      "sha256": "D48B188F48493043CFDF14D6C3F15472787EC2C990FE7CF7354448E5EB199DA8",
+      "path": "搜打撤\\game\\src\\hub\\command-errors.js"
+    },
+    {
+      "sha256": "6100CA4B1F3624E49FD0C27A2B21373BAEB462F50D1D84F13A85E3D6438CA88B",
+      "path": "搜打撤\\game\\src\\hub\\commands.shared.js"
+    },
+    {
+      "sha256": "9CC5C83974F285AEDEE0CD766D8E98E3C90CDB5A19BB62095FF9A77B7485D251",
+      "path": "搜打撤\\game\\src\\hub\\courtyard.rain-tableau.js"
+    },
+    {
+      "sha256": "7FF8046BA4F485B44FAC9B8C987A134B2FC79FE9420F8D60598EEB206684C04B",
+      "path": "搜打撤\\game\\src\\hub\\departure-persistence.js"
+    },
+    {
+      "sha256": "C2B00EDDD459FD8628E9055BBDCD477255297732A50CAEBF9A2AC09715B21992",
+      "path": "搜打撤\\game\\src\\hub\\departure.drag.js"
+    },
+    {
+      "sha256": "C4D0AE39CC850B463BFE3CCC941C4BA0009663A3268E1124FB00E7685AA01DB4",
+      "path": "搜打撤\\game\\src\\hub\\departure.selection-state.js"
+    },
+    {
+      "sha256": "552E175A199E0353BB9F460B4D9B30279CF560762CABB6C4091EEF706D816177",
+      "path": "搜打撤\\game\\src\\hub\\departure.summary.js"
+    },
+    {
+      "sha256": "08D3E8E64236DB48E3617F7021FC7202B8EFA65F812B5A4097CD8C66F7CFC27E",
+      "path": "搜打撤\\game\\src\\hub\\departure.view-updates.js"
+    },
+    {
+      "sha256": "225E3A8C47883B58D729EDC04A4E1BF2FF44EDC45DEDDE1F064D29F02C3D5A96",
+      "path": "搜打撤\\game\\src\\hub\\extraction.commands.js"
+    },
+    {
+      "sha256": "CB117388A75F9E47D9803DA31BE7912DAE443C586ABBD6DCEC096491061C6CF5",
+      "path": "搜打撤\\game\\src\\hub\\game.bag.bridge.js"
+    },
+    {
+      "sha256": "7D03E4E8975E703301D92D2A8CFE98B6E2B63EA418C7CA7A119E7B146615830B",
+      "path": "搜打撤\\game\\src\\hub\\game.bag.drag.js"
+    },
+    {
+      "sha256": "B0203137BF7CA624FDAE510E5F0F7F2CE79C4F258ECE9F86487E00F6B22E0851",
+      "path": "搜打撤\\game\\src\\hub\\game.bag.js"
+    },
+    {
+      "sha256": "631F5316A1D25F04A844D44525E6D65E13F123ED73BD6E421580005EC9414F80",
+      "path": "搜打撤\\game\\src\\hub\\game.bag.rules.js"
+    },
+    {
+      "sha256": "DFEF40D55C5A5EB7437D9F1189B83EDD02798B02634FE40249892CBD6B20E4FC",
+      "path": "搜打撤\\game\\src\\hub\\game.bag.safe-transfer.js"
+    },
+    {
+      "sha256": "199481A0279312A21E6BF341D36B1CC1BD75B089A3D6BE81AF96AA6857B3CDD5",
+      "path": "搜打撤\\game\\src\\hub\\game.bag.settle.js"
+    },
+    {
+      "sha256": "18A680C5829B730D75A9A1989FE11963205E5F4A51824387FFC72F4D43F523BC",
+      "path": "搜打撤\\game\\src\\hub\\game.bag.token-craft.js"
+    },
+    {
+      "sha256": "2FA98640901FF50F1D3D0C104CAB6DD6F122A5E7BD03ADA2B2CE8C1FA0FBB9E3",
+      "path": "搜打撤\\game\\src\\hub\\game.bag.view2.js"
+    },
+    {
+      "sha256": "8D961B16A8AA87B1D1C6C3C5CF61A80F66E28869EB7399B989C4422458893A71",
+      "path": "搜打撤\\game\\src\\hub\\game.cardslib.art-warm.js"
+    },
+    {
+      "sha256": "1273361E2324CBDE2DC7098DA6CAA34825A2571137F54BB271D5B010987DA6A0",
+      "path": "搜打撤\\game\\src\\hub\\game.cardslib.common.js"
+    },
+    {
+      "sha256": "924391C092D6AB5BF55E2B35F723516C78826F04390381756A83D5F7B71A785A",
+      "path": "搜打撤\\game\\src\\hub\\game.cardslib.designer.js"
+    },
+    {
+      "sha256": "AD502D05463B9871CA0C4E4B772953F87AFE3AD8FA2D4B9B2CF73CD5831575DD",
+      "path": "搜打撤\\game\\src\\hub\\game.cardslib.js"
+    },
+    {
+      "sha256": "26EE26B09D0407C618E68C45AF4C9995866722BEC1D3495CDECCDAE47A4A56C4",
+      "path": "搜打撤\\game\\src\\hub\\game.cardslib.page.js"
+    },
+    {
+      "sha256": "452DF01D5FE6C40051CF1CC06677DD48AF418F8AFD57C7F5B03798E3D2A97A66",
+      "path": "搜打撤\\game\\src\\hub\\game.cardslib.photo-fps.js"
+    },
+    {
+      "sha256": "03D790A91524BBB094B54026500F2EF59448A89CF3B6B34B422957A0D8AFEAC1",
+      "path": "搜打撤\\game\\src\\hub\\game.cardslib.photo-props.js"
+    },
+    {
+      "sha256": "CAEA9ADE67F7B8B20496296D02377F1422B5D0D57310C6AA0D73E4715587E9E9",
+      "path": "搜打撤\\game\\src\\hub\\game.container-store.view.js"
+    },
+    {
+      "sha256": "8F0BD3E9A736841BCA9623FDA2A9E0C4ED8045CBB482523E093C0FE3D7D737E5",
+      "path": "搜打撤\\game\\src\\hub\\game.hub.bridge.js"
+    },
+    {
+      "sha256": "2C637B4D4ACFBB6DFD0F31E737AEE6D38DCB9203ED3C330CAB2DAC44B52DC09E",
+      "path": "搜打撤\\game\\src\\hub\\game.hub.depart.js"
+    },
+    {
+      "sha256": "8F59196BDA4FEFB6E6F1F477A5B696B2A48DB0032E49FCF04ED2BD63FFE1D184",
+      "path": "搜打撤\\game\\src\\hub\\game.hub.home-scene.js"
+    },
+    {
+      "sha256": "A8A10366A8CAF2FA9F4C99C320597BC5DE91F4C58169400C4C8EF9CF9BB1D08E",
+      "path": "搜打撤\\game\\src\\hub\\game.hub.js"
+    },
+    {
+      "sha256": "5BAB544672307D067BBBAD598C25FC6E53457F9A89BD80B53B6D3DCC84A7666F",
+      "path": "搜打撤\\game\\src\\hub\\game.hub.pages.js"
+    },
+    {
+      "sha256": "7E03EBBCB413262D3BAF886C7AC14617C618D3AEC19A4A871695100FFAAC07F9",
+      "path": "搜打撤\\game\\src\\hub\\game.hub.preparation-ports.js"
+    },
+    {
+      "sha256": "3E891B4A447D2AC90A94249EB4870DADB388DCDAE0185A715227F09AD5CDA166",
+      "path": "搜打撤\\game\\src\\hub\\game.hub.preparation.js"
+    },
+    {
+      "sha256": "7B86625BFB0C1C04734E139263222600535AE5AF1417850761958D59A15F7DAB",
+      "path": "搜打撤\\game\\src\\hub\\game.hub.runtime.js"
+    },
+    {
+      "sha256": "3838D34A2AE054673293DF2F1F4D5CC069F927F521FA4BFF8709F722ED52D60E",
+      "path": "搜打撤\\game\\src\\hub\\game.notes.js"
+    },
+    {
+      "sha256": "D510BA40C7598F0FBADCACD73254C33DC809FC2B19B2F47540AA85F8D5713244",
+      "path": "搜打撤\\game\\src\\hub\\game.reward-organizer.js"
+    },
+    {
+      "sha256": "6BE83D81CB848DEA4ABF56F9082698D9B4802647FD497C4146C35FA37EBF6F6A",
+      "path": "搜打撤\\game\\src\\hub\\game.storage.js"
+    },
+    {
+      "sha256": "943E61CE889937DEA82D56DC2EFF7A604B3F6B1F5FE6FDCA73D22AAFA1298D4F",
+      "path": "搜打撤\\game\\src\\hub\\game.store.js"
+    },
+    {
+      "sha256": "6167EFEE959B1A4058E2A894AD13F9D1A2E89FEEE6C621034FCBC81884FA7615",
+      "path": "搜打撤\\game\\src\\hub\\hub.archive-v3.js"
+    },
+    {
+      "sha256": "804424FAEB1496D178662D204B18DFDCC7FD9CCE606CE29609D0114EC90E1497",
+      "path": "搜打撤\\game\\src\\hub\\hub.archive.js"
+    },
+    {
+      "sha256": "7BF4F3BED10D6393271EECF08157374DD8D8A470346623056EDFDD98044D60F0",
+      "path": "搜打撤\\game\\src\\hub\\hub.collection-v4.js"
+    },
+    {
+      "sha256": "F1F4241AF29039847C46A298F5FE97AC1A3335737A6D9FD0F2522ECDB8CFDA25",
+      "path": "搜打撤\\game\\src\\hub\\hub.courtyard-runtime.js"
+    },
+    {
+      "sha256": "AD2F0C2BCD96E17E9EB59D084CBE30D41ACDF55C55AB5DE2B99EF1C73D6DE356",
+      "path": "搜打撤\\game\\src\\hub\\hub.courtyard-v3.js"
+    },
+    {
+      "sha256": "A6CE60246E4705DF10F5693987319DE4822E72AABC1D90834A8F8265750229F7",
+      "path": "搜打撤\\game\\src\\hub\\hub.facilities.js"
+    },
+    {
+      "sha256": "1F8A8A58059692D6B89C312E4845DBBAC73891839FE577DA026B652E13A36DD4",
+      "path": "搜打撤\\game\\src\\hub\\hub.home-icons-v10.js"
+    },
+    {
+      "sha256": "C941B3575798F85E63788607E17098AA56105B4E847614827752AA229AE43B79",
+      "path": "搜打撤\\game\\src\\hub\\hub.home-v3.js"
+    },
+    {
+      "sha256": "25D9E187EF7F3E261AD068CCB1E20A6C6980992CC09C14757B102DA598A7C5D8",
+      "path": "搜打撤\\game\\src\\hub\\hub.materials.js"
+    },
+    {
+      "sha256": "A5AF60B6FE8A520C9856D9F242FDD52EFAF21A2CF7A772168911E6485EE4FA6A",
+      "path": "搜打撤\\game\\src\\hub\\hub.navigation-v7.js"
+    },
+    {
+      "sha256": "37796E2E56647A4D86C456E62BE91F9CA843DBE0EE7F59FA75E41249B008A307",
+      "path": "搜打撤\\game\\src\\hub\\hub.personnel.js"
+    },
+    {
+      "sha256": "ABF38AEB09093CB9E88F3AECDD1D2F582306725FD27E35FF96A737E7AE719191",
+      "path": "搜打撤\\game\\src\\hub\\hub.presentation.js"
+    },
+    {
+      "sha256": "51AEEBA92392FAF0A97623DD63ED41F9AD8A9A490A53855CC895BAA0CB433EB6",
+      "path": "搜打撤\\game\\src\\hub\\hub.reward-feedback.js"
+    },
+    {
+      "sha256": "1819D85E12CF1BF30B3E70A20205A3EAF13AA8CF4AA41A86F8CE2453E2352E93",
+      "path": "搜打撤\\game\\src\\hub\\hub.trade-shop-v5.js"
+    },
+    {
+      "sha256": "1284B86E61536FB11E6440995A3094711510D2228E6CA4C90705421F783B0E78",
+      "path": "搜打撤\\game\\src\\hub\\hub.visuals.js"
+    },
+    {
+      "sha256": "209AEBF8E4D64FAA0B234614A4725F17D5DCBD2121FF9B4E720F4972065A6B2D",
+      "path": "搜打撤\\game\\src\\hub\\hub.warehouse-categories-v7.js"
+    },
+    {
+      "sha256": "D99BCF65C9AC96B7235B279242B175F05381B80560BA70FF0B770440CCBC102C",
+      "path": "搜打撤\\game\\src\\hub\\hub.warehouse.js"
+    },
+    {
+      "sha256": "B3033C3466F95142EAA221A2E2C28E2E38695D0A65D82CB15B9C3818D88D0DE0",
+      "path": "搜打撤\\game\\src\\hub\\meta-progression.js"
+    },
+    {
+      "sha256": "B86AB01BF3E2CE1AA68EF264996078F8D6E7DF90C5CC3F5571158BD378D26E97",
+      "path": "搜打撤\\game\\src\\hub\\meta.js"
+    },
+    {
+      "sha256": "EFC6BC99AECDA6EB7F835CA4CBC5DA5238CE7E1E2E0C97777CEB41C7B01CCF5B",
+      "path": "搜打撤\\game\\src\\hub\\nest-settlement.commands.js"
+    },
+    {
+      "sha256": "45CB473FC2782137374C8C9CAA2A16F85C7A5890D0B06D153F3C9281ACAC82A9",
+      "path": "搜打撤\\game\\src\\hub\\photo-studio-catalog-cache.js"
+    },
+    {
+      "sha256": "B2A582CAD98FD758F0AD2601B30C8AC656EB29DD83618E6BFA84BCEDF112619F",
+      "path": "搜打撤\\game\\src\\hub\\photo-studio-controls.js"
+    },
+    {
+      "sha256": "B1C23F153CB8F2097647E4E8C3C834C412806AF735C479EC53A780A3AB94254E",
+      "path": "搜打撤\\game\\src\\hub\\photo-studio-navigation.js"
+    },
+    {
+      "sha256": "B93AF0E7507FAA7E70BC0B4B0C13F7B2ACEE17B9A37620A3135192A228E750A5",
+      "path": "搜打撤\\game\\src\\hub\\photo-studio-presentation.js"
+    },
+    {
+      "sha256": "722162BF5802F1140B7BF7694B895B11658674E28909EAF8AC4B41DEF12C7B22",
+      "path": "搜打撤\\game\\src\\hub\\photo-studio-tabs.js"
+    },
+    {
+      "sha256": "68F7C6E9F88FE6E1540244491E31BE1F17DC2394D6D514281E868875DF2D70D0",
+      "path": "搜打撤\\game\\src\\hub\\preparation.commands.js"
+    },
+    {
+      "sha256": "8D65A4D5DECA909D820DFD790EE9F91092FE2AE198CE617945542A564E83680D",
+      "path": "搜打撤\\game\\src\\hub\\preparation.sources.js"
+    },
+    {
+      "sha256": "B43523DC198206B400828035098A4F2D09DE85214EF77F2DFA97CC7EFF67919C",
+      "path": "搜打撤\\game\\src\\hub\\preparation.view.js"
+    },
+    {
+      "sha256": "346FA6ACBECD1F8296263809285AE11E3B4A79163B2D45C6C348FFA2E4C3D606",
+      "path": "搜打撤\\game\\src\\hub\\receipt-retention.js"
+    },
+    {
+      "sha256": "A11BB33661D187E09E27230ACD42C62210A71E3E57E1C2D4BDD3CB09985CC813",
+      "path": "搜打撤\\game\\src\\hub\\recoverable-pair.js"
+    },
+    {
+      "sha256": "705BA67F68F821828D63FD94CB0A3335AE61029871468400C9E743FC193065C6",
+      "path": "搜打撤\\game\\src\\hub\\recovery.commands.js"
+    },
+    {
+      "sha256": "9AD03CD5EF368D82BFCF40F3B4DD3E444CAB451D2F26F99D83B00A67EAC1CC0C",
+      "path": "搜打撤\\game\\src\\hub\\run-rescue-cards.js"
+    },
+    {
+      "sha256": "5DA3F71597C2F1EC2C76E33E9103E0A14162F0849A5EA1F71DA0F53A1197EE3C",
+      "path": "搜打撤\\game\\src\\hub\\run-save-validation.js"
+    },
+    {
+      "sha256": "73747968CA260E0D4C6A962F23817F5F0F9FF18F5489C4B982A8F7D4A3B87368",
+      "path": "搜打撤\\game\\src\\hub\\sacrifice-policy.js"
+    },
+    {
+      "sha256": "51EF18F8D7EE212769FC099C9BFFEA75361471399D4F83B4191B029FFF288D34",
+      "path": "搜打撤\\game\\src\\hub\\save-archive.js"
+    },
+    {
+      "sha256": "9C59FD4985CE1EFB433A057D1CD2579FFE75C50AAD7AC32272448ECAE6C120CC",
+      "path": "搜打撤\\game\\src\\hub\\slot-write-lock.js"
+    },
+    {
+      "sha256": "2BA63A9A490BDEF064804821FC307C120EB294C8208EDB6B651B018B3CE0F1FA",
+      "path": "搜打撤\\game\\src\\hub\\stash-sale-price.js"
+    },
+    {
+      "sha256": "F682A2EA080C03533B8F2F710CAE1B16FA5CFC9970A3C17DD7B7016E956A36C6",
+      "path": "搜打撤\\game\\src\\hub\\stored-card-identity.js"
+    },
+    {
+      "sha256": "3554C3D9B948E094CDFF7901BA943EC40F7BD78F06B65208515262BEEE0BA88E",
+      "path": "搜打撤\\game\\src\\hub\\terminal.commands.js"
+    },
+    {
+      "sha256": "9D8725A88EE0251F7DA12ABFF822B8331AE400530A43B3FB15A25093464EC97B",
+      "path": "搜打撤\\game\\src\\hub\\versioned-slot-reader.js"
+    },
+    {
+      "sha256": "2F0081832C66A2458876C9BD56DF82AE36877D9CBD90F3B60E5642B3EE8C51D1",
+      "path": "搜打撤\\game\\src\\hub\\courtyard-vendor\\KoiPond.js"
+    },
+    {
+      "sha256": "E96BB5E851656D954294D434F475D304CC33A9ACCD83E9F249FD377B1254AD4F",
+      "path": "搜打撤\\game\\src\\run\\chest-opening-art.js"
+    },
+    {
+      "sha256": "2CBC62FF1FB13A8B53EEE60D7B17DDF9C4EA1734CEBBE372F45042FB300CC38F",
+      "path": "搜打撤\\game\\src\\run\\chest-reward-save.js"
+    },
+    {
+      "sha256": "FD42E9BDE3B8CB28E913687C77E6AA462CAE57DCEE24309A637523E76CDF732E",
+      "path": "搜打撤\\game\\src\\run\\chests.js"
+    },
+    {
+      "sha256": "CBC1AFBBDC5BFC250977ECB084791A54C2DF735D0C1E4160625BD3A67CCA43E1",
+      "path": "搜打撤\\game\\src\\run\\encounter-meta.js"
+    },
+    {
+      "sha256": "A7533515EDE020FDB82A5DBF488DEA9D411224B329239897085D1F45D8855398",
+      "path": "搜打撤\\game\\src\\run\\encounter-selector.js"
+    },
+    {
+      "sha256": "B2D520297F93A75CAC6536A5212B9F4DCC2D766151E088E3253B82432D5A95C1",
+      "path": "搜打撤\\game\\src\\run\\event-branch-choice.js"
+    },
+    {
+      "sha256": "3EC68C9B742152E505DFE2DF28F8EC40C19FF9621597620D54D8BEAFC89FA9F3",
+      "path": "搜打撤\\game\\src\\run\\event-card-choice.js"
+    },
+    {
+      "sha256": "E2A97B9747A6CDAC364EA9F84E3FAFBC7BED1DA392211E74CF18A606C6857977",
+      "path": "搜打撤\\game\\src\\run\\event-commands.js"
+    },
+    {
+      "sha256": "51FDE1B6B453ADE083F02DE32787955B07BEFA5ACD32D8C8B9776FB1B5E7B514",
+      "path": "搜打撤\\game\\src\\run\\event-lifecycle.js"
+    },
+    {
+      "sha256": "F83DF7FF6BC31D822213D7EAEA0A7B0AD608B42772228A07907EC1F90E21AB64",
+      "path": "搜打撤\\game\\src\\run\\event-recode-candidates.js"
+    },
+    {
+      "sha256": "9AEE8A98EE8A8D4A6BFBC3B5182A10381D3862DC3B16442DDD6AD34A7D89FB6E",
+      "path": "搜打撤\\game\\src\\run\\event-runtime.js"
+    },
+    {
+      "sha256": "EB37CDB594CC82537AACC9DBD629B505B434AB640D2E6E79FD4659CB0F9D64A2",
+      "path": "搜打撤\\game\\src\\run\\expedition-tool-art.js"
+    },
+    {
+      "sha256": "5B3F04A046C8E78DD626DDF1BAB6FAA40038978F4BABD39CAC20B18927573B3B",
+      "path": "搜打撤\\game\\src\\run\\expedition.view.js"
+    },
+    {
+      "sha256": "D1A3DD4B9391BE795B24BC7832D48E9D1F303691DED76795FD2C18C4FF091715",
+      "path": "搜打撤\\game\\src\\run\\extraction-preview.js"
+    },
+    {
+      "sha256": "C24D01704894949D77809E3D23FABA92A4AB424032AE3F409A4026589D3695B8",
+      "path": "搜打撤\\game\\src\\run\\game-session-departure.js"
+    },
+    {
+      "sha256": "6EC128BD2B366A669C7813934BDE379648A44D115130FB73D2B26CDB8C5A563A",
+      "path": "搜打撤\\game\\src\\run\\game-session-persistence.js"
+    },
+    {
+      "sha256": "C53D0E80747349FEC479825C973E0D2185B95E3DFAC8C168D9EB421CA4E0A750",
+      "path": "搜打撤\\game\\src\\run\\game-session-restoration.js"
+    },
+    {
+      "sha256": "F2AF6ED873D3F25E0BB92BD8744F818B3D877E1A6D59BFB5292ACF567804C3F0",
+      "path": "搜打撤\\game\\src\\run\\game.nest.js"
+    },
+    {
+      "sha256": "66AC64AEDD9152DD92B3F52B258A6FD0C3A8F6925E7D3443667DAF754D80FDC3",
+      "path": "搜打撤\\game\\src\\run\\game.run.altar.js"
+    },
+    {
+      "sha256": "A81DFCE40A84A2713174BCF918E5901B4401F8B71604691256FA3BC94FB3128B",
+      "path": "搜打撤\\game\\src\\run\\game.run.class-choice.js"
+    },
+    {
+      "sha256": "1AFC1F86E94C3B1F7F959667148D4180655ABEBA5012877C126550FC06E91D4D",
+      "path": "搜打撤\\game\\src\\run\\game.run.class-choice.page.js"
+    },
+    {
+      "sha256": "F4B71689CB1B9A94D5FDB2DDD90D7D723CAA5E45D22A4A8ABED8D0FCFAEB6886",
+      "path": "搜打撤\\game\\src\\run\\game.run.data.js"
+    },
+    {
+      "sha256": "63BC91F9BE199B49531268E4ADA83E8A49843C73D0BBE4D72DA6A59743EA51BA",
+      "path": "搜打撤\\game\\src\\run\\game.run.dev-loader.js"
+    },
+    {
+      "sha256": "932B2D10248A6F54C4B6E75BF4743C7B7E585B96AB0CC87C6324F5AAFAECB329",
+      "path": "搜打撤\\game\\src\\run\\game.run.dev.js"
+    },
+    {
+      "sha256": "2BCE72A8CF8CF0526F7D56F2B8F8EFB1BC4573B793EACF3344CF7301A5433E1E",
+      "path": "搜打撤\\game\\src\\run\\game.run.events.js"
+    },
+    {
+      "sha256": "704B627FC971301D85D508860023004373C0C618122F418D2B8BC4F2B8259EBB",
+      "path": "搜打撤\\game\\src\\run\\game.run.flow.js"
+    },
+    {
+      "sha256": "45EDA386150581E6FFD3B90AC319CF10BBA37E12CCF1095DF5C8662807164266",
+      "path": "搜打撤\\game\\src\\run\\game.run.js"
+    },
+    {
+      "sha256": "10EA543066D689F08A303B5426AFC4C9C3D881D65CB5DC285523872423DEC8AF",
+      "path": "搜打撤\\game\\src\\run\\game.run.resources.js"
+    },
+    {
+      "sha256": "759B53A8FAFBF889CE19A4A8B7A8626492D08C92D1F340A7377495DDB26EA3F0",
+      "path": "搜打撤\\game\\src\\run\\game.run.scenes.js"
+    },
+    {
+      "sha256": "FD593EC790066E0D0390936D86C9413AE4D8F561A15989775E6B1499954F09F0",
+      "path": "搜打撤\\game\\src\\run\\game.run.shop.js"
+    },
+    {
+      "sha256": "AA131ECCFB2308E5C25A51489A872563DF110E3B27C50D829CF992EB1A5A344F",
+      "path": "搜打撤\\game\\src\\run\\game.session.bag.js"
+    },
+    {
+      "sha256": "8D4C5CCFFF913AA57FBA4AA7F0D14CCBC90D9560761BA263C45AF9D9F62C265D",
+      "path": "搜打撤\\game\\src\\run\\game.session.board.js"
+    },
+    {
+      "sha256": "6990F34B05C0B1FE119723999171B6713C69B868D3FCB58D6B7F10BC57B7D34C",
+      "path": "搜打撤\\game\\src\\run\\game.session.browser.js"
+    },
+    {
+      "sha256": "58250EACF239BB56CC17C8528CCC1522533A60EA44D61C000D796590F26D703C",
+      "path": "搜打撤\\game\\src\\run\\game.session.death.js"
+    },
+    {
+      "sha256": "EB63A8DCD6CCFBAA0649650BE0976172AFD9C9E9D78125C766FB08B0D2A9595A",
+      "path": "搜打撤\\game\\src\\run\\game.session.js"
+    },
+    {
+      "sha256": "F4EEB71B4322B3561F81572A6B618B357D46561C74AF3FD160EBBE3595861D1F",
+      "path": "搜打撤\\game\\src\\run\\game.session.kernel.js"
+    },
+    {
+      "sha256": "F3F871628E972E0956DA1515AC93610ADF69C904E2CC8715ABDD8F2152A1684C",
+      "path": "搜打撤\\game\\src\\run\\game.session.map.js"
+    },
+    {
+      "sha256": "E33974A83AA529A0408FB2FACE2717F8E2D5DB35047547A1791FF6C78D2069F9",
+      "path": "搜打撤\\game\\src\\run\\game.session.modes.js"
+    },
+    {
+      "sha256": "3D2950DE2AC3C7218FDB18FC34A38644E5257B2CCCE34AEA68A3C77E1A63C4D2",
+      "path": "搜打撤\\game\\src\\run\\lab.ending.js"
+    },
+    {
+      "sha256": "79FFF9BAA207243DD4DC9156F90409CA9F897EA906227840D0153F440067D83F",
+      "path": "搜打撤\\game\\src\\run\\layeredMap.js"
+    },
+    {
+      "sha256": "5E02474DDE9E2A10831A61848E5BC265B33032C07CCEE34112AC60D3C8AAB285",
+      "path": "搜打撤\\game\\src\\run\\map-exploration-adapter.js"
+    },
+    {
+      "sha256": "A1260274B9264C21920FC5E985A380A81AB6180CEDFEEAA6488295E196AE03A6",
+      "path": "搜打撤\\game\\src\\run\\map-generation-rules.js"
+    },
+    {
+      "sha256": "DB171F76238C93E9C857CEEE6ED30D8FFEAFABB3273501F341C5B5CB58F85F12",
+      "path": "搜打撤\\game\\src\\run\\map-generator-v4.js"
+    },
+    {
+      "sha256": "EFE436ECD0EC92BE1520E863837C3CDDC69290392E0D10FE81678E09491BC747",
+      "path": "搜打撤\\game\\src\\run\\map-generator-v7.js"
+    },
+    {
+      "sha256": "733C0948FE2F9D1C38253643ECC1B3F370AA656358AC8F576D3F2782D0C793EB",
+      "path": "搜打撤\\game\\src\\run\\map-generator.js"
+    },
+    {
+      "sha256": "EF3FD0D85F9C36DCE50AEB8D0BC155A83224BCA54CD4F232DEF3BABA4E21CB0F",
+      "path": "搜打撤\\game\\src\\run\\map-graph.js"
+    },
+    {
+      "sha256": "E48D7FFC9C14BDE61807D0853D022F507DFB0B491680EB0CA52ECFFC296EF5B8",
+      "path": "搜打撤\\game\\src\\run\\map-node-arrival.js"
+    },
+    {
+      "sha256": "36F78F9CCECC6ACDEAC2342EF604D7371F70ABD4306E595C436FE7704E69B7EF",
+      "path": "搜打撤\\game\\src\\run\\map-route-v2.js"
+    },
+    {
+      "sha256": "D216F6D574BA6DACA59735AE70599E5B2E82981119AA9BAA10D6FDB4109FAB56",
+      "path": "搜打撤\\game\\src\\run\\map-snapshot.js"
+    },
+    {
+      "sha256": "8D1678B4175F0693B9C87D4F13754F337D55256CD6A0CB18DE1CF11630A61C78",
+      "path": "搜打撤\\game\\src\\run\\map-travel-motion.js"
+    },
+    {
+      "sha256": "9A7ACEC607016B96B4159F7EC68D08259994A2B55330EE6DE46B29BFDBA9147B",
+      "path": "搜打撤\\game\\src\\run\\map-travel-path.js"
+    },
+    {
+      "sha256": "7CE2533261DEC03519E306DE900037877FFCA2225829A643D24D2BC80250A4B2",
+      "path": "搜打撤\\game\\src\\run\\node-restore-state.js"
+    },
+    {
+      "sha256": "B8B4A5E851ADBD06BD75FE1434C260E62651C441B3B130FA68C1504ACCB98A8B",
+      "path": "搜打撤\\game\\src\\run\\node-reward-state.js"
+    },
+    {
+      "sha256": "0A05A0AF46C7F95BE20F9578A1B3CAAE9D7359FA0A0D0967D20EA4A0C4328583",
+      "path": "搜打撤\\game\\src\\run\\route-choice-preview.js"
+    },
+    {
+      "sha256": "1AA8D758583CCCB8F3D2D13FE545FE54D97C986CB86765ADBAF63AC778C78B82",
+      "path": "搜打撤\\game\\src\\run\\run-memento.js"
+    },
+    {
+      "sha256": "A4F9C30A1AA03E9594500143220A767AC3B24ABF5A65C33D150D909303BCF6EB",
+      "path": "搜打撤\\game\\src\\run\\shop-browse-state.js"
+    },
+    {
+      "sha256": "3DA4C0BC334F1279E93A81674CFB4269AA448BD33665C18675FB6FB80D8F0E70",
+      "path": "搜打撤\\game\\src\\run\\shop-commands.js"
+    },
+    {
+      "sha256": "53F3BA8BFD297DD8E49FFD57E9F25326E3099DB8D3D0E32D8EC2362C1C26D860",
+      "path": "搜打撤\\game\\src\\run\\shop-commission.js"
+    },
+    {
+      "sha256": "0F8EC59B656702ABFCF903FD02EB3CFA6FA3FB5768073BDBB11CC64A9F08EA3D",
+      "path": "搜打撤\\game\\src\\ui\\achievement-gallery.js"
+    },
+    {
+      "sha256": "D47FEE5B4C8400219108370BD26F915615BC4D216E51121F083874884BB5EB41",
+      "path": "搜打撤\\game\\src\\ui\\achievement-medals.js"
+    },
+    {
+      "sha256": "2C5E23E8D9F3E76D6FB79532B1F1D4214212A4F18FCFF92FAB343E9689FFF3E7",
+      "path": "搜打撤\\game\\src\\ui\\achievement-motion.js"
+    },
+    {
+      "sha256": "F34766EF8BED42E3E10EC87DE2042E584AACE5CA13183EE1CB1E6F700E209116",
+      "path": "搜打撤\\game\\src\\ui\\action-dispatch.js"
+    },
+    {
+      "sha256": "701B3F7149BF64F375B7A8159BBAE4F670698423A329A9C6062E492D68A5BE76",
+      "path": "搜打撤\\game\\src\\ui\\archive-motion.js"
+    },
+    {
+      "sha256": "EBB623073FFC52BE0534CBA3B795BFFDCA7649DFA9F4FC84985E77C724FB13E4",
+      "path": "搜打撤\\game\\src\\ui\\base-design-preview-v7.js"
+    },
+    {
+      "sha256": "7F791A9A8F479EC50FF93D46F5E21FE09BCA8E059D04EFDDADA564722052411D",
+      "path": "搜打撤\\game\\src\\ui\\base-preview-rooms-v7.js"
+    },
+    {
+      "sha256": "88A61273BED1D40D0842D6E620FCA72D9AEBD7F0FCFA3CF69BAF954E002DA8D8",
+      "path": "搜打撤\\game\\src\\ui\\battle-hud-info.js"
+    },
+    {
+      "sha256": "C037A5BEF0FD549DF99636B45249F03F27829B42954179BF8A9DA0E2B5CC7DFF",
+      "path": "搜打撤\\game\\src\\ui\\battle-menu-icons.js"
+    },
+    {
+      "sha256": "F2C68403F7BFC83FB17790783BC5D4C25A5707C774E109C2F7282AF78FA98AC4",
+      "path": "搜打撤\\game\\src\\ui\\beginner-guide-diagrams.js"
+    },
+    {
+      "sha256": "B18EDB0E4EAC2BEF94894760CE12E8DEE424DBFC11DB3F5254F384C735758B61",
+      "path": "搜打撤\\game\\src\\ui\\beginner-guide.js"
+    },
+    {
+      "sha256": "63E7A22D9B47878498A57E75A6FF2F555B374CE5E490BBD6D8727B3A587B7675",
+      "path": "搜打撤\\game\\src\\ui\\camp-entry.js"
+    },
+    {
+      "sha256": "483B7CC2371B4159536193F4E95A43BC1D875EA04237B97D8780D7902D87E52B",
+      "path": "搜打撤\\game\\src\\ui\\card-browser-state.js"
+    },
+    {
+      "sha256": "FE1A140B5EA132F7AC0F9DDBF3F8F1714F1F9719EF9B0B7C6699EBAABB458A9D",
+      "path": "搜打撤\\game\\src\\ui\\card-browser.js"
+    },
+    {
+      "sha256": "312E425D51CCB40DCBD7AECA8E2EF56102F5AFDB7D1143DAE0A110AAFE349554",
+      "path": "搜打撤\\game\\src\\ui\\card-result-feedback.js"
+    },
+    {
+      "sha256": "946E8F07759D76D8F4E25F349D851E7D3B1DBF0E93EDB30F3F554CE81D1A2673",
+      "path": "搜打撤\\game\\src\\ui\\card-state-motion.js"
+    },
+    {
+      "sha256": "AE109D0101A04DBB323A65BC71735CA30D2E01C7AFA8E23436345ECB15722BB5",
+      "path": "搜打撤\\game\\src\\ui\\card-tip-groups.js"
+    },
+    {
+      "sha256": "12EDAB3F251422BC592D23D5246D39665A354593AFE6E460BC66027DD5B20F31",
+      "path": "搜打撤\\game\\src\\ui\\card-zoom-content.js"
+    },
+    {
+      "sha256": "F8A40E51978702A8F2B1CF395BAFD1081208480460DAAB2252E28C45BE72EE0B",
+      "path": "搜打撤\\game\\src\\ui\\card-zoom-controller.js"
+    },
+    {
+      "sha256": "9EC9F518B740694A1A26A3A8DB758EF4DC772B80CD8280FF8046EFB9CFDFA0E4",
+      "path": "搜打撤\\game\\src\\ui\\card-zoom-photo-source.js"
+    },
+    {
+      "sha256": "0C9B1BDA408FAF017692009CC5811D9F3069C3D1414F55F122D7305E803BA74E",
+      "path": "搜打撤\\game\\src\\ui\\character-idle.js"
+    },
+    {
+      "sha256": "7D72AA15F10A2CEA7FA8BB396058A3EDFCCFE5437BE4A2C20BA25779A51503DE",
+      "path": "搜打撤\\game\\src\\ui\\character-view-motion.js"
+    },
+    {
+      "sha256": "EF62CEF740D1A51023FFA1F1ED56EDF1191576D3DC11D8567D9B8C423E32ABA2",
+      "path": "搜打撤\\game\\src\\ui\\chest-reward-overview.js"
+    },
+    {
+      "sha256": "FB97F4BF9594E708EDB9E315704D24A1F54ACA452CE079582646077439A3DA22",
+      "path": "搜打撤\\game\\src\\ui\\cinematic-profiles.js"
+    },
+    {
+      "sha256": "139077D8FE0C3BE7BED252F0542258748DA84979442486F1BD4F94B38AAC13F5",
+      "path": "搜打撤\\game\\src\\ui\\cinematics.js"
+    },
+    {
+      "sha256": "6060BAE086FB9302005142819A48C2276783E50847400EFAC0734D049737421D",
+      "path": "搜打撤\\game\\src\\ui\\collection-chrome.js"
+    },
+    {
+      "sha256": "310764B8A9444CEF35331EEB9EF81F5FEDE503FE8366E7609D9E0AA6F98A45C1",
+      "path": "搜打撤\\game\\src\\ui\\collection-search.js"
+    },
+    {
+      "sha256": "7BDF6FAC5FC34CA48408BD11932EDFB5C09B8575C6D0370BB9FDD3A049409B9B",
+      "path": "搜打撤\\game\\src\\ui\\collection-view-art.js"
+    },
+    {
+      "sha256": "B81084ED34EF3A3C000CCB62F219F6B8398A86F24B60E3D7463F93199702D5DC",
+      "path": "搜打撤\\game\\src\\ui\\collection-view.js"
+    },
+    {
+      "sha256": "9D51674CB6A3B01E5A2805BCDD0B6BC8585BBDA5548FC17878E1BF39F3D3374B",
+      "path": "搜打撤\\game\\src\\ui\\comm-feed.js"
+    },
+    {
+      "sha256": "DEC635E039A115B35A4492EDC72282FAF751DBA69B85F426554B6D11A66A9E74",
+      "path": "搜打撤\\game\\src\\ui\\confirm-dialog.js"
+    },
+    {
+      "sha256": "2497D39F1A48C774E3FDF1FFEA35D9F1489AFA406617D7FA11B3F6F6C84E6E48",
+      "path": "搜打撤\\game\\src\\ui\\cover-context.js"
+    },
+    {
+      "sha256": "095EAD53151A98BE5155C8D03235D67ACA42F675D19520460061AF258E11AD0D",
+      "path": "搜打撤\\game\\src\\ui\\decision-summary.js"
+    },
+    {
+      "sha256": "A99131BE15FE0C9ED8B85DA9D08305EBE6495CDB53A3A5BDBD50D0782EB51278",
+      "path": "搜打撤\\game\\src\\ui\\departure-cinematic.js"
+    },
+    {
+      "sha256": "9A86345E9FE3931676545DBAB6069355F76ED1DAAB3AA7A835FE5B2A56706F80",
+      "path": "搜打撤\\game\\src\\ui\\departure-transition.js"
+    },
+    {
+      "sha256": "4689DD5C3FBDA39030AD0B24F05B84F2DB7B3DFFF493C68A7CA9C58B5FBBFA4D",
+      "path": "搜打撤\\game\\src\\ui\\dialog-surface.js"
+    },
+    {
+      "sha256": "31A097139EE2FFAE15221C4E498238541DD8582E7D4216A8FE549381DB992976",
+      "path": "搜打撤\\game\\src\\ui\\discovery-selection.js"
+    },
+    {
+      "sha256": "8AAB7B4672D8C3B7BDED97AD32272219E683C1868C7B227351A8703E3F5F3BEF",
+      "path": "搜打撤\\game\\src\\ui\\emergency-exit-view.js"
+    },
+    {
+      "sha256": "B19FA534686E9C79D0B2FD91AD869AF8ADA01DFDA8EE6C4184756463B6F95C26",
+      "path": "搜打撤\\game\\src\\ui\\encounter-presentation.js"
+    },
+    {
+      "sha256": "CEC92B465917A499088BA2FC674DD053AF46ABECDD0DC98941404750E34AAF2A",
+      "path": "搜打撤\\game\\src\\ui\\end-turn-hold.js"
+    },
+    {
+      "sha256": "5AB35D4621969742809302645EABD5CCD1D70B52A68FD5AB2FECC9B04557E78A",
+      "path": "搜打撤\\game\\src\\ui\\equipment-info.js"
+    },
+    {
+      "sha256": "04540BCAE00A6E50F72E64786F1C74CA5C2FC1900CCC6E45DE91887182DE7A88",
+      "path": "搜打撤\\game\\src\\ui\\event-choice-selection.js"
+    },
+    {
+      "sha256": "FBB726973A2A711F73221AB2EB2D5DCA044B1C00ECD79A10261C7A76E1E487F0",
+      "path": "搜打撤\\game\\src\\ui\\event-dice-visual.js"
+    },
+    {
+      "sha256": "D50A669CB7C2ED6E33493C6CE478615839FC29E5B42CC6250C58E06BFC4E4D98",
+      "path": "搜打撤\\game\\src\\ui\\event-dice.js"
+    },
+    {
+      "sha256": "1C9EC4488A0F55C631A5ADF726EF4B0FE2A6DEA88B6613A4CDAA00C5E1A9A506",
+      "path": "搜打撤\\game\\src\\ui\\event-option-state.js"
+    },
+    {
+      "sha256": "996E2DE502674B5F0AEF87911AF7127703552BCBEF7DC7A1EB5F65F771054D29",
+      "path": "搜打撤\\game\\src\\ui\\event-recode-result.js"
+    },
+    {
+      "sha256": "B4B9C536D19F9E4DF64192FAEE22DFE32E13023340DAA7BEA730327ECE1ADACE",
+      "path": "搜打撤\\game\\src\\ui\\event-signal-puzzle.js"
+    },
+    {
+      "sha256": "B4721D70C51D25A3737BA2AEA87DCAA9E189B914E590C97EDC22960EB227344F",
+      "path": "搜打撤\\game\\src\\ui\\expedition-feedback.js"
+    },
+    {
+      "sha256": "10B9FCF20E77653E506895BBB49031FED31DD4C42E823DB096ADC6A9BF1AB0CF",
+      "path": "搜打撤\\game\\src\\ui\\extraction-rewards-view.js"
+    },
+    {
+      "sha256": "217F91B8A7AE724FD8008E825C472E88D8C5962C629F0F5EB52FCBFB0894EDD1",
+      "path": "搜打撤\\game\\src\\ui\\extraction-stash-update.js"
+    },
+    {
+      "sha256": "A03B36AFC583C8B8E6C977612CA6D30F65BF36756D6D658C2342E43902C9AD79",
+      "path": "搜打撤\\game\\src\\ui\\feedback-theme.js"
+    },
+    {
+      "sha256": "DA6F9EF8C50031A560AC88BF4B56B41013248167FB034D94036361D9C96AF865",
+      "path": "搜打撤\\game\\src\\ui\\feedback.local.js"
+    },
+    {
+      "sha256": "99026739C707141AE599E91E95FEF90FE2FD8FB239C60ADE43E0B1EF4A734DB0",
+      "path": "搜打撤\\game\\src\\ui\\fire-rest-feedback.js"
+    },
+    {
+      "sha256": "D48C9597925299BB585B1D83E23DE02C54C661DA8F63A41A1DA9EB63136AC9F7",
+      "path": "搜打撤\\game\\src\\ui\\fire-rest-view.js"
+    },
+    {
+      "sha256": "99EA84A90D0BFF550A1C46C41FEF8EFF4FB5CAEBFF5E1DFD434DCC0FFC465298",
+      "path": "搜打撤\\game\\src\\ui\\game-map-controls.js"
+    },
+    {
+      "sha256": "45696C507F592BD08367E2BE74409A04F7E73F5C85D41A529336A4AA2DD291CB",
+      "path": "搜打撤\\game\\src\\ui\\game-title-controller.js"
+    },
+    {
+      "sha256": "D238C4097E91A3FBF7E192EAB5408D4306384EEAE2ACEBAB1611D171BF190CE8",
+      "path": "搜打撤\\game\\src\\ui\\game.menu.js"
+    },
+    {
+      "sha256": "EA2A392077690E3A094CE205717C6571CC2958FFC948487BDCB93D3F9FB5F596",
+      "path": "搜打撤\\game\\src\\ui\\game.menu.pages.js"
+    },
+    {
+      "sha256": "72D796624BB54425DAAB904F49EE11EFE8200BA605F0E679EFD954C21F0CC927",
+      "path": "搜打撤\\game\\src\\ui\\general-transition.js"
+    },
+    {
+      "sha256": "57281B9A9C25D8E7C7E7FA233594227F0B2E83C3E4EA4B55A7CEBF29A0CABA3B",
+      "path": "搜打撤\\game\\src\\ui\\home-fx.js"
+    },
+    {
+      "sha256": "60F092EA0F10DF4B5F96F3EA3363D98C65B19E93E820EC7A4567847D8AA06AA5",
+      "path": "搜打撤\\game\\src\\ui\\home-layers.js"
+    },
+    {
+      "sha256": "1E17A3A0F4E4A4F6C6BABA1C0BC6709755B34C147BA7C2FE7970D3C574F2289B",
+      "path": "搜打撤\\game\\src\\ui\\home-linked-interactions.js"
+    },
+    {
+      "sha256": "4D0F2B613C9DE156BE3DFEF115CFBA10CDC64A40A568F82CE9E1E8E6C176B7D5",
+      "path": "搜打撤\\game\\src\\ui\\home-menu-motion.js"
+    },
+    {
+      "sha256": "9DDFCA03ADD6723496C0057F3B2CFD9FF075587FFCF4475B58FE09742CB1008B",
+      "path": "搜打撤\\game\\src\\ui\\hud.js"
+    },
+    {
+      "sha256": "AD43826915539AB343FC388D731CE5B044294991B8CEB3F7519470D5D8B12AA8",
+      "path": "搜打撤\\game\\src\\ui\\illustrated-node.js"
+    },
+    {
+      "sha256": "D6536876D27E967CAF317279E8D9BE584D0827166F4CFD342F97AC93B885354B",
+      "path": "搜打撤\\game\\src\\ui\\input-isolation.js"
+    },
+    {
+      "sha256": "919C1FA974A9D7D12E712315DF749E5FB634D2EF5ED5B7BC5BC2D2083B4A9C3C",
+      "path": "搜打撤\\game\\src\\ui\\interface-motion.js"
+    },
+    {
+      "sha256": "29E2CAB71D09EEB478F77426A062D903735EDA16E51A49ED1196F85D708C8374",
+      "path": "搜打撤\\game\\src\\ui\\inventory-zoom.js"
+    },
+    {
+      "sha256": "E108FD937350673A129BDDB4D13017734BFE630EC8D761EAFD1FD3383B39F147",
+      "path": "搜打撤\\game\\src\\ui\\latest-page-motion.js"
+    },
+    {
+      "sha256": "4BADCEF490A3877CC7A50BD437FDAC810C905C9CBB345031AF680058C3E70315",
+      "path": "搜打撤\\game\\src\\ui\\layer-passage-profiles.js"
+    },
+    {
+      "sha256": "8187ABA1DCA294160EA921F902C5242CA193F83458DA214C3BF7C450253FAC77",
+      "path": "搜打撤\\game\\src\\ui\\list-image-recovery.js"
+    },
+    {
+      "sha256": "5B158A641780BABD8C9EB31139C18581C1472E2934B68E6848409500674F2C9D",
+      "path": "搜打撤\\game\\src\\ui\\lucide-acquisition-icon.js"
+    },
+    {
+      "sha256": "E7516D707E2AE7A3D7BF6EE731002C4AE98C9151F3655EE1A0D744D4916C8955",
+      "path": "搜打撤\\game\\src\\ui\\map-health-hud.js"
+    },
+    {
+      "sha256": "70B8A4E711B517BCB605202F8DD3D6781F649FB873BA4F95C99CD6C4B52574E5",
+      "path": "搜打撤\\game\\src\\ui\\map-passage.js"
+    },
+    {
+      "sha256": "B786E57FE028C387D5642AC8A9A28067229702E16848C605013A0306DC8369AE",
+      "path": "搜打撤\\game\\src\\ui\\menu-data.js"
+    },
+    {
+      "sha256": "E28F27BA6375D0E642408ECD9067342426F077F20606BCFF31F41E1F12DE529B",
+      "path": "搜打撤\\game\\src\\ui\\menu-feedback.js"
+    },
+    {
+      "sha256": "A4ED310200C643713E1125BFBB339CF9D27299F7F238AE631243BC4B4A0DCD69",
+      "path": "搜打撤\\game\\src\\ui\\menu-guide.js"
+    },
+    {
+      "sha256": "990177A9AFAA2F4C2571A13F41E4084A494FAC109E64DD6C134E6CC2E6842DE6",
+      "path": "搜打撤\\game\\src\\ui\\menu-leave.js"
+    },
+    {
+      "sha256": "D8D1C0A70DEF84C61E7F46BFB18EC3A81ADAA479238558FEBE84001A31212408",
+      "path": "搜打撤\\game\\src\\ui\\menu-settings.js"
+    },
+    {
+      "sha256": "25C1E9E00F245AC38C3B6E37446F5B8FBE7CB3A241E4A191C08DC2DEE88346C6",
+      "path": "搜打撤\\game\\src\\ui\\menu-slot-view.js"
+    },
+    {
+      "sha256": "205C9869427BC45A3C7BD34565E2ED8CB9F281694382566D71D1CE7C745E2F7C",
+      "path": "搜打撤\\game\\src\\ui\\menu-slots.js"
+    },
+    {
+      "sha256": "0EE28737BE4C01A45A7D39E67626FD053400F69EE4E880AB8765FA8B5D171174",
+      "path": "搜打撤\\game\\src\\ui\\motion-completion.js"
+    },
+    {
+      "sha256": "857FCF75668A97CA69A713532A63511ED855A9F6043188E3D09DCF274CA16221",
+      "path": "搜打撤\\game\\src\\ui\\motion-presets.js"
+    },
+    {
+      "sha256": "24DB1C42F93A1727291D3C4A40C00FA0B5F43618DCBFE3BD987E36A87E100E27",
+      "path": "搜打撤\\game\\src\\ui\\motion-transitions.js"
+    },
+    {
+      "sha256": "1FCA7C4C9AC259BE7BBF81BD9C9BE5E7AB62D256DB1995E7AE5EEAF87D51AFC4",
+      "path": "搜打撤\\game\\src\\ui\\navigation-motion.js"
+    },
+    {
+      "sha256": "E42B00EE4F7AAC5EEB20DD6E450E2914C5EBB5766CCB71EF7A71480196763EB0",
+      "path": "搜打撤\\game\\src\\ui\\node-decision-view.js"
+    },
+    {
+      "sha256": "E22D43081D8EAA5EB77B6CCF0F644CE6319E8FDBB0CF512435E377417928760B",
+      "path": "搜打撤\\game\\src\\ui\\node-scene-view.js"
+    },
+    {
+      "sha256": "80EE168F7DB31C1B81CBFA990F739CB74336108961C95B21B3783C0234AE7825",
+      "path": "搜打撤\\game\\src\\ui\\operation-notice.js"
+    },
+    {
+      "sha256": "1BAB0A47861E04C0340568B7858E557E6E75F09ABFA159DBBFC1BF9E28A74517",
+      "path": "搜打撤\\game\\src\\ui\\outcome-feedback.js"
+    },
+    {
+      "sha256": "69F1B735C99937584E1138EA376485CDC705704D3AC2949D42E4CD38593BAB4E",
+      "path": "搜打撤\\game\\src\\ui\\overlay-return-state.js"
+    },
+    {
+      "sha256": "0529331813C3EF233EA47EFDA5AA6788327AE94228CE1653BD74C6E815D34382",
+      "path": "搜打撤\\game\\src\\ui\\overlay.js"
+    },
+    {
+      "sha256": "0DED9AF70313732065BF22A54084290A7CC7F2BC5FB2CAA99BCA86C08647F157",
+      "path": "搜打撤\\game\\src\\ui\\page-entry-cancellation.js"
+    },
+    {
+      "sha256": "F4CDEB61257B64E3CFD310845D7977E925D0DD9A7DE5C901808EC5984F3EB537",
+      "path": "搜打撤\\game\\src\\ui\\page-loading.js"
+    },
+    {
+      "sha256": "D8495BF4625BC560DB06A0E8A7144C9413DBE216D7598101E8DBE8803F4C3B20",
+      "path": "搜打撤\\game\\src\\ui\\page-motion-profiles.js"
+    },
+    {
+      "sha256": "D4A56DCDDC4571F1A778F3473BC81D3A7D7520D2C70969E835AF5EFAA73E85C0",
+      "path": "搜打撤\\game\\src\\ui\\page-surface-lifetime.js"
+    },
+    {
+      "sha256": "184DE45EAB835FD9AA170212159A9E504E6C035CC50D9205F74E248F65DAFC37",
+      "path": "搜打撤\\game\\src\\ui\\page-visual-readiness-sharing.js"
+    },
+    {
+      "sha256": "9EAB50FF6C24C68463EA66385B5BD30D466941107720F32CEB96A57C0F6254AE",
+      "path": "搜打撤\\game\\src\\ui\\page-visual-ready.js"
+    },
+    {
+      "sha256": "0D305E3FC6663CF5B3D899064D948D3B37B813A541E78F9BFF6D7FF8FCA76CEA",
+      "path": "搜打撤\\game\\src\\ui\\partner-interaction.js"
+    },
+    {
+      "sha256": "FC9AFD76C425BC7DE38C77B6DB821F9D50EE3E9E5C6B8251BD3E8DDC91C21A69",
+      "path": "搜打撤\\game\\src\\ui\\performance-settings.js"
+    },
+    {
+      "sha256": "D8F8FB6A9D675A5478343DF0550B092D1CC4851E71BB094D3FC54BB686BF0737",
+      "path": "搜打撤\\game\\src\\ui\\quick-nav.js"
+    },
+    {
+      "sha256": "F33CEF9F756B69C8ACC38B9FD39675DFAEC5A6964A51418AEB9877981BDFBBE8",
+      "path": "搜打撤\\game\\src\\ui\\rarity-reveal.js"
+    },
+    {
+      "sha256": "CE16D462FF55169EC17B3D9380DD2CC4C651426E83FA28297A48DCCF342D67EB",
+      "path": "搜打撤\\game\\src\\ui\\region-transition.js"
+    },
+    {
+      "sha256": "DF06881C5F68C0A2AB02632E51912FB63F143B175DEF55A837701A0E1F634A0B",
+      "path": "搜打撤\\game\\src\\ui\\reward-acquisition-motion.js"
+    },
+    {
+      "sha256": "B54288BDD2B83B6C00A96F17F7C421E6E22755A54CDC431D841E045486274AD2",
+      "path": "搜打撤\\game\\src\\ui\\reward-capacity-organizer.js"
+    },
+    {
+      "sha256": "4809CC164E23209647AC6A55254250884A2AAFB417B694C48AF135CBD15DF0B5",
+      "path": "搜打撤\\game\\src\\ui\\reward-card-feedback.js"
+    },
+    {
+      "sha256": "143A5072221E80CFAF3CBD30F6259E714B34F48994C3AE88FF16E1D57E1E556A",
+      "path": "搜打撤\\game\\src\\ui\\reward-interaction.js"
+    },
+    {
+      "sha256": "E0153A5EEE1A255E5E4900B473F4DA38DC95EEA4C7ECF71C39F7993C64ED32BD",
+      "path": "搜打撤\\game\\src\\ui\\reward-picker-heading.js"
+    },
+    {
+      "sha256": "51ECB9A8BBEDC8751AE64ADC8E555326232A22E596085A359B2D8CA109EEFCA3",
+      "path": "搜打撤\\game\\src\\ui\\reward-scene-view.js"
+    },
+    {
+      "sha256": "CC0AB11D338B6421D2E139416E5979FA1280D59C53B94622802535DC2B0EF088",
+      "path": "搜打撤\\game\\src\\ui\\reward-state.js"
+    },
+    {
+      "sha256": "34EBE9B8B6178EC6C7C6E4E4D430C7166B48FED2C87CC7120EF18AE471FACAFF",
+      "path": "搜打撤\\game\\src\\ui\\room-actions.js"
+    },
+    {
+      "sha256": "6CDA424E29D98D2A518D56FD83C2BCEBEDED27E407CAFEDC895E943AB621D8E2",
+      "path": "搜打撤\\game\\src\\ui\\room-footer.js"
+    },
+    {
+      "sha256": "782A2FAB4D8B9B76EADCE992F74755778C2C890562561E0978B0D1FF560AFAEB",
+      "path": "搜打撤\\game\\src\\ui\\route-overlay.js"
+    },
+    {
+      "sha256": "08FA5BE93D95F0443A04F7A23103F5EE7F4994207302D7C9B5004A8A9E680706",
+      "path": "搜打撤\\game\\src\\ui\\run-memento-view.js"
+    },
+    {
+      "sha256": "03ECD9F1672F166B5D0914C82AA9383607A0177DE30427F3447C32BECC11092E",
+      "path": "搜打撤\\game\\src\\ui\\run-top-bar.js"
+    },
+    {
+      "sha256": "8BD37A97035429E3C46E3EF5C8FD4012CC2889211DC312C334C8767852F1CAA9",
+      "path": "搜打撤\\game\\src\\ui\\save-management.js"
+    },
+    {
+      "sha256": "552BFDDC0671DDD8E4EF104E9F5D9E29F94D3F197869EAA89E1E48AC4007D1A3",
+      "path": "搜打撤\\game\\src\\ui\\screen-owner.js"
+    },
+    {
+      "sha256": "84C014835145C9EB5F9BAF1AEC99DB07F48F391DC29C82BC6175004A2D87626C",
+      "path": "搜打撤\\game\\src\\ui\\selection-state-motion.js"
+    },
+    {
+      "sha256": "3541C1F986D78CA8EE4F5ADE1E5A0825083BED64915B6C572245A05221667322",
+      "path": "搜打撤\\game\\src\\ui\\settings-audio.js"
+    },
+    {
+      "sha256": "7881E729164224548B332429C70472B09AB9A896AFE8277513B3D4B01731F514",
+      "path": "搜打撤\\game\\src\\ui\\settings-battle-restart.js"
+    },
+    {
+      "sha256": "D00EE46ED1CE0C757F221CA9D99948F33588DBE7CB57F9F0858A748CA226839C",
+      "path": "搜打撤\\game\\src\\ui\\settings-input.js"
+    },
+    {
+      "sha256": "53382BC468F9F40E41994A77FA9F331578CAFAF75B9FFAF92523CA1195E454EA",
+      "path": "搜打撤\\game\\src\\ui\\settings-navigation.js"
+    },
+    {
+      "sha256": "4EBA53111674E4B46FF72F1D8347EA1A3B443C7ED027DC182BC96D5846DBCD26",
+      "path": "搜打撤\\game\\src\\ui\\settlement-report.js"
+    },
+    {
+      "sha256": "91B9419C36E40EA3677D9A1285D9C6F31BEF62E391A77086525DBDF9B298717D",
+      "path": "搜打撤\\game\\src\\ui\\silent-node-film.js"
+    },
+    {
+      "sha256": "0BF838627ED112F4590F8D99D033FA75CA9FFA38757EF2081FB0BDBDD1ED9CD8",
+      "path": "搜打撤\\game\\src\\ui\\slot-emblems.js"
+    },
+    {
+      "sha256": "E9D1ED97C2CB0EAA16ACF91BDAF583038AAEF704C416D127DF81B841D373395E",
+      "path": "搜打撤\\game\\src\\ui\\startup-transition.js"
+    },
+    {
+      "sha256": "A7C19A427A3B77EADEA351833E875AF503388A49C1C821DD69C67CC4F3A74F92",
+      "path": "搜打撤\\game\\src\\ui\\status-icons.js"
+    },
+    {
+      "sha256": "8C78617CE7CFFC3E002C493CA5F122354A66CAF2FC157BC1CA91A6E6744B06DC",
+      "path": "搜打撤\\game\\src\\ui\\surface-activity.js"
+    },
+    {
+      "sha256": "A74A3963F57721DE8EE88C5584F3CF154F652DC46012859A644CBFCC45AB0738",
+      "path": "搜打撤\\game\\src\\ui\\surface-motion.js"
+    },
+    {
+      "sha256": "D18F78BD8417EBEFCEF243920B32727B4026FE01D04FBF2F28120F143A182EA2",
+      "path": "搜打撤\\game\\src\\ui\\target-motion.js"
+    },
+    {
+      "sha256": "DE5F94A8495A2210DBBFD6FA2334FB2814C2FD8F7F48F0E8B60F41EB41F8CB85",
+      "path": "搜打撤\\game\\src\\ui\\term-definitions.js"
+    },
+    {
+      "sha256": "2199329B0EFAEC8A2B74DA961322256253637609BC197211D60116845EC105A4",
+      "path": "搜打撤\\game\\src\\ui\\term-tip-policy.js"
+    },
+    {
+      "sha256": "02E8D1024D243CA970E860CF9C4526119A1D3EB7D67B771466EB67DAFFDD2B44",
+      "path": "搜打撤\\game\\src\\ui\\term-tips.js"
+    },
+    {
+      "sha256": "F79CA9507A6869E9A988F780FCB2242448E3BA86EEC041C1701E987D27C0470F",
+      "path": "搜打撤\\game\\src\\ui\\term-tips.runtime.js"
+    },
+    {
+      "sha256": "5DC6CBCC72106C6935C8A0C2E7A1C9C2F73BFCDFE8E34067B0C37C12D074C47C",
+      "path": "搜打撤\\game\\src\\ui\\terminal-settlement.js"
+    },
+    {
+      "sha256": "93B238BF0D726EB6C37E3803125C7F735DF8A2D0AD6BEE316A2AA84C7D48ECE5",
+      "path": "搜打撤\\game\\src\\ui\\title-credits.js"
+    },
+    {
+      "sha256": "825C8FC8D9B3743A8D52F9FF5FCF53D8116AD0530DECB9DAA469698D93DA1195",
+      "path": "搜打撤\\game\\src\\ui\\title-wallpaper.js"
+    },
+    {
+      "sha256": "A65791EC4362FBF5E376C7B2DFBDFF3F1F23B5D6C9FEF53B339CE45EE4295752",
+      "path": "搜打撤\\game\\src\\ui\\transition-art.js"
+    },
+    {
+      "sha256": "37B904A7802B6EB20A43F05374CA601483627A34756D7614A801EDD646BE14ED",
+      "path": "搜打撤\\game\\src\\ui\\transition-diagnostic-policy.js"
+    },
+    {
+      "sha256": "3F38A0B051B35D8DF6E8E934A3023A4F612BA05E7951BE710E548C92D355F1F5",
+      "path": "搜打撤\\game\\src\\ui\\transition-handoff.js"
+    },
+    {
+      "sha256": "7240B2827CC91005FBC2CC3E0FA7E23C18FE00C9EA3063E5D99DBA9C7F9D1348",
+      "path": "搜打撤\\game\\src\\ui\\transition-heading.js"
+    },
+    {
+      "sha256": "2A70BDFADDBB69ACBCE000662EB7C4F6D8B6E0569C6FDAD0C69FB770BB975A78",
+      "path": "搜打撤\\game\\src\\ui\\transition-preparation.js"
+    },
+    {
+      "sha256": "8757736C20E371B6B70E496902544AB36057D21A3A410A1EEE139C741AE2F4B6",
+      "path": "搜打撤\\game\\src\\ui\\transitions-director.js"
+    },
+    {
+      "sha256": "A025C37AE7BDA843BF83B51EE5B5A923F7B8435D389D701DB72246CBB6883AF4",
+      "path": "搜打撤\\game\\src\\ui\\ui-decision.js"
+    },
+    {
+      "sha256": "35863A8B9879A048AF9B360BF5AED471CEE6224744444A2F7BCBCCF71AF6CBCB",
+      "path": "搜打撤\\game\\src\\ui\\ui-disclosure.js"
+    },
+    {
+      "sha256": "BC07CBF42305E549DEDE660CC8ABC0646EE579C3ECBF4E6F8AFA571CFA92C2BC",
+      "path": "搜打撤\\game\\src\\ui\\ui-scale.js"
+    },
+    {
+      "sha256": "DFB18B58761E07DFAF65E24ACF46460DD5A56125C0596414A34A5585B952F093",
+      "path": "搜打撤\\game\\src\\ui\\ui.js"
+    },
+    {
+      "sha256": "32117836FAF5C1C95E598502C192E8A899088A592EB854CEF7A1DBC123F23366",
+      "path": "搜打撤\\game\\src\\ui\\view-children-sync.js"
+    },
+    {
+      "sha256": "456A67940E06592CFEAD497A8B7C5DE02F64397333CA0FF9276632E11E80755E",
+      "path": "搜打撤\\game\\src\\ui\\visual-image-preparation.js"
+    },
+    {
+      "sha256": "25987112A48881C93E0F1C4E28D4A11775B0157E374ACF12E961C974A408F74B",
+      "path": "搜打撤\\game\\src\\ui\\visual-resource-recovery.js"
+    }
+  ],
+  "coreSnapshot": [
+    {
+      "sha256": "EFC8B15298352114B134372D6E4D40DE3244DA93ADB7BD2E01F0E3C106701A21",
+      "path": "Cards.cs"
+    },
+    {
+      "sha256": "4DF02FA3C5B0279AE7C7D3543BAFBA6E0B7097786B7DA4B3293891BA17FB7470",
+      "path": "CardsExtras.cs"
+    },
+    {
+      "sha256": "F7F33FDA167B7275BCCA4D26E25F0A6345087E0CC3C7F84E1DD3EDEBFAE195A6",
+      "path": "CharacterTable.cs"
+    },
+    {
+      "sha256": "0B09603D4EC67651801B5B85ED925144F14BB7A7A58A0E89D0A8E2F68A97E87B",
+      "path": "ChestLoot.cs"
+    },
+    {
+      "sha256": "32DD0E1558D1FB62FDA29B88C94E85C74E1FE02D63338268D726CECA0B1FD242",
+      "path": "CombatResolver.cs"
+    },
+    {
+      "sha256": "287C8D99BC7D852EF8273E921867204BC2E0B319F17C1B43C329EA08A938B800",
+      "path": "CurrentMapData.cs"
+    },
+    {
+      "sha256": "A7E4BE390CB6A929C5655627B7D6E4FDE20A6342499037EF8E4A2BF2E5E9C7ED",
+      "path": "GameRules.cs"
+    },
+    {
+      "sha256": "70799C15F470491A86ADC5E3944F8A288AEA6362274F328DAC4FC3459987FDE5",
+      "path": "KoiPondModel.cs"
+    },
+    {
+      "sha256": "1C49B70174F492124F1A88CB9C08569B61D8CFD705F9EAA0754BD15DC1C6A3E3",
+      "path": "LayeredMapGenerator.cs"
+    },
+    {
+      "sha256": "0CF679AFA6CDE6096338AC1FC18A57AB7EAFC58A86B9F5E2A4035CA9A403EBA9",
+      "path": "MapModel.cs"
+    },
+    {
+      "sha256": "716E80ECDEE107982F725E4768964575911D07B8FF7AC37DA2998FC866F07CD1",
+      "path": "RewardReceipt.cs"
+    },
+    {
+      "sha256": "E81D33B2CB692DF9070696B73D53EB5119A70BBB870E2918A30B9E442C1F9E1A",
+      "path": "Rng.cs"
+    },
+    {
+      "sha256": "BAA66CA2F0119F7BFD6C5DF617BA3F77D23C64C3A94340D1F86751EF65FDCFCE",
+      "path": "RunState.cs"
+    },
+    {
+      "sha256": "5088CA7446567FF33BBCF18362BD356AF9A3F7E19ECC26BC9EE53EFD6087AD4D",
+      "path": "ShopOfferReceipt.cs"
+    },
+    {
+      "sha256": "7750EA6CC6CED409F46C22525562B94AFE5B402A0E63316DC8B123FF9CCD575A",
+      "path": "Battle\\BattleActorPresentation.cs"
+    },
+    {
+      "sha256": "2BB817C0ACD3AF5024034E4C12C3ECDDBEFE478F075A103E384650FC08723C47",
+      "path": "Battle\\BattleHandTransforms.cs"
+    },
+    {
+      "sha256": "8ECAB8FC3770A22210F5CB35E28A54262006440B4D34841227EEBA3C1E5924BA",
+      "path": "Battle\\BattleItems.cs"
+    },
+    {
+      "sha256": "621F9AEB841AD67FC735B97610D1D4AC2918204314493C4679D9B46291B83518",
+      "path": "Battle\\BattlePlayerEffects.cs"
+    },
+    {
+      "sha256": "3CB6CBD98DABC5631140902A86C961C9AC4E471B55F6F9C10D108B28D5438CFE",
+      "path": "Battle\\BattleRestartCheckpoint.cs"
+    },
+    {
+      "sha256": "00F8C9EB46A020300AEEC1F1C888873219CABD2D901D7A837304E5C7A476CF16",
+      "path": "Battle\\BattleRules.cs"
+    },
+    {
+      "sha256": "F58AD813A9308D321D8C6C4A8B83D7B0A2B148EF622D9EED8D550E89D01DB8DB",
+      "path": "Battle\\BattleSession.cs"
+    },
+    {
+      "sha256": "E92CA71430FF55A791C4E789E4CE2ED2425C3D237804642EB879B7CAF1AB010D",
+      "path": "Battle\\BattleSummary.cs"
+    },
+    {
+      "sha256": "078203F3CE41621D5A8B6587B8D2CFC3B5A7DB9815368CD41C75058646A6EA90",
+      "path": "Battle\\BattleTurnForecast.cs"
+    },
+    {
+      "sha256": "A3ADA0917AF87DE1711DAB489F9B53A4533324ED42E57D602DB9BCDDCF89A5D5",
+      "path": "Battle\\BuiltinCardIdentities.cs"
+    },
+    {
+      "sha256": "A3073FBF236A1A3BB2297CCD12B7C0FDE24AD6FAF67316438D6EC9B81F154AF5",
+      "path": "Battle\\CurrentBattlePools.cs"
+    },
+    {
+      "sha256": "644A8F0928C831A50A2B935042ADE0553E5D0958A8D113AEFA7545445C864A0A",
+      "path": "Battle\\CurrentBossMechanics.cs"
+    },
+    {
+      "sha256": "B665975E94A231537017509F16798E585AA6C6733738B623E65DB7CAA69F3179",
+      "path": "Battle\\DeckBottomDiscovery.cs"
+    },
+    {
+      "sha256": "0AA9473B6A1C6FE7AEAE6256824F352006132E91A8AFCF95B9F505798A516C51",
+      "path": "Battle\\DeckOps.cs"
+    },
+    {
+      "sha256": "69EF97A86D2870C8267069EE5E1ED2BBF6FF19D5E24000BEF1F88819E519D632",
+      "path": "Battle\\EffectExecutor.cs"
+    },
+    {
+      "sha256": "9F7DEEAD674895E0FD2F501522B4BFC698FA269BA4C1768214D2E51CC54175FB",
+      "path": "Battle\\RuleValue.cs"
+    },
+    {
+      "sha256": "50847FC3E255097387F0CE0B2ABB4029E29CFBAE9E08A2317C95BB415CBD9E73",
+      "path": "Battle\\StructuredRules.cs"
+    },
+    {
+      "sha256": "D2DEA28342400841F80BCB74DE47D290F501692BBC94045DE27A046B1EB00F1E",
+      "path": "Data\\CardDatabase.cs"
+    },
+    {
+      "sha256": "EFE29E8E59F010B15285D65C7A4D747F096B2E450CA9909ED9C445B35F3ED740",
+      "path": "Data\\CurrentBalanceData.cs"
+    },
+    {
+      "sha256": "7DFD4B8993FA3B7BC85ACEC47195D69D819173C1A96EB89D9FD841E0F58DEC2F",
+      "path": "Data\\CurrentChestData.cs"
+    },
+    {
+      "sha256": "935646F0A1F0D2502F58747420ABD62D4908C78E51D5E70610F99C757F785579",
+      "path": "Data\\EventDatabase.cs"
+    },
+    {
+      "sha256": "0722BE487263CC278EE3A68306C301ECF374358E3E64D92FF5AE20500AF64136",
+      "path": "Data\\EventProgress.cs"
+    },
+    {
+      "sha256": "9CA1EEDAE3DD26063C9C1D5E1F6DA3F966532A476AF8C71B1FB30FE9A43B680F",
+      "path": "Data\\SceneCopy.cs"
+    }
+  ]
+}

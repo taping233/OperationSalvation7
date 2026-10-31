@@ -1,0 +1,35 @@
+{
+  "production": {
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSecondaryViews.cs": "14e5c10437f0eb568fbc2de067200213cf4215d6e4973e2da5c5eb332502c567",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattlePileData.cs": "ced4c29505177afce68e7ce00fcc2999dbe748498bbd2e33c8c5f8fef0a74eea",
+    "Assets/Scripts/Sdt.UI/Screens/Run/DepartureElements.cs": "668183293fc7626c7526bd3cf537e56f95f3df49f8fc4b2b1fd61295d79242a4",
+    "Assets/Scripts/Sdt.UI/Kit/UiStack.cs": "1edab12f9672e4c4d056155da92f02d6b196ed18ab0075e72f6d681408957642",
+    "Assets/Editor/CurrentBattlePileValidation.cs": "ec4e93ae9cc746f39902b16866a588fdeaffb142d8286c2b4dc5d4037c91af22",
+    "Assets/Scripts/Sdt.UI/Screens/Run/RunUi.cs": "fdca0355196b1c94c1194d672053b68aca71946e32db56494da754fd62427ec3",
+    "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs": "bd97bfbe7058d2c0ffb0290d00c42b26a7890d71846a1cafe026743b5049d93e"
+  },
+  "source": {
+    "game/src/battle/view/battle.pile-view.js": "fc3da1c0f1209f1931b3299dee7b4942ead6e325251f8bfafb7cc554e001d9c3",
+    "game/src/battle/view/battle.decision-shell.js": "74a3157528ee7b5362cdc4de86c878adc2ed56cef5cf3a3ff1b3a22b3c0f4359",
+    "game/src/battle/view/battle.overlays.js": "4fe4294abfe76c446b57c6e755c235645444c02ba8693bca0354a438496ad3bb",
+    "game/css/battle-pile-view.css": "1dc6bb6b92e9a4b2764a7842f1b9acd404044b84bbbdeb17b573fa3f8eeb34af",
+    "game/src/battle/bag/battle.bag.domain.js": "fa9a8beb099c8b92e5f1976c291fcf1577e83b28b70b5805cd088ec5aa90e8c3",
+    "game/src/battle/bag/battle.slam-skill.js": "7fd77ac5c16fefa8f436a942e1998ad421a31b5103047ebfb28d7d73439a8df1",
+    "game/css/cards.css": "aa23fd9148c4c6fd77aae6fa448f085cec4a7b9f07d5bd4653b710582fb1dd11",
+    "game/css/winter.css": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9",
+    "game/css/battle-secondary-overlay.css": "df6c4d0ccc38b9f24a06eaa678529beb53727e55bd65e2d73e6ccbc8dad62a6a",
+    "game/css/expedition-library.css": "db8cac5f7f3a1656ac66a93bafbce6bb988b49dd91237c8db7ac61a89aba0ac8",
+    "game/css/review-ui.css": "911bd4c7a4d50faeefe08ab3babdea46f5c91dbf18accb6e68ccb465590d9fc9",
+    "game/src/ui/card-zoom-controller.js": "f8a40e51978702a8f2b1cf395bafd1081208480460daab2252e28c45be72ee0b",
+    "game/src/ui/hud.js": "9ddfca03add6723496c0057f3b2cfd9ff075587ffcf4475b58fe09742cb1008b",
+    "game/src/ui/run-top-bar.css": "11449375450eb0d2a61acf1cdfa16b20357ecf226cbd7a861f99b8ba3f127373"
+  },
+  "compile": "final private compile 0 errors / 10 existing warnings; Editor probe 0 errors / 4 existing OffscreenCapture warnings; root native pending",
+  "dataChecks": 10,
+  "nativeRun": false,
+  "foreground": false,
+  "pending": [
+    "native button/reader browse/scroll/focus and backdrop material/alpha restoration",
+    "actual player frame review"
+  ]
+}

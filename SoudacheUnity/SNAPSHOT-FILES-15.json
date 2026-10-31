@@ -1,0 +1,2502 @@
+[
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Res/UnitFrameCatalog.cs",
+    "bytes": 946,
+    "sha256": "0f1f4a96e9fe4b022df67559b956162edcde1f48c121a8ad28fa1857c4282d97"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/AtomicJsonFile.cs",
+    "bytes": 1209,
+    "sha256": "827b9ff1c75cf8c1a82148ecdfe0032215b00e85442e3f9f19042f92c9b5db68"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/AudioService.cs",
+    "bytes": 28233,
+    "sha256": "a1c405f2ecedd0654369eb296894d2b2b2cf6d916dcbe7d146066d33d5916576"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/BagItemCommands.cs",
+    "bytes": 7643,
+    "sha256": "960661f4571d9056348e3a7423c9dbff8ff24fe9ff4e63c3c97e0593bd213e4a"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/BaseData.Customization.cs",
+    "bytes": 6501,
+    "sha256": "5686d5e7462b003abd753fa7ef7b1b520dccf3ca4b314f7cd2d53593f37e8be7"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/BaseData.PetsMaterials.cs",
+    "bytes": 5283,
+    "sha256": "706dc1bd80d7aca04d47a62d62c21a8a0a84ff92e2a8d4d8f808332cdcd6e935"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/BaseData.Preparation.cs",
+    "bytes": 10792,
+    "sha256": "f63cd7ae1da24436816eb47ab13b7af12f7f085bbdbfc6e0cdec83fdfda4543c"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/BaseData.Story.cs",
+    "bytes": 6474,
+    "sha256": "b044b5673229b99cf28ce8793c38cda2452ce95bcd096c28e4d592e6892b3173"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/BaseData.SupplyPack.cs",
+    "bytes": 3260,
+    "sha256": "fb3aeec0bbdacdd7c16df2c06d7f768722c7475e35bbd373927a82d659374c16"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/BaseData.cs",
+    "bytes": 23004,
+    "sha256": "e74004853b3a26057ebeb6e19c6673d2f143cd31d05c2cf54c041e9b6d2572d9"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/CardContainerCommands.cs",
+    "bytes": 9637,
+    "sha256": "a77ee6c656911bebeb734e7017d8487803d2321d93f23a58f1079319207c2687"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/CourtyardPreferences.cs",
+    "bytes": 1039,
+    "sha256": "47572bcf9fea5d8188dd4e5ee351b7fc90c908e483c221b09681f37d317d70db"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.Altar.cs",
+    "bytes": 5739,
+    "sha256": "21b4435688fdcc861fb67bb2863070e2d03c45c5847ac3f758e5644d3741c371"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.BattleCheckpoint.cs",
+    "bytes": 2040,
+    "sha256": "9ec3999fd60ed8b91d89d5e04c51c93d1214cec8fddbba7d0cbb0b947d7ecd52"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.Commission.cs",
+    "bytes": 4755,
+    "sha256": "1571f124cd0a0edf771dc023d2a5daf327bd8d834af033f18a8226192497d413"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.Departure.cs",
+    "bytes": 6909,
+    "sha256": "3c45dd0486ee872221fa088c3549065093a786865cf8be0ae049b0a8329dfea8"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.EventRoutes.cs",
+    "bytes": 11186,
+    "sha256": "215ca11fbb4e7524e8d6ec0828d49cf6f28c3d43a7401b87c00e43c41780a690"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.Events.cs",
+    "bytes": 11076,
+    "sha256": "5b419b30dd1a43edac513ee538c5ba09d4c305e5d24c18bba8a2b8c5c99b0dfc"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.Map.cs",
+    "bytes": 11093,
+    "sha256": "b42c73755e89cf56c5bc90efc40d25014c6c3c71d7eb5ed4a12ba1031c653187"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.Persistence.cs",
+    "bytes": 4394,
+    "sha256": "28226746ad67a670a90a5b2e2055f7479c9d3b74b3bb685b3bc84defca2f517a"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.Settlement.cs",
+    "bytes": 7701,
+    "sha256": "ecd1774a5634b26589ee3bf6f4d80aca83190123e327d53b80c072a357174a8d"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/GameRuntime.cs",
+    "bytes": 75685,
+    "sha256": "ffd7aceef25ca0bc5769f7370c87222d2fd9d0d26885e221a6e6d9d279bb7b22"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/MetaProgress.Achievements.cs",
+    "bytes": 2725,
+    "sha256": "a08345817b965554cbbc6592ed2127cb353023ccef0a0014c84fc0f9223a0e6e"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/MetaProgress.Collections.cs",
+    "bytes": 4849,
+    "sha256": "963b9a6cb3fb490ab868e74a5b8121498cec55614c6ed0a57185d2060df07f17"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/MetaProgress.cs",
+    "bytes": 13752,
+    "sha256": "acde820eac60d2e1d6ca87364b858905b1251a9b76b37dddc8968f2e3104f4ee"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/RunEvents.cs",
+    "bytes": 5323,
+    "sha256": "a45bef022c24b2d416b49ddf1045b715774ac4dae0000249f17ffe6a3e5e2483"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/SaveJson.cs",
+    "bytes": 2789,
+    "sha256": "2234c532d5a0ad8beb8bace9e0d5234d120f0988b279740ff69b22b2d93492dc"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.Run/SaveSystem.cs",
+    "bytes": 17813,
+    "sha256": "286ab12bdfc5432458f4b496ed3a83f34197f255b0458574b5694993297f466f"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/App.cs",
+    "bytes": 8918,
+    "sha256": "e8a1181fa3871da9ae7b0ff8060b0b44c3d92dfda3922c7e09650448afd0deea"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/CurrentEndTurnHold.cs",
+    "bytes": 4017,
+    "sha256": "63cf3a627b1ef4c4bb1f77c0c303bc39902d7f42d2914e4fd817804bb647410c"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/CurrentInputBindings.cs",
+    "bytes": 8064,
+    "sha256": "4c9c08bef907b70ee7ea4cf8f46a50c288341d2df814ae98c74c103bb5ffef50"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/CurrentMapTools.cs",
+    "bytes": 10293,
+    "sha256": "b8375cb70d3a0b8c4cdf66cda7ef18ade0e23302c7614f5c8dd962337630b116"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/CurrentRunHudView.cs",
+    "bytes": 4556,
+    "sha256": "4e40830279864762cc58551d3c25a02435042be8713e426aeea638a1567e7502"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/CurrentRunTopBar.cs",
+    "bytes": 8192,
+    "sha256": "8998a86be87a209c37152b7e50332cd571a6d6f1c958fa4460168e1f2656aefb"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/CurrentUiPreferences.cs",
+    "bytes": 3215,
+    "sha256": "b7963e2ba9f132ded67e340e6fa588cf3871eb1d96b54a9048dfe22acd4622a8"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/DesktopRunHud.cs",
+    "bytes": 9833,
+    "sha256": "12b3169c1237cc6dc9ffac6d98ebd0b8643b3dae43ca32b671ef32ea23483e07"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/HelpSystem.cs",
+    "bytes": 4519,
+    "sha256": "96d8f5f93de1ef8c32df40bf97d2d163db0280e8fa7c904acb31c788a3cb8daa"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/InlineIconParser.cs",
+    "bytes": 5320,
+    "sha256": "7df811ec8b159e914d0ace3968853697190c99ec741e666458aa962c532ac82d"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/InlineIconText.cs",
+    "bytes": 7785,
+    "sha256": "d0ba70e5a63e1be7c5f9d42d9f2c720eb5e01e89a3c3898e178e0bbdd2596e5c"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/Theme.cs",
+    "bytes": 5509,
+    "sha256": "2fa4c473a2a2cda59f39e85fdf10fc127178689552b74780500dfc5aabaa62a5"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/Tooltip.cs",
+    "bytes": 3095,
+    "sha256": "2ad5c08914dba872436574943f01118073b9ed5c8dd9c2e8023d8cb9ff7d32a1"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/UIKit.cs",
+    "bytes": 11887,
+    "sha256": "6a376e3afed196d944fa731c1915a04e0aadac3cf362145755f6ed9a92952414"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Kit/UiStack.cs",
+    "bytes": 5489,
+    "sha256": "a8c844130f17dfd83b9dbb5da114b98461df04ee6f5ed37bebe8877d6e554556"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Bag/BagCardDetail.cs",
+    "bytes": 13502,
+    "sha256": "ef1ba987c47a1235550aab63f1691043754ef2eb06a72178023daec688b3a58c"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Bag/BagCurrentCell.cs",
+    "bytes": 8239,
+    "sha256": "1d5b635249243d3ff5c1e89411695d6531a6a050e42045fa3be0af7a847f2e8b"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Bag/BagCurrentGlyph.cs",
+    "bytes": 2328,
+    "sha256": "ba3daebfc9c3f99f4ac3f4d296da3060bbc8cd13ce586a5edae60c6e2192eb76"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Bag/BagCurrentView.cs",
+    "bytes": 14643,
+    "sha256": "ddc44c2b1a16155249fd59e54919692dfb9e2a36f588e4db70b70d8a76e4e3a9"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Bag/BagItemDiscoveryScreen.cs",
+    "bytes": 3284,
+    "sha256": "8a7d245f4cb915422acd05ce4ff9e1e52702f57e72bf307222f5fda653114fc9"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Bag/BagScreen.cs",
+    "bytes": 10915,
+    "sha256": "fe08b01f0529be8e497086d842d265aa2f2782e1febe464aebd9410c7e95c855"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Bag/BossPackCleanup.cs",
+    "bytes": 7926,
+    "sha256": "0f9f2c538fc92d6dc6e6bfc70fb9712bbf0fec0a1f3431738f9818b72be0b896"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Bag/ContainerScreen.cs",
+    "bytes": 8215,
+    "sha256": "7bd78d8a476edd9e3349974b0176c57b667e1871c19e786d6b908c46035571ee"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/AimArrow.cs",
+    "bytes": 5233,
+    "sha256": "761235551f9a8f7f5a0489ee10fe29ecf54c97319b86d5767c33eaaff154bf74"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleActorClock.cs",
+    "bytes": 2552,
+    "sha256": "3688f7d6954947cf7d02df9624602d099a044950e9c12932fdd873bbd63f8421"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleEnemyFrameMotion.cs",
+    "bytes": 3067,
+    "sha256": "2e5f6a24f23e1bedd6d02ca83142459f9a9f3f210bef46c3e0d1a7001bfeffbc"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleEvents.cs",
+    "bytes": 6298,
+    "sha256": "ea3add2d894d1ddfe6d6e90f7e0d2e990e9f15e8f70f899d502f751d39844aa1"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleFx.cs",
+    "bytes": 13396,
+    "sha256": "c5432c5ab226fb673265ce085a0759ffe27567ed0fa27fc5aebd5dbc74473d95"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleItemInputs.cs",
+    "bytes": 3753,
+    "sha256": "a7e597577da67e900d00f849cb98e5d1b0f32b9cb15b7997cf76c0c9f6a4c11b"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattlePortraitProfile.cs",
+    "bytes": 4508,
+    "sha256": "0de6b92747ebfbb133b7948b62ab8b37c75c20f42911f5cf1c2be4f248a3f7be"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+    "bytes": 35650,
+    "sha256": "19a670a80b2b00afe81e42dc975be266f1cf26e8d1156a2bcf7bd44f9e5580a3"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattlePresentationBeats.cs",
+    "bytes": 2307,
+    "sha256": "a1ae06b8669198411b643b48c25a7a7328d64e0f5a220dfa36937fe490b73d58"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattlePresentationQueue.cs",
+    "bytes": 5245,
+    "sha256": "72757666f3a776866fa5fd67cea6d4f4bd9ed38803f768c4bc096d0d050da311"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattlePresentationTiming.cs",
+    "bytes": 1006,
+    "sha256": "7214bf37f08a6634bbc0a547fc9bb83ef2f69ba8f2232c7fbed6a483b61bcade"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleRuleInputs.cs",
+    "bytes": 7920,
+    "sha256": "8a12af11eb9ccb8029387e1dcc79fa4380c5dc8d45134b798fdf36fb4afd5da9"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleScreen.cs",
+    "bytes": 15406,
+    "sha256": "7899cdd48257e8ce8ffd46e3b4c899ceb207c76a715b1047f7deda48bcdba90c"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleSecondaryViews.cs",
+    "bytes": 5206,
+    "sha256": "984970c73fd29523870d0b2e5d01a13bf595db07060055abf818a38d9ba5e9cf"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleSettingsScreen.cs",
+    "bytes": 4014,
+    "sha256": "13157fcef30a4ca401452bc860902c892ed2425f42da4d1cf03907d2b802194e"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleSubpages.cs",
+    "bytes": 15135,
+    "sha256": "0d27508bf6aa44c0104402016739e11d5105281d61b2e3e5eed7d2dfbbccb1e2"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleSurrenderButton.cs",
+    "bytes": 1923,
+    "sha256": "e711094c29ee7dc777691c1b1563b1e788cf8b6bdbfad20937594db345979485"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleUnitFrames.cs",
+    "bytes": 5099,
+    "sha256": "c98c9db9210690bf2166ce6f3b81d789a1cb136bdf2b185242af39c0f36da640"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/BattleWidgets.cs",
+    "bytes": 18046,
+    "sha256": "761b4a5a6aad401f31de41d6305532607ae33a6ea4f6670270fb691f1814288e"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Battle/HandPanel.cs",
+    "bytes": 14400,
+    "sha256": "ffc43bfc7fb7686a388fdf33b299ca56ca4d5c824452c8413ab8fae604f892e3"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/CardBackPickerScreen.cs",
+    "bytes": 2408,
+    "sha256": "55330545334948120ffa548891138df6f50410b85f79a62cbc8f57f866941b29"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/CharacterAppearanceScreen.cs",
+    "bytes": 2518,
+    "sha256": "def56f9f869d25aa102ae354e3bbfced6fd87ef7da6ceec3512b2575fa54204e"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/CollectionConversionScreen.cs",
+    "bytes": 3340,
+    "sha256": "4d40f4ee0bf70b5a86251c23bd060fc6cd9a9c6188f349bf6d02a5fe6ce4984c"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/CourtyardScreen.cs",
+    "bytes": 18774,
+    "sha256": "40a3e894ee8aa3cabd9457561a0a36dc921ced783b615e1b9c0491e9ef2ac573"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/DepartPrepScreen.View.cs",
+    "bytes": 13659,
+    "sha256": "2b48c8835a82239a84cf5f3e4c5d79e4a0dee7ca54571960aa269b7fff7955d0"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/DepartPrepScreen.cs",
+    "bytes": 12195,
+    "sha256": "3681374195098d1bf8fcd3d82fc77f73b67f2e6f5a9de904e1366d152e0cd481"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/DepartureCinematic.cs",
+    "bytes": 3606,
+    "sha256": "44b1c4452d1606201b85a879dad0310c15a55b8314866b8640895545040d579b"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/DepartureDragHandle.cs",
+    "bytes": 3462,
+    "sha256": "050e2b342002572516dbaec3c17041bc33ac858d9b8d00998f96383ddd97610d"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubCurrentArchiveViews.cs",
+    "bytes": 13671,
+    "sha256": "20663775468551514fe08f1f507807f49cc0c8683a9058e152c94e55637b8c5c"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubCurrentBrowse.cs",
+    "bytes": 2619,
+    "sha256": "9d28f20de54bafdbb73e784389032c48a8afe6c03298269812d66ab482950c1d"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubCurrentGlass.cs",
+    "bytes": 810,
+    "sha256": "2480294d56b4503475121c673dab5a65e5516a03c712772c2ceaf7ef5ff707b1"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubCurrentHomeCard.cs",
+    "bytes": 797,
+    "sha256": "cdc6ee15824bbf3a2d35c596fa900318ced38ad2a4e219b69df530d125c87878"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubCurrentInteractions.cs",
+    "bytes": 4331,
+    "sha256": "aa300c68ff04295dbde226b75e71e72933ae0862304b7ba07e0c2a53a1fd40f5"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubCurrentInventory.cs",
+    "bytes": 8726,
+    "sha256": "28dbbcbc3c0b1e92718d9a2a35fe5ad4c1b002f508317379cadb182978b054a6"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubCurrentLayout.cs",
+    "bytes": 12668,
+    "sha256": "9cb8731f6b80a328b62dfb905a8b0282e7984ca6c2b951380b1f9719a22206fd"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubCurrentMotion.cs",
+    "bytes": 4335,
+    "sha256": "1538ee4b2cd6a0900ef743e4c7899c2bb9cfeb17fcb0b758ed6b6599ca3c96ea"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubCurrentRooms.cs",
+    "bytes": 15253,
+    "sha256": "800a6a3b3a9399c452f3966269868e02c16fef9d8ade091c4fae9e881cfad88e"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubModernPages.cs",
+    "bytes": 15342,
+    "sha256": "afd9349548547cd2d8d02827c8e21919eb36bda5e9ba81473415ea1210ba8a9e"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubPets.cs",
+    "bytes": 6341,
+    "sha256": "7edfa53f326eb8de4e979feccceab5b75dd3385f664f9863cd63f0a268b7ee00"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/HubScreen.cs",
+    "bytes": 23056,
+    "sha256": "6438a4fc9f970bc0f76d2efc7314b8ac13740d687bc5e241b3602ac1f36ed996"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/KoiPondGraphic.cs",
+    "bytes": 8937,
+    "sha256": "a4af26325321d948e27f600ba3745692de9653b2c56865f8bb923bfb3dc13b46"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/PreparationScreen.cs",
+    "bytes": 16864,
+    "sha256": "e0199977ef6ac407bacfbd27199e991f8d0dc215d5c62bd3bb545974316698c0"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Hub/StoryArchiveScreen.cs",
+    "bytes": 2435,
+    "sha256": "d514e60a88b7796642f31a6105a34d0b92fc5385bf6f6d7c681ff8e6b8719b32"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CreditsScreen.cs",
+    "bytes": 4885,
+    "sha256": "149b6a615d754565579f8c478297da7843f6f049c0634c26cc162ca0a87d1031"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentAudioSourcesText.cs",
+    "bytes": 5266,
+    "sha256": "25f251727fb3e2370c25e6b8c250ddb0b0cbb30d581dd359ba8137b2a2e580b2"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentFeedbackComposer.cs",
+    "bytes": 7977,
+    "sha256": "0caea4346466cb6a4830668f890caa9d1f8d0fc66b950a9fb5eba1e6e9a9d988"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentHomeAmbient.cs",
+    "bytes": 10015,
+    "sha256": "00fd96366059a311b20acaf7637d8e8bf9670d330561513e31ad82a13b15a933"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentHomeElements.cs",
+    "bytes": 3134,
+    "sha256": "92b4a800cf0c63ec26a02fc3bf47b95493aa61cf93329fad3468147a0daa2037"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentHomeMaterials.cs",
+    "bytes": 1285,
+    "sha256": "54e1bd9dadc5cf71a69fcb67c6a0a27d7ddfb315ba5913b4318a85262c7811be"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentHomeMotion.cs",
+    "bytes": 11320,
+    "sha256": "13a85c28b35fe2fc64870744afebaf6647c6de34266989f2094907b62261882d"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentHomePlate.cs",
+    "bytes": 4700,
+    "sha256": "66b45aefd524a617eae90814d598e022cd91aa1cf7e45b787bf9151130fd5a30"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentHomeText.cs",
+    "bytes": 1407,
+    "sha256": "75100c93a1d8c10057fc6aed1ade5964b902aa6c00558b690ecde073cef507d2"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentSettingsDialogs.cs",
+    "bytes": 7310,
+    "sha256": "4d20e27602d024ceb38f7ded94753e1d62427d671f632d63c17368e709740d6e"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/CurrentSettingsPage.cs",
+    "bytes": 24203,
+    "sha256": "7f7db5d7c1eb59777553585214fba0ea8fe45953b2aec9bb0b394419b26ecfa1"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/HomeInboxDeleteDialog.cs",
+    "bytes": 1136,
+    "sha256": "490e865f9129edf40a8e8665ad54cfa8e772e1d97f056f44358a6c8b3aaeada9"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/HomeInboxScreen.cs",
+    "bytes": 12490,
+    "sha256": "545f34e370b50cd8201b5e6ae72c3eabce11fa38876d5aa2a3f465c907d1e70f"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/MenuDialogs.cs",
+    "bytes": 18727,
+    "sha256": "0e3cc9649476bd017c02f8c14510157c9c794f298f55eaba9f5cc9d60bc80338"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/SlotPickerScreen.cs",
+    "bytes": 14548,
+    "sha256": "95d8b209cd5a446bf5fde1ae57a47e782237c78fe7a93bf9f0167c8238aaba88"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Menu/TitleScreen.cs",
+    "bytes": 11092,
+    "sha256": "37521844999c3a7697d47be5a3778c6ac91520ef810d8af5b928c7c56b2ab007"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/CardDesignerScreen.cs",
+    "bytes": 25193,
+    "sha256": "3f83063d9c31bfe512fff2add9c95ee6939ae464dbe2a2d747e6d3e3848f9334"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/CardLibraryScreen.cs",
+    "bytes": 16477,
+    "sha256": "e360118efe1845883b3a9f71a19547966bbbb4ebd4b9be49cb498dbdb0dfb4cc"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/ImportExportOverlay.cs",
+    "bytes": 8239,
+    "sha256": "29d5ce7d406e751d4878109ea66bc73873bb4e5f2d7bfb2082e9737682ae1107"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/NotesEditorScreen.cs",
+    "bytes": 6133,
+    "sha256": "7b5f7ea5dea733d0651b08c88ebd00e5fc7c01cfc67b3e453ae23a928c1975f4"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs",
+    "bytes": 12951,
+    "sha256": "48da59198efe27f2f6de8bcc6dee0bfcb744d0353c4fb60ac395b58ab65c4f83"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/PhotoInlineLinks.cs",
+    "bytes": 5361,
+    "sha256": "f7e83b6442fb4b2c8761deff3bfb3145bf92ca7fc4ddd65c650bdd805b1d1b2b"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/PhotoStudioChoice.cs",
+    "bytes": 5198,
+    "sha256": "e281c3f849cf6eaf793baf9001dceaef33f67c16e6bcb44ac817588ccf525e00"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/PhotoStudioDossier.cs",
+    "bytes": 4267,
+    "sha256": "34490ce371ce67a5d9ba2bb969e2608a7960b17029a34128c337eb86b37b196a"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/PhotoStudioElements.cs",
+    "bytes": 14728,
+    "sha256": "a23700f9f16f3e3867e4a6ec524dce89572a7aa4a2603ab089258ecd3307e47d"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/PhotoStudioMotion.cs",
+    "bytes": 1555,
+    "sha256": "bd92bfc2b38888bda14e2ef411650518e9a01e717c408e706e66ea6d54d157bf"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/PhotoStudioRoom.cs",
+    "bytes": 4934,
+    "sha256": "58a8a3885e65475d8d1847bd3b1e7c023a70699659f361aa73017a94b86ad3e2"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Misc/PhotoStudioWall.cs",
+    "bytes": 8538,
+    "sha256": "bd096cc92c92fb2eafd151b5e3cd806dc54a336970db52bd30990be9b09cd5d6"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/AltarRitualScreen.cs",
+    "bytes": 4929,
+    "sha256": "205bb16cf178da81130b22fb3613a7d4c2d1a0f5d74893f660b7d43fbe327d7a"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/AmmoTeachScreen.cs",
+    "bytes": 2444,
+    "sha256": "dc5a89a650948ba12c8acec98577972ff00461cdf00c33cc6accf8ed8f335c3a"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/CardFace.cs",
+    "bytes": 13561,
+    "sha256": "16f429784ae5be2b5610cac64457730a62dc03715a153431d9998a51600c2c73"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/CardSacrificeScreen.cs",
+    "bytes": 2515,
+    "sha256": "61a80442ab72f3cef240ce20648ee463f4ddc6132bd81f7f50e56f78a68232c5"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/CardVisual.cs",
+    "bytes": 4693,
+    "sha256": "1fe400a7db501f0692f16310eeef78ab828d101a1eaf363ec39a957cf8fedb2a"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/ChestOpenScreen.cs",
+    "bytes": 10647,
+    "sha256": "ff222540ec88eb329c9ef0e99c89a61940edd0156b357f26a96b27a66e79c357"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/ClassChoiceScreen.Pool.cs",
+    "bytes": 8065,
+    "sha256": "ef8e169d3c7cdc896b2d5ed89a5c96dbd7f5896bf4db3aed26c8c09d868f7449"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/ClassChoiceScreen.cs",
+    "bytes": 17864,
+    "sha256": "a2ac24eccb6658522c4a80e2776eae019a649fa71587b6214dc867ba1712d2a8"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/DepartureElements.cs",
+    "bytes": 9678,
+    "sha256": "06bfaf2a85de32a131fcd4776ca72564aae8621376d76c28752e69e02986b549"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/DepartureSourceMotion.cs",
+    "bytes": 1162,
+    "sha256": "62743e782231538405325ffff2fc46d8e8ffbc3d0c48cdd50c3f2614d31d0ee7"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/EntrySupplyScreen.cs",
+    "bytes": 2519,
+    "sha256": "97dad6d8af5f4d3447b440e5e659fb03e1185e9d16c35961af57ffd80442d647"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/EventDialogChoices.cs",
+    "bytes": 8017,
+    "sha256": "3c365260a78713ce02bb9e10266b14d0cfcf5f4af589be20f1087c3ecd69cc65"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/EventDialogScreen.cs",
+    "bytes": 5933,
+    "sha256": "a49f560f53521b8162421d55da1ae5e6b1ed1af166618521bce295c41e903009"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/ExtractScreens.cs",
+    "bytes": 16283,
+    "sha256": "d0de5144724a9bb25f4e8c60651f448a460eb2197a5186a06e9d80d870da9421"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/FireRestScreen.cs",
+    "bytes": 2979,
+    "sha256": "e1d300c8a19dbae6f9d547bd19bc2c7b97eaa69339286badea75022eaa2baddd"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/NodeModals.cs",
+    "bytes": 6768,
+    "sha256": "561957710e17676c7a205870dc48062718820bfeb9ae05b060fec7021d9753f1"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/PickupScreen.cs",
+    "bytes": 3006,
+    "sha256": "b366cd5dab4830fc70a805d4ea802ade629730edd7a07fb3ddb0e5815a4a64b0"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/RunUi.cs",
+    "bytes": 13593,
+    "sha256": "ae948c9074dbb7c2ae863a6af2eda31b5cd2af230562f7a7e58cd04861b44a78"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/SceneTransitionScreen.cs",
+    "bytes": 12845,
+    "sha256": "f23c25d4b8af195378a538b5a819384b4163c01c5e8770638dd8ba943952a5f0"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.UI/Screens/Run/ShopScreen.cs",
+    "bytes": 19875,
+    "sha256": "c02a33156e9778c21b43f959c43d408344037d05b0257ea470bab016df3b4b30"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.View/BoardCamera.cs",
+    "bytes": 3833,
+    "sha256": "2d2ff0cb95bb4ef30055d1479b47b5e95422c593ab20a94e1ffce511556104ee"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.View/BoardGfx.cs",
+    "bytes": 4971,
+    "sha256": "1951cf3ceb1ccf4e73d12ff98aae77ee99b64e7a208d2ed9c191010a5d2fd61d"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.View/BoardView.cs",
+    "bytes": 34235,
+    "sha256": "2cfdd9d5eacaeb57fb5c4fda387680caa038f70ff6850a0699330a6223f367ca"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.View/BoardViewHost.cs",
+    "bytes": 3712,
+    "sha256": "a808e950f9294673f6e665a2f3d0fc1c4a2233f08b0668481bb70205296799e3"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.View/Fx.cs",
+    "bytes": 10689,
+    "sha256": "260ba32574313960e583d279e8a205fc0e30fb8ab0bafcd7eff0a66be91e5e0d"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/isolated/snapshot/Sdt.View/MapBackdrop.cs",
+    "bytes": 5385,
+    "sha256": "ad2d3cd310abd725ad83dda76613c0caf96e1ee3fb05fa02735aed82512a08a7"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/receipt.json",
+    "bytes": 5452,
+    "sha256": "7d2597eeccaff39a79008be8cc645019f9b2de1625bb27959a47b7693d99b6e3"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/rng-source-vector.json",
+    "bytes": 185,
+    "sha256": "1bd5cad78051abd58cc0100e35fbc7019f52158930ca8479589de7141be1cb54"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/rng-unity-vector.json",
+    "bytes": 197,
+    "sha256": "f1e8190d68809700cfbaccc94a8ddc33c8559d3744daca9d7031fb9dc5494019"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/rng-vector.mjs",
+    "bytes": 669,
+    "sha256": "b7eee5da77b7b216096989012506bbee39154787d563049b34b2f75e17fcfd6c"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/source-beats.json",
+    "bytes": 5658,
+    "sha256": "fedbb9bba0988a1c83c92000b4190a930ebb915b974976d5b70afc2b4d948aa4"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/source-beats.mjs",
+    "bytes": 5021,
+    "sha256": "c8d5ac54ea22f3af44f6ee5317ebccbacdd318c92cdfa8d221de82a3a1555ba7"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/source-oracle.mjs",
+    "bytes": 4831,
+    "sha256": "28f3fd3dad89e598ee89c97e197eb163ca460502e2578be2fd59914bac132478"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/source-vectors.json",
+    "bytes": 446438,
+    "sha256": "59f1adcb33adb5aa630f984037576cc631be0558257efc203c3e1b105c4c93ff"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/sync_frames.py",
+    "bytes": 5505,
+    "sha256": "9079659ea377bb2a206e80f1fbab030fae094683c13622104ba0efe1d5dd5b33"
+  },
+  {
+    "path": "_planning/migration-1029/current-unit-frames/unity-results.json",
+    "bytes": 746752,
+    "sha256": "94f70afc66482006164849631a4c0aa643895eeaafb9cecb961a489f7071dd17"
+  },
+  {
+    "path": "_planning/migration-1029/fresh-scope-audit/Program.cs",
+    "bytes": 2883,
+    "sha256": "067e502819aff1d4bcbbb0fd717a86cdecde9a350d992a087c949d30dbc26892"
+  },
+  {
+    "path": "_planning/migration-1029/fresh-scope-audit/REPORT.md",
+    "bytes": 5065,
+    "sha256": "04a90986aa25a6a4b1a9591f2703745a9844dbe36fc358b0626ebacbb3d1ccad"
+  },
+  {
+    "path": "_planning/migration-1029/fresh-scope-audit/Stubs.cs",
+    "bytes": 745,
+    "sha256": "7ad62d58fcba990a4af59f32ec71286168aec6464073d23336dfde265d9ed87d"
+  },
+  {
+    "path": "_planning/migration-1029/fresh-scope-audit/data-20261029-181714730/profile.json",
+    "bytes": 61218,
+    "sha256": "75aeb277136e4c72d8364cfef727b856542ecf76d4684386345269f0b411e600"
+  },
+  {
+    "path": "_planning/migration-1029/fresh-scope-audit/data-20261029-181714730/profile.json.previous",
+    "bytes": 62346,
+    "sha256": "0c00a819713953b540968eb96c6de9ea066728cfe2fc4c0637090c89cb130ed9"
+  },
+  {
+    "path": "_planning/migration-1029/fresh-scope-audit/data-20261029-181925138/profile.json",
+    "bytes": 59534,
+    "sha256": "f6252d8c93284cdb676e3c3dee69ca9d1a5eabe1c882052deec237d5187e480d"
+  },
+  {
+    "path": "_planning/migration-1029/fresh-scope-audit/data-20261029-181925138/profile.json.previous",
+    "bytes": 60662,
+    "sha256": "9065a7a06c58440f76782480abef2c86fe6d20f918c5d868649337fdc476dc8a"
+  },
+  {
+    "path": "_planning/migration-1029/fresh-scope-audit/source-hashes.json",
+    "bytes": 939,
+    "sha256": "24621e35d631b0ee2924bf33264574ef66d51c85f685c07ca18faa5f5c20ac71"
+  },
+  {
+    "path": "_planning/migration-1029/import-quality/README.md",
+    "bytes": 1913,
+    "sha256": "e40e8b872ade668ea463cac6534dc35cbaff9827f70e9b634b45402c43ef5bf1"
+  },
+  {
+    "path": "_planning/migration-1029/import-quality/current-fonts-receipt.json",
+    "bytes": 627,
+    "sha256": "63f093ab27cab2bef341adb32ffe2e4ea1f6c35b518778e54953091a70e1e5ab"
+  },
+  {
+    "path": "_planning/migration-1029/import-quality/inspect_sources.py",
+    "bytes": 3316,
+    "sha256": "395c532c2312839aa177f29c6189b8418d428d3d395aa3ca8097e43e92bd8bd1"
+  },
+  {
+    "path": "_planning/migration-1029/import-quality/instantiate_fonts.py",
+    "bytes": 1819,
+    "sha256": "adcfa0bf99b61817fa586efe9daa754f9a4d05c07f969f77b7e02c4efce903bf"
+  },
+  {
+    "path": "_planning/migration-1029/import-quality/source-inspection.json",
+    "bytes": 5490,
+    "sha256": "3c6cfe77ca1f25d3d197043d8a831a0ff3ec3281924b5a4801773dc590c51b40"
+  },
+  {
+    "path": "_planning/migration-1029/import-quality/static-fonts/receipt.json",
+    "bytes": 1013,
+    "sha256": "2162ee1825ab83286a142f977c32cf7776b8913bbe797089a97ca3e396ceee9e"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/Program.cs",
+    "bytes": 4946,
+    "sha256": "bc57bc0507ab48094c25b378926a5cceddfa26c06a111130587ee86d0e699896"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/README.md",
+    "bytes": 4827,
+    "sha256": "b957f9ca2edcaf5570374a8b80405f62d3069fdb1c5381e144e9018edf5b6ab1"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/Stubs.cs",
+    "bytes": 745,
+    "sha256": "7ad62d58fcba990a4af59f32ec71286168aec6464073d23336dfde265d9ed87d"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/data-20261029-172114293/profile.json",
+    "bytes": 102718,
+    "sha256": "141ec07b000bec5e94cf0f54989993f0e72bd569881df086646aaee905361b21"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/data-20261029-172114293/profile.json.previous",
+    "bytes": 102718,
+    "sha256": "fee835ae138112681e0aa73693e287b0ea51a48a684c171e4b80ca4c98b57deb"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/data-20261029-172302352/profile.json",
+    "bytes": 149752,
+    "sha256": "0a5143a1404a53a43eca6b7d2bbf9ce8ea88de8954bfe522e8d6a040ccd70146"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/data-20261029-172302352/profile.json.previous",
+    "bytes": 148407,
+    "sha256": "9c79748c84c6527753e7ea36c840cb4b923b125d6061c8064521a25a825eb1fe"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/fresh-results.txt",
+    "bytes": 1290,
+    "sha256": "dae253324eac7703608458a9be4ef65ce2c1ca6dcd3cc6387fd17e359239f37b"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/primary-flow-checks.mjs",
+    "bytes": 1178,
+    "sha256": "c041ba066e65a930e16d0cb0b759be6f8ab7327f0e4be23cdfa486dfe9fbc0f1"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/primary-results.txt",
+    "bytes": 194,
+    "sha256": "c63114a1d53288baf6b911e50b2b69afad62438763386d2cfae9d3dd3c6106cd"
+  },
+  {
+    "path": "_planning/migration-1029/independent-flow/source-hashes.json",
+    "bytes": 2297,
+    "sha256": "2e9a3fecec3cc5a5bca1438d47f1c9f78e29c9311e7c8cd9ecfb3a8beecb9dca"
+  },
+  {
+    "path": "_planning/migration-1029/independent-ui/review.md",
+    "bytes": 6036,
+    "sha256": "eef235d897b24e012c309d998a8d2aa214d4a316e00bd487d9dd247b57ddccd2"
+  },
+  {
+    "path": "_planning/migration-1029/map-font-check/NuGet.Config",
+    "bytes": 73,
+    "sha256": "e497501960554d323eef45860c14474958accd1ae7f3ae6f95b10e4c1d340401"
+  },
+  {
+    "path": "_planning/migration-1029/map-font-check/README.md",
+    "bytes": 1795,
+    "sha256": "b51fc14a16b439e4063ca73fb8d0d940b3fb5d0ecccfec74f1b2617a2c2430b9"
+  },
+  {
+    "path": "_planning/migration-1029/map/Program.cs",
+    "bytes": 2129,
+    "sha256": "f986b608f01a47531305f52212fe776e0e88acdcc9e2b3c094cc6042cf5aa081"
+  },
+  {
+    "path": "_planning/migration-1029/map/compare.mjs",
+    "bytes": 1323,
+    "sha256": "03502f381c47f4e883fbf2ede3502c40c1f07871ba8ac6f08b72af461fbd0721"
+  },
+  {
+    "path": "_planning/migration-1029/map/comparison-result.json",
+    "bytes": 770,
+    "sha256": "528b876c80625aff9be13fbd6fd6c22044387797d8abbd2ae63a3ed77abc446d"
+  },
+  {
+    "path": "_planning/migration-1029/map/export-map-data.mjs",
+    "bytes": 1973,
+    "sha256": "72d2465379f4f65e74dfd74198e4070bad042ed69da39fece71df9727a7e04f7"
+  },
+  {
+    "path": "_planning/migration-1029/map/finalize-view.py",
+    "bytes": 926,
+    "sha256": "583dfbf18363ad5619680c6299dc514df2228b14b8e20efa60476e411498169e"
+  },
+  {
+    "path": "_planning/migration-1029/map/update-encounters.py",
+    "bytes": 5487,
+    "sha256": "58b698731cf3d4f2d86bc1e3a23597ed892d13308028053b3fe69504455c1217"
+  },
+  {
+    "path": "_planning/migration-1029/map/update-profile.py",
+    "bytes": 8182,
+    "sha256": "18952449c46c7ce0e3be8c5463cb09f08aa2b870e0aaa68672e334947a013da4"
+  },
+  {
+    "path": "_planning/migration-1029/map/update-runtime.py",
+    "bytes": 10243,
+    "sha256": "38d39343692b2ed9ccc36c00c15b065e7f3081cfe73b35b8ed1b2b803649b239"
+  },
+  {
+    "path": "_planning/migration-1029/map/update-savecurrent.py",
+    "bytes": 613,
+    "sha256": "3ff7336d4475123434f3199686fef3a4bf6160bbeac54c221f26c90f107ce3f8"
+  },
+  {
+    "path": "_planning/migration-1029/map/update-settlement.py",
+    "bytes": 270,
+    "sha256": "79f2fe8625b108df95e6c7a520f6e4731994a7e6125768f38389a68c511a73cf"
+  },
+  {
+    "path": "_planning/migration-1029/map/update-supply.py",
+    "bytes": 1783,
+    "sha256": "384f91d20340f1a978218150e885038a5a4267403c90cf5b5e3048234ef20d9e"
+  },
+  {
+    "path": "_planning/migration-1029/map/update-view.py",
+    "bytes": 4917,
+    "sha256": "484dc6ca0d89cc831f9b7bb6852fbcbbd32ebe2589a6972be945a5b167151317"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/Program.cs",
+    "bytes": 22642,
+    "sha256": "c86b3419410257aadcd3bcf18a5dda840bcfd6096d31a940a3a0da6bfe4e1612"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/README.md",
+    "bytes": 3989,
+    "sha256": "834492d37c07dc1184135a98e9ea146e40dd68c699ec685d3bc960db10fa5915"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-150343-939/profile.json",
+    "bytes": 32002,
+    "sha256": "4ba3365df1e408994e7174d55500ee020bca8813c17451b38df596f5c15acde8"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-150343-939/profile.json.previous",
+    "bytes": 37165,
+    "sha256": "5b404dca9962990448a5b4ed1fad400462b0989587bbf99d39b1125166b02e45"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-150417-446/profile.json",
+    "bytes": 32451,
+    "sha256": "4fe498556b3d240251e1319410b855f450dc85dafbb606a01d2fee30fb7f6daa"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-150417-446/profile.json.previous",
+    "bytes": 32229,
+    "sha256": "e8ba4665103dd3b1f744778fc9f199a550aef2f0a5956b97520531bb8ca0f270"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-150802-905/profile.json",
+    "bytes": 31875,
+    "sha256": "68f07186b86f9d77dc7d683052e3266f5444f1d44353cc358445d284e7e42487"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-150802-905/profile.json.previous",
+    "bytes": 31876,
+    "sha256": "69251e48b1cf38bbfec24254e2f32991ea7cc4011eaaff22ae56f1ae00d57fab"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-150945-243/profile.json",
+    "bytes": 38744,
+    "sha256": "2fbe437a2a3e07b2e5dc54e8e6cd918e762a6bf7d610373795fb7907891f206f"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-150945-243/profile.json.previous",
+    "bytes": 35266,
+    "sha256": "d0e40f792e5b2aa09e5646b77cdb5bafaf47d458b0dcab048d16d87a09036b6e"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-150945-243/result.json",
+    "bytes": 246,
+    "sha256": "922c484155cace1adfd3122c47e46a0db3bcfe5955d4499a5e92dcfe8b1276bf"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-151540-926/profile.json",
+    "bytes": 39324,
+    "sha256": "9015054af69b87ec0b7ff90a89e27db0ad9d839202f3108388c9a7539b0f5314"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-151540-926/profile.json.previous",
+    "bytes": 83022,
+    "sha256": "990c3dd9edd9c29820ef98d4f15a0dc8462ede993adc2e739d0522d0ad51d470"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-151540-926/result.json",
+    "bytes": 246,
+    "sha256": "55ce684f0881fa5813f91f3b31bb116e20802c68c333796a7650967e49678e10"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-152515-538/profile.json",
+    "bytes": 39285,
+    "sha256": "0c44029e413a88183f463ceedc060132045f20f68eeda242c562543ef0e704d9"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-152515-538/profile.json.previous",
+    "bytes": 82940,
+    "sha256": "db278fab9bf311d04d09fb2b036ec0c7a5a7826500a20f8c6caad4ccf716acb8"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-152515-538/result.json",
+    "bytes": 246,
+    "sha256": "daad2ee26789aca65fc4d707833c3656a14c9c25cc882a50414f5e3765229c69"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-153928-498/profile.json",
+    "bytes": 39485,
+    "sha256": "f63de9044cc20ef74e90c58be42029fee556ec4e3d00bb704f237e5d8b3a6fd7"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-153928-498/profile.json.previous",
+    "bytes": 83217,
+    "sha256": "fdcc1b2f2df7266a22c36e9ad831d48495d96da9281d3766694c8277af9cd724"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-153928-498/result.json",
+    "bytes": 246,
+    "sha256": "6be7378ac301fe69005e0132cdc2a69df3c67ecfb0db814c400797c7cf4dfaad"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-154303-335/profile.json",
+    "bytes": 91835,
+    "sha256": "d0bf51eee151c72f1052d7025c295e6ddb8bfa24ed5adfa4d01ba54f854d791c"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-154303-335/profile.json.previous",
+    "bytes": 91835,
+    "sha256": "987f12372b2fd7bfe596329249eef356deffd5eca6982cf8f51742bfe216c21c"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-154303-335/result.json",
+    "bytes": 312,
+    "sha256": "bd47f52937cc91edf526423e954e5751a3cbc36fae8c6ca8bd29d2461c1c792c"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-154531-325/profile.json",
+    "bytes": 91734,
+    "sha256": "f9317f8b0cc88c88b62689aa43ce65585faa4d2cbac6e858f3a06a234622779a"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-154531-325/profile.json.previous",
+    "bytes": 91734,
+    "sha256": "7a8c08ac532fb2f127c29fc8992b9a20eeb8fd27c0977dafe39224e7e6259812"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-154531-325/result.json",
+    "bytes": 312,
+    "sha256": "22671752ad2b55c753a2f71f4b656c6ec832d9a162519a0370132756a6fa1b58"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-155354-235/profile.json",
+    "bytes": 91730,
+    "sha256": "c82756e97d8141ef6f089842cca54ded1d0b70e8942fe9906913624fb98474ec"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-155354-235/profile.json.previous",
+    "bytes": 91730,
+    "sha256": "5830bf0cca033b6b0634162a7090f8405a452c602d46e664a29041016027ceeb"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-155614-458/profile.json",
+    "bytes": 91136,
+    "sha256": "dd4d15719ceaa6fb85226bec5405a268561af65eea6c1008057c2b880ffcee1c"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-155614-458/profile.json.previous",
+    "bytes": 91136,
+    "sha256": "f899e253a9a6f203632ba519ebdf028e842ae9d283671293b91550c1a6ce1fb9"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-155614-458/result.json",
+    "bytes": 347,
+    "sha256": "069225cdf688fc1a93df3ce5f42cdec2383c5c6e6481820c0f03b7064b674344"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-155746-863/profile.json",
+    "bytes": 91349,
+    "sha256": "a2057e282576c9762c648415df2e18d6f07faae6bf08284f350a2c681958d187"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-155746-863/profile.json.previous",
+    "bytes": 91349,
+    "sha256": "9b2f70bc97a1f49c2eb0d8ad391c8f8ccd7149f4b148e372618e006be37fd9a9"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-155746-863/result.json",
+    "bytes": 347,
+    "sha256": "f55bb01610a711e20ed90697d184c865ead3aa89beb8422c62db238ed787a8e3"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-160212-196/profile.json",
+    "bytes": 98538,
+    "sha256": "5b6860f3b616a6ec34409acf1c71c1ba70f5268bfbab12ad426d03ebe1cebb31"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-160212-196/profile.json.previous",
+    "bytes": 90136,
+    "sha256": "0261955affbe0fcb1ba183beba260d6c2890df7a533c938e7b121670074b6a73"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-160212-196/result.json",
+    "bytes": 347,
+    "sha256": "4e9a19abc050f72e760274eeac31cd3e3f95fac0988a5f34a3ddbdc92f5b72e3"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-161153-506/profile.json",
+    "bytes": 98226,
+    "sha256": "ca8e3dee0df0d4dcacd9823be46987c50343bafbccc8685b57326dece3cbb2bd"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-161153-506/profile.json.previous",
+    "bytes": 98226,
+    "sha256": "8c241b70670293521263999faacede69c6af4286ee37907804fa3f7b657d8f27"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-161153-506/result.json",
+    "bytes": 347,
+    "sha256": "422988c9e3e5ffb55cca16d9042f9c50c175401ffd3dc414e388b3da5e0340f6"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-161337-706/profile.json",
+    "bytes": 126174,
+    "sha256": "f60cc31a5ec2d560f4963d887dda0cd32093319af15d571fd99a2a8ff0f6c729"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-161337-706/profile.json.previous",
+    "bytes": 123651,
+    "sha256": "19aec0192b0667ccd94722626fd8c58fefe7e8ccf07171969524849a429a6bf8"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-161414-689/profile.json",
+    "bytes": 134296,
+    "sha256": "4ec247abaca8c3bf24f85517af5d287139e7d33d37243821656068461f348b88"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-161414-689/profile.json.previous",
+    "bytes": 134296,
+    "sha256": "43d146179ef9ed0e2a89598903d87050a472a096ad5ec9ee92c175cc30fcd07d"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/data-20261029-161414-689/result.json",
+    "bytes": 347,
+    "sha256": "2ad608cb7b41278772fc48a85f8e248b3f13d62f0c839da1ac87dd38415b74c2"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/source-vectors.json",
+    "bytes": 98315,
+    "sha256": "2a94f19c27e70b7bbca1f8820a73b37d117c8ac1e81d50210aed36b9039fbb22"
+  },
+  {
+    "path": "_planning/migration-1029/run-finish/source-vectors.mjs",
+    "bytes": 7251,
+    "sha256": "107055de2f9fbf97de70e5483c1e69a17f16a348be161b874bb92a059da39c72"
+  },
+  {
+    "path": "_planning/migration-1029/run_native_check.ps1",
+    "bytes": 2743,
+    "sha256": "e3f23636b964c2fdd4dfdf4b77de120bf1cd298775be876afef694620ae061e1"
+  },
+  {
+    "path": "_planning/migration-1029/save-check/NuGet.Config",
+    "bytes": 74,
+    "sha256": "9508cae5f76364f56e80eb97cb16493977243cf38e5cca6284e3d74f83b20a2c"
+  },
+  {
+    "path": "_planning/migration-1029/save-check/Program.cs",
+    "bytes": 1541,
+    "sha256": "8ffdd988228bdd0751cbfb691bb9abf68d954587246c92ee929ec58d52912dcf"
+  },
+  {
+    "path": "_planning/migration-1029/save/HubChecks.cs",
+    "bytes": 6698,
+    "sha256": "9632be8c3e1668df0098a304ef9fd50391c209a126e46b0a684363dc18b4c741"
+  },
+  {
+    "path": "_planning/migration-1029/save/Program.cs",
+    "bytes": 10463,
+    "sha256": "f2ed086c4b5407b12b61898bc457ed909812d0740bed3b074d7f6109b4dc2615"
+  },
+  {
+    "path": "_planning/migration-1029/save/README.md",
+    "bytes": 1637,
+    "sha256": "fe2f4dcc8bafa15aab4ce151df6509d4a2e6004765b27a176ac8b527d39c409d"
+  },
+  {
+    "path": "_planning/migration-1029/save/codec-fix.py",
+    "bytes": 2045,
+    "sha256": "c976b86ebd560117830c1b82452dd062010c121691e183453590dcfc27652b3d"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125106-048/profile-valid-before-corruption.json",
+    "bytes": 110233,
+    "sha256": "0205269fea0f285580118ec4a2d3b500741b1428b1e85f827f1990a0fcbd7982"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125106-048/profile.json",
+    "bytes": 7,
+    "sha256": "be302461cda285db3ed2d45fb767b23e08ca8808b35a638009937df22b332d73"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125106-048/profile.json.previous",
+    "bytes": 107545,
+    "sha256": "b563e78ed1018915fd0bf0035182eac9ec43312d3706a9c8df36bf7156cf1686"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125106-048/result.json",
+    "bytes": 289,
+    "sha256": "515e6ecb91790c4d56fa744fb6cf0be02b58e738f868a3e019ae554816608246"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125303-146/profile-valid-before-corruption.json",
+    "bytes": 109621,
+    "sha256": "3d6da1aea54432a52f5f9581a011d0addbbb5d36a86de4e54f60d204275b19bc"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125303-146/profile.json",
+    "bytes": 7,
+    "sha256": "be302461cda285db3ed2d45fb767b23e08ca8808b35a638009937df22b332d73"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125303-146/profile.json.previous",
+    "bytes": 106947,
+    "sha256": "bae033232ac963acb929931b8df76664f5818c08f0c6e2861f4e513027aecff3"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125303-146/result.json",
+    "bytes": 289,
+    "sha256": "be74f34d1cc0ec52520ea0928527580f80fcb31419334c5e0f1fb11c6ced5e7d"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125401-702/profile-valid-before-corruption.json",
+    "bytes": 185282,
+    "sha256": "6e93a62a2590acfa89ef0f88b5f9c07bf199245a0e53780be66be98819b91e12"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125401-702/profile.json",
+    "bytes": 7,
+    "sha256": "be302461cda285db3ed2d45fb767b23e08ca8808b35a638009937df22b332d73"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125401-702/profile.json.previous",
+    "bytes": 184073,
+    "sha256": "47da6c5cd9bf635652984d2c7254ddb6771b0ffcfd387461e039b9b9a5f468d5"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125401-702/result.json",
+    "bytes": 289,
+    "sha256": "3d422d7f600f9e8470e3be9f5f040a3aed796a4766d4306ba973fef41e4695aa"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125541-295/profile-valid-before-corruption.json",
+    "bytes": 185904,
+    "sha256": "529ddf8afa088eecec5598a9ac015c02d27e625f99b18027fcf46b0b34a154f8"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125541-295/profile.json",
+    "bytes": 7,
+    "sha256": "be302461cda285db3ed2d45fb767b23e08ca8808b35a638009937df22b332d73"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125541-295/profile.json.previous",
+    "bytes": 184063,
+    "sha256": "426fb7bd50db525d7b06fa3b156055c0f5647270cd49763925db059d23890fa9"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125541-295/profile.json.writing",
+    "bytes": 185905,
+    "sha256": "2b904ae2b3c790ad4cc450d95fe54791b7eedc1f137f1d2daa07e84a1d2a7b7d"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-125541-295/result.json",
+    "bytes": 290,
+    "sha256": "510960abedcab61b12798089224d6e72ad05ccfd5ee5224498d2186b84e65d30"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-130717-566/profile.json",
+    "bytes": 185971,
+    "sha256": "e5a969f2cc4d197fc3b5db3272a09b30ffcc267f6374f047e9ea9d454ace1249"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-130717-566/profile.json.previous",
+    "bytes": 184321,
+    "sha256": "abdfc261581e760fca2b98ce051e13b113ba23140317e163934fd63c77ac8ae3"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-130754-998/profile.json",
+    "bytes": 187418,
+    "sha256": "96e6d689ffa0a36e65c11d77e1b044e3d3db4f83cfd9a704243f596cc2660eb1"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-130754-998/profile.json.previous",
+    "bytes": 186127,
+    "sha256": "4b6e31e419d153833b523dc33f405866e94ba1653e6ea822cda0b39c79f0e707"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132413-354/profile-valid-before-corruption.json",
+    "bytes": 188169,
+    "sha256": "1c1ab552b7c941f6bdf563738d77490e26effa391f11a00fe5acb161a32a12da"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132413-354/profile.json",
+    "bytes": 7,
+    "sha256": "be302461cda285db3ed2d45fb767b23e08ca8808b35a638009937df22b332d73"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132413-354/profile.json.previous",
+    "bytes": 186982,
+    "sha256": "6feac310c48c6614aca8c86d6cc2de25fe771b9ce876c84ed646cb64b60bb186"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132413-354/profile.json.writing",
+    "bytes": 188170,
+    "sha256": "9d77d7a8a313b3b17c2f1a5c5ae11e7cd18da05f00ba32a54f907d8c47687358"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132413-354/result.json",
+    "bytes": 290,
+    "sha256": "eff99ec4d3f2cead1b32b15333ab560d3fa7a64348daa08249a1ccca4c68a15d"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132748-068/profile-valid-before-corruption.json",
+    "bytes": 187819,
+    "sha256": "6b7a7df0626eb9ad10ac8be9de260feafabc70b4a73b69aabeff110dd091b32c"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132748-068/profile.json",
+    "bytes": 7,
+    "sha256": "be302461cda285db3ed2d45fb767b23e08ca8808b35a638009937df22b332d73"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132748-068/profile.json.previous",
+    "bytes": 186632,
+    "sha256": "4f62892389952596bba0f20663d969458058b636c01c6953c48a7dc5dee99d55"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132748-068/profile.json.writing",
+    "bytes": 187820,
+    "sha256": "b7c9bcd1ab2ba20e95517f5dad289690f82d991ee0d91a27c19ba9d9211f8a35"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-132748-068/result.json",
+    "bytes": 290,
+    "sha256": "a73254cc89face9a21cb9725bbf4552a3da71fe85d3b1cd77783eae94cb1b77b"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-133502-789/profile.json",
+    "bytes": 197662,
+    "sha256": "682712782602c06d3497c434d043d702b46ab94290ecd69fa5f85bc41d922a04"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-133502-789/profile.json.previous",
+    "bytes": 197669,
+    "sha256": "bffba5a313176fde8faa52f83e58e9573915e9d226e8f48d1615ed7ba55811c7"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-133612-949/hub-result.json",
+    "bytes": 191,
+    "sha256": "8c9b2329cea70e0830ac44ff820151a2e62f6e10f6e17d7ca6581e6e9edca331"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-133612-949/profile-valid-before-corruption.json",
+    "bytes": 201469,
+    "sha256": "002ced1172b22223c7eebba281f6f00bdd5fe5fbbebcf94c0b9a7659a361534d"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-133612-949/profile.json",
+    "bytes": 7,
+    "sha256": "be302461cda285db3ed2d45fb767b23e08ca8808b35a638009937df22b332d73"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-133612-949/profile.json.previous",
+    "bytes": 200282,
+    "sha256": "b3f3ba0f1889afc84f1e4d5f503f584f8a1a8558bb55134bdc27ca8dc5e606bb"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-133612-949/profile.json.writing",
+    "bytes": 201470,
+    "sha256": "912898b3bdb88e5e3f009ffb3fc8de58daa64d58e3270fc7cd9fed298c2e916e"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-133612-949/result.json",
+    "bytes": 291,
+    "sha256": "78b965e64ef35471999de8433acbd1a2ee680d8f6761e16f047c0b86f98fddd2"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-145746-923/hub-result.json",
+    "bytes": 191,
+    "sha256": "8c9b2329cea70e0830ac44ff820151a2e62f6e10f6e17d7ca6581e6e9edca331"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-145746-923/profile-valid-before-corruption.json",
+    "bytes": 204051,
+    "sha256": "b88b26fce1d816f05d3bcf049fd30cf0b41e334324aa351f8485334dc1869b1e"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-145746-923/profile.json",
+    "bytes": 7,
+    "sha256": "be302461cda285db3ed2d45fb767b23e08ca8808b35a638009937df22b332d73"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-145746-923/profile.json.previous",
+    "bytes": 202832,
+    "sha256": "9a546e38e213316e3660c07b7674091a8ef754c6a7ece686e323ed785132a1f9"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-145746-923/profile.json.writing",
+    "bytes": 204052,
+    "sha256": "eea45dd9a9692d91a65c34430360898bf07649b1ea240227f89a87681bd96995"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-145746-923/result.json",
+    "bytes": 291,
+    "sha256": "46852c92de87d94b22f3768f4fe92d67b8a6d27fc129b7a24098dbb9d22693e5"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-152515-572/hub-result.json",
+    "bytes": 191,
+    "sha256": "8c9b2329cea70e0830ac44ff820151a2e62f6e10f6e17d7ca6581e6e9edca331"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-152515-572/profile-valid-before-corruption.json",
+    "bytes": 204253,
+    "sha256": "e26f97e49d2146cc80d8c0da4a27e183c27c2fc42847f8dc8f5b24a4721d690c"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-152515-572/profile.json",
+    "bytes": 7,
+    "sha256": "be302461cda285db3ed2d45fb767b23e08ca8808b35a638009937df22b332d73"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-152515-572/profile.json.previous",
+    "bytes": 203034,
+    "sha256": "3d103c61d8f2c63848bba954b3fdd8a2f49eb9706a04e0680f484c3c911cf6fd"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-152515-572/profile.json.writing",
+    "bytes": 204254,
+    "sha256": "4eb1ec3494308e937bb1646e95280971ffcaa1e9040cf4882fdfa46ffc44756d"
+  },
+  {
+    "path": "_planning/migration-1029/save/data-20261029-152515-572/result.json",
+    "bytes": 291,
+    "sha256": "7dc22369538c2be0e88f0f4061576a3ad1db61d2d6c0c9f7323bdf377ce2ff46"
+  },
+  {
+    "path": "_planning/migration-1029/save/extend-tests.py",
+    "bytes": 2752,
+    "sha256": "ce2b73be3351a671753c30add8bfa26e2f3e19338bc0b7f63c38a09c7a09e146"
+  },
+  {
+    "path": "_planning/migration-1029/save/invalid-profile-tests.py",
+    "bytes": 1222,
+    "sha256": "b0a62e2b4546d2f2e5edd518b8abdecfa9d2d281fe132684ca30dcffbb4537fa"
+  },
+  {
+    "path": "_planning/migration-1029/save/replace-test.py",
+    "bytes": 845,
+    "sha256": "b5e3493cd058afa6bb07663e999b660662e16ba19fcb9a57b196f01645f981fb"
+  },
+  {
+    "path": "_planning/migration-1029/save/rule-json-test.py",
+    "bytes": 1834,
+    "sha256": "cd12e600f17ac81ac66aad95872f2f9922767fdaa050d16b63a41de5827c9a0b"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/Adapters.cs",
+    "bytes": 3706,
+    "sha256": "8e1a5c181a915fc62552b007fad739b271b058ee56a1e36537c4bb916c3c7c77"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/GameBattleHost.generated.cs",
+    "bytes": 8752,
+    "sha256": "472c250cf1cd8b7e0ec09c11f298a99dc58cf9ef9ab42c59494046622be9ed04"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/NuGet.Config",
+    "bytes": 74,
+    "sha256": "9508cae5f76364f56e80eb97cb16493977243cf38e5cca6284e3d74f83b20a2c"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/Program.cs",
+    "bytes": 9841,
+    "sha256": "5e7bfe700775b97fd5e435d188b9530abe2899c52e146e205b63e1e3ae21797c"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/README.md",
+    "bytes": 4651,
+    "sha256": "8fe349153e09b3d9bccb4d642b08ebae211f3ab329c34dc1d43f839cbabe24e9"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/run-20261029-180515-738/profile/profile.json",
+    "bytes": 44486,
+    "sha256": "d2c3419830a43e5abe9db604552ee2951d49d220f9764f5eb943883ea9005c7f"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/run-20261029-180515-738/profile/profile.json.previous",
+    "bytes": 44486,
+    "sha256": "74e23f123199ec1f2a2a9bcb0eae0920d8bb64c856c924c6741d583a2dfe1c7b"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/run-20261029-180515-738/result.json",
+    "bytes": 2846,
+    "sha256": "b67eee231d9b18072c51a64c61df852581df6295df3496a4ef793936f296303a"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/run-20261029-180714-359/profile/profile.json",
+    "bytes": 44893,
+    "sha256": "22c6e38fdff28b946fdea539993cba099de978b340c4d1139b9d4fc3e9ec8807"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/run-20261029-180714-359/profile/profile.json.previous",
+    "bytes": 44893,
+    "sha256": "ee3aa575c245d7237b837b3f4c1a0911c28f43d0fb39e465ef89ca099f693a8d"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/run-20261029-180714-359/result.json",
+    "bytes": 2846,
+    "sha256": "938cc7980bb59fc546ee10b64853c364eab485b3df336f42e262579913cea81e"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/run.ps1",
+    "bytes": 3156,
+    "sha256": "d23daf21f0adc907a5a4db7831647f5ba432b494305d277a71c8e9c038b50a37"
+  },
+  {
+    "path": "_planning/migration-1029/surrender-review/source-manifest.json",
+    "bytes": 9845,
+    "sha256": "4a992f6342eb0606f5af33499fe2692754ae2a92f8b3ec63b37daad1018284c0"
+  },
+  {
+    "path": "_planning/migration-1029/travel-departure/NuGet.Config",
+    "bytes": 74,
+    "sha256": "9508cae5f76364f56e80eb97cb16493977243cf38e5cca6284e3d74f83b20a2c"
+  },
+  {
+    "path": "_planning/migration-1029/travel-departure/Program.cs",
+    "bytes": 11029,
+    "sha256": "c31a9eb9a7a86a3b700d1ef7086690c61ec29a5d56dd24d80ef9372846c5f9b9"
+  },
+  {
+    "path": "_planning/migration-1029/travel-departure/README.md",
+    "bytes": 2283,
+    "sha256": "bf2303df93253b56aa9370b03c85929f96d31d120d319621a52882f8732bd8da"
+  },
+  {
+    "path": "_planning/migration-1029/travel-departure/data-20261029-172934-842/profile.json",
+    "bytes": 49611,
+    "sha256": "baf72173756a4621802925e1128338c6f388c917ce01f1f95cff22691cc2916d"
+  },
+  {
+    "path": "_planning/migration-1029/travel-departure/data-20261029-172934-842/profile.json.previous",
+    "bytes": 48117,
+    "sha256": "62e9b83104b89f79a59a3073e306d5d38d6d00d603052ecb19e6cab79b69e592"
+  },
+  {
+    "path": "_planning/migration-1029/travel-departure/data-20261029-172934-842/result.json",
+    "bytes": 300,
+    "sha256": "06bb1fa8d7ec5ed4eff9debcc8373fbb560f6762b2bdeadf76a2737775b4e9ea"
+  },
+  {
+    "path": "_planning/migration-1029/travel-departure/source-vectors.json",
+    "bytes": 217406,
+    "sha256": "80319782a258df02f8c3b287b50bd000009ce5f089fdf2f7b799ce3f0cb6174c"
+  },
+  {
+    "path": "_planning/migration-1029/travel-departure/source-vectors.mjs",
+    "bytes": 6057,
+    "sha256": "0e6ab0afce4451b62027e12d77dbc14d9b48a7a1e3c7536dec3fc3100556adb2"
+  },
+  {
+    "path": "_planning/migration-1029/ui/HubFeatureChecks.cs",
+    "bytes": 8868,
+    "sha256": "4cc8bf4ff291fe6a5404ec52f03bdde64a00466873601e529bdbf1a6f69f0bc3"
+  },
+  {
+    "path": "_planning/migration-1029/ui/README.md",
+    "bytes": 6703,
+    "sha256": "1bf65687579cff4feccdd3b778e8f4b7bbd622604564de8ea960dea67d323e0a"
+  },
+  {
+    "path": "_planning/migration-1029/ui/__pycache__/sync_assets.cpython-38.pyc",
+    "bytes": 13577,
+    "sha256": "7b03c4ea45f9f979225e384dec212f1b4f9eab2d41140e1a4783b0f3423759eb"
+  },
+  {
+    "path": "_planning/migration-1029/ui/assets-receipt.json",
+    "bytes": 189480,
+    "sha256": "40ed84fb19d5ae44461aa1f6c71870e8acdb5630793872fa679170804c3e821c"
+  },
+  {
+    "path": "_planning/migration-1029/ui/assets-verification.json",
+    "bytes": 315,
+    "sha256": "cdac3db55de38b93e9b2b4a94682d330beb2dc329f10215abc1dd51f351b645d"
+  },
+  {
+    "path": "_planning/migration-1029/ui/export-hub-vectors.mjs",
+    "bytes": 3050,
+    "sha256": "b34b856528ec72c49fcd62fd7dedb5e0c8d61055508f6f87de03a0fa904ff9da"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155142-096/profile.json",
+    "bytes": 9280,
+    "sha256": "a25c5cd306c57e819843b2a67fbe2855cb111cddc0693e0d8ac214361b419377"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155319-078/profile.json",
+    "bytes": 8855,
+    "sha256": "57950486941b6163a881c900d2572a088e92ae49508c51dae42238e422299e63"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155319-078/profile.json.previous",
+    "bytes": 10502,
+    "sha256": "9e3acce055a19a3ca45975d6c4461b2309a50fa72956ef1504f4ab47d9617714"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155447-017/profile.json",
+    "bytes": 8757,
+    "sha256": "6648e2105ebd6fce9745ea3f30cc58982082d678fbed76d67e055c09e081e0db"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155447-017/profile.json.previous",
+    "bytes": 4188,
+    "sha256": "91af1529732036bdeaac12a21e060bae2fcd240903e3fe37353d3c62082acb80"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155602-112/profile.json",
+    "bytes": 3382,
+    "sha256": "4092b52354a8ad41a7ad7c7acc6938addf8e36d24da710de48b996a577cb8e9e"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155602-112/profile.json.previous",
+    "bytes": 3432,
+    "sha256": "f961058635c975a386b6a0beb91157b86531e576f2359907baae6e96c4f92ee4"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155602-112/result.json",
+    "bytes": 136,
+    "sha256": "60cea85cbd754a3dad232464479fa427cbeafc197239efb2749eb94f942a1c72"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155834-586/profile.json",
+    "bytes": 7173,
+    "sha256": "7921de15e1cb3e2f104f29624eb9cb5bc70ffe663ec6da3b5ec94118580afa72"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155834-586/profile.json.previous",
+    "bytes": 6804,
+    "sha256": "ff20455a944ea6406620b2dded708d29ecb4bd97349a91d4acb0dc65b9ea7ade"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155901-617/profile.json",
+    "bytes": 7173,
+    "sha256": "7921de15e1cb3e2f104f29624eb9cb5bc70ffe663ec6da3b5ec94118580afa72"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-155901-617/profile.json.previous",
+    "bytes": 6804,
+    "sha256": "ff20455a944ea6406620b2dded708d29ecb4bd97349a91d4acb0dc65b9ea7ade"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-160253-338/profile.json",
+    "bytes": 51412,
+    "sha256": "80fa6d02d23379ce2775e2d4da4950d4d7325f0256747300467b31d2c32ab982"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-160253-338/profile.json.previous",
+    "bytes": 7909,
+    "sha256": "448fb5a36346c3a8436ddcbd898af960ec4f9549d783e5b63ee2935df7d4f4af"
+  },
+  {
+    "path": "_planning/migration-1029/ui/features-20261029-160253-338/result.json",
+    "bytes": 136,
+    "sha256": "5e3fc5baac0adb0b2082764e5a9b6ba0752c91a9ae78d2a14d171ba03a2c2b9f"
+  },
+  {
+    "path": "_planning/migration-1029/ui/fonts-receipt.json",
+    "bytes": 3113,
+    "sha256": "700b1f450a33411b5f606798892065bf843a686b974ad10e62bfdecc753c9843"
+  },
+  {
+    "path": "_planning/migration-1029/ui/hub-reference-vectors.json",
+    "bytes": 20016,
+    "sha256": "53b2029c161cd3b3d93d1106cf636ac949803249a76247121a7ef171394cd73f"
+  },
+  {
+    "path": "_planning/migration-1029/ui/icon-checks/Program.cs",
+    "bytes": 2764,
+    "sha256": "e7329cd2924477c4c5f5a67fa8f11e0c7f720c601566ae40fbfec9bcb0688523"
+  },
+  {
+    "path": "_planning/migration-1029/ui/icon-checks/result.json",
+    "bytes": 63,
+    "sha256": "6e4cf30c677845d383eef2060226c1ed389c2234d0b62361f8166e56ba5eaff5"
+  },
+  {
+    "path": "_planning/migration-1029/ui/icon-probe.png",
+    "bytes": 3581,
+    "sha256": "7148722b3eaae74d0d9cae950913d5769f6469c1ae6f60ac5c3db779e2da0298"
+  },
+  {
+    "path": "_planning/migration-1029/ui/icon-source-vectors.json",
+    "bytes": 22827,
+    "sha256": "aa15321f61ed8be7b96760850422c1bb19cb1e5630be35197c1597e923de0315"
+  },
+  {
+    "path": "_planning/migration-1029/ui/icon-source-vectors.mjs",
+    "bytes": 1282,
+    "sha256": "4fea140e894b4e8cd91480ccf3e17602357876a653b2b5b34cd7fbf5b096acf3"
+  },
+  {
+    "path": "_planning/migration-1029/ui/icons-receipt.json",
+    "bytes": 40982,
+    "sha256": "5ff00bd39f62b24ebd1642255b3a61119a4c25cf02becb4fca782f01c1efa3e5"
+  },
+  {
+    "path": "_planning/migration-1029/ui/icons-verification.json",
+    "bytes": 156,
+    "sha256": "d356a8d9fb5baa6ac231d785dea36a5e7bc14254ba3a5c2e5d35799fc9175706"
+  },
+  {
+    "path": "_planning/migration-1029/ui/source-hub-vectors.json",
+    "bytes": 299912,
+    "sha256": "ef1031697d358ed8fa575c7b367ffca87a12eeff86fbf64b03361e7270cf3e98"
+  },
+  {
+    "path": "_planning/migration-1029/ui/source-hub-vectors.mjs",
+    "bytes": 5574,
+    "sha256": "5ccb0be20ffd2fe0842ee0628503b5114122e012e473936c40856e1358cc3b29"
+  },
+  {
+    "path": "_planning/migration-1029/ui/sync_assets.py",
+    "bytes": 14658,
+    "sha256": "3db6d2c9120e96fa91f8092d42d99f83600489026d7c877a1cf1175b8b30fff3"
+  },
+  {
+    "path": "_planning/migration-1029/ui/sync_card_identities.py",
+    "bytes": 1415,
+    "sha256": "6129a21f48bb7c03fb1821ce2709bc6b25eca4a7a61cd7a29e635e01958198c0"
+  },
+  {
+    "path": "_planning/migration-1029/ui/sync_fonts.py",
+    "bytes": 1652,
+    "sha256": "c6b8a168642687dc84d86cbe01be42c5c50cbb17e3ce6319d0e6486bd651efb9"
+  },
+  {
+    "path": "_planning/migration-1029/ui/sync_icons.py",
+    "bytes": 6415,
+    "sha256": "f084a3071b536a1336a2383f353a2334c1914640fc728409bdf549e85dc20e0f"
+  },
+  {
+    "path": "_planning/migration-1029/ui/sync_thumbnails.py",
+    "bytes": 2467,
+    "sha256": "7952cb1707a2226e6a2363b9f48871ea65cb94afe70fcbaad4bc026ea215d0b9"
+  },
+  {
+    "path": "_planning/migration-1029/ui/thumbnails-receipt.json",
+    "bytes": 93907,
+    "sha256": "b608f902e8d9a58232e8b9e63df03418394079b6422de7a159be062790df93c1"
+  },
+  {
+    "path": "_planning/migration-1029/ui/verify_assets.py",
+    "bytes": 3211,
+    "sha256": "f4442e8efd858ba5b3a569afb811ad8f10993c5253e61de4ffc0f16534718767"
+  },
+  {
+    "path": "_planning/migration-1029/ui/verify_icons.py",
+    "bytes": 3211,
+    "sha256": "265ef8d42300b399557f176582dd804035d24cda2dae6bb37a33f7ad5f5e1742"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/README.md",
+    "bytes": 3551,
+    "sha256": "e7225d7ca97f818d5c0782a19901b2d570600770fdc05ca0e2614ad1524b00a9"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/check.py",
+    "bytes": 4219,
+    "sha256": "e6e9dec6828448358ab87ee1da8a13418d41b506f47e6339f073dd93ec87289c"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/receipt.json",
+    "bytes": 1988,
+    "sha256": "92da9a184f0913f3ff8dbc77a6c82c60100f0184c170e9f02ddbe2692b555d3f"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Boot/BattleBridge.cs",
+    "bytes": 24192,
+    "sha256": "9fd99370b024e86a7a11d754f6d6c6454b98012f14ceaba95ca0aafb9f202a1c"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Boot/BattleViewApi.cs",
+    "bytes": 12542,
+    "sha256": "0601875510314479e4e045431d6b5187ae9c4cceb93ba76b43558dd42b913cbf"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Boot/GameBoot.cs",
+    "bytes": 2308,
+    "sha256": "9cbd1e76b5e4b8c105a417e15fe5b3ac085139ea60c1c8e71e7452ff82de9cbd"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Boot/NativeDisplayReview.cs",
+    "bytes": 28022,
+    "sha256": "f084216c7221040ed0a608c27ab6e28e8be52a84caef8db614b4659159f4c45f"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Boot/RunLoopBridge.cs",
+    "bytes": 7338,
+    "sha256": "0419011eed138eb49d5762001f2e98c0263a9237a73fcd50b10c73ce767010d9"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Boot/Sdt.Boot.asmdef",
+    "bytes": 442,
+    "sha256": "4f71a1c7b40be0fa7bd54bead5326329c40b687366b7bb73d4164e7d5ea5fa49"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Boot/StartupTransition.cs",
+    "bytes": 4438,
+    "sha256": "9b2b78c2068066e756aba50e92c4470199924b6a6cbd81611cf6da193c88e747"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleActorPresentation.cs",
+    "bytes": 6879,
+    "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleComplexSourceSemantics.cs",
+    "bytes": 4160,
+    "sha256": "2790fa44a8fd60fc81db80ed880f69ef8fa703897adab19329de06e653c18082"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleHandPayment.cs",
+    "bytes": 4226,
+    "sha256": "addb0f680933c19b718f98002678b02c1eab3606563a1ef2612ccbb5c469c2a1"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleHandRetention.cs",
+    "bytes": 902,
+    "sha256": "7322fb225faaba9ba148da64a8c280f122673c8e4bfe5ed2878a38d395883a1e"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleHandTransforms.cs",
+    "bytes": 1302,
+    "sha256": "2bb817c0acd3af5024034e4c12c3ecddbefe478f075a103e384650fc08723c47"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+    "bytes": 8616,
+    "sha256": "8ecab8fc3770a22210f5cb35e28a54262006440b4d34841227eeba3c1e5924ba"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattlePlayerEffects.cs",
+    "bytes": 5122,
+    "sha256": "86ca5202e205dc4803eecb3d9ca68223c69709d73c20bc0d3727db716aca4fc3"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleRestartCheckpoint.cs",
+    "bytes": 5854,
+    "sha256": "3cb6cbd98dabc5631140902a86c961c9ac4e471b55f6f9c10d108b28d5438cfe"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleRuleConsumers.cs",
+    "bytes": 1712,
+    "sha256": "e862713c60b6659ba2b3afaf37624ef1a03aac59c508eebb3281bd4812030d04"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleRules.cs",
+    "bytes": 6118,
+    "sha256": "fddb1f24a80d9387d999214415f7b078b0eb4ade955e36f9072427d09b1798fb"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+    "bytes": 77026,
+    "sha256": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleStructuredSourceSemantics.cs",
+    "bytes": 2862,
+    "sha256": "d9511196df1d295a9d5115542798c05a4237d59ad8cff1eaac7b9cc80ef83dd0"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleSummary.cs",
+    "bytes": 1389,
+    "sha256": "e92ca71430ff55a791c4e789e4ce2ed2425c3d237804642eb879b7caf1ab010d"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleTargetSelections.cs",
+    "bytes": 5861,
+    "sha256": "94e47885b7e54f7827e0f367a59355bcffc2525b4de87bba0eba9a71fc6e0268"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BattleTurnForecast.cs",
+    "bytes": 4612,
+    "sha256": "078203f3ce41621d5a8b6587b8d2cfc3b5a7db9815368cd41c75058646a6ea90"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/BuiltinCardIdentities.cs",
+    "bytes": 4629,
+    "sha256": "a3ada0917af87de1711dab489f9b53a4533324ed42e57d602db9bcddcf89a5d5"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/CurrentBattlePools.cs",
+    "bytes": 3447,
+    "sha256": "a3073fbf236a1a3bb2297ccd12b7c0fde24ad6faf67316438d6ec9b81f154af5"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/CurrentBossMechanics.cs",
+    "bytes": 3558,
+    "sha256": "644a8f0928c831a50a2b935042ade0553e5d0958a8d113aefa7545445c864a0a"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/DeckBottomDiscovery.cs",
+    "bytes": 963,
+    "sha256": "b665975e94a231537017509f16798e585aa6c6733738b623e65db7caa69f3179"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/DeckOps.cs",
+    "bytes": 1281,
+    "sha256": "0aa9473b6a1c6fe7aeae6256824f352006132e91a8afcf95b9f505798a516c51"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/EffectExecutor.cs",
+    "bytes": 26181,
+    "sha256": "69ef97a86d2870c8267069ee5e1ed2bbf6ff19d5e24000bef1f88819e519d632"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/RuleValue.cs",
+    "bytes": 1606,
+    "sha256": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+    "bytes": 73927,
+    "sha256": "9f639275a45c1037b68f1a5fa08a326f709cae5ebaad8a363fe55d635d83b7f1"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Cards.cs",
+    "bytes": 15649,
+    "sha256": "02dad40ff56fe46c2901125fc6f167a237735711c093776e5bf24e8c4e771120"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/CardsExtras.cs",
+    "bytes": 3996,
+    "sha256": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/CharacterTable.cs",
+    "bytes": 6267,
+    "sha256": "f7f33fda167b7275bcca4d26e25f0a6345087e0cc3c7f84e1dd3edebfae195a6"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/ChestLoot.cs",
+    "bytes": 6924,
+    "sha256": "0b09603d4ec67651801b5b85ed925144f14bb7a7a58a0e89d0a8e2f68a97e87b"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/CombatResolver.cs",
+    "bytes": 26655,
+    "sha256": "32dd0e1558d1fb62fda29b88c94e85c74e1fe02d63338268d726ceca0b1fd242"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/CurrentMapData.cs",
+    "bytes": 7909,
+    "sha256": "287c8d99bc7d852ef8273e921867204bc2e0b319f17c1b43c329ea08a938b800"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+    "bytes": 127842,
+    "sha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Data/CurrentBalanceData.cs",
+    "bytes": 662,
+    "sha256": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Data/CurrentChestData.cs",
+    "bytes": 1727,
+    "sha256": "7dfd4b8993fa3b7bc85acec47195d69d819173c1a96eb89d9fd841e0f58dec2f"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+    "bytes": 72573,
+    "sha256": "935646f0a1f0d2502f58747420abd62d4908c78e51d5e70610f99c757f785579"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Data/EventProgress.cs",
+    "bytes": 2040,
+    "sha256": "1b7192db6245669f388391a91aaedfa57a8218babc804990ef73d09187fa7da2"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Data/SceneCopy.cs",
+    "bytes": 13290,
+    "sha256": "9ca1eedae3dd26063c9c1d5e1f6da3f966532a476af8c71b1fb30fe9a43b680f"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/GameRules.cs",
+    "bytes": 2969,
+    "sha256": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/KoiPondModel.cs",
+    "bytes": 7273,
+    "sha256": "70799c15f470491a86adc5e3944f8a288aea6362274f328dac4fc3459987fde5"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/LayeredMapGenerator.cs",
+    "bytes": 25766,
+    "sha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/MapModel.cs",
+    "bytes": 32585,
+    "sha256": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/RewardReceipt.cs",
+    "bytes": 560,
+    "sha256": "716e80ecdee107982f725e4768964575911d07b8ff7ac37da2998fc866f07cd1"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Rng.cs",
+    "bytes": 5470,
+    "sha256": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/RunState.cs",
+    "bytes": 7217,
+    "sha256": "7ccd5d30c156dcf83cd73c2d7b4a78a2ecfddd6b8c05a5aa94ac637fac481989"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/Sdt.Core.asmdef",
+    "bytes": 349,
+    "sha256": "aaf418187e300323babccae7b2e0a20b1e528855c6e80c93ebdd8411839a712e"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Core/ShopOfferReceipt.cs",
+    "bytes": 255,
+    "sha256": "5088ca7446567ff33bbcf18362bd356af9a3f7e19ecc26bc9ee53efd6087ad4d"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/CallStack.cs",
+    "bytes": 15420,
+    "sha256": "feee9c7fce39092e50b11b10541066b69c4c45020972e34a94421382f4e556f3"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Choice.cs",
+    "bytes": 2052,
+    "sha256": "e04520d4bc490c0dea6e47aa1e5e90ece835cfbc14ec61e0f499def33e1d1863"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/ChoicePoint.cs",
+    "bytes": 2750,
+    "sha256": "8b9d5db6be07bcf5a36124762c047003abea13223be7b2cd4284495cd8dc19ce"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Container.cs",
+    "bytes": 11546,
+    "sha256": "b15e9e4da486244ae1774daa154dc1aa4a29d80c868240efdcb8ec9c20edb9e8"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/ControlCommand.cs",
+    "bytes": 5098,
+    "sha256": "fb3656fb953c557733f2eb15b255329fa326d8813e7daed80caff21b0a729427"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/DebugMetadata.cs",
+    "bytes": 2522,
+    "sha256": "16bc8206a12586225b0564e988b09fe2b016ca732f05a25173c8dd67dd50e91f"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Divert.cs",
+    "bytes": 4511,
+    "sha256": "9b9e6e291c9ca0449ddf21f07b2f50d0bb56149cf770a55f8b57acf32978993a"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Error.cs",
+    "bytes": 792,
+    "sha256": "e49ad61beaa8764417990867aa9c39cca81fb425bab188e17aac56aeecb50780"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Flow.cs",
+    "bytes": 3506,
+    "sha256": "84424f634b4d07bf9aac5949da80a02544f16c57828c6ab1b2fbcee899c15e56"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Glue.cs",
+    "bytes": 198,
+    "sha256": "1bde0c02fe8c4a87e12a533cad83f3eb00dd241eaa3f2020aee8d7b78c57a8e4"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/INamedContent.cs",
+    "bytes": 121,
+    "sha256": "9d791f7a12d82e2c4976016c6170d4961422f02d1ebe22804ce475e8a6a12aca"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/InkList.cs",
+    "bytes": 24048,
+    "sha256": "a4bf43663462a0c42d7ca0c59c7d44768f882db715c5f54c637b5d09e6724543"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/JsonSerialisation.cs",
+    "bytes": 28307,
+    "sha256": "4b8b214505ede872e724675bd05c7ecc87ec6d86b09105394c63bde1178da747"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/ListDefinition.cs",
+    "bytes": 2317,
+    "sha256": "493f3379995da4fa49302ddc276659150a65600e48c0d1be54b10c7324da0211"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/ListDefinitionsOrigin.cs",
+    "bytes": 1720,
+    "sha256": "059b6ade51bd7825800fdb06ec92671b9169fd725984ef84f9a63aed72755c4a"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/NativeFunctionCall.cs",
+    "bytes": 20154,
+    "sha256": "e050cb423d5c0fd3c854fe9720d79c3c27c132cd5b5d76bc7f901c707204976a"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Object.cs",
+    "bytes": 7968,
+    "sha256": "d0054093a306270e7ae5f710a0cd816d619663e5f6afa134bebe0d0e0773d5bb"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Path.cs",
+    "bytes": 6922,
+    "sha256": "1c940aa8f7a1fc1c114fb271aee38b8507a3a167c1ab09e0b8120aa64c8de6c4"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Pointer.cs",
+    "bytes": 2039,
+    "sha256": "89f2e1378db5124aed55d58060c806a791a70eb333e98a73223381e974fe55ea"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Profiler.cs",
+    "bytes": 10866,
+    "sha256": "e56d1754b7d538db056ae0e81a9a1fefb4bed862dcbbe5c384cf898bd65f2c9d"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/PushPop.cs",
+    "bytes": 186,
+    "sha256": "37616544617f8846a19b4e1290080607f823af2d03c33ef354dba596ec3e1d82"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/SearchResult.cs",
+    "bytes": 822,
+    "sha256": "9aa562665d815cc0bd339e496dfbc0228f7ed941fea8a12cd0876c2b40f8482e"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/SimpleJson.cs",
+    "bytes": 20212,
+    "sha256": "bf7c32271a54f568edf3e3c726108d1f18c53193bc8131699e4c752d8cc8bbf3"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/StatePatch.cs",
+    "bytes": 2419,
+    "sha256": "5e5906efc2f7154170c7603e6f990911dcbaea8aa600a70d6a83ac9960dff699"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Story.cs",
+    "bytes": 129567,
+    "sha256": "10a150e6438360f346bfad4ffd17749bcdc5ae851fd11e4bb957ed27e0604340"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/StoryException.cs",
+    "bytes": 789,
+    "sha256": "6993aa38c828a1d76027e776c1bd2f3fdbd95f54df5b86b930f641b9db7c4c8c"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/StoryState.cs",
+    "bytes": 50479,
+    "sha256": "a44bf0bbc26b6a6a9b3a34b658330f97b742ebde63578c11125873d69c4a5d7a"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/StringJoinExtension.cs",
+    "bytes": 555,
+    "sha256": "0aa43366b08ee029ac5a56377717805888e46149b264db1c10c77edf3773c225"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Tag.cs",
+    "bytes": 818,
+    "sha256": "f9ec45926ebeb3c8753351cbd997d6347fa8aad525c31ee8f9a91d9ef33d6654"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Value.cs",
+    "bytes": 12147,
+    "sha256": "59b8cc9fa877403310032198c4a0cb57c2917e0649ea85ad956800f36ed8f093"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/VariableAssignment.cs",
+    "bytes": 815,
+    "sha256": "8b40e2e6c48f42f310168c8e34f947af27e9fe7ccd205afe4f16c709ff71f17c"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/VariableReference.cs",
+    "bytes": 1356,
+    "sha256": "41226b1348a57acbfd127fd68b2b37632446111a87bf56c06c5fdcd6a2038ba9"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/VariablesState.cs",
+    "bytes": 16394,
+    "sha256": "a1a2fe694b8e2b41b85991fc76c4dfb0012215334833747fdbfb28cc8a13d265"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/InkRuntime/Void.cs",
+    "bytes": 124,
+    "sha256": "f7e5d018a1591b1b7a728196c29e7acc5bfbcd5bdfabada52dab704cb5d88c8e"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/NarrativeService.cs",
+    "bytes": 5571,
+    "sha256": "4c7a2689ed16e1e370c5f83b0fd09081311a2e48ee41c4eeb6f042a94a581724"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Narrative/Sdt.Narrative.asmdef",
+    "bytes": 383,
+    "sha256": "72870e9d9725090fbb864d8606257bdd8a2ecc7fca8f6a8cd5c98ef84b42fc81"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentArchiveAssets.cs",
+    "bytes": 1938,
+    "sha256": "52b661f1b49a5a1e3df365f0103eabc79470526f0a596ecd4d149c04108b39c1"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentAssets.cs",
+    "bytes": 40513,
+    "sha256": "50d2e9bf618a6654ebe435589817eeb46a0c552fc3300cd43b8f2bce252a5329"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentCardPresentation.Rich.cs",
+    "bytes": 4231,
+    "sha256": "f61172c1e58e27e7bdfab172fbd9a4c094d8852f89721de729ac4d4f40dea501"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentCardPresentation.cs",
+    "bytes": 11185,
+    "sha256": "d8cb3de46b458066413c19290ff92858f1754ebaccf74aef86fffd01b48a515e"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentHomeAssets.cs",
+    "bytes": 1455,
+    "sha256": "1b07fa4e20dcf4586582940d57f6508ca81948be99c3b29b42d41a9bbd3c5ebd"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentNodeAssets.cs",
+    "bytes": 2423,
+    "sha256": "d3d7350ffe5bc3ead300fb87a81175a80ff0b10b97891652c7a26e7324324d6f"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentPhotoAssets.cs",
+    "bytes": 1059,
+    "sha256": "978ece849b9a96da82c3fd6d43f4de1df5706b38667a1f95ba8b11198f50cb10"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentThumbnails.cs",
+    "bytes": 22719,
+    "sha256": "9424e6d5c92818ce054a9df6cf029daacb630cb9a843330639556195ab88110f"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentUiIcons.cs",
+    "bytes": 10723,
+    "sha256": "be8f01c1f337fd0206c47fb427db7f18741e22c9930af4c8d34c3bc085a8b0c4"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/CurrentUnitFrames.cs",
+    "bytes": 3838,
+    "sha256": "c58df1429b084d6e322d4e74344a57f33f74e4f45d06b8774f2102626260002f"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/Res.CurrentRunHudAssets.cs",
+    "bytes": 758,
+    "sha256": "87e4ca204bbe5b7f29f4fdf4c95d250c8febe545f474a907c810b575c1b1a356"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/Res.cs",
+    "bytes": 10526,
+    "sha256": "71978ac545a8b9a6142ded76ae8a2a5e4ab9c42331f4e733b6f910ebc5644b14"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/Sdt.Res.asmdef",
+    "bytes": 323,
+    "sha256": "3b2f5f0dd76147c4585893d892a0a364225650d2fd8648acb450c7c6487f5ca7"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Res/UnitFrameCatalog.cs",
+    "bytes": 946,
+    "sha256": "0f1f4a96e9fe4b022df67559b956162edcde1f48c121a8ad28fa1857c4282d97"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/AtomicJsonFile.cs",
+    "bytes": 1209,
+    "sha256": "827b9ff1c75cf8c1a82148ecdfe0032215b00e85442e3f9f19042f92c9b5db68"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/AudioService.cs",
+    "bytes": 28233,
+    "sha256": "a1c405f2ecedd0654369eb296894d2b2b2cf6d916dcbe7d146066d33d5916576"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/BagItemCommands.cs",
+    "bytes": 7643,
+    "sha256": "960661f4571d9056348e3a7423c9dbff8ff24fe9ff4e63c3c97e0593bd213e4a"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/BaseData.Customization.cs",
+    "bytes": 6463,
+    "sha256": "112923cb7652b92e980d904ecdc57a5505024e1aab5c1413e90940cb554708e4"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/BaseData.PetsMaterials.cs",
+    "bytes": 5283,
+    "sha256": "706dc1bd80d7aca04d47a62d62c21a8a0a84ff92e2a8d4d8f808332cdcd6e935"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/BaseData.Preparation.cs",
+    "bytes": 10792,
+    "sha256": "f63cd7ae1da24436816eb47ab13b7af12f7f085bbdbfc6e0cdec83fdfda4543c"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/BaseData.Story.cs",
+    "bytes": 6474,
+    "sha256": "b044b5673229b99cf28ce8793c38cda2452ce95bcd096c28e4d592e6892b3173"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/BaseData.SupplyPack.cs",
+    "bytes": 3260,
+    "sha256": "fb3aeec0bbdacdd7c16df2c06d7f768722c7475e35bbd373927a82d659374c16"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/BaseData.cs",
+    "bytes": 23151,
+    "sha256": "45d297fff5224306db0a66fd22eeea8aefacc3bd066189f65b8a74ab71fbeb9f"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/CardContainerCommands.cs",
+    "bytes": 9637,
+    "sha256": "a77ee6c656911bebeb734e7017d8487803d2321d93f23a58f1079319207c2687"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/CourtyardPreferences.cs",
+    "bytes": 1039,
+    "sha256": "47572bcf9fea5d8188dd4e5ee351b7fc90c908e483c221b09681f37d317d70db"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/CurrentSettlementReceipt.cs",
+    "bytes": 7055,
+    "sha256": "782acad82d4cbf855fb8b0d14acaa9e5aa8467af577d9824e05f54898129b141"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.Altar.cs",
+    "bytes": 5739,
+    "sha256": "21b4435688fdcc861fb67bb2863070e2d03c45c5847ac3f758e5644d3741c371"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.BattleCheckpoint.cs",
+    "bytes": 2040,
+    "sha256": "9ec3999fd60ed8b91d89d5e04c51c93d1214cec8fddbba7d0cbb0b947d7ecd52"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.BossGate.cs",
+    "bytes": 2000,
+    "sha256": "f5dc62cae3e4d436e79b9b85bfa6b13997e5bd574d71ab919c711d669c8a6861"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.Commission.cs",
+    "bytes": 9271,
+    "sha256": "5e8c9cd9e54b5dee1d7d0477f8539a1077edfad74da1f3c4580c5f040337a3a3"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.CurrentNodeRewards.cs",
+    "bytes": 6056,
+    "sha256": "bca18da9d3160b884adc9ca09d4895650f5c20ca2d3ebedb52c3042034d48abe"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.CurrentPickup.cs",
+    "bytes": 2883,
+    "sha256": "a84f94e8ee82ff2051211410f75be66a75a292ae3f31d1a5df2ae93a994b854c"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.Departure.cs",
+    "bytes": 6909,
+    "sha256": "3c45dd0486ee872221fa088c3549065093a786865cf8be0ae049b0a8329dfea8"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.EventRoutes.cs",
+    "bytes": 12086,
+    "sha256": "3e4636fc26da9e8a8328a82e19f32aaef0bcf81309da517ad04097dffa06aad8"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+    "bytes": 11999,
+    "sha256": "6ebd9aa032c101be532be776a52a43c8acfa281a1474ddb6db19ba064428f28a"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.Map.cs",
+    "bytes": 11093,
+    "sha256": "b42c73755e89cf56c5bc90efc40d25014c6c3c71d7eb5ed4a12ba1031c653187"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs",
+    "bytes": 5897,
+    "sha256": "d87e92602ea1e71695680fc7c01015b6e1a02a3861393742b5b189067acd2549"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.Settlement.cs",
+    "bytes": 15776,
+    "sha256": "b89560f72ebd67b4bdccdb2043eb1741d1363040cd8ce835f9542f9e22831e05"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.ShopAcquisition.cs",
+    "bytes": 1863,
+    "sha256": "9564eff843c173dbfeee195ecdbcec7834d51054e48bd262e0cecb57d0596e7c"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/GameRuntime.cs",
+    "bytes": 74881,
+    "sha256": "6e948f7725d2aa417b837f6485f53f2590d77fe8f3bdcd0fda3e786688f1238e"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/MetaProgress.Achievements.cs",
+    "bytes": 2725,
+    "sha256": "a08345817b965554cbbc6592ed2127cb353023ccef0a0014c84fc0f9223a0e6e"
+  },
+  {
+    "path": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/MetaProgress.Collections.cs",
+    "bytes": 4849,
+    "sha256": "963b9a6cb3fb490ab868e74a5b8121498cec55614c6ed0a57185d2060df07f17"
+  }
+]

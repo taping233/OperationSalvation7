@@ -1,0 +1,362 @@
+[
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__EventSystem__UIBehaviour.cs",
+    "bytes": 2561,
+    "sha256": "1318c973273b71180dd140f9889859bea0361df41d58288eb46d029dea6dc250"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__EventSystem__UIElements__PanelEventHandler.cs",
+    "bytes": 25258,
+    "sha256": "c5a2dd65ce0a4bac3b64baf8b28ecbeaf8f67000e5cb43c5a3b6b8d523e4fa56"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__EventSystem__UIElements__PanelRaycaster.cs",
+    "bytes": 3976,
+    "sha256": "5d2efd44ccd3b5d56b33aa61f196a1d714430f7ce6169718d93f10bfcbafd4d3"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__EventSystem__UIElements__UIToolkitInteroperabilityBridge.cs",
+    "bytes": 12478,
+    "sha256": "0efd25d2b6174bed4671957615af3414e64ab013bab3bb39926d419d2a415640"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__EventSystem__UIElements__WorldDocumentRaycaster.cs",
+    "bytes": 5083,
+    "sha256": "61d939e2f25bafd76462db7f32621a7d21a2ba93afcc04af4a80a382ef67e961"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Animation__CoroutineTween.cs",
+    "bytes": 6595,
+    "sha256": "508de2199126b8baee7b888e29c2bd0a39a20553ea2d8db359ad96d6c922cc3e"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__AnimationTriggers.cs",
+    "bytes": 6130,
+    "sha256": "9bd0076530f545f837ba3b8fcbe64c4dadd2f7253737f642f12a4a49268d5fbc"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Button.cs",
+    "bytes": 6560,
+    "sha256": "3c782c7a0446dd3417ea7daf877149e644bc92cf9e61ba39228e788098519e12"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__CanvasUpdateRegistry.cs",
+    "bytes": 15942,
+    "sha256": "01bc16cfb1f096747fb674ea66aa06a3b746527fcf7be131238e4ade76d849dc"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__ColorBlock.cs",
+    "bytes": 8157,
+    "sha256": "9682c31afe58c3d370a8be4f42c332e3b95a53700a4ab6faedbab9308d7b7b54"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Culling__ClipperRegistry.cs",
+    "bytes": 2464,
+    "sha256": "f2ff08b44b211279d84d33a4eebeeb049209ca73b4f1a2ac4a387af26456b7d9"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Culling__Clipping.cs",
+    "bytes": 2085,
+    "sha256": "3268bc1bc0a28a77fb835536e79848def014634b46960645e69ad1ed1a236f24"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Culling__IClipRegion.cs",
+    "bytes": 2090,
+    "sha256": "710974022178e0cfc9214ccb1b8ea8ea72839822c8934e2e1eadd6dffd83df4e"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Culling__RectangularVertexClipper.cs",
+    "bytes": 781,
+    "sha256": "07dd7451205044c87850c8baf6632d765b1bb9b5fb47077d2260c57cbbcd2202"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__DefaultControls.cs",
+    "bytes": 36429,
+    "sha256": "f519e8450bc1df68414ea641dbd79622e7922e1e21169bf7f89b8e63e00acbfc"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Dropdown.cs",
+    "bytes": 47053,
+    "sha256": "2adb98efebf85621aaf33bfd03e0f2dc205c7b47f6bc04354483dd8f0c1a34d8"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__FontData.cs",
+    "bytes": 5893,
+    "sha256": "a3f917da73e530d66b28b83a6314005ccf50c3048a7a6f983de4cc0d196b22fe"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__FontUpdateTracker.cs",
+    "bytes": 2856,
+    "sha256": "65f31f377170a26ecaab7481d60005876c6686f17fa102902f53c506d1f5b935"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Graphic.cs",
+    "bytes": 40556,
+    "sha256": "f4ec2cbc2db4c12f6b35cf6624c0232a2ecace9356a8ab2d92a43ec52b1bb84c"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__GraphicRaycaster.cs",
+    "bytes": 14283,
+    "sha256": "ebffac43a86057f139e7938d409764aa164f82396e104a6c2c0e45a5a5061c8c"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__GraphicRebuildTracker.cs",
+    "bytes": 1823,
+    "sha256": "22edfe9a78769f5be1e5dad101d4650b1e9b413e9e8e8774c60bcbde5b112658"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__GraphicRegistry.cs",
+    "bytes": 8296,
+    "sha256": "6e82be0057aca338129b113e73fbb54e55511bbae95baf93314e9fc99476c764"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__IGraphicEnabledDisabled.cs",
+    "bytes": 192,
+    "sha256": "940ef9cc8e128ae03a4fc4bc96102a9e8566998810f35f5d79ec1b6daf239074"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__IMask.cs",
+    "bytes": 305,
+    "sha256": "f1f5855bebf5179a0a7755a02a75610b43c5750663713e6cd49e4bd9b86eb3bf"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__IMaskable.cs",
+    "bytes": 472,
+    "sha256": "c8a30ae5bd9f1787e7f50e2457ef4b7bf705b00c74fbbc14dee80f74000222ed"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Image.cs",
+    "bytes": 81929,
+    "sha256": "59250c4075601d8724bbb111d8b60d863cebde3cbda2a7dc1911f990e15d9502"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__InputField.cs",
+    "bytes": 135847,
+    "sha256": "5d0829d38a0526a3726f87dc44f0cb1823565b13a0be6b93a53b0883a6c60bdb"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__AspectRatioFitter.cs",
+    "bytes": 8898,
+    "sha256": "bbc3ec90287a011dd0d7d92e89f8590def05e91a2e5d310ac8d7f625c0011df6"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__CanvasScaler.cs",
+    "bytes": 21129,
+    "sha256": "7c7a3b5cb6c06848c2b89051ff2733c6bc01df394a2cd196e46447deb135e007"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__ContentSizeFitter.cs",
+    "bytes": 4649,
+    "sha256": "f61a2e2cec32fa4948aa6fbd1b6154c261ce85161ca7c90ef3af32881c80e5b9"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__GridLayoutGroup.cs",
+    "bytes": 14493,
+    "sha256": "6a8c7351192c1a05acd51b0b6ac2b26077fedfa00788407c301074c39ea18102"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__HorizontalLayoutGroup.cs",
+    "bytes": 1334,
+    "sha256": "ab34fc19f889083bf5597426f3feb9ca88b736f67865588204c0d9aca7c5d012"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__HorizontalOrVerticalLayoutGroup.cs",
+    "bytes": 14455,
+    "sha256": "b815fe7b760d5a1ae1ed0d177708c94d28cd46c662655e5320130f03630dffeb"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__ILayoutElement.cs",
+    "bytes": 12484,
+    "sha256": "9612c51e3852554bb56eb60c1fac66f3b2366484782736e295d57c351032e53a"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__LayoutElement.cs",
+    "bytes": 9400,
+    "sha256": "30a8c51b88be3add501b2fbec15255e8e0ed40c50a3d470619ef242e4589df2c"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__LayoutGroup.cs",
+    "bytes": 16112,
+    "sha256": "aed0ff645a0ae82c3ae63bc8886d6ef653401c403245f293b25ad115d6fbd7c8"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__LayoutRebuilder.cs",
+    "bytes": 12579,
+    "sha256": "d44a291187b7562c3dd0a802f9eac0b76e6839b60128a62d1a1bc40f7c826881"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__LayoutUtility.cs",
+    "bytes": 10272,
+    "sha256": "70a46cb05d05339e1861d97560bb08616efbc36f82ba51941c4f83715f537a1f"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Layout__VerticalLayoutGroup.cs",
+    "bytes": 1315,
+    "sha256": "8c9123091369571fb9c6ced2fdc3e3dbff0933ceb8aa89affc33103e9f63653e"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Mask.cs",
+    "bytes": 6978,
+    "sha256": "470580a20d8df47df14519e114a20577c877bb1a356d8c516e126e96b28af0ac"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__MaskUtilities.cs",
+    "bytes": 8736,
+    "sha256": "a7badf134a891d78a239af176d25aad595d5912a56162b8e4995bd87879c29e6"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__MaskableGraphic.cs",
+    "bytes": 10652,
+    "sha256": "add4178505b8b900786a4aa2aff872693de6322ba32a10f96884394a87704557"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__MaterialModifiers__IMaterialModifier.cs",
+    "bytes": 819,
+    "sha256": "c5a224cb4af4f46b4ccddd5bc163d3cbbc5a6eb62f17d5e7964ed4137ff6690b"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Misc.cs",
+    "bytes": 1284,
+    "sha256": "27b2ddd1000eef68e6f2b00f4e25323625c11b8f5d4751eb2198641eba0e9e8f"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__MultipleDisplayUtilities.cs",
+    "bytes": 9673,
+    "sha256": "579ee811c744e971c3450c74bb7f2ce3b6399324ddd48f5eb9a4a9d073a2f15b"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Navigation.cs",
+    "bytes": 11396,
+    "sha256": "0ba0c5d749c6860e1491e59f6b3e98b535d0c467ab6f0d40a3f9984548ecc74d"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__RawImage.cs",
+    "bytes": 6492,
+    "sha256": "d0d075ffe4239d95398602cdea7b9130b6242a23da53b4ee4901db9c28e3f527"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__RectMask2D.cs",
+    "bytes": 11889,
+    "sha256": "73cc60daa42e92c920e904df5c01aaa5ccf990c52406740253a02a82b168e4b4"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__ScrollRect.cs",
+    "bytes": 57732,
+    "sha256": "25ddf484fcc0a59d317b0c51d1ce5c6cafacd5955eec42fbb5cae21e19dc9059"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Scrollbar.cs",
+    "bytes": 20575,
+    "sha256": "02b6121f8a44fb4b2effc01aa3de79df3690d3bf914f4094daabae24fecf91df"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Selectable.cs",
+    "bytes": 51539,
+    "sha256": "50da82e4719042ce02e3db40fbb0be59e74e88bec85bedc3e6d96bc25b76c598"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__SetPropertyUtility.cs",
+    "bytes": 1127,
+    "sha256": "71470d9519a6cfebcf3448f5d7d4bd2d06d2b5fdeefc4c537d8f30855f02ce5d"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Slider.cs",
+    "bytes": 28848,
+    "sha256": "1c8b2312027b5faf5d02b16e2f5e8f6cef3fa13ca220f2be04b746e4fd144c30"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__SpecializedCollections__IndexedSet.cs",
+    "bytes": 7350,
+    "sha256": "efba8f77d628507000cf4e49ae226d5d2c17d040136d0eefc31f37127403301a"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__SpriteState.cs",
+    "bytes": 1714,
+    "sha256": "26f3f224cd54cdf4db8b6dbadadd8baf51c6b43c0d68dacfbcebabb1b57b5ea4"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__StencilMaterial.cs",
+    "bytes": 7213,
+    "sha256": "8facfafb4463959c85d7e4ecb49e38fa9661720fc72c1e999bd3dc94ef1847cb"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Text.cs",
+    "bytes": 27301,
+    "sha256": "424666311f5d20cd4d1b5c6b532ee87113bf95364b542b5ea04ce61a4d33efb5"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Toggle.cs",
+    "bytes": 11123,
+    "sha256": "2ecc608dfc6cc4680f09c1be3d1536fbf775fd6867243bc103b59ef0270c2300"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__ToggleGroup.cs",
+    "bytes": 6853,
+    "sha256": "300fff39a8b870e21c4d8a9432b66474a892ee03df6732057afcb7ca642f6e4b"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Utility__ReflectionMethodsCache.cs",
+    "bytes": 4487,
+    "sha256": "eb43b47e7ebf5db08464fbf46d7f396311f853f78e481a06636d177788430995"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__Utility__VertexHelper.cs",
+    "bytes": 12947,
+    "sha256": "a456231f598802057b34ce0f74173d4e8e2a3c8422394ccd3d5ce5916be9382d"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__VertexModifiers__BaseMeshEffect.cs",
+    "bytes": 3572,
+    "sha256": "4aa46946a563e1981ac292fd6e9b34290827ce0950ac34ec885800df9fd10751"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__VertexModifiers__IMeshModifier.cs",
+    "bytes": 1246,
+    "sha256": "768cefeaa2a7d207c8ebfc9d90589f31d6e3050de0e34e4364a3fb0774bcac6a"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__VertexModifiers__Outline.cs",
+    "bytes": 1509,
+    "sha256": "d5b017f87fd27f68a70978a52e6688a26062e3cd1cf7091c1e5e628d6c1ff9ec"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__VertexModifiers__PositionAsUV1.cs",
+    "bytes": 751,
+    "sha256": "f36c278cf7723630701d6f7c311293f18c6842c6ed11fc3edf386c2cd603e78c"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/UGUI__UI__Core__VertexModifiers__Shadow.cs",
+    "bytes": 4529,
+    "sha256": "ecf32fa1c12651e48bcd90509418424adbc44d72caadb5a6e6220357bdda3fd0"
+  },
+  {
+    "path": "_planning/tools/ccbuild/ugui_src/_Stubs.cs",
+    "bytes": 146,
+    "sha256": "bced04298f3a4f33141b1d56cb19006d2e3ec193a08fa17b9f2861813f1c662a"
+  },
+  {
+    "path": "_planning/tools/compile-check.py",
+    "bytes": 6145,
+    "sha256": "989e1372407feeee4690a8f87ff14e46218a78770512754d56c1694e64289665"
+  },
+  {
+    "path": "_planning/tools/dump-data/dump.mjs",
+    "bytes": 13830,
+    "sha256": "c5a86dd4c8afb9c3114569e3910b6d16974e47a1b438730c5f8d66b5999e9d13"
+  },
+  {
+    "path": "_planning/tools/errsum.py",
+    "bytes": 602,
+    "sha256": "238c998b905680ef1286352ebac6385fe82aa08f6c0d3c181bf73e3e59c1ad7b"
+  },
+  {
+    "path": "_planning/tools/w8_copy_assets.py",
+    "bytes": 12433,
+    "sha256": "0610ed4c433cb6624b8cbdf394f38ebcc2d807a524af9a5614adcc39a6937d7d"
+  },
+  {
+    "path": "_planning/unity-releases.json",
+    "bytes": 306012,
+    "sha256": "85757ccb428f4d3d9005cdf6654bcb6fd6071b13661ab27773c06f7210e70a7b"
+  }
+]

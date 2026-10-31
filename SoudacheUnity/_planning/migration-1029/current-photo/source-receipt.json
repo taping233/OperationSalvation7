@@ -1,0 +1,667 @@
+{
+  "authority": "../搜打撤/game current bytes",
+  "sourceFiles": [
+    {
+      "path": "src/hub/game.cardslib.js",
+      "sha256": "ad502d05463b9871ca0c4e4b772953f87afe3ad8fa2d4b9b2cf73cd5831575dd"
+    },
+    {
+      "path": "src/hub/game.cardslib.page.js",
+      "sha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4"
+    },
+    {
+      "path": "src/hub/game.cardslib.photo-props.js",
+      "sha256": "03d790a91524bbb094b54026500f2ef59448a89cf3b6b34b422957a0d8afeac1"
+    },
+    {
+      "path": "src/hub/photo-studio-presentation.js",
+      "sha256": "b93af0e7507faa7e70bc0b4b0c13f7b2acee17b9a37620a3135192a228e750a5"
+    },
+    {
+      "path": "src/hub/photo-studio-controls.js",
+      "sha256": "b2a582cad98fd758f0ad2601b30c8ac656eb29dd83618e6bfa84bcedf112619f"
+    },
+    {
+      "path": "src/hub/photo-studio-navigation.js",
+      "sha256": "b1c23f153cb8f2097647e4e8c3c834c412806af735c479ec53a780a3ab94254e"
+    },
+    {
+      "path": "src/hub/photo-studio-tabs.js",
+      "sha256": "722162bf5802f1140b7bf7694b895b11658674e28909eaf8ac4b41def12c7b22"
+    },
+    {
+      "path": "src/hub/photo-studio-catalog-cache.js",
+      "sha256": "45cb473fc2782137374c8c9caa2a16f85c7a5890d0b06d153f3c9281acac82a9"
+    },
+    {
+      "path": "src/ui/card-browser.js",
+      "sha256": "fe1a140b5ea132f7ac0f9ddbf3f8f1714f1f9719ef9b0b7c6699ebaabb458a9d"
+    },
+    {
+      "path": "src/ui/card-browser-state.js",
+      "sha256": "483b7cc2371b4159536193f4e95a43bc1d875ea04237b97d8780d7902d87e52b"
+    },
+    {
+      "path": "src/ui/card-zoom-controller.js",
+      "sha256": "f8a40e51978702a8f2b1cf395bafd1081208480460daab2252e28c45be72ee0b"
+    },
+    {
+      "path": "src/ui/card-zoom-content.js",
+      "sha256": "12edab3f251422bc592d23d5246d39665a354593afe6e460bc66027dd5b20f31"
+    },
+    {
+      "path": "src/ui/card-zoom-photo-source.js",
+      "sha256": "9ec9f518b740694a1a26a3a8db758ef4dc772b80cd8280ff8046efb9cfdfa0e4"
+    },
+    {
+      "path": "src/cards/card-photo-notes.js",
+      "sha256": "e5b584cc493c1beebc5918f6920c0434a8cd8711886c4cd4c1c8b22a71a2435d"
+    },
+    {
+      "path": "src/cards/card-draw-explanation.js",
+      "sha256": "cdebd3c03d273b3d58ecdc696ec6391b07d6d7db4b745d1a3606676eaac45665"
+    },
+    {
+      "path": "src/ui/collection-chrome.js",
+      "sha256": "6060bae086fb9302005142819a48c2276783e50847400efac0734d049737421d"
+    },
+    {
+      "path": "src/ui/motion-presets.js",
+      "sha256": "857fcf75668a97ca69a713532a63511ed855a9f6043188e3d09dcf274ca16221"
+    },
+    {
+      "path": "css/collection-chrome.css",
+      "sha256": "c3a859b244ce82a774f1f5aa0ebf3ec9f475c223ba22d67c37d375a3cd0ba766"
+    },
+    {
+      "path": "css/expedition-library.css",
+      "sha256": "db8cac5f7f3a1656ac66a93bafbce6bb988b49dd91237c8db7ac61a89aba0ac8"
+    },
+    {
+      "path": "css/photo-studio-mounts.css",
+      "sha256": "9c036b4cca8cedc4b2f02724c5f6b396b146855afa580422c30af6ba8c7ff7fe"
+    },
+    {
+      "path": "css/photo-studio-unified.css",
+      "sha256": "9920efa17a5360610ee393b22c7f1cd59cf0639029fe5ca99e5aeee03cdcee23"
+    },
+    {
+      "path": "css/photo-studio-room-effects.css",
+      "sha256": "fa2b6b95bec7472ac5ad4eeb99737f305b82ca79c81427bb49949ccf7bf05630"
+    },
+    {
+      "path": "css/photo-studio-zoom-motion.css",
+      "sha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40"
+    },
+    {
+      "path": "data/card-notes.json",
+      "sha256": "64db0ff972f98782a88ca483319abdf1b24f4b7b12a25ec1ec5be2019963fc24"
+    },
+    {
+      "path": "src/cards/card-description-text.js",
+      "sha256": "cc10e433470705dc578b07e088c25d36f0d37fb2eefdd8dea05ef89bd134c92d"
+    },
+    {
+      "path": "src/cards/structured-card-description.js",
+      "sha256": "1d20149b58efc462f72ed381c3400db7e466aab36c4cef2059acd0956010dba1"
+    },
+    {
+      "path": "src/cards/card-state-presentation.js",
+      "sha256": "b7326da0309571d78729db62cd2a92229bdf9ec112bfe3f0a2caacc2e94fc915"
+    },
+    {
+      "path": "src/cards/battle-value-context.js",
+      "sha256": "ead5ae039e02ec40012e381c3189b8abbc2404149e9d36af1cf47572f624c890"
+    },
+    {
+      "path": "src/cards/card-energy-policy.js",
+      "sha256": "348c48bc0b53755fb0d7ffd887ef3e18fd7442afbf9498716bc0f03bb1b579e9"
+    },
+    {
+      "path": "src/cards/rot-seed-revision.js",
+      "sha256": "b4edbaa03d12f4a7c71240c3fa40cc0d7e09c576c8842bc66c2289632e02ae07"
+    },
+    {
+      "path": "src/cards/card-description-links.js",
+      "sha256": "42c52131393ddd1298fbed298ed246c66fc00102913f7a38eceaf17218e3b69d"
+    },
+    {
+      "path": "src/cards/cards.view.js",
+      "sha256": "896ccd180d56beeba01426ce31a33aaff0c74464f1b9e32b7519ded76491293a"
+    },
+    {
+      "path": "src/core/scavenge-terminology.js",
+      "sha256": "0937a24296e74b05286828a4392b1ec1d16cb374a86e454a2f852f10b90d959b"
+    },
+    {
+      "path": "src/ui/term-definitions.js",
+      "sha256": "de5f94a8495a2210dbbfd6fa2334fb2814c2fd8f7f48f0e8b60f41eb41f8cb85"
+    },
+    {
+      "path": "src/ui/term-tips.js",
+      "sha256": "02e8d1024d243ca970e860cf9c4526119a1d3eb7d67b771466eb67daffdd2b44"
+    },
+    {
+      "path": "src/ui/status-icons.js",
+      "sha256": "a7c19a427a3b77eadea351833e875af503388a49c1c821dd69c67cc4f3a74f92"
+    }
+  ],
+  "assets": [
+    {
+      "source": "assets/scenes/transition-photo-v2.webp",
+      "sourceSha256": "11ab751e84d18f31064a8052403778c6e37b04dc265a0ecc35219150965ed100",
+      "output": "Assets/Resources/Art/CurrentPhoto/transition-photo-v2.png",
+      "outputSha256": "bc5cc2d8188d68271dda3faa1b5b3e0c410b40c6947dd59e9b06515304369406",
+      "conversion": "original pixels; WebP/PNG to native RGBA PNG",
+      "bytes": 438453,
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/paper-grain.png",
+      "sourceSha256": "b44c1efce10247f2c7b8103c4b7c773f363e544b46e7f4a6612f382ed107285f",
+      "output": "Assets/Resources/Art/CurrentPhoto/paper-grain.png",
+      "outputSha256": "9d4333635698424f9a9885082946e1e76ec428f8de1cd6ca811e72dc0cc6d5ce",
+      "conversion": "original pixels; WebP/PNG to native RGBA PNG",
+      "bytes": 27332,
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/frame-atelier-v1.png",
+      "sourceSha256": "762a15346b4ee49dc8c8a960f3e2775d9e5b4dc51b88847c2ae13a958dccdfb9",
+      "output": "Assets/Resources/Art/CurrentPhoto/frame-atelier-v1.png",
+      "outputSha256": "14a4d76cb118a4f288e5a9342e661cf06ba5bbed1f2aec3db36dd619eb948299",
+      "conversion": "original pixels; WebP/PNG to native RGBA PNG",
+      "bytes": 1343524,
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/cabinet-plaque.svg",
+      "sourceSha256": "d368775d85cf743267eaeff4d94c6bab3283a9a860bfdcfcb40a4229aced5f81",
+      "output": "Assets/Resources/Art/CurrentPhoto/cabinet-plaque.png",
+      "outputSha256": "872717eb3cbcd294af4bc2fb43f4d2f6e436713c86a95dd921e5708088812d77",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 9271,
+      "size": [
+        320,
+        160
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/corner-class.svg",
+      "sourceSha256": "39d952d628811d8e000edc8abea682c49816d40bffb4e7c1680491a5981199e5",
+      "output": "Assets/Resources/Art/CurrentPhoto/corner-class.png",
+      "outputSha256": "f860faea3cd49b0e0b0c0514e2da1ed118bc94f10a4c7a9e3bdc3fdc0980d70b",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 853,
+      "size": [
+        48,
+        48
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/corner-epic.svg",
+      "sourceSha256": "ce21c1cbb58f4bae3f24f1528e743022ea8799b41b77c6486752ae862f8355a2",
+      "output": "Assets/Resources/Art/CurrentPhoto/corner-epic.png",
+      "outputSha256": "bd99f72c42ccd00a2be4bb83a3880811abab7c22c9c0e8191dc2abab5e16b6f2",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 3235,
+      "size": [
+        48,
+        48
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/corner-plain.svg",
+      "sourceSha256": "d0a14bf88ea311b6d09fb67e5efeae95f36fcf767dbf003b635fe5acf7d63ab2",
+      "output": "Assets/Resources/Art/CurrentPhoto/corner-plain.png",
+      "outputSha256": "a03d341a0d2f5f1d832c2051dacd6d40d808371d8b81c393c25e8373a09ccd87",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 956,
+      "size": [
+        48,
+        48
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/corner-prismatic.svg",
+      "sourceSha256": "9dd708a2c5fe3663fcf19feec9bca8f8705d34f849b23604604ee12effbfe43c",
+      "output": "Assets/Resources/Art/CurrentPhoto/corner-prismatic.png",
+      "outputSha256": "f48a564c4f36cde45097fcf955aeb8eacade9a7c79e69095d1d6c8d4c94dd94b",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 2294,
+      "size": [
+        48,
+        48
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/corner-rare.svg",
+      "sourceSha256": "77efbd048b28f3b9df20ee55a45f3ad7ef21945711f86f49e795e1217d8f0fdf",
+      "output": "Assets/Resources/Art/CurrentPhoto/corner-rare.png",
+      "outputSha256": "7ccbf704c6e333e0e43e0bbdd2cbd2519d22a32266ced073f9a2de759d4c6d2b",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 1317,
+      "size": [
+        48,
+        48
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-class.svg",
+      "sourceSha256": "4f56ae7d8c557fc401aebccb35ec1032f4770a10842f40ce632fd6de680723f5",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-class.png",
+      "outputSha256": "cd4f65343d4f1681c2b6da4a1ec1f8f784b253bbebf1a2494ce620e3ad97c450",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 9906,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-derived.svg",
+      "sourceSha256": "a915e9ed9c1ec2fdc53b89bf9eea2c547d2c228536253276b2bf525684f10887",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-derived.png",
+      "outputSha256": "f102eb6e120eec7053e16fe4cee3342de019ee2cf9516af7b145bdb3acc2e7d9",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 9901,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-epic.svg",
+      "sourceSha256": "706550666ea2ec98ae74d0afcf6d95f4d85591b03e2a60003e4fa3ccb8dba140",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-epic.png",
+      "outputSha256": "dcc7e4b34bf070e3273aa675db827b8785302a64c19a2a8b38ed37c6b1fd68a0",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 24197,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-legendary.svg",
+      "sourceSha256": "0428b9f64355ea53dbe1a48359d1c429832ecca8e3b11e94b822bb5da409f130",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-legendary.png",
+      "outputSha256": "348f7e26c607bb09db6856abbd647439c26777cb7feea1d950dddf83f895b700",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 24668,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-plain.svg",
+      "sourceSha256": "7f5c8b44b532b36f44de2f9b3218188e61490a259c0fdcd2b478e2099f15ef83",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-plain.png",
+      "outputSha256": "2c6532c13de05c37767c6f0248d72d003c65466a6587f1d6bb032efbb3641fe4",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 15002,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-prismatic.svg",
+      "sourceSha256": "2b0229f0120e43beaf75124dad66c834a3e5d1327c28980bb3b2d56c13d64b5a",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-prismatic.png",
+      "outputSha256": "cec6a5ad8dc766ea0231fffd3611b1b50aa0cbb12868776448cb89863878d3e2",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 14577,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-proof.svg",
+      "sourceSha256": "5a644c9b0a8de1bb51a098dc1e30660c0bec74d3bde8d38cc02bfdebcc7b75a3",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-proof.png",
+      "outputSha256": "afa9c8161add798f4851dcd7cc408178b32c5a9740c247baebf68ffa1e362cc4",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 8974,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-rare.svg",
+      "sourceSha256": "3da23f86f087543f3521525e9c8338a14777d17f036c3ee4f9c3f09f5578b10d",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-rare.png",
+      "outputSha256": "1c6b5cf596692bc90cb59eae350579f106494b769a0079396c6c0fbfd0b62cc7",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 22592,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-thumbnail-class.svg",
+      "sourceSha256": "8dab3e8085cff6ab34399fd832bedb7700dfc1c06c2c7cb98e826831bccadfd6",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-thumbnail-class.png",
+      "outputSha256": "5a0ea344dbe4f51792f7462e078baa3011beb0ca8686e469a2445be9b749cad7",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 9253,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-thumbnail-derived.svg",
+      "sourceSha256": "58c006ae281292da017dc5a55d0f25a2e3f0774c8037403e30f80de11a194555",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-thumbnail-derived.png",
+      "outputSha256": "5da8dadbca05730523e01e0635e689cf1c3bf4e5bef7b6a57eb1366c56dab7b5",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 8578,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-thumbnail-epic.svg",
+      "sourceSha256": "ef58874812886193268b5a89eb3ae4ea22e704e35bd7f3316729623ddc9c366b",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-thumbnail-epic.png",
+      "outputSha256": "529840b613e0c04b639aaeeda51c0152dafc9e388a7044199c3122b8ce105a97",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 18682,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-thumbnail-plain.svg",
+      "sourceSha256": "5659bde56acf1bdac76ffffcedb773631a3e00a63b8096b9a3d60e146bbcbb72",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-thumbnail-plain.png",
+      "outputSha256": "92a4b7b50bc694126fdb1c9db8239b471c96efdc32751ce47ab17cdfd7ba94f9",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 11321,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-thumbnail-prismatic.svg",
+      "sourceSha256": "0876def4548dffbb60db04c249951bc2e2cd00fa92e4ab6b8323c6d9118a384c",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-thumbnail-prismatic.png",
+      "outputSha256": "19967fac6de126f6795c6593b22e15471c07cbb516622f7bafe6e1e950d9a680",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 17692,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-thumbnail-proof.svg",
+      "sourceSha256": "aea43154c8e69e69e5506f9f62c2aee064f70cdaa392617c5cd9dff3da8a68ed",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-thumbnail-proof.png",
+      "outputSha256": "a242875bf669fa1f8fcf85c09f99463129f5ceabdd6208c6aa9f0bbb79f94c81",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 7404,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/mount-thumbnail-rare.svg",
+      "sourceSha256": "1a0578a46d72e15bc18466101be4b7f86c6abcbf598105b98af1c95140c7b90e",
+      "output": "Assets/Resources/Art/CurrentPhoto/mount-thumbnail-rare.png",
+      "outputSha256": "91a11c0ccfa73a220e1bd6428d8400f19f2a1870f4ac5423cec9a80b119eddcb",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 13639,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/rails-class.svg",
+      "sourceSha256": "564ea50a026ad51f63c72f3b1e992ac922d89ba76735f39329be99d307f20f3b",
+      "output": "Assets/Resources/Art/CurrentPhoto/rails-class.png",
+      "outputSha256": "49c94db6dce0876f29c8358bc8f832efd52d7d7d91c37ef5bddacf3d74f1de79",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 7329,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/rails-epic.svg",
+      "sourceSha256": "e0a550a23b0fd791f4ccf547cbc3139ed50b73346961841be0fdb8bcda32e4f8",
+      "output": "Assets/Resources/Art/CurrentPhoto/rails-epic.png",
+      "outputSha256": "dcf2444bf79812dc7c12dbdf646d0cf0eed674f311a4b0b54f8cff83ef381f26",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 13058,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/rails-plain.svg",
+      "sourceSha256": "f7e1c5458cb28c263302327e0db81169f2927d83c20f84c7b1d18b9c522f9394",
+      "output": "Assets/Resources/Art/CurrentPhoto/rails-plain.png",
+      "outputSha256": "3c02e13e4dc9664f25cef38a1c41dd27714335a189166f41bdbdb9e57f5d9146",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 12379,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/rails-prismatic.svg",
+      "sourceSha256": "f53680bd2569ea6edf40bf2442179f93f5411ec01935c84a8ad3e3ce2ab910db",
+      "output": "Assets/Resources/Art/CurrentPhoto/rails-prismatic.png",
+      "outputSha256": "6fc1ab366259022c4decef856e6efd4b0777281a6530dd6036434ec0ec96e63c",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 5374,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "assets/ui/photo-studio/rails-rare.svg",
+      "sourceSha256": "1f4cc9b0a08e0e6805dcd7143c9f79667b9267b46616dc1f0c38ee2121443054",
+      "output": "Assets/Resources/Art/CurrentPhoto/rails-rare.png",
+      "outputSha256": "9108c7bed6872dfcce4bea6e0e428fc5b6fdb396ff30935b2f22d7a75a1fc998",
+      "conversion": "original SVG paths/gradients; CairoSVG at source viewBox size",
+      "bytes": 19216,
+      "size": [
+        320,
+        320
+      ]
+    },
+    {
+      "source": "css/photo-studio-unified.css",
+      "sourceSha256": "9920efa17a5360610ee393b22c7f1cd59cf0639029fe5ca99e5aeee03cdcee23",
+      "output": "Assets/Resources/Art/CurrentPhoto/paper.png",
+      "outputSha256": "781d4d7913f35afa3877d485a367f25036d4227d6f7ebadc3feba6f8b6b5ab61",
+      "conversion": "final photo-studio-unified.css gradient/paper-grain paint layers, native raster",
+      "bytes": 223887,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "source": "css/photo-studio-unified.css",
+      "sourceSha256": "9920efa17a5360610ee393b22c7f1cd59cf0639029fe5ca99e5aeee03cdcee23",
+      "output": "Assets/Resources/Art/CurrentPhoto/zoom-paper.png",
+      "outputSha256": "e1315054ef767a4197f1b5388be34d6c0edfa68615851a5ce89556e9a3782a9c",
+      "conversion": "final photo-studio-unified.css gradient/paper-grain paint layers, native raster",
+      "bytes": 221709,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "source": "css/photo-studio-unified.css",
+      "sourceSha256": "9920efa17a5360610ee393b22c7f1cd59cf0639029fe5ca99e5aeee03cdcee23",
+      "output": "Assets/Resources/Art/CurrentPhoto/room-shade.png",
+      "outputSha256": "6dcd395c6c7e8f72163fb5e67841daa2725f2ce20b4cbdf11bf9f47596af3976",
+      "conversion": "final photo-studio-unified.css gradient/paper-grain paint layers, native raster",
+      "bytes": 333861,
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "source": "css/photo-studio-unified.css",
+      "sourceSha256": "9920efa17a5360610ee393b22c7f1cd59cf0639029fe5ca99e5aeee03cdcee23",
+      "output": "Assets/Resources/Art/CurrentPhoto/zoom-shade.png",
+      "outputSha256": "623bbcdaed0590244e452b40573340d83bcb2425b54bd0dce70c5eff4054e547",
+      "conversion": "final photo-studio-unified.css gradient/paper-grain paint layers, native raster",
+      "bytes": 10703,
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/category-全部.png",
+      "outputSha256": "5e4090e677275848e49dd6fd0910784d4f6a3cfc711acd4fb3feca16fee79fbc",
+      "conversion": "exact studioCategoryBadgeHTML inline SVG",
+      "bytes": 406,
+      "size": [
+        96,
+        96
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/category-武术.png",
+      "outputSha256": "7c96d74a796e9e7b15fa2a14683834d563071f45e3c16d4a601eee221d7f81ef",
+      "conversion": "exact studioCategoryBadgeHTML inline SVG",
+      "bytes": 801,
+      "size": [
+        96,
+        96
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/category-法术.png",
+      "outputSha256": "e0e21520732c6acfb54273db927347aa6298bc54dda834bbe1fa2e2193d1d866",
+      "conversion": "exact studioCategoryBadgeHTML inline SVG",
+      "bytes": 1042,
+      "size": [
+        96,
+        96
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/category-生物.png",
+      "outputSha256": "469683e6d3bb1f5f0daaad855ae4659e5ff0808dfc5ebea28d25bb61f5744251",
+      "conversion": "exact studioCategoryBadgeHTML inline SVG",
+      "bytes": 1942,
+      "size": [
+        96,
+        96
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/category-道具.png",
+      "outputSha256": "9a02d4a7e280cd13fc9207eb25576323e5d7bd0ccc0732306313a50caba169bc",
+      "conversion": "exact studioCategoryBadgeHTML inline SVG",
+      "bytes": 1036,
+      "size": [
+        96,
+        96
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/category-装备.png",
+      "outputSha256": "641163f00875dff4c66f46ba33e4e56a34d69ea0d100584358977e49b4428d98",
+      "conversion": "exact studioCategoryBadgeHTML inline SVG",
+      "bytes": 1322,
+      "size": [
+        96,
+        96
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/category-事件.png",
+      "outputSha256": "7f01b98eaeca027349fcea0d6e3ea1e53bcca3b7996094b97387802cf642cd92",
+      "conversion": "exact studioCategoryBadgeHTML inline SVG",
+      "bytes": 578,
+      "size": [
+        96,
+        96
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/category-能力卡.png",
+      "outputSha256": "ba421d195917950d2736bcb9df748a6c7b8374ddeb163de3879134221ec79a96",
+      "conversion": "exact studioCategoryBadgeHTML inline SVG",
+      "bytes": 1165,
+      "size": [
+        96,
+        96
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/category-资源.png",
+      "outputSha256": "d4c1752f3b1107510f23cd779887ecc571482990bd52d4f50c0aa3d2ac7e8d88",
+      "conversion": "exact studioCategoryBadgeHTML inline SVG",
+      "bytes": 1537,
+      "size": [
+        96,
+        96
+      ]
+    },
+    {
+      "source": "src/hub/game.cardslib.page.js",
+      "sourceSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "output": "Assets/Resources/Art/CurrentPhoto/shutter.png",
+      "outputSha256": "737c27f02b401e586154a85e910fe22d60f9aa4cc40d51c02f4a69a0510a6f7d",
+      "conversion": "exact STUDIO_SHUTTER_ICON inline SVG",
+      "bytes": 2492,
+      "size": [
+        96,
+        96
+      ]
+    }
+  ]
+}

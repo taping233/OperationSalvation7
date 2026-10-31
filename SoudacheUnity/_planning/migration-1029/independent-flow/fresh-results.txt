@@ -1,0 +1,20 @@
+PASS fresh slot persisted
+PASS fresh new run persisted
+OBSERVE departure_base_pocket_count=2 expected_current_web=0
+PASS generated cross-layer return edge exists
+OBSERVE cross_layer_return_allowed=False reason=请从层间闸门通行
+NOTICE 保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file 'D:\素材\代号柒\SoudacheUnity\_planning\migration-1029\independent-flow\data-20261029-172302352\profile.json.writing' because it is being used by another process.
+PASS locked save rejects mutation
+PASS failed mutation restores run base and RNG
+PASS failed mutation preserves profile bytes
+PASS extraction starts
+PASS repeated extraction does not duplicate resources or stats
+PASS sorting extraction reloads as sorting
+PASS sorting claim persists
+PASS repeated claim does not duplicate cards
+PASS finish extraction is repeatable without duplicate rewards
+PASS slot 2 base writes do not contaminate slot 1
+OBSERVE fresh_event_node_entered_count=2 expected_single_presentation=1
+OBSERVE retract boss=False allowed=True result=null ended=True
+OBSERVE retract boss=True allowed=True result=null ended=True
+PROFILE D:\素材\代号柒\SoudacheUnity\_planning\migration-1029\independent-flow\data-20261029-172302352\profile.json

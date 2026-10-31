@@ -1,0 +1,181 @@
+{
+  "created": "2026-10-30T05:47:16.4883686+08:00",
+  "changedSource": [],
+  "sourcePreviousManifest": "inputs-sha256.json",
+  "artifacts": [
+    {
+      "path": "fresh-catalog.json",
+      "sha256": "285BACE96578B00E053F40C02698F51265F55315CA4191FAA3C20D69EA78EEA1"
+    },
+    {
+      "path": "source-round2.mjs",
+      "sha256": "B0C0D10EEE61798FC936FF432696D76DBBCC1136943C282DE6AC5D32992C2395"
+    },
+    {
+      "path": "Round2.cs",
+      "sha256": "1DBD429A933EC74AC6FFC8816D394B8C74F331B6FE28200622751F49044CC6E4"
+    },
+    {
+      "path": "source-round2-results.json",
+      "sha256": "DBDE6EB148A9C8418561FFF3F4BC1FEE61AF3A48DFAC45C3A90AE62035CBE18C"
+    },
+    {
+      "path": "core-round2-results.json",
+      "sha256": "EC7FBD7CB7A3FE48C922DD46ED3D7FBB13317537AF85BF07062AB8DD26A13F3E"
+    },
+    {
+      "path": "coverage-round2.json",
+      "sha256": "5061ABCA72D80DA78AF7E6DCB633292252C557F456926C0B56A1B9E1E7176A6B"
+    }
+  ],
+  "coreSnapshot": [
+    {
+      "path": "Cards.cs",
+      "sha256": "EFC8B15298352114B134372D6E4D40DE3244DA93ADB7BD2E01F0E3C106701A21"
+    },
+    {
+      "path": "CardsExtras.cs",
+      "sha256": "4DF02FA3C5B0279AE7C7D3543BAFBA6E0B7097786B7DA4B3293891BA17FB7470"
+    },
+    {
+      "path": "CharacterTable.cs",
+      "sha256": "F7F33FDA167B7275BCCA4D26E25F0A6345087E0CC3C7F84E1DD3EDEBFAE195A6"
+    },
+    {
+      "path": "ChestLoot.cs",
+      "sha256": "0B09603D4EC67651801B5B85ED925144F14BB7A7A58A0E89D0A8E2F68A97E87B"
+    },
+    {
+      "path": "CombatResolver.cs",
+      "sha256": "32DD0E1558D1FB62FDA29B88C94E85C74E1FE02D63338268D726CECA0B1FD242"
+    },
+    {
+      "path": "CurrentMapData.cs",
+      "sha256": "287C8D99BC7D852EF8273E921867204BC2E0B319F17C1B43C329EA08A938B800"
+    },
+    {
+      "path": "GameRules.cs",
+      "sha256": "A7E4BE390CB6A929C5655627B7D6E4FDE20A6342499037EF8E4A2BF2E5E9C7ED"
+    },
+    {
+      "path": "KoiPondModel.cs",
+      "sha256": "70799C15F470491A86ADC5E3944F8A288AEA6362274F328DAC4FC3459987FDE5"
+    },
+    {
+      "path": "LayeredMapGenerator.cs",
+      "sha256": "1C49B70174F492124F1A88CB9C08569B61D8CFD705F9EAA0754BD15DC1C6A3E3"
+    },
+    {
+      "path": "MapModel.cs",
+      "sha256": "0CF679AFA6CDE6096338AC1FC18A57AB7EAFC58A86B9F5E2A4035CA9A403EBA9"
+    },
+    {
+      "path": "RewardReceipt.cs",
+      "sha256": "716E80ECDEE107982F725E4768964575911D07B8FF7AC37DA2998FC866F07CD1"
+    },
+    {
+      "path": "Rng.cs",
+      "sha256": "E81D33B2CB692DF9070696B73D53EB5119A70BBB870E2918A30B9E442C1F9E1A"
+    },
+    {
+      "path": "RunState.cs",
+      "sha256": "BAA66CA2F0119F7BFD6C5DF617BA3F77D23C64C3A94340D1F86751EF65FDCFCE"
+    },
+    {
+      "path": "ShopOfferReceipt.cs",
+      "sha256": "5088CA7446567FF33BBCF18362BD356AF9A3F7E19ECC26BC9EE53EFD6087AD4D"
+    },
+    {
+      "path": "Battle\\BattleActorPresentation.cs",
+      "sha256": "7750EA6CC6CED409F46C22525562B94AFE5B402A0E63316DC8B123FF9CCD575A"
+    },
+    {
+      "path": "Battle\\BattleHandTransforms.cs",
+      "sha256": "2BB817C0ACD3AF5024034E4C12C3ECDDBEFE478F075A103E384650FC08723C47"
+    },
+    {
+      "path": "Battle\\BattleItems.cs",
+      "sha256": "8ECAB8FC3770A22210F5CB35E28A54262006440B4D34841227EEBA3C1E5924BA"
+    },
+    {
+      "path": "Battle\\BattlePlayerEffects.cs",
+      "sha256": "621F9AEB841AD67FC735B97610D1D4AC2918204314493C4679D9B46291B83518"
+    },
+    {
+      "path": "Battle\\BattleRestartCheckpoint.cs",
+      "sha256": "3CB6CBD98DABC5631140902A86C961C9AC4E471B55F6F9C10D108B28D5438CFE"
+    },
+    {
+      "path": "Battle\\BattleRules.cs",
+      "sha256": "00F8C9EB46A020300AEEC1F1C888873219CABD2D901D7A837304E5C7A476CF16"
+    },
+    {
+      "path": "Battle\\BattleSession.cs",
+      "sha256": "F58AD813A9308D321D8C6C4A8B83D7B0A2B148EF622D9EED8D550E89D01DB8DB"
+    },
+    {
+      "path": "Battle\\BattleSummary.cs",
+      "sha256": "E92CA71430FF55A791C4E789E4CE2ED2425C3D237804642EB879B7CAF1AB010D"
+    },
+    {
+      "path": "Battle\\BattleTurnForecast.cs",
+      "sha256": "078203F3CE41621D5A8B6587B8D2CFC3B5A7DB9815368CD41C75058646A6EA90"
+    },
+    {
+      "path": "Battle\\BuiltinCardIdentities.cs",
+      "sha256": "A3ADA0917AF87DE1711DAB489F9B53A4533324ED42E57D602DB9BCDDCF89A5D5"
+    },
+    {
+      "path": "Battle\\CurrentBattlePools.cs",
+      "sha256": "A3073FBF236A1A3BB2297CCD12B7C0FDE24AD6FAF67316438D6EC9B81F154AF5"
+    },
+    {
+      "path": "Battle\\CurrentBossMechanics.cs",
+      "sha256": "644A8F0928C831A50A2B935042ADE0553E5D0958A8D113AEFA7545445C864A0A"
+    },
+    {
+      "path": "Battle\\DeckBottomDiscovery.cs",
+      "sha256": "B665975E94A231537017509F16798E585AA6C6733738B623E65DB7CAA69F3179"
+    },
+    {
+      "path": "Battle\\DeckOps.cs",
+      "sha256": "0AA9473B6A1C6FE7AEAE6256824F352006132E91A8AFCF95B9F505798A516C51"
+    },
+    {
+      "path": "Battle\\EffectExecutor.cs",
+      "sha256": "69EF97A86D2870C8267069EE5E1ED2BBF6FF19D5E24000BEF1F88819E519D632"
+    },
+    {
+      "path": "Battle\\RuleValue.cs",
+      "sha256": "9F7DEEAD674895E0FD2F501522B4BFC698FA269BA4C1768214D2E51CC54175FB"
+    },
+    {
+      "path": "Battle\\StructuredRules.cs",
+      "sha256": "50847FC3E255097387F0CE0B2ABB4029E29CFBAE9E08A2317C95BB415CBD9E73"
+    },
+    {
+      "path": "Data\\CardDatabase.cs",
+      "sha256": "D2DEA28342400841F80BCB74DE47D290F501692BBC94045DE27A046B1EB00F1E"
+    },
+    {
+      "path": "Data\\CurrentBalanceData.cs",
+      "sha256": "EFE29E8E59F010B15285D65C7A4D747F096B2E450CA9909ED9C445B35F3ED740"
+    },
+    {
+      "path": "Data\\CurrentChestData.cs",
+      "sha256": "7DFD4B8993FA3B7BC85ACEC47195D69D819173C1A96EB89D9FD841E0F58DEC2F"
+    },
+    {
+      "path": "Data\\EventDatabase.cs",
+      "sha256": "935646F0A1F0D2502F58747420ABD62D4908C78E51D5E70610F99C757F785579"
+    },
+    {
+      "path": "Data\\EventProgress.cs",
+      "sha256": "0722BE487263CC278EE3A68306C301ECF374358E3E64D92FF5AE20500AF64136"
+    },
+    {
+      "path": "Data\\SceneCopy.cs",
+      "sha256": "9CA1EEDAE3DD26063C9C1D5E1F6DA3F966532A476AF8C71B1FB30FE9A43B680F"
+    }
+  ]
+}

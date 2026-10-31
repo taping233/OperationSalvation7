@@ -1,0 +1,15 @@
+{
+  "report": "README.md",
+  "scenarioExecutions": 69,
+  "sourceChanges": 0,
+  "rngVectors": 12,
+  "productionDrift": 0,
+  "sixCards": 6,
+  "originalVectors": 15,
+  "originalAssertions": 50,
+  "coreFiles": 43,
+  "sourceFiles": 677,
+  "complexVectors": 36,
+  "status": "PASS scoped final independent closure",
+  "native": "Root-owned, not part of this backend pass"
+}

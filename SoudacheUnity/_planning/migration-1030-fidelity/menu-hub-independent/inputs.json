@@ -1,0 +1,121 @@
+{
+  "scope": "Read-only selected function bodies and call sites; a file hash does not imply exhaustive line coverage",
+  "files": [
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/TitleScreen.cs",
+      "sha256": "37521844999c3a7697d47be5a3778c6ac91520ef810d8af5b928c7c56b2ab007"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomePlate.cs",
+      "sha256": "66b45aefd524a617eae90814d598e022cd91aa1cf7e45b787bf9151130fd5a30"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeMotion.cs",
+      "sha256": "afce1bb3aafda72a560401cc1759d5ac4d6fd155ba54fa763e7e08209e6b78f8"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/SlotPickerScreen.cs",
+      "sha256": "93059ab24f14e388e290671980ed8bcf56e7eb08a3857b498be785c9e1d6a816"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotPage.cs",
+      "sha256": "a1ac38ae8719742ea6d0d452431b37fa0803a21554904980cff407c893b3dfa1"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotSnapshot.cs",
+      "sha256": "360890aa8e4e1c6e965f786a86ee974039ef6bb834b3bb13b40b33b90a02d447"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+      "sha256": "c20e2a0d18fa2214deaa1c4fb6df76a3c747d725a9af37be9e57b33cca3a2dbb"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentSourceLayout.cs",
+      "sha256": "e4d707b607f2431959022b506074d1a862e888523830373532e8f37413e86fcb"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInteractions.cs",
+      "sha256": "aa300c68ff04295dbde226b75e71e72933ae0862304b7ba07e0c2a53a1fd40f5"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Misc/ImportExportOverlay.cs",
+      "sha256": "29d5ce7d406e751d4878109ea66bc73873bb4e5f2d7bfb2082e9737682ae1107"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Kit/App.cs",
+      "sha256": "71676543e3612974082268532a022463af6ccf5aa2fc5849f39524493d2c1c1c"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Kit/UiStack.cs",
+      "sha256": "1edab12f9672e4c4d056155da92f02d6b196ed18ab0075e72f6d681408957642"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/SaveSystem.cs",
+      "sha256": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/AtomicJsonFile.cs",
+      "sha256": "827b9ff1c75cf8c1a82148ecdfe0032215b00e85442e3f9f19042f92c9b5db68"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/BaseData.cs",
+      "sha256": "45d297fff5224306db0a66fd22eeea8aefacc3bd066189f65b8a74ab71fbeb9f"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/GameRuntime.cs",
+      "sha256": "6e948f7725d2aa417b837f6485f53f2590d77fe8f3bdcd0fda3e786688f1238e"
+    },
+    {
+      "path": "搜打撤/game/src/ui/game-title-controller.js",
+      "sha256": "45696c507f592bd08367e2be74409a04f7e73f5c85d41a529336a4aa2dd291cb"
+    },
+    {
+      "path": "搜打撤/game/src/ui/menu-slots.js",
+      "sha256": "205c9869427bc45a3c7bd34565e2ed8cb9f281694382566d71d1ce7c745e2f7c"
+    },
+    {
+      "path": "搜打撤/game/src/ui/menu-slot-view.js",
+      "sha256": "25c1e9e00f245ac38c3b6e37446f5b8fbe7cb3a241e4a191c08dc2dee88346c6"
+    },
+    {
+      "path": "搜打撤/game/src/ui/save-management.js",
+      "sha256": "8bd37a97035429e3c46e3ef5c8fd4012cc2889211dc312c334c8767852f1caa9"
+    },
+    {
+      "path": "搜打撤/game/src/ui/game.menu.pages.js",
+      "sha256": "ea2a392077690e3a094ce205717c6571cc2958ffc948487bdcb93d3f9fb5f596"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.session.js",
+      "sha256": "eb63a8dcd6ccfbaa0649650be0976172afd9c9e9d78125c766fb08b0d2a9595a"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.runtime.js",
+      "sha256": "7b86625bfb0c1c04734e139263222600535ae5af1417850761958d59a15f7dab"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.home-v3.js",
+      "sha256": "c941b3575798f85e63788607e17098aa56105b4e847614827752aa229ae43b79"
+    },
+    {
+      "path": "搜打撤/game/src/hub/hub.navigation-v7.js",
+      "sha256": "a5af60b6fe8a520c9856d9f242fdd52efaf21a2cf7a772168911e6485ee4fa6a"
+    },
+    {
+      "path": "搜打撤/game/src/hub/save-archive.js",
+      "sha256": "51ef18f8d7ee212769fc099c9bffea75361471399d4f83b4191b029fff288d34"
+    },
+    {
+      "path": "搜打撤/game/css/home-polish.css",
+      "sha256": "c3c4a76fa783497cca60b85fd84ac00266f721fd4dd2b6b06749de6a4b785ec4"
+    },
+    {
+      "path": "搜打撤/game/css/base-framework-v7.css",
+      "sha256": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953"
+    },
+    {
+      "path": "搜打撤/game/index.html",
+      "sha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567"
+    }
+  ]
+}

@@ -1,0 +1,1269 @@
+{
+  "witness": [
+    {
+      "type": "attack",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 15,
+        "atk": 2
+      },
+      "dealt": 5
+    },
+    {
+      "type": "attack",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 102
+    },
+    {
+      "type": "attack",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 15,
+        "atk": 2
+      },
+      "dealt": 5
+    },
+    {
+      "type": "attack",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 102
+    },
+    {
+      "type": "attack",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 15,
+        "atk": 1
+      },
+      "dealt": 5
+    },
+    {
+      "type": "attack",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 102
+    },
+    {
+      "type": "attack",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 15,
+        "atk": 1
+      },
+      "dealt": 5
+    },
+    {
+      "type": "attack",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 102
+    },
+    {
+      "type": "spell",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 18,
+        "atk": 1
+      },
+      "dealt": 3
+    },
+    {
+      "type": "spell",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 100
+    },
+    {
+      "type": "spell",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 17,
+        "atk": 1
+      },
+      "dealt": 3
+    },
+    {
+      "type": "spell",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 100
+    },
+    {
+      "type": "spell",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 17,
+        "atk": 1
+      },
+      "dealt": 3
+    },
+    {
+      "type": "spell",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 100
+    },
+    {
+      "type": "spell",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 17,
+        "atk": 1
+      },
+      "dealt": 3
+    },
+    {
+      "type": "spell",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 100
+    },
+    {
+      "type": "fixed",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 19,
+        "atk": 1
+      },
+      "dealt": 1
+    },
+    {
+      "type": "fixed",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 98
+    },
+    {
+      "type": "fixed",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 19,
+        "atk": 1
+      },
+      "dealt": 1
+    },
+    {
+      "type": "fixed",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 98
+    },
+    {
+      "type": "fixed",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 19,
+        "atk": 1
+      },
+      "dealt": 1
+    },
+    {
+      "type": "fixed",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 98
+    },
+    {
+      "type": "fixed",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 19,
+        "atk": 1
+      },
+      "dealt": 1
+    },
+    {
+      "type": "fixed",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 98
+    },
+    {
+      "type": "true",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 17,
+        "atk": 1
+      },
+      "dealt": 3
+    },
+    {
+      "type": "true",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 100
+    },
+    {
+      "type": "true",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 17,
+        "atk": 1
+      },
+      "dealt": 3
+    },
+    {
+      "type": "true",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 0,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 100
+    },
+    {
+      "type": "true",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 17,
+        "atk": 1
+      },
+      "dealt": 3
+    },
+    {
+      "type": "true",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 100
+    },
+    {
+      "type": "true",
+      "amount": 3,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 17,
+        "atk": 1
+      },
+      "dealt": 3
+    },
+    {
+      "type": "true",
+      "amount": 100,
+      "input": {
+        "hp": 20,
+        "maxHp": 30,
+        "atk": 1,
+        "behavior": "witness_pope",
+        "status": {
+          "silence": 1,
+          "healban": 1
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "after": {
+        "hp": 0,
+        "atk": 1
+      },
+      "dealt": 100
+    }
+  ],
+  "capped": [
+    {
+      "type": "attack",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 0,
+          "necroticExposure": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 4,
+      "hp": 96
+    },
+    {
+      "type": "attack",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 0,
+          "necroticExposure": 2
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 8,
+      "hp": 92
+    },
+    {
+      "type": "attack",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 0,
+          "necroticExposure": 8
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 32,
+      "hp": 68
+    },
+    {
+      "type": "attack",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 1,
+          "necroticExposure": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 13,
+      "hp": 87
+    },
+    {
+      "type": "attack",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 1,
+          "necroticExposure": 2
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 26,
+      "hp": 74
+    },
+    {
+      "type": "attack",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 1,
+          "necroticExposure": 8
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 104,
+      "hp": 0
+    },
+    {
+      "type": "spell",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 0,
+          "necroticExposure": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 4,
+      "hp": 96
+    },
+    {
+      "type": "spell",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 0,
+          "necroticExposure": 2
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 8,
+      "hp": 92
+    },
+    {
+      "type": "spell",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 0,
+          "necroticExposure": 8
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 32,
+      "hp": 68
+    },
+    {
+      "type": "spell",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 1,
+          "necroticExposure": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 11,
+      "hp": 89
+    },
+    {
+      "type": "spell",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 1,
+          "necroticExposure": 2
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 22,
+      "hp": 78
+    },
+    {
+      "type": "spell",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 1,
+          "necroticExposure": 8
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 88,
+      "hp": 12
+    },
+    {
+      "type": "true",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 0,
+          "necroticExposure": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 9,
+      "hp": 91
+    },
+    {
+      "type": "true",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 0,
+          "necroticExposure": 2
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 18,
+      "hp": 82
+    },
+    {
+      "type": "true",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 0,
+          "necroticExposure": 8
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 72,
+      "hp": 28
+    },
+    {
+      "type": "true",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 1,
+          "necroticExposure": 0
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 9,
+      "hp": 91
+    },
+    {
+      "type": "true",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 1,
+          "necroticExposure": 2
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 18,
+      "hp": 82
+    },
+    {
+      "type": "true",
+      "input": {
+        "hp": 100,
+        "maxHp": 100,
+        "atk": 1,
+        "damageCap": 4,
+        "status": {
+          "abreak": 1,
+          "necroticExposure": 8
+        },
+        "defense": {
+          "armor": 2,
+          "shield": 0,
+          "guard": false
+        }
+      },
+      "dealt": 72,
+      "hp": 28
+    }
+  ],
+  "summons": [
+    {
+      "mode": "standard",
+      "turn": 2,
+      "foe": {
+        "id": "greedy_imp",
+        "hp": 5,
+        "atk": 4,
+        "eliteSkill": "deathEnergy",
+        "stealth": 0
+      }
+    },
+    {
+      "mode": "standard",
+      "turn": 4,
+      "foe": {
+        "id": "cultist",
+        "hp": 6,
+        "atk": 6,
+        "eliteSkill": "blockPowerGain",
+        "stealth": 0
+      }
+    },
+    {
+      "mode": "standard",
+      "turn": 6,
+      "foe": {
+        "id": "swaggerer",
+        "hp": 6,
+        "atk": 2,
+        "eliteSkill": "attackAura",
+        "stealth": 0
+      }
+    },
+    {
+      "mode": "elite",
+      "turn": 2,
+      "foe": {
+        "id": "greedy_imp",
+        "hp": 7,
+        "atk": 5,
+        "eliteSkill": "deathEnergy",
+        "stealth": 0
+      }
+    },
+    {
+      "mode": "elite",
+      "turn": 4,
+      "foe": {
+        "id": "cultist",
+        "hp": 8,
+        "atk": 8,
+        "eliteSkill": "blockPowerGain",
+        "stealth": 0
+      }
+    },
+    {
+      "mode": "elite",
+      "turn": 6,
+      "foe": {
+        "id": "swaggerer",
+        "hp": 8,
+        "atk": 3,
+        "eliteSkill": "attackAura",
+        "stealth": 0
+      }
+    }
+  ],
+  "necro": [
+    {
+      "turn": 3,
+      "drawPile": [
+        "d0",
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "grave": [
+        "d5",
+        "d6"
+      ],
+      "exposure": 2
+    },
+    {
+      "turn": 6,
+      "drawPile": [
+        "d0",
+        "d1",
+        "d2"
+      ],
+      "grave": [
+        "d5",
+        "d6",
+        "d3",
+        "d4"
+      ],
+      "exposure": 4
+    },
+    {
+      "turn": 9,
+      "drawPile": [
+        "d0"
+      ],
+      "grave": [
+        "d5",
+        "d6",
+        "d3",
+        "d4",
+        "d1",
+        "d2"
+      ],
+      "exposure": 8
+    }
+  ],
+  "summonPool": [
+    "infantry",
+    "archer",
+    "cavalry",
+    "rager",
+    "deserter",
+    "greedy_imp",
+    "wolf_rider",
+    "orc_axe",
+    "orc_jav",
+    "swaggerer",
+    "tin_mute",
+    "heavy_hammer",
+    "water_el",
+    "fire_el",
+    "grass_el",
+    "cultist",
+    "fake_apothecary",
+    "camo_sniper"
+  ]
+}

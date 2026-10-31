@@ -1,0 +1,1392 @@
+{
+  "generatedAtUtc": "2026-10-29T23:40:31.4295417Z",
+  "conclusion": "32 samples: no actionable production actor-frame visual defect; one evidence provenance-label issue",
+  "evidenceDirectory": "搜打撤/docs/evidence/2026-10-29-unity-desktop/current-unit-frames-1",
+  "notFinalBuild": true,
+  "readOnlySourceReview": true,
+  "unityCompilerOrCUAStarted": false,
+  "hardwareInputTested": false,
+  "sourceReadSnapshots": [
+    {
+      "path": "SoudacheUnity/Assets/Editor/CurrentUnitFrameValidation.cs",
+      "sha256": "cba022589ce39555f9348f6f42ba02ff0adddab36bcf744fb60b5138b7202868",
+      "readBoundary": "1-209; stages1-3 commands,4-8 fixtures; Tick/CheckCatalog/Sample",
+      "evidenceSha256": "e7631f64745e047376c5d1c89ff23da953803095e2d87f9a257f3bb25f6314d4",
+      "matchesEvidenceSnapshot": false
+    },
+    {
+      "path": "SoudacheUnity/Assets/Editor/OffscreenCapture.cs",
+      "sha256": "73af16a2d14b5c4f921bb51947584edb1a41365d5b05feba371ca98ef99e5990",
+      "readBoundary": "1-90; PrepareReference/Write",
+      "evidenceSha256": "73af16a2d14b5c4f921bb51947584edb1a41365d5b05feba371ca98ef99e5990",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleUnitFrames.cs",
+      "sha256": "c98c9db9210690bf2166ce6f3b81d789a1cb136bdf2b185242af39c0f36da640",
+      "readBoundary": "full file: Bind/Timeline/Play/Hurt/Update/Paint/Pause/Release",
+      "evidenceSha256": "c98c9db9210690bf2166ce6f3b81d789a1cb136bdf2b185242af39c0f36da640",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleActorClock.cs",
+      "sha256": "3688f7d6954947cf7d02df9624602d099a044950e9c12932fdd873bbd63f8421",
+      "readBoundary": "full file: Play/Advance/ImpactRemaining/Finish",
+      "evidenceSha256": "3688f7d6954947cf7d02df9624602d099a044950e9c12932fdd873bbd63f8421",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Res/CurrentUnitFrames.cs",
+      "sha256": "c58df1429b084d6e322d4e74344a57f33f74e4f45d06b8774f2102626260002f",
+      "readBoundary": "full file: Find/Lease.Frame/Dispose/Acquire",
+      "evidenceSha256": "c58df1429b084d6e322d4e74344a57f33f74e4f45d06b8774f2102626260002f",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Res/UnitFrameCatalog.cs",
+      "sha256": "0f1f4a96e9fe4b022df67559b956162edcde1f48c121a8ad28fa1857c4282d97",
+      "readBoundary": "full file: FigureHeight/ActorHeight/FootInset/actions",
+      "evidenceSha256": "0f1f4a96e9fe4b022df67559b956162edcde1f48c121a8ad28fa1857c4282d97",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Resources/Data/CurrentUnitFrames.json",
+      "sha256": "e31d19a69ebb858273883ad7b9257b47a08351074ac4686f5fe9b3fe327ea83c",
+      "readBoundary": "JSON: version,roles[*].id/catalogSha256/width/height/bodyHeight/bodyFill/neutralBounds/contactFrame/actions[*]",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+      "sha256": "2d148fe7282f0ac645d0ac75ee8aa07406ab1af32b76c6374de33fe28bc55bf4",
+      "readBoundary": "250-263; fixed actor foot geometry; other frame references rg only",
+      "evidenceSha256": "2d148fe7282f0ac645d0ac75ee8aa07406ab1af32b76c6374de33fe28bc55bf4",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentationQueue.cs",
+      "sha256": "72757666f3a776866fa5fd67cea6d4f4bd9ed38803f768c4bc096d0d050da311",
+      "readBoundary": "full file: event subscription/Enqueue/Update/ApplyHit/pause",
+      "evidenceSha256": "72757666f3a776866fa5fd67cea6d4f4bd9ed38803f768c4bc096d0d050da311",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentationBeats.cs",
+      "sha256": "a1ae06b8669198411b643b48c25a7a7328d64e0f5a220dfa36937fe490b73d58",
+      "readBoundary": "full file: PresentResolvedHit/PresentEnemyAttack",
+      "evidenceSha256": "a1ae06b8669198411b643b48c25a7a7328d64e0f5a220dfa36937fe490b73d58",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Core/Battle/BattleActorPresentation.cs",
+      "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a",
+      "readBoundary": "full file: windup/hit and PublishHit/EmitPresentation",
+      "evidenceSha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "sha256": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99",
+      "readBoundary": "rg-only 572 PlayCard,769 BeginActorCard,941 BeginActorHit; read1021-1045 PlayerTakeHit,1067-1081 EndTurn transition",
+      "evidenceSha256": "5cba112d6c6e75cfb0214863bfbbdd06db36cca376f4bfc2a0b771afef73a084",
+      "matchesEvidenceSnapshot": false
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs",
+      "sha256": "ac90af36245bfe801c08606da5ad4702d69e0b218cb6264e9284aea52aad8997",
+      "readBoundary": "rg-only308-312 Hurt/PresentFloats; no full UI review",
+      "evidenceSha256": "ac90af36245bfe801c08606da5ad4702d69e0b218cb6264e9284aea52aad8997",
+      "matchesEvidenceSnapshot": true
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "sha256": "5cf48efee89816eae30390665705558433a21aaa6918a0afdc0271e7afc94505",
+      "readBoundary": "rg locating frame pipeline; read351-432 layout/applyFrame,437-505 buildTimeline/playSeq/advance",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frame-catalog.js",
+      "sha256": "3699b292b5e1620f1ca5cc51775a4a213a02a95c3fab7f7f14d16f883c879727",
+      "readBoundary": "full11-line timeline module",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "sha256": "ba7f531eae515cb888e9f34f89c76eb55a1d82bcb76b5920fcbd4bba600dd224",
+      "readBoundary": "full11-line timeline module",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frame-catalog-three-role.js",
+      "sha256": "efbdf272a28617f60c61cc114dc4481d81a9d90576adb4832a395c89884d0a6d",
+      "readBoundary": "full18-line timeline module",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/animations.json",
+      "sha256": "322055d9c310af548716f4be77005540c29658032ecb38f3fd697b389a1423a8",
+      "readBoundary": "JSON width/height/sequences[*]/timings[*]; catalog SHA comparison",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/animations.json",
+      "sha256": "4506cb85b506e943436513a14e2d3c4d298df4637591740b839c41e7a266bfe0",
+      "readBoundary": "JSON width/height/sequences[*]/timings[*]; catalog SHA comparison",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/animations.json",
+      "sha256": "e834fc26969fdc44d15be767a8d2739c2c1c6dd92fd087621edde6acd071f303",
+      "readBoundary": "JSON width/height/sequences[*]/timings[*]; catalog SHA comparison",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/animations.json",
+      "sha256": "f3354a16a949a5c3d4b93a19e1c5b0da17dc7f8f86573819c09c0743eaab6567",
+      "readBoundary": "JSON width/height/sequences[*]/timings[*]; catalog SHA comparison",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/animations.json",
+      "sha256": "e834fc26969fdc44d15be767a8d2739c2c1c6dd92fd087621edde6acd071f303",
+      "readBoundary": "JSON width/height/sequences[*]/timings[*]; catalog SHA comparison",
+      "evidenceSha256": null,
+      "matchesEvidenceSnapshot": null
+    }
+  ],
+  "process": {
+    "method": "Sdt.Editor.CurrentUnitFrameValidation.Run",
+    "pid": 1780,
+    "startedAt": "2026-10-29T23:05:14.1993183Z",
+    "endedAt": "2026-10-29T23:05:45.4255223Z",
+    "exitCode": 0,
+    "timedOut": false,
+    "inputsUnchanged": true,
+    "changedInputs": [],
+    "sourceCount": 331,
+    "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-unit-frames-1"
+  },
+  "evidenceIntegrity": {
+    "artifacts": [
+      {
+        "file": "frames-trace.json",
+        "sha256": "cee436aac8526443cfad90a9c6896cd04944b6f34dcd9533b30b0cb3b1869b7a"
+      },
+      {
+        "file": "process.json",
+        "sha256": "8c732225fd51e25ef4ab799a489bf713d84f328d5bd894d9749ec9678165f6ed"
+      },
+      {
+        "file": "result.json",
+        "sha256": "4a3960abb23f42d1878a10544cf59eb32e769e1061bcd6dfa54af0896de78875"
+      },
+      {
+        "file": "source-after.json",
+        "sha256": "8e223f4f3fa6457da51c91573fdffb217304688bbf835f2e327dce2c0f2aa285"
+      },
+      {
+        "file": "source-before.json",
+        "sha256": "8e223f4f3fa6457da51c91573fdffb217304688bbf835f2e327dce2c0f2aa285"
+      }
+    ],
+    "extraAfterKeys": 0,
+    "beforeKeys": 331,
+    "afterKeys": 331,
+    "differingValues": 0
+  },
+  "catalogChecks": [
+    {
+      "role": "wu",
+      "sourceShaMatches": true,
+      "allSequencesAndTimingsMatch": true,
+      "actions": [
+        {
+          "name": "idle",
+          "slots": 72,
+          "uniqueFrames": 37,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/frame-001",
+          "hold": false
+        },
+        {
+          "name": "atk",
+          "slots": 10,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "hurt",
+          "slots": 8,
+          "uniqueFrames": 3,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "death",
+          "slots": 21,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/frame-050",
+          "hold": true
+        },
+        {
+          "name": "cast",
+          "slots": 1,
+          "uniqueFrames": 1,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        }
+      ],
+      "resourceRun": {
+        "role": "wu",
+        "uniqueImported": 51,
+        "pace": 1.0
+      }
+    },
+    {
+      "role": "changwuyu",
+      "sourceShaMatches": true,
+      "allSequencesAndTimingsMatch": true,
+      "actions": [
+        {
+          "name": "idle",
+          "slots": 72,
+          "uniqueFrames": 37,
+          "first": "sprite-v1/f000",
+          "last": "sprite-v1/f001",
+          "hold": false
+        },
+        {
+          "name": "atk",
+          "slots": 12,
+          "uniqueFrames": 4,
+          "first": "sprite-v1/f000",
+          "last": "sprite-v1/f000",
+          "hold": false
+        },
+        {
+          "name": "hurt",
+          "slots": 19,
+          "uniqueFrames": 18,
+          "first": "sprite-v1/f000",
+          "last": "sprite-v1/f000",
+          "hold": false
+        },
+        {
+          "name": "death",
+          "slots": 28,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/f000",
+          "last": "sprite-v1/f062",
+          "hold": true
+        },
+        {
+          "name": "cast",
+          "slots": 12,
+          "uniqueFrames": 4,
+          "first": "sprite-v1/f000",
+          "last": "sprite-v1/f000",
+          "hold": false
+        }
+      ],
+      "resourceRun": {
+        "role": "changwuyu",
+        "uniqueImported": 63,
+        "pace": 2.0
+      }
+    },
+    {
+      "role": "baita",
+      "sourceShaMatches": true,
+      "allSequencesAndTimingsMatch": true,
+      "actions": [
+        {
+          "name": "idle",
+          "slots": 72,
+          "uniqueFrames": 36,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "atk",
+          "slots": 10,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "hurt",
+          "slots": 8,
+          "uniqueFrames": 3,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "death",
+          "slots": 21,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/frame-049",
+          "hold": true
+        },
+        {
+          "name": "cast",
+          "slots": 10,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        }
+      ],
+      "resourceRun": {
+        "role": "baita",
+        "uniqueImported": 50,
+        "pace": 1.0
+      }
+    },
+    {
+      "role": "heixiang",
+      "sourceShaMatches": true,
+      "allSequencesAndTimingsMatch": true,
+      "actions": [
+        {
+          "name": "idle",
+          "slots": 72,
+          "uniqueFrames": 36,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "atk",
+          "slots": 10,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "hurt",
+          "slots": 8,
+          "uniqueFrames": 3,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "death",
+          "slots": 21,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/frame-049",
+          "hold": true
+        },
+        {
+          "name": "cast",
+          "slots": 1,
+          "uniqueFrames": 1,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        }
+      ],
+      "resourceRun": {
+        "role": "heixiang",
+        "uniqueImported": 50,
+        "pace": 1.0
+      }
+    },
+    {
+      "role": "xingyue",
+      "sourceShaMatches": true,
+      "allSequencesAndTimingsMatch": true,
+      "actions": [
+        {
+          "name": "idle",
+          "slots": 72,
+          "uniqueFrames": 36,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "atk",
+          "slots": 10,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "hurt",
+          "slots": 8,
+          "uniqueFrames": 3,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        },
+        {
+          "name": "death",
+          "slots": 21,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/frame-049",
+          "hold": true
+        },
+        {
+          "name": "cast",
+          "slots": 10,
+          "uniqueFrames": 7,
+          "first": "sprite-v1/neutral",
+          "last": "sprite-v1/neutral",
+          "hold": false
+        }
+      ],
+      "resourceRun": {
+        "role": "xingyue",
+        "uniqueImported": 50,
+        "pace": 1.0
+      }
+    }
+  ],
+  "images": [
+    {
+      "file": "frames-baita-atk-mid.png",
+      "bytes": 1523997,
+      "sha256": "64f32d42e352fa2aec9a04cefe73260f807b0d29736dba0eee660ec7c9aba5f8",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "baita",
+      "label": "atk-mid",
+      "manualRoleObservation": "棕发绿裙坐椅浮书；攻击施法抬手，受伤捂胸，离椅跪倒至伏地，椅书保留。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "baita",
+        "action": "atk",
+        "index": 3,
+        "frame": "sprite-v1/frame-037",
+        "fixture": true,
+        "footY": 396.950775,
+        "catalogFootInset": 15.4492369,
+        "alpha": {
+          "opaque": 36825,
+          "transparent": 136491,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-baita-cast-mid.png",
+      "bytes": 1523997,
+      "sha256": "64f32d42e352fa2aec9a04cefe73260f807b0d29736dba0eee660ec7c9aba5f8",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "baita",
+      "label": "cast-mid",
+      "manualRoleObservation": "棕发绿裙坐椅浮书；攻击施法抬手，受伤捂胸，离椅跪倒至伏地，椅书保留。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "baita",
+        "action": "cast",
+        "index": 3,
+        "frame": "sprite-v1/frame-037",
+        "fixture": true,
+        "footY": 396.950775,
+        "catalogFootInset": 15.4492369,
+        "alpha": {
+          "opaque": 36825,
+          "transparent": 136491,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-baita-death-last-hold.png",
+      "bytes": 1504859,
+      "sha256": "335a8e3f029f67448892552a5dd3044a8373cabe722e5095f25866f7d6e1f01a",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "baita",
+      "label": "death-last-hold",
+      "manualRoleObservation": "棕发绿裙坐椅浮书；攻击施法抬手，受伤捂胸，离椅跪倒至伏地，椅书保留。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "baita",
+        "action": "death",
+        "index": 20,
+        "frame": "sprite-v1/frame-049",
+        "fixture": true,
+        "footY": 396.950775,
+        "catalogFootInset": 15.4492369,
+        "alpha": {
+          "opaque": 29485,
+          "transparent": 143821,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-baita-death-mid.png",
+      "bytes": 1523045,
+      "sha256": "5dffa2fbf4b6067479bac81941244d2ae67ccc822977f606fb247fe7d6d5a3d5",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "baita",
+      "label": "death-mid",
+      "manualRoleObservation": "棕发绿裙坐椅浮书；攻击施法抬手，受伤捂胸，离椅跪倒至伏地，椅书保留。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "baita",
+        "action": "death",
+        "index": 7,
+        "frame": "sprite-v1/frame-046",
+        "fixture": true,
+        "footY": 396.950775,
+        "catalogFootInset": 15.4492369,
+        "alpha": {
+          "opaque": 39890,
+          "transparent": 132988,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-baita-hurt-mid.png",
+      "bytes": 1523863,
+      "sha256": "30015026f428068aaf8c532b3ca1f2c80f1bd9ed84226db5c26b64ea4e812cea",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "baita",
+      "label": "hurt-mid",
+      "manualRoleObservation": "棕发绿裙坐椅浮书；攻击施法抬手，受伤捂胸，离椅跪倒至伏地，椅书保留。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "baita",
+        "action": "hurt",
+        "index": 2,
+        "frame": "sprite-v1/frame-042",
+        "fixture": true,
+        "footY": 396.950775,
+        "catalogFootInset": 15.4492369,
+        "alpha": {
+          "opaque": 38797,
+          "transparent": 134621,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-baita-idle-mid.png",
+      "bytes": 1516579,
+      "sha256": "2e154481a6a8d18641d3c557ac61e2e1a90f870cb0d2c0015397acd586d48b40",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "baita",
+      "label": "idle-mid",
+      "manualRoleObservation": "棕发绿裙坐椅浮书；攻击施法抬手，受伤捂胸，离椅跪倒至伏地，椅书保留。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "baita",
+        "action": "idle",
+        "index": 0,
+        "frame": "sprite-v1/neutral",
+        "fixture": true,
+        "footY": 396.950775,
+        "catalogFootInset": 15.4492369,
+        "alpha": {
+          "opaque": 33896,
+          "transparent": 139515,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-changwuyu-atk-mid.png",
+      "bytes": 1516485,
+      "sha256": "8092b469d0dafec42b67d7e55fde92703e84f7c45d4a46fff8fb04ade44635c0",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "changwuyu",
+      "label": "atk-mid",
+      "manualRoleObservation": "白发紫黑帽；攻击施法伸臂，受伤收臂，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "changwuyu",
+        "action": "atk",
+        "index": 4,
+        "frame": "sprite-v1/f038",
+        "fixture": true,
+        "footY": 400.203827,
+        "catalogFootInset": 12.1961575,
+        "alpha": {
+          "opaque": 80505,
+          "transparent": 309613,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-changwuyu-cast-mid.png",
+      "bytes": 1516485,
+      "sha256": "8092b469d0dafec42b67d7e55fde92703e84f7c45d4a46fff8fb04ade44635c0",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "changwuyu",
+      "label": "cast-mid",
+      "manualRoleObservation": "白发紫黑帽；攻击施法伸臂，受伤收臂，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "changwuyu",
+        "action": "cast",
+        "index": 4,
+        "frame": "sprite-v1/f038",
+        "fixture": true,
+        "footY": 400.203827,
+        "catalogFootInset": 12.1961575,
+        "alpha": {
+          "opaque": 80505,
+          "transparent": 309613,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-changwuyu-death-last-hold.png",
+      "bytes": 1490165,
+      "sha256": "df332a8efb7570b171adeeb9a117680cf1825dbf45909ce6c221b1e371fc65bd",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "changwuyu",
+      "label": "death-last-hold",
+      "manualRoleObservation": "白发紫黑帽；攻击施法伸臂，受伤收臂，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "changwuyu",
+        "action": "death",
+        "index": 27,
+        "frame": "sprite-v1/f062",
+        "fixture": true,
+        "footY": 400.203827,
+        "catalogFootInset": 12.1961575,
+        "alpha": {
+          "opaque": 45053,
+          "transparent": 346057,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-changwuyu-death-mid.png",
+      "bytes": 1500844,
+      "sha256": "f4f60a0fa302caf8c990701267f2e1a2b798aec58a4f7ba13f00410beefbdc73",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "changwuyu",
+      "label": "death-mid",
+      "manualRoleObservation": "白发紫黑帽；攻击施法伸臂，受伤收臂，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "changwuyu",
+        "action": "death",
+        "index": 9,
+        "frame": "sprite-v1/f059",
+        "fixture": true,
+        "footY": 400.203827,
+        "catalogFootInset": 12.1961575,
+        "alpha": {
+          "opaque": 59727,
+          "transparent": 330846,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-changwuyu-hurt-mid.png",
+      "bytes": 1510693,
+      "sha256": "c8425f03ca08962a541a7421f57aa8dc634660b87baca117758df71b5e826209",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "changwuyu",
+      "label": "hurt-mid",
+      "manualRoleObservation": "白发紫黑帽；攻击施法伸臂，受伤收臂，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "changwuyu",
+        "action": "hurt",
+        "index": 6,
+        "frame": "sprite-v1/f045",
+        "fixture": true,
+        "footY": 400.203827,
+        "catalogFootInset": 12.1961575,
+        "alpha": {
+          "opaque": 77090,
+          "transparent": 313306,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-changwuyu-idle-mid.png",
+      "bytes": 1513366,
+      "sha256": "b35a5313e8aeaecf6589c9fccda83a1ef509aa4a8adb0bdcd6387f65fa691678",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "changwuyu",
+      "label": "idle-mid",
+      "manualRoleObservation": "白发紫黑帽；攻击施法伸臂，受伤收臂，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "changwuyu",
+        "action": "idle",
+        "index": 0,
+        "frame": "sprite-v1/f000",
+        "fixture": true,
+        "footY": 400.203827,
+        "catalogFootInset": 12.1961575,
+        "alpha": {
+          "opaque": 76907,
+          "transparent": 313562,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-heixiang-atk-mid.png",
+      "bytes": 1518990,
+      "sha256": "8de111cc40957fa8d5d19e910cff931e8f2504e7167df3c731a9faace35e1f3a",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "heixiang",
+      "label": "atk-mid",
+      "manualRoleObservation": "黑甲橙围巾大剑；攻击举剑，受伤后仰，跪倒至俯卧，剑落地。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "heixiang",
+        "action": "atk",
+        "index": 3,
+        "frame": "sprite-v1/frame-037",
+        "fixture": true,
+        "footY": 394.012146,
+        "catalogFootInset": 18.387886,
+        "alpha": {
+          "opaque": 27213,
+          "transparent": 145859,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-heixiang-cast-mid.png",
+      "bytes": 1502434,
+      "sha256": "2f8dfefbf9dd78a61c32e56e19e18b1e1546639e46ace68c64d29fe9d4da05ab",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "heixiang",
+      "label": "cast-mid",
+      "manualRoleObservation": "黑甲橙围巾大剑；攻击举剑，受伤后仰，跪倒至俯卧，剑落地。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "heixiang",
+        "action": "cast",
+        "index": 0,
+        "frame": "sprite-v1/neutral",
+        "fixture": true,
+        "footY": 394.012146,
+        "catalogFootInset": 18.387886,
+        "alpha": {
+          "opaque": 21325,
+          "transparent": 152020,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-heixiang-death-last-hold.png",
+      "bytes": 1475184,
+      "sha256": "16e67d2734c2839f89f7ab2792b1f8d167fad647685c4b7a0c096fcbce440d9e",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "heixiang",
+      "label": "death-last-hold",
+      "manualRoleObservation": "黑甲橙围巾大剑；攻击举剑，受伤后仰，跪倒至俯卧，剑落地。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "heixiang",
+        "action": "death",
+        "index": 20,
+        "frame": "sprite-v1/frame-049",
+        "fixture": true,
+        "footY": 394.012146,
+        "catalogFootInset": 18.387886,
+        "alpha": {
+          "opaque": 10674,
+          "transparent": 163702,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-heixiang-death-mid.png",
+      "bytes": 1489447,
+      "sha256": "1ff2b9df206b88bffb7e763022763438bc3da2056d468b2a709cca6814a7b01b",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "heixiang",
+      "label": "death-mid",
+      "manualRoleObservation": "黑甲橙围巾大剑；攻击举剑，受伤后仰，跪倒至俯卧，剑落地。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "heixiang",
+        "action": "death",
+        "index": 7,
+        "frame": "sprite-v1/frame-046",
+        "fixture": true,
+        "footY": 394.012146,
+        "catalogFootInset": 18.387886,
+        "alpha": {
+          "opaque": 17260,
+          "transparent": 156550,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-heixiang-hurt-mid.png",
+      "bytes": 1503806,
+      "sha256": "b3ab6eb93b23a4865da15734300d18b0e1da09639043ea6ec63bdd1b6b5b8363",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "heixiang",
+      "label": "hurt-mid",
+      "manualRoleObservation": "黑甲橙围巾大剑；攻击举剑，受伤后仰，跪倒至俯卧，剑落地。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "heixiang",
+        "action": "hurt",
+        "index": 2,
+        "frame": "sprite-v1/frame-042",
+        "fixture": true,
+        "footY": 394.012146,
+        "catalogFootInset": 18.387886,
+        "alpha": {
+          "opaque": 21463,
+          "transparent": 152010,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-heixiang-idle-mid.png",
+      "bytes": 1502434,
+      "sha256": "2f8dfefbf9dd78a61c32e56e19e18b1e1546639e46ace68c64d29fe9d4da05ab",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "heixiang",
+      "label": "idle-mid",
+      "manualRoleObservation": "黑甲橙围巾大剑；攻击举剑，受伤后仰，跪倒至俯卧，剑落地。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "heixiang",
+        "action": "idle",
+        "index": 0,
+        "frame": "sprite-v1/neutral",
+        "fixture": true,
+        "footY": 394.012146,
+        "catalogFootInset": 18.387886,
+        "alpha": {
+          "opaque": 21325,
+          "transparent": 152020,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-wu-atk-mid.png",
+      "bytes": 1426082,
+      "sha256": "4aecee1178b262787faa0bf1c8bc6ce17e9626f6a4afa19ce4d599cb3f092811",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "wu",
+      "label": "atk-mid",
+      "manualRoleObservation": "白发蓝结黑裙持剑；攻击挥斩/命令突刺，受伤后仰，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "wu",
+        "action": "atk",
+        "index": 3,
+        "frame": "sprite-v1/frame-038",
+        "fixture": true,
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249,
+        "alpha": {
+          "opaque": 37778,
+          "transparent": 134158,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-wu-cast-mid.png",
+      "bytes": 1413005,
+      "sha256": "a8cdcabf39c72063fbb6752697667c02098414c185745444f84a0443fbcb461a",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "wu",
+      "label": "cast-mid",
+      "manualRoleObservation": "白发蓝结黑裙持剑；攻击挥斩/命令突刺，受伤后仰，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "wu",
+        "action": "cast",
+        "index": 0,
+        "frame": "sprite-v1/neutral",
+        "fixture": true,
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249,
+        "alpha": {
+          "opaque": 29637,
+          "transparent": 143488,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-wu-death-last-hold.png",
+      "bytes": 1390793,
+      "sha256": "e07252809a91e1860fa0f420ab9435d63aac7f4aedcc6c3d6c76bf0ddbec7231",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "wu",
+      "label": "death-last-hold",
+      "manualRoleObservation": "白发蓝结黑裙持剑；攻击挥斩/命令突刺，受伤后仰，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "wu",
+        "action": "death",
+        "index": 20,
+        "frame": "sprite-v1/frame-050",
+        "fixture": true,
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249,
+        "alpha": {
+          "opaque": 19435,
+          "transparent": 154478,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-wu-death-mid.png",
+      "bytes": 1404418,
+      "sha256": "c2531cd46b349e4b2fa364e1876a1d9d9aaed9167e1793f4bafc6d618651c70a",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "wu",
+      "label": "death-mid",
+      "manualRoleObservation": "白发蓝结黑裙持剑；攻击挥斩/命令突刺，受伤后仰，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "wu",
+        "action": "death",
+        "index": 7,
+        "frame": "sprite-v1/frame-047",
+        "fixture": true,
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249,
+        "alpha": {
+          "opaque": 25571,
+          "transparent": 148070,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-wu-hurt-mid.png",
+      "bytes": 1413266,
+      "sha256": "bbccd1a1974fc3b62f04c256ac36d94ed8bb458dcce29ed9440946824a395b0b",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "wu",
+      "label": "hurt-mid",
+      "manualRoleObservation": "白发蓝结黑裙持剑；攻击挥斩/命令突刺，受伤后仰，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "wu",
+        "action": "hurt",
+        "index": 2,
+        "frame": "sprite-v1/frame-043",
+        "fixture": true,
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249,
+        "alpha": {
+          "opaque": 31965,
+          "transparent": 141267,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-wu-idle-mid.png",
+      "bytes": 1531966,
+      "sha256": "314433849fb1e71cf6a37cfca88412c5fdb8ecf04475977c1752ae4d7cc0fd71",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "wu",
+      "label": "idle-mid",
+      "manualRoleObservation": "白发蓝结黑裙持剑；攻击挥斩/命令突刺，受伤后仰，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "wu",
+        "action": "idle",
+        "index": 0,
+        "frame": "sprite-v1/neutral",
+        "fixture": true,
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249,
+        "alpha": {
+          "opaque": 29637,
+          "transparent": 143488,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-wu-real-card-command-atk.png",
+      "bytes": 1493173,
+      "sha256": "138d749883eeb6ea689184153782a8ec161cf433b75d906b596b3521162e38f0",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "wu",
+      "label": "real-card-command-atk",
+      "manualRoleObservation": "白发蓝结黑裙持剑；攻击挥斩/命令突刺，受伤后仰，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "wu",
+        "action": "atk",
+        "index": 6,
+        "frame": "sprite-v1/frame-040",
+        "fixture": false,
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249,
+        "alpha": {
+          "opaque": 31147,
+          "transparent": 141504,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-wu-real-EndTurn-hurt.png",
+      "bytes": 1465176,
+      "sha256": "b60da7e6d6a9c40d55f5f52c97bbff660e8ac0be37153e0d9cad7c33a91bd1ba",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "wu",
+      "label": "real-EndTurn-hurt",
+      "manualRoleObservation": "白发蓝结黑裙持剑；攻击挥斩/命令突刺，受伤后仰，跪地至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "wu",
+        "action": "hurt",
+        "index": 1,
+        "frame": "sprite-v1/frame-043",
+        "fixture": false,
+        "footY": 398.226471,
+        "catalogFootInset": 14.1735249,
+        "alpha": {
+          "opaque": 31965,
+          "transparent": 141267,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-xingyue-atk-mid.png",
+      "bytes": 1520270,
+      "sha256": "72692679f6b60b6fb6c4a181ffbc54fc6b1c2b3927838071968d5262dd521882",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "xingyue",
+      "label": "atk-mid",
+      "manualRoleObservation": "金发辫绿白金袍；攻击施法合掌，受伤后仰，跪倒至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "xingyue",
+        "action": "atk",
+        "index": 3,
+        "frame": "sprite-v1/frame-037",
+        "fixture": true,
+        "footY": 396.374268,
+        "catalogFootInset": 16.0256863,
+        "alpha": {
+          "opaque": 30152,
+          "transparent": 143170,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-xingyue-cast-mid.png",
+      "bytes": 1520270,
+      "sha256": "72692679f6b60b6fb6c4a181ffbc54fc6b1c2b3927838071968d5262dd521882",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "xingyue",
+      "label": "cast-mid",
+      "manualRoleObservation": "金发辫绿白金袍；攻击施法合掌，受伤后仰，跪倒至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "xingyue",
+        "action": "cast",
+        "index": 3,
+        "frame": "sprite-v1/frame-037",
+        "fixture": true,
+        "footY": 396.374268,
+        "catalogFootInset": 16.0256863,
+        "alpha": {
+          "opaque": 30152,
+          "transparent": 143170,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-xingyue-death-last-hold.png",
+      "bytes": 1482925,
+      "sha256": "9cd889285aca51ad60d6b7ab154075d65a11c4ca75d5269a63c25c927890ff04",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "xingyue",
+      "label": "death-last-hold",
+      "manualRoleObservation": "金发辫绿白金袍；攻击施法合掌，受伤后仰，跪倒至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "xingyue",
+        "action": "death",
+        "index": 20,
+        "frame": "sprite-v1/frame-049",
+        "fixture": true,
+        "footY": 396.374268,
+        "catalogFootInset": 16.0256863,
+        "alpha": {
+          "opaque": 13740,
+          "transparent": 160605,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-xingyue-death-mid.png",
+      "bytes": 1499092,
+      "sha256": "d6f62df89b973752df8c2f850ce124797032aa27596dba8e59e28b838afc86a4",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "xingyue",
+      "label": "death-mid",
+      "manualRoleObservation": "金发辫绿白金袍；攻击施法合掌，受伤后仰，跪倒至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "xingyue",
+        "action": "death",
+        "index": 7,
+        "frame": "sprite-v1/frame-046",
+        "fixture": true,
+        "footY": 396.374268,
+        "catalogFootInset": 16.0256863,
+        "alpha": {
+          "opaque": 19268,
+          "transparent": 154726,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-xingyue-hurt-mid.png",
+      "bytes": 1526308,
+      "sha256": "3ab8d3546c98bfe85bd9cce697d283529902e4162fff6deb614c331aa01768af",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "xingyue",
+      "label": "hurt-mid",
+      "manualRoleObservation": "金发辫绿白金袍；攻击施法合掌，受伤后仰，跪倒至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "xingyue",
+        "action": "hurt",
+        "index": 2,
+        "frame": "sprite-v1/frame-042",
+        "fixture": true,
+        "footY": 396.374268,
+        "catalogFootInset": 16.0256863,
+        "alpha": {
+          "opaque": 33532,
+          "transparent": 139682,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    {
+      "file": "frames-xingyue-idle-mid.png",
+      "bytes": 1524396,
+      "sha256": "6b11ee7e169d215db4ea94af22bbfae2d6587e0f02a6c4b97612b04b0acdc5fe",
+      "individuallyViewedWith": "tools.view_image",
+      "role": "xingyue",
+      "label": "idle-mid",
+      "manualRoleObservation": "金发辫绿白金袍；攻击施法合掌，受伤后仰，跪倒至侧卧。",
+      "compositing": "人物周围透出场景，无不透明画布矩形",
+      "grounding": "站姿/椅脚/倒地在同一地面带，无裁断或整幅缩放漂移",
+      "sample": {
+        "role": "xingyue",
+        "action": "idle",
+        "index": 0,
+        "frame": "sprite-v1/neutral",
+        "fixture": true,
+        "footY": 396.374268,
+        "catalogFootInset": 16.0256863,
+        "alpha": {
+          "opaque": 32388,
+          "transparent": 140842,
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    }
+  ],
+  "cues": [
+    {
+      "BattleToken": "9f6681e046d048959b2f70f194afb206",
+      "Sequence": 1,
+      "Kind": "windup",
+      "Action": "atk",
+      "HpBefore": 0,
+      "HpAfter": 0,
+      "IsSelf": false
+    },
+    {
+      "BattleToken": "9f6681e046d048959b2f70f194afb206",
+      "Sequence": 2,
+      "Kind": "hit",
+      "Action": null,
+      "HpBefore": 10000,
+      "HpAfter": 9996,
+      "IsSelf": false
+    },
+    {
+      "BattleToken": "9f6681e046d048959b2f70f194afb206",
+      "Sequence": 3,
+      "Kind": "wait",
+      "Action": null,
+      "HpBefore": 0,
+      "HpAfter": 0,
+      "IsSelf": false
+    },
+    {
+      "BattleToken": "9f6681e046d048959b2f70f194afb206",
+      "Sequence": 4,
+      "Kind": "enemy-windup",
+      "Action": null,
+      "HpBefore": 0,
+      "HpAfter": 0,
+      "IsSelf": false
+    },
+    {
+      "BattleToken": "9f6681e046d048959b2f70f194afb206",
+      "Sequence": 5,
+      "Kind": "hit",
+      "Action": null,
+      "HpBefore": 1000,
+      "HpAfter": 998,
+      "IsSelf": true
+    },
+    {
+      "BattleToken": "9f6681e046d048959b2f70f194afb206",
+      "Sequence": 6,
+      "Kind": "wait",
+      "Action": null,
+      "HpBefore": 0,
+      "HpAfter": 0,
+      "IsSelf": false
+    }
+  ],
+  "findings": [
+    {
+      "category": "evidence-label",
+      "impact": "fixture:false cannot establish command-origin coverage; use stage plus explicit real sample labels.",
+      "source": "CurrentUnitFrameValidation.cs:62-63",
+      "suggestion": "Current code already corrected provenance labeling; preserve old run limitation or use fresh rerun evidence.",
+      "severity": "medium",
+      "observation": "All222 actual-frame-transition records use fixture:false;208 stage5 direct-Play fixture transitions and one stage7 fixture resume are included.",
+      "id": "E1",
+      "currentStatus": "Current validator line63 now derives fixture status from role/stage; correction observed after initial read. Existing current-unit-frames-1 evidence retains old false labels and was not regenerated by this review."
+    }
+  ],
+  "limitations": [
+    "32 stills individually viewed; no continuous video or all264-frame visual review. CheckCatalog actually acquires every unique catalog frame and checks dimensions/pivot, supporting recorded264 loads, without independent rerun.",
+    "Only wu runs real PlayCard and EndTurn session commands; other30 screenshots are direct-Play fixtures. No real spell/death command capture or pointer/keyboard test.",
+    "OnApplicationPause is SendMessage fixture for wu attack only; five death last frames checked after0.25s, not real lethal-damage settlement.",
+    "Only1920x1080 offscreen render; capture forces scaling/sorting/camera target. No final standalone build, OS focus or multiple-size claim.",
+    "Current read-source SHA is review-time snapshot; Core concurrently changes. matchesEvidenceSnapshot identifies earlier-run correspondence.",
+    "native-frame-foe white rectangle is controlled synthetic target without roster asset; not a finding against real enemies.",
+    "Texture alpha sampled in32 images is0..255; scene composites show transparent surroundings. Entire scene PNG need not have transparent background.",
+    "No Agent old assets, unrelated complex cards or whole-interface design reviewed."
+  ],
+  "verified": [
+    "Five source animation JSON SHA and every action slot+timing match Unity manifest. wu/heixiang cast originally one neutral frame; other three reuse atk sequence.",
+    "Source battle.frames.js440-442 deliberately holds first idle frame, despite72 catalog idle slots; native mirrors this.",
+    "32 samples retain alpha minimum0/maximum255. Constant within-role footY, with footY+catalogFootInset approx412.4 across all roles.",
+    "Five death-last samples are final catalog slot with deathComplete true and visible corpse; no baseline drift in reviewed stills.",
+    "Cues windup atk,hit10000->9996,wait,enemy-windup,hit1000->998,wait agree with real wu command captures."
+  ],
+  "cueSourceChain": [
+    "Validation Step1-3 calls Session.PlayCard/EndTurn; no direct Actor.Play in these stages.",
+    "PlayCard -> BeginActorCard; damage -> BeginActorHit -> PresentActorWindup/PublishHit. EndTurn -> PlayerTakeHit -> BeginPlayerHit enemy-windup/PublishHit self.",
+    "BattlePresentationQueue subscribes ActorPresentation, filters token/sequence, calls ActorFrames.Play; hit -> PresentResolvedHit -> PresentFloats -> BattleUnitFrames.Hurt (or fallback Play hurt).",
+    "BattleUnitFrames.Update -> BattleActorClock.Advance -> Paint -> Lease.Frame -> Image.sprite. Fixed-canvas geometry uses neutralBounds."
+  ]
+}

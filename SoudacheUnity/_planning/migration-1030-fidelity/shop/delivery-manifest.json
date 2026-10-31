@@ -1,0 +1,258 @@
+{
+  "frozenUtc": "2026-10-30T14:51:06.992189+00:00",
+  "sourceReadOnly": true,
+  "unityStartedByAgent": false,
+  "nativeProbeRun": false,
+  "compiledEditorSource": "Assets/Editor/CurrentShopSourceValidation.cs",
+  "planningProbeIdentical": true,
+  "reviewedFixes": [
+    "voucher start/dice/applied/announced",
+    "second-die failed-reserve retry",
+    "per-phase named button focus",
+    "SuggestionBox cover and return focus",
+    "retain shop transaction and gift queue",
+    "source selected state/reveal/bag-pop",
+    "shop-local coin CSS box/1.7 art compensation, nowrap price, one-line offer centering"
+  ],
+  "remainingValidation": [
+    "Root unified native rebuild and actual coin/header/action layout image review of this increment"
+  ],
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/ShopScreen.cs",
+      "sha256": "7a13f85d1c74db2f37f8d00d3aad7cf50da4db49c3e4cafc9a82466a56a932fc",
+      "bytes": 13623,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.ShopAcquisition.cs",
+      "sha256": "9564eff843c173dbfeee195ecdbcec7834d51054e48bd262e0cecb57d0596e7c",
+      "bytes": 1863,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Commission.cs",
+      "sha256": "5e8c9cd9e54b5dee1d7d0477f8539a1077edfad74da1f3c4580c5f040337a3a3",
+      "bytes": 9271,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs",
+      "sha256": "d87e92602ea1e71695680fc7c01015b6e1a02a3861393742b5b189067acd2549",
+      "bytes": 5897,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Cards.cs",
+      "sha256": "33d8338aea361d8efe8c7a561bb8e0eddcb65dbcbda923dd5d4fd6bb9d927453",
+      "bytes": 15677,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/EventProgress.cs",
+      "sha256": "1b7192db6245669f388391a91aaedfa57a8218babc804990ef73d09187fa7da2",
+      "bytes": 2040,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeScene.cs",
+      "sha256": "563c459d886b1e87054a482efc1be2d5e925ee6e7b0dbcdb33e5b2472770cbd2",
+      "bytes": 11377,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeShade.cs",
+      "sha256": "f7388705708d884f77a48728277f30581e1fe02f751edfb5c2718e4e50e8fd4d",
+      "bytes": 2831,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCarry.cs",
+      "sha256": "a725f15c9f39de4803cb3928ce8213bbf397b6f7c79b93b85ce388e1dfed228e",
+      "bytes": 4272,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCommission.cs",
+      "sha256": "a037e69d8f2407783c9fdbde2cfe11f65d9dac95483c15b1deca77cfaa014b34",
+      "bytes": 14149,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.cs",
+      "sha256": "31a852b303f306e4db29fa41ac0a305805a52d2b9443ddfe3fdaa89881339bbe",
+      "bytes": 9998,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Detail.cs",
+      "sha256": "9cb68e1879e3142d5454eb8260cd5cc4a82df3f12d518e33515cf14ec06a0151",
+      "bytes": 8044,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Exchange.cs",
+      "sha256": "9290cad70ea6b86e9f2e8440d9bc451fcf10916ece6be441daecceca3505e3b0",
+      "bytes": 5850,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Market.cs",
+      "sha256": "4053aea92a4d4eb129bfb71af14355f18fadade1e48b94d2ae7d0b801d01b5cd",
+      "bytes": 11261,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop/merchant-approved.png",
+      "sha256": "bbf68e81708ea6b169580831306188e58643d215045bb01800a196f4d55f4922",
+      "bytes": 1784954,
+      "binaryOver1MB": true
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop/mystery-back.png",
+      "sha256": "75688925cad6135b41bd3c31e551467bc13922512047bef4c37f7c3dd6931365",
+      "bytes": 959424,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Editor/CurrentShopSourceValidation.cs",
+      "sha256": "4e7bcf51cd49c0992729d1630a83467c8771c6061f91d1c9504c53f24776a412",
+      "bytes": 29698,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/ShopScreen.cs.meta",
+      "sha256": "99852a050302512613fcab2d236f3190af7d3a12edb4a99061e8b86300b0aa2e",
+      "bytes": 59,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.ShopAcquisition.cs.meta",
+      "sha256": "df79ec93b55ed2ead066a22cb204723aab1a90879fafdf2dc00624ef80b64a1c",
+      "bytes": 254,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Commission.cs.meta",
+      "sha256": "5c3917c0c4de429b9726b79a5eba7dc9fb656e05ce986eed340d0094bb1f444b",
+      "bytes": 59,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs.meta",
+      "sha256": "01d80bcc5343ee6510246970ad94bd22d3787379d4e01a79a5b943535d3bcb21",
+      "bytes": 59,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Cards.cs.meta",
+      "sha256": "442450fc92241af2132f86b1adafac0b693f987616f9dfc375d25f61f140ce55",
+      "bytes": 59,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/EventProgress.cs.meta",
+      "sha256": "c458a904a20d15c2e57c8fa0fc01b1413e0fc6060d70b33c29198362bd1ed5c1",
+      "bytes": 59,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeScene.cs.meta",
+      "sha256": "1e4444ec86771ad233a80cf1e3b1cb1376db0a52b5c3f55d17a05c9e99a18f36",
+      "bytes": 59,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeShade.cs.meta",
+      "sha256": "e8260bda9a8e6363693dec26cf6e0f5d77e90e19da0e3decaf1d9c6919c4e8d9",
+      "bytes": 59,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCarry.cs.meta",
+      "sha256": "a90096031256ba3423e826574868e89180a1a0b6a59e2a6717ded91eedc3dd27",
+      "bytes": 254,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCommission.cs.meta",
+      "sha256": "2bbd9ff553c83e6b0a7f41bc6d08e79a4a4df5ddca0dd645a323f57525913922",
+      "bytes": 254,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.cs.meta",
+      "sha256": "10e265ae1fd8ea1305bab9262a96f91ed15fa0f2b7b888aa6bf2aab486fb388b",
+      "bytes": 254,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Detail.cs.meta",
+      "sha256": "196238ba0afd7aa938c6a1897d0016db1ea6ae05d210338fd2687c2006bd711f",
+      "bytes": 254,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Exchange.cs.meta",
+      "sha256": "28922cbd193e18496029bcc99ecd94e8139c7e0666244e963771976516b9845f",
+      "bytes": 254,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Market.cs.meta",
+      "sha256": "e43d0562efcc85b4aac753fcf1652f3a316a6e9436a1204ba286fdb593316321",
+      "bytes": 254,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop/merchant-approved.png.meta",
+      "sha256": "758b4242bae1c50f793cf5352bb7e71c400a8b018a8889619545afaab7e54de8",
+      "bytes": 2833,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop/mystery-back.png.meta",
+      "sha256": "516c2412b0b4d26796c71e8c8ee47913fd9899f50194c152f30547d3c99168e6",
+      "bytes": 2833,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Editor/CurrentShopSourceValidation.cs.meta",
+      "sha256": "18de927132d6b580e0d42f9e35c6b3e4c202ab706e345e46b2ab132d7de2f77c",
+      "bytes": 254,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentShop.meta",
+      "sha256": "d37051b658094e5b59f0d82f6a083cf17b6fc9ba81948ff97459f860111455d0",
+      "bytes": 180,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCoin.cs",
+      "sha256": "358145d7797b3090842287cadf65e1d7ea7b181939bfe79902ff691802d99142",
+      "bytes": 2765,
+      "binaryOver1MB": false
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCoin.cs.meta",
+      "sha256": "b6eca867d3ff8085e86c98cb0134fbb1e97ba63d8f188f137ba766f3ed61ee1c",
+      "bytes": 254,
+      "binaryOver1MB": false
+    }
+  ],
+  "rootReportedLatestProductionAndUnityCompile": true,
+  "coinPresentationPatch": {
+    "frozen": true,
+    "privateProductionTypecheck": {
+      "exit": 0,
+      "errors": 0,
+      "warnings": 10,
+      "log": "compile/latest.log"
+    },
+    "independentStaticReview": "new_ui_independent_review confirmed six active CSS consumers and one/two-line offer centering",
+    "nativeRebuildDone": false,
+    "receipt": "coin-source-contract.json"
+  },
+  "previousSnapshotNativeEvidence": "Root reported shop-source-3, slot-archive-1, journey-4 passed and desktop-final-player-1 42 actual images; this does not validate the later coin presentation increment"
+}

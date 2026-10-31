@@ -1,0 +1,10 @@
+import {pathToFileURL} from 'node:url';import fs from 'node:fs';import path from 'node:path';
+const source=path.resolve('..','搜打撤','game','src');
+const mod=await import(pathToFileURL(path.join(source,'hub/extraction.commands.js')));
+const {SeededRandomService}=await import(pathToFileURL(path.join(source,'core/random-service.js')));
+const a={id:'a',name:'同名',rarity:'稀有',variantKey:'red'},b={id:'b',name:'同名',rarity:'史诗',variantKey:'blue'},sha={id:'starter',name:'初始攻击',rarity:'古朴'},career={id:'career',name:'职业牌',rarity:'职业'};
+const game={ownedCards:[{card:a},{card:a},{card:b},{card:b},{card:sha}],usedPocket:[],inventory:[],explored:{'0,0':true,'1,0':true},turn:6,layerIdx:1,elapsed:125.7,coins:9,altarActivated:true,layerData:[{name:'第一层',logical:[{}]},{name:'第二层',logical:[{}]}],eventLog:[{name:'测试事件'}],nodeRewards:{}};
+const pending={sourceIdentityVersion:1,remainingCards:[{card:a,count:1},{card:b,count:2}],totalPocketCount:6,lostPocketCount:2,keptPocket:[{card:a,count:1},{card:sha,count:2},{card:career,count:1}],resources:{wood:3,rations:2}};
+const random=new SeededRandomService(12345);const rolls=Array.from({length:6},()=>random.random('pocket'));
+const output={keys:[mod.extractionSourceKey({card:a,count:1}),mod.extractionSourceKey({card:b,count:1})],pocket:mod.extractionPocketOutcome(pending,c=>c.id==='starter'),receipt:mod.buildExtractionReceipt({game,pending,isSha:c=>c.id==='starter',xpMul:1.5}),xp:[mod.extractionXp(0,1),mod.extractionXp(2,1.5)],rolls};
+fs.writeFileSync('_planning/current-settlement/source-vectors.json',JSON.stringify(output,null,2));console.log('Current source vectors generated; 6 exact pocket-stream draws.');

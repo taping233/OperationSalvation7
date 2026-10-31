@@ -1,0 +1,151 @@
+{
+  "reviewer": "node-agent; independent of reviewed production",
+  "batch": "current-visual-6",
+  "method": "read-only view_image of all six native images plus direct current source/CSS reads; no Unity/browser/production edits",
+  "images": [
+    {
+      "file": "library.png",
+      "sha256": "360d24b335387e2868db884076f1ccce07a3aacddcf2d889cd6dedeadf1eefea",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "photo-detail.png",
+      "sha256": "cb8066f11e81a8b3a34626cf3830d792eefd785f42d7959a8ab14ca4e4a3385f",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "settings.png",
+      "sha256": "3afb1dcd2c168d511c81b22cce81256946536197e3ae124b2f379a8c20f069fa",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "bag.png",
+      "sha256": "254910d328f2f61782717377891ac01a679878b6d8b5964dfff981984f35a676",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "character.png",
+      "sha256": "5f227ef7de3f0a3fa7681e9cee19112b4e5f82328d752f67c151792d7f30d9a8",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "departure.png",
+      "sha256": "0dddd849d763862a03123d4cab17ebe78988966cc9546b532b48328b9ca2fbf8",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "findingsSummary": {
+    "P1": 1,
+    "P2": 2
+  },
+  "pages": [
+    {
+      "page": "library.png",
+      "status": "finding",
+      "findings": [
+        {
+          "severity": "P2",
+          "issue": "搜索占位文案换成两行，第二行关键词落到44px输入框下方",
+          "imageEvidence": "1920x1080: 左上筛选行 x56..390 y172..216，第二行伸到约y224",
+          "source": [
+            "game/css/photo-studio-unified.css:640: clib-search is a native input with 10px vertical padding",
+            "game/src/hub/photo-studio-controls.js: native select/input contracts retained"
+          ],
+          "unity": "Assets/Scripts/Sdt.UI/Screens/Misc/CardLibraryScreen.cs:87-94: SearchPlaceholder uses wrapping Text in InputField; no single-line overflow constraint"
+        }
+      ],
+      "visibleFacts": [
+        "四列照片与右侧选片背签清楚，未见整体宽度塌缩或照片层缺失"
+      ]
+    },
+    {
+      "page": "photo-detail.png",
+      "status": "limited-no-confirmed-layout-defect",
+      "findings": [],
+      "visibleFacts": [
+        "原始火球图按宽高完整显示，左照片纸夹/右背签两栏独立",
+        "短背签末行已存档在阅读viewport底缘部分可见；该区域为ScrollRect，与源允许滚动一致，静图不足以定性为不可达剪裁"
+      ],
+      "source": [
+        "game/css/photo-studio-unified.css:132-157",
+        "game/src/ui/card-zoom-content.js:13-16"
+      ]
+    },
+    {
+      "page": "settings.png",
+      "status": "limited-no-confirmed-layout-defect",
+      "findings": [],
+      "visibleFacts": [
+        "四项分类导航和通用panel分区清晰；单选页面、行分隔、开关、三折叠区未见重叠或裁字"
+      ],
+      "source": [
+        "game/css/settings-navigation.css:5-10: 260px nav +40px gap",
+        "game/css/settings-navigation.css:50+: content panel and overflow"
+      ]
+    },
+    {
+      "page": "bag.png",
+      "status": "finding",
+      "findings": [
+        {
+          "severity": "P2",
+          "issue": "木材卡右下售价10被拆成纵向1/0两行",
+          "imageEvidence": "1920x1080: 第一张木材卡右下 x455..475 y654..698，售价数字上下分行",
+          "source": [
+            "game/css/card-layout-selected.css:208-226: hsc-val flex inline number, 7.2cqw/1.15 font"
+          ],
+          "unity": "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs:112-131: numberWidth uses preferredWidth without extra glyph margin; Text wrapping remains enabled"
+        }
+      ],
+      "visibleFacts": [
+        "侧栏分区、容量、筛选与五列真实卡面可读，第二行处在正常滚动裁剪区"
+      ]
+    },
+    {
+      "page": "character.png",
+      "status": "finding",
+      "findings": [
+        {
+          "severity": "P1",
+          "issue": "无标准全身立绘头部被画框顶边截掉，当前图仅从下半脸开始",
+          "imageEvidence": "1920x1080: 左大图白色内框 y124，发顶/护目镜/眼睛均不在框内，足部仍可见",
+          "source": [
+            "game/css/roster-departure-v2.css:25-33: default portrait height based on framed surface, body must fit",
+            "game/css/roster-reference.css:6-8: wu portrait-height95.115%, bottom2.257%, center-57.764%",
+            "game/assets/portraits/full/wu.webp: independently viewed original includes complete head and goggles"
+          ],
+          "unity": "Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.cs:88-104 and :195-202: RosterPortraitFit image geometry/mask; exact native geometry needs parent probe"
+        }
+      ],
+      "visibleFacts": [
+        "人物舞台/右信息/最右头像格与源当前三域结构一致；不能据此忽略主形象裁切"
+      ]
+    },
+    {
+      "page": "departure.png",
+      "status": "limited-no-confirmed-layout-defect",
+      "findings": [],
+      "visibleFacts": [
+        "左右等宽仓库候选/本次携带、过滤、固定初始牌、伙伴、底部容量和出发均可读",
+        "左列第二行卡牌被scroll viewport裁切属于可滚动长列表，未据静图认定丢内容"
+      ],
+      "source": [
+        "game/css/departure-selected.css:16-43: equal columns and scrolling pool/bag",
+        "game/css/departure-selected.css:45-62: pet strip and footer"
+      ]
+    }
+  ],
+  "notValidated": [
+    "real input",
+    "scroll access",
+    "all character skins and five roster roles",
+    "filter menus and other settings tabs",
+    "animation equivalence"
+  ]
+}

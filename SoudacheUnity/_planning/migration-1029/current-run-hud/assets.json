@@ -1,0 +1,86 @@
+[
+  {
+    "source": "assets\\ui\\map-tools-1021\\bag-v2.webp",
+    "sourceSha256": "19d0258ea69363be8fd57a19222bb8368b5e4dfcb32c08203b547c65701850fd",
+    "target": "Assets\\Resources\\Art\\Current\\RunHud\\bag-v2.png",
+    "targetSha256": "e0435885880951f4afa34728fbe8354b43f222744b0b1fdbf5e724df03846e8b",
+    "size": [
+      256,
+      256
+    ],
+    "pixelsSha256": "5e3b20f1a9affb51a4eec8e2582738f65cf3fdeb591d540ae5657c26aa2e2589",
+    "pixelExact": true
+  },
+  {
+    "source": "assets\\ui\\map-tools-1021\\safe-v2.webp",
+    "sourceSha256": "82bb782a889bc8c3797eef5f65116a9825c74bf4e6963b1bebb857f347caa775",
+    "target": "Assets\\Resources\\Art\\Current\\RunHud\\safe-v2.png",
+    "targetSha256": "5c34918f322bad1061f78ff12c85a96a6a9d27ce9dc4dee2dc22b056b1b63841",
+    "size": [
+      256,
+      256
+    ],
+    "pixelsSha256": "120ee8a94988b6763ea5e2fee67d85f389b57666d5a1796b9780a74a4ffa4bfc",
+    "pixelExact": true
+  },
+  {
+    "source": "assets\\ui\\map-tools-1021\\pocket-v2.webp",
+    "sourceSha256": "0e49c66ff29f2427a42c238528b831cf63c7e1e6610a62c0b75d77a58641719b",
+    "target": "Assets\\Resources\\Art\\Current\\RunHud\\pocket-v2.png",
+    "targetSha256": "fa0d6a343ab97ea9f5409e8a475f8cc7736a9aab0b6ef37bf4f6ab3389b79ded",
+    "size": [
+      256,
+      256
+    ],
+    "pixelsSha256": "2cf03c7132a0a0ec8736a85bca85a65357a45d6aa012f30cec11e0beafda0dd7",
+    "pixelExact": true
+  },
+  {
+    "source": "assets\\ui\\map-tools-1021\\focus-v2.webp",
+    "sourceSha256": "e6737899cd522e9da9044a9256c76ed55cc9580eb7dff1125afa58e08da0893a",
+    "target": "Assets\\Resources\\Art\\Current\\RunHud\\focus-v2.png",
+    "targetSha256": "fa111b6ee17241f779b60644639306d8375e7a0a5fdce8adee4dce97d4c1a044",
+    "size": [
+      256,
+      256
+    ],
+    "pixelsSha256": "16b8cbfc3b4d7a8375e30f8a147bfcc8005db47ee625ff52b741d6d647a75655",
+    "pixelExact": true
+  },
+  {
+    "source": "assets\\ui\\map-tools-1021\\overview-v2.webp",
+    "sourceSha256": "c9cb6db4b607061901372c919177fdcbabe0fc30a06f3bf4877563a21fcc312f",
+    "target": "Assets\\Resources\\Art\\Current\\RunHud\\overview-v2.png",
+    "targetSha256": "e71269035febe6076deead0a9c2c1211c29ba20f06e8c5c8a2183916e17ac085",
+    "size": [
+      256,
+      256
+    ],
+    "pixelsSha256": "15e816ceb2b10cf9b6b259216956f9acd6f00477947c8fdefcfa3dbe87593e9a",
+    "pixelExact": true
+  },
+  {
+    "source": "assets\\ui\\map-hud-1015\\gold-is7-v2.webp",
+    "sourceSha256": "1beb50cdff1a039022d233310f93f36af0c20eff93fe038d9abb9510d1d13930",
+    "target": "Assets\\Resources\\Art\\Current\\RunHud\\gold-v2.png",
+    "targetSha256": "ca27a033968afaa25153d03da83da9e1474c34da9646189e3d75bf7b2b946173",
+    "size": [
+      128,
+      128
+    ],
+    "pixelsSha256": "c7240c25cc3a138318e8ef343ddb0405190eb12d431a14fb56c96b9f1999b9a2",
+    "pixelExact": true
+  },
+  {
+    "source": "assets\\ui\\map-hud-1015\\attack-is7-v2.webp",
+    "sourceSha256": "a0e6e65ae1ca6b60ed29cdf7e32cac9cbe9db3223d522538dcc4033d7d4b02c5",
+    "target": "Assets\\Resources\\Art\\Current\\RunHud\\attack-v2.png",
+    "targetSha256": "66ef021cf937da37a269996fc9152c48f13f7019e0e68492175c826db955d8cc",
+    "size": [
+      128,
+      128
+    ],
+    "pixelsSha256": "300a80c825d23783a5dcb220444f6852ec968a901cf615aa2903449a727bbe1b",
+    "pixelExact": true
+  }
+]

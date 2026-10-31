@@ -1,0 +1,136 @@
+{
+  "reviewedAt": "2026-10-30T04:39:31.174338",
+  "scope": "independent read-only battle/current card components; no front window, Unity, compile or production edits; own HUD not independently accepted",
+  "capture": "current-visual-6",
+  "images": [
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-visual-6\\battle.png",
+      "sha256": "0e1b960df15ee37c590fa850323747c27c85103b0d0a1314334851d7559d44ea"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-visual-6\\cards-and-icons.png",
+      "sha256": "9f6196799006e8e745425e1312b54a849f61559618df32b0b93578f867aa906c"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-visual-6\\icons-updated.png",
+      "sha256": "2f13f5429c11555e5a61d8987053e1bbb2dc3c23c341f37f517939fb78e764ec"
+    }
+  ],
+  "verdict": "battle-not-equivalent",
+  "findings": [
+    {
+      "id": "R6-B01",
+      "priority": 1,
+      "claim": "Enemy status chip still uses old full-label uncontrolled layout and renders a roughly 100x100 dark box, clipping text and overlapping the intent region.",
+      "image": "battle.png",
+      "imageRegion": [
+        1304,
+        173,
+        1404,
+        273
+      ],
+      "source": [
+        "src/battle/view/battle.layers.js:1039 curseChips(status,{compact:true})",
+        "css/battle-status-chips.css:4-8 enemy list height28; :26-44 compact icon/amount chip min-height26, name/unit hidden"
+      ],
+      "unity": [
+        "Assets/Scripts/Sdt.UI/Screens/Battle/BattleWidgets.cs:251-276 BtChips.Create creates unstretched nested rows and full icon+Name+Value",
+        "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs:379-384 fixed chip region and intent offsets"
+      ],
+      "acceptance": "Source compact status icon+amount, 28px bounded list with scroll/summary and hover/focus explanation; no opaque 100px square."
+    },
+    {
+      "id": "R6-B02",
+      "priority": 2,
+      "claim": "Enemy head hierarchy remains legacy extra attack stats plus full intent label at fixed vertical offsets. Source enemies display name, compact status, then icon+damage intention; enemy separate attack stats are absent.",
+      "image": "battle.png",
+      "imageRegion": [
+        920,
+        140,
+        1475,
+        315
+      ],
+      "source": [
+        "src/battle/view/battle.layers.js:717 only non-enemies get stats; :1013-1030 name and icon+damage-only intent",
+        "css/battle-stage.css:60-65 nameplate flex/gap6/bottom100%+20; :81-91 intent optical grid"
+      ],
+      "unity": [
+        "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs:264 enemy passes extra attack stats",
+        "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs:370-395 fixed name/stats/chips/intent positions and intent.Label"
+      ],
+      "acceptance": "Match source one name, no duplicate enemy attack stat line, compact intention icon+damage, flow height based on present sections."
+    },
+    {
+      "id": "R6-B03",
+      "priority": 1,
+      "claim": "Visible combat-start message says normal combat needs no draw, while current source normal combat has a temporary starter deck and draw effects read that deck. Shipping Core also still contains old draw-to-generated-starter messages. This is a source-rule migration gap, not accepted as a cosmetic translation.",
+      "image": "battle.png",
+      "imageRegion": [
+        635,
+        116,
+        1285,
+        162
+      ],
+      "source": [
+        "src/battle/core/battle.lifecycle.domain.js:356 current hand + temporary deck, draw effects fetch from deck; no fixed start/turn draw",
+        "src/battle/view/battle.view.js:616 current deck explanation"
+      ],
+      "unity": [
+        "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs:454 old normal no-draw message",
+        "Assets/Scripts/Sdt.Core/Battle/EffectExecutor.cs:371 old draw generates starter message",
+        "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs:912 old draw generates starter path"
+      ],
+      "acceptance": "Root should route actual normal-deck rule migration separately, prove source vectors and then update text; changing only displayed wording is insufficient."
+    }
+  ],
+  "limitedPositiveObservations": [
+    "Wu visible neutral frame has black short skirt, forward sword pose and current sprite identity; no old blue-star skirt fallback visible. Only this role/idle frame is assessed.",
+    "Visible player/enemy bodies have comparable human scale and share the platform; no obvious stretching or missing alpha from this still frame. All five roles and action timing remain unverified.",
+    "Hand bottom clipping is source-intended: hand bottom92/height300, 390px card +64 rest produces visible top~752 and bottom~1142 at1080 height. The observed bottom crop is not a defect by itself.",
+    "cards-and-icons and updated sample preserve 12 paper faces, type/name/rule/price areas; visible icon/number updates do not overlap the card gallery. These samples do not prove game hit regions."
+  ],
+  "unverified": [
+    "No motion timeline or five-role switching can be accepted from still images.",
+    "No real hand hover/read/aim/drag/click, key submission or pointer hit-region test was run by this review.",
+    "Own run HUD is explicitly excluded from independent acceptance.",
+    "No exact source full-frame screenshot at matching window was supplied; conclusions use authoritative final CSS/module structure and new native image evidence."
+  ],
+  "sources": [
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\view\\battle.layers.js",
+      "sha256": "747d2f12bf5841c7396a44846833060be0f451d8e3d04e7f6f2fc673719448da"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\view\\battle.stage-view.js",
+      "sha256": "def5ad3701fd58b08d93b0273a3061188689e66a0b31b0ebcb976a8cdf3f0a07"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\view\\battle.hand-layout.js",
+      "sha256": "341c75ac4471c910a920ac58789efc3fde2c73256f543e4a9dffacb92686e0ff"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\view\\battle.frames.js",
+      "sha256": "5cf48efee89816eae30390665705558433a21aaa6918a0afdc0271e7afc94505"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\css\\battle-stage.css",
+      "sha256": "ccebad0f54d689eee5cfe525b4057bde003541160c15c1657b9e264c0d4562ce"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\css\\battle-status-chips.css",
+      "sha256": "e65afb9a61b45a93ee7c7f7ab0186751c6587c867f20b291de119fae2cb8b904"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\css\\card-layout-selected.css",
+      "sha256": "16215e25286c401718703e5939e55dcad563de2aa2c631e08f4d680215fa871c"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\core\\battle.lifecycle.domain.js",
+      "sha256": "60aca5a6ee67a4675c643b5751ffdbebb438128ed7bce1a58b32e95c7cc46c43"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\view\\battle.view.js",
+      "sha256": "eb0f9bc9035345eedc8daa4a96dc5cd4468709545eca33809461363ea13584dd"
+    }
+  ]
+}

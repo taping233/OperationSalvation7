@@ -1,0 +1,3414 @@
+{
+  "format": "sdt-unity-profile",
+  "version": 1,
+  "runs": {
+    "1": {
+      "format": "sdt-unity-desktop",
+      "version": 1,
+      "mapSnapshot": {
+        "seed": "140530352",
+        "generatorVersion": 7,
+        "layoutVersion": 9,
+        "layers": [
+          {
+            "nodes": [
+              {
+                "id": "L1_N1",
+                "type": "entrance",
+                "name": "外围入口",
+                "li": 0,
+                "idx": 0,
+                "x": 0,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 1
+                  },
+                  {
+                    "li": 0,
+                    "idx": 3
+                  }
+                ]
+              },
+              {
+                "id": "L1_N2",
+                "type": "event",
+                "name": "1层·事件",
+                "li": 0,
+                "idx": 1,
+                "x": 0,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "id": "L1_N3",
+                "type": "battle",
+                "name": "1层·战斗",
+                "li": 0,
+                "idx": 2,
+                "x": 1,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 3
+                  },
+                  {
+                    "li": 0,
+                    "idx": 5
+                  }
+                ]
+              },
+              {
+                "id": "L1_N4",
+                "type": "battle",
+                "name": "1层·战斗",
+                "li": 0,
+                "idx": 3,
+                "x": 1,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 0
+                  },
+                  {
+                    "li": 0,
+                    "idx": 2
+                  },
+                  {
+                    "li": 0,
+                    "idx": 4
+                  }
+                ]
+              },
+              {
+                "id": "L1_N5",
+                "type": "fire",
+                "name": "1层·火堆",
+                "li": 0,
+                "idx": 4,
+                "x": 2,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 3
+                  }
+                ]
+              },
+              {
+                "id": "L1_N6",
+                "type": "chest",
+                "name": "1层·搜刮点",
+                "li": 0,
+                "idx": 5,
+                "x": 2,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 2
+                  },
+                  {
+                    "li": 0,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L1_N7",
+                "type": "door",
+                "name": "通往第2层",
+                "li": 0,
+                "idx": 6,
+                "x": 3,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 5
+                  },
+                  {
+                    "li": 1,
+                    "idx": 0
+                  }
+                ]
+              }
+            ],
+            "entry": 0,
+            "exit": 6,
+            "gridBounds": {
+              "minX": 0,
+              "maxX": 3,
+              "minRow": -3,
+              "maxRow": 3
+            },
+            "doors": [
+              {
+                "pair": "p1",
+                "at": 6,
+                "toLayer": 1,
+                "arriveAt": 0,
+                "exit": false,
+                "reverse": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "id": "L2_N1",
+                "type": "entrance",
+                "name": "第2层入口",
+                "li": 1,
+                "idx": 0,
+                "x": 0,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 1
+                  },
+                  {
+                    "li": 1,
+                    "idx": 10
+                  },
+                  {
+                    "li": 0,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L2_N2",
+                "type": "battle",
+                "name": "2层·战斗",
+                "li": 1,
+                "idx": 1,
+                "x": 0,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 0
+                  },
+                  {
+                    "li": 1,
+                    "idx": 2
+                  }
+                ]
+              },
+              {
+                "id": "L2_N3",
+                "type": "chest",
+                "name": "2层·搜刮点",
+                "li": 1,
+                "idx": 2,
+                "x": 1,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 1
+                  },
+                  {
+                    "li": 1,
+                    "idx": 3
+                  }
+                ]
+              },
+              {
+                "id": "L2_N4",
+                "type": "battle",
+                "name": "2层·战斗",
+                "li": 1,
+                "idx": 3,
+                "x": 1,
+                "row": -2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 2
+                  },
+                  {
+                    "li": 1,
+                    "idx": 4
+                  }
+                ]
+              },
+              {
+                "id": "L2_N5",
+                "type": "event",
+                "name": "2层·事件",
+                "li": 1,
+                "idx": 4,
+                "x": 2,
+                "row": -2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 3
+                  },
+                  {
+                    "li": 1,
+                    "idx": 5
+                  },
+                  {
+                    "li": 1,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L2_N6",
+                "type": "chest",
+                "name": "2层·搜刮点",
+                "li": 1,
+                "idx": 5,
+                "x": 2,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 4
+                  }
+                ]
+              },
+              {
+                "id": "L2_N8",
+                "type": "shop",
+                "name": "2层·补给站",
+                "li": 1,
+                "idx": 6,
+                "x": 3,
+                "row": -2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 4
+                  },
+                  {
+                    "li": 1,
+                    "idx": 7
+                  }
+                ]
+              },
+              {
+                "id": "L2_N9",
+                "type": "battle",
+                "name": "2层·战斗",
+                "li": 1,
+                "idx": 7,
+                "x": 4,
+                "row": -2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 6
+                  },
+                  {
+                    "li": 1,
+                    "idx": 8
+                  },
+                  {
+                    "li": 1,
+                    "idx": 9
+                  }
+                ]
+              },
+              {
+                "id": "L2_N10",
+                "type": "door",
+                "name": "通往第3层",
+                "li": 1,
+                "idx": 8,
+                "x": 5,
+                "row": -2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 7
+                  },
+                  {
+                    "li": 2,
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "id": "L2_N11",
+                "type": "resource",
+                "name": "2层·物资格",
+                "li": 1,
+                "idx": 9,
+                "x": 4,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 7
+                  }
+                ]
+              },
+              {
+                "id": "L2_N12",
+                "type": "event",
+                "name": "2层·事件",
+                "li": 1,
+                "idx": 10,
+                "x": 1,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 0
+                  }
+                ]
+              }
+            ],
+            "entry": 0,
+            "exit": 8,
+            "gridBounds": {
+              "minX": 0,
+              "maxX": 5,
+              "minRow": -3,
+              "maxRow": 3
+            },
+            "doors": [
+              {
+                "pair": "p2",
+                "at": 8,
+                "toLayer": 2,
+                "arriveAt": 0,
+                "exit": false,
+                "reverse": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "id": "L3_N1",
+                "type": "entrance",
+                "name": "第3层入口",
+                "li": 2,
+                "idx": 0,
+                "x": 0,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 2
+                  },
+                  {
+                    "li": 1,
+                    "idx": 8
+                  }
+                ]
+              },
+              {
+                "id": "L3_N3",
+                "type": "event",
+                "name": "3层·事件",
+                "li": 2,
+                "idx": 1,
+                "x": 1,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 2
+                  }
+                ]
+              },
+              {
+                "id": "L3_N4",
+                "type": "resource",
+                "name": "3层·物资格",
+                "li": 2,
+                "idx": 2,
+                "x": 1,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 0
+                  },
+                  {
+                    "li": 2,
+                    "idx": 1
+                  },
+                  {
+                    "li": 2,
+                    "idx": 3
+                  }
+                ]
+              },
+              {
+                "id": "L3_N5",
+                "type": "chest",
+                "name": "3层·搜刮点",
+                "li": 2,
+                "idx": 3,
+                "x": 2,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 2
+                  },
+                  {
+                    "li": 2,
+                    "idx": 4
+                  }
+                ]
+              },
+              {
+                "id": "L3_N6",
+                "type": "battle",
+                "name": "3层·战斗",
+                "li": 2,
+                "idx": 4,
+                "x": 2,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 3
+                  },
+                  {
+                    "li": 2,
+                    "idx": 5
+                  }
+                ]
+              },
+              {
+                "id": "L3_N7",
+                "type": "event",
+                "name": "3层·事件",
+                "li": 2,
+                "idx": 5,
+                "x": 3,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 4
+                  },
+                  {
+                    "li": 2,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L3_N8",
+                "type": "battle",
+                "name": "3层·战斗",
+                "li": 2,
+                "idx": 6,
+                "x": 3,
+                "row": -2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 5
+                  },
+                  {
+                    "li": 2,
+                    "idx": 7
+                  }
+                ]
+              },
+              {
+                "id": "L3_N9",
+                "type": "event",
+                "name": "3层·事件",
+                "li": 2,
+                "idx": 7,
+                "x": 4,
+                "row": -2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 6
+                  },
+                  {
+                    "li": 2,
+                    "idx": 8
+                  },
+                  {
+                    "li": 2,
+                    "idx": 10
+                  }
+                ]
+              },
+              {
+                "id": "L3_N10",
+                "type": "fire",
+                "name": "3层·火堆",
+                "li": 2,
+                "idx": 8,
+                "x": 4,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 7
+                  },
+                  {
+                    "li": 2,
+                    "idx": 9
+                  }
+                ]
+              },
+              {
+                "id": "L3_N11",
+                "type": "battle",
+                "name": "3层·战斗",
+                "li": 2,
+                "idx": 9,
+                "x": 5,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 8
+                  }
+                ]
+              },
+              {
+                "id": "L3_N12",
+                "type": "battle",
+                "name": "3层·战斗",
+                "li": 2,
+                "idx": 10,
+                "x": 5,
+                "row": -2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 7
+                  },
+                  {
+                    "li": 2,
+                    "idx": 11
+                  }
+                ]
+              },
+              {
+                "id": "L3_N13",
+                "type": "chest",
+                "name": "3层·搜刮点",
+                "li": 2,
+                "idx": 11,
+                "x": 6,
+                "row": -2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 10
+                  },
+                  {
+                    "li": 2,
+                    "idx": 12
+                  }
+                ]
+              },
+              {
+                "id": "L3_N14",
+                "type": "chest",
+                "name": "3层·搜刮点",
+                "li": 2,
+                "idx": 12,
+                "x": 6,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 11
+                  },
+                  {
+                    "li": 2,
+                    "idx": 13
+                  }
+                ]
+              },
+              {
+                "id": "L3_N15",
+                "type": "emergencyExit",
+                "name": "3层·紧急撤离点",
+                "li": 2,
+                "idx": 13,
+                "x": 7,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 12
+                  },
+                  {
+                    "li": 2,
+                    "idx": 14
+                  }
+                ]
+              },
+              {
+                "id": "L3_N16",
+                "type": "chest",
+                "name": "3层·搜刮点",
+                "li": 2,
+                "idx": 14,
+                "x": 7,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 13
+                  },
+                  {
+                    "li": 2,
+                    "idx": 15
+                  }
+                ]
+              },
+              {
+                "id": "L3_N17",
+                "type": "door",
+                "name": "通往第4层",
+                "li": 2,
+                "idx": 15,
+                "x": 8,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 14
+                  },
+                  {
+                    "li": 3,
+                    "idx": 0
+                  }
+                ]
+              }
+            ],
+            "entry": 0,
+            "exit": 15,
+            "gridBounds": {
+              "minX": 0,
+              "maxX": 8,
+              "minRow": -3,
+              "maxRow": 3
+            },
+            "doors": [
+              {
+                "pair": "p3",
+                "at": 15,
+                "toLayer": 3,
+                "arriveAt": 0,
+                "exit": false,
+                "reverse": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "id": "L4_N1",
+                "type": "entrance",
+                "name": "第4层入口",
+                "li": 3,
+                "idx": 0,
+                "x": 0,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 1
+                  },
+                  {
+                    "li": 3,
+                    "idx": 3
+                  },
+                  {
+                    "li": 2,
+                    "idx": 15
+                  }
+                ]
+              },
+              {
+                "id": "L4_N2",
+                "type": "event",
+                "name": "4层·事件",
+                "li": 3,
+                "idx": 1,
+                "x": 0,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "id": "L4_N3",
+                "type": "battle",
+                "name": "4层·战斗",
+                "li": 3,
+                "idx": 2,
+                "x": 1,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 3
+                  }
+                ]
+              },
+              {
+                "id": "L4_N4",
+                "type": "resource",
+                "name": "4层·物资格",
+                "li": 3,
+                "idx": 3,
+                "x": 1,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 0
+                  },
+                  {
+                    "li": 3,
+                    "idx": 2
+                  },
+                  {
+                    "li": 3,
+                    "idx": 4
+                  }
+                ]
+              },
+              {
+                "id": "L4_N5",
+                "type": "event",
+                "name": "4层·事件",
+                "li": 3,
+                "idx": 4,
+                "x": 2,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 3
+                  },
+                  {
+                    "li": 3,
+                    "idx": 5
+                  }
+                ]
+              },
+              {
+                "id": "L4_N6",
+                "type": "chest",
+                "name": "4层·搜刮点",
+                "li": 3,
+                "idx": 5,
+                "x": 2,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 4
+                  },
+                  {
+                    "li": 3,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L4_N7",
+                "type": "shop",
+                "name": "4层·补给站",
+                "li": 3,
+                "idx": 6,
+                "x": 3,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 5
+                  },
+                  {
+                    "li": 3,
+                    "idx": 7
+                  }
+                ]
+              },
+              {
+                "id": "L4_N8",
+                "type": "battle",
+                "name": "4层·战斗",
+                "li": 3,
+                "idx": 7,
+                "x": 4,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 6
+                  },
+                  {
+                    "li": 3,
+                    "idx": 8
+                  }
+                ]
+              },
+              {
+                "id": "L4_N9",
+                "type": "battle",
+                "name": "4层·战斗",
+                "li": 3,
+                "idx": 8,
+                "x": 4,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 7
+                  },
+                  {
+                    "li": 3,
+                    "idx": 9
+                  }
+                ]
+              },
+              {
+                "id": "L4_N10",
+                "type": "altar",
+                "name": "4层·祭坛",
+                "li": 3,
+                "idx": 9,
+                "x": 5,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 8
+                  },
+                  {
+                    "li": 3,
+                    "idx": 10
+                  }
+                ]
+              },
+              {
+                "id": "L4_N11",
+                "type": "chest",
+                "name": "4层·搜刮点",
+                "li": 3,
+                "idx": 10,
+                "x": 5,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 9
+                  },
+                  {
+                    "li": 3,
+                    "idx": 11
+                  }
+                ]
+              },
+              {
+                "id": "L4_N12",
+                "type": "battle",
+                "name": "4层·战斗",
+                "li": 3,
+                "idx": 11,
+                "x": 6,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 10
+                  },
+                  {
+                    "li": 3,
+                    "idx": 12
+                  },
+                  {
+                    "li": 3,
+                    "idx": 14
+                  }
+                ]
+              },
+              {
+                "id": "L4_N13",
+                "type": "boss",
+                "name": "4层·首脑",
+                "li": 3,
+                "idx": 12,
+                "x": 6,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 11
+                  },
+                  {
+                    "li": 3,
+                    "idx": 13
+                  }
+                ]
+              },
+              {
+                "id": "L4_N14",
+                "type": "extraction",
+                "name": "终局撤离点",
+                "li": 3,
+                "idx": 13,
+                "x": 7,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 12
+                  }
+                ]
+              },
+              {
+                "id": "L4_N16",
+                "type": "chest",
+                "name": "4层·搜刮点",
+                "li": 3,
+                "idx": 14,
+                "x": 6,
+                "row": 3,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 11
+                  },
+                  {
+                    "li": 3,
+                    "idx": 15
+                  }
+                ]
+              },
+              {
+                "id": "L4_N17",
+                "type": "chest",
+                "name": "4层·搜刮点",
+                "li": 3,
+                "idx": 15,
+                "x": 7,
+                "row": 3,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 14
+                  }
+                ]
+              }
+            ],
+            "entry": 0,
+            "exit": 13,
+            "gridBounds": {
+              "minX": 0,
+              "maxX": 7,
+              "minRow": -3,
+              "maxRow": 3
+            },
+            "doors": []
+          }
+        ]
+      },
+      "explored": [],
+      "revealed": [
+        "0,0",
+        "0,1",
+        "0,3"
+      ],
+      "settled": [],
+      "closed": [],
+      "altarActivated": false,
+      "bossDefeated": false,
+      "entrySupply": null,
+      "spellPower": 0,
+      "fragments": 0,
+      "battleRestartCheckpoint": null,
+      "nodeRewards": {},
+      "seed": 140530352,
+      "rngState": "seed=140530352;v=2;s=reward:1910109805,identity:4041391744,gameplay:2862158757",
+      "layerIdx": 0,
+      "trackPos": 0,
+      "hp": 2,
+      "maxHp": 30,
+      "coins": 0,
+      "turn": 1,
+      "atk": 4,
+      "mode": "standard",
+      "myClass": "侠客",
+      "characterId": "wu",
+      "inventory": [],
+      "ownedCards": [
+        {
+          "uid": "deck0",
+          "card": {
+            "id": "tt3-fireball",
+            "name": "火球",
+            "cost": 1,
+            "rarity": "衍生",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "造成 4 点法术伤害。",
+            "value": 1,
+            "sellable": false,
+            "unrandom": true,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": null,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        },
+        {
+          "uid": "deck1",
+          "card": {
+            "id": "tt3-fireball",
+            "name": "火球",
+            "cost": 1,
+            "rarity": "衍生",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "造成 4 点法术伤害。",
+            "value": 1,
+            "sellable": false,
+            "unrandom": true,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": null,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        },
+        {
+          "uid": "deck2",
+          "card": {
+            "id": "tt3-fireball",
+            "name": "火球",
+            "cost": 1,
+            "rarity": "衍生",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "造成 4 点法术伤害。",
+            "value": 1,
+            "sellable": false,
+            "unrandom": true,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": null,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        },
+        {
+          "uid": "deck3",
+          "card": {
+            "id": "tt3-fireball",
+            "name": "火球",
+            "cost": 1,
+            "rarity": "衍生",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "造成 4 点法术伤害。",
+            "value": 1,
+            "sellable": false,
+            "unrandom": true,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": null,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        },
+        {
+          "uid": "deck4",
+          "card": {
+            "id": "tt3-fireball",
+            "name": "火球",
+            "cost": 1,
+            "rarity": "衍生",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "造成 4 点法术伤害。",
+            "value": 1,
+            "sellable": false,
+            "unrandom": true,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": null,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        }
+      ],
+      "cardOrder": [],
+      "usedPocket": [],
+      "eventLog": [],
+      "discovered": [],
+      "diceHistory": [],
+      "elapsed": 0.0,
+      "slot": 1,
+      "savedAt": 1793289376806
+    },
+    "3": {
+      "format": "sdt-unity-desktop",
+      "version": 1,
+      "mapSnapshot": {
+        "seed": "140530751",
+        "generatorVersion": 7,
+        "layoutVersion": 9,
+        "layers": [
+          {
+            "nodes": [
+              {
+                "id": "L1_N1",
+                "type": "entrance",
+                "name": "外围入口",
+                "li": 0,
+                "idx": 0,
+                "x": 0,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 1
+                  },
+                  {
+                    "li": 0,
+                    "idx": 3
+                  }
+                ]
+              },
+              {
+                "id": "L1_N2",
+                "type": "battle",
+                "name": "1层·战斗",
+                "li": 0,
+                "idx": 1,
+                "x": 0,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "id": "L1_N3",
+                "type": "chest",
+                "name": "1层·搜刮点",
+                "li": 0,
+                "idx": 2,
+                "x": 1,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 5
+                  }
+                ]
+              },
+              {
+                "id": "L1_N4",
+                "type": "battle",
+                "name": "1层·战斗",
+                "li": 0,
+                "idx": 3,
+                "x": 1,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 0
+                  },
+                  {
+                    "li": 0,
+                    "idx": 4
+                  }
+                ]
+              },
+              {
+                "id": "L1_N5",
+                "type": "fire",
+                "name": "1层·火堆",
+                "li": 0,
+                "idx": 4,
+                "x": 2,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 3
+                  },
+                  {
+                    "li": 0,
+                    "idx": 5
+                  }
+                ]
+              },
+              {
+                "id": "L1_N6",
+                "type": "event",
+                "name": "1层·事件",
+                "li": 0,
+                "idx": 5,
+                "x": 2,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 2
+                  },
+                  {
+                    "li": 0,
+                    "idx": 4
+                  },
+                  {
+                    "li": 0,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L1_N7",
+                "type": "door",
+                "name": "通往第2层",
+                "li": 0,
+                "idx": 6,
+                "x": 3,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 0,
+                    "idx": 5
+                  },
+                  {
+                    "li": 1,
+                    "idx": 0
+                  }
+                ]
+              }
+            ],
+            "entry": 0,
+            "exit": 6,
+            "gridBounds": {
+              "minX": 0,
+              "maxX": 3,
+              "minRow": -3,
+              "maxRow": 3
+            },
+            "doors": [
+              {
+                "pair": "p1",
+                "at": 6,
+                "toLayer": 1,
+                "arriveAt": 0,
+                "exit": false,
+                "reverse": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "id": "L2_N1",
+                "type": "entrance",
+                "name": "第2层入口",
+                "li": 1,
+                "idx": 0,
+                "x": 0,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 1
+                  },
+                  {
+                    "li": 1,
+                    "idx": 3
+                  },
+                  {
+                    "li": 1,
+                    "idx": 9
+                  },
+                  {
+                    "li": 0,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L2_N2",
+                "type": "battle",
+                "name": "2层·战斗",
+                "li": 1,
+                "idx": 1,
+                "x": 0,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 0
+                  },
+                  {
+                    "li": 1,
+                    "idx": 2
+                  }
+                ]
+              },
+              {
+                "id": "L2_N3",
+                "type": "battle",
+                "name": "2层·战斗",
+                "li": 1,
+                "idx": 2,
+                "x": 1,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 1
+                  },
+                  {
+                    "li": 1,
+                    "idx": 3
+                  },
+                  {
+                    "li": 1,
+                    "idx": 4
+                  }
+                ]
+              },
+              {
+                "id": "L2_N4",
+                "type": "event",
+                "name": "2层·事件",
+                "li": 1,
+                "idx": 3,
+                "x": 1,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 0
+                  },
+                  {
+                    "li": 1,
+                    "idx": 2
+                  }
+                ]
+              },
+              {
+                "id": "L2_N6",
+                "type": "resource",
+                "name": "2层·物资格",
+                "li": 1,
+                "idx": 4,
+                "x": 2,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 2
+                  },
+                  {
+                    "li": 1,
+                    "idx": 5
+                  }
+                ]
+              },
+              {
+                "id": "L2_N7",
+                "type": "event",
+                "name": "2层·事件",
+                "li": 1,
+                "idx": 5,
+                "x": 3,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 4
+                  },
+                  {
+                    "li": 1,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L2_N8",
+                "type": "chest",
+                "name": "2层·搜刮点",
+                "li": 1,
+                "idx": 6,
+                "x": 4,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 5
+                  },
+                  {
+                    "li": 1,
+                    "idx": 7
+                  }
+                ]
+              },
+              {
+                "id": "L2_N9",
+                "type": "door",
+                "name": "通往第3层",
+                "li": 1,
+                "idx": 7,
+                "x": 5,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 6
+                  },
+                  {
+                    "li": 1,
+                    "idx": 8
+                  },
+                  {
+                    "li": 2,
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "id": "L2_N10",
+                "type": "shop",
+                "name": "2层·补给站",
+                "li": 1,
+                "idx": 8,
+                "x": 5,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 7
+                  },
+                  {
+                    "li": 1,
+                    "idx": 10
+                  }
+                ]
+              },
+              {
+                "id": "L2_N11",
+                "type": "chest",
+                "name": "2层·搜刮点",
+                "li": 1,
+                "idx": 9,
+                "x": 0,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "id": "L2_N12",
+                "type": "battle",
+                "name": "2层·战斗",
+                "li": 1,
+                "idx": 10,
+                "x": 4,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 1,
+                    "idx": 8
+                  }
+                ]
+              }
+            ],
+            "entry": 0,
+            "exit": 7,
+            "gridBounds": {
+              "minX": 0,
+              "maxX": 5,
+              "minRow": -3,
+              "maxRow": 3
+            },
+            "doors": [
+              {
+                "pair": "p2",
+                "at": 7,
+                "toLayer": 2,
+                "arriveAt": 0,
+                "exit": false,
+                "reverse": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "id": "L3_N1",
+                "type": "entrance",
+                "name": "第3层入口",
+                "li": 2,
+                "idx": 0,
+                "x": 0,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 2
+                  },
+                  {
+                    "li": 1,
+                    "idx": 7
+                  }
+                ]
+              },
+              {
+                "id": "L3_N3",
+                "type": "event",
+                "name": "3层·事件",
+                "li": 2,
+                "idx": 1,
+                "x": 1,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 2
+                  }
+                ]
+              },
+              {
+                "id": "L3_N4",
+                "type": "event",
+                "name": "3层·事件",
+                "li": 2,
+                "idx": 2,
+                "x": 1,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 0
+                  },
+                  {
+                    "li": 2,
+                    "idx": 1
+                  },
+                  {
+                    "li": 2,
+                    "idx": 3
+                  }
+                ]
+              },
+              {
+                "id": "L3_N5",
+                "type": "chest",
+                "name": "3层·搜刮点",
+                "li": 2,
+                "idx": 3,
+                "x": 2,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 2
+                  },
+                  {
+                    "li": 2,
+                    "idx": 4
+                  }
+                ]
+              },
+              {
+                "id": "L3_N6",
+                "type": "battle",
+                "name": "3层·战斗",
+                "li": 2,
+                "idx": 4,
+                "x": 2,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 3
+                  },
+                  {
+                    "li": 2,
+                    "idx": 5
+                  }
+                ]
+              },
+              {
+                "id": "L3_N7",
+                "type": "chest",
+                "name": "3层·搜刮点",
+                "li": 2,
+                "idx": 5,
+                "x": 3,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 4
+                  },
+                  {
+                    "li": 2,
+                    "idx": 6
+                  },
+                  {
+                    "li": 2,
+                    "idx": 15
+                  }
+                ]
+              },
+              {
+                "id": "L3_N8",
+                "type": "battle",
+                "name": "3层·战斗",
+                "li": 2,
+                "idx": 6,
+                "x": 4,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 5
+                  },
+                  {
+                    "li": 2,
+                    "idx": 7
+                  }
+                ]
+              },
+              {
+                "id": "L3_N9",
+                "type": "resource",
+                "name": "3层·物资格",
+                "li": 2,
+                "idx": 7,
+                "x": 5,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 6
+                  },
+                  {
+                    "li": 2,
+                    "idx": 8
+                  }
+                ]
+              },
+              {
+                "id": "L3_N10",
+                "type": "event",
+                "name": "3层·事件",
+                "li": 2,
+                "idx": 8,
+                "x": 6,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 7
+                  },
+                  {
+                    "li": 2,
+                    "idx": 9
+                  },
+                  {
+                    "li": 2,
+                    "idx": 13
+                  },
+                  {
+                    "li": 2,
+                    "idx": 14
+                  }
+                ]
+              },
+              {
+                "id": "L3_N11",
+                "type": "fire",
+                "name": "3层·火堆",
+                "li": 2,
+                "idx": 9,
+                "x": 6,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 8
+                  },
+                  {
+                    "li": 2,
+                    "idx": 10
+                  }
+                ]
+              },
+              {
+                "id": "L3_N12",
+                "type": "chest",
+                "name": "3层·搜刮点",
+                "li": 2,
+                "idx": 10,
+                "x": 7,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 9
+                  },
+                  {
+                    "li": 2,
+                    "idx": 11
+                  },
+                  {
+                    "li": 2,
+                    "idx": 14
+                  }
+                ]
+              },
+              {
+                "id": "L3_N13",
+                "type": "chest",
+                "name": "3层·搜刮点",
+                "li": 2,
+                "idx": 11,
+                "x": 7,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 10
+                  },
+                  {
+                    "li": 2,
+                    "idx": 12
+                  }
+                ]
+              },
+              {
+                "id": "L3_N14",
+                "type": "door",
+                "name": "通往第4层",
+                "li": 2,
+                "idx": 12,
+                "x": 8,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 11
+                  },
+                  {
+                    "li": 3,
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "id": "L3_N15",
+                "type": "battle",
+                "name": "3层·战斗",
+                "li": 2,
+                "idx": 13,
+                "x": 6,
+                "row": 3,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 8
+                  }
+                ]
+              },
+              {
+                "id": "L3_N16",
+                "type": "emergencyExit",
+                "name": "3层·紧急撤离点",
+                "li": 2,
+                "idx": 14,
+                "x": 7,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 8
+                  },
+                  {
+                    "li": 2,
+                    "idx": 10
+                  }
+                ]
+              },
+              {
+                "id": "L3_N17",
+                "type": "battle",
+                "name": "3层·战斗",
+                "li": 2,
+                "idx": 15,
+                "x": 3,
+                "row": 3,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 2,
+                    "idx": 5
+                  }
+                ]
+              }
+            ],
+            "entry": 0,
+            "exit": 12,
+            "gridBounds": {
+              "minX": 0,
+              "maxX": 8,
+              "minRow": -3,
+              "maxRow": 3
+            },
+            "doors": [
+              {
+                "pair": "p3",
+                "at": 12,
+                "toLayer": 3,
+                "arriveAt": 0,
+                "exit": false,
+                "reverse": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "id": "L4_N1",
+                "type": "entrance",
+                "name": "第4层入口",
+                "li": 3,
+                "idx": 0,
+                "x": 0,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 1
+                  },
+                  {
+                    "li": 2,
+                    "idx": 12
+                  }
+                ]
+              },
+              {
+                "id": "L4_N2",
+                "type": "event",
+                "name": "4层·事件",
+                "li": 3,
+                "idx": 1,
+                "x": 0,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 0
+                  },
+                  {
+                    "li": 3,
+                    "idx": 2
+                  },
+                  {
+                    "li": 3,
+                    "idx": 14
+                  }
+                ]
+              },
+              {
+                "id": "L4_N3",
+                "type": "battle",
+                "name": "4层·战斗",
+                "li": 3,
+                "idx": 2,
+                "x": 1,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 1
+                  },
+                  {
+                    "li": 3,
+                    "idx": 3
+                  }
+                ]
+              },
+              {
+                "id": "L4_N4",
+                "type": "chest",
+                "name": "4层·搜刮点",
+                "li": 3,
+                "idx": 3,
+                "x": 1,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 2
+                  },
+                  {
+                    "li": 3,
+                    "idx": 4
+                  },
+                  {
+                    "li": 3,
+                    "idx": 14
+                  }
+                ]
+              },
+              {
+                "id": "L4_N5",
+                "type": "battle",
+                "name": "4层·战斗",
+                "li": 3,
+                "idx": 4,
+                "x": 2,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 3
+                  },
+                  {
+                    "li": 3,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L4_N7",
+                "type": "resource",
+                "name": "4层·物资格",
+                "li": 3,
+                "idx": 5,
+                "x": 3,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 6
+                  }
+                ]
+              },
+              {
+                "id": "L4_N8",
+                "type": "battle",
+                "name": "4层·战斗",
+                "li": 3,
+                "idx": 6,
+                "x": 3,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 4
+                  },
+                  {
+                    "li": 3,
+                    "idx": 5
+                  },
+                  {
+                    "li": 3,
+                    "idx": 7
+                  }
+                ]
+              },
+              {
+                "id": "L4_N9",
+                "type": "chest",
+                "name": "4层·搜刮点",
+                "li": 3,
+                "idx": 7,
+                "x": 4,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 6
+                  },
+                  {
+                    "li": 3,
+                    "idx": 10
+                  }
+                ]
+              },
+              {
+                "id": "L4_N10",
+                "type": "chest",
+                "name": "4层·搜刮点",
+                "li": 3,
+                "idx": 8,
+                "x": 4,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 9
+                  }
+                ]
+              },
+              {
+                "id": "L4_N11",
+                "type": "battle",
+                "name": "4层·战斗",
+                "li": 3,
+                "idx": 9,
+                "x": 5,
+                "row": 2,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 8
+                  },
+                  {
+                    "li": 3,
+                    "idx": 10
+                  }
+                ]
+              },
+              {
+                "id": "L4_N12",
+                "type": "altar",
+                "name": "4层·祭坛",
+                "li": 3,
+                "idx": 10,
+                "x": 5,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 7
+                  },
+                  {
+                    "li": 3,
+                    "idx": 9
+                  },
+                  {
+                    "li": 3,
+                    "idx": 11
+                  }
+                ]
+              },
+              {
+                "id": "L4_N13",
+                "type": "boss",
+                "name": "4层·首脑",
+                "li": 3,
+                "idx": 11,
+                "x": 6,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 10
+                  },
+                  {
+                    "li": 3,
+                    "idx": 12
+                  }
+                ]
+              },
+              {
+                "id": "L4_N14",
+                "type": "chest",
+                "name": "4层·搜刮点",
+                "li": 3,
+                "idx": 12,
+                "x": 6,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 11
+                  },
+                  {
+                    "li": 3,
+                    "idx": 13
+                  },
+                  {
+                    "li": 3,
+                    "idx": 15
+                  }
+                ]
+              },
+              {
+                "id": "L4_N15",
+                "type": "extraction",
+                "name": "终局撤离点",
+                "li": 3,
+                "idx": 13,
+                "x": 7,
+                "row": 0,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 12
+                  }
+                ]
+              },
+              {
+                "id": "L4_N16",
+                "type": "event",
+                "name": "4层·事件",
+                "li": 3,
+                "idx": 14,
+                "x": 0,
+                "row": 1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 1
+                  },
+                  {
+                    "li": 3,
+                    "idx": 3
+                  }
+                ]
+              },
+              {
+                "id": "L4_N17",
+                "type": "shop",
+                "name": "4层·补给站",
+                "li": 3,
+                "idx": 15,
+                "x": 6,
+                "row": -1,
+                "extraction": false,
+                "next": [
+                  {
+                    "li": 3,
+                    "idx": 12
+                  }
+                ]
+              }
+            ],
+            "entry": 0,
+            "exit": 13,
+            "gridBounds": {
+              "minX": 0,
+              "maxX": 7,
+              "minRow": -3,
+              "maxRow": 3
+            },
+            "doors": []
+          }
+        ]
+      },
+      "explored": [
+        "0,1"
+      ],
+      "revealed": [
+        "0,0",
+        "0,1",
+        "0,3"
+      ],
+      "settled": [
+        "0,0"
+      ],
+      "closed": [
+        "0,0"
+      ],
+      "altarActivated": false,
+      "bossDefeated": false,
+      "entrySupply": null,
+      "spellPower": 0,
+      "fragments": 0,
+      "battleRestartCheckpoint": null,
+      "nodeRewards": {
+        "0,1": {
+          "type": "battle",
+          "eventCardId": null,
+          "eventProgress": null,
+          "completed": false,
+          "healUsed": false,
+          "restoreUsed": false,
+          "bonusRolled": false,
+          "chests": null,
+          "coins": 0,
+          "restoreLeft": 0,
+          "healAmount": 0,
+          "classCardId": null,
+          "bonusReceived": false,
+          "restoredIds": [],
+          "enemies": [
+            {
+              "id": "archer",
+              "name": "封锁线枪手",
+              "behavior": "volley",
+              "eliteSkill": null,
+              "desc": null,
+              "atk": 5,
+              "hp": 3,
+              "damageCap": 0,
+              "elite": false,
+              "evenAttack": false
+            },
+            {
+              "id": "archer",
+              "name": "封锁线枪手",
+              "behavior": "volley",
+              "eliteSkill": null,
+              "desc": null,
+              "atk": 5,
+              "hp": 3,
+              "damageCap": 0,
+              "elite": false,
+              "evenAttack": false
+            },
+            {
+              "id": "archer",
+              "name": "封锁线枪手",
+              "behavior": "volley",
+              "eliteSkill": null,
+              "desc": null,
+              "atk": 5,
+              "hp": 3,
+              "damageCap": 0,
+              "elite": false,
+              "evenAttack": false
+            }
+          ],
+          "rewardCardIds": null,
+          "rewardTaken": null,
+          "chestQueue": null,
+          "chestIndex": 0,
+          "battleWon": false,
+          "shopStock": null,
+          "battleBoss": false,
+          "battleConsumed": [],
+          "extraLegendaryPrepared": false,
+          "battleFoeNames": [],
+          "altarRewardPending": false,
+          "altarItemSacrificed": false,
+          "altarRewardKind": null,
+          "altarFragmentCardId": null,
+          "altarRestoreLeft": 0,
+          "altarTaken": []
+        }
+      },
+      "seed": 140530751,
+      "rngState": "seed=140530751;v=2;s=reward:1034445682,identity:3691448531,gameplay:3386928760,enemy:1063651734",
+      "layerIdx": 0,
+      "trackPos": 1,
+      "hp": 35,
+      "maxHp": 35,
+      "coins": 0,
+      "turn": 2,
+      "atk": 4,
+      "mode": "standard",
+      "myClass": "侠客",
+      "characterId": "wu",
+      "inventory": [],
+      "ownedCards": [
+        {
+          "uid": "omvtq6ywyoqaaq",
+          "card": {
+            "id": "starter-attack",
+            "name": "初始攻击",
+            "cost": 1,
+            "rarity": "初始",
+            "type": "武术",
+            "dmg": 0,
+            "dmgType": "attack",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "攻（+0）：造成等同于攻击力的伤害。",
+            "value": 1,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": 1,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        },
+        {
+          "uid": "omvtq6ywy84td",
+          "card": {
+            "id": "starter-attack",
+            "name": "初始攻击",
+            "cost": 1,
+            "rarity": "初始",
+            "type": "武术",
+            "dmg": 0,
+            "dmgType": "attack",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "攻（+0）：造成等同于攻击力的伤害。",
+            "value": 1,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": 1,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        },
+        {
+          "uid": "omvtq6ywylrnlk",
+          "card": {
+            "id": "starter-attack",
+            "name": "初始攻击",
+            "cost": 1,
+            "rarity": "初始",
+            "type": "武术",
+            "dmg": 0,
+            "dmgType": "attack",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "攻（+0）：造成等同于攻击力的伤害。",
+            "value": 1,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": 1,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        },
+        {
+          "uid": "omvtq6ywyzsou4",
+          "card": {
+            "id": "starter-attack",
+            "name": "初始攻击",
+            "cost": 1,
+            "rarity": "初始",
+            "type": "武术",
+            "dmg": 0,
+            "dmgType": "attack",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "攻（+0）：造成等同于攻击力的伤害。",
+            "value": 1,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": 1,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        },
+        {
+          "uid": "omvtq6ywysl8ci",
+          "card": {
+            "id": "starter-attack",
+            "name": "初始攻击",
+            "cost": 1,
+            "rarity": "初始",
+            "type": "武术",
+            "dmg": 0,
+            "dmgType": "attack",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "攻（+0）：造成等同于攻击力的伤害。",
+            "value": 1,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "brought": 1,
+          "safe": null,
+          "stored": false,
+          "pouchOf": null,
+          "bagDiscover": null
+        }
+      ],
+      "cardOrder": [],
+      "usedPocket": [],
+      "eventLog": [],
+      "discovered": [],
+      "diceHistory": [],
+      "elapsed": 0.0,
+      "slot": 3,
+      "savedAt": 1793289376860
+    }
+  },
+  "global": {
+    "sdt-base-v2-slot1": {
+      "wood": 2,
+      "rations": 4,
+      "bagUp": 0,
+      "safeUp": 0,
+      "stashUp": 0,
+      "coins": 123,
+      "stash": [
+        {
+          "card": {
+            "id": "tt-wood",
+            "name": "木材",
+            "cost": 0,
+            "rarity": "古朴",
+            "type": "资源",
+            "dmg": 0,
+            "dmgType": null,
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "木材 ×1。",
+            "value": 2,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "base": {
+                "material": {
+                  "kind": "wood",
+                  "amount": 1
+                }
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 23
+        },
+        {
+          "card": {
+            "id": "tt3-thunderblast",
+            "name": "雷殛",
+            "cost": 2,
+            "rarity": "传说",
+            "type": "法术",
+            "dmg": 7,
+            "dmgType": "spell",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "造成7点法术伤害；墓地中每有1 张法术牌，伤害+1。",
+            "value": 5,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amount": 7,
+                    "target": "chosenEnemy",
+                    "graveyard": {
+                      "type": "法术",
+                      "perCard": 1
+                    }
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 1
+        }
+      ],
+      "pocket": [],
+      "collection": {},
+      "selMode": "standard",
+      "classes": {},
+      "characters": {
+        "wu": {
+          "lv": 2,
+          "xp": 25
+        },
+        "changwuyu": {
+          "lv": 1,
+          "xp": 0
+        },
+        "baita": {
+          "lv": 1,
+          "xp": 0
+        },
+        "heixiang": {
+          "lv": 1,
+          "xp": 0
+        },
+        "xingyue": {
+          "lv": 1,
+          "xp": 0
+        }
+      },
+      "stats": {
+        "extracts": 1,
+        "deaths": 0,
+        "kills": 0,
+        "actions": 0,
+        "playSeconds": 0.0,
+        "bossKills": [],
+        "bestRunCoins": 0,
+        "stashTotal": 0,
+        "turnMovesMax": 0,
+        "battleEquipsMax": 0,
+        "reviveKills": 0,
+        "nestBossKills": [],
+        "labTotalScore": 1500
+      },
+      "achClaimed": {
+        "firstExtract": true,
+        "runeFan": true,
+        "labScore2": true
+      },
+      "backs": {
+        "classic": true
+      },
+      "backSel": "classic",
+      "selectedSkins": {},
+      "collClaimed": {},
+      "collectionProtection": {},
+      "keys": 2,
+      "pets": {
+        "dog": {
+          "lv": 1,
+          "ts": 0
+        }
+      },
+      "petSel": "dog",
+      "eggPity": 0,
+      "eggBattles": 0,
+      "ammoTaught": false,
+      "runes": [
+        {
+          "kind": "rainbow",
+          "attrs": [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e"
+          ]
+        }
+      ],
+      "goals": {
+        "tracked": [],
+        "presets": {}
+      },
+      "story": {
+        "flags": {},
+        "outcomes": {}
+      },
+      "supplyPackOpening": null,
+      "BackSel": "classic",
+      "BagCap": 16,
+      "SafeCap": 2,
+      "StashCap": 25,
+      "StashUsed": 25,
+      "StashRoom": 0,
+      "CanUpgradeBag": true,
+      "CanUpgradeSafe": true,
+      "CanUpgradeStash": true,
+      "KeyCount": 2,
+      "CarriedPet": {
+        "id": "dog",
+        "name": "旺财",
+        "icon": "paw",
+        "desc": "携带效果：生命上限 +5",
+        "effect": {
+          "maxHp": 5,
+          "safeBonus": 0,
+          "extraSha": 0,
+          "classChest": 0.0,
+          "shopFree": false,
+          "shaToFireball": false
+        }
+      },
+      "PetEggDropChance": 0.007
+    },
+    "sdt-base-v2-slot3": {
+      "wood": 0,
+      "rations": 0,
+      "bagUp": 0,
+      "safeUp": 0,
+      "stashUp": 0,
+      "coins": 0,
+      "stash": [
+        {
+          "card": {
+            "id": "tt4-woodify",
+            "name": "能量饮料",
+            "cost": 0,
+            "rarity": "古朴",
+            "type": "道具",
+            "dmg": 0,
+            "dmgType": null,
+            "draw": null,
+            "infuse": null,
+            "heal": 6,
+            "armor": null,
+            "desc": "回复 6 点生命。",
+            "value": 2,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "bag": {
+                "use": [
+                  {
+                    "op": "heal",
+                    "amountField": "heal"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 1
+        },
+        {
+          "card": {
+            "id": "tt3-azure-sword",
+            "name": "百炼青虹剑",
+            "cost": 0,
+            "rarity": "稀有",
+            "type": "装备",
+            "dmg": 0,
+            "dmgType": null,
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "消耗该牌时立即释放一次’初始攻击‘。",
+            "value": 3,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "equip": {
+                "onEquip": []
+              },
+              "triggers": {
+                "onConsume": [
+                  {
+                    "op": "release",
+                    "source": "generated",
+                    "key": "初始攻击",
+                    "max": 1
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 1
+        },
+        {
+          "card": {
+            "id": "tt3-fate-wheel",
+            "name": "命运钟表",
+            "cost": 0,
+            "rarity": "史诗",
+            "type": "装备",
+            "dmg": 0,
+            "dmgType": null,
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "主动技能：消耗所有手牌，获得 1 个额外回合。",
+            "value": 4,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "equip": {
+                "onEquip": [],
+                "skill": {
+                  "oncePerBattle": true,
+                  "ops": [
+                    {
+                      "op": "consumeHand",
+                      "all": true
+                    },
+                    {
+                      "op": "extraTurn"
+                    }
+                  ]
+                }
+              },
+              "triggers": {}
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 1
+        },
+        {
+          "card": {
+            "id": "tt13-bitter-rain",
+            "name": "苦雨",
+            "cost": 1,
+            "rarity": "稀有",
+            "type": "法术",
+            "dmg": null,
+            "dmgType": null,
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "对一名敌人附加2层中毒，如果其已有诅咒，额外附加1项其他诅咒。",
+            "value": null,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "curse",
+                    "curse": "poison",
+                    "stacks": 2,
+                    "target": "chosenEnemy",
+                    "missingBonusIfCursed": true
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 1
+        },
+        {
+          "card": {
+            "id": "tt12-chargeray",
+            "name": "充能射线",
+            "cost": 1,
+            "rarity": "稀有",
+            "type": "法术",
+            "dmg": 5,
+            "dmgType": "spell",
+            "draw": null,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2",
+            "value": null,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amount": 5,
+                    "target": "chosenEnemy",
+                    "perInfusedInHand": 2
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 1
+        }
+      ],
+      "pocket": [],
+      "collection": {},
+      "selMode": "standard",
+      "classes": {},
+      "characters": {
+        "wu": {
+          "lv": 1,
+          "xp": 0
+        },
+        "changwuyu": {
+          "lv": 1,
+          "xp": 0
+        },
+        "baita": {
+          "lv": 1,
+          "xp": 0
+        },
+        "heixiang": {
+          "lv": 1,
+          "xp": 0
+        },
+        "xingyue": {
+          "lv": 1,
+          "xp": 0
+        }
+      },
+      "stats": {
+        "extracts": 0,
+        "deaths": 0,
+        "kills": 0,
+        "actions": 1,
+        "playSeconds": 0.0,
+        "bossKills": [],
+        "bestRunCoins": 0,
+        "stashTotal": 0,
+        "turnMovesMax": 0,
+        "battleEquipsMax": 0,
+        "reviveKills": 0,
+        "nestBossKills": [],
+        "labTotalScore": 0
+      },
+      "achClaimed": {},
+      "backs": {
+        "classic": true
+      },
+      "backSel": "classic",
+      "selectedSkins": {},
+      "collClaimed": {},
+      "collectionProtection": {},
+      "keys": 0,
+      "pets": {
+        "dog": {
+          "lv": 1,
+          "ts": 0
+        }
+      },
+      "petSel": "dog",
+      "eggPity": 0,
+      "eggBattles": 0,
+      "ammoTaught": false,
+      "runes": [],
+      "goals": {
+        "tracked": [],
+        "presets": {}
+      },
+      "story": {
+        "flags": {},
+        "outcomes": {}
+      },
+      "supplyPackOpening": null,
+      "BackSel": "classic",
+      "BagCap": 16,
+      "SafeCap": 2,
+      "StashCap": 25,
+      "StashUsed": 5,
+      "StashRoom": 20,
+      "CanUpgradeBag": false,
+      "CanUpgradeSafe": false,
+      "CanUpgradeStash": false,
+      "KeyCount": 0,
+      "CarriedPet": {
+        "id": "dog",
+        "name": "旺财",
+        "icon": "paw",
+        "desc": "携带效果：生命上限 +5",
+        "effect": {
+          "maxHp": 5,
+          "safeBonus": 0,
+          "extraSha": 0,
+          "classChest": 0.0,
+          "shopFree": false,
+          "shaToFireball": false
+        }
+      },
+      "PetEggDropChance": 0.007
+    }
+  },
+  "settlements": {}
+}

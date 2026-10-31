@@ -1,0 +1,31 @@
+{
+  "consumer": [
+    "game/css/expedition-shop.css:12",
+    "game/src/run/game.run.shop.js:23-24"
+  ],
+  "sourceReadOnly": true,
+  "method": "Lossless decoded RGBA conversion to Unity PNG; no image generation/redesign",
+  "binaryPolicy": "Local assets; no git stage/commit",
+  "assets": [
+    {
+      "source": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\scenes\\shop\\shop-cardstyle-approved-1011.webp",
+      "output": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Resources\\Art\\CurrentShop\\merchant-approved.png",
+      "sourceSha256": "d150710921cd395438f44d98798312e71c9e10f15df887d528909c83e4f335d2",
+      "outputSha256": "bbf68e81708ea6b169580831306188e58643d215045bb01800a196f4d55f4922",
+      "width": 1659,
+      "height": 948,
+      "decodedRgbaSha256": "888cfffe5b0b4dfe04fdc1d89bef9661a63fa855ddf3855083fd0b27e6f11b55",
+      "pixelsIdentical": true
+    },
+    {
+      "source": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\shop-mystery-back-1025.webp",
+      "output": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Resources\\Art\\CurrentShop\\mystery-back.png",
+      "sourceSha256": "b436d4565810c74e25ff76b9c9b7c20974e63c37a1bc2c0db90e510b9e1142e3",
+      "outputSha256": "75688925cad6135b41bd3c31e551467bc13922512047bef4c37f7c3dd6931365",
+      "width": 768,
+      "height": 1152,
+      "decodedRgbaSha256": "59b4a9f3f61f9c4fcf3aff3776c3307f308b4342732892dfe41b9d07ef20ed7f",
+      "pixelsIdentical": true
+    }
+  ]
+}

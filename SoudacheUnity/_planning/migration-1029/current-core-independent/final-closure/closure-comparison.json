@@ -1,0 +1,408 @@
+{
+  "pass": true,
+  "vectors": 15,
+  "checks": [
+    {
+      "name": "grudge hand",
+      "pass": true,
+      "source": [],
+      "core": []
+    },
+    {
+      "name": "grudge consumed",
+      "pass": true,
+      "source": [
+        "o1",
+        "o2"
+      ],
+      "core": [
+        "o1",
+        "o2"
+      ]
+    },
+    {
+      "name": "grudge armor",
+      "pass": true,
+      "source": 0,
+      "core": 0
+    },
+    {
+      "name": "grudge foeHp",
+      "pass": true,
+      "source": 88,
+      "core": 88
+    },
+    {
+      "name": "grudge energy",
+      "pass": true,
+      "source": 1,
+      "core": 1
+    },
+    {
+      "name": "armor hand",
+      "pass": true,
+      "source": [],
+      "core": []
+    },
+    {
+      "name": "armor consumed",
+      "pass": true,
+      "source": [
+        "o1"
+      ],
+      "core": [
+        "o1"
+      ]
+    },
+    {
+      "name": "armor armor",
+      "pass": true,
+      "source": 10,
+      "core": 10
+    },
+    {
+      "name": "armor foeHp",
+      "pass": true,
+      "source": 100,
+      "core": 100
+    },
+    {
+      "name": "armor energy",
+      "pass": true,
+      "source": 1,
+      "core": 1
+    },
+    {
+      "name": "fly hand",
+      "pass": true,
+      "source": [],
+      "core": []
+    },
+    {
+      "name": "fly consumed",
+      "pass": true,
+      "source": [],
+      "core": []
+    },
+    {
+      "name": "fly armor",
+      "pass": true,
+      "source": 0,
+      "core": 0
+    },
+    {
+      "name": "fly foeHp",
+      "pass": true,
+      "source": 87,
+      "core": 87
+    },
+    {
+      "name": "fly energy",
+      "pass": true,
+      "source": 0,
+      "core": 0
+    },
+    {
+      "name": "bleedAmp costs",
+      "pass": true,
+      "source": [
+        1,
+        2
+      ],
+      "core": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "bleedAmp hand",
+      "pass": true,
+      "source": [
+        "o2"
+      ],
+      "core": [
+        "o2"
+      ]
+    },
+    {
+      "name": "bleedAmp consumed",
+      "pass": true,
+      "source": [],
+      "core": []
+    },
+    {
+      "name": "bleedAmp armor",
+      "pass": true,
+      "source": 0,
+      "core": 0
+    },
+    {
+      "name": "bleedAmp foeHp",
+      "pass": true,
+      "source": 90,
+      "core": 90
+    },
+    {
+      "name": "bleedAmp energy",
+      "pass": true,
+      "source": 1,
+      "core": 1
+    },
+    {
+      "name": "spellCost1 costs",
+      "pass": true,
+      "source": [
+        2,
+        1
+      ],
+      "core": [
+        2,
+        1
+      ]
+    },
+    {
+      "name": "meleeCost1 costs",
+      "pass": true,
+      "source": [
+        1,
+        2
+      ],
+      "core": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "grudge-boss hand",
+      "pass": true,
+      "source": [],
+      "core": []
+    },
+    {
+      "name": "grudge-boss consumed",
+      "pass": true,
+      "source": [
+        "o1",
+        "o2"
+      ],
+      "core": [
+        "o1",
+        "o2"
+      ]
+    },
+    {
+      "name": "grudge-boss armor",
+      "pass": true,
+      "source": 0,
+      "core": 0
+    },
+    {
+      "name": "grudge-boss foeHp",
+      "pass": true,
+      "source": 88,
+      "core": 88
+    },
+    {
+      "name": "grudge-boss energy",
+      "pass": true,
+      "source": 1,
+      "core": 1
+    },
+    {
+      "name": "armor-boss hand",
+      "pass": true,
+      "source": [],
+      "core": []
+    },
+    {
+      "name": "armor-boss consumed",
+      "pass": true,
+      "source": [
+        "o1"
+      ],
+      "core": [
+        "o1"
+      ]
+    },
+    {
+      "name": "armor-boss armor",
+      "pass": true,
+      "source": 10,
+      "core": 10
+    },
+    {
+      "name": "armor-boss foeHp",
+      "pass": true,
+      "source": 100,
+      "core": 100
+    },
+    {
+      "name": "armor-boss energy",
+      "pass": true,
+      "source": 1,
+      "core": 1
+    },
+    {
+      "name": "cicada consumed",
+      "pass": true,
+      "source": [
+        "o1",
+        "o2"
+      ],
+      "core": [
+        "o1",
+        "o2"
+      ]
+    },
+    {
+      "name": "cicada armor",
+      "pass": true,
+      "source": 0,
+      "core": 0
+    },
+    {
+      "name": "cicada energy",
+      "pass": true,
+      "source": 2,
+      "core": 2
+    },
+    {
+      "name": "cicada foe",
+      "pass": true,
+      "source": 96,
+      "core": 96
+    },
+    {
+      "name": "cicada hand count",
+      "pass": true,
+      "source": 3,
+      "core": 3
+    },
+    {
+      "name": "cicada-boss consumed",
+      "pass": true,
+      "source": [
+        "o1",
+        "o2"
+      ],
+      "core": [
+        "o1",
+        "o2"
+      ]
+    },
+    {
+      "name": "cicada-boss armor",
+      "pass": true,
+      "source": 0,
+      "core": 0
+    },
+    {
+      "name": "cicada-boss energy",
+      "pass": true,
+      "source": 2,
+      "core": 2
+    },
+    {
+      "name": "cicada-boss foe",
+      "pass": true,
+      "source": 96,
+      "core": 96
+    },
+    {
+      "name": "cicada-boss hand count",
+      "pass": true,
+      "source": 1,
+      "core": 1
+    },
+    {
+      "name": "scale foes",
+      "pass": true,
+      "source": [
+        94,
+        100
+      ],
+      "core": [
+        94,
+        100
+      ]
+    },
+    {
+      "name": "scale hp",
+      "pass": true,
+      "source": 26,
+      "core": 26
+    },
+    {
+      "name": "scale hand",
+      "pass": true,
+      "source": [
+        "starter-attack"
+      ],
+      "core": [
+        "starter-attack"
+      ]
+    },
+    {
+      "name": "immortal retained",
+      "pass": true,
+      "source": [
+        1,
+        90,
+        0
+      ],
+      "core": [
+        1,
+        90,
+        0
+      ]
+    },
+    {
+      "name": "dart stages",
+      "pass": true,
+      "source": [
+        {
+          "hp": 95,
+          "bleed": 1,
+          "poison": 0
+        },
+        {
+          "hp": 95,
+          "bleed": 0,
+          "poison": 1
+        }
+      ],
+      "core": [
+        {
+          "hp": 95,
+          "bleed": 1,
+          "poison": 0
+        },
+        {
+          "hp": 95,
+          "bleed": 0,
+          "poison": 1
+        }
+      ]
+    },
+    {
+      "name": "provoke targets",
+      "pass": true,
+      "source": [
+        100,
+        94,
+        98
+      ],
+      "core": [
+        100,
+        94,
+        98
+      ]
+    },
+    {
+      "name": "forbidden fuel",
+      "pass": true,
+      "source": [],
+      "core": []
+    }
+  ]
+}

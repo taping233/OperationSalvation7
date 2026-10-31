@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'../../..');
+const d=JSON.parse(fs.readFileSync(path.resolve(root,'../搜打撤/game/data/map.json'),'utf8'));
+const str=v=>JSON.stringify(v??'');
+const strings=v=>'new string[]{'+(v||[]).map(str).join(',')+'}';
+const monster=v=>'new MonsterDef{'+['id','name','behavior','eliteSkill','desc'].filter(k=>v[k]!=null).map(k=>k+'='+str(v[k])).concat(['atk','hp','damageCap'].filter(k=>v[k]!=null).map(k=>k+'='+v[k]),['elite','evenAttack'].filter(k=>v[k]!=null).map(k=>k+'='+v[k])).join(',')+'}';
+let text='// Generated from 搜打撤/game/data/map.json by _planning/migration-1029/map/export-map-data.mjs\nusing System.Collections.Generic;\nnamespace Sdt.Core { public static class CurrentMapData {\n';
+text+='public static readonly IReadOnlyDictionary<string,MonsterDef> Monsters=new Dictionary<string,MonsterDef>{'+Object.entries(d.monsters).map(([k,v])=>'{'+str(k)+','+monster(v)+'}').join(',')+'};\n';
+text+='public static readonly EncounterDef[] Encounters=new EncounterDef[]{'+d.encounters.map(e=>'new EncounterDef{risk='+str(e.risk)+',strategy='+str(e.strategy)+',entries=new EncounterEntry[]{'+e.entries.map(v=>'new EncounterEntry{id='+str(v.id)+',size=new[]{'+v.size.join(',')+'}}').join(',')+'},groups=new EncounterGroup[]{'+(e.groups||[]).map(v=>'new EncounterGroup{id='+str(v.id)+',strategy='+str(v.strategy)+',enemyIds='+strings(v.enemyIds)+',size=new[]{'+v.size.join(',')+'}}').join(',')+'},guaranteedElite='+strings(e.guaranteedElite)+'}').join(',')+'};\n';
+text+='public static readonly AltarBossDef[] Bosses=new AltarBossDef[]{'+d.altar.bosses.map(v=>'new AltarBossDef{'+['id','name','icon','affix','affixName','behavior','affixDesc'].map(k=>k+'='+str(v[k])).concat(['atk','hp'].map(k=>k+'='+v[k]),['cellX='+v.cell[0],'cellY='+v.cell[1]]).join(',')+'}').join(',')+'};\n}}\n';
+fs.writeFileSync(path.join(root,'Assets/Scripts/Sdt.Core/CurrentMapData.cs'),text);

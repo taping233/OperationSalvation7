@@ -1,0 +1,235 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!129 &1
+PlayerSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 26
+  productGUID: 7d1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b
+  AndroidProfiler: 0
+  AndroidFilterTouchesWhenObscured: 0
+  AndroidEnableSustainedPerformanceMode: 0
+  defaultScreenOrientation: 4
+  targetDevice: 2
+  useOnDemandResources: 0
+  accelerometerFrequency: 60
+  companyName: Codename7
+  productName: "代号柒-搜打撤"
+  defaultScreenWidth: 1920
+  defaultScreenHeight: 1080
+  defaultScreenWidthWeb: 960
+  defaultScreenHeightWeb: 600
+  m_StereoRenderingPath: 0
+  m_ActiveColorSpace: 0
+  m_MTRendering: 1
+  mipStripping: 0
+  numberOfMipsStripped: 0
+  m_StackTraceTypes: 010000000100000001000000010000000100000001000000
+  resizableWindow: 1
+  fullscreenMode: 3
+  macOSFullscreenMode: 2
+  d3d11FullscreenMode: 1
+  playerLogLevel: 0
+  allowHDRDisplaySupport: 0
+  forceSIMD: 0
+  metalEditorSupport: 1
+  metalAPIValidation: 1
+  shouldInlineAllUnderlineGeometry: 0
+  additionalCompilerArguments: {}
+  platformArchitecture: {}
+  scriptingBackend: {}
+  il2cppCompilerConfiguration: {}
+  managedDebuggerForceCollisionDetectionPolicy: 0
+  apiCompatibilityLevelPerPlatform: {}
+  m_DisableWebGLTemplateSupport: 0
+  m_disableRenderPipelineAssetForSceneView: 0
+  allowUnsafeCode: 0
+  useDeterministicCompilation: 1
+  additionalIl2CppArgs:
+  scriptingDefineSymbols: {}
+  bumpIncrementalBuildEpoch: 0
+  androidMinimumSdkVersion: 24
+  androidTargetSdkVersion: 0
+  androidPreferredInstallLocation: 1
+  aotOptions:
+  clampTextureShapes: 0
+  intermediateIl2CppOutputDirectory:
+  il2cppStacktraceCrawl: 0
+  androidCreateSymbolsZip: 0
+  androidUseLegacyKeystore: 0
+  androidBlitType: 0
+  androidResizableActivity: 0
+  androidApplicationEntry: 0
+  defaultIsNativeResolution: 1
+  macRetinaSupport: 1
+  runInBackground: 1
+  captureSingleScreen: 0
+  muteOtherAudioSources: 0
+  Prepare IOS For Recording: 0
+  Force IOS Speakers When Recording: 0
+  audioSpatialExperience: 0
+  sysCPUFreq: 0
+  androidScriptBackend: 0
+  androidBuildApkPerCpuArchitecture: 0
+  sceneListPrimingMode: 0
+  buildWithDeepProfilingSupport: 0
+  cloudProjectId:
+  projectName:
+  organizationalUnitId:
+  enableNativePlatformBackdoorsForDevelopment: 0
+  eventSystemScreenKeyboardTarget: 0
+  legacyClampBlendShapeWeights: 0
+  playerDataPath:
+  forceSRGBBuffer: 1
+  linearIntensityUnit: 0
+  virtualTexturingSupport: 0
+  insecureHttpOption: 0
+  androidTargetArchitectures: 1
+  androidTexcompressionFormat: 1
+  androidBuildType: 0
+  androidUseSWMultiplier: 0
+  accelerometerTilt: 0
+  androidRenderOutsideSafeArea: 1
+  androidUseSwappy: 1
+  androidAspectRatio: 1
+  androidMaxAspectRatio: 2.1
+  applicationIdentifier: {}
+  buildNumber:
+    Standalone: 0
+    iPhone: 0
+    tvOS: 0
+  overrideDefaultApplicationIdentifier: 0
+  AndroidBundleVersionCode: 1
+  AndroidMinSdkVersion: 24
+  AndroidTargetSdkVersion: 0
+  AndroidPreferredInstallLocation: 1
+  AotOptions:
+  StripEngineCode: 1
+  iPhoneStrippingLevel: 0
+  iPhoneScriptCallOptimization: 0
+  ForceInternetPermission: 0
+  ForceSDCardPermission: 0
+  CreateWallpaper: 0
+  APKExpansionFiles: 0
+  keepLoadedShadersAlive: 0
+  StripUnusedMeshComponents: 1
+  VertexChannelCompressionMask: -1
+  iPhoneSdkVersion: 988
+  iOSTargetOSVersionString: 13.0
+  tvOSSdkVersion: 466
+  tvOSRequireExtendedGameController: 0
+  tvOSTargetOSVersionString: 13.0
+  uIPrerenderedIcon: 0
+  uIRequiresPersistentWiFi: 0
+  uIRequiresFullScreen: 1
+  uIStatusBarHidden: 1
+  uIExitOnSuspend: 0
+  uIStatusBarStyle: 0
+  appleTVSplashScreen: {fileID: 0}
+  appleTVSplashScreen2x: {fileID: 0}
+  tvOSSmallIconLayers: []
+  tvOSSmallIconLayers2x: []
+  tvOSLargeIconLayers: []
+  tvOSLargeIconLayers2x: []
+  tvOSTopShelfImageLayers: []
+  tvOSTopShelfImageLayers2x: []
+  tvOSTopShelfImageWideLayers: []
+  tvOSTopShelfImageWideLayers2x: []
+  iOSLaunchScreenType: 0
+  iOSLaunchScreenPortrait: {fileID: 0}
+  iOSLaunchScreenLandscape: {fileID: 0}
+  iOSLaunchScreenBackgroundColor:
+    serializedVersion: 2
+    rgba: 0
+  iOSLaunchScreenFillPct: 100
+  iOSLaunchScreenSize: 100
+  iOSLaunchScreenCustomXibPath:
+  iOSLaunchScreenCustomStoryboardPath:
+  iOSLaunchScreenProvisioningProfilePath:
+  iOSLaunchScreenAutoRotationEnabled: 0
+  iOSLaunchScreenAutoRotationRotateToHome: 0
+  iOSLaunchScreenAutoRotationRotateToLeft: 0
+  iOSLaunchScreenAutoRotationRotateToRight: 0
+  iOSLaunchScreenAutoRotationRotate180: 0
+  iOSLaunchScreenAutoRotationEnabledIPhone: 0
+  AndroidLaunchScreenType: 0
+  AndroidVulkanSupport: 0
+  androidGamepadSupportLevel: 0
+  AndroidValidateAppBundleSize: 1
+  AndroidSymbolTablesEnabled: 0
+  AndroidUseCustomKeystore: 0
+  AndroidEnableArCoreApi: 0
+  AndroidUsePerformanceTuning: 0
+  macOSSplashScreen: {fileID: 0}
+  macOSDevSandboxEnabled: 0
+  macOSAppCategory: public.app-category.games
+  macOSTargetOSVersion: 11.0
+  allowDesktopMem4gb: 0
+  usePlayerLog: 1
+  dedicatedServerOptimizations: 0
+  useMicrophoneForVOS: 0
+  resplashScreen: {fileID: 0}
+  buildReferenceInformation:
+  memoryBudget: 0
+  spatializerPlugin:
+  audioDSPPlugin:
+  hljShaderCompileQueue: 0
+  defaultAudioSpeakerMode: 2
+  audioDefaultSpeakerMode20: 2
+  disableAudio: 0
+  preloadAudioData: 0
+  useNullPhysicsEngineFor2D: 0
+  scriptedAnimationsOnly: 0
+  gpuSkinning: 1
+  stereoVideo: 0
+  defaultGraphicsAPIs:
+  - 2
+  m_BuildTargetGraphicsAPIs:
+  - m_BuildTarget: 1
+    m_APIs: 0200000011000000
+    m_Automatic: 1
+  m_BuildTargetDefaultGraphicsAPIs: []
+  m_BuildTargetEnableVulkan: []
+  androidRenderModeSafe: 0
+  m_BuildTargetGraphicsJobMode:
+  - m_BuildTarget: 1
+    m_GraphicsJobMode: 2
+  m_BuildTargetGraphicsJobModes:
+  - m_BuildTarget: 1
+    m_GraphicsJobMode: 2
+  platformIcons: {}
+  buildTargetPlatformLightmapSettings: []
+  forceStaticBatching: 1
+  buildTargetTextureCompression: 1
+  uploadClearedSymbols: 0
+  spritesUsePointFiltering: 0
+  spritesUseNPOTScale: 0
+  lightmapStripping: 0
+  fogStripping: 0
+  lightmapKeepPlain: 1
+  lightmapKeepDirCombined: 1
+  lightmapKeepDynamicPlain: 1
+  lightmapKeepDirLightmaps: 1
+  lightmapKeepDynamicDirLightmaps: 1
+  lightmapKeepAlphaShadowMask: 1
+  lightmapKeepSeparateMasked: 1
+  instancingStripping: 0
+  lightmapKeep RGBM: 1
+  asyncShaderCompilation: 1
+  defaultShaderChunkSize: 0
+  interleafResources: 0
+  gcWBarrier: 0
+  gcIncremental: 1
+  gcIncrementalBurstSlices: 960
+  gcWBarrierIncremental: 0
+  scriptingRuntimeVersion: 1
+  il2CppStacktraceInformation: 1
+  apiCompatibilityLevel: 6
+  activeInputHandler: 0
+  windowsGpuSelection: 0
+  useHWND: 0
+  targetPixelDensity: 0
+  resizableWindow: 1
+  fullscreenMode: 3
+  ResolutionDialogSetting: 2
+  PhysicsKS: 0
+  activeInputHandlerInt: 0

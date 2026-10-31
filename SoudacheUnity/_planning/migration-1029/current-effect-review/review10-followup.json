@@ -1,0 +1,313 @@
+{
+  "review": "10 followup independent scope-limited evidence closure",
+  "decision": "evidence-limited",
+  "findings": [],
+  "scope": "Only current-reading-scroll-1 three images and current-receipts-4 fifteen images; prior 35 scene scope not re-opened or re-run.",
+  "reading": {
+    "process": {
+      "method": "Sdt.Editor.CurrentCardScrollValidation.Run",
+      "pid": 16712,
+      "startedAt": "2026-10-29T23:46:23.362067Z",
+      "endedAt": "2026-10-29T23:46:37.202135Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputsUnchanged": true,
+      "changedInputs": [],
+      "sourceCount": 334,
+      "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-reading-scroll-1"
+    },
+    "scenario": "current-large-card-native-wheel",
+    "osHardwareInput": false,
+    "input": "constructed uGUI RaycastAll + ExecuteEvents.scrollHandler; source shared production CardFace",
+    "readingGap": "closed for constructed native RaycastAll + scrollHandler path, bottom reachability and return-to-top; no hardware wheel claim",
+    "source": "game/src/cards/card-description-text.js:167 ends 并附加 1 层中毒。; game/css/card-layout-selected.css:105-110 provides overflow:auto and thin scrollbar",
+    "native": "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs:100-103; Assets/Editor/CurrentCardScrollValidation.cs:66-68,80-85",
+    "visual": "Top and return-top show first sentence and upper scrollbar; bottom image x825..1090,y605..734 includes end of attack formula and final 加1层中毒。 with glyphs entirely above paper bottom; thumb moves to bottom. Return button remains visible in all three.",
+    "records": [
+      {
+        "kind": "capture",
+        "name": "reading-top",
+        "description": "选择 2 个目标（可以重复）：对第 1 个目标造成（你的攻击力 + 1）点攻击伤害，并附加 1 层流血；对第 2 个目标造成（你的攻击力 + 1）点攻击伤害，并附加 1 层中毒。",
+        "contentHeight": 240.0,
+        "viewportHeight": 88.75831,
+        "position": 1.0,
+        "thumbSize": 0.369826227
+      },
+      {
+        "kind": "constructed-native-wheel",
+        "delta": -100.0,
+        "first": "rules",
+        "receiver": "rules"
+      },
+      {
+        "kind": "capture",
+        "name": "reading-bottom",
+        "description": "选择 2 个目标（可以重复）：对第 1 个目标造成（你的攻击力 + 1）点攻击伤害，并附加 1 层流血；对第 2 个目标造成（你的攻击力 + 1）点攻击伤害，并附加 1 层中毒。",
+        "contentHeight": 240.0,
+        "viewportHeight": 88.75831,
+        "position": -2.522252E-08,
+        "thumbSize": 0.369826227
+      },
+      {
+        "kind": "constructed-native-wheel",
+        "delta": 100.0,
+        "first": "rules",
+        "receiver": "rules"
+      },
+      {
+        "kind": "capture",
+        "name": "reading-return-top",
+        "description": "选择 2 个目标（可以重复）：对第 1 个目标造成（你的攻击力 + 1）点攻击伤害，并附加 1 层流血；对第 2 个目标造成（你的攻击力 + 1）点攻击伤害，并附加 1 层中毒。",
+        "contentHeight": 240.0,
+        "viewportHeight": 88.75831,
+        "position": 1.0,
+        "thumbSize": 0.369826227
+      }
+    ]
+  },
+  "receipts": {
+    "process": {
+      "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts",
+      "pid": 13896,
+      "startedAt": "2026-10-29T23:41:55.5701387Z",
+      "endedAt": "2026-10-29T23:42:36.4652533Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputsUnchanged": true,
+      "changedInputs": [],
+      "sourceCount": 334,
+      "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-receipts-4"
+    },
+    "scenario": "receipts",
+    "input": "constructed-uGUI-RaycastAll-and-ExecuteEvents; constructed-InputField-endEdit; runtime-commands-where-recorded",
+    "osHardwareInput": false,
+    "observations": [
+      "Chest reward has two cards and independent take actions; reward-complete shows both faded with 已收下 and visible 继续探索; no marker leak.",
+      "Fire before/complete states show hp30→35, completion copy and recovered card plus continue.",
+      "Extraction summary, death/surrender reports, abandon failed retry/completed and terminal return base retain legible primary actions within view.",
+      "Abandon complete now visibly uses lock icon before preserved card copy, closing potential R9 same-family lock symptom for this fixture branch."
+    ],
+    "sourceParity": "game/src/run/chests.js:408-410 and594/693 completion-close/continue contract matched by ChestOpenScreen.cs:112-127: retain completed final picker, advance queue only through continuation. Review verifies this source mechanism and visible supplied completion screen, not all chest combinations.",
+    "records": [
+      {
+        "step": 7,
+        "tick": 9,
+        "kind": "constructed-hold-cancel-lifecycle",
+        "detail": {
+          "release": true,
+          "exit": true,
+          "deselect": true,
+          "cancel": true,
+          "syntheticHoldingState": true,
+          "physicalHoldSuccess": false
+        }
+      },
+      {
+        "step": 7,
+        "tick": 9,
+        "kind": "real-battle-command",
+        "detail": {
+          "action": "EndTurn",
+          "lethal": true
+        }
+      },
+      {
+        "step": 23,
+        "tick": 29,
+        "kind": "ugui-raycast",
+        "detail": {
+          "target": "继续探索",
+          "x": 1798.0,
+          "y": 150.0,
+          "first": "继续探索",
+          "receiver": "继续探索",
+          "hits": [
+            "继续探索",
+            "mask"
+          ]
+        }
+      },
+      {
+        "step": 27,
+        "tick": 33,
+        "kind": "current-chest-retry-and-idempotency",
+        "detail": {
+          "node": "1,2",
+          "completed": true,
+          "taken": [
+            0,
+            1
+          ],
+          "lost": [],
+          "repeatedAll": true,
+          "coins": 3
+        }
+      },
+      {
+        "step": 27,
+        "tick": 33,
+        "kind": "ugui-raycast",
+        "detail": {
+          "target": "继续探索",
+          "x": 1784.0,
+          "y": 50.0000038,
+          "first": "继续探索",
+          "receiver": "继续探索",
+          "hits": [
+            "继续探索",
+            "mask"
+          ]
+        }
+      }
+    ],
+    "limits": [
+      "Source 18 vectors/108 comparisons were parent-reported and not rerun or independently accepted by this visual-only followup.",
+      "Several screenshots retain deliberately injected file-lock error toast after retry success because captured during same fast fixture timeline; no timing/lifetime conclusion from these frames.",
+      "Surrender/death fixture uses controlled enemy with forced statistics (including 99999 damage and negative displayed hp); white enemy placeholder in surrender-save-failed does not establish a production asset regression.",
+      "Actual post-retry persistence, rollback and all terminal guards require corresponding command/test evidence; visible success frames alone are insufficient."
+    ]
+  },
+  "images": [
+    {
+      "path": "current-reading-scroll-1/reading-bottom.png",
+      "sha256": "bf208ce7f106722442561a049ac5fb56e20e2b8f1e4aba84018acc2782da77c4",
+      "viewed": true
+    },
+    {
+      "path": "current-reading-scroll-1/reading-return-top.png",
+      "sha256": "27a5dc7c8e41794db04d926a54acd17e04bfbe82dcca7a4798552c4750da04b9",
+      "viewed": true
+    },
+    {
+      "path": "current-reading-scroll-1/reading-top.png",
+      "sha256": "9c80c40ffde68f0a55f802ce24390edddf62fb7d0b681b9d25b3dd8f53220c48",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-abandon-complete.png",
+      "sha256": "08d74d20529931101f9f3716ea96be040019114711d0f3554feda5af4ddd3513",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-abandon-save-failed.png",
+      "sha256": "c2186df963c0f2a9838db7dc5ebce670aab72611499022e6fbf188accbf97f7e",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-chest-reward.png",
+      "sha256": "7ec0365bc36367df50cb9b752fbb1604619a5d530dc0744b883c776ffc7bece3",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-death.png",
+      "sha256": "ee77b4e57c00b88ad848078af24b9f49b5a7a7a4ef10350a7e1d34151f446cbd",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-event-after-choice.png",
+      "sha256": "bc602c006fe24ebb3a311923b23c67d86e4990fc81dba58ca6c9e5f14e7eda42",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-event.png",
+      "sha256": "76a9b2d8e4844a8ffa756db9f19dbf87c84bd6de42a0814dcfdfe909fc02a6ff",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-extract-complete.png",
+      "sha256": "c334e4af5cc2bc274de6eb991aff88a3c19eb83d8412da8eed43ca44562b79f2",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-fire-complete.png",
+      "sha256": "2f0eb716c6e7df00132239a046d8c5855435df0b32474472bd2fbd64df2381b6",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-fire.png",
+      "sha256": "b4661267e2f0040ac3b62315c02b00e7635194f7fe39a2cf61530ba944f159e2",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-reward-complete.png",
+      "sha256": "d843b9cf21626ca714e25acf25e419559c6ec1e2e81481749bc9a632f6804a79",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-sort-before.png",
+      "sha256": "63070753018c7acb281926ecd4425d7a85b39abad111c303665501452e2144e7",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-sort-finish-save-failed.png",
+      "sha256": "2258b4cefcf786736c6ed19e5a081ad52c5019ff21908b11180cd867192c7f1e",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-surrender-complete.png",
+      "sha256": "7a7ec7a3106d35c7d318418ae7c4cc95dfe24076ae79be6b20015f559d2356ea",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-surrender-save-failed.png",
+      "sha256": "cb5082dfc36f6f70066334cc52e84a66725c83afa00433488229bda73b5012da",
+      "viewed": true
+    },
+    {
+      "path": "current-receipts-4/receipts-terminal-return-base.png",
+      "sha256": "5bea84c41441b8fdb431f4bc07822ecf42bf7e908241c0c58ee7f5073dd2f800",
+      "viewed": true
+    }
+  ],
+  "relatedSources": [
+    {
+      "path": "搜打撤/game/src/cards/card-description-text.js",
+      "currentSha256": "cc10e433470705dc578b07e088c25d36f0d37fb2eefdd8dea05ef89bd134c92d",
+      "scrollCapturedSha256": null,
+      "receiptsCapturedSha256": null
+    },
+    {
+      "path": "搜打撤/game/css/card-layout-selected.css",
+      "currentSha256": "16215e25286c401718703e5939e55dcad563de2aa2c631e08f4d680215fa871c",
+      "scrollCapturedSha256": null,
+      "receiptsCapturedSha256": null
+    },
+    {
+      "path": "搜打撤/game/src/run/chests.js",
+      "currentSha256": "fd42e9bde3b8cb28e913687c77e6aa462cae57dcee24309a637523e76cdf732e",
+      "scrollCapturedSha256": null,
+      "receiptsCapturedSha256": null
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs",
+      "currentSha256": "d1733f7dd87574e4e81dcaeaf523189716faf1b07392067a990532a7bd0884d5",
+      "scrollCapturedSha256": "d1733f7dd87574e4e81dcaeaf523189716faf1b07392067a990532a7bd0884d5",
+      "receiptsCapturedSha256": "d1733f7dd87574e4e81dcaeaf523189716faf1b07392067a990532a7bd0884d5"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CardVisual.cs",
+      "currentSha256": "6b110106d7c56dcad3c1ba589309af4b5e97d22afc4be46bda705d8344a04c9a",
+      "scrollCapturedSha256": "6b110106d7c56dcad3c1ba589309af4b5e97d22afc4be46bda705d8344a04c9a",
+      "receiptsCapturedSha256": "6b110106d7c56dcad3c1ba589309af4b5e97d22afc4be46bda705d8344a04c9a"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardScene.cs",
+      "currentSha256": "5fb8576fd808e8fb0c2aead3eca2d629c15b72277ebd2f0a3aaca14220e36819",
+      "scrollCapturedSha256": "5fb8576fd808e8fb0c2aead3eca2d629c15b72277ebd2f0a3aaca14220e36819",
+      "receiptsCapturedSha256": "5fb8576fd808e8fb0c2aead3eca2d629c15b72277ebd2f0a3aaca14220e36819"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ChestOpenScreen.cs",
+      "currentSha256": "62a15f2abf8483368ca26c0a313acd05d7e642c930427ea59920be64543cb40b",
+      "scrollCapturedSha256": "62a15f2abf8483368ca26c0a313acd05d7e642c930427ea59920be64543cb40b",
+      "receiptsCapturedSha256": "62a15f2abf8483368ca26c0a313acd05d7e642c930427ea59920be64543cb40b"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Editor/CurrentCardScrollValidation.cs",
+      "currentSha256": "3f9e9da83aa010821575db495ef118cf9394d8be5857be56eed72722352ed51b",
+      "scrollCapturedSha256": "3f9e9da83aa010821575db495ef118cf9394d8be5857be56eed72722352ed51b",
+      "receiptsCapturedSha256": "3f9e9da83aa010821575db495ef118cf9394d8be5857be56eed72722352ed51b"
+    }
+  ],
+  "method": "All 18 new PNG files actually opened through view_image. Result metadata and selected record fields read directly. No Unity, browser, CUA, production mutation, service, build or hardware input by reviewer."
+}

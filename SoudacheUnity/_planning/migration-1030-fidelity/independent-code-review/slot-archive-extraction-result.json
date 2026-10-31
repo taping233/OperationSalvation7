@@ -1,0 +1,27 @@
+{
+  "readOnly": true,
+  "noCompile": true,
+  "rows": [
+    {
+      "previous": "_planning/migration-1030-fidelity/capacity-focus/snapshot/Assets/Scripts/Sdt.Run/SaveSystem.cs",
+      "previousSha256": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5",
+      "validationEqualIgnoringIndent": true,
+      "readerWrapperEqualIgnoringIndent": true,
+      "normalizedValidationSha256": "eeb1b670a2058a8a4c2a54c3675773422e9b62f5db2206e57774b9a07e99e7da"
+    },
+    {
+      "previous": "_planning/migration-1030-fidelity/recode/snapshot/Assets/Scripts/Sdt.Run/SaveSystem.cs",
+      "previousSha256": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5",
+      "validationEqualIgnoringIndent": true,
+      "readerWrapperEqualIgnoringIndent": true,
+      "normalizedValidationSha256": "eeb1b670a2058a8a4c2a54c3675773422e9b62f5db2206e57774b9a07e99e7da"
+    },
+    {
+      "previous": "_planning/migration-1030-fidelity/startup/snapshot/Assets/Scripts/Sdt.Run/SaveSystem.cs",
+      "previousSha256": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5",
+      "validationEqualIgnoringIndent": true,
+      "readerWrapperEqualIgnoringIndent": true,
+      "normalizedValidationSha256": "eeb1b670a2058a8a4c2a54c3675773422e9b62f5db2206e57774b9a07e99e7da"
+    }
+  ]
+}

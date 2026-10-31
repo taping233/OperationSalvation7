@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checks": 1445,
+  "branches": 176,
+  "stageRestarts": 316,
+  "realSaveFailures": 4,
+  "checkpointAssertions": 42,
+  "itemAssertions": 1141,
+  "source": "actual Vite eventChoiceSpec 19 events/44 choices/4 layers; production C# runtime with platform/audio adapters",
+  "directory": "D:\\素材\\代号柒\\SoudacheUnity\\_planning\\migration-1029\\battle\\events\\data-20261029-153117-258"
+}

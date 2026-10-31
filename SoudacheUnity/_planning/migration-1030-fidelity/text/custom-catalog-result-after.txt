@@ -1,0 +1,7 @@
+PASS default order equals fresh source
+PASS override preserves gallery count and unique stable ID
+PASS same stable ID uses edited description at original index
+PASS override does not reorder extraction pool
+PASS new stable ID appends exactly as source
+PASS serialized provider file reload retains source order and override
+PASS reload contains no duplicate stable ID

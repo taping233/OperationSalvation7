@@ -1,0 +1,130 @@
+{
+  "task": "current-forecast",
+  "state": "frozen-complete-uncommitted",
+  "generatedAt": "2026-10-30T03:20:23.1953087+08:00",
+  "gitHead": "0bdcb665bd49e47fadbf91707e6a654430cc6d95",
+  "scope": "Current Vite oracle versus isolated production Core; programmatically constructed input",
+  "checks": {
+    "sourceOracle": "passed",
+    "corePassed": 289,
+    "coreFailed": 0,
+    "cardSemanticsPassed": 167,
+    "cardSemanticsFailed": 0,
+    "nativeUnity": "not-run; root integration owns it",
+    "visualAndRealInput": "not-run"
+  },
+  "coverage": {
+    "forecast": 37,
+    "inputUnchanged": 37,
+    "plans": 44,
+    "intents": 116,
+    "actualEndTurn": 18,
+    "actualSingleHit": 6,
+    "structuredSelfDamage": 3,
+    "otherContracts": 28
+  },
+  "sourceSHA": [
+    {
+      "file": "game/src/battle/view/battle.turn-forecast.js",
+      "sha256": "f574ea234fab0910927adff2fbd86ce18cbbd05b0c156235c478d787a28babe6"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-plan.js",
+      "sha256": "1d28a58ee095538e2524356898a8901608dea40c473ebbbe9aaef47b5e73e07b"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "d49fd89f58f9bec35478b93329b7ddd95496d29b886bec293511a762a72e86f3"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "sha256": "bc01cacda85a1aded7f33bb2a2262e9f3c53347a110f5ed5139790b4df17b380"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-intent.js",
+      "sha256": "7b9d76d6b89f806698c7c1cb9bb8cf06aef882dfd39816eb1b3cfc5aa66cf1ff"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.domain.js",
+      "sha256": "60aca5a6ee67a4675c643b5751ffdbebb438128ed7bce1a58b32e95c7cc46c43"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.snapshot.js",
+      "sha256": "63ccfc3319ede711648a13870f499e1d5977296ef84eebcad9d361d5a851f86a"
+    },
+    {
+      "file": "game/src/battle/bag/battle.consumed-pile.js",
+      "sha256": "9ee5a989806293af534bba10d60570ebfb8e975fed69c734cca480bc44d7b292"
+    },
+    {
+      "file": "game/src/battle/core/combat.factory.js",
+      "sha256": "980494c55f4381167a2142bf60ef99e74a8416f646e2348c14357d5fa2f4c0d3"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.state.js",
+      "sha256": "1b742d48b5ec01b1bf2a4b8b331b422d446a9a6853776c885323090c67fd23d0"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.action-runner.js",
+      "sha256": "03816eb0496933b4c0322de664c6a7980cd3168c46e1c08109bf26eac919d47d"
+    },
+    {
+      "file": "game/src/battle/effects/card-semantic-operations.js",
+      "sha256": "4457bdbc738cb19ec2649c062d38b50d5c094665dec96c03c354533c2b8f3eff"
+    }
+  ],
+  "productionSHA": [
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleTurnForecast.cs",
+      "sha256": "078203f3ce41621d5a8b6587b8d2cfc3b5a7db9815368cd41c75058646a6ea90"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "sha256": "eb44c6fa5d820bc4138e05efc04a902cd3349d6f5b8fffe07297647e14b3455d"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+      "sha256": "e1c8e24e32fd6d74fdcf808bf93546d63a8586049810fd3639ea0c096deb2ade"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleRestartCheckpoint.cs",
+      "sha256": "3cb6cbd98dabc5631140902a86c961c9ac4e471b55f6f9c10d108b28d5438cfe"
+    }
+  ],
+  "evidenceSHA": [
+    {
+      "path": "source-oracle.mjs",
+      "sha256": "57df03d2ed2a8e7f3d6c87558568ef8c5dbf1ca88279c4b9282e97c2fd7d7a9e"
+    },
+    {
+      "path": "source-vectors.json",
+      "sha256": "ae31be3addb5ae2c440545ad1eab9a66fc8f2ef685042ca41240c35621368970"
+    },
+    {
+      "path": "Audit.cs",
+      "sha256": "fa20a76a65a4b14921662423c1160f3a31ceddbfe01a0ed30adb95df4fc6dc8c"
+    },
+    {
+      "path": "Audit.csproj",
+      "sha256": "0d2a09dfd239580d2572ea1c0ced5d793344a29d82115a580f42dd4078e2dc30"
+    },
+    {
+      "path": "unity-results.json",
+      "sha256": "ed57bd06b3fffd2e08f12b5370ab290b1922ad09f0a6772ad82490ef8bd07c38"
+    },
+    {
+      "path": "baseline.json",
+      "sha256": "69bd0258e6d5dbbc8bfd2c5551c9da692454183252edf32fe2b560efb71d3ed1"
+    },
+    {
+      "path": "README.md",
+      "sha256": "495a40595454c81669f97336c292b43c77326b5f925b0973c5e5820a1b5d9364"
+    }
+  ],
+  "limitations": [
+    "TimeRune=true is pure DTO oracle only; research second map remains excluded",
+    "FoeIntent integer damage compatibility uses HasDamage=false for source null",
+    "Forecast has the same source note excluding turn-end triggers, ally attacks and random effects",
+    "No commit, push, frontend, native Unity run, or shared compilation"
+  ]
+}

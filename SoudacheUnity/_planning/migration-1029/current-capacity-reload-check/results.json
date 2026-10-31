@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "scope": "read-only JSON/code directed check; no Unity execution",
+  "sourceProfile": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-journey-1\\profile-journey-20261029235058182\\profile.json",
+  "targetProfile": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-reward-transition-1\\profile-rewardTransition-20261030002552658\\profile.json",
+  "baseUpgrade": 0,
+  "baseCapacity": 16,
+  "resourceBonusBeforeReset": 0,
+  "resourceBonusAfterReset": 0,
+  "resourceBonusAfterReplay": 0,
+  "removed": [
+    {
+      "uid": "omvu76bfdf3v1c",
+      "id": "tt2-turtlearmor"
+    },
+    {
+      "uid": "omvu76bfde8q5x",
+      "id": "tt12-raydragon"
+    },
+    {
+      "uid": "omvu76bfd6p2y7",
+      "id": "cmtna0nb1yxt"
+    }
+  ],
+  "timeline": [
+    {
+      "tick": 110,
+      "name": "page-EmergencyModal-2",
+      "texts": [
+        "7<size=18><color=#91a3a7>/25</color></size>"
+      ]
+    },
+    {
+      "tick": 115,
+      "name": "page-ChestOpenScreen-3",
+      "texts": [
+        "[[icon:bag]] 7/25 格",
+        "7<size=18><color=#91a3a7>/25</color></size>"
+      ]
+    },
+    {
+      "tick": 119,
+      "name": "page-BattleScreen-3",
+      "texts": [
+        "本牌内置 3×3 格空间，可容纳所有类型的资源卡牌。",
+        "7<size=18><color=#91a3a7>/25</color></size>"
+      ]
+    },
+    {
+      "tick": 141,
+      "name": "page-EventDialogScreen-3",
+      "texts": [
+        "7<size=18><color=#91a3a7>/25</color></size>"
+      ]
+    },
+    {
+      "tick": 154,
+      "name": "page-AltarRitualScreen-3",
+      "texts": [
+        "7<size=18><color=#91a3a7>/16</color></size>"
+      ]
+    }
+  ],
+  "sha256": {
+    "搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-journey-1\\profile-journey-20261029235058182\\profile.json": "7a788b8cbe4ea42117134c9c6b67ae5da7d97f60d6cbf8ca4c07b3e828c66110",
+    "搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-reward-transition-1\\profile-rewardTransition-20261030002552658\\profile.json": "b18498d8c0cf6beb718d4d444a7297605204eb3577d64b750406d313a4d22438",
+    "搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-journey-1\\journey-trace.json": "92e59cfc71718a4c89ce98ab7944c6e45dfccc0fc026b6ca727bf6e904d88ccb",
+    "搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-reward-transition-1\\rewardTransition-trace.json": "fa8483c16b87fa0e04353a06bc281dbb49f1f3cbc5149e35bd94786dae3684f2",
+    "搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-journey-1\\journey-page-ChestOpenScreen-3.png": "fcceae2c12dc6a6a53db2c8cf8501b7cee53ce69ba8d583efe26e8ee3ed8adb0",
+    "搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-reward-transition-1\\rewardTransition-exact-old-medium-selected.png": "d68aa3153cfc5675e62908c1b782422bdb4daf711c3a4415ea32322f20d8c62c",
+    "SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.cs": "9c5c58af2ecfb7c0fbb14b163dd50428d5b302f779e6122ed4b7286f74fe7264",
+    "SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\BaseData.cs": "45d297fff5224306db0a66fd22eeea8aefacc3bd066189f65b8a74ab71fbeb9f",
+    "SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\CardContainerCommands.cs": "a77ee6c656911bebeb734e7017d8487803d2321d93f23a58f1079319207c2687",
+    "SoudacheUnity\\Assets\\Scripts\\Sdt.Core\\GameRules.cs": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed",
+    "SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\ChestOpenScreen.cs": "62a15f2abf8483368ca26c0a313acd05d7e642c930427ea59920be64543cb40b",
+    "SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentRewardScene.cs": "5fb8576fd808e8fb0c2aead3eca2d629c15b72277ebd2f0a3aaca14220e36819",
+    "SoudacheUnity\\Assets\\Editor\\CurrentMigrationFlowValidation.Journey.cs": "cd86bb33b2d9af9cf824d9388bd83d47e0538635d59819b6d1724c49cd733154",
+    "SoudacheUnity\\Assets\\Editor\\CurrentMigrationFlowValidation.RewardTransition.cs": "f115c0eae1b17f63e8977d92b1c4b70962bac231d70f337132668934dfdf8c1e",
+    "搜打撤\\game\\src\\core\\card-capacity.js": "859f81cc941d1db172747667fc455ee09a35e911d635d7966f9e999aa8838bb5",
+    "搜打撤\\game\\src\\hub\\base.js": "91fb4d16f352c43ebfa737caed9e932489d86e5405b55dedeb133633cec97e05",
+    "搜打撤\\game\\src\\run\\game-session-restoration.js": "c53d0e80747349fec479825c973e0d2185b95e3dfac8c168d9eb421ca4e0a750",
+    "搜打撤\\game\\src\\run\\game.session.bag.js": "aa131eccfb2308e5c25a51489a872563df110e3b27c50d829cf992eb1a5a344f"
+  }
+}

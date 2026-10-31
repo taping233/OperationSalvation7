@@ -1,0 +1,24 @@
+[
+  {
+    "file": "NotoSansSC-Regular.ttf",
+    "weight": 400,
+    "source": "_planning\\migration-1029\\import-quality\\static-fonts\\original-variable.ttf",
+    "sourceSha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+    "sha256": "ecdbb846e2edf2d4a361b6557dc2b8a09b1a8bedbd3156171c34caef64542c9d",
+    "glyphs": 31036,
+    "codepoints": 30890,
+    "variable": false,
+    "output": "_planning\\migration-1029\\import-quality\\static-fonts\\NotoSansSC-Regular.ttf"
+  },
+  {
+    "file": "NotoSansSC-Bold.ttf",
+    "weight": 700,
+    "source": "_planning\\migration-1029\\import-quality\\static-fonts\\original-variable.ttf",
+    "sourceSha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+    "sha256": "72ce56f3dae8d882987b15c039d199d9cbe526a27e4fa2c2b32481205d5affc8",
+    "glyphs": 31036,
+    "codepoints": 30890,
+    "variable": false,
+    "output": "_planning\\migration-1029\\import-quality\\static-fonts\\NotoSansSC-Bold.ttf"
+  }
+]

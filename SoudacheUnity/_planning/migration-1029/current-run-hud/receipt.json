@@ -1,0 +1,32 @@
+{
+  "status": "frozen-complete-uncommitted-native-review-pending",
+  "frozenAt": "2026-10-30T04:23:58.031093",
+  "runtimeSha256": {
+    "Assets/Scripts/Sdt.UI/Kit/DesktopRunHud.cs": "c13f1d8b831986b897d39445a00f197840d6f8627da8f1820c5fbee4543b818d",
+    "Assets/Scripts/Sdt.UI/Kit/App.cs": "c0afff7af24b361bef127f40a9bba2c2da4d41d3d2c56126a4abbdd56de58a26",
+    "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs": "d53c6d5b031316554fd5e8d09f5958e841b586546f9616ca3facc1bc9d9d76ba",
+    "Assets/Scripts/Sdt.UI/Kit/CurrentMapTools.cs": "9157b15626700387fb56b3b5b6a54c18e96590796615c181e3a30ef0995fbd44",
+    "Assets/Scripts/Sdt.UI/Kit/CurrentRunHudView.cs": "4e40830279864762cc58551d3c25a02435042be8713e426aeea638a1567e7502",
+    "Assets/Scripts/Sdt.UI/Kit/CurrentEndTurnHold.cs": "63cf3a627b1ef4c4bb1f77c0c303bc39902d7f42d2914e4fd817804bb647410c",
+    "Assets/Scripts/Sdt.Res/Res.CurrentRunHudAssets.cs": "87e4ca204bbe5b7f29f4fdf4c95d250c8febe545f474a907c810b575c1b1a356",
+    "Assets/Scripts/Sdt.View/BoardView.cs": "6b772a54af33480a201ff1c2260eca371951d4b5e4b96309594c37bd76010afd",
+    "Assets/Scripts/Sdt.View/BoardCamera.cs": "5c3dddf9448a084d5cf1bdd187fc9adf62d559c2e9e68fb33c48538dfe5a3a6b",
+    "Assets/Scripts/Sdt.View/Fx.cs": "c10d71cdd02f9f148bc38dd8e52f18d0f599ce1e095d4896a9138faa2c81e141"
+  },
+  "compile": {
+    "exit": 0,
+    "errors": 0,
+    "warnings": 8,
+    "log": "private-check/latest.log"
+  },
+  "behavior": {
+    "exit": 0,
+    "assertions": 21,
+    "log": "behavior-check/latest.log"
+  },
+  "assetsPixelExact": true,
+  "nativeWindowVerified": false,
+  "unityLaunched": false,
+  "frontWindowTouched": false,
+  "sharedCompileTouched": false
+}

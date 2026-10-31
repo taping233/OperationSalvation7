@@ -1,0 +1,15 @@
+{
+  "scope": "Editor probe extension only; production suppression routing owned by Root",
+  "inputs": {
+    "Assets/Editor/CurrentBattlePileValidation.cs": "d8a460cc4973658511b5460f5b622c09a2ecdacc2e0bffa7084b215746e719a5",
+    "Assets/Scripts/Sdt.Run/RunEvents.cs": "3251e3de028c40307c199b67ac6437709df0c4bc7598840c4af01614a835ff4f",
+    "Assets/Scripts/Sdt.Boot/BattleBridge.cs": "9fd99370b024e86a7a11d754f6d6c6454b98012f14ceaba95ca0aafb9f202a1c",
+    "Assets/Scripts/Sdt.UI/Kit/DesktopRunHud.cs": "97a1789705c8ebc979b33ee343e70c2055f4318c4c13df8acef15532ccb64ef4"
+  },
+  "actualStartEncounterWarning": "observed before BattleRequested; Tone warn plus SuppressNotice true required",
+  "actualBeginNormalSystem": "normal starter-deck sys log plus SuppressNotice true required",
+  "uiWarning": "RunLog.Log(warn) remains unsuppressed and visible in OperationNotice with warn color",
+  "retainedChecks": "title glyph geometry and no global notice over pile; all existing pile pointer/wheel/focus checks",
+  "nativeRun": false,
+  "compile": "private production 0 errors/10 existing warnings; Editor 0 errors/4 existing OffscreenCapture warnings"
+}

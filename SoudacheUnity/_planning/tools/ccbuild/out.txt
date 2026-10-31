@@ -1,0 +1,21 @@
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(582,27): error CS1503: 参数 1: 无法从“int?”转换为“int” [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1201,31): error CS0029: 无法将类型“(int layerIdx, int trackPos, string pair)”隐式转换为“string” [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1236,36): error CS0119: “Extensions.Value<U>(IEnumerable<JToken>)”是一个 方法，这在给定的上下文中无效 [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1236,65): error CS0119: “Extensions.Value<U>(IEnumerable<JToken>)”是一个 方法，这在给定的上下文中无效 [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1237,42): error CS0119: “Extensions.Value<U>(IEnumerable<JToken>)”是一个 方法，这在给定的上下文中无效 [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1237,54): error CS0119: “Extensions.Value<U>(IEnumerable<JToken>)”是一个 方法，这在给定的上下文中无效 [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1274,26): error CS1503: 参数 1: 无法从“System.Collections.Generic.List<Sdt.Core.InvSlot>”转换为“System.Collections.Generic.IEnumerable<Sdt.Run.InventorySlot>” [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+
+生成失败。
+
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(582,27): error CS1503: 参数 1: 无法从“int?”转换为“int” [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1201,31): error CS0029: 无法将类型“(int layerIdx, int trackPos, string pair)”隐式转换为“string” [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1236,36): error CS0119: “Extensions.Value<U>(IEnumerable<JToken>)”是一个 方法，这在给定的上下文中无效 [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1236,65): error CS0119: “Extensions.Value<U>(IEnumerable<JToken>)”是一个 方法，这在给定的上下文中无效 [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1237,42): error CS0119: “Extensions.Value<U>(IEnumerable<JToken>)”是一个 方法，这在给定的上下文中无效 [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1237,54): error CS0119: “Extensions.Value<U>(IEnumerable<JToken>)”是一个 方法，这在给定的上下文中无效 [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+D:\素材\代号柒\SoudacheUnity\Assets\Scripts\Sdt.Run\GameRuntime.cs(1274,26): error CS1503: 参数 1: 无法从“System.Collections.Generic.List<Sdt.Core.InvSlot>”转换为“System.Collections.Generic.IEnumerable<Sdt.Run.InventorySlot>” [D:\素材\代号柒\SoudacheUnity\_planning\tools\ccbuild\Sdt.Run.csproj]
+    0 个警告
+    7 个错误
+
+已用时间 00:00:03.35

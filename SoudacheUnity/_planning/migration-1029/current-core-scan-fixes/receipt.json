@@ -1,0 +1,465 @@
+{
+  "frozen": true,
+  "catalog": 291,
+  "sourceSha256": {
+    "battle/core/battle.exec-play.domain.js": "2b6b7eda1142fcb04aba856633d601fef8a9baa852ecdd6ab3e290203e30ec1e",
+    "battle/core/battle.resolution.domain.js": "3cc0d0691c1784dcaaee321a68f22898476377053e7d0e5fd14f508bdc39fd51",
+    "battle/effects/battle.status-operations.domain.js": "425f6e1ddd0cc05431d523ad0742844942892077f263c18f61d4fd98d6db3a75",
+    "cards/card-energy-policy.js": "348c48bc0b53755fb0d7ffd887ef3e18fd7442afbf9498716bc0f03bb1b579e9",
+    "battle/core/battle.effect-assembly.domain.js": "6704ae9af91beea4b87c66ab55f9b3c9496122e06efc5f541f2aa12079d55b93",
+    "battle/core/combat.factory.js": "980494c55f4381167a2142bf60ef99e74a8416f646e2348c14357d5fa2f4c0d3",
+    "core/random-service.js": "d7c4481c5673646ac055c83483ad5304d1ce61cb102892b17a0bbb32a66bdeca",
+    "core/random-core.js": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174",
+    "core/random-streams.js": "af4e4cac02117d5e37cd239889bcc97356c2ba6a9dcee36cd05e847846dd9897",
+    "battle/effects/card-semantic-operations.js": "4457bdbc738cb19ec2649c062d38b50d5c094665dec96c03c354533c2b8f3eff"
+  },
+  "productionCoreSha256": {
+    "Cards.cs": "efc8b15298352114b134372d6e4d40de3244da93adb7bd2e01f0e3c106701a21",
+    "CardsExtras.cs": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470",
+    "CharacterTable.cs": "f7f33fda167b7275bcca4d26e25f0a6345087e0cc3c7f84e1dd3edebfae195a6",
+    "ChestLoot.cs": "0b09603d4ec67651801b5b85ed925144f14bb7a7a58a0e89d0a8e2f68a97e87b",
+    "CombatResolver.cs": "32dd0e1558d1fb62fda29b88c94e85c74e1fe02d63338268d726ceca0b1fd242",
+    "CurrentMapData.cs": "287c8d99bc7d852ef8273e921867204bc2e0b319f17c1b43c329ea08a938b800",
+    "GameRules.cs": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed",
+    "KoiPondModel.cs": "70799c15f470491a86adc5e3944f8a288aea6362274f328dac4fc3459987fde5",
+    "LayeredMapGenerator.cs": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3",
+    "MapModel.cs": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9",
+    "RewardReceipt.cs": "716e80ecdee107982f725e4768964575911d07b8ff7ac37da2998fc866f07cd1",
+    "Rng.cs": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a",
+    "RunState.cs": "baa66ca2f0119f7bfd6c5df617ba3f77d23c64c3a94340d1f86751ef65fdcfce",
+    "ShopOfferReceipt.cs": "5088ca7446567ff33bbcf18362bd356af9a3f7e19ecc26bc9ee53efd6087ad4d",
+    "Battle\\BattleActorPresentation.cs": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a",
+    "Battle\\BattleHandPayment.cs": "addb0f680933c19b718f98002678b02c1eab3606563a1ef2612ccbb5c469c2a1",
+    "Battle\\BattleHandRetention.cs": "7322fb225faaba9ba148da64a8c280f122673c8e4bfe5ed2878a38d395883a1e",
+    "Battle\\BattleHandTransforms.cs": "2bb817c0acd3af5024034e4c12c3ecddbefe478f075a103e384650fc08723c47",
+    "Battle\\BattleItems.cs": "8ecab8fc3770a22210f5cb35e28a54262006440b4d34841227eeba3c1e5924ba",
+    "Battle\\BattlePlayerEffects.cs": "86ca5202e205dc4803eecb3d9ca68223c69709d73c20bc0d3727db716aca4fc3",
+    "Battle\\BattleRestartCheckpoint.cs": "3cb6cbd98dabc5631140902a86c961c9ac4e471b55f6f9c10d108b28d5438cfe",
+    "Battle\\BattleRuleConsumers.cs": "e862713c60b6659ba2b3afaf37624ef1a03aac59c508eebb3281bd4812030d04",
+    "Battle\\BattleRules.cs": "fddb1f24a80d9387d999214415f7b078b0eb4ade955e36f9072427d09b1798fb",
+    "Battle\\BattleSession.cs": "5cba112d6c6e75cfb0214863bfbbdd06db36cca376f4bfc2a0b771afef73a084",
+    "Battle\\BattleStructuredSourceSemantics.cs": "d9511196df1d295a9d5115542798c05a4237d59ad8cff1eaac7b9cc80ef83dd0",
+    "Battle\\BattleSummary.cs": "e92ca71430ff55a791c4e789e4ce2ed2425c3d237804642eb879b7caf1ab010d",
+    "Battle\\BattleTargetSelections.cs": "94e47885b7e54f7827e0f367a59355bcffc2525b4de87bba0eba9a71fc6e0268",
+    "Battle\\BattleTurnForecast.cs": "078203f3ce41621d5a8b6587b8d2cfc3b5a7db9815368cd41c75058646a6ea90",
+    "Battle\\BuiltinCardIdentities.cs": "a3ada0917af87de1711dab489f9b53a4533324ed42e57d602db9bcddcf89a5d5",
+    "Battle\\CurrentBattlePools.cs": "a3073fbf236a1a3bb2297ccd12b7c0fde24ad6faf67316438d6ec9b81f154af5",
+    "Battle\\CurrentBossMechanics.cs": "644a8f0928c831a50a2b935042ade0553e5d0958a8d113aefa7545445c864a0a",
+    "Battle\\DeckBottomDiscovery.cs": "b665975e94a231537017509f16798e585aa6c6733738b623e65db7caa69f3179",
+    "Battle\\DeckOps.cs": "0aa9473b6a1c6fe7aeae6256824f352006132e91a8afcf95b9f505798a516c51",
+    "Battle\\EffectExecutor.cs": "69ef97a86d2870c8267069ee5e1ed2bbf6ff19d5e24000bef1f88819e519d632",
+    "Battle\\RuleValue.cs": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb",
+    "Battle\\StructuredRules.cs": "8962d8162dcb1bae8f247ef3ae79bdce4b3277418d06988afebed7c1e5dba516",
+    "Data\\CardDatabase.cs": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e",
+    "Data\\CurrentBalanceData.cs": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740",
+    "Data\\CurrentChestData.cs": "7dfd4b8993fa3b7bc85acec47195d69d819173c1a96eb89d9fd841e0f58dec2f",
+    "Data\\EventDatabase.cs": "935646f0a1f0d2502f58747420abd62d4908c78e51d5e70610f99c757f785579",
+    "Data\\EventProgress.cs": "0722be487263cc278ee3a68306c301ecf374358e3e64d92ff5ae20500af64136",
+    "Data\\SceneCopy.cs": "9ca1eedae3dd26063c9c1d5e1f6da3f966532a476af8c71b1fb30fe9a43b680f"
+  },
+  "scan": {
+    "tested": 129,
+    "identical": 128,
+    "remaining": "cmtn1r10xnl1 discoverPlus already-known snapshot projection"
+  },
+  "boundaries": {
+    "total": 39,
+    "equal": 38,
+    "knownUnreachableSyntheticDeviation": [
+      "replay-async-empty"
+    ],
+    "rngStatesEqual": 39
+  },
+  "v8": {
+    "node": "v24.13.0",
+    "v8": "13.6.233.17-node.37",
+    "verified": 10000,
+    "digest": "6fee34d84d55885a5a9d00f3328b2ca1f498df19cd14c977fe1691037d7a2ad6",
+    "vectors": [
+      {
+        "seed": 0,
+        "actual": [
+          "poison",
+          "healban",
+          "silence",
+          "abreak",
+          "bleed",
+          "freeze"
+        ],
+        "trace": [
+          [
+            "poison",
+            "bleed",
+            -0.2672765012830496
+          ],
+          [
+            "freeze",
+            "poison",
+            0.049033328890800476
+          ],
+          [
+            "freeze",
+            "bleed",
+            0.3761843761894852
+          ],
+          [
+            "silence",
+            "bleed",
+            -0.12363406782969832
+          ],
+          [
+            "silence",
+            "poison",
+            0.18540248018689454
+          ],
+          [
+            "abreak",
+            "bleed",
+            -0.003935668151825666
+          ],
+          [
+            "abreak",
+            "silence",
+            0.38813215401023626
+          ],
+          [
+            "healban",
+            "abreak",
+            -0.4337782326620072
+          ],
+          [
+            "healban",
+            "silence",
+            -0.21927764522843063
+          ],
+          [
+            "healban",
+            "poison",
+            0.11978208576329052
+          ]
+        ],
+        "rng": {
+          "version": 2,
+          "seed": 0,
+          "streams": {
+            "generation": 1553158855
+          }
+        }
+      },
+      {
+        "seed": 1,
+        "actual": [
+          "healban",
+          "bleed",
+          "freeze",
+          "silence",
+          "poison",
+          "abreak"
+        ],
+        "trace": [
+          [
+            "poison",
+            "bleed",
+            0.484652993734926
+          ],
+          [
+            "freeze",
+            "poison",
+            -0.028047143947333097
+          ],
+          [
+            "freeze",
+            "poison",
+            -0.23848157725296915
+          ],
+          [
+            "freeze",
+            "bleed",
+            0.44078983389772475
+          ],
+          [
+            "silence",
+            "freeze",
+            0.09174265037290752
+          ],
+          [
+            "silence",
+            "poison",
+            -0.46974767139181495
+          ],
+          [
+            "abreak",
+            "silence",
+            0.3099047210998833
+          ],
+          [
+            "abreak",
+            "poison",
+            0.4102507554925978
+          ],
+          [
+            "healban",
+            "silence",
+            -0.27811731304973364
+          ],
+          [
+            "healban",
+            "freeze",
+            -0.20124491304159164
+          ],
+          [
+            "healban",
+            "bleed",
+            -0.15952014923095703
+          ]
+        ],
+        "rng": {
+          "version": 2,
+          "seed": 1,
+          "streams": {
+            "generation": 611766131
+          }
+        }
+      },
+      {
+        "seed": 2,
+        "actual": [
+          "freeze",
+          "abreak",
+          "poison",
+          "healban",
+          "bleed",
+          "silence"
+        ],
+        "trace": [
+          [
+            "poison",
+            "bleed",
+            -0.2853170661255717
+          ],
+          [
+            "freeze",
+            "poison",
+            0.22991290758363903
+          ],
+          [
+            "freeze",
+            "bleed",
+            -0.4686079933308065
+          ],
+          [
+            "freeze",
+            "poison",
+            -0.24718976742587984
+          ],
+          [
+            "silence",
+            "poison",
+            0.23625110113061965
+          ],
+          [
+            "silence",
+            "bleed",
+            0.3968470338732004
+          ],
+          [
+            "abreak",
+            "bleed",
+            -0.46072451095096767
+          ],
+          [
+            "abreak",
+            "poison",
+            -0.06641804683022201
+          ],
+          [
+            "abreak",
+            "freeze",
+            0.22498367028310895
+          ],
+          [
+            "healban",
+            "poison",
+            0.1239227179903537
+          ],
+          [
+            "healban",
+            "silence",
+            -0.07829196355305612
+          ],
+          [
+            "healban",
+            "bleed",
+            -0.21287064929492772
+          ]
+        ],
+        "rng": {
+          "version": 2,
+          "seed": 2,
+          "streams": {
+            "generation": 2128019435
+          }
+        }
+      },
+      {
+        "seed": 123,
+        "actual": [
+          "freeze",
+          "healban",
+          "poison",
+          "bleed",
+          "abreak",
+          "silence"
+        ],
+        "trace": [
+          [
+            "poison",
+            "bleed",
+            -0.14420956396497786
+          ],
+          [
+            "freeze",
+            "poison",
+            0.08976687048561871
+          ],
+          [
+            "freeze",
+            "bleed",
+            -0.3846872334834188
+          ],
+          [
+            "freeze",
+            "poison",
+            -0.3690188922919333
+          ],
+          [
+            "silence",
+            "poison",
+            0.2906439264770597
+          ],
+          [
+            "silence",
+            "bleed",
+            0.35477635939605534
+          ],
+          [
+            "abreak",
+            "bleed",
+            0.4978029397316277
+          ],
+          [
+            "abreak",
+            "silence",
+            -0.28970059868879616
+          ],
+          [
+            "healban",
+            "bleed",
+            -0.09495892864651978
+          ],
+          [
+            "healban",
+            "poison",
+            -0.2342853827867657
+          ],
+          [
+            "healban",
+            "freeze",
+            0.3623541225679219
+          ]
+        ],
+        "rng": {
+          "version": 2,
+          "seed": 123,
+          "streams": {
+            "generation": 969294680
+          }
+        }
+      },
+      {
+        "seed": 999,
+        "actual": [
+          "abreak",
+          "bleed",
+          "poison",
+          "healban",
+          "freeze",
+          "silence"
+        ],
+        "trace": [
+          [
+            "poison",
+            "bleed",
+            0.11860921024344862
+          ],
+          [
+            "freeze",
+            "poison",
+            0.027954152319580317
+          ],
+          [
+            "silence",
+            "freeze",
+            -0.3940466360654682
+          ],
+          [
+            "silence",
+            "poison",
+            0.3171310133766383
+          ],
+          [
+            "silence",
+            "freeze",
+            0.36665092315524817
+          ],
+          [
+            "abreak",
+            "freeze",
+            -0.19245816441252828
+          ],
+          [
+            "abreak",
+            "poison",
+            -0.40571612073108554
+          ],
+          [
+            "abreak",
+            "bleed",
+            -0.1367084130179137
+          ],
+          [
+            "healban",
+            "poison",
+            0.4942794148810208
+          ],
+          [
+            "healban",
+            "silence",
+            -0.12653184565715492
+          ],
+          [
+            "healban",
+            "freeze",
+            -0.0560919817071408
+          ]
+        ],
+        "rng": {
+          "version": 2,
+          "seed": 999,
+          "streams": {
+            "generation": 2052787037
+          }
+        }
+      }
+    ]
+  },
+  "regressions": {
+    "integration": 1814,
+    "forecast": 289,
+    "semantics": 167,
+    "targets": 47
+  },
+  "selfExtendCurrentCards": [],
+  "replayAsyncCurrentCards": [],
+  "native": "Not run by this agent; Root native validation pending"
+}

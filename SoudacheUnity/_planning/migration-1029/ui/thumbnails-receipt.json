@@ -1,0 +1,1895 @@
+{
+  "count": 270,
+  "files": [
+    {
+      "source": "thumbs/cards/items/builtin-fuyuanyao.webp",
+      "destination": "Art/Current/thumbs/cards/items/builtin-fuyuanyao.png",
+      "sourceSha256": "2c76c9bafc4baceb181231900a5d55f3d87a0dbe39c89338f26a25482642755c",
+      "outputSha256": "d6fbad48319ecd4b97574d9b2b06e66256c501b6481906cfcd8f14103f5bb793",
+      "bytes": 64686
+    },
+    {
+      "source": "thumbs/cards/martial-cc-chase-slash.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cc-chase-slash.png",
+      "sourceSha256": "6acc8055441b40865260548511ee73fc1b7c2a8cd13e8c616f7f4d5abc30a824",
+      "outputSha256": "5c3858c9284e368b3b4d945492a2680f3ab85f469cf26bd367ea90220591a062",
+      "bytes": 146271
+    },
+    {
+      "source": "thumbs/cards/martial-cc-cursed-blade.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cc-cursed-blade.png",
+      "sourceSha256": "e4383fd8c2a1549e36b1b6622976e6f2d698381d824c9ea5fd968693e4513cd2",
+      "outputSha256": "bda79d369f5abc3187195f113d4b88f195ba902e576a1cc0d07f19dacbdf6c02",
+      "bytes": 157288
+    },
+    {
+      "source": "thumbs/cards/spell-cc-demon.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cc-demon.png",
+      "sourceSha256": "c0d8ba10e9d78f11dd8403464d268a6d41c4e5bb903a65d164c0ddfbec795537",
+      "outputSha256": "45daa5ebc046325418fe2c05266dd8921cad1151f23532abb70eb733db1211d2",
+      "bytes": 177751
+    },
+    {
+      "source": "thumbs/cards/spell-cc-double-boom.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cc-double-boom.png",
+      "sourceSha256": "17ffdd09a98b73dab884c35814d4fbaa9faae5b06335170c6c9c8ccb82f01c02",
+      "outputSha256": "c7b14f59d71d0f89710fde3807742c7c86149dad2b2f11eddc6264e1b5f71899",
+      "bytes": 116603
+    },
+    {
+      "source": "thumbs/cards/martial-cc-dual-wield.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cc-dual-wield.png",
+      "sourceSha256": "8c4880aaae19784e773e7570ef8f772b7b50cbaa8716cbd26069ddd3230ae86e",
+      "outputSha256": "be8cbe3182e6ef4ee8223561b410c7e75eff1e07f4c934c95de7d7a25a51b4f5",
+      "bytes": 274227
+    },
+    {
+      "source": "thumbs/cards/spell-cc-ember-burst.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cc-ember-burst.png",
+      "sourceSha256": "73cf0e48d98a08af72b91e8958545ae0350867b9ce1a2004d0a21f6645981198",
+      "outputSha256": "4bcf0686f83c02dfe483b8f19cae159c3e3d6d1a4d3141edc144ceaab063dadc",
+      "bytes": 151933
+    },
+    {
+      "source": "thumbs/cards/martial-cc-last-stand.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cc-last-stand.png",
+      "sourceSha256": "7d1676b4a10e7f2db271aa8dcc092239026a69aa163ba1599158e511509cf84a",
+      "outputSha256": "f6b8549170cf5c7262a7a846efc31ad0ab6fc5c7051152139067235e822e5ca9",
+      "bytes": 155367
+    },
+    {
+      "source": "thumbs/cards/spell-cc-lava-blast.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cc-lava-blast.png",
+      "sourceSha256": "832b96ee004a687c5d463aec7455a4e8500bdeb7201a310cd0eafc8ef7f462af",
+      "outputSha256": "59f5f84e522486aa7d844f7ce4c11be28df1ac2c8a0fddd067b0e017fb1ce409",
+      "bytes": 168521
+    },
+    {
+      "source": "thumbs/cards/spell-cc-mana-surge.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cc-mana-surge.png",
+      "sourceSha256": "406acf5ddf91720709cbb4ecba1de31dacda8192caceae88ac0c3907d586f713",
+      "outputSha256": "9f80837052e0ca74c35c165a67a4d8ce3e4c5dc074e70700359187759f569d36",
+      "bytes": 183305
+    },
+    {
+      "source": "thumbs/cards/spell-cc-poison-burst.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cc-poison-burst.png",
+      "sourceSha256": "608fec1016ca4d96098c2dafbef383ededb36f803464a5da5cf7d353b57dae07",
+      "outputSha256": "4d785b07b38bcc4948e2af3e67635925fcaa066bcaf7071c54fdb8191857359b",
+      "bytes": 138542
+    },
+    {
+      "source": "thumbs/cards/martial-cc-rapid-fire.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cc-rapid-fire.png",
+      "sourceSha256": "ba92280679b5e446d49c5e0af356b34c7b7ee9b98d5daa60334315074d76f3df",
+      "outputSha256": "10f303ea5ee6ea7de75c7c64c8ed9f436c31d4afda184873c1b42f62f85eef29",
+      "bytes": 143132
+    },
+    {
+      "source": "thumbs/cards/spell-cc-rot-seed.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cc-rot-seed.png",
+      "sourceSha256": "3861f5f5bb7e3c62ce4b39841524ddcc64ca6581230c52e7af6544f2b0e33556",
+      "outputSha256": "cbfc5aa66ae539bf0ab51f3ddd52e5b7b32ca9306021d7f474dee0f92498cb3f",
+      "bytes": 97811
+    },
+    {
+      "source": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtn1p9vb5au.png",
+      "sourceSha256": "4cad1117d5b355a33951ac9f77054052a381c4335b8e198bb14a5115479222f9",
+      "outputSha256": "2b71caf6cd5f8526095209e6681ef2e0e71d9832a5e52ea306ba5ded9269adf1",
+      "bytes": 269812
+    },
+    {
+      "source": "thumbs/cards/martial-cc-unmoved.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cc-unmoved.png",
+      "sourceSha256": "d76673b8bd0bc7c4fac96d72f8fec2a2007b7f2be665cd40c73f1324aace262e",
+      "outputSha256": "586865a9c47ff0572519b655a7305c3777461597541e0b86e71f6ee36da4800a",
+      "bytes": 145798
+    },
+    {
+      "source": "thumbs/cards/items/cmtmvq6ss84l.webp",
+      "destination": "Art/Current/thumbs/cards/items/cmtmvq6ss84l.png",
+      "sourceSha256": "608adbd518518ee22223c5c4efe9c14942032b697e420da62c913e803e7c328a",
+      "outputSha256": "a121b30367c9a544dab93c765ce9d1e6ed0d546087e7372a9ed273bf96bd87e2",
+      "bytes": 137455
+    },
+    {
+      "source": "thumbs/cards/martial-cmtn0pbkmnvc.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cmtn0pbkmnvc.png",
+      "sourceSha256": "210afd327470ee2653836ffe1cc161ea93cecb5b84d2b127bca3ff1b87376725",
+      "outputSha256": "0623307a476297ed60a38f19e17bd6f24cddee321729a322121c8d73d5b97fbb",
+      "bytes": 46726
+    },
+    {
+      "source": "thumbs/cards/martial-cmtn0xt0zr7.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cmtn0xt0zr7.png",
+      "sourceSha256": "0e2ed4c5a9c70032f8d6b7b24bef6cb67604fa09e26ced7b0cb6a0851130438f",
+      "outputSha256": "67aebefb522ec60d57d8dbb0b5738f0902dd1c49d908e161ad5505a5d6e97519",
+      "bytes": 133050
+    },
+    {
+      "source": "thumbs/cards/spell-cmtn125e1nk0.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtn125e1nk0.png",
+      "sourceSha256": "094b8e2f4369611eb2e0ce700a4b6d427e8bdc7a064cee1bef593dd2d60c202d",
+      "outputSha256": "3b3c4619c2c495ef90d3561e3c1d89839c93219591fe1d6e926f4ebb78ad1e19",
+      "bytes": 143273
+    },
+    {
+      "source": "thumbs/cards/spell-cmtn1epgt20j.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtn1epgt20j.png",
+      "sourceSha256": "4dd573dcb452d9b36b6c018ac3c00eecf139168ff8afa0fcf1f29f99647e4984",
+      "outputSha256": "450b410d202a14f22ad852533fe42dd9e0dcfc94e3229df2a4a6bf0721500b87",
+      "bytes": 90726
+    },
+    {
+      "source": "thumbs/cards/spell-cmtn1gfhczzj.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtn1gfhczzj.png",
+      "sourceSha256": "f4183901c50841339a052747592256b9c5654bbcc3af9df94287b47e1b051a87",
+      "outputSha256": "b142b4307e6f0e4aed89e1cc93e1a33e48bfe76bda0dc0600b766d6a848033ec",
+      "bytes": 147427
+    },
+    {
+      "source": "thumbs/cards/martial-cmtn1i64j7y7.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cmtn1i64j7y7.png",
+      "sourceSha256": "6f8228c10b287040de91add04783c170567b789a84a58abe9339cdad99a3fe28",
+      "outputSha256": "f5ab0347bfefde05f8418f93a3d3f547d772dda405fbbbfe48f0f05ac9cb5fee",
+      "bytes": 144269
+    },
+    {
+      "source": "thumbs/cards/spell-cmtn1lbhbqi4.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtn1lbhbqi4.png",
+      "sourceSha256": "6712dbf9cb47a95cede452ccadeaa8e1b423aae0224ebf774fbe19db51eaef2e",
+      "outputSha256": "1fc2939d1657582223f5730b6bced1d8b5945be24b628405829f7bfaef677d3c",
+      "bytes": 197665
+    },
+    {
+      "source": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtn1ntxzoc4.png",
+      "sourceSha256": "043aad85e333a74c5fceecc210086b924d2362a2ede84040abb52dedd8b7f8b2",
+      "outputSha256": "63c84451e5b6fbed1be335250377c313094d1edd9632a38eec0604c3907cbdf2",
+      "bytes": 292214
+    },
+    {
+      "source": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtn1p9vb5au.png",
+      "sourceSha256": "4cad1117d5b355a33951ac9f77054052a381c4335b8e198bb14a5115479222f9",
+      "outputSha256": "2b71caf6cd5f8526095209e6681ef2e0e71d9832a5e52ea306ba5ded9269adf1",
+      "bytes": 269812
+    },
+    {
+      "source": "thumbs/cards/spell-cmtn1r10xnl1.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtn1r10xnl1.png",
+      "sourceSha256": "bb8dcc1ae55056f0c6ddd63e4dddde52c8a077578289eaaf12d91fe9e1c8ff77",
+      "outputSha256": "87c43de6e12e9fec566414c83079ae6bb92b84eddb191b594a7ad141b223ebae",
+      "bytes": 181358
+    },
+    {
+      "source": "thumbs/cards/martial-cmtn1wnhhym.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cmtn1wnhhym.png",
+      "sourceSha256": "7191b3c1324fa5358a97108354514277dd1be4d65db87899b260449b3664509b",
+      "outputSha256": "10e3f5d96ee7b85d06a124e9e3a6c5c5d526bb1a01c16de1bdb3815566bf7d78",
+      "bytes": 265085
+    },
+    {
+      "source": "thumbs/cards/martial-cmtn233trmeg.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cmtn233trmeg.png",
+      "sourceSha256": "c57eb463d9d8176ce12d8e8af40516456218dbc19868174d39ea46aa6968ee29",
+      "outputSha256": "0971a4c84dddc7b13cfa0fe4a8a7dc7c6aa3da9941d75e07ab8ac91565c527a3",
+      "bytes": 75657
+    },
+    {
+      "source": "thumbs/cards/spell-cmtn28jv33wx.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtn28jv33wx.png",
+      "sourceSha256": "b60597269fc771d9eb267e828e1e6fc5123c11011f9d61ed2cdda1581014f2c0",
+      "outputSha256": "6959f8c19e22f0b4f14e4cc6213f07217033119572cae6276a6840ded32c673e",
+      "bytes": 213357
+    },
+    {
+      "source": "thumbs/cards/martial-cmtn2jc142dj.webp",
+      "destination": "Art/Current/thumbs/cards/martial-cmtn2jc142dj.png",
+      "sourceSha256": "2bcebe095fa6eacd05edf45085ac6b87bf8f7f626805da30489a284cd398bed2",
+      "outputSha256": "4401e9fc54cffb9460516d7f170bd01b5ffa42e268a4d19f5ed59a0e01e95f48",
+      "bytes": 109378
+    },
+    {
+      "source": "thumbs/cards/items/builtin-fuyuanyao.webp",
+      "destination": "Art/Current/thumbs/cards/items/builtin-fuyuanyao.png",
+      "sourceSha256": "2c76c9bafc4baceb181231900a5d55f3d87a0dbe39c89338f26a25482642755c",
+      "outputSha256": "d6fbad48319ecd4b97574d9b2b06e66256c501b6481906cfcd8f14103f5bb793",
+      "bytes": 64686
+    },
+    {
+      "source": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+      "destination": "Art/Current/thumbs/cards/creature-cmtn6ulm4boj.png",
+      "sourceSha256": "54a76a2992bb8ba1263cd664f775952a6aa78e65b8fe2d9cd9c8357d9a81b241",
+      "outputSha256": "e7951b3895d713b506e5364218a49914a2ee989ff96a409f6371302a18462428",
+      "bytes": 277353
+    },
+    {
+      "source": "thumbs/cards/creature-cmtn79743r2n.webp",
+      "destination": "Art/Current/thumbs/cards/creature-cmtn79743r2n.png",
+      "sourceSha256": "2d068dfc1f58c283a04494cffb5bb54b671ff54595d2589cef43bb2e376ea7ec",
+      "outputSha256": "1cb88c805a3e07dadf2b34c99dbc9eb81f1e81b1b5463b6ac1ed98608860678f",
+      "bytes": 170674
+    },
+    {
+      "source": "thumbs/cards/creature-cmtn7err0a7.webp",
+      "destination": "Art/Current/thumbs/cards/creature-cmtn7err0a7.png",
+      "sourceSha256": "0bb0ed7f85e10e808067ae49728921dbb59c9bd83675a72d0cc8339a3cfde18a",
+      "outputSha256": "6daacdee8cff7e18a9bc514d426fdb36f4ce2099f8e0e0974228681fb6f249a9",
+      "bytes": 152017
+    },
+    {
+      "source": "thumbs/scenes/event-cmtn7qttxqo4.webp",
+      "destination": "Art/Current/thumbs/scenes/event-cmtn7qttxqo4.png",
+      "sourceSha256": "2bb708e7d2c89e60b8a8a714108920bea1ce0e1a4d05cd3bd7727864f0a9665a",
+      "outputSha256": "d522ebd430f368b1fc7202df021f9f4113ead1ddb2655a4bcc7ddaf0e7ae7707",
+      "bytes": 157676
+    },
+    {
+      "source": "thumbs/cards/spell-cmtna0nb1yxt.webp",
+      "destination": "Art/Current/thumbs/cards/spell-cmtna0nb1yxt.png",
+      "sourceSha256": "df5e35cc2a37ab5fcaa4acf3012251a4890c827f84aaf9aea541d9ede806979b",
+      "outputSha256": "7a4f60b585aee87cd159668fbca11e58ed80c7decded562149273b770cd6564f",
+      "bytes": 115724
+    },
+    {
+      "source": "thumbs/scenes/event-ev19-arrows.webp",
+      "destination": "Art/Current/thumbs/scenes/event-ev19-arrows.png",
+      "sourceSha256": "8548d54e4eae74e18cac30b8bf81322bad0abb5e8565311ee50e0fdfe4ccebeb",
+      "outputSha256": "9545d294107fea8d7adf7d3dcb25c433544a3625c71cd428931b734760dd25cf",
+      "bytes": 129604
+    },
+    {
+      "source": "thumbs/scenes/event-ev19-classchest.webp",
+      "destination": "Art/Current/thumbs/scenes/event-ev19-classchest.png",
+      "sourceSha256": "716f241fd788a94ba082a6dfa3b61ed346724144924a69012cd6a5fd77774d5e",
+      "outputSha256": "9991a1349c86a51abfc347565355ab8db6205ccaf85ac618ed77477f7d268f92",
+      "bytes": 128390
+    },
+    {
+      "source": "thumbs/scenes/event-ev19-fireballs.webp",
+      "destination": "Art/Current/thumbs/scenes/event-ev19-fireballs.png",
+      "sourceSha256": "efc5e2a8f4aaa2de615c7ab4546af8e80b5081ced2b8b3902e5ac14d25c0ce95",
+      "outputSha256": "3f90709deb740edb7b75d963a5cad889d4736abea5d0380a12bcfa8beb8d098c",
+      "bytes": 121628
+    },
+    {
+      "source": "thumbs/scenes/event-ev19-gamble.webp",
+      "destination": "Art/Current/thumbs/scenes/event-ev19-gamble.png",
+      "sourceSha256": "90cba164fb18dc927074711ea6b2c239158bc20b7f53a08bbf16731870933c4a",
+      "outputSha256": "8c12b010c1023f2382ed26dcd3b95bba1735b6ea69c222111d331510f220a06a",
+      "bytes": 128030
+    },
+    {
+      "source": "thumbs/scenes/event-ev19-pearlbox.webp",
+      "destination": "Art/Current/thumbs/scenes/event-ev19-pearlbox.png",
+      "sourceSha256": "97c4a1fd47c5b07695795b901068193c1808299456346591d486b372a7ca6329",
+      "outputSha256": "de7237443edd93daa1e5f064fa302e50377bbeee6ca9e9c78d3e0b10ba38bded",
+      "bytes": 126529
+    },
+    {
+      "source": "thumbs/scenes/event-ev19-potions.webp",
+      "destination": "Art/Current/thumbs/scenes/event-ev19-potions.png",
+      "sourceSha256": "256e92d0361dfac2ee205e3b9a68f880c04eca7d6693faf87df1a050d31afa68",
+      "outputSha256": "84236397ffb890c9a9cd9e35201b86af456a6f76966d2529999c491f5e788db8",
+      "bytes": 142649
+    },
+    {
+      "source": "thumbs/scenes/event-ev19-quartermaster.webp",
+      "destination": "Art/Current/thumbs/scenes/event-ev19-quartermaster.png",
+      "sourceSha256": "30e016975243654589450c563103530f40625f11143e0d147b45efd74efe1bfa",
+      "outputSha256": "bab0fed41bfb0a3acb8566e7b34ffe1f15837a1aee546edc263d32754cc3f6db",
+      "bytes": 138079
+    },
+    {
+      "source": "thumbs/scenes/event-ev19-recode.webp",
+      "destination": "Art/Current/thumbs/scenes/event-ev19-recode.png",
+      "sourceSha256": "f549db7d8ea61adc78ba569a8509d7d0562129818c6825483bf7e2ec0afefeeb",
+      "outputSha256": "422bf26905723ffb91e2196c3bf1b152a2b81e17d551f54dadf0254386116258",
+      "bytes": 147178
+    },
+    {
+      "source": "thumbs/scenes/event-ev19-vital.webp",
+      "destination": "Art/Current/thumbs/scenes/event-ev19-vital.png",
+      "sourceSha256": "492e73322a2d9f23198deb4dc0ae1291e95c4f720acfa5c363098cb54c66cef7",
+      "outputSha256": "e4e177b4496cda53f761aea364ad0cb8413ccb92b96463716c637c7c92d0f167",
+      "bytes": 114923
+    },
+    {
+      "source": "thumbs/cards/resources/pet-egg.webp",
+      "destination": "Art/Current/thumbs/cards/resources/pet-egg.png",
+      "sourceSha256": "abf40b69e3d28dfd23c33a5799ae57dc03c3044369740047e415f19c262b9977",
+      "outputSha256": "d4b84852d55819a49bfd3e853f974db6666eae45c377e6b3c666e3e2874a274d",
+      "bytes": 85108
+    },
+    {
+      "source": "thumbs/cards/expedition-starters/basic-attack.webp",
+      "destination": "Art/Current/thumbs/cards/expedition-starters/basic-attack.png",
+      "sourceSha256": "a7907af3692586c01f4a446c60acab92cc74e11bb90950f574826b237cf5c271",
+      "outputSha256": "5dbd6b7fb0d60a3f4cd3865b443a2cc4dd628bcb6eeb5051d3b37020a722e60f",
+      "bytes": 102680
+    },
+    {
+      "source": "thumbs/cards/items/starter-emergency-bandage.webp",
+      "destination": "Art/Current/thumbs/cards/items/starter-emergency-bandage.png",
+      "sourceSha256": "e67d975cbdc913d37b386f1cca4ad8cbc882fc0e947ecc921e15433859eb0919",
+      "outputSha256": "c53bbba051bb20df9081ac0ab6ec85f28b369e44f82a4b2e788edd831b713991",
+      "bytes": 61812
+    },
+    {
+      "source": "thumbs/cards/resources/ration-std.webp",
+      "destination": "Art/Current/thumbs/cards/resources/ration-std.png",
+      "sourceSha256": "25474f807a3e52b98fd2d434ed42ca962e34d8bc3943da93d1bede5d8871a404",
+      "outputSha256": "fee753bfbee500520e88b4eefe589b84b3bc7be8ad56b470b0fa7bfbf60029fa",
+      "bytes": 118276
+    },
+    {
+      "source": "thumbs/cards/resources/coin-copper.webp",
+      "destination": "Art/Current/thumbs/cards/resources/coin-copper.png",
+      "sourceSha256": "6edf19c52defe9bd3fff5cd92594ce799f22e4580e7b10775480ba082dc3b78f",
+      "outputSha256": "f1851aa8229eed3c59e3328ce155e3dfbfad3507143c1df90bde2036ed64ca8e",
+      "bytes": 138980
+    },
+    {
+      "source": "thumbs/cards/items/tt-crystal.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt-crystal.png",
+      "sourceSha256": "8c1899f872f84ad414a31ce98140bbad9d3ffc3ab1958beda52b9b5a6ff9412f",
+      "outputSha256": "644c93eed4c074a55637d08785aa43d6ed310359781dc3c5a356100279513148",
+      "bytes": 57426
+    },
+    {
+      "source": "thumbs/cards/resources/econpack.webp",
+      "destination": "Art/Current/thumbs/cards/resources/econpack.png",
+      "sourceSha256": "03dbc0aedc0dd6e438c09ab7617119b19e8c7c5c601b1a16e4d50bec192ef7c6",
+      "outputSha256": "a13cfafaa17d169d656fef10113dd1505913ddf1d0c3799fa127c838ff389a39",
+      "bytes": 93087
+    },
+    {
+      "source": "thumbs/cards/resources/coin-gold.webp",
+      "destination": "Art/Current/thumbs/cards/resources/coin-gold.png",
+      "sourceSha256": "4d5a214f3af2216bec13859eac7490aaf899be4a7b7457e149302b9749892d25",
+      "outputSha256": "a10a0d6eb5e7b20a164a1c65de192b44d456cbe04bbe6cbb408ec406ac224c2d",
+      "bytes": 143042
+    },
+    {
+      "source": "thumbs/cards/items/tt-jinchuangyao.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt-jinchuangyao.png",
+      "sourceSha256": "f51ffdc4925bbb4cb7244df1582b9a2f569f475251870123c2ad0b0c32832a82",
+      "outputSha256": "e3e685bef2f908e61915e12e175f0d5d561fb0152688850b398f3a670bbe6cda",
+      "bytes": 43884
+    },
+    {
+      "source": "thumbs/cards/resources/key.webp",
+      "destination": "Art/Current/thumbs/cards/resources/key.png",
+      "sourceSha256": "b75fe347df39b217bb875510f98cbbefe449850bb63fef4821e5c37bdc922a31",
+      "outputSha256": "390ae7fc6f8b838f2184173ad08dba932f7edce13b07e11ea1ca5b2dc3dc1bb5",
+      "bytes": 58532
+    },
+    {
+      "source": "thumbs/cards/resources/key-one.webp",
+      "destination": "Art/Current/thumbs/cards/resources/key-one.png",
+      "sourceSha256": "f4bae1790f57eab02114ae4c777595186f4f9231c785d95098a21eee004a4dbf",
+      "outputSha256": "7f0aaf133447b47f2847a6463492288a436f080d3256531606d56bff08662e64",
+      "bytes": 160281
+    },
+    {
+      "source": "thumbs/cards/resources/keys-bunch.webp",
+      "destination": "Art/Current/thumbs/cards/resources/keys-bunch.png",
+      "sourceSha256": "5f0ab03637c486aa354a5869c97867a7b5f83a8cd19467fa199c71cc37dda8da",
+      "outputSha256": "564b388df6a359e4345192bbcb190dccf3e2d8e1937dd8e1d1fdcfb384898434",
+      "bytes": 84442
+    },
+    {
+      "source": "thumbs/cards/items/tt-medneedle.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt-medneedle.png",
+      "sourceSha256": "f6cc6a8b9c5911ca99546a6aa167dfef3eef8b73604c22a4a46a15cc21d14c35",
+      "outputSha256": "c036f8d132c72cc16464d2cf3a39d2a989ed6517d19ae0ae6662405ab068d5dc",
+      "bytes": 46793
+    },
+    {
+      "source": "thumbs/cards/expedition-starters/rations.webp",
+      "destination": "Art/Current/thumbs/cards/expedition-starters/rations.png",
+      "sourceSha256": "4769b74c110b4711c8275c436a58f091aac8cb5831c8eede9bc42cdfac2baf02",
+      "outputSha256": "e928fd76d82ac2319f4eec498bd3a29c6595902d72259f7f8f1810d94ba47260",
+      "bytes": 141603
+    },
+    {
+      "source": "thumbs/cards/resources/coin-silver.webp",
+      "destination": "Art/Current/thumbs/cards/resources/coin-silver.png",
+      "sourceSha256": "886deaa9d32390053c8660f958165af248ff06600701244a7382d8bc78462292",
+      "outputSha256": "76306884ae288115b66320c20889997a99eb34f53026dc3be40e4b02429275a3",
+      "bytes": 117189
+    },
+    {
+      "source": "thumbs/cards/items/cmtmvq6ss84l.webp",
+      "destination": "Art/Current/thumbs/cards/items/cmtmvq6ss84l.png",
+      "sourceSha256": "608adbd518518ee22223c5c4efe9c14942032b697e420da62c913e803e7c328a",
+      "outputSha256": "a121b30367c9a544dab93c765ce9d1e6ed0d546087e7372a9ed273bf96bd87e2",
+      "bytes": 137455
+    },
+    {
+      "source": "thumbs/cards/items/tt-token-gold.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt-token-gold.png",
+      "sourceSha256": "1e364a17b3ccee5e3714fbc05e3a8f19c3aa7805f7a7b5411f9ebc405654a562",
+      "outputSha256": "2ad5f24ffeab8e6dc7aa682f6bc3d89112adb55c6947154c9c5ed2c5b8c1ef88",
+      "bytes": 64085
+    },
+    {
+      "source": "thumbs/cards/resources/wood.webp",
+      "destination": "Art/Current/thumbs/cards/resources/wood.png",
+      "sourceSha256": "e479cafc68ba6c7347275476587f1ed46bf6c678cd62b92bb7b23763e9350048",
+      "outputSha256": "bf5b28ae33627cc0e9bb428fcd5965e613e37e9c85b282d2bb36377d2d8932e0",
+      "bytes": 89691
+    },
+    {
+      "source": "thumbs/cards/resources/wood-lots.webp",
+      "destination": "Art/Current/thumbs/cards/resources/wood-lots.png",
+      "sourceSha256": "32f44c8842fc8549518412ae76eb51b490c0d33089080ae5c81daac82c59c749",
+      "outputSha256": "c10d38fe5f52a36b45393cf206f590d588690d77fc35062083204b67490221d5",
+      "bytes": 146800
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-backupcell.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-backupcell.png",
+      "sourceSha256": "744d1087a86aa48878f09cd714ea003a5ce20a33717329c6fa46efcdc9a57332",
+      "outputSha256": "843a41da72241c30f0751568c3eeb51baa315ad01e24a6438c5cb38b8c5e4a2d",
+      "bytes": 105736
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-barriermend.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-barriermend.png",
+      "sourceSha256": "e8cedbd25ea906132304ab17e9fdb3ff6230b9420c16e9a44654a1f6c51c0c21",
+      "outputSha256": "755b1288866c658ca825e28e1580977463a2455400286e4233e10fb4b3a9d672",
+      "bytes": 129088
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-basicdev.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-basicdev.png",
+      "sourceSha256": "861ba76af49abdfaf10b4fd35cb0a39430ed630e51e1bb46a9423109cf5df32e",
+      "outputSha256": "5f967aeb2c776b05fe2377477cf8dad0ace1eb3818044d0d6c9064abdf95950e",
+      "bytes": 109756
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-breakthrough.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-breakthrough.png",
+      "sourceSha256": "8b4890acaea145f1952936612d682063625656e898e346fca3381badb017883c",
+      "outputSha256": "24291b349b1b88a046afe0f016d4b0bd9e9dd2c3df18f6d1aa29168d3bbc0f24",
+      "bytes": 72786
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-chargeray.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-chargeray.png",
+      "sourceSha256": "b8c9fb7edc9cc3626d0bbaca9dcf28a174e5c2a6020487a9c82c63da95846af8",
+      "outputSha256": "28f02a9904f34826af36929b37dcc2bed77e45f660098f2dc73e152a03975948",
+      "bytes": 48053
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-elemburst.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-elemburst.png",
+      "sourceSha256": "36ce597d8e52b189dedd46e361a7b3e6c07d8466ef8d61918a58875f68e64b39",
+      "outputSha256": "e84ab9a88cd1228283b3ef48ceb6f519ff8d63b53ca0c62adfe713ed66ba03f9",
+      "bytes": 86127
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-felguard.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-felguard.png",
+      "sourceSha256": "3e5632089318b5ec9e6157de10ed603486b85ed7f7a5753d3daa04c7fb5be17d",
+      "outputSha256": "13d6e021ecb2a86a3c40685f9bb7ef968654b4621dbbf1edcdd3f8b7d6fc1778",
+      "bytes": 113716
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-firecracker.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-firecracker.png",
+      "sourceSha256": "ae7aa0d12fb33bf00192f6f6c29f09d1035f72ca3af5e2488a9d6ddfd46fb98a",
+      "outputSha256": "200da229bc45043f32723cf728a1e97bf4e054a4bbd92fc6545fe789d67e0296",
+      "bytes": 65571
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-freezeray.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-freezeray.png",
+      "sourceSha256": "432bfbc93b0d9d62dc71c10e7de9aed7168f6348445eccf351d32a8ab025a209",
+      "outputSha256": "f945e05bf1bdef16bb2451ebb2bff0ce4567dac7a5639af6685f57dfb4e259b5",
+      "bytes": 73325
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-hitechrd.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-hitechrd.png",
+      "sourceSha256": "e9cb644745d870fefacc1240568038fd3589eb66fd4fc017593a84638680418d",
+      "outputSha256": "d6dc8353e0c2a27d07700c10f847803477d19cad40a405cf52a644cd19c3924e",
+      "bytes": 142112
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-infectray.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-infectray.png",
+      "sourceSha256": "4482052792f0140b63eeb3a9f78f88e5f75d3d65e89fc6255924acd2cd7527c5",
+      "outputSha256": "d57729a3bd7c6b4500d81cb0431b35060f5feb2e9e7f594d2379b35b98876987",
+      "bytes": 88172
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-magicfind.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-magicfind.png",
+      "sourceSha256": "ea3998ad0ba60d6148241bdea40aafa434114d07f500da596769e96728904b22",
+      "outputSha256": "9c30c964b209b8b41954f90ada57951743074c10126ff5877dc5dbdb94706cc4",
+      "bytes": 81136
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-raydragon.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-raydragon.png",
+      "sourceSha256": "705c934f1edb961ff6902473995a669fc969402d49543cb6fcb44ee7dedccd87",
+      "outputSha256": "61272fd095481df30ce0eafcd11c807c3beb4221f5d758806cc6b9e04612b3f9",
+      "bytes": 120977
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt12-raygun.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt12-raygun.png",
+      "sourceSha256": "d5451bbcb5c0a29abe3b8825baa1f1b26d479f95be6f9fa1d8550d89bec18a95",
+      "outputSha256": "46d18e8061120aca5328c9031713cbc33ca106f5c7a84fadaa17a265d6bea415",
+      "bytes": 85999
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-saturate.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-saturate.png",
+      "sourceSha256": "fd7cfef8e4cb42c67a53d1395c394c70fd556f59df697d93c7390db67e44b3ce",
+      "outputSha256": "703730a421f806cc01f5fc331b9835d63cd7eb060cfb876ba805d7ae1bf37abf",
+      "bytes": 102203
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-sporewall.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-sporewall.png",
+      "sourceSha256": "3be806ee733a17249f74912b094d29c5da90322e2ad97f2db73976e52bb7c6a4",
+      "outputSha256": "c6c6bf2da04146da3276084b8bf3f7c5e6d6eb4dfe272bd7dc619a03faf411f6",
+      "bytes": 152077
+    },
+    {
+      "source": "thumbs/cards/spell-tt12-unstableray.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt12-unstableray.png",
+      "sourceSha256": "dc223d7d03eabc5e729ecbeff71f288e96fdb954033f5c8aafcf7d2779823f93",
+      "outputSha256": "6be5c66cf07bcf5d2485abe7aa066dc982b1e5d9770b23b0b54a6521878da6d5",
+      "bytes": 23977
+    },
+    {
+      "source": "thumbs/cards/equip-tt13-astrolabe.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt13-astrolabe.png",
+      "sourceSha256": "5b02dbf62299013518c25805cc00cd36eb6672aae3e8d81c17b5efe6b150701a",
+      "outputSha256": "b14b4ff135fb15d3a35ed53a704cda5dc9bf632796f3bb434d88ad6042266be9",
+      "bytes": 206348
+    },
+    {
+      "source": "thumbs/cards/spell-tt13-bitter-rain.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt13-bitter-rain.png",
+      "sourceSha256": "eb5d66aa73915c73dc884711dfbadbe9802ac55178f60b6e7ff4b2a4ba3cb357",
+      "outputSha256": "18d5fb68d17ba3322d6d6470b202f6cac9c101f04da9c3c9832d88a4ffcd8c15",
+      "bytes": 241653
+    },
+    {
+      "source": "thumbs/cards/spell-tt13-chaos-deck.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt13-chaos-deck.png",
+      "sourceSha256": "960ea77a0ed136c8302de823e81d450800fd2ad5ecfef69f9cc99cc4f4c43348",
+      "outputSha256": "1590c4a8df4a4d41569a06b096a24892f799611765e16f621eb8d36f4bad8025",
+      "bytes": 312840
+    },
+    {
+      "source": "thumbs/cards/equip-tt13-flame-staff.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt13-flame-staff.png",
+      "sourceSha256": "31eb206bd335390d9e7109a82170337f5f4ccc37d185ad793406dee89ae0c29b",
+      "outputSha256": "c51bfcff7aa31445bde6ed2f8f85ff7d010b75d83497eaa9bce37d610cb0a821",
+      "bytes": 179033
+    },
+    {
+      "source": "thumbs/cards/martial-tt13-guard.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt13-guard.png",
+      "sourceSha256": "e11bdf85ceb775a24de6ce1517e9c64377259669f78c8edb50327eb0caffba35",
+      "outputSha256": "a50416dc76fc9da315bb916f3d0caeeb0391d89119ffff70a10df0c40bb5def1",
+      "bytes": 185630
+    },
+    {
+      "source": "thumbs/cards/equip-tt13-magazine.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt13-magazine.png",
+      "sourceSha256": "1c4d23055edfb66ba7e56ccb8be0df0e662f8c014551105ab2fdca741d13e2ae",
+      "outputSha256": "f1431d2e182d3a6b8fb5277be8f80c354efa45aca14c6f548a348e4b6e273214",
+      "bytes": 231139
+    },
+    {
+      "source": "thumbs/cards/martial-tt13-mercy.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt13-mercy.png",
+      "sourceSha256": "a20c2649539ea27e3e1fe53564df797a8d95625711b21616ab3fb53e5eb1a8c6",
+      "outputSha256": "37b9befecdc8ca2f219ddd40a8b34f5df8565f6fa466548e8f40a74d695d12a0",
+      "bytes": 200484
+    },
+    {
+      "source": "thumbs/cards/spell-tt13-mind-control.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt13-mind-control.png",
+      "sourceSha256": "2048b6f4fb2dfc0a9f0b932140a36ba5c37f9bda40a57451becca85f07e66f31",
+      "outputSha256": "8d250561c161f166a9499d4ae0fa113ba6f9cafb90767e3c11a008503b654a5b",
+      "bytes": 230136
+    },
+    {
+      "source": "thumbs/cards/equip-tt13-poor-meal.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt13-poor-meal.png",
+      "sourceSha256": "0843f981f31c0a42652f792e43759677e732fe5d387349e00caeda2d88cedf85",
+      "outputSha256": "5faae8619bc460b92173324be895767d8b109cbf8499019916efc5b10593e83e",
+      "bytes": 219242
+    },
+    {
+      "source": "thumbs/cards/equip-tt13-scale-armor.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt13-scale-armor.png",
+      "sourceSha256": "766b80bd98ecd71c7653d5af90676a4a9b58b4764c2d9f7cdae2e400e0031d0c",
+      "outputSha256": "ad02b9f46d419fef83141df254222a13eb2b3eb0a648e1cb21bd5273b21bed18",
+      "bytes": 226141
+    },
+    {
+      "source": "thumbs/cards/martial-tt13-snipe.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt13-snipe.png",
+      "sourceSha256": "95f6684917e5b436e64e5833058ba57703f3abbca773d899ff6b2289805458ec",
+      "outputSha256": "f9307059b921faee60513d8990b984b056972e7f711bb38c4ab2d3f35dad4d33",
+      "bytes": 183190
+    },
+    {
+      "source": "thumbs/cards/spell-tt13-soul-contract.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt13-soul-contract.png",
+      "sourceSha256": "c57e5dca3b46fb5a9230a1984d55caa24d99e61f6b557509492e302879c25390",
+      "outputSha256": "fd41bc11b660ced16d58a11a436bca14015081ed03ca4f817e58a82ccf306b24",
+      "bytes": 276867
+    },
+    {
+      "source": "thumbs/cards/spell-tt13-spring.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt13-spring.png",
+      "sourceSha256": "8b952237c167733fb710e9acbe468f6adac9cb8f0b9b375b6e05336250641ba4",
+      "outputSha256": "6c6a059ae0fe0a812100aaf819ab3084194ee1e46d1cd10bd76e6010b67867ac",
+      "bytes": 246541
+    },
+    {
+      "source": "thumbs/cards/spell-tt13-stellar-divination.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt13-stellar-divination.png",
+      "sourceSha256": "bee34f3d91e2e24298353defca718e09ab3f1d28ca35749ef1394285e4a11cd9",
+      "outputSha256": "3670cad99e11e703dd348e7f62b9848060360cbffded2013da7822c8b2282336",
+      "bytes": 241162
+    },
+    {
+      "source": "thumbs/cards/equip-tt2-apollo.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt2-apollo.png",
+      "sourceSha256": "760e0bb3a852dc7a8ddbb7665b9e5808009511a848197df2451d13afd2232c8d",
+      "outputSha256": "8903389feff1bfda316248f30cfdd308ea7ea497efcae1cd984c8d30c6831ae7",
+      "bytes": 141720
+    },
+    {
+      "source": "thumbs/cards/martial-tt2-block.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt2-block.png",
+      "sourceSha256": "a1a8292aa2ff757b2169533f2baf89ce13c5e4940c249fcd73d7b2487fa76381",
+      "outputSha256": "4d964d5d208e41b61ff2d6666c68fb42218884273dfed48686e6416ee6f3b539",
+      "bytes": 134422
+    },
+    {
+      "source": "thumbs/cards/martial-tt2-bloodblade.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt2-bloodblade.png",
+      "sourceSha256": "c34f779248bf78a7feca28379a36e42b7d306196832a2317a93d2d99a15bff4b",
+      "outputSha256": "541d0ae962eaca95649bc01f5d314da5c90c1fb5e0f44d7c384a180703e2a336",
+      "bytes": 31457
+    },
+    {
+      "source": "thumbs/cards/martial-tt2-comboarrow.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt2-comboarrow.png",
+      "sourceSha256": "a43f09e03ba8017f6dde1e12bb1ec9b890f649cddf5a5952933bad5aff87f7a0",
+      "outputSha256": "49bd7b3c198b2ad1ac15f95ff58f3430c44c7f079bc6cfcd13398ed4c9372173",
+      "bytes": 89333
+    },
+    {
+      "source": "thumbs/cards/martial-tt2-forestarrow.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt2-forestarrow.png",
+      "sourceSha256": "1a4e851eb95066abeb65bd9e218073790a5bfa86256d0f77ef3acfac98760d72",
+      "outputSha256": "a6f3d72340e36cf1350b2d3e5e33e75508e0afb41e221c78ba107517d820ad2d",
+      "bytes": 136221
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt2-frostsword.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt2-frostsword.png",
+      "sourceSha256": "c9349257202bc1638f2d405abdec57991b5b55e7d1e32b90eaa5739a4c016bf0",
+      "outputSha256": "683e5f277eeb003d4a776ef584426c70162c30d10ea615944fdfca20ebaf2d5c",
+      "bytes": 95894
+    },
+    {
+      "source": "thumbs/cards/martial-tt2-jianghu.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt2-jianghu.png",
+      "sourceSha256": "c0e4eb64464648b9dc3f9a587bae3dbc376db439ad2619ec41d6336f892c15b4",
+      "outputSha256": "3b0a406f9f43582482c73a40ab27b361a51bf399cc435970373344492af2d034",
+      "bytes": 117930
+    },
+    {
+      "source": "thumbs/cards/equip-tt2-pearlbox.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt2-pearlbox.png",
+      "sourceSha256": "a1756fb8d624f090b33d944bad0167e702d9f5ea5342a66c1684d7fe4eb01d29",
+      "outputSha256": "16f96b8176ff0c1bd899adb0760747e5e9715475e7dc37f9ec36cfea10efb1c0",
+      "bytes": 132938
+    },
+    {
+      "source": "thumbs/cards/martial-tt2-piercearrow.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt2-piercearrow.png",
+      "sourceSha256": "bbcba6c6dd7499f6b944ccdd301b8cfcbe7e446b5bbc7d0abc1923df3db478ef",
+      "outputSha256": "d3c1bed9ba45c6752ebea000e2f4926cbd54f1af85a05ba32ea4c1f701c2ff22",
+      "bytes": 125863
+    },
+    {
+      "source": "thumbs/cards/martial-tt2-shoot.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt2-shoot.png",
+      "sourceSha256": "94a7cbb1a9932398c3fde164d348b7715ace1ce86c0e9a607ff5083cfd1b10e3",
+      "outputSha256": "c34f0c708dc9b86403223541c1584b76643f533c61f0c43da8c01a4230e40774",
+      "bytes": 108767
+    },
+    {
+      "source": "thumbs/cards/martial-tt2-swiftarrow.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt2-swiftarrow.png",
+      "sourceSha256": "028e9ffa125336f1ac4558380488b2d497c7d08a71dbfb901dbe272615784116",
+      "outputSha256": "e81648c9de4d541ca4128346f31c4136d37deac8368d15921a8a183470f83420",
+      "bytes": 57863
+    },
+    {
+      "source": "thumbs/cards/equip-tt2-treasuremap.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt2-treasuremap.png",
+      "sourceSha256": "c45a7c4f84ac24d6f74f56dd594a86dac602ea9f04227f24c51a8e0c36845779",
+      "outputSha256": "d01fc4885b970c4d5cf24da096f34b87918ff78f817df06fb6d94b628e496675",
+      "bytes": 125213
+    },
+    {
+      "source": "thumbs/cards/martial-tt2-turtlearmor.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt2-turtlearmor.png",
+      "sourceSha256": "21a95d6801bcc19620b7f151cd14eb3329501e9b445e5f0f7d8d26f58d908bff",
+      "outputSha256": "27733be602396c51398dae940432301f1b7c43038b1580bc91cf42e115da9b2d",
+      "bytes": 184782
+    },
+    {
+      "source": "thumbs/cards/equip-tt2-venomstaff.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt2-venomstaff.png",
+      "sourceSha256": "46cd1102e0fde0d7f101560b194a4db51c1ea6723c465ef3f8fe9ce43afd02ba",
+      "outputSha256": "eb984100fd50f47fadf0c0c7c2642243b31a1e68e63bc21d853d521b70f63a41",
+      "bytes": 34981
+    },
+    {
+      "source": "thumbs/cards/equip-tt2-wreck.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt2-wreck.png",
+      "sourceSha256": "785c6d9901971a7d7d1891b74adbc91798e80314334e245ac355d4c84a8d7297",
+      "outputSha256": "c168f7ea4f74fc93b32066f0cc7e0aa9870cf9f9e41e21f24f52d9adc6532600",
+      "bytes": 132243
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-armor-rush.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-armor-rush.png",
+      "sourceSha256": "08ce9d97cd2662a77fc45bbba7a82d9e19f6c682c31c26e1df0740c20fe06b37",
+      "outputSha256": "4cfb0ea8d3a31e63afedb0c5db6586751d9c18a6fca4a04d43e1ba43fe81651a",
+      "bytes": 196928
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-arrow-rain.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-arrow-rain.png",
+      "sourceSha256": "0565d5e823c30c6b8ff0a67c82266a4f608f18119173a9f701e3b2890db106a6",
+      "outputSha256": "99e4a35935494f6de7cadb3e9c3fbc55b4d5ab82f937f018d3c5b9711ff04465",
+      "bytes": 157253
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-azure-sword.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-azure-sword.png",
+      "sourceSha256": "61f5da260958bfd071e7a02fc66dd6f5449074a1195d1402417c9137e15a7487",
+      "outputSha256": "debf73f10b7a576755dbc2a2492dd575733335691751c83172778ff44de82d94",
+      "bytes": 34934
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-bandage.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-bandage.png",
+      "sourceSha256": "8b8fd264e38c40ffe4cc22b9609dd1cf1d355e0abe1b5fe350e21ca02c9f70ad",
+      "outputSha256": "7773a3fa8673be320a622e7dd1407420d1a6a956e0e7643aeb8c42a9bccef282",
+      "bytes": 64969
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-blood-arrow.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-blood-arrow.png",
+      "sourceSha256": "5f5727160ba2c4871866133989fe00d6635037ff7b45d6c0fb0dfa873f7bbbed",
+      "outputSha256": "957b69f227e472124f231962e7994eabc8e39289a85dcd931f02ff482a439e86",
+      "bytes": 39101
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt3-blooddrinker.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt3-blooddrinker.png",
+      "sourceSha256": "ea78615077eb7069d0f0da778781a730fa5832a2f69df0325de9f779b35a75a0",
+      "outputSha256": "8bde810c602512acc1d6d8bde4e16d7fd9cd564a2ef9faf05bf54d13fd49ef5f",
+      "bytes": 76177
+    },
+    {
+      "source": "thumbs/cards/items/tt3-blue-potion.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-blue-potion.png",
+      "sourceSha256": "c073621bb90718407445b24e63e575871fd86c5bcf14cc3cc1ec950162d820b4",
+      "outputSha256": "ffcf2aee7afa887cc4042871ee68789ad90c6801facaab13fe60d6388b2489c2",
+      "bytes": 63192
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-chain-lightning.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-chain-lightning.png",
+      "sourceSha256": "eaf4a4318dbfac7ec95766cac1c273d9d99b8f6ea99c754b09e933ed04724602",
+      "outputSha256": "b061bcb52ab4c9e6feff4dc48b4e8958bc10d64b8479e2ba8f2bbc657bd814b1",
+      "bytes": 116360
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-chaos-eye.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-chaos-eye.png",
+      "sourceSha256": "f56e15440aba3a92eba7380b1f1e10a13b569caef609246acb362762ee214ca6",
+      "outputSha256": "d7114f8829721b1ffa097dba2acc683726068fcbbf3d443cfcf71d21b12dc2b6",
+      "bytes": 142552
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-crimson-pouch.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-crimson-pouch.png",
+      "sourceSha256": "fa273946487f6561fc9e4198d7579d8c7eaf02a4a43b7a688f1b8549ec54dcd8",
+      "outputSha256": "37629094b402273c21aecb41a8ef46ecd99dd2108ae5ff0d98bdbdf8964cdbd0",
+      "bytes": 54193
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-deep-diary.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-deep-diary.png",
+      "sourceSha256": "3d0382d71caa5a51e07d419d32835b3df0e2bea8a90d161e1f025b7fad6217f1",
+      "outputSha256": "6205cb01cb09fe6803546a7bf1ee560510227383aee2d7d835a74b2f57bbf0fa",
+      "bytes": 86088
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-deep-seal.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-deep-seal.png",
+      "sourceSha256": "b17edd6f720fc6538e491539d4298515c0ba3c2eb05dc702fda483323632fa87",
+      "outputSha256": "a3760b5d7d9002b4606228099a49a80c51ce41536943a803288f37f8ee629904",
+      "bytes": 83584
+    },
+    {
+      "source": "thumbs/cards/items/tt3-demon-potion.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-demon-potion.png",
+      "sourceSha256": "003846dd85e829f2a8d14d84e867ef1ade1da7602b2888fdf0dcaf6b526a9bb0",
+      "outputSha256": "4eed18cb2fa5ec0bfad5ac8ea29c860f4d4e2a5f7ba86a99f15ef3307bfb2a62",
+      "bytes": 22084
+    },
+    {
+      "source": "thumbs/cards/resources/diamond.webp",
+      "destination": "Art/Current/thumbs/cards/resources/diamond.png",
+      "sourceSha256": "358f18aec620a9abc4126b9573107bd691aaea45e51939df7f4edeec8e79a929",
+      "outputSha256": "9a3b86c4ac05f3969904d1538a19fdc6d9955f1664b7aee4bdccd70f7c3fc53b",
+      "bytes": 93827
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-dig-treasure.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-dig-treasure.png",
+      "sourceSha256": "7528f763d7fd81ba9e222143a6c9dae864d1bafb489647ae8b23facba78d4e28",
+      "outputSha256": "d8e576e04ef78b62bd9674e8378df3e42ab7c856f1dcc1576a1e057c8d8b6f67",
+      "bytes": 122131
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-double-shot.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-double-shot.png",
+      "sourceSha256": "f5d2406a5b85644ceea2865d898f47dd4663c444a5c9c777e51dca71b3cf1aea",
+      "outputSha256": "ad8e669bfda4910009ba3f3993bfcda43459d2bd6201eab7c9a7391b41d7bc8d",
+      "bytes": 156469
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-element-seal.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-element-seal.png",
+      "sourceSha256": "96a415b80fb62236cf08f632d760d19dafe224099515faa6504e2c0a433c81f8",
+      "outputSha256": "458528c7e6c5ea4d229a7fac194de73dbedf655c00515b797b3d516978b00ce1",
+      "bytes": 46601
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-execute.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-execute.png",
+      "sourceSha256": "978104bda1ae7b299e95ec8e81f33e9b3e87c47175a4fa24fb2b78f98a917f4b",
+      "outputSha256": "5c31c544e4547d878e3f7511ed52f47efefeb60c15b7db47fc9f2241d5afb3b4",
+      "bytes": 127822
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-fatal-pierce.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-fatal-pierce.png",
+      "sourceSha256": "8735c56557005a1c4f357e7467ae2134352d2d0faa0cc88741f92a8dd6ea83bf",
+      "outputSha256": "5d94b8c3341edc7f5268ffa1e1ce9d0526500ff3d558e80c16122ed852226a56",
+      "bytes": 85706
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt3-fate-wheel.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt3-fate-wheel.png",
+      "sourceSha256": "c4f1dd6f84d4d845edcb425294103c15a5c3fe8d670b561876ec71abd3e0171d",
+      "outputSha256": "da3b587e278d5a74b0b0eeabf133d3f4948ba827e81de6dd29644ceaca5d1516",
+      "bytes": 99214
+    },
+    {
+      "source": "thumbs/cards/expedition-starters/fireball.webp",
+      "destination": "Art/Current/thumbs/cards/expedition-starters/fireball.png",
+      "sourceSha256": "8e64d6aa5d73167f052130b278ce60e54b6f55e682aaafd6e21937cfe8aab2d4",
+      "outputSha256": "c91fc0b62deaaa45184b095334bc8c1459b20b9ed34cace36265b4732ad3d6fb",
+      "bytes": 132101
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-firm-barrier.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-firm-barrier.png",
+      "sourceSha256": "e159cdb19cfc4096b9591987d656e9f3e3b4dc3536c72494f7b9c51c1d7ed677",
+      "outputSha256": "22ad2938073ea0b2be29e29c3c199601da8e277e95a7b5ca487a4288cff609f4",
+      "bytes": 190924
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-flame-storm.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-flame-storm.png",
+      "sourceSha256": "caaba8fadc1f86b4c58a67e8d39cb7d5e7b49a1b73ca9aa5ad3d50f0da800710",
+      "outputSha256": "44f3f46f084321c935d895317c32a205c9c78dbf6fb2d7f884a6cb15ba42f590",
+      "bytes": 290641
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-flux-slash.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-flux-slash.png",
+      "sourceSha256": "55ec0df78c7e82e9a9cc11e72db076a4e0fb40648fb596d8ffe966ee3c355066",
+      "outputSha256": "e95bef52097c8b77ede4738c3537c020c91af555387af553b3e9d1c5da58eed3",
+      "bytes": 61237
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-fly-arrowhawk.png",
+      "sourceSha256": "9d033376025c5b148eeedc6450881d2bbbbb150274f80fd423769a3452c04fc1",
+      "outputSha256": "e7c68ec81005402df76bdcfbe97a9b2c86f29547a7257a413db79ac4ec320a06",
+      "bytes": 112672
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-frost-slash.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-frost-slash.png",
+      "sourceSha256": "0716ddef077e7c06a07f2fcac23d5a7c643643756fce288cf64314d543ba22ee",
+      "outputSha256": "c6bdcd6d281fe9c9947238601c27189db4075b6ef37d5f13412d4e23b0eb7279",
+      "bytes": 52998
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-frostfall.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-frostfall.png",
+      "sourceSha256": "9532319e4fad670def8c0c9e19dae24793c8c7979e963562d626bddb74612893",
+      "outputSha256": "dc18eeba3f652d22e52b6e48198c2beffeb0d450991115a28f38623e3fd0aa5a",
+      "bytes": 248744
+    },
+    {
+      "source": "thumbs/cards/resources/garnet-marble.webp",
+      "destination": "Art/Current/thumbs/cards/resources/garnet-marble.png",
+      "sourceSha256": "c2cf31d3e80d43b054b2795b174212fd6f0f56f5af4a8a0f0e84ed946204d0ba",
+      "outputSha256": "e9ac08ac24e8b3c4a01c28ed06f7e0a54488d9da83c48df34fcd1773a10f0f28",
+      "bytes": 98078
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt3-grass-armor.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt3-grass-armor.png",
+      "sourceSha256": "5d68144089244b6108517692d571732b69f98cf07eee383599d3191ac04bf435",
+      "outputSha256": "218d014a4e90ed97b9b8a66f65d15cbc3ae0682778705fdd07f13281d57d3993",
+      "bytes": 155777
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-grope.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-grope.png",
+      "sourceSha256": "82caea420347aeeae90d79f10a6322d21c674c5d972fbc49f766b7cf73f8227c",
+      "outputSha256": "ddcfdb6a77cbae5e5d00dd4e75b6f59d377906086805581a6d83017075682ac5",
+      "bytes": 75682
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-hold-fast.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-hold-fast.png",
+      "sourceSha256": "d2f234a25e3d356848fb0df804bad59862bd3544419cdca7c01109d880f1cc2b",
+      "outputSha256": "240694bf17bb4ddd56648db4d9e2dc035a8ebe4dc92f238a4b224b6709e7f4df",
+      "bytes": 81551
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-holy-shield.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-holy-shield.png",
+      "sourceSha256": "db6560065a741aca796b30010dae165dcf737213a57a84b66db90e8cb1dad136",
+      "outputSha256": "773783a10098f6b8e6b026a257eb354b61e74a09c9a1eb4287c06621c1fe24c4",
+      "bytes": 188905
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-holy-staff.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-holy-staff.png",
+      "sourceSha256": "23732a12d933c8dc7b5f233eccf6130df2b4f3151dd372cc16f2fff027893026",
+      "outputSha256": "5d435cc3dc22a214857e2cc5eec5b778e3265eba22faf6f93cda7661f407aba4",
+      "bytes": 43249
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-holy-water.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-holy-water.png",
+      "sourceSha256": "eb841a2c60fef34fa3a403091cf3e6fc858bdb4b768e43bc27da1d2095ca6f88",
+      "outputSha256": "f98bc9d16147e3b1e3b243357ec7eca5f6f1887f1217ebb8cdb183e2da5f9b7f",
+      "bytes": 172553
+    },
+    {
+      "source": "thumbs/cards/items/tt3-houyi-potion.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-houyi-potion.png",
+      "sourceSha256": "bd6ef8a0a0975bc85e5f1d5cb4dfab34f7cd6a217ccf0468bc5a158c0fb4ee23",
+      "outputSha256": "a606adc6e08126288a75c1f066906f222e970e93d7e77b75c3cf8493de8b3e7d",
+      "bytes": 69376
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-ice-spike.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-ice-spike.png",
+      "sourceSha256": "6ddc0e3f7b123518d2de78e1c626dd0d761b56cff90699dc9423d828ba196824",
+      "outputSha256": "b4697cceee635bfffaa006ad36b8816480a1a28261919a492f999b3cedafb3c2",
+      "bytes": 161799
+    },
+    {
+      "source": "thumbs/cards/items/tt3-iceheart-potion.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-iceheart-potion.png",
+      "sourceSha256": "75d6786ea523ef97255903cecbf94d1f608fb80cf508c9655b7bc89a50e5a51e",
+      "outputSha256": "ecdfaed3e458ba22d370a186c290362deb94394a9c84d3dc9967c8719a3091f1",
+      "bytes": 65277
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-immortal-blade.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-immortal-blade.png",
+      "sourceSha256": "58a0ff339fdb635ca98f55736176d0a5471289616a7e6dc94ab1d235a7f82a91",
+      "outputSha256": "1670722984fa506cc9c51f76cc59bbc7c9c395c83de4b69ab4c9f93902644451",
+      "bytes": 47670
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-life-arrow.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-life-arrow.png",
+      "sourceSha256": "936d65ae121774201ab79d4de6d70edd348b78dafc227db05fe494633f605fee",
+      "outputSha256": "62b8f35f61dda2675cee5a93f6db52461255c19d9377c46c6176ce5006922cc3",
+      "bytes": 48642
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-light-mail.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-light-mail.png",
+      "sourceSha256": "adfbe687f778688f27eb2d3f410683c5aade92753e2e6749f5c01c5e042cee5f",
+      "outputSha256": "4363d24e554751c686c79536177ee4fa9437c44c9928e38fb29f6470d46bb14d",
+      "bytes": 113706
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-longsword.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-longsword.png",
+      "sourceSha256": "9f38fc3000b197eb4150e0420a8dc6722bf74f15961a95dcb306a52ecb99375c",
+      "outputSha256": "7031db85f672002ff2a5b314a2a71176c978b40e76f46988b238ac0c920fc15b",
+      "bytes": 25978
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-magic-lamp.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-magic-lamp.png",
+      "sourceSha256": "6c1f7f15ea584cc24efbecf4b4011d26f3a67cc344b7c4094cd8266aeef15876",
+      "outputSha256": "bed973ceb0f8013e0899f1f0720eb4600c9a2e618e0a9c4ebb3898c858a46f1c",
+      "bytes": 95462
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-master-staff.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-master-staff.png",
+      "sourceSha256": "6af47b70914b607ad3c01050b32006ccab7caf673a3810b684da2c2725a5630e",
+      "outputSha256": "5cde72e044e79de8810930d227903ec9bbe761226bb25219fd10a251c17327b2",
+      "bytes": 63132
+    },
+    {
+      "source": "thumbs/cards/items/tt3-mind-potion.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-mind-potion.png",
+      "sourceSha256": "18b7e6b9f3c4cc82cb75ec76f6f692b26a553eb53826f85f1b96a3fa706a6ec1",
+      "outputSha256": "3ac3c6ffb768c20ed29d9a968d89871ecd49aced718406aa29dd98da8a3cd694",
+      "bytes": 73781
+    },
+    {
+      "source": "thumbs/cards/items/tt3-mixed-potion.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-mixed-potion.png",
+      "sourceSha256": "fa2efa22dbbd7eca1f3228faa985ab123b9619fe3619b04893bb38be52bb2eaa",
+      "outputSha256": "dd1ae4be8e38fe8a40b6ca58cf85f7157ca6682680a24c8698939cb42f6c2dcb",
+      "bytes": 26133
+    },
+    {
+      "source": "thumbs/cards/items/tt3-mystery-potion.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-mystery-potion.png",
+      "sourceSha256": "620cbc25ba62e3f3beaaed3c784539c81a9f544f10771f2997b13396dba4c203",
+      "outputSha256": "a86f9b38819b4e1171163818c4fb18e6051690bba8553a71776c996a7289b4ec",
+      "bytes": 58396
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-nature-form.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-nature-form.png",
+      "sourceSha256": "12652780d3813b0744a52110fc0d5492ce9b8bdff420f0e0c01025b095afb593",
+      "outputSha256": "89ecfdc1f4f432d863523235b79c7d744d1120448ddc1b038001248e132fb370",
+      "bytes": 201121
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-noon-duel.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-noon-duel.png",
+      "sourceSha256": "cbd82c411cb61784235e9a2b2603eac23798219edb077a27cc1c223b235cc0da",
+      "outputSha256": "ea00b93e2d33eca8c907d27cf3e7357eb57ab1d91d8cc3fddd8572ac7d8612b1",
+      "bytes": 210525
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-nuke-ray.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-nuke-ray.png",
+      "sourceSha256": "28d910128f39fd217d7d98091e9bbf4045fc63fc0357907959b700b6148aec68",
+      "outputSha256": "f3d604e67db92781de419494e9d02458d6e8f6359a84208f7326298095578463",
+      "bytes": 183916
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-petal.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-petal.png",
+      "sourceSha256": "9f1b96b14321a3b3294e2343cd932fb6a73d67e37ec83ef7a11e4643554ff450",
+      "outputSha256": "83055785f1566df350e9cc951e08a603626bf8485edb10205f6dc212c26a9e03",
+      "bytes": 229966
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-purify-arrow.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-purify-arrow.png",
+      "sourceSha256": "6d4e5e8f12a09744901048be228d31f2d226a242e38f90cb2239000509a5a82b",
+      "outputSha256": "ea577982ccf9a6b49b8964f127889d8b3b2896a828c4f458e4fc2d6e1c407f8f",
+      "bytes": 104892
+    },
+    {
+      "source": "thumbs/cards/items/tt3-python-potion.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-python-potion.png",
+      "sourceSha256": "44f9944bfb03318e021dc61dcdd79b1699bfaf8ee2b170fad0438f4f4b9c2d96",
+      "outputSha256": "9640d63883b7e9c3fbcb9805b9c9131ab7e4ee14ad6e923bda183fe7e383154f",
+      "bytes": 51342
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-qi-wave.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-qi-wave.png",
+      "sourceSha256": "a6b1c67ee2214b3154738d1847f392829822f23a673fc3a37ea1c1a33030524c",
+      "outputSha256": "cef90d42eaa21a4d90692175bd6b2dc55719c76073612caff05e55390658531e",
+      "bytes": 137688
+    },
+    {
+      "source": "thumbs/cards/resources/ration-double.webp",
+      "destination": "Art/Current/thumbs/cards/resources/ration-double.png",
+      "sourceSha256": "73ff57bf29614241857da8368aae4f2ebc5ca9662fe88acee9581270b139524e",
+      "outputSha256": "e987a3efb6c78469939bdb15e0430b9aba74e32966804a1faf8a790189cd38ad",
+      "bytes": 116340
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-reshot.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-reshot.png",
+      "sourceSha256": "1f35eae38061229822f8b3eeb913f8ea15bc38b0a4f682518b20462aec80531b",
+      "outputSha256": "77ee02923639ec0a36b3c8cded21d8225bf0f14ee87b81f7311225f8cd51e293",
+      "bytes": 68931
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-reverse-bow.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-reverse-bow.png",
+      "sourceSha256": "40f83d90b8e2ce9a2f9fbf1a54b0355de74c16bf3967a4a36130798c7b0c17fc",
+      "outputSha256": "ecd78f9eae1dad8c209fba5dcce702e65d2b7c8c431f7f295734d7adc491a337",
+      "bytes": 128342
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-sapper-bomb.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-sapper-bomb.png",
+      "sourceSha256": "83f5cea1eb6f8a7d01e9463dec969856f1f2c98229bfb89e2a831a9ebc81e230",
+      "outputSha256": "d0b429ee70fb67a091f7a3307161869d590bac211844ac3bf94f9ed09d05ee43",
+      "bytes": 98604
+    },
+    {
+      "source": "thumbs/cards/items/tt3-savior-elixir.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-savior-elixir.png",
+      "sourceSha256": "f1612ec76a2ed724ac7cd5c1bc02b13289063c73597b2681c80cf012a08e06f5",
+      "outputSha256": "d7a5477e090de98fa8cd5469cdcc1e20579f583dc427f15a9ebfab043b50b7e4",
+      "bytes": 67207
+    },
+    {
+      "source": "thumbs/cards/equip-tt3-silver-runesword.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3-silver-runesword.png",
+      "sourceSha256": "d7480e92cfd9737243eebc4bdd06c3a3349fe9d90bc91b64d8579e95ed44c968",
+      "outputSha256": "c49cf052f079526381ef20bb90c10779f750cba083e126afb5674b2d7adfe9c9",
+      "bytes": 76821
+    },
+    {
+      "source": "thumbs/cards/expedition-starters/pierce.webp",
+      "destination": "Art/Current/thumbs/cards/expedition-starters/pierce.png",
+      "sourceSha256": "c54873724ba43d9a1fa6515ac7caaee578c190dfebde237e7863063d520a8615",
+      "outputSha256": "758c8a62f8c3166a00355bb0f988d104333feffaa1f4c0e492664d277ef701f9",
+      "bytes": 163943
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt3-staff.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt3-staff.png",
+      "sourceSha256": "f0975823bf81b775629cd91d68d2d7d37a19275129ba30ffe2f348c166befc9c",
+      "outputSha256": "f770fe89739480fe1099dce9c8a6bd297e5a7e2ec9e4c788f5888d21e31a5692",
+      "bytes": 61720
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-thornfield.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-thornfield.png",
+      "sourceSha256": "2da9f60cc46147eaa9c81a1f675d7f089f5289641f26fb74eec7b38eeab99ee7",
+      "outputSha256": "b7137bcbd144fd3f6efe9f76a11f89c2f7a8f859296bd6b7d2aa4845be586ea7",
+      "bytes": 168218
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-thunderblast.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-thunderblast.png",
+      "sourceSha256": "7d484079fa1666e270b5656b005fdba4f99ae9b1d8671da890c461d078186ace",
+      "outputSha256": "55e4508d874e99fafeabd90b78e9c4f4701dd025ca969bea239c92812ee83492",
+      "bytes": 181628
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-toxin.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-toxin.png",
+      "sourceSha256": "5e894eb06261785e3ba95e213ca4ea630f085d1800ca5799c2b8521e7f19a492",
+      "outputSha256": "927f9b498750e8fc5fc4988d41009cd5f0e6e2c8e2ec9aa57389e81bebd25dae",
+      "bytes": 42506
+    },
+    {
+      "source": "thumbs/cards/spell-tt3-treasure-hunt.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3-treasure-hunt.png",
+      "sourceSha256": "ec6c4b82985fe169b388eb39efb7ec92d2c237707de94e16849543eff43cb6a3",
+      "outputSha256": "832c3123be9625f1aef01cc2d6f9a14d3ea159ecc161faf7e2aad12495dcd4de",
+      "bytes": 146058
+    },
+    {
+      "source": "thumbs/cards/items/tt3-turnabout-potion.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3-turnabout-potion.png",
+      "sourceSha256": "d12f49b3a48e6f0e0ede1117db7513d7ce45afee31a23fe62dd37bb65410c47d",
+      "outputSha256": "3c06a921ef866c61679ec847c0bdb1e5e8ffbd7ef5ad9cd6f50ac12a1cc4ca4a",
+      "bytes": 41474
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt3-twinwater-mail.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt3-twinwater-mail.png",
+      "sourceSha256": "ffc3fef5cdaf475edcd6bc3a4284079f11995f1c01ad7d0ca20a105a7f66d36d",
+      "outputSha256": "41562a2f1eefe816f8bd990374a05642ed8ad651497456fd9061ef2e552fa9a1",
+      "bytes": 151121
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-venom-arrow.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-venom-arrow.png",
+      "sourceSha256": "08d278fca6de8103a78ac4c610ec85863f9b53f075115c8d302a923238c03ed5",
+      "outputSha256": "da703bc1081629124ce7767fb2a503a0193f9d3bba706f22ee2fe3b95a759b38",
+      "bytes": 47364
+    },
+    {
+      "source": "thumbs/cards/martial-tt3-wave-slash.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3-wave-slash.png",
+      "sourceSha256": "86fe125834ad8f0419ef69357da03fea4d28fe591458090b43d893c8aa23b664",
+      "outputSha256": "49abdd9d349f181610408ae1bb42c47aba58d0a9ef3b3307c368cc5563f96dd4",
+      "bytes": 126364
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt3-wolf-bow.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt3-wolf-bow.png",
+      "sourceSha256": "f2e2844e65722dd65e0f083735342555cc2d0ebbae4ddd4775bae2917b39a578",
+      "outputSha256": "b87fc50126c49b5c990ef6e0fc3ec765f22b7e9e472ada974bd25ed2c345f4d6",
+      "bytes": 126896
+    },
+    {
+      "source": "thumbs/cards/resources/wood-bundle.webp",
+      "destination": "Art/Current/thumbs/cards/resources/wood-bundle.png",
+      "sourceSha256": "c406c5f2fd2d9b24193801dfd23a79887f70fe601c7b1971c577e884ac739615",
+      "outputSha256": "799488ca5cf9cf140fc1fa12714e9196ad80421ab695283b7c122e452eaecb26",
+      "bytes": 128004
+    },
+    {
+      "source": "thumbs/cards/equip-tt3eq-boiler.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3eq-boiler.png",
+      "sourceSha256": "ad5f4b54705c124b8a03e9fe041f3d45776be99ca0c3991ebe43e6330b6633e2",
+      "outputSha256": "698c8c474ae2af922f87e2d897916db8a1dd7cce0c4cf26da5cd6405fd8f7811",
+      "bytes": 88066
+    },
+    {
+      "source": "thumbs/cards/equip-tt3eq-mistbox.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt3eq-mistbox.png",
+      "sourceSha256": "a140eb54ce2a8dc029d554506a6c632ab4960bb33de1ef1a40e18cf8ff9b4f0e",
+      "outputSha256": "6f4ef5162f98cb67ab223ce0cb9a02d077c5cf721b53bb8802a26e6f971c60f8",
+      "bytes": 159533
+    },
+    {
+      "source": "thumbs/cards/spell-tt3sp-bloodstorm.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3sp-bloodstorm.png",
+      "sourceSha256": "64943cbf87360063b85d8d77bfdac320b51720ba42154407b1e3881395ab894c",
+      "outputSha256": "a7d7132276cfa9263266d6b5f31ff22ed486f702c8745871a8ddbc5a7d5628df",
+      "bytes": 136478
+    },
+    {
+      "source": "thumbs/cards/spell-tt3sp-devour.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3sp-devour.png",
+      "sourceSha256": "0f84f52271b6195543546a4691826411f4c1d3200d268b51ebc19396bdba6956",
+      "outputSha256": "d999ca49df5c70335285fad488ca0cc2a0ca1102c5a6033ec0041ce02bc805ad",
+      "bytes": 177541
+    },
+    {
+      "source": "thumbs/cards/spell-tt3sp-dodge.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3sp-dodge.png",
+      "sourceSha256": "b07602059d7265fd4d48ecf131743015f4e2b177b247d67578e060ef0daa3326",
+      "outputSha256": "2dea06ed8e67aecc7b14cc619f6b4e48d7e4605ab2681e5541253bf375cc7937",
+      "bytes": 76877
+    },
+    {
+      "source": "thumbs/cards/items/tt3sp-doom.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt3sp-doom.png",
+      "sourceSha256": "a3a11317897206647c19aae1655f02f5afdc424fdcb78260506691d22fdfaa68",
+      "outputSha256": "e3032990d4a6997526dfa7b54fe0b4981718bba02f29bc4367af9b896d8692b5",
+      "bytes": 47497
+    },
+    {
+      "source": "thumbs/cards/spell-tt3sp-flowerzhen.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3sp-flowerzhen.png",
+      "sourceSha256": "0b52632dd1720d7b7493c20f0f37ba77a04b4f6c908bb7d8c10dc88f9102b71b",
+      "outputSha256": "cb74535d4ee43fe8bd0d448352065acfa3f6728a1bf95379abf439052fb6864f",
+      "bytes": 89115
+    },
+    {
+      "source": "thumbs/cards/spell-tt3sp-magicoil.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3sp-magicoil.png",
+      "sourceSha256": "686543bb2f77c9d3bb3f9d9cbb7279ae840d17a2d164122932455f181826262a",
+      "outputSha256": "2071c636ea29e455a376a0319c088ca05e9957de802c7424b2e5b7ace2b6fb0f",
+      "bytes": 52618
+    },
+    {
+      "source": "thumbs/cards/martial-tt3sp-shadowbug.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3sp-shadowbug.png",
+      "sourceSha256": "3d0180f4c069763637158a077caea03450777c4ac3b85b18ee50e3fde02a7e29",
+      "outputSha256": "30604357df7d8f7bd87a9a4d62630e72214698701bab071477c24c58ce6d5b3b",
+      "bytes": 230217
+    },
+    {
+      "source": "thumbs/cards/spell-tt3sp-shadowshot.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3sp-shadowshot.png",
+      "sourceSha256": "ce0426fb17338b95f1fa25ddfe628119a171b953f8866f5ff0c037634ef38229",
+      "outputSha256": "f02cbd5cb7747e519fe9a6b07cc1e4d92a2bf9d01a07c3d11fba94cb6ecc7040",
+      "bytes": 153103
+    },
+    {
+      "source": "thumbs/cards/spell-tt3sp-silverthorn.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt3sp-silverthorn.png",
+      "sourceSha256": "a9abbd198610b0994cf5beaf476662f13ce141e387fe4d79f5157d0107801e8f",
+      "outputSha256": "36f66e591c4c5050cf8cc593a84a93f9e816d5f12ecc214e691e47f88a084fa1",
+      "bytes": 61714
+    },
+    {
+      "source": "thumbs/cards/martial-tt3wu-shike.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt3wu-shike.png",
+      "sourceSha256": "2450bad2a8ec16f77a6a53d2acdf7398ab414ad8859e0cc8fe4f23442bf3d7b8",
+      "outputSha256": "82ecbb1fc112399bafb65e6f3e3785e0644c2e796e45570131cc698300230218",
+      "bytes": 40268
+    },
+    {
+      "source": "thumbs/cards/items/tt4-shine-token.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt4-shine-token.png",
+      "sourceSha256": "0ecd901c998a8ff547c3595f07638483412a042686e9ee4beb6a97a7acc15d98",
+      "outputSha256": "8ffab7cebb7faefbbe7cdbcf1c01f32c5bf9f54258adda7c0df690459d63fdd5",
+      "bytes": 75358
+    },
+    {
+      "source": "thumbs/cards/items/tt4-smoke-bomb.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt4-smoke-bomb.png",
+      "sourceSha256": "ff9d08a2a5c10409d9c69e500d623e954104c210b26f45b689b834a1a9facaa7",
+      "outputSha256": "22fd32281a0b69ee13636808d429c4bc9ca53c2b3bf4a55ab8e0310a0584ea54",
+      "bytes": 59058
+    },
+    {
+      "source": "thumbs/cards/items/tt4-woodify.webp",
+      "destination": "Art/Current/thumbs/cards/items/tt4-woodify.png",
+      "sourceSha256": "5f1d711b61ab717374d9c1d8ed82687964b512d1115798d3750d4aac70d2c253",
+      "outputSha256": "afdd4388bef042fe84e76109f63f4575cf8bdc9da155cbd87e5a67c8ae4ffe08",
+      "bytes": 53067
+    },
+    {
+      "source": "thumbs/cards/spell-tt5-galaxy-voyage.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt5-galaxy-voyage.png",
+      "sourceSha256": "3d86bcd9b02394e70dcc2aad5f71e41d6e95827e118029925317f0eae247064a",
+      "outputSha256": "59749ba84a4632baa5046902191f13241da14dfdfdf3ff530d1230e396219e12",
+      "bytes": 87213
+    },
+    {
+      "source": "thumbs/scenes/event-tt6-airdrop.webp",
+      "destination": "Art/Current/thumbs/scenes/event-tt6-airdrop.png",
+      "sourceSha256": "961e633f9abec92a3fa76269186da964abf4510506ac47e0834b04eb2005f3a1",
+      "outputSha256": "bd4add4116febb661a8c67902fbe69b64057315ba81fb0e1a54009adaee6bba0",
+      "bytes": 153041
+    },
+    {
+      "source": "thumbs/scenes/event-bandits-anime-v2.webp",
+      "destination": "Art/Current/thumbs/scenes/event-bandits-anime-v2.png",
+      "sourceSha256": "5ce1b0cc8af595d77bb0febf14187fd1237dcd8052d7278cc678dd82fad38619",
+      "outputSha256": "267787c247eeb364587c47afb69d6672065d3f1461feec73b5e9eedb488d6047",
+      "bytes": 165216
+    },
+    {
+      "source": "thumbs/scenes/event-tt6-chestdraw.webp",
+      "destination": "Art/Current/thumbs/scenes/event-tt6-chestdraw.png",
+      "sourceSha256": "ad2b88a5cfd446865ef86eb336806a603b25747eecf80de0ec280248d3138d35",
+      "outputSha256": "0dd18d390eaeee387a56fdc5f8959863cec02b8e2fbaa5f4d89d59e32f8e0e97",
+      "bytes": 125223
+    },
+    {
+      "source": "thumbs/scenes/event-tt6-demondeal.webp",
+      "destination": "Art/Current/thumbs/scenes/event-tt6-demondeal.png",
+      "sourceSha256": "545cd5fb9e92a541e3918521d6a040fd6c12ea53cd003eb2cf62079c82e76e75",
+      "outputSha256": "d785736e75009d8b50a71e19900d83391ab9e7c28820b2926ec2895ff0a2d305",
+      "bytes": 117673
+    },
+    {
+      "source": "thumbs/scenes/event-tt6-goldhammer.webp",
+      "destination": "Art/Current/thumbs/scenes/event-tt6-goldhammer.png",
+      "sourceSha256": "0b25460f0f300b16a783ec7f51903eb4a940431a874086a2c14f998621f7bd12",
+      "outputSha256": "166cb0ab7876dd3d51dbe372e134c475d42db8de4445aa8eca4689ac0df28d86",
+      "bytes": 147529
+    },
+    {
+      "source": "thumbs/scenes/event-tt6-goldmine-1013-v2.webp",
+      "destination": "Art/Current/thumbs/scenes/event-tt6-goldmine-1013-v2.png",
+      "sourceSha256": "e9055c2566e22b63d9632985e5cf6dca400ddf795b3e8e87a1c9afd042d1df6e",
+      "outputSha256": "81c6b0bbaee1a8786b755b4244253939ab960efc8e778557e5c61dd59745c47a",
+      "bytes": 162459
+    },
+    {
+      "source": "thumbs/scenes/event-tt6-mystery.webp",
+      "destination": "Art/Current/thumbs/scenes/event-tt6-mystery.png",
+      "sourceSha256": "53f1f2c708e729d98e49e2b4676722c736275cc30a3d34e2157305bcf1f0a77b",
+      "outputSha256": "2b0b15dccbf5eeba1019214a31dd90abbc04f57351fda1b2657deccc80370fc8",
+      "bytes": 135112
+    },
+    {
+      "source": "thumbs/scenes/event-tt6-relief.webp",
+      "destination": "Art/Current/thumbs/scenes/event-tt6-relief.png",
+      "sourceSha256": "5d048774abaa4e9f9418b36f04086c15c32c2e1e101babbbf5bb83c13fc09d76",
+      "outputSha256": "afe0daabee5f5db73f80463ef6b3589f70a22f345e233083ccd76e81af0f5c3c",
+      "bytes": 141620
+    },
+    {
+      "source": "thumbs/scenes/event-tt6-systemsupply.webp",
+      "destination": "Art/Current/thumbs/scenes/event-tt6-systemsupply.png",
+      "sourceSha256": "531d353f8bd69623321ae0848d0eb37f652562e15d2c0e1b1a5f81922d78fd6a",
+      "outputSha256": "80bb99ae2c2d10d01eba60326f851c6eb8e82d1459a14a66acc15548656385f5",
+      "bytes": 144413
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-abysscurse.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-abysscurse.png",
+      "sourceSha256": "67f900a5f633250dfd4036796c22fd39afdd761ddbda5f0f7c5d42250a1c7df5",
+      "outputSha256": "f86044e537402abf9367107a5b7bcdb930df3df96ef7a9f2dfc8e77789d80917",
+      "bytes": 156737
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-arcanebolt.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-arcanebolt.png",
+      "sourceSha256": "e95f1b825a740bd695f445e7d054d220011e11de4080b1820ed2ae2057d49a14",
+      "outputSha256": "3c5a023565c66581805dbc51049bc594af729a744d66d3e35cf9775344822e70",
+      "bytes": 253114
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt7-arcanescroll.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt7-arcanescroll.png",
+      "sourceSha256": "0cce97fdc30188bdf181111ea200b46558664c5e68e7753d63639dff62563f3e",
+      "outputSha256": "52c6516b67d7150ffd03e384dfcf3becd7473b280c9e0a3b44464df06de25530",
+      "bytes": 184237
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-armup.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-armup.png",
+      "sourceSha256": "fcf7d8db9ec4ab5744f43cbb88959855b5a66823732c5b2df5578a915022889e",
+      "outputSha256": "b7b721e8dcb8c5cf02e5a701c9ec5dec915e6d9157ce74b9572d6e40ec56483f",
+      "bytes": 296964
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-bladebloom.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-bladebloom.png",
+      "sourceSha256": "e2c88823a3fd5e33f43a4bd2f37006793b1cb06debc577934c37f47600c0138f",
+      "outputSha256": "d85c89979f94f2a6e516e6609dbe1ab9f97e27e326f25351616d072d3af59d41",
+      "bytes": 311105
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-bloodpoison.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-bloodpoison.png",
+      "sourceSha256": "d402fb80fd14c9f0354da5880c7119fac184ec31c2743848a15ec8f39eb69402",
+      "outputSha256": "f0619da2b3f59c9f141942a714ff04025c61d0565adb4beaf3bed5a4510ff2aa",
+      "bytes": 271805
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-bloodpotion.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-bloodpotion.png",
+      "sourceSha256": "65596f746087b659811ff5f66a0863795972638487edbf953395d9478c9f2e09",
+      "outputSha256": "a7dedeffd4ddb609a6c902a54821da7ee223cd00e66b221192d3e2c9ecc59031",
+      "bytes": 165170
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-bulwark.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-bulwark.png",
+      "sourceSha256": "c59ad5574544c858c9bf4fdeb511e38a23bc5e945fc152e00abc08b13c736f75",
+      "outputSha256": "95fc8191cc03104f437b26c1b82e4c04b2ecc54c57468c63a33e5aba5aa75a3c",
+      "bytes": 220849
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-burnharvest.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-burnharvest.png",
+      "sourceSha256": "f08542332fe09ebe14c7a5af5938c0f3fba23d5b5fbd3a7050e29554044e18e6",
+      "outputSha256": "92eb9c2343c20d628ecba4a0a9d631327db278b77f201bb46fa698af48c8c92e",
+      "bytes": 290176
+    },
+    {
+      "source": "thumbs/cards/equip-tt7-darkfort.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt7-darkfort.png",
+      "sourceSha256": "ae73be53da306b321e8f588527ca091ff8a0f9ce7580a2d13e8596822f6915a8",
+      "outputSha256": "5ec0782008fd467e717961d5a88e7465d58142b6a3bdd96058e1d50f08dab947",
+      "bytes": 38661
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-demonbreaker.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-demonbreaker.png",
+      "sourceSha256": "7104a34a851802b985774024155d4841ef2e0e41f3f3d62de7c304df7a9971fd",
+      "outputSha256": "ff75ff913eaf03d8869a174f3656e9e2b39445d07d1fe89899f4b735831d5b0f",
+      "bytes": 198991
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-elementstorm.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-elementstorm.png",
+      "sourceSha256": "8d302460d9928e27fb7f0190ff5606be714b99902e03a05b34daad484d951949",
+      "outputSha256": "589bca7ee3ca3afa59fdba560061f0b010fea1f6a3383724d12716fff64b32f0",
+      "bytes": 216385
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-energize.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-energize.png",
+      "sourceSha256": "ab6f0e65cb78c7e88ba5f3432811ebe75048802d9d427fe5d045e219cd15d5ec",
+      "outputSha256": "0d26bca935350b9b8acd5c22baa6d37133fbf197acf10950f2c08a9800e9a828",
+      "bytes": 237510
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-frozenight.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-frozenight.png",
+      "sourceSha256": "0106a81a24a6fad37a87130f0867f876514903608d010fe689c35efdc22072d5",
+      "outputSha256": "f038725dbdec998988b7832b96cf3908e4c68155c8dddcfe831fc25df84ac939",
+      "bytes": 270040
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-fullstrike.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-fullstrike.png",
+      "sourceSha256": "5b73e0f1f44fb6476a3c8dc79c64f0cd3eea4986e8196d1731aec3d7ee4cc614",
+      "outputSha256": "24d5c1192fed4de107d3bfcb481f812634d008c7e4cef77d6674181792252ade",
+      "bytes": 159249
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-ghostblade.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-ghostblade.png",
+      "sourceSha256": "1ce758ec79fa562816563497348279b1b72e1949d5def47aaa2dbaafd107b2a6",
+      "outputSha256": "57c4d518a3faeebcd0abb86df14e92c7417db27861b9e4ce67653ee25baa0b4e",
+      "bytes": 237711
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-goldencicada.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-goldencicada.png",
+      "sourceSha256": "9d90d6d28eb8b7b029dc1270391d357c83ce287f64dc2306c57a29a9f8e4c8c5",
+      "outputSha256": "f377428a07d0c28cce7a4e62c870b613ef2ddd44a1cffe25d3eae9ab5d3ca620",
+      "bytes": 256947
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-holyglow.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-holyglow.png",
+      "sourceSha256": "b8b3f1cdb8063740ab921cf168c30df1e54b81b8648141a12f543f68f757ae87",
+      "outputSha256": "349d3a12f72057c279592f9ff880792aa47f86aa7c25bc5ba99a04ccec3b33b2",
+      "bytes": 181404
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-holyheal.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-holyheal.png",
+      "sourceSha256": "3568eb7569daac45a71ad1851effa2e362916bcaf644b7023ce5e1d1c41e3525",
+      "outputSha256": "4fc5d538ab1e239dd98d660ef535f0b509ad3f8aca32ffb789422a16a27aa6c8",
+      "bytes": 195829
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-imitate.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-imitate.png",
+      "sourceSha256": "2b2c5c30139cca7bd42c2d37bc7efac39a87a6eab1e90ef8b5e70718d60d4771",
+      "outputSha256": "66477bae246cab3feeed9408fd8a1496387ec61d70246e9db62d8b1707945ac3",
+      "bytes": 324577
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-ironcharge.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-ironcharge.png",
+      "sourceSha256": "d3d5ecebdba7c81d1c015ea1f641b01993068652d3467af8cd70607ec6a63946",
+      "outputSha256": "500bef48de784347ac4de729e99e1e9ee431f26cfd40ad8b2c129f756d5f03a9",
+      "bytes": 147498
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-ironphalanx.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-ironphalanx.png",
+      "sourceSha256": "5b8f97c37339258585f4f55d07c1b2700f036d6cba57c5e711593bdf0d3b1e7b",
+      "outputSha256": "609abe2495cebc0efed34f3d066ff303f8335423f11be34cccf12e0f4ecdbd24",
+      "bytes": 177279
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-livingwater.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-livingwater.png",
+      "sourceSha256": "d561f6d5e465d82227ea206a8608d61af9bf01c54a00d6f262fe2253d1dd4c7a",
+      "outputSha256": "17184f1d02be968311661d59404a67315b1817680b9531432393de83fdd5af33",
+      "bytes": 206030
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-marchrush.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-marchrush.png",
+      "sourceSha256": "3ee34a06c41939f39a3145912df82b84411d587287c8db546ab62694c2836fdd",
+      "outputSha256": "c2a5b972202acbbe9cb6a667753b47ec92abae7969e429fe30db62bd9e658714",
+      "bytes": 178759
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-maxsupply.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-maxsupply.png",
+      "sourceSha256": "e20c4fa1173872d991d17e44f45f9c24b493ba9bf2fc26e5aca1bb57e4a6fc67",
+      "outputSha256": "5605ac9888587d5e248250b8a42ce32c85886dd83efb6453a01699c4da2906ec",
+      "bytes": 268925
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-meteorrain.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-meteorrain.png",
+      "sourceSha256": "83865302550a1e37c042d5e8c0f031c67812aa3bac3eb6324f56a6b56725f04b",
+      "outputSha256": "5863973788a4aab766d992877b064bc2e5065a85ca3bb8e8e17a5b0d9e4c4858",
+      "bytes": 242751
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-meteorstrong.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-meteorstrong.png",
+      "sourceSha256": "967f2e0a970f0f2284f5d0f6d734ce80bd08541a57c73a8f36f15538587c33d6",
+      "outputSha256": "91c0de54029044cfb2aa9452e1ed069864e4a777d645cb31e52d6332f3a60927",
+      "bytes": 225457
+    },
+    {
+      "source": "thumbs/cards/equip-tt7-naturestaff.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt7-naturestaff.png",
+      "sourceSha256": "bc602350e33099c7986df6263006ab6c55a92b64cdefa093a9d5ae059467d8f2",
+      "outputSha256": "99b78fd9606952c89550cb05ed1c4cf74b546c7367c2c4faba383ab20ced84df",
+      "bytes": 112426
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-provoke.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-provoke.png",
+      "sourceSha256": "415e8c58ad0c5858ca4246fe28987516f29cd4360a44ef0b452f9108ba5af388",
+      "outputSha256": "58a969632b7e685b10d370eac866a3ca19867c9c1d2bc11ed11788ec6c60fe5c",
+      "bytes": 133227
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-recruit.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-recruit.png",
+      "sourceSha256": "6cb3c265a0036332b2683618cc9d134c0c7e99ddc967605b02454d4c2ff2e028",
+      "outputSha256": "bdf0b0dfcffc354a7bc065594bf6ddfca79b43c3f086cad5fe7cd91278bf347b",
+      "bytes": 178529
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-silence.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-silence.png",
+      "sourceSha256": "5e0a1458ecab59ec10ef897980ab0157e3d02ca6b17350843fca28b9dad65442",
+      "outputSha256": "2d66ab646ec1d58e13a7eb35f0088bff283aeff02b59620a68ce1d216c21933b",
+      "bytes": 145517
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-smite.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-smite.png",
+      "sourceSha256": "ae6def5a814d56d85d82e586cf5081c8bb5d13f7cd5e327e755b464923de4664",
+      "outputSha256": "d5fbdcb51fc8d75728eb36617181abad8e418eb54093443692b958323fd596f8",
+      "bytes": 145844
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-sneak.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-sneak.png",
+      "sourceSha256": "9c4a9ad1be9b121551177e3b7ade79f9ab242c0499b0344577f7384296f12939",
+      "outputSha256": "ee688c821bd805542b71433c410fa90bf6c3edfa3a4dd87d55fa37f967a52b2b",
+      "bytes": 262455
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-stealth.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-stealth.png",
+      "sourceSha256": "f60798c3a58c14515f6c8b344e26c81db56e4d119fc846c78c3b453df2aa9f88",
+      "outputSha256": "5d2811865901b05b2d2a0662144fe3d3f71b8ebb417414b222e9b6805e7520fb",
+      "bytes": 223591
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-stratagem.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-stratagem.png",
+      "sourceSha256": "5388ea9065fdb4e160d8c04f4730eab887ad75f306974741e345d3dc69e25295",
+      "outputSha256": "9f8a5fd50f3290417434094ccd4cbbc01326f7ab3e33ff029ee2f016721610e8",
+      "bytes": 253985
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-swordimmortal.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-swordimmortal.png",
+      "sourceSha256": "f5610520466fb07f99cbcadb1be981fa1b81d257123620ad357632b8838f7c5d",
+      "outputSha256": "0e757b70df5b14a1f2e7eb0eeabb02254a7a3f4b919fc261009a9e9a942ba26b",
+      "bytes": 228563
+    },
+    {
+      "source": "thumbs/cards/equip-tt7-talisman.webp",
+      "destination": "Art/Current/thumbs/cards/equip-tt7-talisman.png",
+      "sourceSha256": "54d62a2e4beb5deb5f324fa79480f33529791d5535fbfa2fd75789bd53c255a9",
+      "outputSha256": "43eaed9b6571aeca985f01f9b36604ddb403b1267332e15043440bbb96ea0227",
+      "bytes": 51728
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-throwblade.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-throwblade.png",
+      "sourceSha256": "5b184035cfddd13310beb79d9422290545983103888009805dcd5eb70190341b",
+      "outputSha256": "406fee56d0c0ce61c2422a63770fdeaa38464ffb83ae31c84cb8477136aa445b",
+      "bytes": 158842
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-thundergrudge.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-thundergrudge.png",
+      "sourceSha256": "c204cdf9da91b4f59d701ec2d92b14dc14a00c7454d56c05b8cf3b5d37dbe8e4",
+      "outputSha256": "9de51caa7504231bd62d877ee921583acc7af466e180ff68b558dd4f8e999bea",
+      "bytes": 162682
+    },
+    {
+      "source": "thumbs/cards/spell-tt7-twinfireball.webp",
+      "destination": "Art/Current/thumbs/cards/spell-tt7-twinfireball.png",
+      "sourceSha256": "de0b8144b7cd7a1fd9f07540f1c00b56b637d1eccf7ab2d93947e86df6e2d401",
+      "outputSha256": "e5301339904bc90befd68d3f5346875a5ceb665ad5daf6ea3c09ab344244d245",
+      "bytes": 280896
+    },
+    {
+      "source": "thumbs/cards/martial-tt7-whirlwind.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt7-whirlwind.png",
+      "sourceSha256": "18e9b6aa0164b1bdc52db9acaa25820ee71a96b80e61c3e3f2a024db13f423d7",
+      "outputSha256": "553c4c5e5e31276a1aa0917410c5d09b995d4bfbaba9c34f58a44edd37303f9b",
+      "bytes": 296140
+    },
+    {
+      "source": "thumbs/cards/hero-abysssovereign.webp",
+      "destination": "Art/Current/thumbs/cards/hero-abysssovereign.png",
+      "sourceSha256": "0f69c907c90a2a5a07156f6a81b55cc979bfa4329e75c468ed4c1cc3e6c1b8ce",
+      "outputSha256": "5d62fe107f7d98e05d51a1b66e604381d2ca2151dc72a2b4359ef7818f681af0",
+      "bytes": 272667
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt8-archdemon.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt8-archdemon.png",
+      "sourceSha256": "29d4d76e66b366dc4718a55c406d2011273a8bfdef969a6315c792fe3db31e90",
+      "outputSha256": "9b73c5b0f8b0548b050c7d1019aab3e0fe42867bad34530fcfe27dceabc1a488",
+      "bytes": 59395
+    },
+    {
+      "source": "thumbs/cards/curse-drain.webp",
+      "destination": "Art/Current/thumbs/cards/curse-drain.png",
+      "sourceSha256": "bde557f9f1cb1c1b300e1c4895cb09cdf49734e1df9d3a833802a13e2feb1bb5",
+      "outputSha256": "19a6cb19c00792cf5615659205861e7a694cbae595acfe4e7698e77c108736dd",
+      "bytes": 175005
+    },
+    {
+      "source": "thumbs/cards/curse-freeze.webp",
+      "destination": "Art/Current/thumbs/cards/curse-freeze.png",
+      "sourceSha256": "8117a9a628235908f376d5a344803c991c6566df3707d6a33695fabff3f8110d",
+      "outputSha256": "ee8d840e993450bfb750849c771c3ef73169025291c2cc0024d4b45b33389b1c",
+      "bytes": 178942
+    },
+    {
+      "source": "thumbs/cards/curse-venom.webp",
+      "destination": "Art/Current/thumbs/cards/curse-venom.png",
+      "sourceSha256": "f4dcedd2c7f3ff529a0b8499acdd87b13c2ff1cb12f546b8e5b83688de49a2a0",
+      "outputSha256": "ff67a78b83e4fc8f8c614fb63d143bdeea3d41e1efc06f929603d591d6786254",
+      "bytes": 159777
+    },
+    {
+      "source": "thumbs/cards/curse-silence.webp",
+      "destination": "Art/Current/thumbs/cards/curse-silence.png",
+      "sourceSha256": "12ab7b29fbbe26cf25f46edf9a3e682b957349b468d7366198de921a65d4784e",
+      "outputSha256": "7202b1bccf32c3bc5c18f6bfde66a0e148c21089ce973a66293788531afc7d5a",
+      "bytes": 158298
+    },
+    {
+      "source": "thumbs/cards/creature-tt8-curseimmune.webp",
+      "destination": "Art/Current/thumbs/cards/creature-tt8-curseimmune.png",
+      "sourceSha256": "e5a35c1f756b62eb22c69d3f5c720efc7aba0598d0b0df2d6350f72de5a94ee3",
+      "outputSha256": "9e4f0fea8b295841d9ff491fe841b761e1e0983eef5893cf1300d5ab6fded291",
+      "bytes": 166622
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt8-demonslay.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt8-demonslay.png",
+      "sourceSha256": "d14024ad84c604cea745c2311745193791c1808ad6068425f93124e02a460821",
+      "outputSha256": "461c914147a562a5fd82a895389bd2c7493b3c412cfd1941244ee3c783c22f46",
+      "bytes": 63373
+    },
+    {
+      "source": "thumbs/cards/martial-tt8-dragonblade.webp",
+      "destination": "Art/Current/thumbs/cards/martial-tt8-dragonblade.png",
+      "sourceSha256": "c27489c0dfb6c57a592a108164e1593a8edc4d3a26327252f47b270d33b26cf1",
+      "outputSha256": "958d565b5fc4a90cbf835013ff53f8adec187f41ba4b0e1cd02ec51f75be6fb2",
+      "bytes": 161504
+    },
+    {
+      "source": "thumbs/cards/creature-tt8-energycap.webp",
+      "destination": "Art/Current/thumbs/cards/creature-tt8-energycap.png",
+      "sourceSha256": "1881aec2fe8d727ab98259fd6f66187ee64122227a4084b43e30af5f2de925a2",
+      "outputSha256": "3b579013baf8aa4e327ecffc87b46f90a57770dc33fd389bd3fa5f1d92ba8469",
+      "bytes": 119676
+    },
+    {
+      "source": "thumbs/cards/creature-tt8-healplus.webp",
+      "destination": "Art/Current/thumbs/cards/creature-tt8-healplus.png",
+      "sourceSha256": "1c5242be3e547dd3cd05a354c5dfdebc8fe1af26422c6064a461260afe99ab5b",
+      "outputSha256": "9ed30ad18144291c88d4fd34347b2edba9ee15edd9ff67b0104177d1c428a5e1",
+      "bytes": 146587
+    },
+    {
+      "source": "thumbs/cards/studio-expanded/tt8-heavensword.webp",
+      "destination": "Art/Current/thumbs/cards/studio-expanded/tt8-heavensword.png",
+      "sourceSha256": "15a29ad6cd4edfc249d2619025b6704c9bc785894c51703f913a03076227a53b",
+      "outputSha256": "639733cc333e0eb08741d152ecb0c915ac74371f080158666a8b5d0767e1043a",
+      "bytes": 169825
+    },
+    {
+      "source": "thumbs/cards/wu-void.webp",
+      "destination": "Art/Current/thumbs/cards/wu-void.png",
+      "sourceSha256": "107de7241c21856c4e128444d00a31b3323119035c9997e579292e7b57e38a8a",
+      "outputSha256": "614ad59794868f1c74a255a222f1c6bf5776000689d9ddfbc3f512b447b6188c",
+      "bytes": 153412
+    },
+    {
+      "source": "thumbs/cards/hero-volcano.webp",
+      "destination": "Art/Current/thumbs/cards/hero-volcano.png",
+      "sourceSha256": "bf81b97167ee3e9b01fb78ecf459eb389a7cb971bd51591f294cc399f3fffbdd",
+      "outputSha256": "49c0c705cb1398d7a262efda741c9de9725c7a32a31d7ddc9a067995833686a4",
+      "bytes": 325221
+    },
+    {
+      "source": "thumbs/cards/hero-sacredsword.webp",
+      "destination": "Art/Current/thumbs/cards/hero-sacredsword.png",
+      "sourceSha256": "0be1d4ef2719453eac101bd2efdfcbedc2a117ce8f49d4be3557f37a0d494459",
+      "outputSha256": "2cd0cd03f32eac27309f408091c472c5e7ce33f9eaba6ca98a0cd72556f08000",
+      "bytes": 108629
+    },
+    {
+      "source": "thumbs/cards/lore-raving.webp",
+      "destination": "Art/Current/thumbs/cards/lore-raving.png",
+      "sourceSha256": "de216249df97ad74791e1f8d485d990b00f708f67095d8ce9d9a584f1e5b3d3e",
+      "outputSha256": "e312937ce438a6bd2fec22c87afc1c5d1d5c7c4b7cac3fa7aa38b5862c9d701d",
+      "bytes": 229784
+    },
+    {
+      "source": "thumbs/cards/hero-sacredrain.webp",
+      "destination": "Art/Current/thumbs/cards/hero-sacredrain.png",
+      "sourceSha256": "fd423d3b439e7464dc170799925d4a2a0031d3e1d7d17478788c592aed9f137e",
+      "outputSha256": "e2660bc66cde1cb6fbe37c3773d1efc14e5b0ee5178dd2a96088348e05069e20",
+      "bytes": 199384
+    },
+    {
+      "source": "thumbs/cards/wu-heavensword.webp",
+      "destination": "Art/Current/thumbs/cards/wu-heavensword.png",
+      "sourceSha256": "43d5c5125ea84a032b3df69bca6d8a26996b8871bef788d429f72cab98aa3b41",
+      "outputSha256": "c66e1f3bea9d72f7dfed68e74c08948918634b7604fa3d5ea38e4d6de49263b3",
+      "bytes": 153303
+    },
+    {
+      "source": "thumbs/cards/bound-shadow.webp",
+      "destination": "Art/Current/thumbs/cards/bound-shadow.png",
+      "sourceSha256": "657c82bde374177fd525ccb071a0fcd68deb9467cbf5f2948d7ec08519468aba",
+      "outputSha256": "2f8c775e04fe6db62a1ad2d1c871ee1db1d3d464afd8007888bf9d6ade1c58c1",
+      "bytes": 203432
+    },
+    {
+      "source": "thumbs/cards/hero-summoner.webp",
+      "destination": "Art/Current/thumbs/cards/hero-summoner.png",
+      "sourceSha256": "1d163184deebdea57b32bb0edf8a2df242bf71e116463b6bba7d74bc3cdd6a42",
+      "outputSha256": "4870ed54330cb3d435330ce66ee5782e68e1d0e1dde3a09d5e428709d1b9833c",
+      "bytes": 225179
+    },
+    {
+      "source": "thumbs/cards/wu-myriadswords.webp",
+      "destination": "Art/Current/thumbs/cards/wu-myriadswords.png",
+      "sourceSha256": "2f54aa3004337fc801ce24905062a7a5fd59d7a73998897c3e016df377ea01f9",
+      "outputSha256": "d491ad7d4bbc4e468d4865f6aa8fdcea1a6c9daa742fef14124e0fbc93fced68",
+      "bytes": 220645
+    },
+    {
+      "source": "thumbs/cards/dark-eclipse.webp",
+      "destination": "Art/Current/thumbs/cards/dark-eclipse.png",
+      "sourceSha256": "da445ecea660d852d62047757ea96a2464520b445842271c3b52ff9ba468d754",
+      "outputSha256": "08fe32790bc6e06f4aa20d7e6ca48ed4e601010f203854cc758af09ac7f42417",
+      "bytes": 164216
+    },
+    {
+      "source": "thumbs/cards/creature-tt8-nofocus.webp",
+      "destination": "Art/Current/thumbs/cards/creature-tt8-nofocus.png",
+      "sourceSha256": "40586f025a3f75beaae809dc88d067517620d37c87dafa21dab750e712fe61d1",
+      "outputSha256": "611cc9b5a8047ba5c1a18d87650541e49b5b129f64442ef54bde6890d699556e",
+      "bytes": 163641
+    }
+  ]
+}

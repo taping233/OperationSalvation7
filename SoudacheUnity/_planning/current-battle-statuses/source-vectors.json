@@ -1,0 +1,564 @@
+{
+  "input": {
+    "atkUp": 1,
+    "spellUp": 2,
+    "stealth": 3,
+    "immune": 4,
+    "reduce": 5,
+    "dodge": 6,
+    "swordForm": 7,
+    "natureForm": 8,
+    "cosmosForm": 9,
+    "bleed": 10,
+    "poison": 11,
+    "freeze": 12,
+    "silence": 13,
+    "abreak": 14,
+    "healban": 15,
+    "atkDown": 16
+  },
+  "statuses": [
+    {
+      "key": "buff:atkUp",
+      "name": "攻击强化",
+      "icon": "status-atk-up",
+      "amount": "1",
+      "unit": "",
+      "label": "攻击强化 1"
+    },
+    {
+      "key": "buff:spellUp",
+      "name": "法术强化",
+      "icon": "status-spell-up",
+      "amount": "2",
+      "unit": "",
+      "label": "法术强化 2"
+    },
+    {
+      "key": "buff:stealth",
+      "name": "潜行",
+      "icon": "status-stealth",
+      "amount": "3",
+      "unit": "回合",
+      "label": "潜行 3回合"
+    },
+    {
+      "key": "buff:immune",
+      "name": "免疫伤害",
+      "icon": "status-immune",
+      "amount": "4",
+      "unit": "回合",
+      "label": "免疫伤害 4回合"
+    },
+    {
+      "key": "buff:reduce",
+      "name": "减伤",
+      "icon": "status-reduce",
+      "amount": "5",
+      "unit": "",
+      "label": "减伤 5"
+    },
+    {
+      "key": "buff:dodge",
+      "name": "闪避",
+      "icon": "status-dodge",
+      "amount": "6",
+      "unit": "次",
+      "label": "闪避 6次"
+    },
+    {
+      "key": "buff:swordForm",
+      "name": "剑仙形态",
+      "icon": "status-sword-form",
+      "amount": "",
+      "unit": "",
+      "label": "剑仙形态 · 生效中"
+    },
+    {
+      "key": "buff:natureForm",
+      "name": "满月形态",
+      "icon": "status-moon-form",
+      "amount": "",
+      "unit": "",
+      "label": "满月形态 · 生效中"
+    },
+    {
+      "key": "buff:cosmosForm",
+      "name": "宇宙形态",
+      "icon": "status-cosmos-form",
+      "amount": "",
+      "unit": "",
+      "label": "宇宙形态 · 生效中"
+    },
+    {
+      "key": "curse:bleed",
+      "name": "流血",
+      "icon": "status-bleed",
+      "amount": "10",
+      "unit": "层",
+      "label": "流血 10层"
+    },
+    {
+      "key": "curse:poison",
+      "name": "中毒",
+      "icon": "status-poison",
+      "amount": "11",
+      "unit": "层",
+      "label": "中毒 11层"
+    },
+    {
+      "key": "curse:freeze",
+      "name": "冰冻",
+      "icon": "status-freeze",
+      "amount": "12",
+      "unit": "回合",
+      "label": "冰冻 12回合"
+    },
+    {
+      "key": "curse:silence",
+      "name": "沉默",
+      "icon": "status-silence",
+      "amount": "13",
+      "unit": "回合",
+      "label": "沉默 13回合"
+    },
+    {
+      "key": "curse:abreak",
+      "name": "破甲",
+      "icon": "status-armor-break",
+      "amount": "14",
+      "unit": "回合",
+      "label": "破甲 14回合"
+    },
+    {
+      "key": "curse:healban",
+      "name": "禁疗",
+      "icon": "status-heal-ban",
+      "amount": "15",
+      "unit": "回合",
+      "label": "禁疗 15回合"
+    },
+    {
+      "key": "curse:atkDown",
+      "name": "攻击降低",
+      "icon": "status-atk-down",
+      "amount": "16",
+      "unit": "回合",
+      "label": "攻击降低 16回合"
+    }
+  ],
+  "intents": [
+    {
+      "input": {
+        "icon": "[[icon:swords]]",
+        "label": "攻击",
+        "damage": 0,
+        "hits": 1
+      },
+      "hasDamage": true,
+      "text": "[[icon:swords]] 0",
+      "summary": "攻击 · 0"
+    },
+    {
+      "input": {
+        "icon": "[[icon:tools]]",
+        "label": "双击并施加诅咒",
+        "damage": 7,
+        "hits": 2,
+        "bleedBonus": 3
+      },
+      "hasDamage": true,
+      "text": "[[icon:tools]] 7×2",
+      "summary": "双击并施加诅咒 · 7 ×2（共14） · 流血 3 层"
+    },
+    {
+      "input": {
+        "icon": "[[icon:crystal]]",
+        "label": "蓄力·下回合行动",
+        "damage": null,
+        "hits": 1
+      },
+      "hasDamage": false,
+      "text": "[[icon:crystal]]",
+      "summary": "蓄力·下回合行动"
+    }
+  ],
+  "effects": [
+    {
+      "input": {},
+      "expected": []
+    },
+    {
+      "input": {
+        "playerCurseImmune": true
+      },
+      "expected": [
+        {
+          "key": "curseImmunity",
+          "name": "免疫诅咒",
+          "icon": "shield",
+          "duration": "本场",
+          "description": "阻止对自身施加诅咒。持续至本场战斗结束。不等于免疫伤害。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "playerCurseImmune": true,
+        "curseImmunityTemporary": true
+      },
+      "expected": [
+        {
+          "key": "curseImmunity",
+          "name": "免疫诅咒",
+          "icon": "shield",
+          "duration": "本回合",
+          "description": "阻止对自身施加诅咒。下回合开始时结束。不等于免疫伤害。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "holyRune": true,
+        "turn": 1
+      },
+      "expected": [
+        {
+          "key": "curseImmunity",
+          "name": "免疫诅咒",
+          "icon": "shield",
+          "duration": "3回合",
+          "description": "阻止对自身施加诅咒。圣洁符文在前3回合有效。不等于免疫伤害。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "holyRune": true,
+        "turn": 3
+      },
+      "expected": [
+        {
+          "key": "curseImmunity",
+          "name": "免疫诅咒",
+          "icon": "shield",
+          "duration": "1回合",
+          "description": "阻止对自身施加诅咒。圣洁符文在前3回合有效。不等于免疫伤害。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "holyRune": true,
+        "turn": 4
+      },
+      "expected": []
+    },
+    {
+      "input": {
+        "holyRune": true,
+        "turn": 0
+      },
+      "expected": [
+        {
+          "key": "curseImmunity",
+          "name": "免疫诅咒",
+          "icon": "shield",
+          "duration": "3回合",
+          "description": "阻止对自身施加诅咒。圣洁符文在前3回合有效。不等于免疫伤害。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "holyRune": true,
+        "turn": -1
+      },
+      "expected": [
+        {
+          "key": "curseImmunity",
+          "name": "免疫诅咒",
+          "icon": "shield",
+          "duration": "5回合",
+          "description": "阻止对自身施加诅咒。圣洁符文在前3回合有效。不等于免疫伤害。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "holyRune": true,
+        "turn": 2,
+        "playerCurseImmune": true
+      },
+      "expected": [
+        {
+          "key": "curseImmunity",
+          "name": "免疫诅咒",
+          "icon": "shield",
+          "duration": "本场",
+          "description": "阻止对自身施加诅咒。持续至本场战斗结束。不等于免疫伤害。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "holyRune": true,
+        "turn": 2,
+        "playerCurseImmune": true,
+        "curseImmunityTemporary": true
+      },
+      "expected": [
+        {
+          "key": "curseImmunity",
+          "name": "免疫诅咒",
+          "icon": "shield",
+          "duration": "2回合",
+          "description": "阻止对自身施加诅咒。圣洁符文在前3回合有效。不等于免疫伤害。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "spellCost1": true
+      },
+      "expected": [
+        {
+          "key": "moveCost",
+          "name": "法术1费",
+          "icon": "sparkles",
+          "duration": "本场",
+          "description": "法术按1费结算，持续至本场战斗结束；单牌限回合0费、无限符文等更高优先级费用规则仍适用，以手牌实际费用为准。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "meleeCost1": true
+      },
+      "expected": [
+        {
+          "key": "moveCost",
+          "name": "武术1费",
+          "icon": "sparkles",
+          "duration": "本场",
+          "description": "武术按1费结算，持续至本场战斗结束；单牌限回合0费、无限符文等更高优先级费用规则仍适用，以手牌实际费用为准。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "spellCost1": true,
+        "meleeCost1": true
+      },
+      "expected": [
+        {
+          "key": "moveCost",
+          "name": "招式1费",
+          "icon": "sparkles",
+          "duration": "本场",
+          "description": "招式按1费结算，持续至本场战斗结束；单牌限回合0费、无限符文等更高优先级费用规则仍适用，以手牌实际费用为准。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "playerCurseImmune": true,
+        "spellCost1": true,
+        "meleeCost1": true,
+        "nextSpellTwice": 2,
+        "allSpellsInfused": true,
+        "discoverPlus": 3,
+        "bleedAmp": 1,
+        "deathSave": 2,
+        "extraTurn": true
+      },
+      "expected": [
+        {
+          "key": "curseImmunity",
+          "name": "免疫诅咒",
+          "icon": "shield",
+          "duration": "本场",
+          "description": "阻止对自身施加诅咒。持续至本场战斗结束。不等于免疫伤害。"
+        },
+        {
+          "key": "moveCost",
+          "name": "招式1费",
+          "icon": "sparkles",
+          "duration": "本场",
+          "description": "招式按1费结算，持续至本场战斗结束；单牌限回合0费、无限符文等更高优先级费用规则仍适用，以手牌实际费用为准。"
+        },
+        {
+          "key": "nextSpell",
+          "name": "法术额外施放",
+          "icon": "sparkles",
+          "duration": "下一张",
+          "description": "下一张法术额外施放1次，触发后消失；不会为额外施放再次支付费用。"
+        },
+        {
+          "key": "infused",
+          "name": "招式已注能",
+          "icon": "sparkles",
+          "duration": "本场",
+          "description": "可注能与必须注能的武术、法术均视为已注能，无需材料；仍需支付正常费用，持续至本场战斗结束。"
+        },
+        {
+          "key": "discoverPlus",
+          "name": "发现候选+3",
+          "icon": "question",
+          "duration": "本场",
+          "description": "随机发现的候选数量增加，不增加可选择的张数。持续至本场战斗结束。"
+        },
+        {
+          "key": "bleedAmp",
+          "name": "流血加成翻倍",
+          "icon": "blood",
+          "duration": "本场",
+          "description": "对流血敌人造成伤害时，流血附加伤害再增加一份，不是总伤害翻倍。持续至本场战斗结束。"
+        },
+        {
+          "key": "deathSave",
+          "name": "抵挡致命伤害",
+          "icon": "shield",
+          "duration": "2次",
+          "description": "受到致命伤害时抵挡该次伤害并获得本回合免疫伤害，每次触发消耗1次；剩余次数保留至本场战斗结束。"
+        },
+        {
+          "key": "extraTurn",
+          "name": "额外回合",
+          "icon": "hourglass",
+          "duration": "待触发",
+          "description": "结束当前回合后跳过敌方行动，立即进入自己的下一回合；触发后消失。"
+        }
+      ]
+    },
+    {
+      "input": {
+        "nextSpellTwice": 0,
+        "discoverPlus": 0,
+        "bleedAmp": -1,
+        "deathSave": 0
+      },
+      "expected": []
+    }
+  ],
+  "buffs": [
+    "atkUp",
+    "spellUp",
+    "stealth",
+    "immune",
+    "reduce",
+    "dodge",
+    "swordForm",
+    "natureForm",
+    "cosmosForm"
+  ],
+  "curses": [
+    "bleed",
+    "poison",
+    "freeze",
+    "silence",
+    "abreak",
+    "healban",
+    "atkDown"
+  ],
+  "buffMetadata": {
+    "atkUp": {
+      "name": "攻击强化",
+      "icon": "[[icon:status-atk-up]]",
+      "value": true,
+      "desc": "攻击伤害 +N（本场战斗）"
+    },
+    "spellUp": {
+      "name": "法术强化",
+      "icon": "[[icon:status-spell-up]]",
+      "value": true,
+      "desc": "法术伤害 +N（本场战斗）"
+    },
+    "stealth": {
+      "name": "潜行",
+      "icon": "[[icon:status-stealth]]",
+      "timed": true,
+      "desc": "无法成为被攻击对象；造成伤害会破除潜行"
+    },
+    "immune": {
+      "name": "免疫伤害",
+      "icon": "[[icon:status-immune]]",
+      "timed": true,
+      "desc": "不受到任何伤害"
+    },
+    "reduce": {
+      "name": "减伤",
+      "icon": "[[icon:status-reduce]]",
+      "value": true,
+      "desc": "每次受到的伤害 -N（真实伤害除外）"
+    },
+    "dodge": {
+      "name": "闪避",
+      "icon": "[[icon:status-dodge]]",
+      "value": true,
+      "desc": "避开下一段伤害（每层避开 1 段）"
+    },
+    "swordForm": {
+      "name": "剑仙形态",
+      "icon": "[[icon:status-sword-form]]",
+      "flag": true,
+      "desc": "回合开始时额外抽 1 张"
+    },
+    "natureForm": {
+      "name": "满月形态",
+      "icon": "[[icon:status-moon-form]]",
+      "flag": true,
+      "desc": "回合开始时额外获得 1 点能量"
+    },
+    "cosmosForm": {
+      "name": "宇宙形态",
+      "icon": "[[icon:status-cosmos-form]]",
+      "flag": true,
+      "desc": "本局对战所有卡牌变为 1 费"
+    }
+  },
+  "curseMetadata": {
+    "bleed": {
+      "name": "流血",
+      "icon": "[[icon:status-bleed]]",
+      "stack": true,
+      "desc": "每层使受到的攻击伤害 +1"
+    },
+    "poison": {
+      "name": "中毒",
+      "icon": "[[icon:status-poison]]",
+      "stack": true,
+      "desc": "每层在回合结束时受到 1 点固定伤害"
+    },
+    "freeze": {
+      "name": "冰冻",
+      "icon": "[[icon:status-freeze]]",
+      "stack": false,
+      "desc": "1 回合无法行动"
+    },
+    "silence": {
+      "name": "沉默",
+      "icon": "[[icon:status-silence]]",
+      "stack": false,
+      "desc": "1 回合技能无法生效（攻击除外）"
+    },
+    "abreak": {
+      "name": "破甲",
+      "icon": "[[icon:status-armor-break]]",
+      "stack": false,
+      "desc": "2 回合内无法减免伤害"
+    },
+    "healban": {
+      "name": "禁疗",
+      "icon": "[[icon:status-heal-ban]]",
+      "stack": false,
+      "desc": "2 回合内无法回复生命"
+    },
+    "atkDown": {
+      "name": "攻击降低",
+      "icon": "[[icon:status-atk-down]]",
+      "stack": false,
+      "desc": "持续期间攻击力降低，到期归还"
+    }
+  }
+}

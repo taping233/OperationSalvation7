@@ -1,0 +1,50 @@
+{
+  "reviewedUtc": "2026-10-29T19:36:59.1246828Z",
+  "report": "README.md",
+  "capture": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-visual-2",
+  "verdict": "not-equivalent",
+  "scope": "background read-only production source and six current native frames; no Unity/browser/compile",
+  "findings": [
+    "E01-base-content-width",
+    "E02-shared-run-header-and-map-tools",
+    "E03-current-actor-frame-chain",
+    "E04-home-ghost-stroke",
+    "E05-preparation-goals-layout"
+  ],
+  "staticUnverified": [
+    "E06-end-turn-hold"
+  ],
+  "images": [
+    {
+      "name": "title.png",
+      "bytes": 3376898,
+      "sha256": "28ba97cb8427ec92670afd363e323daa3f6b32f73e6d52cfb23aaa883c079ffd"
+    },
+    {
+      "name": "hub.png",
+      "bytes": 1816425,
+      "sha256": "17528e743c859cce208367b54e52afa3fdab7a82469ccf68230b9902779561ee"
+    },
+    {
+      "name": "preparation.png",
+      "bytes": 553326,
+      "sha256": "be32dde5725ae4c14deeaf2c2a0f3e6c712a7456719e4de26fa5207e3a15029c"
+    },
+    {
+      "name": "battle.png",
+      "bytes": 1659516,
+      "sha256": "e3b61f761daaba4e9f74f9057e20f9f0f732245a7b16a16b5aa71e6ce7675e69"
+    },
+    {
+      "name": "cards-and-icons.png",
+      "bytes": 1152421,
+      "sha256": "99e74c3731d7d57d73ef79a1663937820919acc0acfecd442d7f01672b2c31eb"
+    },
+    {
+      "name": "map.png",
+      "bytes": 836993,
+      "sha256": "33ec6180858c71343388aa756e9cf4c6f689286e52829683e4537c7da4744e6c"
+    }
+  ],
+  "released": true
+}

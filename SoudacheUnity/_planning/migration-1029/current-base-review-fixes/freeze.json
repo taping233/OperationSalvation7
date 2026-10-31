@@ -1,0 +1,151 @@
+{
+  "status": "production-frozen-for-independent-native-review",
+  "time": "2026-10-29T21:07:28.034104+00:00",
+  "reviewedEvidence": "../current-effect-review/review6-base-photoagent.json",
+  "production": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+      "sha256": "c20e2a0d18fa2214deaa1c4fb6df76a3c747d725a9af37be9e57b33cca3a2dbb"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentLayout.cs",
+      "sha256": "5ad53c6f6938aa35084ae7a39201052e7a1bd9697c3ebad346fd29e9c043d630"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentSourceLayout.cs",
+      "sha256": "073a8d33752ec5fde53f9938b712d785fc2559a624702b4871b199d19835a1e7"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+      "sha256": "c56ecc827d399a8e70b5f19fe0e87222e78b2259c14262916cbc292bd39ad48c"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentRooms.cs",
+      "sha256": "d195abe79e4b324a6d5efc52925174ec6767c044229ce27b78cc89de66db7109"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/CourtyardScreen.cs",
+      "sha256": "afc69993358415c91a974927bf97e208d48c4e7f2a92c356a44d8e45f3f85541"
+    },
+    {
+      "path": "Assets/Resources/HubPortraitMultiply.shader",
+      "sha256": "6d52354921b6e2d9e0f9d62e1d132dead3838109209bd2fac9950b3233ba44b6"
+    }
+  ],
+  "currentSource": [
+    {
+      "path": "game/css/archive-back.css",
+      "sha256": "d893b6a0396f28ba4bd7905016d574c26a67f51268d1b7800d319b627fd71b38"
+    },
+    {
+      "path": "game/css/navigation-feedback.css",
+      "sha256": "36b28df2419f09718b9143c3f3ef71a493ad16713a2bc16dc40f6b4c337c1bf2"
+    },
+    {
+      "path": "game/css/base-framework-v7.css",
+      "sha256": "2c0bf5d41221ea9880d8c82ed696c13877e0a712fed74924cf14b85aaee7b953"
+    },
+    {
+      "path": "game/css/base-archive-facilities-v12.css",
+      "sha256": "16dd8568baef9c60d14f6a6d4cc96f3fb2351cdbf4f9334068fa04d22cadad9d"
+    },
+    {
+      "path": "game/css/base-courtyard-v3.css",
+      "sha256": "977142ab7ea86d39897fcd03b624d9506f246185c0c8da64020b9cd3a10be007"
+    },
+    {
+      "path": "game/css/base-logistics-trade-v12.css",
+      "sha256": "962d79109e0d67519cbbe4bb5e0d9c6299e36fe85b8ae01090827d804947ffda"
+    },
+    {
+      "path": "game/css/base-personnel-v12.css",
+      "sha256": "55b4ee0a9d2472295ae0ecc9c20cf2eed920e8f6360b2c6d06ef3c8a29329cff"
+    },
+    {
+      "path": "game/css/collection-workspace.css",
+      "sha256": "fb0d6e01f7e6d6e63a685a4cfe71326d3b26e7a41a76099bafd1ec5bb1452592"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "sha256": "37796e2e56647a4d86c456e62be91f9ca843dbe0ee7f59fa75e41249b008a307"
+    },
+    {
+      "path": "game/src/hub/hub.trade-shop-v5.js",
+      "sha256": "1819d85e12cf1bf30b3e70a20205a3eaf13aa8cf4aa41a86f8ce2453e2352e93"
+    },
+    {
+      "path": "game/src/hub/hub.warehouse.js",
+      "sha256": "d99bcf65c9ac96b7235b279242b175f05381b80560ba70ff0b770440ccbc102c"
+    },
+    {
+      "path": "game/src/ui/home-linked-interactions.js",
+      "sha256": "1e17a3a0f4e4a4f6c6baba1c0bc6709755b34c147ba7c2fe7970d3c574f2289b"
+    }
+  ],
+  "reusedAssets": [
+    {
+      "path": "Assets/Resources/Art/CurrentHome/linked-back.png",
+      "sha256": "2b74f29e220be7d0bc66b83e9b0d452ebb416297084c6b4a644df746482da647",
+      "mode": "existing source SVG raster; no reimport"
+    }
+  ],
+  "corrections": [
+    {
+      "finding": "R6-PHOTOAGENT-01",
+      "result": "166px trade mode track, remaining shelf, 480px desk; 220px auto-fill/16px gap/max260px item; source 210px shelf and 220px desk art; scroll constrained to shelf/reading"
+    },
+    {
+      "finding": "R6-PHOTOAGENT-02",
+      "result": "184px archive directory; 230px/.8fr/min490px1.2fr facilities tracks; numbered left aligned directory title/arrow and facility second line"
+    },
+    {
+      "finding": "R6-PHOTOAGENT-03",
+      "result": "default portrait only: full original, isolated #c4ccc9 stage, CSS-equivalent RGB multiply shader; scene skins retain normal image material"
+    },
+    {
+      "finding": "R6-PHOTOAGENT-04",
+      "result": "courtyard 12px gaps, 18px horizontal padding, 10px vertical button padding, content width buttons, remaining-width information, intact current-window counters"
+    },
+    {
+      "finding": "R6-PHOTOAGENT-05",
+      "result": "64x58 transparent square back region at18/16, reused24px linked-back SVG; graphite hover/focus and source focus outline"
+    },
+    {
+      "related": "warehouse fixed track boundary",
+      "result": "348px divisor/24px gap, full original columns through last row, 300px art contained, independent scrolling, right stack count"
+    }
+  ],
+  "checks": [
+    "private Hub partial family and Courtyard compile against imported assemblies: 0 warnings/0 errors",
+    "owned Unity pseudo-null add-component pattern guard"
+  ],
+  "controls": [
+    "hub-back archive-back",
+    "archive-back-focus-visible",
+    "trade-v12-layout",
+    "trade-v5-list",
+    "trade-v5-item <key>",
+    "av12-workspace",
+    "av12-directory",
+    "facility-layout",
+    "facility-map",
+    "pv12-agent-image-stage",
+    "warehouse-card-browser",
+    "warehouse-card-cell <id>",
+    "stack-count",
+    "courtyard-controls-row",
+    "courtyard-v3-info",
+    "courtyard-v3-progress"
+  ],
+  "nativeRequired": [
+    "new current-window screenshots reviewed by a different reviewer",
+    "trade shelf no overlap; rail166/desk480; card art width210/220; shelf and desk scroll independently",
+    "archive directory184 and facilities230/.8fr/1.2fr proportions, selection targets",
+    "default versus scene skin and shader import/color in native renderer",
+    "courtyard counters intact, buttons content width, hover/focus/back destination",
+    "warehouse last row width preserved and scrolling detail/back state"
+  ],
+  "shaderImportVerified": false,
+  "appearanceAccepted": false,
+  "realInputAccepted": false
+}

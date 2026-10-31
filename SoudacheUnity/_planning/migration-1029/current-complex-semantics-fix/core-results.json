@@ -1,0 +1,3314 @@
+[
+  {
+    "name": "gate-empty",
+    "seed": 1,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=1;v=2;s=generation:3139108811"
+  },
+  {
+    "name": "gate-prefer",
+    "seed": 1,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=1;v=2;s=generation:3139108811"
+  },
+  {
+    "name": "gate-purify",
+    "seed": 1,
+    "after": {
+      "player": {
+        "hp": 29,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 3,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=1;v=2;s=generation:3139108811"
+  },
+  {
+    "name": "gate-other-door",
+    "seed": 1,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 983,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "abreak": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    },
+    "third": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1,
+          "spellUp": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 974,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "freeze": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 4
+    },
+    "rng": "seed=1;v=2;s=generation:611766131"
+  },
+  {
+    "name": "gate-empty",
+    "seed": 2,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=2;v=2;s=generation:2823796302"
+  },
+  {
+    "name": "gate-prefer",
+    "seed": 2,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=2;v=2;s=generation:2823796302"
+  },
+  {
+    "name": "gate-purify",
+    "seed": 2,
+    "after": {
+      "player": {
+        "hp": 29,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 3,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=2;v=2;s=generation:2823796302"
+  },
+  {
+    "name": "gate-other-door",
+    "seed": 2,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {},
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 984,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "bleed": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    },
+    "third": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 974,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "bleed": 1,
+            "silence": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 4
+    },
+    "rng": "seed=2;v=2;s=generation:296453622"
+  },
+  {
+    "name": "gate-empty",
+    "seed": 3,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=3;v=2;s=generation:1236267565"
+  },
+  {
+    "name": "gate-prefer",
+    "seed": 3,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=3;v=2;s=generation:1236267565"
+  },
+  {
+    "name": "gate-purify",
+    "seed": 3,
+    "after": {
+      "player": {
+        "hp": 29,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 3,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=3;v=2;s=generation:1236267565"
+  },
+  {
+    "name": "gate-other-door",
+    "seed": 3,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "stealth": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 984,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "silence": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    },
+    "third": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 975,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "abreak": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 4
+    },
+    "rng": "seed=3;v=2;s=generation:3003892181"
+  },
+  {
+    "name": "gate-empty",
+    "seed": 4,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=4;v=2;s=generation:3540330968"
+  },
+  {
+    "name": "gate-prefer",
+    "seed": 4,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=4;v=2;s=generation:3540330968"
+  },
+  {
+    "name": "gate-purify",
+    "seed": 4,
+    "after": {
+      "player": {
+        "hp": 29,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 3,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=4;v=2;s=generation:3540330968"
+  },
+  {
+    "name": "gate-other-door",
+    "seed": 4,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1,
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 983,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "freeze": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    },
+    "third": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 973,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "freeze": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 4
+    },
+    "rng": "seed=4;v=2;s=generation:1012988288"
+  },
+  {
+    "name": "gate-empty",
+    "seed": 5,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {},
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=5;v=2;s=generation:3289429567"
+  },
+  {
+    "name": "gate-prefer",
+    "seed": 5,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=5;v=2;s=generation:3289429567"
+  },
+  {
+    "name": "gate-purify",
+    "seed": 5,
+    "after": {
+      "player": {
+        "hp": 29,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 3,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=5;v=2;s=generation:3289429567"
+  },
+  {
+    "name": "gate-other-door",
+    "seed": 5,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {},
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 984,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "healban": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    },
+    "third": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "stealth": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 976,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "healban": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 4
+    },
+    "rng": "seed=5;v=2;s=generation:762086887"
+  },
+  {
+    "name": "gate-empty",
+    "seed": 6,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {},
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=6;v=2;s=generation:4153347442"
+  },
+  {
+    "name": "gate-prefer",
+    "seed": 6,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=6;v=2;s=generation:4153347442"
+  },
+  {
+    "name": "gate-purify",
+    "seed": 6,
+    "after": {
+      "player": {
+        "hp": 29,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 3,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=6;v=2;s=generation:4153347442"
+  },
+  {
+    "name": "gate-other-door",
+    "seed": 6,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {},
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "stealth": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 983,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "silence": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    },
+    "third": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "stealth": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "stealth": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 974,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "silence": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 4
+    },
+    "rng": "seed=6;v=2;s=generation:1626004762"
+  },
+  {
+    "name": "gate-empty",
+    "seed": 7,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {},
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=7;v=2;s=generation:614277409"
+  },
+  {
+    "name": "gate-prefer",
+    "seed": 7,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=7;v=2;s=generation:614277409"
+  },
+  {
+    "name": "gate-purify",
+    "seed": 7,
+    "after": {
+      "player": {
+        "hp": 29,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 3,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=7;v=2;s=generation:614277409"
+  },
+  {
+    "name": "gate-other-door",
+    "seed": 7,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {},
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1,
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 984,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "silence": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    },
+    "third": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "reduce": 1,
+            "spellUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 976,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "freeze": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 4
+    },
+    "rng": "seed=7;v=2;s=generation:2381902025"
+  },
+  {
+    "name": "gate-empty",
+    "seed": 8,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=8;v=2;s=generation:3691281580"
+  },
+  {
+    "name": "gate-prefer",
+    "seed": 8,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 5,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=8;v=2;s=generation:3691281580"
+  },
+  {
+    "name": "gate-purify",
+    "seed": 8,
+    "after": {
+      "player": {
+        "hp": 29,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1,
+          "stealth": 1
+        },
+        "armor": 3,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "poison": 1,
+            "reduce": 1,
+            "spellUp": 1,
+            "stealth": 1
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": null,
+    "third": null,
+    "rng": "seed=8;v=2;s=generation:3691281580"
+  },
+  {
+    "name": "gate-other-door",
+    "seed": 8,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "reduce": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "stealth": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 0,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 983,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "abreak": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    },
+    "third": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {
+          "atkUp": 1,
+          "reduce": 1,
+          "spellUp": 1
+        },
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1,
+            "stealth": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        },
+        {
+          "hp": 4,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "atkUp": 1
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 973,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "silence": 1
+          },
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 4
+    },
+    "rng": "seed=8;v=2;s=generation:1163938900"
+  },
+  {
+    "name": "recruit-status",
+    "seed": 123,
+    "immediate": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 40,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "freeze": 1,
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 40,
+          "atk": 4,
+          "dead": true,
+          "status": {
+            "freeze": 1,
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        },
+        {
+          "hp": 1000,
+          "atk": 3,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 8,
+      "turn": 1
+    },
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 38,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 40,
+          "atk": 4,
+          "dead": true,
+          "status": {
+            "freeze": 1,
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        },
+        {
+          "hp": 1000,
+          "atk": 3,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 36,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 40,
+          "atk": 4,
+          "dead": true,
+          "status": {
+            "freeze": 1,
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        },
+        {
+          "hp": 996,
+          "atk": 3,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    }
+  },
+  {
+    "name": "recruit-poison-death",
+    "seed": 123,
+    "immediate": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "freeze": 1,
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": true,
+          "status": {
+            "freeze": 1,
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        },
+        {
+          "hp": 1000,
+          "atk": 3,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 8,
+      "turn": 1
+    },
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 1,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": true,
+          "status": {
+            "freeze": 1,
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        },
+        {
+          "hp": 1000,
+          "atk": 3,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [],
+      "foes": [
+        {
+          "hp": 3,
+          "atk": 4,
+          "dead": true,
+          "status": {
+            "freeze": 1,
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        },
+        {
+          "hp": 996,
+          "atk": 3,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    }
+  },
+  {
+    "name": "recruit-stealth-expiry",
+    "seed": 123,
+    "immediate": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 40,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3,
+            "stealth": 1
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 40,
+          "atk": 4,
+          "dead": true,
+          "status": {
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        },
+        {
+          "hp": 1000,
+          "atk": 3,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 8,
+      "turn": 1
+    },
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 38,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 40,
+          "atk": 4,
+          "dead": true,
+          "status": {
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        },
+        {
+          "hp": 996,
+          "atk": 3,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 2
+    },
+    "second": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [
+        {
+          "hp": 36,
+          "atk": 4,
+          "dead": false,
+          "status": {
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 3,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "foes": [
+        {
+          "hp": 40,
+          "atk": 4,
+          "dead": true,
+          "status": {
+            "poison": 2,
+            "reduce": 1,
+            "spellUp": 3
+          },
+          "armor": 5,
+          "shield": 2,
+          "guard": false
+        },
+        {
+          "hp": 992,
+          "atk": 3,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 10,
+      "turn": 3
+    }
+  },
+  {
+    "name": "noInfuse-discover",
+    "seed": 1,
+    "index": 2,
+    "chosen": "tt12-raydragon",
+    "waiver": true,
+    "damage": 13,
+    "infusing": false,
+    "after": {
+      "player": {
+        "hp": 30,
+        "atk": 0,
+        "dead": false,
+        "status": {},
+        "armor": 0,
+        "shield": 0,
+        "guard": false
+      },
+      "allies": [],
+      "foes": [
+        {
+          "hp": 987,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0,
+          "guard": false
+        }
+      ],
+      "energy": 8,
+      "turn": 1
+    }
+  }
+]

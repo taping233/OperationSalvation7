@@ -1,0 +1,844 @@
+{
+  "click": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/click"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "cardSelect": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/click"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "characterSelect": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/click"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "confirm": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/confirm"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "prepReady": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/confirm"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "extractionConfirm": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/confirm"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "gain": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "ui",
+    "rate": 1.08,
+    "gainScale": 0.72
+  },
+  "coin": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "tradeSell": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "stashDeposit": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "safeStore": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/safe-store"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "hover": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/click"
+    ],
+    "gain": 0.08,
+    "group": "ui"
+  },
+  "navigate": {
+    "files": [],
+    "gain": 0,
+    "group": "ui",
+    "silent": true
+  },
+  "switch": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/click"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "open": {
+    "files": [],
+    "gain": 0,
+    "group": "ui",
+    "silent": true
+  },
+  "safeEnter": {
+    "files": [],
+    "gain": 0,
+    "group": "ui",
+    "silent": true
+  },
+  "close": {
+    "files": [],
+    "gain": 0,
+    "group": "ui",
+    "silent": true
+  },
+  "error": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2569"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "deny": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2569"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "blackMarketLose": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2569"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "extractionFail": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2569"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "pick": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/click"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "safeRetrieve": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/safe-retrieve"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "drop": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/discard"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "discard": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/discard"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "danger": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/268"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "eventDanger": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/268"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "bossReveal": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2794"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "energyUp": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/status-up"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "buffUp": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/status-up"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "energyDown": {
+    "files": [
+      "Audio/Current/sfx/selected15-r2-1018/status-down"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "buffDown": {
+    "files": [
+      "Audio/Current/sfx/selected15-r2-1018/status-down"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "curseEnd": {
+    "files": [],
+    "gain": 0,
+    "group": "combat",
+    "silent": true
+  },
+  "turnSelf": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2568"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "phaseSelf": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2568"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "turnFoe": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/1109"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "phaseFoe": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/1109"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "scene": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/transition"
+    ],
+    "gain": 0.55,
+    "group": "transition"
+  },
+  "eventEnter": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/transition"
+    ],
+    "gain": 0.55,
+    "group": "transition"
+  },
+  "layerEnter": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/transition"
+    ],
+    "gain": 0.55,
+    "group": "transition"
+  },
+  "fireEnter": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/268"
+    ],
+    "gain": 0.18,
+    "group": "transition"
+  },
+  "altarEnter": {
+    "files": [],
+    "gain": 0,
+    "group": "transition",
+    "silent": true
+  },
+  "doorEnter": {
+    "files": [],
+    "gain": 0,
+    "group": "transition",
+    "silent": true
+  },
+  "shopEnter": {
+    "files": [],
+    "gain": 0,
+    "group": "transition",
+    "silent": true
+  },
+  "extractionEnter": {
+    "files": [],
+    "gain": 0,
+    "group": "transition",
+    "silent": true
+  },
+  "deployStart": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/deploy-start"
+    ],
+    "gain": 0.55,
+    "group": "transition"
+  },
+  "battleEnter": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/battle-enter"
+    ],
+    "gain": 0.55,
+    "group": "transition"
+  },
+  "flee": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/transition"
+    ],
+    "gain": 0.55,
+    "group": "transition"
+  },
+  "ding": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "levelup": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "achievementUnlock": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "collectionUnlock": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "eventComplete": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "storyComplete": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "recodeComplete": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "shutter": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/click"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "searchStart": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/1530"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "recodeStart": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/1530"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "searchReveal": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2380"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "eventClue": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2380"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "storyClue": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2380"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "altarActivate": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/click"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "altarOffer": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/click"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "eventSafe": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/confirm"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "card": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2380",
+      "Audio/Current/sfx/mixkit-1018/1530"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "draw": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/1104",
+      "Audio/Current/sfx/mixkit-1018/1101"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "shuffle": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/1530"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "hit": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2158",
+      "Audio/Current/sfx/mixkit-1018/2166"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "attackSlash": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2158",
+      "Audio/Current/sfx/mixkit-1018/2166"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "attackPierce": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2761"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "attackArrow": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2771"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "strike": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2153"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "attackBlunt": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2153"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "attackBossHeavy": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2794"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "hurt": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2153"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "parry": {
+    "files": [
+      "Audio/Current/sfx/selected15-r2-1018/parry",
+      "Audio/Current/sfx/selected15-r2-1018/parry-muted"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "curse": {
+    "files": [
+      "Audio/Current/sfx/selected15-r2-1018/curse"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "attackFire": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/fire"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "attackIce": {
+    "files": [],
+    "gain": 0,
+    "group": "combat",
+    "silent": true
+  },
+  "attackLightning": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/lightning"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "attackPoison": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/1530"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "attackPsychic": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/psychic"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "heal": {
+    "files": [],
+    "gain": 0,
+    "group": "combat",
+    "silent": true
+  },
+  "cardRestore": {
+    "files": [
+      "Audio/Current/sfx/selected15-r2-1018/heal"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "chestShake": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/1530"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "chestBurst": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "reveal": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "tradeBuy": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat",
+    "rate": 1.15,
+    "gainScale": 0.75
+  },
+  "runeExchange": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "legend": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "rarePlay": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "altarReward": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "eggHatch": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "petRescue": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "blackMarketWin": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "victory": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "result",
+    "rate": 0.96,
+    "gainScale": 0.9
+  },
+  "bossVictory": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "result",
+    "rate": 0.84,
+    "gainScale": 1
+  },
+  "runClear": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "result",
+    "rate": 0.76,
+    "gainScale": 1
+  },
+  "extractionSuccess": {
+    "files": [
+      "Audio/Current/sfx/original-ui-1018/reward"
+    ],
+    "gain": 0.65,
+    "group": "result",
+    "rate": 1.06,
+    "gainScale": 0.95
+  },
+  "defeat": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/268"
+    ],
+    "gain": 0.32,
+    "group": "result",
+    "rate": 0.88,
+    "gainScale": 1
+  },
+  "shieldUp": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/shield"
+    ],
+    "gain": 0.65,
+    "group": "combat",
+    "maxDuration": 0.42
+  },
+  "kill": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2794"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "shieldBreak": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2795"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "armorBreak": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2795"
+    ],
+    "gain": 0.32,
+    "group": "combat"
+  },
+  "burn": {
+    "files": [
+      "Audio/Current/sfx/selected32-1018/burn"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "foeLunge": {
+    "files": [
+      "Audio/Current/sfx/mixkit-1018/2141"
+    ],
+    "gain": 0.32,
+    "group": "combat",
+    "maxDuration": 0.22
+  },
+  "_policy": {
+    "cooldowns": {
+      "click": 28,
+      "hover": 55,
+      "scene": 110,
+      "hit": 45,
+      "hurt": 60,
+      "strike": 45,
+      "kill": 90,
+      "buffUp": 80,
+      "buffDown": 120,
+      "foeLunge": 60,
+      "curse": 60,
+      "curseEnd": 160,
+      "parry": 45,
+      "coin": 80,
+      "cardSelect": 45,
+      "discard": 65,
+      "burn": 80,
+      "rarePlay": 180,
+      "danger": 300,
+      "energyUp": 45,
+      "energyDown": 45,
+      "shieldUp": 220,
+      "shieldBreak": 100,
+      "armorBreak": 120,
+      "phase": 180,
+      "attackSlash": 45,
+      "attackPierce": 45,
+      "attackArrow": 45,
+      "attackBlunt": 60,
+      "attackFire": 80,
+      "attackIce": 80,
+      "attackLightning": 80,
+      "attackPoison": 80,
+      "attackPsychic": 80,
+      "attackBossHeavy": 120,
+      "phaseSelf": 180,
+      "phaseFoe": 180,
+      "eventEnter": 110,
+      "bossReveal": 300,
+      "fireEnter": 250,
+      "altarEnter": 250,
+      "doorEnter": 250,
+      "shopEnter": 250,
+      "extractionEnter": 250,
+      "eventComplete": 180,
+      "achievementUnlock": 180,
+      "collectionUnlock": 180
+    },
+    "priorities": {
+      "victory": 6,
+      "bossVictory": 6,
+      "defeat": 6,
+      "runClear": 6,
+      "extractionSuccess": 6,
+      "danger": 5,
+      "phase": 4,
+      "kill": 4,
+      "shieldBreak": 5,
+      "armorBreak": 5,
+      "rarePlay": 4,
+      "curseEnd": 4,
+      "hurt": 3,
+      "hit": 3,
+      "strike": 3,
+      "foeLunge": 3,
+      "shieldUp": 2,
+      "energyUp": 2,
+      "energyDown": 2,
+      "curse": 2,
+      "cardSelect": 1,
+      "discard": 1,
+      "burn": 1,
+      "hover": 0,
+      "attackSlash": 3,
+      "attackPierce": 3,
+      "attackArrow": 3,
+      "attackBlunt": 3,
+      "attackFire": 3,
+      "attackIce": 3,
+      "attackLightning": 3,
+      "attackPoison": 3,
+      "attackPsychic": 3,
+      "attackBossHeavy": 4,
+      "phaseSelf": 4,
+      "phaseFoe": 4,
+      "bossReveal": 5
+    }
+  }
+}

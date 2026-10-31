@@ -1,0 +1,339 @@
+{
+  "format": "sdt-unity-profile",
+  "version": 1,
+  "runs": {},
+  "global": {
+    "sdt-base-v2-slot1": {
+      "wood": 0,
+      "rations": 0,
+      "bagUp": 0,
+      "safeUp": 0,
+      "stashUp": 0,
+      "coins": 0,
+      "stash": [
+        {
+          "card": {
+            "id": "starter-emergency-bandage",
+            "name": "应急绷带",
+            "cost": 0,
+            "rarity": "稀有",
+            "type": "道具",
+            "dmg": 0,
+            "dmgType": null,
+            "draw": null,
+            "infuse": null,
+            "heal": 12,
+            "armor": null,
+            "desc": "回复12 点生命。",
+            "value": 0,
+            "sellable": false,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "bag": {
+                "use": [
+                  {
+                    "op": "heal",
+                    "amountField": "heal"
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 5
+        }
+      ],
+      "pocket": [],
+      "collection": {},
+      "selMode": "standard",
+      "classes": {},
+      "characters": {
+        "wu": {
+          "lv": 1,
+          "xp": 0
+        },
+        "changwuyu": {
+          "lv": 1,
+          "xp": 0
+        },
+        "baita": {
+          "lv": 1,
+          "xp": 0
+        },
+        "heixiang": {
+          "lv": 1,
+          "xp": 0
+        },
+        "xingyue": {
+          "lv": 1,
+          "xp": 0
+        }
+      },
+      "stats": {
+        "extracts": 0,
+        "deaths": 0,
+        "kills": 0,
+        "actions": 0,
+        "playSeconds": 0.0,
+        "bossKills": [],
+        "bestRunCoins": 0,
+        "stashTotal": 0,
+        "turnMovesMax": 0,
+        "battleEquipsMax": 0,
+        "reviveKills": 0,
+        "nestBossKills": [],
+        "labTotalScore": 0
+      },
+      "achClaimed": {},
+      "backs": {
+        "classic": true
+      },
+      "backSel": "classic",
+      "selectedSkins": {},
+      "collClaimed": {},
+      "collectionProtection": {},
+      "keys": 0,
+      "pets": {
+        "dog": {
+          "lv": 1,
+          "ts": 0
+        }
+      },
+      "petSel": "dog",
+      "eggPity": 0,
+      "eggBattles": 0,
+      "ammoTaught": false,
+      "runes": [],
+      "goals": {
+        "tracked": [
+          "a",
+          "b"
+        ],
+        "presets": {
+          "preset-1": {
+            "id": "preset-1",
+            "name": "实装预设",
+            "characterId": "wu",
+            "petId": "dog",
+            "picks": []
+          }
+        }
+      },
+      "story": {
+        "flags": {},
+        "outcomes": {}
+      },
+      "supplyPackOpening": null,
+      "BackSel": "classic",
+      "BagCap": 16,
+      "SafeCap": 2,
+      "StashCap": 25,
+      "StashUsed": 5,
+      "StashRoom": 20,
+      "CanUpgradeBag": false,
+      "CanUpgradeSafe": false,
+      "CanUpgradeStash": false,
+      "KeyCount": 0,
+      "CarriedPet": {
+        "id": "dog",
+        "name": "旺财",
+        "icon": "paw",
+        "desc": "携带效果：生命上限 +5",
+        "effect": {
+          "maxHp": 5,
+          "safeBonus": 0,
+          "extraSha": 0,
+          "classChest": 0.0,
+          "shopFree": false,
+          "shaToFireball": false
+        }
+      },
+      "PetEggDropChance": 0.007
+    },
+    "sdt-base-v2-slot2": {
+      "wood": 0,
+      "rations": 0,
+      "bagUp": 0,
+      "safeUp": 0,
+      "stashUp": 0,
+      "coins": 0,
+      "stash": [
+        {
+          "card": {
+            "id": "tt2-swiftarrow",
+            "name": "迅疾箭",
+            "cost": 1,
+            "rarity": "古朴",
+            "type": "武术",
+            "dmg": -1,
+            "dmgType": "attack",
+            "draw": 1,
+            "infuse": null,
+            "heal": null,
+            "armor": null,
+            "desc": "攻（-1），抽 1 张牌。",
+            "value": 2,
+            "sellable": null,
+            "unrandom": false,
+            "cls": null,
+            "hero": null,
+            "art": null,
+            "tokenOf": null,
+            "tier": null,
+            "count": 0,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "draw",
+                    "amount": 1
+                  }
+                ]
+              }
+            },
+            "zeroCostUntilTurn": null,
+            "runtimeCost": null,
+            "noInfuse": false
+          },
+          "count": 3
+        }
+      ],
+      "pocket": [],
+      "collection": {},
+      "selMode": "standard",
+      "classes": {},
+      "characters": {
+        "wu": {
+          "lv": 1,
+          "xp": 0
+        },
+        "changwuyu": {
+          "lv": 1,
+          "xp": 0
+        },
+        "baita": {
+          "lv": 1,
+          "xp": 0
+        },
+        "heixiang": {
+          "lv": 1,
+          "xp": 0
+        },
+        "xingyue": {
+          "lv": 1,
+          "xp": 0
+        }
+      },
+      "stats": {
+        "extracts": 0,
+        "deaths": 0,
+        "kills": 0,
+        "actions": 0,
+        "playSeconds": 0.0,
+        "bossKills": [],
+        "bestRunCoins": 0,
+        "stashTotal": 0,
+        "turnMovesMax": 0,
+        "battleEquipsMax": 0,
+        "reviveKills": 0,
+        "nestBossKills": [],
+        "labTotalScore": 0
+      },
+      "achClaimed": {},
+      "backs": {
+        "classic": true
+      },
+      "backSel": "classic",
+      "selectedSkins": {},
+      "collClaimed": {},
+      "collectionProtection": {},
+      "keys": 0,
+      "pets": {
+        "dog": {
+          "lv": 1,
+          "ts": 0
+        },
+        "robot": {
+          "lv": 1,
+          "ts": 0
+        }
+      },
+      "petSel": "dog",
+      "eggPity": 0,
+      "eggBattles": 0,
+      "ammoTaught": false,
+      "runes": [],
+      "goals": {
+        "tracked": [],
+        "presets": {
+          "preset-1": {
+            "id": "preset-1",
+            "name": "出征",
+            "characterId": "wu",
+            "petId": "robot",
+            "picks": [
+              {
+                "card": {
+                  "cardId": "tt2-swiftarrow"
+                },
+                "count": 2
+              }
+            ]
+          }
+        }
+      },
+      "story": {
+        "flags": {},
+        "outcomes": {}
+      },
+      "supplyPackOpening": null,
+      "BackSel": "classic",
+      "BagCap": 16,
+      "SafeCap": 2,
+      "StashCap": 25,
+      "StashUsed": 3,
+      "StashRoom": 22,
+      "CanUpgradeBag": false,
+      "CanUpgradeSafe": false,
+      "CanUpgradeStash": false,
+      "KeyCount": 0,
+      "CarriedPet": {
+        "id": "dog",
+        "name": "旺财",
+        "icon": "paw",
+        "desc": "携带效果：生命上限 +5",
+        "effect": {
+          "maxHp": 5,
+          "safeBonus": 0,
+          "extraSha": 0,
+          "classChest": 0.0,
+          "shopFree": false,
+          "shaToFireball": false
+        }
+      },
+      "PetEggDropChance": 0.007
+    }
+  },
+  "settlements": {}
+}

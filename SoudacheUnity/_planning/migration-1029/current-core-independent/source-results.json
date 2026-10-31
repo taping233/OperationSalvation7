@@ -1,0 +1,850 @@
+[
+  {
+    "name": "grudge",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-thundergrudge",
+          "cls": "侠客",
+          "name": "快意恩仇",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "消耗 2 张初始攻击，攻击 3 次。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              },
+              "requirements": [
+                {
+                  "kind": "handCards",
+                  "count": 2,
+                  "type": "初始攻击"
+                }
+              ]
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy",
+                  "hitCount": 3,
+                  "retarget": "livingFoes"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "initialHand": [
+      "o0",
+      "o1",
+      "o2"
+    ],
+    "out": {
+      "selection": {
+        "act": "payment",
+        "type": "初始攻击",
+        "n": 2
+      },
+      "hand": [],
+      "consumed": [
+        "o1",
+        "o2"
+      ],
+      "armor": 0,
+      "foeHp": 88,
+      "energy": 1
+    }
+  },
+  {
+    "name": "armor",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt2-turtlearmor",
+          "name": "铸甲",
+          "cost": 1,
+          "rarity": "稀有",
+          "type": "武术",
+          "desc": "消耗1 张装备牌，+10甲。",
+          "dmg": 0,
+          "armor": 10,
+          "value": 3,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              },
+              "requirements": [
+                {
+                  "kind": "handCards",
+                  "count": 1,
+                  "type": "装备"
+                }
+              ]
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "armor",
+                  "amount": 10
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "tt2-apollo",
+          "name": "阿猫的礼物",
+          "cost": 0,
+          "rarity": "史诗",
+          "type": "装备",
+          "desc": "发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌。",
+          "dmg": 0,
+          "value": 4,
+          "rules": {
+            "version": 1,
+            "equip": {
+              "onEquip": []
+            },
+            "triggers": {
+              "onAcquire": [
+                {
+                  "op": "energy",
+                  "n": 1
+                },
+                {
+                  "op": "acquire",
+                  "n": 1,
+                  "pool": {
+                    "kind": "随机"
+                  },
+                  "filter": {
+                    "exceptIds": [
+                      "tt2-apollo"
+                    ]
+                  },
+                  "dest": "hand"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "initialHand": [
+      "o0",
+      "o1"
+    ],
+    "out": {
+      "selection": {
+        "act": "payment",
+        "type": "装备",
+        "n": 1
+      },
+      "hand": [],
+      "consumed": [
+        "o1"
+      ],
+      "armor": 10,
+      "foeHp": 100,
+      "energy": 1
+    }
+  },
+  {
+    "name": "fly",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt3-fly-arrowhawk",
+          "name": "飞身劈",
+          "cost": 2,
+          "rarity": "稀有",
+          "type": "武术",
+          "desc": "攻（+3），触发的流血伤害翻倍。",
+          "dmg": 3,
+          "dmgType": "attack",
+          "value": 3,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "bleed": 3,
+    "out": {
+      "selection": null,
+      "hand": [],
+      "consumed": [],
+      "armor": 0,
+      "foeHp": 87,
+      "energy": 0
+    }
+  },
+  {
+    "name": "bleedAmp",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "custom-bleedAmp",
+          "name": "规则夹具",
+          "type": "法术",
+          "cost": 0,
+          "desc": "",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "registerRule",
+                  "rule": "bleedAmp"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "tt3-nuke-ray",
+          "cls": "降临者",
+          "name": "致命射线",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "dmg": 8,
+          "dmgType": "spell",
+          "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+          "value": 3,
+          "sellable": false,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 3,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "costs": [
+      1,
+      2
+    ],
+    "out": {
+      "selection": null,
+      "hand": [
+        "o2"
+      ],
+      "consumed": [],
+      "armor": 0,
+      "foeHp": 90,
+      "energy": 1
+    }
+  },
+  {
+    "name": "spellCost1",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "custom-spellCost1",
+          "name": "规则夹具",
+          "type": "法术",
+          "cost": 0,
+          "desc": "",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "registerRule",
+                  "rule": "spellCost1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "tt3-fly-arrowhawk",
+          "name": "飞身劈",
+          "cost": 2,
+          "rarity": "稀有",
+          "type": "武术",
+          "desc": "攻（+3），触发的流血伤害翻倍。",
+          "dmg": 3,
+          "dmgType": "attack",
+          "value": 3,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "tt3-nuke-ray",
+          "cls": "降临者",
+          "name": "致命射线",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "dmg": 8,
+          "dmgType": "spell",
+          "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+          "value": 3,
+          "sellable": false,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 3,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "costs": [
+      2,
+      1
+    ],
+    "out": {}
+  },
+  {
+    "name": "meleeCost1",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "custom-meleeCost1",
+          "name": "规则夹具",
+          "type": "法术",
+          "cost": 0,
+          "desc": "",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "registerRule",
+                  "rule": "meleeCost1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "tt3-fly-arrowhawk",
+          "name": "飞身劈",
+          "cost": 2,
+          "rarity": "稀有",
+          "type": "武术",
+          "desc": "攻（+3），触发的流血伤害翻倍。",
+          "dmg": 3,
+          "dmgType": "attack",
+          "value": 3,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "tt3-nuke-ray",
+          "cls": "降临者",
+          "name": "致命射线",
+          "cost": 2,
+          "rarity": "职业",
+          "type": "法术",
+          "dmg": 8,
+          "dmgType": "spell",
+          "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+          "value": 3,
+          "sellable": false,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "curse",
+                  "randomKinds": 3,
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "costs": [
+      1,
+      2
+    ],
+    "out": {}
+  },
+  {
+    "name": "grudge-boss",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt7-thundergrudge",
+          "cls": "侠客",
+          "name": "快意恩仇",
+          "cost": 1,
+          "rarity": "职业",
+          "type": "武术",
+          "desc": "消耗 2 张初始攻击，攻击 3 次。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 3,
+          "unrandom": true,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              },
+              "requirements": [
+                {
+                  "kind": "handCards",
+                  "count": 2,
+                  "type": "初始攻击"
+                }
+              ]
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy",
+                  "hitCount": 3,
+                  "retarget": "livingFoes"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o2",
+        "card": {
+          "id": "starter-attack",
+          "name": "初始攻击",
+          "cost": 1,
+          "rarity": "初始",
+          "type": "武术",
+          "desc": "攻（+0）：造成等同于攻击力的伤害。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "value": 1,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "conditionedHand": [
+      "o0",
+      "o1",
+      "o2"
+    ],
+    "out": {
+      "selection": {
+        "act": "payment",
+        "type": "初始攻击",
+        "n": 2
+      },
+      "hand": [],
+      "consumed": [
+        "o1",
+        "o2"
+      ],
+      "armor": 0,
+      "foeHp": 88,
+      "energy": 1
+    }
+  },
+  {
+    "name": "armor-boss",
+    "input": [
+      {
+        "uid": "o0",
+        "card": {
+          "id": "tt2-turtlearmor",
+          "name": "铸甲",
+          "cost": 1,
+          "rarity": "稀有",
+          "type": "武术",
+          "desc": "消耗1 张装备牌，+10甲。",
+          "dmg": 0,
+          "armor": 10,
+          "value": 3,
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              },
+              "requirements": [
+                {
+                  "kind": "handCards",
+                  "count": 1,
+                  "type": "装备"
+                }
+              ]
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "armor",
+                  "amount": 10
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "uid": "o1",
+        "card": {
+          "id": "tt2-apollo",
+          "name": "阿猫的礼物",
+          "cost": 0,
+          "rarity": "史诗",
+          "type": "装备",
+          "desc": "发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌。",
+          "dmg": 0,
+          "value": 4,
+          "rules": {
+            "version": 1,
+            "equip": {
+              "onEquip": []
+            },
+            "triggers": {
+              "onAcquire": [
+                {
+                  "op": "energy",
+                  "n": 1
+                },
+                {
+                  "op": "acquire",
+                  "n": 1,
+                  "pool": {
+                    "kind": "随机"
+                  },
+                  "filter": {
+                    "exceptIds": [
+                      "tt2-apollo"
+                    ]
+                  },
+                  "dest": "hand"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "conditionedHand": [
+      "o0",
+      "o1"
+    ],
+    "out": {
+      "selection": {
+        "act": "payment",
+        "type": "装备",
+        "n": 1
+      },
+      "hand": [],
+      "consumed": [
+        "o1"
+      ],
+      "armor": 10,
+      "foeHp": 100,
+      "energy": 1
+    }
+  }
+]

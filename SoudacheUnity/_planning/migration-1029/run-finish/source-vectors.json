@@ -1,0 +1,5265 @@
+{
+  "nativeBagCards": 19,
+  "cases": [
+    {
+      "id": "starter-emergency-bandage",
+      "hp": 4,
+      "consumed": true,
+      "afterHp": 16,
+      "ownedIds": [],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "starter-emergency-bandage",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "starter-emergency-bandage"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt-crystal",
+      "hp": 4,
+      "consumed": true,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "tt-crystal",
+      "hp": 30,
+      "consumed": true,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "tt-jinchuangyao",
+      "hp": 4,
+      "consumed": true,
+      "afterHp": 24,
+      "ownedIds": [],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt-jinchuangyao",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt-jinchuangyao"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-blue-potion",
+      "hp": 4,
+      "consumed": true,
+      "afterHp": 9,
+      "ownedIds": [],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-blue-potion",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-blue-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-python-potion",
+      "hp": 4,
+      "consumed": false,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3-python-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-python-potion",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-python-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-houyi-potion",
+      "hp": 4,
+      "consumed": false,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3-houyi-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-houyi-potion",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-houyi-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-iceheart-potion",
+      "hp": 4,
+      "consumed": false,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3-iceheart-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-iceheart-potion",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-iceheart-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-demon-potion",
+      "hp": 4,
+      "consumed": false,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3-demon-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-demon-potion",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-demon-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-mind-potion",
+      "hp": 4,
+      "consumed": false,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3-mind-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-mind-potion",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-mind-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-turnabout-potion",
+      "hp": 4,
+      "consumed": false,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3-turnabout-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-turnabout-potion",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-turnabout-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-mixed-potion",
+      "hp": 4,
+      "consumed": false,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3-mixed-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-mixed-potion",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-mixed-potion"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3sp-doom",
+      "hp": 4,
+      "consumed": false,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3sp-doom"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3sp-doom",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3sp-doom"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-savior-elixir",
+      "hp": 4,
+      "consumed": true,
+      "afterHp": 30,
+      "ownedIds": [],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt3-savior-elixir",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-savior-elixir"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt4-smoke-bomb",
+      "hp": 4,
+      "consumed": false,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt4-smoke-bomb"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt4-smoke-bomb",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt4-smoke-bomb"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt4-woodify",
+      "hp": 4,
+      "consumed": true,
+      "afterHp": 10,
+      "ownedIds": [],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "tt4-woodify",
+      "hp": 30,
+      "consumed": false,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt4-woodify"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "cmtn6bge52qt",
+      "hp": 4,
+      "consumed": true,
+      "afterHp": 4,
+      "ownedIds": [
+        "tt3-fireball",
+        "tt3-fireball"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "cmtn6bge52qt",
+      "hp": 30,
+      "consumed": true,
+      "afterHp": 30,
+      "ownedIds": [
+        "tt3-fireball",
+        "tt3-fireball"
+      ],
+      "pocket": [
+        {
+          "id": "tt3-fireball",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "hatches": [
+    {
+      "seed": 0,
+      "sequence": [
+        "robot",
+        "falcon",
+        "fire",
+        "penguin",
+        "cat",
+        "all"
+      ],
+      "coins": 50,
+      "eggCount": 1
+    },
+    {
+      "seed": 1,
+      "sequence": [
+        "falcon",
+        "cat",
+        "penguin",
+        "fire",
+        "robot",
+        "all"
+      ],
+      "coins": 50,
+      "eggCount": 1
+    },
+    {
+      "seed": 4,
+      "sequence": [
+        "fire",
+        "falcon",
+        "robot",
+        "penguin",
+        "cat",
+        "all"
+      ],
+      "coins": 50,
+      "eggCount": 1
+    },
+    {
+      "seed": 1029,
+      "sequence": [
+        "robot",
+        "falcon",
+        "cat",
+        "penguin",
+        "fire",
+        "all"
+      ],
+      "coins": 50,
+      "eggCount": 1
+    }
+  ],
+  "pets": {
+    "eggId": "pet-egg",
+    "hatchCost": 50,
+    "levelMax": 5,
+    "upCosts": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "list": [
+      {
+        "id": "dog",
+        "name": "旺财",
+        "icon": "paw",
+        "desc": "携带效果：生命上限 +5",
+        "effect": {
+          "maxHp": 5
+        }
+      },
+      {
+        "id": "falcon",
+        "name": "猎鹰宝宝",
+        "icon": "runner",
+        "desc": "携带效果：获得的搜刮点为职业搜刮点的概率提高至 35%",
+        "effect": {
+          "classChest": 0.35
+        }
+      },
+      {
+        "id": "cat",
+        "name": "招财猫",
+        "icon": "coin",
+        "desc": "携带效果：商店中第一格的卡牌变为免费",
+        "effect": {
+          "shopFree": true
+        }
+      },
+      {
+        "id": "robot",
+        "name": "变形机器人",
+        "icon": "tools",
+        "desc": "携带效果：起始背包中增加 2 张「初始攻击」",
+        "effect": {
+          "extraSha": 2
+        }
+      },
+      {
+        "id": "fire",
+        "name": "火焰精灵",
+        "icon": "fire",
+        "desc": "携带效果：起始背包中的 5 张「初始攻击」化为 5 张「火球」",
+        "effect": {
+          "shaToFireball": true
+        }
+      },
+      {
+        "id": "penguin",
+        "name": "小企鹅咕嘎",
+        "icon": "crystal",
+        "desc": "携带效果：安全格 +2（2-6 格 → 4-8 格）",
+        "effect": {
+          "safeBonus": 2
+        }
+      }
+    ]
+  },
+  "achievements": [
+    {
+      "data": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1
+          }
+        },
+        "petSel": "dog",
+        "collection": {},
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": {},
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 0,
+          "requests": {}
+        }
+      },
+      "expected": {
+        "firstExtract": false,
+        "extract3": false,
+        "kill10": false,
+        "firstBoss": false,
+        "allBoss": false,
+        "rich30": false,
+        "stash20": false,
+        "bagMax": false,
+        "safeMax": false,
+        "class3": false,
+        "collectGold": false,
+        "collectLegend": false,
+        "collect5": false,
+        "petHatch1": false,
+        "petHatch3": false,
+        "petMax": false,
+        "petAll": false,
+        "unlimitedEnergy": false,
+        "weaponMaster": false,
+        "runeFan": false,
+        "savior": false,
+        "beautifulVase": false,
+        "excuseMe": false,
+        "labScore1": false,
+        "labScore2": false,
+        "labScore3": false
+      }
+    },
+    {
+      "data": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1
+          }
+        },
+        "petSel": "dog",
+        "collection": {},
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 3,
+          "deaths": 0,
+          "kills": 10,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [
+            "a",
+            "b",
+            "c"
+          ],
+          "bestRunCoins": 30,
+          "stashTotal": 20
+        },
+        "achClaimed": {},
+        "collClaimed": {},
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 0,
+          "requests": {}
+        }
+      },
+      "expected": {
+        "firstExtract": true,
+        "extract3": true,
+        "kill10": true,
+        "firstBoss": true,
+        "allBoss": true,
+        "rich30": true,
+        "stash20": true,
+        "bagMax": false,
+        "safeMax": false,
+        "class3": false,
+        "collectGold": false,
+        "collectLegend": false,
+        "collect5": false,
+        "petHatch1": false,
+        "petHatch3": false,
+        "petMax": false,
+        "petAll": false,
+        "unlimitedEnergy": false,
+        "weaponMaster": false,
+        "runeFan": false,
+        "savior": false,
+        "beautifulVase": false,
+        "excuseMe": false,
+        "labScore1": false,
+        "labScore2": false,
+        "labScore3": false
+      }
+    },
+    {
+      "data": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 5
+          }
+        },
+        "petSel": "dog",
+        "collection": {},
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": {},
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 0,
+          "requests": {}
+        }
+      },
+      "expected": {
+        "firstExtract": false,
+        "extract3": false,
+        "kill10": false,
+        "firstBoss": false,
+        "allBoss": false,
+        "rich30": false,
+        "stash20": false,
+        "bagMax": false,
+        "safeMax": true,
+        "class3": false,
+        "collectGold": false,
+        "collectLegend": false,
+        "collect5": false,
+        "petHatch1": false,
+        "petHatch3": false,
+        "petMax": true,
+        "petAll": false,
+        "unlimitedEnergy": false,
+        "weaponMaster": false,
+        "runeFan": false,
+        "savior": false,
+        "beautifulVase": false,
+        "excuseMe": false,
+        "labScore1": false,
+        "labScore2": false,
+        "labScore3": false
+      }
+    },
+    {
+      "data": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1
+          },
+          "penguin": {
+            "lv": 3
+          }
+        },
+        "petSel": "penguin",
+        "collection": {},
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": {},
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 0,
+          "requests": {}
+        }
+      },
+      "expected": {
+        "firstExtract": false,
+        "extract3": false,
+        "kill10": false,
+        "firstBoss": false,
+        "allBoss": false,
+        "rich30": false,
+        "stash20": false,
+        "bagMax": false,
+        "safeMax": true,
+        "class3": false,
+        "collectGold": false,
+        "collectLegend": false,
+        "collect5": false,
+        "petHatch1": true,
+        "petHatch3": false,
+        "petMax": false,
+        "petAll": false,
+        "unlimitedEnergy": false,
+        "weaponMaster": false,
+        "runeFan": false,
+        "savior": false,
+        "beautifulVase": false,
+        "excuseMe": false,
+        "labScore1": false,
+        "labScore2": false,
+        "labScore3": false
+      }
+    },
+    {
+      "data": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1
+          },
+          "falcon": {
+            "lv": 1
+          },
+          "cat": {
+            "lv": 1
+          },
+          "robot": {
+            "lv": 1
+          },
+          "fire": {
+            "lv": 1
+          },
+          "penguin": {
+            "lv": 1
+          }
+        },
+        "petSel": "dog",
+        "collection": {},
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": {},
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 0,
+          "requests": {}
+        }
+      },
+      "expected": {
+        "firstExtract": false,
+        "extract3": false,
+        "kill10": false,
+        "firstBoss": false,
+        "allBoss": false,
+        "rich30": false,
+        "stash20": false,
+        "bagMax": false,
+        "safeMax": false,
+        "class3": false,
+        "collectGold": false,
+        "collectLegend": false,
+        "collect5": false,
+        "petHatch1": true,
+        "petHatch3": true,
+        "petMax": false,
+        "petAll": true,
+        "unlimitedEnergy": false,
+        "weaponMaster": false,
+        "runeFan": false,
+        "savior": false,
+        "beautifulVase": false,
+        "excuseMe": false,
+        "labScore1": false,
+        "labScore2": false,
+        "labScore3": false
+      }
+    },
+    {
+      "data": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1
+          }
+        },
+        "petSel": "dog",
+        "collection": {},
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 1,
+          "turnMovesMax": 10,
+          "battleEquipsMax": 5,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": {},
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 0,
+          "requests": {}
+        }
+      },
+      "expected": {
+        "firstExtract": false,
+        "extract3": false,
+        "kill10": false,
+        "firstBoss": false,
+        "allBoss": false,
+        "rich30": false,
+        "stash20": false,
+        "bagMax": false,
+        "safeMax": false,
+        "class3": false,
+        "collectGold": false,
+        "collectLegend": false,
+        "collect5": false,
+        "petHatch1": false,
+        "petHatch3": false,
+        "petMax": false,
+        "petAll": false,
+        "unlimitedEnergy": true,
+        "weaponMaster": true,
+        "runeFan": false,
+        "savior": false,
+        "beautifulVase": false,
+        "excuseMe": true,
+        "labScore1": false,
+        "labScore2": false,
+        "labScore3": false
+      }
+    },
+    {
+      "data": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [
+          {
+            "kind": "rainbow",
+            "attrs": [
+              "a",
+              "b",
+              "c",
+              "d",
+              "e"
+            ]
+          }
+        ],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1
+          }
+        },
+        "petSel": "dog",
+        "collection": {},
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [
+            "one",
+            "two"
+          ],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0,
+          "labTotalScore": 4000
+        },
+        "achClaimed": {},
+        "collClaimed": {},
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 0,
+          "requests": {}
+        }
+      },
+      "expected": {
+        "firstExtract": false,
+        "extract3": false,
+        "kill10": false,
+        "firstBoss": false,
+        "allBoss": false,
+        "rich30": false,
+        "stash20": false,
+        "bagMax": false,
+        "safeMax": false,
+        "class3": false,
+        "collectGold": false,
+        "collectLegend": false,
+        "collect5": false,
+        "petHatch1": false,
+        "petHatch3": false,
+        "petMax": false,
+        "petAll": false,
+        "unlimitedEnergy": false,
+        "weaponMaster": false,
+        "runeFan": true,
+        "savior": true,
+        "beautifulVase": true,
+        "excuseMe": false,
+        "labScore1": true,
+        "labScore2": true,
+        "labScore3": true
+      }
+    },
+    {
+      "data": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 20,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1
+          }
+        },
+        "petSel": "dog",
+        "collection": {
+          "tt-gold": {
+            "rarity": "传说"
+          },
+          "a": {},
+          "b": {},
+          "c": {},
+          "d": {}
+        },
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": {},
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 0,
+          "requests": {}
+        },
+        "characters": {
+          "wu": {
+            "lv": 3,
+            "xp": 0
+          }
+        }
+      },
+      "expected": {
+        "firstExtract": false,
+        "extract3": false,
+        "kill10": false,
+        "firstBoss": false,
+        "allBoss": false,
+        "rich30": false,
+        "stash20": false,
+        "bagMax": true,
+        "safeMax": false,
+        "class3": true,
+        "collectGold": true,
+        "collectLegend": true,
+        "collect5": true,
+        "petHatch1": false,
+        "petHatch3": false,
+        "petMax": false,
+        "petAll": false,
+        "unlimitedEnergy": false,
+        "weaponMaster": false,
+        "runeFan": false,
+        "savior": false,
+        "beautifulVase": false,
+        "excuseMe": false,
+        "labScore1": false,
+        "labScore2": false,
+        "labScore3": false
+      }
+    }
+  ],
+  "extraction": [
+    {
+      "explored": 0,
+      "multiplier": 1,
+      "moves": 0,
+      "xp": 20,
+      "after": {
+        "lv": 1,
+        "xp": 20
+      }
+    },
+    {
+      "explored": 0,
+      "multiplier": 1.25,
+      "moves": 0,
+      "xp": 25,
+      "after": {
+        "lv": 1,
+        "xp": 25
+      }
+    },
+    {
+      "explored": 0,
+      "multiplier": 1.5,
+      "moves": 0,
+      "xp": 30,
+      "after": {
+        "lv": 1,
+        "xp": 30
+      }
+    },
+    {
+      "explored": 1,
+      "multiplier": 1,
+      "moves": 1,
+      "xp": 22,
+      "after": {
+        "lv": 1,
+        "xp": 22
+      }
+    },
+    {
+      "explored": 1,
+      "multiplier": 1.25,
+      "moves": 1,
+      "xp": 28,
+      "after": {
+        "lv": 1,
+        "xp": 28
+      }
+    },
+    {
+      "explored": 1,
+      "multiplier": 1.5,
+      "moves": 1,
+      "xp": 33,
+      "after": {
+        "lv": 1,
+        "xp": 33
+      }
+    },
+    {
+      "explored": 4,
+      "multiplier": 1,
+      "moves": 4,
+      "xp": 28,
+      "after": {
+        "lv": 1,
+        "xp": 28
+      }
+    },
+    {
+      "explored": 4,
+      "multiplier": 1.25,
+      "moves": 4,
+      "xp": 35,
+      "after": {
+        "lv": 1,
+        "xp": 35
+      }
+    },
+    {
+      "explored": 4,
+      "multiplier": 1.5,
+      "moves": 4,
+      "xp": 42,
+      "after": {
+        "lv": 1,
+        "xp": 42
+      }
+    },
+    {
+      "explored": 15,
+      "multiplier": 1,
+      "moves": 15,
+      "xp": 50,
+      "after": {
+        "lv": 2,
+        "xp": 0
+      }
+    },
+    {
+      "explored": 15,
+      "multiplier": 1.25,
+      "moves": 15,
+      "xp": 63,
+      "after": {
+        "lv": 2,
+        "xp": 13
+      }
+    },
+    {
+      "explored": 15,
+      "multiplier": 1.5,
+      "moves": 15,
+      "xp": 75,
+      "after": {
+        "lv": 2,
+        "xp": 25
+      }
+    }
+  ],
+  "encounters": [
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 0,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.04017091961577535,
+        0.12254945375025272,
+        0.9985761579591781
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 0,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.04017091961577535,
+        0.12254945375025272,
+        0.9985761579591781
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 1,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 1,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 1,
+      "index": 5,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 2,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 6,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.12254945375025272,
+        0.9985761579591781,
+        0.4289328563027084
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 2,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 6,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.12254945375025272,
+        0.9985761579591781,
+        0.4289328563027084
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 2,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 6,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.12254945375025272,
+        0.9985761579591781,
+        0.4289328563027084
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 2,
+      "index": 7,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 6,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.12254945375025272,
+        0.9985761579591781,
+        0.4289328563027084
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 3,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 3,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "standard",
+      "li": 3,
+      "index": 11,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 0,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.04017091961577535,
+        0.12254945375025272,
+        0.9985761579591781
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 0,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.04017091961577535,
+        0.12254945375025272,
+        0.9985761579591781
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 1,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 1,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 1,
+      "index": 5,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 2,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 8,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.12254945375025272,
+        0.9985761579591781,
+        0.4289328563027084
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 2,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 8,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.12254945375025272,
+        0.9985761579591781,
+        0.4289328563027084
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 2,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 8,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.12254945375025272,
+        0.9985761579591781,
+        0.4289328563027084
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 2,
+      "index": 7,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 8,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.12254945375025272,
+        0.9985761579591781,
+        0.4289328563027084
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 3,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 3,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 0,
+      "mode": "elite",
+      "li": 3,
+      "index": 11,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9742270822171122,
+        0.10671516577713192,
+        0.9798295176587999
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 0,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "bandit",
+          "hp": 3,
+          "atk": 3,
+          "elite": false
+        },
+        {
+          "id": "bandit",
+          "hp": 3,
+          "atk": 3,
+          "elite": false
+        },
+        {
+          "id": "bandit",
+          "hp": 3,
+          "atk": 3,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 0,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "bandit",
+          "hp": 3,
+          "atk": 3,
+          "elite": false
+        },
+        {
+          "id": "bandit",
+          "hp": 3,
+          "atk": 3,
+          "elite": false
+        },
+        {
+          "id": "bandit",
+          "hp": 3,
+          "atk": 3,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 1,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 1,
+      "index": 9,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 1,
+      "index": 10,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 2,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 2,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 2,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 2,
+      "index": 7,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 3,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "cultist",
+          "hp": 6,
+          "atk": 6,
+          "elite": true
+        },
+        {
+          "id": "fire_el",
+          "hp": 7,
+          "atk": 10,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "cultist",
+          "hp": 6,
+          "atk": 6,
+          "elite": true
+        },
+        {
+          "id": "fire_el",
+          "hp": 7,
+          "atk": 10,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 3,
+      "index": 9,
+      "enemies": [
+        {
+          "id": "cultist",
+          "hp": 6,
+          "atk": 6,
+          "elite": true
+        },
+        {
+          "id": "fire_el",
+          "hp": 7,
+          "atk": 10,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "standard",
+      "li": 3,
+      "index": 12,
+      "enemies": [
+        {
+          "id": "cultist",
+          "hp": 6,
+          "atk": 6,
+          "elite": true
+        },
+        {
+          "id": "fire_el",
+          "hp": 7,
+          "atk": 10,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 0,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "bandit",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "bandit",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "bandit",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 0,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "bandit",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "bandit",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "bandit",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 1,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 1,
+      "index": 9,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 1,
+      "index": 10,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 2,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 2,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 2,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 2,
+      "index": 7,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.3007271105889231,
+        0.49359286669641733,
+        0.8874228170607239
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 3,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "cultist",
+          "hp": 8,
+          "atk": 8,
+          "elite": true
+        },
+        {
+          "id": "fire_el",
+          "hp": 9,
+          "atk": 14,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "cultist",
+          "hp": 8,
+          "atk": 8,
+          "elite": true
+        },
+        {
+          "id": "fire_el",
+          "hp": 9,
+          "atk": 14,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 3,
+      "index": 9,
+      "enemies": [
+        {
+          "id": "cultist",
+          "hp": 8,
+          "atk": 8,
+          "elite": true
+        },
+        {
+          "id": "fire_el",
+          "hp": 9,
+          "atk": 14,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 1,
+      "mode": "elite",
+      "li": 3,
+      "index": 12,
+      "enemies": [
+        {
+          "id": "cultist",
+          "hp": 8,
+          "atk": 8,
+          "elite": true
+        },
+        {
+          "id": "fire_el",
+          "hp": 9,
+          "atk": 14,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.5506088621914387,
+        0.3007271105889231,
+        0.49359286669641733
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 0,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "infantry",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "infantry",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "infantry",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 0,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "infantry",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "infantry",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "infantry",
+          "hp": 4,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 1,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "rager",
+          "hp": 5,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 1,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "rager",
+          "hp": 5,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 1,
+      "index": 9,
+      "enemies": [
+        {
+          "id": "rager",
+          "hp": 5,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 2,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 6,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 2,
+      "index": 5,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 6,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 2,
+      "index": 7,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 6,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 2,
+      "index": 14,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 6,
+          "atk": 2,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 3,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "camo_sniper",
+          "hp": 4,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "camo_sniper",
+          "hp": 4,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 3,
+      "index": 7,
+      "enemies": [
+        {
+          "id": "camo_sniper",
+          "hp": 4,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "standard",
+      "li": 3,
+      "index": 11,
+      "enemies": [
+        {
+          "id": "camo_sniper",
+          "hp": 4,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 0,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "infantry",
+          "hp": 5,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "infantry",
+          "hp": 5,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "infantry",
+          "hp": 5,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 0,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "infantry",
+          "hp": 5,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "infantry",
+          "hp": 5,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "infantry",
+          "hp": 5,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 1,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "rager",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 1,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "rager",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 1,
+      "index": 9,
+      "enemies": [
+        {
+          "id": "rager",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 2,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 8,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 2,
+      "index": 5,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 8,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 2,
+      "index": 7,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 8,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 2,
+      "index": 14,
+      "enemies": [
+        {
+          "id": "swaggerer",
+          "hp": 8,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.10639197821728885,
+        0.9064935685601085,
+        0.7631488963961601
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 3,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "camo_sniper",
+          "hp": 5,
+          "atk": 9,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "camo_sniper",
+          "hp": 5,
+          "atk": 9,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 3,
+      "index": 7,
+      "enemies": [
+        {
+          "id": "camo_sniper",
+          "hp": 5,
+          "atk": 9,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 9,
+      "mode": "elite",
+      "li": 3,
+      "index": 11,
+      "enemies": [
+        {
+          "id": "camo_sniper",
+          "hp": 5,
+          "atk": 9,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.24830258172005415,
+        0.10639197821728885,
+        0.9064935685601085
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 0,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.44825295987538993,
+        0.9707283915486187,
+        0.45633506402373314
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 0,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.44825295987538993,
+        0.9707283915486187,
+        0.45633506402373314
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 1,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 1,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 1,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 2,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9707283915486187,
+        0.45633506402373314,
+        0.4516969849355519
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 2,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9707283915486187,
+        0.45633506402373314,
+        0.4516969849355519
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 2,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9707283915486187,
+        0.45633506402373314,
+        0.4516969849355519
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 2,
+      "index": 10,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9707283915486187,
+        0.45633506402373314,
+        0.4516969849355519
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 3,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 3,
+      "index": 9,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "standard",
+      "li": 3,
+      "index": 11,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 0,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.44825295987538993,
+        0.9707283915486187,
+        0.45633506402373314
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 0,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.44825295987538993,
+        0.9707283915486187,
+        0.45633506402373314
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 1,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 1,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 1,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 2,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9707283915486187,
+        0.45633506402373314,
+        0.4516969849355519
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 2,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9707283915486187,
+        0.45633506402373314,
+        0.4516969849355519
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 2,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9707283915486187,
+        0.45633506402373314,
+        0.4516969849355519
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 2,
+      "index": 10,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9707283915486187,
+        0.45633506402373314,
+        0.4516969849355519
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 3,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 3,
+      "index": 9,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 42,
+      "mode": "elite",
+      "li": 3,
+      "index": 11,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.745230644242838,
+        0.8259629916865379,
+        0.9283210248686373
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 0,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 0,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 3,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 1,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 1,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 1,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 7,
+          "atk": 3,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 6,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 2,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 2,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 2,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 6,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 2,
+      "index": 10,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 7,
+          "atk": 4,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 4,
+          "atk": 6,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 3,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 3,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "standard",
+      "li": 3,
+      "index": 10,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 10,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 12,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 0,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 0,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "archer",
+          "hp": 4,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 1,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 1,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 1,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "deserter",
+          "hp": 9,
+          "atk": 4,
+          "elite": true
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        },
+        {
+          "id": "cavalry",
+          "hp": 8,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 2,
+      "index": 2,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 2,
+      "index": 3,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 2,
+      "index": 8,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "wolf_rider",
+          "hp": 8,
+          "atk": 9,
+          "elite": false
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 2,
+      "index": 10,
+      "enemies": [
+        {
+          "id": "tin_mute",
+          "hp": 12,
+          "atk": 5,
+          "elite": true
+        },
+        {
+          "id": "orc_axe",
+          "hp": 9,
+          "atk": 5,
+          "elite": false
+        },
+        {
+          "id": "orc_jav",
+          "hp": 5,
+          "atk": 8,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.9631480141542852,
+        0.6720426469109952,
+        0.27674981276504695
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 3,
+      "index": 1,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 3,
+      "index": 4,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 3,
+      "index": 6,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    },
+    {
+      "seed": 1029,
+      "mode": "elite",
+      "li": 3,
+      "index": 10,
+      "enemies": [
+        {
+          "id": "fake_apothecary",
+          "hp": 14,
+          "atk": 7,
+          "elite": true
+        },
+        {
+          "id": "grass_el",
+          "hp": 16,
+          "atk": 7,
+          "elite": false
+        }
+      ],
+      "next": [
+        0.4399552782997489,
+        0.9631480141542852,
+        0.6720426469109952
+      ]
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "passed": true,
+  "scope": "Independent current code and actual normal standalone visual closure of four confirmed Player1 issues, commission settled capture and reward actions; not all screens/resolutions/physical input.",
+  "reviewer": "/root/final_changed_visual_review",
+  "reviewedAt": "2026-10-30T16:15:27.436134+00:00",
+  "buildGUID": "38d6541a41004fd88bbf4438a283dccb",
+  "confirmedOpenItems": [],
+  "closedItems": [
+    "source shop coin consumers and nowrap prices",
+    "large blur repeated grid ghosting",
+    "guide safe-slot formation prose vs execution",
+    "active reward reader common presentation and claim/capacity action"
+  ],
+  "evidence": {
+    "result": {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\result.json",
+      "sha256": "a6e543301350f828598243c959592a7b422d649fe54d88e2549efe89e6b2d0e6"
+    },
+    "process": {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\process.json",
+      "sha256": "e7db9c4c0462f67a0ef933e6d33ed31e3f3090342fb16330f422ca769923b5eb"
+    },
+    "log": {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player.log",
+      "sha256": "b5ea2cb700fb978e09a84e6c65d51b300f4c16cba5f6a0195f3259d07218b07b"
+    },
+    "actualOpenedPngs": [
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-shop.png",
+        "sha256": "c14a72658feecbdb451d60d58a3262b4b72bc87a2bb3c7252e26f38396b7a837"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-shop-inspection.png",
+        "sha256": "2626bed559d51a529db8fc2aa203466814b2400e8852cad8580b41c4dcd8e6d6"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-shop-exchange.png",
+        "sha256": "0f5ce9b6c4ef166e6845f1ef1c3cf435028cc1861ba9384532c253ff35e60b69"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-recode-reader.png",
+        "sha256": "030b02950c30814776f5ad4236bcfdf0a6174bcecd0bf6b6115b79069fc3af07"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-reward-reader-pending.png",
+        "sha256": "245322900b93c4b7d187a057984502403e92becfd98648695a9045cf0d04c605"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-reward-reader-capacity.png",
+        "sha256": "571eb8615b90780592bc0b2512089991e5f1262bb025fbfe3349b66d98afcbd3"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-reward-reader-organizer.png",
+        "sha256": "a62b976710697197aecf235f7c50385e5142d52bc61a6f89bd72c193933c5ddb"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-guide-more-4.png",
+        "sha256": "83f563ed0136e1fa46207c50dea175d36fce92556a1de92cb35c0118bb799da4"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-shop-commission-receipt.png",
+        "sha256": "15e9ac34f6eda6fee629005dd9526951e8f5e9144e0d2ddbf2c78532ac8f12a1"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-shop-free-offers.png",
+        "sha256": "f4f43c855185b14609a96673f904cc10df567d9ce564c547e29c7ac0f9a7622a"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\fidelity-1030\\desktop-final-player-2\\player-settings.png",
+        "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+      }
+    ],
+    "code": [
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopCoin.cs",
+        "sha256": "358145d7797b3090842287cadf65e1d7ea7b181939bfe79902ff691802d99142"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.cs",
+        "sha256": "31a852b303f306e4db29fa41ac0a305805a52d2b9443ddfe3fdaa89881339bbe"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.Market.cs",
+        "sha256": "4053aea92a4d4eb129bfb71af14355f18fadade1e48b94d2ae7d0b801d01b5cd"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.Detail.cs",
+        "sha256": "9cb68e1879e3142d5454eb8260cd5cc4a82df3f12d518e33515cf14ec06a0151"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentShopView.Exchange.cs",
+        "sha256": "9290cad70ea6b86e9f2e8440d9bc451fcf10916ece6be441daecceca3505e3b0"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentRewardScene.cs",
+        "sha256": "6a2f746b3fd1db3fff968d5c9034e222b4158b83b2a29199280fd049102ed5db"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\DepartureElements.cs",
+        "sha256": "afb814af3b364b7308ca0d4d250284fc09136e8dbb9d5fa1d05295c6ffa570d0"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\Resources\\CurrentHomeComposite.shader",
+        "sha256": "4864303385c3f7a3bd5cab6bd35663afd70b60578b215e4a2f1ab04cbc7f46c4"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Kit\\DesktopRunHud.cs",
+        "sha256": "97a1789705c8ebc979b33ee343e70c2055f4318c4c13df8acef15532ccb64ef4"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.Persistence.cs",
+        "sha256": "d87e92602ea1e71695680fc7c01015b6e1a02a3861393742b5b189067acd2549"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Core\\Battle\\BattleSession.cs",
+        "sha256": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Boot\\NativeDisplayReview.cs",
+        "sha256": "ed4d0f3a1f5dc3ffbf2ce26853ae177daef4c967dd373e75a0a90f11a4ffbcd6"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\css\\expedition-shop.css",
+        "sha256": "fea202aebf256b235d7d3a1b3d0cf5a1b878f2d11b1bca0b23880a7c580a835a"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\css\\cover-details.css",
+        "sha256": "727f66a5b0ef69266b88449d5eaa971af7148ce5b3e33d94359e49d4361975e8"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\chests.js",
+        "sha256": "fd42e9bde3b8cb28e913687c77e6aa462cae57dcee24309a637523e76cdf732e"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\event-card-choice.js",
+        "sha256": "3ec68c9b742152e505dfe2df28f8ec40c19ff9621597620d54d8beafc89fa9f3"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\core\\battle.lifecycle.domain.js",
+        "sha256": "60aca5a6ee67a4675c643b5751ffdbebb438128ed7bce1a58b32e95c7cc46c43"
+      }
+    ]
+  },
+  "toastClassification": {
+    "origin": "preceding intentional recode file lock",
+    "ttlSeconds": 4,
+    "failedRecodeFrame": 1393,
+    "readerFrames": [
+      1442,
+      1490
+    ],
+    "returnedBagFrame": 1495,
+    "laterAbsentFrame": 1722,
+    "matchingSaveFailureLogMessages": 1,
+    "newRewardSaveFailureConfirmed": false
+  },
+  "limitations": [
+    "11 original captures directly opened in this review; current result contains 48 captures total.",
+    "No Unity run/build or foreground control by reviewer.",
+    "Constructed EventSystem and controlled reward fixture; no physical input or random-equivalence claim.",
+    "No browser-vs-shader Gaussian pixel equivalence claim.",
+    "Seller28 consumer static at this capture because exchange list empty."
+  ],
+  "report": "player2-review.md"
+}

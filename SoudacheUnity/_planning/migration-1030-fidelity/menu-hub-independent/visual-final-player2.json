@@ -1,0 +1,289 @@
+{
+  "passed": true,
+  "scope": "Independent direct review of final Desktop Player2 menu/archive/Guide changed scope; actual normal standalone pixels plus active code, no inherited pass claims.",
+  "reviewedAt": "2026-10-30T16:09:39.972986+00:00",
+  "confirmedOpenItems": [],
+  "checks": [
+    {
+      "scope": "Guide第5章更多",
+      "result": "passed",
+      "finding": "正常背包与安全格中的可编组卡牌都能参与；容器需移回。与source battle.lifecycle.domain.js:419及Native BattleSession.cs:467实际无safe排除条件一致。"
+    },
+    {
+      "scope": "五档稳定取证",
+      "result": "passed",
+      "finding": "slots-backup和returned-slots都显示01至05，05基地档操作和备份3动作均可见，无动画中断缺卡。Capture等待SlotPickerScreen .95秒后才读实际backbuffer。"
+    },
+    {
+      "scope": "导出/导入/预览",
+      "result": "passed",
+      "finding": "导出只读JSON、导入可编辑JSON、先预览且显式确认，来源档5/保存时间/覆盖警告均完整。文本、边框、底部按钮无重叠或截断。"
+    },
+    {
+      "scope": "实际构造输入与返回",
+      "result": "passed",
+      "finding": "result中exportSlotArchive-5、slotArchiveBack、importSlotArchive-5、slotArchivePreview、confirmation-accept、slotBack都由EventSystem raycast找到同名接收者。输入JSON来自同档导出值直接赋值，未触剪贴板或OS。默认Cancel及完成后slots/唯一title由执行代码显式断言，passed仅在全部断言后写入。"
+    },
+    {
+      "scope": "正常上一备档恢复保全",
+      "result": "passed",
+      "finding": "PreviewPreviousSlotArchive取.previous目标三分区且冻结值；Import复核磁盘和实例缓存一致、预览后指纹一致，再现有事务只替换目标run/base/settlement；File.Replace保留当前完整profile到.previous。正常现存主profile的其余四档/全局保留。此前31项真实生产DLL含previous target partition only；本次不把外部删除/损坏后连续恢复假设视为确认缺陷。"
+    }
+  ],
+  "viewedPng": [
+    "player-guide-more-4.png",
+    "player-slots-backup.png",
+    "player-slot-archive-export.png",
+    "player-slot-archive-import.png",
+    "player-slot-archive-import-preview.png",
+    "player-returned-slots.png",
+    "player-returned-title.png"
+  ],
+  "display": {
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "dpi": 120.0,
+    "fullScreenMode": "Windowed",
+    "desktop": {
+      "width": 2560,
+      "height": 1440
+    },
+    "display": {
+      "renderingWidth": 2560,
+      "renderingHeight": 1440,
+      "systemWidth": 2560,
+      "systemHeight": 1440
+    },
+    "quality": "Ultra",
+    "targetFrameRate": 60,
+    "bufferWidthScale": 1.0,
+    "bufferHeightScale": 1.0,
+    "canvas": {
+      "mode": "ScreenSpaceOverlay",
+      "scaleFactor": 1.33333337,
+      "width": 1920.0,
+      "height": 1080.0,
+      "lossyScale": {
+        "x": 1.33333337,
+        "y": 1.33333337,
+        "z": 1.33333337
+      },
+      "scaler": "ScaleWithScreenSize",
+      "referenceWidth": 1920.0,
+      "referenceHeight": 1080.0,
+      "matchWidthOrHeight": 0.5
+    },
+    "windowsDpi": {
+      "available": true,
+      "processAwareness": 2,
+      "result": 0
+    },
+    "graphics": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "graphicsApi": "Direct3D12",
+    "unityVersion": "6000.6.7f1",
+    "buildGUID": "38d6541a41004fd88bbf4438a283dccb"
+  },
+  "constructedActions": [
+    {
+      "kind": "constructed-player-click",
+      "name": "goBase",
+      "x": 2213.3335,
+      "y": 101.333313,
+      "first": "goBase",
+      "receiver": "goBase"
+    },
+    {
+      "kind": "constructed-player-click",
+      "name": "hub-back archive-back",
+      "x": 66.666626,
+      "y": 1380.0,
+      "first": "hub-back archive-back",
+      "receiver": "hub-back archive-back"
+    },
+    {
+      "kind": "constructed-player-click",
+      "name": "slot-archive-5",
+      "x": 2101.333,
+      "y": 122.666748,
+      "first": "slot-archive-5",
+      "receiver": "slot-archive-5"
+    },
+    {
+      "kind": "constructed-player-click",
+      "name": "exportSlotArchive-5",
+      "x": 2101.3335,
+      "y": 213.333374,
+      "first": "exportSlotArchive-5",
+      "receiver": "exportSlotArchive-5"
+    },
+    {
+      "kind": "constructed-player-click",
+      "name": "slotArchiveBack",
+      "x": 1722.66675,
+      "y": 224.0,
+      "first": "slotArchiveBack",
+      "receiver": "slotArchiveBack"
+    },
+    {
+      "kind": "constructed-player-click",
+      "name": "importSlotArchive-5",
+      "x": 2101.332,
+      "y": 168.000366,
+      "first": "importSlotArchive-5",
+      "receiver": "importSlotArchive-5"
+    },
+    {
+      "kind": "constructed-native-field-value",
+      "target": "slotArchiveJson",
+      "source": "exported isolated slot archive",
+      "osHardwareInput": false
+    },
+    {
+      "kind": "constructed-player-click",
+      "name": "slotArchivePreview",
+      "x": 948.0,
+      "y": 224.0,
+      "first": "slotArchivePreview",
+      "receiver": "slotArchivePreview"
+    },
+    {
+      "kind": "constructed-player-click",
+      "name": "confirmation-accept",
+      "x": 1453.33337,
+      "y": 606.6667,
+      "first": "confirmation-accept",
+      "receiver": "confirmation-accept"
+    },
+    {
+      "kind": "constructed-player-click",
+      "name": "slotBack",
+      "x": 66.666626,
+      "y": 1379.97156,
+      "first": "slotBack",
+      "receiver": "slotBack"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/result.json",
+      "bytes": 3758166,
+      "sha256": "a6e543301350f828598243c959592a7b422d649fe54d88e2549efe89e6b2d0e6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/process.json",
+      "bytes": 1899,
+      "sha256": "e7db9c4c0462f67a0ef933e6d33ed31e3f3090342fb16330f422ca769923b5eb"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/player-guide-more-4.png",
+      "bytes": 779184,
+      "sha256": "83f563ed0136e1fa46207c50dea175d36fce92556a1de92cb35c0118bb799da4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/player-slots-backup.png",
+      "bytes": 1462130,
+      "sha256": "5d747d0b511c36bcb32d1edf80545deb24886ad3f2dce34069e5c8d222d8fa61"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/player-slot-archive-export.png",
+      "bytes": 655493,
+      "sha256": "b620749e4fc8ffd666d718cc36efc40c61c046e1e895830aa83d66b8fb11d576"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/player-slot-archive-import.png",
+      "bytes": 643935,
+      "sha256": "6e9d7f42d2a0df68e72cbbc4a721dcc455474c26ade6e478a5108d6fe73b8205"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/player-slot-archive-import-preview.png",
+      "bytes": 495385,
+      "sha256": "cb098e80e7bcaee3f0be803c1f4e92e1e37f66584fa6a1344bcb8822c3ec2cde"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/player-returned-slots.png",
+      "bytes": 1461942,
+      "sha256": "77c6fac753a94cc0bac58bee4d6f5cd69dc22995eee745e5dd307767a455f1b0"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/player-returned-title.png",
+      "bytes": 3412673,
+      "sha256": "1fa2dbb86de6ed912e66f07f68cbfa293b3db3589b06ec49bfd991ad8c99ed85"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Boot/NativeDisplayReview.cs",
+      "bytes": 43005,
+      "sha256": "ed4d0f3a1f5dc3ffbf2ce26853ae177daef4c967dd373e75a0a90f11a4ffbcd6"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotArchiveScreen.cs",
+      "bytes": 6929,
+      "sha256": "d2cb58071cd5176016307bca71e897a15541a90cf83273155833f3a8885d7b38"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotPage.cs",
+      "bytes": 14219,
+      "sha256": "178448edf159e0e63112d2225104afd0b3f275e49695c44a9528690a7a10958a"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotSnapshot.cs",
+      "bytes": 1931,
+      "sha256": "360890aa8e4e1c6e965f786a86ee974039ef6bb834b3bb13b40b33b90a02d447"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/SlotPickerScreen.cs",
+      "bytes": 433,
+      "sha256": "93059ab24f14e388e290671980ed8bcf56e7eb08a3857b498be785c9e1d6a816"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/SaveSystem.SlotArchive.cs",
+      "bytes": 12154,
+      "sha256": "c5118c3bfbac5f2ec7d75084a69846f4214395cb2a9db0c0ef91e18a2ed2e3af"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/SaveSystem.cs",
+      "bytes": 15447,
+      "sha256": "b5f45f31198d2614806a9334b5a71cb456bca27f2e1ab6c0b2ab3813d028c8d7"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/AtomicJsonFile.cs",
+      "bytes": 1209,
+      "sha256": "827b9ff1c75cf8c1a82148ecdfe0032215b00e85442e3f9f19042f92c9b5db68"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "bytes": 77026,
+      "sha256": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Resources/Data/CurrentBeginnerGuide.json",
+      "bytes": 13768,
+      "sha256": "33dc995542465e2c91cc20fefd2504d8744005b1a8d31804e38e95d7044ab032"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.lifecycle.domain.js",
+      "bytes": 30618,
+      "sha256": "60aca5a6ee67a4675c643b5751ffdbebb438128ed7bce1a58b32e95c7cc46c43"
+    },
+    {
+      "path": "搜打撤/game/src/ui/menu-slots.js",
+      "bytes": 22145,
+      "sha256": "205c9869427bc45a3c7bd34565e2ed8cb9f281694382566d71d1ce7c745e2f7c"
+    },
+    {
+      "path": "搜打撤/game/src/ui/save-management.js",
+      "bytes": 3929,
+      "sha256": "8bd37a97035429e3c46e3ef5c8fd4012cc2889211dc312c334c8767852f1caa9"
+    },
+    {
+      "path": "搜打撤/game/css/page-slot-select.css",
+      "bytes": 19624,
+      "sha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6"
+    }
+  ],
+  "limitations": [
+    "本审没有启动Unity、前台、OS输入或多尺寸验证。",
+    "程序JSON直接赋值和EventSystem构造输入不代表物理键鼠。",
+    "上一备档保全复核是代码与既有31项数据执行证据，不伪称本审实际UI点击恢复上一备档。",
+    "本审范围外图片由其他独审者检查。"
+  ]
+}

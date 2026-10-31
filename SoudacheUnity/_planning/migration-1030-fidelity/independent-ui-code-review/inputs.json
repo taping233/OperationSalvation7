@@ -1,0 +1,31 @@
+{
+  "reviewedAt": "2026-10-30T13:31:10.867859+00:00",
+  "scope": "Independent read-only code; no Unity/build/test/image run",
+  "findings": 1,
+  "files": {
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/EventDialogRecode.cs": "1da447460bfb84e74f71ac04443838ed2b9c89a85a7e740b63204768f24d0f81",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/EventDialogScreen.cs": "2b48ed3a0e503ea89828efc99c87939331f2d577f229d738d60f6fc1b4128625",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/EventDialogChoices.cs": "a773d5d77e509b01da8bf4af6920e1451bfbf35837ee9adfa01b28b42e309685",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CurrentIllustratedNode.cs": "ab00adae18d58a0ec373572c42e99adeab4c55c3f1941512d1cec3d404715248",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardCapacityOrganizer.cs": "f9b45b16ecae83065b100314747d2ec41820ed4f00880b2f4de095e4be7d6e27",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/DepartureElements.cs": "668183293fc7626c7526bd3cf537e56f95f3df49f8fc4b2b1fd61295d79242a4",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/CurrentDeckFormation.cs": "2a20024e6740ca284d86f70e18aeccc137fb96070a30836ef71d3213fe1c73d7",
+    "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs": "69af83aa1139d1e179013aca06e757bff1bf7105adc7b1a855e2240b877e8235",
+    "SoudacheUnity/Assets/Scripts/Sdt.Core/Battle/BattleSession.cs": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99",
+    "SoudacheUnity/Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs": "9f639275a45c1037b68f1a5fa08a326f709cae5ebaad8a363fe55d635d83b7f1",
+    "搜打撤/game/src/ui/event-recode-result.js": "996e2de502674b5f0aef87911af7127703552bcbef7dc7a1eb5f65f771054d29",
+    "搜打撤/game/src/run/game.run.events.js": "2bce72a8cf8cf0526f7d56f2b8f8efb1bc4573b793eacf3344cf7301a5433e1e",
+    "搜打撤/game/src/ui/reward-capacity-organizer.js": "b54288bdd2b83b6c00a96f17f7c421e6e22755a54cdc431d841e045486274ad2",
+    "搜打撤/game/src/ui/card-zoom-content.js": "12edab3f251422bc592d23d5246d39665a354593afe6e460bc66027dd5b20f31",
+    "搜打撤/game/src/ui/card-zoom-controller.js": "f8a40e51978702a8f2b1cf395bafd1081208480460daab2252e28c45be72ee0b",
+    "搜打撤/game/src/battle/view/battle.overlays.js": "4fe4294abfe76c446b57c6e755c235645444c02ba8693bca0354a438496ad3bb",
+    "搜打撤/game/src/battle/core/battle.snapshot-projection.domain.js": "017582df1dd6988fc3d014250a27480de0e271802bcbb25fd85b553b9c4d4178",
+    "搜打撤/game/src/battle/core/battle.lifecycle.domain.js": "60aca5a6ee67a4675c643b5751ffdbebb438128ed7bce1a58b32e95c7cc46c43",
+    "搜打撤/game/css/event-recode-result.css": "4e7f80828d38b7c7499a6f487859d6d831fdfcfb4892035e70aebd80670be82d",
+    "搜打撤/game/css/cards.css": "aa23fd9148c4c6fd77aae6fa448f085cec4a7b9f07d5bd4653b710582fb1dd11",
+    "搜打撤/game/css/winter.css": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9",
+    "搜打撤/game/css/review-ui.css": "911bd4c7a4d50faeefe08ab3babdea46f5c91dbf18accb6e68ccb465590d9fc9",
+    "搜打撤/game/css/battle-decision.css": "6a91d4666c61af517ac651d77fa12902d65d88c3a8658bf0bd260bb04dc0eb44",
+    "搜打撤/game/css/battle-hand-overhaul.css": "66985d7a29553c8cea96a2fd36218cd2b5b04749f9b54bb7c6c1156f89030954"
+  }
+}

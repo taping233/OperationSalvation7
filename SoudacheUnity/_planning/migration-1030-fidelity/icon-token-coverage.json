@@ -1,0 +1,6 @@
+{
+  "scope": "Literal icon tokens in current C# and data, checked against actual Res.Ui Paths; includes dead branches, excludes standalone comment lines/computed keys/per-consumer CSS sizing.",
+  "tokens": 281,
+  "runtimePaths": 98,
+  "missing": {}
+}

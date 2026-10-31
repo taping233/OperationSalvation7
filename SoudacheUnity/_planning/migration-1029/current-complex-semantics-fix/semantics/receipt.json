@@ -1,0 +1,326 @@
+{
+  "status": "frozen-complete-uncommitted",
+  "createdAt": "2026-10-29T18:31:51.3092255Z",
+  "groups": 11,
+  "assertions": 167,
+  "passed": 167,
+  "sourceOracleRecords": 11,
+  "production": [
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+      "sha256": "cf7878faac78a3774a33ee6a0b2b5a7d148003c7a8d51c311cedfac0e2fc0a82",
+      "bytes": 68703
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "sha256": "5f97fed52cdc6c2286b806c81c206cdb98f9f4bff3e554bf50156754108af4f7",
+      "bytes": 70559
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/CombatResolver.cs",
+      "sha256": "1425208537bb281e7b9562d264cc037252a6589065dee503b4f365a03bcf3045",
+      "bytes": 26568
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+      "sha256": "8ecab8fc3770a22210f5cb35e28a54262006440b4d34841227eeba3c1e5924ba",
+      "bytes": 8616
+    }
+  ],
+  "allCore": [
+    {
+      "path": "Assets/Scripts/Sdt.Core/Cards.cs",
+      "sha256": "b65bf1f89248eb4eaa4a13e83c141d2c73081f3a97fc38943baa6891150c8fda",
+      "bytes": 15239
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/CardsExtras.cs",
+      "sha256": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470",
+      "bytes": 3996
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/CharacterTable.cs",
+      "sha256": "f7f33fda167b7275bcca4d26e25f0a6345087e0cc3c7f84e1dd3edebfae195a6",
+      "bytes": 6267
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/ChestLoot.cs",
+      "sha256": "0b09603d4ec67651801b5b85ed925144f14bb7a7a58a0e89d0a8e2f68a97e87b",
+      "bytes": 6924
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/CombatResolver.cs",
+      "sha256": "1425208537bb281e7b9562d264cc037252a6589065dee503b4f365a03bcf3045",
+      "bytes": 26568
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/CurrentMapData.cs",
+      "sha256": "287c8d99bc7d852ef8273e921867204bc2e0b319f17c1b43c329ea08a938b800",
+      "bytes": 7909
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/GameRules.cs",
+      "sha256": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed",
+      "bytes": 2969
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/KoiPondModel.cs",
+      "sha256": "70799c15f470491a86adc5e3944f8a288aea6362274f328dac4fc3459987fde5",
+      "bytes": 7273
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/LayeredMapGenerator.cs",
+      "sha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3",
+      "bytes": 25766
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/MapModel.cs",
+      "sha256": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9",
+      "bytes": 32585
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/RewardReceipt.cs",
+      "sha256": "e8f1af7b9ccbf5cc5aba2ecb299b06225ccbf71b6127dde48fd6b05bd9a0b5dd",
+      "bytes": 478
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Rng.cs",
+      "sha256": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a",
+      "bytes": 5470
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/RunState.cs",
+      "sha256": "4b024199e24e04fa0003ff4f9d2e8cd7d5326733cb4782a617cf4e94f05e9d02",
+      "bytes": 7026
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/ShopOfferReceipt.cs",
+      "sha256": "5088ca7446567ff33bbcf18362bd356af9a3f7e19ecc26bc9ee53efd6087ad4d",
+      "bytes": 255
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+      "sha256": "8ecab8fc3770a22210f5cb35e28a54262006440b4d34841227eeba3c1e5924ba",
+      "bytes": 8616
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleRestartCheckpoint.cs",
+      "sha256": "ca3046268a4e443dfb0d2fcde748318f0b16dca47924f53bcc6ef15ea530f2ed",
+      "bytes": 5824
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleRules.cs",
+      "sha256": "c277d73f0b2071bedd26123f76a3ea3f625a1fa07c1d68e57a7af78f45d4ffee",
+      "bytes": 3143
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "sha256": "5f97fed52cdc6c2286b806c81c206cdb98f9f4bff3e554bf50156754108af4f7",
+      "bytes": 70559
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/CurrentBattlePools.cs",
+      "sha256": "a3073fbf236a1a3bb2297ccd12b7c0fde24ad6faf67316438d6ec9b81f154af5",
+      "bytes": 3447
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/CurrentBossMechanics.cs",
+      "sha256": "644a8f0928c831a50a2b935042ade0553e5d0958a8d113aefa7545445c864a0a",
+      "bytes": 3558
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/DeckBottomDiscovery.cs",
+      "sha256": "b665975e94a231537017509f16798e585aa6c6733738b623e65db7caa69f3179",
+      "bytes": 963
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/DeckOps.cs",
+      "sha256": "0aa9473b6a1c6fe7aeae6256824f352006132e91a8afcf95b9f505798a516c51",
+      "bytes": 1281
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/EffectExecutor.cs",
+      "sha256": "45a6681c02502fee4f5eab9249cab96f26098af8260bd50670f0f9e1ae4d3a4b",
+      "bytes": 26514
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/RuleValue.cs",
+      "sha256": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb",
+      "bytes": 1606
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+      "sha256": "cf7878faac78a3774a33ee6a0b2b5a7d148003c7a8d51c311cedfac0e2fc0a82",
+      "bytes": 68703
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+      "sha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e",
+      "bytes": 127842
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/CurrentBalanceData.cs",
+      "sha256": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740",
+      "bytes": 662
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/CurrentChestData.cs",
+      "sha256": "7dfd4b8993fa3b7bc85acec47195d69d819173c1a96eb89d9fd841e0f58dec2f",
+      "bytes": 1727
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+      "sha256": "935646f0a1f0d2502f58747420abd62d4908c78e51d5e70610f99c757f785579",
+      "bytes": 72573
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/EventProgress.cs",
+      "sha256": "0722be487263cc278ee3a68306c301ecf374358e3e64d92ff5ae20500af64136",
+      "bytes": 1999
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Data/SceneCopy.cs",
+      "sha256": "9ca1eedae3dd26063c9c1d5e1f6da3f966532a476af8c71b1fb30fe9a43b680f",
+      "bytes": 13290
+    }
+  ],
+  "source": [
+    {
+      "path": "../搜打撤/game/src/battle/effects/card-semantic-operations.js",
+      "sha256": "4457bdbc738cb19ec2649c062d38b50d5c094665dec96c03c354533c2b8f3eff",
+      "bytes": 11875
+    },
+    {
+      "path": "../搜打撤/game/src/battle/effects/equipment-semantic-operations.js",
+      "sha256": "9b62b72b6536942f8b08b69b23d7c9687d7872f9a8a3085f32bf9411b6a13507",
+      "bytes": 3710
+    },
+    {
+      "path": "../搜打撤/game/src/battle/effects/requested-card-batch.js",
+      "sha256": "266ec856b963931eadc37406ef036984a07add9d00bf775ac69ae827a4d322b5",
+      "bytes": 3862
+    },
+    {
+      "path": "../搜打撤/game/src/battle/effects/effect-steps.m2.domain.js",
+      "sha256": "5a242a0fce3a2656f2c24ad2b671ea00dde3da1805e9c93c2b5c8fe767d493ce",
+      "bytes": 24475
+    },
+    {
+      "path": "../搜打撤/game/src/battle/core/battle.draw.domain.js",
+      "sha256": "8721e7603705c92b605c5507b89d28f14fc114b0b4e1d2cbe1ca2c75a5d1e2e4",
+      "bytes": 17619
+    },
+    {
+      "path": "../搜打撤/game/src/battle/core/battle.exec-play.domain.js",
+      "sha256": "2b6b7eda1142fcb04aba856633d601fef8a9baa852ecdd6ab3e290203e30ec1e",
+      "bytes": 32808
+    },
+    {
+      "path": "../搜打撤/game/src/battle/core/battle.selection-flow.domain.js",
+      "sha256": "e4d40a28f9bcb9befb69ccda34f6b3472b0019dcf182bb5709e020a1f29fbf95",
+      "bytes": 21700
+    },
+    {
+      "path": "../搜打撤/game/src/battle/core/battle.enemy-phase.domain.js",
+      "sha256": "bc01cacda85a1aded7f33bb2a2262e9f3c53347a110f5ed5139790b4df17b380",
+      "bytes": 33526
+    },
+    {
+      "path": "../搜打撤/game/src/battle/core/combat.factory.js",
+      "sha256": "980494c55f4381167a2142bf60ef99e74a8416f646e2348c14357d5fa2f4c0d3",
+      "bytes": 17344
+    },
+    {
+      "path": "../搜打撤/game/src/cards/builtin-card-execution.js",
+      "sha256": "59d14c68c8b9b0895834ac762f0a0f49c3c69fdf1865ff62748859e4bf5bff15",
+      "bytes": 12402
+    },
+    {
+      "path": "../搜打撤/game/src/cards/builtin-equipment-execution.js",
+      "sha256": "f81507183473f84573d91c8eed0293fe85f6a9929b7023d4c715a457cdd7cd9e",
+      "bytes": 2982
+    }
+  ],
+  "evidence": [
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/Audit.cs",
+      "sha256": "7f99c6f903a61d438b204189032835279d62fddf8272abba6281c7e34413508d",
+      "bytes": 6928
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/Audit.csproj",
+      "sha256": "3887bf9d6082b469dc19046a0674f73e437d67f11b9c0ad382849ca8d9863bf2",
+      "bytes": 481
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/baseline-eleven-groups.json",
+      "sha256": "1847584e8f511d1f326001efa84c0a2c33dbc3410816250a87fd9e584ea73c16",
+      "bytes": 17036
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/baseline-expanded-results.json",
+      "sha256": "ed2c34358a900abf765967f32567e876bc635fbca4ccd07b6d6ce4e0934c5ced",
+      "bytes": 4810
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/baseline-first-failures.json",
+      "sha256": "6af3ad763d5338ff3951595511e284e626d34d3e7b881aaec2b337104ab8e183",
+      "bytes": 3770
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/boss-source-vectors.json",
+      "sha256": "d019fddecb9f75d87e78ccbfb084571633f42d8c93d86642ab351851490cae4e",
+      "bytes": 22603
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/BossAudit.cs",
+      "sha256": "d7ce57bd87a4e00012fa12f2643c0f1f133b7605027ef00ac8ec80d776db5962",
+      "bytes": 4893
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/boundary-source-vectors.json",
+      "sha256": "c54abf42f41cbe8235ddeb8a2bd1b5ed5651d6207a4d5d6423f36d4e84713724",
+      "bytes": 4307
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/BoundaryChecks.cs",
+      "sha256": "d0205d0e9468c95341d090014aae2798b059b22e0b8aed668a7fc9fce0b6c752",
+      "bytes": 13206
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/current-catalog.json",
+      "sha256": "e4df057ee0af7c2c243b4cbe8b274a049e738d5e80c138287c753fc0fec6baa3",
+      "bytes": 181800
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/README.md",
+      "sha256": "32c1f1add3449ba29d542ce440f5548dda9d73d75cb38cc68452cb30553716f9",
+      "bytes": 5115
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/source-oracle.mjs",
+      "sha256": "ec25643a373e6767478a56232bbd9a14d327e606e8d9f5d8d64bcc8a27137e88",
+      "bytes": 7580
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/source-results.json",
+      "sha256": "60616b144aa2ab935612018a5fe16962500793a5b38d3506faa64f069450ceb5",
+      "bytes": 1385
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/source-run.txt",
+      "sha256": "3472d40d0b2649f6742e2675b39560c471e08c69b5fb8a3380c9ab53faea100b",
+      "bytes": 1477
+    },
+    {
+      "path": "_planning/migration-1029/card-semantics-fix/unity-results.json",
+      "sha256": "8a55afac20b7928565479e9cbb61c316d0071d72f8d2001cc055582f7ddcb9e2",
+      "bytes": 30522
+    }
+  ],
+  "unverified": [
+    "full 291-card semantic coverage",
+    "Unity native input/render validation",
+    "Vite full asynchronous battle engine for automatic cast scenarios"
+  ]
+}

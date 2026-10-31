@@ -1,0 +1,1241 @@
+{
+  "rows": [
+    {
+      "id": "tt3-nuke-ray:0",
+      "seed": 0,
+      "rng": {
+        "version": 2,
+        "seed": 0,
+        "streams": {
+          "generation": 1553158855
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt3-nuke-ray",
+            "cls": "降临者",
+            "name": "致命射线",
+            "cost": 2,
+            "rarity": "职业",
+            "type": "法术",
+            "dmg": 8,
+            "dmgType": "spell",
+            "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+            "value": 3,
+            "sellable": false,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 3,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 8,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 990,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "healban": 1,
+              "poison": 1,
+              "silence": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt12-infectray:0",
+      "seed": 0,
+      "rng": {
+        "version": 2,
+        "seed": 0,
+        "streams": {
+          "generation": 1553158855
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt12-infectray",
+            "name": "感染射线",
+            "cost": 1,
+            "rarity": "古朴",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "desc": "造成4点法伤，附加一层随机诅咒",
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 1,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 9,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 994,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "poison": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt3-nuke-ray:1",
+      "seed": 1,
+      "rng": {
+        "version": 2,
+        "seed": 1,
+        "streams": {
+          "generation": 611766131
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt3-nuke-ray",
+            "cls": "降临者",
+            "name": "致命射线",
+            "cost": 2,
+            "rarity": "职业",
+            "type": "法术",
+            "dmg": 8,
+            "dmgType": "spell",
+            "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+            "value": 3,
+            "sellable": false,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 3,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 8,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 990,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "bleed": 1,
+              "freeze": 1,
+              "healban": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt12-infectray:1",
+      "seed": 1,
+      "rng": {
+        "version": 2,
+        "seed": 1,
+        "streams": {
+          "generation": 611766131
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt12-infectray",
+            "name": "感染射线",
+            "cost": 1,
+            "rarity": "古朴",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "desc": "造成4点法伤，附加一层随机诅咒",
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 1,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 9,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 994,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "healban": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt3-nuke-ray:2",
+      "seed": 2,
+      "rng": {
+        "version": 2,
+        "seed": 2,
+        "streams": {
+          "generation": 2128019435
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt3-nuke-ray",
+            "cls": "降临者",
+            "name": "致命射线",
+            "cost": 2,
+            "rarity": "职业",
+            "type": "法术",
+            "dmg": 8,
+            "dmgType": "spell",
+            "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+            "value": 3,
+            "sellable": false,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 3,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 8,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 990,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "abreak": 1,
+              "freeze": 1,
+              "poison": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt12-infectray:2",
+      "seed": 2,
+      "rng": {
+        "version": 2,
+        "seed": 2,
+        "streams": {
+          "generation": 2128019435
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt12-infectray",
+            "name": "感染射线",
+            "cost": 1,
+            "rarity": "古朴",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "desc": "造成4点法伤，附加一层随机诅咒",
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 1,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 9,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 994,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "freeze": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt3-nuke-ray:123",
+      "seed": 123,
+      "rng": {
+        "version": 2,
+        "seed": 123,
+        "streams": {
+          "generation": 969294680
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt3-nuke-ray",
+            "cls": "降临者",
+            "name": "致命射线",
+            "cost": 2,
+            "rarity": "职业",
+            "type": "法术",
+            "dmg": 8,
+            "dmgType": "spell",
+            "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+            "value": 3,
+            "sellable": false,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 3,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 8,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 990,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "freeze": 1,
+              "healban": 1,
+              "poison": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt12-infectray:123",
+      "seed": 123,
+      "rng": {
+        "version": 2,
+        "seed": 123,
+        "streams": {
+          "generation": 969294680
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt12-infectray",
+            "name": "感染射线",
+            "cost": 1,
+            "rarity": "古朴",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "desc": "造成4点法伤，附加一层随机诅咒",
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 1,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 9,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 994,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "freeze": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt3-nuke-ray:999",
+      "seed": 999,
+      "rng": {
+        "version": 2,
+        "seed": 999,
+        "streams": {
+          "generation": 2052787037
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt3-nuke-ray",
+            "cls": "降临者",
+            "name": "致命射线",
+            "cost": 2,
+            "rarity": "职业",
+            "type": "法术",
+            "dmg": 8,
+            "dmgType": "spell",
+            "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+            "value": 3,
+            "sellable": false,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 3,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 8,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 990,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "abreak": 1,
+              "bleed": 1,
+              "poison": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt12-infectray:999",
+      "seed": 999,
+      "rng": {
+        "version": 2,
+        "seed": 999,
+        "streams": {
+          "generation": 2052787037
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt12-infectray",
+            "name": "感染射线",
+            "cost": 1,
+            "rarity": "古朴",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "desc": "造成4点法伤，附加一层随机诅咒",
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 1,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 9,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 994,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "abreak": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt3-nuke-ray:2147483647",
+      "seed": 2147483647,
+      "rng": {
+        "version": 2,
+        "seed": 2147483647,
+        "streams": {
+          "generation": 2885799120
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt3-nuke-ray",
+            "cls": "降临者",
+            "name": "致命射线",
+            "cost": 2,
+            "rarity": "职业",
+            "type": "法术",
+            "dmg": 8,
+            "dmgType": "spell",
+            "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+            "value": 3,
+            "sellable": false,
+            "unrandom": true,
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 3,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 8,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 990,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "bleed": 1,
+              "healban": 1,
+              "silence": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    },
+    {
+      "id": "tt12-infectray:2147483647",
+      "seed": 2147483647,
+      "rng": {
+        "version": 2,
+        "seed": 2147483647,
+        "streams": {
+          "generation": 2885799120
+        }
+      },
+      "input": [
+        {
+          "uid": "o0",
+          "card": {
+            "id": "tt12-infectray",
+            "name": "感染射线",
+            "cost": 1,
+            "rarity": "古朴",
+            "type": "法术",
+            "dmg": 4,
+            "dmgType": "spell",
+            "desc": "造成4点法伤，附加一层随机诅咒",
+            "rules": {
+              "version": 1,
+              "battle": {
+                "target": {
+                  "side": "enemy",
+                  "area": false
+                }
+              },
+              "triggers": {
+                "onPlay": [
+                  {
+                    "op": "damage",
+                    "amountField": "dmg",
+                    "target": "chosenEnemy"
+                  },
+                  {
+                    "op": "curse",
+                    "randomKinds": 1,
+                    "target": "chosenEnemy"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "after": {
+        "hp": 30,
+        "energy": 9,
+        "maxEnergy": 10,
+        "armor": 0,
+        "shield": 0,
+        "guard": false,
+        "status": {},
+        "foes": [
+          {
+            "hp": 994,
+            "atk": 2,
+            "dead": false,
+            "status": {
+              "bleed": 1
+            },
+            "armor": 0,
+            "shield": 0
+          }
+        ],
+        "hand": [],
+        "deck": [
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          },
+          {
+            "id": "starter-attack",
+            "cost": 1,
+            "dmg": 0
+          }
+        ],
+        "consumed": []
+      },
+      "turn": null
+    }
+  ],
+  "skipped": []
+}

@@ -1,0 +1,138 @@
+{
+  "pass": true,
+  "vectors": 12,
+  "rows": [
+    {
+      "id": "tt3-nuke-ray:0",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 1553158855
+      },
+      "coreStreams": {
+        "generation": 1553158855
+      }
+    },
+    {
+      "id": "tt12-infectray:0",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 1553158855
+      },
+      "coreStreams": {
+        "generation": 1553158855
+      }
+    },
+    {
+      "id": "tt3-nuke-ray:1",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 611766131
+      },
+      "coreStreams": {
+        "generation": 611766131
+      }
+    },
+    {
+      "id": "tt12-infectray:1",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 611766131
+      },
+      "coreStreams": {
+        "generation": 611766131
+      }
+    },
+    {
+      "id": "tt3-nuke-ray:2",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 2128019435
+      },
+      "coreStreams": {
+        "generation": 2128019435
+      }
+    },
+    {
+      "id": "tt12-infectray:2",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 2128019435
+      },
+      "coreStreams": {
+        "generation": 2128019435
+      }
+    },
+    {
+      "id": "tt3-nuke-ray:123",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 969294680
+      },
+      "coreStreams": {
+        "generation": 969294680
+      }
+    },
+    {
+      "id": "tt12-infectray:123",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 969294680
+      },
+      "coreStreams": {
+        "generation": 969294680
+      }
+    },
+    {
+      "id": "tt3-nuke-ray:999",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 2052787037
+      },
+      "coreStreams": {
+        "generation": 2052787037
+      }
+    },
+    {
+      "id": "tt12-infectray:999",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 2052787037
+      },
+      "coreStreams": {
+        "generation": 2052787037
+      }
+    },
+    {
+      "id": "tt3-nuke-ray:2147483647",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 2885799120
+      },
+      "coreStreams": {
+        "generation": 2885799120
+      }
+    },
+    {
+      "id": "tt12-infectray:2147483647",
+      "state": true,
+      "rng": true,
+      "sourceStreams": {
+        "generation": 2885799120
+      },
+      "coreStreams": {
+        "generation": 2885799120
+      }
+    }
+  ]
+}

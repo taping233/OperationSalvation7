@@ -1,0 +1,1577 @@
+{
+  "vectors": [
+    {
+      "id": "starter-emergency-bandage",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 32,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "starter-emergency-bandage",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 32,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt-jinchuangyao",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 35,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt-jinchuangyao",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 35,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-blue-potion",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 25,
+      "status": {
+        "silence": 0
+      },
+      "energy": 3,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-blue-potion",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 25,
+      "status": {
+        "silence": 2
+      },
+      "energy": 3,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-python-potion",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 36,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 36,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-python-potion",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 36,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 36,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-houyi-potion",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 0,
+        "bleed": 0,
+        "poison": 0,
+        "freeze": 0,
+        "abreak": 0,
+        "healban": 0,
+        "atkDown": 0,
+        "atkUp": 2,
+        "spellUp": 0,
+        "stealth": 0,
+        "immune": 0,
+        "reduce": 0,
+        "dodge": 0,
+        "swordForm": 0,
+        "natureForm": 0,
+        "cosmosForm": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-houyi-potion",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 2,
+        "bleed": 0,
+        "poison": 0,
+        "freeze": 0,
+        "abreak": 0,
+        "healban": 0,
+        "atkDown": 0,
+        "atkUp": 2,
+        "spellUp": 0,
+        "stealth": 0,
+        "immune": 0,
+        "reduce": 0,
+        "dodge": 0,
+        "swordForm": 0,
+        "natureForm": 0,
+        "cosmosForm": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-iceheart-potion",
+      "silenced": false,
+      "targetSide": "enemy",
+      "hp": 20,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 1,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-iceheart-potion",
+      "silenced": true,
+      "targetSide": "enemy",
+      "hp": 20,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 1,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-demon-potion",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 0,
+        "bleed": 0,
+        "poison": 0,
+        "freeze": 0,
+        "abreak": 0,
+        "healban": 0,
+        "atkDown": 0,
+        "atkUp": 0,
+        "spellUp": 2,
+        "stealth": 0,
+        "immune": 0,
+        "reduce": 0,
+        "dodge": 0,
+        "swordForm": 0,
+        "natureForm": 0,
+        "cosmosForm": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-demon-potion",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 2,
+        "bleed": 0,
+        "poison": 0,
+        "freeze": 0,
+        "abreak": 0,
+        "healban": 0,
+        "atkDown": 0,
+        "atkUp": 0,
+        "spellUp": 2,
+        "stealth": 0,
+        "immune": 0,
+        "reduce": 0,
+        "dodge": 0,
+        "swordForm": 0,
+        "natureForm": 0,
+        "cosmosForm": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-mind-potion",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 2,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-mind-potion",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 2,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-turnabout-potion",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 1,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 1,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-turnabout-potion",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 1,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 1,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-mixed-potion",
+      "silenced": false,
+      "targetSide": "enemy",
+      "hp": 20,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 38,
+          "dead": false,
+          "status": {
+            "bleed": 1,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-mixed-potion",
+      "silenced": true,
+      "targetSide": "enemy",
+      "hp": 20,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 38,
+          "dead": false,
+          "status": {
+            "bleed": 1,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3sp-doom",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 0,
+          "dead": true,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3sp-doom",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 20,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 0,
+          "dead": true,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-savior-elixir",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 35,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt3-savior-elixir",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 35,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt4-woodify",
+      "silenced": false,
+      "targetSide": null,
+      "hp": 26,
+      "status": {
+        "silence": 0
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tt4-woodify",
+      "silenced": true,
+      "targetSide": null,
+      "hp": 26,
+      "status": {
+        "silence": 2
+      },
+      "energy": 2,
+      "draw": 0,
+      "foes": [
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        },
+        {
+          "hp": 40,
+          "dead": false,
+          "status": {
+            "bleed": 0,
+            "poison": 0,
+            "freeze": 0,
+            "silence": 0,
+            "abreak": 0,
+            "healban": 0,
+            "atkDown": 0,
+            "atkUp": 0,
+            "spellUp": 0,
+            "stealth": 0,
+            "immune": 0,
+            "reduce": 0,
+            "dodge": 0,
+            "swordForm": 0,
+            "natureForm": 0,
+            "cosmosForm": 0
+          }
+        }
+      ]
+    }
+  ],
+  "consumed": {
+    "before": [
+      "a",
+      "b",
+      "c"
+    ],
+    "retrieved": true,
+    "after": {
+      "hand": [
+        "active",
+        "a"
+      ],
+      "drawPile": [
+        "deck"
+      ],
+      "played": [
+        "active"
+      ],
+      "consumed": [
+        "b"
+      ],
+      "discard": [
+        "c",
+        "deck"
+      ],
+      "grave": [
+        "d",
+        "b"
+      ]
+    }
+  }
+}

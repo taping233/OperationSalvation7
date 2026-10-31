@@ -1,0 +1,872 @@
+{
+  "files": [
+    {
+      "key": "altar",
+      "source": "scenes/map-nodes/altar-symbol-1017-v2.webp",
+      "sourceSha256": "290185e51e34e7326822c5dcf3ddb07d831c789d5e9c9b7b72812e5f55478ac6",
+      "destination": "Art/Current/UiIcons/altar.png",
+      "outputSha256": "b544d14650254f6935c13e758e013a4ef5681fb5fb8acd6786ebfcc930f5e56d",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "archive",
+      "source": "ui/semantic-icons/archive.svg",
+      "sourceSha256": "d0732811bac1b7fbd3ee2b7a26d8e6613df3050ba91ad0bb5bbf91715fdd8a10",
+      "destination": "Art/Current/UiIcons/archive.png",
+      "outputSha256": "b65cc0aca006aaedc74aa49a4216ed818b0ddffecb518f05b1b203e204bb4c28",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "arrow",
+      "source": "ui/semantic-icons/arrow.svg",
+      "sourceSha256": "7dcfe44ce9926c34949d1207d5da7a279252ff7399296ea87bc347fdc3a5221e",
+      "destination": "Art/Current/UiIcons/arrow.png",
+      "outputSha256": "1992ec1b2f78fa7d18f79670fe9d57d5fcca7d8e2838d9e5afc4a1322de332de",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "bag",
+      "source": "ui/semantic-icons/bag.svg",
+      "sourceSha256": "4c6129960417fa625914250f3f42eebe8654cfb84b90e6d5f54ca51980365ea9",
+      "destination": "Art/Current/UiIcons/bag.png",
+      "outputSha256": "0569d4e99ab933dd95fbe0a9348fa434ecfa75b96c6f3bfabd9b207f9f29413c",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "blood",
+      "source": "ui/icons/blood.png",
+      "sourceSha256": "6ddba11e7853e51c3da6f886618da4372c5c74cc00369644f3e649093ed97b9d",
+      "destination": "Art/Current/UiIcons/blood.png",
+      "outputSha256": "6ddba11e7853e51c3da6f886618da4372c5c74cc00369644f3e649093ed97b9d",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "bolt",
+      "source": "ui/icons/bolt.png",
+      "sourceSha256": "0ca5191ee356ee03cc8dd07abd1bc494e51ea946cd3fa2ba8471a69600412da0",
+      "destination": "Art/Current/UiIcons/bolt.png",
+      "outputSha256": "0ca5191ee356ee03cc8dd07abd1bc494e51ea946cd3fa2ba8471a69600412da0",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "book",
+      "source": "ui/semantic-icons/book.svg",
+      "sourceSha256": "336648e14729ad8ffe203c2b0bd3eafe3be3d1e7f7dce46301c06af846ded18e",
+      "destination": "Art/Current/UiIcons/book.png",
+      "outputSha256": "d6ab1c04674e0b93c4564e7a01af95a825964070ed7ffa70f642746a1071dab2",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "bread",
+      "source": "ui/icons/bread.png",
+      "sourceSha256": "7cdddae2a97fdaed625152758fd52223729e7f5f588347b1a7dde4fcd5a6a177",
+      "destination": "Art/Current/UiIcons/bread.png",
+      "outputSha256": "7cdddae2a97fdaed625152758fd52223729e7f5f588347b1a7dde4fcd5a6a177",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "broken",
+      "source": "ui/icons/broken.png",
+      "sourceSha256": "b393bf324f5754ef776b1079437212d48193e7d1d11eb7590f3bc4a1fa7dc2ce",
+      "destination": "Art/Current/UiIcons/broken.png",
+      "outputSha256": "b393bf324f5754ef776b1079437212d48193e7d1d11eb7590f3bc4a1fa7dc2ce",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "broom",
+      "source": "ui/semantic-icons/broom.svg",
+      "sourceSha256": "10b8cfbcda580e925d06fc5f40194740affa7f7f1c9c1fb92ad975dc8ccdbaf7",
+      "destination": "Art/Current/UiIcons/broom.png",
+      "outputSha256": "eee672ce00ced42bc5b2d86f397d34bd797bc1f2c268aeba727ac43ee86f4a64",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "card-back",
+      "source": "ui/semantic-icons/card-back.svg",
+      "sourceSha256": "6b04d723765facab0cbe262dfd8ee7a7c5d6a61cf63e298f3618a1acee1c68c1",
+      "destination": "Art/Current/UiIcons/card-back.png",
+      "outputSha256": "452e6dd7a99ffd9a7ea34fa4f03fb60d59496463e4654a6db61df3993d028e08",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "card-craft",
+      "source": "ui/semantic-icons/card-craft.svg",
+      "sourceSha256": "324c1942ab5821f2a9416033db47691f849f02a2b2ef50e50ecb837d9faeba21",
+      "destination": "Art/Current/UiIcons/card-craft.png",
+      "outputSha256": "4b964e523630d307fa45a5d8bdfb81770f4a067ff09b5c1c8b94b772d0612942",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "card-library",
+      "source": "ui/semantic-icons/card-library.svg",
+      "sourceSha256": "90cd14eb1dab2ba30c6d857af10a197aa63ee5a7b1f5444abd46edee159a89d8",
+      "destination": "Art/Current/UiIcons/card-library.png",
+      "outputSha256": "33840059218ade07034dccdba126120d9357390df38e60e3cd93cee5e2de38a1",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "cards",
+      "source": "ui/semantic-icons/cards.svg",
+      "sourceSha256": "8114d4e9562e2c1e4f6380a5de9b47aa13ae8af9419b89ac465d6d546f21dac3",
+      "destination": "Art/Current/UiIcons/cards.png",
+      "outputSha256": "c58eea4aa125f3a0698f7c67f27afa6fe30586b8fccabd97f46c3839cef081e4",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "chart",
+      "source": "ui/semantic-icons/chart.svg",
+      "sourceSha256": "e84e676c38ca3abeb5358ac4e2051f6344d106c2f0e7cabf21a350a8f8800092",
+      "destination": "Art/Current/UiIcons/chart.png",
+      "outputSha256": "dd35ddb733747223126733879fcb2861eefebabdf5859ea3f14aa6c3010edac5",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "check",
+      "source": "ui/icons/check.png",
+      "sourceSha256": "199b401c7cb96fc8b1e701facc8bcbc79ad9cd1965dea0b359eb838c35886bb7",
+      "destination": "Art/Current/UiIcons/check.png",
+      "outputSha256": "199b401c7cb96fc8b1e701facc8bcbc79ad9cd1965dea0b359eb838c35886bb7",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "coin",
+      "source": "ui/map-hud-1015/gold-is7-v2.webp",
+      "sourceSha256": "1beb50cdff1a039022d233310f93f36af0c20eff93fe038d9abb9510d1d13930",
+      "destination": "Art/Current/UiIcons/coin.png",
+      "outputSha256": "ca27a033968afaa25153d03da83da9e1474c34da9646189e3d75bf7b2b946173",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "consumed-pile",
+      "source": "ui/semantic-icons/consumed-pile.svg",
+      "sourceSha256": "15ee36fc4d37fb6914aaa13a13d866ddd6049c3281128aa11c36f4bd3431a6a9",
+      "destination": "Art/Current/UiIcons/consumed-pile.png",
+      "outputSha256": "44ba997386ec1a56e3c8a6160b315f7d530943238a6cec82c1a88ff48fce2250",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "cross",
+      "source": "ui/icons/cross.png",
+      "sourceSha256": "e1c88cd7a202f77ddc6c44a84ec5a281e83fc7afc44c246895fa817d3a568451",
+      "destination": "Art/Current/UiIcons/cross.png",
+      "outputSha256": "e1c88cd7a202f77ddc6c44a84ec5a281e83fc7afc44c246895fa817d3a568451",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "crystal",
+      "source": "ui/semantic-icons/crystal.svg",
+      "sourceSha256": "32fd0c11bd6c91453b3471e21d5f73f7f236cb627200fe73c67b3183416063d1",
+      "destination": "Art/Current/UiIcons/crystal.png",
+      "outputSha256": "2400285ef90b2e24f6a5f57d19d61c89d4d0da41a63c39dcaccb1862b7cccde0",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "demon",
+      "source": "ui/icons/demon.png",
+      "sourceSha256": "a9f278ec0a763ee77157b17227b8b28cccd8beb6c6dd220f0b874c7c2d031cc4",
+      "destination": "Art/Current/UiIcons/demon.png",
+      "outputSha256": "a9f278ec0a763ee77157b17227b8b28cccd8beb6c6dd220f0b874c7c2d031cc4",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "dice",
+      "source": "ui/icons/dice.png",
+      "sourceSha256": "adb3ccdfa1ea9379646f6831607464b6e61937519055bb4fafdc63323a6ca5dd",
+      "destination": "Art/Current/UiIcons/dice.png",
+      "outputSha256": "adb3ccdfa1ea9379646f6831607464b6e61937519055bb4fafdc63323a6ca5dd",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "door",
+      "source": "ui/semantic-icons/door.svg",
+      "sourceSha256": "c1e6e84dcbb5b0870f1f9e972fc084e1459ec7febd850867e19f45be411cbcee",
+      "destination": "Art/Current/UiIcons/door.png",
+      "outputSha256": "1c7904e0daf375693fd2557b9fbe2aaacd78d22301e9cf895a228b423137d3bb",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "download",
+      "source": "ui/icons/download.png",
+      "sourceSha256": "a14c5e985f06e9ac82adb533aa952112d1ca7ce8bfc07f2e61d1cc837886ec6d",
+      "destination": "Art/Current/UiIcons/download.png",
+      "outputSha256": "a14c5e985f06e9ac82adb533aa952112d1ca7ce8bfc07f2e61d1cc837886ec6d",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "draw-card",
+      "source": "ui/semantic-icons/draw-card.svg",
+      "sourceSha256": "b0ecb454d9656c9239b5859f907dfb00b0d32d371c5c7eb495957cab21273bfe",
+      "destination": "Art/Current/UiIcons/draw-card.png",
+      "outputSha256": "582b2b0d38409506d2d1a147eb8b77d8dd6447baf56a6cc5786daf18e3c3106e",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "draw-pile",
+      "source": "ui/semantic-icons/draw-pile.svg",
+      "sourceSha256": "fefc349b3de1a26a3776d257c80eb72c3d766f29c65b12a34caed62f8aa89232",
+      "destination": "Art/Current/UiIcons/draw-pile.png",
+      "outputSha256": "bc36060c92403a891eb4d1993ebc53871f5d65f732dbd7dd603aa361790116e4",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "exit",
+      "source": "ui/semantic-icons/exit.svg",
+      "sourceSha256": "3ac55b90fef2b1a1bd401c2d5eda2caf411b0f391d8070678eb20624472d1d4a",
+      "destination": "Art/Current/UiIcons/exit.png",
+      "outputSha256": "06f5df938ec340d6816705fbb93c4f9afb3532863687977b1384ab83ff67ba2d",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "fire",
+      "source": "ui/icons/fire.png",
+      "sourceSha256": "dfb7af696cfd2a889279feb682f13cc865b06a3c8a000828c7945207ee7246a1",
+      "destination": "Art/Current/UiIcons/fire.png",
+      "outputSha256": "dfb7af696cfd2a889279feb682f13cc865b06a3c8a000828c7945207ee7246a1",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "flag",
+      "source": "ui/icons/flag.png",
+      "sourceSha256": "920a0ba3bace2c9bb540710819bfa977dec33f36e9e91be526e4a4a71aeb5e96",
+      "destination": "Art/Current/UiIcons/flag.png",
+      "outputSha256": "920a0ba3bace2c9bb540710819bfa977dec33f36e9e91be526e4a4a71aeb5e96",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "flask",
+      "source": "ui/icons/flask.png",
+      "sourceSha256": "f31ac7bac8befa5e3c6a2d677388a487a77b43116e1885d6098ae03a5e315372",
+      "destination": "Art/Current/UiIcons/flask.png",
+      "outputSha256": "f31ac7bac8befa5e3c6a2d677388a487a77b43116e1885d6098ae03a5e315372",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "folder",
+      "source": "ui/semantic-icons/folder.svg",
+      "sourceSha256": "1b45a9c4595f33e7683fed1a4478546bac0a36ae5a0cf4834b9ce95fb25196cd",
+      "destination": "Art/Current/UiIcons/folder.png",
+      "outputSha256": "e4eeafea81feefeb6fb597f5c2d009d664109b70f70d1c198224d8646fd44503",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "gear",
+      "source": "ui/icons/gear.png",
+      "sourceSha256": "7fbef9f84edbc9e948e6a7a4779c835954002da3603a5bc00e80c74a0b951473",
+      "destination": "Art/Current/UiIcons/gear.png",
+      "outputSha256": "7fbef9f84edbc9e948e6a7a4779c835954002da3603a5bc00e80c74a0b951473",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "gem",
+      "source": "ui/semantic-icons/gem.svg",
+      "sourceSha256": "0e797886f2b29c23ab36b9f4adbac4ee43f07e25f0c30f3253d27b9ab1105ff7",
+      "destination": "Art/Current/UiIcons/gem.png",
+      "outputSha256": "ce25032e8b439bfc15f70f3bc9e3c58b1dcd27505d642600e4837c47cf2904ec",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "hand-pages",
+      "source": "ui/semantic-icons/hand-pages.svg",
+      "sourceSha256": "4ed544f7744db1a8caca0dc359f06dfcc4ecdfa57539963bc6afb492c76018ab",
+      "destination": "Art/Current/UiIcons/hand-pages.png",
+      "outputSha256": "6c240b4261972fc6242887c7fe26d9efd21ea23b7ad0e4f16912777e2282d5bc",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "heart",
+      "source": "ui/icons/heart.png",
+      "sourceSha256": "3698053f2689d511a0f63db8e1a4aad7582d0cdebfe8c2597d4396f59adef6eb",
+      "destination": "Art/Current/UiIcons/heart.png",
+      "outputSha256": "3698053f2689d511a0f63db8e1a4aad7582d0cdebfe8c2597d4396f59adef6eb",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "helmet",
+      "source": "ui/semantic-icons/helmet.svg",
+      "sourceSha256": "f030c08bda3fa79668cc4eecf60e29ca4c245890d9ea2ea14b3bfc93d905861f",
+      "destination": "Art/Current/UiIcons/helmet.png",
+      "outputSha256": "5af7eaca30bf0454c5dbeda339e957efeb7044da33730bb640d0a2921ceeb8f0",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "home",
+      "source": "ui/semantic-icons/home.svg",
+      "sourceSha256": "f5e3f7705d987ca8109116e7b47842a4db8754318c60e7cd5f7c7671acb41ad0",
+      "destination": "Art/Current/UiIcons/home.png",
+      "outputSha256": "b335de819a3d8fd1149ee1620f4006101eed28cd31ec437db6a890f1a81884ba",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "hourglass",
+      "source": "ui/semantic-icons/hourglass.svg",
+      "sourceSha256": "35f7ce54b04d1e5064b024cbfa8ac97b105d86330c8e3db0c8d7bac959b2de22",
+      "destination": "Art/Current/UiIcons/hourglass.png",
+      "outputSha256": "4a35c2b2ab81dc348132f16da02c74fcf12d8d4b80ff588a308db3a10413606f",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "infinity",
+      "source": "ui/semantic-icons/infinity.svg",
+      "sourceSha256": "28c3eb6e0e82cf2cad7982b4addcc349cf22b72c5ebf838662314a321dad5032",
+      "destination": "Art/Current/UiIcons/infinity.png",
+      "outputSha256": "d63b158b00afc1e123cf8fde3cd53d2761eb89f5ee68375989e00196626c135d",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "info",
+      "source": "ui/semantic-icons/info.svg",
+      "sourceSha256": "04bbaa4fad501545b906703c1fac6dff716058975965875dccb8ab38f20720c6",
+      "destination": "Art/Current/UiIcons/info.png",
+      "outputSha256": "25d2144f4b263145bf7c136c30caeec2ba3c54fcabf0886ec5952624d278f2d3",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "infuse",
+      "source": "ui/semantic-icons/infuse.svg",
+      "sourceSha256": "129598abe54ca922f15f4bd2184ed80b9243b2a8fe27b16fb908deecad22dd05",
+      "destination": "Art/Current/UiIcons/infuse.png",
+      "outputSha256": "385079aab5e5705d945f61485ffcb43ea8abf757d0b705d52d5d2142077a5df3",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "key",
+      "source": "ui/icons/key.png",
+      "sourceSha256": "9ed823ab9b14bfd1b0a1c12f6fe8bae1cf6683e345e3df024e138a86dce13e31",
+      "destination": "Art/Current/UiIcons/key.png",
+      "outputSha256": "9ed823ab9b14bfd1b0a1c12f6fe8bae1cf6683e345e3df024e138a86dce13e31",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "lantern",
+      "source": "ui/semantic-icons/lantern.svg",
+      "sourceSha256": "179cd07129d891a9ecf4550d53448e4bc7a4fb0d3238037ca1f9b81b9f4891bb",
+      "destination": "Art/Current/UiIcons/lantern.png",
+      "outputSha256": "7d3619caf558fcca178b5592295a61cd43f1886020f23170dcf1c081cba8b469",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "lock",
+      "source": "ui/icons/lock.png",
+      "sourceSha256": "691b10a542e041ff97d5ddf9e39742a5d33feef8485a3ac5d8a273458f9e3ab6",
+      "destination": "Art/Current/UiIcons/lock.png",
+      "outputSha256": "691b10a542e041ff97d5ddf9e39742a5d33feef8485a3ac5d8a273458f9e3ab6",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "map",
+      "source": "ui/icons/map.png",
+      "sourceSha256": "8c24b879b817db55351ee7b89b11f7b5df81deaf579c2ead8c0d5dcc5afeac4e",
+      "destination": "Art/Current/UiIcons/map.png",
+      "outputSha256": "8c24b879b817db55351ee7b89b11f7b5df81deaf579c2ead8c0d5dcc5afeac4e",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "medal",
+      "source": "ui/icons/medal.png",
+      "sourceSha256": "007d3e0fa06dbff5b9ea0ea92893aa72d01ee70881b01b8f3c23c17f78b57d38",
+      "destination": "Art/Current/UiIcons/medal.png",
+      "outputSha256": "007d3e0fa06dbff5b9ea0ea92893aa72d01ee70881b01b8f3c23c17f78b57d38",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "mouse",
+      "source": "ui/semantic-icons/mouse.svg",
+      "sourceSha256": "2fb324358115bc4ecfce676fa632b387df64b998d30eefa7f5357e5bc29fa4df",
+      "destination": "Art/Current/UiIcons/mouse.png",
+      "outputSha256": "3795469fe58ba7ff5447bdd1cd8337305c96e82b958f045440d25defc5acd9cc",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "notes",
+      "source": "ui/semantic-icons/notes.svg",
+      "sourceSha256": "d94debfbcbebec4845d6985f063452ac80ce4ac11b357f8c7c7babbf62015f35",
+      "destination": "Art/Current/UiIcons/notes.png",
+      "outputSha256": "c99b8b8764971b269f05538d5b5dd1e0b829721f24d670391bddc7ce3b9fa9cf",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "pass-fragment",
+      "source": "ui/semantic-icons/pass-fragment.svg",
+      "sourceSha256": "3050c50c3a4d90ca3641be08e8fa2341c691288c87c282b407cf11a4fc9c5063",
+      "destination": "Art/Current/UiIcons/pass-fragment.png",
+      "outputSha256": "e92ecf94b323f4839d0b2cc60cf2d8d77c0955f3b210d918a549e2e5495f38c9",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "paw",
+      "source": "ui/icons/paw.png",
+      "sourceSha256": "29264104d179f63a43a42a8f00f81f490c015f4d7c0cf755a6e439499d98483e",
+      "destination": "Art/Current/UiIcons/paw.png",
+      "outputSha256": "29264104d179f63a43a42a8f00f81f490c015f4d7c0cf755a6e439499d98483e",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "pearl-box",
+      "source": "ui/semantic-icons/pearl-box.svg",
+      "sourceSha256": "09d8a9314e06c0b650a5015fba662a99a201b98a7b44bccf641f388692b8128c",
+      "destination": "Art/Current/UiIcons/pearl-box.png",
+      "outputSha256": "7f6e84217794562cbbdca73e6fda93a24c9798d750a1027e06b6f60cb9cb7e74",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "pen",
+      "source": "ui/semantic-icons/pen.svg",
+      "sourceSha256": "6acbda02259578485340e29aca158c6e8e01d8760677b34838d9107d2f3e3cbc",
+      "destination": "Art/Current/UiIcons/pen.png",
+      "outputSha256": "d6fb653a4c07c6eb2408db3bcd68db4438851c991e424894222c1a2a03c5d077",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "pet-egg",
+      "source": "ui/semantic-icons/pet-egg.svg",
+      "sourceSha256": "fe5776cdd28dc124df591bc2907c13fd0f654548f879d60060c802ebd934ad7e",
+      "destination": "Art/Current/UiIcons/pet-egg.png",
+      "outputSha256": "16eee6745bbf9b13ec39c1e1d5af9c1d2230eabb964b2b59cebf44d5dff88e86",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "pin",
+      "source": "ui/semantic-icons/pin.svg",
+      "sourceSha256": "65ebfc975d0748e2925005033a5a2d3a2c5c91e0c440e4ea1bb43029a07a46f1",
+      "destination": "Art/Current/UiIcons/pin.png",
+      "outputSha256": "6b8638e2a2480cbeacbe2a6b0c13c95b8b307f9fb779ad8cacbadc007e21e31b",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "plate",
+      "source": "ui/semantic-icons/plate.svg",
+      "sourceSha256": "07cfdb450554a34a34c97bf7fef4b5bf24ee389c17ce73415a6b3ab67b267362",
+      "destination": "Art/Current/UiIcons/plate.png",
+      "outputSha256": "96b96bea44c8c9a5ef7e6bc82f9ff5a81621421800d27a977fa0c07211d45ffa",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "play",
+      "source": "ui/semantic-icons/play.svg",
+      "sourceSha256": "4619d3a357e7ba7eaf1a9e0037145928fd0c68bcaf931fc7a91aa035db4f26c1",
+      "destination": "Art/Current/UiIcons/play.png",
+      "outputSha256": "c1dd293821cacb37160e7e0def88569d9e4e37e3faeaa9ee843a77f0ba575c7e",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "pocket",
+      "source": "ui/semantic-icons/pocket.svg",
+      "sourceSha256": "ae04eaaacccffe6db56c7e9f49ad66f8bf3d9a27dba4cbbb4ed2b17792a97a3b",
+      "destination": "Art/Current/UiIcons/pocket.png",
+      "outputSha256": "bcb446cd9f0ee1dc6b31c4f59bb7c31fde2eac87837779a2c36c90cc1c213c08",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "pouch",
+      "source": "ui/semantic-icons/pouch.svg",
+      "sourceSha256": "dfcbb6f214b8ad5174520afda13568216634256249d913f7a11d1cde607238bb",
+      "destination": "Art/Current/UiIcons/pouch.png",
+      "outputSha256": "8984dd752284ab93a9af17241d2d4dee6a18870103075bb0cf9bd177b2671457",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "question",
+      "source": "ui/semantic-icons/question.svg",
+      "sourceSha256": "aae9b329f8214fd502a90e24270cfb5f9cc9e19013103e42e1c59433d114e0be",
+      "destination": "Art/Current/UiIcons/question.png",
+      "outputSha256": "c87b4d9259acbc86ca9f26130d29f73d3bf07325b1f26a87ebf8cac79b837a17",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "recycle",
+      "source": "ui/icons/recycle.png",
+      "sourceSha256": "bb1bd84ed2927f5567c70b415838308c8e6ef0423ac67a77fcb2092952015084",
+      "destination": "Art/Current/UiIcons/recycle.png",
+      "outputSha256": "bb1bd84ed2927f5567c70b415838308c8e6ef0423ac67a77fcb2092952015084",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "runner",
+      "source": "ui/icons/runner.png",
+      "sourceSha256": "a9ca3f1a55cc1618f003075647a9198fe0e94f4c973716b490eedf6b2bded7db",
+      "destination": "Art/Current/UiIcons/runner.png",
+      "outputSha256": "a9ca3f1a55cc1618f003075647a9198fe0e94f4c973716b490eedf6b2bded7db",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "safe-slot",
+      "source": "ui/semantic-icons/safe-slot.svg",
+      "sourceSha256": "17e2e5e17d0eefc1447053bd18dcfe6fc57bc581cca9636b8c1ae36047c5b2ce",
+      "destination": "Art/Current/UiIcons/safe-slot.png",
+      "outputSha256": "a1f756f3cc36ec4d3499ab19680c5176296b90a9914043b5a462b06e21101b4f",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "save",
+      "source": "ui/semantic-icons/save.svg",
+      "sourceSha256": "85fb550d18917ca97c6719706a9a83ad5caa2c35acc08f2e34a370ae01749a10",
+      "destination": "Art/Current/UiIcons/save.png",
+      "outputSha256": "1543c1c1ec96a091c9b4e3fb308d15209b1a2e6a949b3ba0b4385ca8d8b92bd8",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "scroll",
+      "source": "ui/semantic-icons/scroll.svg",
+      "sourceSha256": "3b4a879312959031bf6cb3fc4959229af5f59150a2d39e56afd1a38077f31fdd",
+      "destination": "Art/Current/UiIcons/scroll.png",
+      "outputSha256": "cc14a8d0508c81c3c1539f1a7cdbf30c34bbfd11ddc3f762f1ef4e8aaf96d79a",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "search",
+      "source": "ui/semantic-icons/search.svg",
+      "sourceSha256": "ce5ba0cc5c01550e4f56d8ddfb4d9d37164db7ec5745a8047b1655fe6cc2c829",
+      "destination": "Art/Current/UiIcons/search.png",
+      "outputSha256": "ea977598b98aa4c28fe74e7b90db56d66fcfdd35d07b04e7e90b86fa67b332aa",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "sell-cards",
+      "source": "ui/semantic-icons/sell-cards.svg",
+      "sourceSha256": "881aeded16120a6681b2ebb1f39f07641197390f317dcef1b889e7c09b6f15ff",
+      "destination": "Art/Current/UiIcons/sell-cards.png",
+      "outputSha256": "fb2ae8276423f8b95389abb02884daa432d9128fe330d5d99b0e985bea3f15a0",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "shield",
+      "source": "ui/semantic-icons/shield.svg",
+      "sourceSha256": "591a9a8174bace45de025c9bef6ddfe740ea495f61a0af489a4483f98afb88bc",
+      "destination": "Art/Current/UiIcons/shield.png",
+      "outputSha256": "76bf23806f4d3cd1a996d05f1521776d74c87bff624a9b69795e8dd53631339b",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "skip",
+      "source": "ui/semantic-icons/skip.svg",
+      "sourceSha256": "0c8254bda061c3855f387955f5927813fdba066425b3d09c22590c0e8b012a18",
+      "destination": "Art/Current/UiIcons/skip.png",
+      "outputSha256": "b07beaaa60540f0b49cb386f778d12952b2717a79e64085a08de37a7448a14ab",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "skull",
+      "source": "ui/icons/skull.png",
+      "sourceSha256": "cdf7e473530e9b693431dee7b86f440e4d7396c670b7be1b909550b73aad3fd2",
+      "destination": "Art/Current/UiIcons/skull.png",
+      "outputSha256": "cdf7e473530e9b693431dee7b86f440e4d7396c670b7be1b909550b73aad3fd2",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "slime",
+      "source": "ui/icons/slime.png",
+      "sourceSha256": "8d0c614cea2b06ec28ee55124c37dcad8c72f40e4b26eda3bd18dd9d18e356fb",
+      "destination": "Art/Current/UiIcons/slime.png",
+      "outputSha256": "8d0c614cea2b06ec28ee55124c37dcad8c72f40e4b26eda3bd18dd9d18e356fb",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "sparkles",
+      "source": "ui/semantic-icons/sparkles.svg",
+      "sourceSha256": "60a34c946474349975cbde49c421f382edc8ac2238ae5181aa8527946e54e76c",
+      "destination": "Art/Current/UiIcons/sparkles.png",
+      "outputSha256": "d7c6f8b03c6950acff778a8f894bc1208a05c36924d9446f9adb822f1ac44ce6",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "spell-pouch",
+      "source": "ui/semantic-icons/spell-pouch.svg",
+      "sourceSha256": "8bd8542416d3891600ca84cb620d814ed48c2f065d480d47e758e2ae8d88c284",
+      "destination": "Art/Current/UiIcons/spell-pouch.png",
+      "outputSha256": "3cf1719446564fc9ec4a1488685267d9d9cdb6a62f997f3bcd429b3e63fad295",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "spell-power",
+      "source": "ui/semantic-icons/spell-power.svg",
+      "sourceSha256": "c4a7438d670d939aa907ac60c816edb83e7bfdd22091483280b18b66da819c7c",
+      "destination": "Art/Current/UiIcons/spell-power.png",
+      "outputSha256": "a343288902a95478fcd1313108c16d609df4301e1241826cf5fbb42cb7dddc3c",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-armor-break",
+      "source": "ui/semantic-icons/status-armor-break.svg",
+      "sourceSha256": "09b21038603993110774d2d73f32894592ee99a4844f62ba148e6131751227e1",
+      "destination": "Art/Current/UiIcons/status-armor-break.png",
+      "outputSha256": "169b9a7637a24e316ef28d5066c817e0cc32bbfc391ec5c8e81698647bce8854",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-atk-down",
+      "source": "ui/semantic-icons/status-atk-down.svg",
+      "sourceSha256": "b3bfb4f223d1785789541ea65f3ae14b1bfb57dab9aa4c863ae44614361d8a2f",
+      "destination": "Art/Current/UiIcons/status-atk-down.png",
+      "outputSha256": "bcc2bcd10d898d0666bbbd565031d400189ad48b50efebbde5f5cd8c200c340a",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-atk-up",
+      "source": "ui/semantic-icons/status-atk-up.svg",
+      "sourceSha256": "eacc7953adbe1370a90040139cb0d1df3a3fe5c370ebc10696b8b8167a81df07",
+      "destination": "Art/Current/UiIcons/status-atk-up.png",
+      "outputSha256": "a21f29ca6690aee063975f2dc5f083eeddad22f88bd6fa6e68063dcb941e88c3",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-bleed",
+      "source": "ui/semantic-icons/status-bleed.svg",
+      "sourceSha256": "e206137d2449f11501903b7bdb773a21708b5b51447f1c0f0ac75867854454c8",
+      "destination": "Art/Current/UiIcons/status-bleed.png",
+      "outputSha256": "e65a8bda744c424fcd13d2e800a0e1e56dc0af424e31d03e3dba796bc917d5ca",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-cosmos-form",
+      "source": "ui/semantic-icons/status-cosmos-form.svg",
+      "sourceSha256": "8ed8f6c7fbb2c63fb54d1c0f7ca03924ae885bb7cb546780872beda4be69a166",
+      "destination": "Art/Current/UiIcons/status-cosmos-form.png",
+      "outputSha256": "14dfb7d7a039e5c35e5820aaa9ebfe983273c85c46d2185b3a4829445281cb0b",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-dodge",
+      "source": "ui/semantic-icons/status-dodge.svg",
+      "sourceSha256": "c42a90b084fde8bf67a91ef8c8c1644288572f7e48e8586438c6d60f3c9ce230",
+      "destination": "Art/Current/UiIcons/status-dodge.png",
+      "outputSha256": "d4f82664a474af2304306732fb9939b73abc24a971967db8a3fb902ddecf9107",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-freeze",
+      "source": "ui/semantic-icons/status-freeze.svg",
+      "sourceSha256": "09b51d2aeae8fa37a9f0055048230fadf1dc1974126d1524d8b2fa81bd3b379e",
+      "destination": "Art/Current/UiIcons/status-freeze.png",
+      "outputSha256": "cc87277df8853803fe03d528804c3778a250f0895cf480b5a06d401559cdccc2",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-heal-ban",
+      "source": "ui/semantic-icons/status-heal-ban.svg",
+      "sourceSha256": "218f50f48fc06b97b7f7258bdd9f52b9813640ef157296697dabba7204316de6",
+      "destination": "Art/Current/UiIcons/status-heal-ban.png",
+      "outputSha256": "7f4b45c566f7149ccf0ce4435af74d13da7124d533d138a3e7b52c3c94b93382",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-immune",
+      "source": "ui/semantic-icons/status-immune.svg",
+      "sourceSha256": "b8f7a52d62cd9b5809681f6eeb678aa68911e92a9aaca0176cb55270b81a3d25",
+      "destination": "Art/Current/UiIcons/status-immune.png",
+      "outputSha256": "15c9e6f45f852020f4699595f2ba5ec5184f3e44bbc4877f2677d11cf973fe99",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-moon-form",
+      "source": "ui/semantic-icons/status-moon-form.svg",
+      "sourceSha256": "239eaed04bc1cab0de15cc922cb77edab16cc47432662901316feecf979893cd",
+      "destination": "Art/Current/UiIcons/status-moon-form.png",
+      "outputSha256": "0ac4bf54fdf7a1192ff1c5740118ca9ce4e9779993f18bff0daebe30244befa1",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-poison",
+      "source": "ui/semantic-icons/status-poison.svg",
+      "sourceSha256": "75b65aaf49b9bdbf6fc51dcb9138e020b1652962f4f49dc544c4ef507a13b7b7",
+      "destination": "Art/Current/UiIcons/status-poison.png",
+      "outputSha256": "397c8e6d9748854280e3eddf3d14185c767246208b8700e9991b1445ba1b5b6d",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-reduce",
+      "source": "ui/semantic-icons/status-reduce.svg",
+      "sourceSha256": "af6c98e6380483f8094a1f7573a9426dfaf436153b0a3af198bb7c29f503512c",
+      "destination": "Art/Current/UiIcons/status-reduce.png",
+      "outputSha256": "2388dc5c5ef711c873de9cf177a1abebb659d3ede43996ac4db20dbcce176283",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-silence",
+      "source": "ui/semantic-icons/status-silence.svg",
+      "sourceSha256": "e539a18d3b5178d7ebf7a66026fc884667fef14e6eb9956376e2e64151d224a5",
+      "destination": "Art/Current/UiIcons/status-silence.png",
+      "outputSha256": "ffb2f60692a1a8edec10e7042ed7fa404522d9fdd239396fb17c845821e88760",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-spell-up",
+      "source": "ui/semantic-icons/status-spell-up.svg",
+      "sourceSha256": "e7df2ad3d06e9ce4bf5af22cb95fad8aab8af4f5572428f071995610448b1340",
+      "destination": "Art/Current/UiIcons/status-spell-up.png",
+      "outputSha256": "e6b20e1d4519e24071e68c49510f6f36644561a76107d8ab611ff08244483ae5",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-stealth",
+      "source": "ui/semantic-icons/status-stealth.svg",
+      "sourceSha256": "25600363d641f122ea40e37bbf17e4fdd59bdff7ec78a506d9a0037906aa6853",
+      "destination": "Art/Current/UiIcons/status-stealth.png",
+      "outputSha256": "2e572e676b9991b595b2da31b1a6f9da72a31277c102e9a12fd738da71800c6e",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "status-sword-form",
+      "source": "ui/semantic-icons/status-sword-form.svg",
+      "sourceSha256": "352a9cf7d800fdebfed50673de7979abec1b43c41cd8c490e8f7e52ec945888b",
+      "destination": "Art/Current/UiIcons/status-sword-form.png",
+      "outputSha256": "eaa0d78c442135fce6638d5e48d8ee5bcaac34c819fe0fefd7278dcd655cd5c4",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "sword",
+      "source": "ui/icons/sword.png",
+      "sourceSha256": "a1639b937b924d9e8bddf1e0a759b5965617570b756eee40c72b7bda81957eee",
+      "destination": "Art/Current/UiIcons/sword.png",
+      "outputSha256": "a1639b937b924d9e8bddf1e0a759b5965617570b756eee40c72b7bda81957eee",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "swords",
+      "source": "ui/icons/swords.png",
+      "sourceSha256": "a187cc96e25f34c4e5508681a798fbb59e239f7638e23b56d201dbc2bf6b8e06",
+      "destination": "Art/Current/UiIcons/swords.png",
+      "outputSha256": "a187cc96e25f34c4e5508681a798fbb59e239f7638e23b56d201dbc2bf6b8e06",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "tools",
+      "source": "ui/semantic-icons/tools.svg",
+      "sourceSha256": "5bef647b79916304b56e45a9ef522980e3831cb184bed73257e59b66595f334d",
+      "destination": "Art/Current/UiIcons/tools.png",
+      "outputSha256": "1dc60fab959088f513d1266ba2e5274c3df28b2f94d4945962e1451abb990291",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "trash",
+      "source": "ui/semantic-icons/trash.svg",
+      "sourceSha256": "e3f7579ab66eba3baf16d9c40394a6d95a655c0e25cc88266dc341256beb1dda",
+      "destination": "Art/Current/UiIcons/trash.png",
+      "outputSha256": "3ef0006b1635ae320168f11be75a09c4f77c5b3145dabf0e32982c0d497073ef",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "trophy",
+      "source": "ui/icons/trophy.png",
+      "sourceSha256": "97fe3b2c1ad22125565320b198a87c0feb9ed64ff069df7f64380bbb829b066c",
+      "destination": "Art/Current/UiIcons/trophy.png",
+      "outputSha256": "97fe3b2c1ad22125565320b198a87c0feb9ed64ff069df7f64380bbb829b066c",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "unlock",
+      "source": "ui/icons/unlock.png",
+      "sourceSha256": "12aede0159feb6de705befbe8e6497df3e7389025e76151b6aa5639ebcf3bffa",
+      "destination": "Art/Current/UiIcons/unlock.png",
+      "outputSha256": "12aede0159feb6de705befbe8e6497df3e7389025e76151b6aa5639ebcf3bffa",
+      "conversion": "original source pixels"
+    },
+    {
+      "key": "upload",
+      "source": "ui/semantic-icons/upload.svg",
+      "sourceSha256": "063c213a16298163f4347fde0c415975e0aead412bb384056950378a3c4ee965",
+      "destination": "Art/Current/UiIcons/upload.png",
+      "outputSha256": "9e6cc3d1bea845c8503a4ee67a14db780a5c979317d1f11c782f0538991a4e0d",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "warning",
+      "source": "ui/semantic-icons/warning.svg",
+      "sourceSha256": "3199ce394227327e5dd5cfdd5bf101c2111b9ac32f1398e257f94c7af0134e72",
+      "destination": "Art/Current/UiIcons/warning.png",
+      "outputSha256": "50a5bb9cdc65e3d56305629c52ad71323e68f4c2513b6c60e13a513ed349ad3f",
+      "conversion": "CairoSVG 128px raster of current SVG"
+    },
+    {
+      "key": "wood",
+      "source": "ui/icons/wood.png",
+      "sourceSha256": "ca93425aa9cf18f6b53272d1cccf288ac558ee31352783a479738d6213c94791",
+      "destination": "Art/Current/UiIcons/wood.png",
+      "outputSha256": "ca93425aa9cf18f6b53272d1cccf288ac558ee31352783a479738d6213c94791",
+      "conversion": "original source pixels"
+    }
+  ],
+  "hubFiles": [
+    {
+      "key": "home",
+      "source": "src/hub/hub.home-icons-v10.js",
+      "sourceSha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "pathSha256": "20ce78d4047606501fc6d2dbde4b504ba0a2f95b481e9cd9720f91d651b3608c",
+      "destination": "Art/Current/HubIcons/home.png",
+      "outputSha256": "bd2b74bd56c1c7af38da9571444817ea636f3b67e1ab7f4400137e51f8a49632"
+    },
+    {
+      "key": "deploy",
+      "source": "src/hub/hub.home-icons-v10.js",
+      "sourceSha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "pathSha256": "762c8683e44d3a45a247b8dae05ab326d91d7c901f0622f8794b3072cda093f0",
+      "destination": "Art/Current/HubIcons/deploy.png",
+      "outputSha256": "3f48205417cfa5099130132921224594be8da7999b542bc9992a3247bb0396f8"
+    },
+    {
+      "key": "classes",
+      "source": "src/hub/hub.home-icons-v10.js",
+      "sourceSha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "pathSha256": "4a834f2199a521fc6aedc5d99fc4c52fa2abe29a657cc75ab75d22cd1dc7af0c",
+      "destination": "Art/Current/HubIcons/classes.png",
+      "outputSha256": "e4787ee7b3404e94252712754e7dd65fc7db05e60df7cef68a3208eba215ee17"
+    },
+    {
+      "key": "stash",
+      "source": "src/hub/hub.home-icons-v10.js",
+      "sourceSha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "pathSha256": "bbad80a0ef97d313f991c5ed6def85986f60c81592501e583bc15e231bbe2715",
+      "destination": "Art/Current/HubIcons/stash.png",
+      "outputSha256": "68358650d660b9c7061d4073b31dff76e5c5a7de53627140c0281421887aca44"
+    },
+    {
+      "key": "shop",
+      "source": "src/hub/hub.home-icons-v10.js",
+      "sourceSha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "pathSha256": "a77d82c7e1dc809d3d3333bd6e504de12d4274e0135ceaea1ed6f0957a23bf65",
+      "destination": "Art/Current/HubIcons/shop.png",
+      "outputSha256": "1f5dadd09bd1540d543c52310fd286dc257c252b5deb9202bdfa3ba2cdc0a502"
+    },
+    {
+      "key": "ach",
+      "source": "src/hub/hub.home-icons-v10.js",
+      "sourceSha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "pathSha256": "fdf16042430bce416d01b0e7aa38c7b3a45a8342e76dda4c3127425356151106",
+      "destination": "Art/Current/HubIcons/ach.png",
+      "outputSha256": "8a333395025c7124b5ed9e0aa9804d4d9e001cbd5c8aaf8fc1dcac30a54b36b2"
+    },
+    {
+      "key": "upgrade",
+      "source": "src/hub/hub.home-icons-v10.js",
+      "sourceSha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "pathSha256": "6dc85a2efff55b2884608f19d6e80da4ff8996063b5ea059fdd1cd5d7b3249a2",
+      "destination": "Art/Current/HubIcons/upgrade.png",
+      "outputSha256": "382e7da1a35214e2b2f3912fb0f2c053d6d54f4c06e6e03319f662fd74fa7eea"
+    },
+    {
+      "key": "courtyard",
+      "source": "src/hub/hub.home-icons-v10.js",
+      "sourceSha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "pathSha256": "3ab7570df10b8e22d8f4e088d3720920d652e79ecd6f83fb96f5f5af27dc9fea",
+      "destination": "Art/Current/HubIcons/courtyard.png",
+      "outputSha256": "1a85bdf16392b9836d826355a462ca795cb2c25e69c63ab7d3bb9246d1a82b5a"
+    },
+    {
+      "key": "facility-bag",
+      "source": "src/hub/hub.visuals.js",
+      "sourceSha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
+      "sourceSvgSha256": "93a528e0639e19dba48905b452a3d81e673f9766cbf96c0bc7725951e86e054e",
+      "destination": "Art/Current/HubIcons/facility-bag.png",
+      "outputSha256": "eaac05de5e4bafe561c2abcb35ec59cc15d7d85c932f46cbcb5969d2814cf655"
+    },
+    {
+      "key": "facility-stash",
+      "source": "src/hub/hub.visuals.js",
+      "sourceSha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
+      "sourceSvgSha256": "79da3eb990b195c8416e1f125e815b2367916f97d422a53b64c8fdf48a7c6c66",
+      "destination": "Art/Current/HubIcons/facility-stash.png",
+      "outputSha256": "31214b9d9957351896a4e6bb887169d6a95f4b0736a94683188ca348576018d0"
+    }
+  ],
+  "registeredIcons": 98,
+  "emojiMappings": 112
+}

@@ -1,0 +1,126 @@
+{
+  "status": "pending-central-native-verification",
+  "policy": "current window only; main coordinator native screenshots and real inputs; no claim of UI acceptance from syntax/type diagnostics",
+  "cases": [
+    {
+      "id": "shell",
+      "expectation": "各目的地84顶栏/104底导航/七入口顺序、标题、档位、资源胶囊和提示一致；基地返回选档。",
+      "status": "unverified"
+    },
+    {
+      "id": "home-affairs",
+      "expectation": "首次目标、可扩建、可孵化、待领取分别满足/不满足时出现与隐藏，空态布局对应源。",
+      "status": "unverified"
+    },
+    {
+      "id": "home-draft",
+      "expectation": "无草稿待选择/待配置；有效草稿人物/张数/继续整备；跨档与失效草稿不泄漏。",
+      "status": "unverified"
+    },
+    {
+      "id": "home-mode",
+      "expectation": "正常入城/直入敌腹的选中、说明、保存失败回滚和出征入口。",
+      "status": "unverified"
+    },
+    {
+      "id": "browse",
+      "expectation": "房间/子页切换后滚动位置、焦点及搜索输入选择区保留；旧页面控件不触发新档操作。",
+      "status": "unverified"
+    },
+    {
+      "id": "warehouse",
+      "expectation": "四用途分类、搜索/类型/品质、人物培养来源和空态；网格实际行列与卡面边界。",
+      "status": "unverified"
+    },
+    {
+      "id": "warehouse-material",
+      "expectation": "材料单击使用1张、反馈与资源入账；特写数量变化后安全刷新。",
+      "status": "unverified"
+    },
+    {
+      "id": "warehouse-actions",
+      "expectation": "卡牌详情、收藏保护、出售单张/整堆2.6秒确认、能力/职业卡转化、补给包与蛋。",
+      "status": "unverified"
+    },
+    {
+      "id": "pocket",
+      "expectation": "待复原独立页、钥匙不足、仓库容量不足、成功复原与返回仓库。",
+      "status": "unverified"
+    },
+    {
+      "id": "personnel",
+      "expectation": "五人切换、全身默认立绘/已装备外观、当前与下级加成、经验、培养入口来源返回。",
+      "status": "unverified"
+    },
+    {
+      "id": "pool",
+      "expectation": "四张单行分页及放大阅读、归档状态和末页/空态。",
+      "status": "unverified"
+    },
+    {
+      "id": "appearance",
+      "expectation": "预览与应用分离、已装备态、保存失败保持原外观。",
+      "status": "unverified"
+    },
+    {
+      "id": "pets",
+      "expectation": "六伙伴展示/未相遇、切换随行、安全格、培养/缺料、孵化条件与失败不消耗、互动三反应/回复。",
+      "status": "unverified"
+    },
+    {
+      "id": "facilities",
+      "expectation": "背包/仓库三栏、原始SVG、容量前后/木材/符文材料、缺料交易链接、最大容量和失败回滚。",
+      "status": "unverified"
+    },
+    {
+      "id": "trade",
+      "expectation": "买卖/分类/选择/完整货架卡/结算台；购入物资入数、卡入库、仓满/币不足/保护、出售确认。",
+      "status": "unverified"
+    },
+    {
+      "id": "permanent-gallery",
+      "expectation": "仅有collection记录而stash无该卡时仍可见；末张转化后仍可见；旧记录缺卡定义显示名称与历史档案。",
+      "status": "unverified"
+    },
+    {
+      "id": "archive",
+      "expectation": "六目录、搜索类型/缩略页、奖励/里程碑双栏、成就排序/状态数量/搜索/进度/painted原图、奖励容量保护。",
+      "status": "unverified"
+    },
+    {
+      "id": "backs-stories",
+      "expectation": "卡背预览/应用/解锁目标返回、故事有记录/无记录/损坏记录重试。",
+      "status": "unverified"
+    },
+    {
+      "id": "save-failure",
+      "expectation": "注入保存失败，对所有原子操作核对原始库存/币/材料/成长/外观/奖励资格保留，反馈可见。",
+      "status": "unverified"
+    },
+    {
+      "id": "courtyard-shell",
+      "expectation": "庭院位于同一84/104壳中，七目的地可离开/返回，庭院设置弹出栏不会遮断公共导航。",
+      "status": "unverified"
+    },
+    {
+      "id": "courtyard-controls",
+      "expectation": "雨开关、雨势、声音、暂停/继续/静态、三配色/禁用态、偏好保存失败提示。",
+      "status": "unverified"
+    },
+    {
+      "id": "courtyard-input",
+      "expectation": "水面点击及Enter/Space投喂各一次，划过发现锦鲤；暂停与减少动效时输入仍可使静态图更新。",
+      "status": "unverified"
+    },
+    {
+      "id": "courtyard-lifecycle",
+      "expectation": "离开/关闭/失焦停止推进和声音，返回不恢复旧房间实例；同一页面无重复声音/重复帧循环。",
+      "status": "unverified"
+    },
+    {
+      "id": "native-glass",
+      "expectation": "实际Unity导入/Shader编译、圆角/遮罩/背景cover/22px玻璃取样、局部动效和减少动效；当前窗口截图。",
+      "status": "unverified"
+    }
+  ]
+}

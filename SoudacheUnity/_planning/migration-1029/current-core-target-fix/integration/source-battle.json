@@ -1,0 +1,59 @@
+{
+  "draws": [
+    {
+      "hand": 4,
+      "deck": 3,
+      "starters": 2
+    },
+    {
+      "hand": 5,
+      "deck": 1,
+      "starters": 4
+    },
+    {
+      "hand": 5,
+      "deck": 0,
+      "starters": 5
+    }
+  ],
+  "sword": {
+    "hand": 1,
+    "deck": 4
+  },
+  "frenzy": {
+    "hp": 23,
+    "status": {
+      "bleed": 1,
+      "poison": 1
+    }
+  },
+  "summary": {
+    "round": 2,
+    "remainingFoes": [
+      {
+        "name": "目标",
+        "hp": 50,
+        "maxHp": 50
+      }
+    ],
+    "damageTaken": [
+      {
+        "source": "目标",
+        "damage": 3,
+        "round": 1
+      },
+      {
+        "source": "目标",
+        "damage": 4,
+        "round": 1
+      }
+    ],
+    "damageCoverage": "记录敌方直接攻击与回合末中毒；其他卡牌或反噬伤害未归因。"
+  },
+  "mimic": {
+    "id": "starter-attack",
+    "cost": 1,
+    "originalId": "tt7-imitate",
+    "blocked": null
+  }
+}

@@ -1,0 +1,32 @@
+using System;using UnityEngine;using UnityEngine.UI;using UnityEngine.EventSystems;using Sdt.UI.Kit;namespace Sdt.UI.Screens.Menu {
+    sealed class VolSlider : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+    {
+        RectTransform _fill;Action<float> _change;Text _label;int _value;
+        public Action Released;
+        public void Setup(int value,Action<float> change)
+        {
+            _change=change;var track=gameObject.AddComponent<Image>();track.color=Theme.Hex("#19212A");
+            gameObject.AddComponent<Outline>().effectColor=Theme.Hex("#657B8D");
+            _fill=new GameObject("range-fill",typeof(RectTransform)).GetComponent<RectTransform>();_fill.SetParent(transform,false);
+            _fill.anchorMin=Vector2.zero;_fill.anchorMax=new Vector2(0,1);_fill.pivot=new Vector2(0,.5f);
+            _fill.gameObject.AddComponent<Image>().color=Theme.Hex("#6C9BA9");
+            _label=UIKit.Label(transform,"",18,Theme.Hex("#DDE7EE"));_label.alignment=TextAnchor.MiddleCenter;UiStack.Stretch(_label.rectTransform);
+            Set(value,false);
+        }
+        void Set(int value,bool notify)
+        {
+            _value=Mathf.Clamp(value,0,100);_fill.anchorMax=new Vector2(_value/100f,1);_fill.offsetMin=_fill.offsetMax=Vector2.zero;
+            _label.text=_value+"%";if(notify)_change?.Invoke(_value/100f);
+        }
+        void Move(PointerEventData data)
+        {
+            var rect=(RectTransform)transform;if(!RectTransformUtility.ScreenPointToLocalPointInRectangle(rect,data.position,data.pressEventCamera,out var point))return;
+            Set(Mathf.RoundToInt((point.x-rect.rect.xMin)/Mathf.Max(1,rect.rect.width)*100),true);
+        }
+        public void OnPointerDown(PointerEventData data){if(data.button==PointerEventData.InputButton.Left)Move(data);}
+        public void OnDrag(PointerEventData data){if(data.button==PointerEventData.InputButton.Left)Move(data);}
+        public void OnPointerUp(PointerEventData data){if(data.button==PointerEventData.InputButton.Left)Released?.Invoke();}
+    }
+
+
+}

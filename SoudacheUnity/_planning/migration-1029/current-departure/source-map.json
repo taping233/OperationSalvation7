@@ -1,0 +1,186 @@
+{
+  "scope": "06-character / 07-departure",
+  "authority": "../搜打撤/game",
+  "source": [
+    {
+      "path": "搜打撤/game/src/run/game.session.kernel.js",
+      "sha256": "f4eeb71b4322b3561f81572a6b618b357d46561c74af3fd160ebbe3595861d1f"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.class-choice.js",
+      "sha256": "a81dfce40a84a2713174bcf918e5901b4401f8b71604691256fa3bc94fb3128b"
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.class-choice.page.js",
+      "sha256": "1afc1f86e94c3b1f7f959667148d4180655abeba5012877c126550fc06e91d4d"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.depart.js",
+      "sha256": "2c637b4d4acfbb6dfd0f31e737aee6d38dcb9203ed3c330cab2dac44b52dc09e"
+    },
+    {
+      "path": "搜打撤/game/src/hub/departure.selection-state.js",
+      "sha256": "c4d0ae39cc850b463bfe3ccc941c4ba0009663a3268e1124fb00e7685aa01db4"
+    },
+    {
+      "path": "搜打撤/game/src/hub/departure.summary.js",
+      "sha256": "552e175a199e0353bb9f460b4d9b30279cf560762cabb6c4091eef706d816177"
+    },
+    {
+      "path": "搜打撤/game/src/hub/departure.view-updates.js",
+      "sha256": "08d3e8e64236db48e3617f7021fc7202b8efa65f812b5a4097cd8c66f7cfc27e"
+    },
+    {
+      "path": "搜打撤/game/src/hub/departure.drag.js",
+      "sha256": "c2b00eddd459fd8628e9055bbdcd477255297732a50caebf9a2ac09715b21992"
+    },
+    {
+      "path": "搜打撤/game/src/hub/base-departure.commands.js",
+      "sha256": "58ba0cbb8a807a6e65cc0e430ffacde8348728f135852cc0f9a01af4820d9b06"
+    },
+    {
+      "path": "搜打撤/game/src/hub/preparation.commands.js",
+      "sha256": "68f7c6e9f88fe6e1540244491e31be1f17dc2394d6d514281e868875df2d70d0"
+    },
+    {
+      "path": "搜打撤/game/src/hub/preparation.view.js",
+      "sha256": "b43523dc198206b400828035098a4f2d09de85214ef77f2dfa97cc7eff67919c"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.preparation.js",
+      "sha256": "3e891b4a447d2ac90a94249eb4870dadb388dcdae0185a715227f09ad5cda166"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.preparation-ports.js",
+      "sha256": "7e03ebbcb413262d3baf886c7ac14617c618d3aec19a4a871695100ffaac07f9"
+    },
+    {
+      "path": "搜打撤/game/src/ui/character-idle.js",
+      "sha256": "0c9b1bda408faf017692009cc5811d9f3069c3d1414f55f122d7305e803ba74e"
+    },
+    {
+      "path": "搜打撤/game/src/ui/character-view-motion.js",
+      "sha256": "7d72aa15f10a2cea7fa8bb396058a3edfccfe5437be4a2c20ba25779a51503de"
+    },
+    {
+      "path": "搜打撤/game/src/ui/departure-transition.js",
+      "sha256": "9a86345e9fe3931676545dbab6069355f76ed1daab3aa7a835fe5b2a56706f80"
+    },
+    {
+      "path": "搜打撤/game/src/ui/departure-cinematic.js",
+      "sha256": "a99131be15fe0c9ed8b85da9d08305ebe6495cdb53a3a5bdbd50d0782eb51278"
+    },
+    {
+      "path": "搜打撤/game/src/ui/cinematic-profiles.js",
+      "sha256": "fb97f4bf9594e708edb9e315704d24a1f54aca452ce079582646077439a3da22"
+    },
+    {
+      "path": "搜打撤/game/src/ui/motion-presets.js",
+      "sha256": "857fcf75668a97ca69a713532a63511ed855a9f6043188e3d09dcf274ca16221"
+    },
+    {
+      "path": "搜打撤/game/src/ui/navigation-motion.js",
+      "sha256": "1fca7c4c9ac259be7bbf81bd9c9be5e7ab62d256db1995e7ae5eeaf87d51afc4"
+    },
+    {
+      "path": "搜打撤/game/css/expedition-roster.css",
+      "sha256": "0d684bf10cd2d1afb39b2d77fc6ed10022294a5620ad8c3710d55ecef1b3c801"
+    },
+    {
+      "path": "搜打撤/game/css/roster-departure-v2.css",
+      "sha256": "be88e89679b9d8f82238a5821fbe0caafc96efa9bd76f36a31a8ee271bd5f156"
+    },
+    {
+      "path": "搜打撤/game/css/roster-reference.css",
+      "sha256": "01bc6f688eab809fcc6e0e21194141fb612eca011364e6fcd1098b4f300000fe"
+    },
+    {
+      "path": "搜打撤/game/css/departure-selected.css",
+      "sha256": "e5eee8332021d24ddfe5b5826bc448b77e7220dc9abce30cd1beacf392596ade"
+    },
+    {
+      "path": "搜打撤/game/css/base-camp-rework.css",
+      "sha256": "2d3d0a2c9926fc6a124aeab1b66e78cbe770fdb497b0921a552e9f65af2f8c47"
+    },
+    {
+      "path": "搜打撤/game/css/preparation.css",
+      "sha256": "62f6d8156938123171e4675600299a2ba68f0afc65d11714d61ab27f89686e66"
+    },
+    {
+      "path": "搜打撤/game/css/departure-cinematic.css",
+      "sha256": "4f10291a3a98eeaa8d05bdfad8a18988bb8babbcf31ea5dc2f0688ac4470504c"
+    },
+    {
+      "path": "搜打撤/game/css/silent-node-film.css",
+      "sha256": "4ed960115782b7d1455ff0a2d7ed13cecd651603c36ed75a5de2a2d00fbc976b"
+    }
+  ],
+  "unity": [
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.cs",
+      "sha256": "a2ac24eccb6658522c4a80e2776eae019a649fa71587b6214dc867ba1712d2a8"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.Pool.cs",
+      "sha256": "ef8e169d3c7cdc896b2d5ed89a5c96dbd7f5896bf4db3aed26c8c09d868f7449"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/DepartureElements.cs",
+      "sha256": "918389a91ab0b38f4457e9edc3af7a701fd525fbef6c431abf8640452a019ad3"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/DepartureSourceMotion.cs",
+      "sha256": "9f2b04a128e3a75c1e7337970c4f4d6d7889d7148706e84503ee2fdb9eaf7988"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/DepartPrepScreen.cs",
+      "sha256": "3681374195098d1bf8fcd3d82fc77f73b67f2e6f5a9de904e1366d152e0cd481"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/DepartPrepScreen.View.cs",
+      "sha256": "2b48c8835a82239a84cf5f3e4c5d79e4a0dee7ca54571960aa269b7fff7955d0"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/DepartureDragHandle.cs",
+      "sha256": "5ba92f3fa6b90ff115d5a3589478a96cf258fa1980ae6941916add4c1e2bc880"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/DepartureCinematic.cs",
+      "sha256": "44b1c4452d1606201b85a879dad0310c15a55b8314866b8640895545040d579b"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Hub/PreparationScreen.cs",
+      "sha256": "2e0658184dbe74e09b9a4105c9742b943d1a63b0cec3b5d07da6d4b3bac7b083"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/GameRuntime.Departure.cs",
+      "sha256": "3c45dd0486ee872221fa088c3549065093a786865cf8be0ae049b0a8329dfea8"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/GameRuntime.cs",
+      "sha256": "ffd7aceef25ca0bc5769f7370c87222d2fd9d0d26885e221a6e6d9d279bb7b22"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/BaseData.Preparation.cs",
+      "sha256": "f63cd7ae1da24436816eb47ab13b7af12f7f085bbdbfc6e0cdec83fdfda4543c"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Run/BaseData.cs",
+      "sha256": "c95566aa07afa4e3fc246637f2342f9b57dd50bd4d7d61bb8223700bdab272f5"
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.Core/Cards.cs",
+      "sha256": "efc8b15298352114b134372d6e4d40de3244da93adb7bd2e01f0e3c106701a21"
+    }
+  ],
+  "verified": [
+    "89 domain assertions",
+    "isolated native assembly reference compile"
+  ],
+  "unverified": [
+    "Unity current-window rendering and materials",
+    "real pointer/keyboard/drag input",
+    "native three-stage journey and save failure overlay",
+    "pixel/font/portrait/cinematic effects parity"
+  ]
+}

@@ -1,0 +1,7343 @@
+[
+  {
+    "id": "starter-attack",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 996,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-pearlbox",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-venomstaff",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-frostsword",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-swiftarrow",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-block",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": true,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-comboarrow",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-piercearrow",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "abreak": 2
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-shoot",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 998,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-bloodblade",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 36,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt2-forestarrow",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 3,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-blood-arrow",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "bleed": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-fatal-pierce",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 995,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-fly-arrowhawk",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 993,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-frost-slash",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "freeze": 1,
+            "healban": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-noon-duel",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": {
+      "hp": 28,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    }
+  },
+  {
+    "id": "tt3-armor-rush",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 992,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "bleed": 2
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-double-shot",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-bandage",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 33,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 3,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-purify-arrow",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-arrow-rain",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-wave-slash",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 993,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-qi-wave",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 999,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-hold-fast",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 5,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-reshot",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-venom-arrow",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "poison": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-toxin",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "poison": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3wu-shike",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 0,
+          "dead": false,
+          "status": {
+            "atkDown": 3,
+            "bleed": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-flame-storm",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-nature-form",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 11,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-chain-lightning",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-fireball",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-holy-water",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 35,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-skewer",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "abreak": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-holy-shield",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 6,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-nuke-ray",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "healban": 1,
+            "poison": 1,
+            "silence": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-petal",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": {
+      "hp": 31,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    }
+  },
+  {
+    "id": "tt3-thornfield",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 998,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "poison": 2
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-firm-barrier",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "freeze": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-ice-spike",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 996,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "freeze": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-grope",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3sp-dodge",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "dodge": 1
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3sp-shadowbug",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "atkUp": 1
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 1,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3sp-flowerzhen",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3sp-shadowshot",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 995,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-thunderblast",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 991,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-master-staff",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": {
+      "hp": 28,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "spellUp": 1
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    }
+  },
+  {
+    "id": "tt3-execute",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-silver-runesword",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "atkUp": 2
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": {
+      "hp": 26,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "atkUp": 2
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    }
+  },
+  {
+    "id": "tt3-holy-staff",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-staff",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "spellUp": 1
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-sapper-bomb",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-twinwater-mail",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-grass-armor",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 5,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-blooddrinker",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-longsword",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "atkUp": 1
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-element-seal",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-light-mail",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt3-deep-diary",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt5-galaxy-voyage",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-throwblade",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 999,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "bleed": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-sneak",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-ghostblade",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 995,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-meteorrain",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-stealth",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "stealth": 1
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-swordimmortal",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": {
+      "hp": 28,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    }
+  },
+  {
+    "id": "cc-unmoved",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 4,
+      "shield": 0,
+      "guard": true,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-marchrush",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 4,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-bulwark",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 8,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-armup",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-whirlwind",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 995,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-demonbreaker",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 991,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "abreak": 2
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-fullstrike",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 991,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-silence",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "silence": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cc-demon",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 28,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 991,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-holyglow",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 42,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-bloodpotion",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 35,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 995,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-smite",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 988,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-arcanebolt",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 997,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-energize",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 11,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-frozenight",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "freeze": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-elementstorm",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-burnharvest",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 991,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-abysscurse",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 991,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "healban": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-hero-assassin",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "stealth": 2
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-hero-guardian",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 11,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-hero-descender",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {
+        "spellUp": 1
+      },
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-curse1",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-curse2",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-curse3",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-curse4",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-demonslay",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-heavensword",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt8-dragonblade",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 990,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "abreak": 2,
+            "bleed": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cmtn233trmeg",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 995,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "cmtn233trmeg",
+          "cost": 1,
+          "dmg": 1
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cmtna0nb1yxt",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 993,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-livingwater",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-darkfort",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-arcanescroll",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-ironcharge",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 12,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt7-maxsupply",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cmtn0xt0zr7",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 995,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cmtn1lbhbqi4",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cmtn1r10xnl1",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cc-chase-slash",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 996,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cc-cursed-blade",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 993,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cc-double-boom",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 995,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cc-ember-burst",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 996,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cc-last-stand",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 986,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cc-poison-burst",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "cc-rapid-fire",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-sporewall",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 6,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "poison": 2
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-elemburst",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 984,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-barriermend",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 6,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-saturate",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 991,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-unstableray",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 993,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-infectray",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "healban": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-firecracker",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 999,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-chargeray",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 993,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-backupcell",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt12-freezeray",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 994,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "freeze": 1
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt13-poor-meal",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt13-snipe",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 8,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 991,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt13-guard",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 10,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt13-bitter-rain",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {
+            "poison": 2
+          },
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt13-flame-staff",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": {
+      "hp": 28,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 996,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    }
+  },
+  {
+    "id": "tt13-scale-armor",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt13-astrolabe",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 10,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 1000,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  },
+  {
+    "id": "tt13-mercy",
+    "ok": true,
+    "reason": null,
+    "after": {
+      "hp": 30,
+      "energy": 9,
+      "maxEnergy": 10,
+      "armor": 0,
+      "shield": 0,
+      "guard": false,
+      "status": {},
+      "foes": [
+        {
+          "hp": 993,
+          "atk": 2,
+          "dead": false,
+          "status": {},
+          "armor": 0,
+          "shield": 0
+        }
+      ],
+      "hand": [],
+      "deck": [
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        },
+        {
+          "id": "starter-attack",
+          "cost": 1,
+          "dmg": 0
+        }
+      ],
+      "consumed": []
+    },
+    "turn": null
+  }
+]

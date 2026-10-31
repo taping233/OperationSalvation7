@@ -1,0 +1,364 @@
+{
+  "originalCauseDetermined": false,
+  "currentScope": "programmatically constructed native uGUI at 1920x1080; no OS hardware input",
+  "process": {
+    "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunJourney",
+    "pid": 10308,
+    "startedAt": "2026-10-30T00:08:20.4841931Z",
+    "endedAt": "2026-10-30T00:09:19.8998931Z",
+    "exitCode": 0,
+    "timedOut": false,
+    "inputsUnchanged": true,
+    "changedInputs": [],
+    "sourceCount": 335,
+    "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-journey-2"
+  },
+  "probeReasons": {
+    "candidate-reachability": 25
+  },
+  "probeCount": 25,
+  "candidateSampleCount": 67,
+  "candidateAuditCounts": {
+    "inScreen": 66,
+    "independentMaskContains": 66,
+    "firstHitNameMatches": 66,
+    "firstReceiverNameMatches": 66,
+    "receiverNameMatches": 66,
+    "enabledRaycastGraphicHasNativeDepthAndNotCulled": 66,
+    "centersInsideAnotherCandidateBounds": 0
+  },
+  "preferredClickedExactly": 25,
+  "normalRenderFallbackExecuted": false,
+  "scrollEvents": 0,
+  "blockedImages": [],
+  "originalSeed": 169015024,
+  "currentSeed": 170063968,
+  "originalCardIds": [
+    "tt2-frostsword",
+    "tt12-raygun",
+    "tt12-chargeray"
+  ],
+  "currentCardIds": [
+    "tt2-comboarrow",
+    "tt2-forestarrow",
+    "tt2-frostsword"
+  ],
+  "currentChoiceReceipt": {
+    "taken": [
+      0
+    ],
+    "lost": [
+      1,
+      2
+    ],
+    "completed": true
+  },
+  "currentOriginalPointSamples": [
+    {
+      "step": 1,
+      "tick": 178,
+      "reason": "candidate-reachability",
+      "node": "3,9",
+      "chestIndex": 1,
+      "ordinal": 0,
+      "name": "收下",
+      "label": "选择",
+      "card": "tt2-comboarrow",
+      "index": 0,
+      "bounds": {
+        "minX": 516.0,
+        "minY": 266.0,
+        "maxX": 716.0,
+        "maxY": 318.0
+      },
+      "center": {
+        "x": 616.0,
+        "y": 292.0
+      },
+      "centerInMasks": true,
+      "receiver": "收下",
+      "hits": [
+        {
+          "name": "收下",
+          "receiver": "收下"
+        },
+        {
+          "name": "scroll",
+          "receiver": null
+        },
+        {
+          "name": "mask",
+          "receiver": "mask"
+        }
+      ],
+      "graphics": [
+        {
+          "name": "收下",
+          "depth": 23,
+          "raycastTarget": true,
+          "culled": false,
+          "enabled": true
+        },
+        {
+          "name": "label",
+          "depth": 24,
+          "raycastTarget": false,
+          "culled": false,
+          "enabled": true
+        }
+      ],
+      "masks": [
+        {
+          "name": "scroll",
+          "bounds": {
+            "minX": 55.9999466,
+            "minY": 111.999939,
+            "maxX": 1864.0,
+            "maxY": 943.999939
+          }
+        }
+      ],
+      "audit": {
+        "inScreen": true,
+        "independentMaskContains": true,
+        "firstHitNameMatches": true,
+        "firstReceiverNameMatches": true,
+        "receiverNameMatches": true,
+        "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+        "otherCandidateBoundsContainCenter": []
+      }
+    },
+    {
+      "step": 1,
+      "tick": 178,
+      "reason": "candidate-reachability",
+      "node": "3,9",
+      "chestIndex": 1,
+      "ordinal": 1,
+      "name": "收下",
+      "label": "选择",
+      "card": "tt2-forestarrow",
+      "index": 1,
+      "bounds": {
+        "minX": 860.0,
+        "minY": 266.0,
+        "maxX": 1060.0,
+        "maxY": 318.0
+      },
+      "center": {
+        "x": 960.0,
+        "y": 292.0
+      },
+      "centerInMasks": true,
+      "receiver": "收下",
+      "hits": [
+        {
+          "name": "收下",
+          "receiver": "收下"
+        },
+        {
+          "name": "scroll",
+          "receiver": null
+        },
+        {
+          "name": "mask",
+          "receiver": "mask"
+        }
+      ],
+      "graphics": [
+        {
+          "name": "收下",
+          "depth": 43,
+          "raycastTarget": true,
+          "culled": false,
+          "enabled": true
+        },
+        {
+          "name": "label",
+          "depth": 44,
+          "raycastTarget": false,
+          "culled": false,
+          "enabled": true
+        }
+      ],
+      "masks": [
+        {
+          "name": "scroll",
+          "bounds": {
+            "minX": 55.9999466,
+            "minY": 111.999939,
+            "maxX": 1864.0,
+            "maxY": 943.999939
+          }
+        }
+      ],
+      "audit": {
+        "inScreen": true,
+        "independentMaskContains": true,
+        "firstHitNameMatches": true,
+        "firstReceiverNameMatches": true,
+        "receiverNameMatches": true,
+        "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+        "otherCandidateBoundsContainCenter": []
+      }
+    },
+    {
+      "step": 1,
+      "tick": 178,
+      "reason": "candidate-reachability",
+      "node": "3,9",
+      "chestIndex": 1,
+      "ordinal": 2,
+      "name": "收下",
+      "label": "选择",
+      "card": "tt2-frostsword",
+      "index": 2,
+      "bounds": {
+        "minX": 1204.0,
+        "minY": 266.0,
+        "maxX": 1404.00012,
+        "maxY": 318.0
+      },
+      "center": {
+        "x": 1304.0,
+        "y": 292.0
+      },
+      "centerInMasks": true,
+      "receiver": "收下",
+      "hits": [
+        {
+          "name": "收下",
+          "receiver": "收下"
+        },
+        {
+          "name": "scroll",
+          "receiver": null
+        },
+        {
+          "name": "mask",
+          "receiver": "mask"
+        }
+      ],
+      "graphics": [
+        {
+          "name": "收下",
+          "depth": 60,
+          "raycastTarget": true,
+          "culled": false,
+          "enabled": true
+        },
+        {
+          "name": "label",
+          "depth": 61,
+          "raycastTarget": false,
+          "culled": false,
+          "enabled": true
+        }
+      ],
+      "masks": [
+        {
+          "name": "scroll",
+          "bounds": {
+            "minX": 55.9999466,
+            "minY": 111.999939,
+            "maxX": 1864.0,
+            "maxY": 943.999939
+          }
+        }
+      ],
+      "audit": {
+        "inScreen": true,
+        "independentMaskContains": true,
+        "firstHitNameMatches": true,
+        "firstReceiverNameMatches": true,
+        "receiverNameMatches": true,
+        "enabledRaycastGraphicHasNativeDepthAndNotCulled": true,
+        "otherCandidateBoundsContainCenter": []
+      }
+    }
+  ],
+  "sourceChangesBetweenRuns": [
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.RewardInput.cs",
+      "old": null,
+      "new": "bbed50862d892abb04bdc4211092d96ede337521dbef4339920824ac1471151c"
+    },
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.cs",
+      "old": "72c1e36770e035103877fb8ed1a8e7199892bee26c930d0a3f1a64451a74ef60",
+      "new": "09a12139d44a071efcde45cfc9d7642f138ccbead9d97c4f3e2177e86712a729"
+    }
+  ],
+  "changedProductionScriptCount": 0,
+  "limitations": [
+    "Journey 1 did not capture depth/cull/mask or a failure frame, so the original transient blocker cannot be classified.",
+    "Journey 2 used a different seed and different card identities; equivalent position/choice topology is not an exact replay.",
+    "All candidate probes record receiver names, not stable object identities; exact object equality is additionally asserted for each actually selected preferred button by the live helper/Click.",
+    "The normal-render and scroll fallback branches did not run; this evidence cannot claim either fixed the original failure."
+  ],
+  "visibleCandidateSamples": 66,
+  "visibleCandidateFailures": [],
+  "nonVisibleCandidateSamples": [
+    {
+      "step": 1,
+      "tick": 200,
+      "reason": "candidate-reachability",
+      "node": "3,13",
+      "chestIndex": 0,
+      "ordinal": 6,
+      "name": "收下",
+      "label": "收下",
+      "card": "tt-copper",
+      "index": 5,
+      "bounds": {
+        "minX": 860.0,
+        "minY": -143.999985,
+        "maxX": 1060.0,
+        "maxY": -91.9999847
+      },
+      "center": {
+        "x": 960.0,
+        "y": -117.999985
+      },
+      "centerInMasks": false,
+      "receiver": null,
+      "hits": [],
+      "graphics": [
+        {
+          "name": "收下",
+          "depth": 117,
+          "raycastTarget": true,
+          "culled": true,
+          "enabled": true
+        },
+        {
+          "name": "label",
+          "depth": 118,
+          "raycastTarget": false,
+          "culled": true,
+          "enabled": true
+        }
+      ],
+      "masks": [
+        {
+          "name": "scroll",
+          "bounds": {
+            "minX": 55.9999466,
+            "minY": 111.999939,
+            "maxX": 1864.0,
+            "maxY": 943.999939
+          }
+        }
+      ],
+      "audit": {
+        "inScreen": false,
+        "independentMaskContains": false,
+        "firstHitNameMatches": false,
+        "firstReceiverNameMatches": false,
+        "receiverNameMatches": false,
+        "enabledRaycastGraphicHasNativeDepthAndNotCulled": false,
+        "otherCandidateBoundsContainCenter": []
+      }
+    }
+  ]
+}

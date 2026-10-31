@@ -1,0 +1,2502 @@
+[
+  {
+    "path": "_planning/migration-1029/current-base/check-source.ps1",
+    "bytes": 2606,
+    "sha256": "b730f13bea7d70de6ad4df90c07c8206eec723655e86fdfbe2ec32d9ed12e29b"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/courtyard_input.py",
+    "bytes": 2674,
+    "sha256": "abbf0606d7a5681deb2d51bce9dd5205a48231205b722f24ea2e33573a7849ba"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/courtyard_integration.py",
+    "bytes": 1598,
+    "sha256": "168007b8d2cf36669d87307421f5d1908aecaf9d491802797c5f3c502489b4dd"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/courtyard_shores.py",
+    "bytes": 2916,
+    "sha256": "3c5a7dadebc23243f3be15a1ebf609434196cf50d483d3b71b58fb7a8dab8ce4"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/current_guard.py",
+    "bytes": 3748,
+    "sha256": "ad3ae3ff5d927e4425b50e7926142f9f6b72c218fd48f92c12988d6336f3c3f8"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/detail_refinement.py",
+    "bytes": 2383,
+    "sha256": "943b87276525a8e408f4f2dc37d2e74b47ffaaf19c07789b19fc4c078939423f"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/freeze_base.py",
+    "bytes": 6146,
+    "sha256": "d7b763e11d5c64afa073b3692376763bd3487af3da3cda68b755c3f468f58e3f"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/gallery_geometry.py",
+    "bytes": 3051,
+    "sha256": "ba0b5f401013c2cd158a8e449e5fcd23e587f95f4b066f21dd8618770626253a"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/glass_integration.py",
+    "bytes": 888,
+    "sha256": "01c7c3ba9996fd88535093b9189c5a3e5c38c97a8a0a4fb99b685e6ec8685b41"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/interactions_integration.py",
+    "bytes": 1925,
+    "sha256": "ae9e96207ed60b644e9b9183be92c9ca30745f78fd499465a5cf3af9086224ba"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/motion_integration.py",
+    "bytes": 1183,
+    "sha256": "e73dcba8d90bc657fa530d0d9cedea17b344adfae3b9b241062f57dc2196db59"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/partner_motion.py",
+    "bytes": 2341,
+    "sha256": "6830b4d71a39bed1e6511f09eed8cdfa2bcf3cb897e60ea2a98084631aa5659f"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/pool_browser.py",
+    "bytes": 1884,
+    "sha256": "e608396d2b38788339347de73c8af5e91ddb6988dee43bd6419eb43ef13ac7fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/port_base.py",
+    "bytes": 12184,
+    "sha256": "c1e265d63bd97ae795835e5a21f342a3a3650f058e7c4a34ac7c8f030370f1b7"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/refine_base.py",
+    "bytes": 1862,
+    "sha256": "ecf378d4af7c45d776f6c259d90626babeffe4cf6524e8b2e1e2812f7422ad53"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/shell_refinement.py",
+    "bytes": 2610,
+    "sha256": "27d4ad5c1e9de19b8ecf2effef405a61ee433f0abcbea1d40a012632abbcef5e"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/source-diagnostics.json",
+    "bytes": 1482,
+    "sha256": "cb03609a905af202ab511f18e5baff8427f53c8ed87e3ad7921c6d47dfe2a845"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/source-map.json",
+    "bytes": 18234,
+    "sha256": "ecf25221c58ca982c3952331e4070882b64b424e85d0fe29e821b98d82e049cb"
+  },
+  {
+    "path": "_planning/migration-1029/current-base/verification-plan.json",
+    "bytes": 5208,
+    "sha256": "f5bc8aee4bc47badb4538e3da6c8e01c7d269ffe70cf6aae93d3cc592cfde884"
+  },
+  {
+    "path": "_planning/migration-1029/current-battle-ui/README.md",
+    "bytes": 3648,
+    "sha256": "7a099391ba26922c17fb6c65a7e124090c1784463463ef7108798775270800de"
+  },
+  {
+    "path": "_planning/migration-1029/current-battle-ui/check_static.py",
+    "bytes": 5813,
+    "sha256": "e056817bc72b47ab7d3b22a684fa99ad2fb4550c1bfeb2c1f4528e31f06c01f3"
+  },
+  {
+    "path": "_planning/migration-1029/current-battle-ui/check_syntax.ps1",
+    "bytes": 1324,
+    "sha256": "a6bc7ebbec2e1f8656c1419842a16f6ee3620ded77175c1a9bd64def4cac5c1c"
+  },
+  {
+    "path": "_planning/migration-1029/current-battle-ui/freeze.json",
+    "bytes": 752,
+    "sha256": "669d054a3a1945e2b5de1115aa8349004b09f296210b8b881e4a67f6a074f625"
+  },
+  {
+    "path": "_planning/migration-1029/current-battle-ui/source-contract-check.json",
+    "bytes": 14962,
+    "sha256": "79732dff18c9c2cf71b8e17d6ca2c324ff55eacd76f5629322f6c88ab09b6bff"
+  },
+  {
+    "path": "_planning/migration-1029/current-battle-ui/syntax-check.json",
+    "bytes": 899,
+    "sha256": "354fedc59e8b97890f9805d9dbdeee81a49cbd70d6ba689e3466f6303e357867"
+  },
+  {
+    "path": "_planning/migration-1029/current-capacity-reload-check/README.md",
+    "bytes": 3807,
+    "sha256": "34fd757ac3aa865ed0a3ba22e9984312371becb81da2a53fb2cc3c4465e54dd9"
+  },
+  {
+    "path": "_planning/migration-1029/current-capacity-reload-check/check.py",
+    "bytes": 3684,
+    "sha256": "2c060cc265ea134ea7490deccb68dbc0b108f1602e6aeb72749249c93e93fcbf"
+  },
+  {
+    "path": "_planning/migration-1029/current-capacity-reload-check/results.json",
+    "bytes": 4567,
+    "sha256": "b537e583e199f0e2f8a9f645295b32f436e43af7a8b88e3b6d80f10b5ee65891"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/Audit.cs",
+    "bytes": 7472,
+    "sha256": "503ac9089297e7238ca002fbd5cbbfa0eb52728e8073567494353a83871d0400"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/BossAudit.cs",
+    "bytes": 4893,
+    "sha256": "45ce872c1bb0809311a82b7b7f29da24065af2c44f5433e88be8d1475f3e179d"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/README.md",
+    "bytes": 6857,
+    "sha256": "f3fb3516fe64318a072583a03d7f12a2f54efb3c7405e8face8c2ee0ea95d3b6"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/boss-source-vectors.json",
+    "bytes": 22603,
+    "sha256": "d019fddecb9f75d87e78ccbfb084571633f42d8c93d86642ab351851490cae4e"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/catalog-comparison.json",
+    "bytes": 1100,
+    "sha256": "5cc23fc322d001407f16424441096df40732682c1711093baa1bc98b7cbb29fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/catalog-run.txt",
+    "bytes": 1119,
+    "sha256": "f0f2dfcb814fe04d3f37977ff55d2279c86590790ee487aa52ffe86b8ce3e949"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/compare-catalog.mjs",
+    "bytes": 1463,
+    "sha256": "6faf04e15e087131d620a567839fb1734f9b0ee8c475d2ec3ded0590d037fa5a"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/compiled-catalog.json",
+    "bytes": 147404,
+    "sha256": "d71469f31a1378dd20a0adefe43c20d0206de35471a8b24f469adbce78ee2747"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/current-catalog-summary.json",
+    "bytes": 1611,
+    "sha256": "1a9ee9eb82faeb17e8e9c5b8efc6e343657c26d51ef8a1cc2e074974ce767446"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/current-catalog.json",
+    "bytes": 181800,
+    "sha256": "e4df057ee0af7c2c243b4cbe8b274a049e738d5e80c138287c753fc0fec6baa3"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/export-boss-vectors.mjs",
+    "bytes": 2696,
+    "sha256": "8ca26c920f13153fbb5946b31d435b8713f274fa1a3be277e65c79ca31635553"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/export-current.mjs",
+    "bytes": 7047,
+    "sha256": "ec37abfa0716e44d0ab1e7df2170352fda92040d3b0fc9d6e9b3032ec26b1b9e"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/final-baseline-source-hashes.json",
+    "bytes": 897,
+    "sha256": "0a236e5315ad7b983e00135fcf23d22c794e5b2458bba56a92ed68142e60cf58"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/first-failures.json",
+    "bytes": 3770,
+    "sha256": "6af3ad763d5338ff3951595511e284e626d34d3e7b881aaec2b337104ab8e183"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/first-source-hashes.json",
+    "bytes": 679,
+    "sha256": "9592109e26df1aa7ac186ef835c0297230d9fe068823a825fd807a9eb7909f33"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/nine-group-failures.json",
+    "bytes": 4810,
+    "sha256": "ed2c34358a900abf765967f32567e876bc635fbca4ccd07b6d6ce4e0934c5ced"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/source-first-results.json",
+    "bytes": 962,
+    "sha256": "a4e729c1cca326da9f796816d8a5d286884dc5268b2940a5a04c99ad1d29edcf"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/source-oracle.mjs",
+    "bytes": 6277,
+    "sha256": "4bf1b88138f8591d01aa7608038170bf91b865df2e2c29491fa90d2bfa7d5b54"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/source-results.json",
+    "bytes": 1550,
+    "sha256": "121be1553787800793d98e820948f44aaf6a6c99b98ecbabeb6fb84c4405c45c"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/source-run.txt",
+    "bytes": 1550,
+    "sha256": "121be1553787800793d98e820948f44aaf6a6c99b98ecbabeb6fb84c4405c45c"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/source-vectors.json",
+    "bytes": 122852,
+    "sha256": "19768aa74c668838de94ba821ab760866743dd8c2b13f629dbb6b28429f5c312"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/unity-boss-edge-results.json",
+    "bytes": 5143,
+    "sha256": "131fe51f56752f9f6128a257c101362ccae59143ab0c8528b1fbc72f8004bf8b"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/unity-expanded-results.json",
+    "bytes": 4810,
+    "sha256": "ed2c34358a900abf765967f32567e876bc635fbca4ccd07b6d6ce4e0934c5ced"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/unity-final-baseline.json",
+    "bytes": 17036,
+    "sha256": "6073f4538aab411882d96afb43a6dfafa7675f150d015ccaa3776867d642339e"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/unity-results.json",
+    "bytes": 3770,
+    "sha256": "6af3ad763d5338ff3951595511e284e626d34d3e7b881aaec2b337104ab8e183"
+  },
+  {
+    "path": "_planning/migration-1029/current-card-audit/unity-with-boss-vectors.json",
+    "bytes": 17036,
+    "sha256": "1847584e8f511d1f326001efa84c0a2c33dbc3410816250a87fd9e584ea73c16"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/BattleComplexSourceSemantics.cs",
+    "bytes": 4090,
+    "sha256": "26138ef38cd019424cd2ab27324184bd36c4e443ed96b7dfc58d7805ca409d50"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/README.md",
+    "bytes": 3278,
+    "sha256": "ae3e51dc34e96bb6d06e908805c9be938fb9fa464aa8727104734a1c4a59817d"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/Tests.cs",
+    "bytes": 5992,
+    "sha256": "67330250bd19b2be0e6689bd2e94a17debd8b3f976ebe49fc1f82aa7971ee555"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/after-run.txt",
+    "bytes": 17,
+    "sha256": "06b520397354db77264f6fa2b704990ce716c7efb2bcd70755ccd653adf7eec4"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/before-run.txt",
+    "bytes": 212,
+    "sha256": "f84ec14b60409c3d71305b11a9904137d40f7b10ddf840d296bef41d2ee2ef97"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/compare-run.txt",
+    "bytes": 2658,
+    "sha256": "b90b72f88d013e03afbe80913739544d99b2000774bfda0ee29269aac6d1c3a0"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/compare.py",
+    "bytes": 1397,
+    "sha256": "b07b50aff9bc628cad44819ac58a06d846e535cde1063ac0ddc4a0b4cd492d3f"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/comparison.json",
+    "bytes": 4113,
+    "sha256": "786cd44d821953ea226588640a32e9393df17b52eaa59575183ab8a8208b3cee"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/core-build.txt",
+    "bytes": 84,
+    "sha256": "d705e837b5680ccf4bd8282771e5e46d59d0d461f8fd65c281324ee752fc2f1f"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/core-results.json",
+    "bytes": 66048,
+    "sha256": "1327269f0914707f2d233995a26a94d00d1e7dfae3db3408bacd053039b64e66"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/finish.py",
+    "bytes": 3367,
+    "sha256": "bfae61521ea7e8ff39d3c1e5c0a3f9c2b11d16d8989f4b81482fb8ae88ae181c"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/forecast/Audit.cs",
+    "bytes": 13787,
+    "sha256": "d74b338199a1fc319ef8421b629b2948b7a6d39d24316114059f7f17c4af672b"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/forecast/baseline.json",
+    "bytes": 352208,
+    "sha256": "69bd0258e6d5dbbc8bfd2c5551c9da692454183252edf32fe2b560efb71d3ed1"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/forecast/receipt.json",
+    "bytes": 4769,
+    "sha256": "8fa09cd85d170640fb6ea396f16fa5e3b4b946d67ac5fb763d8f40777501201e"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/forecast/run.txt",
+    "bytes": 59,
+    "sha256": "dae83fe606b381bcf94839301eb2a30770073356898c960ca352dd432a4f61ca"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/forecast/source-vectors.json",
+    "bytes": 143069,
+    "sha256": "ae31be3addb5ae2c440545ad1eab9a66fc8f2ef685042ca41240c35621368970"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/forecast/unity-results.json",
+    "bytes": 436666,
+    "sha256": "7abc79d3ae9a5575d0494b95247315089811f4fb9d27a8be12323e842b097af0"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/fresh-catalog.json",
+    "bytes": 162998,
+    "sha256": "285bace96578b00e053f40c02698f51265f55315ca4191faa3c20d69ea78eea1"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/fresh-run.txt",
+    "bytes": 17,
+    "sha256": "06b520397354db77264f6fa2b704990ce716c7efb2bcd70755ccd653adf7eec4"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/integration/BattleChecks.cs",
+    "bytes": 6082,
+    "sha256": "17318f546db4f98e8cd8e9923804d193ffe992b6f60f14d82ebb48124a5bc4f7"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/integration/DataChecks.cs",
+    "bytes": 5100,
+    "sha256": "45c956e68b423a77a7423fb78d972e42d275438be9ac9790cd8e6172f324fe69"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/integration/battle-results.json",
+    "bytes": 75262,
+    "sha256": "f22f135d0852e9e23692da1ae56528e1632d8ed9eb76b9dc6cf04ce7bacf878d"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/integration/card-identities.json",
+    "bytes": 313,
+    "sha256": "1aeb400be5bc56c2648db03884ee9cfce1370f8583affdfcfb9d38f365089337"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/integration/receipt.json",
+    "bytes": 1689,
+    "sha256": "9bc983ea8ed4c419a8ea9ee5a6f3fbcedfadcb636a84e4801014ee8c25f41507"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/integration/run.txt",
+    "bytes": 54,
+    "sha256": "73c60a2e498c6f240d0e9a5521b71643fb8e3b64ada59d978ad1b1c55963a527"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/integration/source-battle.json",
+    "bytes": 925,
+    "sha256": "1a31408cec2de4fe8d32187b9032a6ed66b0c96ff76ed22f7869ac04709f5ed0"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/integration/source-targets.json",
+    "bytes": 229609,
+    "sha256": "1b17b7919d06101a8cd0796180731918b0bf4416cff36218ba18dd7116691a5a"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/patch_private.py",
+    "bytes": 5198,
+    "sha256": "f0db51fc80b42443fb0c052d1ecaf9383dd6f6574794acc57384145679a27294"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/payment/PaymentBoundary.cs",
+    "bytes": 5930,
+    "sha256": "c8341e5958610b28a580324a44856c3ab1b323b03a7a310b878e54a23c44b7c9"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/payment/run.txt",
+    "bytes": 29,
+    "sha256": "e9b2507340d7bf7a9ae2002e0692b88f2ffdd7c164a01bb09e4ba967561b5352"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/prepare.py",
+    "bytes": 1191,
+    "sha256": "702fdeeb3f4c424c26987bb4645d69c2c3686c29d5e7f10144c218a465d617ee"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/production-before/BattleSession.cs",
+    "bytes": 77000,
+    "sha256": "5cba112d6c6e75cfb0214863bfbbdd06db36cca376f4bfc2a0b771afef73a084"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/production-before/StructuredRules.cs",
+    "bytes": 73381,
+    "sha256": "8962d8162dcb1bae8f247ef3ae79bdce4b3277418d06988afebed7c1e5dba516"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/receipt.json",
+    "bytes": 76780,
+    "sha256": "f8e6dd4caa9f2b06d52418c8712de0bbaaa13d4e12d54e2e42161c467a690535"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/regressions.py",
+    "bytes": 2198,
+    "sha256": "6f05e11a4633de789bef35f4ec96210a037bab0a0b54c344ea76be73e34ab874"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/scan/Scan.cs",
+    "bytes": 3284,
+    "sha256": "3ee50301590a76a17c55f92158a8db459b86a8008a0a9bd578c9612d1dfe9fbd"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/scan/run.txt",
+    "bytes": 5,
+    "sha256": "f0e51b0748db48990b164c173141f81eb1de6522d9e9e66527f7c40eac761dac"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/scan/scan-core.json",
+    "bytes": 138494,
+    "sha256": "caa98945e8c60d28a2857627b5105bc915ceb2bfc6545432ec5591318cba9290"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/scan/scan-source.json",
+    "bytes": 274891,
+    "sha256": "636b1e9c9e0dea845da1aa0a994ac35cf839b8920a50c1fbdde6d7b73cc54750"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/Audit.cs",
+    "bytes": 6947,
+    "sha256": "57ad2aaf3fb5b2c10253f4aa3bfde83d65a2cbaf5c4b6e2b4f16adda14c85031"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/BossAudit.cs",
+    "bytes": 4894,
+    "sha256": "77d8e08f78d3d4753a6f28f79d010adba87757039b4e963b3f7458fdff0e3464"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/BoundaryChecks.cs",
+    "bytes": 13241,
+    "sha256": "4a737bd56cab0363e4a62ddf5a77545e3337a18c46df2fe4364603c07da5d8b2"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/baseline-eleven-groups.json",
+    "bytes": 17036,
+    "sha256": "1847584e8f511d1f326001efa84c0a2c33dbc3410816250a87fd9e584ea73c16"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/baseline-expanded-results.json",
+    "bytes": 4810,
+    "sha256": "ed2c34358a900abf765967f32567e876bc635fbca4ccd07b6d6ce4e0934c5ced"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/baseline-first-failures.json",
+    "bytes": 3770,
+    "sha256": "6af3ad763d5338ff3951595511e284e626d34d3e7b881aaec2b337104ab8e183"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/boss-source-vectors.json",
+    "bytes": 22603,
+    "sha256": "d019fddecb9f75d87e78ccbfb084571633f42d8c93d86642ab351851490cae4e"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/boundary-source-vectors.json",
+    "bytes": 4307,
+    "sha256": "c54abf42f41cbe8235ddeb8a2bd1b5ed5651d6207a4d5d6423f36d4e84713724"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/current-catalog.json",
+    "bytes": 181800,
+    "sha256": "e4df057ee0af7c2c243b4cbe8b274a049e738d5e80c138287c753fc0fec6baa3"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/receipt.json",
+    "bytes": 12141,
+    "sha256": "b35f9132ec593898b8345fa72e5d1b4521869b541ae6880a6a5706d792271d09"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/run.txt",
+    "bytes": 51,
+    "sha256": "18d46551cf52614a9359e7c701b49d19978319f428d796ac7e22689f6969d728"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/source-results.json",
+    "bytes": 1385,
+    "sha256": "60616b144aa2ab935612018a5fe16962500793a5b38d3506faa64f069450ceb5"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/semantics/unity-results.json",
+    "bytes": 30522,
+    "sha256": "8a55afac20b7928565479e9cbb61c316d0071d72f8d2001cc055582f7ddcb9e2"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleActorPresentation.cs",
+    "bytes": 6879,
+    "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleComplexSourceSemantics.cs",
+    "bytes": 4160,
+    "sha256": "2790fa44a8fd60fc81db80ed880f69ef8fa703897adab19329de06e653c18082"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleHandPayment.cs",
+    "bytes": 4226,
+    "sha256": "addb0f680933c19b718f98002678b02c1eab3606563a1ef2612ccbb5c469c2a1"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleHandRetention.cs",
+    "bytes": 902,
+    "sha256": "7322fb225faaba9ba148da64a8c280f122673c8e4bfe5ed2878a38d395883a1e"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleHandTransforms.cs",
+    "bytes": 1302,
+    "sha256": "2bb817c0acd3af5024034e4c12c3ecddbefe478f075a103e384650fc08723c47"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleItems.cs",
+    "bytes": 8616,
+    "sha256": "8ecab8fc3770a22210f5cb35e28a54262006440b4d34841227eeba3c1e5924ba"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattlePlayerEffects.cs",
+    "bytes": 5122,
+    "sha256": "86ca5202e205dc4803eecb3d9ca68223c69709d73c20bc0d3727db716aca4fc3"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleRestartCheckpoint.cs",
+    "bytes": 5854,
+    "sha256": "3cb6cbd98dabc5631140902a86c961c9ac4e471b55f6f9c10d108b28d5438cfe"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleRuleConsumers.cs",
+    "bytes": 1712,
+    "sha256": "e862713c60b6659ba2b3afaf37624ef1a03aac59c508eebb3281bd4812030d04"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleRules.cs",
+    "bytes": 6118,
+    "sha256": "fddb1f24a80d9387d999214415f7b078b0eb4ade955e36f9072427d09b1798fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleSession.cs",
+    "bytes": 77026,
+    "sha256": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleStructuredSourceSemantics.cs",
+    "bytes": 2862,
+    "sha256": "d9511196df1d295a9d5115542798c05a4237d59ad8cff1eaac7b9cc80ef83dd0"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleSummary.cs",
+    "bytes": 1389,
+    "sha256": "e92ca71430ff55a791c4e789e4ce2ed2425c3d237804642eb879b7caf1ab010d"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleTargetSelections.cs",
+    "bytes": 5861,
+    "sha256": "94e47885b7e54f7827e0f367a59355bcffc2525b4de87bba0eba9a71fc6e0268"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BattleTurnForecast.cs",
+    "bytes": 4612,
+    "sha256": "078203f3ce41621d5a8b6587b8d2cfc3b5a7db9815368cd41c75058646a6ea90"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/BuiltinCardIdentities.cs",
+    "bytes": 4629,
+    "sha256": "a3ada0917af87de1711dab489f9b53a4533324ed42e57d602db9bcddcf89a5d5"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/CurrentBattlePools.cs",
+    "bytes": 3447,
+    "sha256": "a3073fbf236a1a3bb2297ccd12b7c0fde24ad6faf67316438d6ec9b81f154af5"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/CurrentBossMechanics.cs",
+    "bytes": 3558,
+    "sha256": "644a8f0928c831a50a2b935042ade0553e5d0958a8d113aefa7545445c864a0a"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/DeckBottomDiscovery.cs",
+    "bytes": 963,
+    "sha256": "b665975e94a231537017509f16798e585aa6c6733738b623e65db7caa69f3179"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/DeckOps.cs",
+    "bytes": 1281,
+    "sha256": "0aa9473b6a1c6fe7aeae6256824f352006132e91a8afcf95b9f505798a516c51"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/EffectExecutor.cs",
+    "bytes": 26181,
+    "sha256": "69ef97a86d2870c8267069ee5e1ed2bbf6ff19d5e24000bef1f88819e519d632"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/RuleValue.cs",
+    "bytes": 1606,
+    "sha256": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Battle/StructuredRules.cs",
+    "bytes": 73927,
+    "sha256": "9f639275a45c1037b68f1a5fa08a326f709cae5ebaad8a363fe55d635d83b7f1"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Cards.cs",
+    "bytes": 15336,
+    "sha256": "efc8b15298352114b134372d6e4d40de3244da93adb7bd2e01f0e3c106701a21"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/CardsExtras.cs",
+    "bytes": 3996,
+    "sha256": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/CharacterTable.cs",
+    "bytes": 6267,
+    "sha256": "f7f33fda167b7275bcca4d26e25f0a6345087e0cc3c7f84e1dd3edebfae195a6"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/ChestLoot.cs",
+    "bytes": 6924,
+    "sha256": "0b09603d4ec67651801b5b85ed925144f14bb7a7a58a0e89d0a8e2f68a97e87b"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/CombatResolver.cs",
+    "bytes": 26655,
+    "sha256": "32dd0e1558d1fb62fda29b88c94e85c74e1fe02d63338268d726ceca0b1fd242"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/CurrentMapData.cs",
+    "bytes": 7909,
+    "sha256": "287c8d99bc7d852ef8273e921867204bc2e0b319f17c1b43c329ea08a938b800"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Data/CardDatabase.cs",
+    "bytes": 127842,
+    "sha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Data/CurrentBalanceData.cs",
+    "bytes": 662,
+    "sha256": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Data/CurrentChestData.cs",
+    "bytes": 1727,
+    "sha256": "7dfd4b8993fa3b7bc85acec47195d69d819173c1a96eb89d9fd841e0f58dec2f"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Data/EventDatabase.cs",
+    "bytes": 72573,
+    "sha256": "935646f0a1f0d2502f58747420abd62d4908c78e51d5e70610f99c757f785579"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Data/EventProgress.cs",
+    "bytes": 1999,
+    "sha256": "0722be487263cc278ee3a68306c301ecf374358e3e64d92ff5ae20500af64136"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Data/SceneCopy.cs",
+    "bytes": 13290,
+    "sha256": "9ca1eedae3dd26063c9c1d5e1f6da3f966532a476af8c71b1fb30fe9a43b680f"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/GameRules.cs",
+    "bytes": 2969,
+    "sha256": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/KoiPondModel.cs",
+    "bytes": 7273,
+    "sha256": "70799c15f470491a86adc5e3944f8a288aea6362274f328dac4fc3459987fde5"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/LayeredMapGenerator.cs",
+    "bytes": 25766,
+    "sha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/MapModel.cs",
+    "bytes": 32585,
+    "sha256": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/RewardReceipt.cs",
+    "bytes": 560,
+    "sha256": "716e80ecdee107982f725e4768964575911d07b8ff7ac37da2998fc866f07cd1"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/Rng.cs",
+    "bytes": 5470,
+    "sha256": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/RunState.cs",
+    "bytes": 7114,
+    "sha256": "baa66ca2f0119f7bfd6c5df617ba3f77d23c64c3a94340d1f86751ef65fdcfce"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/snapshot/ShopOfferReceipt.cs",
+    "bytes": 255,
+    "sha256": "5088ca7446567ff33bbcf18362bd356af9a3f7e19ecc26bc9ee53efd6087ad4d"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/source-cases.mjs",
+    "bytes": 4281,
+    "sha256": "dcce2f55ef41db4a9fb963467347bb66459d7bb2dbccb850bb0bb40eb243821f"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/source-results.json",
+    "bytes": 173031,
+    "sha256": "a63617757e69f16f49d4e6452fca0b582db2dfa0fb9e2386ac44389153c74af7"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/source-run.txt",
+    "bytes": 1281,
+    "sha256": "55e01941af0b3b9a4d83270c6686ea696322b5a0c2b38d9227833a0ee09bad09"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/source.mjs",
+    "bytes": 8449,
+    "sha256": "90fea32413eb7ec12ba2ad8fa4f47683ad5d1b84c766c62e31c9bd4c7e188986"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/targets/TargetTests.cs",
+    "bytes": 8867,
+    "sha256": "5b1be9db2ae059d4f6b298aa8a29ca7da1f6e0727704809b60c87c619b0dd5a0"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/targets/run.txt",
+    "bytes": 9,
+    "sha256": "e16190c1e564dd3ccb31198b8e35d9e3076963937720f0fa6ec79a446bffa1ff"
+  },
+  {
+    "path": "_planning/migration-1029/current-complex-semantics-fix/targets/target-tests-results.json",
+    "bytes": 36,
+    "sha256": "c461511ec5ba9a4e53b18906a279dc9822c205cd137e06057544d4b60ecb1125"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/Audit.cs",
+    "bytes": 2894,
+    "sha256": "61079cb60a4ff47d7705600a6961c4067bd616efc45a226018ef8a92b6ced77c"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/README.md",
+    "bytes": 5362,
+    "sha256": "2c4101608d1acbed3adfd9b8027156c19bbce2efdb1013b1b95a1c6f8b0089d0"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/ROUND2.md",
+    "bytes": 7968,
+    "sha256": "4af718fbd2cfaa8e8d6fa6548e4b6998673240e2684460d00e65e27903f90dd0"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/Round2.cs",
+    "bytes": 3443,
+    "sha256": "1dbd429a933ec74ac6ffc8816d394b8c74f331b6fe28200622751f49044cc6e4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/core-results.json",
+    "bytes": 1931,
+    "sha256": "71b3fa288883daa151505d816fe4fef6bc15aef260a892e344e9f7bf047b7936"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/core-round2-results.json",
+    "bytes": 3352,
+    "sha256": "ec7fbd7cb7a3fe48c922dd46ed3d7fbb13317537af85bf07062ab8dd26a13f3e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/core-round2-run.txt",
+    "bytes": 3354,
+    "sha256": "c8f24f47ba0ae026ed75ddc97c38eb4252e1e5c74f6867be26d0ac6a8a53119c"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/core-run.txt",
+    "bytes": 1933,
+    "sha256": "bbafe3aac3d084f989f531bcaf475743ad48fe071c0d3f2dad6b4814348d8ad7"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/coverage-audit/README.md",
+    "bytes": 8850,
+    "sha256": "3557d98c9a24c6d8d2d5eb285e498f5bee0d3fa87a89fa41133d3733f504c059"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/coverage-audit/map.mjs",
+    "bytes": 2575,
+    "sha256": "02c5a0dd19f7e4c81d135dfdfa7ae342f717dd33aae2449b6dc9237aae1cb862"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/coverage-audit/observed-inputs.json",
+    "bytes": 1860,
+    "sha256": "8dc6beb66d607f4a64a9fd44101ced10e33becb40979d1cc27bbaee38ef88107"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/coverage-audit/opcode-field-map.json",
+    "bytes": 62099,
+    "sha256": "956188ee5740a2c257d392d8e932597a79d87217160f0bcedf36cec5fe4a7012"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/coverage-round2.json",
+    "bytes": 25231,
+    "sha256": "5061abca72d80da78af7e6dcb633292252c557f456926c0b56a1b9e1e7176a6b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/declarations.json",
+    "bytes": 62984,
+    "sha256": "561803ae13f364961d02ee26a68bf4074bd2ad07942529f5fbe02874f8b32deb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/README.md",
+    "bytes": 6029,
+    "sha256": "04f32d9add4df9729222390b64ae640852a431e7dce47878affe87baa345f5bd"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/closure-comparison.json",
+    "bytes": 6332,
+    "sha256": "aef532973564e91e0cd20908ca0c28a6fa705143c4bea3b9fb245a8d9ff67b7c"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/compare-closure.mjs",
+    "bytes": 1749,
+    "sha256": "cfee46a884e8c7ab3cb7798510e2f33f0fd7d68bffa07365ed64e75360942ebe"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/compare-complex.mjs",
+    "bytes": 1584,
+    "sha256": "a669b611f95ff35d771a68106b8d4e48c6ef340f2baa5e3ae48c1853013d02ff"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/compare-rng.mjs",
+    "bytes": 997,
+    "sha256": "e6ddfea1dff7dbd38a32a4bb80d4f21b9bc8ea2edf40fd78e597e889ace79c9e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/compare-scan.mjs",
+    "bytes": 878,
+    "sha256": "b2b3bd7e44bf74ec8b5334fd7a0f07fae4a1617fdf9e68fe91f52153e4d6ebdb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/complex-build.txt",
+    "bytes": 84,
+    "sha256": "85ebe08df97f80d0b1d531749e9af2a177d30bb1c4d8eca1b5f3c9c8922dbe19"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/complex-comparison.json",
+    "bytes": 6953,
+    "sha256": "592971820e1b662a1fabc5dc71574bc19d95f1da4f1515979d90b8fae5e3d203"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/complex-run.txt",
+    "bytes": 17,
+    "sha256": "06b520397354db77264f6fa2b704990ce716c7efb2bcd70755ccd653adf7eec4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/complex/Audit.cs",
+    "bytes": 6099,
+    "sha256": "09ad5ba2e1dfca9522139f8e2e7f2a367ce6fe91d27e8aca8e1c84a2de0f2915"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/core-complex.json",
+    "bytes": 66202,
+    "sha256": "ccac8df4a23b2cce64db0de255672e411b5eed3d8f2c52e91d80e6afeb25aa0a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/core-results.json",
+    "bytes": 1797,
+    "sha256": "b11b0582ec264a5fa483f633d0f461bfa68c4db0781a7cbc43486482a30672c0"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/core-round2-results.json",
+    "bytes": 3232,
+    "sha256": "ef071cea66c108a50d3853b974f61995fc2f65cd2d5653d6ca27b73b7bac3797"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/discovery-rng-trace.json",
+    "bytes": 941,
+    "sha256": "f9343c8c26f975c5ba1a8c6a7f6912e979dd9645bec4652eae61829802d305e1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/fresh-catalog.json",
+    "bytes": 162998,
+    "sha256": "285bace96578b00e053f40c02698f51265f55315ca4191faa3c20d69ea78eea1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/inputs-sha256.json",
+    "bytes": 122148,
+    "sha256": "da414c0601c027235de7f687a1237fe11b3fa4443dca8d158dd5d4d5f0011bcc"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/r1-build.txt",
+    "bytes": 84,
+    "sha256": "08360b6b23b45c31eb636e6cf4e83e41873851cce8d0199e0cb0dbff045f9f58"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/r1-run.txt",
+    "bytes": 1799,
+    "sha256": "b2b703c06c1ef7b90cd5672c3e621562fe0a88f955c8a196b1f5664ae62a7fb3"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/r1/Audit.cs",
+    "bytes": 3128,
+    "sha256": "da300e17a3b0ae5404c9517a34d933eee6b0b7a5627f3450b47f3ae1e0a3cb05"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/r2-build.txt",
+    "bytes": 84,
+    "sha256": "ec740341af84e768e80876cceaaaa35dcfd50bce879ddd3f792a155355263a28"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/r2-run.txt",
+    "bytes": 3234,
+    "sha256": "8f62305cd1f264348bc4054521e09de09cc81727c5359b451480bf6a120c2dbc"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/r2/Audit.cs",
+    "bytes": 3622,
+    "sha256": "f79fa810d00dc954ffda340d4586281fd183d30781fe93de21221b2de719e034"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/receipt.json",
+    "bytes": 382,
+    "sha256": "490f88e85310b365dc5b536c22d1c533a67fdfe5d9e8cb02385b31c831e2809b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/rng-build.txt",
+    "bytes": 84,
+    "sha256": "b242b74f42a1a94b3a736ccced690c3a69e6a1f08a2131a33daca209227de0e5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/rng-comparison.json",
+    "bytes": 2649,
+    "sha256": "7d1daeed94061c3b3c77cd0d664e4b26032098354df1d2d1c1eaa062762e1395"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/rng-core.json",
+    "bytes": 13662,
+    "sha256": "0c232bdccf2928156830f06105d5304acfff26d6f9b8e4bdf9559d8e497cf81d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/rng-run.txt",
+    "bytes": 4,
+    "sha256": "f2bf6cb915ec521520920f625e9a641f22bae7808a5f5db7867c431c1a79440f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/rng-source.json",
+    "bytes": 27970,
+    "sha256": "dcf0e2d0c221eccfc1066e702f5347fa0cc5f1aa9c3cab0cf2fcfec69fe0cb89"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/rng/Audit.cs",
+    "bytes": 3335,
+    "sha256": "6ed965620f2948473ddb3b15003b469881423d6be91f00ecd604b0755f6bea90"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/scan-comparison.json",
+    "bytes": 72,
+    "sha256": "af1685315d195458193f67f793ff96aae8796ba4a4b1da6d6ca11c92e6d1129e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/scan-core.json",
+    "bytes": 6267,
+    "sha256": "9ef5931d03c804c413c4e0963355694be744cc8927f0f282965de6ca2bc58bf1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/scan-source.json",
+    "bytes": 12479,
+    "sha256": "de5a15abc147ad41ef649bddbd663845dc031f15aa0cefbd5f94b49c36400cd4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/six-build.txt",
+    "bytes": 84,
+    "sha256": "f04ca080009fa7228e4ca2f0b27dadd0b0f6b2b25a295a5defcd5a9abf999b11"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/six-run.txt",
+    "bytes": 3,
+    "sha256": "92961e9752250efa971147344b22295db32d7b75e940e0971e5fb34f21d0bc67"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/six/Audit.cs",
+    "bytes": 3284,
+    "sha256": "3ee50301590a76a17c55f92158a8db459b86a8008a0a9bd578c9612d1dfe9fbd"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle.meta",
+    "bytes": 172,
+    "sha256": "337aa116f406c2ca956437b31fcae195a31a04ac801cfef5b8d0ca656aa55586"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleActorPresentation.cs",
+    "bytes": 6879,
+    "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleActorPresentation.cs.meta",
+    "bytes": 59,
+    "sha256": "55ce9990b190b9434a394b7a44fd155308a446299b3707b888fb245cc6cc04ff"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleComplexSourceSemantics.cs",
+    "bytes": 4160,
+    "sha256": "2790fa44a8fd60fc81db80ed880f69ef8fa703897adab19329de06e653c18082"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleComplexSourceSemantics.cs.meta",
+    "bytes": 59,
+    "sha256": "e6e16539a4c720f442cc35ab341b28bf1640e60c0bd229a184ec5ba48e4f45e7"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleHandPayment.cs",
+    "bytes": 4226,
+    "sha256": "addb0f680933c19b718f98002678b02c1eab3606563a1ef2612ccbb5c469c2a1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleHandPayment.cs.meta",
+    "bytes": 59,
+    "sha256": "37c44899280d4ed481619334febe2fd3049d6f42dd17e8b131ece7215b38f6e9"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleHandRetention.cs",
+    "bytes": 902,
+    "sha256": "7322fb225faaba9ba148da64a8c280f122673c8e4bfe5ed2878a38d395883a1e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleHandRetention.cs.meta",
+    "bytes": 59,
+    "sha256": "db7a1e3eee5fba5b7d5687e770713791a0c8525b8fc37ec7429f42149b310cba"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleHandTransforms.cs",
+    "bytes": 1302,
+    "sha256": "2bb817c0acd3af5024034e4c12c3ecddbefe478f075a103e384650fc08723c47"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleHandTransforms.cs.meta",
+    "bytes": 59,
+    "sha256": "3dbff1ff29196094c1022356c2a9e0c4e1c909301159ea2dc68eefad33c47f67"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleItems.cs",
+    "bytes": 8616,
+    "sha256": "8ecab8fc3770a22210f5cb35e28a54262006440b4d34841227eeba3c1e5924ba"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleItems.cs.meta",
+    "bytes": 59,
+    "sha256": "bcdad10a315f8588b7cd69e1a1258fe2316ac767dd78d687386bdceb74f142a4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattlePlayerEffects.cs",
+    "bytes": 5122,
+    "sha256": "86ca5202e205dc4803eecb3d9ca68223c69709d73c20bc0d3727db716aca4fc3"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattlePlayerEffects.cs.meta",
+    "bytes": 60,
+    "sha256": "6504857e67e214fb90a3add9670fc62bf5e67b95d6518831efc5e5fcb35550fe"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleRestartCheckpoint.cs",
+    "bytes": 5854,
+    "sha256": "3cb6cbd98dabc5631140902a86c961c9ac4e471b55f6f9c10d108b28d5438cfe"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleRestartCheckpoint.cs.meta",
+    "bytes": 59,
+    "sha256": "730634acac09d74f9208653dedd3717473ac62318dcfe356474c08b4a42ef1e5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleRuleConsumers.cs",
+    "bytes": 1712,
+    "sha256": "e862713c60b6659ba2b3afaf37624ef1a03aac59c508eebb3281bd4812030d04"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleRuleConsumers.cs.meta",
+    "bytes": 59,
+    "sha256": "dd1feebf31731b23d20c6b759de4677815de5c2c7d789d085888ad20677adf8f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleRules.cs",
+    "bytes": 6118,
+    "sha256": "fddb1f24a80d9387d999214415f7b078b0eb4ade955e36f9072427d09b1798fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleRules.cs.meta",
+    "bytes": 59,
+    "sha256": "a22d27bad783c10fd183210b374c35a37473cf476c1d82b96190373f77f16198"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleSession.cs",
+    "bytes": 77026,
+    "sha256": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleSession.cs.meta",
+    "bytes": 59,
+    "sha256": "6fd5279237a0dc85a08e6af7c04e3ab58de07998b983879c2228a69332baf62b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleStructuredSourceSemantics.cs",
+    "bytes": 2862,
+    "sha256": "d9511196df1d295a9d5115542798c05a4237d59ad8cff1eaac7b9cc80ef83dd0"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleStructuredSourceSemantics.cs.meta",
+    "bytes": 60,
+    "sha256": "0e123a2cdfb9acc1fc1b71547987c4dc317aaefdc47e9292cbd18c784a5da2a4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleSummary.cs",
+    "bytes": 1389,
+    "sha256": "e92ca71430ff55a791c4e789e4ce2ed2425c3d237804642eb879b7caf1ab010d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleSummary.cs.meta",
+    "bytes": 59,
+    "sha256": "f725e4a50f9ae2368986e1d2c970d0c02adee193ab08c693b3d459c16f1753df"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleTargetSelections.cs",
+    "bytes": 5861,
+    "sha256": "94e47885b7e54f7827e0f367a59355bcffc2525b4de87bba0eba9a71fc6e0268"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleTargetSelections.cs.meta",
+    "bytes": 59,
+    "sha256": "0d1dad152407a9e3bdd70ce8d47395d0a0f5e600ec426db29f0ddcbcf2bc169f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleTurnForecast.cs",
+    "bytes": 4612,
+    "sha256": "078203f3ce41621d5a8b6587b8d2cfc3b5a7db9815368cd41c75058646a6ea90"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BattleTurnForecast.cs.meta",
+    "bytes": 59,
+    "sha256": "a5b4e327d7debbac7ffa0202d192786d97bf47d4c2e260c773831417a1cb16fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BuiltinCardIdentities.cs",
+    "bytes": 4629,
+    "sha256": "a3ada0917af87de1711dab489f9b53a4533324ed42e57d602db9bcddcf89a5d5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/BuiltinCardIdentities.cs.meta",
+    "bytes": 59,
+    "sha256": "f8437dad2b815f20e3c06383970a9051d668f39ee87837ab18cc6104fddded6e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/CurrentBattlePools.cs",
+    "bytes": 3447,
+    "sha256": "a3073fbf236a1a3bb2297ccd12b7c0fde24ad6faf67316438d6ec9b81f154af5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/CurrentBattlePools.cs.meta",
+    "bytes": 59,
+    "sha256": "3ebaba6c515eb9868a08f08db2c26c64d98dc7d806239d7418b7aac100bdb5b7"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/CurrentBossMechanics.cs",
+    "bytes": 3558,
+    "sha256": "644a8f0928c831a50a2b935042ade0553e5d0958a8d113aefa7545445c864a0a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/CurrentBossMechanics.cs.meta",
+    "bytes": 59,
+    "sha256": "d18fb8b2ee215683541504fd1d41ff982609359712d50ec372ca839e25df09fd"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/DeckBottomDiscovery.cs",
+    "bytes": 963,
+    "sha256": "b665975e94a231537017509f16798e585aa6c6733738b623e65db7caa69f3179"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/DeckBottomDiscovery.cs.meta",
+    "bytes": 59,
+    "sha256": "ccbb0b8b81bba99f92ac0dcc2a513aed88cbf1f6519a908f12b56a7a07d2a267"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/DeckOps.cs",
+    "bytes": 1281,
+    "sha256": "0aa9473b6a1c6fe7aeae6256824f352006132e91a8afcf95b9f505798a516c51"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/DeckOps.cs.meta",
+    "bytes": 59,
+    "sha256": "d25db525def47023edaa2cf6d11fbf48a800577a1710e2a10af3e6b970e12e7a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/EffectExecutor.cs",
+    "bytes": 26181,
+    "sha256": "69ef97a86d2870c8267069ee5e1ed2bbf6ff19d5e24000bef1f88819e519d632"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/EffectExecutor.cs.meta",
+    "bytes": 59,
+    "sha256": "8355dbc9e51722fe776dad6014bdbd62146332e9b4cebf16734ecdebb0c3fdf9"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/RuleValue.cs",
+    "bytes": 1606,
+    "sha256": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/RuleValue.cs.meta",
+    "bytes": 59,
+    "sha256": "6745a3eb806d2bf53316b28f6be4bd57c95abf9bb59b065fc7a0b26eb1f2cae4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/StructuredRules.cs",
+    "bytes": 73927,
+    "sha256": "9f639275a45c1037b68f1a5fa08a326f709cae5ebaad8a363fe55d635d83b7f1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Battle/StructuredRules.cs.meta",
+    "bytes": 59,
+    "sha256": "422abe402578bd273f38609692384ced5286ea948af85b61c23f9cba38dc1960"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Cards.cs",
+    "bytes": 15336,
+    "sha256": "efc8b15298352114b134372d6e4d40de3244da93adb7bd2e01f0e3c106701a21"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Cards.cs.meta",
+    "bytes": 59,
+    "sha256": "442450fc92241af2132f86b1adafac0b693f987616f9dfc375d25f61f140ce55"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/CardsExtras.cs",
+    "bytes": 3996,
+    "sha256": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/CardsExtras.cs.meta",
+    "bytes": 59,
+    "sha256": "389c3e828859953f2aff38e18476a242a74f00dc0c1dbc6c3743dea4875d1216"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/CharacterTable.cs",
+    "bytes": 6267,
+    "sha256": "f7f33fda167b7275bcca4d26e25f0a6345087e0cc3c7f84e1dd3edebfae195a6"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/CharacterTable.cs.meta",
+    "bytes": 59,
+    "sha256": "025fa69998885f4080af8cec3ea24265834c26bcf65b1bd8598c8e15c5de56b0"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/ChestLoot.cs",
+    "bytes": 6924,
+    "sha256": "0b09603d4ec67651801b5b85ed925144f14bb7a7a58a0e89d0a8e2f68a97e87b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/ChestLoot.cs.meta",
+    "bytes": 59,
+    "sha256": "7c4e2094e812109a624ac1b5caa2327503c42fc6b9777ca52a19bf358cc4e165"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/CombatResolver.cs",
+    "bytes": 26655,
+    "sha256": "32dd0e1558d1fb62fda29b88c94e85c74e1fe02d63338268d726ceca0b1fd242"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/CombatResolver.cs.meta",
+    "bytes": 59,
+    "sha256": "c94ce4077503ec7ec3a1f6383e265fef3211264d094f45cfb059a77c2d73fc7b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/CurrentMapData.cs",
+    "bytes": 7909,
+    "sha256": "287c8d99bc7d852ef8273e921867204bc2e0b319f17c1b43c329ea08a938b800"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/CurrentMapData.cs.meta",
+    "bytes": 59,
+    "sha256": "5bf9b174e0165b75c7f85e9a20959247d75c7dfb404469134fbbb52042e8f021"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data.meta",
+    "bytes": 172,
+    "sha256": "4a1b668c314c10d86f8b0600145a6abf5c2d72be87be5354329bb5c1b843f40d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/CardDatabase.cs",
+    "bytes": 127842,
+    "sha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/CardDatabase.cs.meta",
+    "bytes": 59,
+    "sha256": "f6715b46276a1503aebe91f933beeab7dc1b9d7fd03c0fbc22bbf2645c1cc6c5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/CurrentBalanceData.cs",
+    "bytes": 662,
+    "sha256": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/CurrentBalanceData.cs.meta",
+    "bytes": 59,
+    "sha256": "5c3a853cea44ac03b687b659e4008394bec8c7f05f20351dca29a7e83682e913"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/CurrentChestData.cs",
+    "bytes": 1727,
+    "sha256": "7dfd4b8993fa3b7bc85acec47195d69d819173c1a96eb89d9fd841e0f58dec2f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/CurrentChestData.cs.meta",
+    "bytes": 59,
+    "sha256": "cf7fc3273ce176bce799a313f7fb296acf6c2080b38b8bc78de038c20e6cd028"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/EventDatabase.cs",
+    "bytes": 72573,
+    "sha256": "935646f0a1f0d2502f58747420abd62d4908c78e51d5e70610f99c757f785579"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/EventDatabase.cs.meta",
+    "bytes": 59,
+    "sha256": "00efb18943de8427dc0e4e082b27dd770c83da1887a720b4f3a7849ab73e2271"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/EventProgress.cs",
+    "bytes": 1999,
+    "sha256": "0722be487263cc278ee3a68306c301ecf374358e3e64d92ff5ae20500af64136"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/EventProgress.cs.meta",
+    "bytes": 59,
+    "sha256": "c458a904a20d15c2e57c8fa0fc01b1413e0fc6060d70b33c29198362bd1ed5c1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/SceneCopy.cs",
+    "bytes": 13290,
+    "sha256": "9ca1eedae3dd26063c9c1d5e1f6da3f966532a476af8c71b1fb30fe9a43b680f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Data/SceneCopy.cs.meta",
+    "bytes": 59,
+    "sha256": "56addf0984769354acd6e32e157ee7aa0d2839aa4d81185c3c311369eccfbd0b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/GameRules.cs",
+    "bytes": 2969,
+    "sha256": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/GameRules.cs.meta",
+    "bytes": 59,
+    "sha256": "ae5ba2546c48a972d5dde7eeefae34f7cb02e90b38b7c7433f2a9936d41f231a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/KoiPondModel.cs",
+    "bytes": 7273,
+    "sha256": "70799c15f470491a86adc5e3944f8a288aea6362274f328dac4fc3459987fde5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/KoiPondModel.cs.meta",
+    "bytes": 59,
+    "sha256": "463d29ba8522a57b7f020aa0554e3d4233256a471e9fe442a1781cea47b1dc78"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/LayeredMapGenerator.cs",
+    "bytes": 25766,
+    "sha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/LayeredMapGenerator.cs.meta",
+    "bytes": 59,
+    "sha256": "3e2c219d9914fba55b5ca12161573ba179825e99fea3a73e61fdd3fddb8e3872"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/MapModel.cs",
+    "bytes": 32585,
+    "sha256": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/MapModel.cs.meta",
+    "bytes": 59,
+    "sha256": "cb22799a9a5e74f4d9ff49c0d9d5595436bd5ba8cc187bc7e4a0cddafe9e8409"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/RewardReceipt.cs",
+    "bytes": 560,
+    "sha256": "716e80ecdee107982f725e4768964575911d07b8ff7ac37da2998fc866f07cd1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/RewardReceipt.cs.meta",
+    "bytes": 59,
+    "sha256": "2621c92160dcde9e5585d5713f106e1b96255683a2de872d6c56006ba2069119"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Rng.cs",
+    "bytes": 5470,
+    "sha256": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Rng.cs.meta",
+    "bytes": 59,
+    "sha256": "ac5e669950f5304747cba6376d6c1a862275da4c2ef1e6e985312ae7301f72e8"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/RunState.cs",
+    "bytes": 7114,
+    "sha256": "baa66ca2f0119f7bfd6c5df617ba3f77d23c64c3a94340d1f86751ef65fdcfce"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/RunState.cs.meta",
+    "bytes": 59,
+    "sha256": "b7f406074588e80fbf952a313a7f16e96aacf80ac3c3800320e8235fc0aab353"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Sdt.Core.asmdef",
+    "bytes": 349,
+    "sha256": "aaf418187e300323babccae7b2e0a20b1e528855c6e80c93ebdd8411839a712e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/Sdt.Core.asmdef.meta",
+    "bytes": 166,
+    "sha256": "daf1f2c95bba90d6f209e173235053573d340fda2e87d2016c26736e70ece8d5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/ShopOfferReceipt.cs",
+    "bytes": 255,
+    "sha256": "5088ca7446567ff33bbcf18362bd356af9a3f7e19ecc26bc9ee53efd6087ad4d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/snapshot/ShopOfferReceipt.cs.meta",
+    "bytes": 59,
+    "sha256": "6307c78fb001d93aa9c5a8c0c810402d7468913b32bc17fa45b4a66030125203"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-complex-run.txt",
+    "bytes": 1412,
+    "sha256": "2493519f4827c3119254e2c52f90138b07e985e1fecc875c76218bc535e35f2c"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-complex.json",
+    "bytes": 173247,
+    "sha256": "a6ba5df4992c83845febce4417704fcebc48c7bf44efa28b3ec14b1712336c32"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-complex.mjs",
+    "bytes": 8552,
+    "sha256": "14035eda7f0815bce50252ee8e67795802325f0cddc7f0080a4d3e205e8b1358"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-r1-run.txt",
+    "bytes": 893,
+    "sha256": "33aa5188065907a7cad0479e0e37d73bc88d3dd4d48bfc8381912a9c0cc034e0"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-r2-run.txt",
+    "bytes": 995,
+    "sha256": "3aec5837c7250c446acd6f587b905400e882c2ca46b829ff78381bf79b4d85b8"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-results.json",
+    "bytes": 19421,
+    "sha256": "da189cb021e7dbf2ce733e99cdb9281a4b8aafd02e87f386488e693baa7334fc"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-rng-run.txt",
+    "bytes": 254,
+    "sha256": "89cc3502775e00aa1ebec02c3e955d9b9f8ae794c234b9e6b006481a5e581370"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-rng.mjs",
+    "bytes": 7205,
+    "sha256": "f3d1506c426f59fa4a22ffeedf7e1490cafee7848e667039e0b7838ff611c4ea"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-round2-results.json",
+    "bytes": 13412,
+    "sha256": "dbde6eb148a9c8418561fff3f4bc1fee61af3a48dfac45c3a90ae62035cbe18c"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-round2.mjs",
+    "bytes": 6238,
+    "sha256": "df3cc6e25e5fa905e59115116d4b7069a8b9dfc4def95020f8f6e576e7f67f28"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-six-run.txt",
+    "bytes": 143,
+    "sha256": "f77f726dce31936a117f167153189bceb81fcaba84af39bee8d0de77afe6307b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source-six.mjs",
+    "bytes": 7165,
+    "sha256": "36cd03a26941c1b485476917a247ceb89b34a1b594426705b69a0f6d033b8671"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-closure/source.mjs",
+    "bytes": 5761,
+    "sha256": "dbd0df540038d1e5995283df4e061de7a5c15185538c02063647c920b050a07b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/README.md",
+    "bytes": 6332,
+    "sha256": "7637e227c4ae3e0d945878b91666c2d11c6b813a474f6d75bed58f726890c64b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/closure-comparison.json",
+    "bytes": 6332,
+    "sha256": "aef532973564e91e0cd20908ca0c28a6fa705143c4bea3b9fb245a8d9ff67b7c"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/compare-closure.mjs",
+    "bytes": 1749,
+    "sha256": "cfee46a884e8c7ab3cb7798510e2f33f0fd7d68bffa07365ed64e75360942ebe"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/compare-scan.mjs",
+    "bytes": 878,
+    "sha256": "b2b3bd7e44bf74ec8b5334fd7a0f07fae4a1617fdf9e68fe91f52153e4d6ebdb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/core-r1-run.txt",
+    "bytes": 1799,
+    "sha256": "b2b703c06c1ef7b90cd5672c3e621562fe0a88f955c8a196b1f5664ae62a7fb3"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/core-r2-run.txt",
+    "bytes": 3234,
+    "sha256": "8f62305cd1f264348bc4054521e09de09cc81727c5359b451480bf6a120c2dbc"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/core-results.json",
+    "bytes": 1797,
+    "sha256": "b11b0582ec264a5fa483f633d0f461bfa68c4db0781a7cbc43486482a30672c0"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/core-round2-results.json",
+    "bytes": 3232,
+    "sha256": "ef071cea66c108a50d3853b974f61995fc2f65cd2d5653d6ca27b73b7bac3797"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/fresh-catalog.json",
+    "bytes": 162998,
+    "sha256": "285bace96578b00e053f40c02698f51265f55315ca4191faa3c20d69ea78eea1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/inputs-sha256.json",
+    "bytes": 120786,
+    "sha256": "6dce107cc1a93d72accebedd77ede7f538b20c94f9dae65cb7d3b0bdf1443635"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/r1/Audit.cs",
+    "bytes": 3128,
+    "sha256": "da300e17a3b0ae5404c9517a34d933eee6b0b7a5627f3450b47f3ae1e0a3cb05"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/r2/Audit.cs",
+    "bytes": 3622,
+    "sha256": "f79fa810d00dc954ffda340d4586281fd183d30781fe93de21221b2de719e034"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/scan-comparison.json",
+    "bytes": 14726,
+    "sha256": "9cf128da8de33f9c69e0dc4bcc340a0ae49e69fddd66f1b13e3be1eda429d469"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/scan-core.json",
+    "bytes": 138533,
+    "sha256": "cb9feedc5e3d587b04329ad1594bd9dd04b8739313a407bf954ab43b04566377"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/scan-run.txt",
+    "bytes": 2567,
+    "sha256": "b3c0edf15d96ec195e2d87c49c5e125aa6a1a4b9aa839bcf95942429b2580d31"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/scan-source.json",
+    "bytes": 274891,
+    "sha256": "636b1e9c9e0dea845da1aa0a994ac35cf839b8920a50c1fbdde6d7b73cc54750"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/scan-source.mjs",
+    "bytes": 7035,
+    "sha256": "daf5a35e1b6fd4a0442e12d65853c5c64fdd9c30c4dbc9ff389f83dde1daa3da"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/scan/Audit.cs",
+    "bytes": 3284,
+    "sha256": "3ee50301590a76a17c55f92158a8db459b86a8008a0a9bd578c9612d1dfe9fbd"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle.meta",
+    "bytes": 172,
+    "sha256": "337aa116f406c2ca956437b31fcae195a31a04ac801cfef5b8d0ca656aa55586"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleActorPresentation.cs",
+    "bytes": 6879,
+    "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleActorPresentation.cs.meta",
+    "bytes": 59,
+    "sha256": "55ce9990b190b9434a394b7a44fd155308a446299b3707b888fb245cc6cc04ff"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleHandPayment.cs",
+    "bytes": 4226,
+    "sha256": "addb0f680933c19b718f98002678b02c1eab3606563a1ef2612ccbb5c469c2a1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleHandPayment.cs.meta",
+    "bytes": 59,
+    "sha256": "37c44899280d4ed481619334febe2fd3049d6f42dd17e8b131ece7215b38f6e9"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleHandRetention.cs",
+    "bytes": 902,
+    "sha256": "7322fb225faaba9ba148da64a8c280f122673c8e4bfe5ed2878a38d395883a1e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleHandRetention.cs.meta",
+    "bytes": 59,
+    "sha256": "db7a1e3eee5fba5b7d5687e770713791a0c8525b8fc37ec7429f42149b310cba"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleHandTransforms.cs",
+    "bytes": 1302,
+    "sha256": "2bb817c0acd3af5024034e4c12c3ecddbefe478f075a103e384650fc08723c47"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleHandTransforms.cs.meta",
+    "bytes": 59,
+    "sha256": "3dbff1ff29196094c1022356c2a9e0c4e1c909301159ea2dc68eefad33c47f67"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleItems.cs",
+    "bytes": 8616,
+    "sha256": "8ecab8fc3770a22210f5cb35e28a54262006440b4d34841227eeba3c1e5924ba"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleItems.cs.meta",
+    "bytes": 59,
+    "sha256": "bcdad10a315f8588b7cd69e1a1258fe2316ac767dd78d687386bdceb74f142a4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattlePlayerEffects.cs",
+    "bytes": 5122,
+    "sha256": "86ca5202e205dc4803eecb3d9ca68223c69709d73c20bc0d3727db716aca4fc3"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattlePlayerEffects.cs.meta",
+    "bytes": 60,
+    "sha256": "6504857e67e214fb90a3add9670fc62bf5e67b95d6518831efc5e5fcb35550fe"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleRestartCheckpoint.cs",
+    "bytes": 5854,
+    "sha256": "3cb6cbd98dabc5631140902a86c961c9ac4e471b55f6f9c10d108b28d5438cfe"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleRestartCheckpoint.cs.meta",
+    "bytes": 59,
+    "sha256": "730634acac09d74f9208653dedd3717473ac62318dcfe356474c08b4a42ef1e5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleRuleConsumers.cs",
+    "bytes": 1712,
+    "sha256": "e862713c60b6659ba2b3afaf37624ef1a03aac59c508eebb3281bd4812030d04"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleRuleConsumers.cs.meta",
+    "bytes": 59,
+    "sha256": "dd1feebf31731b23d20c6b759de4677815de5c2c7d789d085888ad20677adf8f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleRules.cs",
+    "bytes": 6118,
+    "sha256": "fddb1f24a80d9387d999214415f7b078b0eb4ade955e36f9072427d09b1798fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleRules.cs.meta",
+    "bytes": 59,
+    "sha256": "a22d27bad783c10fd183210b374c35a37473cf476c1d82b96190373f77f16198"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleSession.cs",
+    "bytes": 77000,
+    "sha256": "5cba112d6c6e75cfb0214863bfbbdd06db36cca376f4bfc2a0b771afef73a084"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleSession.cs.meta",
+    "bytes": 59,
+    "sha256": "6fd5279237a0dc85a08e6af7c04e3ab58de07998b983879c2228a69332baf62b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleSummary.cs",
+    "bytes": 1389,
+    "sha256": "e92ca71430ff55a791c4e789e4ce2ed2425c3d237804642eb879b7caf1ab010d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleSummary.cs.meta",
+    "bytes": 59,
+    "sha256": "f725e4a50f9ae2368986e1d2c970d0c02adee193ab08c693b3d459c16f1753df"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleTargetSelections.cs",
+    "bytes": 5861,
+    "sha256": "94e47885b7e54f7827e0f367a59355bcffc2525b4de87bba0eba9a71fc6e0268"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleTargetSelections.cs.meta",
+    "bytes": 59,
+    "sha256": "0d1dad152407a9e3bdd70ce8d47395d0a0f5e600ec426db29f0ddcbcf2bc169f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleTurnForecast.cs",
+    "bytes": 4612,
+    "sha256": "078203f3ce41621d5a8b6587b8d2cfc3b5a7db9815368cd41c75058646a6ea90"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BattleTurnForecast.cs.meta",
+    "bytes": 59,
+    "sha256": "a5b4e327d7debbac7ffa0202d192786d97bf47d4c2e260c773831417a1cb16fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BuiltinCardIdentities.cs",
+    "bytes": 4629,
+    "sha256": "a3ada0917af87de1711dab489f9b53a4533324ed42e57d602db9bcddcf89a5d5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/BuiltinCardIdentities.cs.meta",
+    "bytes": 59,
+    "sha256": "f8437dad2b815f20e3c06383970a9051d668f39ee87837ab18cc6104fddded6e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/CurrentBattlePools.cs",
+    "bytes": 3447,
+    "sha256": "a3073fbf236a1a3bb2297ccd12b7c0fde24ad6faf67316438d6ec9b81f154af5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/CurrentBattlePools.cs.meta",
+    "bytes": 59,
+    "sha256": "3ebaba6c515eb9868a08f08db2c26c64d98dc7d806239d7418b7aac100bdb5b7"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/CurrentBossMechanics.cs",
+    "bytes": 3558,
+    "sha256": "644a8f0928c831a50a2b935042ade0553e5d0958a8d113aefa7545445c864a0a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/CurrentBossMechanics.cs.meta",
+    "bytes": 59,
+    "sha256": "d18fb8b2ee215683541504fd1d41ff982609359712d50ec372ca839e25df09fd"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/DeckBottomDiscovery.cs",
+    "bytes": 963,
+    "sha256": "b665975e94a231537017509f16798e585aa6c6733738b623e65db7caa69f3179"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/DeckBottomDiscovery.cs.meta",
+    "bytes": 59,
+    "sha256": "ccbb0b8b81bba99f92ac0dcc2a513aed88cbf1f6519a908f12b56a7a07d2a267"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/DeckOps.cs",
+    "bytes": 1281,
+    "sha256": "0aa9473b6a1c6fe7aeae6256824f352006132e91a8afcf95b9f505798a516c51"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/DeckOps.cs.meta",
+    "bytes": 59,
+    "sha256": "d25db525def47023edaa2cf6d11fbf48a800577a1710e2a10af3e6b970e12e7a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/EffectExecutor.cs",
+    "bytes": 26181,
+    "sha256": "69ef97a86d2870c8267069ee5e1ed2bbf6ff19d5e24000bef1f88819e519d632"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/EffectExecutor.cs.meta",
+    "bytes": 59,
+    "sha256": "8355dbc9e51722fe776dad6014bdbd62146332e9b4cebf16734ecdebb0c3fdf9"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/RuleValue.cs",
+    "bytes": 1606,
+    "sha256": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/RuleValue.cs.meta",
+    "bytes": 59,
+    "sha256": "6745a3eb806d2bf53316b28f6be4bd57c95abf9bb59b065fc7a0b26eb1f2cae4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/StructuredRules.cs",
+    "bytes": 72558,
+    "sha256": "1332ded1d935a2f17116dfe3c228ed87087bc6baf2062013f4dc3c9d31490afa"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Battle/StructuredRules.cs.meta",
+    "bytes": 59,
+    "sha256": "422abe402578bd273f38609692384ced5286ea948af85b61c23f9cba38dc1960"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Cards.cs",
+    "bytes": 15336,
+    "sha256": "efc8b15298352114b134372d6e4d40de3244da93adb7bd2e01f0e3c106701a21"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Cards.cs.meta",
+    "bytes": 59,
+    "sha256": "442450fc92241af2132f86b1adafac0b693f987616f9dfc375d25f61f140ce55"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/CardsExtras.cs",
+    "bytes": 3996,
+    "sha256": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/CardsExtras.cs.meta",
+    "bytes": 59,
+    "sha256": "389c3e828859953f2aff38e18476a242a74f00dc0c1dbc6c3743dea4875d1216"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/CharacterTable.cs",
+    "bytes": 6267,
+    "sha256": "f7f33fda167b7275bcca4d26e25f0a6345087e0cc3c7f84e1dd3edebfae195a6"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/CharacterTable.cs.meta",
+    "bytes": 59,
+    "sha256": "025fa69998885f4080af8cec3ea24265834c26bcf65b1bd8598c8e15c5de56b0"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/ChestLoot.cs",
+    "bytes": 6924,
+    "sha256": "0b09603d4ec67651801b5b85ed925144f14bb7a7a58a0e89d0a8e2f68a97e87b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/ChestLoot.cs.meta",
+    "bytes": 59,
+    "sha256": "7c4e2094e812109a624ac1b5caa2327503c42fc6b9777ca52a19bf358cc4e165"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/CombatResolver.cs",
+    "bytes": 26655,
+    "sha256": "32dd0e1558d1fb62fda29b88c94e85c74e1fe02d63338268d726ceca0b1fd242"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/CombatResolver.cs.meta",
+    "bytes": 59,
+    "sha256": "c94ce4077503ec7ec3a1f6383e265fef3211264d094f45cfb059a77c2d73fc7b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/CurrentMapData.cs",
+    "bytes": 7909,
+    "sha256": "287c8d99bc7d852ef8273e921867204bc2e0b319f17c1b43c329ea08a938b800"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/CurrentMapData.cs.meta",
+    "bytes": 59,
+    "sha256": "5bf9b174e0165b75c7f85e9a20959247d75c7dfb404469134fbbb52042e8f021"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data.meta",
+    "bytes": 172,
+    "sha256": "4a1b668c314c10d86f8b0600145a6abf5c2d72be87be5354329bb5c1b843f40d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/CardDatabase.cs",
+    "bytes": 127842,
+    "sha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/CardDatabase.cs.meta",
+    "bytes": 59,
+    "sha256": "f6715b46276a1503aebe91f933beeab7dc1b9d7fd03c0fbc22bbf2645c1cc6c5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/CurrentBalanceData.cs",
+    "bytes": 662,
+    "sha256": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/CurrentBalanceData.cs.meta",
+    "bytes": 59,
+    "sha256": "5c3a853cea44ac03b687b659e4008394bec8c7f05f20351dca29a7e83682e913"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/CurrentChestData.cs",
+    "bytes": 1727,
+    "sha256": "7dfd4b8993fa3b7bc85acec47195d69d819173c1a96eb89d9fd841e0f58dec2f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/CurrentChestData.cs.meta",
+    "bytes": 59,
+    "sha256": "cf7fc3273ce176bce799a313f7fb296acf6c2080b38b8bc78de038c20e6cd028"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/EventDatabase.cs",
+    "bytes": 72573,
+    "sha256": "935646f0a1f0d2502f58747420abd62d4908c78e51d5e70610f99c757f785579"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/EventDatabase.cs.meta",
+    "bytes": 59,
+    "sha256": "00efb18943de8427dc0e4e082b27dd770c83da1887a720b4f3a7849ab73e2271"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/EventProgress.cs",
+    "bytes": 1999,
+    "sha256": "0722be487263cc278ee3a68306c301ecf374358e3e64d92ff5ae20500af64136"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/EventProgress.cs.meta",
+    "bytes": 59,
+    "sha256": "c458a904a20d15c2e57c8fa0fc01b1413e0fc6060d70b33c29198362bd1ed5c1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/SceneCopy.cs",
+    "bytes": 13290,
+    "sha256": "9ca1eedae3dd26063c9c1d5e1f6da3f966532a476af8c71b1fb30fe9a43b680f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Data/SceneCopy.cs.meta",
+    "bytes": 59,
+    "sha256": "56addf0984769354acd6e32e157ee7aa0d2839aa4d81185c3c311369eccfbd0b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/GameRules.cs",
+    "bytes": 2969,
+    "sha256": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/GameRules.cs.meta",
+    "bytes": 59,
+    "sha256": "ae5ba2546c48a972d5dde7eeefae34f7cb02e90b38b7c7433f2a9936d41f231a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/KoiPondModel.cs",
+    "bytes": 7273,
+    "sha256": "70799c15f470491a86adc5e3944f8a288aea6362274f328dac4fc3459987fde5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/KoiPondModel.cs.meta",
+    "bytes": 59,
+    "sha256": "463d29ba8522a57b7f020aa0554e3d4233256a471e9fe442a1781cea47b1dc78"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/LayeredMapGenerator.cs",
+    "bytes": 25766,
+    "sha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/LayeredMapGenerator.cs.meta",
+    "bytes": 59,
+    "sha256": "3e2c219d9914fba55b5ca12161573ba179825e99fea3a73e61fdd3fddb8e3872"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/MapModel.cs",
+    "bytes": 32585,
+    "sha256": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/MapModel.cs.meta",
+    "bytes": 59,
+    "sha256": "cb22799a9a5e74f4d9ff49c0d9d5595436bd5ba8cc187bc7e4a0cddafe9e8409"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/RewardReceipt.cs",
+    "bytes": 560,
+    "sha256": "716e80ecdee107982f725e4768964575911d07b8ff7ac37da2998fc866f07cd1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/RewardReceipt.cs.meta",
+    "bytes": 59,
+    "sha256": "2621c92160dcde9e5585d5713f106e1b96255683a2de872d6c56006ba2069119"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Rng.cs",
+    "bytes": 5470,
+    "sha256": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Rng.cs.meta",
+    "bytes": 59,
+    "sha256": "ac5e669950f5304747cba6376d6c1a862275da4c2ef1e6e985312ae7301f72e8"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/RunState.cs",
+    "bytes": 7114,
+    "sha256": "baa66ca2f0119f7bfd6c5df617ba3f77d23c64c3a94340d1f86751ef65fdcfce"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/RunState.cs.meta",
+    "bytes": 59,
+    "sha256": "b7f406074588e80fbf952a313a7f16e96aacf80ac3c3800320e8235fc0aab353"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Sdt.Core.asmdef",
+    "bytes": 349,
+    "sha256": "aaf418187e300323babccae7b2e0a20b1e528855c6e80c93ebdd8411839a712e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/Sdt.Core.asmdef.meta",
+    "bytes": 166,
+    "sha256": "daf1f2c95bba90d6f209e173235053573d340fda2e87d2016c26736e70ece8d5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/ShopOfferReceipt.cs",
+    "bytes": 255,
+    "sha256": "5088ca7446567ff33bbcf18362bd356af9a3f7e19ecc26bc9ee53efd6087ad4d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/snapshot/ShopOfferReceipt.cs.meta",
+    "bytes": 59,
+    "sha256": "6307c78fb001d93aa9c5a8c0c810402d7468913b32bc17fa45b4a66030125203"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/source-results.json",
+    "bytes": 19421,
+    "sha256": "da189cb021e7dbf2ce733e99cdb9281a4b8aafd02e87f386488e693baa7334fc"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/source-round2-results.json",
+    "bytes": 13412,
+    "sha256": "dbde6eb148a9c8418561fff3f4bc1fee61af3a48dfac45c3a90ae62035cbe18c"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/source-round2.mjs",
+    "bytes": 6238,
+    "sha256": "df3cc6e25e5fa905e59115116d4b7069a8b9dfc4def95020f8f6e576e7f67f28"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/final-review/source.mjs",
+    "bytes": 5761,
+    "sha256": "dbd0df540038d1e5995283df4e061de7a5c15185538c02063647c920b050a07b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/fresh-catalog.json",
+    "bytes": 162998,
+    "sha256": "285bace96578b00e053f40c02698f51265f55315ca4191faa3c20d69ea78eea1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/inputs-round2-sha256.json",
+    "bytes": 6161,
+    "sha256": "86b37e4567851cf4b568a2a4955da0e9d757437de1d1d3c578c8563ce7350cfb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/inputs-sha256.json",
+    "bytes": 118937,
+    "sha256": "ce4e5cf433312451d2b619111a2dae997be7af35f06549533021521cca0a2afc"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/skipped-declarations.txt",
+    "bytes": 19181,
+    "sha256": "4e0bfcad01b3f7dd127729df24428be0640793e85ad44caa1da1790992d50ebd"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle.meta",
+    "bytes": 172,
+    "sha256": "337aa116f406c2ca956437b31fcae195a31a04ac801cfef5b8d0ca656aa55586"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleActorPresentation.cs",
+    "bytes": 6879,
+    "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleActorPresentation.cs.meta",
+    "bytes": 59,
+    "sha256": "55ce9990b190b9434a394b7a44fd155308a446299b3707b888fb245cc6cc04ff"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleHandTransforms.cs",
+    "bytes": 1302,
+    "sha256": "2bb817c0acd3af5024034e4c12c3ecddbefe478f075a103e384650fc08723c47"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleHandTransforms.cs.meta",
+    "bytes": 59,
+    "sha256": "3dbff1ff29196094c1022356c2a9e0c4e1c909301159ea2dc68eefad33c47f67"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleItems.cs",
+    "bytes": 8616,
+    "sha256": "8ecab8fc3770a22210f5cb35e28a54262006440b4d34841227eeba3c1e5924ba"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleItems.cs.meta",
+    "bytes": 59,
+    "sha256": "bcdad10a315f8588b7cd69e1a1258fe2316ac767dd78d687386bdceb74f142a4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattlePlayerEffects.cs",
+    "bytes": 4976,
+    "sha256": "621f9aeb841ad67fc735b97610d1d4ac2918204314493c4679d9b46291b83518"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattlePlayerEffects.cs.meta",
+    "bytes": 60,
+    "sha256": "6504857e67e214fb90a3add9670fc62bf5e67b95d6518831efc5e5fcb35550fe"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleRestartCheckpoint.cs",
+    "bytes": 5854,
+    "sha256": "3cb6cbd98dabc5631140902a86c961c9ac4e471b55f6f9c10d108b28d5438cfe"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleRestartCheckpoint.cs.meta",
+    "bytes": 59,
+    "sha256": "730634acac09d74f9208653dedd3717473ac62318dcfe356474c08b4a42ef1e5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleRules.cs",
+    "bytes": 5713,
+    "sha256": "00f8c9eb46a020300aeec1f1c888873219cabd2d901d7a837304e5c7a476cf16"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleRules.cs.meta",
+    "bytes": 59,
+    "sha256": "a22d27bad783c10fd183210b374c35a37473cf476c1d82b96190373f77f16198"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleSession.cs",
+    "bytes": 73168,
+    "sha256": "f58ad813a9308d321d8c6c4a8b83d7b0a2b148ef622d9eed8d550e89d01db8db"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleSession.cs.meta",
+    "bytes": 59,
+    "sha256": "6fd5279237a0dc85a08e6af7c04e3ab58de07998b983879c2228a69332baf62b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleSummary.cs",
+    "bytes": 1389,
+    "sha256": "e92ca71430ff55a791c4e789e4ce2ed2425c3d237804642eb879b7caf1ab010d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleSummary.cs.meta",
+    "bytes": 59,
+    "sha256": "f725e4a50f9ae2368986e1d2c970d0c02adee193ab08c693b3d459c16f1753df"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleTurnForecast.cs",
+    "bytes": 4612,
+    "sha256": "078203f3ce41621d5a8b6587b8d2cfc3b5a7db9815368cd41c75058646a6ea90"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BattleTurnForecast.cs.meta",
+    "bytes": 59,
+    "sha256": "a5b4e327d7debbac7ffa0202d192786d97bf47d4c2e260c773831417a1cb16fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BuiltinCardIdentities.cs",
+    "bytes": 4629,
+    "sha256": "a3ada0917af87de1711dab489f9b53a4533324ed42e57d602db9bcddcf89a5d5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/BuiltinCardIdentities.cs.meta",
+    "bytes": 59,
+    "sha256": "f8437dad2b815f20e3c06383970a9051d668f39ee87837ab18cc6104fddded6e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/CurrentBattlePools.cs",
+    "bytes": 3447,
+    "sha256": "a3073fbf236a1a3bb2297ccd12b7c0fde24ad6faf67316438d6ec9b81f154af5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/CurrentBattlePools.cs.meta",
+    "bytes": 59,
+    "sha256": "3ebaba6c515eb9868a08f08db2c26c64d98dc7d806239d7418b7aac100bdb5b7"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/CurrentBossMechanics.cs",
+    "bytes": 3558,
+    "sha256": "644a8f0928c831a50a2b935042ade0553e5d0958a8d113aefa7545445c864a0a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/CurrentBossMechanics.cs.meta",
+    "bytes": 59,
+    "sha256": "d18fb8b2ee215683541504fd1d41ff982609359712d50ec372ca839e25df09fd"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/DeckBottomDiscovery.cs",
+    "bytes": 963,
+    "sha256": "b665975e94a231537017509f16798e585aa6c6733738b623e65db7caa69f3179"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/DeckBottomDiscovery.cs.meta",
+    "bytes": 59,
+    "sha256": "ccbb0b8b81bba99f92ac0dcc2a513aed88cbf1f6519a908f12b56a7a07d2a267"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/DeckOps.cs",
+    "bytes": 1281,
+    "sha256": "0aa9473b6a1c6fe7aeae6256824f352006132e91a8afcf95b9f505798a516c51"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/DeckOps.cs.meta",
+    "bytes": 59,
+    "sha256": "d25db525def47023edaa2cf6d11fbf48a800577a1710e2a10af3e6b970e12e7a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/EffectExecutor.cs",
+    "bytes": 26181,
+    "sha256": "69ef97a86d2870c8267069ee5e1ed2bbf6ff19d5e24000bef1f88819e519d632"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/EffectExecutor.cs.meta",
+    "bytes": 59,
+    "sha256": "8355dbc9e51722fe776dad6014bdbd62146332e9b4cebf16734ecdebb0c3fdf9"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/RuleValue.cs",
+    "bytes": 1606,
+    "sha256": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/RuleValue.cs.meta",
+    "bytes": 59,
+    "sha256": "6745a3eb806d2bf53316b28f6be4bd57c95abf9bb59b065fc7a0b26eb1f2cae4"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/StructuredRules.cs",
+    "bytes": 70731,
+    "sha256": "50847fc3e255097387f0ce0b2abb4029e29cfbae9e08a2317c95bb415cbd9e73"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Battle/StructuredRules.cs.meta",
+    "bytes": 59,
+    "sha256": "422abe402578bd273f38609692384ced5286ea948af85b61c23f9cba38dc1960"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Cards.cs",
+    "bytes": 15336,
+    "sha256": "efc8b15298352114b134372d6e4d40de3244da93adb7bd2e01f0e3c106701a21"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Cards.cs.meta",
+    "bytes": 59,
+    "sha256": "442450fc92241af2132f86b1adafac0b693f987616f9dfc375d25f61f140ce55"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/CardsExtras.cs",
+    "bytes": 3996,
+    "sha256": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/CardsExtras.cs.meta",
+    "bytes": 59,
+    "sha256": "389c3e828859953f2aff38e18476a242a74f00dc0c1dbc6c3743dea4875d1216"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/CharacterTable.cs",
+    "bytes": 6267,
+    "sha256": "f7f33fda167b7275bcca4d26e25f0a6345087e0cc3c7f84e1dd3edebfae195a6"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/CharacterTable.cs.meta",
+    "bytes": 59,
+    "sha256": "025fa69998885f4080af8cec3ea24265834c26bcf65b1bd8598c8e15c5de56b0"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/ChestLoot.cs",
+    "bytes": 6924,
+    "sha256": "0b09603d4ec67651801b5b85ed925144f14bb7a7a58a0e89d0a8e2f68a97e87b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/ChestLoot.cs.meta",
+    "bytes": 59,
+    "sha256": "7c4e2094e812109a624ac1b5caa2327503c42fc6b9777ca52a19bf358cc4e165"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/CombatResolver.cs",
+    "bytes": 26655,
+    "sha256": "32dd0e1558d1fb62fda29b88c94e85c74e1fe02d63338268d726ceca0b1fd242"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/CombatResolver.cs.meta",
+    "bytes": 59,
+    "sha256": "c94ce4077503ec7ec3a1f6383e265fef3211264d094f45cfb059a77c2d73fc7b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/CurrentMapData.cs",
+    "bytes": 7909,
+    "sha256": "287c8d99bc7d852ef8273e921867204bc2e0b319f17c1b43c329ea08a938b800"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/CurrentMapData.cs.meta",
+    "bytes": 59,
+    "sha256": "5bf9b174e0165b75c7f85e9a20959247d75c7dfb404469134fbbb52042e8f021"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data.meta",
+    "bytes": 172,
+    "sha256": "4a1b668c314c10d86f8b0600145a6abf5c2d72be87be5354329bb5c1b843f40d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/CardDatabase.cs",
+    "bytes": 127842,
+    "sha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/CardDatabase.cs.meta",
+    "bytes": 59,
+    "sha256": "f6715b46276a1503aebe91f933beeab7dc1b9d7fd03c0fbc22bbf2645c1cc6c5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/CurrentBalanceData.cs",
+    "bytes": 662,
+    "sha256": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/CurrentBalanceData.cs.meta",
+    "bytes": 59,
+    "sha256": "5c3a853cea44ac03b687b659e4008394bec8c7f05f20351dca29a7e83682e913"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/CurrentChestData.cs",
+    "bytes": 1727,
+    "sha256": "7dfd4b8993fa3b7bc85acec47195d69d819173c1a96eb89d9fd841e0f58dec2f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/CurrentChestData.cs.meta",
+    "bytes": 59,
+    "sha256": "cf7fc3273ce176bce799a313f7fb296acf6c2080b38b8bc78de038c20e6cd028"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/EventDatabase.cs",
+    "bytes": 72573,
+    "sha256": "935646f0a1f0d2502f58747420abd62d4908c78e51d5e70610f99c757f785579"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/EventDatabase.cs.meta",
+    "bytes": 59,
+    "sha256": "00efb18943de8427dc0e4e082b27dd770c83da1887a720b4f3a7849ab73e2271"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/EventProgress.cs",
+    "bytes": 1999,
+    "sha256": "0722be487263cc278ee3a68306c301ecf374358e3e64d92ff5ae20500af64136"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/EventProgress.cs.meta",
+    "bytes": 59,
+    "sha256": "c458a904a20d15c2e57c8fa0fc01b1413e0fc6060d70b33c29198362bd1ed5c1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/SceneCopy.cs",
+    "bytes": 13290,
+    "sha256": "9ca1eedae3dd26063c9c1d5e1f6da3f966532a476af8c71b1fb30fe9a43b680f"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Data/SceneCopy.cs.meta",
+    "bytes": 59,
+    "sha256": "56addf0984769354acd6e32e157ee7aa0d2839aa4d81185c3c311369eccfbd0b"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/GameRules.cs",
+    "bytes": 2969,
+    "sha256": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/GameRules.cs.meta",
+    "bytes": 59,
+    "sha256": "ae5ba2546c48a972d5dde7eeefae34f7cb02e90b38b7c7433f2a9936d41f231a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/KoiPondModel.cs",
+    "bytes": 7273,
+    "sha256": "70799c15f470491a86adc5e3944f8a288aea6362274f328dac4fc3459987fde5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/KoiPondModel.cs.meta",
+    "bytes": 59,
+    "sha256": "463d29ba8522a57b7f020aa0554e3d4233256a471e9fe442a1781cea47b1dc78"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/LayeredMapGenerator.cs",
+    "bytes": 25766,
+    "sha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/LayeredMapGenerator.cs.meta",
+    "bytes": 59,
+    "sha256": "3e2c219d9914fba55b5ca12161573ba179825e99fea3a73e61fdd3fddb8e3872"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/MapModel.cs",
+    "bytes": 32585,
+    "sha256": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/MapModel.cs.meta",
+    "bytes": 59,
+    "sha256": "cb22799a9a5e74f4d9ff49c0d9d5595436bd5ba8cc187bc7e4a0cddafe9e8409"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/RewardReceipt.cs",
+    "bytes": 560,
+    "sha256": "716e80ecdee107982f725e4768964575911d07b8ff7ac37da2998fc866f07cd1"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/RewardReceipt.cs.meta",
+    "bytes": 59,
+    "sha256": "2621c92160dcde9e5585d5713f106e1b96255683a2de872d6c56006ba2069119"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Rng.cs",
+    "bytes": 5470,
+    "sha256": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Rng.cs.meta",
+    "bytes": 59,
+    "sha256": "ac5e669950f5304747cba6376d6c1a862275da4c2ef1e6e985312ae7301f72e8"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/RunState.cs",
+    "bytes": 7114,
+    "sha256": "baa66ca2f0119f7bfd6c5df617ba3f77d23c64c3a94340d1f86751ef65fdcfce"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/RunState.cs.meta",
+    "bytes": 59,
+    "sha256": "b7f406074588e80fbf952a313a7f16e96aacf80ac3c3800320e8235fc0aab353"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Sdt.Core.asmdef",
+    "bytes": 349,
+    "sha256": "aaf418187e300323babccae7b2e0a20b1e528855c6e80c93ebdd8411839a712e"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/Sdt.Core.asmdef.meta",
+    "bytes": 166,
+    "sha256": "daf1f2c95bba90d6f209e173235053573d340fda2e87d2016c26736e70ece8d5"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/ShopOfferReceipt.cs",
+    "bytes": 255,
+    "sha256": "5088ca7446567ff33bbcf18362bd356af9a3f7e19ecc26bc9ee53efd6087ad4d"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot-round2/ShopOfferReceipt.cs.meta",
+    "bytes": 59,
+    "sha256": "6307c78fb001d93aa9c5a8c0c810402d7468913b32bc17fa45b4a66030125203"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot/Battle.meta",
+    "bytes": 172,
+    "sha256": "337aa116f406c2ca956437b31fcae195a31a04ac801cfef5b8d0ca656aa55586"
+  },
+  {
+    "path": "_planning/migration-1029/current-core-independent/snapshot/Battle/BattleActorPresentation.cs",
+    "bytes": 6879,
+    "sha256": "7750ea6cc6ced409f46c22525562b94afe5b402a0e63316dc8b123ff9ccd575a"
+  }
+]

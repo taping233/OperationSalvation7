@@ -1,0 +1,99 @@
+{
+  "keys": [
+    "[\"a\",\"red\",null]",
+    "[\"b\",\"blue\",null]"
+  ],
+  "pocket": {
+    "keptCards": [
+      {
+        "card": {
+          "id": "a",
+          "name": "同名",
+          "rarity": "稀有",
+          "variantKey": "red"
+        },
+        "count": 1
+      }
+    ],
+    "keptCount": 1,
+    "ruleLost": 3,
+    "lostCount": 5
+  },
+  "receipt": {
+    "version": 1,
+    "outcome": "extract",
+    "bossKilled": false,
+    "layersReached": 2,
+    "actions": 5,
+    "firstExplore": {
+      "moves": 2,
+      "xp": 36
+    },
+    "savedCards": [
+      {
+        "card": {
+          "id": "a",
+          "name": "同名",
+          "rarity": "稀有",
+          "variantKey": "red"
+        },
+        "count": 1
+      }
+    ],
+    "memento": {
+      "version": 1,
+      "trail": [
+        {
+          "layer": 1,
+          "name": "第一层",
+          "count": 1
+        },
+        {
+          "layer": 2,
+          "name": "第二层",
+          "count": 1
+        }
+      ],
+      "moments": [
+        "你唤醒了污染祭坛。",
+        "途中遇见「测试事件」。"
+      ],
+      "representative": {
+        "name": "同名",
+        "count": 1
+      }
+    },
+    "netTake": {
+      "cardsStashed": 1,
+      "pocketKept": 1,
+      "wood": 3,
+      "rations": 2
+    },
+    "losses": {
+      "lostCount": 3,
+      "lostNotable": [
+        {
+          "name": "同名",
+          "rarity": "史诗",
+          "count": 2
+        }
+      ],
+      "pocketLost": 5,
+      "pocketRuleLost": 3
+    },
+    "runCoins": 9,
+    "durationSec": 125
+  },
+  "xp": [
+    20,
+    36
+  ],
+  "rolls": [
+    0.32569866464473307,
+    0.8922398111317307,
+    0.9788459048140794,
+    0.4766549381893128,
+    0.4376669304911047,
+    0.34298580093309283
+  ]
+}

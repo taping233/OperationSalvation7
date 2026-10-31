@@ -1,0 +1,571 @@
+{
+  "review": "10 independent native static visual review",
+  "decision": "evidence-limited",
+  "staticScopeResult": "No additional confirmed discrepancy in the supplied 35 scene captures; review9 marker family visually resolved. Whole-source effect/input equivalence not established from constructed static frames.",
+  "findings": [],
+  "process": {
+    "method": "Sdt.Editor.DesktopVisualValidation.Run",
+    "pid": 31404,
+    "startedAt": "2026-10-29T23:00:02.7404949Z",
+    "endedAt": "2026-10-29T23:01:36.5937752Z",
+    "exitCode": 0,
+    "timedOut": false,
+    "inputsUnchanged": true,
+    "changedInputs": [],
+    "sourceCount": 331,
+    "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-visual-10"
+  },
+  "result": {
+    "passed": true,
+    "renderGenerationPassed": true,
+    "sourceEffectAcceptance": "pending-independent-review",
+    "input": "background-offscreen-native-render; constructed fixture and programmatic page/button calls; no OS input",
+    "referenceWidth": 1920,
+    "referenceHeight": 1080,
+    "frames": 35,
+    "dataDirectory": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-29-unity-desktop\\current-visual-10\\profile-20261029230014"
+  },
+  "failurePresent": false,
+  "viewedScenes": 35,
+  "viewedAuxiliary": 1,
+  "missingScenes": [],
+  "review9Closure": {
+    "id": "R9-01",
+    "decision": "resolved in actual new frames",
+    "extractDone": "extract-done.png x140..216,y989..1007: cyan check icon and 已保存; literal marker absent.",
+    "leaveMenu": "leave-menu.png x1066..1208,y638..663: save icon before 保存并退出; literal marker absent.",
+    "sourcePaths": [
+      "Assets/Scripts/Sdt.UI/Kit/CurrentRunHudView.cs:18",
+      "Assets/Scripts/Sdt.UI/Screens/Run/CurrentSettlementView.cs:14-20",
+      "Assets/Scripts/Sdt.UI/Screens/Run/CurrentSettlementReport.cs:51",
+      "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentLeavePage.cs:42"
+    ]
+  },
+  "review8Closure": "Character full head/feet, five slot card CTA/status and photo 已存档 stay within viewport; no recurrence in round10 frames.",
+  "additionalFrames": [
+    {
+      "frames": [
+        "title.png",
+        "title-low.png",
+        "title-high.png"
+      ],
+      "observation": "Three frames retain same control positions and legible labels. High shows grain/mist layering; balanced/low smoother. No newly confirmed visual fault.",
+      "source": [
+        "game/css/performance-settings.css:20-24",
+        "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeAmbient.cs:114-145"
+      ],
+      "limit": "Static images do not establish animation rate, particle timing, GPU performance, preference persistence or all wallpaper states."
+    },
+    {
+      "frames": [
+        "reading-log.png",
+        "reading-confirmation.png"
+      ],
+      "observation": "Large log and confirmation body remain legible inside their panels, with return/confirm actions visible.",
+      "source": [
+        "game/css/review-ui.css:21",
+        "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSecondaryViews.cs:77",
+        "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSettingsDialogs.cs:40",
+        "Assets/Scripts/Sdt.UI/Kit/CurrentReadingPreference.cs:44-49"
+      ],
+      "consumerBoundary": "Original CSS targets log/confirmation p, rule tips/term tip and cardZoom hsc-desc. This is not a universal global font enlargement; only shown consumers reviewed."
+    },
+    {
+      "frames": [
+        "reading-card-zoom.png"
+      ],
+      "coordinates": "Card body x825..1098,y607..731; visible text ends mid-sentence at viewport bottom",
+      "observation": "Long 血毒双镖 description does not all fit first viewport at 26px; source and native code both explicitly supply an internal scrolling description region, so initial frame alone is not evidence of irrecoverable missing text.",
+      "source": [
+        "game/css/card-layout-selected.css:105-110",
+        "game/css/card-layout-selected.css:286",
+        "Assets/Scripts/Sdt.UI/Screens/Run/CardVisual.cs:8",
+        "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardScene.cs:131-135",
+        "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs:94-103",
+        "Assets/Scripts/Sdt.UI/Kit/CurrentReadingPreference.cs:21-26"
+      ],
+      "pendingEvidence": "Wheel/raycast routing, bottom line visibility and return-to-top require专项 evidence from Root. This review has not operated a scroll input. Thin scrollbar was not visible in this captured frame; Root reports later source-aligned thin affordance added after round10."
+    }
+  ],
+  "scopeNotes": [
+    "All 35 scene PNGs and auxiliary atlas actually viewed through view_image, not inferred from result.passed.",
+    "One reference size 1920x1080; programmatic fixtures and page/button calls; no OS or hardware input by reviewer.",
+    "Current source imports/selector contracts from prior current-source review reused where stable. Related source SHA recalculated and compared to round10 capture; post-capture edits shown separately.",
+    "Root source-baseline-check.json records unchanged 794 runtime source bytes; reused as a separately attributed check, not a browser computed-style baseline.",
+    "No same-state Vite pixel baseline; no complete page-family state or animation/persistence proof.",
+    "No new P1 or P2 confirmed in the reviewed static scope. Existing source scrolling needs functional evidence rather than assuming either failure or success from clipped first viewport."
+  ],
+  "sourceBaselineCheck": {
+    "checkedUtc": "2026-10-30T07:02:30.635116+08:00",
+    "passed": true,
+    "scope": "Recorded current runtime-source JS/CSS/JSON/HTML file bytes, not asset files or new unrecorded imports",
+    "inputCount": 794,
+    "changes": []
+  },
+  "images": [
+    {
+      "name": "abandon.png",
+      "sha256": "10d52de15bd0ebd90a8f0fd77ba2909f55bb73002bcea1e18d2a4e9f87d82b85",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "achievements.png",
+      "sha256": "ca4074c8813ea55c35359d56598f8a80f980f456582c5df98a4c0bb897691cfb",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "archive.png",
+      "sha256": "7df5566c66d2edc3ea731612d52b7856a236b61524b876f09394a680f30c6f67",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "bag.png",
+      "sha256": "75a78209cab3f764dc21d5a6fa61368e5383309d0678e9a136dd095699cdace9",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "battle.png",
+      "sha256": "484e1f8562dc07d3c982f9f3a243b9a09091236b44f41e18d71549557f49f72b",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "cards-and-icons.png",
+      "sha256": "a29af83e54d405f263a90c667af7ecde6c37a5b8feaef027ef5d7479dc12b7bd",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "character.png",
+      "sha256": "61ad1370a90305a0fda6967f862414b6fd4cdf48d70b822f4f03a92d22debf57",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "courtyard.png",
+      "sha256": "da1e13cbc3452abe8d792bd1fb5fda6ffec5d21940582bad991fc8275e5d2146",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "death.png",
+      "sha256": "b9e5656f85ec1afbfc00e8a6b8d8f24f33735be3742afaf76c70c4a5fc7d4615",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "departure.png",
+      "sha256": "e7f1eee08a4ea327b291506e315c1137c617b3446a3931bcb300b6b31133d8d9",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "entry.png",
+      "sha256": "d643d0c8fc154de34d470c01fd96f23f4c9b37c46c1b1166176adec93f41fdd9",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "event.png",
+      "sha256": "f034ea07ff61ace352f66c72b3d97277a2cf5a114aaf6349e9b32102d8c34fff",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "extract-done.png",
+      "sha256": "bd9af0d26a7aeacc70fe93dbf94eb053d210d9a513385803501c238b0c6fed9c",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "extraction.png",
+      "sha256": "30c76c1128911af244aaab3739e15df0e9e3066cddaec793c8c354e7b33a53f4",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "facilities.png",
+      "sha256": "df2bdef0af373ed711d86121df1ba2438556f988ac5b47c1c0c22ce55d35da0c",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "fire.png",
+      "sha256": "f7e79ae349573214de3948159d23366bd2ee4b29e5d9862c0a47e716bd69bd0f",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "hub.png",
+      "sha256": "9fe2c5b7f28b832c857985aae70d298648d6076043becd360352ff212722d095",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "icons-updated.png",
+      "sha256": "9247b2eca770efe896a02aaa2a71ad8fdd1248a1adc35e0c8905dcfd94f99af4",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "leave-menu.png",
+      "sha256": "55108d0b39f0beee41a64fe14fba7d12a71a09f2409261c0d68188bddcc0a7b5",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "library.png",
+      "sha256": "31a4a9e7c6084928562ef7b3200c7e1c16403d803200b4efdf38a05108eaa253",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "logistics.png",
+      "sha256": "f104b23a42d4129a50935c580e4de62637b5ca0069a5db04f63872f45ee01f7e",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "map-atlas.png",
+      "sha256": "a53b88e363756dcd6d9c53df4400e040bdaa42971e66a2b0b7773f48626e89f8",
+      "viewed": true,
+      "auxiliary": true
+    },
+    {
+      "name": "map.png",
+      "sha256": "1d7672bf60dad742aa694fda7c18347f35acb03f367a86cc4aecca9516bb6b20",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "personnel.png",
+      "sha256": "49a0af9dd2e0a1af714c5c2f495cc5ce371f9e3be13cda9d420f4fb607dc040d",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "photo-detail.png",
+      "sha256": "9d8bdbc022726386023c8d90ac74b85edc342f20bb18c54c969008e954fb1fbd",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "preparation.png",
+      "sha256": "7a13329f45775240e1833ad28ac76b5897a46735a97c18c846d9830ab499e6dd",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "reading-card-zoom.png",
+      "sha256": "d6ebb475b914e491486d40b8f4faeba8ac77cbadaec0832f2eb47290820247f5",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "reading-confirmation.png",
+      "sha256": "a66bdddb69de4001f483ab4270c7d502f4fb890e1462a33f9a6630956f473d83",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "reading-log.png",
+      "sha256": "2834ba8457db8fe5e28ead64cf3f7399b24e9a858ed2d73ecf9cb53402f4ce29",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "rewards.png",
+      "sha256": "05267447bfd01e2e4e34780d38acdbd50830cfa8d753e7bb0607dee5506568da",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "settings.png",
+      "sha256": "3afb1dcd2c168d511c81b22cce81256946536197e3ae124b2f379a8c20f069fa",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "slots.png",
+      "sha256": "a08d4f2ce262bf045f4c6bf04d146f6081e7677479eb7b75145d2dc7fe2b7000",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "title-high.png",
+      "sha256": "04649448b12c2f1e2bbbd420cee39ac97deaeffe70b7ee49306d86160a3c78db",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "title-low.png",
+      "sha256": "44292f9fe42d8757e40706f292749292322e76fd9de0b0f1faff653bf9095dfc",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "title.png",
+      "sha256": "5edc46cfdc555a033869f8dd79aca046c2ec17471cb27c0c72bf3feeedd9566a",
+      "viewed": true,
+      "auxiliary": false
+    },
+    {
+      "name": "trade.png",
+      "sha256": "32a9bd45728e42c85ea48376efc8742828a3d9fabd1f45c15cf3ca2c04128392",
+      "viewed": true,
+      "auxiliary": false
+    }
+  ],
+  "relatedSourceSha256": [
+    {
+      "path": "搜打撤/game/css/card-layout-selected.css",
+      "currentSha256": "16215e25286c401718703e5939e55dcad563de2aa2c631e08f4d680215fa871c",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/extraction-rewards.css",
+      "currentSha256": "c9894114a4f55a1594905445e65543d39c352902ec45bdfd67b76ebc88449299",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/overlays.css",
+      "currentSha256": "d862d1dfb82a8c376473b07762daf8bcb274ff5e7d599ee516acc65b1f97546d",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/page-slot-select.css",
+      "currentSha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/performance-settings.css",
+      "currentSha256": "ca1d7281689dab575ddeb825e4dca716577a37233964eed0e957b6d22ceb9c96",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/photo-studio-unified.css",
+      "currentSha256": "9920efa17a5360610ee393b22c7f1cd59cf0639029fe5ca99e5aeee03cdcee23",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/review-ui.css",
+      "currentSha256": "911bd4c7a4d50faeefe08ab3babdea46f5c91dbf18accb6e68ccb465590d9fc9",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/roster-departure-v2.css",
+      "currentSha256": "be88e89679b9d8f82238a5821fbe0caafc96efa9bd76f36a31a8ee271bd5f156",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/roster-reference.css",
+      "currentSha256": "01bc6f688eab809fcc6e0e21194141fb612eca011364e6fcd1098b4f300000fe",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/settlement-report.css",
+      "currentSha256": "0c47e22e8717db5d94fb452d720101569f2ba9dd64ace663d97552d11727d27b",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/title-achievements.css",
+      "currentSha256": "4cccbe4c131cfef23682ef4a4a85e698bc9b09a1957444506399e6435be8a3b8",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/css/winter.css",
+      "currentSha256": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/index.html",
+      "currentSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/core/icons-bitmap.js",
+      "currentSha256": "c0efeda56e5fc74caa2dcbcd2405ea681af33129cdfc9b0658b7dda050edcc1e",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.cardslib.page.js",
+      "currentSha256": "26ee26b09d0407c618e68c45af4c9995866722bec1d3495cdeccdae47a4a56c4",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.depart.js",
+      "currentSha256": "2c637b4d4acfbb6dfd0f31e737aee6d38dcb9203ed3c330cab2dac44b52dc09e",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.js",
+      "currentSha256": "a8a10366a8caf2fa9f4c99c320597bc5de91f4c58169400c4c8ef9cf9bb1d08e",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/main.js",
+      "currentSha256": "f4bb40999b217c7c170cde55ee77fbbaac434365aff90dc9eeb1a0489403ebde",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/ui/card-zoom-content.js",
+      "currentSha256": "12edab3f251422bc592d23d5246d39665a354593afe6e460bc66027dd5b20f31",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/ui/extraction-rewards-view.js",
+      "currentSha256": "10b9fcf20e77653e506895bbb49031fed31dd4c42e823db096adc6a9bf1ab0cf",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/ui/menu-leave.js",
+      "currentSha256": "990177a9afaa2f4c2571a13f41e4084a494fac109e64dd6c134e6cc2e6842de6",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/ui/menu-settings.js",
+      "currentSha256": "d8d1c0a70def84c61e7f46bfb18ec3a81adaa479238558febe84001a31212408",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "搜打撤/game/src/ui/settlement-report.js",
+      "currentSha256": "4eba53111674e4b46ff72f1d8347ea1a3b443c7ed027dc182bc96d5846dbcd26",
+      "capturedSha256": null,
+      "currentMatchesCapture": null
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Kit/CurrentReadingPreference.cs",
+      "currentSha256": "f30e627f82c4ed4dd05608f636dc1436b140cb89d70f0a66618498014ea6d864",
+      "capturedSha256": "f30e627f82c4ed4dd05608f636dc1436b140cb89d70f0a66618498014ea6d864",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Kit/CurrentRunHudView.cs",
+      "currentSha256": "151acb85cbafad309d1e6265e568cd1921ff6f5de9d4b6d84abaaba1aa408b6c",
+      "capturedSha256": "151acb85cbafad309d1e6265e568cd1921ff6f5de9d4b6d84abaaba1aa408b6c",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Kit/InlineIconParser.cs",
+      "currentSha256": "7df811ec8b159e914d0ace3968853697190c99ec741e666458aa962c532ac82d",
+      "capturedSha256": "7df811ec8b159e914d0ace3968853697190c99ec741e666458aa962c532ac82d",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Kit/InlineIconText.cs",
+      "currentSha256": "d0ba70e5a63e1be7c5f9d42d9f2c720eb5e01e89a3c3898e178e0bbdd2596e5c",
+      "capturedSha256": "d0ba70e5a63e1be7c5f9d42d9f2c720eb5e01e89a3c3898e178e0bbdd2596e5c",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Battle/BattleSecondaryViews.cs",
+      "currentSha256": "c629351af2004ff75536732a039a95d4bd8a92ac3179b6cf5ab8942ce274580c",
+      "capturedSha256": "c629351af2004ff75536732a039a95d4bd8a92ac3179b6cf5ab8942ce274580c",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentAchievementPage.cs",
+      "currentSha256": "cf7a9db6420eedb062bacd17f1e9021c9bf2d304f59f5566a4fb06f1a87684a2",
+      "capturedSha256": "cf7a9db6420eedb062bacd17f1e9021c9bf2d304f59f5566a4fb06f1a87684a2",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentArchiveUi.cs",
+      "currentSha256": "3626949c1f0ce41e32fd331ade3a8061c9e2466f301b4aa10a6a3824f39c9923",
+      "capturedSha256": "3626949c1f0ce41e32fd331ade3a8061c9e2466f301b4aa10a6a3824f39c9923",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentHomeAmbient.cs",
+      "currentSha256": "377c95980cd210ebbeaf4d67fd2889d236d9fbce492f6a418ca647bfb3db08ca",
+      "capturedSha256": "377c95980cd210ebbeaf4d67fd2889d236d9fbce492f6a418ca647bfb3db08ca",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentLeavePage.cs",
+      "currentSha256": "af1667c621bc59af7de61e340e65a6b5acb6dc17394fc01259ac25184acb4538",
+      "capturedSha256": "af1667c621bc59af7de61e340e65a6b5acb6dc17394fc01259ac25184acb4538",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSettingsDialogs.cs",
+      "currentSha256": "93ff2489417bbb70c7d5c7a20a22817bd9ab786a87b883fe51c996cd82b460ac",
+      "capturedSha256": "93ff2489417bbb70c7d5c7a20a22817bd9ab786a87b883fe51c996cd82b460ac",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotPage.cs",
+      "currentSha256": "a1ac38ae8719742ea6d0d452431b37fa0803a21554904980cff407c893b3dfa1",
+      "capturedSha256": "a1ac38ae8719742ea6d0d452431b37fa0803a21554904980cff407c893b3dfa1",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs",
+      "currentSha256": "1deadfc023e989098a74fb334fab757907cf9709d8a2cd9b34ac36dc321fb38a",
+      "capturedSha256": "1deadfc023e989098a74fb334fab757907cf9709d8a2cd9b34ac36dc321fb38a",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs",
+      "currentSha256": "d1733f7dd87574e4e81dcaeaf523189716faf1b07392067a990532a7bd0884d5",
+      "capturedSha256": "71d2aa711565729cc4c9be71d744b8d7959fd576bede7d136f09d39fc2c203fa",
+      "currentMatchesCapture": false
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CardVisual.cs",
+      "currentSha256": "6b110106d7c56dcad3c1ba589309af4b5e97d22afc4be46bda705d8344a04c9a",
+      "capturedSha256": "6b110106d7c56dcad3c1ba589309af4b5e97d22afc4be46bda705d8344a04c9a",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.cs",
+      "currentSha256": "382a835892cf24fcc8628f6d5b60d1af5c8966e1dc540fa488d4a79c8bc2ce89",
+      "capturedSha256": "382a835892cf24fcc8628f6d5b60d1af5c8966e1dc540fa488d4a79c8bc2ce89",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardScene.cs",
+      "currentSha256": "5fb8576fd808e8fb0c2aead3eca2d629c15b72277ebd2f0a3aaca14220e36819",
+      "capturedSha256": "5fb8576fd808e8fb0c2aead3eca2d629c15b72277ebd2f0a3aaca14220e36819",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CurrentSettlementReport.cs",
+      "currentSha256": "6cccfe90ad8fd7c0f4b0b990f9d1b830b6b6e355af3ae3a99c12a95bca9fbd7f",
+      "capturedSha256": "6cccfe90ad8fd7c0f4b0b990f9d1b830b6b6e355af3ae3a99c12a95bca9fbd7f",
+      "currentMatchesCapture": true
+    },
+    {
+      "path": "SoudacheUnity/Assets/Scripts/Sdt.UI/Screens/Run/CurrentSettlementView.cs",
+      "currentSha256": "c414b2450ddb06fec8ce26df1a8b3e8ee43bc8bfa1c1a6ac64d5221b2a49acdd",
+      "capturedSha256": "c414b2450ddb06fec8ce26df1a8b3e8ee43bc8bfa1c1a6ac64d5221b2a49acdd",
+      "currentMatchesCapture": true
+    }
+  ]
+}

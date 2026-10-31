@@ -1,0 +1,669 @@
+{
+  "tested": 129,
+  "identical": 128,
+  "mismatches": [
+    {
+      "id": "cmtn1r10xnl1",
+      "differences": [
+        {
+          "path": ".after.status.discoverPlus",
+          "source": 1
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "id": "starter-emergency-bandage",
+      "reason": "bag"
+    },
+    {
+      "id": "tt-copper",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt-keys-bunch",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt-rations",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt-gold",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt-econpack",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt-silver",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt-key",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt-crystal",
+      "reason": "bag"
+    },
+    {
+      "id": "tt-key-one",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt-token-gold",
+      "reason": "bag"
+    },
+    {
+      "id": "tt-jinchuangyao",
+      "reason": "bag"
+    },
+    {
+      "id": "tt-wood",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt-wood-lots",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt2-apollo",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt2-wreck",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt2-treasuremap",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt2-jianghu",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt2-turtlearmor",
+      "reason": "requires-materials"
+    },
+    {
+      "id": "tt3-life-arrow",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt3-dig-treasure",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt3-frostfall",
+      "reason": "complex-op:handSelect"
+    },
+    {
+      "id": "tt3-mystery-potion",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt3-blue-potion",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3-treasure-hunt",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt3-python-potion",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3-houyi-potion",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3-iceheart-potion",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3-demon-potion",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3-magic-lamp",
+      "reason": "complex-op:execute"
+    },
+    {
+      "id": "tt3-mind-potion",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3-turnabout-potion",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3-mixed-potion",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3sp-devour",
+      "reason": "complex-op:execute"
+    },
+    {
+      "id": "tt3sp-doom",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3sp-silverthorn",
+      "reason": "requires-materials"
+    },
+    {
+      "id": "tt3sp-magicoil",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt3sp-bloodstorm",
+      "reason": "requires-materials"
+    },
+    {
+      "id": "tt3-flux-slash",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt3-immortal-blade",
+      "reason": "boss-setup"
+    },
+    {
+      "id": "tt3-diamond",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt3-chaos-eye",
+      "reason": "boss-setup"
+    },
+    {
+      "id": "tt3-savior-elixir",
+      "reason": "bag"
+    },
+    {
+      "id": "tt3-azure-sword",
+      "reason": "complex-op:release"
+    },
+    {
+      "id": "tt3-fate-wheel",
+      "reason": "complex-op:extraTurn"
+    },
+    {
+      "id": "tt3-crimson-pouch",
+      "reason": "complex-op:handSelect"
+    },
+    {
+      "id": "tt3-wolf-bow",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt3-reverse-bow",
+      "reason": "complex-op:release"
+    },
+    {
+      "id": "tt3eq-mistbox",
+      "reason": "complex-op:swapDiscoverCosts"
+    },
+    {
+      "id": "tt3-garnet-marble",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt3-wood-bundle",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt3-ration-double",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt4-shine-token",
+      "reason": "bag"
+    },
+    {
+      "id": "tt4-smoke-bomb",
+      "reason": "bag"
+    },
+    {
+      "id": "tt4-woodify",
+      "reason": "bag"
+    },
+    {
+      "id": "tt6-demondeal",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt6-bandits",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt6-mystery",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt6-goldmine",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt6-goldhammer",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt6-relief",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt6-airdrop",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt6-chestdraw",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt6-systemsupply",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt7-goldencicada",
+      "reason": "complex-op:consumeHand"
+    },
+    {
+      "id": "tt7-thundergrudge",
+      "reason": "requires-materials"
+    },
+    {
+      "id": "tt7-ironphalanx",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt7-bloodpoison",
+      "reason": "needs-input:pick"
+    },
+    {
+      "id": "tt7-holyheal",
+      "reason": "requires-materials"
+    },
+    {
+      "id": "tt7-provoke",
+      "reason": "needs-input:pick"
+    },
+    {
+      "id": "tt7-stratagem",
+      "reason": "complex-op:castStored"
+    },
+    {
+      "id": "tt7-bladebloom",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt7-recruit",
+      "reason": "complex-op:summon"
+    },
+    {
+      "id": "tt7-twinfireball",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt7-meteorstrong",
+      "reason": "requires-materials"
+    },
+    {
+      "id": "tt8-hero-sword",
+      "reason": "complex-op:castDrawn"
+    },
+    {
+      "id": "tt8-hero-ranger",
+      "reason": "complex-op:insertCards"
+    },
+    {
+      "id": "tt8-hero-warrior",
+      "reason": "complex-op:transform"
+    },
+    {
+      "id": "tt8-hero-priest",
+      "reason": "complex-op:fillHand"
+    },
+    {
+      "id": "tt8-hero-warlock",
+      "reason": "complex-op:insertCards"
+    },
+    {
+      "id": "tt8-hero-mage",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt8-hero-summoner",
+      "reason": "complex-op:randomBlessing"
+    },
+    {
+      "id": "tt8-hero-sealer",
+      "reason": "requires-materials"
+    },
+    {
+      "id": "tt8-archdemon",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "foe-rager",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-deserter",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-greedy_imp",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-swaggerer",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-tin_mute",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-heavy_hammer",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-cultist",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-fake_apothecary",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-camo_sniper",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-infantry",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-archer",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-bandit",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-cavalry",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-orc_jav",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-wolf_rider",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-orc_axe",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-fire_el",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-water_el",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-esper_crow",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-esper_candle",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-grass_el",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-esper_silence",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-esper_echo",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-dragon",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-boss_general",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-boss_orc",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "foe-boss_elem",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "cmtn0pbkmnvc",
+      "reason": "complex-op:execute"
+    },
+    {
+      "id": "cmtn1epgt20j",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "cmtn2jc142dj",
+      "reason": "complex-op:copyRandom"
+    },
+    {
+      "id": "cmtn6ulm4boj",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "cmtn79743r2n",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "cmtn7err0a7",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt7-naturestaff",
+      "reason": "complex-op:handSelect"
+    },
+    {
+      "id": "tt7-talisman",
+      "reason": "boss-setup"
+    },
+    {
+      "id": "tt7-imitate",
+      "reason": "unprepared-runtime:rejected",
+      "detail": {
+        "code": "CARD_UNPLAYABLE",
+        "message": "【不变应万变-改】无法打出：先打出一张武术牌，使本牌变形"
+      }
+    },
+    {
+      "id": "tt8-healplus",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt8-energycap",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt8-nofocus",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt8-curseimmune",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "cmtmvq6ss84l",
+      "reason": "bag"
+    },
+    {
+      "id": "cmtn125e1nk0",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "cmtn1gfhczzj",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "cmtn1i64j7y7",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "cmtn1ntxzoc4",
+      "reason": "complex-op:registerInfusionBonus"
+    },
+    {
+      "id": "cmtn1p9vb5au",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "cmtn1wnhhym",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "cmtn28jv33wx",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "cmtn6bge52qt",
+      "reason": "bag"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "cc-dual-wield",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "cc-lava-blast",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "cc-mana-surge",
+      "reason": "complex-op:castRandomSpells"
+    },
+    {
+      "id": "cc-rot-seed",
+      "reason": "complex-op:markEnemy"
+    },
+    {
+      "id": "pet-egg",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt8-abyss-sovereign",
+      "reason": "complex-op:summon"
+    },
+    {
+      "id": "ev19-vital",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "ev19-fireballs",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "ev19-classchest",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "ev19-recode",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "ev19-potions",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "ev19-arrows",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "ev19-gamble",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "reason": "no-simple-entry"
+    },
+    {
+      "id": "tt12-raydragon",
+      "reason": "requires-materials"
+    },
+    {
+      "id": "tt12-hitechrd",
+      "reason": "complex-op:discover"
+    },
+    {
+      "id": "tt12-felguard",
+      "reason": "requires-materials"
+    },
+    {
+      "id": "tt12-basicdev",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt12-magicfind",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt12-breakthrough",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt12-raygun",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt13-spring",
+      "reason": "complex-op:restoreHeroSkill"
+    },
+    {
+      "id": "tt13-magazine",
+      "reason": "complex-op:acquire"
+    },
+    {
+      "id": "tt13-mind-control",
+      "reason": "complex-op:recruitEnemy"
+    },
+    {
+      "id": "tt13-soul-contract",
+      "reason": "complex-op:markEnemy"
+    },
+    {
+      "id": "tt13-stellar-divination",
+      "reason": "complex-op:discoverCopies"
+    },
+    {
+      "id": "tt13-chaos-deck",
+      "reason": "complex-op:consumeHand"
+    }
+  ]
+}

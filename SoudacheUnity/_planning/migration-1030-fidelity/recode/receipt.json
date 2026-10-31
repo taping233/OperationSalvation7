@@ -1,0 +1,26 @@
+{
+  "sourceFiles": {
+    "game/src/ui/event-recode-result.js": "996e2de502674b5f0aef87911af7127703552bcbef7dc7a1eb5f65f771054d29",
+    "game/src/run/game.run.events.js": "2bce72a8cf8cf0526f7d56f2b8f8efb1bc4573b793eacf3344cf7301a5433e1e",
+    "game/css/event-recode-result.css": "4e7f80828d38b7c7499a6f487859d6d831fdfcfb4892035e70aebd80670be82d",
+    "game/css/illustrated-node.css": "7b2dbdf3839960ac91f206297b6908faf413437f47894a7322f50b0e11e51530",
+    "game/src/ui/node-scene-view.js": "e22d43081d8eaa5eb77b6ccf0f644ce6319e8fdbb0cf512435e377417928760b",
+    "game/src/ui/illustrated-node.js": "ad43826915539ab343fc388d731ce5b044294991b8ceb3f7519470d5d8b12aa8",
+    "tests/event-recode-selection-continuity.test.js": "bfae69de110aaef3b435b03af2ec5ad79f5991a82bde1881a9da51dc398af25d",
+    "tests/event-settlement-unification.test.js": "52855cbac8ff03360c32aed375e5dbc2e031032e0214cd36f99193842e92f1ac"
+  },
+  "nativeFiles": {
+    "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogRecode.cs": "1da447460bfb84e74f71ac04443838ed2b9c89a85a7e740b63204768f24d0f81",
+    "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogScreen.cs": "2b48ed3a0e503ea89828efc99c87939331f2d577f229d738d60f6fc1b4128625",
+    "Assets/Scripts/Sdt.UI/Screens/Run/CurrentIllustratedNode.cs": "ab00adae18d58a0ec373572c42e99adeab4c55c3f1941512d1cec3d404715248"
+  },
+  "typecheck": "Sdt.UI production snapshot: 0 errors; 10 pre-existing warnings",
+  "sourceDomExit": 1,
+  "sourceTests": {
+    "numPassedTests": 26,
+    "numFailedTests": 2,
+    "success": false
+  },
+  "sourceTestGap": "Two continuity tests query retired selectors. Source production/tests read-only; all 26 settlement tests passed.",
+  "nativeRuntime": "pending root consolidated native verification; Unity not launched"
+}

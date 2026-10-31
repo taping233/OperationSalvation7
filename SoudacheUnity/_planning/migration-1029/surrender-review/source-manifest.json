@@ -1,0 +1,245 @@
+{
+  "scope": "isolated headless execution, native entry prepared",
+  "generatedHostSha256": "472c250cf1cd8b7e0ec09c11f298a99dc58cf9ef9ab42c59494046622be9ed04",
+  "stableDuringRun": true,
+  "files": [
+    {
+      "sha256": "76a8b4673224c4d6d9f8c6786c0f6689d534c76c6f65c2fd9f27ad765b53cd54",
+      "path": "Assets/Scripts/Sdt.Boot/BattleBridge.cs"
+    },
+    {
+      "sha256": "e711094c29ee7dc777691c1b1563b1e788cf8b6bdbfad20937594db345979485",
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSurrenderButton.cs"
+    },
+    {
+      "sha256": "4f3aa540eed7054ecfd54919e9cce75ea53fca6ddd6b3e599de73e3a0ff6a2f2",
+      "path": "Assets/Editor/DesktopSurrenderValidation.cs"
+    },
+    {
+      "sha256": "b65bf1f89248eb4eaa4a13e83c141d2c73081f3a97fc38943baa6891150c8fda",
+      "path": "Assets/Scripts/Sdt.Core/Cards.cs"
+    },
+    {
+      "sha256": "4df02fa3c5b0279ae7c7d3543bafba6e0b7097786b7da4b3293891ba17fb7470",
+      "path": "Assets/Scripts/Sdt.Core/CardsExtras.cs"
+    },
+    {
+      "sha256": "f7f33fda167b7275bcca4d26e25f0a6345087e0cc3c7f84e1dd3edebfae195a6",
+      "path": "Assets/Scripts/Sdt.Core/CharacterTable.cs"
+    },
+    {
+      "sha256": "0b09603d4ec67651801b5b85ed925144f14bb7a7a58a0e89d0a8e2f68a97e87b",
+      "path": "Assets/Scripts/Sdt.Core/ChestLoot.cs"
+    },
+    {
+      "sha256": "3e8969eefc4f88df9f1162df3784326c73a23e649a863ac2bb32ba32a63483cd",
+      "path": "Assets/Scripts/Sdt.Core/CombatResolver.cs"
+    },
+    {
+      "sha256": "287c8d99bc7d852ef8273e921867204bc2e0b319f17c1b43c329ea08a938b800",
+      "path": "Assets/Scripts/Sdt.Core/CurrentMapData.cs"
+    },
+    {
+      "sha256": "a7e4be390cb6a929c5655627b7d6e4fde20a6342499037ef8e4a2bf2e5e9c7ed",
+      "path": "Assets/Scripts/Sdt.Core/GameRules.cs"
+    },
+    {
+      "sha256": "70799c15f470491a86adc5e3944f8a288aea6362274f328dac4fc3459987fde5",
+      "path": "Assets/Scripts/Sdt.Core/KoiPondModel.cs"
+    },
+    {
+      "sha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3",
+      "path": "Assets/Scripts/Sdt.Core/LayeredMapGenerator.cs"
+    },
+    {
+      "sha256": "0cf679afa6cde6096338ac1fc18a57ab7eafc58a86b9f5e2a4035ca9a403eba9",
+      "path": "Assets/Scripts/Sdt.Core/MapModel.cs"
+    },
+    {
+      "sha256": "e8f1af7b9ccbf5cc5aba2ecb299b06225ccbf71b6127dde48fd6b05bd9a0b5dd",
+      "path": "Assets/Scripts/Sdt.Core/RewardReceipt.cs"
+    },
+    {
+      "sha256": "e81d33b2cb692df9070696b73d53eb5119a70bbb870e2918a30b9e442c1f9e1a",
+      "path": "Assets/Scripts/Sdt.Core/Rng.cs"
+    },
+    {
+      "sha256": "4b024199e24e04fa0003ff4f9d2e8cd7d5326733cb4782a617cf4e94f05e9d02",
+      "path": "Assets/Scripts/Sdt.Core/RunState.cs"
+    },
+    {
+      "sha256": "5088ca7446567ff33bbcf18362bd356af9a3f7e19ecc26bc9ee53efd6087ad4d",
+      "path": "Assets/Scripts/Sdt.Core/ShopOfferReceipt.cs"
+    },
+    {
+      "sha256": "108472d18789fcb1002a5cad5ffc04981c6e24fc87419c487477a51f082029a3",
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs"
+    },
+    {
+      "sha256": "ca3046268a4e443dfb0d2fcde748318f0b16dca47924f53bcc6ef15ea530f2ed",
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleRestartCheckpoint.cs"
+    },
+    {
+      "sha256": "c277d73f0b2071bedd26123f76a3ea3f625a1fa07c1d68e57a7af78f45d4ffee",
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleRules.cs"
+    },
+    {
+      "sha256": "78b60049747caf9708a77325ec49421107926489fed5ea0fb4c651939c4fc62d",
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs"
+    },
+    {
+      "sha256": "a3073fbf236a1a3bb2297ccd12b7c0fde24ad6faf67316438d6ec9b81f154af5",
+      "path": "Assets/Scripts/Sdt.Core/Battle/CurrentBattlePools.cs"
+    },
+    {
+      "sha256": "644a8f0928c831a50a2b935042ade0553e5d0958a8d113aefa7545445c864a0a",
+      "path": "Assets/Scripts/Sdt.Core/Battle/CurrentBossMechanics.cs"
+    },
+    {
+      "sha256": "b665975e94a231537017509f16798e585aa6c6733738b623e65db7caa69f3179",
+      "path": "Assets/Scripts/Sdt.Core/Battle/DeckBottomDiscovery.cs"
+    },
+    {
+      "sha256": "0aa9473b6a1c6fe7aeae6256824f352006132e91a8afcf95b9f505798a516c51",
+      "path": "Assets/Scripts/Sdt.Core/Battle/DeckOps.cs"
+    },
+    {
+      "sha256": "45a6681c02502fee4f5eab9249cab96f26098af8260bd50670f0f9e1ae4d3a4b",
+      "path": "Assets/Scripts/Sdt.Core/Battle/EffectExecutor.cs"
+    },
+    {
+      "sha256": "9f7deead674895e0fd2f501522b4bfc698fa269ba4c1768214d2e51cc54175fb",
+      "path": "Assets/Scripts/Sdt.Core/Battle/RuleValue.cs"
+    },
+    {
+      "sha256": "12b14566f99513c472c63f3af1ccdd79b4c8051343c15f7b4bca17d2e7a3aa69",
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs"
+    },
+    {
+      "sha256": "d2dea28342400841f80bcb74de47d290f501692bbc94045de27a046b1eb00f1e",
+      "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs"
+    },
+    {
+      "sha256": "efe29e8e59f010b15285d65c7a4d747f096b2e450ca9909ed9c445b35f3ed740",
+      "path": "Assets/Scripts/Sdt.Core/Data/CurrentBalanceData.cs"
+    },
+    {
+      "sha256": "7dfd4b8993fa3b7bc85acec47195d69d819173c1a96eb89d9fd841e0f58dec2f",
+      "path": "Assets/Scripts/Sdt.Core/Data/CurrentChestData.cs"
+    },
+    {
+      "sha256": "935646f0a1f0d2502f58747420abd62d4908c78e51d5e70610f99c757f785579",
+      "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs"
+    },
+    {
+      "sha256": "0722be487263cc278ee3a68306c301ecf374358e3e64d92ff5ae20500af64136",
+      "path": "Assets/Scripts/Sdt.Core/Data/EventProgress.cs"
+    },
+    {
+      "sha256": "9ca1eedae3dd26063c9c1d5e1f6da3f966532a476af8c71b1fb30fe9a43b680f",
+      "path": "Assets/Scripts/Sdt.Core/Data/SceneCopy.cs"
+    },
+    {
+      "sha256": "827b9ff1c75cf8c1a82148ecdfe0032215b00e85442e3f9f19042f92c9b5db68",
+      "path": "Assets/Scripts/Sdt.Run/AtomicJsonFile.cs"
+    },
+    {
+      "sha256": "960661f4571d9056348e3a7423c9dbff8ff24fe9ff4e63c3c97e0593bd213e4a",
+      "path": "Assets/Scripts/Sdt.Run/BagItemCommands.cs"
+    },
+    {
+      "sha256": "c9d18fc6ef9667ab2a8a1b2191cb9dda4a6a3f2ac0aff0e38d921d7b0f5662e9",
+      "path": "Assets/Scripts/Sdt.Run/BaseData.cs"
+    },
+    {
+      "sha256": "5686d5e7462b003abd753fa7ef7b1b520dccf3ca4b314f7cd2d53593f37e8be7",
+      "path": "Assets/Scripts/Sdt.Run/BaseData.Customization.cs"
+    },
+    {
+      "sha256": "706dc1bd80d7aca04d47a62d62c21a8a0a84ff92e2a8d4d8f808332cdcd6e935",
+      "path": "Assets/Scripts/Sdt.Run/BaseData.PetsMaterials.cs"
+    },
+    {
+      "sha256": "a7ce15534be4484147d120719ce1f692be7b77e9c8df100512409e3844f6c4ce",
+      "path": "Assets/Scripts/Sdt.Run/BaseData.Preparation.cs"
+    },
+    {
+      "sha256": "b044b5673229b99cf28ce8793c38cda2452ce95bcd096c28e4d592e6892b3173",
+      "path": "Assets/Scripts/Sdt.Run/BaseData.Story.cs"
+    },
+    {
+      "sha256": "fb3aeec0bbdacdd7c16df2c06d7f768722c7475e35bbd373927a82d659374c16",
+      "path": "Assets/Scripts/Sdt.Run/BaseData.SupplyPack.cs"
+    },
+    {
+      "sha256": "34429073ead323a480da649a9a20fa34bf42776c923d96eb418f4ea6c5154787",
+      "path": "Assets/Scripts/Sdt.Run/CardContainerCommands.cs"
+    },
+    {
+      "sha256": "47572bcf9fea5d8188dd4e5ee351b7fc90c908e483c221b09681f37d317d70db",
+      "path": "Assets/Scripts/Sdt.Run/CourtyardPreferences.cs"
+    },
+    {
+      "sha256": "21b4435688fdcc861fb67bb2863070e2d03c45c5847ac3f758e5644d3741c371",
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Altar.cs"
+    },
+    {
+      "sha256": "9ec3999fd60ed8b91d89d5e04c51c93d1214cec8fddbba7d0cbb0b947d7ecd52",
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.BattleCheckpoint.cs"
+    },
+    {
+      "sha256": "1571f124cd0a0edf771dc023d2a5daf327bd8d834af033f18a8226192497d413",
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Commission.cs"
+    },
+    {
+      "sha256": "62e5fe937051a0724e146af72e2160d137f706c5c03bb9de65278845a347497b",
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.cs"
+    },
+    {
+      "sha256": "215ca11fbb4e7524e8d6ec0828d49cf6f28c3d43a7401b87c00e43c41780a690",
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.EventRoutes.cs"
+    },
+    {
+      "sha256": "5b419b30dd1a43edac513ee538c5ba09d4c305e5d24c18bba8a2b8c5c99b0dfc",
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs"
+    },
+    {
+      "sha256": "b42c73755e89cf56c5bc90efc40d25014c6c3c71d7eb5ed4a12ba1031c653187",
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Map.cs"
+    },
+    {
+      "sha256": "28226746ad67a670a90a5b2e2055f7479c9d3b74b3bb685b3bc84defca2f517a",
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs"
+    },
+    {
+      "sha256": "ecd1774a5634b26589ee3bf6f4d80aca83190123e327d53b80c072a357174a8d",
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Settlement.cs"
+    },
+    {
+      "sha256": "a08345817b965554cbbc6592ed2127cb353023ccef0a0014c84fc0f9223a0e6e",
+      "path": "Assets/Scripts/Sdt.Run/MetaProgress.Achievements.cs"
+    },
+    {
+      "sha256": "963b9a6cb3fb490ab868e74a5b8121498cec55614c6ed0a57185d2060df07f17",
+      "path": "Assets/Scripts/Sdt.Run/MetaProgress.Collections.cs"
+    },
+    {
+      "sha256": "acde820eac60d2e1d6ca87364b858905b1251a9b76b37dddc8968f2e3104f4ee",
+      "path": "Assets/Scripts/Sdt.Run/MetaProgress.cs"
+    },
+    {
+      "sha256": "a45bef022c24b2d416b49ddf1045b715774ac4dae0000249f17ffe6a3e5e2483",
+      "path": "Assets/Scripts/Sdt.Run/RunEvents.cs"
+    },
+    {
+      "sha256": "2234c532d5a0ad8beb8bace9e0d5234d120f0988b279740ff69b22b2d93492dc",
+      "path": "Assets/Scripts/Sdt.Run/SaveJson.cs"
+    },
+    {
+      "sha256": "286ab12bdfc5432458f4b496ed3a83f34197f255b0458574b5694993297f466f",
+      "path": "Assets/Scripts/Sdt.Run/SaveSystem.cs"
+    }
+  ],
+  "generatedAt": "2026-10-29T18:06:50.1088687Z",
+  "checkedAt": "2026-10-29T18:07:15.4344092Z"
+}

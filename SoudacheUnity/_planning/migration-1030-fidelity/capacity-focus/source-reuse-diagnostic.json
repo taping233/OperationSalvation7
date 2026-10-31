@@ -1,0 +1,19 @@
+{
+  "afterRender": {
+    "oldStillInRoot": true,
+    "oldCurrentAction": "keep",
+    "oldIsCurrentKeep": true,
+    "confirmPresent": true
+  },
+  "afterOldClick": {
+    "confirmPresent": false,
+    "discardPresent": true,
+    "moved": 0,
+    "discarded": 0,
+    "count": 3
+  },
+  "afterPageReplacement": {
+    "confirmPresentInDetachedRoot": false
+  },
+  "conclusion": "syncViewChildren reused the former safe BUTTON as the active keep BUTTON. old.click() legitimately cancelled the confirmation. The old test then dereferences a missing confirm button; no move or discard occurred."
+}

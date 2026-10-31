@@ -1,0 +1,25 @@
+{
+  "status": "in progress; native follow-up and independent review pending",
+  "sourceAndOutput": {
+    "Assets/Scripts/Sdt.Core/Battle/BattleRules.cs": "00f8c9eb46a020300aeec1f1c888873219cabd2d901d7a837304e5c7a476cf16",
+    "Assets/Scripts/Sdt.Core/Battle/BattleSummary.cs": "e92ca71430ff55a791c4e789e4ce2ed2425c3d237804642eb879b7caf1ab010d",
+    "Assets/Scripts/Sdt.Core/Battle/BattleHandTransforms.cs": "2bb817c0acd3af5024034e4c12c3ecddbefe478f075a103e384650fc08723c47",
+    "Assets/Scripts/Sdt.Core/Battle/BuiltinCardIdentities.cs": "a3ada0917af87de1711dab489f9b53a4533324ed42e57d602db9bcddcf89a5d5",
+    "Assets/Scripts/Sdt.Run/SaveSystem.cs": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5",
+    "Assets/Scripts/Sdt.Run/BaseData.Customization.cs": "112923cb7652b92e980d904ecdc57a5505024e1aab5c1413e90940cb554708e4",
+    "Assets/Scripts/Sdt.Run/BaseData.cs": "45d297fff5224306db0a66fd22eeea8aefacc3bd066189f65b8a74ab71fbeb9f",
+    "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs": "0ea30bda44b5db3939fa7e9c74876981f8e00084f838c66508f851e7e391db56",
+    "Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.cs": "858b7b83f303bc189e0a45c453c29a2af06a082923d12df30c0d4bd25fb20dd5",
+    "Assets/Scripts/Sdt.Boot/BattleBridge.cs": "348e39bfd9b62292cb7f2b599e786caabf8719b54f9d9fa8ed41db88e674ec12"
+  },
+  "dataAssertions": 18,
+  "battleAssertions": 1814,
+  "priorAdjacentRegressions": [
+    289,
+    167,
+    1813,
+    25
+  ],
+  "nativeRender": "current-visual-6: 19 constructed frames; not final effect acceptance",
+  "knownPending": "Strict native texture quality, player-effects projection, fresh source-based flow/input and Windows build"
+}

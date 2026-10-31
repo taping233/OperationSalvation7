@@ -1,0 +1,68 @@
+{
+  "frozenUtc": "2026-10-30T14:18:31.647837+00:00",
+  "nativeNotRun": true,
+  "typecheck": {
+    "passed": true,
+    "errors": 0,
+    "incrementalExistingWarnings": 5,
+    "log": "editor-check.log"
+  },
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/SaveSystem.cs",
+      "sha256": "b5f45f31198d2614806a9334b5a71cb456bca27f2e1ab6c0b2ab3813d028c8d7",
+      "bytes": 15447
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/SaveSystem.RunValidation.cs",
+      "sha256": "711acfd7f7e68f5137dc2180c25f4c9d64d82cce4e854c111f30138c97d942c2",
+      "bytes": 3932
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/SaveSystem.RunValidation.cs.meta",
+      "sha256": "a8d64ed26c472e6a43b0c4c4855ef4d0cca4104345a26446fe936ea3ec097099",
+      "bytes": 62
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/SaveSystem.SlotArchive.cs",
+      "sha256": "c5118c3bfbac5f2ec7d75084a69846f4214395cb2a9db0c0ef91e18a2ed2e3af",
+      "bytes": 12154
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/SaveSystem.SlotArchive.cs.meta",
+      "sha256": "e7f73e729186ac9ef2a020c85d7eac88ae7a6dfd6e7f5d03ded11ac06b94f464",
+      "bytes": 62
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotPage.cs",
+      "sha256": "178448edf159e0e63112d2225104afd0b3f275e49695c44a9528690a7a10958a",
+      "bytes": 14219
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotArchiveScreen.cs",
+      "sha256": "d2cb58071cd5176016307bca71e897a15541a90cf83273155833f3a8885d7b38",
+      "bytes": 6929
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotArchiveScreen.cs.meta",
+      "sha256": "c84f7282b5c701cea57702b9d9f74d68f22c10cc947eaf9f659c4ba544f69b2c",
+      "bytes": 62
+    },
+    {
+      "path": "Assets/Editor/CurrentSlotArchiveValidation.cs",
+      "sha256": "6ca66591ae62b5302d975d470579f9db8a238b74b17d0f010df2b27fc7b99ebb",
+      "bytes": 7280
+    },
+    {
+      "path": "Assets/Editor/CurrentSlotArchiveValidation.cs.meta",
+      "sha256": "397a23252b502a62211ff906c8f037186a2f62acee342dbd65ed4ef013fa289b",
+      "bytes": 62
+    }
+  ],
+  "dataProbe": {
+    "path": "data-run-221255\\result.json",
+    "passed": true,
+    "cases": 31,
+    "scope": "Real production SaveSystem/validation/archive DLL under .NET; isolated native run snapshot, real file writes/locks; not Unity UI or LoadRun."
+  }
+}

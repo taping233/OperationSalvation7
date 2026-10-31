@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-10-30T20:46:30.6462863+08:00",
+  "scope": "Time-bounded independent active-code sample; source and native fingerprints",
+  "productionWrites": false,
+  "hashes": [
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\view\\battle.view.js",
+      "Hash": "EB0F9BC9035345EEDC8DAA4A96DC5CD4468709545ECA33809461363EA13584DD"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\bag\\battle.bag.domain.js",
+      "Hash": "FA9A8BEB099C8B92E5F1976C291FCF1577E83B28B70B5805CD088EC5AA90E8C3"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.events.js",
+      "Hash": "2BCE72A8CF8CF0526F7D56F2B8F8EFB1BC4573B793EACF3344CF7301A5433E1E"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\event-recode-result.js",
+      "Hash": "996E2DE502674B5F0AEF87911AF7127703552BCBEF7DC7A1EB5F65F771054D29"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\css\\event-recode-result.css",
+      "Hash": "4E7F80828D38B7C7499A6F487859D6D831FDFCFB4892035E70AEBD80670BE82D"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\reward-capacity-organizer.js",
+      "Hash": "B54288BDD2B83B6C00A96F17F7C421E6E22755A54CDC431D841E045486274AD2"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\hub\\game.reward-organizer.js",
+      "Hash": "D510BA40C7598F0FBADCACD73254C33DC809FC2B19B2F47540AA85F8D5713244"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\menu-leave.js",
+      "Hash": "990177A9AFAA2F4C2571A13F41E4084A494FAC109E64DD6C134E6CC2E6842DE6"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.Events.cs",
+      "Hash": "6EBD9AA032C101BE532BE776A52A43C8ACFA281A1474DDB6DB19BA064428F28A"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.Run\\GameRuntime.EventRoutes.cs",
+      "Hash": "3E4636FC26DA9E8A8328A82E19F32AAEF0BCF81309DA517AD04097DFFA06AAD8"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\EventDialogScreen.cs",
+      "Hash": "2E534004F10155F2D6D7E34E7AA4F1FF0AA2A6FF9F775DDD90747FAE388F2ED7"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\EventDialogChoices.cs",
+      "Hash": "A773D5D77E509B01DA8BF4AF6920E1451BFBF35837EE9ADFA01B28B42E309685"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentRewardCapacityOrganizer.cs",
+      "Hash": "B07A8875710ADB4E26FDCD867D00611749A09521841190F114EFA622FCA7BED0"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentRewardScene.cs",
+      "Hash": "5FB8576FD808E8FB0C2AEAD3ECA2D629C15B72277EBD2F0A3AACA14220E36819"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Hub\\HubScreen.cs",
+      "Hash": "C20E2A0D18FA2214DEAA1C4FB6DF76A3C747D725A9AF37BE9E57B33CCA3A2DBB"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Menu\\CurrentLeavePage.cs",
+      "Hash": "AF1667C621BC59AF7DE61E340E65A6B5ACB6DC17394FC01259AC25184ACB4538"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\ExtractScreens.cs",
+      "Hash": "DC43D41D70FB80A04F808A5C9A6C2B28CC1A2C9FB9BC1CE6BDFF17DCCA7D3248"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Scripts\\Sdt.UI\\Screens\\Run\\CurrentSettlementReport.cs",
+      "Hash": "6CCCFE90AD8FD7C0F4B0B990F9D1B830B6B6E355AF3AE3A99C12A95BCA9FBD7F"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "name": "heroPriestRandomFill",
+    "value": {
+      "hand": 6,
+      "ids": [
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball",
+        "tt3-fireball"
+      ],
+      "healed": 18,
+      "draws": 0
+    }
+  },
+  {
+    "name": "chaosDiscard",
+    "value": {
+      "hand": [],
+      "discard": [
+        "fireball",
+        "bandage"
+      ]
+    }
+  },
+  {
+    "name": "chaosPreservesType",
+    "value": [
+      "武术",
+      "武术",
+      "武术",
+      "武术",
+      "武术"
+    ]
+  },
+  {
+    "name": "guardAfterPlayerDealtDamage",
+    "value": 6
+  },
+  {
+    "name": "astrolabeTurnOneMartialSpellMartial",
+    "value": [
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "shadowbugEnemyAttackRestored",
+    "value": {
+      "during": 1,
+      "after": 8
+    }
+  },
+  {
+    "name": "poisonBurstImmuneTarget",
+    "value": {
+      "hp": 100,
+      "poison": 3
+    }
+  },
+  {
+    "name": "poisonBurstBypassesArmor",
+    "value": {
+      "hp": 94,
+      "armor": 5
+    }
+  },
+  {
+    "name": "twoFlameFormsEachTrackTwoFuel",
+    "value": 4
+  },
+  {
+    "name": "onDrawTokenZones",
+    "value": {
+      "hand": [],
+      "discard": [
+        "curse"
+      ],
+      "triggerCount": 1
+    }
+  },
+  {
+    "name": "tempCardAcquisitionHook",
+    "value": {
+      "calls": 1,
+      "hand": 1
+    }
+  }
+]

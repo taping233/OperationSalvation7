@@ -1,0 +1,60 @@
+{
+  "kind": "source vector + production wiring inspection; actual Unity evidence delegated to root",
+  "vectors": {
+    "low": {
+      "sourceBackdropScale": 1,
+      "sourceCourtyardScale": 0.75,
+      "sourceRetainedMiB": 48.0,
+      "nativeDistantSnow": false,
+      "nativeNearSnow": false,
+      "nativeMist": false,
+      "nativeGrain": false,
+      "nativeSparks": false,
+      "nativeBeams": false,
+      "nativeGhostAndAccentMotion": false
+    },
+    "balanced": {
+      "sourceBackdropScale": 1.5,
+      "sourceCourtyardScale": 1,
+      "sourceRetainedMiB": 96.0,
+      "nativeDistantSnow": true,
+      "nativeNearSnow": false,
+      "nativeMist": false,
+      "nativeGrain": false,
+      "nativeSparks": true,
+      "nativeBeams": true,
+      "nativeGhostAndAccentMotion": true
+    },
+    "high": {
+      "sourceBackdropScale": 2,
+      "sourceCourtyardScale": 1.25,
+      "sourceRetainedMiB": 192,
+      "nativeDistantSnow": true,
+      "nativeNearSnow": true,
+      "nativeMist": true,
+      "nativeGrain": true,
+      "nativeSparks": true,
+      "nativeBeams": true,
+      "nativeGhostAndAccentMotion": true
+    }
+  },
+  "reading": {
+    "cardZoom_hsc_desc": {
+      "font": 26,
+      "lineSpacing": "existing"
+    },
+    "termTip_log_confirmation": {
+      "font": 26,
+      "lineSpacing": 1.7
+    },
+    "excluded": [
+      "photo .cz-photo-rules",
+      "inventory-zoom-rules",
+      "#tooltip",
+      "ordinary Xl cards",
+      "map preview"
+    ]
+  },
+  "sourceShaUnchanged": true,
+  "productionFiles": 10
+}

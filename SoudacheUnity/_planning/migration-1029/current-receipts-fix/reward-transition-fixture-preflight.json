@@ -1,0 +1,50 @@
+{
+  "sourceSha256": "7a788b8cbe4ea42117134c9c6b67ae5da7d97f60d6cbf8ca4c07b3e828c66110",
+  "seed": 169015024,
+  "node": "3,9",
+  "boxes": [
+    {
+      "kind": "large",
+      "claimMode": "all",
+      "choiceCount": 0,
+      "cardIds": [
+        "tt2-turtlearmor",
+        "tt12-raydragon",
+        "cmtna0nb1yxt"
+      ],
+      "coins": 3
+    },
+    {
+      "kind": "medium",
+      "claimMode": "one",
+      "choiceCount": 3,
+      "cardIds": [
+        "tt2-frostsword",
+        "tt12-raygun",
+        "tt12-chargeray"
+      ],
+      "coins": 1
+    }
+  ],
+  "removedPriorGrantUids": [
+    {
+      "uid": "omvu76bfdf3v1c",
+      "id": "tt2-turtlearmor"
+    },
+    {
+      "uid": "omvu76bfde8q5x",
+      "id": "tt12-raydragon"
+    },
+    {
+      "uid": "omvu76bfd6p2y7",
+      "id": "cmtna0nb1yxt"
+    }
+  ],
+  "resetOwnedCount": 7,
+  "expectedFinalOwnedCount": 11,
+  "reversedCoins": 4,
+  "originalAndFinalCoins": 32,
+  "sourceNodeSettled": false,
+  "sourceNodeClosed": false,
+  "originalEvidenceReadOnly": true
+}

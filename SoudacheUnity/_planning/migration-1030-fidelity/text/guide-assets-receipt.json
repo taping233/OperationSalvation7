@@ -1,0 +1,77 @@
+{
+  "pages": 6,
+  "files": [
+    {
+      "source": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\data\\beginner-guide.json",
+      "destination": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\Assets\\Resources\\Data\\CurrentBeginnerGuide.json",
+      "sourceSha256": "1a9b0d144bd407097f22aab62fd062cca4cf622c99a6acd1021c7b472db322ac",
+      "outputSha256": "1a9b0d144bd407097f22aab62fd062cca4cf622c99a6acd1021c7b472db322ac"
+    },
+    {
+      "source": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\assets\\ui\\beginner-guide\\prepare-live.webp",
+      "destination": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\Assets\\Resources\\Art\\CurrentGuide\\prepare.png",
+      "sourceSha256": "a54a551ac56617163cccf7a6dc367ac3df186a61aa301271385b7cfee0110f72",
+      "outputSha256": "be210b420a19cec5cd0bf89b2b3f28f344ffea83c23331da04b21776491cad9a",
+      "size": [
+        1280,
+        720
+      ],
+      "acquisition": "Lossless RGBA decode of current source WebP; no resize"
+    },
+    {
+      "source": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\assets\\ui\\beginner-guide\\map-live.webp",
+      "destination": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\Assets\\Resources\\Art\\CurrentGuide\\map.png",
+      "sourceSha256": "6337e3edab0356618422b04da071d96c83e7e919f9b1d1d005538ecbb2575808",
+      "outputSha256": "9ca9b5f033f9ba91fcb6967cd419f54a740be6e34408e5f087d769a8017a70f1",
+      "size": [
+        1600,
+        900
+      ],
+      "acquisition": "Lossless RGBA decode of current source WebP; no resize"
+    },
+    {
+      "source": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\assets\\ui\\beginner-guide\\battle-live.webp",
+      "destination": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\Assets\\Resources\\Art\\CurrentGuide\\battle.png",
+      "sourceSha256": "869bdd84cde555c1e667b00bc6da85883dc34d3668fef3762a8752ce7d5782e5",
+      "outputSha256": "0e7b7d3fd18bd2c7faa4597cab54fd69a3d96091795c5dfd460c8aef9024dd52",
+      "size": [
+        1600,
+        900
+      ],
+      "acquisition": "Lossless RGBA decode of current source WebP; no resize"
+    },
+    {
+      "source": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\assets\\ui\\beginner-guide\\loot-live.webp",
+      "destination": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\Assets\\Resources\\Art\\CurrentGuide\\loot.png",
+      "sourceSha256": "c8c88088991cb6448bb0e6c49d5464267f39d1d4e1e9508bf9af765f56178231",
+      "outputSha256": "6599018d4a197f5ae7e961c74eb63484b27a8240625e07c8fef5a61ac75c4988",
+      "size": [
+        1600,
+        900
+      ],
+      "acquisition": "Lossless RGBA decode of current source WebP; no resize"
+    },
+    {
+      "source": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\assets\\ui\\beginner-guide\\extract-live.webp",
+      "destination": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\Assets\\Resources\\Art\\CurrentGuide\\extract.png",
+      "sourceSha256": "d38c695fcf7c7af0f854926082c1f87bb26ea5f2bf57a88491d57001e2f4d8d6",
+      "outputSha256": "1881eeb7085d23bfa9b1372c0b4375a044cc9ad6ca5419056726bc7bd5c846c8",
+      "size": [
+        1600,
+        900
+      ],
+      "acquisition": "Lossless RGBA decode of current source WebP; no resize"
+    },
+    {
+      "source": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\\u641c\u6253\u64a4\\game\\assets\\ui\\beginner-guide\\growth-live.webp",
+      "destination": "D:\\\u7d20\u6750\\\u4ee3\u53f7\u67d2\\SoudacheUnity\\Assets\\Resources\\Art\\CurrentGuide\\growth.png",
+      "sourceSha256": "43e8ad018f530985cc6953347995d08757fa2d0de05eba7aecee2fb5ac8284ee",
+      "outputSha256": "ff58db85850db0d73b292c0143bd8856f3cdaae2fd3cc01f46f78516d948ac31",
+      "size": [
+        1280,
+        720
+      ],
+      "acquisition": "Lossless RGBA decode of current source WebP; no resize"
+    }
+  ]
+}

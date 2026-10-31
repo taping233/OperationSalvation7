@@ -1,0 +1,52 @@
+{
+  "authority": "User: original concrete execution is authoritative; source prose can be wrong.",
+  "sourceBeforeSha256": "1a9b0d144bd407097f22aab62fd062cca4cf622c99a6acd1021c7b472db322ac",
+  "correctedSha256": "33dc995542465e2c91cc20fefd2504d8744005b1a8d31804e38e95d7044ab032",
+  "changes": [
+    {
+      "path": "pages.loot.notes.1",
+      "before": {
+        "title": "安全格不是带入牌的保险",
+        "text": "死亡或放弃会失去带入本局的全部卡牌，安全格保护的是符合条件的本局所得。珍贵新收获及时转入，丢弃前看清卡牌。"
+      },
+      "after": {
+        "title": "看清不同失败方式",
+        "text": "倒下时，安全格中的卡牌和安全格珍珠盒保护的资源会被抢运，带入牌也按此规则处理；主动放弃会排除带入牌，只抢运符合条件的本局所得。未受保护的随身牌与消耗区卡牌会散失。"
+      }
+    },
+    {
+      "path": "pages.extract.notes.2",
+      "before": {
+        "title": "普通战斗撤退按失败结算",
+        "text": "撤退或放弃主要依靠安全格保住符合条件的本局所得，带入本局的牌仍会丢失。"
+      },
+      "after": {
+        "title": "普通战斗撤退按失败结算",
+        "text": "点击普通战斗的撤退会结束本局，按倒下时的安全格抢运规则结算；主动放弃则不保留带入牌。烟雾弹等卡牌逃跑按各自效果处理。"
+      }
+    },
+    {
+      "path": "pages.extract.notes.0",
+      "before": {
+        "title": "编组前先整理行装",
+        "text": "安全格与容器里的牌不参与编组，先移回普通背包。“对战开始时”装备计入编组并占装备栏；编入混沌之眼可增加 5 张牌库上限。"
+      },
+      "after": {
+        "title": "编组前先整理行装",
+        "text": "普通背包与安全格中的可编组卡牌都能参与；容器里的牌需先移回普通背包。“对战开始时”装备计入编组并占装备栏；编入混沌之眼可增加 5 张牌库上限。"
+      }
+    }
+  ],
+  "sourceExecution": [
+    "game/src/run/game.session.death.js:141",
+    "game/src/hub/run-rescue-cards.js:2",
+    "game/src/battle/core/battle.enemy-phase.domain.js:495",
+    "game/src/battle/core/battle.lifecycle.domain.js:419"
+  ],
+  "nativeExecution": [
+    "Assets/Scripts/Sdt.Run/GameRuntime.Settlement.cs:116",
+    "Assets/Scripts/Sdt.Run/GameRuntime.Settlement.cs:128",
+    "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs:467"
+  ],
+  "boundary": "Only these three prose entries are corrected. All domain rules and Vite source remain unchanged."
+}
