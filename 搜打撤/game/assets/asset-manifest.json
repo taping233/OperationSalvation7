@@ -1,7 +1,7 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1750,
+  "count": 1756,
   "assets": [
     {
       "path": "portraits/enemies/boss_witness_pope.webp",
@@ -11107,6 +11107,54 @@
         "externalScript": false,
         "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
       }
+    },
+    {
+      "path": "ui/beginner-guide/battle-live.webp",
+      "ext": "webp",
+      "bytes": 122092,
+      "sha256": "869bdd84cde555c1e667b00bc6da85883dc34d3668fef3762a8752ce7d5782e5",
+      "license": "老板提供并授权使用的本项目录屏截帧（画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/extract-live.webp",
+      "ext": "webp",
+      "bytes": 40956,
+      "sha256": "d38c695fcf7c7af0f854926082c1f87bb26ea5f2bf57a88491d57001e2f4d8d6",
+      "license": "老板提供并授权使用的本项目录屏截帧（画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/growth-live.webp",
+      "ext": "webp",
+      "bytes": 46192,
+      "sha256": "43e8ad018f530985cc6953347995d08757fa2d0de05eba7aecee2fb5ac8284ee",
+      "license": "本项目实机截图（既有项目证据；画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/loot-live.webp",
+      "ext": "webp",
+      "bytes": 29800,
+      "sha256": "c8c88088991cb6448bb0e6c49d5464267f39d1d4e1e9508bf9af765f56178231",
+      "license": "老板提供并授权使用的本项目录屏截帧（画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/map-live.webp",
+      "ext": "webp",
+      "bytes": 51974,
+      "sha256": "6337e3edab0356618422b04da071d96c83e7e919f9b1d1d005538ecbb2575808",
+      "license": "老板提供并授权使用的本项目录屏截帧（画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/prepare-live.webp",
+      "ext": "webp",
+      "bytes": 84684,
+      "sha256": "a54a551ac56617163cccf7a6dc367ac3df186a61aa301271385b7cfee0110f72",
+      "license": "本项目实机截图（既有项目证据；画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
     },
     {
       "path": "ui/beginner-guide/battle.svg",
