@@ -24,6 +24,26 @@
     "viteBuildAndBudget": "passed",
     "builtInBrowser": "passed"
   },
-  "publicationBoundary": "Source branch adds this receipt and root .gitignore change to the exact 3628-file source payload; no Unity history, build package, caches, temporary profiles or policy media copied. Clean-room resource import was not performed.",
-  "repositoryRelativeAcceptance": "搜打撤/docs/evidence/2026-11-01-github-sync/README.md"
+  "publicationBoundary": "The exact 3628-file native payload matches the validated local Git blobs; parent Vite commits and compact verification/closure records are additionally included. No build package, caches, temporary profiles, native old history or policy media copied; no clean-room resource import claimed.",
+  "repositoryRelativeAcceptance": "搜打撤/docs/evidence/2026-11-01-github-sync/README.md",
+  "latestViteCommit": "f966e859043b7ab3703839005029ef090a4677b5",
+  "mergedSourceCommit": "13797f12976d62aa1c1849eaca27c7c5dcb2188a",
+  "remoteCI": {
+    "scope": "Vite master; Unity editor/player checks ran locally",
+    "full": {
+      "conclusion": "success",
+      "url": "https://github.com/taping233/OperationSalvation7/actions/runs/41249631980"
+    },
+    "build": {
+      "conclusion": "success",
+      "url": "https://github.com/taping233/OperationSalvation7/actions/runs/41249631982"
+    }
+  },
+  "canonicalNativePayloadRecheckedAfterParentMerge": true,
+  "finalAcceptance": "搜打撤/docs/evidence/2026-11-01-github-sync/final-summary.json",
+  "remainingBoundaries": [
+    "Native compression ratio 10 maps to source 12.",
+    "No acoustic, physical OS-input, multiple-window-size or FPS benchmark claim.",
+    "Dependency diagnostics reported 12 existing advisories including 2 critical; dependency security acceptance is separate."
+  ]
 }

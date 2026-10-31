@@ -1,0 +1,55 @@
+{
+  "status": "accepted-and-source-synchronized",
+  "completedAt": "2026-10-31T23:05:28.752442+00:00",
+  "masterCodeCommit": "f966e859043b7ab3703839005029ef090a4677b5",
+  "unityMergedSourceCommit": "13797f12976d62aa1c1849eaca27c7c5dcb2188a",
+  "nativeLocalValidatedCommit": "81b87cbd5f7b6bb7de48b0973c534ba494cb84a9",
+  "nativeBuildGUID": "f83ab90840ac4e558400ef9f736d3d59",
+  "native": {
+    "domainAssertions": 845,
+    "sharedNativeChecks": 48,
+    "battleNative": "passed",
+    "stableBuildInputs": 3927,
+    "standaloneImages": 61
+  },
+  "viteLocal": {
+    "testFiles": 960,
+    "passedTests": 9596,
+    "skippedTests": 41,
+    "failedTests": 0,
+    "currentWindowBrowser": "passed",
+    "globalAssetAuditErrors": 0,
+    "unchangedHistoricalAssetWarnings": 567,
+    "buildAndBudget": "passed",
+    "rebuiltArtifactFilesUnchanged": 1759
+  },
+  "remoteCI": {
+    "scope": "Vite master; Unity editor/player checks ran locally",
+    "full": {
+      "conclusion": "success",
+      "url": "https://github.com/taping233/OperationSalvation7/actions/runs/41249631980"
+    },
+    "build": {
+      "conclusion": "success",
+      "url": "https://github.com/taping233/OperationSalvation7/actions/runs/41249631982"
+    }
+  },
+  "publication": {
+    "nativePayloadFiles": 3628,
+    "allNativeCanonicalBlobsStillMatchValidatedLocalCommit": true,
+    "compactParityEvidenceFiles": 6,
+    "finalClosureDocuments": "This receipt and completed task/registry records are administrative follow-up to the synchronized source commits."
+  },
+  "remainingBoundaries": [
+    "Native compression ratio 10 maps to source 12.",
+    "No acoustic, physical OS-input, multiple-window-size or FPS benchmark claim.",
+    "Dependency diagnostics reported 12 existing advisories including 2 critical; dependency security acceptance is separate."
+  ],
+  "cleanup": {
+    "temporaryBrowserClosed": true,
+    "previewStopped": true,
+    "port8139Free": true,
+    "ciWatcherExited": true,
+    "publicationWorktreeRetainedWithoutEditingOrProcessOccupancy": "C:\\Users\\太平\\AppData\\Local\\Temp\\unity-validated-20261101-01a19232"
+  }
+}

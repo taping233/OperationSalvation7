@@ -12,8 +12,31 @@
     "源码和产物指纹与本次原生及领域验收一致",
     "候选按子系统提交并推送GitHub，远端SHA回读一致"
   ],
-  "stage": "doing",
-  "checks": [],
-  "unverified": [],
-  "updatedAt": "2026-10-31T20:21:48.831Z"
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "Unity845领域、原生检查、3927输入稳定构建及61图通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Vite本地960文件9596通过41跳过、全局素材0错误、构建预算及实页通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "master f966e859与Unity13797f12已推送回读一致；master完整CI及构建检查success",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "原生压缩比10对应源12；未做声学、OS物理输入、多尺寸或FPS基准；依赖诊断的既有安全告警另行处理"
+  ],
+  "updatedAt": "2026-10-31T23:02:45.460Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
 }

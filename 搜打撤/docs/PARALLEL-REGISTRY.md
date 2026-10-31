@@ -9,7 +9,6 @@
 
 ## 活跃登记
 
-Friday（Unity验收与GitHub同步 WF-unity-github-sync-1101；01a19232），2026-11-01：老板授权验收后提交推送，范围Unity与父仓库全部完成改动。初轮Native845项+两组原生+61图通过；父Vite冻结239项full静态通过，完整测试234失败/9348通过，失败保留。三线正按现役接口修旧夹具/断言，Hub复用bagStacks消除真实二次遍历；Root补154随行文档快照与指南既有模式/地图确认说明，同步Native唯一Guide JSON，C#规则未改。当前后台unity-build-final/cwd SoudacheUnity，顺序重建→当前2560×1440隔离Standalone，用户档/前台不动；Native结束后统一刷新Source/export指纹。两仓本会话暂存保留未提交，公共卡容量/既有断言强度不降低，不恢复退役帮助wrapper；清单排除活跃/待拍板/媒体中间物，最终提交后回读origin SHA。自有证据`docs/evidence/2026-11-01-github-sync/`、Unity规划`_planning/github-sync-1101/`，Root维护本行/MIGRATION/提交。
 
 
 Friday（积雪城市独立预览 base-geometric-20261031；01a18d9d），2026-10-31：编辑中；老板授权独立看建模/镜头，不接入游戏，并追加生息演算两张方格地图参考、积雪城市、允许调整配色。范围线程可视化目录 `C:/Users/太平/.codex/visualizations/2026/10/30/01a18d9d-6b5f-7da1-82da-eb59c1a31e90/base-geometric*`、自有 `docs/evidence/2026-10-31-base-geometric/` 与本登记行；无角色建模，不改Vite/Unity运行实现、不build/提交。初版v1已保留；平台共面闪烁修正后六地点完整巡游通过，拖动回放受内置工具fractional iframe坐标限制未完成。服务127.0.0.1:5367/进程自报PID38576/执行会话88741，cwd搜打撤，入口线程目录base-geometric-serve.py；原39084已结束。当前仅在内置浏览器当前窗口验收，制作城市版后复验并释放。
@@ -390,6 +389,9 @@ Friday / WF-card-feedback-v2-1023 (01a16808)，2026-10-23：12张内置修订、
 
 
 ## 近期已释放
+
+Friday（Unity验收与GitHub同步 WF-unity-github-sync-1101；01a19232），2026-11-01已完成并释放：master代码f966e859、Unity合并源码13797f12已推送且远端回读一致；GitHub完整CI41249631980和生产构建41249631982均success。Unity845领域、原生公共48项及战斗、3927稳定构建输入、正常Standalone61图通过，GUID f83ab90840ac4e558400ef9f736d3d59。Vite本地960文件9596通过/41跳过/0失败，实页新档至刷新读档通过；补齐6指南图登记后完整候选全局素材0错/567未变化历史警告，重建1759产物与实页验收包逐字节一致。原在途改动与本地媒体保留，原生压缩比10/源12及未测范围、依赖安全诊断告警见最终证据。临时浏览器、8139预览及gh watch均结束，端口已复核为空；发布工作树留存无编辑/进程占用。最终记录docs/evidence/2026-11-01-github-sync/final-summary.json；本条和任务完成记录随源码分支收官同步。
+
 
 Friday（Unity源码对齐与性能精简 WF-unity-parity-1031；01a19232），2026-11-01：完成未提交、编辑释放。`SoudacheUnity/`本轮77份C#修正、正式SFX总线/滤镜/图集/导出与自有`_planning/parity-1031/`，自有`docs/evidence/2026-10-31-unity-parity/`；原有其他未提交增量保留。普通选材/真实注能、费用/随机流、开局/祭坛、仓库/交易/收藏/钥匙/消息、声音策略与源差异闭合；清理历史无入口和多余回退，生产C#净减85099字节，重复BFS/卡堆展开/快照/每帧文字与设置分配收拢。领域845项、原生battle-6/shared-8、四层旅程/商店/单档恢复、build-6与player-5完整61图及独立看图通过；3925构建输入/858Vite输入/166交付文件指纹登记。默认包`SoudacheUnity/Build/Desktop/代号柒.exe`，GUID`4bdd212ad45c44d09a0052a7b8b1e2b3`；本机压缩比10对应源12的后端适配明确记录。过程失败保留，范围与未核项见自有README/task；未删除文件、未提交推送发布，用户档未动。所有本会话后台Editor/Player已退出，无新端口服务。
 
