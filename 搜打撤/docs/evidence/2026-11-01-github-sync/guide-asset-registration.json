@@ -1,0 +1,124 @@
+{
+  "status": "passed-targeted-and-frozen",
+  "atUtc": "2026-10-31T22:35:16.332971+00:00",
+  "changedPaths": [
+    "game/assets/asset-manifest.json"
+  ],
+  "sha256": "3fe612802c436b471f3cda512287c3839795af4b7c98142aca77f3bd5a7100af",
+  "lfNormalizedSha256": "a689a36b739408c681faf25c87067a9749b3382d1f68244ba4fb6e0e6b02409c",
+  "bytes": 661949,
+  "mtimeNs": 1793486016128692000,
+  "countBefore": 1750,
+  "countAfter": 1756,
+  "exactlySixAdded": true,
+  "allExistingEntriesUnchanged": true,
+  "added": [
+    {
+      "path": "ui/beginner-guide/battle-live.webp",
+      "ext": "webp",
+      "bytes": 122092,
+      "sha256": "869bdd84cde555c1e667b00bc6da85883dc34d3668fef3762a8752ce7d5782e5",
+      "license": "老板提供并授权使用的本项目录屏截帧（画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/extract-live.webp",
+      "ext": "webp",
+      "bytes": 40956,
+      "sha256": "d38c695fcf7c7af0f854926082c1f87bb26ea5f2bf57a88491d57001e2f4d8d6",
+      "license": "老板提供并授权使用的本项目录屏截帧（画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/growth-live.webp",
+      "ext": "webp",
+      "bytes": 46192,
+      "sha256": "43e8ad018f530985cc6953347995d08757fa2d0de05eba7aecee2fb5ac8284ee",
+      "license": "本项目实机截图（既有项目证据；画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/loot-live.webp",
+      "ext": "webp",
+      "bytes": 29800,
+      "sha256": "c8c88088991cb6448bb0e6c49d5464267f39d1d4e1e9508bf9af765f56178231",
+      "license": "老板提供并授权使用的本项目录屏截帧（画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/map-live.webp",
+      "ext": "webp",
+      "bytes": 51974,
+      "sha256": "6337e3edab0356618422b04da071d96c83e7e919f9b1d1d005538ecbb2575808",
+      "license": "老板提供并授权使用的本项目录屏截帧（画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    },
+    {
+      "path": "ui/beginner-guide/prepare-live.webp",
+      "ext": "webp",
+      "bytes": 84684,
+      "sha256": "a54a551ac56617163cccf7a6dc367ac3df186a61aa301271385b7cfee0110f72",
+      "license": "本项目实机截图（既有项目证据；画面素材许可沿原登记）",
+      "source": "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      "docs/evidence/2026-10-27-survival-guide/README.md",
+      "docs/evidence/2026-10-27-survival-guide/media-sources.json"
+    ],
+    "receiptHashesAndSizesMatch": true,
+    "types": {
+      "project-runtime-evidence": [
+        "prepare",
+        "growth"
+      ],
+      "authorized-user-recording": [
+        "map",
+        "battle",
+        "loot",
+        "extract"
+      ]
+    },
+    "licenseBoundary": "Existing project evidence or owner-provided authorized project recording frames; underlying scene/card/art licenses retain their original project registrations. No external permission invented."
+  },
+  "validation": {
+    "selectedTool": "tools/art-check.mjs",
+    "auditReport": "guide-asset-check.json",
+    "selectedOk": true,
+    "selectedErrors": 0,
+    "exitCode": 0,
+    "globalSummary": {
+      "ok": false,
+      "errorCount": 92,
+      "historicalWarningCount": 567,
+      "manifestIssues": []
+    },
+    "globalBoundary": "Main worktree global audit is not claimed passed; other unstaged media and historical issues were not registered or waived. Root will test the staged candidate independently.",
+    "untrackedAssetExtensionCounts": {
+      ".wav": 92
+    },
+    "testReport": "guide-asset-tests.json",
+    "testLog": "guide-asset-tests.log",
+    "testFiles": [
+      "tests/asset-audit.test.js",
+      "tests/asset-manifest-source.test.js",
+      "tests/beginner-guide-readability.test.js",
+      "tests/beginner-guide-entry-copy.test.js"
+    ],
+    "testsPassed": 30,
+    "testsFailed": 0,
+    "testsExitCode": 0,
+    "testScope": "Isolated .tmp/hub-gate-repair-1101/project with exact changed manifest bytes and the six receipt-matching screenshots",
+    "gitDiffCheck": "passed"
+  },
+  "untouched": [
+    "docs/asset-audit-debt.json",
+    "asset budgets",
+    "runtime omission paths/rules",
+    "all other asset registrations"
+  ],
+  "staged": false,
+  "committed": false,
+  "networkUsed": false
+}

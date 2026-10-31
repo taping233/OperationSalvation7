@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "exitCode": 0,
+  "steps": [
+    {
+      "name": "selected-assets",
+      "exitCode": 0,
+      "durationMs": 2845,
+      "stdout": "{\"scope\":\"selected\",\"ok\":true,\"selected\":[\"ui/beginner-guide/battle-live.webp\",\"ui/beginner-guide/extract-live.webp\",\"ui/beginner-guide/growth-live.webp\",\"ui/beginner-guide/loot-live.webp\",\"ui/beginner-guide/map-live.webp\",\"ui/beginner-guide/prepare-live.webp\"],\"errors\":[],\"assets\":[{\"path\":\"ui/beginner-guide/battle-live.webp\",\"bytes\":122092,\"sha256\":\"869bdd84cde555c1e667b00bc6da85883dc34d3668fef3762a8752ce7d5782e5\"},{\"path\":\"ui/beginner-guide/extract-live.webp\",\"bytes\":40956,\"sha256\":\"d38c695fcf7c7af0f854926082c1f87bb26ea5f2bf57a88491d57001e2f4d8d6\"},{\"path\":\"ui/beginner-guide/growth-live.webp\",\"bytes\":46192,\"sha256\":\"43e8ad018f530985cc6953347995d08757fa2d0de05eba7aecee2fb5ac8284ee\"},{\"path\":\"ui/beginner-guide/loot-live.webp\",\"bytes\":29800,\"sha256\":\"c8c88088991cb6448bb0e6c49d5464267f39d1d4e1e9508bf9af765f56178231\"},{\"path\":\"ui/beginner-guide/map-live.webp\",\"bytes\":51974,\"sha256\":\"6337e3edab0356618422b04da071d96c83e7e919f9b1d1d005538ecbb2575808\"},{\"path\":\"ui/beginner-guide/prepare-live.webp\",\"bytes\":84684,\"sha256\":\"a54a551ac56617163cccf7a6dc367ac3df186a61aa301271385b7cfee0110f72\"}],\"global\":{\"ok\":false,\"errorCount\":92,\"historicalWarningCount\":567,\"manifestIssues\":[]}}\n",
+      "stderr": ""
+    }
+  ]
+}

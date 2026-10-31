@@ -1,0 +1,104 @@
+{
+  "status": "read-only diagnosis complete; no workflow/test/manifest edit and no checks executed",
+  "checkedAt": "2026-11-01T06:34:51.1403064+08:00",
+  "finding": "The staged flag skips the entire production asset-audit step. SDT_STAGED_SNAPSHOT independently skips the repository CLI integration test. A full test mode inside the staged gate therefore does not certify the CI asset check.",
+  "localEvidence": {
+    "receipt": "docs/evidence/2026-11-01-github-sync-final/2026-10-31T22-05-52.667Z-b48c2ccb-staged.json",
+    "outcome": "passed",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "scripts/acceptance-gate.mjs",
+      "--staged",
+      "--run"
+    ],
+    "gateMode": "full",
+    "testCounts": "Parent reports local 960 files / 9596 passed / 41 skipped; this diagnosis does not rerun or reinterpret those tests."
+  },
+  "ciEvidence": {
+    "head": "d1aafd25baf5f73e5b6bbce0146e9762029dd02d",
+    "log": "搜打撤/docs/evidence/2026-11-01-github-sync/github-ci-failed.log",
+    "workflow": ".github/workflows/ci.yml",
+    "entry": "node scripts/acceptance-gate.mjs --full --run",
+    "observed": "Syntax, data, type and ESLint passed; asset step failed with 6 unlisted errors and 567 historical warnings before Vitest.",
+    "unregistered": [
+      "game/assets/ui/beginner-guide/battle-live.webp",
+      "game/assets/ui/beginner-guide/extract-live.webp",
+      "game/assets/ui/beginner-guide/growth-live.webp",
+      "game/assets/ui/beginner-guide/loot-live.webp",
+      "game/assets/ui/beginner-guide/map-live.webp",
+      "game/assets/ui/beginner-guide/prepare-live.webp"
+    ]
+  },
+  "boundaries": [
+    {
+      "source": "scripts/acceptance-gate.mjs:217,252-262",
+      "behavior": "staged derives from --staged selection. Both skip and non-skip modes run asset audit only when !staged. --force-full changes plan.mode, not staged. Clearing SDT_STAGED_SNAPSHOT does not change this."
+    },
+    {
+      "source": "scripts/workflow-staged.mjs:215-226",
+      "behavior": "Snapshot invokes acceptance-gate --staged --run and sets SDT_STAGED_SNAPSHOT=1 only on execution."
+    },
+    {
+      "source": "tests/asset-audit.test.js:135,149",
+      "behavior": "Real repository CLI integration case explicitly skips when SDT_STAGED_SNAPSHOT is truthy. Synthetic audit unit cases remain useful but do not inspect the real candidate inventory."
+    },
+    {
+      "source": "tests/acceptance-gate.test.js:269-278,382-394; tests/workflow-staged.test.js:129-133",
+      "behavior": "Contracts explicitly expect the staged gate not to call asset audit. This is intentional current behavior, not a new silent skip."
+    },
+    {
+      "source": ".github/workflows/ci.yml:32-42; scripts/acceptance-gate.mjs:235,262",
+      "behavior": "CI rejects inherited gate shortcut variables and runs non-staged --full; plan.paths=[] reaches global asset-audit --check --paths-json []."
+    }
+  ],
+  "designConstraint": {
+    "documentedInCode": "Staged comments state worktree audit fingerprints versus index LF-normalized bytes can drift, so worktree/CI own the check.",
+    "qualification": "asset-audit-lib.cjs:8-14 currently canonicalizes SVG/JSON asset CRLF to LF. The broad legacy rationale is therefore not proof that all current asset checks require skipping.",
+    "specificFailure": "All 6 files are binary WebP and the unlisted predicate at asset-audit-lib.cjs:84 is a manifest path-membership check. CRLF cannot explain these missing registrations.",
+    "scope": "No attempt to remove or redesign the existing staged exception in this task."
+  },
+  "minimalOfficialSupplement": {
+    "cwd": "The complete checkout of the corrected publication candidate / 搜打撤",
+    "command": "node scripts/asset-audit.cjs --check",
+    "equivalence": "Same global audit as CI --full because omitted paths default to []. It scans inventory, registration bytes/extensions/hashes/license and historical-debt fingerprints.",
+    "expected": "Exit 0 after manifest repair, no new errors; unchanged historical warnings remain separately reported.",
+    "constraints": [
+      "Run against the corrected candidate checkout bytes, not a different mixed tree or a selected-only report.",
+      "Do not substitute --scope selected, which returns selected ok separately from global.ok.",
+      "No build, npm dependency install or network required by asset-audit; its implementation uses Node built-ins.",
+      "This asset-only supplement closes the omitted asset stage; it does not claim a new complete full-gate receipt or remote CI success."
+    ],
+    "notExecutedHere": true
+  },
+  "auditedSources": [
+    {
+      "path": "搜打撤/scripts/acceptance-gate.mjs",
+      "sha256": "88c2b82d076b5b07d38c849d1c2b3c245dcbc4c0aa4169f389788f3b8fe82129"
+    },
+    {
+      "path": "搜打撤/scripts/workflow-staged.mjs",
+      "sha256": "0a780402b899299aace87a4f75762ec433fb562d3d433f030b6fa98d7ecab6bc"
+    },
+    {
+      "path": "搜打撤/scripts/asset-audit.cjs",
+      "sha256": "a1eb24b80aef0bf8973d1311d48bba85d5c2e8bc72fe2c35ac1c2c5985257934"
+    },
+    {
+      "path": "搜打撤/scripts/asset-audit-lib.cjs",
+      "sha256": "06ed331ed5b29235a068237fe03953217cb48fb9da476e53eec8f7ddb424e69e"
+    },
+    {
+      "path": "搜打撤/tests/asset-audit.test.js",
+      "sha256": "b82acaa48f04b064c0c2afe7971603874a35ebdc3677fe84e058e66af6b6aa49"
+    },
+    {
+      "path": "搜打撤/tests/acceptance-gate.test.js",
+      "sha256": "c6dddbeda3341add954c6c7fcb7323dad8ac1f9cab7c2d1ab5a6f75244285f85"
+    },
+    {
+      "path": "搜打撤/tests/workflow-staged.test.js",
+      "sha256": "2cbcc308b948186f9830a7f926d1dc2cb79b298b5636b1d2ca198407abe0b91d"
+    }
+  ],
+  "remaining": "Hub repairs only the 6 manifest entries; Root runs the global asset supplement against the correction candidate and verifies new CI after publishing."
+}

@@ -122,5 +122,15 @@
     "consoleErrors": 0,
     "startupAudioWarnings": 3,
     "currentWindowOnly": true
+  },
+  "ciAssetFollowup": {
+    "scope": "Only six existing beginner-guide images registered in the formal asset manifest; all original entries retained.",
+    "assetAuditErrors": 0,
+    "historicalWarnings": 567,
+    "targetedAssertions": 30,
+    "frozenQuickGatePassed": true,
+    "buildPassed": true,
+    "artifactUnchanged": true,
+    "receipt": "asset-followup-summary.json"
   }
 }
