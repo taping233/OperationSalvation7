@@ -1,0 +1,13 @@
+{
+  "status": "fixed and frozen; formal combined gate owned by root",
+  "scope": "搜打撤/game/src/battle/core/battle.resolution.domain.js:129",
+  "failure": "The new sixth parameter defaulted to an untyped empty object, so destructuring onHandSelectDone failed the formal checked-JavaScript gate.",
+  "contract": "game/src/battle/core/battle.core-ports.types.d.ts ResolveCard.steps already declares execution?: { onHandSelectDone?: () => void }.",
+  "change": "Name the sixth parameter execution, annotate it with Parameters<ResolveCard['steps']>[5], and destructure its callback inside the generator. Type the bottom synchronous wrapper rest argument as Parameters<ResolveCard['steps']>; retain its for-of consumption of all generator steps. The existing port declaration remains the single callback contract; no any cast, fallback or rule/assertion change.",
+  "checks": [
+    { "kind": "node --check target", "passed": true, "exitCode": 0 },
+    { "kind": "isolated failed-snapshot check-types.mjs diagnostic", "passed": true, "exitCode": 0, "configurations": 11, "implementationCoverage": "677/677", "strictCoverage": "51/677", "sourceSha256": "43738fed9dbcb4bd50e7d30d730831531c1cbd2ec4f98cf2b5a8d8c961d3857d", "snapshot": "C:/Users/太平/AppData/Local/Temp/sdt-staged-oVfyaS/snapshot", "boundary": "Authorized copy of this one target into the already failed isolated snapshot. Diagnostic only; does not supersede or reuse the failed formal receipt." },
+    { "kind": "combined type/quality gate", "status": "root to rerun after all scoped fixes freeze" }
+  ],
+  "ownership": "Only this target production file was changed. No stage, commit, push or Unity launch."
+}

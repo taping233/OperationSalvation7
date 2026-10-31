@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Friday / hub_save_parity independent review",
+  "reviewedAt": "2026-10-31T14:31:47.664236+00:00",
+  "status": "reviewed-no-confirmed-regression",
+  "evidence": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-31-unity-parity\\player-1",
+  "buildGUID": "45c6a2e4e15743de8bcee21833e1bf3c",
+  "display": {
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "dpi": 144,
+    "canvas": "ScreenSpaceOverlay",
+    "canvasScaleFactor": 1.33333337
+  },
+  "reviewedImages": [
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-31-unity-parity\\player-1\\player-title.png",
+      "sha256": "10f83a8b04675f6825b8034c011d5c81fc252509d8a118158a1a1d5f721f9206",
+      "viewedWith": "functions.view_image",
+      "conclusion": "no-confirmed-visual-regression-in-visible-scope",
+      "observations": "主标题、进入城市、生存指南、右侧菜单及底部信箱/壁纸入口完整，字体与图标可读；未见全局清理造成空区、叠字、重复header或缺图。手写logo属于源图片，不据其笔触判为文本模糊。"
+    },
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-31-unity-parity\\player-1\\player-settings.png",
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6",
+      "viewedWith": "functions.view_image",
+      "conclusion": "no-confirmed-visual-regression-in-visible-scope",
+      "observations": "设置标题与返回、四分类导航、通用开关及折叠项目均清楚；右栏文本与开关不相互覆盖，边界和底部留白完整。本图仅通用分类。"
+    },
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-31-unity-parity\\player-1\\player-slots-backup.png",
+      "sha256": "a49e5682b8e42076857a775743d6bb1c02ae0d3213f7e2ef5a6794145a8e9e84",
+      "viewedWith": "functions.view_image",
+      "conclusion": "no-confirmed-visual-regression-in-visible-scope",
+      "observations": "五档卡片、档位05基地状态、进入存档、覆盖重开/删除与展开的备份恢复三入口均在卡片内，未见底部裁切；另外四档空态可读。"
+    },
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-31-unity-parity\\player-1\\player-shop.png",
+      "sha256": "e8e8b32c631b1245a6bace9f908a41b2b818b5c4768960495b35dbafca4c46aa",
+      "viewedWith": "functions.view_image",
+      "conclusion": "no-confirmed-visual-regression-in-visible-scope",
+      "observations": "当前补给站26:74区域与五列两行货架、商人、金币/容量和返回按钮完整；各卡费用/卡名/说明与商品价格可读，金币图标未挤占价格文字。"
+    },
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-31-unity-parity\\player-1\\player-shop-commission.png",
+      "sha256": "bba5f64121056777add9a76cf258f836824d20bf5736328fb59eea68282f99fb",
+      "viewedWith": "functions.view_image",
+      "conclusion": "no-confirmed-visual-regression-in-visible-scope",
+      "observations": "凭据以自身commission-story标题/正文/单操作呈现，没有误用市场货架壳或重复公共标题；两段正文折行完整，按钮未盖字。"
+    },
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-31-unity-parity\\player-1\\player-reward-reader-capacity.png",
+      "sha256": "571eb8615b90780592bc0b2512089991e5f1262bb025fbfe3349b66d98afcbd3",
+      "viewedWith": "functions.view_image",
+      "conclusion": "no-confirmed-visual-regression-in-visible-scope",
+      "observations": "大卡面、费用、卡名、规则和下方整理背包按钮清楚，背景虚化连续，关闭控件可见。顶端保存失败提示来自本轮脚本前序故意文件锁失败，见NativeDisplayReview.cs的eventRecodeAccept文件锁段；与卡面不重叠，不据此推断后续领取保存失败。"
+    },
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-31-unity-parity\\player-1\\player-returned-base.png",
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291",
+      "viewedWith": "functions.view_image",
+      "conclusion": "no-confirmed-visual-regression-in-visible-scope",
+      "observations": "基地标题、档案05、四资源数字/图标、左事务栏、右整备/难度区和七项底部导航完整；没有残留局内公共顶栏或双重header，字形清楚。"
+    }
+  ],
+  "confirmedFindings": [],
+  "currentSourceContext": [
+    "搜打撤/game/src/ui/menu-slot-view.js",
+    "搜打撤/game/src/ui/menu-settings.js",
+    "搜打撤/game/src/ui/settings-navigation.js",
+    "搜打撤/game/css/expedition-shop.css",
+    "搜打撤/game/src/run/shop-commission.js",
+    "搜打撤/game/css/expedition-rewards.css",
+    "搜打撤/game/src/hub/hub.home-v3.js",
+    "SoudacheUnity/Assets/Scripts/Sdt.Boot/NativeDisplayReview.cs"
+  ],
+  "conclusion": "7张当前正常Standalone实际画面已逐张查看，所见Header、读字、布局和公共清理未发现确证P1/P2回归。来源结构核对限于当前活跃页面和屏幕可见内容，不沿用历史Passed。",
+  "limits": [
+    "未启动Unity、播放器、浏览器或测试；本报告仅只读查看已有实际图片并核对当前源码。",
+    "仅当前2560×1440/DPI144窗口，不声称其它尺寸、其它DPI、逐像素Vite一致或全部57张独立审图。",
+    "设置其它分类、卡牌长文末页、遮罩下不可见内容、动态帧连续性和物理键鼠未由这7张静态图证明。",
+    "截图包含程序构造流程与故意文件锁错误提示；不把构造场景等同自然随机流程、硬件输入或音效听测。"
+  ]
+}

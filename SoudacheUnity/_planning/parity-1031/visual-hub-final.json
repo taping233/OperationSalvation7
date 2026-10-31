@@ -1,0 +1,138 @@
+{
+  "date": "2026-11-01",
+  "reviewer": "battle_parity; independent of Hub implementation",
+  "status": "complete within assigned Hub flow and current-window evidence",
+  "mode": "read-only view_image and current source/result review; no production changes or test execution",
+  "evidenceRoot": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5",
+  "buildGuid": "4bdd212ad45c44d09a0052a7b8b1e2b3",
+  "reviewReuse": "前五图已逐张审查player-4。按root构建收据，build-5→6唯一输入变化为NativeDisplayReview.HubParity.cs的Canvas等待，生产与美术相同。player-5的stock、trade-variant、trade-base-variant、conversion-overflow与player-4各自SHA256完全一致；本次另view_image抽查player-5的warehouse-actions与conversion-overflow，并新增查看两张最终图。",
+  "display": { "width": 2560, "height": 1440, "dpi": 144, "scope": "current Standalone capture window only" },
+  "runBoundary": {
+    "passed": true,
+    "records": 151,
+    "processExitCode": 0,
+    "meaning": "player-5完整61图，指定Hub流程与后置状态守卫完成；通过状态来自本包result，退出码与构建GUID由root收据提供。"
+  },
+  "images": [
+    {
+      "file": "player-hub-variant-stock.png",
+      "sha256": "0D3817639F02D0BDDB73A1C2E08CDA3F100DB73AFC58ED1536103877199957DD",
+      "observed": [
+        "同名迅疾箭两堆分别×3、×2；职业卡×1、钥匙卡×2；仓库8/25格、顶部钥匙4和储备币10可读。",
+        "卡名、卡面、数量未互相覆盖，当前库存卡片边界未裁断。"
+      ],
+      "limit": "同名同卡面仅凭图片无法证明稳定variant身份；以夹具和命令后状态守卫补充。"
+    },
+    {
+      "file": "player-hub-warehouse-actions.png",
+      "sha256": "C3C4C837190EF288346BC5654973280A6ACBC0BA4242F077DD277975C779562D",
+      "observed": [
+        "普通迅疾箭详情显示持有3张，仅有保护卡牌和返回仓库，未出现出售操作。",
+        "卡名、说明和两个底部按钮完整可读；未见父页面通知覆盖详情标题。"
+      ],
+      "resultSupport": "Capture前的无出售控件、保护不扣库存/不加XP、取消保护保留图鉴守卫已通过。"
+    },
+    {
+      "file": "player-hub-trade-variant.png",
+      "sha256": "647287378058211DB3B1A61EECD97241C461F7C976FD700067A0ECAE293229F8",
+      "observed": [
+        "选中第一种迅疾箭变体，持有3；同名邻堆持有2。两堆均显示2储备币。",
+        "右侧单价2、数量1、总收入2、余额10，以及出售×1/+2、整堆×3/+6按钮清楚。",
+        "卡面印刷估值37与基地出售单价2分别呈现。"
+      ]
+    },
+    {
+      "file": "player-hub-trade-base-variant.png",
+      "sha256": "7A880A5D758B814D0AF4021913F8A0DBD43B16355A955E0B1D31C3ED33C83C72",
+      "observed": [
+        "第一堆已降为持有2，第二堆仍持有2并被选中；余额12、单价2、收入2、整堆收入4清楚。",
+        "出售完成通知位于右下方，没有盖住交易标题、价格、操作按钮或其下次打开的培养详情标题。"
+      ],
+      "resultSupport": "本包完成销售数量、余额及同名邻堆守卫；最终record确认variant2、普通堆1、币14。精确身份结论结合源中的稳定stackKey和夹具路径。"
+    },
+    {
+      "file": "player-hub-conversion-overflow.png",
+      "sha256": "6B9C39D828491CBCD1D2AEE7E61DDD6DA315EFC1FA125D5AAE78C43AB12B3916",
+      "observed": [
+        "飞刃偷袭详情显示实际经验1 XP、末张溢出9 XP、Lv.9→Lv.10、消耗1/1。",
+        "首次转化永久收录图鉴的提示、确认消耗并转化和取消转化按钮完整。",
+        "详情标题、卡面、预览数字未被父notice遮挡；当前局部错误状态为空。"
+      ],
+      "resultSupport": "此前未收录职业卡没有保护按钮的控件守卫、上述预览数值和确认可用守卫已通过。",
+      "resultSupportAfterCommit": "本包后续转换提交完成；最终record确认Lv10、XP0、已注册，四个关闭/替换后的保护与转换旧回调守卫均记录成功。截图本身只证明预览，实际结果由本包状态守卫补充。"
+    },
+    {
+      "file": "player-hub-restore-unbanked-keys.png",
+      "sha256": "2E29C6074AA1CC7AFBB45513DA78D910DE7188B48824253C3C890D526E1A6C75",
+      "observed": [
+        "待复原1张，已入账钥匙0/1、仓库空位20/1；复原1张/1钥匙按钮呈禁用状态，返回仓库可见。",
+        "顶部总钥匙仍显示4；总钥匙包含未使用资源卡，与此操作读取的入账钥匙分别展示。",
+        "父页面培养完成通知留在右下并处于详情遮罩后方，未覆盖迅疾箭标题、卡面、钥匙需求或按钮。"
+      ],
+      "resultSupport": "本包确认复原按钮不可交互、b.keys为0、KeyCount大于0、待复原数量仍1；最终unbankedRestoreBlocked=true。"
+    },
+    {
+      "file": "player-hub-parity-returned-base.png",
+      "sha256": "D5FA8EF972FA6FEB8C2D3748A8987BFDF4EB1CD51DD2DA1148ADC3E9A8AD62B7",
+      "observed": [
+        "返回基地，储备币14、总钥匙4、待复原1清楚；基地事务、出征整备和底部导航未被详情或旧通知遮挡。",
+        "当前基地页无遗留局部错误文字或过期详情弹层。"
+      ],
+      "resultSupport": "最终state record为币14、variantCount2、baseVariantCount1、level10、xp0、registered=true、unbankedRestoreBlocked=true；这些内部值不全部显示于本张基地图。"
+    }
+  ],
+  "sourceCrossCheck": [
+    {
+      "topic": "warehouse actions and local detail ownership",
+      "sources": [
+        "game/src/hub/game.hub.pages.js:123-135",
+        "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInventory.cs:24-31",
+        "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInventory.cs:69-89"
+      ],
+      "finding": "当前详情不提供出售；未收录职业卡不提供保护。操作先检查当前详情owner、Base实例与档位；失败文字写入局部status并SuppressNotice，不转成父notice。当前五图未触发详情失败文字，不能声称已验该文字的实际错误场景。"
+    },
+    {
+      "topic": "sale price and exact stack identity",
+      "sources": [
+        "game/src/hub/stash-sale-price.js:2-7",
+        "Assets/Scripts/Sdt.Run/BaseData.cs:328-367",
+        "Assets/Scripts/Sdt.Boot/NativeDisplayReview.HubParity.cs:fixture and sequential sale guards"
+      ],
+      "finding": "古朴基地售价为2；FindStoredStack按完整DepartureStackKey定位并拒绝重复身份。夹具variantKey为card:tt2-swiftarrow:display-hub-variant，普通堆为card:tt2-swiftarrow；销售路径守卫分别检查邻堆未变和币10→12→14。图片本身不承担精确身份的证明。"
+    },
+    {
+      "topic": "actual experience and overflow",
+      "sources": [
+        "Assets/Scripts/Sdt.Run/MetaProgress.Collections.cs:53-79",
+        "Assets/Scripts/Sdt.Run/MetaProgress.Collections.cs:82-97",
+        "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInventory.cs:69-78"
+      ],
+      "finding": "预览按等级上限所需XP截断实际增量并分列末张溢出；本夹具还差1XP，职业卡每张10XP，得到1/9预览。生产提交沿同一预览增加actualXp；本包提交守卫及最终record确认等级10、XP0、已注册。"
+    },
+    {
+      "topic": "parent notice placement",
+      "sources": [
+        "game/src/hub/game.hub.runtime.js:175",
+        "game/css/base-camp.css:62",
+        "Assets/Scripts/Sdt.UI/Kit/CurrentHubOperationNotice.cs:14-50"
+      ],
+      "finding": "父notice由页面owner维护，当前右下32/24位置与来源对应；同页重建保留到期时刻。交易成功、培养预览及复原详情均未出现标题遮挡；返回基地无遗留详情或过期局部状态。"
+    }
+  ],
+  "runtimeEvidence": {
+    "directRecords": [
+      "constructed-current-hub-fixture: normalId tt2-swiftarrow, printed value37, source price2, conversionId tt7-throwblade",
+      "constructed-stale-callback-rejected: warehouse-protect-after-close-same-frame",
+      "constructed-stale-callback-rejected: warehouse-protect-after-replacement",
+      "constructed-stale-callback-rejected: warehouse-convert-after-close-same-frame",
+      "constructed-stale-callback-rejected: warehouse-convert-after-replacement",
+      "current-hub-parity-effects: coins14, variantCount2, baseVariantCount1, level10, xp0, registered=true, unbankedRestoreBlocked=true"
+    ],
+    "oldCallbackMeaning": "保护与转换各两个旧回调守卫比较当前owner、Base/State序列化值与RNG状态；本包四条均有成功记录。结论限于这些关闭/替换场景。",
+    "inputBoundary": "Standalone内挂载控件、构造pointer输入和可达性检查；无OS物理键鼠输入声明。"
+  },
+  "clippingBoundary": "交易右侧trade-v5-reading是来源和Unity均保留的滚动阅读区；当前首屏截取卡底与后续说明。关键价格和按钮未被非预期遮挡；仅凭静态图不能验证完整滚动阅读。",
+  "pending": [],
+  "confirmedNewVisualDefects": [],
+  "conclusion": "指定Hub流程已闭合：仓库操作边界、售价2、精确variant扣减、1/9XP及实际转换、未入账钥匙禁复原、四个旧回调拒绝和返回基地均有相应画面或本包状态守卫支撑，未发现新增标题或关键控件遮挡。范围限于本夹具与当前窗口；不扩称全部Hub页面、任意存档、实际听音或OS物理输入均通过。"
+}

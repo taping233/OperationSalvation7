@@ -1,0 +1,303 @@
+{
+  "assets": [
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-emblem-1.png",
+      "outputSha256": "352ac82b19b7961f9a0b7da3c1acf9f5a5ad2c8faba50e4b6cfeaa7829a9e03c",
+      "bytes": 9954,
+      "conversion": "exact inline SVG paths; CairoSVG raster"
+    },
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-emblem-2.png",
+      "outputSha256": "489a85760fd142e1c748fcdd99da0862d4c20e345072e6d03a143ca28e5b2d98",
+      "bytes": 7565,
+      "conversion": "exact inline SVG paths; CairoSVG raster"
+    },
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-emblem-3.png",
+      "outputSha256": "d6887f4315bae049637513bb39b556e26d3ea99a3e21db9c3140b1444791758f",
+      "bytes": 8109,
+      "conversion": "exact inline SVG paths; CairoSVG raster"
+    },
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-emblem-4.png",
+      "outputSha256": "167f3f81d9042a2ab98b4d5ed61c54fb14dfe6b22869028e883da463e1e31e21",
+      "bytes": 8445,
+      "conversion": "exact inline SVG paths; CairoSVG raster"
+    },
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-emblem-5.png",
+      "outputSha256": "98bd210c8189d3bf1bf135ecd1635d53dd3f62c1c5d29a965643fd67c95e2734",
+      "bytes": 12765,
+      "conversion": "exact inline SVG paths; CairoSVG raster"
+    },
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-glow-1.png",
+      "outputSha256": "56e036e92149a672af76aa3e719d9b71c20f0c9a69b3c9cd0fa678ecbe25bc90",
+      "bytes": 19765,
+      "conversion": "same source SVG alpha, literal CSS drop-shadow11px/34px at native122px seal size"
+    },
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-glow-2.png",
+      "outputSha256": "56e036e92149a672af76aa3e719d9b71c20f0c9a69b3c9cd0fa678ecbe25bc90",
+      "bytes": 19765,
+      "conversion": "same source SVG alpha, literal CSS drop-shadow11px/34px at native122px seal size"
+    },
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-glow-3.png",
+      "outputSha256": "56e036e92149a672af76aa3e719d9b71c20f0c9a69b3c9cd0fa678ecbe25bc90",
+      "bytes": 19765,
+      "conversion": "same source SVG alpha, literal CSS drop-shadow11px/34px at native122px seal size"
+    },
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-glow-4.png",
+      "outputSha256": "56e036e92149a672af76aa3e719d9b71c20f0c9a69b3c9cd0fa678ecbe25bc90",
+      "bytes": 19765,
+      "conversion": "same source SVG alpha, literal CSS drop-shadow11px/34px at native122px seal size"
+    },
+    {
+      "source": "src/ui/slot-emblems.js",
+      "sourceSha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-glow-5.png",
+      "outputSha256": "56e036e92149a672af76aa3e719d9b71c20f0c9a69b3c9cd0fa678ecbe25bc90",
+      "bytes": 19765,
+      "conversion": "same source SVG alpha, literal CSS drop-shadow11px/34px at native122px seal size"
+    },
+    {
+      "source": "src/ui/menu-slot-view.js",
+      "sourceSha256": "25c1e9e00f245ac38c3b6e37446f5b8fbe7cb3a241e4a191c08dc2dee88346c6",
+      "output": "Assets/Resources/Art/CurrentArchive/sil-horse.png",
+      "outputSha256": "a4d6b93c974f7cf71342c06dc1eb5e3b6306846f8d598974372fa631969ad7dc",
+      "bytes": 7719,
+      "conversion": "exact inline SVG paths; CairoSVG raster"
+    },
+    {
+      "source": "src/ui/menu-slot-view.js",
+      "sourceSha256": "25c1e9e00f245ac38c3b6e37446f5b8fbe7cb3a241e4a191c08dc2dee88346c6",
+      "output": "Assets/Resources/Art/CurrentArchive/sil-deer.png",
+      "outputSha256": "956b68a92d0ac0ea39fc026b638da4569d0962120aed02cd91a69747ece94e1a",
+      "bytes": 11022,
+      "conversion": "exact inline SVG paths; CairoSVG raster"
+    },
+    {
+      "source": "src/ui/menu-slot-view.js",
+      "sourceSha256": "25c1e9e00f245ac38c3b6e37446f5b8fbe7cb3a241e4a191c08dc2dee88346c6",
+      "output": "Assets/Resources/Art/CurrentArchive/sil-birds.png",
+      "outputSha256": "d6fe9b238f493876e002ab44493d746816f1e6997dd417d7b4a9bc0f722a352d",
+      "bytes": 4104,
+      "conversion": "exact inline SVG paths; CairoSVG raster"
+    },
+    {
+      "source": "assets/ui/achievement-styles/gesture.webp",
+      "sourceSha256": "15df7c8274e3fcc921d8d4b47a3ab223cadf2923988baa0ebbe55b2f86b2121b",
+      "output": "Assets/Resources/Art/CurrentArchive/gesture.png",
+      "outputSha256": "91f9850557eaca71046d969df12a1ff9fd7e9ae39bd1c2b5d18279cc5659e903",
+      "bytes": 2232496,
+      "conversion": "original WebP decoded to RGBA PNG; original pixels and canvas"
+    },
+    {
+      "source": "assets/ui/achievement-styles/ink.webp",
+      "sourceSha256": "f0034e153a187e2097caecdfaee17728eea7b1a6c87a6c52cacd965d36c80d6e",
+      "output": "Assets/Resources/Art/CurrentArchive/ink.png",
+      "outputSha256": "8cbc8d2ad2a449b8a78ea1cc4cf9f1fe471e8d337dd1a65060546c26473831f8",
+      "bytes": 2103737,
+      "conversion": "original WebP decoded to RGBA PNG; original pixels and canvas"
+    },
+    {
+      "source": "assets/ui/achievement-styles/collage.webp",
+      "sourceSha256": "93ebea5371207eaf4cf31324e72c2de560be824335925df6a73ff8c7480206e1",
+      "output": "Assets/Resources/Art/CurrentArchive/collage.png",
+      "outputSha256": "8b2afc010684e00b085a4899e85e7c1d080022161577059fd81c3fde6c0352a0",
+      "bytes": 2263764,
+      "conversion": "original WebP decoded to RGBA PNG; original pixels and canvas"
+    },
+    {
+      "source": "assets/ui/achievement-styles/symbol.webp",
+      "sourceSha256": "decf51817df219f84f535a49c0e8e5be22c064c766d4a2dbe96109583dfc4936",
+      "output": "Assets/Resources/Art/CurrentArchive/symbol.png",
+      "outputSha256": "af3644cabce04fd310c74b23fe506b19bb5ee212945f3347249b63eab4a9424d",
+      "bytes": 1254661,
+      "conversion": "original WebP decoded to RGBA PNG; original pixels and canvas"
+    },
+    {
+      "source": "assets/scenes/cinematic/archive-leaves-v1.webp",
+      "sourceSha256": "07c914ebf7c1e4c8e298dd37886ae53231fd49e88d9ebb1fd2acc6b82dfe65c1",
+      "output": "Assets/Resources/Art/CurrentArchive/archive-leaves-v1.png",
+      "outputSha256": "51d2209ed4f10788591988d0f457f1c6ac4499029f00d63e8e601b000fcd80e4",
+      "bytes": 411627,
+      "conversion": "original WebP decoded to RGBA PNG"
+    },
+    {
+      "source": "css/page-slot-select.css",
+      "sourceSha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-page.png",
+      "outputSha256": "9931d2e42e1cde6e78e41308dcce86dadd28d6cdc7fc4ae28684cc8b56de125d",
+      "bytes": 142239,
+      "conversion": "literal final CSS gradient paint, raster; native text and interaction remain separate"
+    },
+    {
+      "source": "css/page-slot-select.css",
+      "sourceSha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-mist.png",
+      "outputSha256": "9adda78645a9ffecc2d52ddbc601555d9305f060a9d6f9c1a2ec3f8d53c684af",
+      "bytes": 276696,
+      "conversion": "literal final CSS gradient paint, raster; native text and interaction remain separate"
+    },
+    {
+      "source": "css/page-slot-select.css",
+      "sourceSha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-bokeh.png",
+      "outputSha256": "711da7f519478c2e6416b9937c44f577cd02fc280534a59618170fae1507d0c1",
+      "bytes": 3378,
+      "conversion": "literal final CSS gradient paint, raster; native text and interaction remain separate"
+    },
+    {
+      "source": "css/winter.css",
+      "sourceSha256": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-card-shade.png",
+      "outputSha256": "afc9c1cb217656e581414df272dd2c48a234462779116c74bfd18123c3d5e5e8",
+      "bytes": 3305,
+      "conversion": "literal final CSS gradient paint, raster; native text and interaction remain separate"
+    },
+    {
+      "source": "css/winter.css",
+      "sourceSha256": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9",
+      "output": "Assets/Resources/Art/CurrentArchive/slot-card-light.png",
+      "outputSha256": "eb2ee640f5d8255c65eddfb74937c73316dc04313b2a9469e37eff171930c795",
+      "bytes": 67943,
+      "conversion": "literal final CSS gradient paint, raster; native text and interaction remain separate"
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/ui/menu-slots.js",
+      "sha256": "205c9869427bc45a3c7bd34565e2ed8cb9f281694382566d71d1ce7c745e2f7c"
+    },
+    {
+      "path": "src/ui/menu-slot-view.js",
+      "sha256": "25c1e9e00f245ac38c3b6e37446f5b8fbe7cb3a241e4a191c08dc2dee88346c6"
+    },
+    {
+      "path": "src/ui/slot-emblems.js",
+      "sha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8"
+    },
+    {
+      "path": "src/ui/achievement-gallery.js",
+      "sha256": "0f8ec59b656702abfcf903fd02eb3cfa6fa3fb5768073bdbb11cc64a9f08ea3d"
+    },
+    {
+      "path": "src/ui/achievement-medals.js",
+      "sha256": "d47fee5b4c8400219108370bd26f915615bc4d216e51121f083874884bb5eb41"
+    },
+    {
+      "path": "src/ui/achievement-motion.js",
+      "sha256": "2c5e23e8d9f3e76d6fb79532b1f1d4214212a4f18fcff92fab343e9689fff3e7"
+    },
+    {
+      "path": "src/ui/menu-guide.js",
+      "sha256": "a4ed310200c643713e1125bfbb339cf9d27299f7f238ae631243bc4b4a0dcd69"
+    },
+    {
+      "path": "src/ui/camp-entry.js",
+      "sha256": "63e7a22d9b47878498a57e75a6ff2f555b374ce5e490bbd6d8727b3a587b7675"
+    },
+    {
+      "path": "src/ui/archive-motion.js",
+      "sha256": "701b3f7149bf64f375b7a8159bbae4f670698423a329a9c6062e492d68a5be76"
+    },
+    {
+      "path": "src/ui/page-motion-profiles.js",
+      "sha256": "d8495bf4625bc560db06a0e8a7144c9413dbe216d7598101e8dbe8803f4c3b20"
+    },
+    {
+      "path": "src/ui/transition-handoff.js",
+      "sha256": "3f38a0b051b35d8df6e8e934a3023a4f612ba05e7951be710e548c92d355f1f5"
+    },
+    {
+      "path": "src/ui/silent-node-film.js",
+      "sha256": "91b9419c36e40ea3677d9a1285d9c6f31bef62e391a77086525dbdf9b298717d"
+    },
+    {
+      "path": "src/ui/cinematic-profiles.js",
+      "sha256": "fb97f4bf9594e708edb9e315704d24a1f54aca452ce079582646077439a3da22"
+    },
+    {
+      "path": "src/ui/motion-presets.js",
+      "sha256": "857fcf75668a97ca69a713532a63511ed855a9f6043188e3d09dcf274ca16221"
+    },
+    {
+      "path": "src/ui/collection-chrome.js",
+      "sha256": "6060bae086fb9302005142819a48c2276783e50847400efac0734d049737421d"
+    },
+    {
+      "path": "css/overlays.css",
+      "sha256": "d862d1dfb82a8c376473b07762daf8bcb274ff5e7d599ee516acc65b1f97546d"
+    },
+    {
+      "path": "css/winter.css",
+      "sha256": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9"
+    },
+    {
+      "path": "css/page-slot-select.css",
+      "sha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6"
+    },
+    {
+      "path": "css/title-achievements.css",
+      "sha256": "4cccbe4c131cfef23682ef4a4a85e698bc9b09a1957444506399e6435be8a3b8"
+    },
+    {
+      "path": "css/collection-chrome.css",
+      "sha256": "c3a859b244ce82a774f1f5aa0ebf3ec9f475c223ba22d67c37d375a3cd0ba766"
+    },
+    {
+      "path": "css/review-ui.css",
+      "sha256": "911bd4c7a4d50faeefe08ab3babdea46f5c91dbf18accb6e68ccb465590d9fc9"
+    },
+    {
+      "path": "css/archive-motion.css",
+      "sha256": "f1c574f0e50ded250233e25185b5e376c5db1d28a46a33cf3d531cada563d756"
+    },
+    {
+      "path": "css/archive-back.css",
+      "sha256": "d893b6a0396f28ba4bd7905016d574c26a67f51268d1b7800d319b627fd71b38"
+    },
+    {
+      "path": "css/navigation-feedback.css",
+      "sha256": "36b28df2419f09718b9143c3f3ef71a493ad16713a2bc16dc40f6b4c337c1bf2"
+    },
+    {
+      "path": "css/home-linked-interactions.css",
+      "sha256": "ca5e34915fc8b9acfc0bcd64812228d1a6eb35df3a69c89054ae670458033d51"
+    },
+    {
+      "path": "css/silent-node-film.css",
+      "sha256": "4ed960115782b7d1455ff0a2d7ed13cecd651603c36ed75a5de2a2d00fbc976b"
+    },
+    {
+      "path": "css/secondary-ui-tokens.css",
+      "sha256": "1cac3b724a9e1a42a44eaab106f87d110dc74951336ac42247ded94297421064"
+    }
+  ],
+  "reused": [
+    "Assets/Resources/Art/CurrentHome/<selected-wallpaper>.png",
+    "Assets/Resources/Art/CurrentHome/linked-back.png",
+    "Assets/Resources/Art/Current/ui/achievement-styles/painted.png"
+  ]
+}

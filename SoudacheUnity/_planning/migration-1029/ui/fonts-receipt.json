@@ -1,0 +1,74 @@
+[
+  {
+    "source": "assets/fonts/notosans-sc-400.woff2",
+    "sourceSha256": "02c79b0cb2e1f15f74b3081078aecd220be13b7d00f68f83c30e73d00cea0bab",
+    "destination": "Assets/Resources/Fonts/notosans-sc-400.ttf",
+    "outputSha256": "d34e80efeba809c8abf23bea0d1d7c675a03cf1c55a8c832786e17fd80dae7e9",
+    "weight": 400,
+    "codepoints": 1692,
+    "glyphMetricsUnchanged": true
+  },
+  {
+    "source": "assets/fonts/notosans-sc-700.woff2",
+    "sourceSha256": "583be2db6cd6b977e207807c7c6dd94d2c55afded5c7be11da82314c5e71bfb5",
+    "destination": "Assets/Resources/Fonts/notosans-sc-700.ttf",
+    "outputSha256": "59c6f867346b73f8931766d2c43aa4a3eb6cf30e8b7d01f694224a6d7d12273c",
+    "weight": 700,
+    "codepoints": 1692,
+    "glyphMetricsUnchanged": true
+  },
+  {
+    "source": "assets/fonts/oxanium-latin-500-normal.woff2",
+    "sourceSha256": "8ad0e754c0e87a6f134d1e172377408bcbda29727a2bfe56e2f3fa976af1dc35",
+    "destination": "Assets/Resources/Fonts/oxanium-latin-500-normal.ttf",
+    "outputSha256": "44f9e89b6ef25dc66da81cf2a04e4c891e638e685f7f9826c7f58570242a9206",
+    "weight": 500,
+    "codepoints": 221,
+    "glyphMetricsUnchanged": true
+  },
+  {
+    "source": "assets/fonts/oxanium-latin-700-normal.woff2",
+    "sourceSha256": "19ac72d5a8b3b31316133df3dc8e5b47f93dfc4b85245b776dd6d70fc4b3504c",
+    "destination": "Assets/Resources/Fonts/oxanium-latin-700-normal.ttf",
+    "outputSha256": "83670d6bd36590523aa0e33de40467365f8d7ab1df0546d0da49b80e25560903",
+    "weight": 700,
+    "codepoints": 221,
+    "glyphMetricsUnchanged": true
+  },
+  {
+    "source": "assets/fonts/rajdhani-latin-600-normal.woff2",
+    "sourceSha256": "433a7007e4747a02a790167a6efa2625855f013970ba49b9b739a5d3db8b2601",
+    "destination": "Assets/Resources/Fonts/rajdhani-latin-600-normal.ttf",
+    "outputSha256": "fee3c177e992617f9407f04e31b213494cbdf4a07c8a5dfa432a590f4fdae5ef",
+    "weight": 600,
+    "codepoints": 204,
+    "glyphMetricsUnchanged": true
+  },
+  {
+    "source": "assets/fonts/rajdhani-latin-700-normal.woff2",
+    "sourceSha256": "5b7e4a6f97163c2636724d4de90304fc895653dcfe64c67a7a22f26331ca5c5f",
+    "destination": "Assets/Resources/Fonts/rajdhani-latin-700-normal.ttf",
+    "outputSha256": "4321bf26e5b82432833a1e0cb3cb4df1d563d7a081868ec2cf514e2bbcfb43cf",
+    "weight": 700,
+    "codepoints": 204,
+    "glyphMetricsUnchanged": true
+  },
+  {
+    "source": "assets/fonts/cascadia-code-400.woff2",
+    "sourceSha256": "aa8a6ab4f26a153a260863b2b3f0e19a60c20fa49856c1c17a5b4da1fa40242c",
+    "destination": "Assets/Resources/Fonts/cascadia-code-400.ttf",
+    "outputSha256": "766cb86024a1403f93227474d722e303f874c157664bd4f15893363ba23d2041",
+    "weight": 400,
+    "codepoints": 119,
+    "glyphMetricsUnchanged": true
+  },
+  {
+    "source": "assets/fonts/cascadia-code-700.woff2",
+    "sourceSha256": "412012aaf548b00b2ce4acf6e99d2f8fdf411e465fe8c199fcb30c4124892b7a",
+    "destination": "Assets/Resources/Fonts/cascadia-code-700.ttf",
+    "outputSha256": "babb108cdf8d90911ac6c226680ad843be282fbdc94643d37978550ec30f80c4",
+    "weight": 700,
+    "codepoints": 119,
+    "glyphMetricsUnchanged": true
+  }
+]

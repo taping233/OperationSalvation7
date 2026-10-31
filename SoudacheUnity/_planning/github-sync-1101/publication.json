@@ -1,0 +1,29 @@
+{
+  "status": "Validated source publication; all preconditions from the export manifest satisfied",
+  "at": "2026-10-31T22:22:46.454514+00:00",
+  "viteBaseCommit": "d1aafd25baf5f73e5b6bbce0146e9762029dd02d",
+  "nativeValidatedLocalCommit": "81b87cbd5f7b6bb7de48b0973c534ba494cb84a9",
+  "nativeBuildGUID": "f83ab90840ac4e558400ef9f736d3d59",
+  "sourcePayloadFiles": 3628,
+  "allCopiedOriginalBytesMatchExportManifest": true,
+  "allSelectedCanonicalGitBlobsMatchNativeCommit": true,
+  "canonicalRowsFormat": "Compact UTF-8 JSON array of [Unity-relative path, mode, Git blob OID], sorted by Unicode path code points; excludes this receipt",
+  "canonicalBlobListSha256": "d5aa01be6229582c33441da3503335d680ddad501db05d5969bbc74f596eca05",
+  "manifest": "_planning/github-sync-1101/export-manifest.json",
+  "sourceHashScope": "Export manifest hashes original worktree bytes; Git blob IDs identify normalized clone bytes. No claim that CRLF original-byte hashes equal LF clone hashes.",
+  "validation": {
+    "nativeDomainAssertions": 845,
+    "nativeSharedChecks": 48,
+    "nativeBattle": "passed",
+    "playerImages": 61,
+    "completeBuildInputs": 3927,
+    "viteFiles": 960,
+    "vitePassedTests": 9596,
+    "viteSkippedTests": 41,
+    "viteFailedTests": 0,
+    "viteBuildAndBudget": "passed",
+    "builtInBrowser": "passed"
+  },
+  "publicationBoundary": "Source branch adds this receipt and root .gitignore change to the exact 3628-file source payload; no Unity history, build package, caches, temporary profiles or policy media copied. Clean-room resource import was not performed.",
+  "repositoryRelativeAcceptance": "搜打撤/docs/evidence/2026-11-01-github-sync/README.md"
+}

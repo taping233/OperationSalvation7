@@ -1,0 +1,43 @@
+{
+  "frozenUtc": "2026-10-29T18:33:07.173Z",
+  "owner": "unity_current_ui_version_audit",
+  "status": "frozen-released",
+  "rows": 24,
+  "sourceDrift": 0,
+  "productionWrites": false,
+  "frontmostActions": false,
+  "unityLaunched": false,
+  "compileRun": false,
+  "artifacts": [
+    {
+      "name": "build-matrix.mjs",
+      "bytes": 34066,
+      "sha256": "9121cd5360a3e5fd33240adf64ad168356b65720ed817ae5bbae8bc1f6c7a5ce"
+    },
+    {
+      "name": "capture-runtime.mjs",
+      "bytes": 4161,
+      "sha256": "711dd4bc18c4811ff07350c8c7e52b1566d7c456c20bb5fe39c29dd816e5c6c1"
+    },
+    {
+      "name": "README.md",
+      "bytes": 44693,
+      "sha256": "8dd81c8708d7e09efcfeb2cb3998f53a6984e91664ed921e7ad8a8201afd928a"
+    },
+    {
+      "name": "runtime-source-manifest.json",
+      "bytes": 559379,
+      "sha256": "ee152dbd85d51fb9906082dcc740685ddb928ce596b81383f4de6fe14d5a19bf"
+    },
+    {
+      "name": "source-drift-check.json",
+      "bytes": 78,
+      "sha256": "ed66ebe10dcd09dae80869947de1d634faa46c77fe495b3f0d71cc6f83aa5031"
+    },
+    {
+      "name": "version-matrix.json",
+      "bytes": 102848,
+      "sha256": "ac3981958d06a8fe40dd8734ac34e6502d92ccce7384a4cc631ce287cb47b8ad"
+    }
+  ]
+}

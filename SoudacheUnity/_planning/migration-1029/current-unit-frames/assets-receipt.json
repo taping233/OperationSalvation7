@@ -1,0 +1,2381 @@
+{
+  "manifestSha256": "e31d19a69ebb858273883ad7b9257b47a08351074ac4686f5fe9b3fe327ea83c",
+  "files": [
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/neutral.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/neutral.png",
+      "sourceSha256": "57ffd12fac024595631df559179eef54deb95db8ba183a9602f8dd721d072071",
+      "outputSha256": "9674a64d6b937bef7e8d3f9a852c22fe44fb56c94b8b6cc37ff8930f4f9b8fb4",
+      "width": 512,
+      "height": 342,
+      "bytes": 84760
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-001.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-001.png",
+      "sourceSha256": "edba1b420eeb3a2e93825f2aea09043410044017c7e2d1d6246fd0618fe182a9",
+      "outputSha256": "11637c1559259c6c1486eb87a61894027a68f93cb7a160aaa7623fdd599134c3",
+      "width": 512,
+      "height": 342,
+      "bytes": 83878
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-002.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-002.png",
+      "sourceSha256": "59a7f4781696dcae9b9cedbd772062bf4ea3cc2ccb5ce4ccbfd0da92dd812aba",
+      "outputSha256": "2a104fbeb89592e6256abeb8062d071f65cb4af291c52c7273d6b3e028aa0de6",
+      "width": 512,
+      "height": 342,
+      "bytes": 83822
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-003.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-003.png",
+      "sourceSha256": "3ec3bd73b0cac2cabaffae85b2bbaaadbccae5c954a398e8f0cc92480f92ad98",
+      "outputSha256": "22bf3112f83e6ef32b628195472b25284192b370cda7c738118d2d18c390235b",
+      "width": 512,
+      "height": 342,
+      "bytes": 83760
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-004.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-004.png",
+      "sourceSha256": "30208f78f946538c7161915fd547e93d3fe48e345860c44dc346c227567e38f3",
+      "outputSha256": "a5d3d99e25f47fc43f501f18c374f694f37224de4ca402128ed4a5cc9e7a2f4c",
+      "width": 512,
+      "height": 342,
+      "bytes": 83557
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-005.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-005.png",
+      "sourceSha256": "b659f9c51e44e1f96146390a216e029c8b4c333f6e5689c391f943c693d2adcf",
+      "outputSha256": "263b16eeb159e74b6598d182b273d0cf6f489aef60867d9b284004d3f138ad0d",
+      "width": 512,
+      "height": 342,
+      "bytes": 83315
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-006.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-006.png",
+      "sourceSha256": "d92df74d8c7ae4cf91ab282845c8abd3c20ba87f21c0c211421498e75b0be2b5",
+      "outputSha256": "31617d82b5f9f97ecdc4b24b7af47e821c2035072436a66a65dddc7d5d0ac5cc",
+      "width": 512,
+      "height": 342,
+      "bytes": 83054
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-007.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-007.png",
+      "sourceSha256": "57d18b85ada69cc86745a0d95d3ec0537c72d05ad33586ca9cf516180187429b",
+      "outputSha256": "4e305d5f0ac2cc3ec191bdce63f5d0e9fec349816493f120ec640544b9d7f982",
+      "width": 512,
+      "height": 342,
+      "bytes": 82994
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-008.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-008.png",
+      "sourceSha256": "1ab2c269dd56c5d53976d061fc93bc648e20e950f3d5667ff83832acdef798db",
+      "outputSha256": "cbd7e99d233a9e43cc004bf12824aaefd47779d952ad2bc8ea1ad80e0efea299",
+      "width": 512,
+      "height": 342,
+      "bytes": 82814
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-009.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-009.png",
+      "sourceSha256": "1e25ceaba32b18f97910749a6003b4b8532015f44186c776ef4c5b9f428e8b4f",
+      "outputSha256": "2c4b51528f9867b24ffc42a73074acbc84b505fb3b9e49f16b79c1d0902ca818",
+      "width": 512,
+      "height": 342,
+      "bytes": 82794
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-010.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-010.png",
+      "sourceSha256": "6312778083258596be0de144d854ab28890211749cd76b9556c1160bdcebdce4",
+      "outputSha256": "4fa3e8fd1a10026cfd8b3f7b09ec00b9439d95b9e064b457e7b6e9ba0c3691d5",
+      "width": 512,
+      "height": 342,
+      "bytes": 82970
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-011.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-011.png",
+      "sourceSha256": "c9216635b0bb712c7803624e0d8375c469365fe75e087a75bb960ee563afaa90",
+      "outputSha256": "973c42daa285956eb2b509d716e93ad2d5ac786b8b0a8c6146ae84522bafc21e",
+      "width": 512,
+      "height": 342,
+      "bytes": 83134
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-012.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-012.png",
+      "sourceSha256": "276a4a1fc0462fcebbb9f985b00736fd0e06bb0646306ea11137d87eb61f9200",
+      "outputSha256": "bd2073f743bcd7a8552b416d87b1a04afdad61965553a9df664860e6324ea0cc",
+      "width": 512,
+      "height": 342,
+      "bytes": 83586
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-013.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-013.png",
+      "sourceSha256": "cd070b06ec3e757185a4fb40e3143ed869a9e6a63370ba9d5b8d18a072da6aa6",
+      "outputSha256": "7d42e9cb162552aac417aadccc4a2a7c11a0cdee04433429c2f348c2649178c8",
+      "width": 512,
+      "height": 342,
+      "bytes": 83918
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-014.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-014.png",
+      "sourceSha256": "b1c5fa591168f10d51db67f3d1ce95262b4b97a8b42378f791126c82c3e8754f",
+      "outputSha256": "cd6d0c807f36a0be74d4e4a88f31b35a5c7c7933cfb9c0f6eb9738242a8f9834",
+      "width": 512,
+      "height": 342,
+      "bytes": 83404
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-015.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-015.png",
+      "sourceSha256": "1b0a7fe1ed4e2f116f1d80fefbbeef87b77aae41131a0f26403dabcb96a76775",
+      "outputSha256": "cf1445a93296c4877b7f47680150375ab345cedc9fecd29e7dbe11e73d4fdb53",
+      "width": 512,
+      "height": 342,
+      "bytes": 83065
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-016.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-016.png",
+      "sourceSha256": "c6fc25c77bf295c4a336e63b1e1ff391d954d4c5cedf0fae11d404110bac8b4e",
+      "outputSha256": "e3c0ed27687dc6d2d204ca8d0920f256dcd80f9077b4915bc9063e62df6f4999",
+      "width": 512,
+      "height": 342,
+      "bytes": 82990
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-017.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-017.png",
+      "sourceSha256": "ed00df7ae210b0b70df86cd6893a9a89d075ec48c9eb8167fc9d19aad81d1745",
+      "outputSha256": "9e6248e479270e77380f98f53bb60e748cf6eab216f0d32efa645da76f6e71c2",
+      "width": 512,
+      "height": 342,
+      "bytes": 83046
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-018.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-018.png",
+      "sourceSha256": "eb3576cc79b35e3de13fda27c9579971917eb95890b77897ec8453154ff650b3",
+      "outputSha256": "486fe3e322752e5ff3428100e1f5b8b813642639c4076a5a1f27969c12e73ae5",
+      "width": 512,
+      "height": 342,
+      "bytes": 83189
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-019.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-019.png",
+      "sourceSha256": "a39a671c3b99190f7f164ed7fdd741768d4934bb0680bfeb3ef0741f49d47566",
+      "outputSha256": "bd3fa0b317e7db2fee2202907e01aee08cb4807dade5a52f626cb5c7cadba490",
+      "width": 512,
+      "height": 342,
+      "bytes": 83752
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-020.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-020.png",
+      "sourceSha256": "5c4f32fbbe6d8502e935a61233bce8cefb6648bafc2dd0e235521d2b4a59804a",
+      "outputSha256": "62a633e81d281db198c0e3ba2af4e3b2a502bc089f505469e1d52cc59a1e67a3",
+      "width": 512,
+      "height": 342,
+      "bytes": 83897
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-021.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-021.png",
+      "sourceSha256": "d18796df11df3b53d55ad08395bde161409a4b36e52fac34e4267911b1175ba8",
+      "outputSha256": "afa75c6bc1b8ea9558cdf7fb5aa783f0db31acb8f7ef649e5b05e5ea1f632312",
+      "width": 512,
+      "height": 342,
+      "bytes": 83255
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-022.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-022.png",
+      "sourceSha256": "39fc9787b2ab402ddd77eece676bdce02aad80bb7d0180aaaafae6456d614590",
+      "outputSha256": "2c139062471d040c0c32409802dc3422beb548eef1d90d02db25b4e06bf76790",
+      "width": 512,
+      "height": 342,
+      "bytes": 83021
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-023.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-023.png",
+      "sourceSha256": "95c524a7a0f9c924bd6ae4129debb7d3b98c6958dc63d899aeb22acd83b5534f",
+      "outputSha256": "15d07f20bd8c356ea25377eb24b8ba9c826e8b8dda25b63b357a9ce3ba8d270d",
+      "width": 512,
+      "height": 342,
+      "bytes": 83055
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-024.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-024.png",
+      "sourceSha256": "8994aaf754917f169b0b990ec1a7ed229bc111b71c939f3bf7d8f06f6ab29b47",
+      "outputSha256": "7d5a3ae37c5086000a7f4333144d678784edea547602424b04c24bbddc2da747",
+      "width": 512,
+      "height": 342,
+      "bytes": 83153
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-025.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-025.png",
+      "sourceSha256": "9c1b0461d91d87327c7fa366ec155a1958634ec616b3cad8de2b6bd99bfab77d",
+      "outputSha256": "00abfe5a93d49de6233c0372071b88d738fc979efc1c28691579b0419d7f2888",
+      "width": 512,
+      "height": 342,
+      "bytes": 83361
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-026.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-026.png",
+      "sourceSha256": "872371a1ae92f64df1d4b4ee3de202a079ca247d441453caafb300ea235995ed",
+      "outputSha256": "d2b321b3f0306b348bc5e13fd1a4629ee1223390caaf2421b07da6482bfcf195",
+      "width": 512,
+      "height": 342,
+      "bytes": 83824
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-027.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-027.png",
+      "sourceSha256": "12b6caea65532dea5800defd2a88361d44a4ac82395a39df4e595b0c508a97fc",
+      "outputSha256": "0b629dc3d04fb74de0da4afcbe4995dbcb57c33d970f4d34c917ad9b002e5b94",
+      "width": 512,
+      "height": 342,
+      "bytes": 84174
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-028.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-028.png",
+      "sourceSha256": "bd9c5dd0c06032e2b5052766b7495b0075e9a6b749144946a10925a3d576dff8",
+      "outputSha256": "9cb4a63cb1a7bd043b01f24a64077ec1ba544b48abbec61c47d70033aac78a3b",
+      "width": 512,
+      "height": 342,
+      "bytes": 84036
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-029.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-029.png",
+      "sourceSha256": "f66645cfe1d9f6648c7e3aa8cfbd21c38b04a167ab9653d36b81453a7f7641b9",
+      "outputSha256": "d89d3091a8961cb7bdb86840a6ba0a1cab6ab19d98f3fb3dbe5f462339ed126e",
+      "width": 512,
+      "height": 342,
+      "bytes": 83543
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-030.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-030.png",
+      "sourceSha256": "029e13b7961d4e88237aee54b710a428c8fc9fd45b349b2b30a76cc3f6ef1cbc",
+      "outputSha256": "d35ffc2e62d0843d312d9e0a7d04b5e69cfc7ce38f34fe3c53bdba85ab0f6f63",
+      "width": 512,
+      "height": 342,
+      "bytes": 83378
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-031.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-031.png",
+      "sourceSha256": "6d01ecb0b80f17b878f4148e9cb04ca7b3aec68b660ee3772bcd39a0b4cf39be",
+      "outputSha256": "3a290de448cb804de1bbaa32f986c4f8dbd4f00cf2f5c759af91608e45d9ffa3",
+      "width": 512,
+      "height": 342,
+      "bytes": 83306
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-032.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-032.png",
+      "sourceSha256": "ea8baff8f429cd788d82b231c28fe6c3aec438726ed289712774220fdbd8c2b3",
+      "outputSha256": "4d9cf2ef75524541fd883ddb7a9995208fc512b5a25474fdde3affa02e86698a",
+      "width": 512,
+      "height": 342,
+      "bytes": 83241
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-033.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-033.png",
+      "sourceSha256": "ee3e531caf29e2004092da78aea3d88e472dd575de76b24768fa6ebdc5927f7f",
+      "outputSha256": "59c45d3fa76137fed736f5db62285f363fe465493ff0f0fc8afe8125f21294cc",
+      "width": 512,
+      "height": 342,
+      "bytes": 83250
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-034.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-034.png",
+      "sourceSha256": "d99ae85ab7ef025dfde11ed07f5d20e7b819195378bfe8ad7e5717f869a220b7",
+      "outputSha256": "a3050d861126cea57cab5eb638f5de6bd5849ecd493e9284c1e120710c9d4471",
+      "width": 512,
+      "height": 342,
+      "bytes": 83149
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-035.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-035.png",
+      "sourceSha256": "a6340a944b0f28331c532ad7579267503bb91ce761c550cd1941263cc8fad292",
+      "outputSha256": "1d342d17ba476cbc764136fa42acc7d0db3dcbe37c7ba2ac8ec61f1beea5d15f",
+      "width": 512,
+      "height": 342,
+      "bytes": 83124
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-036.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-036.png",
+      "sourceSha256": "7ab0e305f75b967baa6e99f5166ffe2fbc658912784143144c38084ff55ee89a",
+      "outputSha256": "2f542e599b68338605d854cbc8bbc8efb22e9fd68dd167370dffc0ffe5b230c2",
+      "width": 512,
+      "height": 342,
+      "bytes": 83299
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-037.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-037.png",
+      "sourceSha256": "01b6233799b59e6c538a2dda326db9e7e352651ce1394722a901f4133090e476",
+      "outputSha256": "a27d6d52ac2b32111303a61d55d40be3b35492de2fc30a2be8f69160ef166236",
+      "width": 512,
+      "height": 342,
+      "bytes": 88748
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-038.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-038.png",
+      "sourceSha256": "43cc2e1816829c96d8a11427b1bb541999cae77ae2a6e75acb8ab6bff35ffe9a",
+      "outputSha256": "3fe7fccba7e632e1f8e8d59d421e0643249bf4036119701b1e0d43e3984d2c37",
+      "width": 512,
+      "height": 342,
+      "bytes": 111468
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-039.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-039.png",
+      "sourceSha256": "2b174e8029b287cef3328c761200c9fde39ac84e65827f795e3452f1801937f5",
+      "outputSha256": "bffd6ad36ea2122709ff9f3a0094c2beb8c75126bc62685f304acabce330568c",
+      "width": 512,
+      "height": 342,
+      "bytes": 91882
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-040.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-040.png",
+      "sourceSha256": "efe50f692b6d4f746a53d4550ecd38f79a5b575828d99cf8afd268935a7ccb1f",
+      "outputSha256": "b07f9a3c8d5957ef691d6205044243e9f94cc3ec35040472eb4f74380eabc763",
+      "width": 512,
+      "height": 342,
+      "bytes": 90552
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-041.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-041.png",
+      "sourceSha256": "3423949918be04fc362cd34536c3c78f998d7611e790623cb9f87f88d5547f7c",
+      "outputSha256": "c1ee7d5c34819d5b6ca0ee9c75494dc9b2157122b5314f2bcd7ba91eb240dda0",
+      "width": 512,
+      "height": 342,
+      "bytes": 100347
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-042.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-042.png",
+      "sourceSha256": "e0c9aba17fdacfd8a88c23fa4881cede7688c5d078eda854d52e787612dfe5f2",
+      "outputSha256": "8b33519dc6f53d43a15234b7e0d599f51ab0eb1a7231fe5d6ad70ae0a71ef33d",
+      "width": 512,
+      "height": 342,
+      "bytes": 99343
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-043.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-043.png",
+      "sourceSha256": "52f079ec614a529971573bd270bd15e32d754eac537676f13ebe8be8493ca43b",
+      "outputSha256": "3978c5c1807762a56e504f55705da41a23793e070dd915a259b43a28c977d3c0",
+      "width": 512,
+      "height": 342,
+      "bytes": 87736
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-044.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-044.png",
+      "sourceSha256": "0aa9c8fabafb334257c313393557f9c8804ca76ccb221b0d8ad3c4ba663e6c44",
+      "outputSha256": "6486c30ee61b9526de7ec5c2a46bee56dbe4db6e8d24dffb681c3642c619316c",
+      "width": 512,
+      "height": 342,
+      "bytes": 91272
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-045.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-045.png",
+      "sourceSha256": "b20b843114e5208bf09e6215b834558dea2a50eb4bf771b4a758bdc6f5845e4a",
+      "outputSha256": "e5c8e9e83225f1f48daf66297611f09047b5d915ef1c3a8ad2373d2803f28743",
+      "width": 512,
+      "height": 342,
+      "bytes": 77406
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-046.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-046.png",
+      "sourceSha256": "2ceeb398b3a2ebe20c91a58e1053b8d3c75f6e2eac058ec3a47a069c5a68d63b",
+      "outputSha256": "b3b04c9fca7af57ee88dc9f4189ba78def4eedbf838094b7fd8470472a89bc1e",
+      "width": 512,
+      "height": 342,
+      "bytes": 71893
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-047.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-047.png",
+      "sourceSha256": "1db1c7092bf28b4f7340ee0177af29db25f9706a4e666235ea2f0b5350a6717e",
+      "outputSha256": "dc04098520e084622e97b6b4e0ac124231e47e9a8e7aa89c8c2585792c4ee72e",
+      "width": 512,
+      "height": 342,
+      "bytes": 72523
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-048.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-048.png",
+      "sourceSha256": "de19d0ab6312610ed66aeff64becb1ce8250f7ac415c89873e1eab5dba5f7405",
+      "outputSha256": "6e8ec73c9fa27a6838bf1c58c934f6723e09384b3f83975e9c9a713ed2737b2c",
+      "width": 512,
+      "height": 342,
+      "bytes": 65093
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-049.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-049.png",
+      "sourceSha256": "eea302969d5b511be6c33e7f40d3dd55e0ca56e80b21ada335b5a7381f7096b8",
+      "outputSha256": "972cc2ef0c6a891a47315d9dd75dc838dcbcf6e32e287c5423a09b6c15a6277e",
+      "width": 512,
+      "height": 342,
+      "bytes": 54394
+    },
+    {
+      "source": "assets/portraits/frames/wu/sprite-v1/frame-050.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/wu/sprite-v1/frame-050.png",
+      "sourceSha256": "e51cde18f124a8698cf0159fa6f0488a5620ea9de7f5788420711bf030648bd7",
+      "outputSha256": "7fd680220433edb791219bbcecb096aff6509d8d017e07d3fdc76287ec00ef40",
+      "width": 512,
+      "height": 342,
+      "bytes": 54851
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f000.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f000.png",
+      "sourceSha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "outputSha256": "a43c3f816ba39a69fd7d262830743f583d79f2268a73f80dc64a4dade2784507",
+      "width": 768,
+      "height": 512,
+      "bytes": 322603
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f001.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f001.png",
+      "sourceSha256": "7841aaf683c0ef5f5991ea4f6226483581b5118be00c6604ea9b600e2a8640e3",
+      "outputSha256": "fdeccc89310f3945f4279d1eb153a40257a71a3f61d6a900d40765b5c2797979",
+      "width": 768,
+      "height": 512,
+      "bytes": 321860
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f002.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f002.png",
+      "sourceSha256": "a4b75e51864dbc58f05bc6124b37b7c30f1b331a0b87b4c73f8c6c58aabc2b70",
+      "outputSha256": "7745b61f337118c9a4f009a96da651c016f57d78ab7bf161139ad9190ef61d1b",
+      "width": 768,
+      "height": 512,
+      "bytes": 321840
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f003.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f003.png",
+      "sourceSha256": "15c2fe314947e3c93d897259e0ea36252143cb2254133d383828379632c7f948",
+      "outputSha256": "2b6e7834d16bc3e0458f3959fd6c9ee203f2ed5677fc109591352935304be3fb",
+      "width": 768,
+      "height": 512,
+      "bytes": 321798
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f004.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f004.png",
+      "sourceSha256": "05e6f2491bfd6ed9883119a3b8e831f761f5859a39879f6da009820e1eada76f",
+      "outputSha256": "99e83a66cfd4b9f102bbcb709e42b54f844abfe48541cfdbfc029d7597ffdc1c",
+      "width": 768,
+      "height": 512,
+      "bytes": 321789
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f005.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f005.png",
+      "sourceSha256": "7db2cdaa79914091b5f29963c6eb010b86441eeafb9e4e1e3fd711767a9f1362",
+      "outputSha256": "6c0dbeb91e5992b4eba9c646307b6d6f9abf10f928a39b74405db8dd01ca9ba8",
+      "width": 768,
+      "height": 512,
+      "bytes": 321740
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f006.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f006.png",
+      "sourceSha256": "67410e0df72de8950accfa83da5e2768ef49107e337233c1b771abd27bad7164",
+      "outputSha256": "56eb446632d4e0784082f9441e7d39a5d5994861c3d471d5a426d4d2fe980e09",
+      "width": 768,
+      "height": 512,
+      "bytes": 321656
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f007.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f007.png",
+      "sourceSha256": "d9ebda080f45dbff7b1f59dd4b03104736eb17caa5a7fd2205f08864bfa42e9c",
+      "outputSha256": "6c0aabc41c27769d06a3ec613a88853018dbd745e6f966b37295ae3db98cfaee",
+      "width": 768,
+      "height": 512,
+      "bytes": 321521
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f008.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f008.png",
+      "sourceSha256": "bfeefd201eb0f5677b0096dc725c2f8bd8b258dc3d271b9dab30f629f147458e",
+      "outputSha256": "b8ba41f83b3cc0c43c0d62c1fc63c26885094420816149b1eebefc6891b8de5d",
+      "width": 768,
+      "height": 512,
+      "bytes": 321374
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f009.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f009.png",
+      "sourceSha256": "72e11ea55cf7e1bd33362bd6451e878d87a882ff8ff3b97f555d3f1999c45f34",
+      "outputSha256": "0df1674d84935d90c8f12b46a05656b8929afe47286a02bf7d05cb2fb00a540e",
+      "width": 768,
+      "height": 512,
+      "bytes": 321360
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f010.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f010.png",
+      "sourceSha256": "d4bcdabd15cb904a38d780e364b7f27c1e6cc8246cdc04d1e0cdcb196c8d75c3",
+      "outputSha256": "0c568f4817026fa7bba4b6ecd031a2218de243a4164299156be50025dd10cfae",
+      "width": 768,
+      "height": 512,
+      "bytes": 321453
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f011.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f011.png",
+      "sourceSha256": "75f17c48cbd9490dd70a63fcff60ac65c31d6b368d01a23bfcbf426d25fb42fc",
+      "outputSha256": "36320f6460f07f5063680e8b1022b52f5941c3fef48f591bb6a8629136a0c3cb",
+      "width": 768,
+      "height": 512,
+      "bytes": 321365
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f012.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f012.png",
+      "sourceSha256": "382c7fe5a035091945cd84e7c6e7f772d16a5d015d7f48ef02f08f1581f4bc2b",
+      "outputSha256": "e0acf68d3c1802206c6f444dc2563cda2fe65a4ffd00eaa89e30099bc913e4a1",
+      "width": 768,
+      "height": 512,
+      "bytes": 321492
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f013.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f013.png",
+      "sourceSha256": "df570d0da6e4b7c2b40453a5e2a7b9b39085f253c8906080f328819a595f2c0f",
+      "outputSha256": "f7e9df5be0ef4bc08abc07c5ac053e536e56f947c09c463bf1548c9a4e39cd14",
+      "width": 768,
+      "height": 512,
+      "bytes": 321415
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f014.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f014.png",
+      "sourceSha256": "0f1a6c052ce3b47a284415c4bee4ff0a879091559c9b483e2c7e7dd71eb40ee2",
+      "outputSha256": "50cea355f19ec8ccbb7218cdef67720fc443132942e41d156bb267f2d8b650eb",
+      "width": 768,
+      "height": 512,
+      "bytes": 321449
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f015.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f015.png",
+      "sourceSha256": "c09a96348f7443049e693f2e0b894ac3264202f6503fdb2460aac255ecd5f863",
+      "outputSha256": "80eef611df6cbcf28aecbba84ddaabc29ab59c30de62f47a69f3e72bc10c1dee",
+      "width": 768,
+      "height": 512,
+      "bytes": 321370
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f016.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f016.png",
+      "sourceSha256": "a0a72698c34dde0d8d2a818624fb2f5110564a83a0d18210a9efca77fce7179f",
+      "outputSha256": "c633358ef3d1db37a9e1592a90236a202c359dbab1eaa29fa2faf8c3454028c1",
+      "width": 768,
+      "height": 512,
+      "bytes": 321328
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f017.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f017.png",
+      "sourceSha256": "4760e2bcfb4611ed55ecc638dc5587df9179f89776d7c60fea7e4291a12dbf68",
+      "outputSha256": "8224be415aaa44c87e8a3f17f6e89787e18bb78e27fc762c6de9fce56baa94a9",
+      "width": 768,
+      "height": 512,
+      "bytes": 321292
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f018.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f018.png",
+      "sourceSha256": "7ecf97070afc9445b6dbfcb440c37090a3b6c9002f01cf0b528338051d8b62f3",
+      "outputSha256": "3c6d2c7a7db5bd3f57ac4f3be4cbc3c925f3a40bcbb3e51af5e3fe3d312b4cf7",
+      "width": 768,
+      "height": 512,
+      "bytes": 321407
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f019.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f019.png",
+      "sourceSha256": "d76abb4a8da2a424982d411a5faa1b1277cf06ee835dedfac3f4df02d2e0441b",
+      "outputSha256": "23ca7c62a3e83c36260c076905a8ab11da645451f80c23fd75d90cd55e820834",
+      "width": 768,
+      "height": 512,
+      "bytes": 321481
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f020.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f020.png",
+      "sourceSha256": "ff959864a9c102756681e2a2ad14a18fb10e3cccda8ef40931be9a45a229c053",
+      "outputSha256": "b7be1a309a9e6eab82e7a80911eafa21c1a0be63f9b488b550ff0074a082049e",
+      "width": 768,
+      "height": 512,
+      "bytes": 321518
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f021.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f021.png",
+      "sourceSha256": "2c8a164bc8c7ae04e5963e43cc38602d12303c1e3d1a7fceabd4419b3f94bf1a",
+      "outputSha256": "f12ed6825b78ac1ab5aa1cc3059c9e2a473dc30fe7ac04c2e8a7a5a02e30a951",
+      "width": 768,
+      "height": 512,
+      "bytes": 321522
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f022.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f022.png",
+      "sourceSha256": "71070edaff5ce6cff7cdf91a7cf73c9f17da5dcea1b398eb3db3fdc48f7dcf9d",
+      "outputSha256": "c2e60ac1a6438de8e6c49a32faa2ae20417b4bcefff764ad03276c72c33b28b5",
+      "width": 768,
+      "height": 512,
+      "bytes": 321556
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f023.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f023.png",
+      "sourceSha256": "3033751802e9714836c76f563f8b9ba6b6a2828b282d4958a73d71fa0f71b2bc",
+      "outputSha256": "96d828d3dd7468b12d11326b78b44389fc6bbf7e4e2ab603be4c749950b4bd30",
+      "width": 768,
+      "height": 512,
+      "bytes": 321624
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f024.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f024.png",
+      "sourceSha256": "ac808042d30b8d49dfef32944d0514b1f29fa45d20330b95d40eb67c17cb92d9",
+      "outputSha256": "7912636c09fad5c09d9c4c5bcf99b10351605eff9e9ef4c72d7442c3fd9547f8",
+      "width": 768,
+      "height": 512,
+      "bytes": 321500
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f025.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f025.png",
+      "sourceSha256": "5d6f408b172654e11d3b5f559fb31f0d7797bb39e9f9fbbdae37ccb5dddbf75c",
+      "outputSha256": "0446fecaf22e72a563f2d7747111cb10e50e2de079fef80d142b9c20b98ce4d7",
+      "width": 768,
+      "height": 512,
+      "bytes": 321361
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f026.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f026.png",
+      "sourceSha256": "39f3740f49001552707bbe37c3daa18e9f39639a76e74bf7300aabeb9df35e12",
+      "outputSha256": "bab1d40bf5cdd4d6931ded1a5ffde6c794b8d4e9d93c8862c1737cd9aa08a9cc",
+      "width": 768,
+      "height": 512,
+      "bytes": 321410
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f027.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f027.png",
+      "sourceSha256": "2b3c9aad362c9d2569b909c580ad030d2f0e864dcd12abb9d63afcf065e9204a",
+      "outputSha256": "a692083009d1f8ce8402f3e1bb09fc3f6a208769c4cf12de9a25f4204fdbe4f2",
+      "width": 768,
+      "height": 512,
+      "bytes": 321370
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f028.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f028.png",
+      "sourceSha256": "7b4c484a3c17d2bcbbe81f84d04367516f41afb72a19ecd725271137dbe0cc1b",
+      "outputSha256": "d45bbc4b321aac2199e7c234e710c56952dac78ae27a3b37807a0c764e49e753",
+      "width": 768,
+      "height": 512,
+      "bytes": 321145
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f029.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f029.png",
+      "sourceSha256": "bf72a73a8aa10b81254cfb8338f1cba4a41b908ea6cfaa504571df9e8b86b285",
+      "outputSha256": "7814d252e23bfb3dc23fac876ac94f074d9ef04c980b6ab9025bcddfbdf29407",
+      "width": 768,
+      "height": 512,
+      "bytes": 321128
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f030.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f030.png",
+      "sourceSha256": "27d8de90db2c735e858ed4e6c06f9b733263edee4850061bfd876a0321466bd7",
+      "outputSha256": "cc189b41b368615b7ced8c3fd7720060d8e912a259e6ee119e4d9ec2238b1358",
+      "width": 768,
+      "height": 512,
+      "bytes": 321145
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f031.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f031.png",
+      "sourceSha256": "bf3f1ffda3ae09abbb6769d4878eab25655e86d780930db67732b12c91dcfc5f",
+      "outputSha256": "ae12a6be1fff8de91e432d6116f105acb3813b0bc6fa0b5239a8fe91e2da3c66",
+      "width": 768,
+      "height": 512,
+      "bytes": 321195
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f032.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f032.png",
+      "sourceSha256": "a07a0533bec2a583b7f7c60d6c3ce2f30e3244e60fa53ff0fc20ae213e3025b0",
+      "outputSha256": "1f3915a438bd89793d3047eb0bca783ca5f9558192c2cea1f41838736152ff33",
+      "width": 768,
+      "height": 512,
+      "bytes": 321270
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f033.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f033.png",
+      "sourceSha256": "827ef0077460c98c8ce81eaab998cb8dc5a7204992952d9297fc312092f49add",
+      "outputSha256": "3a0a6968b7d22d00c85d3f7c15f835a5a0392c9d315d7e18ba1dfd50fba05ffa",
+      "width": 768,
+      "height": 512,
+      "bytes": 321323
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f034.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f034.png",
+      "sourceSha256": "32520f802abfab7219d294e9cee5b2a06291dbef694561954b63fc790f0c61b4",
+      "outputSha256": "6272ebd5a1b77d37591a599f6d89ed6dc548a59ebd1f439674ab4eb48451dd2d",
+      "width": 768,
+      "height": 512,
+      "bytes": 321350
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f035.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f035.png",
+      "sourceSha256": "2debe0f2a7f724168b257c226133af569d9aefc60eb3972ee9c1744ee639546f",
+      "outputSha256": "6c5b3409efa448416b02c9a6765831d693f47b231a3e0fc5f75a7d4fc6ec0f3d",
+      "width": 768,
+      "height": 512,
+      "bytes": 321308
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f036.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f036.png",
+      "sourceSha256": "d181c07a2948bd76a0c83ee4a83c720e59453f1aa887529e5367a5aad30811da",
+      "outputSha256": "5fd00559b6384445d22e5a0fa7254c6d1fe68c44014b9b3348214d8c0ade53ea",
+      "width": 768,
+      "height": 512,
+      "bytes": 321331
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f037.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f037.png",
+      "sourceSha256": "6f3770b37fb887084b196944833685c275da0e07892f7a35b4175584fd0d5272",
+      "outputSha256": "368a4c0c23b7760f96d9149866e2a34002e07e860dfe0d186eff8ac694f7bfe5",
+      "width": 768,
+      "height": 512,
+      "bytes": 323264
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f038.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f038.png",
+      "sourceSha256": "cd933922a0583c595fff1db9747ff120fcb7af7ffe128abf87a6620593108130",
+      "outputSha256": "9976a324171b9007f1c166d0133f87b17ebf874c7b141f29239e22447a981be3",
+      "width": 768,
+      "height": 512,
+      "bytes": 327072
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f039.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f039.png",
+      "sourceSha256": "53b624f570b9c1944853a6132965a29718dbc7b02e717c05bf2dd09869ab22b1",
+      "outputSha256": "3dda551816bfba201a07ee178d7ae9908b58a1d0a9b83ff459719d7d313e0bc7",
+      "width": 768,
+      "height": 512,
+      "bytes": 322007
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f040.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f040.png",
+      "sourceSha256": "9998ded120b177b9a42c27f069dea2943f16d9a4744f56ed4723bd24383dd9f7",
+      "outputSha256": "87a2158df76b71ecd6b7b350cccf9377380b994d7317f263ebbd9d8249646569",
+      "width": 768,
+      "height": 512,
+      "bytes": 260241
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f041.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f041.png",
+      "sourceSha256": "0a2928bb467bc28eb71ac6a476a8a8cc12b2786fd0bf386a52f4ffc9ed9005a5",
+      "outputSha256": "12eb49d2671598d7434f1a2a0332cef95485ca96195fb8a5badafe023e955e37",
+      "width": 768,
+      "height": 512,
+      "bytes": 258034
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f042.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f042.png",
+      "sourceSha256": "e9895ca4c8de81af82cf97e7560e3b0659949f57ac7f9659aace2aab53114e9e",
+      "outputSha256": "11e16d8ad1a66d44117cadf4daf63d7d6269cdf2c139f4d5fa052f3035201520",
+      "width": 768,
+      "height": 512,
+      "bytes": 259338
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f043.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f043.png",
+      "sourceSha256": "cfd816423a2267ef6fb7030c28510be02001b2970a3b6aa8240f29fbd652ab60",
+      "outputSha256": "c7749edba96e6f78c4c47225b4d3f60db890cd642b3a49686fff2aef777f75c9",
+      "width": 768,
+      "height": 512,
+      "bytes": 279243
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f044.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f044.png",
+      "sourceSha256": "68d9f5519f60f19241cb0f6665b698f76070d499741e6b0be14fa91ead858c0f",
+      "outputSha256": "3bf276b722608b8043d6d65f309c5baf26a34b76b99422a1f2994879e2ced99f",
+      "width": 768,
+      "height": 512,
+      "bytes": 261649
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f045.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f045.png",
+      "sourceSha256": "928c66957044c507e4fd2ac909618e0743325294b9950ca3313a4940b3d4a41f",
+      "outputSha256": "67126d61d2fd482d64380b8e5f38760950611642ea3d1a78a60b3db754145f01",
+      "width": 768,
+      "height": 512,
+      "bytes": 260005
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f046.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f046.png",
+      "sourceSha256": "ee9a1f74be869c6c8363c6be736dc67b62ff9e89f156d8865bf2d992d9bd529b",
+      "outputSha256": "07995a74b799517f069eb441172b40d03a4c029ae938d27f705c7c6e6bed6c18",
+      "width": 768,
+      "height": 512,
+      "bytes": 259929
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f047.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f047.png",
+      "sourceSha256": "2f8818f2f54ead63cb0a97ed51efd51dd5dbc95a9776224944f807990a0e8429",
+      "outputSha256": "d666032f8aaf90098d5806c16353021c2487fa4e85e171da682435f85625ca98",
+      "width": 768,
+      "height": 512,
+      "bytes": 257504
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f048.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f048.png",
+      "sourceSha256": "47c384dad889c77fd191f34656f755becb899bae9b951de3c12c3d9f90a4ead0",
+      "outputSha256": "bf9b58b5a6d5326f9d923d23b8f2afd437de494291e631d5eea5bdd94323eb5b",
+      "width": 768,
+      "height": 512,
+      "bytes": 258385
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f049.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f049.png",
+      "sourceSha256": "16762d1f4e43652e2ab5c96ed2340db4ef16c567fc9ea20d1931568ac13dbd40",
+      "outputSha256": "cac5af6859c83b6fbd468827feaa1401eb7d076f142c953f23ebf5113d628709",
+      "width": 768,
+      "height": 512,
+      "bytes": 260718
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f050.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f050.png",
+      "sourceSha256": "db93d4dd9bc65319f1248bea3f07799c9864b752d84da897f0c9fa8464201d8e",
+      "outputSha256": "e20d24af52d0436e6c93dd54683d48be71dd792b93571e794fa38c86c26524f4",
+      "width": 768,
+      "height": 512,
+      "bytes": 279861
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f051.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f051.png",
+      "sourceSha256": "91fb0e9ed93c5a756589b70909363b9d3dc33b0b0d66c0ea8eceee4778c6b5f1",
+      "outputSha256": "2bfb942c31b81a55d85363c773c954da507e31cf55af5b05337ce78e06f0e05c",
+      "width": 768,
+      "height": 512,
+      "bytes": 260396
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f052.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f052.png",
+      "sourceSha256": "d7cd93c018c0b4764915c114f064128e56db1ef632a740733da38db123392d26",
+      "outputSha256": "ea1793e2d4a5a3ddce82c77f62c7ac54a74998ed41ef0139c6a1bfa80b919c49",
+      "width": 768,
+      "height": 512,
+      "bytes": 259106
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f053.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f053.png",
+      "sourceSha256": "6e8696e6c52bd25a4c892d6fd7744bb3f8a5f9b1a0f80bd26d8586a065008429",
+      "outputSha256": "14acbb6082f5f8577c9eed62da8471ab2509d8acbbebf4225f09706b37cefdce",
+      "width": 768,
+      "height": 512,
+      "bytes": 259236
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f054.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f054.png",
+      "sourceSha256": "fef04867f93573b8b2677052cc53b5bf85c929a6fd35876c218874162ec99276",
+      "outputSha256": "1c1ed23bc7a76a72615291b22d9e3b726af892cdf3a1bd5226f0b5c7af290401",
+      "width": 768,
+      "height": 512,
+      "bytes": 261870
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f055.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f055.png",
+      "sourceSha256": "1df757d618cd664f432da49ee910ccf5850cb4aa4da45938548436e24a1f6347",
+      "outputSha256": "1f290abd4cdce502531d392da678c7619921e1904aed01dfaea969860e6ab92c",
+      "width": 768,
+      "height": 512,
+      "bytes": 264213
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f056.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f056.png",
+      "sourceSha256": "16c79108415430b6bd044e3dd5e0d82e602c4f2d450ebe36516b9fc2234a68b2",
+      "outputSha256": "9a352109346624a20ae5b9ae641f5d934f5be78e8c262b5ef77619d218ed4a1f",
+      "width": 768,
+      "height": 512,
+      "bytes": 268079
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f057.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f057.png",
+      "sourceSha256": "12dfa30c19e660f4bccf35e2d944e0f4cac77b99a96c03b070db7d6a47b7d064",
+      "outputSha256": "a5f443be6dbdbe01b9c0e09d15d30b9609a6f3f41788c78bd2116633b1590c74",
+      "width": 768,
+      "height": 512,
+      "bytes": 174405
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f058.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f058.png",
+      "sourceSha256": "e30de2bb1f7d82b3fafadd57774c82cb60ec33457bd89597a1120152dee7f5cf",
+      "outputSha256": "b04d2b596eca286ed381719e8b33f98027dab6c3b1b55d9880df0ef104498fdf",
+      "width": 768,
+      "height": 512,
+      "bytes": 185345
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f059.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f059.png",
+      "sourceSha256": "f72ae036a0e1cf2aca4591ba22382bb02469ae5e84fb3e74ad74b33b8391963d",
+      "outputSha256": "916ac2e951d733e51eefe3167243212530de95a88fbd2642ca1be09af6847b72",
+      "width": 768,
+      "height": 512,
+      "bytes": 152907
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f060.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f060.png",
+      "sourceSha256": "0d5b21b0f56ca5c27fb86250e5331e7d330a13833a3a4d08ee60f4df9f52a300",
+      "outputSha256": "82e0355a13d00b704d0b3d9743b1e9a0e0fa2b71d4ee5b2842e2b6e851e16157",
+      "width": 768,
+      "height": 512,
+      "bytes": 155890
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f061.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f061.png",
+      "sourceSha256": "067653f0c60b20d630f6a772d0fd788b7cae350c2d1686edd97105805fa183fe",
+      "outputSha256": "44ac1232366dce48734808731679c8aab82fb5998e2fa60cfc3251a12055fc25",
+      "width": 768,
+      "height": 512,
+      "bytes": 128959
+    },
+    {
+      "source": "assets/portraits/frames/changwuyu/sprite-v1/f062.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/changwuyu/sprite-v1/f062.png",
+      "sourceSha256": "db28d08fbc8f000467cd0f8e46134c59946123cd57232366d14f42bd320e7d0f",
+      "outputSha256": "6add8cd5aab58b1a3f6719e91f8ea2e89f34fda1a6c726cc06806438a2daf62e",
+      "width": 768,
+      "height": 512,
+      "bytes": 117235
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/neutral.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/neutral.png",
+      "sourceSha256": "c93ce03668e093c4b0d61358b7f2a094d24e3983c9c2711795d273ad93e8e94b",
+      "outputSha256": "08a4f46c13dc909d0cc7f400a7a9ceeec577fbf7398a709dc15f0ec0790c517e",
+      "width": 512,
+      "height": 342,
+      "bytes": 92409
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-001.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-001.png",
+      "sourceSha256": "4378dbff7096271a2c62de58fbf7634216f663274fdd7e14bfff0c011fce78db",
+      "outputSha256": "1b7ec99cb353ffda0d32c86b1ddbe4ae9db3c18c8265b73d63c37b8f126192f6",
+      "width": 512,
+      "height": 342,
+      "bytes": 92362
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-002.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-002.png",
+      "sourceSha256": "3997a11086fae18d98bef9c84493d43366da8ded65ae63cac1d41e40cdd4433c",
+      "outputSha256": "9ab99a4ea954ea81f386fe54108f74e584ae35a7e1eec0c1e16b4416e907bb7c",
+      "width": 512,
+      "height": 342,
+      "bytes": 92227
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-003.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-003.png",
+      "sourceSha256": "5443244e4847ab160a3d14771a6358ba89b40ac7880eb0481e2410bc0094fbff",
+      "outputSha256": "57193af591677cfa568da25719f0b202a300435c06ce212f48a3273778429f02",
+      "width": 512,
+      "height": 342,
+      "bytes": 92082
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-004.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-004.png",
+      "sourceSha256": "a983123275ca12177a3bf3d77db31b47a82c0f1b5b5acf4d968537c54a7b5b81",
+      "outputSha256": "e686a33bff813ae821acdc15c377942c8475dd14705aefa55ec9a29f39ad1090",
+      "width": 512,
+      "height": 342,
+      "bytes": 91932
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-005.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-005.png",
+      "sourceSha256": "3cb6d4dabc09b8e1ef8428184f6cbc90bd31e94ff9345354673cc592dd54a3f8",
+      "outputSha256": "a43e54a600646a3810a06811818e92d2902e4f01f154cec16add76e4a8ea5342",
+      "width": 512,
+      "height": 342,
+      "bytes": 91796
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-006.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-006.png",
+      "sourceSha256": "2f85b8cd609de4ca0abd29971674fcc3b3917c596189830e97aaaaee1fac5574",
+      "outputSha256": "c02ebb00e71eb51e08587ea3749c7d1bb25bd5dc6bafeb2729ccf6ec7a1a8e5c",
+      "width": 512,
+      "height": 342,
+      "bytes": 91714
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-007.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-007.png",
+      "sourceSha256": "038dc6540b28b2191d8eda6d7f8064e1f7be0988d06f4f97561d5f940c69f3c0",
+      "outputSha256": "119666eb3376528a31055effc12414abdd8912bef80693b5fff41f4f998f977f",
+      "width": 512,
+      "height": 342,
+      "bytes": 91636
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-008.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-008.png",
+      "sourceSha256": "5e4cb4cf90bab9a00fa376f2bfc5453de11b550027a91f365d40da2a7eb64337",
+      "outputSha256": "bcfdd079993e85458530df9e2ce22827ead92d9a7596bcac15cbb554fe71a41f",
+      "width": 512,
+      "height": 342,
+      "bytes": 91720
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-009.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-009.png",
+      "sourceSha256": "1bc522309bbfdd544b308087048fb9f264b9eed1299284c65d50a6e696d7ae43",
+      "outputSha256": "ffd22da60fefee019d3db7c05800a6c3af44544ea8e4114132a6a7a52dcdd209",
+      "width": 512,
+      "height": 342,
+      "bytes": 91669
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-010.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-010.png",
+      "sourceSha256": "9e95e51980fea66fe9de569d8f4738a77e17760f53e10c76074f9cf7c6109982",
+      "outputSha256": "65a1f80b82c1de4198acba1dfb88d137b04d837e139456bcf1befad5454fa801",
+      "width": 512,
+      "height": 342,
+      "bytes": 91772
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-011.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-011.png",
+      "sourceSha256": "bd82f1c9186420cfa13f76fed8e5a275f5fe1ef330aa5d8d8198bb17095eac71",
+      "outputSha256": "73e2c97624a95b9d27db2fe1a68641d406d5b9f46ab109aa146887b332eca1c0",
+      "width": 512,
+      "height": 342,
+      "bytes": 91845
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-012.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-012.png",
+      "sourceSha256": "2ced9cc94361e72918a8ef864ef8eb0b24b5c2a3ee385f89b916fad7f76c2e19",
+      "outputSha256": "529d0f869fc662f3adb4590b38b328c06035f145b6f0a7bb740fb7a70df72590",
+      "width": 512,
+      "height": 342,
+      "bytes": 92077
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-013.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-013.png",
+      "sourceSha256": "596247791e3784bdd62d19efb026bf6920b143f135df307a9c79370cae638e4f",
+      "outputSha256": "2ab20429a540a8ce3680aacfc44a1e232c4929cd8da9aeb8fa6d64ea6d0999f9",
+      "width": 512,
+      "height": 342,
+      "bytes": 91850
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-014.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-014.png",
+      "sourceSha256": "dd19c2c22424b161de55209d12e2783c42e3e6a3c092948a9094f4eb73eaf573",
+      "outputSha256": "6f84e39f80203304bbf1a8ca5d6b865c45bd3c97c74f4f73b02096212286eabf",
+      "width": 512,
+      "height": 342,
+      "bytes": 91676
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-015.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-015.png",
+      "sourceSha256": "881baf2284d1608b7c2f0f5e052bd9cb614fd3e88a0d7131b49954a464969a28",
+      "outputSha256": "76be716827a657418d5a600aa822e9c0470c9f08b59298731681f928a61e78f6",
+      "width": 512,
+      "height": 342,
+      "bytes": 91574
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-016.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-016.png",
+      "sourceSha256": "3db43b5e1c51e1f46ffab996d7063b03c0f7ae5fce22b1c35e0ea80f9344e297",
+      "outputSha256": "c915aa42b3517a0bc2ae3a24f58d5b303022c712f6c2f399660d7910f55601f5",
+      "width": 512,
+      "height": 342,
+      "bytes": 91738
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-017.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-017.png",
+      "sourceSha256": "ad494b98dedbf6e2a69be8b665c1b52f7d3157988aa835ea280798e9513a2865",
+      "outputSha256": "209e25293e931b60daa8f67e13cdffba32ce56dda653fde8842d0c8874bc9d9d",
+      "width": 512,
+      "height": 342,
+      "bytes": 91883
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-018.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-018.png",
+      "sourceSha256": "05d51b6053864cfdb74f303e517cc918a6d2d67c7f3f8f411d8627559aaae983",
+      "outputSha256": "6ac4096ce13afb9bf0b72d83547dc3da3a2f196691b29a03404e1821996f3018",
+      "width": 512,
+      "height": 342,
+      "bytes": 92094
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-019.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-019.png",
+      "sourceSha256": "1e3da67981ce21e63093623a66ded19e6bb399e097639672241002003e4f88ac",
+      "outputSha256": "f836fca3f6b0f67e886df84b30d96a0f6c2ad648d0e78328b652fa10fe378187",
+      "width": 512,
+      "height": 342,
+      "bytes": 92169
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-020.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-020.png",
+      "sourceSha256": "64514cabc749b6b0e642709b8371c8a58c686569d9926f3d9e2c4770dbdfc30a",
+      "outputSha256": "de0c20e381d8865849dab29dbfd919dee880077d76c783ef427e7bdee0f146d5",
+      "width": 512,
+      "height": 342,
+      "bytes": 91965
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-021.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-021.png",
+      "sourceSha256": "1b0f8fe1e9fd7f363970f0ee9d09c00924ec2ca5846b253d8779b2ec55e08a6c",
+      "outputSha256": "7a1b8b4ab98e8c730da035e4de132f6413652ef7a7c4f8bc30eb55673c3fc729",
+      "width": 512,
+      "height": 342,
+      "bytes": 91817
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-022.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-022.png",
+      "sourceSha256": "0b5e1f3df58466dea26f61a13cf0330a1271a3f31a55c596e133de9ce476771c",
+      "outputSha256": "c22114ae7914a2ba77f91bc8e2898124c828a3033a3462979d62f8cb34bf9956",
+      "width": 512,
+      "height": 342,
+      "bytes": 91898
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-023.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-023.png",
+      "sourceSha256": "bf9a884f491b1fef45afc047341db522365fdaad29c0ca07d26a1ac10e2e7b97",
+      "outputSha256": "0b8d2ef5d44dfe8a445e1f8848ed0394acc438fa3ca156d944823e582b0a91f1",
+      "width": 512,
+      "height": 342,
+      "bytes": 91844
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-024.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-024.png",
+      "sourceSha256": "72ae34dbed8e95b8462d909b40c0fb7d5dd45276fff326d8e3c1685c0d631c06",
+      "outputSha256": "1d641369adaabe82da4a956b5cabf0fbd08563daef9fa388b8b1f5c351efdd2f",
+      "width": 512,
+      "height": 342,
+      "bytes": 91908
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-025.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-025.png",
+      "sourceSha256": "51d86317624bd65bf1a055bb919d1601812647dd39c06f6f6168f32e52cbd4a9",
+      "outputSha256": "d72295de0581261fb80df1eb8529d2ef098396c6a3b6208f3652b88fa96b7d8f",
+      "width": 512,
+      "height": 342,
+      "bytes": 92145
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-026.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-026.png",
+      "sourceSha256": "63e07e3b438cfbc48483201771e9c525159877afa2d46c63a676791f28e9f3f3",
+      "outputSha256": "6a4c8d2a703ac949735ff000c413f072dc427cd5f78fde5f57320b2bb759d8fe",
+      "width": 512,
+      "height": 342,
+      "bytes": 92441
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-027.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-027.png",
+      "sourceSha256": "093848c1630a656f6548ed778ac8e27697ffdb887ac68f698a1fccf319070e1f",
+      "outputSha256": "bd7c4fcae635bccb71cc6d6969a61a21842e58c9eebd8b634219367573fb8953",
+      "width": 512,
+      "height": 342,
+      "bytes": 92079
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-028.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-028.png",
+      "sourceSha256": "d36226157c3b28a47eca03377136b37b0e0b51a137c1e55c8dfce211413a5603",
+      "outputSha256": "7c70d55fb4b017fdc7f61065d22655b8679243db71f3bf7d19e081aa6d124c93",
+      "width": 512,
+      "height": 342,
+      "bytes": 91935
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-029.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-029.png",
+      "sourceSha256": "2bbd750d1c4a5ab241014618ef11c8885c8b46623ee055657ec40dc9b4687cb4",
+      "outputSha256": "4d88afd42398d2ce9e0d812ce17962b2b9dac4d155937d7d0393dfc4ae6dc9c0",
+      "width": 512,
+      "height": 342,
+      "bytes": 91917
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-030.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-030.png",
+      "sourceSha256": "6014274c24eebdb3604b7e23dfbc8735da0d6a41adf559e8ab878c427df6d107",
+      "outputSha256": "e9aeead9e5f2d87018bd4168bbb9c0d49ba455686bad658e947169c6f96a4004",
+      "width": 512,
+      "height": 342,
+      "bytes": 91883
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-031.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-031.png",
+      "sourceSha256": "ae4bd76d83e6a2f0679469ea89880abb6236e65863496eabd56b1e590136cc54",
+      "outputSha256": "54f7e903dcf77868c50bbeb40e24689cdfdcf09c5fbceb870ef44049b7ace231",
+      "width": 512,
+      "height": 342,
+      "bytes": 91924
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-032.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-032.png",
+      "sourceSha256": "f96e33113d7b10d7d83dea9c0df5b0b696b84f7bac7a9388eb0163ce81cfecb2",
+      "outputSha256": "13735bd8aad863b1d9433d2a9911cae8cda94c1593de2d4fa196c049dfb0ad0d",
+      "width": 512,
+      "height": 342,
+      "bytes": 91895
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-033.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-033.png",
+      "sourceSha256": "5b1af686cb4431d07c67af939b5f243169053ae2f553944e16bed82eeb3025cc",
+      "outputSha256": "cec243e8e1a2dc2893dbe9fd77465753b660d7a3951fcbcc8c1a181b32e7bac8",
+      "width": 512,
+      "height": 342,
+      "bytes": 91938
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-034.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-034.png",
+      "sourceSha256": "665c38ff98cbebd0914cab46de7a86e8bb907ca3a0aa0320e218d4439497ce13",
+      "outputSha256": "441f19afebec8b421180a3eb70754f8d25e3daa7574d1e1d1f9a0de7868932a9",
+      "width": 512,
+      "height": 342,
+      "bytes": 92048
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-035.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-035.png",
+      "sourceSha256": "5e89c2e20cc3b3d670d1de9e7d635b961ed55ed3a2359b5419eb194637cd076b",
+      "outputSha256": "c1ace19a8180105bcaa7ac8005297865cd957f6b16798378360a4b8c60432c4c",
+      "width": 512,
+      "height": 342,
+      "bytes": 92026
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-036.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-036.png",
+      "sourceSha256": "d3850bc1e38838323f7a05bff62b4aea4f130c65f0999e1e3e253a5704ca516f",
+      "outputSha256": "4858beaac6954346a14f494b184910abc537dde81a5195d515611e25a5768ba3",
+      "width": 512,
+      "height": 342,
+      "bytes": 99688
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-037.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-037.png",
+      "sourceSha256": "d4ce5cfb313c0187fb3a2cd9875a32718d905896a655c9c8c046b8c4789299c8",
+      "outputSha256": "4a69183d28dceda5036c72c784fa798694b2c2182f7e5f09fd074ffc1d25ded3",
+      "width": 512,
+      "height": 342,
+      "bytes": 102982
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-038.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-038.png",
+      "sourceSha256": "3352610bb717c0b0e09d1a980e570ef69620ee1eeb94178969363a6e712fb60b",
+      "outputSha256": "15cbd0045aead4575f76f806d9b53ad618cdc54c1ae334afb757046a0713bf73",
+      "width": 512,
+      "height": 342,
+      "bytes": 105544
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-039.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-039.png",
+      "sourceSha256": "c2fe0c395d6ece0a56001be174d49f66760e6349bd6f8001648f665e84d2f709",
+      "outputSha256": "75893ea3e240eb6037182f5c9929359412d0f6597c595d7005cc8a42a516ccfa",
+      "width": 512,
+      "height": 342,
+      "bytes": 107597
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-040.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-040.png",
+      "sourceSha256": "f0fda34720f1bf30b38ecedfbe83f2b816177f5a8676ea15ab00959c671e31a4",
+      "outputSha256": "a21ccb714572661485a63aceffff122b1783e99095c355b6914857493223b229",
+      "width": 512,
+      "height": 342,
+      "bytes": 101660
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-041.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-041.png",
+      "sourceSha256": "d63680b4b55bd136ab35f64aed8238b2efd7194cb361490bf362d32bf3c5f5a9",
+      "outputSha256": "baeb6d0d19276b5ac98412ff62521110a790465e39cf1eaad3d3ff75e31e170d",
+      "width": 512,
+      "height": 342,
+      "bytes": 98266
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-042.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-042.png",
+      "sourceSha256": "c5ff53e42cbd3a6fae25ebb35294d1bc27f7bbe4bfb3f94d75b60a151d187ce3",
+      "outputSha256": "978e9c60605335460d39ed1d8386b0f7f9d39fba7d7f8a869c91a53e247c311f",
+      "width": 512,
+      "height": 342,
+      "bytes": 103784
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-043.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-043.png",
+      "sourceSha256": "b8f63b1470ca96407dc90fa7b2ef97b626efd47c41f9f065d944dda7fc6c9c39",
+      "outputSha256": "fdc6cded0a2c03250ab9f0c0ce21c13488c36ccef66e097db030450d241a512b",
+      "width": 512,
+      "height": 342,
+      "bytes": 103341
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-044.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-044.png",
+      "sourceSha256": "d0ccd01c857b4423dd935e2739c9658f709cef779995170d6eeca53532308f09",
+      "outputSha256": "b5c94115ed397b3a7a26f6fd6e40f4b229221c6c3df4cd5bf2ec97deefe264d4",
+      "width": 512,
+      "height": 342,
+      "bytes": 117308
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-045.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-045.png",
+      "sourceSha256": "5aef54d07914ac340c592d93e0178450da2ee74ccd1cb4d1e59ead0c2a5ca80f",
+      "outputSha256": "7aef48a9e4788064f2b9231f2153fb7844fd059a5501135c0d23fca5362d3664",
+      "width": 512,
+      "height": 342,
+      "bytes": 118850
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-046.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-046.png",
+      "sourceSha256": "1ad335f70172165ca4cf74a2c1b757f79596a1a6f370ed74233b96f1b97df04d",
+      "outputSha256": "9355acf2e0919bd9cfb6877f3d7c82e076d89669bc10050a4e6d2de7f9d6dbda",
+      "width": 512,
+      "height": 342,
+      "bytes": 109794
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-047.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-047.png",
+      "sourceSha256": "9127f7ca28743e2a6ec7e2092bb322a84fde325ac85ce37a9c28ff3b87e6a97d",
+      "outputSha256": "857e9ffe31529cae93b2988c93a9cfd0904612a02b6fd29b71e1894cb507e17a",
+      "width": 512,
+      "height": 342,
+      "bytes": 101262
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-048.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-048.png",
+      "sourceSha256": "094bc726f45926a8356f58c9ca51e297c24340193107074a69c4a4db50289cc5",
+      "outputSha256": "b485ff0a995b3faeb0b72b8084dd4ee2f482b48608438d6ebd14a95c5c03ba03",
+      "width": 512,
+      "height": 342,
+      "bytes": 85225
+    },
+    {
+      "source": "assets/portraits/frames/baita/sprite-v1/frame-049.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/baita/sprite-v1/frame-049.png",
+      "sourceSha256": "32e9ccaaa7a50b8f019d61be66ec168ba6aa4eda299c41e25087b1c9ab2bd856",
+      "outputSha256": "23f61ae64e9f9cc80e5d58e715243773c7d78ac54f96bd61b3764e3d5934074d",
+      "width": 512,
+      "height": 342,
+      "bytes": 81871
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/neutral.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/neutral.png",
+      "sourceSha256": "232e345a47572c2dfc991b929f159e8ff3a88c6b986a7c3f88d3eb6ac6fc6f28",
+      "outputSha256": "9dd8a6f780696808e7a014f1db8232318b6a6294094845ea42523aa5a48d535d",
+      "width": 512,
+      "height": 342,
+      "bytes": 65581
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-001.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-001.png",
+      "sourceSha256": "29808029ec49e28b8f932a74756ab98af6d8346bc4c9a99f12eae6b7c89e3524",
+      "outputSha256": "0b8d183cdae047bd5fe3665c02ccef58f83563749ebbaf1f5fdd2924f3826123",
+      "width": 512,
+      "height": 342,
+      "bytes": 65494
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-002.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-002.png",
+      "sourceSha256": "a0d717b7bf5c13cd67de3e3f153a365666a77f1f588bc0ba89a88e415228c367",
+      "outputSha256": "a654142bbc7606085c864d6c569b6680d2296af4d770390bc9c23ad5a184ca11",
+      "width": 512,
+      "height": 342,
+      "bytes": 65409
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-003.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-003.png",
+      "sourceSha256": "083bb86cabec2b1ba83b39a53ca909387f44858e54aeaf64552ca8ccb1d09225",
+      "outputSha256": "abadedc05709485f03c1b024670db9bf83cd5589508e69130ff32980925c31e2",
+      "width": 512,
+      "height": 342,
+      "bytes": 65165
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-004.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-004.png",
+      "sourceSha256": "e2663aaa6039edd63dc0a47616d0b94860a0997a52acc4a55bcee490b9b06b58",
+      "outputSha256": "22d083f2c4b68bb9b3cab8e6233fa9fb44a73874e1b4e54ab6d8f00356b41d15",
+      "width": 512,
+      "height": 342,
+      "bytes": 64881
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-005.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-005.png",
+      "sourceSha256": "8433dd48125deaf93cf97719f28117a067183b2b664c4ea3c4997e4ce1fe55ab",
+      "outputSha256": "08f40ab2459ac2aaf91819ddac79cca3865b0212ad13295984a64b1c6f1d25fa",
+      "width": 512,
+      "height": 342,
+      "bytes": 64744
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-006.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-006.png",
+      "sourceSha256": "deef7965b039b172219aadf8500cb3950b032ecc8a92398dd56c5671f021837f",
+      "outputSha256": "04de2de94273aa6d7adc248073ae9f443de180450515af949f197b5c69ec4e7c",
+      "width": 512,
+      "height": 342,
+      "bytes": 64579
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-007.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-007.png",
+      "sourceSha256": "32d5c60b204d4d248324844a79b60518c237cb26712d8a4afe0542fd0f61639a",
+      "outputSha256": "36102ea4cd2590d9b8da210b09751776a867d1e68d7a417bb5e6eea311a715c2",
+      "width": 512,
+      "height": 342,
+      "bytes": 64419
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-008.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-008.png",
+      "sourceSha256": "b28b55b919e8ed41531d34aea5914da96cb9f397dd22dcd473a82c9dd4c3b9a8",
+      "outputSha256": "96fd0a569d762e0842301c36ae2ec1937da1ae0cdd505a47f757dcd6b3d5a423",
+      "width": 512,
+      "height": 342,
+      "bytes": 64446
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-009.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-009.png",
+      "sourceSha256": "6376859a3e5a3abdf4d726cdfd7efc6e678eac5d42e2e52ae6e5509734c74752",
+      "outputSha256": "ee64efc8c5e51f56d3c513bf8adbb2ef633af93e074cd371ed0f6a3326dc308d",
+      "width": 512,
+      "height": 342,
+      "bytes": 64456
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-010.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-010.png",
+      "sourceSha256": "b1cb1cfa36b69d501d5d5a6d9df45f509fb4b91451d838cef2d198099d61649f",
+      "outputSha256": "3674369459eca02c8d9a00f0f6e06794ae6e1ab42b4fa11ece1d878a8ff2bf71",
+      "width": 512,
+      "height": 342,
+      "bytes": 64646
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-011.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-011.png",
+      "sourceSha256": "5b8459b96a3c4652e80cbb21aa123c7ee2679c25263d404ec635dba4f12ba04d",
+      "outputSha256": "76eb2b1b1502d64bd3227671df118dc11c26824922aa34d1a39be8e3f3937609",
+      "width": 512,
+      "height": 342,
+      "bytes": 65060
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-012.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-012.png",
+      "sourceSha256": "0a15a18f47251d95a3d4a6693121d4066ee032f72ece8214f29f2daa5dcfb868",
+      "outputSha256": "8209514baac5e2f626f4574412a695e86b4813edf7b4498a316a927abfb01113",
+      "width": 512,
+      "height": 342,
+      "bytes": 65587
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-013.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-013.png",
+      "sourceSha256": "8af3f2a386bc1e2f328efd8c35140564bb7867fea2e62f768c4fc3e324bd6d63",
+      "outputSha256": "26120bf174c4f1e2cf545c529f77c7449beaeb0fe16e3ed6feca0fd2fc3055e0",
+      "width": 512,
+      "height": 342,
+      "bytes": 65220
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-014.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-014.png",
+      "sourceSha256": "fe020985c3672eebf529a428361f01fd190903e1d29716b5f0ed33fb1bc150bc",
+      "outputSha256": "acfe13a06db60eb69a831cc5fde0078e209cc087a9c5fd0b6c1cb5e27222d4ff",
+      "width": 512,
+      "height": 342,
+      "bytes": 64717
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-015.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-015.png",
+      "sourceSha256": "3168d3c33d9368ba4884569bb6e6acbf19876ffdc5469074cdbebf49f3ab57e9",
+      "outputSha256": "31c5b3ae708350d4d04bab8f21286fdec9990db46fa699653af46d496bb5dc6c",
+      "width": 512,
+      "height": 342,
+      "bytes": 64652
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-016.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-016.png",
+      "sourceSha256": "feffdb0e003459f77bd7e1f0944b4230f344c0c92cba7f40dcc1ea08e13a4d51",
+      "outputSha256": "92a76655beb4da7c6b2c9a06861e64e23694171bcda02dff4a7186ec53aeb35a",
+      "width": 512,
+      "height": 342,
+      "bytes": 64776
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-017.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-017.png",
+      "sourceSha256": "88c158cd74f13d5ab1e2879e0c07ebbec3a09673398e83bac3fe962c1afa6bae",
+      "outputSha256": "4d1a52e67c6f8c616fc661e0b86761bad0790e818aad600e7ba9e80f1f935836",
+      "width": 512,
+      "height": 342,
+      "bytes": 64993
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-018.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-018.png",
+      "sourceSha256": "cc96a870f325e093ffaec72e64fa40d14b91f2c49ff7d0e0b4ffc4a37a2058af",
+      "outputSha256": "aeaebe24639e51282cd0f8d1c127171c6f30a4f08e08253e9897f23b2186211b",
+      "width": 512,
+      "height": 342,
+      "bytes": 65378
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-019.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-019.png",
+      "sourceSha256": "c3f8ea9ae1c351caf678c7d5efa2a574e1fad64ff29b430f2b6dfcf7c5dc3c00",
+      "outputSha256": "4a6581db9edd3fc791cdb68d4f4d1f17f695dec1c62dba34e5205c06a6f1235f",
+      "width": 512,
+      "height": 342,
+      "bytes": 65638
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-020.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-020.png",
+      "sourceSha256": "7fd50a4e815e9ac0424ffda0a1067f16b53ed4f4392b7c0ec3a2ae799aa41826",
+      "outputSha256": "f3c9dc4a404c01c5bb11590854105949078cb03716b128573894b9405791604c",
+      "width": 512,
+      "height": 342,
+      "bytes": 65256
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-021.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-021.png",
+      "sourceSha256": "4c5b53469b11552b775a037ea382cda302e8e40fde59f47cf130206e1be68c14",
+      "outputSha256": "27c9b471a3f9b44c270beef88831c683333ad05a5be78f6b3bada650c03f94e4",
+      "width": 512,
+      "height": 342,
+      "bytes": 64885
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-022.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-022.png",
+      "sourceSha256": "d3b92e6a1d1672bd33315d5eb472d204cf3222a1ff85c4153d44751b42d4c75c",
+      "outputSha256": "2f3a4e0668df33b467f9c09a4ec8f30f3dc41f774645621eac963547c0016e7c",
+      "width": 512,
+      "height": 342,
+      "bytes": 64902
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-023.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-023.png",
+      "sourceSha256": "399b113dcdccc1a21587756b61a97ea9aa02c862cb83747b08154fc3e6631de7",
+      "outputSha256": "007782b22b91a21272bccd3c1c07969bd4969c52538cde60778bbee41e6c16d6",
+      "width": 512,
+      "height": 342,
+      "bytes": 65054
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-024.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-024.png",
+      "sourceSha256": "513da37c1e3ac4901bdf282ea2d1ec3c826a40944fb176b5c5b34f82387e4cb2",
+      "outputSha256": "56035c7ec5e467476e70d0411da48f5bf73f208ae7b40766c8b377de41b46ae5",
+      "width": 512,
+      "height": 342,
+      "bytes": 65299
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-025.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-025.png",
+      "sourceSha256": "ebfda62f3c703b595162e929583ba202122a6cb58dc212cfeaf1ec02a943733b",
+      "outputSha256": "5c33f9986ae2fb7bfea49d94ae9e94ef33d84cb1250d7a65388cfdc51524796f",
+      "width": 512,
+      "height": 342,
+      "bytes": 65464
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-026.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-026.png",
+      "sourceSha256": "a8c99edd49bfbf0eacaae4ac16d97d1fe2a623a41870feb9b0956f847a98702e",
+      "outputSha256": "855e7f409c53218cb060a58a6a68c46bcec98e5d202cdaa2eef7ac717aeda65e",
+      "width": 512,
+      "height": 342,
+      "bytes": 66038
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-027.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-027.png",
+      "sourceSha256": "5cdcc6356ae2a92be62136e03800340eceb9e72972c43bc14824cbcc7e54c17b",
+      "outputSha256": "5121ed589e8e3b4a98005bdb5f3854baedef887a315d56b1824a7596b1c65dc2",
+      "width": 512,
+      "height": 342,
+      "bytes": 65674
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-028.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-028.png",
+      "sourceSha256": "9e892b9dd1005a54ccd4f219fe17f7cc83d793ce2e8f053bf0fc267c17aaac92",
+      "outputSha256": "939faf1a2a4402f4df261d5a96e61cb6c404b4f66634b94f8677be5d7a6ae9e3",
+      "width": 512,
+      "height": 342,
+      "bytes": 65371
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-029.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-029.png",
+      "sourceSha256": "be18af4e85e0ab937590e6edb338c419b9c09ced1f851510c3f926be3079abac",
+      "outputSha256": "ca87aa408fa7b8d449664acc9a7b9e75aaed417e9fb0866f129ba6e7e395e3a1",
+      "width": 512,
+      "height": 342,
+      "bytes": 65269
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-030.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-030.png",
+      "sourceSha256": "e54e71c4e0018a2bd84a2ed18847fd63da96efc83c21d91e168e29a784bec9e5",
+      "outputSha256": "8f21828d5bac437e2198ab4ec5dd6cbf315e647f280fdaf3133f1b5016e891af",
+      "width": 512,
+      "height": 342,
+      "bytes": 65129
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-031.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-031.png",
+      "sourceSha256": "bbf54c7382e4f2781cb9f28a8d920e98bcc69ea7bfae8d145dc7eb02e7fd75e4",
+      "outputSha256": "de92cad6515ae0445e27b0a6112bbb1c4312a2cb4abc9b13f3f94b311527b348",
+      "width": 512,
+      "height": 342,
+      "bytes": 65046
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-032.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-032.png",
+      "sourceSha256": "9089a36cc0bfb6e355fb16fc8ca8e32d06daef79c3237c42d3b75955c09396b4",
+      "outputSha256": "ffab225e7baa426ea0e3245378ce5c5c662cf6a2bbe91a353340bee72250f2c1",
+      "width": 512,
+      "height": 342,
+      "bytes": 64967
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-033.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-033.png",
+      "sourceSha256": "95d6d5f394be06b9a54677b68896a8970fe5642ce693640645f15fc11c06b091",
+      "outputSha256": "d754373ed7bba2583aca43b9ec42d91ffef4956cbc77927909671d8ce5a578cc",
+      "width": 512,
+      "height": 342,
+      "bytes": 64964
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-034.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-034.png",
+      "sourceSha256": "9f17a6b03dfb058e6fba7f08833bfbc4da54beb19b39606f6678719e12c6de36",
+      "outputSha256": "135d0d496846d183170ffb909d0b7fc5f689ac7ed7deaa37719c3473cabae8bb",
+      "width": 512,
+      "height": 342,
+      "bytes": 65089
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-035.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-035.png",
+      "sourceSha256": "b4017a30eac135183c2eade3c555e43ed6ac94daf7dcf14d6199e2572f54a714",
+      "outputSha256": "ce74859318a0e57748aec2299504877f09f71cd3a5ae553de7dc9dcc256b2c81",
+      "width": 512,
+      "height": 342,
+      "bytes": 65125
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-036.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-036.png",
+      "sourceSha256": "3901f2cc8264697e69efa1448b73c15c87b4605aa3f0566d47f6dcd74815b74a",
+      "outputSha256": "b5ee10fb35f0c87e797fac6f11229a07c64aacf36a28ab97ea63e65be1723582",
+      "width": 512,
+      "height": 342,
+      "bytes": 74712
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-037.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-037.png",
+      "sourceSha256": "cb35435b0d2d2f2a6447b35a69e16366b95bf6c4f5efee2a7ed42a3a7b855298",
+      "outputSha256": "8ff82b0f0eefbf88e3b5c3d2c08c8bab23a7d2d5444a8186056612a643d5b325",
+      "width": 512,
+      "height": 342,
+      "bytes": 79316
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-038.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-038.png",
+      "sourceSha256": "3c233b45fbe9ad7872aafa7edb9214e83415d51f541cdf6bdd20404d64f06a14",
+      "outputSha256": "02e948d1c1e36576ea08b53f4d472d5a54c032077005308d622372bc237aeed7",
+      "width": 512,
+      "height": 342,
+      "bytes": 85012
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-039.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-039.png",
+      "sourceSha256": "0e5eaf48bcb7120c0ac50936eb683960ff8aa2656d45a8c0fff66100dde0e52a",
+      "outputSha256": "fdb8326bee29e3d7d14b7b300c0a2876a0d2c27efd0220b27511c6769829873a",
+      "width": 512,
+      "height": 342,
+      "bytes": 74337
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-040.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-040.png",
+      "sourceSha256": "a904b044e5c736ea70fb6ecfbe199e7b2a70a9d689ddbc2dcd8d01b4290dd56a",
+      "outputSha256": "f0e20111f58f5310765b2a4fa110a634293d2d7ba78dece1c0fee253a5ecfee6",
+      "width": 512,
+      "height": 342,
+      "bytes": 70038
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-041.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-041.png",
+      "sourceSha256": "dbf677f753ae18f8c6de3cf735bfae92ca212763dab1264215d2a2b1ca21914a",
+      "outputSha256": "ddce5c0829ba103a9a6a62d8bb1259b328b34b4767ed96dbdea6d3b7f723ebb9",
+      "width": 512,
+      "height": 342,
+      "bytes": 67215
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-042.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-042.png",
+      "sourceSha256": "c223d3f62d53abe18ab98e9b13cc845a873ae83655dd145e928236578081c1f4",
+      "outputSha256": "139a5b52ec6ddd94b0a2a588fe8b505af454ad6dfc984436dd34f793c9b7efa7",
+      "width": 512,
+      "height": 342,
+      "bytes": 63848
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-043.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-043.png",
+      "sourceSha256": "5eba5c4a87c5b8879859048b6de3a5a96939df580e9abbfe5794061a94fbd34f",
+      "outputSha256": "578f6482b7c77f01454cc704e6d4a21e4863fcdb4fbc737ed647008f581c2ff8",
+      "width": 512,
+      "height": 342,
+      "bytes": 66472
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-044.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-044.png",
+      "sourceSha256": "0ea2c74494c900f857f49a97dcaa79dd07af38ddce2cc287cba2e45dffe804c8",
+      "outputSha256": "9f3294797cfd1d7fb738479fcafdab7e9f9eddba72a0da5bf9b7a253fa0d7316",
+      "width": 512,
+      "height": 342,
+      "bytes": 61222
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-045.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-045.png",
+      "sourceSha256": "9a578152b68dfc5af28fb2d593aae3a27a27b43c22a68e4feed316eccb66654a",
+      "outputSha256": "97830aa1f90353f5ebb87bad895d6492bcfcd58bcd2474a0de0c8034f473f46a",
+      "width": 512,
+      "height": 342,
+      "bytes": 56848
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-046.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-046.png",
+      "sourceSha256": "8319e95d1c689068ee84b637d0f735444d7a4a003363c306289c281053d2cab8",
+      "outputSha256": "2f8a5ededdc83f36b5699d1bbb2d38e372fdec2abd6acfc4d4dc94785445619f",
+      "width": 512,
+      "height": 342,
+      "bytes": 49211
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-047.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-047.png",
+      "sourceSha256": "15c15bdf43f1069c0a706d332535a079f3a6379af2ff435df58012558fe31653",
+      "outputSha256": "8c1c00832ec07f0b18874bc1bbafc2deb9845aff6309cf4633bb653b94f6b8c6",
+      "width": 512,
+      "height": 342,
+      "bytes": 42158
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-048.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-048.png",
+      "sourceSha256": "73a7b062d203a6ffbe8f24f89ecc2c62cbd08eff5c9f1e2c3a18238095c9512b",
+      "outputSha256": "aaefc6da6592b6ce1db98f481c6c972b961d26280d2f584f29a6e9668d147690",
+      "width": 512,
+      "height": 342,
+      "bytes": 32503
+    },
+    {
+      "source": "assets/portraits/frames/heixiang/sprite-v1/frame-049.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/heixiang/sprite-v1/frame-049.png",
+      "sourceSha256": "f5ab758d2b0d54e5e7f4933d027604112688192bc433957de892704aee8d2156",
+      "outputSha256": "9d4645d201ec78ce1056afd5299145c675f5dcbf9bb6987b0613389b688610b1",
+      "width": 512,
+      "height": 342,
+      "bytes": 30039
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/neutral.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/neutral.png",
+      "sourceSha256": "6821803c9b3250625a8248c1c1bd008b56c2817fb565cc4dd0e72694818dce68",
+      "outputSha256": "f5fdb85d09f99197f44e7908f76cfc6ff974912483b2a8fe831acafa9fad3d40",
+      "width": 512,
+      "height": 342,
+      "bytes": 97230
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-001.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-001.png",
+      "sourceSha256": "3a8c8c5a92d7c968f63352e2e0446d3cd3af27543efc0eb92a6fbfedac984d20",
+      "outputSha256": "6a73041c23eafae7b5661bd6ede535fc01f4c82a9668decaa283890b6d8a57fa",
+      "width": 512,
+      "height": 342,
+      "bytes": 96973
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-002.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-002.png",
+      "sourceSha256": "5408481bd705d195d3ecefc7c2c6cac6d77309bbe482983eee8f1558bb993639",
+      "outputSha256": "86e0a761b99b54303dcd964bd688e5528246da2ee0cec2cb3c192c992587f02b",
+      "width": 512,
+      "height": 342,
+      "bytes": 96685
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-003.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-003.png",
+      "sourceSha256": "be8d0311db74224b5e70b25185100c4dec95867b102de623eb48877273ae8332",
+      "outputSha256": "8dcaf7c08a942304f3990c2591dc9e33cb8d7b7235561a7c17b5b82e0268901b",
+      "width": 512,
+      "height": 342,
+      "bytes": 96581
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-004.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-004.png",
+      "sourceSha256": "f4d3773fa4967eb23bcbfc7f80cf3d2eadd76aba853a192206fd2d1c7588bd20",
+      "outputSha256": "ec2b6f3c5aadc712324f0de44db1367f2a27e7e351425a01fbb34b07201421a5",
+      "width": 512,
+      "height": 342,
+      "bytes": 96406
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-005.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-005.png",
+      "sourceSha256": "23996b374671a7263e5762a7c9b009cc4bfd903103dc9703ca3a2713649d33bf",
+      "outputSha256": "e03282bee7aec58c7f89250ec3ce54c9482cd4726f0c1f6c9d368ce71b1d8e44",
+      "width": 512,
+      "height": 342,
+      "bytes": 96339
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-006.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-006.png",
+      "sourceSha256": "f19e3c846372f78b237eb8cfad33fe787142565516b7b2817e0295311f46276b",
+      "outputSha256": "c5be7fd9134d534db2842d63bddd153a7f920a515b326327303802a0157ec520",
+      "width": 512,
+      "height": 342,
+      "bytes": 96162
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-007.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-007.png",
+      "sourceSha256": "21ee6c5770fde4730b0948ff220908891125a864fdab5b4754755de9d0b5a6b5",
+      "outputSha256": "c69d0bd436eeaca08ae5c921c064428b95a58f3caf0676c66aee365fc83273e7",
+      "width": 512,
+      "height": 342,
+      "bytes": 96087
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-008.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-008.png",
+      "sourceSha256": "8cae818df037cf1535ae059b202cb31976eb905089f15519fa8007eec2f33db4",
+      "outputSha256": "b20890c60f3f41b8a4ee8d54bc468ed8d5519f17c37fe41d1fc8d91ef9ff47e2",
+      "width": 512,
+      "height": 342,
+      "bytes": 96072
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-009.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-009.png",
+      "sourceSha256": "3de71daecd86958aff3b7b9acebec4762f88099d96584195e11df386f333b480",
+      "outputSha256": "57dbcb4a92738cc92c3fc31b6523c7898f3017ea45543cfe0e0416a075d14916",
+      "width": 512,
+      "height": 342,
+      "bytes": 96200
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-010.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-010.png",
+      "sourceSha256": "c94b0c8c6846885407853881a85d3e105efef15d064fd62a41dd1014ba956e2a",
+      "outputSha256": "42c64dcbdb239dbd4e28af75e191aeb82ad119fe3f6b47dc8ac86e53858afafa",
+      "width": 512,
+      "height": 342,
+      "bytes": 96377
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-011.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-011.png",
+      "sourceSha256": "5b6707bf500ebd22eacc563c95594efeb8690b8f1938364260740347bed0cc26",
+      "outputSha256": "b917f748c5df555a6c603eb0051775aa67ccf15d2b726445bf2a6b9de5ac84af",
+      "width": 512,
+      "height": 342,
+      "bytes": 96645
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-012.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-012.png",
+      "sourceSha256": "48c5c135600471f054ea4cf46030a3d7a5c149d9cb9a195c40ad8353c9674f2e",
+      "outputSha256": "1d4b204097eaad672ee5efac3c2dde53a8fd92d45e595450137987ea851ebbd4",
+      "width": 512,
+      "height": 342,
+      "bytes": 97055
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-013.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-013.png",
+      "sourceSha256": "34f66e5ca58431cc4c827255382f64de2447ff694920446af0a008aeb4c983a7",
+      "outputSha256": "d78f758a0b23a4d4047b1367b41a50860ceb551ff791112c71be6d4fbbdb5f22",
+      "width": 512,
+      "height": 342,
+      "bytes": 96568
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-014.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-014.png",
+      "sourceSha256": "0b3d5a9df64d25acb9b836ed23dc178903a5ae8826b6dcd0ba14983b236d890d",
+      "outputSha256": "7e0a32281d1557888c0c5839439ddd8ad112036b7654903c16a42bd249d9cbcf",
+      "width": 512,
+      "height": 342,
+      "bytes": 96392
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-015.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-015.png",
+      "sourceSha256": "783e321a216a0aad109dfdebc29e212d1ee4eeaf9c90cb32f3f69dd68d558d46",
+      "outputSha256": "13c22fe8b9bf1f35630bf51a8e0b4663a7401632cbe24c8392ce137f4d31ffd4",
+      "width": 512,
+      "height": 342,
+      "bytes": 96353
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-016.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-016.png",
+      "sourceSha256": "3d67dc412f631acaa9c1ac9202279e3f1ef62788647a1319d7811d2975d3f650",
+      "outputSha256": "c8816fa15e356ddbc2e8ce4c6187810c1dbd1f1623dd0dd6d2052c196cc38144",
+      "width": 512,
+      "height": 342,
+      "bytes": 96378
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-017.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-017.png",
+      "sourceSha256": "2e32b4c52f3a17da6e4046375c59777592bd69144c991c7e7961dfc21246b9b0",
+      "outputSha256": "a5e4a907da891c575b3247fb4399cf5b181c18cceeb54b95912322f13230c709",
+      "width": 512,
+      "height": 342,
+      "bytes": 96597
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-018.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-018.png",
+      "sourceSha256": "1dbdac92fa99105a6b4a5240bca1fbbdef7696559ccc04551a17271a04ebe97b",
+      "outputSha256": "21f6cababea766f6555b1f22aa72eaa25d7c17e8c6280a9cb5a981932a0b193b",
+      "width": 512,
+      "height": 342,
+      "bytes": 97119
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-019.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-019.png",
+      "sourceSha256": "f8b31f2e292b78a55f3d60824e9cde4f08fdfcd06031586427e57cc1cd3137af",
+      "outputSha256": "bad3bb2f1f5298da238025686fbe3c9e107f1065e56f3e1132c33f33b88bb930",
+      "width": 512,
+      "height": 342,
+      "bytes": 97113
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-020.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-020.png",
+      "sourceSha256": "ea210b3bb05c383c1724377f7c2142aa95bdc19a6bdb18088d5e0b47c2834df5",
+      "outputSha256": "1fb4d2248760baee9c22f64cf70d6b9f86277ae71027fb66991ad60c7de5e10b",
+      "width": 512,
+      "height": 342,
+      "bytes": 96777
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-021.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-021.png",
+      "sourceSha256": "5c329e765dcb17a5d58a598b9582b9c30a602b8fbdc9d05b3b3d22e9bcd3a68b",
+      "outputSha256": "648adc98981f742b160279b79439df4a559fe10beb6aef4c562d9d06ba17d080",
+      "width": 512,
+      "height": 342,
+      "bytes": 96548
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-022.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-022.png",
+      "sourceSha256": "5fab519250177d24059bba8a0fd6391641a71811a94fe174053b93924fec4d3f",
+      "outputSha256": "1bd6fd72d1c0538f4f4823fe6eaeb7005f05092f8fd80ca1d6d460d9d0cfa4da",
+      "width": 512,
+      "height": 342,
+      "bytes": 96508
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-023.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-023.png",
+      "sourceSha256": "5892df2fab1dde3d8ba48c51621cb9546d9427bd445ac94d243da1fe2e8fb817",
+      "outputSha256": "6ee0259403304a6720721fc5b8e9c57533857262d963fcea5d1bfe348928dcaf",
+      "width": 512,
+      "height": 342,
+      "bytes": 96680
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-024.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-024.png",
+      "sourceSha256": "bbeddbe57fa6e3eb4bbc8fa247a4ff23603049d4e4d5334a6547cf994e9cc623",
+      "outputSha256": "814111ab84e48cf252594977b792e7a6ce75911986f31a6ae0e025da7f25cb6d",
+      "width": 512,
+      "height": 342,
+      "bytes": 96764
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-025.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-025.png",
+      "sourceSha256": "a47bc0d9a8987b1bb3c747db88059d9be4112cd6db0999197f526889edf57b76",
+      "outputSha256": "e1297311dcf88ae980ab24e59a95d3dbdb9fcf9555b8b29a6e60051a6aad3c45",
+      "width": 512,
+      "height": 342,
+      "bytes": 97141
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-026.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-026.png",
+      "sourceSha256": "4898f7d20583a07dd8d199136e2b2bbb3b087b6b149e2210325b5b05aad698a5",
+      "outputSha256": "06043ff227707ad6e578c92bbf683e5e2af58446e4b0f4701907e4b0aa7b5cef",
+      "width": 512,
+      "height": 342,
+      "bytes": 97802
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-027.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-027.png",
+      "sourceSha256": "f74f96c2b24814f971a509b78ebb2dac8bf462aa3e8661e932152e6ab84d2f5e",
+      "outputSha256": "80c936f8fd9b4088e1f06440fa4de49fdda3e888a8312fb100262fff8c7fbe61",
+      "width": 512,
+      "height": 342,
+      "bytes": 97309
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-028.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-028.png",
+      "sourceSha256": "f5da0b7ed575b117040e99e1d53d031becbeaac6e5cf681b664918f5281aa8a4",
+      "outputSha256": "6f7b46ba49bb87c9a211a1fbc2538cc979416ca51effa3f778a279aefa07afc6",
+      "width": 512,
+      "height": 342,
+      "bytes": 97031
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-029.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-029.png",
+      "sourceSha256": "fe09d13c2dc7275a9ebca8a83cc7fcddd05e4928deb2dee1383ebe8dda2f0647",
+      "outputSha256": "221e3a668743b8519e9f266cbb394df27d8579be7ae137d50bbd8a76f00388fd",
+      "width": 512,
+      "height": 342,
+      "bytes": 96973
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-030.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-030.png",
+      "sourceSha256": "671b41258e1838600353168c329f9b94811d7d95cb234ebe0c9ec547d4fa174a",
+      "outputSha256": "7bd72687e83d220ccd2ed0c33f464f1de290488fce006a578fc620a693255e65",
+      "width": 512,
+      "height": 342,
+      "bytes": 96829
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-031.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-031.png",
+      "sourceSha256": "768df600713747f624043c77842ae4849e358bacb0da06da957a649f82897979",
+      "outputSha256": "e4244922dcbe62b01354cbb0232d1c68ccba8021743caa0585465283f798ccac",
+      "width": 512,
+      "height": 342,
+      "bytes": 96821
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-032.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-032.png",
+      "sourceSha256": "c4c2f3fc78cdf97232716becaa495ed3271371e752b1b243f9905db8f2b97087",
+      "outputSha256": "bbba3f4d54e067fe615f78899bf29be5727e3bd00a7477eac8b630d6ae7966f8",
+      "width": 512,
+      "height": 342,
+      "bytes": 96953
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-033.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-033.png",
+      "sourceSha256": "3f3c3f34fd29ddd29443bbd535d154db8db538ae7329bc8756d21e0c212f03a8",
+      "outputSha256": "5af0248eb9f6d93c8b29c5ff5815829bd2aaf2a6724b605f14867f9140033b11",
+      "width": 512,
+      "height": 342,
+      "bytes": 96967
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-034.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-034.png",
+      "sourceSha256": "a70dc30bd68ec0fe4d5a2a6a21c0f4f7433904a3db1d5256f701cd6501ad2f9e",
+      "outputSha256": "bf419f4777e78469103cd53a7e890e83bd55de4c3efb67e6b1a47d5d39bd5496",
+      "width": 512,
+      "height": 342,
+      "bytes": 96864
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-035.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-035.png",
+      "sourceSha256": "6cfd1f004f5037bed87dc294c9e085ef7a0507f925ea3cb872ff4f7a85f164cd",
+      "outputSha256": "b8804da2c660163b30399ccde9c8f3db24e5aeaa4e27f4811db2405d5999b0fc",
+      "width": 512,
+      "height": 342,
+      "bytes": 96857
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-036.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-036.png",
+      "sourceSha256": "4808d303a37826626373271e0c63a8a50777f4e4283bf21a0a95cb10661247fe",
+      "outputSha256": "e084a6fc8d921631c88fcf88805a5444869f1203cbe73ce39713aafb533fe77d",
+      "width": 512,
+      "height": 342,
+      "bytes": 98467
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-037.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-037.png",
+      "sourceSha256": "0c63e7c74546e99a89f39e3fbe05be7e3802894f86920620d97af7c21e4ac2c5",
+      "outputSha256": "b4d16acde40f8d73cf34eb3c57d786abb1b10367fa3bde4c2ce024bdc46ddd0d",
+      "width": 512,
+      "height": 342,
+      "bytes": 91147
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-038.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-038.png",
+      "sourceSha256": "85d73cb874f723768af658ee007952a3d596919a0e73e07ef182929b75059926",
+      "outputSha256": "e59031354b7b00d608b1b88041bd9ab75122c78c8a04d11d510d45bb5b666362",
+      "width": 512,
+      "height": 342,
+      "bytes": 101452
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-039.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-039.png",
+      "sourceSha256": "08c24fbb405f31b0f8aa4337808ef52e20e41d5b724684e49dba97dc4641785a",
+      "outputSha256": "33d23bf10272ccbbc07ab89f130e7a0c42d31927b695e39c566e4f27bcae75a4",
+      "width": 512,
+      "height": 342,
+      "bytes": 100930
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-040.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-040.png",
+      "sourceSha256": "389364d19ffb7b5b978ea94326fe5f156349c3e6db706046606260a64eef6466",
+      "outputSha256": "67921651818755a8c8933b4f116c0d69d0c0f4ef020d1509891b62f1cd83a1f5",
+      "width": 512,
+      "height": 342,
+      "bytes": 95911
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-041.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-041.png",
+      "sourceSha256": "3474a0b1458d9b20b380e460ef52d6ee219dcc0dce2f4db54e77bdc6f6ae56b0",
+      "outputSha256": "ce79cff461bb12cba720dbffefcd2cc8846a393f288c100321963104ccb2c03f",
+      "width": 512,
+      "height": 342,
+      "bytes": 92398
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-042.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-042.png",
+      "sourceSha256": "b68733f5af6fc8d5a4417b9bbb63afc20e29966e04294747fe2ebcdedf36a45a",
+      "outputSha256": "86872647087d96c605f9ac49e8a228cddb0fc57dc7b71299c08065896ee6f3ed",
+      "width": 512,
+      "height": 342,
+      "bytes": 100623
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-043.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-043.png",
+      "sourceSha256": "29469d3b34bfd7e2bef2b568319831ee28cee37b2f42245c8df04a70bcb167d6",
+      "outputSha256": "5fc33ec7476f643e4f8ccef48872fd8369777723ea71d66a9b785d1ae1049b1b",
+      "width": 512,
+      "height": 342,
+      "bytes": 107279
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-044.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-044.png",
+      "sourceSha256": "6b9a2d86fbb3098a40ede230d10e9a0e15972f43f1c29c5bdbd4a9b71196647e",
+      "outputSha256": "9f14b97b150dba97b40a2fee3969ffe6b1055ec566efde1f5e23715b1fddcc34",
+      "width": 512,
+      "height": 342,
+      "bytes": 79426
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-045.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-045.png",
+      "sourceSha256": "ec713da93b750b3db716ea969c2dd8329ffa2985c68daf34bd23da113569c44c",
+      "outputSha256": "d1bbc589141674a76ef960c66f336348147c1844285eec0c503f27b6ee91c649",
+      "width": 512,
+      "height": 342,
+      "bytes": 79403
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-046.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-046.png",
+      "sourceSha256": "4ef579dff8a4cd3706a6fa2c73a2323f475f2e40bbe97bbff6946363878e0b31",
+      "outputSha256": "09b9e6ebe1c26080e50a5cefc36e92ed5d3a19f5ce013838117c374ee5a7418f",
+      "width": 512,
+      "height": 342,
+      "bytes": 61414
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-047.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-047.png",
+      "sourceSha256": "5fd3388ab136855f393526ec772a2c58bd0c9935e0b6fd8368dbcd85eebf414f",
+      "outputSha256": "4d0eefa7af1d9f10b3465ff1064b4d882eb6b28aa0833f756eb7e2592988c1f6",
+      "width": 512,
+      "height": 342,
+      "bytes": 61639
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-048.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-048.png",
+      "sourceSha256": "38f9c6b95a381742210e64727e6a27b83b1e55803e48ac7a42d1b08a97eed818",
+      "outputSha256": "6c1847c955644c19f768e442292c65db3d774a594a7989e4bc38e48a32156dc3",
+      "width": 512,
+      "height": 342,
+      "bytes": 48328
+    },
+    {
+      "source": "assets/portraits/frames/xingyue/sprite-v1/frame-049.webp",
+      "output": "Assets/Resources/Art/Current/portraits/frames/xingyue/sprite-v1/frame-049.png",
+      "sourceSha256": "64e01fd94965da0db8568472bb644d6f91baabbec2d08a15a95f2f381f355e1e",
+      "outputSha256": "356c2519448f0bece5ad75adc078db15d1e429926346b3d30f9584e3d6fce59b",
+      "width": 512,
+      "height": 342,
+      "bytes": 41933
+    }
+  ]
+}

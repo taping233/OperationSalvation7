@@ -1,0 +1,100 @@
+{
+  "reviewedAt": "2026-11-01",
+  "status": "final-player-5-battle-visual-scope-passed",
+  "mode": "Read-only source/CSS comparison and individual view_image inspection. No Assets edits or test execution by this reviewer.",
+  "evidenceRoot": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-5",
+  "reviewedBuild": {
+    "playerEvidenceVersion": "player-5",
+    "buildGUID": "4bdd212ad45c44d09a0052a7b8b1e2b3",
+    "authority": "Root-provided identity for these stable actual Standalone captures",
+    "battleVisualScopePassed": true,
+    "fullPlayerRunPassed": true,
+    "fullRunProof": "Root reports final player-5 completed 61 images, exitCode 0 and result.passed=true. This reviewer independently inspected only the assigned battle image scope.",
+    "fullRunBoundary": "The previous player-4 later Hub stop is superseded by Root's complete player-5 result. This visual review does not independently certify Hub commands, audio acoustics, physical input or another build."
+  },
+  "evidenceReuse": {
+    "previousEvidenceRoot": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-4",
+    "previousBuildGUID": "25f3a3e3de49410189ad002458c98caf",
+    "previousIndividuallyReviewedImageCount": 6,
+    "finalPackageIndividuallyRechecked": ["player-infusion-picked.png", "player-infusion-return.png"],
+    "inputBoundary": "Root verified build-5 to build-6 changed only the Canvas wait in NativeDisplayReview.HubParity.cs. Battle production code, art and shaders are unchanged, so the six-image player-4 review is reused and the two final player-5 images reconfirm the prior defect closures and return restoration. No whole-suite rerun was performed by this reviewer."
+  },
+  "viewport": { "width": 2560, "height": 1440, "dpi": 144, "origin": "root actual Standalone review metadata" },
+  "reviewedImages": [
+    "player-hand-material.png",
+    "player-hand-material-picked.png",
+    "player-infusion.png",
+    "player-infusion-picked.png",
+    "player-infusion-return.png",
+    "player-fx-atlas-specimen.png"
+  ],
+  "findings": [
+    {
+      "id": "real-infusion-selected-face-covered-by-solid-outline",
+      "priority": "P2",
+      "status": "closed-by-player-4-actual-frame",
+      "image": "player-infusion-picked.png",
+      "discoveryEvidenceRoot": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-3",
+      "observed": "The selected material is a solid opaque pale-gold rectangle. Its artwork, name and rules are completely hidden; only the return arrow remains visible. The source card and unselected shelf remain readable.",
+      "source": "battle.infusion-view.js renders the selected physical card face, then an independent return arrow. battle-infusion.css applies a 3px gold outline with transparent interior.",
+      "causeAtCapture": "BattlePresentation.SyncInfusionWorkspace appends a full White-sprite Image with Color.clear and Outline.useGraphicAlpha=false above the selected face. Outline copies the full rectangle as opaque gold, covering the face instead of drawing a hollow perimeter.",
+      "recommendation": "Use four narrow non-interactive edge images or an actual hollow border sprite. Preserve the face interior and return action. Recheck the selected real-infusion frame after the fix.",
+      "notification": "Reported immediately to root and battle author after view_image. Root confirmed the actual screenshot and dispatched a minimal hollow-border correction.",
+      "closure": "Individually inspected player-4/player-infusion-picked.png with view_image. Four narrow gold edges leave the full selected starter artwork, name and rule text visible. The return arrow remains visible at lower right; no opaque interior rectangle covers the card.",
+      "finalPackageRecheck": "Reconfirmed with view_image on player-5/player-infusion-picked.png: selected artwork, name, rule and return arrow remain readable inside the hollow border."
+    },
+    {
+      "id": "real-infusion-full-draft-candidate-opacity",
+      "priority": "P3",
+      "status": "closed-by-player-4-actual-frame",
+      "image": "player-infusion-picked.png",
+      "discoveryEvidenceRoot": "搜打撤/docs/evidence/2026-10-31-unity-parity/player-3",
+      "observed": "At 1/1 selected, the unselected candidate shelf remains fully bright.",
+      "source": "infusionMaterialState returns canAdjust=false for unpicked cards when the infusion is full; renderInfusionSelection applies infusion-at-limit, whose final CSS sets opacity .6.",
+      "unityAtCapture": "HandPanel sets Off from fuelAllowed and ApplyPose selects alpha from Off only, so eligible full-draft candidates remain alpha 1.",
+      "recommendation": "Apply the .6 presentation only to full real-infusion candidates, including pose/hover updates. Ordinary RuleHandSelection deliberately keeps other eligible faces bright when its draft is full.",
+      "closure": "Individually inspected player-4/player-infusion.png and player-infusion-picked.png with view_image. At 1/1 the remaining candidate shelf is visibly faded while source and selected card remain bright/readable. The ordinary hand-selection picked image keeps other eligible faces bright. Current HandPanel SyncOpacity applies InfusionAtLimit=.6 only to real infusion, and shares it across hover/pose updates; the still image confirms that presentation state rather than independently measuring exact alpha.",
+      "finalPackageRecheck": "Reconfirmed with view_image on player-5/player-infusion-picked.png that the 1/1 unpicked shelf is faded; player-infusion-return.png restores the ordinary hand, arena actors/labels, foreground and HUD without remaining blur or dimming."
+    }
+  ],
+  "confirmedObservations": [
+    {
+      "images": ["player-hand-material.png", "player-hand-material-picked.png"],
+      "result": "Ordinary copying-hand selection now uses the ordinary bottom hand and a three-part center control row. No large source-card/independent selected-card workspace appears. Cancel and Confirm remain present; Confirm is disabled at 0/1 and enabled at 1/1. The picked starter face remains readable, lifted and gold-edged; the battlefield and ordinary HUD remain visible and unblurred.",
+      "source": "battle.view.js routes handSelecting to renderHandSelection, independently of renderInfusionSelection. battle-hand-selection.css places controls at 50% stage height with 220x88 minimum buttons and selected-card translateY(-42px).",
+      "limit": "The static picked frame confirms an uplift and gold selected state. Exact settled animation displacement is supported by current code and root's native checks, not independently measured from these transition stills."
+    },
+    {
+      "images": ["player-infusion.png", "player-infusion-picked.png"],
+      "result": "Genuine Infusing uses its separate large source face, selected region, lower candidate shelf and right-side page count. The source face remains readable at the same position. Progress changes 0/1 to 1/1; the right-aligned confirm changes disabled to enabled. Return and direct-play actions are visible at left. Page 1/2, disabled previous and enabled next remain readable.",
+      "source": "battle.view.js calls renderInfusionSelection only for snapshot.infusing. Current source CSS owns source/selected/footer geometry and the separate material paging contract."
+    },
+    {
+      "images": ["player-infusion.png", "player-infusion-picked.png", "player-infusion-return.png"],
+      "result": "During real infusion the enemy rectangle and its arena labels are blurred and faded; source card, candidate cards, global top bar and distant scenery retain clear edges. The player frame and scenic foreground are hidden during infusion. After Return the player, foreground, labels, normal piles/energy/turn controls and ordinary hand reappear clearly without a remaining blur rectangle.",
+      "source": "battle-infusion.css filters only stage[data-infusion-mode] > .sts-arena with blur7/opacity.72, hides the separate unitFrames and scenic foreground, and keeps background/hand outside that filter. Unity uses CurrentArenaFilter for this subtree and restores it on Return.",
+      "limit": "Visual inspection confirms the filter boundary and restoration in these states. Exact alpha/convolution/resource-release values are established by root's separately executed native-shared-7 checks."
+    },
+    {
+      "image": "player-fx-atlas-specimen.png",
+      "result": "The 16 constructed atlas specimens preserve transparent surroundings and show no confirmed neighboring-cell bleed. Their overlap with ordinary hand/UI is part of this explicit grid composition.",
+      "source": "NativeDisplayReview.Parity.cs explicitly mounts slash/block/magic/fire/ice/lightning/poison/heal/curse/pulse/trail/death/buff/debuff/draw/boss and records naturalCombatTimingClaim=false."
+    },
+    {
+      "result": "Final real-infusion visible groups now use stable OrderBy(Rank), matching the new shortcut projection's category ordering. The prior source-order/keyboard-order discrepancy has been corrected in code; root reports native-battle-5 mixed-category and physical-UID checks passed."
+    }
+  ],
+  "verificationReportedByRoot": {
+    "native-shared-7": "passed; real GPU alpha, disabled/reopen restoration, no orphan and notice checks",
+    "native-battle-5": "passed; ordinary in-place selection, physical same-name UIDs, real infusion, ordering and destroyed-focus checks",
+    "build-3": "success with 0 errors and stable inputs",
+    "qualification": "This reviewer did not execute these tests. The player-3 opaque-border image finding remains valid despite their pass results because it is a raster composition defect."
+  },
+  "limitations": [
+    "Only the six listed player-4 actual Standalone images and the two assigned final player-5 rechecks were opened; no extra sizes, browsers or physical-input sessions were used.",
+    "The rectangular enemy and special health/attack values are explicit review fixtures and are not classified as missing production art or balance defects.",
+    "No inference about natural combat effect timing is made from the constructed atlas grid.",
+    "The two player-3 findings were closed by six player-4 images and reconfirmed in the two assigned final player-5 images with buildGUID 4bdd212ad45c44d09a0052a7b8b1e2b3. The complete 61-image player-run pass is reported by Root, independently of this bounded battle visual review.",
+    "No new production code, compilation or test execution was performed for this final visual follow-up."
+  ]
+}

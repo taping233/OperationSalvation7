@@ -1,0 +1,498 @@
+{
+  "sourceRoot": "D:\\素材\\代号柒\\搜打撤\\game",
+  "sourceFingerprints": [
+    {
+      "path": "index.html",
+      "sha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567"
+    },
+    {
+      "path": "css/base.css",
+      "sha256": "2da446bbfe8e78c46f9a1ef489737362e5c37cffa14bcc1e425453e91acfb0a3"
+    },
+    {
+      "path": "css/winter.css",
+      "sha256": "105f5510830950104d6d0add2da379c3611b228c58952fc67914e3dbaa5630d9"
+    },
+    {
+      "path": "css/ui-scale.css",
+      "sha256": "83705767f816c8aee8e7d463be424881ebf27c714ddc5f29648a97ac7895ebe1"
+    },
+    {
+      "path": "css/title-p0.css",
+      "sha256": "b8ffa57c729cb19308d74296f8640f6ba664cc7ddabb0989d4b046ebe6e8a2f7"
+    },
+    {
+      "path": "css/ak-skin.css",
+      "sha256": "ff54a1a823e8a12ddd407d8db9097591df32c0abcc0d927328ff05b368d7dbd7"
+    },
+    {
+      "path": "css/home-polish.css",
+      "sha256": "c3c4a76fa783497cca60b85fd84ac00266f721fd4dd2b6b06749de6a4b785ec4"
+    },
+    {
+      "path": "css/home-layers.css",
+      "sha256": "240209838f26c33beb62fb2712622226b641411c36311f8b8e30daa2aeb7cbcd"
+    },
+    {
+      "path": "css/home-ui-tokens.css",
+      "sha256": "cf985b45cf4f28d4f1fef916125797c322ffefd63330743481d7547a5b83d0d0"
+    },
+    {
+      "path": "css/home-menu-motion.css",
+      "sha256": "d8d06606f2e144b9728ddaaad792969b44d3f8cca58c1552b7cfa2ad78587025"
+    },
+    {
+      "path": "css/title-credits.css",
+      "sha256": "3c76c2fd6b88bf3689319884754eee4b6a25c03527bc71b6edc6e8d217b80dc4"
+    },
+    {
+      "path": "css/page-settings.css",
+      "sha256": "0f8c66f50c22ecd832d8ff4071556e1a260adbc939f937d417245499962bc9fe"
+    },
+    {
+      "path": "src/ui/home-fx.js",
+      "sha256": "57281b9a9c25d8e7c7e7fa233594227f0b2e83c3e4ea4b55a7cebf29a0caba3b"
+    },
+    {
+      "path": "src/ui/home-layers.js",
+      "sha256": "60f092ea0f10df4b5f96f3ea3363d98c65b19e93e820ec7a4567847d8aa06aa5"
+    },
+    {
+      "path": "src/ui/home-menu-motion.js",
+      "sha256": "4d0f2b613c9de156be3dfef115cfba10cdc64a40a568f82ce9e1e8e6c176b7d5"
+    },
+    {
+      "path": "src/ui/title-wallpaper.js",
+      "sha256": "825c8fc8d9b3743a8d52f9ff5fcf53d8116ad0530decb9daa469698d93da1195"
+    },
+    {
+      "path": "src/ui/title-credits.js",
+      "sha256": "93b238bf0d726eb6c37e3803125c7f735df8a2d0ad6bee316a2aa84c7d48ece5"
+    },
+    {
+      "path": "src/ui/menu-feedback.js",
+      "sha256": "e28f27ba6375d0e642408ecd9067342426f077f20606bcff31f41e1f12de529b"
+    },
+    {
+      "path": "src/ui/feedback.local.js",
+      "sha256": "da6f9ef8c50031a560ac88bf4b56b41013248167fb034d94036361d9c96af865"
+    },
+    {
+      "path": "src/ui/home-linked-interactions.js",
+      "sha256": "1e17a3a0f4e4a4f6c6baba1c0bc6709755b34c147ba7c2fe7970d3c574f2289b"
+    },
+    {
+      "path": "css/home-linked-interactions.css",
+      "sha256": "ca5e34915fc8b9acfc0bcd64812228d1a6eb35df3a69c89054ae670458033d51"
+    },
+    {
+      "path": "version.json",
+      "sha256": "dda8bf6cef59f15312f6965322119772fdb88a4893766d97808b3ad9b750b4d3"
+    }
+  ],
+  "files": [
+    {
+      "source": "assets/reconstruction/wallpaper-snow-road-1016.webp",
+      "sourceSha256": "6595b1ca0f0c84ca438da2688501d1f0a0886e297fa16b6bf7c98cd2302407ef",
+      "output": "Assets/Resources/Art/CurrentHome/snow-road.png",
+      "outputSha256": "251c781a3585d3c83f2e13081017baf5fe6c01af96b0c231eb3b8b21d7f5e14d",
+      "operation": "original pixels; WebP/PNG to native PNG",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "source": "assets/reconstruction/wallpaper-baita-heixiang-1016.webp",
+      "sourceSha256": "12efb1d9d0b269e3c22350f1d71c793ef5e63801c4b89d508be5017469407b25",
+      "output": "Assets/Resources/Art/CurrentHome/baita-heixiang.png",
+      "outputSha256": "03ac60808c846fdfaf23e92097a3ec53d751041c4045267f03c4e38fc81f2ade",
+      "operation": "original pixels; WebP/PNG to native PNG",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "source": "assets/reconstruction/wallpaper-baita-heixiang-1016.webp",
+      "sourceSha256": "12efb1d9d0b269e3c22350f1d71c793ef5e63801c4b89d508be5017469407b25",
+      "output": "Assets/Resources/Art/CurrentHome/baita-heixiang-filtered.png",
+      "outputSha256": "18363604a07484a8afdf3a9e78a397fee467fb17ca3181ea43d6ac6fc0d4352a",
+      "operation": "home-polish.css alternate layer saturate(.88) contrast(1.03) brightness(.96)",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "source": "assets/reconstruction/wallpaper-xingyue-piano-1020.webp",
+      "sourceSha256": "2ae951b2ff94ddd75d6314d006f218a7983b56dfb542ab1da4aa507e13f97161",
+      "output": "Assets/Resources/Art/CurrentHome/xingyue-piano.png",
+      "outputSha256": "a99fc49ef464e16de5f75b744d587cc9778ca35f6ecbb7f5fb9f27a607211087",
+      "operation": "original pixels; WebP/PNG to native PNG",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "source": "assets/reconstruction/wallpaper-wu-bass-1020.webp",
+      "sourceSha256": "95a572de56736ea2bc3b3bfabc9158e6d79f232b088fc817006983812e71875d",
+      "output": "Assets/Resources/Art/CurrentHome/wu-bass.png",
+      "outputSha256": "a6fd111576198c3c9ce0ad5b4b2c65c74adc970742596c57d958db4b10725953",
+      "operation": "original pixels; WebP/PNG to native PNG",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "source": "assets/reconstruction/wallpaper-baita-station-1020.webp",
+      "sourceSha256": "ef45420901f59620c401dad7bcf5aff0a83e084270407ac5da764a1c0a54a712",
+      "output": "Assets/Resources/Art/CurrentHome/baita-station.png",
+      "outputSha256": "d8403f02a30be61cb64731cedf0adb08b7af8ce627d65bf7be571a7c50658466",
+      "operation": "original pixels; WebP/PNG to native PNG",
+      "size": [
+        1673,
+        940
+      ]
+    },
+    {
+      "source": "assets/reconstruction/wallpaper-xingyue-reeds-1020.webp",
+      "sourceSha256": "dea7e99b31a961ea1c9a74d96bc1c90b0ac186baa744597ba04e9188155ea8bf",
+      "output": "Assets/Resources/Art/CurrentHome/xingyue-reeds.png",
+      "outputSha256": "a8e1a2cc5e127fd9a3605d8b15c309b83b5bff6eeebd87cf20c419b3866487a5",
+      "operation": "original pixels; WebP/PNG to native PNG",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "source": "assets/slot-bg-knight-fantasy.webp",
+      "sourceSha256": "80f2d3cd5f065616cf230b35cf056a44a7475918c6cfc61e510e8dffd2356c77",
+      "output": "Assets/Resources/Art/CurrentHome/companions-dinner.png",
+      "outputSha256": "4299bedb46e251880932468900941f22cb13d7aee2706d91c01a86b53e597157",
+      "operation": "original pixels; WebP/PNG to native PNG",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "source": "assets/title-wordmark.png",
+      "sourceSha256": "28feaa2e5e3eb66f1c6502f88868cc3ca67e62e2457301d7e0d11739c571766e",
+      "output": "Assets/Resources/Art/CurrentHome/wordmark.png",
+      "outputSha256": "23a42d32bebd5d81cf082b2fd84d85e961394184e7f1913a7f7564905c76f709",
+      "operation": "original pixels; WebP/PNG to native PNG",
+      "size": [
+        3200,
+        1486
+      ]
+    },
+    {
+      "source": "assets/ui/sugin-mail-empty.webp",
+      "sourceSha256": "3b1f7c6630cc6238d491a5a4f34d1dc830978ddd3af51d705d4c9d5a1478f5fb",
+      "output": "Assets/Resources/Art/CurrentHome/mail-empty.png",
+      "outputSha256": "22003ab90cd3ce2c7d27837b57d9948da35f7f9e7f4d87d3777489d39bd766f3",
+      "operation": "original pixels; WebP/PNG to native PNG",
+      "size": [
+        360,
+        526
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/mStart.png",
+      "outputSha256": "d2bb00c4291937c3c4cdd86d13fe9f26c00fe5b86dc56aeea381b4293e3a7866",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/mStart-off.png",
+      "outputSha256": "d5ff198ff3f266f2544fee4eff40812d81eedc985f98c0a04f6323542a7bf4cf",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/mGuide.png",
+      "outputSha256": "341f08cfabc5765521580b8bd89804870cdbb45f3f04626a6d8e7031cb6b8477",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/mAch.png",
+      "outputSha256": "750e8fef87bee9ca61520667fdc329621595e7420c483f51a49e06336d75cfcf",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/btnCardLib.png",
+      "outputSha256": "a2367c6d810b2cf6c370091f902eff08799e50068d04cfb690200b3e1bb0ce25",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/mSettings.png",
+      "outputSha256": "28ebdc355bb9401228d5993a1f1934fad26f74189f0716a349f7193de2945ed1",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/mCredits.png",
+      "outputSha256": "e9b7956db22fac5b99a9677b10aab54463419a5db88d69c748102913965851f0",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/btnTitleExit.png",
+      "outputSha256": "e4ab0bc0409f162c7ddff2ab8dab5d56f877b5921df6d6a4977ca61e02bad8f5",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/btnTitleMute.png",
+      "outputSha256": "7755e0f2df6884a9557d1072888566321d01ca3f8726a08444e1056323cccfbb",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/btnTitleMute-off.png",
+      "outputSha256": "f07700412a94d1916858ed59026d779656fae708cd5dd8e50c04e2580650f2b7",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/mInbox.png",
+      "outputSha256": "4769df0d4ed5c62cbd2e5b3eae2c0905424b0059a4e54d13f2547bffcf629613",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/btnTitleWallpaper.png",
+      "outputSha256": "8e87b12fe952cfa1f12e7b9f51801dc591104057996d3e014cde3d0924708487",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "index.html",
+      "sourceSha256": "7aeb1753520b6afc4ca78cd45200bb6476eb4edf16f49255cf2d701a2907f567",
+      "output": "Assets/Resources/Art/CurrentHome/btnTitleWallpaperView.png",
+      "outputSha256": "7b5d6ef7650bf374e8a3a6b8aa10a91cbff92e8f443af2363d476a64807ebab4",
+      "operation": "exact inline SVG + final title-p0/home-polish stroke; CairoSVG raster",
+      "size": [
+        176,
+        176
+      ]
+    },
+    {
+      "source": "assets/fonts/rajdhani-latin-600-normal.woff2",
+      "sourceSha256": "433a7007e4747a02a790167a6efa2625855f013970ba49b9b739a5d3db8b2601",
+      "output": "Assets/Resources/Art/CurrentHome/Rajdhani-600.ttf",
+      "outputSha256": "806bd15e538d30225b07cc9aed3fcf35819528aa0e6b3821ceb71f3b1e39913f",
+      "operation": "lossless WOFF2 decompression to Unity TTF; same glyphs and metrics",
+      "size": null
+    },
+    {
+      "source": "assets/fonts/rajdhani-latin-700-normal.woff2",
+      "sourceSha256": "5b7e4a6f97163c2636724d4de90304fc895653dcfe64c67a7a22f26331ca5c5f",
+      "output": "Assets/Resources/Art/CurrentHome/Rajdhani-700.ttf",
+      "outputSha256": "3ddba859fa438d6a791e4ce40e6a7114d9bbfa83a483611fd3a97af97b5c78b6",
+      "operation": "lossless WOFF2 decompression to Unity TTF; same glyphs and metrics",
+      "size": null
+    },
+    {
+      "source": "src/ui/home-linked-interactions.js",
+      "sourceSha256": "1e17a3a0f4e4a4f6c6baba1c0bc6709755b34c147ba7c2fe7970d3c574f2289b",
+      "output": "Assets/Resources/Art/CurrentHome/linked-back.png",
+      "outputSha256": "2b74f29e220be7d0bc66b83e9b0d452ebb416297084c6b4a644df746482da647",
+      "operation": "current linkedBackHTML inline SVG, unchanged paths",
+      "size": [
+        96,
+        96
+      ]
+    }
+  ],
+  "derived": [
+    {
+      "key": "scene-shade",
+      "path": "Assets/Resources/Art/CurrentHome/scene-shade.png",
+      "sha256": "d45d227768bf6156396ca3f718d33b7cb7e795bbfd04b39cf73c80a17a8f1498",
+      "source": "home-polish.css ::after four gradient stack"
+    },
+    {
+      "key": "home-slash",
+      "path": "Assets/Resources/Art/CurrentHome/home-slash.png",
+      "sha256": "55a6b2bfeab5136b23067b59a283686861ca6d99493d2f17140e64e1da73899e",
+      "source": "home-layers.js polygon and SVG hlSlashFill"
+    },
+    {
+      "key": "home-beams",
+      "path": "Assets/Resources/Art/CurrentHome/home-beams.png",
+      "sha256": "76046538389efb330b6b861e2c0ca71ca1dd459df71528329b6437eaae9ec80d",
+      "source": "home-layers.css conic-gradient(from 168deg at 52% -12%) and mask"
+    },
+    {
+      "key": "home-mist",
+      "path": "Assets/Resources/Art/CurrentHome/home-mist.png",
+      "sha256": "cc36e9f5a0e7c7e2f1dd888bcc3647ebbc1a6702666044a25f47d87d07d4a293",
+      "source": "home-polish.css three ground-mist radial gradients; screen blend remains native material"
+    },
+    {
+      "key": "home-grain",
+      "path": "Assets/Resources/Art/CurrentHome/home-grain.png",
+      "sha256": "dcaa72425335bd3cbef30bf32a3c546f00768a9902e5d31a0df8e6fbf2a478f8",
+      "source": "home-polish.css monochrome grain carrier; native seeded noise for SVG feTurbulence"
+    },
+    {
+      "key": "home-sheen",
+      "path": "Assets/Resources/Art/CurrentHome/home-sheen.png",
+      "sha256": "bc69d43a43db6ddd296a7fef2ff5ebb35aae59132251174d6e532c85e5ad6d1b",
+      "source": "home-polish.css 105deg transparent40% white50% transparent60% /260%"
+    },
+    {
+      "key": "home-ripple",
+      "path": "Assets/Resources/Art/CurrentHome/home-ripple.png",
+      "sha256": "e8532436cdc9de39e14b78424a97742ce1219d31a2d7bfce2e2ab17b1398833f",
+      "source": "winter.css/home-polish.css geometric primitive"
+    },
+    {
+      "key": "home-snow-dot",
+      "path": "Assets/Resources/Art/CurrentHome/home-snow-dot.png",
+      "sha256": "6a02ea550a699cd8c1ccc4c290fc8d98a9d644af34fed23ca1ddd18a96fd4982",
+      "source": "winter.css/home-polish.css geometric primitive"
+    },
+    {
+      "key": "home-spark",
+      "path": "Assets/Resources/Art/CurrentHome/home-spark.png",
+      "sha256": "98be228eead8544f88899cd42e9db3ea90da11eda8faf7218ec8069c5b233970",
+      "source": "winter.css/home-polish.css geometric primitive"
+    },
+    {
+      "key": "plate-start",
+      "path": "Assets/Resources/Art/CurrentHome/plate-start.png",
+      "sha256": "6f2e87ccfe0401c1ca13784b71175440e00b1484593175ed0d29d2a1942f3dca",
+      "source": "title-p0.css --plate-shape; home-polish.css final --plate-fill"
+    },
+    {
+      "key": "glow-start",
+      "path": "Assets/Resources/Art/CurrentHome/glow-start.png",
+      "sha256": "5cc7b3e20fa0d3723bcd20c0e62162d2d671621dd7f8caaf41da8db203eacda4",
+      "source": "home-polish.css final .home-start > .home-hover-glow"
+    },
+    {
+      "key": "plate-guide",
+      "path": "Assets/Resources/Art/CurrentHome/plate-guide.png",
+      "sha256": "30c0734d4a0dd94b4c15adf044f9357ce3aae773986f7a3d6187694909f74c80",
+      "source": "title-p0.css --plate-shape; home-polish.css final --plate-fill"
+    },
+    {
+      "key": "glow-guide",
+      "path": "Assets/Resources/Art/CurrentHome/glow-guide.png",
+      "sha256": "438439279a05fca2c0bc9c8c131651d86d4f9d85457e9db9e4a55a3f64d498e2",
+      "source": "home-polish.css option-light radial/edge layer"
+    },
+    {
+      "key": "plate-collection",
+      "path": "Assets/Resources/Art/CurrentHome/plate-collection.png",
+      "sha256": "5e6a7a63db06c60be788d2b94dbc9250fec07366052721763c18928417ab20de",
+      "source": "title-p0.css --plate-shape; home-polish.css final --plate-fill"
+    },
+    {
+      "key": "glow-collection",
+      "path": "Assets/Resources/Art/CurrentHome/glow-collection.png",
+      "sha256": "5d65b4cc04eb9f1c39afed6191b275224e8e667a3783b34617e065f3f4550532",
+      "source": "home-polish.css option-light radial/edge layer"
+    },
+    {
+      "key": "plate-system",
+      "path": "Assets/Resources/Art/CurrentHome/plate-system.png",
+      "sha256": "29a9ae1f6662b3d759b7f9a94c3898e134febbd1b8b6df4e7f4f8b2e3ad01cdc",
+      "source": "title-p0.css --plate-shape; home-polish.css final --plate-fill"
+    },
+    {
+      "key": "glow-system",
+      "path": "Assets/Resources/Art/CurrentHome/glow-system.png",
+      "sha256": "78a4fc2fd13e2a926d58aef911d4cded36f9242c337c4b67c3401ff120c68bc6",
+      "source": "home-polish.css option-light radial/edge layer"
+    }
+  ],
+  "wallpapers": [
+    "snow-road",
+    "baita-heixiang",
+    "xingyue-piano",
+    "wu-bass",
+    "baita-station",
+    "xingyue-reeds",
+    "companions-dinner"
+  ],
+  "defaultWallpaper": "wu-bass",
+  "styleOrder": [
+    "ui-scale.css → title-p0.css",
+    "ak-skin.css",
+    "home-menu-motion.css / home-ui-tokens.css",
+    "home-fx.js → home-polish.css",
+    "home-layers.js → dynamic home-layers.css",
+    "title-credits.css"
+  ],
+  "nativeVisualVerification": "pending parent native capture; no foreground/Unity/compile invoked"
+}

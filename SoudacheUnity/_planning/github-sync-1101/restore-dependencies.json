@@ -1,0 +1,544 @@
+{
+  "at": "2026-10-31T20:46:56.337960+00:00",
+  "scope": "Static local dependency/target audit only; no importers, Unity or Node resource generator executed.",
+  "status": "complete; corrected node export destination is explicit in all current recovery instructions",
+  "mustIncludeUnityRelative": [
+    {
+      "path": "_planning/migration-1029/ui/sync_assets.py",
+      "bytes": 15007,
+      "sha256": "69b269131ebcafcaabcfd42c5efce30ca75800e782cf689ad1aefa09841e82ca",
+      "reasons": [
+        "Executable restore entry",
+        "Local Python import required by _planning/migration-1029/ui/sync_fonts.py"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/ui/sync_fonts.py",
+      "bytes": 3693,
+      "sha256": "8d186d5e497078b98f5f57125a696e7bc8c4d5b7bc1bde82262f11787baa003f",
+      "reasons": [
+        "Executable restore entry"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/ui/fonts-receipt.json",
+      "bytes": 3113,
+      "sha256": "700b1f450a33411b5f606798892065bf843a686b974ad10e62bfdecc753c9843",
+      "reasons": [
+        "Input/template required by _planning/migration-1029/ui/sync_fonts.py"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/export_assets.py",
+      "bytes": 2800,
+      "sha256": "3c2138ef2d6fdef5974680f8bccb30113c0793ed20591bcf6893d9eb08d3679a",
+      "reasons": [
+        "Executable restore entry"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/source-data.json",
+      "bytes": 101446,
+      "sha256": "d18e0bc2cfcb42f00feb75bc09fb0995c7192c32425ede8f41655fdefbb58bea",
+      "reasons": [
+        "Input/template required by _planning/migration-1029/current-node-rooms/export_assets.py"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/source-svg/search.svg",
+      "bytes": 297,
+      "sha256": "f548e865e0738a8bd605143493d01cb2fbf8a83ec8ec9ebb07a8146692d41c87",
+      "reasons": [
+        "Ghost raster source required by node export"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/source-svg/breach.svg",
+      "bytes": 225,
+      "sha256": "13b1f912df662e3008c12cad4f34db229def596ee7e21a166db2d5165a3793c3",
+      "reasons": [
+        "Ghost raster source required by node export"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/source-svg/heal.svg",
+      "bytes": 163,
+      "sha256": "30358b2a34864f3b9a4464180ccfa268288b487d493c921e12a9cb625d3c03bc",
+      "reasons": [
+        "Ghost raster source required by node export"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/source-svg/cards.svg",
+      "bytes": 211,
+      "sha256": "fc513156c181b33ddfdc79179329f10eaf6dbeef8c1806c3a311dc88ee917f6c",
+      "reasons": [
+        "Ghost raster source required by node export"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/source-svg/chest.svg",
+      "bytes": 203,
+      "sha256": "9640efe127e5ad4380c88a372ee22059c3fafbff6370f200d2bc0cb46c7747a2",
+      "reasons": [
+        "Ghost raster source required by node export"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/source-svg/leave.svg",
+      "bytes": 183,
+      "sha256": "048ea674607110dbd8dc812342951b87eebe1ec08d0563b0387177a68918c9e2",
+      "reasons": [
+        "Ghost raster source required by node export"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/source-svg/fight.svg",
+      "bytes": 223,
+      "sha256": "d4c73be2c30cca1dc64ad94e2add3e055d81b5820b4860824d239fd40051660d",
+      "reasons": [
+        "Ghost raster source required by node export"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/source-svg/explore.svg",
+      "bytes": 210,
+      "sha256": "5babc2bc4a937555166a63581a3123d65e41d674bbaef22f98e4f386d24d78ce",
+      "reasons": [
+        "Ghost raster source required by node export"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-slot-achievement/sync_assets.py",
+      "bytes": 6619,
+      "sha256": "194204ecfa65df469cc6532d677d234222c02f26a66f5cf715c3b3c1d99f4d28",
+      "reasons": [
+        "Executable restore entry"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-home/sync_home.py",
+      "bytes": 13614,
+      "sha256": "4ae3edbc8609d90548ebc9d5f5127516f1b56db528fa6f5b1bfe2a0383b770b3",
+      "reasons": [
+        "Executable restore entry"
+      ]
+    },
+    {
+      "path": "Assets/Resources/Art/Current/title-wordmark.png.meta",
+      "bytes": 2714,
+      "sha256": "0ddc61896e311417fb83615506855d129cbedf59ebccc79b8a6f9d7b27d9ef8a",
+      "reasons": [
+        "Input/template required by _planning/migration-1029/current-home/sync_home.py"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-photo/sync_photo.py",
+      "bytes": 7203,
+      "sha256": "5f0ca8081f338ac2ccdb1ff4788b823da8d0967644ac665399f5fdffd6a79bb1",
+      "reasons": [
+        "Executable restore entry"
+      ]
+    },
+    {
+      "path": "_planning/migration-1030-fidelity/shop/import_assets.py",
+      "bytes": 1758,
+      "sha256": "324c7c30d9f49c41fbdbdfcd49d9866f762926ac65fd7fc820cb67225c792c39",
+      "reasons": [
+        "Executable restore entry"
+      ]
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentGuide/battle.png.meta",
+      "bytes": 2714,
+      "sha256": "2d84078c3ab4747cd97f86d9ac860cfbf4b0229ec2caadbcf824b0d069bd6456",
+      "reasons": [
+        "Input/template required by _planning/migration-1030-fidelity/shop/import_assets.py"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/current-unit-frames/sync_frames.py",
+      "bytes": 5505,
+      "sha256": "9079659ea377bb2a206e80f1fbab030fae094683c13622104ba0efe1d5dd5b33",
+      "reasons": [
+        "Executable restore entry"
+      ]
+    },
+    {
+      "path": "_planning/migration-1029/ui/README.md",
+      "bytes": 8666,
+      "sha256": "03c3a5ff2c0ef9e6f0eb07affaade944d451b40b6f0abdaaab9fa759964d25b8",
+      "reasons": [
+        "Current recovery instructions/source closure manifest"
+      ]
+    },
+    {
+      "path": "GITHUB-SOURCE.md",
+      "bytes": 3213,
+      "sha256": "bd3674d978d8113b092c29fe80ce6976a9d9a19157fcfb4c691761fa22413826",
+      "reasons": [
+        "Current recovery instructions/source closure manifest"
+      ]
+    },
+    {
+      "path": "_planning/github-sync-1101/resource-rebuild.json",
+      "bytes": 305302,
+      "sha256": "16baa02b4a160ef16cbb60df04ca7a3af363bcd7ff75d9a2edb9a63898655415",
+      "reasons": [
+        "Current recovery instructions/source closure manifest"
+      ]
+    }
+  ],
+  "recommendedProvenanceUnityRelative": [
+    {
+      "path": "_planning/migration-1029/ui/assets-receipt.json",
+      "bytes": 189480,
+      "sha256": "40ed84fb19d5ae44461aa1f6c71870e8acdb5630793872fa679170804c3e821c",
+      "reason": "Referenced provenance/output receipt; ui/assets and bgm receipts are optional cache/reuse inputs, others are regenerated by their owning script."
+    },
+    {
+      "path": "_planning/migration-1029/bgm/receipt.json",
+      "bytes": 2255,
+      "sha256": "4ec02af7c547712b5668cb66e3311736a0288be8a93a51f90b5fad41c9a72d73",
+      "reason": "Referenced provenance/output receipt; ui/assets and bgm receipts are optional cache/reuse inputs, others are regenerated by their owning script."
+    },
+    {
+      "path": "_planning/migration-1029/current-node-rooms/assets-receipt.json",
+      "bytes": 23918,
+      "sha256": "c5587d8439bee8e91cc331ab66fcddf669ed2ddb7ed22003cf2e8df91c01fc1e",
+      "reason": "Referenced provenance/output receipt; ui/assets and bgm receipts are optional cache/reuse inputs, others are regenerated by their owning script."
+    },
+    {
+      "path": "_planning/migration-1029/current-slot-achievement/source-receipt.json",
+      "bytes": 13854,
+      "sha256": "4288971701784194294203171f229fafa479ac23644d39e4a5204d0c8388d8ca",
+      "reason": "Referenced provenance/output receipt; ui/assets and bgm receipts are optional cache/reuse inputs, others are regenerated by their owning script."
+    },
+    {
+      "path": "_planning/migration-1029/current-home/source-receipt.json",
+      "bytes": 20018,
+      "sha256": "d568dde0b3d837e998f544853bcd57bdafd50ae4592dc6080bafea530b2bf4be",
+      "reason": "Referenced provenance/output receipt; ui/assets and bgm receipts are optional cache/reuse inputs, others are regenerated by their owning script."
+    },
+    {
+      "path": "_planning/migration-1029/current-photo/source-receipt.json",
+      "bytes": 26257,
+      "sha256": "602350b24261c880f7e2772be2d5d0ee63de57e76fce4ac97007d05848b97ad1",
+      "reason": "Referenced provenance/output receipt; ui/assets and bgm receipts are optional cache/reuse inputs, others are regenerated by their owning script."
+    },
+    {
+      "path": "_planning/migration-1030-fidelity/shop/assets-receipt.json",
+      "bytes": 1490,
+      "sha256": "b4ba2d2bd1220851082d881807a8d7b7c75ea55c1f1980eb2ef3618eaccb0e4a",
+      "reason": "Referenced provenance/output receipt; ui/assets and bgm receipts are optional cache/reuse inputs, others are regenerated by their owning script."
+    },
+    {
+      "path": "_planning/migration-1029/current-unit-frames/assets-receipt.json",
+      "bytes": 112175,
+      "sha256": "525ffb45e3e8c3c1c5a98837fe2ce00b24eeccf0475b201a9141e8166a271f26",
+      "reason": "Referenced provenance/output receipt; ui/assets and bgm receipts are optional cache/reuse inputs, others are regenerated by their owning script."
+    },
+    {
+      "path": "_planning/migration-1029/import-quality/current-fonts-receipt.json",
+      "bytes": 627,
+      "sha256": "63f093ab27cab2bef341adb32ffe2e4ea1f6c35b518778e54953091a70e1e5ab",
+      "reason": "Referenced provenance/output receipt; ui/assets and bgm receipts are optional cache/reuse inputs, others are regenerated by their owning script."
+    }
+  ],
+  "entries": [
+    {
+      "entry": "_planning/migration-1029/ui/sync_assets.py",
+      "pythonImports": [
+        "PIL",
+        "hashlib",
+        "json",
+        "pathlib",
+        "re",
+        "shutil",
+        "subprocess",
+        "urllib.parse"
+      ],
+      "localPythonModules": [],
+      "unityInputs": [],
+      "target": "Assets/Resources",
+      "nodeHelperFiles": []
+    },
+    {
+      "entry": "_planning/migration-1029/ui/sync_fonts.py",
+      "pythonImports": [
+        "argparse",
+        "fontTools.ttLib",
+        "json",
+        "pathlib",
+        "shutil",
+        "sync_assets"
+      ],
+      "localPythonModules": [
+        "_planning/migration-1029/ui/sync_assets.py"
+      ],
+      "unityInputs": [
+        "_planning/migration-1029/ui/fonts-receipt.json"
+      ],
+      "target": "Assets/Resources",
+      "nodeHelperFiles": []
+    },
+    {
+      "entry": "_planning/migration-1029/current-node-rooms/export_assets.py",
+      "pythonImports": [
+        "PIL",
+        "argparse",
+        "cairosvg",
+        "hashlib",
+        "json",
+        "pathlib",
+        "re"
+      ],
+      "localPythonModules": [],
+      "unityInputs": [
+        "_planning/migration-1029/current-node-rooms/source-data.json",
+        "_planning/migration-1029/current-node-rooms/source-svg/search.svg",
+        "_planning/migration-1029/current-node-rooms/source-svg/breach.svg",
+        "_planning/migration-1029/current-node-rooms/source-svg/heal.svg",
+        "_planning/migration-1029/current-node-rooms/source-svg/cards.svg",
+        "_planning/migration-1029/current-node-rooms/source-svg/chest.svg",
+        "_planning/migration-1029/current-node-rooms/source-svg/leave.svg",
+        "_planning/migration-1029/current-node-rooms/source-svg/fight.svg",
+        "_planning/migration-1029/current-node-rooms/source-svg/explore.svg"
+      ],
+      "target": "Assets/Resources with explicit --output Assets/Resources; default is same-directory draft/Resources",
+      "nodeHelperFiles": []
+    },
+    {
+      "entry": "_planning/migration-1029/current-slot-achievement/sync_assets.py",
+      "pythonImports": [
+        "PIL",
+        "cairosvg",
+        "hashlib",
+        "json",
+        "numpy",
+        "pathlib",
+        "re",
+        "uuid"
+      ],
+      "localPythonModules": [],
+      "unityInputs": [],
+      "target": "Assets/Resources",
+      "nodeHelperFiles": []
+    },
+    {
+      "entry": "_planning/migration-1029/current-home/sync_home.py",
+      "pythonImports": [
+        "PIL",
+        "cairosvg",
+        "fontTools.ttLib",
+        "hashlib",
+        "json",
+        "numpy",
+        "pathlib",
+        "re",
+        "shutil",
+        "uuid",
+        "xml.etree.ElementTree"
+      ],
+      "localPythonModules": [],
+      "unityInputs": [
+        "Assets/Resources/Art/Current/title-wordmark.png.meta"
+      ],
+      "target": "Assets/Resources",
+      "nodeHelperFiles": []
+    },
+    {
+      "entry": "_planning/migration-1029/current-photo/sync_photo.py",
+      "pythonImports": [
+        "PIL",
+        "cairosvg",
+        "hashlib",
+        "json",
+        "numpy",
+        "pathlib",
+        "re",
+        "uuid"
+      ],
+      "localPythonModules": [],
+      "unityInputs": [],
+      "target": "Assets/Resources",
+      "nodeHelperFiles": []
+    },
+    {
+      "entry": "_planning/migration-1030-fidelity/shop/import_assets.py",
+      "pythonImports": [
+        "PIL",
+        "hashlib",
+        "json",
+        "pathlib",
+        "re",
+        "uuid"
+      ],
+      "localPythonModules": [],
+      "unityInputs": [
+        "Assets/Resources/Art/CurrentGuide/battle.png.meta"
+      ],
+      "target": "Assets/Resources",
+      "nodeHelperFiles": []
+    },
+    {
+      "entry": "_planning/migration-1029/current-unit-frames/sync_frames.py",
+      "pythonImports": [
+        "PIL",
+        "hashlib",
+        "json",
+        "math",
+        "pathlib",
+        "re"
+      ],
+      "localPythonModules": [],
+      "unityInputs": [],
+      "target": "Assets/Resources",
+      "nodeHelperFiles": []
+    }
+  ],
+  "parentBaseline": {
+    "layout": [
+      "SoudacheUnity",
+      "搜打撤/game"
+    ],
+    "requiredSourceCorpus": "Retain the parent HEAD game/assets, game/src, game/css, game/data and the current game/index.html, version.json, package.json baseline; include the seven current artwork source changes identified in resource-rebuild.json. Helpers use dynamic asset paths/globs, so this is not a promise that only the literal filenames below suffice.",
+    "directSourceTextFiles": [
+      "搜打撤/game/css/ak-skin.css",
+      "搜打撤/game/css/archive-back.css",
+      "搜打撤/game/css/archive-motion.css",
+      "搜打撤/game/css/base.css",
+      "搜打撤/game/css/collection-chrome.css",
+      "搜打撤/game/css/expedition-library.css",
+      "搜打撤/game/css/home-layers.css",
+      "搜打撤/game/css/home-linked-interactions.css",
+      "搜打撤/game/css/home-menu-motion.css",
+      "搜打撤/game/css/home-polish.css",
+      "搜打撤/game/css/home-ui-tokens.css",
+      "搜打撤/game/css/navigation-feedback.css",
+      "搜打撤/game/css/overlays.css",
+      "搜打撤/game/css/page-settings.css",
+      "搜打撤/game/css/page-slot-select.css",
+      "搜打撤/game/css/photo-studio-mounts.css",
+      "搜打撤/game/css/photo-studio-room-effects.css",
+      "搜打撤/game/css/photo-studio-unified.css",
+      "搜打撤/game/css/photo-studio-zoom-motion.css",
+      "搜打撤/game/css/review-ui.css",
+      "搜打撤/game/css/scenes.css",
+      "搜打撤/game/css/secondary-ui-tokens.css",
+      "搜打撤/game/css/silent-node-film.css",
+      "搜打撤/game/css/title-achievements.css",
+      "搜打撤/game/css/title-credits.css",
+      "搜打撤/game/css/title-p0.css",
+      "搜打撤/game/css/ui-scale.css",
+      "搜打撤/game/css/winter.css",
+      "搜打撤/game/data/achievements.json",
+      "搜打撤/game/data/art-mapping.json",
+      "搜打撤/game/data/card-frame-layout.json",
+      "搜打撤/game/data/card-notes.json",
+      "搜打撤/game/data/pets.json",
+      "搜打撤/game/index.html",
+      "搜打撤/game/src/audio/sound.music.catalog.js",
+      "搜打撤/game/src/audio/sound.policy.js",
+      "搜打撤/game/src/audio/sound.samples.catalog.js",
+      "搜打撤/game/src/battle/view/battle.action-timing.js",
+      "搜打撤/game/src/cards/battle-value-context.js",
+      "搜打撤/game/src/cards/card-description-links.js",
+      "搜打撤/game/src/cards/card-description-text.js",
+      "搜打撤/game/src/cards/card-draw-explanation.js",
+      "搜打撤/game/src/cards/card-energy-policy.js",
+      "搜打撤/game/src/cards/card-photo-notes.js",
+      "搜打撤/game/src/cards/card-state-presentation.js",
+      "搜打撤/game/src/cards/cards.view.js",
+      "搜打撤/game/src/cards/rot-seed-revision.js",
+      "搜打撤/game/src/cards/structured-card-description.js",
+      "搜打撤/game/src/core/art.js",
+      "搜打撤/game/src/core/characters.js",
+      "搜打撤/game/src/core/map-node-art.js",
+      "搜打撤/game/src/core/scavenge-terminology.js",
+      "搜打撤/game/src/generated/narrative-events.js",
+      "搜打撤/game/src/home/narrative.js",
+      "搜打撤/game/src/hub/game.cardslib.js",
+      "搜打撤/game/src/hub/game.cardslib.page.js",
+      "搜打撤/game/src/hub/game.cardslib.photo-props.js",
+      "搜打撤/game/src/hub/game.hub.pages.js",
+      "搜打撤/game/src/hub/photo-studio-catalog-cache.js",
+      "搜打撤/game/src/hub/photo-studio-controls.js",
+      "搜打撤/game/src/hub/photo-studio-navigation.js",
+      "搜打撤/game/src/hub/photo-studio-presentation.js",
+      "搜打撤/game/src/hub/photo-studio-tabs.js",
+      "搜打撤/game/src/ui/achievement-gallery.js",
+      "搜打撤/game/src/ui/achievement-medals.js",
+      "搜打撤/game/src/ui/achievement-motion.js",
+      "搜打撤/game/src/ui/archive-motion.js",
+      "搜打撤/game/src/ui/camp-entry.js",
+      "搜打撤/game/src/ui/card-browser-state.js",
+      "搜打撤/game/src/ui/card-browser.js",
+      "搜打撤/game/src/ui/card-zoom-content.js",
+      "搜打撤/game/src/ui/card-zoom-controller.js",
+      "搜打撤/game/src/ui/card-zoom-photo-source.js",
+      "搜打撤/game/src/ui/cinematic-profiles.js",
+      "搜打撤/game/src/ui/collection-chrome.js",
+      "搜打撤/game/src/ui/feedback.local.js",
+      "搜打撤/game/src/ui/home-fx.js",
+      "搜打撤/game/src/ui/home-layers.js",
+      "搜打撤/game/src/ui/home-linked-interactions.js",
+      "搜打撤/game/src/ui/home-menu-motion.js",
+      "搜打撤/game/src/ui/menu-feedback.js",
+      "搜打撤/game/src/ui/menu-guide.js",
+      "搜打撤/game/src/ui/menu-slot-view.js",
+      "搜打撤/game/src/ui/menu-slots.js",
+      "搜打撤/game/src/ui/motion-presets.js",
+      "搜打撤/game/src/ui/page-motion-profiles.js",
+      "搜打撤/game/src/ui/silent-node-film.js",
+      "搜打撤/game/src/ui/slot-emblems.js",
+      "搜打撤/game/src/ui/status-icons.js",
+      "搜打撤/game/src/ui/term-definitions.js",
+      "搜打撤/game/src/ui/term-tips.js",
+      "搜打撤/game/src/ui/title-credits.js",
+      "搜打撤/game/src/ui/title-wallpaper.js",
+      "搜打撤/game/src/ui/transition-handoff.js",
+      "搜打撤/game/version.json",
+      "搜打撤/package.json"
+    ],
+    "framesInputs": [
+      "搜打撤/game/src/battle/view/battle.action-timing.js",
+      "搜打撤/game/assets/portraits/frames/{wu,changwuyu,baita,heixiang,xingyue}/sprite-v1/animations.json",
+      "Referenced WebP frame names from each sequences array"
+    ],
+    "fontsInputs": "Eight named WOFF2 files, two HarmonyOS TTF files and three license files under game/assets/fonts."
+  },
+  "verifiedDependencyFacts": [
+    "sync_fonts.py is the only restore entry with a local Python import: ui/sync_assets.py.",
+    "Home, photo, archive and node export do not import each other or import ui/sync_assets; there is no importlib/sys.path helper chain in these eight entries.",
+    "sync_assets embeds its Node script and invokes node --input-type=module -e. No local .mjs helper is required. Its six import entries have no top-level static-import dependency chain. narrative.js exposes KNOTS; resource generation does not call the functions containing dynamic inkjs imports.",
+    "sync_frames.py has only Python stdlib and Pillow imports, no local Python module/template/Node helper; its manifest and asset receipt are outputs, not required input dependencies.",
+    "Shop importer unconditionally reads next(CurrentGuide.glob(\"*.png.meta\")); battle.png.meta is one sufficient tracked template, while retaining all six formal CurrentGuide meta files is also valid.",
+    "Home importer unconditionally reads Current/title-wordmark.png.meta even when all destination metas already exist.",
+    "Node exporter reads source-data.json and exactly eight source-svg files; --output Assets/Resources is necessary for formal restore. The original default draft destination remains available.",
+    "Existing active resource .meta files must remain in export; scripts preserve their GUIDs. The 67 retired media metas in resource-rebuild.json are omitted from the new branch export only."
+  ],
+  "externalRuntimeDependencies": [
+    "Python",
+    "Pillow",
+    "fontTools with WOFF2/Brotli support",
+    "CairoSVG with loadable native Cairo shared library",
+    "NumPy",
+    "Node supporting ES modules; nearest 搜打撤/package.json type=module",
+    "ffmpeg with libvorbis on PATH"
+  ],
+  "defaultDraftEntryFixed": {
+    "file": "_planning/migration-1029/current-node-rooms/export_assets.py",
+    "formalCommand": "python _planning/migration-1029/current-node-rooms/export_assets.py --output Assets/Resources",
+    "defaultPreserved": "_planning/migration-1029/current-node-rooms/draft/Resources",
+    "syntaxChecked": true,
+    "executed": false,
+    "helpCheckPassed": true,
+    "importerExecuted": false
+  },
+  "explicitNonDependencies": [
+    "No need to run current-settlement/deploy_owned.py; Settlement is restored by ui/sync_assets.py.",
+    "Do not export node draft/Resources or other build caches as dependencies.",
+    "No new Release package, installed Unity Library, compiler bin/obj, profile files, or legacy asset binaries are necessary for these restore entries."
+  ]
+}

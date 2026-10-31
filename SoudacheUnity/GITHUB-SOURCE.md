@@ -1,0 +1,32 @@
+# GitHub 源码与本地验收
+
+Unity 工程使用同仓的 `搜打撤/game` 作为现行资源来源。克隆仓库后保留 `SoudacheUnity/` 与 `搜打撤/` 的同级布局；只下载 Unity 子目录不包含完整原料。
+
+本轮桌面包在 Unity 6000.6.7f1、当前2560×1440窗口通过845项领域检查、原生选材/注能、音频/设置/生命周期检查及完整Standalone流程，取得61张画面。输入、实际操作与版本范围记录在[本次验收](../搜打撤/docs/evidence/2026-11-01-github-sync/README.md)。源码提交的行尾按父仓库规则统一为LF，工作区原字节与Git对象指纹分别记录，不用EXE启动壳哈希识别版本。
+
+## 恢复资源
+
+仓库保留正式C#、Shader、配置、数据、小图和导入`.meta`。大于1MB的导入副本、音频和字体由原料恢复；构建包、Library、bin/obj与构造存档属于本地产物。排除项和精确源SHA见[资源清单](_planning/github-sync-1101/resource-rebuild.json)。其中241项为当前资源，原料均已在同仓提供；67项退役旧资源没有运行调用或序列化GUID引用，不作恢复。
+
+准备Python/Pillow、CairoSVG及可加载的原生Cairo库、NumPy、fontTools及WOFF2/Brotli支持、Node和ffmpeg。以Unity工程目录为当前目录，先作只读来源检查，再按现有专有导入入口恢复：
+
+```powershell
+python -B _planning/migration-1029/ui/sync_fonts.py --check-sources
+python _planning/migration-1029/ui/sync_assets.py
+python _planning/migration-1029/ui/sync_fonts.py
+python _planning/migration-1029/current-node-rooms/export_assets.py --output Assets/Resources
+python _planning/migration-1029/current-slot-achievement/sync_assets.py
+python _planning/migration-1029/current-home/sync_home.py
+python _planning/migration-1029/current-photo/sync_photo.py
+python _planning/migration-1030-fidelity/shop/import_assets.py
+```
+
+保留现役资源的`.meta`；67份退役媒体的对应`.meta`仅从新分支导出清单省略，当前工作区及本地Unity旧文件不改。然后用Unity Hub打开该工程并恢复UPM依赖。各入口的来源、转换及副作用边界见[资源恢复说明](_planning/migration-1029/ui/README.md)。跨工具版本的转换输出不承诺字节完全相同；字体检查保留字形/度量验证，来源和输出收据分别记录。
+
+## 运行与复验
+
+正常入口为`Assets/Scenes/Bootstrap.unity`。编辑器中打开场景后进入Play；Windows独立包由`Sdt.Editor.BuildGame.BuildWin64`生成至`Build/Desktop/代号柒.exe`。运行时依赖通过正式Packages恢复，临时第三方DLL和历史编译输出不作为依赖入口。
+
+领域检查入口为`_planning/parity-1031/`中的BattleChecks、RunParityChecks与HubParityChecks项目。原生检查为`Sdt.Editor.CurrentBattleMaterialValidation.Run`及`Sdt.Editor.CurrentParityValidation.Run`；需设置独立`SDT_UNITY_CHECK_OUTPUT`，验收使用隔离档。项目已包含正式SFX混音器，初始化无需重跑一次性生成器。
+
+范围沿[MIGRATION.md](MIGRATION.md)。原生音频压缩比10对应源WebAudio的12，是已记录的后端适配；未作逐样本声学、物理键鼠、多尺寸或FPS/内存收益声明。

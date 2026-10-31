@@ -1,0 +1,561 @@
+{
+  "files": [
+    {
+      "source": "assets/scenes/scene-shop-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/scene-shop-anime-v2.png",
+      "sourceSha256": "750e55cc93c087d0d7809beccf4a2c96446a0b4b8bfbadea39148b6ce2b647d8",
+      "outputSha256": "560f4133ff57966833eef4defb988183cd568d75e79d51a963df310870a52de1",
+      "bytes": 1482101,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "b56a86826ab0c3b63fe3603f70a4fcea9897e6dd2ad03f988642a63602e97240"
+    },
+    {
+      "source": "assets/scenes/event-tt6-mystery.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-mystery.png",
+      "sourceSha256": "5de72ea13dcbd012e3cf92ca083bd2320ca9626f8ce34c21648d68d0ea97b96e",
+      "outputSha256": "5360932dbc3c43cb4918f6fe23fceb695f596c7bb03bd36bca8ef721d31a8f23",
+      "bytes": 1297995,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "4521c5521e5020f517d4b42669bd38f3ed1054b422fc6d266d9b1600f3089425"
+    },
+    {
+      "source": "assets/scenes/fire-rest-1021/city-campfire.webp",
+      "output": "Art/Current/node-rooms/scenes/fire-rest-1021/city-campfire.png",
+      "sourceSha256": "826c12561f4078c10952b689870b491b2c48c2bc6f038c7d63764a8257faf7dc",
+      "outputSha256": "49acfbb89030274b1ebb13a5656a487adc2635083bb9b54423978fa28fdb14f2",
+      "bytes": 480225,
+      "size": [
+        1599,
+        900
+      ],
+      "rgbaSha256": "c4afe89c5f2017e686af89a40abb8e1d3649f6b35271daf36a796b9ea4e50f5d"
+    },
+    {
+      "source": "assets/scenes/scene-chest-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/scene-chest-anime-v2.png",
+      "sourceSha256": "841f161e1076e0b4444172f92cf31536cd9d97e5c68718fb15d3d1b88f45e783",
+      "outputSha256": "d85dcdae8c06f5fd99a2f4accfec7860aa6ba771d949662a5d3d836dda3f0c9c",
+      "bytes": 1143454,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "8ce3a612f3e6f44d9bec7247233e866f7e621e03e523188874d9479de9ea2230"
+    },
+    {
+      "source": "assets/scenes/scene-door-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/scene-door-anime-v2.png",
+      "sourceSha256": "3f099a756a4f68cbd4256e41ba2fe3624e41297c8d4257ff83a2cc594f72e682",
+      "outputSha256": "b285a395a3bbc6534f3b505344cf8f4fe85eeea8e035a1f62cb57f37f36a4e1d",
+      "bytes": 2882441,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "1ffd47a25d0bac28b3ea14a63680a264c26f5f025f8e0184ce4d9c1e7212b5f0"
+    },
+    {
+      "source": "assets/scenes/scene-altar-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/scene-altar-anime-v2.png",
+      "sourceSha256": "09c160a54c59463ca8c32dd177038f200337f6d30b4fb3a77348e3f5b6234b2d",
+      "outputSha256": "a689e888e5fed6d8dbf0c15657bb5bf1f1b312e5dd94dd1fa57c98f3e73f8831",
+      "bytes": 1880465,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "a49bcbfdfc8894c471dd090d4f2a75c280d98c35944c91f06f0dad745e633e5f"
+    },
+    {
+      "source": "assets/scenes/scene-extract-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/scene-extract-anime-v2.png",
+      "sourceSha256": "a373e8e00dbba37f9ed69fc93121bbb4ac82ea4dcd55f1fab4d0776da4d62227",
+      "outputSha256": "8a45c2b7be6e84192d7140459dfb1e4551323252d741122d8253c3c63972b9e3",
+      "bytes": 1075171,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "142f86d2bfaa0f6c39d8f5bcdf6cd03a987883da8e8dc8dfc031785d033dc4c8"
+    },
+    {
+      "source": "assets/scenes/scene-pickup-coin-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/scene-pickup-coin-anime-v2.png",
+      "sourceSha256": "2df066025b1455aeefafd2035242e4394befd670caa5ec32cfe200e73be9a88a",
+      "outputSha256": "37226a921bad60b83dc3d5aa51d3ed037d17c8f345658a1bf16a5f67a2898495",
+      "bytes": 1672163,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "aabdf4327a8479f4a934fc57bacfa437194cc3f6b0c98e0e87177d29ad5fddd9"
+    },
+    {
+      "source": "assets/scenes/scene-pickup-wood-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/scene-pickup-wood-anime-v2.png",
+      "sourceSha256": "078c55742904bc4e0522e6e70b0048bd64811e43ea96ab344bf9a0943ff01cec",
+      "outputSha256": "d5a903573337820f0bc16c42b64c0b2f8a94d2468298e2fa1d84467aaadcf99c",
+      "bytes": 1882244,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "815dd7707106a7a40e63bde5e0ec99af6e59fb05719d93bd949fdbcd2c316349"
+    },
+    {
+      "source": "assets/scenes/scene-pickup-rations-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/scene-pickup-rations-anime-v2.png",
+      "sourceSha256": "870f24b4359d9829af63521acb7d1bf26b6287ec1cc1c59cf191001026dc011d",
+      "outputSha256": "ede2185569a91a93eb8ffb15460c2b66fd6ce33d83b3300ba4ed992038012055",
+      "bytes": 1807589,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "8c4c497d1412c589c2c1910b67d9f29312c2b7418c52f4240afeea0a70d0baa0"
+    },
+    {
+      "source": "assets/scenes/scene-pickup-key-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/scene-pickup-key-anime-v2.png",
+      "sourceSha256": "5203bcdfbf7676355b0ff0c8cb1ac940968b8c527d78ccc6d1632546bf01ed3b",
+      "outputSha256": "4eeb1dd37d963ebdeb18ef9f50c3bb18bcd70b1ee601f6aa91c871a67d58cc41",
+      "bytes": 2302962,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "a805458a5cc9da1ea2f4c63beb7f587f3a82bc0e831a4b6ff5a61253ef16e8c6"
+    },
+    {
+      "source": "assets/scenes/event-tt6-mystery.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-mystery.png",
+      "sourceSha256": "5de72ea13dcbd012e3cf92ca083bd2320ca9626f8ce34c21648d68d0ea97b96e",
+      "outputSha256": "5360932dbc3c43cb4918f6fe23fceb695f596c7bb03bd36bca8ef721d31a8f23",
+      "bytes": 1297995,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "4521c5521e5020f517d4b42669bd38f3ed1054b422fc6d266d9b1600f3089425"
+    },
+    {
+      "source": "assets/scenes/event-tt6-demondeal.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-demondeal.png",
+      "sourceSha256": "e4405f040be571c225d5f98386b225643ebf1e12995f27c50d1a7485ab64c18b",
+      "outputSha256": "7ab240d637371da1cddfef70d8f16f22a5a69f9712e80003e29513fc69ae7383",
+      "bytes": 1043224,
+      "size": [
+        1660,
+        948
+      ],
+      "rgbaSha256": "c70214f67e9d057149806cd38bc3e1d2bcf45392110cbaf7cf671f21d815ef98"
+    },
+    {
+      "source": "assets/scenes/event-bandits-anime-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/event-bandits-anime-v2.png",
+      "sourceSha256": "a7e7edb9958f70ab3f1b19c9ebec346484c8868bb2bdcba539c18d1f88e9df90",
+      "outputSha256": "7be4288e5ba9725217c994c079c642eddfe81f10dab2fd19d6cc5dc6f6669471",
+      "bytes": 1470523,
+      "size": [
+        1660,
+        948
+      ],
+      "rgbaSha256": "20dbd120d90485b913ab6872e972687e2b635f373db46f9643b4cdbc23236c71"
+    },
+    {
+      "source": "assets/scenes/event-tt6-mystery.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-mystery.png",
+      "sourceSha256": "5de72ea13dcbd012e3cf92ca083bd2320ca9626f8ce34c21648d68d0ea97b96e",
+      "outputSha256": "5360932dbc3c43cb4918f6fe23fceb695f596c7bb03bd36bca8ef721d31a8f23",
+      "bytes": 1297995,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "4521c5521e5020f517d4b42669bd38f3ed1054b422fc6d266d9b1600f3089425"
+    },
+    {
+      "source": "assets/scenes/event-tt6-goldmine-1013-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-goldmine-1013-v2.png",
+      "sourceSha256": "c7f856070df3157b0cf37ae289e716599f30d61f2d515718b291e0d4cf139a3e",
+      "outputSha256": "3710c97d84ab2159b8be426c32438ef35f99b9d86f403ed10822bac339a9c728",
+      "bytes": 1894677,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "a8add21de31cfb9e3b96e88c63be4e734458fed1216359e40fcda7ad38f62f57"
+    },
+    {
+      "source": "assets/scenes/event-tt6-goldhammer.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-goldhammer.png",
+      "sourceSha256": "4c105cbe5243a80e0c2c45625739b5375c72a58b2c9162630271ebee5ca45f3d",
+      "outputSha256": "304309d55e3b043d94365cd84cd43166567920a7a0de0c8f4a36306ff14535fa",
+      "bytes": 1261309,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "d5a6367f8374fb4ac50add845223915c9455167f38652d8d752d2fcc0b757c0c"
+    },
+    {
+      "source": "assets/scenes/event-tt6-relief.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-relief.png",
+      "sourceSha256": "52cf46cfe64c1488500983dd55ec1d5c3525f75bbfb93079666e6813e456c6a3",
+      "outputSha256": "1c8ad34cd928fc6a7b6f9f7f0b65c37fb598e7e9e572ba1ec2b9705fc2599f20",
+      "bytes": 1345738,
+      "size": [
+        1660,
+        948
+      ],
+      "rgbaSha256": "aff299a63309cc87c91fce31c1336eabcbb4c88c71b084f4c17b3da359349b09"
+    },
+    {
+      "source": "assets/scenes/event-tt6-airdrop.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-airdrop.png",
+      "sourceSha256": "323e2127a446886f373ae3c895a99a262ab1602dd00a4922fa242921035c81a7",
+      "outputSha256": "ad3478b9f3b090bf7efefddc0d2a464f7d1e9af4a4ac364efbc30a030d672ec1",
+      "bytes": 1342532,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "9ca6e82f108569e553ef853bbb1cb33cf8c0200e90b661228dff08a3e487cb4e"
+    },
+    {
+      "source": "assets/scenes/event-tt6-chestdraw.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-chestdraw.png",
+      "sourceSha256": "7d3204a3aba6cc81b76db29cb8422dd77fac0368f549d43b98f94527b382515b",
+      "outputSha256": "d45e90537abd5df9a611fab6058c49d4c08a6e29ef33679d6a73cbecf11bae8a",
+      "bytes": 937282,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "2fae9ccd98f8b0307720641398b3f6e99be12fcf54caa93e9d1c53c9605216e2"
+    },
+    {
+      "source": "assets/scenes/event-tt6-systemsupply.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-systemsupply.png",
+      "sourceSha256": "bac1d4425809467f9e5a9930edf658384ae5b83eff273511a441045cad641059",
+      "outputSha256": "695061df0f7fb918cc5883e591fbc5bec656c91477b3af5a9cb08857c06a591a",
+      "bytes": 1476376,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "533c537a04a33edbdf783a595c562d0cb3dac062b8678f96b57b9c7765ac1f87"
+    },
+    {
+      "source": "assets/scenes/winter-expedition/outskirts.webp",
+      "output": "Art/Current/node-rooms/scenes/winter-expedition/outskirts.png",
+      "sourceSha256": "1ab56bd069cbe3a47a4472199934fb4138cf238e3ff4e88f749e163811cd01bd",
+      "outputSha256": "3a15ebbf652ac3206bcabaefb1c823c83c050e0b5187b829e49f8803146fd72f",
+      "bytes": 545430,
+      "size": [
+        1344,
+        768
+      ],
+      "rgbaSha256": "5336a2ebc0d8f0c99409804fa91d429891619f7c884790a7b360ab33e596618e"
+    },
+    {
+      "source": "assets/scenes/event-tt6-mystery.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-mystery.png",
+      "sourceSha256": "5de72ea13dcbd012e3cf92ca083bd2320ca9626f8ce34c21648d68d0ea97b96e",
+      "outputSha256": "5360932dbc3c43cb4918f6fe23fceb695f596c7bb03bd36bca8ef721d31a8f23",
+      "bytes": 1297995,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "4521c5521e5020f517d4b42669bd38f3ed1054b422fc6d266d9b1600f3089425"
+    },
+    {
+      "source": "assets/scenes/event-tt6-airdrop.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-airdrop.png",
+      "sourceSha256": "323e2127a446886f373ae3c895a99a262ab1602dd00a4922fa242921035c81a7",
+      "outputSha256": "ad3478b9f3b090bf7efefddc0d2a464f7d1e9af4a4ac364efbc30a030d672ec1",
+      "bytes": 1342532,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "9ca6e82f108569e553ef853bbb1cb33cf8c0200e90b661228dff08a3e487cb4e"
+    },
+    {
+      "source": "assets/scenes/event-tt6-relief.webp",
+      "output": "Art/Current/node-rooms/scenes/event-tt6-relief.png",
+      "sourceSha256": "52cf46cfe64c1488500983dd55ec1d5c3525f75bbfb93079666e6813e456c6a3",
+      "outputSha256": "1c8ad34cd928fc6a7b6f9f7f0b65c37fb598e7e9e572ba1ec2b9705fc2599f20",
+      "bytes": 1345738,
+      "size": [
+        1660,
+        948
+      ],
+      "rgbaSha256": "aff299a63309cc87c91fce31c1336eabcbb4c88c71b084f4c17b3da359349b09"
+    },
+    {
+      "source": "assets/scenes/event-last-lamp-1013-v1.webp",
+      "output": "Art/Current/node-rooms/scenes/event-last-lamp-1013-v1.png",
+      "sourceSha256": "690c1a393de21d4d54e31e4b585185c70c2edf30974105bfceb2727f4e513351",
+      "outputSha256": "f342c96851955621ae2fe600241b5ca4181de2fdecc6ddd901dd6cb86b9637aa",
+      "bytes": 1236345,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "47f20f26436ae59e9e404aced62cc5910591850de8b25b5592bc6d1a5ccefed8"
+    },
+    {
+      "source": "assets/scenes/event-ev19-vital.webp",
+      "output": "Art/Current/node-rooms/scenes/event-ev19-vital.png",
+      "sourceSha256": "63b267d2ef13be04fc62b12e4bad0a76c77983d3a07569f71c0aa2b6ff8bf4ed",
+      "outputSha256": "725dbf82c7bcce5d92b37514ee070576fc145926531d4af7c7a0f36932241bb9",
+      "bytes": 962951,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "94600718fe9b3980afa2bf585ff3f0a43e36add7ddac412d78ef828c4389c3d2"
+    },
+    {
+      "source": "assets/scenes/event-ev19-pearlbox.webp",
+      "output": "Art/Current/node-rooms/scenes/event-ev19-pearlbox.png",
+      "sourceSha256": "a629a5ec1583811e254ccb4bd467ec8263d40319f0524a9193b049d22d2d94dd",
+      "outputSha256": "20fbdb6a7bd34ce2879f267770e99f763a1b6c4fff411b0419511ea33b442ac7",
+      "bytes": 1171890,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "2319b5a8eb67133784f4d26cec08bd9ae5b4dde25120556562fb2e4716aca270"
+    },
+    {
+      "source": "assets/scenes/event-ev19-fireballs.webp",
+      "output": "Art/Current/node-rooms/scenes/event-ev19-fireballs.png",
+      "sourceSha256": "c6e6f7f1e21d653af399829ee0cc04bea2e96467981cb04875718a32c1cf310b",
+      "outputSha256": "a2ee72c272a44c0c55d57a0d846175025b6bece85c4e92f7b6920769711365da",
+      "bytes": 1183988,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "6c7ddf77b05869d30778281ea9fd354daccf93467659390a04a1d903f70a42e9"
+    },
+    {
+      "source": "assets/scenes/event-ev19-classchest.webp",
+      "output": "Art/Current/node-rooms/scenes/event-ev19-classchest.png",
+      "sourceSha256": "5731b9d9ea3731714e66552d8153e54a24e7d9641fd117c2f713855b03fbf267",
+      "outputSha256": "ae138b4fab2e6e6dac2e49fd0cd54d4b75c706d90fbc77a333186f421aa92d2d",
+      "bytes": 1218849,
+      "size": [
+        1660,
+        948
+      ],
+      "rgbaSha256": "93e17abfda2b1b6276091d2eba729cd9e51a3acfb80e91c0f0b6183d27a65bfa"
+    },
+    {
+      "source": "assets/scenes/event-ev19-recode.webp",
+      "output": "Art/Current/node-rooms/scenes/event-ev19-recode.png",
+      "sourceSha256": "bc1a87d48cfbccc9ad6717b44cef5817f73b7025bf4dd3e1f9692bf8d8bc98c1",
+      "outputSha256": "5045ef01bdad5f6cc05ff0f43458dab1e5362b6c257dbf6298b0d6f259de85a2",
+      "bytes": 1193773,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "ae83b65aece1901208bf1e7915ed0bf2a4915d9bb4f2c9f2d2ba0e7ca628c3cb"
+    },
+    {
+      "source": "assets/scenes/event-ev19-potions.webp",
+      "output": "Art/Current/node-rooms/scenes/event-ev19-potions.png",
+      "sourceSha256": "1ce1ce8d5754bb7771734b92ce4335d77f11559a32cf4aed5cb30d57dfdc369b",
+      "outputSha256": "45b4b101c145a3336407c64da549213ba9b85ad4355f88dae99bb038924423d5",
+      "bytes": 1293414,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "c6655d50350251665436345a8fbd357579c44a9ec2b28fc3d9f9147c8032ad29"
+    },
+    {
+      "source": "assets/scenes/event-ev19-arrows.webp",
+      "output": "Art/Current/node-rooms/scenes/event-ev19-arrows.png",
+      "sourceSha256": "83f0bc7e0b1014ea0567e4994e29d6cc45a58af1fdb62e0dc177a042595e9fb6",
+      "outputSha256": "92e6e0acf640af7ad43e743f539c690db13f1bb6807111262b7ebd09cc7d7205",
+      "bytes": 1427100,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "69c31707f384d976e18789aca419f76e1efc62952e15470a8d4ea639632e48f7"
+    },
+    {
+      "source": "assets/scenes/event-ev19-gamble.webp",
+      "output": "Art/Current/node-rooms/scenes/event-ev19-gamble.png",
+      "sourceSha256": "d4105df1f4bf897c94d3b7d5d8910232e2b44fd3f009c073bb11c82664d52df9",
+      "outputSha256": "9ef67ace361fa630d76fd58e6cc01b4c7bb9edde73376f03dd3f035f62a35433",
+      "bytes": 1278534,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "d98da1b6ddf6965289f89d76d8dcff087dd5dc37969864a3f32d010e9aa93550"
+    },
+    {
+      "source": "assets/scenes/event-ev19-quartermaster.webp",
+      "output": "Art/Current/node-rooms/scenes/event-ev19-quartermaster.png",
+      "sourceSha256": "b091918413b125ad4ad9d671f9a8b956ad967c18fc840a0a8864a932dcd5c4ce",
+      "outputSha256": "d980cfe56d51c345788df633b0c1e2a4978c8fda42a87f6e802e993e7ee45aea",
+      "bytes": 1249544,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "718df9f976d2a7e622a364cf249309457c29da95af9e7810c0ed10bf648e6d91"
+    },
+    {
+      "source": "assets/scenes/event-cmtn7qttxqo4.webp",
+      "output": "Art/Current/node-rooms/scenes/event-cmtn7qttxqo4.png",
+      "sourceSha256": "a3618cfd8dc5c405abe719fa072660c2925ffce9ae145f705b27741bd5ed8152",
+      "outputSha256": "fe7e91066c52f95613abe94e489dfff991502c186d3419eb9591697e69dbf0c6",
+      "bytes": 1504462,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "5ca1622faf71d3483382abb2570372640dc4422c43f97dc7bbc450b542854409"
+    },
+    {
+      "source": "assets/scenes/entry/modern-winter-entry-1011-v2.webp",
+      "output": "Art/Current/node-rooms/scenes/entry/modern-winter-entry-1011-v2.png",
+      "sourceSha256": "7066dd7f26e4006ec8005f5b927f62c237439edcfe94cee694acd27890075331",
+      "outputSha256": "ea53405bf6e4d1a705b671970a36b60696e76dc37d0f2f12e6f5a60acd81640c",
+      "bytes": 1441239,
+      "size": [
+        1672,
+        941
+      ],
+      "rgbaSha256": "871eb4d7cc1754450ffa5834d314c5c593b20f5feecc341a14615771ddd60d37"
+    },
+    {
+      "source": "assets/scenes/reward-salvage-v1.webp",
+      "output": "Art/Current/node-rooms/scenes/reward-salvage-v1.png",
+      "sourceSha256": "00fe6a8244e98c610ff61c03316ea2e34887e97fbc89bc3d6a4f7fd3fe460a5b",
+      "outputSha256": "9260e4e09ab230e37cb1a4f7134fee8e13484d8265efdafbaf7b879a6b508b54",
+      "bytes": 949992,
+      "size": [
+        1659,
+        948
+      ],
+      "rgbaSha256": "deeb31b7859fb0bdb8c11565b2d9b2ffa729cee77c06eb8c9cbd476c8f51e367"
+    },
+    {
+      "source": "assets/ui/illustrated-node/choice-winter-v1.webp",
+      "output": "Art/Current/node-rooms/choice-winter-v1.png",
+      "sourceSha256": "1a8e7b34e8ecfc80cc39e3b9049979f9ebc20afb5ddbff513d60927129dcbc92",
+      "outputSha256": "8b8b389235805420d5c353d20f22977469f444f5ef1150b2dbf7e82b4dbf6b6c",
+      "bytes": 214128,
+      "size": [
+        1437,
+        480
+      ],
+      "rgbaSha256": "cfc3ba997b21750b9915a8aa4d8f12ce287826ba66148966586e88f64220f4af"
+    },
+    {
+      "source": "assets/ui/outcome/recovery-v2.webp",
+      "output": "Art/Current/node-rooms/outcome/recovery-v2.png",
+      "sourceSha256": "02ac16a04536e15a7cd8a39afe365d3557dbcc42b0f129e174d2e6828b27fd9d",
+      "outputSha256": "9931f0b092e25aeced19c8ea15e56d99ac9b0aa31c1001dd82e7cdd62fa5b75f",
+      "bytes": 90583,
+      "size": [
+        512,
+        512
+      ],
+      "rgbaSha256": "c083fe5cdeae3f20d55d968bc9a83190f6a293b1bc1ba9f7ac46d34b3748ab38"
+    },
+    {
+      "source": "assets/ui/outcome/restoration-v2.webp",
+      "output": "Art/Current/node-rooms/outcome/restoration-v2.png",
+      "sourceSha256": "062f35f710bf9371b498f7c9dd2542655f49bf152897401a0e8cc7b6953df8ae",
+      "outputSha256": "576f98fa173d5096e6a1c8d90d2ef18f7d69dbc77e7910bed4a0686fff35b39f",
+      "bytes": 65803,
+      "size": [
+        512,
+        341
+      ],
+      "rgbaSha256": "52ba6bce422eb4154477d7d5e00720bdeefe7f7648103b6028a34ed0a763e226"
+    },
+    {
+      "source": "source-svg/search.svg",
+      "output": "Art/Current/node-rooms/ghosts/search.png",
+      "sourceSha256": "f548e865e0738a8bd605143493d01cb2fbf8a83ec8ec9ebb07a8146692d41c87",
+      "outputSha256": "174ba84b3706224ef437f50517ad786b8ff2d72217973f4082640a19192f0835",
+      "bytes": 5813,
+      "method": "rasterize original illustratedGhostHTML SVG at 240x200, unchanged paths"
+    },
+    {
+      "source": "source-svg/breach.svg",
+      "output": "Art/Current/node-rooms/ghosts/breach.png",
+      "sourceSha256": "13b1f912df662e3008c12cad4f34db229def596ee7e21a166db2d5165a3793c3",
+      "outputSha256": "0167c90ce5e5b1d1e534c4db7f477070464f7ecfce9335ab5854551b27405e9e",
+      "bytes": 3919,
+      "method": "rasterize original illustratedGhostHTML SVG at 240x200, unchanged paths"
+    },
+    {
+      "source": "source-svg/heal.svg",
+      "output": "Art/Current/node-rooms/ghosts/heal.png",
+      "sourceSha256": "30358b2a34864f3b9a4464180ccfa268288b487d493c921e12a9cb625d3c03bc",
+      "outputSha256": "b1dfd9d94d516a2ff3b9cd88d329f7e0322e1ece270cd284e65aca91bc08d5b0",
+      "bytes": 602,
+      "method": "rasterize original illustratedGhostHTML SVG at 240x200, unchanged paths"
+    },
+    {
+      "source": "source-svg/cards.svg",
+      "output": "Art/Current/node-rooms/ghosts/cards.png",
+      "sourceSha256": "fc513156c181b33ddfdc79179329f10eaf6dbeef8c1806c3a311dc88ee917f6c",
+      "outputSha256": "cf4a0c1a6c6320151aad76f141b288d98c03b4aa9cf4b1a546221c2692bc7a37",
+      "bytes": 3699,
+      "method": "rasterize original illustratedGhostHTML SVG at 240x200, unchanged paths"
+    },
+    {
+      "source": "source-svg/chest.svg",
+      "output": "Art/Current/node-rooms/ghosts/chest.png",
+      "sourceSha256": "9640efe127e5ad4380c88a372ee22059c3fafbff6370f200d2bc0cb46c7747a2",
+      "outputSha256": "97e888b410afc24446903f81a38709a4cc02239f5224241033b7a2637dab1c91",
+      "bytes": 1325,
+      "method": "rasterize original illustratedGhostHTML SVG at 240x200, unchanged paths"
+    },
+    {
+      "source": "source-svg/leave.svg",
+      "output": "Art/Current/node-rooms/ghosts/leave.png",
+      "sourceSha256": "048ea674607110dbd8dc812342951b87eebe1ec08d0563b0387177a68918c9e2",
+      "outputSha256": "60211f828d5e54555970c19da5c4d62ba31864391b40ea9588665149ea5d8505",
+      "bytes": 1369,
+      "method": "rasterize original illustratedGhostHTML SVG at 240x200, unchanged paths"
+    },
+    {
+      "source": "source-svg/fight.svg",
+      "output": "Art/Current/node-rooms/ghosts/fight.png",
+      "sourceSha256": "d4c73be2c30cca1dc64ad94e2add3e055d81b5820b4860824d239fd40051660d",
+      "outputSha256": "a3c9068f7905ffd390d5fd4623251dbe4fdd65f4d48241b3fb45bb52ab5b3ce3",
+      "bytes": 4278,
+      "method": "rasterize original illustratedGhostHTML SVG at 240x200, unchanged paths"
+    },
+    {
+      "source": "source-svg/explore.svg",
+      "output": "Art/Current/node-rooms/ghosts/explore.png",
+      "sourceSha256": "5babc2bc4a937555166a63581a3123d65e41d674bbaef22f98e4f386d24d78ce",
+      "outputSha256": "263f6315a6d2876634ecfc015d575c426af2d52388e694456c073a44f741acbc",
+      "bytes": 2469,
+      "method": "rasterize original illustratedGhostHTML SVG at 240x200, unchanged paths"
+    }
+  ],
+  "manifestSha256": "61f6927a4e17d4d6520437d7d46ab0931c49a2c9686baf52b8cfdcce11b45436"
+}

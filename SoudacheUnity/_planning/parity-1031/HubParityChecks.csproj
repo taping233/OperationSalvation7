@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><LangVersion>9</LangVersion><EnableDefaultCompileItems>false</EnableDefaultCompileItems><DefineConstants>UNITY_EDITOR</DefineConstants></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Assets/Scripts/Sdt.Core/**/*.cs" />
+    <Compile Include="../../Assets/Scripts/Sdt.Run/*.cs" Exclude="../../Assets/Scripts/Sdt.Run/AudioService.cs;../../Assets/Scripts/Sdt.Run/CurrentSfxHighShelf.cs" />
+    <Compile Include="HubParityChecks.cs" />
+    <Reference Include="Newtonsoft.Json"><HintPath>../../Library/PackageCache/com.unity.nuget.newtonsoft-json@4dfd81071c64/Runtime/Newtonsoft.Json.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

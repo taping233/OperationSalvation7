@@ -15,7 +15,7 @@ output/
 /*.zip
 搜打撤/desktop-app/game/
 搜打撤/desktop-app/dist-shell-check/
-/SoudacheUnity/
+# Native project sources are tracked on this branch; local outputs use SoudacheUnity/.gitignore.
 /_incoming_sdc2/
 /_cards_diff.txt
 /perf2.json

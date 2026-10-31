@@ -1,0 +1,649 @@
+{
+  "passed": true,
+  "checkedAt": "2026-10-30T16:10:43.207756+00:00",
+  "scope": "Independent completion-evidence consistency and explicit scope coverage, current worktree only. Not visual acceptance or a claim of universal source equivalence; the two final image audits and final delivery/docs closure are separate root gates.",
+  "confirmedOpenItems": [],
+  "evidence": [
+    {
+      "name": "cjk-1",
+      "passed": true,
+      "result": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/cjk-1/result.json",
+      "resultSha256": "971dca0aaac4ce467cca8bd5e8cb1aa7e86ee9cb820efed228de94b481c9ff59",
+      "recordCount": 4,
+      "scope": "Native TextGenerator advances, content/tag preservation, punctuation rules, bounded lines and atomic inline-icon remapping. Actual page screenshots remain root scope."
+    },
+    {
+      "name": "film-flow-3",
+      "passed": true,
+      "result": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/film-flow-3/result.json",
+      "resultSha256": "39f20887d35fdfad48befc7eaaf98fb47986ffd220c4f2754aba497a7c96c98f",
+      "recordCount": 67,
+      "scope": "actual production entry/commands with isolated controlled map positions; constructed uGUI raycast/pointer; owner close API"
+    },
+    {
+      "name": "frames-2",
+      "passed": true,
+      "result": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/frames-2/result.json",
+      "resultSha256": "8d5ad9ba8d4b03ff33d5c2402abc7a129452a0d7d7b28fc13d5586215f77a867",
+      "recordCount": 413,
+      "scope": "See actual assertions in named Editor validation class."
+    },
+    {
+      "name": "organizer-focus-2",
+      "passed": true,
+      "result": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/organizer-focus-2/result.json",
+      "resultSha256": "23a38bf3e7976fa137c804fb7829641a86f3fc04d16b94e0ab14f8ce22ed5356",
+      "recordCount": 10,
+      "scope": "actual production organizer and EventSystem ISubmitHandler; constructed submit events"
+    },
+    {
+      "name": "slot-archive-1",
+      "passed": true,
+      "result": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/slot-archive-1/result.json",
+      "resultSha256": "ec7cdba276cbba78a84c1355a568104581815d69ac90287b813afa1b73f531ad",
+      "recordCount": 5,
+      "scope": "Actual runtime NewRun/LoadRun/battle checkpoint/extraction recovery, real file-lock failure and two SaveSystem instances; constructed positions/enemy. UI archive controls covered separately by actual standalone review."
+    },
+    {
+      "name": "journey-4",
+      "passed": true,
+      "result": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/journey-4/result.json",
+      "resultSha256": "0b22fab0798bc10cfe751b79903b1777244cba07aff4b993572eefebe7ffc02b",
+      "recordCount": 638,
+      "scope": "constructed-uGUI-RaycastAll-and-ExecuteEvents; constructed-InputField-endEdit; runtime-commands-where-recorded"
+    },
+    {
+      "name": "shop-source-4",
+      "passed": true,
+      "result": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/shop-source-4/result.json",
+      "resultSha256": "bd988a7225ec6e700faa1896dd9308bdba71fb3b8677a2cd4d35318fafa077f2",
+      "recordCount": 48,
+      "scope": "actual runtime and constructed EventSystem raycast/down/up/click"
+    },
+    {
+      "name": "pile-3",
+      "passed": true,
+      "result": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/pile-3/result.json",
+      "resultSha256": "2a2086e457047fe797346b8a2453e49659a72cd13db4a35b001d664b385d43e9",
+      "recordCount": 48,
+      "scope": "Real HUD pointer path; controlled native battle and real card commands; native pointer/wheel dispatch; retained pile/reader return"
+    },
+    {
+      "name": "desktop-final-player-2",
+      "passed": true,
+      "result": "搜打撤/docs/evidence/2026-10-29-unity-desktop/fidelity-1030/desktop-final-player-2/result.json",
+      "resultSha256": "a6e543301350f828598243c959592a7b422d649fe54d88e2549efe89e6b2d0e6",
+      "recordCount": 98,
+      "scope": "Actual standalone backbuffer; hidden parent; normal CanvasScaler and ScreenSpaceOverlay; constructed page opens; no OS input"
+    },
+    {
+      "name": "desktop-final-build-2",
+      "passed": true,
+      "result": "SoudacheUnity/Build/Desktop/build-info.json",
+      "resultSha256": "977d311acbe2005482ea0e5043028a3d126a495614da00b75774d9d935d79259"
+    }
+  ],
+  "fingerprints": {
+    "currentBuildInputs": {
+      "count": 3893,
+      "mismatches": []
+    },
+    "mappedSourceJsCss": {
+      "count": 167,
+      "mismatches": []
+    },
+    "recordedRuntimeSource": {
+      "count": 794,
+      "mismatches": []
+    },
+    "core69Source": {
+      "count": 677,
+      "mismatches": []
+    },
+    "core69Production": {
+      "count": 43,
+      "mismatches": [
+        {
+          "path": "Cards.cs",
+          "expected": "EFC8B15298352114B134372D6E4D40DE3244DA93ADB7BD2E01F0E3C106701A21",
+          "actual": "33d8338aea361d8efe8c7a561bb8e0eddcb65dbcbda923dd5d4fd6bb9d927453"
+        },
+        {
+          "path": "RunState.cs",
+          "expected": "BAA66CA2F0119F7BFD6C5DF617BA3F77D23C64C3A94340D1F86751EF65FDCFCE",
+          "actual": "7ccd5d30c156dcf83cd73c2d7b4a78a2ecfddd6b8c05a5aa94ac637fac481989"
+        },
+        {
+          "path": "Data\\EventProgress.cs",
+          "expected": "0722BE487263CC278EE3A68306C301ECF374358E3E64D92FF5AE20500AF64136",
+          "actual": "1b7192db6245669f388391a91aaedfa57a8218babc804990ef73d09187fa7da2"
+        }
+      ]
+    },
+    "receiptCoveredMedia": {
+      "count": 2448,
+      "mismatches": [],
+      "receiptEntries": {
+        "source": 1270,
+        "output": 1287
+      },
+      "scope": "Only explicit matched primary receipt paths; derived SVG reconstruction and exhaustive dynamic reachability are separate checks."
+    },
+    "oldVisual331": {
+      "count": 331,
+      "mismatches": [
+        {
+          "path": "Assets/Editor/BuildGame.cs",
+          "expected": "4ff1355780f35a247993b826f518234aa3cd9e2cec140a4205cc0a5f4731bd0c",
+          "actual": "31b8888c8d5d7bfe00f3413c5c666e1d7082499da790bb24be128dfac4ccc388"
+        },
+        {
+          "path": "Assets/Editor/CurrentMigrationFlowValidation.cs",
+          "expected": "72c1e36770e035103877fb8ed1a8e7199892bee26c930d0a3f1a64451a74ef60",
+          "actual": "08bfe55eb4720dd9645182bcc26f2f2b419fe96d9a11e412b19420b52b36dc08"
+        },
+        {
+          "path": "Assets/Editor/CurrentMigrationFlowValidation.Journey.cs",
+          "expected": "cd86bb33b2d9af9cf824d9388bd83d47e0538635d59819b6d1724c49cd733154",
+          "actual": "7e9a8743b4f2b23677351337f6ea83b854cc29097ddd2401996482dd4fa58e38"
+        },
+        {
+          "path": "Assets/Editor/CurrentMigrationFlowValidation.Receipts.cs",
+          "expected": "8d78e793241ea368933c85905ab92af88e06eb4e8105f3fecb732f3a0ba731cc",
+          "actual": "b2c43cc28414d2823c0d0a2d6eef433d5b0be06ee4e95882329398c8612346d5"
+        },
+        {
+          "path": "Assets/Editor/CurrentUnitFrameValidation.cs",
+          "expected": "e7631f64745e047376c5d1c89ff23da953803095e2d87f9a257f3bb25f6314d4",
+          "actual": "ddc8019fb410a3d857084cbd062a89ab4ba2cd9917cd19f0a5d052de45e27275"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Boot/BattleBridge.cs",
+          "expected": "ca224d33483223c7cca32b96aa4782caa1f2258af5ce988473a585f6f8854b4d",
+          "actual": "9fd99370b024e86a7a11d754f6d6c6454b98012f14ceaba95ca0aafb9f202a1c"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Boot/GameBoot.cs",
+          "expected": "68adc9246e3b8ad7469a8d5a73ccf4dc7f2e7a85081d49d6c87ce82ca3b83488",
+          "actual": "9cbd1e76b5e4b8c105a417e15fe5b3ac085139ea60c1c8e71e7452ff82de9cbd"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Boot/RunLoopBridge.cs",
+          "expected": "6c4af97f9a8697dde71c00839c3acbce3653e1fe1f2f0fae7fb7f960ae9e699e",
+          "actual": "0419011eed138eb49d5762001f2e98c0263a9237a73fcd50b10c73ce767010d9"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+          "expected": "5cba112d6c6e75cfb0214863bfbbdd06db36cca376f4bfc2a0b771afef73a084",
+          "actual": "7dc534371bd2552a25f337a4749cfc688d216cd635a83b2534275807ca662b99"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+          "expected": "8962d8162dcb1bae8f247ef3ae79bdce4b3277418d06988afebed7c1e5dba516",
+          "actual": "9f639275a45c1037b68f1a5fa08a326f709cae5ebaad8a363fe55d635d83b7f1"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Core/Cards.cs",
+          "expected": "efc8b15298352114b134372d6e4d40de3244da93adb7bd2e01f0e3c106701a21",
+          "actual": "33d8338aea361d8efe8c7a561bb8e0eddcb65dbcbda923dd5d4fd6bb9d927453"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Core/Data/EventProgress.cs",
+          "expected": "0722be487263cc278ee3a68306c301ecf374358e3e64d92ff5ae20500af64136",
+          "actual": "1b7192db6245669f388391a91aaedfa57a8218babc804990ef73d09187fa7da2"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Core/RunState.cs",
+          "expected": "baa66ca2f0119f7bfd6c5df617ba3f77d23c64c3a94340d1f86751ef65fdcfce",
+          "actual": "7ccd5d30c156dcf83cd73c2d7b4a78a2ecfddd6b8c05a5aa94ac637fac481989"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Res/CurrentCardPresentation.cs",
+          "expected": "945c364fb2959c8cd1ab6278161ba2743d405243d8265b60e7c16dc9c5bcfda0",
+          "actual": "d8cb3de46b458066413c19290ff92858f1754ebaccf74aef86fffd01b48a515e"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Run/GameRuntime.Commission.cs",
+          "expected": "1571f124cd0a0edf771dc023d2a5daf327bd8d834af033f18a8226192497d413",
+          "actual": "5e8c9cd9e54b5dee1d7d0477f8539a1077edfad74da1f3c4580c5f040337a3a3"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Run/GameRuntime.cs",
+          "expected": "9c5c58af2ecfb7c0fbb14b163dd50428d5b302f779e6122ed4b7286f74fe7264",
+          "actual": "eee1eb302d736126cecaad91b931ef4f14d023b623a0579cc11ae1451ee68f02"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs",
+          "expected": "28226746ad67a670a90a5b2e2055f7479c9d3b74b3bb685b3bc84defca2f517a",
+          "actual": "d87e92602ea1e71695680fc7c01015b6e1a02a3861393742b5b189067acd2549"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Run/RunEvents.cs",
+          "expected": "a45bef022c24b2d416b49ddf1045b715774ac4dae0000249f17ffe6a3e5e2483",
+          "actual": "3251e3de028c40307c199b67ac6437709df0c4bc7598840c4af01614a835ff4f"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Run/SaveSystem.cs",
+          "expected": "59e25a122eea12fc8029a724464704a035078bdfe8fe7dfe2649fa424cc566e5",
+          "actual": "b5f45f31198d2614806a9334b5a71cb456bca27f2e1ab6c0b2ab3813d028c8d7"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Kit/App.cs",
+          "expected": "c0afff7af24b361bef127f40a9bba2c2da4d41d3d2c56126a4abbdd56de58a26",
+          "actual": "71676543e3612974082268532a022463af6ccf5aa2fc5849f39524493d2c1c1c"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Kit/CurrentReadingPreference.cs",
+          "expected": "f30e627f82c4ed4dd05608f636dc1436b140cb89d70f0a66618498014ea6d864",
+          "actual": "7486940d0d45247f9c21ba3f5db0a5d288b00d39f81377112648f552c84975ca"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Kit/CurrentRunHudView.cs",
+          "expected": "151acb85cbafad309d1e6265e568cd1921ff6f5de9d4b6d84abaaba1aa408b6c",
+          "actual": "21fe578d7f9cccd8142129e85a41ad0bcebdb8cf1a594db1107756a7e7e6d869"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "expected": "3ce8378ad2b2ceed0089ab359d337ce701d80fbb71c46f97a61fea1fcaccb6cd",
+          "actual": "f2adf65fe5f0c7c1be5450660ed23288803c3f1fe25fbe26431ad5a17d0af7b7"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Kit/DesktopRunHud.cs",
+          "expected": "c13f1d8b831986b897d39445a00f197840d6f8627da8f1820c5fbee4543b818d",
+          "actual": "97a1789705c8ebc979b33ee343e70c2055f4318c4c13df8acef15532ccb64ef4"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Kit/InlineIconText.cs",
+          "expected": "d0ba70e5a63e1be7c5f9d42d9f2c720eb5e01e89a3c3898e178e0bbdd2596e5c",
+          "actual": "cb2959ad75527961ce093452b23c59a1e15402fe0905b281ef6c2b3bffdc59dc"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Kit/UiStack.cs",
+          "expected": "a8c844130f17dfd83b9dbb5da114b98461df04ee6f5ed37bebe8877d6e554556",
+          "actual": "1edab12f9672e4c4d056155da92f02d6b196ed18ab0075e72f6d681408957642"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagCardDetail.cs",
+          "expected": "ef1ba987c47a1235550aab63f1691043754ef2eb06a72178023daec688b3a58c",
+          "actual": "98081ccb5949fe671f74174b634fe9c9f3307904204501a2fc3930a6bd5cda90"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleItemInputs.cs",
+          "expected": "a7e597577da67e900d00f849cb98e5d1b0f32b9cb15b7997cf76c0c9f6a4c11b",
+          "actual": "f552ebcf4bfec2a2a381ac30d0e98813f3b7a41eca29eae39aac6eb4b4319c65"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+          "expected": "2d148fe7282f0ac645d0ac75ee8aa07406ab1af32b76c6374de33fe28bc55bf4",
+          "actual": "bd97bfbe7058d2c0ffb0290d00c42b26a7890d71846a1cafe026743b5049d93e"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleRuleInputs.cs",
+          "expected": "d1cbe46f4449471bf34737d8a792a6399c2ed32545a8e9f95647d96e3a482eff",
+          "actual": "b158602bb9db1143652c400da0b8978e2220e229237197faa6ded4924004eb32"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSecondaryViews.cs",
+          "expected": "c629351af2004ff75536732a039a95d4bd8a92ac3179b6cf5ab8942ce274580c",
+          "actual": "14e5c10437f0eb568fbc2de067200213cf4215d6e4973e2da5c5eb332502c567"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs",
+          "expected": "0d27508bf6aa44c0104402016739e11d5105281d61b2e3e5eed7d2dfbbccb1e2",
+          "actual": "69af83aa1139d1e179013aca06e757bff1bf7105adc7b1a855e2240b877e8235"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleUnitFrames.cs",
+          "expected": "c98c9db9210690bf2166ce6f3b81d789a1cb136bdf2b185242af39c0f36da640",
+          "actual": "156f37a36857ecebc76ed9ea189a800b71e7f501cfe3d6a51dc91c23f0faac44"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Hub/DepartureCinematic.cs",
+          "expected": "44b1c4452d1606201b85a879dad0310c15a55b8314866b8640895545040d579b",
+          "actual": "53c56a7005293ccb05032a55f4eb7258157d9985b2dec398b7cf9ca1e1d634e5"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInventory.cs",
+          "expected": "28dbbcbc3c0b1e92718d9a2a35fe5ad4c1b002f508317379cadb182978b054a6",
+          "actual": "8f1d060b5b9219e40231badc9a1f2d380f97b89d3ed787081573f056050e4600"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentSourceLayout.cs",
+          "expected": "9cede9cca2c208ef706a02d5f5c93609277f5859041aee08a92cbfe503e5d87e",
+          "actual": "e4d707b607f2431959022b506074d1a862e888523830373532e8f37413e86fcb"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Hub/KoiPondGraphic.cs",
+          "expected": "a7ac787377e0ad454922e451ee43c9a453f0532fec75b323a32e8089410aba97",
+          "actual": "193e305bac288fda04fbcbfcaf674d2ac8b2287b78614c05d9e69ae0dfa9b651"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentFeedbackComposer.cs",
+          "expected": "0caea4346466cb6a4830668f890caa9d1f8d0fc66b950a9fb5eba1e6e9a9d988",
+          "actual": "027ef99df7f294237f52a38d40fe29821f1795c450fbd985daec52bd4aab0042"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSettingsPage.cs",
+          "expected": "44e4ba43f90e4d285b1db88cdb36ea582cc2fa45313325d7575f38386315072a",
+          "actual": "833ccd3569b1fbea24ad2b7b1d3a89630885d48342ab9c99e719ce587b591d32"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSlotPage.cs",
+          "expected": "a1ac38ae8719742ea6d0d452431b37fa0803a21554904980cff407c893b3dfa1",
+          "actual": "178448edf159e0e63112d2225104afd0b3f275e49695c44a9528690a7a10958a"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Menu/MenuDialogs.cs",
+          "expected": "8a580dae0ac5166c2bd60d026488ce95178ca18dbcd98b0071c34d0546a43d21",
+          "actual": "3812ca5537fa61d5bcd53611815ca56b7f78f5e3346301f64e54fedecd0f4b67"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Menu/Resources/CurrentHomeComposite.shader",
+          "expected": "46f9065179e892909897d95019f7660c8f4ebf96a0d700d095eed2e4f3bc1962",
+          "actual": "4864303385c3f7a3bd5cab6bd35663afd70b60578b215e4a2f1ab04cbc7f46c4"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Menu/SlotPickerScreen.cs",
+          "expected": "746875e5b173e89efaa15ebe887a1340fa90d130df4d77ffc6929cb85ef25458",
+          "actual": "93059ab24f14e388e290671980ed8bcf56e7eb08a3857b498be785c9e1d6a816"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Misc/CardLibraryScreen.cs",
+          "expected": "02a40e053cbd505498cde32e0fe0203ef18f96e0301a7c4dde45d3521456de8c",
+          "actual": "20cfe1f9f89e941036d7f78f72a210737568f93d91f3a1a34b3ba1bb2f7f7807"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoDetailScreen.cs",
+          "expected": "1deadfc023e989098a74fb334fab757907cf9709d8a2cd9b34ac36dc321fb38a",
+          "actual": "8a98f51b3a295854255e80b27995be6ca904415dd36db5073aca88181ca8e7cc"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoInlineLinks.cs",
+          "expected": "0bebecec0e42d8d8f1e1bbf65e95e7cbcbbab8a172e21a1a240126efb1923737",
+          "actual": "9eb0b4c5a6d5d3639a46ecf30c910f24f4b3f50b5577382652d53c36d32b7d16"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioDossier.cs",
+          "expected": "e178d66c9304d1069863d7fd9e58686d52fb5ae98ab4c7a211a590e91b46b59b",
+          "actual": "3a779b14e8ba6650af06f8d442fc3aa98ada9fda60961c649a8c7f7e279bc30d"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/AltarRitualScreen.cs",
+          "expected": "205bb16cf178da81130b22fb3613a7d4c2d1a0f5d74893f660b7d43fbe327d7a",
+          "actual": "bb1cf667a37387055125bf17297d63cdb0e25d9599b0df9e495700439cfa405d"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs",
+          "expected": "71d2aa711565729cc4c9be71d744b8d7959fd576bede7d136f09d39fc2c203fa",
+          "actual": "e8e62df5483fdca5c56ab14904067dd17415116a1ca2f69c15f2462bdde5e0a6"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/ChestOpenScreen.cs",
+          "expected": "dc1f3f3a0099ef75176b15424a67390e056172e51d7263119fb8e325f190c8ec",
+          "actual": "62a15f2abf8483368ca26c0a313acd05d7e642c930427ea59920be64543cb40b"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/ClassChoiceScreen.Pool.cs",
+          "expected": "ef8e169d3c7cdc896b2d5ed89a5c96dbd7f5896bf4db3aed26c8c09d868f7449",
+          "actual": "508b332aa3a20ef62a3c2f377b22800c17080ab3d879fdc45efe1dbd24c73272"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentIllustratedNode.cs",
+          "expected": "35b5255a2d6c598323b604cba6c41e1c800369b3917b765673164334b473df40",
+          "actual": "ab00adae18d58a0ec373572c42e99adeab4c55c3f1941512d1cec3d404715248"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentNodeShade.cs",
+          "expected": "b6a733fa592d73d2a6b00c879d5ac6f39788ec8460090068ec6256fa9899667c",
+          "actual": "f7388705708d884f77a48728277f30581e1fe02f751edfb5c2718e4e50e8fd4d"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardCapacityOrganizer.cs",
+          "expected": "b07a8875710adb4e26fdcd867d00611749a09521841190f114efa622fca7bed0",
+          "actual": "8771720d19112bf9ad383569cba7396c3a150f18a0f8404e7307a27e11a715a1"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardScene.cs",
+          "expected": "5fb8576fd808e8fb0c2aead3eca2d629c15b72277ebd2f0a3aaca14220e36819",
+          "actual": "6a2f746b3fd1db3fff968d5c9034e222b4158b83b2a29199280fd049102ed5db"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentSettlementView.cs",
+          "expected": "c414b2450ddb06fec8ce26df1a8b3e8ee43bc8bfa1c1a6ac64d5221b2a49acdd",
+          "actual": "5cac04a51b69b04a46bb6b6997f3e119025dcac21fcf0d7d66b44da18cb23366"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/DepartureElements.cs",
+          "expected": "06bfaf2a85de32a131fcd4776ca72564aae8621376d76c28752e69e02986b549",
+          "actual": "afb814af3b364b7308ca0d4d250284fc09136e8dbb9d5fa1d05295c6ffa570d0"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogScreen.cs",
+          "expected": "2f6beb553996013f6bf38009463c54e93eb55c71bccb49a34ffe3420356c6764",
+          "actual": "2b48ed3a0e503ea89828efc99c87939331f2d577f229d738d60f6fc1b4128625"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/ExtractScreens.cs",
+          "expected": "a33f4b5617c87b8167e9a24fe3f0945531f4a1c9ea3e7c147cadb9f51a721236",
+          "actual": "dc43d41d70fb80a04f808a5c9a6c2b28cc1a2c9fb9bc1ce6bdff17dcca7d3248"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/NodeModals.cs",
+          "expected": "561957710e17676c7a205870dc48062718820bfeb9ae05b060fec7021d9753f1",
+          "actual": "d53cd1da261449594783d66a2b3aa8acbba8a34bc34b5bd5fd2b10bc09c89f7b"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/RunUi.cs",
+          "expected": "aa0a9d4be9aa287a17aaf57034956e795bb101761a37e8c8d1e6fe68807c7309",
+          "actual": "fdca0355196b1c94c1194d672053b68aca71946e32db56494da754fd62427ec3"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Run/ShopScreen.cs",
+          "expected": "c02a33156e9778c21b43f959c43d408344037d05b0257ea470bab016df3b4b30",
+          "actual": "7a13f85d1c74db2f37f8d00d3aad7cf50da4db49c3e4cafc9a82466a56a932fc"
+        }
+      ],
+      "reusePolicy": "Do not reuse the whole old static batch as final acceptance. Only unchanged page geometry/consumers remain bounded historical evidence; changed common mechanisms use new fidelity probes and actual player frames."
+    }
+  },
+  "pageFamilies": [
+    {
+      "id": "01-home",
+      "name": "首页（独立重建，仅冻结版本）",
+      "coverage": "desktop-final-player-2: title/startup/returned-title; unchanged TitleScreen/home partial geometry; current code directly binds current seven-wallpaper/footer/credits controls (not a hardware exercise of every control)",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "02-slots",
+      "name": "选档",
+      "coverage": "desktop-final-player-2: returned-slots/backup/import-preview/returned-title; slot-archive-1 runtime restore and cross-slot identities",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "03-base-shell",
+      "name": "基地共用外壳与导航",
+      "coverage": "current-visual-10 hub seven-room shell geometry; desktop-final-player-2 stable returned-base; journey-4 returned-base-ready",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "04-base-home",
+      "name": "基地首页",
+      "coverage": "current-visual-10 hub; current-entry-2 new/current/continued slot and preparation; journey-4 and final-player2 stable return",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "05-base-logistics",
+      "name": "后勤/建设/人物房间",
+      "coverage": "current-visual-10 logistics/personnel/facilities; source-map current-base; current-entry-2 and prior data/state regressions",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "06-character",
+      "name": "出征选人",
+      "coverage": "current-visual-10 character; current-entry-2; pool now calls common source reader reviewed with recode/reward; class body geometry unchanged",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "07-departure",
+      "name": "出征整备",
+      "coverage": "current-visual-10 departure/preparation; current-entry-2 draft/new/continue/native entry; source departure modules unchanged",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "08-bag",
+      "name": "背包主界面",
+      "coverage": "current-visual-10 bag; prior UID/variant/container commands; shop-source-4 actual bag returns and long detail state; CardFace/InlineIconText new common checks",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "09-safe-pocket",
+      "name": "安全格/消耗区",
+      "coverage": "current-entry-2 safe; current-receipts-4 settlement branches; organizer-focus-2 real safe moves/failure and UID decisions",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "10-containers",
+      "name": "锦囊/珍珠盒",
+      "coverage": "current-bag source contract and 26 data checks; unchanged ContainerScreen family, common card text density/CJK rechecked; no claim of final-player2 container input coverage",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "11-settings",
+      "name": "设置",
+      "coverage": "desktop-final-player-2 settings; current-entry-2 native preferences/failure/bindings; four-tab source page retained",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "12-photo",
+      "name": "照相馆",
+      "coverage": "desktop-final-player-2 photo; current-visual-10 library; photo body unchanged except shared reading/density; current-entry-2 global data",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "13-photo-detail",
+      "name": "照片详情/背签",
+      "coverage": "current-entry-2 actual note and failure; current-visual-10 photo-detail; photo-inline density and InputField isolation source checked",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "14-achievements",
+      "name": "成就总览",
+      "coverage": "current-visual-10 achievements; current-slot-achievement contract/source assets; current Meta/Hub reward routes retained",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "15-trade",
+      "name": "交易所",
+      "coverage": "current-visual-10 trade; current-base source-map; transaction BaseData source consumers unchanged",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "16-archive",
+      "name": "收藏室/卡背/故事",
+      "coverage": "current-visual-10 archive; current-base-review-fixes gallery correction; unchanged archive sections/source routing",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "17-courtyard",
+      "name": "庭院",
+      "coverage": "current-visual-10 courtyard; source-map/current-base; frames-2 clock/cap verification plus Koi reduced clock path",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "18-events",
+      "name": "事件/入城/火堆/拾取共用插画房间",
+      "coverage": "current-receipts-4 entry/event/fire; film-flow-3; desktop-final-player-2 altar/door/passage/recode result+reader+write failure; common node source shell",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "19-rewards",
+      "name": "奖励/宝箱/战后领取",
+      "coverage": "current-receipts-4; shop-source-4 Apollo continuation/write failure; final-player2 real pending reader claim/stale callback/full-bag organizer; organizer-focus-2",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "20-extraction",
+      "name": "撤离整理",
+      "coverage": "current-receipts-4; journey-4 real extraction/deposit/stable base; final-player2 extraction; slot-archive-1 sorting cross-slot actual resume",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "21-settlement",
+      "name": "撤离完成/失败/放弃结算",
+      "coverage": "current-receipts-4 death/abandon/normal flee; journey-4 final Boss/extract/idempotence; final-player2 settlement and base return",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "22-map-hud",
+      "name": "地图HUD",
+      "coverage": "journey-4 30 real moves/four layers/three gates; final-player2 node/battle/shared HUD; source run-hud contracts",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "23-battle-hud",
+      "name": "战斗场景/HUD",
+      "coverage": "final-player2 battle/pile/return/formation/rules; frames-2 real attack+EndTurn and 264 frame assets; current-battle-ui source contract",
+      "oldMatrixIsBaselineOnly": true
+    },
+    {
+      "id": "24-hand",
+      "name": "手牌/指向/翻栏",
+      "coverage": "current-battle-ui layout/input source contract; journey-4 real card/end-turn commands; final-player2 battle; Core69 true-source vectors cover payment/target/zone state",
+      "oldMatrixIsBaselineOnly": true
+    }
+  ],
+  "finalPlayer": {
+    "buildGUID": "38d6541a41004fd88bbf4438a283dccb",
+    "captures": 48,
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120.0,
+    "canvas": {
+      "mode": "ScreenSpaceOverlay",
+      "scaleFactor": 1.33333337,
+      "width": 1920.0,
+      "height": 1080.0,
+      "lossyScale": {
+        "x": 1.33333337,
+        "y": 1.33333337,
+        "z": 1.33333337
+      },
+      "scaler": "ScaleWithScreenSize",
+      "referenceWidth": 1920.0,
+      "referenceHeight": 1080.0,
+      "matchWidthOrHeight": 0.5
+    },
+    "densityPassed": true,
+    "densitySamples": 22
+  },
+  "currentMusic": {
+    "passed": true,
+    "source": {
+      "title": "music-demo/01-title-frostglass-v12",
+      "board": "music-demo/02-explore-ashline",
+      "battle": "music-demo/03-battle-shadowtide-full-v2",
+      "shop": "music-demo/05-shop-lamplight-deal-v3"
+    },
+    "native": {
+      "battle": "music-demo/03-battle-shadowtide-full-v2",
+      "board": "music-demo/02-explore-ashline",
+      "shop": "music-demo/05-shop-lamplight-deal-v3",
+      "title": "music-demo/01-title-frostglass-v12"
+    },
+    "legacyCallSites": [],
+    "missingClipPolicy": "AudioService.PlayBgm calls Res.Music; missing clears source and stops playback; no historical fallback."
+  },
+  "core69Reuse": "Source677 unchanged. Production43: Cards.cs changed in source-order custom upsert, factored same drop selection and new read-only note; current shop104 vectors cover generated stock and subsequent4 real drops/RNG. RunState adds bossId; EventProgress adds commissionAnnounced. Other40 including actual battle implementation unchanged. Do not call this a rerun of69 after those metadata changes.",
+  "provenBoundaries": [
+    "Actual player is normal Standalone at current 2560x1440 with ScaleWithScreenSize/ScreenSpaceOverlay and native backbuffer scale1, captured from invisible zero-alpha nonactivating host.",
+    "Constructed EventSystem inputs/field values and controlled battle/reward fixtures are recorded. No OS hardware input, front control, multi-size or balance proof.",
+    "Previous 35+18 static frames are retained only for unchanged geometry/consumers; the62 later-changed inputs are exposed above.",
+    "Agent, Web old saves, research second map and closed workshop are explicitly excluded by MIGRATION.md.",
+    "No commits, push or release; no production edits or Unity execution by this audit."
+  ],
+  "dependentRootGates": [
+    "final_changed_visual_review player2-review.md",
+    "final_archive_menu_review visual-final-player2.md",
+    "Final artifact/media manifests, current docs check and registry/task closure."
+  ]
+}
