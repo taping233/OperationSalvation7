@@ -118,21 +118,6 @@ namespace Sdt.UI.Kit
                 PollRightClick();
             }
 
-            // [diag] 点击链诊断（临时）：左键按下时打 EventSystem 状态与 raycast 命中栈
-            static void DiagClick()
-            {
-                if (!Input.GetMouseButtonDown(0)) return;
-                var es = EventSystem.current;
-                if (es == null) { Debug.Log("[diag] click es=NULL"); return; }
-                var pe = new PointerEventData(es) { position = Input.mousePosition };
-                var hits = new System.Collections.Generic.List<RaycastResult>();
-                es.RaycastAll(pe, hits);
-                Debug.Log("[diag] click pos=" + Input.mousePosition + " module=" +
-                          (es.currentInputModule != null ? es.currentInputModule.GetType().Name : "NULL") +
-                          " hits=" + hits.Count + (hits.Count > 0 ? " top=" + hits[0].gameObject.name : ""));
-                foreach (var r in hits) Debug.Log("[diag]   hit " + r.gameObject.name);
-            }
-
             static readonly KeyCode[] _polled = (KeyCode[])Enum.GetValues(typeof(KeyCode));
             static bool Ctrl => Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
             static bool Alt => Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
@@ -142,8 +127,13 @@ namespace Sdt.UI.Kit
             {
                 if (!Input.anyKeyDown || !string.IsNullOrEmpty(Input.compositionString)) return;
                 // Key capture owns Escape as well; this precedes all overlay and gameplay handlers.
-                foreach (var key in _polled)
-                    if (Input.GetKeyDown(key) && CurrentInputBindings.KeyFor(key) != null && CurrentInputBindings.CaptureKey(key, Ctrl, Alt, Meta)) return;
+                if (CurrentInputBindings.SuppressGameplayInput)
+                    foreach (var key in _polled)
+                    {
+                        if (!Input.GetKeyDown(key)) continue;
+                        string binding=CurrentInputBindings.KeyFor(key);
+                        if (binding!=null && CurrentInputBindings.TryCapture(binding, Ctrl, Alt, Meta)) return;
+                    }
                 if (CurrentInputBindings.SuppressGameplayInput) return;
                 var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
                 if (selected != null && selected.GetComponentInParent<InputField>() != null) return;

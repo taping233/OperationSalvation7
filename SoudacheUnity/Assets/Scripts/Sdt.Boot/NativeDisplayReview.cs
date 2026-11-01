@@ -97,6 +97,8 @@ namespace Sdt.Boot
             if (!Guard(() => { Clear(); UiStack.Show<Sdt.UI.Screens.Menu.SettingsScreen>("Settings"); })) yield break;
             for (int frame = 0; frame < 4; frame++) yield return null;
             yield return Capture("player-settings", false);
+            yield return ReviewRound6Audio();
+            if (_failed) yield break;
             if (!Guard(() => { Clear(); UiStack.Show<Sdt.UI.Screens.Menu.GuideScreen>("Guide"); })) yield break;
             for(int page=0;page<6;page++)
             {
@@ -112,6 +114,8 @@ namespace Sdt.Boot
             yield return Capture("player-guide-in-run",false);
             if(!Guard(()=>{if(!CurrentRunTopBar.Covered())throw new InvalidOperationException("Run guide did not cover shared top bar.");Clear();GameRuntime.I.State.Phase="modal";AltarRitualScreen.Open();}))yield break;
             yield return Capture("player-altar",false);
+            yield return ReviewRound6Sacrifice();
+            if (_failed) yield break;
             if(!Guard(()=>{Clear();var g=GameRuntime.I;var door=g.Map.Snapshot.layers[0].doors.First(item=>item.toLayer>0);g.State.layerIdx=0;g.State.trackPos=door.at;g.State.Phase="modal";DoorModal.Open(new Sdt.UI.Screens.Run.DoorInfo{toLayer=door.toLayer,arriveAt=door.arriveAt,toLayerName=g.Map.Layers[door.toLayer],reverse=false,exit=false},false);}))yield break;
             yield return Capture("player-door",false);
             if(!Guard(()=>ClickNamed("goDoor")))yield break;
@@ -136,6 +140,8 @@ namespace Sdt.Boot
             if(!Guard(()=>ClickNamed("zoom-close")))yield break;
             yield return Capture("player-battle-pile-return",false);
             yield return ParityBattle();
+            if (_failed) yield break;
+            yield return ReviewRound6Discovery();
             if (_failed) yield break;
             if(!Guard(()=>{
                 NewPresentationFixture();var g=GameRuntime.I;

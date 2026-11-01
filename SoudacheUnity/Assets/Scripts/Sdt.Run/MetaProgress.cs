@@ -33,7 +33,6 @@ namespace Sdt.Run
     /// perkText()→PerkText / addXP()→AddXP / ACHIEVEMENTS→Achievements / achById()→AchById /
     /// isUnlocked()→IsUnlocked / isClaimed()→IsClaimed / pendingAch()→PendingAch / claim()→Claim /
     /// checkUnlocks()→CheckUnlocks / syncBackUnlocks()→SyncBackUnlocks / track()→Track / setXpMul()→SetXpMul /
-    /// classSummary()→ClassSummary。
     /// </summary>
     public sealed partial class MetaProgress
     {
@@ -240,20 +239,5 @@ namespace Sdt.Run
         /// <summary>meta.js setXpMul：经验倍率随本局玩法模式（开局时设置）。</summary>
         public void SetXpMul(double m) { _xpMul = m > 0 ? m : 1; }
 
-        /// <summary>meta.js classSummary：职业页汇总（基地 UI 用）。</summary>
-        public sealed class ClassSummaryRow
-        {
-            public string cls; public int lv, xp, need, pool; public bool maxed;
-        }
-        public List<ClassSummaryRow> ClassSummary()
-        {
-            return ClassList().Select(cls =>
-            {
-                int lv = ClassLv(cls), xp = ClassXP(cls);
-                int pool = 0;
-                try { pool = CardLibrary.ClassPool(cls).Count; } catch { }
-                return new ClassSummaryRow { cls = cls, lv = lv, xp = xp, need = XpForNext(lv), maxed = lv >= LevelMax, pool = pool };
-            }).ToList();
-        }
     }
 }

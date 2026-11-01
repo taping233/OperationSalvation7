@@ -34,6 +34,7 @@ namespace Sdt.UI.Screens.Menu
         int _requestedCategory;
         Text _notice, _bindingStatus, _musicStatus, _sfxStatus;
         Button _musicRetry;
+        AudioService _audio;
         int _category, _revision;
         string _listening;
         bool Current => this != null && _owner != null && UiStack.Top == _owner && !SuggestionBox.IsOpen;
@@ -70,6 +71,8 @@ namespace Sdt.UI.Screens.Menu
             var layout=content.GetComponent<VerticalLayoutGroup>();layout.spacing=0;layout.padding=new RectOffset(0,0,0,0);
             _notice=E.Text(root.transform,"settings-write-status","",18,Theme.Hex("#F0B9AE"),490,1044,1240,30);
             CurrentInputBindings.Changed+=UpdateBindings;
+            if(_audio!=null)_audio.MusicStateChanged-=UpdateAudioStatus;
+            _audio=AudioService.I;_audio.MusicStateChanged+=UpdateAudioStatus;
             SelectCategory(0);
         }
         void SelectCategory(int category)
@@ -167,7 +170,9 @@ namespace Sdt.UI.Screens.Menu
             Switch(_body,"setMusic","背景音乐",()=>!audio.MusicMuted,value=>AudioWrite(()=>audio.SetMusicMuted(!value)));
             Volume("setMusicVol","音乐音量",audio.MusicVolume,value=>AudioWrite(()=>audio.SetMusicVolume(value)));
             _musicStatus=Copy(_body,"",18,44);
-            _musicRetry=Control(_body,"setMusicRetry","重试加载音乐",()=>{string scene=audio.MusicScene;audio.PlayBgm(null);audio.PlayBgm(scene);UpdateAudioStatus();},48);
+            Button retry=null;
+            retry=Control(_body,"setMusicRetry","重试加载音乐",()=>{if(Current&&_audio==audio&&_category==2&&_musicRetry==retry&&retry.isActiveAndEnabled&&retry.interactable)audio.RetryBgm();},48);
+            _musicRetry=retry;
             Switch(_body,"setSfx","音效",()=>!audio.SfxMuted,value=>AudioWrite(()=>{audio.SetSfxMuted(!value);audio.PlaySfx("ding");}));
             Volume("setSfxVol","音效音量",audio.SfxVolume,value=>AudioWrite(()=>audio.SetSfxVolume(value)),()=>audio.PlaySfx("ding"));
             _sfxStatus=Copy(_body,"",18,48);Copy(_body,"自动保存 · 侧栏可静音",18,48);
@@ -175,9 +180,9 @@ namespace Sdt.UI.Screens.Menu
         }
         void UpdateAudioStatus()
         {
-            if(_musicStatus==null)return;var audio=AudioService.I;
-            bool missing=!string.IsNullOrEmpty(audio.MusicScene)&&string.IsNullOrEmpty(audio.MusicAsset);
-            _musicStatus.text=audio.Muted||audio.MusicMuted?"音乐已静音。":missing?"音乐资源未加载，当前保持静音。可手动重试。":!string.IsNullOrEmpty(audio.MusicAsset)?"音乐已就绪。":"当前没有场景音乐。";
+            if(!isActiveAndEnabled||_musicStatus==null)return;var audio=AudioService.I;
+            bool missing=audio.MusicLoadFailed;
+            _musicStatus.text=audio.Muted||audio.MusicMuted?"音乐已静音。":missing?!string.IsNullOrEmpty(audio.MusicAsset)?"当前场景音乐加载失败，已保留上一首。可手动重试。":"音乐资源未加载，当前保持静音。可手动重试。":!string.IsNullOrEmpty(audio.MusicAsset)?"音乐已就绪。":"当前没有场景音乐。";
             _musicRetry.gameObject.SetActive(missing&&!audio.Muted&&!audio.MusicMuted);
             _sfxStatus.text=audio.Muted||audio.SfxMuted?"音效已静音。":"音效已启用。";
         }
@@ -230,8 +235,8 @@ namespace Sdt.UI.Screens.Menu
         }
         void BindingStatus(string text){if(_bindingStatus!=null)_bindingStatus.text=text;}
         void UpdateBindings(){foreach(var pair in _bindings)if(pair.Value!=null)pair.Value.GetComponentInChildren<Text>().text=CurrentInputBindings.BindingLabel(pair.Key);}
-        void OnDestroy(){CancelListening(false);CurrentInputBindings.Changed-=UpdateBindings;}
-        public void Release()=>CancelListening(false);
+        void OnDestroy(){Release();CurrentInputBindings.Changed-=UpdateBindings;}
+        public void Release(){CancelListening(false);if(_audio!=null){_audio.MusicStateChanged-=UpdateAudioStatus;_audio=null;}}
         void Preference(string id,string label,string key,bool defaultValue=false)=>Switch(_body,id,label,()=>CurrentUiPreferences.Flag(key,defaultValue),value=>SaveFlag(key,value));
         string SaveFlag(string key,bool value)=>CurrentUiPreferences.TrySetFlag(key,value,out var error)?null:error;
         bool SavePerformance(string quality,int fps){bool saved=CurrentUiPreferences.TrySetPerformance(quality,fps,out var error);Status(saved?"已保存，立即生效":error);return saved;}

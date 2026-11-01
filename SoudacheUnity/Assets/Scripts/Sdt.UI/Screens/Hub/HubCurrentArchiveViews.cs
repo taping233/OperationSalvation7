@@ -30,20 +30,20 @@ namespace Sdt.UI.Screens.Hub
             Label(detail,"奖励预览",20,false,Muted);Label(detail,chosen.rewards,22);
             var claim=Command(detail,chosen.claimed?"已领取":chosen.ready?"领取奖励":"待完成",chosen.claim,true);claim.interactable=chosen.ready&&!chosen.claimed;
         }
-        void BuildRewards(Transform parent)
+        void BuildRewards(Transform parent,(int total,int progress) collection,List<AchievementDef> achievements)
         {
             var records=new List<ArchiveRecord>();
-            var pool=G.Meta.CollectionPool();int total=pool.Count,progress=pool.Count(card=>G.Base.IsCollected(card));
-            foreach(var item in MetaProgress.Achievements.Where(a=>MetaProgress.IsUnlocked(a,G.Base)&&!G.Meta.IsClaimed(a.id)))
+            int total=collection.total,progress=collection.progress;
+            foreach(var item in achievements)
             {var a=item;records.Add(new ArchiveRecord{id="achievement-"+a.id,label="成就奖励",name=a.name,status="可领取",body=a.desc,rewards=RewardText(a),ready=true,claim=()=>ClaimAchievement(a.id)});}
             foreach(var item in HubCatalog.Current.milestones.Where(m=>!G.Meta.MilestoneClaimed(m.id)&&progress>=(m.all?total:m.need)))
             {var m=item;int need=m.all?total:m.need;records.Add(new ArchiveRecord{id="collection-"+m.id,label="收藏奖励",name=need==total?"收集完成":"收集 "+need+" 张",status="可领取",rewards=G.Meta.CollectionRewardText(m),ready=true,claim=()=>ClaimMilestone(m.id)});}
             BuildRecordWorkspace(parent,records,_rewardRecord,id=>_rewardRecord=id,true);
         }
         void ClaimMilestone(string id){if(!G.Meta.TryClaimCollection(id,out var reason)){Log(reason,"warn");return;}Log("收藏奖励已入账","ok");Rebuild();}
-        void BuildMilestones(Transform parent)
+        void BuildMilestones(Transform parent,(int total,int progress) collection)
         {
-            var pool=G.Meta.CollectionPool();int total=pool.Count,progress=pool.Count(card=>G.Base.IsCollected(card));
+            int total=collection.total,progress=collection.progress;
             var summary=Row(parent,"av12-summary",20,72);Surface(summary);Label(summary,"已收藏",22,false,Muted);Label(summary,progress+" / "+total,30,true);Progress(summary,(float)progress/Math.Max(1,total));
             var records=HubCatalog.Current.milestones.Select((m,index)=>
             {

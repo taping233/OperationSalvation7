@@ -17,8 +17,8 @@ namespace Sdt.UI.Kit
         RectTransform _avatarPosition, _healthPosition;
         int? _hp, _maxHp, _coinCount, _attackValue;
         int _layerIndex = -1, _layerCount = -1;
-        bool? _combat;
-        static readonly string[] CoverNames = {"BagScreen","BagCardDetail","GuideScreen","CurrentSettingsPage","SettingsScreen","CurrentSettingsShell","HomeSettingsScreen","ShopScreen","ExtractStashScreen","CardZoom","ActionConfirmation","Discover"};
+        bool? _combat, _visible;
+        static readonly string[] CoverNames = {"BagScreen","BagCardDetail","GuideScreen","CurrentSettingsPage","SettingsScreen","CurrentSettingsShell","HomeSettingsScreen","ShopScreen","ExtractStashScreen","CardZoom","ActionConfirmation"};
         bool _failed; string _saveMessage;
         public static CurrentRunTopBar Install(Transform root)
         {
@@ -80,6 +80,7 @@ namespace Sdt.UI.Kit
         static bool Covers(Panel panel)
         {
             if(panel==null)return false;
+            if(panel is DiscoverPanel||panel is GravePanel)return true;
             string name=panel.GetType().Name;
             foreach(string covered in CoverNames)if(name.Contains(covered))return true;
             return panel.GetComponentInChildren<CurrentSettingsPage>(true)!=null;
@@ -92,19 +93,24 @@ namespace Sdt.UI.Kit
         public static bool Visible=>GameRuntime.I.State.runActive&&!Covered();
         void Update()
         {
-            var runtime=GameRuntime.I; bool covered=false,illustrated=false,reward=false;
+            var runtime=GameRuntime.I;
+            bool visible=runtime.State.runActive&&!Covered();
+            if(_visible!=visible)
+            {
+                _visible=visible;_visibility.alpha=visible?1:0;
+                _visibility.interactable=_visibility.blocksRaycasts=visible;
+            }
+            if(!visible){CloseDetail();return;}
+            bool illustrated=false,reward=false;
             for(int i=0;i<UiStack.Count;i++)
             {
                 var panel=UiStack.PanelAt(i);if(panel==null)continue;
-                covered|=Covers(panel);
-                illustrated|=panel.GetComponentInChildren<Sdt.UI.Screens.Run.CurrentIllustratedNode>()!=null;
-                reward|=panel.GetComponentInChildren<Sdt.UI.Screens.Run.CurrentRewardScene>()!=null;
+                if(!illustrated)illustrated=panel.GetComponentInChildren<Sdt.UI.Screens.Run.CurrentIllustratedNode>()!=null;
+                if(!reward)reward=panel.GetComponentInChildren<Sdt.UI.Screens.Run.CurrentRewardScene>()!=null;
+                if(illustrated&&reward)break;
             }
-            bool visible=runtime.State.runActive&&!covered;
-            _visibility.alpha=visible?1:0;_visibility.interactable=_visibility.blocksRaycasts=visible;
             if(_shade.gameObject.activeSelf!=illustrated)_shade.gameObject.SetActive(illustrated);
             if(_chapter.transform.parent.gameObject.activeSelf==reward)_chapter.transform.parent.gameObject.SetActive(!reward);
-            if(!visible){CloseDetail();return;}
             var s=runtime.State;var battle=s.battleActive?GameSnapshotRef.Current:null;
             bool combat=battle?.Player!=null;
             if(_combat!=combat)

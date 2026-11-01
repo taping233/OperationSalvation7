@@ -137,6 +137,7 @@ namespace Sdt.Core.Battle
     public sealed class DiscoveringSnapshot
     {
         public IReadOnlyList<CardDef> options; public int n; public string rarity;
+        public long selectionId; public string kind,sourceCommit,sourceUid;
         public IReadOnlyList<CardDef> Options => options;   // UI 别名
     }
     public sealed partial class PendingTargetSnapshot
@@ -246,7 +247,10 @@ namespace Sdt.Core.Battle
         private EffectExecutor applyTextEffects;
 
         private sealed class InfusingState { public string uid; public CardDef card; public int need, targetIndex; public HashSet<string> picked = new HashSet<string>(); }
-        private sealed class DiscoveringState { public List<CardDef> options; public int n; public string rarity; }
+        private long discoverSerial;
+        private sealed class DiscoveringState { public List<CardDef> options; public int n,selectedIndex; public string rarity,kind,sourceCommit="committed",sourceUid; public long selectionId; public Action cancel; }
+        private DiscoveringState BeginDiscovery(List<CardDef> options,int n=1,string kind="hand",string rarity=null,Action cancel=null)
+        {return discovering=new DiscoveringState{options=options,n=n,kind=kind,rarity=rarity,cancel=cancel,selectionId=++discoverSerial};}
         private sealed class DelayedItem { public string text; public string cardName; public bool repeat; }
 
         public static readonly IReadOnlyDictionary<string, string[]> AffixMeta = new Dictionary<string, string[]>
@@ -730,7 +734,7 @@ namespace Sdt.Core.Battle
             return CommandResult.Yes();
         }
 
-        private void ExecPlay(string uid, CardDef card, List<string> fuelUids, BattleFoe target, bool freeCost = false, bool directRelease = false, List<string> paymentUids = null)
+        private void ExecPlay(string uid, CardDef card, List<string> fuelUids, BattleFoe target, bool freeCost = false, bool directRelease = false, List<string> paymentUids = null,PreparedDiscovery prepared=null)
         {
             if(!ValidatePreparedFighters(uid,card))return;
             card=FindCard(uid)?.card ?? card;
@@ -740,7 +744,15 @@ namespace Sdt.Core.Battle
                 if(issue!=null) { G.Log(issue,"warn"); return; }
                 BeginHandPayment(uid,card,fuelUids,target,freeCost,directRelease); return;
             }
+            if(prepared==null&&!directRelease&&hand.Contains(uid)&&TryPreviewDiscovery(uid,card,false,ticket=>
+            {
+                var current=FindCard(uid)?.card;
+                string issue=PreviewPlayIssue(uid,current,fuelUids,target,freeCost,directRelease,paymentUids);
+                if(issue!=null)return CommandResult.No(issue);
+                ExecPlay(uid,current,fuelUids,target,freeCost,directRelease,paymentUids,ticket);return CommandResult.Yes();
+            }))return;
             int committedCost = freeCost ? 0 : EffCostOf(card);
+            int consumptionBase=ruleContinuations.Count;
             if (paymentUids!=null)
             {
                 var entries=paymentUids.Select(p=>FindCard(p)).ToArray();
@@ -751,6 +763,7 @@ namespace Sdt.Core.Battle
             if(_phase!="enemy") _phase="resolving";
             RequestRender();
             BeginRuleCast(card, target, fuelUids);
+            castContext.preparedDiscovery=prepared;
             BindPreparedFighters(uid);
             if (directRelease) castContext.infused = true;
             castContext.uid = uid; skipInfusionCards.Remove(uid);
@@ -773,6 +786,13 @@ namespace Sdt.Core.Battle
                 if (o != null) ResolveInfusedFuel(o.card, target);
             }
             if (mode == "boss") discard.Add(uid);
+            if(over)return;
+            if(RuleInputPending)DeferRuleBatch(consumptionBase,()=>ResolvePlayedCard(uid,card,target));
+            else ResolvePlayedCard(uid,card,target);
+            CompletePlayerResolution();RequestRender();
+        }
+        private void ResolvePlayedCard(string uid,CardDef card,BattleFoe target)
+        {
             int continuationBase = ruleContinuations.Count;
             var context = castContext;
             using (BeginActorCard(card)) ResolveCard(card, target);
@@ -787,8 +807,6 @@ namespace Sdt.Core.Battle
                 castContext = previous;
             };
             if (RuleInputPending) ruleContinuations.Insert(continuationBase, complete); else complete();
-            CompletePlayerResolution();
-            RequestRender();
         }
 
         // 注册「回合开始时」延迟段（repeat = 装备卡或「每回合开始时」，每回合开始重复触发）
@@ -1002,15 +1020,17 @@ namespace Sdt.Core.Battle
                 if (c != null && !taken.Contains(c.id)) { taken.Add(c.id); options.Add(c); }
             }
             if (options.Count == 0) { G.Log("（卡牌库是空的，没有可发现的卡牌）", "dim"); return; }
-            discovering = new DiscoveringState { options = options, n = job.n, rarity = job.rarity };
+            BeginDiscovery(options,job.n,rarity:job.rarity);
             RequestRender();
         }
 
         public CommandResult PickDiscover(int i)
         {
-            if (discovering == null) return CommandResult.No("not discovering");
+            if (over || discovering == null) return CommandResult.No("发现已结束");
             CardDef card = i >= 0 && i < discovering.options.Count ? discovering.options[i] : null;
             if (card == null) return CommandResult.No("bad index");
+            if(discoveryPreview?.state==discovering)return ConfirmDiscoveryPreview(i);
+            discovering.selectedIndex=i;
             if (structuredDiscoverAction != null)
             {
                 var action = structuredDiscoverAction; structuredDiscoverAction = null; discovering = null;
@@ -1026,6 +1046,23 @@ namespace Sdt.Core.Battle
             ProcessDiscoverQueue();
             RequestRender();
             return CommandResult.Yes();
+        }
+
+        public CommandResult PickDiscover(int i,string battleToken,long selectionId)
+        {
+            if(!DiscoveryCurrent(battleToken,selectionId))return CommandResult.No("发现选择已失效");
+            return PickDiscover(i);
+        }
+        private bool DiscoveryCurrent(string battleToken,long selectionId)
+            =>!over&&discovering!=null&&_battleToken==battleToken&&discovering.selectionId==selectionId;
+        public CommandResult CancelDiscover(string battleToken,long selectionId)
+        {
+            if(!DiscoveryCurrent(battleToken,selectionId))return CommandResult.No("发现选择已失效");
+            if(discoveryPreview?.state==discovering)return CancelDiscoveryPreview();
+            var current=discovering;discovering=null;structuredDiscoverAction=null;
+            current.cancel?.Invoke();
+            G.Log("[[icon:question]] 已结束本次发现，放弃尚未确认的奖励；此前用牌与已结算效果保留","sys");
+            ResolveRuleOutcome();if(!over)ProcessDiscoverQueue();ResumeRules();RequestRender();return CommandResult.Yes();
         }
 
         // 玩家受到一次攻击（含流血加成 / 格挡），返回实际伤害
@@ -1064,7 +1101,7 @@ namespace Sdt.Core.Battle
             string token=_battleToken;turnEndPending=true;turnOwnerToken=token;
             if (extraTurn)
             {
-                extraTurn=false;turn++;energy=maxEnergy;busy=true;
+                extraTurn=false;turn++;ClearDiscoveryPreviews();energy=maxEnergy;busy=true;
                 int continuationBase=ruleContinuations.Count;AdvanceStructuredTurn();
                 if(OwnsTurn(token))
                 {
@@ -1143,6 +1180,7 @@ namespace Sdt.Core.Battle
             foreach (var foe in foes) if (!foe.dead) TickDurationsLog(foe.status, foe.name);
             TickRuleAllyDurations();
             turn++;
+            ClearDiscoveryPreviews();
             _phase = "player";
             foreach (var foe in foes) if (!foe.dead) foe.intent = IntentFor(foe, turn);
             energy = maxEnergy;
@@ -1194,7 +1232,7 @@ namespace Sdt.Core.Battle
         private void Finish(bool? win)
         {
             if (over) return;
-            ClearTurnOwner();ClearDrawnCasts();
+            ClearTurnOwner();ClearDrawnCasts();ClearDiscoveryPreviews();
             if (win == false && G.Hp <= 0) EmitActorCue("death");
             if(win==true) _phase="victory";
             else if(win==false) _phase="defeat";
@@ -1296,7 +1334,7 @@ namespace Sdt.Core.Battle
             DiscoveringSnapshot disc = null;
             if (discovering != null)
             {
-                disc = new DiscoveringSnapshot { options = new List<CardDef>(discovering.options), n = discovering.n, rarity = discovering.rarity };
+                disc = new DiscoveringSnapshot { options = new List<CardDef>(discovering.options), n = discovering.n, rarity = discovering.rarity, selectionId=discovering.selectionId,kind=discovering.kind,sourceCommit=discovering.sourceCommit,sourceUid=discovering.sourceUid };
             }
             DeckSelectionSnapshot deckSel = null;
             if (selectingDeck)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -80,7 +81,7 @@ namespace Sdt.UI.Screens.Hub
         }
         static void BindConfirm(Button button,Action action)
         {var owner=button.GetComponentInParent<HubScreen>();int revision=owner!=null?owner._renderVersion:0;button.onClick.RemoveAllListeners();button.gameObject.AddComponent<HubConfirmAction>().Bind(button,()=>{if(owner!=null&&!owner.CurrentHub(revision))return;action?.Invoke();});}
-        void BuildCollectionRoom(Transform page)
+        void BuildCollectionRoom(Transform page,(int total,int progress) collection,List<AchievementDef> achievements)
         {
             var layout=Row(page,"av12-workspace",22);Fill((RectTransform)layout);
             SourceColumns(layout,new[]{184f,0},new[]{0f,0},new[]{0f,1},22);
@@ -90,7 +91,7 @@ namespace Sdt.UI.Screens.Hub
             {string key=section.Item1;DirectoryEntry(directory,++number,section.Item2,()=>{if(key=="achievements")_achievementReturn=_archiveView=="backs"?"backs":"rewards";_archiveView=key;Rebuild();},key==_archiveView);}
             var content=Column(layout,"av12-content",16);Bounds(content.gameObject,0,0,1,1);
             switch(_archiveView)
-            {case "cards":BuildOwnedGallery(content);break;case "rewards":BuildRewards(content);break;case "classes":BuildMilestones(content);break;case "backs":BuildBacks(content);break;case "stories":BuildStories(content);break;default:BuildAch(content);break;}
+            {case "cards":BuildOwnedGallery(content);break;case "rewards":BuildRewards(content,collection,achievements);break;case "classes":BuildMilestones(content,collection);break;case "backs":BuildBacks(content);break;case "stories":BuildStories(content);break;default:BuildAch(content);break;}
         }
         void BuildOwnedGallery(Transform parent)
         {

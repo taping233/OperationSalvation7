@@ -3,7 +3,7 @@
 //   DeckSelectionPanel —— BOSS 编组牌库（selectDeckCard/confirmDeck/cancelDeck）
 //   DiscoverPanel      —— 发现三选一（pickDiscover）
 //   GravePanel         —— 墓地查看（openGrave/closeGrave）
-// 文案逐字照抄源码模板串。
+// 发现提示按真实候选来源与支付阶段展示，交互由当前战斗归属守卫。
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +43,7 @@ namespace Sdt.UI.Screens.Battle
             card.transform.SetParent(root.transform, false);
             var rt = card.GetComponent<RectTransform>();
             rt.anchorMin = new Vector2(0.015f, 0.025f); rt.anchorMax = new Vector2(0.985f, 0.975f);
+            rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
             var img = card.AddComponent<Image>(); img.sprite = BtSprites.White();
             img.color = BtColors.HexA("#10232B", 0.98f);
             var ol = card.AddComponent<Outline>(); ol.effectColor = BtColors.BorderDark; ol.effectDistance = new Vector2(2, -2);
@@ -127,7 +128,27 @@ namespace Sdt.UI.Screens.Battle
     {
         int _selected = -1;
         float _readyAt;
-        string _options;
+        string _token;
+        long _selectionId;
+        int _revision;
+        bool _closed;
+        public override void Build()
+        {
+            base.Build();
+            var layout=BodyRoot.GetComponent<VerticalLayoutGroup>();
+            layout.padding=new RectOffset(40,40,20,20);layout.spacing=16;
+        }
+        bool Current(string token,long selectionId,int revision)
+        {
+            var state=GameSnapshotRef.Current;
+            return this!=null&&!_closed&&isActiveAndEnabled&&UiStack.Top==this&&revision==_revision
+                &&state!=null&&!state.Over&&state.BattleToken==token&&state.Discovering?.selectionId==selectionId;
+        }
+        public override void SetSnapshot(BattleSnapshot snapshot)
+        {UIKit.ClearChildren(BodyRoot);UIKit.ClearChildren(BtnsRoot);OnBody();}
+        public override void CloseFromEscape()
+        {if(Current(_token,_selectionId,_revision))BattleView.Commands?.CancelDiscover(_token,_selectionId);}
+        internal override void OnClose(){_closed=true;_revision++;}
         protected override string TitleText()
         {
             var s = GameSnapshotRef.Current;
@@ -141,10 +162,12 @@ namespace Sdt.UI.Screens.Battle
             var s = GameSnapshotRef.Current;
             var cmd = BattleView.Commands;
             if (s == null || s.Discovering == null || cmd == null) return;
-            string options = s.Discovering.n + ":" + string.Join("|", s.Discovering.Options.Select(c => c.id + c.desc));
-            if (_options != options) { _options = options; _selected = -1; _readyAt = Time.unscaledTime + .35f; }
-            UIKit.Label(BodyRoot, "从随机 " + s.Discovering.Options.Count + " 张卡牌中选择 1 张置入手牌",
-                24, Color.white);
+            string token=s.BattleToken;long selectionId=s.Discovering.selectionId;int revision=++_revision;
+            if(_token!=token||_selectionId!=selectionId){_token=token;_selectionId=selectionId;_selected=-1;_readyAt=Time.unscaledTime+.35f;}
+            string kind=s.Discovering.kind;
+            bool preview=s.Discovering.sourceCommit=="preview";
+            string prompt=kind=="deckBottom"?"从牌库底的候选中选择 1 张置入手牌":kind=="swap"?"选择 1 张招式置入手牌；两张齐后交换费用":kind=="play"?"选择 1 张直接施放":kind=="stored"?"选择 1 张锦囊法术直接施放":kind=="effect"?"选择 1 张，按来源卡牌效果结算":"从随机 "+s.Discovering.Options.Count+" 张卡牌中选择 1 张获得";
+            var instruction=UIKit.Label(BodyRoot,prompt,24,Color.white);instruction.name="discoverPrompt";
             var row = UIKit.Row(BodyRoot);
             var hl = row.AddComponent<HorizontalLayoutGroup>();
             hl.spacing = 64; hl.padding = new RectOffset(32, 32, 28, 22); hl.childAlignment = TextAnchor.MiddleCenter;
@@ -153,14 +176,18 @@ namespace Sdt.UI.Screens.Battle
             for (int i = 0; i < s.Discovering.Options.Count; i++)
             {
                 var c = s.Discovering.Options[i];
-                var cardGo = CardFace.Create(c, CardSize.Xl, row.transform);
+                var cardGo = CardFace.Create(c, CardSize.Xl, row.transform,options:new CardFaceOptions{HideCost=false});
                 var idx = i;
                 var btn = cardGo.AddComponent<Button>(); btn.targetGraphic = cardGo.GetComponent<Image>();
+                btn.name="discoverPick-"+i;
                 var outline = cardGo.AddComponent<Outline>(); outline.effectColor = _selected == i ? BtColors.Hex("#E0C98E") : Color.clear; outline.effectDistance = new Vector2(3,-3);
-                btn.onClick.AddListener(() => { if (Time.unscaledTime < _readyAt) return; _selected = idx; SetSnapshot(GameSnapshotRef.Current); });
+                btn.onClick.AddListener(() => { if (!Current(token,selectionId,revision)||Time.unscaledTime < _readyAt) return; _selected = idx; SetSnapshot(GameSnapshotRef.Current); });
             }
-            UIKit.Label(BodyRoot, "发现的卡是战斗内临时卡，战后消散、不进背包。", 12, UiPalette.Dim);
-            BtBtn.Create(BtnsRoot, "确认选择", () => { if (_selected >= 0 && Time.unscaledTime >= _readyAt) { int index = _selected; _selected = -1; cmd.PickDiscover(index); } }, "ok", _selected >= 0);
+            string hint=kind=="deckBottom"?"从本场牌库取回原实体；取消会将未确认的候选按原序放回牌库底。":kind=="swap"?"每次确认即入手；第二轮取消会保留首张原费用，尚未确认的牌不会生成。":kind=="stored"?"确认后消耗所选锦囊卡；取消不会消耗未选卡牌。":kind=="play"?"直接施放视为已注能，不消耗注能材料；已结算效果保留。":kind=="effect"?"确认后按来源效果处理；取消只放弃尚未确认的部分。":"本场生成的卡牌仅供本场使用；取消不会撤销此前已确认的选择。";
+            if(preview)hint="尚未使用来源卡牌；取消使用不消耗源牌、能量、注能材料或手牌代价。确认后按当前条件结算，本回合重新打开保留候选。";
+            var note=UIKit.Label(BodyRoot,hint,17,UiPalette.Dim);note.name="discoverHint";
+            var confirm=BtBtn.Create(BtnsRoot,"确认选择",()=>{if(Current(token,selectionId,revision)&&_selected>=0&&Time.unscaledTime>=_readyAt){int index=_selected;_selected=-1;cmd.PickDiscover(index,token,selectionId);}},"ok",_selected>=0);confirm.name="discoverConfirm";
+            var cancel=BtBtn.Create(BtnsRoot,preview?"取消使用":"结束发现",()=>{if(Current(token,selectionId,revision))cmd.CancelDiscover(token,selectionId);});cancel.name="discoverCancel";
         }
     }
 

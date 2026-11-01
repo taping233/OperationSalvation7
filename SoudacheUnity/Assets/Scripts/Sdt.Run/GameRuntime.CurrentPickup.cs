@@ -44,6 +44,9 @@ namespace Sdt.Run
         {
             reason=null;if(!OwnsCurrentPickup(nodeId)){reason="本次拾取已失效";return false;}
             if(CurrentNodeReceipt.pickupClaimed&&!TryClaimCurrentPickup(nodeId,out reason))return false;
+            // The claim checkpoint already contains the coins, settled receipt and
+            // RNG. Phase is runtime-only; LoadRun enters idle without another write.
+            if(CurrentNodeReceipt.pickupClaimed&&CurrentNodeReceipt.pickupSaved){State.Phase="idle";return true;}
             return TryPersistMutation(()=>State.Phase="idle",out reason);
         }
     }

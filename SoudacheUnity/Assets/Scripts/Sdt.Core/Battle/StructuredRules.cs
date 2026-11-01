@@ -68,7 +68,7 @@ namespace Sdt.Core.Battle
 
         private void InitializeStructuredBattle()
         {
-            ClearTurnOwner();ClearDrawnCasts();
+            ClearTurnOwner();ClearDrawnCasts();ClearDiscoveryPreviews();
             itemJobs.Clear();resolvingItemUid=null; preparedFighters=null; preparedFightersUid=null; deferredTargetAction=null; pendingFuel=null; pendingFuelUid=null; handPayment=null;
             registeredCards.Clear(); equippedCards.Clear(); equipmentUsed.Clear(); persistentRules.Clear(); ruleJobs.Clear();
             enemyMarks.Clear(); ruleAllies.Clear(); ruleContinuations.Clear(); growingCards.Clear(); castOnDraw.Clear(); timedRuleStatuses.Clear();
@@ -287,7 +287,7 @@ namespace Sdt.Core.Battle
             bool doubled = card.type=="法术" && doubleNextSpell;
             if(doubled) doubleNextSpell=false;
             var operations=triggers.Operations("onPlay").Where(op=>op.Text("pick")!="new").ToArray(); int continuationBase=ruleContinuations.Count;
-            RunRuleOps(card, operations, target);
+            RunRuleOps(card, operations, target,prepared:castContext?.card==card?castContext.preparedDiscovery:null);
             var replayRule = triggers.Get("replay");
             if (doubled || replayRule?.Text("on") == "lastHand")
             {
@@ -374,7 +374,7 @@ namespace Sdt.Core.Battle
             if (target == null || target.dead) target = alive.FirstOrDefault();
             return target == null ? new List<BattleFoe>() : new List<BattleFoe> { target };
         }
-        private void RunRuleOps(CardDef card, RuleValue[] operations, BattleFoe target, int index = 0)
+        private void RunRuleOps(CardDef card, RuleValue[] operations, BattleFoe target, int index = 0,PreparedDiscovery prepared=null)
         {
             if (++ruleDepth > 48) { ruleDepth--; throw new InvalidOperationException("规则递归超过安全上限"); }
             try
@@ -390,11 +390,11 @@ namespace Sdt.Core.Battle
                         ruleJobs.Add(new RuleJob { card = card, operations = new[] { deferred }, turn = turn + 1, target = target }); continue;
                     }
                     int continuationBase = ruleContinuations.Count;
-                    ApplyRuleOperation(card, operation, target);
+                    ApplyRuleOperation(card, operation, target,prepared);
                     if (RuleInputPending)
                     {
                 int next = i + 1; var context=castContext;
-                if (next < operations.Length) ruleContinuations.Insert(continuationBase, () => { var previous=castContext;castContext=context;RunRuleOps(card, operations, target, next);castContext=previous; });
+                if (next < operations.Length) ruleContinuations.Insert(continuationBase, () => { var previous=castContext;castContext=context;RunRuleOps(card, operations, target, next,prepared);castContext=previous; });
                         break;
                     }
                 }
@@ -402,7 +402,7 @@ namespace Sdt.Core.Battle
             finally { ruleDepth--; }
         }
 
-        private void ApplyRuleOperation(CardDef card, RuleValue op, BattleFoe target)
+        private void ApplyRuleOperation(CardDef card, RuleValue op, BattleFoe target,PreparedDiscovery prepared=null)
         {
             int n;
             switch (op.Text("op"))
@@ -455,8 +455,8 @@ namespace Sdt.Core.Battle
                 case "removeRule": persistentRules.Remove(op.Text("rule")); break;
                 case "expireCard": ConsumeRuleHand(op.Text("uid")); break;
                 case "registerInfusionBonus": infusionBonuses.Add(new RuleInfusionBonus { every = op.Number("every", 2), key = op.Text("key", "spellUp"), stacks = op.Number("stacks", 1) }); break;
-                case "acquire": AcquireRuleCards(card, op, target); break;
-                case "discover": StartStructuredDiscover(card, op, target); break;
+                case "acquire": AcquireRuleCards(card, op, target,prepared); break;
+                case "discover": StartStructuredDiscover(card, op, target,prepared:prepared); break;
                 case "choice": StartRuleChoice(card, op, target); break;
                 case "handSelect": StartRuleHandSelect(card, op, target); break;
                 case "schedule": ruleJobs.Add(new RuleJob { card = card, operations = op.Operations("ops").ToArray(), target = target, turn = turn + op.Number("delay", 1) }); break;
@@ -517,7 +517,7 @@ namespace Sdt.Core.Battle
                 case "swapDiscoverCosts": StartSwapDiscoverCosts(card, target); break;
                 case "restoreConsumed": RestoreRuleConsumed(op.Number("amount", 1)); break;
                 case "castStored":
-                    CastStoredRuleCard(target); break;
+                    CastStoredRuleCard(target,prepared); break;
                 default: throw new InvalidOperationException("尚未移植的结构化操作：" + op.Text("op") + " / " + card.id);
             }
         }
@@ -636,13 +636,13 @@ namespace Sdt.Core.Battle
             if(pool?.Text("kind")=="牌库底")return drawPile.Take(3).Select(uid=>FindCard(uid)?.card).Where(c=>c!=null).ToList();
             return CurrentBattlePools.Resolve(CardLibrary.All(),pool,G.MyClass,filter);
         }
-        private void AcquireRuleCards(CardDef card, RuleValue op, BattleFoe target)
+        private void AcquireRuleCards(CardDef card, RuleValue op, BattleFoe target,PreparedDiscovery prepared=null)
         {
-            int count = op.Number("n", 1); string dest = op.Text("dest", "hand");
+            int count = op.Number("n", 1); string dest = op.Text("dest", "discover");
             if(op.Get("pool")?.Text("kind")=="牌库底"||card.id=="cmtn28jv33wx"&&count==3&&op.Get("pool")?.Text("kind")=="随机"&&dest=="hand"&&!op.Has("act")&&!op.Has("filter")){
                 StartDeckBottomDiscovery(card,op);return;
             }
-            if (dest == "discover") { StartStructuredDiscover(card, op, target); return; }
+            if (dest == "discover") { StartStructuredDiscover(card, op, target,prepared:prepared); return; }
             var pool = CurrentBattlePools.Resolve(CardLibrary.All(),op.Get("pool"),G.MyClass,op.Get("filter"),namedAcquisition:true);
             for (int i = 0; i < count; i++)
             {
@@ -658,13 +658,11 @@ namespace Sdt.Core.Battle
             }
             if(dest=="deck")drawPile=DeckOps.ShuffleCards(drawPile,rng);
         }
-        private void StartStructuredDiscover(CardDef card, RuleValue op, BattleFoe target, Action<CardDef> onSelect = null)
+        private List<CardDef> DiscoverOptions(IReadOnlyList<CardDef> pool,int optionCap)
         {
-            var pool = RulePool(op.Get("pool"),op.Get("filter"));
             var options = new List<CardDef>();
             var taken = new HashSet<string>(); var names = new HashSet<string>();
             // Source discover-flow draws from the full pool and retries collisions (ID or name).
-            int optionCap = 3 + Math.Max(0, discoverExtra);
             for (int i = 0; i < optionCap && options.Count < optionCap && pool.Count > 0; i++)
             {
                 CardDef candidate = pool[(int)(rng.Random("battle", "generation") * pool.Count)];
@@ -674,17 +672,23 @@ namespace Sdt.Core.Battle
                 if (!taken.Contains(candidate.id) && !names.Contains(candidate.name))
                 { taken.Add(candidate.id); names.Add(candidate.name); options.Add(candidate); }
             }
+            return options;
+        }
+        private void StartStructuredDiscover(CardDef card, RuleValue op, BattleFoe target, Action<CardDef> onSelect = null,PreparedDiscovery prepared=null)
+        {
+            bool confirmed=prepared?.Claim()==true;
+            var options=confirmed?prepared.options:DiscoverOptions(RulePool(op.Get("pool"),op.Get("filter")),3+Math.Max(0,discoverExtra));
             if (options.Count == 0) return;
-            discovering = new DiscoveringState { options = options, n = 1 };
-            structuredDiscoverAction = chosen =>
+            Action<CardDef> select = chosen =>
             {
+                int continuationBase=ruleContinuations.Count;
                 lastAcquired = chosen;
                 if (onSelect != null) { onSelect(chosen); return; }
                 var acquired = chosen.Clone(); if (op.Text("act") == "zeroCost") acquired.cost = 0;
                 if(op.Text("act")=="noInfuse")acquired.noInfuse=true;
                 if (op.Text("act") == "play"||op.Text("act")=="playKeep"){
                     string castUid=AddTempCard(acquired);
-                    if(acquired.type=="道具")UseItem(castUid,target==null?-1:FoeIdx(target));
+                    if(acquired.type=="道具")UseItemCore(castUid,target==null?-1:FoeIdx(target),null,directRelease:true);
                     else CastRuleHandCard(castUid, target);
                     if(op.Text("act")=="playKeep")foreach(var other in options.Where(c=>c.id!=chosen.id))AddTempCard(other);
                 }
@@ -692,14 +696,17 @@ namespace Sdt.Core.Battle
                 {
                     string uid = AddTempCard(acquired);
                     if (op.Text("act") == "dup") AddTempCard(acquired);
-                    if (op.Has("costDecayPerTurn")) costDecayCards[uid] = op.Number("costDecayPerTurn");
+                    if (op.Has("costDecayPerTurn")||op.Text("act")=="decay") costDecayCards[uid] = op.Number("costDecayPerTurn",1);
                 }
                 if (op.Number("n", op.Number("count", 1)) > 1)
                 {
                     var next = RuleValue.Obj(); foreach (var entry in op.Values) next.Values[entry.Key] = entry.Value;
-                    next.Values["n"] = op.Number("n", op.Number("count", 1)) - 1; StartStructuredDiscover(card, next, target);
+                    next.Values["n"] = op.Number("n", op.Number("count", 1)) - 1;
+                    if(RuleInputPending)DeferRuleBatch(continuationBase,()=>StartStructuredDiscover(card,next,target));else StartStructuredDiscover(card,next,target);
                 }
             };
+            if(confirmed)select(options[prepared.index]);
+            else {BeginDiscovery(options,n:op.Number("n",op.Number("count",1)),kind:onSelect!=null?"effect":op.Text("act")=="play"||op.Text("act")=="playKeep"?"play":"hand");structuredDiscoverAction=select;}
         }
         private void StartRuleChoice(CardDef card, RuleValue op, BattleFoe target)
         {
@@ -982,9 +989,28 @@ namespace Sdt.Core.Battle
         }
         private void StartSwapDiscoverCosts(CardDef card, BattleFoe target)
         {
-            StartStructuredDiscover(card, RuleValue.Obj("pool", RuleValue.Obj("kind", "随机")), target, first =>
-                StartStructuredDiscover(card, RuleValue.Obj("pool", RuleValue.Obj("kind", "随机")), target, second =>
-                { var a = first.Clone(); var b = second.Clone(); a.cost = second.cost; b.cost = first.cost; a.runtimeCost = b.runtimeCost = null; AddTempCard(a); AddTempCard(b); }));
+            var catalog=CardLibrary.All();
+            if(catalog.Count(candidate=>(candidate.type=="武术"||candidate.type=="法术")&&CardLibrary.IsRandomObtainable(candidate))<2)
+            {G.Log("[[icon:cross]] <b>迷之匣</b>：卡牌库中没有足够的随机招式可供发现","warn");return;}
+            // Source preflight counts random-obtainable moves; its explicit predicate then admits
+            // all non-class, non-derived moves. Each round deduplicates ID/name independently.
+            var pool=CurrentBattlePools.Resolve(catalog,RuleValue.Obj("kind","招式"),G.MyClass);
+            OpenSwapDiscovery(pool);
+        }
+        private void OpenSwapDiscovery(List<CardDef> pool,string firstUid=null,CardDef first=null)
+        {
+            var options=DiscoverOptions(pool,3);if(options.Count==0)return;
+            BeginDiscovery(options,kind:"swap");
+            structuredDiscoverAction=chosen=>
+            {
+                lastAcquired=chosen;
+                if(firstUid==null)
+                {
+                    int continuationBase=ruleContinuations.Count;string uid=AddTempCard(chosen.Clone());
+                    if(RuleInputPending)DeferRuleBatch(continuationBase,()=>OpenSwapDiscovery(pool,uid,chosen));else OpenSwapDiscovery(pool,uid,chosen);
+                }
+                else{var a=first.Clone();var b=chosen.Clone();a.cost=chosen.cost;b.cost=first.cost;a.runtimeCost=b.runtimeCost=null;cardOverrides[firstUid]=a;AddTempCard(b);}
+            };
         }
         private void TransformRuleCards(RuleValue op)
         {
@@ -1008,17 +1034,19 @@ namespace Sdt.Core.Battle
         {
             foreach (var uid in consumed.Take(n).ToArray()) { consumed.Remove(uid); grave.Remove(uid); if (FindCard(uid) != null && !hand.Contains(uid)) hand.Add(uid); }
         }
-        private void CastStoredRuleCard(BattleFoe target)
+        private OwnedCard[] StoredRuleCards()=>G.OwnedCards.Where(entry=>entry.pouchOf=="tt7-stratagem"&&entry.card?.type=="法术").ToArray();
+        private void CastStoredRuleCard(BattleFoe target,PreparedDiscovery prepared=null)
         {
-            var entries=G.OwnedCards.Where(entry=>entry.pouchOf=="tt7-stratagem"&&entry.card.type=="法术").ToArray();
+            var entries=StoredRuleCards();
             if(entries.Length==0){G.Log("锦囊是空的——背包中存入法术后才能生效","dim");return;}
-            discovering=new DiscoveringState{options=entries.Select(entry=>entry.card).ToList(),n=1};
-            structuredDiscoverAction=chosen=>
+            Action<OwnedCard,CardDef> cast=(source,chosen)=>
             {
-                var source=entries.FirstOrDefault(entry=>ReferenceEquals(entry.card,chosen));
                 if(source==null||!(G is BattleContainerHost host)||!host.ConsumeStoredCard(source.uid)){G.Log("锦囊法术未能消费，请重试","warn");return;}
                 consumed.Add(source.uid);CastRuleCard(chosen,target);
             };
+            if(prepared?.Claim(true)==true){cast(entries.FirstOrDefault(entry=>entry.uid==prepared.storedUids[prepared.index]),prepared.options[prepared.index]);return;}
+            var state=BeginDiscovery(entries.Select(entry=>entry.card).ToList(),kind:"stored");
+            structuredDiscoverAction=chosen=>cast(entries[state.selectedIndex],chosen);
         }
         private void ApplyRuleBattleSetup()
         {

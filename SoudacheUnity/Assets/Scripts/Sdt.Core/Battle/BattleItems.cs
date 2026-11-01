@@ -44,19 +44,26 @@ namespace Sdt.Core.Battle
         IReadOnlyList<BattleItemSnapshot> BattleItemsState()=>G==null?Array.Empty<BattleItemSnapshot>():AvailableBattleItems().Select(e=>new BattleItemSnapshot{
             uid=e.uid,card=e.card,reason=BattleItemReason(e.card),usable=BattleItemReason(e.card)==null,targetSide=ItemTargetSide(e.card)}).ToList();
         public CommandResult UseItem(string uid,int targetIndex=-1)
+            =>UseItemCore(uid,targetIndex,null);
+        private CommandResult UseItemCore(string uid,int targetIndex,PreparedDiscovery prepared,bool directRelease=false)
         {
-            if(over||turnEndPending||busy||selectingDeck||RuleInputPending||infusing!=null)return CommandResult.No("请先完成当前战斗操作");
+            if(over||selectingDeck||RuleInputPending||infusing!=null||!directRelease&&(turnEndPending||busy))return CommandResult.No("请先完成当前战斗操作");
             var entry=AvailableBattleItems().FirstOrDefault(e=>e.uid==uid);string reason=BattleItemReason(entry?.card);if(reason!=null)return CommandResult.No(reason);
             var target=targetIndex>=0&&targetIndex<foes.Count&&!foes[targetIndex].dead?foes[targetIndex]:null;
             if(ItemTargetSide(entry.card)=="enemy"&&target==null){
                 if(Alive().Count==1)target=Alive()[0];else{pendingTarget=new PendingTargetSnapshot{uid=uid,card=entry.card};pendingHint="请选择一名敌人使用道具";RequestRender();return CommandResult.No(pendingHint);}
             }
             target??=Alive().FirstOrDefault();pendingTarget=null;pendingHint="";
+            if(prepared==null&&!directRelease&&TryPreviewDiscovery(uid,entry.card,true,ticket=>{
+                if(ItemTargetSide(entry.card)=="enemy"&&(target==null||target.dead||target.hp<=0||!foes.Contains(target)))return CommandResult.No("目标已变化，本次未消耗");
+                return UseItemCore(uid,target==null?-1:FoeIdx(target),ticket);
+            }))return CommandResult.Yes();
             hand.Remove(uid);if(!played.Contains(uid))played.Add(uid);resolvingItemUid=uid;
             try{
                 var card=BattleItemExecutionCard(entry.card);BeginRuleCast(card,target,new List<string>());castContext.uid=uid;
+                castContext.preparedDiscovery=prepared;
                 var bag=card.rules?.Get("bag");
-                if(bag?.Has("use")==true)ResolveBattleBagOperations(card,bag.Operations("use"),target);
+                if(bag?.Has("use")==true)ResolveBattleBagOperations(card,bag.Operations("use").ToArray(),target,prepared:prepared);
                 else ResolveCard(card,target);
                 ResolveRuleOutcome();ProcessDiscoverQueue();RequestRender();return CommandResult.Yes();
             }finally{resolvingItemUid=null;}
@@ -74,10 +81,12 @@ namespace Sdt.Core.Battle
             }
             CheckRuleCombinations();
         }
-        void ResolveBattleBagOperations(CardDef card,IEnumerable<RuleValue> operations,BattleFoe target)
+        void ResolveBattleBagOperations(CardDef card,IReadOnlyList<RuleValue> operations,BattleFoe target,int start=0,PreparedDiscovery prepared=null)
         {
-            foreach(var op in operations){
+            for(int index=start;index<operations.Count;index++){
+                var op=operations[index];int continuationBase=ruleContinuations.Count;
                 int amount=op.Has("amount")?op.Number("amount"):op.Text("amountField")=="heal"?card.heal??0:op.Text("amountField")=="draw"?card.draw??0:op.Number("n",1);
+                if((op.Text("op")=="acquire"||op.Text("op")=="discover")&&BagDiscoveryCount(op)<=0)continue;
                 if(op.Has("schedule")){
                     var copy=RuleValue.Obj();foreach(var pair in op.Values)if(pair.Key!="schedule")copy.Values[pair.Key]=pair.Value;
                     itemJobs.Add(new BattleItemJob{card=card,operation=copy,target=target,left=op.Number("duration",1),turn=turn+1});continue;
@@ -100,13 +109,20 @@ namespace Sdt.Core.Battle
                             var available=pool.Text("kind")=="classAbility"?CardLibrary.All().Where(c=>c.type=="能力卡"&&c.cls==G.MyClass).ToList():RulePool(pool);
                             if(available.Count>0){var chosen=available[(int)(rng.Random("battle","generation")*available.Count)];AddTempCard(chosen);}break;
                         }
-                        StartStructuredDiscover(card,op,target);break;
-                    case "discover":StartStructuredDiscover(card,op,target);break;
+                        StartStructuredDiscover(card,BagDiscoveryOperation(op),target,prepared:prepared);break;
+                    case "discover":StartStructuredDiscover(card,BagDiscoveryOperation(op),target,prepared:prepared);break;
                     default:ApplyRuleOperation(card,op,target);break;
                 }
                 if(over)return;
+                if(RuleInputPending){
+                    int next=index+1;var context=castContext;
+                    if(next<operations.Count)ruleContinuations.Insert(continuationBase,()=>{var previous=castContext;castContext=context;try{ResolveBattleBagOperations(card,operations,target,next,prepared);}finally{castContext=previous;}});
+                    return;
+                }
             }
         }
+        static RuleValue BagDiscoveryOperation(RuleValue operation)
+        {var copy=RuleValue.Obj();foreach(var pair in operation.Values)copy.Values[pair.Key]=pair.Value;copy.Values["n"]=BagDiscoveryCount(operation);return copy;}
         void AdvanceBattleItems()
         {
             foreach(var job in itemJobs.Where(job=>job.turn<=turn).ToArray()){

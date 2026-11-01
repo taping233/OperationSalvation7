@@ -27,7 +27,7 @@ namespace Sdt.Run
             if(matches.Count!=1||matches[0].card?.type!="道具")throw new InvalidOperationException("该道具已不在普通背包");
             return matches[0];
         }
-        static List<CardDef> Pool(GameRuntime game,string kind)=>CardDatabase.All.Where(c=>kind=="legendary"
+        static List<CardDef> Pool(GameRuntime game,string kind)=>CardLibrary.All().Where(c=>kind=="legendary"
             ? c.rarity=="传说"&&CardLibrary.IsRandomObtainable(c):c.cls==game.State.myClass&&c.type=="能力卡").ToList();
         static List<RuleValue> MapOperations(CardDef card)
         {
@@ -41,30 +41,57 @@ namespace Sdt.Run
             var source=game.State.ownedCards.FirstOrDefault(o=>o.uid==uid);
             return source!=null&&MapOperations(source.card).Any(o=>o.Text("op")=="discover");
         }
+        static string DiscoveryKind(CardDef card)
+        {
+            var op=MapOperations(card).FirstOrDefault(o=>o.Text("op")=="discover");
+            if(op==null)throw new InvalidOperationException("该道具没有发现效果");
+            return op.Get("pool").Text("kind");
+        }
+        static void ValidateDiscovery(BagDiscoveryReceipt receipt,string kind,Dictionary<string,CardDef> pool)
+        {
+            if(receipt==null||receipt.version!=1||receipt.poolKind!=kind||receipt.cardIds==null||receipt.cardIds.Count==0||receipt.cardIds.Count>3
+                ||receipt.cardIds.Distinct().Count()!=receipt.cardIds.Count||receipt.cardIds.Any(id=>id==null||!pool.ContainsKey(id)))
+                throw new InvalidOperationException("发现候选无效，原卡牌与候选已保留");
+        }
         public static bool TryPrepareDiscovery(GameRuntime game,string uid,out List<CardDef> candidates,out string reason)
         {
-            candidates=null;
-            bool ok=game.TryPersistMutation(()=>{
-                var source=Source(game,uid);var op=MapOperations(source.card).FirstOrDefault(o=>o.Text("op")=="discover");
-                if(op==null)throw new InvalidOperationException("该道具没有发现效果");
-                string kind=op.Get("pool").Text("kind");var pool=Pool(game,kind).GroupBy(c=>c.id).Select(g=>g.First()).ToList();
+            candidates=null;reason=null;
+            try
+            {
+                var run=game.State;var source=Source(game,uid);string kind=DiscoveryKind(source.card);
+                var pool=Pool(game,kind).Where(c=>!string.IsNullOrEmpty(c.id)).GroupBy(c=>c.id).Select(g=>g.First()).ToList();
+                var byId=pool.ToDictionary(c=>c.id);
                 if(pool.Count==0)throw new InvalidOperationException("当前没有可发现的卡牌");
-                if(source.bagDiscover==null){
+                // Reopening a saved choice is read-only, while retaining the same
+                // profile/slot read-error gate as the original write transaction.
+                int slot=game.ActiveSlot??game.State.slot;
+                if(game.Saves.HasSlotReadError(slot))throw new System.IO.IOException(game.Saves.ReadErrorForSlot(slot));
+                if(source.bagDiscover!=null)
+                {
+                    ValidateDiscovery(source.bagDiscover,kind,byId);
+                    candidates=source.bagDiscover.cardIds.Select(id=>byId[id]).ToList();return true;
+                }
+                bool ok=game.TryPersistMutation(()=>{
                     var receipt=new BagDiscoveryReceipt{poolKind=kind};
                     while(pool.Count>0&&receipt.cardIds.Count<3){int i=(int)(game.Rng.Random("loot","reward")*pool.Count);receipt.cardIds.Add(pool[i].id);pool.RemoveAt(i);}
                     source.bagDiscover=receipt;
+                },out reason);
+                if(ok)
+                {
+                    if(!ReferenceEquals(game.State,run)||!ReferenceEquals(Source(game,uid),source))throw new InvalidOperationException("本次发现来源已失效");
+                    candidates=source.bagDiscover.cardIds.Select(id=>byId[id]).ToList();
                 }
-                var saved=source.bagDiscover;
-                if(saved.version!=1||saved.poolKind!=kind||saved.cardIds.Count==0||saved.cardIds.Count>3||saved.cardIds.Distinct().Count()!=saved.cardIds.Count||saved.cardIds.Any(id=>!Pool(game,kind).Any(c=>c.id==id)))throw new InvalidOperationException("发现候选无效，原卡牌与候选已保留");
-            },out reason);
-            if(ok)candidates=game.State.ownedCards.First(o=>o.uid==uid).bagDiscover.cardIds.Select(CardLibrary.FindById).ToList();
-            return ok;
+                return ok;
+            }
+            catch(Exception e){reason=e.Message;game.Bus.Emit(new ToastRequested{Text=reason,Tone="warn"});return false;}
         }
         public static bool TryChooseDiscovery(GameRuntime game,string uid,string cardId,out string reason)=>game.TryPersistMutation(()=>{
-            var source=Source(game,uid);var receipt=source.bagDiscover;
-            if(receipt==null||!receipt.cardIds.Contains(cardId))throw new InvalidOperationException("请选择已保存的发现候选");
-            var card=Pool(game,receipt.poolKind).FirstOrDefault(c=>c.id==cardId);
-            if(card==null||!CardContainerCommands.CanReceive(game,card,game.State.ownedCards.Where(o=>o!=source)))throw new InvalidOperationException("背包空间不足，请整理后重试；通行证与候选已保留");
+            var source=Source(game,uid);var receipt=source.bagDiscover;string kind=DiscoveryKind(source.card);
+            var pool=Pool(game,kind).Where(c=>!string.IsNullOrEmpty(c.id)).GroupBy(c=>c.id).ToDictionary(g=>g.Key,g=>g.First());
+            ValidateDiscovery(receipt,kind,pool);
+            if(!receipt.cardIds.Contains(cardId))throw new InvalidOperationException("请选择已保存的发现候选");
+            var card=pool[cardId];
+            if(!CardContainerCommands.CanReceive(game,card,game.State.ownedCards.Where(o=>o!=source)))throw new InvalidOperationException("背包空间不足，请整理后重试；通行证与候选已保留");
             game.State.ownedCards.Remove(source);game.GrantCard(card);
         },out reason);
 

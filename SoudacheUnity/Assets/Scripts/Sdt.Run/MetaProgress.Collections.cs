@@ -17,8 +17,11 @@ namespace Sdt.Run
         public bool IsCollectible(CardDef card) => card != null && !string.IsNullOrEmpty(card.cls)
             && CharacterTable.For(card.cls) != null && (card.rarity == "职业" || card.type == "能力卡");
         public List<CardDef> CollectionPool() => CardLibrary.All().Where(IsCollectible).GroupBy(c => c.id).Select(g => g.First()).ToList();
-        public int CollectionProgress => CollectionPool().Count(card => B.collection.ContainsKey(card.id));
-        public int MilestoneNeed(CollectionMilestone milestone) => milestone.all ? CollectionPool().Count : milestone.need;
+        public (int total, int progress) CollectionSummary()
+        {
+            var pool = CollectionPool();
+            return (pool.Count, pool.Count(card => B.IsCollected(card)));
+        }
         public bool MilestoneClaimed(string id) => B.collClaimed != null && B.collClaimed.TryGetValue(id, out var claimed) && claimed;
         public string CollectionRewardText(CollectionMilestone milestone)
         {
@@ -35,7 +38,9 @@ namespace Sdt.Run
             return _rt.TryPersistMutation(() =>
             {
                 var milestone = HubCatalog.Current.milestones.SingleOrDefault(item => item.id == id);
-                if (milestone == null || MilestoneClaimed(id) || CollectionProgress < MilestoneNeed(milestone)) throw new InvalidOperationException("当前尚不能领取这项奖励");
+                if (milestone == null || MilestoneClaimed(id)) throw new InvalidOperationException("当前尚不能领取这项奖励");
+                var collection = CollectionSummary();
+                if (collection.progress < (milestone.all ? collection.total : milestone.need)) throw new InvalidOperationException("当前尚不能领取这项奖励");
                 var reward = milestone.reward;
                 var pool = CardLibrary.All().Where(card => card.rarity == "传说" && CardLibrary.IsRandomObtainable(card)).GroupBy(c => c.id).Select(g => g.First()).ToList();
                 var egg = CardLibrary.FindById("pet-egg");

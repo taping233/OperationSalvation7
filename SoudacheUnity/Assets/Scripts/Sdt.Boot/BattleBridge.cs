@@ -224,7 +224,8 @@ namespace Sdt.Boot
         public void OpenGrave() => _s.OpenGrave();
         public void CloseGrave() => _s.CloseGrave();
         public void CancelPendingTarget() => _s.CancelPendingTarget();
-        public void PickDiscover(int index) => _s.PickDiscover(index);
+        public CommandResult PickDiscover(int index,string battleToken,long selectionId) => ReferenceEquals(BattleViewApi.Session,_s)?_s.PickDiscover(index,battleToken,selectionId):CommandResult.No("发现会话已失效");
+        public CommandResult CancelDiscover(string battleToken,long selectionId) => ReferenceEquals(BattleViewApi.Session,_s)?_s.CancelDiscover(battleToken,selectionId):CommandResult.No("发现会话已失效");
         public void SetPendingHint(string text) => _s.SetPendingHint(text);
         public void LockPendingTarget(string uid)
         {

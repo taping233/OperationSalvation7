@@ -111,6 +111,8 @@ namespace Sdt.Run
             foreach(var token in new[]{values["run"],(values["settlement"] as JObject)?["run"]})
             {
                 if(!Present(token))continue;var run=SaveJson.Read<RunSaveData>(token);
+                foreach(var owned in run.ownedCards)
+                    if(owned?.bagDiscover!=null)RequireMany(owned.bagDiscover.cardIds);
                 if(run.entrySupply!=null)RequireMany(run.entrySupply.cardIds.Where((_,index)=>!run.entrySupply.taken.Contains(index)));
                 foreach(var receipt in run.nodeRewards.Values)
                 {

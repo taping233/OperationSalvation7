@@ -38,7 +38,8 @@ namespace Sdt.UI.Screens.Battle
         void OpenGrave();                  // openGrave
         void CloseGrave();                 // closeGrave
         void CancelPendingTarget();        // cancelPendingTarget
-        void PickDiscover(int index);      // pickDiscover
+        CommandResult PickDiscover(int index,string battleToken,long selectionId);
+        CommandResult CancelDiscover(string battleToken,long selectionId);
         void SetPendingHint(string text);  // setPendingHint
         void LockPendingTarget(string uid);// lockPendingTarget
         void SelectDeckCard(string uid);   // selectDeckCard

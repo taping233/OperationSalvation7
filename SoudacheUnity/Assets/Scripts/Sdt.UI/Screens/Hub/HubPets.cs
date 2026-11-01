@@ -22,7 +22,7 @@ namespace Sdt.UI.Screens.Hub
                 CardArt(art,Sdt.Core.CardLibrary.FindById(PetCatalog.Current.eggId),340,560);
                 var info=Column(scene,"companion-hatch",24,new RectOffset(36,36,36,36));Surface(info);Label(info,"伙伴孵化",32,true);Command(info,"返回伙伴",()=>{_hatch=false;Rebuild();});
                 Label(info,"随机获得一位尚未拥有的伙伴。",22,false,Muted);Fact(info,"伙伴蛋",eggs+" / 1");Fact(info,"储备币",B.coins+" / "+PetCatalog.Current.hatchCost);
-                var hatch=Command(info,"孵化伙伴",()=>{if(!G.Base.TryHatchPet(out var pet,out var reason)){Log(reason,"warn");return;}_pet=pet.id;_hatch=false;Log("孵化成功："+pet.name,"ok");Rebuild();},true);
+                var hatch=Command(info,"孵化伙伴",()=>{if(!G.Base.TryHatchPet(out var pet,out var reason)){Log(reason,"warn");return;}G.Audio.PlaySfx("eggHatch");_pet=pet.id;_hatch=false;Log("孵化成功："+pet.name,"ok");Rebuild();},true);
                 hatch.interactable=eggs>0&&B.coins>=PetCatalog.Current.hatchCost&&B.pets.Count<BaseData.PetsCatalog.Count;
                 if(!hatch.interactable)Label(info,B.pets.Count>=BaseData.PetsCatalog.Count?"所有伙伴已相遇":eggs==0?"缺少 1 枚伙伴蛋":"还需 "+(PetCatalog.Current.hatchCost-B.coins)+" 储备币",20,false,Muted);return;
             }
@@ -46,7 +46,7 @@ namespace Sdt.UI.Screens.Hub
             if(owned)
             {
                 Fact(details,"等级","Lv."+level+" → "+(maximum?"MAX":"Lv."+(level+1)));Fact(details,"安全格",safe+" → "+(maximum?safe:nextSafe));Fact(details,"口粮",B.rations+" / "+(maximum?"—":cost.ToString()));
-                var up=Command(details,maximum?"已达培养上限":"培养伙伴",()=>{if(!G.Base.TryUpgradePet(selected.id,out var why)){Log(why,"warn");return;}G.Meta.CheckUnlocks();Rebuild();},true);up.interactable=B.CanUpgradePet(selected.id);
+                var up=Command(details,maximum?"已达培养上限":"培养伙伴",()=>{if(!G.Base.TryUpgradePet(selected.id,out var why)){Log(why,"warn");return;}G.Audio.PlaySfx("levelup");G.Meta.CheckUnlocks();Rebuild();},true);up.interactable=B.CanUpgradePet(selected.id);
                 if(!maximum)Label(details,B.rations<cost?"还需 "+(cost-B.rations)+" 口粮":"安全格加成在携带时生效",20,false,Muted);
                 if(!maximum&&B.rations<cost)Command(details,"交易所补充口粮 →",()=>{_tradeMode="buy";_tradeKey="rations";Navigate("shop");});
             }

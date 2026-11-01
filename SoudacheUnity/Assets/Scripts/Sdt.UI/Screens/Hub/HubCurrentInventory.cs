@@ -63,7 +63,7 @@ namespace Sdt.UI.Screens.Hub
                     if(material!=null)
                     {Command(info,"使用 1 张 · +"+material.amount+material.label,()=>UseMaterial(false),true);if(stack.count>1)Command(info,"全部使用 · +"+material.amount*stack.count+material.label,()=>UseMaterial(true));}
                     else if(_card.id==PetCatalog.Current.eggId)
-                    {var hatch=Command(info,"孵化伙伴 · "+PetCatalog.Current.hatchCost+" 储备币",()=>{if(!BeginOperation())return;if(!R.Base.TryHatchPet(out var pet,out var why)){Notify(why);return;}Done("获得伙伴「"+pet.name+"」");},true);hatch.interactable=_base.coins>=PetCatalog.Current.hatchCost&&_base.pets.Count<BaseData.PetsCatalog.Count;}
+                    {var hatch=Command(info,"孵化伙伴 · "+PetCatalog.Current.hatchCost+" 储备币",()=>{if(!BeginOperation())return;if(!R.Base.TryHatchPet(out var pet,out var why)){Notify(why);return;}R.Audio.PlaySfx("eggHatch");Done("获得伙伴「"+pet.name+"」",false);},true);hatch.interactable=_base.coins>=PetCatalog.Current.hatchCost&&_base.pets.Count<BaseData.PetsCatalog.Count;}
                     else if(_card.id=="tt-econpack")Command(info,"拆开 1 包 · 获得 5 张随机卡牌",()=>{if(!BeginOperation())return;if(!R.Base.TryOpenSupplyPack(out var cards,out var why)){Notify(why);return;}Done("拆包完成："+string.Join("、",cards.Select(c=>c.name)));},true);
                     if(material!=null||_card.id==PetCatalog.Current.eggId||_card.id=="tt-econpack"){Command(info,"返回仓库",Close);return;}
                     if(_converting)

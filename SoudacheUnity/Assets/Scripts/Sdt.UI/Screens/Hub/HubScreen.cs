@@ -64,6 +64,10 @@ namespace Sdt.UI.Screens.Hub
         public override void Build()
         {
             _renderVersion=++_renderSequence;_viewBase=G.Base;_viewSlot=G.ActiveSlot;
+            bool unclaimed=HubCatalog.Current.milestones.Any(m=>!G.Meta.MilestoneClaimed(m.id));
+            var collection=unclaimed||_tab=="ach"&&_archiveView=="classes"?G.Meta.CollectionSummary():(total:0,progress:0);
+            var achievements=G.Meta.PendingAch();
+            int pending=achievements.Count+HubCatalog.Current.milestones.Count(m=>!G.Meta.MilestoneClaimed(m.id)&&collection.progress>=(m.all?collection.total:m.need));
             var root = UIKit.Panel("hubMain base-frame-v7 " + (_tab == "deploy" ? "base-home" : "base-subpage"), transform);
             var scene = UIKit.Image(root.transform, Sdt.Res.Res.Scene("base-operations-v5"));
             Fill(scene.rectTransform); scene.type = Image.Type.Simple; scene.preserveAspect = true;
@@ -86,17 +90,17 @@ namespace Sdt.UI.Screens.Hub
             var page = Area(root.transform, "hub-page", Vector2.zero, Vector2.one, new Vector2(_tab == "deploy" ? 0 : 48, 104 + (_tab == "deploy" ? 0 : 24)), new Vector2(_tab == "deploy" ? 0 : -48, -84 - (_tab == "deploy" ? 0 : 24)));
             switch (_tab)
             {
-                case "deploy": BuildDeploy(page); break; case "classes": BuildClasses(page); break; case "stash": BuildStash(page); break;
+                case "deploy": BuildDeploy(page,pending); break; case "classes": BuildClasses(page); break; case "stash": BuildStash(page); break;
                 case "shop": BuildTrade(page); break; case "upgrade": BuildUpgrade(page); break; case "courtyard": CourtyardScreen.BuildCurrentRoom(page); break;
-                default: BuildCollectionRoom(page); break;
+                default: BuildCollectionRoom(page,collection,achievements); break;
             }
-            BuildNavigation(root.transform);
+            BuildNavigation(root.transform,pending);
             RestoreBrowse(root);
             ApplyCurrentMotion(root);
             // The production v7 public shell is stationary; no legacy PageIn animation.
         }
         static string RoomTitle(string id) { switch(id) { case "classes": return "人物"; case "stash": return "后勤"; case "shop": return "交易所"; case "ach": return "收藏室"; case "upgrade": return "建设"; case "courtyard": return "庭院"; default: return "基地"; } }
-        void BuildNavigation(Transform parent)
+        void BuildNavigation(Transform parent,int pending)
         {
             var nav = Area(parent, "base-navigation-v7", Vector2.zero, new Vector2(1, 0), Vector2.zero, new Vector2(0, 104)); Surface(nav, .82f, 0);
             var row = nav.gameObject.AddComponent<HorizontalLayoutGroup>(); Configure(row, 5, new RectOffset(40, 40, 0, 0), true);
@@ -110,24 +114,22 @@ namespace Sdt.UI.Screens.Hub
                 var text = UIKit.Label(button.transform, RoomTitle(id), 22, InkColor); text.fontStyle = FontStyle.Bold; text.alignment = TextAnchor.MiddleCenter;
                 Set(text.transform, Vector2.zero, Vector2.one, new Vector2(4, 25), new Vector2(-4, -49));
                 if (selected) { var line = Area(button.transform, "selected-indicator", new Vector2(0,1),Vector2.one,new Vector2(0,-3),Vector2.zero); line.gameObject.AddComponent<Image>().color = Accent; }
-                int pending = PendingRewards;
                 if (id == "ach" && pending > 0) { var badge=UIKit.Label(button.transform,pending.ToString(),20,Accent);Set(badge.transform,Vector2.one,Vector2.one,new Vector2(-50,-36),new Vector2(-20,-8));badge.fontStyle=FontStyle.Bold; }
             }
         }
-        int PendingRewards => G.Meta.PendingAch().Count + HubCatalog.Current.milestones.Count(m => !G.Meta.MilestoneClaimed(m.id) && G.Meta.CollectionProgress >= G.Meta.MilestoneNeed(m));
-        void BuildDeploy(Transform page)
+        void BuildDeploy(Transform page,int pending)
         {
             var B = G.Base;
             int eggCount=B.stash.Where(s=>s.card.id==PetCatalog.Current.eggId).Sum(s=>s.count);
-            int affairCount=(!B.ammoTaught?1:0)+(B.CanUpgradeBag||B.CanUpgradeStash?1:0)+(PendingRewards>0?1:0)+(eggCount>0&&B.coins>=PetCatalog.Current.hatchCost&&B.pets.Count<BaseData.PetsCatalog.Count?1:0);
+            int affairCount=(!B.ammoTaught?1:0)+(B.CanUpgradeBag||B.CanUpgradeStash?1:0)+(pending>0?1:0)+(eggCount>0&&B.coins>=PetCatalog.Current.hatchCost&&B.pets.Count<BaseData.PetsCatalog.Count?1:0);
             bool hasAffairs=affairCount>0;
             var list=HomeCard(page,"base-home-affairs",false,hasAffairs?380:264,40,4,hasAffairs?new RectOffset(14,14,20,14):new RectOffset(16,16,13,13));
             var heading=hasAffairs?Column(list,"affairs-heading",0,new RectOffset(8,8,0,6),false):list;Label(heading,"基地事务",hasAffairs?22:21,true);
             if (!B.ammoTaught) Affair(list,"首次目标：带回资源","撤离后，在后勤使用资源卡。",OpenDeparture);
             if (B.CanUpgradeBag || B.CanUpgradeStash) Affair(list,"可扩建  " + ((B.CanUpgradeBag?1:0)+(B.CanUpgradeStash?1:0)),(B.CanUpgradeStash?"基地仓库 · 当前 " + B.StashCap:"出征背包 · 当前 " + B.BagCap) + " 格",()=>{_facility=B.CanUpgradeStash?"stash":"bag";Navigate("upgrade");});
-            int eggs=B.stash.Where(s=>s.card.id==PetCatalog.Current.eggId).Sum(s=>s.count);
+            int eggs=eggCount;
             if(eggs>0 && B.coins>=PetCatalog.Current.hatchCost && B.pets.Count<BaseData.PetsCatalog.Count) Affair(list,"可孵化  "+eggs,"伙伴蛋 × "+eggs,()=>{_personGroup="pets";Navigate("classes");});
-            if(PendingRewards>0) Affair(list,"待领取  "+PendingRewards,"收藏与成就奖励",()=>{_archiveView="rewards";Navigate("ach");});
+            if(pending>0) Affair(list,"待领取  "+pending,"收藏与成就奖励",()=>{_archiveView="rewards";Navigate("ach");});
             if(!hasAffairs) Label(list,"暂无待处理事务",20,false,Muted);
             var body=HomeCard(page,"base-home-preparation",true,420,Mathf.Clamp(((RectTransform)page).rect.height*.14f,40,120),18,new RectOffset(24,24,24,24));
             var facts=Row(body,"base-home-ready-facts",16,101);facts.GetComponent<HorizontalLayoutGroup>().padding=new RectOffset(0,0,16,16);var person=Column(facts,"person",6); var cards=Column(facts,"cards",6);

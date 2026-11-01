@@ -91,7 +91,7 @@ namespace Sdt.UI.Screens.Hub
             var confirm=Command(details,maxed?"建设完成":"确认扩建    →",()=>
             {
                 bool ok=G.TryPersistMutation(()=>{bool changed=bag?G.Base.UpgradeBag():G.Base.UpgradeStash();if(!changed)throw new InvalidOperationException("材料不足或设施已达上限");},out var reason);
-                if(!ok){Log(reason,"warn");return;}G.Meta.CheckUnlocks();Log("扩建完成：容量 "+(bag?G.Base.BagCap:G.Base.StashCap)+" 格","ok");Rebuild();
+                if(!ok){Log(reason,"warn");return;}G.Audio.PlaySfx("levelup");G.Meta.CheckUnlocks();Log("扩建完成：容量 "+(bag?G.Base.BagCap:G.Base.StashCap)+" 格","ok");Rebuild();
             },true);confirm.interactable=can;
             if(!can)Label(details,maxed?"已达上限":string.Join(" · ",new[]{B.wood<cost?"木材不足，还需 "+(cost-B.wood):"",B.runes.Count<runes?"符文不足，还需 "+(runes-B.runes.Count):""}.Where(v=>v!="")),20,false,Muted);
             if(!maxed&&B.wood<cost)Command(details,"交易所补充木材 →",()=>{_tradeMode="buy";_tradeKey="wood";Navigate("shop");});
@@ -101,7 +101,8 @@ namespace Sdt.UI.Screens.Hub
         {
             if(_personGroup=="pets"){BuildPets(page);return;}
             var character=CharacterTable.For(_person)??CharacterTable.All[0];_person=character.id;
-            var stats=G.Meta.ClassSummary().First(s=>CharacterTable.For(s.cls)?.id==character.id);
+            int level=G.Meta.ClassLv(character.rulesetId);
+            var stats=(lv:level,xp:G.Meta.ClassXP(character.rulesetId),need:MetaProgress.XpForNext(level),maxed:level>=MetaProgress.LevelMax);
             if(string.IsNullOrEmpty(_previewSkin))_previewSkin=G.Base.SelectedSkin(character.id);
             var root=Area(page,"personnel-v12",Vector2.zero,Vector2.one,new Vector2(24,16),new Vector2(-24,-16));
             var art=Area(root,_personSection=="pool"?"pv12-pool-catalog":"pv12-agent-art",Vector2.zero,new Vector2(_personSection=="pool"?1:.44f,1),Vector2.zero,new Vector2(_personSection=="pool"?0:-12,0));

@@ -11,10 +11,11 @@ namespace Sdt.Core.Battle
             var uids=drawPile.Take(count).Where(uid=>FindCard(uid)!=null).ToList();
             if(uids.Count==0)return;
             foreach(string uid in uids)drawPile.Remove(uid);
-            var options=uids.Select(uid=>FindCard(uid).card).ToList();
-            discovering=new DiscoveringState{options=options,n=1};
+            var options=uids.Take(3).Select(uid=>FindCard(uid).card).ToList();
+            lastAcquired=null;
+            var state=BeginDiscovery(options,kind:"deckBottom",cancel:()=>{drawPile.InsertRange(0,uids);lastAcquired=null;});
             structuredDiscoverAction=chosen=>{
-                int index=options.IndexOf(chosen);if(index<0)return;string selected=uids[index];
+                string selected=uids[state.selectedIndex];
                 hand.Add(selected);drawPile.InsertRange(0,uids.Where(uid=>uid!=selected));
                 lastAcquired=chosen;
                 CheckRuleCombinations();

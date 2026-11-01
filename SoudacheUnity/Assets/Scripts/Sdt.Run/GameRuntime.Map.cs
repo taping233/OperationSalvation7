@@ -112,10 +112,12 @@ namespace Sdt.Run
             State.Phase="idle";SaveCurrent();
         }
         public void NotifyBossDefeated(){State.bossDefeated=true;State.settled.Add(CurrentNodeId);CurrentNodeReceipt.completed=true;SaveCurrent();}
+        static bool IsSacrificeCandidate(OwnedCard card) => card!=null&&card.card!=null&&card.safe!=true&&!card.stored&&string.IsNullOrEmpty(card.pouchOf);
+        public IReadOnlyList<OwnedCard> GetSacrificeCandidates() => State.ownedCards.Where(IsSacrificeCandidate).ToList();
         bool Sacrifice(IEnumerable<string> uids,out string reason)
         {
             var ids=uids?.Distinct().ToList();reason=null;if(ids==null||ids.Count!=3){reason="请选择 3 张随身卡牌献祭";return false;}
-            var cards=ids.Select(id=>State.ownedCards.FirstOrDefault(o=>o.uid==id&&o.safe!=true&&!o.stored&&string.IsNullOrEmpty(o.pouchOf))).ToList();if(cards.Any(o=>o==null)){reason="献祭卡牌已变化，请重新选择";return false;}
+            var cards=ids.Select(id=>State.ownedCards.FirstOrDefault(o=>o.uid==id&&IsSacrificeCandidate(o))).ToList();if(cards.Any(o=>o==null)){reason="献祭卡牌已变化，请重新选择";return false;}
             foreach(var card in cards)State.ownedCards.Remove(card);return true;
         }
         public bool TryActivateAltar(IEnumerable<string> sacrificeUids,out string reason)

@@ -31,7 +31,9 @@ namespace Sdt.Run
         AudioSource _bgm, _titleBgm, _activeBgm;
         AudioMixerGroup _sfxGroup;
         int _audioConfigurationChanged;
-        string _musicMode;
+        string _musicMode, _loadedMusicMode;
+        public bool MusicLoadFailed { get; private set; }
+        public event Action MusicStateChanged;
         sealed class CurrentCue
         {
             public AudioClip[] clips;
@@ -181,21 +183,36 @@ namespace Sdt.Run
             mode = string.IsNullOrEmpty(mode) ? null : mode;
             if (mode == _musicMode) { SyncBgm(); return; }
             _musicMode = mode;
-            if (mode != null)
+            if (mode == null)
             {
-                var clip = Res.Res.Music(mode);
-                if (clip == null) { Debug.LogWarning("[BGM] 当前配乐未加载：" + mode); return; }
+                _loadedMusicMode = null; MusicLoadFailed = false;
+                SyncBgm(); MusicStateChanged?.Invoke(); return;
+            }
+            LoadRequestedBgm();
+        }
+        public void RetryBgm()
+        {
+            if (_musicMode != null && MusicLoadFailed) LoadRequestedBgm();
+        }
+        void LoadRequestedBgm()
+        {
+            var clip = Res.Res.Music(_musicMode);
+            MusicLoadFailed = clip == null;
+            if (MusicLoadFailed) Debug.LogWarning("[BGM] 当前配乐未加载：" + _musicMode);
+            else
+            {
                 if (_activeBgm.clip != clip)
                 {
                     _activeBgm = _activeBgm == _bgm ? _titleBgm : _bgm;
                     CancelFade(_activeBgm); _activeBgm.Stop(); _activeBgm.clip = clip;
                 }
+                _loadedMusicMode = _musicMode;
             }
-            SyncBgm();
+            SyncBgm(); MusicStateChanged?.Invoke();
         }
         void SyncBgm()
         {
-            bool on = _musicMode != null && !_muted && !_musicOff;
+            bool on = _musicMode != null && _loadedMusicMode != null && !_muted && !_musicOff;
             SyncTrack(_bgm, on); SyncTrack(_titleBgm, on);
         }
         void SyncTrack(AudioSource track, bool on)
@@ -247,12 +264,12 @@ namespace Sdt.Run
         void StopSfx() { foreach (var voice in _voices) voice.source.Stop(); _lastSfxAt.Clear(); _recentSfx.Clear(); _lastUiStart = double.NegativeInfinity; }
         public bool Muted => _muted;
         public string MusicScene => _musicMode;
-        public string MusicAsset => _activeBgm.clip != null ? _activeBgm.clip.name : null;
+        public string MusicAsset => _loadedMusicMode != null && _activeBgm.clip != null ? _activeBgm.clip.name : null;
         public bool MusicMuted => _musicOff;
         public bool SfxMuted => _sfxOff;
         public float MusicVolume => _musicVol;
         public float SfxVolume => _sfxVol;
-        public void Mute(bool value) { _muted = value; Persist("sdt-muted", value ? "1" : "0"); if (value) StopSfx(); SyncBgm(); }
+        public void Mute(bool value) { _muted = value; Persist("sdt-muted", value ? "1" : "0"); if (value) StopSfx(); SyncBgm(); MusicStateChanged?.Invoke(); }
         public void SetMusicMuted(bool value) { _musicOff = value; Persist("sdt-music-off", value ? "1" : "0"); SyncBgm(); }
         public void SetSfxMuted(bool value) { _sfxOff = value; Persist("sdt-sfx-off", value ? "1" : "0"); if (value) StopSfx(); }
         public void SetMusicVolume(float value) { _musicVol = Mathf.Clamp01(value); Persist("sdt-music-vol", _musicVol.ToString("0.####", CultureInfo.InvariantCulture)); SyncBgm(); }

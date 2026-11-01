@@ -825,7 +825,7 @@ namespace Sdt.Run
         /// <summary>从现行事件卡池抽取未遭遇内容，卡池用尽时显示见闻结束页。</summary>
         NodeResult RunEventDeck()
         {
-            var deck = CardDatabase.All.Where(c => c.type == "事件").ToList();
+            var deck = CardLibrary.All().Where(c => c.type == "事件").ToList();
             var used = new HashSet<string>(State.nodeRewards.Values
                 .Where(record => record.type == "event" || record.type == "event-choice")
                 .Select(record => record.eventCardId).Where(id => !string.IsNullOrEmpty(id)));
