@@ -31,6 +31,9 @@ namespace Sdt.Editor
         static RenderTexture _target;
         static FileStream _locked;
         static string _before, _uid, _photo;
+        static int _shotStep = -1, _shotFrame;
+        static string _shotName;
+        static Panel _shotOwner;
         static readonly List<object> Records = new List<object>();
         static readonly string[] Destinations = { "classes", "stash", "shop", "ach", "upgrade", "courtyard", "deploy" };
         static string Output => Environment.GetEnvironmentVariable("SDT_UNITY_CHECK_OUTPUT");
@@ -201,6 +204,18 @@ namespace Sdt.Editor
         static void Lock() { _before = File.ReadAllText(SaveSystem.ProfilePath); _locked = new FileStream(SaveSystem.ProfilePath, FileMode.Open, FileAccess.Read, FileShare.Read); }
         static void Unlock() { _locked?.Dispose(); _locked = null; }
         static void Shot(string name) { Record("capture", new { name, capture = OffscreenCapture.Write(Path.Combine(Output, Scenario + "-" + name + ".png")) }); }
+        static bool ShotReady(string name)
+        {
+            var owner = UiStack.Top;
+            if (_shotStep != _step || _shotName != name || !ReferenceEquals(_shotOwner, owner))
+            {
+                Shot(name); _shotStep = _step; _shotName = name; _shotOwner = owner; _shotFrame = Time.frameCount;
+                Record("wait-after-capture-frame", new { name, frame = _shotFrame }); return false;
+            }
+            // Capture restores the live camera projection; allow one complete native frame before input.
+            if (Time.frameCount < _shotFrame + 2) return false;
+            Record("after-capture-frame-ready", new { name, capturedFrame = _shotFrame, frame = Time.frameCount }); return true;
+        }
         static void Record(string kind, object detail)
         {
             Records.Add(new { step = _step, tick = _ticks, kind, detail });

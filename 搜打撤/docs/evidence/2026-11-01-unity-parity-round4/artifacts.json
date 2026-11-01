@@ -1,0 +1,541 @@
+{
+  "source": "Local generated evidence; images and large raw logs/JSON remain outside Git. Current-window player captures and 1920 reference native diagnostics are distinct.",
+  "acquisition": "Replay source-fixed native methods recorded in process.json with the retained run_native_check.ps1 and fresh outputs; replay player via run_hidden_player.ps1 -TransparentCompositor using this product manifest. Domain arguments are in domain/processes.json.",
+  "artifacts": [
+    {
+      "path": "native-journey/journey-extraction.png",
+      "bytes": 1206376,
+      "sha256": "0d29de13027ef875e5053d5624326d0d478044725b4a3f236927f3bb97efd903"
+    },
+    {
+      "path": "native-journey/journey-page-AltarRitualScreen-3.png",
+      "bytes": 2048109,
+      "sha256": "8fb9d8b74f0181411e8fbc01a8881d70138b7abde067a61d9887f47e84a01dea"
+    },
+    {
+      "path": "native-journey/journey-page-BattleScreen-0.png",
+      "bytes": 1724682,
+      "sha256": "85669b26330c4a52beb5dfe13f649033aa55ce7a3d52feabf8a56b6ae4fd2c5e"
+    },
+    {
+      "path": "native-journey/journey-page-BattleScreen-1.png",
+      "bytes": 1733969,
+      "sha256": "98d11316e645a84d17907295ea4c5bc4579af87caeff1ebc68bbfad247a745e8"
+    },
+    {
+      "path": "native-journey/journey-page-BattleScreen-2.png",
+      "bytes": 1802219,
+      "sha256": "8deee6794dd2eae680f7804446e3ce3463f8b910969f3b646b8eea56d6d3ef51"
+    },
+    {
+      "path": "native-journey/journey-page-BattleScreen-3.png",
+      "bytes": 1757088,
+      "sha256": "ff879fddbdee89811718fa87054e172af6bb2d0a5e55a7e55136cbda13eba552"
+    },
+    {
+      "path": "native-journey/journey-page-ChestOpenScreen-0.png",
+      "bytes": 1612449,
+      "sha256": "3b431ccdeea0fd983f1e59d217c3efe78250ee33c186622ee1413230ebebf3d9"
+    },
+    {
+      "path": "native-journey/journey-page-ChestOpenScreen-1.png",
+      "bytes": 1913147,
+      "sha256": "7b2d6b9e73e8e391985bdfbc29ed8de1a4b639260218b751d45d4be81d81216c"
+    },
+    {
+      "path": "native-journey/journey-page-ChestOpenScreen-2.png",
+      "bytes": 1910202,
+      "sha256": "898a495b6d22dc9236edbac85ebe78ce4629ae2b9c71656efe92b98fc2802827"
+    },
+    {
+      "path": "native-journey/journey-page-ChestOpenScreen-3.png",
+      "bytes": 1928476,
+      "sha256": "beb0db4eb641466560c39620c7fb9af94704eaf8f152e0d0e0f5d5c0ec9a0d22"
+    },
+    {
+      "path": "native-journey/journey-page-CurrentBossGateScreen-3.png",
+      "bytes": 755878,
+      "sha256": "ba9c38cdc6ad678a4c58cc35f0347940b19849e8cca177ae0405111201528ab2"
+    },
+    {
+      "path": "native-journey/journey-page-DeckSelectionPanel-3.png",
+      "bytes": 773378,
+      "sha256": "25cce53566af27950c82f16b7bebbfeac8232e1ad786652e57e841d70df0348d"
+    },
+    {
+      "path": "native-journey/journey-page-DoorModal-0.png",
+      "bytes": 3023719,
+      "sha256": "9148f10b123859da078a4aa1b12fe2f1adcfbbfe8fbf1f3d2b945bdf8526ce8d"
+    },
+    {
+      "path": "native-journey/journey-page-DoorModal-1.png",
+      "bytes": 3024170,
+      "sha256": "4915568ec4844a8476a66f67254bc06e9342e0bc0b3462d9dec94d5cd9abdb9d"
+    },
+    {
+      "path": "native-journey/journey-page-DoorModal-2.png",
+      "bytes": 3024580,
+      "sha256": "e65a24714add8a5bab17275d4bbdd6a3bc2d32597d4cbe69532a0b0fb4a3d75f"
+    },
+    {
+      "path": "native-journey/journey-page-EmergencyModal-2.png",
+      "bytes": 1333363,
+      "sha256": "5e7b53d790a1a046ab7610a00f5b917acd7ff9b3b7ef21c1c4896d4c83c657a1"
+    },
+    {
+      "path": "native-journey/journey-page-EntrySupplyScreen-2.png",
+      "bytes": 1601887,
+      "sha256": "7fbcca83f0b72cc631f8b15aea0e9e99a61b0484ef85baa40f0adfc390f22e13"
+    },
+    {
+      "path": "native-journey/journey-page-EntrySupplyScreen-3.png",
+      "bytes": 1725006,
+      "sha256": "5e89fae081ecd68c930c067a5d6caa1c6f1e51fb6d0bf3f0444c069694ef44dc"
+    },
+    {
+      "path": "native-journey/journey-page-EventDialogScreen-1.png",
+      "bytes": 1706118,
+      "sha256": "8d912333a804380675bb3f1bac57490ddc11f5e3d099c11d13e448be0d23afda"
+    },
+    {
+      "path": "native-journey/journey-page-EventDialogScreen-2.png",
+      "bytes": 2014713,
+      "sha256": "b677294c512087fa8b68783f7fec5230a8d13749980953304bde8472d063f9bb"
+    },
+    {
+      "path": "native-journey/journey-page-EventDialogScreen-3.png",
+      "bytes": 1866445,
+      "sha256": "3ab34c082809b2e708c4f35932f33f98de9208531cb412d64ee218859a36201c"
+    },
+    {
+      "path": "native-journey/journey-page-FinalExtractionModal-3.png",
+      "bytes": 1328527,
+      "sha256": "98ac23b7e550528a01b3e8d21a9a3d074af5b1bb70b703793e4247c2182f741b"
+    },
+    {
+      "path": "native-journey/journey-page-FireRestScreen-0.png",
+      "bytes": 1043224,
+      "sha256": "56af319c3de35d30e6162a0311cc464f0b470acd2e01d354bc81f901388b8092"
+    },
+    {
+      "path": "native-journey/journey-page-FireRestScreen-2.png",
+      "bytes": 1044120,
+      "sha256": "b6b5c8553e3d9b6abe7a678061a3e112fa04f43b8c1042db82ab776041dfd9b2"
+    },
+    {
+      "path": "native-journey/journey-page-ShopScreen-1.png",
+      "bytes": 2641209,
+      "sha256": "4b8be5257aafdff120dbed03308c02484c8b91c1b4976754ec4223cf173b7f92"
+    },
+    {
+      "path": "native-journey/journey-page-ShopScreen-3.png",
+      "bytes": 2604144,
+      "sha256": "74554653d91dbe07f65847794529e081c78b43a8b9bb74f4bb2d95cd3158bf93"
+    },
+    {
+      "path": "native-journey/journey-returned-base.png",
+      "bytes": 1797244,
+      "sha256": "9abe4957dcd9ba6e4fa8179cb61fa927a79565a58504ecb6eba4e0b2be3175e1"
+    },
+    {
+      "path": "native-journey/journey-settlement.png",
+      "bytes": 677009,
+      "sha256": "2bc6ceb97378812f8ebee8a9bf8c9bcd0e504167b5fb0569d7a1a088697315fe"
+    },
+    {
+      "path": "native-receipts/receipts-sort-before.png",
+      "bytes": 918550,
+      "sha256": "f2c32104aa0c95b6568261fc3b7e23a020eb095f632c4d8035f41e8c7ceeae12"
+    },
+    {
+      "path": "native-receipts-2/receipts-abandon-complete.png",
+      "bytes": 647014,
+      "sha256": "6a40d3ebb7254db618ad0a6f721d3813f38e09898fb062a40d1dfb5bfd7689f4"
+    },
+    {
+      "path": "native-receipts-2/receipts-abandon-save-failed.png",
+      "bytes": 552369,
+      "sha256": "fee3583bd2c3e36376d09c0afee04d18a04853fa4fc18e689f2f8516a4a65f08"
+    },
+    {
+      "path": "native-receipts-2/receipts-chest-reward.png",
+      "bytes": 1743804,
+      "sha256": "2f211d269dfe6bf0e8e1a2323336b1e68dcf9316b3821e157b599da49428a185"
+    },
+    {
+      "path": "native-receipts-2/receipts-death.png",
+      "bytes": 434276,
+      "sha256": "fb0a54d155b408cc73b5a6eadfec5de2b04cb2ac45b26badd842bb5f77011296"
+    },
+    {
+      "path": "native-receipts-2/receipts-event-after-choice.png",
+      "bytes": 1015508,
+      "sha256": "afe79f8e731e5982d805797d7afc5bf8fc222cdd50353255efc3ccc21ef21081"
+    },
+    {
+      "path": "native-receipts-2/receipts-event.png",
+      "bytes": 2439685,
+      "sha256": "ec904552f4ba987d8704ba097862e26df1118399737a4c10390a7006fa851f93"
+    },
+    {
+      "path": "native-receipts-2/receipts-extract-complete.png",
+      "bytes": 678728,
+      "sha256": "c334e4af5cc2bc274de6eb991aff88a3c19eb83d8412da8eed43ca44562b79f2"
+    },
+    {
+      "path": "native-receipts-2/receipts-fire-complete.png",
+      "bytes": 1105012,
+      "sha256": "a2bc0aa9b8fb27bf70cdad2c97b6990ed5373a4b5bba0fb5dbdcc4709fb0e9df"
+    },
+    {
+      "path": "native-receipts-2/receipts-fire.png",
+      "bytes": 1042427,
+      "sha256": "f580d310b158fc23e7b6d77bebf664042f2129d5c43b28c24454754205496a35"
+    },
+    {
+      "path": "native-receipts-2/receipts-reward-complete.png",
+      "bytes": 1686794,
+      "sha256": "50f0e71698cad375ce8ede5cbab01ec0562f5f46203369daf38a2fd56e13a2a2"
+    },
+    {
+      "path": "native-receipts-2/receipts-sort-before.png",
+      "bytes": 918550,
+      "sha256": "f2c32104aa0c95b6568261fc3b7e23a020eb095f632c4d8035f41e8c7ceeae12"
+    },
+    {
+      "path": "native-receipts-2/receipts-sort-finish-save-failed.png",
+      "bytes": 714011,
+      "sha256": "e87c66eae78b1ad48123fd6fe3a736a173d5e5e9ab9cafc6fefa4627beb76f4e"
+    },
+    {
+      "path": "native-receipts-2/receipts-surrender-complete.png",
+      "bytes": 418336,
+      "sha256": "b2bb2dcc6ac5e9a2fad3a7c5028f7cce5c16252b5d5e8b0184dfeb0b0ceece6b"
+    },
+    {
+      "path": "native-receipts-2/receipts-surrender-save-failed.png",
+      "bytes": 1216980,
+      "sha256": "7dfaf8d54bfba9766a26ff5bce02b2d7ff307be7a80f916a5d1ed7f210a6b00c"
+    },
+    {
+      "path": "native-receipts-2/receipts-terminal-return-base.png",
+      "bytes": 490218,
+      "sha256": "ab4bbeebdebf91ca653963e52e1b920fed1e24d95d7bb8be676b9d7dfbb77a5d"
+    },
+    {
+      "path": "player/player-altar.png",
+      "bytes": 2754726,
+      "sha256": "9ae5614ff8dbc5d5ffb6b9db20a327a4d826880e91a884080c4c5eb291f8be7a"
+    },
+    {
+      "path": "player/player-battle-pile-reader.png",
+      "bytes": 2000616,
+      "sha256": "de77176ff16995488066130a6613eaac9d42a08316e692a543e41f0146457792"
+    },
+    {
+      "path": "player/player-battle-pile-return.png",
+      "bytes": 1852935,
+      "sha256": "f32527dca5c9cd8ee1cbe4b997878bbdc2fa097f1bc67b1a7e9c2ebe4dca03d7"
+    },
+    {
+      "path": "player/player-battle-pile.png",
+      "bytes": 1852935,
+      "sha256": "f32527dca5c9cd8ee1cbe4b997878bbdc2fa097f1bc67b1a7e9c2ebe4dca03d7"
+    },
+    {
+      "path": "player/player-battle.png",
+      "bytes": 1844883,
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5"
+    },
+    {
+      "path": "player/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "player/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "player/player-door.png",
+      "bytes": 4098051,
+      "sha256": "63ea55e6f23cb9e3f8bcbd23bdc78f814402f212c28a31b647f36076053adb9e"
+    },
+    {
+      "path": "player/player-extraction.png",
+      "bytes": 1347096,
+      "sha256": "743eb53c4aaa8097c6a3f53d23b89ada8f197eba0b4c1f43aaabd6b292817d44"
+    },
+    {
+      "path": "player/player-formation-rules.png",
+      "bytes": 1149821,
+      "sha256": "eb4c31e58b3f663a06cabde68e7c3bd1509629685509ce38d57b983ced258d03"
+    },
+    {
+      "path": "player/player-formation.png",
+      "bytes": 1244652,
+      "sha256": "d1a05fe00a3066aae48175bd7d4b466580f2d407d9e00ec99bb152c537595bd4"
+    },
+    {
+      "path": "player/player-fx-atlas-specimen.png",
+      "bytes": 2528761,
+      "sha256": "d64a4dc48d4a4016792d4658433f2adf5160ea181d07170f1383553eba2fd950"
+    },
+    {
+      "path": "player/player-guide-0.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "player/player-guide-1.png",
+      "bytes": 705059,
+      "sha256": "cd9ea4717cd5420adcf995ab83cd29bc0abd7fc2e5ffc225ec2bfbdc7e9f71c1"
+    },
+    {
+      "path": "player/player-guide-2.png",
+      "bytes": 1066215,
+      "sha256": "39d9a46ed51c94c910f3693efea6345dbf338d2ada853d0002ae08594a655df9"
+    },
+    {
+      "path": "player/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "player/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "player/player-guide-5.png",
+      "bytes": 740854,
+      "sha256": "c946e5f9dd81ddcb8efb65ac626737f1fb7c41ee4f3d4d87197e09338bba853e"
+    },
+    {
+      "path": "player/player-guide-in-run.png",
+      "bytes": 1061590,
+      "sha256": "a1bc3754782a336080914fce48d5dd287e6f822abcb9f2f54482ccc79544e1fe"
+    },
+    {
+      "path": "player/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "player/player-guide-more-4.png",
+      "bytes": 778512,
+      "sha256": "376090feea1120aa15d9b5d3d671f1f41f82b62ac381e762e2feb47abb52c6ff"
+    },
+    {
+      "path": "player/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "player/player-hand-material-picked.png",
+      "bytes": 2339241,
+      "sha256": "851a99c44bb5d5555aaf24f9f933287871466bfd811b6b33e81225307ce80212"
+    },
+    {
+      "path": "player/player-hand-material.png",
+      "bytes": 2301332,
+      "sha256": "4560dab200362d83184a9219af061e8144f8b4f923b142da16804b4a3bfd5364"
+    },
+    {
+      "path": "player/player-hub-conversion-overflow.png",
+      "bytes": 1155860,
+      "sha256": "f072355d9367ed37c7c5c47a61af3f2d416f465cd636a6e0063bad446d77dd7a"
+    },
+    {
+      "path": "player/player-hub-parity-returned-base.png",
+      "bytes": 2379281,
+      "sha256": "d5fa8ef972fa6feb8c2d3748a8987bfdf4eb1cd51dd2da1148adc3e9a8ad62b7"
+    },
+    {
+      "path": "player/player-hub-restore-unbanked-keys.png",
+      "bytes": 1002849,
+      "sha256": "26bfa63c9497edfd472f319c9f038779b9a9da42292bd2faf4138514e7f5a288"
+    },
+    {
+      "path": "player/player-hub-trade-base-variant.png",
+      "bytes": 2464843,
+      "sha256": "bf50fc7c0fcbb3b7b34114351181b24e35313be4879b21b105fcab9996677519"
+    },
+    {
+      "path": "player/player-hub-trade-variant.png",
+      "bytes": 2463813,
+      "sha256": "7e17a546dda47c7b2ffb15a941a14cc8152d4d7a6419ef5ec4843d59e4f30c6e"
+    },
+    {
+      "path": "player/player-hub-variant-stock.png",
+      "bytes": 2526105,
+      "sha256": "1f33e6b5aa2a2f4f599c1260102d675a9ce5430a1016ec7d2ad5c0301c6a921f"
+    },
+    {
+      "path": "player/player-hub-warehouse-actions.png",
+      "bytes": 991921,
+      "sha256": "227cb11c17cd149006b3b4562c83c96a1f2a910190cc0493077d3ddf475ef073"
+    },
+    {
+      "path": "player/player-infusion-picked.png",
+      "bytes": 2093716,
+      "sha256": "07358d0c37570bb6424ac8fa440e99469bfb4c7e8f1f4b8d2f22860be5ce1b78"
+    },
+    {
+      "path": "player/player-infusion-return.png",
+      "bytes": 2401713,
+      "sha256": "67f52925a14658f8715f34e31cbf31e9e9fcaf1b50712cec2a8505c83d2498fd"
+    },
+    {
+      "path": "player/player-infusion.png",
+      "bytes": 2067283,
+      "sha256": "9fefe7eab5ef95c9afa5d968965a238f2e91bad51beb645c028bb616970351f1"
+    },
+    {
+      "path": "player/player-passage.png",
+      "bytes": 1175574,
+      "sha256": "1a01612fad5077214a9c1c657daa2a17d3d43b4cac6575d45f043430c15e177c"
+    },
+    {
+      "path": "player/player-photo.png",
+      "bytes": 2481300,
+      "sha256": "8bde1aa8321a4fbb57e1db3f9735343d339201f859496d963e6e3d79e3e0cacf"
+    },
+    {
+      "path": "player/player-recode-reader.png",
+      "bytes": 2516203,
+      "sha256": "c59080fb004cda2092f30a2e29587eb898aae505a83e490785c6b38fcb7bafa1"
+    },
+    {
+      "path": "player/player-recode-result.png",
+      "bytes": 2564656,
+      "sha256": "e0adfdd27a1fbdf0f7fecdc8acf57c56f994f7f2ed3fb3e3a955a1dfbc2feacc"
+    },
+    {
+      "path": "player/player-recode-save-failed.png",
+      "bytes": 2620622,
+      "sha256": "33a688307257f4105a338d3d047965138131893c24c928ccc08015608ff41a01"
+    },
+    {
+      "path": "player/player-returned-base.png",
+      "bytes": 2375426,
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291"
+    },
+    {
+      "path": "player/player-returned-slots.png",
+      "bytes": 1471703,
+      "sha256": "4aacc14b854c0a7f18ac14951e294375f87044e6bf20cc10b71421ff540bf782"
+    },
+    {
+      "path": "player/player-returned-title.png",
+      "bytes": 3411202,
+      "sha256": "26fb032df7bfcf20b9240acdcaf96726ab4980bcd3667dc8edacba034898d344"
+    },
+    {
+      "path": "player/player-reward-pending.png",
+      "bytes": 2142377,
+      "sha256": "83354692db6f65f61c9de7dbb2ff9569ef41d406a8d8289af21e1d2e2d6a4e30"
+    },
+    {
+      "path": "player/player-reward-reader-capacity.png",
+      "bytes": 1839342,
+      "sha256": "571eb8615b90780592bc0b2512089991e5f1262bb025fbfe3349b66d98afcbd3"
+    },
+    {
+      "path": "player/player-reward-reader-organizer.png",
+      "bytes": 2561394,
+      "sha256": "33b7f6e03977e91c10c869f82cc4bb3fa1e6c97b3335e478bb57f7e85fcae690"
+    },
+    {
+      "path": "player/player-reward-reader-pending.png",
+      "bytes": 1834131,
+      "sha256": "245322900b93c4b7d187a057984502403e92becfd98648695a9045cf0d04c605"
+    },
+    {
+      "path": "player/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "player/player-settlement.png",
+      "bytes": 880084,
+      "sha256": "352140e5391a1f4633a3c331e40309757d8e0d547e3c26235f7e22ae14b79ff3"
+    },
+    {
+      "path": "player/player-shop-commission-dice.png",
+      "bytes": 1929031,
+      "sha256": "3fb14775749844ff4cd77d51db125338f31f3745f237b949c021bc004c4123e4"
+    },
+    {
+      "path": "player/player-shop-commission-receipt.png",
+      "bytes": 2459969,
+      "sha256": "f09364e9e1acbbef6b8e6d37da3944dbd78dfb95d531ba4383aa5e1a179b4929"
+    },
+    {
+      "path": "player/player-shop-commission.png",
+      "bytes": 2620979,
+      "sha256": "bba5f64121056777add9a76cf258f836824d20bf5736328fb59eea68282f99fb"
+    },
+    {
+      "path": "player/player-shop-exchange.png",
+      "bytes": 1688771,
+      "sha256": "0f5ce9b6c4ef166e6845f1ef1c3cf435028cc1861ba9384532c253ff35e60b69"
+    },
+    {
+      "path": "player/player-shop-free-offers.png",
+      "bytes": 3739856,
+      "sha256": "5b6f978ffd41cb5ea5813cb93649a984263e0251d4caa9c0249940a012ff0b86"
+    },
+    {
+      "path": "player/player-shop-inspection.png",
+      "bytes": 2373605,
+      "sha256": "27ee8abc20b6b1a240cd7a259984e00e7314143a7533cb5d9fa374be3aece092"
+    },
+    {
+      "path": "player/player-shop.png",
+      "bytes": 3702029,
+      "sha256": "976902908e9ea4797cf1793fedb239d00f05ea742daf8ab0a8860212c641082d"
+    },
+    {
+      "path": "player/player-slot-archive-export.png",
+      "bytes": 662317,
+      "sha256": "31a34fad597da52c25d85fdc4b4e6f07bea14909995828494f73e428d8a085c3"
+    },
+    {
+      "path": "player/player-slot-archive-import-preview.png",
+      "bytes": 500554,
+      "sha256": "3d72420ee161b4e8a77b4289ff040a7942c8a6154a1c49f676adb1398222933f"
+    },
+    {
+      "path": "player/player-slot-archive-import.png",
+      "bytes": 646735,
+      "sha256": "722ccbb93412fbd3b29236a5096ac305d3f3ff7b3a53b088bdc48f073a5136d6"
+    },
+    {
+      "path": "player/player-slots-backup.png",
+      "bytes": 1462600,
+      "sha256": "2470f1d04b723b4c74f14e452207d604f5be74dbdc9fe90365a1dd7cb1ade0d4"
+    },
+    {
+      "path": "player/player-startup.png",
+      "bytes": 829997,
+      "sha256": "31ddfdc719d4f087c77ee6899208dc41073ea1bd695dc90c4a5793f0cad6a9ae"
+    },
+    {
+      "path": "player/player-title.png",
+      "bytes": 3427706,
+      "sha256": "18aef8d0ee0da1a3937ddea91931cc6daa7a480df184627da941d06fe4a12566"
+    },
+    {
+      "path": "player/result.json",
+      "bytes": 5422905,
+      "sha256": "dce89263ad2c589d672a8bc979448bd6a549cdb8895406b3e4c4825bf6491bde"
+    },
+    {
+      "path": "player/trace.json",
+      "bytes": 5421958,
+      "sha256": "7568e8e6ea8a3366c203480aca41e1675d3b927c31eb07cc22a7e9ded5bafb58"
+    }
+  ]
+}

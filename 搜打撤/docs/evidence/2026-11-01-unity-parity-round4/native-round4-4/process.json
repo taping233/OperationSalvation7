@@ -1,0 +1,14 @@
+{
+  "method": "Sdt.Editor.CurrentRound4Validation.Run",
+  "pid": 31628,
+  "startedAt": "2026-11-01T02:15:34.1833478Z",
+  "endedAt": "2026-11-01T02:15:54.0901586Z",
+  "exitCode": 0,
+  "timedOut": false,
+  "inputsUnchanged": false,
+  "changedInputs": [
+    "Assets/Editor/CurrentBattleRound4Checks.cs"
+  ],
+  "sourceCount": 796,
+  "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-round4-4"
+}

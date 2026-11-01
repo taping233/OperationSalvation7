@@ -1,0 +1,58 @@
+{
+  "status": "frozen-awaiting-central-validation",
+  "testsRun": false,
+  "compileRun": false,
+  "unityRun": false,
+  "productionCount": 7,
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Map.cs",
+      "sha256": "8937519b10231578f243a049c349e1855092805d945b299b2d4e6da06c275ef1"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+      "sha256": "629801a763f16cfd69664603548de39b12dd5d3fcab9a04195f760d6e14c38e4"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.EventRoutes.cs",
+      "sha256": "2c6089fbdbde1774cf353900842985805590bdbfe8578f199a5932474899f843"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/EntrySupplyScreen.cs",
+      "sha256": "11f292ee028f6ba575f54ee397c9126da8f2eb78828aba106eac83e5c1632802"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogScreen.cs",
+      "sha256": "af3932d9a1e44c00ca28951857c905e4793131d85be1b29fe650584cab385a9e"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/EventDialogChoices.cs",
+      "sha256": "6ee4202b7100a8564ac907603f87947b6ddcc64ef17c779df2ec9f7e55f5fcad"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardCapacityOrganizer.cs",
+      "sha256": "5eb68f1e3800196d86ac90df09484d8f64d4c54ac61f5a264f023979acb25747"
+    },
+    {
+      "path": "Assets/Editor/CurrentRunRound2Checks.cs",
+      "sha256": "12a95be9c949175f96e46150912f15eeedb2748cba3cf1385cd370589335f5ad"
+    },
+    {
+      "path": "Assets/Editor/CurrentRunRound2Checks.cs.meta",
+      "sha256": "774c2952524d48551dd1345aedbc1300c7c9708a2efef12d8fe239403c4e5413"
+    },
+    {
+      "path": "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj",
+      "sha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308"
+    },
+    {
+      "path": "_planning/parity-1101-round2/run-check/Program.cs",
+      "sha256": "246a3918ecc54047b9be98c1eefa2c4eb2f7fec7c988f8493e3beffea1b319f7"
+    }
+  ],
+  "nativeEntry": "CurrentRunRound2Checks.Run",
+  "nativeAssertionCounter": "CurrentRunRound2Checks.Assertions",
+  "nativePlannedAssertions": 13,
+  "domainEntry": "dotnet run --project _planning/parity-1101-round2/run-check/RunRound2Checks.csproj",
+  "dependency": "CardContainerCommands.CreateSafeStoragePreview / BagCapacityQuery.SafeUsed / CanStore; maintained by hub_save_parity"
+}

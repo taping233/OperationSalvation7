@@ -13,7 +13,7 @@ function SourceManifest {
     $files=@()
     foreach ($directory in @('Assets/Scripts','Assets/Editor','ProjectSettings','Packages')) {
         $files+=Get-ChildItem -LiteralPath (Join-Path $projectRoot $directory) -File -Recurse |
-            Where-Object { $_.Extension -in @('.cs','.asmdef','.json','.asset','.txt','.shader','.cginc','.uxml','.uss') }
+            Where-Object { $_.Extension -in @('.cs','.asmdef','.json','.asset','.txt','.shader','.cginc','.uxml','.uss','.meta') }
     }
     foreach ($file in ($files | Sort-Object FullName)) {
         $relative=$file.FullName.Substring($projectRoot.Length+1).Replace('\','/')

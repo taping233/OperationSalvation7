@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "error": "System.InvalidOperationException: reward round3: old rebound tile claim and reader callbacks inert\r\n  at Sdt.Editor.CurrentRewardRound3Checks.Check (System.Boolean value, System.String message) [0x00020] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRewardRound3Checks.cs:22 \r\n  at Sdt.Editor.CurrentRewardRound3Checks+<Run>d__10.MoveNext () [0x00a1a] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRewardRound3Checks.cs:77 \r\n  at Sdt.Editor.CurrentRound3Validation+<Flow>d__8.MoveNext () [0x00058] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound3Validation.cs:37 \r\n  at Sdt.Editor.CurrentRound3Validation+<Drive>d__9.MoveNext () [0x0002a] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound3Validation.cs:48 ",
+  "rewardAssertions": 40,
+  "shopAssertions": 0,
+  "battleAssertions": 0,
+  "archiveAssertions": 0,
+  "scope": "Native constructed submit and lifetime checks in isolated profile; no OS input, multi-size or FPS claim."
+}

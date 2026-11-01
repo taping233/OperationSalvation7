@@ -1,0 +1,59 @@
+{
+  "status": "read-only review complete; documentation refresh owned by root",
+  "reviewedManifest": {
+    "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\publication\\export-manifest.json",
+    "sha256": "92be34199678e371e8b035671bde2abd85907dbddeff7c521a3cd3736fa34bfa",
+    "fileCount": 3702,
+    "formalCount": 3587,
+    "planningCount": 115
+  },
+  "exportScript": {
+    "path": "SoudacheUnity/_planning/github-sync-1101/export_manifest.py",
+    "sha256": "1e077c34e12da71ba758872397818f2024c44e7577736290c0ddedaf63ebd729",
+    "newOutputSupported": true,
+    "oldDefaultManifestPreservedByOutput": true,
+    "onlyMutation": "MANIFEST.write_text(payload); not executed by reviewer"
+  },
+  "inventoryReview": {
+    "all3702FilesExistAndMatchBytesAndHash": true,
+    "filesOver1000000": 0,
+    "forbiddenMediaOrGeneratedExtensions": 0,
+    "unsafeRelativePaths": 0,
+    "generatedDirectoryOrRawWipFound": false,
+    "falsePositiveNamesReviewed": [
+      "CurrentCinematicProfiles.json",
+      "InkRuntime/Profiler.cs",
+      "BattlePortraitProfile.cs",
+      "CurrentSlotSnapshot.cs"
+    ],
+    "oldManifestStillExists": true,
+    "oldManifestSha256": "a166a7e08b8416cfb040b0e8dac7562babeb164168b3cb83048054e1c8aa81f0",
+    "oldManifestFiles": 3627,
+    "oldManifestPathsOmittedFromNew": 0
+  },
+  "verificationClosure": {
+    "domainProjects": 5,
+    "allDirectCompileSourcesIncluded": true,
+    "allRound2Round3Round4NativeDriversAndChecksIncluded": true,
+    "lockedUPMConfigsIncluded": true,
+    "formalSfxMixerIncluded": true,
+    "missingResourceClosureOrReceipt": [],
+    "parentRawSourcePrerequisitesChanged": [],
+    "activeRestoreRecipes": 7,
+    "requiredRestoreClosureFiles": 23,
+    "recommendedProvenanceReceipts": 9,
+    "restoreRequiredMedia": 241,
+    "retiredMediaAndMetaOmitted": 67
+  },
+  "rootFollowups": [
+    {
+      "path": "SoudacheUnity/.gitignore",
+      "action": "Add explicit exceptions for Round2 RunRound2Checks.csproj and Round3 ArchiveRound3Checks.csproj; update three-project comment. Both projects already exist in exact export manifest; root confirms force staging exact list."
+    },
+    {
+      "path": "SoudacheUnity/GITHUB-SOURCE.md",
+      "action": "Navigate current five domain projects and current Round2/3/4 native entry points. Keep old 845-run statement scoped to its historical delivery. Root accepted ownership."
+    }
+  ],
+  "boundary": "No builds, tests, Unity process, git mutation, exporter execution or source edits. Existing restore-owner source/provenance decisions reused; no clean-room restoration or new runtime acceptance claim. Root must regenerate the new directed manifest after final docs and verify Git-object bytes independently."
+}

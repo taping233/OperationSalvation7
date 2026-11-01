@@ -1,0 +1,101 @@
+{
+  "status": "six current PNGs visually reviewed; no confirmed visual issue",
+  "images": [
+    {
+      "path": "player/player-title.png",
+      "observation": "首页字标、进入城市/指南及右侧功能按钮、底部入口清楚；可见内容在窗口内，没有重叠或残留弹层。仅该静帧，不证明轮播或输入行为。",
+      "sha256": "18aef8d0ee0da1a3937ddea91931cc6daa7a480df184627da941d06fe4a12566",
+      "bytes": 3427706,
+      "width": 2560,
+      "height": 1440,
+      "frame": 141,
+      "reviewedWith": "functions.view_image",
+      "conclusion": "no confirmed visual regression in visible frame"
+    },
+    {
+      "path": "player/player-settings.png",
+      "observation": "通用设置的页头、左侧导航、六行设置及三个折叠区文字清楚，开关与行内容分离，未见裁切重叠。仅通用页当前展开状态。",
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6",
+      "bytes": 737345,
+      "width": 2560,
+      "height": 1440,
+      "frame": 307,
+      "reviewedWith": "functions.view_image",
+      "conclusion": "no confirmed visual regression in visible frame"
+    },
+    {
+      "path": "player/player-photo.png",
+      "observation": "照片墙标题与291张计数、分类/筛选区、首排四张卡及右侧选中说明清楚；图片与选框对应，未见缺图或重复残留。第二排延伸至滚动视口下缘属可见边界；未检查照片详情、翻图、备注或滚动全过程。",
+      "sha256": "8bde1aa8321a4fbb57e1db3f9735343d339201f859496d963e6e3d79e3e0cacf",
+      "bytes": 2481300,
+      "width": 2560,
+      "height": 1440,
+      "frame": 267,
+      "reviewedWith": "functions.view_image",
+      "conclusion": "no confirmed visual regression in visible frame"
+    },
+    {
+      "path": "player/player-slot-archive-export.png",
+      "observation": "档位05导出弹层居中，version 2 JSON文本区、说明及复制/导出/返回三个按钮清楚；背景档位被正确压暗，未见覆盖标题或按钮。文本内容超过显示区，本次只读可见部分。",
+      "sha256": "31a34fad597da52c25d85fdc4b4e6f07bea14909995828494f73e428d8a085c3",
+      "bytes": 662317,
+      "width": 2560,
+      "height": 1440,
+      "frame": 2705,
+      "reviewedWith": "functions.view_image",
+      "conclusion": "no confirmed visual regression in visible frame"
+    },
+    {
+      "path": "player/player-slot-archive-import-preview.png",
+      "observation": "导入确认在导入页上方居中；来源档位5、保存时间、目标已有档案替换提示及返回/确认按钮完整清楚，前后层次分明。画面处于正式确认之前。",
+      "sha256": "3d72420ee161b4e8a77b4289ff040a7942c8a6154a1c49f676adb1398222933f",
+      "bytes": 500554,
+      "width": 2560,
+      "height": 1440,
+      "frame": 2771,
+      "reviewedWith": "functions.view_image",
+      "conclusion": "no confirmed visual regression in visible frame"
+    },
+    {
+      "path": "player/player-returned-slots.png",
+      "observation": "从基地返回后的五档页面完整，前四空档与第五基地档案状态区分清楚，入口/备份区域均在窗口内，无旧Hub或归档弹层残留。trace显示本图早于导出和导入，不用它声称导入完成后的返回画面。",
+      "sha256": "4aacc14b854c0a7f18ac14951e294375f87044e6bf20cc10b71421ff540bf782",
+      "bytes": 1471703,
+      "width": 2560,
+      "height": 1440,
+      "frame": 2641,
+      "reviewedWith": "functions.view_image",
+      "conclusion": "no confirmed visual regression in visible frame"
+    }
+  ],
+  "confirmedIssues": [],
+  "boundary": [
+    "实际使用view_image逐张查看上述六图，没有声称61张全看。",
+    "只覆盖本批2560×1440/DPI120窗口的可见静帧，不复用旧图或旧Passed，不声称其它尺寸。",
+    "本批是实际Standalone实绘；process记录窗口visible=false，操作记录为constructed-player-click，无物理键鼠或系统输入验收声明。",
+    "本报告只核明显布局、读字、缺图和旧内容残留；异步保存、原子导入、自定义闭包、旧回调及焦点由正式领域/原生证据承担，不由图片推断。",
+    "归档预览后的confirmation-accept为trace中的构造点击记录；本次未查看最终导入后title或slots图，不能用静帧替代持久化断言。",
+    "未改Source/check，未启动Unity或Player，未执行编译或测试。"
+  ],
+  "batch": {
+    "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "dpi": 120.0,
+    "canvasMode": "ScreenSpaceOverlay",
+    "canvasScaleFactor": 1.33333337,
+    "unityVersion": "6000.6.7f1",
+    "graphicsApi": "Direct3D12",
+    "playerPassed": true,
+    "processExitCode": 0,
+    "hostVisible": false,
+    "totalPngs": 61,
+    "reviewedPngs": 6,
+    "source": "current player/result.json display; current player/process.json"
+  },
+  "evidenceHashes": {
+    "result.json": "dce89263ad2c589d672a8bc979448bd6a549cdb8895406b3e4c4825bf6491bde",
+    "process.json": "bfee269928605c494f67fa03279b4eebd7a6449014902e34020a8467b4a14756",
+    "trace.json": "7568e8e6ea8a3366c203480aca41e1675d3b927c31eb07cc22a7e9ded5bafb58"
+  }
+}

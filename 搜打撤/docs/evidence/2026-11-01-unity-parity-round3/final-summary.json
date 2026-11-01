@@ -1,0 +1,240 @@
+{
+  "status": "validated",
+  "atUtc": "2026-11-01T01:12:13.438780+00:00",
+  "sourceInputCount": 780,
+  "sourceScope": "Scripts, editor checks, project/package configuration and metadata; native runner hash separately recorded.",
+  "sourceInputsUnchanged": true,
+  "nativeRunnerSha256": "0ee4a1c7f14112474eaa50b86c36387229cc18b9d73a83253dadbf9e09903722",
+  "domain": {
+    "battle": 117,
+    "runBaseline": 326,
+    "runRound2": 32,
+    "hub": 472,
+    "archive": 39,
+    "total": 986,
+    "extraSources": [
+      {
+        "path": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+        "sha256": "1717a205bdf98e1c92c699a9218bce61ab9d91aa5f980ca4d9ab07d54284020a"
+      },
+      {
+        "path": "_planning/parity-1031/battle-check/Program.cs",
+        "sha256": "dc6f43bd753c6a91b856238a158d7970bd4be9197fec5557245a97d159e306f2"
+      },
+      {
+        "path": "_planning/parity-1031/battle-check/Round3Checks.cs",
+        "sha256": "5f0b8884f0e505121253f5bbb7108978d2eff375084d5a055d486a08f1eb13c6"
+      },
+      {
+        "path": "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+        "sha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308"
+      },
+      {
+        "path": "_planning/parity-1101-round3/archive-check/Program.cs",
+        "sha256": "af8d0cd6be575e0e221e1a4ec52e3156f2cb165ba344ec1c84c509002747f073"
+      }
+    ]
+  },
+  "native": {
+    "third": 131,
+    "thirdByDomain": {
+      "rewardAssertions": 54,
+      "shopAssertions": 42,
+      "battleAssertions": 25,
+      "archiveAssertions": 10
+    },
+    "secondRegression": 375,
+    "sharedRegression": 48,
+    "shopSourceRecordKinds": {
+      "controlled-source-fixture": 5,
+      "default-and-action-exception-boundaries": 1,
+      "native-render-reference": 5,
+      "constructed-uGUI-pointer": 25,
+      "voucher-source-command": 2,
+      "constructed-uGUI-selected-submit": 8,
+      "commission-full-source-stages": 1,
+      "complete": 1
+    },
+    "receipts": {
+      "native-round3-final": {
+        "resultSha256": "2a1bb791a6edc665dd15c08d45a9609874f673079f4371b8c0ab6d3a7337e659",
+        "process": {
+          "method": "Sdt.Editor.CurrentRound3Validation.Run",
+          "pid": 27664,
+          "startedAt": "2026-11-01T01:07:20.7940798Z",
+          "endedAt": "2026-11-01T01:07:40.9410462Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 780,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round3\\native-round3-final"
+        }
+      },
+      "native-round2-regression-2": {
+        "resultSha256": "1c5f70774a3856785636532452d71fab3ae12389fbfe43837fefee82eb63aea3",
+        "process": {
+          "method": "Sdt.Editor.CurrentRound2Validation.Run",
+          "pid": 34740,
+          "startedAt": "2026-11-01T01:07:41.0632312Z",
+          "endedAt": "2026-11-01T01:07:56.7690215Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 780,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round3\\native-round2-regression-2"
+        }
+      },
+      "native-shared-regression": {
+        "resultSha256": "edb0754d795e1a41b164441529b649e24e5a415b61c406560846e94804dc5c52",
+        "process": {
+          "method": "Sdt.Editor.CurrentParityValidation.Run",
+          "pid": 35344,
+          "startedAt": "2026-11-01T01:07:56.8814071Z",
+          "endedAt": "2026-11-01T01:08:15.7991562Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 780,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round3\\native-shared-regression"
+        }
+      },
+      "native-shop-source": {
+        "resultSha256": "9d4bb73f5527cc8fa452651c452b80c14755e8fd093fcd91bbd75f46e1c85320",
+        "process": {
+          "method": "Sdt.Editor.CurrentShopSourceValidation.Run",
+          "pid": 35808,
+          "startedAt": "2026-11-01T01:08:15.8668403Z",
+          "endedAt": "2026-11-01T01:08:56.6278617Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 780,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round3\\native-shop-source"
+        }
+      }
+    }
+  },
+  "build": {
+    "result": "Succeeded",
+    "inputCount": 3945,
+    "inputsUnchanged": true,
+    "executableSha256": "9806abde4a406ed68647e9505852c49f6aa72a372f4f084e2aa2821affea57a2",
+    "productFiles": 166,
+    "productManifest": "product-manifest.json"
+  },
+  "player": {
+    "passed": true,
+    "buildGUID": "cfbe07ccdc1147f28801339933512ee0",
+    "screenshots": 61,
+    "process": {
+      "executable": "D:\\素材\\代号柒\\SoudacheUnity\\Build\\Desktop\\代号柒.exe",
+      "executableSha256": "9806abde4a406ed68647e9505852c49f6aa72a372f4f084e2aa2821affea57a2",
+      "pid": 36880,
+      "startedAt": "2026-11-01T01:10:24.1401447Z",
+      "endedAt": "2026-11-01T01:11:35.6483591Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "host": {
+        "hwnd": 23333662,
+        "visible": false,
+        "dpi": 120,
+        "awareness": 2,
+        "clientWidth": 2560,
+        "clientHeight": 1440,
+        "windowLeft": 0,
+        "windowTop": 0,
+        "windowWidth": 2560,
+        "windowHeight": 1440
+      },
+      "child": {
+        "hwnd": 4197344,
+        "visible": true,
+        "dpi": 120,
+        "awareness": 2,
+        "clientWidth": 2560,
+        "clientHeight": 1440,
+        "windowLeft": 0,
+        "windowTop": 0,
+        "windowWidth": 2560,
+        "windowHeight": 1440
+      },
+      "childGeometryChanges": [
+        {
+          "seconds": 0.2805214,
+          "window": {
+            "hwnd": 4197344,
+            "visible": false,
+            "dpi": 120,
+            "awareness": 2,
+            "clientWidth": 2560,
+            "clientHeight": 1440,
+            "windowLeft": 0,
+            "windowTop": 0,
+            "windowWidth": 2560,
+            "windowHeight": 1440
+          }
+        },
+        {
+          "seconds": 5.3390968,
+          "window": {
+            "hwnd": 4197344,
+            "visible": true,
+            "dpi": 120,
+            "awareness": 2,
+            "clientWidth": 2560,
+            "clientHeight": 1440,
+            "windowLeft": 0,
+            "windowTop": 0,
+            "windowWidth": 2560,
+            "windowHeight": 1440
+          }
+        }
+      ],
+      "transparentCompositor": true,
+      "zeroAlphaAndNonactivating": true,
+      "input": "No OS input; zero-alpha nonactivating click-through parent HWND; standalone backbuffer at current physical primary desktop size",
+      "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round3\\player"
+    }
+  },
+  "scope": "Native fixture and constructed EventSystem paths. No physical input, multi-size, acoustic or FPS claim; warmed catalog allocation measurements cover only All() calls.",
+  "visualReviews": {
+    "shop": {
+      "path": "visual-shop.json",
+      "status": "passed_within_reviewed_scope",
+      "sha256": "81e07867c53ece8e42863e6cb7001560ee2616e9b29eac82a28fdfeaeca0f798"
+    },
+    "reward": {
+      "path": "visual-reward.json",
+      "status": "review-complete-no-confirmed-visual-regression",
+      "sha256": "8883ea31098b4ae07a4fed8e5547e003029e755aa2b5779b3c72f3068e6cc637"
+    },
+    "battle": {
+      "path": "visual-battle.json",
+      "status": "complete-no-obvious-regression-in-four-assigned-images",
+      "sha256": "7ac0e198f02d3623e86a74499bc37483998b12cfa0fd57f44b3fc949346697f4"
+    },
+    "archive": {
+      "path": "visual-archive.json",
+      "status": "passed-with-scope",
+      "sha256": "f341d7fe43bc36106dc734b7ed1f462fc47553624fd214c8ba4d100bb8e9912b"
+    }
+  },
+  "continuousGoal": {
+    "status": "active",
+    "next": "Verify a real supported enemy-phase damage/draw automatic-cast interaction and its outer turn scheduler before claiming complete parity."
+  },
+  "publication": "Current batch remains completed and uncommitted; sync after the continuing source comparison is closed.",
+  "docs": {
+    "passed": true,
+    "report": "docs-check-final.log",
+    "sha256": "7f9b91992c4057ad948d7df4aa1263f9c6c3459bd7f1742a3b8f1bc2202b02d5",
+    "unrelatedSkippedMetadata": [
+      "docs/evidence/2026-10-05-WF-card-ally-redesign/task.json",
+      "docs/evidence/2026-10-12-WF-selfplay-fixes/task.json"
+    ]
+  }
+}

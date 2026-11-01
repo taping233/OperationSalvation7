@@ -1,0 +1,69 @@
+{
+  "reviewer": "run_parity",
+  "status": "passed_within_reviewed_scope",
+  "buildGUID": "cfbe07ccdc1147f28801339933512ee0",
+  "display": "2560x1440 / DPI120 / Windowed / normal CanvasScaler",
+  "evidence": {
+    "result": "player/result.json",
+    "trace": "player/trace.json",
+    "process": "player/process.json",
+    "playerResultPassed": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "packagePngCount": 61,
+    "reviewedPngCount": 7,
+    "method": "逐张 view_image 复核实际 Standalone backbuffer；只解析既有 JSON 的小摘要，没有重启或追加测试。"
+  },
+  "images": [
+    {
+      "path": "player/player-shop.png",
+      "frame": 1079,
+      "sha256": "12c11e2f050d30c7281eb79fca8253203b0f871ebc7739695dafa22a9c823306",
+      "observation": "九货位、卡名/说明、价格/购买状态、30币与4/16格、整理入口和返回地图均完整可读；神秘货箱保持背面，没有详情/收购台残留。"
+    },
+    {
+      "path": "player/player-shop-inspection.png",
+      "frame": 1107,
+      "sha256": "23f096a59e3646a545cb2b893bef4b36d9e957e564a0e5f904845a467e59a081",
+      "observation": "神秘药水详情卡面、完整说明、购买与3币价格、右上关闭入口清晰；货架正常压暗，没有旧详情或重复卡面重叠。"
+    },
+    {
+      "path": "player/player-shop-exchange.png",
+      "frame": 1135,
+      "sha256": "0f5ce9b6c4ef166e6845f1ef1c3cf435028cc1861ba9384532c253ff35e60b69",
+      "observation": "空收购台的0张/0件、合计0币、持有7张/当前30币、空态说明、收购规则与返回商店可读；没有市场货位、详情遮罩或旧购买按钮残留。该图只覆盖空收购态。"
+    },
+    {
+      "path": "player/player-shop-commission.png",
+      "frame": 1207,
+      "sha256": "bba5f64121056777add9a76cf258f836824d20bf5736328fb59eea68282f99fb",
+      "observation": "交付凭据标题、两次投掷说明、初始攻击排除说明和正式交付按钮完整，无商店列表残留或文字相叠。"
+    },
+    {
+      "path": "player/player-shop-commission-dice.png",
+      "frame": 1229,
+      "sha256": "b559a19a9baa320f4c9b9c3025247a753133b9e1984be819cfdf9e27bcc715a1",
+      "observation": "第一格免单标题、D6等待态、展开的六档点数/对应货位、投骰与返回动作可见；骰子没有压住结果文字，未见明显布局回归。"
+    },
+    {
+      "path": "player/player-shop-commission-receipt.png",
+      "frame": 1450,
+      "sha256": "54d82d6c6ad9d269fb0f61dee623b74beca19281502bce3bf7a4e966f2b60820",
+      "observation": "兑现回执并列显示第6格突破进展、第4格能源结晶及免费标识；代付/商品仍在货架说明和进入商店按钮清晰，没有骰子页残留。"
+    },
+    {
+      "path": "player/player-shop-free-offers.png",
+      "frame": 1453,
+      "sha256": "baa8258673d7b0b53a9c7fa543a6301be09b14dd73b5df6613286fc43012bd5c",
+      "observation": "第4/6货位与回执一致，金色空心边框及可免费领取/免费文字完整；其余货位保持正常价格和购买状态，30币与4/16格未被免费展示误改，未残留凭据面板。"
+    }
+  ],
+  "confirmedIssues": [],
+  "limits": [
+    "本报告仅审查列出的7图，不将整包61图计为本审查视觉通过。",
+    "画面来自实际播放器的构造页面/状态与程序内输入；不证明自然随机牌序、完整事件遭遇路径、物理键鼠/射线或多尺寸表现。",
+    "空收购台截图不覆盖有货出售布局，正常详情也不单独证明长规则全文、非默认滚动往返、旧回调拒绝或I/O故障；这些行为由另行原生/商店SourceValidation证据承担。",
+    "静态截图不证明对象未重建或性能收益；当前源码与集中原生中的身份断言为保留视图提供独立证据。",
+    "没有修改生产或测试，没有重新启动播放器或执行任何测试。"
+  ]
+}

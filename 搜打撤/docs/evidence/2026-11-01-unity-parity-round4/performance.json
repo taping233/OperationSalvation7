@@ -1,0 +1,14 @@
+{
+  "photoWallStableMount": {
+    "nativeChecks": "native-round4-5/result.json",
+    "calls": 100,
+    "managedBytes": 0,
+    "conditions": "Warmed Action delegate, real nonempty photo wall, unchanged mount range and tile dimensions; excludes delegate construction and all other frame work."
+  },
+  "catalogStableProjection": {
+    "nativeChecks": "native-round3-regression/result.json",
+    "calls": 100,
+    "managedBytes": 0,
+    "conditions": "Warmed full native catalog read with unchanged definitions; no whole-frame GC/FPS claim."
+  }
+}

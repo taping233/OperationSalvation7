@@ -1,0 +1,39 @@
+{
+  "status": "frozen-awaiting-central-validation",
+  "scope": "Preparation owner/revision and failed-edit lifetime only; existing Hub Save archive 39 retained as evidence",
+  "compiled": false,
+  "testsRun": false,
+  "unityLaunched": false,
+  "checkEntry": "Sdt.Editor.CurrentPreparationRound4Checks.Run()/Assertions",
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/PreparationScreen.cs",
+      "bytes": 20817,
+      "mtimeNs": 1793498513406983600,
+      "sha256": "7588b76a6bebc1116e8b3a413d339e8c769edcae586b97ed0ec6bdf4a53d2692",
+      "lfSha256": "7588b76a6bebc1116e8b3a413d339e8c769edcae586b97ed0ec6bdf4a53d2692"
+    },
+    {
+      "path": "Assets/Editor/CurrentPreparationRound4Checks.cs",
+      "bytes": 7608,
+      "mtimeNs": 1793496828866493800,
+      "sha256": "f64f55c19c2d802f96b3827f61b10c12a4a092c1f12b36752b3e62b011b4afcd",
+      "lfSha256": "f64f55c19c2d802f96b3827f61b10c12a4a092c1f12b36752b3e62b011b4afcd"
+    },
+    {
+      "path": "Assets/Editor/CurrentPreparationRound4Checks.cs.meta",
+      "bytes": 60,
+      "mtimeNs": 1793496829610097800,
+      "sha256": "9b4e264d2381704086ce3074193824c0228236a266ed8be3618b85c70a32b7a1",
+      "lfSha256": "9b4e264d2381704086ce3074193824c0228236a266ed8be3618b85c70a32b7a1"
+    },
+    {
+      "path": "_planning/parity-1101-round4/hub-save-completion-audit.md",
+      "bytes": 7670,
+      "mtimeNs": 1793496928200548900,
+      "sha256": "5ef3f2db1ddff21f03727f58371d1ef3c582f5f591dc670f26f3d5eac7e657db",
+      "lfSha256": "5ef3f2db1ddff21f03727f58371d1ef3c582f5f591dc670f26f3d5eac7e657db"
+    }
+  ],
+  "lastCorrection": "Unity 6000.6.7 CS0029: onEndEdit now constructs InputField.EndEditEvent; no callback behavior change; awaiting central recompile."
+}

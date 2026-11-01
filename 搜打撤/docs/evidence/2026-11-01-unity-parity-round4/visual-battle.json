@@ -1,0 +1,168 @@
+{
+  "review": "round4 Standalone 战斗、编组与牌堆实绘独审",
+  "reviewer": "battle_parity",
+  "method": "逐张通过 view_image 读取本批正常 Standalone 实际 PNG；未启动程序、未改生产或检查源。",
+  "conclusion": "所读六张在当前 2560×1440 / DPI120 窗口未见明显新增卡面、文本或操作栏遮挡；结论限于下列画面。",
+  "playerEvidence": {
+    "result": "player/result.json",
+    "resultSha256": "dce89263ad2c589d672a8bc979448bd6a549cdb8895406b3e4c4825bf6491bde",
+    "passed": true,
+    "process": "player/process.json",
+    "processSha256": "bfee269928605c494f67fa03279b4eebd7a6449014902e34020a8467b4a14756",
+    "exitCode": 0,
+    "timedOut": false,
+    "scope": "Actual standalone backbuffer; hidden parent; normal CanvasScaler and ScreenSpaceOverlay; constructed page opens; no OS input",
+    "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "dpi": 120.0,
+    "fullScreenMode": "Windowed",
+    "canvas": {
+      "mode": "ScreenSpaceOverlay",
+      "scaleFactor": 1.33333337,
+      "width": 1920.0,
+      "height": 1080.0,
+      "lossyScale": {
+        "x": 1.33333337,
+        "y": 1.33333337,
+        "z": 1.33333337
+      },
+      "scaler": "ScaleWithScreenSize",
+      "referenceWidth": 1920.0,
+      "referenceHeight": 1080.0,
+      "matchWidthOrHeight": 0.5
+    },
+    "bufferWidthScale": 1.0,
+    "bufferHeightScale": 1.0,
+    "availablePngCount": 61,
+    "reviewedPngCount": 6
+  },
+  "images": [
+    {
+      "name": "player-battle",
+      "judgment": "未见明显新增视觉回归",
+      "observations": [
+        "玩家立绘、敌方名称与血条、顶部生命与资源、底部能量及牌堆按钮可辨。",
+        "底部休整牌以战斗手牌位置露出，结束回合控件可见；本图没有敌方等待输入或目标选择状态。",
+        "右侧受控敌人是白色矩形占位，按下述构造范围单列，不作为正式敌人立绘资源已验证的证据。"
+      ],
+      "file": "player/player-battle.png",
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5",
+      "bytes": 1844883,
+      "width": 2560,
+      "height": 1440,
+      "frame": 805,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "viewedWith": "view_image"
+    },
+    {
+      "name": "player-formation",
+      "judgment": "未见明显新增视觉回归",
+      "observations": [
+        "BOSS 战编组标题、受控首脑资料、0/3 计数与固定初始攻击说明清楚。",
+        "三张候选卡分别呈现，含同名飞刀偷袭两张；卡面与名称可见，没有错误合为一张。",
+        "规则处于折叠态，未满额提示及放弃挑战操作位于可见固定底栏。"
+      ],
+      "file": "player/player-formation.png",
+      "sha256": "d1a05fe00a3066aae48175bd7d4b466580f2d407d9e00ec99bb152c537595bd4",
+      "bytes": 1244652,
+      "width": 2560,
+      "height": 1440,
+      "frame": 1011,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "viewedWith": "view_image"
+    },
+    {
+      "name": "player-formation-rules",
+      "judgment": "未见明显新增视觉回归",
+      "observations": [
+        "规则展开后初始抽牌 5、每回合抽牌 1、每回合能量 2，以及排除类型和战前装备说明可读。",
+        "候选卡被规则向下推，卡片下缘由滚动视区裁切；右侧滚动条和固定底部操作栏可见。",
+        "本图仅证明当前展开位置，没有实际滚动到候选底部，也不据此宣称全部内容同时完整展示。"
+      ],
+      "file": "player/player-formation-rules.png",
+      "sha256": "eb4c31e58b3f663a06cabde68e7c3bd1509629685509ce38d57b983ced258d03",
+      "bytes": 1149821,
+      "width": 2560,
+      "height": 1440,
+      "frame": 1014,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "viewedWith": "view_image"
+    },
+    {
+      "name": "player-battle-pile",
+      "judgment": "未见明显新增视觉回归",
+      "observations": [
+        "剩余牌库标题与 5 张计数清楚，五张初始攻击横向独立呈现，图、费用、牌名和描述均可辨。",
+        "战斗背景在半透明模糊层后保留；右下返回战斗按钮清楚，未与卡面重叠。"
+      ],
+      "file": "player/player-battle-pile.png",
+      "sha256": "f32527dca5c9cd8ee1cbe4b997878bbdc2fa097f1bc67b1a7e9c2ebe4dca03d7",
+      "bytes": 1852935,
+      "width": 2560,
+      "height": 1440,
+      "frame": 808,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "viewedWith": "view_image"
+    },
+    {
+      "name": "player-battle-pile-reader",
+      "judgment": "未见明显新增视觉回归",
+      "observations": [
+        "居中放大的初始攻击卡面完整，名称、费用、描述与价值可读，覆盖列表部分卡片属于阅读层呈现。",
+        "右上关闭、底部 1/5 和下一张控件可见；背后的牌库标题、列表及返回战斗按钮仍保留。"
+      ],
+      "file": "player/player-battle-pile-reader.png",
+      "sha256": "de77176ff16995488066130a6613eaac9d42a08316e692a543e41f0146457792",
+      "bytes": 2000616,
+      "width": 2560,
+      "height": 1440,
+      "frame": 811,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "viewedWith": "view_image"
+    },
+    {
+      "name": "player-battle-pile-return",
+      "judgment": "未见明显新增视觉回归",
+      "observations": [
+        "关闭阅读层后放大卡、阅读关闭键与阅读翻页控件已经消失，五张列表恢复可见。",
+        "剩余牌库标题、5 张计数和返回战斗按钮保留；本图的 return 是从阅读层返回牌库列表，不是已返回战场的证明。"
+      ],
+      "file": "player/player-battle-pile-return.png",
+      "sha256": "f32527dca5c9cd8ee1cbe4b997878bbdc2fa097f1bc67b1a7e9c2ebe4dca03d7",
+      "bytes": 1852935,
+      "width": 2560,
+      "height": 1440,
+      "frame": 814,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "viewedWith": "view_image"
+    }
+  ],
+  "fixtureBoundary": {
+    "source": "SoudacheUnity/Assets/Scripts/Sdt.Boot/NativeDisplayReview.cs:122-146",
+    "battle": "显式清空 ownedCards，生命设为 1000、攻击为 0，加入 24 张独立 UID 的 SHA 克隆，cost=0、dmg=0、rules=null；以 display-foe / 受控敌人、hp=10000、atk=0 构造 BattleRequested。",
+    "whiteBlock": "受控敌人使用 QA 专用 display-foe 身份而非正式怪物身份；该构造画面中的白色矩形按 fixture 占位记录，不扩大为正式怪物图像加载已验结论。",
+    "formation": "NewPresentationFixture 后加入当前职业一张非初始武术卡，以 IsBoss=true、Layer=3、boss_orc / 受控首脑、hp=45、atk=3 构造编组入口；通过 bossFormationRules 展开规则。",
+    "pileReader": "实际捕获流程为牌库按钮 → btDecisionInspect-0 → zoom-close；未在这组三张中操作返回战斗按钮。"
+  },
+  "separateBehaviorEvidence": {
+    "result": "native-round4-5/result.json",
+    "resultSha256": "ae604178d8e4ecd5b4488328ba180de2dcb085c3bc55c10008b04092fc09ab95",
+    "passed": true,
+    "battleAssertions": 30,
+    "process": "native-round4-5/process.json",
+    "processSha256": "f1862b72fa64a436359c67dcfa6290c8d7c609f8f0ef31c50e8fc775d576e04a",
+    "exitCode": 0,
+    "inputsUnchanged": true,
+    "sourceCount": 796,
+    "details": "../../../../SoudacheUnity/_planning/parity-1101-round4/battle-turn-acceptance.md",
+    "invalidatedAttempt": "native-round4-4 changed its check input during execution and is excluded from acceptance."
+  },
+  "limits": [
+    "本报告只目检所列六张，未声称检查全部 61 张或覆盖完整玩家旅程。",
+    "截图来自正常 Standalone 实际后缓冲及正常 CanvasScaler；打开页面和动作由受控 QA 构造，无操作系统物理输入证明。",
+    "仅当前 2560×1440 / DPI120 窗口；未验证其他尺寸、硬件、帧率或原费变体 UI。",
+    "本批正常流程没有 EnemyWait 专项画面；这些静态图不能替代 native-round4-5 Battle30 对敌方等待、续接、旧回调及终局的行为断言。",
+    "Native30 的回合前置使用正式 BattleView.Commands.EndTurn，后续选择走实际 ISubmitHandler；不宣称后台结束按钮 Submit 或物理输入已验。"
+  ]
+}

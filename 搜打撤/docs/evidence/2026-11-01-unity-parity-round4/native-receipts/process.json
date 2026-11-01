@@ -1,0 +1,12 @@
+{
+  "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts",
+  "pid": 33196,
+  "startedAt": "2026-11-01T02:18:08.7763242Z",
+  "endedAt": "2026-11-01T02:18:22.8196842Z",
+  "exitCode": 2,
+  "timedOut": false,
+  "inputsUnchanged": true,
+  "changedInputs": [],
+  "sourceCount": 796,
+  "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-receipts"
+}

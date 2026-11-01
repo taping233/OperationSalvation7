@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "error": "System.InvalidOperationException: Sequence contains no matching element\r\n  at System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00011] in <a20f1d2e02704095a3695abe8dca1148>:0 \r\n  at CurrentShopRound3Checks.Fixture () [0x00084] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentShopRound3Checks.cs:28 \r\n  at CurrentShopRound3Checks+<Run>d__15.MoveNext () [0x000f9] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentShopRound3Checks.cs:44 \r\n  at Sdt.Editor.CurrentRound3Validation+<Flow>d__8.MoveNext () [0x00093] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound3Validation.cs:38 \r\n  at Sdt.Editor.CurrentRound3Validation+<Drive>d__9.MoveNext () [0x0002a] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound3Validation.cs:48 ",
+  "rewardAssertions": 54,
+  "shopAssertions": 1,
+  "battleAssertions": 0,
+  "archiveAssertions": 0,
+  "scope": "Native constructed submit and lifetime checks in isolated profile; no OS input, multi-size or FPS claim."
+}

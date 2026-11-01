@@ -1,0 +1,53 @@
+{
+  "reviewer": "hub_save_parity",
+  "status": "review-complete-no-confirmed-blocking-regression",
+  "method": "逐张使用 view_image 查看本轮实际 PNG；对照当前 player/result.json 与 trace.json，未启动程序或执行测试。",
+  "buildGUID": "a529e27adc834c58a21f47beebe94436",
+  "display": { "width": 2560, "height": 1440, "dpi": 120, "canvasScaleFactor": 1.33333337 },
+  "playerResultPassed": true,
+  "viewed": [
+    {
+      "file": "player/player-hub-variant-stock.png",
+      "frame": 1840,
+      "finding": "四种库存各占独立卡位；同名迅疾箭两堆分别显示 ×3/×2，卡面、计数与底部导航没有相互重叠。"
+    },
+    {
+      "file": "player/player-hub-warehouse-actions.png",
+      "frame": 1871,
+      "finding": "详情卡面、标题、持有 3 张及保护/返回按钮完整；仓库详情没有出售按钮，暗色遮罩与后方仓库层次清楚。"
+    },
+    {
+      "file": "player/player-hub-trade-variant.png",
+      "frame": 2084,
+      "finding": "第一堆高亮，持有 3/2/1；右侧单价 2、单卖收入 2、整堆收入 6，与余额 10 清楚分区，按钮无裁切。"
+    },
+    {
+      "file": "player/player-hub-trade-base-variant.png",
+      "frame": 2179,
+      "finding": "出售第一堆后高亮切到第二堆；两堆数量为 2/2，余额 12，整堆收入更新为 4。右下出售完成通知未盖住交易详情或操作按钮。"
+    },
+    {
+      "file": "player/player-returned-base.png",
+      "frame": 1791,
+      "finding": "返回基地后页头、事务卡、出征整备和底部基地选中状态完整，没有战斗/背包/模态残留。"
+    },
+    {
+      "file": "player/player-returned-slots.png",
+      "frame": 2636,
+      "finding": "五个档位完整排布；档位 05 为基地档案，其余为空档，进入/覆盖/删除/备份入口未挤压重叠，没有基地页残留。"
+    },
+    {
+      "file": "player/player-slot-archive-import-preview.png",
+      "frame": 2765,
+      "finding": "导入预览确认层居中，来源档位、保存时间和替换警告完整可读；返回与确认按钮清楚分开，下层 JSON 编辑器及档位页正确变暗。"
+    }
+  ],
+  "confirmedIssues": [],
+  "minorObservation": "仓库顶部“4 种·仓库 8/25 格”浅色摘要落在较亮背景上，对比偏弱；本轮未确认其为新增回归，未据此改动生产。",
+  "boundaries": [
+    "只覆盖上述七张当前播放器实绘静态画面，未复用旧 Passed；未评估其他尺寸、动画全过程或声音。",
+    "trace 标记为 constructed page opens / mounted-player-controls，未使用 OS 硬件输入；旧回调重放是单独构造的检查，不计作正常玩家输入。",
+    "同名两堆使用相同卡面；截图能证明独立分堆、选中和数值显示，variant key 的身份与副作用依据 trace/既有领域断言，不能仅凭画面认定。",
+    "导入图停在写入前确认预览；之后确认、返回标题的步骤来自当前 trace，不以这一张截图替代持久化结果检查。"
+  ]
+}

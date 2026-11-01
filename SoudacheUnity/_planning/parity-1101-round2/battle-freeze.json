@@ -1,0 +1,73 @@
+{
+  "status": "frozen; compilation/tests/Unity not run",
+  "frozenAt": "2026-11-01T07:31:16.8611028+08:00",
+  "unityBaseline": "81b87cbd5f7b6bb7de48b0973c534ba494cb84a9",
+  "parentBaseline": "f966e859043b7ab3703839005029ef090a4677b5",
+  "scope": "Five production files, one existing regression entry; Vite read-only, no file deletion, no persistent lookup/snapshot cache, no compatibility wrapper.",
+  "staticReview": "git diff --check exit 0; source/call and diff inspection only",
+  "productionCount": 5,
+  "regressionCount": 1,
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "bytes": 77869,
+      "sha256": "fa507df7d084702904d3f9e186548d681807e99fe822bfa2c11b86868abfe8cc",
+      "lfSha256": "b4012d3f1cdecbadae6e46035027ba4b48dcdcfa9f0893a17b10142cd3dd4df1",
+      "role": "production"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleHandTransforms.cs",
+      "bytes": 1263,
+      "sha256": "36b0e0315081d5e57fbee18ab4ef1e73eb6859760cc32ff0d20e8764efe1b032",
+      "lfSha256": "36b0e0315081d5e57fbee18ab4ef1e73eb6859760cc32ff0d20e8764efe1b032",
+      "role": "production"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleHandProjection.cs",
+      "bytes": 1652,
+      "sha256": "c47394d27519b76454fd32a70505cb6c5f1cedbb43e6ec1e0a0e136c6c9946bb",
+      "lfSha256": "c47394d27519b76454fd32a70505cb6c5f1cedbb43e6ec1e0a0e136c6c9946bb",
+      "role": "production"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/BattleBridge.cs",
+      "bytes": 24336,
+      "sha256": "95142aa2b86b826644049b1c7ba906221834f39f42e25a5eb8e24db64a2dd2f4",
+      "lfSha256": "816ddd01e7d0bce99d4d859c652e9bf9ab2dfcf8f2118b21848ea207c2b0e39a",
+      "role": "production"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/HandPanel.cs",
+      "bytes": 15629,
+      "sha256": "a7307393b1d71e4ed36aeca9f27caf401204d367185da1426c36f9f72e363a4b",
+      "lfSha256": "7266185ff1de5904451179c6f23dfc74219fe56c15ffe5feda3d735572d0d81f",
+      "role": "production"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Program.cs",
+      "bytes": 16785,
+      "sha256": "f97cc38bbdd5b031e9a8b20218de945a9fcda97f4cd61d9eb6c1953977563697",
+      "lfSha256": "f97cc38bbdd5b031e9a8b20218de945a9fcda97f4cd61d9eb6c1953977563697",
+      "role": "regression-source"
+    }
+  ],
+  "viteSources": [
+    {
+      "path": "搜打撤/game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "d49fd89f58f9bec35478b93329b7ddd95496d29b886bec293511a762a72e86f3"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.hand.js",
+      "sha256": "7418cb177dfe5d397092bfff4574f723ccfb25c1bd76dca8b307c3550b68caa8"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.infusion-material-state.js",
+      "sha256": "48aa3386323df7da2d4d12e2af0a19fd1ec28a30c0bfd3de8b39935c222548ab"
+    }
+  ],
+  "testEntry": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+  "testStatus": "New assertion source awaits the root combined run; prior parity passed does not certify these changes.",
+  "review": "battle.md",
+  "directReadApi": "public string BattleSession.BattleToken => _battleToken",
+  "remaining": "Root combined Core/type/native tests, true-infusion cost-variant UI/keys and target/settlement owner regression."
+}

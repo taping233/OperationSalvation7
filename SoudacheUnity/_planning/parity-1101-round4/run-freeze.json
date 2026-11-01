@@ -1,0 +1,34 @@
+{
+  "status": "source-frozen-awaiting-root-central-validation",
+  "productionChanged": false,
+  "checksRun": false,
+  "unityStarted": false,
+  "entry": "CurrentRunRound4Checks.Run()",
+  "expectedAssertions": 29,
+  "assertionDefinition": {
+    "runBody": 25,
+    "fixturePerCall": 2,
+    "fixtureCalls": 2
+  },
+  "reusedEntriesPending": [
+    "Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts",
+    "Sdt.Editor.CurrentMigrationFlowValidation.RunJourney"
+  ],
+  "scope": "Fresh SaveSystem file read plus same-process ShowTitle/LoadRun; no process restart, physical input or natural journey claim",
+  "checkRepair": {
+    "trigger": "native-round4-2 stopped at assertion 12; first successful grant legitimately advanced identity twice",
+    "classification": "incorrect pre-grant RNG baseline in verification; no production change",
+    "replayBaseline": "full post-success RNG and exact owned cards; completed extraction uses its post-completion baseline",
+    "lastExecution": "pre-repair source only; repaired source awaits Root centralized validation"
+  },
+  "files": [
+    {
+      "path": "Assets/Editor/CurrentRunRound4Checks.cs",
+      "sha256": "37a5673a1b19d833a4cbd9562dcd812e14ef5aaea76aed319d922a23b9a4e5a8"
+    },
+    {
+      "path": "Assets/Editor/CurrentRunRound4Checks.cs.meta",
+      "sha256": "cf4f2ffb591eaa0272c0880661f6a9b506bdf05e7f74ca1edf4b336ff5f032aa"
+    }
+  ]
+}

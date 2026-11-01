@@ -2,7 +2,7 @@
 
 Unity 工程使用同仓的 `搜打撤/game` 作为现行资源来源。克隆仓库后保留 `SoudacheUnity/` 与 `搜打撤/` 的同级布局；只下载 Unity 子目录不包含完整原料。
 
-本轮桌面包在 Unity 6000.6.7f1、当前2560×1440窗口通过845项领域检查、原生选材/注能、音频/设置/生命周期检查及完整Standalone流程，取得61张画面。输入、实际操作与版本范围记录在[本次验收](../搜打撤/docs/evidence/2026-11-01-github-sync/README.md)。源码提交的行尾按父仓库规则统一为LF，工作区原字节与Git对象指纹分别记录，不用EXE启动壳哈希识别版本。
+当前桌面包使用Unity 6000.6.7f1，buildGUID为`66a82ecd32f2426e98d4bf06b8ed3308`。1101项领域、681项原生及正式终局/四层旅程通过；当前2560×1440正常Standalone流程取得61图，实看19图。完整输入、范围和失败历史见[第四轮验收](../搜打撤/docs/evidence/2026-11-01-unity-parity-round4/README.md)。源码提交行尾统一为LF，工作区原字节与Git对象指纹分别记录；EXE为Unity启动壳，其哈希不能单独识别代码版本。
 
 ## 恢复资源
 
@@ -27,6 +27,8 @@ python _planning/migration-1030-fidelity/shop/import_assets.py
 
 正常入口为`Assets/Scenes/Bootstrap.unity`。编辑器中打开场景后进入Play；Windows独立包由`Sdt.Editor.BuildGame.BuildWin64`生成至`Build/Desktop/代号柒.exe`。运行时依赖通过正式Packages恢复，临时第三方DLL和历史编译输出不作为依赖入口。
 
-领域检查入口为`_planning/parity-1031/`中的BattleChecks、RunParityChecks与HubParityChecks项目。原生检查为`Sdt.Editor.CurrentBattleMaterialValidation.Run`及`Sdt.Editor.CurrentParityValidation.Run`；需设置独立`SDT_UNITY_CHECK_OUTPUT`，验收使用隔离档。项目已包含正式SFX混音器，初始化无需重跑一次性生成器。
+五个领域项目为`_planning/parity-1031/battle-check/BattleChecks.csproj`、`_planning/parity-1031/run-check/RunParityChecks.csproj`、`_planning/parity-1031/HubParityChecks.csproj`、`_planning/parity-1101-round2/run-check/RunRound2Checks.csproj`及`_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj`。先由Unity恢复锁定的Newtonsoft包；前三个与Round2项目直接`dotnet run --project <项目>`，Archive项目依次传`-- export <全新输出目录>`、`-- import <同目录>`、`-- id-conflict <同目录>`和`-- name-conflict <同目录>`，四次为独立进程。
+
+新增原生入口为`Sdt.Editor.CurrentRound4Validation.Run`，既有回归为`CurrentRound3Validation.Run`、`CurrentRound2Validation.Run`与`CurrentParityValidation.Run`（均在`Sdt.Editor`）。正式终局及四层旅程分别为`Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts/RunJourney`。经`_planning/migration-1029/run_native_check.ps1 -Method <入口> -Output <全新绝对目录>`执行，驱动使用隔离profile；原生离屏诊断与正常当前窗口播放器分开记录。项目已有正式SFX混音器，无需重跑一次性生成器。
 
 范围沿[MIGRATION.md](MIGRATION.md)。原生音频压缩比10对应源WebAudio的12，是已记录的后端适配；未作逐样本声学、物理键鼠、多尺寸或FPS/内存收益声明。

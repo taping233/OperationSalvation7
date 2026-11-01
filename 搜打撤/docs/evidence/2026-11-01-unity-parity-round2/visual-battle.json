@@ -1,0 +1,93 @@
+{
+  "status": "reviewed: no new obvious regression within the six assigned images",
+  "reviewedAt": "2026-11-01T07:54:02.5596285+08:00",
+  "playerResultPassed": true,
+  "playerScope": "Actual standalone backbuffer; hidden parent; normal CanvasScaler and ScreenSpaceOverlay; constructed page opens; no OS input",
+  "resultSha256": "4e6f0c0f810bf41d946729af969e678e9e11ed9785985c4f51b5fd96b21bf2bf",
+  "display": {
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120.0,
+    "fullScreenMode": "Windowed",
+    "canvasMode": "ScreenSpaceOverlay",
+    "canvasScale": 1.33333337,
+    "buildGUID": "a529e27adc834c58a21f47beebe94436"
+  },
+  "images": [
+    {
+      "file": "player/player-battle.png",
+      "bytes": 1844883,
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5",
+      "frame": 803,
+      "method": "view_image, original actual PNG",
+      "finding": "战场、玩家、生命/能量/牌堆与回合控件可见；静置卡面保留原有下沿沉底。",
+      "newObviousRegression": false
+    },
+    {
+      "file": "player/player-hand-material.png",
+      "bytes": 2300628,
+      "sha256": "b0417b14608dc4b4bd49a070c69bebc6de62316f3d81a96d83fe81d6e4e31697",
+      "frame": 855,
+      "method": "view_image, original actual PNG",
+      "finding": "复制选材0/1居中状态、取消和禁用确定可辨；候选保留普通手牌区，战场保持清楚。",
+      "newObviousRegression": false
+    },
+    {
+      "file": "player/player-hand-material-picked.png",
+      "bytes": 2337151,
+      "sha256": "e6458ee2ede31d46210577853ed52a34e6cd30f1626346c1fd078fd741bd3427",
+      "frame": 858,
+      "method": "view_image, original actual PNG",
+      "finding": "复制选材1/1，已选卡抬起并有金边，卡面与说明可读；确定转为启用。",
+      "newObviousRegression": false
+    },
+    {
+      "file": "player/player-infusion.png",
+      "bytes": 2067283,
+      "sha256": "9fefe7eab5ef95c9afa5d968965a238f2e91bad51beb645c028bb616970351f1",
+      "frame": 861,
+      "method": "view_image, original actual PNG",
+      "finding": "真实注能0/1，大源卡、六个首屏候选、返回/直接打出/禁用确认、1/2分页可见；arena局部模糊和遮罩可见。",
+      "newObviousRegression": false
+    },
+    {
+      "file": "player/player-infusion-picked.png",
+      "bytes": 2093716,
+      "sha256": "07358d0c37570bb6424ac8fa440e99469bfb4c7e8f1f4b8d2f22860be5ce1b78",
+      "frame": 864,
+      "method": "view_image, original actual PNG",
+      "finding": "真实注能1/1，已选卡面未被实心矩形覆盖；空心金框、撤回箭头、启用确认及满额候选变暗均可辨。",
+      "newObviousRegression": false
+    },
+    {
+      "file": "player/player-infusion-return.png",
+      "bytes": 2428753,
+      "sha256": "319eed8e0236c949e7a49e85f9fe1667139bc439bd3c9af5df09555c58856698",
+      "frame": 867,
+      "method": "view_image, original actual PNG",
+      "finding": "返回后大工作区、已选区与模糊消失，玩家/敌生命条、普通手牌、1/2页与结束回合恢复。",
+      "newObviousRegression": false
+    }
+  ],
+  "constructedEvidence": {
+    "scope": "Actual Standalone backbuffer with normal CanvasScaler; program-constructed page opens and pointer/button actions; no OS hardware input.",
+    "cancelRecord": [
+      {
+        "kind": "constructed-player-click",
+        "name": "hand-material-cancel",
+        "first": "hand-material-cancel",
+        "receiver": "hand-material-cancel"
+      }
+    ],
+    "controlledEnemy": "Assigned images show a white rectangle labelled 受控敌人 with 10000 HP. These constructed QA captures do not establish production enemy-art correctness, and this review does not classify that rectangle as a newly introduced rendering regression."
+  },
+  "limitations": [
+    "No new Player launched, no window/size change, no production/test edit, no tests rerun.",
+    "Review is limited to these six actual images at 2560x1440/DPI120, not all pages, all card combinations or another hardware/display profile.",
+    "Images show normal hand-selection draft and true-infusion pick/return states; no claim of physical keyboard/mouse input or complete timing/interaction verification.",
+    "Original-cost 3/1/3 variants at equal effective cost were not specially exercised in these UI captures; do not claim this visual review validates that dedicated case.",
+    "Resting hands intentionally overlap and extend toward the lower viewport edge; this review does not certify every unhovered description as fully readable.",
+    "Programmatic suite success is read from this result.json; it is not an independent rerun of the suite."
+  ],
+  "requiredFixes": []
+}

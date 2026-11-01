@@ -1,0 +1,66 @@
+{
+  "reviewer": "run_parity",
+  "status": "passed_within_reviewed_scope",
+  "buildGUID": "a529e27adc834c58a21f47beebe94436",
+  "evidence": {
+    "result": "player/result.json",
+    "trace": "player/trace.json",
+    "process": "player/process.json",
+    "playerPassed": true,
+    "exitCode": 0,
+    "packagePngCount": 61,
+    "reviewedPngCount": 7,
+    "screen": "2560x1440 / DPI120 / Windowed / normal CanvasScaler",
+    "method": "逐张 view_image 检查实际 Standalone backbuffer，并读取既有结果与 trace；没有重新启动程序或执行测试。"
+  },
+  "images": [
+    {
+      "path": "player/player-reward-reader-organizer.png",
+      "sha256": "14fbb5b318825a5cd13b5a08fe36ada0e6c5dba4f448814c407ad6a0e43f1732",
+      "result": "背包标题、16/16占格、43张计数、卡面与安全格入口清晰；保存失败回执位于上方，无覆盖首排卡面。下排按滚动视口裁切，未见新增布局回归。"
+    },
+    {
+      "path": "player/player-reward-reader-capacity.png",
+      "sha256": "571eb8615b90780592bc0b2512089991e5f1262bb025fbfe3349b66d98afcbd3",
+      "result": "火球阅读器主体、费用、说明、整理背包按钮与右上关闭入口完整可读；背景模糊与前景卡面分离。"
+    },
+    {
+      "path": "player/player-recode-reader.png",
+      "sha256": "554bfb6595a94d32873a1ddfcd0624d6abdbd2c186ff720193917d3cc399481d",
+      "result": "潜匿阅读器的卡名、说明、费用、备注与关闭按钮可见，无文字裁切或卡面遮挡。"
+    },
+    {
+      "path": "player/player-recode-result.png",
+      "sha256": "1eb1516e2fbc79fc28aa180e3ad65a62f98471d2d4dcac11ff42556393822422",
+      "result": "两列各为旧卡名→本列新卡面：不变应万变-改→潜匿、潜匿→江湖救急-改。卡面、整理背包与确认按钮完整，符合现行源版逐列合同。"
+    },
+    {
+      "path": "player/player-recode-save-failed.png",
+      "sha256": "7e00697269ee46565e843a4c36195ea2bd823628e5f5c70ee5fed7c1ab0c9efb",
+      "result": "失败后原两列结果保持可见，整理/确认按钮及“原卡和结果已保留”回执可读；全局与页内保存提示没有盖住卡面或动作。"
+    },
+    {
+      "path": "player/player-shop.png",
+      "sha256": "86bc321e7f4952c83491349ae463e62574cf4aecc0c4453aa83949c3acb3aff3",
+      "result": "补给站标题、30币、4/16格、两排商品、价格/购买状态、神秘货箱、整理入口与返回地图按钮均完整，无相互遮挡。"
+    },
+    {
+      "path": "player/player-returned-base.png",
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291",
+      "result": "返回基地后的顶部资源、基地事务、出征整备、模式与底部导航可读，未残留局内奖励或失败遮罩。"
+    }
+  ],
+  "confirmedIssues": [],
+  "investigatedObservation": {
+    "initialObservation": "曾将重编列上方旧卡名与下方新卡名不同列为疑点；已撤回，不作为缺陷。",
+    "sourceContract": "Vite game/src/ui/event-recode-result.js:15 每列显示 entries[i].card.name、箭头及 cards[i] 新面；两列不是左右组成一对。",
+    "unityBinding": "EventDialogRecode.cs:36 从同一 progress.sources/progress.drawn 按索引传入；72显示来源名称，81绘制新卡。GameRuntime.EventRoutes.cs:108记录来源，160-162确认按同序来源应用 drawn。",
+    "fixtureBoundary": "NativeDisplayReview.cs:338-348 通过正式来源选择与骰子建立已冻结结果，没有拼接矛盾数据；因此无需修改生产或夹具。"
+  },
+  "limits": [
+    "本文件只审查列出的7张，未把整包61图全部记为本审查通过。",
+    "正式播放器使用构造页面/状态和程序内既有检查，没有操作系统物理键鼠输入；截图证明呈现，不单独证明持久化或焦点行为。",
+    "新增同ID不同variant复原场景没有被这61图专门构造；该行为覆盖来自 Root 已通过的当前 Editor run13 检查，不能归功于本次画面。",
+    "没有追加测试、编译、Unity启动或生产/测试源码修改；受授权仅补读重编相关源码以排除视觉疑点。"
+  ]
+}

@@ -53,10 +53,12 @@ crashlytics-build.properties
 /_planning/**/profile.json*
 /*.log
 
-# Keep the three handwritten domain-check projects; generated *.csproj stay ignored.
+# Keep the handwritten domain-check projects; generated *.csproj stay ignored.
 !/_planning/parity-1031/HubParityChecks.csproj
 !/_planning/parity-1031/battle-check/BattleChecks.csproj
 !/_planning/parity-1031/run-check/RunParityChecks.csproj
+!/_planning/parity-1101-round2/run-check/RunRound2Checks.csproj
+!/_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj
 
 # Restore audio, fonts and archives from the documented resource recipes.
 # Keep their .meta files so restored assets retain the published GUIDs.

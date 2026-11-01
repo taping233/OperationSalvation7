@@ -1,0 +1,95 @@
+{
+  "status": "reviewed-no-confirmed-visual-regression-with-context-notes",
+  "reviewDate": "2026-11-01",
+  "reviewMethod": "Each of the seven listed PNG files was opened with view_image; result/process and the matching capture records were read separately.",
+  "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+  "display": {
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120,
+    "canvas": "ScreenSpaceOverlay, ScaleWithScreenSize, scaleFactor 1.33333337, logical reference 1920x1080",
+    "capture": "Actual Standalone backbuffer at the current physical primary desktop size, with normal player CanvasScaler; not the Editor 1920x1080 offscreen evidence.",
+    "host": "Zero-alpha, nonactivating click-through parent HWND; constructed page opens and program input, no OS hardware input."
+  },
+  "playerExecution": {
+    "passed": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "pid": 16668,
+    "generatedPngCount": 61,
+    "visuallyReviewedPngCount": 7,
+    "localResult": "player/result.json",
+    "resultSha256": "dce89263ad2c589d672a8bc979448bd6a549cdb8895406b3e4c4825bf6491bde",
+    "localProcess": "player/process.json",
+    "processSha256": "bfee269928605c494f67fa03279b4eebd7a6449014902e34020a8467b4a14756"
+  },
+  "images": [
+    {
+      "file": "player/player-extraction.png",
+      "sha256": "743eb53c4aaa8097c6a3f53d23b89ada8f197eba0b4c1f43aaabd6b292817d44",
+      "frame": 1572,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "judgment": "Three distinct readable card faces, one copy each, match the pending count of 3. The 5/25 capacity, remaining room, per-card deposit buttons, rarity/all deposit actions and loss/finish footer fit the window without visible overlap or clipping. The shared run header is absent as intended. A prior failure toast remains briefly visible; see context note."
+    },
+    {
+      "file": "player/player-settlement.png",
+      "sha256": "352140e5391a1f4633a3c331e40309757d8e0d547e3c26235f7e22ae14b79ff3",
+      "frame": 1703,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "judgment": "The report shows 3 deposited cards, +0 wood/rations, +20 XP and the named memento in separate readable areas; the saved marker and return-to-base control are visible and unobstructed. The 00:00 duration and fourth-layer state are controlled fixture values, not evidence of a natural completed journey."
+    },
+    {
+      "file": "player/player-returned-base.png",
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291",
+      "frame": 1796,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "judgment": "Base/archive 05, resource counters, task card, departure panel and full bottom navigation are readable. No extraction footer, settlement controls, failure toast or run header visibly remains over the base. This is the requested returned-base image, not the separate later Hub parity fixture."
+    },
+    {
+      "file": "player/player-recode-reader.png",
+      "sha256": "c59080fb004cda2092f30a2e29587eb898aae505a83e490785c6b38fcb7bafa1",
+      "frame": 1458,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "judgment": "The central enlarged 盗宝 card, cost/value, description, notes strip and top-right close control are fully visible. Background blur separates the reader from the underlying event; no card edge or note field is clipped."
+    },
+    {
+      "file": "player/player-recode-result.png",
+      "sha256": "e0adfdd27a1fbdf0f7fecdc8acf57c56f994f7f2ed3fb3e3a955a1dfbc2feacc",
+      "frame": 1455,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "judgment": "The two columns present old name to replacement card independently: 鬼魅之刃 to 盗宝 and 流星箭雨 to 潜匿. The old names are not expected to match the new card titles or each other. Card faces, lower event copy and organize/accept controls are readable and do not overlap."
+    },
+    {
+      "file": "player/player-recode-save-failed.png",
+      "sha256": "33a688307257f4105a338d3d047965138131893c24c928ccc08015608ff41a01",
+      "frame": 1467,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "judgment": "The same replacement cards and old-name labels remain visible after the deliberately locked save. The local retained-result message, global error and retry-save affordance fit without covering the card faces or organize/accept controls. Button operability and rollback are supported by the player's recorded program assertions, not inferred from static color alone."
+    },
+    {
+      "file": "player/player-reward-pending.png",
+      "sha256": "83354692db6f65f61c9de7dbb2ff9569ef41d406a8d8289af21e1d2e2d6a4e30",
+      "frame": 1513,
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+      "judgment": "The actual image is a small supply chest with one pending 火球: card, claim button, 4/16 capacity, organize/other actions and return-to-map footer are readable and separated. It is chest reward presentation, not a dedicated resource-node two-choice view. The preceding recode failure toast remains briefly visible; see context note."
+    }
+  ],
+  "confirmedVisualRegressions": [],
+  "contextNotes": [
+    {
+      "id": "prior-failure-toast-across-controlled-fixtures",
+      "images": ["player/player-reward-pending.png", "player/player-extraction.png"],
+      "observation": "A short-lived global save-failure toast from the previous deliberately failed recode save is still visible at the top. It does not cover current cards or actions, and it is absent by settlement/returned-base.",
+      "sourceContext": "NativeDisplayReview.cs performs the locked recode acceptance, captures its failure, successfully retries, then constructs new reward and extraction fixtures without waiting for that toast's lifetime. No new I/O failure is injected in those two captures.",
+      "interpretation": "Recorded as cross-fixture transient feedback, not proof that the current chest or extraction save failed and not a confirmed new layout defect. No production modification was made."
+    }
+  ],
+  "limits": [
+    "Only these seven current 2560x1440 PNGs were visually reviewed; generation of 61 images and player passed=true do not mean all 61 were reviewed by this agent.",
+    "This package has no separately named event or resource PNG. The event sample reviewed is recode; the reward sample is a supply chest. Resource-node two-choice rendering and all event branches are not claimed as visually checked here.",
+    "No 1920x1080 Editor screenshot or prior-round image was substituted.",
+    "Controlled page/state construction and program assertions do not establish natural progression, balance, physical mouse/keyboard input, multiple sizes, sustained FPS or full failure-combination coverage."
+  ],
+  "sourceOrChecksModified": false,
+  "testsOrUnityStartedByReviewer": false
+}

@@ -1,0 +1,121 @@
+{
+  "status": "validated",
+  "atUtc": "2026-10-31T23:55:43.885254+00:00",
+  "sourceCount": 386,
+  "sourceUnchanged": true,
+  "buildInputCount": 3933,
+  "buildInputsUnchanged": true,
+  "executableSha256": "9806abde4a406ed68647e9505852c49f6aa72a372f4f084e2aa2821affea57a2",
+  "domain": {
+    "battle": 66,
+    "runBaseline": 326,
+    "runRound2": 32,
+    "hub": 472,
+    "total": 896
+  },
+  "native": {
+    "sharedRound2": 23,
+    "runRound2": 13,
+    "hubRound2": 339,
+    "existing": 48
+  },
+  "normalPlayer": {
+    "passed": true,
+    "screenshots": 61,
+    "buildGUID": "a529e27adc834c58a21f47beebe94436",
+    "process": {
+      "executable": "D:\\素材\\代号柒\\SoudacheUnity\\Build\\Desktop\\代号柒.exe",
+      "executableSha256": "9806abde4a406ed68647e9505852c49f6aa72a372f4f084e2aa2821affea57a2",
+      "pid": 27392,
+      "startedAt": "2026-10-31T23:50:08.7690711Z",
+      "endedAt": "2026-10-31T23:51:22.2009512Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "host": {
+        "hwnd": 11733188,
+        "visible": false,
+        "dpi": 120,
+        "awareness": 2,
+        "clientWidth": 2560,
+        "clientHeight": 1440,
+        "windowLeft": 0,
+        "windowTop": 0,
+        "windowWidth": 2560,
+        "windowHeight": 1440
+      },
+      "child": {
+        "hwnd": 8588410,
+        "visible": true,
+        "dpi": 120,
+        "awareness": 2,
+        "clientWidth": 2560,
+        "clientHeight": 1440,
+        "windowLeft": 0,
+        "windowTop": 0,
+        "windowWidth": 2560,
+        "windowHeight": 1440
+      },
+      "childGeometryChanges": [
+        {
+          "seconds": 0.3721377,
+          "window": {
+            "hwnd": 8588410,
+            "visible": false,
+            "dpi": 120,
+            "awareness": 2,
+            "clientWidth": 2560,
+            "clientHeight": 1440,
+            "windowLeft": 0,
+            "windowTop": 0,
+            "windowWidth": 2560,
+            "windowHeight": 1440
+          }
+        },
+        {
+          "seconds": 5.5067277,
+          "window": {
+            "hwnd": 8588410,
+            "visible": true,
+            "dpi": 120,
+            "awareness": 2,
+            "clientWidth": 2560,
+            "clientHeight": 1440,
+            "windowLeft": 0,
+            "windowTop": 0,
+            "windowWidth": 2560,
+            "windowHeight": 1440
+          }
+        }
+      ],
+      "transparentCompositor": true,
+      "zeroAlphaAndNonactivating": true,
+      "input": "No OS input; zero-alpha nonactivating click-through parent HWND; standalone backbuffer at current physical primary desktop size",
+      "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round2\\player"
+    }
+  },
+  "scope": "No physical-input, multi-window-size, acoustic or FPS claim. Allocation checks are limited to the production rim tint delegate and warmed snow mesh construction; zero managed bytes, not whole-frame allocation.",
+  "visualReviews": {
+    "battle": {
+      "path": "visual-battle.json",
+      "status": "reviewed: no new obvious regression within the six assigned images",
+      "sha256": "d61ec60d6a37341faf38bc893b8e762c97592573748ce9ce9848e4e3d3287d8d"
+    },
+    "run": {
+      "path": "visual-run.json",
+      "status": "passed_within_reviewed_scope",
+      "sha256": "020db3c796b4fb617f2049cce24a5bb087baff53269495c46a74ea0864c1d06b"
+    },
+    "hub": {
+      "path": "visual-hub.json",
+      "status": "review-complete-no-confirmed-blocking-regression",
+      "sha256": "4645c88e8889343280bbae52863e24c8dfcc4657fb748cd5a67956cddf72073c"
+    },
+    "shared": {
+      "path": "visual-shared.json",
+      "status": "passed-with-scope",
+      "sha256": "c26dd98b95e014b8694f729772d67df9d56eab1be437a1ef57ec562ff7dace57"
+    }
+  },
+  "continuousGoal": "active; round2 validated, next audit follows actual shop/reward rebuild costs and remaining source differences",
+  "publication": "This batch remains local and uncommitted. Previous published baseline remains unchanged."
+}

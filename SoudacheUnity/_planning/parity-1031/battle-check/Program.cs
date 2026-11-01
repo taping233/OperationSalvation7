@@ -5,7 +5,7 @@ using System.Reflection;
 using Sdt.Core;
 using Sdt.Core.Battle;
 
-static class Program
+static partial class Program
 {
     sealed class Host : BattleHost
     {
@@ -13,12 +13,16 @@ static class Program
         public int MaxHp => 1000;
         public int Atk => 0;
         public int SpellPower => 0;
-        public string MyClass => null;
+        public string MyClass { get; set; }
         public string CharacterId => "wu";
-        public IReadOnlyList<OwnedCard> OwnedCards { get; set; }
-        public void Log(string text,string kind = null) { }
+        IReadOnlyList<OwnedCard> ownedCards;
+        public int OwnedCardReads;
+        public IReadOnlyList<OwnedCard> OwnedCards { get { OwnedCardReads++; return ownedCards; } set { ownedCards=value; } }
+        public readonly List<string> Logs = new List<string>();
+        public readonly List<BattleResult> Results = new List<BattleResult>();
+        public void Log(string text,string kind = null) => Logs.Add(text);
         public void Heal(int amount) => Hp = Math.Min(MaxHp,Hp + amount);
-        public void OnBattleEnd(BattleResult result) { }
+        public void OnBattleEnd(BattleResult result) => Results.Add(result);
     }
     static int checks;
     static void Check(bool condition,string message) { if (!condition) throw new Exception(message); checks++; }
@@ -103,7 +107,9 @@ static class Program
     }
     static void Main()
     {
-        CardLibrary.Init(()=>CardDatabase.All);Selection();EquipmentCancellation();Costs();Presentation();ShortcutProjection();
+        CardLibrary.Init(()=>CardDatabase.All);Selection();EquipmentCancellation();Costs();Presentation();ShortcutProjection();TargetReadProjection();HandTransformLookups();
+        AutomaticCastSelections();AutomaticCastDrawSelections();AutomaticGeneratedSelections();NecromancerFeedback();
+        EnemyTurnSelections();
         Console.WriteLine("PASS "+checks+" current production battle assertions; source semantics: hand-material-selection, hand-selection, card-cost and card-inspection.");
     }
     static void ShortcutProjection()
@@ -114,6 +120,58 @@ static class Program
         Check(order.SequenceEqual(new[]{"sha","a","c","b","renamed","equip"}),"infusion shortcuts lost physical UID grouping/rank/order");
         Check(entries[0].Item1=="a"&&entries[2].Item1=="b"&&entries[3].Item1=="c","shortcut projection changed original hand order");
         Check(BattleHandProjection.InfusionShortcuts(entries,"source",card=>card.cost).SequenceEqual(order),"shortcut projection is not repeatable");
+        var expensive=Card("same-cost-variant","法术",3);var cheaper=expensive.Clone();cheaper.cost=1;
+        var variantEntries=new[]{("high-a",expensive),("low",cheaper),("high-b",expensive.Clone()),("source",source)};
+        Check(BattleHandProjection.StackKey(expensive,1)!=BattleHandProjection.StackKey(cheaper,1),"equal effective cost erased original cost identity");
+        Check(BattleHandProjection.StackKey(expensive,1)==BattleHandProjection.StackKey(variantEntries[2].Item2,1),"identical original and effective cost did not stack");
+        Check(BattleHandProjection.InfusionShortcuts(variantEntries,"source",_=>1).SequenceEqual(new[]{"high-a","high-b","low"}),"original-cost variants lost stack/physical UID shortcut order");
+        Check(variantEntries.Select(entry=>entry.Item1).SequenceEqual(new[]{"high-a","low","high-b","source"})&&expensive.cost==3&&cheaper.cost==1,"cost projection mutated source cards or hand order");
+    }
+    static void TargetReadProjection()
+    {
+        var session=Start(Card("target-a"),Card("target-b"));var host=(Host)Field(session,"G");
+        string token=session.Snapshot.BattleToken;host.OwnedCardReads=0;
+        bool sameToken=true;for(int i=0;i<100;i++)sameToken&=session.BattleToken==token;
+        Check(sameToken,"direct battle token changed identity");
+        Check(host.OwnedCardReads==0,"identity read projected live battle inventory");
+        var original=session.FindCard("c0").card;
+        var pending=new PendingTargetSnapshot{uid="c0",card=original,Kind="fighters",BattleToken=token,SelectionId=27,ExcludedTargetIndex=0};
+        Set(session,"pendingTarget",pending);
+        var fuel=new List<string>{"c1"};Set(session,"pendingFuel",fuel);Set(session,"pendingFuelUid","c0");
+        var fighters=((List<BattleFoe>)Field(session,"foes")).ToArray();Set(session,"preparedFighters",fighters);Set(session,"preparedFightersUid","c0");
+        Action<BattleFoe> continuation=_=>{};Set(session,"deferredTargetAction",continuation);
+        var current=original.Clone();current.name="当前有效牌";((Dictionary<string,CardDef>)Field(session,"cardOverrides"))["c0"]=current;
+        session.LockPendingTarget(new PendingTargetSnapshot{uid="c0"});
+        var kept=session.Snapshot.PendingTarget;
+        Check(kept.Kind=="fighters"&&kept.BattleToken==token&&kept.SelectionId==27&&kept.ExcludedTargetIndex==0,"same-UID lock erased target ownership or selection state");
+        Check(ReferenceEquals(kept.card,current)&&ReferenceEquals(pending.card,original),"same-UID lock lost current face or mutated previous target projection");
+        Check(ReferenceEquals(Field(session,"pendingFuel"),fuel)&&ReferenceEquals(Field(session,"preparedFighters"),fighters)&&ReferenceEquals(Field(session,"deferredTargetAction"),continuation),"same-UID lock discarded payment or target continuation");
+        session.LockPendingTarget(new PendingTargetSnapshot{uid="c1"});
+        Check(Field(session,"pendingFuel")==null&&Field(session,"preparedFighters")==null&&Field(session,"deferredTargetAction")==null,"different UID retained the previous card's continuation");
+        Check(session.Snapshot.PendingTarget.uid=="c1"&&session.Snapshot.PendingTarget.Kind==null,"different UID inherited old selection metadata");
+        session.CancelPendingTarget();
+        Check(session.Snapshot.PendingTarget==null&&session.Snapshot.Phase=="player"&&session.BattleToken==token,"cancel changed battle identity or left target state");
+    }
+    static void HandTransformLookups()
+    {
+        var imitate=Card("imitate-source");imitate.rules.Get("battle").Values["handTransform"]=RuleValue.Obj("afterType","武术","cost",1);
+        var unchanged=Card("unrelated");var session=Start(imitate,unchanged);var host=(Host)Field(session,"G");
+        var temporary=imitate.Clone();((List<OwnedCard>)Field(session,"granted")).Add(new OwnedCard{uid="temp-imitate",card=temporary});
+        var hand=new List<string>{"c0","c1","temp-imitate"};Set(session,"hand",hand);
+        var overrides=(Dictionary<string,CardDef>)Field(session,"cardOverrides");overrides["c0"]=Card("prior-copy");
+        var played=Card("played-martial","武术",5);played.runtimeCost=2;
+        var rng=(Rng)Field(session,"rng");var expected=new Rng(1);expected.LoadState(rng.SaveState());
+        host.OwnedCardReads=0;
+        var apply=typeof(BattleSession).GetMethod("ApplyHandTransforms",BindingFlags.NonPublic|BindingFlags.Instance);
+        apply.Invoke(session,new object[]{played});
+        Check(host.OwnedCardReads==hand.Count,"hand transforms repeated original inventory lookup per UID");
+        Check(overrides.Count==2&&!overrides.ContainsKey("c1"),"unrelated card acquired a transform override");
+        Check(overrides["c0"].id==played.id&&overrides["temp-imitate"].id==played.id&&overrides["c0"].cost==1&&overrides["temp-imitate"].cost==1,"owned or generated transform lost source rule or fixed cost");
+        Check(overrides["c0"].runtimeCost==null&&overrides["temp-imitate"].runtimeCost==null&&!ReferenceEquals(overrides["c0"],overrides["temp-imitate"]),"transformed copies retained runtime override or shared mutable identity");
+        Check(imitate.id=="imitate-source"&&temporary.id=="imitate-source"&&played.cost==5&&played.runtimeCost==2,"hand transform mutated raw source or played template");
+        var first=overrides["c0"];apply.Invoke(session,new object[]{Card("wrong-type","法术")});
+        Check(ReferenceEquals(overrides["c0"],first)&&hand.SequenceEqual(new[]{"c0","c1","temp-imitate"}),"wrong trigger type changed override or physical UID order");
+        Check(rng.Random("battle")==expected.Random("battle"),"hand transform lookup optimization advanced gameplay random flow");
     }
     static void EquipmentCancellation()
     {

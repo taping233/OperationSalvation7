@@ -1,0 +1,52 @@
+{
+  "status": "frozen-awaiting-central-validation",
+  "compiled": false,
+  "testsRun": false,
+  "unityLaunched": false,
+  "checkEntry": "Sdt.Editor.CurrentRewardRound3Checks.Run()/Assertions",
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardCapacityOrganizer.cs",
+      "bytes": 11753,
+      "mtimeNs": 1793491696933046300,
+      "sha256": "974543d01b8c2a29ca8e499b5818fcbc08a936c7d73bb28ce55f08499534f457",
+      "lfSha256": "6f06b5359fb192b660bba45c075718578a771e67407547b1da0ec5c4a70b6ed3"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardFlow.cs",
+      "bytes": 2546,
+      "mtimeNs": 1793491445214279200,
+      "sha256": "1f1f39a63bb77225554e66c774d343729f94936de18537bfeed3640bf7a4f721",
+      "lfSha256": "e89feb5e0a68dc5ef28bf1eb06af22d12f16e46b21a8335d2ce9d4ec041a91a5"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentRewardScene.cs",
+      "bytes": 17120,
+      "mtimeNs": 1793491851984213400,
+      "sha256": "030d222ed3b9a57de6e1b531941b7500287e5f46bbdd9dbed971e2e7df4c5195",
+      "lfSha256": "7faa4e5e63d617e839f70d8951e07aa20b8c9a3f681d2c6034849406d113dccf"
+    },
+    {
+      "path": "Assets/Editor/CurrentRewardRound3Checks.cs",
+      "bytes": 11032,
+      "mtimeNs": 1793494380843388100,
+      "sha256": "b2fb51cde09393039093f083d923589c9745511af6cc4b7b77977328b748a902",
+      "lfSha256": "b2fb51cde09393039093f083d923589c9745511af6cc4b7b77977328b748a902"
+    },
+    {
+      "path": "Assets/Editor/CurrentRewardRound3Checks.cs.meta",
+      "bytes": 60,
+      "mtimeNs": 1793491697911142100,
+      "sha256": "dea14b4e6bf668a88ddd0c9ba5c7c0f4f2aaa484fababada20a6cbc1fcd1dc5f",
+      "lfSha256": "dea14b4e6bf668a88ddd0c9ba5c7c0f4f2aaa484fababada20a6cbc1fcd1dc5f"
+    },
+    {
+      "path": "_planning/parity-1101-round3/reward.md",
+      "bytes": 5481,
+      "mtimeNs": 1793494381110015600,
+      "sha256": "69b322700eb3ca60599b80cdf3b34d4185d2e96837467e8180f4b2118f2bef3d",
+      "lfSha256": "69b322700eb3ca60599b80cdf3b34d4185d2e96837467e8180f4b2118f2bef3d"
+    }
+  ],
+  "lastCentralResult": "native-round3-5 identified neutral tile fixture covered by correctly reopened pending EntrySupply before old event replay; fixture now saves entrySupply=null before mounting owner; production unchanged"
+}

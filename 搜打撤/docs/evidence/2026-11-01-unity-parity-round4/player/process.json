@@ -1,0 +1,69 @@
+{
+  "executable": "D:\\素材\\代号柒\\SoudacheUnity\\Build\\Desktop\\代号柒.exe",
+  "executableSha256": "9806abde4a406ed68647e9505852c49f6aa72a372f4f084e2aa2821affea57a2",
+  "pid": 16668,
+  "startedAt": "2026-11-01T02:34:31.1677715Z",
+  "endedAt": "2026-11-01T02:35:42.9192595Z",
+  "exitCode": 0,
+  "timedOut": false,
+  "host": {
+    "hwnd": 7473896,
+    "visible": false,
+    "dpi": 120,
+    "awareness": 2,
+    "clientWidth": 2560,
+    "clientHeight": 1440,
+    "windowLeft": 0,
+    "windowTop": 0,
+    "windowWidth": 2560,
+    "windowHeight": 1440
+  },
+  "child": {
+    "hwnd": 4262546,
+    "visible": true,
+    "dpi": 120,
+    "awareness": 2,
+    "clientWidth": 2560,
+    "clientHeight": 1440,
+    "windowLeft": 0,
+    "windowTop": 0,
+    "windowWidth": 2560,
+    "windowHeight": 1440
+  },
+  "childGeometryChanges": [
+    {
+      "seconds": 0.2821967,
+      "window": {
+        "hwnd": 4262546,
+        "visible": false,
+        "dpi": 120,
+        "awareness": 2,
+        "clientWidth": 2560,
+        "clientHeight": 1440,
+        "windowLeft": 0,
+        "windowTop": 0,
+        "windowWidth": 2560,
+        "windowHeight": 1440
+      }
+    },
+    {
+      "seconds": 5.3867802,
+      "window": {
+        "hwnd": 4262546,
+        "visible": true,
+        "dpi": 120,
+        "awareness": 2,
+        "clientWidth": 2560,
+        "clientHeight": 1440,
+        "windowLeft": 0,
+        "windowTop": 0,
+        "windowWidth": 2560,
+        "windowHeight": 1440
+      }
+    }
+  ],
+  "transparentCompositor": true,
+  "zeroAlphaAndNonactivating": true,
+  "input": "No OS input; zero-alpha nonactivating click-through parent HWND; standalone backbuffer at current physical primary desktop size",
+  "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\player"
+}

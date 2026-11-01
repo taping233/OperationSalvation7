@@ -1,0 +1,11 @@
+{
+  "passed": false,
+  "error": "System.TimeoutException: Round4 native timeout",
+  "preparationAssertions": 31,
+  "photoAssertions": 25,
+  "inboxAssertions": 12,
+  "runAssertions": 29,
+  "runStep": "complete",
+  "battleAssertions": 6,
+  "scope": "Isolated native player-loop checks and constructed UI events; no OS input, multi-size or FPS claim."
+}

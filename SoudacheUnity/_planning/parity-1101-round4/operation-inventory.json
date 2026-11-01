@@ -1,0 +1,2253 @@
+{
+  "scope": "Static inventory of generated RuleValue.Obj(op, literal) and Core/Run case labels. It locates gaps; a matching label does not prove a matching rule domain or correct semantics.",
+  "operationCount": 58,
+  "operations": {
+    "acquire": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 16,
+        "cardId": "tt-token-gold"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 20,
+        "cardId": "tt2-apollo"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 22,
+        "cardId": "tt2-wreck"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 23,
+        "cardId": "tt2-treasuremap"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 26,
+        "cardId": "tt2-jianghu"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 48,
+        "cardId": "tt3-life-arrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 49,
+        "cardId": "tt3-dig-treasure"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 55,
+        "cardId": "tt3-mystery-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 57,
+        "cardId": "tt3-treasure-hunt"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 71,
+        "cardId": "tt3-magic-lamp"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 83,
+        "cardId": "tt3sp-magicoil"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 89,
+        "cardId": "tt3-flux-slash"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 102,
+        "cardId": "tt3-wolf-bow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 144,
+        "cardId": "tt7-ironphalanx"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 157,
+        "cardId": "tt7-bladebloom"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 161,
+        "cardId": "tt7-twinfireball"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 171,
+        "cardId": "tt8-hero-mage"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 180,
+        "cardId": "tt8-archdemon"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 211,
+        "cardId": "cmtn1epgt20j"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 230,
+        "cardId": "cmtmvq6ss84l"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 232,
+        "cardId": "cmtn125e1nk0"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 233,
+        "cardId": "cmtn1gfhczzj"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 234,
+        "cardId": "cmtn1i64j7y7"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 237,
+        "cardId": "cmtn1p9vb5au"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 239,
+        "cardId": "cmtn1wnhhym"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 240,
+        "cardId": "cmtn28jv33wx"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 246,
+        "cardId": "cc-dual-wield"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 249,
+        "cardId": "cc-lava-blast"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 274,
+        "cardId": "tt12-basicdev"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 276,
+        "cardId": "tt12-magicfind"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 278,
+        "cardId": "tt12-breakthrough"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 279,
+        "cardId": "tt12-raygun"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 284,
+        "cardId": "tt13-magazine"
+      }
+    ],
+    "adjustCurse": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 85,
+        "cardId": "tt3sp-flowerzhen"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 251,
+        "cardId": "cc-poison-burst"
+      }
+    ],
+    "armor": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 28,
+        "cardId": "tt2-block"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 32,
+        "cardId": "tt2-turtlearmor"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 34,
+        "cardId": "tt2-forestarrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 42,
+        "cardId": "tt3-bandage"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 47,
+        "cardId": "tt3-hold-fast"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 49,
+        "cardId": "tt3-dig-treasure"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 66,
+        "cardId": "tt3-holy-shield"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 71,
+        "cardId": "tt3-magic-lamp"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 104,
+        "cardId": "tt3-twinwater-mail"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 105,
+        "cardId": "tt3-grass-armor"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 137,
+        "cardId": "cc-unmoved"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 138,
+        "cardId": "tt7-marchrush"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 139,
+        "cardId": "tt7-bulwark"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 144,
+        "cardId": "tt7-ironphalanx"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 223,
+        "cardId": "tt7-ironcharge"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 266,
+        "cardId": "tt12-sporewall"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 269,
+        "cardId": "tt12-barriermend"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 286,
+        "cardId": "tt13-guard"
+      }
+    ],
+    "battle": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 5,
+        "cardId": null
+      }
+    ],
+    "blessing": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 62,
+        "cardId": "tt3-houyi-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 68,
+        "cardId": "tt3-demon-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 79,
+        "cardId": "tt3sp-dodge"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 92,
+        "cardId": "tt3-master-staff"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 106,
+        "cardId": "tt3-blooddrinker"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 135,
+        "cardId": "tt7-stealth"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 164,
+        "cardId": "tt8-hero-assassin"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 171,
+        "cardId": "tt8-hero-mage"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 174,
+        "cardId": "tt8-hero-descender"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 236,
+        "cardId": "cmtn1ntxzoc4"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 255,
+        "cardId": "tt8-abyss-sovereign"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 271,
+        "cardId": "tt12-felguard"
+      }
+    ],
+    "castDrawn": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 165,
+        "cardId": "tt8-hero-sword"
+      }
+    ],
+    "castRandomSpells": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 250,
+        "cardId": "cc-mana-surge"
+      }
+    ],
+    "castStored": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 156,
+        "cardId": "tt7-stratagem"
+      }
+    ],
+    "chests": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 4,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 11,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 17,
+        "cardId": null
+      }
+    ],
+    "choice": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 71,
+        "cardId": "tt3-magic-lamp"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 172,
+        "cardId": "tt8-hero-summoner"
+      }
+    ],
+    "cleanse": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 43,
+        "cardId": "tt3-purify-arrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 64,
+        "cardId": "tt3-holy-water"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 100,
+        "cardId": "tt3-holy-staff"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 164,
+        "cardId": "tt8-hero-assassin"
+      }
+    ],
+    "coins": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 6,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 7,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 12,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 17,
+        "cardId": null
+      }
+    ],
+    "commission": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 8,
+        "cardId": null
+      }
+    ],
+    "consumeCard": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 7,
+        "cardId": null
+      }
+    ],
+    "consumeHand": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 98,
+        "cardId": "tt3-fate-wheel"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 130,
+        "cardId": "tt7-goldencicada"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 294,
+        "cardId": "tt13-chaos-deck"
+      }
+    ],
+    "copyRandom": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 213,
+        "cardId": "cmtn2jc142dj"
+      }
+    ],
+    "curse": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 30,
+        "cardId": "tt2-piercearrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 35,
+        "cardId": "tt3-blood-arrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 36,
+        "cardId": "tt3-fatal-pierce"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 38,
+        "cardId": "tt3-frost-slash"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 40,
+        "cardId": "tt3-armor-rush"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 51,
+        "cardId": "tt3-venom-arrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 52,
+        "cardId": "tt3-toxin"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 54,
+        "cardId": "tt3wu-shike"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 65,
+        "cardId": "tt3-skewer"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 67,
+        "cardId": "tt3-iceheart-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 69,
+        "cardId": "tt3-nuke-ray"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 72,
+        "cardId": "tt3-thornfield"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 74,
+        "cardId": "tt3-turnabout-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 75,
+        "cardId": "tt3-firm-barrier"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 76,
+        "cardId": "tt3-ice-spike"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 78,
+        "cardId": "tt3-mixed-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 89,
+        "cardId": "tt3-flux-slash"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 129,
+        "cardId": "tt7-throwblade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 142,
+        "cardId": "tt7-demonbreaker"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 145,
+        "cardId": "tt7-bloodpoison"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 146,
+        "cardId": "tt7-silence"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 162,
+        "cardId": "tt7-abysscurse"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 176,
+        "cardId": "tt8-curse2"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 177,
+        "cardId": "tt8-curse3"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 178,
+        "cardId": "tt8-curse4"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 182,
+        "cardId": "tt8-dragonblade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 244,
+        "cardId": "cc-cursed-blade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 253,
+        "cardId": "cc-rot-seed"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 266,
+        "cardId": "tt12-sporewall"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 273,
+        "cardId": "tt12-infectray"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 281,
+        "cardId": "tt12-freezeray"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 287,
+        "cardId": "tt13-bitter-rain"
+      }
+    ],
+    "damage": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 6,
+        "cardId": "starter-attack"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 27,
+        "cardId": "tt2-swiftarrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 29,
+        "cardId": "tt2-comboarrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 30,
+        "cardId": "tt2-piercearrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 31,
+        "cardId": "tt2-shoot"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 33,
+        "cardId": "tt2-bloodblade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 34,
+        "cardId": "tt2-forestarrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 35,
+        "cardId": "tt3-blood-arrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 36,
+        "cardId": "tt3-fatal-pierce"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 37,
+        "cardId": "tt3-fly-arrowhawk"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 38,
+        "cardId": "tt3-frost-slash"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 39,
+        "cardId": "tt3-noon-duel"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 40,
+        "cardId": "tt3-armor-rush"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 41,
+        "cardId": "tt3-double-shot"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 43,
+        "cardId": "tt3-purify-arrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 44,
+        "cardId": "tt3-arrow-rain"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 45,
+        "cardId": "tt3-wave-slash"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 46,
+        "cardId": "tt3-qi-wave"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 48,
+        "cardId": "tt3-life-arrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 50,
+        "cardId": "tt3-reshot"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 51,
+        "cardId": "tt3-venom-arrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 53,
+        "cardId": "tt3-frostfall"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 57,
+        "cardId": "tt3-treasure-hunt"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 58,
+        "cardId": "tt3-flame-storm"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 60,
+        "cardId": "tt3-python-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 61,
+        "cardId": "tt3-chain-lightning"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 63,
+        "cardId": "tt3-fireball"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 65,
+        "cardId": "tt3-skewer"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 69,
+        "cardId": "tt3-nuke-ray"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 76,
+        "cardId": "tt3-ice-spike"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 78,
+        "cardId": "tt3-mixed-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 82,
+        "cardId": "tt3sp-silverthorn"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 86,
+        "cardId": "tt3sp-bloodstorm"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 87,
+        "cardId": "tt3sp-shadowshot"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 88,
+        "cardId": "tt3-thunderblast"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 89,
+        "cardId": "tt3-flux-slash"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 94,
+        "cardId": "tt3-execute"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 103,
+        "cardId": "tt3-sapper-bomb"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 129,
+        "cardId": "tt7-throwblade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 131,
+        "cardId": "tt7-sneak"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 132,
+        "cardId": "tt7-ghostblade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 133,
+        "cardId": "tt7-thundergrudge"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 134,
+        "cardId": "tt7-meteorrain"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 141,
+        "cardId": "tt7-whirlwind"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 142,
+        "cardId": "tt7-demonbreaker"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 143,
+        "cardId": "tt7-fullstrike"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 145,
+        "cardId": "tt7-bloodpoison"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 147,
+        "cardId": "cc-demon"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 151,
+        "cardId": "tt7-bloodpotion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 152,
+        "cardId": "tt7-smite"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 153,
+        "cardId": "tt7-arcanebolt"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 160,
+        "cardId": "tt7-burnharvest"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 161,
+        "cardId": "tt7-twinfireball"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 162,
+        "cardId": "tt7-abysscurse"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 179,
+        "cardId": "tt8-demonslay"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 182,
+        "cardId": "tt8-dragonblade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 212,
+        "cardId": "cmtn233trmeg"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 217,
+        "cardId": "cmtna0nb1yxt"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 231,
+        "cardId": "cmtn0xt0zr7"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 235,
+        "cardId": "cmtn1lbhbqi4"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 243,
+        "cardId": "cc-chase-slash"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 244,
+        "cardId": "cc-cursed-blade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 245,
+        "cardId": "cc-double-boom"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 247,
+        "cardId": "cc-ember-burst"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 248,
+        "cardId": "cc-last-stand"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 249,
+        "cardId": "cc-lava-blast"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 252,
+        "cardId": "cc-rapid-fire"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 265,
+        "cardId": "tt12-raydragon"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 267,
+        "cardId": "tt12-elemburst"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 270,
+        "cardId": "tt12-saturate"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 272,
+        "cardId": "tt12-unstableray"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 273,
+        "cardId": "tt12-infectray"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 275,
+        "cardId": "tt12-firecracker"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 277,
+        "cardId": "tt12-chargeray"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 281,
+        "cardId": "tt12-freezeray"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 285,
+        "cardId": "tt13-snipe"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 289,
+        "cardId": "tt13-flame-staff"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 295,
+        "cardId": "tt13-mercy"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 4,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 7,
+        "cardId": null
+      }
+    ],
+    "deckCap": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 93,
+        "cardId": "tt3-chaos-eye"
+      }
+    ],
+    "dice": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 6,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 11,
+        "cardId": null
+      }
+    ],
+    "discover": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 116,
+        "cardId": "tt4-shine-token"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 268,
+        "cardId": "tt12-hitechrd"
+      }
+    ],
+    "discoverCopies": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 293,
+        "cardId": "tt13-stellar-divination"
+      }
+    ],
+    "draw": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 23,
+        "cardId": "tt2-treasuremap"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 27,
+        "cardId": "tt2-swiftarrow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 46,
+        "cardId": "tt3-qi-wave"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 47,
+        "cardId": "tt3-hold-fast"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 52,
+        "cardId": "tt3-toxin"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 70,
+        "cardId": "tt3-petal"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 73,
+        "cardId": "tt3-mind-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 75,
+        "cardId": "tt3-firm-barrier"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 77,
+        "cardId": "tt3-grope"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 109,
+        "cardId": "tt3-light-mail"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 129,
+        "cardId": "tt7-throwblade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 130,
+        "cardId": "tt7-goldencicada"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 132,
+        "cardId": "tt7-ghostblade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 135,
+        "cardId": "tt7-stealth"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 136,
+        "cardId": "tt7-swordimmortal"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 138,
+        "cardId": "tt7-marchrush"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 140,
+        "cardId": "tt7-armup"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 143,
+        "cardId": "tt7-fullstrike"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 146,
+        "cardId": "tt7-silence"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 153,
+        "cardId": "tt7-arcanebolt"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 162,
+        "cardId": "tt7-abysscurse"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 165,
+        "cardId": "tt8-hero-sword"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 170,
+        "cardId": "tt8-hero-warlock"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 181,
+        "cardId": "tt8-heavensword"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 218,
+        "cardId": "tt7-livingwater"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 221,
+        "cardId": "tt7-arcanescroll"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 222,
+        "cardId": "tt7-talisman"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 223,
+        "cardId": "tt7-ironcharge"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 224,
+        "cardId": "tt7-maxsupply"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 255,
+        "cardId": "tt8-abyss-sovereign"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 271,
+        "cardId": "tt12-felguard"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 280,
+        "cardId": "tt12-backupcell"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 283,
+        "cardId": "tt13-spring"
+      }
+    ],
+    "drawCards": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 9,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 10,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 20,
+        "cardId": null
+      }
+    ],
+    "energy": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 20,
+        "cardId": "tt2-apollo"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 56,
+        "cardId": "tt3-blue-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 154,
+        "cardId": "tt7-energize"
+      }
+    ],
+    "energyCap": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 59,
+        "cardId": "tt3-nature-form"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 168,
+        "cardId": "tt8-hero-guardian"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 255,
+        "cardId": "tt8-abyss-sovereign"
+      }
+    ],
+    "execute": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 71,
+        "cardId": "tt3-magic-lamp"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 80,
+        "cardId": "tt3sp-devour"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 81,
+        "cardId": "tt3sp-doom"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 163,
+        "cardId": "tt7-meteorstrong"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 210,
+        "cardId": "cmtn0pbkmnvc"
+      }
+    ],
+    "extraTurn": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 98,
+        "cardId": "tt3-fate-wheel"
+      }
+    ],
+    "fillHand": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 169,
+        "cardId": "tt8-hero-priest"
+      }
+    ],
+    "flee": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 117,
+        "cardId": "tt4-smoke-bomb"
+      }
+    ],
+    "foeFight": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 150,
+        "cardId": "tt7-provoke"
+      }
+    ],
+    "fragment": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 6,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 12,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 13,
+        "cardId": null
+      }
+    ],
+    "freezeFirstEnemies": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 71,
+        "cardId": "tt3-magic-lamp"
+      }
+    ],
+    "handSelect": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 53,
+        "cardId": "tt3-frostfall"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 99,
+        "cardId": "tt3-crimson-pouch"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 219,
+        "cardId": "tt7-naturestaff"
+      }
+    ],
+    "heal": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 5,
+        "cardId": "starter-emergency-bandage"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 17,
+        "cardId": "tt-jinchuangyao"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 42,
+        "cardId": "tt3-bandage"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 56,
+        "cardId": "tt3-blue-potion"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 64,
+        "cardId": "tt3-holy-water"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 70,
+        "cardId": "tt3-petal"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 95,
+        "cardId": "tt3-savior-elixir"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 96,
+        "cardId": "tt3-silver-runesword"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 100,
+        "cardId": "tt3-holy-staff"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 118,
+        "cardId": "tt4-woodify"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 147,
+        "cardId": "cc-demon"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 148,
+        "cardId": "tt7-holyglow"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 149,
+        "cardId": "tt7-holyheal"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 9,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 10,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 13,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 14,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 15,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 16,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 19,
+        "cardId": null
+      }
+    ],
+    "insertCards": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 166,
+        "cardId": "tt8-hero-ranger"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 170,
+        "cardId": "tt8-hero-warlock"
+      }
+    ],
+    "markEnemy": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 253,
+        "cardId": "cc-rot-seed"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 292,
+        "cardId": "tt13-soul-contract"
+      }
+    ],
+    "maxHp": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 93,
+        "cardId": "tt3-chaos-eye"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 14,
+        "cardId": null
+      }
+    ],
+    "noDrawNext": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 45,
+        "cardId": "tt3-wave-slash"
+      }
+    ],
+    "randomBlessing": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 172,
+        "cardId": "tt8-hero-summoner"
+      }
+    ],
+    "randomCurse": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 172,
+        "cardId": "tt8-hero-summoner"
+      }
+    ],
+    "recruitEnemy": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 288,
+        "cardId": "tt13-mind-control"
+      }
+    ],
+    "refillEnergy": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 280,
+        "cardId": "tt12-backupcell"
+      }
+    ],
+    "registerInfusionBonus": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 236,
+        "cardId": "cmtn1ntxzoc4"
+      }
+    ],
+    "registerRule": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 24,
+        "cardId": "tt2-venomstaff"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 119,
+        "cardId": "tt5-galaxy-voyage"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 159,
+        "cardId": "tt7-elementstorm"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 164,
+        "cardId": "tt8-hero-assassin"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 174,
+        "cardId": "tt8-hero-descender"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 220,
+        "cardId": "tt7-darkfort"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 235,
+        "cardId": "cmtn1lbhbqi4"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 238,
+        "cardId": "cmtn1r10xnl1"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 255,
+        "cardId": "tt8-abyss-sovereign"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 271,
+        "cardId": "tt12-felguard"
+      }
+    ],
+    "release": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 97,
+        "cardId": "tt3-azure-sword"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 110,
+        "cardId": "tt3-reverse-bow"
+      }
+    ],
+    "restore": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 13,
+        "cardId": null
+      }
+    ],
+    "restoreConsumed": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 14,
+        "cardId": "tt-crystal"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 241,
+        "cardId": "cmtn6bge52qt"
+      }
+    ],
+    "restoreHeroSkill": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 283,
+        "cardId": "tt13-spring"
+      }
+    ],
+    "rewards": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 8,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 9,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 10,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 11,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 12,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 15,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 16,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 20,
+        "cardId": null
+      }
+    ],
+    "route": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 4,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 18,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 19,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 20,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 21,
+        "cardId": null
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/EventDatabase.cs",
+        "line": 22,
+        "cardId": null
+      }
+    ],
+    "schedule": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 55,
+        "cardId": "tt3-mystery-potion"
+      }
+    ],
+    "status": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 155,
+        "cardId": "tt7-frozenight"
+      }
+    ],
+    "stealAtk": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 84,
+        "cardId": "tt3sp-shadowbug"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 175,
+        "cardId": "tt8-curse1"
+      }
+    ],
+    "summon": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 158,
+        "cardId": "tt7-recruit"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 255,
+        "cardId": "tt8-abyss-sovereign"
+      }
+    ],
+    "swapDiscoverCosts": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 112,
+        "cardId": "tt3eq-mistbox"
+      }
+    ],
+    "transform": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 90,
+        "cardId": "tt3-immortal-blade"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 167,
+        "cardId": "tt8-hero-warrior"
+      }
+    ],
+    "transformCards": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Data/CardDatabase.cs",
+        "line": 294,
+        "cardId": "tt13-chaos-deck"
+      }
+    ]
+  },
+  "consumerLocations": {
+    "acquire": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 98
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 446
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/BagItemCommands.cs",
+        "line": 90
+      }
+    ],
+    "adjustCurse": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 431
+      }
+    ],
+    "armor": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 351
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 404
+      }
+    ],
+    "battle": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/MapModel.cs",
+        "line": 131
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.cs",
+        "line": 668
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 142
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Map.cs",
+        "line": 45
+      }
+    ],
+    "blessing": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 90
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 423
+      }
+    ],
+    "castDrawn": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 488
+      }
+    ],
+    "castRandomSpells": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 491
+      }
+    ],
+    "castStored": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 507
+      }
+    ],
+    "chests": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 141
+      }
+    ],
+    "choice": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 448
+      }
+    ],
+    "cleanse": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 429
+      }
+    ],
+    "coins": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 120
+      }
+    ],
+    "commission": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 129
+      }
+    ],
+    "consumeCard": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 126
+      }
+    ],
+    "consumeHand": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 468
+      }
+    ],
+    "copyRandom": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 489
+      }
+    ],
+    "curse": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 91
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 421
+      }
+    ],
+    "damage": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 93
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 398
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 125
+      }
+    ],
+    "deckCap": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 467
+      }
+    ],
+    "dice": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 149
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/SaveSystem.ArchiveCards.cs",
+        "line": 131
+      }
+    ],
+    "discover": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 104
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 447
+      }
+    ],
+    "discoverCopies": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 499
+      }
+    ],
+    "draw": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 92
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 351
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 409
+      }
+    ],
+    "drawCards": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 150
+      }
+    ],
+    "energy": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 89
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 417
+      }
+    ],
+    "energyCap": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 418
+      }
+    ],
+    "execute": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 96
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 462
+      }
+    ],
+    "extraTurn": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 474
+      }
+    ],
+    "fillHand": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 479
+      }
+    ],
+    "flee": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 86
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 475
+      }
+    ],
+    "foeFight": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 476
+      }
+    ],
+    "fragment": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 122
+      }
+    ],
+    "freezeFirstEnemies": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 451
+      }
+    ],
+    "handSelect": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 449
+      }
+    ],
+    "heal": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 87
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 351
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 399
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/BagItemCommands.cs",
+        "line": 80
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 121
+      }
+    ],
+    "insertCards": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 478
+      }
+    ],
+    "markEnemy": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 497
+      }
+    ],
+    "maxHp": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 466
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 123
+      }
+    ],
+    "noDrawNext": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 420
+      }
+    ],
+    "randomBlessing": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 504
+      }
+    ],
+    "randomCurse": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 503
+      }
+    ],
+    "recruitEnemy": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 494
+      }
+    ],
+    "refillEnergy": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 419
+      }
+    ],
+    "registerInfusionBonus": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 445
+      }
+    ],
+    "registerRule": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 442
+      }
+    ],
+    "release": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 471
+      }
+    ],
+    "restore": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 146
+      }
+    ],
+    "restoreConsumed": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "line": 88
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 506
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/BagItemCommands.cs",
+        "line": 83
+      }
+    ],
+    "restoreHeroSkill": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 498
+      }
+    ],
+    "rewards": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 130
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Run/SaveSystem.ArchiveCards.cs",
+        "line": 127
+      }
+    ],
+    "route": [
+      {
+        "path": "Assets/Scripts/Sdt.Run/GameRuntime.Events.cs",
+        "line": 152
+      }
+    ],
+    "schedule": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 450
+      }
+    ],
+    "status": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 422
+      }
+    ],
+    "stealAtk": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 452
+      }
+    ],
+    "summon": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 493
+      }
+    ],
+    "swapDiscoverCosts": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 505
+      }
+    ],
+    "transform": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 463
+      }
+    ],
+    "transformCards": [
+      {
+        "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+        "line": 502
+      }
+    ]
+  },
+  "unmatched": {}
+}

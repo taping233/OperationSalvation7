@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "unity-parity-round4",
+  "date": "2026-11-01",
+  "owner": "Friday",
+  "goal": "继续核实敌方回合自动释放等待并完成全玩家流程证据审计，修正确认差异与冗余后集中验证",
+  "paths": [
+    "docs/evidence/2026-11-01-unity-parity-round4"
+  ],
+  "doneWhen": [
+    "合法实卡敌方回合交互边界得到源代码与运行证据并修正确认问题",
+    "24类页面及关键存档状态完成要求和证据逐项对齐，剩余弱项明确",
+    "实现集中冻结后完成适当领域与原生回归、当前窗口播放器复验"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "领域1101项及17个附加源指纹核对通过，domain/processes.json与source-auxiliary.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "新原生127加既有554通过，正式终局61tick及四层旅程422tick通过，796输入未变，复用依据validation-input-reuse.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Win64构建3961输入及166产物已核，GUID66a82ecd32f2426e98d4bf06b8ed3308正常2560x1440播放器退出0，61图中实看19图",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "24页完成审计与当前Source对应，docs-check.json通过806链接，仅他人登记非阻断规则复核",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "物理键鼠、多尺寸窗口、自然未辅助旅程、全部卡牌事件组合与整帧GC/FPS未声明；敌方回合原生前置用正式命令构造",
+    "照相馆开发导出与全局备注无关序列化留下一批；持续目标保持active；GitHub交付另记publication"
+  ],
+  "updatedAt": "2026-11-01T02:52:50.251Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

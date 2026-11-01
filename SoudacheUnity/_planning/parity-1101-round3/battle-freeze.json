@@ -1,0 +1,123 @@
+{
+  "task": "parity-1101-round3-battle",
+  "status": "source-frozen-awaiting-root-validation",
+  "unityHead": "81b87cbd5f7b6bb7de48b0973c534ba494cb84a9",
+  "checksRun": [],
+  "staticReview": [
+    "current source call-chain read",
+    "git diff --check exit 0"
+  ],
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+      "bytes": 77989,
+      "sha256": "e053ecfa9059821e58bda3d211137ea4bfddc69a49a5f069d22a24cacdc25a95",
+      "lfSha256": "b6cdeb184ed117b2cf9de3f331b5c06c0cdd9a45f65055ca7f0d1073417dba69"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleTargetSelections.cs",
+      "bytes": 5865,
+      "sha256": "3d70f52edd656820ed399768bf1ac8833f87bc60451b634c3eaa8291069a8ea9",
+      "lfSha256": "a42f3d6c27c6aa5f622976a352e75defc2cb951c642deb5cdc7e145ec5f6700e"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "bytes": 78465,
+      "sha256": "cab00756172ed2b0e736569388861a44d515fa860a995bf5f8bb3fad658e2702",
+      "lfSha256": "580292ffea35cc40ccfd6ba9f7384dfd8b9661c66ff719b5658244f749fa0710"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/CurrentBossMechanics.cs",
+      "bytes": 3846,
+      "sha256": "100c5582273fd7a1bf3927c2acae35fac774e5712984d633f52398c1a4f33a67",
+      "lfSha256": "100c5582273fd7a1bf3927c2acae35fac774e5712984d633f52398c1a4f33a67"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+      "bytes": 40651,
+      "sha256": "9e221aef2586afc14b844dba1483916bc25a130724ccb48871afa5c0a4a8b92d",
+      "lfSha256": "31ecdb665316e3263b9992afc341177e1a9c7f70cdff2c1ac4f26ecc8f1430a9"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Program.cs",
+      "bytes": 17089,
+      "sha256": "dc6f43bd753c6a91b856238a158d7970bd4be9197fec5557245a97d159e306f2",
+      "lfSha256": "dc6f43bd753c6a91b856238a158d7970bd4be9197fec5557245a97d159e306f2"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Round3Checks.cs",
+      "bytes": 14029,
+      "sha256": "5f0b8884f0e505121253f5bbb7108978d2eff375084d5a055d486a08f1eb13c6",
+      "lfSha256": "5f0b8884f0e505121253f5bbb7108978d2eff375084d5a055d486a08f1eb13c6"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "bytes": 466,
+      "sha256": "1717a205bdf98e1c92c699a9218bce61ab9d91aa5f980ca4d9ab07d54284020a",
+      "lfSha256": "1717a205bdf98e1c92c699a9218bce61ab9d91aa5f980ca4d9ab07d54284020a"
+    },
+    {
+      "path": "_planning/parity-1101-round3/completion-audit.md",
+      "bytes": 7372,
+      "sha256": "87f8bcebb8b0a44b608524c3eecf4ee36b6c07ee21215c125d339b661007b331",
+      "lfSha256": "87f8bcebb8b0a44b608524c3eecf4ee36b6c07ee21215c125d339b661007b331"
+    },
+    {
+      "path": "_planning/parity-1101-round3/battle.md",
+      "bytes": 6773,
+      "sha256": "6d77610a68402901352eb0002873f72399fd7f58c8a613d409f2424b0d8ccfc7",
+      "lfSha256": "6d77610a68402901352eb0002873f72399fd7f58c8a613d409f2424b0d8ccfc7"
+    },
+    {
+      "path": "Assets/Editor/CurrentBattleRound3Checks.cs",
+      "bytes": 10094,
+      "sha256": "15df0a3b6370fd7ad41098797409f1e7ee5cab1c1368f9861bb046b68d41b3ca",
+      "lfSha256": "15df0a3b6370fd7ad41098797409f1e7ee5cab1c1368f9861bb046b68d41b3ca"
+    },
+    {
+      "path": "Assets/Editor/CurrentBattleRound3Checks.cs.meta",
+      "bytes": 60,
+      "sha256": "bed7fcee4eef17a48d987a98dadc8b601d1ec6f37c3e404eea36548d2f5f345b",
+      "lfSha256": "bed7fcee4eef17a48d987a98dadc8b601d1ec6f37c3e404eea36548d2f5f345b"
+    }
+  ],
+  "viteReadOnlyReferences": [
+    {
+      "path": "搜打撤/game/src/battle/core/battle.draw.domain.js",
+      "sha256": "8721e7603705c92b605c5507b89d28f14fc114b0b4e1d2cbe1ca2c75a5d1e2e4"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.exec-play.domain.js",
+      "sha256": "2b6b7eda1142fcb04aba856633d601fef8a9baa852ecdd6ab3e290203e30ec1e"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.boss-mechanics.js",
+      "sha256": "f4c9826939a1c17a9db7b16b024c5a86a32542cf9a1b3fc91a328771195b962a"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.anim.view.js",
+      "sha256": "b1d339414d07fe012ea6877fa3ec641408d309335cf27f89d6dd88ae4be159fd"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.card-consumption-fx.js",
+      "sha256": "35ae2d456ef59d8db5fa71b6227047785c954057e5903ff6329ab09241fd2230"
+    },
+    {
+      "path": "搜打撤/game/src/cards/builtin-card-execution.js",
+      "sha256": "59d14c68c8b9b0895834ac762f0a0f49c3c69fdf1865ff62748859e4bf5bff15"
+    },
+    {
+      "path": "搜打撤/game/src/cards/builtin-equipment-execution.js",
+      "sha256": "f81507183473f84573d91c8eed0293fe85f6a9929b7023d4c715a457cdd7cd9e"
+    }
+  ],
+  "domainEntry": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+  "notClaimed": [
+    "domain compile/pass",
+    "native UI callbacks or raycasts",
+    "audio device listening",
+    "full acquisition journey",
+    "all enemy/turn outer scheduling"
+  ],
+  "nativeEntry": "global CurrentBattleRound3Checks.Run(); Assertions/Step; requires existing PlayMode and isolated SDT_UNITY_TEST_DATA"
+}

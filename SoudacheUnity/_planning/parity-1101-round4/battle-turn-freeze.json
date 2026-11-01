@@ -1,0 +1,129 @@
+{
+  "status": "frozen-awaiting-root-central-validation",
+  "baselineBuildGUID": "cfbe07ccdc1147f28801339933512ee0",
+  "baselineScriptAndMetadataInputs": 780,
+  "baselineBuildInputs": 3945,
+  "compilationRun": false,
+  "testsRun": false,
+  "unityStarted": false,
+  "staticCheck": "git diff --check exit 0; read-only source review; unique new meta GUIDs",
+  "domainEntry": "_planning/parity-1031/battle-check/BattleChecks.csproj (Program includes Round4Checks)",
+  "nativeEntry": "global::CurrentBattleRound4Checks.Run(); Assertions/Step",
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "bytes": 76174,
+      "sha256": "8870664d5cb1ba2b670c24109106163c8a9e2c31aa00840ea27e3c664c262d6b",
+      "lfSha256": "eaa860edb77adc6f9608a4f7b138f9ad49b5e1394b159d44c699ee546a890efa"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+      "bytes": 79826,
+      "sha256": "3688971cd57b1153de0c71bfcbde987784c317d311bd691c99891ddbb4f9dc8f",
+      "lfSha256": "06691589ab237b95485994e18dc8ba2193b7a982271329ef6c0086ac562771e1"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+      "bytes": 8632,
+      "sha256": "5c1058c616e9348d3a3f52ba3b4639d1a3c227e0362cccf6e6d5e07761951792",
+      "lfSha256": "5c1058c616e9348d3a3f52ba3b4639d1a3c227e0362cccf6e6d5e07761951792"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleTurnForecast.cs",
+      "bytes": 4648,
+      "sha256": "d591c14537bdeb03848e7fb27e9c6fabb85b0d4baf953cfed78e4da36c650bae",
+      "lfSha256": "d591c14537bdeb03848e7fb27e9c6fabb85b0d4baf953cfed78e4da36c650bae"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleTurnContinuation.cs",
+      "bytes": 6342,
+      "sha256": "c3b591f15184d7bf0096c92780dee613bf762a407f909efe17973b4fa0a5a178",
+      "lfSha256": "c3b591f15184d7bf0096c92780dee613bf762a407f909efe17973b4fa0a5a178"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleTurnContinuation.cs.meta",
+      "bytes": 60,
+      "sha256": "42ef1c2cd6f767ea06bb9ab4476178118a5fa785abc7e818b1de3a0b610cf657",
+      "lfSha256": "42ef1c2cd6f767ea06bb9ab4476178118a5fa785abc7e818b1de3a0b610cf657"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleDrawnCasts.cs",
+      "bytes": 2077,
+      "sha256": "873e0e97b3fc6be5ae69330e922d0e410a0bad1aacf52cd23dab72baa809bd1f",
+      "lfSha256": "873e0e97b3fc6be5ae69330e922d0e410a0bad1aacf52cd23dab72baa809bd1f"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleDrawnCasts.cs.meta",
+      "bytes": 60,
+      "sha256": "d3bcb4f6594f082c3dc2ba036e3fc9cce47d10aeaff33d3589fb00ab0527eeb0",
+      "lfSha256": "d3bcb4f6594f082c3dc2ba036e3fc9cce47d10aeaff33d3589fb00ab0527eeb0"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+      "bytes": 40950,
+      "sha256": "3f92bb4a886268349e1ae8ac9abba030efe48292b20b205198cd054c2943a893",
+      "lfSha256": "0b9a505570abf30263b1ad783600263a4175d8f56b06a06da323e725271b8883"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleRuleInputs.cs",
+      "bytes": 16797,
+      "sha256": "91c6306dc4d85fa5455aa16a1871f3736b7097257f423d209c337b3436c90049",
+      "lfSha256": "4ea84b9f3c69771b99a6cf800a2969f071163c85162a2cf1201e82a10ed55e93"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleScreen.cs",
+      "bytes": 20245,
+      "sha256": "81c80f38ea39eb31a4144fd1dcf4128e29373a2dee184529a214928626c61fd4",
+      "lfSha256": "41510ee87e8e1b335a078ab0cd527baffa652da5a5fbb112c35e9c75e848c0b5"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/HandPanel.cs",
+      "bytes": 15676,
+      "sha256": "0e9c10f903e30dbe3c82db940deb09da5eacb543f203d8c260e0823a7fd9312d",
+      "lfSha256": "117bcbce7be7c5253dc19dea621c3a229c525c0ab0987855a01d09d66f660a39"
+    },
+    {
+      "path": "Assets/Editor/CurrentBattleRound4Checks.cs",
+      "bytes": 11897,
+      "sha256": "77dd538633f0668050ae7bce1656c47c10f9daa3b7038d71f34d3e6ecb93e3a9",
+      "lfSha256": "77dd538633f0668050ae7bce1656c47c10f9daa3b7038d71f34d3e6ecb93e3a9"
+    },
+    {
+      "path": "Assets/Editor/CurrentBattleRound4Checks.cs.meta",
+      "bytes": 60,
+      "sha256": "c58d8192e855535289ae43e68267d05a13c394768b407ca5d9ba22decab25416",
+      "lfSha256": "c58d8192e855535289ae43e68267d05a13c394768b407ca5d9ba22decab25416"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Program.cs",
+      "bytes": 17125,
+      "sha256": "02838c39e12ee65b248c4b99b3d74119eca8da243fdf3ddeff7aad9257014bb9",
+      "lfSha256": "02838c39e12ee65b248c4b99b3d74119eca8da243fdf3ddeff7aad9257014bb9"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "bytes": 502,
+      "sha256": "83fa242a1e1f07fb08d043e4480ab9d680ec8ed4103563e69bf01ae97557af2a",
+      "lfSha256": "83fa242a1e1f07fb08d043e4480ab9d680ec8ed4103563e69bf01ae97557af2a"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Round4Checks.cs",
+      "bytes": 12191,
+      "sha256": "99cb2543159a8f0da909c208ec9ad81de95eb08a081084229dd88276a88ebe1b",
+      "lfSha256": "99cb2543159a8f0da909c208ec9ad81de95eb08a081084229dd88276a88ebe1b"
+    },
+    {
+      "path": "_planning/parity-1101-round4/battle-turn.md",
+      "bytes": 9121,
+      "sha256": "84d209893c8bfc57fe39fab8c2f0883dcc30bf8e93c4e948e9ad7e7d5d9a8258",
+      "lfSha256": "84d209893c8bfc57fe39fab8c2f0883dcc30bf8e93c4e948e9ad7e7d5d9a8258"
+    },
+    {
+      "path": "_planning/parity-1101-round4/native-reactive-choice-diagnosis.md",
+      "bytes": 2055,
+      "sha256": "fe6d30de88e06357766c2e4fd1bf553f4972aa81edc33389fb9c59426c33390c",
+      "lfSha256": "fe6d30de88e06357766c2e4fd1bf553f4972aa81edc33389fb9c59426c33390c"
+    }
+  ],
+  "nativePrerequisite": "formal BattleView.Commands.EndTurn; exact state/HP assertion; subsequent actual ISubmitHandler; unchanged Ready; focus/RNG diagnostics"
+}

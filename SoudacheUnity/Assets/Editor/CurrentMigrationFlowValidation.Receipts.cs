@@ -99,7 +99,7 @@ namespace Sdt.Editor
                     Require(g.State.runActive && File.ReadAllText(SaveSystem.ProfilePath) == _before && new SaveSystem().GetSettlement(5) == null, "failed extraction consumed run/profile");
                     Unlock(); Require(g.DoExtract() != null, "extraction retry failed"); Next(); break;
                 case 1:
-                    Expect<ExtractStashScreen>(); _identity = g.CurrentExtractionIdentity; Shot("sort-before");
+                    Expect<ExtractStashScreen>(); _identity = g.CurrentExtractionIdentity; if (!ShotReady("sort-before")) return;
                     _terminalStash = SaveJson.Stringify(g.Base.stash); Lock(); Click("exRarity");
                     Require(SaveJson.Stringify(g.Base.stash) == _terminalStash && File.ReadAllText(SaveSystem.ProfilePath) == _before, "failed store mutated stash/profile");
                     Unlock(); Next(); break;
@@ -113,16 +113,18 @@ namespace Sdt.Editor
                     Shot("sort-finish-save-failed"); Unlock(); Next(); break;
                 case 4: Click("exFinish"); Next(); break;
                 case 5:
-                    Expect<ExtractDoneScreen>(); CaptureTerminalBaseline(); g.FinishExtract(true); g.DoExtract(); RequireNoDuplicate("extraction"); Shot("extract-complete"); Click("goBase"); Next(); break;
+                    Expect<ExtractDoneScreen>(); if (!ShotReady("extract-complete")) return;
+                    CaptureTerminalBaseline(); g.FinishExtract(true); g.DoExtract(); RequireNoDuplicate("extraction"); Click("goBase"); Next(); break;
                 case 6: Expect<HubScreen>(); BeginBattle(true); Next(); break;
                 case 7:
                     HoldCancellation(); Record("real-battle-command", new { action = "EndTurn", lethal = true });
                     Sdt.Boot.BattleViewApi.Session.EndTurn(); Next(); break;
                 case 8:
                     if (!AwaitDeathReceipt("lethal-combat-death-receipt")) return;
-                    Expect<DeathScreen>(); Require(new SaveSystem().GetSettlement(5)?.reason == "dead", "lethal combat did not persist death");
+                    Expect<DeathScreen>(); if (!ShotReady("death")) return;
+                    Require(new SaveSystem().GetSettlement(5)?.reason == "dead", "lethal combat did not persist death");
                     Require(new SaveSystem().GetSettlement(5).death.SavedN == 2, "death did not rescue both safe cards");
-                    CaptureTerminalBaseline(); g.DoDeath(); g.DoDeath(); RequireNoDuplicate("death"); Shot("death"); Click("goBase"); Next(); break;
+                    CaptureTerminalBaseline(); g.DoDeath(); g.DoDeath(); RequireNoDuplicate("death"); Click("goBase"); Next(); break;
                 case 9: Expect<HubScreen>(); BeginBattle(false); Next(); break;
                 case 10:
                     if (PresentationStillRunning(Sdt.Boot.BattleViewApi.Session?.Snapshot)) return;
@@ -141,8 +143,9 @@ namespace Sdt.Editor
                     _terminalRetry(); Next(); break;
                 case 13:
                     if (!AwaitDeathReceipt("active-surrender-retry-receipt")) return;
-                    Expect<DeathScreen>(); Require(new SaveSystem().GetSettlement(5)?.reason == "dead", "active surrender not classified as failure");
-                    CaptureTerminalBaseline(); _terminalRetry(); g.DoDeath(); RequireNoDuplicate("active surrender"); Shot("surrender-complete"); Click("goBase"); Next(); break;
+                    Expect<DeathScreen>(); if (!ShotReady("surrender-complete")) return;
+                    Require(new SaveSystem().GetSettlement(5)?.reason == "dead", "active surrender not classified as failure");
+                    CaptureTerminalBaseline(); _terminalRetry(); g.DoDeath(); RequireNoDuplicate("active surrender"); Click("goBase"); Next(); break;
                 case 14: Expect<HubScreen>(); TerminalFixture(); LeaveMenuScreen.Open(); Next(); break;
                 case 15: Click("leaveAbandon"); Next(); break;
                 case 16:
@@ -152,16 +155,17 @@ namespace Sdt.Editor
                 case 17: Click("leaveAbandonConfirm"); Next(); break;
                 case 18:
                     Require(UiStack.Top.GetType().Name == "AbandonResultScreen", "abandon result page missing");
+                    if (!ShotReady("abandon-complete")) return;
                     var receipt = new SaveSystem().GetSettlement(5); Require(receipt?.reason == "abandon" && receipt.abandon.KeptN == 1, "abandon did not rescue only acquired safe card");
                     Require(receipt.abandon.KeptStacks.Single().card.id == "tt-jinchuangyao", "abandon rescued wrong identity");
-                    CaptureTerminalBaseline(); g.AbandonRun(); g.AbandonRun(); RequireNoDuplicate("abandon"); Shot("abandon-complete"); Click("goBase"); Next(); break;
+                    CaptureTerminalBaseline(); g.AbandonRun(); g.AbandonRun(); RequireNoDuplicate("abandon"); Click("goBase"); Next(); break;
                 case 19:
-                    Expect<HubScreen>(); Shot("terminal-return-base"); TerminalFixture();
+                    Expect<HubScreen>(); if (!ShotReady("terminal-return-base")) return; TerminalFixture();
                     g.State.hp = g.State.maxHp - 5; _roomHp = g.State.hp;
                     g.State.usedPocket.Add(new PocketStack { card = CardLibrary.FindById("starter-attack").Clone(), count = 1 });
                     RoomFixture("fire"); FireRestScreen.Open(); Next(); break;
                 case 20:
-                    Expect<FireRestScreen>(); Shot("fire"); Lock(); ClickLabel("回复生命");
+                    Expect<FireRestScreen>(); if (!ShotReady("fire")) return; Lock(); ClickLabel("回复生命");
                     Require(g.State.hp == _roomHp && !g.CurrentNodeReceipt.healUsed && File.ReadAllText(SaveSystem.ProfilePath) == _before, "failed fire heal changed state/profile");
                     Unlock(); Next(); break;
                 case 21: ClickLabel("回复生命"); Next(); break;
@@ -170,15 +174,16 @@ namespace Sdt.Editor
                     Require(g.State.hp > _roomHp && g.CurrentNodeReceipt.healUsed, "fire heal retry did not apply"); ClickLabel("复原卡牌"); Next(); break;
                 case 23:
                     if (!Buttons().Any(b => b.name == "继续探索")) return;
+                    if (!ShotReady("fire-complete")) return;
                     Require(g.CurrentNodeReceipt.restoreUsed && g.CurrentNodeReceipt.restoredIds.Count == 1, "fire restore did not consume exact fixture pocket");
                     Require(new SaveSystem().ReadSlot(5).nodeRewards[g.CurrentNodeId].restoredIds.Count == 1, "fire reward not persisted");
-                    Shot("fire-complete"); Click("继续探索"); Next(); break;
+                    Click("继续探索"); Next(); break;
                 case 24:
                     RoomFixture("resource"); g.CurrentNodeReceipt.chestQueue = new List<ChestVisitReceipt> { new ChestVisitReceipt { kind = "small", coins = 3, cardIds = new List<string> { "tt3-fireball", "tt-jinchuangyao" }, claimMode = "all" } }; g.SaveCurrent();
                     _roomNode = g.CurrentNodeId; _roomSeed = g.State.seed;
                     ChestOpenScreen.OpenPending(null); Next(); break;
                 case 25:
-                    Expect<ChestOpenScreen>(); Shot("chest-reward"); _roomOwned = g.State.ownedCards.Count;
+                    Expect<ChestOpenScreen>(); if (!ShotReady("chest-reward")) return; _roomOwned = g.State.ownedCards.Count;
                     _roomCoins = g.State.coins; _roomOwnedUids = new HashSet<string>(g.State.ownedCards.Select(card => card.uid));
                     Lock(); Click("全部收下"); Require(g.State.ownedCards.Count == _roomOwned && File.ReadAllText(SaveSystem.ProfilePath) == _before, "failed chest claim consumed candidate/profile");
                     var failedChest = g.State.nodeRewards[_roomNode].chestQueue[0];
@@ -186,6 +191,7 @@ namespace Sdt.Editor
                     Unlock(); Next(); break;
                 case 26: Click("全部收下"); Next(); break;
                 case 27:
+                    if (!ShotReady("reward-complete")) return;
                     var node = g.State.nodeRewards[_roomNode]; var chest = node.chestQueue[0];
                     var fresh = new SaveSystem().ReadSlot(5); var savedChest = fresh.nodeRewards[_roomNode].chestQueue[0];
                     string[] expected = { "tt-jinchuangyao", "tt3-fireball" };
@@ -197,7 +203,7 @@ namespace Sdt.Editor
                     bool repeatedAll = g.TryClaimCurrentChest(_roomNode, _roomSeed, -1, out _);
                     Require(g.State.ownedCards.Count == _roomOwned + 2 && new SaveSystem().ReadSlot(5).ownedCards.Count == _roomOwned + 2 && g.State.coins == _roomCoins, "repeated chest claim duplicated cards/coins");
                     Record("current-chest-retry-and-idempotency", new { node = _roomNode, completed = chest.completed, taken = chest.taken.ToArray(), lost = chest.lost.ToArray(), repeatedAll, coins = _roomCoins });
-                    Shot("reward-complete"); Click("继续探索"); _step = 270; break;
+                    Click("继续探索"); _step = 270; break;
                 case 270:
                     Require(g.State.nodeRewards[_roomNode].completed && g.State.nodeRewards[_roomNode].chestIndex == 1 && g.State.Phase == "idle" && !(UiStack.Top is ChestOpenScreen), "source continue did not complete reward queue");
                     Require(new SaveSystem().ReadSlot(5).nodeRewards[_roomNode].completed, "reward continuation not persisted");
@@ -206,7 +212,7 @@ namespace Sdt.Editor
                     RoomFixture("event"); g.CurrentNodeReceipt.eventCardId = "tt6-goldmine"; g.SaveCurrent();
                     EventDialogScreen.Open(CardLibrary.FindById("tt6-goldmine"), null); Next(); break;
                 case 29:
-                    Expect<EventDialogScreen>(); Shot("event");
+                    Expect<EventDialogScreen>(); if (!ShotReady("event")) return;
                     var choice = g.GetCurrentEventOutcome()?.Choices?.FirstOrDefault(c => !c.Disabled); Require(choice != null, "goldmine current choice missing");
                     _before = SaveJson.Stringify(g.CurrentNodeReceipt.eventProgress); ClickLabel(choice.Label); Next(); break;
                 case 30:

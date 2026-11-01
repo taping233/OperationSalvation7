@@ -1,0 +1,34 @@
+{
+  "reviewer": "Friday root",
+  "status": "passed-with-scope",
+  "buildGUID": "cfbe07ccdc1147f28801339933512ee0",
+  "images": [
+    {
+      "path": "player/player-slot-archive-import-preview.png",
+      "bytes": 499643,
+      "sha256": "fff7dc4c18b765cd9e112a660cf65394b65bb320eb19cafdd5609a7d5f3ffc47",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "path": "player/player-slot-archive-export.png",
+      "bytes": 663228,
+      "sha256": "8c9f67c14cc4046bc25775d2d0441d25cd66300830b6e0a49098f66d42491aeb",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "path": "player/player-returned-slots.png",
+      "bytes": 1463858,
+      "sha256": "a8c39a07fcc865bdcce952ad7ef132301b374d347d2d980f3f5a2e37032aed11",
+      "width": 2560,
+      "height": 1440
+    }
+  ],
+  "observations": [
+    "Normal player displays the new archive version2.",
+    "Export and import preview retain readable controls and unobstructed confirmation.",
+    "Return to the five-slot page has no stale dialog."
+  ],
+  "scope": "Three actual 2560x1440 Standalone PNGs individually viewed. Custom-definition disclosure and fitting are separately checked by Native10; this screenshot bundle has no custom-definition transfer fixture. No physical-input claim."
+}

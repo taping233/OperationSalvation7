@@ -9,6 +9,12 @@
 
 ## 活跃登记
 
+Friday（Unity第二至四轮源码同步 WF-unity-parity-publish-1101；01a19232），2026-11-01：编辑中/打包发布，已沿用老板验收后同步GitHub授权。持有既有干净发布工作树 C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232（codex/unity-validated-20261101，起点53715a1）及本批publication收据、MIGRATION/GITHUB-SOURCE/导出清单/本行；仅复制已验收3700余项白名单源码和小收据，分组提交后push并回读。所有运行源/检查源冻结，不改原工作区index、不复制Vite四个在途文件、原始planning/bin、profile/构建包或大媒体；源码原字节与Git LF对象分别核对。当前无后台程序或端口服务；完成未提交的Runtime属地已释放并保留归属。
+
+
+
+
+
 
 
 Friday（积雪城市独立预览 base-geometric-20261031；01a18d9d），2026-10-31：编辑中；老板授权独立看建模/镜头，不接入游戏，并追加生息演算两张方格地图参考、积雪城市、允许调整配色。范围线程可视化目录 `C:/Users/太平/.codex/visualizations/2026/10/30/01a18d9d-6b5f-7da1-82da-eb59c1a31e90/base-geometric*`、自有 `docs/evidence/2026-10-31-base-geometric/` 与本登记行；无角色建模，不改Vite/Unity运行实现、不build/提交。初版v1已保留；平台共面闪烁修正后六地点完整巡游通过，拖动回放受内置工具fractional iframe坐标限制未完成。服务127.0.0.1:5367/进程自报PID38576/执行会话88741，cwd搜打撤，入口线程目录base-geometric-serve.py；原39084已结束。当前仅在内置浏览器当前窗口验收，制作城市版后复验并释放。
@@ -389,6 +395,15 @@ Friday / WF-card-feedback-v2-1023 (01a16808)，2026-10-23：12张内置修订、
 
 
 ## 近期已释放
+
+Friday（Unity持续对照第四轮 WF-unity-parity-round4-1101；01a19232），2026-11-01：完成未提交、编辑释放，原工作区归属保留。Core/Battle续接/UID队列与BattleUI、Preparation/照片/信箱、专用Editor检查及3个旧流程QA分帧，清单见_planning/parity-1101-round4/与docs/evidence/2026-11-01-unity-parity-round4/。领域1101、新127+旧554原生、正式终局/四层旅程与正常2560×1440播放器通过，61图中实看19；GUID66a82ecd32f2426e98d4bf06b8ed3308，796源码/元数据、3961构建输入及166产物已核。所有自有执行已退出（末构建PID35376、播放器16668），无端口服务。持续目标active；下一批为资料制作工具差异与备注全局保存序列化。第二至第四轮源码交付另行活跃登记，Vite四个在途文件及原始planning/bin现场保留。
+
+
+Friday（Unity持续对照第三轮 WF-unity-parity-round3-1101；01a19232），2026-11-01：本轮完成未提交，释放编辑占用，持续目标继续。商店8源、奖励3源、战斗5源、卡库/单档恢复5源及必要Editor检查、自有parity-1101-round3记录完成；当前GUID cfbe07ccdc1147f28801339933512ee0，986领域、131新增与423既有原生、商店事务专项、当前2560×1440正常播放器流程和关键页独审通过；780脚本/设置/元数据与3945构建输入一致，166产物/61图指纹登记。所有本会话执行已结束，无端口服务。未提交推送；旧planning产物和其他活跃源保持现场；失败记录及剩余敌方外层调度边界见本轮README。
+
+
+Friday（Unity持续对照与精简 WF-unity-parity-round2-1101；01a19232），2026-11-01：本轮完成并释放编辑占用，保留完成未提交归属；持续目标继续。SoudacheUnity生产26文件、必要Editor三类检查及自有parity-1101-round2记录，MIGRATION与docs/evidence/2026-11-01-unity-parity-round2同步。896领域、新增375/既有48原生检查、重构建及当前2560×1440正常播放器流程通过，61图与关键页独审；GUID a529e27adc834c58a21f47beebe94436，源码386/构建3933输入一致。所有本会话Unity/播放器执行已结束，无端口服务；未删文件目录，旧planning已脏产物与他人活跃四路径保持现场。本轮暂未提交推送，前轮GitHub版本不变；覆盖与后续片见本轮README。
+
 
 Friday（Unity验收与GitHub同步 WF-unity-github-sync-1101；01a19232），2026-11-01已完成并释放：master代码f966e859、Unity合并源码13797f12已推送且远端回读一致；GitHub完整CI41249631980和生产构建41249631982均success。Unity845领域、原生公共48项及战斗、3927稳定构建输入、正常Standalone61图通过，GUID f83ab90840ac4e558400ef9f736d3d59。Vite本地960文件9596通过/41跳过/0失败，实页新档至刷新读档通过；补齐6指南图登记后完整候选全局素材0错/567未变化历史警告，重建1759产物与实页验收包逐字节一致。原在途改动与本地媒体保留，原生压缩比10/源12及未测范围、依赖安全诊断告警见最终证据。临时浏览器、8139预览及gh watch均结束，端口已复核为空；发布工作树留存无编辑/进程占用。最终记录docs/evidence/2026-11-01-github-sync/final-summary.json；本条和任务完成记录随源码分支收官同步。
 

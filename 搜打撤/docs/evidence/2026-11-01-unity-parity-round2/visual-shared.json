@@ -1,0 +1,50 @@
+{
+  "reviewer": "Friday root",
+  "status": "passed-with-scope",
+  "buildGUID": "a529e27adc834c58a21f47beebe94436",
+  "images": [
+    {
+      "path": "player/player-title.png",
+      "bytes": 3433608,
+      "sha256": "cce2718c0c07b9f086a51742122caee847a143ef0f137e992d286115d907ca8d",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "path": "player/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "path": "player/player-returned-slots.png",
+      "bytes": 1463350,
+      "sha256": "3f2888ffa60915de2051c3c81bd5a37cd6c9941f356e11b8977f66bf5574a188",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "path": "player/player-guide-in-run.png",
+      "bytes": 1061590,
+      "sha256": "a1bc3754782a336080914fce48d5dd287e6f822abcb9f2f54482ccc79544e1fe",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "path": "player/player-infusion-return.png",
+      "bytes": 2428753,
+      "sha256": "319eed8e0236c949e7a49e85f9fe1667139bc439bd3c9af5df09555c58856698",
+      "width": 2560,
+      "height": 1440
+    }
+  ],
+  "observations": [
+    "Title resting layout and wallpaper render intact.",
+    "Opaque settings retain full backing and readable controls.",
+    "Slot rim gradients, five-card layout and decorations remain present.",
+    "Guide keeps its transparent exterior; its content remains readable.",
+    "Infusion return has no leftover candidate workspace."
+  ],
+  "scope": "Five actual native PNGs viewed individually. Native checks separately verify same-frame restoration, finite transitions and allocation; no physical-input or FPS claim."
+}

@@ -46,18 +46,19 @@ namespace Sdt.Editor
                     Require(Layers.Count == 4 && _battles > 0 && g.State.altarActivated && g.State.bossDefeated, "actual four layer/altar/boss prerequisites not traversed");
                     Require(_bossGateEntries == 1 && _layerGateEntries == 3, "journey bypassed the current boss/layer confirmation UI");
                     Require(!g.State.runActive && g.State.Phase == "settlement", "final extraction did not enter sorting");
-                    Expect<ExtractStashScreen>(); _identity = g.CurrentExtractionIdentity; Shot("extraction"); Click("exRarity"); Next(); break;
+                    Expect<ExtractStashScreen>(); _identity = g.CurrentExtractionIdentity; if (!ShotReady("extraction")) return; Click("exRarity"); Next(); break;
                 case 3:
                     Require(new SaveSystem().GetSettlement(5)?.identity == _identity, "extraction identity not persisted");
                     Click("exFinish"); Next(); break;
                 case 4:
                     if (UiStack.Top is ExtractStashScreen) { Click("exConfirmFinish"); break; }
                     Expect<ExtractDoneScreen>();
+                    if (!ShotReady("settlement")) return;
                     Require(new SaveSystem().GetSettlement(5)?.status == "complete", "finish not persisted");
                     var stats = SaveJson.Stringify(g.Base.stats); var stash = SaveJson.Stringify(g.Base.stash);
                     Require(g.FinishExtract(true) != null && g.DoExtract() != null, "completed extraction receipt inaccessible");
                     Require(SaveJson.Stringify(g.Base.stats) == stats && SaveJson.Stringify(g.Base.stash) == stash, "duplicate extraction granted stats/cards");
-                    Shot("settlement"); Click("goBase");
+                    Click("goBase");
                     _returnedBaseSince=UnityEditor.EditorApplication.timeSinceStartup;_returnedBaseClearFrame=-1;_returnedBaseFilmRecorded=false;Next();break;
                 case 5:
                     Expect<HubScreen>();
@@ -89,7 +90,11 @@ namespace Sdt.Editor
         static void Traverse()
         {
             var g = GameRuntime.I; Layers.Add(g.State.layerIdx);
-            if (UiStack.Top != null && Captured.Add(UiStack.Top.GetType().Name + "-" + g.State.layerIdx)) Shot("page-" + UiStack.Top.GetType().Name + "-" + g.State.layerIdx);
+            if (UiStack.Top != null)
+            {
+                string page = UiStack.Top.GetType().Name + "-" + g.State.layerIdx;
+                if (!Captured.Contains(page)) { if (!ShotReady("page-" + page)) return; Captured.Add(page); }
+            }
             if (!g.State.runActive || UiStack.Top is DeathScreen)
             {
                 Record("journey-unexpected-terminal", new { g.State.runActive, g.State.hp, g.State.Phase, node = g.CurrentNodeId, stack = UiStack.Names(), reason = g.Saves.GetSettlement(5)?.reason });

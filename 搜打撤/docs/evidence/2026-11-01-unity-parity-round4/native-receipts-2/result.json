@@ -1,0 +1,7269 @@
+{
+  "passed": true,
+  "scenario": "receipts",
+  "input": "constructed-uGUI-RaycastAll-and-ExecuteEvents; constructed-InputField-endEdit; runtime-commands-where-recorded",
+  "osHardwareInput": false,
+  "referenceWidth": 1920,
+  "referenceHeight": 1080,
+  "dataDirectory": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-receipts-2\\profile-receipts-20261101022708537",
+  "ticks": 61,
+  "records": [
+    {
+      "step": 0,
+      "tick": 1,
+      "kind": "wait-source-curtain",
+      "detail": {
+        "owner": "startup",
+        "startup": "playing",
+        "kind": "departure",
+        "duration": 2.4,
+        "exit": 0.68,
+        "stack": "Title"
+      }
+    },
+    {
+      "step": 0,
+      "tick": 6,
+      "kind": "source-curtain-finished",
+      "detail": {
+        "owner": "startup",
+        "seconds": 3.2501350999999996
+      }
+    },
+    {
+      "step": 0,
+      "tick": 8,
+      "kind": "tick",
+      "detail": {
+        "stack": "Title",
+        "phase": "title"
+      }
+    },
+    {
+      "step": 0,
+      "tick": 8,
+      "kind": "controlled-fixture",
+      "detail": {
+        "powerful": false,
+        "hp": 35,
+        "atk": 4,
+        "source": "current NewRun and entry supply commands; balance not assessed"
+      }
+    },
+    {
+      "step": 0,
+      "tick": 8,
+      "kind": "terminal-fixture",
+      "detail": {
+        "safeAcquired": "native-safe",
+        "safeBrought": "native-brought-safe",
+        "loose": "native-loose"
+      }
+    },
+    {
+      "step": 1,
+      "tick": 9,
+      "kind": "tick",
+      "detail": {
+        "stack": "ExtractStash",
+        "phase": "settlement"
+      }
+    },
+    {
+      "step": 1,
+      "tick": 9,
+      "kind": "capture",
+      "detail": {
+        "name": "sort-before",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "整理战利品",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "待入库  <size=40>3</size><size=21> 张</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "×1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "金疮药",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "你回复 20 点生命。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "道具 · 史诗",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "入库 1 张",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "×2",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "火球",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "造成 4 点法术伤害。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "法术 · 衍生",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "入库 2 张",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "仓库容量     <size=34>0</size><size=19> / 25 格</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "还能入库 25 张\n<size=17>卡牌每张、符文每块各占1格</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全部入库 3 张",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "按稀有度入库 3 张",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "其他收获与去向",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "完成时将丢失 3 张未入库卡\n<size=18>永久失去；带入卡同样适用</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "放弃 3 张并完成  →",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "重试保存",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": -0.000114440918,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1080.0
+              }
+            },
+            {
+              "label": " 金疮药 你回复 20 点生命。 道具 · 史诗 4",
+              "width": 248.0,
+              "height": 347.0,
+              "bounds": {
+                "minX": 73.9999542,
+                "minY": 453.0,
+                "maxX": 321.999939,
+                "maxY": 800.000061
+              }
+            },
+            {
+              "label": "入库 1 张",
+              "width": 248.0,
+              "height": 50.0,
+              "bounds": {
+                "minX": 73.9999542,
+                "minY": 391.0,
+                "maxX": 321.999939,
+                "maxY": 441.0
+              }
+            },
+            {
+              "label": " 火球 造成 4 点法术伤害。 法术 · 衍生 1 1",
+              "width": 248.0,
+              "height": 347.0,
+              "bounds": {
+                "minX": 361.9999,
+                "minY": 453.0,
+                "maxX": 609.999939,
+                "maxY": 800.000061
+              }
+            },
+            {
+              "label": "入库 2 张",
+              "width": 248.0,
+              "height": 50.0,
+              "bounds": {
+                "minX": 361.9999,
+                "minY": 391.0,
+                "maxX": 609.999939,
+                "maxY": 441.0
+              }
+            },
+            {
+              "label": "全部入库 3 张",
+              "width": 320.0,
+              "height": 68.0,
+              "bounds": {
+                "minX": 1535.99988,
+                "minY": 672.0,
+                "maxX": 1856.0,
+                "maxY": 740.0
+              }
+            },
+            {
+              "label": "按稀有度入库 3 张",
+              "width": 320.0,
+              "height": 68.0,
+              "bounds": {
+                "minX": 1535.99988,
+                "minY": 592.0,
+                "maxX": 1856.0,
+                "maxY": 660.0
+              }
+            },
+            {
+              "label": "其他收获与去向",
+              "width": 320.0,
+              "height": 46.0,
+              "bounds": {
+                "minX": 1535.99988,
+                "minY": 446.0,
+                "maxX": 1856.0,
+                "maxY": 492.0
+              }
+            },
+            {
+              "label": "放弃 3 张并完成  →",
+              "width": 392.0,
+              "height": 68.0,
+              "bounds": {
+                "minX": 1463.99988,
+                "minY": 61.99997,
+                "maxX": 1856.0,
+                "maxY": 129.999985
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 17.9999828,
+                "maxX": 168.999939,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999847,
+                "minY": 17.9999828,
+                "maxX": 302.9999,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 17.9999828,
+                "maxX": 436.9999,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.00012,
+                "minY": 17.9999828,
+                "maxX": 1742.00012,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 17.9999828,
+                "maxX": 1876.00012,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1006.0,
+                "maxX": 81.99983,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99994,
+                "minY": 1006.0,
+                "maxX": 157.999878,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 169.999863,
+                "minY": 1006.0,
+                "maxX": 233.999863,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1006.0,
+                "maxX": 235.9999,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 996.000061,
+                "maxX": 1756.0,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 996.000061,
+                "maxX": 1896.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "重试保存",
+              "width": 90.0,
+              "height": 28.0,
+              "bounds": {
+                "minX": 1806.00012,
+                "minY": 948.000061,
+                "maxX": 1896.00012,
+                "maxY": 976.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 1,
+      "tick": 9,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "sort-before",
+        "frame": 261
+      }
+    },
+    {
+      "step": 1,
+      "tick": 10,
+      "kind": "tick",
+      "detail": {
+        "stack": "ExtractStash",
+        "phase": "settlement"
+      }
+    },
+    {
+      "step": 1,
+      "tick": 10,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "sort-before",
+        "capturedFrame": 261,
+        "frame": 292
+      }
+    },
+    {
+      "step": 1,
+      "tick": 10,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "exRarity",
+        "x": 1696.0,
+        "y": 626.000061,
+        "first": "exRarity",
+        "receiver": "exRarity",
+        "hits": [
+          "exRarity",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "tick": 11,
+      "kind": "tick",
+      "detail": {
+        "stack": "ExtractStash",
+        "phase": "settlement"
+      }
+    },
+    {
+      "step": 2,
+      "tick": 11,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "exRarity",
+        "x": 1696.0,
+        "y": 626.000061,
+        "first": "exRarity",
+        "receiver": "exRarity",
+        "hits": [
+          "exRarity",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "tick": 12,
+      "kind": "tick",
+      "detail": {
+        "stack": "ExtractStash",
+        "phase": "settlement"
+      }
+    },
+    {
+      "step": 3,
+      "tick": 12,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "exFinish",
+        "x": 1660.0,
+        "y": 95.99999,
+        "first": "exFinish",
+        "receiver": "exFinish",
+        "hits": [
+          "exFinish",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "tick": 12,
+      "kind": "capture",
+      "detail": {
+        "name": "sort-finish-save-failed",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "整理战利品",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "待入库  <size=40>0</size><size=21> 张</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "完成整理尚未保存：保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.。已入库的卡牌仍保留。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "卡牌已妥善入库",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "▸ 本次已入库 3 张",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "仓库容量     <size=34>3</size><size=19> / 25 格</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "还能入库 22 张\n<size=17>卡牌每张、符文每块各占1格</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "其他收获与去向",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "本次已入库 3 张\n<size=18>已保存至基地仓库</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "完成整理  →",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "重试保存",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": -0.000114440918,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1080.0
+              }
+            },
+            {
+              "label": "▸ 本次已入库 3 张",
+              "width": 1400.0,
+              "height": 50.0,
+              "bounds": {
+                "minX": 67.99988,
+                "minY": 403.999969,
+                "maxX": 1467.99988,
+                "maxY": 454.0
+              }
+            },
+            {
+              "label": "其他收获与去向",
+              "width": 320.0,
+              "height": 46.0,
+              "bounds": {
+                "minX": 1535.99988,
+                "minY": 446.0,
+                "maxX": 1856.0,
+                "maxY": 492.0
+              }
+            },
+            {
+              "label": "完成整理  →",
+              "width": 392.0,
+              "height": 68.0,
+              "bounds": {
+                "minX": 1464.0,
+                "minY": 61.99997,
+                "maxX": 1856.0,
+                "maxY": 129.999954
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 17.9999828,
+                "maxX": 168.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999908,
+                "minY": 17.9999828,
+                "maxX": 302.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 17.9999828,
+                "maxX": 436.9999,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 17.9999828,
+                "maxX": 1742.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 17.9999828,
+                "maxX": 1876.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.99984,
+                "minY": 1006.0,
+                "maxX": 81.99989,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99994,
+                "minY": 1006.0,
+                "maxX": 158.0,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 169.999924,
+                "minY": 1006.0,
+                "maxX": 233.999863,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1006.0,
+                "maxX": 235.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 996.000061,
+                "maxX": 1756.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 996.000061,
+                "maxX": 1896.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "重试保存",
+              "width": 90.0,
+              "height": 28.0,
+              "bounds": {
+                "minX": 1806.0,
+                "minY": 948.000061,
+                "maxX": 1896.0,
+                "maxY": 976.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 4,
+      "tick": 13,
+      "kind": "tick",
+      "detail": {
+        "stack": "ExtractStash",
+        "phase": "settlement"
+      }
+    },
+    {
+      "step": 4,
+      "tick": 13,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "exFinish",
+        "x": 1660.0,
+        "y": 95.99999,
+        "first": "exFinish",
+        "receiver": "exFinish",
+        "hits": [
+          "exFinish",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "tick": 14,
+      "kind": "wait-source-curtain",
+      "detail": {
+        "owner": "extraction",
+        "startup": "complete",
+        "kind": "extraction",
+        "duration": 1.4,
+        "exit": 0.68,
+        "stack": "ExtractDone"
+      }
+    },
+    {
+      "step": 5,
+      "tick": 17,
+      "kind": "source-curtain-finished",
+      "detail": {
+        "owner": "extraction",
+        "seconds": 1.9500269999999986
+      }
+    },
+    {
+      "step": 5,
+      "tick": 17,
+      "kind": "tick",
+      "detail": {
+        "stack": "ExtractDone",
+        "phase": "done"
+      }
+    },
+    {
+      "step": 5,
+      "tick": 17,
+      "kind": "capture",
+      "detail": {
+        "name": "extract-complete",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "撤离成功",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "第 1 层 · 00:00",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "卡牌入库",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "3 张",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "木材",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "+0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "口粮",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "+0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "人物经验",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "+20",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>无</b>     Lv.1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "20 / 50 XP　· 本次结算 +20 XP",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>本局纪念</b>\n\n\n本次入库的一件纪念：<color=#c6b487>金疮药 ×1</color>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "入库卡牌",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "[[icon:check]] 已保存",
+              "RenderedIconCount": 1,
+              "rectangles": [
+                {
+                  "x": 0.5,
+                  "y": -34.0,
+                  "width": 19.0,
+                  "height": 19.0
+                }
+              ]
+            },
+            {
+              "SourceText": "返回基地  →",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "重试保存",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": -0.000114440918,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1080.0
+              }
+            },
+            {
+              "label": "入库卡牌",
+              "width": 1624.0,
+              "height": 48.0,
+              "bounds": {
+                "minX": 143.999863,
+                "minY": 398.999969,
+                "maxX": 1768.0,
+                "maxY": 446.999969
+              }
+            },
+            {
+              "label": "返回基地  →",
+              "width": 240.0,
+              "height": 68.0,
+              "bounds": {
+                "minX": 1540.0,
+                "minY": 41.99998,
+                "maxX": 1780.0,
+                "maxY": 109.999969
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 17.9999828,
+                "maxX": 168.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999908,
+                "minY": 17.9999828,
+                "maxX": 302.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 17.9999828,
+                "maxX": 436.9999,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 17.9999828,
+                "maxX": 1742.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 17.9999828,
+                "maxX": 1876.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.99984,
+                "minY": 1006.0,
+                "maxX": 81.99989,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99994,
+                "minY": 1006.0,
+                "maxX": 158.0,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 169.999924,
+                "minY": 1006.0,
+                "maxX": 233.999863,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1006.0,
+                "maxX": 235.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 996.000061,
+                "maxX": 1756.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 996.000061,
+                "maxX": 1896.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "重试保存",
+              "width": 90.0,
+              "height": 28.0,
+              "bounds": {
+                "minX": 1806.0,
+                "minY": 948.000061,
+                "maxX": 1896.0,
+                "maxY": 976.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 5,
+      "tick": 17,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "extract-complete",
+        "frame": 554
+      }
+    },
+    {
+      "step": 5,
+      "tick": 18,
+      "kind": "tick",
+      "detail": {
+        "stack": "ExtractDone",
+        "phase": "done"
+      }
+    },
+    {
+      "step": 5,
+      "tick": 18,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "extract-complete",
+        "capturedFrame": 554,
+        "frame": 588
+      }
+    },
+    {
+      "step": 5,
+      "tick": 18,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "goBase",
+        "x": 1660.0,
+        "y": 76.00001,
+        "first": "goBase",
+        "receiver": "goBase",
+        "hits": [
+          "goBase",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "tick": 19,
+      "kind": "tick",
+      "detail": {
+        "stack": "Hub-deploy",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 6,
+      "tick": 19,
+      "kind": "controlled-fixture",
+      "detail": {
+        "powerful": false,
+        "hp": 35,
+        "atk": 4,
+        "source": "current NewRun and entry supply commands; balance not assessed"
+      }
+    },
+    {
+      "step": 6,
+      "tick": 19,
+      "kind": "terminal-fixture",
+      "detail": {
+        "safeAcquired": "native-safe",
+        "safeBrought": "native-brought-safe",
+        "loose": "native-loose"
+      }
+    },
+    {
+      "step": 7,
+      "tick": 20,
+      "kind": "tick",
+      "detail": {
+        "stack": "Battle",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 7,
+      "tick": 20,
+      "kind": "constructed-hold-cancel-lifecycle",
+      "detail": {
+        "release": true,
+        "exit": true,
+        "deselect": true,
+        "cancel": true,
+        "syntheticHoldingState": true,
+        "physicalHoldSuccess": false
+      }
+    },
+    {
+      "step": 7,
+      "tick": 20,
+      "kind": "real-battle-command",
+      "detail": {
+        "action": "EndTurn",
+        "lethal": true
+      }
+    },
+    {
+      "step": 8,
+      "tick": 21,
+      "kind": "tick",
+      "detail": {
+        "stack": "Battle",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 8,
+      "tick": 21,
+      "kind": "wait-current-presentation",
+      "detail": {
+        "reason": "lethal-combat-death-receipt",
+        "BattleToken": "e5ebb4446f3e4da7bc601dd359bac899",
+        "over": true,
+        "elapsed": 1.7999999997186933E-06,
+        "queueBusy": true,
+        "pendingBeats": 1,
+        "action": "idle",
+        "frame": "sprite-v1/neutral",
+        "actorRunning": false,
+        "battleActive": true,
+        "stack": "Battle"
+      }
+    },
+    {
+      "step": 8,
+      "tick": 22,
+      "kind": "tick",
+      "detail": {
+        "stack": "Battle",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 8,
+      "tick": 22,
+      "kind": "wait-current-presentation",
+      "detail": {
+        "reason": "lethal-combat-death-receipt",
+        "BattleToken": "e5ebb4446f3e4da7bc601dd359bac899",
+        "over": true,
+        "elapsed": 0.64926050000000046,
+        "queueBusy": true,
+        "pendingBeats": 0,
+        "action": "death",
+        "frame": "sprite-v1/frame-047",
+        "actorRunning": true,
+        "battleActive": true,
+        "stack": "Battle"
+      }
+    },
+    {
+      "step": 8,
+      "tick": 23,
+      "kind": "tick",
+      "detail": {
+        "stack": "Death",
+        "phase": "done"
+      }
+    },
+    {
+      "step": 8,
+      "tick": 23,
+      "kind": "capture",
+      "detail": {
+        "name": "death",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "撤离失败",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "战斗中生命归零 · 远征到此为止",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "卡牌散失  <size=34>1 张</size>            抢运回基地  <size=34>2 张</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区另散失 0 张 · 散装物资估值损失 0\n安全格占用 2/2",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>战斗复盘 · 最后第 1 回合</b>\n敌方剩余：受控敌人 99999/99999 生命",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "承伤来源与记录范围",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>无</b>     Lv.1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "5 / 50 XP　· 本次结算 +5 XP",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>本局纪念</b>\n\n\n抢运回基地的一件纪念：<color=#c6b487>金疮药 ×1</color>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "物资明细与保留规则",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "回基地",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "再出发",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "-99998 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1080.0
+              }
+            },
+            {
+              "label": "承伤来源与记录范围",
+              "width": 936.0,
+              "height": 48.0,
+              "bounds": {
+                "minX": 492.000061,
+                "minY": 524.0,
+                "maxX": 1428.0,
+                "maxY": 571.999939
+              }
+            },
+            {
+              "label": "物资明细与保留规则",
+              "width": 936.0,
+              "height": 48.0,
+              "bounds": {
+                "minX": 492.000061,
+                "minY": 193.000031,
+                "maxX": 1428.0,
+                "maxY": 241.000015
+              }
+            },
+            {
+              "label": "回基地",
+              "width": 452.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 492.000061,
+                "minY": 113.999977,
+                "maxX": 944.0,
+                "maxY": 175.999939
+              }
+            },
+            {
+              "label": "再出发",
+              "width": 468.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 960.0,
+                "minY": 113.999977,
+                "maxX": 1428.0,
+                "maxY": 175.999939
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 17.9999828,
+                "maxX": 168.999878,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999969,
+                "minY": 17.9999828,
+                "maxX": 302.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 17.9999828,
+                "maxX": 436.999969,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 17.9999828,
+                "maxX": 1742.0,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 17.9999828,
+                "maxX": 1876.0,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1006.0,
+                "maxX": 81.9999542,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99988,
+                "minY": 1006.0,
+                "maxX": 157.999878,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 169.999985,
+                "minY": 1006.0,
+                "maxX": 233.999969,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 253.999908,
+                "minY": 1006.0,
+                "maxX": 311.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "0",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 995.9999,
+                "maxX": 1756.0,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 995.9999,
+                "maxX": 1896.00012,
+                "maxY": 1060.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 8,
+      "tick": 23,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "death",
+        "frame": 737
+      }
+    },
+    {
+      "step": 8,
+      "tick": 24,
+      "kind": "tick",
+      "detail": {
+        "stack": "Death",
+        "phase": "done"
+      }
+    },
+    {
+      "step": 8,
+      "tick": 24,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "death",
+        "capturedFrame": 737,
+        "frame": 772
+      }
+    },
+    {
+      "step": 8,
+      "tick": 24,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "goBase",
+        "x": 718.0,
+        "y": 144.999969,
+        "first": "goBase",
+        "receiver": "goBase",
+        "hits": [
+          "goBase",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "tick": 25,
+      "kind": "tick",
+      "detail": {
+        "stack": "Hub-deploy",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 9,
+      "tick": 25,
+      "kind": "controlled-fixture",
+      "detail": {
+        "powerful": false,
+        "hp": 35,
+        "atk": 4,
+        "source": "current NewRun and entry supply commands; balance not assessed"
+      }
+    },
+    {
+      "step": 9,
+      "tick": 25,
+      "kind": "terminal-fixture",
+      "detail": {
+        "safeAcquired": "native-safe",
+        "safeBrought": "native-brought-safe",
+        "loose": "native-loose"
+      }
+    },
+    {
+      "step": 10,
+      "tick": 26,
+      "kind": "tick",
+      "detail": {
+        "stack": "Battle",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 10,
+      "tick": 26,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "btnBattleOptions",
+        "x": 201.9999,
+        "y": 1034.99988,
+        "first": "btnBattleOptions",
+        "receiver": "btnBattleOptions",
+        "hits": [
+          "btnBattleOptions",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 100,
+      "tick": 27,
+      "kind": "tick",
+      "detail": {
+        "stack": "Battle|BattleSettings",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 100,
+      "tick": 27,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "ov-btn",
+        "x": 960.0,
+        "y": 496.0,
+        "first": "ov-btn",
+        "receiver": "ov-btn",
+        "hits": [
+          "ov-btn",
+          "card",
+          "overlay",
+          "mask",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 11,
+      "tick": 28,
+      "kind": "tick",
+      "detail": {
+        "stack": "Battle|BattleSettings",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 11,
+      "tick": 28,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "ov-btn",
+        "x": 960.0,
+        "y": 496.0,
+        "first": "ov-btn",
+        "receiver": "ov-btn",
+        "hits": [
+          "ov-btn",
+          "card",
+          "overlay",
+          "mask",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 11,
+      "tick": 28,
+      "kind": "capture",
+      "detail": {
+        "name": "surrender-save-failed",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35/35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "[[icon:swords]] 攻 4",
+              "RenderedIconCount": 1,
+              "rectangles": [
+                {
+                  "x": -31.5,
+                  "y": -23.0,
+                  "width": 22.0,
+                  "height": 22.0
+                }
+              ]
+            },
+            {
+              "SourceText": "500/500",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "受控敌人",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "[[icon:swords]] 1",
+              "RenderedIconCount": 1,
+              "rectangles": [
+                {
+                  "x": -23.5,
+                  "y": -35.0,
+                  "width": 27.0,
+                  "height": 27.0
+                }
+              ]
+            },
+            {
+              "SourceText": "你的回合     回合 1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "2<size=20>/2</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "[[icon:cards]] 牌库  <size=36>0</size>",
+              "RenderedIconCount": 1,
+              "rectangles": [
+                {
+                  "x": -57.5,
+                  "y": -18.0,
+                  "width": 27.0,
+                  "height": 27.0
+                }
+              ]
+            },
+            {
+              "SourceText": "当前栏没有可用手牌",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "请完成当前选择",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "估算承伤    <size=26><color=#FFD0B9>1</color></size>\n余 <size=26>34</size> 生命",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "[[icon:cards]] 消耗牌堆  0",
+              "RenderedIconCount": 1,
+              "rectangles": [
+                {
+                  "x": -77.5,
+                  "y": -13.0,
+                  "width": 27.0,
+                  "height": 27.0
+                }
+              ]
+            },
+            {
+              "SourceText": "战后保存失败，重试保存",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "战后保存失败，请重试保存：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "重试保存",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "战后保存失败，请重试保存：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1080.0
+              }
+            },
+            {
+              "label": " 1",
+              "width": 48.0,
+              "height": 48.0,
+              "bounds": {
+                "minX": 232.399918,
+                "minY": 412.399933,
+                "maxX": 280.399933,
+                "maxY": 460.399933
+              }
+            },
+            {
+              "label": "35/35 [[icon:swords]] 攻 4",
+              "width": 440.0,
+              "height": 304.730682,
+              "bounds": {
+                "minX": 298.399933,
+                "minY": 412.399933,
+                "maxX": 738.3999,
+                "maxY": 717.1306
+              }
+            },
+            {
+              "label": "500/500 受控敌人 [[icon:swords]] 1",
+              "width": 204.0,
+              "height": 236.0,
+              "bounds": {
+                "minX": 1280.40015,
+                "minY": 412.399933,
+                "maxX": 1484.40015,
+                "maxY": 648.3999
+              }
+            },
+            {
+              "label": "受控敌人",
+              "width": 220.0,
+              "height": 25.0,
+              "bounds": {
+                "minX": 1272.40015,
+                "minY": 718.3999,
+                "maxX": 1492.40015,
+                "maxY": 743.399963
+              }
+            },
+            {
+              "label": "[[icon:cards]] 牌库  <size=36>0</size>",
+              "width": 176.0,
+              "height": 54.0,
+              "bounds": {
+                "minX": 55.99989,
+                "minY": 131.999954,
+                "maxX": 231.9999,
+                "maxY": 185.999969
+              }
+            },
+            {
+              "label": "请完成当前选择",
+              "width": 248.0,
+              "height": 70.0,
+              "bounds": {
+                "minX": 1616.0,
+                "minY": 39.9999771,
+                "maxX": 1864.0,
+                "maxY": 109.999969
+              }
+            },
+            {
+              "label": "[[icon:cards]] 消耗牌堆  0",
+              "width": 248.0,
+              "height": 48.0,
+              "bounds": {
+                "minX": 1616.0,
+                "minY": 218.0,
+                "maxX": 1864.00012,
+                "maxY": 266.0
+              }
+            },
+            {
+              "label": "战后保存失败，重试保存",
+              "width": 768.000061,
+              "height": 108.0,
+              "bounds": {
+                "minX": 576.0,
+                "minY": 486.0,
+                "maxX": 1344.00012,
+                "maxY": 593.999939
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 17.9999828,
+                "maxX": 168.999878,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999969,
+                "minY": 17.9999828,
+                "maxX": 302.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 17.9999828,
+                "maxX": 436.999969,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 17.9999828,
+                "maxX": 1742.0,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 17.9999828,
+                "maxX": 1876.0,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1006.0,
+                "maxX": 81.9999542,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99988,
+                "minY": 1006.0,
+                "maxX": 157.999878,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 169.999985,
+                "minY": 1006.0,
+                "maxX": 233.999969,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 253.999908,
+                "minY": 1006.0,
+                "maxX": 311.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "0",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 995.9999,
+                "maxX": 1756.0,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 995.9999,
+                "maxX": 1896.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "重试保存",
+              "width": 90.0,
+              "height": 28.0,
+              "bounds": {
+                "minX": 1806.00012,
+                "minY": 947.999939,
+                "maxX": 1896.00012,
+                "maxY": 976.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 12,
+      "tick": 29,
+      "kind": "tick",
+      "detail": {
+        "stack": "Battle",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 13,
+      "tick": 30,
+      "kind": "tick",
+      "detail": {
+        "stack": "Death",
+        "phase": "done"
+      }
+    },
+    {
+      "step": 13,
+      "tick": 30,
+      "kind": "capture",
+      "detail": {
+        "name": "surrender-complete",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "撤离失败",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "你主动选择撤离，按失败结算 · 远征到此为止",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "卡牌散失  <size=34>1 张</size>            抢运回基地  <size=34>2 张</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区另散失 0 张 · 散装物资估值损失 0\n安全格占用 2/2",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>战斗复盘 · 最后第 1 回合</b>\n敌方剩余：受控敌人 500/500 生命",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "承伤来源与记录范围",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>无</b>     Lv.1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "5 / 50 XP　· 本次结算 +5 XP",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>本局纪念</b>\n\n\n抢运回基地的一件纪念：<color=#c6b487>金疮药 ×1</color>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "物资明细与保留规则",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "回基地",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "再出发",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "战后保存失败，请重试保存：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "重试保存",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "战后保存失败，请重试保存：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1080.0
+              }
+            },
+            {
+              "label": "承伤来源与记录范围",
+              "width": 936.0,
+              "height": 48.0,
+              "bounds": {
+                "minX": 492.000061,
+                "minY": 524.0,
+                "maxX": 1428.0,
+                "maxY": 571.999939
+              }
+            },
+            {
+              "label": "物资明细与保留规则",
+              "width": 936.0,
+              "height": 48.0,
+              "bounds": {
+                "minX": 492.000061,
+                "minY": 193.000031,
+                "maxX": 1428.0,
+                "maxY": 241.000015
+              }
+            },
+            {
+              "label": "回基地",
+              "width": 452.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 492.000061,
+                "minY": 113.999977,
+                "maxX": 944.0,
+                "maxY": 175.999939
+              }
+            },
+            {
+              "label": "再出发",
+              "width": 468.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 960.0,
+                "minY": 113.999977,
+                "maxX": 1428.0,
+                "maxY": 175.999939
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 17.9999828,
+                "maxX": 168.999878,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999969,
+                "minY": 17.9999828,
+                "maxX": 302.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 17.9999828,
+                "maxX": 436.999969,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 17.9999828,
+                "maxX": 1742.0,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 17.9999828,
+                "maxX": 1876.0,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1006.0,
+                "maxX": 81.9999542,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99988,
+                "minY": 1006.0,
+                "maxX": 157.999878,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 169.999985,
+                "minY": 1006.0,
+                "maxX": 233.999969,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 253.999908,
+                "minY": 1006.0,
+                "maxX": 311.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "0",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 995.9999,
+                "maxX": 1756.0,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 995.9999,
+                "maxX": 1896.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "重试保存",
+              "width": 90.0,
+              "height": 28.0,
+              "bounds": {
+                "minX": 1806.00012,
+                "minY": 947.999939,
+                "maxX": 1896.00012,
+                "maxY": 976.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 13,
+      "tick": 30,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "surrender-complete",
+        "frame": 984
+      }
+    },
+    {
+      "step": 13,
+      "tick": 31,
+      "kind": "tick",
+      "detail": {
+        "stack": "Death",
+        "phase": "done"
+      }
+    },
+    {
+      "step": 13,
+      "tick": 31,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "surrender-complete",
+        "capturedFrame": 984,
+        "frame": 1019
+      }
+    },
+    {
+      "step": 13,
+      "tick": 31,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "goBase",
+        "x": 718.0,
+        "y": 144.999969,
+        "first": "goBase",
+        "receiver": "goBase",
+        "hits": [
+          "goBase",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 14,
+      "tick": 32,
+      "kind": "tick",
+      "detail": {
+        "stack": "Hub-deploy",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 14,
+      "tick": 32,
+      "kind": "controlled-fixture",
+      "detail": {
+        "powerful": false,
+        "hp": 35,
+        "atk": 4,
+        "source": "current NewRun and entry supply commands; balance not assessed"
+      }
+    },
+    {
+      "step": 14,
+      "tick": 32,
+      "kind": "terminal-fixture",
+      "detail": {
+        "safeAcquired": "native-safe",
+        "safeBrought": "native-brought-safe",
+        "loose": "native-loose"
+      }
+    },
+    {
+      "step": 15,
+      "tick": 33,
+      "kind": "tick",
+      "detail": {
+        "stack": "LeaveMenu",
+        "phase": "idle"
+      }
+    },
+    {
+      "step": 15,
+      "tick": 33,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "leaveAbandon",
+        "x": 1154.0,
+        "y": 359.0,
+        "first": "leaveAbandon",
+        "receiver": "leaveAbandon",
+        "hits": [
+          "leaveAbandon",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 16,
+      "tick": 34,
+      "kind": "tick",
+      "detail": {
+        "stack": "LeaveMenu|LeaveAbandonConfirmation",
+        "phase": "idle"
+      }
+    },
+    {
+      "step": 16,
+      "tick": 34,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "leaveAbandonConfirm",
+        "x": 1132.5,
+        "y": 293.000031,
+        "first": "leaveAbandonConfirm",
+        "receiver": "leaveAbandonConfirm",
+        "hits": [
+          "leaveAbandonConfirm",
+          "mask",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 16,
+      "tick": 34,
+      "kind": "capture",
+      "detail": {
+        "name": "abandon-save-failed",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "系统菜单",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "档位 05       第1层 · 外围荒地",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "继续游玩",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "设置",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生存指南",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "[[icon:save]] 保存并退出",
+              "RenderedIconCount": 1,
+              "rectangles": [
+                {
+                  "x": 84.0,
+                  "y": -43.0,
+                  "width": 24.0,
+                  "height": 24.0
+                }
+              ]
+            },
+            {
+              "SourceText": "放弃本次对局  →",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "确认放弃本次对局？",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "放弃后，本次远征将结束。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "将失去",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "带入的全部卡牌、未受安全格保护的本局所得，以及金币、物资和消耗区。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "可带回",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "本局获得并受安全格保护的卡牌，含安全格珍珠盒内的资源。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "返回",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "重试确认放弃",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "重试保存",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1079.99988
+              }
+            },
+            {
+              "label": "继续游玩",
+              "width": 331.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 622.0,
+                "minY": 475.0,
+                "maxX": 953.0,
+                "maxY": 536.999939
+              }
+            },
+            {
+              "label": "设置",
+              "width": 331.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 967.0,
+                "minY": 475.0,
+                "maxX": 1298.0,
+                "maxY": 536.999939
+              }
+            },
+            {
+              "label": "生存指南",
+              "width": 331.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 622.0,
+                "minY": 398.999969,
+                "maxX": 953.0,
+                "maxY": 460.999939
+              }
+            },
+            {
+              "label": "[[icon:save]] 保存并退出",
+              "width": 331.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 967.0,
+                "minY": 398.999969,
+                "maxX": 1298.0,
+                "maxY": 460.999939
+              }
+            },
+            {
+              "label": "放弃本次对局  →",
+              "width": 288.0,
+              "height": 32.0,
+              "bounds": {
+                "minX": 1009.99994,
+                "minY": 342.999969,
+                "maxX": 1298.0,
+                "maxY": 375.0
+              }
+            },
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1079.99988
+              }
+            },
+            {
+              "label": "返回",
+              "width": 331.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 622.0,
+                "minY": 261.999969,
+                "maxX": 953.0,
+                "maxY": 323.999939
+              }
+            },
+            {
+              "label": "重试确认放弃",
+              "width": 331.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 967.0,
+                "minY": 261.999969,
+                "maxX": 1298.0,
+                "maxY": 323.999939
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 18.0000153,
+                "maxX": 168.999878,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999969,
+                "minY": 18.0000153,
+                "maxX": 302.999939,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 18.0000153,
+                "maxX": 436.999969,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 18.0000153,
+                "maxX": 1742.0,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 18.0000153,
+                "maxX": 1876.0,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1005.99994,
+                "maxX": 81.9999542,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99988,
+                "minY": 1005.99994,
+                "maxX": 157.999878,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1005.99994,
+                "maxX": 235.9999,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "0",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 996.0,
+                "maxX": 1756.0,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 996.0,
+                "maxX": 1896.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "重试保存",
+              "width": 90.0,
+              "height": 28.0,
+              "bounds": {
+                "minX": 1806.00012,
+                "minY": 948.0,
+                "maxX": 1896.00012,
+                "maxY": 976.000061
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 17,
+      "tick": 35,
+      "kind": "tick",
+      "detail": {
+        "stack": "LeaveMenu|LeaveAbandonConfirmation",
+        "phase": "idle"
+      }
+    },
+    {
+      "step": 17,
+      "tick": 35,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "leaveAbandonConfirm",
+        "x": 1132.5,
+        "y": 293.000031,
+        "first": "leaveAbandonConfirm",
+        "receiver": "leaveAbandonConfirm",
+        "hits": [
+          "leaveAbandonConfirm",
+          "mask",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 18,
+      "tick": 36,
+      "kind": "tick",
+      "detail": {
+        "stack": "AbandonResult",
+        "phase": "done"
+      }
+    },
+    {
+      "step": 18,
+      "tick": 36,
+      "kind": "capture",
+      "detail": {
+        "name": "abandon-complete",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "已放弃对局",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "当前仍随身的带入卡 <b>1</b> 张全部丢失；对局中获得的卡牌除安全格保护的外也全部失去；\n消耗区卡牌、物资与 <b>0 币</b>一并散失。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "[[icon:lock]] 宠物从安全格抢运回 1 张对局中获得的卡牌",
+              "RenderedIconCount": 1,
+              "rectangles": [
+                {
+                  "x": 0.0,
+                  "y": -44.0,
+                  "width": 20.0,
+                  "height": 20.0
+                }
+              ]
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "金疮药",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "你回复 20 点生命。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "道具 · 史诗",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "×1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "回基地",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "回主菜单",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "重试保存",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1079.99988
+              }
+            },
+            {
+              "label": " 金疮药 你回复 20 点生命。 道具 · 史诗 4",
+              "width": 96.0,
+              "height": 134.0,
+              "bounds": {
+                "minX": 622.0,
+                "minY": 394.0,
+                "maxX": 718.0,
+                "maxY": 527.999939
+              }
+            },
+            {
+              "label": "回基地",
+              "width": 331.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 622.0,
+                "minY": 232.000031,
+                "maxX": 953.0,
+                "maxY": 294.0
+              }
+            },
+            {
+              "label": "回主菜单",
+              "width": 331.0,
+              "height": 62.0,
+              "bounds": {
+                "minX": 967.0,
+                "minY": 232.000031,
+                "maxX": 1298.0,
+                "maxY": 294.0
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 18.0000153,
+                "maxX": 168.999878,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999969,
+                "minY": 18.0000153,
+                "maxX": 302.999939,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 18.0000153,
+                "maxX": 436.999969,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 18.0000153,
+                "maxX": 1742.0,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 18.0000153,
+                "maxX": 1876.0,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1005.99994,
+                "maxX": 81.9999542,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99988,
+                "minY": 1005.99994,
+                "maxX": 157.999878,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1005.99994,
+                "maxX": 235.9999,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "0",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 996.0,
+                "maxX": 1756.0,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 996.0,
+                "maxX": 1896.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "重试保存",
+              "width": 90.0,
+              "height": 28.0,
+              "bounds": {
+                "minX": 1806.00012,
+                "minY": 948.0,
+                "maxX": 1896.00012,
+                "maxY": 976.000061
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 18,
+      "tick": 36,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "abandon-complete",
+        "frame": 1192
+      }
+    },
+    {
+      "step": 18,
+      "tick": 37,
+      "kind": "tick",
+      "detail": {
+        "stack": "AbandonResult",
+        "phase": "done"
+      }
+    },
+    {
+      "step": 18,
+      "tick": 37,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "abandon-complete",
+        "capturedFrame": 1192,
+        "frame": 1227
+      }
+    },
+    {
+      "step": 18,
+      "tick": 37,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "goBase",
+        "x": 787.5,
+        "y": 263.0,
+        "first": "goBase",
+        "receiver": "goBase",
+        "hits": [
+          "goBase",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 19,
+      "tick": 38,
+      "kind": "tick",
+      "detail": {
+        "stack": "Hub-deploy",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 19,
+      "tick": 38,
+      "kind": "capture",
+      "detail": {
+        "name": "terminal-return-base",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "基地",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "档案 / 05",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "基地事务",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "首次目标：带回资源",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "撤离后，在后勤使用资源卡。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "›",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "人物",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "待选择",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "携带卡牌",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "待配置",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "出征整备",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "→",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "正常入城",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "直入敌腹",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "四层探索 · 基础难度",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "携带预设 →",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "基地",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "人物",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "后勤",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "交易所",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "收藏室",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "建设",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "庭院",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "重试保存",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1079.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1005.99994,
+                "maxX": 81.9999542,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "0",
+              "width": 132.0,
+              "height": 54.0,
+              "bounds": {
+                "minX": 1286.0,
+                "minY": 1010.99994,
+                "maxX": 1418.00012,
+                "maxY": 1065.0
+              }
+            },
+            {
+              "label": "0",
+              "width": 132.0,
+              "height": 54.0,
+              "bounds": {
+                "minX": 1436.0,
+                "minY": 1010.99994,
+                "maxX": 1568.00012,
+                "maxY": 1065.0
+              }
+            },
+            {
+              "label": "0",
+              "width": 132.0,
+              "height": 54.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 1010.99994,
+                "maxX": 1718.00012,
+                "maxY": 1065.0
+              }
+            },
+            {
+              "label": "0",
+              "width": 132.0,
+              "height": 54.0,
+              "bounds": {
+                "minX": 1736.0,
+                "minY": 1010.99994,
+                "maxX": 1868.00012,
+                "maxY": 1065.0
+              }
+            },
+            {
+              "label": "首次目标：带回资源 撤离后，在后勤使用资源卡。 ›",
+              "width": 352.0,
+              "height": 96.0,
+              "bounds": {
+                "minX": 61.99997,
+                "minY": 796.999939,
+                "maxX": 413.9999,
+                "maxY": 892.999939
+              }
+            },
+            {
+              "label": "出征整备 →",
+              "width": 372.0,
+              "height": 90.0,
+              "bounds": {
+                "minX": 1476.00012,
+                "minY": 643.000061,
+                "maxX": 1848.0,
+                "maxY": 732.999939
+              }
+            },
+            {
+              "label": "正常入城",
+              "width": 176.0,
+              "height": 54.0,
+              "bounds": {
+                "minX": 1483.0,
+                "minY": 564.0,
+                "maxX": 1659.00012,
+                "maxY": 618.0
+              }
+            },
+            {
+              "label": "直入敌腹",
+              "width": 176.0,
+              "height": 54.0,
+              "bounds": {
+                "minX": 1665.0,
+                "minY": 564.0,
+                "maxX": 1841.0,
+                "maxY": 618.0
+              }
+            },
+            {
+              "label": "携带预设 →",
+              "width": 144.0,
+              "height": 51.0,
+              "bounds": {
+                "minX": 1704.00012,
+                "minY": 444.0,
+                "maxX": 1848.0,
+                "maxY": 494.999969
+              }
+            },
+            {
+              "label": " 基地",
+              "width": 258.571442,
+              "height": 104.0,
+              "bounds": {
+                "minX": 39.9998474,
+                "minY": 0.0,
+                "maxX": 298.57132,
+                "maxY": 104.000015
+              }
+            },
+            {
+              "label": " 人物",
+              "width": 258.571442,
+              "height": 104.0,
+              "bounds": {
+                "minX": 303.57135,
+                "minY": 0.0,
+                "maxX": 562.1428,
+                "maxY": 104.000015
+              }
+            },
+            {
+              "label": " 后勤",
+              "width": 258.571442,
+              "height": 104.0,
+              "bounds": {
+                "minX": 567.1428,
+                "minY": 0.0,
+                "maxX": 825.714233,
+                "maxY": 104.000015
+              }
+            },
+            {
+              "label": " 交易所",
+              "width": 258.571442,
+              "height": 104.0,
+              "bounds": {
+                "minX": 830.714233,
+                "minY": 0.0,
+                "maxX": 1089.28577,
+                "maxY": 104.000015
+              }
+            },
+            {
+              "label": " 收藏室",
+              "width": 258.571442,
+              "height": 104.0,
+              "bounds": {
+                "minX": 1094.28577,
+                "minY": 0.0,
+                "maxX": 1352.85718,
+                "maxY": 104.000015
+              }
+            },
+            {
+              "label": " 建设",
+              "width": 258.571442,
+              "height": 104.0,
+              "bounds": {
+                "minX": 1357.857,
+                "minY": 0.0,
+                "maxX": 1616.42859,
+                "maxY": 104.000015
+              }
+            },
+            {
+              "label": " 庭院",
+              "width": 258.571442,
+              "height": 104.0,
+              "bounds": {
+                "minX": 1621.42859,
+                "minY": 0.0,
+                "maxX": 1880.00012,
+                "maxY": 104.000015
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 18.0000153,
+                "maxX": 168.999878,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999969,
+                "minY": 18.0000153,
+                "maxX": 302.999939,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 18.0000153,
+                "maxX": 436.999969,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 18.0000153,
+                "maxX": 1742.0,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 18.0000153,
+                "maxX": 1876.0,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1005.99994,
+                "maxX": 81.9999542,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99988,
+                "minY": 1005.99994,
+                "maxX": 157.999878,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1005.99994,
+                "maxX": 235.9999,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "0",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 996.0,
+                "maxX": 1756.0,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 996.0,
+                "maxX": 1896.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "重试保存",
+              "width": 90.0,
+              "height": 28.0,
+              "bounds": {
+                "minX": 1806.00012,
+                "minY": 948.0,
+                "maxX": 1896.00012,
+                "maxY": 976.000061
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 19,
+      "tick": 38,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "terminal-return-base",
+        "frame": 1265
+      }
+    },
+    {
+      "step": 19,
+      "tick": 39,
+      "kind": "tick",
+      "detail": {
+        "stack": "Hub-deploy",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 19,
+      "tick": 39,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "terminal-return-base",
+        "capturedFrame": 1265,
+        "frame": 1300
+      }
+    },
+    {
+      "step": 19,
+      "tick": 39,
+      "kind": "controlled-fixture",
+      "detail": {
+        "powerful": false,
+        "hp": 35,
+        "atk": 4,
+        "source": "current NewRun and entry supply commands; balance not assessed"
+      }
+    },
+    {
+      "step": 19,
+      "tick": 39,
+      "kind": "terminal-fixture",
+      "detail": {
+        "safeAcquired": "native-safe",
+        "safeBrought": "native-brought-safe",
+        "loose": "native-loose"
+      }
+    },
+    {
+      "step": 19,
+      "tick": 39,
+      "kind": "controlled-room-fixture",
+      "detail": {
+        "type": "fire",
+        "node": "0,2",
+        "relocation": true,
+        "naturalRouteTraversal": false
+      }
+    },
+    {
+      "step": 20,
+      "tick": 40,
+      "kind": "tick",
+      "detail": {
+        "stack": "FireRest",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 20,
+      "tick": 40,
+      "kind": "capture",
+      "detail": {
+        "name": "fire",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "营火休整",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "回复生命",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "30 → 35 · 实际回复 5",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "复原卡牌",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "随机复原至多 2 张",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "▸ 休整说明",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "整理背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "返回地图",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "30 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 3.21865082E-05,
+                "maxX": 1920.0,
+                "maxY": 1080.0
+              }
+            },
+            {
+              "label": "回复生命 30 → 35 · 实际回复 5",
+              "width": 732.44,
+              "height": 174.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 780.000061,
+                "maxX": 1870.00012,
+                "maxY": 954.0
+              }
+            },
+            {
+              "label": "复原卡牌 随机复原至多 2 张",
+              "width": 732.44,
+              "height": 174.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 574.000061,
+                "maxX": 1870.00012,
+                "maxY": 748.0
+              }
+            },
+            {
+              "label": "▸ 休整说明",
+              "width": 732.44,
+              "height": 52.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 490.0,
+                "maxX": 1870.00012,
+                "maxY": 542.0
+              }
+            },
+            {
+              "label": "整理背包",
+              "width": 160.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 1546.0,
+                "minY": 406.0,
+                "maxX": 1706.0,
+                "maxY": 457.999969
+              }
+            },
+            {
+              "label": "返回地图",
+              "width": 160.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 1718.00012,
+                "minY": 406.0,
+                "maxX": 1878.0,
+                "maxY": 457.999969
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 18.0000477,
+                "maxX": 168.999878,
+                "maxY": 90.0000458
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999969,
+                "minY": 18.0000477,
+                "maxX": 302.999939,
+                "maxY": 90.0000458
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 18.0000477,
+                "maxX": 436.999969,
+                "maxY": 90.0000458
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 18.0000477,
+                "maxX": 1742.0,
+                "maxY": 90.0000458
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 18.0000477,
+                "maxX": 1876.0,
+                "maxY": 90.0000458
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1006.0,
+                "maxX": 81.9999542,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99988,
+                "minY": 1006.0,
+                "maxX": 157.999878,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1006.0,
+                "maxX": 235.9999,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "0",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 996.000061,
+                "maxX": 1756.0,
+                "maxY": 1060.00012
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.00012,
+                "minY": 996.000061,
+                "maxX": 1896.00012,
+                "maxY": 1060.00012
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 20,
+      "tick": 40,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "fire",
+        "frame": 1325
+      }
+    },
+    {
+      "step": 20,
+      "tick": 41,
+      "kind": "tick",
+      "detail": {
+        "stack": "FireRest",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 20,
+      "tick": 41,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "fire",
+        "capturedFrame": 1325,
+        "frame": 1358
+      }
+    },
+    {
+      "step": 20,
+      "tick": 41,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "illustrated-choice 回复生命",
+        "x": 1503.78,
+        "y": 867.0,
+        "first": "illustrated-choice 回复生命",
+        "receiver": "illustrated-choice 回复生命",
+        "hits": [
+          "illustrated-choice 回复生命",
+          "scroll",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 21,
+      "tick": 42,
+      "kind": "tick",
+      "detail": {
+        "stack": "FireRest",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 21,
+      "tick": 42,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "illustrated-choice 回复生命",
+        "x": 1503.78,
+        "y": 867.000061,
+        "first": "illustrated-choice 回复生命",
+        "receiver": "illustrated-choice 回复生命",
+        "hits": [
+          "illustrated-choice 回复生命",
+          "scroll",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 22,
+      "tick": 43,
+      "kind": "tick",
+      "detail": {
+        "stack": "FireRest",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 22,
+      "tick": 44,
+      "kind": "tick",
+      "detail": {
+        "stack": "FireRest",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 22,
+      "tick": 44,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "illustrated-choice 复原卡牌",
+        "x": 1503.78,
+        "y": 661.0,
+        "first": "illustrated-choice 复原卡牌",
+        "receiver": "illustrated-choice 复原卡牌",
+        "hits": [
+          "illustrated-choice 复原卡牌",
+          "scroll",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 23,
+      "tick": 45,
+      "kind": "tick",
+      "detail": {
+        "stack": "FireRest",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 23,
+      "tick": 45,
+      "kind": "capture",
+      "detail": {
+        "name": "fire-complete",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "营火休整",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "回复生命",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "已回复 5 点",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "复原卡牌",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "已复原 1 张",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "▸ 休整说明",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "初始攻击",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "造成等同于你的攻击力的攻击伤害。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "武术 · 初始",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "继续探索",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "卡牌复原",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1 张",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "已回到背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "初始攻击",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "造成等同于你的攻击力的攻击伤害。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "武术 · 初始",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": -0.000114440918,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1079.99988
+              }
+            },
+            {
+              "label": "回复生命 已回复 5 点",
+              "width": 732.44,
+              "height": 174.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 780.000061,
+                "maxX": 1870.0,
+                "maxY": 954.000061
+              }
+            },
+            {
+              "label": "复原卡牌 已复原 1 张",
+              "width": 732.44,
+              "height": 174.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 574.0,
+                "maxX": 1870.0,
+                "maxY": 748.0
+              }
+            },
+            {
+              "label": "▸ 休整说明",
+              "width": 732.44,
+              "height": 52.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 490.000061,
+                "maxX": 1870.0,
+                "maxY": 541.999939
+              }
+            },
+            {
+              "label": "初始攻击 造成等同于你的攻击力的攻击伤害。 武术 · 初始 1 1",
+              "width": 150.0,
+              "height": 250.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 207.999969,
+                "maxX": 1287.56,
+                "maxY": 457.999969
+              }
+            },
+            {
+              "label": "继续探索",
+              "width": 160.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 1717.99988,
+                "minY": 123.999969,
+                "maxX": 1877.99988,
+                "maxY": 175.999985
+              }
+            },
+            {
+              "label": "背包  B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 18.0000153,
+                "maxX": 168.999939,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "安全格 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999908,
+                "minY": 18.0000153,
+                "maxX": 302.999939,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "消耗区 ",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 18.0000153,
+                "maxX": 436.9999,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 18.0000153,
+                "maxX": 1742.00012,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 18.0000153,
+                "maxX": 1876.00012,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1005.99994,
+                "maxX": 81.99989,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99988,
+                "minY": 1005.99994,
+                "maxX": 157.999878,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1005.99994,
+                "maxX": 235.999939,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "0",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 996.0,
+                "maxX": 1756.0,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.0,
+                "minY": 996.0,
+                "maxX": 1896.0,
+                "maxY": 1060.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 23,
+      "tick": 45,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "fire-complete",
+        "frame": 1507
+      }
+    },
+    {
+      "step": 23,
+      "tick": 46,
+      "kind": "tick",
+      "detail": {
+        "stack": "FireRest",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 23,
+      "tick": 46,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "fire-complete",
+        "capturedFrame": 1507,
+        "frame": 1539
+      }
+    },
+    {
+      "step": 23,
+      "tick": 46,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "继续探索",
+        "x": 1797.99988,
+        "y": 149.999969,
+        "first": "继续探索",
+        "receiver": "继续探索",
+        "hits": [
+          "继续探索",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 24,
+      "tick": 47,
+      "kind": "tick",
+      "detail": {
+        "stack": "",
+        "phase": "idle"
+      }
+    },
+    {
+      "step": 24,
+      "tick": 47,
+      "kind": "controlled-room-fixture",
+      "detail": {
+        "type": "resource",
+        "node": "1,8",
+        "relocation": true,
+        "naturalRouteTraversal": false
+      }
+    },
+    {
+      "step": 25,
+      "tick": 48,
+      "kind": "wait-current-reward-native-layout",
+      "detail": {
+        "node": "1,8",
+        "frame": 1612,
+        "CanSubmit": true,
+        "root": {
+          "minX": -0.000114440918,
+          "minY": 0.0,
+          "maxX": 1920.0,
+          "maxY": 1079.99988
+        }
+      }
+    },
+    {
+      "step": 25,
+      "tick": 49,
+      "kind": "current-reward-native-layout-ready",
+      "detail": {
+        "node": "1,8",
+        "firstFrame": 1612,
+        "frame": 1651,
+        "CanSubmit": true,
+        "root": {
+          "minX": -0.000114440918,
+          "minY": 0.0,
+          "maxX": 1920.0,
+          "maxY": 1079.99988
+        },
+        "scrolls": [
+          {
+            "name": "scroll",
+            "viewport": {
+              "minX": 55.9999466,
+              "minY": 111.999939,
+              "maxX": 1864.0,
+              "maxY": 943.999939
+            },
+            "content": {
+              "minX": 55.9999466,
+              "minY": 74.99991,
+              "maxX": 1864.0,
+              "maxY": 943.9999
+            }
+          },
+          {
+            "name": "rules",
+            "viewport": {
+              "minX": 685.9022,
+              "minY": 386.575,
+              "maxX": 897.422,
+              "maxY": 481.016357
+            },
+            "content": {
+              "minX": 685.9022,
+              "minY": 465.016449,
+              "maxX": 897.422,
+              "maxY": 481.016357
+            }
+          },
+          {
+            "name": "rules",
+            "viewport": {
+              "minX": 1030.21265,
+              "minY": 390.399933,
+              "maxX": 1241.99023,
+              "maxY": 483.949524
+            },
+            "content": {
+              "minX": 1030.21277,
+              "minY": 467.9496,
+              "maxX": 1241.99023,
+              "maxY": 483.949524
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 25,
+      "tick": 49,
+      "kind": "tick",
+      "detail": {
+        "stack": "ChestOpen",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 25,
+      "tick": 49,
+      "kind": "capture",
+      "detail": {
+        "name": "chest-reward",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "领取奖励",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "小型物资箱",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "火球",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "造成 4 点法术伤害。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "法术 · 衍生",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "收下",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "金疮药",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "你回复 20 点生命。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "道具 · 史诗",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "收下",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "当前节点可整理后继续领取；前往下一节点后未领奖励作废。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "[[icon:bag]] 2/16 格",
+              "RenderedIconCount": 1,
+              "rectangles": [
+                {
+                  "x": -43.0,
+                  "y": -9.0,
+                  "width": 20.0,
+                  "height": 20.0
+                }
+              ]
+            },
+            {
+              "SourceText": "整理背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "其他操作",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全部收下",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "返回地图",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "2<size=18><color=#91a3a7>/16</color></size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "2<size=18><color=#91a3a7>/2</color></size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "3",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": -0.000114440918,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1079.99988
+              }
+            },
+            {
+              "label": "火球 造成 4 点法术伤害。 法术 · 衍生 1 1",
+              "width": 300.0,
+              "height": 450.0,
+              "bounds": {
+                "minX": 638.0,
+                "minY": 340.0,
+                "maxX": 938.0,
+                "maxY": 790.0
+              }
+            },
+            {
+              "label": "收下",
+              "width": 200.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 688.0,
+                "minY": 266.0,
+                "maxX": 887.999939,
+                "maxY": 318.0
+              }
+            },
+            {
+              "label": "金疮药 你回复 20 点生命。 道具 · 史诗 4",
+              "width": 300.0,
+              "height": 450.0,
+              "bounds": {
+                "minX": 981.9999,
+                "minY": 340.0,
+                "maxX": 1281.99988,
+                "maxY": 790.0
+              }
+            },
+            {
+              "label": "收下",
+              "width": 200.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 1031.99988,
+                "minY": 266.0,
+                "maxX": 1232.0,
+                "maxY": 318.0
+              }
+            },
+            {
+              "label": "整理背包",
+              "width": 160.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 158.999924,
+                "minY": 23.9999981,
+                "maxX": 318.999939,
+                "maxY": 76.00001
+              }
+            },
+            {
+              "label": "其他操作",
+              "width": 160.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 336.999878,
+                "minY": 23.9999981,
+                "maxX": 496.9999,
+                "maxY": 76.00001
+              }
+            },
+            {
+              "label": "全部收下",
+              "width": 160.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 1532.0,
+                "minY": 23.9999981,
+                "maxX": 1692.0,
+                "maxY": 76.00001
+              }
+            },
+            {
+              "label": "返回地图",
+              "width": 160.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 1704.00012,
+                "minY": 23.9999981,
+                "maxX": 1864.0,
+                "maxY": 76.00001
+              }
+            },
+            {
+              "label": "背包 2<size=18><color=#91a3a7>/16</color></size> B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.9998932,
+                "minY": 18.0000153,
+                "maxX": 168.999939,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "安全格 2<size=18><color=#91a3a7>/2</color></size>",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 170.999908,
+                "minY": 18.0000153,
+                "maxX": 302.999939,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "消耗区 0",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999939,
+                "minY": 18.0000153,
+                "maxX": 436.9999,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.0,
+                "minY": 18.0000153,
+                "maxX": 1742.00012,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 18.0000153,
+                "maxX": 1876.00012,
+                "maxY": 90.00001
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.999897,
+                "minY": 1005.99994,
+                "maxX": 81.99989,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99988,
+                "minY": 1005.99994,
+                "maxX": 157.999878,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1005.99994,
+                "maxX": 235.999939,
+                "maxY": 1063.99988
+              }
+            },
+            {
+              "label": "3",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 996.0,
+                "maxX": 1756.0,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.0,
+                "minY": 996.0,
+                "maxX": 1896.0,
+                "maxY": 1060.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 25,
+      "tick": 49,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "chest-reward",
+        "frame": 1651
+      }
+    },
+    {
+      "step": 25,
+      "tick": 50,
+      "kind": "tick",
+      "detail": {
+        "stack": "ChestOpen",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 25,
+      "tick": 50,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "chest-reward",
+        "capturedFrame": 1651,
+        "frame": 1682
+      }
+    },
+    {
+      "step": 25,
+      "tick": 50,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "全部收下",
+        "x": 1612.0,
+        "y": 50.0000038,
+        "first": "全部收下",
+        "receiver": "全部收下",
+        "hits": [
+          "全部收下",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 26,
+      "tick": 51,
+      "kind": "wait-current-reward-native-layout",
+      "detail": {
+        "node": "1,8",
+        "frame": 1717,
+        "CanSubmit": true,
+        "root": {
+          "minX": 0.0,
+          "minY": 0.0,
+          "maxX": 1920.0,
+          "maxY": 1080.0
+        }
+      }
+    },
+    {
+      "step": 26,
+      "tick": 52,
+      "kind": "current-reward-native-layout-ready",
+      "detail": {
+        "node": "1,8",
+        "firstFrame": 1717,
+        "frame": 1756,
+        "CanSubmit": true,
+        "root": {
+          "minX": 0.0,
+          "minY": 0.0,
+          "maxX": 1920.0,
+          "maxY": 1080.0
+        },
+        "scrolls": [
+          {
+            "name": "scroll",
+            "viewport": {
+              "minX": 55.9999466,
+              "minY": 111.999908,
+              "maxX": 1864.0,
+              "maxY": 943.9999
+            },
+            "content": {
+              "minX": 55.9999466,
+              "minY": 74.99991,
+              "maxX": 1864.0,
+              "maxY": 943.9999
+            }
+          },
+          {
+            "name": "rules",
+            "viewport": {
+              "minX": 685.9022,
+              "minY": 386.575,
+              "maxX": 897.422,
+              "maxY": 481.016357
+            },
+            "content": {
+              "minX": 685.9022,
+              "minY": 465.0164,
+              "maxX": 897.422,
+              "maxY": 481.016357
+            }
+          },
+          {
+            "name": "rules",
+            "viewport": {
+              "minX": 1030.21277,
+              "minY": 390.399933,
+              "maxX": 1241.99036,
+              "maxY": 483.949524
+            },
+            "content": {
+              "minX": 1030.21277,
+              "minY": 467.949524,
+              "maxX": 1241.99036,
+              "maxY": 483.949524
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 26,
+      "tick": 52,
+      "kind": "tick",
+      "detail": {
+        "stack": "ChestOpen",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 26,
+      "tick": 52,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "全部收下",
+        "x": 1440.00012,
+        "y": 50.0000038,
+        "first": "全部收下",
+        "receiver": "全部收下",
+        "hits": [
+          "全部收下",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 27,
+      "tick": 53,
+      "kind": "wait-current-reward-native-layout",
+      "detail": {
+        "node": "1,8",
+        "frame": 1793,
+        "CanSubmit": true,
+        "root": {
+          "minX": 0.0,
+          "minY": 0.0,
+          "maxX": 1920.0,
+          "maxY": 1080.0
+        }
+      }
+    },
+    {
+      "step": 27,
+      "tick": 54,
+      "kind": "current-reward-native-layout-ready",
+      "detail": {
+        "node": "1,8",
+        "firstFrame": 1793,
+        "frame": 1832,
+        "CanSubmit": true,
+        "root": {
+          "minX": 0.0,
+          "minY": 0.0,
+          "maxX": 1920.0,
+          "maxY": 1080.0
+        },
+        "scrolls": [
+          {
+            "name": "scroll",
+            "viewport": {
+              "minX": 55.9999466,
+              "minY": 111.999908,
+              "maxX": 1864.0,
+              "maxY": 943.9999
+            },
+            "content": {
+              "minX": 55.9999466,
+              "minY": 111.99984,
+              "maxX": 1864.0,
+              "maxY": 943.9999
+            }
+          },
+          {
+            "name": "rules",
+            "viewport": {
+              "minX": 685.9022,
+              "minY": 386.575,
+              "maxX": 897.422,
+              "maxY": 481.016357
+            },
+            "content": {
+              "minX": 685.9022,
+              "minY": 465.0164,
+              "maxX": 897.422,
+              "maxY": 481.016357
+            }
+          },
+          {
+            "name": "rules",
+            "viewport": {
+              "minX": 1030.21277,
+              "minY": 390.399933,
+              "maxX": 1241.99036,
+              "maxY": 483.949524
+            },
+            "content": {
+              "minX": 1030.21277,
+              "minY": 467.949524,
+              "maxX": 1241.99036,
+              "maxY": 483.949524
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 27,
+      "tick": 54,
+      "kind": "tick",
+      "detail": {
+        "stack": "ChestOpen",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 27,
+      "tick": 54,
+      "kind": "capture",
+      "detail": {
+        "name": "reward-complete",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "奖励已处理",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "小型物资箱",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "火球",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "造成 4 点法术伤害。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "法术 · 衍生",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "1",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "✓ 已收下",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "金疮药",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "你回复 20 点生命。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "道具 · 史诗",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "✓ 已收下",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "[[icon:bag]] 3/16 格",
+              "RenderedIconCount": 1,
+              "rectangles": [
+                {
+                  "x": -43.0,
+                  "y": -9.0,
+                  "width": 20.0,
+                  "height": 20.0
+                }
+              ]
+            },
+            {
+              "SourceText": "继续探索",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "2<size=18><color=#91a3a7>/16</color></size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "2<size=18><color=#91a3a7>/2</color></size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "3",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "保存失败，请重试；原存档与操作前状态已保留：The process cannot access the file because it is being used by another process.",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1080.0
+              }
+            },
+            {
+              "label": "火球 造成 4 点法术伤害。 法术 · 衍生 1 1",
+              "width": 300.0,
+              "height": 450.0,
+              "bounds": {
+                "minX": 638.000061,
+                "minY": 339.999939,
+                "maxX": 938.0,
+                "maxY": 789.999939
+              }
+            },
+            {
+              "label": "金疮药 你回复 20 点生命。 道具 · 史诗 4",
+              "width": 300.0,
+              "height": 450.0,
+              "bounds": {
+                "minX": 982.0,
+                "minY": 339.999939,
+                "maxX": 1282.0,
+                "maxY": 789.999939
+              }
+            },
+            {
+              "label": "继续探索",
+              "width": 160.0,
+              "height": 52.0,
+              "bounds": {
+                "minX": 1704.00024,
+                "minY": 23.9999981,
+                "maxX": 1864.0,
+                "maxY": 76.00001
+              }
+            },
+            {
+              "label": "背包 2<size=18><color=#91a3a7>/16</color></size> B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.99995,
+                "minY": 17.9999828,
+                "maxX": 168.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "安全格 2<size=18><color=#91a3a7>/2</color></size>",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 171.000031,
+                "minY": 17.9999828,
+                "maxX": 303.0,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "消耗区 0",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999969,
+                "minY": 17.9999828,
+                "maxX": 436.999969,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.00012,
+                "minY": 17.9999828,
+                "maxX": 1742.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 17.9999828,
+                "maxX": 1876.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.9999542,
+                "minY": 1006.0,
+                "maxX": 81.9999542,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99994,
+                "minY": 1006.0,
+                "maxX": 157.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1006.0,
+                "maxX": 235.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "3",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 995.9999,
+                "maxX": 1756.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.0,
+                "minY": 995.9999,
+                "maxX": 1896.0,
+                "maxY": 1060.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 27,
+      "tick": 54,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "reward-complete",
+        "frame": 1832
+      }
+    },
+    {
+      "step": 27,
+      "tick": 55,
+      "kind": "tick",
+      "detail": {
+        "stack": "ChestOpen",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 27,
+      "tick": 55,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "reward-complete",
+        "capturedFrame": 1832,
+        "frame": 1863
+      }
+    },
+    {
+      "step": 27,
+      "tick": 55,
+      "kind": "current-chest-retry-and-idempotency",
+      "detail": {
+        "node": "1,8",
+        "completed": true,
+        "taken": [
+          0,
+          1
+        ],
+        "lost": [],
+        "repeatedAll": true,
+        "coins": 3
+      }
+    },
+    {
+      "step": 27,
+      "tick": 55,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "继续探索",
+        "x": 1784.00024,
+        "y": 50.0000038,
+        "first": "继续探索",
+        "receiver": "继续探索",
+        "hits": [
+          "继续探索",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 270,
+      "tick": 56,
+      "kind": "tick",
+      "detail": {
+        "stack": "",
+        "phase": "idle"
+      }
+    },
+    {
+      "step": 28,
+      "tick": 57,
+      "kind": "tick",
+      "detail": {
+        "stack": "",
+        "phase": "idle"
+      }
+    },
+    {
+      "step": 28,
+      "tick": 57,
+      "kind": "controlled-room-fixture",
+      "detail": {
+        "type": "event",
+        "node": "0,3",
+        "relocation": true,
+        "naturalRouteTraversal": false
+      }
+    },
+    {
+      "step": 29,
+      "tick": 58,
+      "kind": "tick",
+      "detail": {
+        "stack": "EventDialog",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 29,
+      "tick": 58,
+      "kind": "capture",
+      "detail": {
+        "name": "event",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "塌陷地下库",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "取走外侧的 3 币；或损失 3 血领取 6 币；或消耗随身木材卡 ×1，安全领取 6 币。",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "取走外侧硬币",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "获得 3 币",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "深入坍塌处",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "获得 6 币，损失 3 血；失去 3 点生命后剩余 32\n<color=#985e59>有代价</color>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "用木材加固支撑",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗随身木材卡 ×1，安全获得 6 币；安全格和收纳区的木材不参与",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "返回地图",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "3<size=18><color=#91a3a7>/16</color></size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "2<size=18><color=#91a3a7>/2</color></size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "3",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "",
+              "width": 1920.00012,
+              "height": 1080.0,
+              "bounds": {
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 1920.0,
+                "maxY": 1080.0
+              }
+            },
+            {
+              "label": "取走外侧硬币 获得 3 币",
+              "width": 732.44,
+              "height": 174.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 780.0001,
+                "maxX": 1870.0,
+                "maxY": 954.0
+              }
+            },
+            {
+              "label": "深入坍塌处 获得 6 币，损失 3 血；失去 3 点生命后剩余 32\n<color=#985e59>有代价</color>",
+              "width": 732.44,
+              "height": 174.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 574.0,
+                "maxX": 1870.0,
+                "maxY": 748.0
+              }
+            },
+            {
+              "label": "用木材加固支撑 消耗随身木材卡 ×1，安全获得 6 币；安全格和收纳区的木材不参与",
+              "width": 732.44,
+              "height": 174.0,
+              "bounds": {
+                "minX": 1137.56,
+                "minY": 368.0,
+                "maxX": 1870.0,
+                "maxY": 541.999939
+              }
+            },
+            {
+              "label": "返回地图",
+              "width": 748.44,
+              "height": 42.0,
+              "bounds": {
+                "minX": 1129.56018,
+                "minY": 289.0001,
+                "maxX": 1878.00012,
+                "maxY": 331.0
+              }
+            },
+            {
+              "label": "背包 3<size=18><color=#91a3a7>/16</color></size> B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.99995,
+                "minY": 17.9999828,
+                "maxX": 168.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "安全格 2<size=18><color=#91a3a7>/2</color></size>",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 171.000031,
+                "minY": 17.9999828,
+                "maxX": 303.0,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "消耗区 0",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999969,
+                "minY": 17.9999828,
+                "maxX": 436.999969,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.00012,
+                "minY": 17.9999828,
+                "maxX": 1742.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 17.9999828,
+                "maxX": 1876.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.9999542,
+                "minY": 1006.0,
+                "maxX": 81.9999542,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99994,
+                "minY": 1006.0,
+                "maxX": 157.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1006.0,
+                "maxX": 235.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "3",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 995.9999,
+                "maxX": 1756.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.0,
+                "minY": 995.9999,
+                "maxX": 1896.0,
+                "maxY": 1060.0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 29,
+      "tick": 58,
+      "kind": "wait-after-capture-frame",
+      "detail": {
+        "name": "event",
+        "frame": 1971
+      }
+    },
+    {
+      "step": 29,
+      "tick": 59,
+      "kind": "tick",
+      "detail": {
+        "stack": "EventDialog",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 29,
+      "tick": 59,
+      "kind": "after-capture-frame-ready",
+      "detail": {
+        "name": "event",
+        "capturedFrame": 1971,
+        "frame": 2002
+      }
+    },
+    {
+      "step": 29,
+      "tick": 59,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "illustrated-choice 取走外侧硬币",
+        "x": 1503.78015,
+        "y": 867.0,
+        "first": "illustrated-choice 取走外侧硬币",
+        "receiver": "illustrated-choice 取走外侧硬币",
+        "hits": [
+          "illustrated-choice 取走外侧硬币",
+          "scroll",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 30,
+      "tick": 60,
+      "kind": "tick",
+      "detail": {
+        "stack": "EventDialog",
+        "phase": "modal"
+      }
+    },
+    {
+      "step": 30,
+      "tick": 60,
+      "kind": "ugui-raycast",
+      "detail": {
+        "target": "event-inline-confirm",
+        "x": 1793.00012,
+        "y": 867.0,
+        "first": "event-inline-confirm",
+        "receiver": "event-inline-confirm",
+        "hits": [
+          "event-inline-confirm",
+          "illustrated-choice 取走外侧硬币",
+          "scroll",
+          "mask"
+        ]
+      }
+    },
+    {
+      "step": 31,
+      "tick": 61,
+      "kind": "tick",
+      "detail": {
+        "stack": "",
+        "phase": "idle"
+      }
+    },
+    {
+      "step": 31,
+      "tick": 61,
+      "kind": "capture",
+      "detail": {
+        "name": "event-after-choice",
+        "capture": {
+          "width": 1920,
+          "height": 1080,
+          "canvasWidth": 1920.00012,
+          "canvasHeight": 1080.0,
+          "measuredBeforeWidth": 1920.00012,
+          "measuredBeforeHeight": 1080.0,
+          "input": "offscreen-native-render",
+          "sortingLayer": 4,
+          "icons": [
+            {
+              "SourceText": "背包",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "3<size=18><color=#91a3a7>/16</color></size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "B",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "安全格",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "2<size=18><color=#91a3a7>/2</color></size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "消耗区",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "0",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "定位",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "F",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "全景",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "G",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "生命值",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "35 / 35",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "<b>外围荒地</b>  <size=14>第 1 层 / 4</size>",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "6",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            },
+            {
+              "SourceText": "4",
+              "RenderedIconCount": 0,
+              "rectangles": []
+            }
+          ],
+          "buttons": [
+            {
+              "label": "背包 3<size=18><color=#91a3a7>/16</color></size> B",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 36.99995,
+                "minY": 17.9999828,
+                "maxX": 168.999939,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "安全格 2<size=18><color=#91a3a7>/2</color></size>",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 171.000031,
+                "minY": 17.9999828,
+                "maxX": 303.0,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "消耗区 0",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 304.999969,
+                "minY": 17.9999828,
+                "maxX": 436.999969,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "定位 F",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1610.00012,
+                "minY": 17.9999828,
+                "maxX": 1742.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "全景 G",
+              "width": 132.0,
+              "height": 72.0,
+              "bounds": {
+                "minX": 1744.0,
+                "minY": 17.9999828,
+                "maxX": 1876.00012,
+                "maxY": 89.99998
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 17.9999542,
+                "minY": 1006.0,
+                "maxX": 81.9999542,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 64.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 93.99994,
+                "minY": 1006.0,
+                "maxX": 157.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "",
+              "width": 58.0,
+              "height": 58.0,
+              "bounds": {
+                "minX": 177.999908,
+                "minY": 1006.0,
+                "maxX": 235.999939,
+                "maxY": 1064.0
+              }
+            },
+            {
+              "label": "6",
+              "width": 170.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1586.0,
+                "minY": 995.9999,
+                "maxX": 1756.00012,
+                "maxY": 1060.0
+              }
+            },
+            {
+              "label": "4",
+              "width": 120.0,
+              "height": 64.0,
+              "bounds": {
+                "minX": 1776.0,
+                "minY": 995.9999,
+                "maxX": 1896.0,
+                "maxY": 1060.0
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Controlled fixtures prove flow and persistence, not balance or original RNG equivalence.",
+    "Hidden batch does not prove physical Input.GetKeyDown or sustained mouse/keyboard hold.",
+    "CurrentEndTurnHold requires focus and hardware-held input; no 650ms success claim."
+  ]
+}

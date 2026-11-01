@@ -1,0 +1,118 @@
+[
+  {
+    "name": "battle",
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "--no-restore",
+      "-c",
+      "Release"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\battle.log"
+  },
+  {
+    "name": "run",
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1031/run-check/RunParityChecks.csproj",
+      "--no-restore",
+      "-c",
+      "Release"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\run.log"
+  },
+  {
+    "name": "run-round2",
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj",
+      "--no-restore",
+      "-c",
+      "Release"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\run-round2.log"
+  },
+  {
+    "name": "hub",
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1031/HubParityChecks.csproj",
+      "--no-restore",
+      "-c",
+      "Release"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\hub.log"
+  },
+  {
+    "name": "archive-export",
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "--no-restore",
+      "-c",
+      "Release",
+      "--",
+      "export",
+      "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\archive"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\archive-export.log"
+  },
+  {
+    "name": "archive-import",
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "--no-restore",
+      "-c",
+      "Release",
+      "--",
+      "import",
+      "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\archive"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\archive-import.log"
+  },
+  {
+    "name": "archive-id-conflict",
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "--no-restore",
+      "-c",
+      "Release",
+      "--",
+      "id-conflict",
+      "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\archive"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\archive-id-conflict.log"
+  },
+  {
+    "name": "archive-name-conflict",
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "--no-restore",
+      "-c",
+      "Release",
+      "--",
+      "name-conflict",
+      "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\archive"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\domain\\archive-name-conflict.log"
+  }
+]

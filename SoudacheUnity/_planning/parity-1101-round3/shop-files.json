@@ -1,0 +1,57 @@
+{
+  "status": "source_frozen_awaiting_root_central_validation",
+  "baselineBuildGUID": "a529e27adc834c58a21f47beebe94436",
+  "testsRun": false,
+  "compilationRun": false,
+  "unityStarted": false,
+  "nativeEntry": "CurrentShopRound3Checks.Run()",
+  "nativeAssertionPlan": {
+    "explicitRunRequires": 25,
+    "submitCalls": 17,
+    "expectedAssertions": 42
+  },
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/ShopScreen.cs",
+      "sha256": "e8f169ef32dd651dadde00268dc45c58f846b949cf1fe7dbc10b79dd30322037"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.cs",
+      "sha256": "74921c4e7a44f0303c4c48a415b364f082fe2cc918c694f81679113cc976a5f2"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Market.cs",
+      "sha256": "fc5f9c39e1302157b2238bd207278ff3c9d50c68e2bee8cab6a79276c5fb53a8"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Detail.cs",
+      "sha256": "82e2c5c314c4fa7f7df7c91de7e9f5f3cc6bc3530fa46efc73a8c3db392caae1"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopView.Exchange.cs",
+      "sha256": "43f427d4af939960c1630004e090c706a56f58a5758b2137b9c2772cd8f4f21f"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCommission.cs",
+      "sha256": "c54cdb14710ee1a3cfb0d6377ee5624d3232308a74f1f984b46704222f07d383"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCarry.cs",
+      "sha256": "2b7d36d2ef84ea05c58ab4dc73e91006c851211b608b14820c26e836f3267131"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CurrentShopCoin.cs",
+      "sha256": "4b20efbf2113fbd2a68b1794d27fe56511ea5beaa5e20a2f23eef218e2195268"
+    },
+    {
+      "path": "Assets/Editor/CurrentShopRound3Checks.cs",
+      "sha256": "f6e423b2e40604dc464abdac1c623f8c4950aef9ecad7c06ac60691893cc5c8b"
+    },
+    {
+      "path": "Assets/Editor/CurrentShopRound3Checks.cs.meta",
+      "sha256": "ecb14309771f50b1fc23a6d49fc09e442a6f9cc8931f2b5cf49ad3599eba519a"
+    }
+  ],
+  "fixtureCorrection": "native-round3-6: choose generated shop from all layers using its li/idx; no production change, 42 planned assertions unchanged; root rerun pending",
+  "scrollLocatorCorrection": "native-round3-7: all three detail ScrollRect queries select shop-detail-scroll, excluding nested CardFace description scroll; 42 planned assertions unchanged"
+}

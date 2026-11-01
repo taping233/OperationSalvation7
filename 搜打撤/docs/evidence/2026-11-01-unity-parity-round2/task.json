@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "unity-parity-round2",
+  "date": "2026-11-01",
+  "owner": "Friday",
+  "goal": "持续对照Vite修正Unity差异，合理改进原版缺陷，精简逻辑并减少重复计算与无用绘制，集中修改后统一验收",
+  "paths": [
+    "docs/evidence/2026-11-01-unity-parity-round2"
+  ],
+  "doneWhen": [
+    "形成基于现码和既有验收的差异与改进矩阵，查证项实施并保留行为边界",
+    "公共机制收拢，冗余和消耗优化有调用、分配或绘制证据，不编造性能增幅",
+    "全部生产修改冻结后完成领域和原生检查及当前窗口播放器复验，记录未测项与差异"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "第二轮对应源码的896领域、375新增及48既有原生、重构建与正常播放器通过，历史证据见final-summary.json；本次仅修正收官记录格式",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "物理键鼠、多尺寸、声学与整帧性能未验；最新源码验证另见第三轮记录"
+  ],
+  "updatedAt": "2026-11-01T01:19:01.530Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

@@ -1,0 +1,835 @@
+{
+  "scope": "Entire local Desktop product, including managed game assemblies and data. The executable is a Unity launcher and its hash alone is not a source-version identity.",
+  "files": [
+    {
+      "path": "Build/Desktop/build-info.json",
+      "bytes": 539771,
+      "sha256": "adefbe9a0a17592e7822ce92aade9cbc7259972f7b56104a4f7ca91e663fac54"
+    },
+    {
+      "path": "Build/Desktop/D3D12/D3D12Core.dll",
+      "bytes": 4725304,
+      "sha256": "625bd40005b1c3708695d5256ecf230d278e6b8edba5a88af70f3d91324f3052"
+    },
+    {
+      "path": "Build/Desktop/dstorage.dll",
+      "bytes": 206904,
+      "sha256": "cae65787f61514bec6f012f44546e68b19e39d8854a9ab52af813370d44b272a"
+    },
+    {
+      "path": "Build/Desktop/dstoragecore.dll",
+      "bytes": 1482784,
+      "sha256": "cf85b19a92a8276f8baca0db9bbcd60735bad50768deb303d310e84d5f4fdd11"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+      "bytes": 7834544,
+      "sha256": "c9b5fcbd3d5694161f494586b8447e8a0bcb6d34d11ab16927d3a3a699d5fbbb"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+      "bytes": 611248,
+      "sha256": "6d4aae4d60b74f59f6e15cfe4cc9dc3729f43a291d1c46728fad5466da036013"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+      "bytes": 1605,
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+      "bytes": 60575,
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/2.0/machine.config",
+      "bytes": 29066,
+      "sha256": "e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/2.0/settings.map",
+      "bytes": 2622,
+      "sha256": "49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/2.0/web.config",
+      "bytes": 11635,
+      "sha256": "cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+      "bytes": 1605,
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+      "bytes": 60575,
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.0/machine.config",
+      "bytes": 33598,
+      "sha256": "e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.0/settings.map",
+      "bytes": 2622,
+      "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.0/web.config",
+      "bytes": 18802,
+      "sha256": "e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+      "bytes": 1605,
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+      "bytes": 60575,
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.5/machine.config",
+      "bytes": 34056,
+      "sha256": "ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.5/settings.map",
+      "bytes": 2622,
+      "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/4.5/web.config",
+      "bytes": 18811,
+      "sha256": "c4cbddd4fd9347b58cc5a72b36dc4ba1ad2bb699e65869d05cd3fb9865f0d824"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/browscap.ini",
+      "bytes": 311984,
+      "sha256": "4ddd50f31fb968f30bedefc253a46dc3f2890192d05cdaa9e0a64a056eee807e"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/config",
+      "bytes": 3815,
+      "sha256": "5776169973a26a387b8b3e5c0f2301a7ab9a6dd7c7d3efa22a96abc47fbf8662"
+    },
+    {
+      "path": "Build/Desktop/MonoBleedingEdge/etc/mono/mconfig/config.xml",
+      "bytes": 25817,
+      "sha256": "0c56e34c69124510fa8c19e7b4c2ca6c1c4ff460ae19f798dd0ca035809e396d"
+    },
+    {
+      "path": "Build/Desktop/UnityCrashHandler64.exe",
+      "bytes": 1773992,
+      "sha256": "3435137bf921a545b044ddcaae33a0f2cb613ef9b946737404686cda14efe832"
+    },
+    {
+      "path": "Build/Desktop/UnityPlayer.dll",
+      "bytes": 38753192,
+      "sha256": "38db99e19730fad74e8cc21758c87ffe7387b7774ebd9a14405c62ae481f2550"
+    },
+    {
+      "path": "Build/Desktop/代号柒.exe",
+      "bytes": 667136,
+      "sha256": "9806abde4a406ed68647e9505852c49f6aa72a372f4f084e2aa2821affea57a2"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/app.info",
+      "bytes": 29,
+      "sha256": "c51906d184eb13a5e303abda41dd7b255ce504e979c357dafc4252ec690e54ed"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/boot.config",
+      "bytes": 156,
+      "sha256": "703974bec9f5a2c79c95dc864ca02f3aea1bdf9fd14e7c8d4432344586708b60"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/globalgamemanagers",
+      "bytes": 132084,
+      "sha256": "bfbbb690b90a1c9c36ce8da13501f824f749013a719be6b1608667c9a139da2d"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/globalgamemanagers.assets",
+      "bytes": 54816,
+      "sha256": "b62533b2f50a8d02d40cf4f63020bb06300f481b827fa48092dd812fc1246c7a"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/globalgamemanagers.assets.resS",
+      "bytes": 2796240,
+      "sha256": "39dd38fcd8dd95d41d6d55fe16a448d29fe2c31d9a162c825c24c6d99a893d7a"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/level0",
+      "bytes": 1104,
+      "sha256": "d470ebc21f65ae1d8a3cf81e8d74d170d21084a708bdb87f979047fe44587596"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Mono.Security.dll",
+      "bytes": 241152,
+      "sha256": "e912bcd94b398ba750f74a12b7c61b530720f66e4ff992e62628dd42edf50ae1"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/mscorlib.dll",
+      "bytes": 4632064,
+      "sha256": "ed3bd3b757069e96c26bfdec8179abd00feef8839ae3ad97f51637c12d83efd8"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/netstandard.dll",
+      "bytes": 90112,
+      "sha256": "6ae62e082dc494a2433984177f60ca4db5fae69b1f360a8b33754172b310b8c5"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Newtonsoft.Json.dll",
+      "bytes": 691712,
+      "sha256": "a56146202232958f46bd6a28b5a7da166aea123ee0d646735a46e5c341dfbf1f"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Sdt.Boot.dll",
+      "bytes": 160768,
+      "sha256": "025e011746a35c8dc48ddff38547c52580a4012ac98d4526e7ede3e7bdd71b80"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Sdt.Core.dll",
+      "bytes": 446464,
+      "sha256": "17a151ca3df338c0f59bd255c08620a4b8f298a8c52a6b3b63edb68381250c6e"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Sdt.Narrative.dll",
+      "bytes": 143872,
+      "sha256": "2b3f81d16e741db4e4cfb01323ad484e919b5da31dbfd3817e86de731cdb89a1"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Sdt.Res.dll",
+      "bytes": 130048,
+      "sha256": "16ae8c85ef16a5b713dd738cadd63c783c7c98c3499f5a93d9a348d0f7a7fcd3"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Sdt.Run.dll",
+      "bytes": 241664,
+      "sha256": "42e85ba00c9b3f565fc162c8c7965c589b583925208cc6ff19972a75f3e6bc43"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Sdt.UI.dll",
+      "bytes": 926720,
+      "sha256": "bc30ebda8419ab31f63a324c2f6d9cf85b60de8dfb9628932c70b643d11226eb"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Sdt.View.dll",
+      "bytes": 41472,
+      "sha256": "bb5ead5fba5b8cdb97386d3ab35a470ed912f96d1bb1730914f03969422805f3"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Buffers.dll",
+      "bytes": 4608,
+      "sha256": "762f8fdbe975e05b76be5fe996c53ce7c75e4a2830f2f50b02a5948ef6ba0aeb"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Collections.Immutable.dll",
+      "bytes": 252680,
+      "sha256": "5b1b1c83ba3d135c2fdfe425842fbe9c7432878b7e468623acb554c69b4c130f"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.ComponentModel.Composition.dll",
+      "bytes": 257024,
+      "sha256": "614793b018e061527e53941045f3d44abb2856591a7982ee3479f08df3237322"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Configuration.dll",
+      "bytes": 124928,
+      "sha256": "548ac87e81788971c06463779c82ce735da2be71cdd8d59fe75a226f63981d82"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Core.dll",
+      "bytes": 1113088,
+      "sha256": "f8a67453fe15cdbe58fd459be18af2600b84d465fe9dc7ef0bceebbb92137a05"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Data.DataSetExtensions.dll",
+      "bytes": 29696,
+      "sha256": "3ef867092db854496c3a119e2a0c9c929eadd64e4f82cc590a2defbc0ffd8885"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Data.dll",
+      "bytes": 2125312,
+      "sha256": "0327833c231a3c2c989ba95651d02bd35417e9579e421adb5ea63182f1741b30"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.dll",
+      "bytes": 2641920,
+      "sha256": "f7a66d1ecb77d1d74840b7100eef17ebdb5aefa2957acc7d3a6cad6d2ac12304"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Drawing.dll",
+      "bytes": 489984,
+      "sha256": "70dd9d25249ec173db45a94cce4e3d66a49dbc47bcedaf56be0a1a3193f013c3"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.EnterpriseServices.dll",
+      "bytes": 44544,
+      "sha256": "4abd633b3749f92df1dc7c8ed0083515d8c4815220d619ff7491ed617a90b70e"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.IO.Compression.dll",
+      "bytes": 114688,
+      "sha256": "ce68e338cd2111d37296ab573e07296f46d0ab1d62140157012662f5c1631bbf"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.IO.Compression.FileSystem.dll",
+      "bytes": 18432,
+      "sha256": "d221d8ede654d31bc9d172050aebcf6583389df49ea9ca3c64b892b4d431aa93"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Memory.dll",
+      "bytes": 4608,
+      "sha256": "c4f030a2cba7da7cdcf493257c24560e203d355904aee490d645a935842f834a"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Net.Http.dll",
+      "bytes": 122880,
+      "sha256": "fc1d9895a57c89690cdbb390ff0e2a33139e6d55b3585ce27a975919b782f384"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Numerics.dll",
+      "bytes": 119296,
+      "sha256": "10ad242e00ccc5842a18f23a5db7cb98994bb9adc9cb8e928bfa983017f7b84d"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Reflection.Metadata.dll",
+      "bytes": 487584,
+      "sha256": "afcfd6c166fe0d59f45cc6363082806f6a7ea8ceed9dc6c75eec9fd79ccb5717"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Runtime.CompilerServices.Unsafe.dll",
+      "bytes": 19256,
+      "sha256": "fd67abc4c4af10affbcd42fd68a2a7bc361b26714afe6965d4d0d139459d8297"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Runtime.Serialization.dll",
+      "bytes": 934400,
+      "sha256": "b5e613632bb6740233ef64eda07a9012b4b760bdbdb382cc9e8401bec181c3cd"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Security.dll",
+      "bytes": 320000,
+      "sha256": "a2b5d9892a204c55cac80a97f115f2ed69c33616b5bc913a329d3a69e3306e33"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.ServiceModel.Internals.dll",
+      "bytes": 215040,
+      "sha256": "aaa9fa4c9037fb65c82d87b6ff1b5666e41e8a2706cb4fa1669856ed546272f9"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Transactions.dll",
+      "bytes": 35328,
+      "sha256": "e10e97aa9723c7c6c48c96d066029ad274094ebca433768b852840455c9bf241"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Xml.dll",
+      "bytes": 3160064,
+      "sha256": "fdead0bddf7d8817a616c09cc603868b4a44645bbc9834775c9309b059576345"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/System.Xml.Linq.dll",
+      "bytes": 136704,
+      "sha256": "d1f14ecf3ce7b6584f409203a474fd32bea20b8c57a64160e419c30cc0eb3ede"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Unity.InternalAPIEngineBridge.004.dll",
+      "bytes": 4096,
+      "sha256": "04a33efe1dafbc75b1434510d93c5a4702b0d5ee5023501ab06a1c468c493f74"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Unity.Scripting.dll",
+      "bytes": 70576,
+      "sha256": "53ab214b5cc329702c20e64f71f31bb991fd94fa93f9befa498610b8236c82e0"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/Unity.TextMeshPro.dll",
+      "bytes": 440320,
+      "sha256": "59a94cffc6acd491f4d443bff18096ba78b4a23115def7aa5dc831fe921617b2"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.AccessibilityModule.dll",
+      "bytes": 49584,
+      "sha256": "c00102f94241fec153db08939d9412acc800500b50b800684682b8267e9d98e6"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.AdaptivePerformanceModule.dll",
+      "bytes": 122280,
+      "sha256": "f1a7ef51f7ef4348a8032fe8fd2c7805b1b98a5e08bc8914e2cc4ada9c22d0f6"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.AIModule.dll",
+      "bytes": 87472,
+      "sha256": "1bcf1b74532457ee06422c44144c55a9bc470dc8f4bbc50b476858c2e4848ca3"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.AMDModule.dll",
+      "bytes": 21936,
+      "sha256": "c1833db6062471ca3a1a5259979f07f9d4d5b5bbd08535a21f1ebd18d4cc4ddf"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+      "bytes": 121256,
+      "sha256": "840113117ebef4831c885c2fbeae1ff8dc270318ff4a4a49420f41fc7e450f6a"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.AnimationModule.dll",
+      "bytes": 218024,
+      "sha256": "fba418a32ecbcf46d175961e27618677c26e7e2efbd8c227b042ee6da9d85b20"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ARModule.dll",
+      "bytes": 27568,
+      "sha256": "d8f08fa3d63621acdfba3d641acf819ba262f48995eea36e1d3a4e5450fba6ad"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.AssetBundleModule.dll",
+      "bytes": 42928,
+      "sha256": "76aba452ddef51b758dc7162dfb4291b4213a8ab2cae824abde725a55b9737ef"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.AudioModule.dll",
+      "bytes": 142248,
+      "sha256": "5cea0fa111f6a594f1ba70ab059d2d1317972213e62ef99879693134b5400226"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.BurstModule.dll",
+      "bytes": 337832,
+      "sha256": "6db1906c74890ba3d6c8fd5cd1fa46b870e48433e2476be1a17db02f8499709b"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ClothModule.dll",
+      "bytes": 38320,
+      "sha256": "c3359d2506f61d7c99c0f83cd41cea85c264f1b5fa6b95efa64331161cc72520"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ClusterInputModule.dll",
+      "bytes": 30120,
+      "sha256": "3021503f52a1ce9b6de1ae4402b1935f3f9e5c2b3f3963073811b56aa0f3472e"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+      "bytes": 28592,
+      "sha256": "4548e8cbba37a6efe6bb799acebd14dfc780ac6bb7cd61a79fbb78cd6105f626"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ContentLoadModule.dll",
+      "bytes": 56232,
+      "sha256": "c87fa9927dd947d515437aaff0a02519df0b3cf5b075daf5a980dbb88c79e67f"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.CoreModule.dll",
+      "bytes": 2030504,
+      "sha256": "957c23d330e2178effe4bda021cb8749f8d8d406bc2012ab8c98a6db0eba175f"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.CrashReportingModule.dll",
+      "bytes": 28584,
+      "sha256": "3ba8d5bea102a35c0f0e4c3ca2fb97d8ecca4eaa76060433ce25cc33a6603384"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.DirectorModule.dll",
+      "bytes": 42928,
+      "sha256": "5c0a7a625977c9307a778e1c5013917a439e606ae299b0706a3434d5b15f86ad"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.dll",
+      "bytes": 226216,
+      "sha256": "0b5700b6f374e0f13740b11d1777051d5aa67b899184940bb9fadb5522df4915"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.DSPGraphModule.dll",
+      "bytes": 33704,
+      "sha256": "0de3bbc63ccf3682f68fb576467584de44cad9273ebd9a8f39ec04eaf2d3ad99"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.GameCenterModule.dll",
+      "bytes": 46504,
+      "sha256": "85d274d5839f328c77de2a9a411b6ff5c3273c5abecf207581cdf2cc6a0b6554"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.GIModule.dll",
+      "bytes": 26032,
+      "sha256": "8ba968f1c0ce3813ea829f692d8f391a7baa0f44413803e1c555510942702456"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+      "bytes": 14256,
+      "sha256": "8b36edd5cb4745844fe84732f68b59a6efaa0e64003ba8403693499aabe6a631"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.GridModule.dll",
+      "bytes": 32688,
+      "sha256": "83e2ca067f5db330ac534b9144f6bbad0bd44dc23a6b5663639f86da0534d37f"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+      "bytes": 114608,
+      "sha256": "9103aeda2704b9dd97052496398bc54a640785c790af6a7249d98a2734e17f04"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.HierarchyModule.dll",
+      "bytes": 117168,
+      "sha256": "99ae2a5cce3b492c6c26818c53691b5c57f5b4cf6e6002b314c9d0459859e288"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.HotReloadModule.dll",
+      "bytes": 26024,
+      "sha256": "74e637bf13b34e586dcfa6584395eb5d6e210e77878cc495d4950d53f1e4df24"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.IdentifiersModule.dll",
+      "bytes": 16816,
+      "sha256": "245fe9769bb2d51a737e9f71899cde96399069b62568d680df619d6554d8213c"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ImageConversionModule.dll",
+      "bytes": 34224,
+      "sha256": "6a4ff449ce3fd1ccc9ad46aad7686ff01b0092842718797c753209cb39093d4e"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.IMGUIModule.dll",
+      "bytes": 191920,
+      "sha256": "ace052a9426fdf9c41e64b9619818c802541b888fcb34035876915ef40267c37"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.InputForUIModule.dll",
+      "bytes": 56752,
+      "sha256": "7f051c08279f409b25fdbad976fa01f6ee873c91e0fa9f31c583481f065f1449"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.InputLegacyModule.dll",
+      "bytes": 42928,
+      "sha256": "b36fc67eddadde63d9c0bf53af314eea74883386ae8406d27567ef26b89b8b28"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.InputModule.dll",
+      "bytes": 32680,
+      "sha256": "510fe0623c4f8bf39221861605c29be74b6cd4a02c9d751f24e879951cf05226"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.InsightsModule.dll",
+      "bytes": 15784,
+      "sha256": "3793290b8ec42954eb780d5501479e6e242eb516ba304e6521f7678e01cc965a"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+      "bytes": 29096,
+      "sha256": "55c7afef07c8872f8e110b2b61836c050a4e3b87b24228b282141f621472b00f"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.LocalizationModule.dll",
+      "bytes": 29104,
+      "sha256": "789d956c0c403406a9229c5a026897cd7c883b02f5d807b381bc65ec76d7c67b"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ManagedKernelModule.dll",
+      "bytes": 14256,
+      "sha256": "6eae37905bc1a8132d2d9fc1043b0ac05ab8ab4a4c528c9bdbe5b6efae0b0f52"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.MarshallingModule.dll",
+      "bytes": 100784,
+      "sha256": "17992d81bb146144c3f3ac39a2c02474f2e3615d33368694a3973451ea824c40"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.MathematicsModule.dll",
+      "bytes": 740784,
+      "sha256": "91d9baed094baeb44534eb143c6bd0512caf2697f6942ccc76007b1b6fc24a28"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.MultiplayerModule.dll",
+      "bytes": 18352,
+      "sha256": "c94981260578bca956026161304ad88fae7de4c6c4bc484d3fc5f1082f75d0bd"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.NVIDIAModule.dll",
+      "bytes": 41392,
+      "sha256": "803fd6bae6a7f5ce511c2ad876f37d01f3f1894da445504b20cac40b086f59e3"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+      "bytes": 170416,
+      "sha256": "378f770a4633d2628105a5c9f2fbe0ca1712a6402114ac2cb34950b4ca4f076b"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+      "bytes": 27056,
+      "sha256": "32db47ceb72b497f2e0036cc93e70ba80f2d9a4147a2eea763e0b60087501377"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.Physics2DModule.dll",
+      "bytes": 222640,
+      "sha256": "75842b91c28c4c9202df446ce0bf6efb00f4e80ac2250bd734cdbe4967127a00"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.PhysicsBackendPhysXModule.dll",
+      "bytes": 14256,
+      "sha256": "8ae8cdad4c8c0c1d28febb463cd1e41d76c95482040dc2bee992902586a248f7"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.PhysicsCore2DModule.dll",
+      "bytes": 481192,
+      "sha256": "9c329c52a02962cee6aa2d8c7fdc40f40fcae9d139f52e20be8381d150f3cd1b"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.PhysicsModule.dll",
+      "bytes": 181672,
+      "sha256": "2a0adcddf1a0c0a0687445e9a06e187249289e4e788ea315a1d8784f393946ee"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.PropertiesModule.dll",
+      "bytes": 124840,
+      "sha256": "ab289a26978bc28ad743d87f6cd6445fccb1b4f588fbaed0801cb563a447504a"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.RenderAs2DModule.dll",
+      "bytes": 27560,
+      "sha256": "eeec4b59e3c673d061e4f75ef376cffd8e52c494e68f119323177b5c0283b155"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+      "bytes": 26032,
+      "sha256": "a728c2f3a28edf711494783cf5c86821715a10dd6874371660139104e240d642"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+      "bytes": 28080,
+      "sha256": "f76237cdc7b2f5d2dc3fc3e04feddf87cc4dbab96185e98774edcc86397abe3d"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ScriptingModule.dll",
+      "bytes": 65968,
+      "sha256": "198355e3872f0a5f1fb6e0c41a221f7d8b254e33eace8a1e7a067184b21118fe"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+      "bytes": 26032,
+      "sha256": "9df089927e6d80cec2aa89c3f488d2283be0b256dd8bd04306c207799aa15dbe"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+      "bytes": 30632,
+      "sha256": "83e5fd0c9b92fcf07b188419dcc4f21db8f645050cda1cb95e10d88e5a94c4cc"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+      "bytes": 34216,
+      "sha256": "83b86c99d01ef30f550bd7e3605c19141e7ee050dbcad42519520f74adc9a7db"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.StreamingModule.dll",
+      "bytes": 28080,
+      "sha256": "4ffadc5cfac944f26c1dd2d892b5920f3d775eddec6f563cd52170b05195e58d"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.SubstanceModule.dll",
+      "bytes": 31144,
+      "sha256": "cc1570a65360eda153ee34c566fadb16055e537cbfe48ae01a60abc3cefc3aae"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.SubsystemsModule.dll",
+      "bytes": 42928,
+      "sha256": "4a2a55dfcd7397df166af405c4a42c2d9913ddd63d33dac5e480b2d367aeda93"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.TerrainModule.dll",
+      "bytes": 132520,
+      "sha256": "05a55f2e7daf41201c4b2ae8c8c271829d358dcb23cf21e06d9d27ae6022399d"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+      "bytes": 27568,
+      "sha256": "fc99213b48e93f6116d9199285f7ce92788ce9e07554aefbed8e643860b3cfe8"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.TetgenModule.dll",
+      "bytes": 26032,
+      "sha256": "da099d65a6a2351ea1eda129f3c5e258bcc929883a30d797f39e9f3c09fb568c"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+      "bytes": 86440,
+      "sha256": "f090fe8e906210ce38740c027e867b2ec3f52bba2337541af86b28708f817e2f"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+      "bytes": 314800,
+      "sha256": "f4bd7432613b2779e399a38db06498a24e53b72cf7fcf2faab6a256812ef9502"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.TextRenderingModule.dll",
+      "bytes": 39344,
+      "sha256": "b5fedb246c07e2f79b00681362e22ed8e902396621671c421750edf8138e21ed"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.TilemapModule.dll",
+      "bytes": 75688,
+      "sha256": "99c21b2145a8ea5b75a33e5d1cf6c5da742ced302040807f0e12b5649cbd0bce"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.TimelineFoundationModule.dll",
+      "bytes": 167344,
+      "sha256": "764b3e2b2887c041330f0007ee86c8e92d5eec94c8bcba8534d645db21728b0a"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.TLSModule.dll",
+      "bytes": 34224,
+      "sha256": "67821ae08f3e702d156ce93ee3025150ba01a45d57be8280d2162e451ef52887"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.U2DRuntimeModule.dll",
+      "bytes": 73648,
+      "sha256": "ab889bdc7a6922f0ecbc269b955064faba48d2fbffb5897846249a9c716f4286"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UI.dll",
+      "bytes": 269312,
+      "sha256": "c76843db7cde4e38c5ac28155f005cd8e69ebace75c42f58f7096a98c8801704"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UIElementsModule.dll",
+      "bytes": 2552232,
+      "sha256": "94f1103ee1538fb226a3159d6cdbbd7bb72a8f18c46c8c09f02de9907849f245"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UIModule.dll",
+      "bytes": 57264,
+      "sha256": "3ab5610e834dac2dded955357a912f40dc9571cb8e58ac17679f28a85faef308"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UmbraModule.dll",
+      "bytes": 26032,
+      "sha256": "3e7743dcd17ae9ab30071e4c7be81e39ff66c57f0439122e7c21803ba86f6d61"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+      "bytes": 36776,
+      "sha256": "8ebbcb289293c6443ee4a6a39397da27acddda82f5e3fb1f3b34586b0f9fbd7c"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+      "bytes": 61864,
+      "sha256": "993e7b95c963eafa0ea03d728e05a1470bd18bf4ddfe8d9dc11b8376c3d6f37b"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityConnectModule.dll",
+      "bytes": 29616,
+      "sha256": "59bd862d6ff02ecd0536e40a4696e6b6eb3b5fe9e0c7d41eeeae62e163731a42"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityConsentModule.dll",
+      "bytes": 16304,
+      "sha256": "c5f8784a2e52b9f20330b507295ba4cbefe6a70a5a91f39a87610c0a6042dab8"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityCurlModule.dll",
+      "bytes": 28072,
+      "sha256": "fbebe3cd6f3bb6693b137268be0b73ba4e2eed81e8f18397ae99078918fd7323"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+      "bytes": 30640,
+      "sha256": "f1cc2c9beaccf363d8bcd61bfa18a685e40ea1af55ec6576e25134d3f7bbd79b"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+      "bytes": 30632,
+      "sha256": "4d845c1af998bbd78e7653e12b71b3e7d6bb259f2f9829d337a6725fe6d43a54"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+      "bytes": 81328,
+      "sha256": "f9e5893bab929d45b605cbaced026a64ac2943420a0ef463d0e52b03c9da2420"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+      "bytes": 29608,
+      "sha256": "0eb45a489e67197d9126ea2505810392cb396618fc0d2eaa712f53ba1a9fbf7b"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+      "bytes": 35248,
+      "sha256": "0b792669540438f24f1aba8a24a0df57c49b218825332f3376e919bcf1aab285"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.VectorGraphicsModule.dll",
+      "bytes": 231336,
+      "sha256": "52fc06d609c516b305867deb3d9879fcb2a4c76fcc0993da981595e7e43faeb0"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.VehiclesModule.dll",
+      "bytes": 33200,
+      "sha256": "3afa6b698444c44e0c8eefb37c8816601f063a00dfd37c4bf51efbcc1e899c98"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.VFXModule.dll",
+      "bytes": 82352,
+      "sha256": "38a4ff3fc6e0256e0eb39da52f70f76e167bbaf0f9f43f853a691b6f3da2c7fb"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.VideoModule.dll",
+      "bytes": 48552,
+      "sha256": "d00897681f27b05807c8ae36d952916e3b85e22782bc3d7f744ace914d9d827e"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+      "bytes": 43952,
+      "sha256": "4ab483ae111a485cf7cf2ad22647a1d535b2dfb5838986a122829bdfc3f51179"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.WindModule.dll",
+      "bytes": 28584,
+      "sha256": "173c414b4049ec2f3a7e530c48176bbd022e4d79f7de8276349bd98e6d60649b"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Managed/UnityEngine.XRModule.dll",
+      "bytes": 96176,
+      "sha256": "48d3fa89c3ea1a696936efa85d45b0b675a90714fb9b5b58b88d313e92d23448"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Resources/unity default resources",
+      "bytes": 5919584,
+      "sha256": "696b9afaee02b5d45978634f1450ef18423c19177933b997fd8ee364d70cdd61"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/Resources/unity_builtin_extra",
+      "bytes": 533236,
+      "sha256": "a9b3fd1a56448145646de85752d7a7d84ce8fc51c90a5e28b3e360da01851da9"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/resources.assets",
+      "bytes": 55218568,
+      "sha256": "12feea25f02897e6fc97a7371bb6e9a498fd2b58de8c80ae1611c5b98c22131e"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/resources.assets.resS",
+      "bytes": 2565154160,
+      "sha256": "a558a771d47060e93fc49c38c5e5d5cf481cf6d253346581e6a7e02b8e6bedfc"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/resources.resource",
+      "bytes": 14258016,
+      "sha256": "27acb12d31346ddfe5a11c53e7b315a96b18ed53bae5c48156c038f5b29c1d3e"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/RuntimeInitializeOnLoads.json",
+      "bytes": 147,
+      "sha256": "94fc1be1e7acc701a0447da950e50cc6885c39de109e586f1b28bc2d7bf8b15a"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/ScriptingAssemblies.json",
+      "bytes": 3598,
+      "sha256": "89662a79cc50c7850e44a2d2f53ceecc2f987d395e795badb594b6ae44a48bdb"
+    },
+    {
+      "path": "Build/Desktop/代号柒_Data/sharedassets0.assets",
+      "bytes": 277,
+      "sha256": "ce3a37bc46770135557be2eade3650e3bd2d07688ab5515e704885d768dae638"
+    }
+  ]
+}

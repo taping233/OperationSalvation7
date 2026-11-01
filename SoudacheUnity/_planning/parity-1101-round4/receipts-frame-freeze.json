@@ -1,0 +1,28 @@
+{
+  "status": "qa-source-frozen-awaiting-root-receipts-and-journey",
+  "productionChanged": false,
+  "offscreenCaptureChanged": false,
+  "testsRunByThisAgent": false,
+  "unityStartedByThisAgent": false,
+  "reason": "Receipts step1 used a capture-restored projection in the same tick: exRarity live pointer was outside the viewport and RaycastAll returned no hits.",
+  "inputContract": "Capture once per step/name/current owner; require Time.frameCount >= capturedFrame + 2 before continuing. Compute current target center and retain original RaycastAll/receiver/pointer-down assertions. No cached screenshot coordinates or input fallback.",
+  "receiptsWaitSteps": [1, 5, 8, 13, 18, 19, 20, 23, 25, 27, 29],
+  "journeyWaitSteps": [2, 4],
+  "journeyTraversal": "First capture of each page/layer waits before issuing that page's commands.",
+  "fileLocks": "All wait points precede Lock; locked failure assertions remain synchronous and unchanged.",
+  "validation": "Static diff/whitespace review only; Root reruns the two existing entries. Other validated production and check consumers are unchanged.",
+  "files": [
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.cs",
+      "sha256": "f7e7332bfb3e2ba7e9b5019795a9cdb8819073b25949bc0ed5ddc1e8cc7dccc4"
+    },
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.Receipts.cs",
+      "sha256": "a00bfe8247ee78a20f0c145a8e07d9734c3c299a34080de7b11125785c9934ed"
+    },
+    {
+      "path": "Assets/Editor/CurrentMigrationFlowValidation.Journey.cs",
+      "sha256": "c63133c5f62658e756c7159ebd49a95170654d459569cb18b2493ac557cf17a1"
+    }
+  ]
+}

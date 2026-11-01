@@ -1,0 +1,32 @@
+{
+  "passed": false,
+  "error": "System.NullReferenceException: Object reference not set to an instance of an object\r\n  at CurrentRunRound2Checks+<>c.<Run>b__13_2 (Sdt.UI.Screens.Run.CurrentRewardTile tile) [0x00000] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRunRound2Checks.cs:53 \r\n  at System.Linq.Enumerable+SelectArrayIterator`2[TSource,TResult].ToArray () [0x00012] in <a20f1d2e02704095a3695abe8dca1148>:0 \r\n  at System.Linq.Enumerable.ToArray[TSource] (System.Collections.Generic.IEnumerable`1[T] source) [0x0001f] in <a20f1d2e02704095a3695abe8dca1148>:0 \r\n  at CurrentRunRound2Checks+<Run>d__13.MoveNext () [0x00126] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRunRound2Checks.cs:53 \r\n  at Sdt.Editor.CurrentRound2Validation+<Flow>d__15.MoveNext () [0x0008f] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound2Validation.cs:81 \r\n  at Sdt.Editor.CurrentRound2Validation+<Drive>d__14.MoveNext () [0x0001f] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound2Validation.cs:70 ",
+  "checks": [
+    "real departure opens guide",
+    "wallpaper crossfade finishes behind transparent guide",
+    "finite covered departure finishes",
+    "covered title stops settled and ambient work",
+    "reduced motion clears covered departure without residual filter",
+    "return restores title with reduced-motion resting pose",
+    "settled title stops rewriting entry regions",
+    "clear immediately detaches and disables old children",
+    "unchanged camera and layer do not rewrite backdrop transforms",
+    "changed backdrop layer still lays out",
+    "opaque settings suppress map before render",
+    "covered map retains camera clearing and audio listener",
+    "covered map movement still completes",
+    "transparent dialog retains its opaque underlying owner",
+    "consecutive same-frame rebuilds expose only current controls",
+    "closing last opaque owner restores map in same call",
+    "repeated close does not repeat panel lifecycle",
+    "slot rim tint hot path allocates zero managed bytes (10000 calls)",
+    "snow optimization retains populated geometry",
+    "warmed snow geometry hot path allocates zero managed bytes (20 builds)",
+    "covered slot snow stops advancing and requesting animated meshes",
+    "reduced slot snow remains static",
+    "slot snow resumes after reduced motion is disabled"
+  ],
+  "runAssertions": 3,
+  "hubAssertions": 0,
+  "scope": "Native controlled events and allocation/lifecycle checks; no physical input, FPS, or multi-size claim."
+}

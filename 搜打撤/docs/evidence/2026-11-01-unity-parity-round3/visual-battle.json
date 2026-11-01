@@ -1,0 +1,93 @@
+{
+  "status": "complete-no-obvious-regression-in-four-assigned-images",
+  "reviewMethod": "view_image inspection of existing actual Standalone PNGs; metadata parsed separately; no player launched, tests rerun, window changed or production edited",
+  "images": [
+    {
+      "name": "player-battle",
+      "review": "no-obvious-regression-within-depicted-state",
+      "observations": [
+        "普通战场、玩家立绘、名板血条、能量、牌库与结束回合显示，无明显错位或新增不透明遮挡。",
+        "初始攻击插画、费用和名称可见；正常静置卡面贴近画面下沿，未据此宣称所有未悬停说明均完整可读。"
+      ],
+      "path": "player/player-battle.png",
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5",
+      "bytes": 1844883,
+      "width": 2560,
+      "height": 1440,
+      "frame": 805
+    },
+    {
+      "name": "player-hand-material-picked",
+      "review": "no-obvious-regression-within-depicted-state",
+      "observations": [
+        "复制选择显示“选择复制的手牌 · 1/1”，左右取消/确定可见；选中卡仍在普通手牌槽并抬升、金边强调，没有错误切入独立注能工作区。",
+        "已选初始攻击插画、费用、名称与规则可见；普通手牌保持重叠排布，本图不证明每张未选卡完整说明可读。"
+      ],
+      "path": "player/player-hand-material-picked.png",
+      "sha256": "7ba4b1f10d3fd52f76b4ae4ce7830974cfa023581633e8d006cff79170378f6a",
+      "bytes": 2329746,
+      "width": 2560,
+      "height": 1440,
+      "frame": 860
+    },
+    {
+      "name": "player-infusion-picked",
+      "review": "no-obvious-regression-within-depicted-state",
+      "observations": [
+        "真实注能显示大源卡、独立已选卡和1/1；已选卡内部卡面可见，空心金框没有再次盖成整块矩形，右下撤回标记可见。",
+        "下方未选候选变暗；返回、不注能直接打出、确认注能及上一页/1/2/下一页文字可见，无明显裁切；arena局部模糊，远景和手牌保持区分。"
+      ],
+      "path": "player/player-infusion-picked.png",
+      "sha256": "9a7896f84d61ba40d7c6d5bbf8e89e5dd10e595ac875d8f9867dab6c817001ad",
+      "bytes": 2093696,
+      "width": 2560,
+      "height": 1440,
+      "frame": 866
+    },
+    {
+      "name": "player-infusion-return",
+      "review": "no-obvious-regression-within-depicted-state",
+      "observations": [
+        "返回后大源卡、已选区、注能控件消失；普通战场、玩家立绘、未模糊的名板血条、普通手牌与结束回合重新显示。",
+        "普通手牌分页1/2与箭头可见，未残留选材金框或注能暗化；同样保留普通手牌重叠与底边布局边界。"
+      ],
+      "path": "player/player-infusion-return.png",
+      "sha256": "94ba9519dd722adbe2e155bfa3296932aac52ca176236f3defee3128f8fe91a6",
+      "bytes": 2413389,
+      "width": 2560,
+      "height": 1440,
+      "frame": 869
+    }
+  ],
+  "evidenceBoundaries": [
+    "受控1000HP玩家、10000HP敌人；白色“受控敌人”矩形属于本包QA构造，不能作为真实敌人立绘完整性证据。",
+    "普通选材与注能页含受控候选费用、伤害与规则；不证明自然获取、跨职业旅程或所有原费变体UI。",
+    "四张图未显示rulePick二段选敌提示或拖动目标箭头，不据图声称该提示/指示已目检。普通复制1/1与真实注能1/1、金框、撤回、分页才属于本次可见指示。",
+    "自动双血毒等待、当前取消、旧UnityEvent与终局停止由独立Editor Battle25检查覆盖；这四张图不是该状态的专项截图。",
+    "不声称OS物理输入、按钮实际射线命中、音频听感、全部页面或卡牌、其它尺寸或硬件及性能测量。"
+  ],
+  "productionEdits": false,
+  "testsRunByReviewer": false,
+  "playerResult": {
+    "path": "player/result.json",
+    "sha256": "ed297d288be73199f8f5857783ad1ffde6f5ecaf6f7c01e918162a74a7d84479",
+    "passed": true,
+    "scope": "Actual standalone backbuffer; hidden parent; normal CanvasScaler and ScreenSpaceOverlay; constructed page opens; no OS input",
+    "buildGUID": "cfbe07ccdc1147f28801339933512ee0",
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120.0,
+    "canvas": "ScreenSpaceOverlay",
+    "scaler": "ScaleWithScreenSize",
+    "normalBufferScale": [
+      1.0,
+      1.0
+    ]
+  },
+  "separateBehaviorEvidence": {
+    "path": "native-round3-final/result.json",
+    "passed": true,
+    "battleAssertions": 25,
+    "scope": "Native constructed submit and lifetime checks in isolated profile; no OS input, multi-size or FPS claim."
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "sourceCount": 796,
+  "changedSinceReusedNative": [
+    "Assets/Editor/CurrentMigrationFlowValidation.Journey.cs",
+    "Assets/Editor/CurrentMigrationFlowValidation.Receipts.cs",
+    "Assets/Editor/CurrentMigrationFlowValidation.cs"
+  ],
+  "productionUnchanged": true,
+  "domainAuxiliaryUnchanged": true,
+  "domainAuxiliaryCount": 17,
+  "reusedNative": [
+    {
+      "folder": "native-round4-5",
+      "inputsUnchangedDuringExecution": true,
+      "passed": true
+    },
+    {
+      "folder": "native-round3-regression",
+      "inputsUnchangedDuringExecution": true,
+      "passed": true
+    },
+    {
+      "folder": "native-round2-regression",
+      "inputsUnchangedDuringExecution": true,
+      "passed": true
+    },
+    {
+      "folder": "native-shared-regression",
+      "inputsUnchangedDuringExecution": true,
+      "passed": true
+    }
+  ],
+  "reason": "Only the dedicated migration flow QA driver changed after these stable-input runs. Its ShotReady/receipts/journey code is not invoked by the four reused entrypoints; all production and their check sources are unchanged. Receipts/Journey run anew on the final input set.",
+  "notReused": "native-round4-4 had an in-flight source edit and is discarded."
+}

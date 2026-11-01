@@ -1,0 +1,68 @@
+{
+  "status": "frozen-awaiting-central-validation",
+  "atUtc": "2026-10-31T23:46:42.822591+00:00",
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/CardContainerCommands.cs",
+      "sha256": "f3d634055035b267d379459240a915f50e02ba6d7e5f0ec55d2b86b40007a7d5",
+      "lfSha256": "5b6477ab28eef0f0d52a8befc0d5a3452d6ca02c98347c63199955faf7c83d9b",
+      "bytes": 12289,
+      "mtimeNs": 1793489515657169200
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagScreen.cs",
+      "sha256": "ca90cd3e4c8d1ba600563d1bfb8a7b1ae11218a10e6ef4cf1e3867a411d4c4da",
+      "lfSha256": "1ddbc3a03ff8b4693a34cb6bb10a81478a95b481e6545f8970c1024443195017",
+      "bytes": 13280,
+      "mtimeNs": 1793490119768755800
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagCurrentView.cs",
+      "sha256": "a2a4084a2ffd61b317804212e8d0517a5c2124daecf4671851cbd591f19b74d9",
+      "lfSha256": "fcd60c97a90134f8d0a75b3d7830e83cfadf1bb386c5be2c49a6a70e784f23bc",
+      "bytes": 15022,
+      "mtimeNs": 1793489617798764300
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagCurrentCell.cs",
+      "sha256": "482c82ad39e6fe05905af9504b5757fe36672bcac53d73735d21a5ce518f5564",
+      "lfSha256": "482c82ad39e6fe05905af9504b5757fe36672bcac53d73735d21a5ce518f5564",
+      "bytes": 8099,
+      "mtimeNs": 1793489618048830600
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/ContainerScreen.cs",
+      "sha256": "6118c605c664ec53388104a5b71853d231c57cf3fb1cbe7d08958e84dc0627f2",
+      "lfSha256": "6118c605c664ec53388104a5b71853d231c57cf3fb1cbe7d08958e84dc0627f2",
+      "bytes": 12956,
+      "mtimeNs": 1793490402060680000
+    },
+    {
+      "path": "Assets/Editor/CurrentHubSaveRound2Checks.cs",
+      "sha256": "250600220f68a8d81915d717aab655a81c36a4b4365fd0fe6c4c7ae003823cf5",
+      "lfSha256": "250600220f68a8d81915d717aab655a81c36a4b4365fd0fe6c4c7ae003823cf5",
+      "bytes": 7879,
+      "mtimeNs": 1793490064555173000
+    },
+    {
+      "path": "Assets/Editor/CurrentHubSaveRound2Checks.cs.meta",
+      "sha256": "160032c504a5de376ad80bec4b9ec947555e25cd496aaa1ed2fa63b057cef701",
+      "lfSha256": "b2eac955fdf5b37e23a1ee5c2ce7848b1559ee546aa941b0f702453417e30966",
+      "bytes": 62,
+      "mtimeNs": 1793490154537301500
+    },
+    {
+      "path": "_planning/parity-1101-round2/hub-save.md",
+      "sha256": "0b0732abd9fcb34c143f397b3fadd7a14cd2ab4a34203289bea13a69cd2f7bc2",
+      "lfSha256": "0b0732abd9fcb34c143f397b3fadd7a14cd2ab4a34203289bea13a69cd2f7bc2",
+      "bytes": 4812,
+      "mtimeNs": 1793490271547508000
+    }
+  ],
+  "productionFiles": 5,
+  "nativeCheck": "Sdt.Editor.CurrentHubSaveRound2Checks.Run()/Assertions",
+  "verification": "source review and git diff --check only; no compile/tests/Unity/build run",
+  "sourceBaseline": "f966e859043b7ab3703839005029ef090a4677b5",
+  "unityBaseline": "81b87cbd5f7b6bb7de48b0973c534ba494cb84a9",
+  "integrationFix": "Added ScreenMount namespace import only after native compile diagnostic CS0103; not retested by this agent."
+}

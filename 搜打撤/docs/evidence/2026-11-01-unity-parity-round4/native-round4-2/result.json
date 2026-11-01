@@ -1,0 +1,11 @@
+{
+  "passed": false,
+  "error": "System.InvalidOperationException: Run round4: repeated pending callback neither grants nor rerolls\r\n  at CurrentRunRound4Checks.Require (System.Boolean value, System.String message) [0x00020] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRunRound4Checks.cs:19 \r\n  at CurrentRunRound4Checks+<Run>d__13.MoveNext () [0x00597] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRunRound4Checks.cs:52 \r\n  at Sdt.Editor.CurrentRound4Validation+<Flow>d__9.MoveNext () [0x0010d] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound4Validation.cs:49 \r\n  at Sdt.Editor.CurrentRound4Validation+<Drive>d__10.MoveNext () [0x00037] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound4Validation.cs:58 ",
+  "preparationAssertions": 31,
+  "photoAssertions": 25,
+  "inboxAssertions": 12,
+  "runAssertions": 12,
+  "runStep": "frozen resource candidates persisted before interruption",
+  "battleAssertions": 0,
+  "scope": "Isolated native player-loop checks and constructed UI events; no OS input, multi-size or FPS claim."
+}

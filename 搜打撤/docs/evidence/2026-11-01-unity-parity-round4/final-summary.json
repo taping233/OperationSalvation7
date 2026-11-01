@@ -1,0 +1,283 @@
+{
+  "status": "validated",
+  "atUtc": "2026-11-01T02:41:51.367535+00:00",
+  "sourceInputCount": 796,
+  "sourceInputsUnchanged": true,
+  "sourceScope": "Native production, editor checks, package and project settings",
+  "sourceAuxiliary": {
+    "count": 17,
+    "unchanged": true,
+    "receipt": "source-auxiliary.json"
+  },
+  "domain": {
+    "battle": 232,
+    "run": 326,
+    "runRound2": 32,
+    "hub": 472,
+    "archive": 39,
+    "total": 1101
+  },
+  "native": {
+    "newTotal": 127,
+    "newByDomain": {
+      "preparationAssertions": 31,
+      "photoAssertions": 25,
+      "inboxAssertions": 12,
+      "runAssertions": 29,
+      "battleAssertions": 30
+    },
+    "priorRegressionTotal": 554,
+    "total": 681,
+    "receipts": {
+      "native-round4-5": {
+        "process": {
+          "method": "Sdt.Editor.CurrentRound4Validation.Run",
+          "pid": 6092,
+          "startedAt": "2026-11-01T02:16:58.0783675Z",
+          "endedAt": "2026-11-01T02:17:15.5549128Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 796,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-round4-5"
+        },
+        "processSha256": "f1862b72fa64a436359c67dcfa6290c8d7c609f8f0ef31c50e8fc775d576e04a",
+        "resultSha256": "ae604178d8e4ecd5b4488328ba180de2dcb085c3bc55c10008b04092fc09ab95"
+      },
+      "native-round3-regression": {
+        "process": {
+          "method": "Sdt.Editor.CurrentRound3Validation.Run",
+          "pid": 9504,
+          "startedAt": "2026-11-01T02:17:15.6790056Z",
+          "endedAt": "2026-11-01T02:17:34.2912675Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 796,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-round3-regression"
+        },
+        "processSha256": "e73f61a6c4146a01678a107f564acffd4a6e263d442972a7c79267784c988058",
+        "resultSha256": "2a1bb791a6edc665dd15c08d45a9609874f673079f4371b8c0ab6d3a7337e659"
+      },
+      "native-round2-regression": {
+        "process": {
+          "method": "Sdt.Editor.CurrentRound2Validation.Run",
+          "pid": 27956,
+          "startedAt": "2026-11-01T02:17:34.4102836Z",
+          "endedAt": "2026-11-01T02:17:49.6356137Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 796,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-round2-regression"
+        },
+        "processSha256": "f047c3e0624346d6d092c406349a1e4e730271cc63e26944303e02892ea8c799",
+        "resultSha256": "1c5f70774a3856785636532452d71fab3ae12389fbfe43837fefee82eb63aea3"
+      },
+      "native-shared-regression": {
+        "process": {
+          "method": "Sdt.Editor.CurrentParityValidation.Run",
+          "pid": 36140,
+          "startedAt": "2026-11-01T02:17:49.7039053Z",
+          "endedAt": "2026-11-01T02:18:08.7076712Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 796,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-shared-regression"
+        },
+        "processSha256": "876829cd22a54ca80034b2a0219f6a6635ed2c75f715239f7916650cc77c4837",
+        "resultSha256": "edb0754d795e1a41b164441529b649e24e5a415b61c406560846e94804dc5c52"
+      },
+      "native-receipts-2": {
+        "process": {
+          "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts",
+          "pid": 35048,
+          "startedAt": "2026-11-01T02:27:02.8272860Z",
+          "endedAt": "2026-11-01T02:27:52.8347044Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 796,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-receipts-2"
+        },
+        "processSha256": "b8d472b181ddcc67a9e76a4c9f4521650b1fe2706a97be0ec54dd9b00fd07f75",
+        "resultSha256": "2078d71ea592bb167a9ec1f6ac7916b926194844ddaa8d49b76fe647c9f4a1cb",
+        "ticks": 61,
+        "recordKinds": {
+          "wait-source-curtain": 2,
+          "source-curtain-finished": 2,
+          "tick": 48,
+          "controlled-fixture": 5,
+          "terminal-fixture": 5,
+          "capture": 15,
+          "wait-after-capture-frame": 11,
+          "after-capture-frame-ready": 11,
+          "ugui-raycast": 23,
+          "constructed-hold-cancel-lifecycle": 1,
+          "real-battle-command": 1,
+          "wait-current-presentation": 2,
+          "controlled-room-fixture": 3,
+          "wait-current-reward-native-layout": 3,
+          "current-reward-native-layout-ready": 3,
+          "current-chest-retry-and-idempotency": 1
+        }
+      },
+      "native-journey": {
+        "process": {
+          "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunJourney",
+          "pid": 26272,
+          "startedAt": "2026-11-01T02:27:52.9600085Z",
+          "endedAt": "2026-11-01T02:29:37.3167831Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 796,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-journey"
+        },
+        "processSha256": "22182721513377fd01e29b6635f1c844f46229a9c88b57cc9b98cc7bf4146a51",
+        "resultSha256": "a8d44ab00acb894a99bd9257fa1e23b33b4c8d45a36fd018e1f75af937dccab0",
+        "ticks": 422,
+        "recordKinds": {
+          "wait-source-curtain": 27,
+          "source-curtain-finished": 27,
+          "tick": 203,
+          "controlled-fixture": 1,
+          "real-move-command": 33,
+          "capture": 28,
+          "wait-after-capture-frame": 27,
+          "after-capture-frame-ready": 27,
+          "current-attack-command": 24,
+          "wait-current-presentation": 68,
+          "current-attack-not-playable": 27,
+          "current-end-turn-command": 4,
+          "current-battle-result": 10,
+          "current-battle-terminal": 10,
+          "current-battle-completed": 10,
+          "wait-current-reward-native-layout": 34,
+          "current-reward-native-layout-ready": 34,
+          "current-reward-input-probe": 18,
+          "ugui-raycast": 25,
+          "current-layer-gate-pointer-entry": 3,
+          "current-event-command": 4,
+          "current-boss-gate-pointer-entry": 1,
+          "wait-returned-base-film": 1,
+          "returned-base-cover-finished": 1,
+          "returned-base-ready": 1
+        }
+      },
+      "build-desktop": {
+        "process": {
+          "method": "Sdt.Editor.BuildGame.BuildWin64",
+          "pid": 35376,
+          "startedAt": "2026-11-01T02:31:21.5821828Z",
+          "endedAt": "2026-11-01T02:31:50.7629091Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 796,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\build-desktop"
+        },
+        "processSha256": "da33159352243d34b554c4bd6dcbba5686c6b6e58df68b48734d63989391aa65"
+      }
+    },
+    "reuseProof": "validation-input-reuse.json"
+  },
+  "build": {
+    "result": "Succeeded",
+    "errors": 0,
+    "inputCount": 3961,
+    "inputsUnchanged": true,
+    "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+    "productFiles": 166,
+    "productBytes": 2734213656,
+    "productManifest": "product-manifest.json",
+    "launcherHashIsNotVersionIdentity": true
+  },
+  "player": {
+    "passed": true,
+    "display": {
+      "screenWidth": 2560,
+      "screenHeight": 1440,
+      "dpi": 120.0,
+      "fullScreenMode": "Windowed",
+      "desktop": {
+        "width": 2560,
+        "height": 1440
+      },
+      "display": {
+        "renderingWidth": 2560,
+        "renderingHeight": 1440,
+        "systemWidth": 2560,
+        "systemHeight": 1440
+      },
+      "quality": "Ultra",
+      "targetFrameRate": 60,
+      "bufferWidthScale": 1.0,
+      "bufferHeightScale": 1.0,
+      "canvas": {
+        "mode": "ScreenSpaceOverlay",
+        "scaleFactor": 1.33333337,
+        "width": 1920.0,
+        "height": 1080.0,
+        "lossyScale": {
+          "x": 1.33333337,
+          "y": 1.33333337,
+          "z": 1.33333337
+        },
+        "scaler": "ScaleWithScreenSize",
+        "referenceWidth": 1920.0,
+        "referenceHeight": 1080.0,
+        "matchWidthOrHeight": 0.5
+      },
+      "windowsDpi": {
+        "available": true,
+        "processAwareness": 2,
+        "result": 0
+      },
+      "graphics": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "graphicsApi": "Direct3D12",
+      "unityVersion": "6000.6.7f1",
+      "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308"
+    },
+    "exitCode": 0,
+    "captures": 61,
+    "records": 151,
+    "resultSha256": "dce89263ad2c589d672a8bc979448bd6a549cdb8895406b3e4c4825bf6491bde",
+    "process": "player/process.json",
+    "input": "Constructed native UI/commands; zero-alpha nonactivating compositor; no OS input."
+  },
+  "visualReviews": [
+    "visual-battle.json",
+    "visual-menu-archive.json",
+    "visual-run.json"
+  ],
+  "artifacts": "artifacts.json",
+  "performance": "performance.json",
+  "failuresRetained": {
+    "native-round4": "Compile event type corrected.",
+    "native-round4-2": "QA compared pre-grant RNG with post-UID state; production unchanged.",
+    "native-round4-3": "QA background end-turn submit could not satisfy focus guard; use formal command for controlled turn precondition.",
+    "native-round4-4": "Discarded because one QA source changed during execution.",
+    "native-receipts": "QA immediate post-capture input used stale camera/Canvas projection; dedicated QA paths split across real frames."
+  },
+  "scope": "No OS hardware input, multi-size window acceptance, natural unassisted journey, all-card/event-combination proof, full-frame allocation or FPS claim.",
+  "continuousGoal": "active",
+  "publication": {
+    "status": "preparing",
+    "branch": "codex/unity-validated-20261101"
+  },
+  "visualReviewedImageCount": 19,
+  "docs": {
+    "passed": true,
+    "checkedRelativeLinks": 806,
+    "nonblockingReview": "Existing other-owner registry browser-boundary duplication at line18 before publishing-row insertion; no modification."
+  }
+}

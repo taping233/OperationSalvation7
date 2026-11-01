@@ -1,5 +1,7 @@
 # GitHub 同步范围审计
 
+下文保留首次发布准备的历史审计。当前恢复入口与验收见[GITHUB-SOURCE](../../GITHUB-SOURCE.md)；新批次使用`export_manifest.py --output <本批清单>`，保留旧`export-manifest.json`原字节。历史候选数及旧工作区状态不作为当前发布状态。
+
 新分支以父仓库安全完成提交后的 HEAD 为基底，保留 `SoudacheUnity/` 与 `搜打撤/game/` 的相邻布局。目标为 `OperationSalvation7` 的 `codex/unity-validated-20261101`；不推 Unity 本地旧历史，也不复用旧未验证快照的文件全集。
 
 - `commit-candidates.json`：正式工程候选3617个，逐项SHA；政策排除Assets媒体308个、403,739,481字节，逐项SHA；28个旧已跟踪编译产物/日志列为不复制。规则采用大于1,000,000字节，音频、字体和压缩包单独排除。保留对应 `.meta` 供恢复GUID。

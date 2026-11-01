@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "scenario": "receipts",
+  "step": 1,
+  "error": "System.InvalidOperationException: raycast blocked target exRarity\r\n  at Sdt.Editor.CurrentMigrationFlowValidation.Click (UnityEngine.GameObject target) [0x00191] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentMigrationFlowValidation.cs:198 \r\n  at Sdt.Editor.CurrentMigrationFlowValidation.Click (System.String name) [0x00000] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentMigrationFlowValidation.cs:179 \r\n  at Sdt.Editor.CurrentMigrationFlowValidation.Receipts () [0x00157] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentMigrationFlowValidation.Receipts.cs:103 \r\n  at Sdt.Editor.CurrentMigrationFlowValidation.Tick () [0x001ad] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentMigrationFlowValidation.cs:76 ",
+  "stack": "ExtractStash",
+  "dataDirectory": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round4\\native-receipts\\profile-receipts-20261101021813485"
+}
