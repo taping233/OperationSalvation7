@@ -271,8 +271,11 @@
   "scope": "No OS hardware input, multi-size window acceptance, natural unassisted journey, all-card/event-combination proof, full-frame allocation or FPS claim.",
   "continuousGoal": "active",
   "publication": {
-    "status": "preparing",
-    "branch": "codex/unity-validated-20261101"
+    "status": "code-snapshot-pushed-and-read-back",
+    "branch": "codex/unity-validated-20261101",
+    "codeAndChecksCommit": "82cde60d01c98a9a6e1bd0b207e0233df2ac3d32",
+    "runtimeCommit": "db30a51a8c07daf18712d5b8d0e21f7259f69590",
+    "receipt": "publication/sync.json"
   },
   "visualReviewedImageCount": 19,
   "docs": {

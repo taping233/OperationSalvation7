@@ -1,0 +1,18 @@
+{
+  "status": "code-snapshot-pushed-and-read-back",
+  "repository": "https://github.com/taping233/OperationSalvation7",
+  "branch": "codex/unity-validated-20261101",
+  "runtimeCommit": "db30a51a8c07daf18712d5b8d0e21f7259f69590",
+  "codeAndChecksCommit": "82cde60d01c98a9a6e1bd0b207e0233df2ac3d32",
+  "remoteReadBack": "82cde60d01c98a9a6e1bd0b207e0233df2ac3d32",
+  "verifiedCommittedObjects": 3889,
+  "nativeWhitelist": 3703,
+  "buildGUID": "66a82ecd32f2426e98d4bf06b8ed3308",
+  "domainAssertions": 1101,
+  "nativeAssertions": 681,
+  "currentWindow": "2560x1440/DPI120; 61 generated PNGs, 19 actually reviewed",
+  "sourceMapping": "publication/index-summary.json; full 1160990-byte review retained local with SHA/acquisition there.",
+  "publicationBoundary": "This receipt names the validated code snapshot. The later documentation-only seal has identical runtime/check sources; final branch SHA is verified externally to avoid self-reference.",
+  "exclusions": "Original workspace/index and unfinished Vite four paths remain untouched. Build binaries, profiles, prohibited media, large raw evidence and unrelated old intermediates are not published.",
+  "continuousGoal": "active"
+}

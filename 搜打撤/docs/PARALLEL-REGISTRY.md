@@ -9,7 +9,6 @@
 
 ## 活跃登记
 
-Friday（Unity第二至四轮源码同步 WF-unity-parity-publish-1101；01a19232），2026-11-01：编辑中/打包发布，已沿用老板验收后同步GitHub授权。持有既有干净发布工作树 C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232（codex/unity-validated-20261101，起点53715a1）及本批publication收据、MIGRATION/GITHUB-SOURCE/导出清单/本行；仅复制已验收3700余项白名单源码和小收据，分组提交后push并回读。所有运行源/检查源冻结，不改原工作区index、不复制Vite四个在途文件、原始planning/bin、profile/构建包或大媒体；源码原字节与Git LF对象分别核对。当前无后台程序或端口服务；完成未提交的Runtime属地已释放并保留归属。
 
 
 
@@ -395,6 +394,9 @@ Friday / WF-card-feedback-v2-1023 (01a16808)，2026-10-23：12张内置修订、
 
 
 ## 近期已释放
+
+Friday（Unity第二至四轮源码同步 WF-unity-parity-publish-1101；01a19232），2026-11-01：已交付/编辑释放。第二至第四轮Runtime db30a51a、检查/文档82cde60d已推送codex/unity-validated-20261101并回读一致，3889候选Git对象逐项匹配原字节或声明LF表示。领域1101、原生681、终局/四层旅程与当前2560×1440播放器通过，GUID66a82ecd32f2426e98d4bf06b8ed3308；小回执见docs/evidence/2026-11-01-unity-parity-round4/publication/。原工作区index与Vite四个在途路径未动，未提交状态及原始planning/bin保留。发布工作树C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232与本会话生成本地门禁收据保留，不作清理；末次仅补文档封签，运行/检查源冻结，无端口或后台进程。持续目标active。
+
 
 Friday（Unity持续对照第四轮 WF-unity-parity-round4-1101；01a19232），2026-11-01：完成未提交、编辑释放，原工作区归属保留。Core/Battle续接/UID队列与BattleUI、Preparation/照片/信箱、专用Editor检查及3个旧流程QA分帧，清单见_planning/parity-1101-round4/与docs/evidence/2026-11-01-unity-parity-round4/。领域1101、新127+旧554原生、正式终局/四层旅程与正常2560×1440播放器通过，61图中实看19；GUID66a82ecd32f2426e98d4bf06b8ed3308，796源码/元数据、3961构建输入及166产物已核。所有自有执行已退出（末构建PID35376、播放器16668），无端口服务。持续目标active；下一批为资料制作工具差异与备注全局保存序列化。第二至第四轮源码交付另行活跃登记，Vite四个在途文件及原始planning/bin现场保留。
 
