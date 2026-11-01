@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "codeCommit": "e40115e931aea0c9b8dc623347f038f53d74cffc",
+  "doctor": {
+    "passed": 8,
+    "warning": 2,
+    "blocked": 0,
+    "info": 3,
+    "not-checked": 2
+  },
+  "stagedGate": {
+    "outcome": "skip",
+    "exitCode": 0,
+    "report": "docs/evidence/2026-11-01-unity-2022-downgrade/2026-11-01T12-29-02.422Z-7a8b99d2-staged.json",
+    "scope": "No Vite gate paths; actual native/domain/build/player receipts independently validate Unity."
+  },
+  "indexSummary": "index-summary.json",
+  "whitespaceReview": "metadata-whitespace-review.json",
+  "runtimeAcceptance": "../final-summary.json",
+  "githubActions": "No CI pass claimed; this branch does not match the master-only push workflows."
+}

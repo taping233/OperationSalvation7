@@ -12,8 +12,21 @@
     "依赖/接口/工程与启动工具适配，原HEAD/index和非任务源保全",
     "统一编译、桌面打包与正常窗口流程验收，失败与未核项如实留证"
   ],
-  "stage": "doing",
-  "checks": [],
-  "unverified": [],
-  "updatedAt": "2026-11-01T10:40:45.649747+00:00"
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "Unity2022 build,2690domain,1629native,102captures23reviewed;GitHub e40115e9 verified",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "No OS hardware input, multi-size or whole-frame performance claim; continuous parity goal remains paused"
+  ],
+  "updatedAt": "2026-11-01T12:37:08.943Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
 }

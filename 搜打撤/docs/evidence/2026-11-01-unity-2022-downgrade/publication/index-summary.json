@@ -1,0 +1,215 @@
+{
+  "passed": true,
+  "mode": "resume-no-index-mutation",
+  "base": "d8a8a2eb1f6eeb5377ec4178e0caa88db404a795",
+  "editor": "2022.3.62f3c1",
+  "buildGUID": "4d33ec981819461295052942d67afeee",
+  "candidateCount": 3920,
+  "stagedChangedCount": 1701,
+  "actualGitBlobCount": 3832,
+  "copyReceiptSha256": "db9a2c3f997c5f52b66d9899788007b58c89ccf25dd83ea3e265ad94fe30e65c",
+  "candidatePathsNulSha256": "f83014576114fd5e6977ddeaaf07323a032a372d403bf1a0766fd4d9e5b03550",
+  "indexReviewSha256": "aeb6d0afb5040debd0ff8a8650080d43b67fb20a0058f262c07a53c7f19a7ac3",
+  "metadataWhitespaceReviewSha256": "d86fc89d805285f6ddc8c413aa24e73c33b40754d7509daa51976eef574ef0ef",
+  "allowedMetadataWhitespaceDiagnostics": 747,
+  "approvedHistoricalEofExceptionCount": 1,
+  "resumeIndexBytesUnchanged": true,
+  "resumeIndexSha256": "4f765344b9143dc8ee672319c35f38418271b2931dfe1b60e8b68e3ac148741d",
+  "activeViteIndexUnchanged": true,
+  "existingUntrackedPreserved": true,
+  "readiness": [
+    {
+      "path": "SoudacheUnity/Build/Desktop/build-info.json",
+      "sha256": "c8550d5358c91d902af25532d24d1df1aade8645b52d531f4ca12d146f4630e8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/build-desktop-2/process.json",
+      "sha256": "08925eb327d625add53e523edb95ed169ed290b925f19a1b5d0ad55900eb9905"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-validation.json",
+      "sha256": "a84e91d642cac9b40bf246588446c7353e28ed0ac4789712b7da40390a20b793"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/final-summary.json",
+      "sha256": "45de3742cdd85cdf382aa822d605e5f530ea81e29d85dd3e3fa9fdd7f958a2df"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/process.json",
+      "sha256": "aa98b3ca066436512865504c1ccbbae8ce644712885b36943d2e23f93a98ed18"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/result.json",
+      "sha256": "3157ce864c7ef291fa8de701422a5f9124b39fbe58fe1d58218d93b1f969d731"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/process.json",
+      "sha256": "8cd289643200cc03df46ff375d1a4f470d4bb3db20107eb133d89b84addaadb8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/result.json",
+      "sha256": "733e99a6b531d249ea4911c535eac9713e529d739e91b94179ad61e60a0b14bf"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/process.json",
+      "sha256": "fe6db36d0d9253a3c379c838bcf8cf3b02cb8fa2ad326308f9815ac9ed1a92a4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/result.json",
+      "sha256": "1eea729cd26b3ec58ae9b90b2e0fc69193a1616bfe010cacb9bf6753f4d86562"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round2/process.json",
+      "sha256": "3da09d47e2eef68cadd020474f38094ce49a55d04cce75348562f41eaa041ead"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round2/result.json",
+      "sha256": "1c5f70774a3856785636532452d71fab3ae12389fbfe43837fefee82eb63aea3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round2/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round2/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round3/process.json",
+      "sha256": "6a4f4733694d1cddad1976642dc28e9869b2f8679bdfa266524d2a084455af06"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round3/result.json",
+      "sha256": "2a1bb791a6edc665dd15c08d45a9609874f673079f4371b8c0ab6d3a7337e659"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round3/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round3/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round4/process.json",
+      "sha256": "7f8a489286aa8915df4b6eb49f4d3aec55151fc2701c415a43ee11dd4b00b234"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round4/result.json",
+      "sha256": "ae604178d8e4ecd5b4488328ba180de2dcb085c3bc55c10008b04092fc09ab95"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round4/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round4/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round5/process.json",
+      "sha256": "93ac9f22ab48c63fb6b3110348fa74834199d6aa993fdf71a0834cd1cd54191f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round5/result.json",
+      "sha256": "b12722966b910dd44150d4fdb96fe5ebacad88424ca18227e0cba0237f6d7914"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round5/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round5/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round6/process.json",
+      "sha256": "446e5f6838c9b2c1a938811ab631108de2c4921ea871cec53d1ac9bcf0477d02"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round6/result.json",
+      "sha256": "1d974c291046d37d7bd59a063e9f656d225c243ba1101a8cb492e3a47e123ae3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round6/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round6/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-6/process.json",
+      "sha256": "4ebee10331a45d34df3f29c4b5e3221b1ae07266b7fe53b04f29fb7684c02ad7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-6/result.json",
+      "sha256": "410db88a664531f495b68a5150c7358683b742c0bd1a1e19d53b86109d36463b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-6/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-6/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-shared/process.json",
+      "sha256": "54299377cf15428fa9e18786c421226fdc42f284ec9798865edcca14db9166f9"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-shared/result.json",
+      "sha256": "edb0754d795e1a41b164441529b649e24e5a415b61c406560846e94804dc5c52"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-shared/source-after.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-shared/source-before.json",
+      "sha256": "b1584bec81c3593ff04afbe6ce939e96853ab7011cde0373916e8b975d242470"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/process.json",
+      "sha256": "71ea4a194d35841a8e5b666872e611abe115b82f1b5b47e3935b46ef316666cc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/result.json",
+      "sha256": "a4125c99bb9b46ae2690122e918226fa9eeb644b9b405624f13a42ec942f1288"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/publication/export-manifest.json",
+      "sha256": "33b1dad0b24ab81b0413811219f42aa960f3baed88f55f2fa4235f85423b40c4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/source-freeze.json",
+      "sha256": "3c636026a81c3af554f7bf8aa55e75946d549e8de947a468fe9af8d82331ad4e"
+    }
+  ],
+  "scope": "Exact existing candidate/index audit; summaries and detailed review remain unstaged. Root owns any native-input reuse and final publication. No index reset, commit, push or doctor."
+}

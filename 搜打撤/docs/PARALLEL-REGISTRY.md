@@ -9,9 +9,9 @@
 
 ## 活跃登记
 
-Friday（Unity 2022降级 unity-2022-downgrade；01a19232），2026-11-01：编辑中。老板明确授权工程及软件降为2022.3.62f3c1；持有SoudacheUnity的Packages/ProjectSettings、已确认新版API的最小兼容修改、正式构建/后台验收入口与MIGRATION，以及_planning/unity-2022-downgrade和本轮evidence。三代理只读审查，不扩展R7功能。修改前源码及设置逐字备份D:/Unity/project-backups/20261101-soudache-before-2022，原HEAD/index受保护。目标编辑器实际安装C:/Program Files/Unity 2022.3.62f3c1/Editor；安装器PID34364退出0，重新导入/编译PID37020后台运行，6000安装暂留。先统一兼容改动，再集中原生编译/打包/当前窗口后台验收。无文件目录删除，无Vite修改。
+Friday（Unity 2022降级 unity-2022-downgrade；01a19232），2026-11-01：已交付、编辑释放；原工作区完成未提交归属保留。工程/实际编辑器/默认桌面包为2022.3.62f3c1。2690领域+8Source、1629原生及转场/终局/四层旅程，当前2560×1440播放器102图/23实看通过；GUID4d33ec98、850正式/4015构建输入。源码e40115e9已推codex/unity-validated-20261101并回读，3920候选/1701变更逐Git对象核对。Unity规范meta空字段747尾空格及一份旧静态审查末空行已明确记录；无绕过代码错误。首次构建云设置规范化重建后稳定。原HEAD/暂存条目、25保护路径/mtime保持；2053meta GUID不变。旧Unity6、Library和桌面包保留；本会话原生/播放器均退出，无端口服务。见docs/evidence/2026-11-01-unity-2022-downgrade；当前仅补交付文档封口，持续对照目标仍暂停。
 
-Friday（Unity持续对照第七轮 unity-parity-round7；01a19232），2026-11-01：功能扩展暂停，未统一测试；现有WIP保留，版本兼容修改归下行降级任务。基线d8a8a2eb/代码c6f7e593、GUIDc3ee3347，828正式输入起点零差异。Battle持有编组几何失效、牌堆一次投影/返焦及Core来源状态到CardFace公共窄接线（含Cards仅NonSerialized原费字段）；独审两处真实分组遗漏正在同批修正，不以首版freeze冒称完成。Run已冻BagItemDiscoveryScreen、BagCurrentView/Cell/Detail与CardContainerCommands局部恢复预览，另备92条预期原生、专用领域与正常窗口探针；Hub已冻成就/收藏派生、进度/实际到账回执、Hub输入旧owner及有限伙伴动画片，含自有检查/5画面探针。Root持有BattleSubpages发现保留树与超过5候选滚动、统一CurrentRound7Validation、Root发现检查/正常探针与主流程、MIGRATION/发布闭包。自有_planning/parity-1101-round7与docs/evidence/2026-11-01-unity-parity-round7；独审与全部源收口后统一冻源集中验证，未启动Unity/编译/build。Vite四在途动作源仅HEAD，原planning/bin和原index保护；无目录文件删除，无新后台/端口服务；发布工作树沿R6留存。
+Friday（Unity持续对照第七轮 unity-parity-round7；01a19232），2026-11-01：本轮实现已在Unity2022降级批次统一验收并同步源码e40115e9，编辑释放、完成未提交归属保留。317新增原生、1312相关回归、2690领域与当前窗口102图/23实看支持本批；作者初版freeze和静态报告保留历史，不替代最终850输入。源码/测试夹具/确认回调修正与唯一云设置复用边界见docs/evidence/2026-11-01-unity-2022-downgrade。持续目标仍暂停，无新的功能扩展、后台服务或删除。
 
 
 
