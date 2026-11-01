@@ -26,3 +26,5 @@
 [性能记录](performance.json)只证明列出的重复工作减少；没有测整帧耗时、GC、FPS或整体draw call。手持硬件输入、自然无辅助通关、多尺寸、逐样本声学与全库零差异均不属于本次结论。截图、超过1MB的原始JSON和完整桌面产物留本地，路径/SHA/复取方法见[artifacts.json](artifacts.json)与[产物清单](product-manifest.json)。
 
 GitHub同步结果在本轮publication记录封存；源码按已授权的独立分支上传，原工作区、index与其他会话在途文件保留。
+
+已按授权分组推送：功能/优化`2424c611`，代码与检查`c6f7e593`，远端回读一致。发布复核与CI边界见[publication/README.md](publication/README.md)；后续封口只改文档/收据。

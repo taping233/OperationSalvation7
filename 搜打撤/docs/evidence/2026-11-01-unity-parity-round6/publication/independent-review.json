@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "decision": "ready",
+  "atUtc": "2026-11-01T08:02:43.208Z",
+  "scope": "Independent read-only review of the current 186-path staged change and 4,128 candidate Git objects in the retained publication worktree. No tests, build, Unity, network, stage, commit or worktree/index/source writes were performed by this review. This report is written only to the original workspace evidence directory.",
+  "worktree": "C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232",
+  "head": "d8f40d78a076e365f9c3993023f35669e32b1983",
+  "blockers": [],
+  "objectReview": {
+    "head": "d8f40d78a076e365f9c3993023f35669e32b1983",
+    "candidateCount": 4128,
+    "candidateNulCount": 4127,
+    "additionalSelfReceipt": "搜打撤/docs/evidence/2026-11-01-unity-parity-round6/publication/worktree-copy.json",
+    "stagedChangedCount": 186,
+    "uniqueCandidateObjects": 3972,
+    "objectRepresentationMismatches": [],
+    "policyViolations": [],
+    "strongCredentialShapes": [],
+    "candidateTextPaths": 2927,
+    "candidateBinaryPaths": 1201,
+    "maxCandidateBytes": 992407,
+    "indexMatchesDeclaredObjects": true,
+    "onlyExpectedChangedPaths": true,
+    "workingTreeUnstagedBytes": 0,
+    "stagedIndexPathSetSha256": "0a4e05a6f505de5d10316e44cb39383c956359bfba58f567e17f926744eba676",
+    "candidateObjectsSha256": "717cdbadc6c80ee43dda2f3a8a9965ef1a96dda4822f3f681f47823d4bb584e4"
+  },
+  "sourceBinding": {
+    "formalInputs": 828,
+    "allFormalSourceRawHashesMatchFrozenReceipt": true,
+    "formalMissingFromIndex": [],
+    "auxiliaryInputs": 24,
+    "allAuxiliaryRawHashesMatchFrozenReceipt": true,
+    "auxiliaryMissingFromIndex": [],
+    "sourceFreezeSha256": "eb3dfbcda75acefb11ca555881e50be6972cc4c1efce9ff9977b108de210ea2e",
+    "auxiliarySha256": "5256cff3d8e0a6902a9014abc2a51fc3eae33853174b46575e119f2080e14181",
+    "indexReviewSha256": "99f34d479dafab02d54245441a7023dd8057b2cd7be0fb5fa616aa31ab5c538d",
+    "exportManifestSha256": "04ef5e50460527b17ac38b9a06de6920875b82340e5f135d5c6eb0ce128adbfc",
+    "copyReceiptSha256": "0baabb45b75c7d2046385cbc69c37f3691d26e414ae380fafdbc80bffe534555",
+    "runtimeChangedPaths": 30,
+    "runtimeCsChanged": 28,
+    "runtimeMetaChanged": 2,
+    "editorFormalChangedPaths": 12,
+    "boundary": "Source receipts record original raw bytes. All candidates were independently compared against their actual index blobs, allowing only exact bytes or CRLF-to-LF normalization; this binds the tested source to Git representation without asserting that the staged Node gate reran Unity."
+  },
+  "keyCodeReview": [
+    {
+      "topic": "Discovery preview and formal payment",
+      "paths": [
+        "Assets/Scripts/Sdt.Core/Battle/BattleDiscoveryPreview.cs",
+        "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+        "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+        "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs"
+      ],
+      "observation": "Read the staged preview implementation and the changed execution consumers. Preview tickets are source-execution scoped, claimed once, and flow explicitly into the selected source's first discover/stored operation. Preview precedes energy/source/fuel/payment consumption; confirmation rechecks source plan, UID, turn/token, current fee/material/payment/target before normal commit. The per-source/plan cache is cleared on turn/battle changes, preserved by cancel/reopen, and reused on first confirmation rather than rerolling. Material/onAcquire pending input is deferred before source continuation. No refund path or old unowned bridge wrapper was added.",
+      "conclusion": "No determined blocker in this reviewed closure."
+    },
+    {
+      "topic": "Discovery identity, committed cancellation and original UIDs",
+      "paths": [
+        "Assets/Scripts/Sdt.Core/Battle/DeckBottomDiscovery.cs",
+        "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+        "Assets/Scripts/Sdt.Boot/BattleBridge.cs",
+        "Assets/Scripts/Sdt.UI/Screens/Battle/BattleEvents.cs",
+        "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+      ],
+      "observation": "Read the token/selectionId bridge and UI revision guards, current owner checks and 350ms readiness. Rebound UnityEvents are replaced and stale closures validate revision/selection. Bottom discovery displays at most three choices while retaining all reserved original UIDs; cancel restores all in order and clears lastAcquired. Structured stored selection consumes the chosen physical UID, and Mist first selection is retained if its second stage is cancelled. Later committed cancellation preserves earlier payments/effects.",
+      "conclusion": "No determined blocker; these are static conclusions bound to the fresh 156 discovery native assertions and existing domain/Player receipts, not newly rerun checks."
+    },
+    {
+      "topic": "Sacrifice ownership, retained cards and settlement",
+      "paths": [
+        "Assets/Scripts/Sdt.UI/Screens/Run/CardSacrificeScreen.cs",
+        "Assets/Scripts/Sdt.Run/GameRuntime.Map.cs"
+      ],
+      "observation": "Read the staged candidate predicate and retained UI diff. Eligibility excludes safe/stored/container cards using the formal domain predicate; UI and confirmation revalidate actual UIDs. Owner includes run/slot/seed/layer/position/map identity, active/top state and revision. Failure adopts only its matching rollback map and keeps the retained page/error; success/cancel continuation checks the remaining owner. Stable toggles retain card/control/scroll identities, while O(N) eligibility and selected-card serialization remain.",
+      "conclusion": "No determined blocker; do not describe retained toggles as zero allocation, zero redraw or a measured FPS gain."
+    },
+    {
+      "topic": "Final global HUD coverage",
+      "paths": [
+        "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+        "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+      ],
+      "observation": "Read the final staged type-based DiscoverPanel/GravePanel coverage and hidden early return. Hidden updates avoid illustrated/reward probes; visibility properties update only on transitions. The final new HUD raw hash is included in native-round6-5/build6, while its earlier performance snapshot remains historical. Native checks include actual grave CanvasGroup alpha 0 while open and alpha 1 after return; Root's Player6 grave/discovery pixel review is separately recorded.",
+      "conclusion": "No determined blocker in the final coverage/layout diff."
+    },
+    {
+      "topic": "Custom archive dependency closure",
+      "paths": [
+        "Assets/Scripts/Sdt.Run/SaveSystem.ArchiveCards.cs",
+        "Assets/Scripts/Sdt.Run/SaveSystem.SlotArchive.cs"
+      ],
+      "observation": "Read the changed bagDiscover pending-ID requirement and its unchanged dependency/import consumers. The existing cardIds whitelist collects those receipt dependencies transitively, with named bindings and same-ID definition conflict checks preserved. Import appends missing definitions in the same slot-partition transaction, resets the custom cache only after commit and cancels on failure. Other Global settings/slots are not replaced. The previous two-profile 39-assertion closure remains bound; this review does not reopen old compatibility or invent new schema behavior.",
+      "conclusion": "No determined blocker."
+    }
+  ],
+  "keyRawHashes": {
+    "Assets/Scripts/Sdt.Core/Battle/BattleDiscoveryPreview.cs": "0903f1b3d6fe5d07688c6dac730ca7792926c0257251dd70f4b04b99eebec704",
+    "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs": "c8baeb6cd5f983324a2b47ea6550a710acd7107e6d4721eaee3547cff5521a78",
+    "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs": "38eb69e3af85e106b682dc99f2108cf992d888eb246ecf4d72128c2ca5da919e",
+    "Assets/Scripts/Sdt.UI/Screens/Run/CardSacrificeScreen.cs": "0dc04aea2dcdcca1a9b27290d067d81495a5e1b059fe169aa79a2deca5f2de4f",
+    "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs": "2c1197d351e0302023bb4f2f3b7ebf99c11d0dbff526b0577ad45570fc98162e",
+    "Assets/Scripts/Sdt.Run/SaveSystem.ArchiveCards.cs": "75a3feeea47215c9f6fffd3197aa3699a9445c7c6a3b5219a19e09305ed30b1e"
+  },
+  "documentationAndClosure": {
+    "reviewer": "Delegated read-only documentation/closure subreview, combined with this review's independent full-object scan.",
+    "indexPaths": [
+      "SoudacheUnity/GITHUB-SOURCE.md",
+      "SoudacheUnity/MIGRATION.md",
+      "SoudacheUnity/_planning/parity-1031/HubParityChecks.csproj",
+      "SoudacheUnity/_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "SoudacheUnity/_planning/parity-1031/run-check/RunParityChecks.csproj",
+      "SoudacheUnity/_planning/parity-1101-round2/run-check/RunRound2Checks.csproj",
+      "SoudacheUnity/_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "SoudacheUnity/_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj",
+      "SoudacheUnity/_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+      "SoudacheUnity/Packages/manifest.json",
+      "SoudacheUnity/Packages/packages-lock.json"
+    ],
+    "domainProjects": 7,
+    "allCompilePathsPresentInIndexExportAndCopy": true,
+    "markdownNavigationLinksChecked": 14,
+    "codeNavigationPathsChecked": 13,
+    "newtonsoftVersion": "3.2.2",
+    "dependencyBoundary": "Newtonsoft uses the explicit documented restore prerequisite; no clean-room Unity import claim is added.",
+    "counts": {
+      "domain": 1483,
+      "domainParts": [
+        492,
+        326,
+        32,
+        472,
+        29,
+        93,
+        39
+      ],
+      "native": 1312,
+      "nativeFresh": 369,
+      "nativeReusedRegression": 943,
+      "sourceOracleCases": 8,
+      "playerPng": 83,
+      "visuallyReviewedUniquePng": 21,
+      "visualSubreceiptCounts": [
+        9,
+        7,
+        5
+      ],
+      "formalInputs": 828,
+      "auxiliaryInputs": 24,
+      "completeBuildInputs": 3993,
+      "exportUnityEntries": 3763,
+      "exportFormalEntries": 3619,
+      "exportPlanningEntries": 144,
+      "copiedEntries": 4127,
+      "indexCandidates": 4128,
+      "stagedChanges": 186
+    },
+    "countBoundary": "3993 is the full build-input inventory, not the export or index candidate count. candidate-paths.nul has 4127 entries; the index review additionally includes its own worktree-copy.json receipt. 21 means three reviewers' unique image records, not all 83 PNGs viewed by this reviewer.",
+    "imageBoundary": "This agent actually viewed the seven current Player6 Hub/Photo/Archive/music PNGs in hub-visual-review.json; the other 14 are separately reviewed by Root/Run. All 21 unique listed image hashes match the artifact inventory.",
+    "historicalEvidenceBoundary": "Small previous failed-batch/source-delta JSONs are retained historical receipts, not active runtime code or substitute final-pass evidence. Raw Player result dumps, PNG captures and large runtime outputs are not part of the staged publication."
+  },
+  "readiness": {
+    "passed": true,
+    "doctor": {
+      "receipt": "doctor-worktree.json",
+      "sha256": "2364734f416bab89cbf517cbde4252732644fd849d5233cff811d4bd128463bc",
+      "summary": {
+        "passed": 8,
+        "warning": 2,
+        "blocked": 0,
+        "info": 3,
+        "not-checked": 2
+      }
+    },
+    "docs": {
+      "receipt": "../docs-check.json",
+      "sha256": "21775badbf9ae7f6da22c2dd4b2d05b6cdf5427b21d47dae1dcc97c7d2d18750",
+      "checkedRelativeLinks": 806
+    },
+    "stagedGate": {
+      "receipt": "staged-result.json",
+      "sha256": "ef68a3e33571e6170955445c94b2fb917fde835b930cfeb40e0ff27b4a91aa6f",
+      "mode": "skip",
+      "tests": [],
+      "reason": "Native C#/evidence paths select no Vite gate tests. Frozen domain/native/build/current-window receipts independently validate the C# changes."
+    }
+  },
+  "readinessReceiptHashChecks": [
+    {
+      "name": "doctor",
+      "receipt": "doctor-worktree.json",
+      "hashMatches": true
+    },
+    {
+      "name": "docs",
+      "receipt": "../docs-check.json",
+      "hashMatches": true
+    },
+    {
+      "name": "stagedGate",
+      "receipt": "staged-result.json",
+      "hashMatches": true
+    }
+  ],
+  "workspaceProtection": {
+    "originalIndexChecks": [
+      {
+        "workspace": "D:\\素材\\代号柒",
+        "matches": true
+      },
+      {
+        "workspace": "D:\\素材\\代号柒\\SoudacheUnity",
+        "matches": true
+      }
+    ],
+    "protectedPathCount": 25,
+    "allProtectedRawHashesUnchanged": true
+  },
+  "limits": [
+    "The independent semantic review is limited to the listed critical staged code paths plus the prior exact-hash Hub/audio implementation reviews. The full-object check is byte/identity/policy review, not an independent semantic review of every file.",
+    "Existing domain/native/build/Player receipts were read and fingerprinted; no tests were rerun.",
+    "Strong credential-shape scan covered changed UTF-8 candidates only; it found no match and printed no candidate values.",
+    "No frame-time, FPS, GPU draw-call or whole-frame allocation measurement is claimed.",
+    "Ready applies to this exact staged candidate snapshot. Any subsequent source/index changes need a scoped recheck; newly written seal/readiness/review receipts may be handled in the final documentation seal."
+  ]
+}

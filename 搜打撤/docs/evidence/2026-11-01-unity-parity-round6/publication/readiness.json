@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "doctor": {
+    "receipt": "doctor-worktree.json",
+    "sha256": "2364734f416bab89cbf517cbde4252732644fd849d5233cff811d4bd128463bc",
+    "summary": {
+      "passed": 8,
+      "warning": 2,
+      "blocked": 0,
+      "info": 3,
+      "not-checked": 2
+    }
+  },
+  "docs": {
+    "receipt": "../docs-check.json",
+    "sha256": "21775badbf9ae7f6da22c2dd4b2d05b6cdf5427b21d47dae1dcc97c7d2d18750",
+    "checkedRelativeLinks": 806
+  },
+  "stagedGate": {
+    "receipt": "staged-result.json",
+    "sha256": "ef68a3e33571e6170955445c94b2fb917fde835b930cfeb40e0ff27b4a91aa6f",
+    "mode": "skip",
+    "tests": [],
+    "reason": "Native C#/evidence paths select no Vite gate tests. Frozen domain/native/build/current-window receipts independently validate the C# changes."
+  }
+}

@@ -9,7 +9,6 @@
 
 ## 活跃登记
 
-Friday（Unity持续对照第六轮 unity-parity-round6；01a19232），2026-11-01：验收通过、源码同步中。828正式/24辅助冻结输入；1483领域+8实际Source向量、新369+相关回归943共1312原生及FilmFlow/Receipts61tick/Journey448tick通过。正常当前2560×1440/DPI120 Player-6共83图211记录exit0，三人实看21图通过；GUIDc3ee3347a03149de80bbb7fe3f0bb5c2，3993构建输入/166产物指纹核对。过程失败及两次人工发现的视觉失败均保留，最新容器/Grave顶栏修正已补验。生产已停止编辑；Root持有自有版本文档、evidence与发布闭包，保留工作树C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232基线d8f40d78准备白名单分组提交。所有后台进程结束，无端口服务；原planning/bin、四个Vite在途源、原index与完成归属保留。
 
 
 
@@ -401,6 +400,9 @@ Friday / WF-card-feedback-v2-1023 (01a16808)，2026-10-23：12张内置修订、
 
 
 ## 近期已释放
+
+Friday（Unity持续对照第六轮 unity-parity-round6；01a19232），2026-11-01：本轮源码已交付，编辑释放，持续目标active。功能2424c611、代码/检查c6f7e593已推送codex/unity-validated-20261101并回读；186变更/4128候选逐Git对象核对、独审无阻断。1483领域+8Source、1312原生及三条完整链，当前窗口83图/21实看，GUIDc3ee3347/3993构建输入支持本批。两次实际视觉失败已修并补验，保留历史。doctor无阻断、docs806链接通过、Node暂存门skip；该分支无自动CI。本会话后台已退出、无端口服务；原工作区/index、25个保护路径与完成归属保留。发布工作树及三个自动staged诊断留存，不清理。最后文档封口只更新收据与自有登记。
+
 
 Friday（Unity第五轮验收源码同步 unity-round5-github-1101；01a19232），2026-11-01：源码已交付，编辑释放。codex/unity-validated-20261101代码与检查eabc0ccd（功能16f0b314）已推送并远端回读；83变更/3966候选逐Git对象核对，独审无阻断。859领域、389原生及FilmFlow、当前窗口66图/9图实看和GUID3a68596b的3977构建输入支持本批。doctor无阻断，Node暂存门skip，分支无自动CI。最后文档收据独立封口；工作树C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232按追溯保留，旧及本轮自动staged诊断未跟踪文件不清理。原工作区/index与他人在途源未动，无后台服务；原字节完成归属保留。
 
