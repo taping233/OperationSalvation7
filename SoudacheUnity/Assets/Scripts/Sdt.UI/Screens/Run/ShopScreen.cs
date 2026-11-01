@@ -14,12 +14,12 @@ namespace Sdt.UI.Screens.Run
     public class ShopScreen : Panel
     {
         /// <summary>货位：card+price / sold / empty / mystery（对齐 game.shopStock 条目语义）。</summary>
-        public sealed class ShopSlot { public CardDef card; public int price; public bool sold; public bool empty; public string label; public bool mystery; public bool free; public int? shaReplenish; }
+        public sealed class ShopSlot { public CardDef card; public int price; public bool sold; public bool empty; public string label; public bool mystery; public bool free; public int? shaReplenish; internal ShopOfferReceipt receipt; }
 
-        System.Collections.Generic.List<ShopSlot> _stock;
+        List<ShopSlot> _stock;
 
         /// <summary>现行 generateShopStock：6 个同名去重随机位、饮料、初始攻击及神秘货箱；由节点回执持久保存。</summary>
-        public static System.Collections.Generic.List<ShopSlot> GenerateStock()
+        public static List<ShopSlot> GenerateStock()
         {
             var runtime = GameRuntime.I;
             var rng = runtime.Rng;
@@ -68,7 +68,12 @@ namespace Sdt.UI.Screens.Run
         }
 
         string _shopNodeId;
+        GameRuntime _runtime; RunState _run; BaseData _base; int? _slot,_seed;
         bool _closed,_unsaved,_departed;
+        internal bool OwnsShop => this!=null&&!_closed&&isActiveAndEnabled&&GameRuntime.I==_runtime
+            &&_runtime.State==_run&&_runtime.Base==_base&&_runtime.ActiveSlot==_slot&&_run.seed==_seed
+            &&_shopNodeId==_runtime.CurrentNodeId&&CanOpen(_runtime);
+        internal bool ShopActive => OwnsShop&&UiStack.Top==this&&!Sdt.UI.Screens.Menu.SuggestionBox.IsOpen;
         public static bool CanOpen(GameRuntime runtime)
         {
             return runtime != null && runtime.State.runActive && !runtime.State.battleActive && runtime.Map != null
@@ -77,7 +82,7 @@ namespace Sdt.UI.Screens.Run
         }
         bool CurrentShop()
         {
-            if (!_closed && CanOpen(GameRuntime.I) && _shopNodeId == GameRuntime.I.CurrentNodeId) return true;
+            if (ShopActive) return true;
             RunLog.Log("商店已离站，当前无法交易", "warn"); return false;
         }
         void RequireCurrentShop()
@@ -105,18 +110,19 @@ namespace Sdt.UI.Screens.Run
             }, out var reason)) { RunLog.Log(reason, "warn"); return; }
             if(runtime.HasPendingShopAcquisition){ChestOpenScreen.OpenPending(null);return;}
             var s = ScreenMount.Show<ShopScreen>("Shop");
-            s._shopNodeId = runtime.CurrentNodeId;
+            s._runtime=runtime;s._run=runtime.State;s._base=runtime.Base;s._slot=runtime.ActiveSlot;s._seed=runtime.State.seed;s._shopNodeId = runtime.CurrentNodeId;
             s.ReloadStock();
             runtime.Audio.PlayBgm("shop");
             s.Build();
         }
         void ReloadStock() => _stock = GameRuntime.I.CurrentNodeReceipt.shopStock.Select(slot => new ShopSlot
             { card = CardLibrary.FindById(slot.cardId), price = slot.price, sold = slot.sold, empty = slot.empty,
-                mystery = slot.mystery, free = slot.free, label = slot.label, shaReplenish = slot.shaReplenish }).ToList();
+                mystery = slot.mystery, free = slot.free, label = slot.label, shaReplenish = slot.shaReplenish, receipt=slot }).ToList();
+        internal void RefreshStockView(){if(!ShopActive)return;ReloadStock();_view?.Refresh(_stock);}
         internal override void OnClose()
         {
-            _closed = true;
-            if (!CanOpen(GameRuntime.I) || _shopNodeId != GameRuntime.I.CurrentNodeId) return;
+            bool owned=OwnsShop;_closed = true;
+            if (!owned) return;
             if(!_departed)GameRuntime.I.FinishNode();
             GameRuntime.I.Audio.PlayBgm("board");
         }
@@ -125,11 +131,13 @@ namespace Sdt.UI.Screens.Run
         {
             var runtime=GameRuntime.I;
             if(!CurrentShop())return;
-            if(_unsaved&&!runtime.TryPersistMutation(()=>{},out var reason))
+            if(_unsaved)
             {
-                _view?.Notice("本局已成交，保存仍未成功；请再次点击返回地图重试保存。"+reason);
-                return;
+                bool saved=runtime.TryPersistMutation(()=>{},out var reason);
+                if(!OwnsShop)return;
+                if(!saved){_view?.Notice("本局已成交，保存仍未成功；请再次点击返回地图重试保存。"+reason);return;}
             }
+            if(!ShopActive)return;
             _unsaved=false;_departed=true;
             bool bonus=runtime.HasPendingShopAcquisition;
             runtime.State.Phase="idle";
@@ -140,6 +148,7 @@ namespace Sdt.UI.Screens.Run
         CurrentShopView _view;
         public override void Build()
         {
+            if(!ShopActive)return;
             if(GameRuntime.I.GetCommissionOutcome()!=null)
             {
                 var root=CurrentNodeElements.Rect(transform,"shop-source-root");UiStack.Stretch(root);
@@ -153,19 +162,19 @@ namespace Sdt.UI.Screens.Run
         public override void CloseFromEscape(){if(_commissionView!=null){_commissionView.RequestLeave();return;}if(_view!=null&&_view.BackFromSubpage())return;Leave();}
 
         CurrentShopCommission _commissionView;
-        void Buy(int index)
+        void Buy(int index,ShopSlot quote)
         {
             var runtime = GameRuntime.I;
             if (!CurrentShop()) return;
-            if (index < 0 || index >= _stock.Count) return;
-            var quote = _stock[index];
+            if (index < 0 || index >= _stock.Count || !ReferenceEquals(_stock[index],quote)) return;
             bool saved = runtime.TryPersistMutation(() =>
             {
                 RequireCurrentShop();
                 var offers = runtime.CurrentNodeReceipt.shopStock;
                 if (offers == null || index >= offers.Count) throw new InvalidOperationException("商店已变化，请重新选择");
                 var slot = offers[index];
-                if (slot.cardId != quote.card?.id || slot.price != quote.price || slot.sold || slot.empty) throw new InvalidOperationException("商品已变化，请重新选择");
+                if (!ReferenceEquals(slot,quote.receipt)||slot.cardId != quote.card?.id || slot.price != quote.price
+                    ||slot.free!=quote.free||slot.mystery!=quote.mystery||slot.shaReplenish!=quote.shaReplenish||slot.sold || slot.empty) throw new InvalidOperationException("商品已变化，请重新选择");
                 if (slot.price < 0 || runtime.State.coins < slot.price) throw new InvalidOperationException("金币不足");
                 var card = CardLibrary.FindById(slot.cardId);
                 if (card == null || !runtime.GrantCard(card)) throw new InvalidOperationException("背包需腾位，尚未扣款");
@@ -174,10 +183,12 @@ namespace Sdt.UI.Screens.Run
                 if (slot.shaReplenish.HasValue) { slot.shaReplenish--; slot.sold = slot.shaReplenish <= 0; }
                 else slot.sold = true;
             }, out var reason,true,out bool applied);
+            if(!OwnsShop)return;
+            if(applied)_unsaved=!saved;
+            if(!ShopActive){ReloadStock();return;}
             if(!applied){if(_view!=null)_view.Notice("交易未成交，未扣款，可重试。"+reason);RunLog.Log(reason,"warn");}
             else
             {
-                _unsaved=!saved;
                 _view?.Purchased(index,quote.mystery);
                 _view?.Notice(saved?(quote.price==0?"免费领取":"已购入")+"「"+quote.card?.name+"」 · 已入本次远征背包 · 剩余 "+runtime.State.coins+" 币"
                     :runtime.HasPendingShopAcquisition?"本次已成交，附赠卡已保留；点击返回地图重试保存，成功后继续领取附赠"
@@ -196,27 +207,32 @@ namespace Sdt.UI.Screens.Run
             return true;
         }
 
-        void Sell(string uid)
+        void Sell(OwnedCard quote,CardDef sourceCard)
         {
             var runtime = GameRuntime.I;
             if (!CurrentShop()) return;
+            string uid=quote?.uid;
             bool saved = runtime.TryPersistMutation(() =>
             {
                 RequireCurrentShop();
                 var card = runtime.State.ownedCards.SingleOrDefault(entry => entry.uid == uid && !entry.stored && string.IsNullOrEmpty(entry.pouchOf));
-                if (card == null || !CardLibrary.IsSellable(card.card)) throw new InvalidOperationException("该卡牌不可出售");
+                if (card == null || !ReferenceEquals(card,quote)||!ReferenceEquals(card.card,sourceCard)||!CardLibrary.IsSellable(card.card)) throw new InvalidOperationException("该卡牌不可出售");
                 int price = CardLibrary.SellPrice(card.card);
                 if (!CardContainerCommands.TryDiscard(runtime, uid, out var discardReason)) throw new InvalidOperationException(discardReason);
                 runtime.State.coins += price;
             }, out var reason,true,out bool applied);
+            if(!OwnsShop)return;
+            if(applied)_unsaved=!saved;
+            if(!ShopActive){ReloadStock();return;}
             if(!applied){if(_view!=null)_view.Notice("交易未成交，卡牌与金币已保留，可重试。"+reason);RunLog.Log(reason,"warn");}
-            else{_unsaved=!saved;runtime.Audio.PlaySfx("tradeSell");_view?.Notice(saved?"已出售 ×1 · 当前金币 "+runtime.State.coins+" 币"
+            else{runtime.Audio.PlaySfx("tradeSell");_view?.Notice(saved?"已出售 ×1 · 当前金币 "+runtime.State.coins+" 币"
                 :"本局已成交，币、背包与货架已同步更新；保存未成功，离店时可重试保存。");}
             ReloadStock(); Rebuild();
         }
 
         void Rebuild()
         {
+            if(!ShopActive)return;
             if(_view!=null&&GameRuntime.I.GetCommissionOutcome()==null){_view.Refresh(_stock);return;}
             for(int i=transform.childCount-1;i>=0;i--){transform.GetChild(i).gameObject.SetActive(false);Destroy(transform.GetChild(i).gameObject);}
             _view=null;Build();

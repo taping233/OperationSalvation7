@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using Sdt.Core;
 using Sdt.Run;
 using Sdt.UI.Kit;
 namespace Sdt.UI.Screens.Run
@@ -10,9 +11,10 @@ namespace Sdt.UI.Screens.Run
     public sealed class EntrySupplyScreen:NodeShellPanel
     {
         bool _resource,_busy;
-        string _node,_error;int? _seed;
+        string _node,_error;int? _seed,_slot;RunState _run;
         CurrentRewardScene _view;
-        bool Current=>GameRuntime.I.State.runActive&&GameRuntime.I.State.seed==_seed&&GameRuntime.I.CurrentNodeId==_node&&UiStack.Top==this;
+        bool Current=>GameRuntime.I.State==_run&&_run.runActive&&!_run.battleActive&&_run.seed==_seed&&GameRuntime.I.ActiveSlot==_slot
+            &&GameRuntime.I.CurrentNodeId==_node&&UiStack.Top==this&&!Sdt.UI.Screens.Menu.SuggestionBox.IsOpen;
         public static void Open()
         {
             if(GameRuntime.I.EntrySupplyComplete)return;
@@ -23,7 +25,7 @@ namespace Sdt.UI.Screens.Run
             if(GameRuntime.I.CurrentNodeReceipt.rewardTaken!=null)return;
             var page=ScreenMount.Show<EntrySupplyScreen>("ResourceReward");page._resource=true;page.Bind();page.Build();
         }
-        void Bind(){_node=GameRuntime.I.CurrentNodeId;_seed=GameRuntime.I.State.seed;}
+        void Bind(){var runtime=GameRuntime.I;_run=runtime.State;_node=runtime.CurrentNodeId;_seed=_run.seed;_slot=runtime.ActiveSlot;}
         public override void Build()
         {
             var runtime=GameRuntime.I;
@@ -58,19 +60,10 @@ namespace Sdt.UI.Screens.Run
             {
                 if(index>=0)
                 {success=_resource?runtime.ClaimResourceReward(index,out _error):runtime.ClaimEntrySupply(index,out _error);}
-                else
-                {
-                    var cards=runtime.GetEntrySupplyCards();_error=null;
-                    for(int i=0;i<cards.Count;i++)
-                    {
-                        if(runtime.State.entrySupply.taken.Contains(i)||cards[i]==null||!runtime.CanReceiveCard(cards[i]))continue;
-                        if(!runtime.ClaimEntrySupply(i,out _error))break;
-                        success=true;
-                    }
-                    if(!success&&_error==null)_error="当前放不下，请整理背包后重试；补给已保留。";
-                }
+                else success=runtime.ClaimAllEntrySupply(out _error);
             }
             finally{_busy=false;}
+            if(!Current)return;
             if(success){var cards=_resource?runtime.GetResourceRewardCards():runtime.GetEntrySupplyCards();_view.PlayAcquisition(cards.Where((c,i)=>c!=null&&!beforeTaken.Contains(i)&&(_resource?runtime.CurrentNodeReceipt.rewardTaken==i:runtime.State.entrySupply.taken.Contains(i))).Select(c=>c.id).ToArray());}
             Build();
         }

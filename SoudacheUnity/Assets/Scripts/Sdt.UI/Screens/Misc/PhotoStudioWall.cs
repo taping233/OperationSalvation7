@@ -36,11 +36,15 @@ namespace Sdt.UI.Screens.Misc
             float scroll = _content.anchoredPosition.y, view = ((RectTransform)_wall.transform).rect.height;
             int first = Mathf.Max(0, Mathf.FloorToInt((scroll - view * 2 - 24) / (_tileH + 56)) * 4);
             int last = Mathf.Min(_filtered.Count - 1, Mathf.CeilToInt((scroll + view * 3) / (_tileH + 56)) * 4 + 3);
-            foreach (int key in _mounted.Keys.Where(k => k < first || k > last).ToArray()) { _mounted[key].gameObject.SetActive(false); Destroy(_mounted[key].gameObject); _mounted.Remove(key); }
+            if (first == _mountedFirst && last == _mountedLast && _tileW == _mountedWidth && _tileH == _mountedHeight) return;
+            _unmounted.Clear();
+            foreach (int key in _mounted.Keys) if (key < first || key > last) _unmounted.Add(key);
+            foreach (int key in _unmounted) { _mounted[key].gameObject.SetActive(false); Destroy(_mounted[key].gameObject); _mounted.Remove(key); }
             for (int i = first; i <= last; i++) if (!_mounted.ContainsKey(i)) _mounted[i] = BuildTile(i);
             foreach (var pair in _mounted) PhotoStudioElements.Place(pair.Value, pair.Key % 4 * (_tileW + 48), 24 + pair.Key / 4 * (_tileH + 56), _tileW, _tileH);
             if (_filtered.Count == 0 && !_content.GetComponentsInChildren<Text>().Any(t => t.name == "StudioEmpty" && t.gameObject.activeSelf))
             { var empty = PhotoStudioElements.Text(_content, "StudioEmpty", "暂无符合条件的照片\n试试其他关键词或重置筛选", 24, PhotoStudioElements.Light, true); PhotoStudioElements.Place(empty.rectTransform, 30, 100, 700, 180); }
+            _mountedFirst = first; _mountedLast = last; _mountedWidth = _tileW; _mountedHeight = _tileH;
         }
         RectTransform BuildTile(int index)
         {
@@ -61,8 +65,8 @@ namespace Sdt.UI.Screens.Misc
             var nav = button.navigation; nav.mode = Navigation.Mode.None; button.navigation = nav; return rt;
         }
         internal void Hover(string id) { if (Time.unscaledTime < _hoverBlockUntil || _hoverId == id) return; _hoverId = id; _hoverAt = Time.unscaledTime + .09f; }
-        internal void Select(string id)
-        { if (_selectedId == id) return; _selectedId = id; foreach (var p in _mounted) p.Value.Find("Selected").gameObject.SetActive(_filtered[p.Key].id == id); RenderDossier(); }
+        internal void Select(string id, bool refresh = false)
+        { if (_selectedId == id && !refresh) return; _selectedId = id; foreach (var p in _mounted) p.Value.Find("Selected").gameObject.SetActive(_filtered[p.Key].id == id); RenderDossier(); }
         void Locate(bool focus)
         {
             int i = _filtered.FindIndex(c => c.id == _selectedId); if (i < 0) return;
@@ -74,8 +78,15 @@ namespace Sdt.UI.Screens.Misc
         { int i = _filtered.FindIndex(c => c.id == _selectedId), next = Mathf.Clamp(i + delta, 0, _filtered.Count - 1); if (i < 0 || next == i) return; Select(_filtered[next].id); Locate(focus); }
         void Inspect(string id)
         {
-            Select(id); Remember(); var i = _filtered.FindIndex(c => c.id == id); RectTransform source = null; if (_mounted.TryGetValue(i, out var tile)) source = tile.Find("studio-photo-paper") as RectTransform;
-            AudioService.I.PlaySfx("shutter"); PhotoDetailScreen.Open(_filtered, id, source, current => { Select(current); RenderDossier(); Locate(true); });
+            if (this == null || _leaving || !isActiveAndEnabled || UiStack.Top != this) return;
+            int i = _filtered.FindIndex(c => c.id == id);
+            if (i < 0) return;
+            Select(id); Remember(); RectTransform source = null; if (_mounted.TryGetValue(i, out var tile)) source = tile.Find("studio-photo-paper") as RectTransform;
+            AudioService.I.PlaySfx("shutter"); PhotoDetailScreen.Open(_filtered, id, source, current =>
+            {
+                if (this == null || !isActiveAndEnabled || UiStack.Top != this) return;
+                Select(current, true); Locate(true);
+            });
         }
     }
     [RequireComponent(typeof(CanvasRenderer))]

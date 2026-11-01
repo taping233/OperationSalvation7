@@ -174,7 +174,7 @@ namespace Sdt.UI.Screens.Battle
                     if (current.Equipment?.Any(e => e.uid == uid && e.canUse) == true)
                     { var result = commands.UseEquipment(uid); if (!result.Ok) RunLog.Log(result.Reason, "warn"); }
                     else ShowReadout(entry.card.name, Sdt.Res.CurrentCardPresentation.Description(entry.card,CardFace.BattleDescription(GameSnapshotRef.Current,entry.uid)));
-                }, true);
+                }, !InputLocked(s));
                 button.image.color = entry.canUse ? BtColors.Hex("#5D5638") : BtColors.Hex("#15212C");
                 button.gameObject.AddComponent<BattleHoverInfo>().Setup(() => ShowReadout(entry.card.name, Sdt.Res.CurrentCardPresentation.Description(entry.card,CardFace.BattleDescription(GameSnapshotRef.Current,entry.uid))));
             }
@@ -198,18 +198,24 @@ namespace Sdt.UI.Screens.Battle
                 if (selecting) card.SetOff(!MaterialEligible(card.Uid,s,api));
                 card.SetMaterialSelected(selecting && _materialPicked.ContainsKey(card.Uid));
             }
-            string signature = s.RuleChoice == null ? "" : string.Join("|", s.RuleChoice.labels);
-            if (_ruleSignature == signature) return; _ruleSignature = signature; ClearRegion(_ruleInput);
-            _ruleInput.gameObject.SetActive(signature.Length > 0); if (signature.Length == 0) return;
+            var choice=s.RuleChoice;string token=s.BattleToken;
+            if(ReferenceEquals(_ruleChoiceOwner,choice)&&_ruleChoiceToken==token)return;
+            _ruleChoiceOwner=choice;_ruleChoiceToken=token;ClearRegion(_ruleInput);
+            _ruleInput.gameObject.SetActive(choice!=null);if(choice==null)return;
             var mask = UIKit.Image(_ruleInput, BtSprites.White()); UiExt.Stretch(mask.rectTransform); mask.color = BtColors.HexA("#000000", .55f);
             var panel = BattleRect("battle-decision choice", _ruleInput); Anchor(panel, .2f, .25f, .8f, .85f);
             panel.gameObject.AddComponent<Image>().color = BtColors.Hex("#10232B");
             var flow = panel.gameObject.AddComponent<VerticalLayoutGroup>(); flow.padding = new RectOffset(24,24,24,24); flow.spacing = 18;
             flow.childForceExpandHeight = false; flow.childControlWidth = flow.childControlHeight = true;
             UIKit.Label(panel, "选择卡牌效果", 30, BtColors.Hex("#F0E0B8"));
-            for (int i = 0; i < s.RuleChoice.labels.Count; i++)
+            for (int i = 0; i < choice.labels.Count; i++)
             {
-                int selected = i; BtBtn.Create(panel, s.RuleChoice.labels[i], () => commands.ChooseRuleOption(selected));
+                int selected=i;BtBtn.Create(panel,choice.labels[i],()=>
+                {
+                    var current=GameSnapshotRef.Current;
+                    if(this==null||!isActiveAndEnabled||UiStack.Top!=this||current==null||current.over||current.Busy||current.BattleToken!=token||!ReferenceEquals(current.RuleChoice,choice))return;
+                    commands.ChooseRuleOption(selected);
+                });
             }
         }
         void ShowReadout(string title, string detail) { BattleReadout.Show(_stageRoot, title, detail); }

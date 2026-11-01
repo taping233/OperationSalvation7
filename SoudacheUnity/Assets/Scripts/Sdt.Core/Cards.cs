@@ -84,9 +84,25 @@ namespace Sdt.Core
 
         private static Func<IReadOnlyList<CardDef>> _source;
         private static readonly CardDef[] Empty = new CardDef[0];
+        static IReadOnlyList<CardDef> _mergedSource,_mergedCustoms,_merged;
+        static (CardDef card,string id)[] _mergedSourceItems,_mergedCustomItems;
+        static void InvalidateMerged()
+        {_merged=null;_mergedSource=null;_mergedCustoms=null;_mergedSourceItems=null;_mergedCustomItems=null;}
+        static bool SameCards(IReadOnlyList<CardDef> cards,(CardDef card,string id)[] snapshot)
+        {
+            if(snapshot==null||snapshot.Length!=cards.Count)return false;
+            for(int i=0;i<cards.Count;i++)if(!ReferenceEquals(cards[i],snapshot[i].card)||cards[i]?.id!=snapshot[i].id)return false;
+            return true;
+        }
+        static (CardDef card,string id)[] CaptureCards(IReadOnlyList<CardDef> cards)
+        {
+            var snapshot=new (CardDef card,string id)[cards.Count];
+            for(int i=0;i<cards.Count;i++)snapshot[i]=(cards[i],cards[i]?.id);
+            return snapshot;
+        }
 
         /// <summary>启动时由装配层注入数据源（W2: () => CardDatabase.All）。未注入时返回空表。</summary>
-        public static void Init(Func<IReadOnlyList<CardDef>> source) { _source = source; }
+        public static void Init(Func<IReadOnlyList<CardDef>> source) { _source = source;InvalidateMerged(); }
 
         public static IReadOnlyList<CardDef> All()
         {
@@ -95,13 +111,30 @@ namespace Sdt.Core
             if (_customs == null && CustomsLoader == null) return src;
             var customs = CustomsList();
             if (customs.Count == 0) return src;
-            var merged = new List<CardDef>(src);
+            if(ReferenceEquals(src,_mergedSource)&&ReferenceEquals(customs,_mergedCustoms)&&SameCards(src,_mergedSourceItems)&&SameCards(customs,_mergedCustomItems))return _merged;
+            _merged=MergeCustoms(src,customs);
+            _mergedSource=src;_mergedCustoms=customs;
+            _mergedSourceItems=CaptureCards(src);_mergedCustomItems=CaptureCards(customs);
+            return _merged;
+        }
+        // Shared by live catalogs and archive dependency resolution; stable IDs keep their source index.
+        public static IReadOnlyList<CardDef> MergeCustoms(IReadOnlyList<CardDef> source,IReadOnlyList<CardDef> customs)
+        {
+            var merged = new List<CardDef>(source);
+            var indices=new Dictionary<string,int>();int nullIndex=-1;
+            for(int i=0;i<merged.Count;i++)
+            {
+                string id=merged[i]?.id;
+                if(id==null){if(nullIndex<0)nullIndex=i;}
+                else if(!indices.ContainsKey(id))indices.Add(id,i);
+            }
             foreach(var card in customs)
             {
-                int index=merged.FindIndex(existing=>existing?.id==card?.id);
+                string id=card?.id;int index=id==null?nullIndex:indices.TryGetValue(id,out int found)?found:-1;
                 if(index>=0)merged[index]=card;else merged.Add(card);
+                if(index<0){if(id==null)nullIndex=merged.Count-1;else indices[id]=merged.Count-1;}
             }
-            return merged;
+            return merged.AsReadOnly();
         }
 
         public static CardDef FindById(string id)

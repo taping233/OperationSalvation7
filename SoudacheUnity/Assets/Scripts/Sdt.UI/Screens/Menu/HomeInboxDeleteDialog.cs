@@ -18,8 +18,13 @@ namespace Sdt.UI.Screens.Menu
             CurrentReadingPreference.Bind(E.Text(card,"description","删除后无法恢复，可先导出这条留言。",22,E.Hex("#C1CBD4"),24,84,572,110));
             var cancel=E.Box(card,"cancel",286,216,138,52);E.Hit(cancel,Close);
             E.Text(cancel,"label","返回",20,E.Hex("#DDE7EE"),20,0,100,52);
-            var confirm=E.Box(card,"confirm",438,216,158,52);E.Hit(confirm,()=>{Confirm?.Invoke();Close();});
+            var confirm=E.Box(card,"confirm",438,216,158,52);E.Hit(confirm,()=>
+            {
+                if(!isActiveAndEnabled||UiStack.Top!=this)return;
+                var action=Confirm;Close();action?.Invoke();
+            });
             E.Text(confirm,"label","删除留言",20,E.Hex("#F0B9AE"),20,0,120,52);
         }
+        internal override void OnClose(){Confirm=null;}
     }
 }

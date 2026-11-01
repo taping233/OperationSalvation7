@@ -65,7 +65,7 @@ namespace Sdt.UI.Screens.Menu
             var source=EventSystem.current?.currentSelectedGameObject;
             var dialog=UiStack.Show<CurrentSettingsConfirmation>("slot-archive-confirmation");
             string saved=preview.SavedAt>0?DateTimeOffset.FromUnixTimeMilliseconds(preview.SavedAt).ToLocalTime().ToString("yyyy-MM-dd HH:mm"):"未记录";
-            dialog.Configure("导入至档位 "+preview.Slot+"？","来源档位："+preview.SourceSlot+"\n上次保存："+saved+"\n"+(preview.PendingExtraction?"包含尚未完成的撤离整理。\n":"")+(preview.Overwrites?"目标已有档案，将被此备份替换。":"将把备份写入此档位。"),"确认导入整档",()=>{
+            dialog.Configure("导入至档位 "+preview.Slot+"？","来源档位："+preview.SourceSlot+"\n上次保存："+saved+"\n"+(preview.PendingExtraction?"包含尚未完成的撤离整理。\n":"")+(preview.AddedCustomCards>0?"将补入 "+preview.AddedCustomCards+" 条本档引用的自定义卡牌定义，加入本机卡牌库。\n":"")+(preview.Overwrites?"目标已有档案，将被此备份替换。":"将把备份写入此档位。"),"确认导入整档",()=>{
                 if(owner==null||!current())return "档位页面已变化，请重新预检。";
                 if(!GameRuntime.I.Saves.ImportSlotArchive(preview,true,out var error))return error;finished?.Invoke();return null;
             },()=>{if(source!=null&&source.activeInHierarchy&&UiStack.Top==owner&&!SuggestionBox.IsOpen)EventSystem.current?.SetSelectedGameObject(source);});

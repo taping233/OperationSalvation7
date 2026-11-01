@@ -161,7 +161,7 @@ namespace Sdt.UI.Screens.Battle
                 var entry = api.FindCard(uid); if (entry == null) continue;
                 bool individual = s.Infusing != null || s.RuleHandSelection != null;
                 var c = entry.Card;
-                string key = individual ? "uid:" + uid : c.id + "|" + c.cost + "|" + c.desc + "|" + api.EffCostOf(c);
+                string key = individual ? "uid:" + uid : BattleHandProjection.StackKey(c,api.EffCostOf(c));
                 if (!byKey.TryGetValue(key,out var group))
                 { result.Add(group = new HandGroup { Card = c, Key = key, Uids = new List<string>(), Self = s.Infusing?.Uid == uid }); byKey.Add(key,group); }
                 group.Uids.Add(uid);
@@ -198,7 +198,7 @@ namespace Sdt.UI.Screens.Battle
             if (infusing)
             {
                 groups = groups.Where(g => g.Uids[0] != selection.Uid && !selection.Picked.Contains(g.Uids[0]))
-                    .GroupBy(g => g.Card.id + "|" + g.Card.desc + "|" + api.EffCostOf(g.Card))
+                    .GroupBy(g => BattleHandProjection.StackKey(g.Card,api.EffCostOf(g.Card)))
                     .Select(stack => new HandGroup { Card = stack.First().Card, Key = stack.Key, Uids = stack.SelectMany(g => g.Uids).ToList() })
                     .OrderBy(group => group.Rank).ToList();
                 for (int i = 0; i < groups.Count; i++) groups[i].Slot = i;
@@ -223,7 +223,7 @@ namespace Sdt.UI.Screens.Battle
                 card.gameObject.SetActive(true); card.SetCount(g.Uids.Count); card.DisplayIndex = g.Slot % pageSize; card.Infusion = infusing;
                 card.Side = infusing ? null : api.TargetSide(g.Card);
                 card.InfusionAtLimit = infusing && selection.Picked.Count >= selection.Need;
-                card.SetOff(infusing ? g.Card.rules?.Get("battle")?.Value("fuelAllowed") is bool allowed && !allowed : s.Busy || s.over || cost > s.Energy || api.UnplayableReason(g.Card) != null);
+                card.SetOff(infusing ? g.Card.rules?.Get("battle")?.Value("fuelAllowed") is bool allowed && !allowed : s.Busy || s.over || s.TurnEndPending&&s.RuleHandSelection==null || cost > s.Energy || api.UnplayableReason(g.Card) != null);
                 card.SetTargeting(!infusing && s.PendingTarget?.Uid == card.Uid);
                 Cards.Add(card);
             }

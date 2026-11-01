@@ -49,10 +49,10 @@ namespace Sdt.Core.Battle
         }
         public CommandResult SelectRuleTarget(int index,string battleToken,int selectionId)
         {
-            if(over||busy||RuleInputPending||_phase=="enemy"||pendingTarget?.Kind!="rulePick"||pendingTarget.BattleToken!=battleToken||_battleToken!=battleToken||pendingTarget.SelectionId!=selectionId)return CommandResult.No("目标选择已失效");
+            if(over||busy||RuleSelectionPending||_phase=="enemy"||pendingTarget?.Kind!="rulePick"||pendingTarget.BattleToken!=battleToken||_battleToken!=battleToken||pendingTarget.SelectionId!=selectionId)return CommandResult.No("目标选择已失效");
             if(index<0||index>=foes.Count||foes[index].dead)return CommandResult.No("请重新选择一名存活敌人");
             var action=deferredTargetAction;pendingTarget=null;pendingHint="";deferredTargetAction=null;_phase="resolving";
-            action?.Invoke(foes[index]);ResumeRules();ResolveRuleOutcome();RequestRender();return CommandResult.Yes();
+            action?.Invoke(foes[index]);ResolveRuleOutcome();ResumeRules();RequestRender();return CommandResult.Yes();
         }
         private PendingTargetSnapshot CopyPendingTarget() => pendingTarget==null?null:new PendingTargetSnapshot { uid=pendingTarget.uid,card=pendingTarget.card,Kind=pendingTarget.Kind,BattleToken=pendingTarget.BattleToken,SelectionId=pendingTarget.SelectionId,ExcludedTargetIndex=pendingTarget.ExcludedTargetIndex };
         private void ResolveFighterAttack(CardDef card,BattleFoe a,BattleFoe b)

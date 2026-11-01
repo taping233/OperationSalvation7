@@ -58,11 +58,11 @@ namespace Sdt.Boot
             if ((actualDeath || result.Win == true) && !ReferenceEquals(_presentedActorResult, result))
             {
                 var session = BattleViewApi.Session;
-                string token = session?.Snapshot.BattleToken;
+                string token = session?.BattleToken;
                 if (BattleScreen.WaitForActorResult(token, actualDeath, () =>
                 {
                     _waitingActorResult = null; _presentedActorResult = result;
-                    if (ReferenceEquals(BattleViewApi.Session, session) && session?.Snapshot.BattleToken == token)
+                    if (ReferenceEquals(BattleViewApi.Session, session) && session?.BattleToken == token)
                         OnBattleEnd(result);
                 })) { _waitingActorResult = result; return; }
                 _presentedActorResult = result;
@@ -228,13 +228,7 @@ namespace Sdt.Boot
         public void SetPendingHint(string text) => _s.SetPendingHint(text);
         public void LockPendingTarget(string uid)
         {
-            // UI 只持有 uid：优先复用快照里的待定目标（含卡面数据），否则建最小条目
-            var snap = _s.Snapshot;
-            if (snap != null && snap.PendingTarget != null && snap.PendingTarget.uid == uid)
-            {
-                _s.LockPendingTarget(snap.PendingTarget);
-                return;
-            }
+            // The session preserves a same-UID target's selection state without projecting the full battle.
             _s.LockPendingTarget(new PendingTargetSnapshot { uid = uid });
         }
         public void SelectDeckCard(string uid) => _s.SelectDeckCard(uid);

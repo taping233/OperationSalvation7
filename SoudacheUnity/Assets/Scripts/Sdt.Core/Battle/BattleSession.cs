@@ -273,6 +273,7 @@ namespace Sdt.Core.Battle
         };
 
         public BattleSnapshot Snapshot { get { return GetSnapshot(); } }
+        public string BattleToken => _battleToken;
         public string Mode => mode;
         public int Turn => turn;
 
@@ -316,15 +317,15 @@ namespace Sdt.Core.Battle
 
         private int DrawCards(int n)
         {
-            int got = 0;
-            while (n-- > 0)
+            int got = 0, continuationBase = ruleContinuations.Count;string token=_battleToken;
+            while (n-- > 0 && !over && _battleToken==token)
             {
                 if (drawPile.Count == 0) break;
-                if (mode=="boss" && hand.Count >= GameRules.BattleHandMax) break;
                 var drawnUid = drawPile[drawPile.Count - 1];
+                if (mode=="boss" && hand.Count >= GameRules.BattleHandMax && !castOnDraw.Contains(drawnUid)) break;
                 hand.Add(drawnUid);
                 drawPile.RemoveAt(drawPile.Count - 1);
-                OnStructuredDraw(drawnUid);
+                OnStructuredDraw(drawnUid,continuationBase);
                 got++;
             }
             return got;
@@ -366,11 +367,17 @@ namespace Sdt.Core.Battle
             for (int i = 0; i < n; i++) AddTempCard(baseCard);
         }
 
+        private OwnedCard FindSourceCard(string uid)
+        {
+            if (G != null) foreach (var o in G.OwnedCards) if (o.uid == uid) return o;
+            foreach (var o in granted) if (o.uid == uid) return o;
+            return null;
+        }
+
         public OwnedCard FindCard(string uid)
         {
-            if (G != null) foreach (var o in G.OwnedCards) if (o.uid == uid) return OverrideCard(o);
-            foreach (var o in granted) if (o.uid == uid) return OverrideCard(o);
-            return null;
+            var source = FindSourceCard(uid);
+            return source != null ? OverrideCard(source) : null;
         }
 
         private static int DrawOf(CardDef card) { return (card.draw ?? 0) > 0 ? card.draw.Value : CardLibrary.DeriveDraw(card); }
@@ -573,7 +580,7 @@ namespace Sdt.Core.Battle
         /// </summary>
         public CommandResult PlayCard(string cardId, int targetIndex, bool infused)
         {
-            if (over || selectingDeck || _phase=="enemy" || _phase=="resolving") return CommandResult.No("当前不能出牌");
+            if (over || turnEndPending || selectingDeck || _phase=="enemy" || _phase=="resolving") return CommandResult.No("当前不能出牌");
             if (RuleInputPending) return CommandResult.No("请先完成当前选择");
             if (!hand.Contains(cardId)) return CommandResult.No("卡牌已不在手牌中");
             if (busy) return CommandResult.No("busy");
@@ -769,6 +776,7 @@ namespace Sdt.Core.Battle
             int continuationBase = ruleContinuations.Count;
             var context = castContext;
             using (BeginActorCard(card)) ResolveCard(card, target);
+            if (over) return;
             Action complete = () =>
             {
                 var previous = castContext; castContext = context;
@@ -1049,11 +1057,22 @@ namespace Sdt.Core.Battle
         public CommandResult EndTurn()
         {
             if (over) return CommandResult.No("战斗已结束");
-            if (RuleInputPending || selectingDeck) return CommandResult.No("请先完成当前选择");
+            if (turnEndPending || RuleInputPending || selectingDeck) return CommandResult.No("请先完成当前选择");
             if (busy || infusing != null || discovering != null) return CommandResult.No("busy/infusing/discovering");
             pendingTarget=null;pendingHint="";
             if(_phase=="targeting") _phase="player";
-            if (extraTurn) { extraTurn = false; turn++; energy = maxEnergy; AdvanceStructuredTurn(); RequestRender(); return CommandResult.Yes(); }
+            string token=_battleToken;turnEndPending=true;turnOwnerToken=token;
+            if (extraTurn)
+            {
+                extraTurn=false;turn++;energy=maxEnergy;busy=true;
+                int continuationBase=ruleContinuations.Count;AdvanceStructuredTurn();
+                if(OwnsTurn(token))
+                {
+                    if(RuleInputPending)SuspendTurn(continuationBase,token,()=>CompleteOwnedTurn(token,false),"player");
+                    else CompleteOwnedTurn(token,false);
+                }
+                return CommandResult.Yes();
+            }
             busy = true;
             _phase = "enemy";
             EmitSoundCue("phaseFoe");
@@ -1062,68 +1081,30 @@ namespace Sdt.Core.Battle
             // —— 玩家回合结束：中毒结算 ——
             var poisonPresentation=BeginPassiveHit();
             var pref = new Combatant { hp = G.Hp, defense = pdef, status = pstat.status };
+            int poisonContinuationBase=ruleContinuations.Count;
             var pr = CombatResolver.TickPoison(pref);
             G.Hp = pref.hp - (pr?.overkill ?? 0);
             if (pr != null)
             {
                 RecordSummaryDamage("中毒",pr.dealt);
+                drawnCastHold++;
+                try{OnStructuredPlayerDamaged(null,pr.dealt);}finally{if(OwnsTurn(token))drawnCastHold--;}
                 floats.Add(new BattleFloat { unit = "self", text = "-" + pr.dealt, cls = "hurt" });
                 G.Log("[[icon:skull]] 中毒结算：你受到 <b>" + pr.dealt + "</b> 点固定伤害（" + G.Hp + "/" + G.MaxHp + "）", "warn");
             }
             // 计时状态不在玩家阶段递减——共享回合钟统一在每回合结束（AfterEnemies 末尾）递减
             poisonPresentation.Dispose();
             RequestRender();
-            if (G.Hp <= 0) { busy = false; Finish(false); return CommandResult.Yes(); }
-            ResolveRuleAllyAttacks();
-            if (over) { busy = false; return CommandResult.Yes(); }
-            // —— 敌人回合：逐个行动（原版 setTimeout 分步动画，此处同步结算，每步发快照）——
-            var acting = Alive();
-            EmitPresentation(new BattleActorCue { Kind="wait", WindupMs=420 });
-            int i = 0;
-            while (true)
-            {
-                if (G.Hp <= 0) { busy = false; Finish(false); return CommandResult.Yes(); }
-                if (i >= acting.Count) { AfterEnemies(); break; }
-                var foe = acting[i++];
-                var plan=BattleEnemyPlan.Build(foe,turn);
-                if (plan.Skip=="dead") continue;
-                if (plan.Skip=="stunned") { foe.stunned=false;continue; }
-                if (plan.Skip=="oddRound" || plan.Skip=="firstRound") continue;
-                if (plan.Skip=="frozen")
-                {
-                    G.Log("[[icon:crystal]] <b>" + Esc(foe.name) + "</b> 被冰冻，无法行动！", "sys");
-                }
-                else
-                {
-                    for (int h = 0; h < plan.Hits && G.Hp > 0 && CombatResolver.CanAct(foe); h++)
-                    {
-                        // 潜行：无法成为被攻击对象（冰冻/潜行的敌人在自己行动后照常递减计时）
-                        if (CombatResolver.IsStealthed(pstat))
-                        {
-                            G.Log("[[icon:runner]] 你在<b>潜行</b>中，<b>" + Esc(foe.name) + "</b> 无法将你作为攻击对象", "sys");
-                            break;
-                        }
-                        if (TryRuleAllyGuard(foe)) { CleanseCurrentBlocker(foe);continue; }
-                        int dealt = PlayerTakeHit(foe);
-                        // 敌人造成伤害也会破除它自己的潜行
-                        if (dealt > 0 && CombatResolver.BreakStealth(foe))
-                        {
-                            G.Log("[[icon:runner]] <b>" + Esc(foe.name) + "</b> 发动了攻击，<b>潜行</b>被破除", "dim");
-                        }
-                        if (dealt > 0 && foe.affix == "frenzy") FrenzyCurse(foe);
-                        CleanseCurrentBlocker(foe);
-                    }
-                }
-                RequestRender();
-                if (G.Hp <= 0) { busy = false; Finish(false); return CommandResult.Yes(); }
-                EmitPresentation(new BattleActorCue { Kind="wait", WindupMs=420 });
-            }
-            busy = false;
-            RequestRender();
+            ResolveRuleOutcome();
+            if(!OwnsTurn(token))return CommandResult.Yes();
+            DrainDrawnCasts(poisonContinuationBase);
+            if(!OwnsTurn(token))return CommandResult.Yes();
+            if(RuleInputPending)SuspendTurn(poisonContinuationBase,token,()=>BeginEnemyActions(token));
+            else BeginEnemyActions(token);
             return CommandResult.Yes();
         }
 
-        private void AfterEnemies()
+        private void AfterEnemies(string token)
         {
             // —— 敌人回合结束：中毒结算 + 词缀 ——
             foreach (var foe in foes)
@@ -1165,33 +1146,11 @@ namespace Sdt.Core.Battle
             _phase = "player";
             foreach (var foe in foes) if (!foe.dead) foe.intent = IntentFor(foe, turn);
             energy = maxEnergy;
+            int continuationBase=ruleContinuations.Count;
             AdvanceStructuredTurn();
-            // —— 新回合开始：玩家形态祝福 ——
-            if (pstat.status.Get("natureForm") > 0)
-            {
-                energy++;
-                G.Log("[[icon:wood]] <b>自然形态</b>：额外获得 1 点能量（当前 " + energy + "/" + maxEnergy + "）", "ok");
-            }
-            if (pstat.status.Get("swordForm") > 0)
-            {
-                int got = DrawCards(1);
-                G.Log("[[icon:sword]] <b>剑仙形态</b>：额外抽了 " + got + " 张牌", "ok");
-            }
-            // —— 新回合开始：「回合开始时」延迟段结算 ——
-            ProcessDelayed();
-            // —— 常规抽牌（「下回合无法抽牌」标记在本回合开始消耗掉）——
-            if (noDrawNext)
-            {
-                noDrawNext = false;
-                G.Log("[[icon:cross]] <b>下回合无法抽牌</b>生效：本回合开始不抽牌", "warn");
-            }
-            else if (mode == "boss")
-            {
-                DrawCards(GameRules.BattleTurnDraw);
-            }
-            EmitSoundCue("phaseSelf");
-            busy = false;
-            RequestRender();
+            if(!OwnsTurn(token))return;
+            if(RuleInputPending)SuspendTurn(continuationBase,token,()=>ContinuePlayerTurnStart(token),"player");
+            else ContinuePlayerTurnStart(token);
         }
 
         private void TickDurationsLog(UnitStatus status, string who)
@@ -1217,7 +1176,7 @@ namespace Sdt.Core.Battle
         public CommandResult Surrender()
         {
             if (mode == "boss") return CommandResult.No("首脑战不可撤离，击败首脑或战败即终局");
-            if (over || busy || infusing != null || RuleInputPending) return CommandResult.No("请先完成当前操作");
+            if (over || turnEndPending || busy || infusing != null || RuleInputPending) return CommandResult.No("请先完成当前操作");
             G.Log("[[icon:cross]] 你选择了撤离——本局视为失败，安全格中的卡牌将被抢运回基地", "warn");
             Finish(false);
             return CommandResult.Yes();
@@ -1235,6 +1194,7 @@ namespace Sdt.Core.Battle
         private void Finish(bool? win)
         {
             if (over) return;
+            ClearTurnOwner();ClearDrawnCasts();
             if (win == false && G.Hp <= 0) EmitActorCue("death");
             if(win==true) _phase="victory";
             else if(win==false) _phase="defeat";
@@ -1259,6 +1219,9 @@ namespace Sdt.Core.Battle
             granted = new List<OwnedCard>(); grave = new List<string>();
             sel = new HashSet<string>();
             infusing = null; discovering = null; discoverQueue.Clear(); pendingTarget = null; floats.Clear();
+            ruleContinuations.Clear(); deferredTargetAction=null; pendingHint="";
+            ruleChoice=null;ruleChoiceAction=null;ruleHandSelection=null;ruleHandAction=null;structuredDiscoverAction=null;handPayment=null;
+            pendingFuel=null;pendingFuelUid=null;preparedFighters=null;preparedFightersUid=null;
             delayed.Clear(); noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false; selectingDeck = false;
             over = true;
             deathSaves=0;extraTurn=false;
@@ -1272,9 +1235,29 @@ namespace Sdt.Core.Battle
         public CommandResult OpenGrave() { viewingGrave = true; RequestRender(); return CommandResult.Yes(); }
         public CommandResult CloseGrave() { viewingGrave = false; RequestRender(); return CommandResult.Yes(); }
 
-        public CommandResult CancelPendingTarget() { pendingFuel=null;pendingFuelUid=null;preparedFighters=null;preparedFightersUid=null;deferredTargetAction=null;pendingTarget = null; pendingHint = ""; if(_phase=="targeting")_phase="player"; RequestRender(); return CommandResult.Yes(); }
+        public CommandResult CancelPendingTarget()
+        {
+            bool deferred = pendingTarget?.Kind == "rulePick";
+            pendingFuel=null;pendingFuelUid=null;preparedFighters=null;preparedFightersUid=null;deferredTargetAction=null;pendingTarget=null;pendingHint="";
+            if (deferred) { ResolveRuleOutcome(); ResumeRules(); }
+            else if (_phase=="targeting") _phase="player";
+            RequestRender(); return CommandResult.Yes();
+        }
         public void SetPendingHint(string value) { pendingHint = value ?? string.Empty; RequestRender(); }
-        public void LockPendingTarget(PendingTargetSnapshot value) { if(value!=null){if(pendingTarget?.uid!=value.uid){pendingFuel=null;pendingFuelUid=null;preparedFighters=null;preparedFightersUid=null;deferredTargetAction=null;} value.card=FindCard(value.uid)?.card ?? value.card;} pendingTarget = value; pendingHint = ""; if(value!=null && !over)_phase="targeting"; RequestRender(); }
+        public void LockPendingTarget(PendingTargetSnapshot value)
+        {
+            if (over || turnEndPending || RuleInputPending) return;
+            if (value != null)
+            {
+                if (pendingTarget?.uid != value.uid)
+                { pendingFuel=null;pendingFuelUid=null;preparedFighters=null;preparedFightersUid=null;deferredTargetAction=null; }
+                else if (value.card == null) value = CopyPendingTarget();
+                value.card = FindCard(value.uid)?.card ?? value.card;
+            }
+            pendingTarget = value; pendingHint = "";
+            if (value != null && !over) _phase = "targeting";
+            RequestRender();
+        }
         public void MarkDreadShown() { dreadShown = true; }
 
         /// <summary>取走待展示的飘字/受击特效（渲染后由视图消费，取后清空）。</summary>
@@ -1331,6 +1314,7 @@ namespace Sdt.Core.Battle
             {
                 Phase = _phase,
                 BattleToken = _battleToken,
+                TurnEndPending = turnEndPending,
                 ConsumedPile = BattleConsumedPile().AsReadOnly(),
                 EndTurnContext = new EndTurnContextSnapshot { ExtraTurn = extraTurn, DeathSave = deathSaves },
                 PlayerEffects = ProjectPlayerEffects(),

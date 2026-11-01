@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sdt.Res;
-using Sdt.Run;
 using Sdt.UI.Kit;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,15 +15,18 @@ namespace Sdt.UI.Screens.Menu
         public CanvasGroup Inner, Decor, SystemGroup;
         public Text Clock;
         public Action Returned;
-        public static Font LabelFont => Resources.Load<Font>("Art/CurrentHome/Rajdhani-600");
-        public static bool Reduced => GameRuntime.I.Saves.Global.GetString("sdt-reduce-motion") == "1";
+        static Font _labelFont;
+        public static Font LabelFont => _labelFont != null ? _labelFont : (_labelFont = Resources.Load<Font>("Art/CurrentHome/Rajdhani-600"));
+        public static bool Reduced => CurrentUiPreferences.ReducedMotion;
         readonly List<Region> _regions = new List<Region>();
         readonly List<Image> _wallpapers = new List<Image>();
         readonly List<Material> _sceneMaterials=new List<Material>();
         readonly float[] _alphas = new float[7], _fromAlphas = new float[7];
         int _selected;
         float _crossfade = 1, _phaseTime, _ambientTime, _viewFade,_filterPhase,_flashPhase,_divePhase;
-        bool _everEntered, _leaving, _covered, _wallpaperOnly;
+        bool _everEntered, _leaving, _covered, _wallpaperOnly, _regionsAnimating, _regionsReduced;
+        float _entryEnd;
+        long _clockSecond = long.MinValue;
         string _picked;
         TitleScreen _owner;
         Vector2 _pointer;
@@ -34,7 +36,7 @@ namespace Sdt.UI.Screens.Menu
         sealed class Region
         {
             public RectTransform rect; public Vector2 position; public CanvasGroup group;
-            public string id; public bool right; public float delay, duration, baseAlpha = 1;
+            public string id; public bool right; public float delay, duration;
         }
 
         public void Register(RectTransform rect, string id, bool right, float delay, float duration)
@@ -82,6 +84,7 @@ namespace Sdt.UI.Screens.Menu
         public void Enter(bool fromWallpaper)
         {
             bool first = !_everEntered; _everEntered = true; _leaving = false; _phaseTime = 0;
+            _entryEnd = 0; _regionsAnimating = true;
             foreach (var region in _regions)
             {
                 int plateIndex = region.id == "mStart" ? 0 : region.id == "mGuide" ? 1 : region.id == "mAch" ? 2
@@ -93,13 +96,14 @@ namespace Sdt.UI.Screens.Menu
                     : plateIndex >= 0 ? EntryDelays[plateIndex] * (first ? 1 : .4f)
                     : region.id == "brand" ? 0 : (region.id == "footer" ? .44f : .32f) * (first ? 1 : .4f);
                 region.group.alpha = Reduced ? 1 : 0;
+                _entryEnd = Mathf.Max(_entryEnd, region.delay + region.duration);
             }
             Returned?.Invoke();
         }
         public void Leave(string id, Action open)
         {
             if (_leaving || _wallpaperOnly || UiStack.Top != _owner) return;
-            _picked = id; _phaseTime = 0; _leaving = true;
+            _picked = id; _phaseTime = 0; _leaving = true; _regionsAnimating = true;
             Inner.interactable = false; Inner.blocksRaycasts = false;
             StartCoroutine(OpenAfterDeparture(open));
         }
@@ -122,6 +126,7 @@ namespace Sdt.UI.Screens.Menu
             bool covered = UiStack.Top != _owner;
             if (_covered && !covered) { Enter(false); Inner.interactable = Inner.blocksRaycasts = true; }
             _covered = covered;
+            bool reduced = Reduced;
             float dt = Time.unscaledDeltaTime;
             // Crossfade remains independent of the ambient pause and handles rapid repeated switches.
             if (_crossfade < 1)
@@ -131,13 +136,17 @@ namespace Sdt.UI.Screens.Menu
                 for (int i = 0; i < _alphas.Length; i++) _alphas[i] = Mathf.Lerp(_fromAlphas[i], i == _selected ? 1 : 0, t);
                 ApplyWallpapers();
             }
-            _viewFade = Mathf.MoveTowards(_viewFade, _wallpaperOnly ? 1 : 0, dt / (_wallpaperOnly ? .26f : .34f));
-            Inner.alpha = Decor.alpha = 1 - _viewFade;
-            if (covered && !_leaving) return;
+            float viewFade = Mathf.MoveTowards(_viewFade, _wallpaperOnly ? 1 : 0, dt / (_wallpaperOnly ? .26f : .34f));
+            if (_viewFade != viewFade) { _viewFade = viewFade; Inner.alpha = Decor.alpha = 1 - _viewFade; }
+            // Transparent destination pages still reveal the finite departure and wallpaper fade.
+            bool departureSettled = _phaseTime >= .18f && (reduced || (_divePhase == 1 && _filterPhase == 1 && _flashPhase == 1));
+            if (covered && (!_leaving || departureSettled) && _regionsReduced == reduced) return;
             _phaseTime += dt;
-            foreach (var region in _regions)
+            if (_regionsAnimating || _regionsReduced != reduced)
             {
-                float t = Reduced ? 1 : Mathf.Clamp01((_phaseTime - (_leaving ? 0 : region.delay)) / (_leaving ? .18f : region.duration));
+              foreach (var region in _regions)
+              {
+                float t = reduced ? 1 : Mathf.Clamp01((_phaseTime - (_leaving ? 0 : region.delay)) / (_leaving ? .18f : region.duration));
                 float ease = Ease(t, _leaving ? .4f : .22f, _leaving ? 0 : 1, _leaving ? .7f : .36f, 1);
                 region.group.alpha = _leaving ? 1 - ease : ease;
                 Vector2 offset = _leaving ? region.id == _picked ? new Vector2(0, 4 * ease)
@@ -145,27 +154,42 @@ namespace Sdt.UI.Screens.Menu
                     : new Vector2((region.right ? 32 : -32) * (1 - ease), 0);
                 region.rect.anchoredPosition = region.position + offset;
                 region.rect.localScale=Vector3.one*(!_leaving?1:region.id==_picked?ease<.3f?Mathf.Lerp(1,.985f,ease/.3f):Mathf.Lerp(.985f,.99f,(ease-.3f)/.7f):region.id=="brand"||region.id=="footer"?1:Mathf.Lerp(1,.985f,ease));
+              }
+              _regionsAnimating = !reduced && _phaseTime < (_leaving ? .18f : _entryEnd);
+              _regionsReduced = reduced;
             }
             bool active = !covered && !_wallpaperOnly && !_leaving && Application.isFocused;
             if (active && !Reduced) _ambientTime += dt;
-            _ambient.Tick(_ambientTime, active && !Reduced);
-            Vector2 target = active && !Reduced ? new Vector2(Input.mousePosition.x / Mathf.Max(1, Screen.width) * 2 - 1,
+            if (!covered)
+            {
+              _ambient.Tick(_ambientTime, active && !reduced);
+              Vector2 target = active && !reduced ? new Vector2(Input.mousePosition.x / Mathf.Max(1, Screen.width) * 2 - 1,
                 Input.mousePosition.y / Mathf.Max(1, Screen.height) * 2 - 1) : Vector2.zero;
-            _pointer = Vector2.Lerp(_pointer, target, Mathf.Min(1, dt / .7f * 4));
-            _ambient.SetPointer(_pointer);
+              _pointer = Vector2.Lerp(_pointer, target, Mathf.Min(1, dt / .7f * 4));
+              _ambient.SetPointer(_pointer);
+            }
             float drift = Reduced || CurrentNativePerformance.Low || _wallpaperOnly ? 0 : Ease(Mathf.PingPong(_ambientTime / 48, 1), .42f, 0, .58f, 1);
             float zoom = Reduced || _wallpaperOnly ? 1 : Mathf.Lerp(1.03f, 1.045f, drift);
             DepartureTargets(_picked,out float dive,out float brightness,out float blur,out float gray,out float flash);
             bool depart=_leaving&&!Reduced;
-            _divePhase=Mathf.MoveTowards(_divePhase,depart?1:0,dt/(_picked=="btnTitleExit"?.7f:.9f));
-            _filterPhase=Mathf.MoveTowards(_filterPhase,depart?1:0,dt/(_picked=="btnTitleExit"?.22f:.7f));
-            _flashPhase=Mathf.MoveTowards(_flashPhase,depart?1:0,dt/.5f);
+            if(reduced)_divePhase=_filterPhase=_flashPhase=0;
+            else
+            {
+                _divePhase=Mathf.MoveTowards(_divePhase,depart?1:0,dt/(_picked=="btnTitleExit"?.7f:.9f));
+                _filterPhase=Mathf.MoveTowards(_filterPhase,depart?1:0,dt/(_picked=="btnTitleExit"?.22f:.7f));
+                _flashPhase=Mathf.MoveTowards(_flashPhase,depart?1:0,dt/.5f);
+            }
             float filterWeight=Ease(_filterPhase,.25f,.1f,.25f,1);
             foreach(var material in _sceneMaterials)if(material!=null){material.SetFloat("_Brightness",Mathf.Lerp(1,brightness,filterWeight));material.SetFloat("_Blur",blur*filterWeight);material.SetFloat("_Gray",gray*filterWeight);}
             _ambient.SetDeparture(_picked,flash*Ease(_flashPhase,.25f,.1f,.25f,1));
             Scene.localScale = Vector3.one * (zoom * Mathf.Lerp(1,dive,Ease(_divePhase,.22f,1,.36f,1)));
             Scene.anchoredPosition = new Vector2(-6 * _pointer.x - drift * 7.68f, -3 * _pointer.y + drift * 3.24f);
-            if (active && Clock != null) Clock.text = "LOCAL " + DateTime.Now.ToString("HH:mm:ss");
+            if (active && Clock != null)
+            {
+                var now = DateTime.Now;
+                long second = now.Ticks / TimeSpan.TicksPerSecond;
+                if (second != _clockSecond) { _clockSecond = second; Clock.text = "LOCAL " + now.ToString("HH:mm:ss"); }
+            }
         }
         static void DepartureTargets(string id,out float dive,out float brightness,out float blur,out float gray,out float flash)
         {
@@ -184,6 +208,8 @@ namespace Sdt.UI.Screens.Menu
         }
         internal static float Ease(float x, float x1, float y1, float x2, float y2)
         {
+            if (x <= 0) return 0;
+            if (x >= 1) return 1;
             float low = 0, high = 1, t = x;
             for (int i = 0; i < 10; i++)
             {

@@ -17,10 +17,12 @@ namespace Sdt.UI.Screens.Run
         CardDef _card;
         EventNarrative _narrative;
         bool _poolExhausted,_eventBusy,_diceRulesOpen=true;
-        string _node;int? _seed;
+        string _node;int? _seed,_slot;RunState _run;
         CurrentRewardScene _reward;
-        bool EventLive=>GameRuntime.I.State.runActive&&GameRuntime.I.State.seed==_seed&&GameRuntime.I.CurrentNodeId==_node&&UiStack.Top==this;
-        void Bind(){_node=GameRuntime.I.CurrentNodeId;_seed=GameRuntime.I.State.seed;}
+        bool EventSourceCurrent=>GameRuntime.I.State==_run&&_run.runActive&&!_run.battleActive&&_run.seed==_seed
+            &&GameRuntime.I.ActiveSlot==_slot&&GameRuntime.I.CurrentNodeId==_node;
+        bool EventLive=>EventSourceCurrent&&UiStack.Top==this&&!Sdt.UI.Screens.Menu.SuggestionBox.IsOpen;
+        void Bind(){var runtime=GameRuntime.I;_run=runtime.State;_node=runtime.CurrentNodeId;_seed=_run.seed;_slot=runtime.ActiveSlot;}
         void RunCurrent(Func<EventOutcome> command)
         {
             if(!EventLive||_eventBusy)return;_eventBusy=true;var runtime=GameRuntime.I;var state=runtime.State;int before=state.hp,maxBefore=state.maxHp,fragments=state.fragments;var parent=transform.parent;string node=_node,source=_card?.name;
@@ -37,14 +39,19 @@ namespace Sdt.UI.Screens.Run
         }
         public override void Build()
         {
+            if(!EventSourceCurrent||UiStack.Top!=this)return;
             var runtime=GameRuntime.I;
-            if(!_poolExhausted&&_card!=null){runtime.GetEventChoices(_card.id);_outcome=runtime.GetCurrentEventOutcome();}
+            if(!_poolExhausted&&_card!=null)
+            {
+                _outcome=runtime.GetCurrentEventOutcome();
+                if(_outcome==null){runtime.GetEventChoices(_card.id);_outcome=runtime.GetCurrentEventOutcome();}
+            }
             if(TryRenderRecodeResult())return;
             bool cards=_outcome?.CardIds!=null&&_outcome.CardIds.Count>0&&_outcome.CardKeys!=null;
             if(cards)
             {
                 if(_illustrated!=null)_illustrated.gameObject.SetActive(false);
-                if(_reward==null)_reward=CurrentRewardScene.Create(transform);_reward.gameObject.SetActive(true);_reward.OnResume=()=>{runtime.State.Phase="modal";Build();};
+                if(_reward==null)_reward=CurrentRewardScene.Create(transform);_reward.gameObject.SetActive(true);_reward.OnResume=()=>{if(EventLive){runtime.State.Phase="modal";Build();}};
                 BuildCardChoices();return;
             }
             if(_reward!=null)_reward.gameObject.SetActive(false);if(_illustrated!=null)_illustrated.gameObject.SetActive(true);base.Build();
@@ -59,7 +66,7 @@ namespace Sdt.UI.Screens.Run
             var items=new List<CurrentRewardItem>();
             for(int i=0;i<Math.Min(state.CardIds.Count,state.CardKeys.Count);i++)
             {
-                string key=state.CardKeys[i];var card=CardLibrary.FindById(state.CardIds[i]);if(card==null)continue;
+                string key=state.CardKeys[i];var card=state.CardFaces==null?CardLibrary.FindById(state.CardIds[i]):state.CardFaces[i];if(card==null)continue;
                 string route=runtime.CurrentNodeReceipt.eventProgress?.route;bool acquiring=state.Stage!="sources"&&route!="trade"&&route!="recode";
                 items.Add(new CurrentRewardItem{Key=key+":"+card.id,Card=card,Choice=true,ExplicitMode=false,Organize=_card.id=="ev19-potions"||_card.id=="ev19-quartermaster",Fits=!acquiring||card.id=="tt2-apollo"&&_card.id=="ev19-quartermaster"||runtime.CanReceiveCard(card),ClaimLabel=state.Need>1?(_eventSelection.Contains(key)?"✓ 已选择":"选择"):null,Claim=()=>
                 {

@@ -28,6 +28,7 @@ namespace Sdt.UI.Kit
             var bus=GameRuntime.I.Bus;bus.On<RunStarted>(_=>BindMap());bus.On<RunLoaded>(_=>BindMap());bus.On<NodeMovementCompleted>(_=>{ClearSelection();RefreshMap();});
             bus.On<ToastRequested>(message=>ShowMessage(message.Text,message.Tone=="warn"));bus.On<LogRequested>(message=>{if(!message.SuppressNotice&&message.Tone=="warn")ShowMessage(message.Text,true);});
             BoardViewHost.OnNodeClicked+=SelectOrMove;
+            UiStack.Changed+=SyncBoardVisibility;
             if(BoardViewHost.View!=null)BoardViewHost.View.InputBlocked=()=>UiStack.Blocked||CurrentRunFilm.Active||CurrentInputBindings.SuppressGameplayInput||EventSystem.current!=null&&EventSystem.current.IsPointerOverGameObject();
         }
         void BindMap()
@@ -82,7 +83,8 @@ namespace Sdt.UI.Kit
             _tools.Refresh(visible);
 
         }
-        void OnDestroy(){BoardViewHost.OnNodeClicked-=SelectOrMove;if(Current==this)Current=null;}
+        static void SyncBoardVisibility()=>BoardViewHost.View?.SetPresentationVisible(!UiStack.CoversBoard);
+        void OnDestroy(){BoardViewHost.OnNodeClicked-=SelectOrMove;UiStack.Changed-=SyncBoardVisibility;if(Current==this)Current=null;}
     }
 }
 

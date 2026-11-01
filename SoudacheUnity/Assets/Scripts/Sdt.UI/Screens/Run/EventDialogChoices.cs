@@ -21,8 +21,6 @@ namespace Sdt.UI.Screens.Run
         bool RenderCurrentEvent()
         {
             var runtime = GameRuntime.I;
-            var choices = runtime.GetEventChoices(_card.id);
-            _outcome = runtime.GetCurrentEventOutcome();
             if (_outcome == null)
             {
                 if (EventDatabase.Find(_card.id) == null) return false;
@@ -74,9 +72,7 @@ namespace Sdt.UI.Screens.Run
                 else EventOptButton.Create(BodyRoot, "返回地图", "事件已结算", "", LeaveCurrentEvent);
                 return true;
             }
-            var shownChoices = _outcome.Choices != null && _outcome.Choices.Count > 0 ? _outcome.Choices
-                : _outcome.Stage == "choices" ? choices : new List<Sdt.Run.EventChoice>();
-            foreach (var choice in shownChoices)
+            foreach (var choice in _outcome.Choices)
             {
                 string key = choice.EffectKey;
                 string detail=choice.Detail;bool disabled=choice.Disabled;CardDef capacityCard=null;
@@ -97,7 +93,7 @@ namespace Sdt.UI.Screens.Run
 
         void AcceptEventOutcome(EventOutcome outcome)
         {
-            if (outcome == null) return;
+            if (!EventLive || outcome == null) return;
             bool changed = _outcome?.Stage != outcome.Stage;
             _outcome = outcome;
             _eventFeedback = outcome.Message;

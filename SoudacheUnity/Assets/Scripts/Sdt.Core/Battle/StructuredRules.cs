@@ -63,10 +63,12 @@ namespace Sdt.Core.Battle
         private readonly List<(Combatant foe, int amount)> attackReductions = new List<(Combatant,int)>();
         private readonly HashSet<string> skipInfusionCards = new HashSet<string>();
         private readonly HashSet<object> acquiringRuleCards = new HashSet<object>();
-        public bool RuleInputPending => ruleChoice != null || ruleHandSelection != null || discovering != null;
+        private bool RuleSelectionPending => ruleChoice != null || ruleHandSelection != null || discovering != null;
+        public bool RuleInputPending => RuleSelectionPending || pendingTarget?.Kind == "rulePick";
 
         private void InitializeStructuredBattle()
         {
+            ClearTurnOwner();ClearDrawnCasts();
             itemJobs.Clear();resolvingItemUid=null; preparedFighters=null; preparedFightersUid=null; deferredTargetAction=null; pendingFuel=null; pendingFuelUid=null; handPayment=null;
             registeredCards.Clear(); equippedCards.Clear(); equipmentUsed.Clear(); persistentRules.Clear(); ruleJobs.Clear();
             enemyMarks.Clear(); ruleAllies.Clear(); ruleContinuations.Clear(); growingCards.Clear(); castOnDraw.Clear(); timedRuleStatuses.Clear();
@@ -154,7 +156,7 @@ namespace Sdt.Core.Battle
         }
         public CommandResult UseEquipment(string uid)
         {
-            if (over || busy || RuleInputPending) return CommandResult.No("当前不能使用装备");
+            if (over || turnEndPending || busy || RuleInputPending) return CommandResult.No("当前不能使用装备");
             var entry = equippedCards.FirstOrDefault(item => item.uid == uid);
             var skill = entry?.card.rules?.Get("equip")?.Get("skill");
             if (skill == null || equipmentUsed.Contains(uid)) return CommandResult.No("装备技能不可用");
@@ -199,7 +201,7 @@ namespace Sdt.Core.Battle
         }
         private void ResumeRules()
         {
-            while (!RuleInputPending && ruleContinuations.Count > 0)
+            while (!over && !RuleInputPending && ruleContinuations.Count > 0)
             {
                 var index = ruleContinuations.Count - 1; var next = ruleContinuations[index]; ruleContinuations.RemoveAt(index); next();
             }
@@ -212,7 +214,7 @@ namespace Sdt.Core.Battle
         private void ResolveRuleOutcome()
         {
             if (over) return;
-            if (G.Hp <= 0) Finish(false); else if (Alive().Count == 0) Finish(true);
+            if (G.Hp <= 0) Finish(false); else if (!foes.Exists(foe=>!foe.dead)) Finish(true);
         }
         private void BeginRuleCast(CardDef card, BattleFoe target, List<string> fuel)
         {
@@ -320,13 +322,24 @@ namespace Sdt.Core.Battle
         private void FireStructuredTrigger(string trigger, BattleFoe target = null)
         {
             if (pstat.status.silence > 0) return;
-            foreach (var registered in registeredCards.ToArray())
+            RunRegisteredTriggers(registeredCards.ToArray(),trigger,target);
+        }
+        private void RunRegisteredTriggers(RuleRegistration[] entries,string trigger,BattleFoe target,int index=0)
+        {
+            for(int i=index;i<entries.Length&&!over;i++)
             {
+                var registered=entries[i];
                 if (registered.left == 0) continue;
                 var ops = registered.card.rules?.Get("triggers")?.Operations(trigger).ToArray();
                 if (ops == null || ops.Length == 0) continue;
+                int continuationBase=ruleContinuations.Count;
                 RunRuleOps(registered.card, ops, target ?? Alive().FirstOrDefault());
                 if (registered.left > 0) registered.left--;
+                if(over)return;
+                if(RuleInputPending)
+                {
+                    int next=i+1;DeferRuleBatch(continuationBase,()=>RunRegisteredTriggers(entries,trigger,target,next));return;
+                }
             }
         }
         private bool Condition(RuleValue condition, BattleFoe target)
@@ -763,14 +776,40 @@ namespace Sdt.Core.Battle
                 if (!hand.Contains(uids[i])) continue;
                 int continuationBase = ruleContinuations.Count;
                 CastRuleHandCard(uids[i], target); count++;
+                if (over) return;
+                int next = i + 1, completed = count;
                 if (RuleInputPending)
                 {
-                    int next = i + 1, completed = count; var context = castContext;
-                    ruleContinuations.Insert(continuationBase, () => { var previous = castContext; castContext = context; DrawCards(drawEach); CastRuleHandBatch(uids, target, drawEach, max, next, completed); castContext = previous; });
+                    DeferRuleBatch(continuationBase, () => ContinueRuleHandBatch(uids, target, drawEach, max, next, completed));
                     return;
                 }
+                continuationBase = ruleContinuations.Count;
                 DrawCards(drawEach);
+                if (over) return;
+                if (RuleInputPending)
+                {
+                    DeferRuleBatch(continuationBase, () => CastRuleHandBatch(uids, target, drawEach, max, next, completed));
+                    return;
+                }
             }
+        }
+        private void ContinueRuleHandBatch(string[] uids, BattleFoe target, int drawEach, int max, int index, int count)
+        {
+            int continuationBase = ruleContinuations.Count;
+            DrawCards(drawEach);
+            if (over) return;
+            if (RuleInputPending) DeferRuleBatch(continuationBase, () => CastRuleHandBatch(uids, target, drawEach, max, index, count));
+            else CastRuleHandBatch(uids, target, drawEach, max, index, count);
+        }
+        private void DeferRuleBatch(int index, Action action)
+        {
+            var context = castContext;string token=_battleToken;
+            ruleContinuations.Insert(index, () =>
+            {
+                if(over||_battleToken!=token)return;
+                var previous = castContext; castContext = context;
+                try { action(); } finally { castContext = previous; }
+            });
         }
         private void CastRuleGeneratedBatch(Func<CardDef> nextCard, int remaining, BattleFoe target, bool infused)
         {
@@ -779,9 +818,10 @@ namespace Sdt.Core.Battle
                 var card = nextCard(); if (card == null) return;
                 int continuationBase = ruleContinuations.Count;
                 CastRuleCard(card, target, infused); remaining--;
+                if (over) return;
                 if (!RuleInputPending) continue;
-                int left = remaining; var context = castContext;
-                ruleContinuations.Insert(continuationBase, () => { var previous = castContext; castContext = context; CastRuleGeneratedBatch(nextCard, left, target, infused); castContext = previous; });
+                int left = remaining;
+                DeferRuleBatch(continuationBase, () => CastRuleGeneratedBatch(nextCard, left, target, infused));
                 return;
             }
         }
@@ -813,11 +853,11 @@ namespace Sdt.Core.Battle
             }
         }
         private readonly Dictionary<string, int> costDecayCards = new Dictionary<string, int>();
-        private void OnStructuredDraw(string uid)
+        private void OnStructuredDraw(string uid,int continuationBase)
         {
             var card = FindCard(uid)?.card; if (card == null) return;
             castContext?.drawn.Add(uid);
-            if (castOnDraw.Remove(uid)) CastRuleHandCard(uid, Alive().FirstOrDefault(), false);
+            if (castOnDraw.Remove(uid)) QueueDrawnCast(uid,card,continuationBase);
             else
             {
                 bool triggered = card.rules?.Get("triggers")?.Operations("onDraw").Any() == true;
@@ -828,8 +868,9 @@ namespace Sdt.Core.Battle
         }
         private void DrawFiltered(int n, string type)
         {
+            int continuationBase=ruleContinuations.Count;string token=_battleToken;
             for (int i = drawPile.Count - 1; i >= 0 && n > 0 && (mode!="boss"||hand.Count < GameRules.BattleHandMax); i--)
-                if (FindCard(drawPile[i])?.card.type == type) { var uid = drawPile[i]; drawPile.RemoveAt(i); hand.Add(uid); n--; OnStructuredDraw(uid); }
+                if (!over&&_battleToken==token&&FindCard(drawPile[i])?.card.type == type) { var uid = drawPile[i]; drawPile.RemoveAt(i); hand.Add(uid); n--; OnStructuredDraw(uid,continuationBase); }
         }
         private void AdvanceStructuredTurn()
         {
@@ -847,28 +888,47 @@ namespace Sdt.Core.Battle
                 var growth=Regex.Match(card.desc??"",@"回合开始时[，,]?\s*本牌伤害\s*\+\s*(\d+)");
                 if(growth.Success){var changed=card.Clone();changed.dmg=(card.dmg??0)+int.Parse(growth.Groups[1].Value);cardOverrides[uid]=changed;}
             }
-            foreach (var job in ruleJobs.Where(job => job.turn <= turn).ToArray())
+            RunTurnStartJobs(ruleJobs.Where(job=>job.turn<=turn).ToArray());
+        }
+        private void RunTurnStartJobs(RuleJob[] jobs,int index=0)
+        {
+            for(int i=index;i<jobs.Length&&!over;i++)
             {
+                var job=jobs[i];
                 // Source retains repeat jobs at their registration position relative to delayed jobs.
                 if (job.repeat) job.turn = turn + 1; else ruleJobs.Remove(job);
+                int continuationBase=ruleContinuations.Count;
                 RunRuleOps(job.card, job.operations, job.target?.dead == true ? Alive().FirstOrDefault() : job.target);
+                if(over)return;
+                if(RuleInputPending)
+                {
+                    int next=i+1;DeferRuleBatch(continuationBase,()=>RunTurnStartJobs(jobs,next));return;
+                }
             }
+            if(over)return;
+            int triggerBase=ruleContinuations.Count;
             FireStructuredTrigger("onTurnStart");
-            AdvanceBattleItems();
+            if(RuleInputPending)DeferRuleBatch(triggerBase,AdvanceBattleItems);else if(!over)AdvanceBattleItems();
         }
         private void OnStructuredPlayerDamaged(BattleFoe attacker, int damage)
         {
             if (damage <= 0 || G.Hp<=0) return;
-            foreach (var entry in equippedCards.ToArray())
+            int continuationBase=ruleContinuations.Count;string token=_battleToken;drawnCastHold++;
+            try
             {
-                var response = entry.card.rules?.Get("equip")?.Get("passive")?.Get("damageResponse");
-                if (response == null) continue;
-                var targets=Alive();
-                if(targets.Count>0) ApplyRuleRawHit(entry.card, targets[(int)(rng.Random("battle","target")*targets.Count)], response.Number("damage"), CombatResolver.FIXED, false, true);
-                if(over) return;
-                double chance = response.Value("drawChance") is double fraction ? fraction : 0;
-                if (rng.Random("battle","generation") < chance) DrawCards(response.Number("draw", 1));
+                foreach (var entry in equippedCards.ToArray())
+                {
+                    var response = entry.card.rules?.Get("equip")?.Get("passive")?.Get("damageResponse");
+                    if (response == null) continue;
+                    var targets=Alive();
+                    if(targets.Count>0) ApplyRuleRawHit(entry.card, targets[(int)(rng.Random("battle","target")*targets.Count)], response.Number("damage"), CombatResolver.FIXED, false, true);
+                    if(over||_battleToken!=token) return;
+                    double chance = response.Value("drawChance") is double fraction ? fraction : 0;
+                    if (rng.Random("battle","generation") < chance) DrawCards(response.Number("draw", 1));
+                }
             }
+            finally{if(!over&&_battleToken==token)drawnCastHold--;}
+            if(!over&&_battleToken==token)DrainDrawnCasts(continuationBase);
         }
         private bool TryBlockPlayerFatalDamage(int damage)
         {
@@ -1063,7 +1123,7 @@ namespace Sdt.Core.Battle
         }
         public CommandResult UseHeroSkill(int targetIndex = -1)
         {
-            if (over || busy || RuleInputPending || selectingDeck || infusing != null) return CommandResult.No("当前不能使用职业技能");
+            if (over || turnEndPending || busy || RuleInputPending || selectingDeck || infusing != null) return CommandResult.No("当前不能使用职业技能");
             var skill = CurrentHeroSkill();
             if (skill.used) return CommandResult.No("本回合技能已使用");
             if (energy < skill.cost) return CommandResult.No("能量不足");

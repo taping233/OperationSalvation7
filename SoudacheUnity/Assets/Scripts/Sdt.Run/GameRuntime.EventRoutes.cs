@@ -97,10 +97,12 @@ namespace Sdt.Run
             BeginEventDie(p,p.attempts>=5?new List<RuleValue>{RuleValue.Obj("label","第 5 次保底：拿走三张卡","gambleWin",true)}
                 :new List<RuleValue>{RuleValue.Obj("label","本次落空","gambleWin",false),RuleValue.Obj("label","拿走三张卡","gambleWin",true)});
         }
+        string EventRestoreKey(PocketStack stack,int index)=>SaveJson.Stringify(new object[]{ActiveSlot,State.seed,CurrentNodeId,index,stack.count,stack.card.id,stack.card.variantKey??"",stack.card.name,stack.card.type});
         public EventOutcome SubmitEventSelection(List<string> keys)
         {
             return EventMutation(()=>{
-                var p=CurrentEvent;if(p==null||p.settled||keys==null||keys.Count!=p.need||keys.Distinct().Count()!=keys.Count||keys.Any(k=>!p.cardKeys.Contains(k)))throw new InvalidOperationException("请选择要求数量的当前卡牌");
+                var p=CurrentEvent;if(p==null||p.settled||keys==null||keys.Count!=p.need||keys.Distinct().Count()!=keys.Count
+                    ||p.stage!="restore"&&keys.Any(k=>!p.cardKeys.Contains(k)))throw new InvalidOperationException("请选择要求数量的当前卡牌");
                 if(p.stage=="sources"){
                     var entries=keys.Select(uid=>State.ownedCards.FirstOrDefault(e=>e.uid==uid)).ToList();var eligible=EventRecodeSources(p.route);
                     if(entries.Any(e=>e==null||!eligible.Contains(e)))throw new InvalidOperationException("原卡已变化，请重新选择");
@@ -110,7 +112,12 @@ namespace Sdt.Run
                     BeginEventDraw(p,pools,new List<RuleValue>{RuleValue.Obj("op","routeDrawn")},p.route!="recodeTwo");return;
                 }
                 if(p.stage=="restore"){
-                    var stack=State.usedPocket.FirstOrDefault(s=>s.card.id==keys[0]&&s.count>0&&FireRestorable(s.card));
+                    PocketStack stack=null;
+                    for(int i=0;i<State.usedPocket.Count;i++)
+                    {
+                        var candidate=State.usedPocket[i];
+                        if(candidate.count>0&&FireRestorable(candidate.card)&&EventRestoreKey(candidate,i)==keys[0]){stack=candidate;break;}
+                    }
                     if(stack==null||!GrantCard(stack.card))throw new InvalidOperationException("卡牌已变化或背包需腾位");
                     stack.count--;if(stack.count==0)State.usedPocket.Remove(stack);RunEventOperations(p);return;
                 }

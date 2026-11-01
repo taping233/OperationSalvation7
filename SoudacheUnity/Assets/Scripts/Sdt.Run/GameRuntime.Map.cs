@@ -140,14 +140,37 @@ namespace Sdt.Run
             reason=null;var supply=State.entrySupply;
             if(!State.runActive||State.battleActive||supply==null||index<0||index>=supply.cardIds.Count||supply.taken.Contains(index)){reason="该补给已领取或不可用";return false;}
             var card=CardLibrary.FindById(supply.cardIds[index]);if(card==null){reason="补给卡牌不存在";return false;}
-            return TryPersistMutation(()=>{if(!GrantCard(card,true))throw new InvalidOperationException("背包需腾位");supply.taken.Add(index);if(State.classCard==null)State.classCard=State.ownedCards[State.ownedCards.Count-1].card;},out reason);
+            return TryPersistMutation(()=>{if(!GrantCard(card,true))throw new InvalidOperationException("背包需腾位");RecordEntrySupplyClaim(supply,index);},out reason);
+        }
+        void RecordEntrySupplyClaim(EntrySupplyReceipt supply,int index)
+        {
+            supply.taken.Add(index);
+            if(State.classCard==null)State.classCard=State.ownedCards[State.ownedCards.Count-1].card;
+        }
+        public bool ClaimAllEntrySupply(out string reason)
+        {
+            reason=null;var supply=State.entrySupply;
+            if(!State.runActive||State.battleActive||supply==null||EntrySupplyComplete){reason="该补给已领取或不可用";return false;}
+            return TryPersistMutation(()=>
+            {
+                int received=0;
+                for(int i=0;i<supply.cardIds.Count;i++)
+                {
+                    if(supply.taken.Contains(i))continue;
+                    var card=CardLibrary.FindById(supply.cardIds[i]);
+                    if(card==null||!CanReceiveCard(card))continue;
+                    if(!GrantCard(card,true))throw new InvalidOperationException("当前补给无法领取，请重试");
+                    RecordEntrySupplyClaim(supply,i);received++;
+                }
+                if(received==0)throw new InvalidOperationException("当前放不下，请整理背包后重试；补给已保留。");
+            },out reason);
         }
         void ReserveResourceReward(NodeVisitReceipt receipt)
         {
             if(receipt.rewardCardIds!=null)return;receipt.rewardCardIds=new List<string>();var names=new HashSet<string>();
+            var pool=CardLibrary.All().Where(c=>c.type=="资源"&&CardLibrary.IsRandomObtainable(c)).ToList();
             for(int i=0;i<2;i++){
-                var pool=CardDatabase.All.Where(c=>c.type=="资源"&&CardLibrary.IsRandomObtainable(c)&&!names.Contains(c.name)).ToList();
-                var tiers=CardLibrary.DropWeights.Select(kv=>(cards:pool.Where(c=>c.rarity==kv.Key).ToList(),weight:kv.Value*(State.mode=="elite"&&kv.Key!="古朴"?1.2:1))).Where(t=>t.cards.Count>0&&t.weight>0).ToList();
+                var tiers=CardLibrary.DropWeights.Select(kv=>(cards:pool.Where(c=>c.rarity==kv.Key&&!names.Contains(c.name)).ToList(),weight:kv.Value*(State.mode=="elite"&&kv.Key!="古朴"?1.2:1))).Where(t=>t.cards.Count>0&&t.weight>0).ToList();
                 if(tiers.Count==0)break;double roll=Rng.Random("loot","reward")*tiers.Sum(t=>t.weight);var selected=tiers[tiers.Count-1];foreach(var tier in tiers){roll-=tier.weight;if(roll<=0){selected=tier;break;}}
                 var card=selected.cards[(int)(Rng.Random("loot","reward")*selected.cards.Count)];receipt.rewardCardIds.Add(card.id);names.Add(card.name);
             }

@@ -18,6 +18,7 @@ namespace Sdt.Core.Battle
     public sealed partial class BattleSnapshot
     {
         public string Phase, BattleToken;
+        public bool TurnEndPending;
         public IReadOnlyList<string> ConsumedPile;
         public EndTurnContextSnapshot EndTurnContext;
         public BattleTurnForecastResult Forecast;

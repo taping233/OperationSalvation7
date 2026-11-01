@@ -14,11 +14,11 @@ namespace Sdt.UI.Screens.Run
     public sealed class CurrentShopCommission:MonoBehaviour
     {
         ShopScreen _owner;CurrentNodeScene _scene;Action _entered,_leave;Action _retry;
-        string _node,_phase,_diceNotice,_focusName;int? _seed;bool _started,_busy,_covered,_rules=true;Coroutine _arrival;
-        bool Live=>this!=null&&UiStack.Top==_owner&&!Sdt.UI.Screens.Menu.SuggestionBox.IsOpen&&GameRuntime.I.State.seed==_seed&&GameRuntime.I.CurrentNodeId==_node&&ShopScreen.CanOpen(GameRuntime.I);
+        string _phase,_diceNotice,_focusName;bool _started,_busy,_covered,_rules=true;Coroutine _arrival;
+        bool Live=>this!=null&&_owner!=null&&_owner.ShopActive;
         public static CurrentShopCommission Create(ShopScreen owner,Transform parent,Action entered,Action leave)
         {
-            var view=UIKit.GetOrAdd<CurrentShopCommission>(parent);view._owner=owner;view._entered=entered;view._leave=leave;view._node=GameRuntime.I.CurrentNodeId;view._seed=GameRuntime.I.State.seed;
+            var view=UIKit.GetOrAdd<CurrentShopCommission>(parent);view._owner=owner;view._entered=entered;view._leave=leave;
             view._scene=CurrentNodeScene.Create(parent,"scene-shop-bg");view._scene.UseCommissionLayout();view.Prepare();return view;
         }
         void Complete()
@@ -40,7 +40,7 @@ namespace Sdt.UI.Screens.Run
             label.verticalOverflow=VerticalWrapMode.Overflow;var fit=UIKit.GetOrAdd<ContentSizeFitter>(label);fit.verticalFit=ContentSizeFitter.FitMode.PreferredSize;return label;
         }
         Button Action(Transform parent,string name,string copy,Action run,bool primary=false)
-        {var button=CurrentNodeElements.Button(parent,copy,()=>{if(Live&&!_busy)run();},primary);button.name=name;var le=button.GetComponent<LayoutElement>();le.flexibleWidth=1;return button;}
+        {var button=CurrentNodeElements.Button(parent,copy,null,primary);button.name=name;UIKit.GetOrAdd<CurrentShopAction>(button).Bind(button,()=>Live&&!_busy,run);var le=button.GetComponent<LayoutElement>();le.flexibleWidth=1;return button;}
         void Heading(string title,string sub)
         {var heading=Copy("commission-heading",title,30,"#f2d394");heading.font=Sdt.Res.Res.SansBold;Copy("commission-sub",sub);Arrive(title);}
         void Render()
@@ -78,7 +78,7 @@ namespace Sdt.UI.Screens.Run
         }
         void Mutate(Func<EventOutcome> run)
         {
-            if(!Live||_busy)return;_busy=true;var outcome=run();_busy=false;
+            if(!Live||_busy)return;_busy=true;var outcome=run();_busy=false;if(!Live)return;
             if(outcome?.Stage=="commission-dice-save-failed"){_started=true;_diceNotice="保存未成功，请重试确认；本次结果不会改变。";Render();return;}
             if(outcome?.Stage=="commission-retry"||!GameRuntime.I.Saves.LastWriteSucceeded)
             {
@@ -89,7 +89,7 @@ namespace Sdt.UI.Screens.Run
         }
         void Roll(CurrentIllustratedDice die)
         {
-            if(!Live||_busy)return;_busy=true;var g=GameRuntime.I;var outcome=g.RollCommissionDice();var saved=g.CurrentCommissionDie;
+            if(!Live||_busy)return;_busy=true;var g=GameRuntime.I;var outcome=g.RollCommissionDice();var saved=g.CurrentCommissionDie;if(!Live){_busy=false;return;}
             if(outcome?.Stage=="commission-dice-save-failed"){_busy=false;_diceNotice="保存未成功，结果已保留在本局；请先重试保存。";Render();return;}
             if(outcome?.Stage=="commission-retry"||!g.Saves.LastWriteSucceeded||saved?.result.HasValue!=true){_busy=false;Failure(outcome?.Message??"本次骰子与凭据进度保留，请重试保存。",()=>Mutate(g.StartCommissionDice));return;}
             foreach(var button in _scene.GetComponentsInChildren<Button>())button.interactable=false;
@@ -97,13 +97,13 @@ namespace Sdt.UI.Screens.Run
         }
         void Announce()
         {
-            if(!Live||_busy)return;_busy=true;bool saved=GameRuntime.I.TryAnnounceShopCommission(out var reason);_busy=false;
+            if(!Live||_busy)return;_busy=true;bool saved=GameRuntime.I.TryAnnounceShopCommission(out var reason);_busy=false;if(!Live)return;
             if(!saved){Failure("免费商品已保留，确认保存未成功，请重试。\n"+reason,Render);return;}
             _entered?.Invoke();
         }
         public void RequestLeave()
         {
-            if(!Live||_busy)return;_busy=true;bool saved=GameRuntime.I.TryPersistMutation(()=>{},out var reason);_busy=false;
+            if(!Live||_busy)return;_busy=true;bool saved=GameRuntime.I.TryPersistMutation(()=>{},out var reason);_busy=false;if(!Live)return;
             if(!saved){Failure("保存未成功，仍保留在本页；请重试保存后离开。\n"+reason,RequestLeave);return;}_leave?.Invoke();
         }
         void Failure(string message,Action retry)

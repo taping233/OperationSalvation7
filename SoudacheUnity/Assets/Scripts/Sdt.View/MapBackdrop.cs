@@ -7,6 +7,7 @@ namespace Sdt.View
     {
         Camera _camera;SpriteRenderer _back,_environment;readonly SpriteRenderer[] _city=new SpriteRenderer[4];
         readonly Material[] _materials=new Material[3];int _layer=-1;float _zoom=1;
+        bool _layoutDirty=true;float _height,_width;
         static readonly float[] Brightness={.38f,.39f,.40f,.34f},Contrast={1.14f,1.12f,1.18f,1.20f},Saturation={.12f,.14f,.15f,.18f};
         static readonly Color[] Wash={new Color(1/255f,10/255f,17/255f,.21f),new Color(5/255f,16/255f,29/255f,.22f),new Color(5/255f,19/255f,19/255f,.23f),new Color(12/255f,6/255f,19/255f,.24f)};
         static readonly float[,,] Props={
@@ -43,7 +44,8 @@ namespace Sdt.View
         }
         public void SetLayer(int layer,float zoom)
         {
-            _zoom=zoom;layer=Mathf.Clamp(layer,0,3);if(_layer==layer)return;_layer=layer;
+            if(_zoom!=zoom){_zoom=zoom;_layoutDirty=true;}
+            layer=Mathf.Clamp(layer,0,3);if(_layer==layer)return;_layer=layer;_layoutDirty=true;
             if(_materials[0]!=null){_materials[0].SetFloat("_Brightness",Brightness[layer]);_materials[0].SetFloat("_Contrast",Contrast[layer]);_materials[0].SetFloat("_Saturation",Saturation[layer]);_materials[0].SetColor("_Wash",Wash[layer]);}
             for(int i=1;i<3;i++)if(_materials[i]!=null){_materials[i].SetFloat("_Brightness",layer==1?1.08f:layer==3?.88f:1);_materials[i].SetFloat("_Contrast",layer>=2?layer==3?1.18f:1.12f:1);_materials[i].SetFloat("_Saturation",layer==0?.65f:layer==1?.45f:.35f);}
             if(_materials[2]!=null)_materials[2].SetFloat("_FadeBottom",1);
@@ -52,8 +54,12 @@ namespace Sdt.View
         }
         void LateUpdate()
         {
-            if(_camera==null||_layer<0)return;transform.position=new Vector3(_camera.transform.position.x,_camera.transform.position.y,30);transform.rotation=_camera.transform.rotation;
+            if(_camera==null||_layer<0)return;
+            var cameraTransform=_camera.transform;var position=new Vector3(cameraTransform.position.x,cameraTransform.position.y,30);
+            if(transform.position!=position||transform.rotation!=cameraTransform.rotation)transform.SetPositionAndRotation(position,cameraTransform.rotation);
             float h=_camera.orthographicSize*2,w=h*_camera.aspect,s=Mathf.Min(w/1440,h/900);
+            if(!_layoutDirty&&h==_height&&w==_width)return;
+            _layoutDirty=false;_height=h;_width=w;
             if(_back?.sprite!=null){var b=_back.sprite.bounds.size;float scale=Mathf.Max(w/b.x,h/b.y);_back.transform.localScale=new Vector3(scale,scale,1);}
             for(int i=0;i<4;i++)if(_city[i]?.sprite!=null){float width=Props[_layer,i,4]*s;Place(_city[i],w*Props[_layer,i,2],h*Props[_layer,i,3],width,w,h);}
             if(_environment?.sprite!=null){float width=480*s*Mathf.Clamp(Mathf.Sqrt(Mathf.Max(.01f,_zoom)),.60f,1),inset=(480*s-width)/2;Place(_environment,w-475*s+inset,h*.15f+inset*.5f,width,w,h);}

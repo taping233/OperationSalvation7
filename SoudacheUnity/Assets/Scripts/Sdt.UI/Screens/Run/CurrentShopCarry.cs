@@ -8,14 +8,14 @@ namespace Sdt.UI.Screens.Run
 {
     public sealed class CurrentShopCarry:MonoBehaviour
     {
-        RectTransform _host,_card,_back;CanvasGroup _alpha;Func<RectTransform> _target;Panel _owner;
+        RectTransform _host,_card,_back;CanvasGroup _alpha;Func<RectTransform> _target;ShopScreen _owner;
         Vector2 _start,_size;float _time,_popTime;bool _mystery,_arrived;
         public static void Play(Transform parent,RectTransform source,Func<RectTransform> target,CardDef card,bool mystery)
         {
             if(CurrentUiPreferences.ReducedMotion||source==null||target?.Invoke()==null)return;
             var host=parent as RectTransform;var corners=new Vector3[4];source.GetWorldCorners(corners);var a=(Vector2)host.InverseTransformPoint(corners[0]);var b=(Vector2)host.InverseTransformPoint(corners[2]);
             var root=CurrentNodeElements.Rect(parent,"shop-purchase-carry");root.anchorMin=root.anchorMax=root.pivot=Vector2.one*.5f;root.sizeDelta=b-a;root.anchoredPosition=(a+b)*.5f;
-            var effect=UIKit.GetOrAdd<CurrentShopCarry>(root);effect._host=host;effect._owner=root.GetComponentInParent<Panel>();effect._target=target;effect._start=root.anchoredPosition;effect._size=b-a;effect._mystery=mystery;
+            var effect=UIKit.GetOrAdd<CurrentShopCarry>(root);effect._host=host;effect._owner=root.GetComponentInParent<ShopScreen>();effect._target=target;effect._start=root.anchoredPosition;effect._size=b-a;effect._mystery=mystery;
             effect._alpha=UIKit.GetOrAdd<CanvasGroup>(root);effect._alpha.blocksRaycasts=effect._alpha.interactable=false;
             effect._card=DepartureElements.Card(root,card,effect._size.x,"shop-carried-card",new CardFaceOptions{HideCost=false,ScrollDescription=false});effect._card.anchorMin=effect._card.anchorMax=effect._card.pivot=Vector2.one*.5f;effect._card.anchoredPosition=Vector2.zero;
             foreach(var child in effect._card.GetComponentsInChildren<Transform>())if(child.name=="value")child.gameObject.SetActive(false);
@@ -23,7 +23,7 @@ namespace Sdt.UI.Screens.Run
         }
         void Update()
         {
-            var target=_target?.Invoke();if(target==null||UiStack.Top!=_owner||CurrentUiPreferences.ReducedMotion){Destroy(gameObject);return;}
+            var target=_target?.Invoke();if(target==null||!target.gameObject.activeInHierarchy||_owner==null||!_owner.ShopActive||CurrentUiPreferences.ReducedMotion){Destroy(gameObject);return;}
             _time+=Time.unscaledDeltaTime;float delay=_mystery?.96f:0;
             if(_arrived){_popTime+=Time.unscaledDeltaTime;target.localScale=Vector3.one*(1+BagPop(_popTime));if(_popTime>=.42f){target.localScale=Vector3.one;Destroy(gameObject);}return;}
             if(_mystery&&_time<.24f){_back.localScale=new Vector3(Mathf.Max(0,1-_time/.24f),1,1);return;}

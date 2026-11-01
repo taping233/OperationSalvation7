@@ -24,6 +24,16 @@ namespace Sdt.UI.Kit
             return (UnityEngine.Object)component != null ? component : target.AddComponent<T>();
         }
         public static T GetOrAdd<T>(Component target) where T : Component => GetOrAdd<T>(target.gameObject);
+        public static void ClearChildren(Transform parent)
+        {
+            for (int i = parent.childCount - 1; i >= 0; i--)
+            {
+                var child = parent.GetChild(i).gameObject;
+                child.SetActive(false);
+                child.transform.SetParent(null, false);
+                UnityEngine.Object.Destroy(child);
+            }
+        }
         /// <summary>全屏 Panel（.pg / showOverlay 卡片本体），锚满 parent。</summary>
         public static GameObject Panel(string name, Transform parent)
         {

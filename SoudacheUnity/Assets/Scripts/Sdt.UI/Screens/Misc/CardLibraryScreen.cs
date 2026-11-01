@@ -21,6 +21,9 @@ namespace Sdt.UI.Screens.Misc
         static readonly Dictionary<string, BrowsePosition> History = new Dictionary<string, BrowsePosition>();
         sealed class BrowsePosition { public string Selected; public float Scroll; }
         readonly Dictionary<int, RectTransform> _mounted = new Dictionary<int, RectTransform>();
+        readonly List<int> _unmounted = new List<int>();
+        int _mountedFirst = -1, _mountedLast = -2;
+        float _mountedWidth, _mountedHeight;
         readonly List<Button> _tabs = new List<Button>();
         readonly List<RectTransform> _toolbarControls = new List<RectTransform>();
         List<CardDef> _catalog, _filtered;
@@ -123,8 +126,8 @@ namespace Sdt.UI.Screens.Misc
             BrowsePosition position = null; if (restore) History.TryGetValue(Context, out position);
             string id = reset ? null : position != null ? position.Selected : _selectedId;
             _selectedId = _filtered.Any(c => c.id == id) ? id : _filtered.FirstOrDefault()?.id;
-            foreach (Transform child in _content) { child.gameObject.SetActive(false); Destroy(child.gameObject); } _mounted.Clear();
-            foreach (Transform child in _chips) { child.gameObject.SetActive(false); Destroy(child.gameObject); }
+            UIKit.ClearChildren(_content); _mounted.Clear(); _mountedFirst = -1; _mountedLast = -2;
+            UIKit.ClearChildren(_chips);
             AddChip("rar", _rar, () => _rar = "全部"); AddChip("cls", _cls, () => _cls = "全部"); AddChip("q", _q, () => { _q = ""; _search.SetTextWithoutNotify(""); });
             _count.text = _filtered.Count == _catalog.Count ? "" : _filtered.Count + " 张";
             _toolbarControls[4].gameObject.SetActive(_tab != "全部" || _rar != "全部" || _cls != "全部" || !string.IsNullOrWhiteSpace(_q));
@@ -176,7 +179,7 @@ namespace Sdt.UI.Screens.Misc
             else if (active != null && active.GetComponent<PhotoStudioTile>() != null && direction != 0) Step(direction, true);
         }
         public override void CloseFromEscape() { if (_choice != null && _choice.IsOpen) _choice.Close(); else if (Input.compositionString.Length == 0) BeginClose(); }
-        void BeginClose() { if (_leaving) return; _leaving = true; Remember(); StartCoroutine(LeaveStudio()); }
+        void BeginClose() { if (this == null || _leaving || !isActiveAndEnabled || UiStack.Top != this) return; _leaving = true; Remember(); StartCoroutine(LeaveStudio()); }
         protected override void OnDestroy() { _choice?.Close(); if (ReferenceEquals(GameRuntime.I.State, _state) && GameRuntime.I.ActiveSlot == _slot && _state.Phase == "modal") _state.Phase = _previousPhase; }
         internal static void BuildRoom(RectTransform root, bool zoom)
         {

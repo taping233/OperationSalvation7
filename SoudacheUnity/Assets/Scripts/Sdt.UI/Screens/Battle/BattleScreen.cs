@@ -111,6 +111,7 @@ namespace Sdt.UI.Screens.Battle
             var snap = GameSnapshotRef.Current ?? s;
             if (PresentationBusy || snap.Busy || snap.over || snap.RuleChoice != null || snap.Discovering != null || UiStack.Top != this) return;
             if (snap.RuleHandSelection != null) { ToggleRuleMaterial(bc.Uid,snap,api); return; }
+            if(snap.TurnEndPending)return;
             if (snap.Infusing != null) { cmd.SelectInfusion(bc.Uid); return; }   // toggleInfusePick
             if (bc.Off) { cmd.SetPendingHint(api.UnplayableReason(api.FindCard(bc.Uid)?.Card) ?? "能量不足，暂时无法打出"); return; }
             if (bc.Side != null) { cmd.LockPendingTarget(bc.Uid); return; }     // play(uid) 对指向卡内定锁定

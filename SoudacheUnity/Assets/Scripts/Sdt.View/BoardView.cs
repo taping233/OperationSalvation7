@@ -36,11 +36,21 @@ namespace Sdt.View
         public BoardCamera Cam { get; private set; }
         internal Transform CamTransform;   // 由 Host 注入
         internal Camera UnityCam;
+        int _boardMask;
+        public bool PresentationVisible { get; private set; } = true;
+        public void SetPresentationVisible(bool visible)
+        {
+            if(PresentationVisible==visible)return;
+            PresentationVisible=visible;
+            if(UnityCam!=null)UnityCam.cullingMask=visible?_boardMask:0;
+            if(_backdrop!=null)_backdrop.enabled=visible;
+        }
 
         /// <summary>宿主注入相机 + 递归设置 Board layer。</summary>
         public void BindCamera(Transform camTransform, Camera cam)
         {
             CamTransform = camTransform; UnityCam = cam;
+            _boardMask=cam.cullingMask;cam.cullingMask=PresentationVisible?_boardMask:0;
             EnsureBackdrop();
         }
 
@@ -117,7 +127,7 @@ namespace Sdt.View
         readonly HashSet<string> _explored = new HashSet<string>(),_settled=new HashSet<string>(),_reachable=new HashSet<string>();
         MapBackdrop _backdrop;
         string _playerCharacter,_currentNode;
-        SpriteRenderer _playerIcon;
+        SpriteRenderer _playerIcon,_playerRipple;
         readonly Dictionary<LineRenderer,(string a,string b)> _roads = new Dictionary<LineRenderer,(string,string)>();
         public Func<bool> InputBlocked;
         // Injected by the UI composition root; View retains its Core/Res-only assembly boundary.
@@ -150,8 +160,8 @@ namespace Sdt.View
         {
             if(font!=LabelFont)return;MapTextAtlasRevision++;_textAtlasDirty=true;
         }
-        void BeforeMapRender(Camera camera){if(camera==UnityCam)RefreshMapTextMeshes();}
-        void LateUpdate(){RefreshMapTextMeshes();}
+        void BeforeMapRender(Camera camera){if(PresentationVisible&&camera==UnityCam)RefreshMapTextMeshes();}
+        void LateUpdate(){if(PresentationVisible)RefreshMapTextMeshes();}
 
         public void Initialize(BoardCamera cam)
         {
@@ -177,8 +187,8 @@ namespace Sdt.View
         public void Build(int seed) => Build(MapModel.Build(seed));
         public void Build(MapModel map)
         {
-            foreach(Transform c in transform)UnityEngine.Object.Destroy(c.gameObject);
-            _backdrop=null;_playerIcon=null;_playerCharacter=null;
+            foreach(Transform c in transform){c.gameObject.SetActive(false);UnityEngine.Object.Destroy(c.gameObject);}
+            _backdrop=null;_playerIcon=null;_playerRipple=null;_playerCharacter=null;
             _nodes.Clear();_mapTexts.Clear();_textAtlasDirty=true;_roads.Clear();_revealed.Clear();_map=map;
             foreach(var n in map.Nodes)CreateNode(n,n.layerIdx,n.idx,Vector2.zero);
             foreach(var n in map.Nodes)foreach(var edge in n.next){
@@ -191,7 +201,7 @@ namespace Sdt.View
         }
         void EnsureBackdrop()
         {
-            if(_backdrop!=null||UnityCam==null)return;var go=new GameObject("CurrentMapBackdrop");go.transform.SetParent(transform,false);_backdrop=go.AddComponent<MapBackdrop>();_backdrop.Initialize(UnityCam,gameObject.layer);
+            if(_backdrop!=null||UnityCam==null)return;var go=new GameObject("CurrentMapBackdrop");go.transform.SetParent(transform,false);_backdrop=go.AddComponent<MapBackdrop>();_backdrop.Initialize(UnityCam,gameObject.layer);_backdrop.enabled=PresentationVisible;
         }
         public void SetExploration(IEnumerable<string> revealed)
         {
@@ -319,8 +329,7 @@ namespace Sdt.View
             mark.transform.localScale = new Vector3(T0 * 1.32f, T0 * 1.32f, 1f); // markR = T0*0.66
             var markRing = MakeSprite(_player, BoardGfx.Ring(), "markRing", SortingPlayer, 1, Rgba(255, 132, 115, 0.95f));
             markRing.transform.localScale = new Vector3(T0 * 1.32f, T0 * 1.32f, 1f);
-            var ripple = MakeSprite(_player, BoardGfx.Ring(), "ripple", SortingPlayer, 1, Rgba(255, 132, 115, 0.35f));
-            ripple.name = "ripple";
+            _playerRipple = MakeSprite(_player, BoardGfx.Ring(), "ripple", SortingPlayer, 1, Rgba(255, 132, 115, 0.35f));
             var lm = new GameObject("Label") { transform = { parent = _player } };
             _playerLabel = lm.AddComponent<TextMesh>();
             _playerLabel.text = "你";
@@ -456,7 +465,7 @@ namespace Sdt.View
                 Cam.Clamp();
             }
 
-            AnimateBoard();
+            if(PresentationVisible)AnimateBoard();
 
             // 相机应用（含 Fx 震屏偏移）
             var so = Fx.GetShakeOffset();
@@ -543,7 +552,6 @@ namespace Sdt.View
                 if(!v.nameSized)v.nameSized=FitTextHeight(v.nameLabel,18);
                 bool cur = v.ring == _curLayer;
                 // 呼吸缩放 + 当前环悬浮
-                float r = v.radius * (1f + 0.045f * Mathf.Sin(t * 2.1f + v.phase));
                 if (v.icon != null)
                 {
                     FitNodeSprite(v.icon,v.node.type,(v.node.type=="blank"?18f:32f)*1.56f*(reduced?1:1f+.02f*Mathf.Sin(t*2.1f+v.phase)));
@@ -562,15 +570,14 @@ namespace Sdt.View
             _backdrop?.SetLayer(_curLayer,Cam.zoom);
             if(!_playerTextSized)_playerTextSized=FitTextHeight(_playerLabel,12);
             // 玩家涟漪（drawPlayer 外扩涟漪：markR*(1.15+pulse*0.35)）
-            var ripple = _player.Find("ripple");
-            if (ripple != null)
+            if (_playerRipple != null)
             {
                 float pulse = 0.5f + 0.5f * Mathf.Sin(t * 3.2f);
                 float d = T0 * 0.66f * (1.15f + pulse * 0.35f) * 2f;
-                ripple.localScale = new Vector3(d, d, 1f);
-                var rc = ripple.GetComponent<SpriteRenderer>().color;
+                _playerRipple.transform.localScale = new Vector3(d, d, 1f);
+                var rc = _playerRipple.color;
                 rc.a = 0.55f - pulse * 0.4f;
-                ripple.GetComponent<SpriteRenderer>().color = rc;
+                _playerRipple.color = rc;
             }
         }
 

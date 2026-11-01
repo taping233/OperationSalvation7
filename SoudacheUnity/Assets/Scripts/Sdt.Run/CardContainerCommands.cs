@@ -10,11 +10,41 @@ namespace Sdt.Run
     {
         public int used,ordinarySlots,resourceSlots,baseCap,resourceBonus,totalCap,safeUsed;
         public bool capacityOk=>ordinarySlots<=baseCap&&used<=totalCap;
+        public int ordinaryFree=>Math.Max(0,Math.Min(baseCap-ordinarySlots,totalCap-used));
+        public int resourceFree=>ordinarySlots>baseCap?0:Math.Max(0,totalCap-used);
+        public int SafeUsed=>safeUsed;
+        internal int safeCap;
+        internal Dictionary<(bool safe,string key),(int count,int cap,bool resource)> groups;
+
+        public bool CanTakeFromContainer(CardDef card,int count)
+        {
+            if(card==null||count<=0||groups==null)return false;
+            groups.TryGetValue((false,CardContainerCommands.Stable(card)),out var bag);
+            int cap=bag.cap>0?bag.cap:CardContainerCommands.StackCap(card);
+            int added=(bag.count+count+cap-1)/cap-(bag.count+cap-1)/cap;
+            bool resource=bag.cap>0?bag.resource:card.type=="资源";
+            return used+added<=totalCap&&ordinarySlots+(resource?0:added)<=baseCap;
+        }
+
+        // A render-local projection: reads the same groups as Query, without cloning cards.
+        public bool CanStore(CardDef card,int count,out int requiredSlots)
+        {
+            requiredSlots=0;
+            if(card==null||BaseData.IsSha(card)||count<=0||groups==null)return false;
+            string key=CardContainerCommands.Stable(card);
+            if(!groups.TryGetValue((false,key),out var bag)||count>bag.count)return false;
+            groups.TryGetValue((true,key),out var safe);
+            int cap=safe.cap>0?safe.cap:CardContainerCommands.StackCap(card);
+            requiredSlots=(safe.count+count+cap-1)/cap-(safe.count+cap-1)/cap;
+            int removed=(bag.count+bag.cap-1)/bag.cap-(bag.count-count+bag.cap-1)/bag.cap;
+            return safeUsed+requiredSlots<=safeCap&&used-removed<=totalCap
+                &&ordinarySlots-(bag.resource?0:removed)<=baseCap;
+        }
     }
     public static class CardContainerCommands
     {
         public const string PouchId="tt7-stratagem",PearlId="tt2-pearlbox";
-        static string Stable(CardDef card)=>!string.IsNullOrEmpty(card?.id)?"card:"+card.id+(string.IsNullOrEmpty(card.variantKey)?"":":"+card.variantKey):card?.name??"";
+        internal static string Stable(CardDef card)=>!string.IsNullOrEmpty(card?.id)?"card:"+card.id+(string.IsNullOrEmpty(card.variantKey)?"":":"+card.variantKey):card?.name??"";
         public static int StackCap(CardDef card)=>card?.type=="装备"?1:3;
         static (int slots,string accepts)? Rule(CardDef card)
         {
@@ -45,8 +75,9 @@ namespace Sdt.Run
                 group.count++;groups[key]=group;
             }
             foreach(var item in inventory??game.State.inventory)supplies+=(Math.Max(1,item.count)+2)/3;
-            int cap=game.Base.BagCap;return new BagCapacityQuery{used=slots+supplies,ordinarySlots=slots+supplies-resources,resourceSlots=resources,baseCap=cap,resourceBonus=bonus,totalCap=cap+bonus,safeUsed=safe};
+            int cap=game.Base.BagCap;return new BagCapacityQuery{used=slots+supplies,ordinarySlots=slots+supplies-resources,resourceSlots=resources,baseCap=cap,resourceBonus=bonus,totalCap=cap+bonus,safeUsed=safe,safeCap=game.SafeCap,groups=groups};
         }
+        public static BagCapacityQuery CreateSafeStoragePreview(GameRuntime game)=>Query(game);
         public static bool CanReceive(GameRuntime game,CardDef card,IEnumerable<OwnedCard> projection=null)
         {
             if(card==null)return false;var owned=projection??game.State.ownedCards;if(!(owned is ICollection<OwnedCard>))owned=owned.ToList();string key=Stable(card);int count=0;foreach(var entry in owned)if(Normal(entry)&&Stable(entry.card)==key)count++;
@@ -71,8 +102,9 @@ namespace Sdt.Run
                 var entries=take?StoredCards(game,kind).Where(o=>o.card.name==name).ToList():game.State.ownedCards.Where(o=>Normal(o)&&o.card.name==name).ToList();
                 // Both directions consume the observed UID set, including same-name variants.
                 if(observed!=null){
-                    if(observed.Count==0||observed.Distinct().Count()!=observed.Count)throw new InvalidOperationException("卡牌选择已变化");
-                    entries=entries.Where(o=>observed.Contains(o.uid)).ToList();
+                    var selected=new HashSet<string>(observed);
+                    if(observed.Count==0||selected.Count!=observed.Count)throw new InvalidOperationException("卡牌选择已变化");
+                    entries=entries.Where(o=>selected.Contains(o.uid)).ToList();
                     if(entries.Count!=observed.Count||entries.Select(o=>Stable(o.card)).Distinct().Count()!=1)throw new InvalidOperationException("卡牌已不在原位置");
                 }else if(entries.Count>0){
                     string stable=Stable(entries[0].card);entries=entries.Where(o=>Stable(o.card)==stable).ToList();
@@ -87,10 +119,9 @@ namespace Sdt.Run
                     if(StoredCards(game,kind).Count+entries.Count>capacity)throw new InvalidOperationException("容器放不下整叠，请先取出一些卡牌");
                 }
                 else{
-                    var projection=game.State.ownedCards.ToList();foreach(var entry in entries){
-                        var projected=projection.Select(o=>o==entry?new OwnedCard{uid=o.uid,card=o.card,safe=false,stored=false,pouchOf=null}:o).ToList();
-                        if(!Query(game,projected).capacityOk)throw new InvalidOperationException("背包放不下整叠；资源扩展格只能存放资源卡");projection=projected;
-                    }
+                    var selected=new HashSet<OwnedCard>(entries);
+                    var projected=game.State.ownedCards.Select(o=>selected.Contains(o)?new OwnedCard{uid=o.uid,card=o.card,safe=false,stored=false,pouchOf=null}:o);
+                    if(!Query(game,projected).capacityOk)throw new InvalidOperationException("背包放不下整叠；资源扩展格只能存放资源卡");
                 }
                 foreach(var entry in entries){entry.stored=!take;entry.pouchOf=take?null:kind=="pouch"?PouchId:null;}
             },out reason);

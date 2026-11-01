@@ -30,6 +30,7 @@ namespace Sdt.UI.Screens.Menu
     // ============================================================
     public sealed class SettingsScreen : Panel
     {
+        public override bool CoversBoard => true;
         CurrentSettingsPage _page;
         public override void Build()
         {

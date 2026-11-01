@@ -17,6 +17,7 @@ namespace Sdt.Core.Battle
         }
         void ApplyCurrentBossTurnStart()
         {
+            bool burned = false;
             foreach(var foe in foes.ToArray()){
                 if(foe.dead||foe.hp<=0||foe.status.silence>0||bossTriggeredTurns.TryGetValue(foe,out int last)&&last==turn)continue;
                 if(foe.behavior=="mutation_mother"&&new[]{2,4,6}.Contains(turn)){
@@ -37,8 +38,11 @@ namespace Sdt.Core.Battle
                 if(foe.behavior=="necromancer"&&new[]{3,6,9}.Contains(turn)){
                     bossTriggeredTurns[foe]=turn;int count=Math.Min(2,drawPile.Count);var torn=drawPile.GetRange(drawPile.Count-count,count);drawPile.RemoveRange(drawPile.Count-count,count);grave.AddRange(torn);
                     foe.status.necroticExposure=Math.Max(1,foe.status.necroticExposure)*2;
+                    burned |= count > 0;
+                    G.Log("[[icon:skull]] <b>死灵能力者</b>撕掉牌库顶 "+count+" 张牌；其最终承伤永久变为 ×"+foe.status.necroticExposure,"warn");
                 }
             }
+            if (burned) EmitSoundCue("burn");
         }
         void CleanseCurrentBlocker(BattleFoe foe)
         {

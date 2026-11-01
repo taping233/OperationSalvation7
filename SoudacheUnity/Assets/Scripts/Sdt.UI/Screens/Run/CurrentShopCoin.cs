@@ -1,5 +1,6 @@
 // game.run.shop.js coinIconHTML + expedition-shop.css .shop-coin-icon.
 using Sdt.UI.Kit;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,9 +23,11 @@ namespace Sdt.UI.Screens.Run
         internal sealed class Row
         {
             public readonly RectTransform Root;float _x;readonly float _height;
+            struct Part { public RectTransform item;public float width,height; }
+            readonly List<Part> _parts=new List<Part>();
             public Row(Transform parent,string name,float height)
             {Root=new GameObject(name,typeof(RectTransform)).GetComponent<RectTransform>();Root.SetParent(parent,false);_height=height;Root.sizeDelta=new Vector2(0,height);}
-            public void Space(float width){_x+=width;Root.sizeDelta=new Vector2(_x,_height);}
+            public void Space(float width){_parts.Add(new Part{width=width});_x+=width;Root.sizeDelta=new Vector2(_x,_height);}
             public void Coin(float size){Add(Icon(Root,size),size,size);}
             public Text Text(string name,string value,int size,string ink,bool bold=false,float lineHeight=1.4f)
             {
@@ -33,7 +36,11 @@ namespace Sdt.UI.Screens.Run
                 Add(label.rectTransform,Mathf.Ceil(label.preferredWidth),size*lineHeight);return label;
             }
             void Add(RectTransform item,float width,float height)
-            {item.anchorMin=item.anchorMax=new Vector2(0,.5f);item.pivot=new Vector2(0,.5f);item.anchoredPosition=new Vector2(_x,0);item.sizeDelta=new Vector2(width,height);Space(width);}
+            {item.anchorMin=item.anchorMax=new Vector2(0,.5f);item.pivot=new Vector2(0,.5f);item.anchoredPosition=new Vector2(_x,0);item.sizeDelta=new Vector2(width,height);_parts.Add(new Part{item=item,width=width,height=height});_x+=width;Root.sizeDelta=new Vector2(_x,_height);}
+            public void Relayout()
+            {
+                _x=0;foreach(var part in _parts){float width=part.width;if(part.item!=null){var text=part.item.GetComponent<Text>();if(text!=null)width=Mathf.Ceil(text.preferredWidth);part.item.anchoredPosition=new Vector2(_x,0);part.item.sizeDelta=new Vector2(width,part.height);}_x+=width;}Root.sizeDelta=new Vector2(_x,_height);
+            }
         }
 
         public static void Right(RectTransform row,float right,float y)

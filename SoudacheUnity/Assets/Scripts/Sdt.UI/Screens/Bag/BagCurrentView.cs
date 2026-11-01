@@ -78,12 +78,13 @@ namespace Sdt.UI.Screens.Bag
             var selected=EventSystem.current?.currentSelectedGameObject;
             float scroll=retain?_scroll.verticalNormalizedPosition:1;
             var query=CardContainerCommands.Query(GameRuntime.I);
-            int pk=_run.usedPocket.Sum(p=>p.count),bagN=CardStacks(_run,false).Sum(s=>s.count),safeN=CardStacks(_run,true).Sum(s=>s.count),supplyN=_run.inventory.Sum(i=>Math.Max(1,i.count));
+            var stacks=BuildCardStacks(_run);
+            int pk=_run.usedPocket.Sum(p=>p.count),bagN=stacks.bag.Sum(s=>s.count),safeN=stacks.safe.Sum(s=>s.count),supplyN=_run.inventory.Sum(i=>Math.Max(1,i.count));
             _title.text=Zone=="safe"?"安全格":Zone=="pocket"?"消耗区":"随身背包";
             int used=Zone=="safe"?query.safeUsed:Zone=="pocket"?pk:query.used,cap=Zone=="safe"?GameRuntime.I.SafeCap:query.totalCap;
             _capacity.text=Zone=="pocket"?"卡牌  <size=38><b>"+pk+"</b></size>  张 · 不限容量":"占格  <size=38><b>"+used+"</b></size> /"+cap+" 格";
             _counts.text=Zone=="pocket"?"":"卡牌 <b>"+(Zone=="safe"?safeN:bagN)+"</b> 张"+(Zone=="bag"&&supplyN>0?" · 散装物资 "+supplyN+" 件":"");
-            if(Zone=="bag"&&query.resourceBonus>0) _counts.text+="\n普通可用 "+Math.Max(0,query.baseCap-query.ordinarySlots)+" 格 · 资源可用 "+Math.Max(0,query.totalCap-query.used)+" 格 · 盒内 "+CardContainerCommands.StoredCards(GameRuntime.I,"pearl").Count+"/"+query.resourceBonus+" 张（不占格）";
+            if(Zone=="bag"&&query.resourceBonus>0) _counts.text+="\n普通可用 "+query.ordinaryFree+" 格 · 资源可用 "+query.resourceFree+" 格 · 盒内 "+CardContainerCommands.StoredCards(GameRuntime.I,"pearl").Count+"/"+query.resourceBonus+" 张（不占格）";
             _fill.transform.parent.gameObject.SetActive(Zone!="pocket"); _fill.rectTransform.anchorMax=new Vector2(Mathf.Clamp01((float)used/Math.Max(1,cap)),1);
             foreach(var pair in _railButtons)
             {
@@ -93,7 +94,7 @@ namespace Sdt.UI.Screens.Bag
             foreach(var pair in _filters)BagView.Selected(pair.Value,pair.Key==_filter);
             _tools.gameObject.SetActive(Zone=="bag"); _sort.interactable=_tidy.interactable=bagN+safeN>0;
             _receipt.text=_notice??"";_receipt.gameObject.SetActive(!string.IsNullOrEmpty(_notice));
-            var entries=VisibleEntries(); var retained=new HashSet<string>();
+            var entries=VisibleEntries(stacks.bag,stacks.safe); var retained=new HashSet<string>();
             foreach(var entry in entries)
             {
                 string key=entry.supply?entry.key:entry.pocketIndex>=0?entry.key:string.Join("|",entry.uids);
@@ -104,15 +105,15 @@ namespace Sdt.UI.Screens.Bag
             foreach(var pair in _cells.Where(p=>!retained.Contains(p.Key)).ToArray()) {pair.Value.gameObject.SetActive(false);Destroy(pair.Value.gameObject);_cells.Remove(pair.Key);}
             _empty.gameObject.SetActive(entries.Count==0);_empty.text=Zone=="bag"&&_filter!="all"?"暂无此类卡牌":"暂无物品";
             _showAll.gameObject.SetActive(entries.Count==0&&Zone=="bag"&&_filter!="all");
-            LayoutCurrent();Canvas.ForceUpdateCanvases();_scroll.verticalNormalizedPosition=scroll;
+            LayoutCurrent(query);Canvas.ForceUpdateCanvases();_scroll.verticalNormalizedPosition=scroll;
             if(selected!=null&&selected.activeInHierarchy)EventSystem.current?.SetSelectedGameObject(selected);
             else if(UiStack.Top==this&&selected!=null)EventSystem.current?.SetSelectedGameObject(_cells.Values.FirstOrDefault()?.gameObject??_railButtons[Zone].gameObject);
         }
-        void LayoutCurrent()
+        void LayoutCurrent(BagCapacityQuery query=null)
         {
             if(_col==null)return;
             var bounds=((RectTransform)transform).rect;_width=bounds.width>0?bounds.width:1920;_height=bounds.height>0?bounds.height:1080;
-            float colWidth=_width-204,headHeight=Zone=="bag"&&CardContainerCommands.Query(GameRuntime.I).resourceBonus>0?130:112,toolsHeight=Zone=="bag"?92:0;
+            float colWidth=_width-204,headHeight=Zone=="bag"&&(query??CardContainerCommands.Query(GameRuntime.I)).resourceBonus>0?130:112,toolsHeight=Zone=="bag"?92:0;
             BagView.Place(_head,0,0,colWidth,headHeight);BagView.Place(_title.rectTransform,0,16,400,58);
             BagView.Place(_capacity.rectTransform,Mathf.Max(400,colWidth-760),8,Mathf.Min(760,colWidth-400),48);BagView.Place(_counts.rectTransform,420,62,colWidth-420,headHeight-64);
             BagView.Place(_tools,0,headHeight,colWidth,92);BagView.Place((RectTransform)_sort.transform,colWidth-96,24,44,44);BagView.Place((RectTransform)_tidy.transform,colWidth-44,24,44,44);
@@ -146,6 +147,7 @@ namespace Sdt.UI.Screens.Bag
             var host=Rect("card-art",parent);var face=CardFace.Create(card,CardSize.Xl,host);var rt=(RectTransform)face.transform;rt.anchorMin=rt.anchorMax=new Vector2(.5f,.5f);rt.anchoredPosition=Vector2.zero;ScaleCard(rt,width);host.sizeDelta=new Vector2(width,width*1.5f);
             foreach(var graphic in host.GetComponentsInChildren<Graphic>())graphic.raycastTarget=false;return host.gameObject;
         }
+        internal static string CardFingerprint(CardDef card)=>string.Join("|",card?.id,card?.variantKey,card?.name,card?.cost,card?.art,card?.desc,card?.value,card?.type,card?.rarity);
         internal static void ScaleCard(Transform card,float width){var size=CardFace.SizeOf(CardSize.Xl);card.localScale=Vector3.one*(width/Mathf.Min(size.x,size.y*2f/3f));}
     }
 }

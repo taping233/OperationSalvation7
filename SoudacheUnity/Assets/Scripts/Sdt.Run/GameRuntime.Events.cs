@@ -12,6 +12,7 @@ namespace Sdt.Run
         public bool CanLeave;
         public int Need;
         public List<string> DiceLabels, CardIds, CardKeys, PreviewCardIds;
+        public IReadOnlyList<CardDef> CardFaces { get; internal set; }
         public List<EventChoice> Choices = new List<EventChoice>();
     }
     public sealed partial class GameRuntime
@@ -49,8 +50,21 @@ namespace Sdt.Run
                 if(die.result.HasValue){o.Message="掷出 "+die.result+" 点 · "+die.labels[(die.result.Value-1)*die.labels.Count/6];o.Choices.Add(new EventChoice{Label="确认结果，继续",EffectKey="__dice_continue",Tone="ok"});}
             }
             if(new[]{"sources","selection","rewards","restore","gamble","recodeConfirm"}.Contains(p.stage)){
-                o.CardIds=p.cardIds.Where((id,index)=>!p.taken.Contains(index)).ToList();
-                o.CardKeys=p.cardKeys.Where((id,index)=>!p.taken.Contains(index)).ToList();
+                if(p.stage=="restore")
+                {
+                    o.CardIds=new List<string>();o.CardKeys=new List<string>();var faces=new List<CardDef>();
+                    for(int i=0;i<State.usedPocket.Count;i++)
+                    {
+                        var stack=State.usedPocket[i];if(stack.count<=0||!FireRestorable(stack.card))continue;
+                        o.CardIds.Add(stack.card.id);o.CardKeys.Add(EventRestoreKey(stack,i));faces.Add(stack.card.Clone());
+                    }
+                    o.CardFaces=faces.AsReadOnly();
+                }
+                else
+                {
+                    o.CardIds=p.cardIds.Where((id,index)=>!p.taken.Contains(index)).ToList();
+                    o.CardKeys=p.cardKeys.Where((id,index)=>!p.taken.Contains(index)).ToList();
+                }
                 if(p.stage=="gamble"){
                     o.PreviewCardIds=p.cardIds.ToList();o.CardIds=null;o.CardKeys=null;
                     o.Message="每次 3 币，1～3 点落空，4～6 点拿走全部；第 5 次保底。已尝试 "+p.attempts+" 次。";
@@ -130,8 +144,8 @@ namespace Sdt.Run
                             .Select(e=>new MonsterDef{id=e.id,name=e.name,hp=e.hp,atk=e.atk,behavior=e.behavior}).ToList();
                         p.battleChests=p.eventId=="tt6-bandits"?new List<string>{"medium","medium"}:null;p.stage="battle";return;
                     case "restore":
-                        var restorables=State.usedPocket.Where(s=>s.count>0&&FireRestorable(s.card)).ToList();
-                        if(restorables.Count==0)break;p.cardIds=restorables.Select(s=>s.card.id).ToList();p.cardKeys=p.cardIds.ToList();p.stage="restore";p.need=1;return;
+                        if(!State.usedPocket.Any(s=>s.count>0&&FireRestorable(s.card)))break;
+                        p.cardIds.Clear();p.cardKeys.Clear();p.stage="restore";p.need=1;return;
                     case "dice":BeginEventDie(p,op.Operations("branches").Select(b=>RuleValue.Obj("label",b.Text("label"),"operations",b.Items("operations"))).ToList());return;
                     case "drawCards":
                         BeginEventDraw(p,op.Items("pools").OfType<object[]>().Select(a=>a.OfType<string>().ToList()).ToList(),op.Operations("after").ToList(),op.Flag("unique"));return;

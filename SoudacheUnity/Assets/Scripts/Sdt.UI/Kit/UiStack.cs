@@ -17,6 +17,7 @@ namespace Sdt.UI.Kit
     {
         public abstract void Build();
         public virtual bool CanCloseWithEscape => true;
+        public virtual bool CoversBoard => false;
         public virtual void CloseFromEscape() => UiStack.Close(this);
         internal virtual void OnClose() { }
         protected virtual void OnDestroy() { }
@@ -27,8 +28,7 @@ namespace Sdt.UI.Kit
         /// <summary>整块重建（innerHTML 重绘等价）。</summary>
         protected void Rebuild()
         {
-            for (int i = transform.childCount - 1; i >= 0; i--)
-                Destroy(transform.GetChild(i).gameObject);
+            UIKit.ClearChildren(transform);
             Build();
         }
     }
@@ -38,6 +38,7 @@ namespace Sdt.UI.Kit
     {
         static readonly List<Panel> _stack = new List<Panel>();
         static Transform _root;
+        public static event Action Changed;
 
         /// <summary>当前栈内面板名（诊断用，"a|b|c" 栈底到栈顶）。</summary>
         public static string Names()
@@ -50,6 +51,15 @@ namespace Sdt.UI.Kit
         public static int Count => _stack.Count;
         public static bool Blocked => _stack.Count > 0;
         public static Panel Top => _stack.Count > 0 ? _stack[_stack.Count - 1] : null;
+        public static bool CoversBoard
+        {
+            get
+            {
+                for (int i = _stack.Count - 1; i >= 0; i--)
+                    if (_stack[i] != null && _stack[i].isActiveAndEnabled && _stack[i].CoversBoard) return true;
+                return false;
+            }
+        }
         public static IReadOnlyList<Panel> CapturePanels() => _stack.ToArray();
         // Read-only synchronous scans need no snapshot allocation. Callers must not mutate the stack while scanning.
         public static Panel PanelAt(int index) => _stack[index];
@@ -92,6 +102,7 @@ namespace Sdt.UI.Kit
             _masks.Add(mask);
             p.transform.SetParent(_root, false);
             _stack.Add(p);
+            Changed?.Invoke();
             // Current prepared menu facades use the same brief entry on every visit.
             if (p is Screens.Menu.GuideScreen || p is Screens.Menu.SettingsScreen || p is Screens.Menu.SlotPickerScreen
                 || p is Screens.Run.ClassChoiceScreen || p is Screens.Menu.HomeInboxScreen)
@@ -104,15 +115,24 @@ namespace Sdt.UI.Kit
         public static void Close(Panel p)
         {
             if (p == null) return;
-            _stack.Remove(p);
+            if (!_stack.Remove(p)) return;
             for (int i = _masks.Count - 1; i >= 0; i--)
                 if (_masks[i].panel == p)
                 {
-                    if (_masks[i].mask != null) UnityEngine.Object.Destroy(_masks[i].mask);
+                    if (_masks[i].mask != null)
+                    {
+                        _masks[i].mask.SetActive(false);
+                        UnityEngine.Object.Destroy(_masks[i].mask);
+                    }
                     _masks.RemoveAt(i);
                 }
             try { p.OnClose(); } catch (Exception e) { Debug.LogException(e); }
-            if (p != null) UnityEngine.Object.Destroy(p.gameObject);
+            if (p != null)
+            {
+                p.gameObject.SetActive(false);
+                UnityEngine.Object.Destroy(p.gameObject);
+            }
+            Changed?.Invoke();
         }
 
         /// <summary>清空到根（回标题等整栈退出）。</summary>

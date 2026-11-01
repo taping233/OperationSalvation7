@@ -28,7 +28,8 @@ namespace Sdt.UI.Screens.Battle
         readonly Dictionary<string, UnitMount> _units = new Dictionary<string, UnitMount>();
         UnitMount _self;
         Vector2 _lastSize;
-        string _promptSignature, _equipmentSignature, _itemSignature, _ruleSignature;
+        string _promptSignature, _equipmentSignature, _itemSignature, _ruleChoiceToken;
+        RuleChoiceSnapshot _ruleChoiceOwner;
         readonly List<string> _battleLog = new List<string>();
         static WeakReference<BattleScreen> _logOwner;
         static bool _logInstalled;
@@ -118,7 +119,8 @@ namespace Sdt.UI.Screens.Battle
         {
             SyncMaterialDraft(s);
             bool enemy = s.Phase == "enemy";
-            _encounter.text = (enemy ? "敌方行动" : s.PendingTarget != null ? "选择目标" : s.Busy ? "结算中…" : "你的回合") + "     回合 " + s.Turn;
+            bool waiting=s.TurnEndPending&&(s.RuleChoice!=null||s.RuleHandSelection!=null||s.Discovering!=null||s.PendingTarget?.Kind=="rulePick");
+            _encounter.text = (waiting ? "正在结束回合 · 等待选择" : enemy ? "敌方行动" : s.PendingTarget != null ? "选择目标" : s.Busy ? "结算中…" : "你的回合") + "     回合 " + s.Turn;
             _energyText.text = s.Energy + "<size=20>/" + s.MaxEnergy + "</size>";
             bool locked = InputLocked(s);
             bool infusion = s.Infusing != null;
@@ -141,7 +143,7 @@ namespace Sdt.UI.Screens.Battle
             _consumed.GetComponentInChildren<Text>().text = "[[icon:cards]] 消耗牌堆  " + ConsumedUids(s).Count;
             _draw.interactable = _consumed.interactable = !locked;
             _endTurn.interactable = !locked && s.Phase == "player";
-            _endTurn.GetComponentInChildren<Text>().text = enemy ? "敌方行动中" : s.Busy ? "结算中…" : s.Phase != "player" ? "请完成当前选择" : "结束回合";
+            _endTurn.GetComponentInChildren<Text>().text = waiting ? "等待当前选择" : enemy ? "敌方行动中" : s.Busy ? "结算中…" : s.Phase != "player" ? "请完成当前选择" : "结束回合";
             _emptyHand.gameObject.SetActive(_cards.Count == 0);
             _emptyHand.text = s.Mode == "boss" ? "当前栏没有手牌；结束回合后按抽牌规则补充。" : "当前栏没有可用手牌";
             // A shared Core forecast may supply exact cloned-state values. The adapter never sums raw attack into a false HP prediction.
@@ -151,7 +153,7 @@ namespace Sdt.UI.Screens.Battle
             _hand.anchoredPosition = new Vector2(_hand.anchoredPosition.x, infusion ? 366 : enemy ? 302 : 392);
             RefreshGeometry(s);
         }
-        bool InputLocked(BattleSnapshot s) => PresentationBusy || s == null || s.over || s.Busy || s.Phase == "enemy" || s.Infusing != null || s.RuleChoice != null || s.RuleHandSelection != null || s.DeckSelection != null || s.Discovering != null || s.ViewingGrave;
+        bool InputLocked(BattleSnapshot s) => PresentationBusy || s == null || s.over || s.Busy || s.TurnEndPending || s.Phase == "enemy" || s.Infusing != null || s.RuleChoice != null || s.RuleHandSelection != null || s.DeckSelection != null || s.Discovering != null || s.ViewingGrave;
         public static void OpenBattleSettings()
         {
             if (_logOwner != null && _logOwner.TryGetTarget(out var screen) && screen != null && UiStack.Top == screen)
@@ -324,7 +326,7 @@ namespace Sdt.UI.Screens.Battle
             SyncHandSelection(s,api,cmd);
             SyncInfusionWorkspace(s, api, cmd);
             if (s.Infusing != null || s.RuleHandSelection != null) { _promptSignature = null; _prompt.gameObject.SetActive(false); return; }
-            string signature = s.PendingTarget != null ? "target:" + s.PendingTarget.Uid + s.PendingHint : _skillTargeting ? "skill" : _itemTargetUid ?? "";
+            string signature = s.PendingTarget != null ? "target:" + s.BattleToken + ":" + s.PendingTarget.Uid + ":" + s.PendingTarget.Kind + ":" + s.PendingTarget.SelectionId + s.PendingHint : _skillTargeting ? "skill" : _itemTargetUid ?? "";
             if (_promptSignature == signature) return; _promptSignature = signature; ClearRegion(_prompt);
             _prompt.gameObject.SetActive(signature.Length > 0); if (signature.Length == 0) return;
             var image = Sdt.UI.Kit.UIKit.GetOrAdd<Image>(_prompt); image.color = BtColors.HexA("#1A2D3B", .94f);
@@ -335,7 +337,14 @@ namespace Sdt.UI.Screens.Battle
                 : s.PendingTarget != null ? "已拿起【" + s.PendingTarget.Card.name + "】 · 点击合法目标或拖向目标\n" + s.PendingHint
                 : _skillTargeting ? "职业技能 · 请选择敌人" : "道具 · 请选择敌人";
             var copy = UIKit.Label(_prompt, text, 22, BtColors.Hex("#E0E9EE")); copy.gameObject.AddComponent<LayoutElement>().flexibleWidth = 1;
-            BtBtn.Mini(_prompt, "取消 Esc", () => { _skillTargeting = false; _itemTargetUid = null; cmd.CancelPendingTarget(); BuildStage(GameSnapshotRef.Current); });
+            BtBtn.Mini(_prompt, "取消 Esc", () =>
+            {
+                var current = GameSnapshotRef.Current;
+                if (current == null || current.Over || current.BattleToken != s.BattleToken) return;
+                var owner = s.PendingTarget; var active = current.PendingTarget;
+                if (owner == null ? active != null : active == null || active.Uid != owner.Uid || active.Kind != owner.Kind || active.SelectionId != owner.SelectionId) return;
+                _skillTargeting = false; _itemTargetUid = null; cmd.CancelPendingTarget(); BuildStage(GameSnapshotRef.Current);
+            });
         }
         void SyncInfusionWorkspace(BattleSnapshot s, IBattleViewApi api, IBattleCommands cmd)
         {

@@ -39,7 +39,7 @@ namespace Sdt.Core
         }
 
         /// <summary>恢复出厂等场景清空内存缓存（存档键由调用方自行删除）。</summary>
-        public static void ResetCustomsCache() { _customs = null; }
+        public static void ResetCustomsCache() { _customs = null;InvalidateMerged(); }
 
         /// <summary>cards.js upsert：无 id 生成 id，按 id 替换或追加，随后落盘。返回带 id 的卡。</summary>
         public static CardDef Upsert(CardDef card)
@@ -50,25 +50,27 @@ namespace Sdt.Core
                 // 源码：'c' + Date.now().toString(36) + rand('identity')*46656 的 36 进制尾巴；此处 ticks 十六进制等价保证唯一
                 card.id = "c" + DateTime.UtcNow.Ticks.ToString("x") + (Math.Floor(new Random().NextDouble() * 46656)).ToString("x");
             }
-            var cards = CustomsList();
+            var cards = new List<CardDef>(CustomsList());
             var i = cards.FindIndex(c => c.id == card.id);
             if (i >= 0) cards[i] = card; else cards.Add(card);
             CustomsSaver?.Invoke(cards);
+            _customs=cards;InvalidateMerged();
             return card;
         }
 
         /// <summary>cards.js remove：按 id 过滤后落盘。</summary>
         public static void Remove(string id)
         {
-            var cards = CustomsList();
-            if (cards.RemoveAll(c => c.id == id) > 0) CustomsSaver?.Invoke(cards);
+            var cards = new List<CardDef>(CustomsList());
+            if (cards.RemoveAll(c => c.id == id) == 0)return;
+            CustomsSaver?.Invoke(cards);_customs=cards;InvalidateMerged();
         }
 
         /// <summary>cards.js clearAll：清空自定义卡并落盘空表。</summary>
         public static void ClearCustoms()
         {
-            CustomsList().Clear();
-            CustomsSaver?.Invoke(CustomsList());
+            var cards=new List<CardDef>();
+            CustomsSaver?.Invoke(cards);_customs=cards;InvalidateMerged();
         }
     }
 }

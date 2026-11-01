@@ -45,7 +45,7 @@ namespace Sdt.Core.Battle
             uid=e.uid,card=e.card,reason=BattleItemReason(e.card),usable=BattleItemReason(e.card)==null,targetSide=ItemTargetSide(e.card)}).ToList();
         public CommandResult UseItem(string uid,int targetIndex=-1)
         {
-            if(over||busy||selectingDeck||RuleInputPending||infusing!=null)return CommandResult.No("请先完成当前战斗操作");
+            if(over||turnEndPending||busy||selectingDeck||RuleInputPending||infusing!=null)return CommandResult.No("请先完成当前战斗操作");
             var entry=AvailableBattleItems().FirstOrDefault(e=>e.uid==uid);string reason=BattleItemReason(entry?.card);if(reason!=null)return CommandResult.No(reason);
             var target=targetIndex>=0&&targetIndex<foes.Count&&!foes[targetIndex].dead?foes[targetIndex]:null;
             if(ItemTargetSide(entry.card)=="enemy"&&target==null){

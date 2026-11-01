@@ -25,7 +25,8 @@ namespace Sdt.UI.Screens.Misc
         RectTransform _root, _layout, _paper, _info, _source;
         Action<string> _returned;
         float _saveAt = -1;
-        bool _closing;
+        bool _closing, _closed;
+        int _revision;
         Vector2 _paperPosition;
         public static void Open(List<CardDef> cards, string id) => Open(cards, id, null, null);
         public static void Open(List<CardDef> cards, string id, RectTransform source, Action<string> returned)
@@ -41,8 +42,13 @@ namespace Sdt.UI.Screens.Misc
         }
         public override void Build()
         {
+            _revision++;
+            StopAllCoroutines();
+            UIKit.ClearChildren(transform);
             var card = _cards[_index]; _root = PhotoStudioElements.Node(transform, "cardZoom.cz-photo.cz-photo-atelier"); PhotoStudioElements.Fill(_root); CardLibraryScreen.BuildRoom(_root, true);
-            var dismiss = PhotoStudioElements.Button(_root, "PhotoBackdropClose", "", ClosePhoto); PhotoStudioElements.Fill((RectTransform)dismiss.transform);
+            int revision = _revision;
+            Action closePhoto = () => { if (Current(revision)) ClosePhoto(); };
+            var dismiss = PhotoStudioElements.Button(_root, "PhotoBackdropClose", "", closePhoto); PhotoStudioElements.Fill((RectTransform)dismiss.transform);
             _layout = PhotoStudioElements.Node(_root, "cz-photo-layout"); _paper = PhotoStudioElements.Node(_layout, "cz-photo-paper");
             PhotoStudioElements.Texture(_paper, "zoom-paper"); string mount = PhotoStudioElements.Mount(card);
             UIKit.GetOrAdd<Image>(_paper).color = new Color(0, 0, 0, .001f);
@@ -50,7 +56,7 @@ namespace Sdt.UI.Screens.Misc
             _info = PhotoStudioElements.Node(_layout, "cz-photo-info"); PhotoStudioElements.Texture(_info, "paper");
             // This opaque hit area keeps reading controls from bubbling to the backdrop.
             UIKit.GetOrAdd<Image>(_info).color = new Color(0, 0, 0, .001f);
-            var close = PhotoStudioElements.Button(_info, "PhotoClose", "×", ClosePhoto, true); var closeRect = (RectTransform)close.transform;
+            var close = PhotoStudioElements.Button(_info, "PhotoClose", "×", closePhoto, true); var closeRect = (RectTransform)close.transform;
             closeRect.anchorMin = closeRect.anchorMax = closeRect.pivot = new Vector2(1, 1); closeRect.anchoredPosition = new Vector2(-12, -12); closeRect.sizeDelta = new Vector2(44, 44);
             var content = PhotoStudioElements.Scroll(_info, "PhotoBackSignReading", out var reading); PhotoStudioElements.Fill((RectTransform)reading.transform, 22, 24, 22, 24); PhotoStudioElements.Vertical(content, 16);
             var title = PhotoStudioElements.Flow(content, "PhotoTitle", card.name, 30, PhotoStudioElements.Ink, true); title.gameObject.GetComponent<LayoutElement>().minHeight = 48;
@@ -89,11 +95,14 @@ namespace Sdt.UI.Screens.Misc
             var text = PhotoStudioElements.Text(rt, "NoteText", "", 17, Theme.Hex("#39352b")); text.lineSpacing = 1.5f; text.supportRichText = false; PhotoStudioElements.Fill(text.rectTransform, 2, 5, 2, 5);
             var placeholder = PhotoStudioElements.Text(rt, "NotePlaceholder", "写下这条卡的备注……", 17, Theme.Hex("#787160")); placeholder.supportRichText = false; PhotoStudioElements.Fill(placeholder.rectTransform, 2, 5, 2, 5);
             var field = UIKit.GetOrAdd<InputField>(rt); field.textComponent = text; field.placeholder = placeholder; field.lineType = InputField.LineType.MultiLineNewline; field.characterLimit = 240; field.text = value;
-            field.onValueChanged.AddListener(_ => { _status.text = "保存中…"; _saveAt = Time.unscaledTime + .24f; }); field.onEndEdit.AddListener(_ => SaveNote()); return field;
+            int revision = _revision;
+            field.onValueChanged.AddListener(_ => { if (Current(revision)) { _status.text = "保存中…"; _saveAt = Time.unscaledTime + .24f; } });
+            field.onEndEdit.AddListener(_ => { if (Current(revision)) SaveNote(); }); return field;
         }
+        bool Current(int revision) => !_closed && !_closing && isActiveAndEnabled && UiStack.Top == this && revision == _revision;
         void SaveNote()
         {
-            _saveAt = -1; if (_note == null) return; string value = (_note.text ?? "").Trim(), id = _cards[_index].id;
+            _saveAt = -1; if (_closed || _note == null) return; string value = (_note.text ?? "").Trim(), id = _cards[_index].id;
             if (value == _savedText && !Pending.ContainsKey(id)) return;
             Pending[id] = value;
             bool ok; string reason;
@@ -114,12 +123,12 @@ namespace Sdt.UI.Screens.Misc
         }
         void Navigate(int delta)
         {
+            if (!Current(_revision)) return;
             int next = _index + delta; if (next < 0 || next >= _cards.Count) return;
-            SaveNote(); StopAllCoroutines(); _index = next;
-            foreach (Transform child in transform) { child.gameObject.SetActive(false); Destroy(child.gameObject); } Build();
+            SaveNote(); _index = next; Build();
         }
         public override void CloseFromEscape() { if (Input.compositionString.Length == 0) ClosePhoto(); }
-        void ClosePhoto() { if (_closing) return; SaveNote(); _closing = true; StopAllCoroutines(); StartCoroutine(Leave()); }
+        void ClosePhoto() { if (!Current(_revision)) return; SaveNote(); _closing = true; StopAllCoroutines(); StartCoroutine(Leave()); }
         IEnumerator Enter()
         {
             yield return null; var group = UIKit.GetOrAdd<CanvasGroup>(_info); var paperGroup = UIKit.GetOrAdd<CanvasGroup>(_paper);
@@ -132,7 +141,12 @@ namespace Sdt.UI.Screens.Misc
                 _paper.anchoredPosition = Vector2.Lerp(from, _paperPosition, t); _paper.localScale = Vector3.one * Mathf.Lerp(scale, 1, t); paperGroup.alpha = Mathf.Lerp(.25f, 1, t); group.alpha = Mathf.Clamp01((elapsed - .1f) / .34f); yield return null;
             }
             _paper.anchoredPosition = _paperPosition; _paper.localScale = Vector3.one; group.alpha = paperGroup.alpha = 1;
-            EventSystem.current?.SetSelectedGameObject(_info.Find("PhotoClose").gameObject);
+            if (Current(_revision) && EventSystem.current != null)
+            {
+                var selected = EventSystem.current.currentSelectedGameObject;
+                if (selected == null || !selected.activeInHierarchy || !selected.transform.IsChildOf(_root))
+                    EventSystem.current.SetSelectedGameObject(_info.Find("PhotoClose").gameObject);
+            }
         }
         IEnumerator Leave()
         {
@@ -144,7 +158,8 @@ namespace Sdt.UI.Screens.Misc
             { elapsed += Time.unscaledDeltaTime; float t = Mathf.Clamp01(elapsed / .12f); group.alpha = 1 - t; _paper.anchoredPosition = Vector2.Lerp(_paperPosition, to, t); _paper.localScale = Vector3.one * Mathf.Lerp(1, scale, t); yield return null; }
             string id = _cards[_index].id; Close(); _returned?.Invoke(id);
         }
-        protected override void OnDestroy() { SaveNote(); }
+        internal override void OnClose() { if (!_closing) SaveNote(); _closed = true; _revision++; StopAllCoroutines(); }
+        void OnApplicationQuit() { SaveNote(); }
     }
     [RequireComponent(typeof(CanvasRenderer))]
     public sealed class PhotoNoteLines : MaskableGraphic

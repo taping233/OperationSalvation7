@@ -1,7 +1,6 @@
 // Current reward-scene-view.js: retained card faces, independent read/claim, fixed footer.
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Sdt.Core;
@@ -21,9 +20,12 @@ namespace Sdt.UI.Screens.Run
         Text _title,_source,_rule,_notice;
         CurrentRewardFlow _grid;ScrollRect _scroll;
         readonly Dictionary<string,CurrentRewardTile> _tiles=new Dictionary<string,CurrentRewardTile>();
+        readonly HashSet<string> _keep=new HashSet<string>();
+        readonly List<CurrentRewardTile> _ordered=new List<CurrentRewardTile>();
+        readonly List<string> _removed=new List<string>();
         Vector2 _last;bool _entry;float _openedAt;
-        public bool IsCurrent=>UiStack.Top==_owner;
-        public bool CanSubmit=>Time.unscaledTime>=_openedAt+.18f&&UiStack.Top==_owner;
+        public bool IsCurrent=>isActiveAndEnabled&&_owner!=null&&_owner.isActiveAndEnabled&&UiStack.Top==_owner;
+        public bool CanSubmit=>Time.unscaledTime>=_openedAt+.18f&&IsCurrent;
         public Action OnResume;Panel _owner;bool _active=true;
         public static CurrentRewardScene Create(Transform parent,bool entry=false)
         {var root=CurrentNodeElements.Rect(parent,"reward-v14 room-reward");CurrentNodeElements.Stretch(root);var view=UIKit.GetOrAdd<CurrentRewardScene>(root);view._entry=entry;view.Build();return view;}
@@ -47,28 +49,28 @@ namespace Sdt.UI.Screens.Run
         }
         public void Set(string title,string source,string notice=null,string rule=null)
         {_title.text=title;_source.text=source??"";_rule.text=rule??"";_rule.gameObject.SetActive(!string.IsNullOrEmpty(rule));_notice.text=notice??"";_notice.gameObject.SetActive(!string.IsNullOrEmpty(notice));_last=new Vector2(-1,-1);}
-        public void Reveal(int index){var tile=_tiles.Values.FirstOrDefault(t=>t.Index==index);if(tile!=null)tile.Pop();}
+        public void Reveal(int index){foreach(var tile in _ordered)if(tile.Index==index){tile.Pop();return;}}
         public void PlayAcquisition(string[] ids)
         {
-            foreach(string id in ids){var tile=_tiles.Values.FirstOrDefault(t=>t.CardId==id);if(tile!=null)CurrentRewardAcquisition.Play(transform,tile.ArtRect,Info,CardLibrary.FindById(id));}
+            foreach(string id in ids)foreach(var tile in _ordered)if(tile.CardId==id){CurrentRewardAcquisition.Play(transform,tile.ArtRect,Info,CardLibrary.FindById(id));break;}
         }
         public void ClearActions(){CurrentNodeElements.Clear(Actions);CurrentNodeElements.Clear(Info);_last=new Vector2(-1,-1);}
         public void Sync(IReadOnlyList<CurrentRewardItem> items)
         {
-            var keep=new HashSet<string>();int order=0;
+            _keep.Clear();_ordered.Clear();int order=0;
             foreach(var item in items)
             {
-                keep.Add(item.Key);
+                _keep.Add(item.Key);
                 if(!_tiles.TryGetValue(item.Key,out var tile)||tile==null){var root=CurrentNodeElements.Rect(_objects,"reward-unit "+item.Key);tile=UIKit.GetOrAdd<CurrentRewardTile>(root);tile.Build(item.Card);_tiles[item.Key]=tile;}
-                tile.Set(item);tile.transform.SetSiblingIndex(order++);
+                tile.Set(item);if(tile.transform.GetSiblingIndex()!=order)tile.transform.SetSiblingIndex(order);order++;_ordered.Add(tile);
             }
-            var ordered=_tiles.Values.Where(t=>t!=null&&keep.Contains(t.Key)).OrderBy(t=>t.transform.GetSiblingIndex()).ToArray();
-            for(int i=0;i<ordered.Length;i++)ordered[i].Navigate(ordered[(i+ordered.Length-1)%ordered.Length],ordered[(i+1)%ordered.Length]);
-            foreach(var key in _tiles.Keys.ToArray())if(!keep.Contains(key)){_tiles[key].gameObject.SetActive(false);Destroy(_tiles[key].gameObject);_tiles.Remove(key);}
+            for(int i=0;i<_ordered.Count;i++)_ordered[i].Navigate(_ordered[(i+_ordered.Count-1)%_ordered.Count],_ordered[(i+1)%_ordered.Count]);
+            _removed.Clear();foreach(var key in _tiles.Keys)if(!_keep.Contains(key))_removed.Add(key);
+            foreach(var key in _removed){if(_tiles[key]!=null){_tiles[key].gameObject.SetActive(false);Destroy(_tiles[key].gameObject);}_tiles.Remove(key);}
         }
         void LateUpdate()
         {
-            bool active=UiStack.Top==_owner;if(active&&!_active){_active=true;OnResume?.Invoke();}_active=active;
+            bool active=IsCurrent;if(active&&!_active){_active=true;OnResume?.Invoke();}_active=active;
             var size=((RectTransform)transform).rect.size;if(size==_last)return;_last=size;
             _rule.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,Mathf.Max(1,size.x-112));float ruleHeight=string.IsNullOrEmpty(_rule.text)?0:Mathf.Max(27,_rule.preferredHeight)+8;float baseHead=string.IsNullOrEmpty(_source.text)?52:92;float headHeight=baseHead+ruleHeight;CurrentNodeElements.Fixed(_header,56,28,Mathf.Max(1,size.x-112),headHeight);
             CurrentNodeElements.Fixed(_title.rectTransform,0,0,Mathf.Max(1,size.x-112),46);CurrentNodeElements.Fixed(_source.rectTransform,0,50,Mathf.Max(1,size.x-112),34);CurrentNodeElements.Fixed(_rule.rectTransform,0,baseHead,Mathf.Max(1,size.x-112),ruleHeight);
@@ -83,34 +85,46 @@ namespace Sdt.UI.Screens.Run
     }
     public sealed class CurrentRewardTile:MonoBehaviour
     {
-        Material _paint;string _paintState;float _pop=-1;
-        CurrentRewardItem _item;Button _claim,_read;Text _state,_tag;CanvasGroup _art;CardDef _card;RectTransform _faceRect;
+        Material _paint;string _paintState;float _pop=-1;int _revision;
+        CurrentRewardScene _scene;
+        CurrentRewardItem _item;Button _claim,_read;Text _state,_tag,_claimLabel;CanvasGroup _art;RectTransform _faceRect,_paper;
         public int Index=>_item?.Index??-1;
         public void Pop(){if(!CurrentUiPreferences.ReducedMotion)_pop=0;}
-        void Update(){if(_pop<0)return;_pop+=Time.unscaledDeltaTime;float p=Mathf.Clamp01(_pop/.32f)*3;float[] scales={1,1.16f,.98f,1};int i=Mathf.Min(2,(int)p);float scale=Mathf.Lerp(scales[i],scales[i+1],p-i);transform.localScale=Vector3.one*scale;if(_pop>=.32f){_pop=-1;transform.localScale=Vector3.one;}}
+        void Update(){if(_pop<0)return;_pop+=Time.unscaledDeltaTime;float p=Mathf.Clamp01(_pop/.32f)*3;float scale=p<1?Mathf.Lerp(1,1.16f,p):p<2?Mathf.Lerp(1.16f,.98f,p-1):Mathf.Lerp(.98f,1,p-2);transform.localScale=Vector3.one*scale;if(_pop>=.32f){_pop=-1;transform.localScale=Vector3.one;}}
         void OnDestroy(){if(_paint!=null)Destroy(_paint);}
+        void OnDisable(){_revision++;_pop=-1;transform.localScale=Vector3.one;}
         public string CardId=>_item?.Card?.id;public RectTransform ArtRect=>_art.transform as RectTransform;
         public string Key=>_item?.Key;
         public void Navigate(CurrentRewardTile left,CurrentRewardTile right){var n=new Navigation{mode=Navigation.Mode.Explicit,selectOnLeft=left._read,selectOnRight=right._read,selectOnDown=_claim};_read.navigation=n;n.selectOnLeft=left._claim.gameObject.activeSelf?left._claim:left._read;n.selectOnRight=right._claim.gameObject.activeSelf?right._claim:right._read;n.selectOnUp=_read;_claim.navigation=n;}
         public bool Bonus=>_item?.Bonus==true;
         public void Build(CardDef card)
         {
-            _card=card;var art=CurrentNodeElements.Rect(transform,"reward-card");CurrentNodeElements.Fixed(art,0,0,300,450);
+            var art=CurrentNodeElements.Rect(transform,"reward-card");CurrentNodeElements.Fixed(art,0,0,300,450);
             var face=CardFace.Create(card,CardSize.Xl,art);var rt=(RectTransform)face.transform;rt.anchorMin=rt.anchorMax=Vector2.one*.5f;rt.pivot=Vector2.one*.5f;rt.anchoredPosition=Vector2.zero;
             _faceRect=rt;
-            var le=UIKit.GetOrAdd<LayoutElement>(face);le.ignoreLayout=true;var paper=face.transform.Find("paper-card") as RectTransform;if(paper!=null)rt.localScale=Vector3.one*(300/paper.sizeDelta.x);
-            _art=UIKit.GetOrAdd<CanvasGroup>(art);_read=UIKit.GetOrAdd<Button>(art);_read.targetGraphic=face.GetComponent<Image>();_read.onClick.AddListener(()=>{var scene=GetComponentInParent<CurrentRewardScene>();if(scene!=null&&scene.IsCurrent)CurrentRewardCardZoom.Open(_item,_read.gameObject);});
-            _claim=CurrentNodeElements.Button(transform,"收下",()=>{var scene=GetComponentInParent<CurrentRewardScene>();if(scene!=null&&!scene.CanSubmit||_item.State!="pending")return;if(!_item.Fits){if(_item.Organize)CurrentRewardCapacityOrganizer.Open(_item,GetComponentInParent<Panel>());else GameRuntime.I.Bus.Emit(new BagOpened());}else _item.Claim?.Invoke();});CurrentNodeElements.Fixed((RectTransform)_claim.transform,50,472,200,52);
+            var le=UIKit.GetOrAdd<LayoutElement>(face);le.ignoreLayout=true;_paper=face.transform.Find("paper-card") as RectTransform;if(_paper!=null)rt.localScale=Vector3.one*(300/_paper.sizeDelta.x);
+            _scene=GetComponentInParent<CurrentRewardScene>();_art=UIKit.GetOrAdd<CanvasGroup>(art);_read=UIKit.GetOrAdd<Button>(art);_read.targetGraphic=face.GetComponent<Image>();
+            _claim=CurrentNodeElements.Button(transform,"收下",null);CurrentNodeElements.Fixed((RectTransform)_claim.transform,50,472,200,52);_claimLabel=_claim.GetComponentInChildren<Text>();
             _state=CurrentNodeElements.Text(transform,"reward-unit-state","",20,"#bfd4c8");CurrentNodeElements.Fixed(_state.rectTransform,0,472,300,52);_state.alignment=TextAnchor.MiddleCenter;
             _tag=CurrentNodeElements.Text(transform,"reward-category","",18,"#b6c7c2");CurrentNodeElements.Fixed(_tag.rectTransform,0,-25,300,24);_tag.alignment=TextAnchor.MiddleCenter;
         }
         public void Set(CurrentRewardItem item)
         {
-            _item=item;bool pending=item.State=="pending";_claim.gameObject.SetActive(pending);_state.gameObject.SetActive(!pending);_art.alpha=item.State=="received"?.6f:item.State=="forfeited"?.28f:1;
+            _item=item;int revision=++_revision;
+            bool Current()=>revision==_revision&&isActiveAndEnabled&&_scene!=null&&_scene.IsCurrent&&ReferenceEquals(_item,item);
+            _read.onClick=new Button.ButtonClickedEvent();_read.onClick.AddListener(()=>{if(Current())CurrentRewardCardZoom.Open(item,_read.gameObject);});
+            _claim.onClick=new Button.ButtonClickedEvent();_claim.onClick.AddListener(()=>
+            {
+                if(!Current()||!_scene.CanSubmit||(item.LiveState?.Invoke()??item.State)!="pending")return;
+                AudioService.I.PlaySfx("click");
+                if(!item.Fits){if(item.Organize)CurrentRewardCapacityOrganizer.Open(item,GetComponentInParent<Panel>());else GameRuntime.I.Bus.Emit(new BagOpened());}
+                else item.Claim?.Invoke();
+            });
+            bool pending=item.State=="pending";_claim.gameObject.SetActive(pending);_state.gameObject.SetActive(!pending);_art.alpha=item.State=="received"?.6f:item.State=="forfeited"?.28f:1;
             float width=item.Bonus?190:300,height=item.Bonus?330:524,artWidth=item.Bonus?166:300,artHeight=artWidth*1.5f;
             var le=UIKit.GetOrAdd<LayoutElement>(this);le.preferredWidth=le.minWidth=width;le.preferredHeight=le.minHeight=height;le.flexibleWidth=le.flexibleHeight=0;
             CurrentNodeElements.Fixed((RectTransform)_art.transform,(width-artWidth)*.5f,item.Bonus?12:0,artWidth,artHeight);
-            var paper=_faceRect.Find("paper-card") as RectTransform;if(paper!=null)_faceRect.localScale=Vector3.one*(artWidth/paper.sizeDelta.x);
+            if(_paper!=null)_faceRect.localScale=Vector3.one*(artWidth/_paper.sizeDelta.x);
             CurrentNodeElements.Fixed((RectTransform)_claim.transform,item.Bonus?12:50,artHeight+(item.Bonus?24:22),item.Bonus?166:200,item.Bonus?46:52);
             CurrentNodeElements.Fixed(_state.rectTransform,0,artHeight+22,width,52);CurrentNodeElements.Fixed(_tag.rectTransform,0,-25,width,24);
             _state.text=item.StateCopy??(item.State=="received"?item.ExplicitMode?item.Choice?"✓ 已入背包":"✓ 已收下":item.Choice?"已选择":"已收下":item.ExplicitMode?"× 已放弃":"已放弃");
@@ -122,12 +136,14 @@ namespace Sdt.UI.Screens.Run
                 foreach(var image in _art.GetComponentsInChildren<Image>())image.material=item.State=="pending"?null:_paint;
             }
             _tag.text=item.Bonus?"附赠":item.Choice?"候选":"";
-            foreach(var text in _claim.GetComponentsInChildren<Text>())text.text=item.ClaimLabel??(!item.Fits?"整理背包":item.Choice?"选择":"收下");
+            _claimLabel.text=item.ClaimLabel??(!item.Fits?"整理背包":item.Choice?"选择":"收下");
         }
     }
     // Only adapts the owning reward's action to the common source card reader.
     public static class CurrentRewardCardZoom
     {
+        internal static bool OwnerMounted(Panel owner)
+        {if(owner==null||!owner.isActiveAndEnabled)return false;for(int i=0;i<UiStack.Count;i++)if(UiStack.PanelAt(i)==owner)return true;return false;}
         public static void Open(CurrentRewardItem item,GameObject returnFocus=null)
         {
             if(item?.Card==null)return;
@@ -135,7 +151,7 @@ namespace Sdt.UI.Screens.Run
             var receipt=hadOwner?g.CurrentNodeReceipt:null;var chest=owner is ChestOpenScreen?g.CurrentChestReceipt:null;
             bool hasTrigger=returnFocus!=null;var focus=returnFocus??UnityEngine.EventSystems.EventSystem.current?.currentSelectedGameObject;
             bool SourceCurrent()=>g.State==run&&run.seed==seed&&g.ActiveSlot==slot&&g.CurrentNodeId==node
-                &&(!hadOwner||run.runActive&&!run.battleActive&&owner!=null&&UiStack.CapturePanels().Contains(owner)&&ReferenceEquals(receipt,g.CurrentNodeReceipt))
+                &&(!hadOwner||run.runActive&&!run.battleActive&&OwnerMounted(owner)&&ReferenceEquals(receipt,g.CurrentNodeReceipt))
                 &&(!hasTrigger||focus!=null&&focus.activeInHierarchy&&owner!=null&&focus.transform.IsChildOf(owner.transform))
                 &&(!(owner is ChestOpenScreen)||ReferenceEquals(chest,g.CurrentChestReceipt));
             bool Pending()=>SourceCurrent()&&(item.LiveState?.Invoke()??item.State)=="pending";

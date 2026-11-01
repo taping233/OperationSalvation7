@@ -56,6 +56,7 @@ namespace Sdt.UI.Screens.Menu
         }
         void Update()
         {
+            if(_owner!=null&&UiStack.Top!=_owner)return;
             bool picked=_hover || _focus, reduced=CurrentHomeMotion.Reduced;
             if(!reduced && UiStack.Top==_owner)_time+=Time.unscaledDeltaTime;
             _weight=Mathf.MoveTowards(_weight,picked ? 1 : 0,Time.unscaledDeltaTime/(picked ? .6f : .8f));
@@ -72,7 +73,7 @@ namespace Sdt.UI.Screens.Menu
             }
             if (_system != null && picked!=_wasPicked) _system.alpha=picked ? 1 : .86f;
             _wasPicked=picked;
-            if (_ripple != null)
+            if (_ripple != null && _rippleAge < .62f)
             {
                 _rippleAge+=Time.unscaledDeltaTime;
                 float t=Mathf.Clamp01(_rippleAge/.62f);

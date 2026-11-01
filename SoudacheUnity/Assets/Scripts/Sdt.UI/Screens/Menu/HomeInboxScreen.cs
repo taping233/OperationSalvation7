@@ -17,7 +17,7 @@ namespace Sdt.UI.Screens.Menu
     {
         public const string StoreKey = "sdt-suggestions-v1";
         const int PageSize = 20;
-        int _page;
+        int _page, _revision;
         JArray _entries;
         string _error;
         Transform _content;
@@ -28,13 +28,13 @@ namespace Sdt.UI.Screens.Menu
             var root = UIKit.Panel("sugin-page", transform);
             var background = root.AddComponent<Image>(); background.color=E.Hex("#11171F");
             E.Fill(root.transform,"pg-head",Theme.HexA("#0D1218",.7f),0,0,1920,88);
-            var back=E.Box(root.transform,"sugBack",18,16,64,58);E.Hit(back,Close);
+            var back=E.Box(root.transform,"sugBack",18,16,64,58);E.Hit(back,()=>{if(Current)Close();});
             E.Art(back,"linked-back",20,17,24,24);
             var title=E.Text(root.transform,"pg-title","留言信箱",30,E.Hex("#E8EEF4"),142,20,760,48,2,true);
             var book=UIKit.Image(root.transform,Sdt.Res.Res.Ui("book"));
             var br=book.rectTransform;br.anchorMin=br.anchorMax=new Vector2(0,1);br.pivot=new Vector2(0,1);
             br.anchoredPosition=new Vector2(98,-29);br.sizeDelta=new Vector2(30,30);
-            _exportAll=Control(root.transform,"sugExportAll","全部导出",()=>ExportAll());
+            _exportAll=Control(root.transform,"sugExportAll","全部导出",()=>ExportAll(),true);
             var er=(RectTransform)_exportAll.transform;er.anchorMin=er.anchorMax=new Vector2(1,1);er.pivot=new Vector2(1,1);
             er.anchoredPosition=new Vector2(-134.4f,-20);er.sizeDelta=new Vector2(144,48);
             var scrollContent=UIKit.Scroll(root.transform);_content=scrollContent.transform;
@@ -56,7 +56,8 @@ namespace Sdt.UI.Screens.Menu
         }
         void Render()
         {
-            for(int i=_content.childCount-1;i>=0;i--)Destroy(_content.GetChild(i).gameObject);
+            _revision++;
+            UIKit.ClearChildren(_content);
             _exportAll.interactable=_entries!=null && _entries.Count>0;
             if(_entries==null)
             {
@@ -119,11 +120,14 @@ namespace Sdt.UI.Screens.Menu
         }
         void ConfirmDelete(string ts)
         {
+            int revision=_revision;
             var dialog=UiStack.Show<HomeInboxDeleteDialog>("DeleteFeedback");
-            dialog.Confirm=()=>{if(this!=null)Mutate(ts,true);};
+            dialog.Confirm=()=>{if(this!=null&&Current&&revision==_revision)Mutate(ts,true);};
         }
+        bool Current=>this!=null&&isActiveAndEnabled&&UiStack.Top==this;
         void Mutate(string ts,bool delete)
         {
+            if(!Current)return;
             try
             {
                 var current=GameRuntime.I.Saves.Global.GetJson(StoreKey) as JArray;
@@ -178,9 +182,10 @@ namespace Sdt.UI.Screens.Menu
             var le=text.gameObject.AddComponent<LayoutElement>();le.minHeight=le.preferredHeight=Mathf.Max(size*1.5f,text.preferredHeight);le.flexibleWidth=1;
             return text;
         }
-        static Button Control(Transform parent,string name,string label,Action action)
+        Button Control(Transform parent,string name,string label,Action action,bool persistent=false)
         {
-            var button=UIKit.Btn(parent,label,action);button.name=name;
+            int revision=_revision;
+            var button=UIKit.Btn(parent,label,()=>{if(Current&&(persistent||revision==_revision))action();});button.name=name;
             button.GetComponent<Image>().color=Theme.HexA("#91A9BC",.13f);
             button.GetComponent<Outline>().effectColor=Theme.HexA("#C2D4E1",.21f);
             var le=button.GetComponent<LayoutElement>();le.minHeight=le.preferredHeight=44;le.minWidth=120;le.flexibleWidth=0;

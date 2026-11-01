@@ -33,7 +33,7 @@ namespace Sdt.UI.Screens.Bag
         }
         public void Bind(BagScreen.Stack stack)
         {
-            string fingerprint=string.Join("|",stack.card?.id,stack.card?.variantKey,stack.card?.name,stack.card?.cost,stack.card?.art,stack.card?.desc,stack.card?.value,stack.card?.type,stack.card?.rarity);
+            string fingerprint=BagView.CardFingerprint(stack.card);
             bool artChanged=Entry==null||_artFingerprint!=fingerprint;_artFingerprint=fingerprint;Entry=stack;
             name=stack.supply?"supply-"+stack.supplyName:stack.pocketIndex>=0?"inspectPocket-"+stack.pocketIndex:"inspectStack-"+stack.uids.FirstOrDefault();
             if(artChanged)
