@@ -6,12 +6,21 @@ namespace Sdt.UI.Screens.Misc
 {
     public sealed class PhotoRoomBackdrop : MonoBehaviour
     {
+        Image _image;
+        RectTransform _rect, _parent;
+        Vector2 _parentSize, _spriteSize;
+        bool _laidOut;
+        void Awake() { _image = GetComponent<Image>(); _rect = (RectTransform)transform; }
+        void OnEnable() { _laidOut = false; }
         void LateUpdate()
         {
-            var image = GetComponent<Image>(); var parent = transform.parent as RectTransform; if (parent == null || image == null || image.sprite == null) return;
-            float ratio = image.sprite.rect.width / image.sprite.rect.height;
-            float width = Mathf.Max(parent.rect.width, parent.rect.height * ratio), height = width / ratio;
-            PhotoStudioElements.Place((RectTransform)transform, (parent.rect.width - width) / 2, parent.rect.height - height + 140, width, height);
+            var parent = _rect.parent as RectTransform; if (parent == null || _image == null || _image.sprite == null) return;
+            Vector2 parentSize = parent.rect.size, spriteSize = _image.sprite.rect.size;
+            if (_laidOut && parent == _parent && parentSize == _parentSize && spriteSize == _spriteSize) return;
+            float ratio = spriteSize.x / spriteSize.y;
+            float width = Mathf.Max(parentSize.x, parentSize.y * ratio), height = width / ratio;
+            PhotoStudioElements.Place(_rect, (parentSize.x - width) / 2, parentSize.y - height + 140, width, height);
+            _parent = parent; _parentSize = parentSize; _spriteSize = spriteSize; _laidOut = true;
         }
     }
     /// <summary>Source photo-studio-room-effects: rail, two lamps, film strip, floor and twelve dust motes.</summary>
@@ -22,6 +31,7 @@ namespace Sdt.UI.Screens.Misc
         CanvasGroup[] _dustAlpha = new CanvasGroup[12];
         RectTransform _beam, _second;
         CanvasGroup _group;
+        bool _dustHidden;
         void Awake()
         {
             _root = (RectTransform)transform; PhotoStudioElements.Fill(_root); _group = UIKit.GetOrAdd<CanvasGroup>(_root); _group.blocksRaycasts = false; _group.interactable = false;
@@ -35,18 +45,26 @@ namespace Sdt.UI.Screens.Misc
             PhotoStudioElements.Paint(film, "FilmBase", Theme.HexA("#101b17", .2f));
             for (int i = 0; i < 3; i++) { var panel = PhotoStudioElements.Paint(film, "FilmCell" + i, Theme.HexA("#b9aa84", .035f)); panel.rectTransform.anchorMin = new Vector2(.2f, .08f + i * .31f); panel.rectTransform.anchorMax = new Vector2(.8f, .34f + i * .31f); panel.rectTransform.offsetMin = panel.rectTransform.offsetMax = Vector2.zero; }
             for (int i = 0; i < 12; i++)
-            { _dust[i] = PhotoStudioElements.Node(_root, "room-dust-" + i); _dust[i].sizeDelta = new Vector2(3, 3); PhotoStudioElements.Paint(_dust[i], "DustPixel", Theme.Hex("#f3e1b4")); _dustAlpha[i] = UIKit.GetOrAdd<CanvasGroup>(_dust[i]); }
+            {
+                _dust[i] = PhotoStudioElements.Node(_root, "room-dust-" + i); _dust[i].sizeDelta = new Vector2(3, 3);
+                _dust[i].anchorMin = _dust[i].anchorMax = new Vector2((19 + i * 13 % 57) / 100f, 1 - (21 + i * 19 % 62) / 100f);
+                PhotoStudioElements.Paint(_dust[i], "DustPixel", Theme.Hex("#f3e1b4")); _dustAlpha[i] = UIKit.GetOrAdd<CanvasGroup>(_dust[i]);
+            }
         }
         void Update()
         {
             var owner = GetComponentInParent<CardLibraryScreen>(); bool visible = owner != null && UiStack.Top == owner; _group.alpha = visible ? 1 : 0; if (!visible) return;
+            if (PhotoStudioElements.Reduced)
+            {
+                if (!_dustHidden) { for (int i = 0; i < _dustAlpha.Length; i++) _dustAlpha[i].alpha = 0; _dustHidden = true; }
+                return;
+            }
+            _dustHidden = false;
             float now = Time.unscaledTime;
-            if (!PhotoStudioElements.Reduced)
-            { _beam.localEulerAngles = new Vector3(0, 0, Mathf.Lerp(-5, 2, (Mathf.Sin(now / 19 * Mathf.PI) + 1) * .5f)); _second.localEulerAngles = new Vector3(0, 0, 12 + Mathf.Sin((now - 11) / 27 * Mathf.PI) * 3); }
+            _beam.localEulerAngles = new Vector3(0, 0, Mathf.Lerp(-5, 2, (Mathf.Sin(now / 19 * Mathf.PI) + 1) * .5f)); _second.localEulerAngles = new Vector3(0, 0, 12 + Mathf.Sin((now - 11) / 27 * Mathf.PI) * 3);
             for (int i = 0; i < 12; i++)
             {
-                float p = Mathf.Repeat((now - i * 2.3f) / (18 + i % 7), 1); _dustAlpha[i].alpha = PhotoStudioElements.Reduced ? 0 : Mathf.Sin(p * Mathf.PI) * .38f;
-                _dust[i].anchorMin = _dust[i].anchorMax = new Vector2((19 + i * 13 % 57) / 100f, 1 - (21 + i * 19 % 62) / 100f);
+                float p = Mathf.Repeat((now - i * 2.3f) / (18 + i % 7), 1); _dustAlpha[i].alpha = Mathf.Sin(p * Mathf.PI) * .38f;
                 _dust[i].anchoredPosition = new Vector2(p * 22, Mathf.Lerp(-20, 65, p));
             }
         }

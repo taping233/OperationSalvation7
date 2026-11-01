@@ -92,6 +92,8 @@ namespace Sdt.Boot
             if (!Guard(() => { Clear(); Sdt.UI.Screens.Misc.CardLibraryScreen.Open(); })) yield break;
             for (int frame = 0; frame < 4; frame++) yield return null;
             yield return Capture("player-photo", false);
+            yield return ReviewPhotoStudioExports();
+            if (_failed) yield break;
             if (!Guard(() => { Clear(); UiStack.Show<Sdt.UI.Screens.Menu.SettingsScreen>("Settings"); })) yield break;
             for (int frame = 0; frame < 4; frame++) yield return null;
             yield return Capture("player-settings", false);

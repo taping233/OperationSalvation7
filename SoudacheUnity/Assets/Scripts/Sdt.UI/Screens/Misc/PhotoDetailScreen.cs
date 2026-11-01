@@ -17,6 +17,7 @@ namespace Sdt.UI.Screens.Misc
     public sealed class PhotoDetailScreen : Panel
     {
         static readonly Dictionary<string, string> Pending = new Dictionary<string, string>();
+        internal static IReadOnlyDictionary<string,string> CapturePendingNotes() => new Dictionary<string,string>(Pending);
         List<CardDef> _cards;
         int _index;
         InputField _note;

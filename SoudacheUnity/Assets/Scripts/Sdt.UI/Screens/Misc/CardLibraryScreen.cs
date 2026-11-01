@@ -26,7 +26,9 @@ namespace Sdt.UI.Screens.Misc
         float _mountedWidth, _mountedHeight;
         readonly List<Button> _tabs = new List<Button>();
         readonly List<RectTransform> _toolbarControls = new List<RectTransform>();
-        List<CardDef> _catalog, _filtered;
+        List<CardDef> _catalog;
+        readonly List<CardDef> _filtered = new List<CardDef>();
+        readonly int[] _categoryCounts = new int[Types.Length];
         RectTransform _root, _header, _main, _catalogRoot, _filterbar, _chips, _content, _inspector;
         ScrollRect _wall;
         InputField _search;
@@ -56,6 +58,7 @@ namespace Sdt.UI.Screens.Misc
             var back = PhotoStudioElements.Button(_header, "closeCardPage", "‹", BeginClose); PhotoStudioElements.Place((RectTransform)back.transform, 18, 18, 64, 52);
             var title = PhotoStudioElements.Text(_header, "PhotoStudioTitle", "照相馆", 32, Theme.Hex("#f1e6d1")); PhotoStudioElements.Place(title.rectTransform, 106, 25, 250, 52);
             var total = PhotoStudioElements.Text(_header, "StudioTotal", "馆藏  <b>" + _catalog.Count + "</b>  张照片", 20, Theme.Hex("#b9b09d")); PhotoStudioElements.Place(total.rectTransform, 260, 32, 270, 40);
+            BuildExportTools();
             var nav = PhotoStudioElements.Node(_header, "studio-category-tabs"); PhotoStudioElements.Place(nav, 106, 88, 1700, 52);
             foreach (var type in Types)
             {
@@ -105,11 +108,32 @@ namespace Sdt.UI.Screens.Misc
             History[_renderedContext] = new BrowsePosition { Selected = _selectedId, Scroll = _content.anchoredPosition.y };
             if (History.Count > 64) History.Remove(History.Keys.First());
         }
-        bool Matches(CardDef card, bool skipTab = false)
+        bool Matches(CardDef card, string[] terms)
         {
-            if (!skipTab && _tab != "全部" && card.type != _tab || _rar != "全部" && CardLibrary.RarityOf(card) != _rar) return false;
+            if (_rar != "全部" && CardLibrary.RarityOf(card) != _rar) return false;
             if (_cls != "全部" && (_cls == "通用" ? !string.IsNullOrEmpty(card.cls) : card.cls != _cls)) return false;
-            return (_q ?? "").Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).All(q => (card.name ?? "").IndexOf(q, StringComparison.CurrentCultureIgnoreCase) >= 0 || Sdt.Res.CurrentCardPresentation.Description(card).IndexOf(q, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            string description = null;
+            foreach (string term in terms)
+            {
+                if ((card.name ?? "").IndexOf(term, StringComparison.CurrentCultureIgnoreCase) >= 0) continue;
+                if (description == null) description = Sdt.Res.CurrentCardPresentation.Description(card);
+                if (description.IndexOf(term, StringComparison.CurrentCultureIgnoreCase) < 0) return false;
+            }
+            return true;
+        }
+        void ProjectCatalog()
+        {
+            var terms = (_q ?? "").Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            _filtered.Clear(); Array.Clear(_categoryCounts, 0, _categoryCounts.Length);
+            foreach (var card in _catalog)
+            {
+                if (!Matches(card, terms)) continue;
+                _categoryCounts[0]++;
+                int category = Array.IndexOf(Types, card.type, 1);
+                if (category >= 1) _categoryCounts[category]++;
+                if (_tab == "全部" || card.type == _tab) _filtered.Add(card);
+            }
+            _filtered.Sort(Compare);
         }
         int Compare(CardDef a, CardDef b)
         {
@@ -122,7 +146,7 @@ namespace Sdt.UI.Screens.Misc
         void Refresh(bool reset = false, bool restore = false)
         {
             _searchAt = _hoverAt = -1; _hoverBlockUntil = Time.unscaledTime + .24f;
-            _filtered = _catalog.Where(c => Matches(c)).ToList(); _filtered.Sort(Compare);
+            ProjectCatalog();
             BrowsePosition position = null; if (restore) History.TryGetValue(Context, out position);
             string id = reset ? null : position != null ? position.Selected : _selectedId;
             _selectedId = _filtered.Any(c => c.id == id) ? id : _filtered.FirstOrDefault()?.id;
@@ -151,7 +175,7 @@ namespace Sdt.UI.Screens.Misc
         {
             float x = 0; for (int i = 0; i < Types.Length; i++)
             {
-                string type = Types[i]; int count = _catalog.Count(c => Matches(c, true) && (type == "全部" || c.type == type));
+                string type = Types[i]; int count = _categoryCounts[i];
                 var label = _tabs[i].GetComponentInChildren<Text>(); label.text = (type == "能力卡" ? "能力" : type) + "  <size=14>" + count + "</size>";
                 label.color = type == _tab ? Theme.Hex("#f1e6d1") : Theme.Hex("#b9b09d");
                 float width = Mathf.Max(102, label.preferredWidth + 50); PhotoStudioElements.Place((RectTransform)_tabs[i].transform, x, 0, width, 52); x += width + 8;
@@ -180,7 +204,11 @@ namespace Sdt.UI.Screens.Misc
         }
         public override void CloseFromEscape() { if (_choice != null && _choice.IsOpen) _choice.Close(); else if (Input.compositionString.Length == 0) BeginClose(); }
         void BeginClose() { if (this == null || _leaving || !isActiveAndEnabled || UiStack.Top != this) return; _leaving = true; Remember(); StartCoroutine(LeaveStudio()); }
-        protected override void OnDestroy() { _choice?.Close(); if (ReferenceEquals(GameRuntime.I.State, _state) && GameRuntime.I.ActiveSlot == _slot && _state.Phase == "modal") _state.Phase = _previousPhase; }
+        internal override void OnClose()
+        {
+            _leaving = true; _choice?.Close();
+            if (ReferenceEquals(GameRuntime.I.State, _state) && GameRuntime.I.ActiveSlot == _slot && _state.Phase == "modal") _state.Phase = _previousPhase;
+        }
         internal static void BuildRoom(RectTransform root, bool zoom)
         {
             PhotoStudioElements.Paint(root, "DarkroomBase", Theme.Hex("#151d19"));

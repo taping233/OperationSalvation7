@@ -45,5 +45,13 @@ namespace Sdt.UI.Screens.Menu
             var text=Text(clip,"",20,"#303735");Fill(text.rectTransform);text.horizontalOverflow=HorizontalWrapMode.Overflow;var placeholder=Text(clip,hint,20,"#637068");Fill(placeholder.rectTransform);placeholder.horizontalOverflow=HorizontalWrapMode.Overflow;
             var field=UIKit.GetOrAdd<InputField>(rect);field.textComponent=text;field.placeholder=placeholder;field.lineType=InputField.LineType.SingleLine;field.onValueChanged.AddListener(v=>changed(v));return field;
         }
+        public static InputField JsonArea(Transform parent,string name,bool readOnly,string hint="")
+        {
+            var rect=Full(parent,name);var size=Size(rect,0,150,1,1);size.preferredHeight=-1;Surface(rect,"#101214");Border(rect,"#777d82");
+            var viewport=Full(rect,"json-viewport");Fill(viewport,new Vector2(14,12),new Vector2(-14,-12));UIKit.GetOrAdd<RectMask2D>(viewport);
+            var text=Text(viewport,"",16,"#d8e4ec");text.supportRichText=false;text.alignment=TextAnchor.UpperLeft;Fill(text.rectTransform);
+            var placeholder=Text(viewport,hint,16,"#8a939a");placeholder.supportRichText=false;placeholder.alignment=TextAnchor.UpperLeft;Fill(placeholder.rectTransform);
+            var field=UIKit.GetOrAdd<InputField>(rect);field.textComponent=text;field.placeholder=placeholder;field.lineType=InputField.LineType.MultiLineNewline;field.readOnly=readOnly;field.characterLimit=20_000_000;return field;
+        }
     }
 }

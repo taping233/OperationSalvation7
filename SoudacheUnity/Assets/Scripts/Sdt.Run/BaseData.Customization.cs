@@ -102,27 +102,39 @@ namespace Sdt.Run
             }, out reason);
         }
 
-        Dictionary<string, string> ReadPhotoNotes()
+        internal const string PhotoNotesKey = "sdt-card-photo-notes-v1";
+        internal static Dictionary<string, string> ReadPhotoNotes(SaveSystem saves)
         {
-            var token = GameRuntime.I.Saves.Global.GetJson("sdt-card-photo-notes-v1");
+            var token = saves.Global.GetJson(PhotoNotesKey);
             return token == null ? new Dictionary<string, string>() : token.ToObject<Dictionary<string, string>>();
         }
         public string PhotoNote(string cardId)
         {
-            var notes = ReadPhotoNotes();
+            var notes = ReadPhotoNotes(GameRuntime.I.Saves);
             return notes.TryGetValue(cardId, out var note) ? note : HubCatalog.Current.baseNotes.TryGetValue(cardId, out note) ? note : "";
         }
         public bool TrySavePhotoNote(string cardId, string text, out string reason)
         {
-            return GameRuntime.I.TryPersistMutation(() =>
+            var game = GameRuntime.I;
+            reason = null;
+            try
             {
                 if (CardLibrary.FindById(cardId) == null) throw new InvalidOperationException("照片已变化，请重新选择");
-                var notes = ReadPhotoNotes();
+                var notes = ReadPhotoNotes(game.Saves);
                 text = (text ?? "").Trim();
                 if (text.Length > 240) text = text.Substring(0, 240);
                 if (text.Length == 0) notes.Remove(cardId); else notes[cardId] = text;
-                GameRuntime.I.Saves.Global.SetJson("sdt-card-photo-notes-v1", notes);
-            }, out reason);
+                // GlobalStore owns atomic profile I/O; photo notes do not checkpoint the active run.
+                game.Saves.Global.SetJson(PhotoNotesKey, notes);
+                return true;
+            }
+            catch (Exception e)
+            {
+                reason = e is System.IO.IOException ? "保存失败，请重试；原存档与操作前状态已保留：" + e.Message : e.Message;
+                if (game.Saves.InTransaction) throw;
+                game.Bus.Emit(new ToastRequested { Text = reason, Tone = "warn" });
+                return false;
+            }
         }
     }
 }

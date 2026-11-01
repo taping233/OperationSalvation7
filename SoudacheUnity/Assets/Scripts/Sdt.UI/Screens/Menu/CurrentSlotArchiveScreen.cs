@@ -21,7 +21,7 @@ namespace Sdt.UI.Screens.Menu
             var column=A.Column(card,"slot-archive-content",16,new RectOffset(28,28,24,24));A.Fill((RectTransform)column);
             A.FlowText(column,(_import?"导入整档":"导出整档")+" · 档位 0"+_slot,28,"#ebebeb",44,true);
             var help=A.FlowText(column,_import?"粘贴 Unity 桌面版整档备份。先校验并预览，再确认写入此档位。":"本备份包含此档位的基地、对局与结算，可复制保存或导出 JSON 文件。",18,"#c9cbcc",60);SourceTextLayout.Cjk(help);
-            _area=MakeArea(column);_area.name="slotArchiveJson";
+            _area=A.JsonArea(column,"slotArchiveJson",!_import,"在此粘贴整档备份 JSON……");
             _notice=A.FlowText(column,"",17,"#e9cda4",60);_notice.GetComponent<LayoutElement>().preferredHeight=-1;SourceTextLayout.Cjk(_notice);
             var row=A.Row(column,"slot-archive-actions",12);A.Size((Component)row,0,48,1);
             Button action;
@@ -37,14 +37,6 @@ namespace Sdt.UI.Screens.Menu
         }
         Button Control(Transform parent,string name,string label,Action run,bool primary=false)
         {var button=A.Button(parent,name,label,()=>{if(Live)run();},primary?"#e4cb7a":"#25282b",primary?"#212326":"#e9eaea",18);A.Size(button,0,48,1);return button;}
-        InputField MakeArea(Transform parent)
-        {
-            var rect=A.Full(parent,"slot-archive-json");var size=A.Size(rect,0,150,1,1);size.preferredHeight=-1;A.Surface(rect,"#101214");A.Border(rect,"#777d82");
-            var viewport=A.Full(rect,"json-viewport");A.Fill(viewport,new Vector2(14,12),new Vector2(-14,-12));UIKit.GetOrAdd<RectMask2D>(viewport);
-            var text=A.Text(viewport,"",16,"#d8e4ec");text.supportRichText=false;text.alignment=TextAnchor.UpperLeft;A.Fill(text.rectTransform);
-            var placeholder=A.Text(viewport,"在此粘贴整档备份 JSON……",16,"#8a939a");placeholder.supportRichText=false;placeholder.alignment=TextAnchor.UpperLeft;A.Fill(placeholder.rectTransform);
-            var field=UIKit.GetOrAdd<InputField>(rect);field.textComponent=text;field.placeholder=placeholder;field.lineType=InputField.LineType.MultiLineNewline;field.readOnly=!_import;field.characterLimit=20_000_000;return field;
-        }
         void Download()
         {
             if(!Live||_export==null)return;try{string directory=Path.Combine(SaveSystem.Dir,"exports");Directory.CreateDirectory(directory);
