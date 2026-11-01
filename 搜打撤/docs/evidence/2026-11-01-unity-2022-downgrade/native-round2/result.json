@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "error": null,
+  "checks": [
+    "real departure opens guide",
+    "wallpaper crossfade finishes behind transparent guide",
+    "finite covered departure finishes",
+    "covered title stops settled and ambient work",
+    "reduced motion clears covered departure without residual filter",
+    "return restores title with reduced-motion resting pose",
+    "settled title stops rewriting entry regions",
+    "clear immediately detaches and disables old children",
+    "unchanged camera and layer do not rewrite backdrop transforms",
+    "changed backdrop layer still lays out",
+    "opaque settings suppress map before render",
+    "covered map retains camera clearing and audio listener",
+    "covered map movement still completes",
+    "transparent dialog retains its opaque underlying owner",
+    "consecutive same-frame rebuilds expose only current controls",
+    "closing last opaque owner restores map in same call",
+    "repeated close does not repeat panel lifecycle",
+    "slot rim tint hot path allocates zero managed bytes (10000 calls)",
+    "snow optimization retains populated geometry",
+    "warmed snow geometry hot path allocates zero managed bytes (20 builds)",
+    "covered slot snow stops advancing and requesting animated meshes",
+    "reduced slot snow remains static",
+    "slot snow resumes after reduced motion is disabled"
+  ],
+  "runAssertions": 13,
+  "hubAssertions": 339,
+  "scope": "Native controlled events and allocation/lifecycle checks; no physical input, FPS, or multi-size claim."
+}

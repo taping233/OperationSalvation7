@@ -1,0 +1,26 @@
+{
+  "success": false,
+  "command": "editors",
+  "data": null,
+  "errors": [
+    {
+      "code": "COMMAND_FAILED",
+      "message": "\"2022.3.62f3c1\" 不是有效的编辑器版本。请提供如 6000.1.0f1 这样的版本号或 latest、lts 等关键字。"
+    }
+  ],
+  "warnings": [],
+  "notifications": [
+    {
+      "code": "CLI_UPDATE_AVAILABLE",
+      "message": "新版本的 Unity CLI 已发布：1.0.0-beta.13 → 1.0.0-beta.15",
+      "data": {
+        "current": "1.0.0-beta.13",
+        "latest": "1.0.0-beta.15"
+      },
+      "remediation": {
+        "command": "unity self-update",
+        "requiresUserApproval": true
+      }
+    }
+  ]
+}

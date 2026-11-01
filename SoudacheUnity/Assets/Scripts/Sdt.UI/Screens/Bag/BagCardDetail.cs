@@ -17,6 +17,80 @@ namespace Sdt.UI.Screens.Bag
         string _uid,_name;
         bool _safe,_confirm;
         GameObject _returnFocus;
+        GameRuntime _runtime;RunState _run;BagScreen _bag;Panel _owner;
+        int? _slot,_seed;int _layer,_position,_generation,_revision;string _zone;
+        bool _closed,_covered,_built;OwnedCard[] _sources;string[] _definitions,_locations;PocketStack _pocket;int _pocketCount;
+        readonly System.Collections.Generic.List<(Button button,System.Action action)> _buttons=new System.Collections.Generic.List<(Button,System.Action)>();
+        bool SamePlace=>GameRuntime.I==_runtime&&_runtime.State==_run&&_runtime.ActiveSlot==_slot&&_run.seed==_seed
+            &&_run.layerIdx==_layer&&_run.trackPos==_position&&_run.runActive&&!_run.battleActive&&BagScreen.Current==_bag
+            &&_bag!=null&&_bag.IsCurrent(_bag.Generation)&&_bag.Zone==_zone;
+        bool Current=>this!=null&&!_closed&&isActiveAndEnabled&&UiStack.Top==this&&SamePlace&&_bag.Generation==_generation
+            &&CurrentRewardCardZoom.OwnerMounted(_owner)&&!Sdt.UI.Screens.Menu.SuggestionBox.IsOpen&&SourcesMatch(false);
+        static string Location(OwnedCard entry)=>SaveJson.Stringify(new{entry.stored,entry.safe,entry.pouchOf});
+        bool SourcesMatch(bool rebind)
+        {
+            if(_pocket!=null)return _entry.pocketIndex>=0&&_entry.pocketIndex<_run.usedPocket.Count
+                &&ReferenceEquals(_run.usedPocket[_entry.pocketIndex],_pocket)&&_pocket.count==_pocketCount&&SaveJson.Stringify(_pocket.card)==_definitions[0];
+            if(_sources==null||_sources.Length==0)return false;
+            var fresh=new OwnedCard[_sources.Length];
+            for(int i=0;i<_sources.Length;i++)
+            {
+                var matches=_run.ownedCards.Where(o=>o.uid==_sources[i].uid).ToArray();
+                if(matches.Length!=1)return false;var entry=matches[0];
+                if(!rebind&&!ReferenceEquals(entry,_sources[i])||SaveJson.Stringify(entry.card)!=_definitions[i]||Location(entry)!=_locations[i])return false;
+                fresh[i]=entry;
+            }
+            if(_entry.zone!="container")
+            {
+                var stack=BagScreen.CardStacks(_run,_safe).FirstOrDefault(s=>s.uids.Contains(_uid));
+                if(stack==null||!stack.uids.SequenceEqual(_entry.uids))return false;
+            }
+            if(rebind)_sources=fresh;return true;
+        }
+        static BagCardDetail Mount(BagScreen.Stack entry,bool confirm)
+        {
+            var bag=BagScreen.Current;var owner=UiStack.Top;var g=GameRuntime.I;
+            if(bag==null||!bag.IsCurrent(bag.Generation)||!g.State.runActive||g.State.battleActive
+                ||(entry.zone=="container"?!(owner is ContainerScreen):owner!=bag))return null;
+            if(entry.zone!="container"&&entry.zone!="pocket")
+            {
+                var current=BagScreen.CardStacks(g.State,entry.zone=="safe").FirstOrDefault(s=>entry.uids.Count>0&&s.uids.Contains(entry.uids[0]));
+                if(current==null||!current.uids.SequenceEqual(entry.uids)||!ReferenceEquals(current.card,entry.card))return null;entry=current;
+            }
+            var screen=ScreenMount.Show<BagCardDetail>(confirm?"DiscardConfirm":"BagCardDetail");
+            screen._runtime=g;screen._run=g.State;screen._bag=bag;screen._owner=owner;screen._slot=g.ActiveSlot;screen._seed=g.State.seed;
+            screen._layer=g.State.layerIdx;screen._position=g.State.trackPos;screen._generation=bag.Generation;screen._zone=bag.Zone;
+            screen._returnFocus=EventSystem.current?.currentSelectedGameObject;screen._entry=entry;screen._uid=entry.uids.FirstOrDefault();screen._name=entry.card.name;screen._safe=entry.zone=="safe";screen._confirm=confirm;
+            if(entry.zone=="pocket"&&entry.pocketIndex>=0&&entry.pocketIndex<g.State.usedPocket.Count)
+            {screen._pocket=g.State.usedPocket[entry.pocketIndex];if(!ReferenceEquals(entry.card,screen._pocket.card)||entry.count!=screen._pocket.count){screen.Close();return null;}screen._pocketCount=screen._pocket.count;screen._definitions=new[]{SaveJson.Stringify(screen._pocket.card)};}
+            else
+            {
+                screen._sources=entry.zone=="container"?g.State.ownedCards.Where(o=>ReferenceEquals(o.card,entry.card)).Take(1).ToArray()
+                    :entry.uids.Select(uid=>g.State.ownedCards.FirstOrDefault(o=>o.uid==uid)).ToArray();
+                if(screen._sources.Any(source=>source==null)){screen.Close();return null;}
+                screen._definitions=screen._sources.Select(source=>SaveJson.Stringify(source.card)).ToArray();
+                screen._locations=screen._sources.Select(Location).ToArray();
+            }
+            if(!screen.Current){screen.Close();return null;}UiStack.Changed+=screen.StackChanged;screen.Build();return screen;
+        }
+        Button OwnedButton(Transform parent,string name,string label,System.Action action,int size=22)
+        {
+            var button=BagView.Button(parent,name,label,null,size);_buttons.Add((button,action));Bind(button,action);return button;
+        }
+        void Bind(Button button,System.Action action)
+        {
+            int revision=_revision;button.onClick=new Button.ButtonClickedEvent();
+            button.onClick.AddListener(()=>{if(revision!=_revision||!Current||!button.IsActive()||!button.IsInteractable())return;AudioService.I.PlaySfx("click");action();});
+        }
+        void RebindFailedCommand()
+        {if(SamePlace&&UiStack.Top==this&&SourcesMatch(true)){_generation=_bag.Generation;_revision++;foreach(var binding in _buttons)Bind(binding.button,binding.action);}}
+        void CloseThen(System.Action action)
+        {Close();if(SamePlace&&UiStack.Top==_bag&&SourcesMatch(false))action();}
+        void StackChanged()
+        {
+            if(_closed)return;if(UiStack.Top!=this){_covered=true;_revision++;return;}
+            if(_covered){_covered=false;_revision++;foreach(var binding in _buttons)Bind(binding.button,binding.action);}
+        }
         public static void Show(string name,bool fromSafe)=>Show(name,fromSafe,null);
         public static void Show(string name,bool fromSafe,string uid)
         {
@@ -26,15 +100,17 @@ namespace Sdt.UI.Screens.Bag
         public static void ShowEntry(BagScreen.Stack entry)
         {
             if(entry?.card==null||entry.supply)return;
-            var screen=ScreenMount.Show<BagCardDetail>("BagCardDetail");screen._returnFocus=EventSystem.current?.currentSelectedGameObject;screen._entry=entry;screen._uid=entry.uids.FirstOrDefault();screen._name=entry.card.name;screen._safe=entry.zone=="safe";screen.Build();
+            Mount(entry,false);
         }
         public static void ShowReadOnly(CardDef card){ShowEntry(new BagScreen.Stack{card=card,count=1,zone="container",key=BagScreen.Identity(card)});}
         public static void ShowDiscardConfirm(string name,bool fromSafe,string uid=null)
         {
-            var screen=ScreenMount.Show<BagCardDetail>("DiscardConfirm");screen._name=name;screen._safe=fromSafe;screen._uid=uid;screen._confirm=true;screen.Build();
+            var stack=BagScreen.CardStacks(GameRuntime.I.State,fromSafe).FirstOrDefault(s=>uid!=null?s.uids.Contains(uid):s.card.name==name);
+            if(stack!=null)Mount(stack,true);
         }
         public override void Build()
         {
+            if(_built||!Current)return;_built=true;_revision++;
             var root=BagView.Rect(_confirm?"discard-confirm":"inventory-zoom",transform);UiExt.Stretch(root);BagView.Paint(root,"#080e16d9");
             if(_confirm){BuildConfirm(root);return;}
             if(_entry?.card==null)return;
@@ -49,7 +125,7 @@ namespace Sdt.UI.Screens.Bag
             var info=BagView.Rect("inventory-zoom-info",layout);BagView.Place(info,472,0,640,layout.rect.height);BagView.Paint(info,"#18232df2");BagView.Border(info,"#a9c8d629");
             var title=BagView.Text(info,"inventory-zoom-title",_entry.card.name,34,"#edf3f4");title.fontStyle=FontStyle.Bold;BagView.Place(title.rectTransform,36,36,490,56);
             var type=BagView.Text(info,"inventory-zoom-type",_entry.card.type+" · "+CardVisual.EffectiveRarity(_entry.card),20,"#9edce7");BagView.Place(type.rectTransform,36,104,530,32);
-            var close=BagView.Button(info,"inventoryZoomClose","×",Close,22);BagView.Place((RectTransform)close.transform,556,24,60,60);
+            var close=OwnedButton(info,"inventoryZoomClose","×",Close,22);BagView.Place((RectTransform)close.transform,556,24,60,60);
             var body=BagView.Scroll(info,"inventory-zoom-effect",out var scroll);BagView.Place((RectTransform)scroll.transform,36,160,568,230);var flow=body.GetComponent<VerticalLayoutGroup>();flow.padding=new RectOffset(0,0,0,0);flow.spacing=14;
             var label=BagView.Text(body,"inventory-zoom-effect-label","卡牌效果",18,"#91a6b0");label.gameObject.AddComponent<LayoutElement>().preferredHeight=28;
             var rules=BagView.Text(body,"inventory-zoom-rules",Sdt.Res.CurrentCardPresentation.Description(_entry.card,GameRuntime.I.State.battleActive?CardFace.BattleDescription(Sdt.UI.Screens.Battle.GameSnapshotRef.Current,_uid):null),24,"#edf3f4");rules.lineSpacing=1.3f;
@@ -59,8 +135,8 @@ namespace Sdt.UI.Screens.Bag
             BuildActions(foot);
             if(_entry.zone!="container"&&BagScreen.Current!=null)
             {
-                var previous=BagView.Button(root,"inventoryZoomPrevious","‹",()=>Browse(-1),32);BagView.Place((RectTransform)previous.transform,(width-1112)/2-72,height/2-30,56,60);
-                var next=BagView.Button(root,"inventoryZoomNext","›",()=>Browse(1),32);BagView.Place((RectTransform)next.transform,(width+1112)/2+16,height/2-30,56,60);
+                var previous=OwnedButton(root,"inventoryZoomPrevious","‹",()=>Browse(-1),32);BagView.Place((RectTransform)previous.transform,(width-1112)/2-72,height/2-30,56,60);
+                var next=OwnedButton(root,"inventoryZoomNext","›",()=>Browse(1),32);BagView.Place((RectTransform)next.transform,(width+1112)/2+16,height/2-30,56,60);
                 var entries=BagScreen.Current.VisibleEntries().Where(s=>s.card!=null&&!s.supply).ToList();int index=entries.FindIndex(s=>_uid!=null?s.uids.Contains(_uid):s.pocketIndex==_entry.pocketIndex);previous.interactable=index>0;next.interactable=index>=0&&index+1<entries.Count;
             }
         }
@@ -77,29 +153,33 @@ namespace Sdt.UI.Screens.Bag
             RectTransform actions=null;int actionCount=0;
             void Action(string name,string text,System.Action action,bool enabled=true){
                 if(actions==null){actions=BagView.Rect("ov-btns",foot);var grid=actions.gameObject.AddComponent<GridLayoutGroup>();grid.constraint=GridLayoutGroup.Constraint.FixedColumnCount;grid.constraintCount=2;grid.cellSize=new Vector2(279,60);grid.spacing=new Vector2(10,10);actions.gameObject.AddComponent<LayoutElement>();}
-                var b=BagView.Button(actions,name,text,action);b.interactable=enabled;actionCount++;actions.GetComponent<LayoutElement>().preferredHeight=((actionCount+1)/2)*70-10;
+                var b=OwnedButton(actions,name,text,action);b.interactable=enabled;actionCount++;actions.GetComponent<LayoutElement>().preferredHeight=((actionCount+1)/2)*70-10;
             }
             if(!_safe&&card.type=="道具"){
-                var status=UseStatus(card,_uid);Action("useDetailCard",status.label,()=>{var id=_uid;Close();UseOwnedCard(id);},string.IsNullOrEmpty(status.reason));
+                string uid=_uid;var status=UseStatus(card,uid);Action("useDetailCard",status.label,()=>CloseThen(()=>UseOwnedCard(uid)),string.IsNullOrEmpty(status.reason));
                 if(!string.IsNullOrEmpty(status.reason))BagView.Text(foot,"bag-use-reason",status.reason,18,"#91a6b0");
             }
-            if(card.id==CardContainerCommands.PearlId)Action("pearlStoreZoom","打开珍珠盒",()=>{Close();ContainerScreen.Open("pearl");});
-            if(card.id==CardContainerCommands.PouchId&&!_safe)Action("pouchStoreZoom","打开锦囊（存放法术 ×3）",()=>{Close();ContainerScreen.Open("pouch");});
-            if(card.id=="tt-token-gold"||card.id=="tt-token-color")Action("craftColorToken",card.id=="tt-token-gold"?"合成员工通行证A（3 张 B → 1 张 A）":"合成员工通行证A（2 碎片 + 1 通行证A）",()=>{if(BagItemCommands.TryCraftTokens(GameRuntime.I,card.id=="tt-token-gold"?"gold":"fragments",out var reason)){Close();BagScreen.Refresh();}else RunLog.Log(reason,"warn");});
-            if(_safe||!initial)Action(_safe?"zoomMoveToBag":"zoomMoveToSafe",_safe?"移回背包":"移入安全格",()=>{var ids=_entry.uids.ToArray();Close();BagScreen.MoveStackSafe(card.name,!_safe,ids);});
-            if(!initial)Action("detailDiscard","丢弃 1 张",()=>{Close();ShowDiscardConfirm(card.name,_safe,_uid);});
+            if(card.id==CardContainerCommands.PearlId)Action("pearlStoreZoom","打开珍珠盒",()=>CloseThen(()=>ContainerScreen.Open("pearl")));
+            if(card.id==CardContainerCommands.PouchId&&!_safe)Action("pouchStoreZoom","打开锦囊（存放法术 ×3）",()=>CloseThen(()=>ContainerScreen.Open("pouch")));
+            if(card.id=="tt-token-gold"||card.id=="tt-token-color")Action("craftColorToken",card.id=="tt-token-gold"?"合成员工通行证A（3 张 B → 1 张 A）":"合成员工通行证A（2 碎片 + 1 通行证A）",()=>{
+                if(BagItemCommands.TryCraftTokens(_runtime,card.id=="tt-token-gold"?"gold":"fragments",out var reason)){if(SamePlace&&UiStack.Top==this){Close();if(SamePlace&&UiStack.Top==_bag)BagScreen.Refresh();}}
+                else{RunLog.Log(reason,"warn");RebindFailedCommand();}});
+            var ids=_entry.uids.ToArray();bool safe=_safe;string sourceName=card.name,sourceUid=_uid;
+            if(safe||!initial)Action(safe?"zoomMoveToBag":"zoomMoveToSafe",safe?"移回背包":"移入安全格",()=>CloseThen(()=>BagScreen.MoveStackSafe(sourceName,!safe,ids)));
+            if(!initial)Action("detailDiscard","丢弃 1 张",()=>CloseThen(()=>ShowDiscardConfirm(sourceName,safe,sourceUid)));
         }
         void Browse(int delta)
         {
-            if(BagScreen.Current==null)return;var entries=BagScreen.Current.VisibleEntries().Where(s=>s.card!=null&&!s.supply).ToList();int index=entries.FindIndex(s=>_uid!=null?s.uids.Contains(_uid):s.pocketIndex==_entry.pocketIndex);int next=index+delta;if(index<0||next<0||next>=entries.Count)return;var entry=entries[next];Close();ShowEntry(entry);
+            if(!Current)return;var entries=_bag.VisibleEntries().Where(s=>s.card!=null&&!s.supply).ToList();int index=entries.FindIndex(s=>_uid!=null?s.uids.Contains(_uid):s.pocketIndex==_entry.pocketIndex);int next=index+delta;if(index<0||next<0||next>=entries.Count)return;var entry=entries[next];CloseThen(()=>ShowEntry(entry));
         }
         void BuildConfirm(RectTransform root)
         {
             var box=BagView.Rect("discard-dialog",root);box.anchorMin=box.anchorMax=Vector2.one*.5f;box.sizeDelta=new Vector2(800,360);BagView.Paint(box,"#18232df2");BagView.Border(box,"#a9c8d629");
             var title=BagView.Text(box,"discard-title","丢弃卡牌？",30,"#edf3f4");BagView.Place(title.rectTransform,36,30,720,50);
             var note=BagView.Text(box,"discard-note","确认丢弃【"+_name+"】1 张？\n确认后永久丢弃，无法从消耗区或墓地取回。",22,"#d4dee3");BagView.Place(note.rectTransform,36,100,720,100);
-            var yes=BagView.Button(box,"confirmDiscard","确认丢弃",()=>{if(DiscardOwnedCard(_name,_safe,_uid)){Close();}else RunLog.Log("卡牌未丢弃，请检查原位置后重试。","warn");});BagView.Place((RectTransform)yes.transform,36,260,340,60);
-            var cancel=BagView.Button(box,"cancelDiscard","取消，放回背包",Close);BagView.Place((RectTransform)cancel.transform,400,260,364,60);
+            string name=_name,uid=_uid;bool safe=_safe;
+            var yes=OwnedButton(box,"confirmDiscard","确认丢弃",()=>{if(DiscardOwnedCard(name,safe,uid)){if(SamePlace&&UiStack.Top==this)Close();}else{RunLog.Log("卡牌未丢弃，请检查原位置后重试。","warn");RebindFailedCommand();}});BagView.Place((RectTransform)yes.transform,36,260,340,60);
+            var cancel=OwnedButton(box,"cancelDiscard","取消，放回背包",Close);BagView.Place((RectTransform)cancel.transform,400,260,364,60);
         }
         public static string UseBadge(CardDef card)
         {
@@ -107,12 +187,20 @@ namespace Sdt.UI.Screens.Bag
             if(card?.id=="tt3-mystery-potion")return "战斗使用";
             return ops!=null&&ops.Any(o=>o.Text("op")=="heal"||o.Text("op")=="restoreConsumed"||(new[]{"acquire","discover"}.Contains(o.Text("op"))&&new[]{"classAbility","legendary"}.Contains(o.Get("pool")?.Text("kind"))))?"可用":ops!=null&&ops.Count>0?"战斗使用":"查看用法";
         }
-        public static (string label,string badge,string reason) UseStatus(CardDef card,string uid)
+        internal static bool HasRestoration(CardDef card)
+        {
+            if(card?.type!="道具"||card.id=="tt3-mystery-potion")return false;
+            bool restore=false;foreach(var op in card.rules?.Get("bag")?.Operations("use")??Enumerable.Empty<RuleValue>())
+            {if(op.Text("op")=="acquire"||op.Text("op")=="discover")return false;if(op.Text("op")=="restoreConsumed")restore=true;}
+            return restore;
+        }
+        public static (string label,string badge,string reason) UseStatus(CardDef card,string uid,BagRestorationPreview restoration=null)
         {
             if(UseBadge(card)=="战斗使用")return("仅战斗中使用","战斗使用",card.id=="tt3-mystery-potion"?"神秘药水仅能在战斗中使用":"该道具的效果需要在战斗中使用");
             var operations=card.rules?.Get("bag")?.Operations("use").ToList();
             if(operations==null||operations.Count==0||operations.Any(o=>o.Text("op")=="acquire"||o.Text("op")=="discover"))return("使用这张道具",UseBadge(card),"");
             var state=GameRuntime.I.State;var failures=new System.Collections.Generic.List<(string label,string badge,string reason)>();
+            bool RestorationFits(){restoration??=CardContainerCommands.CreateRestorationPreview(GameRuntime.I);return state.usedPocket.Any(p=>p.card!=null&&p.count>0&&restoration.CanReplace(uid,p.card));}
             foreach(var operation in operations.Where(o=>o.Text("op")=="heal"||o.Text("op")=="restoreConsumed"))
             {
                 if(operation.Text("op")=="heal"){
@@ -122,7 +210,7 @@ namespace Sdt.UI.Screens.Bag
                 }else{
                     if(operation.Number("amount")<=0)failures.Add(("复原数量无效，无法使用","效果无效","道具卡的结构化复原数量无效；卡牌未消耗"));
                     else if(!state.usedPocket.Any(p=>p.card!=null&&p.count>0))failures.Add(("消耗区为空，无法复原","无可复原卡","消耗区是空的，无需复原"));
-                    else if(!state.usedPocket.Any(p=>p.card!=null&&p.count>0&&CardContainerCommands.CanReceive(GameRuntime.I,p.card,state.ownedCards.Where(o=>o.uid!=uid))))failures.Add(("背包空间不足，先腾位再复原","需腾位","背包空间不足，先腾位再复原；卡牌未消耗"));else return("使用这张道具",UseBadge(card),"");
+                    else if(!RestorationFits())failures.Add(("背包空间不足，先腾位再复原","需腾位","背包空间不足，先腾位再复原；卡牌未消耗"));else return("使用这张道具",UseBadge(card),"");
                 }
             }
             if(failures.Count==1)return failures[0];
@@ -138,6 +226,10 @@ namespace Sdt.UI.Screens.Bag
             if(BagItemCommands.NeedsDiscovery(GameRuntime.I,uid)){BagItemDiscoveryScreen.Open(uid);return;}
             if(!BagItemCommands.TryUse(GameRuntime.I,uid,out var reason))RunLog.Log(reason,"warn");else AudioService.I.PlaySfx("ding");BagScreen.Refresh();
         }
-        internal override void OnClose(){if(_returnFocus!=null&&_returnFocus.activeInHierarchy)EventSystem.current?.SetSelectedGameObject(_returnFocus);}
+        public override void CloseFromEscape(){if(!_closed&&isActiveAndEnabled&&UiStack.Top==this)Close();}
+        void OnDisable(){_revision++;_covered=true;}
+        void OnEnable(){if(_runtime!=null&&!_closed)StackChanged();}
+        internal override void OnClose(){_closed=true;_revision++;UiStack.Changed-=StackChanged;if(SamePlace&&UiStack.Top==_owner&&_returnFocus!=null&&_returnFocus.activeInHierarchy)EventSystem.current?.SetSelectedGameObject(_returnFocus);}
+        protected override void OnDestroy(){_closed=true;_revision++;UiStack.Changed-=StackChanged;}
     }
 }

@@ -151,7 +151,7 @@ namespace Sdt.Boot
         }
         static T Round6BattleField<T>(BattleSession session,string name)=>(T)typeof(BattleSession).GetField(name,BindingFlags.Instance|BindingFlags.NonPublic).GetValue(session);
         static void Round6BattleField(BattleSession session,string name,object value)=>typeof(BattleSession).GetField(name,BindingFlags.Instance|BindingFlags.NonPublic).SetValue(session,value);
-        IEnumerator Round6DiscoverFixture(bool preview)
+        IEnumerator Round6DiscoverFixture(bool preview,bool expanded=false)
         {
             if(!Guard(()=>
             {
@@ -160,6 +160,7 @@ namespace Sdt.Boot
                 game.State.hp=game.State.maxHp=1000;game.State.atk=game.State.spellPower=0;game.State.Phase="idle";
                 var ids=new[]{preview?"cmtn125e1nk0":"tt3-dig-treasure","tt3-fireball","tt3-blooddrinker","tt3-magic-lamp","starter-attack"};
                 for(int i=0;i<ids.Length;i++)game.State.ownedCards.Add(new OwnedCard{uid="display-discover-"+i,card=CardLibrary.FindById(ids[i]).Clone()});
+                if(expanded)for(int i=0;i<3;i++)game.State.ownedCards.Add(new OwnedCard{uid="display-discover-dark-"+i,card=CardLibrary.FindById("cmtn1r10xnl1").Clone()});
                 game.Bus.Emit(new BattleRequested{Request=new BattleRequest{Name=preview?"支付前发现呈现复核":"底牌发现呈现复核",Foes=new List<EnemyStats>{new EnemyStats{id="display-discover-foe",name="受控敌人",hp=10000,atk=0}}}});
             }))yield break;
             float deadline=Time.realtimeSinceStartup+12;
@@ -168,12 +169,16 @@ namespace Sdt.Boot
             {
                 if(!(UiStack.Top is BattleScreen)||CurrentRunFilm.Active)throw new TimeoutException("Bottom discovery battle did not open.");
                 var session=BattleViewApi.Session;
-                Round6BattleField(session,"hand",new List<string>{"display-discover-0"});
+                var hand=new List<string>{"display-discover-0"};
+                if(expanded)for(int i=0;i<3;i++)hand.Add("display-discover-dark-"+i);
+                Round6BattleField(session,"hand",hand);
                 Round6BattleField(session,"drawPile",new List<string>{"display-discover-1","display-discover-2","display-discover-3","display-discover-4"});
                 Round6BattleField(session,"energy",100);
+                if(expanded)for(int i=0;i<3;i++)
+                    if(!session.PlayCard("display-discover-dark-"+i,-1,false).Ok)throw new InvalidOperationException("Real dark form did not execute.");
                 var result=session.PlayCard("display-discover-0",-1,false);
                 if(!result.Ok)throw new InvalidOperationException("Real dig card did not execute: "+result.Reason);
-                if(session.Snapshot.Energy!=(preview?100:99))throw new InvalidOperationException("Discovery did not respect its before/after-payment boundary.");
+                if(session.Snapshot.Energy!=(preview?(expanded?97:100):99))throw new InvalidOperationException("Discovery did not respect its before/after-payment boundary.");
             }))yield break;
             deadline=Time.realtimeSinceStartup+12;
             while(!(UiStack.Top is DiscoverPanel)&&Time.realtimeSinceStartup<deadline)yield return null;

@@ -1,0 +1,1100 @@
+{
+  "acquisition": "Raw native logs/screenshots remain at listed local paths. Reproduce successful entrypoints via run_native_check.ps1 with fresh output and the actual2022 editor, then BuildWin64 and run_hidden_player.ps1 -TransparentCompositor at the current physical primary desktop size. Imported media/fonts are restored by GITHUB-SOURCE recipes. No binary or >1MB artifact is committed.",
+  "artifacts": [
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/build-desktop-1/unity.log",
+      "bytes": 350155,
+      "sha256": "bd89048d2d1e62f0021b85773ddc85a71ffc363c35b8390639b4bb7f5ca6465d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/build-desktop-2/unity.log",
+      "bytes": 75658,
+      "sha256": "eed5dc7e94c957dc13964be7d7fcccfd981e0706b6c83e678a5f50ddd4dae12d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/battle.log",
+      "bytes": 614,
+      "sha256": "3e1a5448c6808a2f9da0b2f187ebbbea59337154894213ff9e35edd7f73589f3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/restore-archive.log",
+      "bytes": 167,
+      "sha256": "c8e6b4f7fcfbb7fbad32ad3e7c586562fc41225825b22e38f28112210d0f214b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/restore-bag-round7.log",
+      "bytes": 158,
+      "sha256": "5d218c661b12619c397e28be7576077ec813cb86b54311d035ef53c0c95bc651"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/restore-battle.log",
+      "bytes": 152,
+      "sha256": "1aa5b49a84aaf481eff8cde3d28999ca442589681c49c30f3d4455c3da228c9c"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/restore-hub.log",
+      "bytes": 142,
+      "sha256": "d24e6ac809082e4d65b7e26f8cf93515fcb945d11cc672e5c8fd16eefb5cf2ce"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/restore-photo-export.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/restore-run-round2.log",
+      "bytes": 159,
+      "sha256": "75f9f946a78f53f9bf6bc8ce18d9bffc6bbb5687600c19cc15e5265355d57fdb"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/restore-run-round6.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/restore-run.log",
+      "bytes": 152,
+      "sha256": "0faabd75b1b85be82ec668e9fac1d4323f3d709d90fe96ac3313240d96c6108f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/run-round2.log",
+      "bytes": 152,
+      "sha256": "8dfe223c1a886f5945544f1c6ac5096a314660ead9b8de92e1964c37b2164e54"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/run.log",
+      "bytes": 186,
+      "sha256": "d3b1a579fd7391a590d9172a67b037b97cb660abcbd631b74a7a3ecf651ec30b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-1/source-oracle.log",
+      "bytes": 135,
+      "sha256": "b10d43e7064538eb1fab080e6ba9424a157268d561ae549ad42e9fba0a12c3da"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/archive-export.log",
+      "bytes": 178,
+      "sha256": "6ae7ec726ed220172367af3bafc77a437ee016a53ed3f7eeb91654134e17244d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/archive-id-conflict.log",
+      "bytes": 187,
+      "sha256": "34bd68a9843e7913ad30172e7696b17fcc9c325c3539c7521ee014ccabfaad6f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/archive-import.log",
+      "bytes": 178,
+      "sha256": "23be8423f17e7e729ade6b92145d92e03cc39adc9df7500a17a292e2688bb994"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/archive-name-conflict.log",
+      "bytes": 191,
+      "sha256": "78b685203b17e8469256d0ad29ef7979aaf066326bafd38865a29e281bf7ad2c"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/bag-round7.log",
+      "bytes": 41,
+      "sha256": "549bbeaed010026b9a3a2f1f6bfad6d5e1a40890260e82a9e11d77a6f49ed684"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/battle.log",
+      "bytes": 138,
+      "sha256": "5c1f2feb198f435fa5de8dc4ab4761a987754dff805d3e3c1f3639de00e2ba4f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/hub.log",
+      "bytes": 207,
+      "sha256": "e458529bc95840bc6b5075096ed5200423c0753f2ae2f857fdd7532cf6bf29da"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/photo-export.log",
+      "bytes": 190,
+      "sha256": "17a279e01b9aebbae529fa4c6c1c8cd88aa91235ab620f76d6d9de9c513cd26e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/restore-archive.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/restore-bag-round7.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/restore-battle.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/restore-hub.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/restore-photo-export.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/restore-run-round2.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/restore-run-round6.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/restore-run.log",
+      "bytes": 82,
+      "sha256": "2ad9967f2280d0195ad457a92fe6a353a8492625846632386df6dfc446efe4bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/run-round2.log",
+      "bytes": 152,
+      "sha256": "a3c192b9569074e380b3f890789085fe38c7e8405ad07d98addf0dceccd2f7ad"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/run-round6.log",
+      "bytes": 27,
+      "sha256": "5b07fd7678647c921543dcb6769f832c15036d81e6828e1474bb2c094adf34df"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/run.log",
+      "bytes": 186,
+      "sha256": "5b101688487a1f5ab2aff22d7fff028e1aba247dd642314b347ed7dfbcd9eff8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/domain-2/source-oracle.log",
+      "bytes": 135,
+      "sha256": "b10d43e7064538eb1fab080e6ba9424a157268d561ae549ad42e9fba0a12c3da"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/import-1/unity.log",
+      "bytes": 75927,
+      "sha256": "7f951ca07f22026fdb72b0e05e2346e1b7ec357a194f39fa2f5c706221392b96"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/import-2/unity.log",
+      "bytes": 45464,
+      "sha256": "45ed434121071bd4865a95e0b71a5c3436ae24e7a582cd04ca4eca7f5ee402b3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/import-3/unity.log",
+      "bytes": 50023,
+      "sha256": "e488f8c963ca33e911537d3372b6dea6e64b0b78ce61091a4c8efe997c13995a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/import-4/unity.log",
+      "bytes": 800476,
+      "sha256": "52b3762f709e0c323540479dacb30890946633247452bf6d30aa865428496543"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/altar-disturb-middle.png",
+      "bytes": 683549,
+      "sha256": "41fb471a87e16cfe0a968eedfe826150ad05cd0e1474b0de3f53195e09a6b020"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/altar-encounter.png",
+      "bytes": 2033275,
+      "sha256": "2978b9298654505888f0e5bcb1781c42ccb8d6a3c600ce18e9e8549fbd736bcc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/boss-deck-after-skip.png",
+      "bytes": 695722,
+      "sha256": "56815a80ef22bd1a8c19620ec75679e98101f75bb8f14b62e89cd435e0aee699"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/boss-gate-confirmation.png",
+      "bytes": 743257,
+      "sha256": "1bc4cef0e3c4313748d2159acc02cbf0d2333a6b6cbdf84d381e8c2071085832"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/boss-gate-save-failed.png",
+      "bytes": 802135,
+      "sha256": "49d65d849c5a4ec07e07ab629937390229b2854824bf6b6d34146da6373c9927"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/boss-pressure-early.png",
+      "bytes": 298423,
+      "sha256": "08d3e85d8724748af229da778e07a7238d66f66290622dc2641f636e09f12be7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/boss-pressure-middle.png",
+      "bytes": 631278,
+      "sha256": "e21cfb38dc6c9db1c944db56ed6f330d1f0557362370c5491ce435b315892406"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/door-destination.png",
+      "bytes": 3022916,
+      "sha256": "efa555a90647779184dbaa7da7801d3dd2f90b3c8692d32c02d6169b3c5124fc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/event-encounter-ev19-recode.png",
+      "bytes": 1861348,
+      "sha256": "ccf8cf36742f48a99530123ef97064a01873db041f566514e3a6bb77ec9f477b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/event-encounter-tt6-chestdraw.png",
+      "bytes": 1562352,
+      "sha256": "f547f04c074916c6e8ae838a65f3ef79b31e3e7fdb0bbe265c7c5918b5940508"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/event-encounter-tt6-mystery.png",
+      "bytes": 1944804,
+      "sha256": "732ddebab673b115f03ce7f2e16dd5b3430c12fdb56a3bd5600f7f6ee886c32e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/passage-early.png",
+      "bytes": 856527,
+      "sha256": "09c42652b7e1669aea6c772452ae56be38602556cc17780e99f14c4402da5b9f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/passage-middle-caption.png",
+      "bytes": 888563,
+      "sha256": "3d3ea6c1aeff68c03ff798e516fe7a93f0d2ab8ae043102bf79a804682529d10"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/photo-destination.png",
+      "bytes": 1821476,
+      "sha256": "2d3cb4b76892b9bf4afa28b2c939d6636d48f43154ce3acfc063f12b9ef7d6ea"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/photo-develop-early.png",
+      "bytes": 414968,
+      "sha256": "1c594a5d118b31df123bd2653d3bdcbeb14edee98363410b0cb628589bff4339"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/photo-develop-middle.png",
+      "bytes": 414968,
+      "sha256": "1c594a5d118b31df123bd2653d3bdcbeb14edee98363410b0cb628589bff4339"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-film/unity.log",
+      "bytes": 97448,
+      "sha256": "60a00bb81ddb01b37df67721ed3c720ab46ef10c19728f6ccf3a462168027151"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-extraction.png",
+      "bytes": 921445,
+      "sha256": "f1eedd9ada0f8001c683c4e10a1b33275de3aadce9191de8dea4ba301e2a07db"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-AltarRitualScreen-3.png",
+      "bytes": 2046747,
+      "sha256": "0d9f04d97fd3d85c593442a7e09e3fe08f5bd5a91506a0dc0f105093e7f0d95a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-BattleScreen-0.png",
+      "bytes": 1685288,
+      "sha256": "aaea9dbb3ebb235ef7eb4c60777ebcf5e10940dbf4f5a4ee6551a4fad96dce87"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-BattleScreen-1.png",
+      "bytes": 1764277,
+      "sha256": "d687961f7f2e7f0f3baa69148428b84b7c66131bc8657e2c2fdc8b1915fbf9e9"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-BattleScreen-2.png",
+      "bytes": 1708114,
+      "sha256": "aa7b9c36aa32b1c5c480800d4c311fa856a402bf6a3e94d30939023aec3b91e1"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-BattleScreen-3.png",
+      "bytes": 1747966,
+      "sha256": "b3a9088c4cb99ca22d4defbab17a0f3d9b90c03e3828c34bb774a77fcd5dfdbc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-ChestOpenScreen-0.png",
+      "bytes": 1626621,
+      "sha256": "eef622420b58b85cd0d7e4e38407b05f6afb661dd7a4e4981dc64166824bfee5"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-ChestOpenScreen-1.png",
+      "bytes": 1625817,
+      "sha256": "8f64cd31cea9e4187ac2c118d2f3f19c582fefcf486a433efc5d9a8f7ee78a1a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-ChestOpenScreen-2.png",
+      "bytes": 1662255,
+      "sha256": "3f1044bd849c3db2d68aee707db032bc5409e1a0ec74f1d4e0cbcfb115e27ce0"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-ChestOpenScreen-3.png",
+      "bytes": 1971973,
+      "sha256": "560d92055ee0df890204000d25e1609585844a01069f29f12a7ce3e385203b2d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-CurrentBossGateScreen-3.png",
+      "bytes": 756866,
+      "sha256": "cc53103735e4aad19ee24fe64675f3f1978596d820c321b4a87e4094d0246cb1"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-DeckSelectionPanel-3.png",
+      "bytes": 1018480,
+      "sha256": "af48f3a4fb210c078c72d527443b73fa1730a58d64f948ed86d259cc795cc888"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-DoorModal-0.png",
+      "bytes": 3022732,
+      "sha256": "b5186f2c60684bf0413a207478da9073aeaefc30e3c1297a5d91c29a1970a031"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-DoorModal-1.png",
+      "bytes": 3022935,
+      "sha256": "633f263bac4f07960355abce57732f574084f9ac0297fae9f67f0f4886dcfca0"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-DoorModal-2.png",
+      "bytes": 3023392,
+      "sha256": "8ab537fc7f5a707225d78956aa63680ae3ca184340d3734147cca4fbde2d8ea2"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-EmergencyModal-2.png",
+      "bytes": 1334531,
+      "sha256": "e6544023c400c09ea649e3f9cc4905b77c775099e8923e94e5fb5baca6cb7513"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-EntrySupplyScreen-1.png",
+      "bytes": 1601040,
+      "sha256": "29ee5857e1de9d73e79efea0477b8cfde542e2a463fdc7e52d16ec8ecae3a401"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-EntrySupplyScreen-2.png",
+      "bytes": 1725299,
+      "sha256": "5c0b784a5bf9ab8fa06b85a7211913e9a7ebd06cd43b032470624e9b29068081"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-EntrySupplyScreen-3.png",
+      "bytes": 1703132,
+      "sha256": "ee0f5741be962c2824c6bed061a32a050b90b6a86b3c30ea33d3a40ade5826bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-EventDialogScreen-2.png",
+      "bytes": 1811620,
+      "sha256": "a1b8338be981c77e6fb6824f81b8928ac7a2e97d5f1211e720bd791b3a2c50dc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-EventDialogScreen-3.png",
+      "bytes": 1810495,
+      "sha256": "b4102cd8d910a8462d6454d7cca9ff197eed391317af2e0651c7da4f9c88c329"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-FinalExtractionModal-3.png",
+      "bytes": 1329457,
+      "sha256": "4c214f2fd93ffb75fe145d3ffed7758396431c15b567ffa752761d8700227c9d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-FireRestScreen-0.png",
+      "bytes": 1043479,
+      "sha256": "7e7a5f307cae091652a3b6ef339d7f66db320d8d8c76c7009630667c7e05c740"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-FireRestScreen-2.png",
+      "bytes": 1043822,
+      "sha256": "85fb2354c3f464192098141f3cab4c64486563b587bd5331f81f30fd15914a9e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-ShopScreen-1.png",
+      "bytes": 2648456,
+      "sha256": "bea8d37cee8d7d828e5a80aa802fae44776f5165063ed741ed08723ccbc5b791"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-page-ShopScreen-3.png",
+      "bytes": 2714339,
+      "sha256": "8bdc016a44419698cf9225daad005e69849031ec3961979f08899aab7b7fcfd4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-returned-base.png",
+      "bytes": 1794959,
+      "sha256": "cba123517fa22770a8969506b8221f44e823b847964edcc9b18eedac2506b8a5"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/journey-settlement.png",
+      "bytes": 697424,
+      "sha256": "4143fbc8abb5fa4e8f382861c7db00859faec8f79ce0ea8ea74354f755834ca8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-journey/unity.log",
+      "bytes": 96320,
+      "sha256": "b4733947a3513de148fe9fc034e4fd388fd087ef0b4bbea9cce415806193a653"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-abandon-complete.png",
+      "bytes": 647933,
+      "sha256": "a3408ad5bdb31e8a46d83933d7ba93c40be6b2ba2e210e3c0a922a369764153c"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-abandon-save-failed.png",
+      "bytes": 552369,
+      "sha256": "fee3583bd2c3e36376d09c0afee04d18a04853fa4fc18e689f2f8516a4a65f08"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-chest-reward.png",
+      "bytes": 1743690,
+      "sha256": "cbff21408ec05da411f1f103b8466be26dd6e419fb682205f4afa100edcca60a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-death.png",
+      "bytes": 434665,
+      "sha256": "2648ed2b9f77abb6ced9ebb797d6515f0f1a9e6301121aa194f9306a8abdccf6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-event-after-choice.png",
+      "bytes": 1018854,
+      "sha256": "8b6897eb9a291edfa2d61f643e32c8cf05a8c29041f87bd72038341552c1a945"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-event.png",
+      "bytes": 2438998,
+      "sha256": "812982d9f39329bd785f046d90339701612ce2ac17069c36f7e8e9b5388590c6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-extract-complete.png",
+      "bytes": 678970,
+      "sha256": "7a0f516d1618d307b84b590426ee466d0e7bab91d1f4ce36a43234b6d73542c3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-fire-complete.png",
+      "bytes": 1104833,
+      "sha256": "6925d5f10f5883dc0bc933e76512232e9fbc814dd798b504031964c1641226fe"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-fire.png",
+      "bytes": 1042660,
+      "sha256": "760584aa4a0a41f809a5822b672ab580a5128fad19a3bd356b37b9a8666ca9c2"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-reward-complete.png",
+      "bytes": 1686978,
+      "sha256": "ef766efc7515049cec8f34ffb042018aec33eb1f7c057476f56ee76cb0289964"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-sort-before.png",
+      "bytes": 918604,
+      "sha256": "644b4affda94f679194f37fd12328244454abfeab911ebbc465b4a7a07b4e5b5"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-sort-finish-save-failed.png",
+      "bytes": 714274,
+      "sha256": "6b7cac872974d1801f291ca41b81de5437ced46b5d31fc9a21a0e2063042576a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-surrender-complete.png",
+      "bytes": 419482,
+      "sha256": "5a985b1d0fa6f8bae48cdccaca97183219698c8e1b39b1acbc30e689b590f8f9"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-surrender-save-failed.png",
+      "bytes": 1218290,
+      "sha256": "4b03a455b1bfa441136f670d88a7fa5903daa994a62e1b8e1d9aa7e54e0c8d31"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/receipts-terminal-return-base.png",
+      "bytes": 486453,
+      "sha256": "b507bcce7ac2383f30016c381cbd15adb66d74af7d8f467646c80afb8848091f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-receipts/unity.log",
+      "bytes": 118738,
+      "sha256": "7feec2986a223258c5a503f163ba8939a86549d11913ee8dd4a0f1dfc2f2b2dd"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round2/unity.log",
+      "bytes": 95965,
+      "sha256": "e073df97b4e6d170d2b877f57cfb150bf04bd4e6458aed39aa322e368d6e49be"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round3/unity.log",
+      "bytes": 105497,
+      "sha256": "a5fd81003ba8074a044c90ccf1b2d288db40c0af5e0680d719a64c3ae874021a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round4/unity.log",
+      "bytes": 105664,
+      "sha256": "777baeac3ebfca61beb68778011134c73659d378e621deb49808da3df2273a58"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round5/unity.log",
+      "bytes": 103619,
+      "sha256": "d9a9f12200bc85114ba5872e42bfbfff795610e608676403d991a61f622bff74"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round6/unity.log",
+      "bytes": 155397,
+      "sha256": "888ed6f918b61a9f01a0f77d7d070d1a6ce773420b74535a6399cce06597022c"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-1/unity.log",
+      "bytes": 95885,
+      "sha256": "e9040b9919feab77f2e7b3accdc8695a7e2397f6f6fe484c88d385685efc5f00"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-2/unity.log",
+      "bytes": 2601,
+      "sha256": "320d4a1373c14be5d8bf92c3ccd9492c2b396b100d3da41a4820ba2b69827985"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-3/unity.log",
+      "bytes": 100795,
+      "sha256": "4f6fe3808a196db2ad2524f8b5af1591f1447ce4e947cf7226c0ad846f4a2889"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-4/unity.log",
+      "bytes": 100591,
+      "sha256": "7b1ca1d1d8ed7fac05cf4c9e53f80f849df69fc7a8afbcd7d5615ea304725a39"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-5/unity.log",
+      "bytes": 104197,
+      "sha256": "ec14ea51e0b9f6def2ebc9f2d02585ad130f70eb87b6bb306ac90caa80e664c3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-round7-6/unity.log",
+      "bytes": 132668,
+      "sha256": "7b5d8b91de771c7c6cf08ce57197d6202f05b4ad9c87842aba6935c58ebf420f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/native-shared/unity.log",
+      "bytes": 101222,
+      "sha256": "b64257890bb8e7c2a288c2e8a33c23612d04f4b927c51ec7e5a18467d9034cbe"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/card-rules-legacy-actual-pixels.png",
+      "bytes": 108053,
+      "sha256": "7d69199d2852ea179845b2c144cae36adec7a666ac73af91e00e73fccee3a359"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/card-rules-native-actual-pixels.png",
+      "bytes": 102146,
+      "sha256": "fc3b5d487a3f271e704cdafc2b03d236fac9c664be74e21ce572bc55ce3971cc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-altar.png",
+      "bytes": 2744976,
+      "sha256": "2a5a4b911072632d3f256569bf90de6be82b5a7b7b809e668fc924ef3e02fe65"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-bag-discovery-candidates.png",
+      "bytes": 1561437,
+      "sha256": "62551e72413acbdc91e793c258e5c922da5d5511e82c30c020451d641ef3c658"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-bag-discovery-returned.png",
+      "bytes": 967712,
+      "sha256": "c2e978786055451ee1250da7293534f7bcfa00193b0e81b6ce77836757b57fc2"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-bag-discovery-save-failed.png",
+      "bytes": 1605903,
+      "sha256": "46537ec63c47aedfd9d1df3ed05cfa54bce068b235ac85a03da28f325a746d18"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-bag-discovery-selected.png",
+      "bytes": 1561444,
+      "sha256": "2daced818a0b0b5af6c9f6b6c1d9ef0a844951fd52346bdfe756d0a777aadee4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-battle-pile-reader.png",
+      "bytes": 2000799,
+      "sha256": "f3de3500f6ee0a6a8f54c66a59601c141abe54d8cf83d2d78670271d81aaddfe"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-battle-pile-return.png",
+      "bytes": 1853842,
+      "sha256": "b5ed918a3f94dc28918f4a6e5058fa369ec11bddeff16f7ba108ec43252f046d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-battle-pile.png",
+      "bytes": 1853842,
+      "sha256": "b5ed918a3f94dc28918f4a6e5058fa369ec11bddeff16f7ba108ec43252f046d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-battle.png",
+      "bytes": 1845043,
+      "sha256": "09656c27664eab5d561b8e739b21d02ae908bf9d1c085ecca13ecc57acfc08a3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-card-legacy-density.png",
+      "bytes": 1362107,
+      "sha256": "38c69925e3ab1bb629ccb13cd5d98a18b44cc901d0c1df24be9c3196bd195132"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-card-native-density.png",
+      "bytes": 1357439,
+      "sha256": "9e1c76073a6aac1662db384032041520ffc8519dece4046682d0d270416da6fa"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-discover-bottom.png",
+      "bytes": 847850,
+      "sha256": "d4c9aa4dfd5e0f66b61b22751dde01d7ae6539b76d4aec2fe4bb06b633874d60"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-discover-cancel-return.png",
+      "bytes": 1676929,
+      "sha256": "1196ec01dab0d86cea00ee3e110f91e639ec6869ac439324c7571e2225378cd2"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-discover-confirm-return.png",
+      "bytes": 1852557,
+      "sha256": "b3c2d038762f0c141a7054c269ddb952ee8060d0e7e18b45d60ffded8b89a98d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-discover-preview-cancel.png",
+      "bytes": 1854606,
+      "sha256": "77b6b01ab593bc5c5d3e77f77d72724c7516d619823ec2b7816b93a9fba81b18"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-discover-preview-confirm.png",
+      "bytes": 1903650,
+      "sha256": "f63e3b57d03b1ba411ee56420ee81992465a668d452ef0f39e54324d8247572b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-discover-preview.png",
+      "bytes": 1073237,
+      "sha256": "8c5743344f18c9e8e41a308f0856437cded23f263acee1eb956db0975c2080e8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-discover-selected.png",
+      "bytes": 850375,
+      "sha256": "8dfdfaa4df0af3945288c3dbb24675b4b41ba605908cfb5e17f1f8942322cf27"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-door.png",
+      "bytes": 4098045,
+      "sha256": "3392b8dd59895b14eca7d1366b40683b0b2652c6bdf424d149d0c6361d61cdd2"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-emergency-entry.png",
+      "bytes": 1773397,
+      "sha256": "fb4e7d90cbd988c6b9b258881018fb4510fa6c2b1a4ea1ff1fd867f6b3e5c7a7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-extraction.png",
+      "bytes": 1333551,
+      "sha256": "538ab79db78552864bcc31b6c80692cc966c47302c95a3a9f2fa2ca2b5242e35"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-formation-rules.png",
+      "bytes": 1148243,
+      "sha256": "0bdf4149ece1b0fdf6c858e5c91d87fb77fe8415027dc127374bf473cf311d2e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-formation.png",
+      "bytes": 1289820,
+      "sha256": "1d941c999aad23d25f010c1fca1f47233ed6eb72b8f1d56948e6c1a81da9da2e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-fx-atlas-specimen.png",
+      "bytes": 2478446,
+      "sha256": "f51d845233bea1a109c61eeca7a0ad245fcd39628807cc9e63ba3ad90d850d95"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-grave-return.png",
+      "bytes": 1995983,
+      "sha256": "014523ac6cbbf64934b8318a5ab08a5a5eaaca2e2964506ac50d84b845bf28b9"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-grave.png",
+      "bytes": 169259,
+      "sha256": "8bc9be8f18058ce456594b9596a884f1c5edfdf4194c1b696bd5732554c1c7b2"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-0.png",
+      "bytes": 1061591,
+      "sha256": "f20d643c913ff487f1a530588effedb861b6ea15045e3e072e9e295ffb9b8686"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-1.png",
+      "bytes": 705059,
+      "sha256": "cd9ea4717cd5420adcf995ab83cd29bc0abd7fc2e5ffc225ec2bfbdc7e9f71c1"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-2.png",
+      "bytes": 1066216,
+      "sha256": "b350b445b5316a6036599b6ab9ed00614c330beab886a254a0fc23b724c3fce8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-5.png",
+      "bytes": 740852,
+      "sha256": "f908ca336c7dcd8f2327afc2177765418bb0534fee51379a0b9450b7e17312c3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-in-run.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-more-4.png",
+      "bytes": 778498,
+      "sha256": "6376a40a97e6dc155cde1ae9416d1bd88921ed424abc7166fec28ec98e21a345"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-guide-original.png",
+      "bytes": 707455,
+      "sha256": "5f7c3a73ddef151f6ae25e1da5e4b55b30d53b5ab591cd71f1510fc5e27f270e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-hand-material-picked.png",
+      "bytes": 2343007,
+      "sha256": "7bae3ed02fa405f08a0fe836a9dc9534bb22308db30655661c5f7b7471a72f0e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-hand-material.png",
+      "bytes": 2301013,
+      "sha256": "41a1d375b0217a3c599de742883c5749a1659a38370e95fa8c8d8bc3ba3107cb"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-hub-conversion-overflow.png",
+      "bytes": 1155796,
+      "sha256": "f288b93bedcc816b5f3e92086d1324a064af87ae4d0a4c3e05bae8cbc35bc688"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-hub-parity-returned-base.png",
+      "bytes": 2379419,
+      "sha256": "2070c81d868c4124102b8cf1bb33367e647f10af6bf3783e8d343168442f74cf"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-hub-restore-unbanked-keys.png",
+      "bytes": 1002729,
+      "sha256": "6205643d79ecb143b49cb2f9e672ef5299793d63f404a4e29a7f3ed258486ddb"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-hub-trade-base-variant.png",
+      "bytes": 2464516,
+      "sha256": "41c15511dbefd8bfb34f7319a72e1d341d088af3d80e23bb4c184fd42a29151b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-hub-trade-variant.png",
+      "bytes": 2463347,
+      "sha256": "b79d5069fe03646a7ff1a8ef878d25c99540884963a482997b117d5b57c34c71"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-hub-variant-stock.png",
+      "bytes": 2525550,
+      "sha256": "3f49a390e5b323339933774bff7fdba409d9c5a9f0f88834e19ceefff3391400"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-hub-warehouse-actions.png",
+      "bytes": 991923,
+      "sha256": "daca813bfb58a703c9f753ce88cb9ccbb37136fd10340edf2a3d549c505045bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-infusion-picked.png",
+      "bytes": 2094026,
+      "sha256": "9b9b5c02aa9e7cb358f24247af13648bce9673b4a753bfa379f3d338fbe02204"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-infusion-return.png",
+      "bytes": 2302392,
+      "sha256": "e1f098400fb8d48bfc9241a92348258b061095a3dbc81a5a915b99a192eb33e3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-infusion.png",
+      "bytes": 2068093,
+      "sha256": "166e85849ca48a61d44d188a2730035f06ab7609c947d823dd820003932a4c4b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-music-load-failed.png",
+      "bytes": 715485,
+      "sha256": "a9a5e16e825a4547c6706f2fd1aa2686d0bdcdddd533a107229576cc515e93cd"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-music-recovered.png",
+      "bytes": 699056,
+      "sha256": "cfdc38c5c09cfaee4e5e0250bd369fdc38f5ba87dc406c9e9bbb534f2eab631e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-music-retry-kept.png",
+      "bytes": 715468,
+      "sha256": "2dbc7c32121b48d59071237652eefddf88488bf99c2da3cb192b2406955f6b91"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-passage.png",
+      "bytes": 1176217,
+      "sha256": "66eb65ee87dab692edd0eefd566dc1c90c6b925e1be4878082559c4963448b87"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-photo-export-cards.png",
+      "bytes": 1187926,
+      "sha256": "838e1cdb2e6a4c3575ad52994a76e98cdbd2c29d3d527411aac12a1df56f7558"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-photo-export-notes.png",
+      "bytes": 1368769,
+      "sha256": "4b79cc41dbfbed4a812c32f0725297eb1fb460933328f9db25a57ada76ccc62e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-photo-export-returned.png",
+      "bytes": 2524773,
+      "sha256": "cc9555d9866d546f20a726ffd75b6252f1acf3ae2ac4c36ca1385f9acc2ed07c"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-photo-export-tools.png",
+      "bytes": 2519230,
+      "sha256": "6525cbab255947a5a4d67fa4a78e94e03a0f190ede201ecb7e670367e0d91f9f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-photo-export-written.png",
+      "bytes": 1204715,
+      "sha256": "e499747a1ea6f3025339b926c094d702a8a027ceb79b08a13976b0a1c6d9c4bd"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-photo.png",
+      "bytes": 2509089,
+      "sha256": "6edab11dc8d7bdd79c488ee6332a6474a28d32959f23744a0f577cc9107ee617"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-consumed-provenance.png",
+      "bytes": 2393298,
+      "sha256": "99027aa5a4ce1694e555a0a3e072a9572f1025f1e16562362ec80181eeb417f8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-discovery-candidates.png",
+      "bytes": 847849,
+      "sha256": "78baf5c1945e6894045e6014bcd81cfe6461416051cf6dcc37b07ae543280a54"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-discovery-expanded.png",
+      "bytes": 1580383,
+      "sha256": "84a238345f1f7561d202b633e29ce48eed202d2835425edd0db7d29a44632ddc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-discovery-return.png",
+      "bytes": 1824563,
+      "sha256": "b4b2916687dfd3ecb9c5f24dd903a7840dccce8e72f07d2a23b94769c791c078"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-discovery-selected.png",
+      "bytes": 850031,
+      "sha256": "8cd1af8d97adb88feeb9cc35083622cd57bea3a7dbe1138e487980d50830b693"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-discovery-sixth-selected.png",
+      "bytes": 1596027,
+      "sha256": "589b653f491a1bdcf9fd49b2debbc59147ae3c71b1af14d67b563536934677f6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-formation-selected.png",
+      "bytes": 968061,
+      "sha256": "346f683f6df8b96c5f3abf4af40efb2ac84094541f40660462d02f862eb8f892"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-hand-state.png",
+      "bytes": 2177555,
+      "sha256": "507e810861edb20f13b42e810558c477365e4c46a340b4e16636ae791b64c7ff"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-hub-collection-receipt.png",
+      "bytes": 1875767,
+      "sha256": "4be3183e92ed009667e695adfd5bbf8237b0e1f1ba3c227b098f732d210e0a50"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-hub-partner-reply.png",
+      "bytes": 2170514,
+      "sha256": "d37b7a5fabad6e16ef0078b8753c437b483fb8e75b400db26421de4395cfad23"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-hub-rainbow-progress.png",
+      "bytes": 1803448,
+      "sha256": "80d0a5a6f3f4a3620a02dbcb08b11e4bb3e6e876dc3079a6c1a7387e2394c7a8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-hub-reward-warehouse.png",
+      "bytes": 2448013,
+      "sha256": "a8d20d0ddc121eab9ff066e0e56d6b18c4bcfea08eedabc5546e5dc07afddb3e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-hub-rune-progress.png",
+      "bytes": 1827654,
+      "sha256": "6986626f75aa53d614e0fe5f6dea972039eff6c6efcc87add44269d253f98678"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-pile-reader.png",
+      "bytes": 2563336,
+      "sha256": "1080714e7024b7d53bb6eaa68d8b2f69eeda20cb8a873b88d7c338bd8cf24daa"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-r7-pile-return.png",
+      "bytes": 1843750,
+      "sha256": "7064ded6e889e9b03227f15150cb799a6e574586018541cf35488e09f89c824a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-recode-reader.png",
+      "bytes": 2605236,
+      "sha256": "456b1ea42b1dd392be8e05728ca10ace5117e34abe7292601af6d6cb9c4d7a87"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-recode-result.png",
+      "bytes": 2585676,
+      "sha256": "3f4ac6bed5c479824bed0368d633d54f73da7cc432825ce81339e0f8f7025e3b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-recode-save-failed.png",
+      "bytes": 2641853,
+      "sha256": "904fedf347cd8bdb0b770fedf486a4e8b34f07b139f9b4ac71579fc2d538e096"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-returned-base.png",
+      "bytes": 2375534,
+      "sha256": "7aa566c6f730faa505c61c6ef4352c7400ae6d0e47313f076369f3e13d597be1"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-returned-slots.png",
+      "bytes": 1464026,
+      "sha256": "29aeb61391b8961465f27726d186841f8b5695a7028619abb7d8dc40bdcc89b0"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-returned-title.png",
+      "bytes": 3424616,
+      "sha256": "922086677bbca251bc3d666753553ac27a00dcd07cded21e0971d9022dcd21dd"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-reward-pending.png",
+      "bytes": 2141645,
+      "sha256": "2b9af3bee0006974bc1671a7952600597e4fce343091e507947e87db5b03a09b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-reward-reader-capacity.png",
+      "bytes": 1854902,
+      "sha256": "6934fa39f8813271e11495dbb8f9591f841194cba2742b4919b9ca27b73b77bc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-reward-reader-organizer.png",
+      "bytes": 2555996,
+      "sha256": "80d17d3714e3b0da198511a9d4fe475c5cdbac0b8cb39f28c9db8ab41915e196"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-reward-reader-pending.png",
+      "bytes": 1856867,
+      "sha256": "2d6cc39eb8c395645e92ffc9115ab7d397561cf4432d8d2a9054fbc04d8bcbb6"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-sacrifice-candidates.png",
+      "bytes": 1942759,
+      "sha256": "05c4ca967dbcb6ca903603b070943de31c25fa96e959c033a561f0848330fd5d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-sacrifice-extraction.png",
+      "bytes": 1045743,
+      "sha256": "886f461e2e789c40d32c36eb8fc9f416f7f43442c7ce1f1e681837d80b31cb89"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-sacrifice-returned.png",
+      "bytes": 1773397,
+      "sha256": "fb4e7d90cbd988c6b9b258881018fb4510fa6c2b1a4ea1ff1fd867f6b3e5c7a7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-sacrifice-selected.png",
+      "bytes": 1940499,
+      "sha256": "631287cd393153b1101795912da31c7ab1d068c59670d332a4120a190e9ab9bf"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-settings.png",
+      "bytes": 737380,
+      "sha256": "83f0ef682ddb87dfd1f36d4c78c594f01aa25637a41525f533f49e88b7aea5b9"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-settlement.png",
+      "bytes": 879865,
+      "sha256": "ba605a0248681d76466f16f06a2fdf4f207994101774459cb9a39aae6f1db1f1"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-shop-commission-dice.png",
+      "bytes": 1928805,
+      "sha256": "81243eb9aa42b5fc85c914bba58dc256ea7819a8b14ba7d9deb3db05247767fe"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-shop-commission-receipt.png",
+      "bytes": 2455170,
+      "sha256": "e729bf476e23536a0a74641d5a9a3db97b21f3ef7864a8fb0e9c6def679030d8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-shop-commission.png",
+      "bytes": 2622081,
+      "sha256": "f56b1daf8be640ed5579d97320eb1a715d9056449ca479c259836a3c403b8189"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-shop-exchange.png",
+      "bytes": 1686992,
+      "sha256": "39c25c3da9fde819641c4ae7d0a43bb1294922fab28f29789e538215e75398e0"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-shop-free-offers.png",
+      "bytes": 3730195,
+      "sha256": "2293b0dcb12aeba39673081527944afcb52a24456e964ba939c3082c1b168e3f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-shop-inspection.png",
+      "bytes": 2371882,
+      "sha256": "3c4a8b811da33b213d90acb41176616baa907f1a16ab794e124adf0eab0e0790"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-shop.png",
+      "bytes": 3733574,
+      "sha256": "1ca5cabdff5ce96f29d383daa5c560c93c53685f38fe370b8b2ec2c95735081f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-slot-archive-export.png",
+      "bytes": 671277,
+      "sha256": "21d6b097903e4bf8a2632f00351855f3c7e6cfc4745a0303e3437344e2abb892"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-slot-archive-import-preview.png",
+      "bytes": 504031,
+      "sha256": "1b6094e43bcc5acda7f081e58faf1d882c6d046d34566fc3246bfa1dd6f4830b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-slot-archive-import.png",
+      "bytes": 651515,
+      "sha256": "9a5e8f8caf480ebd603e388dfff2d628135136014f71892cfcf9950da98dfd8f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-slots-backup.png",
+      "bytes": 1469166,
+      "sha256": "a2849eded6b3dd3f811da9f8e2585b5c092d46183b5066811ba168ec47e4278c"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-startup.png",
+      "bytes": 828569,
+      "sha256": "ca7f45b55eec3969ce109bc765363f542fd05b68f221cdd11b2cd87c3f45fffe"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player-title.png",
+      "bytes": 3437355,
+      "sha256": "cd8cba904e24718b409e706c11f6c316fd5a195de30895dc742464fc50cbef0e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/player.log",
+      "bytes": 661560,
+      "sha256": "326d5aae43734b756757de373e9b494e6871b2cc83e1270c006e6909e16f1695"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/result.json",
+      "bytes": 9414703,
+      "sha256": "a4125c99bb9b46ae2690122e918226fa9eeb644b9b405624f13a42ec942f1288"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/player-1/trace.json",
+      "bytes": 9413753,
+      "sha256": "c6b00cb822f1591878411b4103d03a603be63d71b36b25f9a026ebef839eb402"
+    }
+  ]
+}

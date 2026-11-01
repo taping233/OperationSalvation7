@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "files": [
+    {
+      "path": "Assets/Resources/Art/Current/title-wordmark.png.meta",
+      "oldBytes": 2714,
+      "oldSha256": "0ddc61896e311417fb83615506855d129cbedf59ebccc79b8a6f9d7b27d9ef8a",
+      "newBytes": 2591,
+      "newSha256": "487114822e9dfc46dea42ebbee2cdd1717d32ce6228f7881cfd248d9bf16939f",
+      "guid": "9d84c51ff3d3eda42913419446d8d9dc"
+    },
+    {
+      "path": "Assets/Resources/Art/CurrentGuide/battle.png.meta",
+      "oldBytes": 2714,
+      "oldSha256": "2d84078c3ab4747cd97f86d9ac860cfbf4b0229ec2caadbcf824b0d069bd6456",
+      "newBytes": 2591,
+      "newSha256": "730894aeb6acf9dee16952609e87b3635a53deaf15214ea508a7c1ce7cb1e0df",
+      "guid": "a1ec474594900ba4184ed2ac44948528"
+    }
+  ],
+  "reason": "These two formal metadata files are also template inputs to the unchanged home/shop restore scripts. Unity2022 normalized default sprite fields and platform serialization; source assets, GUIDs and import settings required by recipes are preserved. Current restore dependency hashes now match the validated2022 templates; old contract is retained in the backup and previous published commit."
+}

@@ -143,6 +143,12 @@ namespace Sdt.Boot
             if (_failed) yield break;
             yield return ReviewRound6Discovery();
             if (_failed) yield break;
+            yield return ReviewRound7Discovery();
+            if (_failed) yield break;
+            yield return ReviewRound7Battle();
+            if (_failed) yield break;
+            yield return ReviewRound7Bag();
+            if (_failed) yield break;
             if(!Guard(()=>{
                 NewPresentationFixture();var g=GameRuntime.I;
                 var card=CardDatabase.All.First(item=>item.type=="武术"&&item.cls==g.State.myClass&&item.id!="starter-attack").Clone();
@@ -285,6 +291,7 @@ namespace Sdt.Boot
             yield return new WaitForSecondsRealtime(1.5f);
             yield return Capture("player-returned-title",false);
             if(!Guard(()=>{if(!(UiStack.Top is Sdt.UI.Screens.Menu.TitleScreen)||UiStack.Count!=1||GameRuntime.I.State.Phase!="title")throw new InvalidOperationException("Slots back did not restore a unique title owner.");}))yield break;
+            yield return ReviewRound7Hub();
             if (_failed) yield break;
             Guard(() => File.WriteAllText(Path.Combine(Output, "result.json"), SaveJson.Stringify(new {
                 passed = true, scope = "Actual standalone backbuffer; hidden parent; normal CanvasScaler and ScreenSpaceOverlay; constructed page opens; no OS input",

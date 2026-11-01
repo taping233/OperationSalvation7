@@ -75,7 +75,7 @@ namespace Sdt.Editor
             var tileClaim=tile.GetComponentsInChildren<Button>().Single(button=>button.name=="收下");var oldTileClaim=tileClaim.onClick;
             var tileRead=tile.ArtRect.GetComponent<Button>();var oldTileRead=tileRead.onClick;
             var revisionField=typeof(CurrentRewardTile).GetField("_revision",BindingFlags.Instance|BindingFlags.NonPublic);int oldRevision=(int)revisionField.GetValue(tile);
-            string Context()=>"claimed="+claimed+", top="+(UiStack.Top==null?"none":UiStack.Top.GetType().Name+"/"+UiStack.Top.name+"#"+UiStack.Top.GetEntityId())+", owner="+(owner==null?"destroyed":owner.name+"#"+owner.GetEntityId())+", tileRevision="+revisionField.GetValue(tile)+", oldRevision="+oldRevision;
+            string Context()=>"claimed="+claimed+", top="+(UiStack.Top==null?"none":UiStack.Top.GetType().Name+"/"+UiStack.Top.name+"#"+UiStack.Top.GetInstanceID())+", owner="+(owner==null?"destroyed":owner.name+"#"+owner.GetInstanceID())+", tileRevision="+revisionField.GetValue(tile)+", oldRevision="+oldRevision;
             Check(claimed==0&&UiStack.Top==owner,"tile fixture current before rebinding: "+Context());
             scene.Sync(items);
             Check((int)revisionField.GetValue(tile)>oldRevision&&!ReferenceEquals(tileClaim.onClick,oldTileClaim)&&!ReferenceEquals(tileRead.onClick,oldTileRead),"tile rebinding replaces events and expires old version: "+Context());

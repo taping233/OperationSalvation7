@@ -78,6 +78,8 @@ namespace Sdt.UI.Screens.Bag
             var selected=EventSystem.current?.currentSelectedGameObject;
             float scroll=retain?_scroll.verticalNormalizedPosition:1;
             var query=CardContainerCommands.Query(GameRuntime.I);
+            BagRestorationPreview restoration=null;
+            bool restorable=_run.usedPocket.Any(entry=>entry.card!=null&&entry.count>0);
             var stacks=BuildCardStacks(_run);
             int pk=_run.usedPocket.Sum(p=>p.count),bagN=stacks.bag.Sum(s=>s.count),safeN=stacks.safe.Sum(s=>s.count),supplyN=_run.inventory.Sum(i=>Math.Max(1,i.count));
             _title.text=Zone=="safe"?"安全格":Zone=="pocket"?"消耗区":"随身背包";
@@ -97,9 +99,10 @@ namespace Sdt.UI.Screens.Bag
             var entries=VisibleEntries(stacks.bag,stacks.safe); var retained=new HashSet<string>();
             foreach(var entry in entries)
             {
+                if(restorable&&entry.zone=="bag"&&BagCardDetail.HasRestoration(entry.card))restoration??=CardContainerCommands.CreateRestorationPreview(GameRuntime.I,query);
                 string key=entry.supply?entry.key:entry.pocketIndex>=0?entry.key:string.Join("|",entry.uids);
-                if(!_cells.TryGetValue(key,out var cell)) {cell=BagCell.Create(_grid,this,entry,entry.zone=="safe");_cells[key]=cell;}
-                else cell.Bind(entry);
+                if(!_cells.TryGetValue(key,out var cell)) {cell=BagCell.Create(_grid,this,entry,entry.zone=="safe",restoration);_cells[key]=cell;}
+                else cell.Bind(entry,restoration);
                 cell.transform.SetSiblingIndex(retained.Count);retained.Add(key);
             }
             foreach(var pair in _cells.Where(p=>!retained.Contains(p.Key)).ToArray()) {pair.Value.gameObject.SetActive(false);Destroy(pair.Value.gameObject);_cells.Remove(pair.Key);}

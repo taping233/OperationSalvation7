@@ -1,0 +1,187 @@
+{
+  "status": "frozen-awaiting-root-central-validation",
+  "atUtc": "2026-11-01T10:26:45.6974353Z",
+  "owner": "Friday/battle_parity",
+  "root": "D:\\素材\\代号柒\\SoudacheUnity",
+  "sourceBaseline": "R6 d8a8a2eb / c3ee3347a03149de80bbb7fe3f0bb5c2",
+  "history": {
+    "path": "_planning/parity-1101-round7/battle-freeze-1.json",
+    "sha256": "422dcd85eefbcbe5f99249aa1bc66af40e8ad4e66b79d46874fdd8d959ea6079",
+    "reason": "Initial freeze before independent-review P2 grouping fixes and deck-bottom candidate UID projection; retained without deletion."
+  },
+  "scope": "formation retained geometry; authoritative ordinary/infusion hand keys and HUD pile provenance/printed-fee normalization; current deck-bottom candidate UID mapping; reader/focus",
+  "fileCount": 27,
+  "totalBytes": 410199,
+  "execution": {
+    "compiled": false,
+    "testsRun": false,
+    "unityStarted": false,
+    "playerStarted": false,
+    "domainExpectedAdditions": 32,
+    "domainExpectedTotal": 524,
+    "nativeExpectedAssertions": 74,
+    "playerExpectedImages": 5
+  },
+  "entryPoints": {
+    "domain": "_planning/parity-1031/battle-check/BattleChecks.csproj / Program.CardPresentationChecks",
+    "native": "global::CurrentBattleRound7Checks.Run()/Assertions",
+    "player": "NativeDisplayReview.ReviewRound7Battle() / new partial; Root must connect main driver",
+    "purePile": "_planning/migration-1030-fidelity/pile/data-check/PileCheck.csproj; refresh its generated Core dependency before use"
+  },
+  "integration": {
+    "rootOwned": "BattleSubpages/Root discovery checks and Root normal-player probes",
+    "dependency": "Root consumes deckBottom candidateUids and passes authoritative CardPresentation/CostOverride/Context; this native source verifies that rendering.",
+    "mainPlayerDriver": "Root connects ReviewRound7Battle; this agent did not edit main NativeDisplayReview.cs",
+    "review": "_planning/parity-1101-round7/discovery-battle-review.md; no edits to Root generic review summary"
+  },
+  "boundaries": [
+    "No tests/compile/Unity/Player execution by this agent.",
+    "Old freeze preserved; no file deletion, staging, commit or push.",
+    "Source projection has no new identity cache or UID-prefix inference.",
+    "Authoritative hand/infusion keys include source facts; raw tools retain their state-free contract.",
+    "State-backed pile keys normalize internal printed-fee storage; raw tools retain raw fee differences.",
+    "Only displayed deckBottom candidateUids are projected; the full reserved cancellation list and command rules are unchanged.",
+    "NonSerialized printed-fee metadata clones but does not add save/export data.",
+    "Root approved static state labels in place of decorative breathing aura; current-window readability still awaits validation.",
+    "GravePanel remains public-command/opt-in QA; natural HUD uses BattlePileScreen.",
+    "Constructed formal commands, native Submit/raycast, and OS physical input remain distinct.",
+    "Static work elimination is not FPS or whole-frame allocation measurement."
+  ],
+  "files": [
+    {
+      "path": "_planning/migration-1030-fidelity/pile/Program.cs",
+      "bytes": 3419,
+      "sha256": "73c097b9870d1efaf3be2a2a253156d03f34a150d3aa61e90791e616fa304789"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "bytes": 617,
+      "sha256": "f84e8feb8a4e8814ac8fe1cf25ee17c76a100058903b529ea4629a1445e663a6"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Program.cs",
+      "bytes": 17226,
+      "sha256": "a5b111fcd4cd05f57bb6679e0d0e2856a1f7b964ecf6e1cbdc25013560fa94c5"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Round7Checks.cs",
+      "bytes": 10197,
+      "sha256": "634818fc430b7b2a1a2de6673595f2574d558b3762422adbbefd1252e5aa172b"
+    },
+    {
+      "path": "_planning/parity-1101-round7/battle-audit.md",
+      "bytes": 15945,
+      "sha256": "faf2d6d4440f7fd54fee353472356ec1efa574e299851fa216f31a6a03edb7ef"
+    },
+    {
+      "path": "_planning/parity-1101-round7/discovery-battle-review.md",
+      "bytes": 5153,
+      "sha256": "735d1166ce9258d27081793ed250fe4bbf364d18820bae411718bb8c51aadd25"
+    },
+    {
+      "path": "Assets/Editor/CurrentBattleRound7Checks.cs",
+      "bytes": 25809,
+      "sha256": "a8c0aad7db4db10ea0e72fff24f36fb466b05e592784d83cd6c41eb9221e041c"
+    },
+    {
+      "path": "Assets/Editor/CurrentBattleRound7Checks.cs.meta",
+      "bytes": 60,
+      "sha256": "0f947053fd1a06d52c3e5a799357fedb3c833e0fcfcb546c6f9c559bbb00a10b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/BattleViewApi.cs",
+      "bytes": 11417,
+      "sha256": "42f082854db1f451cc3b42630a8352deb2ca86ab8fc48b7d968d2cb0cec82380"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Battle.cs",
+      "bytes": 10510,
+      "sha256": "328cc74fc86be101368640aa3393807af86571ac10963fa7d03258ea9b704130"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Battle.cs.meta",
+      "bytes": 60,
+      "sha256": "2480ec46c5771ede178a265f8f59d41df420771d5929f41d925f13710c77013e"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleCardPresentation.cs",
+      "bytes": 2078,
+      "sha256": "e18ec53c33037ca41e1ab11053b8b4747b6509eeaec74de3a0ec619e2d7e878d"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleCardPresentation.cs.meta",
+      "bytes": 60,
+      "sha256": "99614ce37faac0c472da15b66a511762d874460d526954f2df2a7fa8ecf8e5d7"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleHandProjection.cs",
+      "bytes": 2494,
+      "sha256": "0618c6f764c557d0497c7f460915b1465d0d6faf11e6636ab83c383bd6e2ffac"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleHandTransforms.cs",
+      "bytes": 1318,
+      "sha256": "931c35495d19072da514959cb446865eba84c6778f2b02340b1f01cae704bc27"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "bytes": 79282,
+      "sha256": "8888ef413bd23175ea0efa896b9cb21df7ec2e6ad4cbaba28bc4ad9f5d44a757"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/DeckBottomDiscovery.cs",
+      "bytes": 1090,
+      "sha256": "be57c5d4f812721c9b313d1c580850f14de021436792b485c2d36cf278fb3db4"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+      "bytes": 82546,
+      "sha256": "bc4ec8c2c575f90c3494bdaa1dce68fdca1c9ece39d0bb4d22e9423735cefa2b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Cards.cs",
+      "bytes": 17866,
+      "sha256": "a4d6e290059a91700bfd673c98541f9837754256ac0fa10153b320ca43b3c55b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleEvents.cs",
+      "bytes": 6868,
+      "sha256": "0922dd08fa093626f951f4e78df2e3ae8628ad4a513a525aa8d16e8f8c409920"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+      "bytes": 41265,
+      "sha256": "eee7eadb4a853e9b960660593d5d1d7d8436d7e65c8d353dcbda0a099788b4e7"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSecondaryViews.cs",
+      "bytes": 13368,
+      "sha256": "01f7de04ec122bfbce25a75d30ad98e4b1878b3c8117a8ad9a20986f96030f13"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattlePileData.cs",
+      "bytes": 4254,
+      "sha256": "2c13b3063e93484cc3ef7de985efaeef15b7dc3c3c4f37281b447b69ade1828b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentDeckFormation.cs",
+      "bytes": 17536,
+      "sha256": "972cb400720f6f8fdbc927b886ce1a7f8f2aa65910be336e5c5c9af339551cee"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/HandPanel.cs",
+      "bytes": 16023,
+      "sha256": "6a9e83506ae601ebb45248f73b474541cc541ffa21100d0c11b995cd710d4cfc"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs",
+      "bytes": 18824,
+      "sha256": "6b9fa6f1eaaecdfec294539c9cf2d81fd7efc82c255c6dd13bfe5b85cd045665"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CardVisual.cs",
+      "bytes": 4914,
+      "sha256": "f56ac7e242e37a41cf8820a32fe12a0ecd2916b7f8eff495a30322df3f0e89fc"
+    }
+  ]
+}

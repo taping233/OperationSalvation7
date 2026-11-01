@@ -1,0 +1,948 @@
+{
+  "purpose": "Actual Vite mist-box queue/discovery/RNG oracle on explicit controlled catalogs; UID port is a deterministic counter and acquisition/visual effects are omitted.",
+  "sourceScope": "Principal behavioural modules below; Root unified Vite input receipt covers transitive imports.",
+  "sources": [
+    {
+      "path": "搜打撤/game/src/battle/effects/battle.card-inspection.domain.js",
+      "sha256": "f463765d295f5582eb5f99b0cef1f86a6887319155800d3dd7d8aa6e4ac42fd0"
+    },
+    {
+      "path": "搜打撤/game/src/battle/effects/battle.discover-flow.js",
+      "sha256": "19c2d673ca3b9a8d7a3ef7beb336465dd66ae451ce5529d87cc2686f4d368ce9"
+    },
+    {
+      "path": "搜打撤/game/src/battle/effects/battle.discover-candidates.js",
+      "sha256": "5d2c1d48b25b60a5bb097a0f133f9c23011e1c8201431e3c2c4b9f480e735817"
+    },
+    {
+      "path": "搜打撤/game/src/battle/effects/battle.discover-state.js",
+      "sha256": "e839c04e47aac8d2786a2b0dc3f72577a937d1480db0e1ffa04e054b2b6bc27b"
+    },
+    {
+      "path": "搜打撤/game/src/cards/card-obtainability.js",
+      "sha256": "001bc830612ea46b35ea326b126fb625ed84d92fd687f1fbf1b0a1a667565ca7"
+    },
+    {
+      "path": "搜打撤/game/src/cards/card-rarity.js",
+      "sha256": "31f9c0583d12066a678c6fe0a08ed99399c2eda0775aa3f0fcdf0b9986c3188e"
+    },
+    {
+      "path": "搜打撤/game/src/core/random-service.js",
+      "sha256": "d7c4481c5673646ac055c83483ad5304d1ce61cb102892b17a0bbb32a66bdeca"
+    },
+    {
+      "path": "搜打撤/game/src/core/random-core.js",
+      "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174"
+    },
+    {
+      "path": "搜打撤/game/src/core/random-streams.js",
+      "sha256": "af4e4cac02117d5e37cd239889bcc97356c2ba6a9dcee36cd05e847846dd9897"
+    }
+  ],
+  "cases": [
+    {
+      "seed": 7,
+      "cancelSecond": false,
+      "catalog": [],
+      "queued": 0,
+      "rounds": [],
+      "finalRandom": {
+        "version": 2,
+        "seed": 7,
+        "streams": {}
+      },
+      "finalCards": [],
+      "generatedCount": 0
+    },
+    {
+      "seed": 7,
+      "cancelSecond": false,
+      "catalog": [
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 1,
+          "variantKey": "first"
+        }
+      ],
+      "queued": 0,
+      "rounds": [],
+      "finalRandom": {
+        "version": 2,
+        "seed": 7,
+        "streams": {}
+      },
+      "finalCards": [],
+      "generatedCount": 0
+    },
+    {
+      "seed": 7,
+      "cancelSecond": false,
+      "catalog": [
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 1,
+          "variantKey": "first"
+        },
+        {
+          "id": "r6-b",
+          "name": "Beta",
+          "type": "法术",
+          "rarity": "稀有",
+          "cost": 3
+        },
+        {
+          "id": "r6-hidden",
+          "name": "Hidden",
+          "type": "法术",
+          "rarity": "古朴",
+          "cost": 2,
+          "unrandom": true
+        },
+        {
+          "id": "r6-class",
+          "name": "Class",
+          "type": "法术",
+          "rarity": "职业",
+          "cls": "牧师",
+          "cost": 4
+        },
+        {
+          "id": "r6-derived",
+          "name": "Derived",
+          "type": "法术",
+          "rarity": "衍生",
+          "cost": 0
+        },
+        {
+          "id": "r6-initial",
+          "name": "Initial",
+          "type": "武术",
+          "rarity": "初始",
+          "cost": 0
+        },
+        {
+          "id": "r6-equipment",
+          "name": "Equipment",
+          "type": "装备",
+          "rarity": "古朴",
+          "cost": 0
+        },
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 4,
+          "variantKey": "second"
+        }
+      ],
+      "queued": 2,
+      "rounds": [
+        {
+          "options": [
+            {
+              "id": "r6-hidden",
+              "variantKey": null,
+              "cost": 2
+            },
+            {
+              "id": "r6-a",
+              "variantKey": "second",
+              "cost": 4
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 7,
+            "streams": {
+              "generation": 2445843222
+            }
+          }
+        },
+        {
+          "options": [
+            {
+              "id": "r6-a",
+              "variantKey": "first",
+              "cost": 1
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            },
+            {
+              "id": "r6-hidden",
+              "variantKey": null,
+              "cost": 2
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 7,
+            "streams": {
+              "generation": 3645573365
+            }
+          }
+        }
+      ],
+      "firstConfirmed": {
+        "id": "r6-hidden",
+        "variantKey": null,
+        "cost": 2
+      },
+      "secondIndex": 0,
+      "finalRandom": {
+        "version": 2,
+        "seed": 7,
+        "streams": {
+          "generation": 3645573365
+        }
+      },
+      "finalCards": [
+        {
+          "id": "r6-hidden",
+          "variantKey": null,
+          "cost": 1
+        },
+        {
+          "id": "r6-a",
+          "variantKey": "first",
+          "cost": 2
+        }
+      ],
+      "generatedCount": 2
+    },
+    {
+      "seed": 7,
+      "cancelSecond": true,
+      "catalog": [
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 1,
+          "variantKey": "first"
+        },
+        {
+          "id": "r6-b",
+          "name": "Beta",
+          "type": "法术",
+          "rarity": "稀有",
+          "cost": 3
+        },
+        {
+          "id": "r6-hidden",
+          "name": "Hidden",
+          "type": "法术",
+          "rarity": "古朴",
+          "cost": 2,
+          "unrandom": true
+        },
+        {
+          "id": "r6-class",
+          "name": "Class",
+          "type": "法术",
+          "rarity": "职业",
+          "cls": "牧师",
+          "cost": 4
+        },
+        {
+          "id": "r6-derived",
+          "name": "Derived",
+          "type": "法术",
+          "rarity": "衍生",
+          "cost": 0
+        },
+        {
+          "id": "r6-initial",
+          "name": "Initial",
+          "type": "武术",
+          "rarity": "初始",
+          "cost": 0
+        },
+        {
+          "id": "r6-equipment",
+          "name": "Equipment",
+          "type": "装备",
+          "rarity": "古朴",
+          "cost": 0
+        },
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 4,
+          "variantKey": "second"
+        }
+      ],
+      "queued": 2,
+      "rounds": [
+        {
+          "options": [
+            {
+              "id": "r6-hidden",
+              "variantKey": null,
+              "cost": 2
+            },
+            {
+              "id": "r6-a",
+              "variantKey": "second",
+              "cost": 4
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 7,
+            "streams": {
+              "generation": 2445843222
+            }
+          }
+        },
+        {
+          "options": [
+            {
+              "id": "r6-a",
+              "variantKey": "first",
+              "cost": 1
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            },
+            {
+              "id": "r6-hidden",
+              "variantKey": null,
+              "cost": 2
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 7,
+            "streams": {
+              "generation": 3645573365
+            }
+          }
+        }
+      ],
+      "firstConfirmed": {
+        "id": "r6-hidden",
+        "variantKey": null,
+        "cost": 2
+      },
+      "secondIndex": 0,
+      "finalRandom": {
+        "version": 2,
+        "seed": 7,
+        "streams": {
+          "generation": 3645573365
+        }
+      },
+      "finalCards": [
+        {
+          "id": "r6-hidden",
+          "variantKey": null,
+          "cost": 2
+        }
+      ],
+      "generatedCount": 1
+    },
+    {
+      "seed": 42,
+      "cancelSecond": false,
+      "catalog": [
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 1,
+          "variantKey": "first"
+        },
+        {
+          "id": "r6-b",
+          "name": "Beta",
+          "type": "法术",
+          "rarity": "稀有",
+          "cost": 3
+        },
+        {
+          "id": "r6-hidden",
+          "name": "Hidden",
+          "type": "法术",
+          "rarity": "古朴",
+          "cost": 2,
+          "unrandom": true
+        },
+        {
+          "id": "r6-class",
+          "name": "Class",
+          "type": "法术",
+          "rarity": "职业",
+          "cls": "牧师",
+          "cost": 4
+        },
+        {
+          "id": "r6-derived",
+          "name": "Derived",
+          "type": "法术",
+          "rarity": "衍生",
+          "cost": 0
+        },
+        {
+          "id": "r6-initial",
+          "name": "Initial",
+          "type": "武术",
+          "rarity": "初始",
+          "cost": 0
+        },
+        {
+          "id": "r6-equipment",
+          "name": "Equipment",
+          "type": "装备",
+          "rarity": "古朴",
+          "cost": 0
+        },
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 4,
+          "variantKey": "second"
+        }
+      ],
+      "queued": 2,
+      "rounds": [
+        {
+          "options": [
+            {
+              "id": "r6-a",
+              "variantKey": "first",
+              "cost": 1
+            },
+            {
+              "id": "r6-b",
+              "variantKey": null,
+              "cost": 3
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 42,
+            "streams": {
+              "generation": 1329951469
+            }
+          }
+        },
+        {
+          "options": [
+            {
+              "id": "r6-b",
+              "variantKey": null,
+              "cost": 3
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            },
+            {
+              "id": "r6-a",
+              "variantKey": "second",
+              "cost": 4
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 42,
+            "streams": {
+              "generation": 2529681612
+            }
+          }
+        }
+      ],
+      "firstConfirmed": {
+        "id": "r6-a",
+        "variantKey": "first",
+        "cost": 1
+      },
+      "secondIndex": 0,
+      "finalRandom": {
+        "version": 2,
+        "seed": 42,
+        "streams": {
+          "generation": 2529681612
+        }
+      },
+      "finalCards": [
+        {
+          "id": "r6-a",
+          "variantKey": "first",
+          "cost": 3
+        },
+        {
+          "id": "r6-b",
+          "variantKey": null,
+          "cost": 1
+        }
+      ],
+      "generatedCount": 2
+    },
+    {
+      "seed": 42,
+      "cancelSecond": true,
+      "catalog": [
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 1,
+          "variantKey": "first"
+        },
+        {
+          "id": "r6-b",
+          "name": "Beta",
+          "type": "法术",
+          "rarity": "稀有",
+          "cost": 3
+        },
+        {
+          "id": "r6-hidden",
+          "name": "Hidden",
+          "type": "法术",
+          "rarity": "古朴",
+          "cost": 2,
+          "unrandom": true
+        },
+        {
+          "id": "r6-class",
+          "name": "Class",
+          "type": "法术",
+          "rarity": "职业",
+          "cls": "牧师",
+          "cost": 4
+        },
+        {
+          "id": "r6-derived",
+          "name": "Derived",
+          "type": "法术",
+          "rarity": "衍生",
+          "cost": 0
+        },
+        {
+          "id": "r6-initial",
+          "name": "Initial",
+          "type": "武术",
+          "rarity": "初始",
+          "cost": 0
+        },
+        {
+          "id": "r6-equipment",
+          "name": "Equipment",
+          "type": "装备",
+          "rarity": "古朴",
+          "cost": 0
+        },
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 4,
+          "variantKey": "second"
+        }
+      ],
+      "queued": 2,
+      "rounds": [
+        {
+          "options": [
+            {
+              "id": "r6-a",
+              "variantKey": "first",
+              "cost": 1
+            },
+            {
+              "id": "r6-b",
+              "variantKey": null,
+              "cost": 3
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 42,
+            "streams": {
+              "generation": 1329951469
+            }
+          }
+        },
+        {
+          "options": [
+            {
+              "id": "r6-b",
+              "variantKey": null,
+              "cost": 3
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            },
+            {
+              "id": "r6-a",
+              "variantKey": "second",
+              "cost": 4
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 42,
+            "streams": {
+              "generation": 2529681612
+            }
+          }
+        }
+      ],
+      "firstConfirmed": {
+        "id": "r6-a",
+        "variantKey": "first",
+        "cost": 1
+      },
+      "secondIndex": 0,
+      "finalRandom": {
+        "version": 2,
+        "seed": 42,
+        "streams": {
+          "generation": 2529681612
+        }
+      },
+      "finalCards": [
+        {
+          "id": "r6-a",
+          "variantKey": "first",
+          "cost": 1
+        }
+      ],
+      "generatedCount": 1
+    },
+    {
+      "seed": 1106,
+      "cancelSecond": false,
+      "catalog": [
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 1,
+          "variantKey": "first"
+        },
+        {
+          "id": "r6-b",
+          "name": "Beta",
+          "type": "法术",
+          "rarity": "稀有",
+          "cost": 3
+        },
+        {
+          "id": "r6-hidden",
+          "name": "Hidden",
+          "type": "法术",
+          "rarity": "古朴",
+          "cost": 2,
+          "unrandom": true
+        },
+        {
+          "id": "r6-class",
+          "name": "Class",
+          "type": "法术",
+          "rarity": "职业",
+          "cls": "牧师",
+          "cost": 4
+        },
+        {
+          "id": "r6-derived",
+          "name": "Derived",
+          "type": "法术",
+          "rarity": "衍生",
+          "cost": 0
+        },
+        {
+          "id": "r6-initial",
+          "name": "Initial",
+          "type": "武术",
+          "rarity": "初始",
+          "cost": 0
+        },
+        {
+          "id": "r6-equipment",
+          "name": "Equipment",
+          "type": "装备",
+          "rarity": "古朴",
+          "cost": 0
+        },
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 4,
+          "variantKey": "second"
+        }
+      ],
+      "queued": 2,
+      "rounds": [
+        {
+          "options": [
+            {
+              "id": "r6-a",
+              "variantKey": "second",
+              "cost": 4
+            },
+            {
+              "id": "r6-b",
+              "variantKey": null,
+              "cost": 3
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 1106,
+            "streams": {
+              "generation": 924406599
+            }
+          }
+        },
+        {
+          "options": [
+            {
+              "id": "r6-b",
+              "variantKey": null,
+              "cost": 3
+            },
+            {
+              "id": "r6-a",
+              "variantKey": "second",
+              "cost": 4
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 1106,
+            "streams": {
+              "generation": 3955702555
+            }
+          }
+        }
+      ],
+      "firstConfirmed": {
+        "id": "r6-a",
+        "variantKey": "second",
+        "cost": 4
+      },
+      "secondIndex": 0,
+      "finalRandom": {
+        "version": 2,
+        "seed": 1106,
+        "streams": {
+          "generation": 3955702555
+        }
+      },
+      "finalCards": [
+        {
+          "id": "r6-a",
+          "variantKey": "second",
+          "cost": 3
+        },
+        {
+          "id": "r6-b",
+          "variantKey": null,
+          "cost": 4
+        }
+      ],
+      "generatedCount": 2
+    },
+    {
+      "seed": 1106,
+      "cancelSecond": true,
+      "catalog": [
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 1,
+          "variantKey": "first"
+        },
+        {
+          "id": "r6-b",
+          "name": "Beta",
+          "type": "法术",
+          "rarity": "稀有",
+          "cost": 3
+        },
+        {
+          "id": "r6-hidden",
+          "name": "Hidden",
+          "type": "法术",
+          "rarity": "古朴",
+          "cost": 2,
+          "unrandom": true
+        },
+        {
+          "id": "r6-class",
+          "name": "Class",
+          "type": "法术",
+          "rarity": "职业",
+          "cls": "牧师",
+          "cost": 4
+        },
+        {
+          "id": "r6-derived",
+          "name": "Derived",
+          "type": "法术",
+          "rarity": "衍生",
+          "cost": 0
+        },
+        {
+          "id": "r6-initial",
+          "name": "Initial",
+          "type": "武术",
+          "rarity": "初始",
+          "cost": 0
+        },
+        {
+          "id": "r6-equipment",
+          "name": "Equipment",
+          "type": "装备",
+          "rarity": "古朴",
+          "cost": 0
+        },
+        {
+          "id": "r6-a",
+          "name": "Alpha",
+          "type": "武术",
+          "rarity": "古朴",
+          "cost": 4,
+          "variantKey": "second"
+        }
+      ],
+      "queued": 2,
+      "rounds": [
+        {
+          "options": [
+            {
+              "id": "r6-a",
+              "variantKey": "second",
+              "cost": 4
+            },
+            {
+              "id": "r6-b",
+              "variantKey": null,
+              "cost": 3
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 1106,
+            "streams": {
+              "generation": 924406599
+            }
+          }
+        },
+        {
+          "options": [
+            {
+              "id": "r6-b",
+              "variantKey": null,
+              "cost": 3
+            },
+            {
+              "id": "r6-a",
+              "variantKey": "second",
+              "cost": 4
+            },
+            {
+              "id": "r6-initial",
+              "variantKey": null,
+              "cost": 0
+            }
+          ],
+          "random": {
+            "version": 2,
+            "seed": 1106,
+            "streams": {
+              "generation": 3955702555
+            }
+          }
+        }
+      ],
+      "firstConfirmed": {
+        "id": "r6-a",
+        "variantKey": "second",
+        "cost": 4
+      },
+      "secondIndex": 0,
+      "finalRandom": {
+        "version": 2,
+        "seed": 1106,
+        "streams": {
+          "generation": 3955702555
+        }
+      },
+      "finalCards": [
+        {
+          "id": "r6-a",
+          "variantKey": "second",
+          "cost": 4
+        }
+      ],
+      "generatedCount": 1
+    }
+  ]
+}

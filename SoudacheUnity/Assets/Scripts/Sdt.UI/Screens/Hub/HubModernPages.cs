@@ -81,7 +81,7 @@ namespace Sdt.UI.Screens.Hub
         }
         static void BindConfirm(Button button,Action action)
         {var owner=button.GetComponentInParent<HubScreen>();int revision=owner!=null?owner._renderVersion:0;button.onClick.RemoveAllListeners();button.gameObject.AddComponent<HubConfirmAction>().Bind(button,()=>{if(owner!=null&&!owner.CurrentHub(revision))return;action?.Invoke();});}
-        void BuildCollectionRoom(Transform page,(int total,int progress) collection,List<AchievementDef> achievements)
+        void BuildCollectionRoom(Transform page,(int total,int progress) collection,List<AchievementDef> achievements,List<AchievementStatus> achievementStatus)
         {
             var layout=Row(page,"av12-workspace",22);Fill((RectTransform)layout);
             SourceColumns(layout,new[]{184f,0},new[]{0f,0},new[]{0f,1},22);
@@ -90,8 +90,9 @@ namespace Sdt.UI.Screens.Hub
             foreach(var section in new[]{("cards","已收藏"),("rewards","奖励"),("achievements","成就目标"),("classes","收藏里程碑"),("backs","卡背"),("stories","故事")})
             {string key=section.Item1;DirectoryEntry(directory,++number,section.Item2,()=>{if(key=="achievements")_achievementReturn=_archiveView=="backs"?"backs":"rewards";_archiveView=key;Rebuild();},key==_archiveView);}
             var content=Column(layout,"av12-content",16);Bounds(content.gameObject,0,0,1,1);
+            _rewardFeedbackHost=Column(content,"hub-reward-feedback",12,new RectOffset(18,18,16,16),false);PaintRewardFeedback();
             switch(_archiveView)
-            {case "cards":BuildOwnedGallery(content);break;case "rewards":BuildRewards(content,collection,achievements);break;case "classes":BuildMilestones(content,collection);break;case "backs":BuildBacks(content);break;case "stories":BuildStories(content);break;default:BuildAch(content);break;}
+            {case "cards":BuildOwnedGallery(content);break;case "rewards":BuildRewards(content,collection,achievements);break;case "classes":BuildMilestones(content,collection);break;case "backs":BuildBacks(content);break;case "stories":BuildStories(content);break;default:BuildAch(content,achievementStatus);break;}
         }
         void BuildOwnedGallery(Transform parent)
         {
@@ -118,7 +119,7 @@ namespace Sdt.UI.Screens.Hub
 
         static string RewardText(AchievementDef a)
         {return string.Join(" · ",new[]{a.reward?.wood>0?"木材 ×"+a.reward.wood:"",a.reward?.rations>0?"口粮 ×"+a.reward.rations:"",a.reward?.keys>0?"钥匙 ×"+a.reward.keys:"",!string.IsNullOrEmpty(a.reward?.card)?"卡牌 · "+(CardLibrary.FindById(a.reward.card)?.name??a.reward.card):"",!string.IsNullOrEmpty(a.back)?"卡背 · "+a.back:""}.Where(v=>v!=""));}
-        void ClaimAchievement(string id){var result=G.Meta.Claim(id);if(!result.ok){Log(result.msg,"warn");return;}Log("奖励已入账","ok");Rebuild();}
+        void ClaimAchievement(string id)=>ClaimReward(MetaProgress.AchById(id)?.name??id,id,false,()=>{var result=G.Meta.Claim(id);return (result.ok,result.msg);});
 
 
         static int _storySegment;

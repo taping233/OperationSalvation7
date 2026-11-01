@@ -1,0 +1,112 @@
+{
+  "format": "round7-bag-freeze-v1",
+  "status": "frozen-awaiting-central-validation",
+  "frozenAt": "2026-11-01T09:13:52.053565+00:00",
+  "executed": false,
+  "productionFiles": 5,
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/CardContainerCommands.cs",
+      "bytes": 15853,
+      "sha256": "6770cd1b5acf5508c247500d1b7ca968f021b6857d95d66001175dc61ca6e11a",
+      "lfSha256": "07889e7ad07b462f99788acfafe14652af77df4adcfa4eac5ad5a021f41d00fb"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagItemDiscoveryScreen.cs",
+      "bytes": 13124,
+      "sha256": "bcd95e5e0dab7a1885ecd982e12d11ef01209853982a916d25f2dd5126b0d455",
+      "lfSha256": "bcd95e5e0dab7a1885ecd982e12d11ef01209853982a916d25f2dd5126b0d455"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagCurrentView.cs",
+      "bytes": 15364,
+      "sha256": "f9902dba03d9b0c572c43d5bc79e87bf800205867bf93fd6fb8697055b7d949e",
+      "lfSha256": "917c4fecf6af5e181bbacfcd135c8a6efe56f1e888f61692824468619fbadf5e"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagCurrentCell.cs",
+      "bytes": 8201,
+      "sha256": "e5e3a1c169746d83f6e717c9cd6b72627e2735ae154e8eab4e44805a2c0a565a",
+      "lfSha256": "e5e3a1c169746d83f6e717c9cd6b72627e2735ae154e8eab4e44805a2c0a565a"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagCardDetail.cs",
+      "bytes": 14216,
+      "sha256": "47ab8e49f5b7135d1b8fd2b558489ccecf55dd705f2109afa88350c28f29f688",
+      "lfSha256": "47ab8e49f5b7135d1b8fd2b558489ccecf55dd705f2109afa88350c28f29f688"
+    },
+    {
+      "path": "Assets/Editor/CurrentBagDiscoveryRound7Checks.cs",
+      "bytes": 12539,
+      "sha256": "4420e9fccfb0357c81a96a647cfe158186264de7203974272c121491dc21609f",
+      "lfSha256": "4420e9fccfb0357c81a96a647cfe158186264de7203974272c121491dc21609f"
+    },
+    {
+      "path": "Assets/Editor/CurrentBagDiscoveryRound7Checks.cs.meta",
+      "bytes": 60,
+      "sha256": "7e5c2ccce3e6289b9b8997648c25fadb77d9c701ae4092d29e60cbda5c814b31",
+      "lfSha256": "7e5c2ccce3e6289b9b8997648c25fadb77d9c701ae4092d29e60cbda5c814b31"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Bag.cs",
+      "bytes": 7232,
+      "sha256": "78a8fc790e999ae4b6f3a259aa627634f0a9e5c581545dada3f68b526f741e0a",
+      "lfSha256": "78a8fc790e999ae4b6f3a259aa627634f0a9e5c581545dada3f68b526f741e0a"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Bag.cs.meta",
+      "bytes": 60,
+      "sha256": "992c8c53c092490d94b9bbecd56a5a2bb630b4f45a46012df9fb5e0e22ba54ab",
+      "lfSha256": "992c8c53c092490d94b9bbecd56a5a2bb630b4f45a46012df9fb5e0e22ba54ab"
+    },
+    {
+      "path": "_planning/parity-1101-round7/bag-check/BagRound7Checks.csproj",
+      "bytes": 843,
+      "sha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+      "lfSha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308"
+    },
+    {
+      "path": "_planning/parity-1101-round7/bag-check/Program.cs",
+      "bytes": 4950,
+      "sha256": "d01f2758f370402fb41892b311ea9e17e402d98154af58c786d995e37d63321d",
+      "lfSha256": "d01f2758f370402fb41892b311ea9e17e402d98154af58c786d995e37d63321d"
+    },
+    {
+      "path": "_planning/parity-1101-round7/bag-run-audit.md",
+      "bytes": 12340,
+      "sha256": "4a3d5b45fc4eca42048925e8434594e0ae873ba55df4b2347a2ed3acb773b3aa",
+      "lfSha256": "f1f45509085fe7ca5d482ea1873f8a916570e29cf6c7c254c4a711f1b67b8932"
+    }
+  ],
+  "native": {
+    "entry": "CurrentBagDiscoveryRound7Checks.Run()",
+    "counter": "CurrentBagDiscoveryRound7Checks.Assertions",
+    "staticExpectedAssertions": 92,
+    "scope": "Actual production Bag/use/controls and controlled state; constructed ISubmitHandler, no OS hardware input."
+  },
+  "domain": {
+    "project": "_planning/parity-1101-round7/bag-check/BagRound7Checks.csproj",
+    "staticExpectedAssertionsAtBaseCap16": 1160,
+    "staticCountFormula": "712 + 28 * BagCap",
+    "oracle": "Actual CardContainerCommands.CanReceive on a complete private projection excluding the observed source object."
+  },
+  "playerProbe": {
+    "entry": "NativeDisplayReview.ReviewRound7Bag()",
+    "captureNames": [
+      "player-bag-discovery-candidates",
+      "player-bag-discovery-selected",
+      "player-bag-discovery-save-failed",
+      "player-bag-discovery-returned"
+    ],
+    "input": "Controlled real employee C inventory, production BagScreen/UID detail entry; actual raycast receiver validation for all clicked buttons. Not executed."
+  },
+  "unchangedAuthoritativeCommands": {
+    "path": "Assets/Scripts/Sdt.Run/BagItemCommands.cs",
+    "sha256": "e08b67db4c77a239a0f3750140c9d23d0e2d150e7daf855208b337fa947beb04"
+  },
+  "limits": [
+    "No compilation, domain/native tests, build or Unity/player launch by this author.",
+    "Only presentation derives replacement capacity; TryUse/TryChoose remain live authoritative transactions.",
+    "Root owns main validation/player driver wiring and unified input freeze."
+  ]
+}

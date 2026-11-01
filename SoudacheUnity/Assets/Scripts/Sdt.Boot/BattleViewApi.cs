@@ -90,6 +90,7 @@ namespace Sdt.Boot
             var found = Session?.FindCard(uid);
             return found != null ? new OwnedCard { Uid = found.uid, Card = found.card } : null;
         }
+        public BattleCardPresentation CardPresentation(string uid) => Session?.GetCardPresentation(uid);
 
         /// <summary>infuseOf：注能数。原版 +(card.infuse || 0) || deriveInfuse(card) || 0。</summary>
         public int InfuseOf(CardDef card)

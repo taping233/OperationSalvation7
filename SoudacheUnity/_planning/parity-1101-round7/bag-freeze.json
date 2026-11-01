@@ -1,0 +1,126 @@
+{
+  "format": "round7-bag-freeze-v2",
+  "status": "frozen-awaiting-central-validation",
+  "frozenAt": "2026-11-01T10:29:32.879346+00:00",
+  "executed": false,
+  "productionFiles": 5,
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/CardContainerCommands.cs",
+      "bytes": 15853,
+      "sha256": "6770cd1b5acf5508c247500d1b7ca968f021b6857d95d66001175dc61ca6e11a",
+      "lfSha256": "07889e7ad07b462f99788acfafe14652af77df4adcfa4eac5ad5a021f41d00fb"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagItemDiscoveryScreen.cs",
+      "bytes": 13124,
+      "sha256": "bcd95e5e0dab7a1885ecd982e12d11ef01209853982a916d25f2dd5126b0d455",
+      "lfSha256": "bcd95e5e0dab7a1885ecd982e12d11ef01209853982a916d25f2dd5126b0d455"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagCurrentView.cs",
+      "bytes": 15364,
+      "sha256": "f9902dba03d9b0c572c43d5bc79e87bf800205867bf93fd6fb8697055b7d949e",
+      "lfSha256": "917c4fecf6af5e181bbacfcd135c8a6efe56f1e888f61692824468619fbadf5e"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagCurrentCell.cs",
+      "bytes": 8201,
+      "sha256": "e5e3a1c169746d83f6e717c9cd6b72627e2735ae154e8eab4e44805a2c0a565a",
+      "lfSha256": "e5e3a1c169746d83f6e717c9cd6b72627e2735ae154e8eab4e44805a2c0a565a"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Bag/BagCardDetail.cs",
+      "bytes": 20658,
+      "sha256": "91d269600ebbc0749e289caaae96e985cdb227de1f98fc429b9ec26e2f38b48b",
+      "lfSha256": "91d269600ebbc0749e289caaae96e985cdb227de1f98fc429b9ec26e2f38b48b"
+    },
+    {
+      "path": "Assets/Editor/CurrentBagDiscoveryRound7Checks.cs",
+      "bytes": 20105,
+      "sha256": "e4596a5038fedd7509b145ec8eb6c38f85c1850bfc3a402d46805d7185dd31b8",
+      "lfSha256": "e4596a5038fedd7509b145ec8eb6c38f85c1850bfc3a402d46805d7185dd31b8"
+    },
+    {
+      "path": "Assets/Editor/CurrentBagDiscoveryRound7Checks.cs.meta",
+      "bytes": 60,
+      "sha256": "7e5c2ccce3e6289b9b8997648c25fadb77d9c701ae4092d29e60cbda5c814b31",
+      "lfSha256": "7e5c2ccce3e6289b9b8997648c25fadb77d9c701ae4092d29e60cbda5c814b31"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Bag.cs",
+      "bytes": 7232,
+      "sha256": "78a8fc790e999ae4b6f3a259aa627634f0a9e5c581545dada3f68b526f741e0a",
+      "lfSha256": "78a8fc790e999ae4b6f3a259aa627634f0a9e5c581545dada3f68b526f741e0a"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Bag.cs.meta",
+      "bytes": 60,
+      "sha256": "992c8c53c092490d94b9bbecd56a5a2bb630b4f45a46012df9fb5e0e22ba54ab",
+      "lfSha256": "992c8c53c092490d94b9bbecd56a5a2bb630b4f45a46012df9fb5e0e22ba54ab"
+    },
+    {
+      "path": "_planning/parity-1101-round7/bag-check/BagRound7Checks.csproj",
+      "bytes": 843,
+      "sha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+      "lfSha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308"
+    },
+    {
+      "path": "_planning/parity-1101-round7/bag-check/Program.cs",
+      "bytes": 8096,
+      "sha256": "9bccd181a8390edf5ff15adaf4274357883046ec52177eb19188420dc4fb8ed6",
+      "lfSha256": "9bccd181a8390edf5ff15adaf4274357883046ec52177eb19188420dc4fb8ed6"
+    },
+    {
+      "path": "_planning/parity-1101-round7/bag-run-audit.md",
+      "bytes": 15618,
+      "sha256": "e70d33b14fee2b1bb8c0f9575a6ba90206cf975e0d602e54c6e3f46c807d2ecb",
+      "lfSha256": "0922b2f7023f83b1a3384ee3ad7e4cc0a603547c312e047cd2bceb139de2771b"
+    }
+  ],
+  "native": {
+    "entry": "CurrentBagDiscoveryRound7Checks.Run()",
+    "counter": "CurrentBagDiscoveryRound7Checks.Assertions",
+    "staticExpectedAssertions": 138,
+    "scope": "Production Bag/use/detail/container controls and controlled state; constructed ISubmitHandler and captured UnityEvent replay; actual CardGranted and audio voice/clip assertions; no OS hardware input."
+  },
+  "domain": {
+    "project": "_planning/parity-1101-round7/bag-check/BagRound7Checks.csproj",
+    "staticExpectedAssertionsAtBaseCap16": 1175,
+    "staticCountFormula": "727 + 28 * BagCap",
+    "oracle": "Actual CardContainerCommands.CanReceive on a complete private projection excluding the observed source object."
+  },
+  "playerProbe": {
+    "entry": "NativeDisplayReview.ReviewRound7Bag()",
+    "captureNames": [
+      "player-bag-discovery-candidates",
+      "player-bag-discovery-selected",
+      "player-bag-discovery-save-failed",
+      "player-bag-discovery-returned"
+    ],
+    "input": "Controlled real employee C inventory, production BagScreen/UID detail entry; actual raycast receiver validation for all clicked buttons. Not executed."
+  },
+  "unchangedAuthoritativeCommands": {
+    "path": "Assets/Scripts/Sdt.Run/BagItemCommands.cs",
+    "sha256": "e08b67db4c77a239a0f3750140c9d23d0e2d150e7daf855208b337fa947beb04"
+  },
+  "limits": [
+    "No compilation, domain/native tests, build or Unity/player launch by this author.",
+    "Only presentation derives replacement capacity; TryUse/TryChoose remain live authoritative transactions.",
+    "Root owns main validation/player driver wiring and unified input freeze."
+  ],
+  "previousFreeze": {
+    "path": "_planning/parity-1101-round7/bag-freeze-1.json",
+    "sha256": "c5bad6147451e19e3037433e3b2d302a2b02bd236387dc86bf249dc2cf83c072"
+  },
+  "supplement": {
+    "reason": "Close the upstream BagCardDetail instance owner lifecycle confirmed by independent review; add exact capacity/upgraded render and event/audio assertions.",
+    "changedSincePrevious": [
+      "Assets/Editor/CurrentBagDiscoveryRound7Checks.cs",
+      "Assets/Scripts/Sdt.UI/Screens/Bag/BagCardDetail.cs",
+      "_planning/parity-1101-round7/bag-check/Program.cs",
+      "_planning/parity-1101-round7/bag-run-audit.md"
+    ],
+    "centralValidationRequired": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "actualImagesReviewed": 23,
+  "newRound7ImagesReviewed": 19,
+  "totalCaptures": 102,
+  "reports": [
+    "visual-root.json",
+    "visual-hub-independent.json",
+    "visual-battle-independent.json"
+  ],
+  "scope": "Current2560x1440 normal standalone backbuffer, DPI120; no multi-size or OS-hardware-input claim. Gold selection backing is visible; not claimed as a thin outline. Old temporary failure toast after retry and low-contrast warehouse occupancy are non-blocking observations in the independent report."
+}

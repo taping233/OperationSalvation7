@@ -91,15 +91,19 @@ namespace Sdt.UI.Screens.Hub
             var button=Command(parent,"",action,selected);SoftSelection(button,selected);Bounds(button.gameObject,width,height,0,0);var col=Column(button.transform,"collection-item",8,new RectOffset(10,10,10,10));Fill((RectTransform)col);
             CardArt(col,card,height<250?90:height>=560?285:210,height-70);var caption=Label(col,label,height<250?13:20,false,InkColor);caption.alignment=TextAnchor.MiddleCenter;
         }
-        static void Input(Transform parent,string placeholder,string value,Action<string> changed)
+        static InputField Input(Transform parent,string placeholder,string value,Action<string> changed)
         {
+            var owner=parent.GetComponentInParent<HubScreen>();int revision=owner!=null?owner._renderVersion:0;
             var box=new GameObject(placeholder,typeof(RectTransform));box.transform.SetParent(parent,false);Surface(box.transform,.7f);Bounds(box,0,54,1,0);
             var text=UIKit.Label(box.transform,value,20,InkColor);Fill(text.rectTransform,new Vector2(14,6),new Vector2(-14,-6));
             var prompt=UIKit.Label(box.transform,placeholder,20,Muted);Fill(prompt.rectTransform,new Vector2(14,6),new Vector2(-14,-6));
-            var field=box.AddComponent<InputField>();field.textComponent=text;field.placeholder=prompt;field.text=value;field.onValueChanged.AddListener(v=>changed(v));
+            var field=box.AddComponent<InputField>();field.textComponent=text;field.placeholder=prompt;field.text=value;
+            field.onValueChanged.AddListener(v=>{if(field==null||!field.IsActive()||!field.IsInteractable()||owner!=null&&!owner.CurrentHub(revision))return;changed(v);});
+            return field;
         }
         static void Filter(Transform parent,string title,string current,IEnumerable<string> values,Action<string> changed)
         {
+            var owner=parent.GetComponentInParent<HubScreen>();int revision=owner!=null?owner._renderVersion:0;
             var options=new List<string>{""};options.AddRange(values.Where(v=>!string.IsNullOrEmpty(v)).Distinct());
             var box=new GameObject(title,typeof(RectTransform));box.transform.SetParent(parent,false);Surface(box.transform,.65f);Bounds(box,190,54,0,0);
             var dropdown=box.AddComponent<Dropdown>();dropdown.targetGraphic=box.GetComponent<Image>();
@@ -109,7 +113,8 @@ namespace Sdt.UI.Screens.Hub
             var content=Area(viewport,"Content",new Vector2(0,1),Vector2.one,new Vector2(0,-54),Vector2.zero);content.pivot=new Vector2(.5f,1);
             var item=Area(content,"Item",new Vector2(0,.5f),new Vector2(1,.5f),new Vector2(0,-27),new Vector2(0,27));var image=item.gameObject.AddComponent<Image>();image.color=Theme.HexA("#44717D",.95f);var toggle=item.gameObject.AddComponent<Toggle>();toggle.targetGraphic=image;
             var itemLabel=UIKit.Label(item,"",20,InkColor);Fill(itemLabel.rectTransform,new Vector2(12,4),new Vector2(-6,-4));dropdown.itemText=itemLabel;dropdown.template=template;sr.viewport=viewport;sr.content=content;template.gameObject.SetActive(false);
-            dropdown.AddOptions(options.Select(v=>v==""?title:v).ToList());dropdown.value=Mathf.Max(0,options.IndexOf(current));dropdown.onValueChanged.AddListener(i=>changed(options[i]));
+            dropdown.AddOptions(options.Select(v=>v==""?title:v).ToList());dropdown.value=Mathf.Max(0,options.IndexOf(current));
+            dropdown.onValueChanged.AddListener(i=>{if(dropdown==null||!dropdown.IsActive()||!dropdown.IsInteractable()||i<0||i>=options.Count||owner!=null&&!owner.CurrentHub(revision))return;changed(options[i]);});
         }
     }
 }

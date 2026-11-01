@@ -9,6 +9,7 @@ namespace Sdt.UI.Screens.Run
         public int? CostOverride;
         public int SpellDamageBonus;
         public Sdt.Res.CurrentCardPresentation.Context DescriptionContext;
+        public Sdt.Core.Battle.BattleCardPresentation Presentation;
     }
     public struct CardFrameOpening { public float Left,Top,Width,Height,CanvasWidth,CanvasHeight; }
     public static class CardVisual
@@ -40,7 +41,8 @@ namespace Sdt.UI.Screens.Run
         }
         public static bool ShowCost(CardDef card,bool hideCost)=>card!=null&&card.type!="资源"&&(!hideCost||!(card.type=="道具"||card.type=="生物"||card.type=="装备"||card.type=="事件"));
         public static int Cost(CardDef card,CardFaceOptions options)=>options?.CostOverride??card?.runtimeCost??card?.cost??0;
-        public static string CostTone(CardDef card,CardFaceOptions options)=>Cost(card,options)<(card?.cost??0)?"down":Cost(card,options)>(card?.cost??0)?"up":"normal";
+        public static string CostTone(CardDef card,CardFaceOptions options)
+        {int cost=Cost(card,options),original=options?.Presentation?.BaseCost??card?._baseCost??card?.cost??0;return cost<original?"down":cost>original?"up":"normal";}
         public static string DamageIcon(CardDef card)=>card?.dmgType=="attack"?"swords":card?.dmgType=="spell"?"sparkles":card?.dmgType=="true"?"bolt":"crystal";
         public static string DamageText(CardDef card,int spellBonus=0)
         {

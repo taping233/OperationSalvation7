@@ -63,6 +63,7 @@ crashlytics-build.properties
 /_planning/parity-1101-round5/export-check/output-*/
 !/_planning/parity-1101-round6/run-check/RunRound6Checks.csproj
 /_planning/parity-1101-round6/run-check/output-*/
+!/_planning/parity-1101-round7/bag-check/BagRound7Checks.csproj
 
 # Restore audio, fonts and archives from the documented resource recipes.
 # Keep their .meta files so restored assets retain the published GUIDs.

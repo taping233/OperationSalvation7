@@ -81,6 +81,7 @@ domain_files = [
     "_planning/parity-1031/battle-check/Round3Checks.cs", "_planning/parity-1031/battle-check/Round4Checks.cs",
     "_planning/parity-1031/battle-check/Round6Checks.cs",
     "_planning/parity-1031/battle-check/Round6PreviewChecks.cs",
+    "_planning/parity-1031/battle-check/Round7Checks.cs",
     "_planning/parity-1031/HubParityChecks.csproj", "_planning/parity-1031/HubParityChecks.cs",
     "_planning/parity-1031/hub-source-vectors.mjs", "_planning/parity-1031/hub-source-vectors.json",
     "_planning/parity-1031/run-check/RunParityChecks.csproj", "_planning/parity-1031/run-check/Program.cs",
@@ -89,16 +90,18 @@ domain_files = [
     "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj", "_planning/parity-1101-round5/export-check/Program.cs",
     "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj", "_planning/parity-1101-round6/run-check/Program.cs",
     "_planning/parity-1101-round6/discover-source-oracle.mjs",
+    "_planning/parity-1101-round7/bag-check/BagRound7Checks.csproj", "_planning/parity-1101-round7/bag-check/Program.cs",
     "_planning/migration-1029/current-departure/Stubs.cs"
 ]
 for relative in domain_files:
     add(relative, "domain-check")
-for folder in ("parity-1101-round2", "parity-1101-round3", "parity-1101-round4", "parity-1101-round5", "parity-1101-round6"):
+for folder in ("parity-1101-round2", "parity-1101-round3", "parity-1101-round4", "parity-1101-round5", "parity-1101-round6", "parity-1101-round7"):
     for pattern in ("*.md", "*.json"):
         for path in sorted((UNITY / "_planning" / folder).glob(pattern)):
             add(path.relative_to(UNITY).as_posix(), "parity-acceptance")
 for relative in (
     "_planning/migration-1029/run_native_check.ps1",
+    "_planning/migration-1029/check_compile.py",
     "_planning/migration-1030-fidelity/clarity/run_hidden_player.ps1",
     "_planning/migration-1030-fidelity/clarity/analyse_player_review.py",
     "_planning/migration-1030-fidelity/clarity/README.md"

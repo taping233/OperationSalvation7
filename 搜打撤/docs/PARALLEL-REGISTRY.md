@@ -9,6 +9,11 @@
 
 ## 活跃登记
 
+Friday（Unity 2022降级 unity-2022-downgrade；01a19232），2026-11-01：编辑中。老板明确授权工程及软件降为2022.3.62f3c1；持有SoudacheUnity的Packages/ProjectSettings、已确认新版API的最小兼容修改、正式构建/后台验收入口与MIGRATION，以及_planning/unity-2022-downgrade和本轮evidence。三代理只读审查，不扩展R7功能。修改前源码及设置逐字备份D:/Unity/project-backups/20261101-soudache-before-2022，原HEAD/index受保护。目标编辑器实际安装C:/Program Files/Unity 2022.3.62f3c1/Editor；安装器PID34364退出0，重新导入/编译PID37020后台运行，6000安装暂留。先统一兼容改动，再集中原生编译/打包/当前窗口后台验收。无文件目录删除，无Vite修改。
+
+Friday（Unity持续对照第七轮 unity-parity-round7；01a19232），2026-11-01：功能扩展暂停，未统一测试；现有WIP保留，版本兼容修改归下行降级任务。基线d8a8a2eb/代码c6f7e593、GUIDc3ee3347，828正式输入起点零差异。Battle持有编组几何失效、牌堆一次投影/返焦及Core来源状态到CardFace公共窄接线（含Cards仅NonSerialized原费字段）；独审两处真实分组遗漏正在同批修正，不以首版freeze冒称完成。Run已冻BagItemDiscoveryScreen、BagCurrentView/Cell/Detail与CardContainerCommands局部恢复预览，另备92条预期原生、专用领域与正常窗口探针；Hub已冻成就/收藏派生、进度/实际到账回执、Hub输入旧owner及有限伙伴动画片，含自有检查/5画面探针。Root持有BattleSubpages发现保留树与超过5候选滚动、统一CurrentRound7Validation、Root发现检查/正常探针与主流程、MIGRATION/发布闭包。自有_planning/parity-1101-round7与docs/evidence/2026-11-01-unity-parity-round7；独审与全部源收口后统一冻源集中验证，未启动Unity/编译/build。Vite四在途动作源仅HEAD，原planning/bin和原index保护；无目录文件删除，无新后台/端口服务；发布工作树沿R6留存。
+
+
 
 
 

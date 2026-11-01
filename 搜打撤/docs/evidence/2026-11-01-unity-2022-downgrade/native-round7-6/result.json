@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "error": null,
+  "discoveryAssertions": 31,
+  "battleAssertions": 74,
+  "bagAssertions": 138,
+  "hubAssertions": 74,
+  "scope": "Isolated production components, formal commands and constructed native UI events. No OS hardware input, natural unassisted play, multi-size or whole-frame performance claim."
+}

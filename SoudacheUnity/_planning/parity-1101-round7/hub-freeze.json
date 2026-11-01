@@ -1,0 +1,113 @@
+{
+  "status": "source-frozen-awaiting-central-validation",
+  "atUtc": "2026-11-01T09:30:48.813536+00:00",
+  "baseline": {
+    "publishedSource": "d8a8a2eb",
+    "playerGUID": "c3ee3347a03149de80bbb7fe3f0bb5c2"
+  },
+  "scope": "Hub input ownership, one-build achievement projection/local workspace, actual reward receipt and finite companion animation; opt-in native/player checks. No save/award transaction signature or framework change.",
+  "compileRunByAuthor": false,
+  "testsRunByAuthor": false,
+  "unityOrPlayerLaunchedByAuthor": false,
+  "sourceCount": 12,
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/MetaProgress.Achievements.cs",
+      "sha256": "3d6636b768bb86c4924574fbe849df3d33cc8248635453bab09ca47a86b0b8fe",
+      "lfSha256": "3d6636b768bb86c4924574fbe849df3d33cc8248635453bab09ca47a86b0b8fe",
+      "bytes": 6615,
+      "mtimeNs": 1793523486146043200
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+      "sha256": "6d7dea524e2d338f4eda109e861027fa6e6216285ecf53fda7530a700fdcead1",
+      "lfSha256": "6d7dea524e2d338f4eda109e861027fa6e6216285ecf53fda7530a700fdcead1",
+      "bytes": 19130,
+      "mtimeNs": 1793525447871301500
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentLayout.cs",
+      "sha256": "eae5a3fa427ecfddcb1dd0e2f470bcdd5efeb2aad4eb7e831bffb8a2c72d5d65",
+      "lfSha256": "47a51c6681181f225f45e7e473f45bcd61da9e036a7ebbc7f9ec3c519763f4e7",
+      "bytes": 13299,
+      "mtimeNs": 1793523033346217500
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentArchiveViews.cs",
+      "sha256": "6956d853372bf210f58f3e0fb4636dc7415d923f9fa7fc7df88ae580f29c03b2",
+      "lfSha256": "fce78812022d2b46c36d94c8edcc762ac4dccbcf3b30c5879cf5a2b4b072c4a7",
+      "bytes": 14880,
+      "mtimeNs": 1793524989166829800
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+      "sha256": "959fcaef4d85c65c9da939d309ddacf3ed7335773e434a9355f3e886be5783bb",
+      "lfSha256": "a049ac64f69a7e1b1c96b18ff0236329d11680e97543defb16b1f27baf121e27",
+      "bytes": 15965,
+      "mtimeNs": 1793522784140676400
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInteractions.cs",
+      "sha256": "cd6385d1101604bd22ad9c051de6e060220045ca74e74175a4eafbf1f3106d32",
+      "lfSha256": "6a7c2d1cb2f87a04c56f792106befcb481931512bb45a8f9208a43ec04f26ac5",
+      "bytes": 4875,
+      "mtimeNs": 1793525305091355600
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubRewardFeedback.cs",
+      "sha256": "913a719e3ede27390b203774d0cf0232d7bdd949102d9c8531cbd7168a2686de",
+      "lfSha256": "913a719e3ede27390b203774d0cf0232d7bdd949102d9c8531cbd7168a2686de",
+      "bytes": 6303,
+      "mtimeNs": 1793523073126987200
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubRewardFeedback.cs.meta",
+      "sha256": "5b137ca1ede7782c85a5520f18bd63e92dbc0e5afd3443a8359e9ed9de6b6660",
+      "lfSha256": "f9da6a51ae57c51f70f92faeb3c5c675f71aea6941bf6dff50a8f0cd4e668ab2",
+      "bytes": 62,
+      "mtimeNs": 1793523486942149400
+    },
+    {
+      "path": "Assets/Editor/CurrentHubRound7Checks.cs",
+      "sha256": "c9a9e3a8119ae27827a868843d5780c86066a0e6af4d01641ea6a4a1b88ea796",
+      "lfSha256": "c9a9e3a8119ae27827a868843d5780c86066a0e6af4d01641ea6a4a1b88ea796",
+      "bytes": 19889,
+      "mtimeNs": 1793525305323816300
+    },
+    {
+      "path": "Assets/Editor/CurrentHubRound7Checks.cs.meta",
+      "sha256": "900c3cfff6f3bae6bf3415c95a3707417831841f604de81b0d11cfabc4448078",
+      "lfSha256": "bb9e2f40f09842ea576ea5a589870fb85e77f7b74fa34b4f87d211a983d04244",
+      "bytes": 62,
+      "mtimeNs": 1793523486942149400
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Hub.cs",
+      "sha256": "4cbbfc490be3626e0764fed1170ef651b840076d5e7271a324ce9024b5d8804b",
+      "lfSha256": "4cbbfc490be3626e0764fed1170ef651b840076d5e7271a324ce9024b5d8804b",
+      "bytes": 7884,
+      "mtimeNs": 1793524749187214000
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Hub.cs.meta",
+      "sha256": "f7947c4d01ec434e778b93e0be2e4cec38c456f3f48fecaee622da68f4efd458",
+      "lfSha256": "e5ca803c20b0e6159d9ba2e41505c6f1fbc95c990cf45db067221cdba4a38a3b",
+      "bytes": 62,
+      "mtimeNs": 1793524308670358300
+    }
+  ],
+  "audit": {
+    "path": "_planning/parity-1101-round7/hub-audit.md",
+    "sha256": "cd5c070ed23ddee4a96d447539cb8b2cbf5f1a551c2aea39e03d44ffd1e3b621"
+  },
+  "nativeEntry": "Sdt.Editor.CurrentHubRound7Checks.Run()/Assertions",
+  "playerEntry": "NativeDisplayReview.ReviewRound7Hub()",
+  "expectedPlayerCaptures": [
+    "player-r7-hub-rune-progress",
+    "player-r7-hub-rainbow-progress",
+    "player-r7-hub-collection-receipt",
+    "player-r7-hub-reward-warehouse",
+    "player-r7-hub-partner-reply"
+  ],
+  "boundary": "All new validation pending. Native event construction and normal Player raycast construction are not OS input or a whole-frame performance benchmark."
+}

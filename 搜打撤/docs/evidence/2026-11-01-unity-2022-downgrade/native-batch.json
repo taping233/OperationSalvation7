@@ -1,0 +1,62 @@
+[
+  {
+    "name": "native-round7-6",
+    "method": "Sdt.Editor.CurrentRound7Validation.Run",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:29:16.0342531Z"
+  },
+  {
+    "name": "native-round6",
+    "method": "Sdt.Editor.CurrentRound6Validation.Run",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:29:41.7028305Z"
+  },
+  {
+    "name": "native-round5",
+    "method": "Sdt.Editor.CurrentRound5Validation.Run",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:29:56.2735017Z"
+  },
+  {
+    "name": "native-round4",
+    "method": "Sdt.Editor.CurrentRound4Validation.Run",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:30:13.6910800Z"
+  },
+  {
+    "name": "native-round3",
+    "method": "Sdt.Editor.CurrentRound3Validation.Run",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:30:32.7776700Z"
+  },
+  {
+    "name": "native-round2",
+    "method": "Sdt.Editor.CurrentRound2Validation.Run",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:30:49.7322930Z"
+  },
+  {
+    "name": "native-shared",
+    "method": "Sdt.Editor.CurrentParityValidation.Run",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:31:10.4432446Z"
+  },
+  {
+    "name": "native-film",
+    "method": "Sdt.Editor.CurrentFilmFlowValidation.Run",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:31:41.6424259Z"
+  },
+  {
+    "name": "native-receipts",
+    "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:32:30.0530080Z"
+  },
+  {
+    "name": "native-journey",
+    "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunJourney",
+    "exitCode": 0,
+    "finishedAt": "2026-11-01T11:34:09.2374082Z"
+  }
+]

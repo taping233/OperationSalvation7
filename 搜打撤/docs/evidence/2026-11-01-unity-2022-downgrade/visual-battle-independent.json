@@ -1,0 +1,207 @@
+{
+  "reviewer": "battle_parity",
+  "status": "nine_images_reviewed_no_blocking_visual_regression",
+  "method": "实际逐张view_image打开；只读解析本包result/process和对应驱动，不运行应用或测试",
+  "build": {
+    "dpi": 120.0,
+    "resolution": [
+      2560,
+      1440
+    ],
+    "unityVersion": "2022.3.62f3c1",
+    "resultPassed": true,
+    "guid": "4d33ec981819461295052942d67afeee",
+    "processExitCode": 0,
+    "mode": "Windowed"
+  },
+  "receipt": {
+    "process": "player-1/process.json",
+    "resultSha256": "a4125c99bb9b46ae2690122e918226fa9eeb644b9b405624f13a42ec942f1288",
+    "processSha256": "71ea4a194d35841a8e5b666872e611abe115b82f1b5b47e3935b46ef316666cc",
+    "result": "player-1/result.json"
+  },
+  "imagesActuallyViewed": 9,
+  "images": [
+    {
+      "height": 1440,
+      "judgment": "清楚显示三张实际候选卡，卡名/说明/费用/价值可读；初始确认灰态，标题与提示未裁切。",
+      "sha256": "62551e72413acbdc91e793c258e5c922da5d5511e82c30c020451d641ef3c658",
+      "file": "player-1/player-bag-discovery-candidates.png",
+      "viewedWith": "view_image",
+      "width": 2560,
+      "frame": 1519,
+      "visibleRegression": null,
+      "bytes": 1561437
+    },
+    {
+      "height": 1440,
+      "judgment": "首张双相星盘蓝底及“已选中”明确；卡面未被覆盖，确认进入可用外观，三卡位置保持。",
+      "sha256": "2daced818a0b0b5af6c9f6b6c1d9ef0a844951fd52346bdfe756d0a777aadee4",
+      "file": "player-1/player-bag-discovery-selected.png",
+      "viewedWith": "view_image",
+      "width": 2560,
+      "frame": 1524,
+      "visibleRegression": null,
+      "bytes": 1561444
+    },
+    {
+      "height": 1440,
+      "judgment": "局部“保存未成功；通行证与候选已保留，请重试”完整；选中态与候选保留；上方全局错误通知未覆盖卡面或标题。",
+      "sha256": "46537ec63c47aedfd9d1df3ed05cfa54bce068b235ac85a03da28f325a746d18",
+      "file": "player-1/player-bag-discovery-save-failed.png",
+      "viewedWith": "view_image",
+      "width": 2560,
+      "frame": 1529,
+      "visibleRegression": null,
+      "bytes": 1605903
+    },
+    {
+      "height": 1440,
+      "judgment": "返回真实随身背包，双相星盘卡面完整，占格1/16、卡牌1张可见。仍可见前5帧留下的失败通知，见非阻断观察。",
+      "sha256": "c2e978786055451ee1250da7293534f7bcfa00193b0e81b6ce77836757b57fc2",
+      "file": "player-1/player-bag-discovery-returned.png",
+      "viewedWith": "view_image",
+      "width": 2560,
+      "frame": 1534,
+      "visibleRegression": null,
+      "bytes": 967712
+    },
+    {
+      "height": 1440,
+      "judgment": "符文爱好者列表与详情一致显示2/5，目标未达成灰态；标题、奖励钥匙×2与底栏均在屏内。",
+      "sha256": "6986626f75aa53d614e0fe5f6dea972039eff6c6efcc87add44269d253f98678",
+      "file": "player-1/player-r7-hub-rune-progress.png",
+      "viewedWith": "view_image",
+      "width": 2560,
+      "frame": 3551,
+      "visibleRegression": null,
+      "bytes": 1827654
+    },
+    {
+      "height": 1440,
+      "judgment": "好美的花瓶！列表与详情一致显示1/1，领取奖励亮态，奖励钥匙×3可读。",
+      "sha256": "80d0a5a6f3f4a3620a02dbcb08b11e4bb3e6e876dc3079a6c1a7387e2394c7a8",
+      "file": "player-1/player-r7-hub-rainbow-progress.png",
+      "viewedWith": "view_image",
+      "width": 2560,
+      "frame": 3556,
+      "visibleRegression": null,
+      "bytes": 1803448
+    },
+    {
+      "height": 1440,
+      "judgment": "实际回执显示已领取·收藏45张、斩杀×1、混沌之眼×1及后勤·卡牌仓库去向；查看仓库/确认按钮未遮挡详情。",
+      "sha256": "4be3183e92ed009667e695adfd5bbf8237b0e1f1ba3c227b098f732d210e0a50",
+      "file": "player-1/player-r7-hub-collection-receipt.png",
+      "viewedWith": "view_image",
+      "width": 2560,
+      "frame": 3591,
+      "visibleRegression": null,
+      "bytes": 1875767
+    },
+    {
+      "height": 1440,
+      "judgment": "后勤仓库实际显示斩杀与混沌之眼两张卡，各×1，与领取回执一致；顶部占格统计对比偏低，见观察。",
+      "sha256": "a8d20d0ddc121eab9ff066e0e56d6b18c4bcfea08eedabc5546e5dc07afddb3e",
+      "file": "player-1/player-r7-hub-reward-warehouse.png",
+      "viewedWith": "view_image",
+      "width": 2560,
+      "frame": 3625,
+      "visibleRegression": null,
+      "bytes": 2448013
+    },
+    {
+      "height": 1440,
+      "judgment": "旺财图、歪头看着你。回复与逗一逗可见，未盖住伙伴名或底部六格选择；右侧随行/培养状态完整。",
+      "sha256": "d37b7a5fabad6e16ef0078b8753c437b483fb8e75b400db26421de4395cfad23",
+      "file": "player-1/player-r7-hub-partner-reply.png",
+      "viewedWith": "view_image",
+      "width": 2560,
+      "frame": 3694,
+      "visibleRegression": null,
+      "bytes": 2170514
+    }
+  ],
+  "businessEvidence": {
+    "hub": {
+      "rainbowProgress": "1 / 1",
+      "controlledSetup": "隔离存档填充正式收藏池、单枚fire/ice双属性彩虹符文；其后正式控件点击",
+      "runeProgress": "2 / 5",
+      "rewardSavedRecord": null,
+      "reply": "歪头看着你。",
+      "milestone": "m45",
+      "actualAwards": [
+        {
+          "id": "tt3-execute",
+          "name": "斩杀",
+          "count": 1
+        },
+        {
+          "id": "tt3-chaos-eye",
+          "name": "混沌之眼",
+          "count": 1
+        }
+      ],
+      "sourceReference": "SoudacheUnity/Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Hub.cs:34-93"
+    },
+    "bag": {
+      "resultRecords": [
+        "round7-bag-retained-selection",
+        "round7-bag-controlled-io-failure",
+        "round7-bag-real-claim-return"
+      ],
+      "chosen": "tt13-astrolabe",
+      "failureIsControlledIsolatedProfileWritingPath": null,
+      "source": "tt4-shine-token",
+      "rewardCount": 1,
+      "candidates": [
+        "tt13-astrolabe",
+        "tt3-thunderblast",
+        "cc-mana-surge"
+      ],
+      "sourceReference": "SoudacheUnity/Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Bag.cs:48-88",
+      "independentRead": null,
+      "sourceConsumedOnce": null
+    }
+  },
+  "observations": [
+    {
+      "evidence": "失败截图frame1529，返回frame1534；本包回执另确认来源唯一消耗、奖励1张、独立ReadSlot通过。",
+      "finding": "重试返回后仍可见此前保存失败的全局Toast；文本包含隔离测试路径及原始I/O原因，未挡卡面和标题。",
+      "severity": "non-blocking observation",
+      "id": "previous_failure_toast_during_fast_retry_return",
+      "boundary": "记录这5帧内实际画面，不据此推断长期提示状态或存档失败。",
+      "images": [
+        "player-1/player-bag-discovery-save-failed.png",
+        "player-1/player-bag-discovery-returned.png"
+      ],
+      "regionPixelsFromTopLeft": {
+        "width": 870,
+        "y": 145,
+        "height": 80,
+        "x": 845
+      }
+    },
+    {
+      "id": "warehouse_summary_low_contrast",
+      "images": [
+        "player-1/player-r7-hub-reward-warehouse.png"
+      ],
+      "finding": "2种·仓库3/25格浅字位于偏亮背景，对比偏低；字串未裁切，卡名/数量和主要控件仍清楚。",
+      "severity": "non-blocking readability observation",
+      "regionPixelsFromTopLeft": {
+        "width": 245,
+        "y": 345,
+        "height": 30,
+        "x": 63
+      }
+    }
+  ],
+  "limitations": [
+    "仅当前2560×1440/DPI120窗口与这9张PNG；未启动播放器、改变窗口或运行测试。",
+    "真实原生控件射线点击由本包驱动记录；本独审只读实图与记录，不声称OS物理输入、无人协助自然流程或全部页面覆盖。",
+    "保存失败为隔离profile .writing路径受控故障；持久化/UID/RNG/重复回调正确性结合驱动断言与正式原生证据，不由截图单独证明。",
+    "背包候选三张均在屏内；截图不证明超长列表、六候选滚动或任意文本边界。",
+    "无缺字/重叠结论限这些可见中文和控件；不替代全字体、性能/FPS或跨尺寸验证。"
+  ]
+}

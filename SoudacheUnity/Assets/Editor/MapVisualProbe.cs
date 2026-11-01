@@ -30,7 +30,7 @@ namespace Sdt.EditorTools
             try{File.WriteAllBytes(path,image.EncodeToPNG());return new{path,texture=TextureInfo(font.material.mainTexture)};}
             finally{UnityEngine.Object.DestroyImmediate(image);}
         }
-        static object TextureInfo(Texture texture)=>texture==null?null:new{id=texture.GetEntityId().ToString(),texture.name,texture.width,texture.height,texture.updateCount,filter=texture.filterMode.ToString()};
+        static object TextureInfo(Texture texture)=>texture==null?null:new{id=texture.GetInstanceID().ToString(),texture.name,texture.width,texture.height,texture.updateCount,filter=texture.filterMode.ToString()};
         static Texture2D ReadAtlas(Texture texture)
         {
             if(texture==null)throw new InvalidOperationException("Font atlas unavailable");
@@ -77,7 +77,7 @@ namespace Sdt.EditorTools
                 var filter=text.GetComponent<MeshFilter>();
                 var mesh=filter!=null?filter.sharedMesh:null;
                 labels.Add(new{owner=text.transform.parent?.name,role,text=text.text,font=text.font?.name,currentFont,material,missing,visible,height,target,fontSize=text.fontSize,characterSize=text.characterSize,
-                    materialId=renderer?.sharedMaterial?.GetEntityId().ToString(),shader=renderer?.sharedMaterial?.shader?.name,materialTexture=TextureInfo(renderer?.sharedMaterial?.mainTexture),propertyTexture=TextureInfo(propertyTexture),
+                    materialId=renderer?.sharedMaterial?.GetInstanceID().ToString(),shader=renderer?.sharedMaterial?.shader?.name,materialTexture=TextureInfo(renderer?.sharedMaterial?.mainTexture),propertyTexture=TextureInfo(propertyTexture),
                     nativeMeshAvailable=mesh!=null,nativeMeshVertexCount=mesh?.vertexCount,nativeMeshUv=mesh==null?null:mesh.uv.Select(p=>new{p.x,p.y}).ToArray(),glyphs});
             }
             if(visibleNames==0||visiblePlayer!=1)failures.Add("Visible labels missing: nodeNames="+visibleNames+", player="+visiblePlayer);

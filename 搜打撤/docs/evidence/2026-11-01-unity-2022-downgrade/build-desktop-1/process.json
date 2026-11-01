@@ -1,0 +1,14 @@
+{
+  "method": "Sdt.Editor.BuildGame.BuildWin64",
+  "pid": 14616,
+  "startedAt": "2026-11-01T11:34:10.5057782Z",
+  "endedAt": "2026-11-01T11:35:11.5797262Z",
+  "exitCode": 2,
+  "timedOut": false,
+  "inputsUnchanged": false,
+  "changedInputs": [
+    "ProjectSettings/UnityConnectSettings.asset"
+  ],
+  "sourceCount": 850,
+  "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\build-desktop-1"
+}

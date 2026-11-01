@@ -12,14 +12,14 @@ namespace Sdt.UI.Screens.Menu
         public bool Grid,Empty;public float[] Tops=Array.Empty<float>(),Heights=Array.Empty<float>();float[] _rows=Array.Empty<float>();
         int Columns=>Grid&&!Empty?Mathf.Max(1,Mathf.FloorToInt((rectTransform.rect.width-padding.horizontal+10)/250)):1;
         float Width=>Mathf.Max(1,(rectTransform.rect.width-padding.horizontal-(Columns-1)*10)/Columns);
-        public override void CalculateLayoutInputHorizontal(){base.CalculateLayoutInputHorizontal();SetLayoutInputForAxis(0,LayoutUtility.DefaultMaxSize,0,1,0);}
+        public override void CalculateLayoutInputHorizontal(){base.CalculateLayoutInputHorizontal();SetLayoutInputForAxis(0,0,1,0);}
         void Measure()
         {
             int count=rectChildren.Count,cols=Columns;Tops=new float[count];Heights=new float[count];_rows=new float[Mathf.CeilToInt(count/(float)cols)];
             for(int i=0;i<count;i++){var tile=rectChildren[i].GetComponent<CurrentAchievementTile>();Heights[i]=tile!=null?tile.Measure(Width,Grid):310;_rows[i/cols]=Mathf.Max(_rows[i/cols],Heights[i]);}
             float top=padding.top;for(int r=0;r<_rows.Length;r++){for(int j=r*cols;j<Mathf.Min(count,(r+1)*cols);j++){Tops[j]=top;Heights[j]=_rows[r];}top+=_rows[r]+10;}
         }
-        public override void CalculateLayoutInputVertical(){Measure();float height=padding.vertical;foreach(float row in _rows)height+=row+10;if(_rows.Length>0)height-=10;SetLayoutInputForAxis(height,height,height,0,1);}
+        public override void CalculateLayoutInputVertical(){Measure();float height=padding.vertical;foreach(float row in _rows)height+=row+10;if(_rows.Length>0)height-=10;SetLayoutInputForAxis(height,height,0,1);}
         public override void SetLayoutHorizontal(){for(int i=0;i<rectChildren.Count;i++)SetChildAlongAxis(rectChildren[i],0,padding.left+i%Columns*(Width+10),Width);}
         public override void SetLayoutVertical(){Measure();for(int i=0;i<rectChildren.Count;i++){SetChildAlongAxis(rectChildren[i],1,Tops[i],Heights[i]);rectChildren[i].GetComponent<CurrentAchievementTile>()?.Arrange(Width,Grid);}}
     }

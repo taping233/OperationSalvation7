@@ -126,8 +126,8 @@
     },
     {
       "path": "Assets/Resources/Art/Current/title-wordmark.png.meta",
-      "bytes": 2714,
-      "sha256": "0ddc61896e311417fb83615506855d129cbedf59ebccc79b8a6f9d7b27d9ef8a",
+      "bytes": 2591,
+      "sha256": "487114822e9dfc46dea42ebbee2cdd1717d32ce6228f7881cfd248d9bf16939f",
       "reasons": [
         "Input/template required by _planning/migration-1029/current-home/sync_home.py"
       ]
@@ -150,8 +150,8 @@
     },
     {
       "path": "Assets/Resources/Art/CurrentGuide/battle.png.meta",
-      "bytes": 2714,
-      "sha256": "2d84078c3ab4747cd97f86d9ac860cfbf4b0229ec2caadbcf824b0d069bd6456",
+      "bytes": 2591,
+      "sha256": "730894aeb6acf9dee16952609e87b3635a53deaf15214ea508a7c1ce7cb1e0df",
       "reasons": [
         "Input/template required by _planning/migration-1030-fidelity/shop/import_assets.py"
       ]

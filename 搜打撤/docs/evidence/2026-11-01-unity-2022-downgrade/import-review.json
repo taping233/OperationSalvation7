@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "metaFiles": 2053,
+  "changedMetaFiles": 1492,
+  "allGuidsPreserved": true,
+  "independentReview": "hub_save_parity compared raw diffs against both exact backup baselines:1220 texture-default normalization,23 archive texture mappings,249 default MonoImporter blocks; no other changed fields."
+}

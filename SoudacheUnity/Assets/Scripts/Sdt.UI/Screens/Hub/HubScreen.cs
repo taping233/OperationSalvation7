@@ -16,7 +16,7 @@ namespace Sdt.UI.Screens.Hub
         static string _tab = "deploy";
         static int? _browseSlot;
         static int _renderSequence;int _renderVersion;BaseData _viewBase;int? _viewSlot;
-        bool CurrentHub(int revision)=>this!=null&&isActiveAndEnabled&&_renderVersion==revision&&_renderSequence==revision&&ReferenceEquals(_viewBase,G.Base)&&_viewSlot==G.ActiveSlot;
+        bool CurrentHub(int revision)=>this!=null&&isActiveAndEnabled&&UiStack.Top==this&&!Sdt.UI.Screens.Menu.SuggestionBox.IsOpen&&_renderVersion==revision&&_renderSequence==revision&&ReferenceEquals(_viewBase,G.Base)&&_viewSlot==G.ActiveSlot;
         static string _warehouseView = "cards", _warehouseGroup = "", _warehouseQuery = "", _warehouseType = "", _warehouseRarity = "", _warehouseCharacter = "";
         static string _person = "wu", _personSection = "profile", _personGroup = "people", _pet = "", _previewSkin = "", _facility = "bag";
         static bool _hatch, _stashFromPersonnel;
@@ -45,6 +45,7 @@ namespace Sdt.UI.Screens.Hub
         void Navigate(string tab)
         {
             CurrentHubOperationNotice.Clear(this);
+            if(tab!="ach")_rewardFeedback=null;
             if(tab=="shop"&&_tab!="shop")_shopParent=_tab=="upgrade"?"stash":_tab;
             if(tab=="upgrade"&&_tab!="upgrade")_facilityParent=_tab;
             if(tab=="stash"&&_tab!="stash"&&!(_tab=="shop"&&_shopParent=="stash"))_stashFromPersonnel=_tab=="classes"&&!string.IsNullOrEmpty(_warehouseCharacter);
@@ -52,6 +53,7 @@ namespace Sdt.UI.Screens.Hub
         }
         void Back()
         {
+            if(_rewardFeedback!=null&&_tab=="ach"){CloseRewardFeedback(_rewardFeedback);return;}
             if (_tab == "classes" && (_personGroup == "pets" || _personSection != "profile"))
             { if (_hatch) _hatch = false; else { _personGroup = "people"; _personSection = "profile"; } Rebuild(); return; }
             if (_tab == "stash" && _warehouseView == "pocket") { _warehouseView = "cards"; Rebuild(); return; }
@@ -66,7 +68,8 @@ namespace Sdt.UI.Screens.Hub
             _renderVersion=++_renderSequence;_viewBase=G.Base;_viewSlot=G.ActiveSlot;
             bool unclaimed=HubCatalog.Current.milestones.Any(m=>!G.Meta.MilestoneClaimed(m.id));
             var collection=unclaimed||_tab=="ach"&&_archiveView=="classes"?G.Meta.CollectionSummary():(total:0,progress:0);
-            var achievements=G.Meta.PendingAch();
+            var achievementStatus=_tab=="ach"&&_archiveView=="achievements"?G.Meta.AchievementStatuses():null;
+            var achievements=achievementStatus==null?G.Meta.PendingAch():achievementStatus.Where(row=>row.Unlocked&&!row.Claimed).Select(row=>row.Definition).ToList();
             int pending=achievements.Count+HubCatalog.Current.milestones.Count(m=>!G.Meta.MilestoneClaimed(m.id)&&collection.progress>=(m.all?collection.total:m.need));
             var root = UIKit.Panel("hubMain base-frame-v7 " + (_tab == "deploy" ? "base-home" : "base-subpage"), transform);
             var scene = UIKit.Image(root.transform, Sdt.Res.Res.Scene("base-operations-v5"));
@@ -92,7 +95,7 @@ namespace Sdt.UI.Screens.Hub
             {
                 case "deploy": BuildDeploy(page,pending); break; case "classes": BuildClasses(page); break; case "stash": BuildStash(page); break;
                 case "shop": BuildTrade(page); break; case "upgrade": BuildUpgrade(page); break; case "courtyard": CourtyardScreen.BuildCurrentRoom(page); break;
-                default: BuildCollectionRoom(page,collection,achievements); break;
+                default: BuildCollectionRoom(page,collection,achievements,achievementStatus); break;
             }
             BuildNavigation(root.transform,pending);
             RestoreBrowse(root);

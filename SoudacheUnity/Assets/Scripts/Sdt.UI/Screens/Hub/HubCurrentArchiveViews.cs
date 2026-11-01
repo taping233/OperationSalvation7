@@ -15,20 +15,36 @@ namespace Sdt.UI.Screens.Hub
         {
             public string id,label,name,status,body,rewards;public int value,total;public bool ready,claimed;public Action claim;
         }
+        bool ArchiveSnapshotCurrent(long revision)
+        {if(G.Saves.Global.Revision==revision)return true;Rebuild();return false;}
         void BuildRecordWorkspace(Transform parent,List<ArchiveRecord> records,string current,Action<string> select,bool inbox)
         {
             var workspace=Row(parent,"av12-record-workspace",20);var list=Column(workspace,"av12-record-list",12,new RectOffset(14,14,14,14));Surface(list);var scroll=Scroll(list,"archive-records");
             if(inbox)Fact(scroll,"待领取",records.Count.ToString());
             var chosen=records.FirstOrDefault(r=>r.id==current)??records.FirstOrDefault();
-            foreach(var item in records){var record=item;var button=Command(scroll,"<size=16>"+record.label+"</size>\n<b>"+record.name+"</b>\n<size=18>"+record.status+"  ›</size>",()=>{select(record.id);Rebuild();},chosen==record);Bounds(button.gameObject,0,106,1,0);SoftSelection(button,chosen==record);}
+            var buttons=new Dictionary<string,Button>();
+            var detail=Column(workspace,"av12-record-detail",24,new RectOffset(28,28,28,28));Surface(detail);int detailVersion=0;long sourceRevision=G.Saves.Global.Revision;
+            void Show(ArchiveRecord record,bool force=false)
+            {
+                if(record!=null)select(record.id);if(!ArchiveSnapshotCurrent(sourceRevision))return;
+                if(!force&&chosen==record)return;var previous=chosen;chosen=record;int version=++detailVersion;UIKit.ClearChildren(detail);
+                if(previous!=record){if(previous!=null)SoftSelection(buttons[previous.id],false);if(record!=null)SoftSelection(buttons[record.id],true);}
+                if(record==null){Label(detail,inbox?"当前没有待领取奖励":"暂无收藏里程碑",28,true);if(inbox)Label(detail,"奖励领完后仍可在成就目标与收藏里程碑查看记录。",22,false,Muted);return;}
+                _archiveReturnFocus=buttons[record.id];
+                Label(detail,record.label+" · "+record.status,20,false,Muted);Label(detail,record.name,28,true);
+                if(record.total>0){Label(detail,Math.Min(record.value,record.total)+" / "+record.total,56,true,Accent);Progress(detail,(float)record.value/record.total);}
+                if(!string.IsNullOrEmpty(record.body))Label(detail,record.body,22);
+                Label(detail,"奖励预览",20,false,Muted);Label(detail,record.rewards,22);
+                var claim=Command(detail,record.claimed?"已领取":record.ready?"领取奖励":"待完成",()=>{if(version==detailVersion&&chosen==record)record.claim?.Invoke();},true);claim.interactable=record.ready&&!record.claimed;
+            }
+            foreach(var item in records)
+            {
+                var record=item;Button button=null;
+                button=Command(scroll,"<size=16>"+record.label+"</size>\n<b>"+record.name+"</b>\n<size=18>"+record.status+"  ›</size>",()=>{if(button.isActiveAndEnabled&&button.interactable)Show(record);},chosen==record);
+                Bounds(button.gameObject,0,106,1,0);SoftSelection(button,chosen==record);buttons.Add(record.id,button);
+            }
             if(inbox){Command(scroll,"成就目标 ›",()=>{_achievementReturn="rewards";_archiveView="achievements";Rebuild();});Command(scroll,"收藏里程碑 ›",()=>{_archiveView="classes";Rebuild();});}
-            var detail=Column(workspace,"av12-record-detail",24,new RectOffset(28,28,28,28));Surface(detail);
-            if(chosen==null){Label(detail,inbox?"当前没有待领取奖励":"暂无收藏里程碑",28,true);if(inbox)Label(detail,"奖励领完后仍可在成就目标与收藏里程碑查看记录。",22,false,Muted);return;}
-            Label(detail,chosen.label+" · "+chosen.status,20,false,Muted);Label(detail,chosen.name,28,true);
-            if(chosen.total>0){Label(detail,Math.Min(chosen.value,chosen.total)+" / "+chosen.total,56,true,Accent);Progress(detail,(float)chosen.value/chosen.total);}
-            if(!string.IsNullOrEmpty(chosen.body))Label(detail,chosen.body,22);
-            Label(detail,"奖励预览",20,false,Muted);Label(detail,chosen.rewards,22);
-            var claim=Command(detail,chosen.claimed?"已领取":chosen.ready?"领取奖励":"待完成",chosen.claim,true);claim.interactable=chosen.ready&&!chosen.claimed;
+            Show(chosen,true);
         }
         void BuildRewards(Transform parent,(int total,int progress) collection,List<AchievementDef> achievements)
         {
@@ -40,7 +56,8 @@ namespace Sdt.UI.Screens.Hub
             {var m=item;int need=m.all?total:m.need;records.Add(new ArchiveRecord{id="collection-"+m.id,label="收藏奖励",name=need==total?"收集完成":"收集 "+need+" 张",status="可领取",rewards=G.Meta.CollectionRewardText(m),ready=true,claim=()=>ClaimMilestone(m.id)});}
             BuildRecordWorkspace(parent,records,_rewardRecord,id=>_rewardRecord=id,true);
         }
-        void ClaimMilestone(string id){if(!G.Meta.TryClaimCollection(id,out var reason)){Log(reason,"warn");return;}Log("收藏奖励已入账","ok");Rebuild();}
+        void ClaimMilestone(string id)
+        {var milestone=HubCatalog.Current.milestones.FirstOrDefault(item=>item.id==id);ClaimReward(milestone?.all==true?"收藏完成":"收藏 "+(milestone?.need??0)+" 张",id,true,()=>{bool ok=G.Meta.TryClaimCollection(id,out var reason);return (ok,reason);});}
         void BuildMilestones(Transform parent,(int total,int progress) collection)
         {
             int total=collection.total,progress=collection.progress;
@@ -60,44 +77,58 @@ namespace Sdt.UI.Screens.Hub
             int index=Math.Max(0,Array.IndexOf(MedalIds,id));float width=atlas.texture.width/6f,height=atlas.texture.height/5f;
             value=Sprite.Create(atlas.texture,new Rect(index%6*width,atlas.texture.height-(index/6+1)*height,width,height),new Vector2(.5f,.5f),100);Medals[id]=value;return value;
         }
-        string AchievementProgress(string id)
+        sealed class AchievementTile
         {
-            var b=G.Base;var s=b.stats;int value=0,total=1;
-            switch(id)
-            {
-                case "firstExtract":value=s.extracts;break;case "extract3":value=s.extracts;total=3;break;case "kill10":value=s.kills;total=10;break;
-                case "firstBoss":value=s.bossKills.Count;break;case "allBoss":value=s.bossKills.Count;total=3;break;case "rich30":value=s.bestRunCoins;total=30;break;case "stash20":value=s.stashTotal;total=20;break;
-                case "bagMax":value=b.BagCap;total=GameRules.BagMax;break;case "safeMax":value=b.SafeCap;total=GameRules.SafeMax;break;
-                case "class3":value=b.characters.Values.Select(p=>p.lv).DefaultIfEmpty(1).Max();total=3;break;
-                case "collectGold":value=b.collection.ContainsKey("tt-gold")?1:0;break;case "collectLegend":value=b.collection.Count(p=>p.Value?.rarity=="传说");break;case "collect5":value=b.collection.Count;total=5;break;
-                case "petHatch1":value=Math.Max(0,b.pets.Count-1);break;case "petHatch3":value=Math.Max(0,b.pets.Count-1);total=3;break;case "petMax":value=b.pets.Values.Select(p=>p.lv).DefaultIfEmpty(1).Max();total=5;break;case "petAll":value=b.pets.Count;total=BaseData.PetsCatalog.Count;break;
-                case "unlimitedEnergy":value=s.turnMovesMax;total=10;break;case "weaponMaster":value=s.battleEquipsMax;total=5;break;case "excuseMe":value=s.reviveKills;break;
-                case "labScore1":value=s.labTotalScore;total=500;break;case "labScore2":value=s.labTotalScore;total=1500;break;case "labScore3":value=s.labTotalScore;total=4000;break;default:return "";
-            }
-            return Math.Min(value,total)+" / "+total;
+            public AchievementStatus Status;public Button Button;
         }
-        void BuildAch(Transform parent)
+        void BuildAch(Transform parent,List<AchievementStatus> snapshot)
         {
             var workspace=Row(parent,"av3-honours-layout",20);var left=Column(workspace,"av3-cabinet",12,new RectOffset(14,14,14,14));Surface(left);
             var filters=Row(left,"archive-status",6,54);
+            var entries=snapshot.OrderBy(row=>row.Claimed?2:row.Unlocked?0:1).ToList();
+            long sourceRevision=G.Saves.Global.Revision;
+            var counts=new Dictionary<string,int>{{"",entries.Count},{"ready",0},{"locked",0},{"claimed",0}};
+            foreach(var row in entries)counts[row.Claimed?"claimed":row.Unlocked?"ready":"locked"]++;
+            var filterButtons=new Dictionary<string,Button>();var tiles=new List<AchievementTile>(entries.Count);
+            var list=Scroll(left,"av3-medals");var detail=Column(workspace,"av3-medal-detail",20,new RectOffset(28,28,28,28));Surface(detail);
+            var empty=Label(list,"没有匹配的成就",26,true);AchievementTile selected=null;int detailVersion=0;
+            void Show(AchievementTile tile)
+            {
+                if(selected==tile&&detail.childCount>0)return;var previous=selected;selected=tile;int version=++detailVersion;UIKit.ClearChildren(detail);
+                if(previous!=null)SoftSelection(previous.Button,false);if(tile!=null)SoftSelection(tile.Button,true);
+                if(tile==null){Label(detail,"没有匹配的成就",26,true);return;}
+                var state=tile.Status;var achievement=state.Definition;_achievement=achievement.id;_archiveReturnFocus=tile.Button;
+                var medal=UIKit.Image(detail,Medal(achievement.id));medal.preserveAspect=true;Bounds(medal.gameObject,0,140,1,0);Label(detail,achievement.name,28,true);Label(detail,achievement.desc,22);
+                if(state.Total>0)Fact(detail,"当前进度",state.Progress);Label(detail,"奖励预览",20,false,Muted);Label(detail,RewardText(achievement),22);
+                var claim=Command(detail,state.Claimed?"已领取":state.Unlocked?"领取奖励":"目标未达成",()=>{if(version==detailVersion&&selected==tile)ClaimAchievement(achievement.id);},true);claim.interactable=state.Unlocked&&!state.Claimed;
+            }
+            bool Matches(AchievementStatus row)
+            {
+                string query=_achievementQuery.Trim();var a=row.Definition;
+                return (query.Length==0||(a.name+" "+a.desc).IndexOf(query,StringComparison.OrdinalIgnoreCase)>=0)
+                    &&(_achievementFilter==""||(_achievementFilter=="claimed"?row.Claimed:_achievementFilter=="locked"?!row.Unlocked&&!row.Claimed:row.Unlocked&&!row.Claimed));
+            }
+            void Apply()
+            {
+                if(!ArchiveSnapshotCurrent(sourceRevision))return;
+                AchievementTile first=null,current=null;
+                foreach(var tile in tiles){bool visible=Matches(tile.Status);tile.Button.gameObject.SetActive(visible);if(visible){if(first==null)first=tile;if(tile.Status.Definition.id==_achievement)current=tile;}}
+                empty.gameObject.SetActive(first==null);Show(current??first);
+            }
             foreach(var filter in new[]{("","全部"),("ready","可领取"),("locked","未达成"),("claimed","已领取")})
             {
-                string id=filter.Item1;int count=MetaProgress.Achievements.Count(a=>id==""||(id=="claimed"?G.Meta.IsClaimed(a.id):id=="locked"?!MetaProgress.IsUnlocked(a,G.Base):MetaProgress.IsUnlocked(a,G.Base)&&!G.Meta.IsClaimed(a.id)));
-                Command(filters,filter.Item2+" "+count,()=>{_achievementFilter=id;Rebuild();},_achievementFilter==id);
+                string id=filter.Item1;int count=counts[id];
+                var button=Command(filters,filter.Item2+" "+count,()=>{_achievementFilter=id;foreach(var pair in filterButtons)SoftSelection(pair.Value,pair.Key==id);Apply();},_achievementFilter==id);button.name="achievement-filter-"+(id==""?"all":id);SoftSelection(button,_achievementFilter==id);filterButtons.Add(id,button);
             }
-            Input(left,"搜索成就或目标",_achievementQuery,v=>{_achievementQuery=v;Rebuild();});
-            var achievements=MetaProgress.Achievements.Where(a=>(_achievementQuery==""||(a.name+" "+a.desc).IndexOf(_achievementQuery,StringComparison.OrdinalIgnoreCase)>=0)&&(_achievementFilter==""||(_achievementFilter=="claimed"?G.Meta.IsClaimed(a.id):_achievementFilter=="locked"?!MetaProgress.IsUnlocked(a,G.Base):MetaProgress.IsUnlocked(a,G.Base)&&!G.Meta.IsClaimed(a.id)))).OrderBy(a=>G.Meta.IsClaimed(a.id)?2:MetaProgress.IsUnlocked(a,G.Base)?0:1).ToList();
-            var list=Scroll(left,"av3-medals");var detail=Column(workspace,"av3-medal-detail",20,new RectOffset(28,28,28,28));Surface(detail);
-            if(achievements.Count==0){Label(list,"没有匹配的成就",26,true);Label(detail,"没有匹配的成就",26,true);return;}
-            var selected=achievements.FirstOrDefault(a=>a.id==_achievement)??achievements[0];_achievement=selected.id;
-            foreach(var item in achievements)
+            Input(left,"搜索成就或目标",_achievementQuery,value=>{_achievementQuery=value;Apply();}).transform.SetSiblingIndex(1);
+            foreach(var state in entries)
             {
-                var a=item;var button=Command(list,"",()=>{_achievement=a.id;Rebuild();},selected.id==a.id);Bounds(button.gameObject,0,106,1,0);SoftSelection(button,selected.id==a.id);
+                var a=state.Definition;var tile=new AchievementTile{Status=state};tiles.Add(tile);
+                var button=Command(list,"",()=>{if(!tile.Button.isActiveAndEnabled||!tile.Button.interactable)return;_achievement=a.id;if(ArchiveSnapshotCurrent(sourceRevision))Show(tile);});tile.Button=button;button.name="achievement-item-"+a.id;Bounds(button.gameObject,0,106,1,0);SoftSelection(button,false);
                 var art=UIKit.Image(button.transform,Medal(a.id));art.preserveAspect=true;Set(art.transform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(16,-28),new Vector2(72,28));
-                var text=UIKit.Label(button.transform,a.name+"\n<size=18>"+AchievementProgress(a.id)+"   "+(G.Meta.IsClaimed(a.id)?"已领取":MetaProgress.IsUnlocked(a,G.Base)?"可领取":"未达成")+"</size>",23,InkColor);Fill(text.rectTransform,new Vector2(88,16),new Vector2(-16,-16));
+                var text=UIKit.Label(button.transform,a.name+"\n<size=18>"+state.Progress+"   "+(state.Claimed?"已领取":state.Unlocked?"可领取":"未达成")+"</size>",23,InkColor);Fill(text.rectTransform,new Vector2(88,16),new Vector2(-16,-16));
             }
-            var medal=UIKit.Image(detail,Medal(selected.id));medal.preserveAspect=true;Bounds(medal.gameObject,0,140,1,0);Label(detail,selected.name,28,true);Label(detail,selected.desc,22);Fact(detail,"当前进度",AchievementProgress(selected.id));Label(detail,"奖励预览",20,false,Muted);Label(detail,RewardText(selected),22);
-            bool claimed=G.Meta.IsClaimed(selected.id),unlocked=MetaProgress.IsUnlocked(selected,G.Base);var claim=Command(detail,claimed?"已领取":unlocked?"领取奖励":"目标未达成",()=>ClaimAchievement(selected.id),unlocked&&!claimed);claim.interactable=unlocked&&!claimed;
+            Apply();
         }
         void BuildBacks(Transform parent)
         {

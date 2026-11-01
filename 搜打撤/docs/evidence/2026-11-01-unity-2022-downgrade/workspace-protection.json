@@ -1,0 +1,141 @@
+{
+  "passed": true,
+  "originalGit": {
+    "parent": {
+      "head": "f966e859043b7ab3703839005029ef090a4677b5",
+      "indexSha256": "8af7a41654048f8221675419c9055a900e76e10d86836bbcdaf3090b1c0d5775"
+    },
+    "unity": {
+      "head": "81b87cbd5f7b6bb7de48b0973c534ba494cb84a9",
+      "indexSha256": "4e69e2bab4555b3f66369a0e851c0be585ce1ebdc7f50e01629626988d44b6bd"
+    }
+  },
+  "indexScope": "SHA256 of git ls-files --stage -z; raw stat-cache index bytes may refresh",
+  "protectedPathsAndMtimes": [
+    {
+      "path": "搜打撤/game/css/character-idle.css",
+      "sha256": "f9adedfa29c22c2f0ccb690dbb955e1ccf8a35bc62c19e9579bba16cd5ae440c",
+      "mtimeNs": 1793033317888228200
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "sha256": "5cf48efee89816eae30390665705558433a21aaa6918a0afdc0271e7afc94505",
+      "mtimeNs": 1793033463625914000
+    },
+    {
+      "path": "搜打撤/game/src/ui/character-idle.js",
+      "sha256": "0c9b1bda408faf017692009cc5811d9f3069c3d1414f55f122d7305e803ba74e",
+      "mtimeNs": 1793033317887231100
+    },
+    {
+      "path": "搜打撤/tests/character-idle.test.js",
+      "sha256": "e333bbd9c9dfc14b40d96018d532a3f7a1837fd1164cf47507247a79dd84511b",
+      "mtimeNs": 1793033317889224700
+    },
+    {
+      "path": "SoudacheUnity/_planning/tasks/C-run-screens.md",
+      "sha256": "62b2668d8acb8c0d05b0a983bd6d5d9d91187e4f7cbed7514a657e27498854ee",
+      "mtimeNs": 1788679358787519300
+    },
+    {
+      "path": "SoudacheUnity/_planning/tasks/E-battle-viewapi.md",
+      "sha256": "313a38c04db538f84ec0dd2f72f0b26942b629c9b886fb2da0e07c0e178b777c",
+      "mtimeNs": 1788679358788049100
+    },
+    {
+      "path": "SoudacheUnity/_planning/tasks/F-chest-open-screen.md",
+      "sha256": "2639cb2072844069fe7645bc5c7b62b220c6365836a9d851666573b48c04c212",
+      "mtimeNs": 1788679358788604700
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/dump-data/dump.mjs",
+      "sha256": "c5a86dd4c8afb9c3114569e3910b6d16974e47a1b438730c5f8d66b5999e9d13",
+      "mtimeNs": 1788679277262483700
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/w8_copy_assets.py",
+      "sha256": "0610ed4c433cb6624b8cbdf394f38ebcc2d807a524af9a5614adcc39a6937d7d",
+      "mtimeNs": 1788679358791314200
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Boot.dll",
+      "sha256": "df8dd133ae4c2561f3d6c066c635bbe5ef7f18d5b6b3611f4747b6a5b7466e27",
+      "mtimeNs": 1788669305183048600
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Boot.pdb",
+      "sha256": "f95cb0b353cfad3812e0f506ad069c8e09bfc9fd9d7cff61d0a754b13c7404b2",
+      "mtimeNs": 1788669305176417000
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Core.dll",
+      "sha256": "0ba4dfdd6932a24dcefe80cf85792374d21a2b4369d1a40aad8071b3ea8ac927",
+      "mtimeNs": 1788669259776147800
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Core.pdb",
+      "sha256": "cd7f301da2ecdbf3899786a7a214dd92dff8ceadc0609442d6fc6eee71048135",
+      "mtimeNs": 1788669259742848700
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Narrative.dll",
+      "sha256": "06ed09c040db704888e8f7f4409f99b47d3fb699533c93d87356a07e244d7606",
+      "mtimeNs": 1788669264389281500
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Narrative.pdb",
+      "sha256": "f7199d76012344f3a3ba17f0944835d4f452d01b1c524a0c6bcf3ce302181ec2",
+      "mtimeNs": 1788669264348719700
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Res.dll",
+      "sha256": "6d892a168a56ec6e7c9961cfad994637c98003750a226aa7b13546d4319b5c63",
+      "mtimeNs": 1788669268503892600
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Res.pdb",
+      "sha256": "197821c7e7667ee9f16517e13a4a6c2cf250e367d707fda158abf41ef4d2e943",
+      "mtimeNs": 1788669268496057200
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Run.dll",
+      "sha256": "87646e6e4ae03fd8508867d0c209b80eda19795034895ea36ce821c68778c46a",
+      "mtimeNs": 1788669276067080100
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.Run.pdb",
+      "sha256": "12afd2e96733e91a8572f5ac7840abdb7a45687599681fb3375b5899a9ea6b5f",
+      "mtimeNs": 1788669276028874900
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.UI.dll",
+      "sha256": "0ba9375fd4ccae6bb96faaf3eb6fc72444b405601d7eb6a468b2f59c49c15b8c",
+      "mtimeNs": 1788669297168085200
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.UI.pdb",
+      "sha256": "4a6e15d818d9593fa4820a79a42db02ecd7043127222445cea6ce9b430c29311",
+      "mtimeNs": 1788669297150554500
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.View.dll",
+      "sha256": "d74776830e5161a49aa0643ef2aba4d8aa70a59b7704771b59d76cd91b37d231",
+      "mtimeNs": 1788669281289784500
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/Sdt.View.pdb",
+      "sha256": "a69393ee570d71bf86ec219342d46976bd2305cfdda68d151344eeb7756ea63d",
+      "mtimeNs": 1788669281281905800
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/UnityEngine.UI.dll",
+      "sha256": "c7712630e9bd7707d530d004e0c05f9743b8f8079db023d90a34562f63dea0c4",
+      "mtimeNs": 1788669285990338200
+    },
+    {
+      "path": "SoudacheUnity/_planning/tools/ccbuild/bin/Debug/net8.0/UnityEngine.UI.pdb",
+      "sha256": "d1cca524fbc059d2b72a0214d743b1c2bfef50ef370be8d85c47d074753c076e",
+      "mtimeNs": 1788669285856168000
+    }
+  ]
+}

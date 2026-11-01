@@ -1,10 +1,19 @@
 param(
     [Parameter(Mandatory=$true)][string]$Method,
     [Parameter(Mandatory=$true)][string]$Output,
-    [int]$TimeoutSeconds=300
+    [int]$TimeoutSeconds=300,
+    [string]$UnityEditor
 )
 $ErrorActionPreference='Stop'
 $projectRoot=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+if ([string]::IsNullOrWhiteSpace($UnityEditor)) {
+    $versionFile=Join-Path $projectRoot 'ProjectSettings/ProjectVersion.txt'
+    $versionLine=@(Select-String -LiteralPath $versionFile -Pattern '^m_EditorVersion:\s*(\S+)\s*$')
+    if ($versionLine.Count -ne 1) { throw 'ProjectVersion.txt must contain exactly one m_EditorVersion.' }
+    $UnityEditor=Join-Path (Join-Path $env:ProgramFiles ('Unity '+$versionLine[0].Matches[0].Groups[1].Value)) 'Editor/Unity.exe'
+}
+if (-not (Test-Path -LiteralPath $UnityEditor -PathType Leaf)) { throw ('Unity editor not found: '+$UnityEditor) }
+$editorPath=(Resolve-Path -LiteralPath $UnityEditor).Path
 $outputRoot=[System.IO.Path]::GetFullPath($Output)
 if (Test-Path -LiteralPath $outputRoot) { throw 'Use a fresh evidence directory.' }
 New-Item -ItemType Directory -Path $outputRoot | Out-Null
@@ -25,7 +34,7 @@ $before=SourceManifest
 $before | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $outputRoot 'source-before.json') -Encoding UTF8
 $env:SDT_UNITY_CHECK_OUTPUT=$outputRoot
 $started=[DateTime]::UtcNow
-$nativeProcess=Start-Process 'D:/Unity/6000.6.7f1/Editor/Unity.exe' -ArgumentList @(
+$nativeProcess=Start-Process -FilePath $editorPath -ArgumentList @(
     '-batchmode','-projectPath',('"'+$projectRoot+'"'),'-executeMethod',$Method,
     '-logFile',('"'+(Join-Path $outputRoot 'unity.log')+'"')
 ) -WindowStyle Hidden -PassThru

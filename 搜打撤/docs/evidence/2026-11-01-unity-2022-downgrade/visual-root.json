@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "reviewer": "Friday/root",
+  "method": "Actual view_image inspection of six original PNGs",
+  "reviewed": [
+    {
+      "path": "player-1/player-title.png",
+      "sha256": "cd8cba904e24718b409e706c11f6c316fd5a195de30895dc742464fc50cbef0e"
+    },
+    {
+      "path": "player-1/player-shop.png",
+      "sha256": "1ca5cabdff5ce96f29d383daa5c560c93c53685f38fe370b8b2ec2c95735081f"
+    },
+    {
+      "path": "player-1/player-reward-pending.png",
+      "sha256": "2b9af3bee0006974bc1671a7952600597e4fce343091e507947e87db5b03a09b"
+    },
+    {
+      "path": "player-1/player-card-native-density.png",
+      "sha256": "9e1c76073a6aac1662db384032041520ffc8519dece4046682d0d270416da6fa"
+    },
+    {
+      "path": "player-1/player-r7-formation-selected.png",
+      "sha256": "346f683f6df8b96c5f3abf4af40efb2ac84094541f40660462d02f862eb8f892"
+    },
+    {
+      "path": "player-1/player-r7-pile-return.png",
+      "sha256": "7064ded6e889e9b03227f15150cb799a6e574586018541cf35488e09f89c824a"
+    }
+  ],
+  "findings": [],
+  "notes": [
+    "Title/shop/reward text and controls readable. Reward error is an intentional locked-file fixture.",
+    "Formation uses a scrolling content viewport and fixed footer. Hand fan is a partial preview, not a full-card reader.",
+    "White enemy rectangle belongs to the controlled material-less fixture; not natural enemy asset acceptance."
+  ]
+}

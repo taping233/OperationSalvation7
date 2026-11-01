@@ -1,0 +1,143 @@
+[
+  {
+    "name": "source-oracle",
+    "arguments": [
+      "node",
+      "_planning/parity-1101-round6/discover-source-oracle.mjs",
+      "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\discover-source-vectors.json"
+    ],
+    "startedAt": "2026-11-01T11:05:31.131157+00:00",
+    "endedAt": "2026-11-01T11:05:31.338965+00:00",
+    "exitCode": 0,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\source-oracle.log"
+  },
+  {
+    "name": "restore-battle",
+    "arguments": [
+      "dotnet",
+      "restore",
+      "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "--source",
+      "./Library/PackageCache"
+    ],
+    "startedAt": "2026-11-01T11:05:31.348851+00:00",
+    "endedAt": "2026-11-01T11:05:33.087576+00:00",
+    "exitCode": 0,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\restore-battle.log"
+  },
+  {
+    "name": "restore-run",
+    "arguments": [
+      "dotnet",
+      "restore",
+      "_planning/parity-1031/run-check/RunParityChecks.csproj",
+      "--source",
+      "./Library/PackageCache"
+    ],
+    "startedAt": "2026-11-01T11:05:31.349359+00:00",
+    "endedAt": "2026-11-01T11:05:33.081152+00:00",
+    "exitCode": 0,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\restore-run.log"
+  },
+  {
+    "name": "restore-run-round2",
+    "arguments": [
+      "dotnet",
+      "restore",
+      "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj",
+      "--source",
+      "./Library/PackageCache"
+    ],
+    "startedAt": "2026-11-01T11:05:31.349359+00:00",
+    "endedAt": "2026-11-01T11:05:33.080631+00:00",
+    "exitCode": 0,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\restore-run-round2.log"
+  },
+  {
+    "name": "restore-hub",
+    "arguments": [
+      "dotnet",
+      "restore",
+      "_planning/parity-1031/HubParityChecks.csproj",
+      "--source",
+      "./Library/PackageCache"
+    ],
+    "startedAt": "2026-11-01T11:05:33.090662+00:00",
+    "endedAt": "2026-11-01T11:05:34.592019+00:00",
+    "exitCode": 0,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\restore-hub.log"
+  },
+  {
+    "name": "restore-photo-export",
+    "arguments": [
+      "dotnet",
+      "restore",
+      "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj",
+      "--source",
+      "./Library/PackageCache"
+    ],
+    "startedAt": "2026-11-01T11:05:33.090662+00:00",
+    "endedAt": "2026-11-01T11:05:34.478613+00:00",
+    "exitCode": 0,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\restore-photo-export.log"
+  },
+  {
+    "name": "restore-run-round6",
+    "arguments": [
+      "dotnet",
+      "restore",
+      "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+      "--source",
+      "./Library/PackageCache"
+    ],
+    "startedAt": "2026-11-01T11:05:33.091299+00:00",
+    "endedAt": "2026-11-01T11:05:34.416217+00:00",
+    "exitCode": 0,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\restore-run-round6.log"
+  },
+  {
+    "name": "restore-bag-round7",
+    "arguments": [
+      "dotnet",
+      "restore",
+      "_planning/parity-1101-round7/bag-check/BagRound7Checks.csproj",
+      "--source",
+      "./Library/PackageCache"
+    ],
+    "startedAt": "2026-11-01T11:05:34.596606+00:00",
+    "endedAt": "2026-11-01T11:05:36.036399+00:00",
+    "exitCode": 0,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\restore-bag-round7.log"
+  },
+  {
+    "name": "restore-archive",
+    "arguments": [
+      "dotnet",
+      "restore",
+      "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "--source",
+      "./Library/PackageCache"
+    ],
+    "startedAt": "2026-11-01T11:05:34.597580+00:00",
+    "endedAt": "2026-11-01T11:05:36.071974+00:00",
+    "exitCode": 0,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\restore-archive.log"
+  },
+  {
+    "name": "battle",
+    "arguments": [
+      "dotnet",
+      "run",
+      "--project",
+      "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "--no-restore",
+      "-c",
+      "Release",
+      "--property:UseSharedCompilation=false"
+    ],
+    "startedAt": "2026-11-01T11:05:36.074488+00:00",
+    "endedAt": "2026-11-01T11:05:55.743642+00:00",
+    "exitCode": 3762504530,
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-2022-downgrade\\domain-1\\battle.log"
+  }
+]

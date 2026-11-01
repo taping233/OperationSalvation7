@@ -6,6 +6,51 @@ using Sdt.Core;
 
 namespace Sdt.Run
 {
+    // One synchronous render's replacement projection; never authorizes a command.
+    public sealed class BagRestorationPreview
+    {
+        sealed class Group { public int Count,Cap,NextCap;public bool Resource,NextResource;public OwnedCard First; }
+        readonly struct Source
+        {
+            public readonly string Key;public readonly int Bonus;public readonly bool First;
+            public Source(string key,int bonus,bool first){Key=key;Bonus=bonus;First=first;}
+        }
+        readonly Dictionary<string,Group> _groups=new Dictionary<string,Group>();
+        readonly Dictionary<string,int> _normalCounts=new Dictionary<string,int>();
+        readonly Dictionary<string,Source> _sources=new Dictionary<string,Source>();
+        readonly HashSet<string> _duplicates=new HashSet<string>();
+        readonly int _used,_ordinary,_baseCap,_totalCap;
+        internal BagRestorationPreview(GameRuntime game,BagCapacityQuery query)
+        {
+            _used=query.used;_ordinary=query.ordinarySlots;_baseCap=query.baseCap;_totalCap=query.totalCap;
+            foreach(var entry in game.State.ownedCards)
+            {
+                if(entry.card==null||entry.stored||entry.safe==true)continue;
+                string key=CardContainerCommands.Stable(entry.card);
+                if(!_groups.TryGetValue(key,out var group))
+                    _groups.Add(key,group=new Group{First=entry,Cap=CardContainerCommands.StackCap(entry.card),Resource=entry.card.type=="资源"});
+                if(group.Count==1){group.NextCap=CardContainerCommands.StackCap(entry.card);group.NextResource=entry.card.type=="资源";}group.Count++;
+                if(!string.IsNullOrEmpty(entry.pouchOf))continue;
+                _normalCounts.TryGetValue(key,out int count);_normalCounts[key]=count+1;
+                if(string.IsNullOrEmpty(entry.uid))continue;
+                if(_sources.ContainsKey(entry.uid))_duplicates.Add(entry.uid);
+                else _sources.Add(entry.uid,new Source(key,CardContainerCommands.ResourceSlots(entry.card),ReferenceEquals(group.First,entry)));
+            }
+        }
+        public bool CanReplace(string sourceUid,CardDef card)
+        {
+            if(card==null||sourceUid==null||_duplicates.Contains(sourceUid)||!_sources.TryGetValue(sourceUid,out var source))return false;
+            string key=CardContainerCommands.Stable(card);_normalCounts.TryGetValue(key,out int count);
+            if(source.Key==key)count--;
+            // Preserve the formal CanReceive short circuit, including an already overfull bag.
+            if(count>0&&count%CardContainerCommands.StackCap(card)!=0)return true;
+            var group=_groups[source.Key];int oldSlots=(group.Count+group.Cap-1)/group.Cap,remaining=group.Count-1;
+            int cap=source.First?group.NextCap:group.Cap;bool resource=source.First?group.NextResource:group.Resource;
+            int newSlots=remaining==0?0:(remaining+cap-1)/cap;
+            int used=_used-oldSlots+newSlots,ordinary=_ordinary-(group.Resource?0:oldSlots)+(resource?0:newSlots);
+            return used+1<=_totalCap-source.Bonus+CardContainerCommands.ResourceSlots(card)&&ordinary+(card.type=="资源"?0:1)<=_baseCap;
+        }
+    }
     public sealed class BagCapacityQuery
     {
         public int used,ordinarySlots,resourceSlots,baseCap,resourceBonus,totalCap,safeUsed;
@@ -53,6 +98,7 @@ namespace Sdt.Run
             return card?.id==PearlId?(9,"资源"):card?.id==PouchId?(3,"法术"):((int,string)?)null;
         }
         public static int ResourceBonus(IEnumerable<OwnedCard> owned)=>owned.Sum(o=>Rule(o.card) is var rule&&rule?.accepts=="资源"?rule.Value.slots:0);
+        internal static int ResourceSlots(CardDef card)=>Rule(card) is var rule&&rule?.accepts=="资源"?rule.Value.slots:0;
         static bool Normal(OwnedCard entry)=>entry.safe!=true&&!entry.stored&&string.IsNullOrEmpty(entry.pouchOf);
         static bool Inside(OwnedCard entry,string kind)=>kind=="pouch"?entry.pouchOf==PouchId:entry.stored&&string.IsNullOrEmpty(entry.pouchOf);
         public static List<StashStack> ZoneStacks(IEnumerable<OwnedCard> owned,bool safe)
@@ -78,6 +124,8 @@ namespace Sdt.Run
             int cap=game.Base.BagCap;return new BagCapacityQuery{used=slots+supplies,ordinarySlots=slots+supplies-resources,resourceSlots=resources,baseCap=cap,resourceBonus=bonus,totalCap=cap+bonus,safeUsed=safe,safeCap=game.SafeCap,groups=groups};
         }
         public static BagCapacityQuery CreateSafeStoragePreview(GameRuntime game)=>Query(game);
+        public static BagRestorationPreview CreateRestorationPreview(GameRuntime game,BagCapacityQuery query=null)
+            =>new BagRestorationPreview(game,query??Query(game));
         public static bool CanReceive(GameRuntime game,CardDef card,IEnumerable<OwnedCard> projection=null)
         {
             if(card==null)return false;var owned=projection??game.State.ownedCards;if(!(owned is ICollection<OwnedCard>))owned=owned.ToList();string key=Stable(card);int count=0;foreach(var entry in owned)if(Normal(entry)&&Stable(entry.card)==key)count++;

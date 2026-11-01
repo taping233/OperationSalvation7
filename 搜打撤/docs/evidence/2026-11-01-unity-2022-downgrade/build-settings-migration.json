@@ -1,0 +1,9 @@
+{
+  "changedInputs": [
+    "ProjectSettings/UnityConnectSettings.asset"
+  ],
+  "reason": "Unity2022 China first build normalized legacy cloud settings; adds CN endpoints, removes Unity6 InsightsSettings, migrates disabled crash reporting field. Main/cloud/ads/analytics/purchasing/performance services remain disabled.",
+  "oldSha256": "11251dae0356b6f43dd2c67bb511f6b7ecda4e5de425186bba3297e6f3dc1c6f",
+  "newSha256": "852b55c3ee6402c4a107150e2edc3a283851886ab27b626a4258cf0ead90f4a9",
+  "nativeReuseBoundary": "Native checks never use project cloud services; current code and all other850-scope inputs remain identical. Fresh build/player verify the migrated settings."
+}

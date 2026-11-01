@@ -14,8 +14,8 @@ namespace Sdt.UI.Screens.Hub
     {
         public float[] Fixed = Array.Empty<float>(), Minimum = Array.Empty<float>(), Fraction = Array.Empty<float>();
         public float Gap = 22;
-        public override void CalculateLayoutInputHorizontal() { base.CalculateLayoutInputHorizontal(); SetLayoutInputForAxis(padding.horizontal, LayoutUtility.DefaultMaxSize, padding.horizontal, 1, 0); }
-        public override void CalculateLayoutInputVertical() { SetLayoutInputForAxis(0, LayoutUtility.DefaultMaxSize, 0, 1, 1); }
+        public override void CalculateLayoutInputHorizontal() { base.CalculateLayoutInputHorizontal(); SetLayoutInputForAxis(padding.horizontal, padding.horizontal, 1, 0); }
+        public override void CalculateLayoutInputVertical() { SetLayoutInputForAxis(0, 0, 1, 1); }
         float[] Widths()
         {
             int n=rectChildren.Count;var sizes=new float[n];var locked=new bool[n];float available=rectTransform.rect.width-padding.horizontal-Mathf.Max(0,n-1)*Gap;
@@ -40,8 +40,8 @@ namespace Sdt.UI.Screens.Hub
         public bool Warehouse;
         public float Gap=24, CellHeight=512, MaximumWidth;
         int Columns=>Mathf.Max(1,Mathf.FloorToInt(Warehouse?(rectTransform.rect.width+24)/348:(rectTransform.rect.width-padding.horizontal+Gap)/(220+Gap)));
-        public override void CalculateLayoutInputHorizontal(){base.CalculateLayoutInputHorizontal();SetLayoutInputForAxis(0,LayoutUtility.DefaultMaxSize,0,1,0);}
-        public override void CalculateLayoutInputVertical(){float height=padding.vertical+Mathf.Ceil(rectChildren.Count/(float)Columns)*(CellHeight+Gap)-Gap;SetLayoutInputForAxis(Mathf.Max(0,height),Mathf.Max(0,height),Mathf.Max(0,height),0,1);}
+        public override void CalculateLayoutInputHorizontal(){base.CalculateLayoutInputHorizontal();SetLayoutInputForAxis(0,0,1,0);}
+        public override void CalculateLayoutInputVertical(){float height=padding.vertical+Mathf.Ceil(rectChildren.Count/(float)Columns)*(CellHeight+Gap)-Gap;SetLayoutInputForAxis(Mathf.Max(0,height),Mathf.Max(0,height),0,1);}
         public override void SetLayoutHorizontal()
         {
             float track=Mathf.Max(0,(rectTransform.rect.width-padding.horizontal-(Columns-1)*Gap)/Columns),width=MaximumWidth>0?Mathf.Min(track,MaximumWidth):track;

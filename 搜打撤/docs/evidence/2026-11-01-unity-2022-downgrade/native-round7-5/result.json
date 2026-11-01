@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "error": "System.InvalidOperationException: TimeoutException: Battle round7: mapped original candidate did not return to battle; top=DiscoverPanel; coreToken=8c4ad67a57e349ff954ae9d5304fb3fe; coreDiscovery=1; shownDiscovery=1; queueBusy=False; pendingBeats=0; queuedSnapshot=False; queuedDiscovery=none; page=token=8c4ad67a57e349ff954ae9d5304fb3fe, round=1, revision=1, selected=0, readyAt=9.407097, now=21.45488; confirmInteractable=True\nCurrentBattleRound7Checks+<Until>d__19.MoveNext () (at Assets/Editor/CurrentBattleRound7Checks.cs:55)\nUnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <8cdc7e7e8a17404287a8b220eb9eec72>:0)\n",
+  "discoveryAssertions": 31,
+  "battleAssertions": 49,
+  "bagAssertions": 0,
+  "hubAssertions": 0,
+  "scope": "Isolated production components, formal commands and constructed native UI events. No OS hardware input, natural unassisted play, multi-size or whole-frame performance claim."
+}

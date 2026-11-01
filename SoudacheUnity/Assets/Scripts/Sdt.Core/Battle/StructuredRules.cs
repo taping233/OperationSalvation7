@@ -474,7 +474,7 @@ namespace Sdt.Core.Battle
                 case "execute": ExecuteRule(card, op, target); break;
                 case "transform":
                     var into = CardLibrary.FindByName(op.Text("into"));
-                    if (into != null) foreach (var owned in G.OwnedCards.Concat(granted).Where(entry => entry.card.name == "初始攻击").ToArray()) cardOverrides[owned.uid] = into.Clone(); break;
+                    if (into != null) foreach (var owned in G.OwnedCards.Concat(granted).Where(entry => entry.card.name == "初始攻击").ToArray()) {var altered=into.Clone();CaptureTransformedCost(owned.card,altered);cardOverrides[owned.uid]=altered;} break;
                 case "maxHp": if (G is BattleHostEffects host) host.ChangeMaxHp(op.Number("n")); break;
                 case "deckCap": temporaryDeckCap += op.Number("n"); break;
                 case "consumeHand":
@@ -648,7 +648,7 @@ namespace Sdt.Core.Battle
             {
                 var acquired = pool.FirstOrDefault(c=>c.name==op.Get("pool")?.Text("kind"))??RandomRuleCard(pool); if (acquired == null) break;
                 acquired = acquired.Clone(); lastAcquired = acquired;
-                if (op.Text("act") == "zeroCost") acquired.cost = 0;
+                if (op.Text("act") == "zeroCost") { if(op.Get("pool")?.Text("kind")=="ids"||op.Get("pool")?.Text("kind")=="types"||op.Has("expire"))acquired._baseCost=acquired.cost;acquired.cost = 0; }
                 if(op.Text("act")=="costMinusOne")acquired.cost=Math.Max(0,acquired.cost-1);
                 if(op.Text("act")=="noInfuse")acquired.noInfuse=true;
                 string uid = dest == "deck" ? AddDeckCard(acquired) : AddTempCard(acquired);
@@ -684,7 +684,7 @@ namespace Sdt.Core.Battle
                 int continuationBase=ruleContinuations.Count;
                 lastAcquired = chosen;
                 if (onSelect != null) { onSelect(chosen); return; }
-                var acquired = chosen.Clone(); if (op.Text("act") == "zeroCost") acquired.cost = 0;
+                var acquired = chosen.Clone(); if (op.Text("act") == "zeroCost") { acquired._baseCost=chosen.cost;acquired.cost = 0; }
                 if(op.Text("act")=="noInfuse")acquired.noInfuse=true;
                 if (op.Text("act") == "play"||op.Text("act")=="playKeep"){
                     string castUid=AddTempCard(acquired);
@@ -888,7 +888,7 @@ namespace Sdt.Core.Battle
             foreach (var entry in timedRuleStatuses.Where(item => item.turn <= turn).ToArray()) { entry.status.Set(entry.key, Math.Max(0,entry.status.Get(entry.key)-entry.original)); timedRuleStatuses.Remove(entry); }
             foreach (var entry in stolenAttackReturns.Where(item => item.turn <= turn || item.foe.dead).ToArray()) { entry.foe.atk += entry.amount; stolenAttackReturns.Remove(entry); }
             foreach (var entry in attackReductions.Where(item => item.foe.status.atkDown == 0).ToArray()) { entry.foe.atk += entry.amount; attackReductions.Remove(entry); }
-            foreach (var entry in costDecayCards.ToArray()) { var card = FindCard(entry.Key)?.card; if (card != null) { var altered = card.Clone(); altered.cost = Math.Max(0, (altered.runtimeCost ?? altered.cost) - entry.Value); altered.runtimeCost = null; cardOverrides[entry.Key] = altered; } }
+            foreach (var entry in costDecayCards.ToArray()) { var card = FindCard(entry.Key)?.card; if (card != null) { var altered = card.Clone(); altered._baseCost=card._baseCost??card.cost;altered.cost = Math.Max(0, (altered.runtimeCost ?? altered.cost) - entry.Value); altered.runtimeCost = null; cardOverrides[entry.Key] = altered; } }
             foreach(var uid in hand.Concat(drawPile).Concat(discard).Concat(grave).Distinct().ToArray())
             {
                 var card=FindCard(uid)?.card; if(card==null)continue;
@@ -1009,7 +1009,7 @@ namespace Sdt.Core.Battle
                     int continuationBase=ruleContinuations.Count;string uid=AddTempCard(chosen.Clone());
                     if(RuleInputPending)DeferRuleBatch(continuationBase,()=>OpenSwapDiscovery(pool,uid,chosen));else OpenSwapDiscovery(pool,uid,chosen);
                 }
-                else{var a=first.Clone();var b=chosen.Clone();a.cost=chosen.cost;b.cost=first.cost;a.runtimeCost=b.runtimeCost=null;cardOverrides[firstUid]=a;AddTempCard(b);}
+                else{var a=first.Clone();var b=chosen.Clone();a.cost=chosen.cost;b._baseCost=chosen._baseCost??chosen.cost;b.cost=first.cost;a.runtimeCost=b.runtimeCost=null;cardOverrides[firstUid]=a;AddTempCard(b);}
             };
         }
         private void TransformRuleCards(RuleValue op)
@@ -1018,12 +1018,12 @@ namespace Sdt.Core.Battle
             var transformed = new List<CardDef>();
             foreach (var uid in drawPile.ToArray())
             {
-                var card = FindCard(uid)?.card; if (card == null || !new[] { "武术", "法术", "装备" }.Contains(card.type)) continue;
+                var source=FindSourceCard(uid);var card = source==null?null:OverrideCard(source).card; if (card == null || !new[] { "武术", "法术", "装备" }.Contains(card.type)) continue;
                 int rank = Array.IndexOf(rarities, card.rarity); if (rank < 0) continue;
                 string next = rarities[Math.Min(rarities.Length - 1, rank + op.Number("raritySteps", 1))];
                 var chosen = RandomRuleCard(CardLibrary.All().Where(candidate => candidate.type == card.type && candidate.rarity == next && CardLibrary.IsRandomObtainable(candidate)).ToList());
                 if (chosen == null) continue;
-                var altered = chosen.Clone(); cardOverrides[uid] = altered; transformed.Add(altered);
+                var altered = chosen.Clone();CaptureTransformedCost(source.card,altered);cardOverrides[uid] = altered; transformed.Add(altered);
             }
             if (!op.Flag("swapCosts")) return;
             var costs = transformed.Select(card => card.cost).ToArray();

@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "total": 2690,
+  "assertions": {
+    "battle": 524,
+    "run": 326,
+    "run-round2": 32,
+    "hub": 472,
+    "photo-export": 29,
+    "run-round6": 93,
+    "bag-round7": 1175,
+    "archive-export": 20,
+    "archive-import": 15,
+    "archive-id-conflict": 2,
+    "archive-name-conflict": 2
+  },
+  "sourceOracleCases": 8,
+  "processReceipt": "domain-2/processes.json",
+  "scope": "Current Core/Run sources under .NET8 with existing Unity resource/audio stubs; target2022 restored Newtonsoft3.2.2. This does not replace native Mono/UI/player checks.",
+  "reuseBoundary": "Later changes are limited to opt-in QA readiness/fixtures, the UI-only retained DiscoverPanel event binding, and first-build normalization of disabled UnityConnect settings. Core/Run sources and the seven target2022 Newtonsoft references are unchanged."
+}

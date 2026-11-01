@@ -136,7 +136,7 @@ namespace Sdt.UI.Screens.Battle
     }
     public sealed class HandGroup
     {
-        public CardDef Card; public List<string> Uids; public string Key; public bool Self; public int Slot;
+        public CardDef Card; public BattleCardPresentation State; public List<string> Uids; public string Key; public bool Self; public int Slot;
         public int Rank => Self ? 5 : BattleHandProjection.Rank(Card);
     }
     public class HandPanel
@@ -151,19 +151,19 @@ namespace Sdt.UI.Screens.Battle
         string _token;
         public int Page, Pages = 1, NewOnOtherPages, VisibleCount;
         public static IReadOnlyList<string> InfusionKeys(BattleSnapshot s,IBattleViewApi api) => BattleHandProjection.InfusionShortcuts(
-            s.Hand.Select(uid=>(uid,api.FindCard(uid)?.Card)),s.Infusing.Uid,api.EffCostOf);
+            s.Hand.Select(api.CardPresentation),s.Infusing.Uid);
         public static List<HandGroup> Group(BattleSnapshot s, IBattleViewApi api)
         {
             var result = new List<HandGroup>();
             var byKey = new Dictionary<string,HandGroup>();
             foreach (string uid in s.Hand)
             {
-                var entry = api.FindCard(uid); if (entry == null) continue;
+                var state = api.CardPresentation(uid); if (state == null) continue;
                 bool individual = s.Infusing != null || s.RuleHandSelection != null;
-                var c = entry.Card;
-                string key = individual ? "uid:" + uid : BattleHandProjection.StackKey(c,api.EffCostOf(c));
+                var c = state.Card;
+                string key = individual ? "uid:" + uid : BattleHandProjection.StackKey(state);
                 if (!byKey.TryGetValue(key,out var group))
-                { result.Add(group = new HandGroup { Card = c, Key = key, Uids = new List<string>(), Self = s.Infusing?.Uid == uid }); byKey.Add(key,group); }
+                { result.Add(group = new HandGroup { Card = c, State=state,Key = key, Uids = new List<string>(), Self = s.Infusing?.Uid == uid }); byKey.Add(key,group); }
                 group.Uids.Add(uid);
             }
             return s.Infusing != null || s.RuleHandSelection != null ? result : result.OrderBy(g => g.Rank).ToList();
@@ -197,9 +197,12 @@ namespace Sdt.UI.Screens.Battle
             bool infusing = selection != null;
             if (infusing)
             {
-                groups = groups.Where(g => g.Uids[0] != selection.Uid && !selection.Picked.Contains(g.Uids[0]))
-                    .GroupBy(g => BattleHandProjection.StackKey(g.Card,api.EffCostOf(g.Card)))
-                    .Select(stack => new HandGroup { Card = stack.First().Card, Key = stack.Key, Uids = stack.SelectMany(g => g.Uids).ToList() })
+                groups = groups.Where(g => g.Uids[0] != selection.Uid)
+                    .GroupBy(g => BattleHandProjection.StackKey(g.State))
+                    .Select(stack => {
+                        var available=stack.Where(g=>!selection.Picked.Contains(g.Uids[0])).ToArray();
+                        return available.Length==0?null:new HandGroup { Card=available[0].Card,State=available[0].State,Key=stack.Key,Uids=available.SelectMany(g=>g.Uids).ToList() };
+                    }).Where(group=>group!=null)
                     .OrderBy(group => group.Rank).ToList();
                 for (int i = 0; i < groups.Count; i++) groups[i].Slot = i;
             }
@@ -212,11 +215,12 @@ namespace Sdt.UI.Screens.Battle
             Cards.Clear();
             foreach (var g in visible)
             {
-                int cost = api.EffCostOf(g.Card), spell = s.Player?.spellPower ?? 0;
+                var state=g.State;int cost = state.EffectiveCost, spell = s.Player?.spellPower ?? 0;
                 if (s.Pstat?.status != null && s.Pstat.status.TryGetValue("spellUp", out int bonus)) spell += bonus;
-                var options = new CardFaceOptions { HideCost = false, ScrollDescription = false, CostOverride = cost, SpellDamageBonus = spell, DescriptionContext=CardFace.BattleDescription(s,g.Uids[0]) };
+                var options = new CardFaceOptions { HideCost = false, ScrollDescription = false, CostOverride = cost, SpellDamageBonus = spell, DescriptionContext=CardFace.BattleDescription(s,g.Uids[0]),Presentation=state };
                 var card = _retained.Find(c => c.Uids.Any(g.Uids.Contains));
-                string signature = g.Card.id + "|" + g.Card.name + "|" + Sdt.Res.CurrentCardPresentation.Description(g.Card,options.DescriptionContext) + "|" + cost + "|" + spell;
+                string signature = g.Card.id + "|" + g.Card.name + "|" + Sdt.Res.CurrentCardPresentation.Description(g.Card,options.DescriptionContext) + "|" + cost + "|" + spell
+                    +"|"+state.Temporary+"|"+state.Transforming+"|"+state.Transformed+"|"+state.OriginName+"|"+state.BaseCost;
                 if (card == null) { card = BattleCard.Create(g.Card, parent, options); _retained.Add(card); }
                 else if (card.FaceSignature != signature) card.RebuildFace(g.Card, options);
                 card.FaceSignature = signature; card.Uid = g.Uids[0]; card.Uids = new List<string>(g.Uids);

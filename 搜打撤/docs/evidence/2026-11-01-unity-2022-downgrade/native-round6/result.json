@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "error": null,
+  "hudAssertions": 14,
+  "hubAssertions": 58,
+  "audioAssertions": 34,
+  "sacrificeAssertions": 107,
+  "discoverAssertions": 156,
+  "scope": "Isolated real native components and production commands with controlled fixtures and constructed UI events; no OS hardware input, natural unassisted play, whole-frame allocation or FPS claim."
+}

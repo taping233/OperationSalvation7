@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "total": 1629,
+  "newRound7": 317,
+  "related": 1312,
+  "receipts": {
+    "native-round7-6": {
+      "assertions": 317,
+      "sourceCount": 850,
+      "processSha256": "4ebee10331a45d34df3f29c4b5e3221b1ae07266b7fe53b04f29fb7684c02ad7",
+      "resultSha256": "410db88a664531f495b68a5150c7358683b742c0bd1a1e19d53b86109d36463b",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    },
+    "native-round6": {
+      "assertions": 369,
+      "sourceCount": 850,
+      "processSha256": "446e5f6838c9b2c1a938811ab631108de2c4921ea871cec53d1ac9bcf0477d02",
+      "resultSha256": "1d974c291046d37d7bd59a063e9f656d225c243ba1101a8cb492e3a47e123ae3",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    },
+    "native-round5": {
+      "assertions": 262,
+      "sourceCount": 850,
+      "processSha256": "93ac9f22ab48c63fb6b3110348fa74834199d6aa993fdf71a0834cd1cd54191f",
+      "resultSha256": "b12722966b910dd44150d4fdb96fe5ebacad88424ca18227e0cba0237f6d7914",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    },
+    "native-round4": {
+      "assertions": 127,
+      "sourceCount": 850,
+      "processSha256": "7f8a489286aa8915df4b6eb49f4d3aec55151fc2701c415a43ee11dd4b00b234",
+      "resultSha256": "ae604178d8e4ecd5b4488328ba180de2dcb085c3bc55c10008b04092fc09ab95",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    },
+    "native-round3": {
+      "assertions": 131,
+      "sourceCount": 850,
+      "processSha256": "6a4f4733694d1cddad1976642dc28e9869b2f8679bdfa266524d2a084455af06",
+      "resultSha256": "2a1bb791a6edc665dd15c08d45a9609874f673079f4371b8c0ab6d3a7337e659",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    },
+    "native-round2": {
+      "assertions": 375,
+      "sourceCount": 850,
+      "processSha256": "3da09d47e2eef68cadd020474f38094ce49a55d04cce75348562f41eaa041ead",
+      "resultSha256": "1c5f70774a3856785636532452d71fab3ae12389fbfe43837fefee82eb63aea3",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    },
+    "native-shared": {
+      "assertions": 48,
+      "sourceCount": 850,
+      "processSha256": "54299377cf15428fa9e18786c421226fdc42f284ec9798865edcca14db9166f9",
+      "resultSha256": "edb0754d795e1a41b164441529b649e24e5a415b61c406560846e94804dc5c52",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    },
+    "native-film": {
+      "assertions": 0,
+      "sourceCount": 850,
+      "processSha256": "aa98b3ca066436512865504c1ccbbae8ce644712885b36943d2e23f93a98ed18",
+      "resultSha256": "3157ce864c7ef291fa8de701422a5f9124b39fbe58fe1d58218d93b1f969d731",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    },
+    "native-receipts": {
+      "assertions": 0,
+      "sourceCount": 850,
+      "processSha256": "fe6db36d0d9253a3c379c838bcf8cf3b02cb8fa2ad326308f9815ac9ed1a92a4",
+      "resultSha256": "1eea729cd26b3ec58ae9b90b2e0fc69193a1616bfe010cacb9bf6753f4d86562",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    },
+    "native-journey": {
+      "assertions": 0,
+      "sourceCount": 850,
+      "processSha256": "8cd289643200cc03df46ff375d1a4f470d4bb3db20107eb133d89b84addaadb8",
+      "resultSha256": "733e99a6b531d249ea4911c535eac9713e529d739e91b94179ad61e60a0b14bf",
+      "currentSourceDifferences": [
+        "ProjectSettings/UnityConnectSettings.asset"
+      ],
+      "reuseBoundary": "Only disabled cloud-service settings were normalized by the first build; no native gameplay/UI input changed. Fresh build/player bind the final settings."
+    }
+  },
+  "filmRecords": 67,
+  "receiptsTicks": 60,
+  "journeyTicks": 390
+}

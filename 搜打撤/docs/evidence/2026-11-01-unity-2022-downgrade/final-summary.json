@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "completedAt": "2026-11-01T11:53:39.970837+00:00",
+  "editor": "2022.3.62f3c1",
+  "editorPath": "C:/Program Files/Unity 2022.3.62f3c1/Editor/Unity.exe",
+  "sourceInputCount": 850,
+  "domainAssertions": 2690,
+  "sourceOracleCases": 8,
+  "nativeAssertions": 1629,
+  "round7NativeAssertions": 317,
+  "nativeReuseAllowedDifferences": [
+    "ProjectSettings/UnityConnectSettings.asset"
+  ],
+  "nativeReuseReason": "First build normalized disabled cloud-service fields only; all Core/Run/UI source hashes are identical to the successful native batch. Final stable build/player use the migrated setting.",
+  "buildGUID": "4d33ec981819461295052942d67afeee",
+  "buildInputs": 4015,
+  "products": 136,
+  "productBytes": 2708694475,
+  "playerCaptures": 102,
+  "playerRecords": 271,
+  "actualImagesReviewed": 23,
+  "display": {
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120.0
+  },
+  "metaFiles": 2053,
+  "normalizedMetaFiles": 1492,
+  "protectedPathsAndMtimes": 25,
+  "originalGitPreserved": true,
+  "retained": "Unity6 editor installation, original import cache and old desktop build retained; project/native tools use2022 only. Original workspace completed changes stay uncommitted; publication uses the existing isolated branch.",
+  "softwareLimit": "Existing international Unity CLI rejects the c1 suffix when registering an editor; verified direct desktop project shortcut opens this editor. No fake version or signature bypass.",
+  "failuresRetained": [
+    "import1-new-layout-api-and-unverified-R7-namespace",
+    "import2-R7-probe-namespace",
+    "import3-R7-private-finish-call",
+    "native1-domain1-R7-invalid-mistbox-fixtures",
+    "native2-license-service-state",
+    "native3-R7-presentation-readiness",
+    "native4/5-confirm-listener-missing-disproved-queue-deadlock",
+    "build1-automatic-cloud-setting-normalization"
+  ],
+  "scope": "No OS hardware input, multi-size, full-library zero-difference, acoustic sample or whole-frame FPS/memory improvement claim. Continuous parity goal remains paused; this authorized downgrade batch is complete."
+}

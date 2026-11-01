@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -42,14 +42,18 @@ namespace Sdt.UI.Screens.Battle
         IReadOnlyList<CurrentBattlePileData.Stack> _stacks;
         readonly List<Button> _inspect = new List<Button>();
         readonly List<(CanvasGroup Group,float Alpha)> _hidden = new List<(CanvasGroup,float)>();
+        readonly Dictionary<string,Sdt.Res.CurrentCardPresentation.Context> _descriptions=new Dictionary<string,Sdt.Res.CurrentCardPresentation.Context>();
+        Sdt.Core.CardDef[] _readerCards;BattleScreen _owner;Button _opener;string _token;
         public string Kind { get; private set; }
         public IReadOnlyList<CurrentBattlePileData.Stack> Stacks => _stacks;
         public ScrollRect Scroll { get; private set; }
-        public static void Open(string title, IReadOnlyList<string> uids)
+        public static void Open(string title, IReadOnlyList<string> uids,BattleScreen owner,Button opener)
         {
+            if(owner==null||UiStack.Top!=owner)return;
             var page = ScreenMount.Show<BattlePileScreen>("BattlePile");
             page.Kind = title == "消耗牌堆" ? "grave" : "deck";
             page._title = page.Kind == "grave" ? "[[icon:consumed-pile]] 消耗牌堆" : "[[icon:draw-pile]] 剩余牌库";
+            page._owner=owner;page._opener=opener;page._token=GameSnapshotRef.Current.BattleToken;
             page._uids = uids.ToArray(); page.Build();
         }
         public override void Build()
@@ -57,13 +61,16 @@ namespace Sdt.UI.Screens.Battle
         void BuildPile()
         {
             var snapshot = GameSnapshotRef.Current;
-            var entries = _uids.Select(uid => {
-                var entry = BattleView.Api.FindCard(uid);
-                return entry == null ? null : new CurrentBattlePileData.Entry { Uid = uid, Card = entry.Card,
-                    EffectiveCost = BattleView.Api.EffCostOf(entry.Card),
-                    PresentationKey = JsonConvert.SerializeObject(CardFace.BattleDescription(snapshot, uid)) };
-            }).Where(entry => entry != null).ToArray();
+            var entries=new List<CurrentBattlePileData.Entry>();
+            foreach(string uid in _uids)
+            {
+                var state=BattleView.Api.CardPresentation(uid);if(state==null)continue;
+                var description=CardFace.BattleDescription(snapshot,uid);_descriptions.Add(uid,description);
+                entries.Add(new CurrentBattlePileData.Entry { Uid=uid,Card=state.Card,EffectiveCost=state.EffectiveCost,State=state,
+                    Presentation=Kind=="deck"||description==null?null:JToken.FromObject(description) });
+            }
             _stacks = CurrentBattlePileData.Build(entries, Kind != "deck");
+            _readerCards=_stacks.Select(stack=>stack.Card).ToArray();
             UiStack.SetMaskColor(this,Color.clear);
             HideForeground();
             var backdrop=BattleScreen.BattleRect("battle-pile-stage-filter",transform);UiStack.Stretch(backdrop);
@@ -80,7 +87,7 @@ namespace Sdt.UI.Screens.Battle
             title.name="battle-pile-title";
             title.font = Sdt.Res.Res.SansBold; title.lineSpacing = SourceTextLayout.LineSpacing(title,1.3f);title.alignment=TextAnchor.MiddleCenter;
             BattleScreen.Fixed(title.rectTransform,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-18),new Vector2(700,47));
-            var total=UIKit.Label(root,entries.Length+" 张",24,BtColors.Hex("#cadbe2"));total.alignment=TextAnchor.MiddleRight;
+            var total=UIKit.Label(root,entries.Count+" 张",24,BtColors.Hex("#cadbe2"));total.alignment=TextAnchor.MiddleRight;
             total.name="battle-pile-total";
             BattleScreen.Fixed(total.rectTransform,new Vector2(1,1),new Vector2(1,1),new Vector2(-36,-18),new Vector2(320,47));
             var body = BattleScreen.BattleRect("battle-decision-content", root);
@@ -119,8 +126,9 @@ namespace Sdt.UI.Screens.Battle
         }
         CardFaceOptions Options(int index,bool reading=true)
         {
-            var stack=_stacks[index];string uid=stack.Uids[0];var live=BattleView.Api.FindCard(uid)?.Card??stack.Card;
-            return new CardFaceOptions{HideCost=false,ScrollDescription=reading,CostOverride=BattleView.Api.EffCostOf(live),DescriptionContext=CardFace.BattleDescription(GameSnapshotRef.Current,uid)};
+            var stack=_stacks[index];
+            return new CardFaceOptions{HideCost=false,ScrollDescription=reading,CostOverride=stack.EffectiveCost,
+                DescriptionContext=_descriptions[stack.Uids[0]],Presentation=stack.State};
         }
         static void AttachScrollbar(ScrollRect scroll)
         {
@@ -136,9 +144,9 @@ namespace Sdt.UI.Screens.Battle
         }
         void Inspect(int index)
         {
-            if(UiStack.Top!=this)return;
-            DepartureCardZoom.Open(_stacks.Select(stack=>stack.Card).ToArray(),index,
-                current=>Options(current),current=>_inspect[current].gameObject);
+            if(UiStack.Top!=this||!SourceCurrent)return;
+            DepartureCardZoom.Open(_readerCards,index,
+                current=>Options(current),current=>_inspect[current].gameObject,sourceCurrent:()=>SourceCurrent);
         }
         void HideForeground()
         {
@@ -151,7 +159,21 @@ namespace Sdt.UI.Screens.Battle
         {var group=UIKit.GetOrAdd<CanvasGroup>(target);if(_hidden.Any(item=>item.Group==group))return;_hidden.Add((group,group.alpha));group.alpha=0;}
         void RestoreForeground()
         {foreach(var item in _hidden)if(item.Group!=null)item.Group.alpha=item.Alpha;_hidden.Clear();}
-        internal override void OnClose()=>RestoreForeground();
+        bool SourceCurrent
+        {
+            get
+            {
+                if(_owner==null||GameSnapshotRef.Current?.BattleToken!=_token||GameSnapshotRef.Current.over)return false;
+                for(int i=0;i<UiStack.Count;i++)if(UiStack.PanelAt(i)==_owner)return true;
+                return false;
+            }
+        }
+        internal override void OnClose()
+        {
+            RestoreForeground();
+            if(SourceCurrent&&UiStack.Top==_owner&&_opener!=null&&_opener.isActiveAndEnabled&&_opener.IsInteractable()
+                &&EventSystem.current!=null)EventSystem.current.SetSelectedGameObject(_opener.gameObject);
+        }
         protected override void OnDestroy()=>RestoreForeground();
     }
     public sealed class BattleLogScreen : Panel

@@ -80,6 +80,7 @@ namespace Sdt.UI.Screens.Battle
             Fixed((RectTransform)_next.transform, Vector2.zero, Vector2.zero, new Vector2(92, 0), new Vector2(84, 34));
             _previous.image.color = _next.image.color = Color.clear;
             _draw = BtBtn.Create(_dock, "", () => OpenPile(false), "ghost");
+            _draw.name="btDeck";
             Fixed((RectTransform)_draw.transform, Vector2.zero, Vector2.zero, new Vector2(HudEdge, 132), new Vector2(ResourceWidth, 54));
             _draw.image.color = Color.clear;
             _hand = BattleRect("bt-hand sts-hand", _stageRoot);
@@ -98,6 +99,7 @@ namespace Sdt.UI.Screens.Battle
             _forecast.raycastTarget = true;
             _forecast.gameObject.AddComponent<BattleHoverInfo>().Setup(() => ShowReadout("回合结束预估", GameSnapshotRef.Current?.Forecast?.Note ?? ""));
             _consumed = BtBtn.Create(_stageRoot, "", () => OpenPile(true), "ghost");
+            _consumed.name="btGrave";
             Fixed((RectTransform)_consumed.transform, Vector2.right, Vector2.right, new Vector2(-HudEdge, 218), new Vector2(TacticsWidth, 48));
             _equipment = BattleRect("sts-unit-actions", _arena);
             _prompt = BattleRect("bt-infuse", _stageRoot);
@@ -234,7 +236,7 @@ namespace Sdt.UI.Screens.Battle
         void OpenPile(bool consumed)
         {
             var s = GameSnapshotRef.Current; if (InputLocked(s)) return;
-            BattlePileScreen.Open(consumed ? "消耗牌堆" : "牌库", consumed ? ConsumedUids(s) : s.DrawPile);
+            BattlePileScreen.Open(consumed ? "消耗牌堆" : "牌库", consumed ? ConsumedUids(s) : s.DrawPile,this,consumed?_consumed:_draw);
         }
         void RefreshGeometry(BattleSnapshot s)
         {
@@ -373,7 +375,7 @@ namespace Sdt.UI.Screens.Battle
             title.rectTransform.offsetMin = new Vector2(430,-170); title.rectTransform.offsetMax = new Vector2(-64,-118); title.alignment = TextAnchor.MiddleRight;
             if(_infusionSource==null)
             {
-                var source = CardFace.Create(inf.Card, CardSize.Xl, _infusionWorkspace, options:new CardFaceOptions { HideCost=false, ScrollDescription=true, CostOverride=api.EffCostOf(inf.Card), DescriptionContext=CardFace.BattleDescription(s,inf.Uid) });
+                var source = CardFace.Create(inf.Card, CardSize.Xl, _infusionWorkspace, options:new CardFaceOptions { HideCost=false, ScrollDescription=true, CostOverride=api.EffCostOf(inf.Card), DescriptionContext=CardFace.BattleDescription(s,inf.Uid),Presentation=api.CardPresentation(inf.Uid) });
                 _infusionSource=(RectTransform)source.transform;
                 _infusionSource.name="infusion-source-card";
                 Fixed(_infusionSource, new Vector2(0,1), new Vector2(0,1), new Vector2(64,-190), new Vector2(300,450));
@@ -387,8 +389,8 @@ namespace Sdt.UI.Screens.Battle
             scroll.AddComponent<LayoutElement>().minWidth=Mathf.Max(0,_stageRoot.rect.width-494);
             foreach (string picked in inf.Picked)
             {
-                string uid = picked; var card = api.FindCard(uid)?.Card; if (card == null) continue;
-                var face = CardFace.Create(card,CardSize.Xl,scroll.transform);
+                string uid = picked; var state=api.CardPresentation(uid);if(state==null)continue;var card=state.Card;
+                var face = CardFace.Create(card,CardSize.Xl,scroll.transform,options:new CardFaceOptions { HideCost=false,CostOverride=state.EffectiveCost,DescriptionContext=CardFace.BattleDescription(s,uid),Presentation=state });
                 var le = face.GetComponent<LayoutElement>(); le.minWidth=le.preferredWidth=190; le.minHeight=le.preferredHeight=285;
                 var paper = face.transform.Find("paper-card") as RectTransform; if (paper != null) paper.sizeDelta=new Vector2(190,285);
                 var edge=BattleRect("infusion-selected-gold-border",face.transform);UiExt.Stretch(edge);edge.offsetMin=-Vector2.one*6;edge.offsetMax=Vector2.one*6;

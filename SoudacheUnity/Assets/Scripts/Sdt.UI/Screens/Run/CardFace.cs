@@ -1,6 +1,7 @@
 // Current paper-card presentation: source card-layout-selected.css and card-frame-layout.json.
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Sdt.Core;
 using Sdt.UI.Kit;
 
@@ -60,11 +61,24 @@ namespace Sdt.UI.Screens.Run
                 BuildCost(card,costLayer,faceWidth,pigment,options);
             }
             if(showVal&&card!=null)BuildValue(card,canvas,width);
+            BuildState(canvas,width,options.Presentation);
             // The current paper-card CSS hides hsc-dmg; retain its semantic data without a red legacy badge.
             if(CardVisual.ShowDamage(card)){
                 var mark=UIKit.IconText(root,"[[icon:"+CardVisual.DamageIcon(card)+"]] "+CardVisual.DamageText(card,options.SpellDamageBonus));mark.name="hsc-dmg";mark.gameObject.SetActive(false);
             }
             return root.gameObject;
+        }
+        static void BuildState(RectTransform parent,float width,Sdt.Core.Battle.BattleCardPresentation state)
+        {
+            if(state==null||!state.Temporary&&!state.Transforming&&!state.Transformed)return;
+            string label=(state.Temporary?"临时":"")+(state.Temporary&&(state.Transforming||state.Transformed)?" · ":"")+(state.Transforming?"随动变形":state.Transformed?"已变形":"");
+            var badge=Rect("hsc-state-label",parent);badge.anchorMin=badge.anchorMax=new Vector2(1,1);badge.pivot=new Vector2(1,1);
+            badge.anchoredPosition=new Vector2(-width*.09f,-width*1.5f*.15f);
+            var ink=badge.gameObject.AddComponent<Image>();ink.color=UiPalette.Hex("#18212FEB");
+            var text=UIKit.Label(badge,label,Mathf.Max(8,Mathf.RoundToInt(width*.062f)),UiPalette.Hex("#F2EDFF"));
+            text.name="card-state-text";text.alignment=TextAnchor.MiddleCenter;text.raycastTarget=false;
+            badge.sizeDelta=new Vector2(Mathf.Min(width*.72f,text.preferredWidth+width*.056f),width*.12f);UiExt.Stretch(text.rectTransform);
+            badge.gameObject.AddComponent<CardStateHint>().Bind(state);
         }
         static void BuildArt(CardDef card,CardSize size,RectTransform face)
         {
@@ -164,5 +178,20 @@ namespace Sdt.UI.Screens.Run
             root.gameObject.AddComponent<LayoutElement>().ignoreLayout=true;var image=root.gameObject.AddComponent<Image>();image.color=color;image.raycastTarget=false;
             var label=UIKit.Label(root,n.ToString(),Mathf.RoundToInt(font),Color.white);UiExt.Stretch(label.rectTransform);label.alignment=TextAnchor.MiddleCenter;return root.gameObject;
         }
+    }
+    internal sealed class CardStateHint:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+    {
+        string[] _lines;
+        public void Bind(Sdt.Core.Battle.BattleCardPresentation state)
+        {
+            var lines=new System.Collections.Generic.List<string>();
+            if(state.Temporary)lines.Add("本场临时牌，按来源规则到期消散或消耗");
+            if(state.Transforming)lines.Add("随操作改变卡名与卡面；来源："+state.OriginName);
+            else if(state.Transformed)lines.Add("由「"+state.OriginName+"」变化而来");
+            _lines=lines.ToArray();
+        }
+        public void OnPointerEnter(PointerEventData value)=>Tooltip.Show(value.position,"卡牌状态",_lines);
+        public void OnPointerExit(PointerEventData value)=>Tooltip.Hide();
+        void OnDisable()=>Tooltip.Hide();
     }
 }

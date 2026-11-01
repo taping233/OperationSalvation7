@@ -138,6 +138,7 @@ namespace Sdt.Core.Battle
     {
         public IReadOnlyList<CardDef> options; public int n; public string rarity;
         public long selectionId; public string kind,sourceCommit,sourceUid;
+        public IReadOnlyList<string> candidateUids; // Existing deck-bottom entities, aligned only with displayed options.
         public IReadOnlyList<CardDef> Options => options;   // UI 别名
     }
     public sealed partial class PendingTargetSnapshot
@@ -248,7 +249,7 @@ namespace Sdt.Core.Battle
 
         private sealed class InfusingState { public string uid; public CardDef card; public int need, targetIndex; public HashSet<string> picked = new HashSet<string>(); }
         private long discoverSerial;
-        private sealed class DiscoveringState { public List<CardDef> options; public int n,selectedIndex; public string rarity,kind,sourceCommit="committed",sourceUid; public long selectionId; public Action cancel; }
+        private sealed class DiscoveringState { public List<CardDef> options; public List<string> candidateUids; public int n,selectedIndex; public string rarity,kind,sourceCommit="committed",sourceUid; public long selectionId; public Action cancel; }
         private DiscoveringState BeginDiscovery(List<CardDef> options,int n=1,string kind="hand",string rarity=null,Action cancel=null)
         {return discovering=new DiscoveringState{options=options,n=n,kind=kind,rarity=rarity,cancel=cancel,selectionId=++discoverSerial};}
         private sealed class DelayedItem { public string text; public string cardName; public bool repeat; }
@@ -1334,7 +1335,7 @@ namespace Sdt.Core.Battle
             DiscoveringSnapshot disc = null;
             if (discovering != null)
             {
-                disc = new DiscoveringSnapshot { options = new List<CardDef>(discovering.options), n = discovering.n, rarity = discovering.rarity, selectionId=discovering.selectionId,kind=discovering.kind,sourceCommit=discovering.sourceCommit,sourceUid=discovering.sourceUid };
+                disc = new DiscoveringSnapshot { options = new List<CardDef>(discovering.options),candidateUids=discovering.candidateUids==null?null:new List<string>(discovering.candidateUids), n = discovering.n, rarity = discovering.rarity, selectionId=discovering.selectionId,kind=discovering.kind,sourceCommit=discovering.sourceCommit,sourceUid=discovering.sourceUid };
             }
             DeckSelectionSnapshot deckSel = null;
             if (selectingDeck)

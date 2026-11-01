@@ -25,13 +25,13 @@ namespace Sdt.UI.Screens.Bag
         float _cardWidth;
         string _artFingerprint;
         int _dropFrame=-1;
-        public static BagCell Create(Transform parent,BagScreen owner,BagScreen.Stack stack,bool safe)
+        public static BagCell Create(Transform parent,BagScreen owner,BagScreen.Stack stack,bool safe,BagRestorationPreview restoration=null)
         {
             var rt=BagView.Rect("bag-tile",parent);BagView.Paint(rt,"#ffffff00");rt.gameObject.AddComponent<Selectable>();var cell=rt.gameObject.AddComponent<BagCell>();cell._owner=owner;cell._alpha=rt.gameObject.AddComponent<CanvasGroup>();
             cell._count=BagView.Text(rt,"bag-tct","",18,"#edf2f3");cell._count.alignment=TextAnchor.MiddleCenter;
-            cell._status=BagView.Text(rt,"bag-tstate","",18,"#c9b477");cell._status.alignment=TextAnchor.MiddleCenter;cell.Bind(stack);return cell;
+            cell._status=BagView.Text(rt,"bag-tstate","",18,"#c9b477");cell._status.alignment=TextAnchor.MiddleCenter;cell.Bind(stack,restoration);return cell;
         }
-        public void Bind(BagScreen.Stack stack)
+        public void Bind(BagScreen.Stack stack,BagRestorationPreview restoration=null)
         {
             string fingerprint=BagView.CardFingerprint(stack.card);
             bool artChanged=Entry==null||_artFingerprint!=fingerprint;_artFingerprint=fingerprint;Entry=stack;
@@ -44,7 +44,7 @@ namespace Sdt.UI.Screens.Bag
                 _art.transform.SetAsFirstSibling();
             }
             _count.text=stack.count>1?"×"+stack.count:"";_count.gameObject.SetActive(stack.count>1);
-            _status.text=stack.zone=="safe"?"押运":stack.zone=="pocket"?(stack.card.type=="道具"||stack.card.type=="装备"?"火堆不可复原":"火堆可复原"):stack.card?.type=="道具"?BagCardDetail.UseStatus(stack.card,stack.uids.FirstOrDefault()).badge:"";
+            _status.text=stack.zone=="safe"?"押运":stack.zone=="pocket"?(stack.card.type=="道具"||stack.card.type=="装备"?"火堆不可复原":"火堆可复原"):stack.card?.type=="道具"?BagCardDetail.UseStatus(stack.card,stack.uids.FirstOrDefault(),restoration).badge:"";
             _status.gameObject.SetActive(!string.IsNullOrEmpty(_status.text));
             if(_art!=null){var group=UIKit.GetOrAdd<CanvasGroup>(_art);group.alpha=stack.zone=="pocket"?.65f:1;}
         }

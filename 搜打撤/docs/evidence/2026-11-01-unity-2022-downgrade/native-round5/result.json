@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "error": null,
+  "photoSaveAssertions": 29,
+  "motionAssertions": 16,
+  "searchAssertions": 180,
+  "exportAssertions": 37,
+  "scope": "Isolated native components, real player loop and constructed Submit events; clipboard is not exercised; no OS input/FPS claim."
+}

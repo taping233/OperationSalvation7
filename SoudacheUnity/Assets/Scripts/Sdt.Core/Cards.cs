@@ -37,6 +37,7 @@ namespace Sdt.Core
         public int? zeroCostUntilTurn;
         public int? runtimeCost;
         public bool noInfuse;
+        [NonSerialized] public int? _baseCost; // Battle-only printed cost; MemberwiseClone preserves it, saves/export omit it.
 
         public CardDef Clone()
         {

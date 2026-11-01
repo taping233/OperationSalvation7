@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "error": "System.InvalidOperationException: InvalidOperationException: Sequence contains no matching element\nSystem.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <ea489521390f48908a7ce45cb17a6848>:0)\nCurrentBattleRound7Checks+<Piles>d__20.MoveNext () (at Assets/Editor/CurrentBattleRound7Checks.cs:139)\nUnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <8cdc7e7e8a17404287a8b220eb9eec72>:0)\n",
+  "discoveryAssertions": 31,
+  "battleAssertions": 35,
+  "bagAssertions": 0,
+  "hubAssertions": 0,
+  "scope": "Isolated production components, formal commands and constructed native UI events. No OS hardware input, natural unassisted play, multi-size or whole-frame performance claim."
+}

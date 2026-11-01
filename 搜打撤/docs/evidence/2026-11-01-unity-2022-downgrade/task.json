@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "unity-2022-downgrade",
+  "date": "2026-11-01",
+  "owner": "Friday",
+  "goal": "将Unity工程及实际使用编辑器切换到2022.3.62f3c1，保留当前成果并完成兼容验收",
+  "paths": [
+    "docs/evidence/2026-11-01-unity-2022-downgrade"
+  ],
+  "doneWhen": [
+    "目标编辑器安装并核实实际版本",
+    "依赖/接口/工程与启动工具适配，原HEAD/index和非任务源保全",
+    "统一编译、桌面打包与正常窗口流程验收，失败与未核项如实留证"
+  ],
+  "stage": "doing",
+  "checks": [],
+  "unverified": [],
+  "updatedAt": "2026-11-01T10:40:45.649747+00:00"
+}

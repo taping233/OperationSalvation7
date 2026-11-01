@@ -1,0 +1,122 @@
+{
+  "passed": true,
+  "reviewType": "Actual view_image inspection of eight original PNGs only",
+  "reviewedAtUtc": "2026-11-01T11:43:18.355020+00:00",
+  "unityVersion": "2022.3.62f3c1",
+  "buildGUID": "4d33ec981819461295052942d67afeee",
+  "display": {
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "dpi": 120.0,
+    "fullScreenMode": "Windowed",
+    "desktop": {
+      "width": 2560,
+      "height": 1440
+    },
+    "display": {
+      "renderingWidth": 2560,
+      "renderingHeight": 1440,
+      "systemWidth": 2560,
+      "systemHeight": 1440
+    },
+    "quality": "Ultra",
+    "targetFrameRate": 60,
+    "bufferWidthScale": 1.0,
+    "bufferHeightScale": 1.0,
+    "canvas": {
+      "mode": "ScreenSpaceOverlay",
+      "scaleFactor": 1.33333337,
+      "width": 1920.0,
+      "height": 1080.0,
+      "lossyScale": {
+        "x": 1.33333337,
+        "y": 1.33333337,
+        "z": 1.33333337
+      },
+      "scaler": "ScaleWithScreenSize",
+      "referenceWidth": 1920.0,
+      "referenceHeight": 1080.0,
+      "matchWidthOrHeight": 0.5
+    },
+    "windowsDpi": {
+      "available": true,
+      "processAwareness": 2,
+      "result": 0
+    },
+    "graphics": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "graphicsApi": "Direct3D11",
+    "unityVersion": "2022.3.62f3c1",
+    "buildGUID": "4d33ec981819461295052942d67afeee"
+  },
+  "playerResultPassedAtReview": true,
+  "reviewedImageCount": 8,
+  "images": [
+    {
+      "path": "player-1/player-r7-discovery-candidates.png",
+      "sha256": "78baf5c1945e6894045e6014bcd81cfe6461416051cf6dcc37b07ae543280a54",
+      "width": 2560,
+      "height": 1440,
+      "observation": "Header, instruction, three card names/costs and footer fit the window; no global HUD covers the discovery title. Unselected confirm is visibly disabled."
+    },
+    {
+      "path": "player-1/player-r7-discovery-selected.png",
+      "sha256": "8cd1af8d97adb88feeb9cc35083622cd57bea3a7dbe1138e487980d50830b693",
+      "width": 2560,
+      "height": 1440,
+      "observation": "Blooddrinker is visibly selected with an opaque gold rectangular backing. It is a filled backing rather than a thin outline, but does not hide the card name, rules or footer."
+    },
+    {
+      "path": "player-1/player-r7-discovery-return.png",
+      "sha256": "b4b2916687dfd3ecb9c5f24dd903a7840dccce8e72f07d2a23b94769c791c078",
+      "width": 2560,
+      "height": 1440,
+      "observation": "Discovery overlay and selection backing are gone; battle HUD and the acquired Blooddrinker hand card are visible. The controlled foe is a white fixture rectangle; natural foe art is outside this review."
+    },
+    {
+      "path": "player-1/player-r7-discovery-expanded.png",
+      "sha256": "84a238345f1f7561d202b633e29ce48eed202d2835425edd0db7d29a44632ddc",
+      "width": 2560,
+      "height": 1440,
+      "observation": "Six choices appear in a three-column/two-row layout. The initial viewport clips the lower part of the second row; the fixed footer remains clear. This image alone does not prove lower-row reading."
+    },
+    {
+      "path": "player-1/player-r7-discovery-sixth-selected.png",
+      "sha256": "589b653f491a1bdcf9fd49b2debbc59147ae3c71b1af14d67b563536934677f6",
+      "width": 2560,
+      "height": 1440,
+      "observation": "After scrolling, the full lower row and sixth Mana Surge card are visible, with its 2-cost tag, complete rules and selected gold backing. Upper-row clipping is confined to the scroll viewport; header and footer remain clear."
+    },
+    {
+      "path": "player-1/player-r7-hand-state.png",
+      "sha256": "507e810861edb20f13b42e810558c477365e4c46a340b4e16636ae791b64c7ff",
+      "width": 2560,
+      "height": 1440,
+      "observation": "Hand visibly distinguishes a normal 1-cost Fireball, the transforming Broken Arrow label, and a temporary 0-cost Fireball. Cards overlap in the hand fan and extend below the viewport; this is not a full-card reading image."
+    },
+    {
+      "path": "player-1/player-r7-consumed-provenance.png",
+      "sha256": "99027aa5a4ce1694e555a0a3e072a9572f1025f1e16562362ec80181eeb417f8",
+      "width": 2560,
+      "height": 1440,
+      "observation": "Five separate consumed cards are visible. Normal and temporary same-name Fireballs remain distinct, with readable 0/1 costs and temporary badges. Title, total and return control are clear."
+    },
+    {
+      "path": "player-1/player-r7-pile-reader.png",
+      "sha256": "1080714e7024b7d53bb6eaa68d8b2f69eeda20cb8a873b88d7c338bd8cf24daa",
+      "width": 2560,
+      "height": 1440,
+      "observation": "The enlarged Fireball shows its green 0-cost tag, temporary badge, name and complete short rule text. 2/5 navigation, close and battle-return controls fit without covering the enlarged card."
+    }
+  ],
+  "blockers": [],
+  "nonBlockingNotes": [
+    "Selected discovery cards have an opaque gold rectangular backing, not a thin outline.",
+    "The expanded initial viewport clips the second row; the separately inspected scrolled image shows the full lower row.",
+    "White foe rectangles and the source-status probe card are controlled QA fixture content."
+  ],
+  "scope": [
+    "Only these eight PNGs from player-1 at their actual 2560x1440 window were inspected.",
+    "No other size, DPI, animation, input routing, payment/RNG, cancellation, old callback, audio, performance or natural-foe coverage is claimed from images.",
+    "Native behavior receipts and the final player process status remain separate evidence."
+  ]
+}

@@ -15,6 +15,7 @@ namespace Sdt.Core.Battle
                 if(original==null||!(transform!=null?transform.Text("afterType")==playedMartial.type:legacy))continue;
                 string priorName=cardOverrides.TryGetValue(uid,out var previous)?previous.name:original.name;
                 var copy=playedMartial.Clone();copy.cost=transform?.Number("cost",1)??1;copy.runtimeCost=null;
+                CaptureTransformedCost(original,copy);
                 cardOverrides[uid]=copy;
                 G.Log("[[icon:recycle]] <b>"+Esc(priorName)+"</b>：变为【"+Esc(playedMartial.name)+"】的 1 费复制","sys");
             }

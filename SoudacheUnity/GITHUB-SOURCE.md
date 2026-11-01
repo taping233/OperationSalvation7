@@ -2,7 +2,7 @@
 
 Unity 工程使用同仓的 `搜打撤/game` 作为现行资源来源。克隆仓库后保留 `SoudacheUnity/` 与 `搜打撤/` 的同级布局；只下载 Unity 子目录不包含完整原料。
 
-当前桌面包使用Unity6000.6.7f1，buildGUID为`c3ee3347a03149de80bbb7fe3f0bb5c2`。第六轮通过1483项领域、8个实际Source场景、369项新增与943项相关回归原生（合计1312）及FilmFlow、正式终局和四层旅程；当前2560×1440正常Standalone流程83图，实看21图。完整输入、失败历史、UI补验与依赖复用边界见[第六轮验收](../搜打撤/docs/evidence/2026-11-01-unity-parity-round6/README.md)。源码提交行尾统一为LF，工作区原字节与Git对象指纹分别记录；EXE为Unity启动壳，其哈希不能单独识别代码版本。
+工程和当前桌面包使用Unity2022.3.62f3c1，buildGUID为`4d33ec981819461295052942d67afeee`。2690领域、8个实际Source场景、1629原生及转场/正式终局/四层旅程通过；当前2560×1440正常Standalone完成102图，实看23图。完整输入、失败与元数据迁移见[2022降级验收](../搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/README.md)。第六轮Unity6包的历史GUID为`c3ee3347a03149de80bbb7fe3f0bb5c2`，原收据留在[第六轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round6/README.md)。源码提交行尾统一为LF，工作区原字节与Git对象指纹分别记录；EXE为Unity启动壳，其哈希不能单独识别代码版本。
 
 ## 恢复资源
 
@@ -27,7 +27,7 @@ python _planning/migration-1030-fidelity/shop/import_assets.py
 
 正常入口为`Assets/Scenes/Bootstrap.unity`。编辑器中打开场景后进入Play；Windows独立包由`Sdt.Editor.BuildGame.BuildWin64`生成至`Build/Desktop/代号柒.exe`。运行时依赖通过正式Packages恢复，临时第三方DLL和历史编译输出不作为依赖入口。
 
-七个领域项目为`_planning/parity-1031/battle-check/BattleChecks.csproj`、`_planning/parity-1031/run-check/RunParityChecks.csproj`、`_planning/parity-1031/HubParityChecks.csproj`、`_planning/parity-1101-round2/run-check/RunRound2Checks.csproj`、`_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj`、`_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj`及`_planning/parity-1101-round6/run-check/RunRound6Checks.csproj`。先由Unity恢复锁定的Newtonsoft包；除Archive外直接`dotnet run --project <项目>`，Archive项目依次传`-- export <全新输出目录>`、`-- import <同目录>`、`-- id-conflict <同目录>`和`-- name-conflict <同目录>`，四次为独立进程。
+八个领域项目为`_planning/parity-1031/battle-check/BattleChecks.csproj`、`_planning/parity-1031/HubParityChecks.csproj`、`_planning/parity-1031/run-check/RunParityChecks.csproj`、`_planning/parity-1101-round2/run-check/RunRound2Checks.csproj`、`_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj`、`_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj`、`_planning/parity-1101-round6/run-check/RunRound6Checks.csproj`、`_planning/parity-1101-round7/bag-check/BagRound7Checks.csproj`。先由Unity恢复锁定的Newtonsoft包；除Archive外直接`dotnet run --project <项目>`，Archive项目依次传`-- export <全新输出目录>`、`-- import <同目录>`、`-- id-conflict <同目录>`和`-- name-conflict <同目录>`，四次为独立进程。
 
 战斗领域检查先生成真实Vite来源向量并设置路径，再执行该项目；来源文件需要上述同仓布局：
 
@@ -38,7 +38,7 @@ $env:SDT_DISCOVER_SOURCE_VECTORS = $discoverVectors
 dotnet run --project _planning/parity-1031/battle-check/BattleChecks.csproj
 ```
 
-新增原生入口为`Sdt.Editor.CurrentRound6Validation.Run`，既有回归为`CurrentRound5Validation.Run`、`CurrentRound4Validation.Run`、`CurrentRound3Validation.Run`、`CurrentRound2Validation.Run`、`CurrentParityValidation.Run`与`CurrentFilmFlowValidation.Run`（均在`Sdt.Editor`）。正式终局及四层旅程分别为`Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts/RunJourney`。经`_planning/migration-1029/run_native_check.ps1 -Method <入口> -Output <全新绝对目录>`执行，驱动使用隔离profile；原生离屏诊断与正常当前窗口播放器分开记录。项目已有正式SFX混音器，无需重跑一次性生成器。
+本批原生入口为`Sdt.Editor.CurrentRound7Validation.Run`；相关回归为`CurrentRound6Validation.Run`、`CurrentRound5Validation.Run`、`CurrentRound4Validation.Run`、`CurrentRound3Validation.Run`、`CurrentRound2Validation.Run`、`CurrentParityValidation.Run`与`CurrentFilmFlowValidation.Run`（均在`Sdt.Editor`）。正式终局及四层旅程为`Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts/RunJourney`。经`_planning/migration-1029/run_native_check.ps1 -Method <入口> -Output <全新绝对目录>`执行；默认按工程版本使用系统安装目录，可显式传`-UnityEditor <Unity.exe>`。各驱动使用隔离profile，离屏诊断与正常当前窗口播放器分开记录。项目已有正式SFX混音器，无需重跑一次性生成器。
 
 照相馆开发工具导出完整本机卡库，以及底稿/已存手写/会话暂存合并备注。格式和原生说明字段的有意差异见[导出契约](_planning/parity-1101-round5/export-contract.md)；源空制作、导入、删除和Agent入口不迁入。
 

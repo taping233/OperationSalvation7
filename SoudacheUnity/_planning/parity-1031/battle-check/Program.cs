@@ -112,6 +112,7 @@ static partial class Program
         EnemyTurnSelections();
         DiscoveryCancellation();
         DiscoveryPreviewChecks();
+        CardPresentationChecks();
         Console.WriteLine("PASS "+checks+" current production battle assertions; source semantics: hand-material-selection, hand-selection, card-cost and card-inspection.");
     }
     static void ShortcutProjection()

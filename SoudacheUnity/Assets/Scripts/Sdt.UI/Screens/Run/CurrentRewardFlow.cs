@@ -10,8 +10,8 @@ namespace Sdt.UI.Screens.Run
         readonly List<Row> _rows=new List<Row>();int _rowCount;
         public Vector2 Spacing=new Vector2(44,28);
         public float MinimumHeight;float _height;
-        public override void CalculateLayoutInputHorizontal(){base.CalculateLayoutInputHorizontal();MakeRows();SetLayoutInputForAxis(0,-1,rectTransform.rect.width,0,0);}
-        public override void CalculateLayoutInputVertical(){MakeRows();float height=Mathf.Max(_height,MinimumHeight);SetLayoutInputForAxis(height,-1,height,0,1);}
+        public override void CalculateLayoutInputHorizontal(){base.CalculateLayoutInputHorizontal();MakeRows();SetLayoutInputForAxis(0,rectTransform.rect.width,0,0);}
+        public override void CalculateLayoutInputVertical(){MakeRows();float height=Mathf.Max(_height,MinimumHeight);SetLayoutInputForAxis(height,height,0,1);}
         void MakeRows()
         {
             _rowCount=0;float available=Mathf.Max(1,rectTransform.rect.width-padding.horizontal);Row row=null;bool bonus=false;

@@ -1,0 +1,150 @@
+{
+  "status": "frozen-awaiting-root-central-validation",
+  "atUtc": "2026-11-01T09:04:55.0799924Z",
+  "owner": "Friday/battle_parity",
+  "root": "D:\\素材\\代号柒\\SoudacheUnity",
+  "sourceBaseline": "R6 d8a8a2eb / c3ee3347a03149de80bbb7fe3f0bb5c2",
+  "scope": "formation retained geometry; current HUD pile projection/provenance/printed fees/reader/focus; no Vite or public UiStack edits",
+  "fileCount": 23,
+  "totalBytes": 305149,
+  "execution": {
+    "compiled": false,
+    "testsRun": false,
+    "unityStarted": false,
+    "playerStarted": false,
+    "domainExpectedAdditions": 18,
+    "nativeExpectedAssertions": 55,
+    "playerExpectedImages": 5
+  },
+  "entryPoints": {
+    "domain": "_planning/parity-1031/battle-check/BattleChecks.csproj / Program.CardPresentationChecks",
+    "native": "global::CurrentBattleRound7Checks.Run()/Assertions",
+    "player": "NativeDisplayReview.ReviewRound7Battle() / new partial; Root must connect main driver",
+    "purePile": "_planning/migration-1030-fidelity/pile/data-check/PileCheck.csproj; refresh its generated Core dependency before use"
+  },
+  "boundaries": [
+    "Core read-only projection has no catalog scan or new source dictionary.",
+    "NonSerialized _baseCost clones but is omitted from existing save/export.",
+    "GravePanel is retained public-command/opt-in QA path; actual HUD uses BattlePileScreen.",
+    "Static state labels/tooltips/fee semantics restored; source breathing state aura is not claimed equivalent.",
+    "Constructed formal card commands and actual native raycast/Submit controls are distinct from OS input.",
+    "Static operation elimination is not FPS or whole-frame allocation measurement."
+  ],
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Core/Cards.cs",
+      "bytes": 17866,
+      "sha256": "a4d6e290059a91700bfd673c98541f9837754256ac0fa10153b320ca43b3c55b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleCardPresentation.cs",
+      "bytes": 2078,
+      "sha256": "e18ec53c33037ca41e1ab11053b8b4747b6509eeaec74de3a0ec619e2d7e878d"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleCardPresentation.cs.meta",
+      "bytes": 60,
+      "sha256": "99614ce37faac0c472da15b66a511762d874460d526954f2df2a7fa8ecf8e5d7"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleHandTransforms.cs",
+      "bytes": 1318,
+      "sha256": "931c35495d19072da514959cb446865eba84c6778f2b02340b1f01cae704bc27"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+      "bytes": 82546,
+      "sha256": "bc4ec8c2c575f90c3494bdaa1dce68fdca1c9ece39d0bb4d22e9423735cefa2b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/BattleViewApi.cs",
+      "bytes": 11417,
+      "sha256": "42f082854db1f451cc3b42630a8352deb2ca86ab8fc48b7d968d2cb0cec82380"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleEvents.cs",
+      "bytes": 6868,
+      "sha256": "0922dd08fa093626f951f4e78df2e3ae8628ad4a513a525aa8d16e8f8c409920"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattlePresentation.cs",
+      "bytes": 41265,
+      "sha256": "eee7eadb4a853e9b960660593d5d1d7d8436d7e65c8d353dcbda0a099788b4e7"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSecondaryViews.cs",
+      "bytes": 13368,
+      "sha256": "01f7de04ec122bfbce25a75d30ad98e4b1878b3c8117a8ad9a20986f96030f13"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentBattlePileData.cs",
+      "bytes": 3997,
+      "sha256": "f17e60b67cd491733ba7be3195deb4cc50b9eab419bde613af8f6fe135944fa5"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/CurrentDeckFormation.cs",
+      "bytes": 17536,
+      "sha256": "972cb400720f6f8fdbc927b886ce1a7f8f2aa65910be336e5c5c9af339551cee"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/HandPanel.cs",
+      "bytes": 15862,
+      "sha256": "4bc3ebf60619d6481627d51e3bdb5885ff886c15d283ddd9d5ccbd74a00bb637"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CardFace.cs",
+      "bytes": 18824,
+      "sha256": "6b9fa6f1eaaecdfec294539c9cf2d81fd7efc82c255c6dd13bfe5b85cd045665"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CardVisual.cs",
+      "bytes": 4914,
+      "sha256": "f56ac7e242e37a41cf8820a32fe12a0ecd2916b7f8eff495a30322df3f0e89fc"
+    },
+    {
+      "path": "Assets/Editor/CurrentBattleRound7Checks.cs",
+      "bytes": 17079,
+      "sha256": "b7171cd73c70056e46009428a80293d1a7354e3c1541121e63d2f7e0ed6a4a0a"
+    },
+    {
+      "path": "Assets/Editor/CurrentBattleRound7Checks.cs.meta",
+      "bytes": 60,
+      "sha256": "0f947053fd1a06d52c3e5a799357fedb3c833e0fcfcb546c6f9c559bbb00a10b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Battle.cs",
+      "bytes": 10510,
+      "sha256": "328cc74fc86be101368640aa3393807af86571ac10963fa7d03258ea9b704130"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round7Battle.cs.meta",
+      "bytes": 60,
+      "sha256": "2480ec46c5771ede178a265f8f59d41df420771d5929f41d925f13710c77013e"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Round7Checks.cs",
+      "bytes": 4649,
+      "sha256": "6415ffd338e20c3e5b673efb0bd7b28bae27b0640f52bdc142cd58d7c4655a3a"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Program.cs",
+      "bytes": 17226,
+      "sha256": "a5b111fcd4cd05f57bb6679e0d0e2856a1f7b964ecf6e1cbdc25013560fa94c5"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "bytes": 617,
+      "sha256": "f84e8feb8a4e8814ac8fe1cf25ee17c76a100058903b529ea4629a1445e663a6"
+    },
+    {
+      "path": "_planning/migration-1030-fidelity/pile/Program.cs",
+      "bytes": 3419,
+      "sha256": "73c097b9870d1efaf3be2a2a253156d03f34a150d3aa61e90791e616fa304789"
+    },
+    {
+      "path": "_planning/parity-1101-round7/battle-audit.md",
+      "bytes": 13610,
+      "sha256": "9da118149f8356a49a0f1713178569798b2e19067740144a1557a61a094d63db"
+    }
+  ]
+}

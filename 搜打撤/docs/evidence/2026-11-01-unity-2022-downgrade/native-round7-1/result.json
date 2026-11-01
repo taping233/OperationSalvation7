@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "error": "System.NullReferenceException: Object reference not set to an instance of an object\r\n  at CurrentBattleRound7Checks.MistSameFace () [0x00006] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentBattleRound7Checks.cs:224 \r\n  at CurrentBattleRound7Checks+<Run>d__21.MoveNext () [0x00045] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentBattleRound7Checks.cs:214 \r\n  at Sdt.Editor.CurrentRound7Validation+<Flow>d__9.MoveNext () [0x00093] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound7Validation.cs:48 \r\n  at Sdt.Editor.CurrentRound7Validation+<Drive>d__10.MoveNext () [0x00037] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound7Validation.cs:58 ",
+  "discoveryAssertions": 31,
+  "battleAssertions": 0,
+  "bagAssertions": 0,
+  "hubAssertions": 0,
+  "scope": "Isolated production components, formal commands and constructed native UI events. No OS hardware input, natural unassisted play, multi-size or whole-frame performance claim."
+}

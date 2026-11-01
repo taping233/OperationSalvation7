@@ -63,6 +63,7 @@ namespace Sdt.UI.Screens.Battle
         IReadOnlyList<StatusChip> CurseChips(IReadOnlyDictionary<string, int> status); // curseChips/statusChips
         int EffCostOf(CardDef card);                             // effCostOf
         OwnedCard FindCard(string uid);                          // findCard
+        BattleCardPresentation CardPresentation(string uid);     // effective face + source-owned state
         int InfuseOf(CardDef card);                              // infuseOf
         void MarkDreadShown();                                   // markDreadShown
         string PileTip(IReadOnlyList<string> uids);              // pileTip
