@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "reviewer": "Friday/root, actual view_image of all 9 listed originals",
+  "atUtc": "2026-11-01T07:36:02.942759+00:00",
+  "buildGUID": "c3ee3347a03149de80bbb7fe3f0bb5c2",
+  "window": {
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120
+  },
+  "images": [
+    {
+      "path": "player-6/player-discover-bottom.png",
+      "sha256": "b6026356f5760a6b40441b7049ad371aba36b80bac48b7464a5c52cf5243d3a7",
+      "observation": "共同表面/标题完整，底牌原实体说明和三张卡面、费用及两个操作均在窗口内。"
+    },
+    {
+      "path": "player-6/player-discover-selected.png",
+      "sha256": "e60eb01a06446742da41e09f3750bd63783fd9da2106505a0e6335432ae0bf43",
+      "observation": "选择后标题与卡列位置稳定，确认按钮启用，无旧内容重叠。"
+    },
+    {
+      "path": "player-6/player-discover-confirm-return.png",
+      "sha256": "1907d55709fe2ba7ca1f863513dc7b2abb64dd186d918ba26cd2d628aa8c8738",
+      "observation": "确认后回战斗，手牌火球可见、能量99、牌库3；发现覆盖页不残留。"
+    },
+    {
+      "path": "player-6/player-discover-cancel-return.png",
+      "sha256": "c2e7adb89055ab7652c78885955fff8b2584090d161e751cc4285a759fa8469b",
+      "observation": "取消后回战斗，能量仍99、牌库4，发现覆盖页不残留。"
+    },
+    {
+      "path": "player-6/player-discover-preview.png",
+      "sha256": "e9a23e2701bf04fe9efc4e5b687a7ffb45279a5dd18bd08e3d666590f2ba184c",
+      "observation": "支付前候选三张及准确获得提示、取消不消耗说明完整，费用和正文可读。"
+    },
+    {
+      "path": "player-6/player-discover-preview-cancel.png",
+      "sha256": "00d5bae512909b63c2b2eb007e0ebf5a19b62320552609cfd82f01bb1d05d3d2",
+      "observation": "取消后来源神秘召唤仍在手牌、能量100，覆盖页消失。"
+    },
+    {
+      "path": "player-6/player-discover-preview-confirm.png",
+      "sha256": "70167663a25cf775457854f83cc0a9f066e129d36a95d359522ba2d442a9faac",
+      "observation": "确认后大法师之杖可见、能量98、来源牌不再显示，战斗顶部栏恢复。"
+    },
+    {
+      "path": "player-6/player-grave.png",
+      "sha256": "c8caa0106f3c7794fff12a2cdcb44caa6f19a51ccd10caa9e5b2a24958c59b36",
+      "observation": "墓地标题、分组数量/火球×2和返回按钮在窗口内；全局状态栏已隐藏，不再叠标题。"
+    },
+    {
+      "path": "player-6/player-grave-return.png",
+      "sha256": "71d348cc1f7518c5343f68c93bdb58f71056340a0d8282afe0f5bda4f7702453",
+      "observation": "返回后全局生命、区域、资源栏恢复，墓地覆盖页已移除。"
+    }
+  ],
+  "scope": "Only these 9 current-window images; no OS input or multi-size. White controlled enemies have no portrait fixture and are excluded from formal enemy-asset fidelity claims. Battle hand uses its existing lower-edge resting layout."
+}

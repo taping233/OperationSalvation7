@@ -1,0 +1,45 @@
+{
+  "status": "frozen-awaiting-central-validation",
+  "scope": "BGM request failure, retained valid track and explicit settings retry; previous Hub source untouched",
+  "compiled": false,
+  "testsRun": false,
+  "unityLaunched": false,
+  "checkEntry": "Sdt.Editor.CurrentAudioRetryRound6Checks.Run()/Assertions",
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/AudioService.cs",
+      "bytes": 15519,
+      "mtimeNs": 1793508051833589500,
+      "sha256": "b49b0c8f7d5e0b5e12fc291592664b7bc2a03e5c8dd859d595902abfd23a5022",
+      "lfSha256": "f7fc11aa60a938fa225c817e3f13b550616d18bb328fe784bfde69242622533b"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Menu/CurrentSettingsPage.cs",
+      "bytes": 24980,
+      "mtimeNs": 1793508460841127900,
+      "sha256": "c5c86cab8fcb7100137a089aea0973f72446db75866935da63100c22a554228f",
+      "lfSha256": "6b0f6bbbb846a549331f5fbe72b140da2a574a08d222ba55450079f0d1f4fe39"
+    },
+    {
+      "path": "Assets/Editor/CurrentAudioRetryRound6Checks.cs",
+      "bytes": 10140,
+      "mtimeNs": 1793508301692769000,
+      "sha256": "002de306cd197247a07177f8babf09c456004b5df129fd989683b666dac6edb3",
+      "lfSha256": "002de306cd197247a07177f8babf09c456004b5df129fd989683b666dac6edb3"
+    },
+    {
+      "path": "Assets/Editor/CurrentAudioRetryRound6Checks.cs.meta",
+      "bytes": 60,
+      "mtimeNs": 1793508137524336100,
+      "sha256": "a7b52cae6dc783ccffe24321bc6ee74e3561013996bbb9ceb9db367790ac4e23",
+      "lfSha256": "a7b52cae6dc783ccffe24321bc6ee74e3561013996bbb9ceb9db367790ac4e23"
+    },
+    {
+      "path": "_planning/parity-1101-round6/audio-audit.md",
+      "bytes": 3332,
+      "mtimeNs": 1793508461055019100,
+      "sha256": "018006d09689ccf85ea0179923c15961a667842894b57d3dfa37317b2507d182",
+      "lfSha256": "018006d09689ccf85ea0179923c15961a667842894b57d3dfa37317b2507d182"
+    }
+  ]
+}

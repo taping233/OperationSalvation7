@@ -1,0 +1,2083 @@
+{
+  "passed": true,
+  "total": 1483,
+  "format": "sdt-unity-round6-domain-validation",
+  "basis": "Read-only reconciliation of existing completed processes, logs, pre-execution/final fingerprints and explicit SDK compile closures; no test, build or Unity process was started by this reconciliation.",
+  "countsByProject": {
+    "battle": 492,
+    "run": 326,
+    "runRound2": 32,
+    "hub": 472,
+    "photoExport": 29,
+    "runRound6": 93,
+    "archiveFourModes": 39
+  },
+  "passingProjectCount": 7,
+  "passingExecutionCount": 10,
+  "passedExecutions": [
+    {
+      "name": "battle",
+      "project": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "passed": true,
+      "assertions": 492,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain-battle-4/process.json",
+          "sha256": "43d7ca44f76f658931ae954af8376b61b5c2c8a1b57fc4d274d161cc0d66059c",
+          "bytes": 479
+        },
+        "entry": "whole document",
+        "record": {
+          "exitCode": 0,
+          "startedAt": "2026-11-01T06:06:31.4824845Z",
+          "endedAt": "2026-11-01T06:06:34.4856003Z",
+          "project": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1031/battle-check/BattleChecks.csproj",
+            "--no-restore",
+            "-c",
+            "Release"
+          ],
+          "sourceOracle": "D:/素材/代号柒/搜打撤/docs/evidence/2026-11-01-unity-parity-round6/discover-source-vectors.json"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-battle-4/battle.log",
+          "sha256": "a954d38ff25da8daa1b5ec3f92d1d5912fd27fd76e8810862875d1e34137883c",
+          "bytes": 138
+        }
+      ],
+      "observedPassLine": "PASS 492 current production battle assertions; source semantics: hand-material-selection, hand-selection, card-cost and card-inspection."
+    },
+    {
+      "name": "run",
+      "project": "_planning/parity-1031/run-check/RunParityChecks.csproj",
+      "passed": true,
+      "assertions": 326,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain/processes.json",
+          "sha256": "e82b7e7291e6eb60287a0fc604755574f09f3a9709783ed4c0e46c63d6da1009",
+          "bytes": 2777
+        },
+        "entry": "run",
+        "record": {
+          "name": "run",
+          "pid": 29008,
+          "exitCode": 0,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1031/run-check/RunParityChecks.csproj",
+            "--no-restore",
+            "-c",
+            "Release"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\run.log",
+          "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\run-stderr.log",
+          "startedAt": "2026-11-01T05:58:30.9498057Z",
+          "endedAt": "2026-11-01T05:58:35.7256643Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain/run.log",
+          "sha256": "6f0392a627c1e5c3f5a79bcead4dbeff57e5f1d08ed072dd6ab2c3ebc767da98",
+          "bytes": 186
+        },
+        {
+          "path": "domain/run-stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "observedPassLine": "{\"passed\":true,\"assertions\":326,\"travelCases\":99,\"capacityCases\":200,\"directory\":\"D:\\\\素材\\\\代号柒\\\\SoudacheUnity\\\\_planning\\\\parity-1031\\\\run-check\\\\profile-20261101-055835-057\"}"
+    },
+    {
+      "name": "run-round2",
+      "project": "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj",
+      "passed": true,
+      "assertions": 32,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain/processes.json",
+          "sha256": "e82b7e7291e6eb60287a0fc604755574f09f3a9709783ed4c0e46c63d6da1009",
+          "bytes": 2777
+        },
+        "entry": "run-round2",
+        "record": {
+          "name": "run-round2",
+          "pid": 18020,
+          "exitCode": 0,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj",
+            "--no-restore",
+            "-c",
+            "Release"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\run-round2.log",
+          "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\run-round2-stderr.log",
+          "startedAt": "2026-11-01T05:58:30.9591881Z",
+          "endedAt": "2026-11-01T05:58:35.9248405Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain/run-round2.log",
+          "sha256": "7f33b29b7734a03ad8ca619f25f9b82d87ccd2dde32752a68acdc42c75fc8ae3",
+          "bytes": 152
+        },
+        {
+          "path": "domain/run-round2-stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "observedPassLine": "{\"passed\":true,\"assertions\":32,\"output\":\"D:\\\\素材\\\\代号柒\\\\SoudacheUnity\\\\_planning\\\\parity-1101-round2\\\\run-check\\\\profile-20261101-055835-075\"}"
+    },
+    {
+      "name": "hub",
+      "project": "_planning/parity-1031/HubParityChecks.csproj",
+      "passed": true,
+      "assertions": 472,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain-2/processes.json",
+          "sha256": "76ca19f615921b08dfef766b26db26ac0d64d26cb26b38c0d080afeb22f9daf8",
+          "bytes": 1186
+        },
+        "entry": "hub",
+        "record": {
+          "name": "hub",
+          "pid": 5192,
+          "exitCode": 0,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1031/HubParityChecks.csproj",
+            "--no-restore",
+            "-c",
+            "Release"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-2\\hub.log",
+          "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-2\\hub-stderr.log",
+          "startedAt": "2026-11-01T06:00:29.3446569Z",
+          "endedAt": "2026-11-01T06:00:37.4671655Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-2/hub.log",
+          "sha256": "e458529bc95840bc6b5075096ed5200423c0753f2ae2f857fdd7532cf6bf29da",
+          "bytes": 207
+        },
+        {
+          "path": "domain-2/hub-stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "observedPassLine": "{\"passed\":true,\"assertions\":472,\"sourceConversions\":72,\"sourceStarters\":8,\"realFileFailure\":true,\"scope\":\"Core/Run production sources with Unity resource/audio stubs; no native UI or physical-input claim\"}"
+    },
+    {
+      "name": "photo-export",
+      "project": "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj",
+      "passed": true,
+      "assertions": 29,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain-remaining/processes.json",
+          "sha256": "55afb540872af5c8f3b85f69f9a7880727469835842c3b813aaadd760e6e369c",
+          "bytes": 3862
+        },
+        "entry": "photo-export",
+        "record": {
+          "name": "photo-export",
+          "pid": 3692,
+          "exitCode": 0,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj",
+            "--no-restore",
+            "-c",
+            "Release"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\photo-export.log",
+          "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\photo-export-stderr.log",
+          "startedAt": "2026-11-01T06:01:53.8800851Z",
+          "endedAt": "2026-11-01T06:01:57.2425575Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-remaining/photo-export.log",
+          "sha256": "17a279e01b9aebbae529fa4c6c1c8cd88aa91235ab620f76d6d9de9c513cd26e",
+          "bytes": 190
+        },
+        {
+          "path": "domain-remaining/photo-export-stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "observedPassLine": "{\"passed\":true,\"assertions\":29,\"scope\":\"Production Core/Run payloads with existing Hub Unity resource/audio stubs; isolated real profile, no UI, file-export, clipboard or OS-input claim.\"}"
+    },
+    {
+      "name": "run-round6",
+      "project": "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+      "passed": true,
+      "assertions": 93,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain-remaining/processes.json",
+          "sha256": "55afb540872af5c8f3b85f69f9a7880727469835842c3b813aaadd760e6e369c",
+          "bytes": 3862
+        },
+        "entry": "run-round6",
+        "record": {
+          "name": "run-round6",
+          "pid": 6424,
+          "exitCode": 0,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+            "--no-restore",
+            "-c",
+            "Release"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\run-round6.log",
+          "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\run-round6-stderr.log",
+          "startedAt": "2026-11-01T06:01:53.9195728Z",
+          "endedAt": "2026-11-01T06:01:59.6029246Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-remaining/run-round6.log",
+          "sha256": "5b07fd7678647c921543dcb6769f832c15036d81e6828e1474bb2c094adf34df",
+          "bytes": 27
+        },
+        {
+          "path": "domain-remaining/run-round6-stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "observedPassLine": "PASS 93 Round6 Run checks"
+    },
+    {
+      "name": "archive-export",
+      "project": "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "passed": true,
+      "assertions": 20,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain-remaining/processes.json",
+          "sha256": "55afb540872af5c8f3b85f69f9a7880727469835842c3b813aaadd760e6e369c",
+          "bytes": 3862
+        },
+        "entry": "archive-export",
+        "record": {
+          "name": "archive-export",
+          "exitCode": 0,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+            "--no-restore",
+            "-c",
+            "Release",
+            "--",
+            "export",
+            "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\archive"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\archive-export.log",
+          "startedAt": "2026-11-01T06:01:59.6123102Z",
+          "endedAt": "2026-11-01T06:02:02.0669570Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-remaining/archive-export.log",
+          "sha256": "b7e0159ad30e88a9f0e8741502569359f15d313d86b0b18d7940b4466e4d80b1",
+          "bytes": 185
+        }
+      ],
+      "observedPassLine": "{\"passed\":true,\"mode\":\"export\",\"assertions\":20,\"profile\":\"D:\\\\素材\\\\代号柒\\\\搜打撤\\\\docs\\\\evidence\\\\2026-11-01-unity-parity-round6\\\\domain-remaining\\\\archive\\\\export-profile\"}"
+    },
+    {
+      "name": "archive-import",
+      "project": "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "passed": true,
+      "assertions": 15,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain-remaining/processes.json",
+          "sha256": "55afb540872af5c8f3b85f69f9a7880727469835842c3b813aaadd760e6e369c",
+          "bytes": 3862
+        },
+        "entry": "archive-import",
+        "record": {
+          "name": "archive-import",
+          "exitCode": 0,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+            "--no-restore",
+            "-c",
+            "Release",
+            "--",
+            "import",
+            "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\archive"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\archive-import.log",
+          "startedAt": "2026-11-01T06:02:02.0689069Z",
+          "endedAt": "2026-11-01T06:02:03.4184758Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-remaining/archive-import.log",
+          "sha256": "6bd43114889be818bd9c6f206790985862d48fb49f0e762c47b53dcb13c12152",
+          "bytes": 185
+        }
+      ],
+      "observedPassLine": "{\"passed\":true,\"mode\":\"import\",\"assertions\":15,\"profile\":\"D:\\\\素材\\\\代号柒\\\\搜打撤\\\\docs\\\\evidence\\\\2026-11-01-unity-parity-round6\\\\domain-remaining\\\\archive\\\\import-profile\"}"
+    },
+    {
+      "name": "archive-id-conflict",
+      "project": "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "passed": true,
+      "assertions": 2,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain-remaining/processes.json",
+          "sha256": "55afb540872af5c8f3b85f69f9a7880727469835842c3b813aaadd760e6e369c",
+          "bytes": 3862
+        },
+        "entry": "archive-id-conflict",
+        "record": {
+          "name": "archive-id-conflict",
+          "exitCode": 0,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+            "--no-restore",
+            "-c",
+            "Release",
+            "--",
+            "id-conflict",
+            "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\archive"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\archive-id-conflict.log",
+          "startedAt": "2026-11-01T06:02:03.4204341Z",
+          "endedAt": "2026-11-01T06:02:04.5631738Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-remaining/archive-id-conflict.log",
+          "sha256": "fe3b2a8899fc7470572a37436095f4c9689f3cf6d2fd51b235d96849cb4a6620",
+          "bytes": 194
+        }
+      ],
+      "observedPassLine": "{\"passed\":true,\"mode\":\"id-conflict\",\"assertions\":2,\"profile\":\"D:\\\\素材\\\\代号柒\\\\搜打撤\\\\docs\\\\evidence\\\\2026-11-01-unity-parity-round6\\\\domain-remaining\\\\archive\\\\id-conflict-profile\"}"
+    },
+    {
+      "name": "archive-name-conflict",
+      "project": "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+      "passed": true,
+      "assertions": 2,
+      "tool": "dotnet",
+      "workingDirectory": "SoudacheUnity",
+      "process": {
+        "artifact": {
+          "path": "domain-remaining/processes.json",
+          "sha256": "55afb540872af5c8f3b85f69f9a7880727469835842c3b813aaadd760e6e369c",
+          "bytes": 3862
+        },
+        "entry": "archive-name-conflict",
+        "record": {
+          "name": "archive-name-conflict",
+          "exitCode": 0,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+            "--no-restore",
+            "-c",
+            "Release",
+            "--",
+            "name-conflict",
+            "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\archive"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-remaining\\archive-name-conflict.log",
+          "startedAt": "2026-11-01T06:02:04.5646374Z",
+          "endedAt": "2026-11-01T06:02:05.7573576Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-remaining/archive-name-conflict.log",
+          "sha256": "add08da16feb952632bb1974ef942b122efc31fa52bf3d57d210006a35265725",
+          "bytes": 198
+        }
+      ],
+      "observedPassLine": "{\"passed\":true,\"mode\":\"name-conflict\",\"assertions\":2,\"profile\":\"D:\\\\素材\\\\代号柒\\\\搜打撤\\\\docs\\\\evidence\\\\2026-11-01-unity-parity-round6\\\\domain-remaining\\\\archive\\\\name-conflict-profile\"}"
+    }
+  ],
+  "failedBattleAttempts": [
+    {
+      "name": "battle",
+      "passed": false,
+      "includedInTotal": false,
+      "process": {
+        "artifact": {
+          "path": "domain/processes.json",
+          "sha256": "e82b7e7291e6eb60287a0fc604755574f09f3a9709783ed4c0e46c63d6da1009",
+          "bytes": 2777
+        },
+        "entry": "battle",
+        "record": {
+          "name": "battle",
+          "pid": 36960,
+          "exitCode": 1,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1031/battle-check/BattleChecks.csproj",
+            "--no-restore",
+            "-c",
+            "Release"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\battle.log",
+          "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\battle-stderr.log",
+          "startedAt": "2026-11-01T05:58:30.9283462Z",
+          "endedAt": "2026-11-01T05:58:32.4127805Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain/battle.log",
+          "sha256": "f937f7a9150c1eee11a3fe6007d7285f6ac44d2f24c8c90fb2158877c6f679a9",
+          "bytes": 11900
+        },
+        {
+          "path": "domain/battle-stderr.log",
+          "sha256": "302c77234ef1c632e138c038b38365d5a86ad37f53c7a3b10d2be36f1c7fcc65",
+          "bytes": 58
+        }
+      ],
+      "mainExecuted": false,
+      "assertionTotalNotPublishedOrCounted": true,
+      "classification": "QA-only extra closing brace/syntax correction in Round6PreviewChecks; first Battle build did not execute its Main.",
+      "productionOrNativeSourceChangesForThisCorrection": []
+    },
+    {
+      "name": "battle",
+      "passed": false,
+      "includedInTotal": false,
+      "process": {
+        "artifact": {
+          "path": "domain-2/processes.json",
+          "sha256": "76ca19f615921b08dfef766b26db26ac0d64d26cb26b38c0d080afeb22f9daf8",
+          "bytes": 1186
+        },
+        "entry": "battle",
+        "record": {
+          "name": "battle",
+          "pid": 35872,
+          "exitCode": -532462766,
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1031/battle-check/BattleChecks.csproj",
+            "--no-restore",
+            "-c",
+            "Release"
+          ],
+          "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-2\\battle.log",
+          "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-2\\battle-stderr.log",
+          "startedAt": "2026-11-01T06:00:29.3054141Z",
+          "endedAt": "2026-11-01T06:00:37.4457659Z"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-2/battle.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "domain-2/battle-stderr.log",
+          "sha256": "1ee47b0a2c7e113c1ae5e47e518573b6080ee378c11a403e99ca5652bfbebd59",
+          "bytes": 1609
+        }
+      ],
+      "mainExecuted": true,
+      "assertionTotalNotPublishedOrCounted": true,
+      "classification": "QA-only oracle RNG adapter now parses native non-JSON Rng.SaveState rather than feeding it to JsonDocument.Parse.",
+      "productionOrNativeSourceChangesForThisCorrection": []
+    },
+    {
+      "name": "battle",
+      "passed": false,
+      "includedInTotal": false,
+      "process": {
+        "artifact": {
+          "path": "domain-battle-3/process.json",
+          "sha256": "ec380581cb4a9c97c40fcdbcd16f9d273af66448117768d46e0154ef03c181f0",
+          "bytes": 488
+        },
+        "entry": "whole document",
+        "record": {
+          "exitCode": -532462766,
+          "startedAt": "2026-11-01T06:03:42.6890900Z",
+          "endedAt": "2026-11-01T06:03:48.1629908Z",
+          "project": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+          "arguments": [
+            "run",
+            "--project",
+            "_planning/parity-1031/battle-check/BattleChecks.csproj",
+            "--no-restore",
+            "-c",
+            "Release"
+          ],
+          "sourceOracle": "D:/素材/代号柒/搜打撤/docs/evidence/2026-11-01-unity-parity-round6/discover-source-vectors.json"
+        }
+      },
+      "logs": [
+        {
+          "path": "domain-battle-3/battle.log",
+          "sha256": "4e18e557186024aa843e2c72fa4e8412f038307c3e914d19837d3fb1781c294d",
+          "bytes": 667
+        }
+      ],
+      "mainExecuted": true,
+      "assertionTotalNotPublishedOrCounted": true,
+      "classification": "QA-only mixed-armor and released-award fixtures now use the formal armor amount field, replacing n.",
+      "productionOrNativeSourceChangesForThisCorrection": []
+    }
+  ],
+  "setupNotCounted": {
+    "offlineRestore": {
+      "artifact": {
+        "path": "domain/processes.json",
+        "sha256": "e82b7e7291e6eb60287a0fc604755574f09f3a9709783ed4c0e46c63d6da1009",
+        "bytes": 2777
+      },
+      "entry": "restore-round6",
+      "record": {
+        "name": "restore-round6",
+        "exitCode": 0,
+        "arguments": [
+          "restore",
+          "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+          "--source",
+          "./Library/PackageCache"
+        ],
+        "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\restore-round6.log",
+        "startedAt": "2026-11-01T05:58:29.8945438Z",
+        "endedAt": "2026-11-01T05:58:30.8113829Z"
+      }
+    },
+    "log": {
+      "path": "domain/restore-round6.log",
+      "sha256": "12c60d521e95f5f3c3d7761b40a43c4ef82da570269f59e66c7b524fc050accb",
+      "bytes": 168
+    },
+    "includedInTotal": false
+  },
+  "fingerprints": {
+    "preExecutionFormal": {
+      "artifact": {
+        "path": "source-freeze-1.json",
+        "sha256": "063f3a73a86ac945d68e64ef36081b6c703c661f06d3e9df515ba83785a9f772",
+        "bytes": 106763
+      },
+      "recordedAt": "2026-11-01T05:58:29.323391+00:00",
+      "sourceCount": 828
+    },
+    "currentFormal": {
+      "artifact": {
+        "path": "source-freeze.json",
+        "sha256": "eb3dfbcda75acefb11ca555881e50be6972cc4c1efce9ff9977b108de210ea2e",
+        "bytes": 106763
+      },
+      "recordedAt": "2026-11-01T07:25:33.532724+00:00",
+      "sourceCount": 828,
+      "currentMatches": 828,
+      "mismatches": [],
+      "recheckScope": "Evidence-only rehash; no project execution by this reviewer."
+    },
+    "currentAuxiliary": {
+      "artifact": {
+        "path": "source-auxiliary.json",
+        "sha256": "5256cff3d8e0a6902a9014abc2a51fc3eae33853174b46575e119f2080e14181",
+        "bytes": 3411
+      },
+      "recordedAt": "2026-11-01T06:06:31.405740+00:00",
+      "fileCount": 24,
+      "currentMatches": 24,
+      "mismatches": []
+    },
+    "formalDeltaSincePreExecution": [
+      {
+        "path": "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+        "beforeSha256": "cc9f9d722a90cde5d9f204aadc5314a9b56aaaacf88ac345a2d2bffc54a30617",
+        "afterSha256": "8b4163c7cf1b3ce9a644192b83e7e685184eea93c2b3853abdef55482f9b7b12",
+        "change": "Editor Discover geometry and controlled Grave checks,156 final discover assertions. Excluded from all SDK compile closures; actual final native run recorded."
+      },
+      {
+        "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+        "beforeSha256": "c2db4be338761d52b3d59866c7a28e5f06fd6e9432728f478c7534a862737539",
+        "afterSha256": "416e3fc6a49d81cfebe48d7a7f5e096a0773afe164a58ad486bf2c6303cab698",
+        "change": "Standalone QA probe alias, bounded real-raycast/layout waits, actual Boss/Grave captures and type-aware discovered-item destination assertion. Excluded from all SDK compile closures."
+      },
+      {
+        "path": "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+        "beforeSha256": "d2c4e7112ae795116fd3c1e84d432a0fcb627a930ee3dae9f1daeadece322975",
+        "afterSha256": "2c1197d351e0302023bb4f2f3b7ebf99c11d0dbff526b0577ad45570fc98162e",
+        "change": "Classify Grave/Discover cover pages by actual component type and remove the redundant Discover string comparison. UI-only HUD visibility fix, covered by the final native Grave visibility assertions; excluded from all SDK compile closures."
+      },
+      {
+        "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs",
+        "beforeSha256": "661e9f547fd29ac2a39928d847f7afc3e3fc3ce17c62333c28fac323ad38b830",
+        "afterSha256": "e2ac09019d00e7bdb9f7b6c6d6675351f78fae28ec321cd843db154c962e5ca8",
+        "change": "Discover UI presentation geometry/padding/spacing fix; no Core/Run rule change. Covered by the actual final native Round6 supplement and current standalone process; human visual scopes are separate."
+      }
+    ],
+    "formalDeltaInAnyDomainCompileClosure": [],
+    "auxiliaryHistory": [
+      {
+        "before": {
+          "path": "source-auxiliary-1.json",
+          "sha256": "8df43be85f2f73af55943bad22dd4a53c0f19da277476838f55a7754c69d17b8",
+          "bytes": 3411
+        },
+        "after": {
+          "path": "source-auxiliary-2.json",
+          "sha256": "1cd405ac1c3bb8cc4b253fa37ea1b3e34def2ca741f1644f4625ab3cb38b27db",
+          "bytes": 3411
+        },
+        "beforeRecordedAt": "2026-11-01T05:58:29.799336+00:00",
+        "afterRecordedAt": "2026-11-01T06:00:29.076079+00:00",
+        "changedFiles": [
+          {
+            "path": "_planning/parity-1031/battle-check/Round6PreviewChecks.cs",
+            "beforeSha256": "608a5c8dff4cc6627b02a06883e471b8581c85bef1ca3af5b5b5477ba30a9d65",
+            "afterSha256": "396a51a5ab7534dc0123a6e78dfcc62a15f20bdcad60e8a5a6026f55b3070c9a"
+          }
+        ],
+        "classification": "QA-only extra closing brace/syntax correction in Round6PreviewChecks; first Battle build did not execute its Main."
+      },
+      {
+        "before": {
+          "path": "source-auxiliary-2.json",
+          "sha256": "1cd405ac1c3bb8cc4b253fa37ea1b3e34def2ca741f1644f4625ab3cb38b27db",
+          "bytes": 3411
+        },
+        "after": {
+          "path": "source-auxiliary-3.json",
+          "sha256": "f153d98a2e2d87a87b5a04d7322b806429de80788fdded7618afa1318247ac7a",
+          "bytes": 3411
+        },
+        "beforeRecordedAt": "2026-11-01T06:00:29.076079+00:00",
+        "afterRecordedAt": "2026-11-01T06:03:42.631252+00:00",
+        "changedFiles": [
+          {
+            "path": "_planning/parity-1031/battle-check/Round6Checks.cs",
+            "beforeSha256": "a8a0e293864ae25faf347177c0759413b66b2bb8afc3d6d74bd2bfaa0255e4b9",
+            "afterSha256": "ae2e4477c82cde8696341764182d843bd2298b675b77f209f02e7e8820c3ab4c"
+          }
+        ],
+        "classification": "QA-only oracle RNG adapter now parses native non-JSON Rng.SaveState rather than feeding it to JsonDocument.Parse."
+      },
+      {
+        "before": {
+          "path": "source-auxiliary-3.json",
+          "sha256": "f153d98a2e2d87a87b5a04d7322b806429de80788fdded7618afa1318247ac7a",
+          "bytes": 3411
+        },
+        "after": {
+          "path": "source-auxiliary.json",
+          "sha256": "5256cff3d8e0a6902a9014abc2a51fc3eae33853174b46575e119f2080e14181",
+          "bytes": 3411
+        },
+        "beforeRecordedAt": "2026-11-01T06:03:42.631252+00:00",
+        "afterRecordedAt": "2026-11-01T06:06:31.405740+00:00",
+        "changedFiles": [
+          {
+            "path": "_planning/parity-1031/battle-check/Round6PreviewChecks.cs",
+            "beforeSha256": "396a51a5ab7534dc0123a6e78dfcc62a15f20bdcad60e8a5a6026f55b3070c9a",
+            "afterSha256": "d316bb17034ced316240b5d741191e022955ed6580a869ca03062b6ec72957ac"
+          }
+        ],
+        "classification": "QA-only mixed-armor and released-award fixtures now use the formal armor amount field, replacing n."
+      }
+    ],
+    "unchangedProductionAndRuntimeResourceInputs": "824 of828 formal entries retain the alias-only native execution hashes. All Core/Run, runtime resources, seven SDK project/helper closures,24 auxiliary files and9 oracle sources are unchanged. The four changed UI/Editor/Boot entries are explicit in the delta and final supplement.",
+    "currentNativeContext": "Final accepted native assertion total1312 =943 Root-approved reused actual checks +369 actual native-round6-5 checks. Earlier271 and intermediate367 are retained without double counting. Three independent flows remain separately recorded at their actual snapshot. Latest native supplement and build inputs exactly match current828; all1312 were not rerun on that snapshot.",
+    "aliasOnlyNativeFreeze": {
+      "artifact": {
+        "path": "source-freeze-2.json",
+        "sha256": "de94b6d79725011ad75323dd225471bd849b93c286d905e56d8886f3266d8f44",
+        "bytes": 106763
+      },
+      "recordedAt": "2026-11-01T06:11:00.643119+00:00",
+      "sourceCount": 828,
+      "currentMatches": 824,
+      "mismatches": [
+        {
+          "path": "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "beforeSha256": "cc9f9d722a90cde5d9f204aadc5314a9b56aaaacf88ac345a2d2bffc54a30617",
+          "afterSha256": "8b4163c7cf1b3ce9a644192b83e7e685184eea93c2b3853abdef55482f9b7b12"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "beforeSha256": "80dce091ed7c2484af2c354a82c38851251129543e0b1a17c3c1767219cd876b",
+          "afterSha256": "416e3fc6a49d81cfebe48d7a7f5e096a0773afe164a58ad486bf2c6303cab698"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "beforeSha256": "d2c4e7112ae795116fd3c1e84d432a0fcb627a930ee3dae9f1daeadece322975",
+          "afterSha256": "2c1197d351e0302023bb4f2f3b7ebf99c11d0dbff526b0577ad45570fc98162e"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs",
+          "beforeSha256": "661e9f547fd29ac2a39928d847f7afc3e3fc3ce17c62333c28fac323ad38b830",
+          "afterSha256": "e2ac09019d00e7bdb9f7b6c6d6675351f78fae28ec321cd843db154c962e5ca8"
+        }
+      ],
+      "actualNativeExecutedInputMatches": 828
+    },
+    "aliasOnlyDeltaVerification": [
+      {
+        "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+        "beforeSha256": "c2db4be338761d52b3d59866c7a28e5f06fd6e9432728f478c7534a862737539",
+        "afterSha256": "80dce091ed7c2484af2c354a82c38851251129543e0b1a17c3c1767219cd876b",
+        "change": "Only the Core.OwnedCard using alias in the normal-player Boot probe.",
+        "removingThatSingleLineRestoresInitialHash": true
+      }
+    ]
+  },
+  "dependencyProof": {
+    "groups": {
+      "core-run-excluding-runtime-audio": {
+        "formalCompileFiles": 83,
+        "fingerprintAlgorithm": "SHA256 of sorted UTF-8 path + NUL + file SHA256 + LF",
+        "aggregateSha256": "ba628bb5db4269573920d70fc1cedab93f7bb09e809f8b9c7a05befbe55f3f90",
+        "compilePatterns": [
+          "Assets/Scripts/Sdt.Core/**/*.cs",
+          "Assets/Scripts/Sdt.Run/*.cs"
+        ],
+        "excludedFiles": [
+          "Assets/Scripts/Sdt.Run/AudioService.cs",
+          "Assets/Scripts/Sdt.Run/CurrentSfxHighShelf.cs"
+        ],
+        "allHashesUnchangedFromPreExecutionFormalFreeze": true,
+        "currentRecheckMatchesRecordedAggregate": true
+      },
+      "core": {
+        "formalCompileFiles": 47,
+        "fingerprintAlgorithm": "SHA256 of sorted UTF-8 path + NUL + file SHA256 + LF",
+        "aggregateSha256": "d0bb18f54d3ffe35693115226904e091dfdbacf241fbf33f14d4d0f413ffcd5e",
+        "compilePatterns": [
+          "Assets/Scripts/Sdt.Core/**/*.cs"
+        ],
+        "excludedFiles": [],
+        "allHashesUnchangedFromPreExecutionFormalFreeze": true,
+        "currentRecheckMatchesRecordedAggregate": true
+      }
+    },
+    "projects": [
+      {
+        "project": "_planning/parity-1031/HubParityChecks.csproj",
+        "projectSha256": "0982a967cf7d1fee4ca7d9c3c36136873f371a2bb93ad4bed73243755bc27439",
+        "formalCompileGroup": "core-run-excluding-runtime-audio",
+        "totalExplicitCompileFiles": 84,
+        "auxiliaryCompileFiles": [
+          {
+            "path": "_planning/parity-1031/HubParityChecks.cs",
+            "sha256": "dcfddd8bcdbe221e05cf7d9c7883b7ad69f7d3d6ee9d1a81f0f183c2836712b1"
+          }
+        ],
+        "changedQaFilesInCompileClosure": [],
+        "nativeBootAliasInCompileClosure": false,
+        "reuseAfterQaCorrections": "No QA correction touched this project or its compiled dependencies; original passing process remains applicable."
+      },
+      {
+        "project": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+        "projectSha256": "aa5be6398cd1c02892855278c92f69b268ede2c21166dc2120c7cc20eff52ca3",
+        "formalCompileGroup": "core",
+        "totalExplicitCompileFiles": 52,
+        "auxiliaryCompileFiles": [
+          {
+            "path": "_planning/parity-1031/battle-check/Program.cs",
+            "sha256": "6d3fe2a90e5d6737e8236bb8b8b290801f1ade4231a9c301e2c789c8a932470f"
+          },
+          {
+            "path": "_planning/parity-1031/battle-check/Round3Checks.cs",
+            "sha256": "5f0b8884f0e505121253f5bbb7108978d2eff375084d5a055d486a08f1eb13c6"
+          },
+          {
+            "path": "_planning/parity-1031/battle-check/Round4Checks.cs",
+            "sha256": "99cb2543159a8f0da909c208ec9ad81de95eb08a081084229dd88276a88ebe1b"
+          },
+          {
+            "path": "_planning/parity-1031/battle-check/Round6Checks.cs",
+            "sha256": "ae2e4477c82cde8696341764182d843bd2298b675b77f209f02e7e8820c3ab4c"
+          },
+          {
+            "path": "_planning/parity-1031/battle-check/Round6PreviewChecks.cs",
+            "sha256": "d316bb17034ced316240b5d741191e022955ed6580a869ca03062b6ec72957ac"
+          }
+        ],
+        "changedQaFilesInCompileClosure": [
+          "_planning/parity-1031/battle-check/Round6Checks.cs",
+          "_planning/parity-1031/battle-check/Round6PreviewChecks.cs"
+        ],
+        "nativeBootAliasInCompileClosure": false,
+        "reuseAfterQaCorrections": "Final Battle process uses the last auxiliary snapshot."
+      },
+      {
+        "project": "_planning/parity-1031/run-check/RunParityChecks.csproj",
+        "projectSha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+        "formalCompileGroup": "core-run-excluding-runtime-audio",
+        "totalExplicitCompileFiles": 85,
+        "auxiliaryCompileFiles": [
+          {
+            "path": "_planning/migration-1029/current-departure/Stubs.cs",
+            "sha256": "7ad62d58fcba990a4af59f32ec71286168aec6464073d23336dfde265d9ed87d"
+          },
+          {
+            "path": "_planning/parity-1031/run-check/Program.cs",
+            "sha256": "f2845eac2704d96247b6953c9345ba7acdb9466ac7c01d838df0ba8f9374d81f"
+          }
+        ],
+        "changedQaFilesInCompileClosure": [],
+        "nativeBootAliasInCompileClosure": false,
+        "reuseAfterQaCorrections": "No QA correction touched this project or its compiled dependencies; original passing process remains applicable."
+      },
+      {
+        "project": "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj",
+        "projectSha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+        "formalCompileGroup": "core-run-excluding-runtime-audio",
+        "totalExplicitCompileFiles": 85,
+        "auxiliaryCompileFiles": [
+          {
+            "path": "_planning/migration-1029/current-departure/Stubs.cs",
+            "sha256": "7ad62d58fcba990a4af59f32ec71286168aec6464073d23336dfde265d9ed87d"
+          },
+          {
+            "path": "_planning/parity-1101-round2/run-check/Program.cs",
+            "sha256": "246a3918ecc54047b9be98c1eefa2c4eb2f7fec7c988f8493e3beffea1b319f7"
+          }
+        ],
+        "changedQaFilesInCompileClosure": [],
+        "nativeBootAliasInCompileClosure": false,
+        "reuseAfterQaCorrections": "No QA correction touched this project or its compiled dependencies; original passing process remains applicable."
+      },
+      {
+        "project": "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj",
+        "projectSha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+        "formalCompileGroup": "core-run-excluding-runtime-audio",
+        "totalExplicitCompileFiles": 85,
+        "auxiliaryCompileFiles": [
+          {
+            "path": "_planning/migration-1029/current-departure/Stubs.cs",
+            "sha256": "7ad62d58fcba990a4af59f32ec71286168aec6464073d23336dfde265d9ed87d"
+          },
+          {
+            "path": "_planning/parity-1101-round3/archive-check/Program.cs",
+            "sha256": "af8d0cd6be575e0e221e1a4ec52e3156f2cb165ba344ec1c84c509002747f073"
+          }
+        ],
+        "changedQaFilesInCompileClosure": [],
+        "nativeBootAliasInCompileClosure": false,
+        "reuseAfterQaCorrections": "No QA correction touched this project or its compiled dependencies; original passing process remains applicable."
+      },
+      {
+        "project": "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj",
+        "projectSha256": "a6c3d5d0366a998ed59abdf26cc5b64d14d5e985f2210af3ec7f0e9c83553a94",
+        "formalCompileGroup": "core-run-excluding-runtime-audio",
+        "totalExplicitCompileFiles": 85,
+        "auxiliaryCompileFiles": [
+          {
+            "path": "_planning/parity-1031/HubParityChecks.cs",
+            "sha256": "dcfddd8bcdbe221e05cf7d9c7883b7ad69f7d3d6ee9d1a81f0f183c2836712b1"
+          },
+          {
+            "path": "_planning/parity-1101-round5/export-check/Program.cs",
+            "sha256": "f906049f17c2d97058eba9a207db055df7bf22e6a9f9e16d3496a188f9a26b7d"
+          }
+        ],
+        "changedQaFilesInCompileClosure": [],
+        "nativeBootAliasInCompileClosure": false,
+        "reuseAfterQaCorrections": "No QA correction touched this project or its compiled dependencies; original passing process remains applicable."
+      },
+      {
+        "project": "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+        "projectSha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+        "formalCompileGroup": "core-run-excluding-runtime-audio",
+        "totalExplicitCompileFiles": 85,
+        "auxiliaryCompileFiles": [
+          {
+            "path": "_planning/migration-1029/current-departure/Stubs.cs",
+            "sha256": "7ad62d58fcba990a4af59f32ec71286168aec6464073d23336dfde265d9ed87d"
+          },
+          {
+            "path": "_planning/parity-1101-round6/run-check/Program.cs",
+            "sha256": "50f72bb126f7918ebde1512610b9811bfcc0436d550ebc0ad1d604d1bb3d819f"
+          }
+        ],
+        "changedQaFilesInCompileClosure": [],
+        "nativeBootAliasInCompileClosure": false,
+        "reuseAfterQaCorrections": "No QA correction touched this project or its compiled dependencies; original passing process remains applicable."
+      }
+    ],
+    "sixOtherProjectsUnchangedAcrossAllAuxiliarySnapshots": true,
+    "runtimeDataBasis": "Formal resources are covered by the unchanged formal snapshot. Auxiliary vectors, Unity resource/audio stubs, project files and check Programs are covered by all four auxiliary snapshots; the generated Source oracle is recorded separately below.",
+    "latestPlayerQaReuse": {
+      "nativeExecutedSnapshot": {
+        "path": "source-freeze-2.json",
+        "sha256": "de94b6d79725011ad75323dd225471bd849b93c286d905e56d8886f3266d8f44",
+        "bytes": 106763
+      },
+      "latestRecordedSnapshot": {
+        "path": "source-freeze.json",
+        "sha256": "eb3dfbcda75acefb11ca555881e50be6972cc4c1efce9ff9977b108de210ea2e",
+        "bytes": 106763
+      },
+      "recordedDelta": [
+        {
+          "path": "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "beforeSha256": "cc9f9d722a90cde5d9f204aadc5314a9b56aaaacf88ac345a2d2bffc54a30617",
+          "afterSha256": "8b4163c7cf1b3ce9a644192b83e7e685184eea93c2b3853abdef55482f9b7b12"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "beforeSha256": "80dce091ed7c2484af2c354a82c38851251129543e0b1a17c3c1767219cd876b",
+          "afterSha256": "416e3fc6a49d81cfebe48d7a7f5e096a0773afe164a58ad486bf2c6303cab698"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "beforeSha256": "d2c4e7112ae795116fd3c1e84d432a0fcb627a930ee3dae9f1daeadece322975",
+          "afterSha256": "2c1197d351e0302023bb4f2f3b7ebf99c11d0dbff526b0577ad45570fc98162e"
+        },
+        {
+          "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs",
+          "beforeSha256": "661e9f547fd29ac2a39928d847f7afc3e3fc3ce17c62333c28fac323ad38b830",
+          "afterSha256": "e2ac09019d00e7bdb9f7b6c6d6675351f78fae28ec321cd843db154c962e5ca8"
+        }
+      ],
+      "workingTreeDeltaFromLatestSnapshot": [],
+      "unchangedOtherFormalEntries": 824,
+      "allDomainCompileAggregatesStillMatch": true,
+      "allNativeCheckAndBusinessInputsStillMatch": false,
+      "nativeExecutionGate": {
+        "file": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.cs",
+        "enabledAt": 24,
+        "configureEarlyReturnAt": 31,
+        "installEarlyReturnAt": 46,
+        "argument": "--sdt-background-review",
+        "basis": "This gate explains exclusion only of the standalone Boot probe. The Discover UI production file and its Editor check also changed, so the gate does not establish native or visual acceptance of the latest UI."
+      },
+      "claimLimit": "SDK1483 and8 source-oracle cases reused for their unchanged compile/source closure. Final native1312 combines943 existing passes and369 final passes; three flows are separate. Current complete native/build source equality does not represent a fresh execution of all reused suites. Player process and five-frame visual scope are distinguished.",
+      "allCoreRunBusinessInputsStillMatch": true,
+      "domainResultReusable": true,
+      "sourceOracle8CasesAnd9SourcesReusable": true,
+      "finalNativeComposition": {
+        "reusedAssertions": 943,
+        "latestExecutedAssertions": 369,
+        "total": 1312,
+        "latestNativeInputsExactlyMatchFinalFreeze": true
+      }
+    }
+  },
+  "sourceOracleNotAddedToTotal": {
+    "includedInTotal": false,
+    "cases": 8,
+    "sourceCount": 9,
+    "purpose": "Actual Vite mist-box queue/discovery/RNG oracle on explicit controlled catalogs; UID port is a deterministic counter and acquisition/visual effects are omitted.",
+    "sourceScope": "Principal behavioural modules below; Root unified Vite input receipt covers transitive imports.",
+    "artifact": {
+      "path": "discover-source-vectors.json",
+      "sha256": "cbab37db05b379719624e49950cec53cf73f353c549e59ba81f56521af1861d8",
+      "bytes": 21209
+    },
+    "generationProcess": {
+      "artifact": {
+        "path": "domain/processes.json",
+        "sha256": "e82b7e7291e6eb60287a0fc604755574f09f3a9709783ed4c0e46c63d6da1009",
+        "bytes": 2777
+      },
+      "entry": "discover-source-oracle",
+      "record": {
+        "name": "discover-source-oracle",
+        "tool": "node",
+        "exitCode": 0,
+        "arguments": [
+          "_planning/parity-1101-round6/discover-source-oracle.mjs",
+          "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\discover-source-vectors.json"
+        ],
+        "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\discover-source-oracle.log",
+        "startedAt": "2026-11-01T05:58:30.8305844Z",
+        "endedAt": "2026-11-01T05:58:30.9230032Z"
+      }
+    },
+    "generationLog": {
+      "path": "domain/discover-source-oracle.log",
+      "sha256": "2a451c7000866d96e07f7c38519b98840042791d3fdf18e76c5a9be07d2c42d1",
+      "bytes": 135
+    },
+    "sources": [
+      {
+        "path": "搜打撤/game/src/battle/effects/battle.card-inspection.domain.js",
+        "sha256": "f463765d295f5582eb5f99b0cef1f86a6887319155800d3dd7d8aa6e4ac42fd0"
+      },
+      {
+        "path": "搜打撤/game/src/battle/effects/battle.discover-flow.js",
+        "sha256": "19c2d673ca3b9a8d7a3ef7beb336465dd66ae451ce5529d87cc2686f4d368ce9"
+      },
+      {
+        "path": "搜打撤/game/src/battle/effects/battle.discover-candidates.js",
+        "sha256": "5d2c1d48b25b60a5bb097a0f133f9c23011e1c8201431e3c2c4b9f480e735817"
+      },
+      {
+        "path": "搜打撤/game/src/battle/effects/battle.discover-state.js",
+        "sha256": "e839c04e47aac8d2786a2b0dc3f72577a937d1480db0e1ffa04e054b2b6bc27b"
+      },
+      {
+        "path": "搜打撤/game/src/cards/card-obtainability.js",
+        "sha256": "001bc830612ea46b35ea326b126fb625ed84d92fd687f1fbf1b0a1a667565ca7"
+      },
+      {
+        "path": "搜打撤/game/src/cards/card-rarity.js",
+        "sha256": "31f9c0583d12066a678c6fe0a08ed99399c2eda0775aa3f0fcdf0b9986c3188e"
+      },
+      {
+        "path": "搜打撤/game/src/core/random-service.js",
+        "sha256": "d7c4481c5673646ac055c83483ad5304d1ce61cb102892b17a0bbb32a66bdeca"
+      },
+      {
+        "path": "搜打撤/game/src/core/random-core.js",
+        "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174"
+      },
+      {
+        "path": "搜打撤/game/src/core/random-streams.js",
+        "sha256": "af4e4cac02117d5e37cd239889bcc97356c2ba6a9dcee36cd05e847846dd9897"
+      }
+    ],
+    "currentSourceHashesMatch": 9,
+    "consumption": "The final Battle metadata names this exact vector file; the Battle checks require it and compare candidate/final card variants, costs and RNG state. Eight generated cases are input cases, not an extra assertion total."
+  },
+  "limits": [
+    "Process PIDs, exit codes, argv and timestamps are copied only from existing process metadata; none were reconstructed from log mtimes.",
+    "Three failed Battle attempts remain failed and excluded; only domain-battle-4 contributes 492.",
+    "Domain Core/Run checks use explicit controlled inputs and production logic with their declared resource/audio stubs. They do not prove normal-window rendering, physical input, natural journeys, frame timing or cross-process interruption recovery.",
+    "Source oracle uses its documented controlled catalogs and deterministic UID port; it is not a whole-game or general discovery seed-equivalence claim.",
+    "Current Native/Standalone validation belongs to separate Root receipts and is not folded into 1483."
+  ],
+  "nativeEvidenceIndex": {
+    "passed": true,
+    "nativeAssertions": 1312,
+    "includedInDomainTotal": false,
+    "suites": [
+      {
+        "name": "native-round6-5",
+        "assertions": 369,
+        "counterFields": {
+          "hudAssertions": 14,
+          "hubAssertions": 58,
+          "audioAssertions": 34,
+          "sacrificeAssertions": 107,
+          "discoverAssertions": 156
+        },
+        "namedChecks": 0,
+        "passed": true,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound6Validation.Run",
+          "pid": 17068,
+          "startedAt": "2026-11-01T07:25:33.7901745Z",
+          "endedAt": "2026-11-01T07:26:00.4886138Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round6-5"
+        },
+        "processArtifact": {
+          "path": "native-round6-5/process.json",
+          "sha256": "ac4e4d15456de011929479839c4b3474235b389cf29ab1f9b77ea6444e0c7a00",
+          "bytes": 400
+        },
+        "resultArtifact": {
+          "path": "native-round6-5/result.json",
+          "sha256": "1d974c291046d37d7bd59a063e9f656d225c243ba1101a8cb492e3a47e123ae3",
+          "bytes": 382
+        },
+        "logArtifact": {
+          "path": "native-round6-5/unity.log",
+          "sha256": "5eff40c1090927a9eecb480519bba55c72289fa2135611348bcf0277ebe66a21",
+          "bytes": 103281
+        },
+        "sourceBefore": {
+          "path": "native-round6-5/source-before.json",
+          "sha256": "5795e5bfbedc67b2719c9bfc7b55dda26de1ac4779e437391a227327d35d7895",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-round6-5/source-after.json",
+          "sha256": "5795e5bfbedc67b2719c9bfc7b55dda26de1ac4779e437391a227327d35d7895",
+          "bytes": 104806
+        },
+        "actualInputsExactlyMatchLatestFreeze": true,
+        "actualInputsExactlyMatchAliasOnlyFreeze": false,
+        "scope": "Isolated real native components and production commands with controlled fixtures and constructed UI events; no OS hardware input, natural unassisted play, whole-frame allocation or FPS claim."
+      },
+      {
+        "name": "native-round2-regression",
+        "assertions": 375,
+        "counterFields": {
+          "runAssertions": 13,
+          "hubAssertions": 339
+        },
+        "namedChecks": 23,
+        "passed": true,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound2Validation.Run",
+          "pid": 35836,
+          "startedAt": "2026-11-01T06:12:19.9185865Z",
+          "endedAt": "2026-11-01T06:12:36.0038728Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round2-regression"
+        },
+        "processArtifact": {
+          "path": "native-round2-regression/process.json",
+          "sha256": "e1a643e491a0c0163297a7d60fa05c79071adc0544b1fb602a7c96bb646ee91f",
+          "bytes": 409
+        },
+        "resultArtifact": {
+          "path": "native-round2-regression/result.json",
+          "sha256": "1c5f70774a3856785636532452d71fab3ae12389fbfe43837fefee82eb63aea3",
+          "bytes": 1568
+        },
+        "logArtifact": {
+          "path": "native-round2-regression/unity.log",
+          "sha256": "71ba06cae3696c7f0ff0f2d18bddf006ee9d44aee78fd526bd0c13486dc7090f",
+          "bytes": 29433
+        },
+        "sourceBefore": {
+          "path": "native-round2-regression/source-before.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-round2-regression/source-after.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "actualInputsExactlyMatchAliasOnlyFreeze": true,
+        "scope": "Native controlled events and allocation/lifecycle checks; no physical input, FPS, or multi-size claim.",
+        "reuseForFinal1312": true,
+        "reuseBasis": "Root-approved reuse of the actual passing suite; original 828-input snapshot retained. All Core/Run and existing suite/check files are unchanged; the four-file Discover presentation/Editor/standalone supplement is covered by native-round6-5 and the current Player process, not represented as this suite rerunning."
+      },
+      {
+        "name": "native-round3-regression",
+        "assertions": 131,
+        "counterFields": {
+          "rewardAssertions": 54,
+          "shopAssertions": 42,
+          "battleAssertions": 25,
+          "archiveAssertions": 10
+        },
+        "namedChecks": 0,
+        "passed": true,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound3Validation.Run",
+          "pid": 13216,
+          "startedAt": "2026-11-01T06:12:01.2882762Z",
+          "endedAt": "2026-11-01T06:12:19.8451059Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round3-regression"
+        },
+        "processArtifact": {
+          "path": "native-round3-regression/process.json",
+          "sha256": "47a47bc6b56ba99a6c7d8d16059839803ef9139f67676fb7b8b24f135a06407f",
+          "bytes": 409
+        },
+        "resultArtifact": {
+          "path": "native-round3-regression/result.json",
+          "sha256": "2a1bb791a6edc665dd15c08d45a9609874f673079f4371b8c0ab6d3a7337e659",
+          "bytes": 267
+        },
+        "logArtifact": {
+          "path": "native-round3-regression/unity.log",
+          "sha256": "fcdb914fc935b887c662bbba07c1d638007c776e63152f234fc7ea529b8cdbab",
+          "bytes": 39783
+        },
+        "sourceBefore": {
+          "path": "native-round3-regression/source-before.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-round3-regression/source-after.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "actualInputsExactlyMatchAliasOnlyFreeze": true,
+        "scope": "Native constructed submit and lifetime checks in isolated profile; no OS input, multi-size or FPS claim.",
+        "reuseForFinal1312": true,
+        "reuseBasis": "Root-approved reuse of the actual passing suite; original 828-input snapshot retained. All Core/Run and existing suite/check files are unchanged; the four-file Discover presentation/Editor/standalone supplement is covered by native-round6-5 and the current Player process, not represented as this suite rerunning."
+      },
+      {
+        "name": "native-round4-regression",
+        "assertions": 127,
+        "counterFields": {
+          "preparationAssertions": 31,
+          "photoAssertions": 25,
+          "inboxAssertions": 12,
+          "runAssertions": 29,
+          "battleAssertions": 30
+        },
+        "namedChecks": 0,
+        "passed": true,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound4Validation.Run",
+          "pid": 37388,
+          "startedAt": "2026-11-01T06:11:44.3252998Z",
+          "endedAt": "2026-11-01T06:12:01.2128894Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round4-regression"
+        },
+        "processArtifact": {
+          "path": "native-round4-regression/process.json",
+          "sha256": "06a89a6bfa92718d43d3d9677480a03dea0105b7fd2ea68f15a3d68ebd42366b",
+          "bytes": 409
+        },
+        "resultArtifact": {
+          "path": "native-round4-regression/result.json",
+          "sha256": "ae604178d8e4ecd5b4488328ba180de2dcb085c3bc55c10008b04092fc09ab95",
+          "bytes": 316
+        },
+        "logArtifact": {
+          "path": "native-round4-regression/unity.log",
+          "sha256": "b016b74fdfde44edfa92e09559c2d0f93645c4192fee059e7936e06fdb5aa90e",
+          "bytes": 40256
+        },
+        "sourceBefore": {
+          "path": "native-round4-regression/source-before.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-round4-regression/source-after.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "actualInputsExactlyMatchAliasOnlyFreeze": true,
+        "scope": "Isolated native player-loop checks and constructed UI events; no OS input, multi-size or FPS claim.",
+        "reuseForFinal1312": true,
+        "reuseBasis": "Root-approved reuse of the actual passing suite; original 828-input snapshot retained. All Core/Run and existing suite/check files are unchanged; the four-file Discover presentation/Editor/standalone supplement is covered by native-round6-5 and the current Player process, not represented as this suite rerunning."
+      },
+      {
+        "name": "native-round5-regression",
+        "assertions": 262,
+        "counterFields": {
+          "photoSaveAssertions": 29,
+          "motionAssertions": 16,
+          "searchAssertions": 180,
+          "exportAssertions": 37
+        },
+        "namedChecks": 0,
+        "passed": true,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound5Validation.Run",
+          "pid": 4840,
+          "startedAt": "2026-11-01T06:11:30.4596368Z",
+          "endedAt": "2026-11-01T06:11:44.2060295Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round5-regression"
+        },
+        "processArtifact": {
+          "path": "native-round5-regression/process.json",
+          "sha256": "d966a11b0e8e88ea89681eef088c342c14373bbb25d0202a31fb21457f88c7dd",
+          "bytes": 408
+        },
+        "resultArtifact": {
+          "path": "native-round5-regression/result.json",
+          "sha256": "b12722966b910dd44150d4fdb96fe5ebacad88424ca18227e0cba0237f6d7914",
+          "bytes": 294
+        },
+        "logArtifact": {
+          "path": "native-round5-regression/unity.log",
+          "sha256": "caa96ec9de81cd8762fdca065b485db4175a5cf0471d1e4f73c6e8432dff29bd",
+          "bytes": 37940
+        },
+        "sourceBefore": {
+          "path": "native-round5-regression/source-before.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-round5-regression/source-after.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "actualInputsExactlyMatchAliasOnlyFreeze": true,
+        "scope": "Isolated native components, real player loop and constructed Submit events; clipboard is not exercised; no OS input/FPS claim.",
+        "reuseForFinal1312": true,
+        "reuseBasis": "Root-approved reuse of the actual passing suite; original 828-input snapshot retained. All Core/Run and existing suite/check files are unchanged; the four-file Discover presentation/Editor/standalone supplement is covered by native-round6-5 and the current Player process, not represented as this suite rerunning."
+      },
+      {
+        "name": "native-shared-regression",
+        "assertions": 48,
+        "counterFields": {},
+        "namedChecks": 48,
+        "passed": true,
+        "process": {
+          "method": "Sdt.Editor.CurrentParityValidation.Run",
+          "pid": 32916,
+          "startedAt": "2026-11-01T06:12:36.0732229Z",
+          "endedAt": "2026-11-01T06:12:55.7138937Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-shared-regression"
+        },
+        "processArtifact": {
+          "path": "native-shared-regression/process.json",
+          "sha256": "5c741b6c4f7bbef47aacfae9ba0fc962434dba5fc2dfd486d054a56470419925",
+          "bytes": 409
+        },
+        "resultArtifact": {
+          "path": "native-shared-regression/result.json",
+          "sha256": "edb0754d795e1a41b164441529b649e24e5a415b61c406560846e94804dc5c52",
+          "bytes": 2480
+        },
+        "logArtifact": {
+          "path": "native-shared-regression/unity.log",
+          "sha256": "b3e239d77496f4ba5993fb54df46267ce459f510fb34578e07c6dea973c29730",
+          "bytes": 35345
+        },
+        "sourceBefore": {
+          "path": "native-shared-regression/source-before.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-shared-regression/source-after.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "actualInputsExactlyMatchAliasOnlyFreeze": true,
+        "scope": "Native production text, settings cache and audio policy/state; no acoustic or physical-input claim.",
+        "reuseForFinal1312": true,
+        "reuseBasis": "Root-approved reuse of the actual passing suite; original 828-input snapshot retained. All Core/Run and existing suite/check files are unchanged; the four-file Discover presentation/Editor/standalone supplement is covered by native-round6-5 and the current Player process, not represented as this suite rerunning."
+      }
+    ],
+    "flowsNotAddedToTotals": [
+      {
+        "name": "native-film-regression",
+        "passed": true,
+        "includedInDomainOrNativeAssertionTotals": false,
+        "process": {
+          "method": "Sdt.Editor.CurrentFilmFlowValidation.Run",
+          "pid": 17200,
+          "startedAt": "2026-11-01T06:12:55.7801259Z",
+          "endedAt": "2026-11-01T06:13:26.6006481Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-film-regression"
+        },
+        "processArtifact": {
+          "path": "native-film-regression/process.json",
+          "sha256": "dafd17e617b9d3340250826d017b799d12d3b3804dfcfff26072194b3ced6f4b",
+          "bytes": 409
+        },
+        "resultArtifact": {
+          "path": "native-film-regression/result.json",
+          "sha256": "2d52301b3f2d041b904b2463eda90011adac8c30a54868f0324691e1b581694b",
+          "bytes": 276838
+        },
+        "logArtifact": {
+          "path": "native-film-regression/unity.log",
+          "sha256": "3ded19c7c0edaa98eec8307ef615720c482ffe7eab6200565a59834a90f9f9a6",
+          "bytes": 30887
+        },
+        "sourceBefore": {
+          "path": "native-film-regression/source-before.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-film-regression/source-after.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "ticks": null,
+        "records": 67,
+        "referenceWidth": 1920,
+        "referenceHeight": 1080,
+        "input": "actual production entry/commands with isolated controlled map positions; constructed uGUI raycast/pointer; owner close API",
+        "osHardwareInput": false,
+        "limitations": [
+          "No physical key or held hardware input claim.",
+          "Controlled positions prove production triggers, not navigation reachability or balance.",
+          "Captured source frames still require visual review; shader presence is not fidelity approval.",
+          "Dedicated departure, extraction, resume, camp, ordinary battle and victory/defeat remain in root full journey/review scope."
+        ]
+      },
+      {
+        "name": "native-receipts",
+        "passed": true,
+        "includedInDomainOrNativeAssertionTotals": false,
+        "process": {
+          "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts",
+          "pid": 2196,
+          "startedAt": "2026-11-01T06:13:26.6742756Z",
+          "endedAt": "2026-11-01T06:14:15.4705113Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-receipts"
+        },
+        "processArtifact": {
+          "path": "native-receipts/process.json",
+          "sha256": "d73c17292b83c8b6b717b307bf2c0378b17d41c708b831fc13ce64f1068d6080",
+          "bytes": 414
+        },
+        "resultArtifact": {
+          "path": "native-receipts/result.json",
+          "sha256": "48d301a9d017180f5ad1933b79450c6a123965775e9849e31cedb91f8581ad97",
+          "bytes": 201477
+        },
+        "logArtifact": {
+          "path": "native-receipts/unity.log",
+          "sha256": "14072f17c6e4d141e961563afe3cbe7da2c196574c251d3f0a4c41a33bacaae7",
+          "bytes": 53829
+        },
+        "sourceBefore": {
+          "path": "native-receipts/source-before.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-receipts/source-after.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "ticks": 61,
+        "records": 136,
+        "referenceWidth": 1920,
+        "referenceHeight": 1080,
+        "input": "constructed-uGUI-RaycastAll-and-ExecuteEvents; constructed-InputField-endEdit; runtime-commands-where-recorded",
+        "osHardwareInput": false,
+        "limitations": [
+          "Controlled fixtures prove flow and persistence, not balance or original RNG equivalence.",
+          "Hidden batch does not prove physical Input.GetKeyDown or sustained mouse/keyboard hold.",
+          "CurrentEndTurnHold requires focus and hardware-held input; no 650ms success claim."
+        ]
+      },
+      {
+        "name": "native-journey",
+        "passed": true,
+        "includedInDomainOrNativeAssertionTotals": false,
+        "process": {
+          "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunJourney",
+          "pid": 37092,
+          "startedAt": "2026-11-01T06:14:15.5415272Z",
+          "endedAt": "2026-11-01T06:16:06.8861004Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-journey"
+        },
+        "processArtifact": {
+          "path": "native-journey/process.json",
+          "sha256": "fcd4816885f995b7f0df07fa1d67cb82a5f9e98292160d6a63f0f04043613193",
+          "bytes": 413
+        },
+        "resultArtifact": {
+          "path": "native-journey/result.json",
+          "sha256": "15a8ea9782500385e48c6085312a2425a63730b1685d77178ff0a5daa1ac2560",
+          "bytes": 777229
+        },
+        "logArtifact": {
+          "path": "native-journey/unity.log",
+          "sha256": "3c1894f0b98871f036b5c791b3c2de9dcac4ad350d0ea8cde806ed7f033bed70",
+          "bytes": 29542
+        },
+        "sourceBefore": {
+          "path": "native-journey/source-before.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-journey/source-after.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "ticks": 448,
+        "records": 693,
+        "referenceWidth": 1920,
+        "referenceHeight": 1080,
+        "input": "constructed-uGUI-RaycastAll-and-ExecuteEvents; constructed-InputField-endEdit; runtime-commands-where-recorded",
+        "osHardwareInput": false,
+        "limitations": [
+          "Controlled fixtures prove flow and persistence, not balance or original RNG equivalence.",
+          "Hidden batch does not prove physical Input.GetKeyDown or sustained mouse/keyboard hold.",
+          "CurrentEndTurnHold requires focus and hardware-held input; no 650ms success claim."
+        ]
+      }
+    ],
+    "failedNativeAttemptPreserved": {
+      "process": {
+        "method": "Sdt.Editor.CurrentRound6Validation.Run",
+        "pid": 37660,
+        "startedAt": "2026-11-01T06:07:32.7219915Z",
+        "endedAt": "2026-11-01T06:08:04.5669852Z",
+        "exitCode": 1,
+        "timedOut": false,
+        "inputsUnchanged": true,
+        "changedInputs": [],
+        "sourceCount": 828,
+        "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round6"
+      },
+      "processArtifact": {
+        "path": "native-round6/process.json",
+        "sha256": "6153817df6a51730359147d403a21ae3ceed3d48d07a1eb3b62faba8f065ccd3",
+        "bytes": 398
+      },
+      "logArtifact": {
+        "path": "native-round6/unity.log",
+        "sha256": "10123a32a57721bada4c813e17dfc0314f85aaa4c41b77db4bf4b8a1fc251527",
+        "bytes": 78203
+      },
+      "includedInPassingTotal": false,
+      "reason": "Standalone QA probe OwnedCard namespace ambiguity before the Root alias-only correction; no result.json was emitted."
+    },
+    "standaloneStatus": {
+      "passed": true,
+      "status": "Player-6 result.passed=true and process exit0 at 2560x1440 DPI120. Earlier process and visual failures remain retained.",
+      "failedAttempts": [
+        {
+          "name": "player",
+          "passed": false,
+          "includedInPassingTotals": false,
+          "processArtifact": {
+            "path": "player/process.json",
+            "sha256": "c854577407f1f5476b0298ff707630755462872544c788a1fda29c0f14269767",
+            "bytes": 1879
+          },
+          "resultArtifact": {
+            "path": "player/result.json",
+            "sha256": "18766a5a3a0a459ce183c9df00592dc6c7fa9fbbb47b8ad36e961ebf35f5b316",
+            "bytes": 2381166
+          },
+          "logArtifact": {
+            "path": "player/player.log",
+            "sha256": "16153ec340d1e99edc7951c4d8c40fa943b2669be793e3599de537b4abb0ef5f",
+            "bytes": 119661
+          },
+          "exitCode": 2,
+          "pid": 33088,
+          "startedAt": "2026-11-01T06:17:55.0846838Z",
+          "endedAt": "2026-11-01T06:18:23.7049013Z",
+          "error": "System.InvalidOperationException: Standalone button blocked: node-choice 选择献祭卡牌"
+        },
+        {
+          "name": "player-2",
+          "passed": false,
+          "includedInPassingTotals": false,
+          "processArtifact": {
+            "path": "player-2/process.json",
+            "sha256": "f30c9ac48149d0c8479df8ac5d9dcc86abba7022e4f41500bc7763232b8b9e4f",
+            "bytes": 1877
+          },
+          "resultArtifact": {
+            "path": "player-2/result.json",
+            "sha256": "379845c336695352048aaf4c88a2767acbb8b1fde643197bcbfb478cfd8ec4b5",
+            "bytes": 2627165
+          },
+          "logArtifact": {
+            "path": "player-2/player.log",
+            "sha256": "0be98d4d148154a2d1406f0fe1ec2c89487225a8ea993a1cc3df5da8363dde0f",
+            "bytes": 122599
+          },
+          "exitCode": 2,
+          "pid": 35936,
+          "startedAt": "2026-11-01T06:25:17.0421344Z",
+          "endedAt": "2026-11-01T06:25:39.4677827Z",
+          "error": "System.InvalidOperationException: Standalone button blocked: sacrificePick-display-sacrifice-0"
+        },
+        {
+          "name": "player-4",
+          "passed": false,
+          "includedInPassingTotals": false,
+          "processArtifact": {
+            "path": "player-4/process.json",
+            "sha256": "f850a1c5c55c1f4e184ea19d336b058f02dc6d4f595d9f28b84c1087f0f26dd0",
+            "bytes": 1880
+          },
+          "resultArtifact": {
+            "path": "player-4/result.json",
+            "sha256": "b5ed14e2b7b55785c635a5d2082c56221dcf0c855163f2180f235e71201547b8",
+            "bytes": 4377874
+          },
+          "logArtifact": {
+            "path": "player-4/player.log",
+            "sha256": "74939e0378e149d4112fdfea80307b9fc56358aa1c0c593bd5b5d358b6cb7b20",
+            "bytes": 189484
+          },
+          "exitCode": 2,
+          "pid": 31972,
+          "startedAt": "2026-11-01T06:52:41.5702706Z",
+          "endedAt": "2026-11-01T06:53:24.0598943Z",
+          "error": "System.InvalidOperationException: Real mysterious summon did not commit its two energy and source exactly once.",
+          "classification": "QA assumed every discovery award enters hand. The formal item destination is GrantedCards without hand membership; Root corrected the probe type-aware destination assertion, retaining source removal, two-energy payment and one unique reward checks.",
+          "correctedProbe": {
+            "path": "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+            "lines": [
+              309,
+              318
+            ]
+          }
+        }
+      ],
+      "completedProcessWithFailedVisualReview": {
+        "name": "player-3",
+        "processPassed": true,
+        "visualPassed": false,
+        "includedInPassingAssertionTotals": false,
+        "processArtifact": {
+          "path": "player-3/process.json",
+          "sha256": "1b049e4b3a59a3d06e4df3378dcfa5878af55ae009247394d6b52986e9c5edc5",
+          "bytes": 1879
+        },
+        "resultArtifact": {
+          "path": "player-3/result.json",
+          "sha256": "fb50d6d7c409879f7ce0eabaa74def3993f98d5abc1e945b095da346671c2b3b",
+          "bytes": 7416370
+        },
+        "logArtifact": {
+          "path": "player-3/player.log",
+          "sha256": "5eafa35df2f7b60e05a3a8c7a26edf4d88cb719a5675e87aeef1ff503097cd33",
+          "bytes": 523866
+        },
+        "visualReviewArtifact": {
+          "path": "visual-review-failed.json",
+          "sha256": "b914411c61585833d6e98a6296c99d9dc4f4af155e95dee6583c288e827c00fc",
+          "bytes": 3258
+        },
+        "blocking": [
+          {
+            "images": [
+              "player-discover-bottom.png",
+              "player-discover-selected.png",
+              "player-discover-preview.png"
+            ],
+            "observation": "Discover header top and prompt/hint left edge extend past the screen. Functional process exit 0 does not satisfy visual acceptance."
+          }
+        ],
+        "buildGUID": "d0665fbed435421682d07b757e01da18"
+      },
+      "passDefinition": "Latest Player process passed; human visual acceptance recorded here is limited to five sacrifice frames. Root owns aggregate visual acceptance.",
+      "completedProcessWithFailedGraveVisualReview": {
+        "name": "player-5",
+        "processPassed": true,
+        "visualPassed": false,
+        "includedInPassingAssertionTotals": false,
+        "processArtifact": {
+          "path": "player-5/process.json",
+          "sha256": "c7c9b3eaaca33cd045eeada1c823b34af0c29dcae262079922e6e9f3917ee4f5",
+          "bytes": 1876
+        },
+        "resultArtifact": {
+          "path": "player-5/result.json",
+          "sha256": "c1329aaaaa4da59feda3e8b6eea0120794eafccae01ddbd5b0a63f4e39600ecf",
+          "bytes": 7552069
+        },
+        "logArtifact": {
+          "path": "player-5/player.log",
+          "sha256": "5ef007731e9852e27243833ffcf14a9e8924db7ebbbcb7ed08f13b5d6eea22cc",
+          "bytes": 546134
+        },
+        "visualReviewArtifact": {
+          "path": "visual-review-grave-failed.json",
+          "sha256": "1aca9ad17ebe518f4cca93a3e06ed16eb7111e0315a9c60c33efd7a6db2f20f8",
+          "bytes": 720
+        },
+        "buildGUID": "fb166685443d40029e1c28dab3af599c",
+        "failure": [
+          {
+            "path": "player-5/player-grave.png",
+            "sha256": "c6323405dc789ec4b8abe5386413b78431f82f4ae54af8f31ba4e1b904888bf0",
+            "observation": "Grave surface/header are inside the screen, but global run HUD remains visible above the overlay and overlaps its title. Visual acceptance fails."
+          }
+        ],
+        "fixBoundary": "CurrentRunTopBar missing GravePanel cover classification; no battle rules change."
+      },
+      "latestPassedProcess": {
+        "name": "player-6",
+        "process": {
+          "executable": "D:\\素材\\代号柒\\SoudacheUnity\\Build\\Desktop\\代号柒.exe",
+          "executableSha256": "9806abde4a406ed68647e9505852c49f6aa72a372f4f084e2aa2821affea57a2",
+          "pid": 23284,
+          "startedAt": "2026-11-01T07:26:29.3002131Z",
+          "endedAt": "2026-11-01T07:27:54.9310851Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "host": {
+            "hwnd": 5639274,
+            "visible": false,
+            "dpi": 120,
+            "awareness": 2,
+            "clientWidth": 2560,
+            "clientHeight": 1440,
+            "windowLeft": 0,
+            "windowTop": 0,
+            "windowWidth": 2560,
+            "windowHeight": 1440
+          },
+          "child": {
+            "hwnd": 20974732,
+            "visible": true,
+            "dpi": 120,
+            "awareness": 2,
+            "clientWidth": 2560,
+            "clientHeight": 1440,
+            "windowLeft": 0,
+            "windowTop": 0,
+            "windowWidth": 2560,
+            "windowHeight": 1440
+          },
+          "childGeometryChanges": [
+            {
+              "seconds": 0.1895845,
+              "window": {
+                "hwnd": 20974732,
+                "visible": false,
+                "dpi": 120,
+                "awareness": 2,
+                "clientWidth": 2560,
+                "clientHeight": 1440,
+                "windowLeft": 0,
+                "windowTop": 0,
+                "windowWidth": 2560,
+                "windowHeight": 1440
+              }
+            },
+            {
+              "seconds": 3.8816754,
+              "window": {
+                "hwnd": 20974732,
+                "visible": true,
+                "dpi": 120,
+                "awareness": 2,
+                "clientWidth": 2560,
+                "clientHeight": 1440,
+                "windowLeft": 0,
+                "windowTop": 0,
+                "windowWidth": 2560,
+                "windowHeight": 1440
+              }
+            }
+          ],
+          "transparentCompositor": true,
+          "zeroAlphaAndNonactivating": true,
+          "input": "No OS input; zero-alpha nonactivating click-through parent HWND; standalone backbuffer at current physical primary desktop size",
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\player-6"
+        },
+        "processArtifact": {
+          "path": "player-6/process.json",
+          "sha256": "34eb56d07fc495d29d92d41b4816a1a4b8cc03f6c7bc4c71076f3a6ae20642db",
+          "bytes": 1879
+        },
+        "resultArtifact": {
+          "path": "player-6/result.json",
+          "sha256": "49b85e9ae879fc7582bf0a687bbff70c66cdb1c98febbf0dc15e62cffda2c520",
+          "bytes": 7536876
+        },
+        "logArtifact": {
+          "path": "player-6/player.log",
+          "sha256": "cdd194ff097935974777e446e29710e7385de345047075993db6805adaa74dcb",
+          "bytes": 542774
+        },
+        "buildGUID": "c3ee3347a03149de80bbb7fe3f0bb5c2",
+        "window": {
+          "width": 2560,
+          "height": 1440,
+          "dpi": 120,
+          "fullScreenMode": "Windowed",
+          "canvasMode": "ScreenSpaceOverlay",
+          "canvasReferenceWidth": 1920.0,
+          "canvasReferenceHeight": 1080.0
+        },
+        "visualReviewArtifact": {
+          "path": "sacrifice-visual-review.json",
+          "sha256": "dd79c01a8fd861a5840454d198edb4b4b9df3a1a04ee3e47cefc06be07854c98",
+          "bytes": 7835
+        },
+        "visualReviewScope": "Five sacrifice images only"
+      }
+    },
+    "supplementalValidation": {
+      "status": "Actual native-round6-5 and build-desktop-6/Player-6 process passed; five sacrifice images reviewed separately.",
+      "actualReplacementRound6Assertions": 369,
+      "actualCombinedNativeAssertions": 1312,
+      "reusedNativeAssertions": 943,
+      "buildProcess": {
+        "method": "Sdt.Editor.BuildGame.BuildWin64",
+        "pid": 4648,
+        "startedAt": "2026-11-01T07:26:00.6166741Z",
+        "endedAt": "2026-11-01T07:26:28.7740225Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "inputsUnchanged": true,
+        "changedInputs": [],
+        "sourceCount": 828,
+        "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\build-desktop-6"
+      },
+      "buildProcessArtifact": {
+        "path": "build-desktop-6/process.json",
+        "sha256": "3670046e1f18d74bfe695c72616f4d3e496a262cc6f20ff4a9a6b5a4c15e38d4",
+        "bytes": 392
+      },
+      "buildLogArtifact": {
+        "path": "build-desktop-6/unity.log",
+        "sha256": "1b9b9706f5ae6442c4a3034ae04722a6e6b115ec086a5a404d346085bc169515",
+        "bytes": 46723
+      },
+      "buildSourceBefore": {
+        "path": "build-desktop-6/source-before.json",
+        "sha256": "5795e5bfbedc67b2719c9bfc7b55dda26de1ac4779e437391a227327d35d7895",
+        "bytes": 104806
+      },
+      "buildSourceAfter": {
+        "path": "build-desktop-6/source-after.json",
+        "sha256": "5795e5bfbedc67b2719c9bfc7b55dda26de1ac4779e437391a227327d35d7895",
+        "bytes": 104806
+      }
+    },
+    "reusedNativeAssertions": 943,
+    "latestExecutedNativeAssertions": 369,
+    "supersededPassingSuitesNotAddedToTotal": [
+      {
+        "name": "native-round6-2",
+        "assertions": 271,
+        "counterFields": {
+          "hudAssertions": 14,
+          "hubAssertions": 58,
+          "audioAssertions": 34,
+          "sacrificeAssertions": 107,
+          "discoverAssertions": 58
+        },
+        "namedChecks": 0,
+        "passed": true,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound6Validation.Run",
+          "pid": 35748,
+          "startedAt": "2026-11-01T06:11:01.0241405Z",
+          "endedAt": "2026-11-01T06:11:30.3208286Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round6-2"
+        },
+        "processArtifact": {
+          "path": "native-round6-2/process.json",
+          "sha256": "8b48547bcd1dc94795b4759655c0bc739b24f12e913286c67e7f0fb7796b07a0",
+          "bytes": 400
+        },
+        "resultArtifact": {
+          "path": "native-round6-2/result.json",
+          "sha256": "2f419874cd15224bd5ef68dd715dc38ee2c37f49d93784970ddb22cec86ac0a0",
+          "bytes": 381
+        },
+        "logArtifact": {
+          "path": "native-round6-2/unity.log",
+          "sha256": "3483b2c057bab0d752dcde757d92f6d4b6e20c5be456c493fb199e892ee665df",
+          "bytes": 103054
+        },
+        "sourceBefore": {
+          "path": "native-round6-2/source-before.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-round6-2/source-after.json",
+          "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117",
+          "bytes": 104806
+        },
+        "actualInputsExactlyMatchAliasOnlyFreeze": true,
+        "scope": "Isolated real native components and production commands with controlled fixtures and constructed UI events; no OS hardware input, natural unassisted play, whole-frame allocation or FPS claim."
+      },
+      {
+        "name": "native-round6-3",
+        "assertions": 367,
+        "counterFields": {
+          "hudAssertions": 14,
+          "hubAssertions": 58,
+          "audioAssertions": 34,
+          "sacrificeAssertions": 107,
+          "discoverAssertions": 154
+        },
+        "namedChecks": 0,
+        "passed": true,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound6Validation.Run",
+          "pid": 35444,
+          "startedAt": "2026-11-01T06:51:02.9619523Z",
+          "endedAt": "2026-11-01T06:51:51.9440243Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round6-3"
+        },
+        "processArtifact": {
+          "path": "native-round6-3/process.json",
+          "sha256": "29d7d73bda0a72194e807632efdab0fb4bac70b97154ec88308702a74864b1b2",
+          "bytes": 400
+        },
+        "resultArtifact": {
+          "path": "native-round6-3/result.json",
+          "sha256": "764cef6b7c07747d53c41bd25a278fc18c0ef5d019f072b8398cd7d89ca33093",
+          "bytes": 382
+        },
+        "logArtifact": {
+          "path": "native-round6-3/unity.log",
+          "sha256": "4f46c95a91c2b60eb1b287a5e80edba3335ca768c4d8becdcc69c1f6d0a4be71",
+          "bytes": 106377
+        },
+        "sourceBefore": {
+          "path": "native-round6-3/source-before.json",
+          "sha256": "bc15e1f40b4765212d8ffc616ba6ac0e8794ff76c59b236777e1508264ce2eb2",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-round6-3/source-after.json",
+          "sha256": "bc15e1f40b4765212d8ffc616ba6ac0e8794ff76c59b236777e1508264ce2eb2",
+          "bytes": 104806
+        },
+        "actualInputsExactlyMatchLatestFreeze": false,
+        "actualInputsExactlyMatchAliasOnlyFreeze": false,
+        "scope": "Isolated real native components and production commands with controlled fixtures and constructed UI events; no OS hardware input, natural unassisted play, whole-frame allocation or FPS claim."
+      },
+      {
+        "name": "native-round6-4",
+        "assertions": 367,
+        "counterFields": {
+          "hudAssertions": 14,
+          "hubAssertions": 58,
+          "audioAssertions": 34,
+          "sacrificeAssertions": 107,
+          "discoverAssertions": 154
+        },
+        "namedChecks": 0,
+        "passed": true,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound6Validation.Run",
+          "pid": 37412,
+          "startedAt": "2026-11-01T07:11:01.3483311Z",
+          "endedAt": "2026-11-01T07:11:27.8823464Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round6-4"
+        },
+        "processArtifact": {
+          "path": "native-round6-4/process.json",
+          "sha256": "b5fa35ebb6c8ead2301329b3c9c4157ae48a4a616700f110e0f71313769bab63",
+          "bytes": 400
+        },
+        "resultArtifact": {
+          "path": "native-round6-4/result.json",
+          "sha256": "764cef6b7c07747d53c41bd25a278fc18c0ef5d019f072b8398cd7d89ca33093",
+          "bytes": 382
+        },
+        "logArtifact": {
+          "path": "native-round6-4/unity.log",
+          "sha256": "834f811dd1bc21c4d005c09571a73ef05870965fcab42411166b70f32516ff1c",
+          "bytes": 106447
+        },
+        "sourceBefore": {
+          "path": "native-round6-4/source-before.json",
+          "sha256": "1ce32f20ef975e53ebabe3cef8fcf1d8fbc59128db81ec038c9c23de3e019f2e",
+          "bytes": 104806
+        },
+        "sourceAfter": {
+          "path": "native-round6-4/source-after.json",
+          "sha256": "1ce32f20ef975e53ebabe3cef8fcf1d8fbc59128db81ec038c9c23de3e019f2e",
+          "bytes": 104806
+        },
+        "actualInputsExactlyMatchLatestFreeze": false,
+        "actualInputsExactlyMatchAliasOnlyFreeze": false,
+        "scope": "Isolated real native components and production commands with controlled fixtures and constructed UI events; no OS hardware input, natural unassisted play, whole-frame allocation or FPS claim."
+      }
+    ],
+    "latestCompleteSnapshotReranAllSuites": false,
+    "latestSupplementalSnapshotPassed": true
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "sha": "d8f40d78a076e365f9c3993023f35669e32b1983",
+  "codeAndChecksCommit": "eabc0ccdb87b6086809acc37e8efba4a7aaf501c",
+  "nativeDiffFromCodeCommit": false,
+  "paths": [
+    "搜打撤/docs/PARALLEL-REGISTRY.md",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/README.md",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/final-summary.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/README.md",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/doctor-worktree.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/github-actions-source.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/independent-review.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/index-summary.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/local-commits.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/readiness.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/source-push.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/staged-plan.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/staged-result.json"
+  ],
+  "files": [
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/README.md",
+      "bytes": 4150,
+      "sha256": "b379e96553643a86b212ddbd2b2ddf877d94f9b97d6d300cad022bff4510c5f5"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/final-summary.json",
+      "bytes": 7581,
+      "sha256": "d0b33f5a8b8623207a4fb054a30ed7b2f0da23296635b909eb80d7bc84dc16a4"
+    },
+    {
+      "path": "搜打撤/docs/PARALLEL-REGISTRY.md",
+      "bytes": 655393,
+      "sha256": "32f545cdec3d81ea822f754a9f626397267fab07c4164d55e1b5fc2279442751"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/README.md",
+      "bytes": 1136,
+      "sha256": "098d6f7e8481534bc4647ffe6805f5375f9bd4b463eabbbf761d54d1eb241afc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/index-summary.json",
+      "bytes": 7523,
+      "sha256": "723a7fe967c817cef430992f9e102cc94ba932e961878d3266913bbb14839c5b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/readiness.json",
+      "bytes": 1125,
+      "sha256": "213f82c766ec37f98bdb98cd468cc9974d7802112cd468afbda42ffdacb44ae8"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/doctor-worktree.json",
+      "bytes": 12222,
+      "sha256": "2d18c693532a19cb45dcfb78418ee8a217bd678c16ef86858012931385b90ad7"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/staged-plan.json",
+      "bytes": 33534,
+      "sha256": "b7a75ca77ea961a7392664deb82c54d797160e4ec0617aa155b27a93d8862ca4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/staged-result.json",
+      "bytes": 6167,
+      "sha256": "ded631c60cc1de61d3bb50c17395f5b0002082cbd995f06d3c04d69e92ebdbaa"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/local-commits.json",
+      "bytes": 223,
+      "sha256": "c3622ec16e8666223262fd2cb676c52217c882dabfe539520e2326cb3edc81e3"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/github-actions-source.json",
+      "bytes": 36,
+      "sha256": "a2790a384d7d281e7395679000c35d27768d89dbd7052f725b8f4688beb59915"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/source-push.json",
+      "bytes": 707,
+      "sha256": "f84f555297a41767b46a27a0a70ae7ad87e9b35980902fe412a6b287e9c83a45"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-11-01-unity-parity-round5/publication/independent-review.json",
+      "bytes": 674,
+      "sha256": "1d42c63863dfafa92c15daa66398df0f6c78594e9c7eebc7e027529e4c168292"
+    }
+  ]
+}

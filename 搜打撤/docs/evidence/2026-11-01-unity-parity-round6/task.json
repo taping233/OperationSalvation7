@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "unity-parity-round6",
+  "date": "2026-11-01",
+  "owner": "Friday",
+  "goal": "继续对照完整玩家流程及公共UI，修正可证明差异与真实重复计算绘制，统一改完后集中验收并同步已完成源码",
+  "paths": [
+    "docs/evidence/2026-11-01-unity-parity-round6"
+  ],
+  "doneWhen": [
+    "活跃链对照指出本轮真实差异、修复依据及有意改进边界",
+    "本轮查证问题完成修复与冗余优化，相关说明跟随现行行为",
+    "全部改完冻源后通过对应领域与原生及必要当前窗口检查并登记指纹、边界和发布结果"
+  ],
+  "stage": "doing",
+  "checks": [],
+  "unverified": [],
+  "updatedAt": "2026-11-01T04:12:23.381Z"
+}

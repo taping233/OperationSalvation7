@@ -1,0 +1,2105 @@
+{
+  "acquisition": "Replay frozen entrypoints from process receipts using run_native_check.ps1 in fresh output directories. Standalone: run_hidden_player.ps1 -TransparentCompositor at the current physical primary desktop size. Large raw evidence and images remain local; 1920 render-target diagnostics are not multi-size acceptance.",
+  "artifacts": [
+    {
+      "path": "native-film-regression/altar-disturb-middle.png",
+      "bytes": 684053,
+      "sha256": "f87ba4ddf84e670f0d045a0d84470ef85298bf4f0bff14717bd58608a06ef05f"
+    },
+    {
+      "path": "native-film-regression/altar-encounter.png",
+      "bytes": 2033923,
+      "sha256": "67a48ab6989c221df9c2037a3aaf2852236ae3726b62e117ea5294df7ace54ee"
+    },
+    {
+      "path": "native-film-regression/boss-deck-after-skip.png",
+      "bytes": 673788,
+      "sha256": "4aaf6300d6f74507d48d93490f1fa42433cd2f8885e44ab5f0045473ad0f663e"
+    },
+    {
+      "path": "native-film-regression/boss-gate-confirmation.png",
+      "bytes": 753599,
+      "sha256": "331fd68b11e81fa7714f400d6f417ce2700740c3b2f3384dc7a24339ae3d9001"
+    },
+    {
+      "path": "native-film-regression/boss-gate-save-failed.png",
+      "bytes": 800360,
+      "sha256": "e3eb3809b2af9b9808ac228f03619cc556766b8da54d20600afbd79f90308564"
+    },
+    {
+      "path": "native-film-regression/boss-pressure-early.png",
+      "bytes": 301528,
+      "sha256": "31b100437f5e195190a0f9b214a3c233977c97bbe71380693b69bddce90d6b20"
+    },
+    {
+      "path": "native-film-regression/boss-pressure-middle.png",
+      "bytes": 626743,
+      "sha256": "c16f97eb77023162691c97c0f2e182693c99a30e660fd1478f464778d1cace22"
+    },
+    {
+      "path": "native-film-regression/door-destination.png",
+      "bytes": 3023045,
+      "sha256": "f2bed8e516ed5b6d8c66734dbc8ccfa0638a4dff302e71864b0d5d56f1e4d859"
+    },
+    {
+      "path": "native-film-regression/event-encounter-ev19-recode.png",
+      "bytes": 1862160,
+      "sha256": "22b473e85f54c9b08d6ed7b5ebf1ec15307d46569a81cdfc61d1cec3dbf2333c"
+    },
+    {
+      "path": "native-film-regression/event-encounter-tt6-chestdraw.png",
+      "bytes": 1562470,
+      "sha256": "64b8ac041615a8045af62aa3121cd1fb0fc1d28e3fb3f7c20c641dc4c6cfc06a"
+    },
+    {
+      "path": "native-film-regression/event-encounter-tt6-mystery.png",
+      "bytes": 1946527,
+      "sha256": "cc2782baf7e3ce2e7b1aa0b2c5db210a869b035eaa2e69099a6f76e86a7e7bea"
+    },
+    {
+      "path": "native-film-regression/passage-early.png",
+      "bytes": 858863,
+      "sha256": "1afd169331f9b3728d76c23049237c4abba12ccbc186695c128cbc2d2149d8aa"
+    },
+    {
+      "path": "native-film-regression/passage-middle-caption.png",
+      "bytes": 889820,
+      "sha256": "395dfdc0b32983fcf2afedc6ab62223283c73e6d0d90bb329fd5d94dac20e3d8"
+    },
+    {
+      "path": "native-film-regression/photo-destination.png",
+      "bytes": 1817427,
+      "sha256": "2c7c1e1b502f7ec5ee24611dc43b553dca18e7b1b6a8be1e929e43903f6d464b"
+    },
+    {
+      "path": "native-film-regression/photo-develop-early.png",
+      "bytes": 419881,
+      "sha256": "1c3b8296c347ca34402eca0046a3098ec0578196caf66fadf87983ae3f381c35"
+    },
+    {
+      "path": "native-film-regression/photo-develop-middle.png",
+      "bytes": 577603,
+      "sha256": "1e9e205c18aee4e0e847bb920834f9f2414c4c3c2e2b965187681cd1def90325"
+    },
+    {
+      "path": "native-journey/journey-extraction.png",
+      "bytes": 1190630,
+      "sha256": "da4f3934636cecfd2fa3108aed7fe575e850e01d536d44d86151c75a9b6c3a8d"
+    },
+    {
+      "path": "native-journey/journey-page-AltarRitualScreen-3.png",
+      "bytes": 2047863,
+      "sha256": "64ab8b8883ee4c67097748a9201bdf558353e7030a237578e836c528991ffda4"
+    },
+    {
+      "path": "native-journey/journey-page-BattleScreen-0.png",
+      "bytes": 1685433,
+      "sha256": "1ec48bb614b3332e81c85dd1ae224b3f5b2ed4f5bee2dd9325c3fca65ae89384"
+    },
+    {
+      "path": "native-journey/journey-page-BattleScreen-1.png",
+      "bytes": 1816604,
+      "sha256": "b062533962920248902cb2c777d0c876eb9bd1f24fac754a607baae73d4e700a"
+    },
+    {
+      "path": "native-journey/journey-page-BattleScreen-2.png",
+      "bytes": 1656243,
+      "sha256": "08a9de3cde5c2ddc857b7e144389341ed2613f11b8ed66991721eea73fcd06b5"
+    },
+    {
+      "path": "native-journey/journey-page-BattleScreen-3.png",
+      "bytes": 1763010,
+      "sha256": "b0b1becc781f8e2113533c1cc31be1e5a4602078654b28efed89fedf26c9354d"
+    },
+    {
+      "path": "native-journey/journey-page-ChestOpenScreen-0.png",
+      "bytes": 1601468,
+      "sha256": "fef8fe3874cadd00c58a20ed4fa34c3911e62f5c9d5b90437ebe57844c5e85e4"
+    },
+    {
+      "path": "native-journey/journey-page-ChestOpenScreen-1.png",
+      "bytes": 1700414,
+      "sha256": "f40a9a043199ea5a64889984cb36b6c9a26b5ea11f400b64640cb9e853e5806f"
+    },
+    {
+      "path": "native-journey/journey-page-ChestOpenScreen-2.png",
+      "bytes": 1951877,
+      "sha256": "4634a1c617cace75ae53b282e45808861ed2abc286d7b9cfc5445590a000e2a9"
+    },
+    {
+      "path": "native-journey/journey-page-ChestOpenScreen-3.png",
+      "bytes": 1896381,
+      "sha256": "8dc28c7300f2c98ea8aacc38a1b5455c6792b3c42001ab23a826d9f3045e6d8f"
+    },
+    {
+      "path": "native-journey/journey-page-CurrentBossGateScreen-3.png",
+      "bytes": 756263,
+      "sha256": "446a2da84e817b907e428f4ebd51bc9535a802bd5db37d5075127ffd2841fb74"
+    },
+    {
+      "path": "native-journey/journey-page-DeckSelectionPanel-3.png",
+      "bytes": 1007995,
+      "sha256": "8d08ada8894db7b314f4bdc3cfbede51bb5f75d4797960e9c34d58e5b28ed54f"
+    },
+    {
+      "path": "native-journey/journey-page-DoorModal-0.png",
+      "bytes": 3023732,
+      "sha256": "3f5799e30face591c8c81a4123e3246887ab9c10ef2322aa19a7703395ce4f30"
+    },
+    {
+      "path": "native-journey/journey-page-DoorModal-1.png",
+      "bytes": 3024100,
+      "sha256": "ed8bf6b0c4687046c8c61e961f4ae1b1b5a942c339283ba153f3f725e30ab6dc"
+    },
+    {
+      "path": "native-journey/journey-page-DoorModal-2.png",
+      "bytes": 3024521,
+      "sha256": "d310853be97ae635b7fcf7669e8dc83653951ad53a981b7afec439406bed7fcd"
+    },
+    {
+      "path": "native-journey/journey-page-EmergencyModal-2.png",
+      "bytes": 1333373,
+      "sha256": "4c5ce88f8c472fdf1862f0691fc67238277ac83c3533d1e86bad196c32d59400"
+    },
+    {
+      "path": "native-journey/journey-page-EntrySupplyScreen-1.png",
+      "bytes": 1601817,
+      "sha256": "3bf814cb1f8ca56da8c847d21341a297f446750a1039de87b96dbd44b820180f"
+    },
+    {
+      "path": "native-journey/journey-page-EntrySupplyScreen-2.png",
+      "bytes": 1601599,
+      "sha256": "e1f5297866104393959910dad25b2c407f87212b8d0763aafd61226e5b2b8e30"
+    },
+    {
+      "path": "native-journey/journey-page-EntrySupplyScreen-3.png",
+      "bytes": 1720870,
+      "sha256": "f0cc88ac7a2c9adfe0aad223b52e24be73cec74c2b8437770d9fd58bdb12c943"
+    },
+    {
+      "path": "native-journey/journey-page-EventDialogScreen-1.png",
+      "bytes": 2444114,
+      "sha256": "39bba164d010d19be3dd2d4c890fbb407f2ffa44b1dde7e164f233ff65be6558"
+    },
+    {
+      "path": "native-journey/journey-page-EventDialogScreen-2.png",
+      "bytes": 1866007,
+      "sha256": "55da91dd0bed2bd2d4316e747e816501d96ffe38493899ad2268647c11e2aba3"
+    },
+    {
+      "path": "native-journey/journey-page-EventDialogScreen-3.png",
+      "bytes": 1564396,
+      "sha256": "10ef449b073c9c23edc1d5a1e03662f73502bdddae7f7b7ca2b8f8337fd1ee00"
+    },
+    {
+      "path": "native-journey/journey-page-FinalExtractionModal-3.png",
+      "bytes": 1328465,
+      "sha256": "207096e1666637494c3129300d348a041fae4d89a1801d1cf175a87ad867c1c0"
+    },
+    {
+      "path": "native-journey/journey-page-FireRestScreen-0.png",
+      "bytes": 1043595,
+      "sha256": "eb5a18e5da272e3bd176a0c4762d07eb5b886c238498eb5851c45016cf7363f9"
+    },
+    {
+      "path": "native-journey/journey-page-FireRestScreen-2.png",
+      "bytes": 1044665,
+      "sha256": "be423c9ff33c5c181dea278ca702467cd4f77e0cee2e71e34333a058e45e1730"
+    },
+    {
+      "path": "native-journey/journey-page-ShopScreen-3.png",
+      "bytes": 2700473,
+      "sha256": "96a51f44bb91078b41aaeeea3bae2ef42db4fa94d6b79b2917c90fbc793dc059"
+    },
+    {
+      "path": "native-journey/journey-returned-base.png",
+      "bytes": 1795214,
+      "sha256": "adeb1b6ee9f6f651ef9800a2b07b6240397981ee4078497854d6a5d11617323a"
+    },
+    {
+      "path": "native-journey/journey-settlement.png",
+      "bytes": 677615,
+      "sha256": "d532c90c359507c4cce44c4d2b17e5bc950e278fe729ec7c51ff69f7541b34b0"
+    },
+    {
+      "path": "native-receipts/receipts-abandon-complete.png",
+      "bytes": 646594,
+      "sha256": "77c4c06a523ceb8180f420418509ddd65ef4c07ebf0476023fbb383711702e12"
+    },
+    {
+      "path": "native-receipts/receipts-abandon-save-failed.png",
+      "bytes": 552562,
+      "sha256": "94cc8a796445c5af1a90a716ace6ce9787dd8b732e92189db6be0b3ca0586c28"
+    },
+    {
+      "path": "native-receipts/receipts-chest-reward.png",
+      "bytes": 1743925,
+      "sha256": "66fd8b95ebefbd3fafd8828f16833b9b14721fb8fa14177d17bdbb231cee3b2b"
+    },
+    {
+      "path": "native-receipts/receipts-death.png",
+      "bytes": 434112,
+      "sha256": "c6fc55c5f1afdb21126637cfb6d4227ec871cd16c75ee7d7e0a19ae7bf0e68be"
+    },
+    {
+      "path": "native-receipts/receipts-event-after-choice.png",
+      "bytes": 1020851,
+      "sha256": "fb5bed64fd1825b00411eb1d59fc06649456638a888f3aa3b933287cc15a26bb"
+    },
+    {
+      "path": "native-receipts/receipts-event.png",
+      "bytes": 2439702,
+      "sha256": "b069cb4aca9ecaf000680848928158c6aac22e61ca507ce809fc3096632c0544"
+    },
+    {
+      "path": "native-receipts/receipts-extract-complete.png",
+      "bytes": 678728,
+      "sha256": "c334e4af5cc2bc274de6eb991aff88a3c19eb83d8412da8eed43ca44562b79f2"
+    },
+    {
+      "path": "native-receipts/receipts-fire-complete.png",
+      "bytes": 1104915,
+      "sha256": "4d8774560727b4e97087531455dcfaa1a0d9ee5e58d9aba93a0ec0d2ce3f2dec"
+    },
+    {
+      "path": "native-receipts/receipts-fire.png",
+      "bytes": 1042427,
+      "sha256": "f580d310b158fc23e7b6d77bebf664042f2129d5c43b28c24454754205496a35"
+    },
+    {
+      "path": "native-receipts/receipts-reward-complete.png",
+      "bytes": 1686716,
+      "sha256": "54d3d3c61ea29181b78454e89c5474b81c6d6c585e3aa6ff898774ca1a632f4c"
+    },
+    {
+      "path": "native-receipts/receipts-sort-before.png",
+      "bytes": 918550,
+      "sha256": "f2c32104aa0c95b6568261fc3b7e23a020eb095f632c4d8035f41e8c7ceeae12"
+    },
+    {
+      "path": "native-receipts/receipts-sort-finish-save-failed.png",
+      "bytes": 714011,
+      "sha256": "e87c66eae78b1ad48123fd6fe3a736a173d5e5e9ab9cafc6fefa4627beb76f4e"
+    },
+    {
+      "path": "native-receipts/receipts-surrender-complete.png",
+      "bytes": 419038,
+      "sha256": "eab40982ad0ba8beb55d7667f54c58d664f1d88eb5a3d767c3ec65f3fdcd3f63"
+    },
+    {
+      "path": "native-receipts/receipts-surrender-save-failed.png",
+      "bytes": 1216981,
+      "sha256": "43c346fa4d2283ed463a6d043019cf29b5e799e893118ebaf50713b1a09cd46a"
+    },
+    {
+      "path": "native-receipts/receipts-terminal-return-base.png",
+      "bytes": 486966,
+      "sha256": "0feb2a1a56c7bf4cb0562d810f582f8c5f440669fa5e2cbc243ffe518bdeaa91"
+    },
+    {
+      "path": "player/player-altar.png",
+      "bytes": 2755040,
+      "sha256": "7f10d90487082386b9fd14dbc770c9e4ff3b4f5182fa457b7c5d54c34348fc58"
+    },
+    {
+      "path": "player/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "player/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "player/player-guide-0.png",
+      "bytes": 1061591,
+      "sha256": "f20d643c913ff487f1a530588effedb861b6ea15045e3e072e9e295ffb9b8686"
+    },
+    {
+      "path": "player/player-guide-1.png",
+      "bytes": 705059,
+      "sha256": "cd9ea4717cd5420adcf995ab83cd29bc0abd7fc2e5ffc225ec2bfbdc7e9f71c1"
+    },
+    {
+      "path": "player/player-guide-2.png",
+      "bytes": 1066216,
+      "sha256": "b350b445b5316a6036599b6ab9ed00614c330beab886a254a0fc23b724c3fce8"
+    },
+    {
+      "path": "player/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "player/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "player/player-guide-5.png",
+      "bytes": 740852,
+      "sha256": "f908ca336c7dcd8f2327afc2177765418bb0534fee51379a0b9450b7e17312c3"
+    },
+    {
+      "path": "player/player-guide-in-run.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "player/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "player/player-guide-more-4.png",
+      "bytes": 778498,
+      "sha256": "f64c23c3fc41c81fb1f3558af01b49e7fc87408bb235b2472919a0dc84df1b69"
+    },
+    {
+      "path": "player/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "player/player-music-load-failed.png",
+      "bytes": 715457,
+      "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6"
+    },
+    {
+      "path": "player/player-music-recovered.png",
+      "bytes": 699036,
+      "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b"
+    },
+    {
+      "path": "player/player-music-retry-kept.png",
+      "bytes": 715436,
+      "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44"
+    },
+    {
+      "path": "player/player-photo-export-cards.png",
+      "bytes": 1169558,
+      "sha256": "4cfa339d9e11979b6b9a164e44183d43046649d59d43d41471cba3832ddc9f65"
+    },
+    {
+      "path": "player/player-photo-export-notes.png",
+      "bytes": 1350774,
+      "sha256": "0d74b3bda51cd431177148f609c6cc0f91fe61ff14dc9b88c2d6df72616f6a39"
+    },
+    {
+      "path": "player/player-photo-export-returned.png",
+      "bytes": 2492008,
+      "sha256": "8257d581a2b863cf8f9a4a3c7f347b89564ce9c43bc25278d4c4d1d0123dc4b4"
+    },
+    {
+      "path": "player/player-photo-export-tools.png",
+      "bytes": 2491991,
+      "sha256": "bb6d16d269576e834bab8785fb85fcc60c962ecbfef90014acb582a83868b788"
+    },
+    {
+      "path": "player/player-photo-export-written.png",
+      "bytes": 1202943,
+      "sha256": "612b7d84e43170551fa86b43e78ab603aafdd0e50c9c264d6213387017a2992b"
+    },
+    {
+      "path": "player/player-photo.png",
+      "bytes": 2481617,
+      "sha256": "2ed6a8a3bf769e2b189552e729ecb6b654cccdd156de96c3b96cbbe5baa260cc"
+    },
+    {
+      "path": "player/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "player/player-startup.png",
+      "bytes": 829488,
+      "sha256": "1336ec9f794724f04c18a59b75662b800f852a674c539334435b63a332b44f73"
+    },
+    {
+      "path": "player/player-title.png",
+      "bytes": 3427080,
+      "sha256": "d88d43e7d9e2ec523ad2b1cea5ad593fbaa52d6304c3dbb262b2b413f5f939a2"
+    },
+    {
+      "path": "player/result.json",
+      "bytes": 2381166,
+      "sha256": "18766a5a3a0a459ce183c9df00592dc6c7fa9fbbb47b8ad36e961ebf35f5b316"
+    },
+    {
+      "path": "player/trace.json",
+      "bytes": 2380370,
+      "sha256": "6870aa1d5695f6f0e196b5a17b020507bbed378d5b19a82ea731b691817396a8"
+    },
+    {
+      "path": "player-2/player-altar.png",
+      "bytes": 2755015,
+      "sha256": "cb0a26c1e453af4c9bb556c23148d6d4c415aa383daaa8cfce383673f9021dba"
+    },
+    {
+      "path": "player-2/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "player-2/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "player-2/player-emergency-entry.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-2/player-guide-0.png",
+      "bytes": 1061590,
+      "sha256": "a1bc3754782a336080914fce48d5dd287e6f822abcb9f2f54482ccc79544e1fe"
+    },
+    {
+      "path": "player-2/player-guide-1.png",
+      "bytes": 705062,
+      "sha256": "33e059e6229d7bfef98221bc205c789db2236a2f5eb26028d9e3619d6977dd4d"
+    },
+    {
+      "path": "player-2/player-guide-2.png",
+      "bytes": 1066217,
+      "sha256": "9fce6829d63309d0e6013c50d761f53f4dd072fd992702eb44961c294c2646d0"
+    },
+    {
+      "path": "player-2/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "player-2/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "player-2/player-guide-5.png",
+      "bytes": 740852,
+      "sha256": "f908ca336c7dcd8f2327afc2177765418bb0534fee51379a0b9450b7e17312c3"
+    },
+    {
+      "path": "player-2/player-guide-in-run.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "player-2/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "player-2/player-guide-more-4.png",
+      "bytes": 778498,
+      "sha256": "f64c23c3fc41c81fb1f3558af01b49e7fc87408bb235b2472919a0dc84df1b69"
+    },
+    {
+      "path": "player-2/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "player-2/player-music-load-failed.png",
+      "bytes": 715457,
+      "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6"
+    },
+    {
+      "path": "player-2/player-music-recovered.png",
+      "bytes": 699036,
+      "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b"
+    },
+    {
+      "path": "player-2/player-music-retry-kept.png",
+      "bytes": 715436,
+      "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44"
+    },
+    {
+      "path": "player-2/player-photo-export-cards.png",
+      "bytes": 1169558,
+      "sha256": "4cfa339d9e11979b6b9a164e44183d43046649d59d43d41471cba3832ddc9f65"
+    },
+    {
+      "path": "player-2/player-photo-export-notes.png",
+      "bytes": 1350774,
+      "sha256": "0d74b3bda51cd431177148f609c6cc0f91fe61ff14dc9b88c2d6df72616f6a39"
+    },
+    {
+      "path": "player-2/player-photo-export-returned.png",
+      "bytes": 2491628,
+      "sha256": "2a83c1d06e246f9df058fa6ed2e4507e220b0480efece328ca464610e51c05d5"
+    },
+    {
+      "path": "player-2/player-photo-export-tools.png",
+      "bytes": 2492398,
+      "sha256": "c51af52cee40e5713a5cf263f004eeb60773dee9411f96755da46c638417516f"
+    },
+    {
+      "path": "player-2/player-photo-export-written.png",
+      "bytes": 1203153,
+      "sha256": "b8a3fd24c43bbcbe4d756d3bd34da9958d2c4f9cd9c5977d8de545454ddd5659"
+    },
+    {
+      "path": "player-2/player-photo.png",
+      "bytes": 2481655,
+      "sha256": "134b6b10f89eb6b3fb46ff1ed812fe23ce179cc60efa684004ed6a45e3482a1f"
+    },
+    {
+      "path": "player-2/player-sacrifice-candidates.png",
+      "bytes": 1941815,
+      "sha256": "981bd05dfbb4d2c4ab96f43f44fc7ee0163807f7f3988fb8991ca0d8f8cf7fbb"
+    },
+    {
+      "path": "player-2/player-sacrifice-returned.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-2/player-sacrifice-selected.png",
+      "bytes": 1939428,
+      "sha256": "6ce4bba461fed2a2b17e2ba92fcf925d852ea9823067376626e54ab61937336d"
+    },
+    {
+      "path": "player-2/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "player-2/player-startup.png",
+      "bytes": 830235,
+      "sha256": "f5b6d66b68b9173e3b91c349712ae02366cce3c8c5ac5b67251b19164697d80f"
+    },
+    {
+      "path": "player-2/player-title.png",
+      "bytes": 3428369,
+      "sha256": "161812bcb2f3152c690a1b1dcc6bbc1e9858f1cf4a3a0dd6feafadd964561c07"
+    },
+    {
+      "path": "player-2/result.json",
+      "bytes": 2627165,
+      "sha256": "379845c336695352048aaf4c88a2767acbb8b1fde643197bcbfb478cfd8ec4b5"
+    },
+    {
+      "path": "player-2/trace.json",
+      "bytes": 2626196,
+      "sha256": "55d29ecdfb19124577a211688c1cedef721e16a92a4481472facf85af2b380df"
+    },
+    {
+      "path": "player-3/player-altar.png",
+      "bytes": 2755033,
+      "sha256": "f04cc4b06eacece014686e9808e795788f57c14b445746540ea558e0694d2f07"
+    },
+    {
+      "path": "player-3/player-battle-pile-reader.png",
+      "bytes": 2000309,
+      "sha256": "2658498dfa384fec92c7f0470277b31d1bc2130feefeab19b905638c96001d5c"
+    },
+    {
+      "path": "player-3/player-battle-pile-return.png",
+      "bytes": 1852932,
+      "sha256": "70065597507933771177a11305b324e542acd0193c1db0a044c8ef7a71dc7189"
+    },
+    {
+      "path": "player-3/player-battle-pile.png",
+      "bytes": 1852932,
+      "sha256": "70065597507933771177a11305b324e542acd0193c1db0a044c8ef7a71dc7189"
+    },
+    {
+      "path": "player-3/player-battle.png",
+      "bytes": 1844883,
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5"
+    },
+    {
+      "path": "player-3/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "player-3/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "player-3/player-discover-bottom.png",
+      "bytes": 780900,
+      "sha256": "2c9ce6502556dea68383e22d21a97c7104bf049b4132c4d21ea8c11b18da798c"
+    },
+    {
+      "path": "player-3/player-discover-cancel-return.png",
+      "bytes": 1675324,
+      "sha256": "c2e7adb89055ab7652c78885955fff8b2584090d161e751cc4285a759fa8469b"
+    },
+    {
+      "path": "player-3/player-discover-confirm-return.png",
+      "bytes": 1842442,
+      "sha256": "4ab52ea293aaa876cb0c65beefdd778c7303efa3c51b0a706c9e02178f740229"
+    },
+    {
+      "path": "player-3/player-discover-preview-cancel.png",
+      "bytes": 1854610,
+      "sha256": "00d5bae512909b63c2b2eb007e0ebf5a19b62320552609cfd82f01bb1d05d3d2"
+    },
+    {
+      "path": "player-3/player-discover-preview-confirm.png",
+      "bytes": 1905675,
+      "sha256": "4e6c74d28148a7403cd04a4f9ee982019a1d7f08fc4ab1ce2e82541cc2c72c31"
+    },
+    {
+      "path": "player-3/player-discover-preview.png",
+      "bytes": 923490,
+      "sha256": "86849ff8a3aba01243e3a2a7cef26088d352a07459165ba848af78d0884fdee8"
+    },
+    {
+      "path": "player-3/player-discover-selected.png",
+      "bytes": 781446,
+      "sha256": "d46cb69606609b0f120a63065ce98dc5d0bb7f9be5e009fb85d9e65c8434f04b"
+    },
+    {
+      "path": "player-3/player-door.png",
+      "bytes": 4098051,
+      "sha256": "63ea55e6f23cb9e3f8bcbd23bdc78f814402f212c28a31b647f36076053adb9e"
+    },
+    {
+      "path": "player-3/player-emergency-entry.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-3/player-extraction.png",
+      "bytes": 1342391,
+      "sha256": "311120a170726ae4250cf9d0a6704f035bb82019d4a963736c78d39d19c59318"
+    },
+    {
+      "path": "player-3/player-formation-rules.png",
+      "bytes": 1176416,
+      "sha256": "8bfa0703a8e5e2fda44843352fdc177a02625c94abb40200690754efe6ed0d50"
+    },
+    {
+      "path": "player-3/player-formation.png",
+      "bytes": 1271868,
+      "sha256": "353faf435d76711674eb941deb4e07c29f00307bb6801e76e9f75c6e8ede38a2"
+    },
+    {
+      "path": "player-3/player-fx-atlas-specimen.png",
+      "bytes": 2517404,
+      "sha256": "c8166b04bc06dda652b99da05abda9b8499f6347219d7dac675c18e0399d8604"
+    },
+    {
+      "path": "player-3/player-guide-0.png",
+      "bytes": 1061591,
+      "sha256": "f20d643c913ff487f1a530588effedb861b6ea15045e3e072e9e295ffb9b8686"
+    },
+    {
+      "path": "player-3/player-guide-1.png",
+      "bytes": 705059,
+      "sha256": "cd9ea4717cd5420adcf995ab83cd29bc0abd7fc2e5ffc225ec2bfbdc7e9f71c1"
+    },
+    {
+      "path": "player-3/player-guide-2.png",
+      "bytes": 1066216,
+      "sha256": "b350b445b5316a6036599b6ab9ed00614c330beab886a254a0fc23b724c3fce8"
+    },
+    {
+      "path": "player-3/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "player-3/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "player-3/player-guide-5.png",
+      "bytes": 740852,
+      "sha256": "f908ca336c7dcd8f2327afc2177765418bb0534fee51379a0b9450b7e17312c3"
+    },
+    {
+      "path": "player-3/player-guide-in-run.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "player-3/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "player-3/player-guide-more-4.png",
+      "bytes": 778498,
+      "sha256": "f64c23c3fc41c81fb1f3558af01b49e7fc87408bb235b2472919a0dc84df1b69"
+    },
+    {
+      "path": "player-3/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "player-3/player-hand-material-picked.png",
+      "bytes": 2340385,
+      "sha256": "4f2b9feb612e2664a77f9da41dba7d0fe6b650d3da7334c7a9c1ba07a1c8cd18"
+    },
+    {
+      "path": "player-3/player-hand-material.png",
+      "bytes": 2301373,
+      "sha256": "65df6d844a2fc8cc06440f2ac071ee6eebe6cd53d528adb0cf865ba8521180fb"
+    },
+    {
+      "path": "player-3/player-hub-conversion-overflow.png",
+      "bytes": 1155863,
+      "sha256": "83e60ae602dda20cf9d7093e39c13cba1460fb536f6862e139ad32575c5e86f8"
+    },
+    {
+      "path": "player-3/player-hub-parity-returned-base.png",
+      "bytes": 2379281,
+      "sha256": "d5fa8ef972fa6feb8c2d3748a8987bfdf4eb1cd51dd2da1148adc3e9a8ad62b7"
+    },
+    {
+      "path": "player-3/player-hub-restore-unbanked-keys.png",
+      "bytes": 1002841,
+      "sha256": "363008d5257e0ed4333ff65c908f1470f5f6c4ef64dd170927c9f7d1260c8a58"
+    },
+    {
+      "path": "player-3/player-hub-trade-base-variant.png",
+      "bytes": 2464839,
+      "sha256": "77a83a15e6e8fe340dfbe16abeaca3a8a08878d4e5b33936a9ff701199d65c90"
+    },
+    {
+      "path": "player-3/player-hub-trade-variant.png",
+      "bytes": 2463809,
+      "sha256": "c29fd7d8e608158f4fbac72b79e175f8381e5e9908109e556490b9677a46166d"
+    },
+    {
+      "path": "player-3/player-hub-variant-stock.png",
+      "bytes": 2526103,
+      "sha256": "81cf375440b12dfbe90e0702b6135e9f0a9946acf73dda3f79ae939ae9201ba0"
+    },
+    {
+      "path": "player-3/player-hub-warehouse-actions.png",
+      "bytes": 991936,
+      "sha256": "6b5cf6c0a7e397cd743d76439094ac5002b1deb218c5c5f8a4d411da2773799b"
+    },
+    {
+      "path": "player-3/player-infusion-picked.png",
+      "bytes": 2093801,
+      "sha256": "dee2f4190d44b6d9e7b0d7abdb2fc32747c0d3b7d2ba0a8477808ce083684150"
+    },
+    {
+      "path": "player-3/player-infusion-return.png",
+      "bytes": 2435207,
+      "sha256": "d3a0adb58ccd6d6679207c3989c80aefb695d30f175b7eb4aca68d9db1588a92"
+    },
+    {
+      "path": "player-3/player-infusion.png",
+      "bytes": 2067341,
+      "sha256": "71d20bbacc2a0c4b7790d2c5a5324d1283ac20310cd733d3948318c101fa3d3c"
+    },
+    {
+      "path": "player-3/player-music-load-failed.png",
+      "bytes": 715457,
+      "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6"
+    },
+    {
+      "path": "player-3/player-music-recovered.png",
+      "bytes": 699036,
+      "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b"
+    },
+    {
+      "path": "player-3/player-music-retry-kept.png",
+      "bytes": 715436,
+      "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44"
+    },
+    {
+      "path": "player-3/player-passage.png",
+      "bytes": 1176373,
+      "sha256": "4f375e05536f50c3ced31f109733667a0dbc130b3b8ae3bdf3128eadad1c87e9"
+    },
+    {
+      "path": "player-3/player-photo-export-cards.png",
+      "bytes": 1169558,
+      "sha256": "4cfa339d9e11979b6b9a164e44183d43046649d59d43d41471cba3832ddc9f65"
+    },
+    {
+      "path": "player-3/player-photo-export-notes.png",
+      "bytes": 1350774,
+      "sha256": "0d74b3bda51cd431177148f609c6cc0f91fe61ff14dc9b88c2d6df72616f6a39"
+    },
+    {
+      "path": "player-3/player-photo-export-returned.png",
+      "bytes": 2492014,
+      "sha256": "e86bcf02a0bfdf9bc170c1aa107e52e5336fd87f9c74d71477c556f9e05ba1bb"
+    },
+    {
+      "path": "player-3/player-photo-export-tools.png",
+      "bytes": 2492210,
+      "sha256": "66ee0232ff378fe58d4c69c2e1c69d5a42f7cf6957c2ca66d2a20c36705b63e4"
+    },
+    {
+      "path": "player-3/player-photo-export-written.png",
+      "bytes": 1203411,
+      "sha256": "ec011ff722bb3d13de137acac0d253643d33be495cca0304525413aff66f319d"
+    },
+    {
+      "path": "player-3/player-photo.png",
+      "bytes": 2481700,
+      "sha256": "5ddbd56f471ffba95f53a9f44a12da9e722d41b647be2fe90dd515ae7abc9b4d"
+    },
+    {
+      "path": "player-3/player-recode-reader.png",
+      "bytes": 2533040,
+      "sha256": "9bc418cb5d5b106355768eac643f644bc104f3530a2116158059f2adb996cc59"
+    },
+    {
+      "path": "player-3/player-recode-result.png",
+      "bytes": 2573993,
+      "sha256": "4b9b8565c6de49a0c85aa925bf07c04c0e94e3894619b9f5d4fc8670ad75ed65"
+    },
+    {
+      "path": "player-3/player-recode-save-failed.png",
+      "bytes": 2630772,
+      "sha256": "8c485a6811b855241dd5d4766505e17abf3a7ede8be57ba107a04f8ed5187ba0"
+    },
+    {
+      "path": "player-3/player-returned-base.png",
+      "bytes": 2375426,
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291"
+    },
+    {
+      "path": "player-3/player-returned-slots.png",
+      "bytes": 1471176,
+      "sha256": "3056fd3dcc36799cb978e2c64aecb452229c6573b2b099c3fb6f7fabe1b1a56d"
+    },
+    {
+      "path": "player-3/player-returned-title.png",
+      "bytes": 3411446,
+      "sha256": "8df807d5380f73e4b338bf748bef4674b6efaa0024b870d7ba2935641cd7f6d6"
+    },
+    {
+      "path": "player-3/player-reward-pending.png",
+      "bytes": 2142375,
+      "sha256": "7aea7e51bf8d915f24822e04ba9435e37a868bc71ff248993fb404e5b02d1ad4"
+    },
+    {
+      "path": "player-3/player-reward-reader-capacity.png",
+      "bytes": 1839331,
+      "sha256": "8690db0c12476577820c3110beaf200906dd3172ec4643d8936b0fe36bdf17fa"
+    },
+    {
+      "path": "player-3/player-reward-reader-organizer.png",
+      "bytes": 2553103,
+      "sha256": "82fd0b62aeee84de969ef3d2fca007501cc1ae65aa77c12286e6d34dbf6ecfd4"
+    },
+    {
+      "path": "player-3/player-reward-reader-pending.png",
+      "bytes": 1834119,
+      "sha256": "5edd05d4175a2e8888d65ac4519025988dce28a64bf2bb435a0dc56302a24ad3"
+    },
+    {
+      "path": "player-3/player-sacrifice-candidates.png",
+      "bytes": 1941815,
+      "sha256": "981bd05dfbb4d2c4ab96f43f44fc7ee0163807f7f3988fb8991ca0d8f8cf7fbb"
+    },
+    {
+      "path": "player-3/player-sacrifice-extraction.png",
+      "bytes": 1045631,
+      "sha256": "7ff3533357fc65caafb5b4b4ff8304fed17383b2a108074d1778a27a557afd94"
+    },
+    {
+      "path": "player-3/player-sacrifice-returned.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-3/player-sacrifice-selected.png",
+      "bytes": 1939428,
+      "sha256": "6ce4bba461fed2a2b17e2ba92fcf925d852ea9823067376626e54ab61937336d"
+    },
+    {
+      "path": "player-3/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "player-3/player-settlement.png",
+      "bytes": 879940,
+      "sha256": "a784429ff242c07a5694e77b714dd9ec483acdc1b16115b2865d08f81658787d"
+    },
+    {
+      "path": "player-3/player-shop-commission-dice.png",
+      "bytes": 1932380,
+      "sha256": "43a76b8e5062874799fcee595b3bb9dae9c30a90643fc5e394ec46bedc65417f"
+    },
+    {
+      "path": "player-3/player-shop-commission-receipt.png",
+      "bytes": 2457740,
+      "sha256": "e92e6925ba30974ee97d9a698225d28c5f818de68c06c1d7c3d94336af30df3b"
+    },
+    {
+      "path": "player-3/player-shop-commission.png",
+      "bytes": 2620979,
+      "sha256": "bba5f64121056777add9a76cf258f836824d20bf5736328fb59eea68282f99fb"
+    },
+    {
+      "path": "player-3/player-shop-exchange.png",
+      "bytes": 1688771,
+      "sha256": "0f5ce9b6c4ef166e6845f1ef1c3cf435028cc1861ba9384532c253ff35e60b69"
+    },
+    {
+      "path": "player-3/player-shop-free-offers.png",
+      "bytes": 3698244,
+      "sha256": "cc835aeacf38d38a92a33be862632662ec803b5210bd9015558d4c037611e179"
+    },
+    {
+      "path": "player-3/player-shop-inspection.png",
+      "bytes": 2397939,
+      "sha256": "37cba4f004e11f542d79d532eef76b5b336cebd919943bed792ffb60f17d61eb"
+    },
+    {
+      "path": "player-3/player-shop.png",
+      "bytes": 3698406,
+      "sha256": "040543fcaa2376e2e2a27994f0337c84d7f2013381c24bc4513a06d5ca86b013"
+    },
+    {
+      "path": "player-3/player-slot-archive-export.png",
+      "bytes": 663895,
+      "sha256": "6362bc808769a01d5bb4b6cd1f5c0a650428a4781da659f7fdb0f4344b175c24"
+    },
+    {
+      "path": "player-3/player-slot-archive-import-preview.png",
+      "bytes": 500483,
+      "sha256": "2e91e942c4bdf236166db5228aa4995b9d38a9570a780aab38416b39500f7ddf"
+    },
+    {
+      "path": "player-3/player-slot-archive-import.png",
+      "bytes": 647090,
+      "sha256": "fcffcee382535e4f420f6c880e892486941e287ef9a36eddc46111338d3d6bff"
+    },
+    {
+      "path": "player-3/player-slots-backup.png",
+      "bytes": 1470373,
+      "sha256": "9abb87f308f306c5be013a1bdaba2c3cae1354abb7ef2a49f482e63960ee216d"
+    },
+    {
+      "path": "player-3/player-startup.png",
+      "bytes": 829445,
+      "sha256": "bb55384330591ade9f8ebd6c184c6e32b7347b03d52d2c1a739bd42907ce055d"
+    },
+    {
+      "path": "player-3/player-title.png",
+      "bytes": 3428187,
+      "sha256": "9d577048ff2d21671ed77ebc3c51f04d2cb3870425bbbab61785f8aae0873640"
+    },
+    {
+      "path": "player-3/result.json",
+      "bytes": 7416370,
+      "sha256": "fb50d6d7c409879f7ce0eabaa74def3993f98d5abc1e945b095da346671c2b3b"
+    },
+    {
+      "path": "player-3/trace.json",
+      "bytes": 7415423,
+      "sha256": "19cde177afd55bb3d70b7eb05ae11fd50fd6ffeeff8f28bc5a2fad3ac56556b6"
+    },
+    {
+      "path": "player-4/player-altar.png",
+      "bytes": 2755040,
+      "sha256": "7f10d90487082386b9fd14dbc770c9e4ff3b4f5182fa457b7c5d54c34348fc58"
+    },
+    {
+      "path": "player-4/player-battle-pile-reader.png",
+      "bytes": 2000309,
+      "sha256": "2658498dfa384fec92c7f0470277b31d1bc2130feefeab19b905638c96001d5c"
+    },
+    {
+      "path": "player-4/player-battle-pile-return.png",
+      "bytes": 1852932,
+      "sha256": "70065597507933771177a11305b324e542acd0193c1db0a044c8ef7a71dc7189"
+    },
+    {
+      "path": "player-4/player-battle-pile.png",
+      "bytes": 1852932,
+      "sha256": "70065597507933771177a11305b324e542acd0193c1db0a044c8ef7a71dc7189"
+    },
+    {
+      "path": "player-4/player-battle.png",
+      "bytes": 1844883,
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5"
+    },
+    {
+      "path": "player-4/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "player-4/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "player-4/player-discover-bottom.png",
+      "bytes": 848600,
+      "sha256": "b6026356f5760a6b40441b7049ad371aba36b80bac48b7464a5c52cf5243d3a7"
+    },
+    {
+      "path": "player-4/player-discover-cancel-return.png",
+      "bytes": 1675324,
+      "sha256": "c2e7adb89055ab7652c78885955fff8b2584090d161e751cc4285a759fa8469b"
+    },
+    {
+      "path": "player-4/player-discover-confirm-return.png",
+      "bytes": 1854599,
+      "sha256": "1907d55709fe2ba7ca1f863513dc7b2abb64dd186d918ba26cd2d628aa8c8738"
+    },
+    {
+      "path": "player-4/player-discover-preview-cancel.png",
+      "bytes": 1854609,
+      "sha256": "237be637c8f462feefab52398aa8598e17d538e70d66418adceeedc2f0d67cde"
+    },
+    {
+      "path": "player-4/player-discover-preview.png",
+      "bytes": 894142,
+      "sha256": "1e8959965e1e924d37a6b45290098c9f32c9982a7c8316489e072c480a5545ce"
+    },
+    {
+      "path": "player-4/player-discover-selected.png",
+      "bytes": 849356,
+      "sha256": "e60eb01a06446742da41e09f3750bd63783fd9da2106505a0e6335432ae0bf43"
+    },
+    {
+      "path": "player-4/player-door.png",
+      "bytes": 4098051,
+      "sha256": "63ea55e6f23cb9e3f8bcbd23bdc78f814402f212c28a31b647f36076053adb9e"
+    },
+    {
+      "path": "player-4/player-emergency-entry.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-4/player-fx-atlas-specimen.png",
+      "bytes": 2512731,
+      "sha256": "8b812dfb304c4bf68ac00b0505a46a761d1b1971c9b8bf59a887b7e124efb7b1"
+    },
+    {
+      "path": "player-4/player-guide-0.png",
+      "bytes": 1061591,
+      "sha256": "f20d643c913ff487f1a530588effedb861b6ea15045e3e072e9e295ffb9b8686"
+    },
+    {
+      "path": "player-4/player-guide-1.png",
+      "bytes": 705059,
+      "sha256": "cd9ea4717cd5420adcf995ab83cd29bc0abd7fc2e5ffc225ec2bfbdc7e9f71c1"
+    },
+    {
+      "path": "player-4/player-guide-2.png",
+      "bytes": 1066216,
+      "sha256": "b350b445b5316a6036599b6ab9ed00614c330beab886a254a0fc23b724c3fce8"
+    },
+    {
+      "path": "player-4/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "player-4/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "player-4/player-guide-5.png",
+      "bytes": 740852,
+      "sha256": "f908ca336c7dcd8f2327afc2177765418bb0534fee51379a0b9450b7e17312c3"
+    },
+    {
+      "path": "player-4/player-guide-in-run.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "player-4/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "player-4/player-guide-more-4.png",
+      "bytes": 778498,
+      "sha256": "f64c23c3fc41c81fb1f3558af01b49e7fc87408bb235b2472919a0dc84df1b69"
+    },
+    {
+      "path": "player-4/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "player-4/player-hand-material-picked.png",
+      "bytes": 2339581,
+      "sha256": "01bb89c64d79abac4305449d8d340cb8b34094b530ae344a526c3f0a5d0082b8"
+    },
+    {
+      "path": "player-4/player-hand-material.png",
+      "bytes": 2301373,
+      "sha256": "65df6d844a2fc8cc06440f2ac071ee6eebe6cd53d528adb0cf865ba8521180fb"
+    },
+    {
+      "path": "player-4/player-infusion-picked.png",
+      "bytes": 2093812,
+      "sha256": "928055619d849f5b312e9f4a8957671bf8dfa46ce1ebf5fdb48eda642227e673"
+    },
+    {
+      "path": "player-4/player-infusion-return.png",
+      "bytes": 2423590,
+      "sha256": "21f29243c88ae412e8a9282358665edd4504bbc1637b3d76fb08a095f416188c"
+    },
+    {
+      "path": "player-4/player-infusion.png",
+      "bytes": 2067342,
+      "sha256": "3f08048c6e6014ff36b3e2ce2b0bac4e68c53dd0d6267485176978b4a2c9710f"
+    },
+    {
+      "path": "player-4/player-music-load-failed.png",
+      "bytes": 715457,
+      "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6"
+    },
+    {
+      "path": "player-4/player-music-recovered.png",
+      "bytes": 699036,
+      "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b"
+    },
+    {
+      "path": "player-4/player-music-retry-kept.png",
+      "bytes": 715436,
+      "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44"
+    },
+    {
+      "path": "player-4/player-passage.png",
+      "bytes": 1176639,
+      "sha256": "be7fcfde6f8fc46e6e69461e536f2ed2a62d50f193db2ea5878146d61859cb43"
+    },
+    {
+      "path": "player-4/player-photo-export-cards.png",
+      "bytes": 1169558,
+      "sha256": "4cfa339d9e11979b6b9a164e44183d43046649d59d43d41471cba3832ddc9f65"
+    },
+    {
+      "path": "player-4/player-photo-export-notes.png",
+      "bytes": 1350774,
+      "sha256": "0d74b3bda51cd431177148f609c6cc0f91fe61ff14dc9b88c2d6df72616f6a39"
+    },
+    {
+      "path": "player-4/player-photo-export-returned.png",
+      "bytes": 2492098,
+      "sha256": "def8663275da1e61a6069e57e0ff289d364b22b2b1ae53f35556774a07002dd8"
+    },
+    {
+      "path": "player-4/player-photo-export-tools.png",
+      "bytes": 2491438,
+      "sha256": "dc1ddd8a4d576a55e1695420e34773a98995d70339d25e8e22a44388a20339cd"
+    },
+    {
+      "path": "player-4/player-photo-export-written.png",
+      "bytes": 1202894,
+      "sha256": "0f10066835f82ca595c6346e405154d930cb9da93303808cf510004c67aae849"
+    },
+    {
+      "path": "player-4/player-photo.png",
+      "bytes": 2481624,
+      "sha256": "57b3c7452ffc4cf02d3703f26a03ebbacf7c40f29bf8af761cfebd872c610f03"
+    },
+    {
+      "path": "player-4/player-sacrifice-candidates.png",
+      "bytes": 1941815,
+      "sha256": "981bd05dfbb4d2c4ab96f43f44fc7ee0163807f7f3988fb8991ca0d8f8cf7fbb"
+    },
+    {
+      "path": "player-4/player-sacrifice-extraction.png",
+      "bytes": 1045631,
+      "sha256": "7ff3533357fc65caafb5b4b4ff8304fed17383b2a108074d1778a27a557afd94"
+    },
+    {
+      "path": "player-4/player-sacrifice-returned.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-4/player-sacrifice-selected.png",
+      "bytes": 1939428,
+      "sha256": "6ce4bba461fed2a2b17e2ba92fcf925d852ea9823067376626e54ab61937336d"
+    },
+    {
+      "path": "player-4/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "player-4/player-startup.png",
+      "bytes": 829532,
+      "sha256": "92e79d1dff458369816e8fac6639eebb5e6beef1f6972a0f30e035957cc253d6"
+    },
+    {
+      "path": "player-4/player-title.png",
+      "bytes": 3427022,
+      "sha256": "052181638e00ac51b531044169627da0556ed781d0ebb1103d1dcd8affb8daf1"
+    },
+    {
+      "path": "player-4/result.json",
+      "bytes": 4377874,
+      "sha256": "b5ed14e2b7b55785c635a5d2082c56221dcf0c855163f2180f235e71201547b8"
+    },
+    {
+      "path": "player-4/trace.json",
+      "bytes": 4377175,
+      "sha256": "4dbc700b61153683778291e92975ee98cef33d6cd55e881e9b33bd8d84d97c69"
+    },
+    {
+      "path": "player-5/player-altar.png",
+      "bytes": 2755011,
+      "sha256": "9f4bfe644ddbe9b250625fad4929c9b6c27307b2bbcb6d517c2a6075d64a5362"
+    },
+    {
+      "path": "player-5/player-battle-pile-reader.png",
+      "bytes": 2000309,
+      "sha256": "2658498dfa384fec92c7f0470277b31d1bc2130feefeab19b905638c96001d5c"
+    },
+    {
+      "path": "player-5/player-battle-pile-return.png",
+      "bytes": 1852932,
+      "sha256": "70065597507933771177a11305b324e542acd0193c1db0a044c8ef7a71dc7189"
+    },
+    {
+      "path": "player-5/player-battle-pile.png",
+      "bytes": 1852932,
+      "sha256": "70065597507933771177a11305b324e542acd0193c1db0a044c8ef7a71dc7189"
+    },
+    {
+      "path": "player-5/player-battle.png",
+      "bytes": 1844883,
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5"
+    },
+    {
+      "path": "player-5/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "player-5/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "player-5/player-discover-bottom.png",
+      "bytes": 848600,
+      "sha256": "b6026356f5760a6b40441b7049ad371aba36b80bac48b7464a5c52cf5243d3a7"
+    },
+    {
+      "path": "player-5/player-discover-cancel-return.png",
+      "bytes": 1675324,
+      "sha256": "c2e7adb89055ab7652c78885955fff8b2584090d161e751cc4285a759fa8469b"
+    },
+    {
+      "path": "player-5/player-discover-confirm-return.png",
+      "bytes": 1854599,
+      "sha256": "1907d55709fe2ba7ca1f863513dc7b2abb64dd186d918ba26cd2d628aa8c8738"
+    },
+    {
+      "path": "player-5/player-discover-preview-cancel.png",
+      "bytes": 1854610,
+      "sha256": "00d5bae512909b63c2b2eb007e0ebf5a19b62320552609cfd82f01bb1d05d3d2"
+    },
+    {
+      "path": "player-5/player-discover-preview-confirm.png",
+      "bytes": 1676404,
+      "sha256": "009cf183ba3249b2bc4edfabc063a2972fb23500e36fa6dd14b12b94070620a0"
+    },
+    {
+      "path": "player-5/player-discover-preview.png",
+      "bytes": 918721,
+      "sha256": "751f269dab1047248b2cd88372397d830ca5fa8c7400d26de89b1f4386074fb1"
+    },
+    {
+      "path": "player-5/player-discover-selected.png",
+      "bytes": 849356,
+      "sha256": "e60eb01a06446742da41e09f3750bd63783fd9da2106505a0e6335432ae0bf43"
+    },
+    {
+      "path": "player-5/player-door.png",
+      "bytes": 4098051,
+      "sha256": "63ea55e6f23cb9e3f8bcbd23bdc78f814402f212c28a31b647f36076053adb9e"
+    },
+    {
+      "path": "player-5/player-emergency-entry.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-5/player-extraction.png",
+      "bytes": 1354725,
+      "sha256": "9f30ac68f1f51b694f11d9f98e7c232aff8ab9710f287ee42ad537f2e1b67e25"
+    },
+    {
+      "path": "player-5/player-formation-rules.png",
+      "bytes": 1168141,
+      "sha256": "cffb79614f3ffe3dbf734532f48a438b48e976cd0123ca17dd4f060a75eb6616"
+    },
+    {
+      "path": "player-5/player-formation.png",
+      "bytes": 1263693,
+      "sha256": "5f24233057692f18e6f203fa0729704b59b9ec99dd35aa88290343aa62a54f30"
+    },
+    {
+      "path": "player-5/player-fx-atlas-specimen.png",
+      "bytes": 2522672,
+      "sha256": "6161d2e9366afe9899fce8a033438caee726018eb20c1b397c7823b853f4e35e"
+    },
+    {
+      "path": "player-5/player-grave-return.png",
+      "bytes": 1994465,
+      "sha256": "8184ec897656d7d00bd5ad81d6e69d13ea08488592c5720398b85417cf07dfb5"
+    },
+    {
+      "path": "player-5/player-grave.png",
+      "bytes": 200668,
+      "sha256": "c6323405dc789ec4b8abe5386413b78431f82f4ae54af8f31ba4e1b904888bf0"
+    },
+    {
+      "path": "player-5/player-guide-0.png",
+      "bytes": 1061591,
+      "sha256": "f20d643c913ff487f1a530588effedb861b6ea15045e3e072e9e295ffb9b8686"
+    },
+    {
+      "path": "player-5/player-guide-1.png",
+      "bytes": 705059,
+      "sha256": "cd9ea4717cd5420adcf995ab83cd29bc0abd7fc2e5ffc225ec2bfbdc7e9f71c1"
+    },
+    {
+      "path": "player-5/player-guide-2.png",
+      "bytes": 1066216,
+      "sha256": "b350b445b5316a6036599b6ab9ed00614c330beab886a254a0fc23b724c3fce8"
+    },
+    {
+      "path": "player-5/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "player-5/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "player-5/player-guide-5.png",
+      "bytes": 740852,
+      "sha256": "f908ca336c7dcd8f2327afc2177765418bb0534fee51379a0b9450b7e17312c3"
+    },
+    {
+      "path": "player-5/player-guide-in-run.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "player-5/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "player-5/player-guide-more-4.png",
+      "bytes": 778498,
+      "sha256": "f64c23c3fc41c81fb1f3558af01b49e7fc87408bb235b2472919a0dc84df1b69"
+    },
+    {
+      "path": "player-5/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "player-5/player-hand-material-picked.png",
+      "bytes": 2340348,
+      "sha256": "51b468df7476d2f51e823975d9454671c2885d4a0e0492e1db406156d2a30a62"
+    },
+    {
+      "path": "player-5/player-hand-material.png",
+      "bytes": 2301373,
+      "sha256": "65df6d844a2fc8cc06440f2ac071ee6eebe6cd53d528adb0cf865ba8521180fb"
+    },
+    {
+      "path": "player-5/player-hub-conversion-overflow.png",
+      "bytes": 1155846,
+      "sha256": "ab3687da23b79f525ad5c6d533559aa7be00489f992895fb2166a7a7d5704071"
+    },
+    {
+      "path": "player-5/player-hub-parity-returned-base.png",
+      "bytes": 2379288,
+      "sha256": "067bd1a88453caac089ab7d72e45546fb539bc75a6bc464c5a6c7bfbb794848e"
+    },
+    {
+      "path": "player-5/player-hub-restore-unbanked-keys.png",
+      "bytes": 1002841,
+      "sha256": "363008d5257e0ed4333ff65c908f1470f5f6c4ef64dd170927c9f7d1260c8a58"
+    },
+    {
+      "path": "player-5/player-hub-trade-base-variant.png",
+      "bytes": 2464839,
+      "sha256": "77a83a15e6e8fe340dfbe16abeaca3a8a08878d4e5b33936a9ff701199d65c90"
+    },
+    {
+      "path": "player-5/player-hub-trade-variant.png",
+      "bytes": 2463809,
+      "sha256": "c29fd7d8e608158f4fbac72b79e175f8381e5e9908109e556490b9677a46166d"
+    },
+    {
+      "path": "player-5/player-hub-variant-stock.png",
+      "bytes": 2526105,
+      "sha256": "bf24f1aa1a7e9acf039d069b91e3e49891452124fe009455a702188c897f96d4"
+    },
+    {
+      "path": "player-5/player-hub-warehouse-actions.png",
+      "bytes": 991936,
+      "sha256": "6b5cf6c0a7e397cd743d76439094ac5002b1deb218c5c5f8a4d411da2773799b"
+    },
+    {
+      "path": "player-5/player-infusion-picked.png",
+      "bytes": 2093812,
+      "sha256": "928055619d849f5b312e9f4a8957671bf8dfa46ce1ebf5fdb48eda642227e673"
+    },
+    {
+      "path": "player-5/player-infusion-return.png",
+      "bytes": 2428730,
+      "sha256": "0d156d8dd467e211ba5fd3588e1de3316c9010b1b5bc753853000310fd1073c7"
+    },
+    {
+      "path": "player-5/player-infusion.png",
+      "bytes": 2067340,
+      "sha256": "a1d44f6469c53a9ca67d8cbca06322e3ff1ece9a52747df794cd3a118df6a07d"
+    },
+    {
+      "path": "player-5/player-music-load-failed.png",
+      "bytes": 715457,
+      "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6"
+    },
+    {
+      "path": "player-5/player-music-recovered.png",
+      "bytes": 699036,
+      "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b"
+    },
+    {
+      "path": "player-5/player-music-retry-kept.png",
+      "bytes": 715436,
+      "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44"
+    },
+    {
+      "path": "player-5/player-passage.png",
+      "bytes": 1176368,
+      "sha256": "0358f75053cd381cbf93eccc978a93d1f8046f8713fd5354d9d0915d2fdf4c69"
+    },
+    {
+      "path": "player-5/player-photo-export-cards.png",
+      "bytes": 1169558,
+      "sha256": "4cfa339d9e11979b6b9a164e44183d43046649d59d43d41471cba3832ddc9f65"
+    },
+    {
+      "path": "player-5/player-photo-export-notes.png",
+      "bytes": 1350774,
+      "sha256": "0d74b3bda51cd431177148f609c6cc0f91fe61ff14dc9b88c2d6df72616f6a39"
+    },
+    {
+      "path": "player-5/player-photo-export-returned.png",
+      "bytes": 2491488,
+      "sha256": "65bebeeadef9d99f80c85dd42f9a177b287fdfe76d18b407705d426a80f1fd27"
+    },
+    {
+      "path": "player-5/player-photo-export-tools.png",
+      "bytes": 2492561,
+      "sha256": "4a55a3515deb49c9434b16426a8e7fdeea84a23c0a6bd86ba279a2202422e87f"
+    },
+    {
+      "path": "player-5/player-photo-export-written.png",
+      "bytes": 1203412,
+      "sha256": "e6e889fa616ef5d70b045b336d46cb82ff75c816e3c0fca514d58351abccfeaa"
+    },
+    {
+      "path": "player-5/player-photo.png",
+      "bytes": 2481634,
+      "sha256": "3421f42f4b287443b62aba492f1b3c4afde42860f62349dd8b60ba7adaded789"
+    },
+    {
+      "path": "player-5/player-recode-reader.png",
+      "bytes": 2588194,
+      "sha256": "b5e610dd77d7ef2ee6ea9836d5381c183526a292137cb7f5fbb43a1221d857dc"
+    },
+    {
+      "path": "player-5/player-recode-result.png",
+      "bytes": 2575093,
+      "sha256": "7677a538ec5bf596d388ca114353873740ee8f75abdb64599ff06e58cbecc107"
+    },
+    {
+      "path": "player-5/player-recode-save-failed.png",
+      "bytes": 2631817,
+      "sha256": "34e9fc1e62ab6bd9409fd1781bff7c1d141e4f6325dbfa05f992f5041f26edfb"
+    },
+    {
+      "path": "player-5/player-returned-base.png",
+      "bytes": 2375426,
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291"
+    },
+    {
+      "path": "player-5/player-returned-slots.png",
+      "bytes": 1464201,
+      "sha256": "fc44ac3bb1c3e32742c278990b929e8a4d0b21575196803c53f06cc78b9f82a4"
+    },
+    {
+      "path": "player-5/player-returned-title.png",
+      "bytes": 3411633,
+      "sha256": "f7adf2ede88b2df9025c5b1374e5d353691f01a67ff1883251891cfbb529140d"
+    },
+    {
+      "path": "player-5/player-reward-pending.png",
+      "bytes": 2142375,
+      "sha256": "7aea7e51bf8d915f24822e04ba9435e37a868bc71ff248993fb404e5b02d1ad4"
+    },
+    {
+      "path": "player-5/player-reward-reader-capacity.png",
+      "bytes": 1839331,
+      "sha256": "8690db0c12476577820c3110beaf200906dd3172ec4643d8936b0fe36bdf17fa"
+    },
+    {
+      "path": "player-5/player-reward-reader-organizer.png",
+      "bytes": 2598914,
+      "sha256": "9dd65cf532e4c9700edb402cabe4151a30d7571445e532a5b0a7ed780fdec972"
+    },
+    {
+      "path": "player-5/player-reward-reader-pending.png",
+      "bytes": 1834119,
+      "sha256": "5edd05d4175a2e8888d65ac4519025988dce28a64bf2bb435a0dc56302a24ad3"
+    },
+    {
+      "path": "player-5/player-sacrifice-candidates.png",
+      "bytes": 1941815,
+      "sha256": "981bd05dfbb4d2c4ab96f43f44fc7ee0163807f7f3988fb8991ca0d8f8cf7fbb"
+    },
+    {
+      "path": "player-5/player-sacrifice-extraction.png",
+      "bytes": 1045631,
+      "sha256": "7ff3533357fc65caafb5b4b4ff8304fed17383b2a108074d1778a27a557afd94"
+    },
+    {
+      "path": "player-5/player-sacrifice-returned.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-5/player-sacrifice-selected.png",
+      "bytes": 1939428,
+      "sha256": "6ce4bba461fed2a2b17e2ba92fcf925d852ea9823067376626e54ab61937336d"
+    },
+    {
+      "path": "player-5/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "player-5/player-settlement.png",
+      "bytes": 878689,
+      "sha256": "a31a3b54931e0a88d77c13a01b3f168987d83021a4d4d2e99497befa59d89c36"
+    },
+    {
+      "path": "player-5/player-shop-commission-dice.png",
+      "bytes": 1930872,
+      "sha256": "537a494ac889e7b69676c4089713c3daffc1115df0d9eea7577c7c7d28f9877d"
+    },
+    {
+      "path": "player-5/player-shop-commission-receipt.png",
+      "bytes": 2461950,
+      "sha256": "0295a1072ef60871983071e0a421b7e9065cd678c6f81bb646339218553b37d3"
+    },
+    {
+      "path": "player-5/player-shop-commission.png",
+      "bytes": 2620979,
+      "sha256": "bba5f64121056777add9a76cf258f836824d20bf5736328fb59eea68282f99fb"
+    },
+    {
+      "path": "player-5/player-shop-exchange.png",
+      "bytes": 1688771,
+      "sha256": "0f5ce9b6c4ef166e6845f1ef1c3cf435028cc1861ba9384532c253ff35e60b69"
+    },
+    {
+      "path": "player-5/player-shop-free-offers.png",
+      "bytes": 3824298,
+      "sha256": "86a43f294c3fab469aba89924954b27a02a28190c3e6e857abdee57e5f2a990c"
+    },
+    {
+      "path": "player-5/player-shop-inspection.png",
+      "bytes": 2353380,
+      "sha256": "b436b95f8316f8b27d706125b76a69e93e4ea0434a8f6dfac9e1751f5c7a3563"
+    },
+    {
+      "path": "player-5/player-shop.png",
+      "bytes": 3719424,
+      "sha256": "21de45739ccb1700fb8194236d22c5222b6c6cb45672c9c62b6ad9330561ac33"
+    },
+    {
+      "path": "player-5/player-slot-archive-export.png",
+      "bytes": 664088,
+      "sha256": "df66b5d0526f1298f372236a5cb2f0fe74b7aaadff36eebdd3528f7632823171"
+    },
+    {
+      "path": "player-5/player-slot-archive-import-preview.png",
+      "bytes": 498778,
+      "sha256": "d281dca292814bbac222ea703f5bfe780ebe8cb39a921d1fc52fc917f972b0a0"
+    },
+    {
+      "path": "player-5/player-slot-archive-import.png",
+      "bytes": 646060,
+      "sha256": "07f8d6d369344fd275a48a4f65bc73385a3cf22829af1f2bc8cdad7d996c5023"
+    },
+    {
+      "path": "player-5/player-slots-backup.png",
+      "bytes": 1470146,
+      "sha256": "c399fc70b14ed5ab821e5b8609c69d52df2663cc38d0ea9977f453a973fa521a"
+    },
+    {
+      "path": "player-5/player-startup.png",
+      "bytes": 829012,
+      "sha256": "16784167d037799e3413a846ee4ba43b01587c4960274a3528c88b7c7d3d57e7"
+    },
+    {
+      "path": "player-5/player-title.png",
+      "bytes": 3428083,
+      "sha256": "66b19144dfd6f526525a0c1715dbe0271f2036434673a57a5de601d9c0df33e1"
+    },
+    {
+      "path": "player-5/result.json",
+      "bytes": 7552069,
+      "sha256": "c1329aaaaa4da59feda3e8b6eea0120794eafccae01ddbd5b0a63f4e39600ecf"
+    },
+    {
+      "path": "player-5/trace.json",
+      "bytes": 7551122,
+      "sha256": "3a346395ea7c0713bb10cdb71942a8cdfdd2a3b7af7497eb3d9f2fe4969afa3c"
+    },
+    {
+      "path": "player-6/player-altar.png",
+      "bytes": 2755040,
+      "sha256": "7f10d90487082386b9fd14dbc770c9e4ff3b4f5182fa457b7c5d54c34348fc58"
+    },
+    {
+      "path": "player-6/player-battle-pile-reader.png",
+      "bytes": 2000309,
+      "sha256": "2658498dfa384fec92c7f0470277b31d1bc2130feefeab19b905638c96001d5c"
+    },
+    {
+      "path": "player-6/player-battle-pile-return.png",
+      "bytes": 1852932,
+      "sha256": "70065597507933771177a11305b324e542acd0193c1db0a044c8ef7a71dc7189"
+    },
+    {
+      "path": "player-6/player-battle-pile.png",
+      "bytes": 1852932,
+      "sha256": "70065597507933771177a11305b324e542acd0193c1db0a044c8ef7a71dc7189"
+    },
+    {
+      "path": "player-6/player-battle.png",
+      "bytes": 1844883,
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5"
+    },
+    {
+      "path": "player-6/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "player-6/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "player-6/player-discover-bottom.png",
+      "bytes": 848600,
+      "sha256": "b6026356f5760a6b40441b7049ad371aba36b80bac48b7464a5c52cf5243d3a7"
+    },
+    {
+      "path": "player-6/player-discover-cancel-return.png",
+      "bytes": 1675324,
+      "sha256": "c2e7adb89055ab7652c78885955fff8b2584090d161e751cc4285a759fa8469b"
+    },
+    {
+      "path": "player-6/player-discover-confirm-return.png",
+      "bytes": 1854599,
+      "sha256": "1907d55709fe2ba7ca1f863513dc7b2abb64dd186d918ba26cd2d628aa8c8738"
+    },
+    {
+      "path": "player-6/player-discover-preview-cancel.png",
+      "bytes": 1854610,
+      "sha256": "00d5bae512909b63c2b2eb007e0ebf5a19b62320552609cfd82f01bb1d05d3d2"
+    },
+    {
+      "path": "player-6/player-discover-preview-confirm.png",
+      "bytes": 1834135,
+      "sha256": "70167663a25cf775457854f83cc0a9f066e129d36a95d359522ba2d442a9faac"
+    },
+    {
+      "path": "player-6/player-discover-preview.png",
+      "bytes": 918360,
+      "sha256": "e9a23e2701bf04fe9efc4e5b687a7ffb45279a5dd18bd08e3d666590f2ba184c"
+    },
+    {
+      "path": "player-6/player-discover-selected.png",
+      "bytes": 849356,
+      "sha256": "e60eb01a06446742da41e09f3750bd63783fd9da2106505a0e6335432ae0bf43"
+    },
+    {
+      "path": "player-6/player-door.png",
+      "bytes": 4098051,
+      "sha256": "63ea55e6f23cb9e3f8bcbd23bdc78f814402f212c28a31b647f36076053adb9e"
+    },
+    {
+      "path": "player-6/player-emergency-entry.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-6/player-extraction.png",
+      "bytes": 1350207,
+      "sha256": "a7c57cfe240114f830f351d93729c973911242cd314326ea12311abdf1027a77"
+    },
+    {
+      "path": "player-6/player-formation-rules.png",
+      "bytes": 1178716,
+      "sha256": "d9095f8e28e8a1d4acbd3c01f1d21375c9dfda3061b84b154cb8109a92917a4d"
+    },
+    {
+      "path": "player-6/player-formation.png",
+      "bytes": 1274035,
+      "sha256": "1f072539269b02d8deec10f832bd24a78542eb07aab17bc31cecb4fa059f7610"
+    },
+    {
+      "path": "player-6/player-fx-atlas-specimen.png",
+      "bytes": 2519851,
+      "sha256": "66cc1a6e241c4201a7d615f6768864c5806404975854860da76269d5db60ad87"
+    },
+    {
+      "path": "player-6/player-grave-return.png",
+      "bytes": 1869846,
+      "sha256": "71d348cc1f7518c5343f68c93bdb58f71056340a0d8282afe0f5bda4f7702453"
+    },
+    {
+      "path": "player-6/player-grave.png",
+      "bytes": 166779,
+      "sha256": "c8caa0106f3c7794fff12a2cdcb44caa6f19a51ccd10caa9e5b2a24958c59b36"
+    },
+    {
+      "path": "player-6/player-guide-0.png",
+      "bytes": 1061591,
+      "sha256": "f20d643c913ff487f1a530588effedb861b6ea15045e3e072e9e295ffb9b8686"
+    },
+    {
+      "path": "player-6/player-guide-1.png",
+      "bytes": 705059,
+      "sha256": "cd9ea4717cd5420adcf995ab83cd29bc0abd7fc2e5ffc225ec2bfbdc7e9f71c1"
+    },
+    {
+      "path": "player-6/player-guide-2.png",
+      "bytes": 1066216,
+      "sha256": "b350b445b5316a6036599b6ab9ed00614c330beab886a254a0fc23b724c3fce8"
+    },
+    {
+      "path": "player-6/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "player-6/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "player-6/player-guide-5.png",
+      "bytes": 740852,
+      "sha256": "f908ca336c7dcd8f2327afc2177765418bb0534fee51379a0b9450b7e17312c3"
+    },
+    {
+      "path": "player-6/player-guide-in-run.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "player-6/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "player-6/player-guide-more-4.png",
+      "bytes": 778498,
+      "sha256": "f64c23c3fc41c81fb1f3558af01b49e7fc87408bb235b2472919a0dc84df1b69"
+    },
+    {
+      "path": "player-6/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "player-6/player-hand-material-picked.png",
+      "bytes": 2339897,
+      "sha256": "9a565330ccfe9ae32e5850a77505712f96c891acb1f19cad23c9cb510e210e38"
+    },
+    {
+      "path": "player-6/player-hand-material.png",
+      "bytes": 2301373,
+      "sha256": "65df6d844a2fc8cc06440f2ac071ee6eebe6cd53d528adb0cf865ba8521180fb"
+    },
+    {
+      "path": "player-6/player-hub-conversion-overflow.png",
+      "bytes": 1155864,
+      "sha256": "0c38c6cb907bb8529ffb3687441b791c5adea495c251510c9b42cffc490d34f5"
+    },
+    {
+      "path": "player-6/player-hub-parity-returned-base.png",
+      "bytes": 2379281,
+      "sha256": "d5fa8ef972fa6feb8c2d3748a8987bfdf4eb1cd51dd2da1148adc3e9a8ad62b7"
+    },
+    {
+      "path": "player-6/player-hub-restore-unbanked-keys.png",
+      "bytes": 1002841,
+      "sha256": "363008d5257e0ed4333ff65c908f1470f5f6c4ef64dd170927c9f7d1260c8a58"
+    },
+    {
+      "path": "player-6/player-hub-trade-base-variant.png",
+      "bytes": 2464839,
+      "sha256": "77a83a15e6e8fe340dfbe16abeaca3a8a08878d4e5b33936a9ff701199d65c90"
+    },
+    {
+      "path": "player-6/player-hub-trade-variant.png",
+      "bytes": 2463809,
+      "sha256": "c29fd7d8e608158f4fbac72b79e175f8381e5e9908109e556490b9677a46166d"
+    },
+    {
+      "path": "player-6/player-hub-variant-stock.png",
+      "bytes": 2526125,
+      "sha256": "616cd53ae34789f034e41a9eb8e6440feeca8890cfd39b868e7726ba7c35523f"
+    },
+    {
+      "path": "player-6/player-hub-warehouse-actions.png",
+      "bytes": 991936,
+      "sha256": "85f09083379bc344a1786e8ca1cbae5b891ae7348c0bc401e039d127d0592115"
+    },
+    {
+      "path": "player-6/player-infusion-picked.png",
+      "bytes": 2093812,
+      "sha256": "928055619d849f5b312e9f4a8957671bf8dfa46ce1ebf5fdb48eda642227e673"
+    },
+    {
+      "path": "player-6/player-infusion-return.png",
+      "bytes": 2395771,
+      "sha256": "ba59697f59c0c5cf823ac9474765bac12dded2cf9fcf47a016d59cce16b563cc"
+    },
+    {
+      "path": "player-6/player-infusion.png",
+      "bytes": 2067342,
+      "sha256": "3f08048c6e6014ff36b3e2ce2b0bac4e68c53dd0d6267485176978b4a2c9710f"
+    },
+    {
+      "path": "player-6/player-music-load-failed.png",
+      "bytes": 715457,
+      "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6"
+    },
+    {
+      "path": "player-6/player-music-recovered.png",
+      "bytes": 699036,
+      "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b"
+    },
+    {
+      "path": "player-6/player-music-retry-kept.png",
+      "bytes": 715436,
+      "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44"
+    },
+    {
+      "path": "player-6/player-passage.png",
+      "bytes": 1176021,
+      "sha256": "d56b33553fcd78c3e56a5f70f598fb32f8ced361d256b507ba5d8fa31ad8e5b0"
+    },
+    {
+      "path": "player-6/player-photo-export-cards.png",
+      "bytes": 1169558,
+      "sha256": "4cfa339d9e11979b6b9a164e44183d43046649d59d43d41471cba3832ddc9f65"
+    },
+    {
+      "path": "player-6/player-photo-export-notes.png",
+      "bytes": 1350774,
+      "sha256": "0d74b3bda51cd431177148f609c6cc0f91fe61ff14dc9b88c2d6df72616f6a39"
+    },
+    {
+      "path": "player-6/player-photo-export-returned.png",
+      "bytes": 2491933,
+      "sha256": "380b0c5a329d971747dde1467bb7acbb49b8960589c729f7ca883477a00e3437"
+    },
+    {
+      "path": "player-6/player-photo-export-tools.png",
+      "bytes": 2492364,
+      "sha256": "566d3a4351c00306831c11950eeddfc069633e58b9fac5c747ee066ab074a2fb"
+    },
+    {
+      "path": "player-6/player-photo-export-written.png",
+      "bytes": 1203059,
+      "sha256": "2f973e50f51df1624c615537e3f7744507c01d6b0c5b688e78e654d351419fc2"
+    },
+    {
+      "path": "player-6/player-photo.png",
+      "bytes": 2481409,
+      "sha256": "37036eb817f823bd2a40550a37a5207fcae8eab2ac7bf2aa03a8784e626dd53b"
+    },
+    {
+      "path": "player-6/player-recode-reader.png",
+      "bytes": 2586573,
+      "sha256": "ff9640d97eeefb84a5e7feca0c76fc0bbf56a8009d633238603f5dfe7364ed08"
+    },
+    {
+      "path": "player-6/player-recode-result.png",
+      "bytes": 2587408,
+      "sha256": "f81d6e1c4ac6137341314c152ba7987a0db0819d12a0332fefee4e2e201d9067"
+    },
+    {
+      "path": "player-6/player-recode-save-failed.png",
+      "bytes": 2643721,
+      "sha256": "03e07681f652946b3518442ac00111ed53ab02eefcae236dd9795c03d5d0dcd3"
+    },
+    {
+      "path": "player-6/player-returned-base.png",
+      "bytes": 2375426,
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291"
+    },
+    {
+      "path": "player-6/player-returned-slots.png",
+      "bytes": 1463907,
+      "sha256": "ea9173f2e80a613865d6308ff9acec46dda62588e964f68a8ba33be43ca436a5"
+    },
+    {
+      "path": "player-6/player-returned-title.png",
+      "bytes": 3411559,
+      "sha256": "160169fdfbffb5f98e6e6d7d29b6aeb82c3cb0eaab456d5c011b057c36ad4080"
+    },
+    {
+      "path": "player-6/player-reward-pending.png",
+      "bytes": 2142375,
+      "sha256": "7aea7e51bf8d915f24822e04ba9435e37a868bc71ff248993fb404e5b02d1ad4"
+    },
+    {
+      "path": "player-6/player-reward-reader-capacity.png",
+      "bytes": 1839331,
+      "sha256": "8690db0c12476577820c3110beaf200906dd3172ec4643d8936b0fe36bdf17fa"
+    },
+    {
+      "path": "player-6/player-reward-reader-organizer.png",
+      "bytes": 2535921,
+      "sha256": "18915f660abefefa295c113df2ff2bf712a7cd58b87e197e1be5d190b0343358"
+    },
+    {
+      "path": "player-6/player-reward-reader-pending.png",
+      "bytes": 1834119,
+      "sha256": "5edd05d4175a2e8888d65ac4519025988dce28a64bf2bb435a0dc56302a24ad3"
+    },
+    {
+      "path": "player-6/player-sacrifice-candidates.png",
+      "bytes": 1941815,
+      "sha256": "981bd05dfbb4d2c4ab96f43f44fc7ee0163807f7f3988fb8991ca0d8f8cf7fbb"
+    },
+    {
+      "path": "player-6/player-sacrifice-extraction.png",
+      "bytes": 1045631,
+      "sha256": "7ff3533357fc65caafb5b4b4ff8304fed17383b2a108074d1778a27a557afd94"
+    },
+    {
+      "path": "player-6/player-sacrifice-returned.png",
+      "bytes": 1772279,
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-6/player-sacrifice-selected.png",
+      "bytes": 1939428,
+      "sha256": "6ce4bba461fed2a2b17e2ba92fcf925d852ea9823067376626e54ab61937336d"
+    },
+    {
+      "path": "player-6/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "player-6/player-settlement.png",
+      "bytes": 880731,
+      "sha256": "f491c1115debae31918aa8e9654e861329e3d2d6c33feeabf7dbfb105643ec27"
+    },
+    {
+      "path": "player-6/player-shop-commission-dice.png",
+      "bytes": 1927425,
+      "sha256": "4cc2f421a49189b55c379f708aefe0c3d45dcbc08d23342babe01b539f1e8804"
+    },
+    {
+      "path": "player-6/player-shop-commission-receipt.png",
+      "bytes": 2453570,
+      "sha256": "1dab1f16b2d8faff0a988638c119e932364b179970096f8e7065359950adbfd8"
+    },
+    {
+      "path": "player-6/player-shop-commission.png",
+      "bytes": 2620979,
+      "sha256": "bba5f64121056777add9a76cf258f836824d20bf5736328fb59eea68282f99fb"
+    },
+    {
+      "path": "player-6/player-shop-exchange.png",
+      "bytes": 1688771,
+      "sha256": "0f5ce9b6c4ef166e6845f1ef1c3cf435028cc1861ba9384532c253ff35e60b69"
+    },
+    {
+      "path": "player-6/player-shop-free-offers.png",
+      "bytes": 3734406,
+      "sha256": "bff1c7b69cbf8684ef07633ab447265d7e261235f9ac611ad475887acf3b97fc"
+    },
+    {
+      "path": "player-6/player-shop-inspection.png",
+      "bytes": 2355093,
+      "sha256": "4a7d8e5109973947c07966de03eddd95b72225f00a7af2cc355d9ea921e9a605"
+    },
+    {
+      "path": "player-6/player-shop.png",
+      "bytes": 3751633,
+      "sha256": "ae2b6b1f472510762f997416416f2ed095ec746b10c91fcad033664e7232383a"
+    },
+    {
+      "path": "player-6/player-slot-archive-export.png",
+      "bytes": 664975,
+      "sha256": "74e493adca3f198f9eaf145d9495e4d7b0267a629445e3edb33da50e7ec41ded"
+    },
+    {
+      "path": "player-6/player-slot-archive-import-preview.png",
+      "bytes": 499479,
+      "sha256": "fc4761c2fba1aa3d774703d2b7c86391b90e6d01577450ccf77e5fb485723c2b"
+    },
+    {
+      "path": "player-6/player-slot-archive-import.png",
+      "bytes": 646605,
+      "sha256": "fea9c06ac7759291870a3927f3cdeef29eae8b97ce27423bc64c06398d227e8f"
+    },
+    {
+      "path": "player-6/player-slots-backup.png",
+      "bytes": 1470390,
+      "sha256": "45ca81dd9e881f2c1bb9d2c0c0c5fd90497a99557928419cbc432d9cb2b53c88"
+    },
+    {
+      "path": "player-6/player-startup.png",
+      "bytes": 829588,
+      "sha256": "337a4f461430a2e75d4757e208637688f72188a5b94ae79779771593a0f5fbb4"
+    },
+    {
+      "path": "player-6/player-title.png",
+      "bytes": 3428239,
+      "sha256": "5a447b73c94318b593f6a5d9396fb5c1dd074f6080cbd7a7b5117119d4cf5539"
+    },
+    {
+      "path": "player-6/result.json",
+      "bytes": 7536876,
+      "sha256": "49b85e9ae879fc7582bf0a687bbff70c66cdb1c98febbf0dc15e62cffda2c520"
+    },
+    {
+      "path": "player-6/trace.json",
+      "bytes": 7535929,
+      "sha256": "7dcc701f2cf23e3199364abe2cfa6adbca2a11a8ecee77313b9b31f236d4355d"
+    }
+  ]
+}

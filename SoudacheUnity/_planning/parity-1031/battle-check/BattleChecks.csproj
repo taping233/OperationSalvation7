@@ -4,5 +4,5 @@
     <Nullable>disable</Nullable><EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <NoWarn>CS0169;CS0414</NoWarn>
   </PropertyGroup>
-  <ItemGroup><Compile Include="../../../Assets/Scripts/Sdt.Core/**/*.cs"/><Compile Include="Program.cs"/><Compile Include="Round3Checks.cs"/><Compile Include="Round4Checks.cs"/></ItemGroup>
+  <ItemGroup><Compile Include="../../../Assets/Scripts/Sdt.Core/**/*.cs"/><Compile Include="Program.cs"/><Compile Include="Round3Checks.cs"/><Compile Include="Round4Checks.cs"/><Compile Include="Round6Checks.cs"/><Compile Include="Round6PreviewChecks.cs"/></ItemGroup>
 </Project>

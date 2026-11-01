@@ -1,0 +1,332 @@
+{
+  "status": "validated-awaiting-publication",
+  "atUtc": "2026-11-01T07:43:02.179074+00:00",
+  "sourceInputCount": 828,
+  "sourceInputsUnchanged": true,
+  "sourceScope": "Native production, editor checks, package and project settings",
+  "sourceAuxiliary": {
+    "count": 24,
+    "unchanged": true,
+    "receipt": "source-auxiliary.json"
+  },
+  "domain": {
+    "freshTotal": 1483,
+    "receipt": "domain-validation.json",
+    "sourceOracleCases": 8,
+    "oracleReceipt": "discover-source-vectors.json"
+  },
+  "native": {
+    "newTotal": 369,
+    "newByDomain": {
+      "hudAssertions": 14,
+      "hubAssertions": 58,
+      "audioAssertions": 34,
+      "sacrificeAssertions": 107,
+      "discoverAssertions": 156
+    },
+    "relatedRegressionTotal": 943,
+    "assertionTotal": 1312,
+    "filmFlowPassed": true,
+    "receiptTicks": 61,
+    "journeyTicks": 448,
+    "receipts": {
+      "native-round6-5": {
+        "assertions": 369,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound6Validation.Run",
+          "pid": 17068,
+          "startedAt": "2026-11-01T07:25:33.7901745Z",
+          "endedAt": "2026-11-01T07:26:00.4886138Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round6-5"
+        },
+        "processSha256": "ac4e4d15456de011929479839c4b3474235b389cf29ab1f9b77ea6444e0c7a00",
+        "resultSha256": "1d974c291046d37d7bd59a063e9f656d225c243ba1101a8cb492e3a47e123ae3",
+        "currentSourceDifferences": [],
+        "reuseBoundary": "Later differences are confined to the opt-in normal-player review, Discover/Grave shared surface geometry and its new dedicated checks. Fresh Round6 native and normal-player reruns cover those changed UI paths; older regressions do not execute Discover/Grave. All Core/Run business inputs remain byte-identical."
+      },
+      "native-round5-regression": {
+        "assertions": 262,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound5Validation.Run",
+          "pid": 4840,
+          "startedAt": "2026-11-01T06:11:30.4596368Z",
+          "endedAt": "2026-11-01T06:11:44.2060295Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round5-regression"
+        },
+        "processSha256": "d966a11b0e8e88ea89681eef088c342c14373bbb25d0202a31fb21457f88c7dd",
+        "resultSha256": "b12722966b910dd44150d4fdb96fe5ebacad88424ca18227e0cba0237f6d7914",
+        "currentSourceDifferences": [
+          "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+        ],
+        "reuseBoundary": "Later differences are confined to the opt-in normal-player review, Discover/Grave shared surface geometry and its new dedicated checks. Fresh Round6 native and normal-player reruns cover those changed UI paths; older regressions do not execute Discover/Grave. All Core/Run business inputs remain byte-identical."
+      },
+      "native-round4-regression": {
+        "assertions": 127,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound4Validation.Run",
+          "pid": 37388,
+          "startedAt": "2026-11-01T06:11:44.3252998Z",
+          "endedAt": "2026-11-01T06:12:01.2128894Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round4-regression"
+        },
+        "processSha256": "06a89a6bfa92718d43d3d9677480a03dea0105b7fd2ea68f15a3d68ebd42366b",
+        "resultSha256": "ae604178d8e4ecd5b4488328ba180de2dcb085c3bc55c10008b04092fc09ab95",
+        "currentSourceDifferences": [
+          "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+        ],
+        "reuseBoundary": "Later differences are confined to the opt-in normal-player review, Discover/Grave shared surface geometry and its new dedicated checks. Fresh Round6 native and normal-player reruns cover those changed UI paths; older regressions do not execute Discover/Grave. All Core/Run business inputs remain byte-identical."
+      },
+      "native-round3-regression": {
+        "assertions": 131,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound3Validation.Run",
+          "pid": 13216,
+          "startedAt": "2026-11-01T06:12:01.2882762Z",
+          "endedAt": "2026-11-01T06:12:19.8451059Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round3-regression"
+        },
+        "processSha256": "47a47bc6b56ba99a6c7d8d16059839803ef9139f67676fb7b8b24f135a06407f",
+        "resultSha256": "2a1bb791a6edc665dd15c08d45a9609874f673079f4371b8c0ab6d3a7337e659",
+        "currentSourceDifferences": [
+          "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+        ],
+        "reuseBoundary": "Later differences are confined to the opt-in normal-player review, Discover/Grave shared surface geometry and its new dedicated checks. Fresh Round6 native and normal-player reruns cover those changed UI paths; older regressions do not execute Discover/Grave. All Core/Run business inputs remain byte-identical."
+      },
+      "native-round2-regression": {
+        "assertions": 375,
+        "process": {
+          "method": "Sdt.Editor.CurrentRound2Validation.Run",
+          "pid": 35836,
+          "startedAt": "2026-11-01T06:12:19.9185865Z",
+          "endedAt": "2026-11-01T06:12:36.0038728Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-round2-regression"
+        },
+        "processSha256": "e1a643e491a0c0163297a7d60fa05c79071adc0544b1fb602a7c96bb646ee91f",
+        "resultSha256": "1c5f70774a3856785636532452d71fab3ae12389fbfe43837fefee82eb63aea3",
+        "currentSourceDifferences": [
+          "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+        ],
+        "reuseBoundary": "Later differences are confined to the opt-in normal-player review, Discover/Grave shared surface geometry and its new dedicated checks. Fresh Round6 native and normal-player reruns cover those changed UI paths; older regressions do not execute Discover/Grave. All Core/Run business inputs remain byte-identical."
+      },
+      "native-shared-regression": {
+        "assertions": 48,
+        "process": {
+          "method": "Sdt.Editor.CurrentParityValidation.Run",
+          "pid": 32916,
+          "startedAt": "2026-11-01T06:12:36.0732229Z",
+          "endedAt": "2026-11-01T06:12:55.7138937Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-shared-regression"
+        },
+        "processSha256": "5c741b6c4f7bbef47aacfae9ba0fc962434dba5fc2dfd486d054a56470419925",
+        "resultSha256": "edb0754d795e1a41b164441529b649e24e5a415b61c406560846e94804dc5c52",
+        "currentSourceDifferences": [
+          "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+        ],
+        "reuseBoundary": "Later differences are confined to the opt-in normal-player review, Discover/Grave shared surface geometry and its new dedicated checks. Fresh Round6 native and normal-player reruns cover those changed UI paths; older regressions do not execute Discover/Grave. All Core/Run business inputs remain byte-identical."
+      },
+      "native-film-regression": {
+        "assertions": 0,
+        "process": {
+          "method": "Sdt.Editor.CurrentFilmFlowValidation.Run",
+          "pid": 17200,
+          "startedAt": "2026-11-01T06:12:55.7801259Z",
+          "endedAt": "2026-11-01T06:13:26.6006481Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-film-regression"
+        },
+        "processSha256": "dafd17e617b9d3340250826d017b799d12d3b3804dfcfff26072194b3ced6f4b",
+        "resultSha256": "2d52301b3f2d041b904b2463eda90011adac8c30a54868f0324691e1b581694b",
+        "currentSourceDifferences": [
+          "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+        ],
+        "reuseBoundary": "Later differences are confined to the opt-in normal-player review, Discover/Grave shared surface geometry and its new dedicated checks. Fresh Round6 native and normal-player reruns cover those changed UI paths; older regressions do not execute Discover/Grave. All Core/Run business inputs remain byte-identical."
+      },
+      "native-receipts": {
+        "assertions": 0,
+        "process": {
+          "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunReceipts",
+          "pid": 2196,
+          "startedAt": "2026-11-01T06:13:26.6742756Z",
+          "endedAt": "2026-11-01T06:14:15.4705113Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-receipts"
+        },
+        "processSha256": "d73c17292b83c8b6b717b307bf2c0378b17d41c708b831fc13ce64f1068d6080",
+        "resultSha256": "48d301a9d017180f5ad1933b79450c6a123965775e9849e31cedb91f8581ad97",
+        "currentSourceDifferences": [
+          "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+        ],
+        "reuseBoundary": "Later differences are confined to the opt-in normal-player review, Discover/Grave shared surface geometry and its new dedicated checks. Fresh Round6 native and normal-player reruns cover those changed UI paths; older regressions do not execute Discover/Grave. All Core/Run business inputs remain byte-identical."
+      },
+      "native-journey": {
+        "assertions": 0,
+        "process": {
+          "method": "Sdt.Editor.CurrentMigrationFlowValidation.RunJourney",
+          "pid": 37092,
+          "startedAt": "2026-11-01T06:14:15.5415272Z",
+          "endedAt": "2026-11-01T06:16:06.8861004Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 828,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\native-journey"
+        },
+        "processSha256": "fcd4816885f995b7f0df07fa1d67cb82a5f9e98292160d6a63f0f04043613193",
+        "resultSha256": "15a8ea9782500385e48c6085312a2425a63730b1685d77178ff0a5daa1ac2560",
+        "currentSourceDifferences": [
+          "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+          "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+          "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+        ],
+        "reuseBoundary": "Later differences are confined to the opt-in normal-player review, Discover/Grave shared surface geometry and its new dedicated checks. Fresh Round6 native and normal-player reruns cover those changed UI paths; older regressions do not execute Discover/Grave. All Core/Run business inputs remain byte-identical."
+      }
+    }
+  },
+  "build": {
+    "result": "Succeeded",
+    "errors": 0,
+    "inputCount": 3993,
+    "inputsUnchanged": true,
+    "buildGUID": "c3ee3347a03149de80bbb7fe3f0bb5c2",
+    "productFiles": 166,
+    "productBytes": 2734291432,
+    "productManifest": "product-manifest.json",
+    "launcherHashIsNotVersionIdentity": true,
+    "process": "build-desktop-6/process.json"
+  },
+  "player": {
+    "passed": true,
+    "display": {
+      "screenWidth": 2560,
+      "screenHeight": 1440,
+      "dpi": 120.0,
+      "fullScreenMode": "Windowed",
+      "desktop": {
+        "width": 2560,
+        "height": 1440
+      },
+      "display": {
+        "renderingWidth": 2560,
+        "renderingHeight": 1440,
+        "systemWidth": 2560,
+        "systemHeight": 1440
+      },
+      "quality": "Ultra",
+      "targetFrameRate": 60,
+      "bufferWidthScale": 1.0,
+      "bufferHeightScale": 1.0,
+      "canvas": {
+        "mode": "ScreenSpaceOverlay",
+        "scaleFactor": 1.33333337,
+        "width": 1920.0,
+        "height": 1080.0,
+        "lossyScale": {
+          "x": 1.33333337,
+          "y": 1.33333337,
+          "z": 1.33333337
+        },
+        "scaler": "ScaleWithScreenSize",
+        "referenceWidth": 1920.0,
+        "referenceHeight": 1080.0,
+        "matchWidthOrHeight": 0.5
+      },
+      "windowsDpi": {
+        "available": true,
+        "processAwareness": 2,
+        "result": 0
+      },
+      "graphics": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "graphicsApi": "Direct3D12",
+      "unityVersion": "6000.6.7f1",
+      "buildGUID": "c3ee3347a03149de80bbb7fe3f0bb5c2"
+    },
+    "exitCode": 0,
+    "captures": 83,
+    "records": 211,
+    "resultSha256": "49b85e9ae879fc7582bf0a687bbff70c66cdb1c98febbf0dc15e62cffda2c520",
+    "process": "player-6/process.json",
+    "input": "Constructed native UI/raycast/commands with zero-alpha nonactivating host; no OS hardware input."
+  },
+  "visualReviews": {
+    "receipt": "visual-review.json",
+    "count": 21
+  },
+  "performance": "performance.json",
+  "artifacts": "artifacts.json",
+  "failuresRetained": {
+    "domain": "Battle new-QA brace error, RNG state format adapter, and armor fixture field corrected in checks only. Each failed attempt and final successful retry retained.",
+    "native-round6": "New player diagnostic had ambiguous OwnedCard alias, fixed only diagnostic compile input.",
+    "player": "Emergency opener clicked before settled layout; entry capture exposed actual rendered geometry. No business code change.",
+    "player-5": "83-capture process passed but new Grave image review showed global HUD overlapping its title. Added exact Grave/Discover cover types, removed redundant Discover name fallback and checked actual hide/restore.",
+    "player-4": "Source selection can award items that are granted but not put in the hand. Corrected only the player test assumption to verify the selected exact variant UID and its actual type-specific destination; energy/source assertions retained.",
+    "player-3": "Functional 81-capture process passed, but actual image review failed Discover header/prompt clipping; corrected only shared surface geometry and added dedicated checks. Preserved visual-review-failed.json.",
+    "player-2": "First selection/cancel/return passed. Immediate second-open card click hit the mask before layout settled. Added bounded true-raycast readiness without suppressing blocked-click failure."
+  },
+  "scope": "No OS hardware input, multi-size acceptance, natural unassisted gameplay, whole-frame allocations, FPS or overall draw-call reduction claim.",
+  "continuousGoal": "active",
+  "publication": {
+    "status": "preparing",
+    "branch": "codex/unity-validated-20261101"
+  }
+}

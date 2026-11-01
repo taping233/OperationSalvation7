@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "branch": "codex/unity-validated-20261101",
+  "finalCommit": "d8f40d78a076e365f9c3993023f35669e32b1983",
+  "codeAndChecksCommit": "eabc0ccdb87b6086809acc37e8efba4a7aaf501c",
+  "runtimeCommit": "16f0b31488e203374bb1a24ca52295b357fe9042",
+  "remoteReadBack": "d8f40d78a076e365f9c3993023f35669e32b1983",
+  "nativeUnchangedBySeal": true,
+  "source812Auxiliary19Build3977Unchanged": true,
+  "product166HashesUnchanged": true,
+  "originalHeadsAndParentIndexPreserved": true,
+  "publicationTrackedAndIndexClean": true,
+  "retainedUntrackedReports": [
+    "搜打撤/docs/evidence/2026-11-01-staged-check/2026-11-01T04-02-38.793Z-7a3e88ba-staged.json",
+    "搜打撤/docs/evidence/2026-11-01-unity-parity-round4/2026-11-01T03-09-29.070Z-ee00ab14-staged.json"
+  ],
+  "githubActionsCount": 0,
+  "ciScope": "No push CI configured for this codex branch; local native and domain acceptance is the source of validation.",
+  "atUtc": "2026-11-01T04:09:44.411763+00:00"
+}

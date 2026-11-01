@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "error": null,
+  "rewardAssertions": 54,
+  "shopAssertions": 42,
+  "battleAssertions": 25,
+  "archiveAssertions": 10,
+  "scope": "Native constructed submit and lifetime checks in isolated profile; no OS input, multi-size or FPS claim."
+}

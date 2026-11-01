@@ -79,17 +79,21 @@ for row in dependencies["recommendedProvenanceUnityRelative"]:
 domain_files = [
     "_planning/parity-1031/battle-check/BattleChecks.csproj", "_planning/parity-1031/battle-check/Program.cs",
     "_planning/parity-1031/battle-check/Round3Checks.cs", "_planning/parity-1031/battle-check/Round4Checks.cs",
+    "_planning/parity-1031/battle-check/Round6Checks.cs",
+    "_planning/parity-1031/battle-check/Round6PreviewChecks.cs",
     "_planning/parity-1031/HubParityChecks.csproj", "_planning/parity-1031/HubParityChecks.cs",
     "_planning/parity-1031/hub-source-vectors.mjs", "_planning/parity-1031/hub-source-vectors.json",
     "_planning/parity-1031/run-check/RunParityChecks.csproj", "_planning/parity-1031/run-check/Program.cs",
     "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj", "_planning/parity-1101-round2/run-check/Program.cs",
     "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj", "_planning/parity-1101-round3/archive-check/Program.cs",
     "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj", "_planning/parity-1101-round5/export-check/Program.cs",
+    "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj", "_planning/parity-1101-round6/run-check/Program.cs",
+    "_planning/parity-1101-round6/discover-source-oracle.mjs",
     "_planning/migration-1029/current-departure/Stubs.cs"
 ]
 for relative in domain_files:
     add(relative, "domain-check")
-for folder in ("parity-1101-round2", "parity-1101-round3", "parity-1101-round4", "parity-1101-round5"):
+for folder in ("parity-1101-round2", "parity-1101-round3", "parity-1101-round4", "parity-1101-round5", "parity-1101-round6"):
     for pattern in ("*.md", "*.json"):
         for path in sorted((UNITY / "_planning" / folder).glob(pattern)):
             add(path.relative_to(UNITY).as_posix(), "parity-acceptance")

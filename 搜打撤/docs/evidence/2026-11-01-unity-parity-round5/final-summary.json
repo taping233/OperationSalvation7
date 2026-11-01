@@ -190,6 +190,9 @@
     "codeAndChecksCommit": "eabc0ccdb87b6086809acc37e8efba4a7aaf501c",
     "sourceRemoteReadBack": "eabc0ccdb87b6086809acc37e8efba4a7aaf501c",
     "receipts": "publication/README.md",
-    "seal": "Following commit contains only this final documentation/receipt update. Final remote head is recorded locally after its push."
+    "seal": "Following commit contains only this final documentation/receipt update. Final remote head is recorded locally after its push.",
+    "finalCommit": "d8f40d78a076e365f9c3993023f35669e32b1983",
+    "finalRemoteReadBack": "d8f40d78a076e365f9c3993023f35669e32b1983",
+    "finalReceipt": "publication/final-remote.json"
   }
 }

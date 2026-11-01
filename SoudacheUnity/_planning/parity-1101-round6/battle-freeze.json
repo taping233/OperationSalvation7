@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "date": "2026-11-01",
+  "owner": "battle_parity",
+  "sourceFrozen": true,
+  "fileCount": 21,
+  "totalBytes": 365295,
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Map.cs",
+      "group": "production",
+      "bytes": 13767,
+      "sha256": "f2eae354115b2f11402ffbe58e18af040b477e16246d2c309e2a4691ec1dbc11"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CardSacrificeScreen.cs",
+      "group": "production",
+      "bytes": 11506,
+      "sha256": "0dc04aea2dcdcca1a9b27290d067d81495a5e1b059fe169aa79a2deca5f2de4f"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleSession.cs",
+      "group": "production",
+      "bytes": 79028,
+      "sha256": "c8baeb6cd5f983324a2b47ea6550a710acd7107e6d4721eaee3547cff5521a78"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/StructuredRules.cs",
+      "group": "production",
+      "bytes": 82131,
+      "sha256": "38eb69e3af85e106b682dc99f2108cf992d888eb246ecf4d72128c2ca5da919e"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/DeckBottomDiscovery.cs",
+      "group": "production",
+      "bytes": 1023,
+      "sha256": "7b50052a50c5c0d544472e1c394fbb01ba4a33e5162fa12f820d8d490f5bb5ef"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleItems.cs",
+      "group": "production",
+      "bytes": 10273,
+      "sha256": "c844530b229ad93f3c7ae31de654878a2090869e7cdc859ba0bb256258731c53"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleDiscoveryPreview.cs",
+      "group": "production",
+      "bytes": 10023,
+      "sha256": "0903f1b3d6fe5d07688c6dac730ca7792926c0257251dd70f4b04b99eebec704"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Battle/BattleDiscoveryPreview.cs.meta",
+      "group": "production",
+      "bytes": 60,
+      "sha256": "2523abc2b863b4b0c0cd7471dafe2fb2d0c81400bbd76629fe58132f2911bbfa"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleEvents.cs",
+      "group": "production",
+      "bytes": 6763,
+      "sha256": "ae36a91d07c1e37aa452f8a7fd2526a3e9006804898f4675c33bccb54f9c96b0"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs",
+      "group": "production",
+      "bytes": 14547,
+      "sha256": "e2ac09019d00e7bdb9f7b6c6d6675351f78fae28ec321cd843db154c962e5ca8"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/BattleBridge.cs",
+      "group": "production",
+      "bytes": 24702,
+      "sha256": "f7d337c09dd0a7e3fc71433a78ec00892e234069c1094ab7fb6ca14aa34cea09"
+    },
+    {
+      "path": "Assets/Editor/CurrentSacrificeRound6Checks.cs",
+      "group": "nativeChecks",
+      "bytes": 13077,
+      "sha256": "3dcaee5bc165070a133bd8dd68b8e5a29720041706132e63f2267e6e31af58cc"
+    },
+    {
+      "path": "Assets/Editor/CurrentSacrificeRound6Checks.cs.meta",
+      "group": "nativeChecks",
+      "bytes": 60,
+      "sha256": "58c2fc2d73b209bd48b380d28b5a2359dda735c30a5ea8dc5bc8332e97541655"
+    },
+    {
+      "path": "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+      "group": "nativeChecks",
+      "bytes": 21713,
+      "sha256": "8b4163c7cf1b3ce9a644192b83e7e685184eea93c2b3853abdef55482f9b7b12"
+    },
+    {
+      "path": "Assets/Editor/CurrentDiscoverRound6Checks.cs.meta",
+      "group": "nativeChecks",
+      "bytes": 60,
+      "sha256": "2a81cfb12082f28fc120de7b08e2fd886f6e12f74ef1be0c374d453686fb5c48"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "group": "domainChecks",
+      "bytes": 581,
+      "sha256": "aa5be6398cd1c02892855278c92f69b268ede2c21166dc2120c7cc20eff52ca3"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Program.cs",
+      "group": "domainChecks",
+      "bytes": 17192,
+      "sha256": "6d3fe2a90e5d6737e8236bb8b8b290801f1ade4231a9c301e2c789c8a932470f"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Round6Checks.cs",
+      "group": "domainChecks",
+      "bytes": 14678,
+      "sha256": "ae2e4477c82cde8696341764182d843bd2298b675b77f209f02e7e8820c3ab4c"
+    },
+    {
+      "path": "_planning/parity-1031/battle-check/Round6PreviewChecks.cs",
+      "group": "domainChecks",
+      "bytes": 24970,
+      "sha256": "d316bb17034ced316240b5d741191e022955ed6580a869ca03062b6ec72957ac"
+    },
+    {
+      "path": "_planning/parity-1101-round6/discover-source-oracle.mjs",
+      "group": "sourceOracle",
+      "bytes": 5487,
+      "sha256": "ace62a7a0f40f1156ded4e77858364f65db3bdf50b8c3cceff8b185dc18aa30a"
+    },
+    {
+      "path": "_planning/parity-1101-round6/battle-audit.md",
+      "group": "notes",
+      "bytes": 13654,
+      "sha256": "c58a602152d6960b972e47901084e121a2d83b6ca22b0da255ce355961890ea2"
+    }
+  ],
+  "reviews": [
+    {
+      "path": "_planning/parity-1101-round6/sacrifice-independent-review.md",
+      "sha256": "2807f67dd7255941ca8bcf3fe42eb1ef04f4bf568194317b0a134f099487d961",
+      "kind": "read-only static review, not execution"
+    },
+    {
+      "path": "_planning/parity-1101-round6/discover-preview-audit.md",
+      "sha256": "7c8fce99da633e8edaa4800cc09669e2ea779b16a1f5b0152b688baedfd81b6d",
+      "kind": "read-only static review, not execution"
+    }
+  ],
+  "execution": {
+    "compileRun": false,
+    "testsRun": false,
+    "unityStarted": false,
+    "playerStarted": false,
+    "status": "Player-5 exit0/83 PNG failed shared HUD overlap on Grave. Root owns TopBar production fix; GraveGeometry adds actual hidden/restore CanvasGroup assertions (+2, expected Discover156/new369/total1312). Root unified rerun pending; owner ran no tests."
+  },
+  "domainEntry": "_planning/parity-1031/battle-check/BattleChecks.csproj -> Program.DiscoveryCancellation + DiscoveryPreviewChecks; existing Round3/Round4 bodies unchanged",
+  "nativeEntries": [
+    "global::CurrentSacrificeRound6Checks.Run()/Assertions",
+    "global::CurrentDiscoverRound6Checks.Run()/Assertions"
+  ],
+  "sourceOracle": {
+    "script": "_planning/parity-1101-round6/discover-source-oracle.mjs",
+    "arguments": "<absolute evidence output JSON>",
+    "beforeDomain": true,
+    "environment": "SDT_DISCOVER_SOURCE_VECTORS=<absolute generated JSON>",
+    "scope": "Actual Source mist-box queue/candidate/RNG normal and second-cancel cases; deterministic UID port and omitted acquisition/visual effects"
+  },
+  "intentionalSourceCorrection": "Computed bag discover/acquire amount <= 0 generates no preview, RNG draw or award. Normal item use cost and other ops remain; Source zero-count award is not copied.",
+  "ui": {
+    "discoveryButtons": [
+      "discoverPick-0",
+      "discoverPick-1",
+      "discoverPick-2",
+      "discoverConfirm",
+      "discoverCancel"
+    ],
+    "owner": "BattleToken + long selectionId + render revision; Boot command also requires current Session",
+    "metadata": [
+      "kind",
+      "sourceCommit: preview|committed",
+      "sourceUid"
+    ],
+    "admissionSeconds": 0.35,
+    "sacrificeButtons": [
+      "sacrificePick-<UID>",
+      "sacrificeConfirm",
+      "sacrificeBag",
+      "sacrificeCancel"
+    ]
+  },
+  "boundaries": [
+    "No Vite edits, no App.cs edits, no file deletion, no stage/commit/push",
+    "Native controls use actual EventSystem Submit on controlled fixture state; no claim of physical input or Raycast layout coverage",
+    "Normal Player evidence is Root-owned; no new screenshots reviewed here",
+    "DeckFormation unconditional Layout audit deferred by Root, unmodified",
+    "CardVisual HideCost correction affects equipment/items and similar no-cost types; move/spell printed costs were already visible"
+  ]
+}

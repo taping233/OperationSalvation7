@@ -1,0 +1,30 @@
+{
+  "atUtc": "2026-11-01T05:58:29.799336+00:00",
+  "scope": "All seven domain-check projects, check source/vectors/resource stubs and native/player/source-oracle runners outside the Unity formal-source manifest. Generated Source oracle JSON is a separate recorded validation input.",
+  "files": {
+    "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj": "a6c3d5d0366a998ed59abdf26cc5b64d14d5e985f2210af3ec7f0e9c83553a94",
+    "_planning/parity-1101-round5/export-check/Program.cs": "f906049f17c2d97058eba9a207db055df7bf22e6a9f9e16d3496a188f9a26b7d",
+    "_planning/parity-1031/battle-check/BattleChecks.csproj": "aa5be6398cd1c02892855278c92f69b268ede2c21166dc2120c7cc20eff52ca3",
+    "_planning/parity-1031/battle-check/Program.cs": "6d3fe2a90e5d6737e8236bb8b8b290801f1ade4231a9c301e2c789c8a932470f",
+    "_planning/parity-1031/battle-check/Round3Checks.cs": "5f0b8884f0e505121253f5bbb7108978d2eff375084d5a055d486a08f1eb13c6",
+    "_planning/parity-1031/battle-check/Round4Checks.cs": "99cb2543159a8f0da909c208ec9ad81de95eb08a081084229dd88276a88ebe1b",
+    "_planning/parity-1031/run-check/RunParityChecks.csproj": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+    "_planning/parity-1031/run-check/Program.cs": "f2845eac2704d96247b6953c9345ba7acdb9466ac7c01d838df0ba8f9374d81f",
+    "_planning/parity-1031/HubParityChecks.csproj": "0982a967cf7d1fee4ca7d9c3c36136873f371a2bb93ad4bed73243755bc27439",
+    "_planning/parity-1031/HubParityChecks.cs": "dcfddd8bcdbe221e05cf7d9c7883b7ad69f7d3d6ee9d1a81f0f183c2836712b1",
+    "_planning/parity-1031/hub-source-vectors.json": "7664fab0e9a3455070123e902c9dc103e15bccc11002392d6fbf1ecd0fe61371",
+    "_planning/parity-1031/hub-source-vectors.mjs": "877842e8fd2d3f5b2b97022a00e14f87be0462a9c07669ec780691cb52759d6e",
+    "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+    "_planning/parity-1101-round2/run-check/Program.cs": "246a3918ecc54047b9be98c1eefa2c4eb2f7fec7c988f8493e3beffea1b319f7",
+    "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+    "_planning/parity-1101-round3/archive-check/Program.cs": "af8d0cd6be575e0e221e1a4ec52e3156f2cb165ba344ec1c84c509002747f073",
+    "_planning/migration-1029/current-departure/Stubs.cs": "7ad62d58fcba990a4af59f32ec71286168aec6464073d23336dfde265d9ed87d",
+    "_planning/migration-1029/run_native_check.ps1": "0ee4a1c7f14112474eaa50b86c36387229cc18b9d73a83253dadbf9e09903722",
+    "_planning/migration-1030-fidelity/clarity/run_hidden_player.ps1": "ba3d3663f879661bd4f54b8bb87d3337cf61b3561331e1fcaf8562a3cad7d9e9",
+    "_planning/parity-1031/battle-check/Round6Checks.cs": "a8a0e293864ae25faf347177c0759413b66b2bb8afc3d6d74bd2bfaa0255e4b9",
+    "_planning/parity-1031/battle-check/Round6PreviewChecks.cs": "608a5c8dff4cc6627b02a06883e471b8581c85bef1ca3af5b5b5477ba30a9d65",
+    "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+    "_planning/parity-1101-round6/run-check/Program.cs": "50f72bb126f7918ebde1512610b9811bfcc0436d550ebc0ad1d604d1bb3d819f",
+    "_planning/parity-1101-round6/discover-source-oracle.mjs": "ace62a7a0f40f1156ded4e77858364f65db3bdf50b8c3cceff8b185dc18aa30a"
+  }
+}

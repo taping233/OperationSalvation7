@@ -1,0 +1,15 @@
+{
+  "exitCode": 0,
+  "startedAt": "2026-11-01T06:06:31.4824845Z",
+  "endedAt": "2026-11-01T06:06:34.4856003Z",
+  "project": "_planning/parity-1031/battle-check/BattleChecks.csproj",
+  "arguments": [
+    "run",
+    "--project",
+    "_planning/parity-1031/battle-check/BattleChecks.csproj",
+    "--no-restore",
+    "-c",
+    "Release"
+  ],
+  "sourceOracle": "D:/素材/代号柒/搜打撤/docs/evidence/2026-11-01-unity-parity-round6/discover-source-vectors.json"
+}

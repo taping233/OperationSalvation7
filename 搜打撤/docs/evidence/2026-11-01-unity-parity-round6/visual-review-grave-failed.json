@@ -1,0 +1,20 @@
+{
+  "passed": false,
+  "atUtc": "2026-11-01T07:24:26.638266+00:00",
+  "reviewer": "Friday/root actual view_image",
+  "playerProcessPassed": true,
+  "buildGUID": "fb166685443d40029e1c28dab3af599c",
+  "window": {
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120
+  },
+  "images": [
+    {
+      "path": "player-5/player-grave.png",
+      "sha256": "c6323405dc789ec4b8abe5386413b78431f82f4ae54af8f31ba4e1b904888bf0",
+      "observation": "Grave surface/header are inside the screen, but global run HUD remains visible above the overlay and overlaps its title. Visual acceptance fails."
+    }
+  ],
+  "fixBoundary": "CurrentRunTopBar missing GravePanel cover classification; no battle rules change."
+}

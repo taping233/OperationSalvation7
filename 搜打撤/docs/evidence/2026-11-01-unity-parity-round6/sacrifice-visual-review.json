@@ -1,0 +1,134 @@
+{
+  "passed": true,
+  "reviewer": "Friday/run_parity",
+  "reviewMethod": "view_image on each original PNG; no generated or substituted image",
+  "player": "player-6",
+  "buildGUID": "c3ee3347a03149de80bbb7fe3f0bb5c2",
+  "window": {
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120,
+    "fullScreenMode": "Windowed",
+    "canvasMode": "ScreenSpaceOverlay",
+    "canvasReferenceWidth": 1920.0,
+    "canvasReferenceHeight": 1080.0
+  },
+  "scope": "Only these five actual standalone backbuffer captures were visually reviewed. No new clipping, overlap, stale selection panel or unreadable card face was found in this visible scope.",
+  "input": "No OS input; zero-alpha nonactivating click-through parent HWND; standalone backbuffer at current physical primary desktop size",
+  "processArtifact": {
+    "path": "player-6/process.json",
+    "sha256": "34eb56d07fc495d29d92d41b4816a1a4b8cc03f6c7bc4c71076f3a6ae20642db",
+    "bytes": 1879
+  },
+  "resultArtifact": {
+    "path": "player-6/result.json",
+    "sha256": "49b85e9ae879fc7582bf0a687bbff70c66cdb1c98febbf0dc15e62cffda2c520",
+    "bytes": 7536876
+  },
+  "images": [
+    {
+      "path": "player-6/player-emergency-entry.png",
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956",
+      "passed": true,
+      "observation": "紧急撤离点标题、献祭3张说明及选择/返回两项完整可读；选项面板、底部说明与顶栏无重叠或越屏。"
+    },
+    {
+      "path": "player-6/player-sacrifice-candidates.png",
+      "sha256": "981bd05dfbb4d2c4ab96f43f44fc7ee0163807f7f3988fb8991ca0d8f8cf7fbb",
+      "passed": true,
+      "observation": "已选0/3与未满额的禁用确认状态一致；同名不同费用卡面和点击选择提示可读，整理背包/返回撤离点按钮完整。下排卡片在滚动视口底边裁切，未覆盖固定按钮。"
+    },
+    {
+      "path": "player-6/player-sacrifice-selected.png",
+      "sha256": "6ce4bba461fed2a2b17e2ba92fcf925d852ea9823067376626e54ab61937336d",
+      "passed": true,
+      "observation": "已选3/3，三张所选卡的金框不遮卡图和文字，确认按钮呈可用金色；首行撤回提示清晰，底部固定按钮不被滚动内容覆盖。第三张部分位于视口外，本图不证明其全部卡面。"
+    },
+    {
+      "path": "player-6/player-sacrifice-returned.png",
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956",
+      "passed": true,
+      "observation": "返回后恢复紧急撤离点原选项与说明，献祭候选网格和金框均未残留；顶栏、背景及主面板布局一致。"
+    },
+    {
+      "path": "player-6/player-sacrifice-extraction.png",
+      "sha256": "7ff3533357fc65caafb5b4b4ff8304fed17383b2a108074d1778a27a557afd94",
+      "passed": true,
+      "observation": "成功进入整理战利品；待入库6张、仓库5/25及两种批量入库6张、放弃6张并完成等信息完整。卡面/单张入库按钮与侧栏无重叠；第六张仅在下排局部显示，属于滚动区域裁切。"
+    }
+  ],
+  "blocking": [],
+  "limits": [
+    "Constructed page entry and uGUI events, no OS hardware input or natural unassisted journey claim.",
+    "These five static frames do not prove click reception, save durability, UID qualification, all scroll positions, FPS or all other Player images.",
+    "Lower rows are intentionally clipped by scroll viewports; unseen content and the full third selected card were not visually approved.",
+    "Historical Player-3 Discover and Player-5 Grave visual failures remain preserved in their original reports; closure of those other images is owned by Root and is outside this five-image review."
+  ],
+  "previousPlayer5ReviewPreserved": {
+    "passed": true,
+    "reviewer": "Friday/run_parity",
+    "reviewMethod": "view_image on each original PNG; no generated or substituted image",
+    "player": "player-5",
+    "buildGUID": "fb166685443d40029e1c28dab3af599c",
+    "window": {
+      "width": 2560,
+      "height": 1440,
+      "dpi": 120,
+      "fullScreenMode": "Windowed",
+      "canvasMode": "ScreenSpaceOverlay",
+      "canvasReferenceWidth": 1920.0,
+      "canvasReferenceHeight": 1080.0
+    },
+    "scope": "Only these five actual standalone backbuffer captures were visually reviewed. No new clipping, overlap, stale selection panel or unreadable card face was found in this visible sacrifice scope. This is not whole-Player visual acceptance.",
+    "input": "No OS input; zero-alpha nonactivating click-through parent HWND; standalone backbuffer at current physical primary desktop size",
+    "processArtifact": {
+      "path": "player-5/process.json",
+      "sha256": "c7c9b3eaaca33cd045eeada1c823b34af0c29dcae262079922e6e9f3917ee4f5",
+      "bytes": 1876
+    },
+    "resultArtifact": {
+      "path": "player-5/result.json",
+      "sha256": "c1329aaaaa4da59feda3e8b6eea0120794eafccae01ddbd5b0a63f4e39600ecf",
+      "bytes": 7552069
+    },
+    "images": [
+      {
+        "path": "player-5/player-emergency-entry.png",
+        "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956",
+        "passed": true,
+        "observation": "紧急撤离点标题、献祭3张说明及选择/返回两项完整可读；选项面板、底部说明与顶栏无重叠或越屏。"
+      },
+      {
+        "path": "player-5/player-sacrifice-candidates.png",
+        "sha256": "981bd05dfbb4d2c4ab96f43f44fc7ee0163807f7f3988fb8991ca0d8f8cf7fbb",
+        "passed": true,
+        "observation": "已选0/3与未满额的禁用确认状态一致；同名不同费用卡面和点击选择提示可读，整理背包/返回撤离点按钮完整。下排卡片在滚动视口底边裁切，未覆盖固定按钮。"
+      },
+      {
+        "path": "player-5/player-sacrifice-selected.png",
+        "sha256": "6ce4bba461fed2a2b17e2ba92fcf925d852ea9823067376626e54ab61937336d",
+        "passed": true,
+        "observation": "已选3/3，三张所选卡的金框不遮卡图和文字，确认按钮呈可用金色；首行撤回提示清晰，底部固定按钮不被滚动内容覆盖。第三张部分位于视口外，本图不证明其全部卡面。"
+      },
+      {
+        "path": "player-5/player-sacrifice-returned.png",
+        "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956",
+        "passed": true,
+        "observation": "返回后恢复紧急撤离点原选项与说明，献祭候选网格和金框均未残留；顶栏、背景及主面板布局一致。"
+      },
+      {
+        "path": "player-5/player-sacrifice-extraction.png",
+        "sha256": "7ff3533357fc65caafb5b4b4ff8304fed17383b2a108074d1778a27a557afd94",
+        "passed": true,
+        "observation": "成功进入整理战利品；待入库6张、仓库5/25及两种批量入库6张、放弃6张并完成等信息完整。卡面/单张入库按钮与侧栏无重叠；第六张仅在下排局部显示，属于滚动区域裁切。"
+      }
+    ],
+    "blockingInReviewedScope": [],
+    "limits": [
+      "Constructed page entry and uGUI events, no OS hardware input or natural unassisted journey claim.",
+      "These five static frames do not prove click reception, save durability, UID qualification, all scroll positions, FPS or other Player images.",
+      "Lower rows are intentionally clipped by scroll viewports; unseen content and the full third selected card were not visually approved.",
+      "Player-3 Discover visual failure remains preserved in visual-review-failed.json. Root also found a Grave/global-HUD overlap outside these five images in Player-5; that fix and its new validation chain remain separate. No overall Player-5 visual pass is asserted."
+    ]
+  }
+}

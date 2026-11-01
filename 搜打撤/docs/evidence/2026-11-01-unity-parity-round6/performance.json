@@ -1,0 +1,1092 @@
+{
+  "schemaVersion": 2,
+  "round": "unity-parity-round6",
+  "kind": "static-work-reduction-with-functional-receipts",
+  "baseline": {
+    "publishedHead": "d8f40d78a076e365f9c3993023f35669e32b1983",
+    "repositoryPathPrefix": "SoudacheUnity/",
+    "method": "Read exact git HEAD blobs from the existing validated publication worktree; compare current source bytes without changing either worktree or index."
+  },
+  "currentBoundary": {
+    "scope": "Final recorded snapshots of the named 20 performance inputs, compared with the published baseline and bound to native-round6-5 plus build-desktop-6/player-6.",
+    "coreBattleHashStabilityClaim": false,
+    "coreBattleWasInProgressAtInitialPreparation": true,
+    "laterReceiptBoundary": "Native-round6-5 before/after maps and the current source freeze agree for 828 inputs; desktop build before/after maps also match. Nineteen original performance input raw hashes are unchanged; the HUD raw hash is refreshed for explicit DiscoverPanel/GravePanel coverage, with its earlier snapshot retained in sourceSnapshotHistory. Functional checks and images do not establish whole-frame speed.",
+    "evidenceEditorExecutedProjectCode": false,
+    "evidenceEditorRanTests": false,
+    "evidenceEditorLaunchedUnity": false,
+    "evidenceEditorModifiedProductionOrChecks": false
+  },
+  "validation": {
+    "status": "scoped-functional-checks-and-standalone-passed-performance-unmeasured",
+    "domain": "passed-scoped-run93",
+    "native": "passed-round6-369",
+    "standalonePlayer": "passed-player-6",
+    "receiptBinding": "bound-listed-receipts-and-source-shas",
+    "performanceMeasurement": "not-measured",
+    "receipts": [
+      {
+        "path": "source-auxiliary-3.json",
+        "sha256": "f153d98a2e2d87a87b5a04d7322b806429de80788fdded7618afa1318247ac7a"
+      },
+      {
+        "path": "domain-remaining/processes.json",
+        "sha256": "55afb540872af5c8f3b85f69f9a7880727469835842c3b813aaadd760e6e369c"
+      },
+      {
+        "path": "domain-remaining/run-round6.log",
+        "sha256": "5b07fd7678647c921543dcb6769f832c15036d81e6828e1474bb2c094adf34df"
+      },
+      {
+        "path": "discover-source-vectors.json",
+        "sha256": "cbab37db05b379719624e49950cec53cf73f353c549e59ba81f56521af1861d8"
+      },
+      {
+        "path": "domain/discover-source-oracle.log",
+        "sha256": "2a451c7000866d96e07f7c38519b98840042791d3fdf18e76c5a9be07d2c42d1"
+      },
+      {
+        "path": "domain-battle-4/process.json",
+        "sha256": "43d7ca44f76f658931ae954af8376b61b5c2c8a1b57fc4d274d161cc0d66059c"
+      },
+      {
+        "path": "domain-battle-4/battle.log",
+        "sha256": "a954d38ff25da8daa1b5ec3f92d1d5912fd27fd76e8810862875d1e34137883c"
+      },
+      {
+        "path": "native-round6-5/result.json",
+        "sha256": "1d974c291046d37d7bd59a063e9f656d225c243ba1101a8cb492e3a47e123ae3",
+        "bindingBatch": "native-round6-5"
+      },
+      {
+        "path": "native-round6-5/process.json",
+        "sha256": "ac4e4d15456de011929479839c4b3474235b389cf29ab1f9b77ea6444e0c7a00",
+        "bindingBatch": "native-round6-5"
+      },
+      {
+        "path": "native-round6-5/source-before.json",
+        "sha256": "5795e5bfbedc67b2719c9bfc7b55dda26de1ac4779e437391a227327d35d7895",
+        "bindingBatch": "native-round6-5"
+      },
+      {
+        "path": "native-round6-5/source-after.json",
+        "sha256": "5795e5bfbedc67b2719c9bfc7b55dda26de1ac4779e437391a227327d35d7895",
+        "bindingBatch": "native-round6-5"
+      },
+      {
+        "path": "source-freeze.json",
+        "sha256": "eb3dfbcda75acefb11ca555881e50be6972cc4c1efce9ff9977b108de210ea2e",
+        "bindingBatch": "native-round6-5"
+      },
+      {
+        "path": "build-desktop-6/process.json",
+        "sha256": "3670046e1f18d74bfe695c72616f4d3e496a262cc6f20ff4a9a6b5a4c15e38d4",
+        "bindingBatch": "build-desktop-6"
+      },
+      {
+        "path": "build-desktop-6/source-before.json",
+        "sha256": "5795e5bfbedc67b2719c9bfc7b55dda26de1ac4779e437391a227327d35d7895",
+        "bindingBatch": "build-desktop-6"
+      },
+      {
+        "path": "build-desktop-6/source-after.json",
+        "sha256": "5795e5bfbedc67b2719c9bfc7b55dda26de1ac4779e437391a227327d35d7895",
+        "bindingBatch": "build-desktop-6"
+      },
+      {
+        "path": "player-6/result.json",
+        "sha256": "49b85e9ae879fc7582bf0a687bbff70c66cdb1c98febbf0dc15e62cffda2c520",
+        "bindingBatch": "player-6"
+      },
+      {
+        "path": "player-6/process.json",
+        "sha256": "34eb56d07fc495d29d92d41b4816a1a4b8cc03f6c7bc4c71076f3a6ae20642db",
+        "bindingBatch": "player-6"
+      }
+    ],
+    "sourceOracle": "passed-8-controlled-battle-cases"
+  },
+  "claims": [
+    {
+      "id": "hub-single-build-derived-summary",
+      "trigger": "Any HubScreen.Build; the largest old repetition was the home page with unclaimed milestones and a visible pending-rewards row.",
+      "before": "BuildNavigation evaluated PendingRewards in all seven navigation iterations. BuildDeploy evaluated it twice, and a third time when the row was shown. Each PendingRewards allocated PendingAch and evaluated CollectionProgress per unclaimed milestone; the all-cards milestone also called CollectionPool for its threshold. Reward/milestone pages independently rebuilt their summary pool.",
+      "after": "At Build entry, derive CollectionSummary at most once: only when an unclaimed milestone needs pending eligibility, or the current milestone page actually displays progress/total. The resulting local tuple and one PendingAch list feed pending count, home row, navigation badge, reward records and milestone records through arguments. When all milestones are claimed on a page with no summary consumer, no summary pool is read. The home egg count is also reused instead of scanning stash twice.",
+      "staticCounts": {
+        "navigationPendingEvaluationsBefore": 7,
+        "homePendingEvaluationsBefore": "2, or 3 when the pending row is present",
+        "pendingEvaluationsAfter": 1,
+        "poolFormulaBeforePerPendingEvaluation": "U + A, where U is the unclaimed-milestone count and A is 1 when the all-cards milestone is unclaimed, otherwise 0",
+        "conditionalExample": "The checked catalog contains five milestones, including one all-cards milestone. With all five unclaimed and a positive home pending row: 10 PendingRewards evaluations × 6 CollectionPool builds = 60 summary-pool builds, plus 10 PendingAch lists. Current Build uses one summary-pool build and one PendingAch list.",
+        "summaryPoolBuildsAfter": "1 when needed, otherwise 0",
+        "pendingAchievementListsAfter": 1
+      },
+      "remainingWork": "This is one Build only. When needed, it still scans/groups the current catalog and checks collected state, evaluates achievements and milestones, and creates the requested UI. Gallery/card-pool drawing may have its own necessary catalog reads. There is no cache across inventory or definition changes; claiming a milestone independently re-derives eligibility inside its transaction. The initial unconditional-summary extra read in the all-claimed/non-archive case has been removed in this round: both the published baseline and current source use 0 summary pools there. The milestone page still derives one real summary, including after all rewards were claimed; default tuples are only passed through branches with no actual summary consumer. New controlled native-source assertions cover all-claimed home/person profile at 0 provider reads and the milestone page at 1 read with the actual 1 / 2 label; the 58-assertion native Hub suite has passed with matching source inputs; timing/allocation remain unmeasured.",
+      "sources": [
+        "Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs:64",
+        "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentArchiveViews.cs:33",
+        "Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs:84",
+        "Assets/Scripts/Sdt.Run/MetaProgress.Collections.cs:19",
+        "Assets/Resources/Data/CurrentHubCatalog.json:76"
+      ],
+      "runtimeValidation": "passed-native-provider-and-readiness-contracts",
+      "runtimeEvidence": {
+        "assertionField": "hubAssertions",
+        "suiteAssertions": 58,
+        "scope": "CurrentHubRewardsRound6Checks: one provider read where needed; all-claimed home/person at zero, milestone at one with actual 1 / 2 label; badge/reward/claim failure and revalidation behavior. Static conditional 60-to-1 example is still source-derived, not a timed benchmark.",
+        "receipt": "native-round6-5/result.json"
+      }
+    },
+    {
+      "id": "personnel-selected-progress-only",
+      "trigger": "Building the selected personnel profile, upgrade or pool page.",
+      "before": "BuildClasses constructed a ClassSummary list for every class, read each class level/XP, constructed a ClassPool list for every class, then selected one row. The row.pool value had no live consumer in this view.",
+      "after": "BuildClasses reads ClassLv/ClassXP/XpForNext/LevelMax only for the selected character ruleset. The unused ClassSummary DTO/list and row.pool computation were removed. The explicit card-pool tab still constructs the selected class pool when needed for its actual cards.",
+      "staticCounts": {
+        "unusedClassPoolScansBefore": "C per person-page build, C = current ClassList count",
+        "unusedClassPoolScansAfter": 0,
+        "progressSubjectsAfter": 1
+      },
+      "remainingWork": "ClassLv and ClassXP still each call the existing progress lookup; actual personnel UI and selected pool cards are still rendered. The change does not claim that the entire person page has no catalog or allocation work.",
+      "sources": [
+        "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentRooms.cs:100",
+        "Assets/Scripts/Sdt.Run/MetaProgress.cs:82",
+        "Assets/Scripts/Sdt.Core/Cards.cs:230"
+      ],
+      "runtimeValidation": "passed-native-selected-person-and-provider-contracts",
+      "runtimeEvidence": {
+        "assertionField": "hubAssertions",
+        "suiteAssertions": 58,
+        "scope": "CurrentHubRewardsRound6Checks: selected level/XP, no all-character class-pool projection, and all-claimed person profile zero provider reads. Total checks include the broader Hub contract suite.",
+        "receipt": "native-round6-5/result.json"
+      }
+    },
+    {
+      "id": "hidden-header-return-and-stable-visibility",
+      "trigger": "CurrentRunTopBar.Update while no run is active, or while coverage hides the header, including real DiscoverPanel and GravePanel owners.",
+      "before": "Every update walked the panel stack, tested coverage and probed both illustrated-node and reward-scene descendants, even when the header could not be shown. Three CanvasGroup visibility/interactivity properties were written every update.",
+      "after": "Compute run-active/coverage visibility first, with direct DiscoverPanel/GravePanel type recognition. Only a visibility transition writes the CanvasGroup properties. Hidden updates close header detail and return before illustrated/reward descendant probes; visible updates stop each category probe after finding it and stop scanning once both are found.",
+      "staticCounts": {
+        "hiddenIllustratedRewardProbesBefore": "2 × P for P stack panels",
+        "hiddenIllustratedRewardProbesAfter": 0,
+        "unchangedVisibilityPropertyAssignmentsBefore": 3,
+        "unchangedVisibilityPropertyAssignmentsAfter": 0
+      },
+      "remainingWork": "When run-active and covered, Covered still scans up to P panels and retains the settings-component check. Explicit discovery/grave coverage prevents the global HUD from covering those titles and lets these covered frames use the same early return. Visible frames retain coverage/classification, value comparisons and health animation. No whole-page O(1), zero-draw or measured-speed claim is made.",
+      "sources": [
+        "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs:80",
+        "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs:94",
+        "Assets/Editor/CurrentDiscoverRound6Checks.cs:123",
+        "Assets/Editor/CurrentDiscoverRound6Checks.cs:129"
+      ],
+      "runtimeValidation": "passed-native-hidden-and-reactivation-contracts",
+      "runtimeEvidence": {
+        "assertionField": "hudAssertions",
+        "suiteAssertions": 14,
+        "scope": "CurrentHudRound6Checks: real settings coverage, hidden numeric/scene state remains deferred, unhide reads current values. Exact avoided probe/property-call counts remain static source evidence, not runtime instrumentation.",
+        "receipt": "native-round6-5/result.json",
+        "additionalCoverage": {
+          "field": "discoverAssertions",
+          "suiteAssertions": 156,
+          "scope": "Includes real grave owner/header CanvasGroup alpha 0 and restored alpha 1 checks. The fresh native total is 369; no probe-count runtime instrumentation or benchmark is inferred."
+        }
+      }
+    },
+    {
+      "id": "skip-unowned-key-capture-scan",
+      "trigger": "An eligible key-down frame after the existing anyKeyDown/IME guard, with no active key-rebinding capture owner.",
+      "before": "PollKeys scanned the cached KeyCode array for capture before scanning it again for normal actions. A pressed capture candidate could be converted to its binding name once in the guard and again in CaptureKey.",
+      "after": "The capture pass runs only while SuppressGameplayInput says a capture owner exists. Captured keys compute the binding name once and pass it to TryCapture. The existing second owner check still prevents gameplay dispatch if capture remains active.",
+      "staticCounts": {
+        "captureKeyCodePassesWithoutOwnerBefore": 1,
+        "captureKeyCodePassesWithoutOwnerAfter": 0,
+        "ordinaryActionPass": "retained when eligible; text fields can still return early"
+      },
+      "remainingWork": "The KeyCode array was already statically cached; this does not eliminate per-frame Enum allocation because none was present. Frames with no key-down were already skipped. IME, modifier keys, input focus, Escape, Space and Enter keep their existing gates. The retired uncalled DiagClick body was removed; no runtime-speed benefit is assigned to deleting an uncalled method.",
+      "sources": [
+        "Assets/Scripts/Sdt.UI/Kit/App.cs:125",
+        "Assets/Scripts/Sdt.UI/Kit/CurrentInputBindings.cs:21"
+      ],
+      "runtimeValidation": "pending",
+      "runtimeEvidence": {
+        "scope": "Static source comparison only; none of the bound native/Source receipts directly exercises the absence-of-capture KeyCode pass count or physical keyboard input."
+      }
+    },
+    {
+      "id": "saved-map-item-discovery-read-only-reopen",
+      "trigger": "Preparing a map-item discovery whose existing receipt is valid for the current authoritative card catalog.",
+      "before": "Even an existing receipt entered TryPersistMutation, capturing whole-run/Base/RNG/extraction/battle state, cloning the profile transaction, serializing Base/run and committing a profile write. Pool eligibility was rebuilt for each saved candidate; final projection performed per-ID catalog lookup.",
+      "after": "Build the current CardLibrary pool and ID dictionary once. Validate/project an existing receipt through that dictionary and return without a mutation transaction or write. First generation still uses the existing transaction and rolls back receipt/RNG on failure; final selection still validates and commits through the existing transaction.",
+      "staticCounts": {
+        "poolBuildsBeforeForThreeValidCandidates": 4,
+        "poolBuildsAfter": 1,
+        "finalPerCandidateFindByIdBefore": 3,
+        "finalDictionaryLookupsAfter": "at most 3",
+        "repeatReopenWriteTransactionsBefore": 1,
+        "repeatReopenWriteTransactionsAfter": 0
+      },
+      "remainingWork": "Every reopen still constructs the current pool/list/dictionary and checks source ownership, read-error gate and all saved candidate IDs. It is not a persistent cache, and malformed/missing-definition receipts remain failures rather than silently rerolling. Comparing authoritative eligibility also changes correctness for custom overrides; this is not merely a faster read of the obsolete static catalog.",
+      "sources": [
+        "Assets/Scripts/Sdt.Run/BagItemCommands.cs:30",
+        "Assets/Scripts/Sdt.Run/BagItemCommands.cs:55",
+        "Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs:17",
+        "Assets/Scripts/Sdt.Run/SaveSystem.cs"
+      ],
+      "runtimeValidation": "passed-scoped-domain-read-count-and-locked-profile-contracts",
+      "runtimeEvidence": {
+        "assertionField": "runAssertions",
+        "suiteAssertions": 93,
+        "scope": "RunRound6Checks: existing candidates reopen under a real file lock; provider reads one, SaveCompleted zero, state/profile/RNG unchanged. First/final checkpoints and failure behavior remain tested.",
+        "receipt": "domain-remaining/run-round6.log"
+      }
+    },
+    {
+      "id": "saved-coin-pickup-phase-only-return",
+      "trigger": "The retained coin-pickup command path when pickupClaimed and pickupSaved are already true; the normal claim-then-leave consumer passes no onDone callback.",
+      "before": "PickupScreen.Claim saved the claim checkpoint, then TryLeaveCurrentPickup entered another full mutation/save transaction solely to set the runtime Phase to idle.",
+      "after": "The already-saved branch sets runtime Phase=idle and returns without a second transaction/write. Failed/unsaved claims still retry the real checkpoint before leaving; unclaimed leave keeps its existing save. CaptureRunSave does not serialize Phase and LoadRun re-enters idle.",
+      "staticCounts": {
+        "successfulClaimThenLeaveSaveTransactionsBefore": 2,
+        "successfulClaimThenLeaveSaveTransactionsAfter": 1,
+        "additionalLeaveTransactionAfterSavedClaim": 0
+      },
+      "reachabilityBoundary": "Current new layered maps do not generate coin/wood/rations/key nodes. This is a retained command/developer-constructed coin-receipt path, not a claimed performance gain for normal new-map coin visits. No third FinishNode write is assumed: the actual RunLoopBridge consumer supplies onDone=null.",
+      "remainingWork": "The original claim persistence and failure receipt remain. Claim settlement still credits coins before attempting its checkpoint and retains that memory state on save failure; this change does not add an invented rollback/refund.",
+      "sources": [
+        "Assets/Scripts/Sdt.Run/GameRuntime.CurrentPickup.cs:31",
+        "Assets/Scripts/Sdt.UI/Screens/Run/PickupScreen.cs:52",
+        "Assets/Scripts/Sdt.Boot/RunLoopBridge.cs:133",
+        "Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs:64",
+        "Assets/Scripts/Sdt.Core/LayeredMapGenerator.cs:30"
+      ],
+      "runtimeValidation": "passed-scoped-domain-saved-return-and-retry-contracts",
+      "runtimeEvidence": {
+        "assertionField": "runAssertions",
+        "suiteAssertions": 93,
+        "scope": "RunRound6Checks: controlled coin receipt, one claim checkpoint, locked-profile leave changes only runtime phase, no second SaveCompleted/write, retries/load retained. This is not natural new-map coin-node coverage.",
+        "receipt": "domain-remaining/run-round6.log"
+      }
+    },
+    {
+      "id": "sacrifice-retains-candidate-controls",
+      "trigger": "Selecting or unselecting a still-current, unchanged sacrifice candidate.",
+      "before": "The name-only candidate button changed the selection HashSet and called Rebuild, clearing/rebuilding the node body/footer and every candidate row on each click.",
+      "after": "Mounted candidate controls are keyed by actual UID. A valid unchanged Toggle updates its selection mark, state text, selected-count text and confirm availability, while preserving the candidate/root/scroll view. AlignCandidates reconciles added/removed UIDs and refreshes a face only when its serialized definition changes.",
+      "staticCounts": {
+        "fullBodyFooterRebuildsPerStableToggleBefore": 1,
+        "fullBodyFooterRebuildsPerStableToggleAfter": 0,
+        "candidateControlsRecreatedPerStableToggleAfter": 0
+      },
+      "remainingWork": "Each Toggle still calls GetSacrificeCandidates: an O(N) owned-card eligibility scan plus a new list, then a linear UID search and serialization of the selected current card for stale-definition validation. Text and selection-mark changes can dirty UI; this is not zero redraw or zero GC. AlignCandidates still scans/reconciles candidates, serializes definitions and rebinds events; confirm also revalidates the whole candidate set.",
+      "necessaryAddedWork": "Unlike the old name-only rows, the new page mounts real CardFace controls with fees and descriptions. That initial drawing and required changed-definition refresh are intentional fidelity/correctness work, not removed cost. The report makes no total page-time or memory comparison between the old text-only view and the new illustrated view.",
+      "sources": [
+        "Assets/Scripts/Sdt.UI/Screens/Run/CardSacrificeScreen.cs:117",
+        "Assets/Scripts/Sdt.UI/Screens/Run/CardSacrificeScreen.cs:144",
+        "Assets/Scripts/Sdt.Run/GameRuntime.Map.cs:115"
+      ],
+      "runtimeValidation": "passed-native-mounted-identity-scroll-and-rollback-contracts",
+      "runtimeEvidence": {
+        "assertionField": "sacrificeAssertions",
+        "suiteAssertions": 107,
+        "scope": "CurrentSacrificeRound6Checks: exact Button/CardFace/scroll-content/offset identity retained across pick/retract, and retained view after failed persistence with owner/UID validation. No zero-GC or frame-time assertion.",
+        "receipt": "native-round6-5/result.json"
+      }
+    }
+  ],
+  "measurementLimits": {
+    "elapsedMilliseconds": null,
+    "managedAllocationBytes": null,
+    "framesPerSecond": null,
+    "gpuDrawCalls": null,
+    "claimsNotMade": [
+      "zero redraw",
+      "zero GC",
+      "FPS improvement",
+      "measured frame-time improvement",
+      "all flows optimized",
+      "coin nodes naturally present in new maps",
+      "all Core sources frozen"
+    ],
+    "nextStep": "No benchmark result is claimed. Static count reductions are supported by unchanged/final input hashes and scoped functional provider/write/identity checks; final normal Standalone receipts and seven actual image reviews establish their stated behavior/layout scope only."
+  },
+  "sourceSnapshotPaths": [
+    "Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentArchiveViews.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentRooms.cs",
+    "Assets/Scripts/Sdt.Run/MetaProgress.cs",
+    "Assets/Scripts/Sdt.Run/MetaProgress.Collections.cs",
+    "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+    "Assets/Scripts/Sdt.UI/Kit/App.cs",
+    "Assets/Scripts/Sdt.UI/Kit/CurrentInputBindings.cs",
+    "Assets/Scripts/Sdt.Run/BagItemCommands.cs",
+    "Assets/Scripts/Sdt.Run/GameRuntime.CurrentPickup.cs",
+    "Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs",
+    "Assets/Scripts/Sdt.Run/SaveSystem.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Run/PickupScreen.cs",
+    "Assets/Scripts/Sdt.Boot/RunLoopBridge.cs",
+    "Assets/Scripts/Sdt.UI/Screens/Run/CardSacrificeScreen.cs",
+    "Assets/Scripts/Sdt.Run/GameRuntime.Map.cs",
+    "Assets/Scripts/Sdt.Core/LayeredMapGenerator.cs",
+    "Assets/Scripts/Sdt.Core/Cards.cs",
+    "Assets/Resources/Data/CurrentHubCatalog.json"
+  ],
+  "sourceSnapshots": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+      "baselineGitBlobSha256": "908942f5c5f5cc3cc2bedbcc3406f180457637b5ec96a2feda8cabed9a3a54f7",
+      "baselineLfSha256": "908942f5c5f5cc3cc2bedbcc3406f180457637b5ec96a2feda8cabed9a3a54f7",
+      "baselineBytes": 18488,
+      "currentSha256": "e6b21ab1220667c576cdf3d914053ba235eead7661bfe52ccbce16886bd09290",
+      "currentLfSha256": "e6b21ab1220667c576cdf3d914053ba235eead7661bfe52ccbce16886bd09290",
+      "currentBytes": 18676,
+      "currentMtimeNs": 1793512423754595000,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "e6b21ab1220667c576cdf3d914053ba235eead7661bfe52ccbce16886bd09290",
+        "afterSha256": "e6b21ab1220667c576cdf3d914053ba235eead7661bfe52ccbce16886bd09290",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+      "baselineGitBlobSha256": "a388e3e8bb6aa50ffeb957ae85a998a0c912a536c8416aa5228bffb065ef66d2",
+      "baselineLfSha256": "a388e3e8bb6aa50ffeb957ae85a998a0c912a536c8416aa5228bffb065ef66d2",
+      "baselineBytes": 15479,
+      "currentSha256": "4941371d8784936c3f8cfe7e17ea7993008188dffa1a97c21a2b6734236c1ae3",
+      "currentLfSha256": "3abc6efdf0bf05196725b323a8b084f9dd7746519c0b4fb362fa66c9a42bd5ee",
+      "currentBytes": 15764,
+      "currentMtimeNs": 1793507042136196100,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "4941371d8784936c3f8cfe7e17ea7993008188dffa1a97c21a2b6734236c1ae3",
+        "afterSha256": "4941371d8784936c3f8cfe7e17ea7993008188dffa1a97c21a2b6734236c1ae3",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentArchiveViews.cs",
+      "baselineGitBlobSha256": "0bb30e607e5ec07ae8f8ce5b16a7389176468f5ec347c94aa67b1fbb2fa5f15d",
+      "baselineLfSha256": "0bb30e607e5ec07ae8f8ce5b16a7389176468f5ec347c94aa67b1fbb2fa5f15d",
+      "baselineBytes": 13575,
+      "currentSha256": "e0908b2719ff6957dc5646b7bfe0a59b34cb46f9c90442f615171bb0c15a5c84",
+      "currentLfSha256": "fb6c989d8a15bc0815280035bff892430dba85f975989011796cc53f16854451",
+      "currentBytes": 13617,
+      "currentMtimeNs": 1793506856775379400,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "e0908b2719ff6957dc5646b7bfe0a59b34cb46f9c90442f615171bb0c15a5c84",
+        "afterSha256": "e0908b2719ff6957dc5646b7bfe0a59b34cb46f9c90442f615171bb0c15a5c84",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentRooms.cs",
+      "baselineGitBlobSha256": "fa62f696b2e01a50a2b1bdbc8edddc212959b646576297a2865def6deb724c83",
+      "baselineLfSha256": "fa62f696b2e01a50a2b1bdbc8edddc212959b646576297a2865def6deb724c83",
+      "baselineBytes": 16208,
+      "currentSha256": "db4ae59a385c50afbe74f08ab6f179c6f486a85f993f0142cc806bc1a7714680",
+      "currentLfSha256": "3557f476a0c835469e755dd8103d128a1208d00f1fbd15ddec850de394664957",
+      "currentBytes": 16495,
+      "currentMtimeNs": 1793506873770885500,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "db4ae59a385c50afbe74f08ab6f179c6f486a85f993f0142cc806bc1a7714680",
+        "afterSha256": "db4ae59a385c50afbe74f08ab6f179c6f486a85f993f0142cc806bc1a7714680",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/MetaProgress.cs",
+      "baselineGitBlobSha256": "c9a3b285dd80e0dd8862ded8871fefedbff710b97e142a7084bc0afadcb024aa",
+      "baselineLfSha256": "c9a3b285dd80e0dd8862ded8871fefedbff710b97e142a7084bc0afadcb024aa",
+      "baselineBytes": 12744,
+      "currentSha256": "bdfab2bdf272ccf5fc9d7f2b39108a58b48937f42cca7632c05951afa434e537",
+      "currentLfSha256": "bdfab2bdf272ccf5fc9d7f2b39108a58b48937f42cca7632c05951afa434e537",
+      "currentBytes": 12012,
+      "currentMtimeNs": 1793506873536728700,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "bdfab2bdf272ccf5fc9d7f2b39108a58b48937f42cca7632c05951afa434e537",
+        "afterSha256": "bdfab2bdf272ccf5fc9d7f2b39108a58b48937f42cca7632c05951afa434e537",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/MetaProgress.Collections.cs",
+      "baselineGitBlobSha256": "28409f334e6843c4c0715c221c15dbd77ecf01e1b85d53f5fcd0750db4264889",
+      "baselineLfSha256": "28409f334e6843c4c0715c221c15dbd77ecf01e1b85d53f5fcd0750db4264889",
+      "baselineBytes": 6822,
+      "currentSha256": "545d6611511d3f22899418c3eab18a110a3789c39c11e8a7126edd8fae714ce5",
+      "currentLfSha256": "545d6611511d3f22899418c3eab18a110a3789c39c11e8a7126edd8fae714ce5",
+      "currentBytes": 6960,
+      "currentMtimeNs": 1793506856084274500,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "545d6611511d3f22899418c3eab18a110a3789c39c11e8a7126edd8fae714ce5",
+        "afterSha256": "545d6611511d3f22899418c3eab18a110a3789c39c11e8a7126edd8fae714ce5",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+      "baselineGitBlobSha256": "fddde6e648a438455413f57c952d5d78d733d3b278b2e2046ed0d62c598f1ab1",
+      "baselineLfSha256": "fddde6e648a438455413f57c952d5d78d733d3b278b2e2046ed0d62c598f1ab1",
+      "baselineBytes": 12457,
+      "currentSha256": "2c1197d351e0302023bb4f2f3b7ebf99c11d0dbff526b0577ad45570fc98162e",
+      "currentLfSha256": "c1b73e26910f6d24cf4be68863762134a8ede8709cb5fbf77efabd6f825878b0",
+      "currentBytes": 12822,
+      "currentMtimeNs": 1793517575120061100,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "2c1197d351e0302023bb4f2f3b7ebf99c11d0dbff526b0577ad45570fc98162e",
+        "afterSha256": "2c1197d351e0302023bb4f2f3b7ebf99c11d0dbff526b0577ad45570fc98162e",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": null
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Kit/App.cs",
+      "baselineGitBlobSha256": "82b483c879e1ddc1f74423433b2badb70ff3524f6334cd128fdc884f35d6f324",
+      "baselineLfSha256": "82b483c879e1ddc1f74423433b2badb70ff3524f6334cd128fdc884f35d6f324",
+      "baselineBytes": 11563,
+      "currentSha256": "a4175b719fda250f807f309cbeea389a978502ab14bb0e5f1031901298323e89",
+      "currentLfSha256": "0e84794d5bc8ac57b45b928c8515e2f72ef615caf4f5ca252cb6c464810070aa",
+      "currentBytes": 10997,
+      "currentMtimeNs": 1793506910795479000,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "a4175b719fda250f807f309cbeea389a978502ab14bb0e5f1031901298323e89",
+        "afterSha256": "a4175b719fda250f807f309cbeea389a978502ab14bb0e5f1031901298323e89",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Kit/CurrentInputBindings.cs",
+      "baselineGitBlobSha256": "4c9c08bef907b70ee7ea4cf8f46a50c288341d2df814ae98c74c103bb5ffef50",
+      "baselineLfSha256": "4c9c08bef907b70ee7ea4cf8f46a50c288341d2df814ae98c74c103bb5ffef50",
+      "baselineBytes": 8064,
+      "currentSha256": "4c9c08bef907b70ee7ea4cf8f46a50c288341d2df814ae98c74c103bb5ffef50",
+      "currentLfSha256": "4c9c08bef907b70ee7ea4cf8f46a50c288341d2df814ae98c74c103bb5ffef50",
+      "currentBytes": 8064,
+      "currentMtimeNs": 1793302590069881800,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "4c9c08bef907b70ee7ea4cf8f46a50c288341d2df814ae98c74c103bb5ffef50",
+        "afterSha256": "4c9c08bef907b70ee7ea4cf8f46a50c288341d2df814ae98c74c103bb5ffef50",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/BagItemCommands.cs",
+      "baselineGitBlobSha256": "960661f4571d9056348e3a7423c9dbff8ff24fe9ff4e63c3c97e0593bd213e4a",
+      "baselineLfSha256": "960661f4571d9056348e3a7423c9dbff8ff24fe9ff4e63c3c97e0593bd213e4a",
+      "baselineBytes": 7643,
+      "currentSha256": "e08b67db4c77a239a0f3750140c9d23d0e2d150e7daf855208b337fa947beb04",
+      "currentLfSha256": "e08b67db4c77a239a0f3750140c9d23d0e2d150e7daf855208b337fa947beb04",
+      "currentBytes": 9089,
+      "currentMtimeNs": 1793506888882111500,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "e08b67db4c77a239a0f3750140c9d23d0e2d150e7daf855208b337fa947beb04",
+        "afterSha256": "e08b67db4c77a239a0f3750140c9d23d0e2d150e7daf855208b337fa947beb04",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.CurrentPickup.cs",
+      "baselineGitBlobSha256": "a093c7cb35c5fe05b9be558b30ff4b1f98046700cf81763679ab36e180640d3c",
+      "baselineLfSha256": "a093c7cb35c5fe05b9be558b30ff4b1f98046700cf81763679ab36e180640d3c",
+      "baselineBytes": 2803,
+      "currentSha256": "b679fc05cc40512ff072269dac773bb1ea04bc76311db56f8644ad5f1dd64226",
+      "currentLfSha256": "bfcb79fc413bf6f788307236707e73866990e4beb55381c30535e960b573e9ef",
+      "currentBytes": 3140,
+      "currentMtimeNs": 1793506888882111500,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "b679fc05cc40512ff072269dac773bb1ea04bc76311db56f8644ad5f1dd64226",
+        "afterSha256": "b679fc05cc40512ff072269dac773bb1ea04bc76311db56f8644ad5f1dd64226",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Persistence.cs",
+      "baselineGitBlobSha256": "a7d1b6a29a747c16e8702fafa396701a54b2fa3614a87069122119812fd0a6f6",
+      "baselineLfSha256": "a7d1b6a29a747c16e8702fafa396701a54b2fa3614a87069122119812fd0a6f6",
+      "baselineBytes": 5807,
+      "currentSha256": "d87e92602ea1e71695680fc7c01015b6e1a02a3861393742b5b189067acd2549",
+      "currentLfSha256": "a7d1b6a29a747c16e8702fafa396701a54b2fa3614a87069122119812fd0a6f6",
+      "currentBytes": 5897,
+      "currentMtimeNs": 1793366084564949400,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "d87e92602ea1e71695680fc7c01015b6e1a02a3861393742b5b189067acd2549",
+        "afterSha256": "d87e92602ea1e71695680fc7c01015b6e1a02a3861393742b5b189067acd2549",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/SaveSystem.cs",
+      "baselineGitBlobSha256": "232412ece46ba906f88bd3c5b232133cf2279c302ca28dd554b95f6e8188484a",
+      "baselineLfSha256": "232412ece46ba906f88bd3c5b232133cf2279c302ca28dd554b95f6e8188484a",
+      "baselineBytes": 15452,
+      "currentSha256": "232412ece46ba906f88bd3c5b232133cf2279c302ca28dd554b95f6e8188484a",
+      "currentLfSha256": "232412ece46ba906f88bd3c5b232133cf2279c302ca28dd554b95f6e8188484a",
+      "currentBytes": 15452,
+      "currentMtimeNs": 1793454975952221600,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "232412ece46ba906f88bd3c5b232133cf2279c302ca28dd554b95f6e8188484a",
+        "afterSha256": "232412ece46ba906f88bd3c5b232133cf2279c302ca28dd554b95f6e8188484a",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/PickupScreen.cs",
+      "baselineGitBlobSha256": "64950e16e0dde2e25bab1dfc3b9ec580c81a36b82ff42ac99d2ebb0c04e5decd",
+      "baselineLfSha256": "64950e16e0dde2e25bab1dfc3b9ec580c81a36b82ff42ac99d2ebb0c04e5decd",
+      "baselineBytes": 4258,
+      "currentSha256": "4a9c39545368aa1adbfe0dfc8bb5a9e60793e4f2c4cde0347ec3e2739b6068ee",
+      "currentLfSha256": "64950e16e0dde2e25bab1dfc3b9ec580c81a36b82ff42ac99d2ebb0c04e5decd",
+      "currentBytes": 4329,
+      "currentMtimeNs": 1793309414727994700,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "4a9c39545368aa1adbfe0dfc8bb5a9e60793e4f2c4cde0347ec3e2739b6068ee",
+        "afterSha256": "4a9c39545368aa1adbfe0dfc8bb5a9e60793e4f2c4cde0347ec3e2739b6068ee",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Boot/RunLoopBridge.cs",
+      "baselineGitBlobSha256": "ee7301193f357fdf07bf7037ee1d2523e4efe5699782307e6834673e5cb7ac34",
+      "baselineLfSha256": "ee7301193f357fdf07bf7037ee1d2523e4efe5699782307e6834673e5cb7ac34",
+      "baselineBytes": 7043,
+      "currentSha256": "6fc7adbfaab62c6ba54f8e4a4dacda04afd9cc826e23a15f9cb25abf97d3ab85",
+      "currentLfSha256": "ee7301193f357fdf07bf7037ee1d2523e4efe5699782307e6834673e5cb7ac34",
+      "currentBytes": 7184,
+      "currentMtimeNs": 1793455132474704500,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "6fc7adbfaab62c6ba54f8e4a4dacda04afd9cc826e23a15f9cb25abf97d3ab85",
+        "afterSha256": "6fc7adbfaab62c6ba54f8e4a4dacda04afd9cc826e23a15f9cb25abf97d3ab85",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Run/CardSacrificeScreen.cs",
+      "baselineGitBlobSha256": "61a80442ab72f3cef240ce20648ee463f4ddc6132bd81f7f50e56f78a68232c5",
+      "baselineLfSha256": "61a80442ab72f3cef240ce20648ee463f4ddc6132bd81f7f50e56f78a68232c5",
+      "baselineBytes": 2515,
+      "currentSha256": "0dc04aea2dcdcca1a9b27290d067d81495a5e1b059fe169aa79a2deca5f2de4f",
+      "currentLfSha256": "0dc04aea2dcdcca1a9b27290d067d81495a5e1b059fe169aa79a2deca5f2de4f",
+      "currentBytes": 11506,
+      "currentMtimeNs": 1793510980950233300,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "0dc04aea2dcdcca1a9b27290d067d81495a5e1b059fe169aa79a2deca5f2de4f",
+        "afterSha256": "0dc04aea2dcdcca1a9b27290d067d81495a5e1b059fe169aa79a2deca5f2de4f",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.Map.cs",
+      "baselineGitBlobSha256": "e751c423b757722b10cb3cdd5024298dc1330f3b04ca3d25cd9ed2cb658efc24",
+      "baselineLfSha256": "e751c423b757722b10cb3cdd5024298dc1330f3b04ca3d25cd9ed2cb658efc24",
+      "baselineBytes": 13332,
+      "currentSha256": "f2eae354115b2f11402ffbe58e18af040b477e16246d2c309e2a4691ec1dbc11",
+      "currentLfSha256": "e2a8766d2ddb1b464367c815f8e6b44c3ad94c4cc574573ccd801febb496b25e",
+      "currentBytes": 13767,
+      "currentMtimeNs": 1793507643494659200,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "f2eae354115b2f11402ffbe58e18af040b477e16246d2c309e2a4691ec1dbc11",
+        "afterSha256": "f2eae354115b2f11402ffbe58e18af040b477e16246d2c309e2a4691ec1dbc11",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/LayeredMapGenerator.cs",
+      "baselineGitBlobSha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3",
+      "baselineLfSha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3",
+      "baselineBytes": 25766,
+      "currentSha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3",
+      "currentLfSha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3",
+      "currentBytes": 25766,
+      "currentMtimeNs": 1793276766652278600,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3",
+        "afterSha256": "1c49b70174f492124f1a88cb9c08569b61d8cfd705f9eaa0754bd15dc1c6a3e3",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Core/Cards.cs",
+      "baselineGitBlobSha256": "ca909656a3bb7bc03ab93d27c7d8ef4cf0d3481a7f23592d1dadc5f7ef23f39f",
+      "baselineLfSha256": "ca909656a3bb7bc03ab93d27c7d8ef4cf0d3481a7f23592d1dadc5f7ef23f39f",
+      "baselineBytes": 17738,
+      "currentSha256": "ca909656a3bb7bc03ab93d27c7d8ef4cf0d3481a7f23592d1dadc5f7ef23f39f",
+      "currentLfSha256": "ca909656a3bb7bc03ab93d27c7d8ef4cf0d3481a7f23592d1dadc5f7ef23f39f",
+      "currentBytes": 17738,
+      "currentMtimeNs": 1793492544938131500,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": true,
+        "beforeSha256": "ca909656a3bb7bc03ab93d27c7d8ef4cf0d3481a7f23592d1dadc5f7ef23f39f",
+        "afterSha256": "ca909656a3bb7bc03ab93d27c7d8ef4cf0d3481a7f23592d1dadc5f7ef23f39f",
+        "batch": "native-round6-5",
+        "previousMatchingBatch": "native-round6-3"
+      }
+    },
+    {
+      "path": "Assets/Resources/Data/CurrentHubCatalog.json",
+      "baselineGitBlobSha256": "3ab044206314890a02340fb6e3d607247f65b75cfddcc16ba662cc565591fb87",
+      "baselineLfSha256": "3ab044206314890a02340fb6e3d607247f65b75cfddcc16ba662cc565591fb87",
+      "baselineBytes": 24374,
+      "currentSha256": "3ab044206314890a02340fb6e3d607247f65b75cfddcc16ba662cc565591fb87",
+      "currentLfSha256": "3ab044206314890a02340fb6e3d607247f65b75cfddcc16ba662cc565591fb87",
+      "currentBytes": 24374,
+      "currentMtimeNs": 1793278089375456500,
+      "snapshotOnly": true,
+      "nativeSourceBinding": {
+        "included": false,
+        "reason": "Resource JSON is outside the 828-entry scripts/packages/project-settings native source receipt; its current bytes still match this recorded snapshot."
+      }
+    }
+  ],
+  "preparedAtUtc": "2026-11-01T05:48:19.591475+00:00",
+  "lazySummaryFollowUp": {
+    "atUtc": "2026-11-01T05:54:50.027268+00:00",
+    "scope": "Only Hub Build laziness and its native checks; no cross-Build cache or claim-transaction change.",
+    "validation": "passed-native-hub58",
+    "hubFreezeSha256": "80e0873c579024b7e0325bb04a765fbf20c77a0e82ca4f20b8a1e2c116243099",
+    "checkEntry": "Sdt.Editor.CurrentHubRewardsRound6Checks.Run()/Assertions",
+    "checkSourceSha256": "61e3d5b4a6c12cfe1e4a68ae1e20a18d8175c493c353bf99b57f291920c0bd74",
+    "receipt": "native-round6-5/result.json",
+    "checkSourceMatchesNativeBeforeAndAfter": true,
+    "nativeSuiteAssertions": 369
+  },
+  "verificationBindings": {
+    "boundAtUtc": "2026-11-01T07:35:56.579571+00:00",
+    "native": {
+      "method": "Sdt.Editor.CurrentRound6Validation.Run",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputsUnchanged": true,
+      "sourceCount": 828,
+      "sourceBeforeAfterMapsEqual": true,
+      "assertions": {
+        "hudAssertions": 14,
+        "hubAssertions": 58,
+        "audioAssertions": 34,
+        "sacrificeAssertions": 107,
+        "discoverAssertions": 156
+      },
+      "totalAssertions": 369,
+      "checkSources": [
+        {
+          "path": "Assets/Editor/CurrentHudRound6Checks.cs",
+          "sha256": "01af8dffd7e0b07270eddfee36d9d51eec4b9defcd38762e136931fa6c132230",
+          "matchesNativeBeforeAndAfter": true
+        },
+        {
+          "path": "Assets/Editor/CurrentHubRewardsRound6Checks.cs",
+          "sha256": "61e3d5b4a6c12cfe1e4a68ae1e20a18d8175c493c353bf99b57f291920c0bd74",
+          "matchesNativeBeforeAndAfter": true
+        },
+        {
+          "path": "Assets/Editor/CurrentAudioRetryRound6Checks.cs",
+          "sha256": "002de306cd197247a07177f8babf09c456004b5df129fd989683b666dac6edb3",
+          "matchesNativeBeforeAndAfter": true
+        },
+        {
+          "path": "Assets/Editor/CurrentSacrificeRound6Checks.cs",
+          "sha256": "3dcaee5bc165070a133bd8dd68b8e5a29720041706132e63f2267e6e31af58cc",
+          "matchesNativeBeforeAndAfter": true
+        },
+        {
+          "path": "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+          "sha256": "8b4163c7cf1b3ce9a644192b83e7e685184eea93c2b3853abdef55482f9b7b12",
+          "matchesNativeBeforeAndAfter": true
+        },
+        {
+          "path": "Assets/Editor/CurrentRound6Validation.cs",
+          "sha256": "779476f0c29173234d14dcc8a2bd9a637a6afed4ba5a59f83f8a88aed46e2e4f",
+          "matchesNativeBeforeAndAfter": true
+        }
+      ],
+      "scope": "Isolated real native components and production commands with controlled fixtures and constructed UI events; no OS hardware input, natural unassisted play, whole-frame allocation or FPS claim.",
+      "audioBoundary": "The 34 audio assertions validate failure/retry behavior only; no audio performance improvement is assigned.",
+      "batch": "native-round6-5",
+      "formalSourceFreezeSha256": "eb3dfbcda75acefb11ca555881e50be6972cc4c1efce9ff9977b108de210ea2e",
+      "formalSourceFreezeFilesMatchBefore": true,
+      "receiptPaths": [
+        "native-round6-5/result.json",
+        "native-round6-5/process.json",
+        "native-round6-5/source-before.json",
+        "native-round6-5/source-after.json",
+        "source-freeze.json"
+      ]
+    },
+    "sourceIdentity": {
+      "recordedSnapshots": 20,
+      "allTwentyCurrentRawHashesMatchRecorded": true,
+      "snapshotsIncludedAndMatchingNativeBeforeAfter": 19,
+      "outsideNativeSourceMap": [
+        "Assets/Resources/Data/CurrentHubCatalog.json"
+      ],
+      "resourceBoundary": "CurrentHubCatalog.json remains the same bytes as the static count input, but it is not covered by the 828-entry source receipt.",
+      "latestNativeBatch": "native-round6-5",
+      "changedFromPreviousRecordedSnapshot": [
+        "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs"
+      ],
+      "nineteenOtherRawSnapshotsUnchanged": true
+    },
+    "domainRun": {
+      "name": "run-round6",
+      "project": "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+      "exitCode": 0,
+      "assertions": 93,
+      "scope": "Production Core/Run with existing Unity stubs, controlled live definitions and isolated real profile/file-lock checks; covers map discovery projection/read-only reopen and retained coin-pickup checkpoint behavior.",
+      "auxiliarySources": [
+        {
+          "path": "_planning/parity-1101-round6/run-check/Program.cs",
+          "sha256": "50f72bb126f7918ebde1512610b9811bfcc0436d550ebc0ad1d604d1bb3d819f",
+          "matchesAuxiliaryReceipt": true
+        },
+        {
+          "path": "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+          "sha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+          "matchesAuxiliaryReceipt": true
+        }
+      ]
+    },
+    "sourceOracle": {
+      "cases": 8,
+      "principalSourceInputs": [
+        {
+          "path": "搜打撤/game/src/battle/effects/battle.card-inspection.domain.js",
+          "sha256": "f463765d295f5582eb5f99b0cef1f86a6887319155800d3dd7d8aa6e4ac42fd0"
+        },
+        {
+          "path": "搜打撤/game/src/battle/effects/battle.discover-flow.js",
+          "sha256": "19c2d673ca3b9a8d7a3ef7beb336465dd66ae451ce5529d87cc2686f4d368ce9"
+        },
+        {
+          "path": "搜打撤/game/src/battle/effects/battle.discover-candidates.js",
+          "sha256": "5d2c1d48b25b60a5bb097a0f133f9c23011e1c8201431e3c2c4b9f480e735817"
+        },
+        {
+          "path": "搜打撤/game/src/battle/effects/battle.discover-state.js",
+          "sha256": "e839c04e47aac8d2786a2b0dc3f72577a937d1480db0e1ffa04e054b2b6bc27b"
+        },
+        {
+          "path": "搜打撤/game/src/cards/card-obtainability.js",
+          "sha256": "001bc830612ea46b35ea326b126fb625ed84d92fd687f1fbf1b0a1a667565ca7"
+        },
+        {
+          "path": "搜打撤/game/src/cards/card-rarity.js",
+          "sha256": "31f9c0583d12066a678c6fe0a08ed99399c2eda0775aa3f0fcdf0b9986c3188e"
+        },
+        {
+          "path": "搜打撤/game/src/core/random-service.js",
+          "sha256": "d7c4481c5673646ac055c83483ad5304d1ce61cb102892b17a0bbb32a66bdeca"
+        },
+        {
+          "path": "搜打撤/game/src/core/random-core.js",
+          "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174"
+        },
+        {
+          "path": "搜打撤/game/src/core/random-streams.js",
+          "sha256": "af4e4cac02117d5e37cd239889bcc97356c2ba6a9dcee36cd05e847846dd9897"
+        }
+      ],
+      "allCurrentPrincipalHashesMatch": true,
+      "comparisonExitCode": 0,
+      "comparisonAssertionsInSuite": 492,
+      "comparisonCheckSource": {
+        "path": "_planning/parity-1031/battle-check/Round6Checks.cs",
+        "sha256": "ae2e4477c82cde8696341764182d843bd2298b675b77f209f02e7e8820c3ab4c",
+        "matchesAuxiliaryReceipt": true
+      },
+      "scope": "Actual Vite mist-box queue/discovery/RNG oracle on explicit controlled catalogs; UID port is a deterministic counter and acquisition/visual effects are omitted.",
+      "relevance": "Supplementary battle candidate/UID/RNG behavioral evidence. These eight cases do not measure Hub/Header FPS, map-item writes, audio performance or whole-frame allocation."
+    },
+    "notCovered": {
+      "keyCaptureRuntime": "No dedicated current key-capture runtime or OS-input receipt is bound; reduced scan remains a source-control-flow conclusion.",
+      "timingAndAllocation": "No whole-frame timing, FPS, GPU draw-call or managed-allocation measurement is present.",
+      "standalonePlayerBoundary": "Passed controlled normal Standalone path, 83 PNG captures/211 records at 2560x1440/DPI120; no OS input, acoustic measurement, whole-frame timing/allocation or FPS claim."
+    },
+    "nativeHistory": [
+      {
+        "batch": "native-round6-2",
+        "boundAtUtc": "2026-11-01T06:18:08.140216+00:00",
+        "native": {
+          "method": "Sdt.Editor.CurrentRound6Validation.Run",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "sourceCount": 828,
+          "sourceBeforeAfterMapsEqual": true,
+          "assertions": {
+            "hudAssertions": 14,
+            "hubAssertions": 58,
+            "audioAssertions": 34,
+            "sacrificeAssertions": 107,
+            "discoverAssertions": 58
+          },
+          "totalAssertions": 271,
+          "checkSources": [
+            {
+              "path": "Assets/Editor/CurrentHudRound6Checks.cs",
+              "sha256": "01af8dffd7e0b07270eddfee36d9d51eec4b9defcd38762e136931fa6c132230",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentHubRewardsRound6Checks.cs",
+              "sha256": "61e3d5b4a6c12cfe1e4a68ae1e20a18d8175c493c353bf99b57f291920c0bd74",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentAudioRetryRound6Checks.cs",
+              "sha256": "002de306cd197247a07177f8babf09c456004b5df129fd989683b666dac6edb3",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentSacrificeRound6Checks.cs",
+              "sha256": "3dcaee5bc165070a133bd8dd68b8e5a29720041706132e63f2267e6e31af58cc",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+              "sha256": "cc9f9d722a90cde5d9f204aadc5314a9b56aaaacf88ac345a2d2bffc54a30617",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentRound6Validation.cs",
+              "sha256": "779476f0c29173234d14dcc8a2bd9a637a6afed4ba5a59f83f8a88aed46e2e4f",
+              "matchesNativeBeforeAndAfter": true
+            }
+          ],
+          "scope": "Isolated real native components and production commands with controlled fixtures and constructed UI events; no OS hardware input, natural unassisted play, whole-frame allocation or FPS claim.",
+          "audioBoundary": "The 34 audio assertions validate failure/retry behavior only; no audio performance improvement is assigned."
+        },
+        "receipts": [
+          {
+            "path": "native-round6-2/result.json",
+            "sha256": "2f419874cd15224bd5ef68dd715dc38ee2c37f49d93784970ddb22cec86ac0a0"
+          },
+          {
+            "path": "native-round6-2/process.json",
+            "sha256": "8b48547bcd1dc94795b4759655c0bc739b24f12e913286c67e7f0fb7796b07a0"
+          },
+          {
+            "path": "native-round6-2/source-before.json",
+            "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117"
+          },
+          {
+            "path": "native-round6-2/source-after.json",
+            "sha256": "50cdc84ab36070657a71f5cc639bbb3a1fd6b0c1e6f935c53e5d745369cea117"
+          },
+          {
+            "path": "source-freeze.json",
+            "sha256": "de94b6d79725011ad75323dd225471bd849b93c286d905e56d8886f3266d8f44"
+          }
+        ],
+        "boundary": "Historical 271-assertion binding retained. The recorded source-freeze.json hash is its then-current value; the immutable native-round6-2 before/after files remain its original source map."
+      },
+      {
+        "batch": "native-round6-3",
+        "boundAtUtc": "2026-11-01T06:55:26.887264+00:00",
+        "native": {
+          "method": "Sdt.Editor.CurrentRound6Validation.Run",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "sourceCount": 828,
+          "sourceBeforeAfterMapsEqual": true,
+          "assertions": {
+            "hudAssertions": 14,
+            "hubAssertions": 58,
+            "audioAssertions": 34,
+            "sacrificeAssertions": 107,
+            "discoverAssertions": 154
+          },
+          "totalAssertions": 367,
+          "checkSources": [
+            {
+              "path": "Assets/Editor/CurrentHudRound6Checks.cs",
+              "sha256": "01af8dffd7e0b07270eddfee36d9d51eec4b9defcd38762e136931fa6c132230",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentHubRewardsRound6Checks.cs",
+              "sha256": "61e3d5b4a6c12cfe1e4a68ae1e20a18d8175c493c353bf99b57f291920c0bd74",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentAudioRetryRound6Checks.cs",
+              "sha256": "002de306cd197247a07177f8babf09c456004b5df129fd989683b666dac6edb3",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentSacrificeRound6Checks.cs",
+              "sha256": "3dcaee5bc165070a133bd8dd68b8e5a29720041706132e63f2267e6e31af58cc",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+              "sha256": "4d735f6ec9a9a89e44bdab1fac2d1a6a79d89000d6279754025d78058b1b44e8",
+              "matchesNativeBeforeAndAfter": true
+            },
+            {
+              "path": "Assets/Editor/CurrentRound6Validation.cs",
+              "sha256": "779476f0c29173234d14dcc8a2bd9a637a6afed4ba5a59f83f8a88aed46e2e4f",
+              "matchesNativeBeforeAndAfter": true
+            }
+          ],
+          "scope": "Isolated real native components and production commands with controlled fixtures and constructed UI events; no OS hardware input, natural unassisted play, whole-frame allocation or FPS claim.",
+          "audioBoundary": "The 34 audio assertions validate failure/retry behavior only; no audio performance improvement is assigned.",
+          "batch": "native-round6-3",
+          "formalSourceFreezeSha256": "4f7585642b33a9968b938a125a662b7b82a22286841d00c5a83eb59c3f499f9f",
+          "formalSourceFreezeFilesMatchBefore": true,
+          "receiptPaths": [
+            "native-round6-3/result.json",
+            "native-round6-3/process.json",
+            "native-round6-3/source-before.json",
+            "native-round6-3/source-after.json",
+            "source-freeze.json"
+          ]
+        },
+        "receipts": [
+          {
+            "path": "native-round6-3/result.json",
+            "sha256": "764cef6b7c07747d53c41bd25a278fc18c0ef5d019f072b8398cd7d89ca33093",
+            "bindingBatch": "native-round6-3"
+          },
+          {
+            "path": "native-round6-3/process.json",
+            "sha256": "29d7d73bda0a72194e807632efdab0fb4bac70b97154ec88308702a74864b1b2",
+            "bindingBatch": "native-round6-3"
+          },
+          {
+            "path": "native-round6-3/source-before.json",
+            "sha256": "bc15e1f40b4765212d8ffc616ba6ac0e8794ff76c59b236777e1508264ce2eb2",
+            "bindingBatch": "native-round6-3"
+          },
+          {
+            "path": "native-round6-3/source-after.json",
+            "sha256": "bc15e1f40b4765212d8ffc616ba6ac0e8794ff76c59b236777e1508264ce2eb2",
+            "bindingBatch": "native-round6-3"
+          },
+          {
+            "path": "source-freeze.json",
+            "sha256": "4f7585642b33a9968b938a125a662b7b82a22286841d00c5a83eb59c3f499f9f",
+            "bindingBatch": "native-round6-3"
+          }
+        ],
+        "boundary": "Historical 367-assertion binding. source-freeze.json was subsequently refreshed; the stored historical hash and immutable native-round6-3 before/after maps identify that earlier state."
+      }
+    ],
+    "reusedEvidenceReason": {
+      "previousNativeBatch": "native-round6-3",
+      "latestNativeBatch": "native-round6-5",
+      "formalInputChanges": [
+        "Assets/Editor/CurrentDiscoverRound6Checks.cs",
+        "Assets/Scripts/Sdt.Boot/NativeDisplayReview.Round6.cs",
+        "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+        "Assets/Scripts/Sdt.UI/Screens/Battle/BattleSubpages.cs"
+      ],
+      "coreOrRunProductionInputsChanged": false,
+      "domainRun93": "Reused: no Core/Run production input changed from native-round6-3 to native-round6-5. Current run-check Program/csproj still match their successful auxiliary-source binding; the isolated 93-assertion process/log remains unchanged.",
+      "sourceCases8": "Reused: the eight-case JSON, all nine principal Vite source hashes and the actual comparison check source remain unchanged. Later changes are HUD/discovery layout and native/player QA, outside the oracle behavior.",
+      "sourceOracleJsonSha256": "cbab37db05b379719624e49950cec53cf73f353c549e59ba81f56521af1861d8",
+      "newNativeCoverage": "Fresh 369 native assertions include 156 discovery checks. Two added checks verify the real shared header CanvasGroup is alpha 0 while GravePanel owns the screen and alpha 1 after return; this is functional/layout coverage, not a performance benchmark."
+    },
+    "standalonePlayer": {
+      "batch": "player-6",
+      "passed": true,
+      "exitCode": 0,
+      "timedOut": false,
+      "buildGUID": "c3ee3347a03149de80bbb7fe3f0bb5c2",
+      "captureCount": 83,
+      "recordCount": 211,
+      "display": {
+        "width": 2560,
+        "height": 1440,
+        "dpi": 120.0
+      },
+      "result": "player-6/result.json",
+      "process": "player-6/process.json",
+      "buildProcess": "build-desktop-6/process.json",
+      "buildSucceededLog": "build-desktop-6/unity.log",
+      "buildInputMapsMatchNative": true,
+      "scope": "No OS input; zero-alpha nonactivating click-through parent HWND; standalone backbuffer at current physical primary desktop size",
+      "visualReview": "hub-visual-review.json",
+      "imagesIndependentlyReviewed": 7,
+      "performanceMeasurement": "not-measured",
+      "visualReviewSha256": "8eee086ce4190f5d5b5c295486a0d443c78415da239c005dfa945a3d09e18579"
+    }
+  },
+  "sourceSnapshotHistory": [
+    {
+      "retiredAtUtc": "2026-11-01T07:35:56.579571+00:00",
+      "previousPerformanceSha256": "27c4ae32c631cf0cf99f74a9df906eeea38e3dca39f7df8b6adcbfb8137f2834",
+      "snapshot": {
+        "path": "Assets/Scripts/Sdt.UI/Kit/CurrentRunTopBar.cs",
+        "baselineGitBlobSha256": "fddde6e648a438455413f57c952d5d78d733d3b278b2e2046ed0d62c598f1ab1",
+        "baselineLfSha256": "fddde6e648a438455413f57c952d5d78d733d3b278b2e2046ed0d62c598f1ab1",
+        "baselineBytes": 12457,
+        "currentSha256": "d2c4e7112ae795116fd3c1e84d432a0fcb627a930ee3dae9f1daeadece322975",
+        "currentLfSha256": "e64e14f009e312cfde821a454cce6411d84d91688faa9d0ea80389ed92f90a69",
+        "currentBytes": 12760,
+        "currentMtimeNs": 1793506910794303300,
+        "snapshotOnly": true,
+        "nativeSourceBinding": {
+          "included": true,
+          "beforeSha256": "d2c4e7112ae795116fd3c1e84d432a0fcb627a930ee3dae9f1daeadece322975",
+          "afterSha256": "d2c4e7112ae795116fd3c1e84d432a0fcb627a930ee3dae9f1daeadece322975",
+          "batch": "native-round6-3",
+          "previousMatchingBatch": "native-round6-2"
+        }
+      },
+      "reason": "Final HUD coverage fix directly recognizes DiscoverPanel and GravePanel before the hidden-header early return. Historical comparison bytes and their former native binding are preserved."
+    }
+  ]
+}

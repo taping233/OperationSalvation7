@@ -12,9 +12,9 @@
 
 ## 本轮实施与验收
 
-当前第五轮：2026-11-01，照相馆开发模式接入完整卡牌/备注导出；备注仅写全局备注键，失败暂存、同值重试与跨档共享保持。照片墙共同筛选与类别计数合为单遍，减动效跳过隐藏尘点工作、背景几何不变跳过布局；图库正式关闭立即恢复所属阶段，导出预览限制8000字符而复制/文件保持完整JSON。全部修改冻结后，859项相关领域、本轮262项与相关回归127项原生、FilmFlow及当前2560×1440正常Standalone流程通过，生成66图、实际复核9图。默认 `Build/Desktop/代号柒.exe` 已更新，buildGUID为 `3a68596b7ad04387a7ea36420d8ac12e`。输入/产物指纹、严格检查夹具修正和验收边界见[第五轮验收](../搜打撤/docs/evidence/2026-11-01-unity-parity-round5/README.md)。持续目标保持，不声称整库零差异或FPS提升。
+当前第六轮修正发现取消及支付前预览、献祭实体与变体、当前卡库道具/事件、基地按需汇总与成功音、音乐失败重试和隐藏页更新。1483领域、8个Source场景、1312原生及三条完整链通过；当前窗口83图、实看21图，GUID`c3ee3347a03149de80bbb7fe3f0bb5c2`。UI裁切人工发现后补验，原版amount为0误发奖励改正；静态工作削减不等于FPS或整帧收益。完整指纹、失败与复用范围见[第六轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round6/README.md)。持续目标保持，不声称全库零差异。
 
-历次基线只用于对应版本追溯：[第四轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round4/README.md)、[第三轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round3/README.md)、[第二轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round2/README.md)、[首次同步](../搜打撤/docs/evidence/2026-11-01-github-sync/README.md)、[早期对齐](../搜打撤/docs/evidence/2026-10-31-unity-parity/README.md)。旧离屏图及旧通过数字不替代当前版本结论。
+历次基线只用于对应版本追溯：[第五轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round5/README.md)、[第四轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round4/README.md)、[第三轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round3/README.md)、[第二轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round2/README.md)、[首次同步](../搜打撤/docs/evidence/2026-11-01-github-sync/README.md)、[早期对齐](../搜打撤/docs/evidence/2026-10-31-unity-parity/README.md)。旧离屏图及旧通过数字不替代当前版本结论。
 
 音效沿用十个原声道，共享正式SFX总线，BGM独立；本机原生压缩比上限10对应源12，其余参数保存回读。未作逐样本声学、物理键鼠、多尺寸窗口或整帧性能收益声明。
 
@@ -36,4 +36,4 @@
 - 验收包括现行内容导出核对、定向领域断言、Unity 原生编译、实际玩家流程与桌面构建。截图、程序构造场景和真实输入分别报告。
 - 优先使用本机已有编辑器与依赖；当前原生编译及后台运行使用 `D:/Unity/6000.6.7f1/Editor/Unity.exe`，结果按每轮输入指纹记录。
 
-2026-11-01老板已授权验收后提交并同步GitHub；当前交付记录见[第五轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round5/README.md)，源码与同仓资源恢复方式见[GITHUB-SOURCE.md](GITHUB-SOURCE.md)。
+2026-11-01老板已授权验收后提交并同步GitHub；当前交付记录见[第六轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round6/README.md)，源码与同仓资源恢复方式见[GITHUB-SOURCE.md](GITHUB-SOURCE.md)。

@@ -110,6 +110,8 @@ static partial class Program
         CardLibrary.Init(()=>CardDatabase.All);Selection();EquipmentCancellation();Costs();Presentation();ShortcutProjection();TargetReadProjection();HandTransformLookups();
         AutomaticCastSelections();AutomaticCastDrawSelections();AutomaticGeneratedSelections();NecromancerFeedback();
         EnemyTurnSelections();
+        DiscoveryCancellation();
+        DiscoveryPreviewChecks();
         Console.WriteLine("PASS "+checks+" current production battle assertions; source semantics: hand-material-selection, hand-selection, card-cost and card-inspection.");
     }
     static void ShortcutProjection()

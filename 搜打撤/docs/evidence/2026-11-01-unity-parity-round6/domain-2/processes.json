@@ -1,0 +1,36 @@
+[
+  {
+    "name": "battle",
+    "pid": 35872,
+    "exitCode": -532462766,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "--no-restore",
+      "-c",
+      "Release"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-2\\battle.log",
+    "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-2\\battle-stderr.log",
+    "startedAt": "2026-11-01T06:00:29.3054141Z",
+    "endedAt": "2026-11-01T06:00:37.4457659Z"
+  },
+  {
+    "name": "hub",
+    "pid": 5192,
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1031/HubParityChecks.csproj",
+      "--no-restore",
+      "-c",
+      "Release"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-2\\hub.log",
+    "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain-2\\hub-stderr.log",
+    "startedAt": "2026-11-01T06:00:29.3446569Z",
+    "endedAt": "2026-11-01T06:00:37.4671655Z"
+  }
+]

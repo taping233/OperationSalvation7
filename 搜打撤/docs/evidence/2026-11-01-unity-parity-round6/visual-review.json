@@ -1,0 +1,166 @@
+{
+  "passed": true,
+  "atUtc": "2026-11-01T07:42:55.806100+00:00",
+  "window": {
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120
+  },
+  "buildGUID": "c3ee3347a03149de80bbb7fe3f0bb5c2",
+  "reviewReceipts": [
+    "battle-visual-review.json",
+    "hub-visual-review.json",
+    "sacrifice-visual-review.json"
+  ],
+  "images": [
+    {
+      "path": "player-6/player-discover-bottom.png",
+      "sha256": "b6026356f5760a6b40441b7049ad371aba36b80bac48b7464a5c52cf5243d3a7",
+      "observation": "共同表面/标题完整，底牌原实体说明和三张卡面、费用及两个操作均在窗口内。"
+    },
+    {
+      "path": "player-6/player-discover-selected.png",
+      "sha256": "e60eb01a06446742da41e09f3750bd63783fd9da2106505a0e6335432ae0bf43",
+      "observation": "选择后标题与卡列位置稳定，确认按钮启用，无旧内容重叠。"
+    },
+    {
+      "path": "player-6/player-discover-confirm-return.png",
+      "sha256": "1907d55709fe2ba7ca1f863513dc7b2abb64dd186d918ba26cd2d628aa8c8738",
+      "observation": "确认后回战斗，手牌火球可见、能量99、牌库3；发现覆盖页不残留。"
+    },
+    {
+      "path": "player-6/player-discover-cancel-return.png",
+      "sha256": "c2e7adb89055ab7652c78885955fff8b2584090d161e751cc4285a759fa8469b",
+      "observation": "取消后回战斗，能量仍99、牌库4，发现覆盖页不残留。"
+    },
+    {
+      "path": "player-6/player-discover-preview.png",
+      "sha256": "e9a23e2701bf04fe9efc4e5b687a7ffb45279a5dd18bd08e3d666590f2ba184c",
+      "observation": "支付前候选三张及准确获得提示、取消不消耗说明完整，费用和正文可读。"
+    },
+    {
+      "path": "player-6/player-discover-preview-cancel.png",
+      "sha256": "00d5bae512909b63c2b2eb007e0ebf5a19b62320552609cfd82f01bb1d05d3d2",
+      "observation": "取消后来源神秘召唤仍在手牌、能量100，覆盖页消失。"
+    },
+    {
+      "path": "player-6/player-discover-preview-confirm.png",
+      "sha256": "70167663a25cf775457854f83cc0a9f066e129d36a95d359522ba2d442a9faac",
+      "observation": "确认后大法师之杖可见、能量98、来源牌不再显示，战斗顶部栏恢复。"
+    },
+    {
+      "path": "player-6/player-grave.png",
+      "sha256": "c8caa0106f3c7794fff12a2cdcb44caa6f19a51ccd10caa9e5b2a24958c59b36",
+      "observation": "墓地标题、分组数量/火球×2和返回按钮在窗口内；全局状态栏已隐藏，不再叠标题。"
+    },
+    {
+      "path": "player-6/player-grave-return.png",
+      "sha256": "71d348cc1f7518c5343f68c93bdb58f71056340a0d8282afe0f5bda4f7702453",
+      "observation": "返回后全局生命、区域、资源栏恢复，墓地覆盖页已移除。"
+    },
+    {
+      "path": "player-6/player-music-load-failed.png",
+      "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6",
+      "observation": "Audio settings display the failed-request message and explicitly state that the previous track is retained. Retry, music/SFX volume controls and the lower status area fit within the current window; no overlapping or clipped controls were visible.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 448,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-music-retry-kept.png",
+      "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44",
+      "observation": "After retry, the failure message and retry action remain visible rather than reporting readiness. The audio settings layout remains stable with legible controls and no visible overlap.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 451,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-music-recovered.png",
+      "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b",
+      "observation": "The recovered state displays music ready and removes the retry action. The following SFX controls move upward cleanly, with no stale failure text, duplicated controls or clipped labels visible.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 454,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-hub-variant-stock.png",
+      "sha256": "616cd53ae34789f034e41a9eb8e6440feeca8890cfd39b868e7726ba7c35523f",
+      "observation": "The two same-name swift-arrow stacks remain visibly separate, labelled x3 and x2. Card faces, names, costs and descriptions are legible; the warehouse title, filters, resources and navigation fit the window, with no stale modal over the cards.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 2211,
+      "viewedWith": "view_image",
+      "blockingIssues": [],
+      "nonBlockingNotes": [
+        "The small warehouse summary on the bright left background has weaker contrast; its text remains distinguishable in this image."
+      ]
+    },
+    {
+      "path": "player-6/player-hub-parity-returned-base.png",
+      "sha256": "d5fa8ef972fa6feb8c2d3748a8987bfdf4eb1cd51dd2da1148adc3e9a8ad62b7",
+      "observation": "The returned base page shows its title/resources, base tasks, preparation panel and navigation without leftover warehouse cards, conversion confirmation or detail masks. The pending-2 row and collection badge 2 are both visible and do not overlap.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 2909,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-photo.png",
+      "sha256": "37036eb817f823bd2a40550a37a5207fcae8eab2ac7bf2aa03a8784e626dd53b",
+      "observation": "The photo-studio title, total 291, nine category counts and search/filter controls are visible without overlap. The first row of four photos and the selected photo side panel are legible and contained; clipping of the second row at the scroll-viewport bottom is consistent with the visible scroll region.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 265,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-slot-archive-import-preview.png",
+      "sha256": "fc4761c2fba1aa3d774703d2b7c86391b90e6d01577450ccf77e5fb485723c2b",
+      "observation": "The centered import confirmation fully displays target slot 5, source slot 5, saved timestamp, replacement warning, return and confirm buttons. Background JSON and slot pages are dimmed; no old notice or global HUD covers the dialog.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 3135,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-emergency-entry.png",
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956",
+      "passed": true,
+      "observation": "紧急撤离点标题、献祭3张说明及选择/返回两项完整可读；选项面板、底部说明与顶栏无重叠或越屏。"
+    },
+    {
+      "path": "player-6/player-sacrifice-candidates.png",
+      "sha256": "981bd05dfbb4d2c4ab96f43f44fc7ee0163807f7f3988fb8991ca0d8f8cf7fbb",
+      "passed": true,
+      "observation": "已选0/3与未满额的禁用确认状态一致；同名不同费用卡面和点击选择提示可读，整理背包/返回撤离点按钮完整。下排卡片在滚动视口底边裁切，未覆盖固定按钮。"
+    },
+    {
+      "path": "player-6/player-sacrifice-selected.png",
+      "sha256": "6ce4bba461fed2a2b17e2ba92fcf925d852ea9823067376626e54ab61937336d",
+      "passed": true,
+      "observation": "已选3/3，三张所选卡的金框不遮卡图和文字，确认按钮呈可用金色；首行撤回提示清晰，底部固定按钮不被滚动内容覆盖。第三张部分位于视口外，本图不证明其全部卡面。"
+    },
+    {
+      "path": "player-6/player-sacrifice-returned.png",
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956",
+      "passed": true,
+      "observation": "返回后恢复紧急撤离点原选项与说明，献祭候选网格和金框均未残留；顶栏、背景及主面板布局一致。"
+    },
+    {
+      "path": "player-6/player-sacrifice-extraction.png",
+      "sha256": "7ff3533357fc65caafb5b4b4ff8304fed17383b2a108074d1778a27a557afd94",
+      "passed": true,
+      "observation": "成功进入整理战利品；待入库6张、仓库5/25及两种批量入库6张、放弃6张并完成等信息完整。卡面/单张入库按钮与侧栏无重叠；第六张仅在下排局部显示，属于滚动区域裁切。"
+    }
+  ],
+  "scope": "Actual original-image review by three agents, 21 of 83 current-window captures; normal CanvasScaler. No OS hardware input or other window size. Controlled portraitless enemies and intentional scroll/hand clipping excluded from formal asset fidelity claims."
+}

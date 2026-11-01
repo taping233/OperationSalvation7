@@ -1,0 +1,87 @@
+{
+  "status": "frozen-awaiting-central-validation",
+  "scope": "build-local conditional Hub reward derivation (zero or one collection summary), selected-person reads and committed upgrade/hatch audio",
+  "compiled": false,
+  "testsRun": false,
+  "unityLaunched": false,
+  "checkEntry": "Sdt.Editor.CurrentHubRewardsRound6Checks.Run()/Assertions",
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/MetaProgress.cs",
+      "bytes": 12012,
+      "mtimeNs": 1793506873536728700,
+      "sha256": "bdfab2bdf272ccf5fc9d7f2b39108a58b48937f42cca7632c05951afa434e537",
+      "lfSha256": "bdfab2bdf272ccf5fc9d7f2b39108a58b48937f42cca7632c05951afa434e537"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/MetaProgress.Collections.cs",
+      "bytes": 6960,
+      "mtimeNs": 1793506856084274500,
+      "sha256": "545d6611511d3f22899418c3eab18a110a3789c39c11e8a7126edd8fae714ce5",
+      "lfSha256": "545d6611511d3f22899418c3eab18a110a3789c39c11e8a7126edd8fae714ce5"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubScreen.cs",
+      "bytes": 18676,
+      "mtimeNs": 1793512423754595000,
+      "sha256": "e6b21ab1220667c576cdf3d914053ba235eead7661bfe52ccbce16886bd09290",
+      "lfSha256": "e6b21ab1220667c576cdf3d914053ba235eead7661bfe52ccbce16886bd09290"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubModernPages.cs",
+      "bytes": 15764,
+      "mtimeNs": 1793507042136196100,
+      "sha256": "4941371d8784936c3f8cfe7e17ea7993008188dffa1a97c21a2b6734236c1ae3",
+      "lfSha256": "3abc6efdf0bf05196725b323a8b084f9dd7746519c0b4fb362fa66c9a42bd5ee"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentArchiveViews.cs",
+      "bytes": 13617,
+      "mtimeNs": 1793506856775379400,
+      "sha256": "e0908b2719ff6957dc5646b7bfe0a59b34cb46f9c90442f615171bb0c15a5c84",
+      "lfSha256": "fb6c989d8a15bc0815280035bff892430dba85f975989011796cc53f16854451"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentRooms.cs",
+      "bytes": 16495,
+      "mtimeNs": 1793506873770885500,
+      "sha256": "db4ae59a385c50afbe74f08ab6f179c6f486a85f993f0142cc806bc1a7714680",
+      "lfSha256": "3557f476a0c835469e755dd8103d128a1208d00f1fbd15ddec850de394664957"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubPets.cs",
+      "bytes": 6396,
+      "mtimeNs": 1793506873993172500,
+      "sha256": "ddacb0b607a173954eb69cfb5d45ff24d006cb17cfb082984e8dd25cf39a6953",
+      "lfSha256": "8b17b0b4dea649ae10189b1fdd397d90dc4f80a9b390a3748b5b108b0666e8d0"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Hub/HubCurrentInventory.cs",
+      "bytes": 8997,
+      "mtimeNs": 1793506874220529100,
+      "sha256": "efdf44bda0f9c5737514539f1f9aea4bcf84ddfad9eb06f9ac431eed187f2a3b",
+      "lfSha256": "efdf44bda0f9c5737514539f1f9aea4bcf84ddfad9eb06f9ac431eed187f2a3b"
+    },
+    {
+      "path": "Assets/Editor/CurrentHubRewardsRound6Checks.cs",
+      "bytes": 12055,
+      "mtimeNs": 1793512456555271400,
+      "sha256": "61e3d5b4a6c12cfe1e4a68ae1e20a18d8175c493c353bf99b57f291920c0bd74",
+      "lfSha256": "61e3d5b4a6c12cfe1e4a68ae1e20a18d8175c493c353bf99b57f291920c0bd74"
+    },
+    {
+      "path": "Assets/Editor/CurrentHubRewardsRound6Checks.cs.meta",
+      "bytes": 60,
+      "mtimeNs": 1793507267692624600,
+      "sha256": "39a17d35f6db2e355e190161485c487287b337de45883480fa77f2706db219a5",
+      "lfSha256": "39a17d35f6db2e355e190161485c487287b337de45883480fa77f2706db219a5"
+    },
+    {
+      "path": "_planning/parity-1101-round6/hub-audit.md",
+      "bytes": 5780,
+      "mtimeNs": 1793512424265751500,
+      "sha256": "2cb7e37c5cb52da84ab7b30e806ea3f4f3ce4efedd240deea0c7d00823b858ba",
+      "lfSha256": "2cb7e37c5cb52da84ab7b30e806ea3f4f3ce4efedd240deea0c7d00823b858ba"
+    }
+  ]
+}

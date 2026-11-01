@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 2,
+  "scope": "Independent view_image review of exactly seven original Player-6 PNGs at the current physical window size. Evidence only; no source/check edits, tests, new captures or OS input.",
+  "batch": "player-6",
+  "buildGUID": "c3ee3347a03149de80bbb7fe3f0bb5c2",
+  "display": {
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120.0,
+    "unityVersion": "6000.6.7f1"
+  },
+  "playerReceipt": {
+    "result": "player-6/result.json",
+    "process": "player-6/process.json",
+    "passed": true,
+    "exitCode": 0,
+    "captureCount": 83,
+    "recordCount": 211,
+    "imagesActuallyReviewed": 7,
+    "resultSha256": "49b85e9ae879fc7582bf0a687bbff70c66cdb1c98febbf0dc15e62cffda2c520",
+    "processSha256": "34eb56d07fc495d29d92d41b4816a1a4b8cc03f6c7bc4c71076f3a6ae20642db"
+  },
+  "result": "No blocking overlap, off-screen title/button or stale modal found in these seven reviewed final-batch images.",
+  "acceptanceBoundary": "This independent visual conclusion covers only these seven Player-6 images and this exact GUID. Root separately reviewed Discover/Grave and their return states; those images are not counted as reviewed here. The Player receipt passed its controlled normal Standalone path; it is not an FPS, allocation or unassisted-play benchmark.",
+  "images": [
+    {
+      "path": "player-6/player-music-load-failed.png",
+      "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6",
+      "observation": "Audio settings display the failed-request message and explicitly state that the previous track is retained. Retry, music/SFX volume controls and the lower status area fit within the current window; no overlapping or clipped controls were visible.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 448,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-music-retry-kept.png",
+      "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44",
+      "observation": "After retry, the failure message and retry action remain visible rather than reporting readiness. The audio settings layout remains stable with legible controls and no visible overlap.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 451,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-music-recovered.png",
+      "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b",
+      "observation": "The recovered state displays music ready and removes the retry action. The following SFX controls move upward cleanly, with no stale failure text, duplicated controls or clipped labels visible.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 454,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-hub-variant-stock.png",
+      "sha256": "616cd53ae34789f034e41a9eb8e6440feeca8890cfd39b868e7726ba7c35523f",
+      "observation": "The two same-name swift-arrow stacks remain visibly separate, labelled x3 and x2. Card faces, names, costs and descriptions are legible; the warehouse title, filters, resources and navigation fit the window, with no stale modal over the cards.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 2211,
+      "viewedWith": "view_image",
+      "blockingIssues": [],
+      "nonBlockingNotes": [
+        "The small warehouse summary on the bright left background has weaker contrast; its text remains distinguishable in this image."
+      ]
+    },
+    {
+      "path": "player-6/player-hub-parity-returned-base.png",
+      "sha256": "d5fa8ef972fa6feb8c2d3748a8987bfdf4eb1cd51dd2da1148adc3e9a8ad62b7",
+      "observation": "The returned base page shows its title/resources, base tasks, preparation panel and navigation without leftover warehouse cards, conversion confirmation or detail masks. The pending-2 row and collection badge 2 are both visible and do not overlap.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 2909,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-photo.png",
+      "sha256": "37036eb817f823bd2a40550a37a5207fcae8eab2ac7bf2aa03a8784e626dd53b",
+      "observation": "The photo-studio title, total 291, nine category counts and search/filter controls are visible without overlap. The first row of four photos and the selected photo side panel are legible and contained; clipping of the second row at the scroll-viewport bottom is consistent with the visible scroll region.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 265,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    },
+    {
+      "path": "player-6/player-slot-archive-import-preview.png",
+      "sha256": "fc4761c2fba1aa3d774703d2b7c86391b90e6d01577450ccf77e5fb485723c2b",
+      "observation": "The centered import confirmation fully displays target slot 5, source slot 5, saved timestamp, replacement warning, return and confirm buttons. Background JSON and slot pages are dimmed; no old notice or global HUD covers the dialog.",
+      "width": 2560,
+      "height": 1440,
+      "captureFrame": 3135,
+      "viewedWith": "view_image",
+      "blockingIssues": []
+    }
+  ],
+  "behaviorBoundary": [
+    "Music screenshots establish displayed status and layout, not audible output, acoustic quality or clip identity. Functional retention/retry behavior belongs to the native/Player command receipts.",
+    "Warehouse variant ownership, sale price, protection and atomic persistence are not established by a picture alone.",
+    "Archive import execution, custom-definition closure and failure recovery require their domain/native receipts.",
+    "No FPS, allocation, other window sizes, hidden photo rows or all 291 photos were visually reviewed."
+  ],
+  "notReviewed": [
+    "The other 76 Player-6 captures",
+    "Discover/Grave images reviewed separately by Root",
+    "Other window sizes and OS hardware input"
+  ],
+  "previousReviews": [
+    {
+      "batch": "player-3",
+      "buildGUID": "d0665fbed435421682d07b757e01da18",
+      "imagesActuallyReviewed": 4,
+      "pathsAndHashes": [
+        {
+          "path": "player-3/player-hub-variant-stock.png",
+          "sha256": "81cf375440b12dfbe90e0702b6135e9f0a9946acf73dda3f79ae939ae9201ba0"
+        },
+        {
+          "path": "player-3/player-hub-parity-returned-base.png",
+          "sha256": "d5fa8ef972fa6feb8c2d3748a8987bfdf4eb1cd51dd2da1148adc3e9a8ad62b7"
+        },
+        {
+          "path": "player-3/player-photo.png",
+          "sha256": "5ddbd56f471ffba95f53a9f44a12da9e722d41b647be2fe90dd515ae7abc9b4d"
+        },
+        {
+          "path": "player-3/player-slot-archive-import-preview.png",
+          "sha256": "2e91e942c4bdf236166db5228aa4995b9d38a9570a780aab38416b39500f7ddf"
+        }
+      ],
+      "boundary": "Historical four-image Player-3 review; not relabelled as Player-5 or final-build evidence."
+    },
+    {
+      "batch": "player-5",
+      "buildGUID": "fb166685443d40029e1c28dab3af599c",
+      "imagesActuallyReviewed": 7,
+      "pathsAndHashes": [
+        {
+          "path": "player-5/player-music-load-failed.png",
+          "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6"
+        },
+        {
+          "path": "player-5/player-music-retry-kept.png",
+          "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44"
+        },
+        {
+          "path": "player-5/player-music-recovered.png",
+          "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b"
+        },
+        {
+          "path": "player-5/player-hub-variant-stock.png",
+          "sha256": "bf24f1aa1a7e9acf039d069b91e3e49891452124fe009455a702188c897f96d4"
+        },
+        {
+          "path": "player-5/player-hub-parity-returned-base.png",
+          "sha256": "067bd1a88453caac089ab7d72e45546fb539bc75a6bc464c5a6c7bfbb794848e"
+        },
+        {
+          "path": "player-5/player-photo.png",
+          "sha256": "3421f42f4b287443b62aba492f1b3c4afde42860f62349dd8b60ba7adaded789"
+        },
+        {
+          "path": "player-5/player-slot-archive-import-preview.png",
+          "sha256": "d281dca292814bbac222ea703f5bfe780ebe8cb39a921d1fc52fc917f972b0a0"
+        }
+      ],
+      "boundary": "Historical seven-image Player-5 scope; it was not final acceptance because Root separately found the grave HUD overlap. These PNGs have not been relabelled as Player-6."
+    }
+  ],
+  "reviewedAtUtc": "2026-11-01T07:35:56.579571+00:00"
+}

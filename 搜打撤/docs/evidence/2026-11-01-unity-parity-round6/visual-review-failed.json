@@ -1,0 +1,82 @@
+{
+  "passed": false,
+  "reviewer": "Friday/root",
+  "atUtc": "2026-11-01T06:42:58.402310+00:00",
+  "player": "player-3",
+  "processPassed": true,
+  "buildGUID": "d0665fbed435421682d07b757e01da18",
+  "scope": "15 new captures actually viewed; all generated at 2560x1440 DPI120. Constructed uGUI input, no OS input.",
+  "blocking": [
+    {
+      "images": [
+        "player-discover-bottom.png",
+        "player-discover-selected.png",
+        "player-discover-preview.png"
+      ],
+      "observation": "Discover header top and prompt/hint left edge extend past the screen. Functional process exit 0 does not satisfy visual acceptance."
+    }
+  ],
+  "nonBlocking": "Controlled battle enemy has no portrait fixture; white rectangle is fixture-only, not proof of a formal enemy missing asset. Sacrifice list lower rows are clipped by their intentional scroll viewport.",
+  "images": [
+    {
+      "path": "player-3/player-music-load-failed.png",
+      "sha256": "517cb4b75314dccb4d7a4f422aa2dd5323bd9ab53013261a563e19c87d424ac6"
+    },
+    {
+      "path": "player-3/player-music-retry-kept.png",
+      "sha256": "9446432841e2526076ac5425b0b541663090f9d5ccdfb10ed78ab5d4a40b6a44"
+    },
+    {
+      "path": "player-3/player-music-recovered.png",
+      "sha256": "4734224acfd7ec5dd8d2239a385c7f35d5814c3535ca7f8fd4de7e5ca1874f1b"
+    },
+    {
+      "path": "player-3/player-emergency-entry.png",
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-3/player-sacrifice-candidates.png",
+      "sha256": "981bd05dfbb4d2c4ab96f43f44fc7ee0163807f7f3988fb8991ca0d8f8cf7fbb"
+    },
+    {
+      "path": "player-3/player-sacrifice-selected.png",
+      "sha256": "6ce4bba461fed2a2b17e2ba92fcf925d852ea9823067376626e54ab61937336d"
+    },
+    {
+      "path": "player-3/player-sacrifice-returned.png",
+      "sha256": "5aa5ad5b2a326636524e7aae7b7d4fb188107266751ef0d75aab00b9e359f956"
+    },
+    {
+      "path": "player-3/player-sacrifice-extraction.png",
+      "sha256": "7ff3533357fc65caafb5b4b4ff8304fed17383b2a108074d1778a27a557afd94"
+    },
+    {
+      "path": "player-3/player-discover-bottom.png",
+      "sha256": "2c9ce6502556dea68383e22d21a97c7104bf049b4132c4d21ea8c11b18da798c"
+    },
+    {
+      "path": "player-3/player-discover-selected.png",
+      "sha256": "d46cb69606609b0f120a63065ce98dc5d0bb7f9be5e009fb85d9e65c8434f04b"
+    },
+    {
+      "path": "player-3/player-discover-confirm-return.png",
+      "sha256": "4ab52ea293aaa876cb0c65beefdd778c7303efa3c51b0a706c9e02178f740229"
+    },
+    {
+      "path": "player-3/player-discover-cancel-return.png",
+      "sha256": "c2e7adb89055ab7652c78885955fff8b2584090d161e751cc4285a759fa8469b"
+    },
+    {
+      "path": "player-3/player-discover-preview.png",
+      "sha256": "86849ff8a3aba01243e3a2a7cef26088d352a07459165ba848af78d0884fdee8"
+    },
+    {
+      "path": "player-3/player-discover-preview-cancel.png",
+      "sha256": "00d5bae512909b63c2b2eb007e0ebf5a19b62320552609cfd82f01bb1d05d3d2"
+    },
+    {
+      "path": "player-3/player-discover-preview-confirm.png",
+      "sha256": "4e6c74d28148a7403cd04a4f9ee982019a1d7f08fc4ab1ce2e82541cc2c72c31"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "status": "frozen-awaiting-root-validation",
+  "date": "2026-11-01",
+  "author": "/root/run_parity",
+  "expectedAssertions": 93,
+  "runCommand": "dotnet run --project _planning/parity-1101-round6/run-check/RunRound6Checks.csproj --no-restore -c Release",
+  "verification": {
+    "diffCheckPassed": true,
+    "compiled": false,
+    "testsExecuted": false,
+    "unityStarted": false
+  },
+  "sourceScope": [
+    "BagItemCommands.cs: current authoritative pool, strict receipt validation and read-only saved discovery",
+    "GameRuntime.CurrentPickup.cs: saved claim phase-only return",
+    "GameRuntime.cs: only RunEventDeck pool source at line 828"
+  ],
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/BagItemCommands.cs",
+      "sha256": "e08b67db4c77a239a0f3750140c9d23d0e2d150e7daf855208b337fa947beb04",
+      "bytes": 9089
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.CurrentPickup.cs",
+      "sha256": "b679fc05cc40512ff072269dac773bb1ea04bc76311db56f8644ad5f1dd64226",
+      "bytes": 3140
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/GameRuntime.cs",
+      "sha256": "6714666d2a6e5b5abe46935653ef392eacb74f4366fa2481bd5e2b8b25794603",
+      "bytes": 54067
+    },
+    {
+      "path": "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+      "sha256": "c7b49c565b88e98c2cc66712aa8c1d21d987cd237e9a6dee7d6f28b9217dc308",
+      "bytes": 843
+    },
+    {
+      "path": "_planning/parity-1101-round6/run-check/Program.cs",
+      "sha256": "50f72bb126f7918ebde1512610b9811bfcc0436d550ebc0ad1d604d1bb3d819f",
+      "bytes": 26496
+    },
+    {
+      "path": "_planning/parity-1101-round6/run-audit.md",
+      "sha256": "a1cbf2ccdaa0ab843220c73072920141f8c6ea6263e17483ef2ff431df6d6255",
+      "bytes": 10670
+    }
+  ],
+  "externalDependency": {
+    "path": "Assets/Scripts/Sdt.Run/SaveSystem.ArchiveCards.cs",
+    "owner": "Root",
+    "sha256": "75a3feeea47215c9f6fffd3197aa3699a9445c7c6a3b5219a19e09305ed30b1e",
+    "note": "Observed Root-owned pending bagDiscover definition guard; requires Root final source freeze."
+  },
+  "limits": [
+    "Domain host only; no Unity UI or physical keyboard/mouse input.",
+    "Pickup uses an explicit coin receipt; the current newly generated map has no coin nodes.",
+    "Event fixtures select real generated event nodes with controlled current catalog eligibility.",
+    "Archive tests use the real employee pass C and a legitimate structured custom legendary.",
+    "CardSacrifice UI differences remain reported and unmodified."
+  ]
+}

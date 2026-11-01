@@ -1,0 +1,78 @@
+[
+  {
+    "name": "restore-round6",
+    "exitCode": 0,
+    "arguments": [
+      "restore",
+      "_planning/parity-1101-round6/run-check/RunRound6Checks.csproj",
+      "--source",
+      "./Library/PackageCache"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\restore-round6.log",
+    "startedAt": "2026-11-01T05:58:29.8945438Z",
+    "endedAt": "2026-11-01T05:58:30.8113829Z"
+  },
+  {
+    "name": "discover-source-oracle",
+    "tool": "node",
+    "exitCode": 0,
+    "arguments": [
+      "_planning/parity-1101-round6/discover-source-oracle.mjs",
+      "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\discover-source-vectors.json"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\discover-source-oracle.log",
+    "startedAt": "2026-11-01T05:58:30.8305844Z",
+    "endedAt": "2026-11-01T05:58:30.9230032Z"
+  },
+  {
+    "name": "battle",
+    "pid": 36960,
+    "exitCode": 1,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1031/battle-check/BattleChecks.csproj",
+      "--no-restore",
+      "-c",
+      "Release"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\battle.log",
+    "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\battle-stderr.log",
+    "startedAt": "2026-11-01T05:58:30.9283462Z",
+    "endedAt": "2026-11-01T05:58:32.4127805Z"
+  },
+  {
+    "name": "run",
+    "pid": 29008,
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1031/run-check/RunParityChecks.csproj",
+      "--no-restore",
+      "-c",
+      "Release"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\run.log",
+    "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\run-stderr.log",
+    "startedAt": "2026-11-01T05:58:30.9498057Z",
+    "endedAt": "2026-11-01T05:58:35.7256643Z"
+  },
+  {
+    "name": "run-round2",
+    "pid": 18020,
+    "exitCode": 0,
+    "arguments": [
+      "run",
+      "--project",
+      "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj",
+      "--no-restore",
+      "-c",
+      "Release"
+    ],
+    "log": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\run-round2.log",
+    "stderr": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round6\\domain\\run-round2-stderr.log",
+    "startedAt": "2026-11-01T05:58:30.9591881Z",
+    "endedAt": "2026-11-01T05:58:35.9248405Z"
+  }
+]

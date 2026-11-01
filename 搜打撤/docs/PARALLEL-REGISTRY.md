@@ -9,6 +9,9 @@
 
 ## 活跃登记
 
+Friday（Unity持续对照第六轮 unity-parity-round6；01a19232），2026-11-01：验收通过、源码同步中。828正式/24辅助冻结输入；1483领域+8实际Source向量、新369+相关回归943共1312原生及FilmFlow/Receipts61tick/Journey448tick通过。正常当前2560×1440/DPI120 Player-6共83图211记录exit0，三人实看21图通过；GUIDc3ee3347a03149de80bbb7fe3f0bb5c2，3993构建输入/166产物指纹核对。过程失败及两次人工发现的视觉失败均保留，最新容器/Grave顶栏修正已补验。生产已停止编辑；Root持有自有版本文档、evidence与发布闭包，保留工作树C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232基线d8f40d78准备白名单分组提交。所有后台进程结束，无端口服务；原planning/bin、四个Vite在途源、原index与完成归属保留。
+
+
 
 
 

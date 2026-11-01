@@ -1,0 +1,20 @@
+{
+  "environment": {
+    "HTTP_PROXY": {
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 12450
+    },
+    "HTTPS_PROXY": {
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 12450
+    },
+    "ALL_PROXY": {
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 12450
+    }
+  },
+  "gitOverrides": []
+}
