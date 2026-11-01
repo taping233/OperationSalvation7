@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "branch": "codex/unity-validated-20261101",
+  "runtimeCommit": "16f0b31488e203374bb1a24ca52295b357fe9042",
+  "codeAndChecksCommit": "eabc0ccdb87b6086809acc37e8efba4a7aaf501c",
+  "remoteHeadReadBack": "eabc0ccdb87b6086809acc37e8efba4a7aaf501c",
+  "githubActions": {
+    "totalCount": 0,
+    "receipt": "github-actions-source.json",
+    "reason": "Both current push workflows restrict branches to master; no automatic CI result is claimed for this codex branch."
+  },
+  "network": "Current process HTTP/HTTPS/ALL proxy was checked before network; Git proxy override lookup returned none; Git inherited current environment.",
+  "atUtc": "2026-11-01T04:08:11.996141+00:00"
+}

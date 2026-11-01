@@ -1,0 +1,16 @@
+{
+  "reviewer": "hub_save_parity",
+  "result": "ready-no-confirmed-blocker",
+  "reviewedIndexChanges": 83,
+  "runtimePaths": 13,
+  "formalNativeChanges": 37,
+  "exportWhitelist": 3729,
+  "domainProjects": 6,
+  "freezeIndexComparison": {
+    "uniquePaths": 843,
+    "rawExact": 655,
+    "declaredTextCrlfToLfOnly": 188,
+    "unexpected": 0
+  },
+  "scope": "Independent read-only staged review checked production note/export ownership and failure boundaries, all 812 formal +19 auxiliary frozen inputs, changed Unity paths, project closure, current documentation links/numbers, and exclusion of WIP/media/profile/bin/obj. No edits or tests run by reviewer."
+}

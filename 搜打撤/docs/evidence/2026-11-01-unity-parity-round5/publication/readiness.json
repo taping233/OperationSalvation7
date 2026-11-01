@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "doctor": {
+    "receipt": "doctor-worktree.json",
+    "sha256": "2d18c693532a19cb45dcfb78418ee8a217bd678c16ef86858012931385b90ad7",
+    "summary": {
+      "passed": 8,
+      "warning": 2,
+      "blocked": 0,
+      "info": 3,
+      "not-checked": 2
+    }
+  },
+  "docs": {
+    "receipt": "../docs-check.json",
+    "sha256": "0e3347f2fba988538504dccd397fda446a2b8078933b273557434a70a0e8f53b",
+    "checkedRelativeLinks": 806,
+    "reviewOnly": "Existing browser-rule duplication in another registry owner row; retained without unrelated edits."
+  },
+  "stagedGate": {
+    "receipt": "staged-result.json",
+    "sha256": "ded631c60cc1de61d3bb50c17395f5b0002082cbd995f06d3c04d69e92ebdbaa",
+    "mode": "skip",
+    "tests": [],
+    "reason": "No Vite quality-gate path changed; C# independently validated by frozen domain/native/build/player receipts."
+  },
+  "initialDoctorInvocation": "The first command used the parent directory without package.json and exited before doctor; doctor-worktree.json is the actual successful invocation. No source or validation outcome changed."
+}

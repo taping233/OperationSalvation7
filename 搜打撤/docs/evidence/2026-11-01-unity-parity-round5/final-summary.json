@@ -1,5 +1,5 @@
 {
-  "status": "validated-awaiting-publication",
+  "status": "validated-and-source-pushed",
   "atUtc": "2026-11-01T03:59:10.026961+00:00",
   "sourceInputCount": 812,
   "sourceInputsUnchanged": true,
@@ -184,7 +184,12 @@
   "scope": "No OS hardware input, multi-size acceptance, natural unassisted gameplay, whole-frame allocations or FPS claim.",
   "continuousGoal": "active",
   "publication": {
-    "status": "preparing",
-    "branch": "codex/unity-validated-20261101"
+    "status": "source-pushed-and-remote-verified",
+    "branch": "codex/unity-validated-20261101",
+    "runtimeCommit": "16f0b31488e203374bb1a24ca52295b357fe9042",
+    "codeAndChecksCommit": "eabc0ccdb87b6086809acc37e8efba4a7aaf501c",
+    "sourceRemoteReadBack": "eabc0ccdb87b6086809acc37e8efba4a7aaf501c",
+    "receipts": "publication/README.md",
+    "seal": "Following commit contains only this final documentation/receipt update. Final remote head is recorded locally after its push."
   }
 }

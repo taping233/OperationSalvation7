@@ -16,3 +16,5 @@
 正常Standalone当前2560×1440/DPI120、原CanvasScaler、零透明非激活宿主完成165条记录和66图；包含真实RaycastAll目标核验、完整卡牌/备注文件独立读取，以及整档导出→可编辑导入→预检确认→回选档。实际复核新增5图、普通图库1图、整档3图，见[visual-review.json](visual-review.json)。这些为程序构造原生输入；无系统键鼠、多尺寸或自然未辅助玩法证明。FilmFlow旧1920离屏目标只作组件/流程诊断，不作为另一个实际窗口尺寸验收。
 
 完整本地产物见[product-manifest.json](product-manifest.json)，图片、大JSON与原始日志索引见[artifacts.json](artifacts.json)，超过1MB或受限媒体不进Git；构造profile不发布。EXE为Unity启动壳，哈希相同不能独立证明版本。原工作区、原index、四个Vite在途源及他人planning/bin保持归属；已授权源码同步沿`codex/unity-validated-20261101`，发布核对记录位于`publication/`。
+
+源码已按授权分组提交并推送，远端回读核实：功能/优化`16f0b314`，代码与检查`eabc0ccd`。发布索引、独审和实际CI触发边界见[publication/README.md](publication/README.md)；后续收据封口只改文档，不改本批已验源码。
