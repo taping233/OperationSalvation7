@@ -1,0 +1,190 @@
+{
+  "status": "validated-awaiting-publication",
+  "atUtc": "2026-11-01T03:59:10.026961+00:00",
+  "sourceInputCount": 812,
+  "sourceInputsUnchanged": true,
+  "sourceScope": "Native production, editor checks, package and project settings",
+  "sourceAuxiliary": {
+    "count": 19,
+    "unchanged": true,
+    "receipt": "source-auxiliary.json"
+  },
+  "domain": {
+    "freshTotal": 859,
+    "receipt": "domain-validation.json"
+  },
+  "native": {
+    "newTotal": 262,
+    "newByDomain": {
+      "photoSaveAssertions": 29,
+      "motionAssertions": 16,
+      "searchAssertions": 180,
+      "exportAssertions": 37
+    },
+    "relatedRegressionTotal": 127,
+    "assertionTotal": 389,
+    "filmFlowPassed": true,
+    "receipts": {
+      "native-round5-3": {
+        "process": {
+          "method": "Sdt.Editor.CurrentRound5Validation.Run",
+          "pid": 14064,
+          "startedAt": "2026-11-01T03:53:28.5253610Z",
+          "endedAt": "2026-11-01T03:53:43.2941029Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 812,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round5\\native-round5-3"
+        },
+        "processSha256": "32364063235dc0427591ac33c19abd2dba46c62b687bff3badbce78fed7efc9f",
+        "resultSha256": "b12722966b910dd44150d4fdb96fe5ebacad88424ca18227e0cba0237f6d7914"
+      },
+      "native-photo-regression": {
+        "process": {
+          "method": "Sdt.Editor.CurrentRound4Validation.Run",
+          "pid": 36572,
+          "startedAt": "2026-11-01T03:53:43.4269617Z",
+          "endedAt": "2026-11-01T03:54:00.0087104Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 812,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round5\\native-photo-regression"
+        },
+        "processSha256": "db35d828129d193e98ae4fc7feb124973958cd6fe890af2b3aaac57b3cfd5f79",
+        "resultSha256": "ae604178d8e4ecd5b4488328ba180de2dcb085c3bc55c10008b04092fc09ab95"
+      },
+      "native-film-regression": {
+        "process": {
+          "method": "Sdt.Editor.CurrentFilmFlowValidation.Run",
+          "pid": 27768,
+          "startedAt": "2026-11-01T03:54:00.1279890Z",
+          "endedAt": "2026-11-01T03:54:30.5587844Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 812,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round5\\native-film-regression"
+        },
+        "processSha256": "1a3d95229509d124c98a92fe453bba1e06a9c0279f23cb59332473238bd708d2",
+        "resultSha256": "a60d9fdcbeaf8cddb6d5f36ca8a5b4a1767526bd1a56b6d8e29de89e6a1b86f4",
+        "recordKinds": {
+          "native-page-ready": 10,
+          "native-pointer-diagnostics": 8,
+          "constructed-native-page-pointer": 8,
+          "actual-film-start": 11,
+          "capture": 16,
+          "photo-warm-owner-cancel": 1,
+          "controlled-node-position": 6,
+          "boss-failed-entry-state": 1,
+          "boss-failed-atomic-retry": 1,
+          "constructed-native-film-pointer": 2,
+          "boss-success-after-skip": 1,
+          "door-return-reentry-and-ordinary-skip": 1,
+          "actual-passage-completed": 1
+        }
+      },
+      "build-desktop": {
+        "process": {
+          "method": "Sdt.Editor.BuildGame.BuildWin64",
+          "pid": 37104,
+          "startedAt": "2026-11-01T03:55:03.2485921Z",
+          "endedAt": "2026-11-01T03:55:33.1011163Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "inputsUnchanged": true,
+          "changedInputs": [],
+          "sourceCount": 812,
+          "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-11-01-unity-parity-round5\\build-desktop"
+        },
+        "processSha256": "53db77c0247ddc7cc9190798155427cfac04353245a5de6fbbea0cf0e91022a4"
+      }
+    },
+    "scope": "Round5 full chain plus Round4 aggregate (including all 25 photo checks) and existing FilmFlow. Unrelated R3/R2/shared suites not rerun or added to the fresh count."
+  },
+  "build": {
+    "result": "Succeeded",
+    "errors": 0,
+    "inputCount": 3977,
+    "inputsUnchanged": true,
+    "buildGUID": "3a68596b7ad04387a7ea36420d8ac12e",
+    "productFiles": 166,
+    "productBytes": 2734228494,
+    "productManifest": "product-manifest.json",
+    "launcherHashIsNotVersionIdentity": true
+  },
+  "player": {
+    "passed": true,
+    "display": {
+      "screenWidth": 2560,
+      "screenHeight": 1440,
+      "dpi": 120.0,
+      "fullScreenMode": "Windowed",
+      "desktop": {
+        "width": 2560,
+        "height": 1440
+      },
+      "display": {
+        "renderingWidth": 2560,
+        "renderingHeight": 1440,
+        "systemWidth": 2560,
+        "systemHeight": 1440
+      },
+      "quality": "Ultra",
+      "targetFrameRate": 60,
+      "bufferWidthScale": 1.0,
+      "bufferHeightScale": 1.0,
+      "canvas": {
+        "mode": "ScreenSpaceOverlay",
+        "scaleFactor": 1.33333337,
+        "width": 1920.0,
+        "height": 1080.0,
+        "lossyScale": {
+          "x": 1.33333337,
+          "y": 1.33333337,
+          "z": 1.33333337
+        },
+        "scaler": "ScaleWithScreenSize",
+        "referenceWidth": 1920.0,
+        "referenceHeight": 1080.0,
+        "matchWidthOrHeight": 0.5
+      },
+      "windowsDpi": {
+        "available": true,
+        "processAwareness": 2,
+        "result": 0
+      },
+      "graphics": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "graphicsApi": "Direct3D12",
+      "unityVersion": "6000.6.7f1",
+      "buildGUID": "3a68596b7ad04387a7ea36420d8ac12e"
+    },
+    "exitCode": 0,
+    "captures": 66,
+    "records": 165,
+    "resultSha256": "a4182ec772f6c3e8c58af5faf400f745e0a143dfc58ad56c770599d6cef6cfa2",
+    "process": "player/process.json",
+    "input": "Constructed native UI/raycast/commands, zero-alpha nonactivating host; no OS hardware input."
+  },
+  "visualReviews": {
+    "receipt": "visual-review.json",
+    "count": 9
+  },
+  "performance": "performance.json",
+  "artifacts": "artifacts.json",
+  "failuresRetained": {
+    "export-domain.log": "NETSDK1004 before execution; offline restore of local SDK/package project then passed.",
+    "native-round5": "Strict new fixture expected .NET Core Chinese collation; actual was not logged.",
+    "native-round5-2": "Added actual IDs/cost/rarity/sort diagnostic. Correct sort selected; unchanged production comparer uses Unity Mono ordering. Fixed only QA expected IDs/type-label distinction; all assertions retained."
+  },
+  "scope": "No OS hardware input, multi-size acceptance, natural unassisted gameplay, whole-frame allocations or FPS claim.",
+  "continuousGoal": "active",
+  "publication": {
+    "status": "preparing",
+    "branch": "codex/unity-validated-20261101"
+  }
+}

@@ -9,6 +9,11 @@
 
 ## 活跃登记
 
+Friday（Unity第五轮验收源码同步 unity-round5-github-1101；01a19232），2026-11-01：编辑中。仅持有已授权发布工作树 C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232 的codex/unity-validated-20261101、原生GITHUB-SOURCE/MIGRATION/.gitignore及export_manifest发布闭包、自有本轮evidence/publication和本行；基线HEAD a733c8a5。只复制已验完成的精确白名单，核每个Git对象与输入指纹后分组提交、推送及远端回读，不打包原index/他人在途四个Vite文件、profile或大媒体。工作树已存在且保留，无端口服务；原工作区代码不再改。
+
+
+
+
 
 
 
@@ -394,6 +399,9 @@ Friday / WF-card-feedback-v2-1023 (01a16808)，2026-10-23：12张内置修订、
 
 
 ## 近期已释放
+
+Friday（Unity持续对照第五轮 WF-unity-parity-round5-1101；01a19232），2026-11-01：完成未提交，编辑释放。BaseData.Customization备注、PhotoStudioExport纯服务、CardLibrary/PhotoDetail/PhotoStudioRoom、PhotoStudioExports、共用CurrentArchiveUi/SlotArchive、NativeDisplayReview.PhotoStudio及五个Editor检查/集成、手写export-check工程、自有_planning/parity-1101-round5与本轮evidence均完成。859领域、262新增+127相关原生、FilmFlow、当前2560×1440Standalone通过，66图实看9；GUID3a68596b7ad04387a7ea36420d8ac12e，812源码/3977构建输入不变，166产物有SHA。所有本轮原生/播放器PID已核退出，无服务。原字节归属保留，Vite四在途源及原planning/bin未动；按老板既有授权转入下行源码同步，持续目标active。
+
 
 Friday（Unity第二至四轮源码同步 WF-unity-parity-publish-1101；01a19232），2026-11-01：已交付/编辑释放。第二至第四轮Runtime db30a51a、检查/文档82cde60d已推送codex/unity-validated-20261101并回读一致，3889候选Git对象逐项匹配原字节或声明LF表示。领域1101、原生681、终局/四层旅程与当前2560×1440播放器通过，GUID66a82ecd32f2426e98d4bf06b8ed3308；小回执见docs/evidence/2026-11-01-unity-parity-round4/publication/。原工作区index与Vite四个在途路径未动，未提交状态及原始planning/bin保留。发布工作树C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232与本会话生成本地门禁收据保留，不作清理；末次仅补文档封签，运行/检查源冻结，无端口或后台进程。持续目标active。
 

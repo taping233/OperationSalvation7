@@ -12,9 +12,9 @@
 
 ## 本轮实施与验收
 
-当前第四轮：2026-11-01，敌方回合实卡自动释放的输入等待/续接、准备/照片/信箱旧回调与焦点、照片墙挂载开销已修正并集中验收。领域1101项、新增127项及既有554项原生、正式终局与四层旅程通过；正常Standalone当前2560×1440窗口流程通过，生成61图、实际复核19图。默认 `Build/Desktop/代号柒.exe` 已更新，buildGUID为 `66a82ecd32f2426e98d4bf06b8ed3308`；796源码/元数据、3961构建输入及166产物指纹已核对。24类玩家页面完成审计、失败历史、构造输入及复用边界见[第四轮验收](../搜打撤/docs/evidence/2026-11-01-unity-parity-round4/README.md)。持续目标保持；资料制作工具与下一批性能候选另列，不声称整库零差异。
+当前第五轮：2026-11-01，照相馆开发模式接入完整卡牌/备注导出；备注仅写全局备注键，失败暂存、同值重试与跨档共享保持。照片墙共同筛选与类别计数合为单遍，减动效跳过隐藏尘点工作、背景几何不变跳过布局；图库正式关闭立即恢复所属阶段，导出预览限制8000字符而复制/文件保持完整JSON。全部修改冻结后，859项相关领域、本轮262项与相关回归127项原生、FilmFlow及当前2560×1440正常Standalone流程通过，生成66图、实际复核9图。默认 `Build/Desktop/代号柒.exe` 已更新，buildGUID为 `3a68596b7ad04387a7ea36420d8ac12e`。输入/产物指纹、严格检查夹具修正和验收边界见[第五轮验收](../搜打撤/docs/evidence/2026-11-01-unity-parity-round5/README.md)。持续目标保持，不声称整库零差异或FPS提升。
 
-历次基线只用于对应版本追溯：[第三轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round3/README.md)、[第二轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round2/README.md)、[首次同步](../搜打撤/docs/evidence/2026-11-01-github-sync/README.md)、[早期对齐](../搜打撤/docs/evidence/2026-10-31-unity-parity/README.md)。旧离屏图及旧通过数字不替代当前版本结论。
+历次基线只用于对应版本追溯：[第四轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round4/README.md)、[第三轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round3/README.md)、[第二轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round2/README.md)、[首次同步](../搜打撤/docs/evidence/2026-11-01-github-sync/README.md)、[早期对齐](../搜打撤/docs/evidence/2026-10-31-unity-parity/README.md)。旧离屏图及旧通过数字不替代当前版本结论。
 
 音效沿用十个原声道，共享正式SFX总线，BGM独立；本机原生压缩比上限10对应源12，其余参数保存回读。未作逐样本声学、物理键鼠、多尺寸窗口或整帧性能收益声明。
 
@@ -36,4 +36,4 @@
 - 验收包括现行内容导出核对、定向领域断言、Unity 原生编译、实际玩家流程与桌面构建。截图、程序构造场景和真实输入分别报告。
 - 优先使用本机已有编辑器与依赖；当前原生编译及后台运行使用 `D:/Unity/6000.6.7f1/Editor/Unity.exe`，结果按每轮输入指纹记录。
 
-2026-11-01老板已授权验收后提交并同步GitHub；当前交付记录见[第四轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round4/README.md)，源码与同仓资源恢复方式见[GITHUB-SOURCE.md](GITHUB-SOURCE.md)。
+2026-11-01老板已授权验收后提交并同步GitHub；当前交付记录见[第五轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round5/README.md)，源码与同仓资源恢复方式见[GITHUB-SOURCE.md](GITHUB-SOURCE.md)。

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "unity-parity-round5",
+  "date": "2026-11-01",
+  "owner": "Friday",
+  "goal": "对齐照相馆开发导出与全局备注持久入口，优化确认的不可见动效及重复布局/搜索，集中完成后统一原生与当前窗口验收并按授权同步源码",
+  "paths": [
+    "docs/evidence/2026-11-01-unity-parity-round5"
+  ],
+  "doneWhen": [
+    "现役卡牌/备注导出契约与原生正式入口对应，空钩子和Agent能力不复制",
+    "备注仅写Global且保持失败保全/同值重试，减动效和布局修正确认的无用工作",
+    "全部修改冻源后完成相应逻辑及原生/当前窗口验收，指纹及剩余差异明确"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "859项领域、262项新增与127项相关原生、FilmFlow及当前窗口流程和9图复核通过；812源码3977构建输入不变",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "该codex分支未配置push自动CI；无系统键鼠、多尺寸或整帧性能量化"
+  ],
+  "updatedAt": "2026-11-01T04:00:25.803Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

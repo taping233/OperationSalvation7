@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "reviewer": "Friday/root; actual view_image review of all listed originals",
+  "atUtc": "2026-11-01T03:57:23.895161+00:00",
+  "window": {
+    "width": 2560,
+    "height": 1440,
+    "dpi": 120
+  },
+  "inputScope": "Real standalone render at current physical desktop, normal CanvasScaler; constructed uGUI input, no OS input. No other window size reviewed.",
+  "images": [
+    {
+      "path": "player/player-photo-export-tools.png",
+      "sha256": "3aba2312c8390e1a766dca2c4d9649525adf23344c75fdf68ad9e327457bfae3",
+      "observation": "开发模式三个导出控件位于标题右侧；馆藏/类别计数、筛选、照片及右侧资料均可读，无遮挡。"
+    },
+    {
+      "path": "player/player-photo-export-cards.png",
+      "sha256": "4cfa339d9e11979b6b9a164e44183d43046649d59d43d41471cba3832ddc9f65",
+      "observation": "完整卡牌导出说明、只读JSON预览及三个按钮可读；预览位于正文边界内，明确前8000字符限制。"
+    },
+    {
+      "path": "player/player-photo-export-written.png",
+      "sha256": "26e3dd10eaa692edd4258bc1e1937314ed9685c6c32be901703feed254c1fdcc",
+      "observation": "写入成功路径在状态区换行，保留JSON；导出按钮置灰、复制及返回仍可见。"
+    },
+    {
+      "path": "player/player-photo-export-notes.png",
+      "sha256": "0d74b3bda51cd431177148f609c6cc0f91fe61ff14dc9b88c2d6df72616f6a39",
+      "observation": "备注合并和未存档说明可读，JSON版本/备注正文可读，底部操作完整。"
+    },
+    {
+      "path": "player/player-photo-export-returned.png",
+      "sha256": "d68f51d2352a633b3de4c94079e3d29b8850b00fb4ec99d52acf4f9bf6e9ba27",
+      "observation": "关闭覆盖页后馆藏291、原选中照片及资料、三个工具控件恢复，无残留遮罩。"
+    },
+    {
+      "path": "player/player-photo.png",
+      "sha256": "3cb3f785552a5b77c62844af03a5e28457cd4b501fb4895470ce88c969c2f5ce",
+      "observation": "普通模式照片墙不出现开发导出工具，馆藏、筛选、照片和资料清楚。"
+    },
+    {
+      "path": "player/player-slot-archive-export.png",
+      "sha256": "e602b1aadb8b78c26ba0f96d2e5d5b441a4162c643acc5781a629ab55dc45ce2",
+      "observation": "共用JSON控件接入后整档只读导出内容、说明及底部三个操作完整。"
+    },
+    {
+      "path": "player/player-slot-archive-import.png",
+      "sha256": "d6c61224bbe6f3d5945b1010cf40a895a7511ee482515f4fb713cd60cc54dd07",
+      "observation": "整档导入的可编辑JSON仍有选中状态，校验并预览和返回操作可见。"
+    },
+    {
+      "path": "player/player-slot-archive-import-preview.png",
+      "sha256": "1f4c6195dd4e8a28e2c5f0a1b9a51fe30a271da035dd4b09ba2b88e75b418c65",
+      "observation": "预览确认覆盖层显示来源档位和覆盖说明，返回及确认导入位置完整。"
+    }
+  ]
+}

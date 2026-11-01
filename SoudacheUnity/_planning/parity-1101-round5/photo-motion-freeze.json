@@ -1,0 +1,46 @@
+{
+  "status": "source frozen; native checks written and not executed",
+  "productionScope": [
+    "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioRoom.cs"
+  ],
+  "nativeEntry": "Sdt.Editor.CurrentPhotoMotionRound5Checks.Run() / Assertions",
+  "nativeScope": [
+    "reduced-motion stable dust transforms",
+    "same-object normal-motion restore",
+    "reduced-motion reentry",
+    "initial backdrop cover geometry",
+    "stable backdrop transform",
+    "parent resize",
+    "different sprite geometry",
+    "equal geometry sprite replacement",
+    "reactivation after resize"
+  ],
+  "verification": "read-only source review and targeted git diff --check only; no compile, tests, Unity or Player run",
+  "rootOwnedFollowup": "CardLibraryScreen search and category-count single-pass projection; no edits by battle_parity",
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioRoom.cs",
+      "bytes": 5686,
+      "sha256": "86950aa9bebbea20adb842ccffac5142aa503064b0c3493cbce7468a7f04c479",
+      "normalizedLfSha256": "86950aa9bebbea20adb842ccffac5142aa503064b0c3493cbce7468a7f04c479"
+    },
+    {
+      "path": "Assets/Editor/CurrentPhotoMotionRound5Checks.cs",
+      "bytes": 6499,
+      "sha256": "3e02c69ac0def1c023fcc21a53d3ad96455f37bc0274a863e982d21fba35da1e",
+      "normalizedLfSha256": "3e02c69ac0def1c023fcc21a53d3ad96455f37bc0274a863e982d21fba35da1e"
+    },
+    {
+      "path": "Assets/Editor/CurrentPhotoMotionRound5Checks.cs.meta",
+      "bytes": 60,
+      "sha256": "7f56c7c6b9a4f2da3228e4f0d18e827a4fbc674da115e2519dd282fd2a0f746e",
+      "normalizedLfSha256": "7f56c7c6b9a4f2da3228e4f0d18e827a4fbc674da115e2519dd282fd2a0f746e"
+    },
+    {
+      "path": "_planning/parity-1101-round5/photo-performance-audit.md",
+      "bytes": 6928,
+      "sha256": "7d45aaa3dcf4231ed9a9e7e78c2387b49f21d354cb8692f985fb61ad2cc6669b",
+      "normalizedLfSha256": "7d45aaa3dcf4231ed9a9e7e78c2387b49f21d354cb8692f985fb61ad2cc6669b"
+    }
+  ]
+}

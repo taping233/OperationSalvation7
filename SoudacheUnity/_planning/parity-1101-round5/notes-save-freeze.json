@@ -1,0 +1,39 @@
+{
+  "status": "frozen-awaiting-central-validation",
+  "scope": "photo Global key persistence only; no SaveSystem/UI/export edits",
+  "compiled": false,
+  "testsRun": false,
+  "unityLaunched": false,
+  "checkEntry": "Sdt.Editor.CurrentPhotoSaveRound5Checks.Run()/Assertions",
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/BaseData.Customization.cs",
+      "bytes": 7950,
+      "mtimeNs": 1793503658350964300,
+      "sha256": "a1aec5bd75e0f9aeced6f8b66e02805c723a290d1dc5208e211b55415fc118fa",
+      "lfSha256": "a1aec5bd75e0f9aeced6f8b66e02805c723a290d1dc5208e211b55415fc118fa"
+    },
+    {
+      "path": "Assets/Editor/CurrentPhotoSaveRound5Checks.cs",
+      "bytes": 8509,
+      "mtimeNs": 1793503456685338500,
+      "sha256": "f862ebf6ffc6f56da070b392b673e67da133b83182bbab0ee23a04fc2f0ea111",
+      "lfSha256": "f862ebf6ffc6f56da070b392b673e67da133b83182bbab0ee23a04fc2f0ea111"
+    },
+    {
+      "path": "Assets/Editor/CurrentPhotoSaveRound5Checks.cs.meta",
+      "bytes": 60,
+      "mtimeNs": 1793503456928566900,
+      "sha256": "b99f7b7142f132dc5a4d341e945732e708481aa4897dbfcd17fe40fd11e4acdf",
+      "lfSha256": "b99f7b7142f132dc5a4d341e945732e708481aa4897dbfcd17fe40fd11e4acdf"
+    },
+    {
+      "path": "_planning/parity-1101-round5/notes-save.md",
+      "bytes": 2747,
+      "mtimeNs": 1793503658579545800,
+      "sha256": "04c1f2878c6c73589fd0cc4d1ebc2eb9ce2a27336ebe1e26c6cf8dfcd17e15bd",
+      "lfSha256": "04c1f2878c6c73589fd0cc4d1ebc2eb9ce2a27336ebe1e26c6cf8dfcd17e15bd"
+    }
+  ],
+  "sharedInterface": "internal static BaseData.ReadPhotoNotes(SaveSystem saves); internal const BaseData.PhotoNotesKey; source parser unchanged"
+}

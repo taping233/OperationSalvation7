@@ -84,11 +84,12 @@ domain_files = [
     "_planning/parity-1031/run-check/RunParityChecks.csproj", "_planning/parity-1031/run-check/Program.cs",
     "_planning/parity-1101-round2/run-check/RunRound2Checks.csproj", "_planning/parity-1101-round2/run-check/Program.cs",
     "_planning/parity-1101-round3/archive-check/ArchiveRound3Checks.csproj", "_planning/parity-1101-round3/archive-check/Program.cs",
+    "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj", "_planning/parity-1101-round5/export-check/Program.cs",
     "_planning/migration-1029/current-departure/Stubs.cs"
 ]
 for relative in domain_files:
     add(relative, "domain-check")
-for folder in ("parity-1101-round2", "parity-1101-round3", "parity-1101-round4"):
+for folder in ("parity-1101-round2", "parity-1101-round3", "parity-1101-round4", "parity-1101-round5"):
     for pattern in ("*.md", "*.json"):
         for path in sorted((UNITY / "_planning" / folder).glob(pattern)):
             add(path.relative_to(UNITY).as_posix(), "parity-acceptance")

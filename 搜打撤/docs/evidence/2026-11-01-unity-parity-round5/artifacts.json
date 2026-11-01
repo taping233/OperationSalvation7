@@ -1,0 +1,425 @@
+{
+  "acquisition": "Replay source-fixed entrypoints from process.json using run_native_check.ps1 and fresh directories; replay standalone with run_hidden_player.ps1 -TransparentCompositor. Images and large raw evidence remain local. Native 1920 render-target diagnostics do not prove another real window size.",
+  "artifacts": [
+    {
+      "path": "native-film-regression/altar-disturb-middle.png",
+      "bytes": 688063,
+      "sha256": "e2d4974c82f07ec4221cf9690a733a0b19a4c03bbf52dc10f604aa471e9e870e"
+    },
+    {
+      "path": "native-film-regression/altar-encounter.png",
+      "bytes": 2033943,
+      "sha256": "d33bf4cc3d28fff237df1294947895901cc76f07454bdaf17e506c83679f5f1f"
+    },
+    {
+      "path": "native-film-regression/boss-deck-after-skip.png",
+      "bytes": 674873,
+      "sha256": "b8eadfc6320089846ea61c5a69c6664c5ce233394173c4ef533230e9b0cbf7b5"
+    },
+    {
+      "path": "native-film-regression/boss-gate-confirmation.png",
+      "bytes": 753599,
+      "sha256": "331fd68b11e81fa7714f400d6f417ce2700740c3b2f3384dc7a24339ae3d9001"
+    },
+    {
+      "path": "native-film-regression/boss-gate-save-failed.png",
+      "bytes": 800337,
+      "sha256": "fbd2061c0585ae6d212804377770b873bf77d3eff227aef77b234c179363d5d8"
+    },
+    {
+      "path": "native-film-regression/boss-pressure-early.png",
+      "bytes": 262566,
+      "sha256": "6d1b23148ad38a30909452a7dcbbae3e5033e871f2d152ad7ce064fe37ba9fe6"
+    },
+    {
+      "path": "native-film-regression/boss-pressure-middle.png",
+      "bytes": 631420,
+      "sha256": "902e1ecdbde3335d030e27dc18669077b2a652a88b76d2825e53461ca602e65a"
+    },
+    {
+      "path": "native-film-regression/door-destination.png",
+      "bytes": 3023045,
+      "sha256": "f2bed8e516ed5b6d8c66734dbc8ccfa0638a4dff302e71864b0d5d56f1e4d859"
+    },
+    {
+      "path": "native-film-regression/event-encounter-ev19-recode.png",
+      "bytes": 1862170,
+      "sha256": "a77c38e3406c82a8d144280e20ededdef4aa936196927668e374fafee1ee71bc"
+    },
+    {
+      "path": "native-film-regression/event-encounter-tt6-chestdraw.png",
+      "bytes": 1562469,
+      "sha256": "7fed8b02002f4134e3b314b03fc19324fe98f668c355484a4010184c5c52031d"
+    },
+    {
+      "path": "native-film-regression/event-encounter-tt6-mystery.png",
+      "bytes": 1946448,
+      "sha256": "f09578df9129232430e7f85deec43273eeffb2149f054e3fcd9969e2d58a04da"
+    },
+    {
+      "path": "native-film-regression/passage-early.png",
+      "bytes": 829398,
+      "sha256": "61f60bf8aa55b6fa7b1e6478ab0ba426b56b49131213108f78c9ceae914c4af8"
+    },
+    {
+      "path": "native-film-regression/passage-middle-caption.png",
+      "bytes": 889316,
+      "sha256": "faa93668f0ece22ca491873f191b9ccbf128bfa3801dc54651d967f1b9602425"
+    },
+    {
+      "path": "native-film-regression/photo-destination.png",
+      "bytes": 1817217,
+      "sha256": "0a76a72acc9b5373ca61726491d83bed97d5fcd24293818dbec5ea867bf9e3d0"
+    },
+    {
+      "path": "native-film-regression/photo-develop-early.png",
+      "bytes": 415623,
+      "sha256": "92a73a1f6815b14922572da815803dec353ab46beeb89eca9d01d2ab6475e1cf"
+    },
+    {
+      "path": "native-film-regression/photo-develop-middle.png",
+      "bytes": 582840,
+      "sha256": "1c65a0ed24a3fd342394d14ed96f48094cce3de13e0d7975771aa2bf3d85480b"
+    },
+    {
+      "path": "player/player-altar.png",
+      "bytes": 2755055,
+      "sha256": "31d8d02e8c745fd13fa3854ce4e7ca839bd1843ae763d9bfed4fbefdace2cb6c"
+    },
+    {
+      "path": "player/player-battle-pile-reader.png",
+      "bytes": 2000614,
+      "sha256": "aec6808767c5ee9af343a1e2325b4f771baafe03797e6005f64e9914d3d3edad"
+    },
+    {
+      "path": "player/player-battle-pile-return.png",
+      "bytes": 1852914,
+      "sha256": "5a745e8799c19263cab4dd02a383b6c60b82dfaa0adcb0051161cea118bb5d46"
+    },
+    {
+      "path": "player/player-battle-pile.png",
+      "bytes": 1852914,
+      "sha256": "5a745e8799c19263cab4dd02a383b6c60b82dfaa0adcb0051161cea118bb5d46"
+    },
+    {
+      "path": "player/player-battle.png",
+      "bytes": 1844883,
+      "sha256": "72cdd25defb58f21cdfbd599162440bbc1fbb067eff28047bdc735d621381ad5"
+    },
+    {
+      "path": "player/player-card-legacy-density.png",
+      "bytes": 1361976,
+      "sha256": "dbb13a3052891368370e656b6ac26036ca2f48147dd9b78fb35f15cccef00d09"
+    },
+    {
+      "path": "player/player-card-native-density.png",
+      "bytes": 1357338,
+      "sha256": "6fe1e3c167a35c6420604bc08d09553c243df56be19b41aab0c09e832ce6bfb6"
+    },
+    {
+      "path": "player/player-door.png",
+      "bytes": 4098051,
+      "sha256": "63ea55e6f23cb9e3f8bcbd23bdc78f814402f212c28a31b647f36076053adb9e"
+    },
+    {
+      "path": "player/player-extraction.png",
+      "bytes": 1352806,
+      "sha256": "e7e626eb8ca2d100cd54db89da8f1b4e6ccad3ea0a34d1995cc5317060b5f9a9"
+    },
+    {
+      "path": "player/player-formation-rules.png",
+      "bytes": 1147886,
+      "sha256": "145474fa4c383b54a299510cf60dd8cb7872535f5cac5ea3d9bff1f4ef50ecca"
+    },
+    {
+      "path": "player/player-formation.png",
+      "bytes": 1243272,
+      "sha256": "e8e87731976ff3c6f7f3bb6457de6baa2058bce97e67982c65febad07079645e"
+    },
+    {
+      "path": "player/player-fx-atlas-specimen.png",
+      "bytes": 2521928,
+      "sha256": "27bb720fd56492b25400aff154bab2879987c068ba1ef93917f629db001fee0b"
+    },
+    {
+      "path": "player/player-guide-0.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "player/player-guide-1.png",
+      "bytes": 705057,
+      "sha256": "2e5c1fa96417229f1ffe937f3b026ccf68a01752df326b2cb77e5ca01d83234b"
+    },
+    {
+      "path": "player/player-guide-2.png",
+      "bytes": 1066215,
+      "sha256": "39d9a46ed51c94c910f3693efea6345dbf338d2ada853d0002ae08594a655df9"
+    },
+    {
+      "path": "player/player-guide-3.png",
+      "bytes": 533258,
+      "sha256": "3574f3b98f7236c27e5e44370719935b3a957726ecc233400967ee16d48a0660"
+    },
+    {
+      "path": "player/player-guide-4.png",
+      "bytes": 692497,
+      "sha256": "d27a3328dcd56893b8da230536bc77b68f6bd767a8b3a75f062df261f748b852"
+    },
+    {
+      "path": "player/player-guide-5.png",
+      "bytes": 740852,
+      "sha256": "f908ca336c7dcd8f2327afc2177765418bb0534fee51379a0b9450b7e17312c3"
+    },
+    {
+      "path": "player/player-guide-in-run.png",
+      "bytes": 1061593,
+      "sha256": "6afb0ee81d1535e31d66c559d3a9eca6d2089aa92334215d1a9f2232e271fa26"
+    },
+    {
+      "path": "player/player-guide-more-3.png",
+      "bytes": 608528,
+      "sha256": "9b578cecfc6b9e3079c5b8cbcb1e305f2832675ab7b13021c4c9255d44d04fee"
+    },
+    {
+      "path": "player/player-guide-more-4.png",
+      "bytes": 778500,
+      "sha256": "880694b6859ead83972163bc425237c8866c237be311b3e778c4eb844b643e7b"
+    },
+    {
+      "path": "player/player-guide-original.png",
+      "bytes": 707395,
+      "sha256": "6b2fbb427373af9de941c38d83646a11c02cb7514f1cee20deae5c1d95b62525"
+    },
+    {
+      "path": "player/player-hand-material-picked.png",
+      "bytes": 2340407,
+      "sha256": "ec83f92dae851f4b6a9103190e2bf277463f235fd968b6e49d6a318ad4597bb8"
+    },
+    {
+      "path": "player/player-hand-material.png",
+      "bytes": 2301379,
+      "sha256": "80f0421eb5a0cc10429cfe3bb667e32bb3af439a41fea00fdbfe1873e84ecb7e"
+    },
+    {
+      "path": "player/player-hub-conversion-overflow.png",
+      "bytes": 1155841,
+      "sha256": "d576d6e869848d8c8921948c81816accbb3edece3354a63fc3f10508a5854a4a"
+    },
+    {
+      "path": "player/player-hub-parity-returned-base.png",
+      "bytes": 2379281,
+      "sha256": "d5fa8ef972fa6feb8c2d3748a8987bfdf4eb1cd51dd2da1148adc3e9a8ad62b7"
+    },
+    {
+      "path": "player/player-hub-restore-unbanked-keys.png",
+      "bytes": 1002848,
+      "sha256": "12a12b686cda699d5ca7cd1af27947f2b5ce994b49fceccaea6cf99638b491af"
+    },
+    {
+      "path": "player/player-hub-trade-base-variant.png",
+      "bytes": 2464839,
+      "sha256": "337fb07a9d5153108e95d583a3a90b73cdbf489c44e7cb3d5df1170bb5504719"
+    },
+    {
+      "path": "player/player-hub-trade-variant.png",
+      "bytes": 2463804,
+      "sha256": "6db7dff624251a8c46be60d562291972811e41942cbc1463df59be7bcda6aae5"
+    },
+    {
+      "path": "player/player-hub-variant-stock.png",
+      "bytes": 2526111,
+      "sha256": "b317e4e0dbb320d00ea35ac94fb046604b3b389d2c490946627d2728e856828d"
+    },
+    {
+      "path": "player/player-hub-warehouse-actions.png",
+      "bytes": 991924,
+      "sha256": "5fd8d898f21e728881d4746f5c3eb70b454158627167ffbc078c42e390ae0a7c"
+    },
+    {
+      "path": "player/player-infusion-picked.png",
+      "bytes": 2093813,
+      "sha256": "5f00685b87373612a7d0e86bcb9c49b0bad16c7c8c2537aee6be58feda06860e"
+    },
+    {
+      "path": "player/player-infusion-return.png",
+      "bytes": 2427460,
+      "sha256": "a52d3c6781e253ce0b28b9ac9fd13df72708df08190526b7f1ea94f8e7d2018e"
+    },
+    {
+      "path": "player/player-infusion.png",
+      "bytes": 2067439,
+      "sha256": "83d6f43976eb872f534987cdec382c3b88456e3b611091b67e1a8a5ec371810b"
+    },
+    {
+      "path": "player/player-passage.png",
+      "bytes": 1176261,
+      "sha256": "c78a100c93250265acf4bdd0195dd069418960e66e9afa8aaf70b92645ea1fe8"
+    },
+    {
+      "path": "player/player-photo-export-cards.png",
+      "bytes": 1169558,
+      "sha256": "4cfa339d9e11979b6b9a164e44183d43046649d59d43d41471cba3832ddc9f65"
+    },
+    {
+      "path": "player/player-photo-export-notes.png",
+      "bytes": 1350774,
+      "sha256": "0d74b3bda51cd431177148f609c6cc0f91fe61ff14dc9b88c2d6df72616f6a39"
+    },
+    {
+      "path": "player/player-photo-export-returned.png",
+      "bytes": 2491954,
+      "sha256": "d68f51d2352a633b3de4c94079e3d29b8850b00fb4ec99d52acf4f9bf6e9ba27"
+    },
+    {
+      "path": "player/player-photo-export-tools.png",
+      "bytes": 2492612,
+      "sha256": "3aba2312c8390e1a766dca2c4d9649525adf23344c75fdf68ad9e327457bfae3"
+    },
+    {
+      "path": "player/player-photo-export-written.png",
+      "bytes": 1203287,
+      "sha256": "26e3dd10eaa692edd4258bc1e1937314ed9685c6c32be901703feed254c1fdcc"
+    },
+    {
+      "path": "player/player-photo.png",
+      "bytes": 2481397,
+      "sha256": "3cb3f785552a5b77c62844af03a5e28457cd4b501fb4895470ce88c969c2f5ce"
+    },
+    {
+      "path": "player/player-recode-reader.png",
+      "bytes": 2583557,
+      "sha256": "87b12b20a119b852c7371bdaa29fc6b65d9d066584fc721dcfa19ed1b80ff966"
+    },
+    {
+      "path": "player/player-recode-result.png",
+      "bytes": 2578168,
+      "sha256": "d093c1949eda885b37715c6baa725b5d4f16d13023aaca28814d1b1c2f8a2abc"
+    },
+    {
+      "path": "player/player-recode-save-failed.png",
+      "bytes": 2634002,
+      "sha256": "a06a1fb3203186ce3eb367f6db590041df3c3c8220c92937fabbc57044a4c811"
+    },
+    {
+      "path": "player/player-returned-base.png",
+      "bytes": 2375426,
+      "sha256": "e00aed21019637a146f1801f59110a3191ee09d4027b83e0c3e40f4467fa5291"
+    },
+    {
+      "path": "player/player-returned-slots.png",
+      "bytes": 1471743,
+      "sha256": "b38b195f4fbab0fbbd351d0ecaa9f2c3b5b2f5b111799fea15fb542f6856119b"
+    },
+    {
+      "path": "player/player-returned-title.png",
+      "bytes": 3411450,
+      "sha256": "fddc43e820aef64f2bb5512f83d2d6a8af1d5266398503cc7d5de24e43740a0b"
+    },
+    {
+      "path": "player/player-reward-pending.png",
+      "bytes": 2142375,
+      "sha256": "7aea7e51bf8d915f24822e04ba9435e37a868bc71ff248993fb404e5b02d1ad4"
+    },
+    {
+      "path": "player/player-reward-reader-capacity.png",
+      "bytes": 1839331,
+      "sha256": "8690db0c12476577820c3110beaf200906dd3172ec4643d8936b0fe36bdf17fa"
+    },
+    {
+      "path": "player/player-reward-reader-organizer.png",
+      "bytes": 2582947,
+      "sha256": "55e62113e5d10214f9dcc9afb4535e0cadbbf14dc471eb8983092a19da61bed3"
+    },
+    {
+      "path": "player/player-reward-reader-pending.png",
+      "bytes": 1834119,
+      "sha256": "5edd05d4175a2e8888d65ac4519025988dce28a64bf2bb435a0dc56302a24ad3"
+    },
+    {
+      "path": "player/player-settings.png",
+      "bytes": 737345,
+      "sha256": "5e462a9f25ccf52ba3aca6f86b03b1c2a0521a6b1f6ac829686290cc1138d9c6"
+    },
+    {
+      "path": "player/player-settlement.png",
+      "bytes": 879940,
+      "sha256": "a784429ff242c07a5694e77b714dd9ec483acdc1b16115b2865d08f81658787d"
+    },
+    {
+      "path": "player/player-shop-commission-dice.png",
+      "bytes": 1929477,
+      "sha256": "a211156453f40c9acbece1a614313ad6f6da8797ca4b3244a07135451a9503fe"
+    },
+    {
+      "path": "player/player-shop-commission-receipt.png",
+      "bytes": 2461951,
+      "sha256": "eadd8965e579b8a26f7ace00a7bd58b89197ccb3960a4f122ca006484af2da1d"
+    },
+    {
+      "path": "player/player-shop-commission.png",
+      "bytes": 2620979,
+      "sha256": "bba5f64121056777add9a76cf258f836824d20bf5736328fb59eea68282f99fb"
+    },
+    {
+      "path": "player/player-shop-exchange.png",
+      "bytes": 1688771,
+      "sha256": "0f5ce9b6c4ef166e6845f1ef1c3cf435028cc1861ba9384532c253ff35e60b69"
+    },
+    {
+      "path": "player/player-shop-free-offers.png",
+      "bytes": 3617368,
+      "sha256": "1376784b373c880f0ab722c98332785842f988a749386459d48022d2bda84401"
+    },
+    {
+      "path": "player/player-shop-inspection.png",
+      "bytes": 2363925,
+      "sha256": "ad7b0c732b9523333d57c9c48bcbc46fc22ad6050cfe6e9634ca18777e7b412f"
+    },
+    {
+      "path": "player/player-shop.png",
+      "bytes": 3700423,
+      "sha256": "afb8b3558e6aa44c36d79c7b000adcecebdb53cc5b6d6d848769005ca4c47d83"
+    },
+    {
+      "path": "player/player-slot-archive-export.png",
+      "bytes": 662915,
+      "sha256": "e602b1aadb8b78c26ba0f96d2e5d5b441a4162c643acc5781a629ab55dc45ce2"
+    },
+    {
+      "path": "player/player-slot-archive-import-preview.png",
+      "bytes": 499371,
+      "sha256": "1f4c6195dd4e8a28e2c5f0a1b9a51fe30a271da035dd4b09ba2b88e75b418c65"
+    },
+    {
+      "path": "player/player-slot-archive-import.png",
+      "bytes": 645857,
+      "sha256": "d6c61224bbe6f3d5945b1010cf40a895a7511ee482515f4fb713cd60cc54dd07"
+    },
+    {
+      "path": "player/player-slots-backup.png",
+      "bytes": 1463157,
+      "sha256": "6da523563b4d3d35cdf0cbe04eb5f2dd66796c8c05fc656bc9a3d9854b88b0f2"
+    },
+    {
+      "path": "player/player-startup.png",
+      "bytes": 829053,
+      "sha256": "414cb8e485d505e169914d5afcea51bb53b1adeede2c2e134b4ac448353082a7"
+    },
+    {
+      "path": "player/player-title.png",
+      "bytes": 3427785,
+      "sha256": "d0b334362d9709d5cf4e9b15b1e05dc14b04dfe2deec869a121db4340c2a905d"
+    },
+    {
+      "path": "player/result.json",
+      "bytes": 6480349,
+      "sha256": "a4182ec772f6c3e8c58af5faf400f745e0a143dfc58ad56c770599d6cef6cfa2"
+    },
+    {
+      "path": "player/trace.json",
+      "bytes": 6479402,
+      "sha256": "133d91e15588b6dfbaa3caaa7437a64d76c842a79f65f55db9f170edef7a8787"
+    }
+  ]
+}

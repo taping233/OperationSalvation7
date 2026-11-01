@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "error": "System.InvalidOperationException: Photo search round5: exact result IDs/order: foe-rager,tt6-demondeal,tt-copper,tt3-blooddrinker,starter-emergency-bandage,starter-attack,tt3-fireball,tt3-magic-lamp,tt13-stellar-divination,tt8-hero-assassin\r\n  at Sdt.Editor.CurrentPhotoSearchRound5Checks.Check (System.Boolean value, System.String message) [0x00020] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentPhotoSearchRound5Checks.cs:26 \r\n  at Sdt.Editor.CurrentPhotoSearchRound5Checks.Results (Sdt.UI.Screens.Misc.CardLibraryScreen page, System.String[] ids) [0x00000] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentPhotoSearchRound5Checks.cs:43 \r\n  at Sdt.Editor.CurrentPhotoSearchRound5Checks+<Run>d__17.MoveNext () [0x00212] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentPhotoSearchRound5Checks.cs:73 \r\n  at Sdt.Editor.CurrentRound5Validation+<Flow>d__9.MoveNext () [0x000ce] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound5Validation.cs:49 \r\n  at Sdt.Editor.CurrentRound5Validation+<Drive>d__10.MoveNext () [0x00037] in D:\\素材\\代号柒\\SoudacheUnity\\Assets\\Editor\\CurrentRound5Validation.cs:58 ",
+  "photoSaveAssertions": 29,
+  "motionAssertions": 16,
+  "searchAssertions": 6,
+  "exportAssertions": 0,
+  "scope": "Isolated native components, real player loop and constructed Submit events; clipboard is not exercised; no OS input/FPS claim."
+}

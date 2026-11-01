@@ -1,0 +1,60 @@
+{
+  "status": "source-frozen-awaiting-root-central-validation",
+  "compilationRun": false,
+  "testsRun": false,
+  "unityStarted": false,
+  "existingProductionFilesChangedByThisAgent": false,
+  "productionAdded": "Assets/Scripts/Sdt.Run/PhotoStudioExport.cs plus meta",
+  "interfaces": [
+    "PhotoStudioExport.CardsJson()",
+    "PhotoStudioExport.NotesJson(SaveSystem saves, IReadOnlyDictionary<string,string> pending)"
+  ],
+  "contract": "Cards preserve the current all-catalog v2 payload without stripping fields. Notes v1 merge complete base, persisted handwriting and pending; pending clear falls back to base. Native comment metadata is intentional. No profile/output writes, clipboard, UI or pending clearing in this service.",
+  "checks": {
+    "project": "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj",
+    "workingDirectory": "SoudacheUnity",
+    "startupObject": "PhotoStudioExportChecks",
+    "reusedHost": "_planning/parity-1031/HubParityChecks.cs (resource/audio stubs only; its Main is not selected)",
+    "expectedAssertions": 29,
+    "assertionDefinition": {
+      "uniqueCheckSites": 24,
+      "extraInvalidMapLoopChecks": 2,
+      "extraRejectHelperExecutions": 3
+    },
+    "coverage": "Full actual catalog and custom override order, plain RuleValue JSON, detached payload, preserved fields, missing/saved/pending/base note priorities and clear semantics, historical IDs, read-lock no-write, malformed notes and whole-profile read rejection with original/pending unchanged. No UI or physical-input claim."
+  },
+  "readOnlyDependencies": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/BaseData.Customization.cs",
+      "owner": "Hub",
+      "interface": "BaseData.ReadPhotoNotes(SaveSystem saves), BaseData.PhotoNotesKey",
+      "sha256": "a1aec5bd75e0f9aeced6f8b66e02805c723a290d1dc5208e211b55415fc118fa"
+    },
+    {
+      "path": "_planning/parity-1031/HubParityChecks.cs",
+      "sha256": "dcfddd8bcdbe221e05cf7d9c7883b7ad69f7d3d6ee9d1a81f0f183c2836712b1"
+    }
+  ],
+  "files": [
+    {
+      "path": "Assets/Scripts/Sdt.Run/PhotoStudioExport.cs",
+      "sha256": "c87404482e6f748dd5aa0300ae0469cdc36cc6bd44ba33f541117820dd777a81"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.Run/PhotoStudioExport.cs.meta",
+      "sha256": "fe4edb2e89a7c3fd0f92d3298c9826144b4f9fb6c2b622ec06f9c002b09cc0b6"
+    },
+    {
+      "path": "_planning/parity-1101-round5/export-check/PhotoStudioExportChecks.csproj",
+      "sha256": "a6c3d5d0366a998ed59abdf26cc5b64d14d5e985f2210af3ec7f0e9c83553a94"
+    },
+    {
+      "path": "_planning/parity-1101-round5/export-check/Program.cs",
+      "sha256": "f906049f17c2d97058eba9a207db055df7bf22e6a9f9e16d3496a188f9a26b7d"
+    },
+    {
+      "path": "_planning/parity-1101-round5/export-contract.md",
+      "sha256": "88f252ae056e6783e8034b70a294701201d17a41daeaa4ca9abb06f4577f0139"
+    }
+  ]
+}

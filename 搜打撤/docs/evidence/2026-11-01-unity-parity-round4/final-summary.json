@@ -275,7 +275,10 @@
     "branch": "codex/unity-validated-20261101",
     "codeAndChecksCommit": "82cde60d01c98a9a6e1bd0b207e0233df2ac3d32",
     "runtimeCommit": "db30a51a8c07daf18712d5b8d0e21f7259f69590",
-    "receipt": "publication/sync.json"
+    "receipt": "publication/sync.json",
+    "finalBranchHead": "a733c8a5429ae359847294a98c9ae265ce3087d3",
+    "finalRemoteReceipt": "publication/final-remote.json",
+    "automaticCI": "not triggered: push branches master only"
   },
   "visualReviewedImageCount": 19,
   "docs": {

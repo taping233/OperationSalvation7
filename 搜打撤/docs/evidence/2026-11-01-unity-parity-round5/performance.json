@@ -1,0 +1,184 @@
+{
+  "title": "Round5 照片馆静态工作削减与原生回归证据",
+  "date": "2026-11-01",
+  "author": "battle_parity",
+  "method": "只读比对已发布 a733 工作树和当前源码，解析已完成原生收据；本任务未执行测试、编译或 Unity/Player，只写此 JSON。",
+  "conclusion": "重复匹配、不可见尘点计算和固定背景重排已由源码消除；实际原生检查证明所列功能、对象复用与稳定 Transform 边界。未测本轮 FPS、CPU/GPU 时间或整帧分配。",
+  "baseline": {
+    "commit": "a733c8a5429ae359847294a98c9ae265ce3087d3",
+    "worktree": "C:/Users/太平/AppData/Local/Temp/unity-validated-20261101-01a19232",
+    "sourceStatus": "git status --short for the two compared production paths returned empty; read-only HEAD confirmed a733c8a5429ae359847294a98c9ae265ce3087d3",
+    "files": [
+      {
+        "path": "Assets/Scripts/Sdt.UI/Screens/Misc/CardLibraryScreen.cs",
+        "bytes": 16993,
+        "sha256": "79d9f93cd1a9224da88e1181d89057901ec0ed11fcae7ae5b07eaca1ab4bd763",
+        "normalizedLfSha256": "79d9f93cd1a9224da88e1181d89057901ec0ed11fcae7ae5b07eaca1ab4bd763"
+      },
+      {
+        "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioRoom.cs",
+        "bytes": 4981,
+        "sha256": "639466435fd48d7cb02b6fa8d7aa418088a736ad56058d711d9b1ad684915c46",
+        "normalizedLfSha256": "639466435fd48d7cb02b6fa8d7aa418088a736ad56058d711d9b1ad684915c46"
+      }
+    ]
+  },
+  "currentSources": [
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/CardLibraryScreen.cs",
+      "bytes": 17831,
+      "sha256": "0db6472d455261f00c4e26872bfa06a3c5f30f2ba4d370317005b5f1ecde59b1",
+      "normalizedLfSha256": "0db6472d455261f00c4e26872bfa06a3c5f30f2ba4d370317005b5f1ecde59b1"
+    },
+    {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioRoom.cs",
+      "bytes": 5686,
+      "sha256": "86950aa9bebbea20adb842ccffac5142aa503064b0c3493cbce7468a7f04c479",
+      "normalizedLfSha256": "86950aa9bebbea20adb842ccffac5142aa503064b0c3493cbce7468a7f04c479"
+    },
+    {
+      "path": "Assets/Editor/CurrentPhotoMotionRound5Checks.cs",
+      "bytes": 6499,
+      "sha256": "3e02c69ac0def1c023fcc21a53d3ad96455f37bc0274a863e982d21fba35da1e",
+      "normalizedLfSha256": "3e02c69ac0def1c023fcc21a53d3ad96455f37bc0274a863e982d21fba35da1e"
+    },
+    {
+      "path": "Assets/Editor/CurrentPhotoSearchRound5Checks.cs",
+      "bytes": 10129,
+      "sha256": "9e19d31e19e52891c783053a79c53b1657bbe3bafe5f213aaec982f2d5063323",
+      "normalizedLfSha256": "9e19d31e19e52891c783053a79c53b1657bbe3bafe5f213aaec982f2d5063323"
+    }
+  ],
+  "staticWorkReduction": [
+    {
+      "id": "catalog-projection",
+      "source": "Assets/Scripts/Sdt.UI/Screens/Misc/CardLibraryScreen.cs",
+      "beforeLines": "19,108-112,122-125,150-154",
+      "afterLines": "111-136,146-149,174-178",
+      "frequency": "每次 Refresh；由首次进入、类别、排序、筛选和 120ms 防抖后的搜索触发，不是空闲逐帧遍历。",
+      "symbols": {
+        "N": "当前图库目录的卡牌数量",
+        "K": "空格拆分后的查询词数",
+        "M": "最终当前类别结果数"
+      },
+      "before": {
+        "catalogPasses": 10,
+        "matchesCalls": "10N：结果过滤一遍，加全部在内的九类别各一遍 Count。类别 Count 先执行 Matches，再比较类型。",
+        "querySplits": "最多 10N 次；各 Matches 通过稀有度/人物早退条件后才拆词。",
+        "descriptionExpansion": "每个未由名称满足的词都可能再次派生描述；上界 10NK。",
+        "resultStorage": "每次结果过滤 ToList 创建新列表。"
+      },
+      "after": {
+        "catalogPasses": 1,
+        "matchesCalls": "N；同一遍公共筛选/搜索同时累计九类数量并填写当前类别结果。",
+        "querySplits": "每次 ProjectCatalog 一次。",
+        "descriptionExpansion": "单卡在此次投影中按需派生零或一次，词循环复用同一字符串；名称满足全部词时不派生描述。",
+        "categoryWork": "通过公共筛选的卡仍执行最多八类的固定 Array.IndexOf，不声称完全消除分类开销。",
+        "resultStorage": "Clear 并复用 _filtered 和 _categoryCounts；列表扩容仍可能分配，不宣称整个刷新零分配。"
+      },
+      "conditionalStaticExample": "若无其它筛选、当前类别为全部、单个查询词未命中任何名称和描述，旧代码派生描述 10N 次，新代码 N 次；这是从调用路径推导的计数，未添加生产计数器或做计时实验。",
+      "retainedWork": "两版扫描相对 N 都仍为线性，改变的是常数和重复派生；M 项排序仍为 O(M log M)。已直接比对 Compare 函数正文相同。后续选中定位、挂载、详情和 UI 布局仍存在，不把 ProjectCatalog 的单遍等同于整个 Refresh 只有一次工作。",
+      "nativeEvidence": "native-round5-3 Search180：十张现役卡的受控页面目录，精确 ID/顺序、九类计数与实际标签、类别计数忽略当前 tab、多词/缺词/空白、人物/稀有度组合、三排序、清筛选、搜索输入/焦点保留、结果列表/计数数组身份复用，以及阅读页独立有序快照不被后续列表 Clear 破坏。",
+      "nativeLimit": "Search180 是功能与对象身份检查，没有测分配字节、派生调用次数、耗时或 FPS；排序并列使用当前 Unity 6000.6.7 Mono 的既有 zh-CN 比较器，不扩大为其它平台排序测量。",
+      "compareBodyUnchanged": true
+    },
+    {
+      "id": "reduced-motion-dust",
+      "source": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioRoom.cs",
+      "beforeLines": "38,40-50",
+      "afterLines": "47-69",
+      "condition": "图库为栈顶、组件活动且已进入减动效后的稳定帧。",
+      "beforePerFrame": {
+        "dustPhaseComputations": 12,
+        "dustPositionComputations": 12,
+        "fixedAnchorSetterCalls": 24,
+        "positionSetterCalls": 12,
+        "dustAlphaSetterCalls": 12,
+        "reducedPreferenceReads": 13
+      },
+      "afterStableReducedFrame": {
+        "dustPhaseComputations": 0,
+        "dustPositionComputations": 0,
+        "fixedAnchorSetterCalls": 0,
+        "positionSetterCalls": 0,
+        "dustAlphaSetterCalls": 0,
+        "reducedPreferenceReads": 1
+      },
+      "transitionAndRestore": "固定锚点改为 Awake 一次设置；每次进入减动效将十二个 alpha 隐藏一次，随后早退。切回正常时同一批对象继续按当前绝对时间恢复位置和 alpha，正常模式也不再重复固定锚点赋值。原栈顶/可见性查询和场景 group alpha 处理保留，没有暂停整个 Canvas/Camera。",
+      "nativeEvidence": "Motion16 使用正式图库中的真实 PhotoStudioRoom，核十二尘点隐藏、连续四个稳定帧的位置与 Transform.hasChanged、切回正常同对象可见运动、再次减动效隐藏并停止变化。",
+      "nativeLimit": "证明受控帧内实际 Transform 稳定和恢复，不是整帧分配、GPU 绘制量或长时间性能采样。静态 setter 次数不能直接当作 Unity 内部网格重建次数。"
+    },
+    {
+      "id": "backdrop-layout",
+      "source": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioRoom.cs",
+      "beforeLines": "7-15",
+      "afterLines": "7-24",
+      "condition": "活动 PhotoRoomBackdrop，父对象/父 Rect 尺寸及 Sprite.rect 几何保持不变。",
+      "beforePerFrame": {
+        "imageGetComponentCalls": 1,
+        "coverLayoutCalculations": 1,
+        "placeCalls": 1,
+        "transformSetterCallsInsidePlace": 5
+      },
+      "afterStableFrame": {
+        "imageGetComponentCalls": 0,
+        "coverLayoutCalculations": 0,
+        "placeCalls": 0,
+        "transformSetterCallsInsidePlace": 0
+      },
+      "retainedWork": "Awake 获取 Image/RectTransform 一次；每帧仍检查父对象、父尺寸和实际 Sprite 几何。首次/重新启用、父尺寸或 Sprite 几何变化继续执行原 cover 与 +140 垂直偏移；同几何换图不重排。",
+      "nativeEvidence": "Motion16 还使用实际 PhotoRoomBackdrop 组件和受控 Texture/Sprite，核首次几何、连续四个稳定帧不改 Transform、父尺寸变化、不同 Sprite 几何、相同几何的新 Sprite、重新启用后的布局。",
+      "nativeLimit": "布局几何与 Transform.hasChanged 是实际观察；未以 Profiler 测量 Image/Canvas 内部工作、CPU 时间或背景 GPU 绘制。"
+    }
+  ],
+  "round5NativeReceipt": {
+    "result": "native-round5-3/result.json",
+    "resultSha256": "b12722966b910dd44150d4fdb96fe5ebacad88424ca18227e0cba0237f6d7914",
+    "passed": true,
+    "photoSaveAssertions": 29,
+    "motionAssertions": 16,
+    "searchAssertions": 180,
+    "exportAssertions": 37,
+    "process": "native-round5-3/process.json",
+    "processSha256": "32364063235dc0427591ac33c19abd2dba46c62b687bff3badbce78fed7efc9f",
+    "exitCode": 0,
+    "timedOut": false,
+    "inputsUnchanged": true,
+    "sourceCount": 812,
+    "changedInputs": [],
+    "sourceBefore": "native-round5-3/source-before.json",
+    "sourceBeforeSha256": "5b6d9e773597446004c0670517597cfd7439563c5160d952c92464bf63ae9b76",
+    "sourceAfter": "native-round5-3/source-after.json",
+    "sourceAfterSha256": "5b6d9e773597446004c0670517597cfd7439563c5160d952c92464bf63ae9b76",
+    "sourceMapsEqual": true,
+    "fourCurrentSourcesMatchExecutedHashes": true
+  },
+  "historicalAllocationEvidence": {
+    "classification": "复用的旧 Round4 函数局部分配证据，本任务未重测，不能计为 Round5 新性能测量。",
+    "result": "../2026-11-01-unity-parity-round4/native-round4-5/result.json",
+    "process": "../2026-11-01-unity-parity-round4/native-round4-5/process.json",
+    "check": "Assets/Editor/CurrentPhotoRound4Checks.cs:80-83",
+    "measuredScope": "预热一次后，同一线程同步调用稳定挂载范围的 UpdateTiles 100 次，GC.GetAllocatedBytesForCurrentThread 差值为 0B；该断言包含在原生 Photo25 成功结果内。",
+    "exclusions": "不包含跨帧 Unity 工作、其它 Update/LateUpdate、布局/渲染、搜索刷新、备注存盘或完整照片页；不能推出照片页整帧零分配或 FPS 提升。",
+    "resultSha256": "ae604178d8e4ecd5b4488328ba180de2dcb085c3bc55c10008b04092fc09ab95",
+    "processSha256": "f1862b72fa64a436359c67dcfa6290c8d7c609f8f0ef31c50e8fc775d576e04a",
+    "passed": true,
+    "photoAssertions": 25,
+    "inputsUnchanged": true,
+    "sourceCount": 796,
+    "checkSha256AtOriginalRun": "0c68b18159f28728dc873ea1a66334937812886fa3aaf5145b41bbe16f374e63",
+    "wallSourceNormalizedTextUnchangedFromPublishedBaseline": true,
+    "wallCurrentSource": {
+      "path": "Assets/Scripts/Sdt.UI/Screens/Misc/PhotoStudioWall.cs",
+      "bytes": 9278,
+      "sha256": "3a372913bdca30cf292a85434fa8752bf7252d9b569a5d98032353ed4c31e2d3",
+      "normalizedLfSha256": "3a372913bdca30cf292a85434fa8752bf7252d9b569a5d98032353ed4c31e2d3"
+    }
+  },
+  "limits": [
+    "本轮实际数字是功能断言计数及受控 Transform/集合身份结果；静态工作次数由源码推导，并非 Profiler 采样。",
+    "未执行新的 benchmark、测试、编译或 Unity/Player；未报告 FPS、帧时间、CPU/GPU 百分比或本轮整帧 GC 数字。",
+    "未新增生产计数器、长寿命目录/描述缓存或公共更新框架。",
+    "不以旧绿测试替代本轮源码绑定：下列收据核执行前后输入一致，并核本文四个当前生产/检查文件等于该次输入。"
+  ]
+}
