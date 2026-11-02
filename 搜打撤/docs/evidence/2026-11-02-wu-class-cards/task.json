@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "unity-wu-class-cards-1102",
+  "date": "2026-11-02",
+  "owner": "Friday",
+  "goal": "新增无的三张职业武术及黄沙斗篷专属装备，沿现有Unity规则实现费用、抽牌、击杀及全角色潜行",
+  "paths": [
+    "docs/evidence/2026-11-02-wu-class-cards"
+  ],
+  "doneWhen": [
+    "四张正式卡牌定义、文案、图片映射与正式执行入口接齐",
+    "潜行实时减费、按本回合敌人死亡减费与主动全角色潜行进入共同规则入口",
+    "只改Unity源码并静态阅读；不测试、编译、打包、提交或推送"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "沿老板要求未编译、运行测试、启动Unity或验收实际画面与输入；桌面包未重打"
+  ],
+  "updatedAt": "2026-11-02T00:39:39.0704589+08:00",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "四卡定义、规则、职业获取与现有素材映射源码接齐，按老板要求仅源码交付，未运行验收、提交或推送"
+  }
+}

@@ -2,6 +2,8 @@
 
 下文保留首次发布准备的历史审计。当前恢复入口与验收见[GITHUB-SOURCE](../../GITHUB-SOURCE.md)；新批次使用`export_manifest.py --output <本批清单>`，保留旧`export-manifest.json`原字节。历史候选数及旧工作区状态不作为当前发布状态。
 
+2026-11-02图片交付规则已变更：正式`Assets/`现役图片随工程提供，不再按1MB过滤。`export_manifest.py`、`audit_inventory.py`与`filter_plan.py`沿此规则，67项已退役媒体及对应`.meta`仍排除。189张原遗漏现役PNG必须存在并进入新批次清单；旧`resource-rebuild.json`的241项恢复结论仅作为历史追溯。新范围见[图片交付修复](../../../搜打撤/docs/evidence/2026-11-02-unity-missing-art/README.md)，本次提交同步见[源码与图片交付](../../../搜打撤/docs/evidence/2026-11-02-unity-source-art-push/README.md)。
+
 新分支以父仓库安全完成提交后的 HEAD 为基底，保留 `SoudacheUnity/` 与 `搜打撤/game/` 的相邻布局。目标为 `OperationSalvation7` 的 `codex/unity-validated-20261101`；不推 Unity 本地旧历史，也不复用旧未验证快照的文件全集。
 
 - `commit-candidates.json`：正式工程候选3617个，逐项SHA；政策排除Assets媒体308个、403,739,481字节，逐项SHA；28个旧已跟踪编译产物/日志列为不复制。规则采用大于1,000,000字节，音频、字体和压缩包单独排除。保留对应 `.meta` 供恢复GUID。

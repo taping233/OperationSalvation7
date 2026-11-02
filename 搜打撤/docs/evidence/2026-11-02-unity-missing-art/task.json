@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "unity-missing-art-1102",
+  "date": "2026-11-02",
+  "owner": "Friday",
+  "goal": "按老板要求修正Unity工程漏图交付规则，现役图片及原meta直接随工程提供，不使用单独补齐包",
+  "paths": [
+    "docs/evidence/2026-11-02-unity-missing-art"
+  ],
+  "doneWhen": [
+    "确认旧发布189张现役大图的遗漏及截图对应图片",
+    "修正交付过滤器并生成含全部正式图片及meta的新清单",
+    "仅源码及清单交付，不测试、打包、暂存、提交或推送"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "未取得对方工程/Console日志，未在其机器复现；未启动本机Unity或运行编译/游戏测试",
+    "远端仍为旧发布版本，189张图尚未上传；本轮未打包、暂存、提交或推送"
+  ],
+  "updatedAt": "2026-11-02T14:22:59.5981350+08:00",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "三处发布过滤器及现行说明已修正，新交付清单含1389张正式图片及原meta，原189项遗漏为0；不扩称运行或远端已验证"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "unity-battle-cards-1101",
+  "date": "2026-11-01",
+  "owner": "Friday",
+  "goal": "按老板新要求调整Unity发现观察、自动施法演出/击杀收尾、精英标识与指定卡牌规则；仅改代码不测试提交推送",
+  "paths": [
+    "docs/evidence/2026-11-01-unity-battle-cards"
+  ],
+  "doneWhen": [
+    "指定卡牌/新卡的数值、描述和实际规则一致",
+    "发现观察可恢复选择，自动施法及最后击杀演出接齐，精英独立可见",
+    "只静态查读与源级核对；不运行测试/Unity/打包/提交/推送"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "按老板要求未编译、运行测试、启动Unity或验收实际画面与点击；桌面包未重打",
+    "两处依赖旧黑暗形态增加候选的R7夹具前提已失效，本轮未修改或运行"
+  ],
+  "updatedAt": "2026-11-02T00:22:15.8017170+08:00",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "指定Unity源码与说明已接齐；按老板明确要求仅源码交付，无运行验收、提交或推送"
+  }
+}

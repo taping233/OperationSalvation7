@@ -19,22 +19,46 @@ MANIFEST = args.output.resolve() if args.output else HERE / "export-manifest.jso
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+resource = json.loads((HERE / "resource-rebuild.json").read_text(encoding="utf-8"))
+retired_media = {row["path"] for row in resource["files"] if not row["restorationRequired"]}
+retired_paths = retired_media | {path + ".meta" for path in retired_media}
+image_extensions = {".png", ".jpg", ".jpeg", ".webp", ".svg", ".bmp", ".tga", ".tif", ".tiff", ".gif", ".psd", ".exr", ".hdr"}
+media_extensions = {".mp3", ".ogg", ".opus", ".wav", ".flac", ".m4a", ".aac", ".mp4", ".webm", ".mov", ".avi", ".zip", ".7z", ".rar", ".tar", ".gz", ".ttf", ".otf", ".woff", ".woff2"}
+generated_extensions = {".log", ".tmp", ".bak", ".pdb", ".exe", ".dll", ".pyc"}
+generated_parts = {"bin", "obj", "library", "temp", "logs", "build", "builds", "usersettings", "__pycache__", "snapshot", "profiles", "compile-private"}
+required_images = {row["path"] for row in resource["files"]
+                   if row["restorationRequired"] and Path(row["path"]).suffix.lower() in image_extensions}
+
+def project_image(relative):
+    path = Path(relative)
+    return path.parts[0] == "Assets" and path.suffix.lower() in image_extensions
+
+def image_coverage(selected_paths):
+    current_images = {path.relative_to(UNITY).as_posix() for path in (UNITY / "Assets").rglob("*")
+                      if path.is_file() and project_image(path.relative_to(UNITY))
+                      and path.relative_to(UNITY).as_posix() not in retired_paths
+                      and not any(part.lower() in generated_parts for part in path.relative_to(UNITY).parts[:-1])}
+    images = current_images | required_images
+    metadata = {path + ".meta" for path in images}
+    return {"missingImageFiles": sorted(path for path in required_images if not (UNITY / path).is_file()),
+            "missingImageEntries": sorted(images - selected_paths),
+            "missingImageMetadataFiles": sorted(path for path in metadata if not (UNITY / path).is_file()),
+            "missingImageMetadataEntries": sorted(metadata - selected_paths),
+            "retiredAssetsSelected": sorted(retired_paths & selected_paths)}
+
 if args.check:
     old = json.loads(MANIFEST.read_text(encoding="utf-8"))
     changed = [row["path"] for row in old["files"] if not (UNITY / row["path"]).is_file()
                or (UNITY / row["path"]).stat().st_size != row["bytes"] or sha(UNITY / row["path"]) != row["sha256"]]
     parent_changed = [row["path"] for row in old["parentSourcePrerequisites"] if not (PARENT / row["path"]).is_file()
                       or sha(PARENT / row["path"]) != row["sha256"]]
-    print(json.dumps({"passed": not changed and not parent_changed, "changedUnityFiles": changed,
-                      "changedParentSources": parent_changed}, ensure_ascii=False))
-    raise SystemExit(1 if changed or parent_changed else 0)
+    coverage = image_coverage({row["path"] for row in old["files"]})
+    passed = not changed and not parent_changed and not any(coverage.values())
+    print(json.dumps({"passed": passed, "changedUnityFiles": changed,
+                      "changedParentSources": parent_changed, "imageCoverage": coverage}, ensure_ascii=False))
+    raise SystemExit(0 if passed else 1)
 
-resource = json.loads((HERE / "resource-rebuild.json").read_text(encoding="utf-8"))
 dependencies = json.loads((HERE / "restore-dependencies.json").read_text(encoding="utf-8"))
-retired_meta = {row["path"] + ".meta" for row in resource["files"] if not row["restorationRequired"]}
-media_extensions = {".mp3", ".ogg", ".opus", ".wav", ".flac", ".m4a", ".aac", ".mp4", ".webm", ".mov", ".avi", ".zip", ".7z", ".rar", ".tar", ".gz", ".ttf", ".otf", ".woff", ".woff2"}
-generated_extensions = {".log", ".tmp", ".bak", ".pdb", ".exe", ".dll", ".pyc"}
-generated_parts = {"bin", "obj", "library", "temp", "logs", "build", "builds", "usersettings", "__pycache__", "snapshot", "profiles", "compile-private"}
 selected = {}
 
 def add(relative, purpose):
@@ -42,9 +66,9 @@ def add(relative, purpose):
     path = UNITY / relative
     if not path.is_file():
         raise ValueError("Required source is absent: " + relative)
-    if relative in retired_meta:
-        raise ValueError("Retired import metadata must not be exported: " + relative)
-    if path.stat().st_size > 1_000_000 or path.suffix.lower() in media_extensions | generated_extensions:
+    if relative in retired_paths:
+        raise ValueError("Retired media and import metadata must not be exported: " + relative)
+    if (path.stat().st_size > 1_000_000 and not project_image(relative)) or path.suffix.lower() in media_extensions | generated_extensions:
         raise ValueError("Publication policy excludes selected file: " + relative)
     if any(part.lower() in generated_parts for part in Path(relative).parts[:-1]):
         raise ValueError("Generated/intermediate source selected: " + relative)
@@ -56,13 +80,16 @@ for directory in ("Assets", "Packages", "ProjectSettings"):
         if not path.is_file():
             continue
         relative = path.relative_to(UNITY).as_posix()
-        if relative in retired_meta or path.stat().st_size > 1_000_000 or path.suffix.lower() in media_extensions | generated_extensions:
+        if relative in retired_paths or (path.stat().st_size > 1_000_000 and not project_image(relative)) or path.suffix.lower() in media_extensions | generated_extensions:
             continue
         if any(part.lower() in generated_parts for part in path.relative_to(UNITY).parts[:-1]):
             continue
-        purpose = "meta" if path.suffix == ".meta" else "config" if directory != "Assets" else "art" if path.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".svg"} else "runtime"
+        purpose = "meta" if path.suffix == ".meta" else "config" if directory != "Assets" else "art" if project_image(relative) else "runtime"
         add(relative, purpose)
         formal.add(relative)
+coverage = image_coverage(set(selected))
+if any(coverage.values()):
+    raise ValueError(json.dumps({"imageCoverage": coverage}, ensure_ascii=False))
 for path in sorted(UNITY.glob("*.md")):
     add(path.name, "project-doc")
     formal.add(path.name)
@@ -122,7 +149,7 @@ for relative in (
     "_planning/migration-1029/current-ui-version/FREEZE.json"
 ):
     add(relative, "migration-history")
-for name in ("README.md", "resource-rebuild.json", "restore-dependencies.json", "resolution-type-fix.json", "gitignore-review.json", "export_manifest.py"):
+for name in ("README.md", "resource-rebuild.json", "restore-dependencies.json", "resolution-type-fix.json", "gitignore-review.json", "export_manifest.py", "audit_inventory.py", "filter_plan.py", "image-delivery-policy.md"):
     add("_planning/github-sync-1101/" + name, "publication")
 
 missing_dependencies = []
@@ -167,6 +194,7 @@ for row in resource["requiredCompletedSourceChanges"]:
     parent_sources.append({"path": row["path"], "bytes": path.stat().st_size, "sha256": sha(path), "purpose": "current-raw-source"})
 
 files = [{"path": relative, "bytes": (UNITY / relative).stat().st_size, "sha256": sha(UNITY / relative), "purpose": "+".join(sorted(selected[relative]))} for relative in sorted(selected)]
+remaining_restore = [row for row in resource["files"] if row["restorationRequired"] and row["path"] not in required_images]
 manifest = {
     "status": "frozen exact export list; no stage, commit, push, import or Unity launch by this tool",
     "unityDestination": "SoudacheUnity/",
@@ -175,11 +203,15 @@ manifest = {
     "files": files,
     "manifestPayload": "Copy this export-manifest.json as one additional publication receipt; its own hash is intentionally excluded to avoid self-reference.",
     "parentSourcePrerequisites": parent_sources,
-    "restoreCoverage": resource["summary"],
+    "restoreCoverage": {"historicalReceipt": "_planning/github-sync-1101/resource-rebuild.json", "historicalSummary": resource["summary"],
+                        "currentDelivery": {"imagesEmbedded": True, "embeddedImageCount": sum(project_image(row["path"]) for row in files),
+                                            "historicallyOmittedImagesNowEmbedded": len(required_images), "remainingRestoreRequired": len(remaining_restore),
+                                            "remainingRestoreBytes": sum(row["bytes"] for row in remaining_restore), "retiredMediaExcluded": len(retired_media),
+                                            "boundary": "Assets images and their existing metadata are shipped directly; source presence and manifest inclusion are checked. The historical restore receipt remains unchanged. Audio/fonts retain their existing restoration policy."}},
     "dependencyCheck": {"missing": [], "activeRestoreRecipes": sum(recipe["entry"] is not None for recipe in resource["restoreRecipes"].values()), "includedResourceTools": sum(row["path"].endswith(".py") for row in dependencies["mustIncludeUnityRelative"]), "requiredClosureFiles": len(dependencies["mustIncludeUnityRelative"]), "recommendedReceipts": len(dependencies["recommendedProvenanceUnityRelative"]), "domainProjects": sum(path.endswith(".csproj") for path in domain_files), "checks": "Exact restore-entry/input/template/receipt hashes, explicit csproj direct Compile source dependencies and parent raw-source hashes checked at export time."},
     "omittedRetiredMetas": [{"path": row["path"] + ".meta", "guid": row["metaGuid"]} for row in resource["files"] if not row["restorationRequired"]],
-    "omissionEvidence": "The 67 retired media have zero current loader-path consumers and zero non-meta serialized GUID references. Export omits their .meta; worktree files are retained unchanged.",
-    "exclusions": "No Library/Build/bin/obj/typecheck/compile-private/snapshot/profile outputs, logs, rendered planning images, temporary thirdparty binaries, policy audio/fonts/archives or files over 1,000,000 bytes. The broad inventory and intermediate working JSONs are not exported.",
+    "omissionEvidence": "The 67 retired media have zero current loader-path consumers and zero non-meta serialized GUID references. Export omits both media and their .meta; worktree files are retained unchanged.",
+    "exclusions": "No Library/Build/bin/obj/typecheck/compile-private/snapshot/profile outputs, logs, rendered planning images, temporary thirdparty binaries or policy audio/fonts/archives. The 1,000,000-byte limit applies outside formal Assets images, including planning/evidence. Retired media and their metadata remain excluded. Broad inventory and intermediate working JSONs are not exported.",
     "prerequisites": dependencies["externalRuntimeDependencies"],
     "updatedDocumentation": updated_documentation,
     "qaBoundary": "Native launcher retains its documented local Unity editor executable path; configure that machine prerequisite before replay. Domain Hub/Run projects use the restored locked Newtonsoft PackageCache. Player review/analysis and final receipt tools require fresh runtime evidence, not committed renderer captures. These are verification tools, not normal game startup dependencies.",
@@ -189,4 +221,4 @@ payload = json.dumps(manifest, ensure_ascii=False, separators=(",", ":"))
 if len(payload.encode("utf-8")) >= 1_000_000:
     raise ValueError("Publication manifest exceeds the project size budget.")
 MANIFEST.write_text(payload, encoding="utf-8")
-print(json.dumps({"fileCount": manifest["fileCount"], "formalCount": manifest["formalCount"], "planningCount": manifest["planningCount"], "totalBytes": manifest["totalBytes"], "manifestBytes": len(payload.encode("utf-8")), "omittedRetiredMetas": len(retired_meta), "missingDependencies": 0}, ensure_ascii=False))
+print(json.dumps({"fileCount": manifest["fileCount"], "formalCount": manifest["formalCount"], "planningCount": manifest["planningCount"], "totalBytes": manifest["totalBytes"], "manifestBytes": len(payload.encode("utf-8")), "omittedRetiredMetas": len(retired_media), "missingDependencies": 0}, ensure_ascii=False))

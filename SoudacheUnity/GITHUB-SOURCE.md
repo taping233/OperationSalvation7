@@ -1,14 +1,22 @@
 # GitHub 源码与本地验收
 
-Unity 工程使用同仓的 `搜打撤/game` 作为现行资源来源。克隆仓库后保留 `SoudacheUnity/` 与 `搜打撤/` 的同级布局；只下载 Unity 子目录不包含完整原料。
+Unity运行使用的图片直接包含在`Assets/Resources/`，与导入`.meta`一起随工程交付，不需要另下载图片包或运行图片生成器。`搜打撤/game`保留为开发时的原料来源；需要维护或重建原料时，保留`SoudacheUnity/`与`搜打撤/`的同级布局。
 
-工程和当前桌面包使用Unity2022.3.62f3c1，buildGUID为`4d33ec981819461295052942d67afeee`。2690领域、8个实际Source场景、1629原生及转场/正式终局/四层旅程通过；当前2560×1440正常Standalone完成102图，实看23图。完整输入、失败与元数据迁移见[2022降级验收](../搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/README.md)。第六轮Unity6包的历史GUID为`c3ee3347a03149de80bbb7fe3f0bb5c2`，原收据留在[第六轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round6/README.md)。源码提交行尾统一为LF，工作区原字节与Git对象指纹分别记录；EXE为Unity启动壳，其哈希不能单独识别代码版本。
+2026-11-02本批按老板授权提交战斗与新卡源码，并将此前遗漏的189张现役大图片直接纳入工程；正式图片不再受1MB过滤限制。交付清单覆盖1389张正式图片及原`.meta`，原因见[编辑器缺图修复](../搜打撤/docs/evidence/2026-11-02-unity-missing-art/README.md)，提交与远端同步状态见[本批交付记录](../搜打撤/docs/evidence/2026-11-02-unity-source-art-push/README.md)。旧`e40115e9`/`b512cf4`不包含这些大图，不能继续作为完整图片版本分发。
 
-## 恢复资源
+工程和最近已验收桌面包使用Unity2022.3.62f3c1，buildGUID为`4d33ec981819461295052942d67afeee`。该基线的2690领域、8个实际Source场景、1629原生及转场/正式终局/四层旅程通过；2560×1440正常Standalone完成102图，实看23图。完整输入、失败与元数据迁移见[2022降级验收](../搜打撤/docs/evidence/2026-11-01-unity-2022-downgrade/README.md)。第六轮Unity6包的历史GUID为`c3ee3347a03149de80bbb7fe3f0bb5c2`，原收据留在[第六轮](../搜打撤/docs/evidence/2026-11-01-unity-parity-round6/README.md)。源码提交行尾统一为LF，工作区原字节与Git对象指纹分别记录；EXE为Unity启动壳，其哈希不能单独识别代码版本。
 
-仓库保留正式C#、Shader、配置、数据、小图和导入`.meta`。大于1MB的导入副本、音频和字体由原料恢复；构建包、Library、bin/obj与构造存档属于本地产物。排除项和精确源SHA见[资源清单](_planning/github-sync-1101/resource-rebuild.json)。其中241项为当前资源，原料均已在同仓提供；67项退役旧资源没有运行调用或序列化GUID引用，不作恢复。
+2026-11-01至11-02的[战斗与卡牌调整](../搜打撤/docs/evidence/2026-11-01-unity-battle-cards/README.md)已纳入本批源码交付，按老板要求未编译、测试或重打桌面包。上述旧基线结果不覆盖这些改动。
 
-准备Python/Pillow、CairoSVG及可加载的原生Cairo库、NumPy、fontTools及WOFF2/Brotli支持、Node和ffmpeg。以Unity工程目录为当前目录，先作只读来源检查，再按现有专有导入入口恢复：
+2026-11-02新增的[无职业新卡](../搜打撤/docs/evidence/2026-11-02-wu-class-cards/README.md)同样纳入本批源码交付，桌面包尚未重新构建。
+
+## 图片与资源交付
+
+正式C#、Shader、配置、数据、现行图片和导入`.meta`属于工程内容。大图片直接保留在原`Assets/Resources/`路径，图像像素、尺寸、GUID和现有加载路径不变。交付清单必须包含全部现役图片，缺少图片或`.meta`会拒绝生成清单；不在启动时增加下载、替代图片或自动恢复流程。构建包、Library、bin/obj与构造存档继续作为本地产物排除。
+
+音频、字体和压缩包仍沿既有原料恢复边界。本次只修正图片排除规则。[旧资源清单](_planning/github-sync-1101/resource-rebuild.json)保留为2026-11-01历史证据，其中原先需要恢复的241项包括189张现役图片及52项音频/字体；新版图片已改为直接交付。67项退役旧媒体和对应`.meta`仍不进入交付清单，本机文件不删除。
+
+以下命令用于开发者从原料重建资源，不是新版工程显示图片的前置步骤。准备Python/Pillow、CairoSVG及可加载的原生Cairo库、NumPy、fontTools及WOFF2/Brotli支持、Node和ffmpeg，以Unity工程目录为当前目录执行。工具会重新生成图片映射或描述，重建前须保留2026-11-01至11-02新增的Unity专属卡牌定义和映射：
 
 ```powershell
 python -B _planning/migration-1029/ui/sync_fonts.py --check-sources
@@ -21,7 +29,9 @@ python _planning/migration-1029/current-photo/sync_photo.py
 python _planning/migration-1030-fidelity/shop/import_assets.py
 ```
 
-保留现役资源的`.meta`；67份退役媒体的对应`.meta`仅从新分支导出清单省略，当前工作区及本地Unity旧文件不改。然后用Unity Hub打开该工程并恢复UPM依赖。各入口的来源、转换及副作用边界见[资源恢复说明](_planning/migration-1029/ui/README.md)。跨工具版本的转换输出不承诺字节完全相同；字体检查保留字形/度量验证，来源和输出收据分别记录。
+保留现役资源的`.meta`，用Unity Hub打开工程并恢复UPM依赖。各开发入口的来源、转换及副作用边界见[资源恢复说明](_planning/migration-1029/ui/README.md)。跨工具版本的转换输出不承诺字节完全相同；字体检查保留字形/度量验证，来源和输出收据分别记录。
+
+新批次统一使用`python -B _planning/github-sync-1101/export_manifest.py --output <本批清单绝对路径>`生成交付列表。复制工程时按新列表包含图片原文件和`.meta`，不能复用旧发布清单或旧批次临时复制脚本中的1MB全局过滤。该命令仅生成清单，不暂存、提交或推送。
 
 ## 运行与复验
 
