@@ -28,7 +28,7 @@ namespace Sdt.Core
         public int healban;   // 计时：2 回合内无法回复生命
         public int atkDown;
         public int atkUp;     // 祝福 value 型：攻击伤害 +N（本场战斗）
-        public int spellUp;   // 祝福 value 型：法术伤害 +N（本场战斗）
+        public int spellUp;   // 祝福 value 型：法术伤害 +N，来源规则负责移除临时贡献。
         public int stealth;   // 祝福 timed 型：无法成为被攻击对象；造成伤害破除
         public int immune;    // 祝福 timed 型：不受到任何伤害
         public int reduce;    // 祝福 value 型：每次受到的伤害 -N（真实除外）
@@ -183,7 +183,7 @@ namespace Sdt.Core
         public static readonly IReadOnlyDictionary<string, BuffMeta> BuffMetaDict = new Dictionary<string, BuffMeta>
         {
             { "atkUp", new BuffMeta { name = "攻击强化", icon = "[[icon:status-atk-up]]", value = true, desc = "攻击伤害 +N（本场战斗）" } },
-            { "spellUp", new BuffMeta { name = "法术强化", icon = "[[icon:status-spell-up]]", value = true, desc = "法术伤害 +N（本场战斗）" } },
+            { "spellUp", new BuffMeta { name = "法术强化", icon = "[[icon:status-spell-up]]", value = true, desc = "法术伤害 +N；持续时间以提供加成的效果为准。" } },
             { "stealth", new BuffMeta { name = "潜行", icon = "[[icon:status-stealth]]", timed = true, desc = "无法成为被攻击对象；造成伤害会破除潜行" } },
             { "immune", new BuffMeta { name = "免疫伤害", icon = "[[icon:status-immune]]", timed = true, desc = "不受到任何伤害" } },
             { "reduce", new BuffMeta { name = "减伤", icon = "[[icon:status-reduce]]", value = true, desc = "每次受到的伤害 -N（真实伤害除外）" } },

@@ -10,7 +10,7 @@ namespace Sdt.Core.Battle
         private sealed class HandPayment
         {
             public string uid; public CardDef card; public BattleFoe target;
-            public List<string> fuel; public bool freeCost, directRelease;
+            public List<string> fuel; public bool freeCost, directRelease, automatic;
             public long selectionId;
         }
         private HandPayment handPayment;
@@ -27,9 +27,9 @@ namespace Sdt.Core.Battle
             var payment = new HandPayment { uid=uid, card=card, fuel=fuel };
             return hand.Distinct().Count(h => PaymentCandidate(h,payment)) < requirement.Number("count",1) ? "手牌支付不足" : null;
         }
-        private void BeginHandPayment(string uid, CardDef card, List<string> fuel, BattleFoe target, bool freeCost, bool directRelease)
+        private void BeginHandPayment(string uid, CardDef card, List<string> fuel, BattleFoe target, bool freeCost, bool directRelease,bool automatic)
         {
-            handPayment = new HandPayment { uid=uid,card=card,fuel=new List<string>(fuel),target=target,freeCost=freeCost,directRelease=directRelease,selectionId=++handPaymentSerial };
+            handPayment = new HandPayment { uid=uid,card=card,fuel=new List<string>(fuel),target=target,freeCost=freeCost,directRelease=directRelease,automatic=automatic,selectionId=++handPaymentSerial };
             ruleHandSelection = new RuleHandSelectionSnapshot {
                 act="payment", type=HandRequirement(card).Text("type"), n=HandRequirement(card).Number("count",1), selectionId=handPayment.selectionId, sourceUid=uid, sourceCard=card,
                 candidateUids=hand.Distinct().Where(h=>PaymentCandidate(h,handPayment)).ToArray(), selectedUids=Array.Empty<string>(), canCancel=false };
@@ -53,7 +53,7 @@ namespace Sdt.Core.Battle
                 && (BattleRules.TargetSideFor(card)!="enemy" || payment.target!=null&&!payment.target.dead&&foes.Contains(payment.target));
             handPayment=null; ruleHandSelection=null;
             if(!valid) { ResumeRules(); RequestRender(); return CommandResult.No("支付或目标已变化，本次未消耗"); }
-            ExecPlay(payment.uid,card,payment.fuel,payment.target,payment.freeCost,payment.directRelease,paid);
+            ExecPlay(payment.uid,card,payment.fuel,payment.target,payment.freeCost,payment.directRelease,paid,automatic:payment.automatic);
             ResumeRules(); RequestRender(); return CommandResult.Yes();
         }
     }

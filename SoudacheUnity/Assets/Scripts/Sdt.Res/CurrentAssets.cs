@@ -7,6 +7,13 @@ namespace Sdt.Res
     {
         public static readonly IReadOnlyDictionary<string, string> CardIllustrations = new Dictionary<string, string>
         {
+            { "wu-listen-wind", "Art/Current/cards/martial-tt7-goldencicada" },
+            { "wu-invisible-kill", "Art/Current/cards/martial-tt7-ghostblade" },
+            { "wu-unspent-sword-intent", "Art/Current/cards/martial-tt7-swordimmortal" },
+            { "wu-yellow-sand-cloak", "Art/Current/cards/martial-tt7-stealth" },
+            // Native definitions reuse the shipped card art and thumbnail resources.
+            { "wuyu-devouring-flame", "Art/Current/cards/spell-tt3-flame-storm" },
+            { "neutral-temporary-circle", "Art/Current/cards/spell-tt3-petal" },
             { "builtin-fuyuanyao", "Art/Current/cards/items/builtin-fuyuanyao" },
             { "cc-chase-slash", "Art/Current/cards/martial-cc-chase-slash" },
             { "cc-cursed-blade", "Art/Current/cards/martial-cc-cursed-blade" },

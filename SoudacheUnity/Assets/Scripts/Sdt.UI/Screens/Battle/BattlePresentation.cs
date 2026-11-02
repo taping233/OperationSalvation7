@@ -294,9 +294,10 @@ namespace Sdt.UI.Screens.Battle
                 if (!_units.TryGetValue(key, out var view)) { view = new UnitMount(_arena, "sts-foe " + key, () => OnFoeClick(GameSnapshotRef.Current, index)); _units[key] = view; }
                 view.Click = () => OnFoeClick(GameSnapshotRef.Current, index);
                 view.Art.sprite = Sdt.Res.Res.EnemyPortrait(f.Id); view.Art.preserveAspect = true;
+                view.Nameplate.SetElite(f.elite);
                 view.Update(f.Name, f.Hp, f.MaxHp, "", api.CurseChips(f.Status), f.Intent, f.Dead, api.AegisBlocked(f), f.defense?.Armor ?? 0,f.Status);
                 bool frozen=f.Status!=null&&f.Status.TryGetValue("freeze",out var freeze)&&freeze>0;
-                view.SetDetails(f.Name,(f.desc??"")+"\n攻击 "+f.Atk+" · "+CurrentBattleNameplate.IntentDescription(f.Intent,frozen,f.Dead)+(string.IsNullOrEmpty(f.Affix)?"":"\n"+(api.AffixMeta(f.Affix)?.Name??f.Affix)+"："+(api.AffixMeta(f.Affix)?.Desc??"")));
+                view.SetDetails(f.Name,(f.elite?"精英敌人\n":"")+(f.desc??"")+"\n攻击 "+f.Atk+" · "+CurrentBattleNameplate.IntentDescription(f.Intent,frozen,f.Dead)+(string.IsNullOrEmpty(f.Affix)?"":"\n"+(api.AffixMeta(f.Affix)?.Name??f.Affix)+"："+(api.AffixMeta(f.Affix)?.Desc??"")));
                 _foeRoots.Add(view.Root); _foeFigures.Add(view.Figure);
             }
             foreach (string key in _units.Keys.ToArray()) if (!kept.Contains(key)) { _units[key].Root.gameObject.SetActive(false); Destroy(_units[key].Root.gameObject); _units.Remove(key); }
@@ -318,7 +319,7 @@ namespace Sdt.UI.Screens.Battle
         public static bool WaitForActorResult(string battleToken, bool actualDeath, Action complete)
         {
             if (_logOwner == null || !_logOwner.TryGetTarget(out var screen) || screen == null
-                || UiStack.Top != screen || GameSnapshotRef.Current?.BattleToken != battleToken) return false;
+                || !screen.OwnsCurrentBattlePanel || GameSnapshotRef.Current?.BattleToken != battleToken) return false;
             return screen._presentation?.WaitForResult(actualDeath, complete) == true;
         }
         void ReleaseActorFrames() { _self?.Frames?.Release(); }

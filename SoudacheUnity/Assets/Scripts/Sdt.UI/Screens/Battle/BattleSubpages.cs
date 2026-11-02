@@ -29,10 +29,12 @@ namespace Sdt.UI.Screens.Battle
         protected RectTransform CardRoot;
         protected Transform BodyRoot;
         protected Transform BtnsRoot;
+        protected GameObject SurfaceRoot;
 
         public override void Build()
         {
             var root = UIKit.Panel("subpage", transform);
+            SurfaceRoot=root;
             var dimGo = new GameObject("dim", typeof(RectTransform));
             dimGo.transform.SetParent(root.transform, false);
             UiExt.Stretch(dimGo.GetComponent<RectTransform>());
@@ -52,7 +54,7 @@ namespace Sdt.UI.Screens.Battle
             vl.childForceExpandWidth = true; vl.childForceExpandHeight = false;
             vl.childControlWidth = true; vl.childControlHeight = true;
             CardRoot = rt;
-            BodyRoot = BuildHeader(card.transform);
+            BuildHeader(card.transform);
             var bodyGo = new GameObject("ovBody", typeof(RectTransform));
             bodyGo.transform.SetParent(card.transform, false);
             var leB = bodyGo.AddComponent<LayoutElement>(); leB.flexibleHeight = 1; leB.flexibleWidth = 1;
@@ -69,7 +71,7 @@ namespace Sdt.UI.Screens.Battle
         }
 
         /// <summary>子类标题行（ovTitle）。</summary>
-        private Transform BuildHeader(Transform card)
+        private void BuildHeader(Transform card)
         {
             var head = new GameObject("ovTitle", typeof(RectTransform));
             head.transform.SetParent(card, false);
@@ -82,7 +84,6 @@ namespace Sdt.UI.Screens.Battle
             var t = UIKit.IconText(head.transform, TitleText());
             t.fontSize = 34; t.color = BtColors.Hex("#F0E0B8");
             var le = head.AddComponent<LayoutElement>(); le.minHeight = 88; le.flexibleHeight = 0;
-            return head.transform;
         }
 
         protected abstract string TitleText();
@@ -138,23 +139,59 @@ namespace Sdt.UI.Screens.Battle
         readonly List<string> _candidateUids = new List<string>();
         readonly List<Outline> _selectionFrames = new List<Outline>();
         Button _confirm;
+        Button _watch;
+        Text _watchLabel;
+        Color _maskColor;
+        public bool WatchingBattlefield { get; private set; }
+        internal bool PresentsChoice(BattleSnapshot snapshot)=>snapshot!=null&&snapshot.BattleToken==_token&&snapshot.Discovering?.selectionId==_selectionId;
         public override void Build()
         {
             base.Build();
             var layout=BodyRoot.GetComponent<VerticalLayoutGroup>();
             layout.padding=new RectOffset(40,40,20,20);layout.spacing=16;
+            _maskColor=UiStack.MaskColor(this);
+            _watch=CurrentRunHudView.Button(transform,"discover-watch-battlefield",0,0,48,48,ToggleBattlefield,new Vector2(1,1),new Vector2(1,1));
+            _watch.GetComponent<Image>().color=BtColors.HexA("#172C36",.96f);
+            var glyph=CurrentRunHudView.Box(_watch.transform,"eye",10,10,28,28);
+            var eye=UIKit.GetOrAdd<CurrentRunControlGlyph>(glyph);eye.SetKind("eye");eye.color=BtColors.Hex("#F0E0B8");eye.raycastTarget=false;
+            _watchLabel=CurrentRunHudView.Text(_watch.transform,"return-label","返回发现",46,0,116,48,18,"#F0E0B8");
+            _watchLabel.gameObject.SetActive(false);
+            ((RectTransform)_watch.transform).anchoredPosition=new Vector2(-44,-42);
         }
-        bool Current(string token,long selectionId,int revision)
+        bool Owns(string token,long selectionId,int revision)
         {
             var state=GameSnapshotRef.Current;
             return this!=null&&!_closed&&isActiveAndEnabled&&UiStack.Top==this&&revision==_revision
-                &&state!=null&&!state.Over&&state.BattleToken==token&&state.Discovering?.selectionId==selectionId;
+                &&ReferenceEquals(_commands,BattleView.Commands)&&state!=null&&!state.Over&&state.BattleToken==token&&state.Discovering?.selectionId==selectionId;
+        }
+        bool Current(string token,long selectionId,int revision)=>!WatchingBattlefield&&Owns(token,selectionId,revision);
+        void ToggleBattlefield()
+        {
+            if(!Owns(_token,_selectionId,_revision))return;
+            SetBattlefieldView(!WatchingBattlefield);
+            Sdt.Run.AudioService.I.PlaySfx("click");
+        }
+        void SetBattlefieldView(bool visible)
+        {
+            WatchingBattlefield=visible;
+            SurfaceRoot.SetActive(!visible);
+            // The stack's transparent mask still intercepts battlefield input.
+            UiStack.SetMaskColor(this,visible?Color.clear:_maskColor);
+            _watchLabel.gameObject.SetActive(visible);
+            var rect=(RectTransform)_watch.transform;
+            rect.sizeDelta=new Vector2(visible?172:48,48);
+            rect.anchoredPosition=visible?new Vector2(-28,-112):new Vector2(-44,-42);
+            var focus=!visible&&_selected>=0&&_selected<_selectionFrames.Count?_selectionFrames[_selected].gameObject:_watch.gameObject;
+            UnityEngine.EventSystems.EventSystem.current?.SetSelectedGameObject(focus);
         }
         public override void SetSnapshot(BattleSnapshot snapshot)
         {if(!_closed)Render(snapshot);}
         public override void CloseFromEscape()
-        {if(Current(_token,_selectionId,_revision))BattleView.Commands?.CancelDiscover(_token,_selectionId);}
-        internal override void OnClose(){_closed=true;_revision++;}
+        {
+            if(WatchingBattlefield&&Owns(_token,_selectionId,_revision)){SetBattlefieldView(false);return;}
+            if(Current(_token,_selectionId,_revision))BattleView.Commands?.CancelDiscover(_token,_selectionId);
+        }
+        internal override void OnClose(){_closed=true;_revision++;WatchingBattlefield=false;}
         protected override string TitleText()
         {
             var s = GameSnapshotRef.Current;

@@ -42,6 +42,7 @@ namespace Sdt.Res
             string text = revision != null && source == revision.original ? revision.reviewed : source;
             if (revision != null && (source == revision.original || source == revision.reviewed)) text = Structured(card, text) ?? text;
             text = text.Replace("（不计之前战斗的消耗区或普通弃牌；仅进入墓地的牌不计）", "").Replace("本场战斗消耗牌中", "消耗牌堆中").Replace("从本场消耗牌复原", "从消耗牌堆复原").Replace("对应消耗区为空时", "对应牌区为空时").Replace("弃牌堆", "消耗牌堆").Replace("墓地", "消耗牌堆").Replace("消耗牌堆或消耗牌堆", "消耗牌堆");
+            if (card.id == "cmtn1lbhbqi4" && card.dmg.HasValue) text = Regex.Replace(text, @"^造成\s*\d+\s*点法术伤害", "造成 " + N(card.dmg.Value) + " 点法术伤害");
             if (context != null && (context.Attack.HasValue || context.SpellPower.HasValue)) text = ApplyBattle(text, card, context);
             var alternating = card.rules?.Get("equip")?.Get("passive")?.Get("alternatingRefund");
             string[] types = alternating?.Items("types").OfType<string>().ToArray() ?? (card.id == "tt13-astrolabe" ? new[] { "武术", "法术" } : Array.Empty<string>());

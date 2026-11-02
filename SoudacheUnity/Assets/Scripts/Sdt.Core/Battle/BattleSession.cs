@@ -249,7 +249,7 @@ namespace Sdt.Core.Battle
 
         private sealed class InfusingState { public string uid; public CardDef card; public int need, targetIndex; public HashSet<string> picked = new HashSet<string>(); }
         private long discoverSerial;
-        private sealed class DiscoveringState { public List<CardDef> options; public List<string> candidateUids; public int n,selectedIndex; public string rarity,kind,sourceCommit="committed",sourceUid; public long selectionId; public Action cancel; }
+        private sealed class DiscoveringState { public List<CardDef> options; public List<string> candidateUids; public int n,selectedIndex; public string rarity,kind,sourceCommit="committed",sourceUid; public long selectionId; public Action cancel; public bool choiceApplied; }
         private DiscoveringState BeginDiscovery(List<CardDef> options,int n=1,string kind="hand",string rarity=null,Action cancel=null)
         {return discovering=new DiscoveringState{options=options,n=n,kind=kind,rarity=rarity,cancel=cancel,selectionId=++discoverSerial};}
         private sealed class DelayedItem { public string text; public string cardName; public bool repeat; }
@@ -735,7 +735,7 @@ namespace Sdt.Core.Battle
             return CommandResult.Yes();
         }
 
-        private void ExecPlay(string uid, CardDef card, List<string> fuelUids, BattleFoe target, bool freeCost = false, bool directRelease = false, List<string> paymentUids = null,PreparedDiscovery prepared=null)
+        private void ExecPlay(string uid, CardDef card, List<string> fuelUids, BattleFoe target, bool freeCost = false, bool directRelease = false, List<string> paymentUids = null,PreparedDiscovery prepared=null,bool automatic=false)
         {
             if(!ValidatePreparedFighters(uid,card))return;
             card=FindCard(uid)?.card ?? card;
@@ -743,14 +743,14 @@ namespace Sdt.Core.Battle
             {
                 var issue=PaymentPreflight(uid,card,fuelUids);
                 if(issue!=null) { G.Log(issue,"warn"); return; }
-                BeginHandPayment(uid,card,fuelUids,target,freeCost,directRelease); return;
+                BeginHandPayment(uid,card,fuelUids,target,freeCost,directRelease,automatic); return;
             }
             if(prepared==null&&!directRelease&&hand.Contains(uid)&&TryPreviewDiscovery(uid,card,false,ticket=>
             {
                 var current=FindCard(uid)?.card;
                 string issue=PreviewPlayIssue(uid,current,fuelUids,target,freeCost,directRelease,paymentUids);
                 if(issue!=null)return CommandResult.No(issue);
-                ExecPlay(uid,current,fuelUids,target,freeCost,directRelease,paymentUids,ticket);return CommandResult.Yes();
+                ExecPlay(uid,current,fuelUids,target,freeCost,directRelease,paymentUids,ticket,automatic);return CommandResult.Yes();
             }))return;
             int committedCost = freeCost ? 0 : EffCostOf(card);
             int consumptionBase=ruleContinuations.Count;
@@ -763,7 +763,7 @@ namespace Sdt.Core.Battle
             }
             if(_phase!="enemy") _phase="resolving";
             RequestRender();
-            BeginRuleCast(card, target, fuelUids);
+            BeginRuleCast(card, target, fuelUids,automatic);
             castContext.preparedDiscovery=prepared;
             BindPreparedFighters(uid);
             if (directRelease) castContext.infused = true;
@@ -796,7 +796,7 @@ namespace Sdt.Core.Battle
         {
             int continuationBase = ruleContinuations.Count;
             var context = castContext;
-            using (BeginActorCard(card)) ResolveCard(card, target);
+            using (BeginActorCard(card,context?.automatic==true)) ResolveCard(card, target);
             if (over) return;
             Action complete = () =>
             {
@@ -993,7 +993,7 @@ namespace Sdt.Core.Battle
             }
             if (foe.hp <= 0 && !foe.dead)
             {
-                foe.dead = true;
+                MarkEnemyDead(foe);
                 G.Log("[[icon:skull]] <b>" + Esc(foe.name) + "</b> 被击倒！（剩 " + Alive().Count + " 个敌人）", "ok");
                 floats.Add(new BattleFloat { unit = FoeIdx(foe), text = "💥", cls = "stk" });
                 floats.Add(new BattleFloat { unit = "self", text = KillCheer[(int)Math.Floor(rng.Random("visual") * KillCheer.Length)], cls = "stk stk-late" });
@@ -1037,14 +1037,18 @@ namespace Sdt.Core.Battle
                 var action = structuredDiscoverAction; structuredDiscoverAction = null; discovering = null;
                 action(card); ResumeRules(); ResolveRuleOutcome(); RequestRender(); return CommandResult.Yes();
             }
-            AddTempCard(card);
-            G.Log("[[icon:question]] 发现：【<b>" + Esc(card.name) + "</b>】置入手牌（战斗内临时卡，战后消散）", "loot");
-            int n = discovering.n;
-            string rarity = discovering.rarity;
+            var current=discovering;
             discovering = null;
-            if (Alive().Count == 0) { Finish(true); return CommandResult.Yes(); }
-            if (n > 1) discoverQueue.Insert(0, new DiscoverJob { n = n - 1, rarity = rarity });
-            ProcessDiscoverQueue();
+            CompleteDiscoveryChoice(current,card,()=>
+            {
+                AddTempCard(card);
+                G.Log("[[icon:question]] 发现：【<b>"+Esc(card.name)+"</b>】置入手牌（战斗内临时卡，战后消散）","loot");
+            },()=>
+            {
+                if(current.n>1)discoverQueue.Insert(0,new DiscoverJob{n=current.n-1,rarity=current.rarity});
+                ProcessDiscoverQueue();
+            });
+            ResumeRules();ResolveRuleOutcome();
             RequestRender();
             return CommandResult.Yes();
         }
@@ -1100,6 +1104,7 @@ namespace Sdt.Core.Battle
             pendingTarget=null;pendingHint="";
             if(_phase=="targeting") _phase="player";
             string token=_battleToken;turnEndPending=true;turnOwnerToken=token;
+            ClearTurnSpellPower();
             if (extraTurn)
             {
                 extraTurn=false;turn++;ClearDiscoveryPreviews();energy=maxEnergy;busy=true;
@@ -1157,7 +1162,7 @@ namespace Sdt.Core.Battle
                 }
                 if (foe.hp <= 0 && !foe.dead)
                 {
-                    foe.dead = true;
+                    MarkEnemyDead(foe);
                     G.Log("[[icon:skull]] <b>" + Esc(foe.name) + "</b> 毒发倒地！（剩 " + Alive().Count + " 个敌人）", "ok");
                     floats.Add(new BattleFloat { unit = foes.IndexOf(foe), text = "💥", cls = "stk" });
                     floats.Add(new BattleFloat { unit = "self", text = KillCheer[(int)Math.Floor(rng.Random("visual") * KillCheer.Length)], cls = "stk stk-late" });
@@ -1233,6 +1238,8 @@ namespace Sdt.Core.Battle
         private void Finish(bool? win)
         {
             if (over) return;
+            if(win==true&&fireballVictoryHolds>0){fireballVictoryPending=true;return;}
+            ClearTurnSpellPower();ResetDiscoveryRuleState();
             ClearTurnOwner();ClearDrawnCasts();ClearDiscoveryPreviews();
             if (win == false && G.Hp <= 0) EmitActorCue("death");
             if(win==true) _phase="victory";

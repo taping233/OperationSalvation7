@@ -80,7 +80,8 @@ namespace Sdt.UI.Kit
         static bool Covers(Panel panel)
         {
             if(panel==null)return false;
-            if(panel is DiscoverPanel||panel is GravePanel)return true;
+            if(panel is DiscoverPanel discovery)return !discovery.WatchingBattlefield;
+            if(panel is GravePanel)return true;
             string name=panel.GetType().Name;
             foreach(string covered in CoverNames)if(name.Contains(covered))return true;
             return panel.GetComponentInChildren<CurrentSettingsPage>(true)!=null;

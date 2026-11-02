@@ -14,6 +14,7 @@ namespace Sdt.Core.Battle
         public bool IsSelf, Dead;
         public DefenseState DefenseBefore, DefenseAfter;
         public IReadOnlyList<BattleFloat> Feedback;
+        public CardDef Card;
     }
     public sealed partial class BattleSession
     {
@@ -28,17 +29,24 @@ namespace Sdt.Core.Battle
         {
             readonly BattleSession _session;
             readonly CardDef _card;
+            readonly bool _automatic;
+            bool _disposed;
             public int Windups;
-            public ActorCardScope(BattleSession session, CardDef card) { _session = session; _card = card; }
+            public ActorCardScope(BattleSession session, CardDef card, bool automatic) { _session = session; _card = card; _automatic=automatic; }
             public void Dispose()
             {
+                if(_disposed)return;_disposed=true;
                 _session._actorCards.Pop();
                 if (Windups == 0) _session.EmitActorCue(_card.type == "法术" ? "cast" : _card.type == "武术" ? "atk" : null);
+                if(_automatic)_session.EmitPresentation(new BattleActorCue{Kind="card-end"});
             }
         }
-        IDisposable BeginActorCard(CardDef card)
+        IDisposable BeginActorCard(CardDef card,bool automatic=false)
         {
-            var scope = new ActorCardScope(this, card); _actorCards.Push(scope); return scope;
+            var scope = new ActorCardScope(this, card,automatic); _actorCards.Push(scope);
+            // Freeze the resolved override before Finish clears its physical source.
+            if(automatic)EmitPresentation(new BattleActorCue{Kind="card",Card=card.Clone(),CardName=card.name});
+            return scope;
         }
         sealed class PresentationScope : IDisposable
         {

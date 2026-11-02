@@ -13,6 +13,7 @@ namespace Sdt.Core.Battle
         {
             public List<CardDef> options;
             public string[] storedUids;
+            public DiscoveringState state;
             public int index;
             public bool claimed;
             public bool Claim(bool stored=false)
@@ -100,11 +101,11 @@ namespace Sdt.Core.Battle
                 {
                     var entries=StoredRuleCards();candidates.options=entries.Select(entry=>entry.card).ToList();candidates.storedUids=entries.Select(entry=>entry.uid).ToArray();
                 }
-                else candidates.options=DiscoverOptions(RulePool(operation.Get("pool"),operation.Get("filter")),3+Math.Max(0,discoverExtra));
+                else candidates.options=DiscoverOptions(RulePool(operation.Get("pool"),operation.Get("filter")),3);
                 if(candidates.options.Count==0)return false;
                 discoveryPreviewCache[key]=candidates;
             }
-            int count=stored?1:BagDiscovery(card)?BagDiscoveryCount(operation):operation.Number("n",operation.Number("count",1));
+            int count=stored?1:BagDiscovery(card)?BagDiscoveryCount(operation):DiscoveryCount(operation);
             var state=BeginDiscovery(candidates.options,n:count,kind:stored?"stored":operation.Text("act")=="play"||operation.Text("act")=="playKeep"?"play":"hand");
             state.sourceCommit="preview";state.sourceUid=uid;
             discoveryPreview=new DiscoveryPreview{state=state,uid=uid,token=_battleToken,turn=turn,plan=plan,item=item,candidates=candidates,commit=commit};
@@ -123,7 +124,7 @@ namespace Sdt.Core.Battle
             var preview=discoveryPreview;
             if(!PreviewCurrent(preview))return CommandResult.No("发现来源已变化，请取消本次使用");
             discoveryPreview=null;discovering=null;
-            var result=preview.commit(new PreparedDiscovery{options=preview.candidates.options,storedUids=preview.candidates.storedUids,index=index});
+            var result=preview.commit(new PreparedDiscovery{options=preview.candidates.options,storedUids=preview.candidates.storedUids,index=index,state=preview.state});
             if(!result.Ok)G.Log(result.Reason,"warn");
             ResolveRuleOutcome();ResumeRules();RequestRender();return result;
         }

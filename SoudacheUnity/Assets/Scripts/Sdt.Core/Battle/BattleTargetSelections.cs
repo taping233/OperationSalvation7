@@ -61,7 +61,7 @@ namespace Sdt.Core.Battle
             EmitPresentation(new BattleActorCue { Kind="enemy-windup",ActorIndex=FoeIdx(a),WindupMs=130 });
             using var presentation=BeginPassiveHit(b);
             if(AegisBlocked(b))return;
-            bool alive=!b.dead;var result=CombatResolver.DealDamage(a,b,0,CombatResolver.ATTACK); if(b.hp<=0)b.dead=true;
+            bool alive=!b.dead;var result=CombatResolver.DealDamage(a,b,0,CombatResolver.ATTACK); if(b.hp<=0)MarkEnemyDead(b);
 
             if(result.dealt>0)enemyDamageThisTurn=true;
             G.Log("[[icon:swords]] <b>"+Esc(card.name)+"</b>："+Esc(a.name)+" 被迫攻击 "+Esc(b.name)+"，造成 "+result.dealt+" 点伤害","sys");

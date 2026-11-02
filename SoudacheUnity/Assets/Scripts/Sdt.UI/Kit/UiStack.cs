@@ -71,6 +71,12 @@ namespace Sdt.UI.Kit
                 {entry.mask.GetComponent<Image>().color=color;return true;}
             return false;
         }
+        public static Color MaskColor(Panel owner)
+        {
+            foreach(var entry in _masks)
+                if(entry.panel==owner&&entry.mask!=null)return entry.mask.GetComponent<Image>().color;
+            return Color.clear;
+        }
 
         /// <summary>由 App.Launch 建栈根（Canvas 下层），面板与遮罩都挂这里。</summary>
         public static void Init(Transform root) => _root = root;

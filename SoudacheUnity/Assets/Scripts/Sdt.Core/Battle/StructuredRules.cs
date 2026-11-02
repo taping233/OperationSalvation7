@@ -37,7 +37,6 @@ namespace Sdt.Core.Battle
         private readonly List<RuleMark> enemyMarks = new List<RuleMark>();
         private readonly List<RuleAlly> ruleAllies = new List<RuleAlly>();
         private readonly List<Action> ruleContinuations = new List<Action>();
-        private readonly Dictionary<CardDef, int> growingCards = new Dictionary<CardDef, int>();
         private readonly HashSet<string> castOnDraw = new HashSet<string>();
         private readonly List<(UnitStatus status, string key, int original, int turn)> timedRuleStatuses = new List<(UnitStatus, string, int, int)>();
         private readonly List<(Combatant foe, int amount, int turn)> stolenAttackReturns = new List<(Combatant, int, int)>();
@@ -54,9 +53,9 @@ namespace Sdt.Core.Battle
         private int deathSaves, temporaryDeckCap;
         private string previousCardType;
         private bool enemyDamageThisTurn, doubleNextSpell, extraTurn;
+        private readonly HashSet<BattleFoe> deadEnemiesThisTurn = new HashSet<BattleFoe>();
         private bool priestFlipped;
         private int heroUsedTurn;
-        private int discoverExtra;
         private bool combiningHand, sealCombined;
         private int conditionalAttack, conditionalSpell;
         private readonly HashSet<string> infusionUnlocked = new HashSet<string>();
@@ -71,7 +70,7 @@ namespace Sdt.Core.Battle
             ClearTurnOwner();ClearDrawnCasts();ClearDiscoveryPreviews();
             itemJobs.Clear();resolvingItemUid=null; preparedFighters=null; preparedFightersUid=null; deferredTargetAction=null; pendingFuel=null; pendingFuelUid=null; handPayment=null;
             registeredCards.Clear(); equippedCards.Clear(); equipmentUsed.Clear(); persistentRules.Clear(); ruleJobs.Clear();
-            enemyMarks.Clear(); ruleAllies.Clear(); ruleContinuations.Clear(); growingCards.Clear(); castOnDraw.Clear(); timedRuleStatuses.Clear();
+            enemyMarks.Clear(); ruleAllies.Clear(); ruleContinuations.Clear(); castOnDraw.Clear(); timedRuleStatuses.Clear();
             stolenAttackReturns.Clear(); infusionBonuses.Clear(); alternatingRefunds.Clear();
             cardOverrides.Clear(); costDecayCards.Clear(); armorDecay = 0; lastAcquired = null;
             ruleChoice = null; ruleHandSelection = null; ruleChoiceAction = null; ruleHandAction = null; structuredDiscoverAction = null;
@@ -79,8 +78,9 @@ namespace Sdt.Core.Battle
             turnMovesMax=0;bossTriggeredTurns.Clear();
             deathSaves = temporaryDeckCap = 0; previousCardType = null;
             enemyDamageThisTurn = doubleNextSpell = extraTurn = false; castContext = null;
+            deadEnemiesThisTurn.Clear();
             priestFlipped = false; heroUsedTurn = -1;
-            discoverExtra = 0;
+            ResetDiscoveryRuleState();
             combiningHand = sealCombined = false; conditionalAttack = conditionalSpell = 0; infusionUnlocked.Clear(); attackReductions.Clear();
             skipInfusionCards.Clear();
             acquiringRuleCards.Clear();
@@ -216,9 +216,10 @@ namespace Sdt.Core.Battle
             if (over) return;
             if (G.Hp <= 0) Finish(false); else if (!foes.Exists(foe=>!foe.dead)) Finish(true);
         }
-        private void BeginRuleCast(CardDef card, BattleFoe target, List<string> fuel)
+        private void BeginRuleCast(CardDef card, BattleFoe target, List<string> fuel,bool automatic=false)
         {
             castContext = new RuleContext { card = card, target = target, beforeHp = target?.hp ?? 0,
+                automatic=automatic,
                 infused = fuel.Count > 0 || HasRuleInfusionWaiver(card),
                 fuelCost = fuel.Sum(uid => FindCard(uid)?.card.cost ?? 0), consumedCount = fuel.Count,
                 wasStealthed = pstat?.status.stealth > 0, lastHand = hand.Count <= fuel.Count + 1 };
@@ -249,6 +250,7 @@ namespace Sdt.Core.Battle
         {
             int cost = card.runtimeCost ?? card.cost;
             var modifiers = card.rules?.Get("battle")?.Operations("costModifiers").ToArray() ?? Array.Empty<RuleValue>();
+            if(pstat?.status.stealth>0&&modifiers.Any(op=>op.Text("kind")=="stealthFree"))return 0;
             var previous = modifiers.FirstOrDefault(op => op.Text("kind") == "previousCardTypeFree");
             if (previous != null && previousCardType == previous.Text("type", "武术")) return 0;
             var martial = modifiers.FirstOrDefault(op => op.Text("kind") == "martialPlayedDiscount");
@@ -259,7 +261,23 @@ namespace Sdt.Core.Battle
             var consumedDiscount = modifiers.FirstOrDefault(op => op.Text("kind") == "consumedSpellDiscount");
             if (consumedDiscount != null)
                 cost -= BattleConsumedPile().Count(uid => FindCard(uid)?.card.type == "法术") * consumedDiscount.Number("amount");
+            var deathsDiscount=modifiers.FirstOrDefault(op=>op.Text("kind")=="enemyDeathsThisTurnDiscount");
+            if(deathsDiscount!=null)cost-=deadEnemiesThisTurn.Count*deathsDiscount.Number("amount",1);
             return Math.Max(0, cost);
+        }
+        private void MarkEnemyDead(BattleFoe foe)
+        {
+            foe.dead=true;
+            deadEnemiesThisTurn.Add(foe);
+        }
+        private void GrantRuleBlessing(Combatant unit,string key,int stacks,RuleValue operation)
+        {
+            CombatResolver.EnsureStatus(unit);
+            int original=unit.status.Get(key);CombatResolver.AddBlessing(unit,key,stacks);
+            int added=unit.status.Get(key)-original;
+            if(unit==pstat&&key=="spellUp"&&operation.Flag("untilTurnEnd"))turnSpellPowerBonus+=added;
+            if(operation.Has("duration")&&(key=="atkUp"||key=="spellUp"||key=="reduce"||key=="dodge"))
+                timedRuleStatuses.Add((unit.status,key,added,turn+operation.Number("duration")));
         }
         private string StructuredRequirement(CardDef card)
         {
@@ -435,8 +453,12 @@ namespace Sdt.Core.Battle
                 case "blessing":
                     var key = op.Text("key"); n = op.Number("stacks", op.Number("duration", 1));
                     if ((key == "atkUp" || key == "spellUp") && Alive().Any(foe => foe.eliteSkill == "blockPowerGain")) break;
-                    int original = pstat.status.Get(key); CombatResolver.AddBlessing(pstat, key, n);
-                    if (op.Has("duration") && (key == "atkUp" || key == "spellUp" || key == "reduce" || key == "dodge")) timedRuleStatuses.Add((pstat.status, key, pstat.status.Get(key)-original, turn + op.Number("duration")));
+                    GrantRuleBlessing(pstat,key,n,op);
+                    if(op.Text("target")=="allCharacters")
+                    {
+                        foreach(var foe in foes)if(!foe.dead&&foe.hp>0)GrantRuleBlessing(foe,key,n,op);
+                        foreach(var ally in ruleAllies)if(!ally.dead&&!ally.statless&&ally.hp>0)GrantRuleBlessing(ally,key,n,op);
+                    }
                     break;
                 case "cleanse":
                     if (op.Text("target") == "allEnemies") foreach (var foe in Alive()) CombatResolver.Purify(foe); else CombatResolver.Purify(pstat); break;
@@ -448,7 +470,7 @@ namespace Sdt.Core.Battle
                         for (int i = 0; i < op.Number("burst") && !foe.dead; i++)
                         {
                             CombatResolver.TickPoison(foe);
-                            if (foe.hp <= 0) { foe.dead = true; FireEnemyMarks(foe, "death"); OnEliteDeath(foe); FireStructuredTrigger("onKill", foe); }
+                            if (foe.hp <= 0) { MarkEnemyDead(foe); FireEnemyMarks(foe, "death"); OnEliteDeath(foe); FireStructuredTrigger("onKill", foe); }
                         }
                     } break;
                 case "registerRule": RegisterRuleName(card, op); break;
@@ -533,8 +555,6 @@ namespace Sdt.Core.Battle
             if (rule == "moveCost1") spellCost1 = true;
             if (rule == "doubleNextSpell") doubleNextSpell = true;
             if (rule == "deathSave") deathSaves = op.Number("n");
-            if (rule == "growth") growingCards[card] = 0;
-            if (rule == "discoverPlus") discoverExtra++;
             if (!op.Has("duration")) ruleJobs.RemoveAll(job=>job.operations.Any(operation=>operation.Text("op")=="removeRule"&&operation.Text("rule")==rule));
             if (op.Has("duration") && !existed) ruleJobs.Add(new RuleJob { card = card, turn = turn + op.Number("duration"),
                 operations = new[] { RuleValue.Obj("op", "removeRule", "rule", rule) } });
@@ -566,7 +586,7 @@ namespace Sdt.Core.Battle
                     if (op.Flag("lifesteal") && pstat.status.healban == 0) G.Heal(dealt);
                     if (foe.dead && wasAlive)
                     {
-                        var onKill = op.Get("onKill"); if (onKill != null) { pdef.Armor += onKill.Number("armor"); energy += onKill.Number("energy"); if (onKill.Number("coins")>0&&G is BattleHostEffects host) host.GainCoins(onKill.Number("coins")); }
+                        var onKill = op.Get("onKill"); if (onKill != null) { pdef.Armor += onKill.Number("armor"); energy += onKill.Number("energy"); if(onKill.Number("stealth")>0)CombatResolver.AddBlessing(pstat,"stealth",onKill.Number("stealth")); if (onKill.Number("coins")>0&&G is BattleHostEffects host) host.GainCoins(onKill.Number("coins")); }
                     }
                     var recast = op.Get("recast");
                     if (recast != null && (recast.Text("on") == "kill" && foe.dead || recast.Text("on") == "lastHand" && castContext?.lastHand == true))
@@ -676,37 +696,42 @@ namespace Sdt.Core.Battle
         }
         private void StartStructuredDiscover(CardDef card, RuleValue op, BattleFoe target, Action<CardDef> onSelect = null,PreparedDiscovery prepared=null)
         {
+            int count=DiscoveryCount(op);if(count<=0)return;
             bool confirmed=prepared?.Claim()==true;
-            var options=confirmed?prepared.options:DiscoverOptions(RulePool(op.Get("pool"),op.Get("filter")),3+Math.Max(0,discoverExtra));
+            var options=confirmed?prepared.options:DiscoverOptions(RulePool(op.Get("pool"),op.Get("filter")),3);
             if (options.Count == 0) return;
+            DiscoveringState state=confirmed?prepared.state:null;
             Action<CardDef> select = chosen =>
             {
-                int continuationBase=ruleContinuations.Count;
-                lastAcquired = chosen;
-                if (onSelect != null) { onSelect(chosen); return; }
-                var acquired = chosen.Clone(); if (op.Text("act") == "zeroCost") { acquired._baseCost=chosen.cost;acquired.cost = 0; }
-                if(op.Text("act")=="noInfuse")acquired.noInfuse=true;
-                if (op.Text("act") == "play"||op.Text("act")=="playKeep"){
-                    string castUid=AddTempCard(acquired);
-                    if(acquired.type=="道具")UseItemCore(castUid,target==null?-1:FoeIdx(target),null,directRelease:true);
-                    else CastRuleHandCard(castUid, target);
-                    if(op.Text("act")=="playKeep")foreach(var other in options.Where(c=>c.id!=chosen.id))AddTempCard(other);
-                }
-                else
+                Action next=null;
+                if(onSelect==null&&count>1)
                 {
-                    string uid = AddTempCard(acquired);
-                    if (op.Text("act") == "dup") AddTempCard(acquired);
-                    if (op.Has("costDecayPerTurn")||op.Text("act")=="decay") costDecayCards[uid] = op.Number("costDecayPerTurn",1);
+                    var remaining=RuleValue.Obj();foreach(var entry in op.Values)remaining.Values[entry.Key]=entry.Value;
+                    remaining.Values["n"]=count-1;next=()=>StartStructuredDiscover(card,remaining,target);
                 }
-                if (op.Number("n", op.Number("count", 1)) > 1)
+                CompleteDiscoveryChoice(state,chosen,()=>
                 {
-                    var next = RuleValue.Obj(); foreach (var entry in op.Values) next.Values[entry.Key] = entry.Value;
-                    next.Values["n"] = op.Number("n", op.Number("count", 1)) - 1;
-                    if(RuleInputPending)DeferRuleBatch(continuationBase,()=>StartStructuredDiscover(card,next,target));else StartStructuredDiscover(card,next,target);
-                }
+                    lastAcquired=chosen;
+                    if(onSelect!=null){onSelect(chosen);return;}
+                    var acquired=chosen.Clone();if(op.Text("act")=="zeroCost"){acquired._baseCost=chosen.cost;acquired.cost=0;}
+                    if(op.Text("act")=="noInfuse")acquired.noInfuse=true;
+                    if(op.Text("act")=="play"||op.Text("act")=="playKeep")
+                    {
+                        string castUid=AddTempCard(acquired);
+                        if(acquired.type=="道具")UseItemCore(castUid,target==null?-1:FoeIdx(target),null,directRelease:true);
+                        else CastRuleHandCard(castUid,target);
+                        if(op.Text("act")=="playKeep")foreach(var other in options.Where(c=>c.id!=chosen.id))AddTempCard(other);
+                    }
+                    else
+                    {
+                        string uid=AddTempCard(acquired);
+                        if(op.Text("act")=="dup")AddTempCard(acquired);
+                        if(op.Has("costDecayPerTurn")||op.Text("act")=="decay")costDecayCards[uid]=op.Number("costDecayPerTurn",1);
+                    }
+                },next);
             };
             if(confirmed)select(options[prepared.index]);
-            else {BeginDiscovery(options,n:op.Number("n",op.Number("count",1)),kind:onSelect!=null?"effect":op.Text("act")=="play"||op.Text("act")=="playKeep"?"play":"hand");structuredDiscoverAction=select;}
+            else {state=BeginDiscovery(options,n:count,kind:onSelect!=null?"effect":op.Text("act")=="play"||op.Text("act")=="playKeep"?"play":"hand");structuredDiscoverAction=select;}
         }
         private void StartRuleChoice(CardDef card, RuleValue op, BattleFoe target)
         {
@@ -755,26 +780,29 @@ namespace Sdt.Core.Battle
         }
         private void ExecuteRule(CardDef card, RuleValue op, BattleFoe target)
         {
-            if (op.Text("what") == "fireball") { var fireball = CardLibrary.FindById("tt3-fireball"); for (int i = 0; i < op.Number("count", 1) && Alive().Count > 0; i++) if (fireball != null) CastRuleCard(fireball, target); return; }
+            if (op.Text("what") == "fireball") { CastFireballs(op,target);return; }
             if (op.Text("what") == "starterAttack") { int count = target == null ? 0 : CombatResolver.Curses.Sum(key => target.status.Get(key)); for (int i = 0; i < count && Alive().Count > 0; i++) CastRuleCard(CardLibrary.FindById("starter-attack") ?? CardLibrary.SHA, target); return; }
             if (mode == "boss") return;
             var cap = op.Get("cap");
             foreach (var foe in RuleTargets(op, target).Concat(Alive()).Distinct().Where(foe => (cap?.Flag("wounded") != true || foe.hp < foe.maxHp) && (cap?.Has("atk") != true || foe.atk <= cap.Number("atk"))).Take(op.Number("count", 1)).ToArray())
-            { foe.hp = 0; foe.dead = true; FireEnemyMarks(foe, "death"); OnEliteDeath(foe); FireStructuredTrigger("onKill", foe); }
+            { foe.hp = 0; MarkEnemyDead(foe); FireEnemyMarks(foe, "death"); OnEliteDeath(foe); FireStructuredTrigger("onKill", foe); }
         }
         private void CastRuleCard(CardDef card, BattleFoe target, bool infused = true)
         {
             if (card == null || ruleDepth > 40 || over) return;
-            CastRuleHandCard(AddTempCard(card), target, infused);
+            int continuationBase=ruleContinuations.Count;string uid=AddTempCard(card);
+            if(over)return;
+            if(RuleInputPending)DeferRuleBatch(continuationBase,()=>CastRuleHandCard(uid,target,infused));
+            else CastRuleHandCard(uid,target,infused);
         }
         private void CastRuleHandCard(string uid, BattleFoe target, bool directRelease = true)
         {
             var card = FindCard(uid)?.card;
             if (card == null || !hand.Contains(uid) || over) return;
             if (!directRelease && RequiresInfusion(card) && InfuseOf(card) > 0) return;
-            var previous = castContext;
-            ExecPlay(uid, card, new List<string>(), target?.dead == true ? Alive().FirstOrDefault() : target, true, directRelease);
-            castContext = previous;
+            var previous = castContext;string token=_battleToken;
+            try{ExecPlay(uid, card, new List<string>(), target?.dead == true ? Alive().FirstOrDefault() : target, true, directRelease,automatic:true);}
+            finally{if(_battleToken==token)castContext=previous;}
         }
         private void CastRuleHandBatch(string[] uids, BattleFoe target, int drawEach = 0, int max = 0, int index = 0, int count = 0)
         {
@@ -814,8 +842,8 @@ namespace Sdt.Core.Battle
             ruleContinuations.Insert(index, () =>
             {
                 if(over||_battleToken!=token)return;
-                var previous = castContext; castContext = context;
-                try { action(); } finally { castContext = previous; }
+                var previous = castContext;castContext=context;
+                try { action(); } finally { if(_battleToken==token)castContext=previous; }
             });
         }
         private void CastRuleGeneratedBatch(Func<CardDef> nextCard, int remaining, BattleFoe target, bool infused)
@@ -881,6 +909,7 @@ namespace Sdt.Core.Battle
         }
         private void AdvanceStructuredTurn()
         {
+            deadEnemiesThisTurn.Clear();
             ApplyCurrentBossTurnStart();
             pdef.Guard=false;
             enemyDamageThisTurn = false; rulePlayedMoves = rulePlayedMartial = 0; previousCardType = null;
@@ -889,9 +918,11 @@ namespace Sdt.Core.Battle
             foreach (var entry in stolenAttackReturns.Where(item => item.turn <= turn || item.foe.dead).ToArray()) { entry.foe.atk += entry.amount; stolenAttackReturns.Remove(entry); }
             foreach (var entry in attackReductions.Where(item => item.foe.status.atkDown == 0).ToArray()) { entry.foe.atk += entry.amount; attackReductions.Remove(entry); }
             foreach (var entry in costDecayCards.ToArray()) { var card = FindCard(entry.Key)?.card; if (card != null) { var altered = card.Clone(); altered._baseCost=card._baseCost??card.cost;altered.cost = Math.Max(0, (altered.runtimeCost ?? altered.cost) - entry.Value); altered.runtimeCost = null; cardOverrides[entry.Key] = altered; } }
-            foreach(var uid in hand.Concat(drawPile).Concat(discard).Concat(grave).Distinct().ToArray())
+            foreach(var uid in hand.Concat(drawPile).Concat(discard).Concat(grave).Concat(played).Concat(consumed).Distinct().ToArray())
             {
                 var card=FindCard(uid)?.card; if(card==null)continue;
+                int explicitGrowth=card.rules?.Get("battle")?.Number("damageGrowthPerTurn")??0;
+                if(explicitGrowth!=0){var changed=card.Clone();changed.dmg=(card.dmg??0)+explicitGrowth;cardOverrides[uid]=changed;continue;}
                 var growth=Regex.Match(card.desc??"",@"回合开始时[，,]?\s*本牌伤害\s*\+\s*(\d+)");
                 if(growth.Success){var changed=card.Clone();changed.dmg=(card.dmg??0)+int.Parse(growth.Groups[1].Value);cardOverrides[uid]=changed;}
             }
@@ -971,7 +1002,7 @@ namespace Sdt.Core.Battle
             foreach (var foe in Alive())
             {
                 if (foe.eliteSkill == "allyDeathRage") foe.atk += 2;
-                if (foe.eliteSkill == "allyDeathLoss") { foe.hp = Math.Max(0, foe.hp - 2); if (foe.hp == 0) { foe.dead = true; OnEliteDeath(foe); } }
+                if (foe.eliteSkill == "allyDeathLoss") { foe.hp = Math.Max(0, foe.hp - 2); if (foe.hp == 0) { MarkEnemyDead(foe); OnEliteDeath(foe); } }
                 if (foe.eliteSkill == "firstTurnStealth" && Alive().Count <= 1) foe.status.stealth = 0;
                 if (fallen.eliteSkill == "attackAura") foe.atk -= 2;
             }
@@ -1000,16 +1031,17 @@ namespace Sdt.Core.Battle
         private void OpenSwapDiscovery(List<CardDef> pool,string firstUid=null,CardDef first=null)
         {
             var options=DiscoverOptions(pool,3);if(options.Count==0)return;
-            BeginDiscovery(options,kind:"swap");
+            var state=BeginDiscovery(options,kind:"swap");
             structuredDiscoverAction=chosen=>
             {
-                lastAcquired=chosen;
+                string uid=null;
                 if(firstUid==null)
                 {
-                    int continuationBase=ruleContinuations.Count;string uid=AddTempCard(chosen.Clone());
-                    if(RuleInputPending)DeferRuleBatch(continuationBase,()=>OpenSwapDiscovery(pool,uid,chosen));else OpenSwapDiscovery(pool,uid,chosen);
+                    CompleteDiscoveryChoice(state,chosen,
+                        ()=>{lastAcquired=chosen;uid=AddTempCard(chosen.Clone());},()=>OpenSwapDiscovery(pool,uid,chosen));
                 }
-                else{var a=first.Clone();var b=chosen.Clone();a.cost=chosen.cost;b._baseCost=chosen._baseCost??chosen.cost;b.cost=first.cost;a.runtimeCost=b.runtimeCost=null;cardOverrides[firstUid]=a;AddTempCard(b);}
+                else CompleteDiscoveryChoice(state,chosen,()=>
+                {lastAcquired=chosen;var a=first.Clone();var b=chosen.Clone();a.cost=chosen.cost;b._baseCost=chosen._baseCost??chosen.cost;b.cost=first.cost;a.runtimeCost=b.runtimeCost=null;cardOverrides[firstUid]=a;AddTempCard(b);});
             };
         }
         private void TransformRuleCards(RuleValue op)
@@ -1039,14 +1071,15 @@ namespace Sdt.Core.Battle
         {
             var entries=StoredRuleCards();
             if(entries.Length==0){G.Log("锦囊是空的——背包中存入法术后才能生效","dim");return;}
-            Action<OwnedCard,CardDef> cast=(source,chosen)=>
+            Action<OwnedCard,CardDef,DiscoveringState> cast=(source,chosen,selection)=>
             {
                 if(source==null||!(G is BattleContainerHost host)||!host.ConsumeStoredCard(source.uid)){G.Log("锦囊法术未能消费，请重试","warn");return;}
-                consumed.Add(source.uid);CastRuleCard(chosen,target);
+                consumed.Add(source.uid);
+                CompleteDiscoveryChoice(selection,chosen,()=>CastRuleCard(chosen,target));
             };
-            if(prepared?.Claim(true)==true){cast(entries.FirstOrDefault(entry=>entry.uid==prepared.storedUids[prepared.index]),prepared.options[prepared.index]);return;}
+            if(prepared?.Claim(true)==true){cast(entries.FirstOrDefault(entry=>entry.uid==prepared.storedUids[prepared.index]),prepared.options[prepared.index],prepared.state);return;}
             var state=BeginDiscovery(entries.Select(entry=>entry.card).ToList(),kind:"stored");
-            structuredDiscoverAction=chosen=>cast(entries[state.selectedIndex],chosen);
+            structuredDiscoverAction=chosen=>cast(entries[state.selectedIndex],chosen,state);
         }
         private void ApplyRuleBattleSetup()
         {
@@ -1114,7 +1147,7 @@ namespace Sdt.Core.Battle
                 var result = CombatResolver.DealDamage(ally,target,0,CombatResolver.ATTACK);
                 if(result.dealt>0) CombatResolver.BreakStealth(ally);
                 G.Log(ally.name+"攻击"+target.name+"，造成 "+result.dealt+" 点伤害", "sys");
-                if (target.hp <= 0) { target.dead = true; FireEnemyMarks(target,"death"); OnEliteDeath(target); FireStructuredTrigger("onKill",target); }
+                if (target.hp <= 0) { MarkEnemyDead(target); FireEnemyMarks(target,"death"); OnEliteDeath(target); FireStructuredTrigger("onKill",target); }
             }
             if (Alive().Count == 0) Finish(true);
         }

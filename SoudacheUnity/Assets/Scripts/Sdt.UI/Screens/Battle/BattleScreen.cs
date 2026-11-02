@@ -27,6 +27,14 @@ namespace Sdt.UI.Screens.Battle
         private DiscoverPanel _discoverPage;
         private GravePanel _gravePage;
         string _entrySoundToken, _initialTurnSoundToken;
+        internal bool OwnsCurrentBattlePanel
+        {
+            get
+            {
+                var top=UiStack.Top;
+                return top!=null&&(top==this||top==_deckPage||top==_discoverPage||top==_gravePage);
+            }
+        }
         public override void Build()
         {
             _stageRoot = BattleRect("battle-stage sts battle-sts", transform);
@@ -55,7 +63,14 @@ namespace Sdt.UI.Screens.Battle
             { _entrySoundToken=s.BattleToken;Sdt.Run.AudioService.I.PlaySfx(s.Opts?.IsBoss==true ? "bossReveal" : "battleEnter"); }
             if (_initialTurnSoundToken != s.BattleToken && s.DeckSelection == null && !s.over)
             { _initialTurnSoundToken=s.BattleToken;Sdt.Run.AudioService.I.PlaySfx("phaseSelf"); }
-            if (_presentation?.Capture(s) == true) { DrainPresentationFloats(); return; }
+            CloseResolvedSubpages(s);
+            if (_presentation?.Capture(s) == true)
+            {
+                if(_deckPage!=null&&s.DeckSelection!=null)_deckPage.SetSnapshot(s);
+                if(_discoverPage!=null&&s.Discovering!=null)_discoverPage.SetSnapshot(s);
+                if(_gravePage!=null&&s.ViewingGrave)_gravePage.SetSnapshot(s);
+                DrainPresentationFloats();return;
+            }
             if (s.Busy || s.over || s.DeckSelection != null || s.Discovering != null || s.RuleHandSelection != null || s.ViewingGrave) CancelAim();
             BuildStage(s);
             UpdateSubpages(s);
@@ -65,6 +80,13 @@ namespace Sdt.UI.Screens.Battle
             SetPage(ref _deckPage, s.DeckSelection != null, s);
             SetPage(ref _discoverPage, s.Discovering != null, s);
             SetPage(ref _gravePage, s.ViewingGrave, s);
+        }
+        void CloseResolvedSubpages(BattleSnapshot snapshot)
+        {
+            if(snapshot.over||snapshot.DeckSelection==null)SetPage(ref _deckPage,false,snapshot);
+            if(snapshot.over||snapshot.Discovering==null||(_discoverPage!=null&&_presentation?.Busy==true&&!_discoverPage.PresentsChoice(snapshot)))
+                SetPage(ref _discoverPage,false,snapshot);
+            if(snapshot.over||!snapshot.ViewingGrave)SetPage(ref _gravePage,false,snapshot);
         }
         private void SetPage<T>(ref T page, bool active, BattleSnapshot s) where T : Component, IBattleSubpage
         {

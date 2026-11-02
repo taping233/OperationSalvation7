@@ -1,4 +1,4 @@
-// Generated directly from current cards/builtin-card-identities.js.
+// Source identity seed plus explicitly authored native card definitions.
 using System.Collections.Generic;
 namespace Sdt.Core.Battle {
  public static class BuiltinCardIdentities {
@@ -40,7 +40,8 @@ namespace Sdt.Core.Battle {
    "tt12-chargeray", "tt12-breakthrough", "tt12-raygun", "tt12-backupcell", "tt12-freezeray", "tt13-poor-meal",
    "tt13-spring", "tt13-magazine", "tt13-snipe", "tt13-guard", "tt13-bitter-rain", "tt13-mind-control",
    "tt13-flame-staff", "tt13-scale-armor", "tt13-astrolabe", "tt13-soul-contract", "tt13-stellar-divination", "tt13-chaos-deck",
-   "tt13-mercy",
+   "tt13-mercy", "wuyu-devouring-flame", "neutral-temporary-circle",
+   "wu-listen-wind", "wu-invisible-kill", "wu-unspent-sword-intent", "wu-yellow-sand-cloak",
   };
   public static bool IsExecutable(CardDef card)=>card!=null&&card.id!=null&&Ids.Contains(card.id);
   public static bool OwnsExecution(CardDef card)=>IsExecutable(card)&&card.rules!=null&&(card.rules.Get("battle")?.Items("hosted").Length??0)==0;

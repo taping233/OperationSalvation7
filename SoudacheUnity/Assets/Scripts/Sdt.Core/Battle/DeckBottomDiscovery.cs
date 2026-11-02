@@ -16,10 +16,12 @@ namespace Sdt.Core.Battle
             var state=BeginDiscovery(options,kind:"deckBottom",cancel:()=>{drawPile.InsertRange(0,uids);lastAcquired=null;});
             state.candidateUids=uids.Take(options.Count).ToList();
             structuredDiscoverAction=chosen=>{
-                string selected=uids[state.selectedIndex];
-                hand.Add(selected);drawPile.InsertRange(0,uids.Where(uid=>uid!=selected));
-                lastAcquired=chosen;
-                CheckRuleCombinations();
+                CompleteDiscoveryChoice(state,chosen,()=>
+                {
+                    string selected=uids[state.selectedIndex];
+                    hand.Add(selected);drawPile.InsertRange(0,uids.Where(uid=>uid!=selected));
+                    lastAcquired=chosen;CheckRuleCombinations();
+                });
             };
         }
     }

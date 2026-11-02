@@ -41,6 +41,7 @@ namespace Sdt.UI.Kit
             vh.Clear();
             if (Kind == "back") { Path(vh,9,4,18,4,19.5f,5.5f,19.5f,18.5f,18,20,9,20); Path(vh,4,12,14,12); Path(vh,8,8,4,12,8,16); }
             else if (Kind == "settings") { Path(vh,4,7,7,7);Path(vh,13,7,20,7);Path(vh,4,17,11,17);Path(vh,17,17,20,17); Circle(vh,10,7,3);Circle(vh,14,17,3); }
+            else if (Kind == "eye") { Path(vh,2,12,5,8,9,6,15,6,19,8,22,12,19,16,15,18,9,18,5,16,2,12);Circle(vh,12,12,3.4f); }
             else { Path(vh,3,8.5f,3,15.5f,7,15.5f,12,20,12,4,7,8.5f,3,8.5f); if (Kind == "muted") {Path(vh,16,9,21,15);Path(vh,21,9,16,15);} else {Arc(vh,11.53f,12,6,-42,42);Arc(vh,11.86f,12,10,-44.4f,44.4f);} }
         }
         Vector2 P(float x,float y) { var r=GetPixelAdjustedRect();return new Vector2(r.x+x*r.width/24,r.y+(24-y)*r.height/24); }
