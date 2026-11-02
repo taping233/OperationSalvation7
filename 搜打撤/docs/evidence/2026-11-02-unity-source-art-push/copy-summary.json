@@ -1,0 +1,25 @@
+{
+  "base": "b512cf4bebfdafc9e21f5734608be5014d725f1f",
+  "branch": "codex/unity-validated-20261101",
+  "selected": 4011,
+  "unity": 4000,
+  "images": {
+    "imagesEmbedded": true,
+    "embeddedImageCount": 1389,
+    "historicallyOmittedImagesNowEmbedded": 189,
+    "remainingRestoreRequired": 52,
+    "remainingRestoreBytes": 28985526,
+    "retiredMediaExcluded": 67,
+    "boundary": "Assets images and their existing metadata are shipped directly; source presence and manifest inclusion are checked. The historical restore receipt remains unchanged. Audio/fonts retain their existing restoration policy."
+  },
+  "originalState": {
+    "D:\\素材\\代号柒": {
+      "head": "f966e859043b7ab3703839005029ef090a4677b5",
+      "index": "475d4677738d61ee50dbdc40c874a9f1d8f9dd8ef4b26a2ea94c97a021a1ed30"
+    },
+    "D:\\素材\\代号柒\\SoudacheUnity": {
+      "head": "81b87cbd5f7b6bb7de48b0973c534ba494cb84a9",
+      "index": "216fa41c9ce60ffc776cce02cd7545903f12f4716798692a50cef22c631ac4f1"
+    }
+  }
+}

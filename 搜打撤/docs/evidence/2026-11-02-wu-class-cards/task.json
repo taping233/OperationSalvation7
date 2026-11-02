@@ -17,10 +17,17 @@
   "unverified": [
     "沿老板要求未编译、运行测试、启动Unity或验收实际画面与输入；桌面包未重打"
   ],
-  "updatedAt": "2026-11-02T00:39:39.0704589+08:00",
+  "updatedAt": "2026-11-02T15:33:57.400248+08:00",
   "closure": {
     "kind": "manual",
     "doneWhenConfirmed": true,
     "statement": "四卡定义、规则、职业获取与现有素材映射源码接齐，按老板要求仅源码交付，未运行验收、提交或推送"
+  },
+  "publication": {
+    "record": "../2026-11-02-unity-source-art-push/README.md",
+    "branch": "codex/unity-validated-20261101",
+    "codeCommit": "058b2064465be71364703aa8aa583cb0c9bc5396",
+    "artCommit": "975196e48cbbe76ab232524f5f613b666949b25d",
+    "remoteVerified": true
   }
 }

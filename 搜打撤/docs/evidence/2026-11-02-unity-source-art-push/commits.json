@@ -1,0 +1,24 @@
+{
+  "branch": "codex/unity-validated-20261101",
+  "base": "b512cf4bebfdafc9e21f5734608be5014d725f1f",
+  "commits": [
+    {
+      "group": "game",
+      "commit": "058b2064465be71364703aa8aa583cb0c9bc5396",
+      "changedFiles": 30,
+      "title": "Update Unity battle presentation and class card rules"
+    },
+    {
+      "group": "art",
+      "commit": "975196e48cbbe76ab232524f5f613b666949b25d",
+      "changedFiles": 207,
+      "title": "Include complete Unity artwork in the project"
+    }
+  ],
+  "gameTestsRun": false,
+  "desktopRebuilt": false,
+  "committedImageCount": 1389,
+  "previouslyOmittedImagesIncluded": 189,
+  "imageOrMetaMissing": 0,
+  "note": "Commits are complete; remote result is recorded separately."
+}

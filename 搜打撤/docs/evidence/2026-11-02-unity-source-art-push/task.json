@@ -4,10 +4,29 @@
   "date": "2026-11-02",
   "owner": "Friday",
   "goal": "按老板授权提交并推送已完成Unity战斗卡牌及图片交付修复，图片直接包含工程",
-  "paths": ["docs/evidence/2026-11-02-unity-source-art-push"],
-  "doneWhen": ["完成源码与189张原遗漏图片按子系统提交", "推送codex/unity-validated-20261101并核对远端提交", "保留其它活跃工作与原index，不运行游戏测试或打包"],
-  "stage": "doing",
+  "paths": [
+    "docs/evidence/2026-11-02-unity-source-art-push"
+  ],
+  "doneWhen": [
+    "完成源码与189张原遗漏图片按子系统提交",
+    "推送codex/unity-validated-20261101并核对远端提交",
+    "保留其它活跃工作与原index，不运行游戏测试或打包"
+  ],
+  "stage": "complete-uncommitted",
   "checks": [],
-  "unverified": ["此前两轮玩法和UI按老板要求未经编译或运行测试，本次不补做验收"],
-  "updatedAt": "2026-11-02"
+  "unverified": [
+    "此前两轮玩法和UI按老板要求未经编译或运行测试，本次不补做验收"
+  ],
+  "updatedAt": "2026-11-02T15:33:57.400248+08:00",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "Source and artwork commits pushed and remote read back; original indexes preserved; game tests and rebuild deferred by user"
+  },
+  "publication": {
+    "branch": "codex/unity-validated-20261101",
+    "codeCommit": "058b2064465be71364703aa8aa583cb0c9bc5396",
+    "artCommit": "975196e48cbbe76ab232524f5f613b666949b25d",
+    "remoteVerified": true
+  }
 }

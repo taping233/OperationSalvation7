@@ -18,10 +18,17 @@
     "未取得对方工程/Console日志，未在其机器复现；未启动本机Unity或运行编译/游戏测试",
     "远端仍为旧发布版本，189张图尚未上传；本轮未打包、暂存、提交或推送"
   ],
-  "updatedAt": "2026-11-02T14:22:59.5981350+08:00",
+  "updatedAt": "2026-11-02T15:33:57.400248+08:00",
   "closure": {
     "kind": "manual",
     "doneWhenConfirmed": true,
     "statement": "三处发布过滤器及现行说明已修正，新交付清单含1389张正式图片及原meta，原189项遗漏为0；不扩称运行或远端已验证"
+  },
+  "publication": {
+    "record": "../2026-11-02-unity-source-art-push/README.md",
+    "branch": "codex/unity-validated-20261101",
+    "codeCommit": "058b2064465be71364703aa8aa583cb0c9bc5396",
+    "artCommit": "975196e48cbbe76ab232524f5f613b666949b25d",
+    "remoteVerified": true
   }
 }
